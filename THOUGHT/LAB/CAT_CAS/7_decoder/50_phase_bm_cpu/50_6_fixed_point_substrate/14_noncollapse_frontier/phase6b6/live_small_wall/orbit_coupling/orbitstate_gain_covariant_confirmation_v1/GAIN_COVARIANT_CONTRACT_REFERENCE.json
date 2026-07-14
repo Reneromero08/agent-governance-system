@@ -1,0 +1,20 @@
+{
+  "contract_sha256": "31af6869bdf4e25634b1e408830015af2b2c4f20202b2df28492b2e1a9a90860",
+  "gain_control_conditions": [
+    "post_projection",
+    "equal_orbit_odd_zero"
+  ],
+  "official_retained_class": "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+  "predecessor_evidence_allowed_in_decision": false,
+  "primary_coordinate": "change_to_dirty",
+  "private_odd_signal_floor": 456.0,
+  "public_q0_absolute_bound": 152.0,
+  "public_randomization_seed": "orbitstate-gain-covariant-final-confirmation-public-seed-5b7b1338-a7daa611",
+  "relational_tolerance": 0.25,
+  "retrospective_explanatory_class": "PRIVATE_ORBITSTATE_GAIN_COVARIANT_GEOMETRY_ESTABLISHED",
+  "schema": "GAIN_COVARIANT_CONTRACT_REFERENCE_V1",
+  "science_package_id": "orbitstate_gain_covariant_confirmation_v1_0",
+  "small_wall_crossed_promoted": false,
+  "source_commit": "4ff588cea11343bf38d4c96c1281d34cbf1961ed",
+  "transaction_run_id": "orbitstate_gain_covariant_confirmation_v1_0"
+}

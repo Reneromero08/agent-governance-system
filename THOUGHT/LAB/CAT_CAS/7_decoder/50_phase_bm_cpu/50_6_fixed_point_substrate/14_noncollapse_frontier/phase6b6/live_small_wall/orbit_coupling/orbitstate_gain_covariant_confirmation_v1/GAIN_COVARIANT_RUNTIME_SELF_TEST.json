@@ -1,0 +1,17 @@
+{
+  "data": {
+    "affine_line_permutation": "line(i)=(257*i+43) mod 4096",
+    "bank_initialization": "physical A and B identical",
+    "d_q0": 1298,
+    "d_q1": 822,
+    "fold_q0": 1298,
+    "polarity_q0": -1298,
+    "process_boundary": "source_child_opens_private_map_after_fork",
+    "source_off_q": 0,
+    "status": "GAIN_COVARIANT_RUNTIME_SELF_TEST_OK"
+  },
+  "passed": true,
+  "returncode": 0,
+  "stderr": "",
+  "stdout": "{\"status\":\"GAIN_COVARIANT_RUNTIME_SELF_TEST_OK\",\"d_q0\":1298,\"fold_q0\":1298,\"d_q1\":822,\"polarity_q0\":-1298,\"source_off_q\":0,\"affine_line_permutation\":\"line(i)=(257*i+43) mod 4096\",\"bank_initialization\":\"physical A and B identical\",\"process_boundary\":\"source_child_opens_private_map_after_fork\"}\n"
+}

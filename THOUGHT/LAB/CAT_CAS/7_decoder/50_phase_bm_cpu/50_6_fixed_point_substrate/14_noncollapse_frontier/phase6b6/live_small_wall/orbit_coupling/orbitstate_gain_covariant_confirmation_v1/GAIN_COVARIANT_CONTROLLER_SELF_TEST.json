@@ -1,0 +1,18 @@
+{
+  "failure_exit_status_law": {
+    "cleanup_failure_status": "GAIN_COVARIANT_CONTROLLER_CLEANUP_FAILED",
+    "copyback_sha_mismatch_status": "GAIN_COVARIANT_CONTROLLER_SUCCESS_EVIDENCE_INVALID",
+    "copyback_size_mismatch_status": "GAIN_COVARIANT_CONTROLLER_SUCCESS_EVIDENCE_INVALID",
+    "passed": true,
+    "success_status": "GAIN_COVARIANT_CONTROLLER_TARGET_COMPLETE",
+    "target_failure_status": "GAIN_COVARIANT_CONTROLLER_TARGET_FAILED_EVIDENCE_RETAINED"
+  },
+  "schema": "GAIN_COVARIANT_CONTROLLER_SELF_TEST_V2",
+  "self_test_passed": true,
+  "self_test_sha256": "03f24c05363f3ef36dcd8e160726122fda1e0b070961d5283b2942a2876051b2",
+  "transport_passed": true,
+  "transport_simulation_sha256": "40c84c64e84ed63d26772d19bfbddb89f6064a44bd5ce4d581866b882165a8a5",
+  "validate_only_passed": true,
+  "validate_only_stable_sha256": "6846a6d52e65583a5bee254731c604a222853417901a13e81937822b95c170d8",
+  "zero_live_contact": true
+}

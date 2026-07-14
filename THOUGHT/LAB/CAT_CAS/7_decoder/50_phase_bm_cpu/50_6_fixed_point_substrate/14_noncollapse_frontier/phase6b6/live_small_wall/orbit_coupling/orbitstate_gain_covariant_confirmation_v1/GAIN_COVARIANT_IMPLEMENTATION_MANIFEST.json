@@ -1,0 +1,187 @@
+{
+  "allowed_target_classes": [
+    "ORBITSTATE_GAIN_COVARIANT_CONFIRMATION_CONFIRMED",
+    "ORBITSTATE_GAIN_COVARIANT_CONFIRMATION_CANDIDATE",
+    "ORBITSTATE_GAIN_COVARIANT_CONFIRMATION_NOT_ESTABLISHED"
+  ],
+  "branch_at_freeze_build": "main",
+  "contract_reference": {
+    "contract_sha256": "31af6869bdf4e25634b1e408830015af2b2c4f20202b2df28492b2e1a9a90860",
+    "gain_control_conditions": [
+      "post_projection",
+      "equal_orbit_odd_zero"
+    ],
+    "official_retained_class": "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+    "predecessor_evidence_allowed_in_decision": false,
+    "primary_coordinate": "change_to_dirty",
+    "private_odd_signal_floor": 456.0,
+    "public_q0_absolute_bound": 152.0,
+    "public_randomization_seed": "orbitstate-gain-covariant-final-confirmation-public-seed-5b7b1338-a7daa611",
+    "relational_tolerance": 0.25,
+    "retrospective_explanatory_class": "PRIVATE_ORBITSTATE_GAIN_COVARIANT_GEOMETRY_ESTABLISHED",
+    "schema": "GAIN_COVARIANT_CONTRACT_REFERENCE_V1",
+    "science_package_id": "orbitstate_gain_covariant_confirmation_v1_0",
+    "small_wall_crossed_promoted": false,
+    "source_commit": "4ff588cea11343bf38d4c96c1281d34cbf1961ed",
+    "transaction_run_id": "orbitstate_gain_covariant_confirmation_v1_0"
+  },
+  "deployment_layout_self_test": {
+    "passed": true,
+    "sha256": "88dbd464562353e06230f8f7a8793018cff2c1fd48b76ce2f5cfd25664f6d40d",
+    "starting_commit_layout_would_fail": null
+  },
+  "expected_local_root": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\runs\\orbitstate_gain_covariant_confirmation_v1_0",
+  "expected_remote_output_root": "/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output",
+  "expected_remote_root": "/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0",
+  "feature_boundary_self_test": {
+    "passed": true,
+    "sha256": "9e2a382d56435fbafdd76fee418356086a8cc9c926b7689dc6257bb3ba5294a0"
+  },
+  "final_commit": "AWAITING_COHERENT_COMMIT",
+  "forbidden_target_classes": [
+    "SMALL_WALL_CROSSED"
+  ],
+  "frozen_science": {
+    "M": 2048,
+    "N": 256,
+    "conditions": 9,
+    "d": 23,
+    "fold_d": 233,
+    "independent_component_windows": 288,
+    "mapping_leg_records": 144,
+    "private_odd_signal_floor": 456.0,
+    "public_decoder_phases": 4,
+    "public_q0_absolute_bound": 152.0,
+    "quantization_scale": 1536,
+    "relational_tolerance": 0.25,
+    "replicates": 2
+  },
+  "future_authorization": {
+    "commit_binding_env": "ORBITSTATE_GAIN_COVARIANT_V1_COMMIT_BINDING",
+    "live_authority_env": "ORBITSTATE_GAIN_COVARIANT_V1_LIVE_AUTHORITY",
+    "live_authority_value": "orbitstate_gain_covariant_confirmation_v1_0",
+    "manifest_binding_env": "ORBITSTATE_GAIN_COVARIANT_V1_MANIFEST_SHA256",
+    "powershell_command": "$env:ORBITSTATE_GAIN_COVARIANT_V1_COMMIT_BINDING = \"<new-final-commit>\"\n$env:ORBITSTATE_GAIN_COVARIANT_V1_MANIFEST_SHA256 = \"<new-manifest-file-sha>\"\n$env:ORBITSTATE_GAIN_COVARIANT_V1_LIVE_AUTHORITY = \"orbitstate_gain_covariant_confirmation_v1_0\"\n\n.\\.venv\\Scripts\\python.exe \"THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\run_gain_covariant_confirmation_v1.py\" --execute-authorized"
+  },
+  "git_status_porcelain_at_freeze_build": " M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/SMALL_WALL_STATE.md\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_gain_covariant_confirmation_v1/\n",
+  "hashes": {
+    "contract_reference_file_sha256": "60922b295a165386313a2cd73241a7c1ad0f84e91c92bb51d0cc53f0982e7f34",
+    "contract_sha256": "31af6869bdf4e25634b1e408830015af2b2c4f20202b2df28492b2e1a9a90860",
+    "controller_self_test_sha256": "3764c95f48122336a8842684381e057275859469ab67748d054dd20e2df5572c",
+    "deployment_layout_self_test_sha256": "88dbd464562353e06230f8f7a8793018cff2c1fd48b76ce2f5cfd25664f6d40d",
+    "disassembly_sha256": "61714e69bb8029ca25eb9e81056a417444c0aba07155d6320ccaa9e394a02f8c",
+    "feature_boundary_self_test_sha256": "9e2a382d56435fbafdd76fee418356086a8cc9c926b7689dc6257bb3ba5294a0",
+    "implementation_audit_sha256": "9af9f29bb185aafc5054f7b1f75bd0d40c2af1343030732876fed88dd27516cd",
+    "offline_binary_sha256": "3f24810593c8ab73a77c77290aa8506d4d4c7cb20b7960e0f935f1a98b801f8a",
+    "private_source_map_canonical_sha256": "bd62da5ad12df997fa6ffcd8e13f4d6d0a244f5fdf73b97e38d71b2403bb6842",
+    "private_source_map_file_sha256": "d1c34fb5cf4b032a0a83d704188b2b24ec3d15a508247226a2c3501782f3c699",
+    "public_schedule_json_sha256": "98142e30d26a4322315c897e2c6053a5d16408ca78991f77a6503d8a8a1eabcf",
+    "public_schedule_sha256_file_sha256": "e19737b44484fe826447114a202a8f3bb2ff53e9bdda6828c6a3cd15ca1c744d",
+    "public_schedule_tsv_sha256": "a2588ab1621a0b518b14205613b9b075a23ea56ed51fb20fc1c808872926efb6",
+    "retrospective_gain_covariant_law_audit_sha256": "85691c0a76a9c1381a0b88c88839996a21dfc652aaaf91c87c14b57df50e4522",
+    "runtime_self_test_sha256": "bae3ca8d8da6850838ac4004c02a6235d5dca2c8ae631e1468c39a50937d8da5",
+    "self_test_sha256": "708058ebc664ff719d366967967e44ac43d03363bc3c5aa3981ed8728936c1b2",
+    "sol_audit_sha256": "b51ed2c52034aa9914feba387e12f1f440486a017a67582149a9020d67e4b852",
+    "source_bundle_sha256": "458b7367f2f93e52e6f8716fb89aa436e72f4dc5023a5d606e94cf6594939cba",
+    "target_self_test_sha256": "ea62b503ca941f15e6b12a4bb02170eddc51ee53f1eb55663510b2aa12aa06d0",
+    "transport_simulation_sha256": "fb150204ac701632511b89896d3c97ca65919c39b7d78f98f9a455d49f478167"
+  },
+  "head_at_freeze_build": "4ff588cea11343bf38d4c96c1281d34cbf1961ed",
+  "manifest_canonical_sha256": "7c31f56e7024973a39832152f7bc69868bb09c49fd880127a21d886b1ad13fb5",
+  "offline_validation": {
+    "offline_validate_sha256": "cb4b3667bc6dddb4b50366379dc7cf20821450774dc58ea00b3b4a8d93a38b03",
+    "passed": true
+  },
+  "origin_main_at_freeze_build": "4ff588cea11343bf38d4c96c1281d34cbf1961ed",
+  "predecessor_boundary": {
+    "official_retained_class": "ORBITSTATE_INDEPENDENT_COUPLING_CANDIDATE",
+    "predecessor_evidence_allowed_in_decision": false,
+    "protected_roots": [
+      "orbitstate_independent_v2_0",
+      "orbitstate_independent_v2_1",
+      "independent_window_transducer_v3_0",
+      "balanced_transducer_confirmation_v2_0",
+      "balanced_transducer_confirmation_v2_1"
+    ],
+    "retrospective_explanatory_class": "PRIVATE_ORBITSTATE_GAIN_COVARIANT_GEOMETRY_ESTABLISHED",
+    "small_wall_crossed_promoted": false
+  },
+  "run_id": "orbitstate_gain_covariant_confirmation_v1_0",
+  "schema": "GAIN_COVARIANT_IMPLEMENTATION_MANIFEST_V2",
+  "science_package_id": "orbitstate_gain_covariant_confirmation_v1_0",
+  "small_wall_post_audit_promotion_law": [
+    "fresh target result is ORBITSTATE_GAIN_COVARIANT_CONFIRMATION_CONFIRMED",
+    "both fresh replicates independently pass",
+    "receiver feature hash frozen before unblinding",
+    "no private source field entered receiver feature extraction",
+    "restoration and physical mapping controls pass",
+    "GPT-5.6 Sol Extra High read-only audit has no material blocker",
+    "GPT-5.5 independently verifies copied source and evidence"
+  ],
+  "sol_audit": {
+    "material_findings": [],
+    "sha256": "b51ed2c52034aa9914feba387e12f1f440486a017a67582149a9020d67e4b852",
+    "status": "NO_MATERIAL_BLOCKERS"
+  },
+  "source_file_map": {
+    "FINAL_CONFIRMATION_CONTRACT.md": {
+      "sha256": "31af6869bdf4e25634b1e408830015af2b2c4f20202b2df28492b2e1a9a90860",
+      "size": 6401
+    },
+    "GAIN_COVARIANT_CONTRACT_REFERENCE.json": {
+      "sha256": "60922b295a165386313a2cd73241a7c1ad0f84e91c92bb51d0cc53f0982e7f34",
+      "size": 975
+    },
+    "GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json": {
+      "sha256": "d1c34fb5cf4b032a0a83d704188b2b24ec3d15a508247226a2c3501782f3c699",
+      "size": 91683
+    },
+    "GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256": {
+      "sha256": "45500e0943c679c0865887c640d5a5cfaa9bcb7f6e4bc086315d867eb721925b",
+      "size": 106
+    },
+    "GAIN_COVARIANT_PUBLIC_SCHEDULE.json": {
+      "sha256": "98142e30d26a4322315c897e2c6053a5d16408ca78991f77a6503d8a8a1eabcf",
+      "size": 63533
+    },
+    "GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "e19737b44484fe826447114a202a8f3bb2ff53e9bdda6828c6a3cd15ca1c744d",
+      "size": 255
+    },
+    "GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "a2588ab1621a0b518b14205613b9b075a23ea56ed51fb20fc1c808872926efb6",
+      "size": 14782
+    },
+    "gain_covariant_confirmation_public.py": {
+      "sha256": "6d2b03b0d0ca343d3ce4bed9511703bcae77df99d131e5f096e516e847d74d0b",
+      "size": 75320
+    },
+    "gain_covariant_confirmation_runtime.c": {
+      "sha256": "4a6d2b1794268baa0e7b90a61913399639ee3c5af4af28c192e9b45f63618610",
+      "size": 43394
+    },
+    "gain_covariant_confirmation_runtime.h": {
+      "sha256": "5344375615d878f80cc7f4462daa2c6b6e1de3ac1c1e0b27fc5be0cc977ab70a",
+      "size": 880
+    },
+    "gain_covariant_confirmation_target.py": {
+      "sha256": "c251c4fd5ab82dfaedb7ea3ec44361903ec48f215ee1f46ac559c71e85b361cd",
+      "size": 70894
+    },
+    "run_gain_covariant_confirmation_v1.py": {
+      "sha256": "077d0f1bcd827510de460a4b1a7b3a1c712db129ab903e4ebd57a94cae5ce470",
+      "size": 62720
+    }
+  },
+  "starting_commit": "4ff588cea11343bf38d4c96c1281d34cbf1961ed",
+  "transaction_run_id": "orbitstate_gain_covariant_confirmation_v1_0",
+  "transport_simulation": {
+    "passed": true,
+    "sha256": "fb150204ac701632511b89896d3c97ca65919c39b7d78f98f9a455d49f478167"
+  },
+  "zero_live_contact_attestation": {
+    "hardware_executions": 0,
+    "network_connections": 0,
+    "ssh_scp_ping_target_contact": 0
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "FINAL_CONFIRMATION_CONTRACT.md": {
+    "sha256": "31af6869bdf4e25634b1e408830015af2b2c4f20202b2df28492b2e1a9a90860",
+    "size": 6401
+  },
+  "GAIN_COVARIANT_CONTRACT_REFERENCE.json": {
+    "sha256": "60922b295a165386313a2cd73241a7c1ad0f84e91c92bb51d0cc53f0982e7f34",
+    "size": 975
+  },
+  "GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json": {
+    "sha256": "d1c34fb5cf4b032a0a83d704188b2b24ec3d15a508247226a2c3501782f3c699",
+    "size": 91683
+  },
+  "GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256": {
+    "sha256": "45500e0943c679c0865887c640d5a5cfaa9bcb7f6e4bc086315d867eb721925b",
+    "size": 106
+  },
+  "GAIN_COVARIANT_PUBLIC_SCHEDULE.json": {
+    "sha256": "98142e30d26a4322315c897e2c6053a5d16408ca78991f77a6503d8a8a1eabcf",
+    "size": 63533
+  },
+  "GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256": {
+    "sha256": "e19737b44484fe826447114a202a8f3bb2ff53e9bdda6828c6a3cd15ca1c744d",
+    "size": 255
+  },
+  "GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv": {
+    "sha256": "a2588ab1621a0b518b14205613b9b075a23ea56ed51fb20fc1c808872926efb6",
+    "size": 14782
+  },
+  "gain_covariant_confirmation_public.py": {
+    "sha256": "6d2b03b0d0ca343d3ce4bed9511703bcae77df99d131e5f096e516e847d74d0b",
+    "size": 75320
+  },
+  "gain_covariant_confirmation_runtime.c": {
+    "sha256": "4a6d2b1794268baa0e7b90a61913399639ee3c5af4af28c192e9b45f63618610",
+    "size": 43394
+  },
+  "gain_covariant_confirmation_runtime.h": {
+    "sha256": "5344375615d878f80cc7f4462daa2c6b6e1de3ac1c1e0b27fc5be0cc977ab70a",
+    "size": 880
+  },
+  "gain_covariant_confirmation_target.py": {
+    "sha256": "c251c4fd5ab82dfaedb7ea3ec44361903ec48f215ee1f46ac559c71e85b361cd",
+    "size": 70894
+  },
+  "run_gain_covariant_confirmation_v1.py": {
+    "sha256": "077d0f1bcd827510de460a4b1a7b3a1c712db129ab903e4ebd57a94cae5ce470",
+    "size": 62720
+  }
+}

@@ -1,0 +1,3328 @@
+{
+  "constants": {
+    "base_work": 2048,
+    "d": 23,
+    "fold_d": 233,
+    "n": 256,
+    "quantization_scale": 1536,
+    "total_work": 4096
+  },
+  "public_schedule_sha256": "c64b6f22aa858fda0de6a4c922277fa34ff90b5735c3a2b70c3c996c315fd962",
+  "records": [
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_2d6216ff09039379",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_783490bfe3094e55",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_736d6abd923a5c28",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_8f3266a7bd5d1088",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_8a4c9f1c03f0cbdd",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_8c9a3289eeeac5fe",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_dd0a22256ef3bb97",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_9108317d7ad7b69f",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_d86807fc4dfda29c",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_03013f24025e0856",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_91b65452c8439052",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_96f1b05c971943d1",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_fa8ef767ef18726c",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_7977cd0a9983c70c",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_2aeda32a53aa27dd",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_d7b242a1175ae5da",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_b41f7a923ff9ab20",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_f9342be5e34bad5f",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_a1a7e60826575611",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_9df4eff17506683a",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_6900a9ac8302ffa5",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_3121e4e083658352",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_471920b93ddb8d6d",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_3f9e415b0890df0b",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_6e3aa73a191a30f5",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_dcd89671fa68d192",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_4fafa01fa36e3325",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_baa410ffba8844a8",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_5773697543b81307",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_dc68b5a348b664ef",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": true,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_8e24f7c7f1e5b954",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_130cebd782b05729",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_2b5806acb96a1bcb",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_47143d70bd3782f3",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_ae2f065a45a86b1a",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": true,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_3e7170c23fcb5174",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_622432209a04e1e9",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_69e09292bd404319",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_b113a2dcf40d284d",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_f1559f6f5bc300d0",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_444b790e0f9756be",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_98bc8fc7d1a12b10",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_f83d808e4c6b31cc",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_4717eb9e072a02c4",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_17d34c6481be0443",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": true,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_8c6425da730a84dd",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_6d40b0518b99162c",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_64209b3e9bdd1f0d",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_ea6c4e338f7e90db",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_844577760230cfee",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_cd27e6bab0178581",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_8728d8a27492d732",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_90eb6d4da78ac1cf",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": true,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_c0380ca00b557bf2",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_bc09e6bd30ce4d71",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_2e35e4c73b75eaf7",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": true,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_d95e2e84588df9cd",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_cbd83688f49f6261",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_9c02dad8ac3a075a",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_39b597f38693a794",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_a9e1f3092eb4406e",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_4cde25ff244dabe6",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_aef88eb31ccba368",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_1e72465c499ba4ce",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": true,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_062e1de3e5927a74",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_e605a9c66a7c0403",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": true,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_f2a952c69f7be9b9",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_03d9f4f6d21cfcb7",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_3628873eefdcee91",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_073bb6acc8f2093d",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_b5461da92fe1d41d",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_0a4b74fe797e11b2",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_ca5a9b32292f0358",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": true,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_a1a054f2bdd90f59",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_b0c134dbc8ee383b",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_9f11e5427c8726d6",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_e1338d57809a68c7",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_27653c76bb204aa5",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_73b7af2a97fb533f",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_9a4f366c1070844c",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_d931c5493ac1d738",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_806072290909c0b9",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_01b03bee5bd66fdc",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": true,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_bcb2e2ff5bb5302a",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_3eafa48b7fe176a1",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_b86f63dd9626502e",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_ba4fb16001d1ebd6",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_a9a7b2e3782d963e",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_d9fc2e0cd59f3cd8",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": true,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_e4fee01b0f87cc35",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": true,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_83cde181a75c7b5e",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_6e5a895e44aecacf",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_4dbf0aba4e5489d5",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_4dea1609941a92ab",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_872e1e7b7eb40cb7",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_f1ecd2aa8432e0f9",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_95a50859dfdd61aa",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_3642efa485323bd3",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_fef3c0ed797da6c6",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_2099f107621435de",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_4847f63e04700ab8",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_a41167b5a74745b4",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_8cb8026d29cfdb98",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_56981afbd45d23be",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_36153870c253e135",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_cbc25381680fb1aa",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_fa4e037869d7bbc1",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_28fa2a3f96aa1d43",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_86dcb81be3ac9e84",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": true,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_17dc000c9facbc37",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_9b3515649d80e0da",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_989bc155e3eb82a3",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_7fad15c2b4ac81e4",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": true,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_df2711c0f1ac44cf",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_6485a71da8d4e58c",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_b64817429c3715d1",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_9ccb25e644120847",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_1402d9e67204ab20",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_7a8a1b78713e1a92",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_f49f32dc80f987b8",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_ea04a96dee4441ac",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": true,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_9192e9aa056dbbc7",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_d7f7160739cd6855",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_d6db6dd365194a48",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": true,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_598adab4bc0fc251",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_4a2dd4260c5d332d",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_94e789bbbd6b0698",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_3fd34bcacd89737c",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_off",
+      "opaque_group_id": "grp_02_92335e5f98573377",
+      "opaque_run_id": "run_37c1cc83c34cb760",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "source_off",
+      "source_off_dummy_mode": true
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_f63c4035ffa230e5",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_516ac5f8d15db932",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_9718024dbd7910fb",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_1a81ce182b1eafb3",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_56088ab48ac435e5",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "declaration_sham",
+      "opaque_group_id": "grp_05_2c482d1c8e54871c",
+      "opaque_run_id": "run_e01267655bd1efd1",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "declaration_sham",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "equal_orbit_odd_zero",
+      "opaque_group_id": "grp_07_b1e9e81e78fd10d7",
+      "opaque_run_id": "run_0414b8bd75d5bfc2",
+      "orbit_state": {
+        "member": 0,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 3,
+      "private_source_phase_radians": 4.712388980385,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 3,
+      "replicate": 0,
+      "response_mode": "equal_orbit_odd_zero",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_off",
+      "opaque_group_id": "grp_03_72e0590d18b754a4",
+      "opaque_run_id": "run_7f027454195f3888",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "query_off",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "post_projection",
+      "opaque_group_id": "grp_04_5d4478a6643fb902",
+      "opaque_run_id": "run_36d7d7bfc9e641c0",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 0,
+      "response_mode": "post_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "query_scramble",
+      "opaque_group_id": "grp_06_09e37248ec1509b2",
+      "opaque_run_id": "run_33aea064e981aff5",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "public_phase_index": 3,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_bee8e864ec052d27",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 0,
+      "private_source_phase_radians": 0.0,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 0,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_d",
+      "opaque_group_id": "grp_00_836d2e4607fc0705",
+      "opaque_run_id": "run_501a56b1e19fe59a",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "source_polarity_inversion_d",
+      "opaque_group_id": "grp_08_382f16d792b913d1",
+      "opaque_run_id": "run_95fb29ed8b0cf567",
+      "orbit_state": {
+        "member": 23,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": true,
+      "private_source_phase_index": 1,
+      "private_source_phase_radians": 1.570796326795,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 1,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_433c0758f2c4c412",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map0",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 0,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    },
+    {
+      "condition": "pre_projection_fold",
+      "opaque_group_id": "grp_01_8ad2df9c6f3b2e29",
+      "opaque_run_id": "run_d839e4dea1593e08",
+      "orbit_state": {
+        "member": 233,
+        "modulus": 256
+      },
+      "physical_mapping": "map1",
+      "polarity_inversion": false,
+      "private_source_phase_index": 2,
+      "private_source_phase_radians": 3.14159265359,
+      "private_source_phase_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_phase_index": 2,
+      "replicate": 1,
+      "response_mode": "pre_projection",
+      "source_off_dummy_mode": false
+    }
+  ],
+  "run_id": "orbitstate_gain_covariant_confirmation_v1_0",
+  "schema": "GAIN_COVARIANT_PRIVATE_SOURCE_MAP_V2",
+  "sealed_before_live_authorization": true
+}

@@ -1,0 +1,927 @@
+{
+  "passed": true,
+  "regressions": {
+    "cleanup_absence_failure_retains_remote": true,
+    "cleanup_absence_verified": true,
+    "cleanup_failure_retains_remote": true,
+    "copyback_command_failure_retains_remote": true,
+    "copyback_sha_mismatch_fails": true,
+    "copyback_size_mismatch_fails": true,
+    "existing_remote_root_rejected": true,
+    "explicit_manifest_bound_transfer_used": true,
+    "historical_root_mutation_rejected": true,
+    "historical_roots_not_used_for_transfer_or_execution": true,
+    "no_automatic_retry": true,
+    "null_transport_baseline_rejected_without_target_invocation": true,
+    "preexecution_no_output_failure_retains_new_root": true,
+    "recursive_unbound_transfer_not_used": true,
+    "success_cleanup_targets_exact_root": true,
+    "target_failure_evidence_copied": true,
+    "target_failure_retains_remote_root": true
+  },
+  "results": {
+    "cleanup_absence_failure": {
+      "absence_returncode": 11,
+      "commands": [
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\FINAL_CONFIRMATION_CONTRACT.md",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/FINAL_CONFIRMATION_CONTRACT.md"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_CONTRACT_REFERENCE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_CONTRACT_REFERENCE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_public.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_public.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.c",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.c"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.h",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.h"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_target.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\run_gain_covariant_confirmation_v1.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/run_gain_covariant_confirmation_v1.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "cd /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_GAIN_COVARIANT_V1_COMMIT_BINDING=<commit> ORBITSTATE_GAIN_COVARIANT_V1_MANIFEST_SHA256=<sha256> ORBITSTATE_GAIN_COVARIANT_V1_LIVE_AUTHORITY=orbitstate_gain_covariant_confirmation_v1_0 python3 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source --output-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output --run-id orbitstate_gain_covariant_confirmation_v1_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "test -d /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output"
+        ],
+        [
+          "scp",
+          "-r",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output/.",
+          "<fake_transport_root>\\runs_cleanup_absence\\orbitstate_gain_covariant_confirmation_v1_0"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "rm -rf -- /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "test ! -e /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0"
+        ]
+      ],
+      "final": {
+        "fake_transport": true,
+        "result_class": "ORBITSTATE_GAIN_COVARIANT_CONFIRMATION_CONFIRMED",
+        "run_id": "orbitstate_gain_covariant_confirmation_v1_0",
+        "science_package_id": "orbitstate_gain_covariant_confirmation_v1_0",
+        "scientific_classification_emitted": true,
+        "status": "ORBITSTATE_GAIN_COVARIANT_TARGET_COMPLETE",
+        "transaction_run_id": "orbitstate_gain_covariant_confirmation_v1_0"
+      },
+      "pretransport_gate": {
+        "passed": true,
+        "simulated": true
+      },
+      "remote_cleaned": false,
+      "remote_retained": true,
+      "status": "GAIN_COVARIANT_CONTROLLER_CLEANUP_ABSENCE_VERIFY_FAILED"
+    },
+    "cleanup_failure": {
+      "cleanup_returncode": 10,
+      "commands": [
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\FINAL_CONFIRMATION_CONTRACT.md",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/FINAL_CONFIRMATION_CONTRACT.md"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_CONTRACT_REFERENCE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_CONTRACT_REFERENCE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_public.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_public.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.c",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.c"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.h",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.h"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_target.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\run_gain_covariant_confirmation_v1.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/run_gain_covariant_confirmation_v1.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "cd /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_GAIN_COVARIANT_V1_COMMIT_BINDING=<commit> ORBITSTATE_GAIN_COVARIANT_V1_MANIFEST_SHA256=<sha256> ORBITSTATE_GAIN_COVARIANT_V1_LIVE_AUTHORITY=orbitstate_gain_covariant_confirmation_v1_0 python3 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source --output-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output --run-id orbitstate_gain_covariant_confirmation_v1_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "test -d /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output"
+        ],
+        [
+          "scp",
+          "-r",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output/.",
+          "<fake_transport_root>\\runs_cleanup_failure\\orbitstate_gain_covariant_confirmation_v1_0"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "rm -rf -- /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0"
+        ]
+      ],
+      "final": {
+        "fake_transport": true,
+        "result_class": "ORBITSTATE_GAIN_COVARIANT_CONFIRMATION_CONFIRMED",
+        "run_id": "orbitstate_gain_covariant_confirmation_v1_0",
+        "science_package_id": "orbitstate_gain_covariant_confirmation_v1_0",
+        "scientific_classification_emitted": true,
+        "status": "ORBITSTATE_GAIN_COVARIANT_TARGET_COMPLETE",
+        "transaction_run_id": "orbitstate_gain_covariant_confirmation_v1_0"
+      },
+      "pretransport_gate": {
+        "passed": true,
+        "simulated": true
+      },
+      "remote_cleaned": false,
+      "remote_retained": true,
+      "status": "GAIN_COVARIANT_CONTROLLER_CLEANUP_FAILED"
+    },
+    "copyback_command_failure": {
+      "commands": [
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\FINAL_CONFIRMATION_CONTRACT.md",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/FINAL_CONFIRMATION_CONTRACT.md"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_CONTRACT_REFERENCE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_CONTRACT_REFERENCE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_public.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_public.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.c",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.c"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.h",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.h"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_target.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\run_gain_covariant_confirmation_v1.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/run_gain_covariant_confirmation_v1.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "cd /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_GAIN_COVARIANT_V1_COMMIT_BINDING=<commit> ORBITSTATE_GAIN_COVARIANT_V1_MANIFEST_SHA256=<sha256> ORBITSTATE_GAIN_COVARIANT_V1_LIVE_AUTHORITY=orbitstate_gain_covariant_confirmation_v1_0 python3 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source --output-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output --run-id orbitstate_gain_covariant_confirmation_v1_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "test -d /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output"
+        ],
+        [
+          "scp",
+          "-r",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output/.",
+          "<fake_transport_root>\\runs_copy_command\\orbitstate_gain_covariant_confirmation_v1_0"
+        ]
+      ],
+      "copyback_error": {
+        "returncode": 8,
+        "stderr": "fake copyback failure",
+        "stdout": ""
+      },
+      "output_root_exists": true,
+      "pretransport_gate": {
+        "passed": true,
+        "simulated": true
+      },
+      "remote_cleaned": false,
+      "remote_retained": true,
+      "status": "GAIN_COVARIANT_CONTROLLER_COPYBACK_FAILED"
+    },
+    "copyback_sha_mismatch": {
+      "commands": [
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\FINAL_CONFIRMATION_CONTRACT.md",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/FINAL_CONFIRMATION_CONTRACT.md"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_CONTRACT_REFERENCE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_CONTRACT_REFERENCE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_public.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_public.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.c",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.c"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.h",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.h"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_target.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\run_gain_covariant_confirmation_v1.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/run_gain_covariant_confirmation_v1.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "cd /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_GAIN_COVARIANT_V1_COMMIT_BINDING=<commit> ORBITSTATE_GAIN_COVARIANT_V1_MANIFEST_SHA256=<sha256> ORBITSTATE_GAIN_COVARIANT_V1_LIVE_AUTHORITY=orbitstate_gain_covariant_confirmation_v1_0 python3 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source --output-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output --run-id orbitstate_gain_covariant_confirmation_v1_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "test -d /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output"
+        ],
+        [
+          "scp",
+          "-r",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output/.",
+          "<fake_transport_root>\\runs_copy_sha\\orbitstate_gain_covariant_confirmation_v1_0"
+        ]
+      ],
+      "evidence_error": "copyback SHA mismatch: FINAL_RESULT_GAIN_COVARIANT_CONFIRMATION.json",
+      "pretransport_gate": {
+        "passed": true,
+        "simulated": true
+      },
+      "remote_cleaned": false,
+      "remote_retained": true,
+      "status": "GAIN_COVARIANT_CONTROLLER_SUCCESS_EVIDENCE_INVALID"
+    },
+    "copyback_size_mismatch": {
+      "commands": [
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\FINAL_CONFIRMATION_CONTRACT.md",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/FINAL_CONFIRMATION_CONTRACT.md"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_CONTRACT_REFERENCE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_CONTRACT_REFERENCE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_public.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_public.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.c",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.c"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.h",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.h"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_target.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\run_gain_covariant_confirmation_v1.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/run_gain_covariant_confirmation_v1.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "cd /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_GAIN_COVARIANT_V1_COMMIT_BINDING=<commit> ORBITSTATE_GAIN_COVARIANT_V1_MANIFEST_SHA256=<sha256> ORBITSTATE_GAIN_COVARIANT_V1_LIVE_AUTHORITY=orbitstate_gain_covariant_confirmation_v1_0 python3 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source --output-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output --run-id orbitstate_gain_covariant_confirmation_v1_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "test -d /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output"
+        ],
+        [
+          "scp",
+          "-r",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output/.",
+          "<fake_transport_root>\\runs_copy_size\\orbitstate_gain_covariant_confirmation_v1_0"
+        ]
+      ],
+      "evidence_error": "copyback size mismatch: FINAL_RESULT_GAIN_COVARIANT_CONFIRMATION.json",
+      "pretransport_gate": {
+        "passed": true,
+        "simulated": true
+      },
+      "remote_cleaned": false,
+      "remote_retained": true,
+      "status": "GAIN_COVARIANT_CONTROLLER_SUCCESS_EVIDENCE_INVALID"
+    },
+    "preexecution_no_output": {
+      "commands": [
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\FINAL_CONFIRMATION_CONTRACT.md",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/FINAL_CONFIRMATION_CONTRACT.md"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_CONTRACT_REFERENCE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_CONTRACT_REFERENCE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_public.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_public.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.c",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.c"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.h",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.h"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_target.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\run_gain_covariant_confirmation_v1.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/run_gain_covariant_confirmation_v1.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "cd /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_GAIN_COVARIANT_V1_COMMIT_BINDING=<commit> ORBITSTATE_GAIN_COVARIANT_V1_MANIFEST_SHA256=<sha256> ORBITSTATE_GAIN_COVARIANT_V1_LIVE_AUTHORITY=orbitstate_gain_covariant_confirmation_v1_0 python3 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source --output-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output --run-id orbitstate_gain_covariant_confirmation_v1_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "test -d /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output"
+        ]
+      ],
+      "copyback_error": null,
+      "output_root_exists": false,
+      "pretransport_gate": {
+        "passed": true,
+        "simulated": true
+      },
+      "remote_cleaned": false,
+      "remote_retained": true,
+      "status": "GAIN_COVARIANT_CONTROLLER_TARGET_FAILED_NO_COPYBACK",
+      "stderr": "fake pre-execution failure before output root",
+      "stdout": "",
+      "target_returncode": 12
+    },
+    "remote_root_exists": {
+      "commands": [
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source"
+        ]
+      ],
+      "pretransport_gate": {
+        "passed": true,
+        "simulated": true
+      },
+      "remote_cleaned": false,
+      "remote_retained": true,
+      "returncode": 9,
+      "status": "GAIN_COVARIANT_CONTROLLER_REMOTE_ROOT_NOT_ABSENT",
+      "stderr": "remote root exists",
+      "stdout": ""
+    },
+    "success": {
+      "commands": [
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\FINAL_CONFIRMATION_CONTRACT.md",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/FINAL_CONFIRMATION_CONTRACT.md"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_CONTRACT_REFERENCE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_CONTRACT_REFERENCE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_public.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_public.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.c",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.c"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.h",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.h"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_target.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\run_gain_covariant_confirmation_v1.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/run_gain_covariant_confirmation_v1.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "cd /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_GAIN_COVARIANT_V1_COMMIT_BINDING=<commit> ORBITSTATE_GAIN_COVARIANT_V1_MANIFEST_SHA256=<sha256> ORBITSTATE_GAIN_COVARIANT_V1_LIVE_AUTHORITY=orbitstate_gain_covariant_confirmation_v1_0 python3 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source --output-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output --run-id orbitstate_gain_covariant_confirmation_v1_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "test -d /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output"
+        ],
+        [
+          "scp",
+          "-r",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output/.",
+          "<fake_transport_root>\\runs_success\\orbitstate_gain_covariant_confirmation_v1_0"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "rm -rf -- /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "test ! -e /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0"
+        ]
+      ],
+      "final": {
+        "fake_transport": true,
+        "result_class": "ORBITSTATE_GAIN_COVARIANT_CONFIRMATION_CONFIRMED",
+        "run_id": "orbitstate_gain_covariant_confirmation_v1_0",
+        "science_package_id": "orbitstate_gain_covariant_confirmation_v1_0",
+        "scientific_classification_emitted": true,
+        "status": "ORBITSTATE_GAIN_COVARIANT_TARGET_COMPLETE",
+        "transaction_run_id": "orbitstate_gain_covariant_confirmation_v1_0"
+      },
+      "local_root": "<fake_transport_root>\\runs_success\\orbitstate_gain_covariant_confirmation_v1_0",
+      "pretransport_gate": {
+        "passed": true,
+        "simulated": true
+      },
+      "remote_cleaned": true,
+      "remote_retained": false,
+      "remote_root": "/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0",
+      "status": "GAIN_COVARIANT_CONTROLLER_TARGET_COMPLETE",
+      "success_evidence": {
+        "copyback": {
+          "copyback_manifest_sha256": "<sha256>",
+          "entry_count": 15,
+          "passed": true
+        },
+        "execution_manifest_sha256": "<sha256>",
+        "final": {
+          "fake_transport": true,
+          "result_class": "ORBITSTATE_GAIN_COVARIANT_CONFIRMATION_CONFIRMED",
+          "run_id": "orbitstate_gain_covariant_confirmation_v1_0",
+          "science_package_id": "orbitstate_gain_covariant_confirmation_v1_0",
+          "scientific_classification_emitted": true,
+          "status": "ORBITSTATE_GAIN_COVARIANT_TARGET_COMPLETE",
+          "transaction_run_id": "orbitstate_gain_covariant_confirmation_v1_0"
+        },
+        "passed": true,
+        "result_class": "ORBITSTATE_GAIN_COVARIANT_CONFIRMATION_CONFIRMED"
+      }
+    },
+    "target_failure": {
+      "commands": [
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "set -eu; test ! -e /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0; install -d -m 0700 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\FINAL_CONFIRMATION_CONTRACT.md",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/FINAL_CONFIRMATION_CONTRACT.md"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_CONTRACT_REFERENCE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_CONTRACT_REFERENCE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_public.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_public.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.c",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.c"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_runtime.h",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_runtime.h"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\gain_covariant_confirmation_target.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\run_gain_covariant_confirmation_v1.py",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/run_gain_covariant_confirmation_v1.py"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.tsv"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PUBLIC_SCHEDULE.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.json"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_PRIVATE_SOURCE_MAP.sha256"
+        ],
+        [
+          "scp",
+          "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\orbit_coupling\\orbitstate_gain_covariant_confirmation_v1\\GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/GAIN_COVARIANT_IMPLEMENTATION_MANIFEST.json"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "cd /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source && timeout --signal=TERM --kill-after=5s 900s env ORBITSTATE_GAIN_COVARIANT_V1_COMMIT_BINDING=<commit> ORBITSTATE_GAIN_COVARIANT_V1_MANIFEST_SHA256=<sha256> ORBITSTATE_GAIN_COVARIANT_V1_LIVE_AUTHORITY=orbitstate_gain_covariant_confirmation_v1_0 python3 /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source/gain_covariant_confirmation_target.py --execute-live --source-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/source --output-root /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output --run-id orbitstate_gain_covariant_confirmation_v1_0 --expected-manifest-sha <sha256> --expected-commit-binding <commit>"
+        ],
+        [
+          "ssh",
+          "root@192.168.137.100",
+          "test -d /root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output"
+        ],
+        [
+          "scp",
+          "-r",
+          "root@192.168.137.100:/root/catcas_live_small_wall/orbitstate_gain_covariant_confirmation_v1_0/output/.",
+          "<fake_transport_root>\\runs_failure\\orbitstate_gain_covariant_confirmation_v1_0"
+        ]
+      ],
+      "failure_evidence": {
+        "copyback": {
+          "copyback_manifest_sha256": "<sha256>",
+          "entry_count": 4,
+          "passed": true
+        },
+        "failure_phase": "fake_target",
+        "passed": true
+      },
+      "pretransport_gate": {
+        "passed": true,
+        "simulated": true
+      },
+      "remote_cleaned": false,
+      "remote_retained": true,
+      "status": "GAIN_COVARIANT_CONTROLLER_TARGET_FAILED_EVIDENCE_RETAINED",
+      "stderr": "fake target failure",
+      "stdout": "",
+      "target_returncode": 7
+    }
+  },
+  "schema": "GAIN_COVARIANT_TRANSPORT_SIMULATION_V2",
+  "target_invocations": {
+    "cleanup_absence_failure": 1,
+    "cleanup_failure": 1,
+    "copyback_command_failure": 1,
+    "copyback_sha_mismatch": 1,
+    "copyback_size_mismatch": 1,
+    "preexecution_no_output": 1,
+    "remote_root_exists": 0,
+    "success": 1,
+    "target_failure": 1
+  },
+  "transport_simulation_sha256": "40c84c64e84ed63d26772d19bfbddb89f6064a44bd5ce4d581866b882165a8a5",
+  "zero_live_contact": true
+}

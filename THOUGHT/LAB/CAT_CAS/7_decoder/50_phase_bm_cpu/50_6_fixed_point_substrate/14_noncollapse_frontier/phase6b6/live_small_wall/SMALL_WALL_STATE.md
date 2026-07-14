@@ -6,7 +6,7 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`FINAL_GAIN_COVARIANT_CONFIRMATION_FROZEN_AWAITING_AUTHORIZATION`
+`FINAL_GAIN_COVARIANT_CONFIRMATION_LIVE_PACKAGE_FROZEN_AWAITING_AUTHORIZATION`
 
 **Latest live result:**
 `orbitstate_independent_v2_1` completed the one authorized retry-one private
@@ -87,6 +87,28 @@ strong-signal mapping/reversal/sign hard gates, and a fixed near-zero absolute l
 No live transaction is authorized by the contract.
 
 **Latest offline freeze:**
+`orbitstate_gain_covariant_confirmation_v1_0` freezes the final prospective
+gain-covariant OrbitState confirmation live package at starting head
+`4ff588cea11343bf38d4c96c1281d34cbf1961ed`, without SSH, SCP, ping, target
+inspection, PMU hardware execution, or lab-device contact. This is a live-capable
+package freeze only; it does not authorize or execute the target transaction and
+does not promote `SMALL_WALL_CROSSED`.
+
+Frozen package root:
+`phase6b6/live_small_wall/orbit_coupling/orbitstate_gain_covariant_confirmation_v1`.
+Contract SHA-256:
+`31af6869bdf4e25634b1e408830015af2b2c4f20202b2df28492b2e1a9a90860`.
+The package predeclares the new public seed
+`orbitstate-gain-covariant-final-confirmation-public-seed-5b7b1338-a7daa611`,
+per-replicate control-only gain estimation from `post_projection` and
+`equal_orbit_odd_zero`, gain-normalized target/fold/polarity geometry, strong
+signal phase controls, a fixed near-zero absolute law, no target-derived gain
+fitting, no post-run threshold revision, and both fresh replicates as hard gates.
+The future live invocation remains blocked unless the final committed head,
+manifest file SHA, and explicit live authority environment variables are supplied
+after this offline package has been reviewed.
+
+**Previous offline freeze:**
 `orbitstate_independent_v2_0` freezes the private OrbitState independent-window
 wall-crossing package at source head `4762b5b49b308ae4aca8e141113e4fafe4b0f81e`
 without SSH, SCP, ping, target inspection, PMU hardware execution, or lab-device
