@@ -209,8 +209,10 @@ def source_audit_quorum(
     expected_source_hashes_sha256: str,
     expected_source_bundle_sha256: str,
     review_report_present: bool,
+    excluded_agent_ids: set[str] | None = None,
 ) -> dict[str, Any]:
     failures: list[str] = []
+    excluded_agent_ids = excluded_agent_ids or set()
     if source_audit.get("source_authority_commit") != expected_source_commit:
         failures.append("source audit commit mismatch")
     if source_audit.get("source_hashes_sha256") != expected_source_hashes_sha256:
@@ -274,6 +276,9 @@ def source_audit_quorum(
         if not isinstance(boundary, dict) or boundary.get("no_git_write") is not True or boundary.get("no_target_contact") is not True:
             failures.append(f"source audit reviewer boundary attestation missing {role}")
             role_entry["passed"] = False
+        if role_entry["agent_id"] in excluded_agent_ids:
+            failures.append(f"source audit reviewer reuses prior package reviewer identity {role}")
+            role_entry["passed"] = False
     missing = sorted(set(SOURCE_AUDIT_REQUIRED_REVIEW_ROLES) - set(by_role))
     if missing:
         failures.append("missing source audit reviewer roles: " + ",".join(missing))
@@ -322,6 +327,20 @@ def git_text(*args: str) -> str:
 def git_lines(*args: str) -> list[str]:
     text = run(["git", "-c", f"safe.directory={REPO_ROOT.as_posix()}", *args], timeout=30.0, cwd=REPO_ROOT).stdout
     return [line for line in text.splitlines() if line.strip()]
+
+
+def git_blob_bytes(commit: str, name: str) -> bytes:
+    rel = package_relative_path(name)
+    completed = subprocess.run(
+        ["git", "-c", f"safe.directory={REPO_ROOT.as_posix()}", "show", f"{commit}:{rel}"],
+        capture_output=True,
+        timeout=30.0,
+        check=False,
+        cwd=REPO_ROOT,
+    )
+    if completed.returncode != 0:
+        raise ControllerError(f"git blob read failed for {commit}:{rel}: {completed.stderr.decode('utf-8', errors='replace')}")
+    return completed.stdout
 
 
 def git_state() -> dict[str, Any]:
@@ -644,10 +663,26 @@ def temperature_sensor_authority_from_receipt(
                 failures.append("temperature sensor discovery provenance package mismatch")
             if provenance.get("transaction_run_id") != public.TRANSACTION_RUN_ID:
                 failures.append("temperature sensor discovery provenance run mismatch")
-            if not isinstance(provenance.get("target_platform"), dict):
+            platform = provenance.get("target_platform")
+            if not isinstance(platform, dict):
                 failures.append("temperature sensor discovery target platform missing")
+            else:
+                if platform.get("vendor") != "AuthenticAMD" or platform.get("cpu_family") != 16:
+                    failures.append("temperature sensor discovery target platform is not AMD Family 10h")
+                if platform.get("checked_before_discovery") is not True:
+                    failures.append("temperature sensor discovery platform was not checked before discovery")
             if not isinstance(provenance.get("discovery_monotonic_ns"), int) or provenance.get("discovery_monotonic_ns", 0) <= 0:
                 failures.append("temperature sensor discovery monotonic timestamp missing")
+            if expected_challenge is not None:
+                if provenance.get("controller_challenge_sha256") != public.digest(expected_challenge):
+                    failures.append("temperature sensor discovery challenge provenance mismatch")
+                if provenance.get("authorized_commit") != expected_challenge.get("authorized_commit"):
+                    failures.append("temperature sensor discovery authorized commit provenance mismatch")
+        if expected_challenge is not None and discovery.get("controller_nonce_sha256") != expected_challenge.get("controller_nonce_sha256"):
+            failures.append("temperature sensor discovery controller nonce mismatch")
+        source_authority = discovery.get("source_authority")
+        if not isinstance(source_authority, dict) or source_authority.get("passed") is not True:
+            failures.append("temperature sensor discovery source authority did not pass")
         if discovery.get("target_contact_count") != 1:
             failures.append("temperature sensor discovery target contact count must be one")
         if discovery.get("sensor_inventory_count") != 1:
@@ -662,27 +697,83 @@ def temperature_sensor_authority_from_receipt(
             failures.append("temperature sensor discovery runtime launch count must be zero")
         if discovery.get("tomography_output_root_created") is not False:
             failures.append("temperature sensor discovery must not create tomography output root")
-        if discovery.get("selected_identity") != identity:
+        selected_identity = discovery.get("selected_identity")
+        if selected_identity != identity:
             failures.append("temperature sensor discovery identity mismatch")
         candidates = discovery.get("observed_candidates")
         if not isinstance(candidates, list) or not candidates:
             failures.append("temperature sensor discovery candidates missing")
         elif identity is not None:
-            complete_candidates = []
+            approved_candidates = []
             for index, candidate in enumerate(candidates):
                 if not isinstance(candidate, dict):
                     failures.append(f"temperature sensor discovery candidate malformed {index}")
                     continue
                 candidate_identity = candidate.get("identity")
+                if candidate_identity is None:
+                    if candidate.get("approved") is True:
+                        failures.append(f"temperature sensor discovery candidate approved without identity {index}")
+                    continue
                 if not isinstance(candidate_identity, dict) or set(candidate_identity) != public.TEMPERATURE_SENSOR_IDENTITY_KEYS:
                     failures.append(f"temperature sensor discovery candidate identity malformed {index}")
                     continue
                 if candidate_identity.get("identity_sha256") != public.temperature_identity_digest(candidate_identity):
                     failures.append(f"temperature sensor discovery candidate identity digest mismatch {index}")
-                if candidate.get("approved") is True:
-                    complete_candidates.append(candidate_identity)
-            if identity not in complete_candidates:
+                    continue
+                expected_approved = (
+                    candidate_identity.get("hwmon_name") in target.APPROVED_TEMPERATURE_HWMON_NAMES
+                    and candidate_identity.get("sensor_label") in target.APPROVED_TEMPERATURE_SENSOR_LABELS
+                )
+                if candidate.get("approved") is not expected_approved:
+                    failures.append(f"temperature sensor discovery candidate approval mismatch {index}")
+                if expected_approved:
+                    approved_candidates.append(candidate)
+            if identity not in [candidate.get("identity") for candidate in approved_candidates]:
                 failures.append("temperature sensor discovery selected identity not in approved candidates")
+            if approved_candidates:
+                label_rank = {"Tctl": 0, "Tdie": 1}
+                recomputed_selected = sorted(
+                    approved_candidates,
+                    key=lambda candidate: (
+                        label_rank.get(candidate["identity"]["sensor_label"], 99),
+                        candidate["identity"]["class_path"],
+                        candidate["identity"]["resolved_input_path"],
+                    ),
+                )[0]["identity"]
+                if selected_identity != recomputed_selected:
+                    failures.append("temperature sensor discovery deterministic selection mismatch")
+                selection = discovery.get("selection")
+                if not isinstance(selection, dict):
+                    failures.append("temperature sensor discovery selection metadata missing")
+                else:
+                    if selection.get("deterministic_law") is not True:
+                        failures.append("temperature sensor discovery deterministic law missing")
+                    if selection.get("approved_count") != len(approved_candidates):
+                        failures.append("temperature sensor discovery approved count mismatch")
+                    if selection.get("selected_class_path") != recomputed_selected.get("class_path"):
+                        failures.append("temperature sensor discovery selected class path mismatch")
+            for field in ("identity_before", "identity_after"):
+                observed = discovery.get(field)
+                if not isinstance(observed, dict) or not target.identity_matches_required(observed, identity):
+                    failures.append(f"temperature sensor discovery {field} mismatch")
+            sample = discovery.get("sample")
+            if not isinstance(sample, dict):
+                failures.append("temperature sensor discovery sample missing")
+            else:
+                if sample.get("identity") != identity:
+                    failures.append("temperature sensor discovery sample identity mismatch")
+                if sample.get("path") != identity.get("class_path"):
+                    failures.append("temperature sensor discovery sample path mismatch")
+                if sample.get("label") != identity.get("sensor_label"):
+                    failures.append("temperature sensor discovery sample label mismatch")
+                value = sample.get("value_c")
+                if not public.is_json_number(value) or not 0.0 < float(value) < 120.0:
+                    failures.append("temperature sensor discovery sample value invalid")
+                descriptor = sample.get("pinned_descriptor")
+                if not isinstance(descriptor, dict) or descriptor.get("resolved_input_path") != identity.get("resolved_input_path"):
+                    failures.append("temperature sensor discovery pinned descriptor missing or mismatched")
+                if sample.get("read_law") != "manifest-approved resolved input descriptor":
+                    failures.append("temperature sensor discovery read law mismatch")
     if expected_transport_receipt is None:
         if require_transport:
             failures.append("temperature discovery transport receipt missing")
@@ -697,10 +788,16 @@ def temperature_sensor_authority_from_receipt(
         cleanup = expected_transport_receipt.get("cleanup")
         if not isinstance(cleanup, dict) or cleanup.get("passed") is not True or cleanup.get("absence_verified") is not True:
             failures.append("temperature discovery cleanup and absence verification required")
+        if expected_challenge is not None and expected_transport_receipt.get("source_authority_commit") != expected_challenge.get("authorized_commit"):
+            failures.append("temperature discovery transport source commit mismatch")
         if expected_transport_receipt.get("target_discovery_receipt_sha256") != discovery.get("target_discovery_receipt_sha256"):
             failures.append("temperature discovery transport target receipt mismatch")
+        if re.fullmatch(r"[0-9a-f]{64}", str(expected_transport_receipt.get("target_discovery_receipt_file_sha256", ""))) is None:
+            failures.append("temperature discovery transport target receipt file hash missing")
         if expected_transport_receipt.get("authority_receipt_sha256") != receipt.get("temperature_sensor_authority_sha256"):
             failures.append("temperature discovery transport authority receipt mismatch")
+        if re.fullmatch(r"[0-9a-f]{64}", str(expected_transport_receipt.get("authority_receipt_file_sha256", ""))) is None:
+            failures.append("temperature discovery transport authority receipt file hash missing")
         if expected_transport_receipt.get("controller_challenge_sha256") != receipt.get("controller_challenge_sha256"):
             failures.append("temperature discovery transport challenge mismatch")
         if expected_transport_receipt.get("retry_count") != 0:
@@ -942,13 +1039,31 @@ def sh_quote(value: str) -> str:
     return shlex.quote(value)
 
 
-def acquire_temperature_sensor_authority(*, target_host: str = TARGET_HOST, remote_root: str = DISCOVERY_REMOTE_ROOT) -> dict[str, Any]:
-    if any(path.exists() for path in [TEMPERATURE_SENSOR_AUTHORITY, TARGET_DISCOVERY_RECEIPT, DISCOVERY_TRANSPORT_PATH, DISCOVERY_ATTEMPT_PATH]):
+def serialized_json_sha256(value: Any) -> str:
+    return hashlib.sha256((json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8")).hexdigest()
+
+
+def acquire_temperature_sensor_authority(
+    *,
+    target_host: str = TARGET_HOST,
+    remote_root: str = DISCOVERY_REMOTE_ROOT,
+    source_authority_commit: str | None = None,
+) -> dict[str, Any]:
+    if any(
+        path.exists()
+        for path in [
+            TEMPERATURE_SENSOR_AUTHORITY,
+            TARGET_DISCOVERY_RECEIPT,
+            DISCOVERY_TRANSPORT_PATH,
+            DISCOVERY_ATTEMPT_PATH,
+            DISCOVERY_CHALLENGE_PATH,
+        ]
+    ):
         raise ControllerError("second discovery attempt rejected: authority, discovery, transport, or attempt receipt already exists")
     source_hashes = read_source_hash_authority()
     schedule_sidecar = read_json(public.SCHEDULE_SHA)
-    bundle = write_source_bundle()
-    source_commit = git_text("rev-parse", "HEAD")
+    bundle = read_existing_source_bundle_authority()
+    source_commit = source_authority_commit or os.environ.get("FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUTHORITY_COMMIT") or git_text("rev-parse", "HEAD")
     source_commit_check = source_authority_commit_verification(source_commit)
     if not source_commit_check["passed"]:
         raise ControllerError("source authority commit verification failed: " + ",".join(source_commit_check["failures"]))
@@ -961,7 +1076,23 @@ def acquire_temperature_sensor_authority(*, target_host: str = TARGET_HOST, remo
         authorized_commit=source_commit,
         controller_nonce_sha256=nonce_sha,
     )
-    challenge_receipt = write_discovery_challenge_receipt(challenge, source_commit=source_commit, nonce_sha=nonce_sha)
+    challenge_receipt = {
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE_RECEIPT_V1",
+        "science_package_id": public.SCIENCE_PACKAGE_ID,
+        "transaction_run_id": public.TRANSACTION_RUN_ID,
+        "source_authority_commit": source_commit,
+        "controller_challenge": challenge,
+        "controller_challenge_sha256": public.digest(challenge),
+        "controller_nonce_sha256": nonce_sha,
+        "pre_contact": True,
+        "target_contact_count": 0,
+        "sensor_inventory_count": 0,
+        "live_invocation_count": 0,
+        "pmu_acquisition_count": 0,
+    }
+    challenge_receipt["challenge_receipt_sha256"] = public.digest(
+        {k: v for k, v in challenge_receipt.items() if k != "challenge_receipt_sha256"}
+    )
     remote_source = f"{remote_root}/source"
     remote_challenge = f"{remote_source}/controller_challenge.json"
     remote_receipt = f"{remote_source}/{target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME}"
@@ -975,7 +1106,7 @@ def acquire_temperature_sensor_authority(*, target_host: str = TARGET_HOST, remo
     write_discovery_attempt_receipt(
         {
             "passed": False,
-            "attempt_state": "issued_pre_contact",
+            "attempt_state": "claimed_pre_contact",
             "source_authority_commit": source_commit,
             "source_authority": source_commit_check,
             "controller_challenge_sha256": public.digest(challenge),
@@ -988,17 +1119,35 @@ def acquire_temperature_sensor_authority(*, target_host: str = TARGET_HOST, remo
     )
     with tempfile.TemporaryDirectory(prefix="family10h_temperature_discovery_") as tmp:
         tmp_root = Path(tmp)
+        source_stage = tmp_root / "source_authority_snapshot"
+        materialize_source_authority_snapshot(source_commit, source_stage)
         challenge_path = tmp_root / "controller_challenge.json"
         write_json(challenge_path, challenge)
+        write_json(DISCOVERY_CHALLENGE_PATH, challenge_receipt)
         local_copyback = tmp_root / target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME
         try:
             preflight = f"set -eu; test ! -e {sh_quote(remote_root)}; install -d -m 0700 {sh_quote(remote_source)}"
             command = ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=8", target_host, preflight]
             commands.append(command)
+            write_discovery_attempt_receipt(
+                {
+                    "passed": False,
+                    "attempt_state": "transport_contact_invoked",
+                    "source_authority_commit": source_commit,
+                    "source_authority": source_commit_check,
+                    "controller_challenge_sha256": public.digest(challenge),
+                    "challenge_receipt_sha256": challenge_receipt["challenge_receipt_sha256"],
+                    "target_contact_count": 1,
+                    "sensor_inventory_count": 0,
+                    "live_invocation_count": 0,
+                    "pmu_acquisition_count": 0,
+                    "commands": commands,
+                }
+            )
             run(command, timeout=20.0)
             remote_root_created = True
             for name in SOURCE_AUTHORITY_FILE_NAMES:
-                local = HERE / name
+                local = source_stage / name
                 command = ["scp", "-q", str(local), f"{target_host}:{remote_source}/{name}"]
                 commands.append(command)
                 run(command, timeout=60.0)
@@ -1027,7 +1176,7 @@ def acquire_temperature_sensor_authority(*, target_host: str = TARGET_HOST, remo
                     "controller_challenge_sha256": public.digest(challenge),
                     "challenge_receipt_sha256": challenge_receipt["challenge_receipt_sha256"],
                     "target_contact_count": 1,
-                    "sensor_inventory_count": 0,
+                    "sensor_inventory_count": 1,
                     "live_invocation_count": 0,
                     "pmu_acquisition_count": 0,
                     "commands": commands,
@@ -1061,7 +1210,8 @@ def acquire_temperature_sensor_authority(*, target_host: str = TARGET_HOST, remo
                     "source_authority": source_commit_check,
                     "controller_challenge_sha256": public.digest(challenge),
                     "challenge_receipt_sha256": challenge_receipt["challenge_receipt_sha256"],
-                    "target_discovery_receipt_sha256": local_sha,
+                    "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256"),
+                    "target_discovery_receipt_file_sha256": local_sha,
                     "target_contact_count": 1,
                     "sensor_inventory_count": 1,
                     "live_invocation_count": 0,
@@ -1084,12 +1234,9 @@ def acquire_temperature_sensor_authority(*, target_host: str = TARGET_HOST, remo
         raise ControllerError("discovery cleanup or remote-root absence verification failed")
     if discovery is None or authority is None:
         raise ControllerError("discovery receipt or authority receipt missing after cleanup")
-    TARGET_DISCOVERY_RECEIPT.write_bytes((json.dumps(discovery, indent=2, sort_keys=True) + "\n").encode("utf-8"))
-    if target_discovery_file_sha is None or public.sha256_file(TARGET_DISCOVERY_RECEIPT) != target_discovery_file_sha:
-        raise ControllerError("discovery receipt local write verification failed")
-    write_json(TEMPERATURE_SENSOR_AUTHORITY, authority)
-    if read_json(TEMPERATURE_SENSOR_AUTHORITY) != authority:
-        raise ControllerError("temperature authority receipt write verification failed")
+    if target_discovery_file_sha is None or serialized_json_sha256(discovery) != target_discovery_file_sha:
+        raise ControllerError("discovery receipt serialized hash verification failed")
+    authority_file_sha = serialized_json_sha256(authority)
     result = {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT_V1",
         "passed": True,
@@ -1103,9 +1250,11 @@ def acquire_temperature_sensor_authority(*, target_host: str = TARGET_HOST, remo
         "challenge_receipt_sha256": public.sha256_file(DISCOVERY_CHALLENGE_PATH),
         "controller_nonce_sha256": nonce_sha,
         "target_discovery_receipt_path": str(TARGET_DISCOVERY_RECEIPT),
-        "target_discovery_receipt_sha256": public.sha256_file(TARGET_DISCOVERY_RECEIPT),
+        "target_discovery_receipt_sha256": discovery["target_discovery_receipt_sha256"],
+        "target_discovery_receipt_file_sha256": target_discovery_file_sha,
         "authority_receipt_path": str(TEMPERATURE_SENSOR_AUTHORITY),
-        "authority_receipt_sha256": public.sha256_file(TEMPERATURE_SENSOR_AUTHORITY),
+        "authority_receipt_sha256": authority["temperature_sensor_authority_sha256"],
+        "authority_receipt_file_sha256": authority_file_sha,
         "approved_sensor_identity": authority["approved_sensor_identity"],
         "cleanup": cleanup,
         "commands": commands,
@@ -1117,10 +1266,21 @@ def acquire_temperature_sensor_authority(*, target_host: str = TARGET_HOST, remo
         "pmu_acquisition_count": 0,
     }
     result["discovery_transport_sha256"] = public.digest({k: v for k, v in result.items() if k != "discovery_transport_sha256"})
-    write_json(DISCOVERY_TRANSPORT_PATH, result)
-    final_validation = read_temperature_sensor_authority(expected_challenge=challenge)
+    final_validation = temperature_sensor_authority_from_receipt(
+        authority,
+        expected_challenge=challenge,
+        expected_discovery_receipt=discovery,
+        expected_transport_receipt=result,
+    )
     if not final_validation["passed"]:
         raise ControllerError("final temperature authority chain invalid: " + ",".join(final_validation["failures"]))
+    TARGET_DISCOVERY_RECEIPT.write_bytes((json.dumps(discovery, indent=2, sort_keys=True) + "\n").encode("utf-8"))
+    if public.sha256_file(TARGET_DISCOVERY_RECEIPT) != target_discovery_file_sha:
+        raise ControllerError("discovery receipt local write verification failed")
+    write_json(TEMPERATURE_SENSOR_AUTHORITY, authority)
+    if public.sha256_file(TEMPERATURE_SENSOR_AUTHORITY) != authority_file_sha or read_json(TEMPERATURE_SENSOR_AUTHORITY) != authority:
+        raise ControllerError("temperature authority receipt write verification failed")
+    write_json(DISCOVERY_TRANSPORT_PATH, result)
     write_discovery_attempt_receipt(
         {
             "passed": True,
@@ -1130,7 +1290,9 @@ def acquire_temperature_sensor_authority(*, target_host: str = TARGET_HOST, remo
             "controller_challenge_sha256": public.digest(challenge),
             "challenge_receipt_sha256": challenge_receipt["challenge_receipt_sha256"],
             "target_discovery_receipt_sha256": result["target_discovery_receipt_sha256"],
+            "target_discovery_receipt_file_sha256": result["target_discovery_receipt_file_sha256"],
             "authority_receipt_sha256": result["authority_receipt_sha256"],
+            "authority_receipt_file_sha256": result["authority_receipt_file_sha256"],
             "discovery_transport_sha256": result["discovery_transport_sha256"],
             "target_contact_count": 1,
             "sensor_inventory_count": 1,
@@ -1191,6 +1353,27 @@ def source_bundle_preview() -> dict[str, Any]:
                         with path.open("rb") as handle:
                             tar.addfile(info, handle)
         return {"sha256": public.sha256_file(temp_bundle), "file_count": len(names), "files": sorted(names)}
+
+
+def read_existing_source_bundle_authority() -> dict[str, Any]:
+    if not SOURCE_BUNDLE.exists():
+        raise ControllerError("source bundle authority missing; prepare-only must freeze it before discovery")
+    preview = source_bundle_preview()
+    file_sha = public.sha256_file(SOURCE_BUNDLE)
+    if file_sha != preview["sha256"]:
+        raise ControllerError("source bundle authority file does not match deterministic reconstruction")
+    return {
+        "path": str(SOURCE_BUNDLE),
+        "sha256": file_sha,
+        "file_count": preview["file_count"],
+        "files": preview["files"],
+    }
+
+
+def materialize_source_authority_snapshot(commit: str, destination: Path) -> None:
+    destination.mkdir(parents=True, exist_ok=True)
+    for name in SOURCE_AUTHORITY_FILE_NAMES:
+        (destination / name).write_bytes(git_blob_bytes(commit, name))
 
 
 def find_c_compiler() -> list[str] | None:
@@ -1405,10 +1588,14 @@ def validate_discovery_transport_receipt(receipt: dict[str, Any] | None) -> dict
         "controller_challenge_sha256",
         "challenge_receipt_sha256",
         "target_discovery_receipt_sha256",
+        "target_discovery_receipt_file_sha256",
         "authority_receipt_sha256",
+        "authority_receipt_file_sha256",
     ]:
         if re.fullmatch(r"[0-9a-f]{64}", str(receipt.get(field, ""))) is None:
             failures.append(f"discovery transport {field} missing or invalid")
+    if re.fullmatch(r"[0-9a-f]{40}", str(receipt.get("source_authority_commit", ""))) is None:
+        failures.append("discovery transport source authority commit missing or invalid")
     return {"passed": not failures, "failures": failures}
 
 
@@ -1425,10 +1612,13 @@ def discovery_transport_self_tests() -> dict[str, Any]:
             "cleanup": {"attempted": True, "passed": True, "absence_verified": True},
             "retry_count": 0,
             "target_command_invoked": True,
+            "source_authority_commit": "f" * 40,
             "controller_challenge_sha256": "1" * 64,
             "challenge_receipt_sha256": "2" * 64,
             "target_discovery_receipt_sha256": "3" * 64,
+            "target_discovery_receipt_file_sha256": "5" * 64,
             "authority_receipt_sha256": "4" * 64,
+            "authority_receipt_file_sha256": "6" * 64,
             "target_contact_count": 1,
             "sensor_inventory_count": 1,
             "live_invocation_count": 0,
@@ -1485,10 +1675,13 @@ def discovery_transport_self_tests() -> dict[str, Any]:
                 "cleanup": {"attempted": True, "passed": True, "absence_verified": True},
                 "retry_count": 0,
                 "target_command_invoked": True,
+                "source_authority_commit": "f" * 40,
                 "controller_challenge_sha256": public.digest(challenge),
                 "challenge_receipt_sha256": "9" * 64,
                 "target_discovery_receipt_sha256": discovery["target_discovery_receipt_sha256"],
+                "target_discovery_receipt_file_sha256": serialized_json_sha256(discovery),
                 "authority_receipt_sha256": authority["temperature_sensor_authority_sha256"],
+                "authority_receipt_file_sha256": serialized_json_sha256(authority),
                 "target_contact_count": 1,
                 "sensor_inventory_count": 1,
                 "live_invocation_count": 0,
@@ -1876,6 +2069,14 @@ def source_audit_quorum_regression() -> dict[str, Any]:
             expected_source_bundle_sha256=bundle_hash,
             review_report_present=True,
         )["passed"],
+        "prior_package_reviewer_reuse_blocked": not source_audit_quorum(
+            base,
+            expected_source_commit=source_commit,
+            expected_source_hashes_sha256=source_hash,
+            expected_source_bundle_sha256=bundle_hash,
+            review_report_present=True,
+            excluded_agent_ids={"source-reviewer-1"},
+        )["passed"],
     }
     return {"schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUDIT_QUORUM_REGRESSION_V1", "passed": all(checks.values()), "checks": checks}
 
@@ -2007,6 +2208,14 @@ def controller_self_test() -> dict[str, Any]:
 
 
 def authority_contact_counters(temperature_authority: dict[str, Any]) -> dict[str, int]:
+    if DISCOVERY_ATTEMPT_PATH.exists():
+        attempt = read_json(DISCOVERY_ATTEMPT_PATH)
+        return {
+            "target_contact_count": int(attempt.get("target_contact_count", 0)),
+            "sensor_inventory_count": int(attempt.get("sensor_inventory_count", 0)),
+            "live_invocation_count": int(attempt.get("live_invocation_count", 0)),
+            "pmu_acquisition_count": int(attempt.get("pmu_acquisition_count", 0)),
+        }
     if temperature_authority.get("passed") is not True or not TEMPERATURE_SENSOR_AUTHORITY.exists():
         return {
             "target_contact_count": 0,
@@ -2047,6 +2256,11 @@ def manifest() -> dict[str, Any]:
     if SUBAGENT_FINDINGS_PATH.exists():
         independent_review = read_json(SUBAGENT_FINDINGS_PATH)
     quorum = review_quorum(independent_review)
+    prior_reviewer_ids = {
+        str(item.get("agent_id"))
+        for item in (independent_review.get("reviewer_verdicts") or {}).values()
+        if isinstance(item, dict) and item.get("agent_id")
+    }
     source_audit = {}
     if SOURCE_AUDIT_FINDINGS_PATH.exists():
         source_audit = read_json(SOURCE_AUDIT_FINDINGS_PATH)
@@ -2056,22 +2270,29 @@ def manifest() -> dict[str, Any]:
         expected_source_hashes_sha256=source_hashes["source_hashes_sha256"],
         expected_source_bundle_sha256=bundle["sha256"],
         review_report_present=SOURCE_AUDIT_REVIEW_PATH.exists(),
+        excluded_agent_ids=prior_reviewer_ids,
     )
     review_blocked = not quorum["passed"]
     source_review_blocked = not source_quorum["passed"]
-    contact_counters_truthful = contact_counters == {
+    expected_contact_counters = {
         "target_contact_count": 1,
         "sensor_inventory_count": 1,
         "live_invocation_count": 0,
         "pmu_acquisition_count": 0,
-    } if temperature_authority["passed"] else contact_counters == {
-        "target_contact_count": 0,
-        "sensor_inventory_count": 0,
+    } if DISCOVERY_ATTEMPT_PATH.exists() else {
+        "target_contact_count": 1 if temperature_authority["passed"] else 0,
+        "sensor_inventory_count": 1 if temperature_authority["passed"] else 0,
         "live_invocation_count": 0,
         "pmu_acquisition_count": 0,
     }
+    contact_counters_truthful = contact_counters == expected_contact_counters
     final_exact_object = read_json(FINAL_OBJECT_VERIFY_PATH) if FINAL_OBJECT_VERIFY_PATH.exists() else {}
-    final_exact_object_passed = final_exact_object.get("passed") is True
+    final_exact_validation = validate_final_exact_object_receipt(
+        final_exact_object,
+        expected_source_commit=source_authority_commit,
+        expected_evidence_commit=final_exact_object.get("evidence_commit") if isinstance(final_exact_object, dict) else None,
+    )
+    final_exact_object_passed = final_exact_validation["passed"]
     result = {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST_V1",
         "science_package_id": public.SCIENCE_PACKAGE_ID,
@@ -2112,7 +2333,7 @@ def manifest() -> dict[str, Any]:
             "source_authority_commit": final_exact_object.get("source_authority_commit"),
             "evidence_commit": final_exact_object.get("evidence_commit"),
             "verification_sha256": final_exact_object.get("final_exact_object_verification_sha256"),
-            "failures": final_exact_object.get("failures", ["final exact-object verification missing"]),
+            "failures": final_exact_validation["failures"] or final_exact_object.get("failures", ["final exact-object verification missing"]),
         },
         "allowed_result_classes": public.ALLOWED_RESULT_CLASSES,
         "forbidden_result_classes": public.FORBIDDEN_RESULT_CLASSES,
@@ -2252,6 +2473,101 @@ def receipt_digest_matches(receipt: dict[str, Any], field: str) -> bool:
     return bool(receipt.get(field)) and receipt.get(field) == public.digest({k: v for k, v in receipt.items() if k != field})
 
 
+def commit_exists(commit: str) -> bool:
+    if re.fullmatch(r"[0-9a-f]{40}", commit or "") is None:
+        return False
+    return (
+        run(
+            ["git", "-c", f"safe.directory={REPO_ROOT.as_posix()}", "cat-file", "-e", f"{commit}^{{commit}}"],
+            timeout=30.0,
+            check=False,
+            cwd=REPO_ROOT,
+        ).returncode
+        == 0
+    )
+
+
+def is_ancestor_commit(ancestor: str, descendant: str) -> bool:
+    return (
+        run(
+            ["git", "-c", f"safe.directory={REPO_ROOT.as_posix()}", "merge-base", "--is-ancestor", ancestor, descendant],
+            timeout=30.0,
+            check=False,
+            cwd=REPO_ROOT,
+        ).returncode
+        == 0
+    )
+
+
+def commit_has_path(commit: str, path: Path) -> bool:
+    rel = path.relative_to(REPO_ROOT).as_posix()
+    return (
+        run(
+            ["git", "-c", f"safe.directory={REPO_ROOT.as_posix()}", "cat-file", "-e", f"{commit}:{rel}"],
+            timeout=30.0,
+            check=False,
+            cwd=REPO_ROOT,
+        ).returncode
+        == 0
+    )
+
+
+def validate_final_exact_object_receipt(
+    receipt: dict[str, Any] | None,
+    *,
+    expected_source_commit: str | None = None,
+    expected_evidence_commit: str | None = None,
+) -> dict[str, Any]:
+    failures: list[str] = []
+    if not isinstance(receipt, dict):
+        return {"passed": False, "failures": ["final exact-object verification receipt missing"]}
+    if receipt.get("schema") != "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EXACT_OBJECT_VERIFICATION_V1":
+        failures.append("final exact-object verification schema mismatch")
+    if not receipt_digest_matches(receipt, "final_exact_object_verification_sha256"):
+        failures.append("final exact-object verification digest mismatch")
+    if receipt.get("passed") is not True:
+        failures.append("final exact-object verification did not pass")
+    if receipt.get("failures") not in ([], None):
+        failures.append("final exact-object verification contains failures")
+    source_commit = receipt.get("source_authority_commit")
+    evidence_commit = receipt.get("evidence_commit")
+    if expected_source_commit is not None and source_commit != expected_source_commit:
+        failures.append("final exact-object verification source commit mismatch")
+    if expected_evidence_commit is not None and evidence_commit != expected_evidence_commit:
+        failures.append("final exact-object verification evidence commit mismatch")
+    if not commit_exists(str(source_commit)):
+        failures.append("final exact-object verification source commit missing")
+    if not commit_exists(str(evidence_commit)):
+        failures.append("final exact-object verification evidence commit missing")
+    if source_commit == evidence_commit:
+        failures.append("final exact-object verification evidence commit must differ from source C1")
+    if isinstance(source_commit, str) and isinstance(evidence_commit, str) and commit_exists(source_commit) and commit_exists(evidence_commit):
+        if not is_ancestor_commit(source_commit, evidence_commit):
+            failures.append("final exact-object verification evidence commit is not a descendant of source C1")
+    if receipt.get("changed_source_files_after_c1") != []:
+        failures.append("final exact-object verification source files changed")
+    source_authority = receipt.get("source_authority")
+    if not isinstance(source_authority, dict) or source_authority.get("passed") is not True:
+        failures.append("final exact-object verification source authority did not pass")
+    counters = receipt.get("contact_counters")
+    if counters != {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}:
+        failures.append("final exact-object verification counters mismatch")
+    for label, path in {
+        "source audit findings": SOURCE_AUDIT_FINDINGS_PATH,
+        "source audit report": SOURCE_AUDIT_REVIEW_PATH,
+        "target discovery receipt": TARGET_DISCOVERY_RECEIPT,
+        "temperature authority receipt": TEMPERATURE_SENSOR_AUTHORITY,
+        "discovery transport receipt": DISCOVERY_TRANSPORT_PATH,
+        "discovery challenge receipt": DISCOVERY_CHALLENGE_PATH,
+        "discovery attempt receipt": DISCOVERY_ATTEMPT_PATH,
+        "manifest": MANIFEST_PATH,
+        "manifest sidecar": MANIFEST_SHA_PATH,
+    }.items():
+        if isinstance(evidence_commit, str) and commit_exists(evidence_commit) and not commit_has_path(evidence_commit, path):
+            failures.append(f"final exact-object evidence commit lacks {label}")
+    return {"passed": not failures, "failures": failures}
+
+
 def validate_receipt_chain(manifest_data: dict[str, Any]) -> list[str]:
     failures: list[str] = []
     if not target.validate_no_live_authority_env()["passed"]:
@@ -2347,12 +2663,21 @@ def validate_receipt_chain(manifest_data: dict[str, Any]) -> list[str]:
         failures.append("manifest PMU acquisition count must be zero")
     authority_section = manifest_data.get("temperature_sensor_authority", {})
     authority_passed = authority_section.get("authority_receipt_passed") is True
-    expected_counters = {
-        "target_contact_count": 1 if authority_passed else 0,
-        "sensor_inventory_count": 1 if authority_passed else 0,
-        "live_invocation_count": 0,
-        "pmu_acquisition_count": 0,
-    }
+    if DISCOVERY_ATTEMPT_PATH.exists():
+        attempt = read_json(DISCOVERY_ATTEMPT_PATH)
+        expected_counters = {
+            "target_contact_count": int(attempt.get("target_contact_count", 0)),
+            "sensor_inventory_count": int(attempt.get("sensor_inventory_count", 0)),
+            "live_invocation_count": int(attempt.get("live_invocation_count", 0)),
+            "pmu_acquisition_count": int(attempt.get("pmu_acquisition_count", 0)),
+        }
+    else:
+        expected_counters = {
+            "target_contact_count": 1 if authority_passed else 0,
+            "sensor_inventory_count": 1 if authority_passed else 0,
+            "live_invocation_count": 0,
+            "pmu_acquisition_count": 0,
+        }
     if manifest_counters != expected_counters:
         failures.append("manifest contact counters are not truthful for authority state")
     if TEMPERATURE_SENSOR_AUTHORITY.exists():
@@ -2377,6 +2702,15 @@ def validate_receipt_chain(manifest_data: dict[str, Any]) -> list[str]:
             if attempt.get("passed") is not True or attempt.get("attempt_state") != "complete":
                 failures.append("discovery attempt receipt is not complete")
     final_section = manifest_data.get("final_exact_object_verification", {})
+    if FINAL_OBJECT_VERIFY_PATH.exists():
+        final_receipt = read_json(FINAL_OBJECT_VERIFY_PATH)
+        final_validation = validate_final_exact_object_receipt(
+            final_receipt,
+            expected_source_commit=final_section.get("source_authority_commit"),
+            expected_evidence_commit=final_section.get("evidence_commit"),
+        )
+        if not final_validation["passed"]:
+            failures.append("final exact-object verification invalid: " + ",".join(final_validation["failures"]))
     if manifest_data.get("package_decision") == public.PACKAGE_DECISION_FROZEN:
         if final_section.get("passed") is not True:
             failures.append("frozen package lacks passing final exact-object verification")
@@ -2472,13 +2806,13 @@ def final_exact_object_verification(*, evidence_commit: str | None = None) -> di
     if re.fullmatch(r"[0-9a-f]{40}", evidence_commit or "") is None:
         failures.append("evidence commit missing or malformed")
         evidence_commit = ""
-    elif run(
-        ["git", "-c", f"safe.directory={REPO_ROOT.as_posix()}", "cat-file", "-e", f"{evidence_commit}^{{commit}}"],
-        timeout=30.0,
-        check=False,
-        cwd=REPO_ROOT,
-    ).returncode != 0:
+    elif not commit_exists(evidence_commit):
         failures.append("evidence commit not found")
+    if source_commit and evidence_commit:
+        if source_commit == evidence_commit:
+            failures.append("evidence commit must be distinct from source authority commit")
+        elif commit_exists(source_commit) and commit_exists(evidence_commit) and not is_ancestor_commit(source_commit, evidence_commit):
+            failures.append("evidence commit is not a descendant of source authority commit")
     package_root = Path(
         "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/"
         "phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1"
@@ -2506,16 +2840,25 @@ def final_exact_object_verification(*, evidence_commit: str | None = None) -> di
     counters = manifest_data.get("contact_counter_attestation", {})
     if counters != {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}:
         failures.append("final contact counters are not exactly 1/1/0/0")
-    if not SOURCE_AUDIT_FINDINGS_PATH.exists() or not SOURCE_AUDIT_REVIEW_PATH.exists():
-        failures.append("source audit artifacts missing")
-    if (
-        not TEMPERATURE_SENSOR_AUTHORITY.exists()
-        or not TARGET_DISCOVERY_RECEIPT.exists()
-        or not DISCOVERY_TRANSPORT_PATH.exists()
-        or not DISCOVERY_CHALLENGE_PATH.exists()
-        or not DISCOVERY_ATTEMPT_PATH.exists()
-    ):
-        failures.append("temperature discovery evidence artifacts missing")
+    required_evidence_paths = {
+        "source audit findings": SOURCE_AUDIT_FINDINGS_PATH,
+        "source audit report": SOURCE_AUDIT_REVIEW_PATH,
+        "temperature authority": TEMPERATURE_SENSOR_AUTHORITY,
+        "target discovery": TARGET_DISCOVERY_RECEIPT,
+        "discovery transport": DISCOVERY_TRANSPORT_PATH,
+        "discovery challenge": DISCOVERY_CHALLENGE_PATH,
+        "discovery attempt": DISCOVERY_ATTEMPT_PATH,
+        "manifest": MANIFEST_PATH,
+        "manifest sidecar": MANIFEST_SHA_PATH,
+    }
+    missing_evidence_paths: list[str] = []
+    for label, path in required_evidence_paths.items():
+        if not path.exists():
+            failures.append(f"{label} artifact missing")
+            missing_evidence_paths.append(label)
+        if evidence_commit and commit_exists(evidence_commit) and not commit_has_path(evidence_commit, path):
+            failures.append(f"evidence commit lacks {label} artifact")
+            missing_evidence_paths.append(label)
     if sidecar.get("manifest_canonical_sha256") != public.digest({k: v for k, v in manifest_data.items() if k != "manifest_canonical_sha256"}):
         failures.append("manifest canonical sidecar mismatch")
     if sidecar.get("manifest_file_sha256") != public.sha256_file(MANIFEST_PATH):
@@ -2532,6 +2875,8 @@ def final_exact_object_verification(*, evidence_commit: str | None = None) -> di
         "contact_counters": counters,
         "manifest_file_sha256": sidecar.get("manifest_file_sha256"),
         "manifest_canonical_sha256": sidecar.get("manifest_canonical_sha256"),
+        "required_evidence_paths": {label: str(path) for label, path in required_evidence_paths.items()},
+        "missing_evidence_paths": sorted(set(missing_evidence_paths)),
     }
     result["final_exact_object_verification_sha256"] = public.digest(
         {k: v for k, v in result.items() if k != "final_exact_object_verification_sha256"}
@@ -2553,16 +2898,34 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--final-exact-object-verification", action="store_true")
     parser.add_argument("--target-host", default=TARGET_HOST)
     parser.add_argument("--discovery-remote-root", default=DISCOVERY_REMOTE_ROOT)
+    parser.add_argument("--source-authority-commit", default=None)
     parser.add_argument("--evidence-commit", default=None)
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args(argv)
     try:
+        modes = [
+            args.initialize_source_hashes,
+            args.acquire_temperature_sensor_authority,
+            args.final_exact_object_verification,
+            args.prepare_only,
+            args.validate_only,
+            args.self_test,
+            args.transport_simulation,
+            args.deployment_layout_self_test,
+            args.offline_validate,
+        ]
+        if sum(1 for mode in modes if mode) != 1:
+            raise ControllerError("exactly one controller mode must be selected")
         if args.initialize_source_hashes:
             result = initialize_source_hash_authority(force=args.force)
             print(json.dumps(result, indent=2, sort_keys=True))
             return 0
         if args.acquire_temperature_sensor_authority:
-            result = acquire_temperature_sensor_authority(target_host=args.target_host, remote_root=args.discovery_remote_root)
+            result = acquire_temperature_sensor_authority(
+                target_host=args.target_host,
+                remote_root=args.discovery_remote_root,
+                source_authority_commit=args.source_authority_commit,
+            )
             print(json.dumps(result, indent=2, sort_keys=True))
             return 0 if result["passed"] else 1
         if args.final_exact_object_verification:

@@ -221,6 +221,41 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
     review_quorum = manifest.get("independent_review", {}).get("review_quorum", {})
     if package_decision == public.PACKAGE_DECISION_FROZEN and review_quorum.get("passed") is not True:
         failures.append("frozen package lacks complete review quorum")
+    if package_decision == public.PACKAGE_DECISION_FROZEN:
+        source_quorum = manifest.get("source_authority_review", {}).get("review_quorum", {})
+        if source_quorum.get("passed") is not True:
+            failures.append("frozen package lacks exact C1 source-review quorum")
+        if manifest.get("offline_validate", {}).get("passed") is not True:
+            failures.append("frozen package lacks passing offline validation")
+        counters = manifest.get("contact_counter_attestation", {})
+        if counters != {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}:
+            failures.append("frozen package contact counters are not exactly 1/1/0/0")
+        final_section = manifest.get("final_exact_object_verification", {})
+        if final_section.get("passed") is not True:
+            failures.append("frozen package lacks passing final exact-object verification")
+        final_path_value = final_section.get("path")
+        final_file_sha = final_section.get("file_sha256")
+        if not isinstance(final_path_value, str) or not final_file_sha:
+            failures.append("frozen package lacks final exact-object receipt binding")
+        else:
+            final_path = source_root / Path(final_path_value).name
+            if not final_path.exists():
+                failures.append("final exact-object verification receipt missing")
+            elif public.sha256_file(final_path) != final_file_sha:
+                failures.append("final exact-object verification file hash mismatch")
+            else:
+                try:
+                    final_receipt = json.loads(final_path.read_text(encoding="utf-8"))
+                except json.JSONDecodeError as exc:
+                    failures.append(f"final exact-object verification JSON invalid: {exc}")
+                else:
+                    digest = final_receipt.get("final_exact_object_verification_sha256")
+                    if final_receipt.get("schema") != "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EXACT_OBJECT_VERIFICATION_V1":
+                        failures.append("final exact-object verification schema mismatch")
+                    if digest != public.digest({k: v for k, v in final_receipt.items() if k != "final_exact_object_verification_sha256"}):
+                        failures.append("final exact-object verification digest mismatch")
+                    if final_receipt.get("passed") is not True or final_receipt.get("failures") not in ([], None):
+                        failures.append("final exact-object verification did not pass")
     return {
         "passed": not failures,
         "failures": failures,
@@ -418,10 +453,26 @@ def validate_temperature_sensor_authority_payload(
                 failures.append("temperature sensor discovery provenance package mismatch")
             if provenance.get("transaction_run_id") != public.TRANSACTION_RUN_ID:
                 failures.append("temperature sensor discovery provenance run mismatch")
-            if not isinstance(provenance.get("target_platform"), dict):
+            platform = provenance.get("target_platform")
+            if not isinstance(platform, dict):
                 failures.append("temperature sensor discovery target platform missing")
+            else:
+                if platform.get("vendor") != "AuthenticAMD" or platform.get("cpu_family") != 16:
+                    failures.append("temperature sensor discovery target platform is not AMD Family 10h")
+                if platform.get("checked_before_discovery") is not True:
+                    failures.append("temperature sensor discovery platform was not checked before discovery")
             if not isinstance(provenance.get("discovery_monotonic_ns"), int) or provenance.get("discovery_monotonic_ns", 0) <= 0:
                 failures.append("temperature sensor discovery monotonic timestamp missing")
+            if expected_challenge is not None:
+                if provenance.get("controller_challenge_sha256") != public.digest(expected_challenge):
+                    failures.append("temperature sensor discovery challenge provenance mismatch")
+                if provenance.get("authorized_commit") != expected_challenge.get("authorized_commit"):
+                    failures.append("temperature sensor discovery authorized commit provenance mismatch")
+        if expected_challenge is not None and discovery.get("controller_nonce_sha256") != expected_challenge.get("controller_nonce_sha256"):
+            failures.append("temperature sensor discovery controller nonce mismatch")
+        source_authority = discovery.get("source_authority")
+        if not isinstance(source_authority, dict) or source_authority.get("passed") is not True:
+            failures.append("temperature sensor discovery source authority did not pass")
         if discovery.get("target_contact_count") != 1:
             failures.append("temperature sensor discovery target contact count must be one")
         if discovery.get("sensor_inventory_count") != 1:
@@ -436,27 +487,83 @@ def validate_temperature_sensor_authority_payload(
             failures.append("temperature sensor discovery runtime launch count must be zero")
         if discovery.get("tomography_output_root_created") is not False:
             failures.append("temperature sensor discovery must not create tomography output root")
-        if discovery.get("selected_identity") != identity:
+        selected_identity = discovery.get("selected_identity")
+        if selected_identity != identity:
             failures.append("temperature sensor discovery identity mismatch")
         candidates = discovery.get("observed_candidates")
         if not isinstance(candidates, list) or not candidates:
             failures.append("temperature sensor discovery candidates missing")
         elif identity is not None:
-            complete_candidates = []
+            approved_candidates = []
             for index, candidate in enumerate(candidates):
                 if not isinstance(candidate, dict):
                     failures.append(f"temperature sensor discovery candidate malformed {index}")
                     continue
                 candidate_identity = candidate.get("identity")
+                if candidate_identity is None:
+                    if candidate.get("approved") is True:
+                        failures.append(f"temperature sensor discovery candidate approved without identity {index}")
+                    continue
                 if not isinstance(candidate_identity, dict) or set(candidate_identity) != public.TEMPERATURE_SENSOR_IDENTITY_KEYS:
                     failures.append(f"temperature sensor discovery candidate identity malformed {index}")
                     continue
                 if candidate_identity.get("identity_sha256") != public.temperature_identity_digest(candidate_identity):
                     failures.append(f"temperature sensor discovery candidate identity digest mismatch {index}")
-                if candidate.get("approved") is True:
-                    complete_candidates.append(candidate_identity)
-            if identity not in complete_candidates:
+                    continue
+                expected_approved = (
+                    candidate_identity.get("hwmon_name") in APPROVED_TEMPERATURE_HWMON_NAMES
+                    and candidate_identity.get("sensor_label") in APPROVED_TEMPERATURE_SENSOR_LABELS
+                )
+                if candidate.get("approved") is not expected_approved:
+                    failures.append(f"temperature sensor discovery candidate approval mismatch {index}")
+                if expected_approved:
+                    approved_candidates.append(candidate)
+            if identity not in [candidate.get("identity") for candidate in approved_candidates]:
                 failures.append("temperature sensor discovery selected identity not in approved candidates")
+            if approved_candidates:
+                label_rank = {"Tctl": 0, "Tdie": 1}
+                recomputed_selected = sorted(
+                    approved_candidates,
+                    key=lambda candidate: (
+                        label_rank.get(candidate["identity"]["sensor_label"], 99),
+                        candidate["identity"]["class_path"],
+                        candidate["identity"]["resolved_input_path"],
+                    ),
+                )[0]["identity"]
+                if selected_identity != recomputed_selected:
+                    failures.append("temperature sensor discovery deterministic selection mismatch")
+                selection = discovery.get("selection")
+                if not isinstance(selection, dict):
+                    failures.append("temperature sensor discovery selection metadata missing")
+                else:
+                    if selection.get("deterministic_law") is not True:
+                        failures.append("temperature sensor discovery deterministic law missing")
+                    if selection.get("approved_count") != len(approved_candidates):
+                        failures.append("temperature sensor discovery approved count mismatch")
+                    if selection.get("selected_class_path") != recomputed_selected.get("class_path"):
+                        failures.append("temperature sensor discovery selected class path mismatch")
+            for field in ("identity_before", "identity_after"):
+                observed = discovery.get(field)
+                if not isinstance(observed, dict) or not identity_matches_required(observed, identity):
+                    failures.append(f"temperature sensor discovery {field} mismatch")
+            sample = discovery.get("sample")
+            if not isinstance(sample, dict):
+                failures.append("temperature sensor discovery sample missing")
+            else:
+                if sample.get("identity") != identity:
+                    failures.append("temperature sensor discovery sample identity mismatch")
+                if sample.get("path") != identity.get("class_path"):
+                    failures.append("temperature sensor discovery sample path mismatch")
+                if sample.get("label") != identity.get("sensor_label"):
+                    failures.append("temperature sensor discovery sample label mismatch")
+                value = sample.get("value_c")
+                if not public.is_json_number(value) or not 0.0 < float(value) < 120.0:
+                    failures.append("temperature sensor discovery sample value invalid")
+                descriptor = sample.get("pinned_descriptor")
+                if not isinstance(descriptor, dict) or descriptor.get("resolved_input_path") != identity.get("resolved_input_path"):
+                    failures.append("temperature sensor discovery pinned descriptor missing or mismatched")
+                if sample.get("read_law") != "manifest-approved resolved input descriptor":
+                    failures.append("temperature sensor discovery read law mismatch")
     if expected_transport_receipt is None:
         failures.append("temperature discovery transport receipt missing")
     else:
@@ -470,10 +577,16 @@ def validate_temperature_sensor_authority_payload(
         cleanup = expected_transport_receipt.get("cleanup")
         if not isinstance(cleanup, dict) or cleanup.get("passed") is not True or cleanup.get("absence_verified") is not True:
             failures.append("temperature discovery cleanup and absence verification required")
+        if expected_challenge is not None and expected_transport_receipt.get("source_authority_commit") != expected_challenge.get("authorized_commit"):
+            failures.append("temperature discovery transport source commit mismatch")
         if expected_transport_receipt.get("target_discovery_receipt_sha256") != discovery.get("target_discovery_receipt_sha256"):
             failures.append("temperature discovery transport target receipt mismatch")
+        if re.fullmatch(r"[0-9a-f]{64}", str(expected_transport_receipt.get("target_discovery_receipt_file_sha256", ""))) is None:
+            failures.append("temperature discovery transport target receipt file hash missing")
         if expected_transport_receipt.get("authority_receipt_sha256") != receipt.get("temperature_sensor_authority_sha256"):
             failures.append("temperature discovery transport authority receipt mismatch")
+        if re.fullmatch(r"[0-9a-f]{64}", str(expected_transport_receipt.get("authority_receipt_file_sha256", ""))) is None:
+            failures.append("temperature discovery transport authority receipt file hash missing")
         if expected_transport_receipt.get("controller_challenge_sha256") != receipt.get("controller_challenge_sha256"):
             failures.append("temperature discovery transport challenge mismatch")
         if expected_transport_receipt.get("retry_count") != 0:
