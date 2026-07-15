@@ -8,12 +8,15 @@ task only runs the offline validators and self-tests.
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import os
 import re
 import subprocess
+import tarfile
 import tempfile
+import time
 from pathlib import Path
 from typing import Any
 
@@ -68,6 +71,7 @@ AUTHORITY_VALUE = public.TRANSACTION_RUN_ID
 TEMPERATURE_SENSOR_AUTHORITY_SCHEMA = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_AUTHORITY_V1"
 TEMPERATURE_SENSOR_DISCOVERY_SCHEMA = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_DISCOVERY_V1"
 TEMPERATURE_SENSOR_AUTHORITY_CHALLENGE_SCHEMA = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_AUTHORITY_CHALLENGE_V1"
+TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME = "CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json"
 REQUIRED_TEMPERATURE_AUTHORITY_CHALLENGE_KEYS = {
     "schema",
     "authority",
@@ -367,8 +371,20 @@ def validate_temperature_sensor_authority_payload(
                 failures.append("temperature sensor discovery target platform missing")
             if not isinstance(provenance.get("discovery_monotonic_ns"), int) or provenance.get("discovery_monotonic_ns", 0) <= 0:
                 failures.append("temperature sensor discovery monotonic timestamp missing")
-        if discovery.get("target_contact_count") != 0 or discovery.get("live_invocation_count") != 0:
-            failures.append("temperature sensor discovery counters must be zero")
+        if discovery.get("target_contact_count") != 1:
+            failures.append("temperature sensor discovery target contact count must be one")
+        if discovery.get("sensor_inventory_count") != 1:
+            failures.append("temperature sensor discovery inventory count must be one")
+        if discovery.get("live_invocation_count") != 0:
+            failures.append("temperature sensor discovery live invocation count must be zero")
+        if discovery.get("pmu_acquisition_count") != 0:
+            failures.append("temperature sensor discovery PMU acquisition count must be zero")
+        if discovery.get("pmu_open_count") != 0:
+            failures.append("temperature sensor discovery PMU open count must be zero")
+        if discovery.get("runtime_launch_count") != 0:
+            failures.append("temperature sensor discovery runtime launch count must be zero")
+        if discovery.get("tomography_output_root_created") is not False:
+            failures.append("temperature sensor discovery must not create tomography output root")
         if discovery.get("selected_identity") != identity:
             failures.append("temperature sensor discovery identity mismatch")
         candidates = discovery.get("observed_candidates")
@@ -631,8 +647,13 @@ def manifest_live_gate_fixture() -> dict[str, Any]:
     forged_discovery = {
         "schema": TEMPERATURE_SENSOR_DISCOVERY_SCHEMA,
         "discovery_mode": "target_read_only_sensor_inventory",
-        "target_contact_count": 0,
+        "target_contact_count": 1,
+        "sensor_inventory_count": 1,
         "live_invocation_count": 0,
+        "pmu_acquisition_count": 0,
+        "pmu_open_count": 0,
+        "runtime_launch_count": 0,
+        "tomography_output_root_created": False,
         "selected_identity": identity,
         "observed_candidates": [{}],
     }
@@ -642,8 +663,13 @@ def manifest_live_gate_fixture() -> dict[str, Any]:
     complete_forged_discovery = {
         "schema": TEMPERATURE_SENSOR_DISCOVERY_SCHEMA,
         "discovery_mode": "target_read_only_sensor_inventory",
-        "target_contact_count": 0,
+        "target_contact_count": 1,
+        "sensor_inventory_count": 1,
         "live_invocation_count": 0,
+        "pmu_acquisition_count": 0,
+        "pmu_open_count": 0,
+        "runtime_launch_count": 0,
+        "tomography_output_root_created": False,
         "selected_identity": forged_identity,
         "observed_candidates": [{"identity": forged_identity, "approved": True}],
         "provenance": {
@@ -803,7 +829,7 @@ def source_mutation_fixtures(source_root: Path) -> dict[str, Any]:
     }
 
 
-def temperature_sensor_identity(path: Path) -> dict[str, Any]:
+def raw_temperature_sensor_identity(path: Path) -> dict[str, Any]:
     hwmon_dir = path.parent
     name_path = hwmon_dir / "name"
     label_path = path.with_name(path.name.replace("_input", "_label"))
@@ -811,8 +837,6 @@ def temperature_sensor_identity(path: Path) -> dict[str, Any]:
     require(label_path.exists(), "temperature sensor label missing")
     hwmon_name = name_path.read_text(encoding="utf-8").strip()
     sensor_label = label_path.read_text(encoding="utf-8").strip()
-    require(hwmon_name in APPROVED_TEMPERATURE_HWMON_NAMES, f"temperature hwmon name not approved: {hwmon_name}")
-    require(sensor_label in APPROVED_TEMPERATURE_SENSOR_LABELS, f"temperature sensor label not approved: {sensor_label}")
     device_path = hwmon_dir / "device"
     identity = {
         "hwmon_name": hwmon_name,
@@ -824,6 +848,57 @@ def temperature_sensor_identity(path: Path) -> dict[str, Any]:
         "resolved_device_path": str((device_path if device_path.exists() else hwmon_dir).resolve(strict=True)),
     }
     return public.with_temperature_identity_digest(identity)
+
+
+def temperature_sensor_identity(path: Path) -> dict[str, Any]:
+    identity = raw_temperature_sensor_identity(path)
+    require(identity["hwmon_name"] in APPROVED_TEMPERATURE_HWMON_NAMES, f"temperature hwmon name not approved: {identity['hwmon_name']}")
+    require(identity["sensor_label"] in APPROVED_TEMPERATURE_SENSOR_LABELS, f"temperature sensor label not approved: {identity['sensor_label']}")
+    return identity
+
+
+def temperature_candidate_record(path: Path) -> dict[str, Any]:
+    record: dict[str, Any] = {"class_path": str(path)}
+    try:
+        identity = raw_temperature_sensor_identity(path)
+        approved = identity["hwmon_name"] in APPROVED_TEMPERATURE_HWMON_NAMES and identity["sensor_label"] in APPROVED_TEMPERATURE_SENSOR_LABELS
+        record.update(
+            {
+                "identity": identity,
+                "approved": approved,
+                "approval_law": "hwmon_name in k10temp and sensor_label in Tctl/Tdie",
+                "rejection_reason": None if approved else "hwmon name or sensor label not approved",
+            }
+        )
+    except (OSError, TargetError) as exc:
+        record.update({"identity": None, "approved": False, "approval_law": "identity must be readable", "rejection_reason": str(exc)})
+    return record
+
+
+def enumerate_temperature_candidates(hwmon_root: Path = Path("/sys/class/hwmon")) -> list[dict[str, Any]]:
+    return [temperature_candidate_record(path) for path in sorted(hwmon_root.glob("hwmon*/temp*_input"))]
+
+
+def select_approved_temperature_identity(candidates: list[dict[str, Any]], *, deterministic_law: bool = True) -> tuple[dict[str, Any], dict[str, Any]]:
+    approved = [candidate for candidate in candidates if candidate.get("approved") is True and isinstance(candidate.get("identity"), dict)]
+    require(bool(approved), "no approved CPU temperature sensor found")
+    if len(approved) > 1 and not deterministic_law:
+        raise TargetError("multiple approved CPU temperature sensors require deterministic selection law")
+    label_rank = {"Tctl": 0, "Tdie": 1}
+    selected = sorted(
+        approved,
+        key=lambda candidate: (
+            label_rank.get(candidate["identity"]["sensor_label"], 99),
+            candidate["identity"]["class_path"],
+            candidate["identity"]["resolved_input_path"],
+        ),
+    )[0]
+    return selected["identity"], {
+        "law": "prefer Tctl over Tdie, then class_path, then resolved_input_path",
+        "approved_count": len(approved),
+        "selected_class_path": selected["identity"]["class_path"],
+        "deterministic_law": deterministic_law,
+    }
 
 
 def descriptor_identity(fd: int, identity: dict[str, Any]) -> dict[str, Any]:
@@ -956,12 +1031,372 @@ def policy_custody_state() -> str:
     return str(policy_custody_snapshot()["state"])
 
 
-def require_family10h_platform() -> dict[str, Any]:
-    text = Path("/proc/cpuinfo").read_text(encoding="utf-8", errors="replace")
+def require_family10h_platform(cpuinfo_path: Path = Path("/proc/cpuinfo")) -> dict[str, Any]:
+    text = cpuinfo_path.read_text(encoding="utf-8", errors="replace")
     vendor_ok = "vendor_id\t: AuthenticAMD" in text or "vendor_id : AuthenticAMD" in text
     family_ok = "cpu family\t: 16" in text or "cpu family : 16" in text
     require(vendor_ok and family_ok, "platform identity is not AMD Family 10h")
-    return {"vendor": "AuthenticAMD", "cpu_family": 16, "checked_before_execution": True}
+    model_match = re.search(r"model\s*:\s*(\d+)", text)
+    return {
+        "vendor": "AuthenticAMD",
+        "cpu_family": 16,
+        "cpu_model": int(model_match.group(1)) if model_match else None,
+        "cpuinfo_path": str(cpuinfo_path),
+        "checked_before_discovery": True,
+    }
+
+
+def deterministic_source_bundle_sha256(source_root: Path) -> str:
+    with tempfile.TemporaryDirectory(prefix="family10h_target_source_bundle_") as tmp:
+        bundle_path = Path(tmp) / "source_bundle.tar.gz"
+        with bundle_path.open("wb") as raw:
+            with gzip.GzipFile(fileobj=raw, mode="wb", filename="", mtime=0) as gz:
+                with tarfile.open(fileobj=gz, mode="w") as tar:
+                    for name in sorted(SOURCE_FILE_NAMES):
+                        path = source_root / name
+                        require(path.exists(), f"source file missing for bundle {name}")
+                        info = tar.gettarinfo(str(path), arcname=name)
+                        info.mtime = 0
+                        info.uid = 0
+                        info.gid = 0
+                        info.uname = ""
+                        info.gname = ""
+                        with path.open("rb") as handle:
+                            tar.addfile(info, handle)
+        return public.sha256_file(bundle_path)
+
+
+def expected_discovery_challenge(source_root: Path, authorized_commit: str, controller_nonce_sha256: str) -> dict[str, Any]:
+    source_hashes = json.loads((source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json").read_text(encoding="utf-8"))
+    schedule_sidecar = json.loads((source_root / "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256").read_text(encoding="utf-8"))
+    return {
+        "schema": TEMPERATURE_SENSOR_AUTHORITY_CHALLENGE_SCHEMA,
+        "authority": "controller_issued_temperature_sensor_challenge",
+        "science_package_id": public.SCIENCE_PACKAGE_ID,
+        "transaction_run_id": public.TRANSACTION_RUN_ID,
+        "source_hashes_sha256": source_hashes["source_hashes_sha256"],
+        "source_bundle_sha256": deterministic_source_bundle_sha256(source_root),
+        "schedule_canonical_sha256": schedule_sidecar["canonical_sha256"],
+        "schedule_json_sha256": schedule_sidecar["json_sha256"],
+        "schedule_tsv_sha256": schedule_sidecar["tsv_sha256"],
+        "authorized_commit": authorized_commit,
+        "controller_nonce_sha256": controller_nonce_sha256,
+    }
+
+
+def validate_discovery_challenge(source_root: Path, challenge: dict[str, Any], controller_nonce: str, authorized_commit: str) -> dict[str, Any]:
+    failures: list[str] = []
+    if re.fullmatch(r"[0-9a-f]{64}", controller_nonce) is None:
+        failures.append("controller nonce missing or malformed")
+        nonce_sha = ""
+    else:
+        nonce_sha = hashlib.sha256(controller_nonce.encode("ascii")).hexdigest()
+    if re.fullmatch(r"[0-9a-f]{40}", authorized_commit) is None:
+        failures.append("authorized source commit missing or malformed")
+    source_authority = validate_source_file_authority(source_root)
+    if not source_authority["passed"]:
+        failures.extend(source_authority["failures"])
+    if not isinstance(challenge, dict):
+        failures.append("controller challenge missing")
+        challenge = {}
+    expected = expected_discovery_challenge(source_root, authorized_commit, nonce_sha) if not failures else {}
+    if set(challenge) != REQUIRED_TEMPERATURE_AUTHORITY_CHALLENGE_KEYS:
+        failures.append("controller challenge field mismatch")
+    if challenge != expected:
+        failures.append("controller challenge mismatch")
+    if challenge.get("controller_nonce_sha256") != nonce_sha:
+        failures.append("controller challenge nonce digest mismatch")
+    if challenge.get("authorized_commit") != authorized_commit:
+        failures.append("controller challenge source commit mismatch")
+    return {
+        "passed": not failures,
+        "failures": failures,
+        "expected_challenge": expected,
+        "challenge_sha256": public.digest(challenge) if isinstance(challenge, dict) else None,
+        "controller_nonce_sha256": nonce_sha,
+        "source_authority": source_authority,
+    }
+
+
+def discover_temperature_sensor_authority(
+    *,
+    source_root: Path,
+    controller_challenge_path: Path,
+    controller_nonce: str,
+    authorized_commit: str,
+    receipt_path: Path,
+    hwmon_root: Path = Path("/sys/class/hwmon"),
+    cpuinfo_path: Path = Path("/proc/cpuinfo"),
+) -> dict[str, Any]:
+    require(controller_challenge_path.exists(), "controller challenge file missing")
+    challenge = json.loads(controller_challenge_path.read_text(encoding="utf-8"))
+    challenge_validation = validate_discovery_challenge(source_root, challenge, controller_nonce, authorized_commit)
+    require(challenge_validation["passed"], "controller challenge invalid: " + ",".join(challenge_validation["failures"]))
+    platform_identity = require_family10h_platform(cpuinfo_path)
+    candidates = enumerate_temperature_candidates(hwmon_root)
+    selected_identity, selection = select_approved_temperature_identity(candidates, deterministic_law=True)
+    identity_before = temperature_sensor_identity(Path(selected_identity["class_path"]))
+    require(identity_matches_required(identity_before, selected_identity), "selected temperature identity changed before read")
+    with PinnedTemperatureSensor(selected_identity) as sensor:
+        sample = sensor.read_sample()
+    identity_after = temperature_sensor_identity(Path(selected_identity["class_path"]))
+    require(identity_matches_required(identity_after, selected_identity), "selected temperature identity changed after read")
+    result = {
+        "schema": TEMPERATURE_SENSOR_DISCOVERY_SCHEMA,
+        "discovery_mode": "target_read_only_sensor_inventory",
+        "target_contact_count": 1,
+        "sensor_inventory_count": 1,
+        "live_invocation_count": 0,
+        "pmu_acquisition_count": 0,
+        "pmu_open_count": 0,
+        "runtime_launch_count": 0,
+        "tomography_output_root_created": False,
+        "source_root": str(source_root),
+        "hwmon_root": str(hwmon_root),
+        "provenance": {
+            "authority": "target_sensor_discovery",
+            "science_package_id": public.SCIENCE_PACKAGE_ID,
+            "transaction_run_id": public.TRANSACTION_RUN_ID,
+            "target_platform": platform_identity,
+            "discovery_monotonic_ns": time.monotonic_ns(),
+            "controller_challenge_sha256": challenge_validation["challenge_sha256"],
+            "authorized_commit": authorized_commit,
+        },
+        "controller_challenge_sha256": challenge_validation["challenge_sha256"],
+        "controller_nonce_sha256": challenge_validation["controller_nonce_sha256"],
+        "source_authority": challenge_validation["source_authority"],
+        "observed_candidates": candidates,
+        "selection": selection,
+        "selected_identity": selected_identity,
+        "identity_before": identity_before,
+        "sample": sample,
+        "identity_after": identity_after,
+    }
+    result["target_discovery_receipt_sha256"] = public.digest({k: v for k, v in result.items() if k != "target_discovery_receipt_sha256"})
+    write_json(receipt_path, result)
+    return result
+
+
+def copy_source_fixture(source_root: Path, destination: Path) -> None:
+    destination.mkdir(parents=True, exist_ok=True)
+    for name in SOURCE_FILE_NAMES + ["CARRIER_TOMOGRAPHY_SOURCE_HASHES.json"]:
+        path = source_root / name
+        require(path.exists(), f"source fixture missing {name}")
+        (destination / name).write_bytes(path.read_bytes())
+
+
+def write_fake_family10h_cpuinfo(path: Path) -> None:
+    path.write_text(
+        "processor\t: 0\nvendor_id\t: AuthenticAMD\ncpu family\t: 16\nmodel\t\t: 10\nmodel name\t: AMD Phenom(tm) II\n",
+        encoding="utf-8",
+    )
+
+
+def target_sensor_discovery_fixture(source_root: Path) -> dict[str, Any]:
+    sensor_regressions = temperature_sensor_identity_fixture()
+    with tempfile.TemporaryDirectory(prefix="family10h_target_discovery_") as tmp:
+        root = Path(tmp)
+        source = root / "source"
+        copy_source_fixture(source_root, source)
+        cpuinfo = root / "cpuinfo"
+        write_fake_family10h_cpuinfo(cpuinfo)
+        nonce = "a" * 64
+        commit = "b" * 40
+        nonce_sha = hashlib.sha256(nonce.encode("ascii")).hexdigest()
+        challenge = expected_discovery_challenge(source, commit, nonce_sha)
+        challenge_path = root / "challenge.json"
+        write_json(challenge_path, challenge)
+
+        hwmon = root / "hwmon"
+        write_fake_hwmon_sensor(hwmon, 0, "acpitz", "temp1")
+        write_fake_hwmon_sensor(hwmon, 1, "k10temp", "Tdie", "43000")
+        write_fake_hwmon_sensor(hwmon, 2, "k10temp", "Tctl", "42000")
+        receipt_path = root / TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME
+        receipt = discover_temperature_sensor_authority(
+            source_root=source,
+            controller_challenge_path=challenge_path,
+            controller_nonce=nonce,
+            authorized_commit=commit,
+            receipt_path=receipt_path,
+            hwmon_root=hwmon,
+            cpuinfo_path=cpuinfo,
+        )
+
+        missing_challenge_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=source,
+                controller_challenge_path=root / "missing.json",
+                controller_nonce=nonce,
+                authorized_commit=commit,
+                receipt_path=root / "missing_receipt.json",
+                hwmon_root=hwmon,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+        wrong_nonce_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=source,
+                controller_challenge_path=challenge_path,
+                controller_nonce="c" * 64,
+                authorized_commit=commit,
+                receipt_path=root / "wrong_nonce_receipt.json",
+                hwmon_root=hwmon,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+        wrong_commit_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=source,
+                controller_challenge_path=challenge_path,
+                controller_nonce=nonce,
+                authorized_commit="d" * 40,
+                receipt_path=root / "wrong_commit_receipt.json",
+                hwmon_root=hwmon,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+
+        wrong_bundle = {**challenge, "source_bundle_sha256": "0" * 64}
+        wrong_bundle_path = root / "wrong_bundle_challenge.json"
+        write_json(wrong_bundle_path, wrong_bundle)
+        wrong_bundle_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=source,
+                controller_challenge_path=wrong_bundle_path,
+                controller_nonce=nonce,
+                authorized_commit=commit,
+                receipt_path=root / "wrong_bundle_receipt.json",
+                hwmon_root=hwmon,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+
+        wrong_schedule = {**challenge, "schedule_json_sha256": "1" * 64}
+        wrong_schedule_path = root / "wrong_schedule_challenge.json"
+        write_json(wrong_schedule_path, wrong_schedule)
+        wrong_schedule_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=source,
+                controller_challenge_path=wrong_schedule_path,
+                controller_nonce=nonce,
+                authorized_commit=commit,
+                receipt_path=root / "wrong_schedule_receipt.json",
+                hwmon_root=hwmon,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+
+        wrong_package = {**challenge, "science_package_id": "wrong_package"}
+        wrong_package_path = root / "wrong_package_challenge.json"
+        write_json(wrong_package_path, wrong_package)
+        wrong_package_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=source,
+                controller_challenge_path=wrong_package_path,
+                controller_nonce=nonce,
+                authorized_commit=commit,
+                receipt_path=root / "wrong_package_receipt.json",
+                hwmon_root=hwmon,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+
+        source_mutation = root / "mutated_source"
+        copy_source_fixture(source_root, source_mutation)
+        (source_mutation / "family10h_carrier_tomography_target.py").write_text(
+            (source_mutation / "family10h_carrier_tomography_target.py").read_text(encoding="utf-8") + "\n# discovery mutation\n",
+            encoding="utf-8",
+        )
+        wrong_source_hash_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=source_mutation,
+                controller_challenge_path=challenge_path,
+                controller_nonce=nonce,
+                authorized_commit=commit,
+                receipt_path=root / "wrong_source_receipt.json",
+                hwmon_root=hwmon,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+
+        non_cpu_root = root / "non_cpu_hwmon"
+        write_fake_hwmon_sensor(non_cpu_root, 0, "acpitz", "Tctl")
+        non_cpu_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=source,
+                controller_challenge_path=challenge_path,
+                controller_nonce=nonce,
+                authorized_commit=commit,
+                receipt_path=root / "non_cpu_receipt.json",
+                hwmon_root=non_cpu_root,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+
+        wrong_label_root = root / "wrong_label_hwmon"
+        write_fake_hwmon_sensor(wrong_label_root, 0, "k10temp", "ambient")
+        wrong_label_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=source,
+                controller_challenge_path=challenge_path,
+                controller_nonce=nonce,
+                authorized_commit=commit,
+                receipt_path=root / "wrong_label_receipt.json",
+                hwmon_root=wrong_label_root,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+
+        malformed_root = root / "malformed_hwmon"
+        write_fake_hwmon_sensor(malformed_root, 0, "k10temp", "Tctl", "not-a-number")
+        malformed_sample_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=source,
+                controller_challenge_path=challenge_path,
+                controller_nonce=nonce,
+                authorized_commit=commit,
+                receipt_path=root / "malformed_receipt.json",
+                hwmon_root=malformed_root,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+
+        ambiguous_without_law_rejected = raises_target_error(
+            lambda: select_approved_temperature_identity(enumerate_temperature_candidates(hwmon), deterministic_law=False)
+        )
+
+    checks = {
+        "valid_discovery_receipt_digest": receipt["target_discovery_receipt_sha256"]
+        == public.digest({k: v for k, v in receipt.items() if k != "target_discovery_receipt_sha256"}),
+        "valid_discovery_target_contact_count_one": receipt["target_contact_count"] == 1,
+        "valid_discovery_sensor_inventory_count_one": receipt["sensor_inventory_count"] == 1,
+        "valid_discovery_live_invocation_count_zero": receipt["live_invocation_count"] == 0,
+        "valid_discovery_pmu_acquisition_count_zero": receipt["pmu_acquisition_count"] == 0,
+        "valid_discovery_no_pmu_open": receipt["pmu_open_count"] == 0,
+        "valid_discovery_no_runtime_launch": receipt["runtime_launch_count"] == 0,
+        "valid_discovery_no_tomography_output_root": receipt["tomography_output_root_created"] is False,
+        "valid_discovery_selected_tctl": receipt["selected_identity"]["sensor_label"] == "Tctl",
+        "valid_discovery_records_all_candidates": len(receipt["observed_candidates"]) == 3,
+        "missing_challenge_rejected": missing_challenge_rejected,
+        "wrong_nonce_rejected": wrong_nonce_rejected,
+        "wrong_source_commit_rejected": wrong_commit_rejected,
+        "wrong_source_hash_receipt_rejected": wrong_source_hash_rejected,
+        "wrong_source_bundle_rejected": wrong_bundle_rejected,
+        "wrong_schedule_hashes_rejected": wrong_schedule_rejected,
+        "wrong_package_identity_rejected": wrong_package_rejected,
+        "non_cpu_hwmon_rejected": non_cpu_rejected,
+        "wrong_sensor_label_rejected": wrong_label_rejected,
+        "multiple_approved_without_deterministic_law_rejected": ambiguous_without_law_rejected,
+        "descriptor_drift_rejected": sensor_regressions["same_class_path_substitution_rejected"],
+        "identity_drift_rejected": sensor_regressions["identity_drift_rejected"],
+        "malformed_sample_rejected": malformed_sample_rejected,
+    }
+    return {
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_SELF_TEST_V1",
+        "passed": all(checks.values()),
+        "checks": checks,
+        "valid_receipt": receipt,
+    }
 
 
 def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
@@ -973,6 +1408,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
     policy = policy_and_platform_fixture()
     manifest_live_gate = manifest_live_gate_fixture()
     source_mutation = source_mutation_fixtures(source_root)
+    discovery = target_sensor_discovery_fixture(source_root)
     env = validate_no_live_authority_env()
     output_root.mkdir(parents=True, exist_ok=True)
     result = {
@@ -981,7 +1417,9 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
         "transaction_run_id": public.TRANSACTION_RUN_ID,
         "offline_only": True,
         "target_contact_count": 0,
+        "sensor_inventory_count": 0,
         "live_invocation_count": 0,
+        "pmu_acquisition_count": 0,
         "schedule_artifacts": schedule_result,
         "evidence_file_fixtures": evidence,
         "feature_boundary_self_test": feature,
@@ -989,6 +1427,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
         "policy_and_platform_fixture": policy,
         "manifest_live_gate_fixture": manifest_live_gate,
         "source_mutation_fixtures": source_mutation,
+        "temperature_sensor_discovery_fixture": discovery,
         "live_authority_env_absent": env,
         "allowed_result_classes": public.ALLOWED_RESULT_CLASSES,
         "forbidden_result_classes": public.FORBIDDEN_RESULT_CLASSES,
@@ -1002,6 +1441,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
             policy["passed"],
             manifest_live_gate["passed"],
             source_mutation["passed"],
+            discovery["passed"],
             env["passed"],
         ]
     )
@@ -1135,13 +1575,33 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--self-test", action="store_true")
     parser.add_argument("--execute-authorized", action="store_true")
+    parser.add_argument("--discover-temperature-sensor-authority", action="store_true")
     parser.add_argument("--source-root", type=Path, default=Path(__file__).resolve().parent)
     parser.add_argument("--output-root", type=Path, default=Path(__file__).resolve().parent)
+    parser.add_argument("--controller-challenge", type=Path)
+    parser.add_argument("--controller-nonce", default="")
+    parser.add_argument("--authorized-commit", default="")
+    parser.add_argument("--receipt-path", type=Path, default=Path(TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME))
+    parser.add_argument("--hwmon-root", type=Path, default=Path("/sys/class/hwmon"))
+    parser.add_argument("--cpuinfo-path", type=Path, default=Path("/proc/cpuinfo"))
     args = parser.parse_args(argv)
     if args.execute_authorized:
         result = execute_authorized(args.source_root.resolve(), args.output_root.resolve())
         print(json.dumps(result, indent=2, sort_keys=True))
         return 0 if result["status"] == "TARGET_EXECUTION_COMPLETE" else 1
+    if args.discover_temperature_sensor_authority:
+        require(args.controller_challenge is not None, "controller challenge path required")
+        result = discover_temperature_sensor_authority(
+            source_root=args.source_root.resolve(),
+            controller_challenge_path=args.controller_challenge.resolve(),
+            controller_nonce=args.controller_nonce,
+            authorized_commit=args.authorized_commit,
+            receipt_path=args.receipt_path.resolve(),
+            hwmon_root=args.hwmon_root.resolve(),
+            cpuinfo_path=args.cpuinfo_path.resolve(),
+        )
+        print(json.dumps(result, indent=2, sort_keys=True))
+        return 0
     if not args.self_test:
         parser.print_help()
         return 2

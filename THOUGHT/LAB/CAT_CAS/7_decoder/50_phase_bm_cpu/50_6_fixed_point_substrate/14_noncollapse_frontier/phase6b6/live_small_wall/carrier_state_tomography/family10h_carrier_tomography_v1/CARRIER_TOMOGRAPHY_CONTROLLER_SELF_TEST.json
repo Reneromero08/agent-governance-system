@@ -1,10 +1,27 @@
 {
+  "discovery_transport_self_test": {
+    "checks": {
+      "cleanup_failure_rejected": true,
+      "copyback_corruption_rejected": true,
+      "incorrect_zero_target_contact_rejected": true,
+      "nonzero_live_invocation_rejected": true,
+      "nonzero_pmu_acquisition_rejected": true,
+      "remote_absence_failure_rejected": true,
+      "second_attempt_retry_rejected": true,
+      "transport_digest_corruption_rejected": true,
+      "valid_fake_discovery_authority_passes": true,
+      "valid_transport_passes": true
+    },
+    "passed": true,
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT_SELF_TEST_V1"
+  },
   "live_authority_env_absent": {
     "passed": true,
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "166d37e0d28ad0dbde65f35d745a32219193d5c8f07cfef287d17ea351d2accd",
+  "offline_validate_sha256": "a8ca125f16cac15e24e121fa7da334358b5088020a327915025e9c248b10fa7a",
+  "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
       "duplicate reviewer agent ids",
@@ -58,13 +75,16 @@
     },
     "live_invocation_count": 0,
     "passed": true,
-    "runtime_authority_gate_self_test_sha256": "a17e7aa29c5adbba54f46795d8672bc46502bd35efb848a86375663f2565abcc",
+    "pmu_acquisition_count": 0,
+    "runtime_authority_gate_self_test_sha256": "9c0f01139a91e0d8679d23ea402096c2b35fc7a4035729b6098b4aec01fac1b0",
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY_GATE_SELF_TEST_V1",
+    "sensor_inventory_count": 0,
     "target_contact_count": 0
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "0dfdeeda9bc220b6e36e44af28a6c13f7a5ae52a4ead790b9c565ff808ea1be7",
+  "self_test_sha256": "0881a3f91accc707b019bf77c0fd04fc08ddf8fa9440e623e37dd9f466f6cae2",
+  "sensor_inventory_count": 0,
   "source_hash_authority_regression": {
     "authority_file_byte_identical_after_rejection": true,
     "failures": [
@@ -94,5 +114,5 @@
     "well_formed_self_authored_discovery_wrong_expected_challenge_rejected": true,
     "wrong_hwmon_authority_rejected": true
   },
-  "transport_simulation_sha256": "df4bf2baca163b28fb8310ae6170fec0a1d3602b181f1abe67518be8884ceab0"
+  "transport_simulation_sha256": "4a11bfdd155123abc9631f9aadec4ff5017392681dd9c195cc8afa094eae6938"
 }
