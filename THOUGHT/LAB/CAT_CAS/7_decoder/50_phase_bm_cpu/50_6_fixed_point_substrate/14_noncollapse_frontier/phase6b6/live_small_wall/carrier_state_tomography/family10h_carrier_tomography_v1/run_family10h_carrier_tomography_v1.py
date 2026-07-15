@@ -307,6 +307,12 @@ def write_json(path: Path, value: Any) -> None:
     path.write_bytes((json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8"))
 
 
+def write_json_exclusive(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("xb") as handle:
+        handle.write((json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8"))
+
+
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -479,7 +485,7 @@ def write_discovery_challenge_receipt(challenge: dict[str, Any], *, source_commi
         "pmu_acquisition_count": 0,
     }
     receipt["challenge_receipt_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "challenge_receipt_sha256"})
-    write_json(DISCOVERY_CHALLENGE_PATH, receipt)
+    write_json_exclusive(DISCOVERY_CHALLENGE_PATH, receipt)
     return receipt
 
 
@@ -487,7 +493,10 @@ def write_discovery_attempt_receipt(payload: dict[str, Any]) -> dict[str, Any]:
     receipt = dict(payload)
     receipt["schema"] = "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT_V1"
     receipt["discovery_attempt_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "discovery_attempt_sha256"})
-    write_json(DISCOVERY_ATTEMPT_PATH, receipt)
+    if DISCOVERY_ATTEMPT_PATH.exists():
+        write_json(DISCOVERY_ATTEMPT_PATH, receipt)
+    else:
+        write_json_exclusive(DISCOVERY_ATTEMPT_PATH, receipt)
     return receipt
 
 
@@ -683,6 +692,9 @@ def temperature_sensor_authority_from_receipt(
         source_authority = discovery.get("source_authority")
         if not isinstance(source_authority, dict) or source_authority.get("passed") is not True:
             failures.append("temperature sensor discovery source authority did not pass")
+        authorizing_scope = discovery.get("authorizing_scope")
+        if not isinstance(authorizing_scope, dict) or authorizing_scope.get("authorizing") is not True:
+            failures.append("temperature sensor discovery was not captured from canonical target sensor roots")
         if discovery.get("target_contact_count") != 1:
             failures.append("temperature sensor discovery target contact count must be one")
         if discovery.get("sensor_inventory_count") != 1:
@@ -792,12 +804,12 @@ def temperature_sensor_authority_from_receipt(
             failures.append("temperature discovery transport source commit mismatch")
         if expected_transport_receipt.get("target_discovery_receipt_sha256") != discovery.get("target_discovery_receipt_sha256"):
             failures.append("temperature discovery transport target receipt mismatch")
-        if re.fullmatch(r"[0-9a-f]{64}", str(expected_transport_receipt.get("target_discovery_receipt_file_sha256", ""))) is None:
-            failures.append("temperature discovery transport target receipt file hash missing")
+        if expected_transport_receipt.get("target_discovery_receipt_file_sha256") != serialized_json_sha256(discovery):
+            failures.append("temperature discovery transport target receipt file hash mismatch")
         if expected_transport_receipt.get("authority_receipt_sha256") != receipt.get("temperature_sensor_authority_sha256"):
             failures.append("temperature discovery transport authority receipt mismatch")
-        if re.fullmatch(r"[0-9a-f]{64}", str(expected_transport_receipt.get("authority_receipt_file_sha256", ""))) is None:
-            failures.append("temperature discovery transport authority receipt file hash missing")
+        if expected_transport_receipt.get("authority_receipt_file_sha256") != serialized_json_sha256(receipt):
+            failures.append("temperature discovery transport authority receipt file hash mismatch")
         if expected_transport_receipt.get("controller_challenge_sha256") != receipt.get("controller_challenge_sha256"):
             failures.append("temperature discovery transport challenge mismatch")
         if expected_transport_receipt.get("retry_count") != 0:
@@ -1076,23 +1088,7 @@ def acquire_temperature_sensor_authority(
         authorized_commit=source_commit,
         controller_nonce_sha256=nonce_sha,
     )
-    challenge_receipt = {
-        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE_RECEIPT_V1",
-        "science_package_id": public.SCIENCE_PACKAGE_ID,
-        "transaction_run_id": public.TRANSACTION_RUN_ID,
-        "source_authority_commit": source_commit,
-        "controller_challenge": challenge,
-        "controller_challenge_sha256": public.digest(challenge),
-        "controller_nonce_sha256": nonce_sha,
-        "pre_contact": True,
-        "target_contact_count": 0,
-        "sensor_inventory_count": 0,
-        "live_invocation_count": 0,
-        "pmu_acquisition_count": 0,
-    }
-    challenge_receipt["challenge_receipt_sha256"] = public.digest(
-        {k: v for k, v in challenge_receipt.items() if k != "challenge_receipt_sha256"}
-    )
+    challenge_receipt = write_discovery_challenge_receipt(challenge, source_commit=source_commit, nonce_sha=nonce_sha)
     remote_source = f"{remote_root}/source"
     remote_challenge = f"{remote_source}/controller_challenge.json"
     remote_receipt = f"{remote_source}/{target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME}"
@@ -1123,7 +1119,6 @@ def acquire_temperature_sensor_authority(
         materialize_source_authority_snapshot(source_commit, source_stage)
         challenge_path = tmp_root / "controller_challenge.json"
         write_json(challenge_path, challenge)
-        write_json(DISCOVERY_CHALLENGE_PATH, challenge_receipt)
         local_copyback = tmp_root / target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME
         try:
             preflight = f"set -eu; test ! -e {sh_quote(remote_root)}; install -d -m 0700 {sh_quote(remote_source)}"
@@ -1144,8 +1139,8 @@ def acquire_temperature_sensor_authority(
                     "commands": commands,
                 }
             )
-            run(command, timeout=20.0)
             remote_root_created = True
+            run(command, timeout=20.0)
             for name in SOURCE_AUTHORITY_FILE_NAMES:
                 local = source_stage / name
                 command = ["scp", "-q", str(local), f"{target_host}:{remote_source}/{name}"]
@@ -1663,10 +1658,35 @@ def discovery_transport_self_tests() -> dict[str, Any]:
             hwmon_root=hwmon,
             cpuinfo_path=cpuinfo,
         )
-        authority = build_temperature_sensor_authority_receipt(
-            discovery=discovery,
-            controller_challenge=challenge,
-            controller_nonce=nonce,
+        try:
+            build_temperature_sensor_authority_receipt(
+                discovery=discovery,
+                controller_challenge=challenge,
+                controller_nonce=nonce,
+            )
+            fake_discovery_authority_build_rejected = False
+        except ControllerError:
+            fake_discovery_authority_build_rejected = True
+        identity = discovery["selected_identity"]
+        authority = {
+            "schema": TEMPERATURE_SENSOR_AUTHORITY_SCHEMA,
+            "provenance_bound": True,
+            "provenance": "controller_verified_target_sensor_inventory",
+            "hwmon_name": identity["hwmon_name"],
+            "sensor_label": identity["sensor_label"],
+            "approved_sensor_identity": identity,
+            "target_discovery_receipt": discovery,
+            "controller_challenge": challenge,
+            "controller_challenge_sha256": public.digest(challenge),
+            "controller_nonce": nonce,
+            "source_authority_commit": challenge["authorized_commit"],
+            "target_contact_count": discovery.get("target_contact_count"),
+            "sensor_inventory_count": discovery.get("sensor_inventory_count"),
+            "live_invocation_count": discovery.get("live_invocation_count"),
+            "pmu_acquisition_count": discovery.get("pmu_acquisition_count"),
+        }
+        authority["temperature_sensor_authority_sha256"] = public.digest(
+            {k: v for k, v in authority.items() if k != "temperature_sensor_authority_sha256"}
         )
         authority_transport = seal(
             {
@@ -1688,6 +1708,7 @@ def discovery_transport_self_tests() -> dict[str, Any]:
                 "pmu_acquisition_count": 0,
             }
         )
+        wrong_file_hash_transport = seal({**authority_transport, "target_discovery_receipt_file_sha256": "0" * 64})
         copyback_corruption = dict(discovery)
         copyback_corruption["selected_identity"] = public.synthetic_temperature_identity()
         corrupted_authority_rejected = not temperature_sensor_authority_from_receipt(
@@ -1716,12 +1737,19 @@ def discovery_transport_self_tests() -> dict[str, Any]:
         "nonzero_pmu_acquisition_rejected": not validate_discovery_transport_receipt(pmu_nonzero)["passed"],
         "transport_digest_corruption_rejected": not validate_discovery_transport_receipt(corrupted)["passed"],
         "copyback_corruption_rejected": corrupted_authority_rejected,
+        "transport_file_hash_mismatch_rejected": not temperature_sensor_authority_from_receipt(
+            authority,
+            expected_challenge=challenge,
+            expected_discovery_receipt=discovery,
+            expected_transport_receipt=wrong_file_hash_transport,
+        )["passed"],
         "authority_without_transport_rejected": not temperature_sensor_authority_from_receipt(
             authority,
             expected_challenge=challenge,
             expected_discovery_receipt=discovery,
         )["passed"],
-        "valid_fake_discovery_authority_with_transport_passes": temperature_sensor_authority_from_receipt(
+        "fake_discovery_authority_build_rejected": fake_discovery_authority_build_rejected,
+        "fake_discovery_authority_with_transport_rejected": not temperature_sensor_authority_from_receipt(
             authority,
             expected_challenge=challenge,
             expected_discovery_receipt=discovery,
@@ -2499,17 +2527,310 @@ def is_ancestor_commit(ancestor: str, descendant: str) -> bool:
     )
 
 
-def commit_has_path(commit: str, path: Path) -> bool:
-    rel = path.relative_to(REPO_ROOT).as_posix()
-    return (
-        run(
-            ["git", "-c", f"safe.directory={REPO_ROOT.as_posix()}", "cat-file", "-e", f"{commit}:{rel}"],
-            timeout=30.0,
-            check=False,
-            cwd=REPO_ROOT,
-        ).returncode
-        == 0
+def path_to_repo_relative(path: Path) -> str:
+    return path.relative_to(REPO_ROOT).as_posix()
+
+
+def commit_object_type(commit: str, path: Path) -> str | None:
+    rel = path_to_repo_relative(path)
+    completed = run(
+        ["git", "-c", f"safe.directory={REPO_ROOT.as_posix()}", "cat-file", "-t", f"{commit}:{rel}"],
+        timeout=30.0,
+        check=False,
+        cwd=REPO_ROOT,
     )
+    if completed.returncode != 0:
+        return None
+    return completed.stdout.strip()
+
+
+def commit_blob_id(commit: str, path: Path) -> str | None:
+    rel = path_to_repo_relative(path)
+    completed = run(
+        ["git", "-c", f"safe.directory={REPO_ROOT.as_posix()}", "rev-parse", f"{commit}:{rel}"],
+        timeout=30.0,
+        check=False,
+        cwd=REPO_ROOT,
+    )
+    if completed.returncode != 0:
+        return None
+    blob_id = completed.stdout.strip()
+    if re.fullmatch(r"[0-9a-f]{40}", blob_id or "") is None:
+        return None
+    return blob_id
+
+
+def commit_blob_bytes(commit: str, path: Path) -> bytes | None:
+    rel = path_to_repo_relative(path)
+    completed = subprocess.run(
+        ["git", "-c", f"safe.directory={REPO_ROOT.as_posix()}", "show", f"{commit}:{rel}"],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        timeout=30.0,
+    )
+    if completed.returncode != 0:
+        return None
+    return completed.stdout
+
+
+def commit_blob_json(commit: str, path: Path) -> Any | None:
+    blob = commit_blob_bytes(commit, path)
+    if blob is None:
+        return None
+    try:
+        return json.loads(blob.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return None
+
+
+def commit_blob_record(commit: str, path: Path) -> dict[str, Any]:
+    rel = path_to_repo_relative(path)
+    object_type = commit_object_type(commit, path)
+    blob_id = commit_blob_id(commit, path) if object_type == "blob" else None
+    blob = commit_blob_bytes(commit, path) if object_type == "blob" else None
+    return {
+        "repo_path": rel,
+        "object_type": object_type,
+        "blob_id": blob_id,
+        "sha256": hashlib.sha256(blob).hexdigest() if blob is not None else None,
+        "size": len(blob) if blob is not None else None,
+        "present": object_type == "blob" and blob_id is not None and blob is not None,
+    }
+
+
+def commit_has_blob(commit: str, path: Path) -> bool:
+    return commit_blob_record(commit, path)["present"] is True
+
+
+def final_evidence_paths() -> dict[str, Path]:
+    return {
+        "source audit findings": SOURCE_AUDIT_FINDINGS_PATH,
+        "source audit report": SOURCE_AUDIT_REVIEW_PATH,
+        "target discovery receipt": TARGET_DISCOVERY_RECEIPT,
+        "temperature authority receipt": TEMPERATURE_SENSOR_AUTHORITY,
+        "discovery transport receipt": DISCOVERY_TRANSPORT_PATH,
+        "discovery challenge receipt": DISCOVERY_CHALLENGE_PATH,
+        "discovery attempt receipt": DISCOVERY_ATTEMPT_PATH,
+        "manifest": MANIFEST_PATH,
+        "manifest sidecar": MANIFEST_SHA_PATH,
+    }
+
+
+def source_authority_commit_blob_verification(commit: str) -> dict[str, Any]:
+    failures: list[str] = []
+    files: dict[str, dict[str, Any]] = {}
+    if re.fullmatch(r"[0-9a-f]{40}", commit or "") is None:
+        return {"passed": False, "failures": ["source authority commit malformed"], "commit": commit, "files": files}
+    if not commit_exists(commit):
+        return {"passed": False, "failures": ["source authority commit missing"], "commit": commit, "files": files}
+    source_hashes = commit_blob_json(commit, SOURCE_HASHES)
+    if not isinstance(source_hashes, dict):
+        failures.append("source hash receipt blob missing or invalid")
+        source_hashes = {}
+    expected = source_hashes.get("source_files", {})
+    if set(expected) != set(SOURCE_FILE_NAMES):
+        failures.append("source hash receipt keyset mismatch")
+    for name in SOURCE_FILE_NAMES:
+        path = HERE / name
+        record = commit_blob_record(commit, path)
+        files[name] = record
+        if not record["present"]:
+            failures.append(f"source file blob missing {name}")
+            continue
+        expected_item = expected.get(name, {}) if isinstance(expected, dict) else {}
+        if expected_item.get("sha256") != record["sha256"] or expected_item.get("size") != record["size"]:
+            failures.append(f"source file authority blob mismatch {name}")
+    if source_hashes and source_hashes.get("source_hashes_sha256") != public.digest(
+        {k: v for k, v in source_hashes.items() if k != "source_hashes_sha256"}
+    ):
+        failures.append("source hash receipt blob digest mismatch")
+    bundle_record = commit_blob_record(commit, SOURCE_BUNDLE)
+    files[SOURCE_BUNDLE.name] = bundle_record
+    if not bundle_record["present"]:
+        failures.append("source bundle blob missing")
+    for name in SOURCE_AUTHORITY_FILE_NAMES:
+        if name in files:
+            continue
+        record = commit_blob_record(commit, HERE / name)
+        files[name] = record
+        if not record["present"]:
+            failures.append(f"source authority blob missing {name}")
+    return {
+        "passed": not failures,
+        "failures": failures,
+        "commit": commit,
+        "files": files,
+        "source_hashes_sha256": source_hashes.get("source_hashes_sha256") if isinstance(source_hashes, dict) else None,
+        "source_bundle_sha256": bundle_record.get("sha256"),
+    }
+
+
+def exact_review_agent_ids(review: dict[str, Any]) -> set[str]:
+    return {
+        str(item.get("agent_id"))
+        for item in (review.get("reviewer_verdicts") or {}).values()
+        if isinstance(item, dict) and item.get("agent_id")
+    }
+
+
+def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict[str, Any]:
+    failures: list[str] = []
+    if re.fullmatch(r"[0-9a-f]{40}", source_commit or "") is None:
+        failures.append("source authority commit missing or malformed")
+    elif not commit_exists(source_commit):
+        failures.append("source authority commit not found")
+    if re.fullmatch(r"[0-9a-f]{40}", evidence_commit or "") is None:
+        failures.append("evidence commit missing or malformed")
+    elif not commit_exists(evidence_commit):
+        failures.append("evidence commit not found")
+    if not failures and source_commit == evidence_commit:
+        failures.append("evidence commit must be distinct from source authority commit")
+    if not failures and not is_ancestor_commit(source_commit, evidence_commit):
+        failures.append("evidence commit is not a descendant of source authority commit")
+
+    source_authority = source_authority_commit_blob_verification(source_commit) if commit_exists(source_commit) else {
+        "passed": False,
+        "failures": ["source authority commit unavailable"],
+        "files": {},
+    }
+    if not source_authority["passed"]:
+        failures.append("source authority commit blob verification failed")
+
+    source_authority_blob_records: dict[str, dict[str, Any]] = {}
+    changed_source_files: list[str] = []
+    if commit_exists(source_commit) and commit_exists(evidence_commit):
+        for name in SOURCE_AUTHORITY_FILE_NAMES:
+            path = HERE / name
+            source_record = commit_blob_record(source_commit, path)
+            evidence_record = commit_blob_record(evidence_commit, path)
+            unchanged = source_record["present"] and evidence_record["present"] and source_record["blob_id"] == evidence_record["blob_id"]
+            source_authority_blob_records[name] = {
+                "source": source_record,
+                "evidence": evidence_record,
+                "unchanged_after_c1": unchanged,
+            }
+            if not unchanged:
+                changed_source_files.append(name)
+        if changed_source_files:
+            failures.append("evidence overlay changed source authority blobs")
+
+    evidence_blob_records = {
+        label: commit_blob_record(evidence_commit, path) if commit_exists(evidence_commit) else {
+            "repo_path": path_to_repo_relative(path),
+            "present": False,
+        }
+        for label, path in final_evidence_paths().items()
+    }
+    for label, record in evidence_blob_records.items():
+        if record.get("present") is not True:
+            failures.append(f"evidence commit lacks {label} blob")
+
+    manifest_data = commit_blob_json(evidence_commit, MANIFEST_PATH) if commit_exists(evidence_commit) else None
+    sidecar = commit_blob_json(evidence_commit, MANIFEST_SHA_PATH) if commit_exists(evidence_commit) else None
+    if not isinstance(manifest_data, dict):
+        failures.append("evidence manifest blob is not valid JSON")
+        manifest_data = {}
+    if not isinstance(sidecar, dict):
+        failures.append("evidence manifest sidecar blob is not valid JSON")
+        sidecar = {}
+    if sidecar.get("manifest_file_sha256") != evidence_blob_records.get("manifest", {}).get("sha256"):
+        failures.append("manifest sidecar file hash does not match evidence blob")
+    if sidecar.get("manifest_canonical_sha256") != public.digest({k: v for k, v in manifest_data.items() if k != "manifest_canonical_sha256"}):
+        failures.append("manifest sidecar canonical hash does not match evidence blob")
+
+    independent_review = commit_blob_json(evidence_commit, SUBAGENT_FINDINGS_PATH) if commit_exists(evidence_commit) else None
+    if not isinstance(independent_review, dict):
+        failures.append("independent review findings blob is not valid JSON")
+        independent_review = {}
+    independent_quorum = review_quorum(independent_review)
+    if not independent_quorum["passed"]:
+        failures.append("independent review quorum failed from evidence blob")
+
+    source_audit = commit_blob_json(evidence_commit, SOURCE_AUDIT_FINDINGS_PATH) if commit_exists(evidence_commit) else None
+    if not isinstance(source_audit, dict):
+        failures.append("source audit findings blob is not valid JSON")
+        source_audit = {}
+    source_quorum = source_audit_quorum(
+        source_audit,
+        expected_source_commit=source_commit,
+        expected_source_hashes_sha256=source_authority.get("source_hashes_sha256"),
+        expected_source_bundle_sha256=source_authority.get("source_bundle_sha256"),
+        review_report_present=evidence_blob_records.get("source audit report", {}).get("present") is True,
+        excluded_agent_ids=exact_review_agent_ids(independent_review),
+    )
+    if not source_quorum["passed"]:
+        failures.append("source authority review quorum failed from evidence blob")
+
+    challenge = manifest_data.get("temperature_sensor_authority", {}).get("controller_challenge")
+    if not isinstance(challenge, dict):
+        failures.append("temperature challenge missing from evidence manifest")
+        challenge = {}
+    if challenge.get("authorized_commit") != source_commit:
+        failures.append("temperature challenge does not bind source C1")
+    if challenge.get("source_hashes_sha256") != source_authority.get("source_hashes_sha256"):
+        failures.append("temperature challenge source hash mismatch")
+    if challenge.get("source_bundle_sha256") != source_authority.get("source_bundle_sha256"):
+        failures.append("temperature challenge source bundle mismatch")
+
+    counters = manifest_data.get("contact_counter_attestation", {})
+    expected_counters = {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}
+    if counters != expected_counters:
+        failures.append("final contact counters are not exactly 1/1/0/0")
+
+    discovery = commit_blob_json(evidence_commit, TARGET_DISCOVERY_RECEIPT) if commit_exists(evidence_commit) else None
+    authority = commit_blob_json(evidence_commit, TEMPERATURE_SENSOR_AUTHORITY) if commit_exists(evidence_commit) else None
+    transport = commit_blob_json(evidence_commit, DISCOVERY_TRANSPORT_PATH) if commit_exists(evidence_commit) else None
+    attempt = commit_blob_json(evidence_commit, DISCOVERY_ATTEMPT_PATH) if commit_exists(evidence_commit) else None
+    if not isinstance(discovery, dict):
+        failures.append("target discovery blob is not valid JSON")
+        discovery = None
+    if not isinstance(authority, dict):
+        failures.append("temperature authority blob is not valid JSON")
+        authority = None
+    if not isinstance(transport, dict):
+        failures.append("discovery transport blob is not valid JSON")
+        transport = None
+    if not isinstance(attempt, dict):
+        failures.append("discovery attempt blob is not valid JSON")
+        attempt = None
+    if isinstance(transport, dict):
+        transport_validation = validate_discovery_transport_receipt(transport)
+        if not transport_validation["passed"]:
+            failures.append("discovery transport blob failed validation")
+    if isinstance(authority, dict):
+        authority_validation = temperature_sensor_authority_from_receipt(
+            authority,
+            expected_challenge=challenge,
+            expected_discovery_receipt=discovery,
+            expected_transport_receipt=transport,
+        )
+        if not authority_validation["passed"]:
+            failures.append("temperature authority blob failed validation")
+    if isinstance(attempt, dict):
+        if attempt.get("passed") is not True or attempt.get("attempt_state") != "complete":
+            failures.append("discovery attempt blob is not complete")
+        attempt_counters = {
+            "target_contact_count": int(attempt.get("target_contact_count", 0)),
+            "sensor_inventory_count": int(attempt.get("sensor_inventory_count", 0)),
+            "live_invocation_count": int(attempt.get("live_invocation_count", 0)),
+            "pmu_acquisition_count": int(attempt.get("pmu_acquisition_count", 0)),
+        }
+        if attempt_counters != expected_counters:
+            failures.append("discovery attempt counters are not exactly 1/1/0/0")
+
+    return {
+        "passed": not failures,
+        "failures": failures,
+        "source_authority": source_authority,
+        "source_authority_blob_records": source_authority_blob_records,
+        "changed_source_files_after_c1": changed_source_files,
+        "evidence_blob_records": evidence_blob_records,
+        "independent_quorum": independent_quorum,
+        "source_quorum": source_quorum,
+        "contact_counters": counters,
+        "manifest_file_sha256": sidecar.get("manifest_file_sha256"),
+        "manifest_canonical_sha256": sidecar.get("manifest_canonical_sha256"),
+    }
 
 
 def validate_final_exact_object_receipt(
@@ -2535,36 +2856,27 @@ def validate_final_exact_object_receipt(
         failures.append("final exact-object verification source commit mismatch")
     if expected_evidence_commit is not None and evidence_commit != expected_evidence_commit:
         failures.append("final exact-object verification evidence commit mismatch")
-    if not commit_exists(str(source_commit)):
-        failures.append("final exact-object verification source commit missing")
-    if not commit_exists(str(evidence_commit)):
-        failures.append("final exact-object verification evidence commit missing")
-    if source_commit == evidence_commit:
-        failures.append("final exact-object verification evidence commit must differ from source C1")
-    if isinstance(source_commit, str) and isinstance(evidence_commit, str) and commit_exists(source_commit) and commit_exists(evidence_commit):
-        if not is_ancestor_commit(source_commit, evidence_commit):
-            failures.append("final exact-object verification evidence commit is not a descendant of source C1")
-    if receipt.get("changed_source_files_after_c1") != []:
-        failures.append("final exact-object verification source files changed")
-    source_authority = receipt.get("source_authority")
-    if not isinstance(source_authority, dict) or source_authority.get("passed") is not True:
-        failures.append("final exact-object verification source authority did not pass")
-    counters = receipt.get("contact_counters")
-    if counters != {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}:
-        failures.append("final exact-object verification counters mismatch")
-    for label, path in {
-        "source audit findings": SOURCE_AUDIT_FINDINGS_PATH,
-        "source audit report": SOURCE_AUDIT_REVIEW_PATH,
-        "target discovery receipt": TARGET_DISCOVERY_RECEIPT,
-        "temperature authority receipt": TEMPERATURE_SENSOR_AUTHORITY,
-        "discovery transport receipt": DISCOVERY_TRANSPORT_PATH,
-        "discovery challenge receipt": DISCOVERY_CHALLENGE_PATH,
-        "discovery attempt receipt": DISCOVERY_ATTEMPT_PATH,
-        "manifest": MANIFEST_PATH,
-        "manifest sidecar": MANIFEST_SHA_PATH,
-    }.items():
-        if isinstance(evidence_commit, str) and commit_exists(evidence_commit) and not commit_has_path(evidence_commit, path):
-            failures.append(f"final exact-object evidence commit lacks {label}")
+    replay = replay_final_exact_objects(str(source_commit or ""), str(evidence_commit or ""))
+    if not replay["passed"]:
+        failures.extend("replay: " + item for item in replay["failures"])
+    if receipt.get("passed") != replay["passed"]:
+        failures.append("final exact-object verification pass bit does not match replay")
+    if receipt.get("failures") != replay["failures"]:
+        failures.append("final exact-object verification failure list does not match replay")
+    if receipt.get("changed_source_files_after_c1") != replay["changed_source_files_after_c1"]:
+        failures.append("final exact-object verification source-file delta does not match replay")
+    if receipt.get("source_authority") != replay["source_authority"]:
+        failures.append("final exact-object source authority record does not match replay")
+    if receipt.get("source_authority_blob_records") != replay["source_authority_blob_records"]:
+        failures.append("final exact-object source authority blob records do not match replay")
+    if receipt.get("evidence_blob_records") != replay["evidence_blob_records"]:
+        failures.append("final exact-object evidence blob records do not match replay")
+    if receipt.get("contact_counters") != replay["contact_counters"]:
+        failures.append("final exact-object verification counters do not match replay")
+    if receipt.get("manifest_file_sha256") != replay["manifest_file_sha256"]:
+        failures.append("final exact-object manifest file hash does not match replay")
+    if receipt.get("manifest_canonical_sha256") != replay["manifest_canonical_sha256"]:
+        failures.append("final exact-object manifest canonical hash does not match replay")
     return {"passed": not failures, "failures": failures}
 
 
@@ -2795,88 +3107,31 @@ def validate_only() -> dict[str, Any]:
 
 
 def final_exact_object_verification(*, evidence_commit: str | None = None) -> dict[str, Any]:
-    manifest_data = read_json(MANIFEST_PATH)
-    sidecar = read_json(MANIFEST_SHA_PATH)
-    failures: list[str] = []
-    source_commit = manifest_data.get("source_authority_review", {}).get("source_authority_commit")
     evidence_commit = evidence_commit or os.environ.get(FINAL_EVIDENCE_COMMIT_ENV) or git_text("rev-parse", "HEAD")
-    if not isinstance(source_commit, str) or re.fullmatch(r"[0-9a-f]{40}", source_commit) is None:
-        failures.append("source authority commit missing")
+    evidence_manifest = commit_blob_json(evidence_commit, MANIFEST_PATH) if commit_exists(evidence_commit) else None
+    working_manifest = read_json(MANIFEST_PATH) if MANIFEST_PATH.exists() else {}
+    manifest_data = evidence_manifest if isinstance(evidence_manifest, dict) else working_manifest
+    source_commit = manifest_data.get("source_authority_review", {}).get("source_authority_commit")
+    if not isinstance(source_commit, str):
         source_commit = ""
-    if re.fullmatch(r"[0-9a-f]{40}", evidence_commit or "") is None:
-        failures.append("evidence commit missing or malformed")
-        evidence_commit = ""
-    elif not commit_exists(evidence_commit):
-        failures.append("evidence commit not found")
-    if source_commit and evidence_commit:
-        if source_commit == evidence_commit:
-            failures.append("evidence commit must be distinct from source authority commit")
-        elif commit_exists(source_commit) and commit_exists(evidence_commit) and not is_ancestor_commit(source_commit, evidence_commit):
-            failures.append("evidence commit is not a descendant of source authority commit")
-    package_root = Path(
-        "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/"
-        "phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1"
-    )
-    source_paths = [str(package_root / name) for name in SOURCE_AUTHORITY_FILE_NAMES]
-    changed_sources = git_lines("diff", "--name-only", f"{source_commit}..{evidence_commit}", "--", *source_paths) if source_commit and evidence_commit else []
-    if changed_sources:
-        failures.append("evidence overlay changed source authority files")
-    source_authority = source_authority_commit_verification(source_commit) if source_commit else {"passed": False, "failures": ["source commit missing"]}
-    if not source_authority["passed"]:
-        failures.append("source authority no longer matches source commit")
-    bundle_preview = source_bundle_preview()
-    if bundle_preview["sha256"] != manifest_data.get("source_bundle", {}).get("sha256"):
-        failures.append("source bundle reconstruction mismatch")
-    challenge = manifest_data.get("temperature_sensor_authority", {}).get("controller_challenge")
-    if not isinstance(challenge, dict):
-        failures.append("temperature challenge missing")
-        challenge = {}
-    if challenge.get("authorized_commit") != source_commit:
-        failures.append("temperature challenge does not bind source C1")
-    if challenge.get("source_hashes_sha256") != manifest_data.get("source_hashes", {}).get("source_hashes_sha256"):
-        failures.append("temperature challenge source hash mismatch")
-    if challenge.get("source_bundle_sha256") != manifest_data.get("source_bundle", {}).get("sha256"):
-        failures.append("temperature challenge source bundle mismatch")
-    counters = manifest_data.get("contact_counter_attestation", {})
-    if counters != {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}:
-        failures.append("final contact counters are not exactly 1/1/0/0")
-    required_evidence_paths = {
-        "source audit findings": SOURCE_AUDIT_FINDINGS_PATH,
-        "source audit report": SOURCE_AUDIT_REVIEW_PATH,
-        "temperature authority": TEMPERATURE_SENSOR_AUTHORITY,
-        "target discovery": TARGET_DISCOVERY_RECEIPT,
-        "discovery transport": DISCOVERY_TRANSPORT_PATH,
-        "discovery challenge": DISCOVERY_CHALLENGE_PATH,
-        "discovery attempt": DISCOVERY_ATTEMPT_PATH,
-        "manifest": MANIFEST_PATH,
-        "manifest sidecar": MANIFEST_SHA_PATH,
-    }
-    missing_evidence_paths: list[str] = []
-    for label, path in required_evidence_paths.items():
-        if not path.exists():
-            failures.append(f"{label} artifact missing")
-            missing_evidence_paths.append(label)
-        if evidence_commit and commit_exists(evidence_commit) and not commit_has_path(evidence_commit, path):
-            failures.append(f"evidence commit lacks {label} artifact")
-            missing_evidence_paths.append(label)
-    if sidecar.get("manifest_canonical_sha256") != public.digest({k: v for k, v in manifest_data.items() if k != "manifest_canonical_sha256"}):
-        failures.append("manifest canonical sidecar mismatch")
-    if sidecar.get("manifest_file_sha256") != public.sha256_file(MANIFEST_PATH):
-        failures.append("manifest file sidecar mismatch")
+    replay = replay_final_exact_objects(source_commit, evidence_commit)
     result = {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EXACT_OBJECT_VERIFICATION_V1",
-        "passed": not failures,
-        "failures": failures,
+        "passed": replay["passed"],
+        "failures": replay["failures"],
         "source_authority_commit": source_commit,
         "evidence_commit": evidence_commit,
-        "changed_source_files_after_c1": changed_sources,
-        "source_authority": source_authority,
-        "source_bundle_reconstruction": bundle_preview,
-        "contact_counters": counters,
-        "manifest_file_sha256": sidecar.get("manifest_file_sha256"),
-        "manifest_canonical_sha256": sidecar.get("manifest_canonical_sha256"),
-        "required_evidence_paths": {label: str(path) for label, path in required_evidence_paths.items()},
-        "missing_evidence_paths": sorted(set(missing_evidence_paths)),
+        "changed_source_files_after_c1": replay["changed_source_files_after_c1"],
+        "source_authority": replay["source_authority"],
+        "source_authority_blob_records": replay["source_authority_blob_records"],
+        "evidence_blob_records": replay["evidence_blob_records"],
+        "independent_quorum": replay["independent_quorum"],
+        "source_quorum": replay["source_quorum"],
+        "contact_counters": replay["contact_counters"],
+        "manifest_file_sha256": replay["manifest_file_sha256"],
+        "manifest_canonical_sha256": replay["manifest_canonical_sha256"],
+        "required_evidence_paths": {label: str(path) for label, path in final_evidence_paths().items()},
+        "missing_evidence_paths": sorted(label for label, record in replay["evidence_blob_records"].items() if record.get("present") is not True),
     }
     result["final_exact_object_verification_sha256"] = public.digest(
         {k: v for k, v in result.items() if k != "final_exact_object_verification_sha256"}

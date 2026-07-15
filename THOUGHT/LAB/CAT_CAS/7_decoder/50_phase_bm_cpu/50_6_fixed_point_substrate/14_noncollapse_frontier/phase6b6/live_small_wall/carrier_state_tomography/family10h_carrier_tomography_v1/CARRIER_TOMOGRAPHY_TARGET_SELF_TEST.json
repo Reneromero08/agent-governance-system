@@ -146,7 +146,7 @@
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TARGET_SELF_TEST_V1",
   "science_package_id": "family10h_carrier_tomography_v1_0",
   "self_test_passed": true,
-  "self_test_sha256": "6e90e0178d31ad31383578254642e019180c19e10145b94715f538fe35e64c66",
+  "self_test_sha256": "a30ff9f9915d7f5908579e41be151b7278e0b658b3df11e3ca96292703f6c5a2",
   "sensor_inventory_count": 0,
   "source_death_process_custody": {
     "passed": true,
@@ -199,27 +199,37 @@
     "passed": true,
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_SELF_TEST_V1",
     "valid_receipt": {
-      "controller_challenge_sha256": "45986abc0aedf069ab9b53187170c6e6a11b09a429f0a77611f9bb32549ab27d",
+      "authorizing_scope": {
+        "authorizing": false,
+        "canonical_cpuinfo": false,
+        "canonical_hwmon_root": false,
+        "cpuinfo_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\cpuinfo",
+        "hwmon_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon",
+        "resolved_device_is_sysfs_device": false,
+        "resolved_input_is_sysfs_device": false,
+        "selected_class_path_is_sysfs_hwmon": false
+      },
+      "controller_challenge_sha256": "c7a9f1e86db4d14997319cf8e47667ecdabb256a3d96c839661adb6a59c814ba",
       "controller_nonce_sha256": "ffe054fe7ae0cb6dc65c3af9b61d5209f439851db43d0ba5997337df154668eb",
       "discovery_mode": "target_read_only_sensor_inventory",
-      "hwmon_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon",
+      "hwmon_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon",
       "identity_after": {
-        "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+        "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
         "hwmon_name": "k10temp",
-        "identity_sha256": "831b5d7e498fdd8cf1db782e045b5b30bc4b0437df3030496169267439c9a48e",
-        "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\device",
-        "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2",
-        "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+        "identity_sha256": "a6527c371688431c851b4cc0e2ce4542127f9c30545ba0d7022cfefc1564d3ad",
+        "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\device",
+        "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2",
+        "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
         "sensor_input": "temp1_input",
         "sensor_label": "Tctl"
       },
       "identity_before": {
-        "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+        "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
         "hwmon_name": "k10temp",
-        "identity_sha256": "831b5d7e498fdd8cf1db782e045b5b30bc4b0437df3030496169267439c9a48e",
-        "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\device",
-        "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2",
-        "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+        "identity_sha256": "a6527c371688431c851b4cc0e2ce4542127f9c30545ba0d7022cfefc1564d3ad",
+        "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\device",
+        "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2",
+        "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
         "sensor_input": "temp1_input",
         "sensor_label": "Tctl"
       },
@@ -228,14 +238,14 @@
         {
           "approval_law": "hwmon_name in k10temp and sensor_label in Tctl/Tdie",
           "approved": false,
-          "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon0\\temp1_input",
+          "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon0\\temp1_input",
           "identity": {
-            "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon0\\temp1_input",
+            "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon0\\temp1_input",
             "hwmon_name": "acpitz",
-            "identity_sha256": "35b23c21d33fc1a7bbf1f426c6a65c01c55df9a3c641ece63bd9fae922268b3b",
-            "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon0\\device",
-            "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon0",
-            "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon0\\temp1_input",
+            "identity_sha256": "dbcbaeeeb3fb06c979b0aebfcd1445df933638ec94044100a54a5a48509b00bb",
+            "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon0\\device",
+            "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon0",
+            "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon0\\temp1_input",
             "sensor_input": "temp1_input",
             "sensor_label": "temp1"
           },
@@ -244,14 +254,14 @@
         {
           "approval_law": "hwmon_name in k10temp and sensor_label in Tctl/Tdie",
           "approved": true,
-          "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon1\\temp1_input",
+          "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon1\\temp1_input",
           "identity": {
-            "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon1\\temp1_input",
+            "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon1\\temp1_input",
             "hwmon_name": "k10temp",
-            "identity_sha256": "6c671d112b813c6f5272c09fa3e570544bd12c194d9b3168d54913ab43280ff6",
-            "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon1\\device",
-            "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon1",
-            "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon1\\temp1_input",
+            "identity_sha256": "d4757964a2a53f40cbef243b7728e963c8ea5c28a6b4a5eb331d5ef3837f7183",
+            "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon1\\device",
+            "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon1",
+            "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon1\\temp1_input",
             "sensor_input": "temp1_input",
             "sensor_label": "Tdie"
           },
@@ -260,14 +270,14 @@
         {
           "approval_law": "hwmon_name in k10temp and sensor_label in Tctl/Tdie",
           "approved": true,
-          "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+          "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
           "identity": {
-            "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+            "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
             "hwmon_name": "k10temp",
-            "identity_sha256": "831b5d7e498fdd8cf1db782e045b5b30bc4b0437df3030496169267439c9a48e",
-            "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\device",
-            "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2",
-            "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+            "identity_sha256": "a6527c371688431c851b4cc0e2ce4542127f9c30545ba0d7022cfefc1564d3ad",
+            "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\device",
+            "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2",
+            "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
             "sensor_input": "temp1_input",
             "sensor_label": "Tctl"
           },
@@ -279,14 +289,14 @@
       "provenance": {
         "authority": "target_sensor_discovery",
         "authorized_commit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-        "controller_challenge_sha256": "45986abc0aedf069ab9b53187170c6e6a11b09a429f0a77611f9bb32549ab27d",
-        "discovery_monotonic_ns": 48739921000000,
+        "controller_challenge_sha256": "c7a9f1e86db4d14997319cf8e47667ecdabb256a3d96c839661adb6a59c814ba",
+        "discovery_monotonic_ns": 51427765000000,
         "science_package_id": "family10h_carrier_tomography_v1_0",
         "target_platform": {
           "checked_before_discovery": true,
           "cpu_family": 16,
           "cpu_model": 10,
-          "cpuinfo_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\cpuinfo",
+          "cpuinfo_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\cpuinfo",
           "vendor": "AuthenticAMD"
         },
         "transaction_run_id": "family10h_carrier_tomography_v1_0"
@@ -294,21 +304,21 @@
       "runtime_launch_count": 0,
       "sample": {
         "identity": {
-          "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+          "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
           "hwmon_name": "k10temp",
-          "identity_sha256": "831b5d7e498fdd8cf1db782e045b5b30bc4b0437df3030496169267439c9a48e",
-          "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\device",
-          "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2",
-          "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+          "identity_sha256": "a6527c371688431c851b4cc0e2ce4542127f9c30545ba0d7022cfefc1564d3ad",
+          "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\device",
+          "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2",
+          "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
           "sensor_input": "temp1_input",
           "sensor_label": "Tctl"
         },
         "label": "Tctl",
-        "path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+        "path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
         "pinned_descriptor": {
-          "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+          "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
           "st_dev": 3002855469,
-          "st_ino": 38843546786447290,
+          "st_ino": 108930815987348861,
           "st_mode": 33206
         },
         "read_law": "manifest-approved resolved input descriptor",
@@ -316,12 +326,12 @@
       },
       "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_DISCOVERY_V1",
       "selected_identity": {
-        "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+        "class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
         "hwmon_name": "k10temp",
-        "identity_sha256": "831b5d7e498fdd8cf1db782e045b5b30bc4b0437df3030496169267439c9a48e",
-        "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\device",
-        "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2",
-        "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input",
+        "identity_sha256": "a6527c371688431c851b4cc0e2ce4542127f9c30545ba0d7022cfefc1564d3ad",
+        "resolved_device_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\device",
+        "resolved_hwmon_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2",
+        "resolved_input_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input",
         "sensor_input": "temp1_input",
         "sensor_label": "Tctl"
       },
@@ -329,7 +339,7 @@
         "approved_count": 2,
         "deterministic_law": true,
         "law": "prefer Tctl over Tdie, then class_path, then resolved_input_path",
-        "selected_class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\hwmon\\hwmon2\\temp1_input"
+        "selected_class_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\hwmon\\hwmon2\\temp1_input"
       },
       "sensor_inventory_count": 1,
       "source_authority": {
@@ -337,9 +347,9 @@
         "failures": [],
         "passed": true
       },
-      "source_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_zif8i0pc\\source",
+      "source_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_target_discovery_3fj4cm0u\\source",
       "target_contact_count": 1,
-      "target_discovery_receipt_sha256": "f1d4e96905631bf57217fb011ff1d1f1a56e6016559ccf3fc481e4cc3d3334fe",
+      "target_discovery_receipt_sha256": "98e9f8c099c4dfce81a63755515f4ed6b4b6f87326a1c94d4dd372c95e9b75a0",
       "tomography_output_root_created": false
     }
   },
