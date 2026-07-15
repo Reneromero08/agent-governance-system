@@ -14,7 +14,7 @@
   },
   "controller_self_test": {
     "passed": true,
-    "sha256": "747647fa155d365b9ca13fb8f54a6e9b237cb8cdb0a6040814568721adc843fe"
+    "sha256": "6ecbd245a39e48f37bc102319cdbeae5f9afc509f2ed1d527173ceb56e1e4649"
   },
   "delay_grid": [
     {
@@ -40,7 +40,7 @@
   ],
   "deployment_layout": {
     "passed": true,
-    "sha256": "86d4af20dbf8b6eb723c22d293acc50bfb34f1a8cfd8e36b7697aa18c5aaca41"
+    "sha256": "bc94768367dc6791c1ce01ae51844101ee9e156afdff841b496694ff4a864226"
   },
   "exact_tuple_count": 8320,
   "expected_local_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0",
@@ -62,12 +62,39 @@
       "final exact-object verification schema mismatch",
       "final exact-object verification digest mismatch",
       "final exact-object verification did not pass",
-      "final exact-object verification source commit missing",
-      "final exact-object verification evidence commit missing",
-      "final exact-object verification evidence commit must differ from source C1",
-      "final exact-object verification source files changed",
-      "final exact-object verification source authority did not pass",
-      "final exact-object verification counters mismatch"
+      "replay: source authority commit missing or malformed",
+      "replay: evidence commit missing or malformed",
+      "replay: source authority commit blob verification failed",
+      "replay: evidence commit lacks source audit findings blob",
+      "replay: evidence commit lacks source audit report blob",
+      "replay: evidence commit lacks target discovery receipt blob",
+      "replay: evidence commit lacks temperature authority receipt blob",
+      "replay: evidence commit lacks discovery transport receipt blob",
+      "replay: evidence commit lacks discovery challenge receipt blob",
+      "replay: evidence commit lacks discovery attempt receipt blob",
+      "replay: evidence commit lacks manifest blob",
+      "replay: evidence commit lacks manifest sidecar blob",
+      "replay: evidence manifest blob is not valid JSON",
+      "replay: evidence manifest sidecar blob is not valid JSON",
+      "replay: manifest sidecar canonical hash does not match evidence blob",
+      "replay: independent review findings blob is not valid JSON",
+      "replay: independent review quorum failed from evidence blob",
+      "replay: source audit findings blob is not valid JSON",
+      "replay: source authority review quorum failed from evidence blob",
+      "replay: temperature challenge missing from evidence manifest",
+      "replay: temperature challenge does not bind source C1",
+      "replay: final contact counters are not exactly 1/1/0/0",
+      "replay: target discovery blob is not valid JSON",
+      "replay: temperature authority blob is not valid JSON",
+      "replay: discovery transport blob is not valid JSON",
+      "replay: discovery attempt blob is not valid JSON",
+      "final exact-object verification pass bit does not match replay",
+      "final exact-object verification failure list does not match replay",
+      "final exact-object verification source-file delta does not match replay",
+      "final exact-object source authority record does not match replay",
+      "final exact-object source authority blob records do not match replay",
+      "final exact-object evidence blob records do not match replay",
+      "final exact-object verification counters do not match replay"
     ],
     "file_sha256": null,
     "passed": false,
@@ -92,7 +119,7 @@
   },
   "git_state_at_manifest_build": {
     "branch": "codex/family10h-tomography-repair",
-    "head": "cf7099c7fdbb6f62a522ac8737f4394b1bbb79e7",
+    "head": "9443b363f58b11cade0a1b577eef4695bb462c6a",
     "origin_main": "32b5af119a03bc48bb00f279e6cc0014406147ad",
     "stash_list": [
       "stash@{0}: On main: preserve superseded pmu first-light work before micro_equal_1 closure",
@@ -150,10 +177,10 @@
     "review_report_sha256": "c42820d3d6836cabca6a89cac63aea92ffa5bb4e449a7da96471cd0349a66448",
     "verdict": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED"
   },
-  "manifest_canonical_sha256": "c70301dd92e044d13ee81755240f6e306a273c3477dc0c8a145991d2727da3e6",
+  "manifest_canonical_sha256": "5e3e26d058ff9fa5b17b8b5b015e1b4cdd64922b08aec37561f28cbb077c84fa",
   "offline_validate": {
     "passed": true,
-    "sha256": "96a52700e68b90f6a187e4b81036d469e138f0afd7c68f1f6f84f2a5d17bb787"
+    "sha256": "aaa57658e2d84c32f8bbe633803957cdd1622093b91480c9411947e8822bb92b"
   },
   "operator_ladder": [
     "S0 scalar preparation amplitude",
@@ -326,8 +353,8 @@
     "review_report_path": null,
     "review_report_sha256": null,
     "source_authority_commit": null,
-    "source_bundle_sha256": "a2c018b174a916fc775b24478ddbae139f7e227d7182b945cce961ec5c8ab0ba",
-    "source_hashes_sha256": "e84c6adcb0b6c958b1afc62219a5f71817e21261ba0a1a308b5d6dde832f236f"
+    "source_bundle_sha256": "8ea95ff80d749030582562e786cb4dc111f7b2d1b83d7ff87efe5c10ececa7ef",
+    "source_hashes_sha256": "663de8cdb67a9386d9b8808a70ba1fc36e5d0cdb30062ee1447663631211969e"
   },
   "source_bundle": {
     "file_count": 9,
@@ -343,7 +370,7 @@
       "run_family10h_carrier_tomography_v1.py"
     ],
     "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-    "sha256": "a2c018b174a916fc775b24478ddbae139f7e227d7182b945cce961ec5c8ab0ba"
+    "sha256": "8ea95ff80d749030582562e786cb4dc111f7b2d1b83d7ff87efe5c10ececa7ef"
   },
   "source_hashes": {
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_HASHES_V1",
@@ -377,20 +404,20 @@
         "size": 1368
       },
       "family10h_carrier_tomography_target.py": {
-        "sha256": "eee5d44da3e012fdda3147b3e426cf0e8b09c5774745e2b11aea42e508cbf563",
-        "size": 99914
+        "sha256": "7f0fc7c1672e1c7bebad7c00bf717eb091cf3b3bc88d5e32074d9cf6f522a50c",
+        "size": 108620
       },
       "run_family10h_carrier_tomography_v1.py": {
-        "sha256": "6435dad04b428af343d43528424b6151d9d90beeae56814b41fb6a49256a04b3",
-        "size": 153453
+        "sha256": "6a3aeb29e17754ec828d8620227db6fc051480c855c934a39d53bdd010cc6054",
+        "size": 165365
       }
     },
-    "source_hashes_sha256": "e84c6adcb0b6c958b1afc62219a5f71817e21261ba0a1a308b5d6dde832f236f"
+    "source_hashes_sha256": "663de8cdb67a9386d9b8808a70ba1fc36e5d0cdb30062ee1447663631211969e"
   },
   "starting_head_required": "836d53a81225fb37406528f1c25e87e208aa9495",
   "target_self_test": {
     "passed": true,
-    "sha256": "1a0795213f9aa557cdfa782b325042f2f4529963f5ec3e89c332ab10086f5a4d"
+    "sha256": "a30ff9f9915d7f5908579e41be151b7278e0b658b3df11e3ca96292703f6c5a2"
   },
   "temperature_sensor_authority": {
     "approved_hwmon_names": [

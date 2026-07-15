@@ -4,13 +4,15 @@
       "authority_without_transport_rejected": true,
       "cleanup_failure_rejected": true,
       "copyback_corruption_rejected": true,
+      "fake_discovery_authority_build_rejected": true,
+      "fake_discovery_authority_with_transport_rejected": true,
       "incorrect_zero_target_contact_rejected": true,
       "nonzero_live_invocation_rejected": true,
       "nonzero_pmu_acquisition_rejected": true,
       "remote_absence_failure_rejected": true,
       "second_attempt_retry_rejected": true,
       "transport_digest_corruption_rejected": true,
-      "valid_fake_discovery_authority_with_transport_passes": true,
+      "transport_file_hash_mismatch_rejected": true,
       "valid_transport_passes": true
     },
     "passed": true,
@@ -21,7 +23,7 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "4a9ccc340a47055612194ce60b707030b5f4e6a3476c4ac95e02fe2587625ad9",
+  "offline_validate_sha256": "aaa57658e2d84c32f8bbe633803957cdd1622093b91480c9411947e8822bb92b",
   "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -84,7 +86,7 @@
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "f0b29d99c05bff1b25eb340ee1a341867650f80308b9b2ab0c532d2692002659",
+  "self_test_sha256": "6ecbd245a39e48f37bc102319cdbeae5f9afc509f2ed1d527173ceb56e1e4649",
   "sensor_inventory_count": 0,
   "source_audit_quorum_regression": {
     "checks": {
