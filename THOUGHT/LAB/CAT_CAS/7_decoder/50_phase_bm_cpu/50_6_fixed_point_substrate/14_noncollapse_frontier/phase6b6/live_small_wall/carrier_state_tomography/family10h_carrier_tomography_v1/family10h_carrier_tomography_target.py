@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import gzip
 import hashlib
+import inspect
 import json
 import os
 import re
@@ -71,6 +72,29 @@ SOURCE_AUDIT_ROLE_ALIASES = {
     "source_bundle_evidence_auditor": "source_bundle_evidence_auditor",
     "claim_boundary_adjudicator": "claim_boundary_adjudicator",
 }
+SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = {
+    "schema",
+    "issuer",
+    "thread_id",
+    "agent_id",
+    "role",
+    "model",
+    "final_response_sha256",
+    "audited_commit",
+    "source_hashes_sha256",
+    "source_bundle_sha256",
+    "no_git_write",
+    "no_file_edits",
+    "no_checkout_mutation",
+    "no_target_contact",
+    "no_live_authority",
+    "no_pmu",
+    "self_authored",
+    "evidence_origin",
+}
+SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = "FAMILY10H_SOURCE_AUTHORITY_C1_REVIEWER_RECEIPT_V1"
+SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER = "codex_subagent_read_only_review"
+SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN = "codex_subagent_final_response"
 TEMPERATURE_IDENTITY_FIELDS = [
     "hwmon_name",
     "sensor_label",
@@ -123,6 +147,14 @@ REQUIRED_TEMPERATURE_AUTHORITY_CHALLENGE_KEYS = {
     "transport_scope",
     "source_authority_review",
 }
+SOURCE_REVIEW_BINDING_KEYS = {
+    "findings_sha256",
+    "review_report_sha256",
+    "review_quorum_sha256",
+    "source_authority_commit",
+    "source_hashes_sha256",
+    "source_bundle_sha256",
+}
 
 
 class TargetError(RuntimeError):
@@ -142,22 +174,48 @@ def raises_target_error(callback: Any) -> bool:
     return False
 
 
+def strict_json_loads(text: str) -> Any:
+    def reject_constant(value: str) -> None:
+        raise ValueError(f"non-finite JSON value rejected: {value}")
+
+    def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError(f"duplicate JSON key rejected: {key}")
+            result[key] = value
+        return result
+
+    return json.loads(text, object_pairs_hook=reject_duplicate_keys, parse_constant=reject_constant)
+
+
+def strict_json_dumps(value: Any, *, indent: int | None = None) -> str:
+    return json.dumps(value, indent=indent, sort_keys=True, allow_nan=False)
+
+
+def read_json(path: Path) -> Any:
+    return strict_json_loads(path.read_text(encoding="utf-8"))
+
+
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes((json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8"))
+    path.write_bytes((strict_json_dumps(value, indent=2) + "\n").encode("utf-8"))
 
 
 def serialized_json_sha256(value: Any) -> str:
-    return hashlib.sha256((json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8")).hexdigest()
+    return hashlib.sha256((strict_json_dumps(value, indent=2) + "\n").encode("utf-8")).hexdigest()
 
 
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if any(not line.strip() for line in lines):
+        raise TargetError("blank JSONL row rejected")
+    return [strict_json_loads(line) for line in lines]
 
 
 def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes("".join(json.dumps(row, sort_keys=True) + "\n" for row in rows).encode("utf-8"))
+    path.write_bytes("".join(strict_json_dumps(row) + "\n" for row in rows).encode("utf-8"))
 
 
 def validate_schedule_artifacts(source_root: Path) -> dict[str, Any]:
@@ -167,8 +225,8 @@ def validate_schedule_artifacts(source_root: Path) -> dict[str, Any]:
     require(schedule_path.exists(), "schedule JSON missing")
     require(sidecar_path.exists(), "schedule sidecar missing")
     require(tsv_path.exists(), "schedule TSV missing")
-    schedule = json.loads(schedule_path.read_text(encoding="utf-8"))
-    sidecar = json.loads(sidecar_path.read_text(encoding="utf-8"))
+    schedule = read_json(schedule_path)
+    sidecar = read_json(sidecar_path)
     failures = []
     if public.digest(schedule) != sidecar.get("canonical_sha256"):
         failures.append("schedule canonical digest mismatch")
@@ -197,7 +255,7 @@ def validate_source_file_authority(source_root: Path) -> dict[str, Any]:
     failures: list[str] = []
     if not receipt_path.exists():
         return {"passed": False, "failures": ["source hash receipt missing"], "checked_files": 0}
-    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    receipt = read_json(receipt_path)
     expected = receipt.get("source_files", {})
     if set(expected) != set(SOURCE_FILE_NAMES):
         failures.append("source hash keyset mismatch")
@@ -239,6 +297,46 @@ def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = Fa
         verdicts = {}
     if len(verdicts) != len(required_roles):
         failures.append("reviewer verdict count must be exactly four")
+
+    def validate_source_review_receipt(item: dict[str, Any], role: str, role_name: str) -> list[str]:
+        if not source_audit:
+            return []
+        receipt = item.get("review_receipt")
+        if not isinstance(receipt, dict):
+            return [f"source audit reviewer receipt missing {role}"]
+        receipt_failures: list[str] = []
+        if set(receipt) != SOURCE_AUDIT_REVIEW_RECEIPT_KEYS:
+            receipt_failures.append(f"source audit reviewer receipt field mismatch {role}")
+        expected_pairs = {
+            "schema": SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA,
+            "issuer": SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER,
+            "agent_id": item.get("agent_id"),
+            "role": role_name,
+            "audited_commit": item.get("audited_commit"),
+            "source_hashes_sha256": item.get("source_hashes_sha256"),
+            "source_bundle_sha256": item.get("source_bundle_sha256"),
+            "evidence_origin": SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN,
+            "self_authored": False,
+            "no_git_write": True,
+            "no_file_edits": True,
+            "no_checkout_mutation": True,
+            "no_target_contact": True,
+            "no_live_authority": True,
+            "no_pmu": True,
+        }
+        for key, expected in expected_pairs.items():
+            if receipt.get(key) != expected:
+                receipt_failures.append(f"source audit reviewer receipt {key} mismatch {role}")
+        if re.fullmatch(r"[0-9a-f]{64}", str(receipt.get("final_response_sha256", ""))) is None:
+            receipt_failures.append(f"source audit reviewer final response digest invalid {role}")
+        if not isinstance(receipt.get("thread_id"), str) or not receipt["thread_id"]:
+            receipt_failures.append(f"source audit reviewer thread id missing {role}")
+        if not isinstance(receipt.get("model"), str) or not receipt["model"]:
+            receipt_failures.append(f"source audit reviewer model missing {role}")
+        if item.get("self_authored") is True or item.get("evidence_origin") == "target-derived":
+            receipt_failures.append(f"source audit reviewer provenance rejected {role}")
+        return receipt_failures
+
     by_role: dict[str, dict[str, Any]] = {}
     for role_key, item in verdicts.items():
         if not isinstance(item, dict):
@@ -263,8 +361,13 @@ def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = Fa
             "source_hashes_sha256": item.get("source_hashes_sha256"),
             "source_bundle_sha256": item.get("source_bundle_sha256"),
             "boundary_attestation": item.get("boundary_attestation"),
+            "review_receipt": item.get("review_receipt"),
             "passed": passed,
         }
+        receipt_failures = validate_source_review_receipt(item, role, required_roles[role])
+        if receipt_failures:
+            failures.extend(receipt_failures)
+            by_role[role]["passed"] = False
     missing = sorted(set(required_roles) - set(by_role))
     if missing:
         failures.append("missing reviewer roles: " + ",".join(missing))
@@ -315,7 +418,7 @@ def validate_target_offline_receipts(source_root: Path, manifest: dict[str, Any]
             failures.append(f"{name} receipt missing")
             continue
         try:
-            receipt = json.loads(path.read_text(encoding="utf-8"))
+            receipt = read_json(path)
         except json.JSONDecodeError as exc:
             failures.append(f"{name} receipt JSON invalid: {exc}")
             continue
@@ -325,7 +428,7 @@ def validate_target_offline_receipts(source_root: Path, manifest: dict[str, Any]
         if not receipt_digest_matches(receipt, digest_field):
             failures.append(f"{name} receipt digest mismatch")
     source_hash_path = source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json"
-    source_hashes = json.loads(source_hash_path.read_text(encoding="utf-8")) if source_hash_path.exists() else {}
+    source_hashes = read_json(source_hash_path) if source_hash_path.exists() else {}
     offline = receipts.get("offline", {})
     expected_links = {
         "public_self_test_sha256": receipts.get("public_self", {}).get("self_test_sha256"),
@@ -391,7 +494,7 @@ def validate_manifest_review_section(
     findings: dict[str, Any] = {}
     if findings_path is not None and findings_path.exists():
         try:
-            findings = json.loads(findings_path.read_text(encoding="utf-8"))
+            findings = read_json(findings_path)
         except json.JSONDecodeError as exc:
             failures.append(f"{label} findings JSON invalid: {exc}")
             findings = {}
@@ -431,8 +534,8 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
     failures: list[str] = []
     if not manifest_path.exists() or not sidecar_path.exists():
         return {"passed": False, "failures": ["manifest authority files missing"]}
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    sidecar = json.loads(sidecar_path.read_text(encoding="utf-8"))
+    manifest = read_json(manifest_path)
+    sidecar = read_json(sidecar_path)
     if sidecar.get("manifest_file_sha256") != public.sha256_file(manifest_path):
         failures.append("manifest file hash mismatch")
     if sidecar.get("manifest_canonical_sha256") != public.digest({k: v for k, v in manifest.items() if k != "manifest_canonical_sha256"}):
@@ -456,7 +559,7 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
     elif not source_hash_receipt.exists():
         failures.append("source hash receipt missing")
     else:
-        source_hash_data = json.loads(source_hash_receipt.read_text(encoding="utf-8"))
+        source_hash_data = read_json(source_hash_receipt)
         if source_hash_data.get("source_hashes_sha256") != manifest_source_hash:
             failures.append("manifest source hash binding mismatch")
     temperature_authority = manifest.get("temperature_sensor_authority", {})
@@ -524,7 +627,7 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
                 failures.append("final exact-object verification file hash mismatch")
             else:
                 try:
-                    final_receipt = json.loads(final_path.read_text(encoding="utf-8"))
+                    final_receipt = read_json(final_path)
                 except json.JSONDecodeError as exc:
                     failures.append(f"final exact-object verification JSON invalid: {exc}")
             if not final_evidence_path.exists():
@@ -533,7 +636,7 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
                 failures.append("final evidence commit authority file hash mismatch")
             else:
                 try:
-                    final_evidence_receipt = json.loads(final_evidence_path.read_text(encoding="utf-8"))
+                    final_evidence_receipt = read_json(final_evidence_path)
                 except json.JSONDecodeError as exc:
                     failures.append(f"final evidence commit authority JSON invalid: {exc}")
                 else:
@@ -662,8 +765,8 @@ def validate_manifest_temperature_authority(manifest: dict[str, Any], source_roo
             elif public.sha256_file(discovery_transport_path) != discovery_transport_file_value:
                 failures.append("discovery transport receipt hash mismatch")
             try:
-                target_discovery_receipt = json.loads(target_discovery_path.read_text(encoding="utf-8")) if target_discovery_path.exists() else None
-                discovery_transport_receipt = json.loads(discovery_transport_path.read_text(encoding="utf-8")) if discovery_transport_path.exists() else None
+                target_discovery_receipt = read_json(target_discovery_path) if target_discovery_path.exists() else None
+                discovery_transport_receipt = read_json(discovery_transport_path) if discovery_transport_path.exists() else None
             except json.JSONDecodeError as exc:
                 failures.append(f"discovery evidence JSON invalid: {exc}")
                 target_discovery_receipt = None
@@ -1002,7 +1105,7 @@ def validate_temperature_sensor_authority_file(
     if not path.exists():
         return {"passed": False, "failures": ["temperature sensor authority file missing"], "approved_sensor_identity": None}
     try:
-        receipt = json.loads(path.read_text(encoding="utf-8"))
+        receipt = read_json(path)
     except json.JSONDecodeError as exc:
         return {"passed": False, "failures": [f"temperature sensor authority JSON invalid: {exc}"], "approved_sensor_identity": None}
     return validate_temperature_sensor_authority_payload(
@@ -1142,8 +1245,10 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
 
 def policy_and_platform_fixture() -> dict[str, Any]:
     sensor = temperature_sensor_identity_fixture()
+    with tempfile.TemporaryDirectory(prefix="carrier_tomography_platform_") as tmp:
+        platform = platform_identity_regression(Path(tmp))
     checks = {
-        "strict_platform_identity_required": True,
+        "strict_platform_identity_required": all(platform.values()),
         "strict_readable_policy_fields_required": True,
         "strict_temperature_required": True,
         "approved_temperature_hwmon_name_required": sensor["wrong_hwmon_name_rejected"],
@@ -1159,7 +1264,7 @@ def policy_and_platform_fixture() -> dict[str, Any]:
         "process_scan_failure_rejected": True,
         "temperature_failure_rejected": sensor["unreadable_approved_sensor_rejected"],
     }
-    return {"passed": all(checks.values()) and sensor["passed"], "checks": checks, "temperature_sensor_identity": sensor}
+    return {"passed": all(checks.values()) and sensor["passed"], "checks": checks, "platform_identity": platform, "temperature_sensor_identity": sensor}
 
 
 def manifest_live_gate_fixture() -> dict[str, Any]:
@@ -1329,7 +1434,7 @@ def validate_minimal_evidence_root(root: Path, schedule: dict[str, Any]) -> dict
         return {"passed": False, "failures": failures, "existing": existing}
     raw_records = read_jsonl(root / "raw_records.jsonl")
     receipts = read_jsonl(root / "source_death_receipts.jsonl")
-    feature_freeze = json.loads((root / "feature_freeze.json").read_text(encoding="utf-8"))
+    feature_freeze = read_json(root / "feature_freeze.json")
     packet = {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_EVIDENCE_PACKET_V1",
         "schedule_sha256": public.digest(schedule),
@@ -1606,16 +1711,57 @@ def policy_custody_state() -> str:
     return str(policy_custody_snapshot()["state"])
 
 
+def parse_cpuinfo_stanzas(text: str) -> list[dict[str, str]]:
+    stanzas: list[dict[str, str]] = []
+    for raw_stanza in re.split(r"\n\s*\n", text.strip()):
+        if not raw_stanza.strip():
+            continue
+        fields: dict[str, str] = {}
+        for raw_line in raw_stanza.splitlines():
+            if not raw_line.strip():
+                continue
+            if ":" not in raw_line:
+                raise TargetError("platform identity line malformed")
+            key, value = raw_line.split(":", 1)
+            key = key.strip()
+            value = value.strip()
+            if key in fields and fields[key] != value:
+                raise TargetError(f"platform identity conflicting field {key}")
+            if key in fields:
+                raise TargetError(f"platform identity duplicate field {key}")
+            fields[key] = value
+        if fields:
+            stanzas.append(fields)
+    return stanzas
+
+
 def require_family10h_platform(cpuinfo_path: Path = Path("/proc/cpuinfo")) -> dict[str, Any]:
     text = cpuinfo_path.read_text(encoding="utf-8", errors="replace")
-    vendor_ok = "vendor_id\t: AuthenticAMD" in text or "vendor_id : AuthenticAMD" in text
-    family_ok = "cpu family\t: 16" in text or "cpu family : 16" in text
-    require(vendor_ok and family_ok, "platform identity is not AMD Family 10h")
-    model_match = re.search(r"model\s*:\s*(\d+)", text)
+    stanzas = parse_cpuinfo_stanzas(text)
+    require(bool(stanzas), "platform identity CPU stanza missing")
+    processors: list[dict[str, Any]] = []
+    for stanza in stanzas:
+        require("processor" in stanza, "platform identity processor field missing")
+        require(stanza.get("vendor_id") == "AuthenticAMD", "platform identity vendor is not AuthenticAMD")
+        require(stanza.get("cpu family") == "16", "platform identity CPU family is not 16")
+        require(re.fullmatch(r"\d+", stanza.get("processor", "")) is not None, "platform identity processor id malformed")
+        require(re.fullmatch(r"\d+", stanza.get("model", "")) is not None, "platform identity model malformed")
+        processors.append(
+            {
+                "processor": int(stanza["processor"]),
+                "vendor_id": stanza["vendor_id"],
+                "cpu_family": int(stanza["cpu family"]),
+                "model": int(stanza["model"]),
+            }
+        )
+    processor_ids = [item["processor"] for item in processors]
+    require(len(set(processor_ids)) == len(processor_ids), "platform identity duplicate processor id")
     return {
         "vendor": "AuthenticAMD",
         "cpu_family": 16,
-        "cpu_model": int(model_match.group(1)) if model_match else None,
+        "cpu_models": sorted(set(item["model"] for item in processors)),
+        "processor_count": len(processors),
+        "processors": processors,
         "cpuinfo_path": str(cpuinfo_path),
         "checked_before_discovery": True,
     }
@@ -1649,8 +1795,8 @@ def expected_discovery_challenge(
     transport_scope: dict[str, Any] | None = None,
     source_authority_review: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    source_hashes = json.loads((source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json").read_text(encoding="utf-8"))
-    schedule_sidecar = json.loads((source_root / "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256").read_text(encoding="utf-8"))
+    source_hashes = read_json(source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json")
+    schedule_sidecar = read_json(source_root / "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256")
     if transport_scope is None:
         transport_scope = {
             "target_host": "offline_fixture",
@@ -1677,7 +1823,7 @@ def expected_discovery_challenge(
 
 
 def fixture_source_review_binding(source_root: Path, authorized_commit: str) -> dict[str, Any]:
-    source_hashes = json.loads((source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json").read_text(encoding="utf-8"))
+    source_hashes = read_json(source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json")
     return {
         "findings_sha256": "a" * 64,
         "review_report_sha256": "b" * 64,
@@ -1726,11 +1872,17 @@ def validate_discovery_challenge(source_root: Path, challenge: dict[str, Any], c
     if not isinstance(review, dict):
         failures.append("controller challenge source authority review missing")
     else:
+        if set(review) != SOURCE_REVIEW_BINDING_KEYS:
+            failures.append("controller challenge source authority review field mismatch")
         for field in ["findings_sha256", "review_report_sha256", "review_quorum_sha256", "source_hashes_sha256", "source_bundle_sha256"]:
             if re.fullmatch(r"[0-9a-f]{64}", str(review.get(field, ""))) is None:
                 failures.append(f"controller challenge source authority review {field} invalid")
         if review.get("source_authority_commit") != authorized_commit:
             failures.append("controller challenge source authority review commit mismatch")
+        if review.get("source_hashes_sha256") != challenge.get("source_hashes_sha256"):
+            failures.append("controller challenge source authority review source-hashes mismatch")
+        if review.get("source_bundle_sha256") != challenge.get("source_bundle_sha256"):
+            failures.append("controller challenge source authority review source-bundle mismatch")
     return {
         "passed": not failures,
         "failures": failures,
@@ -1757,7 +1909,7 @@ def discover_temperature_sensor_authority(
     require(receipt_path.parent.resolve() == source_root.resolve(), "discovery receipt path must be inside source root")
     require(not receipt_path.exists(), "discovery receipt already exists")
     require(controller_challenge_path.exists(), "controller challenge file missing")
-    challenge = json.loads(controller_challenge_path.read_text(encoding="utf-8"))
+    challenge = read_json(controller_challenge_path)
     challenge_validation = validate_discovery_challenge(source_root, challenge, controller_nonce, authorized_commit)
     require(challenge_validation["passed"], "controller challenge invalid: " + ",".join(challenge_validation["failures"]))
     platform_identity = require_family10h_platform(cpuinfo_path)
@@ -1823,7 +1975,7 @@ def discover_temperature_sensor_authority(
     }
     result["target_discovery_receipt_sha256"] = public.digest({k: v for k, v in result.items() if k != "target_discovery_receipt_sha256"})
     with receipt_path.open("xb") as handle:
-        handle.write((json.dumps(result, indent=2, sort_keys=True) + "\n").encode("utf-8"))
+        handle.write((strict_json_dumps(result, indent=2) + "\n").encode("utf-8"))
     return result
 
 
@@ -1842,10 +1994,75 @@ def write_fake_family10h_cpuinfo(path: Path) -> None:
     )
 
 
+def platform_identity_regression(root: Path) -> dict[str, bool]:
+    valid = root / "cpuinfo_valid"
+    write_fake_family10h_cpuinfo(valid)
+    intel = root / "cpuinfo_intel"
+    intel.write_text("processor\t: 0\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 58\n", encoding="utf-8")
+    wrong_family = root / "cpuinfo_wrong_family"
+    wrong_family.write_text("processor\t: 0\nvendor_id\t: AuthenticAMD\ncpu family\t: 23\nmodel\t\t: 1\n", encoding="utf-8")
+    split = root / "cpuinfo_split"
+    split.write_text(
+        "processor\t: 0\nvendor_id\t: AuthenticAMD\nmodel\t\t: 10\n\nprocessor\t: 1\ncpu family\t: 16\nmodel\t\t: 10\n",
+        encoding="utf-8",
+    )
+    mixed = root / "cpuinfo_mixed"
+    mixed.write_text(
+        "processor\t: 0\nvendor_id\t: AuthenticAMD\ncpu family\t: 16\nmodel\t\t: 10\n\n"
+        "processor\t: 1\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 58\n",
+        encoding="utf-8",
+    )
+    conflicting = root / "cpuinfo_conflicting"
+    conflicting.write_text("processor\t: 0\nvendor_id\t: AuthenticAMD\nvendor_id\t: GenuineIntel\ncpu family\t: 16\nmodel\t\t: 10\n", encoding="utf-8")
+    malformed = root / "cpuinfo_malformed"
+    malformed.write_text("processor\t 0\nvendor_id\t: AuthenticAMD\ncpu family\t: 16\nmodel\t\t: 10\n", encoding="utf-8")
+    return {
+        "valid_family10h_platform_passes": require_family10h_platform(valid)["processor_count"] == 1,
+        "intel_platform_rejected": raises_target_error(lambda: require_family10h_platform(intel)),
+        "wrong_amd_family_rejected": raises_target_error(lambda: require_family10h_platform(wrong_family)),
+        "split_vendor_family_rejected": raises_target_error(lambda: require_family10h_platform(split)),
+        "mixed_processors_rejected": raises_target_error(lambda: require_family10h_platform(mixed)),
+        "duplicate_conflicting_fields_rejected": raises_target_error(lambda: require_family10h_platform(conflicting)),
+        "malformed_cpuinfo_rejected": raises_target_error(lambda: require_family10h_platform(malformed)),
+    }
+
+
+def discovery_command_isolation_regression() -> dict[str, bool]:
+    source = inspect.getsource(discover_temperature_sensor_authority)
+    forbidden_tokens = [
+        "perf_event_open",
+        "/dev/cpu",
+        "msr",
+        "subprocess.",
+        "Popen",
+        "run(",
+        "execute_authorized",
+        "EXPECTED_REMOTE_OUTPUT_ROOT",
+        "output_root.mkdir",
+    ]
+    return {
+        "discovery_source_has_no_pmu_runtime_or_output_root_tokens": not any(token in source for token in forbidden_tokens),
+        "discovery_receipt_counters_are_literals_only": all(
+            token in source
+            for token in [
+                '"target_contact_count": 1',
+                '"sensor_inventory_count": 1',
+                '"live_invocation_count": 0',
+                '"pmu_acquisition_count": 0',
+                '"pmu_open_count": 0',
+                '"runtime_launch_count": 0',
+                '"tomography_output_root_created": False',
+            ]
+        ),
+    }
+
+
 def target_sensor_discovery_fixture(source_root: Path) -> dict[str, Any]:
     sensor_regressions = temperature_sensor_identity_fixture()
     with tempfile.TemporaryDirectory(prefix="family10h_target_discovery_") as tmp:
         root = Path(tmp)
+        platform_regressions = platform_identity_regression(root)
+        isolation_regressions = discovery_command_isolation_regression()
         source = root / "source"
         copy_source_fixture(source_root, source)
 
@@ -1962,6 +2179,52 @@ def target_sensor_discovery_fixture(source_root: Path) -> dict[str, Any]:
             )
         )
 
+        nested_wrong_hash = {**challenge, "source_authority_review": {**challenge["source_authority_review"], "source_hashes_sha256": "4" * 64}}
+        nested_wrong_hash_path = root / "nested_wrong_hash_challenge.json"
+        write_json(nested_wrong_hash_path, nested_wrong_hash)
+        nested_wrong_hash_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=fresh_source("nested_wrong_hash"),
+                controller_challenge_path=nested_wrong_hash_path,
+                controller_nonce=nonce,
+                authorized_commit=commit,
+                receipt_path=root / "nested_wrong_hash" / "source" / TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME,
+                hwmon_root=hwmon,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+        nested_wrong_bundle = {**challenge, "source_authority_review": {**challenge["source_authority_review"], "source_bundle_sha256": "5" * 64}}
+        nested_wrong_bundle_path = root / "nested_wrong_bundle_challenge.json"
+        write_json(nested_wrong_bundle_path, nested_wrong_bundle)
+        nested_wrong_bundle_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=fresh_source("nested_wrong_bundle"),
+                controller_challenge_path=nested_wrong_bundle_path,
+                controller_nonce=nonce,
+                authorized_commit=commit,
+                receipt_path=root / "nested_wrong_bundle" / "source" / TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME,
+                hwmon_root=hwmon,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+        nested_extra_key = {
+            **challenge,
+            "source_authority_review": {**challenge["source_authority_review"], "unexpected": "blocked"},
+        }
+        nested_extra_key_path = root / "nested_extra_key_challenge.json"
+        write_json(nested_extra_key_path, nested_extra_key)
+        nested_extra_key_rejected = raises_target_error(
+            lambda: discover_temperature_sensor_authority(
+                source_root=fresh_source("nested_extra_key"),
+                controller_challenge_path=nested_extra_key_path,
+                controller_nonce=nonce,
+                authorized_commit=commit,
+                receipt_path=root / "nested_extra_key" / "source" / TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME,
+                hwmon_root=hwmon,
+                cpuinfo_path=cpuinfo,
+            )
+        )
+
         source_mutation = root / "mutated_source"
         copy_source_fixture(source_root, source_mutation)
         (source_mutation / "family10h_carrier_tomography_target.py").write_text(
@@ -2045,12 +2308,17 @@ def target_sensor_discovery_fixture(source_root: Path) -> dict[str, Any]:
         "wrong_source_bundle_rejected": wrong_bundle_rejected,
         "wrong_schedule_hashes_rejected": wrong_schedule_rejected,
         "wrong_package_identity_rejected": wrong_package_rejected,
+        "nested_source_review_hash_mismatch_rejected": nested_wrong_hash_rejected,
+        "nested_source_review_bundle_mismatch_rejected": nested_wrong_bundle_rejected,
+        "nested_source_review_keyset_mismatch_rejected": nested_extra_key_rejected,
         "non_cpu_hwmon_rejected": non_cpu_rejected,
         "wrong_sensor_label_rejected": wrong_label_rejected,
         "multiple_approved_without_deterministic_law_rejected": ambiguous_without_law_rejected,
         "descriptor_drift_rejected": sensor_regressions["same_class_path_substitution_rejected"],
         "identity_drift_rejected": sensor_regressions["identity_drift_rejected"],
         "malformed_sample_rejected": malformed_sample_rejected,
+        **platform_regressions,
+        **isolation_regressions,
     }
     return {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_SELF_TEST_V1",
@@ -2062,7 +2330,7 @@ def target_sensor_discovery_fixture(source_root: Path) -> dict[str, Any]:
 
 def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
     schedule_result = validate_schedule_artifacts(source_root)
-    schedule = json.loads((source_root / "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json").read_text(encoding="utf-8"))
+    schedule = read_json(source_root / "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json")
     evidence = evidence_file_fixtures(schedule)
     feature = public.feature_boundary_self_test()
     process = process_custody_fixture()
@@ -2145,7 +2413,7 @@ def execute_authorized(source_root: Path, output_root: Path) -> dict[str, Any]:
     policy_before = policy_custody_snapshot()
     output_root.mkdir(parents=True, exist_ok=False)
     execution_receipt_path = output_root.with_name(output_root.name + "_target_execution_receipt.json")
-    schedule = json.loads((source_root / "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json").read_text(encoding="utf-8"))
+    schedule = read_json(source_root / "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json")
     try:
         runtime_env = os.environ.copy()
         runtime_env[RUNTIME_AUTHORITY_ENV] = public.TRANSACTION_RUN_ID
@@ -2251,7 +2519,7 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("select exactly one target mode")
     if args.execute_authorized:
         result = execute_authorized(args.source_root.resolve(), args.output_root.resolve())
-        print(json.dumps(result, indent=2, sort_keys=True))
+        print(strict_json_dumps(result, indent=2))
         return 0 if result["status"] == "TARGET_EXECUTION_COMPLETE" else 1
     if args.discover_temperature_sensor_authority:
         require(args.controller_challenge is not None, "controller challenge path required")
@@ -2264,13 +2532,13 @@ def main(argv: list[str] | None = None) -> int:
             hwmon_root=args.hwmon_root.resolve(),
             cpuinfo_path=args.cpuinfo_path.resolve(),
         )
-        print(json.dumps(result, indent=2, sort_keys=True))
+        print(strict_json_dumps(result, indent=2))
         return 0
     if not args.self_test:
         parser.print_help()
         return 2
     result = self_test(args.source_root.resolve(), args.output_root.resolve())
-    print(json.dumps(result, indent=2, sort_keys=True))
+    print(strict_json_dumps(result, indent=2))
     return 0 if result["self_test_passed"] else 1
 
 

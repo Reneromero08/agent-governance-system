@@ -1,12 +1,81 @@
 {
+  "challenge_receipt_regression": {
+    "checks": {
+      "canonical_digest_mismatch_rejected": true,
+      "changed_review_binding_rejected": true,
+      "extra_field_rejected": true,
+      "nonzero_precontact_counter_rejected": true,
+      "valid_challenge_receipt_passes": true
+    },
+    "passed": true,
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CHALLENGE_RECEIPT_REGRESSION_V1"
+  },
+  "controller_acquisition_transaction_regression": {
+    "authority_sha256": "8b5093f6b4b48c39c65a57f511c4a167ec0d5d04ceb508bc227e257583d8f621",
+    "checks": {
+      "all_receipts_are_redirected_to_fixture_root": true,
+      "authority_receipt_replays_against_copied_receipt": true,
+      "challenge_receipt_written_before_contact": true,
+      "cleanup_and_absence_probe_executed": true,
+      "discovery_transport_receipt_replays": true,
+      "full_acquisition_function_passes_with_injected_transport": true,
+      "journal_has_exact_success_sequence": true,
+      "no_live_or_pmu_counters_incremented": true,
+      "source_files_copied_before_target_command": true
+    },
+    "command_kinds": [
+      "ssh_preflight_claim",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "scp_source_or_challenge_to_target",
+      "ssh_target_discovery_command",
+      "ssh_copyback_hash_probe",
+      "scp_copyback_receipt",
+      "ssh_cleanup",
+      "ssh_absence_probe"
+    ],
+    "fixture_cleaned_root_count": 1,
+    "fixture_remote_file_count": 14,
+    "journal_state_sequence": [
+      "claimed_pre_contact",
+      "transport_contact_invoked",
+      "target_command_invoked",
+      "receipt_copied_cleanup_pending",
+      "cleanup_armed",
+      "cleanup_completed",
+      "complete"
+    ],
+    "live_invocation_count": 0,
+    "passed": true,
+    "pmu_acquisition_count": 0,
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_ACQUISITION_TRANSACTION_REGRESSION_V1",
+    "sensor_inventory_count": 1,
+    "target_contact_count": 1,
+    "transport_sha256": "e0b82a3fa1edccba67ff37ae8c07494c3bd0ea13038f649b2daa51230ee82ab2"
+  },
   "discovery_attempt_journal_regression": {
     "checks": {
+      "binding_mutation_rejected": true,
       "digest_corruption_rejected": true,
+      "duplicated_state_rejected": true,
       "empty_journal_rejected": true,
       "missing_previous_counter_rejected": true,
+      "post_terminal_append_rejected": true,
       "reordered_rows_rejected": true,
+      "single_complete_row_rejected": true,
+      "skipped_state_rejected": true,
       "snapshot_without_journal_rejected": true,
-      "valid_journal_replays": true
+      "valid_seven_state_journal_replays": true
     },
     "passed": true,
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT_JOURNAL_REGRESSION_V1"
@@ -37,7 +106,7 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "9f01a8585e69929cc8eb9c06357b2a31c3d351ec741ab891c46fbc5466dc92a8",
+  "offline_validate_sha256": "22b35074ea240129573e70d4dfbd443dfde226102d7b74527fc05170d33f7fbc",
   "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -52,10 +121,11 @@
   "review_quorum_regressions": {
     "duplicate_role_or_agent_blocked": true,
     "empty_findings_blocked": true,
-    "exact_four_final_clearances_can_freeze": true,
+    "exact_four_final_clearances_satisfy_legacy_quorum_only": true,
     "fifth_blocking_response_blocked": true,
     "fifth_clear_response_blocked": true,
     "fifth_malformed_response_blocked": true,
+    "legacy_quorum_without_authority_cannot_freeze_package": true,
     "material_blocker_list_blocked": true,
     "missing_final_response_blocked": true,
     "missing_findings_blocked": true,
@@ -100,15 +170,20 @@
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "9d5a64119dc20054a41169c444f4a2bcfbbd03ed224fadecfb331efed971675c",
+  "self_test_sha256": "8a45b873efc0afba6764aadf5e3be34beb6991d1917f2d313b8a7d43fa71afaf",
   "sensor_inventory_count": 0,
   "source_audit_quorum_regression": {
     "checks": {
+      "altered_final_response_digest_blocked": true,
       "exact_source_audit_quorum_passes": true,
       "missing_boundary_attestation_blocked": true,
       "missing_report_blocked": true,
       "pre_contact_missing_or_mismatched_source_review_blocked": true,
       "prior_package_reviewer_reuse_blocked": true,
+      "provenance_free_receipt_blocked": true,
+      "self_authored_receipt_blocked": true,
+      "synthetic_agent_id_blocked": true,
+      "target_derived_receipt_blocked": true,
       "wrong_reviewer_commit_blocked": true,
       "wrong_top_level_bundle_blocked": true
     },
@@ -136,6 +211,15 @@
     "prepare_only_uses_read_only_source_authority": true,
     "source_hash_authority_present": true,
     "source_hashes_excluded_from_generated_receipts": true
+  },
+  "strict_json_regression": {
+    "checks": {
+      "duplicate_key_rejected": true,
+      "missing_or_blank_jsonl_rejected": true,
+      "nonfinite_rejected": true
+    },
+    "passed": true,
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_STRICT_JSON_REGRESSION_V1"
   },
   "target_contact_count": 0,
   "temperature_sensor_authority_regression": {
