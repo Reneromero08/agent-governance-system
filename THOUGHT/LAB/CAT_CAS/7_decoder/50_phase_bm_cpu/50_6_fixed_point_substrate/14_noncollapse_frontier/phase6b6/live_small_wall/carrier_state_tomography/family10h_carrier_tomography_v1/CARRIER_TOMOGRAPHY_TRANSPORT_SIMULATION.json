@@ -41,8 +41,10 @@
   "live_invocation_count": 0,
   "offline_only": true,
   "passed": true,
+  "pmu_acquisition_count": 0,
   "protected_remote_roots_not_touched": true,
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TRANSPORT_SIMULATION_V1",
+  "sensor_inventory_count": 0,
   "success": {
     "failures": [],
     "passed": true,
@@ -59,5 +61,5 @@
     "no_automatic_retry": true,
     "outer_timeout_exceeds_inner_timeout": true
   },
-  "transport_simulation_sha256": "df4bf2baca163b28fb8310ae6170fec0a1d3602b181f1abe67518be8884ceab0"
+  "transport_simulation_sha256": "4a11bfdd155123abc9631f9aadec4ff5017392681dd9c195cc8afa094eae6938"
 }

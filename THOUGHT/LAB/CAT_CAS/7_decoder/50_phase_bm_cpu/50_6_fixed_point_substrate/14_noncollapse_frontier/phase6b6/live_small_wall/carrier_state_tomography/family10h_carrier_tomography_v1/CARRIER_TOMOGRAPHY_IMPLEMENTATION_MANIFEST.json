@@ -6,9 +6,15 @@
     "FAMILY10H_CARRIER_TOMOGRAPHY_CUSTODY_INVALID"
   ],
   "claim_ceiling": "route-scoped public carrier-state model only",
+  "contact_counter_attestation": {
+    "live_invocation_count": 0,
+    "pmu_acquisition_count": 0,
+    "sensor_inventory_count": 0,
+    "target_contact_count": 0
+  },
   "controller_self_test": {
     "passed": true,
-    "sha256": "0dfdeeda9bc220b6e36e44af28a6c13f7a5ae52a4ead790b9c565ff808ea1be7"
+    "sha256": "0881a3f91accc707b019bf77c0fd04fc08ddf8fa9440e623e37dd9f466f6cae2"
   },
   "delay_grid": [
     {
@@ -34,7 +40,7 @@
   ],
   "deployment_layout": {
     "passed": true,
-    "sha256": "da72417a4e3dab670c30f5092fb31cc3e741c999b4eb5d5c577033d008e58df4"
+    "sha256": "8e81b0d1affd4291ee75fd6112265d51571f3f57c0ea35ea7e35632eff02def5"
   },
   "exact_tuple_count": 8320,
   "expected_local_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0",
@@ -67,13 +73,13 @@
   },
   "git_state_at_manifest_build": {
     "branch": "codex/family10h-tomography-repair",
-    "head": "57f3e26e5e2b6bd454f5a68b8b7e596da1ef016f",
+    "head": "893d1ad0df9a87f76299d06eba0e5a1f71169385",
     "origin_main": "32b5af119a03bc48bb00f279e6cc0014406147ad",
     "stash_list": [
       "stash@{0}: On main: preserve superseded pmu first-light work before micro_equal_1 closure",
       "stash@{1}: On phase6/combined-observability-executor: codex-stale-pr10-hardening-before-0c4244d9-verification"
     ],
-    "status_porcelain": " M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_CONTRACT.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_DEPLOYMENT_LAYOUT_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_EXACT_COVERAGE_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_FACTORIAL_ARM_SELF_TEST.json\n D THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json\n D THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_OFFLINE_VALIDATE.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_OPERATOR_ANALYSIS_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_SOURCE_DEATH_CUSTODY_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_TARGET_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SUBAGENT_FINDINGS_NORMALIZED.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SUBAGENT_REVIEW_REPORTS.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/family10h_carrier_tomography_public.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/family10h_carrier_tomography_runtime\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/family10h_carrier_tomography_runtime.c\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/family10h_carrier_tomography_target.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/run_family10h_carrier_tomography_v1.py\n"
+    "status_porcelain": " M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_DEPLOYMENT_LAYOUT_SELF_TEST.json\n D THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json\n D THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_OFFLINE_VALIDATE.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_TARGET_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_TRANSPORT_SIMULATION.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/family10h_carrier_tomography_target.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/run_family10h_carrier_tomography_v1.py\n"
   },
   "independent_review": {
     "findings_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\SUBAGENT_FINDINGS_NORMALIZED.json",
@@ -125,10 +131,10 @@
     "review_report_sha256": "c42820d3d6836cabca6a89cac63aea92ffa5bb4e449a7da96471cd0349a66448",
     "verdict": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED"
   },
-  "manifest_canonical_sha256": "4e84dfbc8b7e683aa6cc43a8bb316ad313547887e556f8df41492b8a65f00832",
+  "manifest_canonical_sha256": "44aff44d7f2c2536948feff69abdce5169783b9ae8a8c155252d10632fbb4070",
   "offline_validate": {
     "passed": true,
-    "sha256": "166d37e0d28ad0dbde65f35d745a32219193d5c8f07cfef287d17ea351d2accd"
+    "sha256": "a8ca125f16cac15e24e121fa7da334358b5088020a327915025e9c248b10fa7a"
   },
   "operator_ladder": [
     "S0 scalar preparation amplitude",
@@ -268,6 +274,39 @@
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST_V1",
   "science_package_id": "family10h_carrier_tomography_v1_0",
+  "source_authority_review": {
+    "findings_path": null,
+    "findings_sha256": null,
+    "material_blocker_count": 0,
+    "review_quorum": {
+      "failures": [
+        "source audit source-hashes mismatch",
+        "source audit material blockers missing or malformed",
+        "source audit reviewer verdicts missing or malformed",
+        "source audit reviewer verdict count must be exactly four",
+        "missing source audit reviewer roles: claim_boundary_adjudicator,discovery_transport_custody_auditor,physical_sensor_authority_auditor,source_bundle_evidence_auditor"
+      ],
+      "material_blockers": [],
+      "missing_roles": [
+        "claim_boundary_adjudicator",
+        "discovery_transport_custody_auditor",
+        "physical_sensor_authority_auditor",
+        "source_bundle_evidence_auditor"
+      ],
+      "passed": false,
+      "required_roles": {
+        "claim_boundary_adjudicator": "claim-boundary adjudicator",
+        "discovery_transport_custody_auditor": "discovery transport and custody auditor",
+        "physical_sensor_authority_auditor": "physical sensor-authority auditor",
+        "source_bundle_evidence_auditor": "source/bundle and evidence auditor"
+      },
+      "roles": {}
+    },
+    "review_report_path": null,
+    "review_report_sha256": null,
+    "source_authority_commit": null,
+    "source_hashes_sha256": "5b14964309106a5dc685019290e67d9226dbf48f87740ef29d047e23f275aff9"
+  },
   "source_bundle": {
     "file_count": 9,
     "files": [
@@ -282,7 +321,7 @@
       "run_family10h_carrier_tomography_v1.py"
     ],
     "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-    "sha256": "4b3d50c8dce3e27fdd318a4f8afaa3456b668cf3fa7a2f3279a4c57b4f211898"
+    "sha256": "59a42fc238bab57288e8e8c7939f94df0ad1ef123342e83a7d8df094e76c06f4"
   },
   "source_hashes": {
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_HASHES_V1",
@@ -316,20 +355,20 @@
         "size": 1368
       },
       "family10h_carrier_tomography_target.py": {
-        "sha256": "e62f479fcea31366b9d56ec39450d3f7d4a7c0b1136b8e4b46cbda28d4e6c30e",
-        "size": 61151
+        "sha256": "71fe7498c14440302be473e35e19fc49370b2a352ad0ab64195fa21c3ea6b2e1",
+        "size": 83666
       },
       "run_family10h_carrier_tomography_v1.py": {
-        "sha256": "ead91dbd08e2bb7da7c7abb6dbe869397d46a5a1056753c2798e8c2824e33006",
-        "size": 76447
+        "sha256": "7dc3c4ecfbd793bfd980a00ccaa4c02881474c65c76dbd65203d579409cfc269",
+        "size": 108881
       }
     },
-    "source_hashes_sha256": "b0144cdc36928be678fd80822c4c03af89189fdaec34d5082dd419205de4170a"
+    "source_hashes_sha256": "5b14964309106a5dc685019290e67d9226dbf48f87740ef29d047e23f275aff9"
   },
   "starting_head_required": "836d53a81225fb37406528f1c25e87e208aa9495",
   "target_self_test": {
     "passed": true,
-    "sha256": "6b857401c1b0bc192fc1a958f107e0d4361f2a2f6002a9c28e27971588304cdd"
+    "sha256": "bdb87aa4a6f7219db202270a94a10162a1f889fd5e11d214dcec7cef9780a34e"
   },
   "temperature_sensor_authority": {
     "approved_hwmon_names": [
@@ -347,6 +386,12 @@
     "authority_receipt_passed": false,
     "authority_receipt_path": null,
     "authority_receipt_present": false,
+    "contact_counters": {
+      "live_invocation_count": 0,
+      "pmu_acquisition_count": 0,
+      "sensor_inventory_count": 0,
+      "target_contact_count": 0
+    },
     "controller_challenge": null,
     "controller_challenge_sha256": null,
     "controller_nonce_env": "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_AUTHORITY_NONCE",
@@ -368,15 +413,18 @@
     ],
     "resolved_identity_bound_in_evidence": true,
     "self_authored_discovery_without_controller_challenge_cannot_freeze": true,
+    "source_authority_commit": null,
     "synthetic_or_provenance_free_identity_cannot_freeze": true
   },
   "transaction_run_id": "family10h_carrier_tomography_v1_0",
   "transport_simulation": {
     "passed": true,
-    "sha256": "df4bf2baca163b28fb8310ae6170fec0a1d3602b181f1abe67518be8884ceab0"
+    "sha256": "4a11bfdd155123abc9631f9aadec4ff5017392681dd9c195cc8afa094eae6938"
   },
   "zero_live_contact_attestation": {
     "live_invocation_count": 0,
+    "pmu_acquisition_count": 0,
+    "sensor_inventory_count": 0,
     "target_contact_count": 0
   }
 }
