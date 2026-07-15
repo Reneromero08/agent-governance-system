@@ -1,6 +1,7 @@
 {
   "passed": true,
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_DEATH_CUSTODY_SELF_TEST_V1",
+  "source_death_custody_self_test_sha256": "2cd7d134a53d17aadc9d7db415f496a21ca1f2930d9bffddb11fa13059bd93fd",
   "source_death_custody_tests": {
     "open_source_ipc_after_waitpid_rejected": true,
     "post_observation_query_window_selection_rejected": true,

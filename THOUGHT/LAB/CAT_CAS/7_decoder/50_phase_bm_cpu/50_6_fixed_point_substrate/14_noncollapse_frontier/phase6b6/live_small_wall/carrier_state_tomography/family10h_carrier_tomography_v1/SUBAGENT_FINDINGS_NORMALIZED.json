@@ -1,84 +1,125 @@
 {
-  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SUBAGENT_FINDINGS_NORMALIZED_V1",
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SUBAGENT_FINDINGS_NORMALIZED_V2",
   "package_decision": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
-  "material_blockers": [
-    "PHYS-REVIEW-01",
-    "OPER-REVIEW-01",
-    "OPER-REVIEW-02",
-    "OPER-REVIEW-03",
-    "OPER-REVIEW-04"
-  ],
+  "material_blockers": [],
+  "reviewer_verdicts": {
+    "physical_carrier_state_auditor": {
+      "agent_id": "019f6493-f1e2-70d2-8bba-49fd83cc59a3",
+      "exact_report": "final physical carrier-state review for regenerated hash set",
+      "final_response": true,
+      "originating_agent": "physical carrier-state auditor",
+      "role": "physical_carrier_state_auditor",
+      "verdict": "NO_MATERIAL_BLOCKER"
+    },
+    "experimental_design_operator_auditor": {
+      "agent_id": "019f6494-2f04-75e0-abd7-407cca5f541b",
+      "exact_report": "final experimental-design/operator review for regenerated hash set",
+      "final_response": true,
+      "originating_agent": "experimental-design/operator auditor",
+      "role": "experimental_design_operator_auditor",
+      "verdict": "NO_MATERIAL_BLOCKER"
+    },
+    "custody_evidence_auditor": {
+      "agent_id": "019f6494-7489-7fe3-88cb-7ab61828b951",
+      "exact_report": "final custody/evidence review for regenerated hash set",
+      "final_response": true,
+      "originating_agent": "custody/evidence auditor",
+      "role": "custody_evidence_auditor",
+      "verdict": "NO_MATERIAL_BLOCKER"
+    },
+    "claim_boundary_adjudicator": {
+      "agent_id": "019f64a2-aee1-78a2-9af4-58c8b57611c8",
+      "exact_report": "final claim-boundary reassessment after main generated-log attribution",
+      "final_response": true,
+      "originating_agent": "claim-boundary adjudicator",
+      "role": "claim_boundary_adjudicator",
+      "verdict": "NO_MATERIAL_BLOCKER"
+    }
+  },
   "findings": {
     "PHYS-REVIEW-01": {
       "originating_agent": "physical carrier-state auditor",
-      "agent_id": "019f62c5-3e70-7c92-bdde-9b54e6f9a6e6",
-      "exact_report": "final latest-state physical re-audit",
-      "cited_source_file_function_line": "family10h_carrier_tomography_target.py:read_temperature_sample:293",
-      "mechanism": "Temperature sampling binds a stable hwmon path but does not require an approved CPU sensor identity.",
-      "consequence": "A non-CPU sensor could satisfy the temperature custody threshold.",
-      "minimal_repair": "Bind a manifest-approved CPU sensor identity by resolved path plus approved hwmon name and label.",
-      "required_regression": "Place a non-CPU hwmon sensor first and confirm rejection.",
-      "parent_disposition": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+      "agent_id": "019f6493-f1e2-70d2-8bba-49fd83cc59a3",
+      "exact_report": "final physical carrier-state review for regenerated hash set",
+      "cited_source_file_function_line": "family10h_carrier_tomography_target.py:validate_temperature_sensor_authority_payload:320-407; PinnedTemperatureSensor:806-891",
+      "mechanism": "Temperature custody is now restricted to an approved CPU sensor identity with hwmon name, label, resolved paths, digest, descriptor pinning, and identity-stability checks. Self-authored discovery receipts require an external controller challenge and nonce binding.",
+      "consequence": "Non-CPU sensors, path substitutions, identity drift, synthetic identities, and recomputed forged discovery receipts cannot authorize frozen status.",
+      "minimal_repair": "Implemented approved k10temp/Tctl-or-Tdie identity binding plus controller-challenge-bound temperature authority validation.",
+      "required_regression": "Target and controller regressions reject non-CPU-first sensors, wrong hwmon/label, substitutions, drift, unreadable sensors, synthetic authority, and well-formed self-authored discovery without the expected challenge.",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
       "independently_reproduced": true
     },
     "OPER-REVIEW-01": {
       "originating_agent": "experimental-design/operator auditor",
-      "agent_id": "019f62c5-63d2-7e70-8831-ffc8b97226c6",
-      "exact_report": "final latest-state operator re-audit",
-      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:evidence_samples:1345-1392",
-      "mechanism": "Active query observations are collapsed into one A-minus-B contrast sample labeled query_A.",
-      "consequence": "Per-query and query-order operator effects are not identified by the gated analysis.",
-      "minimal_repair": "Represent query effects and query-order interactions explicitly without collapsing all active queries into one label.",
-      "required_regression": "A query-order-only effect must be detected by the operator analysis.",
-      "parent_disposition": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+      "agent_id": "019f6494-2f04-75e0-abd7-407cca5f541b",
+      "exact_report": "final experimental-design/operator review for regenerated hash set",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:evidence_samples:1713-1781; model_features:1217-1267",
+      "mechanism": "The operator path now preserves query_A, query_B, query_A_then_B, and query_B_then_A as raw modeled observations. Matched contrasts remain derived quantities for lifetime/sign laws only. Query order is reported as order-encoded query identity rather than an unsupported independent main effect.",
+      "consequence": "Per-query responses remain visible to modeling/classification, and identical pairwise contrasts with different raw responses remain distinguishable.",
+      "minimal_repair": "Use raw change_to_dirty as operator y, store matched_contrast_y separately, remove duplicate query_order basis, and expose on-support identifiability.",
+      "required_regression": "Equal-pairwise-contrast different-raw-response fixture remains distinct; query/order/source-order structure gates pass.",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
       "independently_reproduced": true
     },
     "OPER-REVIEW-02": {
       "originating_agent": "experimental-design/operator auditor",
-      "agent_id": "019f62c5-63d2-7e70-8831-ffc8b97226c6",
-      "exact_report": "final latest-state operator re-audit",
-      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:fit_operator_ladder:1318-1320",
-      "mechanism": "Mapping and delay holdouts retain those factor levels in training via replicate 0.",
-      "consequence": "The gate proves restricted replicate prediction, not strict held-out mapping or delay prediction.",
-      "minimal_repair": "Use strict factor-held-out gates or rename and contractually narrow the gate.",
-      "required_regression": "Mapping-scrambled and delay-scrambled packets that retain pooled contrasts must remain candidate.",
-      "parent_disposition": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+      "agent_id": "019f6494-2f04-75e0-abd7-407cca5f541b",
+      "exact_report": "final experimental-design/operator review for regenerated hash set",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:heldout_bundle:1318-1352",
+      "mechanism": "Strict held-out replicate, mapping, and delay tests remove the tested factor level from training.",
+      "consequence": "Held-out prediction is no longer rescued by seeing the same mapping or delay level in training.",
+      "minimal_repair": "Train/test predicates now isolate replicate 1, map1, and 10ms as absent held-out levels.",
+      "required_regression": "Mapping-scrambled, delay-scrambled, and in-sample-rescue fixtures remain candidate/fail the strict holdout gate.",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
       "independently_reproduced": true
     },
     "OPER-REVIEW-03": {
       "originating_agent": "experimental-design/operator auditor",
-      "agent_id": "019f62c5-63d2-7e70-8831-ffc8b97226c6",
-      "exact_report": "final latest-state operator re-audit",
-      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:operational_distinguishability:1307",
-      "mechanism": "Cross-validated classification is asserted as true in the summary.",
-      "consequence": "A classification failure would not currently gate the observed result class.",
-      "minimal_repair": "Compute and gate classification success from the confusion matrix.",
-      "required_regression": "A deliberately confused codeword packet must fail the classification gate.",
-      "parent_disposition": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+      "agent_id": "019f6494-2f04-75e0-abd7-407cca5f541b",
+      "exact_report": "final experimental-design/operator review for regenerated hash set",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:codeword_classifier:1427-1483; operator_prediction_gate:2064-2083",
+      "mechanism": "Cross-validated classification is computed using a nearest-centroid-by-q classifier, held-out replicate split, 7x7 confusion matrix, balanced accuracy, and a fixed 0.95 threshold.",
+      "consequence": "Observed status is downgraded unless held-out classification actually passes.",
+      "minimal_repair": "Replace asserted classification boolean with computed classifier output and hard gate.",
+      "required_regression": "Perfectly separated codewords pass; deliberately confused, class-imbalanced, and training-memorized held-out-failure fixtures fail.",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
       "independently_reproduced": true
     },
     "OPER-REVIEW-04": {
       "originating_agent": "experimental-design/operator auditor",
-      "agent_id": "019f62c5-63d2-7e70-8831-ffc8b97226c6",
-      "exact_report": "final latest-state operator re-audit",
-      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:lifetime_summary:1426-1454",
-      "mechanism": "Lifetime reporting remains incomplete relative to the contract vocabulary and variation decomposition.",
-      "consequence": "State-lifetime claims are not ready for authorization.",
-      "minimal_repair": "Emit contract-vocabulary lifetime classes with explicit session and mapping variation gates.",
-      "required_regression": "Interleaved or variation-confounded lifetime packets must be rejected or downgraded.",
-      "parent_disposition": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+      "agent_id": "019f6494-2f04-75e0-abd7-407cca5f541b",
+      "exact_report": "final experimental-design/operator review for regenerated hash set",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:lifetime_summary:1874-2012",
+      "mechanism": "Lifetime analysis emits the full five-class vocabulary and session, mapping, query, confidence, and polarity variation gates.",
+      "consequence": "Variation-confounded or form-changing packets downgrade instead of supporting observed status.",
+      "minimal_repair": "Add full lifetime vocabulary, mean persistence curve, variation summaries, confidence intervals, and hard downgrade gates.",
+      "required_regression": "Stable persistence, bounded decay, immediate-only, no-response, nonmonotonic form change, session/mapping/query confounds, equal-marginal crossover, sign reversal, and opposite-sign replicate fixtures pass/downgrade as expected.",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
       "independently_reproduced": true
     }
   },
   "non_material_clearances": {
     "claim_boundary": {
+      "agent_id": "019f64a2-aee1-78a2-9af4-58c8b57611c8",
       "originating_agent": "claim-boundary adjudicator",
-      "agent_id": "019f62c5-9ad3-7b40-ac8a-2e993c9161b2",
+      "verdict": "NO_MATERIAL_BLOCKER"
+    },
+    "custody_evidence": {
+      "agent_id": "019f6494-7489-7fe3-88cb-7ab61828b951",
+      "originating_agent": "custody/evidence auditor",
       "verdict": "NO_MATERIAL_BLOCKER"
     }
   },
   "zero_contact_attestation": {
     "target_contact_count": 0,
     "live_invocation_count": 0
+  },
+  "remaining_blockers": [
+    "actual provenance-bound temperature sensor authority receipt absent"
+  ],
+  "main_worktree_attribution": {
+    "path": "NAVIGATION/CORTEX/_generated/search_log.jsonl",
+    "disposition": "preserved and excluded from repair branch",
+    "reason": "generated Cortex startup/search log entries in the separate main worktree"
   }
 }

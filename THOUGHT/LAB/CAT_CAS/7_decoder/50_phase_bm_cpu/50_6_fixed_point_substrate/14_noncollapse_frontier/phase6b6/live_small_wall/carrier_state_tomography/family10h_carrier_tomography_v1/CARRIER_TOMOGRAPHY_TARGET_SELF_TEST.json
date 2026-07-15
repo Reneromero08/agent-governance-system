@@ -56,9 +56,27 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
+  "manifest_live_gate_fixture": {
+    "checks": {
+      "boolean_only_frozen_manifest_rejected": true,
+      "explicit_live_authority_still_required": true,
+      "frozen_manifest_bad_identity_rejected": true,
+      "frozen_manifest_missing_identity_rejected": true,
+      "frozen_manifest_with_identity_can_reach_separate_authority_gate": true,
+      "hash_valid_blocked_manifest_rejected_before_hardware": true,
+      "schema_complete_forged_discovery_rejected": true,
+      "synthetic_identity_with_asserted_provenance_rejected": true,
+      "well_formed_challenge_bound_fixture_passes_target_validator": true,
+      "well_formed_self_authored_discovery_without_expected_challenge_rejected": true,
+      "well_formed_self_authored_discovery_wrong_expected_challenge_rejected": true
+    },
+    "passed": true
+  },
   "offline_only": true,
   "policy_and_platform_fixture": {
     "checks": {
+      "approved_temperature_hwmon_name_required": true,
+      "approved_temperature_sensor_label_required": true,
       "policy_drift_rejected": true,
       "policy_unreadable_rejected": true,
       "process_scan_failure_rejected": true,
@@ -66,10 +84,41 @@
       "strict_readable_policy_fields_required": true,
       "strict_temperature_required": true,
       "temperature_failure_rejected": true,
+      "temperature_identity_drift_rejected": true,
+      "temperature_path_substitution_rejected": true,
+      "temperature_same_class_path_substitution_rejected": true,
+      "temperature_swap_restore_reads_pinned_descriptor": true,
       "wrong_receiver_core_rejected": true,
       "wrong_source_core_rejected": true
     },
-    "passed": true
+    "passed": true,
+    "temperature_sensor_identity": {
+      "approved_hwmon_names": [
+        "k10temp"
+      ],
+      "approved_sensor_labels": [
+        "Tctl",
+        "Tdie"
+      ],
+      "identity_drift_rejected": true,
+      "identity_fields": [
+        "hwmon_name",
+        "sensor_label",
+        "sensor_input",
+        "class_path",
+        "resolved_input_path",
+        "resolved_hwmon_path",
+        "resolved_device_path"
+      ],
+      "non_cpu_sensor_first_skipped": true,
+      "passed": true,
+      "path_substitution_rejected": true,
+      "same_class_path_substitution_rejected": true,
+      "same_class_swap_restore_reads_pinned_descriptor": true,
+      "unreadable_approved_sensor_rejected": true,
+      "wrong_hwmon_name_rejected": true,
+      "wrong_sensor_label_rejected": true
+    }
   },
   "schedule_artifacts": {
     "failures": [],
@@ -96,7 +145,7 @@
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TARGET_SELF_TEST_V1",
   "science_package_id": "family10h_carrier_tomography_v1_0",
   "self_test_passed": true,
-  "self_test_sha256": "3d2443090118a032f3e63d00d0be959c06f8df4f5003fea38c0af055fc2543df",
+  "self_test_sha256": "6b857401c1b0bc192fc1a958f107e0d4361f2a2f6002a9c28e27971588304cdd",
   "source_death_process_custody": {
     "passed": true,
     "rejected": {

@@ -1,14 +1,17 @@
 {
-  "deployment_layout_self_test_sha256": "735b129b3bd1f08268813bb983291f5114b171a8a34f19cf5217e7807940b08a",
+  "deployment_layout_self_test_sha256": "da72417a4e3dab670c30f5092fb31cc3e741c999b4eb5d5c577033d008e58df4",
   "exact_coverage_passed": true,
+  "exact_coverage_self_test_sha256": "af18819efd4b44b367e60b59affcbca0a015651df841b9b23a873458a89af77e",
   "factorial_arm_passed": true,
+  "factorial_arm_self_test_sha256": "e6529963425c421d678899ac8d25fa5e1f0f53e318530c8aa52732e399156b16",
   "feature_boundary_self_test_sha256": "548392a789e3ad2d056f2288a7fef2a337916517c1fd130b924a7297b88d5d18",
   "live_invocation_count": 0,
-  "offline_validate_sha256": "b62a0708437720e8cdf80f5e0cfd7ff8daa71cff0cb1b54c11d46a4a7ca3e493",
+  "offline_validate_sha256": "166d37e0d28ad0dbde65f35d745a32219193d5c8f07cfef287d17ea351d2accd",
   "operator_analysis_passed": true,
+  "operator_analysis_self_test_sha256": "034ac2e163627e6f9c4d315bd13702b08f53901061a8c5ccfb228b8b46d2649e",
   "passed": true,
-  "public_self_test_sha256": "900a45c20ce940aa406fb78b7b1ada8e1c58257132196cfcc72bb38716dd88ce",
-  "runtime_self_test_sha256": "3186ff9c74d51bc0cca153f1bd2d424177610b058237c43bb76961c4930c37d2",
+  "public_self_test_sha256": "a134ecc739400f9771a9855ae381a9a37b8fb332ea7d5befa88ad18791441403",
+  "runtime_self_test_sha256": "abf45b6ead7505bb4aaa006842f6723b683f4039ef0fccdbe972c4760432d69a",
   "schedule_validation": {
     "failures": [],
     "passed": true,
@@ -33,7 +36,9 @@
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_OFFLINE_VALIDATE_V1",
   "source_death_custody_passed": true,
+  "source_death_custody_self_test_sha256": "2cd7d134a53d17aadc9d7db415f496a21ca1f2930d9bffddb11fa13059bd93fd",
+  "source_hashes_sha256": "b0144cdc36928be678fd80822c4c03af89189fdaec34d5082dd419205de4170a",
   "target_contact_count": 0,
-  "target_self_test_sha256": "3d2443090118a032f3e63d00d0be959c06f8df4f5003fea38c0af055fc2543df",
+  "target_self_test_sha256": "6b857401c1b0bc192fc1a958f107e0d4361f2a2f6002a9c28e27971588304cdd",
   "transport_simulation_sha256": "df4bf2baca163b28fb8310ae6170fec0a1d3602b181f1abe67518be8884ceab0"
 }

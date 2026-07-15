@@ -4,10 +4,95 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "b62a0708437720e8cdf80f5e0cfd7ff8daa71cff0cb1b54c11d46a4a7ca3e493",
+  "offline_validate_sha256": "166d37e0d28ad0dbde65f35d745a32219193d5c8f07cfef287d17ea351d2accd",
+  "review_quorum_null_model_baseline": {
+    "null_baseline_failures": [
+      "duplicate reviewer agent ids",
+      "non-clear reviewer roles: custody_evidence_auditor,physical_carrier_state_auditor"
+    ],
+    "null_baseline_rejected": true,
+    "null_model": "deterministic_randomized_reviewer_identity_and_finality",
+    "passed": true,
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_REVIEW_QUORUM_NULL_BASELINE_V1"
+  },
+  "review_quorum_regressions": {
+    "duplicate_role_or_agent_blocked": true,
+    "empty_findings_blocked": true,
+    "exact_four_final_clearances_can_freeze": true,
+    "fifth_blocking_response_blocked": true,
+    "fifth_clear_response_blocked": true,
+    "fifth_malformed_response_blocked": true,
+    "material_blocker_list_blocked": true,
+    "missing_final_response_blocked": true,
+    "missing_findings_blocked": true,
+    "non_final_response_blocked": true,
+    "three_clearances_blocked": true
+  },
+  "runtime_authority_gate": {
+    "checks": {
+      "mismatched_authority_rejected_before_output_creation": true,
+      "missing_authority_rejected_before_output_creation": true
+    },
+    "compile": {
+      "compile_command": [
+        "C:\\Windows\\system32\\wsl.EXE",
+        "bash",
+        "-lc",
+        "gcc -std=c11 -Wall -Wextra -Werror -O2 -o \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime')\" \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime.c')\""
+      ],
+      "compiler": [
+        "C:\\Windows\\system32\\wsl.EXE",
+        "gcc"
+      ],
+      "offline_binary_sha256": "0076789f9cfa4769f9abf9b829b478b42bc7d762f9cfab2104e008fa50084576",
+      "passed": true,
+      "returncode": 0,
+      "runtime_command": [
+        "C:\\Windows\\system32\\wsl.EXE",
+        "bash",
+        "-lc",
+        "\"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime')\" --self-test"
+      ],
+      "stderr": "",
+      "stdout": ""
+    },
+    "live_invocation_count": 0,
+    "passed": true,
+    "runtime_authority_gate_self_test_sha256": "a17e7aa29c5adbba54f46795d8672bc46502bd35efb848a86375663f2565abcc",
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY_GATE_SELF_TEST_V1",
+    "target_contact_count": 0
+  },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "a7d2e522ec93989e97130c0b5e97cac636dee7668385d7d2d137b9dc2d8ba07f",
+  "self_test_sha256": "0dfdeeda9bc220b6e36e44af28a6c13f7a5ae52a4ead790b9c565ff808ea1be7",
+  "source_hash_authority_regression": {
+    "authority_file_byte_identical_after_rejection": true,
+    "failures": [
+      "source file authority mismatch run_family10h_carrier_tomography_v1.py"
+    ],
+    "manifest_uses_read_only_source_authority": true,
+    "mutated_source_rejected": true,
+    "offline_validate_uses_read_only_source_authority": true,
+    "passed": true,
+    "prepare_only_uses_read_only_source_authority": true,
+    "source_hash_authority_present": true,
+    "source_hashes_excluded_from_generated_receipts": true
+  },
   "target_contact_count": 0,
+  "temperature_sensor_authority_regression": {
+    "current_authority_failures": [
+      "temperature sensor authority receipt missing"
+    ],
+    "current_authority_passed": false,
+    "current_authority_present": false,
+    "passed": true,
+    "schema_complete_forged_discovery_rejected": true,
+    "synthetic_identity_with_asserted_provenance_cannot_freeze": true,
+    "synthetic_or_provenance_free_identity_cannot_freeze": true,
+    "well_formed_challenge_bound_fixture_passes_controller_validator": true,
+    "well_formed_self_authored_discovery_without_expected_challenge_rejected": true,
+    "well_formed_self_authored_discovery_wrong_expected_challenge_rejected": true,
+    "wrong_hwmon_authority_rejected": true
+  },
   "transport_simulation_sha256": "df4bf2baca163b28fb8310ae6170fec0a1d3602b181f1abe67518be8884ceab0"
 }

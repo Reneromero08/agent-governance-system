@@ -1,4 +1,5 @@
 {
+  "factorial_arm_self_test_sha256": "e6529963425c421d678899ac8d25fa5e1f0f53e318530c8aa52732e399156b16",
   "factorial_arm_tests": {
     "additive_data_rejected_as_nonadditive": true,
     "additive_factorial_jq": 0.0,

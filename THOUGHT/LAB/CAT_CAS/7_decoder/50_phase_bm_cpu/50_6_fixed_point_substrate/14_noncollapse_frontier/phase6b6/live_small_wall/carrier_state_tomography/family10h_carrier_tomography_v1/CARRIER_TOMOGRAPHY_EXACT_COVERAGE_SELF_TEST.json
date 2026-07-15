@@ -8,6 +8,7 @@
     "execution_order_mismatch_rejected": true,
     "false_feature_freeze_rejected": true,
     "feature_extra_private_key_rejected": true,
+    "feature_temperature_sensor_identity_drift_rejected": true,
     "first_nonnumeric_counter_rejected": true,
     "full_schedule_row_drift_rejected": true,
     "middle_negative_counter_rejected": true,
@@ -22,16 +23,19 @@
     "missing_query_cell_rejected": true,
     "missing_replicate_rejected": true,
     "missing_source_receipt_rejected": true,
+    "missing_temperature_sensor_identity_rejected": true,
     "negative_temperature_rejected": true,
     "raw_extra_private_key_rejected": true,
     "receipt_extra_private_key_rejected": true,
     "swapped_receipts_rejected": true,
     "tail_record_4159_corruption_rejected": true,
+    "temperature_sensor_identity_digest_mismatch_rejected": true,
     "unexpected_id_rejected": true,
     "wait_status_success_mismatch_rejected": true,
     "wrong_schedule_hash_rejected": true,
     "zero_duration_rejected": true
   },
+  "exact_coverage_self_test_sha256": "af18819efd4b44b367e60b59affcbca0a015651df841b9b23a873458a89af77e",
   "passed": true,
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_EXACT_COVERAGE_SELF_TEST_V1"
 }

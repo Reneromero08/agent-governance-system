@@ -46,6 +46,9 @@ typedef struct {
     int source_cpu_after;
 } F10CarrierShared;
 
+#define F10_RUNTIME_AUTH_ENV "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY"
+#define F10_RUNTIME_AUTH_VALUE "family10h_carrier_tomography_v1_0"
+
 static long perf_event_open_call(struct perf_event_attr *attr, pid_t pid, int cpu, int group_fd, unsigned long flags) {
     return syscall(__NR_perf_event_open, attr, pid, cpu, group_fd, flags);
 }
@@ -395,6 +398,11 @@ static int ensure_dir(const char *path) {
     return errno == EEXIST;
 }
 
+static int runtime_authority_ready(void) {
+    const char *value = getenv(F10_RUNTIME_AUTH_ENV);
+    return value != NULL && strcmp(value, F10_RUNTIME_AUTH_VALUE) == 0;
+}
+
 static void prefault_state(F10CarrierState *state) {
     volatile uint8_t sink = 0;
     uint32_t i = 0;
@@ -420,6 +428,9 @@ static int execute_schedule(const char *schedule_path, const char *output_root) 
     int line_index = -1;
     PerfGroup group;
     int have_pmu = 0;
+    if (!runtime_authority_ready()) {
+        return 13;
+    }
     if (!ensure_dir(output_root)) {
         return 3;
     }
@@ -668,6 +679,6 @@ int main(int argc, char **argv) {
     if (argc == 4 && strcmp(argv[1], "--execute-schedule") == 0) {
         return execute_schedule(argv[2], argv[3]);
     }
-    fprintf(stderr, "usage: %s --self-test\n", argv[0]);
+    fprintf(stderr, "usage: %s --self-test | --execute-schedule <schedule.tsv> <output-root>\n", argv[0]);
     return 2;
 }
