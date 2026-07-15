@@ -17,6 +17,7 @@ import subprocess
 import tarfile
 import tempfile
 import time
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -42,6 +43,34 @@ SOURCE_AUTHORITY_FILE_NAMES = SOURCE_FILE_NAMES + [
 
 APPROVED_TEMPERATURE_HWMON_NAMES = ["k10temp"]
 APPROVED_TEMPERATURE_SENSOR_LABELS = ["Tctl", "Tdie"]
+REQUIRED_REVIEW_ROLES = {
+    "physical_carrier_state_auditor": "physical carrier-state auditor",
+    "experimental_design_operator_auditor": "experimental-design/operator auditor",
+    "custody_evidence_auditor": "custody/evidence auditor",
+    "claim_boundary_adjudicator": "claim-boundary adjudicator",
+}
+SOURCE_AUDIT_REQUIRED_REVIEW_ROLES = {
+    "physical_sensor_authority_auditor": "physical sensor-authority auditor",
+    "discovery_transport_custody_auditor": "discovery transport and custody auditor",
+    "source_bundle_evidence_auditor": "source/bundle and evidence auditor",
+    "claim_boundary_adjudicator": "claim-boundary adjudicator",
+}
+REVIEW_ROLE_ALIASES = {
+    "physical_carrier_state_auditor": "physical_carrier_state_auditor",
+    "experimental_design_operator_auditor": "experimental_design_operator_auditor",
+    "implementation_custody_evidence_auditor": "custody_evidence_auditor",
+    "custody_evidence_auditor": "custody_evidence_auditor",
+    "claim_boundary_adjudicator": "claim_boundary_adjudicator",
+}
+SOURCE_AUDIT_ROLE_ALIASES = {
+    "physical_sensor_authority_auditor": "physical_sensor_authority_auditor",
+    "physical_sensor_authority": "physical_sensor_authority_auditor",
+    "discovery_transport_and_custody_auditor": "discovery_transport_custody_auditor",
+    "discovery_transport_custody_auditor": "discovery_transport_custody_auditor",
+    "source_bundle_and_evidence_auditor": "source_bundle_evidence_auditor",
+    "source_bundle_evidence_auditor": "source_bundle_evidence_auditor",
+    "claim_boundary_adjudicator": "claim_boundary_adjudicator",
+}
 TEMPERATURE_IDENTITY_FIELDS = [
     "hwmon_name",
     "sensor_label",
@@ -91,6 +120,7 @@ REQUIRED_TEMPERATURE_AUTHORITY_CHALLENGE_KEYS = {
     "schedule_tsv_sha256",
     "authorized_commit",
     "controller_nonce_sha256",
+    "transport_scope",
 }
 
 
@@ -188,6 +218,143 @@ def portable_basename(value: Any) -> str:
     return str(value).replace("\\", "/").rsplit("/", 1)[-1]
 
 
+def normalized_role(value: str) -> str:
+    return value.lower().replace("/", "_").replace("-", "_").replace(" ", "_")
+
+
+def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = False) -> dict[str, Any]:
+    required_roles = SOURCE_AUDIT_REQUIRED_REVIEW_ROLES if source_audit else REQUIRED_REVIEW_ROLES
+    aliases = SOURCE_AUDIT_ROLE_ALIASES if source_audit else REVIEW_ROLE_ALIASES
+    failures: list[str] = []
+    material_blockers = findings.get("material_blockers")
+    if not isinstance(material_blockers, list):
+        failures.append("material blockers list missing or malformed")
+        material_blockers = []
+    elif material_blockers:
+        failures.append("material blockers present")
+    verdicts = findings.get("reviewer_verdicts")
+    if not isinstance(verdicts, dict):
+        failures.append("reviewer verdicts missing or malformed")
+        verdicts = {}
+    if len(verdicts) != len(required_roles):
+        failures.append("reviewer verdict count must be exactly four")
+    by_role: dict[str, dict[str, Any]] = {}
+    for role_key, item in verdicts.items():
+        if not isinstance(item, dict):
+            failures.append(f"malformed reviewer response {role_key}")
+            continue
+        role_name = str(item.get("role") or item.get("originating_agent") or role_key)
+        role = aliases.get(normalized_role(role_name), "")
+        if role not in required_roles:
+            failures.append(f"unknown reviewer role {role_name}")
+            continue
+        if role in by_role:
+            failures.append(f"duplicate reviewer role {role}")
+            continue
+        agent_id = item.get("agent_id")
+        passed = isinstance(agent_id, str) and bool(agent_id) and item.get("verdict") == "NO_MATERIAL_BLOCKER" and item.get("final_response") is True
+        by_role[role] = {
+            "role": required_roles[role],
+            "agent_id": agent_id,
+            "verdict": item.get("verdict"),
+            "final_response": item.get("final_response"),
+            "audited_commit": item.get("audited_commit"),
+            "source_hashes_sha256": item.get("source_hashes_sha256"),
+            "source_bundle_sha256": item.get("source_bundle_sha256"),
+            "boundary_attestation": item.get("boundary_attestation"),
+            "passed": passed,
+        }
+    missing = sorted(set(required_roles) - set(by_role))
+    if missing:
+        failures.append("missing reviewer roles: " + ",".join(missing))
+    duplicates = [
+        agent_id
+        for agent_id, count in Counter(item["agent_id"] for item in by_role.values() if item.get("agent_id")).items()
+        if count > 1
+    ]
+    if duplicates:
+        failures.append("duplicate reviewer agent ids")
+    failed = [role for role, item in by_role.items() if not item["passed"]]
+    if failed:
+        failures.append("non-clear reviewer roles: " + ",".join(sorted(failed)))
+    return {"passed": not failures, "failures": failures, "roles": by_role, "material_blockers": material_blockers}
+
+
+def review_agent_ids(quorum: dict[str, Any]) -> set[str]:
+    return {
+        str(item.get("agent_id"))
+        for item in (quorum.get("roles") or {}).values()
+        if isinstance(item, dict) and item.get("agent_id")
+    }
+
+
+def receipt_digest_matches(receipt: dict[str, Any], field: str) -> bool:
+    return bool(receipt.get(field)) and receipt.get(field) == public.digest({k: v for k, v in receipt.items() if k != field})
+
+
+def validate_target_offline_receipts(source_root: Path, manifest: dict[str, Any], failures: list[str]) -> None:
+    specs = {
+        "public_self": ("CARRIER_TOMOGRAPHY_SELF_TEST.json", "self_test_sha256", "self_test_passed"),
+        "target_self": ("CARRIER_TOMOGRAPHY_TARGET_SELF_TEST.json", "self_test_sha256", "self_test_passed"),
+        "runtime": ("CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST.json", "runtime_self_test_sha256", "passed"),
+        "transport": ("CARRIER_TOMOGRAPHY_TRANSPORT_SIMULATION.json", "transport_simulation_sha256", "passed"),
+        "deployment": ("CARRIER_TOMOGRAPHY_DEPLOYMENT_LAYOUT_SELF_TEST.json", "deployment_layout_self_test_sha256", "passed"),
+        "controller": ("CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST.json", "self_test_sha256", "self_test_passed"),
+        "offline": ("CARRIER_TOMOGRAPHY_OFFLINE_VALIDATE.json", "offline_validate_sha256", "passed"),
+        "feature_boundary": ("CARRIER_TOMOGRAPHY_FEATURE_BOUNDARY_SELF_TEST.json", "feature_boundary_self_test_sha256", "passed"),
+        "operator_analysis": ("CARRIER_TOMOGRAPHY_OPERATOR_ANALYSIS_SELF_TEST.json", "operator_analysis_self_test_sha256", "passed"),
+        "factorial_arm": ("CARRIER_TOMOGRAPHY_FACTORIAL_ARM_SELF_TEST.json", "factorial_arm_self_test_sha256", "passed"),
+        "source_death": ("CARRIER_TOMOGRAPHY_SOURCE_DEATH_CUSTODY_SELF_TEST.json", "source_death_custody_self_test_sha256", "passed"),
+        "exact_coverage": ("CARRIER_TOMOGRAPHY_EXACT_COVERAGE_SELF_TEST.json", "exact_coverage_self_test_sha256", "passed"),
+    }
+    receipts: dict[str, dict[str, Any]] = {}
+    for name, (filename, digest_field, pass_field) in specs.items():
+        path = source_root / filename
+        if not path.exists():
+            failures.append(f"{name} receipt missing")
+            continue
+        try:
+            receipt = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            failures.append(f"{name} receipt JSON invalid: {exc}")
+            continue
+        receipts[name] = receipt
+        if receipt.get(pass_field) is not True:
+            failures.append(f"{name} receipt not passed")
+        if not receipt_digest_matches(receipt, digest_field):
+            failures.append(f"{name} receipt digest mismatch")
+    source_hash_path = source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json"
+    source_hashes = json.loads(source_hash_path.read_text(encoding="utf-8")) if source_hash_path.exists() else {}
+    offline = receipts.get("offline", {})
+    expected_links = {
+        "public_self_test_sha256": receipts.get("public_self", {}).get("self_test_sha256"),
+        "target_self_test_sha256": receipts.get("target_self", {}).get("self_test_sha256"),
+        "runtime_self_test_sha256": receipts.get("runtime", {}).get("runtime_self_test_sha256"),
+        "transport_simulation_sha256": receipts.get("transport", {}).get("transport_simulation_sha256"),
+        "deployment_layout_self_test_sha256": receipts.get("deployment", {}).get("deployment_layout_self_test_sha256"),
+        "feature_boundary_self_test_sha256": receipts.get("feature_boundary", {}).get("feature_boundary_self_test_sha256"),
+        "operator_analysis_self_test_sha256": receipts.get("operator_analysis", {}).get("operator_analysis_self_test_sha256"),
+        "factorial_arm_self_test_sha256": receipts.get("factorial_arm", {}).get("factorial_arm_self_test_sha256"),
+        "source_death_custody_self_test_sha256": receipts.get("source_death", {}).get("source_death_custody_self_test_sha256"),
+        "exact_coverage_self_test_sha256": receipts.get("exact_coverage", {}).get("exact_coverage_self_test_sha256"),
+        "source_hashes_sha256": source_hashes.get("source_hashes_sha256"),
+    }
+    for field, expected in expected_links.items():
+        if offline.get(field) != expected:
+            failures.append(f"offline receipt link mismatch {field}")
+    manifest_links = {
+        ("runtime_self_test", "sha256"): receipts.get("runtime", {}).get("runtime_self_test_sha256"),
+        ("target_self_test", "sha256"): receipts.get("target_self", {}).get("self_test_sha256"),
+        ("controller_self_test", "sha256"): receipts.get("controller", {}).get("self_test_sha256"),
+        ("offline_validate", "sha256"): receipts.get("offline", {}).get("offline_validate_sha256"),
+        ("transport_simulation", "sha256"): receipts.get("transport", {}).get("transport_simulation_sha256"),
+        ("deployment_layout", "sha256"): receipts.get("deployment", {}).get("deployment_layout_self_test_sha256"),
+    }
+    for (section, field), expected in manifest_links.items():
+        if manifest.get(section, {}).get(field) != expected:
+            failures.append(f"manifest receipt link mismatch {section}.{field}")
+
+
 def validate_bound_file(
     source_root: Path,
     path_value: Any,
@@ -212,42 +379,49 @@ def validate_manifest_review_section(
     section: dict[str, Any],
     label: str,
     failures: list[str],
+    *,
+    source_audit: bool = False,
+    expected_source_commit: str | None = None,
+    expected_source_hashes_sha256: str | None = None,
+    expected_source_bundle_sha256: str | None = None,
 ) -> set[str]:
     findings_path = validate_bound_file(source_root, section.get("findings_path"), section.get("findings_sha256"), f"{label} findings", failures)
     validate_bound_file(source_root, section.get("review_report_path"), section.get("review_report_sha256"), f"{label} report", failures)
+    findings: dict[str, Any] = {}
     if findings_path is not None and findings_path.exists():
         try:
             findings = json.loads(findings_path.read_text(encoding="utf-8"))
         except json.JSONDecodeError as exc:
             failures.append(f"{label} findings JSON invalid: {exc}")
             findings = {}
-        if isinstance(findings, dict) and findings.get("material_blockers") != []:
-            failures.append(f"{label} findings contain material blockers")
-    quorum = section.get("review_quorum")
-    if not isinstance(quorum, dict) or quorum.get("passed") is not True:
-        failures.append(f"{label} quorum did not pass")
-        return set()
-    roles = quorum.get("roles")
-    if not isinstance(roles, dict) or len(roles) != 4:
-        failures.append(f"{label} quorum must contain exactly four roles")
-        roles = {}
-    agent_ids: list[str] = []
-    for role_name, role in roles.items():
-        if not isinstance(role, dict):
-            failures.append(f"{label} malformed role {role_name}")
-            continue
-        agent_id = role.get("agent_id")
-        if not isinstance(agent_id, str) or not agent_id:
-            failures.append(f"{label} role {role_name} missing agent id")
-        else:
-            agent_ids.append(agent_id)
-        if role.get("passed") is not True or role.get("verdict") != "NO_MATERIAL_BLOCKER" or role.get("final_response") is not True:
-            failures.append(f"{label} role {role_name} did not clear")
-    if len(agent_ids) != len(set(agent_ids)):
-        failures.append(f"{label} duplicate reviewer agent ids")
+    quorum = recompute_review_quorum(findings, source_audit=source_audit)
+    if not quorum["passed"]:
+        failures.append(f"{label} quorum failed from findings: " + ",".join(quorum["failures"]))
+    if source_audit:
+        if findings.get("source_authority_commit") != expected_source_commit:
+            failures.append(f"{label} source-authority commit mismatch")
+        if findings.get("source_hashes_sha256") != expected_source_hashes_sha256:
+            failures.append(f"{label} source-hashes mismatch")
+        if findings.get("source_bundle_sha256") != expected_source_bundle_sha256:
+            failures.append(f"{label} source-bundle mismatch")
+        if findings.get("review_report_present") is not True:
+            failures.append(f"{label} report presence not asserted")
+        for role_name, role in (quorum.get("roles") or {}).items():
+            if role.get("audited_commit") != expected_source_commit:
+                failures.append(f"{label} role {role_name} audited commit mismatch")
+            if role.get("source_hashes_sha256") != expected_source_hashes_sha256:
+                failures.append(f"{label} role {role_name} source-hashes mismatch")
+            if role.get("source_bundle_sha256") != expected_source_bundle_sha256:
+                failures.append(f"{label} role {role_name} source-bundle mismatch")
+            boundary = role.get("boundary_attestation")
+            if not isinstance(boundary, dict) or boundary.get("no_git_write") is not True or boundary.get("no_target_contact") is not True:
+                failures.append(f"{label} role {role_name} boundary attestation missing")
     if section.get("material_blocker_count") not in (0, None):
         failures.append(f"{label} manifest material blocker count is nonzero")
-    return set(agent_ids)
+    manifest_quorum = section.get("review_quorum")
+    if isinstance(manifest_quorum, dict) and manifest_quorum != quorum:
+        failures.append(f"{label} manifest quorum summary differs from findings replay")
+    return review_agent_ids(quorum)
 
 
 def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
@@ -304,6 +478,10 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
             manifest.get("source_authority_review", {}) if isinstance(manifest.get("source_authority_review"), dict) else {},
             "source authority review",
             failures,
+            source_audit=True,
+            expected_source_commit=manifest.get("source_authority_review", {}).get("source_authority_commit"),
+            expected_source_hashes_sha256=manifest.get("source_hashes", {}).get("source_hashes_sha256"),
+            expected_source_bundle_sha256=manifest.get("source_bundle", {}).get("sha256"),
         )
         if independent_agent_ids & source_agent_ids:
             failures.append("source authority review reused independent reviewer agent ids")
@@ -319,6 +497,7 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
             failures.append("source authority review source-bundle binding mismatch")
         if manifest.get("offline_validate", {}).get("passed") is not True:
             failures.append("frozen package lacks passing offline validation")
+        validate_target_offline_receipts(source_root, manifest, failures)
         counters = manifest.get("contact_counter_attestation", {})
         if counters != {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}:
             failures.append("frozen package contact counters are not exactly 1/1/0/0")
@@ -327,10 +506,17 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
             failures.append("frozen package lacks passing final exact-object verification")
         final_path_value = final_section.get("path")
         final_file_sha = final_section.get("file_sha256")
+        final_evidence_path_value = final_section.get("final_evidence_commit_path")
+        final_evidence_file_sha = final_section.get("final_evidence_commit_file_sha256")
         if not isinstance(final_path_value, str) or not final_file_sha:
             failures.append("frozen package lacks final exact-object receipt binding")
-        else:
+        if not isinstance(final_evidence_path_value, str) or not final_evidence_file_sha:
+            failures.append("frozen package lacks final evidence commit binding")
+        if isinstance(final_path_value, str) and final_file_sha and isinstance(final_evidence_path_value, str) and final_evidence_file_sha:
             final_path = source_root / portable_basename(final_path_value)
+            final_evidence_path = source_root / portable_basename(final_evidence_path_value)
+            final_receipt: dict[str, Any] = {}
+            final_evidence_receipt: dict[str, Any] = {}
             if not final_path.exists():
                 failures.append("final exact-object verification receipt missing")
             elif public.sha256_file(final_path) != final_file_sha:
@@ -340,7 +526,21 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
                     final_receipt = json.loads(final_path.read_text(encoding="utf-8"))
                 except json.JSONDecodeError as exc:
                     failures.append(f"final exact-object verification JSON invalid: {exc}")
+            if not final_evidence_path.exists():
+                failures.append("final evidence commit authority missing")
+            elif public.sha256_file(final_evidence_path) != final_evidence_file_sha:
+                failures.append("final evidence commit authority file hash mismatch")
+            else:
+                try:
+                    final_evidence_receipt = json.loads(final_evidence_path.read_text(encoding="utf-8"))
+                except json.JSONDecodeError as exc:
+                    failures.append(f"final evidence commit authority JSON invalid: {exc}")
                 else:
+                    if final_evidence_receipt.get("schema") != "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT_V1":
+                        failures.append("final evidence commit authority schema mismatch")
+                    if final_evidence_receipt.get("final_evidence_commit_sha256") != public.digest({k: v for k, v in final_evidence_receipt.items() if k != "final_evidence_commit_sha256"}):
+                        failures.append("final evidence commit authority digest mismatch")
+            if final_receipt:
                     digest = final_receipt.get("final_exact_object_verification_sha256")
                     if final_receipt.get("schema") != "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EXACT_OBJECT_VERIFICATION_V1":
                         failures.append("final exact-object verification schema mismatch")
@@ -350,19 +550,29 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
                         failures.append("final exact-object verification did not pass")
                     if final_receipt.get("source_authority_commit") != source_review.get("source_authority_commit"):
                         failures.append("final exact-object source commit mismatch")
-                    if final_receipt.get("manifest_file_sha256") != public.sha256_file(manifest_path):
-                        failures.append("final exact-object manifest file hash is stale")
-                    if final_receipt.get("manifest_canonical_sha256") != sidecar.get("manifest_canonical_sha256"):
-                        failures.append("final exact-object manifest canonical hash is stale")
+                    if final_receipt.get("evidence_commit") != final_evidence_receipt.get("evidence_commit"):
+                        failures.append("final exact-object evidence commit mismatch")
+                    if final_receipt.get("manifest_file_sha256") != final_evidence_receipt.get("evidence_manifest_file_sha256"):
+                        failures.append("final exact-object evidence manifest file mismatch")
+                    if final_receipt.get("manifest_canonical_sha256") != final_evidence_receipt.get("evidence_manifest_canonical_sha256"):
+                        failures.append("final exact-object evidence manifest canonical mismatch")
+                    if final_receipt.get("final_evidence_commit_sha256") != final_evidence_receipt.get("final_evidence_commit_sha256"):
+                        failures.append("final exact-object final evidence authority mismatch")
+                    if final_section.get("evidence_manifest_file_sha256") != final_evidence_receipt.get("evidence_manifest_file_sha256"):
+                        failures.append("final section evidence manifest file mismatch")
+                    if final_section.get("evidence_manifest_canonical_sha256") != final_evidence_receipt.get("evidence_manifest_canonical_sha256"):
+                        failures.append("final section evidence manifest canonical mismatch")
+                    if final_section.get("evidence_manifest_sidecar_sha256") != final_evidence_receipt.get("evidence_manifest_sidecar_sha256"):
+                        failures.append("final section evidence manifest sidecar mismatch")
                     evidence_records = final_receipt.get("evidence_blob_records")
                     if not isinstance(evidence_records, dict):
                         failures.append("final exact-object evidence blob records missing")
                     else:
                         manifest_record = evidence_records.get("manifest", {})
                         sidecar_record = evidence_records.get("manifest sidecar", {})
-                        if not isinstance(manifest_record, dict) or manifest_record.get("sha256") != public.sha256_file(manifest_path):
+                        if not isinstance(manifest_record, dict) or manifest_record.get("sha256") != final_evidence_receipt.get("evidence_manifest_file_sha256"):
                             failures.append("final exact-object evidence manifest blob mismatch")
-                        if not isinstance(sidecar_record, dict) or sidecar_record.get("sha256") != public.sha256_file(sidecar_path):
+                        if not isinstance(sidecar_record, dict) or sidecar_record.get("sha256") != final_evidence_receipt.get("evidence_manifest_sidecar_sha256"):
                             failures.append("final exact-object evidence sidecar blob mismatch")
                         for label in [
                             "source audit findings",
@@ -372,6 +582,7 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
                             "discovery transport receipt",
                             "discovery challenge receipt",
                             "discovery attempt receipt",
+                            "discovery attempt journal",
                             "manifest",
                             "manifest sidecar",
                         ]:
@@ -512,6 +723,13 @@ def validate_temperature_authority_challenge(
                 failures.append(f"temperature authority controller challenge {field} invalid")
         if re.fullmatch(r"[0-9a-f]{40}", str(challenge.get("authorized_commit", ""))) is None:
             failures.append("temperature authority controller challenge authorized commit invalid")
+        scope = challenge.get("transport_scope")
+        if not isinstance(scope, dict):
+            failures.append("temperature authority controller challenge transport scope missing")
+        else:
+            for field in ["target_host", "remote_base_root", "remote_root", "remote_source_root", "remote_receipt_path"]:
+                if not isinstance(scope.get(field), str) or not scope.get(field):
+                    failures.append(f"temperature authority controller challenge transport scope {field} missing")
     if expected_challenge is None:
         failures.append("temperature authority expected controller challenge missing")
     elif challenge != expected_challenge:
@@ -528,6 +746,12 @@ def validate_temperature_authority_challenge(
             failures.append("temperature discovery controller challenge echo mismatch")
         if provenance.get("authorized_commit") != challenge.get("authorized_commit"):
             failures.append("temperature discovery authorized commit echo mismatch")
+    scope = challenge.get("transport_scope") if isinstance(challenge, dict) else None
+    if isinstance(scope, dict):
+        if discovery.get("source_root") != scope.get("remote_source_root"):
+            failures.append("temperature discovery source root does not match transport scope")
+        if discovery.get("receipt_path") != scope.get("remote_receipt_path"):
+            failures.append("temperature discovery receipt path does not match transport scope")
     return failures
 
 
@@ -712,6 +936,23 @@ def validate_temperature_sensor_authority_payload(
             failures.append("temperature discovery cleanup and absence verification required")
         if expected_challenge is not None and expected_transport_receipt.get("source_authority_commit") != expected_challenge.get("authorized_commit"):
             failures.append("temperature discovery transport source commit mismatch")
+        scope = expected_challenge.get("transport_scope") if isinstance(expected_challenge, dict) else None
+        if not isinstance(scope, dict):
+            failures.append("temperature discovery transport scope missing from challenge")
+            scope = {}
+        transport_scope = {
+            "target_host": expected_transport_receipt.get("target_host"),
+            "remote_base_root": expected_transport_receipt.get("remote_base_root"),
+            "remote_root": expected_transport_receipt.get("remote_root"),
+            "remote_source_root": expected_transport_receipt.get("remote_source_root"),
+            "remote_receipt_path": expected_transport_receipt.get("remote_receipt_path"),
+        }
+        if transport_scope != scope:
+            failures.append("temperature discovery transport scope mismatch")
+        if discovery.get("source_root") != scope.get("remote_source_root"):
+            failures.append("temperature discovery source root does not match challenged transport scope")
+        if discovery.get("receipt_path") != scope.get("remote_receipt_path"):
+            failures.append("temperature discovery receipt path does not match challenged transport scope")
         if expected_transport_receipt.get("target_discovery_receipt_sha256") != discovery.get("target_discovery_receipt_sha256"):
             failures.append("temperature discovery transport target receipt mismatch")
         if expected_transport_receipt.get("target_discovery_receipt_file_sha256") != serialized_json_sha256(discovery):
@@ -1400,9 +1641,22 @@ def deterministic_source_bundle_sha256(source_root: Path) -> str:
         return public.sha256_file(bundle_path)
 
 
-def expected_discovery_challenge(source_root: Path, authorized_commit: str, controller_nonce_sha256: str) -> dict[str, Any]:
+def expected_discovery_challenge(
+    source_root: Path,
+    authorized_commit: str,
+    controller_nonce_sha256: str,
+    transport_scope: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     source_hashes = json.loads((source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json").read_text(encoding="utf-8"))
     schedule_sidecar = json.loads((source_root / "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256").read_text(encoding="utf-8"))
+    if transport_scope is None:
+        transport_scope = {
+            "target_host": "offline_fixture",
+            "remote_base_root": str(source_root.parent),
+            "remote_root": str(source_root.parent),
+            "remote_source_root": str(source_root),
+            "remote_receipt_path": str(source_root / TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME),
+        }
     return {
         "schema": TEMPERATURE_SENSOR_AUTHORITY_CHALLENGE_SCHEMA,
         "authority": "controller_issued_temperature_sensor_challenge",
@@ -1415,6 +1669,7 @@ def expected_discovery_challenge(source_root: Path, authorized_commit: str, cont
         "schedule_tsv_sha256": schedule_sidecar["tsv_sha256"],
         "authorized_commit": authorized_commit,
         "controller_nonce_sha256": controller_nonce_sha256,
+        "transport_scope": transport_scope,
     }
 
 
@@ -1433,7 +1688,8 @@ def validate_discovery_challenge(source_root: Path, challenge: dict[str, Any], c
     if not isinstance(challenge, dict):
         failures.append("controller challenge missing")
         challenge = {}
-    expected = expected_discovery_challenge(source_root, authorized_commit, nonce_sha) if not failures else {}
+    challenge_scope = challenge.get("transport_scope") if isinstance(challenge.get("transport_scope"), dict) else None
+    expected = expected_discovery_challenge(source_root, authorized_commit, nonce_sha, challenge_scope) if not failures else {}
     if set(challenge) != REQUIRED_TEMPERATURE_AUTHORITY_CHALLENGE_KEYS:
         failures.append("controller challenge field mismatch")
     if challenge != expected:
@@ -1442,6 +1698,14 @@ def validate_discovery_challenge(source_root: Path, challenge: dict[str, Any], c
         failures.append("controller challenge nonce digest mismatch")
     if challenge.get("authorized_commit") != authorized_commit:
         failures.append("controller challenge source commit mismatch")
+    scope = challenge.get("transport_scope")
+    if not isinstance(scope, dict):
+        failures.append("controller challenge transport scope missing")
+    else:
+        if scope.get("remote_source_root") != str(source_root):
+            failures.append("controller challenge source root scope mismatch")
+        if scope.get("remote_receipt_path") != str(source_root / TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME):
+            failures.append("controller challenge receipt path scope mismatch")
     return {
         "passed": not failures,
         "failures": failures,
@@ -1510,6 +1774,7 @@ def discover_temperature_sensor_authority(
         "runtime_launch_count": 0,
         "tomography_output_root_created": False,
         "source_root": str(source_root),
+        "receipt_path": str(receipt_path),
         "hwmon_root": str(hwmon_root),
         "provenance": {
             "authority": "target_sensor_discovery",

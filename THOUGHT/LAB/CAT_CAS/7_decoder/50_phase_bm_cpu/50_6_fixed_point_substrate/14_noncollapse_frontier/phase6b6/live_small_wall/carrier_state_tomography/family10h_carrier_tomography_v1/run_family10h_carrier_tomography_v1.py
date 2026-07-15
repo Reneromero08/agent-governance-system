@@ -34,7 +34,9 @@ TARGET_DISCOVERY_RECEIPT = HERE / "CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.j
 DISCOVERY_TRANSPORT_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT.json"
 DISCOVERY_CHALLENGE_PATH = HERE / "CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE.json"
 DISCOVERY_ATTEMPT_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.json"
+DISCOVERY_ATTEMPT_JOURNAL_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.jsonl"
 FINAL_OBJECT_VERIFY_PATH = HERE / "CARRIER_TOMOGRAPHY_FINAL_OBJECT_VERIFY.json"
+FINAL_EVIDENCE_COMMIT_PATH = HERE / "CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT.json"
 MANIFEST_PATH = HERE / "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json"
 MANIFEST_SHA_PATH = HERE / "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256"
 RUNTIME_SELF_TEST_PATH = HERE / "CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST.json"
@@ -81,8 +83,7 @@ TEMPERATURE_SENSOR_AUTHORITY_CHALLENGE_SCHEMA = target.TEMPERATURE_SENSOR_AUTHOR
 REQUIRED_TEMPERATURE_AUTHORITY_CHALLENGE_KEYS = target.REQUIRED_TEMPERATURE_AUTHORITY_CHALLENGE_KEYS
 TARGET_HOST = "root@192.168.137.100"
 DISCOVERY_REMOTE_ROOT = f"{public.EXPECTED_REMOTE_ROOT}_sensor_authority_discovery"
-DISCOVERY_REMOTE_SOURCE_ROOT = f"{DISCOVERY_REMOTE_ROOT}/source"
-DISCOVERY_REMOTE_RECEIPT = f"{DISCOVERY_REMOTE_SOURCE_ROOT}/{target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME}"
+DISCOVERY_OWNED_ROOT_HEX_LEN = 16
 
 SOURCE_FILE_NAMES = target.SOURCE_FILE_NAMES
 SOURCE_AUTHORITY_FILE_NAMES = target.SOURCE_AUTHORITY_FILE_NAMES
@@ -307,10 +308,27 @@ def write_json(path: Path, value: Any) -> None:
     path.write_bytes((json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8"))
 
 
-def write_json_exclusive(path: Path, value: Any) -> None:
+def durable_write_bytes_exclusive(path: Path, data: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("xb") as handle:
-        handle.write((json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8"))
+        handle.write(data)
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
+def write_json_exclusive(path: Path, value: Any) -> None:
+    durable_write_bytes_exclusive(path, (json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8"))
+
+
+def write_json_atomic(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    data = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    with tempfile.NamedTemporaryFile("wb", delete=False, dir=path.parent, prefix=path.name + ".", suffix=".tmp") as handle:
+        tmp_name = handle.name
+        handle.write(data)
+        handle.flush()
+        os.fsync(handle.fileno())
+    os.replace(tmp_name, path)
 
 
 def read_json(path: Path) -> Any:
@@ -453,6 +471,7 @@ def build_temperature_authority_challenge(
     schedule_sidecar: dict[str, Any],
     authorized_commit: str,
     controller_nonce_sha256: str,
+    transport_scope: dict[str, Any],
 ) -> dict[str, Any]:
     return {
         "schema": TEMPERATURE_SENSOR_AUTHORITY_CHALLENGE_SCHEMA,
@@ -466,6 +485,69 @@ def build_temperature_authority_challenge(
         "schedule_tsv_sha256": schedule_sidecar["tsv_sha256"],
         "authorized_commit": authorized_commit,
         "controller_nonce_sha256": controller_nonce_sha256,
+        "transport_scope": transport_scope,
+    }
+
+
+def discovery_transport_scope(*, target_host: str, remote_root: str, nonce_sha: str) -> dict[str, Any]:
+    require(target_host == TARGET_HOST, "target host override rejected for temperature discovery")
+    require(remote_root == DISCOVERY_REMOTE_ROOT, "remote discovery root override rejected")
+    require(re.fullmatch(r"[0-9a-f]{64}", nonce_sha) is not None, "nonce digest malformed")
+    owned_root = f"{remote_root}/{nonce_sha[:DISCOVERY_OWNED_ROOT_HEX_LEN]}"
+    remote_source = f"{owned_root}/source"
+    return {
+        "target_host": target_host,
+        "remote_base_root": remote_root,
+        "remote_root": owned_root,
+        "remote_source_root": remote_source,
+        "remote_receipt_path": f"{remote_source}/{target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME}",
+    }
+
+
+def fixture_transport_scope(source_root: Path, nonce_sha: str) -> dict[str, Any]:
+    return {
+        "target_host": "offline_fixture",
+        "remote_base_root": str(source_root.parent),
+        "remote_root": str(source_root.parent),
+        "remote_source_root": str(source_root),
+        "remote_receipt_path": str(source_root / target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME),
+    }
+
+
+def read_source_authority_review_for_discovery(
+    *,
+    source_commit: str,
+    source_hashes_sha256: str,
+    source_bundle_sha256: str,
+) -> dict[str, Any]:
+    failures: list[str] = []
+    if not SOURCE_AUDIT_FINDINGS_PATH.exists():
+        failures.append("source authority C1 review findings missing")
+        source_audit: dict[str, Any] = {}
+    else:
+        source_audit = read_json(SOURCE_AUDIT_FINDINGS_PATH)
+    prior = commit_blob_json(source_commit, SUBAGENT_FINDINGS_PATH) if commit_exists(source_commit) else None
+    prior_ids = exact_review_agent_ids(prior if isinstance(prior, dict) else {})
+    quorum = source_audit_quorum(
+        source_audit,
+        expected_source_commit=source_commit,
+        expected_source_hashes_sha256=source_hashes_sha256,
+        expected_source_bundle_sha256=source_bundle_sha256,
+        review_report_present=SOURCE_AUDIT_REVIEW_PATH.exists(),
+        excluded_agent_ids=prior_ids,
+    )
+    failures.extend(quorum["failures"])
+    return {
+        "passed": not failures,
+        "failures": failures,
+        "review_quorum": quorum,
+        "source_authority_commit": source_commit,
+        "source_hashes_sha256": source_hashes_sha256,
+        "source_bundle_sha256": source_bundle_sha256,
+        "findings_path": str(SOURCE_AUDIT_FINDINGS_PATH) if SOURCE_AUDIT_FINDINGS_PATH.exists() else None,
+        "findings_sha256": public.sha256_file(SOURCE_AUDIT_FINDINGS_PATH) if SOURCE_AUDIT_FINDINGS_PATH.exists() else None,
+        "review_report_path": str(SOURCE_AUDIT_REVIEW_PATH) if SOURCE_AUDIT_REVIEW_PATH.exists() else None,
+        "review_report_sha256": public.sha256_file(SOURCE_AUDIT_REVIEW_PATH) if SOURCE_AUDIT_REVIEW_PATH.exists() else None,
     }
 
 
@@ -489,14 +571,53 @@ def write_discovery_challenge_receipt(challenge: dict[str, Any], *, source_commi
     return receipt
 
 
+ATTEMPT_STATE_ORDER = {
+    "claimed_pre_contact": 0,
+    "transport_contact_invoked": 1,
+    "target_command_invoked": 2,
+    "receipt_copied_cleanup_pending": 3,
+    "cleanup_armed": 4,
+    "cleanup_completed": 5,
+    "complete": 6,
+}
+ATTEMPT_COUNTER_KEYS = ["target_contact_count", "sensor_inventory_count", "live_invocation_count", "pmu_acquisition_count"]
+
+
+def validate_discovery_attempt_transition(previous: dict[str, Any] | None, receipt: dict[str, Any]) -> None:
+    state = receipt.get("attempt_state")
+    require(state in ATTEMPT_STATE_ORDER, "discovery attempt state missing or invalid")
+    for key in ATTEMPT_COUNTER_KEYS:
+        require(isinstance(receipt.get(key), int) and receipt[key] >= 0, f"discovery attempt counter missing or invalid {key}")
+    if previous is None:
+        return
+    previous_state = previous.get("attempt_state")
+    require(previous_state in ATTEMPT_STATE_ORDER, "previous discovery attempt state invalid")
+    require(ATTEMPT_STATE_ORDER[state] >= ATTEMPT_STATE_ORDER[previous_state], "discovery attempt state regression rejected")
+    for key in ATTEMPT_COUNTER_KEYS:
+        require(receipt[key] >= previous.get(key, -1), f"discovery attempt counter regression rejected {key}")
+
+
+def append_discovery_attempt_journal(receipt: dict[str, Any]) -> None:
+    row = json.dumps(receipt, sort_keys=True).encode("utf-8") + b"\n"
+    if not DISCOVERY_ATTEMPT_JOURNAL_PATH.exists():
+        durable_write_bytes_exclusive(DISCOVERY_ATTEMPT_JOURNAL_PATH, row)
+        return
+    with DISCOVERY_ATTEMPT_JOURNAL_PATH.open("ab") as handle:
+        handle.write(row)
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
 def write_discovery_attempt_receipt(payload: dict[str, Any]) -> dict[str, Any]:
     receipt = dict(payload)
     receipt["schema"] = "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT_V1"
     receipt["discovery_attempt_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "discovery_attempt_sha256"})
-    if DISCOVERY_ATTEMPT_PATH.exists():
-        write_json(DISCOVERY_ATTEMPT_PATH, receipt)
-    else:
-        write_json_exclusive(DISCOVERY_ATTEMPT_PATH, receipt)
+    previous = read_json(DISCOVERY_ATTEMPT_PATH) if DISCOVERY_ATTEMPT_PATH.exists() else None
+    if previous is None and DISCOVERY_ATTEMPT_JOURNAL_PATH.exists():
+        raise ControllerError("discovery attempt journal exists without snapshot")
+    validate_discovery_attempt_transition(previous, receipt)
+    append_discovery_attempt_journal(receipt)
+    write_json_atomic(DISCOVERY_ATTEMPT_PATH, receipt)
     return receipt
 
 
@@ -516,6 +637,7 @@ def expected_temperature_authority_challenge(
         schedule_sidecar=schedule_sidecar,
         authorized_commit=authorized_commit,
         controller_nonce_sha256=nonce_sha,
+        transport_scope=discovery_transport_scope(target_host=TARGET_HOST, remote_root=DISCOVERY_REMOTE_ROOT, nonce_sha=nonce_sha),
     )
 
 
@@ -546,6 +668,7 @@ def expected_temperature_authority_challenge_for_manifest(
                 schedule_sidecar=schedule_sidecar,
                 authorized_commit=source_commit,
                 controller_nonce_sha256=nonce_sha,
+                transport_scope=discovery_transport_scope(target_host=TARGET_HOST, remote_root=DISCOVERY_REMOTE_ROOT, nonce_sha=nonce_sha),
             )
             if embedded_challenge != expected:
                 return None, None
@@ -802,6 +925,21 @@ def temperature_sensor_authority_from_receipt(
             failures.append("temperature discovery cleanup and absence verification required")
         if expected_challenge is not None and expected_transport_receipt.get("source_authority_commit") != expected_challenge.get("authorized_commit"):
             failures.append("temperature discovery transport source commit mismatch")
+        scope = expected_challenge.get("transport_scope") if isinstance(expected_challenge, dict) else None
+        if not isinstance(scope, dict):
+            failures.append("temperature discovery transport scope missing from challenge")
+            scope = {}
+        transport_scope = {
+            "target_host": expected_transport_receipt.get("target_host"),
+            "remote_base_root": expected_transport_receipt.get("remote_base_root"),
+            "remote_root": expected_transport_receipt.get("remote_root"),
+            "remote_source_root": expected_transport_receipt.get("remote_source_root"),
+            "remote_receipt_path": expected_transport_receipt.get("remote_receipt_path"),
+        }
+        if transport_scope != scope:
+            failures.append("temperature discovery transport scope mismatch")
+        if discovery.get("source_root") != scope.get("remote_source_root"):
+            failures.append("temperature discovery source root does not match challenged transport scope")
         if expected_transport_receipt.get("target_discovery_receipt_sha256") != discovery.get("target_discovery_receipt_sha256"):
             failures.append("temperature discovery transport target receipt mismatch")
         if expected_transport_receipt.get("target_discovery_receipt_file_sha256") != serialized_json_sha256(discovery):
@@ -870,6 +1008,13 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
         schedule_sidecar={"canonical_sha256": "3" * 64, "json_sha256": "4" * 64, "tsv_sha256": "6" * 64},
         authorized_commit="7" * 40,
         controller_nonce_sha256=hashlib.sha256(controller_nonce.encode("ascii")).hexdigest(),
+        transport_scope={
+            "target_host": "offline_fixture",
+            "remote_base_root": "/fixture",
+            "remote_root": "/fixture",
+            "remote_source_root": "/fixture/source",
+            "remote_receipt_path": f"/fixture/source/{target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME}",
+        },
     )
     synthetic_challenge_sha = public.digest(synthetic_challenge)
     complete_forged_identity = public.with_temperature_identity_digest(
@@ -1081,17 +1226,28 @@ def acquire_temperature_sensor_authority(
         raise ControllerError("source authority commit verification failed: " + ",".join(source_commit_check["failures"]))
     nonce = secrets.token_hex(32)
     nonce_sha = hashlib.sha256(nonce.encode("ascii")).hexdigest()
+    transport_scope = discovery_transport_scope(target_host=target_host, remote_root=remote_root, nonce_sha=nonce_sha)
+    source_review = read_source_authority_review_for_discovery(
+        source_commit=source_commit,
+        source_hashes_sha256=source_hashes["source_hashes_sha256"],
+        source_bundle_sha256=bundle["sha256"],
+    )
+    if not source_review["passed"]:
+        raise ControllerError("source authority C1 review gate failed before target contact: " + ",".join(source_review["failures"]))
     challenge = build_temperature_authority_challenge(
         source_hashes=source_hashes,
         source_bundle_sha256=bundle["sha256"],
         schedule_sidecar=schedule_sidecar,
         authorized_commit=source_commit,
         controller_nonce_sha256=nonce_sha,
+        transport_scope=transport_scope,
     )
     challenge_receipt = write_discovery_challenge_receipt(challenge, source_commit=source_commit, nonce_sha=nonce_sha)
-    remote_source = f"{remote_root}/source"
+    remote_base_root = transport_scope["remote_base_root"]
+    remote_root = transport_scope["remote_root"]
+    remote_source = transport_scope["remote_source_root"]
     remote_challenge = f"{remote_source}/controller_challenge.json"
-    remote_receipt = f"{remote_source}/{target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME}"
+    remote_receipt = transport_scope["remote_receipt_path"]
     commands: list[list[str]] = []
     cleanup = {"attempted": False, "passed": False, "absence_verified": False}
     remote_root_created = False
@@ -1105,6 +1261,7 @@ def acquire_temperature_sensor_authority(
             "attempt_state": "claimed_pre_contact",
             "source_authority_commit": source_commit,
             "source_authority": source_commit_check,
+            "source_authority_review": source_review,
             "controller_challenge_sha256": public.digest(challenge),
             "challenge_receipt_sha256": challenge_receipt["challenge_receipt_sha256"],
             "target_contact_count": 0,
@@ -1130,6 +1287,7 @@ def acquire_temperature_sensor_authority(
                     "attempt_state": "transport_contact_invoked",
                     "source_authority_commit": source_commit,
                     "source_authority": source_commit_check,
+                    "source_authority_review": source_review,
                     "controller_challenge_sha256": public.digest(challenge),
                     "challenge_receipt_sha256": challenge_receipt["challenge_receipt_sha256"],
                     "target_contact_count": 1,
@@ -1168,6 +1326,7 @@ def acquire_temperature_sensor_authority(
                     "attempt_state": "target_command_invoked",
                     "source_authority_commit": source_commit,
                     "source_authority": source_commit_check,
+                    "source_authority_review": source_review,
                     "controller_challenge_sha256": public.digest(challenge),
                     "challenge_receipt_sha256": challenge_receipt["challenge_receipt_sha256"],
                     "target_contact_count": 1,
@@ -1203,6 +1362,7 @@ def acquire_temperature_sensor_authority(
                     "attempt_state": "receipt_copied_cleanup_pending",
                     "source_authority_commit": source_commit,
                     "source_authority": source_commit_check,
+                    "source_authority_review": source_review,
                     "controller_challenge_sha256": public.digest(challenge),
                     "challenge_receipt_sha256": challenge_receipt["challenge_receipt_sha256"],
                     "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256"),
@@ -1217,14 +1377,62 @@ def acquire_temperature_sensor_authority(
         finally:
             if remote_root_created:
                 cleanup["attempted"] = True
+                write_discovery_attempt_receipt(
+                    {
+                        "passed": False,
+                        "attempt_state": "cleanup_armed",
+                        "source_authority_commit": source_commit,
+                        "source_authority": source_commit_check,
+                        "source_authority_review": source_review,
+                        "controller_challenge_sha256": public.digest(challenge),
+                        "challenge_receipt_sha256": challenge_receipt["challenge_receipt_sha256"],
+                        "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256") if isinstance(discovery, dict) else None,
+                        "target_discovery_receipt_file_sha256": target_discovery_file_sha,
+                        "target_contact_count": 1,
+                        "sensor_inventory_count": 1 if target_command_invoked else 0,
+                        "live_invocation_count": 0,
+                        "pmu_acquisition_count": 0,
+                        "cleanup": cleanup,
+                        "commands": commands,
+                    }
+                )
                 cleanup_command = ["ssh", "-o", "BatchMode=yes", target_host, f"rm -rf -- {sh_quote(remote_root)}"]
                 commands.append(cleanup_command)
-                cleanup_result = run(cleanup_command, timeout=30.0, check=False)
-                cleanup["passed"] = cleanup_result.returncode == 0
+                try:
+                    cleanup_result = run(cleanup_command, timeout=30.0, check=False)
+                    cleanup["passed"] = cleanup_result.returncode == 0
+                    cleanup["returncode"] = cleanup_result.returncode
+                except Exception as exc:  # noqa: BLE001 - cleanup failures must be recorded, not raised before absence probe
+                    cleanup["passed"] = False
+                    cleanup["error"] = str(exc)
                 absence_command = ["ssh", "-o", "BatchMode=yes", target_host, f"test ! -e {sh_quote(remote_root)}"]
                 commands.append(absence_command)
-                absence_result = run(absence_command, timeout=20.0, check=False)
-                cleanup["absence_verified"] = absence_result.returncode == 0
+                try:
+                    absence_result = run(absence_command, timeout=20.0, check=False)
+                    cleanup["absence_verified"] = absence_result.returncode == 0
+                    cleanup["absence_returncode"] = absence_result.returncode
+                except Exception as exc:  # noqa: BLE001 - preserve failed absence probe in durable attempt state
+                    cleanup["absence_verified"] = False
+                    cleanup["absence_error"] = str(exc)
+                write_discovery_attempt_receipt(
+                    {
+                        "passed": False,
+                        "attempt_state": "cleanup_completed",
+                        "source_authority_commit": source_commit,
+                        "source_authority": source_commit_check,
+                        "source_authority_review": source_review,
+                        "controller_challenge_sha256": public.digest(challenge),
+                        "challenge_receipt_sha256": challenge_receipt["challenge_receipt_sha256"],
+                        "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256") if isinstance(discovery, dict) else None,
+                        "target_discovery_receipt_file_sha256": target_discovery_file_sha,
+                        "target_contact_count": 1,
+                        "sensor_inventory_count": 1 if target_command_invoked else 0,
+                        "live_invocation_count": 0,
+                        "pmu_acquisition_count": 0,
+                        "cleanup": cleanup,
+                        "commands": commands,
+                    }
+                )
     if not cleanup["passed"] or not cleanup["absence_verified"]:
         raise ControllerError("discovery cleanup or remote-root absence verification failed")
     if discovery is None or authority is None:
@@ -1236,9 +1444,12 @@ def acquire_temperature_sensor_authority(
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT_V1",
         "passed": True,
         "target_host": target_host,
+        "remote_base_root": remote_base_root,
         "remote_root": remote_root,
         "remote_source_root": remote_source,
+        "remote_receipt_path": remote_receipt,
         "source_authority_commit": source_commit,
+        "source_authority_review": source_review,
         "controller_challenge": challenge,
         "controller_challenge_sha256": public.digest(challenge),
         "challenge_receipt_path": str(DISCOVERY_CHALLENGE_PATH),
@@ -1282,6 +1493,7 @@ def acquire_temperature_sensor_authority(
             "attempt_state": "complete",
             "source_authority_commit": source_commit,
             "source_authority": source_commit_check,
+            "source_authority_review": source_review,
             "controller_challenge_sha256": public.digest(challenge),
             "challenge_receipt_sha256": challenge_receipt["challenge_receipt_sha256"],
             "target_discovery_receipt_sha256": result["target_discovery_receipt_sha256"],
@@ -1566,6 +1778,29 @@ def validate_discovery_transport_receipt(receipt: dict[str, Any] | None) -> dict
         failures.append("discovery transport must pass")
     if receipt.get("target_command_invoked") is not True:
         failures.append("discovery transport target command invocation missing")
+    transport_scope = receipt.get("controller_challenge", {}).get("transport_scope") if isinstance(receipt.get("controller_challenge"), dict) else None
+    if not isinstance(transport_scope, dict):
+        failures.append("discovery transport challenge scope missing")
+        transport_scope = {}
+    expected_scope = {
+        "target_host": receipt.get("target_host"),
+        "remote_base_root": receipt.get("remote_base_root"),
+        "remote_root": receipt.get("remote_root"),
+        "remote_source_root": receipt.get("remote_source_root"),
+        "remote_receipt_path": receipt.get("remote_receipt_path"),
+    }
+    if transport_scope != expected_scope:
+        failures.append("discovery transport scope mismatch")
+    if receipt.get("target_host") != TARGET_HOST:
+        failures.append("discovery transport target host mismatch")
+    if receipt.get("remote_base_root") != DISCOVERY_REMOTE_ROOT:
+        failures.append("discovery transport remote base root mismatch")
+    if not isinstance(receipt.get("remote_root"), str) or not str(receipt.get("remote_root")).startswith(DISCOVERY_REMOTE_ROOT + "/"):
+        failures.append("discovery transport remote root not nonce-owned")
+    if receipt.get("remote_source_root") != f"{receipt.get('remote_root')}/source":
+        failures.append("discovery transport remote source root mismatch")
+    if receipt.get("remote_receipt_path") != f"{receipt.get('remote_source_root')}/{target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME}":
+        failures.append("discovery transport remote receipt path mismatch")
     cleanup = receipt.get("cleanup")
     if not isinstance(cleanup, dict) or cleanup.get("passed") is not True or cleanup.get("absence_verified") is not True:
         failures.append("discovery cleanup and absence verification required")
@@ -1600,6 +1835,11 @@ def discovery_transport_self_tests() -> dict[str, Any]:
         result["discovery_transport_sha256"] = public.digest({k: v for k, v in result.items() if k != "discovery_transport_sha256"})
         return result
 
+    base_nonce_sha = "8" * 64
+    base_scope = discovery_transport_scope(target_host=TARGET_HOST, remote_root=DISCOVERY_REMOTE_ROOT, nonce_sha=base_nonce_sha)
+    base_challenge = {
+        "transport_scope": base_scope,
+    }
     base = seal(
         {
             "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT_V1",
@@ -1607,7 +1847,13 @@ def discovery_transport_self_tests() -> dict[str, Any]:
             "cleanup": {"attempted": True, "passed": True, "absence_verified": True},
             "retry_count": 0,
             "target_command_invoked": True,
+            "target_host": base_scope["target_host"],
+            "remote_base_root": base_scope["remote_base_root"],
+            "remote_root": base_scope["remote_root"],
+            "remote_source_root": base_scope["remote_source_root"],
+            "remote_receipt_path": base_scope["remote_receipt_path"],
             "source_authority_commit": "f" * 40,
+            "controller_challenge": base_challenge,
             "controller_challenge_sha256": "1" * 64,
             "challenge_receipt_sha256": "2" * 64,
             "target_discovery_receipt_sha256": "3" * 64,
@@ -1626,6 +1872,7 @@ def discovery_transport_self_tests() -> dict[str, Any]:
     zero_contact = seal({**base, "target_contact_count": 0})
     live_nonzero = seal({**base, "live_invocation_count": 1})
     pmu_nonzero = seal({**base, "pmu_acquisition_count": 1})
+    alternate_root = seal({**base, "remote_root": f"{DISCOVERY_REMOTE_ROOT}/alternate", "remote_source_root": f"{DISCOVERY_REMOTE_ROOT}/alternate/source"})
     corrupted = dict(base)
     corrupted["target_contact_count"] = 0
 
@@ -1646,6 +1893,7 @@ def discovery_transport_self_tests() -> dict[str, Any]:
             schedule_sidecar=read_json(source / public.SCHEDULE_SHA.name),
             authorized_commit="f" * 40,
             controller_nonce_sha256=nonce_sha,
+            transport_scope=fixture_transport_scope(source, nonce_sha),
         )
         challenge_path = root / "challenge.json"
         write_json(challenge_path, challenge)
@@ -1735,6 +1983,7 @@ def discovery_transport_self_tests() -> dict[str, Any]:
         "incorrect_zero_target_contact_rejected": not validate_discovery_transport_receipt(zero_contact)["passed"],
         "nonzero_live_invocation_rejected": not validate_discovery_transport_receipt(live_nonzero)["passed"],
         "nonzero_pmu_acquisition_rejected": not validate_discovery_transport_receipt(pmu_nonzero)["passed"],
+        "alternate_remote_scope_rejected": not validate_discovery_transport_receipt(alternate_root)["passed"],
         "transport_digest_corruption_rejected": not validate_discovery_transport_receipt(corrupted)["passed"],
         "copyback_corruption_rejected": corrupted_authority_rejected,
         "transport_file_hash_mismatch_rejected": not temperature_sensor_authority_from_receipt(
@@ -2105,6 +2354,11 @@ def source_audit_quorum_regression() -> dict[str, Any]:
             review_report_present=True,
             excluded_agent_ids={"source-reviewer-1"},
         )["passed"],
+        "pre_contact_missing_or_mismatched_source_review_blocked": not read_source_authority_review_for_discovery(
+            source_commit=source_commit,
+            source_hashes_sha256=source_hash,
+            source_bundle_sha256=bundle_hash,
+        )["passed"],
     }
     return {"schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUDIT_QUORUM_REGRESSION_V1", "passed": all(checks.values()), "checks": checks}
 
@@ -2238,12 +2492,9 @@ def controller_self_test() -> dict[str, Any]:
 def authority_contact_counters(temperature_authority: dict[str, Any]) -> dict[str, int]:
     if DISCOVERY_ATTEMPT_PATH.exists():
         attempt = read_json(DISCOVERY_ATTEMPT_PATH)
-        return {
-            "target_contact_count": int(attempt.get("target_contact_count", 0)),
-            "sensor_inventory_count": int(attempt.get("sensor_inventory_count", 0)),
-            "live_invocation_count": int(attempt.get("live_invocation_count", 0)),
-            "pmu_acquisition_count": int(attempt.get("pmu_acquisition_count", 0)),
-        }
+        for key in ATTEMPT_COUNTER_KEYS:
+            require(isinstance(attempt.get(key), int), f"discovery attempt counter missing {key}")
+        return {key: int(attempt[key]) for key in ATTEMPT_COUNTER_KEYS}
     if temperature_authority.get("passed") is not True or not TEMPERATURE_SENSOR_AUTHORITY.exists():
         return {
             "target_contact_count": 0,
@@ -2252,12 +2503,9 @@ def authority_contact_counters(temperature_authority: dict[str, Any]) -> dict[st
             "pmu_acquisition_count": 0,
         }
     receipt = read_json(TEMPERATURE_SENSOR_AUTHORITY)
-    return {
-        "target_contact_count": int(receipt.get("target_contact_count", 0)),
-        "sensor_inventory_count": int(receipt.get("sensor_inventory_count", 0)),
-        "live_invocation_count": int(receipt.get("live_invocation_count", 0)),
-        "pmu_acquisition_count": int(receipt.get("pmu_acquisition_count", 0)),
-    }
+    for key in ATTEMPT_COUNTER_KEYS:
+        require(isinstance(receipt.get(key), int), f"temperature authority counter missing {key}")
+    return {key: int(receipt[key]) for key in ATTEMPT_COUNTER_KEYS}
 
 
 def manifest() -> dict[str, Any]:
@@ -2315,12 +2563,18 @@ def manifest() -> dict[str, Any]:
     }
     contact_counters_truthful = contact_counters == expected_contact_counters
     final_exact_object = read_json(FINAL_OBJECT_VERIFY_PATH) if FINAL_OBJECT_VERIFY_PATH.exists() else {}
+    final_evidence_authority = read_final_evidence_commit_authority() if FINAL_OBJECT_VERIFY_PATH.exists() else {
+        "passed": False,
+        "failures": ["final evidence commit authority missing"],
+        "receipt": {},
+    }
+    final_evidence_receipt = final_evidence_authority.get("receipt", {}) if isinstance(final_evidence_authority, dict) else {}
     final_exact_validation = validate_final_exact_object_receipt(
         final_exact_object,
         expected_source_commit=source_authority_commit,
-        expected_evidence_commit=final_exact_object.get("evidence_commit") if isinstance(final_exact_object, dict) else None,
+        expected_evidence_commit=final_evidence_receipt.get("evidence_commit") if isinstance(final_evidence_receipt, dict) else None,
     )
-    final_exact_object_passed = final_exact_validation["passed"]
+    final_exact_object_passed = final_evidence_authority["passed"] and final_exact_validation["passed"]
     result = {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST_V1",
         "science_package_id": public.SCIENCE_PACKAGE_ID,
@@ -2357,11 +2611,17 @@ def manifest() -> dict[str, Any]:
         "final_exact_object_verification": {
             "path": str(FINAL_OBJECT_VERIFY_PATH) if FINAL_OBJECT_VERIFY_PATH.exists() else None,
             "file_sha256": public.sha256_file(FINAL_OBJECT_VERIFY_PATH) if FINAL_OBJECT_VERIFY_PATH.exists() else None,
+            "final_evidence_commit_path": str(FINAL_EVIDENCE_COMMIT_PATH) if FINAL_EVIDENCE_COMMIT_PATH.exists() else None,
+            "final_evidence_commit_file_sha256": public.sha256_file(FINAL_EVIDENCE_COMMIT_PATH) if FINAL_EVIDENCE_COMMIT_PATH.exists() else None,
+            "final_evidence_commit_sha256": final_evidence_receipt.get("final_evidence_commit_sha256") if isinstance(final_evidence_receipt, dict) else None,
+            "evidence_manifest_file_sha256": final_evidence_receipt.get("evidence_manifest_file_sha256") if isinstance(final_evidence_receipt, dict) else None,
+            "evidence_manifest_canonical_sha256": final_evidence_receipt.get("evidence_manifest_canonical_sha256") if isinstance(final_evidence_receipt, dict) else None,
+            "evidence_manifest_sidecar_sha256": final_evidence_receipt.get("evidence_manifest_sidecar_sha256") if isinstance(final_evidence_receipt, dict) else None,
             "passed": final_exact_object_passed,
             "source_authority_commit": final_exact_object.get("source_authority_commit"),
-            "evidence_commit": final_exact_object.get("evidence_commit"),
+            "evidence_commit": final_evidence_receipt.get("evidence_commit") if isinstance(final_evidence_receipt, dict) else final_exact_object.get("evidence_commit"),
             "verification_sha256": final_exact_object.get("final_exact_object_verification_sha256"),
-            "failures": final_exact_validation["failures"] or final_exact_object.get("failures", ["final exact-object verification missing"]),
+            "failures": final_evidence_authority["failures"] + final_exact_validation["failures"] or final_exact_object.get("failures", ["final exact-object verification missing"]),
         },
         "allowed_result_classes": public.ALLOWED_RESULT_CLASSES,
         "forbidden_result_classes": public.FORBIDDEN_RESULT_CLASSES,
@@ -2611,6 +2871,7 @@ def final_evidence_paths() -> dict[str, Path]:
         "discovery transport receipt": DISCOVERY_TRANSPORT_PATH,
         "discovery challenge receipt": DISCOVERY_CHALLENGE_PATH,
         "discovery attempt receipt": DISCOVERY_ATTEMPT_PATH,
+        "discovery attempt journal": DISCOVERY_ATTEMPT_JOURNAL_PATH,
         "manifest": MANIFEST_PATH,
         "manifest sidecar": MANIFEST_SHA_PATH,
     }
@@ -2877,7 +3138,56 @@ def validate_final_exact_object_receipt(
         failures.append("final exact-object manifest file hash does not match replay")
     if receipt.get("manifest_canonical_sha256") != replay["manifest_canonical_sha256"]:
         failures.append("final exact-object manifest canonical hash does not match replay")
+    final_evidence = read_final_evidence_commit_authority()
+    if not final_evidence["passed"]:
+        failures.append("final evidence commit authority invalid: " + ",".join(final_evidence["failures"]))
+    else:
+        evidence_receipt = final_evidence["receipt"]
+        if evidence_receipt.get("source_authority_commit") != source_commit:
+            failures.append("final evidence commit authority source mismatch")
+        if evidence_receipt.get("evidence_commit") != evidence_commit:
+            failures.append("final evidence commit authority evidence mismatch")
+        if evidence_receipt.get("evidence_manifest_file_sha256") != replay["manifest_file_sha256"]:
+            failures.append("final evidence commit authority manifest file mismatch")
+        if evidence_receipt.get("evidence_manifest_canonical_sha256") != replay["manifest_canonical_sha256"]:
+            failures.append("final evidence commit authority manifest canonical mismatch")
+        if receipt.get("final_evidence_commit_sha256") != evidence_receipt.get("final_evidence_commit_sha256"):
+            failures.append("final exact-object evidence authority digest mismatch")
+        if receipt.get("final_evidence_commit_file_sha256") != public.sha256_file(FINAL_EVIDENCE_COMMIT_PATH):
+            failures.append("final exact-object evidence authority file mismatch")
     return {"passed": not failures, "failures": failures}
+
+
+def write_final_evidence_commit_receipt(source_commit: str, evidence_commit: str, replay: dict[str, Any]) -> dict[str, Any]:
+    receipt = {
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT_V1",
+        "source_authority_commit": source_commit,
+        "evidence_commit": evidence_commit,
+        "evidence_manifest_file_sha256": replay.get("manifest_file_sha256"),
+        "evidence_manifest_canonical_sha256": replay.get("manifest_canonical_sha256"),
+        "evidence_manifest_sidecar_sha256": replay.get("evidence_blob_records", {}).get("manifest sidecar", {}).get("sha256"),
+    }
+    receipt["final_evidence_commit_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "final_evidence_commit_sha256"})
+    write_json(FINAL_EVIDENCE_COMMIT_PATH, receipt)
+    return receipt
+
+
+def read_final_evidence_commit_authority() -> dict[str, Any]:
+    if not FINAL_EVIDENCE_COMMIT_PATH.exists():
+        return {"passed": False, "failures": ["final evidence commit authority missing"]}
+    receipt = read_json(FINAL_EVIDENCE_COMMIT_PATH)
+    failures: list[str] = []
+    if receipt.get("schema") != "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT_V1":
+        failures.append("final evidence commit authority schema mismatch")
+    if receipt.get("final_evidence_commit_sha256") != public.digest({k: v for k, v in receipt.items() if k != "final_evidence_commit_sha256"}):
+        failures.append("final evidence commit authority digest mismatch")
+    for field, pattern in {"source_authority_commit": r"[0-9a-f]{40}", "evidence_commit": r"[0-9a-f]{40}"}.items():
+        if re.fullmatch(pattern, str(receipt.get(field, ""))) is None:
+            failures.append(f"final evidence commit authority {field} malformed")
+    for field in ["evidence_manifest_file_sha256", "evidence_manifest_canonical_sha256", "evidence_manifest_sidecar_sha256"]:
+        if re.fullmatch(r"[0-9a-f]{64}", str(receipt.get(field, ""))) is None:
+            failures.append(f"final evidence commit authority {field} malformed")
+    return {"passed": not failures, "failures": failures, "receipt": receipt}
 
 
 def validate_receipt_chain(manifest_data: dict[str, Any]) -> list[str]:
@@ -2977,12 +3287,12 @@ def validate_receipt_chain(manifest_data: dict[str, Any]) -> list[str]:
     authority_passed = authority_section.get("authority_receipt_passed") is True
     if DISCOVERY_ATTEMPT_PATH.exists():
         attempt = read_json(DISCOVERY_ATTEMPT_PATH)
-        expected_counters = {
-            "target_contact_count": int(attempt.get("target_contact_count", 0)),
-            "sensor_inventory_count": int(attempt.get("sensor_inventory_count", 0)),
-            "live_invocation_count": int(attempt.get("live_invocation_count", 0)),
-            "pmu_acquisition_count": int(attempt.get("pmu_acquisition_count", 0)),
-        }
+        missing_attempt_counters = [key for key in ATTEMPT_COUNTER_KEYS if not isinstance(attempt.get(key), int)]
+        if missing_attempt_counters:
+            failures.append("discovery attempt counters missing: " + ",".join(missing_attempt_counters))
+            expected_counters = {}
+        else:
+            expected_counters = {key: int(attempt[key]) for key in ATTEMPT_COUNTER_KEYS}
     else:
         expected_counters = {
             "target_contact_count": 1 if authority_passed else 0,
@@ -3115,6 +3425,7 @@ def final_exact_object_verification(*, evidence_commit: str | None = None) -> di
     if not isinstance(source_commit, str):
         source_commit = ""
     replay = replay_final_exact_objects(source_commit, evidence_commit)
+    final_evidence_authority = write_final_evidence_commit_receipt(source_commit, evidence_commit, replay)
     result = {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EXACT_OBJECT_VERIFICATION_V1",
         "passed": replay["passed"],
@@ -3130,6 +3441,9 @@ def final_exact_object_verification(*, evidence_commit: str | None = None) -> di
         "contact_counters": replay["contact_counters"],
         "manifest_file_sha256": replay["manifest_file_sha256"],
         "manifest_canonical_sha256": replay["manifest_canonical_sha256"],
+        "final_evidence_commit_path": str(FINAL_EVIDENCE_COMMIT_PATH),
+        "final_evidence_commit_file_sha256": public.sha256_file(FINAL_EVIDENCE_COMMIT_PATH),
+        "final_evidence_commit_sha256": final_evidence_authority["final_evidence_commit_sha256"],
         "required_evidence_paths": {label: str(path) for label, path in final_evidence_paths().items()},
         "missing_evidence_paths": sorted(label for label, record in replay["evidence_blob_records"].items() if record.get("present") is not True),
     }

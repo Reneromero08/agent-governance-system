@@ -1,6 +1,7 @@
 {
   "discovery_transport_self_test": {
     "checks": {
+      "alternate_remote_scope_rejected": true,
       "authority_without_transport_rejected": true,
       "cleanup_failure_rejected": true,
       "copyback_corruption_rejected": true,
@@ -23,7 +24,7 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "aaa57658e2d84c32f8bbe633803957cdd1622093b91480c9411947e8822bb92b",
+  "offline_validate_sha256": "cca7b57bfe39cb23cad190f379f65315d89e3dc438ffce903e95b15d9758cdcd",
   "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -86,13 +87,14 @@
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "6ecbd245a39e48f37bc102319cdbeae5f9afc509f2ed1d527173ceb56e1e4649",
+  "self_test_sha256": "bfef35b7528d7fe151156a1b52411db74583b0d8832fbbe6ff2053334913c342",
   "sensor_inventory_count": 0,
   "source_audit_quorum_regression": {
     "checks": {
       "exact_source_audit_quorum_passes": true,
       "missing_boundary_attestation_blocked": true,
       "missing_report_blocked": true,
+      "pre_contact_missing_or_mismatched_source_review_blocked": true,
       "prior_package_reviewer_reuse_blocked": true,
       "wrong_reviewer_commit_blocked": true,
       "wrong_top_level_bundle_blocked": true
