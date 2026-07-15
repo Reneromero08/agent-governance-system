@@ -21,7 +21,7 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "007b18a5d3e150505b00347c01c36b5c4bd7ddcea9708908eda8d1b6e19c19f7",
+  "offline_validate_sha256": "4a9ccc340a47055612194ce60b707030b5f4e6a3476c4ac95e02fe2587625ad9",
   "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -84,13 +84,14 @@
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "99079ff9ea26472b45dab37d49dcb02f9b6f712bed17e1494cb1ad8be953fea5",
+  "self_test_sha256": "f0b29d99c05bff1b25eb340ee1a341867650f80308b9b2ab0c532d2692002659",
   "sensor_inventory_count": 0,
   "source_audit_quorum_regression": {
     "checks": {
       "exact_source_audit_quorum_passes": true,
       "missing_boundary_attestation_blocked": true,
       "missing_report_blocked": true,
+      "prior_package_reviewer_reuse_blocked": true,
       "wrong_reviewer_commit_blocked": true,
       "wrong_top_level_bundle_blocked": true
     },
