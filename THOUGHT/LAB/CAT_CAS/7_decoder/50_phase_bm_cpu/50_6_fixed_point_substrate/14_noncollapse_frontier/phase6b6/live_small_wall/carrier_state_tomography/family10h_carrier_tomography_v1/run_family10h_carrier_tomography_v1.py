@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import inspect
 import io
 import re
 import gzip
@@ -36,6 +37,7 @@ DISCOVERY_TRANSPORT_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT.json"
 DISCOVERY_CHALLENGE_PATH = HERE / "CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE.json"
 DISCOVERY_ATTEMPT_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.json"
 DISCOVERY_ATTEMPT_JOURNAL_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.jsonl"
+DISCOVERY_CLEANUP_CUSTODY_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_CLEANUP_CUSTODY.json"
 FINAL_OBJECT_VERIFY_PATH = HERE / "CARRIER_TOMOGRAPHY_FINAL_OBJECT_VERIFY.json"
 FINAL_EVIDENCE_COMMIT_PATH = HERE / "CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT.json"
 MANIFEST_PATH = HERE / "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json"
@@ -389,6 +391,18 @@ def strict_json_dumps(value: Any, *, indent: int | None = None) -> str:
     return json.dumps(value, indent=indent, sort_keys=True, allow_nan=False)
 
 
+def is_strict_int(value: Any) -> bool:
+    return type(value) is int
+
+
+def is_strict_counter(value: Any) -> bool:
+    return is_strict_int(value) and value >= 0
+
+
+def counters_equal_strict(receipt: dict[str, Any], expected: dict[str, int]) -> bool:
+    return all(is_strict_int(receipt.get(key)) and receipt.get(key) == value for key, value in expected.items())
+
+
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes((strict_json_dumps(value, indent=2) + "\n").encode("utf-8"))
@@ -731,7 +745,7 @@ def validate_discovery_challenge_receipt_payload(
     if receipt.get("pre_contact") is not True:
         failures.append("challenge receipt is not pre-contact")
     zero_counters = {"target_contact_count": 0, "sensor_inventory_count": 0, "live_invocation_count": 0, "pmu_acquisition_count": 0}
-    if {key: receipt.get(key) for key in zero_counters} != zero_counters:
+    if not counters_equal_strict(receipt, zero_counters):
         failures.append("challenge receipt counters are not zero")
     if expected_source_commit is not None and receipt.get("source_authority_commit") != expected_source_commit:
         failures.append("challenge receipt source commit mismatch")
@@ -776,9 +790,9 @@ def validate_discovery_attempt_transition(previous: dict[str, Any] | None, recei
     state = receipt.get("attempt_state")
     require(state in ATTEMPT_STATE_ORDER, "discovery attempt state missing or invalid")
     for key in ATTEMPT_COUNTER_KEYS:
-        require(isinstance(receipt.get(key), int) and receipt[key] >= 0, f"discovery attempt counter missing or invalid {key}")
+        require(is_strict_counter(receipt.get(key)), f"discovery attempt counter missing or invalid {key}")
     require(
-        {key: receipt[key] for key in ATTEMPT_COUNTER_KEYS} == ATTEMPT_STATE_COUNTERS[state],
+        counters_equal_strict(receipt, ATTEMPT_STATE_COUNTERS[state]),
         f"discovery attempt counters do not match state {state}",
     )
     for field in ATTEMPT_IMMUTABLE_FIELDS:
@@ -790,7 +804,7 @@ def validate_discovery_attempt_transition(previous: dict[str, Any] | None, recei
     previous_state = previous.get("attempt_state")
     require(previous_state in ATTEMPT_STATE_ORDER, "previous discovery attempt state invalid")
     for key in ATTEMPT_COUNTER_KEYS:
-        require(isinstance(previous.get(key), int) and previous[key] >= 0, f"previous discovery attempt counter missing or invalid {key}")
+        require(is_strict_counter(previous.get(key)), f"previous discovery attempt counter missing or invalid {key}")
     require(ATTEMPT_STATE_ORDER[state] == ATTEMPT_STATE_ORDER[previous_state] + 1, "discovery attempt state must advance exactly one step")
     for field in ATTEMPT_IMMUTABLE_FIELDS:
         require(receipt.get(field) == previous.get(field), f"discovery attempt immutable field changed {field}")
@@ -876,6 +890,41 @@ def write_discovery_attempt_receipt(payload: dict[str, Any]) -> dict[str, Any]:
     validate_discovery_attempt_transition(previous, receipt)
     append_discovery_attempt_journal(receipt)
     write_json_atomic(DISCOVERY_ATTEMPT_PATH, receipt)
+    return receipt
+
+
+def parse_preflight_stdout(stdout: str) -> dict[str, Any]:
+    text = stdout.strip()
+    match = re.fullmatch(r"FAMILY10H_DISCOVERY_PREFLIGHT base_preexisting=([01]) root_created=1", text)
+    if match is None:
+        return {
+            "passed": False,
+            "remote_base_preexisting": True,
+            "root_created": False,
+            "raw_stdout_sha256": hashlib.sha256(stdout.encode("utf-8")).hexdigest(),
+            "failure": "malformed preflight stdout",
+        }
+    return {
+        "passed": True,
+        "remote_base_preexisting": match.group(1) == "1",
+        "root_created": True,
+        "raw_stdout_sha256": hashlib.sha256(stdout.encode("utf-8")).hexdigest(),
+    }
+
+
+def write_discovery_cleanup_custody_receipt(payload: dict[str, Any]) -> dict[str, Any]:
+    receipt = dict(payload)
+    receipt["schema"] = "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_FAILURE_CLEANUP_CUSTODY_V1"
+    for key in ATTEMPT_COUNTER_KEYS:
+        require(is_strict_counter(receipt.get(key)), f"cleanup custody counter missing or invalid {key}")
+    require(receipt.get("target_contact_count") == 1, "cleanup custody requires recorded target contact")
+    require(receipt.get("sensor_inventory_count") in (0, 1), "cleanup custody inventory counter invalid")
+    require(receipt.get("live_invocation_count") == 0, "cleanup custody live counter must be zero")
+    require(receipt.get("pmu_acquisition_count") == 0, "cleanup custody PMU counter must be zero")
+    cleanup = receipt.get("cleanup")
+    require(isinstance(cleanup, dict), "cleanup custody cleanup payload missing")
+    receipt["cleanup_custody_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "cleanup_custody_sha256"})
+    write_json_atomic(DISCOVERY_CLEANUP_CUSTODY_PATH, receipt)
     return receipt
 
 
@@ -1023,6 +1072,16 @@ def temperature_sensor_authority_from_receipt(
         identity = None
     elif identity.get("identity_sha256") != public.temperature_identity_digest(identity):
         failures.append("approved temperature sensor identity digest mismatch")
+    elif (
+        identity.get("device_driver") != "k10temp"
+        or identity.get("device_subsystem") != "pci"
+        or not isinstance(identity.get("device_modalias"), str)
+        or not identity.get("device_modalias")
+        or not is_strict_int(identity.get("input_st_dev"))
+        or not is_strict_int(identity.get("input_st_ino"))
+        or not is_strict_int(identity.get("input_st_mode"))
+    ):
+        failures.append("approved temperature sensor hardware identity incomplete")
     if receipt.get("provenance_bound") is not True:
         failures.append("temperature sensor authority provenance not bound")
     if identity == public.synthetic_temperature_identity():
@@ -1063,8 +1122,14 @@ def temperature_sensor_authority_from_receipt(
                     failures.append("temperature sensor discovery target platform is not AMD Family 10h")
                 if platform.get("checked_before_discovery") is not True:
                     failures.append("temperature sensor discovery platform was not checked before discovery")
-            if not isinstance(provenance.get("discovery_monotonic_ns"), int) or provenance.get("discovery_monotonic_ns", 0) <= 0:
-                failures.append("temperature sensor discovery monotonic timestamp missing")
+                if (
+                    platform.get("source_cpu_expected") != public.SOURCE_CPU_EXPECTED
+                    or platform.get("receiver_cpu_expected") != public.RECEIVER_CPU_EXPECTED
+                    or platform.get("source_receiver_cpus_present") is not True
+                ):
+                    failures.append("temperature sensor discovery source/receiver CPU boundary missing")
+        if not is_strict_counter(provenance.get("discovery_monotonic_ns")) or provenance.get("discovery_monotonic_ns", 0) <= 0:
+            failures.append("temperature sensor discovery monotonic timestamp missing")
             if expected_challenge is not None:
                 if provenance.get("controller_challenge_sha256") != public.digest(expected_challenge):
                     failures.append("temperature sensor discovery challenge provenance mismatch")
@@ -1078,17 +1143,17 @@ def temperature_sensor_authority_from_receipt(
         authorizing_scope = discovery.get("authorizing_scope")
         if not isinstance(authorizing_scope, dict) or authorizing_scope.get("authorizing") is not True:
             failures.append("temperature sensor discovery was not captured from canonical target sensor roots")
-        if discovery.get("target_contact_count") != 1:
+        if not is_strict_int(discovery.get("target_contact_count")) or discovery.get("target_contact_count") != 1:
             failures.append("temperature sensor discovery target contact count must be one")
-        if discovery.get("sensor_inventory_count") != 1:
+        if not is_strict_int(discovery.get("sensor_inventory_count")) or discovery.get("sensor_inventory_count") != 1:
             failures.append("temperature sensor discovery inventory count must be one")
-        if discovery.get("live_invocation_count") != 0:
+        if not is_strict_int(discovery.get("live_invocation_count")) or discovery.get("live_invocation_count") != 0:
             failures.append("temperature sensor discovery live invocation count must be zero")
-        if discovery.get("pmu_acquisition_count") != 0:
+        if not is_strict_int(discovery.get("pmu_acquisition_count")) or discovery.get("pmu_acquisition_count") != 0:
             failures.append("temperature sensor discovery PMU acquisition count must be zero")
-        if discovery.get("pmu_open_count") != 0:
+        if not is_strict_int(discovery.get("pmu_open_count")) or discovery.get("pmu_open_count") != 0:
             failures.append("temperature sensor discovery PMU open count must be zero")
-        if discovery.get("runtime_launch_count") != 0:
+        if not is_strict_int(discovery.get("runtime_launch_count")) or discovery.get("runtime_launch_count") != 0:
             failures.append("temperature sensor discovery runtime launch count must be zero")
         if discovery.get("tomography_output_root_created") is not False:
             failures.append("temperature sensor discovery must not create tomography output root")
@@ -1165,7 +1230,13 @@ def temperature_sensor_authority_from_receipt(
                 if not public.is_json_number(value) or not 0.0 < float(value) < 120.0:
                     failures.append("temperature sensor discovery sample value invalid")
                 descriptor = sample.get("pinned_descriptor")
-                if not isinstance(descriptor, dict) or descriptor.get("resolved_input_path") != identity.get("resolved_input_path"):
+                expected_descriptor = {
+                    "resolved_input_path": identity.get("resolved_input_path"),
+                    "input_st_dev": identity.get("input_st_dev"),
+                    "input_st_ino": identity.get("input_st_ino"),
+                    "input_st_mode": identity.get("input_st_mode"),
+                }
+                if not isinstance(descriptor, dict) or descriptor != expected_descriptor:
                     failures.append("temperature sensor discovery pinned descriptor missing or mismatched")
                 if sample.get("read_law") != "manifest-approved resolved input descriptor":
                     failures.append("temperature sensor discovery read law mismatch")
@@ -1212,15 +1283,15 @@ def temperature_sensor_authority_from_receipt(
             failures.append("temperature discovery transport authority receipt file hash mismatch")
         if expected_transport_receipt.get("controller_challenge_sha256") != receipt.get("controller_challenge_sha256"):
             failures.append("temperature discovery transport challenge mismatch")
-        if expected_transport_receipt.get("retry_count") != 0:
+        if not is_strict_int(expected_transport_receipt.get("retry_count")) or expected_transport_receipt.get("retry_count") != 0:
             failures.append("temperature discovery transport retry count must be zero")
-        if expected_transport_receipt.get("target_contact_count") != 1:
+        if not is_strict_int(expected_transport_receipt.get("target_contact_count")) or expected_transport_receipt.get("target_contact_count") != 1:
             failures.append("temperature discovery transport target contact count must be one")
-        if expected_transport_receipt.get("sensor_inventory_count") != 1:
+        if not is_strict_int(expected_transport_receipt.get("sensor_inventory_count")) or expected_transport_receipt.get("sensor_inventory_count") != 1:
             failures.append("temperature discovery transport inventory count must be one")
-        if expected_transport_receipt.get("live_invocation_count") != 0:
+        if not is_strict_int(expected_transport_receipt.get("live_invocation_count")) or expected_transport_receipt.get("live_invocation_count") != 0:
             failures.append("temperature discovery transport live invocation count must be zero")
-        if expected_transport_receipt.get("pmu_acquisition_count") != 0:
+        if not is_strict_int(expected_transport_receipt.get("pmu_acquisition_count")) or expected_transport_receipt.get("pmu_acquisition_count") != 0:
             failures.append("temperature discovery transport PMU acquisition count must be zero")
     failures.extend(validate_temperature_authority_challenge(receipt, discovery, expected_challenge))
     if receipt.get("hwmon_name") not in target.APPROVED_TEMPERATURE_HWMON_NAMES:
@@ -1468,21 +1539,7 @@ def acquire_temperature_sensor_authority(
     target_host: str = TARGET_HOST,
     remote_root: str = DISCOVERY_REMOTE_ROOT,
     source_authority_commit: str | None = None,
-    command_runner: Any | None = None,
-    nonce_override: str | None = None,
-    source_commit_check_override: dict[str, Any] | None = None,
-    source_review_override: dict[str, Any] | None = None,
-    source_stage_root: Path | None = None,
 ) -> dict[str, Any]:
-    fixture_overrides = [
-        nonce_override is not None,
-        source_commit_check_override is not None,
-        source_review_override is not None,
-        source_stage_root is not None,
-    ]
-    if any(fixture_overrides) and command_runner is None:
-        raise ControllerError("offline acquisition fixture overrides require injected command runner")
-    execute = command_runner or run
     if any(
         path.exists()
         for path in [
@@ -1491,24 +1548,21 @@ def acquire_temperature_sensor_authority(
             DISCOVERY_TRANSPORT_PATH,
             DISCOVERY_ATTEMPT_PATH,
             DISCOVERY_CHALLENGE_PATH,
+            DISCOVERY_CLEANUP_CUSTODY_PATH,
         ]
     ):
-        raise ControllerError("second discovery attempt rejected: authority, discovery, transport, or attempt receipt already exists")
+        raise ControllerError("second discovery attempt rejected: authority, discovery, transport, cleanup, or attempt receipt already exists")
     source_hashes = read_source_hash_authority()
     schedule_sidecar = read_json(public.SCHEDULE_SHA)
     bundle = read_existing_source_bundle_authority()
     source_commit = source_authority_commit or os.environ.get("FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUTHORITY_COMMIT") or git_text("rev-parse", "HEAD")
-    source_commit_check = source_commit_check_override or source_authority_commit_verification(source_commit)
+    source_commit_check = source_authority_commit_verification(source_commit)
     if not source_commit_check["passed"]:
         raise ControllerError("source authority commit verification failed: " + ",".join(source_commit_check["failures"]))
-    if source_commit_check.get("commit") != source_commit:
-        raise ControllerError("source authority commit verification result does not match requested commit")
-    nonce = nonce_override or secrets.token_hex(32)
-    if re.fullmatch(r"[0-9a-f]{64}", nonce) is None:
-        raise ControllerError("controller nonce override malformed")
+    nonce = secrets.token_hex(32)
     nonce_sha = hashlib.sha256(nonce.encode("ascii")).hexdigest()
     transport_scope = discovery_transport_scope(target_host=target_host, remote_root=remote_root, nonce_sha=nonce_sha)
-    source_review = source_review_override or read_source_authority_review_for_discovery(
+    source_review = read_source_authority_review_for_discovery(
         source_commit=source_commit,
         source_hashes_sha256=source_hashes["source_hashes_sha256"],
         source_bundle_sha256=bundle["sha256"],
@@ -1534,6 +1588,7 @@ def acquire_temperature_sensor_authority(
     commands: list[list[str]] = []
     cleanup = {"attempted": False, "passed": False, "absence_verified": False, "owner_marker": remote_owner_marker}
     remote_root_owned = False
+    remote_root_may_exist = False
     remote_base_preexisting = True
     target_command_invoked = False
     discovery: dict[str, Any] | None = None
@@ -1558,14 +1613,7 @@ def acquire_temperature_sensor_authority(
     with tempfile.TemporaryDirectory(prefix="family10h_temperature_discovery_") as tmp:
         tmp_root = Path(tmp)
         source_stage = tmp_root / "source_authority_snapshot"
-        if source_stage_root is None:
-            materialize_source_authority_snapshot(source_commit, source_stage)
-        else:
-            source_stage.mkdir(parents=True, exist_ok=True)
-            for name in SOURCE_AUTHORITY_FILE_NAMES:
-                local_source = source_stage_root / name
-                require(local_source.exists(), f"offline source-stage fixture missing {name}")
-                shutil.copy2(local_source, source_stage / name)
+        materialize_source_authority_snapshot(source_commit, source_stage)
         challenge_path = tmp_root / "controller_challenge.json"
         write_json(challenge_path, challenge)
         local_copyback = tmp_root / target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME
@@ -1578,16 +1626,14 @@ def acquire_temperature_sensor_authority(
                 f"install -d -m 0700 {sh_quote(remote_base_root)}; "
                 f"mkdir -m 0700 {sh_quote(remote_root)}; "
                 f"printf '%s\\n' {sh_quote(nonce_sha)} > {sh_quote(remote_owner_marker)}; "
-                f"if ! install -d -m 0700 {sh_quote(remote_source)}; then rm -rf -- {sh_quote(remote_root)}; exit 1; fi; "
-                f"if ! test \"$(cat {sh_quote(remote_owner_marker)})\" = {sh_quote(nonce_sha)}; then rm -rf -- {sh_quote(remote_root)}; exit 1; fi; "
-                "printf 'base_preexisting=%s\\n' \"$base_preexisting\""
+                f"trap 'if test -f {sh_quote(remote_owner_marker)} && grep -qx {sh_quote(nonce_sha)} {sh_quote(remote_owner_marker)}; then rm -rf -- {sh_quote(remote_root)}; fi' HUP INT TERM EXIT; "
+                f"install -d -m 0700 {sh_quote(remote_source)}; "
+                f"test \"$(cat {sh_quote(remote_owner_marker)})\" = {sh_quote(nonce_sha)}; "
+                "trap - HUP INT TERM EXIT; "
+                "printf 'FAMILY10H_DISCOVERY_PREFLIGHT base_preexisting=%s root_created=1\\n' \"$base_preexisting\""
             )
             command = ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=8", target_host, preflight]
             commands.append(command)
-            preflight_result = execute(command, timeout=20.0)
-            remote_root_owned = True
-            remote_base_preexisting = "base_preexisting=1" in preflight_result.stdout
-            cleanup["remote_base_preexisting"] = remote_base_preexisting
             write_discovery_attempt_receipt(
                 {
                     "passed": False,
@@ -1605,14 +1651,23 @@ def acquire_temperature_sensor_authority(
                     "commands": commands,
                 }
             )
+            remote_root_may_exist = True
+            preflight_result = run(command, timeout=20.0)
+            preflight_receipt = parse_preflight_stdout(preflight_result.stdout)
+            remote_root_owned = preflight_receipt["passed"] is True and preflight_receipt["root_created"] is True
+            remote_base_preexisting = bool(preflight_receipt["remote_base_preexisting"])
+            cleanup["remote_base_preexisting"] = remote_base_preexisting
+            cleanup["preflight"] = preflight_receipt
+            if not preflight_receipt["passed"]:
+                raise ControllerError("discovery preflight stdout malformed")
             for name in SOURCE_AUTHORITY_FILE_NAMES:
                 local = source_stage / name
                 command = ["scp", "-q", str(local), f"{target_host}:{remote_source}/{name}"]
                 commands.append(command)
-                execute(command, timeout=60.0)
+                run(command, timeout=60.0)
             command = ["scp", "-q", str(challenge_path), f"{target_host}:{remote_challenge}"]
             commands.append(command)
-            execute(command, timeout=30.0)
+            run(command, timeout=30.0)
             remote_command = (
                 f"cd {sh_quote(remote_source)} && "
                 f"python3 family10h_carrier_tomography_target.py "
@@ -1643,16 +1698,16 @@ def acquire_temperature_sensor_authority(
                     "commands": commands,
                 }
             )
-            completed = execute(command, timeout=120.0, check=False)
+            completed = run(command, timeout=120.0, check=False)
             if completed.returncode != 0:
                 raise ControllerError(f"target discovery failed rc={completed.returncode}: {completed.stderr or completed.stdout}")
             sha_command = f"sha256sum {sh_quote(remote_receipt)} | awk '{{print $1}}'"
             command = ["ssh", "-o", "BatchMode=yes", target_host, sha_command]
             commands.append(command)
-            remote_sha = execute(command, timeout=20.0).stdout.strip()
+            remote_sha = run(command, timeout=20.0).stdout.strip()
             command = ["scp", "-q", f"{target_host}:{remote_receipt}", str(local_copyback)]
             commands.append(command)
-            execute(command, timeout=30.0)
+            run(command, timeout=30.0)
             local_sha = public.sha256_file(local_copyback)
             if local_sha != remote_sha:
                 raise ControllerError("discovery copy-back hash mismatch")
@@ -1683,43 +1738,42 @@ def acquire_temperature_sensor_authority(
                 }
             )
         finally:
-            if remote_root_owned:
+            if remote_root_owned or remote_root_may_exist:
                 cleanup["attempted"] = True
-                try:
-                    write_discovery_attempt_receipt(
-                        {
-                            "passed": False,
-                            "attempt_state": "cleanup_armed",
-                            "source_authority_commit": source_commit,
-                            "source_authority": source_commit_check,
-                            "source_authority_review": source_review,
-                            "controller_challenge_sha256": public.digest(challenge),
-                            "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
-                            "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
-                            "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256") if isinstance(discovery, dict) else None,
-                            "target_discovery_receipt_file_sha256": target_discovery_file_sha,
-                            "target_contact_count": 1,
-                            "sensor_inventory_count": 1 if discovery is not None else 0,
-                            "live_invocation_count": 0,
-                            "pmu_acquisition_count": 0,
-                            "cleanup": cleanup,
-                            "commands": commands,
-                        }
-                    )
-                except Exception as exc:  # noqa: BLE001 - local receipt failure must not skip remote cleanup
-                    cleanup["journal_error_before_cleanup"] = str(exc)
+                if discovery is not None:
+                    try:
+                        write_discovery_attempt_receipt(
+                            {
+                                "passed": False,
+                                "attempt_state": "cleanup_armed",
+                                "source_authority_commit": source_commit,
+                                "source_authority": source_commit_check,
+                                "source_authority_review": source_review,
+                                "controller_challenge_sha256": public.digest(challenge),
+                                "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
+                                "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
+                                "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256") if isinstance(discovery, dict) else None,
+                                "target_discovery_receipt_file_sha256": target_discovery_file_sha,
+                                "target_contact_count": 1,
+                                "sensor_inventory_count": 1,
+                                "live_invocation_count": 0,
+                                "pmu_acquisition_count": 0,
+                                "cleanup": cleanup,
+                                "commands": commands,
+                            }
+                        )
+                    except Exception as exc:  # noqa: BLE001 - local receipt failure must not skip remote cleanup
+                        cleanup["journal_error_before_cleanup"] = str(exc)
                 cleanup_script = (
-                    "set -eu; "
-                    f"test -f {sh_quote(remote_owner_marker)}; "
-                    f"grep -qx {sh_quote(nonce_sha)} {sh_quote(remote_owner_marker)}; "
-                    f"rm -rf -- {sh_quote(remote_root)}; "
+                    "set -u; "
+                    f"if test -f {sh_quote(remote_owner_marker)} && grep -qx {sh_quote(nonce_sha)} {sh_quote(remote_owner_marker)}; then rm -rf -- {sh_quote(remote_root)}; fi; "
                     + (f"rmdir -- {sh_quote(remote_base_root)} 2>/dev/null || true; " if not remote_base_preexisting else "")
                     + "true"
                 )
                 cleanup_command = ["ssh", "-o", "BatchMode=yes", target_host, cleanup_script]
                 commands.append(cleanup_command)
                 try:
-                    cleanup_result = execute(cleanup_command, timeout=30.0, check=False)
+                    cleanup_result = run(cleanup_command, timeout=30.0, check=False)
                     cleanup["passed"] = cleanup_result.returncode == 0
                     cleanup["returncode"] = cleanup_result.returncode
                 except Exception as exc:  # noqa: BLE001 - cleanup failures must be recorded, not raised before absence probe
@@ -1732,35 +1786,53 @@ def acquire_temperature_sensor_authority(
                 absence_command = ["ssh", "-o", "BatchMode=yes", target_host, absence_script]
                 commands.append(absence_command)
                 try:
-                    absence_result = execute(absence_command, timeout=20.0, check=False)
+                    absence_result = run(absence_command, timeout=20.0, check=False)
                     cleanup["absence_verified"] = absence_result.returncode == 0
                     cleanup["absence_returncode"] = absence_result.returncode
                 except Exception as exc:  # noqa: BLE001 - preserve failed absence probe in durable attempt state
                     cleanup["absence_verified"] = False
                     cleanup["absence_error"] = str(exc)
-                try:
-                    write_discovery_attempt_receipt(
+                if discovery is not None:
+                    try:
+                        write_discovery_attempt_receipt(
+                            {
+                                "passed": False,
+                                "attempt_state": "cleanup_completed",
+                                "source_authority_commit": source_commit,
+                                "source_authority": source_commit_check,
+                                "source_authority_review": source_review,
+                                "controller_challenge_sha256": public.digest(challenge),
+                                "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
+                                "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
+                                "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256") if isinstance(discovery, dict) else None,
+                                "target_discovery_receipt_file_sha256": target_discovery_file_sha,
+                                "target_contact_count": 1,
+                                "sensor_inventory_count": 1,
+                                "live_invocation_count": 0,
+                                "pmu_acquisition_count": 0,
+                                "cleanup": cleanup,
+                                "commands": commands,
+                            }
+                        )
+                    except Exception as exc:  # noqa: BLE001 - authority remains blocked by missing cleanup journal
+                        cleanup["journal_error_after_cleanup"] = str(exc)
+                else:
+                    write_discovery_cleanup_custody_receipt(
                         {
-                            "passed": False,
-                            "attempt_state": "cleanup_completed",
+                            "passed": cleanup["passed"] is True and cleanup["absence_verified"] is True,
                             "source_authority_commit": source_commit,
-                            "source_authority": source_commit_check,
                             "source_authority_review": source_review,
                             "controller_challenge_sha256": public.digest(challenge),
                             "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
                             "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
-                            "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256") if isinstance(discovery, dict) else None,
-                            "target_discovery_receipt_file_sha256": target_discovery_file_sha,
                             "target_contact_count": 1,
-                            "sensor_inventory_count": 1 if discovery is not None else 0,
+                            "sensor_inventory_count": 0,
                             "live_invocation_count": 0,
                             "pmu_acquisition_count": 0,
                             "cleanup": cleanup,
                             "commands": commands,
                         }
                     )
-                except Exception as exc:  # noqa: BLE001 - authority remains blocked by missing cleanup journal
-                    cleanup["journal_error_after_cleanup"] = str(exc)
     if not cleanup["passed"] or not cleanup["absence_verified"]:
         raise ControllerError("discovery cleanup or remote-root absence verification failed")
     if discovery is None or authority is None:
@@ -2149,7 +2221,7 @@ def validate_discovery_transport_receipt(receipt: dict[str, Any] | None) -> dict
         return {"passed": False, "failures": ["discovery transport receipt missing"]}
     if receipt.get("schema") != "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT_V1":
         failures.append("discovery transport schema mismatch")
-    if receipt.get("retry_count") != 0:
+    if not is_strict_int(receipt.get("retry_count")) or receipt.get("retry_count") != 0:
         failures.append("discovery transport retry count must be zero")
     if receipt.get("passed") is not True:
         failures.append("discovery transport must pass")
@@ -2187,13 +2259,13 @@ def validate_discovery_transport_receipt(receipt: dict[str, Any] | None) -> dict
     cleanup = receipt.get("cleanup")
     if not isinstance(cleanup, dict) or cleanup.get("passed") is not True or cleanup.get("absence_verified") is not True:
         failures.append("discovery cleanup and absence verification required")
-    if receipt.get("target_contact_count") != 1:
+    if not is_strict_int(receipt.get("target_contact_count")) or receipt.get("target_contact_count") != 1:
         failures.append("discovery target contact count must be one")
-    if receipt.get("sensor_inventory_count") != 1:
+    if not is_strict_int(receipt.get("sensor_inventory_count")) or receipt.get("sensor_inventory_count") != 1:
         failures.append("discovery sensor inventory count must be one")
-    if receipt.get("live_invocation_count") != 0:
+    if not is_strict_int(receipt.get("live_invocation_count")) or receipt.get("live_invocation_count") != 0:
         failures.append("discovery live invocation count must be zero")
-    if receipt.get("pmu_acquisition_count") != 0:
+    if not is_strict_int(receipt.get("pmu_acquisition_count")) or receipt.get("pmu_acquisition_count") != 0:
         failures.append("discovery PMU acquisition count must be zero")
     if receipt.get("discovery_transport_sha256") != public.digest({k: v for k, v in receipt.items() if k != "discovery_transport_sha256"}):
         failures.append("discovery transport digest mismatch")
@@ -3060,237 +3132,138 @@ def challenge_receipt_regression() -> dict[str, Any]:
 
 
 def controller_acquisition_transaction_regression() -> dict[str, Any]:
-    original_paths = {
-        "TEMPERATURE_SENSOR_AUTHORITY": TEMPERATURE_SENSOR_AUTHORITY,
-        "TARGET_DISCOVERY_RECEIPT": TARGET_DISCOVERY_RECEIPT,
-        "DISCOVERY_TRANSPORT_PATH": DISCOVERY_TRANSPORT_PATH,
-        "DISCOVERY_CHALLENGE_PATH": DISCOVERY_CHALLENGE_PATH,
-        "DISCOVERY_ATTEMPT_PATH": DISCOVERY_ATTEMPT_PATH,
-        "DISCOVERY_ATTEMPT_JOURNAL_PATH": DISCOVERY_ATTEMPT_JOURNAL_PATH,
-    }
-    source_hashes = read_source_hash_authority()
-    source_bundle = read_existing_source_bundle_authority()
-    source_commit = "f" * 40
-    controller_nonce = "d" * 64
-    source_review = {
-        "passed": True,
-        "failures": [],
-        "review_quorum": {"passed": True, "roles": {}, "failures": []},
-        "review_quorum_sha256": "c" * 64,
-        "source_authority_commit": source_commit,
-        "source_hashes_sha256": source_hashes["source_hashes_sha256"],
-        "source_bundle_sha256": source_bundle["sha256"],
-        "findings_path": "offline_fixture_SOURCE_AUTHORITY_C1_REVIEW_NORMALIZED.json",
-        "findings_sha256": "a" * 64,
-        "review_report_path": "offline_fixture_SOURCE_AUTHORITY_C1_REVIEW_REPORTS.md",
-        "review_report_sha256": "b" * 64,
-    }
-    source_commit_check = {
-        "passed": True,
-        "failures": [],
-        "commit": source_commit,
-        "files": {name: {"present": True, "offline_fixture": True} for name in SOURCE_AUTHORITY_FILE_NAMES},
-        "status": [],
-        "offline_fixture": True,
-    }
-    command_kinds: list[str] = []
-    remote_files: dict[str, bytes] = {}
-    cleaned_roots: set[str] = set()
+    def seal_attempt(state: str, overrides: dict[str, Any] | None = None) -> dict[str, Any]:
+        row = {
+            "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT_V1",
+            "passed": state == "complete",
+            "attempt_state": state,
+            "source_authority_commit": "1" * 40,
+            "source_authority_review": {
+                "findings_sha256": "a" * 64,
+                "review_report_sha256": "b" * 64,
+                "review_quorum_sha256": "c" * 64,
+                "source_authority_commit": "1" * 40,
+                "source_hashes_sha256": "d" * 64,
+                "source_bundle_sha256": "e" * 64,
+            },
+            "controller_challenge_sha256": "2" * 64,
+            "challenge_receipt_canonical_sha256": "3" * 64,
+            "challenge_receipt_file_sha256": "4" * 64,
+            **ATTEMPT_STATE_COUNTERS[state],
+        }
+        if overrides:
+            row.update(overrides)
+        row["discovery_attempt_sha256"] = public.digest({k: v for k, v in row.items() if k != "discovery_attempt_sha256"})
+        return row
 
-    def completed(command: list[str], returncode: int = 0, stdout: str = "", stderr: str = "") -> subprocess.CompletedProcess[str]:
-        return subprocess.CompletedProcess(command, returncode, stdout, stderr)
-
-    def non_synthetic_canonical_identity() -> dict[str, Any]:
-        return public.with_temperature_identity_digest(
-            {
-                "hwmon_name": "k10temp",
-                "sensor_label": "Tctl",
-                "sensor_input": "temp1_input",
-                "class_path": "/sys/class/hwmon/hwmon7/temp1_input",
-                "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.4/hwmon/hwmon7/temp1_input",
-                "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.4/hwmon/hwmon7",
-                "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.4",
-            }
-        )
-
-    def build_copied_back_discovery(challenge: dict[str, Any]) -> dict[str, Any]:
-        identity = non_synthetic_canonical_identity()
-        scope = challenge["transport_scope"]
-        result = {
-            "schema": TEMPERATURE_SENSOR_DISCOVERY_SCHEMA,
-            "discovery_mode": "target_read_only_sensor_inventory",
+    def seal_transport(overrides: dict[str, Any] | None = None) -> dict[str, Any]:
+        nonce_sha = "8" * 64
+        scope = discovery_transport_scope(target_host=TARGET_HOST, remote_root=DISCOVERY_REMOTE_ROOT, nonce_sha=nonce_sha)
+        row = {
+            "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT_V1",
+            "passed": True,
+            "cleanup": {"attempted": True, "passed": True, "absence_verified": True},
+            "retry_count": 0,
+            "target_command_invoked": True,
+            "target_host": scope["target_host"],
+            "remote_base_root": scope["remote_base_root"],
+            "remote_root": scope["remote_root"],
+            "remote_source_root": scope["remote_source_root"],
+            "remote_receipt_path": scope["remote_receipt_path"],
+            "source_authority_commit": "f" * 40,
+            "controller_challenge": {"controller_nonce_sha256": nonce_sha, "transport_scope": scope},
+            "controller_challenge_sha256": "1" * 64,
+            "challenge_receipt_canonical_sha256": "2" * 64,
+            "challenge_receipt_file_sha256": "7" * 64,
+            "target_discovery_receipt_sha256": "3" * 64,
+            "target_discovery_receipt_file_sha256": "5" * 64,
+            "authority_receipt_sha256": "4" * 64,
+            "authority_receipt_file_sha256": "6" * 64,
             "target_contact_count": 1,
             "sensor_inventory_count": 1,
             "live_invocation_count": 0,
             "pmu_acquisition_count": 0,
-            "pmu_open_count": 0,
-            "runtime_launch_count": 0,
-            "tomography_output_root_created": False,
-            "source_root": scope["remote_source_root"],
-            "receipt_path": scope["remote_receipt_path"],
-            "hwmon_root": "/sys/class/hwmon",
-            "provenance": {
-                "authority": "target_sensor_discovery",
-                "science_package_id": public.SCIENCE_PACKAGE_ID,
-                "transaction_run_id": public.TRANSACTION_RUN_ID,
-                "target_platform": {
-                    "vendor": "AuthenticAMD",
-                    "cpu_family": 16,
-                    "cpu_models": [10],
-                    "processor_count": 1,
-                    "processors": [{"processor": 0, "vendor_id": "AuthenticAMD", "cpu_family": 16, "model": 10}],
-                    "cpuinfo_path": "/proc/cpuinfo",
-                    "checked_before_discovery": True,
-                },
-                "discovery_monotonic_ns": 1,
-                "controller_challenge_sha256": public.digest(challenge),
-                "authorized_commit": challenge["authorized_commit"],
-            },
-            "controller_challenge_sha256": public.digest(challenge),
-            "controller_nonce_sha256": challenge["controller_nonce_sha256"],
-            "source_authority": {"passed": True, "failures": [], "offline_fixture": True},
-            "authorizing_scope": {
-                "cpuinfo_path": "/proc/cpuinfo",
-                "hwmon_root": "/sys/class/hwmon",
-                "canonical_cpuinfo": True,
-                "canonical_hwmon_root": True,
-                "selected_class_path_is_sysfs_hwmon": True,
-                "resolved_input_is_sysfs_device": True,
-                "resolved_device_is_sysfs_device": True,
-                "authorizing": True,
-            },
-            "observed_candidates": [{"identity": identity, "approved": True}],
-            "selection": {
-                "law": "prefer Tctl over Tdie, then class_path, then resolved_input_path",
-                "approved_count": 1,
-                "selected_class_path": identity["class_path"],
-                "deterministic_law": True,
-            },
-            "selected_identity": identity,
-            "identity_before": identity,
-            "sample": {
-                "path": identity["class_path"],
-                "label": identity["sensor_label"],
-                "value_c": 42.0,
-                "identity": identity,
-                "pinned_descriptor": {
-                    "resolved_input_path": identity["resolved_input_path"],
-                    "st_dev": 1,
-                    "st_ino": 2,
-                    "st_mode": 33060,
-                },
-                "read_law": "manifest-approved resolved input descriptor",
-            },
-            "identity_after": identity,
         }
-        result["target_discovery_receipt_sha256"] = public.digest(
-            {k: v for k, v in result.items() if k != "target_discovery_receipt_sha256"}
-        )
-        return result
+        if overrides:
+            row.update(overrides)
+        row["discovery_transport_sha256"] = public.digest({k: v for k, v in row.items() if k != "discovery_transport_sha256"})
+        return row
 
-    def fake_runner(command: list[str], *, timeout: float, check: bool = True, cwd: Path | None = None) -> subprocess.CompletedProcess[str]:
-        del timeout, cwd
-        if command[0] == "ssh":
-            remote_script = command[-1]
-            if "base_preexisting=" in remote_script:
-                command_kinds.append("ssh_preflight_claim")
-                return completed(command, stdout="base_preexisting=0\n")
-            if "--discover-temperature-sensor-authority" in remote_script:
-                command_kinds.append("ssh_target_discovery_command")
-                receipt_match = re.search(r"--receipt-path\s+(\S+)", remote_script)
-                nonce_match = re.search(r"--controller-nonce\s+([0-9a-f]{64})", remote_script)
-                require(receipt_match is not None and nonce_match is not None, "fixture target command malformed")
-                receipt_path = receipt_match.group(1)
-                challenge_path = receipt_path.replace("/" + target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME, "/controller_challenge.json")
-                challenge = strict_json_loads(remote_files[challenge_path].decode("utf-8"))
-                require(nonce_match.group(1) == controller_nonce, "fixture target command nonce mismatch")
-                discovery = build_copied_back_discovery(challenge)
-                remote_files[receipt_path] = (strict_json_dumps(discovery, indent=2) + "\n").encode("utf-8")
-                return completed(command)
-            if "sha256sum" in remote_script:
-                command_kinds.append("ssh_copyback_hash_probe")
-                receipt_match = re.search(r"sha256sum\s+(\S+)", remote_script)
-                require(receipt_match is not None, "fixture hash probe malformed")
-                receipt_path = receipt_match.group(1)
-                return completed(command, stdout=hashlib.sha256(remote_files[receipt_path]).hexdigest() + "\n")
-            if "rm -rf --" in remote_script:
-                command_kinds.append("ssh_cleanup")
-                root_match = re.search(r"rm -rf --\s+(\S+)", remote_script)
-                if root_match:
-                    cleaned_roots.add(root_match.group(1))
-                return completed(command)
-            if "test ! -e" in remote_script:
-                command_kinds.append("ssh_absence_probe")
-                return completed(command)
-        if command[0] == "scp":
-            source = command[-2]
-            destination = command[-1]
-            if ":" in destination and not source.startswith(f"{TARGET_HOST}:"):
-                command_kinds.append("scp_source_or_challenge_to_target")
-                remote_path = destination.split(":", 1)[1]
-                remote_files[remote_path] = Path(source).read_bytes()
-                return completed(command)
-            if source.startswith(f"{TARGET_HOST}:"):
-                command_kinds.append("scp_copyback_receipt")
-                remote_path = source.split(":", 1)[1]
-                Path(destination).write_bytes(remote_files[remote_path])
-                return completed(command)
-        if check:
-            raise ControllerError("fixture runner received unsupported command: " + " ".join(command))
-        return completed(command, returncode=1, stderr="unsupported fixture command")
-
-    with tempfile.TemporaryDirectory(prefix="family10h_controller_acquisition_fixture_") as tmp:
-        artifact_root = Path(tmp) / "artifacts"
-        artifact_root.mkdir()
+    production_signature = set(inspect.signature(acquire_temperature_sensor_authority).parameters)
+    valid_preflight = parse_preflight_stdout("FAMILY10H_DISCOVERY_PREFLIGHT base_preexisting=0 root_created=1\n")
+    malformed_preflight = parse_preflight_stdout("base_preexisting=0\n")
+    bool_challenge = {
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE_RECEIPT_V1",
+        "science_package_id": public.SCIENCE_PACKAGE_ID,
+        "transaction_run_id": public.TRANSACTION_RUN_ID,
+        "source_authority_commit": "1" * 40,
+        "source_authority_review": fixture_source_review_binding("1" * 40, "2" * 64, "3" * 64),
+        "controller_challenge": {"controller_nonce_sha256": "4" * 64},
+        "controller_challenge_sha256": public.digest({"controller_nonce_sha256": "4" * 64}),
+        "controller_nonce_sha256": "4" * 64,
+        "pre_contact": True,
+        "target_contact_count": False,
+        "sensor_inventory_count": 0,
+        "live_invocation_count": 0,
+        "pmu_acquisition_count": 0,
+    }
+    bool_challenge["challenge_receipt_canonical_sha256"] = public.digest(
+        {k: v for k, v in bool_challenge.items() if k != "challenge_receipt_canonical_sha256"}
+    )
+    bool_journal_rows = [seal_attempt(state) for state in ATTEMPT_STATE_SEQUENCE]
+    bool_journal_rows[1] = seal_attempt("transport_contact_invoked", {"target_contact_count": True})
+    original_cleanup_path = DISCOVERY_CLEANUP_CUSTODY_PATH
+    with tempfile.TemporaryDirectory(prefix="family10h_cleanup_custody_regression_") as tmp:
         try:
-            for name, original in original_paths.items():
-                globals()[name] = artifact_root / original.name
-            result = acquire_temperature_sensor_authority(
-                source_authority_commit=source_commit,
-                command_runner=fake_runner,
-                nonce_override=controller_nonce,
-                source_commit_check_override=source_commit_check,
-                source_review_override=source_review,
-                source_stage_root=HERE,
+            globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = Path(tmp) / "cleanup.json"
+            cleanup_valid = write_discovery_cleanup_custody_receipt(
+                {
+                    "passed": True,
+                    "source_authority_commit": "1" * 40,
+                    "source_authority_review": {},
+                    "controller_challenge_sha256": "2" * 64,
+                    "challenge_receipt_canonical_sha256": "3" * 64,
+                    "challenge_receipt_file_sha256": "4" * 64,
+                    "target_contact_count": 1,
+                    "sensor_inventory_count": 0,
+                    "live_invocation_count": 0,
+                    "pmu_acquisition_count": 0,
+                    "cleanup": {"attempted": True, "passed": True, "absence_verified": True},
+                    "commands": [],
+                }
             )
-            transport = read_json(DISCOVERY_TRANSPORT_PATH)
-            authority = read_json(TEMPERATURE_SENSOR_AUTHORITY)
-            discovery = read_json(TARGET_DISCOVERY_RECEIPT)
-            journal_rows = strict_jsonl_loads(DISCOVERY_ATTEMPT_JOURNAL_PATH.read_bytes())
-            journal_replay = replay_attempt_journal_rows(journal_rows)
-            authority_validation = temperature_sensor_authority_from_receipt(
-                authority,
-                expected_challenge=transport["controller_challenge"],
-                expected_discovery_receipt=discovery,
-                expected_transport_receipt=transport,
-            )
-            checks = {
-                "full_acquisition_function_passes_with_injected_transport": result["passed"] is True,
-                "discovery_transport_receipt_replays": validate_discovery_transport_receipt(transport)["passed"],
-                "authority_receipt_replays_against_copied_receipt": authority_validation["passed"],
-                "journal_has_exact_success_sequence": journal_replay["passed"],
-                "challenge_receipt_written_before_contact": read_json(DISCOVERY_CHALLENGE_PATH).get("pre_contact") is True,
-                "all_receipts_are_redirected_to_fixture_root": all(globals()[name].parent == artifact_root for name in original_paths),
-                "source_files_copied_before_target_command": command_kinds.index("ssh_target_discovery_command")
-                > max(index for index, kind in enumerate(command_kinds) if kind == "scp_source_or_challenge_to_target"),
-                "cleanup_and_absence_probe_executed": "ssh_cleanup" in command_kinds and "ssh_absence_probe" in command_kinds,
-                "no_live_or_pmu_counters_incremented": result["live_invocation_count"] == 0 and result["pmu_acquisition_count"] == 0,
-            }
+            try:
+                write_discovery_cleanup_custody_receipt(
+                    {
+                        **cleanup_valid,
+                        "cleanup_custody_sha256": None,
+                        "target_contact_count": True,
+                    }
+                )
+                bool_cleanup_rejected = False
+            except ControllerError:
+                bool_cleanup_rejected = True
         finally:
-            for name, original in original_paths.items():
-                globals()[name] = original
+            globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = original_cleanup_path
+    checks = {
+        "production_acquisition_has_no_injected_transport_surface": production_signature
+        == {"target_host", "remote_root", "source_authority_commit"},
+        "valid_structured_preflight_parses": valid_preflight["passed"] is True and valid_preflight["remote_base_preexisting"] is False,
+        "malformed_preflight_fails_closed_and_preserves_base": malformed_preflight["passed"] is False
+        and malformed_preflight["remote_base_preexisting"] is True,
+        "boolean_challenge_counter_rejected": not validate_discovery_challenge_receipt_payload(bool_challenge)["passed"],
+        "boolean_journal_counter_rejected": not replay_attempt_journal_rows(bool_journal_rows)["passed"],
+        "boolean_transport_counter_rejected": not validate_discovery_transport_receipt(seal_transport({"target_contact_count": True}))["passed"],
+        "failure_cleanup_receipt_writes_without_success_journal": cleanup_valid["cleanup_custody_sha256"]
+        == public.digest({k: v for k, v in cleanup_valid.items() if k != "cleanup_custody_sha256"}),
+        "boolean_cleanup_counter_rejected": bool_cleanup_rejected,
+    }
     return {
-        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_ACQUISITION_TRANSACTION_REGRESSION_V1",
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_ACQUISITION_TRANSACTION_REGRESSION_V2",
         "passed": all(checks.values()),
         "checks": checks,
-        "command_kinds": command_kinds,
-        "journal_state_sequence": [row.get("attempt_state") for row in journal_rows],
-        "transport_sha256": transport.get("discovery_transport_sha256"),
-        "authority_sha256": authority.get("temperature_sensor_authority_sha256"),
-        "fixture_remote_file_count": len(remote_files),
-        "fixture_cleaned_root_count": len(cleaned_roots),
-        "target_contact_count": 1,
-        "sensor_inventory_count": 1,
+        "target_contact_count": 0,
+        "sensor_inventory_count": 0,
         "live_invocation_count": 0,
         "pmu_acquisition_count": 0,
     }

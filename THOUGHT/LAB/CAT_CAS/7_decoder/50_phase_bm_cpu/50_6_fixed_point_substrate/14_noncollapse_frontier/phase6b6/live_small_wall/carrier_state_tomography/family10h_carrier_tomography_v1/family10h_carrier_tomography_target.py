@@ -44,6 +44,8 @@ SOURCE_AUTHORITY_FILE_NAMES = SOURCE_FILE_NAMES + [
 
 APPROVED_TEMPERATURE_HWMON_NAMES = ["k10temp"]
 APPROVED_TEMPERATURE_SENSOR_LABELS = ["Tctl", "Tdie"]
+APPROVED_TEMPERATURE_DEVICE_DRIVERS = ["k10temp"]
+APPROVED_TEMPERATURE_DEVICE_SUBSYSTEMS = ["pci"]
 REQUIRED_REVIEW_ROLES = {
     "physical_carrier_state_auditor": "physical carrier-state auditor",
     "experimental_design_operator_auditor": "experimental-design/operator auditor",
@@ -103,6 +105,14 @@ TEMPERATURE_IDENTITY_FIELDS = [
     "resolved_input_path",
     "resolved_hwmon_path",
     "resolved_device_path",
+    "resolved_driver_path",
+    "resolved_subsystem_path",
+    "device_driver",
+    "device_subsystem",
+    "device_modalias",
+    "input_st_dev",
+    "input_st_ino",
+    "input_st_mode",
 ]
 
 REQUIRED_EVIDENCE_FILES = [
@@ -880,6 +890,16 @@ def validate_temperature_sensor_authority_payload(
         identity = None
     elif identity.get("identity_sha256") != public.temperature_identity_digest(identity):
         failures.append("approved temperature sensor identity digest mismatch")
+    elif (
+        identity.get("device_driver") != "k10temp"
+        or identity.get("device_subsystem") != "pci"
+        or not isinstance(identity.get("device_modalias"), str)
+        or not identity.get("device_modalias")
+        or not public.is_json_int(identity.get("input_st_dev"))
+        or not public.is_json_int(identity.get("input_st_ino"))
+        or not public.is_json_int(identity.get("input_st_mode"))
+    ):
+        failures.append("approved temperature sensor hardware identity incomplete")
     if receipt.get("provenance_bound") is not True:
         failures.append("temperature sensor authority provenance not bound")
     if identity == public.synthetic_temperature_identity():
@@ -919,7 +939,13 @@ def validate_temperature_sensor_authority_payload(
                     failures.append("temperature sensor discovery target platform is not AMD Family 10h")
                 if platform.get("checked_before_discovery") is not True:
                     failures.append("temperature sensor discovery platform was not checked before discovery")
-            if not isinstance(provenance.get("discovery_monotonic_ns"), int) or provenance.get("discovery_monotonic_ns", 0) <= 0:
+                if (
+                    platform.get("source_cpu_expected") != public.SOURCE_CPU_EXPECTED
+                    or platform.get("receiver_cpu_expected") != public.RECEIVER_CPU_EXPECTED
+                    or platform.get("source_receiver_cpus_present") is not True
+                ):
+                    failures.append("temperature sensor discovery source/receiver CPU boundary missing")
+            if not public.is_json_int(provenance.get("discovery_monotonic_ns")) or provenance.get("discovery_monotonic_ns", 0) <= 0:
                 failures.append("temperature sensor discovery monotonic timestamp missing")
             if expected_challenge is not None:
                 if provenance.get("controller_challenge_sha256") != public.digest(expected_challenge):
@@ -1021,7 +1047,13 @@ def validate_temperature_sensor_authority_payload(
                 if not public.is_json_number(value) or not 0.0 < float(value) < 120.0:
                     failures.append("temperature sensor discovery sample value invalid")
                 descriptor = sample.get("pinned_descriptor")
-                if not isinstance(descriptor, dict) or descriptor.get("resolved_input_path") != identity.get("resolved_input_path"):
+                expected_descriptor = {
+                    "resolved_input_path": identity.get("resolved_input_path"),
+                    "input_st_dev": identity.get("input_st_dev"),
+                    "input_st_ino": identity.get("input_st_ino"),
+                    "input_st_mode": identity.get("input_st_mode"),
+                }
+                if not isinstance(descriptor, dict) or descriptor != expected_descriptor:
                     failures.append("temperature sensor discovery pinned descriptor missing or mismatched")
                 if sample.get("read_law") != "manifest-approved resolved input descriptor":
                     failures.append("temperature sensor discovery read law mismatch")
@@ -1156,8 +1188,15 @@ def write_fake_hwmon_sensor(root: Path, index: int, name: str, label: str, milli
     (hwmon / "name").write_text(name + "\n", encoding="utf-8")
     (hwmon / "temp1_label").write_text(label + "\n", encoding="utf-8")
     (hwmon / "temp1_input").write_text(milli_c + "\n", encoding="utf-8")
+    bus_root = root / "bus" / "pci"
+    driver_target = bus_root / "drivers" / "k10temp"
+    driver_target.mkdir(parents=True, exist_ok=True)
+    bus_root.mkdir(parents=True, exist_ok=True)
     device = hwmon / "device"
     device.mkdir()
+    (device / "driver").symlink_to(driver_target, target_is_directory=True)
+    (device / "subsystem").symlink_to(bus_root, target_is_directory=True)
+    (device / "modalias").write_text("pci:v00001022d00001203sv00000000sd00000000bc06sc00i00\n", encoding="utf-8")
     (device / "identity").write_text(f"{name}:{label}\n", encoding="utf-8")
     return hwmon / "temp1_input"
 
@@ -1518,14 +1557,41 @@ def raw_temperature_sensor_identity(path: Path) -> dict[str, Any]:
     hwmon_name = name_path.read_text(encoding="utf-8").strip()
     sensor_label = label_path.read_text(encoding="utf-8").strip()
     device_path = hwmon_dir / "device"
+    require(device_path.exists(), "temperature hwmon device link missing")
+    resolved_input = path.resolve(strict=True)
+    resolved_hwmon = hwmon_dir.resolve(strict=True)
+    resolved_device = device_path.resolve(strict=True)
+    driver_path = resolved_device / "driver"
+    subsystem_path = resolved_device / "subsystem"
+    modalias_path = resolved_device / "modalias"
+    require(driver_path.exists(), "temperature device driver link missing")
+    require(subsystem_path.exists(), "temperature device subsystem link missing")
+    require(modalias_path.exists(), "temperature device modalias missing")
+    resolved_driver = driver_path.resolve(strict=True)
+    resolved_subsystem = subsystem_path.resolve(strict=True)
+    device_driver = resolved_driver.name
+    device_subsystem = resolved_subsystem.name
+    device_modalias = modalias_path.read_text(encoding="utf-8").strip()
+    require(device_driver in APPROVED_TEMPERATURE_DEVICE_DRIVERS, f"temperature device driver not approved: {device_driver}")
+    require(device_subsystem in APPROVED_TEMPERATURE_DEVICE_SUBSYSTEMS, f"temperature device subsystem not approved: {device_subsystem}")
+    require(bool(device_modalias), "temperature device modalias empty")
+    input_stat = resolved_input.stat()
     identity = {
         "hwmon_name": hwmon_name,
         "sensor_label": sensor_label,
         "sensor_input": path.name,
         "class_path": str(path),
-        "resolved_input_path": str(path.resolve(strict=True)),
-        "resolved_hwmon_path": str(hwmon_dir.resolve(strict=True)),
-        "resolved_device_path": str((device_path if device_path.exists() else hwmon_dir).resolve(strict=True)),
+        "resolved_input_path": str(resolved_input),
+        "resolved_hwmon_path": str(resolved_hwmon),
+        "resolved_device_path": str(resolved_device),
+        "resolved_driver_path": str(resolved_driver),
+        "resolved_subsystem_path": str(resolved_subsystem),
+        "device_driver": device_driver,
+        "device_subsystem": device_subsystem,
+        "device_modalias": device_modalias,
+        "input_st_dev": input_stat.st_dev,
+        "input_st_ino": input_stat.st_ino,
+        "input_st_mode": input_stat.st_mode,
     }
     return public.with_temperature_identity_digest(identity)
 
@@ -1586,9 +1652,18 @@ def descriptor_identity(fd: int, identity: dict[str, Any]) -> dict[str, Any]:
     stat = os.fstat(fd)
     return {
         "resolved_input_path": identity["resolved_input_path"],
-        "st_dev": stat.st_dev,
-        "st_ino": stat.st_ino,
-        "st_mode": stat.st_mode,
+        "input_st_dev": stat.st_dev,
+        "input_st_ino": stat.st_ino,
+        "input_st_mode": stat.st_mode,
+    }
+
+
+def expected_descriptor_identity(identity: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "resolved_input_path": identity["resolved_input_path"],
+        "input_st_dev": identity["input_st_dev"],
+        "input_st_ino": identity["input_st_ino"],
+        "input_st_mode": identity["input_st_mode"],
     }
 
 
@@ -1612,6 +1687,7 @@ class PinnedTemperatureSensor:
         require(str(resolved_input.resolve(strict=True)) == self.required_identity["resolved_input_path"], "temperature resolved path drift")
         self.fd = os.open(resolved_input, os.O_RDONLY)
         self.descriptor = descriptor_identity(self.fd, self.required_identity)
+        require(self.descriptor == expected_descriptor_identity(self.required_identity), "temperature descriptor differs from discovery identity")
         post_open_identity = temperature_sensor_identity(class_path)
         require(identity_matches_required(post_open_identity, self.required_identity), "temperature class-path identity drift after pin")
         require(descriptor_identity(self.fd, self.required_identity) == self.descriptor, "temperature descriptor drift after pin")
@@ -1756,12 +1832,21 @@ def require_family10h_platform(cpuinfo_path: Path = Path("/proc/cpuinfo")) -> di
         )
     processor_ids = [item["processor"] for item in processors]
     require(len(set(processor_ids)) == len(processor_ids), "platform identity duplicate processor id")
+    required_cpus = {public.SOURCE_CPU_EXPECTED, public.RECEIVER_CPU_EXPECTED}
+    require(required_cpus.issubset(set(processor_ids)), "platform identity missing frozen source or receiver CPU")
+    affinity = sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") and cpuinfo_path == Path("/proc/cpuinfo") else sorted(processor_ids)
+    require(required_cpus.issubset(set(affinity)), "platform affinity excludes frozen source or receiver CPU")
     return {
         "vendor": "AuthenticAMD",
         "cpu_family": 16,
         "cpu_models": sorted(set(item["model"] for item in processors)),
         "processor_count": len(processors),
         "processors": processors,
+        "source_cpu_expected": public.SOURCE_CPU_EXPECTED,
+        "receiver_cpu_expected": public.RECEIVER_CPU_EXPECTED,
+        "source_receiver_cpus_present": True,
+        "affinity_checked": cpuinfo_path == Path("/proc/cpuinfo"),
+        "affinity_cpus": affinity,
         "cpuinfo_path": str(cpuinfo_path),
         "checked_before_discovery": True,
     }
@@ -1929,6 +2014,8 @@ def discover_temperature_sensor_authority(
         "selected_class_path_is_sysfs_hwmon": str(selected_identity["class_path"]).startswith("/sys/class/hwmon/"),
         "resolved_input_is_sysfs_device": str(selected_identity["resolved_input_path"]).startswith("/sys/devices/"),
         "resolved_device_is_sysfs_device": str(selected_identity["resolved_device_path"]).startswith("/sys/devices/"),
+        "resolved_driver_is_k10temp": selected_identity["device_driver"] == "k10temp",
+        "resolved_subsystem_is_pci": selected_identity["device_subsystem"] == "pci",
     }
     authorizing_scope["authorizing"] = all(
         bool(authorizing_scope[key])
@@ -1938,6 +2025,8 @@ def discover_temperature_sensor_authority(
             "selected_class_path_is_sysfs_hwmon",
             "resolved_input_is_sysfs_device",
             "resolved_device_is_sysfs_device",
+            "resolved_driver_is_k10temp",
+            "resolved_subsystem_is_pci",
         ]
     )
     result = {
@@ -1989,9 +2078,23 @@ def copy_source_fixture(source_root: Path, destination: Path) -> None:
 
 def write_fake_family10h_cpuinfo(path: Path) -> None:
     path.write_text(
-        "processor\t: 0\nvendor_id\t: AuthenticAMD\ncpu family\t: 16\nmodel\t\t: 10\nmodel name\t: AMD Phenom(tm) II\n",
+        "".join(
+            f"processor\t: {cpu}\nvendor_id\t: AuthenticAMD\ncpu family\t: 16\nmodel\t\t: 10\nmodel name\t: AMD Phenom(tm) II\n\n"
+            for cpu in range(6)
+        ),
         encoding="utf-8",
     )
+
+
+def write_fake_cpuinfo_processors(path: Path, processors: list[int]) -> Path:
+    path.write_text(
+        "".join(
+            f"processor\t: {cpu}\nvendor_id\t: AuthenticAMD\ncpu family\t: 16\nmodel\t\t: 10\nmodel name\t: AMD Phenom(tm) II\n\n"
+            for cpu in processors
+        ),
+        encoding="utf-8",
+    )
+    return path
 
 
 def platform_identity_regression(root: Path) -> dict[str, bool]:
@@ -2017,13 +2120,15 @@ def platform_identity_regression(root: Path) -> dict[str, bool]:
     malformed = root / "cpuinfo_malformed"
     malformed.write_text("processor\t 0\nvendor_id\t: AuthenticAMD\ncpu family\t: 16\nmodel\t\t: 10\n", encoding="utf-8")
     return {
-        "valid_family10h_platform_passes": require_family10h_platform(valid)["processor_count"] == 1,
+        "valid_family10h_platform_passes": require_family10h_platform(valid)["processor_count"] == 6,
         "intel_platform_rejected": raises_target_error(lambda: require_family10h_platform(intel)),
         "wrong_amd_family_rejected": raises_target_error(lambda: require_family10h_platform(wrong_family)),
         "split_vendor_family_rejected": raises_target_error(lambda: require_family10h_platform(split)),
         "mixed_processors_rejected": raises_target_error(lambda: require_family10h_platform(mixed)),
         "duplicate_conflicting_fields_rejected": raises_target_error(lambda: require_family10h_platform(conflicting)),
         "malformed_cpuinfo_rejected": raises_target_error(lambda: require_family10h_platform(malformed)),
+        "missing_source_cpu_rejected": raises_target_error(lambda: require_family10h_platform(write_fake_cpuinfo_processors(root / "cpuinfo_missing_source", [0, 1, 2, 3, 5]))),
+        "missing_receiver_cpu_rejected": raises_target_error(lambda: require_family10h_platform(write_fake_cpuinfo_processors(root / "cpuinfo_missing_receiver", [0, 1, 2, 3, 4]))),
     }
 
 
