@@ -1,6 +1,7 @@
 {
   "discovery_transport_self_test": {
     "checks": {
+      "authority_without_transport_rejected": true,
       "cleanup_failure_rejected": true,
       "copyback_corruption_rejected": true,
       "incorrect_zero_target_contact_rejected": true,
@@ -9,7 +10,7 @@
       "remote_absence_failure_rejected": true,
       "second_attempt_retry_rejected": true,
       "transport_digest_corruption_rejected": true,
-      "valid_fake_discovery_authority_passes": true,
+      "valid_fake_discovery_authority_with_transport_passes": true,
       "valid_transport_passes": true
     },
     "passed": true,
@@ -20,7 +21,7 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "a8ca125f16cac15e24e121fa7da334358b5088020a327915025e9c248b10fa7a",
+  "offline_validate_sha256": "007b18a5d3e150505b00347c01c36b5c4bd7ddcea9708908eda8d1b6e19c19f7",
   "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -83,8 +84,28 @@
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "0881a3f91accc707b019bf77c0fd04fc08ddf8fa9440e623e37dd9f466f6cae2",
+  "self_test_sha256": "99079ff9ea26472b45dab37d49dcb02f9b6f712bed17e1494cb1ad8be953fea5",
   "sensor_inventory_count": 0,
+  "source_audit_quorum_regression": {
+    "checks": {
+      "exact_source_audit_quorum_passes": true,
+      "missing_boundary_attestation_blocked": true,
+      "missing_report_blocked": true,
+      "wrong_reviewer_commit_blocked": true,
+      "wrong_top_level_bundle_blocked": true
+    },
+    "passed": true,
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUDIT_QUORUM_REGRESSION_V1"
+  },
+  "source_bundle_mode_regression": {
+    "checks": {
+      "controller_preview_matches_written_bundle": true,
+      "target_bundle_hash_independent_of_0600_mode": true,
+      "target_bundle_hash_independent_of_0644_mode": true
+    },
+    "passed": true,
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_BUNDLE_MODE_REGRESSION_V1"
+  },
   "source_hash_authority_regression": {
     "authority_file_byte_identical_after_rejection": true,
     "failures": [
@@ -109,7 +130,7 @@
     "schema_complete_forged_discovery_rejected": true,
     "synthetic_identity_with_asserted_provenance_cannot_freeze": true,
     "synthetic_or_provenance_free_identity_cannot_freeze": true,
-    "well_formed_challenge_bound_fixture_passes_controller_validator": true,
+    "well_formed_challenge_bound_fixture_without_transport_rejected": true,
     "well_formed_self_authored_discovery_without_expected_challenge_rejected": true,
     "well_formed_self_authored_discovery_wrong_expected_challenge_rejected": true,
     "wrong_hwmon_authority_rejected": true
