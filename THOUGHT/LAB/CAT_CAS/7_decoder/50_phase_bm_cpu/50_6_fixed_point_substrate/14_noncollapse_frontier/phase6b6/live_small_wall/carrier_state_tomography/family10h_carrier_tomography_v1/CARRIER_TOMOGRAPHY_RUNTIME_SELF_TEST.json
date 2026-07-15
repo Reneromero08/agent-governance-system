@@ -4,20 +4,20 @@
       "C:\\Windows\\system32\\wsl.EXE",
       "bash",
       "-lc",
-      "gcc -std=c11 -Wall -Wextra -Werror -O2 -o \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime')\" \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime.c')\""
+      "gcc -std=c11 -Wall -Wextra -Werror -O2 -o \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime')\" \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime.c')\""
     ],
     "compiler": [
       "C:\\Windows\\system32\\wsl.EXE",
       "gcc"
     ],
-    "offline_binary_sha256": "421d7348e5803337f28d5e0dab8df3c36f339e7a703a107df084f85793b7f363",
+    "offline_binary_sha256": "0076789f9cfa4769f9abf9b829b478b42bc7d762f9cfab2104e008fa50084576",
     "passed": true,
     "returncode": 0,
     "runtime_command": [
       "C:\\Windows\\system32\\wsl.EXE",
       "bash",
       "-lc",
-      "\"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime')\" --self-test"
+      "\"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime')\" --self-test"
     ],
     "stderr": "",
     "stdout": ""
@@ -28,7 +28,7 @@
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST_V1"
   },
   "runtime_returncode": 0,
-  "runtime_self_test_sha256": "3186ff9c74d51bc0cca153f1bd2d424177610b058237c43bb76961c4930c37d2",
+  "runtime_self_test_sha256": "abf45b6ead7505bb4aaa006842f6723b683f4039ef0fccdbe972c4760432d69a",
   "runtime_stderr": "",
   "runtime_stdout": "{\"schema\":\"FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST_V1\",\"passed\":true}\n",
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST_RECEIPT_V1"

@@ -1,6 +1,6 @@
 # Public Family 10h Carrier-State Tomography Contract
 
-Status: `FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_FROZEN_AWAITING_AUTHORIZATION`
+Status: `FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED`
 
 Science package id: `family10h_carrier_tomography_v1_0`
 
@@ -354,6 +354,7 @@ coherent nested timeouts
 strict platform identity
 strict readable policy fields
 strict temperature
+provenance-bound temperature sensor authority receipt before frozen status
 strict process custody
 ```
 
@@ -380,5 +381,11 @@ CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256
 CARRIER_TOMOGRAPHY_SOURCE_HASHES.json
 CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz
 ```
+
+`CARRIER_TOMOGRAPHY_SOURCE_HASHES.json` is source authority, not a mutable
+validation receipt. Offline validation and manifest generation must verify it
+without reminting it. A future frozen package also requires a provenance-bound
+temperature sensor authority receipt; synthetic or provenance-free identities
+must keep the package blocked.
 
 No live execution is authorized by this contract.

@@ -14,6 +14,7 @@
     "execution_order_mismatch_rejected": true,
     "false_feature_freeze_rejected": true,
     "feature_extra_private_key_rejected": true,
+    "feature_temperature_sensor_identity_drift_rejected": true,
     "first_nonnumeric_counter_rejected": true,
     "full_schedule_row_drift_rejected": true,
     "middle_negative_counter_rejected": true,
@@ -28,11 +29,13 @@
     "missing_query_cell_rejected": true,
     "missing_replicate_rejected": true,
     "missing_source_receipt_rejected": true,
+    "missing_temperature_sensor_identity_rejected": true,
     "negative_temperature_rejected": true,
     "raw_extra_private_key_rejected": true,
     "receipt_extra_private_key_rejected": true,
     "swapped_receipts_rejected": true,
     "tail_record_4159_corruption_rejected": true,
+    "temperature_sensor_identity_digest_mismatch_rejected": true,
     "unexpected_id_rejected": true,
     "wait_status_success_mismatch_rejected": true,
     "wrong_schedule_hash_rejected": true,
@@ -86,17 +89,5082 @@
     "SMALL_WALL_CROSSED"
   ],
   "operator_analysis_tests": {
+    "all_active_queries_preserved": true,
     "between_state_exceeds_within_state": true,
+    "classification_balanced_accuracy": 1.0,
+    "classification_confusion_matrix": {
+      "-1024": {
+        "-1024": 1,
+        "-1536": 0,
+        "-512": 0,
+        "0": 0,
+        "1024": 0,
+        "1536": 0,
+        "512": 0
+      },
+      "-1536": {
+        "-1024": 0,
+        "-1536": 1,
+        "-512": 0,
+        "0": 0,
+        "1024": 0,
+        "1536": 0,
+        "512": 0
+      },
+      "-512": {
+        "-1024": 0,
+        "-1536": 0,
+        "-512": 1,
+        "0": 0,
+        "1024": 0,
+        "1536": 0,
+        "512": 0
+      },
+      "0": {
+        "-1024": 0,
+        "-1536": 0,
+        "-512": 0,
+        "0": 1,
+        "1024": 0,
+        "1536": 0,
+        "512": 0
+      },
+      "1024": {
+        "-1024": 0,
+        "-1536": 0,
+        "-512": 0,
+        "0": 0,
+        "1024": 1,
+        "1536": 0,
+        "512": 0
+      },
+      "1536": {
+        "-1024": 0,
+        "-1536": 0,
+        "-512": 0,
+        "0": 0,
+        "1024": 0,
+        "1536": 1,
+        "512": 0
+      },
+      "512": {
+        "-1024": 0,
+        "-1536": 0,
+        "-512": 0,
+        "0": 0,
+        "1024": 0,
+        "1536": 0,
+        "512": 1
+      }
+    },
+    "classification_minimum_balanced_accuracy": 0.95,
+    "classification_regressions": {
+      "class_imbalanced_fixture_has_unequal_support": true,
+      "class_imbalanced_trivial_predictor_fails": true,
+      "deliberately_confused_codewords_fail": true,
+      "perfectly_separated_codewords_pass": true,
+      "training_memorization_with_heldout_failure_fails": true
+    },
+    "delay_scrambled_packet_remains_candidate": true,
+    "equal_pairwise_contrasts_different_raw_responses_remain_distinct": true,
+    "held_out_classifier_passed": true,
+    "held_out_delay_absent_from_training": true,
     "held_out_delay_prediction_used": true,
+    "held_out_mapping_absent_from_training": true,
     "held_out_mapping_prediction_used": true,
+    "held_out_replicate_absent_from_training": true,
     "held_out_replicate_prediction_used": true,
     "ideal_persistent_public_state_has_signal": true,
+    "in_sample_fit_cannot_rescue_strict_factor_holdout_failure": true,
     "in_sample_only_claim_rejected": true,
-    "natural_relaxation_fixture_mean": 68.9240091414326,
+    "independent_source_order_contrasts_preserved": true,
+    "lifetime_fixture_summaries": {
+      "bounded_monotonic_decay": {
+        "confidence_variation": {
+          "max_relative_ci_width": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.5
+        },
+        "curve_count": 4,
+        "curves": {
+          "codeword_q_+1536:query_A:session_0:map0": {
+            "lifetime_class": "survives a bounded delay",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 160.0,
+                "mean_oriented_response": 160.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  110.00000000000001,
+                  110.00000000000001
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 110.00000000000001,
+                "mean_oriented_response": 110.00000000000001,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  110.00000000000001,
+                  110.00000000000001
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  70.0,
+                  70.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 70.0,
+                "mean_oriented_response": 70.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  70.0,
+                  70.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  40.0,
+                  40.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 40.0,
+                "mean_oriented_response": 40.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  40.0,
+                  40.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_0:map1": {
+            "lifetime_class": "survives a bounded delay",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 160.0,
+                "mean_oriented_response": 160.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  110.00000000000001,
+                  110.00000000000001
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 110.00000000000001,
+                "mean_oriented_response": 110.00000000000001,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  110.00000000000001,
+                  110.00000000000001
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  70.0,
+                  70.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 70.0,
+                "mean_oriented_response": 70.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  70.0,
+                  70.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  40.0,
+                  40.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 40.0,
+                "mean_oriented_response": 40.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  40.0,
+                  40.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_1:map0": {
+            "lifetime_class": "survives a bounded delay",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 160.0,
+                "mean_oriented_response": 160.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  110.00000000000001,
+                  110.00000000000001
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 110.00000000000001,
+                "mean_oriented_response": 110.00000000000001,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  110.00000000000001,
+                  110.00000000000001
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  70.0,
+                  70.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 70.0,
+                "mean_oriented_response": 70.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  70.0,
+                  70.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  40.0,
+                  40.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 40.0,
+                "mean_oriented_response": 40.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  40.0,
+                  40.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          },
+          "codeword_q_+1536:query_A:session_1:map1": {
+            "lifetime_class": "survives a bounded delay",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 160.0,
+                "mean_oriented_response": 160.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  110.00000000000001,
+                  110.00000000000001
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 110.00000000000001,
+                "mean_oriented_response": 110.00000000000001,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  110.00000000000001,
+                  110.00000000000001
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  70.0,
+                  70.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 70.0,
+                "mean_oriented_response": 70.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  70.0,
+                  70.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  40.0,
+                  40.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 40.0,
+                "mean_oriented_response": 40.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  40.0,
+                  40.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          }
+        },
+        "mapping_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 200.0,
+              "map1": 200.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 40.0,
+              "map1": 40.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 160.0,
+              "map1": 160.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 70.0,
+              "map1": 70.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 110.00000000000001,
+              "map1": 110.00000000000001
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          }
+        },
+        "mean_persistence_curve": [
+          {
+            "delay_label": "0ns",
+            "delay_ns": 0,
+            "mean_abs_response": 200.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100us",
+            "delay_ns": 100000,
+            "mean_abs_response": 160.0,
+            "n": 4
+          },
+          {
+            "delay_label": "1ms",
+            "delay_ns": 1000000,
+            "mean_abs_response": 110.00000000000001,
+            "n": 4
+          },
+          {
+            "delay_label": "10ms",
+            "delay_ns": 10000000,
+            "mean_abs_response": 70.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100ms",
+            "delay_ns": 100000000,
+            "mean_abs_response": 40.0,
+            "n": 4
+          }
+        ],
+        "passed": true,
+        "polarity_consistency": {
+          "failures": [],
+          "passed": true
+        },
+        "query_variation": {
+          "by_preparation_delay": {
+            "codeword_q_+1536:0ns": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 200.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:100ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 40.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:100us": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 160.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:10ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 70.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:1ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 110.00000000000001
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            }
+          },
+          "max_relative_across_query_spread": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.35
+        },
+        "session_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 200.0,
+              "session_1": 200.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 40.0,
+              "session_1": 40.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 160.0,
+              "session_1": 160.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 70.0,
+              "session_1": 70.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 110.00000000000001,
+              "session_1": 110.00000000000001
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          }
+        },
+        "variation_gates": {
+          "confidence_variation_passed": true,
+          "mapping_variation_passed": true,
+          "polarity_consistency_passed": true,
+          "query_variation_passed": true,
+          "session_variation_passed": true
+        },
+        "vocabulary": [
+          "vanishes before source death",
+          "survives only immediate handoff",
+          "survives a bounded delay",
+          "persists across the full grid",
+          "changes form across delay"
+        ]
+      },
+      "immediate_only_response": {
+        "confidence_variation": {
+          "max_relative_ci_width": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.5
+        },
+        "curve_count": 4,
+        "curves": {
+          "codeword_q_+1536:query_A:session_0:map0": {
+            "lifetime_class": "survives only immediate handoff",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_0:map1": {
+            "lifetime_class": "survives only immediate handoff",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_1:map0": {
+            "lifetime_class": "survives only immediate handoff",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          },
+          "codeword_q_+1536:query_A:session_1:map1": {
+            "lifetime_class": "survives only immediate handoff",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          }
+        },
+        "mapping_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 200.0,
+              "map1": 200.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 0.0,
+              "map1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 0.0,
+              "map1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 0.0,
+              "map1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 0.0,
+              "map1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          }
+        },
+        "mean_persistence_curve": [
+          {
+            "delay_label": "0ns",
+            "delay_ns": 0,
+            "mean_abs_response": 200.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100us",
+            "delay_ns": 100000,
+            "mean_abs_response": 0.0,
+            "n": 4
+          },
+          {
+            "delay_label": "1ms",
+            "delay_ns": 1000000,
+            "mean_abs_response": 0.0,
+            "n": 4
+          },
+          {
+            "delay_label": "10ms",
+            "delay_ns": 10000000,
+            "mean_abs_response": 0.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100ms",
+            "delay_ns": 100000000,
+            "mean_abs_response": 0.0,
+            "n": 4
+          }
+        ],
+        "passed": true,
+        "polarity_consistency": {
+          "failures": [],
+          "passed": true
+        },
+        "query_variation": {
+          "by_preparation_delay": {
+            "codeword_q_+1536:0ns": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 200.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:100ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 0.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:100us": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 0.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:10ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 0.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:1ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 0.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            }
+          },
+          "max_relative_across_query_spread": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.35
+        },
+        "session_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 200.0,
+              "session_1": 200.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          }
+        },
+        "variation_gates": {
+          "confidence_variation_passed": true,
+          "mapping_variation_passed": true,
+          "polarity_consistency_passed": true,
+          "query_variation_passed": true,
+          "session_variation_passed": true
+        },
+        "vocabulary": [
+          "vanishes before source death",
+          "survives only immediate handoff",
+          "survives a bounded delay",
+          "persists across the full grid",
+          "changes form across delay"
+        ]
+      },
+      "mapping_confounded_response": {
+        "confidence_variation": {
+          "max_relative_ci_width": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.5
+        },
+        "curve_count": 4,
+        "curves": {
+          "codeword_q_+1536:query_A:session_0:map0": {
+            "lifetime_class": "persists across the full grid",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  190.0,
+                  190.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 190.0,
+                "mean_oriented_response": 190.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  190.0,
+                  190.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 180.0,
+                "mean_oriented_response": 180.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  170.0,
+                  170.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 170.0,
+                "mean_oriented_response": 170.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  170.0,
+                  170.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 160.0,
+                "mean_oriented_response": 160.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_0:map1": {
+            "lifetime_class": "vanishes before source death",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  20.0,
+                  20.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 20.0,
+                "mean_oriented_response": 20.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  20.0,
+                  20.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  19.0,
+                  19.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 19.0,
+                "mean_oriented_response": 19.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  19.0,
+                  19.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  18.0,
+                  18.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 18.0,
+                "mean_oriented_response": 18.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  18.0,
+                  18.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  17.0,
+                  17.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 17.0,
+                "mean_oriented_response": 17.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  17.0,
+                  17.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  16.0,
+                  16.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 16.0,
+                "mean_oriented_response": 16.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  16.0,
+                  16.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_1:map0": {
+            "lifetime_class": "persists across the full grid",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  190.0,
+                  190.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 190.0,
+                "mean_oriented_response": 190.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  190.0,
+                  190.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 180.0,
+                "mean_oriented_response": 180.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  170.0,
+                  170.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 170.0,
+                "mean_oriented_response": 170.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  170.0,
+                  170.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 160.0,
+                "mean_oriented_response": 160.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          },
+          "codeword_q_+1536:query_A:session_1:map1": {
+            "lifetime_class": "vanishes before source death",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  20.0,
+                  20.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 20.0,
+                "mean_oriented_response": 20.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  20.0,
+                  20.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  19.0,
+                  19.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 19.0,
+                "mean_oriented_response": 19.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  19.0,
+                  19.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  18.0,
+                  18.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 18.0,
+                "mean_oriented_response": 18.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  18.0,
+                  18.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  17.0,
+                  17.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 17.0,
+                "mean_oriented_response": 17.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  17.0,
+                  17.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  16.0,
+                  16.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 16.0,
+                "mean_oriented_response": 16.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  16.0,
+                  16.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          }
+        },
+        "mapping_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 180.0,
+            "factor_mean": {
+              "map0": 200.0,
+              "map1": 20.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": false,
+            "relative_across_factor_spread": 1.6363636363636365,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 144.0,
+            "factor_mean": {
+              "map0": 160.0,
+              "map1": 16.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": false,
+            "relative_across_factor_spread": 1.6363636363636365,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 171.0,
+            "factor_mean": {
+              "map0": 190.0,
+              "map1": 19.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": false,
+            "relative_across_factor_spread": 1.6363636363636365,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 153.0,
+            "factor_mean": {
+              "map0": 170.0,
+              "map1": 17.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": false,
+            "relative_across_factor_spread": 1.6363636363636365,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 162.0,
+            "factor_mean": {
+              "map0": 180.0,
+              "map1": 18.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": false,
+            "relative_across_factor_spread": 1.6363636363636365,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          }
+        },
+        "mean_persistence_curve": [
+          {
+            "delay_label": "0ns",
+            "delay_ns": 0,
+            "mean_abs_response": 110.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100us",
+            "delay_ns": 100000,
+            "mean_abs_response": 104.5,
+            "n": 4
+          },
+          {
+            "delay_label": "1ms",
+            "delay_ns": 1000000,
+            "mean_abs_response": 99.0,
+            "n": 4
+          },
+          {
+            "delay_label": "10ms",
+            "delay_ns": 10000000,
+            "mean_abs_response": 93.5,
+            "n": 4
+          },
+          {
+            "delay_label": "100ms",
+            "delay_ns": 100000000,
+            "mean_abs_response": 88.0,
+            "n": 4
+          }
+        ],
+        "passed": false,
+        "polarity_consistency": {
+          "failures": [],
+          "passed": true
+        },
+        "query_variation": {
+          "by_preparation_delay": {
+            "codeword_q_+1536:0ns": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 110.0
+              },
+              "max_within_factor_spread": 180.0,
+              "passed": false,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 1.6363636363636365,
+              "within_factor_spread": {
+                "query_A": 180.0
+              }
+            },
+            "codeword_q_+1536:100ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 88.0
+              },
+              "max_within_factor_spread": 144.0,
+              "passed": false,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 1.6363636363636365,
+              "within_factor_spread": {
+                "query_A": 144.0
+              }
+            },
+            "codeword_q_+1536:100us": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 104.5
+              },
+              "max_within_factor_spread": 171.0,
+              "passed": false,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 1.6363636363636365,
+              "within_factor_spread": {
+                "query_A": 171.0
+              }
+            },
+            "codeword_q_+1536:10ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 93.5
+              },
+              "max_within_factor_spread": 153.0,
+              "passed": false,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 1.6363636363636365,
+              "within_factor_spread": {
+                "query_A": 153.0
+              }
+            },
+            "codeword_q_+1536:1ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 99.0
+              },
+              "max_within_factor_spread": 162.0,
+              "passed": false,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 1.6363636363636365,
+              "within_factor_spread": {
+                "query_A": 162.0
+              }
+            }
+          },
+          "max_relative_across_query_spread": 0.0,
+          "passed": false,
+          "relative_tolerance": 0.35
+        },
+        "session_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 110.0,
+              "session_1": 110.0
+            },
+            "max_within_factor_spread": 180.0,
+            "passed": false,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 1.6363636363636365,
+            "within_factor_spread": {
+              "session_0": 180.0,
+              "session_1": 180.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 88.0,
+              "session_1": 88.0
+            },
+            "max_within_factor_spread": 144.0,
+            "passed": false,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 1.6363636363636365,
+            "within_factor_spread": {
+              "session_0": 144.0,
+              "session_1": 144.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 104.5,
+              "session_1": 104.5
+            },
+            "max_within_factor_spread": 171.0,
+            "passed": false,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 1.6363636363636365,
+            "within_factor_spread": {
+              "session_0": 171.0,
+              "session_1": 171.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 93.5,
+              "session_1": 93.5
+            },
+            "max_within_factor_spread": 153.0,
+            "passed": false,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 1.6363636363636365,
+            "within_factor_spread": {
+              "session_0": 153.0,
+              "session_1": 153.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 99.0,
+              "session_1": 99.0
+            },
+            "max_within_factor_spread": 162.0,
+            "passed": false,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 1.6363636363636365,
+            "within_factor_spread": {
+              "session_0": 162.0,
+              "session_1": 162.0
+            }
+          }
+        },
+        "variation_gates": {
+          "confidence_variation_passed": true,
+          "mapping_variation_passed": false,
+          "polarity_consistency_passed": true,
+          "query_variation_passed": false,
+          "session_variation_passed": false
+        },
+        "vocabulary": [
+          "vanishes before source death",
+          "survives only immediate handoff",
+          "survives a bounded delay",
+          "persists across the full grid",
+          "changes form across delay"
+        ]
+      },
+      "no_post_source_response": {
+        "confidence_variation": {
+          "max_relative_ci_width": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.5
+        },
+        "curve_count": 4,
+        "curves": {
+          "codeword_q_+1536:query_A:session_0:map0": {
+            "lifetime_class": "vanishes before source death",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_0:map1": {
+            "lifetime_class": "vanishes before source death",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_1:map0": {
+            "lifetime_class": "vanishes before source death",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          },
+          "codeword_q_+1536:query_A:session_1:map1": {
+            "lifetime_class": "vanishes before source death",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 0.0,
+                "mean_oriented_response": 0.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  0.0,
+                  0.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          }
+        },
+        "mapping_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 0.0,
+              "map1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 0.0,
+              "map1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 0.0,
+              "map1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 0.0,
+              "map1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 0.0,
+              "map1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          }
+        },
+        "mean_persistence_curve": [
+          {
+            "delay_label": "0ns",
+            "delay_ns": 0,
+            "mean_abs_response": 0.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100us",
+            "delay_ns": 100000,
+            "mean_abs_response": 0.0,
+            "n": 4
+          },
+          {
+            "delay_label": "1ms",
+            "delay_ns": 1000000,
+            "mean_abs_response": 0.0,
+            "n": 4
+          },
+          {
+            "delay_label": "10ms",
+            "delay_ns": 10000000,
+            "mean_abs_response": 0.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100ms",
+            "delay_ns": 100000000,
+            "mean_abs_response": 0.0,
+            "n": 4
+          }
+        ],
+        "passed": true,
+        "polarity_consistency": {
+          "failures": [],
+          "passed": true
+        },
+        "query_variation": {
+          "by_preparation_delay": {
+            "codeword_q_+1536:0ns": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 0.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:100ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 0.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:100us": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 0.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:10ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 0.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:1ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 0.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            }
+          },
+          "max_relative_across_query_spread": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.35
+        },
+        "session_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          }
+        },
+        "variation_gates": {
+          "confidence_variation_passed": true,
+          "mapping_variation_passed": true,
+          "polarity_consistency_passed": true,
+          "query_variation_passed": true,
+          "session_variation_passed": true
+        },
+        "vocabulary": [
+          "vanishes before source death",
+          "survives only immediate handoff",
+          "survives a bounded delay",
+          "persists across the full grid",
+          "changes form across delay"
+        ]
+      },
+      "nonmonotonic_form_change": {
+        "confidence_variation": {
+          "max_relative_ci_width": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.5
+        },
+        "curve_count": 4,
+        "curves": {
+          "codeword_q_+1536:query_A:session_0:map0": {
+            "lifetime_class": "changes form across delay",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  80.0,
+                  80.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 80.0,
+                "mean_oriented_response": 80.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  80.0,
+                  80.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  240.0,
+                  240.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 240.0,
+                "mean_oriented_response": 240.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  240.0,
+                  240.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  60.0,
+                  60.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 60.0,
+                "mean_oriented_response": 60.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  60.0,
+                  60.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 180.0,
+                "mean_oriented_response": 180.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_0:map1": {
+            "lifetime_class": "changes form across delay",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  80.0,
+                  80.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 80.0,
+                "mean_oriented_response": 80.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  80.0,
+                  80.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  240.0,
+                  240.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 240.0,
+                "mean_oriented_response": 240.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  240.0,
+                  240.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  60.0,
+                  60.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 60.0,
+                "mean_oriented_response": 60.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  60.0,
+                  60.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 180.0,
+                "mean_oriented_response": 180.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_1:map0": {
+            "lifetime_class": "changes form across delay",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  80.0,
+                  80.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 80.0,
+                "mean_oriented_response": 80.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  80.0,
+                  80.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  240.0,
+                  240.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 240.0,
+                "mean_oriented_response": 240.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  240.0,
+                  240.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  60.0,
+                  60.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 60.0,
+                "mean_oriented_response": 60.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  60.0,
+                  60.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 180.0,
+                "mean_oriented_response": 180.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          },
+          "codeword_q_+1536:query_A:session_1:map1": {
+            "lifetime_class": "changes form across delay",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  80.0,
+                  80.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 80.0,
+                "mean_oriented_response": 80.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  80.0,
+                  80.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  240.0,
+                  240.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 240.0,
+                "mean_oriented_response": 240.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  240.0,
+                  240.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  60.0,
+                  60.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 60.0,
+                "mean_oriented_response": 60.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  60.0,
+                  60.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 180.0,
+                "mean_oriented_response": 180.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          }
+        },
+        "mapping_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 200.0,
+              "map1": 200.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 180.0,
+              "map1": 180.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 80.0,
+              "map1": 80.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 60.0,
+              "map1": 60.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 240.0,
+              "map1": 240.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          }
+        },
+        "mean_persistence_curve": [
+          {
+            "delay_label": "0ns",
+            "delay_ns": 0,
+            "mean_abs_response": 200.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100us",
+            "delay_ns": 100000,
+            "mean_abs_response": 80.0,
+            "n": 4
+          },
+          {
+            "delay_label": "1ms",
+            "delay_ns": 1000000,
+            "mean_abs_response": 240.0,
+            "n": 4
+          },
+          {
+            "delay_label": "10ms",
+            "delay_ns": 10000000,
+            "mean_abs_response": 60.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100ms",
+            "delay_ns": 100000000,
+            "mean_abs_response": 180.0,
+            "n": 4
+          }
+        ],
+        "passed": false,
+        "polarity_consistency": {
+          "failures": [],
+          "passed": false
+        },
+        "query_variation": {
+          "by_preparation_delay": {
+            "codeword_q_+1536:0ns": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 200.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:100ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 180.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:100us": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 80.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:10ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 60.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:1ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 240.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            }
+          },
+          "max_relative_across_query_spread": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.35
+        },
+        "session_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 200.0,
+              "session_1": 200.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 180.0,
+              "session_1": 180.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 80.0,
+              "session_1": 80.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 60.0,
+              "session_1": 60.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 240.0,
+              "session_1": 240.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          }
+        },
+        "variation_gates": {
+          "confidence_variation_passed": true,
+          "mapping_variation_passed": true,
+          "polarity_consistency_passed": false,
+          "query_variation_passed": true,
+          "session_variation_passed": true
+        },
+        "vocabulary": [
+          "vanishes before source death",
+          "survives only immediate handoff",
+          "survives a bounded delay",
+          "persists across the full grid",
+          "changes form across delay"
+        ]
+      },
+      "session_confounded_response": {
+        "confidence_variation": {
+          "max_relative_ci_width": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.5
+        },
+        "curve_count": 4,
+        "curves": {
+          "codeword_q_+1536:query_A:session_0:map0": {
+            "lifetime_class": "persists across the full grid",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  190.0,
+                  190.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 190.0,
+                "mean_oriented_response": 190.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  190.0,
+                  190.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 180.0,
+                "mean_oriented_response": 180.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  170.0,
+                  170.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 170.0,
+                "mean_oriented_response": 170.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  170.0,
+                  170.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 160.0,
+                "mean_oriented_response": 160.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_0:map1": {
+            "lifetime_class": "persists across the full grid",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  190.0,
+                  190.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 190.0,
+                "mean_oriented_response": 190.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  190.0,
+                  190.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 180.0,
+                "mean_oriented_response": 180.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  180.0,
+                  180.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  170.0,
+                  170.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 170.0,
+                "mean_oriented_response": 170.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  170.0,
+                  170.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 160.0,
+                "mean_oriented_response": 160.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  160.0,
+                  160.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_1:map0": {
+            "lifetime_class": "vanishes before source death",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  20.0,
+                  20.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 20.0,
+                "mean_oriented_response": 20.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  20.0,
+                  20.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  19.0,
+                  19.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 19.0,
+                "mean_oriented_response": 19.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  19.0,
+                  19.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  18.0,
+                  18.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 18.0,
+                "mean_oriented_response": 18.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  18.0,
+                  18.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  17.0,
+                  17.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 17.0,
+                "mean_oriented_response": 17.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  17.0,
+                  17.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  16.0,
+                  16.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 16.0,
+                "mean_oriented_response": 16.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  16.0,
+                  16.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          },
+          "codeword_q_+1536:query_A:session_1:map1": {
+            "lifetime_class": "vanishes before source death",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  20.0,
+                  20.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 20.0,
+                "mean_oriented_response": 20.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  20.0,
+                  20.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  19.0,
+                  19.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 19.0,
+                "mean_oriented_response": 19.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  19.0,
+                  19.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  18.0,
+                  18.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 18.0,
+                "mean_oriented_response": 18.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  18.0,
+                  18.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  17.0,
+                  17.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 17.0,
+                "mean_oriented_response": 17.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  17.0,
+                  17.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  16.0,
+                  16.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 16.0,
+                "mean_oriented_response": 16.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  16.0,
+                  16.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          }
+        },
+        "mapping_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 110.0,
+              "map1": 110.0
+            },
+            "max_within_factor_spread": 180.0,
+            "passed": false,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 1.6363636363636365,
+            "within_factor_spread": {
+              "map0": 180.0,
+              "map1": 180.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 88.0,
+              "map1": 88.0
+            },
+            "max_within_factor_spread": 144.0,
+            "passed": false,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 1.6363636363636365,
+            "within_factor_spread": {
+              "map0": 144.0,
+              "map1": 144.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 104.5,
+              "map1": 104.5
+            },
+            "max_within_factor_spread": 171.0,
+            "passed": false,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 1.6363636363636365,
+            "within_factor_spread": {
+              "map0": 171.0,
+              "map1": 171.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 93.5,
+              "map1": 93.5
+            },
+            "max_within_factor_spread": 153.0,
+            "passed": false,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 1.6363636363636365,
+            "within_factor_spread": {
+              "map0": 153.0,
+              "map1": 153.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 99.0,
+              "map1": 99.0
+            },
+            "max_within_factor_spread": 162.0,
+            "passed": false,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 1.6363636363636365,
+            "within_factor_spread": {
+              "map0": 162.0,
+              "map1": 162.0
+            }
+          }
+        },
+        "mean_persistence_curve": [
+          {
+            "delay_label": "0ns",
+            "delay_ns": 0,
+            "mean_abs_response": 110.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100us",
+            "delay_ns": 100000,
+            "mean_abs_response": 104.5,
+            "n": 4
+          },
+          {
+            "delay_label": "1ms",
+            "delay_ns": 1000000,
+            "mean_abs_response": 99.0,
+            "n": 4
+          },
+          {
+            "delay_label": "10ms",
+            "delay_ns": 10000000,
+            "mean_abs_response": 93.5,
+            "n": 4
+          },
+          {
+            "delay_label": "100ms",
+            "delay_ns": 100000000,
+            "mean_abs_response": 88.0,
+            "n": 4
+          }
+        ],
+        "passed": false,
+        "polarity_consistency": {
+          "failures": [],
+          "passed": true
+        },
+        "query_variation": {
+          "by_preparation_delay": {
+            "codeword_q_+1536:0ns": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 110.0
+              },
+              "max_within_factor_spread": 180.0,
+              "passed": false,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 1.6363636363636365,
+              "within_factor_spread": {
+                "query_A": 180.0
+              }
+            },
+            "codeword_q_+1536:100ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 88.0
+              },
+              "max_within_factor_spread": 144.0,
+              "passed": false,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 1.6363636363636365,
+              "within_factor_spread": {
+                "query_A": 144.0
+              }
+            },
+            "codeword_q_+1536:100us": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 104.5
+              },
+              "max_within_factor_spread": 171.0,
+              "passed": false,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 1.6363636363636365,
+              "within_factor_spread": {
+                "query_A": 171.0
+              }
+            },
+            "codeword_q_+1536:10ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 93.5
+              },
+              "max_within_factor_spread": 153.0,
+              "passed": false,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 1.6363636363636365,
+              "within_factor_spread": {
+                "query_A": 153.0
+              }
+            },
+            "codeword_q_+1536:1ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 99.0
+              },
+              "max_within_factor_spread": 162.0,
+              "passed": false,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 1.6363636363636365,
+              "within_factor_spread": {
+                "query_A": 162.0
+              }
+            }
+          },
+          "max_relative_across_query_spread": 0.0,
+          "passed": false,
+          "relative_tolerance": 0.35
+        },
+        "session_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 180.0,
+            "factor_mean": {
+              "session_0": 200.0,
+              "session_1": 20.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": false,
+            "relative_across_factor_spread": 1.6363636363636365,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 144.0,
+            "factor_mean": {
+              "session_0": 160.0,
+              "session_1": 16.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": false,
+            "relative_across_factor_spread": 1.6363636363636365,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 171.0,
+            "factor_mean": {
+              "session_0": 190.0,
+              "session_1": 19.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": false,
+            "relative_across_factor_spread": 1.6363636363636365,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 153.0,
+            "factor_mean": {
+              "session_0": 170.0,
+              "session_1": 17.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": false,
+            "relative_across_factor_spread": 1.6363636363636365,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 162.0,
+            "factor_mean": {
+              "session_0": 180.0,
+              "session_1": 18.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": false,
+            "relative_across_factor_spread": 1.6363636363636365,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          }
+        },
+        "variation_gates": {
+          "confidence_variation_passed": true,
+          "mapping_variation_passed": false,
+          "polarity_consistency_passed": true,
+          "query_variation_passed": false,
+          "session_variation_passed": false
+        },
+        "vocabulary": [
+          "vanishes before source death",
+          "survives only immediate handoff",
+          "survives a bounded delay",
+          "persists across the full grid",
+          "changes form across delay"
+        ]
+      },
+      "stable_persistence": {
+        "confidence_variation": {
+          "max_relative_ci_width": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.5
+        },
+        "curve_count": 4,
+        "curves": {
+          "codeword_q_+1536:query_A:session_0:map0": {
+            "lifetime_class": "persists across the full grid",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  196.0,
+                  196.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 196.0,
+                "mean_oriented_response": 196.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  196.0,
+                  196.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  192.0,
+                  192.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 192.0,
+                "mean_oriented_response": 192.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  192.0,
+                  192.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  188.0,
+                  188.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 188.0,
+                "mean_oriented_response": 188.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  188.0,
+                  188.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  184.0,
+                  184.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 184.0,
+                "mean_oriented_response": 184.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  184.0,
+                  184.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_0:map1": {
+            "lifetime_class": "persists across the full grid",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  196.0,
+                  196.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 196.0,
+                "mean_oriented_response": 196.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  196.0,
+                  196.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  192.0,
+                  192.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 192.0,
+                "mean_oriented_response": 192.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  192.0,
+                  192.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  188.0,
+                  188.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 188.0,
+                "mean_oriented_response": 188.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  188.0,
+                  188.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  184.0,
+                  184.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 184.0,
+                "mean_oriented_response": 184.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  184.0,
+                  184.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_0"
+          },
+          "codeword_q_+1536:query_A:session_1:map0": {
+            "lifetime_class": "persists across the full grid",
+            "mapping": "map0",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  196.0,
+                  196.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 196.0,
+                "mean_oriented_response": 196.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  196.0,
+                  196.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  192.0,
+                  192.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 192.0,
+                "mean_oriented_response": 192.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  192.0,
+                  192.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  188.0,
+                  188.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 188.0,
+                "mean_oriented_response": 188.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  188.0,
+                  188.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  184.0,
+                  184.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 184.0,
+                "mean_oriented_response": 184.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  184.0,
+                  184.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          },
+          "codeword_q_+1536:query_A:session_1:map1": {
+            "lifetime_class": "persists across the full grid",
+            "mapping": "map1",
+            "points": [
+              {
+                "confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "delay_label": "0ns",
+                "delay_ns": 0,
+                "mean_abs_response": 200.0,
+                "mean_oriented_response": 200.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  200.0,
+                  200.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  196.0,
+                  196.0
+                ],
+                "delay_label": "100us",
+                "delay_ns": 100000,
+                "mean_abs_response": 196.0,
+                "mean_oriented_response": 196.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  196.0,
+                  196.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  192.0,
+                  192.0
+                ],
+                "delay_label": "1ms",
+                "delay_ns": 1000000,
+                "mean_abs_response": 192.0,
+                "mean_oriented_response": 192.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  192.0,
+                  192.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  188.0,
+                  188.0
+                ],
+                "delay_label": "10ms",
+                "delay_ns": 10000000,
+                "mean_abs_response": 188.0,
+                "mean_oriented_response": 188.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  188.0,
+                  188.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              },
+              {
+                "confidence_interval_95": [
+                  184.0,
+                  184.0
+                ],
+                "delay_label": "100ms",
+                "delay_ns": 100000000,
+                "mean_abs_response": 184.0,
+                "mean_oriented_response": 184.0,
+                "n": 4,
+                "oriented_confidence_interval_95": [
+                  184.0,
+                  184.0
+                ],
+                "oriented_pstdev": 0.0,
+                "oriented_sign_consistent": true,
+                "pstdev": 0.0
+              }
+            ],
+            "preparation": "codeword_q_+1536",
+            "query": "query_A",
+            "session": "session_1"
+          }
+        },
+        "mapping_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 200.0,
+              "map1": 200.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 184.0,
+              "map1": 184.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 196.0,
+              "map1": 196.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 188.0,
+              "map1": 188.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "map0": 192.0,
+              "map1": 192.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "map0": 0.0,
+              "map1": 0.0
+            }
+          }
+        },
+        "mean_persistence_curve": [
+          {
+            "delay_label": "0ns",
+            "delay_ns": 0,
+            "mean_abs_response": 200.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100us",
+            "delay_ns": 100000,
+            "mean_abs_response": 196.0,
+            "n": 4
+          },
+          {
+            "delay_label": "1ms",
+            "delay_ns": 1000000,
+            "mean_abs_response": 192.0,
+            "n": 4
+          },
+          {
+            "delay_label": "10ms",
+            "delay_ns": 10000000,
+            "mean_abs_response": 188.0,
+            "n": 4
+          },
+          {
+            "delay_label": "100ms",
+            "delay_ns": 100000000,
+            "mean_abs_response": 184.0,
+            "n": 4
+          }
+        ],
+        "passed": true,
+        "polarity_consistency": {
+          "failures": [],
+          "passed": true
+        },
+        "query_variation": {
+          "by_preparation_delay": {
+            "codeword_q_+1536:0ns": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 200.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:100ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 184.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:100us": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 196.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:10ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 188.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            },
+            "codeword_q_+1536:1ms": {
+              "across_factor_spread": 0.0,
+              "factor_mean": {
+                "query_A": 192.0
+              },
+              "max_within_factor_spread": 0.0,
+              "passed": true,
+              "relative_across_factor_spread": 0.0,
+              "relative_tolerance": 0.35,
+              "relative_within_factor_spread": 0.0,
+              "within_factor_spread": {
+                "query_A": 0.0
+              }
+            }
+          },
+          "max_relative_across_query_spread": 0.0,
+          "passed": true,
+          "relative_tolerance": 0.35
+        },
+        "session_variation": {
+          "codeword_q_+1536:query_A:0ns": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 200.0,
+              "session_1": 200.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 184.0,
+              "session_1": 184.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:100us": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 196.0,
+              "session_1": 196.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:10ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 188.0,
+              "session_1": 188.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          },
+          "codeword_q_+1536:query_A:1ms": {
+            "across_factor_spread": 0.0,
+            "factor_mean": {
+              "session_0": 192.0,
+              "session_1": 192.0
+            },
+            "max_within_factor_spread": 0.0,
+            "passed": true,
+            "relative_across_factor_spread": 0.0,
+            "relative_tolerance": 0.35,
+            "relative_within_factor_spread": 0.0,
+            "within_factor_spread": {
+              "session_0": 0.0,
+              "session_1": 0.0
+            }
+          }
+        },
+        "variation_gates": {
+          "confidence_variation_passed": true,
+          "mapping_variation_passed": true,
+          "polarity_consistency_passed": true,
+          "query_variation_passed": true,
+          "session_variation_passed": true
+        },
+        "vocabulary": [
+          "vanishes before source death",
+          "survives only immediate handoff",
+          "survives a bounded delay",
+          "persists across the full grid",
+          "changes form across delay"
+        ]
+      }
+    },
+    "lifetime_regressions": {
+      "bounded_monotonic_decay_classified": true,
+      "equal_marginal_session_mapping_crossover_downgraded": true,
+      "immediate_only_response_classified": true,
+      "mapping_confounded_response_downgraded": true,
+      "mapping_query_crossover_downgraded": true,
+      "no_post_source_response_classified": true,
+      "nonmonotonic_form_change_classified": true,
+      "opposite_sign_replicates_fail_confidence": true,
+      "packet_path_signed_delay_reversal_downgraded": true,
+      "query_variation_confounded_response_downgraded": true,
+      "session_confounded_response_downgraded": true,
+      "session_query_crossover_downgraded": true,
+      "signed_delay_reversal_classified_as_form_change": true,
+      "signed_mapping_confounded_response_downgraded": true,
+      "signed_session_confounded_response_downgraded": true,
+      "stable_persistence_classified": true
+    },
+    "mapping_scrambled_packet_remains_candidate": true,
+    "natural_relaxation_fixture_mean": 67.58661170010444,
     "no_persistent_state_fixture_mean": 0.0,
     "operator_ladder": {
       "distinguishability": {
+        "balanced_accuracy": 1.0,
         "between_state_min_distance": 4843.703750409475,
+        "classifier": {
+          "balanced_accuracy": 1.0,
+          "classifier": "nearest_centroid_by_q",
+          "confusion_matrix": {
+            "-1024": {
+              "-1024": 1,
+              "-1536": 0,
+              "-512": 0,
+              "0": 0,
+              "1024": 0,
+              "1536": 0,
+              "512": 0
+            },
+            "-1536": {
+              "-1024": 0,
+              "-1536": 1,
+              "-512": 0,
+              "0": 0,
+              "1024": 0,
+              "1536": 0,
+              "512": 0
+            },
+            "-512": {
+              "-1024": 0,
+              "-1536": 0,
+              "-512": 1,
+              "0": 0,
+              "1024": 0,
+              "1536": 0,
+              "512": 0
+            },
+            "0": {
+              "-1024": 0,
+              "-1536": 0,
+              "-512": 0,
+              "0": 1,
+              "1024": 0,
+              "1536": 0,
+              "512": 0
+            },
+            "1024": {
+              "-1024": 0,
+              "-1536": 0,
+              "-512": 0,
+              "0": 0,
+              "1024": 1,
+              "1536": 0,
+              "512": 0
+            },
+            "1536": {
+              "-1024": 0,
+              "-1536": 0,
+              "-512": 0,
+              "0": 0,
+              "1024": 0,
+              "1536": 1,
+              "512": 0
+            },
+            "512": {
+              "-1024": 0,
+              "-1536": 0,
+              "-512": 0,
+              "0": 0,
+              "1024": 0,
+              "1536": 0,
+              "512": 1
+            }
+          },
+          "cross_validated_codeword_classification": true,
+          "minimum_balanced_accuracy": 0.95,
+          "passed": true,
+          "test_split": "replicate_1 absent from training",
+          "training_split": "all rows not matching held_out_replicate_1"
+        },
         "confusion_matrix": {
           "-1024": {
             "-1024": 1,
@@ -163,6 +5231,7 @@
           }
         },
         "cross_validated_codeword_classification": true,
+        "minimum_balanced_accuracy": 0.95,
         "response_matrix_effective_rank": 1,
         "singular_spectrum": [
           12815.235548054345,
@@ -176,44 +5245,127 @@
         "within_state_max_distance": 0.0
       },
       "held_out_delay": {
-        "noise_aware_threshold": 6.238920473916876,
+        "heldout_factor": "delay_label",
+        "heldout_value": "10ms",
+        "noise_aware_threshold": 38.09588330010734,
+        "passed": true,
         "rmse": {
-          "S0": 638.0225354701917,
-          "S1": 638.0225354701917,
-          "S2": 4.674041146550113e-15
+          "S0": 781.414828149375,
+          "S1": 781.414828149375,
+          "S2": 4.1109404038058075e-08
         },
         "smallest_sufficient_model": "S2",
-        "test_count": 336,
-        "train_count": 3024
+        "test_count": 448,
+        "test_levels": [
+          "10ms"
+        ],
+        "tested_factor_absent_from_training": true,
+        "train_count": 1792,
+        "train_levels": [
+          "0ns",
+          "100ms",
+          "100us",
+          "1ms"
+        ]
       },
       "held_out_mapping": {
-        "noise_aware_threshold": 6.253194653099436,
+        "heldout_factor": "mapping",
+        "heldout_value": "map1",
+        "noise_aware_threshold": 38.2928404059842,
+        "passed": true,
         "rmse": {
-          "S0": 625.3194653099438,
-          "S1": 625.3194653099438,
-          "S2": 8.118357223295469e-14
+          "S0": 765.8568081196847,
+          "S1": 765.8568081196838,
+          "S2": 7.20981989906787e-08
         },
         "smallest_sufficient_model": "S2",
-        "test_count": 840,
-        "train_count": 2520
+        "test_count": 1120,
+        "test_levels": [
+          "map1"
+        ],
+        "tested_factor_absent_from_training": true,
+        "train_count": 1120,
+        "train_levels": [
+          "map0"
+        ]
       },
       "held_out_replicate": {
-        "noise_aware_threshold": 6.253194653099436,
+        "heldout_factor": "replicate",
+        "heldout_value": 1,
+        "noise_aware_threshold": 38.2928404059842,
+        "passed": true,
         "rmse": {
-          "S0": 625.319465309944,
-          "S1": 625.319465309944,
-          "S2": 4.4571416196287794e-14
+          "S0": 765.8568081196847,
+          "S1": 765.8568081196847,
+          "S2": 2.923827446200454e-08
         },
         "smallest_sufficient_model": "S2",
-        "test_count": 1680,
-        "train_count": 1680
+        "test_count": 1120,
+        "test_levels": [
+          1
+        ],
+        "tested_factor_absent_from_training": true,
+        "train_count": 1120,
+        "train_levels": [
+          0
+        ]
+      },
+      "query_structure": {
+        "all_active_queries_preserved": true,
+        "delay_by_query_terms_declared": true,
+        "independent_source_order_contrasts_preserved": true,
+        "main_query_effect_abs": 0.0,
+        "mapping_by_query_terms_declared": true,
+        "ordered_queries_preserved": true,
+        "ordered_query_features_distinct": true,
+        "preparation_by_query_terms_declared": true,
+        "q0_mapping_by_query_vectors_distinct": true,
+        "queries_present": [
+          "query_A",
+          "query_A_then_B",
+          "query_B",
+          "query_B_then_A"
+        ],
+        "query_and_source_order_contrasts_nonduplicate": true,
+        "query_order_effect_abs": 0.0,
+        "query_order_identifiability_basis": "order_encoded_query_identity_not_independent_main_effect",
+        "query_order_independent_main_effect_claimed": false,
+        "query_order_terms_not_duplicated_with_query_terms": true,
+        "query_orders_present": [
+          "A_only",
+          "A_then_B",
+          "B_only",
+          "B_then_A"
+        ],
+        "raw_query_observations_preserved": true,
+        "single_query_features_distinct": true,
+        "source_order_effect_abs": 0.0,
+        "source_orders_present": [
+          "A_then_B",
+          "B_then_A"
+        ]
       }
     },
+    "ordered_queries_preserved": true,
+    "ordered_query_features_distinct": true,
+    "q0_mapping_by_query_vectors_distinct": true,
+    "query_order_collapsed_receiver_order_downgraded": true,
+    "query_order_independent_main_effect_not_claimed": true,
+    "query_order_only_effect_detected": true,
+    "query_order_only_fixture_source_balanced": true,
+    "query_order_only_receiver_order_effect_detected": true,
+    "query_order_terms_not_duplicated_with_query_terms": true,
+    "raw_query_observations_preserved": true,
     "s2_sufficient_for_ideal_fixture": true,
+    "single_query_features_distinct": true,
+    "source_order_only_effect_detected": true,
+    "source_order_only_fixture_holdouts_pass": true,
+    "source_order_only_fixture_query_balanced": true,
+    "strict_factor_holdouts_pass": true,
     "validated_packet_analysis": {
       "adjudication_result": "FAMILY10H_POST_SOURCE_STATE_OBSERVED",
       "factorial_matched_group_count": 1120,
-      "lifetime_curve_count": 28,
+      "lifetime_curve_count": 112,
       "operator_ladder_present": true,
       "passed": true
     }
@@ -254,7 +5406,7 @@
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SELF_TEST_V1",
   "science_package_id": "family10h_carrier_tomography_v1_0",
   "self_test_passed": true,
-  "self_test_sha256": "900a45c20ce940aa406fb78b7b1ada8e1c58257132196cfcc72bb38716dd88ce",
+  "self_test_sha256": "a134ecc739400f9771a9855ae381a9a37b8fb332ea7d5befa88ad18791441403",
   "source_death_custody_tests": {
     "open_source_ipc_after_waitpid_rejected": true,
     "post_observation_query_window_selection_rejected": true,
