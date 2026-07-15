@@ -1,0 +1,107 @@
+{
+  "schema": "audio_substrate_findings_normalized_v1",
+  "evidence_identity": {
+    "fixture_count": 12,
+    "fixture_manifest_sha256": "3e10d0ecbf535b795febba7c56f261a58d7ed3a67e8c4ecee7b030b1bff53049",
+    "fixture_total_bytes": 5376528,
+    "reference_results_sha256": "d884152e21b2e6226557879299bdf1c90f4c805279a0bbd826b66548e8075877",
+    "reference_tests_sha256": "0b38d590c5afaf2835bd00aa98865ad33c20e38aabbfdf9f1358a0d688c1c712",
+    "tests_failed": 0,
+    "tests_passed": 29
+  },
+  "findings": [
+    {
+      "canonical_id": "COMMITTED_WAV_SCORING_GAP",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "MATERIAL",
+      "resolution": "All named WAV inputs are parsed from committed float32 bytes before scoring.",
+      "source_finding_ids": ["AUD-WAVE-01-F001", "AUD-WAVE-02-WAV-BINDING-001", "AUD-WAVE-04-C001"]
+    },
+    {
+      "canonical_id": "VERIFY_RECOMPUTATION_GAP",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "MATERIAL",
+      "resolution": "Verify recomputes manifest, freeze, observations, statuses, summary, replay verdict, and claim token.",
+      "source_finding_ids": ["AUD-WAVE-01-F002", "AUD-WAVE-02-VERIFY-001", "AUD-WAVE-04-C001"]
+    },
+    {
+      "canonical_id": "ADVERSARY_INPUT_AND_ALIAS_GAP",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "MATERIAL",
+      "resolution": "Parsed I/Q, real alias bijections, neutral pair names, and public manifest replay are executable.",
+      "source_finding_ids": ["AUD-WAVE-01-F003", "AUD-WAVE-02-LABEL-001", "AUD-WAVE-04-C002"]
+    },
+    {
+      "canonical_id": "DSP_AGGREGATE_SCOPE_OVERSTATEMENT",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "NONMATERIAL",
+      "resolution": "The aggregate includes every applicable ratio-bearing and exact algebra variant.",
+      "source_finding_ids": ["AUD-WAVE-01-F004"]
+    },
+    {
+      "canonical_id": "INTERFACE_BUFFER_EVIDENCE_OVERSTATEMENT",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "NONMATERIAL",
+      "resolution": "Executed evidence is limited to serialized-file persistence; interface-buffer exclusion is explicitly untested.",
+      "source_finding_ids": ["AUD-WAVE-01-F005", "AUD-WAVE-03-F003", "AUD-WAVE-04-C003"]
+    },
+    {
+      "canonical_id": "ADVERTISED_VARIANTS_UNTESTED",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "NONMATERIAL",
+      "resolution": "Zero-filled delay and unnormalized correlation tests were added and pass.",
+      "source_finding_ids": ["AUD-WAVE-02-COVERAGE-001"]
+    },
+    {
+      "canonical_id": "PHYSICAL_CANDIDATE_FIELD_MATRIX_GAP",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "NONMATERIAL_TO_OFFLINE_REVIEW",
+      "resolution": "A uniform five-candidate field matrix explicitly marks every remaining physical field UNFROZEN.",
+      "source_finding_ids": ["AUD-WAVE-03-F001"]
+    },
+    {
+      "canonical_id": "ACOUSTIC_SOURCE_TERMINATION_GAP",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "NONMATERIAL_TO_OFFLINE_REVIEW",
+      "resolution": "Open, shorted, and damped source-transducer termination arms are mandatory before cavity freeze.",
+      "source_finding_ids": ["AUD-WAVE-03-F002"]
+    },
+    {
+      "canonical_id": "REFERENCE_RUNTIME_UNBOUND",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "NONMATERIAL",
+      "resolution": "Python 3.11.6 and NumPy 1.26.4 are bound fail-closed; reported metrics use 12 significant digits.",
+      "source_finding_ids": ["AUD-WAVE-04-C004"]
+    },
+    {
+      "canonical_id": "NONLINEAR_REPLAY_WORDING_MISMATCH",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "NONMATERIAL",
+      "resolution": "Prose now states replay within the frozen float32 serialization tolerance.",
+      "source_finding_ids": ["AUD-WAVE-01-F007", "AUD-WAVE-04-C005"]
+    },
+    {
+      "canonical_id": "MANIFEST_REPLAY_DECLARED_INPUT_MISMATCH",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "NONMATERIAL",
+      "resolution": "The manifest replay declares only its manifest input.",
+      "source_finding_ids": ["AUD-WAVE-01-F006"]
+    }
+  ],
+  "open_findings": [],
+  "physical_freeze_blockers": [
+    "exact carrier schematic or mechanical geometry",
+    "component and transducer identities with tolerances",
+    "mechanically verified source disconnect and interface-buffer drain",
+    "measured post-source lifetime and measurement disturbance",
+    "bounded preparation-capacity and side-information model",
+    "numeric voltage current energy acoustic and timeout safety envelope",
+    "physical baseline distributions and predeclared R2 restoration metric"
+  ],
+  "reviewers": [
+    {"reviewer_id": "AUD-WAVE-01-MECHANISM", "verdict": "PASS"},
+    {"reviewer_id": "AUD-WAVE-02-IDENTIFIABILITY", "verdict": "PASS"},
+    {"reviewer_id": "AUD-WAVE-03-PHYSICAL", "verdict": "PASS"},
+    {"reviewer_id": "AUD-WAVE-04-CLAIMS", "verdict": "PASS"}
+  ]
+}

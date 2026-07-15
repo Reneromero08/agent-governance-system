@@ -1,0 +1,341 @@
+{
+  "fixture_count": 12,
+  "fixtures": [
+    {
+      "byte_count": 768044,
+      "channel_count": 2,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "analytic_query_iq",
+      "generator_parameters": {
+        "amplitude_per_axis": 0.7,
+        "carrier_hz": 8000.0
+      },
+      "path": "fixtures/analytic_query_iq.wav",
+      "peak_amplitude": 0.699999988079,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.494974750341,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "two_axis_analytic_query",
+      "sha256": "e94d2c0e3bbf7c11759fce5533808b5500dcaa09175c93f65dd76c27eb68184a"
+    },
+    {
+      "byte_count": 768044,
+      "channel_count": 2,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "analytic_state_iq",
+      "generator_parameters": {
+        "amplitude_per_axis": 0.7,
+        "carrier_hz": 8000.0,
+        "phase_modulation_hz": 223.0,
+        "phase_modulation_rad": 0.28
+      },
+      "path": "fixtures/analytic_state_iq.wav",
+      "peak_amplitude": 0.699999988079,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.494974746621,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "two_axis_analytic_state",
+      "sha256": "00062778b4f04c0d8039455606b8eace4a046ca9b2e34a0c4594d84793c88abd"
+    },
+    {
+      "byte_count": 384044,
+      "channel_count": 1,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "fm_encoded",
+      "generator_parameters": {
+        "amplitude": 0.9,
+        "carrier_hz": 8000.0,
+        "integral": "left_riemann_integral_zero_at_sample_0",
+        "k_hz_per_unit": 420.0
+      },
+      "path": "fixtures/fm_encoded.wav",
+      "peak_amplitude": 0.899999976158,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.636396103099,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "fm_carrier",
+      "sha256": "6137f5cdca809a9a6b68a4fd58ee69a8e1f2aeb2d664f41696fcdf46b6fdaad8"
+    },
+    {
+      "byte_count": 384044,
+      "channel_count": 1,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "fm_message",
+      "generator_parameters": {
+        "coefficients": [
+          0.52,
+          0.21
+        ],
+        "tones_hz": [
+          137.0,
+          311.0
+        ]
+      },
+      "path": "fixtures/fm_message.wav",
+      "peak_amplitude": 0.729994416237,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.39654760121,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "fm_baseband_message",
+      "sha256": "819de5cab5b2810138fc36dc3f09572004a4b9e16b7144fd307f4f7017581add"
+    },
+    {
+      "byte_count": 384044,
+      "channel_count": 1,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "matched_pair_a",
+      "generator_parameters": {
+        "chirp_end_hz": 4000.0,
+        "chirp_start_hz": 1000.0,
+        "envelope": "sin_squared_end_zero"
+      },
+      "path": "fixtures/wave_pair_a.wav",
+      "peak_amplitude": 0.749993503094,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.324757834959,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "matched_filter_pair_member_a",
+      "sha256": "f4e811aa5be6266b555bcf658de6351d2484bb9dd6eae23ca922a04c0ec13997"
+    },
+    {
+      "byte_count": 384044,
+      "channel_count": 1,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "matched_pair_b",
+      "generator_parameters": {
+        "construction": "time_reverse_of_pair_member_a"
+      },
+      "path": "fixtures/wave_pair_b.wav",
+      "peak_amplitude": 0.749993503094,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.324757834959,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "matched_filter_pair_member_b",
+      "sha256": "1340432e131f7c21959db52c0084fbd89cf119c1d98bfacfd7a05f748eeed6e1"
+    },
+    {
+      "byte_count": 384044,
+      "channel_count": 1,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "multitone_delayed",
+      "generator_parameters": {
+        "boundary": "circular",
+        "delay_samples": 37
+      },
+      "path": "fixtures/multitone_delayed.wav",
+      "peak_amplitude": 0.515540003777,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.284077453124,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "circular_exact_sample_delay_control",
+      "sha256": "eb3123ed85d1693db6a65ccaf273d6ffcbb28fb8dc694c5df35a4142f26c6130"
+    },
+    {
+      "byte_count": 384044,
+      "channel_count": 1,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "multitone_state",
+      "generator_parameters": {
+        "complex_coefficients": [
+          {
+            "magnitude": 0.22,
+            "phase_rad": 0.31
+          },
+          {
+            "magnitude": 0.29,
+            "phase_rad": -0.72
+          },
+          {
+            "magnitude": 0.17,
+            "phase_rad": 1.11
+          }
+        ],
+        "frequencies_hz": [
+          6300.0,
+          8000.0,
+          9700.0
+        ]
+      },
+      "path": "fixtures/multitone_state.wav",
+      "peak_amplitude": 0.515540003777,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.284077453124,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "complex_coefficient_multitone_state",
+      "sha256": "38fe0c7ce147c3c608f1cc1791b80560da5d255397a38672698a69f5cee9a45d"
+    },
+    {
+      "byte_count": 384044,
+      "channel_count": 1,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "nonlinear_input",
+      "generator_parameters": {
+        "amplitudes": [
+          0.3,
+          0.3
+        ],
+        "frequencies_hz": [
+          7000.0,
+          8200.0
+        ]
+      },
+      "path": "fixtures/nonlinear_input.wav",
+      "peak_amplitude": 0.600000023842,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.299999999801,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "two_tone_nonlinear_input",
+      "sha256": "1ab59266f8002cb8e801d02413409bb76350555c8499bb845141c517aef99328"
+    },
+    {
+      "byte_count": 384044,
+      "channel_count": 1,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "nonlinear_output",
+      "generator_parameters": {
+        "alpha": 0.8,
+        "law": "y=x+alpha*x^2"
+      },
+      "path": "fixtures/nonlinear_output.wav",
+      "peak_amplitude": 0.888000011444,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.318847925005,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "ordinary_polynomial_intermodulation_output",
+      "sha256": "e9f4ef75104218303c6b147853e15867061dc8e02e255b6a244419bbb5107573"
+    },
+    {
+      "byte_count": 384044,
+      "channel_count": 1,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "pm_encoded",
+      "generator_parameters": {
+        "amplitude": 0.9,
+        "carrier_hz": 8000.0,
+        "k_rad_per_unit": 1.15
+      },
+      "path": "fixtures/pm_encoded.wav",
+      "peak_amplitude": 0.899999976158,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.636396103231,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "pm_carrier",
+      "sha256": "d2de03090db8134066298a49c5bfa0ea7020215c7f18d015edab1bc49834a2b9"
+    },
+    {
+      "byte_count": 384044,
+      "channel_count": 1,
+      "dtype": "float32_le",
+      "duration_seconds": 2.0,
+      "fixture_id": "pm_message",
+      "generator_parameters": {
+        "coefficients": [
+          0.46,
+          0.19
+        ],
+        "tones_hz": [
+          173.0,
+          421.0
+        ]
+      },
+      "path": "fixtures/pm_message.wav",
+      "peak_amplitude": 0.649999976158,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "rms_amplitude": 0.351923287184,
+      "sample_count": 96000,
+      "sample_rate_hz": 48000,
+      "semantic_role": "pm_baseband_message",
+      "sha256": "116ec2d71449378a2690bbe084ec7062dfa6bc0c29fc8d6d75f2d2da4af04e53"
+    }
+  ],
+  "generator": "audio_wave_reference_v1",
+  "metadata_law": {
+    "answer_bearing_metadata_forbidden": true,
+    "committed_chunks": [
+      "fmt ",
+      "data"
+    ],
+    "forbidden_manifest_keys": [
+      "expected_answer",
+      "winner_label",
+      "query_result",
+      "truth_label"
+    ]
+  },
+  "numerical_envelope": {
+    "absolute_sample_ceiling": 0.95,
+    "baseband_bandwidth_max_hz": 1000.0,
+    "duration_seconds": 2.0,
+    "primary_carrier_hz": 8000.0,
+    "sample_count": 96000,
+    "sample_rate_hz": 48000,
+    "scalar_channels": "mono",
+    "two_axis_channels": "stereo_I_then_Q",
+    "wav_encoding": "IEEE_FLOAT32_LE"
+  },
+  "reference_runtime": {
+    "numpy": "1.26.4",
+    "python": "3.11.6",
+    "reported_metric_significant_digits": 12
+  },
+  "schema": "audio_wave_fixture_manifest_v1",
+  "total_bytes": 5376528
+}
