@@ -1,0 +1,357 @@
+{
+  "freeze_law": "This file is emitted before scoring and binds every metric, comparator, tolerance, and edge convention.",
+  "generator": "audio_wave_reference_v1",
+  "numerical_envelope": {
+    "absolute_sample_ceiling": 0.95,
+    "baseband_limit_hz": 1000.0,
+    "carrier_hz": 8000.0,
+    "compute_dtype": "float64_or_complex128_after_parse",
+    "default_edge_samples": 4096,
+    "duration_seconds": 2.0,
+    "fixture_dtype": "float32_le",
+    "fm_k_hz_per_unit": 420.0,
+    "pm_k_rad_per_unit": 1.15,
+    "sample_count": 96000,
+    "sample_rate_hz": 48000
+  },
+  "reference_runtime": {
+    "numpy": "1.26.4",
+    "python": "3.11.6",
+    "reported_metric_significant_digits": 12
+  },
+  "representation_law": "All named WAV inputs are parsed from committed IEEE float32 bytes before scoring.",
+  "schema": "audio_wave_reference_tests_v1",
+  "tests": [
+    {
+      "comparator": "<=",
+      "edge": "exclude first and last 4096 samples",
+      "expected": "recovered baseband",
+      "id": "fm_round_trip_recovery",
+      "inputs": [
+        "fm_message",
+        "fm_encoded"
+      ],
+      "metric": "sample_rmse",
+      "tolerance": 0.012
+    },
+    {
+      "comparator": "<=",
+      "edge": "exclude first and last 4096 samples; PM DC phase is removed",
+      "expected": "recovered zero-mean baseband",
+      "id": "pm_round_trip_recovery",
+      "inputs": [
+        "pm_message",
+        "pm_encoded"
+      ],
+      "metric": "sample_rmse",
+      "tolerance": 0.012
+    },
+    {
+      "comparator": "<=",
+      "edge": "FFT periodic boundary",
+      "expected": "real part preserved and negative-frequency energy suppressed",
+      "id": "analytic_signal",
+      "inputs": [
+        "multitone_state"
+      ],
+      "metric": "max_reconstruction_or_negative_energy_ratio",
+      "tolerance": 1e-12
+    },
+    {
+      "comparator": "<=",
+      "edge": "parsed float32 stereo I/Q; modulo 2*pi",
+      "expected": "state phase minus query phase",
+      "id": "conjugate_phase_subtraction",
+      "inputs": [
+        "analytic_state_iq",
+        "analytic_query_iq"
+      ],
+      "metric": "max_angular_error_rad",
+      "tolerance": 1e-06
+    },
+    {
+      "comparator": "<=",
+      "edge": "parsed float32 stereo I/Q; modulo 2*pi",
+      "expected": "state phase plus query phase",
+      "id": "ordinary_phase_addition",
+      "inputs": [
+        "analytic_state_iq",
+        "analytic_query_iq"
+      ],
+      "metric": "max_angular_error_rad",
+      "tolerance": 1e-06
+    },
+    {
+      "comparator": "<=",
+      "edge": "parsed float32 integer-cycle two-second record",
+      "expected": "three frozen complex coefficients",
+      "id": "multitone_complex_projection",
+      "inputs": [
+        "multitone_state"
+      ],
+      "metric": "normalized_vector_error",
+      "tolerance": 1e-07
+    },
+    {
+      "comparator": "<=",
+      "edge": "parsed float32 circular exact-sample delay",
+      "expected": "coefficient rotation exp(-j*2*pi*f*37/fs)",
+      "id": "delay_phase_rotation",
+      "inputs": [
+        "multitone_state",
+        "multitone_delayed"
+      ],
+      "metric": "normalized_vector_error",
+      "tolerance": 1e-07
+    },
+    {
+      "comparator": "<=",
+      "edge": "causal zero-filled exact-sample delay",
+      "expected": "first 37 outputs zero and remaining samples equal the shifted input",
+      "id": "zero_filled_delay",
+      "inputs": [
+        "multitone_state"
+      ],
+      "metric": "max_absolute_sample_error",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "edge": "no time-boundary operation",
+      "expected": "rotation followed by exact inverse",
+      "id": "fractional_phase_rotation_inverse",
+      "inputs": [
+        "analytic_state_iq"
+      ],
+      "metric": "normalized_vector_error",
+      "tolerance": 1e-14
+    },
+    {
+      "comparator": "<=",
+      "edge": "parsed float32 complex inner product over full record",
+      "expected": "frozen bins recover coefficients and null bin remains small",
+      "id": "filter_bank_projection",
+      "inputs": [
+        "multitone_state"
+      ],
+      "metric": "max_coefficient_or_null_error",
+      "tolerance": 1e-07
+    },
+    {
+      "comparator": ">=",
+      "edge": "full parsed float32 records; zero norm returns zero",
+      "expected": "A-to-A score exceeds B-to-A score by at least 0.80",
+      "id": "matched_filter_energy_sham",
+      "inputs": [
+        "matched_pair_a",
+        "matched_pair_b"
+      ],
+      "metric": "pair_a_minus_pair_b_normalized_score",
+      "tolerance": 0.8
+    },
+    {
+      "comparator": "<=",
+      "edge": "explicit denominator-zero convention",
+      "expected": "normalized correlation with zero vector equals complex zero",
+      "id": "correlation_zero_denominator",
+      "inputs": [],
+      "metric": "absolute_value",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "edge": "full parsed float32 records",
+      "expected": "unnormalized result equals explicit complex inner product",
+      "id": "unnormalized_correlation",
+      "inputs": [
+        "matched_pair_a",
+        "matched_pair_b"
+      ],
+      "metric": "absolute_error",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "edge": "finite inputs zero outside support; full N+M-1 output",
+      "expected": "FFT full convolution equals direct convolution",
+      "id": "convolution_full_boundary",
+      "inputs": [
+        "matched_pair_a"
+      ],
+      "metric": "sample_rmse",
+      "tolerance": 1e-13
+    },
+    {
+      "comparator": "<=",
+      "edge": "parsed float32 integer-cycle record; y=x+0.8*x^2",
+      "expected": "predeclared 1200 and 15200 Hz products each have amplitude 0.072",
+      "id": "nonlinear_intermodulation",
+      "inputs": [
+        "nonlinear_input",
+        "nonlinear_output"
+      ],
+      "metric": "max_complex_coefficient_error",
+      "tolerance": 1e-07
+    },
+    {
+      "comparator": "<=",
+      "edge": "labels are external aliases, not generator inputs",
+      "expected": "renaming public labels changes neither samples nor query result",
+      "id": "label_only_renaming_invariance",
+      "inputs": [
+        "multitone_state"
+      ],
+      "metric": "max_sample_or_result_error",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": ">=",
+      "edge": "exclude first and last 4096 samples",
+      "expected": "37 Hz wrong query causes at least 0.50 rad RMS phase error",
+      "id": "query_scramble_breaks_recovery",
+      "inputs": [
+        "analytic_state_iq",
+        "analytic_query_iq"
+      ],
+      "metric": "phase_rmse_rad",
+      "tolerance": 0.5
+    },
+    {
+      "comparator": "<=",
+      "edge": "coefficient derived from parsed I/Q; closed query set {0,pi/2,pi,3pi/2}",
+      "expected": "finite four-query answer vector exactly replays delayed selection",
+      "id": "finite_answer_cache_replay",
+      "inputs": [
+        "analytic_state_iq",
+        "analytic_query_iq"
+      ],
+      "metric": "max_absolute_error",
+      "tolerance": 1e-14
+    },
+    {
+      "comparator": "<=",
+      "edge": "coefficient derived from parsed I/Q; held-out q values absent from finite cache",
+      "expected": "two-parameter sinusoidal generator replays held-out continuous queries",
+      "id": "compressed_generator_held_out_query",
+      "inputs": [
+        "analytic_state_iq",
+        "analytic_query_iq"
+      ],
+      "metric": "max_absolute_error",
+      "tolerance": 1e-14
+    },
+    {
+      "comparator": "<=",
+      "edge": "manifest-only non-sample side channel is deliberately public",
+      "expected": "public manifest parameters reconstruct all multitone complex coefficients",
+      "id": "public_manifest_parameter_replay",
+      "inputs": [
+        "AUDIO_WAVE_FIXTURE_MANIFEST.json"
+      ],
+      "metric": "normalized_vector_error",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "edge": "inherits each operation-specific parsed-fixture convention",
+      "expected": "public DSP reproduces every applicable scored algebra operation",
+      "id": "ordinary_dsp_replay",
+      "inputs": [
+        "all committed fixtures"
+      ],
+      "metric": "max_fraction_of_frozen_tolerance",
+      "tolerance": 1.0
+    },
+    {
+      "comparator": "<=",
+      "edge": "full linear convolution",
+      "expected": "public FFT filter exactly replays linear response",
+      "id": "ordinary_linear_filter_replay",
+      "inputs": [
+        "matched_pair_a"
+      ],
+      "metric": "sample_rmse",
+      "tolerance": 1e-13
+    },
+    {
+      "comparator": "<=",
+      "edge": "parsed float32 pointwise polynomial",
+      "expected": "public polynomial law replays float32 output within serialization error",
+      "id": "ordinary_nonlinear_filter_replay",
+      "inputs": [
+        "nonlinear_input",
+        "nonlinear_output"
+      ],
+      "metric": "sample_rmse",
+      "tolerance": 5e-08
+    },
+    {
+      "comparator": "<=",
+      "edge": "parsed float32 real-signal time reversal and full FFT",
+      "expected": "magnitude spectra match while matched responses remain separated",
+      "id": "spectral_energy_leakage_control",
+      "inputs": [
+        "matched_pair_a",
+        "matched_pair_b"
+      ],
+      "metric": "max_spectral_error_or_gap_deficit",
+      "tolerance": 1e-12
+    },
+    {
+      "comparator": "<=",
+      "edge": "alias permutation only",
+      "expected": "phase truth is not encoded in external label names",
+      "id": "phase_label_leakage_control",
+      "inputs": [
+        "multitone_state"
+      ],
+      "metric": "max_sample_or_projection_error",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "edge": "unknown even-padded RIFF chunks ignored",
+      "expected": "LIST metadata addition and stripping leave samples and projection invariant",
+      "id": "file_metadata_stripping_invariance",
+      "inputs": [
+        "multitone_state"
+      ],
+      "metric": "max_sample_or_projection_error",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "edge": "coefficient derived from parsed I/Q; query known before closure",
+      "expected": "source-visible preselected query admits exact answer precomputation",
+      "id": "query_preselection_attack",
+      "inputs": [
+        "analytic_state_iq",
+        "analytic_query_iq"
+      ],
+      "metric": "absolute_error",
+      "tolerance": 1e-14
+    },
+    {
+      "comparator": "<=",
+      "edge": "float32 serialization; classified as file persistence only",
+      "expected": "reopened serialized WAV exactly reproduces the observable",
+      "id": "file_storage_fake_persistence",
+      "inputs": [
+        "multitone_state"
+      ],
+      "metric": "normalized_vector_error",
+      "tolerance": 1e-07
+    },
+    {
+      "comparator": "<=",
+      "edge": "no physical carrier or baseline distribution",
+      "expected": "digital inverse returns samples but supports only R0-like algebraic return",
+      "id": "digital_restoration_r0_only",
+      "inputs": [
+        "analytic_state_iq"
+      ],
+      "metric": "normalized_vector_error",
+      "tolerance": 1e-14
+    }
+  ]
+}

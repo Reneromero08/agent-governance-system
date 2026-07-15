@@ -1,0 +1,437 @@
+{
+  "attestations": {
+    "audio_hardware_contact_count": 0,
+    "audio_playback_count": 0,
+    "audio_recording_count": 0,
+    "live_authority_used": false,
+    "network_contact_count": 0,
+    "target_contact_count": 0
+  },
+  "claim_ceiling": "AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED",
+  "fixture_manifest_sha256": "3e10d0ecbf535b795febba7c56f261a58d7ed3a67e8c4ecee7b030b1bff53049",
+  "generator": "audio_wave_reference_v1",
+  "ordinary_software_replay_expected": true,
+  "ordinary_software_replay_survived": true,
+  "physical_claims_established": [],
+  "reference_runtime": {
+    "numpy": "1.26.4",
+    "python": "3.11.6",
+    "reported_metric_significant_digits": 12
+  },
+  "reference_tests_sha256": "0b38d590c5afaf2835bd00aa98865ad33c20e38aabbfdf9f1358a0d688c1c712",
+  "schema": "audio_wave_reference_results_v1",
+  "scored_representation": "parsed_committed_ieee_float32_wav",
+  "summary": {
+    "failed": 0,
+    "passed": 29,
+    "test_count": 29
+  },
+  "tests": [
+    {
+      "comparator": "<=",
+      "conclusion": "Ordinary analytic-signal FM recovery meets the frozen envelope.",
+      "edge": "exclude first and last 4096 samples",
+      "id": "fm_round_trip_recovery",
+      "measurements": {
+        "carrier_mean_hz": 8000.00722749,
+        "frequency_rmse_hz": 1.87833548821
+      },
+      "metric": "sample_rmse",
+      "observed": 0.00447222735288,
+      "status": "PASS",
+      "tolerance": 0.012
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "Ordinary analytic-signal PM recovery meets the frozen envelope.",
+      "edge": "exclude first and last 4096 samples; PM DC phase is removed",
+      "id": "pm_round_trip_recovery",
+      "measurements": {
+        "phase_rmse_rad": 7.13051739932e-06
+      },
+      "metric": "sample_rmse",
+      "observed": 6.20044991245e-06,
+      "status": "PASS",
+      "tolerance": 0.012
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "The frozen FFT Hilbert convention constructs an analytic complex signal.",
+      "edge": "FFT periodic boundary",
+      "id": "analytic_signal",
+      "measurements": {
+        "negative_to_positive_energy_ratio": 6.43752395715e-32,
+        "real_reconstruction_rmse": 1.15496027227e-16
+      },
+      "metric": "max_reconstruction_or_negative_energy_ratio",
+      "observed": 1.15496027227e-16,
+      "status": "PASS",
+      "tolerance": 1e-12
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "Conjugate mixing of parsed stereo I/Q fixtures performs phase subtraction.",
+      "edge": "parsed float32 stereo I/Q; modulo 2*pi",
+      "id": "conjugate_phase_subtraction",
+      "measurements": {},
+      "metric": "max_angular_error_rad",
+      "observed": 6.50969907191e-08,
+      "status": "PASS",
+      "tolerance": 1e-06
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "Ordinary multiplication of parsed stereo I/Q fixtures performs phase addition.",
+      "edge": "parsed float32 stereo I/Q; modulo 2*pi",
+      "id": "ordinary_phase_addition",
+      "measurements": {},
+      "metric": "max_angular_error_rad",
+      "observed": 6.40811264831e-08,
+      "status": "PASS",
+      "tolerance": 1e-06
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "Complex coefficients, including phase, are recovered from the committed float32 fixture.",
+      "edge": "parsed float32 integer-cycle two-second record",
+      "id": "multitone_complex_projection",
+      "measurements": {
+        "frequencies_hz": [
+          6300.0,
+          8000.0,
+          9700.0
+        ]
+      },
+      "metric": "normalized_vector_error",
+      "observed": 4.10704396658e-09,
+      "status": "PASS",
+      "tolerance": 1e-07
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "The committed circular-delay fixture produces the predeclared per-bin phase rotation.",
+      "edge": "parsed float32 circular exact-sample delay",
+      "id": "delay_phase_rotation",
+      "measurements": {
+        "delay_samples": 37
+      },
+      "metric": "normalized_vector_error",
+      "observed": 4.10704178324e-09,
+      "status": "PASS",
+      "tolerance": 1e-07
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "The zero-filled delay convention is exercised exactly.",
+      "edge": "causal zero-filled exact-sample delay",
+      "id": "zero_filled_delay",
+      "measurements": {
+        "delay_samples": 37
+      },
+      "metric": "max_absolute_sample_error",
+      "observed": 0.0,
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "Complex phase rotation has an exact algebraic inverse.",
+      "edge": "no time-boundary operation",
+      "id": "fractional_phase_rotation_inverse",
+      "measurements": {},
+      "metric": "normalized_vector_error",
+      "observed": 6.94978228843e-17,
+      "status": "PASS",
+      "tolerance": 1e-14
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "The frozen complex filter bank recovers occupied bins from the committed float32 fixture and rejects a declared null bin.",
+      "edge": "parsed float32 complex inner product over full record",
+      "id": "filter_bank_projection",
+      "measurements": {
+        "null_bin_absolute_amplitude": 1.03414646049e-14
+      },
+      "metric": "max_coefficient_or_null_error",
+      "observed": 4.10704396658e-09,
+      "status": "PASS",
+      "tolerance": 1e-07
+    },
+    {
+      "comparator": ">=",
+      "conclusion": "Matched filtering uses phase/time structure rather than energy alone.",
+      "edge": "full parsed float32 records; zero norm returns zero",
+      "id": "matched_filter_energy_sham",
+      "measurements": {
+        "sham_score": 0.0159215213503,
+        "target_score": 1.0
+      },
+      "metric": "pair_a_minus_pair_b_normalized_score",
+      "observed": 0.98407847865,
+      "status": "PASS",
+      "tolerance": 0.8
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "The zero-denominator convention is frozen to complex zero.",
+      "edge": "explicit denominator-zero convention",
+      "id": "correlation_zero_denominator",
+      "measurements": {},
+      "metric": "absolute_value",
+      "observed": 0.0,
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "The unnormalized correlation path equals the explicit complex inner product.",
+      "edge": "full parsed float32 records",
+      "id": "unnormalized_correlation",
+      "measurements": {},
+      "metric": "absolute_error",
+      "observed": 0.0,
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "FFT convolution matches the direct full-boundary reference.",
+      "edge": "finite inputs zero outside support; full N+M-1 output",
+      "id": "convolution_full_boundary",
+      "measurements": {},
+      "metric": "sample_rmse",
+      "observed": 4.47209950655e-20,
+      "status": "PASS",
+      "tolerance": 1e-13
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "The committed float32 output contains the declared ordinary polynomial intermodulation products.",
+      "edge": "parsed float32 integer-cycle record; y=x+0.8*x^2",
+      "id": "nonlinear_intermodulation",
+      "measurements": {
+        "difference_hz": 1200.0,
+        "expected_amplitude": 0.072,
+        "sum_hz": 15200.0
+      },
+      "metric": "max_complex_coefficient_error",
+      "observed": 1.66222279012e-09,
+      "status": "PASS",
+      "tolerance": 1e-07
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "A bijective external alias rename changes neither content resolution nor the scored result.",
+      "edge": "labels are external aliases, not generator inputs",
+      "id": "label_only_renaming_invariance",
+      "measurements": {
+        "aliases_after": {
+          "renamed_control": "matched_pair_a",
+          "renamed_state": "multitone_state"
+        },
+        "aliases_before": {
+          "control_alias": "matched_pair_a",
+          "state_alias": "multitone_state"
+        }
+      },
+      "metric": "max_sample_or_result_error",
+      "observed": 0.0,
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": ">=",
+      "conclusion": "A frequency-scrambled query destroys the intended relative-phase recovery.",
+      "edge": "exclude first and last 4096 samples",
+      "id": "query_scramble_breaks_recovery",
+      "measurements": {},
+      "metric": "phase_rmse_rad",
+      "observed": 1.81759406541,
+      "status": "PASS",
+      "tolerance": 0.5
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "The finite-query theorem is constructively reproduced: the literal cache survives.",
+      "edge": "coefficient derived from parsed I/Q; closed query set {0,pi/2,pi,3pi/2}",
+      "id": "finite_answer_cache_replay",
+      "measurements": {},
+      "metric": "max_absolute_error",
+      "observed": 0.0,
+      "status": "PASS",
+      "tolerance": 1e-14
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "A compact formula survives held-out continuous queries; continuity is not capacity separation.",
+      "edge": "coefficient derived from parsed I/Q; held-out q values absent from finite cache",
+      "id": "compressed_generator_held_out_query",
+      "measurements": {},
+      "metric": "max_absolute_error",
+      "observed": 8.32667268469e-17,
+      "status": "PASS",
+      "tolerance": 1e-14
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "Public non-sample manifest parameters exactly replay the declared multitone coefficients and remain an admissible ordinary side channel.",
+      "edge": "manifest-only non-sample side channel is deliberately public",
+      "id": "public_manifest_parameter_replay",
+      "measurements": {},
+      "metric": "normalized_vector_error",
+      "observed": 0.0,
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "The public ordinary-DSP adversary reproduces every applicable committed-fixture algebra result within its own frozen tolerance.",
+      "edge": "inherits each operation-specific parsed-fixture convention",
+      "id": "ordinary_dsp_replay",
+      "measurements": {
+        "addition": 0.0640811264831,
+        "analytic": 0.000115496027227,
+        "circular_delay": 0.0410704178324,
+        "conjugate": 0.0650969907191,
+        "convolution": 4.47209950655e-07,
+        "filter_bank": 0.0410704396658,
+        "fm": 0.37268561274,
+        "linear_replay": 4.47209950655e-07,
+        "matched_filter": 0.0,
+        "multitone": 0.0410704396658,
+        "nonlinear_intermodulation": 0.0166222279012,
+        "nonlinear_replay": 0.232746540621,
+        "pm": 0.000516704159371,
+        "rotation_inverse": 0.00694978228843,
+        "unnormalized_correlation": 0.0,
+        "zero_denominator_correlation": 0.0,
+        "zero_filled_delay": 0.0
+      },
+      "metric": "max_fraction_of_frozen_tolerance",
+      "observed": 0.37268561274,
+      "status": "PASS",
+      "tolerance": 1.0
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "An ordinary linear-filter model remains sufficient.",
+      "edge": "full linear convolution",
+      "id": "ordinary_linear_filter_replay",
+      "measurements": {},
+      "metric": "sample_rmse",
+      "observed": 4.47209950655e-20,
+      "status": "PASS",
+      "tolerance": 1e-13
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "The public polynomial law explains the committed float32 output within the frozen serialization tolerance.",
+      "edge": "parsed float32 pointwise polynomial",
+      "id": "ordinary_nonlinear_filter_replay",
+      "measurements": {},
+      "metric": "sample_rmse",
+      "observed": 1.1637327031e-08,
+      "status": "PASS",
+      "tolerance": 5e-08
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "Energy and magnitude spectrum do not encode the matched-filter answer.",
+      "edge": "parsed float32 real-signal time reversal and full FFT",
+      "id": "spectral_energy_leakage_control",
+      "measurements": {
+        "magnitude_spectrum_error": 3.25003444627e-16,
+        "matched_score_gap": 0.98407847865
+      },
+      "metric": "max_spectral_error_or_gap_deficit",
+      "observed": 3.25003444627e-16,
+      "status": "PASS",
+      "tolerance": 1e-12
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "A bijective phase-label rename leaves frequency-bound complex coefficients unchanged; public numeric parameters remain separately replayable.",
+      "edge": "alias permutation only",
+      "id": "phase_label_leakage_control",
+      "measurements": {
+        "labels_after": {
+          "renamed_alpha": 6300.0,
+          "renamed_beta": 8000.0,
+          "renamed_gamma": 9700.0
+        },
+        "labels_before": {
+          "alpha": 6300.0,
+          "beta": 8000.0,
+          "gamma": 9700.0
+        }
+      },
+      "metric": "max_sample_or_projection_error",
+      "observed": 0.0,
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "A nonessential RIFF LIST chunk is neither required nor answer-bearing; manifest/path side channels are tested separately.",
+      "edge": "unknown even-padded RIFF chunks ignored",
+      "id": "file_metadata_stripping_invariance",
+      "measurements": {
+        "chunks_after": [
+          "fmt ",
+          "data"
+        ],
+        "chunks_before": [
+          "fmt ",
+          "LIST",
+          "data"
+        ]
+      },
+      "metric": "max_sample_or_projection_error",
+      "observed": 0.0,
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "A preselected query is exactly answer-smuggleable and cannot support query separation.",
+      "edge": "coefficient derived from parsed I/Q; query known before closure",
+      "id": "query_preselection_attack",
+      "measurements": {},
+      "metric": "absolute_error",
+      "observed": 0.0,
+      "status": "PASS",
+      "tolerance": 1e-14
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "The durable state exercised here is serialized file persistence only; interface-buffer persistence remains an untested future physical adversary.",
+      "edge": "float32 serialization; classified as file persistence only",
+      "id": "file_storage_fake_persistence",
+      "measurements": {
+        "interface_buffer_exclusion_tested": false,
+        "wav_chunks": [
+          "fmt ",
+          "data"
+        ]
+      },
+      "metric": "normalized_vector_error",
+      "observed": 0.0,
+      "status": "PASS",
+      "tolerance": 1e-07
+    },
+    {
+      "comparator": "<=",
+      "conclusion": "Exact digital inversion must not be promoted to physical R2 restoration.",
+      "edge": "no physical carrier or baseline distribution",
+      "id": "digital_restoration_r0_only",
+      "measurements": {
+        "physical_R2_established": false,
+        "restoration_tier": "R0_LIKE_DIGITAL_ALGEBRA_ONLY"
+      },
+      "metric": "normalized_vector_error",
+      "observed": 1.83765728576e-16,
+      "status": "PASS",
+      "tolerance": 1e-14
+    }
+  ]
+}
