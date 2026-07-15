@@ -1,0 +1,140 @@
+{
+  "operator_analysis_tests": {
+    "between_state_exceeds_within_state": true,
+    "held_out_delay_prediction_used": true,
+    "held_out_mapping_prediction_used": true,
+    "held_out_replicate_prediction_used": true,
+    "ideal_persistent_public_state_has_signal": true,
+    "in_sample_only_claim_rejected": true,
+    "natural_relaxation_fixture_mean": 68.9240091414326,
+    "no_persistent_state_fixture_mean": 0.0,
+    "operator_ladder": {
+      "distinguishability": {
+        "between_state_min_distance": 4843.703750409475,
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 1,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 1,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 1,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 1,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 1,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 1,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 1
+          }
+        },
+        "cross_validated_codeword_classification": true,
+        "response_matrix_effective_rank": 1,
+        "singular_spectrum": [
+          12815.235548054345,
+          0.00014326612718573926,
+          4.012381661795713e-05,
+          3.675728489291355e-05,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "within_state_max_distance": 0.0
+      },
+      "held_out_delay": {
+        "noise_aware_threshold": 6.238920473916876,
+        "rmse": {
+          "S0": 638.0225354701917,
+          "S1": 638.0225354701917,
+          "S2": 4.674041146550113e-15
+        },
+        "smallest_sufficient_model": "S2",
+        "test_count": 336,
+        "train_count": 3024
+      },
+      "held_out_mapping": {
+        "noise_aware_threshold": 6.253194653099436,
+        "rmse": {
+          "S0": 625.3194653099438,
+          "S1": 625.3194653099438,
+          "S2": 8.118357223295469e-14
+        },
+        "smallest_sufficient_model": "S2",
+        "test_count": 840,
+        "train_count": 2520
+      },
+      "held_out_replicate": {
+        "noise_aware_threshold": 6.253194653099436,
+        "rmse": {
+          "S0": 625.319465309944,
+          "S1": 625.319465309944,
+          "S2": 4.4571416196287794e-14
+        },
+        "smallest_sufficient_model": "S2",
+        "test_count": 1680,
+        "train_count": 1680
+      }
+    },
+    "s2_sufficient_for_ideal_fixture": true,
+    "validated_packet_analysis": {
+      "adjudication_result": "FAMILY10H_POST_SOURCE_STATE_OBSERVED",
+      "factorial_matched_group_count": 1120,
+      "lifetime_curve_count": 28,
+      "operator_ladder_present": true,
+      "passed": true
+    }
+  },
+  "packet_analysis_has_factorial": true,
+  "packet_analysis_has_lifetime": true,
+  "packet_analysis_passed": true,
+  "passed": true,
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_OPERATOR_ANALYSIS_SELF_TEST_V1"
+}

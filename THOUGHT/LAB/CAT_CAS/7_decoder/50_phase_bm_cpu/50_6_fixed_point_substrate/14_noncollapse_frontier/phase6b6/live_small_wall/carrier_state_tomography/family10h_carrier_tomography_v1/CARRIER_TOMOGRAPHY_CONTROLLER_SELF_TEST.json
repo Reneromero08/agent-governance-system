@@ -1,0 +1,13 @@
+{
+  "live_authority_env_absent": {
+    "passed": true,
+    "present_authority_env": []
+  },
+  "live_invocation_count": 0,
+  "offline_validate_sha256": "b62a0708437720e8cdf80f5e0cfd7ff8daa71cff0cb1b54c11d46a4a7ca3e493",
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
+  "self_test_passed": true,
+  "self_test_sha256": "a7d2e522ec93989e97130c0b5e97cac636dee7668385d7d2d137b9dc2d8ba07f",
+  "target_contact_count": 0,
+  "transport_simulation_sha256": "df4bf2baca163b28fb8310ae6170fec0a1d3602b181f1abe67518be8884ceab0"
+}

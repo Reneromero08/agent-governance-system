@@ -1,0 +1,63 @@
+{
+  "copyback_corruption_rejected": true,
+  "corrupted": {
+    "failures": [
+      "exact tuple equality failed",
+      "exact executed order failed",
+      "unexpected ID"
+    ],
+    "passed": false,
+    "validation": {
+      "expected_count": 8320,
+      "failures": [
+        "exact tuple equality failed",
+        "exact executed order failed",
+        "unexpected ID"
+      ],
+      "observed_count": 8320,
+      "passed": false
+    }
+  },
+  "failure": {
+    "failures": [
+      "raw record count mismatch",
+      "exact tuple equality failed",
+      "exact executed order failed"
+    ],
+    "passed": false,
+    "validation": {
+      "expected_count": 8320,
+      "failures": [
+        "raw record count mismatch",
+        "exact tuple equality failed",
+        "exact executed order failed"
+      ],
+      "observed_count": 8319,
+      "passed": false
+    }
+  },
+  "fake_failure_transport_rejected": true,
+  "fake_success_transport_passed": true,
+  "live_invocation_count": 0,
+  "offline_only": true,
+  "passed": true,
+  "protected_remote_roots_not_touched": true,
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TRANSPORT_SIMULATION_V1",
+  "success": {
+    "failures": [],
+    "passed": true,
+    "validation": {
+      "expected_count": 8320,
+      "failures": [],
+      "observed_count": 8320,
+      "passed": true
+    }
+  },
+  "target_contact_count": 0,
+  "timeout_consistency": {
+    "failure_sealed_before_copyback": true,
+    "no_automatic_retry": true,
+    "outer_timeout_exceeds_inner_timeout": true
+  },
+  "transport_simulation_sha256": "df4bf2baca163b28fb8310ae6170fec0a1d3602b181f1abe67518be8884ceab0"
+}

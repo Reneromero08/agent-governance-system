@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_DEATH_CUSTODY_SELF_TEST_V1",
+  "source_death_custody_tests": {
+    "open_source_ipc_after_waitpid_rejected": true,
+    "post_observation_query_window_selection_rejected": true,
+    "query_selected_before_source_death_rejected": true,
+    "source_alive_during_query_rejected": true,
+    "source_helper_survives_rejected": true,
+    "valid_receipt_passes": true
+  }
+}

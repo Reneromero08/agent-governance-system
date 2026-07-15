@@ -1,0 +1,84 @@
+{
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SUBAGENT_FINDINGS_NORMALIZED_V1",
+  "package_decision": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+  "material_blockers": [
+    "PHYS-REVIEW-01",
+    "OPER-REVIEW-01",
+    "OPER-REVIEW-02",
+    "OPER-REVIEW-03",
+    "OPER-REVIEW-04"
+  ],
+  "findings": {
+    "PHYS-REVIEW-01": {
+      "originating_agent": "physical carrier-state auditor",
+      "agent_id": "019f62c5-3e70-7c92-bdde-9b54e6f9a6e6",
+      "exact_report": "final latest-state physical re-audit",
+      "cited_source_file_function_line": "family10h_carrier_tomography_target.py:read_temperature_sample:293",
+      "mechanism": "Temperature sampling binds a stable hwmon path but does not require an approved CPU sensor identity.",
+      "consequence": "A non-CPU sensor could satisfy the temperature custody threshold.",
+      "minimal_repair": "Bind a manifest-approved CPU sensor identity by resolved path plus approved hwmon name and label.",
+      "required_regression": "Place a non-CPU hwmon sensor first and confirm rejection.",
+      "parent_disposition": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+      "independently_reproduced": true
+    },
+    "OPER-REVIEW-01": {
+      "originating_agent": "experimental-design/operator auditor",
+      "agent_id": "019f62c5-63d2-7e70-8831-ffc8b97226c6",
+      "exact_report": "final latest-state operator re-audit",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:evidence_samples:1345-1392",
+      "mechanism": "Active query observations are collapsed into one A-minus-B contrast sample labeled query_A.",
+      "consequence": "Per-query and query-order operator effects are not identified by the gated analysis.",
+      "minimal_repair": "Represent query effects and query-order interactions explicitly without collapsing all active queries into one label.",
+      "required_regression": "A query-order-only effect must be detected by the operator analysis.",
+      "parent_disposition": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+      "independently_reproduced": true
+    },
+    "OPER-REVIEW-02": {
+      "originating_agent": "experimental-design/operator auditor",
+      "agent_id": "019f62c5-63d2-7e70-8831-ffc8b97226c6",
+      "exact_report": "final latest-state operator re-audit",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:fit_operator_ladder:1318-1320",
+      "mechanism": "Mapping and delay holdouts retain those factor levels in training via replicate 0.",
+      "consequence": "The gate proves restricted replicate prediction, not strict held-out mapping or delay prediction.",
+      "minimal_repair": "Use strict factor-held-out gates or rename and contractually narrow the gate.",
+      "required_regression": "Mapping-scrambled and delay-scrambled packets that retain pooled contrasts must remain candidate.",
+      "parent_disposition": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+      "independently_reproduced": true
+    },
+    "OPER-REVIEW-03": {
+      "originating_agent": "experimental-design/operator auditor",
+      "agent_id": "019f62c5-63d2-7e70-8831-ffc8b97226c6",
+      "exact_report": "final latest-state operator re-audit",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:operational_distinguishability:1307",
+      "mechanism": "Cross-validated classification is asserted as true in the summary.",
+      "consequence": "A classification failure would not currently gate the observed result class.",
+      "minimal_repair": "Compute and gate classification success from the confusion matrix.",
+      "required_regression": "A deliberately confused codeword packet must fail the classification gate.",
+      "parent_disposition": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+      "independently_reproduced": true
+    },
+    "OPER-REVIEW-04": {
+      "originating_agent": "experimental-design/operator auditor",
+      "agent_id": "019f62c5-63d2-7e70-8831-ffc8b97226c6",
+      "exact_report": "final latest-state operator re-audit",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:lifetime_summary:1426-1454",
+      "mechanism": "Lifetime reporting remains incomplete relative to the contract vocabulary and variation decomposition.",
+      "consequence": "State-lifetime claims are not ready for authorization.",
+      "minimal_repair": "Emit contract-vocabulary lifetime classes with explicit session and mapping variation gates.",
+      "required_regression": "Interleaved or variation-confounded lifetime packets must be rejected or downgraded.",
+      "parent_disposition": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+      "independently_reproduced": true
+    }
+  },
+  "non_material_clearances": {
+    "claim_boundary": {
+      "originating_agent": "claim-boundary adjudicator",
+      "agent_id": "019f62c5-9ad3-7b40-ac8a-2e993c9161b2",
+      "verdict": "NO_MATERIAL_BLOCKER"
+    }
+  },
+  "zero_contact_attestation": {
+    "target_contact_count": 0,
+    "live_invocation_count": 0
+  }
+}

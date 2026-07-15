@@ -1,0 +1,7 @@
+{
+  "canonical_sha256": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
+  "json_sha256": "a6c30fd345a95e77db4da4190befabe8695309fb1c37b6739267c09b2470743b",
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE_SHA256_V1",
+  "tsv_sha256": "b788a89f66eeb1074f5a8a591f669933efaaaa2ccfd7ef9ebb3715104fc25690",
+  "tuple_count": 8320
+}

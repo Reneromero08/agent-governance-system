@@ -1,0 +1,282 @@
+{
+  "allowed_result_classes": [
+    "FAMILY10H_POST_SOURCE_STATE_OBSERVED",
+    "FAMILY10H_POST_SOURCE_STATE_NOT_OBSERVED",
+    "FAMILY10H_CARRIER_TOMOGRAPHY_CANDIDATE",
+    "FAMILY10H_CARRIER_TOMOGRAPHY_CUSTODY_INVALID"
+  ],
+  "coverage_tests": {
+    "bool_counter_rejected": true,
+    "bool_event_id_rejected": true,
+    "bool_pid_rejected": true,
+    "bool_temperature_rejected": true,
+    "duplicate_id_rejected": true,
+    "execution_order_mismatch_rejected": true,
+    "false_feature_freeze_rejected": true,
+    "feature_extra_private_key_rejected": true,
+    "first_nonnumeric_counter_rejected": true,
+    "full_schedule_row_drift_rejected": true,
+    "middle_negative_counter_rejected": true,
+    "minimal_success_packet": {
+      "expected_count": 8320,
+      "failures": [],
+      "observed_count": 8320,
+      "passed": true
+    },
+    "missing_delay_cell_rejected": true,
+    "missing_preparation_cell_rejected": true,
+    "missing_query_cell_rejected": true,
+    "missing_replicate_rejected": true,
+    "missing_source_receipt_rejected": true,
+    "negative_temperature_rejected": true,
+    "raw_extra_private_key_rejected": true,
+    "receipt_extra_private_key_rejected": true,
+    "swapped_receipts_rejected": true,
+    "tail_record_4159_corruption_rejected": true,
+    "unexpected_id_rejected": true,
+    "wait_status_success_mismatch_rejected": true,
+    "wrong_schedule_hash_rejected": true,
+    "zero_duration_rejected": true
+  },
+  "decision_table_tests": {
+    "candidate_fixture_class": "FAMILY10H_CARRIER_TOMOGRAPHY_CANDIDATE",
+    "exclusive_allowed_classes": true,
+    "failed_source_off_fixture_class": "FAMILY10H_CARRIER_TOMOGRAPHY_CANDIDATE",
+    "invalid_fixture_class": "FAMILY10H_CARRIER_TOMOGRAPHY_CUSTODY_INVALID",
+    "no_state_fixture_class": "FAMILY10H_POST_SOURCE_STATE_NOT_OBSERVED",
+    "observed_fixture_class": "FAMILY10H_POST_SOURCE_STATE_OBSERVED",
+    "one_stratum_only_signal_class": "FAMILY10H_CARRIER_TOMOGRAPHY_CANDIDATE"
+  },
+  "factorial_arm_tests": {
+    "additive_data_rejected_as_nonadditive": true,
+    "additive_factorial_jq": 0.0,
+    "ordinary_nonlinear_data_detected_not_overclaimed": true,
+    "ordinary_nonlinear_factorial_jq": 8.0,
+    "route_bank_order_interaction_fixture_present": true
+  },
+  "feature_boundary_tests": {
+    "artifact_violations": [],
+    "feature_boundary_self_test_sha256": "548392a789e3ad2d056f2288a7fef2a337916517c1fd130b924a7297b88d5d18",
+    "forbidden_claim_hits": [],
+    "forbidden_value_hits": [],
+    "injected_artifact_violation_subtree_rejected": true,
+    "injected_blocker_object_rejected": true,
+    "injected_blocker_resolution_rejected": true,
+    "injected_denied_claim_subtree_rejected": true,
+    "injected_exact_fenced_forbidden_block_allowed": true,
+    "injected_forbidden_claim_ceiling_rejected": true,
+    "injected_forbidden_claim_rejected": true,
+    "injected_forbidden_key_rejected": true,
+    "injected_inline_forbidden_heading_rejected": true,
+    "injected_unfenced_forbidden_heading_rejected": true,
+    "injected_variant_rejected": true,
+    "injected_wall_promotion_rejected": true,
+    "no_fold_branch": true,
+    "no_private_map": true,
+    "no_target_vector": true,
+    "passed": true,
+    "public_only": true,
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_FEATURE_BOUNDARY_SELF_TEST_V1"
+  },
+  "forbidden_result_classes": [
+    "ORBITSTATE_ACCESS_ESTABLISHED",
+    "RELATIONAL_CARRIER_ESTABLISHED",
+    "PHYSICAL_RELATIONAL_MEMORY_ESTABLISHED",
+    "CATALYTIC_BORROWING_ESTABLISHED",
+    "SMALL_WALL_CROSSED"
+  ],
+  "operator_analysis_tests": {
+    "between_state_exceeds_within_state": true,
+    "held_out_delay_prediction_used": true,
+    "held_out_mapping_prediction_used": true,
+    "held_out_replicate_prediction_used": true,
+    "ideal_persistent_public_state_has_signal": true,
+    "in_sample_only_claim_rejected": true,
+    "natural_relaxation_fixture_mean": 68.9240091414326,
+    "no_persistent_state_fixture_mean": 0.0,
+    "operator_ladder": {
+      "distinguishability": {
+        "between_state_min_distance": 4843.703750409475,
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 1,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 1,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 1,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 1,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 1,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 1,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 1
+          }
+        },
+        "cross_validated_codeword_classification": true,
+        "response_matrix_effective_rank": 1,
+        "singular_spectrum": [
+          12815.235548054345,
+          0.00014326612718573926,
+          4.012381661795713e-05,
+          3.675728489291355e-05,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "within_state_max_distance": 0.0
+      },
+      "held_out_delay": {
+        "noise_aware_threshold": 6.238920473916876,
+        "rmse": {
+          "S0": 638.0225354701917,
+          "S1": 638.0225354701917,
+          "S2": 4.674041146550113e-15
+        },
+        "smallest_sufficient_model": "S2",
+        "test_count": 336,
+        "train_count": 3024
+      },
+      "held_out_mapping": {
+        "noise_aware_threshold": 6.253194653099436,
+        "rmse": {
+          "S0": 625.3194653099438,
+          "S1": 625.3194653099438,
+          "S2": 8.118357223295469e-14
+        },
+        "smallest_sufficient_model": "S2",
+        "test_count": 840,
+        "train_count": 2520
+      },
+      "held_out_replicate": {
+        "noise_aware_threshold": 6.253194653099436,
+        "rmse": {
+          "S0": 625.319465309944,
+          "S1": 625.319465309944,
+          "S2": 4.4571416196287794e-14
+        },
+        "smallest_sufficient_model": "S2",
+        "test_count": 1680,
+        "train_count": 1680
+      }
+    },
+    "s2_sufficient_for_ideal_fixture": true,
+    "validated_packet_analysis": {
+      "adjudication_result": "FAMILY10H_POST_SOURCE_STATE_OBSERVED",
+      "factorial_matched_group_count": 1120,
+      "lifetime_curve_count": 28,
+      "operator_ladder_present": true,
+      "passed": true
+    }
+  },
+  "pmu_and_policy_tests": {
+    "mapping_trace_mismatch_rejected": true,
+    "partial_pmu_read_rejected": true,
+    "partial_pmu_value_group_rejected": true,
+    "pmu_id_collision_rejected": true,
+    "policy_drift_required_by_target_self_test": true,
+    "policy_unreadable_required_by_target_self_test": true,
+    "process_scan_failure_required_by_target_self_test": true,
+    "source_off_leakage_detected_as_pmu_multiplexing_fixture": true,
+    "temperature_failure_required_by_target_self_test": true,
+    "wrong_receiver_core_rejected": true,
+    "wrong_source_core_required_by_target_self_test": true
+  },
+  "restoration_boundary_tests": {
+    "natural_relaxation_control_required": true,
+    "post_reset_rebaseline_vector_required": true,
+    "r0_byte_hash_return_field_required": true,
+    "r2_not_adjudicated": true
+  },
+  "schedule_hash": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
+  "schedule_validation": {
+    "block_counts": {
+      "factorial_nonadditivity": 4480,
+      "persistence_matrix": 3840
+    },
+    "expected_blocks": {
+      "factorial_nonadditivity": 4480,
+      "persistence_matrix": 3840
+    },
+    "failures": [],
+    "passed": true,
+    "tuple_count": 8320
+  },
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SELF_TEST_V1",
+  "science_package_id": "family10h_carrier_tomography_v1_0",
+  "self_test_passed": true,
+  "self_test_sha256": "900a45c20ce940aa406fb78b7b1ada8e1c58257132196cfcc72bb38716dd88ce",
+  "source_death_custody_tests": {
+    "open_source_ipc_after_waitpid_rejected": true,
+    "post_observation_query_window_selection_rejected": true,
+    "query_selected_before_source_death_rejected": true,
+    "source_alive_during_query_rejected": true,
+    "source_helper_survives_rejected": true,
+    "valid_receipt_passes": true
+  },
+  "target_controller_transport_tests_required": [
+    "three-file minimal-success packet",
+    "missing evidence file",
+    "extra evidence file",
+    "source mutation before compile",
+    "source mutation during compile",
+    "timeout before failure sealing",
+    "fake success transport",
+    "fake failure transport",
+    "copy-back corruption",
+    "timeout consistency",
+    "source-bundle reconstruction",
+    "deployment-layout"
+  ],
+  "transaction_run_id": "family10h_carrier_tomography_v1_0",
+  "tuple_count": 8320
+}

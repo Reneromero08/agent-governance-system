@@ -1,0 +1,11 @@
+{
+  "factorial_arm_tests": {
+    "additive_data_rejected_as_nonadditive": true,
+    "additive_factorial_jq": 0.0,
+    "ordinary_nonlinear_data_detected_not_overclaimed": true,
+    "ordinary_nonlinear_factorial_jq": 8.0,
+    "route_bank_order_interaction_fixture_present": true
+  },
+  "passed": true,
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_FACTORIAL_ARM_SELF_TEST_V1"
+}

@@ -1,0 +1,300 @@
+{
+  "allowed_result_classes": [
+    "FAMILY10H_POST_SOURCE_STATE_OBSERVED",
+    "FAMILY10H_POST_SOURCE_STATE_NOT_OBSERVED",
+    "FAMILY10H_CARRIER_TOMOGRAPHY_CANDIDATE",
+    "FAMILY10H_CARRIER_TOMOGRAPHY_CUSTODY_INVALID"
+  ],
+  "claim_ceiling": "route-scoped public carrier-state model only",
+  "controller_self_test": {
+    "passed": true,
+    "sha256": "a7d2e522ec93989e97130c0b5e97cac636dee7668385d7d2d137b9dc2d8ba07f"
+  },
+  "delay_grid": [
+    {
+      "delay_label": "0ns",
+      "delay_ns": 0
+    },
+    {
+      "delay_label": "100us",
+      "delay_ns": 100000
+    },
+    {
+      "delay_label": "1ms",
+      "delay_ns": 1000000
+    },
+    {
+      "delay_label": "10ms",
+      "delay_ns": 10000000
+    },
+    {
+      "delay_label": "100ms",
+      "delay_ns": 100000000
+    }
+  ],
+  "deployment_layout": {
+    "passed": true,
+    "sha256": "735b129b3bd1f08268813bb983291f5114b171a8a34f19cf5217e7807940b08a"
+  },
+  "exact_tuple_count": 8320,
+  "expected_local_root": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0",
+  "expected_remote_output_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/output",
+  "expected_remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0",
+  "factorial_arm_definition": {
+    "J_q": "Y_q(A,B) - Y_q(A,dummy) - Y_q(dummy,B) + Y_q(dummy,dummy)",
+    "arms": [
+      "both_active",
+      "A_active_B_dummy",
+      "A_dummy_B_active",
+      "both_dummy"
+    ],
+    "interpretation_ceiling": "observed nonadditivity under matched arms only"
+  },
+  "forbidden_result_classes": [
+    "ORBITSTATE_ACCESS_ESTABLISHED",
+    "RELATIONAL_CARRIER_ESTABLISHED",
+    "PHYSICAL_RELATIONAL_MEMORY_ESTABLISHED",
+    "CATALYTIC_BORROWING_ESTABLISHED",
+    "SMALL_WALL_CROSSED"
+  ],
+  "future_authorization": {
+    "commit_binding_env": "FAMILY10H_CARRIER_TOMOGRAPHY_COMMIT_BINDING",
+    "live_authority_env": "FAMILY10H_CARRIER_TOMOGRAPHY_LIVE_AUTHORITY",
+    "live_authority_value": "family10h_carrier_tomography_v1_0",
+    "manifest_binding_env": "FAMILY10H_CARRIER_TOMOGRAPHY_MANIFEST_SHA256",
+    "this_task_authorizes_live_execution": false
+  },
+  "git_state_at_manifest_build": {
+    "branch": "main",
+    "head": "836d53a81225fb37406528f1c25e87e208aa9495",
+    "origin_main": "836d53a81225fb37406528f1c25e87e208aa9495",
+    "stash_list": [
+      "stash@{0}: On main: preserve superseded pmu first-light work before micro_equal_1 closure",
+      "stash@{1}: On phase6/combined-observability-executor: codex-stale-pr10-hardening-before-0c4244d9-verification"
+    ],
+    "status_porcelain": " M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/SMALL_WALL_STATE.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_query_separated_successor/mechanism_resolution/MECHANISM_RESOLUTION_REVIEW.md\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/\n"
+  },
+  "independent_review": {
+    "findings_path": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\SUBAGENT_FINDINGS_NORMALIZED.json",
+    "findings_sha256": "e6c3d51668bff445d112a918fb027ef3c7da99cedcf4f1720e93e7429b377161",
+    "material_blocker_count": 5,
+    "review_report_path": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\SUBAGENT_REVIEW_REPORTS.md",
+    "review_report_sha256": "22f5e80e342caf1bd0f6c6571763484d76eb9840dcb0afb045f73907752e6f28",
+    "verdict": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED"
+  },
+  "manifest_canonical_sha256": "4cf4ff450a78a524a470dba8b4f0d7e805cff9433f6b4eefd9fd30936da1d304",
+  "offline_validate": {
+    "passed": true,
+    "sha256": "b62a0708437720e8cdf80f5e0cfd7ff8daa71cff0cb1b54c11d46a4a7ca3e493"
+  },
+  "operator_ladder": [
+    "S0 scalar preparation amplitude",
+    "S1 amplitude + query + delay + mapping",
+    "S2 interactions and order"
+  ],
+  "package_decision": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+  "public_preparation_grammar": [
+    {
+      "bank_A_work": 512,
+      "bank_B_work": 3584,
+      "description": "public balanced Family 10h carrier codeword",
+      "dummy_work": 0,
+      "preparation": "codeword_q_-1536",
+      "q": -1536,
+      "source_off_control": false
+    },
+    {
+      "bank_A_work": 1024,
+      "bank_B_work": 3072,
+      "description": "public balanced Family 10h carrier codeword",
+      "dummy_work": 0,
+      "preparation": "codeword_q_-1024",
+      "q": -1024,
+      "source_off_control": false
+    },
+    {
+      "bank_A_work": 1536,
+      "bank_B_work": 2560,
+      "description": "public balanced Family 10h carrier codeword",
+      "dummy_work": 0,
+      "preparation": "codeword_q_-512",
+      "q": -512,
+      "source_off_control": false
+    },
+    {
+      "bank_A_work": 2048,
+      "bank_B_work": 2048,
+      "description": "public balanced Family 10h carrier codeword",
+      "dummy_work": 0,
+      "preparation": "codeword_q_+0",
+      "q": 0,
+      "source_off_control": false
+    },
+    {
+      "bank_A_work": 2560,
+      "bank_B_work": 1536,
+      "description": "public balanced Family 10h carrier codeword",
+      "dummy_work": 0,
+      "preparation": "codeword_q_+512",
+      "q": 512,
+      "source_off_control": false
+    },
+    {
+      "bank_A_work": 3072,
+      "bank_B_work": 1024,
+      "description": "public balanced Family 10h carrier codeword",
+      "dummy_work": 0,
+      "preparation": "codeword_q_+1024",
+      "q": 1024,
+      "source_off_control": false
+    },
+    {
+      "bank_A_work": 3584,
+      "bank_B_work": 512,
+      "description": "public balanced Family 10h carrier codeword",
+      "dummy_work": 0,
+      "preparation": "codeword_q_+1536",
+      "q": 1536,
+      "source_off_control": false
+    },
+    {
+      "bank_A_work": 0,
+      "bank_B_work": 0,
+      "description": "source-off control with same total work directed to dummy storage",
+      "dummy_work": 4096,
+      "preparation": "source_off_dummy_total_work",
+      "q": 0,
+      "source_off_control": true
+    }
+  ],
+  "query_family": [
+    {
+      "address_sequence": "A_lane_affine_lines",
+      "instructions": "Probe the prepared A lane with the standardized receiver loop.",
+      "measurement_disturbance": "single-lane destructive risk; fresh preparation required for every cell",
+      "query": "query_A",
+      "query_order": "A_only"
+    },
+    {
+      "address_sequence": "B_lane_affine_lines",
+      "instructions": "Probe the prepared B lane with the standardized receiver loop.",
+      "measurement_disturbance": "single-lane destructive risk; fresh preparation required for every cell",
+      "query": "query_B",
+      "query_order": "B_only"
+    },
+    {
+      "address_sequence": "A_lane_affine_lines followed by B_lane_affine_lines",
+      "instructions": "Probe A then B in one PMU-scoped ordered receiver window.",
+      "measurement_disturbance": "ordered two-lane destructive risk; fresh preparation required for every cell",
+      "query": "query_A_then_B",
+      "query_order": "A_then_B"
+    },
+    {
+      "address_sequence": "B_lane_affine_lines followed by A_lane_affine_lines",
+      "instructions": "Probe B then A in one PMU-scoped ordered receiver window.",
+      "measurement_disturbance": "ordered two-lane destructive risk; fresh preparation required for every cell",
+      "query": "query_B_then_A",
+      "query_order": "B_then_A"
+    },
+    {
+      "address_sequence": "sham_affine_lines",
+      "instructions": "Run the same receiver loop against untouched sham storage.",
+      "measurement_disturbance": "sham-lane disturbance only",
+      "query": "query_sham",
+      "query_order": "sham_only"
+    },
+    {
+      "address_sequence": "matched_carrier_off_affine_lines",
+      "instructions": "Run the receiver sequence with active carrier preparation disabled.",
+      "measurement_disturbance": "carrier-off control disturbance only",
+      "query": "carrier_off",
+      "query_order": "carrier_off_same_receiver_sequence"
+    }
+  ],
+  "runtime_self_test": {
+    "offline_binary_sha256": "421d7348e5803337f28d5e0dab8df3c36f339e7a703a107df084f85793b7f363",
+    "passed": true,
+    "sha256": "3186ff9c74d51bc0cca153f1bd2d424177610b058237c43bb76961c4930c37d2"
+  },
+  "schedule_hashes": {
+    "canonical_sha256": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
+    "json_sha256": "a6c30fd345a95e77db4da4190befabe8695309fb1c37b6739267c09b2470743b",
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE_SHA256_V1",
+    "tsv_sha256": "b788a89f66eeb1074f5a8a591f669933efaaaa2ccfd7ef9ebb3715104fc25690",
+    "tuple_count": 8320
+  },
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST_V1",
+  "science_package_id": "family10h_carrier_tomography_v1_0",
+  "source_bundle": {
+    "file_count": 9,
+    "files": [
+      "CARRIER_TOMOGRAPHY_CONTRACT.md",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+      "family10h_carrier_tomography_public.py",
+      "family10h_carrier_tomography_runtime.c",
+      "family10h_carrier_tomography_runtime.h",
+      "family10h_carrier_tomography_target.py",
+      "run_family10h_carrier_tomography_v1.py"
+    ],
+    "path": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+    "sha256": "cc6ea77cd30a94d753e5e30b4c4bc21e1976956cdb60cefd26d492ac4080fecd"
+  },
+  "source_hashes": {
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_HASHES_V1",
+    "source_files": {
+      "CARRIER_TOMOGRAPHY_CONTRACT.md": {
+        "sha256": "118a17200e50eeb44b5db0104b530736623feba190c5ed29527eee6e6173e2b7",
+        "size": 8971
+      },
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json": {
+        "sha256": "a6c30fd345a95e77db4da4190befabe8695309fb1c37b6739267c09b2470743b",
+        "size": 12822306
+      },
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256": {
+        "sha256": "b052af68d832104fb27f8e255ac17e2717f44ff43f13c248615efc8a7bfb3ee2",
+        "size": 362
+      },
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv": {
+        "sha256": "b788a89f66eeb1074f5a8a591f669933efaaaa2ccfd7ef9ebb3715104fc25690",
+        "size": 4327644
+      },
+      "family10h_carrier_tomography_public.py": {
+        "sha256": "98d2c73b4d7002b4ca66bd5d51de414283e7472c886eb303363461f3cf0f0f00",
+        "size": 94705
+      },
+      "family10h_carrier_tomography_runtime.c": {
+        "sha256": "a3cf1b0747f6ca1885dbf51bf10e72af513dc6cc4ff6b6fb348660a223a0a5b7",
+        "size": 23507
+      },
+      "family10h_carrier_tomography_runtime.h": {
+        "sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+        "size": 1368
+      },
+      "family10h_carrier_tomography_target.py": {
+        "sha256": "f26242f7305e8aa39228d71ed80ab8225dbef46136d46dcd0b844b12a6cbc0c0",
+        "size": 23680
+      },
+      "run_family10h_carrier_tomography_v1.py": {
+        "sha256": "5e966a72e1b2578f62425a1e7d95a64b3918100116919694672322e36cb0cd15",
+        "size": 32352
+      }
+    },
+    "source_hashes_sha256": "dd8628419d65d5d79ecc5d236f3e173093e4a2fb6cef8674ca80fc0b2937e17c"
+  },
+  "starting_head_required": "836d53a81225fb37406528f1c25e87e208aa9495",
+  "target_self_test": {
+    "passed": true,
+    "sha256": "3d2443090118a032f3e63d00d0be959c06f8df4f5003fea38c0af055fc2543df"
+  },
+  "transaction_run_id": "family10h_carrier_tomography_v1_0",
+  "transport_simulation": {
+    "passed": true,
+    "sha256": "df4bf2baca163b28fb8310ae6170fec0a1d3602b181f1abe67518be8884ceab0"
+  },
+  "zero_live_contact_attestation": {
+    "live_invocation_count": 0,
+    "target_contact_count": 0
+  }
+}

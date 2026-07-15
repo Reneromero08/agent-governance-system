@@ -1,0 +1,42 @@
+{
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_HASHES_V1",
+  "source_files": {
+    "CARRIER_TOMOGRAPHY_CONTRACT.md": {
+      "sha256": "118a17200e50eeb44b5db0104b530736623feba190c5ed29527eee6e6173e2b7",
+      "size": 8971
+    },
+    "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json": {
+      "sha256": "a6c30fd345a95e77db4da4190befabe8695309fb1c37b6739267c09b2470743b",
+      "size": 12822306
+    },
+    "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "b052af68d832104fb27f8e255ac17e2717f44ff43f13c248615efc8a7bfb3ee2",
+      "size": 362
+    },
+    "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "b788a89f66eeb1074f5a8a591f669933efaaaa2ccfd7ef9ebb3715104fc25690",
+      "size": 4327644
+    },
+    "family10h_carrier_tomography_public.py": {
+      "sha256": "98d2c73b4d7002b4ca66bd5d51de414283e7472c886eb303363461f3cf0f0f00",
+      "size": 94705
+    },
+    "family10h_carrier_tomography_runtime.c": {
+      "sha256": "a3cf1b0747f6ca1885dbf51bf10e72af513dc6cc4ff6b6fb348660a223a0a5b7",
+      "size": 23507
+    },
+    "family10h_carrier_tomography_runtime.h": {
+      "sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+      "size": 1368
+    },
+    "family10h_carrier_tomography_target.py": {
+      "sha256": "f26242f7305e8aa39228d71ed80ab8225dbef46136d46dcd0b844b12a6cbc0c0",
+      "size": 23680
+    },
+    "run_family10h_carrier_tomography_v1.py": {
+      "sha256": "5e966a72e1b2578f62425a1e7d95a64b3918100116919694672322e36cb0cd15",
+      "size": 32352
+    }
+  },
+  "source_hashes_sha256": "dd8628419d65d5d79ecc5d236f3e173093e4a2fb6cef8674ca80fc0b2937e17c"
+}

@@ -6,15 +6,16 @@
 `1383f3c3adb05a32e7a4f0748d755cef3319d590`
 
 **Current phase:**
-`GAIN_COVARIANT_FINAL_CONFIRMATION_PACKAGE_RETIRED__QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED`
+`GAIN_COVARIANT_FINAL_CONFIRMATION_PACKAGE_RETIRED__QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED__FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED`
 
 **Current status tokens:**
 
 ```text
-GAIN_COVARIANT_PROJECTION_TRANSDUCTION_ESTABLISHED
+GAIN_COVARIANT_ORBITSTATE_PROJECTION_TRANSDUCTION_ESTABLISHED
 GAIN_COVARIANT_FINAL_CONFIRMATION_PACKAGE_RETIRED
 QUERY_SEPARATED_ARCHITECTURE_BLOCKED
 QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED
+FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED
 SMALL_WALL_CROSSED_NOT_PROMOTED
 ```
 
@@ -144,6 +145,36 @@ QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED
 ```
 
 No live transaction is authorized.
+
+**Latest offline carrier-state tomography package:**
+`family10h_carrier_tomography_v1_0` builds a public, non-relational Family 10h
+carrier-state tomography package under
+`phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1`.
+It returns to the substrate layer: measurable post-source physical carrier state,
+persistence delay, public query operator, operational codeword distinguishability,
+and additive/nonlinear/joint/route/order characterization.
+
+This package does not claim OrbitState access, a relational carrier, physical memory,
+catalytic borrowing, answer-cache exclusion, query-separated identifiability repair,
+R2 closure, or `SMALL_WALL_CROSSED`. The inherited decisions remain:
+
+```text
+GAIN_COVARIANT_ORBITSTATE_PROJECTION_TRANSDUCTION_ESTABLISHED
+GAIN_COVARIANT_FINAL_CONFIRMATION_PACKAGE_RETIRED
+QUERY_SEPARATED_ARCHITECTURE_BLOCKED
+QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED
+SMALL_WALL_CROSSED_NOT_PROMOTED
+```
+
+The tomography package status is blocked by independent offline review:
+
+```text
+FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED
+```
+
+No live transaction is authorized by the package or this state update. The package is
+not awaiting live authorization until the recorded review blockers are repaired and
+re-audited.
 
 **Retired offline freeze:**
 `orbitstate_gain_covariant_confirmation_v1_0` originally froze the final prospective

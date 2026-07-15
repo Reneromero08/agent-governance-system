@@ -1,0 +1,123 @@
+{
+  "allowed_result_classes": [
+    "FAMILY10H_POST_SOURCE_STATE_OBSERVED",
+    "FAMILY10H_POST_SOURCE_STATE_NOT_OBSERVED",
+    "FAMILY10H_CARRIER_TOMOGRAPHY_CANDIDATE",
+    "FAMILY10H_CARRIER_TOMOGRAPHY_CUSTODY_INVALID"
+  ],
+  "evidence_file_fixtures": {
+    "extra_evidence_file_rejected": true,
+    "missing_evidence_file_rejected": true,
+    "passed": true,
+    "three_file_minimal_success_packet": {
+      "failures": [],
+      "passed": true,
+      "validation": {
+        "expected_count": 8320,
+        "failures": [],
+        "observed_count": 8320,
+        "passed": true
+      }
+    }
+  },
+  "feature_boundary_self_test": {
+    "artifact_violations": [],
+    "feature_boundary_self_test_sha256": "548392a789e3ad2d056f2288a7fef2a337916517c1fd130b924a7297b88d5d18",
+    "forbidden_claim_hits": [],
+    "forbidden_value_hits": [],
+    "injected_artifact_violation_subtree_rejected": true,
+    "injected_blocker_object_rejected": true,
+    "injected_blocker_resolution_rejected": true,
+    "injected_denied_claim_subtree_rejected": true,
+    "injected_exact_fenced_forbidden_block_allowed": true,
+    "injected_forbidden_claim_ceiling_rejected": true,
+    "injected_forbidden_claim_rejected": true,
+    "injected_forbidden_key_rejected": true,
+    "injected_inline_forbidden_heading_rejected": true,
+    "injected_unfenced_forbidden_heading_rejected": true,
+    "injected_variant_rejected": true,
+    "injected_wall_promotion_rejected": true,
+    "no_fold_branch": true,
+    "no_private_map": true,
+    "no_target_vector": true,
+    "passed": true,
+    "public_only": true,
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_FEATURE_BOUNDARY_SELF_TEST_V1"
+  },
+  "forbidden_result_classes": [
+    "ORBITSTATE_ACCESS_ESTABLISHED",
+    "RELATIONAL_CARRIER_ESTABLISHED",
+    "PHYSICAL_RELATIONAL_MEMORY_ESTABLISHED",
+    "CATALYTIC_BORROWING_ESTABLISHED",
+    "SMALL_WALL_CROSSED"
+  ],
+  "live_authority_env_absent": {
+    "passed": true,
+    "present_authority_env": []
+  },
+  "live_invocation_count": 0,
+  "offline_only": true,
+  "policy_and_platform_fixture": {
+    "checks": {
+      "policy_drift_rejected": true,
+      "policy_unreadable_rejected": true,
+      "process_scan_failure_rejected": true,
+      "strict_platform_identity_required": true,
+      "strict_readable_policy_fields_required": true,
+      "strict_temperature_required": true,
+      "temperature_failure_rejected": true,
+      "wrong_receiver_core_rejected": true,
+      "wrong_source_core_rejected": true
+    },
+    "passed": true
+  },
+  "schedule_artifacts": {
+    "failures": [],
+    "passed": true,
+    "schedule_sha256": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
+    "tsv_validation": {
+      "passed": true,
+      "row_count": 8320
+    },
+    "validation": {
+      "block_counts": {
+        "factorial_nonadditivity": 4480,
+        "persistence_matrix": 3840
+      },
+      "expected_blocks": {
+        "factorial_nonadditivity": 4480,
+        "persistence_matrix": 3840
+      },
+      "failures": [],
+      "passed": true,
+      "tuple_count": 8320
+    }
+  },
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TARGET_SELF_TEST_V1",
+  "science_package_id": "family10h_carrier_tomography_v1_0",
+  "self_test_passed": true,
+  "self_test_sha256": "3d2443090118a032f3e63d00d0be959c06f8df4f5003fea38c0af055fc2543df",
+  "source_death_process_custody": {
+    "passed": true,
+    "rejected": {
+      "open_source_ipc_after_waitpid": true,
+      "post_observation_query_window_selection": true,
+      "query_selected_before_source_death": true,
+      "source_alive_during_query": true,
+      "source_helper_survives": true
+    },
+    "valid_passes": true
+  },
+  "source_mutation_fixtures": {
+    "baseline": {
+      "checked_files": 9,
+      "failures": [],
+      "passed": true
+    },
+    "passed": true,
+    "source_mutation_before_compile_rejected": true,
+    "source_mutation_during_compile_rejected": true
+  },
+  "target_contact_count": 0,
+  "transaction_run_id": "family10h_carrier_tomography_v1_0"
+}
