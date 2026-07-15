@@ -107,6 +107,8 @@ LIFETIME_CONFIDENCE_RELATIVE_TOLERANCE = 0.50
 EXPECTED_LOCAL_ROOT = str(HERE.parent / "runs" / TRANSACTION_RUN_ID)
 EXPECTED_REMOTE_ROOT = f"/root/catcas_live_small_wall/{TRANSACTION_RUN_ID}"
 EXPECTED_REMOTE_OUTPUT_ROOT = f"{EXPECTED_REMOTE_ROOT}/output"
+SOURCE_CPU_EXPECTED = 4
+RECEIVER_CPU_EXPECTED = 5
 
 SCHEDULE_JSON = HERE / "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json"
 SCHEDULE_TSV = HERE / "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv"
@@ -145,6 +147,14 @@ RAW_RECORD_EXTRA_FIELDS = [
     "temperature_sensor_resolved_input_path",
     "temperature_sensor_resolved_hwmon_path",
     "temperature_sensor_resolved_device_path",
+    "temperature_sensor_resolved_driver_path",
+    "temperature_sensor_resolved_subsystem_path",
+    "temperature_sensor_device_driver",
+    "temperature_sensor_device_subsystem",
+    "temperature_sensor_device_modalias",
+    "temperature_sensor_input_st_dev",
+    "temperature_sensor_input_st_ino",
+    "temperature_sensor_input_st_mode",
     "process_custody",
     "policy_custody",
 ]
@@ -163,6 +173,14 @@ TEMPERATURE_SENSOR_IDENTITY_KEYS = {
     "resolved_input_path",
     "resolved_hwmon_path",
     "resolved_device_path",
+    "resolved_driver_path",
+    "resolved_subsystem_path",
+    "device_driver",
+    "device_subsystem",
+    "device_modalias",
+    "input_st_dev",
+    "input_st_ino",
+    "input_st_mode",
     "identity_sha256",
 }
 FEATURE_FREEZE_KEYS = {
@@ -302,6 +320,14 @@ def synthetic_temperature_identity() -> dict[str, Any]:
             "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
             "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
             "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+            "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+            "resolved_subsystem_path": "/sys/bus/pci",
+            "device_driver": "k10temp",
+            "device_subsystem": "pci",
+            "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+            "input_st_dev": 1,
+            "input_st_ino": 2,
+            "input_st_mode": 33060,
         }
     )
 
@@ -316,6 +342,14 @@ def record_temperature_identity(record: dict[str, Any]) -> dict[str, Any]:
             "resolved_input_path": record.get("temperature_sensor_resolved_input_path"),
             "resolved_hwmon_path": record.get("temperature_sensor_resolved_hwmon_path"),
             "resolved_device_path": record.get("temperature_sensor_resolved_device_path"),
+            "resolved_driver_path": record.get("temperature_sensor_resolved_driver_path"),
+            "resolved_subsystem_path": record.get("temperature_sensor_resolved_subsystem_path"),
+            "device_driver": record.get("temperature_sensor_device_driver"),
+            "device_subsystem": record.get("temperature_sensor_device_subsystem"),
+            "device_modalias": record.get("temperature_sensor_device_modalias"),
+            "input_st_dev": record.get("temperature_sensor_input_st_dev"),
+            "input_st_ino": record.get("temperature_sensor_input_st_ino"),
+            "input_st_mode": record.get("temperature_sensor_input_st_mode"),
         }
     )
 
@@ -330,6 +364,14 @@ def identity_record_fields(identity: dict[str, Any]) -> dict[str, str]:
         "temperature_sensor_resolved_input_path": identity["resolved_input_path"],
         "temperature_sensor_resolved_hwmon_path": identity["resolved_hwmon_path"],
         "temperature_sensor_resolved_device_path": identity["resolved_device_path"],
+        "temperature_sensor_resolved_driver_path": identity["resolved_driver_path"],
+        "temperature_sensor_resolved_subsystem_path": identity["resolved_subsystem_path"],
+        "temperature_sensor_device_driver": identity["device_driver"],
+        "temperature_sensor_device_subsystem": identity["device_subsystem"],
+        "temperature_sensor_device_modalias": identity["device_modalias"],
+        "temperature_sensor_input_st_dev": identity["input_st_dev"],
+        "temperature_sensor_input_st_ino": identity["input_st_ino"],
+        "temperature_sensor_input_st_mode": identity["input_st_mode"],
     }
 
 
@@ -987,9 +1029,16 @@ def validate_raw_record(record: dict[str, Any], schedule_row: dict[str, Any]) ->
         "temperature_sensor_resolved_input_path",
         "temperature_sensor_resolved_hwmon_path",
         "temperature_sensor_resolved_device_path",
+        "temperature_sensor_resolved_driver_path",
+        "temperature_sensor_resolved_subsystem_path",
+        "temperature_sensor_device_driver",
+        "temperature_sensor_device_subsystem",
+        "temperature_sensor_device_modalias",
     ]
     if any(not isinstance(record.get(field), str) or not record.get(field) for field in identity_fields):
         failures.append("temperature sensor identity missing")
+    elif any(not is_json_int(record.get(field)) for field in ["temperature_sensor_input_st_dev", "temperature_sensor_input_st_ino", "temperature_sensor_input_st_mode"]):
+        failures.append("temperature sensor identity stat fields missing")
     else:
         try:
             identity = record_temperature_identity(record)
