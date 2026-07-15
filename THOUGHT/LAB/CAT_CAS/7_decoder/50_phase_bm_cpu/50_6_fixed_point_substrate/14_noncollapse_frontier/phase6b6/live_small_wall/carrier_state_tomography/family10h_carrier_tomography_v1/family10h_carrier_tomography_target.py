@@ -121,6 +121,7 @@ REQUIRED_TEMPERATURE_AUTHORITY_CHALLENGE_KEYS = {
     "authorized_commit",
     "controller_nonce_sha256",
     "transport_scope",
+    "source_authority_review",
 }
 
 
@@ -1646,6 +1647,7 @@ def expected_discovery_challenge(
     authorized_commit: str,
     controller_nonce_sha256: str,
     transport_scope: dict[str, Any] | None = None,
+    source_authority_review: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_hashes = json.loads((source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json").read_text(encoding="utf-8"))
     schedule_sidecar = json.loads((source_root / "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256").read_text(encoding="utf-8"))
@@ -1670,6 +1672,19 @@ def expected_discovery_challenge(
         "authorized_commit": authorized_commit,
         "controller_nonce_sha256": controller_nonce_sha256,
         "transport_scope": transport_scope,
+        "source_authority_review": source_authority_review,
+    }
+
+
+def fixture_source_review_binding(source_root: Path, authorized_commit: str) -> dict[str, Any]:
+    source_hashes = json.loads((source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json").read_text(encoding="utf-8"))
+    return {
+        "findings_sha256": "a" * 64,
+        "review_report_sha256": "b" * 64,
+        "review_quorum_sha256": "c" * 64,
+        "source_authority_commit": authorized_commit,
+        "source_hashes_sha256": source_hashes["source_hashes_sha256"],
+        "source_bundle_sha256": deterministic_source_bundle_sha256(source_root),
     }
 
 
@@ -1689,7 +1704,8 @@ def validate_discovery_challenge(source_root: Path, challenge: dict[str, Any], c
         failures.append("controller challenge missing")
         challenge = {}
     challenge_scope = challenge.get("transport_scope") if isinstance(challenge.get("transport_scope"), dict) else None
-    expected = expected_discovery_challenge(source_root, authorized_commit, nonce_sha, challenge_scope) if not failures else {}
+    challenge_review = challenge.get("source_authority_review") if isinstance(challenge.get("source_authority_review"), dict) else None
+    expected = expected_discovery_challenge(source_root, authorized_commit, nonce_sha, challenge_scope, challenge_review) if not failures else {}
     if set(challenge) != REQUIRED_TEMPERATURE_AUTHORITY_CHALLENGE_KEYS:
         failures.append("controller challenge field mismatch")
     if challenge != expected:
@@ -1706,6 +1722,15 @@ def validate_discovery_challenge(source_root: Path, challenge: dict[str, Any], c
             failures.append("controller challenge source root scope mismatch")
         if scope.get("remote_receipt_path") != str(source_root / TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME):
             failures.append("controller challenge receipt path scope mismatch")
+    review = challenge.get("source_authority_review")
+    if not isinstance(review, dict):
+        failures.append("controller challenge source authority review missing")
+    else:
+        for field in ["findings_sha256", "review_report_sha256", "review_quorum_sha256", "source_hashes_sha256", "source_bundle_sha256"]:
+            if re.fullmatch(r"[0-9a-f]{64}", str(review.get(field, ""))) is None:
+                failures.append(f"controller challenge source authority review {field} invalid")
+        if review.get("source_authority_commit") != authorized_commit:
+            failures.append("controller challenge source authority review commit mismatch")
     return {
         "passed": not failures,
         "failures": failures,
@@ -1834,7 +1859,12 @@ def target_sensor_discovery_fixture(source_root: Path) -> dict[str, Any]:
         nonce = "a" * 64
         commit = "b" * 40
         nonce_sha = hashlib.sha256(nonce.encode("ascii")).hexdigest()
-        challenge = expected_discovery_challenge(source, commit, nonce_sha)
+        challenge = expected_discovery_challenge(
+            source,
+            commit,
+            nonce_sha,
+            source_authority_review=fixture_source_review_binding(source, commit),
+        )
         challenge_path = root / "challenge.json"
         write_json(challenge_path, challenge)
 

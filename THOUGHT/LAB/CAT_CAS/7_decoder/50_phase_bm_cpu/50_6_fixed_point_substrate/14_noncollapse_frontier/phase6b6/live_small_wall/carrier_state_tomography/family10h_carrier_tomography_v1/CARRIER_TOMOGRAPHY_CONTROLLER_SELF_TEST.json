@@ -1,9 +1,22 @@
 {
+  "discovery_attempt_journal_regression": {
+    "checks": {
+      "digest_corruption_rejected": true,
+      "empty_journal_rejected": true,
+      "missing_previous_counter_rejected": true,
+      "reordered_rows_rejected": true,
+      "snapshot_without_journal_rejected": true,
+      "valid_journal_replays": true
+    },
+    "passed": true,
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT_JOURNAL_REGRESSION_V1"
+  },
   "discovery_transport_self_test": {
     "checks": {
       "alternate_remote_scope_rejected": true,
       "authority_without_transport_rejected": true,
       "cleanup_failure_rejected": true,
+      "coherent_wrong_nonce_root_rejected": true,
       "copyback_corruption_rejected": true,
       "fake_discovery_authority_build_rejected": true,
       "fake_discovery_authority_with_transport_rejected": true,
@@ -24,7 +37,7 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "cca7b57bfe39cb23cad190f379f65315d89e3dc438ffce903e95b15d9758cdcd",
+  "offline_validate_sha256": "9f01a8585e69929cc8eb9c06357b2a31c3d351ec741ab891c46fbc5466dc92a8",
   "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -87,7 +100,7 @@
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "bfef35b7528d7fe151156a1b52411db74583b0d8832fbbe6ff2053334913c342",
+  "self_test_sha256": "9d5a64119dc20054a41169c444f4a2bcfbbd03ed224fadecfb331efed971675c",
   "sensor_inventory_count": 0,
   "source_audit_quorum_regression": {
     "checks": {
