@@ -210,20 +210,31 @@ def carrier_query_response(
     carrier_before: np.ndarray,
     carrier_displaced: np.ndarray,
     query_tree: Any,
+    shifts: Sequence[int] = SHIFT_SCHEDULE,
 ) -> complex:
-    """Read a query-bound relational observable from the actually displaced carrier."""
+    """Read a matched relational observable from the actually displaced carrier.
+
+    The public query tree is applied to the same borrowed carrier and transported through
+    the same circular-shift schedule, but it does not receive the hidden trajectory phase
+    operators. This creates a matched carrier query without reconstructing the final tree
+    or feeding the scalar response back into evolution.
+    """
 
     r1.require_native_tree(query_tree, "query tree")
     before = np.asarray(carrier_before, dtype=np.complex128)
     displaced = np.asarray(carrier_displaced, dtype=np.complex128)
     if before.shape != displaced.shape or before.shape != (r0.SAMPLE_COUNT,):
         raise ValueError("carrier query inputs have incompatible shapes")
-    power = np.abs(before) ** 2
-    if float(np.min(power)) <= 0.0:
-        raise ValueError("borrowed carrier must have nonzero amplitude everywhere")
-    carrier_relation = displaced * np.conjugate(before) / power
-    query_beam = query_tree.render(r0.sample_times())
-    return r0.matched_response(carrier_relation, query_beam)
+    if len(shifts) != len(SHIFT_SCHEDULE):
+        raise ValueError("query transport must use the complete frozen shift schedule")
+    query_carrier = r0.apply_phase_operator(
+        before, query_tree.render(r0.sample_times())
+    )
+    for shift in shifts:
+        if isinstance(shift, bool) or not isinstance(shift, int):
+            raise ValueError("query shifts must be integers")
+        query_carrier = np.roll(query_carrier, shift)
+    return r0.matched_response(displaced, query_carrier)
 
 
 def latch_relational_observable(
@@ -313,7 +324,7 @@ def run_reference_tests() -> dict[str, Any]:
         _metric(displacement),
     )
     record(
-        "correct_reverse_restores_exact_carrier",
+        "correct_reverse_restores_carrier_equivalence",
         closure.restore_max_error <= CARRIER_RESTORE_TOL,
         {
             "before_sha256": closure.carrier_before_sha256,
