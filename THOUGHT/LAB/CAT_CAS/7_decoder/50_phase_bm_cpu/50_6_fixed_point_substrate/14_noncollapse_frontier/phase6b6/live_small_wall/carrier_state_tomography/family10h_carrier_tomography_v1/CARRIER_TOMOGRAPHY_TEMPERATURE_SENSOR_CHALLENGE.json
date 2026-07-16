@@ -1,0 +1,53 @@
+{
+  "challenge_receipt_canonical_sha256": "bc01f714a2f6ce29575a6b5b4e121f67d375c43ffb83e068c5bd6a42131400f1",
+  "controller_challenge": {
+    "authority": "controller_issued_temperature_sensor_challenge",
+    "authorized_commit": "ca8f8490e9d2fc9b36debbfe7c927bfe2fde5c5e",
+    "controller_nonce_sha256": "002365c7bdf8eeabea906a9036de0d2613fadd7b543db75bca869d9b49fef340",
+    "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+    "schedule_canonical_sha256": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
+    "schedule_json_sha256": "9658ea725d69ae384c85c5664505e59497d1e3291376128ee2160824ee7e0648",
+    "schedule_tsv_sha256": "b788a89f66eeb1074f5a8a591f669933efaaaa2ccfd7ef9ebb3715104fc25690",
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_AUTHORITY_CHALLENGE_V1",
+    "science_package_id": "family10h_carrier_tomography_v1_0",
+    "source_authority_review": {
+      "findings_sha256": "71d095916f948f0ff905af09900a49f7bcc1909f6c4ab7ebbc2d44ab525ed3ed",
+      "review_quorum_sha256": "fb8630c01f4dfd24721f6698f09162895ed551613d1c8cc96ba166611142b030",
+      "review_report_sha256": "2f1dfcab195b014eb6b2c4a416205eef9924f1de009c8e9eeb7244bb005977c8",
+      "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "source_authority_commit": "ca8f8490e9d2fc9b36debbfe7c927bfe2fde5c5e",
+      "source_bundle_sha256": "29aec7a6e2d9bbde7850ded261e42fbf5655f21d5899cef579c311a8901f22f0",
+      "source_hashes_sha256": "0d8889c6c0be3b5c571887c92abbc41cead95f27f6610ca091af74d5631e4797"
+    },
+    "source_bundle_sha256": "29aec7a6e2d9bbde7850ded261e42fbf5655f21d5899cef579c311a8901f22f0",
+    "source_hashes_sha256": "0d8889c6c0be3b5c571887c92abbc41cead95f27f6610ca091af74d5631e4797",
+    "transaction_run_id": "family10h_carrier_tomography_v1_0",
+    "transport_scope": {
+      "remote_base_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery",
+      "remote_receipt_path": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/002365c7bdf8eeab/source/CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json",
+      "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/002365c7bdf8eeab",
+      "remote_source_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/002365c7bdf8eeab/source",
+      "target_host": "root@192.168.137.100"
+    }
+  },
+  "controller_challenge_sha256": "09f44d624524cc8a04f53bd2a4c0b607706ea622abd6cd9963a29a9f468a9a1a",
+  "controller_nonce_sha256": "002365c7bdf8eeabea906a9036de0d2613fadd7b543db75bca869d9b49fef340",
+  "live_invocation_count": 0,
+  "pmu_acquisition_count": 0,
+  "pre_contact": true,
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE_RECEIPT_V1",
+  "science_package_id": "family10h_carrier_tomography_v1_0",
+  "sensor_inventory_count": 0,
+  "source_authority_commit": "ca8f8490e9d2fc9b36debbfe7c927bfe2fde5c5e",
+  "source_authority_review": {
+    "findings_sha256": "71d095916f948f0ff905af09900a49f7bcc1909f6c4ab7ebbc2d44ab525ed3ed",
+    "review_quorum_sha256": "fb8630c01f4dfd24721f6698f09162895ed551613d1c8cc96ba166611142b030",
+    "review_report_sha256": "2f1dfcab195b014eb6b2c4a416205eef9924f1de009c8e9eeb7244bb005977c8",
+    "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+    "source_authority_commit": "ca8f8490e9d2fc9b36debbfe7c927bfe2fde5c5e",
+    "source_bundle_sha256": "29aec7a6e2d9bbde7850ded261e42fbf5655f21d5899cef579c311a8901f22f0",
+    "source_hashes_sha256": "0d8889c6c0be3b5c571887c92abbc41cead95f27f6610ca091af74d5631e4797"
+  },
+  "target_contact_count": 0,
+  "transaction_run_id": "family10h_carrier_tomography_v1_0"
+}
