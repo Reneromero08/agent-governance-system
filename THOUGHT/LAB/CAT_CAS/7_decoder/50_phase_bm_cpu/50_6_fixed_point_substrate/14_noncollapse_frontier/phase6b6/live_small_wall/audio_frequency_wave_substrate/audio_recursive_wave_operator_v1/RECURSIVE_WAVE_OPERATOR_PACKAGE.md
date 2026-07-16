@@ -1,13 +1,41 @@
 # Recursive Wave Operator Package
 
-**Status:** `SOURCE_CANDIDATE__EXACT_R0_QUALIFICATION_PENDING`  
+**Status:** `SOURCE_CANDIDATE__SOURCE_CUSTODY_REPAIRED__EXACT_R0_QUALIFICATION_PENDING`  
 **Package:** `audio_recursive_wave_operator_v1`  
 **Parent result:** `AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`  
 **Source commit:** `8025c63f0206e04130c00972165206b054688942`  
 **Source Git blob SHA-1:** `9240beeb4334957c73635de4076684e82fa25136`  
-**Local pre-commit source SHA-256:** `688ecc73b5ffda2be41555cd5ca3bd0a38820dd9c59fddff9b48e0200191d37f`  
+**Committed source byte count:** `15895`  
+**Committed source SHA-256:** `4b49b575317cc256ad76e905eb27c2cc53250bedb5dfab7d266f257718175dae`  
+**Retired unattested pre-commit SHA-256:** `688ecc73b5ffda2be41555cd5ca3bd0a38820dd9c59fddff9b48e0200191d37f`  
+**Custody repair binding:** the Git commit containing this file  
 **Operation:** bounded ordinary-software temporal recurrence  
 **Physical authority:** none
+
+## 0. Source Custody Repair
+
+The original candidate contract recorded `688ecc73...` as a local pre-commit SHA-256.
+No authoritative source bytes with that identity exist in repository history. The source
+commit and Git blob already named by the contract resolve to one 15,895-byte file whose
+actual SHA-256 is:
+
+```text
+4b49b575317cc256ad76e905eb27c2cc53250bedb5dfab7d266f257718175dae
+```
+
+The unattested `688ecc73...` value is permanently retired and must not block or authorize
+future execution. The prospectively repaired source-custody tuple is:
+
+```text
+source commit       8025c63f0206e04130c00972165206b054688942
+source Git blob     9240beeb4334957c73635de4076684e82fa25136
+source byte count   15895
+source SHA-256      4b49b575317cc256ad76e905eb27c2cc53250bedb5dfab7d266f257718175dae
+```
+
+This repair changes custody metadata only. It does not alter the committed source,
+recurrence, thresholds, tests, claim law, physical authority, or successor boundary.
+Future R1 qualification must verify the repaired tuple before compilation.
 
 ## 1. Purpose
 
