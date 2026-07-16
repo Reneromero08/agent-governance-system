@@ -1482,6 +1482,38 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
         expected_challenge=synthetic_challenge,
         require_transport=False,
     )
+    boolean_pmu_open_discovery = dict(complete_forged_discovery)
+    boolean_pmu_open_discovery["pmu_open_count"] = False
+    boolean_pmu_open_discovery["target_discovery_receipt_sha256"] = public.digest(
+        {k: v for k, v in boolean_pmu_open_discovery.items() if k != "target_discovery_receipt_sha256"}
+    )
+    boolean_pmu_open_authority = seal_authority(
+        {
+            **complete_forged_authority,
+            "target_discovery_receipt": boolean_pmu_open_discovery,
+        }
+    )
+    boolean_runtime_launch_discovery = dict(complete_forged_discovery)
+    boolean_runtime_launch_discovery["runtime_launch_count"] = False
+    boolean_runtime_launch_discovery["target_discovery_receipt_sha256"] = public.digest(
+        {k: v for k, v in boolean_runtime_launch_discovery.items() if k != "target_discovery_receipt_sha256"}
+    )
+    boolean_runtime_launch_authority = seal_authority(
+        {
+            **complete_forged_authority,
+            "target_discovery_receipt": boolean_runtime_launch_discovery,
+        }
+    )
+    boolean_pmu_open_result = temperature_sensor_authority_from_receipt(
+        boolean_pmu_open_authority,
+        expected_challenge=synthetic_challenge,
+        require_transport=False,
+    )
+    boolean_runtime_launch_result = temperature_sensor_authority_from_receipt(
+        boolean_runtime_launch_authority,
+        expected_challenge=synthetic_challenge,
+        require_transport=False,
+    )
     boolean_authority_counter_result = temperature_sensor_authority_from_receipt(
         boolean_authority_counter,
         expected_challenge=synthetic_challenge,
@@ -1499,6 +1531,8 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
         "well_formed_self_authored_discovery_wrong_expected_challenge_rejected": not complete_forged_wrong_expected_result["passed"],
         "well_formed_challenge_bound_fixture_without_transport_rejected": not complete_forged_with_expected_result["passed"],
         "boolean_discovery_counter_rejected": any("temperature sensor discovery target contact count must be one" in item for item in boolean_discovery_counter_result["failures"]),
+        "boolean_discovery_pmu_open_count_rejected": any("temperature sensor discovery PMU open count must be zero" in item for item in boolean_pmu_open_result["failures"]),
+        "boolean_discovery_runtime_launch_count_rejected": any("temperature sensor discovery runtime launch count must be zero" in item for item in boolean_runtime_launch_result["failures"]),
         "boolean_authority_counter_rejected": any("temperature sensor authority counter missing or invalid target_contact_count" in item for item in boolean_authority_counter_result["failures"]),
         "boolean_manifest_counter_object_rejected": not counter_dict_equal_strict(boolean_counter_values, expected_live_counters),
         "boolean_final_attempt_counter_rejected": not counters_equal_strict(boolean_counter_values, expected_live_counters),
@@ -1516,6 +1550,8 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
         and result["well_formed_self_authored_discovery_wrong_expected_challenge_rejected"]
         and result["well_formed_challenge_bound_fixture_without_transport_rejected"]
         and result["boolean_discovery_counter_rejected"]
+        and result["boolean_discovery_pmu_open_count_rejected"]
+        and result["boolean_discovery_runtime_launch_count_rejected"]
         and result["boolean_authority_counter_rejected"]
         and result["boolean_manifest_counter_object_rejected"]
         and result["boolean_final_attempt_counter_rejected"]
@@ -2384,6 +2420,7 @@ def discovery_transport_self_tests() -> dict[str, Any]:
     cleanup_failure = seal({**base, "cleanup": {"attempted": True, "passed": False, "absence_verified": True}})
     absence_failure = seal({**base, "cleanup": {"attempted": True, "passed": True, "absence_verified": False}})
     retry = seal({**base, "retry_count": 1})
+    retry_bool = seal({**base, "retry_count": False})
     zero_contact = seal({**base, "target_contact_count": 0})
     live_nonzero = seal({**base, "live_invocation_count": 1})
     pmu_nonzero = seal({**base, "pmu_acquisition_count": 1})
@@ -2512,6 +2549,7 @@ def discovery_transport_self_tests() -> dict[str, Any]:
         "cleanup_failure_rejected": not validate_discovery_transport_receipt(cleanup_failure)["passed"],
         "remote_absence_failure_rejected": not validate_discovery_transport_receipt(absence_failure)["passed"],
         "second_attempt_retry_rejected": not validate_discovery_transport_receipt(retry)["passed"],
+        "boolean_retry_count_rejected": not validate_discovery_transport_receipt(retry_bool)["passed"],
         "incorrect_zero_target_contact_rejected": not validate_discovery_transport_receipt(zero_contact)["passed"],
         "nonzero_live_invocation_rejected": not validate_discovery_transport_receipt(live_nonzero)["passed"],
         "nonzero_pmu_acquisition_rejected": not validate_discovery_transport_receipt(pmu_nonzero)["passed"],
@@ -3351,6 +3389,144 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         finally:
             for name, path in original_paths.items():
                 globals()[name] = path
+    production_originals = {
+        "DISCOVERY_ATTEMPT_PATH": DISCOVERY_ATTEMPT_PATH,
+        "DISCOVERY_ATTEMPT_JOURNAL_PATH": DISCOVERY_ATTEMPT_JOURNAL_PATH,
+        "DISCOVERY_CLEANUP_CUSTODY_PATH": DISCOVERY_CLEANUP_CUSTODY_PATH,
+        "TEMPERATURE_SENSOR_AUTHORITY": TEMPERATURE_SENSOR_AUTHORITY,
+        "DISCOVERY_TRANSPORT_PATH": DISCOVERY_TRANSPORT_PATH,
+        "TARGET_DISCOVERY_RECEIPT": TARGET_DISCOVERY_RECEIPT,
+        "DISCOVERY_CHALLENGE_PATH": DISCOVERY_CHALLENGE_PATH,
+        "run": run,
+        "read_source_hash_authority": read_source_hash_authority,
+        "read_existing_source_bundle_authority": read_existing_source_bundle_authority,
+        "source_authority_commit_verification": source_authority_commit_verification,
+        "read_source_authority_review_for_discovery": read_source_authority_review_for_discovery,
+        "materialize_source_authority_snapshot": materialize_source_authority_snapshot,
+    }
+    production_invalid_error = ""
+    production_invalid_cleanup_invoked = False
+    production_invalid_absence_probe_invoked = False
+    production_invalid_cleanup_receipt_sealed = False
+    production_invalid_cleanup_receipt_records_absence = False
+    production_invalid_journal_stopped_before_receipt_copied = False
+    production_invalid_no_success_artifacts = False
+    production_invalid_no_success_cleanup_states = False
+    invalid_discovery = {
+        "schema": TEMPERATURE_SENSOR_DISCOVERY_SCHEMA,
+        "discovery_mode": "target_read_only_sensor_inventory",
+        "target_contact_count": 1,
+        "sensor_inventory_count": 1,
+        "live_invocation_count": 0,
+        "pmu_acquisition_count": 0,
+        "pmu_open_count": 0,
+        "runtime_launch_count": 0,
+    }
+    invalid_discovery["target_discovery_receipt_sha256"] = public.digest(
+        {k: v for k, v in invalid_discovery.items() if k != "target_discovery_receipt_sha256"}
+    )
+    invalid_discovery_bytes = (strict_json_dumps(invalid_discovery, indent=2) + "\n").encode("utf-8")
+    invalid_discovery_file_sha = hashlib.sha256(invalid_discovery_bytes).hexdigest()
+    fake_source_hashes = {"source_hashes_sha256": "d" * 64}
+    fake_bundle = {"path": "offline-fixture-bundle", "sha256": "e" * 64, "file_count": len(SOURCE_FILE_NAMES), "files": sorted(SOURCE_FILE_NAMES)}
+
+    def fake_source_review(
+        *,
+        source_commit: str,
+        source_hashes_sha256: str,
+        source_bundle_sha256: str,
+    ) -> dict[str, Any]:
+        quorum = {"passed": True, "failures": [], "fixture": "production invalid copyback regression"}
+        return {
+            "passed": True,
+            "failures": [],
+            "review_quorum": quorum,
+            "review_quorum_sha256": public.digest(quorum),
+            "source_authority_commit": source_commit,
+            "source_hashes_sha256": source_hashes_sha256,
+            "source_bundle_sha256": source_bundle_sha256,
+            "findings_sha256": "a" * 64,
+            "review_report_sha256": "b" * 64,
+        }
+
+    def fake_materialize(_commit: str, destination: Path) -> None:
+        destination.mkdir(parents=True, exist_ok=True)
+        for name in SOURCE_AUTHORITY_FILE_NAMES:
+            (destination / name).write_text("offline fixture\n", encoding="utf-8")
+
+    def fake_transport_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        nonlocal production_invalid_cleanup_invoked, production_invalid_absence_probe_invoked
+        command_list = [str(item) for item in command]
+        if command_list and command_list[0] == "ssh":
+            script = command_list[-1]
+            if "FAMILY10H_DISCOVERY_PREFLIGHT" in script:
+                return subprocess.CompletedProcess(command_list, 0, "FAMILY10H_DISCOVERY_PREFLIGHT base_preexisting=0 root_created=1\n", "")
+            if "python3 family10h_carrier_tomography_target.py" in script:
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if script.startswith("sha256sum "):
+                return subprocess.CompletedProcess(command_list, 0, invalid_discovery_file_sha + "\n", "")
+            if "rm -rf --" in script:
+                production_invalid_cleanup_invoked = True
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if "test ! -e " in script:
+                production_invalid_absence_probe_invoked = True
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        if command_list and command_list[0] == "scp":
+            if len(command_list) >= 4 and command_list[2].startswith(f"{TARGET_HOST}:"):
+                Path(command_list[3]).write_bytes(invalid_discovery_bytes)
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        return subprocess.CompletedProcess(command_list, 0, "", "")
+
+    with tempfile.TemporaryDirectory(prefix="family10h_production_invalid_copyback_regression_") as tmp:
+        temp_root = Path(tmp)
+        try:
+            globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
+            globals()["DISCOVERY_ATTEMPT_JOURNAL_PATH"] = temp_root / "attempt.jsonl"
+            globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = temp_root / "cleanup.json"
+            globals()["TEMPERATURE_SENSOR_AUTHORITY"] = temp_root / "authority.json"
+            globals()["DISCOVERY_TRANSPORT_PATH"] = temp_root / "transport.json"
+            globals()["TARGET_DISCOVERY_RECEIPT"] = temp_root / "target_discovery.json"
+            globals()["DISCOVERY_CHALLENGE_PATH"] = temp_root / "challenge.json"
+            globals()["run"] = fake_transport_run
+            globals()["read_source_hash_authority"] = lambda: fake_source_hashes
+            globals()["read_existing_source_bundle_authority"] = lambda: fake_bundle
+            globals()["source_authority_commit_verification"] = lambda commit: {
+                "passed": True,
+                "failures": [],
+                "commit": commit,
+                "files": {},
+                "status": [],
+            }
+            globals()["read_source_authority_review_for_discovery"] = fake_source_review
+            globals()["materialize_source_authority_snapshot"] = fake_materialize
+            try:
+                acquire_temperature_sensor_authority(source_authority_commit="1" * 40)
+            except ControllerError as exc:
+                production_invalid_error = str(exc)
+            rows = strict_jsonl_loads(DISCOVERY_ATTEMPT_JOURNAL_PATH.read_bytes())
+            states = [row.get("attempt_state") for row in rows]
+            cleanup_receipt = read_json(DISCOVERY_CLEANUP_CUSTODY_PATH)
+            production_invalid_cleanup_receipt_sealed = cleanup_receipt["cleanup_custody_sha256"] == public.digest(
+                {k: v for k, v in cleanup_receipt.items() if k != "cleanup_custody_sha256"}
+            )
+            cleanup_state = cleanup_receipt.get("cleanup", {})
+            production_invalid_cleanup_receipt_records_absence = (
+                isinstance(cleanup_state, dict)
+                and cleanup_state.get("passed") is True
+                and cleanup_state.get("absence_verified") is True
+                and cleanup_receipt.get("sensor_inventory_count") == 1
+            )
+            production_invalid_journal_stopped_before_receipt_copied = states == ATTEMPT_STATE_SEQUENCE[:3]
+            production_invalid_no_success_cleanup_states = "cleanup_armed" not in states and "cleanup_completed" not in states
+            production_invalid_no_success_artifacts = (
+                not TEMPERATURE_SENSOR_AUTHORITY.exists()
+                and not DISCOVERY_TRANSPORT_PATH.exists()
+                and not TARGET_DISCOVERY_RECEIPT.exists()
+            )
+        finally:
+            for name, value in production_originals.items():
+                globals()[name] = value
     checks = {
         "production_acquisition_has_no_injected_transport_surface": production_signature
         == {"target_host", "remote_root", "source_authority_commit"},
@@ -3360,11 +3536,20 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "boolean_challenge_counter_rejected": not validate_discovery_challenge_receipt_payload(bool_challenge)["passed"],
         "boolean_journal_counter_rejected": not replay_attempt_journal_rows(bool_journal_rows)["passed"],
         "boolean_transport_counter_rejected": not validate_discovery_transport_receipt(seal_transport({"target_contact_count": True}))["passed"],
+        "boolean_transport_retry_count_rejected": not validate_discovery_transport_receipt(seal_transport({"retry_count": False}))["passed"],
         "failure_cleanup_receipt_writes_without_success_journal": cleanup_valid["cleanup_custody_sha256"]
         == public.digest({k: v for k, v in cleanup_valid.items() if k != "cleanup_custody_sha256"}),
         "parsed_invalid_copyback_cleanup_receipt_sealed": parsed_invalid_cleanup_sealed,
         "parsed_invalid_copyback_journal_stops_before_success_cleanup": parsed_invalid_journal_stopped_before_success_cleanup,
         "parsed_invalid_copyback_no_success_artifacts": parsed_invalid_no_success_artifacts,
+        "production_invalid_copyback_acquisition_raises_before_success": "discovery selected identity missing" in production_invalid_error,
+        "production_invalid_copyback_cleanup_invoked": production_invalid_cleanup_invoked,
+        "production_invalid_copyback_absence_probe_invoked": production_invalid_absence_probe_invoked,
+        "production_invalid_copyback_cleanup_receipt_sealed": production_invalid_cleanup_receipt_sealed,
+        "production_invalid_copyback_cleanup_receipt_records_absence": production_invalid_cleanup_receipt_records_absence,
+        "production_invalid_copyback_journal_stops_before_receipt_copied": production_invalid_journal_stopped_before_receipt_copied,
+        "production_invalid_copyback_no_success_cleanup_states": production_invalid_no_success_cleanup_states,
+        "production_invalid_copyback_no_success_artifacts": production_invalid_no_success_artifacts,
         "boolean_cleanup_counter_rejected": bool_cleanup_rejected,
     }
     return {

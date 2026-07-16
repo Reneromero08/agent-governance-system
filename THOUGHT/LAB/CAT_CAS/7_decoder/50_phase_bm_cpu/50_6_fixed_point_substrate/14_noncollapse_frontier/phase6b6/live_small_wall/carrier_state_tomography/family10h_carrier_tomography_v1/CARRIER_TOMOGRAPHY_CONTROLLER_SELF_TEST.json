@@ -16,12 +16,21 @@
       "boolean_cleanup_counter_rejected": true,
       "boolean_journal_counter_rejected": true,
       "boolean_transport_counter_rejected": true,
+      "boolean_transport_retry_count_rejected": true,
       "failure_cleanup_receipt_writes_without_success_journal": true,
       "malformed_preflight_fails_closed_and_preserves_base": true,
       "parsed_invalid_copyback_cleanup_receipt_sealed": true,
       "parsed_invalid_copyback_journal_stops_before_success_cleanup": true,
       "parsed_invalid_copyback_no_success_artifacts": true,
       "production_acquisition_has_no_injected_transport_surface": true,
+      "production_invalid_copyback_absence_probe_invoked": true,
+      "production_invalid_copyback_acquisition_raises_before_success": true,
+      "production_invalid_copyback_cleanup_invoked": true,
+      "production_invalid_copyback_cleanup_receipt_records_absence": true,
+      "production_invalid_copyback_cleanup_receipt_sealed": true,
+      "production_invalid_copyback_journal_stops_before_receipt_copied": true,
+      "production_invalid_copyback_no_success_artifacts": true,
+      "production_invalid_copyback_no_success_cleanup_states": true,
       "valid_structured_preflight_parses": true
     },
     "live_invocation_count": 0,
@@ -52,6 +61,7 @@
     "checks": {
       "alternate_remote_scope_rejected": true,
       "authority_without_transport_rejected": true,
+      "boolean_retry_count_rejected": true,
       "cleanup_failure_rejected": true,
       "coherent_wrong_nonce_root_rejected": true,
       "copyback_corruption_rejected": true,
@@ -74,7 +84,7 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "0f619628f4973df6deffe9020e59d6853062aa78f0640f99512d98f8ecf4eac7",
+  "offline_validate_sha256": "38391a03f5d8e5643d9a3c85fdcd80e32a28bc120d8d582f2bf84619a7da46cd",
   "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -138,7 +148,7 @@
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "8554f73f58b1756b7150b698eca020b3bcb89df9bbba2a2f0b57351e6194f2a6",
+  "self_test_sha256": "e5f525971d9c751020c7969edf3af746204597de4b9e23e827cb671b933f2234",
   "sensor_inventory_count": 0,
   "source_audit_quorum_regression": {
     "checks": {
@@ -193,6 +203,8 @@
   "temperature_sensor_authority_regression": {
     "boolean_authority_counter_rejected": true,
     "boolean_discovery_counter_rejected": true,
+    "boolean_discovery_pmu_open_count_rejected": true,
+    "boolean_discovery_runtime_launch_count_rejected": true,
     "boolean_final_attempt_counter_rejected": true,
     "boolean_manifest_counter_object_rejected": true,
     "boolean_offline_zero_receipt_counter_rejected": true,
