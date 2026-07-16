@@ -1,0 +1,126 @@
+{
+  "claim_ceiling": "SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY",
+  "collapse_boundary": "diagnostic readout only; no decoded scalar feeds recurrence",
+  "execution_environment": {
+    "numpy": "2.3.5",
+    "platform": "Linux-4.4.0-x86_64-with-glibc2.41",
+    "python": "3.13.5"
+  },
+  "frame_seconds": 0.125,
+  "generator": "recursive_phase_tree_reference_v1",
+  "measurements": {
+    "correct_inverse_max_error": 2.48253415325e-16,
+    "cross_query_magnitude": 0.768495135328,
+    "forward_mutation_l2": 73.0410090828,
+    "max_amplitude_only_difference": 4.4408920985e-16,
+    "max_hierarchy_phase_difference_rad": 1.40852227925,
+    "max_unit_modulus_error": 2.22044604925e-16,
+    "max_z2_whole_beam_error": 4.609832636e-14,
+    "node_multisets_equal": true,
+    "self_query_magnitude": 1.0,
+    "tree_a_depth": 3,
+    "tree_a_digest": "0deb52bae8cc12613cdf339494539ff753eb4b41065334904e3025465096dd9b",
+    "tree_b_depth": 3,
+    "tree_b_digest": "ba5e4dfb3d1bf87fb37fa1e29cebe05b31af9decdd30b9cf5c205fe13ee0a287",
+    "wrong_inverse_max_error": 1.1509166525
+  },
+  "ordinary_software_only": true,
+  "physical_claims_established": [],
+  "reproduction_scope": {
+    "exact_local_bytes_match_committed_git_blob": true,
+    "independent_clean_checkout": false,
+    "physical_or_audio_device_contact": false,
+    "repository_full_gate_run": false
+  },
+  "sample_count": 6000,
+  "sample_rate_hz": 48000,
+  "schema": "recursive_phase_tree_reference_result_v1",
+  "source_binding": {
+    "source_byte_count": 13569,
+    "source_commit": "c1075adee64a687e3787a65d501a8e4090d8e1b1",
+    "source_git_blob_sha1": "f0c5b6003b84ac758ad8cb7353fce569b2292497",
+    "source_sha256": "a8e794a7b864b5b60de59fddeb61cfb7feac849856fbc3550ba2570469faa4c0"
+  },
+  "summary": {
+    "failed": 0,
+    "passed": 11,
+    "test_count": 11
+  },
+  "tests": [
+    {
+      "id": "recursive_depth_present",
+      "observed": [
+        3,
+        3
+      ],
+      "requirement": "both hierarchies have depth >= 3",
+      "status": "PASS"
+    },
+    {
+      "id": "same_node_multiset_different_parent_child_geometry",
+      "observed": true,
+      "requirement": true,
+      "status": "PASS"
+    },
+    {
+      "id": "unit_modulus_phase_carrier",
+      "observed": 2.22044604925e-16,
+      "status": "PASS",
+      "tolerance": 1e-12
+    },
+    {
+      "id": "global_z2_rotates_complete_tree",
+      "observed": 4.609832636e-14,
+      "status": "PASS",
+      "tolerance": 1e-12
+    },
+    {
+      "id": "amplitude_only_control_is_exact_null",
+      "observed": 4.4408920985e-16,
+      "status": "PASS",
+      "tolerance": 1e-12
+    },
+    {
+      "id": "hierarchy_changes_phase_geometry",
+      "minimum": 0.1,
+      "observed": 1.40852227925,
+      "status": "PASS"
+    },
+    {
+      "id": "matched_query_prefers_exact_hierarchy",
+      "observed": {
+        "cross": 0.768495135328,
+        "self": 1.0
+      },
+      "requirement": "self >= 1-tol and cross <= 0.98",
+      "status": "PASS"
+    },
+    {
+      "id": "borrowed_tape_is_actually_mutated",
+      "minimum": 1.0,
+      "observed": 73.0410090828,
+      "status": "PASS"
+    },
+    {
+      "id": "correct_inverse_restores",
+      "observed": 2.48253415325e-16,
+      "status": "PASS",
+      "tolerance": 1e-12
+    },
+    {
+      "id": "wrong_hierarchy_inverse_fails",
+      "minimum": 0.05,
+      "observed": 1.1509166525,
+      "status": "PASS"
+    },
+    {
+      "id": "canonical_identity_is_deterministic",
+      "observed": {
+        "tree_a": "0deb52bae8cc12613cdf339494539ff753eb4b41065334904e3025465096dd9b",
+        "tree_b": "ba5e4dfb3d1bf87fb37fa1e29cebe05b31af9decdd30b9cf5c205fe13ee0a287"
+      },
+      "requirement": "stable per tree and distinct across hierarchies",
+      "status": "PASS"
+    }
+  ]
+}
