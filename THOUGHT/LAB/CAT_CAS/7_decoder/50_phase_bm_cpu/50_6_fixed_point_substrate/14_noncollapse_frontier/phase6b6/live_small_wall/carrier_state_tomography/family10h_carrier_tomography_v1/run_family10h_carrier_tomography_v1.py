@@ -400,7 +400,17 @@ def is_strict_counter(value: Any) -> bool:
 
 
 def counters_equal_strict(receipt: dict[str, Any], expected: dict[str, int]) -> bool:
+    if not isinstance(receipt, dict):
+        return False
     return all(is_strict_int(receipt.get(key)) and receipt.get(key) == value for key, value in expected.items())
+
+
+def counter_dict_equal_strict(receipt: dict[str, Any], expected: dict[str, int]) -> bool:
+    return isinstance(receipt, dict) and set(receipt) == set(expected) and counters_equal_strict(receipt, expected)
+
+
+def zero_contact_counter_valid(receipt: dict[str, Any], key: str) -> bool:
+    return key not in receipt or (is_strict_int(receipt.get(key)) and receipt.get(key) == 0)
 
 
 def write_json(path: Path, value: Any) -> None:
@@ -917,10 +927,10 @@ def write_discovery_cleanup_custody_receipt(payload: dict[str, Any]) -> dict[str
     receipt["schema"] = "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_FAILURE_CLEANUP_CUSTODY_V1"
     for key in ATTEMPT_COUNTER_KEYS:
         require(is_strict_counter(receipt.get(key)), f"cleanup custody counter missing or invalid {key}")
-    require(receipt.get("target_contact_count") == 1, "cleanup custody requires recorded target contact")
-    require(receipt.get("sensor_inventory_count") in (0, 1), "cleanup custody inventory counter invalid")
-    require(receipt.get("live_invocation_count") == 0, "cleanup custody live counter must be zero")
-    require(receipt.get("pmu_acquisition_count") == 0, "cleanup custody PMU counter must be zero")
+    require(is_strict_int(receipt.get("target_contact_count")) and receipt.get("target_contact_count") == 1, "cleanup custody requires recorded target contact")
+    require(is_strict_int(receipt.get("sensor_inventory_count")) and receipt.get("sensor_inventory_count") in (0, 1), "cleanup custody inventory counter invalid")
+    require(is_strict_int(receipt.get("live_invocation_count")) and receipt.get("live_invocation_count") == 0, "cleanup custody live counter must be zero")
+    require(is_strict_int(receipt.get("pmu_acquisition_count")) and receipt.get("pmu_acquisition_count") == 0, "cleanup custody PMU counter must be zero")
     cleanup = receipt.get("cleanup")
     require(isinstance(cleanup, dict), "cleanup custody cleanup payload missing")
     receipt["cleanup_custody_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "cleanup_custody_sha256"})
@@ -1303,6 +1313,11 @@ def temperature_sensor_authority_from_receipt(
             failures.append("temperature sensor authority hwmon name mismatch")
         if receipt.get("sensor_label") != identity.get("sensor_label"):
             failures.append("temperature sensor authority sensor label mismatch")
+    for key in ATTEMPT_COUNTER_KEYS:
+        if not is_strict_int(receipt.get(key)):
+            failures.append(f"temperature sensor authority counter missing or invalid {key}")
+        elif isinstance(discovery, dict) and receipt.get(key) != discovery.get(key):
+            failures.append(f"temperature sensor authority counter mismatch {key}")
     return {
         "present": True,
         "passed": not failures,
@@ -1397,8 +1412,26 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
             "controller_challenge": synthetic_challenge,
             "controller_challenge_sha256": synthetic_challenge_sha,
             "controller_nonce": controller_nonce,
+            "source_authority_commit": synthetic_challenge["authorized_commit"],
+            "target_contact_count": complete_forged_discovery["target_contact_count"],
+            "sensor_inventory_count": complete_forged_discovery["sensor_inventory_count"],
+            "live_invocation_count": complete_forged_discovery["live_invocation_count"],
+            "pmu_acquisition_count": complete_forged_discovery["pmu_acquisition_count"],
         }
     )
+    boolean_discovery_counter = dict(complete_forged_discovery)
+    boolean_discovery_counter["target_contact_count"] = True
+    boolean_discovery_counter["target_discovery_receipt_sha256"] = public.digest(
+        {k: v for k, v in boolean_discovery_counter.items() if k != "target_discovery_receipt_sha256"}
+    )
+    boolean_discovery_counter_authority = seal_authority(
+        {
+            **complete_forged_authority,
+            "target_discovery_receipt": boolean_discovery_counter,
+            "target_contact_count": True,
+        }
+    )
+    boolean_authority_counter = seal_authority({**complete_forged_authority, "target_contact_count": True})
 
     provenance_free = {
         "schema": TEMPERATURE_SENSOR_AUTHORITY_SCHEMA,
@@ -1444,7 +1477,19 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
         complete_forged_authority,
         expected_challenge=synthetic_challenge,
     )
+    boolean_discovery_counter_result = temperature_sensor_authority_from_receipt(
+        boolean_discovery_counter_authority,
+        expected_challenge=synthetic_challenge,
+        require_transport=False,
+    )
+    boolean_authority_counter_result = temperature_sensor_authority_from_receipt(
+        boolean_authority_counter,
+        expected_challenge=synthetic_challenge,
+        require_transport=False,
+    )
     malformed_result = temperature_sensor_authority_from_receipt(malformed)
+    expected_live_counters = {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}
+    boolean_counter_values = {"target_contact_count": True, "sensor_inventory_count": True, "live_invocation_count": False, "pmu_acquisition_count": False}
     current = read_temperature_sensor_authority()
     result = {
         "synthetic_or_provenance_free_identity_cannot_freeze": not synthetic_result["passed"],
@@ -1453,6 +1498,11 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
         "well_formed_self_authored_discovery_without_expected_challenge_rejected": not complete_forged_without_expected_result["passed"],
         "well_formed_self_authored_discovery_wrong_expected_challenge_rejected": not complete_forged_wrong_expected_result["passed"],
         "well_formed_challenge_bound_fixture_without_transport_rejected": not complete_forged_with_expected_result["passed"],
+        "boolean_discovery_counter_rejected": any("temperature sensor discovery target contact count must be one" in item for item in boolean_discovery_counter_result["failures"]),
+        "boolean_authority_counter_rejected": any("temperature sensor authority counter missing or invalid target_contact_count" in item for item in boolean_authority_counter_result["failures"]),
+        "boolean_manifest_counter_object_rejected": not counter_dict_equal_strict(boolean_counter_values, expected_live_counters),
+        "boolean_final_attempt_counter_rejected": not counters_equal_strict(boolean_counter_values, expected_live_counters),
+        "boolean_offline_zero_receipt_counter_rejected": not zero_contact_counter_valid({"target_contact_count": False}, "target_contact_count"),
         "wrong_hwmon_authority_rejected": not malformed_result["passed"],
         "current_authority_present": current["present"],
         "current_authority_passed": current["passed"],
@@ -1465,6 +1515,11 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
         and result["well_formed_self_authored_discovery_without_expected_challenge_rejected"]
         and result["well_formed_self_authored_discovery_wrong_expected_challenge_rejected"]
         and result["well_formed_challenge_bound_fixture_without_transport_rejected"]
+        and result["boolean_discovery_counter_rejected"]
+        and result["boolean_authority_counter_rejected"]
+        and result["boolean_manifest_counter_object_rejected"]
+        and result["boolean_final_attempt_counter_rejected"]
+        and result["boolean_offline_zero_receipt_counter_rejected"]
         and result["wrong_hwmon_authority_rejected"]
     )
     return result
@@ -1593,6 +1648,7 @@ def acquire_temperature_sensor_authority(
     target_command_invoked = False
     discovery: dict[str, Any] | None = None
     authority: dict[str, Any] | None = None
+    receipt_copied_state_persisted = False
     target_discovery_file_sha: str | None = None
     write_discovery_attempt_receipt(
         {
@@ -1737,10 +1793,11 @@ def acquire_temperature_sensor_authority(
                     "commands": commands,
                 }
             )
+            receipt_copied_state_persisted = True
         finally:
             if remote_root_owned or remote_root_may_exist:
                 cleanup["attempted"] = True
-                if discovery is not None:
+                if receipt_copied_state_persisted:
                     try:
                         write_discovery_attempt_receipt(
                             {
@@ -1792,7 +1849,7 @@ def acquire_temperature_sensor_authority(
                 except Exception as exc:  # noqa: BLE001 - preserve failed absence probe in durable attempt state
                     cleanup["absence_verified"] = False
                     cleanup["absence_error"] = str(exc)
-                if discovery is not None:
+                if receipt_copied_state_persisted:
                     try:
                         write_discovery_attempt_receipt(
                             {
@@ -1826,7 +1883,7 @@ def acquire_temperature_sensor_authority(
                             "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
                             "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
                             "target_contact_count": 1,
-                            "sensor_inventory_count": 0,
+                            "sensor_inventory_count": 1 if discovery is not None else 0,
                             "live_invocation_count": 0,
                             "pmu_acquisition_count": 0,
                             "cleanup": cleanup,
@@ -3245,6 +3302,55 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
                 bool_cleanup_rejected = True
         finally:
             globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = original_cleanup_path
+    original_paths = {
+        "DISCOVERY_ATTEMPT_PATH": DISCOVERY_ATTEMPT_PATH,
+        "DISCOVERY_ATTEMPT_JOURNAL_PATH": DISCOVERY_ATTEMPT_JOURNAL_PATH,
+        "DISCOVERY_CLEANUP_CUSTODY_PATH": DISCOVERY_CLEANUP_CUSTODY_PATH,
+        "TEMPERATURE_SENSOR_AUTHORITY": TEMPERATURE_SENSOR_AUTHORITY,
+        "DISCOVERY_TRANSPORT_PATH": DISCOVERY_TRANSPORT_PATH,
+        "TARGET_DISCOVERY_RECEIPT": TARGET_DISCOVERY_RECEIPT,
+    }
+    with tempfile.TemporaryDirectory(prefix="family10h_parsed_invalid_copyback_regression_") as tmp:
+        temp_root = Path(tmp)
+        try:
+            globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
+            globals()["DISCOVERY_ATTEMPT_JOURNAL_PATH"] = temp_root / "attempt.jsonl"
+            globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = temp_root / "cleanup.json"
+            globals()["TEMPERATURE_SENSOR_AUTHORITY"] = temp_root / "authority.json"
+            globals()["DISCOVERY_TRANSPORT_PATH"] = temp_root / "transport.json"
+            globals()["TARGET_DISCOVERY_RECEIPT"] = temp_root / "target_discovery.json"
+            for state in ATTEMPT_STATE_SEQUENCE[:3]:
+                write_discovery_attempt_receipt(seal_attempt(state))
+            parsed_invalid_cleanup = write_discovery_cleanup_custody_receipt(
+                {
+                    "passed": True,
+                    "source_authority_commit": "1" * 40,
+                    "source_authority_review": {},
+                    "controller_challenge_sha256": "2" * 64,
+                    "challenge_receipt_canonical_sha256": "3" * 64,
+                    "challenge_receipt_file_sha256": "4" * 64,
+                    "target_contact_count": 1,
+                    "sensor_inventory_count": 1,
+                    "live_invocation_count": 0,
+                    "pmu_acquisition_count": 0,
+                    "cleanup": {"attempted": True, "passed": True, "absence_verified": True},
+                    "commands": [["ssh", "cleanup"], ["ssh", "absence-probe"]],
+                }
+            )
+            parsed_invalid_rows = strict_jsonl_loads(DISCOVERY_ATTEMPT_JOURNAL_PATH.read_bytes())
+            parsed_invalid_states = [row.get("attempt_state") for row in parsed_invalid_rows]
+            parsed_invalid_cleanup_sealed = parsed_invalid_cleanup["cleanup_custody_sha256"] == public.digest(
+                {k: v for k, v in parsed_invalid_cleanup.items() if k != "cleanup_custody_sha256"}
+            )
+            parsed_invalid_journal_stopped_before_success_cleanup = parsed_invalid_states == ATTEMPT_STATE_SEQUENCE[:3]
+            parsed_invalid_no_success_artifacts = (
+                not TEMPERATURE_SENSOR_AUTHORITY.exists()
+                and not DISCOVERY_TRANSPORT_PATH.exists()
+                and not TARGET_DISCOVERY_RECEIPT.exists()
+            )
+        finally:
+            for name, path in original_paths.items():
+                globals()[name] = path
     checks = {
         "production_acquisition_has_no_injected_transport_surface": production_signature
         == {"target_host", "remote_root", "source_authority_commit"},
@@ -3256,6 +3362,9 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "boolean_transport_counter_rejected": not validate_discovery_transport_receipt(seal_transport({"target_contact_count": True}))["passed"],
         "failure_cleanup_receipt_writes_without_success_journal": cleanup_valid["cleanup_custody_sha256"]
         == public.digest({k: v for k, v in cleanup_valid.items() if k != "cleanup_custody_sha256"}),
+        "parsed_invalid_copyback_cleanup_receipt_sealed": parsed_invalid_cleanup_sealed,
+        "parsed_invalid_copyback_journal_stops_before_success_cleanup": parsed_invalid_journal_stopped_before_success_cleanup,
+        "parsed_invalid_copyback_no_success_artifacts": parsed_invalid_no_success_artifacts,
         "boolean_cleanup_counter_rejected": bool_cleanup_rejected,
     }
     return {
@@ -3399,8 +3508,8 @@ def authority_contact_counters(temperature_authority: dict[str, Any]) -> dict[st
     if DISCOVERY_ATTEMPT_PATH.exists():
         attempt = read_json(DISCOVERY_ATTEMPT_PATH)
         for key in ATTEMPT_COUNTER_KEYS:
-            require(isinstance(attempt.get(key), int), f"discovery attempt counter missing {key}")
-        return {key: int(attempt[key]) for key in ATTEMPT_COUNTER_KEYS}
+            require(is_strict_int(attempt.get(key)), f"discovery attempt counter missing or invalid {key}")
+        return {key: attempt[key] for key in ATTEMPT_COUNTER_KEYS}
     if temperature_authority.get("passed") is not True or not TEMPERATURE_SENSOR_AUTHORITY.exists():
         return {
             "target_contact_count": 0,
@@ -3410,8 +3519,8 @@ def authority_contact_counters(temperature_authority: dict[str, Any]) -> dict[st
         }
     receipt = read_json(TEMPERATURE_SENSOR_AUTHORITY)
     for key in ATTEMPT_COUNTER_KEYS:
-        require(isinstance(receipt.get(key), int), f"temperature authority counter missing {key}")
-    return {key: int(receipt[key]) for key in ATTEMPT_COUNTER_KEYS}
+        require(is_strict_int(receipt.get(key)), f"temperature authority counter missing or invalid {key}")
+    return {key: receipt[key] for key in ATTEMPT_COUNTER_KEYS}
 
 
 def manifest() -> dict[str, Any]:
@@ -3977,7 +4086,7 @@ def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict
 
     counters = manifest_data.get("contact_counter_attestation", {})
     expected_counters = {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}
-    if counters != expected_counters:
+    if not counter_dict_equal_strict(counters, expected_counters):
         failures.append("final contact counters are not exactly 1/1/0/0")
 
     discovery = commit_blob_json(evidence_commit, TARGET_DISCOVERY_RECEIPT) if commit_exists(evidence_commit) else None
@@ -4029,13 +4138,7 @@ def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict
         cleanup_state = attempt.get("cleanup")
         if not isinstance(cleanup_state, dict) or cleanup_state.get("passed") is not True or cleanup_state.get("absence_verified") is not True:
             failures.append("discovery attempt cleanup state missing or failed")
-        attempt_counters = {
-            "target_contact_count": int(attempt.get("target_contact_count", 0)),
-            "sensor_inventory_count": int(attempt.get("sensor_inventory_count", 0)),
-            "live_invocation_count": int(attempt.get("live_invocation_count", 0)),
-            "pmu_acquisition_count": int(attempt.get("pmu_acquisition_count", 0)),
-        }
-        if attempt_counters != expected_counters:
+        if not counters_equal_strict(attempt, expected_counters):
             failures.append("discovery attempt counters are not exactly 1/1/0/0")
         attempt_review = attempt.get("source_authority_review")
         if not isinstance(attempt_review, dict):
@@ -4263,24 +4366,27 @@ def validate_receipt_chain(manifest_data: dict[str, Any]) -> list[str]:
 
     for name, value in receipts.items():
         for key in ["target_contact_count", "sensor_inventory_count", "live_invocation_count", "pmu_acquisition_count"]:
-            if key in value and value.get(key) != 0:
+            if not zero_contact_counter_valid(value, key):
                 failures.append(f"offline receipt contact counter must be zero {name}.{key}")
 
     manifest_counters = manifest_data.get("contact_counter_attestation") or manifest_data.get("zero_live_contact_attestation") or {}
-    if manifest_counters.get("live_invocation_count", 0) != 0:
+    if not isinstance(manifest_counters, dict):
+        failures.append("manifest contact counters missing or malformed")
+        manifest_counters = {}
+    if not is_strict_int(manifest_counters.get("live_invocation_count")) or manifest_counters.get("live_invocation_count") != 0:
         failures.append("manifest live invocation count must be zero")
-    if manifest_counters.get("pmu_acquisition_count", 0) != 0:
+    if not is_strict_int(manifest_counters.get("pmu_acquisition_count")) or manifest_counters.get("pmu_acquisition_count") != 0:
         failures.append("manifest PMU acquisition count must be zero")
     authority_section = manifest_data.get("temperature_sensor_authority", {})
     authority_passed = authority_section.get("authority_receipt_passed") is True
     if DISCOVERY_ATTEMPT_PATH.exists():
         attempt = read_json(DISCOVERY_ATTEMPT_PATH)
-        missing_attempt_counters = [key for key in ATTEMPT_COUNTER_KEYS if not isinstance(attempt.get(key), int)]
+        missing_attempt_counters = [key for key in ATTEMPT_COUNTER_KEYS if not is_strict_int(attempt.get(key))]
         if missing_attempt_counters:
             failures.append("discovery attempt counters missing: " + ",".join(missing_attempt_counters))
             expected_counters = {}
         else:
-            expected_counters = {key: int(attempt[key]) for key in ATTEMPT_COUNTER_KEYS}
+            expected_counters = {key: attempt[key] for key in ATTEMPT_COUNTER_KEYS}
     else:
         expected_counters = {
             "target_contact_count": 1 if authority_passed else 0,
@@ -4288,7 +4394,7 @@ def validate_receipt_chain(manifest_data: dict[str, Any]) -> list[str]:
             "live_invocation_count": 0,
             "pmu_acquisition_count": 0,
         }
-    if manifest_counters != expected_counters:
+    if not expected_counters or not counter_dict_equal_strict(manifest_counters, expected_counters):
         failures.append("manifest contact counters are not truthful for authority state")
     if TEMPERATURE_SENSOR_AUTHORITY.exists():
         authority_result = read_temperature_sensor_authority(expected_challenge=authority_section.get("controller_challenge"))
