@@ -1475,6 +1475,38 @@ def manifest_live_gate_fixture() -> dict[str, Any]:
         boolean_discovery_counter_authority,
         expected_challenge=controller_challenge,
     )
+    boolean_pmu_open_discovery = dict(complete_forged_discovery)
+    boolean_pmu_open_discovery["pmu_open_count"] = False
+    boolean_pmu_open_discovery["target_discovery_receipt_sha256"] = public.digest(
+        {k: v for k, v in boolean_pmu_open_discovery.items() if k != "target_discovery_receipt_sha256"}
+    )
+    boolean_pmu_open_authority = {
+        **complete_forged_authority,
+        "target_discovery_receipt": boolean_pmu_open_discovery,
+    }
+    boolean_pmu_open_authority["temperature_sensor_authority_sha256"] = public.digest(
+        {k: v for k, v in boolean_pmu_open_authority.items() if k != "temperature_sensor_authority_sha256"}
+    )
+    boolean_runtime_launch_discovery = dict(complete_forged_discovery)
+    boolean_runtime_launch_discovery["runtime_launch_count"] = False
+    boolean_runtime_launch_discovery["target_discovery_receipt_sha256"] = public.digest(
+        {k: v for k, v in boolean_runtime_launch_discovery.items() if k != "target_discovery_receipt_sha256"}
+    )
+    boolean_runtime_launch_authority = {
+        **complete_forged_authority,
+        "target_discovery_receipt": boolean_runtime_launch_discovery,
+    }
+    boolean_runtime_launch_authority["temperature_sensor_authority_sha256"] = public.digest(
+        {k: v for k, v in boolean_runtime_launch_authority.items() if k != "temperature_sensor_authority_sha256"}
+    )
+    boolean_pmu_open_result = validate_temperature_sensor_authority_payload(
+        boolean_pmu_open_authority,
+        expected_challenge=controller_challenge,
+    )
+    boolean_runtime_launch_result = validate_temperature_sensor_authority_payload(
+        boolean_runtime_launch_authority,
+        expected_challenge=controller_challenge,
+    )
     boolean_authority_counter_result = validate_temperature_sensor_authority_payload(
         boolean_authority_counter,
         expected_challenge=controller_challenge,
@@ -1506,6 +1538,8 @@ def manifest_live_gate_fixture() -> dict[str, Any]:
         "well_formed_self_authored_discovery_wrong_expected_challenge_rejected": complete_forged_wrong_expected_rejected,
         "well_formed_challenge_bound_fixture_without_transport_rejected": complete_forged_with_expected_rejected_without_transport,
         "boolean_discovery_counter_rejected": any("temperature sensor discovery target contact count must be one" in item for item in boolean_discovery_counter_result["failures"]),
+        "boolean_discovery_pmu_open_count_rejected": any("temperature sensor discovery PMU open count must be zero" in item for item in boolean_pmu_open_result["failures"]),
+        "boolean_discovery_runtime_launch_count_rejected": any("temperature sensor discovery runtime launch count must be zero" in item for item in boolean_runtime_launch_result["failures"]),
         "boolean_authority_counter_rejected": any("temperature sensor authority counter missing or invalid target_contact_count" in item for item in boolean_authority_counter_result["failures"]),
         "boolean_frozen_contact_counter_rejected": boolean_frozen_contact_counter_rejected,
         "boolean_only_frozen_manifest_rejected": boolean_only_frozen_manifest_rejected,
