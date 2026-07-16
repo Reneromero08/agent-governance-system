@@ -1,0 +1,313 @@
+{
+  "schema": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEW_NORMALIZED_V1",
+  "source_authority_commit": "0b15890e9a8cad95cee38a2d4a333fda8a00dd50",
+  "source_hashes_sha256": "489a66f073d111fda9ff09e09ee7aa4a7f5107541ce6bfb42d3b6d25af457124",
+  "source_bundle_sha256": "8008ae53870bfd8163711fa13b3000d8296b27369cc506fb665e9fabaccf1cef",
+  "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+  "runtime_binary_git_blob": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+  "review_report_present": true,
+  "decision": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEW_BLOCKED",
+  "package_decision": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+  "contact_counters": {
+    "target_contact_count": 0,
+    "sensor_inventory_count": 0,
+    "live_invocation_count": 0,
+    "pmu_acquisition_count": 0
+  },
+  "material_blockers": [
+    {
+      "id": "C2-PHYS-DISCOVERY-RUNTIME-TRANSFER-GAP",
+      "originating_agent": "019f6980-eede-71b3-929b-ba9be647dbd4",
+      "originating_agents": [
+        "019f6980-eede-71b3-929b-ba9be647dbd4",
+        "019f6981-29b2-7841-980c-31bf19b22fd6",
+        "019f6981-9b41-78e2-bc90-54849d98f2ec"
+      ],
+      "exact_report": "SOURCE_AUTHORITY_C2_REVIEW/physical_sensor_authority_body.md",
+      "cited_source_file_function_line": [
+        "run_family10h_carrier_tomography_v1.py:run_discovery_transaction:1907-1912 creates fresh remote root",
+        "run_family10h_carrier_tomography_v1.py:run_discovery_transaction:1945-1949 uploads only SOURCE_AUTHORITY_FILE_NAMES",
+        "family10h_carrier_tomography_target.py:RUNTIME_BINARY_NAME/RUNTIME_AUTHORITY_FILE_NAMES:39-45 separates runtime authority",
+        "family10h_carrier_tomography_target.py:validate_runtime_binary_authority:301-306,353-366 rejects missing runtime binary",
+        "family10h_carrier_tomography_target.py:challenge validation:2160-2162 requires source validation before inventory"
+      ],
+      "mechanism": "Production discovery transfers only SOURCE_AUTHORITY_FILE_NAMES to an initially empty remote root, but target-side challenge validation now requires the separate runtime authority binary to be present and byte-identical.",
+      "consequence": "A future authorized discovery would consume target contact and then fail before sensor inventory, leaving source authority unrecoverable for C2.",
+      "minimal_repair": "Transfer SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES during discovery, or introduce a prospectively reviewed discovery-specific validator that preserves immutable runtime binding without requiring local binary presence.",
+      "required_regression": "A production-shape fresh remote-source fixture must be populated by the exact outbound transfer list and validate successfully through target source authority before sensor inventory; it must preserve 1/1/0/0 accounting and zero runtime/PMU use.",
+      "parent_disposition": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEW_BLOCKED",
+      "independently_reproduced": true,
+      "independent_reproducers": [
+        "discovery transport and custody auditor",
+        "claim-boundary adjudicator"
+      ]
+    },
+    {
+      "id": "C2-RUNTIME-OVERLAY-REPLAY-REGRESSION-NOT-END-TO-END",
+      "originating_agent": "019f6981-6257-7102-a066-0b91dfb33047",
+      "originating_agents": [
+        "019f6981-6257-7102-a066-0b91dfb33047",
+        "019f6980-eede-71b3-929b-ba9be647dbd4"
+      ],
+      "exact_report": "SOURCE_AUTHORITY_C2_REVIEW/source_bundle_evidence_body.md",
+      "cited_source_file_function_line": [
+        "run_family10h_carrier_tomography_v1.py:runtime_binary_overlay_mutation_regression:3098 uses blob inequality as replay rejection proxy",
+        "run_family10h_carrier_tomography_v1.py:replay_final_exact_objects:4499-4512 appears to compare runtime authority but is not invoked by the regression"
+      ],
+      "mechanism": "The regression mutates the runtime binary and observes changed blob identity, but does not construct source/evidence commits and invoke replay_final_exact_objects().",
+      "consequence": "The test could stay green if future replay logic stopped checking RUNTIME_AUTHORITY_FILE_NAMES, so C1 runtime immutability closure is not mechanically proven.",
+      "minimal_repair": "Replace the tautological check with an evidence-overlay regression that mutates only the runtime binary and requires final exact-object replay to fail on the runtime entry.",
+      "required_regression": "Construct source and descendant evidence commits, preserve source-authority blobs, change only the runtime binary, invoke replay_final_exact_objects(), and assert the runtime entry is reported changed; demonstrate the regression fails if runtime comparison is removed.",
+      "parent_disposition": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEW_BLOCKED",
+      "independently_reproduced": true,
+      "independent_reproducers": [
+        "physical sensor-authority auditor"
+      ]
+    }
+  ],
+  "findings_by_id": {
+    "C2-PHYS-DISCOVERY-RUNTIME-TRANSFER-GAP": {
+      "id": "C2-PHYS-DISCOVERY-RUNTIME-TRANSFER-GAP",
+      "originating_agent": "019f6980-eede-71b3-929b-ba9be647dbd4",
+      "originating_agents": [
+        "019f6980-eede-71b3-929b-ba9be647dbd4",
+        "019f6981-29b2-7841-980c-31bf19b22fd6",
+        "019f6981-9b41-78e2-bc90-54849d98f2ec"
+      ],
+      "exact_report": "SOURCE_AUTHORITY_C2_REVIEW/physical_sensor_authority_body.md",
+      "cited_source_file_function_line": [
+        "run_family10h_carrier_tomography_v1.py:run_discovery_transaction:1907-1912 creates fresh remote root",
+        "run_family10h_carrier_tomography_v1.py:run_discovery_transaction:1945-1949 uploads only SOURCE_AUTHORITY_FILE_NAMES",
+        "family10h_carrier_tomography_target.py:RUNTIME_BINARY_NAME/RUNTIME_AUTHORITY_FILE_NAMES:39-45 separates runtime authority",
+        "family10h_carrier_tomography_target.py:validate_runtime_binary_authority:301-306,353-366 rejects missing runtime binary",
+        "family10h_carrier_tomography_target.py:challenge validation:2160-2162 requires source validation before inventory"
+      ],
+      "mechanism": "Production discovery transfers only SOURCE_AUTHORITY_FILE_NAMES to an initially empty remote root, but target-side challenge validation now requires the separate runtime authority binary to be present and byte-identical.",
+      "consequence": "A future authorized discovery would consume target contact and then fail before sensor inventory, leaving source authority unrecoverable for C2.",
+      "minimal_repair": "Transfer SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES during discovery, or introduce a prospectively reviewed discovery-specific validator that preserves immutable runtime binding without requiring local binary presence.",
+      "required_regression": "A production-shape fresh remote-source fixture must be populated by the exact outbound transfer list and validate successfully through target source authority before sensor inventory; it must preserve 1/1/0/0 accounting and zero runtime/PMU use.",
+      "parent_disposition": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEW_BLOCKED",
+      "independently_reproduced": true,
+      "independent_reproducers": [
+        "discovery transport and custody auditor",
+        "claim-boundary adjudicator"
+      ]
+    },
+    "C2-RUNTIME-OVERLAY-REPLAY-REGRESSION-NOT-END-TO-END": {
+      "id": "C2-RUNTIME-OVERLAY-REPLAY-REGRESSION-NOT-END-TO-END",
+      "originating_agent": "019f6981-6257-7102-a066-0b91dfb33047",
+      "originating_agents": [
+        "019f6981-6257-7102-a066-0b91dfb33047",
+        "019f6980-eede-71b3-929b-ba9be647dbd4"
+      ],
+      "exact_report": "SOURCE_AUTHORITY_C2_REVIEW/source_bundle_evidence_body.md",
+      "cited_source_file_function_line": [
+        "run_family10h_carrier_tomography_v1.py:runtime_binary_overlay_mutation_regression:3098 uses blob inequality as replay rejection proxy",
+        "run_family10h_carrier_tomography_v1.py:replay_final_exact_objects:4499-4512 appears to compare runtime authority but is not invoked by the regression"
+      ],
+      "mechanism": "The regression mutates the runtime binary and observes changed blob identity, but does not construct source/evidence commits and invoke replay_final_exact_objects().",
+      "consequence": "The test could stay green if future replay logic stopped checking RUNTIME_AUTHORITY_FILE_NAMES, so C1 runtime immutability closure is not mechanically proven.",
+      "minimal_repair": "Replace the tautological check with an evidence-overlay regression that mutates only the runtime binary and requires final exact-object replay to fail on the runtime entry.",
+      "required_regression": "Construct source and descendant evidence commits, preserve source-authority blobs, change only the runtime binary, invoke replay_final_exact_objects(), and assert the runtime entry is reported changed; demonstrate the regression fails if runtime comparison is removed.",
+      "parent_disposition": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEW_BLOCKED",
+      "independently_reproduced": true,
+      "independent_reproducers": [
+        "physical sensor-authority auditor"
+      ]
+    }
+  },
+  "reviewer_verdicts": {
+    "physical_sensor_authority_auditor": {
+      "role": "physical sensor-authority auditor",
+      "agent_id": "019f6980-eede-71b3-929b-ba9be647dbd4",
+      "thread_id": "019f6980-eede-71b3-929b-ba9be647dbd4",
+      "model": "GPT-5.6 Sol",
+      "verdict": "MATERIAL_BLOCKER",
+      "final_response": true,
+      "audited_commit": "0b15890e9a8cad95cee38a2d4a333fda8a00dd50",
+      "source_hashes_sha256": "489a66f073d111fda9ff09e09ee7aa4a7f5107541ce6bfb42d3b6d25af457124",
+      "source_bundle_sha256": "8008ae53870bfd8163711fa13b3000d8296b27369cc506fb665e9fabaccf1cef",
+      "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C2_REVIEW/physical_sensor_authority_body.md",
+      "body_file_sha256": "3621a61916cab0d5bab1f2bf416774ad80ba1beb8f08444cdd89f034f7ebc496",
+      "body_canonical_sha256": "3621a61916cab0d5bab1f2bf416774ad80ba1beb8f08444cdd89f034f7ebc496",
+      "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C2_REVIEW/physical_sensor_authority_receipt.json",
+      "receipt_file_sha256": "abc180f30e82b2f7c88bddc0122ffc00cb613c756d6bf0622fd91dd6d691ded7",
+      "boundary_attestation": {
+        "no_git_write": true,
+        "no_file_edits": true,
+        "no_checkout_mutation": true,
+        "no_target_contact": true,
+        "no_live_authority": true,
+        "no_pmu": true
+      },
+      "review_receipt": {
+        "schema": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEWER_RECEIPT_V2",
+        "issuer": "codex_subagent_read_only_review",
+        "receipt_kind": "detached_review_body_acknowledgment",
+        "thread_id": "019f6980-eede-71b3-929b-ba9be647dbd4",
+        "agent_id": "019f6980-eede-71b3-929b-ba9be647dbd4",
+        "role": "physical sensor-authority auditor",
+        "model": "GPT-5.6 Sol",
+        "review_body_sha256": "3621a61916cab0d5bab1f2bf416774ad80ba1beb8f08444cdd89f034f7ebc496",
+        "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+        "audited_commit": "0b15890e9a8cad95cee38a2d4a333fda8a00dd50",
+        "source_hashes_sha256": "489a66f073d111fda9ff09e09ee7aa4a7f5107541ce6bfb42d3b6d25af457124",
+        "source_bundle_sha256": "8008ae53870bfd8163711fa13b3000d8296b27369cc506fb665e9fabaccf1cef",
+        "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+        "no_git_write": true,
+        "no_file_edits": true,
+        "no_checkout_mutation": true,
+        "no_target_contact": true,
+        "no_live_authority": true,
+        "no_pmu": true,
+        "self_authored": false,
+        "evidence_origin": "codex_subagent_detached_receipt"
+      }
+    },
+    "discovery_transport_custody_auditor": {
+      "role": "discovery transport and custody auditor",
+      "agent_id": "019f6981-29b2-7841-980c-31bf19b22fd6",
+      "thread_id": "019f6981-29b2-7841-980c-31bf19b22fd6",
+      "model": "GPT-5.6 Sol",
+      "verdict": "MATERIAL_BLOCKER",
+      "final_response": true,
+      "audited_commit": "0b15890e9a8cad95cee38a2d4a333fda8a00dd50",
+      "source_hashes_sha256": "489a66f073d111fda9ff09e09ee7aa4a7f5107541ce6bfb42d3b6d25af457124",
+      "source_bundle_sha256": "8008ae53870bfd8163711fa13b3000d8296b27369cc506fb665e9fabaccf1cef",
+      "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C2_REVIEW/discovery_transport_custody_body.md",
+      "body_file_sha256": "59379d0b67cfcb24eccc5cbb1ad0f295c4f136f4d275d708f94e51087d929ec1",
+      "body_canonical_sha256": "59379d0b67cfcb24eccc5cbb1ad0f295c4f136f4d275d708f94e51087d929ec1",
+      "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C2_REVIEW/discovery_transport_custody_receipt.json",
+      "receipt_file_sha256": "8ffce1181ba4d4ae5966859c34d2d18a3a858add4d176af3fb21745124f06c03",
+      "boundary_attestation": {
+        "no_git_write": true,
+        "no_file_edits": true,
+        "no_checkout_mutation": true,
+        "no_target_contact": true,
+        "no_live_authority": true,
+        "no_pmu": true
+      },
+      "review_receipt": {
+        "schema": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEWER_RECEIPT_V2",
+        "issuer": "codex_subagent_read_only_review",
+        "receipt_kind": "detached_review_body_acknowledgment",
+        "thread_id": "019f6981-29b2-7841-980c-31bf19b22fd6",
+        "agent_id": "019f6981-29b2-7841-980c-31bf19b22fd6",
+        "role": "discovery transport and custody auditor",
+        "model": "GPT-5.6 Sol",
+        "review_body_sha256": "59379d0b67cfcb24eccc5cbb1ad0f295c4f136f4d275d708f94e51087d929ec1",
+        "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+        "audited_commit": "0b15890e9a8cad95cee38a2d4a333fda8a00dd50",
+        "source_hashes_sha256": "489a66f073d111fda9ff09e09ee7aa4a7f5107541ce6bfb42d3b6d25af457124",
+        "source_bundle_sha256": "8008ae53870bfd8163711fa13b3000d8296b27369cc506fb665e9fabaccf1cef",
+        "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+        "no_git_write": true,
+        "no_file_edits": true,
+        "no_checkout_mutation": true,
+        "no_target_contact": true,
+        "no_live_authority": true,
+        "no_pmu": true,
+        "self_authored": false,
+        "evidence_origin": "codex_subagent_detached_receipt"
+      }
+    },
+    "source_bundle_runtime_evidence_auditor": {
+      "role": "source/bundle/runtime evidence auditor",
+      "agent_id": "019f6981-6257-7102-a066-0b91dfb33047",
+      "thread_id": "019f6981-6257-7102-a066-0b91dfb33047",
+      "model": "GPT-5.6 Sol",
+      "verdict": "MATERIAL_BLOCKER",
+      "final_response": true,
+      "audited_commit": "0b15890e9a8cad95cee38a2d4a333fda8a00dd50",
+      "source_hashes_sha256": "489a66f073d111fda9ff09e09ee7aa4a7f5107541ce6bfb42d3b6d25af457124",
+      "source_bundle_sha256": "8008ae53870bfd8163711fa13b3000d8296b27369cc506fb665e9fabaccf1cef",
+      "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C2_REVIEW/source_bundle_evidence_body.md",
+      "body_file_sha256": "4013016d02836fc24306b9ff490ab365bd4b9f415f2be6374cbdfbf4f806107b",
+      "body_canonical_sha256": "4013016d02836fc24306b9ff490ab365bd4b9f415f2be6374cbdfbf4f806107b",
+      "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C2_REVIEW/source_bundle_evidence_receipt.json",
+      "receipt_file_sha256": "4861cc107dc1f6fd1a26a1896f7c9d16b7e7560a9feba193a8917019b3466d74",
+      "boundary_attestation": {
+        "no_git_write": true,
+        "no_file_edits": true,
+        "no_checkout_mutation": true,
+        "no_target_contact": true,
+        "no_live_authority": true,
+        "no_pmu": true
+      },
+      "review_receipt": {
+        "schema": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEWER_RECEIPT_V2",
+        "issuer": "codex_subagent_read_only_review",
+        "receipt_kind": "detached_review_body_acknowledgment",
+        "thread_id": "019f6981-6257-7102-a066-0b91dfb33047",
+        "agent_id": "019f6981-6257-7102-a066-0b91dfb33047",
+        "role": "source/bundle/runtime evidence auditor",
+        "model": "GPT-5.6 Sol",
+        "review_body_sha256": "4013016d02836fc24306b9ff490ab365bd4b9f415f2be6374cbdfbf4f806107b",
+        "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+        "audited_commit": "0b15890e9a8cad95cee38a2d4a333fda8a00dd50",
+        "source_hashes_sha256": "489a66f073d111fda9ff09e09ee7aa4a7f5107541ce6bfb42d3b6d25af457124",
+        "source_bundle_sha256": "8008ae53870bfd8163711fa13b3000d8296b27369cc506fb665e9fabaccf1cef",
+        "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+        "no_git_write": true,
+        "no_file_edits": true,
+        "no_checkout_mutation": true,
+        "no_target_contact": true,
+        "no_live_authority": true,
+        "no_pmu": true,
+        "self_authored": false,
+        "evidence_origin": "codex_subagent_detached_receipt"
+      }
+    },
+    "claim_boundary_adjudicator": {
+      "role": "claim-boundary adjudicator",
+      "agent_id": "019f6981-9b41-78e2-bc90-54849d98f2ec",
+      "thread_id": "019f6981-9b41-78e2-bc90-54849d98f2ec",
+      "model": "GPT-5.6 Sol",
+      "verdict": "MATERIAL_BLOCKER",
+      "final_response": true,
+      "audited_commit": "0b15890e9a8cad95cee38a2d4a333fda8a00dd50",
+      "source_hashes_sha256": "489a66f073d111fda9ff09e09ee7aa4a7f5107541ce6bfb42d3b6d25af457124",
+      "source_bundle_sha256": "8008ae53870bfd8163711fa13b3000d8296b27369cc506fb665e9fabaccf1cef",
+      "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C2_REVIEW/claim_boundary_body.md",
+      "body_file_sha256": "fbf3f5d9915a0aff05959e5372a848fac0abbac65b1d27ab07fad043a178aaa6",
+      "body_canonical_sha256": "fbf3f5d9915a0aff05959e5372a848fac0abbac65b1d27ab07fad043a178aaa6",
+      "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C2_REVIEW/claim_boundary_receipt.json",
+      "receipt_file_sha256": "a3cac6bcce025b7fb3e55c3fca4c4b581005e0cd2343f2257d92fb6f7353935e",
+      "boundary_attestation": {
+        "no_git_write": true,
+        "no_file_edits": true,
+        "no_checkout_mutation": true,
+        "no_target_contact": true,
+        "no_live_authority": true,
+        "no_pmu": true
+      },
+      "review_receipt": {
+        "schema": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEWER_RECEIPT_V2",
+        "issuer": "codex_subagent_read_only_review",
+        "receipt_kind": "detached_review_body_acknowledgment",
+        "thread_id": "019f6981-9b41-78e2-bc90-54849d98f2ec",
+        "agent_id": "019f6981-9b41-78e2-bc90-54849d98f2ec",
+        "role": "claim-boundary adjudicator",
+        "model": "GPT-5.6 Sol",
+        "review_body_sha256": "fbf3f5d9915a0aff05959e5372a848fac0abbac65b1d27ab07fad043a178aaa6",
+        "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+        "audited_commit": "0b15890e9a8cad95cee38a2d4a333fda8a00dd50",
+        "source_hashes_sha256": "489a66f073d111fda9ff09e09ee7aa4a7f5107541ce6bfb42d3b6d25af457124",
+        "source_bundle_sha256": "8008ae53870bfd8163711fa13b3000d8296b27369cc506fb665e9fabaccf1cef",
+        "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+        "no_git_write": true,
+        "no_file_edits": true,
+        "no_checkout_mutation": true,
+        "no_target_contact": true,
+        "no_live_authority": true,
+        "no_pmu": true,
+        "self_authored": false,
+        "evidence_origin": "codex_subagent_detached_receipt"
+      }
+    }
+  }
+}

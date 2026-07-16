@@ -1,0 +1,23 @@
+{
+  "schema": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEWER_RECEIPT_V2",
+  "issuer": "codex_subagent_read_only_review",
+  "receipt_kind": "detached_review_body_acknowledgment",
+  "thread_id": "019f6981-9b41-78e2-bc90-54849d98f2ec",
+  "agent_id": "019f6981-9b41-78e2-bc90-54849d98f2ec",
+  "role": "claim-boundary adjudicator",
+  "model": "GPT-5.6 Sol",
+  "review_body_sha256": "fbf3f5d9915a0aff05959e5372a848fac0abbac65b1d27ab07fad043a178aaa6",
+  "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+  "audited_commit": "0b15890e9a8cad95cee38a2d4a333fda8a00dd50",
+  "source_hashes_sha256": "489a66f073d111fda9ff09e09ee7aa4a7f5107541ce6bfb42d3b6d25af457124",
+  "source_bundle_sha256": "8008ae53870bfd8163711fa13b3000d8296b27369cc506fb665e9fabaccf1cef",
+  "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+  "no_git_write": true,
+  "no_file_edits": true,
+  "no_checkout_mutation": true,
+  "no_target_contact": true,
+  "no_live_authority": true,
+  "no_pmu": true,
+  "self_authored": false,
+  "evidence_origin": "codex_subagent_detached_receipt"
+}
