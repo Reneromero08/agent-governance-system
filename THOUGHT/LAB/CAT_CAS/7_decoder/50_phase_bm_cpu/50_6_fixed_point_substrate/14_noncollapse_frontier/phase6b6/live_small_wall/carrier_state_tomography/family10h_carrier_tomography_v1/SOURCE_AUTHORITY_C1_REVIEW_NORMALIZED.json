@@ -1,0 +1,156 @@
+{
+  "schema": "FAMILY10H_SOURCE_AUTHORITY_C1_REVIEW_NORMALIZED_V1",
+  "source_authority_commit": "49c26c028765a028133951566d8b4f65a0bde765",
+  "source_hashes_sha256": "6a706f9e5489bb03204f04db2d9f36527a8ebd0651d5705d7067b1619ff489af",
+  "source_bundle_sha256": "bd437cf5ba55ed69a5f190ce59ba71b1197fbeac1aa8e6462bd1b8cb44eb46a7",
+  "review_report_present": true,
+  "material_blockers": [
+    {
+      "id": "C1-PHYS-RUNTIME-IMMUTABILITY",
+      "originating_agent": "019f68f6-92b1-7861-8727-b36d459c7f7b",
+      "role": "physical sensor-authority auditor",
+      "mechanism": "The runtime binary is outside SOURCE_AUTHORITY_FILE_NAMES, so C1-to-evidence exact replay does not compare the runtime binary blob. A later evidence overlay could substitute the binary and coherently update mutable runtime receipt and manifest values.",
+      "consequence": "Final C1 immutability replay can preserve all nine source blobs while failing to preserve the binary actually used by the target-side manifest validation path.",
+      "minimal_repair": "Bind the runtime binary or deterministic C1 compile identity into final C1 immutability replay.",
+      "required_regression": "Mutate only the runtime binary in an evidence overlay while preserving the nine source blobs; final exact-object replay must fail."
+    },
+    {
+      "id": "C1-RECEIPT-SELF-HASH-UNSATISFIED",
+      "originating_agents": [
+        "019f68f6-92b1-7861-8727-b36d459c7f7b",
+        "019f68f6-dba1-7f41-91bc-e83a48767fed",
+        "019f68f7-b631-7dc3-b15c-0fcbedd1c193"
+      ],
+      "role": "multiple returned reviewers",
+      "mechanism": "The requested final_response_sha256 is defined as the SHA-256 of the exact complete response text that contains that same value. Reviewers refused to fabricate a self-referential fixed point and returned null in their own receipts.",
+      "consequence": "The returned receipts do not satisfy the implemented source-audit quorum requirement that final_response_sha256 be a 64-hex string.",
+      "minimal_repair": "Define a detached-envelope, excluded-field, or parent-computed digest convention prospectively; do not retroactively rewrite reviewer receipts.",
+      "required_regression": "Malformed, null, fabricated, or unverifiable response digest receipts must fail under the chosen prospective convention."
+    },
+    {
+      "id": "C1-CLAIM-BOUNDARY-NO-FINAL-RESPONSE",
+      "originating_agent": "019f68f7-c89d-7881-95bc-9271ab7c7da7",
+      "role": "claim-boundary adjudicator",
+      "mechanism": "The fourth dispatched reviewer did not return a complete final response after an interrupt-to-finalize request and was shut down without a report.",
+      "consequence": "The exact four-reviewer source-audit quorum is incomplete.",
+      "minimal_repair": "Run a fresh prospective claim-boundary reviewer under a corrected receipt digest contract.",
+      "required_regression": "A missing reviewer final response or missing reviewer receipt must fail source-audit quorum validation."
+    }
+  ],
+  "reviewer_verdicts": {
+    "physical_sensor_authority_auditor": {
+      "role": "physical sensor-authority auditor",
+      "agent_id": "019f68f6-92b1-7861-8727-b36d459c7f7b",
+      "model": "GPT-5",
+      "verdict": "MATERIAL_BLOCKER",
+      "final_response": true,
+      "audited_commit": "49c26c028765a028133951566d8b4f65a0bde765",
+      "source_hashes_sha256": "6a706f9e5489bb03204f04db2d9f36527a8ebd0651d5705d7067b1619ff489af",
+      "source_bundle_sha256": "bd437cf5ba55ed69a5f190ce59ba71b1197fbeac1aa8e6462bd1b8cb44eb46a7",
+      "boundary_attestation": {
+        "no_git_write": true,
+        "no_target_contact": true
+      },
+      "review_receipt": {
+        "schema": "FAMILY10H_SOURCE_AUTHORITY_C1_REVIEWER_RECEIPT_V1",
+        "issuer": "codex_subagent_read_only_review",
+        "thread_id": "019f68f6-92b1-7861-8727-b36d459c7f7b",
+        "agent_id": "019f68f6-92b1-7861-8727-b36d459c7f7b",
+        "role": "physical sensor-authority auditor",
+        "model": "GPT-5",
+        "final_response_sha256": null,
+        "audited_commit": "49c26c028765a028133951566d8b4f65a0bde765",
+        "source_hashes_sha256": "6a706f9e5489bb03204f04db2d9f36527a8ebd0651d5705d7067b1619ff489af",
+        "source_bundle_sha256": "bd437cf5ba55ed69a5f190ce59ba71b1197fbeac1aa8e6462bd1b8cb44eb46a7",
+        "no_git_write": true,
+        "no_file_edits": true,
+        "no_checkout_mutation": true,
+        "no_target_contact": true,
+        "no_live_authority": true,
+        "no_pmu": true,
+        "self_authored": false,
+        "evidence_origin": "codex_subagent_final_response"
+      }
+    },
+    "discovery_transport_custody_auditor": {
+      "role": "discovery transport and custody auditor",
+      "agent_id": "019f68f6-dba1-7f41-91bc-e83a48767fed",
+      "model": "Codex (GPT-5)",
+      "verdict": "MATERIAL_BLOCKER",
+      "final_response": true,
+      "audited_commit": "49c26c028765a028133951566d8b4f65a0bde765",
+      "source_hashes_sha256": "6a706f9e5489bb03204f04db2d9f36527a8ebd0651d5705d7067b1619ff489af",
+      "source_bundle_sha256": "bd437cf5ba55ed69a5f190ce59ba71b1197fbeac1aa8e6462bd1b8cb44eb46a7",
+      "boundary_attestation": {
+        "no_git_write": true,
+        "no_target_contact": true
+      },
+      "review_receipt": {
+        "schema": "FAMILY10H_SOURCE_AUTHORITY_C1_REVIEWER_RECEIPT_V1",
+        "issuer": "codex_subagent_read_only_review",
+        "thread_id": "019f68f6-dba1-7f41-91bc-e83a48767fed",
+        "agent_id": "019f68f6-dba1-7f41-91bc-e83a48767fed",
+        "role": "discovery transport and custody auditor",
+        "model": "Codex (GPT-5)",
+        "final_response_sha256": null,
+        "audited_commit": "49c26c028765a028133951566d8b4f65a0bde765",
+        "source_hashes_sha256": "6a706f9e5489bb03204f04db2d9f36527a8ebd0651d5705d7067b1619ff489af",
+        "source_bundle_sha256": "bd437cf5ba55ed69a5f190ce59ba71b1197fbeac1aa8e6462bd1b8cb44eb46a7",
+        "no_git_write": true,
+        "no_file_edits": true,
+        "no_checkout_mutation": true,
+        "no_target_contact": true,
+        "no_live_authority": true,
+        "no_pmu": true,
+        "self_authored": false,
+        "evidence_origin": "codex_subagent_final_response"
+      }
+    },
+    "source_bundle_evidence_auditor": {
+      "role": "source/bundle and evidence auditor",
+      "agent_id": "019f68f7-b631-7dc3-b15c-0fcbedd1c193",
+      "model": "Codex (GPT-5)",
+      "verdict": "MATERIAL_BLOCKER",
+      "final_response": true,
+      "audited_commit": "49c26c028765a028133951566d8b4f65a0bde765",
+      "source_hashes_sha256": "6a706f9e5489bb03204f04db2d9f36527a8ebd0651d5705d7067b1619ff489af",
+      "source_bundle_sha256": "bd437cf5ba55ed69a5f190ce59ba71b1197fbeac1aa8e6462bd1b8cb44eb46a7",
+      "boundary_attestation": {
+        "no_git_write": true,
+        "no_target_contact": true
+      },
+      "review_receipt": {
+        "schema": "FAMILY10H_SOURCE_AUTHORITY_C1_REVIEWER_RECEIPT_V1",
+        "issuer": "codex_subagent_read_only_review",
+        "thread_id": "019f68f7-b631-7dc3-b15c-0fcbedd1c193",
+        "agent_id": "019f68f7-b631-7dc3-b15c-0fcbedd1c193",
+        "role": "source/bundle and evidence auditor",
+        "model": "Codex (GPT-5)",
+        "final_response_sha256": null,
+        "audited_commit": "49c26c028765a028133951566d8b4f65a0bde765",
+        "source_hashes_sha256": "6a706f9e5489bb03204f04db2d9f36527a8ebd0651d5705d7067b1619ff489af",
+        "source_bundle_sha256": "bd437cf5ba55ed69a5f190ce59ba71b1197fbeac1aa8e6462bd1b8cb44eb46a7",
+        "no_git_write": true,
+        "no_file_edits": true,
+        "no_checkout_mutation": true,
+        "no_target_contact": true,
+        "no_live_authority": true,
+        "no_pmu": true,
+        "self_authored": false,
+        "evidence_origin": "codex_subagent_final_response"
+      }
+    },
+    "claim_boundary_adjudicator": {
+      "role": "claim-boundary adjudicator",
+      "agent_id": "019f68f7-c89d-7881-95bc-9271ab7c7da7",
+      "model": "gpt-5.6-sol",
+      "verdict": "MATERIAL_BLOCKER",
+      "final_response": false,
+      "audited_commit": "49c26c028765a028133951566d8b4f65a0bde765",
+      "source_hashes_sha256": "6a706f9e5489bb03204f04db2d9f36527a8ebd0651d5705d7067b1619ff489af",
+      "source_bundle_sha256": "bd437cf5ba55ed69a5f190ce59ba71b1197fbeac1aa8e6462bd1b8cb44eb46a7",
+      "boundary_attestation": null,
+      "review_receipt": null
+    }
+  }
+}
