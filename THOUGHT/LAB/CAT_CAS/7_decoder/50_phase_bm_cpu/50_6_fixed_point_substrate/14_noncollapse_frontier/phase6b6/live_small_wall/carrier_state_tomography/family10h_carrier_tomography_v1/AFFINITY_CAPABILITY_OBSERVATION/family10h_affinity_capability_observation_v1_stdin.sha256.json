@@ -1,0 +1,107 @@
+{
+  "schema": "FAMILY10H_AFFINITY_CAPABILITY_OBSERVATION_RECEIPT_V1",
+  "observation_file": "family10h_affinity_capability_observation_v1_stdin.json",
+  "observation_sha256": "a516a56aed1154f2442cb68b4e0a25a79a01cb6dab4a1bf9cc6815b7095db4c2",
+  "source_branch": "codex/family10h-tomography-repair",
+  "source_branch_head_before_contact": "b7ab2017a8973bdeb2c00d192948211add2ee43a",
+  "origin_branch_head_before_contact": "b7ab2017a8973bdeb2c00d192948211add2ee43a",
+  "prior_failed_observation_commit": "b7ab2017a8973bdeb2c00d192948211add2ee43a",
+  "c4_source_commit": "092d0a655e94d7c00f69efc1236cf1c8a2896ee1",
+  "normalized_command_sha256": "b7326aa3daceac0cc5bd89b6260b6534903d700f94e339b328e4b056f3684514",
+  "remote_program_sha256": "006ca85166809ac9a2b4067354c39e2633ca839c1fe9d8d36ac990fd3d98f481",
+  "target": "root@192.168.137.100",
+  "target_contact_count_for_this_observation": 1,
+  "known_cumulative_lane_target_contacts_before_observation": 2,
+  "known_cumulative_lane_target_contacts_after_observation": 3,
+  "sensor_inventory_count": 0,
+  "live_invocation_count": 0,
+  "pmu_acquisition_count": 0,
+  "runtime_launch_count": 0,
+  "tomography_invocation_count": 0,
+  "ssh_exit_code": 0,
+  "ssh_stderr": "",
+  "observation_stdout_bytes": 1254,
+  "observation_parse_passed": true,
+  "observation_passed": true,
+  "observation_parse_error": null,
+  "parsed_summary": {
+    "platform": {
+      "cpu4_family": 16,
+      "cpu4_present": true,
+      "cpu4_vendor": "AuthenticAMD",
+      "cpu5_family": 16,
+      "cpu5_present": true,
+      "cpu5_vendor": "AuthenticAMD",
+      "cpu_family": 16,
+      "processor_count": 6,
+      "vendor": "AuthenticAMD"
+    },
+    "parent_affinity_before": [
+      0,
+      1
+    ],
+    "parent_affinity_after": [
+      0,
+      1
+    ],
+    "parent_affinity_unchanged": true,
+    "cpu4": {
+      "affinity_after": [
+        4
+      ],
+      "child_affinity_before": [
+        0,
+        1
+      ],
+      "child_exit_code": 0,
+      "child_pid": 1602,
+      "errno": null,
+      "error": null,
+      "exception_class": null,
+      "observed_cpu": 4,
+      "observed_cpu_available": true,
+      "observed_cpu_matches": true,
+      "passed": true,
+      "readback_singleton": true,
+      "requested_cpu": 4,
+      "setaffinity_passed": true,
+      "wait_status": 0,
+      "waitpid": 1602
+    },
+    "cpu5": {
+      "affinity_after": [
+        5
+      ],
+      "child_affinity_before": [
+        0,
+        1
+      ],
+      "child_exit_code": 0,
+      "child_pid": 1603,
+      "errno": null,
+      "error": null,
+      "exception_class": null,
+      "observed_cpu": 5,
+      "observed_cpu_available": true,
+      "observed_cpu_matches": true,
+      "passed": true,
+      "readback_singleton": true,
+      "requested_cpu": 5,
+      "setaffinity_passed": true,
+      "wait_status": 0,
+      "waitpid": 1603
+    },
+    "passed": true
+  },
+  "command_normalized": {
+    "stdin_sha256": "006ca85166809ac9a2b4067354c39e2633ca839c1fe9d8d36ac990fd3d98f481",
+    "argv": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "root@192.168.137.100",
+      "python3",
+      "-"
+    ]
+  }
+}
