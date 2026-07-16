@@ -10,7 +10,7 @@
       "C:\\Windows\\system32\\wsl.EXE",
       "gcc"
     ],
-    "offline_binary_sha256": "0076789f9cfa4769f9abf9b829b478b42bc7d762f9cfab2104e008fa50084576",
+    "offline_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
     "passed": true,
     "returncode": 0,
     "runtime_command": [
@@ -28,7 +28,7 @@
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST_V1"
   },
   "runtime_returncode": 0,
-  "runtime_self_test_sha256": "abf45b6ead7505bb4aaa006842f6723b683f4039ef0fccdbe972c4760432d69a",
+  "runtime_self_test_sha256": "04f8a3c49faf75a1983172fefdaeb05fda5d2b1d767aa2de7df84d922685eb95",
   "runtime_stderr": "",
   "runtime_stdout": "{\"schema\":\"FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST_V1\",\"passed\":true}\n",
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST_RECEIPT_V1"

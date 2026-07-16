@@ -147,6 +147,8 @@ static uint64_t mix_step(uint64_t acc, uint32_t index, uint32_t lane_tag) {
 }
 
 static volatile uint64_t f10_query_sink = 0;
+static uint32_t f10_query_trace_tags[4];
+static size_t f10_query_trace_len = 0U;
 
 uint32_t f10_carrier_affine_line(uint32_t line_index) {
     return (uint32_t)(((uint64_t)F10_TOMO_AFFINE_MULTIPLIER * (uint64_t)line_index + F10_TOMO_AFFINE_OFFSET) % F10_TOMO_LINE_COUNT);
@@ -212,12 +214,31 @@ int f10_carrier_prepare(F10CarrierPreparation prep, F10CarrierState *state) {
 static uint64_t query_lane(const uint8_t *lane, uint32_t tag) {
     uint64_t acc = UINT64_C(0xCBF29CE484222325) ^ (uint64_t)tag;
     uint32_t i = 0;
+    if (f10_query_trace_len < sizeof(f10_query_trace_tags) / sizeof(f10_query_trace_tags[0])) {
+        f10_query_trace_tags[f10_query_trace_len] = tag;
+    }
+    ++f10_query_trace_len;
     for (i = 0; i < F10_TOMO_LINE_COUNT; ++i) {
         uint32_t offset = f10_carrier_affine_line(i) * 64U;
         acc = mix_step(acc ^ lane[offset], i, tag);
     }
     f10_query_sink ^= acc;
     return acc;
+}
+
+static uint64_t query_pair_ordered(const uint8_t *first_lane, uint32_t first_tag, const uint8_t *second_lane, uint32_t second_tag) {
+    uint64_t first = query_lane(first_lane, first_tag);
+    uint64_t second = query_lane(second_lane, second_tag);
+    return first ^ (second << 1);
+}
+
+static void query_trace_reset(void) {
+    memset(f10_query_trace_tags, 0, sizeof(f10_query_trace_tags));
+    f10_query_trace_len = 0U;
+}
+
+static int query_trace_pair_is(uint32_t first_tag, uint32_t second_tag) {
+    return f10_query_trace_len == 2U && f10_query_trace_tags[0] == first_tag && f10_query_trace_tags[1] == second_tag;
 }
 
 uint64_t f10_carrier_query(const F10CarrierState *state, const char *query_name) {
@@ -235,16 +256,26 @@ uint64_t f10_carrier_query_mapped(const F10CarrierState *state, const char *quer
         return query_lane(mapped_query_lane(state, 1, map_variant), 0xB0U);
     }
     if (strcmp(query_name, "query_A_then_B") == 0) {
-        return query_lane(mapped_query_lane(state, 0, map_variant), 0xA0U) ^ (query_lane(mapped_query_lane(state, 1, map_variant), 0xB0U) << 1);
+        return query_pair_ordered(
+            mapped_query_lane(state, 0, map_variant),
+            0xA0U,
+            mapped_query_lane(state, 1, map_variant),
+            0xB0U
+        );
     }
     if (strcmp(query_name, "query_B_then_A") == 0) {
-        return query_lane(mapped_query_lane(state, 1, map_variant), 0xB0U) ^ (query_lane(mapped_query_lane(state, 0, map_variant), 0xA0U) << 1);
+        return query_pair_ordered(
+            mapped_query_lane(state, 1, map_variant),
+            0xB0U,
+            mapped_query_lane(state, 0, map_variant),
+            0xA0U
+        );
     }
     if (strcmp(query_name, "query_sham") == 0) {
         return query_lane(state->sham, 0x50U);
     }
     if (strcmp(query_name, "carrier_off") == 0) {
-        return query_lane(state->dummy_a, 0xC0U) ^ (query_lane(state->dummy_b, 0xD0U) << 1);
+        return query_pair_ordered(state->dummy_a, 0xC0U, state->dummy_b, 0xD0U);
     }
     return 0;
 }
@@ -274,6 +305,8 @@ int f10_carrier_runtime_self_test(void) {
         F10CarrierState state;
         uint64_t a = 0;
         uint64_t b = 0;
+        uint64_t ab = 0;
+        uint64_t ba = 0;
         prep.q = q_values[i];
         prep.bank_a_work = (uint32_t)(F10_TOMO_M + prep.q);
         prep.bank_b_work = (uint32_t)(F10_TOMO_M - prep.q);
@@ -290,6 +323,16 @@ int f10_carrier_runtime_self_test(void) {
         a = f10_carrier_query_mapped(&state, "query_A", prep.map_variant);
         b = f10_carrier_query_mapped(&state, "query_B", prep.map_variant);
         if (a == 0U || b == 0U || a == b) {
+            return 0;
+        }
+        query_trace_reset();
+        ab = f10_carrier_query_mapped(&state, "query_A_then_B", prep.map_variant);
+        if (ab == 0U || ab != (a ^ (b << 1)) || !query_trace_pair_is(0xA0U, 0xB0U)) {
+            return 0;
+        }
+        query_trace_reset();
+        ba = f10_carrier_query_mapped(&state, "query_B_then_A", prep.map_variant);
+        if (ba == 0U || ba != (b ^ (a << 1)) || !query_trace_pair_is(0xB0U, 0xA0U)) {
             return 0;
         }
     }
