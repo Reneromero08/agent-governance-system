@@ -1,0 +1,106 @@
+{
+  "$id": "urn:cat-cas:recursive-phase-tree:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "edges": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "child_id": {
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+            "type": "string"
+          },
+          "modulation_index": {
+            "maximum": 4.0,
+            "minimum": 0.0,
+            "type": "number"
+          },
+          "parent_id": {
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "child_id",
+          "modulation_index",
+          "parent_id"
+        ],
+        "type": "object"
+      },
+      "maxItems": 63,
+      "type": "array"
+    },
+    "global_spin_phase_rad": {
+      "enum": [
+        0.0,
+        3.141592653589793
+      ],
+      "type": "number"
+    },
+    "nodes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "frequency_hz": {
+            "exclusiveMaximum": 24000.0,
+            "exclusiveMinimum": 0.0,
+            "type": "number"
+          },
+          "node_id": {
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+            "type": "string"
+          },
+          "phase_rad": {
+            "maximum": 6.283185307179586,
+            "minimum": -6.283185307179586,
+            "type": "number"
+          }
+        },
+        "required": [
+          "frequency_hz",
+          "node_id",
+          "phase_rad"
+        ],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "root_id": {
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+      "type": "string"
+    },
+    "sample_rate_hz": {
+      "const": 48000,
+      "type": "integer"
+    },
+    "schema": {
+      "const": "recursive_phase_tree_v1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "edges",
+    "global_spin_phase_rad",
+    "nodes",
+    "root_id",
+    "sample_rate_hz",
+    "schema"
+  ],
+  "title": "CAT_CAS Recursive Phase Tree v1",
+  "type": "object",
+  "x-semantic-constraints": [
+    "node_id values are unique",
+    "edges reference declared nodes",
+    "the graph is connected and acyclic",
+    "the root has no parent and each other node has exactly one parent",
+    "tree depth is at most 16",
+    "JSON numbers are finite and booleans are not numbers"
+  ]
+}

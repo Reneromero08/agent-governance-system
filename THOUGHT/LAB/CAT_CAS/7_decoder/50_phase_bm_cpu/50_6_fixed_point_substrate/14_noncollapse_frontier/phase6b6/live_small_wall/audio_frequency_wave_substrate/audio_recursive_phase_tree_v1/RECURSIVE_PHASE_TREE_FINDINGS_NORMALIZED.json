@@ -1,0 +1,135 @@
+{
+  "claim_ceiling": "SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY",
+  "evidence_identity": {
+    "fixture_count": 3,
+    "fixture_manifest_sha256": "7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa",
+    "fixture_set_sha256": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+    "fixture_total_bytes": 144132,
+    "reference_result_sha256": "46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab",
+    "reference_tests_sha256": "3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c",
+    "schema_sha256": "41648ef97b94a4ae0b00a95d3fbbd081158183671626ec8ccf5473b77681b974",
+    "source_git_blob_sha1": "956adb0ae8e84c091c1dc1e3de650be374fa96d1",
+    "source_sha256": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887",
+    "tests_failed": 0,
+    "tests_passed": 38
+  },
+  "findings": [
+    {
+      "canonical_id": "TREE_WAV_SEMANTIC_BINDING_GAP",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "MATERIAL",
+      "resolution": "Every committed tree equals its declared role and exactly renders the committed minimal WAV bytes; substitutions hard-fail.",
+      "source_finding_ids": [
+        "S02-M1",
+        "AUD-RPT-03-M1"
+      ]
+    },
+    {
+      "canonical_id": "NATIVE_AND_FLOAT32_ENVELOPE_MISMATCH",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "MATERIAL",
+      "resolution": "The charter separates native complex128 1e-12 from committed float32 2e-7 restoration and Z2 envelopes.",
+      "source_finding_ids": [
+        "AUD-RPT-03-M2"
+      ]
+    },
+    {
+      "canonical_id": "STRICT_JSON_DUPLICATE_AND_OVERFLOW_GAP",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "MATERIAL",
+      "resolution": "Duplicate keys reject through object-pair validation and oversized numeric conversion fails as controlled ValueError.",
+      "source_finding_ids": [
+        "S02-M2"
+      ]
+    },
+    {
+      "canonical_id": "COMMITTED_WAV_LAYOUT_GAP",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "MATERIAL",
+      "resolution": "Committed fixtures require exactly fmt then data; reordered and extra chunks fail while metadata remains an adversary-only path.",
+      "source_finding_ids": [
+        "S02-M3"
+      ]
+    },
+    {
+      "canonical_id": "SCHEMA_IDENTIFIER_LENGTH_MISMATCH",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "MATERIAL",
+      "resolution": "Published schema and executable parser both enforce the 64-character ASCII identifier limit.",
+      "source_finding_ids": [
+        "S02-M4"
+      ]
+    },
+    {
+      "canonical_id": "CROSS_ENVIRONMENT_EXACT_FLOAT_POLICY_GAP",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "MATERIAL",
+      "resolution": "Environment strings are informational; structure and statuses compare exactly and numeric leaves use frozen 5e-12 atol/rtol.",
+      "source_finding_ids": [
+        "S02-M5"
+      ]
+    },
+    {
+      "canonical_id": "LANE_STATE_STALE_CANDIDATE_RECEIPT",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "MATERIAL",
+      "resolution": "Lane state now binds the 38-test evidence, four reviews, claim ceiling, nonpromotions, and next exact boundary.",
+      "source_finding_ids": [
+        "S02-M6"
+      ]
+    },
+    {
+      "canonical_id": "GLOBAL_Z2_DUPLICATE_WAVEFORM_EVIDENCE",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "NONMATERIAL",
+      "resolution": "Internal Z2 preservation is now an exact canonical tree-structure comparison after removing only global orientation.",
+      "source_finding_ids": [
+        "AUD-RPT-01-N1",
+        "AUD-RPT-03-N3"
+      ]
+    },
+    {
+      "canonical_id": "DECLARATIVE_SCALAR_FEEDBACK_TEST_SCOPE",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "NONMATERIAL",
+      "resolution": "The test is narrowed to the source-verifiable fact that R0 implements no native update or temporal recurrence.",
+      "source_finding_ids": [
+        "AUD-RPT-01-N2"
+      ]
+    },
+    {
+      "canonical_id": "SPECTRUM_CONTROL_WORDING_AMBIGUITY",
+      "disposition": "RESOLVED",
+      "materiality_at_discovery": "NONMATERIAL",
+      "resolution": "Claim law explicitly labels the spectrum adversary non-tree and denies a same-spectrum distinct-recursive-tree claim.",
+      "source_finding_ids": [
+        "AUD-RPT-04-N1"
+      ]
+    }
+  ],
+  "open_findings": [],
+  "residual_observations": [
+    "The parent-child phase-scramble gap is 0.021297118398 against the frozen 0.02 minimum and is not described as a broad robustness margin.",
+    "Wrong-hierarchy and subtree-permutation tests share the same three-node A-versus-B geometry change and are intentionally redundant.",
+    "No exact same-spectrum different-hierarchy recursive-tree pair is established; the spectrum adversary is non-tree."
+  ],
+  "reviewers": [
+    {
+      "reviewer_id": "AUD-RPT-01-MECHANISM",
+      "verdict": "PASS"
+    },
+    {
+      "reviewer_id": "AUD-RPT-02-SERIALIZATION",
+      "verdict": "PASS"
+    },
+    {
+      "reviewer_id": "AUD-RPT-03-ADVERSARY",
+      "verdict": "PASS"
+    },
+    {
+      "reviewer_id": "AUD-RPT-04-CLAIMS",
+      "verdict": "PASS"
+    }
+  ],
+  "schema": "recursive_phase_tree_findings_normalized_v1"
+}

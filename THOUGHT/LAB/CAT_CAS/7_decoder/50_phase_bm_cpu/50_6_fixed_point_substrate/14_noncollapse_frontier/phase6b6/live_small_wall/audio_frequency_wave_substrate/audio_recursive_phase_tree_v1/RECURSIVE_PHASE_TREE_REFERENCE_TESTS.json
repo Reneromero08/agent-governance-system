@@ -1,0 +1,144 @@
+{
+  "edge_conventions": {
+    "canonical_json": "UTF-8, sorted keys, indent=2, newline terminated, no NaN/Infinity",
+    "diagnostic_feedback": "no diagnostic scalar feeds any native state update",
+    "exact_spectrum_recursive_pair": "not claimed constructible; spectrum control is explicitly non-tree",
+    "global_orientation": "exactly 0 or pi applied to the complete rendered tree",
+    "portable_result_comparison": "same structure and statuses; numeric leaves use frozen atol/rtol",
+    "reordered_inverse": "same node multiset with hierarchy-B parent-child geometry",
+    "wav": "minimal RIFF, fmt then data, stereo I/Q IEEE float32, 48000 Hz",
+    "wrong_inverse": "hierarchy-A with local phases cyclically permuted in canonical node-ID order"
+  },
+  "numeric_envelope": {
+    "correct_inverse_max_error": 2e-07,
+    "energy_relative_error": 1e-07,
+    "float32_complex_max_error": 2e-07,
+    "hierarchy_phase_gap_min_rad": 0.1,
+    "matched_exact_min": 0.999999999999,
+    "matched_gap_min": 0.02,
+    "mutation_l2_min": 1.0,
+    "portable_metric_atol": 5e-12,
+    "portable_metric_rtol": 5e-12,
+    "spectrum_non_tree_response_max": 0.2,
+    "spectrum_relative_error": 1e-12,
+    "wrong_inverse_max_error_min": 0.05,
+    "wrong_query_magnitude_max": 0.98
+  },
+  "schema": "recursive_phase_tree_reference_tests_v2",
+  "tests": [
+    {
+      "id": "recursive_depth_present"
+    },
+    {
+      "id": "same_node_multiset_different_parent_child_geometry"
+    },
+    {
+      "id": "strict_parser_round_trip_all_declared_trees"
+    },
+    {
+      "id": "duplicate_node_rejected"
+    },
+    {
+      "id": "duplicate_json_key_rejected"
+    },
+    {
+      "id": "cycle_rejected"
+    },
+    {
+      "id": "malformed_edge_rejected"
+    },
+    {
+      "id": "nonfinite_number_rejected"
+    },
+    {
+      "id": "oversized_integer_rejected"
+    },
+    {
+      "id": "nyquist_rejected"
+    },
+    {
+      "id": "unsafe_schema_rejected"
+    },
+    {
+      "id": "oversized_identifier_rejected"
+    },
+    {
+      "id": "unexpected_field_rejected"
+    },
+    {
+      "id": "canonical_serialization_mutation_rejected"
+    },
+    {
+      "id": "committed_wav_matches_declared_recursive_tree"
+    },
+    {
+      "id": "fixture_substitution_rejected"
+    },
+    {
+      "id": "committed_wav_reordered_chunks_rejected"
+    },
+    {
+      "id": "committed_wav_extra_chunk_rejected"
+    },
+    {
+      "id": "committed_wav_unit_modulus"
+    },
+    {
+      "id": "principal_time_magnitude_equal"
+    },
+    {
+      "id": "principal_energy_equal"
+    },
+    {
+      "id": "global_z2_rotates_complete_tree"
+    },
+    {
+      "id": "global_z2_preserves_internal_geometry"
+    },
+    {
+      "id": "amplitude_only_decoder_is_null"
+    },
+    {
+      "id": "hierarchy_changes_phase_geometry"
+    },
+    {
+      "id": "exact_hierarchy_query"
+    },
+    {
+      "id": "wrong_hierarchy_query"
+    },
+    {
+      "id": "subtree_permutation_changes_response"
+    },
+    {
+      "id": "parent_child_phase_scramble_changes_response"
+    },
+    {
+      "id": "flat_multitone_replacement_fails_exact_query"
+    },
+    {
+      "id": "spectrum_magnitude_only_decoder_is_nonidentifying"
+    },
+    {
+      "id": "borrowed_tape_is_nontrivially_mutated"
+    },
+    {
+      "id": "correct_inverse_restores"
+    },
+    {
+      "id": "wrong_inverse_fails_restoration"
+    },
+    {
+      "id": "reordered_inverse_fails_restoration"
+    },
+    {
+      "id": "metadata_stripping_invariant"
+    },
+    {
+      "id": "manifest_binds_committed_fixture_bytes"
+    },
+    {
+      "id": "no_native_update_implemented"
+    }
+  ]
+}

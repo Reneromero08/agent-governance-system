@@ -1,8 +1,8 @@
 # Recursive Phase Tree Charter
 
-**Status:** `FROZEN_THIN_REFERENCE_CONTRACT`  
-**Package:** `audio_recursive_phase_tree_v1`  
-**Operation:** software architecture and deterministic reference only  
+**Status:** `FROZEN_BOUNDED_R0_REFERENCE_CONTRACT`<br>
+**Package:** `audio_recursive_phase_tree_v1`<br>
+**Operation:** software architecture and deterministic reference only<br>
 **Physical authority:** none
 
 ## 1. Primitive
@@ -125,18 +125,25 @@ The complete tree remains the process-object before that boundary.
 ## 7. Frozen Thin-Slice Envelope
 
 ```text
-sample rate:             48000 Hz
-frame duration:          0.125 s
-samples:                 6000
-numeric field:           float64 / complex128
-tree depth:              at least 3
-carrier amplitude:       unit modulus
-correct inverse tol:     1e-12 max absolute error
-global Z2 tol:           1e-12 max absolute error
-hierarchy phase gap:     at least 0.10 rad
-cross-query magnitude:   at most 0.98
-wrong-inverse error:     at least 0.05
+sample rate:                         48000 Hz
+frame duration:                      0.125 s
+samples:                             6000
+native numeric field:                float64 / complex128
+committed fixture field:             stereo I/Q IEEE float32 little-endian
+tree depth:                          at least 3
+carrier amplitude:                   unit modulus
+native correct-inverse tolerance:    1e-12 max absolute error
+native global-Z2 tolerance:          1e-12 max absolute error
+committed-WAV complex tolerance:     2e-7 max absolute error
+committed-WAV restoration tolerance: 2e-7 max absolute error
+hierarchy phase gap:                 at least 0.10 rad
+cross-query magnitude:               at most 0.98
+wrong-inverse error:                 at least 0.05
 ```
+
+The native complex128 envelope and committed float32 envelope are distinct. Results
+scored from parsed WAV bytes use the committed-WAV tolerance; they may not be adjudicated
+against the tighter in-memory envelope or promoted as exact physical restoration.
 
 These are software-reference thresholds only. They are not physical thresholds.
 
@@ -154,7 +161,33 @@ borrowed tape is actually mutated
 correct inverse restores
 wrong hierarchy inverse fails
 canonical identity is deterministic
+strict schema and canonical parser close
+committed tree bytes match the declared fixture role
+committed WAV bytes exactly match deterministic tree rendering
+duplicate keys, cycles, malformed edges, nonfinite and unsafe inputs reject
+substituted or nonminimal committed WAVs reject
+subtree, phase-scramble, flat-bank, amplitude and spectrum controls close
+wrong and reordered inverses fail
+metadata stripping is invariant without admitting metadata into committed fixtures
 ```
+
+## 8A. Committed-Byte Custody
+
+Every declared tree is stored as canonical, newline-terminated JSON and every complete
+beam is stored as a minimal `fmt ` then `data` stereo I/Q IEEE float32 WAV. Verification
+must prove all of the following before scoring:
+
+```text
+tree bytes equal the source-declared role tree
+tree digest and geometry identity close
+WAV bytes exactly equal the deterministic render of that committed tree
+parsed render error is within the frozen float32 envelope
+RIFF chunks are exactly fmt then data
+manifest path, role, hashes, sizes, metrics, orientation, and geometry close
+```
+
+The generic parser may accept an added metadata chunk only for the stripping adversary.
+Such a file is forbidden as a committed fixture.
 
 ## 9. Claim Ceiling
 

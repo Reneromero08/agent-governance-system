@@ -1,0 +1,35 @@
+{
+  "edges": [
+    {
+      "child_id": "leaf",
+      "modulation_index": 0.37,
+      "parent_id": "middle"
+    },
+    {
+      "child_id": "middle",
+      "modulation_index": 0.71,
+      "parent_id": "root"
+    }
+  ],
+  "global_spin_phase_rad": 3.141592653589793,
+  "nodes": [
+    {
+      "frequency_hz": 47.0,
+      "node_id": "leaf",
+      "phase_rad": 0.31
+    },
+    {
+      "frequency_hz": 233.0,
+      "node_id": "middle",
+      "phase_rad": -0.22
+    },
+    {
+      "frequency_hz": 1237.0,
+      "node_id": "root",
+      "phase_rad": 0.17
+    }
+  ],
+  "root_id": "root",
+  "sample_rate_hz": 48000,
+  "schema": "recursive_phase_tree_v1"
+}

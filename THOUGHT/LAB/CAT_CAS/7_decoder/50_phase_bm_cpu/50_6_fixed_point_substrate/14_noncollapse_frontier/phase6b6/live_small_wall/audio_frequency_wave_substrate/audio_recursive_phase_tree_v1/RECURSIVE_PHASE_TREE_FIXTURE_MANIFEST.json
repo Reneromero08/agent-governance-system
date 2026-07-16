@@ -1,0 +1,105 @@
+{
+  "fixture_count": 3,
+  "fixture_set_sha256": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+  "fixtures": [
+    {
+      "byte_count": 48044,
+      "channels": 2,
+      "complex_energy": 6000.00000109,
+      "complex_peak": 1.00000003944,
+      "complex_rms": 1.00000000009,
+      "declared_tree_bytes_match": true,
+      "deterministic_wav_bytes_match": true,
+      "dtype": "ieee_float32_le",
+      "expected_wav_sha256": "1046527027bba627a9bd914c1983cd7482247f4fe0752422d7503e253c8e7131",
+      "generator_parameters": {
+        "formula": "exp(i*Phi_root(t)+i*global_spin_phase_rad)",
+        "frame_seconds": 0.125,
+        "generator": "recursive_phase_tree_reference_v2"
+      },
+      "global_orientation": "plus",
+      "global_spin_phase_rad": 0.0,
+      "parent_child_geometry_identity": "a66358d0570dce381109011f11c63362c19427976277ddaf2ecc53853970dfe6",
+      "parsed_render_max_error": 4.08620897433e-08,
+      "path": "fixtures/hierarchy_a_plus_iq.wav",
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "role": "hierarchy_a_global_plus_complete_tree",
+      "sample_count": 6000,
+      "sample_rate_hz": 48000,
+      "sha256": "1046527027bba627a9bd914c1983cd7482247f4fe0752422d7503e253c8e7131",
+      "tree_digest": "fe745b5e6a335a6813bd80e561ecc9293b7a1ca8c52cd6a4742f6453cf5c06df",
+      "tree_path": "fixtures/hierarchy_a_plus.tree.json",
+      "tree_sha256": "dff40cf1003953d11ddf9d240f799363841f8bdebc3ae2d081bee198565d9d2e"
+    },
+    {
+      "byte_count": 48044,
+      "channels": 2,
+      "complex_energy": 5999.99999848,
+      "complex_peak": 1.00000004017,
+      "complex_rms": 0.999999999873,
+      "declared_tree_bytes_match": true,
+      "deterministic_wav_bytes_match": true,
+      "dtype": "ieee_float32_le",
+      "expected_wav_sha256": "2d0bf58c52326fe6f33ba48abd3ea78fc42722d97d5377782f485ab92d757c0e",
+      "generator_parameters": {
+        "formula": "exp(i*Phi_root(t)+i*global_spin_phase_rad)",
+        "frame_seconds": 0.125,
+        "generator": "recursive_phase_tree_reference_v2"
+      },
+      "global_orientation": "plus",
+      "global_spin_phase_rad": 0.0,
+      "parent_child_geometry_identity": "5b923443537e66e633a5d7dbd6019a7b28750b6f57344d2f5942156c51059532",
+      "parsed_render_max_error": 4.15862671657e-08,
+      "path": "fixtures/hierarchy_b_plus_iq.wav",
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "role": "hierarchy_b_global_plus_complete_tree",
+      "sample_count": 6000,
+      "sample_rate_hz": 48000,
+      "sha256": "2d0bf58c52326fe6f33ba48abd3ea78fc42722d97d5377782f485ab92d757c0e",
+      "tree_digest": "111425f51dc50ceaeb30e01dec958a33fe9ecd5a6a0b0155e84fb83cee0d2521",
+      "tree_path": "fixtures/hierarchy_b_plus.tree.json",
+      "tree_sha256": "c25b7b5be4e844f6b6cf826e59e32decb922a1f76bafd3616d199e0e20ec129f"
+    },
+    {
+      "byte_count": 48044,
+      "channels": 2,
+      "complex_energy": 6000.00000109,
+      "complex_peak": 1.00000003944,
+      "complex_rms": 1.00000000009,
+      "declared_tree_bytes_match": true,
+      "deterministic_wav_bytes_match": true,
+      "dtype": "ieee_float32_le",
+      "expected_wav_sha256": "8c0d65918707b3f81035755238c94d3d76bf3068762ef1e7c2ff69bc7e10d5bc",
+      "generator_parameters": {
+        "formula": "exp(i*Phi_root(t)+i*global_spin_phase_rad)",
+        "frame_seconds": 0.125,
+        "generator": "recursive_phase_tree_reference_v2"
+      },
+      "global_orientation": "minus",
+      "global_spin_phase_rad": 3.141592653589793,
+      "parent_child_geometry_identity": "a66358d0570dce381109011f11c63362c19427976277ddaf2ecc53853970dfe6",
+      "parsed_render_max_error": 4.08620931199e-08,
+      "path": "fixtures/hierarchy_a_minus_iq.wav",
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "role": "hierarchy_a_global_minus_complete_tree",
+      "sample_count": 6000,
+      "sample_rate_hz": 48000,
+      "sha256": "8c0d65918707b3f81035755238c94d3d76bf3068762ef1e7c2ff69bc7e10d5bc",
+      "tree_digest": "ca25df069d6048272d05e46185441eb9cdb4921738c7502d45e2dbbd152a30ba",
+      "tree_path": "fixtures/hierarchy_a_minus.tree.json",
+      "tree_sha256": "c76f84cba57b68b5a7dd13b4ff0e7a1717abfc5c5955d4fdb20e749b82e2d765"
+    }
+  ],
+  "generator": "recursive_phase_tree_reference_v2",
+  "schema": "recursive_phase_tree_fixture_manifest_v1",
+  "total_fixture_bytes": 144132
+}
