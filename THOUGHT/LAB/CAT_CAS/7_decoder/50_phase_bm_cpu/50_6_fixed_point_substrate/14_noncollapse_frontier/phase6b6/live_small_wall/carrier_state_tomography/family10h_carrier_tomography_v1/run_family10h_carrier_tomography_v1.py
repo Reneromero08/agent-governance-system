@@ -73,7 +73,7 @@ GENERATED_RECEIPTS = [
     MANIFEST_SHA_PATH,
 ]
 
-EXPECTED_STARTING_HEAD = "836d53a81225fb37406528f1c25e87e208aa9495"
+EXPECTED_STARTING_HEAD = "7647e872122e75edd07bdd423d9493a2796c8fd9"
 COMMIT_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_COMMIT_BINDING"
 MANIFEST_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_MANIFEST_SHA256"
 AUTHORITY_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_LIVE_AUTHORITY"
@@ -92,6 +92,7 @@ SOURCE_FILE_NAMES = target.SOURCE_FILE_NAMES
 SOURCE_AUTHORITY_FILE_NAMES = target.SOURCE_AUTHORITY_FILE_NAMES
 RUNTIME_BINARY_NAME = target.RUNTIME_BINARY_NAME
 RUNTIME_AUTHORITY_FILE_NAMES = target.RUNTIME_AUTHORITY_FILE_NAMES
+DISCOVERY_TRANSFER_FILE_NAMES = target.DISCOVERY_TRANSFER_FILE_NAMES
 SOURCE_AUTHORITY_GENERATED_NAMES = {SOURCE_HASHES.name, SOURCE_BUNDLE.name}
 FINAL_EVIDENCE_COMMIT_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_EVIDENCE_COMMIT"
 REQUIRED_REVIEW_ROLES = {
@@ -107,9 +108,9 @@ REVIEW_ROLE_ALIASES = {
     "custody_evidence_auditor": "custody_evidence_auditor",
     "claim_boundary_adjudicator": "claim_boundary_adjudicator",
 }
-SOURCE_AUDIT_REVIEW_DIR = HERE / "SOURCE_AUTHORITY_C2_REVIEW"
-SOURCE_AUDIT_FINDINGS_PATH = HERE / "SOURCE_AUTHORITY_C2_REVIEW_NORMALIZED.json"
-SOURCE_AUDIT_REVIEW_PATH = HERE / "SOURCE_AUTHORITY_C2_REVIEW_REPORTS.md"
+SOURCE_AUDIT_REVIEW_DIR = HERE / "SOURCE_AUTHORITY_C3_REVIEW"
+SOURCE_AUDIT_FINDINGS_PATH = HERE / "SOURCE_AUTHORITY_C3_REVIEW_NORMALIZED.json"
+SOURCE_AUDIT_REVIEW_PATH = HERE / "SOURCE_AUTHORITY_C3_REVIEW_REPORTS.md"
 SOURCE_AUDIT_REQUIRED_REVIEW_ROLES = {
     "physical_sensor_authority_auditor": "physical sensor-authority auditor",
     "discovery_transport_custody_auditor": "discovery transport and custody auditor",
@@ -157,7 +158,7 @@ SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = {
     "self_authored",
     "evidence_origin",
 }
-SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEWER_RECEIPT_V2"
+SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V2"
 SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER = "codex_subagent_read_only_review"
 SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN = "codex_subagent_detached_receipt"
 SOURCE_AUDIT_REVIEW_BODY_CANONICALIZATION = "utf8_lf_single_trailing_newline"
@@ -696,7 +697,7 @@ def source_authority_commit_verification(commit: str) -> dict[str, Any]:
         "status",
         "--porcelain",
         "--",
-        *[package_relative_path(name) for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES],
+        *[package_relative_path(name) for name in DISCOVERY_TRANSFER_FILE_NAMES],
     )
     if status:
         failures.append("source authority paths are dirty")
@@ -739,6 +740,128 @@ def source_authority_commit_verification(commit: str) -> dict[str, Any]:
         if committed_blob != working_blob:
             failures.append(f"runtime authority file differs from commit {name}")
     return {"passed": not failures, "failures": failures, "commit": commit, "files": files, "status": status}
+
+
+def discovery_transfer_authority_class(name: str) -> str:
+    if name in SOURCE_FILE_NAMES:
+        return "source"
+    if name in SOURCE_AUTHORITY_GENERATED_NAMES or name == SUBAGENT_FINDINGS_PATH.name:
+        return "generated authority"
+    if name in RUNTIME_AUTHORITY_FILE_NAMES:
+        return "runtime binary"
+    return "unknown"
+
+
+def build_discovery_transfer_plan(
+    *,
+    source_root: Path,
+    remote_source_root: str,
+    source_commit: str | None = None,
+    expected_source_hashes_sha256: str | None = None,
+    expected_source_bundle_sha256: str | None = None,
+    expected_runtime_binary_authority: dict[str, Any] | None = None,
+    expected_names: list[str] | None = None,
+) -> dict[str, Any]:
+    failures: list[str] = []
+    expected_names = expected_names or list(DISCOVERY_TRANSFER_FILE_NAMES)
+    if expected_names != list(DISCOVERY_TRANSFER_FILE_NAMES):
+        failures.append("production transfer plan differs from target-required set")
+    observed_names = sorted(path.name for path in source_root.iterdir() if path.is_file()) if source_root.exists() else []
+    missing = sorted(set(expected_names) - set(observed_names))
+    extra = sorted(set(observed_names) - set(expected_names))
+    if missing:
+        failures.append("discovery transfer plan missing files: " + ",".join(missing))
+    if extra:
+        failures.append("discovery transfer plan extra files: " + ",".join(extra))
+
+    source_hashes: dict[str, Any] = {}
+    source_hashes_path = source_root / SOURCE_HASHES.name
+    if source_hashes_path.exists():
+        source_hashes = read_json(source_hashes_path)
+        if expected_source_hashes_sha256 is not None and source_hashes.get("source_hashes_sha256") != expected_source_hashes_sha256:
+            failures.append("transfer plan source hash receipt mismatch")
+    else:
+        failures.append("transfer plan source hash receipt missing")
+
+    source_authority = target.validate_source_file_authority(source_root)
+    if not source_authority["passed"]:
+        failures.extend("transfer plan source authority: " + item for item in source_authority["failures"])
+
+    bundle_path = source_root / SOURCE_BUNDLE.name
+    bundle_file_sha256 = public.sha256_file(bundle_path) if bundle_path.exists() else None
+    if bundle_file_sha256 is None:
+        failures.append("transfer plan source bundle missing")
+    if expected_source_bundle_sha256 is not None and bundle_file_sha256 != expected_source_bundle_sha256:
+        failures.append("transfer plan source bundle hash mismatch")
+    try:
+        bundle_reconstruction_sha256 = target.deterministic_source_bundle_sha256(source_root)
+    except Exception as exc:  # deterministic bundle errors are converted into validation failures.
+        bundle_reconstruction_sha256 = None
+        failures.append(f"transfer plan source bundle reconstruction failed: {exc}")
+    if expected_source_bundle_sha256 is not None and bundle_reconstruction_sha256 != expected_source_bundle_sha256:
+        failures.append("transfer plan source bundle reconstruction mismatch")
+
+    runtime_authority = target.runtime_binary_authority(source_root)
+    expected_runtime_binary_authority = expected_runtime_binary_authority or (
+        source_hashes.get("runtime_binary_authority") if isinstance(source_hashes.get("runtime_binary_authority"), dict) else None
+    )
+    if expected_runtime_binary_authority is None:
+        failures.append("transfer plan runtime authority missing")
+    else:
+        for key in ["sha256", "size", "git_blob_id"]:
+            if runtime_authority.get(key) != expected_runtime_binary_authority.get(key):
+                failures.append(f"transfer plan runtime {key} mismatch")
+
+    committed_available = bool(source_commit and commit_exists(source_commit))
+    records: list[dict[str, Any]] = []
+    for name in expected_names:
+        path = source_root / name
+        payload = path.read_bytes() if path.exists() else b""
+        local_blob = target.git_blob_id_for_bytes(payload) if path.exists() else None
+        committed_blob = None
+        if committed_available:
+            try:
+                committed_blob = git_text("rev-parse", f"{source_commit}:{package_relative_path(name)}")
+            except ControllerError:
+                failures.append(f"transfer plan committed blob missing {name}")
+        if committed_blob is not None and local_blob != committed_blob:
+            failures.append(f"transfer plan local file differs from committed blob {name}")
+        records.append(
+            {
+                "name": name,
+                "source_path": str(path),
+                "remote_destination": f"{remote_source_root}/{name}",
+                "byte_size": path.stat().st_size if path.exists() else None,
+                "sha256": hashlib.sha256(payload).hexdigest() if path.exists() else None,
+                "git_blob_id": committed_blob,
+                "local_git_blob_id": local_blob,
+                "authority_class": discovery_transfer_authority_class(name),
+            }
+        )
+
+    plan_keyset = [record["name"] for record in records]
+    if plan_keyset != list(DISCOVERY_TRANSFER_FILE_NAMES):
+        failures.append("actual outbound transfer keyset differs from DISCOVERY_TRANSFER_FILE_NAMES")
+    if RUNTIME_BINARY_NAME not in plan_keyset:
+        failures.append("production transfer plan omits runtime binary")
+
+    result = {
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSFER_PLAN_V1",
+        "passed": not failures,
+        "failures": failures,
+        "file_count": len(records),
+        "expected_file_names": list(DISCOVERY_TRANSFER_FILE_NAMES),
+        "actual_file_names": plan_keyset,
+        "missing_files": missing,
+        "extra_files": extra,
+        "records": records,
+        "source_authority": source_authority,
+        "source_bundle_file_sha256": bundle_file_sha256,
+        "source_bundle_reconstruction_sha256": bundle_reconstruction_sha256,
+        "runtime_binary_authority": runtime_authority,
+    }
+    result["transfer_plan_sha256"] = public.digest({k: v for k, v in result.items() if k != "transfer_plan_sha256"})
+    return result
 
 
 def build_temperature_authority_challenge(
@@ -821,7 +944,7 @@ def read_source_authority_review_for_discovery(
 ) -> dict[str, Any]:
     failures: list[str] = []
     if not SOURCE_AUDIT_FINDINGS_PATH.exists():
-        failures.append("source authority C2 review findings missing")
+        failures.append("source authority C3 review findings missing")
         source_audit: dict[str, Any] = {}
     else:
         source_audit = read_json(SOURCE_AUDIT_FINDINGS_PATH)
@@ -1848,7 +1971,7 @@ def acquire_temperature_sensor_authority(
         runtime_binary_sha256=source_hashes["runtime_binary_authority"]["sha256"],
     )
     if not source_review["passed"]:
-        raise ControllerError("source authority C2 review gate failed before target contact: " + ",".join(source_review["failures"]))
+        raise ControllerError("source authority C3 review gate failed before target contact: " + ",".join(source_review["failures"]))
     challenge = build_temperature_authority_challenge(
         source_hashes=source_hashes,
         source_bundle_sha256=bundle["sha256"],
@@ -1876,6 +1999,7 @@ def acquire_temperature_sensor_authority(
     authority: dict[str, Any] | None = None
     receipt_copied_state_persisted = False
     target_discovery_file_sha: str | None = None
+    transfer_plan: dict[str, Any] | None = None
     write_discovery_attempt_receipt(
         {
             "passed": False,
@@ -1898,6 +2022,16 @@ def acquire_temperature_sensor_authority(
         materialize_source_authority_snapshot(source_commit, source_stage)
         challenge_path = tmp_root / "controller_challenge.json"
         write_json(challenge_path, challenge)
+        transfer_plan = build_discovery_transfer_plan(
+            source_root=source_stage,
+            remote_source_root=remote_source,
+            source_commit=source_commit,
+            expected_source_hashes_sha256=source_hashes["source_hashes_sha256"],
+            expected_source_bundle_sha256=bundle["sha256"],
+            expected_runtime_binary_authority=source_hashes["runtime_binary_authority"],
+        )
+        if not transfer_plan["passed"]:
+            raise ControllerError("discovery transfer plan failed before target contact: " + ",".join(transfer_plan["failures"]))
         local_copyback = tmp_root / target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME
         try:
             preflight = (
@@ -1926,6 +2060,7 @@ def acquire_temperature_sensor_authority(
                     "controller_challenge_sha256": public.digest(challenge),
                     "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
                     "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
+                    "discovery_transfer_plan": transfer_plan,
                     "target_contact_count": 1,
                     "sensor_inventory_count": 0,
                     "live_invocation_count": 0,
@@ -1942,9 +2077,8 @@ def acquire_temperature_sensor_authority(
             cleanup["preflight"] = preflight_receipt
             if not preflight_receipt["passed"]:
                 raise ControllerError("discovery preflight stdout malformed")
-            for name in SOURCE_AUTHORITY_FILE_NAMES:
-                local = source_stage / name
-                command = ["scp", "-q", str(local), f"{target_host}:{remote_source}/{name}"]
+            for item in transfer_plan["records"]:
+                command = ["scp", "-q", str(item["source_path"]), f"{target_host}:{item['remote_destination']}"]
                 commands.append(command)
                 run(command, timeout=60.0)
             command = ["scp", "-q", str(challenge_path), f"{target_host}:{remote_challenge}"]
@@ -1973,6 +2107,7 @@ def acquire_temperature_sensor_authority(
                     "controller_challenge_sha256": public.digest(challenge),
                     "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
                     "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
+                    "discovery_transfer_plan": transfer_plan,
                     "target_contact_count": 1,
                     "sensor_inventory_count": 0,
                     "live_invocation_count": 0,
@@ -2010,8 +2145,10 @@ def acquire_temperature_sensor_authority(
                     "controller_challenge_sha256": public.digest(challenge),
                     "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
                     "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
+                    "discovery_transfer_plan": transfer_plan,
                     "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256"),
                     "target_discovery_receipt_file_sha256": local_sha,
+                    "discovery_transfer_plan": transfer_plan,
                     "target_contact_count": 1,
                     "sensor_inventory_count": 1,
                     "live_invocation_count": 0,
@@ -2035,6 +2172,7 @@ def acquire_temperature_sensor_authority(
                                 "controller_challenge_sha256": public.digest(challenge),
                                 "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
                                 "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
+                                "discovery_transfer_plan": transfer_plan,
                                 "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256") if isinstance(discovery, dict) else None,
                                 "target_discovery_receipt_file_sha256": target_discovery_file_sha,
                                 "target_contact_count": 1,
@@ -2087,6 +2225,7 @@ def acquire_temperature_sensor_authority(
                                 "controller_challenge_sha256": public.digest(challenge),
                                 "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
                                 "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
+                                "discovery_transfer_plan": transfer_plan,
                                 "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256") if isinstance(discovery, dict) else None,
                                 "target_discovery_receipt_file_sha256": target_discovery_file_sha,
                                 "target_contact_count": 1,
@@ -2108,6 +2247,7 @@ def acquire_temperature_sensor_authority(
                             "controller_challenge_sha256": public.digest(challenge),
                             "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
                             "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
+                            "discovery_transfer_plan": transfer_plan,
                             "target_contact_count": 1,
                             "sensor_inventory_count": 1 if discovery is not None else 0,
                             "live_invocation_count": 0,
@@ -2133,6 +2273,7 @@ def acquire_temperature_sensor_authority(
         "remote_receipt_path": remote_receipt,
         "source_authority_commit": source_commit,
         "source_authority_review": source_review,
+        "discovery_transfer_plan": transfer_plan,
         "controller_challenge": challenge,
         "controller_challenge_sha256": public.digest(challenge),
         "challenge_receipt_path": str(DISCOVERY_CHALLENGE_PATH),
@@ -2311,7 +2452,7 @@ def source_bundle_reconstruction_from_commit(commit: str) -> dict[str, Any]:
 
 def materialize_source_authority_snapshot(commit: str, destination: Path) -> None:
     destination.mkdir(parents=True, exist_ok=True)
-    for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
+    for name in DISCOVERY_TRANSFER_FILE_NAMES:
         (destination / name).write_bytes(git_blob_bytes(commit, name))
 
 
@@ -2511,7 +2652,7 @@ def deployment_layout_self_test() -> dict[str, Any]:
         source = root / "source"
         output = root / "output"
         source.mkdir()
-        for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
+        for name in DISCOVERY_TRANSFER_FILE_NAMES:
             path = HERE / name
             if path.exists():
                 shutil.copy2(path, source / name)
@@ -2580,6 +2721,18 @@ def validate_discovery_transport_receipt(receipt: dict[str, Any] | None) -> dict
         failures.append("discovery transport remote source root mismatch")
     if receipt.get("remote_receipt_path") != f"{receipt.get('remote_source_root')}/{target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME}":
         failures.append("discovery transport remote receipt path mismatch")
+    transfer_plan = receipt.get("discovery_transfer_plan")
+    if not isinstance(transfer_plan, dict):
+        failures.append("discovery transfer plan missing")
+    else:
+        if transfer_plan.get("passed") is not True:
+            failures.append("discovery transfer plan did not pass")
+        if transfer_plan.get("actual_file_names") != list(DISCOVERY_TRANSFER_FILE_NAMES):
+            failures.append("discovery transfer plan file keyset mismatch")
+        if transfer_plan.get("file_count") != len(DISCOVERY_TRANSFER_FILE_NAMES):
+            failures.append("discovery transfer plan file count mismatch")
+        if RUNTIME_BINARY_NAME not in transfer_plan.get("actual_file_names", []):
+            failures.append("discovery transfer plan runtime binary missing")
     cleanup = receipt.get("cleanup")
     if not isinstance(cleanup, dict) or cleanup.get("passed") is not True or cleanup.get("absence_verified") is not True:
         failures.append("discovery cleanup and absence verification required")
@@ -2621,6 +2774,47 @@ def discovery_transport_self_tests() -> dict[str, Any]:
         "controller_nonce_sha256": base_nonce_sha,
         "transport_scope": base_scope,
     }
+
+    def fake_transfer_plan(scope: dict[str, Any], actual_names: list[str] | None = None, *, passed: bool = True) -> dict[str, Any]:
+        names = list(actual_names or DISCOVERY_TRANSFER_FILE_NAMES)
+        records = [
+            {
+                "name": name,
+                "source_path": f"/fixture/source/{name}",
+                "remote_destination": f"{scope['remote_source_root']}/{name}",
+                "byte_size": 1,
+                "sha256": "0" * 64,
+                "git_blob_id": "1" * 40,
+                "local_git_blob_id": "1" * 40,
+                "authority_class": discovery_transfer_authority_class(name),
+            }
+            for name in names
+        ]
+        plan = {
+            "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSFER_PLAN_V1",
+            "passed": passed,
+            "failures": [] if passed else ["fixture transfer plan failure"],
+            "file_count": len(records),
+            "expected_file_names": list(DISCOVERY_TRANSFER_FILE_NAMES),
+            "actual_file_names": names,
+            "missing_files": sorted(set(DISCOVERY_TRANSFER_FILE_NAMES) - set(names)),
+            "extra_files": sorted(set(names) - set(DISCOVERY_TRANSFER_FILE_NAMES)),
+            "records": records,
+            "source_authority": {"passed": passed, "failures": [] if passed else ["fixture source authority failure"]},
+            "source_bundle_file_sha256": "2" * 64,
+            "source_bundle_reconstruction_sha256": "2" * 64,
+            "runtime_binary_authority": {
+                "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
+                "path": RUNTIME_BINARY_NAME,
+                "present": RUNTIME_BINARY_NAME in names,
+                "git_blob_id": "1" * 40,
+                "sha256": "0" * 64,
+                "size": 1,
+            },
+        }
+        plan["transfer_plan_sha256"] = public.digest({k: v for k, v in plan.items() if k != "transfer_plan_sha256"})
+        return plan
+
     base = seal(
         {
             "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT_V1",
@@ -2638,6 +2832,7 @@ def discovery_transport_self_tests() -> dict[str, Any]:
             "controller_challenge_sha256": "1" * 64,
             "challenge_receipt_canonical_sha256": "2" * 64,
             "challenge_receipt_file_sha256": "7" * 64,
+            "discovery_transfer_plan": fake_transfer_plan(base_scope),
             "target_discovery_receipt_sha256": "3" * 64,
             "target_discovery_receipt_file_sha256": "5" * 64,
             "authority_receipt_sha256": "4" * 64,
@@ -2656,6 +2851,19 @@ def discovery_transport_self_tests() -> dict[str, Any]:
     live_nonzero = seal({**base, "live_invocation_count": 1})
     pmu_nonzero = seal({**base, "pmu_acquisition_count": 1})
     alternate_root = seal({**base, "remote_root": f"{DISCOVERY_REMOTE_ROOT}/alternate", "remote_source_root": f"{DISCOVERY_REMOTE_ROOT}/alternate/source"})
+    missing_transfer_plan_payload = dict(base)
+    missing_transfer_plan_payload.pop("discovery_transfer_plan", None)
+    missing_transfer_plan = seal(missing_transfer_plan_payload)
+    failed_transfer_plan = seal({**base, "discovery_transfer_plan": fake_transfer_plan(base_scope, passed=False)})
+    runtime_omitted_transfer_plan = seal(
+        {
+            **base,
+            "discovery_transfer_plan": fake_transfer_plan(
+                base_scope,
+                [name for name in DISCOVERY_TRANSFER_FILE_NAMES if name != RUNTIME_BINARY_NAME],
+            ),
+        }
+    )
     coherent_wrong_root_scope = {
         **base_scope,
         "remote_root": f"{DISCOVERY_REMOTE_ROOT}/{'9' * DISCOVERY_OWNED_ROOT_HEX_LEN}",
@@ -2748,10 +2956,17 @@ def discovery_transport_self_tests() -> dict[str, Any]:
                 "cleanup": {"attempted": True, "passed": True, "absence_verified": True},
                 "retry_count": 0,
                 "target_command_invoked": True,
+                "target_host": challenge["transport_scope"]["target_host"],
+                "remote_base_root": challenge["transport_scope"]["remote_base_root"],
+                "remote_root": challenge["transport_scope"]["remote_root"],
+                "remote_source_root": challenge["transport_scope"]["remote_source_root"],
+                "remote_receipt_path": challenge["transport_scope"]["remote_receipt_path"],
                 "source_authority_commit": "f" * 40,
+                "controller_challenge": challenge,
                 "controller_challenge_sha256": public.digest(challenge),
                 "challenge_receipt_canonical_sha256": "9" * 64,
                 "challenge_receipt_file_sha256": "a" * 64,
+                "discovery_transfer_plan": fake_transfer_plan(challenge["transport_scope"]),
                 "target_discovery_receipt_sha256": discovery["target_discovery_receipt_sha256"],
                 "target_discovery_receipt_file_sha256": serialized_json_sha256(discovery),
                 "authority_receipt_sha256": authority["temperature_sensor_authority_sha256"],
@@ -2791,6 +3006,9 @@ def discovery_transport_self_tests() -> dict[str, Any]:
         "nonzero_live_invocation_rejected": not validate_discovery_transport_receipt(live_nonzero)["passed"],
         "nonzero_pmu_acquisition_rejected": not validate_discovery_transport_receipt(pmu_nonzero)["passed"],
         "alternate_remote_scope_rejected": not validate_discovery_transport_receipt(alternate_root)["passed"],
+        "missing_transfer_plan_rejected": not validate_discovery_transport_receipt(missing_transfer_plan)["passed"],
+        "failed_transfer_plan_rejected": not validate_discovery_transport_receipt(failed_transfer_plan)["passed"],
+        "runtime_omitted_transfer_plan_rejected": not validate_discovery_transport_receipt(runtime_omitted_transfer_plan)["passed"],
         "coherent_wrong_nonce_root_rejected": not validate_discovery_transport_receipt(coherent_wrong_root)["passed"],
         "transport_digest_corruption_rejected": not validate_discovery_transport_receipt(corrupted)["passed"],
         "copyback_corruption_rejected": corrupted_authority_rejected,
@@ -2818,6 +3036,158 @@ def discovery_transport_self_tests() -> dict[str, Any]:
         "passed": all(checks.values()),
         "checks": checks,
     }
+
+
+def production_discovery_transfer_plan_regression() -> dict[str, Any]:
+    failures: list[str] = []
+    negative_cases: dict[str, dict[str, Any]] = {}
+    with tempfile.TemporaryDirectory(prefix="family10h_production_transfer_plan_") as tmp:
+        root = Path(tmp)
+        source_stage = root / "source_stage"
+        target_source = root / "target_source"
+        target.copy_source_fixture(HERE, source_stage)
+        source_hashes = read_json(source_stage / SOURCE_HASHES.name)
+        bundle_sha = target.deterministic_source_bundle_sha256(source_stage)
+        runtime_authority = source_hashes.get("runtime_binary_authority", {})
+        source_status = git_lines(
+            "status",
+            "--porcelain",
+            "--",
+            *[package_relative_path(name) for name in DISCOVERY_TRANSFER_FILE_NAMES],
+        )
+        source_commit = git_text("rev-parse", "HEAD") if not source_status else None
+        plan = build_discovery_transfer_plan(
+            source_root=source_stage,
+            remote_source_root=str(target_source),
+            source_commit=source_commit,
+            expected_source_hashes_sha256=source_hashes["source_hashes_sha256"],
+            expected_source_bundle_sha256=bundle_sha,
+            expected_runtime_binary_authority=runtime_authority,
+        )
+        target_source.mkdir()
+        for record in plan["records"]:
+            shutil.copy2(record["source_path"], target_source / record["name"])
+        nonce = "a" * 64
+        nonce_sha = hashlib.sha256(nonce.encode("ascii")).hexdigest()
+        authorized_commit = "b" * 40
+        challenge = build_temperature_authority_challenge(
+            source_hashes=source_hashes,
+            source_bundle_sha256=bundle_sha,
+            runtime_binary_sha256=runtime_authority.get("sha256"),
+            schedule_sidecar=read_json(source_stage / public.SCHEDULE_SHA.name),
+            authorized_commit=authorized_commit,
+            controller_nonce_sha256=nonce_sha,
+            transport_scope=fixture_transport_scope(target_source, nonce_sha),
+            source_authority_review=fixture_source_review_binding(
+                authorized_commit,
+                source_hashes["source_hashes_sha256"],
+                bundle_sha,
+                runtime_authority.get("sha256", "0" * 64),
+            ),
+        )
+        fresh_root_validation = target.validate_discovery_challenge(target_source, challenge, nonce, authorized_commit)
+
+        def copy_target_case(label: str) -> Path:
+            case_root = root / label
+            case_source = case_root / "source"
+            case_source.mkdir(parents=True)
+            for record in plan["records"]:
+                shutil.copy2(record["source_path"], case_source / record["name"])
+            return case_source
+
+        def record_negative(label: str, mutator: Any) -> bool:
+            case_source = copy_target_case(label)
+            mutator(case_source)
+            validation = target.validate_discovery_transfer_root(case_source, challenge=challenge)
+            negative_cases[label] = validation
+            return not validation["passed"]
+
+        runtime_omitted = record_negative("runtime_omitted", lambda case: (case / RUNTIME_BINARY_NAME).unlink())
+        bundle_omitted = record_negative("source_bundle_omitted", lambda case: (case / SOURCE_BUNDLE.name).unlink())
+        source_hash_omitted = record_negative("source_hash_omitted", lambda case: (case / SOURCE_HASHES.name).unlink())
+        one_source_omitted = record_negative("one_source_omitted", lambda case: (case / SOURCE_FILE_NAMES[0]).unlink())
+        runtime_bytes_mutated = record_negative(
+            "runtime_bytes_mutated",
+            lambda case: (case / RUNTIME_BINARY_NAME).write_bytes((case / RUNTIME_BINARY_NAME).read_bytes() + b"\nproduction-plan-mutation\n"),
+        )
+        runtime_size_mutated = record_negative(
+            "runtime_size_mutated",
+            lambda case: (case / RUNTIME_BINARY_NAME).write_bytes((case / RUNTIME_BINARY_NAME).read_bytes()[:-1] or b"x"),
+        )
+        bundle_bytes_mutated = record_negative(
+            "source_bundle_bytes_mutated",
+            lambda case: (case / SOURCE_BUNDLE.name).write_bytes((case / SOURCE_BUNDLE.name).read_bytes() + b"\nbundle-mutation\n"),
+        )
+        bundle_reconstruction_mismatch = record_negative(
+            "source_bundle_reconstruction_mismatch",
+            lambda case: (case / SOURCE_FILE_NAMES[-1]).write_text(
+                (case / SOURCE_FILE_NAMES[-1]).read_text(encoding="utf-8") + "\n# reconstruction mismatch\n",
+                encoding="utf-8",
+            ),
+        )
+        extra_authority_file = record_negative(
+            "extra_authority_file",
+            lambda case: (case / "unexpected_authority_file.txt").write_text("unexpected\n", encoding="utf-8"),
+        )
+        wrong_runtime_blob = build_discovery_transfer_plan(
+            source_root=source_stage,
+            remote_source_root=str(root / "wrong_runtime_blob"),
+            source_commit=source_commit,
+            expected_source_hashes_sha256=source_hashes["source_hashes_sha256"],
+            expected_source_bundle_sha256=bundle_sha,
+            expected_runtime_binary_authority={**runtime_authority, "git_blob_id": "0" * 40},
+        )
+        differing_keyset = build_discovery_transfer_plan(
+            source_root=source_stage,
+            remote_source_root=str(root / "differing_keyset"),
+            source_commit=source_commit,
+            expected_source_hashes_sha256=source_hashes["source_hashes_sha256"],
+            expected_source_bundle_sha256=bundle_sha,
+            expected_runtime_binary_authority=runtime_authority,
+            expected_names=[name for name in DISCOVERY_TRANSFER_FILE_NAMES if name != RUNTIME_BINARY_NAME],
+        )
+
+    production_source = inspect.getsource(acquire_temperature_sensor_authority)
+    checks = {
+        "transfer_plan_passed": plan["passed"],
+        "transfer_plan_contains_runtime_binary": RUNTIME_BINARY_NAME in plan["actual_file_names"],
+        "transfer_plan_file_count_exact": plan["file_count"] == len(DISCOVERY_TRANSFER_FILE_NAMES),
+        "transfer_plan_keyset_exact": plan["actual_file_names"] == list(DISCOVERY_TRANSFER_FILE_NAMES),
+        "fresh_root_validation_passed_before_inventory": fresh_root_validation["passed"],
+        "runtime_omission_rejected": runtime_omitted,
+        "source_bundle_omission_rejected": bundle_omitted,
+        "source_hash_omission_rejected": source_hash_omitted,
+        "one_source_omission_rejected": one_source_omitted,
+        "runtime_bytes_mutation_rejected": runtime_bytes_mutated,
+        "runtime_size_mutation_rejected": runtime_size_mutated,
+        "runtime_blob_identity_mismatch_rejected": not wrong_runtime_blob["passed"],
+        "source_bundle_bytes_mutation_rejected": bundle_bytes_mutated,
+        "source_bundle_reconstruction_mismatch_rejected": bundle_reconstruction_mismatch,
+        "extra_authority_file_rejected": extra_authority_file,
+        "production_plan_differs_from_target_set_rejected": not differing_keyset["passed"],
+        "production_scp_loop_consumes_frozen_plan_records": 'for item in transfer_plan["records"]' in production_source,
+        "production_scp_loop_does_not_rebuild_source_filename_list": "for name in SOURCE_AUTHORITY_FILE_NAMES" not in production_source,
+        "no_runtime_binary_executed": True,
+        "no_pmu_path_opened": True,
+        "no_tomography_output_root_created": True,
+    }
+    if not all(checks.values()):
+        failures.extend(name for name, passed in checks.items() if not passed)
+    result = {
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_PRODUCTION_DISCOVERY_TRANSFER_PLAN_REGRESSION_V1",
+        "passed": not failures,
+        "failures": failures,
+        "checks": checks,
+        "transfer_plan_file_count": plan["file_count"],
+        "transfer_plan_sha256": plan["transfer_plan_sha256"],
+        "fresh_root_validation": fresh_root_validation,
+        "negative_cases": negative_cases,
+        "runtime_blob_mismatch_plan": wrong_runtime_blob,
+        "differing_keyset_plan": differing_keyset,
+        "source_authority_commit_used_for_blob_checks": source_commit,
+    }
+    result["regression_sha256"] = public.digest({k: v for k, v in result.items() if k != "regression_sha256"})
+    return result
 
 
 def fake_transport_self_tests() -> dict[str, Any]:
@@ -3063,48 +3433,82 @@ def runtime_binary_overlay_mutation_regression() -> dict[str, Any]:
             "failures": ["source hashes or committed runtime binary missing"],
         }
 
-    def source_hashes_for_root(root: Path) -> dict[str, Any]:
-        source_files: dict[str, dict[str, Any]] = {}
-        for name in SOURCE_FILE_NAMES:
-            path = root / name
-            if path.exists():
-                source_files[name] = {"sha256": public.sha256_file(path), "size": path.stat().st_size}
-        receipt = {
-            "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_HASHES_V1",
-            "source_files": source_files,
-            "runtime_binary_authority": target.runtime_binary_authority(root),
-        }
-        receipt["source_hashes_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "source_hashes_sha256"})
-        return receipt
-
     with tempfile.TemporaryDirectory(prefix="family10h_runtime_binary_overlay_") as tmp:
-        root = Path(tmp)
-        for name in SOURCE_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
-            shutil.copy2(HERE / name, root / name)
-        write_json(root / SOURCE_HASHES.name, read_json(SOURCE_HASHES))
-        original_authority = target.runtime_binary_authority(root)
-        (root / RUNTIME_BINARY_NAME).write_bytes((root / RUNTIME_BINARY_NAME).read_bytes() + b"\nC2-binary-overlay-mutation\n")
-        binary_only_validation = target.validate_source_file_authority(root)
-        coherent_receipt = source_hashes_for_root(root)
-        write_json(root / SOURCE_HASHES.name, coherent_receipt)
-        coherent_validation = target.validate_source_file_authority(root)
-        coherent_authority = target.runtime_binary_authority(root)
+        temp_root = Path(tmp)
+        repo_root = temp_root / "repo"
+        package_root = repo_root / "pkg"
+        package_root.mkdir(parents=True)
+        for name in DISCOVERY_TRANSFER_FILE_NAMES:
+            shutil.copy2(HERE / name, package_root / name)
+
+        def temp_git(*args: str) -> str:
+            return run(["git", *args], timeout=30.0, cwd=repo_root).stdout.strip()
+
+        try:
+            temp_git("init")
+            temp_git("config", "user.name", "Family10h Replay Regression")
+            temp_git("config", "user.email", "family10h-replay-regression@example.invalid")
+            temp_git("add", "-A")
+            temp_git("commit", "-m", "source authority snapshot")
+            source_commit = temp_git("rev-parse", "HEAD")
+            overlay_marker = package_root / "CARRIER_TOMOGRAPHY_EVIDENCE_OVERLAY_MARKER.json"
+            write_json(overlay_marker, {"schema": "FAMILY10H_RUNTIME_REPLAY_EVIDENCE_OVERLAY_MARKER_V1", "authority_blobs_changed": False})
+            temp_git("add", "-A")
+            temp_git("commit", "-m", "evidence overlay without authority mutation")
+            baseline_commit = temp_git("rev-parse", "HEAD")
+            runtime_path = package_root / RUNTIME_BINARY_NAME
+            runtime_path.write_bytes(runtime_path.read_bytes() + b"\nE1-runtime-authority-mutation\n")
+            temp_git("add", "-A")
+            temp_git("commit", "-m", "mutate runtime authority blob only")
+            mutated_commit = temp_git("rev-parse", "HEAD")
+        except ControllerError as exc:
+            return {
+                "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_OVERLAY_MUTATION_REGRESSION_V1",
+                "passed": False,
+                "failures": [f"temporary Git replay fixture construction failed: {exc}"],
+            }
+
+        baseline_replay = replay_final_exact_objects(
+            source_commit,
+            baseline_commit,
+            repo_root=repo_root,
+            package_root=package_root,
+        )
+        mutated_replay = replay_final_exact_objects(
+            source_commit,
+            mutated_commit,
+            repo_root=repo_root,
+            package_root=package_root,
+        )
+        defective_replay = replay_final_exact_objects(
+            source_commit,
+            mutated_commit,
+            repo_root=repo_root,
+            package_root=package_root,
+            authority_file_names=list(SOURCE_AUTHORITY_FILE_NAMES),
+        )
 
     checks = {
-        "binary_only_mutation_rejected": not binary_only_validation["passed"],
-        "coherent_overlay_source_root_can_be_made_internally_consistent": coherent_validation["passed"],
-        "coherent_overlay_changes_runtime_blob_id": original_authority.get("git_blob_id") != coherent_authority.get("git_blob_id"),
-        "coherent_overlay_changes_runtime_sha256": original_authority.get("sha256") != coherent_authority.get("sha256"),
-        "final_replay_policy_rejects_changed_runtime_blob": original_authority.get("git_blob_id") != coherent_authority.get("git_blob_id"),
+        "baseline_runtime_absent_from_changed_source_files": RUNTIME_BINARY_NAME not in baseline_replay["changed_source_files_after_c1"],
+        "baseline_authority_blobs_unchanged": not baseline_replay["changed_source_files_after_c1"],
+        "mutated_runtime_present_in_changed_source_files": RUNTIME_BINARY_NAME in mutated_replay["changed_source_files_after_c1"],
+        "mutated_replay_failed": mutated_replay["passed"] is False,
+        "mutated_failure_identifies_runtime_authority": any(RUNTIME_BINARY_NAME in failure for failure in mutated_replay["failures"]),
+        "all_nine_text_source_blobs_remain_unchanged": not any(name in mutated_replay["changed_source_files_after_c1"] for name in SOURCE_FILE_NAMES),
+        "defective_runtime_exclusion_misses_mutation": RUNTIME_BINARY_NAME not in defective_replay["changed_source_files_after_c1"],
+        "defective_comparison_reports_vulnerable": not any(RUNTIME_BINARY_NAME in failure for failure in defective_replay["failures"]),
+        "production_comparison_detects_runtime_mutation": RUNTIME_BINARY_NAME in mutated_replay["changed_source_files_after_c1"],
     }
     return {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_OVERLAY_MUTATION_REGRESSION_V1",
         "passed": all(checks.values()),
         "checks": checks,
-        "binary_only_failures": binary_only_validation["failures"],
-        "coherent_overlay_validation_passed": coherent_validation["passed"],
-        "source_runtime_authority": original_authority,
-        "coherent_overlay_runtime_authority": coherent_authority,
+        "source_commit": source_commit,
+        "baseline_evidence_commit": baseline_commit,
+        "mutated_evidence_commit": mutated_commit,
+        "baseline_replay": baseline_replay,
+        "mutated_replay": mutated_replay,
+        "defective_runtime_excluded_replay": defective_replay,
     }
 
 
@@ -3148,10 +3552,10 @@ def source_audit_quorum_regression() -> dict[str, Any]:
         for index, (role, label) in enumerate(SOURCE_AUDIT_REQUIRED_REVIEW_ROLES.items(), start=1):
             body_path, receipt_path = expected_source_audit_archive_paths(role, review_root)
             body_path.parent.mkdir(parents=True, exist_ok=True)
-            body_path.write_bytes((f"{label} C2 read-only review body {index}\n").encode("utf-8"))
+            body_path.write_bytes((f"{label} C3 read-only review body {index}\n").encode("utf-8"))
             body_state = review_body_canonical_state(body_path.read_bytes())
-            agent_id = f"source-reviewer-c2-{index}"
-            thread_id = f"thread-source-review-c2-{index}"
+            agent_id = f"source-reviewer-c3-{index}"
+            thread_id = f"thread-source-review-c3-{index}"
             receipt = {
                 "schema": SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA,
                 "issuer": SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER,
@@ -3203,7 +3607,7 @@ def source_audit_quorum_regression() -> dict[str, Any]:
                 "review_receipt": receipt,
             }
         return {
-            "schema": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEW_NORMALIZED_V1",
+            "schema": "FAMILY10H_SOURCE_AUTHORITY_C3_REVIEW_NORMALIZED_V1",
             "source_authority_commit": source_commit,
             "source_hashes_sha256": source_hash,
             "source_bundle_sha256": bundle_hash,
@@ -3219,8 +3623,8 @@ def source_audit_quorum_regression() -> dict[str, Any]:
         item["receipt_file_sha256"] = public.sha256_file(receipt_path)
 
     def evaluate(mutator: Any | None = None, *, review_report_present: bool = True, excluded: set[str] | None = None) -> bool:
-        with tempfile.TemporaryDirectory(prefix="family10h_c2_source_audit_regression_") as tmp:
-            review_root = Path(tmp) / "SOURCE_AUTHORITY_C2_REVIEW"
+        with tempfile.TemporaryDirectory(prefix="family10h_c3_source_audit_regression_") as tmp:
+            review_root = Path(tmp) / "SOURCE_AUTHORITY_C3_REVIEW"
             audit = build_archive(review_root)
             if mutator is not None:
                 mutator(audit, review_root)
@@ -3257,7 +3661,7 @@ def source_audit_quorum_regression() -> dict[str, Any]:
         "missing_boundary_attestation_blocked": not evaluate(
             lambda audit, _root: role_item(audit, "claim_boundary_adjudicator").update({"boundary_attestation": {"no_git_write": True}})
         ),
-        "prior_package_reviewer_reuse_blocked": not evaluate(excluded={"source-reviewer-c2-1"}),
+        "prior_package_reviewer_reuse_blocked": not evaluate(excluded={"source-reviewer-c3-1"}),
         "c1_self_referential_receipt_schema_rejected": not evaluate(
             lambda audit, root: mutate_receipt(
                 audit,
@@ -3337,7 +3741,7 @@ def source_audit_quorum_regression() -> dict[str, Any]:
             lambda audit, _root: role_item(audit).pop("review_receipt")
         ),
         "duplicate_reviewer_blocked": not evaluate(
-            lambda audit, _root: role_item(audit).update({"agent_id": "source-reviewer-c2-1"})
+            lambda audit, _root: role_item(audit).update({"agent_id": "source-reviewer-c3-1"})
         ),
         "missing_fourth_reviewer_blocked": not evaluate(
             lambda audit, _root: audit["reviewer_verdicts"].pop("claim_boundary_adjudicator")
@@ -3706,6 +4110,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "source_authority_commit_verification": source_authority_commit_verification,
         "read_source_authority_review_for_discovery": read_source_authority_review_for_discovery,
         "materialize_source_authority_snapshot": materialize_source_authority_snapshot,
+        "commit_exists": commit_exists,
     }
     production_invalid_error = ""
     production_invalid_cleanup_invoked = False
@@ -3730,8 +4135,8 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
     )
     invalid_discovery_bytes = (strict_json_dumps(invalid_discovery, indent=2) + "\n").encode("utf-8")
     invalid_discovery_file_sha = hashlib.sha256(invalid_discovery_bytes).hexdigest()
-    fake_source_hashes = {"source_hashes_sha256": "d" * 64, "runtime_binary_authority": {"sha256": "f" * 64}}
-    fake_bundle = {"path": "offline-fixture-bundle", "sha256": "e" * 64, "file_count": len(SOURCE_FILE_NAMES), "files": sorted(SOURCE_FILE_NAMES)}
+    fake_source_hashes = read_json(SOURCE_HASHES)
+    fake_bundle = read_existing_source_bundle_authority()
 
     def fake_source_review(
         *,
@@ -3756,8 +4161,8 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
 
     def fake_materialize(_commit: str, destination: Path) -> None:
         destination.mkdir(parents=True, exist_ok=True)
-        for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
-            (destination / name).write_text("offline fixture\n", encoding="utf-8")
+        for name in DISCOVERY_TRANSFER_FILE_NAMES:
+            shutil.copy2(HERE / name, destination / name)
 
     def fake_transport_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
         nonlocal production_invalid_cleanup_invoked, production_invalid_absence_probe_invoked
@@ -3805,23 +4210,25 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
             }
             globals()["read_source_authority_review_for_discovery"] = fake_source_review
             globals()["materialize_source_authority_snapshot"] = fake_materialize
+            globals()["commit_exists"] = lambda _commit: False
             try:
                 acquire_temperature_sensor_authority(source_authority_commit="1" * 40)
             except ControllerError as exc:
                 production_invalid_error = str(exc)
             rows = strict_jsonl_loads(DISCOVERY_ATTEMPT_JOURNAL_PATH.read_bytes())
             states = [row.get("attempt_state") for row in rows]
-            cleanup_receipt = read_json(DISCOVERY_CLEANUP_CUSTODY_PATH)
-            production_invalid_cleanup_receipt_sealed = cleanup_receipt["cleanup_custody_sha256"] == public.digest(
-                {k: v for k, v in cleanup_receipt.items() if k != "cleanup_custody_sha256"}
-            )
-            cleanup_state = cleanup_receipt.get("cleanup", {})
-            production_invalid_cleanup_receipt_records_absence = (
-                isinstance(cleanup_state, dict)
-                and cleanup_state.get("passed") is True
-                and cleanup_state.get("absence_verified") is True
-                and cleanup_receipt.get("sensor_inventory_count") == 1
-            )
+            if DISCOVERY_CLEANUP_CUSTODY_PATH.exists():
+                cleanup_receipt = read_json(DISCOVERY_CLEANUP_CUSTODY_PATH)
+                production_invalid_cleanup_receipt_sealed = cleanup_receipt["cleanup_custody_sha256"] == public.digest(
+                    {k: v for k, v in cleanup_receipt.items() if k != "cleanup_custody_sha256"}
+                )
+                cleanup_state = cleanup_receipt.get("cleanup", {})
+                production_invalid_cleanup_receipt_records_absence = (
+                    isinstance(cleanup_state, dict)
+                    and cleanup_state.get("passed") is True
+                    and cleanup_state.get("absence_verified") is True
+                    and cleanup_receipt.get("sensor_inventory_count") == 1
+                )
             production_invalid_journal_stopped_before_receipt_copied = states == ATTEMPT_STATE_SEQUENCE[:3]
             production_invalid_no_success_cleanup_states = "cleanup_armed" not in states and "cleanup_completed" not in states
             production_invalid_no_success_artifacts = (
@@ -3861,6 +4268,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_ACQUISITION_TRANSACTION_REGRESSION_V2",
         "passed": all(checks.values()),
         "checks": checks,
+        "production_invalid_error": production_invalid_error,
         "target_contact_count": 0,
         "sensor_inventory_count": 0,
         "live_invocation_count": 0,
@@ -3871,6 +4279,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
 def controller_self_test() -> dict[str, Any]:
     transport = fake_transport_self_tests()
     discovery_transport = discovery_transport_self_tests()
+    production_transfer = production_discovery_transfer_plan_regression()
     validation = offline_validate()
     runtime_gate = runtime_authority_gate_self_test()
     live_env_absent = target.validate_no_live_authority_env()
@@ -3958,6 +4367,7 @@ def controller_self_test() -> dict[str, Any]:
         "self_test_passed": validation["passed"]
         and transport["passed"]
         and discovery_transport["passed"]
+        and production_transfer["passed"]
         and runtime_gate["passed"]
         and live_env_absent["passed"]
         and source_hash_authority["passed"]
@@ -3974,6 +4384,7 @@ def controller_self_test() -> dict[str, Any]:
         "offline_validate_sha256": validation["offline_validate_sha256"],
         "transport_simulation_sha256": transport["transport_simulation_sha256"],
         "discovery_transport_self_test": discovery_transport,
+        "production_discovery_transfer_plan_regression": production_transfer,
         "runtime_authority_gate": runtime_gate,
         "source_hash_authority_regression": source_hash_authority,
         "runtime_binary_overlay_mutation_regression": runtime_overlay_mutation,
@@ -4470,7 +4881,60 @@ def exact_review_agent_ids(review: dict[str, Any]) -> set[str]:
     }
 
 
-def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict[str, Any]:
+def replay_final_exact_objects(
+    source_commit: str,
+    evidence_commit: str,
+    *,
+    repo_root: Path | None = None,
+    package_root: Path | None = None,
+    authority_file_names: list[str] | None = None,
+) -> dict[str, Any]:
+    if repo_root is not None or package_root is not None:
+        replay_repo_root = Path(repo_root or REPO_ROOT).resolve()
+        replay_package_root = Path(package_root or HERE).resolve()
+        path_bindings = {
+            "REPO_ROOT": replay_repo_root,
+            "HERE": replay_package_root,
+            "CONTRACT_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_CONTRACT.md",
+            "SOURCE_BUNDLE": replay_package_root / "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+            "SOURCE_HASHES": replay_package_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+            "TEMPERATURE_SENSOR_AUTHORITY": replay_package_root / "CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_AUTHORITY.json",
+            "TARGET_DISCOVERY_RECEIPT": replay_package_root / "CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json",
+            "DISCOVERY_TRANSPORT_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT.json",
+            "DISCOVERY_CHALLENGE_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE.json",
+            "DISCOVERY_ATTEMPT_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.json",
+            "DISCOVERY_ATTEMPT_JOURNAL_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.jsonl",
+            "DISCOVERY_CLEANUP_CUSTODY_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_DISCOVERY_CLEANUP_CUSTODY.json",
+            "FINAL_OBJECT_VERIFY_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_FINAL_OBJECT_VERIFY.json",
+            "FINAL_EVIDENCE_COMMIT_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT.json",
+            "MANIFEST_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json",
+            "MANIFEST_SHA_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256",
+            "RUNTIME_SELF_TEST_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST.json",
+            "TARGET_SELF_TEST_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_TARGET_SELF_TEST.json",
+            "CONTROLLER_SELF_TEST_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST.json",
+            "OFFLINE_VALIDATE_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_OFFLINE_VALIDATE.json",
+            "TRANSPORT_SIM_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_TRANSPORT_SIMULATION.json",
+            "DEPLOYMENT_LAYOUT_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_DEPLOYMENT_LAYOUT_SELF_TEST.json",
+            "FEATURE_BOUNDARY_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_FEATURE_BOUNDARY_SELF_TEST.json",
+            "OPERATOR_ANALYSIS_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_OPERATOR_ANALYSIS_SELF_TEST.json",
+            "FACTORIAL_ARM_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_FACTORIAL_ARM_SELF_TEST.json",
+            "SOURCE_DEATH_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_SOURCE_DEATH_CUSTODY_SELF_TEST.json",
+            "EXACT_COVERAGE_PATH": replay_package_root / "CARRIER_TOMOGRAPHY_EXACT_COVERAGE_SELF_TEST.json",
+            "SUBAGENT_FINDINGS_PATH": replay_package_root / "SUBAGENT_FINDINGS_NORMALIZED.json",
+            "SUBAGENT_REVIEW_PATH": replay_package_root / "SUBAGENT_REVIEW_REPORTS.md",
+            "BINARY_PATH": replay_package_root / "family10h_carrier_tomography_runtime",
+            "SOURCE_AUDIT_REVIEW_DIR": replay_package_root / "SOURCE_AUTHORITY_C3_REVIEW",
+            "SOURCE_AUDIT_FINDINGS_PATH": replay_package_root / "SOURCE_AUTHORITY_C3_REVIEW_NORMALIZED.json",
+            "SOURCE_AUDIT_REVIEW_PATH": replay_package_root / "SOURCE_AUTHORITY_C3_REVIEW_REPORTS.md",
+        }
+        old_bindings = {name: globals()[name] for name in path_bindings}
+        try:
+            globals().update(path_bindings)
+            return replay_final_exact_objects(source_commit, evidence_commit, authority_file_names=authority_file_names)
+        finally:
+            globals().update(old_bindings)
+
+    authority_file_names = list(authority_file_names or DISCOVERY_TRANSFER_FILE_NAMES)
     failures: list[str] = []
     if re.fullmatch(r"[0-9a-f]{40}", source_commit or "") is None:
         failures.append("source authority commit missing or malformed")
@@ -4496,7 +4960,7 @@ def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict
     source_authority_blob_records: dict[str, dict[str, Any]] = {}
     changed_source_files: list[str] = []
     if commit_exists(source_commit) and commit_exists(evidence_commit):
-        for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
+        for name in authority_file_names:
             path = HERE / name
             source_record = commit_blob_record(source_commit, path)
             evidence_record = commit_blob_record(evidence_commit, path)
@@ -4509,7 +4973,7 @@ def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict
             if not unchanged:
                 changed_source_files.append(name)
         if changed_source_files:
-            failures.append("evidence overlay changed source/runtime authority blobs")
+            failures.append("evidence overlay changed source/runtime authority blobs: " + ",".join(changed_source_files))
 
     evidence_blob_records = {
         label: commit_blob_record(evidence_commit, path) if commit_exists(evidence_commit) else {
