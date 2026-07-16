@@ -1,0 +1,31 @@
+{
+  "child_roles": [
+    "state",
+    "drive"
+  ],
+  "drive_child_index": 0,
+  "drive_edge_modulation_index": 0.44999999999999996,
+  "drive_root_id": "drive2v0.root",
+  "drive_tree_digest": "d60fb9d82be06eb3bb0dc776373bcd211938c1da1ddb9878fe4dec342b9a1e9f",
+  "result_root_id": "time2.root",
+  "result_tree_digest": "420536a98d44b29fec469c989a110e235af939f4358ef1d914876e72ceea9e38",
+  "schema": "recursive_wave_ancestry_receipt_v1",
+  "state_child_index": 1,
+  "state_edge_modulation_index": 0.69,
+  "state_root_id": "time1.root",
+  "state_tree_digest": "08ed8b9578a2216a98f95e79789c78768e64b431cb3a0fc111b57ce97c63fe52",
+  "step_index": 2,
+  "step_spec": {
+    "carrier_frequency_hz": 1875.0,
+    "drive_child_index": 0,
+    "drive_modulation_index": 0.44999999999999996,
+    "root_id": "time2.root",
+    "root_phase_rad": 0.18,
+    "schema": "recursive_wave_temporal_step_v1",
+    "state_child_index": 1,
+    "state_modulation_index": 0.69,
+    "step_index": 2
+  },
+  "step_spec_canonical_sha256": "a6a1ba92025adb35bc4a16491223dd3eae43123ab05176ad03f1b7c4ec2c451a",
+  "step_spec_digest": "f2d1dd9112fc367c424b6528a0cfadbcebd3fea45b8f815929e3fcc2f2ead368"
+}

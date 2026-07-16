@@ -1,0 +1,11 @@
+{
+  "carrier_frequency_hz": 1738.0,
+  "drive_child_index": 0,
+  "drive_modulation_index": 0.43,
+  "root_id": "time1.root",
+  "root_phase_rad": 0.09,
+  "schema": "recursive_wave_temporal_step_v1",
+  "state_child_index": 1,
+  "state_modulation_index": 0.66,
+  "step_index": 1
+}

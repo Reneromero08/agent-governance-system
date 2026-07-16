@@ -1,0 +1,256 @@
+{
+  "edge_conventions": {
+    "canonical_json": "UTF-8, sorted keys, indent=2, newline terminated, strict duplicate rejection",
+    "collapsed_controls": "waveform-only controls must fail native tree and receipt admission",
+    "native_call_graph": "closed-call AST reachability from temporal_step, trajectory, and extract_predecessor; unapproved dynamic, module, and method calls fail",
+    "receipt_roles": "explicit distinct canonical child indices bind state and drive, with no additional child",
+    "result_comparison": "environment receipt informational; numeric leaves use frozen portable tolerance",
+    "wav": "minimal RIFF fmt then data, stereo I/Q IEEE float32, 48000 Hz, 6000 samples"
+  },
+  "numeric_envelope": {
+    "maximum_bounded_steps": 6,
+    "nonidentity_tolerance": 1e-06,
+    "ordered_response_max": 0.99,
+    "portable_metric_atol": 5e-12,
+    "portable_metric_rtol": 5e-12,
+    "unit_modulus_tolerance": 1e-12,
+    "wav_render_tolerance": 2e-07
+  },
+  "schema": "recursive_wave_operator_reference_tests_v1",
+  "tests": [
+    {
+      "id": "depth_grows_one_per_step"
+    },
+    {
+      "id": "node_count_growth"
+    },
+    {
+      "id": "every_state_is_valid_complete_tree"
+    },
+    {
+      "id": "unit_modulus_trajectory"
+    },
+    {
+      "id": "each_step_changes_the_complete_state"
+    },
+    {
+      "id": "deterministic_trajectory_and_receipts"
+    },
+    {
+      "id": "trajectory_construction_order_rejected"
+    },
+    {
+      "id": "exact_reverse_ancestry_recovers_t0_bytes"
+    },
+    {
+      "id": "drive_order_changes_history"
+    },
+    {
+      "id": "reordered_trajectory_response_bounded"
+    },
+    {
+      "id": "step_spec_strict_round_trip"
+    },
+    {
+      "id": "step_spec_duplicate_key_rejected"
+    },
+    {
+      "id": "step_spec_unknown_field_rejected"
+    },
+    {
+      "id": "step_spec_nonfinite_rejected"
+    },
+    {
+      "id": "step_spec_boolean_number_rejected"
+    },
+    {
+      "id": "step_spec_step_root_mismatch_rejected"
+    },
+    {
+      "id": "step_spec_nyquist_rejected"
+    },
+    {
+      "id": "step_spec_modulation_envelope_rejected"
+    },
+    {
+      "id": "step_spec_canonical_mutation_rejected"
+    },
+    {
+      "id": "step_spec_digest_deterministic"
+    },
+    {
+      "id": "receipt_strict_round_trip"
+    },
+    {
+      "id": "receipt_duplicate_key_rejected"
+    },
+    {
+      "id": "receipt_unknown_field_rejected"
+    },
+    {
+      "id": "receipt_nonfinite_number_rejected"
+    },
+    {
+      "id": "receipt_boolean_number_rejected"
+    },
+    {
+      "id": "receipt_canonical_mutation_rejected"
+    },
+    {
+      "id": "receipt_binds_complete_result"
+    },
+    {
+      "id": "receipt_binds_exact_step_spec"
+    },
+    {
+      "id": "receipt_binds_both_roles"
+    },
+    {
+      "id": "state_drive_id_collision_rejected"
+    },
+    {
+      "id": "new_root_collision_rejected"
+    },
+    {
+      "id": "wrong_state_digest_rejected"
+    },
+    {
+      "id": "wrong_drive_digest_rejected"
+    },
+    {
+      "id": "swapped_roles_rejected"
+    },
+    {
+      "id": "equal_beta_swapped_roles_rejected"
+    },
+    {
+      "id": "changed_state_beta_rejected"
+    },
+    {
+      "id": "changed_drive_beta_rejected"
+    },
+    {
+      "id": "changed_step_spec_rejected"
+    },
+    {
+      "id": "wrong_result_root_rejected"
+    },
+    {
+      "id": "extra_child_rejected"
+    },
+    {
+      "id": "missing_child_rejected"
+    },
+    {
+      "id": "duplicate_role_rejected"
+    },
+    {
+      "id": "reordered_receipt_rejected"
+    },
+    {
+      "id": "drive_order_reversal_changes_history"
+    },
+    {
+      "id": "flat_wave_native_admission_rejected"
+    },
+    {
+      "id": "flat_wave_receipt_validation_rejected"
+    },
+    {
+      "id": "flat_wave_exact_ancestry_unavailable"
+    },
+    {
+      "id": "decoded_spin_internal_hierarchy_absent"
+    },
+    {
+      "id": "decoded_spin_native_admission_rejected"
+    },
+    {
+      "id": "decoded_spin_receipt_validation_rejected"
+    },
+    {
+      "id": "decoded_spin_exact_ancestry_unavailable"
+    },
+    {
+      "id": "decoded_spin_final_waveform_differs"
+    },
+    {
+      "id": "trajectory_truncation_rejected"
+    },
+    {
+      "id": "trajectory_duplication_rejected"
+    },
+    {
+      "id": "fixture_substitution_rejected"
+    },
+    {
+      "id": "manifest_order_mutation_rejected"
+    },
+    {
+      "id": "ast_native_call_graph_no_scalar_feedback"
+    },
+    {
+      "id": "ast_forbidden_identifiers_mutation_rejected"
+    },
+    {
+      "id": "ast_alias_callable_mutation_rejected"
+    },
+    {
+      "id": "ast_module_helper_mutation_rejected"
+    },
+    {
+      "id": "ast_class_method_mutation_rejected"
+    },
+    {
+      "id": "ast_dynamic_callable_mutation_rejected"
+    },
+    {
+      "id": "ast_digest_control_mutation_rejected"
+    },
+    {
+      "id": "ast_length_feedback_mutation_rejected"
+    },
+    {
+      "id": "ast_module_shadowing_mutation_rejected"
+    },
+    {
+      "id": "ast_module_attribute_rebind_mutation_rejected"
+    },
+    {
+      "id": "ast_decorated_root_mutation_rejected"
+    },
+    {
+      "id": "ast_global_rebind_mutation_rejected"
+    },
+    {
+      "id": "ast_import_alias_rebind_mutation_rejected"
+    },
+    {
+      "id": "ast_loop_target_rebind_mutation_rejected"
+    },
+    {
+      "id": "ast_function_default_rebind_mutation_rejected"
+    },
+    {
+      "id": "ast_native_runtime_binding_shadow_mutation_rejected"
+    },
+    {
+      "id": "ast_receipt_lifecycle_rebind_mutation_rejected"
+    },
+    {
+      "id": "ast_match_capture_result_rebind_mutation_rejected"
+    },
+    {
+      "id": "ast_result_store_rebind_mutation_rejected"
+    },
+    {
+      "id": "committed_tree_wav_bytes_close"
+    },
+    {
+      "id": "committed_step_receipt_bytes_close"
+    },
+    {
+      "id": "manifest_binds_all_fixture_bytes"
+    }
+  ]
+}

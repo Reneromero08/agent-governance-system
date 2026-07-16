@@ -1,0 +1,48 @@
+{
+  "schema": "recursive_wave_operator_findings_normalized_v1",
+  "reviewed_object": {
+    "package": "audio_recursive_wave_operator_v1",
+    "source_git_blob_sha1": "3685be9ae63dcd213b2155c8cd66f6f81e45c071",
+    "source_byte_count": 107055,
+    "source_sha256": "26b2cfaa63f5fe6bfa97f6d9f64b97d0ee944bc39ac45d406092aea257b2179e",
+    "reference_result_sha256": "37cb46f6806555cfaec60910f9b5b92fbcac5bf1d0e976fb67e7f2d2c0ec4139",
+    "reference_tests_sha256": "5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5",
+    "claim_ceiling": "SOFTWARE_COMPLETE_TREE_TEMPORAL_RECURRENCE_REFERENCE_ONLY"
+  },
+  "reviewers": [
+    {
+      "id": "AUD-RWO-01-MECHANISM",
+      "verdict": "PASS"
+    },
+    {
+      "id": "AUD-RWO-02-CUSTODY",
+      "verdict": "PASS"
+    },
+    {
+      "id": "AUD-RWO-03-NEGATIVE-CONTROLS",
+      "verdict": "PASS"
+    },
+    {
+      "id": "AUD-RWO-04-CLAIMS",
+      "verdict": "PASS",
+      "note": "Separate claims-boundary review in an existing reviewer task because the session thread limit prevented spawning a fourth reviewer task."
+    }
+  ],
+  "findings": [
+    {
+      "id": "M-01",
+      "severity": "material",
+      "title": "Result binding count missed structural pattern capture names",
+      "status": "resolved",
+      "resolution": "Added _binding_names coverage for Store, Del, ExceptHandler.name, MatchAs.name, MatchStar.name, and MatchMapping.rest; replaced store-only counts with name_binding_count; added ast_match_capture_result_rebind_mutation_rejected."
+    },
+    {
+      "id": "OBS-RWO-04-01",
+      "severity": "low",
+      "title": "Custody document under-listed newer source-proof controls",
+      "status": "resolved",
+      "resolution": "Updated RECURSIVE_WAVE_OPERATOR_CUSTODY_AND_ADVERSARIES.md to enumerate import-alias, loop-target, function-default, native runtime binding shadowing, receipt lifecycle rebinding, result-store rebinding, and structural pattern-capture rebinding controls."
+    }
+  ],
+  "open_findings": []
+}
