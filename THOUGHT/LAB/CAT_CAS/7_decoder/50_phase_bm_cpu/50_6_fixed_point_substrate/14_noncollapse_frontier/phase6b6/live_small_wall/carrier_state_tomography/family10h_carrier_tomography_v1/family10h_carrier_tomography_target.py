@@ -43,6 +43,7 @@ SOURCE_AUTHORITY_FILE_NAMES = SOURCE_FILE_NAMES + [
     "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
     "SUBAGENT_FINDINGS_NORMALIZED.json",
 ]
+DISCOVERY_TRANSFER_FILE_NAMES = SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES
 
 APPROVED_TEMPERATURE_HWMON_NAMES = ["k10temp"]
 APPROVED_TEMPERATURE_SENSOR_LABELS = ["Tctl", "Tdie"]
@@ -102,7 +103,7 @@ SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = {
     "self_authored",
     "evidence_origin",
 }
-SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEWER_RECEIPT_V2"
+SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V2"
 SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER = "codex_subagent_read_only_review"
 SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN = "codex_subagent_detached_receipt"
 SOURCE_AUDIT_REVIEW_BODY_CANONICALIZATION = "utf8_lf_single_trailing_newline"
@@ -364,6 +365,71 @@ def validate_runtime_binary_authority(source_root: Path, expected: dict[str, Any
             if expected.get(key) != value:
                 failures.append(f"runtime binary authority mismatch {key}")
     return {"passed": not failures, "failures": failures, "authority": authority}
+
+
+def validate_discovery_transfer_root(
+    source_root: Path,
+    *,
+    challenge: dict[str, Any] | None = None,
+    allowed_extra_names: set[str] | None = None,
+) -> dict[str, Any]:
+    failures: list[str] = []
+    allowed_extra_names = allowed_extra_names or set()
+    expected_names = list(DISCOVERY_TRANSFER_FILE_NAMES)
+    observed_names = sorted(path.name for path in source_root.iterdir() if path.is_file()) if source_root.exists() else []
+    missing = sorted(set(expected_names) - set(observed_names))
+    unexpected = sorted(set(observed_names) - set(expected_names) - set(allowed_extra_names))
+    if missing:
+        failures.append("discovery transfer files missing: " + ",".join(missing))
+    if unexpected:
+        failures.append("discovery transfer unexpected files: " + ",".join(unexpected))
+
+    source_authority = validate_source_file_authority(source_root)
+    if not source_authority["passed"]:
+        failures.extend("source authority: " + item for item in source_authority["failures"])
+
+    source_hash_path = source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json"
+    source_hashes = read_json(source_hash_path) if source_hash_path.exists() else {}
+    bundle_path = source_root / "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz"
+    bundle_file_sha256 = public.sha256_file(bundle_path) if bundle_path.exists() else None
+    bundle_reconstruction_sha256: str | None = None
+    if not bundle_path.exists():
+        failures.append("source bundle file missing")
+    try:
+        bundle_reconstruction_sha256 = deterministic_source_bundle_sha256(source_root)
+    except Exception as exc:  # deterministic bundle errors are converted into validation failures.
+        failures.append(f"source bundle reconstruction failed: {exc}")
+
+    if isinstance(challenge, dict):
+        if source_hashes.get("source_hashes_sha256") != challenge.get("source_hashes_sha256"):
+            failures.append("source hash receipt does not match challenged identity")
+        if bundle_file_sha256 != challenge.get("source_bundle_sha256"):
+            failures.append("source bundle file hash does not match challenged identity")
+        if bundle_reconstruction_sha256 != challenge.get("source_bundle_sha256"):
+            failures.append("source bundle reconstruction does not match challenged identity")
+        runtime_authority = source_hashes.get("runtime_binary_authority") if isinstance(source_hashes.get("runtime_binary_authority"), dict) else {}
+        if runtime_authority.get("sha256") != challenge.get("runtime_binary_sha256"):
+            failures.append("runtime binary authority does not match challenged identity")
+    elif bundle_file_sha256 is not None and bundle_reconstruction_sha256 is not None and bundle_file_sha256 != bundle_reconstruction_sha256:
+        failures.append("source bundle file hash does not match deterministic reconstruction")
+
+    return {
+        "passed": not failures,
+        "failures": failures,
+        "expected_files": expected_names,
+        "observed_files": observed_names,
+        "missing_files": missing,
+        "unexpected_files": unexpected,
+        "source_authority": source_authority,
+        "source_hashes_sha256": source_hashes.get("source_hashes_sha256"),
+        "source_bundle_file_sha256": bundle_file_sha256,
+        "source_bundle_reconstruction_sha256": bundle_reconstruction_sha256,
+        "runtime_binary_sha256": (
+            source_hashes.get("runtime_binary_authority", {}).get("sha256")
+            if isinstance(source_hashes.get("runtime_binary_authority"), dict)
+            else None
+        ),
+    }
 
 
 def portable_basename(value: Any) -> str:
@@ -706,7 +772,7 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
             failures.append("source authority review reused independent reviewer agent ids")
         source_quorum = manifest.get("source_authority_review", {}).get("review_quorum", {})
         if source_quorum.get("passed") is not True:
-            failures.append("frozen package lacks exact C2 source-review quorum")
+            failures.append("frozen package lacks exact source-authority review quorum")
         source_review = manifest.get("source_authority_review", {})
         if not isinstance(source_review.get("source_authority_commit"), str) or re.fullmatch(r"[0-9a-f]{40}", source_review.get("source_authority_commit", "")) is None:
             failures.append("frozen package source-authority commit missing or malformed")
@@ -2148,7 +2214,14 @@ def fixture_source_review_binding(source_root: Path, authorized_commit: str) -> 
     }
 
 
-def validate_discovery_challenge(source_root: Path, challenge: dict[str, Any], controller_nonce: str, authorized_commit: str) -> dict[str, Any]:
+def validate_discovery_challenge(
+    source_root: Path,
+    challenge: dict[str, Any],
+    controller_nonce: str,
+    authorized_commit: str,
+    *,
+    allowed_transfer_extra_names: set[str] | None = None,
+) -> dict[str, Any]:
     failures: list[str] = []
     if re.fullmatch(r"[0-9a-f]{64}", controller_nonce) is None:
         failures.append("controller nonce missing or malformed")
@@ -2206,6 +2279,13 @@ def validate_discovery_challenge(source_root: Path, challenge: dict[str, Any], c
             failures.append("controller challenge source authority review source-bundle mismatch")
         if review.get("runtime_binary_sha256") != challenge.get("runtime_binary_sha256"):
             failures.append("controller challenge source authority review runtime-binary mismatch")
+    transfer_root = validate_discovery_transfer_root(
+        source_root,
+        challenge=challenge,
+        allowed_extra_names=allowed_transfer_extra_names,
+    )
+    if not transfer_root["passed"]:
+        failures.extend("discovery transfer root: " + item for item in transfer_root["failures"])
     return {
         "passed": not failures,
         "failures": failures,
@@ -2213,6 +2293,7 @@ def validate_discovery_challenge(source_root: Path, challenge: dict[str, Any], c
         "challenge_sha256": public.digest(challenge) if isinstance(challenge, dict) else None,
         "controller_nonce_sha256": nonce_sha,
         "source_authority": source_authority,
+        "discovery_transfer_root": transfer_root,
     }
 
 
@@ -2233,7 +2314,13 @@ def discover_temperature_sensor_authority(
     require(not receipt_path.exists(), "discovery receipt already exists")
     require(controller_challenge_path.exists(), "controller challenge file missing")
     challenge = read_json(controller_challenge_path)
-    challenge_validation = validate_discovery_challenge(source_root, challenge, controller_nonce, authorized_commit)
+    challenge_validation = validate_discovery_challenge(
+        source_root,
+        challenge,
+        controller_nonce,
+        authorized_commit,
+        allowed_transfer_extra_names={controller_challenge_path.name},
+    )
     require(challenge_validation["passed"], "controller challenge invalid: " + ",".join(challenge_validation["failures"]))
     platform_identity = require_family10h_platform(cpuinfo_path)
     candidates = enumerate_temperature_candidates(hwmon_root)
@@ -2308,7 +2395,7 @@ def discover_temperature_sensor_authority(
 
 def copy_source_fixture(source_root: Path, destination: Path) -> None:
     destination.mkdir(parents=True, exist_ok=True)
-    for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
+    for name in DISCOVERY_TRANSFER_FILE_NAMES:
         path = source_root / name
         require(path.exists(), f"source fixture missing {name}")
         (destination / name).write_bytes(path.read_bytes())
@@ -2586,6 +2673,53 @@ def target_sensor_discovery_fixture(source_root: Path) -> dict[str, Any]:
             )
         )
 
+        def transfer_root_rejects(label: str, mutator: Any) -> bool:
+            case_source = fresh_source(label)
+            mutator(case_source)
+            return not validate_discovery_transfer_root(case_source, challenge=challenge)["passed"]
+
+        transfer_runtime_omitted_rejected = transfer_root_rejects(
+            "transfer_runtime_omitted",
+            lambda case: (case / RUNTIME_BINARY_NAME).unlink(),
+        )
+        transfer_bundle_omitted_rejected = transfer_root_rejects(
+            "transfer_bundle_omitted",
+            lambda case: (case / "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz").unlink(),
+        )
+        transfer_source_hash_omitted_rejected = transfer_root_rejects(
+            "transfer_source_hash_omitted",
+            lambda case: (case / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json").unlink(),
+        )
+        transfer_one_source_omitted_rejected = transfer_root_rejects(
+            "transfer_one_source_omitted",
+            lambda case: (case / SOURCE_FILE_NAMES[0]).unlink(),
+        )
+        transfer_runtime_bytes_mutated_rejected = transfer_root_rejects(
+            "transfer_runtime_bytes_mutated",
+            lambda case: (case / RUNTIME_BINARY_NAME).write_bytes((case / RUNTIME_BINARY_NAME).read_bytes() + b"\nmutated-runtime\n"),
+        )
+        transfer_runtime_size_mutated_rejected = transfer_root_rejects(
+            "transfer_runtime_size_mutated",
+            lambda case: (case / RUNTIME_BINARY_NAME).write_bytes((case / RUNTIME_BINARY_NAME).read_bytes()[:-1] or b"x"),
+        )
+        transfer_bundle_bytes_mutated_rejected = transfer_root_rejects(
+            "transfer_bundle_bytes_mutated",
+            lambda case: (case / "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz").write_bytes(
+                (case / "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz").read_bytes() + b"\nmutated-bundle\n"
+            ),
+        )
+        transfer_bundle_reconstruction_mismatch_rejected = transfer_root_rejects(
+            "transfer_bundle_reconstruction_mismatch",
+            lambda case: (case / SOURCE_FILE_NAMES[-1]).write_text(
+                (case / SOURCE_FILE_NAMES[-1]).read_text(encoding="utf-8") + "\n# bundle reconstruction mismatch\n",
+                encoding="utf-8",
+            ),
+        )
+        transfer_extra_authority_file_rejected = transfer_root_rejects(
+            "transfer_extra_authority_file",
+            lambda case: (case / "unexpected_authority_file.txt").write_text("unexpected\n", encoding="utf-8"),
+        )
+
         non_cpu_root = root / "non_cpu_hwmon"
         write_fake_hwmon_sensor(non_cpu_root, 0, "acpitz", "Tctl")
         non_cpu_rejected = raises_target_error(
@@ -2649,6 +2783,15 @@ def target_sensor_discovery_fixture(source_root: Path) -> dict[str, Any]:
         "wrong_source_commit_rejected": wrong_commit_rejected,
         "wrong_source_hash_receipt_rejected": wrong_source_hash_rejected,
         "wrong_source_bundle_rejected": wrong_bundle_rejected,
+        "transfer_runtime_omitted_rejected": transfer_runtime_omitted_rejected,
+        "transfer_source_bundle_omitted_rejected": transfer_bundle_omitted_rejected,
+        "transfer_source_hash_receipt_omitted_rejected": transfer_source_hash_omitted_rejected,
+        "transfer_one_source_omitted_rejected": transfer_one_source_omitted_rejected,
+        "transfer_runtime_bytes_mutated_rejected": transfer_runtime_bytes_mutated_rejected,
+        "transfer_runtime_size_mutated_rejected": transfer_runtime_size_mutated_rejected,
+        "transfer_source_bundle_bytes_mutated_rejected": transfer_bundle_bytes_mutated_rejected,
+        "transfer_source_bundle_reconstruction_mismatch_rejected": transfer_bundle_reconstruction_mismatch_rejected,
+        "transfer_extra_authority_file_rejected": transfer_extra_authority_file_rejected,
         "wrong_schedule_hashes_rejected": wrong_schedule_rejected,
         "wrong_package_identity_rejected": wrong_package_rejected,
         "nested_source_review_hash_mismatch_rejected": nested_wrong_hash_rejected,
