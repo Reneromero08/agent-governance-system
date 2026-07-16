@@ -84,7 +84,7 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "ee26e8ca79abd2c10e70fc633240e648d99bc1b9fc77fc1852b28e83f9adc3e6",
+  "offline_validate_sha256": "9a07d0949b70c5282a3373aa7240c8951795f4558d8b245c43a62a45d4e5d7a5",
   "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -126,7 +126,7 @@
         "C:\\Windows\\system32\\wsl.EXE",
         "gcc"
       ],
-      "offline_binary_sha256": "0076789f9cfa4769f9abf9b829b478b42bc7d762f9cfab2104e008fa50084576",
+      "offline_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
       "passed": true,
       "returncode": 0,
       "runtime_command": [
@@ -141,14 +141,14 @@
     "live_invocation_count": 0,
     "passed": true,
     "pmu_acquisition_count": 0,
-    "runtime_authority_gate_self_test_sha256": "9c0f01139a91e0d8679d23ea402096c2b35fc7a4035729b6098b4aec01fac1b0",
+    "runtime_authority_gate_self_test_sha256": "4cf2c54f8238fe145821fd3fb22890ab53a963c0aabbc788de0bebf24e9b2d6a",
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY_GATE_SELF_TEST_V1",
     "sensor_inventory_count": 0,
     "target_contact_count": 0
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "ec56e64c416daac972383fd963f9daf63c3f56d607dd44bc772a525783d44592",
+  "self_test_sha256": "967348e02357c50904ca63aa7bb88be4ee161884c34c02ef9e84192972bc50f2",
   "sensor_inventory_count": 0,
   "source_audit_quorum_regression": {
     "checks": {
