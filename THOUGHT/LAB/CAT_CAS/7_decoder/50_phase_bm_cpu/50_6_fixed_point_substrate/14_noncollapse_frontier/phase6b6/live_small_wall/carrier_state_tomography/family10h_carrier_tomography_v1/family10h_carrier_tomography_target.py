@@ -8,6 +8,7 @@ task only runs the offline validators and self-tests.
 from __future__ import annotations
 
 import argparse
+import errno as errno_module
 import gzip
 import hashlib
 import inspect
@@ -202,6 +203,14 @@ def raises_target_error(callback: Any) -> bool:
         callback()
     except TargetError:
         return True
+    return False
+
+
+def raises_target_error_containing(callback: Any, expected: str) -> bool:
+    try:
+        callback()
+    except TargetError as exc:
+        return expected in str(exc)
     return False
 
 
@@ -1119,6 +1128,9 @@ def validate_temperature_sensor_authority_payload(
                     or platform.get("source_receiver_cpus_present") is not True
                 ):
                     failures.append("temperature sensor discovery source/receiver CPU boundary missing")
+                pin_capability = platform.get("operational_pin_capability")
+                if platform.get("operational_pin_capability_passed") is not True or not isinstance(pin_capability, dict) or pin_capability.get("passed") is not True:
+                    failures.append("temperature sensor discovery operational pin capability missing or failed")
             if not public.is_json_int(provenance.get("discovery_monotonic_ns")) or provenance.get("discovery_monotonic_ns", 0) <= 0:
                 failures.append("temperature sensor discovery monotonic timestamp missing")
             if expected_challenge is not None:
@@ -2104,7 +2116,179 @@ def parse_cpuinfo_stanzas(text: str) -> list[dict[str, str]]:
     return stanzas
 
 
-def require_family10h_platform(cpuinfo_path: Path = Path("/proc/cpuinfo")) -> dict[str, Any]:
+def current_execution_cpu() -> int | None:
+    stat_path = Path("/proc/self/stat")
+    if not stat_path.exists():
+        return None
+    try:
+        text = stat_path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return None
+    close = text.rfind(")")
+    if close < 0:
+        return None
+    fields = text[close + 2 :].split()
+    if len(fields) <= 36 or not re.fullmatch(r"\d+", fields[36]):
+        return None
+    return int(fields[36])
+
+
+def affinity_error_name(value: int | None) -> str | None:
+    if value is None:
+        return None
+    return errno_module.errorcode.get(value, f"ERRNO_{value}")
+
+
+def probe_single_operational_pin(cpu: int) -> dict[str, Any]:
+    if not (hasattr(os, "fork") and hasattr(os, "pipe") and hasattr(os, "sched_getaffinity") and hasattr(os, "sched_setaffinity")):
+        return {
+            "cpu": cpu,
+            "passed": False,
+            "failure_class": "affinity_syscall_unavailable",
+            "diagnostic": "operational pin capability syscall unavailable",
+        }
+    parent_before = sorted(os.sched_getaffinity(0))
+    read_fd, write_fd = os.pipe()
+    pid = os.fork()
+    if pid == 0:
+        os.close(read_fd)
+        result: dict[str, Any] = {
+            "cpu": cpu,
+            "passed": False,
+            "child_inherited_affinity": None,
+            "requested_affinity": [cpu],
+            "readback_affinity": None,
+            "actual_execution_cpu": None,
+            "actual_execution_cpu_available": False,
+            "errno": None,
+            "errno_name": None,
+            "failure_class": None,
+            "diagnostic": None,
+        }
+        try:
+            result["child_inherited_affinity"] = sorted(os.sched_getaffinity(0))
+            try:
+                os.sched_setaffinity(0, {cpu})
+            except OSError as exc:
+                result["errno"] = exc.errno
+                result["errno_name"] = affinity_error_name(exc.errno)
+                if exc.errno == errno_module.EPERM:
+                    result["failure_class"] = "permission_failure"
+                elif exc.errno == errno_module.EINVAL:
+                    result["failure_class"] = "cpuset_or_kernel_rejected_cpu"
+                else:
+                    result["failure_class"] = "sched_setaffinity_errno"
+                result["diagnostic"] = f"sched_setaffinity {result['errno_name']}"
+            else:
+                if hasattr(os, "sched_yield"):
+                    os.sched_yield()
+                readback = sorted(os.sched_getaffinity(0))
+                actual_cpu = current_execution_cpu()
+                result["readback_affinity"] = readback
+                result["actual_execution_cpu"] = actual_cpu
+                result["actual_execution_cpu_available"] = actual_cpu is not None
+                if readback != [cpu]:
+                    result["failure_class"] = "affinity_readback_failure"
+                    result["diagnostic"] = "child affinity readback differs from requested singleton"
+                elif actual_cpu is not None and actual_cpu != cpu:
+                    result["failure_class"] = "actual_execution_cpu_mismatch"
+                    result["diagnostic"] = "actual execution CPU differs from requested singleton"
+                else:
+                    result["passed"] = True
+                    result["failure_class"] = None
+                    result["diagnostic"] = "operational pin capability passed"
+        except BaseException as exc:  # noqa: BLE001 - child must report all probe failures to parent.
+            result["failure_class"] = "child_probe_exception"
+            result["diagnostic"] = f"{type(exc).__name__}: {exc}"
+        data = (json.dumps(result, sort_keys=True, allow_nan=False) + "\n").encode("utf-8")
+        os.write(write_fd, data)
+        os.close(write_fd)
+        os._exit(0 if result["passed"] else 1)
+    os.close(write_fd)
+    chunks: list[bytes] = []
+    while True:
+        chunk = os.read(read_fd, 8192)
+        if not chunk:
+            break
+        chunks.append(chunk)
+    os.close(read_fd)
+    waited_pid, status = os.waitpid(pid, 0)
+    parent_after = sorted(os.sched_getaffinity(0))
+    try:
+        result = strict_json_loads(b"".join(chunks).decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError, ValueError):
+        result = {
+            "cpu": cpu,
+            "passed": False,
+            "failure_class": "child_probe_receipt_malformed",
+            "diagnostic": "child probe receipt malformed",
+        }
+    result["child_pid"] = waited_pid
+    result["child_exit_status"] = status
+    result["parent_affinity_before"] = parent_before
+    result["parent_affinity_after"] = parent_after
+    result["parent_affinity_restored"] = parent_after == parent_before
+    if parent_after != parent_before:
+        result["passed"] = False
+        result["failure_class"] = "parent_affinity_changed"
+        result["diagnostic"] = "parent affinity changed after child probe"
+    return result
+
+
+def probe_operational_pin_capability(required_cpus: set[int]) -> dict[str, Any]:
+    parent_before = sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else None
+    per_cpu = {str(cpu): probe_single_operational_pin(cpu) for cpu in sorted(required_cpus)}
+    parent_after = sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else None
+    inherited_excludes = (
+        sorted(cpu for cpu in required_cpus if parent_before is not None and cpu not in parent_before)
+        if parent_before is not None
+        else []
+    )
+    all_cpu_passed = all(item.get("passed") is True for item in per_cpu.values())
+    parent_restored = parent_before == parent_after
+    return {
+        "schema": "FAMILY10H_OPERATIONAL_PIN_CAPABILITY_PROBE_V1",
+        "required_cpus": sorted(required_cpus),
+        "inherited_parent_affinity": parent_before,
+        "inherited_affinity_excluded_required_cpus": inherited_excludes,
+        "inherited_mask_restriction_only": bool(inherited_excludes) and all_cpu_passed,
+        "per_cpu": per_cpu,
+        "parent_affinity_after_all_probes": parent_after,
+        "parent_affinity_restored": parent_restored,
+        "opened_pmu": False,
+        "launched_runtime": False,
+        "created_tomography_output_root": False,
+        "passed": all_cpu_passed and parent_restored,
+    }
+
+
+def format_pin_capability_failure(probe: dict[str, Any]) -> str:
+    if probe.get("parent_affinity_restored") is False:
+        return "operational pin capability failed: parent affinity changed after child probe"
+    per_cpu = probe.get("per_cpu")
+    if isinstance(per_cpu, dict):
+        for key in sorted(per_cpu, key=lambda item: int(item) if str(item).isdigit() else str(item)):
+            item = per_cpu.get(key)
+            if not isinstance(item, dict) or item.get("passed") is True:
+                continue
+            cpu = item.get("cpu", key)
+            failure = item.get("failure_class")
+            if failure in {"permission_failure", "cpuset_or_kernel_rejected_cpu", "sched_setaffinity_errno"}:
+                return f"operational pin capability failed for CPU {cpu}: sched_setaffinity {item.get('errno_name')}"
+            if failure == "affinity_readback_failure":
+                return f"operational pin capability failed for CPU {cpu}: child affinity readback differs"
+            if failure == "actual_execution_cpu_mismatch":
+                return f"operational pin capability failed for CPU {cpu}: actual execution CPU differs"
+            return f"operational pin capability failed for CPU {cpu}: {item.get('diagnostic') or failure}"
+    return "operational pin capability failed"
+
+
+def require_family10h_platform(
+    cpuinfo_path: Path = Path("/proc/cpuinfo"),
+    *,
+    inherited_affinity_cpus: list[int] | None = None,
+    pin_probe: Any | None = None,
+) -> dict[str, Any]:
     text = cpuinfo_path.read_text(encoding="utf-8", errors="replace")
     stanzas = parse_cpuinfo_stanzas(text)
     require(bool(stanzas), "platform identity CPU stanza missing")
@@ -2126,9 +2310,39 @@ def require_family10h_platform(cpuinfo_path: Path = Path("/proc/cpuinfo")) -> di
     processor_ids = [item["processor"] for item in processors]
     require(len(set(processor_ids)) == len(processor_ids), "platform identity duplicate processor id")
     required_cpus = {public.SOURCE_CPU_EXPECTED, public.RECEIVER_CPU_EXPECTED}
-    require(required_cpus.issubset(set(processor_ids)), "platform identity missing frozen source or receiver CPU")
-    affinity = sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") and cpuinfo_path == Path("/proc/cpuinfo") else sorted(processor_ids)
-    require(required_cpus.issubset(set(affinity)), "platform affinity excludes frozen source or receiver CPU")
+    require(public.SOURCE_CPU_EXPECTED in processor_ids, "platform identity missing frozen source CPU")
+    require(public.RECEIVER_CPU_EXPECTED in processor_ids, "platform identity missing frozen receiver CPU")
+    canonical_cpuinfo = cpuinfo_path == Path("/proc/cpuinfo")
+    if inherited_affinity_cpus is not None:
+        inherited_affinity = sorted(inherited_affinity_cpus)
+        inherited_affinity_checked = True
+    elif hasattr(os, "sched_getaffinity") and canonical_cpuinfo:
+        inherited_affinity = sorted(os.sched_getaffinity(0))
+        inherited_affinity_checked = True
+    else:
+        inherited_affinity = sorted(processor_ids)
+        inherited_affinity_checked = False
+    if pin_probe is not None:
+        operational_pin = pin_probe(required_cpus)
+    elif canonical_cpuinfo:
+        operational_pin = probe_operational_pin_capability(required_cpus)
+    else:
+        operational_pin = {
+            "schema": "FAMILY10H_OPERATIONAL_PIN_CAPABILITY_PROBE_V1",
+            "required_cpus": sorted(required_cpus),
+            "inherited_parent_affinity": inherited_affinity,
+            "inherited_affinity_excluded_required_cpus": [],
+            "inherited_mask_restriction_only": False,
+            "per_cpu": {},
+            "parent_affinity_restored": True,
+            "opened_pmu": False,
+            "launched_runtime": False,
+            "created_tomography_output_root": False,
+            "passed": True,
+            "skipped_reason": "noncanonical cpuinfo fixture",
+        }
+    require(isinstance(operational_pin, dict), "operational pin capability result malformed")
+    require(operational_pin.get("passed") is True, format_pin_capability_failure(operational_pin))
     return {
         "vendor": "AuthenticAMD",
         "cpu_family": 16,
@@ -2138,8 +2352,12 @@ def require_family10h_platform(cpuinfo_path: Path = Path("/proc/cpuinfo")) -> di
         "source_cpu_expected": public.SOURCE_CPU_EXPECTED,
         "receiver_cpu_expected": public.RECEIVER_CPU_EXPECTED,
         "source_receiver_cpus_present": True,
-        "affinity_checked": cpuinfo_path == Path("/proc/cpuinfo"),
-        "affinity_cpus": affinity,
+        "affinity_checked": inherited_affinity_checked,
+        "affinity_cpus": inherited_affinity,
+        "inherited_affinity_checked": inherited_affinity_checked,
+        "inherited_affinity_cpus": inherited_affinity,
+        "operational_pin_capability": operational_pin,
+        "operational_pin_capability_passed": operational_pin.get("passed") is True,
         "cpuinfo_path": str(cpuinfo_path),
         "checked_before_discovery": True,
     }
@@ -2422,6 +2640,70 @@ def write_fake_cpuinfo_processors(path: Path, processors: list[int]) -> Path:
     return path
 
 
+def fake_pin_probe(
+    required_cpus: set[int],
+    *,
+    inherited_affinity: list[int] | None = None,
+    failures: dict[int, dict[str, Any]] | None = None,
+    parent_restored: bool = True,
+) -> dict[str, Any]:
+    inherited_affinity = sorted(inherited_affinity if inherited_affinity is not None else required_cpus)
+    failures = failures or {}
+    per_cpu: dict[str, dict[str, Any]] = {}
+    for cpu in sorted(required_cpus):
+        failure = failures.get(cpu)
+        if failure is None:
+            per_cpu[str(cpu)] = {
+                "cpu": cpu,
+                "passed": True,
+                "child_inherited_affinity": inherited_affinity,
+                "requested_affinity": [cpu],
+                "readback_affinity": [cpu],
+                "actual_execution_cpu": cpu,
+                "actual_execution_cpu_available": True,
+                "errno": None,
+                "errno_name": None,
+                "failure_class": None,
+                "diagnostic": "operational pin capability passed",
+                "parent_affinity_before": inherited_affinity,
+                "parent_affinity_after": inherited_affinity,
+                "parent_affinity_restored": True,
+            }
+        else:
+            errno_value = failure.get("errno")
+            per_cpu[str(cpu)] = {
+                "cpu": cpu,
+                "passed": False,
+                "child_inherited_affinity": inherited_affinity,
+                "requested_affinity": [cpu],
+                "readback_affinity": failure.get("readback_affinity"),
+                "actual_execution_cpu": failure.get("actual_execution_cpu"),
+                "actual_execution_cpu_available": failure.get("actual_execution_cpu") is not None,
+                "errno": errno_value,
+                "errno_name": failure.get("errno_name") or affinity_error_name(errno_value),
+                "failure_class": failure["failure_class"],
+                "diagnostic": failure.get("diagnostic"),
+                "parent_affinity_before": inherited_affinity,
+                "parent_affinity_after": inherited_affinity if parent_restored else [0],
+                "parent_affinity_restored": parent_restored,
+            }
+    inherited_excludes = sorted(cpu for cpu in required_cpus if cpu not in inherited_affinity)
+    return {
+        "schema": "FAMILY10H_OPERATIONAL_PIN_CAPABILITY_PROBE_V1",
+        "required_cpus": sorted(required_cpus),
+        "inherited_parent_affinity": inherited_affinity,
+        "inherited_affinity_excluded_required_cpus": inherited_excludes,
+        "inherited_mask_restriction_only": bool(inherited_excludes) and not failures,
+        "per_cpu": per_cpu,
+        "parent_affinity_after_all_probes": inherited_affinity if parent_restored else [0],
+        "parent_affinity_restored": parent_restored,
+        "opened_pmu": False,
+        "launched_runtime": False,
+        "created_tomography_output_root": False,
+        "passed": not failures and parent_restored,
+    }
+
+
 def platform_identity_regression(root: Path) -> dict[str, bool]:
     valid = root / "cpuinfo_valid"
     write_fake_family10h_cpuinfo(valid)
@@ -2444,6 +2726,11 @@ def platform_identity_regression(root: Path) -> dict[str, bool]:
     conflicting.write_text("processor\t: 0\nvendor_id\t: AuthenticAMD\nvendor_id\t: GenuineIntel\ncpu family\t: 16\nmodel\t\t: 10\n", encoding="utf-8")
     malformed = root / "cpuinfo_malformed"
     malformed.write_text("processor\t 0\nvendor_id\t: AuthenticAMD\ncpu family\t: 16\nmodel\t\t: 10\n", encoding="utf-8")
+    inherited_excludes_pass = require_family10h_platform(
+        valid,
+        inherited_affinity_cpus=[0, 1, 2, 3],
+        pin_probe=lambda required: fake_pin_probe(required, inherited_affinity=[0, 1, 2, 3]),
+    )
     return {
         "valid_family10h_platform_passes": require_family10h_platform(valid)["processor_count"] == 6,
         "intel_platform_rejected": raises_target_error(lambda: require_family10h_platform(intel)),
@@ -2452,8 +2739,77 @@ def platform_identity_regression(root: Path) -> dict[str, bool]:
         "mixed_processors_rejected": raises_target_error(lambda: require_family10h_platform(mixed)),
         "duplicate_conflicting_fields_rejected": raises_target_error(lambda: require_family10h_platform(conflicting)),
         "malformed_cpuinfo_rejected": raises_target_error(lambda: require_family10h_platform(malformed)),
-        "missing_source_cpu_rejected": raises_target_error(lambda: require_family10h_platform(write_fake_cpuinfo_processors(root / "cpuinfo_missing_source", [0, 1, 2, 3, 5]))),
-        "missing_receiver_cpu_rejected": raises_target_error(lambda: require_family10h_platform(write_fake_cpuinfo_processors(root / "cpuinfo_missing_receiver", [0, 1, 2, 3, 4]))),
+        "missing_source_cpu_rejected": raises_target_error_containing(
+            lambda: require_family10h_platform(write_fake_cpuinfo_processors(root / "cpuinfo_missing_source", [0, 1, 2, 3, 5])),
+            "platform identity missing frozen source CPU",
+        ),
+        "missing_receiver_cpu_rejected": raises_target_error_containing(
+            lambda: require_family10h_platform(write_fake_cpuinfo_processors(root / "cpuinfo_missing_receiver", [0, 1, 2, 3, 4])),
+            "platform identity missing frozen receiver CPU",
+        ),
+        "inherited_mask_excludes_required_but_pin_capability_passes": inherited_excludes_pass["operational_pin_capability"]["inherited_mask_restriction_only"] is True,
+        "sched_setaffinity_einval_source_rejected": raises_target_error_containing(
+            lambda: require_family10h_platform(
+                valid,
+                inherited_affinity_cpus=[0, 1, 2, 3],
+                pin_probe=lambda required: fake_pin_probe(
+                    required,
+                    inherited_affinity=[0, 1, 2, 3],
+                    failures={
+                        public.SOURCE_CPU_EXPECTED: {
+                            "failure_class": "cpuset_or_kernel_rejected_cpu",
+                            "errno": errno_module.EINVAL,
+                            "diagnostic": "sched_setaffinity EINVAL",
+                        }
+                    },
+                ),
+            ),
+            "operational pin capability failed for CPU 4: sched_setaffinity EINVAL",
+        ),
+        "sched_setaffinity_eperm_receiver_rejected": raises_target_error_containing(
+            lambda: require_family10h_platform(
+                valid,
+                inherited_affinity_cpus=[0, 1, 2, 3],
+                pin_probe=lambda required: fake_pin_probe(
+                    required,
+                    inherited_affinity=[0, 1, 2, 3],
+                    failures={
+                        public.RECEIVER_CPU_EXPECTED: {
+                            "failure_class": "permission_failure",
+                            "errno": errno_module.EPERM,
+                            "diagnostic": "sched_setaffinity EPERM",
+                        }
+                    },
+                ),
+            ),
+            "operational pin capability failed for CPU 5: sched_setaffinity EPERM",
+        ),
+        "child_affinity_readback_mismatch_rejected": raises_target_error_containing(
+            lambda: require_family10h_platform(
+                valid,
+                inherited_affinity_cpus=[0, 1, 2, 3],
+                pin_probe=lambda required: fake_pin_probe(
+                    required,
+                    inherited_affinity=[0, 1, 2, 3],
+                    failures={
+                        public.SOURCE_CPU_EXPECTED: {
+                            "failure_class": "affinity_readback_failure",
+                            "readback_affinity": [0],
+                            "diagnostic": "child affinity readback differs from requested singleton",
+                        }
+                    },
+                ),
+            ),
+            "operational pin capability failed for CPU 4: child affinity readback differs",
+        ),
+        "parent_affinity_change_rejected": raises_target_error_containing(
+            lambda: require_family10h_platform(
+                valid,
+                inherited_affinity_cpus=[0, 1, 2, 3],
+                pin_probe=lambda required: fake_pin_probe(required, inherited_affinity=[0, 1, 2, 3], parent_restored=False),
+            ),
+            "operational pin capability failed: parent affinity changed after child probe",
+        ),
     }
 
 

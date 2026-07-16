@@ -38,6 +38,12 @@ DISCOVERY_CHALLENGE_PATH = HERE / "CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLEN
 DISCOVERY_ATTEMPT_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.json"
 DISCOVERY_ATTEMPT_JOURNAL_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.jsonl"
 DISCOVERY_CLEANUP_CUSTODY_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_CLEANUP_CUSTODY.json"
+ATTEMPT_HISTORY_DIR = HERE / "SENSOR_AUTHORITY_ATTEMPT_HISTORY"
+ATTEMPT_HISTORY_INDEX_PATH = ATTEMPT_HISTORY_DIR / "ATTEMPT_HISTORY_INDEX.json"
+C3_ATTEMPT_HISTORY_DIR = ATTEMPT_HISTORY_DIR / "c3_55e059bc_failed_affinity_precheck"
+C3_SOURCE_AUTHORITY_COMMIT = "55e059bc7acaafee3feacddac2069d7b5e40edd1"
+C3_FAILURE_EVIDENCE_COMMIT = "35844e76317017a73dc0fa83f7e976642b80c66f"
+C3_FAILURE_REASON = "TargetError: platform affinity excludes frozen source or receiver CPU"
 FINAL_OBJECT_VERIFY_PATH = HERE / "CARRIER_TOMOGRAPHY_FINAL_OBJECT_VERIFY.json"
 FINAL_EVIDENCE_COMMIT_PATH = HERE / "CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT.json"
 MANIFEST_PATH = HERE / "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json"
@@ -111,6 +117,18 @@ REVIEW_ROLE_ALIASES = {
 SOURCE_AUDIT_REVIEW_DIR = HERE / "SOURCE_AUTHORITY_C3_REVIEW"
 SOURCE_AUDIT_FINDINGS_PATH = HERE / "SOURCE_AUTHORITY_C3_REVIEW_NORMALIZED.json"
 SOURCE_AUDIT_REVIEW_PATH = HERE / "SOURCE_AUTHORITY_C3_REVIEW_REPORTS.md"
+SOURCE_AUDIT_REVIEW_VERSIONED = {
+    "C3": {
+        "review_dir": HERE / "SOURCE_AUTHORITY_C3_REVIEW",
+        "findings_path": HERE / "SOURCE_AUTHORITY_C3_REVIEW_NORMALIZED.json",
+        "review_path": HERE / "SOURCE_AUTHORITY_C3_REVIEW_REPORTS.md",
+    },
+    "C4": {
+        "review_dir": HERE / "SOURCE_AUTHORITY_C4_REVIEW",
+        "findings_path": HERE / "SOURCE_AUTHORITY_C4_REVIEW_NORMALIZED.json",
+        "review_path": HERE / "SOURCE_AUTHORITY_C4_REVIEW_REPORTS.md",
+    },
+}
 SOURCE_AUDIT_REQUIRED_REVIEW_ROLES = {
     "physical_sensor_authority_auditor": "physical sensor-authority auditor",
     "discovery_transport_custody_auditor": "discovery transport and custody auditor",
@@ -273,6 +291,20 @@ def review_body_canonical_state(data: bytes) -> dict[str, Any]:
 def expected_source_audit_archive_paths(role: str, review_root: Path = SOURCE_AUDIT_REVIEW_DIR) -> tuple[Path, Path]:
     body_name, receipt_name = SOURCE_AUDIT_REVIEW_ARCHIVE_FILES[role]
     return review_root / body_name, review_root / receipt_name
+
+
+def source_audit_paths_for_commit(source_commit: str | None) -> dict[str, Path]:
+    if source_commit == C3_SOURCE_AUTHORITY_COMMIT:
+        return {
+            "review_dir": SOURCE_AUDIT_REVIEW_DIR,
+            "findings_path": SOURCE_AUDIT_FINDINGS_PATH,
+            "review_path": SOURCE_AUDIT_REVIEW_PATH,
+        }
+    return {
+        "review_dir": HERE / "SOURCE_AUTHORITY_C4_REVIEW",
+        "findings_path": HERE / "SOURCE_AUTHORITY_C4_REVIEW_NORMALIZED.json",
+        "review_path": HERE / "SOURCE_AUTHORITY_C4_REVIEW_REPORTS.md",
+    }
 
 
 def archive_path_matches(value: Any, expected: Path) -> bool:
@@ -943,11 +975,15 @@ def read_source_authority_review_for_discovery(
     runtime_binary_sha256: str,
 ) -> dict[str, Any]:
     failures: list[str] = []
-    if not SOURCE_AUDIT_FINDINGS_PATH.exists():
-        failures.append("source authority C3 review findings missing")
+    review_paths = source_audit_paths_for_commit(source_commit)
+    findings_path = review_paths["findings_path"]
+    review_path = review_paths["review_path"]
+    review_dir = review_paths["review_dir"]
+    if not findings_path.exists():
+        failures.append("source authority review findings missing")
         source_audit: dict[str, Any] = {}
     else:
-        source_audit = read_json(SOURCE_AUDIT_FINDINGS_PATH)
+        source_audit = read_json(findings_path)
     prior = commit_blob_json(source_commit, SUBAGENT_FINDINGS_PATH) if commit_exists(source_commit) else None
     prior_ids = exact_review_agent_ids(prior if isinstance(prior, dict) else {})
     quorum = source_audit_quorum(
@@ -956,8 +992,9 @@ def read_source_authority_review_for_discovery(
         expected_source_hashes_sha256=source_hashes_sha256,
         expected_source_bundle_sha256=source_bundle_sha256,
         expected_runtime_binary_sha256=runtime_binary_sha256,
-        review_report_present=SOURCE_AUDIT_REVIEW_PATH.exists(),
+        review_report_present=review_path.exists(),
         excluded_agent_ids=prior_ids,
+        review_root=review_dir,
     )
     failures.extend(quorum["failures"])
     return {
@@ -969,10 +1006,10 @@ def read_source_authority_review_for_discovery(
         "source_hashes_sha256": source_hashes_sha256,
         "source_bundle_sha256": source_bundle_sha256,
         "runtime_binary_sha256": runtime_binary_sha256,
-        "findings_path": str(SOURCE_AUDIT_FINDINGS_PATH) if SOURCE_AUDIT_FINDINGS_PATH.exists() else None,
-        "findings_sha256": public.sha256_file(SOURCE_AUDIT_FINDINGS_PATH) if SOURCE_AUDIT_FINDINGS_PATH.exists() else None,
-        "review_report_path": str(SOURCE_AUDIT_REVIEW_PATH) if SOURCE_AUDIT_REVIEW_PATH.exists() else None,
-        "review_report_sha256": public.sha256_file(SOURCE_AUDIT_REVIEW_PATH) if SOURCE_AUDIT_REVIEW_PATH.exists() else None,
+        "findings_path": str(findings_path) if findings_path.exists() else None,
+        "findings_sha256": public.sha256_file(findings_path) if findings_path.exists() else None,
+        "review_report_path": str(review_path) if review_path.exists() else None,
+        "review_report_sha256": public.sha256_file(review_path) if review_path.exists() else None,
     }
 
 
@@ -1098,6 +1135,131 @@ ATTEMPT_IMMUTABLE_FIELDS = [
 ]
 
 
+def zero_attempt_counters() -> dict[str, int]:
+    return {key: 0 for key in ATTEMPT_COUNTER_KEYS}
+
+
+def counter_sum(left: dict[str, int], right: dict[str, int]) -> dict[str, int]:
+    return {key: int(left.get(key, 0)) + int(right.get(key, 0)) for key in ATTEMPT_COUNTER_KEYS}
+
+
+def read_attempt_history_index() -> dict[str, Any]:
+    if not ATTEMPT_HISTORY_INDEX_PATH.exists():
+        return {"present": False, "passed": False, "failures": ["attempt history index missing"], "cumulative_counters": zero_attempt_counters()}
+    try:
+        index = read_json(ATTEMPT_HISTORY_INDEX_PATH)
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        return {"present": True, "passed": False, "failures": [f"attempt history index unreadable: {exc}"], "cumulative_counters": zero_attempt_counters()}
+    return validate_attempt_history_index(index)
+
+
+def validate_attempt_history_index(index: dict[str, Any]) -> dict[str, Any]:
+    failures: list[str] = []
+    attempts_value = index.get("attempts")
+    attempts = attempts_value if isinstance(attempts_value, list) else []
+    if index.get("schema") != "FAMILY10H_SENSOR_AUTHORITY_ATTEMPT_HISTORY_INDEX_V1":
+        failures.append("attempt history index schema mismatch")
+    if not isinstance(attempts_value, list):
+        failures.append("attempt history attempts missing")
+    c3_records = [item for item in attempts if isinstance(item, dict) and item.get("attempt_version") == "C3"]
+    if len(c3_records) != 1:
+        failures.append("attempt history must contain exactly one C3 record")
+        c3 = {}
+    else:
+        c3 = c3_records[0]
+    if c3:
+        expected_counters = {
+            "target_contact_count": 1,
+            "sensor_inventory_count": 0,
+            "live_invocation_count": 0,
+            "pmu_acquisition_count": 0,
+        }
+        if c3.get("source_authority_commit") != C3_SOURCE_AUTHORITY_COMMIT:
+            failures.append("C3 history source authority commit mismatch")
+        if c3.get("failure_evidence_commit") != C3_FAILURE_EVIDENCE_COMMIT:
+            failures.append("C3 history failure evidence commit mismatch")
+        if c3.get("failure_reason") != C3_FAILURE_REASON:
+            failures.append("C3 history failure reason mismatch")
+        counters = c3.get("counters")
+        if not counter_dict_equal_strict(counters if isinstance(counters, dict) else {}, expected_counters):
+            failures.append("C3 history counters mismatch")
+        if c3.get("cleanup_result") is not True:
+            failures.append("C3 history cleanup result mismatch")
+        if c3.get("remote_root_absence_result") is not True:
+            failures.append("C3 history remote-root absence mismatch")
+        archived_files = c3.get("archived_files")
+        if not isinstance(archived_files, dict):
+            failures.append("C3 history archived files missing")
+            archived_files = {}
+        for label, item in archived_files.items():
+            if not isinstance(item, dict):
+                failures.append(f"C3 history archived file malformed {label}")
+                continue
+            path_value = item.get("path")
+            sha_value = item.get("sha256")
+            if not isinstance(path_value, str) or not isinstance(sha_value, str):
+                failures.append(f"C3 history archived file binding missing {label}")
+                continue
+            path = HERE / path_value if not Path(path_value).is_absolute() else Path(path_value)
+            if not path.exists():
+                failures.append(f"C3 history archived file absent {label}")
+            elif public.sha256_file(path) != sha_value:
+                failures.append(f"C3 history archived file digest mismatch {label}")
+    cumulative = index.get("cumulative_counters")
+    expected_cumulative = {
+        "target_contact_count": 1,
+        "sensor_inventory_count": 0,
+        "live_invocation_count": 0,
+        "pmu_acquisition_count": 0,
+    }
+    if not counter_dict_equal_strict(cumulative if isinstance(cumulative, dict) else {}, expected_cumulative):
+        failures.append("attempt history cumulative counters mismatch")
+    index_sha = index.get("attempt_history_index_sha256")
+    if index_sha != public.digest({k: v for k, v in index.items() if k != "attempt_history_index_sha256"}):
+        failures.append("attempt history index digest mismatch")
+    return {
+        "present": True,
+        "passed": not failures,
+        "failures": failures,
+        "index": index,
+        "cumulative_counters": cumulative if isinstance(cumulative, dict) else zero_attempt_counters(),
+    }
+
+
+def history_cumulative_counters_or_zero() -> dict[str, int]:
+    history = read_attempt_history_index()
+    if history["passed"]:
+        return {key: history["cumulative_counters"][key] for key in ATTEMPT_COUNTER_KEYS}
+    return zero_attempt_counters()
+
+
+def active_attempt_paths() -> list[Path]:
+    return [
+        TEMPERATURE_SENSOR_AUTHORITY,
+        TARGET_DISCOVERY_RECEIPT,
+        DISCOVERY_TRANSPORT_PATH,
+        DISCOVERY_ATTEMPT_PATH,
+        DISCOVERY_ATTEMPT_JOURNAL_PATH,
+        DISCOVERY_CHALLENGE_PATH,
+        DISCOVERY_CLEANUP_CUSTODY_PATH,
+    ]
+
+
+def active_attempt_paths_present() -> list[Path]:
+    return [path for path in active_attempt_paths() if path.exists()]
+
+
+def enrich_attempt_accounting(receipt: dict[str, Any]) -> None:
+    active = {key: receipt[key] for key in ATTEMPT_COUNTER_KEYS if key in receipt}
+    if set(active) != set(ATTEMPT_COUNTER_KEYS):
+        return
+    baseline = history_cumulative_counters_or_zero()
+    receipt.setdefault("attempt_version", "C4")
+    receipt.setdefault("per_attempt_counters", {"attempt_version": receipt["attempt_version"], **active})
+    receipt.setdefault("prior_cumulative_lane_counters", baseline)
+    receipt.setdefault("cumulative_lane_counters", counter_sum(baseline, active))
+
+
 def validate_discovery_attempt_transition(previous: dict[str, Any] | None, receipt: dict[str, Any]) -> None:
     state = receipt.get("attempt_state")
     require(state in ATTEMPT_STATE_ORDER, "discovery attempt state missing or invalid")
@@ -1193,6 +1355,7 @@ def append_discovery_attempt_journal(receipt: dict[str, Any]) -> None:
 def write_discovery_attempt_receipt(payload: dict[str, Any]) -> dict[str, Any]:
     receipt = dict(payload)
     receipt["schema"] = "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT_V1"
+    enrich_attempt_accounting(receipt)
     receipt["discovery_attempt_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "discovery_attempt_sha256"})
     previous = read_json(DISCOVERY_ATTEMPT_PATH) if DISCOVERY_ATTEMPT_PATH.exists() else None
     if previous is None and DISCOVERY_ATTEMPT_JOURNAL_PATH.exists():
@@ -1227,6 +1390,7 @@ def parse_preflight_stdout(stdout: str) -> dict[str, Any]:
 def write_discovery_cleanup_custody_receipt(payload: dict[str, Any]) -> dict[str, Any]:
     receipt = dict(payload)
     receipt["schema"] = "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_FAILURE_CLEANUP_CUSTODY_V1"
+    enrich_attempt_accounting(receipt)
     for key in ATTEMPT_COUNTER_KEYS:
         require(is_strict_counter(receipt.get(key)), f"cleanup custody counter missing or invalid {key}")
     require(is_strict_int(receipt.get("target_contact_count")) and receipt.get("target_contact_count") == 1, "cleanup custody requires recorded target contact")
@@ -1942,22 +2106,18 @@ def acquire_temperature_sensor_authority(
     remote_root: str = DISCOVERY_REMOTE_ROOT,
     source_authority_commit: str | None = None,
 ) -> dict[str, Any]:
-    if any(
-        path.exists()
-        for path in [
-            TEMPERATURE_SENSOR_AUTHORITY,
-            TARGET_DISCOVERY_RECEIPT,
-            DISCOVERY_TRANSPORT_PATH,
-            DISCOVERY_ATTEMPT_PATH,
-            DISCOVERY_CHALLENGE_PATH,
-            DISCOVERY_CLEANUP_CUSTODY_PATH,
-        ]
-    ):
+    source_commit = source_authority_commit or os.environ.get("FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUTHORITY_COMMIT") or git_text("rev-parse", "HEAD")
+    if source_commit == C3_SOURCE_AUTHORITY_COMMIT:
+        raise ControllerError("C3 source authority acquisition already failed and is preserved as no-retry")
+    existing_active_paths = active_attempt_paths_present()
+    if existing_active_paths:
         raise ControllerError("second discovery attempt rejected: authority, discovery, transport, cleanup, or attempt receipt already exists")
+    history = read_attempt_history_index()
+    if not history["passed"]:
+        raise ControllerError("C4 acquisition requires archived C3 attempt history: " + ",".join(history["failures"]))
     source_hashes = read_source_hash_authority()
     schedule_sidecar = read_json(public.SCHEDULE_SHA)
     bundle = read_existing_source_bundle_authority()
-    source_commit = source_authority_commit or os.environ.get("FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUTHORITY_COMMIT") or git_text("rev-parse", "HEAD")
     source_commit_check = source_authority_commit_verification(source_commit)
     if not source_commit_check["passed"]:
         raise ControllerError("source authority commit verification failed: " + ",".join(source_commit_check["failures"]))
@@ -4292,6 +4452,7 @@ def controller_self_test() -> dict[str, Any]:
     attempt_journal_regression = discovery_attempt_journal_regression()
     strict_json = strict_json_regression()
     challenge_receipt = challenge_receipt_regression()
+    attempt_history = read_attempt_history_index()
     acquisition_transaction = controller_acquisition_transaction_regression()
     clearances = {
         role: {
@@ -4379,6 +4540,7 @@ def controller_self_test() -> dict[str, Any]:
         and attempt_journal_regression["passed"]
         and strict_json["passed"]
         and challenge_receipt["passed"]
+        and attempt_history["passed"]
         and acquisition_transaction["passed"]
         and all(quorum_regressions.values()),
         "offline_validate_sha256": validation["offline_validate_sha256"],
@@ -4395,6 +4557,7 @@ def controller_self_test() -> dict[str, Any]:
         "discovery_attempt_journal_regression": attempt_journal_regression,
         "strict_json_regression": strict_json,
         "challenge_receipt_regression": challenge_receipt,
+        "attempt_history_validation": attempt_history,
         "controller_acquisition_transaction_regression": acquisition_transaction,
         "live_authority_env_absent": live_env_absent,
         "review_quorum_regressions": quorum_regressions,
@@ -4447,6 +4610,13 @@ def manifest() -> dict[str, Any]:
     )
     temperature_authority = read_temperature_sensor_authority(expected_challenge=temperature_challenge)
     contact_counters = authority_contact_counters(temperature_authority)
+    attempt_history = read_attempt_history_index()
+    prior_lane_counters = (
+        {key: attempt_history["cumulative_counters"][key] for key in ATTEMPT_COUNTER_KEYS}
+        if attempt_history["passed"]
+        else zero_attempt_counters()
+    )
+    cumulative_lane_counters = counter_sum(prior_lane_counters, contact_counters)
     independent_review = {}
     if SUBAGENT_FINDINGS_PATH.exists():
         independent_review = read_json(SUBAGENT_FINDINGS_PATH)
@@ -4456,17 +4626,22 @@ def manifest() -> dict[str, Any]:
         for item in (independent_review.get("reviewer_verdicts") or {}).values()
         if isinstance(item, dict) and item.get("agent_id")
     }
+    source_audit_paths = source_audit_paths_for_commit(source_authority_commit)
+    source_audit_findings_path = source_audit_paths["findings_path"]
+    source_audit_review_path = source_audit_paths["review_path"]
+    source_audit_review_dir = source_audit_paths["review_dir"]
     source_audit = {}
-    if SOURCE_AUDIT_FINDINGS_PATH.exists():
-        source_audit = read_json(SOURCE_AUDIT_FINDINGS_PATH)
+    if source_audit_findings_path.exists():
+        source_audit = read_json(source_audit_findings_path)
     source_quorum = source_audit_quorum(
         source_audit,
         expected_source_commit=source_authority_commit,
         expected_source_hashes_sha256=source_hashes["source_hashes_sha256"],
         expected_source_bundle_sha256=bundle["sha256"],
         expected_runtime_binary_sha256=source_hashes["runtime_binary_authority"]["sha256"],
-        review_report_present=SOURCE_AUDIT_REVIEW_PATH.exists(),
+        review_report_present=source_audit_review_path.exists(),
         excluded_agent_ids=prior_reviewer_ids,
+        review_root=source_audit_review_dir,
     )
     review_blocked = not quorum["passed"]
     source_review_blocked = not source_quorum["passed"]
@@ -4518,10 +4693,10 @@ def manifest() -> dict[str, Any]:
             "review_quorum": quorum,
         },
         "source_authority_review": {
-            "findings_path": str(SOURCE_AUDIT_FINDINGS_PATH) if SOURCE_AUDIT_FINDINGS_PATH.exists() else None,
-            "findings_sha256": public.sha256_file(SOURCE_AUDIT_FINDINGS_PATH) if SOURCE_AUDIT_FINDINGS_PATH.exists() else None,
-            "review_report_path": str(SOURCE_AUDIT_REVIEW_PATH) if SOURCE_AUDIT_REVIEW_PATH.exists() else None,
-            "review_report_sha256": public.sha256_file(SOURCE_AUDIT_REVIEW_PATH) if SOURCE_AUDIT_REVIEW_PATH.exists() else None,
+            "findings_path": str(source_audit_findings_path) if source_audit_findings_path.exists() else None,
+            "findings_sha256": public.sha256_file(source_audit_findings_path) if source_audit_findings_path.exists() else None,
+            "review_report_path": str(source_audit_review_path) if source_audit_review_path.exists() else None,
+            "review_report_sha256": public.sha256_file(source_audit_review_path) if source_audit_review_path.exists() else None,
             "source_authority_commit": source_authority_commit,
             "source_hashes_sha256": source_hashes["source_hashes_sha256"],
             "source_bundle_sha256": bundle["sha256"],
@@ -4597,6 +4772,15 @@ def manifest() -> dict[str, Any]:
             "approved_sensor_identity": temperature_authority["approved_sensor_identity"],
             "source_authority_commit": source_authority_commit,
             "contact_counters": contact_counters,
+            "attempt_history": {
+                "path": str(ATTEMPT_HISTORY_INDEX_PATH) if ATTEMPT_HISTORY_INDEX_PATH.exists() else None,
+                "file_sha256": public.sha256_file(ATTEMPT_HISTORY_INDEX_PATH) if ATTEMPT_HISTORY_INDEX_PATH.exists() else None,
+                "passed": attempt_history["passed"],
+                "failures": attempt_history["failures"],
+            },
+            "active_attempt_counters": contact_counters,
+            "prior_cumulative_lane_counters": prior_lane_counters,
+            "cumulative_lane_counters": cumulative_lane_counters,
             "synthetic_or_provenance_free_identity_cannot_freeze": True,
             "self_authored_discovery_without_controller_challenge_cannot_freeze": True,
             "resolved_identity_bound_in_evidence": True,
@@ -4616,6 +4800,8 @@ def manifest() -> dict[str, Any]:
             "this_task_authorizes_live_execution": False,
         },
         "contact_counter_attestation": contact_counters,
+        "active_attempt_counter_attestation": contact_counters,
+        "cumulative_lane_counter_attestation": cumulative_lane_counters,
         "zero_live_contact_attestation": {
             "target_contact_count": contact_counters["target_contact_count"],
             "sensor_inventory_count": contact_counters["sensor_inventory_count"],
@@ -4642,15 +4828,16 @@ def prepare_only() -> dict[str, Any]:
     public_self = public.write_self_test(HERE / "CARRIER_TOMOGRAPHY_SELF_TEST.json")
     write_split_self_tests(public_self)
     source_hashes = read_source_hash_authority()
+    bundle = write_source_bundle()
     target_result = target_self_test()
     runtime_result = runtime_self_test()
     transport = fake_transport_self_tests()
     deployment = deployment_layout_self_test()
     offline = offline_validate()
     controller = controller_self_test()
-    bundle = write_source_bundle()
     manifest_result = manifest()
     contact_counters = manifest_result["contact_counter_attestation"]
+    cumulative_lane_counters = manifest_result["cumulative_lane_counter_attestation"]
     result = {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_PREPARE_ONLY_RECEIPT_V1",
         "passed": all(
@@ -4675,6 +4862,8 @@ def prepare_only() -> dict[str, Any]:
         "sensor_inventory_count": contact_counters["sensor_inventory_count"],
         "live_invocation_count": contact_counters["live_invocation_count"],
         "pmu_acquisition_count": contact_counters["pmu_acquisition_count"],
+        "active_attempt_counters": contact_counters,
+        "cumulative_lane_counters": cumulative_lane_counters,
     }
     print(strict_json_dumps(result, indent=2))
     return result
@@ -4785,10 +4974,14 @@ def commit_has_blob(commit: str, path: Path) -> bool:
     return commit_blob_record(commit, path)["present"] is True
 
 
-def final_evidence_paths() -> dict[str, Path]:
+def final_evidence_paths(source_commit: str | None = None) -> dict[str, Path]:
+    source_audit_paths = source_audit_paths_for_commit(source_commit)
+    source_audit_findings_path = source_audit_paths["findings_path"]
+    source_audit_review_path = source_audit_paths["review_path"]
+    source_audit_review_dir = source_audit_paths["review_dir"]
     paths = {
-        "source audit findings": SOURCE_AUDIT_FINDINGS_PATH,
-        "source audit report": SOURCE_AUDIT_REVIEW_PATH,
+        "source audit findings": source_audit_findings_path,
+        "source audit report": source_audit_review_path,
         "target discovery receipt": TARGET_DISCOVERY_RECEIPT,
         "temperature authority receipt": TEMPERATURE_SENSOR_AUTHORITY,
         "discovery transport receipt": DISCOVERY_TRANSPORT_PATH,
@@ -4799,8 +4992,8 @@ def final_evidence_paths() -> dict[str, Path]:
         "manifest sidecar": MANIFEST_SHA_PATH,
     }
     for role, (body_name, receipt_name) in SOURCE_AUDIT_REVIEW_ARCHIVE_FILES.items():
-        paths[f"source audit {role} body"] = SOURCE_AUDIT_REVIEW_DIR / body_name
-        paths[f"source audit {role} receipt"] = SOURCE_AUDIT_REVIEW_DIR / receipt_name
+        paths[f"source audit {role} body"] = source_audit_review_dir / body_name
+        paths[f"source audit {role} receipt"] = source_audit_review_dir / receipt_name
     return paths
 
 
@@ -4892,6 +5085,8 @@ def replay_final_exact_objects(
     if repo_root is not None or package_root is not None:
         replay_repo_root = Path(repo_root or REPO_ROOT).resolve()
         replay_package_root = Path(package_root or HERE).resolve()
+        replay_source_audit_dir_name = "SOURCE_AUTHORITY_C3_REVIEW" if source_commit == C3_SOURCE_AUTHORITY_COMMIT else "SOURCE_AUTHORITY_C4_REVIEW"
+        replay_source_audit_prefix = "SOURCE_AUTHORITY_C3" if source_commit == C3_SOURCE_AUTHORITY_COMMIT else "SOURCE_AUTHORITY_C4"
         path_bindings = {
             "REPO_ROOT": replay_repo_root,
             "HERE": replay_package_root,
@@ -4923,9 +5118,9 @@ def replay_final_exact_objects(
             "SUBAGENT_FINDINGS_PATH": replay_package_root / "SUBAGENT_FINDINGS_NORMALIZED.json",
             "SUBAGENT_REVIEW_PATH": replay_package_root / "SUBAGENT_REVIEW_REPORTS.md",
             "BINARY_PATH": replay_package_root / "family10h_carrier_tomography_runtime",
-            "SOURCE_AUDIT_REVIEW_DIR": replay_package_root / "SOURCE_AUTHORITY_C3_REVIEW",
-            "SOURCE_AUDIT_FINDINGS_PATH": replay_package_root / "SOURCE_AUTHORITY_C3_REVIEW_NORMALIZED.json",
-            "SOURCE_AUDIT_REVIEW_PATH": replay_package_root / "SOURCE_AUTHORITY_C3_REVIEW_REPORTS.md",
+            "SOURCE_AUDIT_REVIEW_DIR": replay_package_root / replay_source_audit_dir_name,
+            "SOURCE_AUDIT_FINDINGS_PATH": replay_package_root / f"{replay_source_audit_prefix}_REVIEW_NORMALIZED.json",
+            "SOURCE_AUDIT_REVIEW_PATH": replay_package_root / f"{replay_source_audit_prefix}_REVIEW_REPORTS.md",
         }
         old_bindings = {name: globals()[name] for name in path_bindings}
         try:
@@ -4980,7 +5175,7 @@ def replay_final_exact_objects(
             "repo_path": path_to_repo_relative(path),
             "present": False,
         }
-        for label, path in final_evidence_paths().items()
+        for label, path in final_evidence_paths(source_commit).items()
     }
     for label, record in evidence_blob_records.items():
         if record.get("present") is not True:
@@ -5009,7 +5204,8 @@ def replay_final_exact_objects(
     if not independent_quorum["passed"]:
         failures.append("independent review quorum failed from evidence blob")
 
-    source_audit = commit_blob_json(evidence_commit, SOURCE_AUDIT_FINDINGS_PATH) if commit_exists(evidence_commit) else None
+    source_audit_paths = source_audit_paths_for_commit(source_commit)
+    source_audit = commit_blob_json(evidence_commit, source_audit_paths["findings_path"]) if commit_exists(evidence_commit) else None
     if not isinstance(source_audit, dict):
         failures.append("source audit findings blob is not valid JSON")
         source_audit = {}
@@ -5022,6 +5218,7 @@ def replay_final_exact_objects(
         review_report_present=evidence_blob_records.get("source audit report", {}).get("present") is True,
         excluded_agent_ids=exact_review_agent_ids(independent_review),
         evidence_commit=evidence_commit,
+        review_root=source_audit_paths["review_dir"],
     )
     if not source_quorum["passed"]:
         failures.append("source authority review quorum failed from evidence blob")
@@ -5550,7 +5747,7 @@ def final_exact_object_verification(*, evidence_commit: str | None = None) -> di
         "final_evidence_commit_path": str(FINAL_EVIDENCE_COMMIT_PATH),
         "final_evidence_commit_file_sha256": public.sha256_file(FINAL_EVIDENCE_COMMIT_PATH),
         "final_evidence_commit_sha256": final_evidence_authority["final_evidence_commit_sha256"],
-        "required_evidence_paths": {label: str(path) for label, path in final_evidence_paths().items()},
+        "required_evidence_paths": {label: str(path) for label, path in final_evidence_paths(source_commit).items()},
         "missing_evidence_paths": sorted(label for label, record in replay["evidence_blob_records"].items() if record.get("present") is not True),
     }
     result["final_exact_object_verification_sha256"] = public.digest(
