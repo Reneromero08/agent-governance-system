@@ -1569,6 +1569,16 @@ def validate_minimal_evidence_root(root: Path, schedule: dict[str, Any]) -> dict
     return {"passed": validation["passed"] and not failures, "failures": failures + validation["failures"], "validation": validation}
 
 
+def build_authorized_feature_freeze(schedule: dict[str, Any], approved_temperature_identity: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "frozen_before_analysis": True,
+        "public_only": True,
+        "schedule_sha256": public.digest(schedule),
+        "receiver_feature_boundary": "public_schedule_and_public_pmu_only",
+        "temperature_sensor_identity": approved_temperature_identity,
+    }
+
+
 def write_minimal_success_root(root: Path, schedule: dict[str, Any]) -> None:
     packet = public.minimal_success_packet(schedule)
     write_jsonl(root / "raw_records.jsonl", packet["raw_records"])
@@ -1584,6 +1594,28 @@ def evidence_file_fixtures(schedule: dict[str, Any]) -> dict[str, Any]:
         write_minimal_success_root(success_root, schedule)
         success = validate_minimal_evidence_root(success_root, schedule)
 
+        authorized_shape_root = root / "authorized_shape"
+        authorized_shape_root.mkdir()
+        packet = public.minimal_success_packet(schedule)
+        write_jsonl(authorized_shape_root / "raw_records.jsonl", packet["raw_records"])
+        write_jsonl(authorized_shape_root / "source_death_receipts.jsonl", packet["source_death_receipts"])
+        authorized_feature_freeze = build_authorized_feature_freeze(
+            schedule,
+            packet["feature_freeze"]["temperature_sensor_identity"],
+        )
+        write_json(authorized_shape_root / "feature_freeze.json", authorized_feature_freeze)
+        authorized_shape = validate_minimal_evidence_root(authorized_shape_root, schedule)
+
+        authorized_extra_root = root / "authorized_extra"
+        authorized_extra_root.mkdir()
+        write_jsonl(authorized_extra_root / "raw_records.jsonl", packet["raw_records"])
+        write_jsonl(authorized_extra_root / "source_death_receipts.jsonl", packet["source_death_receipts"])
+        write_json(
+            authorized_extra_root / "feature_freeze.json",
+            {**authorized_feature_freeze, "temperature_authority_controller_challenge_sha256": "0" * 64},
+        )
+        authorized_extra = validate_minimal_evidence_root(authorized_extra_root, schedule)
+
         missing_root = root / "missing"
         missing_root.mkdir()
         write_minimal_success_root(missing_root, schedule)
@@ -1597,8 +1629,19 @@ def evidence_file_fixtures(schedule: dict[str, Any]) -> dict[str, Any]:
         extra = validate_minimal_evidence_root(extra_root, schedule)
 
     return {
-        "passed": success["passed"] and not missing["passed"] and not extra["passed"],
+        "passed": all(
+            [
+                success["passed"],
+                authorized_shape["passed"],
+                not authorized_extra["passed"],
+                not missing["passed"],
+                not extra["passed"],
+            ]
+        ),
         "three_file_minimal_success_packet": success,
+        "authorized_feature_freeze_shape_passed": authorized_shape,
+        "authorized_feature_freeze_extra_challenge_hash_rejected": not authorized_extra["passed"],
+        "authorized_feature_freeze_keyset": sorted(authorized_feature_freeze),
         "missing_evidence_file_rejected": not missing["passed"],
         "extra_evidence_file_rejected": not extra["passed"],
     }
@@ -2652,14 +2695,7 @@ def execute_authorized(source_root: Path, output_root: Path) -> dict[str, Any]:
         measurements_path.unlink()
         write_json(
             output_root / "feature_freeze.json",
-            {
-                "frozen_before_analysis": True,
-                "public_only": True,
-                "schedule_sha256": public.digest(schedule),
-                "receiver_feature_boundary": "public_schedule_and_public_pmu_only",
-                "temperature_sensor_identity": approved_temperature_identity,
-                "temperature_authority_controller_challenge_sha256": public.digest(controller_challenge),
-            },
+            build_authorized_feature_freeze(schedule, approved_temperature_identity),
         )
         evidence_validation = validate_minimal_evidence_root(output_root, schedule)
     else:

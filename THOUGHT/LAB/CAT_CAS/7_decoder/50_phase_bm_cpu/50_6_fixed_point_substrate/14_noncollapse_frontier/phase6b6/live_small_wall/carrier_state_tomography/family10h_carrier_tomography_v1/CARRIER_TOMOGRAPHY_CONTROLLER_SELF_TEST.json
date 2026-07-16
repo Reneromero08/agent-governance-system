@@ -84,7 +84,7 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "38391a03f5d8e5643d9a3c85fdcd80e32a28bc120d8d582f2bf84619a7da46cd",
+  "offline_validate_sha256": "ee26e8ca79abd2c10e70fc633240e648d99bc1b9fc77fc1852b28e83f9adc3e6",
   "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -148,7 +148,7 @@
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "e5f525971d9c751020c7969edf3af746204597de4b9e23e827cb671b933f2234",
+  "self_test_sha256": "ec56e64c416daac972383fd963f9daf63c3f56d607dd44bc772a525783d44592",
   "sensor_inventory_count": 0,
   "source_audit_quorum_regression": {
     "checks": {
