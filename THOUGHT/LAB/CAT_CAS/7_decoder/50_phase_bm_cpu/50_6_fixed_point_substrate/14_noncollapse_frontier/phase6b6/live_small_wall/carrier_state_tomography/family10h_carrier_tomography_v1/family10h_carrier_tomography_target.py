@@ -165,6 +165,14 @@ SOURCE_REVIEW_BINDING_KEYS = {
     "source_hashes_sha256",
     "source_bundle_sha256",
 }
+CONTACT_COUNTER_KEYS = ["target_contact_count", "sensor_inventory_count", "live_invocation_count", "pmu_acquisition_count"]
+FROZEN_CONTACT_COUNTERS = {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}
+
+
+def contact_counter_object_equal_strict(value: Any, expected: dict[str, int] = FROZEN_CONTACT_COUNTERS) -> bool:
+    if not isinstance(value, dict) or set(value) != set(expected):
+        return False
+    return all(public.is_json_int(value.get(key)) and value.get(key) == expected_value for key, expected_value in expected.items())
 
 
 class TargetError(RuntimeError):
@@ -613,7 +621,7 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
             failures.append("frozen package lacks passing offline validation")
         validate_target_offline_receipts(source_root, manifest, failures)
         counters = manifest.get("contact_counter_attestation", {})
-        if counters != {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}:
+        if not contact_counter_object_equal_strict(counters, FROZEN_CONTACT_COUNTERS):
             failures.append("frozen package contact counters are not exactly 1/1/0/0")
         final_section = manifest.get("final_exact_object_verification", {})
         if final_section.get("passed") is not True:
@@ -960,17 +968,17 @@ def validate_temperature_sensor_authority_payload(
         authorizing_scope = discovery.get("authorizing_scope")
         if not isinstance(authorizing_scope, dict) or authorizing_scope.get("authorizing") is not True:
             failures.append("temperature sensor discovery was not captured from canonical target sensor roots")
-        if discovery.get("target_contact_count") != 1:
+        if not public.is_json_int(discovery.get("target_contact_count")) or discovery.get("target_contact_count") != 1:
             failures.append("temperature sensor discovery target contact count must be one")
-        if discovery.get("sensor_inventory_count") != 1:
+        if not public.is_json_int(discovery.get("sensor_inventory_count")) or discovery.get("sensor_inventory_count") != 1:
             failures.append("temperature sensor discovery inventory count must be one")
-        if discovery.get("live_invocation_count") != 0:
+        if not public.is_json_int(discovery.get("live_invocation_count")) or discovery.get("live_invocation_count") != 0:
             failures.append("temperature sensor discovery live invocation count must be zero")
-        if discovery.get("pmu_acquisition_count") != 0:
+        if not public.is_json_int(discovery.get("pmu_acquisition_count")) or discovery.get("pmu_acquisition_count") != 0:
             failures.append("temperature sensor discovery PMU acquisition count must be zero")
-        if discovery.get("pmu_open_count") != 0:
+        if not public.is_json_int(discovery.get("pmu_open_count")) or discovery.get("pmu_open_count") != 0:
             failures.append("temperature sensor discovery PMU open count must be zero")
-        if discovery.get("runtime_launch_count") != 0:
+        if not public.is_json_int(discovery.get("runtime_launch_count")) or discovery.get("runtime_launch_count") != 0:
             failures.append("temperature sensor discovery runtime launch count must be zero")
         if discovery.get("tomography_output_root_created") is not False:
             failures.append("temperature sensor discovery must not create tomography output root")
@@ -1099,15 +1107,15 @@ def validate_temperature_sensor_authority_payload(
             failures.append("temperature discovery transport authority receipt file hash mismatch")
         if expected_transport_receipt.get("controller_challenge_sha256") != receipt.get("controller_challenge_sha256"):
             failures.append("temperature discovery transport challenge mismatch")
-        if expected_transport_receipt.get("retry_count") != 0:
+        if not public.is_json_int(expected_transport_receipt.get("retry_count")) or expected_transport_receipt.get("retry_count") != 0:
             failures.append("temperature discovery transport retry count must be zero")
-        if expected_transport_receipt.get("target_contact_count") != 1:
+        if not public.is_json_int(expected_transport_receipt.get("target_contact_count")) or expected_transport_receipt.get("target_contact_count") != 1:
             failures.append("temperature discovery transport target contact count must be one")
-        if expected_transport_receipt.get("sensor_inventory_count") != 1:
+        if not public.is_json_int(expected_transport_receipt.get("sensor_inventory_count")) or expected_transport_receipt.get("sensor_inventory_count") != 1:
             failures.append("temperature discovery transport inventory count must be one")
-        if expected_transport_receipt.get("live_invocation_count") != 0:
+        if not public.is_json_int(expected_transport_receipt.get("live_invocation_count")) or expected_transport_receipt.get("live_invocation_count") != 0:
             failures.append("temperature discovery transport live invocation count must be zero")
-        if expected_transport_receipt.get("pmu_acquisition_count") != 0:
+        if not public.is_json_int(expected_transport_receipt.get("pmu_acquisition_count")) or expected_transport_receipt.get("pmu_acquisition_count") != 0:
             failures.append("temperature discovery transport PMU acquisition count must be zero")
     failures.extend(validate_temperature_authority_challenge(receipt, discovery, expected_challenge))
     if receipt.get("hwmon_name") not in APPROVED_TEMPERATURE_HWMON_NAMES:
@@ -1119,6 +1127,11 @@ def validate_temperature_sensor_authority_payload(
             failures.append("temperature sensor authority hwmon name mismatch")
         if receipt.get("sensor_label") != identity.get("sensor_label"):
             failures.append("temperature sensor authority sensor label mismatch")
+    for key in ["target_contact_count", "sensor_inventory_count", "live_invocation_count", "pmu_acquisition_count"]:
+        if not public.is_json_int(receipt.get(key)):
+            failures.append(f"temperature sensor authority counter missing or invalid {key}")
+        elif isinstance(discovery, dict) and receipt.get(key) != discovery.get(key):
+            failures.append(f"temperature sensor authority counter mismatch {key}")
     return {
         "passed": not failures,
         "failures": failures,
@@ -1423,9 +1436,31 @@ def manifest_live_gate_fixture() -> dict[str, Any]:
         "controller_challenge": controller_challenge,
         "controller_challenge_sha256": controller_challenge_sha,
         "controller_nonce": controller_nonce,
+        "source_authority_commit": controller_challenge["authorized_commit"],
+        "target_contact_count": complete_forged_discovery["target_contact_count"],
+        "sensor_inventory_count": complete_forged_discovery["sensor_inventory_count"],
+        "live_invocation_count": complete_forged_discovery["live_invocation_count"],
+        "pmu_acquisition_count": complete_forged_discovery["pmu_acquisition_count"],
     }
     complete_forged_authority["temperature_sensor_authority_sha256"] = public.digest(
         {k: v for k, v in complete_forged_authority.items() if k != "temperature_sensor_authority_sha256"}
+    )
+    boolean_discovery_counter = dict(complete_forged_discovery)
+    boolean_discovery_counter["target_contact_count"] = True
+    boolean_discovery_counter["target_discovery_receipt_sha256"] = public.digest(
+        {k: v for k, v in boolean_discovery_counter.items() if k != "target_discovery_receipt_sha256"}
+    )
+    boolean_discovery_counter_authority = {
+        **complete_forged_authority,
+        "target_discovery_receipt": boolean_discovery_counter,
+        "target_contact_count": True,
+    }
+    boolean_discovery_counter_authority["temperature_sensor_authority_sha256"] = public.digest(
+        {k: v for k, v in boolean_discovery_counter_authority.items() if k != "temperature_sensor_authority_sha256"}
+    )
+    boolean_authority_counter = {**complete_forged_authority, "target_contact_count": True}
+    boolean_authority_counter["temperature_sensor_authority_sha256"] = public.digest(
+        {k: v for k, v in boolean_authority_counter.items() if k != "temperature_sensor_authority_sha256"}
     )
     complete_forged_without_expected_rejected = not validate_temperature_sensor_authority_payload(complete_forged_authority)["passed"]
     complete_forged_wrong_expected_rejected = not validate_temperature_sensor_authority_payload(
@@ -1436,6 +1471,14 @@ def manifest_live_gate_fixture() -> dict[str, Any]:
         complete_forged_authority,
         expected_challenge=controller_challenge,
     )["passed"]
+    boolean_discovery_counter_result = validate_temperature_sensor_authority_payload(
+        boolean_discovery_counter_authority,
+        expected_challenge=controller_challenge,
+    )
+    boolean_authority_counter_result = validate_temperature_sensor_authority_payload(
+        boolean_authority_counter,
+        expected_challenge=controller_challenge,
+    )
     boolean_only_frozen_manifest_rejected = not validate_manifest_temperature_authority(
         {
             "package_decision": public.PACKAGE_DECISION_FROZEN,
@@ -1448,6 +1491,10 @@ def manifest_live_gate_fixture() -> dict[str, Any]:
         },
         Path("/nonexistent/family10h_temperature_authority_fixture"),
     )["passed"]
+    boolean_frozen_contact_counter_rejected = not contact_counter_object_equal_strict(
+        {"target_contact_count": True, "sensor_inventory_count": True, "live_invocation_count": False, "pmu_acquisition_count": False},
+        FROZEN_CONTACT_COUNTERS,
+    )
     checks = {
         "hash_valid_blocked_manifest_rejected_before_hardware": blocked_rejected,
         "frozen_manifest_missing_identity_rejected": missing_identity_rejected,
@@ -1458,6 +1505,9 @@ def manifest_live_gate_fixture() -> dict[str, Any]:
         "well_formed_self_authored_discovery_without_expected_challenge_rejected": complete_forged_without_expected_rejected,
         "well_formed_self_authored_discovery_wrong_expected_challenge_rejected": complete_forged_wrong_expected_rejected,
         "well_formed_challenge_bound_fixture_without_transport_rejected": complete_forged_with_expected_rejected_without_transport,
+        "boolean_discovery_counter_rejected": any("temperature sensor discovery target contact count must be one" in item for item in boolean_discovery_counter_result["failures"]),
+        "boolean_authority_counter_rejected": any("temperature sensor authority counter missing or invalid target_contact_count" in item for item in boolean_authority_counter_result["failures"]),
+        "boolean_frozen_contact_counter_rejected": boolean_frozen_contact_counter_rejected,
         "boolean_only_frozen_manifest_rejected": boolean_only_frozen_manifest_rejected,
         "explicit_live_authority_still_required": True,
     }

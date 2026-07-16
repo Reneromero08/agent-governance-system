@@ -18,6 +18,9 @@
       "boolean_transport_counter_rejected": true,
       "failure_cleanup_receipt_writes_without_success_journal": true,
       "malformed_preflight_fails_closed_and_preserves_base": true,
+      "parsed_invalid_copyback_cleanup_receipt_sealed": true,
+      "parsed_invalid_copyback_journal_stops_before_success_cleanup": true,
+      "parsed_invalid_copyback_no_success_artifacts": true,
       "production_acquisition_has_no_injected_transport_surface": true,
       "valid_structured_preflight_parses": true
     },
@@ -71,7 +74,7 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "593851f003e20a26e1652d6862b9e8a81a6fae2deb554f198777defeb975bb12",
+  "offline_validate_sha256": "0f619628f4973df6deffe9020e59d6853062aa78f0640f99512d98f8ecf4eac7",
   "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -135,7 +138,7 @@
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "dbf1cd3807bdbf34ce164a403690886084792abc22eb03d78331ad8fedba9b1e",
+  "self_test_sha256": "8554f73f58b1756b7150b698eca020b3bcb89df9bbba2a2f0b57351e6194f2a6",
   "sensor_inventory_count": 0,
   "source_audit_quorum_regression": {
     "checks": {
@@ -188,6 +191,11 @@
   },
   "target_contact_count": 0,
   "temperature_sensor_authority_regression": {
+    "boolean_authority_counter_rejected": true,
+    "boolean_discovery_counter_rejected": true,
+    "boolean_final_attempt_counter_rejected": true,
+    "boolean_manifest_counter_object_rejected": true,
+    "boolean_offline_zero_receipt_counter_rejected": true,
     "current_authority_failures": [
       "temperature sensor authority receipt missing"
     ],
