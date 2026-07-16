@@ -1,6 +1,6 @@
 # Recursive Wave Operator Package
 
-**Status:** `SOURCE_CANDIDATE__SOURCE_CUSTODY_REPAIRED__EXACT_R0_QUALIFICATION_PENDING`  
+**Status:** `AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED`<br>
 **Package:** `audio_recursive_wave_operator_v1`  
 **Parent result:** `AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`  
 **Source commit:** `8025c63f0206e04130c00972165206b054688942`  
@@ -99,14 +99,19 @@ new carrier frequency
 new root reference phase
 state-edge modulation index
 drive-edge modulation index
+prospective canonical state child index
+prospective canonical drive child index
 predecessor tree digest
 drive tree digest
 result tree digest
 state and drive root identities
 ```
 
-State and drive node-ID sets must be disjoint. A receipt must identify exactly one
-embedded predecessor. A wrong ancestry receipt must reject.
+State and drive node-ID sets must be disjoint. The exact step specification commits the
+two distinct canonical serialized child positions before the operator runs. The operator
+must reproduce those positions, and the receipt must bind its state and drive fields to
+the same prospective positions. This keeps the predecessor role unambiguous even when
+the two edge modulation indices are equal. A wrong ancestry receipt must reject.
 
 Before the Ising package, both state and drive must have global orientation `0`. The R0
 whole-tree `0/pi` action remains preserved evidence but does not enter R1 recurrence.
@@ -161,8 +166,13 @@ drive order produces a different nested geometry and response
 flat-wave baseline has no canonical ancestry chain
 decoded-spin baseline is not the native final state
 native operator source contains no scalar-feedback route
+native recurrence-defining assignments and runtime bindings match the frozen AST shapes
+module shadowing, decorators, indirect rebinding, and unapproved calls reject
+match-pattern captures cannot rebind recurrence result or protected native names
 state/drive identity overlap rejects
 wrong ancestry receipt rejects
+fully swapped equal-beta role roots, digests, and indices reject
+out-of-order steps reject during trajectory construction
 step-spec identity is deterministic
 ```
 
@@ -215,7 +225,7 @@ carrier restoration
 result survival outside restored history
 ```
 
-## 11. Local Source-Candidate Receipt
+## 11. Historical Source-Candidate Receipt
 
 An API-compatible local model of the committed source produced:
 
@@ -231,6 +241,38 @@ decoded response      0.8747168955281586 diagnostic only
 The local model used an API-compatible R0 stub. It did not execute from a clean
 repository checkout against the exact committed R0 bytes. These values are implementation
 evidence only and must be recomputed from the committed source.
+
+The exact-checkout qualification has now superseded this historical receipt:
+
+```text
+repaired source tuple       PASS
+R0 verify                   38 PASS / 0 FAIL
+R0 self-test                38 PASS / 0 FAIL
+candidate fresh processes  exact byte-for-byte match / 13 PASS
+hardened R1 self-test       78 PASS / 0 FAIL
+hardened R1 verify          78 PASS / 0 FAIL
+committed fixture files     17 / 204332 bytes
+committed state WAVs        4 / 192176 bytes
+final depth / nodes         6 / 12
+order response              0.971914111488 <= 0.99
+AST reachable functions     8
+AST forbidden dependencies  0
+AST unresolved calls        0
+AST recurrence-shape faults 0
+AST runtime-binding faults  0
+AST mutation probes         32 rejected
+R0 source binding           blob 956adb0ae8e84c091c1dc1e3de650be374fa96d1 / exact
+```
+
+The AST and binding result is a fresh-process committed-source qualification. It does
+not claim resistance to arbitrary post-import Python monkeypatching or a hostile
+interpreter with authority to replace live functions. Each authoritative build and
+verification run starts a new process and binds both the R1 and imported R0 source bytes.
+
+The current evidence hashes and exact T0-T3 custody records live in
+`RECURSIVE_WAVE_OPERATOR_LANE_STATE.md` and the machine-readable trajectory manifest.
+They are established only for the offline ordinary-software reference claim after
+four review IDs, package-local verification, and changed-path qualification close.
 
 ## 12. Claim Law
 
@@ -287,8 +329,7 @@ would require a separate prospectively frozen experiment.
 ## 14. Current State
 
 ```text
-AUDIO_RECURSIVE_WAVE_OPERATOR_SOURCE_CANDIDATE
-AUDIO_RECURSIVE_WAVE_OPERATOR_NOT_YET_ESTABLISHED
+AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED
 SOFTWARE_CATALYTIC_WAVE_LOOP_NOT_ESTABLISHED
 RECURSIVE_CATALYTIC_ISING_NOT_ESTABLISHED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
@@ -308,5 +349,5 @@ SSH/SCP              0
 Next exact boundary:
 
 ```text
-EXACT_COMMITTED_R0_INTEGRATION_AND_R1_CUSTODY_QUALIFICATION
+COMMIT_AND_PUSH_AUDIO_BRANCH_ONLY
 ```

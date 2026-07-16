@@ -1,0 +1,177 @@
+{
+  "$id": "urn:cat-cas:recursive-wave-ancestry-receipt:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "child_roles": {
+      "const": [
+        "state",
+        "drive"
+      ],
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    },
+    "drive_child_index": {
+      "maximum": 1,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "drive_edge_modulation_index": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 2.0,
+      "type": "number"
+    },
+    "drive_root_id": {
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+      "type": "string"
+    },
+    "drive_tree_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "result_root_id": {
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+      "type": "string"
+    },
+    "result_tree_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "schema": {
+      "const": "recursive_wave_ancestry_receipt_v1",
+      "type": "string"
+    },
+    "state_child_index": {
+      "maximum": 1,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "state_edge_modulation_index": {
+      "exclusiveMinimum": 0.0,
+      "maximum": 2.0,
+      "type": "number"
+    },
+    "state_root_id": {
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+      "type": "string"
+    },
+    "state_tree_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "step_index": {
+      "maximum": 6,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "step_spec": {
+      "$id": "urn:cat-cas:recursive-wave-temporal-step:v1",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "carrier_frequency_hz": {
+          "exclusiveMaximum": 24000.0,
+          "exclusiveMinimum": 0.0,
+          "type": "number"
+        },
+        "drive_child_index": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "drive_modulation_index": {
+          "exclusiveMinimum": 0.0,
+          "maximum": 2.0,
+          "type": "number"
+        },
+        "root_id": {
+          "maxLength": 64,
+          "pattern": "^time[1-6]\\.[A-Za-z0-9._-]+$",
+          "type": "string"
+        },
+        "root_phase_rad": {
+          "maximum": 6.283185307179586,
+          "minimum": -6.283185307179586,
+          "type": "number"
+        },
+        "schema": {
+          "const": "recursive_wave_temporal_step_v1",
+          "type": "string"
+        },
+        "state_child_index": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "state_modulation_index": {
+          "exclusiveMinimum": 0.0,
+          "maximum": 2.0,
+          "type": "number"
+        },
+        "step_index": {
+          "maximum": 6,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "carrier_frequency_hz",
+        "drive_child_index",
+        "drive_modulation_index",
+        "root_id",
+        "root_phase_rad",
+        "schema",
+        "state_child_index",
+        "state_modulation_index",
+        "step_index"
+      ],
+      "title": "CAT_CAS complete-tree temporal step specification v1",
+      "type": "object",
+      "x-semantic-constraints": [
+        "root_id begins with time{step_index}.",
+        "state_child_index and drive_child_index are distinct canonical serialized child positions 0 and 1",
+        "all numbers are finite and booleans are not numbers",
+        "no answer, score, response, energy, spin, candidate, or winner field is admitted"
+      ]
+    },
+    "step_spec_canonical_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "step_spec_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "child_roles",
+    "drive_child_index",
+    "drive_edge_modulation_index",
+    "drive_root_id",
+    "drive_tree_digest",
+    "result_root_id",
+    "result_tree_digest",
+    "schema",
+    "state_child_index",
+    "state_edge_modulation_index",
+    "state_root_id",
+    "state_tree_digest",
+    "step_index",
+    "step_spec",
+    "step_spec_canonical_sha256",
+    "step_spec_digest"
+  ],
+  "title": "CAT_CAS complete-tree ancestry receipt v1",
+  "type": "object",
+  "x-semantic-constraints": [
+    "the exact step specification is embedded and bound twice",
+    "state_child_index and drive_child_index are distinct positions 0 and 1 in canonical serialized child order",
+    "one state role and one drive role cover every result-root child",
+    "both child roots, complete tree digests, and modulation indices match the result",
+    "the complete result root and tree digest match"
+  ]
+}

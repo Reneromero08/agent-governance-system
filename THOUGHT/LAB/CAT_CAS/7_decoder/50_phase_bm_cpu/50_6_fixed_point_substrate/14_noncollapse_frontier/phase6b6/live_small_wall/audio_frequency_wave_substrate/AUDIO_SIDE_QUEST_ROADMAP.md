@@ -1,14 +1,15 @@
 # CAT_CAS Audio-Frequency Wave Substrate Side Quest Roadmap
 
-**Status:** `ACTIVE_PARALLEL_LANE__RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`<br>
-**Roadmap version:** `1.3`<br>
+**Status:** `ACTIVE_PARALLEL_LANE__RECURSIVE_WAVE_OPERATOR_ESTABLISHED`<br>
+**Roadmap version:** `1.4`<br>
 **Branch:** `codex/audio-frequency-wave-substrate`<br>
 **Base main commit:** `32b5af119a03bc48bb00f279e6cc0014406147ad`<br>
 **Frozen offline foundation commit:** `f028dfd292d2dd0fd11380459417d5b60f936ee3`<br>
 **Roadmap commit binding:** the Git commit containing this file<br>
-**Current accepted results:** `AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED`; `AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`<br>
+**Current accepted results:** `AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED`; `AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`; `AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED`<br>
 **Recursive phase-tree software reference candidate:** `false`<br>
 **Recursive phase-tree software reference established:** `true`<br>
+**Recursive wave operator established:** `true`<br>
 **Recursive catalytic Ising emulator established:** `false`<br>
 **Physical carrier frozen:** `false`<br>
 **Physical audio computing established:** `false`<br>
@@ -269,7 +270,7 @@ a frozen operator evolves complete recursive trees across iterations without
 decoding them to scalar spins between steps
 ```
 
-Current state: **not established**.
+Current state: **established**.
 
 ### R2S: Software catalytic wave loop
 
@@ -389,12 +390,10 @@ transducer operation, or physical restoration is authorized by this roadmap.
 The next bounded implementation packet is:
 
 ```text
-1. freeze the `audio_recursive_wave_operator_v1` contract
-2. implement complete-tree temporal recurrence without scalar feedback
-3. preserve the complete recursive tree across every native update
-4. run flat-bank and decoded-spin recurrence as ordinary collapsed baselines
-5. only after operator closure begin the separate invariant-latch/catalytic-loop package
-6. only after catalytic-loop closure introduce global-Z2 Ising coupling
+1. freeze the separate `audio_catalytic_wave_loop_v1` contract
+2. define invariant latch, reverse traversal, restoration, and wrong-inverse controls
+3. preserve R1 as predecessor evidence without rewriting it
+4. only after catalytic-loop closure introduce global-Z2 Ising coupling
 ```
 
 The implementation agent must not touch `audio_fm_wave_v1/`, `main`, Family 10h
@@ -408,7 +407,9 @@ evidence, `SMALL_WALL_STATE.md`, live hardware, or preserved stashes.
 AUDIO_RECURSIVE_CATALYTIC_ARCHITECTURE_CORRECTED
 AUDIO_RECURSIVE_PHASE_FOUNDATION_STARTED
 AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED
-AUDIO_RECURSIVE_WAVE_OPERATOR_NOT_YET_ESTABLISHED
+AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED
+AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_NOT_YET_ESTABLISHED
+RECURSIVE_CATALYTIC_ISING_NOT_ESTABLISHED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 SMALL_WALL_CROSSED_NOT_PROMOTED
 ```

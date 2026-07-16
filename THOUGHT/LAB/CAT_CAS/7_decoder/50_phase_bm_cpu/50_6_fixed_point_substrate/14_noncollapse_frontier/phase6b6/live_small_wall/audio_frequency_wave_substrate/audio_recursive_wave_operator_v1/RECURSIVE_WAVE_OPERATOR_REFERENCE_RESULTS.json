@@ -1,0 +1,603 @@
+{
+  "execution_environment": {
+    "numpy": "1.26.4",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.6"
+  },
+  "r0_source_binding": {
+    "source_byte_count": 77043,
+    "source_git_blob_sha1": "956adb0ae8e84c091c1dc1e3de650be374fa96d1",
+    "source_sha256": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887"
+  },
+  "schema": "recursive_wave_operator_reference_result_v1",
+  "scientific": {
+    "claim_ceiling": "SOFTWARE_COMPLETE_TREE_TEMPORAL_RECURRENCE_REFERENCE_ONLY",
+    "collapsed_control_boundary": "flat and decoded-spin controls are diagnostic arrays rejected by native tree/receipt admission",
+    "established_token_if_all_gates_close": "AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED",
+    "fixture_count": 17,
+    "fixture_manifest_sha256": "28cbcec8997f6f5eb49dc13e6bf919342af0863a5ba6cb1a70f10dea6fcdbc4e",
+    "fixture_set_sha256": "da62112c0459c49673675182e67011899d8ee1e841df3650c0c4a0aeecd137dd",
+    "fixture_total_bytes": 204332,
+    "measurements": {
+      "ast_no_feedback": {
+        "allowed_attribute_calls": [
+          "TemporalStepReceipt.from_bytes",
+          "beam.canonical_bytes",
+          "beam.root.walk",
+          "canonical_roots.index",
+          "drive.digest",
+          "r0.PhaseEdge",
+          "r0.PhaseNode",
+          "r0.RecursivePhaseBeam",
+          "r0.deserialize_tree_bytes",
+          "receipt.canonical_bytes",
+          "receipt.step_spec.canonical_bytes",
+          "receipts.append",
+          "result.canonical_bytes",
+          "result.digest",
+          "spec.canonical_bytes",
+          "spec.canonical_sha256",
+          "spec.digest",
+          "state.digest",
+          "states.append"
+        ],
+        "forbidden_constructs": [],
+        "forbidden_hits": [],
+        "native_roots": [
+          "temporal_step",
+          "trajectory",
+          "extract_predecessor"
+        ],
+        "reachable_functions": [
+          "_beam_from_child",
+          "extract_predecessor",
+          "node_ids",
+          "require_native_tree",
+          "require_pre_ising_orientation",
+          "temporal_step",
+          "trajectory",
+          "validate_step_receipt"
+        ],
+        "recurrence_shape_violations": [],
+        "shadowing_violations": [],
+        "status": "PASS",
+        "unresolved_calls": []
+      },
+      "decoded_spin_max_difference": 1.99999999656,
+      "decoded_spin_response_diagnostic": 0.874716895528,
+      "depths": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "final_depth": 6,
+      "final_node_count": 12,
+      "flat_response_diagnostic": 0.999384321135,
+      "node_counts": [
+        3,
+        6,
+        9,
+        12
+      ],
+      "order_response": 0.971914111488,
+      "reordered_final_digest": "46b887ed5605f2c1b048c82d17361a68a779397aa7d60eada53fe90a9b4b3bef",
+      "state_step_max_differences": [
+        1.99999999997,
+        1.99999937074,
+        1.99999999422
+      ],
+      "trajectory_digests": [
+        "fe745b5e6a335a6813bd80e561ecc9293b7a1ca8c52cd6a4742f6453cf5c06df",
+        "08ed8b9578a2216a98f95e79789c78768e64b431cb3a0fc111b57ce97c63fe52",
+        "420536a98d44b29fec469c989a110e235af939f4358ef1d914876e72ceea9e38",
+        "c88d63ad5eb409ebecd82a8d912c1a04781b3e124fc972a09bf80834a5bbe7bc"
+      ],
+      "unit_modulus_max_error": 2.22044604925e-16
+    },
+    "ordinary_software_only": true,
+    "physical_claims_established": [],
+    "reference_tests_sha256": "5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5",
+    "schema": "recursive_wave_operator_scientific_result_v1",
+    "summary": {
+      "failed": 0,
+      "passed": 78,
+      "test_count": 78
+    },
+    "tests": [
+      {
+        "id": "depth_grows_one_per_step",
+        "observed": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "node_count_growth",
+        "observed": [
+          3,
+          6,
+          9,
+          12
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "every_state_is_valid_complete_tree",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "unit_modulus_trajectory",
+        "observed": 2.22044604925e-16,
+        "status": "PASS"
+      },
+      {
+        "id": "each_step_changes_the_complete_state",
+        "observed": [
+          1.99999999997,
+          1.99999937074,
+          1.99999999422
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "deterministic_trajectory_and_receipts",
+        "observed": [
+          "fe745b5e6a335a6813bd80e561ecc9293b7a1ca8c52cd6a4742f6453cf5c06df",
+          "08ed8b9578a2216a98f95e79789c78768e64b431cb3a0fc111b57ce97c63fe52",
+          "420536a98d44b29fec469c989a110e235af939f4358ef1d914876e72ceea9e38",
+          "c88d63ad5eb409ebecd82a8d912c1a04781b3e124fc972a09bf80834a5bbe7bc"
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "trajectory_construction_order_rejected",
+        "observed": "trajectory steps must be ordered and contiguous",
+        "status": "PASS"
+      },
+      {
+        "id": "exact_reverse_ancestry_recovers_t0_bytes",
+        "observed": "fe745b5e6a335a6813bd80e561ecc9293b7a1ca8c52cd6a4742f6453cf5c06df",
+        "status": "PASS"
+      },
+      {
+        "id": "drive_order_changes_history",
+        "observed": {
+          "native": "c88d63ad5eb409ebecd82a8d912c1a04781b3e124fc972a09bf80834a5bbe7bc",
+          "reordered": "46b887ed5605f2c1b048c82d17361a68a779397aa7d60eada53fe90a9b4b3bef"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "reordered_trajectory_response_bounded",
+        "observed": 0.971914111488,
+        "status": "PASS"
+      },
+      {
+        "id": "step_spec_strict_round_trip",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "step_spec_duplicate_key_rejected",
+        "observed": "duplicate JSON object key is forbidden: schema",
+        "status": "PASS"
+      },
+      {
+        "id": "step_spec_unknown_field_rejected",
+        "observed": "step specification keys mismatch: missing=[], unexpected=['answer']",
+        "status": "PASS"
+      },
+      {
+        "id": "step_spec_nonfinite_rejected",
+        "observed": "carrier_frequency_hz must be finite",
+        "status": "PASS"
+      },
+      {
+        "id": "step_spec_boolean_number_rejected",
+        "observed": "state_modulation_index must be a JSON number",
+        "status": "PASS"
+      },
+      {
+        "id": "step_spec_step_root_mismatch_rejected",
+        "observed": "root_id must be scoped to its step index",
+        "status": "PASS"
+      },
+      {
+        "id": "step_spec_nyquist_rejected",
+        "observed": "carrier_frequency_hz must be inside (0, Nyquist)",
+        "status": "PASS"
+      },
+      {
+        "id": "step_spec_modulation_envelope_rejected",
+        "observed": "drive_modulation_index exceeds the frozen envelope",
+        "status": "PASS"
+      },
+      {
+        "id": "step_spec_canonical_mutation_rejected",
+        "observed": "step specification is valid but not canonical",
+        "status": "PASS"
+      },
+      {
+        "id": "step_spec_digest_deterministic",
+        "observed": "77c0a6714dbe578f7d12ea8fa62c2782747479bc176736a48e91fd0ce8b99748",
+        "status": "PASS"
+      },
+      {
+        "id": "receipt_strict_round_trip",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "receipt_duplicate_key_rejected",
+        "observed": "duplicate JSON object key is forbidden: schema",
+        "status": "PASS"
+      },
+      {
+        "id": "receipt_unknown_field_rejected",
+        "observed": "ancestry receipt keys mismatch: missing=[], unexpected=['answer']",
+        "status": "PASS"
+      },
+      {
+        "id": "receipt_nonfinite_number_rejected",
+        "observed": "state_edge_modulation_index must be finite",
+        "status": "PASS"
+      },
+      {
+        "id": "receipt_boolean_number_rejected",
+        "observed": "receipt step_index is outside the bounded R1 envelope",
+        "status": "PASS"
+      },
+      {
+        "id": "receipt_canonical_mutation_rejected",
+        "observed": "ancestry receipt is valid but not canonical",
+        "status": "PASS"
+      },
+      {
+        "id": "receipt_binds_complete_result",
+        "observed": [
+          "08ed8b9578a2216a98f95e79789c78768e64b431cb3a0fc111b57ce97c63fe52",
+          "420536a98d44b29fec469c989a110e235af939f4358ef1d914876e72ceea9e38",
+          "c88d63ad5eb409ebecd82a8d912c1a04781b3e124fc972a09bf80834a5bbe7bc"
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "receipt_binds_exact_step_spec",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "receipt_binds_both_roles",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "state_drive_id_collision_rejected",
+        "observed": "state and drive node identities must be disjoint",
+        "status": "PASS"
+      },
+      {
+        "id": "new_root_collision_rejected",
+        "observed": "step root identity collides with a child tree",
+        "status": "PASS"
+      },
+      {
+        "id": "wrong_state_digest_rejected",
+        "observed": "state tree digest does not match the ancestry receipt",
+        "status": "PASS"
+      },
+      {
+        "id": "wrong_drive_digest_rejected",
+        "observed": "drive tree digest does not match the ancestry receipt",
+        "status": "PASS"
+      },
+      {
+        "id": "swapped_roles_rejected",
+        "observed": "receipt role roots do not match positional state/drive child binding",
+        "status": "PASS"
+      },
+      {
+        "id": "equal_beta_swapped_roles_rejected",
+        "observed": "receipt child indices do not match the exact step",
+        "status": "PASS"
+      },
+      {
+        "id": "changed_state_beta_rejected",
+        "observed": "receipt state edge does not match the step specification",
+        "status": "PASS"
+      },
+      {
+        "id": "changed_drive_beta_rejected",
+        "observed": "receipt drive edge does not match the step specification",
+        "status": "PASS"
+      },
+      {
+        "id": "changed_step_spec_rejected",
+        "observed": "receipt does not bind the exact step specification",
+        "status": "PASS"
+      },
+      {
+        "id": "wrong_result_root_rejected",
+        "observed": "result root identity does not match step and receipt",
+        "status": "PASS"
+      },
+      {
+        "id": "extra_child_rejected",
+        "observed": "result root must contain exactly two child roles",
+        "status": "PASS"
+      },
+      {
+        "id": "missing_child_rejected",
+        "observed": "result root must contain exactly two child roles",
+        "status": "PASS"
+      },
+      {
+        "id": "duplicate_role_rejected",
+        "observed": "receipt child roles must be exactly state then drive",
+        "status": "PASS"
+      },
+      {
+        "id": "reordered_receipt_rejected",
+        "observed": "receipt child roles must be exactly state then drive",
+        "status": "PASS"
+      },
+      {
+        "id": "drive_order_reversal_changes_history",
+        "observed": {
+          "digest_changed": true,
+          "response": 0.971914111488
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "flat_wave_native_admission_rejected",
+        "observed": "flat baseline must be a complete RecursivePhaseBeam",
+        "status": "PASS"
+      },
+      {
+        "id": "flat_wave_receipt_validation_rejected",
+        "observed": "result must be a complete RecursivePhaseBeam",
+        "status": "PASS"
+      },
+      {
+        "id": "flat_wave_exact_ancestry_unavailable",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "decoded_spin_internal_hierarchy_absent",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "decoded_spin_native_admission_rejected",
+        "observed": "decoded spin baseline must be a complete RecursivePhaseBeam",
+        "status": "PASS"
+      },
+      {
+        "id": "decoded_spin_receipt_validation_rejected",
+        "observed": "result must be a complete RecursivePhaseBeam",
+        "status": "PASS"
+      },
+      {
+        "id": "decoded_spin_exact_ancestry_unavailable",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "decoded_spin_final_waveform_differs",
+        "observed": 1.99999999656,
+        "status": "PASS"
+      },
+      {
+        "id": "trajectory_truncation_rejected",
+        "observed": "trajectory state count is truncated or extended",
+        "status": "PASS"
+      },
+      {
+        "id": "trajectory_duplication_rejected",
+        "observed": "result root identity does not match step and receipt",
+        "status": "PASS"
+      },
+      {
+        "id": "fixture_substitution_rejected",
+        "observed": "committed state WAV is not the deterministic tree render",
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_order_mutation_rejected",
+        "observed": "manifest trajectory order is not exactly T0 through T3",
+        "status": "PASS"
+      },
+      {
+        "id": "ast_native_call_graph_no_scalar_feedback",
+        "observed": {
+          "allowed_attribute_calls": [
+            "TemporalStepReceipt.from_bytes",
+            "beam.canonical_bytes",
+            "beam.root.walk",
+            "canonical_roots.index",
+            "drive.digest",
+            "r0.PhaseEdge",
+            "r0.PhaseNode",
+            "r0.RecursivePhaseBeam",
+            "r0.deserialize_tree_bytes",
+            "receipt.canonical_bytes",
+            "receipt.step_spec.canonical_bytes",
+            "receipts.append",
+            "result.canonical_bytes",
+            "result.digest",
+            "spec.canonical_bytes",
+            "spec.canonical_sha256",
+            "spec.digest",
+            "state.digest",
+            "states.append"
+          ],
+          "forbidden_constructs": [],
+          "forbidden_hits": [],
+          "native_roots": [
+            "temporal_step",
+            "trajectory",
+            "extract_predecessor"
+          ],
+          "reachable_functions": [
+            "_beam_from_child",
+            "extract_predecessor",
+            "node_ids",
+            "require_native_tree",
+            "require_pre_ising_orientation",
+            "temporal_step",
+            "trajectory",
+            "validate_step_receipt"
+          ],
+          "recurrence_shape_violations": [],
+          "shadowing_violations": [],
+          "status": "PASS",
+          "unresolved_calls": []
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "ast_forbidden_identifiers_mutation_rejected",
+        "observed": {
+          "argmax": true,
+          "argmin": true,
+          "candidate": true,
+          "collapsed_flat_trajectory": true,
+          "collapsed_spin_trajectory": true,
+          "decode_spin": true,
+          "energy": true,
+          "expected_answer": true,
+          "fft": true,
+          "matched_response": true,
+          "response": true,
+          "scalar": true,
+          "score": true,
+          "spin": true,
+          "winner": true
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "ast_alias_callable_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_module_helper_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_class_method_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_dynamic_callable_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_digest_control_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_length_feedback_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_module_shadowing_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_module_attribute_rebind_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_decorated_root_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_global_rebind_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_import_alias_rebind_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_loop_target_rebind_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_function_default_rebind_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_native_runtime_binding_shadow_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_receipt_lifecycle_rebind_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_match_capture_result_rebind_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "ast_result_store_rebind_mutation_rejected",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "committed_tree_wav_bytes_close",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "committed_step_receipt_bytes_close",
+        "observed": true,
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_binds_all_fixture_bytes",
+        "observed": true,
+        "status": "PASS"
+      }
+    ],
+    "wav_fixture_bytes": 192176,
+    "wav_fixture_count": 4
+  },
+  "source_binding": {
+    "source_byte_count": 107055,
+    "source_git_blob_sha1": "3685be9ae63dcd213b2155c8cd66f6f81e45c071",
+    "source_sha256": "26b2cfaa63f5fe6bfa97f6d9f64b97d0ee944bc39ac45d406092aea257b2179e"
+  },
+  "verification_policy": {
+    "committed_byte_authority": "all trajectory trees, WAVs, specs, and receipts are parsed and rescored",
+    "environment_receipt": "informational only",
+    "execution_boundary": "fresh process from exact R1 and R0 source bytes; post-import monkeypatching is outside this source qualification",
+    "portable_metric_atol": 5e-12,
+    "portable_metric_rtol": 5e-12,
+    "stored_pass_authority": false
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "drives": [
+    {
+      "depth": 2,
+      "drive_index": 1,
+      "node_count": 2,
+      "path": "fixtures/drives/D1.tree.json",
+      "root_id": "drive1v0.root",
+      "sha256": "fb6aeffbe443fdca1fc622edfc8c78881af723f0d87f7725da32280506afd056",
+      "tree_digest": "fda7ac9981bf53d83117dec14ea81d457e7e81e613bbadb139da511eb67f1a4c"
+    },
+    {
+      "depth": 2,
+      "drive_index": 2,
+      "node_count": 2,
+      "path": "fixtures/drives/D2.tree.json",
+      "root_id": "drive2v0.root",
+      "sha256": "88d30b51f47b6fb083153f228a15c692d9634efb0c181b2ecaa406e188c4f08f",
+      "tree_digest": "d60fb9d82be06eb3bb0dc776373bcd211938c1da1ddb9878fe4dec342b9a1e9f"
+    },
+    {
+      "depth": 2,
+      "drive_index": 3,
+      "node_count": 2,
+      "path": "fixtures/drives/D3.tree.json",
+      "root_id": "drive3v0.root",
+      "sha256": "69215ccdd749693af2cc870f2dbde1850adf3e12af9be633c779b9a922c4dd5c",
+      "tree_digest": "0614872cb85400a9a400cf8494c980be63f08fbdad3f1b091288989803567697"
+    }
+  ],
+  "fixture_count": 17,
+  "fixture_set_sha256": "da62112c0459c49673675182e67011899d8ee1e841df3650c0c4a0aeecd137dd",
+  "generator": "recursive_wave_operator_reference_v1",
+  "ordered_fixture_paths": [
+    "fixtures/states/T0.tree.json",
+    "fixtures/states/T0_iq.wav",
+    "fixtures/states/T1.tree.json",
+    "fixtures/states/T1_iq.wav",
+    "fixtures/states/T2.tree.json",
+    "fixtures/states/T2_iq.wav",
+    "fixtures/states/T3.tree.json",
+    "fixtures/states/T3_iq.wav",
+    "fixtures/drives/D1.tree.json",
+    "fixtures/drives/D2.tree.json",
+    "fixtures/drives/D3.tree.json",
+    "fixtures/steps/step1.spec.json",
+    "fixtures/steps/step2.spec.json",
+    "fixtures/steps/step3.spec.json",
+    "fixtures/receipts/step1.receipt.json",
+    "fixtures/receipts/step2.receipt.json",
+    "fixtures/receipts/step3.receipt.json"
+  ],
+  "receipts": [
+    {
+      "digest": "e6a7e7acfb5a36a060f7ae84d87dc1e34f32cdf9658543a11f15b4235c8bfb27",
+      "path": "fixtures/receipts/step1.receipt.json",
+      "sha256": "52073b824e6ec9b613172c72875f3196cd0ea2d25d00e1f81f36f923d61f337d",
+      "step_index": 1
+    },
+    {
+      "digest": "059e6ab1942cd26b256032e5f414fa84bf4625671c8faa82b86e9c036431aedf",
+      "path": "fixtures/receipts/step2.receipt.json",
+      "sha256": "2382e0b83dd95a52e26b92fdec5bf5c70ed40b67659705ffae2c06a205c328fd",
+      "step_index": 2
+    },
+    {
+      "digest": "dac4e1088f8f7d3730934c345afbbd5d3497c035afccc50565f2ddaa90f07d80",
+      "path": "fixtures/receipts/step3.receipt.json",
+      "sha256": "9c268bdd2a50a7800cb37cf5617ab297af9cfec109381780d4d7251bcef93395",
+      "step_index": 3
+    }
+  ],
+  "schema": "recursive_wave_operator_trajectory_manifest_v1",
+  "step_specs": [
+    {
+      "canonical_sha256": "c21cb01cc003c0d1c3af8a7be3363ffc5dad642dc9fe3cd154b6324a2d61c914",
+      "digest": "77c0a6714dbe578f7d12ea8fa62c2782747479bc176736a48e91fd0ce8b99748",
+      "path": "fixtures/steps/step1.spec.json",
+      "sha256": "c21cb01cc003c0d1c3af8a7be3363ffc5dad642dc9fe3cd154b6324a2d61c914",
+      "step_index": 1
+    },
+    {
+      "canonical_sha256": "a6a1ba92025adb35bc4a16491223dd3eae43123ab05176ad03f1b7c4ec2c451a",
+      "digest": "f2d1dd9112fc367c424b6528a0cfadbcebd3fea45b8f815929e3fcc2f2ead368",
+      "path": "fixtures/steps/step2.spec.json",
+      "sha256": "a6a1ba92025adb35bc4a16491223dd3eae43123ab05176ad03f1b7c4ec2c451a",
+      "step_index": 2
+    },
+    {
+      "canonical_sha256": "c1681112d94b3e61fda528f34276263b282a9427dbdfbc5787b321ad1b505318",
+      "digest": "cc8cd064b0c0149b11a958005d8bb07ee4ecdfe74f0b0917e15d377e79b9d69e",
+      "path": "fixtures/steps/step3.spec.json",
+      "sha256": "c1681112d94b3e61fda528f34276263b282a9427dbdfbc5787b321ad1b505318",
+      "step_index": 3
+    }
+  ],
+  "total_fixture_bytes": 204332,
+  "trajectory": [
+    {
+      "channels": 2,
+      "complex_energy": 6000.00000109,
+      "complex_peak": 1.00000003944,
+      "complex_rms": 1.00000000009,
+      "depth": 3,
+      "drive_digest": null,
+      "dtype": "ieee_float32_le",
+      "node_count": 3,
+      "predecessor_digest": null,
+      "receipt_digest": null,
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "root_id": "root",
+      "sample_count": 6000,
+      "sample_rate_hz": 48000,
+      "state_index": 0,
+      "step_spec_digest": null,
+      "tree_digest": "fe745b5e6a335a6813bd80e561ecc9293b7a1ca8c52cd6a4742f6453cf5c06df",
+      "tree_path": "fixtures/states/T0.tree.json",
+      "tree_sha256": "dff40cf1003953d11ddf9d240f799363841f8bdebc3ae2d081bee198565d9d2e",
+      "wav_byte_count": 48044,
+      "wav_path": "fixtures/states/T0_iq.wav",
+      "wav_sha256": "1046527027bba627a9bd914c1983cd7482247f4fe0752422d7503e253c8e7131"
+    },
+    {
+      "channels": 2,
+      "complex_energy": 6000.00000733,
+      "complex_peak": 1.00000004073,
+      "complex_rms": 1.00000000061,
+      "depth": 4,
+      "drive_digest": "fda7ac9981bf53d83117dec14ea81d457e7e81e613bbadb139da511eb67f1a4c",
+      "dtype": "ieee_float32_le",
+      "node_count": 6,
+      "predecessor_digest": "fe745b5e6a335a6813bd80e561ecc9293b7a1ca8c52cd6a4742f6453cf5c06df",
+      "receipt_digest": "e6a7e7acfb5a36a060f7ae84d87dc1e34f32cdf9658543a11f15b4235c8bfb27",
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "root_id": "time1.root",
+      "sample_count": 6000,
+      "sample_rate_hz": 48000,
+      "state_index": 1,
+      "step_spec_digest": "77c0a6714dbe578f7d12ea8fa62c2782747479bc176736a48e91fd0ce8b99748",
+      "tree_digest": "08ed8b9578a2216a98f95e79789c78768e64b431cb3a0fc111b57ce97c63fe52",
+      "tree_path": "fixtures/states/T1.tree.json",
+      "tree_sha256": "e485a8033f7b5e8159e86d71a2a49f708492a6462e805c2d393410c8e284d348",
+      "wav_byte_count": 48044,
+      "wav_path": "fixtures/states/T1_iq.wav",
+      "wav_sha256": "4038d818367244dc319dde49124934723f5a29819995cd78f269aa4eb2036110"
+    },
+    {
+      "channels": 2,
+      "complex_energy": 6000.00000051,
+      "complex_peak": 1.00000004146,
+      "complex_rms": 1.00000000004,
+      "depth": 5,
+      "drive_digest": "d60fb9d82be06eb3bb0dc776373bcd211938c1da1ddb9878fe4dec342b9a1e9f",
+      "dtype": "ieee_float32_le",
+      "node_count": 9,
+      "predecessor_digest": "08ed8b9578a2216a98f95e79789c78768e64b431cb3a0fc111b57ce97c63fe52",
+      "receipt_digest": "059e6ab1942cd26b256032e5f414fa84bf4625671c8faa82b86e9c036431aedf",
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "root_id": "time2.root",
+      "sample_count": 6000,
+      "sample_rate_hz": 48000,
+      "state_index": 2,
+      "step_spec_digest": "f2d1dd9112fc367c424b6528a0cfadbcebd3fea45b8f815929e3fcc2f2ead368",
+      "tree_digest": "420536a98d44b29fec469c989a110e235af939f4358ef1d914876e72ceea9e38",
+      "tree_path": "fixtures/states/T2.tree.json",
+      "tree_sha256": "cced24af31f59aeb88e6cc3663ff7bcea59f89f3fe82938d788bde643f449553",
+      "wav_byte_count": 48044,
+      "wav_path": "fixtures/states/T2_iq.wav",
+      "wav_sha256": "2057fd10761c7ddb088376dfc44900ebf7356bf3c1786642fcc231c170e83664"
+    },
+    {
+      "channels": 2,
+      "complex_energy": 5999.99999908,
+      "complex_peak": 1.00000004137,
+      "complex_rms": 0.999999999923,
+      "depth": 6,
+      "drive_digest": "0614872cb85400a9a400cf8494c980be63f08fbdad3f1b091288989803567697",
+      "dtype": "ieee_float32_le",
+      "node_count": 12,
+      "predecessor_digest": "420536a98d44b29fec469c989a110e235af939f4358ef1d914876e72ceea9e38",
+      "receipt_digest": "dac4e1088f8f7d3730934c345afbbd5d3497c035afccc50565f2ddaa90f07d80",
+      "riff_chunks": [
+        "fmt ",
+        "data"
+      ],
+      "root_id": "time3.root",
+      "sample_count": 6000,
+      "sample_rate_hz": 48000,
+      "state_index": 3,
+      "step_spec_digest": "cc8cd064b0c0149b11a958005d8bb07ee4ecdfe74f0b0917e15d377e79b9d69e",
+      "tree_digest": "c88d63ad5eb409ebecd82a8d912c1a04781b3e124fc972a09bf80834a5bbe7bc",
+      "tree_path": "fixtures/states/T3.tree.json",
+      "tree_sha256": "081a8173bdcf2e976541ab206cdfe1f63ede546429e5a99651f02530a925ce92",
+      "wav_byte_count": 48044,
+      "wav_path": "fixtures/states/T3_iq.wav",
+      "wav_sha256": "52723601f639a9db044c3ed67db593a9bccb4407f9fdbf98fdda6ac8f7e83fea"
+    }
+  ],
+  "wav_fixture_bytes": 192176,
+  "wav_fixture_count": 4
+}

@@ -1,0 +1,25 @@
+{
+  "edges": [
+    {
+      "child_id": "drive3v0.leaf",
+      "modulation_index": 0.41,
+      "parent_id": "drive3v0.root"
+    }
+  ],
+  "global_spin_phase_rad": 0.0,
+  "nodes": [
+    {
+      "frequency_hz": 65.0,
+      "node_id": "drive3v0.leaf",
+      "phase_rad": 0.44
+    },
+    {
+      "frequency_hz": 227.0,
+      "node_id": "drive3v0.root",
+      "phase_rad": -0.28
+    }
+  ],
+  "root_id": "drive3v0.root",
+  "sample_rate_hz": 48000,
+  "schema": "recursive_phase_tree_v1"
+}
