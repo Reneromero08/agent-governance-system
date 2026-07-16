@@ -1,126 +1,443 @@
 {
-  "claim_ceiling": "SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY",
-  "collapse_boundary": "diagnostic readout only; no decoded scalar feeds recurrence",
   "execution_environment": {
-    "numpy": "2.3.5",
-    "platform": "Linux-4.4.0-x86_64-with-glibc2.41",
-    "python": "3.13.5"
+    "numpy": "1.26.4",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.6"
   },
-  "frame_seconds": 0.125,
-  "generator": "recursive_phase_tree_reference_v1",
-  "measurements": {
-    "correct_inverse_max_error": 2.48253415325e-16,
-    "cross_query_magnitude": 0.768495135328,
-    "forward_mutation_l2": 73.0410090828,
-    "max_amplitude_only_difference": 4.4408920985e-16,
-    "max_hierarchy_phase_difference_rad": 1.40852227925,
-    "max_unit_modulus_error": 2.22044604925e-16,
-    "max_z2_whole_beam_error": 4.609832636e-14,
-    "node_multisets_equal": true,
-    "self_query_magnitude": 1.0,
-    "tree_a_depth": 3,
-    "tree_a_digest": "0deb52bae8cc12613cdf339494539ff753eb4b41065334904e3025465096dd9b",
-    "tree_b_depth": 3,
-    "tree_b_digest": "ba5e4dfb3d1bf87fb37fa1e29cebe05b31af9decdd30b9cf5c205fe13ee0a287",
-    "wrong_inverse_max_error": 1.1509166525
-  },
-  "ordinary_software_only": true,
-  "physical_claims_established": [],
-  "reproduction_scope": {
-    "exact_local_bytes_match_committed_git_blob": true,
-    "independent_clean_checkout": false,
-    "physical_or_audio_device_contact": false,
-    "repository_full_gate_run": false
-  },
-  "sample_count": 6000,
-  "sample_rate_hz": 48000,
-  "schema": "recursive_phase_tree_reference_result_v1",
-  "source_binding": {
-    "source_byte_count": 13569,
-    "source_commit": "c1075adee64a687e3787a65d501a8e4090d8e1b1",
-    "source_git_blob_sha1": "f0c5b6003b84ac758ad8cb7353fce569b2292497",
-    "source_sha256": "a8e794a7b864b5b60de59fddeb61cfb7feac849856fbc3550ba2570469faa4c0"
-  },
-  "summary": {
-    "failed": 0,
-    "passed": 11,
-    "test_count": 11
-  },
-  "tests": [
-    {
-      "id": "recursive_depth_present",
-      "observed": [
-        3,
-        3
+  "schema": "recursive_phase_tree_reference_result_v2",
+  "scientific": {
+    "claim_ceiling": "SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY",
+    "collapse_boundary": "diagnostic readout only; no decoded scalar feeds native state",
+    "established_token_if_all_gates_close": "AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED",
+    "fixture_count": 3,
+    "fixture_manifest_sha256": "7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa",
+    "fixture_set_sha256": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+    "fixture_total_bytes": 144132,
+    "measurements": {
+      "amplitude_only_max_difference": 6.74029985159e-08,
+      "committed_fixture_render_max_error": 4.15862671657e-08,
+      "committed_tree_wav_bindings_close": true,
+      "committed_wav_extra_chunk_rejected": true,
+      "committed_wav_reordered_chunks_rejected": true,
+      "correct_inverse_max_error": 6.96077265191e-08,
+      "energy_relative_error": 4.3422384495e-10,
+      "exact_query_magnitude": 1.0,
+      "fixture_count": 3,
+      "fixture_set_sha256": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+      "fixture_substitution_rejected": true,
+      "fixture_total_bytes": 144132,
+      "flat_multitone_query_magnitude": 0.957044929771,
+      "forward_mutation_l2": 73.0410090974,
+      "hierarchy_a_depth": 3,
+      "hierarchy_a_digest": "fe745b5e6a335a6813bd80e561ecc9293b7a1ca8c52cd6a4742f6453cf5c06df",
+      "hierarchy_b_depth": 3,
+      "hierarchy_b_digest": "111425f51dc50ceaeb30e01dec958a33fe9ecd5a6a0b0155e84fb83cee0d2521",
+      "max_hierarchy_phase_difference_rad": 1.4085222587,
+      "max_unit_modulus_error": 4.15862446701e-08,
+      "metadata_bytes_restore_original": true,
+      "metadata_chunks": [
+        "fmt ",
+        "LIST",
+        "data"
       ],
-      "requirement": "both hierarchies have depth >= 3",
-      "status": "PASS"
-    },
-    {
-      "id": "same_node_multiset_different_parent_child_geometry",
-      "observed": true,
-      "requirement": true,
-      "status": "PASS"
-    },
-    {
-      "id": "unit_modulus_phase_carrier",
-      "observed": 2.22044604925e-16,
-      "status": "PASS",
-      "tolerance": 1e-12
-    },
-    {
-      "id": "global_z2_rotates_complete_tree",
-      "observed": 4.609832636e-14,
-      "status": "PASS",
-      "tolerance": 1e-12
-    },
-    {
-      "id": "amplitude_only_control_is_exact_null",
-      "observed": 4.4408920985e-16,
-      "status": "PASS",
-      "tolerance": 1e-12
-    },
-    {
-      "id": "hierarchy_changes_phase_geometry",
-      "minimum": 0.1,
-      "observed": 1.40852227925,
-      "status": "PASS"
-    },
-    {
-      "id": "matched_query_prefers_exact_hierarchy",
-      "observed": {
-        "cross": 0.768495135328,
-        "self": 1.0
+      "metadata_sample_error": 0.0,
+      "native_update_implemented": false,
+      "node_multisets_equal": true,
+      "parent_child_phase_scramble_query_magnitude": 0.978702881602,
+      "principal_energy_a": 6000.00000109,
+      "principal_energy_b": 5999.99999848,
+      "reordered_inverse_max_error": 1.15091663097,
+      "schema_negative_cases": {
+        "canonical_serialization_mutation_rejected": true,
+        "cycle_rejected": true,
+        "duplicate_json_key_rejected": true,
+        "duplicate_node_rejected": true,
+        "malformed_edge_rejected": true,
+        "nonfinite_number_rejected": true,
+        "nyquist_rejected": true,
+        "oversized_identifier_rejected": true,
+        "oversized_integer_rejected": true,
+        "unexpected_field_rejected": true,
+        "unsafe_schema_rejected": true
       },
-      "requirement": "self >= 1-tol and cross <= 0.98",
-      "status": "PASS"
+      "spectrum_adversary_class": "spectrum_matched_non_tree",
+      "spectrum_exact_recursive_pair_claimed": false,
+      "spectrum_magnitude_relative_error": 2.87967368335e-16,
+      "spectrum_non_tree_query_magnitude": 1.97379128692e-08,
+      "strict_round_trip_all_declared_trees": true,
+      "temporal_recurrence_steps": 0,
+      "wrong_hierarchy_query_magnitude": 0.768495135405,
+      "wrong_inverse_max_error": 0.451764299661,
+      "z2_internal_tree_structure_equal": true,
+      "z2_whole_beam_error": 0.0
     },
-    {
-      "id": "borrowed_tape_is_actually_mutated",
-      "minimum": 1.0,
-      "observed": 73.0410090828,
-      "status": "PASS"
+    "ordinary_software_only": true,
+    "physical_claims_established": [],
+    "reference_tests_sha256": "3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c",
+    "sample_count": 6000,
+    "sample_rate_hz": 48000,
+    "schema": "recursive_phase_tree_scientific_result_v2",
+    "spectrum_boundary": "spectrum-matched adversary is explicitly non-tree; exact same-spectrum distinct recursive trees are not claimed",
+    "summary": {
+      "failed": 0,
+      "passed": 38,
+      "test_count": 38
     },
-    {
-      "id": "correct_inverse_restores",
-      "observed": 2.48253415325e-16,
-      "status": "PASS",
-      "tolerance": 1e-12
-    },
-    {
-      "id": "wrong_hierarchy_inverse_fails",
-      "minimum": 0.05,
-      "observed": 1.1509166525,
-      "status": "PASS"
-    },
-    {
-      "id": "canonical_identity_is_deterministic",
-      "observed": {
-        "tree_a": "0deb52bae8cc12613cdf339494539ff753eb4b41065334904e3025465096dd9b",
-        "tree_b": "ba5e4dfb3d1bf87fb37fa1e29cebe05b31af9decdd30b9cf5c205fe13ee0a287"
+    "tests": [
+      {
+        "comparator": ">=",
+        "conclusion": "Both declared hierarchies retain recursive depth.",
+        "id": "recursive_depth_present",
+        "observed": [
+          3,
+          3
+        ],
+        "status": "PASS",
+        "threshold": 3
       },
-      "requirement": "stable per tree and distinct across hierarchies",
-      "status": "PASS"
-    }
-  ]
+      {
+        "comparator": "==",
+        "conclusion": "Principal trees use the same node multiset and distinct geometry.",
+        "id": "same_node_multiset_different_parent_child_geometry",
+        "observed": {
+          "geometry_a": "a66358d0570dce381109011f11c63362c19427976277ddaf2ecc53853970dfe6",
+          "geometry_b": "5b923443537e66e633a5d7dbd6019a7b28750b6f57344d2f5942156c51059532",
+          "node_multisets_equal": true
+        },
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "Every declared tree round-trips through strict canonical bytes.",
+        "id": "strict_parser_round_trip_all_declared_trees",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The strict parser fails closed for this invalid tree class.",
+        "id": "duplicate_node_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The strict parser fails closed for this invalid tree class.",
+        "id": "duplicate_json_key_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The strict parser fails closed for this invalid tree class.",
+        "id": "cycle_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The strict parser fails closed for this invalid tree class.",
+        "id": "malformed_edge_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The strict parser fails closed for this invalid tree class.",
+        "id": "nonfinite_number_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The strict parser fails closed for this invalid tree class.",
+        "id": "oversized_integer_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The strict parser fails closed for this invalid tree class.",
+        "id": "nyquist_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The strict parser fails closed for this invalid tree class.",
+        "id": "unsafe_schema_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The strict parser fails closed for this invalid tree class.",
+        "id": "oversized_identifier_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The strict parser fails closed for this invalid tree class.",
+        "id": "unexpected_field_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The strict parser fails closed for this invalid tree class.",
+        "id": "canonical_serialization_mutation_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "compound",
+        "conclusion": "Every committed tree matches its declared role and deterministically renders its exact minimal WAV bytes.",
+        "id": "committed_wav_matches_declared_recursive_tree",
+        "observed": {
+          "all_bindings_close": true,
+          "max_render_error": 4.15862671657e-08
+        },
+        "status": "PASS",
+        "threshold": {
+          "all_bindings_close": true,
+          "max_render_error": 2e-07
+        }
+      },
+      {
+        "comparator": "==",
+        "conclusion": "A common phase-rotated WAV substitution fails semantic fixture binding.",
+        "id": "fixture_substitution_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "A committed data-before-fmt WAV fails the minimal fixture law.",
+        "id": "committed_wav_reordered_chunks_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "A committed WAV with an extra metadata chunk fails the minimal fixture law.",
+        "id": "committed_wav_extra_chunk_rejected",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "<=",
+        "conclusion": "Committed stereo I/Q bytes preserve unit modulus within float32 tolerance.",
+        "id": "committed_wav_unit_modulus",
+        "observed": 4.15862446701e-08,
+        "status": "PASS",
+        "threshold": 2e-07
+      },
+      {
+        "comparator": "<=",
+        "conclusion": "Principal trees have equal time-domain magnitude within serialization tolerance.",
+        "id": "principal_time_magnitude_equal",
+        "observed": 6.74029985159e-08,
+        "status": "PASS",
+        "threshold": 2e-07
+      },
+      {
+        "comparator": "<=",
+        "conclusion": "Principal trees have equal serialized complex energy.",
+        "id": "principal_energy_equal",
+        "observed": 4.3422384495e-10,
+        "status": "PASS",
+        "threshold": 1e-07
+      },
+      {
+        "comparator": "<=",
+        "conclusion": "Global pi rotation acts on the complete committed tree beam.",
+        "id": "global_z2_rotates_complete_tree",
+        "observed": 0.0,
+        "status": "PASS",
+        "threshold": 2e-07
+      },
+      {
+        "comparator": "==",
+        "conclusion": "Plus/minus canonical trees differ only in the global orientation field.",
+        "id": "global_z2_preserves_internal_geometry",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "<=",
+        "conclusion": "Amplitude-only observation cannot distinguish the principal trees.",
+        "id": "amplitude_only_decoder_is_null",
+        "observed": 6.74029985159e-08,
+        "status": "PASS",
+        "threshold": 2e-07
+      },
+      {
+        "comparator": ">=",
+        "conclusion": "Parent-child geometry changes phase while amplitude remains null.",
+        "id": "hierarchy_changes_phase_geometry",
+        "observed": 1.4085222587,
+        "status": "PASS",
+        "threshold": 0.1
+      },
+      {
+        "comparator": ">=",
+        "conclusion": "The exact committed hierarchy matches its frozen query.",
+        "id": "exact_hierarchy_query",
+        "observed": 1.0,
+        "status": "PASS",
+        "threshold": 0.999999999999
+      },
+      {
+        "comparator": "<=",
+        "conclusion": "The same node multiset under wrong hierarchy scores lower.",
+        "id": "wrong_hierarchy_query",
+        "observed": 0.768495135405,
+        "status": "PASS",
+        "threshold": 0.98
+      },
+      {
+        "comparator": ">=",
+        "conclusion": "Parent-child subtree reordering changes hierarchy response.",
+        "id": "subtree_permutation_changes_response",
+        "observed": 0.231504864595,
+        "status": "PASS",
+        "threshold": 0.02
+      },
+      {
+        "comparator": ">=",
+        "conclusion": "A fixed child-phase scramble changes hierarchy-sensitive response.",
+        "id": "parent_child_phase_scramble_changes_response",
+        "observed": 0.021297118398,
+        "status": "PASS",
+        "threshold": 0.02
+      },
+      {
+        "comparator": ">=",
+        "conclusion": "A flat sine bank does not replace native nested phase geometry.",
+        "id": "flat_multitone_replacement_fails_exact_query",
+        "observed": 0.0429550702291,
+        "status": "PASS",
+        "threshold": 0.02
+      },
+      {
+        "comparator": "compound",
+        "conclusion": "A clearly labeled non-tree waveform has the same FFT magnitude but a different hierarchy response.",
+        "id": "spectrum_magnitude_only_decoder_is_nonidentifying",
+        "observed": {
+          "adversary_class": "spectrum_matched_non_tree",
+          "magnitude_relative_error": 2.87967368335e-16,
+          "query_magnitude": 1.97379128692e-08
+        },
+        "status": "PASS",
+        "threshold": {
+          "magnitude_relative_error_max": 1e-12,
+          "query_magnitude_max": 0.2
+        }
+      },
+      {
+        "comparator": ">=",
+        "conclusion": "The borrowed deterministic complex tape is materially changed.",
+        "id": "borrowed_tape_is_nontrivially_mutated",
+        "observed": 73.0410090974,
+        "status": "PASS",
+        "threshold": 1.0
+      },
+      {
+        "comparator": "<=",
+        "conclusion": "The conjugate of the committed exact beam restores the tape.",
+        "id": "correct_inverse_restores",
+        "observed": 6.96077265191e-08,
+        "status": "PASS",
+        "threshold": 2e-07
+      },
+      {
+        "comparator": ">=",
+        "conclusion": "The canonical local-phase-permuted inverse does not restore.",
+        "id": "wrong_inverse_fails_restoration",
+        "observed": 0.451764299661,
+        "status": "PASS",
+        "threshold": 0.05
+      },
+      {
+        "comparator": ">=",
+        "conclusion": "The same nodes in hierarchy-B parent-child order do not restore.",
+        "id": "reordered_inverse_fails_restoration",
+        "observed": 1.15091663097,
+        "status": "PASS",
+        "threshold": 0.05
+      },
+      {
+        "comparator": "compound",
+        "conclusion": "Nonessential RIFF metadata is neither state nor answer-bearing.",
+        "id": "metadata_stripping_invariant",
+        "observed": {
+          "chunks": [
+            "fmt ",
+            "LIST",
+            "data"
+          ],
+          "minimal_bytes_restored": true,
+          "sample_error": 0.0
+        },
+        "status": "PASS",
+        "threshold": {
+          "minimal_bytes_restored": true,
+          "sample_error": 0.0
+        }
+      },
+      {
+        "comparator": "==",
+        "conclusion": "Manifest identities bind parsed committed tree and WAV bytes.",
+        "id": "manifest_binds_committed_fixture_bytes",
+        "observed": true,
+        "status": "PASS",
+        "threshold": true
+      },
+      {
+        "comparator": "==",
+        "conclusion": "The R0 callable surface implements no native update or temporal recurrence for a diagnostic scalar to feed.",
+        "id": "no_native_update_implemented",
+        "observed": {
+          "native_update_implemented": false,
+          "temporal_recurrence_steps": 0
+        },
+        "status": "PASS",
+        "threshold": {
+          "native_update_implemented": false,
+          "temporal_recurrence_steps": 0
+        }
+      }
+    ]
+  },
+  "source_binding": {
+    "source_byte_count": 77043,
+    "source_git_blob_sha1": "956adb0ae8e84c091c1dc1e3de650be374fa96d1",
+    "source_sha256": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887"
+  },
+  "verification_policy": {
+    "deterministic_scientific_fields": "same structure and statuses; numeric leaves use frozen portable comparison",
+    "environment_receipt": "informational; Python NumPy and platform strings may differ",
+    "fixture_scoring": "parse committed float32 WAV bytes and prove exact declared-tree rendering before every score",
+    "portable_metric_atol": 5e-12,
+    "portable_metric_rtol": 5e-12,
+    "stored_pass_authority": false
+  }
 }

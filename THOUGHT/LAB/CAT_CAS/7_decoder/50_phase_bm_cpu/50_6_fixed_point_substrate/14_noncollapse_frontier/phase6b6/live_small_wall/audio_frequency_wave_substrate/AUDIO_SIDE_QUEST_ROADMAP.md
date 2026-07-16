@@ -1,17 +1,17 @@
 # CAT_CAS Audio-Frequency Wave Substrate Side Quest Roadmap
 
-**Status:** `ACTIVE_PARALLEL_LANE__RECURSIVE_PHASE_REFERENCE_CANDIDATE`  
-**Roadmap version:** `1.2`  
-**Branch:** `codex/audio-frequency-wave-substrate`  
-**Base main commit:** `32b5af119a03bc48bb00f279e6cc0014406147ad`  
-**Frozen offline foundation commit:** `f028dfd292d2dd0fd11380459417d5b60f936ee3`  
-**Roadmap commit binding:** the Git commit containing this file  
-**Current accepted result:** `AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED`  
-**Recursive phase-tree software reference candidate:** `true`  
-**Recursive phase-tree software reference established:** `false`  
-**Recursive catalytic Ising emulator established:** `false`  
-**Physical carrier frozen:** `false`  
-**Physical audio computing established:** `false`  
+**Status:** `ACTIVE_PARALLEL_LANE__RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`<br>
+**Roadmap version:** `1.3`<br>
+**Branch:** `codex/audio-frequency-wave-substrate`<br>
+**Base main commit:** `32b5af119a03bc48bb00f279e6cc0014406147ad`<br>
+**Frozen offline foundation commit:** `f028dfd292d2dd0fd11380459417d5b60f936ee3`<br>
+**Roadmap commit binding:** the Git commit containing this file<br>
+**Current accepted results:** `AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED`; `AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`<br>
+**Recursive phase-tree software reference candidate:** `false`<br>
+**Recursive phase-tree software reference established:** `true`<br>
+**Recursive catalytic Ising emulator established:** `false`<br>
+**Physical carrier frozen:** `false`<br>
+**Physical audio computing established:** `false`<br>
 **Small Wall crossed:** `false`
 
 This file supersedes the uncommitted version-1.1 roadmap artifact. The stale
@@ -175,10 +175,10 @@ Each package is separate. No successor may rewrite the frozen evidence of a pred
 
 ---
 
-## 6. Current Thin Slice
+## 6. Established Recursive Phase-Tree Reference
 
-`audio_recursive_phase_tree_v1/recursive_phase_tree_reference.py` begins the first
-software reference.
+`audio_recursive_phase_tree_v1/recursive_phase_tree_reference.py` closes the first
+bounded ordinary-software reference.
 
 Its bounded mechanism is:
 
@@ -205,21 +205,28 @@ wrong-hierarchy inverse failure
 canonical deterministic tree identity
 ```
 
-Committed-source reproduction candidate:
+Committed-byte qualification receipt:
 
 ```text
-source commit:              c1075adee64a687e3787a65d501a8e4090d8e1b1
-source Git blob SHA-1:      f0c5b6003b84ac758ad8cb7353fce569b2292497
-source SHA-256:             a8e794a7b864b5b60de59fddeb61cfb7feac849856fbc3550ba2570469faa4c0
-exact local bytes matched:  true
-tests:                      11 PASS, 0 FAIL
-result SHA-256:             12ac30f54cac83319fa2e565440717cd64509c134041460eace65666e32e94fe
+source commit:              the implementation commit containing the evidence packet
+source Git blob SHA-1:      956adb0ae8e84c091c1dc1e3de650be374fa96d1
+source SHA-256:             e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887
+schema SHA-256:             41648ef97b94a4ae0b00a95d3fbbd081158183671626ec8ccf5473b77681b974
+manifest SHA-256:           7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa
+fixture-set SHA-256:        6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925
+tests SHA-256:              3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c
+result SHA-256:             46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab
+fixtures:                   3 stereo I/Q WAVs, 144132 bytes
+tests:                      38 PASS, 0 FAIL
+committed-byte scoring:     true
+tree-to-WAV binding:        exact
+independent reviews:        4 PASS, 0 open material findings
 claim ceiling:              SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY
 ```
 
-This establishes a source-bound candidate only. An independent clean-checkout rerun,
-committed result verification, changed-path review, and repository gates remain required
-before the established token is emitted.
+The result establishes only the bounded R0 meaning below. It does not establish
+temporal recurrence, a catalytic loop, Ising evolution, physical restoration, physical
+audio computing, optimization advantage, capacity separation, or a Wall crossing.
 
 ---
 
@@ -247,7 +254,7 @@ distinguishes hierarchy through phase while amplitude-only controls remain null,
 mutates a borrowed software carrier, and restores it under the correct inverse
 ```
 
-Current state: **committed source-bound candidate, not established**.
+Current state: **established**.
 
 ### R1: Recursive wave operator
 
@@ -382,14 +389,12 @@ transducer operation, or physical restoration is authorized by this roadmap.
 The next bounded implementation packet is:
 
 ```text
-1. rerun the committed reference from an independent clean checkout
-2. verify the committed machine-readable result receipt
-3. add deterministic complex/WAV fixtures derived from complete trees
-4. add exact tree serialization and parser round-trip
-5. add matched hierarchy controls with stronger spectrum matching
-6. implement complete-tree temporal recurrence without scalar feedback
-7. add invariant latch and reverse traversal as a separate software package
-8. only then introduce global-Z2 Ising coupling
+1. freeze the `audio_recursive_wave_operator_v1` contract
+2. implement complete-tree temporal recurrence without scalar feedback
+3. preserve the complete recursive tree across every native update
+4. run flat-bank and decoded-spin recurrence as ordinary collapsed baselines
+5. only after operator closure begin the separate invariant-latch/catalytic-loop package
+6. only after catalytic-loop closure introduce global-Z2 Ising coupling
 ```
 
 The implementation agent must not touch `audio_fm_wave_v1/`, `main`, Family 10h
@@ -402,8 +407,8 @@ evidence, `SMALL_WALL_STATE.md`, live hardware, or preserved stashes.
 ```text
 AUDIO_RECURSIVE_CATALYTIC_ARCHITECTURE_CORRECTED
 AUDIO_RECURSIVE_PHASE_FOUNDATION_STARTED
-AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_CANDIDATE
-AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_NOT_YET_ESTABLISHED
+AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED
+AUDIO_RECURSIVE_WAVE_OPERATOR_NOT_YET_ESTABLISHED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 SMALL_WALL_CROSSED_NOT_PROMOTED
 ```
