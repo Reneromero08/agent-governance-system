@@ -1,0 +1,715 @@
+{
+  "execution_environment": {
+    "numpy": "1.26.4",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.6"
+  },
+  "parent_custody": {
+    "r0": {
+      "fixture_set_sha256": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+      "manifest_sha256": "7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa",
+      "result_sha256": "46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab",
+      "source_byte_count": 77043,
+      "source_git_blob_sha1": "956adb0ae8e84c091c1dc1e3de650be374fa96d1",
+      "source_sha256": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887",
+      "tests_sha256": "3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c"
+    },
+    "r0_exact": true,
+    "r1": {
+      "fixture_set_sha256": "da62112c0459c49673675182e67011899d8ee1e841df3650c0c4a0aeecd137dd",
+      "manifest_sha256": "28cbcec8997f6f5eb49dc13e6bf919342af0863a5ba6cb1a70f10dea6fcdbc4e",
+      "result_sha256": "37cb46f6806555cfaec60910f9b5b92fbcac5bf1d0e976fb67e7f2d2c0ec4139",
+      "source_byte_count": 107055,
+      "source_git_blob_sha1": "3685be9ae63dcd213b2155c8cd66f6f81e45c071",
+      "source_sha256": "26b2cfaa63f5fe6bfa97f6d9f64b97d0ee944bc39ac45d406092aea257b2179e",
+      "tests_sha256": "5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5"
+    },
+    "r1_exact": true
+  },
+  "schema": "catalytic_wave_loop_reference_result_v1",
+  "schema_bindings": {
+    "closure_schema_sha256": "41a790cab6a8d9b31f6a7cfd9cc42aff74187d5d371b535a8ccbcea48a6607cb",
+    "contract_schema_sha256": "3df3775a9dbbae86a405a7a01a907f7872293c978ac45efd3cadb1fa44d3d650",
+    "latch_schema_sha256": "4fc7a46ffb952a673457d33f3bef2801a860b75cc94f5aa1fa64a72d9f702efd"
+  },
+  "scientific": {
+    "binary_carrier_bytes": 288000,
+    "binary_carrier_count": 3,
+    "claim_ceiling": "SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY",
+    "contact_counts": {
+      "adc_dac": 0,
+      "audio_playback": 0,
+      "audio_recording": 0,
+      "hardware": 0,
+      "ssh_scp": 0,
+      "target": 0,
+      "transducer": 0
+    },
+    "established_token_if_all_gates_close": "AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED",
+    "fixture_count": 6,
+    "fixture_manifest_sha256": "5e8bfa247c513d189774ec671265b2d3dc1ea97004e5e8c40baa090f26db3cad",
+    "fixture_set_sha256": "e6e51ae655e184f8f43b2afa9fe0c75041046966b4cdecd6fde008b02b684aa8",
+    "fixture_total_bytes": 293319,
+    "measurements": {
+      "ast_no_feedback": {
+        "forbidden_constructs": [],
+        "forbidden_hits": [],
+        "function_shape_violations": [],
+        "latch_feedback_calls": [],
+        "latch_taint_violations": [],
+        "lifecycle_order": true,
+        "lifecycle_positions": {
+          "carrier_displaced": 11,
+          "carrier_restored": 15,
+          "closure": 23,
+          "latch": 13,
+          "query": 2,
+          "recovered": 19
+        },
+        "lifecycle_shape_violations": [],
+        "module_binding_inventory_sha256": "9c7f749c0aa78f2d9c1037a2316601f692bf1597990500c61d4eb6b9667580cf",
+        "module_binding_violations": [],
+        "module_indirect_writes_sha256": "883f925d48b3e732632137741c8fb7336f6a3b56c7e5d6b7e5f09b7299106749",
+        "module_load_skeleton_sha256": "12d4b9aa30f135af3b5e31f86bb8c6f04eb46f7b86c1a688f0565ebf21ce77a3",
+        "module_load_violations": [],
+        "module_runtime_call_count": 12,
+        "module_runtime_calls_sha256": "8d7e495615e46a2d691b37dcbaeb97f4b1d8fd67292e5e595947dd87adb5e6bc",
+        "native_roots": [
+          "forward_carrier_step",
+          "inverse_carrier_step",
+          "forward_carrier",
+          "restore_carrier"
+        ],
+        "query_and_latch_downstream": true,
+        "query_preselection_order": true,
+        "query_validation_position": 3,
+        "reachable_functions": [
+          "_native_carrier_array",
+          "_native_shift_sequence",
+          "forward_carrier",
+          "forward_carrier_step",
+          "inverse_carrier_step",
+          "restore_carrier"
+        ],
+        "runtime_binding_violations": [],
+        "status": "PASS",
+        "unresolved_calls": []
+      },
+      "carrier_before_sha256": "b907b0c948cf7929353816771bc3c5916911e5f0240f17eb923af65ac4d79605",
+      "carrier_byte_exact": false,
+      "carrier_displaced_sha256": "ddf312eac86edad3f160048f06b5efa5e0346c8d83737acfe2c55136147f0157",
+      "carrier_restored_sha256": "dcdd7ecc904f435e5fe7ef9410872f4c117a95d001e99e90b008395af1d37917",
+      "duplicated_inverse_error": 1.79894500301,
+      "equivalence_restoration": true,
+      "exact_query_response": {
+        "imag": -0.00230648623425,
+        "real": 0.00716374763471
+      },
+      "forward_displacement_l2": 73.1576613427,
+      "forward_order_inverse_error": 1.79941674031,
+      "no_restore_error": 1.79859400708,
+      "omitted_inverse_error": 1.79928587832,
+      "query_response_difference": 0.00529698627982,
+      "restore_max_error": 4.74287484027e-16,
+      "t0_ancestry_byte_exact": true,
+      "wrong_query_response": {
+        "imag": 0.000282958235002,
+        "real": 0.00254283419804
+      },
+      "wrong_shift_magnitude_error": 1.29003363401,
+      "wrong_shift_sign_error": 1.796417268,
+      "wrong_state_one_leg_error": 1.79967048651,
+      "wrong_trajectory_inverse_error": 0.959034213823
+    },
+    "next_boundary": "AUDIO_RECURSIVE_CATALYTIC_ISING_V1_CONTRACT",
+    "ordinary_software_only": true,
+    "physical_claims_established": [],
+    "reference_tests_sha256": "ef888d8d8b48b2fbdc7897d6d42aa2f63f8c300517f6d9b8911346bf285438c6",
+    "schema": "catalytic_wave_loop_scientific_result_v1",
+    "summary": {
+      "failed": 0,
+      "passed": 78,
+      "test_count": 78
+    },
+    "tests": [
+      {
+        "id": "parent_r0_source_and_fixture_custody_exact",
+        "observed": {
+          "fixture_set_sha256": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+          "manifest_sha256": "7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa",
+          "result_sha256": "46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab",
+          "source_byte_count": 77043,
+          "source_git_blob_sha1": "956adb0ae8e84c091c1dc1e3de650be374fa96d1",
+          "source_sha256": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887",
+          "tests_sha256": "3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "parent_r0_committed_result_recomputed",
+        "observed": {
+          "environment_receipt_compared": false,
+          "fixture_count": 3,
+          "fixture_total_bytes": 144132,
+          "manifest_sha256": "7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa",
+          "operation": "verify",
+          "recomputed_results_match": true,
+          "result_sha256": "46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab",
+          "source_binding_match": true,
+          "status": "PASS",
+          "test_count": 38,
+          "tests_passed": 38,
+          "tests_sha256": "3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "parent_r1_source_and_fixture_custody_exact",
+        "observed": {
+          "fixture_set_sha256": "da62112c0459c49673675182e67011899d8ee1e841df3650c0c4a0aeecd137dd",
+          "manifest_sha256": "28cbcec8997f6f5eb49dc13e6bf919342af0863a5ba6cb1a70f10dea6fcdbc4e",
+          "result_sha256": "37cb46f6806555cfaec60910f9b5b92fbcac5bf1d0e976fb67e7f2d2c0ec4139",
+          "source_byte_count": 107055,
+          "source_git_blob_sha1": "3685be9ae63dcd213b2155c8cd66f6f81e45c071",
+          "source_sha256": "26b2cfaa63f5fe6bfa97f6d9f64b97d0ee944bc39ac45d406092aea257b2179e",
+          "tests_sha256": "5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "parent_r1_committed_result_recomputed",
+        "observed": {
+          "environment_receipt_compared": false,
+          "fixture_count": 17,
+          "fixture_total_bytes": 204332,
+          "manifest_sha256": "28cbcec8997f6f5eb49dc13e6bf919342af0863a5ba6cb1a70f10dea6fcdbc4e",
+          "operation": "verify",
+          "r0_source_binding_match": true,
+          "recomputed_results_match": true,
+          "result_sha256": "37cb46f6806555cfaec60910f9b5b92fbcac5bf1d0e976fb67e7f2d2c0ec4139",
+          "source_binding_match": true,
+          "status": "PASS",
+          "test_count": 78,
+          "tests_passed": 78,
+          "tests_sha256": "5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5",
+          "wav_fixture_bytes": 192176,
+          "wav_fixture_count": 4
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "loop_contract_strict_round_trip",
+        "observed": "7ee893ea53bff6a420355289009882b421e2a49937c0a9470f05d84f31fcb368",
+        "status": "PASS"
+      },
+      {
+        "id": "loop_contract_duplicate_key_rejected",
+        "observed": "duplicate JSON object key is forbidden: schema",
+        "status": "PASS"
+      },
+      {
+        "id": "loop_contract_unknown_field_rejected",
+        "observed": "loop contract keys mismatch: missing=[], unexpected=['extra']",
+        "status": "PASS"
+      },
+      {
+        "id": "loop_contract_nonfinite_rejected",
+        "observed": "restoration_tolerance must be finite",
+        "status": "PASS"
+      },
+      {
+        "id": "loop_contract_boolean_number_rejected",
+        "observed": "carrier_sample_count must be an integer",
+        "status": "PASS"
+      },
+      {
+        "id": "loop_contract_wrong_schedule_length_rejected",
+        "observed": "loop contract shift schedule must be exactly [17, -29, 43]",
+        "status": "PASS"
+      },
+      {
+        "id": "loop_contract_wrong_shifts_rejected",
+        "observed": "loop contract shift schedule must be exactly [17, -29, 43]",
+        "status": "PASS"
+      },
+      {
+        "id": "loop_contract_wrong_query_rejected",
+        "observed": "loop contract query identity does not match the frozen public query",
+        "status": "PASS"
+      },
+      {
+        "id": "loop_contract_wrong_source_identity_rejected",
+        "observed": "loop contract R1 source identity mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "loop_contract_forbidden_field_rejected",
+        "observed": "loop contract contains forbidden field: expected_result",
+        "status": "PASS"
+      },
+      {
+        "id": "latch_strict_round_trip",
+        "observed": "cf9737958904328d6e97b7bc7e9f69a755be256f20dd66760a463a1acf4ea24b",
+        "status": "PASS"
+      },
+      {
+        "id": "latch_duplicate_key_rejected",
+        "observed": "duplicate JSON object key is forbidden: schema",
+        "status": "PASS"
+      },
+      {
+        "id": "latch_unknown_field_rejected",
+        "observed": "relational latch keys mismatch: missing=[], unexpected=['extra']",
+        "status": "PASS"
+      },
+      {
+        "id": "latch_nonfinite_rejected",
+        "observed": "response_real must be finite",
+        "status": "PASS"
+      },
+      {
+        "id": "latch_boolean_number_rejected",
+        "observed": "response_real must be a JSON number",
+        "status": "PASS"
+      },
+      {
+        "id": "latch_forbidden_field_rejected",
+        "observed": "relational latch contains forbidden field: score",
+        "status": "PASS"
+      },
+      {
+        "id": "latch_wrong_schema_rejected",
+        "observed": "relational latch schema mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "latch_wrong_query_id_rejected",
+        "observed": "relational latch query_id mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "latch_wrong_stage_rejected",
+        "observed": "relational latch creation stage mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_strict_round_trip",
+        "observed": "0e3bd2bff5ec2b6137eba98668904b9ceacd22f6809a07a4ddbeb58413ca3381",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_duplicate_key_rejected",
+        "observed": "duplicate JSON object key is forbidden: schema",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_unknown_field_rejected",
+        "observed": "catalytic closure keys mismatch: missing=[], unexpected=['extra']",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_nonfinite_rejected",
+        "observed": "restore_max_error must be finite",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_boolean_rejected",
+        "observed": "ancestry_byte_exact must be a boolean",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_forbidden_history_field_rejected",
+        "observed": "catalytic closure keys mismatch: missing=[], unexpected=['states']",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_wrong_schema_rejected",
+        "observed": "catalytic closure schema mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_false_ancestry_rejected",
+        "observed": "closure ancestry_byte_exact verdict must be true",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_wrong_recovered_digest_rejected",
+        "observed": "closure recovered T0 ancestry identity mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_wrong_recovered_canonical_sha_rejected",
+        "observed": "closure recovered T0 ancestry identity mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_wrong_displacement_rejected",
+        "observed": "closure forward displacement does not match committed carriers",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_wrong_restore_error_rejected",
+        "observed": "closure restoration error does not match committed carriers",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_wrong_equivalence_verdict_rejected",
+        "observed": "closure equivalence-restoration verdict must be true",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_wrong_byte_exact_verdict_rejected",
+        "observed": "closure byte-exact diagnostic is not honest",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_wrong_latch_digest_rejected",
+        "observed": "closure latch digest mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_wrong_carrier_before_hash_rejected",
+        "observed": "closure carrier hash binding mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_wrong_carrier_restored_hash_rejected",
+        "observed": "closure carrier hash binding mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_wrong_claim_ceiling_rejected",
+        "observed": "closure claim ceiling mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "carrier_before_strict_binary_parse",
+        "observed": {
+          "samples": 6000,
+          "sha256": "b907b0c948cf7929353816771bc3c5916911e5f0240f17eb923af65ac4d79605"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "carrier_displaced_strict_binary_parse",
+        "observed": {
+          "samples": 6000,
+          "sha256": "ddf312eac86edad3f160048f06b5efa5e0346c8d83737acfe2c55136147f0157"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "carrier_restored_strict_binary_parse",
+        "observed": {
+          "samples": 6000,
+          "sha256": "dcdd7ecc904f435e5fe7ef9410872f4c117a95d001e99e90b008395af1d37917"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "carrier_truncation_rejected",
+        "observed": "raw carrier byte count must equal 96000, got 95999",
+        "status": "PASS"
+      },
+      {
+        "id": "carrier_extension_rejected",
+        "observed": "raw carrier byte count must equal 96000, got 96001",
+        "status": "PASS"
+      },
+      {
+        "id": "carrier_nonfinite_rejected",
+        "observed": "raw carrier contains non-finite values",
+        "status": "PASS"
+      },
+      {
+        "id": "carrier_endian_mutation_rejected",
+        "observed": "fixture SHA-256 mismatch for role carrier_before",
+        "status": "PASS"
+      },
+      {
+        "id": "zero_amplitude_carrier_coordinate_rejected",
+        "observed": "borrowed carrier contains a zero-amplitude coordinate",
+        "status": "PASS"
+      },
+      {
+        "id": "forward_carrier_displacement_nonzero",
+        "observed": 73.1576613427,
+        "status": "PASS"
+      },
+      {
+        "id": "correct_carrier_equivalence_restoration",
+        "observed": {
+          "max_error": 4.74287484027e-16,
+          "metric": "max_abs_complex_sample_error",
+          "tolerance": 1e-12
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "carrier_byte_exact_diagnostic_honest",
+        "observed": {
+          "before": "b907b0c948cf7929353816771bc3c5916911e5f0240f17eb923af65ac4d79605",
+          "byte_exact": false,
+          "restored": "dcdd7ecc904f435e5fe7ef9410872f4c117a95d001e99e90b008395af1d37917"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "exact_t0_ancestry_bytes_recovered",
+        "observed": {
+          "byte_exact": true,
+          "tree_digest": "fe745b5e6a335a6813bd80e561ecc9293b7a1ca8c52cd6a4742f6453cf5c06df"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "external_latch_survives_both_restoration_stages",
+        "observed": "cf9737958904328d6e97b7bc7e9f69a755be256f20dd66760a463a1acf4ea24b",
+        "status": "PASS"
+      },
+      {
+        "id": "closure_excludes_reversed_histories",
+        "observed": [
+          "ancestry_byte_exact",
+          "carrier_before_sha256",
+          "carrier_byte_exact",
+          "carrier_equivalence_restored",
+          "carrier_restored_sha256",
+          "claim_ceiling",
+          "forward_displacement_l2",
+          "latch",
+          "latch_sha256",
+          "recovered_initial_tree_canonical_sha256",
+          "recovered_initial_tree_digest",
+          "restore_max_error",
+          "schema"
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "query_frozen_before_trajectory_execution",
+        "observed": {
+          "query_id": "hierarchy_a_public_preselected",
+          "stage": "before_trajectory_execution"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "wrong_query_changes_complex_latch",
+        "observed": {
+          "difference": 0.00529698627982,
+          "exact": {
+            "imag": -0.00230648623425,
+            "real": 0.00716374763471
+          },
+          "wrong": {
+            "imag": 0.000282958235002,
+            "real": 0.00254283419804
+          }
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "forward_order_inverse_rejected",
+        "observed": 1.79941674031,
+        "status": "PASS"
+      },
+      {
+        "id": "wrong_trajectory_inverse_rejected",
+        "observed": 0.959034213823,
+        "status": "PASS"
+      },
+      {
+        "id": "omitted_inverse_step_rejected",
+        "observed": 1.79928587832,
+        "status": "PASS"
+      },
+      {
+        "id": "duplicated_inverse_step_rejected",
+        "observed": 1.79894500301,
+        "status": "PASS"
+      },
+      {
+        "id": "wrong_shift_sign_rejected",
+        "observed": 1.796417268,
+        "status": "PASS"
+      },
+      {
+        "id": "wrong_shift_magnitude_rejected",
+        "observed": 1.29003363401,
+        "status": "PASS"
+      },
+      {
+        "id": "wrong_state_one_inverse_leg_rejected",
+        "observed": 1.79967048651,
+        "status": "PASS"
+      },
+      {
+        "id": "no_restore_control_rejected",
+        "observed": 1.79859400708,
+        "status": "PASS"
+      },
+      {
+        "id": "identity_untouched_carrier_rejected",
+        "observed": "forward carrier displacement is below the frozen minimum",
+        "status": "PASS"
+      },
+      {
+        "id": "query_selected_after_result_rejected",
+        "observed": "query must be selected before trajectory execution",
+        "status": "PASS"
+      },
+      {
+        "id": "mutated_displaced_carrier_fixture_rejected",
+        "observed": "fixture SHA-256 mismatch for role carrier_displaced",
+        "status": "PASS"
+      },
+      {
+        "id": "mutated_restored_carrier_fixture_rejected",
+        "observed": "fixture SHA-256 mismatch for role carrier_restored",
+        "status": "PASS"
+      },
+      {
+        "id": "mutated_latch_fixture_rejected",
+        "observed": "fixture SHA-256 mismatch for role relational_latch",
+        "status": "PASS"
+      },
+      {
+        "id": "mutated_loop_contract_rejected",
+        "observed": "loop contract shift schedule must be exactly [17, -29, 43]",
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_role_substitution_rejected",
+        "observed": "fixture manifest role substitution detected",
+        "status": "PASS"
+      },
+      {
+        "id": "committed_fixture_bytes_match_reference_lifecycle",
+        "observed": [
+          "fixtures/carrier_before.c128le",
+          "fixtures/carrier_displaced.c128le",
+          "fixtures/carrier_restored.c128le",
+          "fixtures/loop_contract.json",
+          "fixtures/relational_latch.json",
+          "fixtures/catalytic_closure.json"
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_binds_all_fixture_bytes",
+        "observed": "e6e51ae655e184f8f43b2afa9fe0c75041046966b4cdecd6fde008b02b684aa8",
+        "status": "PASS"
+      },
+      {
+        "id": "ast_native_call_graph_no_scalar_feedback",
+        "observed": {
+          "forbidden_constructs": [],
+          "forbidden_hits": [],
+          "function_shape_violations": [],
+          "latch_feedback_calls": [],
+          "latch_taint_violations": [],
+          "lifecycle_order": true,
+          "lifecycle_positions": {
+            "carrier_displaced": 11,
+            "carrier_restored": 15,
+            "closure": 23,
+            "latch": 13,
+            "query": 2,
+            "recovered": 19
+          },
+          "lifecycle_shape_violations": [],
+          "module_binding_inventory_sha256": "9c7f749c0aa78f2d9c1037a2316601f692bf1597990500c61d4eb6b9667580cf",
+          "module_binding_violations": [],
+          "module_indirect_writes_sha256": "883f925d48b3e732632137741c8fb7336f6a3b56c7e5d6b7e5f09b7299106749",
+          "module_load_skeleton_sha256": "12d4b9aa30f135af3b5e31f86bb8c6f04eb46f7b86c1a688f0565ebf21ce77a3",
+          "module_load_violations": [],
+          "module_runtime_call_count": 12,
+          "module_runtime_calls_sha256": "8d7e495615e46a2d691b37dcbaeb97f4b1d8fd67292e5e595947dd87adb5e6bc",
+          "native_roots": [
+            "forward_carrier_step",
+            "inverse_carrier_step",
+            "forward_carrier",
+            "restore_carrier"
+          ],
+          "query_and_latch_downstream": true,
+          "query_preselection_order": true,
+          "query_validation_position": 3,
+          "reachable_functions": [
+            "_native_carrier_array",
+            "_native_shift_sequence",
+            "forward_carrier",
+            "forward_carrier_step",
+            "inverse_carrier_step",
+            "restore_carrier"
+          ],
+          "runtime_binding_violations": [],
+          "status": "PASS",
+          "unresolved_calls": []
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "ast_query_and_latch_downstream_of_forward_displacement",
+        "observed": {
+          "downstream": true,
+          "feedback_calls": []
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "ast_lifecycle_order_and_external_closure",
+        "observed": {
+          "carrier_displaced": 11,
+          "carrier_restored": 15,
+          "closure": 23,
+          "latch": 13,
+          "query": 2,
+          "recovered": 19
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "ast_no_feedback_mutation_probes_rejected",
+        "observed": {
+          "aliased_latch_feedback": true,
+          "decorated_native": true,
+          "direct_matched_response": true,
+          "dynamic_callable": true,
+          "latch_feedback": true,
+          "late_query_selection": true,
+          "module_class_body_side_effect": true,
+          "module_definition_default_side_effect": true,
+          "module_globals_replacement": true,
+          "module_import_alias_replacement": true,
+          "module_rebind": true,
+          "module_runtime_attribute_replacement": true,
+          "runtime_match_capture": true,
+          "score_feedback": true,
+          "spin_feedback": true,
+          "swapped_inverse_order": true,
+          "tree_scalar_feedback": true,
+          "winner_feedback": true
+        },
+        "status": "PASS"
+      }
+    ]
+  },
+  "source_binding": {
+    "line_ending_identity": "LF",
+    "python_syntax": "PASS",
+    "source_byte_count": 117873,
+    "source_git_blob_sha1": "63eed91f74252082b1258755bdd4371a2a48e105",
+    "source_sha256": "6c55861da950caf0738bb5ffb676f0c458a593a805ddd49419d6b2b427f6c33c"
+  },
+  "verification_policy": {
+    "carrier_restoration": "numerical equivalence under max_abs_complex_sample_error <= 1e-12; hashes reported separately",
+    "committed_byte_authority": "all six fixtures are parsed and recomputed from committed bytes",
+    "environment_receipt": "informational only",
+    "parent_authority": "exact R0 and R1 source, manifest, fixture-set, tests, and result identities plus committed-result recomputation",
+    "portable_metric_atol": 5e-12,
+    "portable_metric_rtol": 5e-12,
+    "stored_pass_authority": false,
+    "t0_restoration": "exact canonical bytes"
+  }
+}

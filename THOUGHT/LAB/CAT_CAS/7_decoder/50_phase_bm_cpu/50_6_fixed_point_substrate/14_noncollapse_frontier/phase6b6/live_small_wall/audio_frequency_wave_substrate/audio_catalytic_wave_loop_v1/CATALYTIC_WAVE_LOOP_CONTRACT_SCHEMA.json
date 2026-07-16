@@ -1,0 +1,226 @@
+{
+  "$id": "urn:cat-cas:catalytic-wave-loop-contract:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "carrier_before_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "carrier_byte_count": {
+      "const": 96000,
+      "type": "integer"
+    },
+    "carrier_byte_order": {
+      "type": "string"
+    },
+    "carrier_dtype": {
+      "type": "string"
+    },
+    "carrier_format": {
+      "type": "string"
+    },
+    "carrier_sample_count": {
+      "const": 6000,
+      "type": "integer"
+    },
+    "carrier_source_id": {
+      "type": "string"
+    },
+    "claim_ceiling": {
+      "type": "string"
+    },
+    "forward_displacement_l2_min": {
+      "type": "number"
+    },
+    "inverse_operator_order": {
+      "const": [
+        "circular_unroll",
+        "multiply_conjugate_tree_beam"
+      ],
+      "type": "array"
+    },
+    "latch_creation_stage": {
+      "type": "string"
+    },
+    "operator_order": {
+      "const": [
+        "multiply_tree_beam",
+        "circular_roll"
+      ],
+      "type": "array"
+    },
+    "query_id": {
+      "type": "string"
+    },
+    "query_selection_stage": {
+      "type": "string"
+    },
+    "query_tree_canonical_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "query_tree_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r0_fixture_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r0_fixture_set_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r0_reference_result_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r0_reference_tests_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r0_source_byte_count": {
+      "const": 77043,
+      "type": "integer"
+    },
+    "r0_source_git_blob_sha1": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "r0_source_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r1_fixture_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r1_fixture_set_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r1_initial_tree_canonical_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r1_initial_tree_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r1_reference_result_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r1_reference_tests_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r1_source_byte_count": {
+      "const": 107055,
+      "type": "integer"
+    },
+    "r1_source_git_blob_sha1": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "r1_source_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r1_trajectory_digests": {
+      "items": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array"
+    },
+    "restoration_metric": {
+      "type": "string"
+    },
+    "restoration_tolerance": {
+      "type": "number"
+    },
+    "schema": {
+      "const": "catalytic_wave_loop_contract_v1",
+      "type": "string"
+    },
+    "shift_schedule": {
+      "const": [
+        17,
+        -29,
+        43
+      ],
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    },
+    "trajectory_order": {
+      "const": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "type": "array"
+    },
+    "wrong_query_separation_min": {
+      "type": "number"
+    },
+    "wrong_restoration_min": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "carrier_before_sha256",
+    "carrier_byte_count",
+    "carrier_byte_order",
+    "carrier_dtype",
+    "carrier_format",
+    "carrier_sample_count",
+    "carrier_source_id",
+    "claim_ceiling",
+    "forward_displacement_l2_min",
+    "inverse_operator_order",
+    "latch_creation_stage",
+    "operator_order",
+    "query_id",
+    "query_selection_stage",
+    "query_tree_canonical_sha256",
+    "query_tree_digest",
+    "r0_fixture_manifest_sha256",
+    "r0_fixture_set_sha256",
+    "r0_reference_result_sha256",
+    "r0_reference_tests_sha256",
+    "r0_source_byte_count",
+    "r0_source_git_blob_sha1",
+    "r0_source_sha256",
+    "r1_fixture_manifest_sha256",
+    "r1_fixture_set_sha256",
+    "r1_initial_tree_canonical_sha256",
+    "r1_initial_tree_digest",
+    "r1_reference_result_sha256",
+    "r1_reference_tests_sha256",
+    "r1_source_byte_count",
+    "r1_source_git_blob_sha1",
+    "r1_source_sha256",
+    "r1_trajectory_digests",
+    "restoration_metric",
+    "restoration_tolerance",
+    "schema",
+    "shift_schedule",
+    "trajectory_order",
+    "wrong_query_separation_min",
+    "wrong_restoration_min"
+  ],
+  "title": "CAT_CAS catalytic wave loop contract v1",
+  "type": "object",
+  "x-semantic-constraints": [
+    "strict canonical JSON with duplicate-key rejection",
+    "exact R0 and R1 source and result identities",
+    "query identity selected before trajectory execution",
+    "shift schedule is exactly [17,-29,43]",
+    "answer, expected-result, spin, energy, winner, candidate, and score fields are forbidden"
+  ]
+}
