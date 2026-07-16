@@ -1,0 +1,23 @@
+{
+  "agent_id": "019f6a1b-bd18-76c3-aa7e-150ca34f686b",
+  "audited_commit": "55e059bc7acaafee3feacddac2069d7b5e40edd1",
+  "evidence_origin": "codex_subagent_detached_receipt",
+  "issuer": "codex_subagent_read_only_review",
+  "model": "gpt-5.6-sol",
+  "no_checkout_mutation": true,
+  "no_file_edits": true,
+  "no_git_write": true,
+  "no_live_authority": true,
+  "no_pmu": true,
+  "no_target_contact": true,
+  "receipt_kind": "detached_review_body_acknowledgment",
+  "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+  "review_body_sha256": "2b13606d0cbaa8ebd0120eba54006c89f27f39985c1abba9299ce696a1fba81a",
+  "role": "discovery transport and custody auditor",
+  "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+  "schema": "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V2",
+  "self_authored": false,
+  "source_bundle_sha256": "b58b0967018fb0e41caa5b4bf494e2bf66542b9770409b4dd763d641467a9b43",
+  "source_hashes_sha256": "997879a0b69393074762a4b3d2f0957250e640506ba0b2cb05c11cfbdc53517f",
+  "thread_id": "019f6a1b-bd18-76c3-aa7e-150ca34f686b"
+}
