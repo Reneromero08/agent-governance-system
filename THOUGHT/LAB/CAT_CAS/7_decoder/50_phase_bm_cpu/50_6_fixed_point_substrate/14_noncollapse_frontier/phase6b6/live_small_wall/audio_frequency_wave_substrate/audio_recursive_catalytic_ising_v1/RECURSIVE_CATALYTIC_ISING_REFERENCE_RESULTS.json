@@ -1,0 +1,1185 @@
+{
+  "fixture_manifest_sha256": "0b83917e4d71575d6300f5d92f60e8e5f439e894375ee100eeef8571fccdc7ae",
+  "parent_custody": {
+    "r0": {
+      "claim_ceiling": "SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY",
+      "fixture_manifest_sha256": "7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa",
+      "fixture_set_sha256": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+      "reference_result_sha256": "46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab",
+      "reference_tests_sha256": "3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c",
+      "source_byte_count": 77043,
+      "source_git_blob_sha1": "956adb0ae8e84c091c1dc1e3de650be374fa96d1",
+      "source_sha256": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887"
+    },
+    "r1": {
+      "claim_ceiling": "SOFTWARE_COMPLETE_TREE_TEMPORAL_RECURRENCE_REFERENCE_ONLY",
+      "fixture_manifest_sha256": "28cbcec8997f6f5eb49dc13e6bf919342af0863a5ba6cb1a70f10dea6fcdbc4e",
+      "fixture_set_sha256": "da62112c0459c49673675182e67011899d8ee1e841df3650c0c4a0aeecd137dd",
+      "reference_result_sha256": "37cb46f6806555cfaec60910f9b5b92fbcac5bf1d0e976fb67e7f2d2c0ec4139",
+      "reference_tests_sha256": "5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5",
+      "source_byte_count": 107055,
+      "source_git_blob_sha1": "3685be9ae63dcd213b2155c8cd66f6f81e45c071",
+      "source_sha256": "26b2cfaa63f5fe6bfa97f6d9f64b97d0ee944bc39ac45d406092aea257b2179e"
+    },
+    "r2s": {
+      "claim_ceiling": "SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY",
+      "fixture_manifest_sha256": "5e8bfa247c513d189774ec671265b2d3dc1ea97004e5e8c40baa090f26db3cad",
+      "fixture_set_sha256": "e6e51ae655e184f8f43b2afa9fe0c75041046966b4cdecd6fde008b02b684aa8",
+      "reference_result_sha256": "bee5727f68fc10ee047d666198b3f060f669058e966aa44802e270f90abbdeeb",
+      "reference_tests_sha256": "ef888d8d8b48b2fbdc7897d6d42aa2f63f8c300517f6d9b8911346bf285438c6",
+      "source_byte_count": 117873,
+      "source_git_blob_sha1": "63eed91f74252082b1258755bdd4371a2a48e105",
+      "source_sha256": "6c55861da950caf0738bb5ffb676f0c458a593a805ddd49419d6b2b427f6c33c"
+    }
+  },
+  "schema": "recursive_catalytic_ising_reference_result_v1",
+  "schema_bindings": {
+    "RECURSIVE_CATALYTIC_ISING_COLLAPSE_SCHEMA.json": "df7360230e0dd2b7d410c547fa20e9fc2a5384e1c55b588b7aed3828afd80866",
+    "RECURSIVE_CATALYTIC_ISING_CONTRACT_SCHEMA.json": "411e0ef55765870fa23e8e57d6fca5d9d36eac14eff022e456dbb6d584a5dd02",
+    "RECURSIVE_CATALYTIC_ISING_MANIFEST_SCHEMA.json": "86387639e1d08ea5ba6f6b37165c724b6720099b47633cf46022dc0c5fc13144",
+    "RECURSIVE_CATALYTIC_ISING_ORACLE_SCHEMA.json": "2ee0a864eceb58546da426a27d1e1ee2c56228dc28fb6bbc0f433b5f49338cb4",
+    "RECURSIVE_CATALYTIC_ISING_PHASE_STATE_SCHEMA.json": "9ac6ca5da808d91eb54560841841bc00f70a05f2f2c4f66ae5209231a46e4ee5",
+    "RECURSIVE_CATALYTIC_ISING_PROBLEM_SCHEMA.json": "e68e360c8b128bf016de703a456af241660a04aeb79b3686fb11261da7144d77",
+    "RECURSIVE_CATALYTIC_ISING_TREE_IDENTITY_SCHEMA.json": "03af9af28859d1e36cd7e19ff5a92af71006bac1b0ecd569c9ec27061f4366a5"
+  },
+  "scientific": {
+    "claim_ceiling": "SOFTWARE_RECURSIVE_PHASE_ISING_EMULATOR_ONLY",
+    "contact_counts": {
+      "adc_dac": 0,
+      "audio_playback": 0,
+      "audio_recording": 0,
+      "hardware": 0,
+      "ssh_scp": 0,
+      "target": 0,
+      "transducer": 0
+    },
+    "established_token_if_all_gates_close": "AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED",
+    "fixture_count": 13,
+    "fixture_manifest_sha256": "0b83917e4d71575d6300f5d92f60e8e5f439e894375ee100eeef8571fccdc7ae",
+    "fixture_set_sha256": "653f8c19d4686c972c6c7a10a8283ee8564322f6f3bf3012aa6bea8b1c2b3d5b",
+    "fixture_total_bytes": 55520,
+    "measurements": {
+      "ast_dataflow_proof": {
+        "call_graph": {
+          "OrientedRecursiveBeam.__post_init__": [
+            "_finite",
+            "wrap_phase"
+          ],
+          "OrientedRecursiveBeam.with_orientation": [
+            "OrientedRecursiveBeam.__post_init__"
+          ],
+          "_finite": [],
+          "evolve_phase_state": [
+            "evolve_phase_trajectory"
+          ],
+          "evolve_phase_trajectory": [
+            "native_phase_step"
+          ],
+          "lock_strength": [
+            "_finite"
+          ],
+          "native_phase_step": [
+            "OrientedRecursiveBeam.with_orientation",
+            "lock_strength",
+            "native_phase_velocity",
+            "wrap_phase"
+          ],
+          "native_phase_velocity": [
+            "_finite",
+            "validate_problem"
+          ],
+          "validate_problem": [],
+          "wrap_phase": []
+        },
+        "call_graph_closure_violation": false,
+        "call_graph_reachable": [
+          "OrientedRecursiveBeam.__post_init__",
+          "OrientedRecursiveBeam.with_orientation",
+          "_finite",
+          "evolve_phase_state",
+          "evolve_phase_trajectory",
+          "lock_strength",
+          "native_phase_step",
+          "native_phase_velocity",
+          "validate_problem",
+          "wrap_phase"
+        ],
+        "forbidden_hits": [],
+        "function_sha256": {
+          "OrientedRecursiveBeam.__post_init__": "45155d3ae7fd75b5d5556b8bfb0b2d36c2eceff41bb9b42aefb93434578b5569",
+          "OrientedRecursiveBeam.with_orientation": "11af3c57eb92a844a695fadba9806d4e0be51989977e51b28d30aa15ab621269",
+          "_finite": "89d4bf98a17d411a9310201028078c2250032518c887757ce2522e7e20a8a974",
+          "evolve_phase_state": "7f78de52e5dad8aeb3dd75dd4c70bd0139bd371427998f1464b7b9af5ddb7fd7",
+          "evolve_phase_trajectory": "01b7f1b3582b1d4ff12e40f470f5e69fef2817af1245ef057204514bda65bdb3",
+          "lock_strength": "2da00101d0fd23f5706d0eaf3bff1c9ad376a570cd0f046a99fa85bfda78c41b",
+          "native_phase_step": "54c4556a45ff51b472321bcd5593dd097c942061192148eeb90e04f5d975e225",
+          "native_phase_velocity": "d8cd61c23f1817d063ca3afca60a7a7d17ae461f9842fda73d4ed4d6198b480b",
+          "validate_problem": "a7ef797409d87d1998bc9ac19feaad932ff8e88d1447f5936aedab53a0c90785",
+          "wrap_phase": "799b6d31e752a9122c993954e4f552127ff4f4935fd1ab60c045745a28931b4d"
+        },
+        "function_shape_violations": [],
+        "lifecycle_order": true,
+        "lifecycle_positions": {
+          "collapse_boundary": 1723,
+          "collapse_receipt_document": 1727,
+          "evolve_phase_trajectory": 1711,
+          "exact_ising_oracle": 1724
+        },
+        "lifecycle_sha256": "334727de992cde5fbb7135f4c448a4ccf801a07fd546d0b343d721214d9f3981",
+        "lifecycle_shape_violation": false,
+        "missing_roots": [],
+        "module_binding_inventory_sha256": "fafa9a3885ec1c1055fddc777d0d8c92f733c625b49adb04907ea165a7c941b0",
+        "module_indirect_write_count": 1,
+        "module_indirect_writes_sha256": "2e0969cd37b70dad54530854c55cefbaae15238cff6277bc0e018fa2bca66116",
+        "module_load_skeleton_sha256": "73a72f282c4e38aafd3ca1eed90b3b9daf1a1d3d41585d665c5290ce5c9bc8ab",
+        "module_load_violations": [],
+        "module_runtime_call_count": 28,
+        "module_runtime_calls_sha256": "02b88667a438588166d3e07dd92750d81d93db56b5789e40633fd22d11a74cfa",
+        "native_roots": [
+          "evolve_phase_state",
+          "evolve_phase_trajectory",
+          "native_phase_step",
+          "native_phase_velocity"
+        ],
+        "native_transitive_closure": [
+          "_finite",
+          "wrap_phase",
+          "validate_problem",
+          "lock_strength",
+          "OrientedRecursiveBeam.__post_init__",
+          "OrientedRecursiveBeam.with_orientation",
+          "evolve_phase_state",
+          "evolve_phase_trajectory",
+          "native_phase_step",
+          "native_phase_velocity"
+        ],
+        "status": "PASS"
+      },
+      "ast_mutation_probes": {
+        "coefficient_vector_substitution": true,
+        "expected_optimum_feedback": true,
+        "flat_sine_substitution": true,
+        "helper_lock_oracle_feedback": true,
+        "helper_problem_oracle_feedback": true,
+        "helper_wrap_antipodal_projection": true,
+        "lifecycle_oracle_before_collapse": true,
+        "method_orientation_oracle_feedback": true,
+        "method_post_init_latch_feedback": true,
+        "module_attribute_write": true,
+        "module_class_side_effect": true,
+        "module_default_side_effect": true,
+        "module_direct_rebind": true,
+        "module_import_rebind": true,
+        "module_namespace_write": true,
+        "native_decode_feedback": true,
+        "native_energy_feedback": true,
+        "native_field_threshold": true,
+        "native_lock_threshold": true,
+        "native_matrix_spin_product": true,
+        "r2s_latch_feedback": true,
+        "state_energy_feedback": true,
+        "step_decode_feedback": true,
+        "trajectory_collapse_feedback": true,
+        "trajectory_oracle_feedback": true,
+        "winner_feedback": true
+      },
+      "collapsed_spin_baseline": {
+        "binary_after_every_step": true,
+        "energy": 10.5,
+        "spins": [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        "structural_state_loss": "continuous_phase_and_internal_relation_discarded_each_step"
+      },
+      "energy_retention_baseline": {
+        "best_energy": -12.5,
+        "best_spins": [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        "energy_evaluated_after_every_step": true,
+        "retention_updates": 3,
+        "structural_state_loss": "binary_energy_selection_controls_retained_output"
+      },
+      "final_antipodal_residual": 7.1054273576e-15,
+      "final_orientations_rad": [
+        3.14159265359,
+        3.14159265359,
+        3.14159265359,
+        3.14159265359,
+        -5.3290705182e-15
+      ],
+      "final_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "initial_orientations_rad": [
+        0.31,
+        1.27,
+        -2.11,
+        2.53,
+        -0.83
+      ],
+      "no_lock_residual": 0.366077762213,
+      "nonbinary_preboundary_rows": 705,
+      "observed_energy": -12.5,
+      "optimum_energy": -12.5,
+      "optimum_gap": 1.0,
+      "permutation_covariance_error": 0.0,
+      "trajectory_byte_count": 40040,
+      "trajectory_sha256": "135a3f8231e4ac6ddfb575c7ac684111409da650260a03b065e7a7b0078ca196",
+      "trajectory_shape": [
+        1001,
+        5
+      ],
+      "tree_identity_checks": 5005,
+      "whole_tree_amplitude_error_max": 3.33066907388e-16,
+      "whole_tree_negation_error_max": 2.00148302124e-16,
+      "wrong_coupling_energy": 5.5,
+      "wrong_coupling_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "wrong_field_energy": -11.5,
+      "wrong_field_spins": [
+        1,
+        1,
+        1,
+        1,
+        -1
+      ]
+    },
+    "next_boundary": "NEXT_AUDIO_PHASE_COMPUTING_BOUNDARY_REQUIRES_EXPLICIT_SELECTION",
+    "ordinary_software_only": true,
+    "parent_custody": {
+      "r0": {
+        "claim_ceiling": "SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY",
+        "fixture_manifest_sha256": "7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa",
+        "fixture_set_sha256": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+        "reference_result_sha256": "46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab",
+        "reference_tests_sha256": "3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c",
+        "source_byte_count": 77043,
+        "source_git_blob_sha1": "956adb0ae8e84c091c1dc1e3de650be374fa96d1",
+        "source_sha256": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887"
+      },
+      "r1": {
+        "claim_ceiling": "SOFTWARE_COMPLETE_TREE_TEMPORAL_RECURRENCE_REFERENCE_ONLY",
+        "fixture_manifest_sha256": "28cbcec8997f6f5eb49dc13e6bf919342af0863a5ba6cb1a70f10dea6fcdbc4e",
+        "fixture_set_sha256": "da62112c0459c49673675182e67011899d8ee1e841df3650c0c4a0aeecd137dd",
+        "reference_result_sha256": "37cb46f6806555cfaec60910f9b5b92fbcac5bf1d0e976fb67e7f2d2c0ec4139",
+        "reference_tests_sha256": "5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5",
+        "source_byte_count": 107055,
+        "source_git_blob_sha1": "3685be9ae63dcd213b2155c8cd66f6f81e45c071",
+        "source_sha256": "26b2cfaa63f5fe6bfa97f6d9f64b97d0ee944bc39ac45d406092aea257b2179e"
+      },
+      "r2s": {
+        "claim_ceiling": "SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY",
+        "fixture_manifest_sha256": "5e8bfa247c513d189774ec671265b2d3dc1ea97004e5e8c40baa090f26db3cad",
+        "fixture_set_sha256": "e6e51ae655e184f8f43b2afa9fe0c75041046966b4cdecd6fde008b02b684aa8",
+        "reference_result_sha256": "bee5727f68fc10ee047d666198b3f060f669058e966aa44802e270f90abbdeeb",
+        "reference_tests_sha256": "ef888d8d8b48b2fbdc7897d6d42aa2f63f8c300517f6d9b8911346bf285438c6",
+        "source_byte_count": 117873,
+        "source_git_blob_sha1": "63eed91f74252082b1258755bdd4371a2a48e105",
+        "source_sha256": "6c55861da950caf0738bb5ffb676f0c458a593a805ddd49419d6b2b427f6c33c"
+      }
+    },
+    "parent_verification": {
+      "r0": {
+        "recomputed_results_match": true,
+        "status": "PASS",
+        "test_count": 38,
+        "tests_passed": 38
+      },
+      "r1": {
+        "recomputed_results_match": true,
+        "status": "PASS",
+        "test_count": 78,
+        "tests_passed": 78
+      },
+      "r2s": {
+        "recomputed_results_match": true,
+        "status": "PASS",
+        "test_count": 78,
+        "tests_passed": 78
+      }
+    },
+    "physical_claims_established": [],
+    "reference_tests_sha256": "40bae1deea55baca1e909f0adc6c93b47350ae463cb267f8e320c3b0bbc05c70",
+    "schema": "recursive_catalytic_ising_scientific_result_v1",
+    "summary": {
+      "failed": 0,
+      "passed": 106,
+      "test_count": 106
+    },
+    "tests": [
+      {
+        "id": "parent_r0_custody_exact",
+        "observed": {
+          "claim_ceiling": "SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY",
+          "fixture_manifest_sha256": "7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa",
+          "fixture_set_sha256": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+          "reference_result_sha256": "46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab",
+          "reference_tests_sha256": "3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c",
+          "source_byte_count": 77043,
+          "source_git_blob_sha1": "956adb0ae8e84c091c1dc1e3de650be374fa96d1",
+          "source_sha256": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "parent_r0_reproduced",
+        "observed": {
+          "recomputed_results_match": true,
+          "status": "PASS",
+          "test_count": 38,
+          "tests_passed": 38
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "parent_r1_custody_exact",
+        "observed": {
+          "claim_ceiling": "SOFTWARE_COMPLETE_TREE_TEMPORAL_RECURRENCE_REFERENCE_ONLY",
+          "fixture_manifest_sha256": "28cbcec8997f6f5eb49dc13e6bf919342af0863a5ba6cb1a70f10dea6fcdbc4e",
+          "fixture_set_sha256": "da62112c0459c49673675182e67011899d8ee1e841df3650c0c4a0aeecd137dd",
+          "reference_result_sha256": "37cb46f6806555cfaec60910f9b5b92fbcac5bf1d0e976fb67e7f2d2c0ec4139",
+          "reference_tests_sha256": "5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5",
+          "source_byte_count": 107055,
+          "source_git_blob_sha1": "3685be9ae63dcd213b2155c8cd66f6f81e45c071",
+          "source_sha256": "26b2cfaa63f5fe6bfa97f6d9f64b97d0ee944bc39ac45d406092aea257b2179e"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "parent_r1_reproduced",
+        "observed": {
+          "recomputed_results_match": true,
+          "status": "PASS",
+          "test_count": 78,
+          "tests_passed": 78
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "parent_r2s_custody_exact",
+        "observed": {
+          "claim_ceiling": "SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY",
+          "fixture_manifest_sha256": "5e8bfa247c513d189774ec671265b2d3dc1ea97004e5e8c40baa090f26db3cad",
+          "fixture_set_sha256": "e6e51ae655e184f8f43b2afa9fe0c75041046966b4cdecd6fde008b02b684aa8",
+          "reference_result_sha256": "bee5727f68fc10ee047d666198b3f060f669058e966aa44802e270f90abbdeeb",
+          "reference_tests_sha256": "ef888d8d8b48b2fbdc7897d6d42aa2f63f8c300517f6d9b8911346bf285438c6",
+          "source_byte_count": 117873,
+          "source_git_blob_sha1": "63eed91f74252082b1258755bdd4371a2a48e105",
+          "source_sha256": "6c55861da950caf0738bb5ffb676f0c458a593a805ddd49419d6b2b427f6c33c"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "parent_r2s_reproduced",
+        "observed": {
+          "recomputed_results_match": true,
+          "status": "PASS",
+          "test_count": 78,
+          "tests_passed": 78
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "source_binding_exact",
+        "observed": {
+          "byte_count": 146825,
+          "git_blob_sha1": "ac01c64d15498355daa844c7e3adba99b2fcc73a",
+          "lf_count": 3335,
+          "line_endings": "LF",
+          "sha256": "076fa3f392a9a0f1307e222deeabef38d558bf93db10c317af481ee40bf17b48"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "contract_schema_exact",
+        "observed": "411e0ef55765870fa23e8e57d6fca5d9d36eac14eff022e456dbb6d584a5dd02",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_schema_exact",
+        "observed": "e68e360c8b128bf016de703a456af241660a04aeb79b3686fb11261da7144d77",
+        "status": "PASS"
+      },
+      {
+        "id": "tree_identity_schema_exact",
+        "observed": "03af9af28859d1e36cd7e19ff5a92af71006bac1b0ecd569c9ec27061f4366a5",
+        "status": "PASS"
+      },
+      {
+        "id": "phase_state_schema_exact",
+        "observed": "9ac6ca5da808d91eb54560841841bc00f70a05f2f2c4f66ae5209231a46e4ee5",
+        "status": "PASS"
+      },
+      {
+        "id": "collapse_schema_exact",
+        "observed": "df7360230e0dd2b7d410c547fa20e9fc2a5384e1c55b588b7aed3828afd80866",
+        "status": "PASS"
+      },
+      {
+        "id": "oracle_schema_exact",
+        "observed": "2ee0a864eceb58546da426a27d1e1ee2c56228dc28fb6bbc0f433b5f49338cb4",
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_schema_exact",
+        "observed": "86387639e1d08ea5ba6f6b37165c724b6720099b47633cf46022dc0c5fc13144",
+        "status": "PASS"
+      },
+      {
+        "id": "all_schemas_draft_2020_12_valid",
+        "observed": {
+          "RECURSIVE_CATALYTIC_ISING_COLLAPSE_SCHEMA.json": "PASS",
+          "RECURSIVE_CATALYTIC_ISING_CONTRACT_SCHEMA.json": "PASS",
+          "RECURSIVE_CATALYTIC_ISING_MANIFEST_SCHEMA.json": "PASS",
+          "RECURSIVE_CATALYTIC_ISING_ORACLE_SCHEMA.json": "PASS",
+          "RECURSIVE_CATALYTIC_ISING_PHASE_STATE_SCHEMA.json": "PASS",
+          "RECURSIVE_CATALYTIC_ISING_PROBLEM_SCHEMA.json": "PASS",
+          "RECURSIVE_CATALYTIC_ISING_TREE_IDENTITY_SCHEMA.json": "PASS"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "contract_schema_malformed_rejected",
+        "observed": "JSON Schema rejection: 5 was expected",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_schema_malformed_rejected",
+        "observed": "JSON Schema rejection: [[0.0, 0.0, 1.0, 2.0, -2.0], [0.0, 0.0, 2.0, -1.0, -1.0], [1.0, 2.0, 0.0, 2.0, -1.0], [2.0, -1.0, 2.0, 0.0, -2.0], [-2.0, -1.0, -1.0, -2.0, 0.0]] was expected",
+        "status": "PASS"
+      },
+      {
+        "id": "tree_identity_schema_malformed_rejected",
+        "observed": "JSON Schema rejection: 0 is not of type 'object'",
+        "status": "PASS"
+      },
+      {
+        "id": "phase_state_schema_malformed_rejected",
+        "observed": "JSON Schema rejection: None is not of type 'array'",
+        "status": "PASS"
+      },
+      {
+        "id": "collapse_schema_malformed_rejected",
+        "observed": "JSON Schema rejection: 0 is not one of [-1, 1]",
+        "status": "PASS"
+      },
+      {
+        "id": "oracle_schema_malformed_rejected",
+        "observed": "JSON Schema rejection: [] is too short",
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_schema_malformed_rejected",
+        "observed": "JSON Schema rejection: [] is too short",
+        "status": "PASS"
+      },
+      {
+        "id": "tree_identity_schema_missing_fields_rejected",
+        "observed": "JSON Schema rejection: 'byte_count' is a required property",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_strict_round_trip",
+        "observed": "8d421d5ed992b49df7fb96a31214e59cf39ac744d08498654383909460e67b7e",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_duplicate_key_rejected",
+        "observed": "duplicate JSON object key is forbidden: schema",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_unknown_field_rejected",
+        "observed": "R3 contract keys mismatch: missing=[], unexpected=['extra']",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_noncanonical_json_rejected",
+        "observed": "R3 contract must use canonical JSON bytes",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_nonfinite_rejected",
+        "observed": "time_step must be finite",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_boolean_number_rejected",
+        "observed": "step_count must be an integer",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_mutated_initial_state_rejected",
+        "observed": "R3 contract initial orientations mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_step_count_mutation_rejected",
+        "observed": "R3 contract step count mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_time_step_mutation_rejected",
+        "observed": "R3 contract time step mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_lock_start_mutation_rejected",
+        "observed": "R3 contract lock start mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_lock_final_mutation_rejected",
+        "observed": "R3 contract lock final mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_nonlinear_schedule_rejected",
+        "observed": "R3 contract lock schedule mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_wrong_collapse_stage_rejected",
+        "observed": "R3 contract collapse-stage law mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_late_oracle_stage_rejected",
+        "observed": "R3 contract oracle-stage law mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_wrong_claim_ceiling_rejected",
+        "observed": "R3 contract claim ceiling mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "contract_expected_optimum_injection_rejected",
+        "observed": "R3 contract contains forbidden field: expected_optimum",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_strict_round_trip",
+        "observed": "4bb1d08c4b22843a28b1323751b1469416c37253b520f4b672a0423d267cbfbb",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_duplicate_key_rejected",
+        "observed": "duplicate JSON object key is forbidden: schema",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_unknown_field_rejected",
+        "observed": "R3 problem keys mismatch: missing=[], unexpected=['extra']",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_noncanonical_json_rejected",
+        "observed": "R3 problem must use canonical JSON bytes",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_nonfinite_coupling_rejected",
+        "observed": "coupling row 0[1] must be finite",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_nonfinite_field_rejected",
+        "observed": "field vector[0] must be finite",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_boolean_number_rejected",
+        "observed": "coupling row 0[0] must be a finite real number",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_asymmetric_coupling_rejected",
+        "observed": "coupling matrix must be exactly symmetric",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_nonzero_diagonal_rejected",
+        "observed": "coupling diagonal must be exactly zero",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_wrong_coupling_dimension_rejected",
+        "observed": "R3 problem coupling matrix has wrong dimensions",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_wrong_field_dimension_rejected",
+        "observed": "field vector must contain exactly 5 values",
+        "status": "PASS"
+      },
+      {
+        "id": "problem_expected_optimum_injection_rejected",
+        "observed": "R3 problem contains forbidden field: expected_optimum",
+        "status": "PASS"
+      },
+      {
+        "id": "tree_identity_strict_round_trip",
+        "observed": "091fa1687933abee7f14c3159254ee95ebaa550e821e49faa53b5f3141f807c1",
+        "status": "PASS"
+      },
+      {
+        "id": "five_tree_fixtures_strict_canonical",
+        "observed": [
+          "5e02caff274b499c74eaeb1d8b3d6534822aa52258468403d9546de8c9521265",
+          "1727deb9dfdcb7a99cfe202608b76fc1722a314bf9b5a04385f87b22924f55da",
+          "c8bcdbb7700aaac656abc2ec8576c8a5fd5fb6f92e1f5104b2adee95a90f8457",
+          "c1f168cf636a3766f0823cb1d1e8b7ec1d4a164ceebe615c16fd5219f4ebffea",
+          "511df60b671b0ebf9abe0b887ae3aea2a28d769e35d3bc9bae4ebdb53288fe4f"
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "tree_identity_checked_at_all_5005_positions",
+        "observed": 5005,
+        "status": "PASS"
+      },
+      {
+        "id": "tree_byte_mutation_rejected",
+        "observed": "tree identity SHA-256 mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "tree_geometry_substitution_rejected",
+        "observed": "tree identity geometry mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "tree_site_id_collision_rejected",
+        "observed": "tree identity site-ID collision",
+        "status": "PASS"
+      },
+      {
+        "id": "initial_phase_state_strict_round_trip",
+        "observed": "f8cdf2176904053c98bc02c331ee4b18314bee924c6c0d8b0c9ce25144d9f4ea",
+        "status": "PASS"
+      },
+      {
+        "id": "mutated_initial_orientation_rejected",
+        "observed": "initial phase state differs from the frozen state",
+        "status": "PASS"
+      },
+      {
+        "id": "trajectory_strict_binary_parse",
+        "observed": {
+          "bytes": 40040,
+          "shape": [
+            1001,
+            5
+          ]
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "trajectory_truncation_rejected",
+        "observed": "phase trajectory byte count must equal 40040, got 40032",
+        "status": "PASS"
+      },
+      {
+        "id": "trajectory_duplication_rejected",
+        "observed": "phase trajectory byte count must equal 40040, got 40048",
+        "status": "PASS"
+      },
+      {
+        "id": "trajectory_nonfinite_sample_rejected",
+        "observed": "phase trajectory contains non-finite values",
+        "status": "PASS"
+      },
+      {
+        "id": "trajectory_sample_mutation_rejected",
+        "observed": "R3 fixture SHA-256 mismatch for role phase_trajectory",
+        "status": "PASS"
+      },
+      {
+        "id": "committed_trajectory_exactly_reproduced",
+        "observed": "135a3f8231e4ac6ddfb575c7ac684111409da650260a03b065e7a7b0078ca196",
+        "status": "PASS"
+      },
+      {
+        "id": "final_phase_state_strict_round_trip",
+        "observed": "cf2ca24cccff4dc43e99bc879c402d6779a0622bd8fb08db580c26d8aaf5e053",
+        "status": "PASS"
+      },
+      {
+        "id": "final_state_outside_lock_tolerance_rejected",
+        "observed": "final phase state lies outside lock tolerance",
+        "status": "PASS"
+      },
+      {
+        "id": "trajectory_all_finite_and_wrapped",
+        "observed": {
+          "max": 3.14159265359,
+          "min": -3.11149418546
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "initial_state_outside_antipodal_sector",
+        "observed": 1.27,
+        "status": "PASS"
+      },
+      {
+        "id": "first_native_update_continuous_nonbinary",
+        "observed": [
+          0.397070381609,
+          1.28150288999,
+          -2.18006345527,
+          2.57483630524,
+          -0.879742280701
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "native_trajectory_deterministic",
+        "observed": "135a3f8231e4ac6ddfb575c7ac684111409da650260a03b065e7a7b0078ca196",
+        "status": "PASS"
+      },
+      {
+        "id": "final_antipodal_lock_closes",
+        "observed": 7.1054273576e-15,
+        "status": "PASS"
+      },
+      {
+        "id": "whole_tree_pi_action_negates_all_sites",
+        "observed": [
+          2.00148302124e-16,
+          2.00148302124e-16,
+          2.00148302124e-16,
+          2.00148302124e-16,
+          2.00148302124e-16
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "whole_tree_pi_action_preserves_amplitude_all_sites",
+        "observed": [
+          3.33066907388e-16,
+          3.33066907388e-16,
+          3.33066907388e-16,
+          3.33066907388e-16,
+          3.33066907388e-16
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "complete_recursive_tree_bytes_preserved",
+        "observed": [
+          "5e02caff274b499c74eaeb1d8b3d6534822aa52258468403d9546de8c9521265",
+          "1727deb9dfdcb7a99cfe202608b76fc1722a314bf9b5a04385f87b22924f55da",
+          "c8bcdbb7700aaac656abc2ec8576c8a5fd5fb6f92e1f5104b2adee95a90f8457",
+          "c1f168cf636a3766f0823cb1d1e8b7ec1d4a164ceebe615c16fd5219f4ebffea",
+          "511df60b671b0ebf9abe0b887ae3aea2a28d769e35d3bc9bae4ebdb53288fe4f"
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "no_second_harmonic_lock_rejected",
+        "observed": 0.366077762213,
+        "status": "PASS"
+      },
+      {
+        "id": "negated_coupling_control_rejected",
+        "observed": {
+          "energy": 5.5,
+          "spins": [
+            -1,
+            -1,
+            1,
+            -1,
+            -1
+          ]
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "reversed_scaled_field_control_rejected",
+        "observed": {
+          "energy": -11.5,
+          "spins": [
+            1,
+            1,
+            1,
+            1,
+            -1
+          ]
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "site_permutation_covariance",
+        "observed": 0.0,
+        "status": "PASS"
+      },
+      {
+        "id": "collapse_receipt_strict_round_trip",
+        "observed": "c664c25496c08e1c1854a7acec79e2ffca3cd1da1f5d70ce57dfb2d5964c7186",
+        "status": "PASS"
+      },
+      {
+        "id": "collapsed_spin_vector_matches_frozen_result",
+        "observed": [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "observed_energy_matches_frozen_result",
+        "observed": -12.5,
+        "status": "PASS"
+      },
+      {
+        "id": "oracle_table_strict_round_trip",
+        "observed": "8977eafb8fadc6a6eac3734822188bf04a1ab3106b92768d8c710c23c5ae964f",
+        "status": "PASS"
+      },
+      {
+        "id": "oracle_table_contains_exactly_32_states",
+        "observed": 32,
+        "status": "PASS"
+      },
+      {
+        "id": "oracle_unique_optimum_and_gap",
+        "observed": {
+          "energy": -12.5,
+          "gap": 1.0,
+          "spins": [
+            -1,
+            -1,
+            -1,
+            -1,
+            1
+          ]
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "oracle_table_mutation_rejected",
+        "observed": "oracle table rows do not match independent exact enumeration",
+        "status": "PASS"
+      },
+      {
+        "id": "collapse_receipt_mutation_rejected",
+        "observed": "collapse receipt observed spins mismatch",
+        "status": "PASS"
+      },
+      {
+        "id": "spin_resynthesis_baseline_declared_collapsed",
+        "observed": {
+          "binary_after_every_step": true,
+          "energy": 10.5,
+          "spins": [
+            1,
+            1,
+            -1,
+            1,
+            1
+          ],
+          "structural_state_loss": "continuous_phase_and_internal_relation_discarded_each_step"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "energy_retention_baseline_declared_collapsed",
+        "observed": {
+          "best_energy": -12.5,
+          "best_spins": [
+            -1,
+            -1,
+            -1,
+            -1,
+            1
+          ],
+          "energy_evaluated_after_every_step": true,
+          "retention_updates": 3,
+          "structural_state_loss": "binary_energy_selection_controls_retained_output"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "collapsed_baselines_outside_native_roots",
+        "observed": [],
+        "status": "PASS"
+      },
+      {
+        "id": "native_ast_dataflow_proof_passes",
+        "observed": {
+          "call_graph": {
+            "OrientedRecursiveBeam.__post_init__": [
+              "_finite",
+              "wrap_phase"
+            ],
+            "OrientedRecursiveBeam.with_orientation": [
+              "OrientedRecursiveBeam.__post_init__"
+            ],
+            "_finite": [],
+            "evolve_phase_state": [
+              "evolve_phase_trajectory"
+            ],
+            "evolve_phase_trajectory": [
+              "native_phase_step"
+            ],
+            "lock_strength": [
+              "_finite"
+            ],
+            "native_phase_step": [
+              "OrientedRecursiveBeam.with_orientation",
+              "lock_strength",
+              "native_phase_velocity",
+              "wrap_phase"
+            ],
+            "native_phase_velocity": [
+              "_finite",
+              "validate_problem"
+            ],
+            "validate_problem": [],
+            "wrap_phase": []
+          },
+          "call_graph_closure_violation": false,
+          "call_graph_reachable": [
+            "OrientedRecursiveBeam.__post_init__",
+            "OrientedRecursiveBeam.with_orientation",
+            "_finite",
+            "evolve_phase_state",
+            "evolve_phase_trajectory",
+            "lock_strength",
+            "native_phase_step",
+            "native_phase_velocity",
+            "validate_problem",
+            "wrap_phase"
+          ],
+          "forbidden_hits": [],
+          "function_sha256": {
+            "OrientedRecursiveBeam.__post_init__": "45155d3ae7fd75b5d5556b8bfb0b2d36c2eceff41bb9b42aefb93434578b5569",
+            "OrientedRecursiveBeam.with_orientation": "11af3c57eb92a844a695fadba9806d4e0be51989977e51b28d30aa15ab621269",
+            "_finite": "89d4bf98a17d411a9310201028078c2250032518c887757ce2522e7e20a8a974",
+            "evolve_phase_state": "7f78de52e5dad8aeb3dd75dd4c70bd0139bd371427998f1464b7b9af5ddb7fd7",
+            "evolve_phase_trajectory": "01b7f1b3582b1d4ff12e40f470f5e69fef2817af1245ef057204514bda65bdb3",
+            "lock_strength": "2da00101d0fd23f5706d0eaf3bff1c9ad376a570cd0f046a99fa85bfda78c41b",
+            "native_phase_step": "54c4556a45ff51b472321bcd5593dd097c942061192148eeb90e04f5d975e225",
+            "native_phase_velocity": "d8cd61c23f1817d063ca3afca60a7a7d17ae461f9842fda73d4ed4d6198b480b",
+            "validate_problem": "a7ef797409d87d1998bc9ac19feaad932ff8e88d1447f5936aedab53a0c90785",
+            "wrap_phase": "799b6d31e752a9122c993954e4f552127ff4f4935fd1ab60c045745a28931b4d"
+          },
+          "function_shape_violations": [],
+          "lifecycle_order": true,
+          "lifecycle_positions": {
+            "collapse_boundary": 1723,
+            "collapse_receipt_document": 1727,
+            "evolve_phase_trajectory": 1711,
+            "exact_ising_oracle": 1724
+          },
+          "lifecycle_sha256": "334727de992cde5fbb7135f4c448a4ccf801a07fd546d0b343d721214d9f3981",
+          "lifecycle_shape_violation": false,
+          "missing_roots": [],
+          "module_binding_inventory_sha256": "fafa9a3885ec1c1055fddc777d0d8c92f733c625b49adb04907ea165a7c941b0",
+          "module_indirect_write_count": 1,
+          "module_indirect_writes_sha256": "2e0969cd37b70dad54530854c55cefbaae15238cff6277bc0e018fa2bca66116",
+          "module_load_skeleton_sha256": "73a72f282c4e38aafd3ca1eed90b3b9daf1a1d3d41585d665c5290ce5c9bc8ab",
+          "module_load_violations": [],
+          "module_runtime_call_count": 28,
+          "module_runtime_calls_sha256": "02b88667a438588166d3e07dd92750d81d93db56b5789e40633fd22d11a74cfa",
+          "native_roots": [
+            "evolve_phase_state",
+            "evolve_phase_trajectory",
+            "native_phase_step",
+            "native_phase_velocity"
+          ],
+          "native_transitive_closure": [
+            "_finite",
+            "wrap_phase",
+            "validate_problem",
+            "lock_strength",
+            "OrientedRecursiveBeam.__post_init__",
+            "OrientedRecursiveBeam.with_orientation",
+            "evolve_phase_state",
+            "evolve_phase_trajectory",
+            "native_phase_step",
+            "native_phase_velocity"
+          ],
+          "status": "PASS"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "collapse_and_oracle_lifecycle_order",
+        "observed": {
+          "collapse_boundary": 1723,
+          "collapse_receipt_document": 1727,
+          "evolve_phase_trajectory": 1711,
+          "exact_ising_oracle": 1724
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "native_roots_have_no_collapsed_identifiers",
+        "observed": [],
+        "status": "PASS"
+      },
+      {
+        "id": "native_ast_mutation_probes_rejected",
+        "observed": {
+          "coefficient_vector_substitution": true,
+          "expected_optimum_feedback": true,
+          "flat_sine_substitution": true,
+          "helper_lock_oracle_feedback": true,
+          "helper_problem_oracle_feedback": true,
+          "helper_wrap_antipodal_projection": true,
+          "lifecycle_oracle_before_collapse": true,
+          "method_orientation_oracle_feedback": true,
+          "method_post_init_latch_feedback": true,
+          "module_attribute_write": true,
+          "module_class_side_effect": true,
+          "module_default_side_effect": true,
+          "module_direct_rebind": true,
+          "module_import_rebind": true,
+          "module_namespace_write": true,
+          "native_decode_feedback": true,
+          "native_energy_feedback": true,
+          "native_field_threshold": true,
+          "native_lock_threshold": true,
+          "native_matrix_spin_product": true,
+          "r2s_latch_feedback": true,
+          "state_energy_feedback": true,
+          "step_decode_feedback": true,
+          "trajectory_collapse_feedback": true,
+          "trajectory_oracle_feedback": true,
+          "winner_feedback": true
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_closes_all_fixture_bytes",
+        "observed": {
+          "count": 13,
+          "fixture_set_sha256": "653f8c19d4686c972c6c7a10a8283ee8564322f6f3bf3012aa6bea8b1c2b3d5b",
+          "total_bytes": 55520
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_role_substitution_rejected",
+        "observed": "R3 fixture manifest role substitution detected",
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_source_binding_exact",
+        "observed": {
+          "byte_count": 146825,
+          "git_blob_sha1": "ac01c64d15498355daa844c7e3adba99b2fcc73a",
+          "lf_count": 3335,
+          "line_endings": "LF",
+          "sha256": "076fa3f392a9a0f1307e222deeabef38d558bf93db10c317af481ee40bf17b48"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_parent_binding_exact",
+        "observed": [
+          "r0",
+          "r1",
+          "r2s"
+        ],
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_test_binding_exact",
+        "observed": "40bae1deea55baca1e909f0adc6c93b47350ae463cb267f8e320c3b0bbc05c70",
+        "status": "PASS"
+      },
+      {
+        "id": "manifest_problem_tree_schedule_binding_exact",
+        "observed": {
+          "problem": "4bb1d08c4b22843a28b1323751b1469416c37253b520f4b672a0423d267cbfbb",
+          "tree": "091fa1687933abee7f14c3159254ee95ebaa550e821e49faa53b5f3141f807c1"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "all_package_json_strict_parses",
+        "observed": 21,
+        "status": "PASS"
+      },
+      {
+        "id": "claim_ceiling_is_bounded_emulator_only",
+        "observed": "SOFTWARE_RECURSIVE_PHASE_ISING_EMULATOR_ONLY",
+        "status": "PASS"
+      },
+      {
+        "id": "contact_counts_are_zero",
+        "observed": {
+          "adc_dac": 0,
+          "audio_playback": 0,
+          "audio_recording": 0,
+          "hardware": 0,
+          "ssh_scp": 0,
+          "target": 0,
+          "transducer": 0
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "next_boundary_requires_explicit_selection",
+        "observed": "NEXT_AUDIO_PHASE_COMPUTING_BOUNDARY_REQUIRES_EXPLICIT_SELECTION",
+        "status": "PASS"
+      },
+      {
+        "id": "committed_byte_packet_recomputed",
+        "observed": {
+          "fixture_set": "653f8c19d4686c972c6c7a10a8283ee8564322f6f3bf3012aa6bea8b1c2b3d5b",
+          "trajectory": "135a3f8231e4ac6ddfb575c7ac684111409da650260a03b065e7a7b0078ca196"
+        },
+        "status": "PASS"
+      },
+      {
+        "id": "problem_and_schedule_are_frozen",
+        "observed": {
+          "dt": 0.03,
+          "lock_final": 1.2,
+          "steps": 1000
+        },
+        "status": "PASS"
+      }
+    ]
+  },
+  "source_binding": {
+    "byte_count": 146825,
+    "git_blob_sha1": "ac01c64d15498355daa844c7e3adba99b2fcc73a",
+    "lf_count": 3335,
+    "line_endings": "LF",
+    "sha256": "076fa3f392a9a0f1307e222deeabef38d558bf93db10c317af481ee40bf17b48"
+  },
+  "verification_policy": {
+    "committed_binary_reproduction": "byte_exact",
+    "committed_json": "canonical_byte_exact",
+    "numeric_atol": 1e-12,
+    "numeric_rtol": 1e-12,
+    "result_reproduction": "canonical_byte_exact"
+  }
+}

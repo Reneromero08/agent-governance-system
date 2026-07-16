@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "next_energy": {
+      "type": "number"
+    },
+    "optimum_energy": {
+      "type": "number"
+    },
+    "optimum_gap": {
+      "minimum": 1.0,
+      "type": "number"
+    },
+    "oracle_stage": {
+      "const": "after_collapse_boundary",
+      "type": "string"
+    },
+    "problem_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "rows": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "energy": {
+            "type": "number"
+          },
+          "spins": {
+            "items": {
+              "enum": [
+                -1,
+                1
+              ],
+              "type": "integer"
+            },
+            "maxItems": 5,
+            "minItems": 5,
+            "type": "array"
+          }
+        },
+        "required": [
+          "energy",
+          "spins"
+        ],
+        "title": "exact_oracle_row",
+        "type": "object"
+      },
+      "maxItems": 32,
+      "minItems": 32,
+      "type": "array"
+    },
+    "schema": {
+      "const": "recursive_catalytic_ising_oracle_table_v1",
+      "type": "string"
+    },
+    "unique_optimum": {
+      "items": {
+        "enum": [
+          -1,
+          1
+        ],
+        "type": "integer"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array"
+    }
+  },
+  "required": [
+    "next_energy",
+    "optimum_energy",
+    "optimum_gap",
+    "oracle_stage",
+    "problem_sha256",
+    "rows",
+    "schema",
+    "unique_optimum"
+  ],
+  "title": "recursive_catalytic_ising_oracle_table_v1",
+  "type": "object"
+}

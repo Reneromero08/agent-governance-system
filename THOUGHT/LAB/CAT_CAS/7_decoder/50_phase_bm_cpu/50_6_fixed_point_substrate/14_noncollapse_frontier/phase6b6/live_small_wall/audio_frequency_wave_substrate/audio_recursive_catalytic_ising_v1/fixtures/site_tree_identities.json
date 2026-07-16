@@ -1,0 +1,50 @@
+{
+  "schema": "recursive_catalytic_ising_tree_identity_record_v1",
+  "sites": [
+    {
+      "byte_count": 678,
+      "fixture_path": "fixtures/site_tree_0.json",
+      "geometry_sha256": "00a56e79eab766360a376e9f540aca40d177d1005f17a712673740dade7b1151",
+      "root_id": "site0.root",
+      "site_id": "site0",
+      "tree_digest": "22e1f32770d182158a135b359973237a15b6f5ae1be5c2bc8663aa8ea8f233eb",
+      "tree_sha256": "5e02caff274b499c74eaeb1d8b3d6534822aa52258468403d9546de8c9521265"
+    },
+    {
+      "byte_count": 678,
+      "fixture_path": "fixtures/site_tree_1.json",
+      "geometry_sha256": "00a56e79eab766360a376e9f540aca40d177d1005f17a712673740dade7b1151",
+      "root_id": "site1.root",
+      "site_id": "site1",
+      "tree_digest": "72441530d653006173ce8a09878b03ce376043c5bc663286234e9b8b887c52df",
+      "tree_sha256": "1727deb9dfdcb7a99cfe202608b76fc1722a314bf9b5a04385f87b22924f55da"
+    },
+    {
+      "byte_count": 678,
+      "fixture_path": "fixtures/site_tree_2.json",
+      "geometry_sha256": "00a56e79eab766360a376e9f540aca40d177d1005f17a712673740dade7b1151",
+      "root_id": "site2.root",
+      "site_id": "site2",
+      "tree_digest": "a75c531d89ed75003c8c52e98a3cc50fd9f54ee35810a8779177777546fe402a",
+      "tree_sha256": "c8bcdbb7700aaac656abc2ec8576c8a5fd5fb6f92e1f5104b2adee95a90f8457"
+    },
+    {
+      "byte_count": 678,
+      "fixture_path": "fixtures/site_tree_3.json",
+      "geometry_sha256": "00a56e79eab766360a376e9f540aca40d177d1005f17a712673740dade7b1151",
+      "root_id": "site3.root",
+      "site_id": "site3",
+      "tree_digest": "e0d2999d59a1ce72ae371177a000f6e748d4442032abccc4ad4aa69d21344b3c",
+      "tree_sha256": "c1f168cf636a3766f0823cb1d1e8b7ec1d4a164ceebe615c16fd5219f4ebffea"
+    },
+    {
+      "byte_count": 678,
+      "fixture_path": "fixtures/site_tree_4.json",
+      "geometry_sha256": "00a56e79eab766360a376e9f540aca40d177d1005f17a712673740dade7b1151",
+      "root_id": "site4.root",
+      "site_id": "site4",
+      "tree_digest": "db38148be612ccc33a5f53cf7c260f593e4c9f8d9e75a59a017cace68747afa2",
+      "tree_sha256": "511df60b671b0ebf9abe0b887ae3aea2a28d769e35d3bc9bae4ebdb53288fe4f"
+    }
+  ]
+}

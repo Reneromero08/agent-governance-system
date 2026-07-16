@@ -1,7 +1,7 @@
 # CAT_CAS Audio-Frequency Wave Substrate Side Quest Roadmap
 
-**Status:** `ACTIVE_PARALLEL_LANE__SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED`<br>
-**Roadmap version:** `1.5`<br>
+**Status:** `ACTIVE_PARALLEL_LANE__RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED`<br>
+**Roadmap version:** `1.6`<br>
 **Branch:** `codex/audio-frequency-wave-substrate`<br>
 **Base main commit:** `32b5af119a03bc48bb00f279e6cc0014406147ad`<br>
 **Frozen offline foundation commit:** `f028dfd292d2dd0fd11380459417d5b60f936ee3`<br>
@@ -320,7 +320,25 @@ the frozen coupling law evolves those trees without scalar feedback,
 and final boundary projections agree with independently generated bounded optima
 ```
 
-Current state: **not established**.
+Current state: **established as a bounded offline numerical emulator**.
+
+R3 receipt:
+
+```text
+source Git blob SHA-1     ac01c64d15498355daa844c7e3adba99b2fcc73a
+source bytes              146825
+source SHA-256            076fa3f392a9a0f1307e222deeabef38d558bf93db10c317af481ee40bf17b48
+fixture manifest          0b83917e4d71575d6300f5d92f60e8e5f439e894375ee100eeef8571fccdc7ae
+fixture set               653f8c19d4686c972c6c7a10a8283ee8564322f6f3bf3012aa6bea8b1c2b3d5b
+reference tests           40bae1deea55baca1e909f0adc6c93b47350ae463cb267f8e320c3b0bbc05c70
+reference result          27720d0a7fb1125291965d5f706e03ba6d707fc9cc4523fefb12516391e9ca3d
+trajectory SHA-256        135a3f8231e4ac6ddfb575c7ac684111409da650260a03b065e7a7b0078ca196
+fixture packet            13 files / 55520 bytes
+qualification             106 PASS / 0 FAIL
+independent reviews       4 PASS / 0 FAIL
+open material findings    0
+claim ceiling             SOFTWARE_RECURSIVE_PHASE_ISING_EMULATOR_ONLY
+```
 
 ### P1+: Physical carrier ladder
 
@@ -403,13 +421,15 @@ transducer operation, or physical restoration is authorized by this roadmap.
 
 ## 11. Immediate Next Work
 
-The catalytic-loop packet is closed. The next exact boundary is:
+The bounded R3 packet is closed. No successor is selected automatically. The next exact
+boundary is:
 
 ```text
-AUDIO_RECURSIVE_CATALYTIC_ISING_V1_CONTRACT
+NEXT_AUDIO_PHASE_COMPUTING_BOUNDARY_REQUIRES_EXPLICIT_SELECTION
 ```
 
-This roadmap update does not begin that successor package.
+This roadmap update does not begin physical audio, silicon-phononic, scaling, or
+language/IR work.
 
 The implementation agent must not touch `audio_fm_wave_v1/`, `main`, Family 10h
 evidence, `SMALL_WALL_STATE.md`, live hardware, or preserved stashes.
@@ -424,7 +444,8 @@ AUDIO_RECURSIVE_PHASE_FOUNDATION_STARTED
 AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED
 AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED
 AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED
-RECURSIVE_CATALYTIC_ISING_NOT_ESTABLISHED
+AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 SMALL_WALL_CROSSED_NOT_PROMOTED
+NEXT_AUDIO_PHASE_COMPUTING_BOUNDARY_REQUIRES_EXPLICIT_SELECTION
 ```

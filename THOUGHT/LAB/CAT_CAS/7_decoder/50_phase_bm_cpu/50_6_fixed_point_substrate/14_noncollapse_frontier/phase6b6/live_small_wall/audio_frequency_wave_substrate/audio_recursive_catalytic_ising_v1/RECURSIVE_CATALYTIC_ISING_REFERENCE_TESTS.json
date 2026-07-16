@@ -1,0 +1,429 @@
+{
+  "schema": "recursive_catalytic_ising_reference_tests_v1",
+  "tests": [
+    {
+      "id": "parent_r0_custody_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "parent_r0_reproduced",
+      "required_status": "PASS"
+    },
+    {
+      "id": "parent_r1_custody_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "parent_r1_reproduced",
+      "required_status": "PASS"
+    },
+    {
+      "id": "parent_r2s_custody_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "parent_r2s_reproduced",
+      "required_status": "PASS"
+    },
+    {
+      "id": "source_binding_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_schema_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_schema_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "tree_identity_schema_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "phase_state_schema_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "collapse_schema_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "oracle_schema_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "manifest_schema_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "all_schemas_draft_2020_12_valid",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_schema_malformed_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_schema_malformed_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "tree_identity_schema_malformed_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "phase_state_schema_malformed_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "collapse_schema_malformed_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "oracle_schema_malformed_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "manifest_schema_malformed_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "tree_identity_schema_missing_fields_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_strict_round_trip",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_duplicate_key_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_unknown_field_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_noncanonical_json_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_nonfinite_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_boolean_number_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_mutated_initial_state_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_step_count_mutation_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_time_step_mutation_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_lock_start_mutation_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_lock_final_mutation_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_nonlinear_schedule_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_wrong_collapse_stage_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_late_oracle_stage_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_wrong_claim_ceiling_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contract_expected_optimum_injection_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_strict_round_trip",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_duplicate_key_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_unknown_field_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_noncanonical_json_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_nonfinite_coupling_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_nonfinite_field_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_boolean_number_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_asymmetric_coupling_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_nonzero_diagonal_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_wrong_coupling_dimension_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_wrong_field_dimension_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_expected_optimum_injection_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "tree_identity_strict_round_trip",
+      "required_status": "PASS"
+    },
+    {
+      "id": "five_tree_fixtures_strict_canonical",
+      "required_status": "PASS"
+    },
+    {
+      "id": "tree_identity_checked_at_all_5005_positions",
+      "required_status": "PASS"
+    },
+    {
+      "id": "tree_byte_mutation_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "tree_geometry_substitution_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "tree_site_id_collision_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "initial_phase_state_strict_round_trip",
+      "required_status": "PASS"
+    },
+    {
+      "id": "mutated_initial_orientation_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "trajectory_strict_binary_parse",
+      "required_status": "PASS"
+    },
+    {
+      "id": "trajectory_truncation_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "trajectory_duplication_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "trajectory_nonfinite_sample_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "trajectory_sample_mutation_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "committed_trajectory_exactly_reproduced",
+      "required_status": "PASS"
+    },
+    {
+      "id": "final_phase_state_strict_round_trip",
+      "required_status": "PASS"
+    },
+    {
+      "id": "final_state_outside_lock_tolerance_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "trajectory_all_finite_and_wrapped",
+      "required_status": "PASS"
+    },
+    {
+      "id": "initial_state_outside_antipodal_sector",
+      "required_status": "PASS"
+    },
+    {
+      "id": "first_native_update_continuous_nonbinary",
+      "required_status": "PASS"
+    },
+    {
+      "id": "native_trajectory_deterministic",
+      "required_status": "PASS"
+    },
+    {
+      "id": "final_antipodal_lock_closes",
+      "required_status": "PASS"
+    },
+    {
+      "id": "whole_tree_pi_action_negates_all_sites",
+      "required_status": "PASS"
+    },
+    {
+      "id": "whole_tree_pi_action_preserves_amplitude_all_sites",
+      "required_status": "PASS"
+    },
+    {
+      "id": "complete_recursive_tree_bytes_preserved",
+      "required_status": "PASS"
+    },
+    {
+      "id": "no_second_harmonic_lock_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "negated_coupling_control_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "reversed_scaled_field_control_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "site_permutation_covariance",
+      "required_status": "PASS"
+    },
+    {
+      "id": "collapse_receipt_strict_round_trip",
+      "required_status": "PASS"
+    },
+    {
+      "id": "collapsed_spin_vector_matches_frozen_result",
+      "required_status": "PASS"
+    },
+    {
+      "id": "observed_energy_matches_frozen_result",
+      "required_status": "PASS"
+    },
+    {
+      "id": "oracle_table_strict_round_trip",
+      "required_status": "PASS"
+    },
+    {
+      "id": "oracle_table_contains_exactly_32_states",
+      "required_status": "PASS"
+    },
+    {
+      "id": "oracle_unique_optimum_and_gap",
+      "required_status": "PASS"
+    },
+    {
+      "id": "oracle_table_mutation_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "collapse_receipt_mutation_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "spin_resynthesis_baseline_declared_collapsed",
+      "required_status": "PASS"
+    },
+    {
+      "id": "energy_retention_baseline_declared_collapsed",
+      "required_status": "PASS"
+    },
+    {
+      "id": "collapsed_baselines_outside_native_roots",
+      "required_status": "PASS"
+    },
+    {
+      "id": "native_ast_dataflow_proof_passes",
+      "required_status": "PASS"
+    },
+    {
+      "id": "collapse_and_oracle_lifecycle_order",
+      "required_status": "PASS"
+    },
+    {
+      "id": "native_roots_have_no_collapsed_identifiers",
+      "required_status": "PASS"
+    },
+    {
+      "id": "native_ast_mutation_probes_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "manifest_closes_all_fixture_bytes",
+      "required_status": "PASS"
+    },
+    {
+      "id": "manifest_role_substitution_rejected",
+      "required_status": "PASS"
+    },
+    {
+      "id": "manifest_source_binding_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "manifest_parent_binding_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "manifest_test_binding_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "manifest_problem_tree_schedule_binding_exact",
+      "required_status": "PASS"
+    },
+    {
+      "id": "all_package_json_strict_parses",
+      "required_status": "PASS"
+    },
+    {
+      "id": "claim_ceiling_is_bounded_emulator_only",
+      "required_status": "PASS"
+    },
+    {
+      "id": "contact_counts_are_zero",
+      "required_status": "PASS"
+    },
+    {
+      "id": "next_boundary_requires_explicit_selection",
+      "required_status": "PASS"
+    },
+    {
+      "id": "committed_byte_packet_recomputed",
+      "required_status": "PASS"
+    },
+    {
+      "id": "problem_and_schedule_are_frozen",
+      "required_status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,959 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "claim_ceiling": {
+      "const": "SOFTWARE_RECURSIVE_PHASE_ISING_EMULATOR_ONLY",
+      "type": "string"
+    },
+    "contract_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "fixture_count": {
+      "const": 13,
+      "type": "integer"
+    },
+    "fixture_set_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "fixtures": {
+      "items": false,
+      "maxItems": 13,
+      "minItems": 13,
+      "prefixItems": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/r3_contract.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "r3_contract",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_r3_contract",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/ising_problem.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "ising_problem",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_ising_problem",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/site_tree_identities.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "site_tree_identities",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_site_tree_identities",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/site_tree_0.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "site_tree_0",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_site_tree_0",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/site_tree_1.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "site_tree_1",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_site_tree_1",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/site_tree_2.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "site_tree_2",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_site_tree_2",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/site_tree_3.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "site_tree_3",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_site_tree_3",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/site_tree_4.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "site_tree_4",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_site_tree_4",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/initial_phase_state.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "initial_phase_state",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_initial_phase_state",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "const": 40040,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "little",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "<f8",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/vnd.cat-cas.raw-float64-phase-matrix",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/phase_trajectory.f64le",
+              "type": "string"
+            },
+            "role": {
+              "const": "phase_trajectory",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "const": [
+                1001,
+                5
+              ],
+              "type": "array"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_phase_trajectory",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/final_phase_state.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "final_phase_state",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_final_phase_state",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/collapse_receipt.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "collapse_receipt",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_collapse_receipt",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "byte_order": {
+              "const": "utf-8",
+              "type": "string"
+            },
+            "dtype": {
+              "const": "canonical_json",
+              "type": "string"
+            },
+            "media_type": {
+              "const": "application/json",
+              "type": "string"
+            },
+            "path": {
+              "const": "fixtures/exact_oracle_table.json",
+              "type": "string"
+            },
+            "role": {
+              "const": "exact_oracle_table",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "shape": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "byte_count",
+            "byte_order",
+            "dtype",
+            "media_type",
+            "path",
+            "role",
+            "sha256",
+            "shape"
+          ],
+          "title": "fixture_record_exact_oracle_table",
+          "type": "object"
+        }
+      ],
+      "type": "array"
+    },
+    "generator": {
+      "const": "recursive_catalytic_ising_reference_v1",
+      "type": "string"
+    },
+    "ordered_fixture_paths": {
+      "const": [
+        "fixtures/r3_contract.json",
+        "fixtures/ising_problem.json",
+        "fixtures/site_tree_identities.json",
+        "fixtures/site_tree_0.json",
+        "fixtures/site_tree_1.json",
+        "fixtures/site_tree_2.json",
+        "fixtures/site_tree_3.json",
+        "fixtures/site_tree_4.json",
+        "fixtures/initial_phase_state.json",
+        "fixtures/phase_trajectory.f64le",
+        "fixtures/final_phase_state.json",
+        "fixtures/collapse_receipt.json",
+        "fixtures/exact_oracle_table.json"
+      ],
+      "type": "array"
+    },
+    "parents": {
+      "additionalProperties": false,
+      "properties": {
+        "r0": {
+          "additionalProperties": false,
+          "properties": {
+            "claim_ceiling": {
+              "const": "SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY",
+              "type": "string"
+            },
+            "fixture_manifest_sha256": {
+              "const": "7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa",
+              "type": "string"
+            },
+            "fixture_set_sha256": {
+              "const": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+              "type": "string"
+            },
+            "reference_result_sha256": {
+              "const": "46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab",
+              "type": "string"
+            },
+            "reference_tests_sha256": {
+              "const": "3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c",
+              "type": "string"
+            },
+            "source_byte_count": {
+              "const": 77043,
+              "type": "integer"
+            },
+            "source_git_blob_sha1": {
+              "const": "956adb0ae8e84c091c1dc1e3de650be374fa96d1",
+              "type": "string"
+            },
+            "source_sha256": {
+              "const": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887",
+              "type": "string"
+            }
+          },
+          "required": [
+            "claim_ceiling",
+            "fixture_manifest_sha256",
+            "fixture_set_sha256",
+            "reference_result_sha256",
+            "reference_tests_sha256",
+            "source_byte_count",
+            "source_git_blob_sha1",
+            "source_sha256"
+          ],
+          "title": "established_parent_identity",
+          "type": "object"
+        },
+        "r1": {
+          "additionalProperties": false,
+          "properties": {
+            "claim_ceiling": {
+              "const": "SOFTWARE_COMPLETE_TREE_TEMPORAL_RECURRENCE_REFERENCE_ONLY",
+              "type": "string"
+            },
+            "fixture_manifest_sha256": {
+              "const": "28cbcec8997f6f5eb49dc13e6bf919342af0863a5ba6cb1a70f10dea6fcdbc4e",
+              "type": "string"
+            },
+            "fixture_set_sha256": {
+              "const": "da62112c0459c49673675182e67011899d8ee1e841df3650c0c4a0aeecd137dd",
+              "type": "string"
+            },
+            "reference_result_sha256": {
+              "const": "37cb46f6806555cfaec60910f9b5b92fbcac5bf1d0e976fb67e7f2d2c0ec4139",
+              "type": "string"
+            },
+            "reference_tests_sha256": {
+              "const": "5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5",
+              "type": "string"
+            },
+            "source_byte_count": {
+              "const": 107055,
+              "type": "integer"
+            },
+            "source_git_blob_sha1": {
+              "const": "3685be9ae63dcd213b2155c8cd66f6f81e45c071",
+              "type": "string"
+            },
+            "source_sha256": {
+              "const": "26b2cfaa63f5fe6bfa97f6d9f64b97d0ee944bc39ac45d406092aea257b2179e",
+              "type": "string"
+            }
+          },
+          "required": [
+            "claim_ceiling",
+            "fixture_manifest_sha256",
+            "fixture_set_sha256",
+            "reference_result_sha256",
+            "reference_tests_sha256",
+            "source_byte_count",
+            "source_git_blob_sha1",
+            "source_sha256"
+          ],
+          "title": "established_parent_identity",
+          "type": "object"
+        },
+        "r2s": {
+          "additionalProperties": false,
+          "properties": {
+            "claim_ceiling": {
+              "const": "SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY",
+              "type": "string"
+            },
+            "fixture_manifest_sha256": {
+              "const": "5e8bfa247c513d189774ec671265b2d3dc1ea97004e5e8c40baa090f26db3cad",
+              "type": "string"
+            },
+            "fixture_set_sha256": {
+              "const": "e6e51ae655e184f8f43b2afa9fe0c75041046966b4cdecd6fde008b02b684aa8",
+              "type": "string"
+            },
+            "reference_result_sha256": {
+              "const": "bee5727f68fc10ee047d666198b3f060f669058e966aa44802e270f90abbdeeb",
+              "type": "string"
+            },
+            "reference_tests_sha256": {
+              "const": "ef888d8d8b48b2fbdc7897d6d42aa2f63f8c300517f6d9b8911346bf285438c6",
+              "type": "string"
+            },
+            "source_byte_count": {
+              "const": 117873,
+              "type": "integer"
+            },
+            "source_git_blob_sha1": {
+              "const": "63eed91f74252082b1258755bdd4371a2a48e105",
+              "type": "string"
+            },
+            "source_sha256": {
+              "const": "6c55861da950caf0738bb5ffb676f0c458a593a805ddd49419d6b2b427f6c33c",
+              "type": "string"
+            }
+          },
+          "required": [
+            "claim_ceiling",
+            "fixture_manifest_sha256",
+            "fixture_set_sha256",
+            "reference_result_sha256",
+            "reference_tests_sha256",
+            "source_byte_count",
+            "source_git_blob_sha1",
+            "source_sha256"
+          ],
+          "title": "established_parent_identity",
+          "type": "object"
+        }
+      },
+      "required": [
+        "r0",
+        "r1",
+        "r2s"
+      ],
+      "title": "established_parent_packet",
+      "type": "object"
+    },
+    "problem_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "result_path": {
+      "const": "RECURSIVE_CATALYTIC_ISING_REFERENCE_RESULTS.json",
+      "type": "string"
+    },
+    "result_schema": {
+      "const": "recursive_catalytic_ising_reference_result_v1",
+      "type": "string"
+    },
+    "schema": {
+      "const": "recursive_catalytic_ising_fixture_manifest_v1",
+      "type": "string"
+    },
+    "source_binding": {
+      "additionalProperties": false,
+      "properties": {
+        "byte_count": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "git_blob_sha1": {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        },
+        "lf_count": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "line_endings": {
+          "const": "LF",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "byte_count",
+        "git_blob_sha1",
+        "lf_count",
+        "line_endings",
+        "sha256"
+      ],
+      "title": "qualified_source_binding",
+      "type": "object"
+    },
+    "tests_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "total_fixture_bytes": {
+      "minimum": 40040,
+      "type": "integer"
+    },
+    "trajectory": {
+      "additionalProperties": false,
+      "properties": {
+        "byte_count": {
+          "const": 40040,
+          "type": "integer"
+        },
+        "dtype": {
+          "const": "<f8",
+          "type": "string"
+        },
+        "format": {
+          "const": "raw_little_endian_float64_phase_matrix",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "shape": {
+          "const": [
+            1001,
+            5
+          ],
+          "type": "array"
+        }
+      },
+      "required": [
+        "byte_count",
+        "dtype",
+        "format",
+        "sha256",
+        "shape"
+      ],
+      "title": "trajectory_identity",
+      "type": "object"
+    },
+    "tree_identity_record_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "claim_ceiling",
+    "contract_sha256",
+    "fixture_count",
+    "fixture_set_sha256",
+    "fixtures",
+    "generator",
+    "ordered_fixture_paths",
+    "parents",
+    "problem_sha256",
+    "result_path",
+    "result_schema",
+    "schema",
+    "source_binding",
+    "tests_sha256",
+    "total_fixture_bytes",
+    "trajectory",
+    "tree_identity_record_sha256"
+  ],
+  "title": "recursive_catalytic_ising_fixture_manifest_v1",
+  "type": "object"
+}

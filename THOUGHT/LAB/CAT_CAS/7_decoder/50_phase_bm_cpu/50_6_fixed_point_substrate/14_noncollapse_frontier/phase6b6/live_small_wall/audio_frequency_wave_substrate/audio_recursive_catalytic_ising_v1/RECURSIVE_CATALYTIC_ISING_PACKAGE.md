@@ -1,12 +1,14 @@
 # Recursive Catalytic Ising Package
 
-**Status:** `SOURCE_CANDIDATE__EXACT_PARENT_AND_R3_QUALIFICATION_PENDING`  
-**Package:** `audio_recursive_catalytic_ising_v1`  
-**Root directive:** `REPLACE THE BIT WITH PI`  
-**Parent results:** `AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`; `AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED`; `AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED`  
-**Source commit:** `aba7dfc4030728f25db00b6f204b2575688afe7a`  
-**Source Git blob SHA-1:** `a73d41b8c70b022d7f14d345056e46afaf8b6f9a`  
-**Source SHA-256:** must be computed and frozen from exact committed bytes during qualification  
+**Status:** `ESTABLISHED__106_PASS__4_REVIEW_PASS`
+**Package:** `audio_recursive_catalytic_ising_v1`
+**Root directive:** `REPLACE THE BIT WITH PI`
+**Parent results:** `AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`; `AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED`; `AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED`
+**Source candidate commit:** `aba7dfc4030728f25db00b6f204b2575688afe7a`
+**Source candidate Git blob SHA-1:** `a73d41b8c70b022d7f14d345056e46afaf8b6f9a`
+**Qualified source Git blob SHA-1:** `ac01c64d15498355daa844c7e3adba99b2fcc73a`
+**Qualified source bytes:** `146825`
+**Qualified source SHA-256:** `076fa3f392a9a0f1307e222deeabef38d558bf93db10c317af481ee40bf17b48`
 **Operation:** bounded ordinary-software recursive phase-native Ising emulation  
 **Physical authority:** none
 
@@ -164,15 +166,20 @@ or candidate selection.
 
 ## 6. Native Non-Collapse Law
 
-Forbidden from the AST-reachable native call graph rooted at:
+The AST-reachable native call graph is frozen transitively from:
 
 ```text
 native_phase_velocity
 native_phase_step
 evolve_phase_state
+evolve_phase_trajectory
 ```
 
-are:
+through `_finite`, `wrap_phase`, `validate_problem`, `lock_strength`,
+`OrientedRecursiveBeam.__post_init__`, and
+`OrientedRecursiveBeam.with_orientation`. All ten bodies are shape-hashed and scanned.
+
+Forbidden throughout that transitive closure are:
 
 ```text
 decode_spins
@@ -277,25 +284,30 @@ wrong field result differs from the frozen optimum and has higher frozen energy
 
 Controls must fail for their declared mechanical reason.
 
-## 10. Candidate Source Diagnostics
+## 10. Qualified Committed-Byte Measurements
 
-An API-compatible local R0 model of the Git-bound source produced:
+The deterministic committed trajectory and independently recomputed result produce:
 
 ```text
-14 PASS / 0 FAIL
+106 PASS / 0 FAIL
 initial antipodal residual         1.27
-final antipodal residual           approximately 7.1e-15
-no-lock residual                   approximately 0.3661
-final orientations                 [pi, pi, pi, pi, approximately 0]
+final antipodal residual           7.1054273576e-15
+no-lock residual                   0.366077762213
+final orientations                 [pi, pi, pi, pi, -5.3290705182e-15]
 projected spins                    [-1, -1, -1, -1, +1]
 observed energy                    -12.5
 optimum gap                         1.0
 wrong-coupling frozen energy        5.5
 wrong-field frozen energy          -11.5
+nonbinary preboundary rows          705
+complete-tree identity checks       5005
+pi negation error max               2.00148302124e-16
+amplitude error max                 3.33066907388e-16
+permutation covariance error        0.0
 ```
 
-These are source-authoring diagnostics only. They are not committed-byte results and do
-not establish the R3 token.
+These are committed-byte qualification results. All four independent reviews passed and
+both material review findings were repaired and closed before adjudication.
 
 ## 11. Required Qualification Packet
 
@@ -330,6 +342,26 @@ orientations, integration schedule, five tree identities, trajectory bytes, fina
 collapse receipt, oracle table, tests, results, and claim ceiling.
 
 Qualification must recompute from committed bytes, not merely regenerate in memory.
+
+The exact qualification packet is:
+
+```text
+contract schema SHA-256       411e0ef55765870fa23e8e57d6fca5d9d36eac14eff022e456dbb6d584a5dd02
+problem schema SHA-256        e68e360c8b128bf016de703a456af241660a04aeb79b3686fb11261da7144d77
+tree schema SHA-256           03af9af28859d1e36cd7e19ff5a92af71006bac1b0ecd569c9ec27061f4366a5
+phase-state schema SHA-256    9ac6ca5da808d91eb54560841841bc00f70a05f2f2c4f66ae5209231a46e4ee5
+collapse schema SHA-256       df7360230e0dd2b7d410c547fa20e9fc2a5384e1c55b588b7aed3828afd80866
+oracle schema SHA-256         2ee0a864eceb58546da426a27d1e1ee2c56228dc28fb6bbc0f433b5f49338cb4
+manifest schema SHA-256       86387639e1d08ea5ba6f6b37165c724b6720099b47633cf46022dc0c5fc13144
+contract fixture SHA-256      8d421d5ed992b49df7fb96a31214e59cf39ac744d08498654383909460e67b7e
+fixture manifest SHA-256      0b83917e4d71575d6300f5d92f60e8e5f439e894375ee100eeef8571fccdc7ae
+fixture set SHA-256           653f8c19d4686c972c6c7a10a8283ee8564322f6f3bf3012aa6bea8b1c2b3d5b
+reference tests SHA-256       40bae1deea55baca1e909f0adc6c93b47350ae463cb267f8e320c3b0bbc05c70
+reference result SHA-256      27720d0a7fb1125291965d5f706e03ba6d707fc9cc4523fefb12516391e9ca3d
+fixture packet                13 files / 55520 bytes
+phase trajectory              <f8 / [1001,5] / 40040 bytes
+phase trajectory SHA-256      135a3f8231e4ac6ddfb575c7ac684111409da650260a03b065e7a7b0078ca196
+```
 
 ## 12. Parent Reproduction
 
@@ -373,6 +405,9 @@ AUD-RCI-04-CLAIMS
 ```
 
 Every material finding must be repaired and affected gates rerun before adjudication.
+
+Current review state: all four roles passed on the exact qualified source and packet.
+The normalized record contains zero open material or minor findings.
 
 ## 14. Claim Law
 
@@ -438,8 +473,7 @@ AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED
 AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED
 AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED
 AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED
-AUDIO_RECURSIVE_CATALYTIC_ISING_SOURCE_CANDIDATE
-AUDIO_RECURSIVE_CATALYTIC_ISING_NOT_YET_ESTABLISHED
+AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 PHYSICAL_SILICON_PHONONIC_COMPUTING_NOT_ESTABLISHED
 HARDWARE_BIT_REPLACEMENT_NOT_ESTABLISHED
@@ -459,5 +493,5 @@ SSH/SCP              0
 Next exact boundary:
 
 ```text
-EXACT_R0_R1_R2S_REPRODUCTION_AND_R3_PHASE_TRAJECTORY_QUALIFICATION
+NEXT_AUDIO_PHASE_COMPUTING_BOUNDARY_REQUIRES_EXPLICIT_SELECTION
 ```

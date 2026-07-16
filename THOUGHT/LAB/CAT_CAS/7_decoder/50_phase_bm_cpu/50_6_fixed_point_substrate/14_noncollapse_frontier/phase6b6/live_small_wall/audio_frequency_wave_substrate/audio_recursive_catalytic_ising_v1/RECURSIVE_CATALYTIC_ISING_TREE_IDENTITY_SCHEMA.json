@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "recursive_catalytic_ising_tree_identity_record_v1",
+      "type": "string"
+    },
+    "sites": {
+      "items": false,
+      "maxItems": 5,
+      "minItems": 5,
+      "prefixItems": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "fixture_path": {
+              "const": "fixtures/site_tree_0.json",
+              "type": "string"
+            },
+            "geometry_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "root_id": {
+              "const": "site0.root",
+              "type": "string"
+            },
+            "site_id": {
+              "const": "site0",
+              "type": "string"
+            },
+            "tree_digest": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "tree_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "byte_count",
+            "fixture_path",
+            "geometry_sha256",
+            "root_id",
+            "site_id",
+            "tree_digest",
+            "tree_sha256"
+          ],
+          "title": "tree_identity_site0",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "fixture_path": {
+              "const": "fixtures/site_tree_1.json",
+              "type": "string"
+            },
+            "geometry_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "root_id": {
+              "const": "site1.root",
+              "type": "string"
+            },
+            "site_id": {
+              "const": "site1",
+              "type": "string"
+            },
+            "tree_digest": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "tree_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "byte_count",
+            "fixture_path",
+            "geometry_sha256",
+            "root_id",
+            "site_id",
+            "tree_digest",
+            "tree_sha256"
+          ],
+          "title": "tree_identity_site1",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "fixture_path": {
+              "const": "fixtures/site_tree_2.json",
+              "type": "string"
+            },
+            "geometry_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "root_id": {
+              "const": "site2.root",
+              "type": "string"
+            },
+            "site_id": {
+              "const": "site2",
+              "type": "string"
+            },
+            "tree_digest": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "tree_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "byte_count",
+            "fixture_path",
+            "geometry_sha256",
+            "root_id",
+            "site_id",
+            "tree_digest",
+            "tree_sha256"
+          ],
+          "title": "tree_identity_site2",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "fixture_path": {
+              "const": "fixtures/site_tree_3.json",
+              "type": "string"
+            },
+            "geometry_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "root_id": {
+              "const": "site3.root",
+              "type": "string"
+            },
+            "site_id": {
+              "const": "site3",
+              "type": "string"
+            },
+            "tree_digest": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "tree_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "byte_count",
+            "fixture_path",
+            "geometry_sha256",
+            "root_id",
+            "site_id",
+            "tree_digest",
+            "tree_sha256"
+          ],
+          "title": "tree_identity_site3",
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "byte_count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "fixture_path": {
+              "const": "fixtures/site_tree_4.json",
+              "type": "string"
+            },
+            "geometry_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "root_id": {
+              "const": "site4.root",
+              "type": "string"
+            },
+            "site_id": {
+              "const": "site4",
+              "type": "string"
+            },
+            "tree_digest": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "tree_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "byte_count",
+            "fixture_path",
+            "geometry_sha256",
+            "root_id",
+            "site_id",
+            "tree_digest",
+            "tree_sha256"
+          ],
+          "title": "tree_identity_site4",
+          "type": "object"
+        }
+      ],
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema",
+    "sites"
+  ],
+  "title": "recursive_catalytic_ising_tree_identity_record_v1",
+  "type": "object"
+}

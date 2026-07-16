@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "stage": {
+            "const": "initial_before_native_evolution"
+          }
+        },
+        "required": [
+          "stage"
+        ]
+      },
+      "then": {
+        "properties": {
+          "trajectory_row_index": {
+            "const": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "stage": {
+            "const": "final_after_1000_native_steps"
+          }
+        },
+        "required": [
+          "stage"
+        ]
+      },
+      "then": {
+        "properties": {
+          "trajectory_row_index": {
+            "const": 1000
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "orientations_rad": {
+      "items": {
+        "exclusiveMaximum": 3.141592653589793,
+        "minimum": -3.141592653589793,
+        "type": "number"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array"
+    },
+    "schema": {
+      "const": "recursive_catalytic_ising_phase_state_v1",
+      "type": "string"
+    },
+    "site_ids": {
+      "const": [
+        "site0",
+        "site1",
+        "site2",
+        "site3",
+        "site4"
+      ],
+      "type": "array"
+    },
+    "stage": {
+      "enum": [
+        "initial_before_native_evolution",
+        "final_after_1000_native_steps"
+      ],
+      "type": "string"
+    },
+    "trajectory_row_index": {
+      "maximum": 1000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "tree_identity_record_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "orientations_rad",
+    "schema",
+    "site_ids",
+    "stage",
+    "trajectory_row_index",
+    "tree_identity_record_sha256"
+  ],
+  "title": "recursive_catalytic_ising_phase_state_v1",
+  "type": "object"
+}
