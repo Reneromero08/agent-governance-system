@@ -1,0 +1,74 @@
+{
+  "active_namespace_empty_after_archive": true,
+  "attempt_history_index_sha256": "70d92c3bcd1688ff3437ec439b6a0c6f39dc8af1bff43e09fb946f2bf932c5ab",
+  "attempts": [
+    {
+      "archived_files": {
+        "attempt": {
+          "bytes": 44534,
+          "path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c3_55e059bc_failed_affinity_precheck/CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.json",
+          "sha256": "1e31858b28d65cb2313ea7dc69260f2ffe3c3385da8803b6f18ae49c031b001a"
+        },
+        "attempt_journal": {
+          "bytes": 92115,
+          "path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c3_55e059bc_failed_affinity_precheck/CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.jsonl",
+          "sha256": "8335e565f1e228e273b4614940c17ca22b6b9907cb2c0ebf886e13cd8ff32d92"
+        },
+        "challenge": {
+          "bytes": 3834,
+          "path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c3_55e059bc_failed_affinity_precheck/CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE.json",
+          "sha256": "f5457f82335434a5a7a6e2ffbd1186f4888f57e00482a1de60046352e9554f75"
+        },
+        "cleanup_custody": {
+          "bytes": 38817,
+          "path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c3_55e059bc_failed_affinity_precheck/CARRIER_TOMOGRAPHY_DISCOVERY_CLEANUP_CUSTODY.json",
+          "sha256": "846b77c0600cae6b9ad6d3a7986bcf65cf72e88932e0258100fbb75a74fa7fcf"
+        }
+      },
+      "attempt_file_sha256": "1e31858b28d65cb2313ea7dc69260f2ffe3c3385da8803b6f18ae49c031b001a",
+      "attempt_journal_hash": "8335e565f1e228e273b4614940c17ca22b6b9907cb2c0ebf886e13cd8ff32d92",
+      "attempt_receipt_sha256": "9238391287c5c5ddca99b4a29b38238662ee2b205c6185b912f065a25faee34e",
+      "attempt_state": "target_command_invoked",
+      "attempt_version": "C3",
+      "challenge_file_sha256": "f5457f82335434a5a7a6e2ffbd1186f4888f57e00482a1de60046352e9554f75",
+      "challenge_hash": "5063b57d188ac8296851c286acec9233e20ca48189e7514c9dedea05c803de10",
+      "challenge_receipt_canonical_sha256": "438d340b50b351956d38afa8b57aec514366032225da6740c861c88fdb790873",
+      "cleanup_custody_file_sha256": "846b77c0600cae6b9ad6d3a7986bcf65cf72e88932e0258100fbb75a74fa7fcf",
+      "cleanup_custody_sha256": "8d3a7ef3291967486f3aecd2d9e5c98e7338d57b325606c2f2d2c2893604055c",
+      "cleanup_result": true,
+      "controller_challenge_sha256": "5063b57d188ac8296851c286acec9233e20ca48189e7514c9dedea05c803de10",
+      "counters": {
+        "live_invocation_count": 0,
+        "pmu_acquisition_count": 0,
+        "sensor_inventory_count": 0,
+        "target_contact_count": 1
+      },
+      "failure_evidence_commit": "35844e76317017a73dc0fa83f7e976642b80c66f",
+      "failure_reason": "TargetError: platform affinity excludes frozen source or receiver CPU",
+      "passed": false,
+      "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/e6d303656200c711",
+      "remote_root_absence_result": true,
+      "runtime_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "source_authority_commit": "55e059bc7acaafee3feacddac2069d7b5e40edd1",
+      "source_bundle_sha256": "b58b0967018fb0e41caa5b4bf494e2bf66542b9770409b4dd763d641467a9b43",
+      "transfer_plan_hash": "9c8d3224abfab85f541df12d9765db56a2eb183af0d1ada361a70bf0d35e9714"
+    }
+  ],
+  "c4_active_attempt_counters_before_contact": {
+    "live_invocation_count": 0,
+    "pmu_acquisition_count": 0,
+    "sensor_inventory_count": 0,
+    "target_contact_count": 0
+  },
+  "cumulative_counters": {
+    "live_invocation_count": 0,
+    "pmu_acquisition_count": 0,
+    "sensor_inventory_count": 0,
+    "target_contact_count": 1
+  },
+  "notes": [
+    "C3 failed before sensor enumeration and before tomography execution.",
+    "C4 requires a distinct source-authority commit and separate review overlay."
+  ],
+  "schema": "FAMILY10H_SENSOR_AUTHORITY_ATTEMPT_HISTORY_INDEX_V1"
+}
