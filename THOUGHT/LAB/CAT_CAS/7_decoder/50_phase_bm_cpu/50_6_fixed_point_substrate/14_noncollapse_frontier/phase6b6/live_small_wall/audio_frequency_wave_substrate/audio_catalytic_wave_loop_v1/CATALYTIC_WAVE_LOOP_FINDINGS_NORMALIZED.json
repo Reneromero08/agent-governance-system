@@ -1,0 +1,66 @@
+{
+  "exact_source": {
+    "byte_count": 117873,
+    "git_blob_sha1": "63eed91f74252082b1258755bdd4371a2a48e105",
+    "sha256": "6c55861da950caf0738bb5ffb676f0c458a593a805ddd49419d6b2b427f6c33c"
+  },
+  "findings": [
+    {
+      "id": "M-01",
+      "reviewer": "AUD-CWL-01-MECHANISM",
+      "status": "RESOLVED",
+      "summary": "Freeze native operator shape and scalar-feedback exclusions."
+    },
+    {
+      "id": "M-02",
+      "reviewer": "AUD-CWL-01-MECHANISM",
+      "status": "RESOLVED",
+      "summary": "Prove public query preselection before trajectory execution."
+    },
+    {
+      "id": "M-03",
+      "reviewer": "AUD-CWL-01-MECHANISM",
+      "status": "RESOLVED",
+      "summary": "Reject direct, aliased, and transitive latch feedback."
+    },
+    {
+      "id": "M-04",
+      "reviewer": "AUD-CWL-01-MECHANISM",
+      "status": "RESOLVED",
+      "summary": "Freeze module-load bindings and definition-time behavior."
+    },
+    {
+      "id": "CWL-CUSTODY-001",
+      "reviewer": "AUD-CWL-03-CUSTODY",
+      "status": "RESOLVED",
+      "summary": "Recompute closure semantics from committed contextual bytes."
+    },
+    {
+      "id": "CWL-CUSTODY-002",
+      "reviewer": "AUD-CWL-03-CUSTODY",
+      "status": "RESOLVED",
+      "summary": "Freeze strict latch schema, query, and stage constants."
+    }
+  ],
+  "open_material_findings": 0,
+  "reference_result_sha256": "bee5727f68fc10ee047d666198b3f060f669058e966aa44802e270f90abbdeeb",
+  "reviewers": [
+    {
+      "id": "AUD-CWL-01-MECHANISM",
+      "verdict": "PASS"
+    },
+    {
+      "id": "AUD-CWL-02-RESTORATION",
+      "verdict": "PASS"
+    },
+    {
+      "id": "AUD-CWL-03-CUSTODY",
+      "verdict": "PASS"
+    },
+    {
+      "id": "AUD-CWL-04-CLAIMS",
+      "verdict": "PASS"
+    }
+  ],
+  "schema": "catalytic_wave_loop_normalized_findings_v1"
+}

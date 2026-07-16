@@ -1,0 +1,69 @@
+{
+  "$id": "urn:cat-cas:catalytic-wave-relational-latch:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "carrier_before_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "carrier_displaced_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "final_tree_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "forward_displacement_l2": {
+      "minimum": 1.0,
+      "type": "number"
+    },
+    "latch_stage": {
+      "const": "after_complete_forward_displacement",
+      "type": "string"
+    },
+    "query_id": {
+      "const": "hierarchy_a_public_preselected",
+      "type": "string"
+    },
+    "query_tree_canonical_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "query_tree_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "response_imag": {
+      "type": "number"
+    },
+    "response_real": {
+      "type": "number"
+    },
+    "schema": {
+      "const": "catalytic_wave_relational_latch_v1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "carrier_before_sha256",
+    "carrier_displaced_sha256",
+    "final_tree_digest",
+    "forward_displacement_l2",
+    "latch_stage",
+    "query_id",
+    "query_tree_canonical_sha256",
+    "query_tree_digest",
+    "response_imag",
+    "response_real",
+    "schema"
+  ],
+  "title": "CAT_CAS external relational latch v1",
+  "type": "object",
+  "x-semantic-constraints": [
+    "created only after complete forward displacement",
+    "immutable through carrier and ancestry restoration",
+    "contains no expected value or selection instruction"
+  ]
+}

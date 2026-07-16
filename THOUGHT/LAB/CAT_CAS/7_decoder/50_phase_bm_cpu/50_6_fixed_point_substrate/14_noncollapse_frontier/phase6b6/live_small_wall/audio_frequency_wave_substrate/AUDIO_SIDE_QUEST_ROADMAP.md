@@ -1,15 +1,16 @@
 # CAT_CAS Audio-Frequency Wave Substrate Side Quest Roadmap
 
-**Status:** `ACTIVE_PARALLEL_LANE__RECURSIVE_WAVE_OPERATOR_ESTABLISHED`<br>
-**Roadmap version:** `1.4`<br>
+**Status:** `ACTIVE_PARALLEL_LANE__SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED`<br>
+**Roadmap version:** `1.5`<br>
 **Branch:** `codex/audio-frequency-wave-substrate`<br>
 **Base main commit:** `32b5af119a03bc48bb00f279e6cc0014406147ad`<br>
 **Frozen offline foundation commit:** `f028dfd292d2dd0fd11380459417d5b60f936ee3`<br>
 **Roadmap commit binding:** the Git commit containing this file<br>
-**Current accepted results:** `AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED`; `AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`; `AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED`<br>
+**Current accepted results:** `AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED`; `AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`; `AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED`; `AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED`<br>
 **Recursive phase-tree software reference candidate:** `false`<br>
 **Recursive phase-tree software reference established:** `true`<br>
 **Recursive wave operator established:** `true`<br>
+**Software catalytic wave loop established:** `true`<br>
 **Recursive catalytic Ising emulator established:** `false`<br>
 **Physical carrier frozen:** `false`<br>
 **Physical audio computing established:** `false`<br>
@@ -288,7 +289,22 @@ under a frozen contract
 
 This is not physical R2 restoration.
 
-Current state: **not established**.
+Current state: **established**.
+
+R2S receipt:
+
+```text
+source Git blob SHA-1     63eed91f74252082b1258755bdd4371a2a48e105
+source SHA-256            6c55861da950caf0738bb5ffb676f0c458a593a805ddd49419d6b2b427f6c33c
+fixture manifest          5e8bfa247c513d189774ec671265b2d3dc1ea97004e5e8c40baa090f26db3cad
+fixture set               e6e51ae655e184f8f43b2afa9fe0c75041046966b4cdecd6fde008b02b684aa8
+reference tests           ef888d8d8b48b2fbdc7897d6d42aa2f63f8c300517f6d9b8911346bf285438c6
+reference result          bee5727f68fc10ee047d666198b3f060f669058e966aa44802e270f90abbdeeb
+qualification             78 PASS / 0 FAIL
+independent reviews       4 PASS / 0 FAIL
+open material findings    0
+claim ceiling             SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY
+```
 
 ### R3: Recursive catalytic Ising emulator
 
@@ -387,14 +403,13 @@ transducer operation, or physical restoration is authorized by this roadmap.
 
 ## 11. Immediate Next Work
 
-The next bounded implementation packet is:
+The catalytic-loop packet is closed. The next exact boundary is:
 
 ```text
-1. freeze the separate `audio_catalytic_wave_loop_v1` contract
-2. define invariant latch, reverse traversal, restoration, and wrong-inverse controls
-3. preserve R1 as predecessor evidence without rewriting it
-4. only after catalytic-loop closure introduce global-Z2 Ising coupling
+AUDIO_RECURSIVE_CATALYTIC_ISING_V1_CONTRACT
 ```
+
+This roadmap update does not begin that successor package.
 
 The implementation agent must not touch `audio_fm_wave_v1/`, `main`, Family 10h
 evidence, `SMALL_WALL_STATE.md`, live hardware, or preserved stashes.
@@ -408,7 +423,7 @@ AUDIO_RECURSIVE_CATALYTIC_ARCHITECTURE_CORRECTED
 AUDIO_RECURSIVE_PHASE_FOUNDATION_STARTED
 AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED
 AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED
-AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_NOT_YET_ESTABLISHED
+AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED
 RECURSIVE_CATALYTIC_ISING_NOT_ESTABLISHED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 SMALL_WALL_CROSSED_NOT_PROMOTED

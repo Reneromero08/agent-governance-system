@@ -1,0 +1,255 @@
+{
+  "edge_conventions": {
+    "binary_carrier": "raw little-endian <c16, 6000 samples, no header or metadata",
+    "canonical_json": "UTF-8, sorted keys, indent=2, newline terminated, duplicate keys rejected",
+    "carrier_restoration": "max absolute complex sample error <= 1e-12; byte identity is diagnostic only",
+    "committed_byte_scoring": "all carriers and JSON receipts are parsed from committed fixture bytes",
+    "query": "hierarchy A selected before trajectory; both A and B complex responses reported",
+    "t0_restoration": "exact canonical committed T0 bytes"
+  },
+  "numeric_envelope": {
+    "forward_displacement_l2_min": 1.0,
+    "portable_metric_atol": 5e-12,
+    "portable_metric_rtol": 5e-12,
+    "restoration_tolerance": 1e-12,
+    "wrong_query_separation_min": 1e-06,
+    "wrong_restoration_error_min": 0.05
+  },
+  "schema": "catalytic_wave_loop_reference_tests_v1",
+  "tests": [
+    {
+      "id": "parent_r0_source_and_fixture_custody_exact"
+    },
+    {
+      "id": "parent_r0_committed_result_recomputed"
+    },
+    {
+      "id": "parent_r1_source_and_fixture_custody_exact"
+    },
+    {
+      "id": "parent_r1_committed_result_recomputed"
+    },
+    {
+      "id": "loop_contract_strict_round_trip"
+    },
+    {
+      "id": "loop_contract_duplicate_key_rejected"
+    },
+    {
+      "id": "loop_contract_unknown_field_rejected"
+    },
+    {
+      "id": "loop_contract_nonfinite_rejected"
+    },
+    {
+      "id": "loop_contract_boolean_number_rejected"
+    },
+    {
+      "id": "loop_contract_wrong_schedule_length_rejected"
+    },
+    {
+      "id": "loop_contract_wrong_shifts_rejected"
+    },
+    {
+      "id": "loop_contract_wrong_query_rejected"
+    },
+    {
+      "id": "loop_contract_wrong_source_identity_rejected"
+    },
+    {
+      "id": "loop_contract_forbidden_field_rejected"
+    },
+    {
+      "id": "latch_strict_round_trip"
+    },
+    {
+      "id": "latch_duplicate_key_rejected"
+    },
+    {
+      "id": "latch_unknown_field_rejected"
+    },
+    {
+      "id": "latch_nonfinite_rejected"
+    },
+    {
+      "id": "latch_boolean_number_rejected"
+    },
+    {
+      "id": "latch_forbidden_field_rejected"
+    },
+    {
+      "id": "latch_wrong_schema_rejected"
+    },
+    {
+      "id": "latch_wrong_query_id_rejected"
+    },
+    {
+      "id": "latch_wrong_stage_rejected"
+    },
+    {
+      "id": "closure_strict_round_trip"
+    },
+    {
+      "id": "closure_duplicate_key_rejected"
+    },
+    {
+      "id": "closure_unknown_field_rejected"
+    },
+    {
+      "id": "closure_nonfinite_rejected"
+    },
+    {
+      "id": "closure_boolean_rejected"
+    },
+    {
+      "id": "closure_forbidden_history_field_rejected"
+    },
+    {
+      "id": "closure_wrong_schema_rejected"
+    },
+    {
+      "id": "closure_false_ancestry_rejected"
+    },
+    {
+      "id": "closure_wrong_recovered_digest_rejected"
+    },
+    {
+      "id": "closure_wrong_recovered_canonical_sha_rejected"
+    },
+    {
+      "id": "closure_wrong_displacement_rejected"
+    },
+    {
+      "id": "closure_wrong_restore_error_rejected"
+    },
+    {
+      "id": "closure_wrong_equivalence_verdict_rejected"
+    },
+    {
+      "id": "closure_wrong_byte_exact_verdict_rejected"
+    },
+    {
+      "id": "closure_wrong_latch_digest_rejected"
+    },
+    {
+      "id": "closure_wrong_carrier_before_hash_rejected"
+    },
+    {
+      "id": "closure_wrong_carrier_restored_hash_rejected"
+    },
+    {
+      "id": "closure_wrong_claim_ceiling_rejected"
+    },
+    {
+      "id": "carrier_before_strict_binary_parse"
+    },
+    {
+      "id": "carrier_displaced_strict_binary_parse"
+    },
+    {
+      "id": "carrier_restored_strict_binary_parse"
+    },
+    {
+      "id": "carrier_truncation_rejected"
+    },
+    {
+      "id": "carrier_extension_rejected"
+    },
+    {
+      "id": "carrier_nonfinite_rejected"
+    },
+    {
+      "id": "carrier_endian_mutation_rejected"
+    },
+    {
+      "id": "zero_amplitude_carrier_coordinate_rejected"
+    },
+    {
+      "id": "forward_carrier_displacement_nonzero"
+    },
+    {
+      "id": "correct_carrier_equivalence_restoration"
+    },
+    {
+      "id": "carrier_byte_exact_diagnostic_honest"
+    },
+    {
+      "id": "exact_t0_ancestry_bytes_recovered"
+    },
+    {
+      "id": "external_latch_survives_both_restoration_stages"
+    },
+    {
+      "id": "closure_excludes_reversed_histories"
+    },
+    {
+      "id": "query_frozen_before_trajectory_execution"
+    },
+    {
+      "id": "wrong_query_changes_complex_latch"
+    },
+    {
+      "id": "forward_order_inverse_rejected"
+    },
+    {
+      "id": "wrong_trajectory_inverse_rejected"
+    },
+    {
+      "id": "omitted_inverse_step_rejected"
+    },
+    {
+      "id": "duplicated_inverse_step_rejected"
+    },
+    {
+      "id": "wrong_shift_sign_rejected"
+    },
+    {
+      "id": "wrong_shift_magnitude_rejected"
+    },
+    {
+      "id": "wrong_state_one_inverse_leg_rejected"
+    },
+    {
+      "id": "no_restore_control_rejected"
+    },
+    {
+      "id": "identity_untouched_carrier_rejected"
+    },
+    {
+      "id": "query_selected_after_result_rejected"
+    },
+    {
+      "id": "mutated_displaced_carrier_fixture_rejected"
+    },
+    {
+      "id": "mutated_restored_carrier_fixture_rejected"
+    },
+    {
+      "id": "mutated_latch_fixture_rejected"
+    },
+    {
+      "id": "mutated_loop_contract_rejected"
+    },
+    {
+      "id": "manifest_role_substitution_rejected"
+    },
+    {
+      "id": "committed_fixture_bytes_match_reference_lifecycle"
+    },
+    {
+      "id": "manifest_binds_all_fixture_bytes"
+    },
+    {
+      "id": "ast_native_call_graph_no_scalar_feedback"
+    },
+    {
+      "id": "ast_query_and_latch_downstream_of_forward_displacement"
+    },
+    {
+      "id": "ast_lifecycle_order_and_external_closure"
+    },
+    {
+      "id": "ast_no_feedback_mutation_probes_rejected"
+    }
+  ]
+}

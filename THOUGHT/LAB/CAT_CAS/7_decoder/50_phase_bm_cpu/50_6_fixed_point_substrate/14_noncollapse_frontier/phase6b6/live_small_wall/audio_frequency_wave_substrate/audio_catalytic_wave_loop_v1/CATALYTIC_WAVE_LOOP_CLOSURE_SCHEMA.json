@@ -1,0 +1,146 @@
+{
+  "$id": "urn:cat-cas:catalytic-wave-closure:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "ancestry_byte_exact": {
+      "const": true,
+      "type": "boolean"
+    },
+    "carrier_before_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "carrier_byte_exact": {
+      "type": "boolean"
+    },
+    "carrier_equivalence_restored": {
+      "const": true,
+      "type": "boolean"
+    },
+    "carrier_restored_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "claim_ceiling": {
+      "const": "SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY",
+      "type": "string"
+    },
+    "forward_displacement_l2": {
+      "minimum": 1.0,
+      "type": "number"
+    },
+    "latch": {
+      "$id": "urn:cat-cas:catalytic-wave-relational-latch:v1",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "carrier_before_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "carrier_displaced_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "final_tree_digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "forward_displacement_l2": {
+          "minimum": 1.0,
+          "type": "number"
+        },
+        "latch_stage": {
+          "const": "after_complete_forward_displacement",
+          "type": "string"
+        },
+        "query_id": {
+          "const": "hierarchy_a_public_preselected",
+          "type": "string"
+        },
+        "query_tree_canonical_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "query_tree_digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "response_imag": {
+          "type": "number"
+        },
+        "response_real": {
+          "type": "number"
+        },
+        "schema": {
+          "const": "catalytic_wave_relational_latch_v1",
+          "type": "string"
+        }
+      },
+      "required": [
+        "carrier_before_sha256",
+        "carrier_displaced_sha256",
+        "final_tree_digest",
+        "forward_displacement_l2",
+        "latch_stage",
+        "query_id",
+        "query_tree_canonical_sha256",
+        "query_tree_digest",
+        "response_imag",
+        "response_real",
+        "schema"
+      ],
+      "title": "CAT_CAS external relational latch v1",
+      "type": "object",
+      "x-semantic-constraints": [
+        "created only after complete forward displacement",
+        "immutable through carrier and ancestry restoration",
+        "contains no expected value or selection instruction"
+      ]
+    },
+    "latch_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "recovered_initial_tree_canonical_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "recovered_initial_tree_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "restore_max_error": {
+      "maximum": 1e-12,
+      "minimum": 0.0,
+      "type": "number"
+    },
+    "schema": {
+      "const": "catalytic_wave_closure_v1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ancestry_byte_exact",
+    "carrier_before_sha256",
+    "carrier_byte_exact",
+    "carrier_equivalence_restored",
+    "carrier_restored_sha256",
+    "claim_ceiling",
+    "forward_displacement_l2",
+    "latch",
+    "latch_sha256",
+    "recovered_initial_tree_canonical_sha256",
+    "recovered_initial_tree_digest",
+    "restore_max_error",
+    "schema"
+  ],
+  "title": "CAT_CAS catalytic closure v1",
+  "type": "object",
+  "x-semantic-constraints": [
+    "closure retains no states, drives, specs, receipts, or displaced carrier",
+    "carrier restoration means numerical equivalence unless hashes match",
+    "T0 ancestry recovery remains byte exact"
+  ]
+}

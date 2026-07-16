@@ -1,0 +1,13 @@
+{
+  "carrier_before_sha256": "b907b0c948cf7929353816771bc3c5916911e5f0240f17eb923af65ac4d79605",
+  "carrier_displaced_sha256": "ddf312eac86edad3f160048f06b5efa5e0346c8d83737acfe2c55136147f0157",
+  "final_tree_digest": "c88d63ad5eb409ebecd82a8d912c1a04781b3e124fc972a09bf80834a5bbe7bc",
+  "forward_displacement_l2": 73.1576613427,
+  "latch_stage": "after_complete_forward_displacement",
+  "query_id": "hierarchy_a_public_preselected",
+  "query_tree_canonical_sha256": "dff40cf1003953d11ddf9d240f799363841f8bdebc3ae2d081bee198565d9d2e",
+  "query_tree_digest": "fe745b5e6a335a6813bd80e561ecc9293b7a1ca8c52cd6a4742f6453cf5c06df",
+  "response_imag": -0.00230648623425,
+  "response_real": 0.00716374763471,
+  "schema": "catalytic_wave_relational_latch_v1"
+}

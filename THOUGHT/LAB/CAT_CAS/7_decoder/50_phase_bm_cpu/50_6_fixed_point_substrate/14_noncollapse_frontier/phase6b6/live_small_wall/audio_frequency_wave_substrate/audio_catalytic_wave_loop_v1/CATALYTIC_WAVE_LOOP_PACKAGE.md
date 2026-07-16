@@ -1,400 +1,296 @@
 # Catalytic Recursive-Wave Loop Package
 
-**Status:** `SOURCE_CANDIDATE__EXACT_R1_QUALIFICATION_PENDING`  
+**Status:** `AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED`
 **Package:** `audio_catalytic_wave_loop_v1`  
 **Parent result:** `AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED`  
-**Source commit:** `65f656527a8bf63e6d44493154f3db15a8a99b8b`  
-**Source Git blob SHA-1:** `1bf96eb8a95c89a82665a95a49d3bd722a14f7d4`  
-**Source SHA-256:** must be computed and frozen from exact committed bytes during qualification  
-**Operation:** bounded ordinary-software catalytic phase-carrier loop  
+**Claim ceiling:** `SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY`
 **Physical authority:** none
 
-## 1. Purpose
+## 1. Bounded established result
 
-This package tests the first complete software lifecycle in the audio lane:
+The package closes one ordinary-software lifecycle:
 
 ```text
-borrow complex phase carrier
--> displace it through the established complete-tree temporal trajectory
--> apply a predeclared matched carrier query
--> latch one complex relational observable outside the history
--> reverse the carrier operators in exact reverse order
--> recover the exact initial R1 tree through ancestry receipts
--> retain the latch while carrier and ancestry close
+exact committed R0 complex carrier
+-> nonzero displacement by committed R1 T1-T3 phase operators
+-> public hierarchy-A query selected before trajectory execution
+-> external complex relational latch
+-> correct reverse carrier traversal
+-> numerical phase-carrier equivalence restoration
+-> exact committed T0 ancestry recovery
 ```
 
-The result is not a spin, Ising energy, winner, candidate, or optimization score. It is a
-query-bound complex relational observable copied before restoration.
+The latch is a boundary observable. It never becomes a scalar control signal for the
+native forward or inverse carrier paths.
 
-## 2. Borrowed Carrier
+## 2. Source custody
 
-The borrowed software carrier is the established deterministic R0 complex tape:
+The thin source candidate was first committed as:
 
 ```text
-tau_0[n] = A[n] * exp(i * phi[n])
+source commit             65f656527a8bf63e6d44493154f3db15a8a99b8b
+source Git blob SHA-1     1bf96eb8a95c89a82665a95a49d3bd722a14f7d4
+source byte count         17797
+source SHA-256            d15ab5273ab79108f0fff63ef439443e33ec69574777488e94298d9a7caac058
+line endings              LF
+Python syntax             PASS
 ```
 
-It has nonzero amplitude at every sample. The carrier is ordinary complex128 software
-state. It is not a physical audio, voltage, or silicon-phonon carrier.
-
-The carrier must be measurably displaced before any restoration claim is admitted:
+Qualification expanded that candidate without modifying R0 or R1. The exact qualified
+source bytes are:
 
 ```text
-||tau_forward - tau_0||_2 >= 1.0
+source Git blob SHA-1     63eed91f74252082b1258755bdd4371a2a48e105
+source byte count         117873
+source SHA-256            6c55861da950caf0738bb5ffb676f0c458a593a805ddd49419d6b2b427f6c33c
+line endings              LF
+Python syntax             PASS
 ```
 
-An untouched carrier is a hard failure.
+The final Git commit containing those bytes is reported after commit. The Git blob and
+SHA-256 already bind the exact source independently of the containing commit.
 
-## 3. Forward Operator
+## 3. Exact parent custody
 
-For R1 trajectory states `T1`, `T2`, `T3`, rendered beams `B_k`, and frozen circular
-shifts:
+The loop contract freezes these established parent identities:
 
 ```text
-s = [17, -29, 43]
+R0 source blob            956adb0ae8e84c091c1dc1e3de650be374fa96d1
+R0 source SHA-256         e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887
+R0 fixture manifest       7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa
+R0 fixture set            6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925
+R0 tests                  3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c
+R0 result                 46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab
+
+R1 source blob            3685be9ae63dcd213b2155c8cd66f6f81e45c071
+R1 source SHA-256         26b2cfaa63f5fe6bfa97f6d9f64b97d0ee944bc39ac45d406092aea257b2179e
+R1 fixture manifest       28cbcec8997f6f5eb49dc13e6bf919342af0863a5ba6cb1a70f10dea6fcdbc4e
+R1 fixture set            da62112c0459c49673675182e67011899d8ee1e841df3650c0c4a0aeecd137dd
+R1 tests                  5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5
+R1 result                 37cb46f6806555cfaec60910f9b5b92fbcac5bf1d0e976fb67e7f2d2c0ec4139
 ```
 
-one carrier step is:
+Qualification reruns both parent verifiers. Stored PASS strings carry no authority.
+
+## 4. Strict contract and custody objects
+
+The source defines strict canonical parsers and generated schemas for exactly three
+objects:
 
 ```text
-F_k(tau) = Roll_s[k](tau * B_k)
+LoopContract
+RelationalLatch
+CatalyticClosure
 ```
 
-The full forward path is:
+The loop contract binds the exact parent identities, public query tree canonical
+identity and digest, T0-T3 digests, shift schedule, raw carrier format, sample and byte
+counts, operator order, thresholds, claim ceiling, query-selection stage, and latch
+stage.
+
+It rejects duplicate keys, unknown keys, noncanonical JSON, nonfinite numbers, booleans
+used as numbers, wrong schedule length, wrong shifts, wrong query identity, wrong source
+identity, and answer/expected-result/spin/energy/winner/candidate/score fields.
+
+The latch contains only:
 
 ```text
-tau_3 = F_3(F_2(F_1(tau_0)))
+schema
+query identity
+final tree digest
+before and displaced carrier hashes
+forward displacement
+complex response
+latch stage
 ```
 
-Phase multiplication and circular transport are each reversible. Their composition is
-order-sensitive because transport and position-dependent phase multiplication do not
-commute in general.
+The closure contains no states, drives, step specifications, ancestry receipts, or
+displaced-carrier array.
 
-The R1 complete trees remain the operator objects. No scalar diagnostic generates a
-carrier step.
-
-## 4. Matched Carrier Query
-
-The public default query is the established R0 hierarchy-A tree. It is selected before
-the R1 trajectory and is not derived from the final state.
-
-The matched query carrier is built from the same borrowed carrier:
+## 5. Frozen carrier
 
 ```text
-q_0 = tau_0 * B_query
-q_3 = Roll_43(Roll_-29(Roll_17(q_0)))
+format                   raw little-endian interleaved complex128
+dtype                    <c16
+samples                  6000
+bytes per carrier        96000
+header or metadata       none
+shift schedule           [17, -29, 43]
+operator order           multiply tree beam, then circular roll
+inverse order            circular unroll, then multiply conjugate tree beam
 ```
 
-It receives the same public transport schedule but none of the hidden trajectory phase
-operators.
-
-The predeclared relational readout is:
+The three committed binary carriers are:
 
 ```text
-z_q = normalized_complex_inner_product(tau_3, q_3)
+before SHA-256           b907b0c948cf7929353816771bc3c5916911e5f0240f17eb923af65ac4d79605
+displaced SHA-256        ddf312eac86edad3f160048f06b5efa5e0346c8d83737acfe2c55136147f0157
+restored SHA-256         dcdd7ecc904f435e5fe7ef9410872f4c117a95d001e99e90b008395af1d37917
+carrier byte exact       false
 ```
 
-The query operates on the actually displaced carrier. It does not reconstruct `T3`, read
-an expected result, or feed `z_q` into native evolution.
+The hashes differ. The package does not call this byte restoration.
 
-A hierarchy-B query is the first wrong-query control. The exact and wrong query latches
-must differ by at least:
+## 6. Restoration law
+
+The complex carrier is a continuous numerical chart rather than a byte-tape identity.
+The prospectively frozen acceptance region is:
 
 ```text
-|z_A - z_B| >= 1e-6
+metric                   max absolute complex sample error
+tolerance                1e-12
+observed correct error   4.74287484027e-16
+equivalence restored     true
 ```
 
-This is a bounded query-sensitivity gate, not an optimization or uniqueness claim.
+This law is coherent because the carrier is genuinely numeric, the metric and tolerance
+precede exact execution, forward displacement is nonzero, the correct inverse enters the
+region, every declared wrong arm remains far outside it, and exact hashes are retained as
+an honest diagnostic. Canonical R1 ancestry is a separate channel and restores exact T0
+bytes.
 
-## 5. External Latch
+Full reasoning is frozen in `CATALYTIC_WAVE_LOOP_RESTORATION_LAW.md`.
 
-Before any reverse operation, the package copies this immutable record:
+## 7. Native lifecycle and public query
 
-```text
-RelationalLatch {
-    query_tree_digest
-    final_tree_digest
-    carrier_before_sha256
-    carrier_displaced_sha256
-    response_real
-    response_imag
-}
-```
-
-The latch contains no spin, energy, expected response, answer, candidate, winner, or
-score field.
-
-The latch canonical bytes and digest must remain unchanged through carrier restoration
-and ancestry unwind. The final closure object must not retain trajectory states,
-receipts, drives, step specifications, or the displaced carrier.
-
-## 6. Carrier Inverse
-
-One inverse step is:
+For each committed R1 state `T_k` and shift `s_k`:
 
 ```text
+F_k(tau)    = Roll_s[k](tau * B_k)
 F_k^-1(tau) = Roll_-s[k](tau) * conjugate(B_k)
 ```
 
-The correct inverse schedule is:
+The public query is selected before trajectory execution:
 
 ```text
-tau_restored = F_1^-1(F_2^-1(F_3^-1(tau_3)))
+q0 = tau0 * B_hierarchy_A
+q3 = Roll_43(Roll_-29(Roll_17(q0)))
+zq = normalized_complex_inner_product(tau3, q3)
 ```
 
-The source implements this by iterating the forward `(state, shift)` pairs in reverse.
-
-Required correct-restoration gate:
+Observed complex responses:
 
 ```text
-max_n |tau_restored[n] - tau_0[n]| <= 1e-12
+hierarchy A              0.00716374763471 - 0.00230648623425i
+hierarchy B              0.00254283419804 + 0.000282958235002i
+absolute difference      0.00529698627982
+required difference      at least 1e-6
 ```
 
-Required wrong-restoration gates:
+Both responses are reported. No winner is selected.
+
+## 8. Correct and wrong arms
 
 ```text
-forward-order inverse error        >= 0.05
-wrong-trajectory inverse error     >= 0.05
-omitted-step inverse error         >= 0.05
-no-restoration displacement        >= 0.05
+forward displacement L2       73.1576613427       >= 1.0
+correct restore max error     4.74287484027e-16   <= 1e-12
+forward-order inverse error   1.79941674031       >= 0.05
+wrong-trajectory error        0.959034213823      >= 0.05
+omitted-step error            1.79928587832       >= 0.05
+duplicated-step error         1.79894500301       >= 0.05
+wrong-shift-sign error        1.796417268         >= 0.05
+wrong-shift-magnitude error   1.29003363401       >= 0.05
+wrong-state-one-leg error     1.79967048651       >= 0.05
+no-restore error              1.79859400708       >= 0.05
+exact T0 ancestry bytes       recovered
 ```
 
-## 7. Restoration Semantics
+Additional negative controls reject an untouched carrier, a zero-amplitude coordinate,
+post-result query selection, carrier/latch/contract mutation, raw-endian mutation, and
+manifest role substitution.
 
-The complex128 carrier is a continuous software chart. Its frozen R2S restoration law is
-an observable-state equivalence region:
+## 9. Structural no-feedback proof
+
+The AST proof closes the call graph rooted at:
 
 ```text
-metric       max absolute complex sample error
-tolerance    1e-12
+forward_carrier_step
+inverse_carrier_step
+forward_carrier
+restore_carrier
 ```
 
-Byte-exact identity is recorded but is not required. The pre- and post-carrier SHA-256
-values may therefore differ despite accepted numerical equivalence.
-
-This package must never describe a differing SHA-256 as byte restoration. Its allowed
-language is:
+It reaches only native carrier helpers, reports no forbidden identifier, unresolved
+call, indirect write, module rebinding, decorator, or latch-feedback route, and proves
+the order:
 
 ```text
-software phase-carrier equivalence restoration
+complete forward displacement
+-> latch
+-> carrier restoration
+-> ancestry restoration
+-> closure
 ```
 
-Exact byte restoration remains required for the canonical R1 ancestry object:
+Eighteen operator-shape, feedback, preselection, alias, and binding mutation probes
+reject. The proof is a committed-source
+ordinary-software qualification, not hostile-interpreter isolation.
+
+## 10. Committed evidence
 
 ```text
-reverse receipt traversal must recover exact committed T0 canonical bytes
+contract schema SHA-256  3df3775a9dbbae86a405a7a01a907f7872293c978ac45efd3cadb1fa44d3d650
+latch schema SHA-256     4fc7a46ffb952a673457d33f3bef2801a860b75cc94f5aa1fa64a72d9f702efd
+closure schema SHA-256   41a790cab6a8d9b31f6a7cfd9cc42aff74187d5d371b535a8ccbcea48a6607cb
+test specification       ef888d8d8b48b2fbdc7897d6d42aa2f63f8c300517f6d9b8911346bf285438c6
+fixture manifest         5e8bfa247c513d189774ec671265b2d3dc1ea97004e5e8c40baa090f26db3cad
+fixture set              e6e51ae655e184f8f43b2afa9fe0c75041046966b4cdecd6fde008b02b684aa8
+reference result         bee5727f68fc10ee047d666198b3f060f669058e966aa44802e270f90abbdeeb
+fixture packet           6 files / 293319 bytes
+binary carriers          3 files / 288000 bytes
+reference tests          78 PASS / 0 FAIL
 ```
 
-Qualification must explicitly audit whether this two-channel restoration law is coherent
-with the CAT_CAS software claim. If byte-exact restoration of the phase carrier is judged
-mandatory rather than equivalence-class restoration, return
-`SOL_EXTRA_HIGH_ARCHITECTURE_REQUIRED`; do not silently weaken or relabel the claim.
+Build, self-test, and verify recompute from committed fixture bytes. Environment strings
+are informational; numeric leaves use the frozen portable comparison tolerance.
 
-## 8. Ancestry Unwind
+Four independent read-only reviews passed on the exact source and packet identities.
+The normalized record is `CATALYTIC_WAVE_LOOP_FINDINGS_NORMALIZED.json`; the full role
+reports are `CATALYTIC_WAVE_LOOP_REVIEW_REPORTS.md`. All six initial material findings
+are resolved and the open material finding count is zero.
 
-The package reuses the complete established R1 trajectory and receipt validation.
+## 11. Claim law
 
-After the carrier is restored:
-
-```text
-T3 -> T2 -> T1 -> T0
-```
-
-must close through exact receipt-bound predecessor extraction. The recovered T0 canonical
-bytes and tree digest must equal the original committed T0 identity.
-
-The closure object keeps only:
-
-```text
-latch
-carrier before hash
-carrier restored hash
-byte-exact diagnostic
-recovered T0 digest
-forward displacement
-restoration error
-```
-
-No temporal history is returned.
-
-## 9. Three Recursions
-
-This package is the first bounded conjunction of:
-
-```text
-depth recursion:
-    phase signal inside phase signal
-
-temporal recursion:
-    complete phase tree inside each later complete tree
-
-catalytic recursion:
-    relational result survives while carrier and temporal ancestry are reversed
-```
-
-This is still ordinary software. It does not establish a physical carrier or hardware bit
-replacement.
-
-## 10. Candidate Source Tests
-
-The source candidate contains eleven thin tests:
-
-```text
-nonzero borrowed-carrier displacement
-correct carrier-equivalence restoration
-exact T0 ancestry recovery
-external latch survival
-forward-order inverse rejection
-wrong-trajectory inverse rejection
-omitted-step inverse rejection
-no-restoration rejection
-wrong-query latch separation
-no spin/energy/winner fields in latch
-no temporal history fields in closure object
-```
-
-An API-compatible local model of the source produced `11 PASS / 0 FAIL` with approximate
-diagnostics:
-
-```text
-forward displacement L2       73.1576613427
-restore max error             4.74287484027e-16
-wrong-order restore error     1.79941674031
-wrong-trajectory error        0.959034213823
-query-latch change            0.00529698627982
-```
-
-These are source-authoring diagnostics only. They were not produced by an independent
-clean checkout against the exact committed R0 and R1 packages and are not frozen result
-identities.
-
-## 11. Required Qualification Expansion
-
-Before promotion, the local agent must add at minimum:
-
-```text
-exact committed source SHA-256 and byte count
-strict latch schema and canonical parser
-strict shift-schedule or loop-contract schema
-committed carrier-before, displaced, and restored fixtures
-committed latch and closure receipts
-manifest binding every source, parent, carrier, query, schedule, result, and hash
-build, self-test, and verify-only modes
-committed-byte recomputation
-AST proof that scalar latch values cannot reach forward or inverse evolution
-mutation tests for query, order, shift, tree, latch, carrier, and receipt custody
-four independent reviews
-normalized findings and claim adjudication
-```
-
-Binary carrier fixtures should use an explicitly frozen little-endian complex format or
-another deterministic format. WAV may be provided as a visualization chart, but it is not
-required to define the native software carrier.
-
-## 12. No-Smuggle Law
-
-The query tree, shift schedule, thresholds, restoration metric, and wrong-control minimums
-must be frozen before exact result generation.
-
-Forbidden inputs to the forward carrier path:
-
-```text
-latched response
-expected response
-spin
-energy
-winner
-candidate
-argmin or argmax
-verification result
-final answer
-```
-
-The latch may be computed only after the full displaced carrier exists.
-
-The exact query may be public, but it cannot contain or be selected from the observed
-latch value. Query A versus query B is a structural control, not a winner-selection loop.
-
-## 13. Claim Law
-
-After exact parent reproduction, committed-byte custody, restoration/adversary closure,
-AST no-feedback proof, four independent reviews, and changed-path qualification, the
+After four independent PASS reviews, zero open material findings, package-local
+qualification, changed-path qualification, coherent commit, and branch push, this
 package may emit only:
 
 ```text
 AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED
 ```
 
-Meaning only:
+Meaning only that the bounded ordinary-software lifecycle above closes under the frozen
+contract. It does not establish:
 
 ```text
-an ordinary-software complex carrier is nontrivially displaced by the established
-complete-tree temporal phase trajectory; a prospectively declared carrier query produces
-a latched complex relational observable; the correct reverse operator sequence restores
-the carrier to the frozen numerical equivalence region; exact R1 receipt traversal
-recovers T0; and the latch survives outside the reversed histories
+byte-exact carrier restoration
+recursive catalytic Ising
+optimization or solver advantage
+physical audio or silicon-phononic computation
+physical restoration
+capacity or energy advantage
+hardware bit replacement
+Small Wall or Big Wall crossing
 ```
 
-Claim ceiling:
-
-```text
-SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY
-```
-
-Forbidden promotion:
-
-```text
-no byte-exact complex-carrier claim unless hashes actually match
-no physical carrier or physical R2 claim
-no Ising coupling, solving, or optimization claim
-no algorithmic, energy, or capacity advantage
-no physical audio or silicon-phonon computing
-no hardware bit replacement
-no Small Wall or Big Wall crossing
-```
-
-## 14. Failure Classes
-
-```text
-BLOCKED:
-    useful latch cannot be separated from history before restoration;
-    correct reverse sequence cannot restore the carrier equivalence class;
-    exact T0 ancestry cannot be recovered;
-    wrong/reordered/omitted controls restore as well as the correct sequence;
-    scalar output is required inside native evolution
-
-INCONCLUSIVE:
-    the mechanism remains coherent but exact source custody, committed fixtures,
-    deterministic reproduction, adversary closure, restoration-law review, or repository
-    qualification is incomplete
-```
-
-## 15. Current State
-
-```text
-AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED
-AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED
-AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED
-AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_SOURCE_CANDIDATE
-AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_NOT_YET_ESTABLISHED
-RECURSIVE_CATALYTIC_ISING_NOT_ESTABLISHED
-PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
-PHYSICAL_SILICON_PHONONIC_COMPUTING_NOT_ESTABLISHED
-SMALL_WALL_CROSSED_NOT_PROMOTED
-```
-
-Contact counts:
+## 12. Contact boundary
 
 ```text
 audio playback       0
 audio recording      0
-hardware contact     0
-target contact       0
-SSH/SCP              0
+ADC/DAC              0
+transducer            0
+hardware contact      0
+target contact        0
+SSH/SCP               0
 ```
 
-Next exact boundary:
+## 13. Next boundary
+
+If the package closes, stop at:
 
 ```text
-EXACT_R0_R1_INTEGRATION_AND_R2S_RESTORATION_LAW_QUALIFICATION
+AUDIO_RECURSIVE_CATALYTIC_ISING_V1_CONTRACT
 ```
+
+The successor is not started by this package.
