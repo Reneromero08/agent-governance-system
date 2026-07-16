@@ -90,6 +90,8 @@ DISCOVERY_OWNED_ROOT_HEX_LEN = 16
 
 SOURCE_FILE_NAMES = target.SOURCE_FILE_NAMES
 SOURCE_AUTHORITY_FILE_NAMES = target.SOURCE_AUTHORITY_FILE_NAMES
+RUNTIME_BINARY_NAME = target.RUNTIME_BINARY_NAME
+RUNTIME_AUTHORITY_FILE_NAMES = target.RUNTIME_AUTHORITY_FILE_NAMES
 SOURCE_AUTHORITY_GENERATED_NAMES = {SOURCE_HASHES.name, SOURCE_BUNDLE.name}
 FINAL_EVIDENCE_COMMIT_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_EVIDENCE_COMMIT"
 REQUIRED_REVIEW_ROLES = {
@@ -105,34 +107,47 @@ REVIEW_ROLE_ALIASES = {
     "custody_evidence_auditor": "custody_evidence_auditor",
     "claim_boundary_adjudicator": "claim_boundary_adjudicator",
 }
-SOURCE_AUDIT_FINDINGS_PATH = HERE / "SOURCE_AUTHORITY_C1_REVIEW_NORMALIZED.json"
-SOURCE_AUDIT_REVIEW_PATH = HERE / "SOURCE_AUTHORITY_C1_REVIEW_REPORTS.md"
+SOURCE_AUDIT_REVIEW_DIR = HERE / "SOURCE_AUTHORITY_C2_REVIEW"
+SOURCE_AUDIT_FINDINGS_PATH = HERE / "SOURCE_AUTHORITY_C2_REVIEW_NORMALIZED.json"
+SOURCE_AUDIT_REVIEW_PATH = HERE / "SOURCE_AUTHORITY_C2_REVIEW_REPORTS.md"
 SOURCE_AUDIT_REQUIRED_REVIEW_ROLES = {
     "physical_sensor_authority_auditor": "physical sensor-authority auditor",
     "discovery_transport_custody_auditor": "discovery transport and custody auditor",
-    "source_bundle_evidence_auditor": "source/bundle and evidence auditor",
+    "source_bundle_runtime_evidence_auditor": "source/bundle/runtime evidence auditor",
     "claim_boundary_adjudicator": "claim-boundary adjudicator",
+}
+SOURCE_AUDIT_REVIEW_ARCHIVE_FILES = {
+    "physical_sensor_authority_auditor": ("physical_sensor_authority_body.md", "physical_sensor_authority_receipt.json"),
+    "discovery_transport_custody_auditor": ("discovery_transport_custody_body.md", "discovery_transport_custody_receipt.json"),
+    "source_bundle_runtime_evidence_auditor": ("source_bundle_evidence_body.md", "source_bundle_evidence_receipt.json"),
+    "claim_boundary_adjudicator": ("claim_boundary_body.md", "claim_boundary_receipt.json"),
 }
 SOURCE_AUDIT_ROLE_ALIASES = {
     "physical_sensor_authority_auditor": "physical_sensor_authority_auditor",
     "physical_sensor_authority": "physical_sensor_authority_auditor",
     "discovery_transport_and_custody_auditor": "discovery_transport_custody_auditor",
     "discovery_transport_custody_auditor": "discovery_transport_custody_auditor",
-    "source_bundle_and_evidence_auditor": "source_bundle_evidence_auditor",
-    "source_bundle_evidence_auditor": "source_bundle_evidence_auditor",
+    "source_bundle_and_evidence_auditor": "source_bundle_runtime_evidence_auditor",
+    "source_bundle_evidence_auditor": "source_bundle_runtime_evidence_auditor",
+    "source_bundle_runtime_evidence_auditor": "source_bundle_runtime_evidence_auditor",
+    "source_bundle_and_runtime_evidence_auditor": "source_bundle_runtime_evidence_auditor",
+    "source_bundle_runtime_and_evidence_auditor": "source_bundle_runtime_evidence_auditor",
     "claim_boundary_adjudicator": "claim_boundary_adjudicator",
 }
 SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = {
     "schema",
     "issuer",
+    "receipt_kind",
     "thread_id",
     "agent_id",
     "role",
     "model",
-    "final_response_sha256",
+    "review_body_sha256",
+    "review_body_canonicalization",
     "audited_commit",
     "source_hashes_sha256",
     "source_bundle_sha256",
+    "runtime_binary_sha256",
     "no_git_write",
     "no_file_edits",
     "no_checkout_mutation",
@@ -142,9 +157,11 @@ SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = {
     "self_authored",
     "evidence_origin",
 }
-SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = "FAMILY10H_SOURCE_AUTHORITY_C1_REVIEWER_RECEIPT_V1"
+SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEWER_RECEIPT_V2"
 SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER = "codex_subagent_read_only_review"
-SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN = "codex_subagent_final_response"
+SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN = "codex_subagent_detached_receipt"
+SOURCE_AUDIT_REVIEW_BODY_CANONICALIZATION = "utf8_lf_single_trailing_newline"
+SOURCE_AUDIT_RECEIPT_KIND = "detached_review_body_acknowledgment"
 
 
 class ControllerError(RuntimeError):
@@ -229,14 +246,76 @@ def review_quorum(independent_review: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def review_body_canonical_state(data: bytes) -> dict[str, Any]:
+    failures: list[str] = []
+    try:
+        text = data.decode("utf-8")
+    except UnicodeDecodeError:
+        return {
+            "passed": False,
+            "failures": ["review body is not UTF-8"],
+            "file_sha256": hashlib.sha256(data).hexdigest(),
+            "canonical_sha256": None,
+        }
+    canonical_text = text.replace("\r\n", "\n").replace("\r", "\n").rstrip("\n") + "\n"
+    canonical = canonical_text.encode("utf-8")
+    if canonical != data:
+        failures.append("review body is not canonical UTF-8 LF with exactly one trailing newline")
+    return {
+        "passed": not failures,
+        "failures": failures,
+        "file_sha256": hashlib.sha256(data).hexdigest(),
+        "canonical_sha256": hashlib.sha256(canonical).hexdigest(),
+    }
+
+
+def expected_source_audit_archive_paths(role: str, review_root: Path = SOURCE_AUDIT_REVIEW_DIR) -> tuple[Path, Path]:
+    body_name, receipt_name = SOURCE_AUDIT_REVIEW_ARCHIVE_FILES[role]
+    return review_root / body_name, review_root / receipt_name
+
+
+def archive_path_matches(value: Any, expected: Path) -> bool:
+    if not isinstance(value, str) or not value:
+        return False
+    normalized = value.replace("\\", "/")
+    accepted = {str(expected).replace("\\", "/"), expected.as_posix()}
+    try:
+        accepted.add(path_to_repo_relative(expected))
+    except ValueError:
+        pass
+    return normalized in accepted
+
+
+def archived_bytes(path: Path, evidence_commit: str | None = None) -> bytes | None:
+    if evidence_commit is not None:
+        return commit_blob_bytes(evidence_commit, path)
+    if not path.exists():
+        return None
+    return path.read_bytes()
+
+
+def archived_json(path: Path, evidence_commit: str | None = None) -> dict[str, Any] | None:
+    data = archived_bytes(path, evidence_commit)
+    if data is None:
+        return None
+    try:
+        parsed = strict_json_loads(data.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError, ValueError):
+        return None
+    return parsed if isinstance(parsed, dict) else None
+
+
 def source_audit_quorum(
     source_audit: dict[str, Any],
     *,
     expected_source_commit: str | None,
     expected_source_hashes_sha256: str,
     expected_source_bundle_sha256: str,
+    expected_runtime_binary_sha256: str,
     review_report_present: bool,
     excluded_agent_ids: set[str] | None = None,
+    evidence_commit: str | None = None,
+    review_root: Path = SOURCE_AUDIT_REVIEW_DIR,
 ) -> dict[str, Any]:
     failures: list[str] = []
     excluded_agent_ids = excluded_agent_ids or set()
@@ -246,6 +325,8 @@ def source_audit_quorum(
         failures.append("source audit source-hashes mismatch")
     if source_audit.get("source_bundle_sha256") != expected_source_bundle_sha256:
         failures.append("source audit source-bundle mismatch")
+    if source_audit.get("runtime_binary_sha256") != expected_runtime_binary_sha256:
+        failures.append("source audit runtime-binary mismatch")
     if source_audit.get("review_report_present") is not True or not review_report_present:
         failures.append("source audit review report missing")
     material_blockers_value = source_audit.get("material_blockers")
@@ -263,21 +344,50 @@ def source_audit_quorum(
     if len(reviewer_verdicts) != len(SOURCE_AUDIT_REQUIRED_REVIEW_ROLES):
         failures.append("source audit reviewer verdict count must be exactly four")
 
-    def validate_reviewer_receipt(item: dict[str, Any], role: str, role_name: str) -> list[str]:
+    def validate_reviewer_archive(item: dict[str, Any], role: str, role_name: str) -> list[str]:
         receipt_failures: list[str] = []
-        receipt = item.get("review_receipt")
-        if not isinstance(receipt, dict):
-            return [f"source audit reviewer receipt missing {role}"]
+        body_path, receipt_path = expected_source_audit_archive_paths(role, review_root)
+        if not archive_path_matches(item.get("body_path"), body_path):
+            receipt_failures.append(f"source audit reviewer body path mismatch {role}")
+        if not archive_path_matches(item.get("receipt_path"), receipt_path):
+            receipt_failures.append(f"source audit reviewer receipt path mismatch {role}")
+        body_bytes = archived_bytes(body_path, evidence_commit)
+        if body_bytes is None:
+            receipt_failures.append(f"source audit reviewer body missing {role}")
+            body_state = {"passed": False, "file_sha256": None, "canonical_sha256": None, "failures": []}
+        else:
+            body_state = review_body_canonical_state(body_bytes)
+            receipt_failures.extend(f"source audit reviewer body {failure} {role}" for failure in body_state["failures"])
+        if item.get("body_file_sha256") != body_state.get("file_sha256"):
+            receipt_failures.append(f"source audit reviewer body file digest mismatch {role}")
+        if item.get("body_canonical_sha256") != body_state.get("canonical_sha256"):
+            receipt_failures.append(f"source audit reviewer body canonical digest mismatch {role}")
+        receipt = archived_json(receipt_path, evidence_commit)
+        if receipt is None:
+            receipt_failures.append(f"source audit reviewer receipt missing {role}")
+            receipt = {}
+        if item.get("receipt_file_sha256") != (
+            hashlib.sha256(archived_bytes(receipt_path, evidence_commit) or b"").hexdigest() if archived_bytes(receipt_path, evidence_commit) is not None else None
+        ):
+            receipt_failures.append(f"source audit reviewer receipt file digest mismatch {role}")
+        if item.get("review_receipt") != receipt:
+            receipt_failures.append(f"source audit reviewer normalized receipt mismatch {role}")
         if set(receipt) != SOURCE_AUDIT_REVIEW_RECEIPT_KEYS:
             receipt_failures.append(f"source audit reviewer receipt field mismatch {role}")
         expected_pairs = {
             "schema": SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA,
             "issuer": SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER,
+            "receipt_kind": SOURCE_AUDIT_RECEIPT_KIND,
+            "thread_id": item.get("thread_id"),
             "agent_id": item.get("agent_id"),
             "role": role_name,
+            "model": item.get("model"),
+            "review_body_sha256": item.get("body_canonical_sha256"),
+            "review_body_canonicalization": SOURCE_AUDIT_REVIEW_BODY_CANONICALIZATION,
             "audited_commit": expected_source_commit,
             "source_hashes_sha256": expected_source_hashes_sha256,
             "source_bundle_sha256": expected_source_bundle_sha256,
+            "runtime_binary_sha256": expected_runtime_binary_sha256,
             "evidence_origin": SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN,
             "self_authored": False,
             "no_git_write": True,
@@ -290,13 +400,15 @@ def source_audit_quorum(
         for key, expected in expected_pairs.items():
             if receipt.get(key) != expected:
                 receipt_failures.append(f"source audit reviewer receipt {key} mismatch {role}")
-        if re.fullmatch(r"[0-9a-f]{64}", str(receipt.get("final_response_sha256", ""))) is None:
-            receipt_failures.append(f"source audit reviewer final response digest invalid {role}")
+        if "final_response_sha256" in receipt:
+            receipt_failures.append(f"source audit reviewer self-referential receipt field rejected {role}")
+        if re.fullmatch(r"[0-9a-f]{64}", str(receipt.get("review_body_sha256", ""))) is None:
+            receipt_failures.append(f"source audit reviewer body digest invalid {role}")
         if not isinstance(receipt.get("thread_id"), str) or not receipt["thread_id"]:
             receipt_failures.append(f"source audit reviewer thread id missing {role}")
         if not isinstance(receipt.get("model"), str) or not receipt["model"]:
             receipt_failures.append(f"source audit reviewer model missing {role}")
-        if item.get("self_authored") is True or item.get("evidence_origin") == "target-derived":
+        if item.get("self_authored") is True or item.get("evidence_origin") == "target-derived" or item.get("evidence_origin") == "parent-created":
             receipt_failures.append(f"source audit reviewer provenance rejected {role}")
         return receipt_failures
 
@@ -321,6 +433,14 @@ def source_audit_quorum(
             "audited_commit": item.get("audited_commit"),
             "source_hashes_sha256": item.get("source_hashes_sha256"),
             "source_bundle_sha256": item.get("source_bundle_sha256"),
+            "runtime_binary_sha256": item.get("runtime_binary_sha256"),
+            "body_path": item.get("body_path"),
+            "body_file_sha256": item.get("body_file_sha256"),
+            "body_canonical_sha256": item.get("body_canonical_sha256"),
+            "receipt_path": item.get("receipt_path"),
+            "receipt_file_sha256": item.get("receipt_file_sha256"),
+            "thread_id": item.get("thread_id"),
+            "model": item.get("model"),
             "boundary_attestation": item.get("boundary_attestation"),
             "review_receipt": item.get("review_receipt"),
             "passed": isinstance(item.get("agent_id"), str)
@@ -329,7 +449,7 @@ def source_audit_quorum(
             and item.get("final_response") is True,
         }
         role_entry = by_role[role]
-        receipt_failures = validate_reviewer_receipt(item, role, SOURCE_AUDIT_REQUIRED_REVIEW_ROLES[role])
+        receipt_failures = validate_reviewer_archive(item, role, SOURCE_AUDIT_REQUIRED_REVIEW_ROLES[role])
         if receipt_failures:
             failures.extend(receipt_failures)
             role_entry["passed"] = False
@@ -342,8 +462,19 @@ def source_audit_quorum(
         if role_entry["source_bundle_sha256"] != expected_source_bundle_sha256:
             failures.append(f"source audit reviewer source-bundle mismatch {role}")
             role_entry["passed"] = False
+        if role_entry["runtime_binary_sha256"] != expected_runtime_binary_sha256:
+            failures.append(f"source audit reviewer runtime-binary mismatch {role}")
+            role_entry["passed"] = False
         boundary = role_entry["boundary_attestation"]
-        if not isinstance(boundary, dict) or boundary.get("no_git_write") is not True or boundary.get("no_target_contact") is not True:
+        if (
+            not isinstance(boundary, dict)
+            or boundary.get("no_git_write") is not True
+            or boundary.get("no_file_edits") is not True
+            or boundary.get("no_checkout_mutation") is not True
+            or boundary.get("no_target_contact") is not True
+            or boundary.get("no_live_authority") is not True
+            or boundary.get("no_pmu") is not True
+        ):
             failures.append(f"source audit reviewer boundary attestation missing {role}")
             role_entry["passed"] = False
         if role_entry["agent_id"] in excluded_agent_ids:
@@ -359,6 +490,13 @@ def source_audit_quorum(
     ]
     if duplicate_agent_ids:
         failures.append("duplicate source audit reviewer agent ids")
+    duplicate_thread_ids = [
+        thread_id
+        for thread_id, count in Counter(item["thread_id"] for item in by_role.values() if item.get("thread_id")).items()
+        if count > 1
+    ]
+    if duplicate_thread_ids:
+        failures.append("duplicate source audit reviewer thread ids")
     failed_roles = [role for role, item in by_role.items() if not item["passed"]]
     if failed_roles:
         failures.append("non-clear source audit reviewer roles: " + ",".join(sorted(failed_roles)))
@@ -496,10 +634,15 @@ def source_file_map() -> dict[str, dict[str, Any]]:
     return result
 
 
+def runtime_binary_authority() -> dict[str, Any]:
+    return target.runtime_binary_authority(HERE)
+
+
 def compute_source_hashes() -> dict[str, Any]:
     result = {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_HASHES_V1",
         "source_files": source_file_map(),
+        "runtime_binary_authority": runtime_binary_authority(),
     }
     result["source_hashes_sha256"] = public.digest({k: v for k, v in result.items() if k != "source_hashes_sha256"})
     return result
@@ -549,7 +692,12 @@ def source_authority_commit_verification(commit: str) -> dict[str, Any]:
     )
     if exists.returncode != 0:
         return {"passed": False, "failures": ["source authority commit missing"], "commit": commit, "files": {}}
-    status = git_lines("status", "--porcelain", "--", *[package_relative_path(name) for name in SOURCE_AUTHORITY_FILE_NAMES])
+    status = git_lines(
+        "status",
+        "--porcelain",
+        "--",
+        *[package_relative_path(name) for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES],
+    )
     if status:
         failures.append("source authority paths are dirty")
     files: dict[str, dict[str, Any]] = {}
@@ -571,6 +719,25 @@ def source_authority_commit_verification(commit: str) -> dict[str, Any]:
         }
         if committed_blob != working_blob:
             failures.append(f"source authority file differs from commit {name}")
+    for name in RUNTIME_AUTHORITY_FILE_NAMES:
+        path = HERE / name
+        rel = package_relative_path(name)
+        if not path.exists():
+            failures.append(f"runtime authority file missing {name}")
+            files[name] = {"present": False}
+            continue
+        committed_blob = git_text("rev-parse", f"{commit}:{rel}")
+        working_blob = git_text("hash-object", str(path))
+        files[name] = {
+            "present": True,
+            "repo_path": rel,
+            "committed_blob": committed_blob,
+            "working_blob": working_blob,
+            "sha256": public.sha256_file(path),
+            "size": path.stat().st_size,
+        }
+        if committed_blob != working_blob:
+            failures.append(f"runtime authority file differs from commit {name}")
     return {"passed": not failures, "failures": failures, "commit": commit, "files": files, "status": status}
 
 
@@ -578,6 +745,7 @@ def build_temperature_authority_challenge(
     *,
     source_hashes: dict[str, Any],
     source_bundle_sha256: str,
+    runtime_binary_sha256: str,
     schedule_sidecar: dict[str, Any],
     authorized_commit: str,
     controller_nonce_sha256: str,
@@ -591,6 +759,7 @@ def build_temperature_authority_challenge(
         "transaction_run_id": public.TRANSACTION_RUN_ID,
         "source_hashes_sha256": source_hashes["source_hashes_sha256"],
         "source_bundle_sha256": source_bundle_sha256,
+        "runtime_binary_sha256": runtime_binary_sha256,
         "schedule_canonical_sha256": schedule_sidecar["canonical_sha256"],
         "schedule_json_sha256": schedule_sidecar["json_sha256"],
         "schedule_tsv_sha256": schedule_sidecar["tsv_sha256"],
@@ -626,7 +795,12 @@ def fixture_transport_scope(source_root: Path, nonce_sha: str) -> dict[str, Any]
     }
 
 
-def fixture_source_review_binding(source_commit: str, source_hashes_sha256: str, source_bundle_sha256: str) -> dict[str, Any]:
+def fixture_source_review_binding(
+    source_commit: str,
+    source_hashes_sha256: str,
+    source_bundle_sha256: str,
+    runtime_binary_sha256: str = "d" * 64,
+) -> dict[str, Any]:
     return {
         "findings_sha256": "a" * 64,
         "review_report_sha256": "b" * 64,
@@ -634,6 +808,7 @@ def fixture_source_review_binding(source_commit: str, source_hashes_sha256: str,
         "source_authority_commit": source_commit,
         "source_hashes_sha256": source_hashes_sha256,
         "source_bundle_sha256": source_bundle_sha256,
+        "runtime_binary_sha256": runtime_binary_sha256,
     }
 
 
@@ -642,10 +817,11 @@ def read_source_authority_review_for_discovery(
     source_commit: str,
     source_hashes_sha256: str,
     source_bundle_sha256: str,
+    runtime_binary_sha256: str,
 ) -> dict[str, Any]:
     failures: list[str] = []
     if not SOURCE_AUDIT_FINDINGS_PATH.exists():
-        failures.append("source authority C1 review findings missing")
+        failures.append("source authority C2 review findings missing")
         source_audit: dict[str, Any] = {}
     else:
         source_audit = read_json(SOURCE_AUDIT_FINDINGS_PATH)
@@ -656,6 +832,7 @@ def read_source_authority_review_for_discovery(
         expected_source_commit=source_commit,
         expected_source_hashes_sha256=source_hashes_sha256,
         expected_source_bundle_sha256=source_bundle_sha256,
+        expected_runtime_binary_sha256=runtime_binary_sha256,
         review_report_present=SOURCE_AUDIT_REVIEW_PATH.exists(),
         excluded_agent_ids=prior_ids,
     )
@@ -668,6 +845,7 @@ def read_source_authority_review_for_discovery(
         "source_authority_commit": source_commit,
         "source_hashes_sha256": source_hashes_sha256,
         "source_bundle_sha256": source_bundle_sha256,
+        "runtime_binary_sha256": runtime_binary_sha256,
         "findings_path": str(SOURCE_AUDIT_FINDINGS_PATH) if SOURCE_AUDIT_FINDINGS_PATH.exists() else None,
         "findings_sha256": public.sha256_file(SOURCE_AUDIT_FINDINGS_PATH) if SOURCE_AUDIT_FINDINGS_PATH.exists() else None,
         "review_report_path": str(SOURCE_AUDIT_REVIEW_PATH) if SOURCE_AUDIT_REVIEW_PATH.exists() else None,
@@ -683,6 +861,7 @@ def source_review_challenge_binding(source_review: dict[str, Any]) -> dict[str, 
         "source_authority_commit": source_review.get("source_authority_commit"),
         "source_hashes_sha256": source_review.get("source_hashes_sha256"),
         "source_bundle_sha256": source_review.get("source_bundle_sha256"),
+        "runtime_binary_sha256": source_review.get("runtime_binary_sha256"),
     }
 
 
@@ -951,11 +1130,17 @@ def expected_temperature_authority_challenge(
     return build_temperature_authority_challenge(
         source_hashes=source_hashes,
         source_bundle_sha256=source_bundle_sha256,
+        runtime_binary_sha256=source_hashes["runtime_binary_authority"]["sha256"],
         schedule_sidecar=schedule_sidecar,
         authorized_commit=authorized_commit,
         controller_nonce_sha256=nonce_sha,
         transport_scope=discovery_transport_scope(target_host=TARGET_HOST, remote_root=DISCOVERY_REMOTE_ROOT, nonce_sha=nonce_sha),
-        source_authority_review=fixture_source_review_binding(authorized_commit, source_hashes["source_hashes_sha256"], source_bundle_sha256),
+        source_authority_review=fixture_source_review_binding(
+            authorized_commit,
+            source_hashes["source_hashes_sha256"],
+            source_bundle_sha256,
+            source_hashes["runtime_binary_authority"]["sha256"],
+        ),
     )
 
 
@@ -983,6 +1168,7 @@ def expected_temperature_authority_challenge_for_manifest(
             expected = build_temperature_authority_challenge(
                 source_hashes=source_hashes,
                 source_bundle_sha256=source_bundle_sha256,
+                runtime_binary_sha256=source_hashes["runtime_binary_authority"]["sha256"],
                 schedule_sidecar=schedule_sidecar,
                 authorized_commit=source_commit,
                 controller_nonce_sha256=nonce_sha,
@@ -1027,6 +1213,7 @@ def validate_temperature_authority_challenge(
         for field in (
             "source_hashes_sha256",
             "source_bundle_sha256",
+            "runtime_binary_sha256",
             "schedule_canonical_sha256",
             "schedule_json_sha256",
             "schedule_tsv_sha256",
@@ -1353,6 +1540,7 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
     synthetic_challenge = build_temperature_authority_challenge(
         source_hashes={"source_hashes_sha256": "1" * 64},
         source_bundle_sha256="2" * 64,
+        runtime_binary_sha256="8" * 64,
         schedule_sidecar={"canonical_sha256": "3" * 64, "json_sha256": "4" * 64, "tsv_sha256": "6" * 64},
         authorized_commit="7" * 40,
         controller_nonce_sha256=hashlib.sha256(controller_nonce.encode("ascii")).hexdigest(),
@@ -1657,12 +1845,14 @@ def acquire_temperature_sensor_authority(
         source_commit=source_commit,
         source_hashes_sha256=source_hashes["source_hashes_sha256"],
         source_bundle_sha256=bundle["sha256"],
+        runtime_binary_sha256=source_hashes["runtime_binary_authority"]["sha256"],
     )
     if not source_review["passed"]:
-        raise ControllerError("source authority C1 review gate failed before target contact: " + ",".join(source_review["failures"]))
+        raise ControllerError("source authority C2 review gate failed before target contact: " + ",".join(source_review["failures"]))
     challenge = build_temperature_authority_challenge(
         source_hashes=source_hashes,
         source_bundle_sha256=bundle["sha256"],
+        runtime_binary_sha256=source_hashes["runtime_binary_authority"]["sha256"],
         schedule_sidecar=schedule_sidecar,
         authorized_commit=source_commit,
         controller_nonce_sha256=nonce_sha,
@@ -2121,7 +2311,7 @@ def source_bundle_reconstruction_from_commit(commit: str) -> dict[str, Any]:
 
 def materialize_source_authority_snapshot(commit: str, destination: Path) -> None:
     destination.mkdir(parents=True, exist_ok=True)
-    for name in SOURCE_AUTHORITY_FILE_NAMES:
+    for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
         (destination / name).write_bytes(git_blob_bytes(commit, name))
 
 
@@ -2138,23 +2328,37 @@ def find_c_compiler() -> list[str] | None:
     return None
 
 
-def compile_runtime() -> dict[str, Any]:
+def compiler_identity(compiler: list[str]) -> str:
+    if compiler[0].endswith("wsl.exe") or Path(compiler[0]).name.lower() == "wsl.exe":
+        completed = run([compiler[0], "bash", "-lc", "gcc --version | head -n 1"], timeout=10.0, check=False)
+    else:
+        completed = run([compiler[0], "--version"], timeout=10.0, check=False)
+    if completed.returncode != 0:
+        return "compiler identity unavailable"
+    return completed.stdout.splitlines()[0] if completed.stdout.splitlines() else "compiler identity unavailable"
+
+
+def compile_runtime(output_path: Path | None = None) -> dict[str, Any]:
     compiler = find_c_compiler()
     source = HERE / "family10h_carrier_tomography_runtime.c"
-    if BINARY_PATH.exists():
-        BINARY_PATH.unlink()
+    output_path = output_path or BINARY_PATH
+    if output_path.exists():
+        output_path.unlink()
     if compiler is None:
         return {
             "passed": False,
             "compiler": None,
+            "compiler_identity": None,
             "compile_command": None,
+            "compile_command_identity": None,
+            "binary_path": str(output_path),
             "offline_binary_sha256": None,
             "failure": "no local C compiler found",
         }
     runtime_command: list[str] | None = None
     if compiler[0].endswith("wsl.exe") or Path(compiler[0]).name.lower() == "wsl.exe":
         win_source = str(source)
-        win_binary = str(BINARY_PATH)
+        win_binary = str(output_path)
         command_text = (
             "gcc -std=c11 -Wall -Wextra -Werror -O2 "
             f"-o \"$(wslpath '{win_binary}')\" \"$(wslpath '{win_source}')\""
@@ -2171,43 +2375,68 @@ def compile_runtime() -> dict[str, Any]:
             "-Werror",
             "-O2",
             "-o",
-            str(BINARY_PATH),
+            str(output_path),
             str(source),
         ]
         completed = run(compile_command, timeout=60.0, check=False)
-        runtime_command = [str(BINARY_PATH), "--self-test"]
-    passed = completed.returncode == 0 and BINARY_PATH.exists()
+        runtime_command = [str(output_path), "--self-test"]
+    passed = completed.returncode == 0 and output_path.exists()
+    identity = {
+        "language_standard": "c11",
+        "flags": ["-std=c11", "-Wall", "-Wextra", "-Werror", "-O2"],
+        "inputs": ["family10h_carrier_tomography_runtime.c"],
+        "output": output_path.name,
+    }
     return {
         "passed": passed,
         "compiler": compiler,
+        "compiler_identity": compiler_identity(compiler),
         "compile_command": compile_command,
+        "compile_command_identity": identity,
+        "binary_path": str(output_path),
         "runtime_command": runtime_command,
         "returncode": completed.returncode,
         "stdout": completed.stdout,
         "stderr": completed.stderr,
-        "offline_binary_sha256": public.sha256_file(BINARY_PATH) if BINARY_PATH.exists() else None,
+        "offline_binary_sha256": public.sha256_file(output_path) if output_path.exists() else None,
+        "offline_binary_size": output_path.stat().st_size if output_path.exists() else None,
     }
 
 
 def runtime_self_test() -> dict[str, Any]:
-    compile_receipt = compile_runtime()
-    if not compile_receipt["passed"]:
-        result = {
-            "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST_RECEIPT_V1",
-            "passed": False,
-            "compile": compile_receipt,
+    authority = runtime_binary_authority()
+    with tempfile.TemporaryDirectory(prefix="family10h_runtime_compile_") as tmp:
+        isolated_binary = Path(tmp) / RUNTIME_BINARY_NAME
+        compile_receipt = compile_runtime(isolated_binary)
+        if compile_receipt["passed"]:
+            completed = run(compile_receipt["runtime_command"], timeout=20.0, check=False)
+            try:
+                runtime_json = strict_json_loads(completed.stdout.strip())
+            except (json.JSONDecodeError, ValueError):
+                runtime_json = {"passed": False, "raw_stdout": completed.stdout}
+        else:
+            completed = subprocess.CompletedProcess(compile_receipt.get("runtime_command") or [], 1, "", "")
+            runtime_json = {"passed": False, "compile_failed": True}
+        committed_sha = authority.get("sha256")
+        isolated_sha = compile_receipt.get("offline_binary_sha256")
+        compile_equivalence = {
+            "law": "byte_exact_isolated_compile",
+            "passed": compile_receipt["passed"] is True and isolated_sha == committed_sha,
+            "committed_runtime_binary_sha256": committed_sha,
+            "isolated_compile_sha256": isolated_sha,
+            "committed_runtime_binary_size": authority.get("size"),
+            "isolated_compile_size": compile_receipt.get("offline_binary_size"),
+            "runtime_c_sha256": authority.get("runtime_c_sha256"),
+            "runtime_h_sha256": authority.get("runtime_h_sha256"),
+            "compile_command_identity": compile_receipt.get("compile_command_identity"),
+            "compiler_identity": compile_receipt.get("compiler_identity"),
         }
-        write_json(RUNTIME_SELF_TEST_PATH, result)
-        return result
-    completed = run(compile_receipt["runtime_command"], timeout=20.0, check=False)
-    try:
-        runtime_json = strict_json_loads(completed.stdout.strip())
-    except (json.JSONDecodeError, ValueError):
-        runtime_json = {"passed": False, "raw_stdout": completed.stdout}
     result = {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST_RECEIPT_V1",
-        "passed": completed.returncode == 0 and runtime_json.get("passed") is True,
+        "passed": completed.returncode == 0 and runtime_json.get("passed") is True and compile_equivalence["passed"] is True,
         "compile": compile_receipt,
+        "runtime_binary_authority": authority,
+        "compile_equivalence": compile_equivalence,
         "runtime_returncode": completed.returncode,
         "runtime_stdout": completed.stdout,
         "runtime_stderr": completed.stderr,
@@ -2219,37 +2448,39 @@ def runtime_self_test() -> dict[str, Any]:
 
 
 def runtime_authority_gate_self_test() -> dict[str, Any]:
-    compile_receipt = compile_runtime()
-    if not compile_receipt["passed"]:
-        return {"passed": False, "compile": compile_receipt}
-
-    def direct_execute(output_root: Path, authority_value: str | None) -> subprocess.CompletedProcess[str]:
-        compiler = compile_receipt["compiler"]
-        if compiler and (compiler[0].endswith("wsl.exe") or Path(compiler[0]).name.lower() == "wsl.exe"):
-            binary = f"\"$(wslpath '{BINARY_PATH}')\""
-            schedule = f"\"$(wslpath '{public.SCHEDULE_TSV}')\""
-            output = f"\"$(wslpath '{output_root}')\""
-            env_prefix = (
-                f"FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY='{authority_value}' "
-                if authority_value is not None
-                else "env -u FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY "
-            )
-            return run([compiler[0], "bash", "-lc", f"{env_prefix}{binary} --execute-schedule {schedule} {output}"], timeout=20.0, check=False)
-        env = os.environ.copy()
-        if authority_value is None:
-            env.pop("FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY", None)
-        else:
-            env["FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY"] = authority_value
-        return subprocess.run(
-            [str(BINARY_PATH), "--execute-schedule", str(public.SCHEDULE_TSV), str(output_root)],
-            text=True,
-            capture_output=True,
-            timeout=20.0,
-            check=False,
-            env=env,
-        )
-
     with tempfile.TemporaryDirectory(prefix="carrier_tomography_runtime_gate_") as tmp:
+        isolated_binary = Path(tmp) / RUNTIME_BINARY_NAME
+        compile_receipt = compile_runtime(isolated_binary)
+        if not compile_receipt["passed"]:
+            return {"passed": False, "compile": compile_receipt}
+
+        def direct_execute(output_root: Path, authority_value: str | None) -> subprocess.CompletedProcess[str]:
+            compiler = compile_receipt["compiler"]
+            binary_path = Path(str(compile_receipt["binary_path"]))
+            if compiler and (compiler[0].endswith("wsl.exe") or Path(compiler[0]).name.lower() == "wsl.exe"):
+                binary = f"\"$(wslpath '{binary_path}')\""
+                schedule = f"\"$(wslpath '{public.SCHEDULE_TSV}')\""
+                output = f"\"$(wslpath '{output_root}')\""
+                env_prefix = (
+                    f"FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY='{authority_value}' "
+                    if authority_value is not None
+                    else "env -u FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY "
+                )
+                return run([compiler[0], "bash", "-lc", f"{env_prefix}{binary} --execute-schedule {schedule} {output}"], timeout=20.0, check=False)
+            env = os.environ.copy()
+            if authority_value is None:
+                env.pop("FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY", None)
+            else:
+                env["FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY"] = authority_value
+            return subprocess.run(
+                [str(binary_path), "--execute-schedule", str(public.SCHEDULE_TSV), str(output_root)],
+                text=True,
+                capture_output=True,
+                timeout=20.0,
+                check=False,
+                env=env,
+            )
+
         missing_output = Path(tmp) / "missing_authority_output"
         mismatch_output = Path(tmp) / "mismatched_authority_output"
         missing = direct_execute(missing_output, None)
@@ -2280,7 +2511,7 @@ def deployment_layout_self_test() -> dict[str, Any]:
         source = root / "source"
         output = root / "output"
         source.mkdir()
-        for name in SOURCE_AUTHORITY_FILE_NAMES:
+        for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
             path = HERE / name
             if path.exists():
                 shutil.copy2(path, source / name)
@@ -2457,12 +2688,18 @@ def discovery_transport_self_tests() -> dict[str, Any]:
         challenge = build_temperature_authority_challenge(
             source_hashes=source_hashes,
             source_bundle_sha256=target.deterministic_source_bundle_sha256(source),
+            runtime_binary_sha256=source_hashes["runtime_binary_authority"]["sha256"],
             schedule_sidecar=read_json(source / public.SCHEDULE_SHA.name),
-        authorized_commit="f" * 40,
-        controller_nonce_sha256=nonce_sha,
-        transport_scope=fixture_transport_scope(source, nonce_sha),
-        source_authority_review=fixture_source_review_binding("f" * 40, source_hashes["source_hashes_sha256"], target.deterministic_source_bundle_sha256(source)),
-    )
+            authorized_commit="f" * 40,
+            controller_nonce_sha256=nonce_sha,
+            transport_scope=fixture_transport_scope(source, nonce_sha),
+            source_authority_review=fixture_source_review_binding(
+                "f" * 40,
+                source_hashes["source_hashes_sha256"],
+                target.deterministic_source_bundle_sha256(source),
+                source_hashes["runtime_binary_authority"]["sha256"],
+            ),
+        )
         challenge_path = root / "challenge.json"
         write_json(challenge_path, challenge)
         discovery = target.discover_temperature_sensor_authority(
@@ -2785,6 +3022,8 @@ def source_hash_authority_regression() -> dict[str, Any]:
         root = Path(tmp)
         for name in SOURCE_FILE_NAMES:
             shutil.copy2(HERE / name, root / name)
+        for name in RUNTIME_AUTHORITY_FILE_NAMES:
+            shutil.copy2(HERE / name, root / name)
         shutil.copy2(SOURCE_HASHES, root / SOURCE_HASHES.name)
         receipt_path = root / SOURCE_HASHES.name
         before = receipt_path.read_bytes()
@@ -2814,6 +3053,59 @@ def source_hash_authority_regression() -> dict[str, Any]:
         ]
     )
     return result
+
+
+def runtime_binary_overlay_mutation_regression() -> dict[str, Any]:
+    if not SOURCE_HASHES.exists() or not BINARY_PATH.exists():
+        return {
+            "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_OVERLAY_MUTATION_REGRESSION_V1",
+            "passed": False,
+            "failures": ["source hashes or committed runtime binary missing"],
+        }
+
+    def source_hashes_for_root(root: Path) -> dict[str, Any]:
+        source_files: dict[str, dict[str, Any]] = {}
+        for name in SOURCE_FILE_NAMES:
+            path = root / name
+            if path.exists():
+                source_files[name] = {"sha256": public.sha256_file(path), "size": path.stat().st_size}
+        receipt = {
+            "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_HASHES_V1",
+            "source_files": source_files,
+            "runtime_binary_authority": target.runtime_binary_authority(root),
+        }
+        receipt["source_hashes_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "source_hashes_sha256"})
+        return receipt
+
+    with tempfile.TemporaryDirectory(prefix="family10h_runtime_binary_overlay_") as tmp:
+        root = Path(tmp)
+        for name in SOURCE_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
+            shutil.copy2(HERE / name, root / name)
+        write_json(root / SOURCE_HASHES.name, read_json(SOURCE_HASHES))
+        original_authority = target.runtime_binary_authority(root)
+        (root / RUNTIME_BINARY_NAME).write_bytes((root / RUNTIME_BINARY_NAME).read_bytes() + b"\nC2-binary-overlay-mutation\n")
+        binary_only_validation = target.validate_source_file_authority(root)
+        coherent_receipt = source_hashes_for_root(root)
+        write_json(root / SOURCE_HASHES.name, coherent_receipt)
+        coherent_validation = target.validate_source_file_authority(root)
+        coherent_authority = target.runtime_binary_authority(root)
+
+    checks = {
+        "binary_only_mutation_rejected": not binary_only_validation["passed"],
+        "coherent_overlay_source_root_can_be_made_internally_consistent": coherent_validation["passed"],
+        "coherent_overlay_changes_runtime_blob_id": original_authority.get("git_blob_id") != coherent_authority.get("git_blob_id"),
+        "coherent_overlay_changes_runtime_sha256": original_authority.get("sha256") != coherent_authority.get("sha256"),
+        "final_replay_policy_rejects_changed_runtime_blob": original_authority.get("git_blob_id") != coherent_authority.get("git_blob_id"),
+    }
+    return {
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_OVERLAY_MUTATION_REGRESSION_V1",
+        "passed": all(checks.values()),
+        "checks": checks,
+        "binary_only_failures": binary_only_validation["failures"],
+        "coherent_overlay_validation_passed": coherent_validation["passed"],
+        "source_runtime_authority": original_authority,
+        "coherent_overlay_runtime_authority": coherent_authority,
+    }
 
 
 def review_quorum_null_model_baseline() -> dict[str, Any]:
@@ -2846,207 +3138,218 @@ def source_audit_quorum_regression() -> dict[str, Any]:
     source_commit = "1" * 40
     source_hash = "2" * 64
     bundle_hash = "3" * 64
+    runtime_hash = "4" * 64
 
-    def clearance(role: str, label: str, index: int) -> dict[str, Any]:
-        agent_id = f"source-reviewer-{index}"
-        receipt = {
-            "schema": SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA,
-            "issuer": SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER,
-            "thread_id": f"thread-source-review-{index}",
-            "agent_id": agent_id,
-            "role": label,
-            "model": "gpt-5.6-sol",
-            "final_response_sha256": hashlib.sha256(f"source-review-{index}".encode("utf-8")).hexdigest(),
-            "audited_commit": source_commit,
-            "source_hashes_sha256": source_hash,
-            "source_bundle_sha256": bundle_hash,
-            "no_git_write": True,
-            "no_file_edits": True,
-            "no_checkout_mutation": True,
-            "no_target_contact": True,
-            "no_live_authority": True,
-            "no_pmu": True,
-            "self_authored": False,
-            "evidence_origin": SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN,
-        }
+    def write_receipt(path: Path, receipt: dict[str, Any]) -> None:
+        write_json(path, receipt)
+
+    def build_archive(review_root: Path) -> dict[str, Any]:
+        clearances: dict[str, dict[str, Any]] = {}
+        for index, (role, label) in enumerate(SOURCE_AUDIT_REQUIRED_REVIEW_ROLES.items(), start=1):
+            body_path, receipt_path = expected_source_audit_archive_paths(role, review_root)
+            body_path.parent.mkdir(parents=True, exist_ok=True)
+            body_path.write_bytes((f"{label} C2 read-only review body {index}\n").encode("utf-8"))
+            body_state = review_body_canonical_state(body_path.read_bytes())
+            agent_id = f"source-reviewer-c2-{index}"
+            thread_id = f"thread-source-review-c2-{index}"
+            receipt = {
+                "schema": SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA,
+                "issuer": SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER,
+                "receipt_kind": SOURCE_AUDIT_RECEIPT_KIND,
+                "thread_id": thread_id,
+                "agent_id": agent_id,
+                "role": label,
+                "model": "gpt-5.6-sol",
+                "review_body_sha256": body_state["canonical_sha256"],
+                "review_body_canonicalization": SOURCE_AUDIT_REVIEW_BODY_CANONICALIZATION,
+                "audited_commit": source_commit,
+                "source_hashes_sha256": source_hash,
+                "source_bundle_sha256": bundle_hash,
+                "runtime_binary_sha256": runtime_hash,
+                "no_git_write": True,
+                "no_file_edits": True,
+                "no_checkout_mutation": True,
+                "no_target_contact": True,
+                "no_live_authority": True,
+                "no_pmu": True,
+                "self_authored": False,
+                "evidence_origin": SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN,
+            }
+            write_receipt(receipt_path, receipt)
+            clearances[role] = {
+                "role": label,
+                "agent_id": agent_id,
+                "thread_id": thread_id,
+                "model": "gpt-5.6-sol",
+                "verdict": "NO_MATERIAL_BLOCKER",
+                "final_response": True,
+                "audited_commit": source_commit,
+                "source_hashes_sha256": source_hash,
+                "source_bundle_sha256": bundle_hash,
+                "runtime_binary_sha256": runtime_hash,
+                "body_path": str(body_path),
+                "body_file_sha256": body_state["file_sha256"],
+                "body_canonical_sha256": body_state["canonical_sha256"],
+                "receipt_path": str(receipt_path),
+                "receipt_file_sha256": public.sha256_file(receipt_path),
+                "boundary_attestation": {
+                    "no_git_write": True,
+                    "no_file_edits": True,
+                    "no_checkout_mutation": True,
+                    "no_target_contact": True,
+                    "no_live_authority": True,
+                    "no_pmu": True,
+                },
+                "review_receipt": receipt,
+            }
         return {
-            "role": label,
-            "agent_id": agent_id,
-            "verdict": "NO_MATERIAL_BLOCKER",
-            "final_response": True,
-            "audited_commit": source_commit,
+            "schema": "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEW_NORMALIZED_V1",
+            "source_authority_commit": source_commit,
             "source_hashes_sha256": source_hash,
             "source_bundle_sha256": bundle_hash,
-            "boundary_attestation": {"no_git_write": True, "no_target_contact": True},
-            "review_receipt": receipt,
+            "runtime_binary_sha256": runtime_hash,
+            "review_report_present": True,
+            "material_blockers": [],
+            "reviewer_verdicts": clearances,
         }
 
-    clearances = {
-        role: clearance(role, label, index)
-        for index, (role, label) in enumerate(SOURCE_AUDIT_REQUIRED_REVIEW_ROLES.items(), start=1)
-    }
-    base = {
-        "source_authority_commit": source_commit,
-        "source_hashes_sha256": source_hash,
-        "source_bundle_sha256": bundle_hash,
-        "review_report_present": True,
-        "material_blockers": [],
-        "reviewer_verdicts": clearances,
-    }
-    wrong_commit = {
-        **base,
-        "reviewer_verdicts": {
-            **clearances,
-            "claim_boundary_adjudicator": {
-                **clearances["claim_boundary_adjudicator"],
-                "audited_commit": "4" * 40,
-                "review_receipt": {**clearances["claim_boundary_adjudicator"]["review_receipt"], "audited_commit": "4" * 40},
-            },
-        },
-    }
-    missing_boundary = {
-        **base,
-        "reviewer_verdicts": {
-            **clearances,
-            "claim_boundary_adjudicator": {**clearances["claim_boundary_adjudicator"], "boundary_attestation": {"no_git_write": True}},
-        },
-    }
-    provenance_free = {
-        **base,
-        "reviewer_verdicts": {
-            **clearances,
-            "source_bundle_evidence_auditor": {
-                **clearances["source_bundle_evidence_auditor"],
-                "review_receipt": {},
-            },
-        },
-    }
-    self_authored = {
-        **base,
-        "reviewer_verdicts": {
-            **clearances,
-            "source_bundle_evidence_auditor": {
-                **clearances["source_bundle_evidence_auditor"],
-                "self_authored": True,
-                "review_receipt": {**clearances["source_bundle_evidence_auditor"]["review_receipt"], "self_authored": True},
-            },
-        },
-    }
-    target_derived = {
-        **base,
-        "reviewer_verdicts": {
-            **clearances,
-            "source_bundle_evidence_auditor": {
-                **clearances["source_bundle_evidence_auditor"],
-                "evidence_origin": "target-derived",
-                "review_receipt": {**clearances["source_bundle_evidence_auditor"]["review_receipt"], "evidence_origin": "target-derived"},
-            },
-        },
-    }
-    synthetic_id = {
-        **base,
-        "reviewer_verdicts": {
-            **clearances,
-            "source_bundle_evidence_auditor": {
-                **clearances["source_bundle_evidence_auditor"],
-                "agent_id": "",
-                "review_receipt": {**clearances["source_bundle_evidence_auditor"]["review_receipt"], "agent_id": ""},
-            },
-        },
-    }
-    altered_response_digest = {
-        **base,
-        "reviewer_verdicts": {
-            **clearances,
-            "source_bundle_evidence_auditor": {
-                **clearances["source_bundle_evidence_auditor"],
-                "review_receipt": {**clearances["source_bundle_evidence_auditor"]["review_receipt"], "final_response_sha256": "not-a-digest"},
-            },
-        },
-    }
+    def rewrite_item_receipt(review_root: Path, item: dict[str, Any], role: str) -> None:
+        _, receipt_path = expected_source_audit_archive_paths(role, review_root)
+        write_receipt(receipt_path, item["review_receipt"])
+        item["receipt_file_sha256"] = public.sha256_file(receipt_path)
+
+    def evaluate(mutator: Any | None = None, *, review_report_present: bool = True, excluded: set[str] | None = None) -> bool:
+        with tempfile.TemporaryDirectory(prefix="family10h_c2_source_audit_regression_") as tmp:
+            review_root = Path(tmp) / "SOURCE_AUTHORITY_C2_REVIEW"
+            audit = build_archive(review_root)
+            if mutator is not None:
+                mutator(audit, review_root)
+            return source_audit_quorum(
+                audit,
+                expected_source_commit=source_commit,
+                expected_source_hashes_sha256=source_hash,
+                expected_source_bundle_sha256=bundle_hash,
+                expected_runtime_binary_sha256=runtime_hash,
+                review_report_present=review_report_present,
+                excluded_agent_ids=excluded,
+                review_root=review_root,
+            )["passed"]
+
+    def role_item(audit: dict[str, Any], role: str = "source_bundle_runtime_evidence_auditor") -> dict[str, Any]:
+        return audit["reviewer_verdicts"][role]
+
+    def mutate_receipt(audit: dict[str, Any], review_root: Path, role_key: str, **fields: Any) -> None:
+        item = role_item(audit, role_key)
+        item["review_receipt"] = {**item["review_receipt"], **fields}
+        rewrite_item_receipt(review_root, item, role_key)
+
     checks = {
-        "exact_source_audit_quorum_passes": source_audit_quorum(
-            base,
-            expected_source_commit=source_commit,
-            expected_source_hashes_sha256=source_hash,
-            expected_source_bundle_sha256=bundle_hash,
-            review_report_present=True,
-        )["passed"],
-        "missing_report_blocked": not source_audit_quorum(
-            base,
-            expected_source_commit=source_commit,
-            expected_source_hashes_sha256=source_hash,
-            expected_source_bundle_sha256=bundle_hash,
-            review_report_present=False,
-        )["passed"],
-        "wrong_top_level_bundle_blocked": not source_audit_quorum(
-            {**base, "source_bundle_sha256": "5" * 64},
-            expected_source_commit=source_commit,
-            expected_source_hashes_sha256=source_hash,
-            expected_source_bundle_sha256=bundle_hash,
-            review_report_present=True,
-        )["passed"],
-        "wrong_reviewer_commit_blocked": not source_audit_quorum(
-            wrong_commit,
-            expected_source_commit=source_commit,
-            expected_source_hashes_sha256=source_hash,
-            expected_source_bundle_sha256=bundle_hash,
-            review_report_present=True,
-        )["passed"],
-        "missing_boundary_attestation_blocked": not source_audit_quorum(
-            missing_boundary,
-            expected_source_commit=source_commit,
-            expected_source_hashes_sha256=source_hash,
-            expected_source_bundle_sha256=bundle_hash,
-            review_report_present=True,
-        )["passed"],
-        "prior_package_reviewer_reuse_blocked": not source_audit_quorum(
-            base,
-            expected_source_commit=source_commit,
-            expected_source_hashes_sha256=source_hash,
-            expected_source_bundle_sha256=bundle_hash,
-            review_report_present=True,
-            excluded_agent_ids={"source-reviewer-1"},
-        )["passed"],
-        "provenance_free_receipt_blocked": not source_audit_quorum(
-            provenance_free,
-            expected_source_commit=source_commit,
-            expected_source_hashes_sha256=source_hash,
-            expected_source_bundle_sha256=bundle_hash,
-            review_report_present=True,
-        )["passed"],
-        "self_authored_receipt_blocked": not source_audit_quorum(
-            self_authored,
-            expected_source_commit=source_commit,
-            expected_source_hashes_sha256=source_hash,
-            expected_source_bundle_sha256=bundle_hash,
-            review_report_present=True,
-        )["passed"],
-        "target_derived_receipt_blocked": not source_audit_quorum(
-            target_derived,
-            expected_source_commit=source_commit,
-            expected_source_hashes_sha256=source_hash,
-            expected_source_bundle_sha256=bundle_hash,
-            review_report_present=True,
-        )["passed"],
-        "synthetic_agent_id_blocked": not source_audit_quorum(
-            synthetic_id,
-            expected_source_commit=source_commit,
-            expected_source_hashes_sha256=source_hash,
-            expected_source_bundle_sha256=bundle_hash,
-            review_report_present=True,
-        )["passed"],
-        "altered_final_response_digest_blocked": not source_audit_quorum(
-            altered_response_digest,
-            expected_source_commit=source_commit,
-            expected_source_hashes_sha256=source_hash,
-            expected_source_bundle_sha256=bundle_hash,
-            review_report_present=True,
-        )["passed"],
+        "exact_source_audit_quorum_passes": evaluate(),
+        "missing_report_blocked": not evaluate(review_report_present=False),
+        "wrong_top_level_bundle_blocked": not evaluate(lambda audit, _root: audit.update({"source_bundle_sha256": "5" * 64})),
+        "wrong_top_level_runtime_blocked": not evaluate(lambda audit, _root: audit.update({"runtime_binary_sha256": "6" * 64})),
+        "wrong_reviewer_commit_blocked": not evaluate(
+            lambda audit, root: (
+                role_item(audit, "claim_boundary_adjudicator").update({"audited_commit": "7" * 40}),
+                mutate_receipt(audit, root, "claim_boundary_adjudicator", audited_commit="7" * 40),
+            )
+        ),
+        "missing_boundary_attestation_blocked": not evaluate(
+            lambda audit, _root: role_item(audit, "claim_boundary_adjudicator").update({"boundary_attestation": {"no_git_write": True}})
+        ),
+        "prior_package_reviewer_reuse_blocked": not evaluate(excluded={"source-reviewer-c2-1"}),
+        "c1_self_referential_receipt_schema_rejected": not evaluate(
+            lambda audit, root: mutate_receipt(
+                audit,
+                root,
+                "source_bundle_runtime_evidence_auditor",
+                schema="FAMILY10H_SOURCE_AUTHORITY_C1_REVIEWER_RECEIPT_V1",
+                final_response_sha256="8" * 64,
+            )
+        ),
+        "missing_review_body_blocked": not evaluate(
+            lambda audit, root: expected_source_audit_archive_paths("source_bundle_runtime_evidence_auditor", root)[0].unlink()
+        ),
+        "missing_receipt_blocked": not evaluate(
+            lambda audit, root: expected_source_audit_archive_paths("source_bundle_runtime_evidence_auditor", root)[1].unlink()
+        ),
+        "body_hash_mismatch_blocked": not evaluate(
+            lambda audit, _root: role_item(audit).update({"body_canonical_sha256": "9" * 64})
+        ),
+        "body_changed_after_ack_blocked": not evaluate(
+            lambda audit, root: expected_source_audit_archive_paths("source_bundle_runtime_evidence_auditor", root)[0].write_bytes(b"changed body\n")
+        ),
+        "receipt_changed_after_ack_blocked": not evaluate(
+            lambda audit, root: write_json(
+                expected_source_audit_archive_paths("source_bundle_runtime_evidence_auditor", root)[1],
+                {**role_item(audit)["review_receipt"], "model": "changed-model"},
+            )
+        ),
+        "wrong_thread_id_blocked": not evaluate(
+            lambda audit, root: mutate_receipt(audit, root, "source_bundle_runtime_evidence_auditor", thread_id="wrong-thread")
+        ),
+        "wrong_agent_id_blocked": not evaluate(
+            lambda audit, root: mutate_receipt(audit, root, "source_bundle_runtime_evidence_auditor", agent_id="wrong-agent")
+        ),
+        "wrong_role_blocked": not evaluate(
+            lambda audit, root: mutate_receipt(audit, root, "source_bundle_runtime_evidence_auditor", role="wrong role")
+        ),
+        "wrong_source_hash_blocked": not evaluate(
+            lambda audit, root: (
+                role_item(audit).update({"source_hashes_sha256": "a" * 64}),
+                mutate_receipt(audit, root, "source_bundle_runtime_evidence_auditor", source_hashes_sha256="a" * 64),
+            )
+        ),
+        "wrong_source_bundle_blocked": not evaluate(
+            lambda audit, root: (
+                role_item(audit).update({"source_bundle_sha256": "b" * 64}),
+                mutate_receipt(audit, root, "source_bundle_runtime_evidence_auditor", source_bundle_sha256="b" * 64),
+            )
+        ),
+        "wrong_runtime_binary_blocked": not evaluate(
+            lambda audit, root: (
+                role_item(audit).update({"runtime_binary_sha256": "c" * 64}),
+                mutate_receipt(audit, root, "source_bundle_runtime_evidence_auditor", runtime_binary_sha256="c" * 64),
+            )
+        ),
+        "parent_created_receipt_blocked": not evaluate(
+            lambda audit, root: (
+                role_item(audit).update({"evidence_origin": "parent-created"}),
+                mutate_receipt(audit, root, "source_bundle_runtime_evidence_auditor", evidence_origin="parent-created"),
+            )
+        ),
+        "self_authored_receipt_blocked": not evaluate(
+            lambda audit, root: (
+                role_item(audit).update({"self_authored": True}),
+                mutate_receipt(audit, root, "source_bundle_runtime_evidence_auditor", self_authored=True),
+            )
+        ),
+        "target_derived_receipt_blocked": not evaluate(
+            lambda audit, root: (
+                role_item(audit).update({"evidence_origin": "target-derived"}),
+                mutate_receipt(audit, root, "source_bundle_runtime_evidence_auditor", evidence_origin="target-derived"),
+            )
+        ),
+        "receipt_from_different_thread_blocked": not evaluate(
+            lambda audit, root: mutate_receipt(audit, root, "source_bundle_runtime_evidence_auditor", thread_id="other-reviewer-thread")
+        ),
+        "missing_second_acknowledgment_blocked": not evaluate(
+            lambda audit, _root: role_item(audit).pop("review_receipt")
+        ),
+        "duplicate_reviewer_blocked": not evaluate(
+            lambda audit, _root: role_item(audit).update({"agent_id": "source-reviewer-c2-1"})
+        ),
+        "missing_fourth_reviewer_blocked": not evaluate(
+            lambda audit, _root: audit["reviewer_verdicts"].pop("claim_boundary_adjudicator")
+        ),
+        "material_blocker_verdict_blocked": not evaluate(
+            lambda audit, _root: role_item(audit, "claim_boundary_adjudicator").update({"verdict": "MATERIAL_BLOCKER", "final_response": False})
+        ),
         "pre_contact_missing_or_mismatched_source_review_blocked": not read_source_authority_review_for_discovery(
             source_commit=source_commit,
             source_hashes_sha256=source_hash,
             source_bundle_sha256=bundle_hash,
+            runtime_binary_sha256=runtime_hash,
         )["passed"],
     }
     return {"schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUDIT_QUORUM_REGRESSION_V1", "passed": all(checks.values()), "checks": checks}
@@ -3427,7 +3730,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
     )
     invalid_discovery_bytes = (strict_json_dumps(invalid_discovery, indent=2) + "\n").encode("utf-8")
     invalid_discovery_file_sha = hashlib.sha256(invalid_discovery_bytes).hexdigest()
-    fake_source_hashes = {"source_hashes_sha256": "d" * 64}
+    fake_source_hashes = {"source_hashes_sha256": "d" * 64, "runtime_binary_authority": {"sha256": "f" * 64}}
     fake_bundle = {"path": "offline-fixture-bundle", "sha256": "e" * 64, "file_count": len(SOURCE_FILE_NAMES), "files": sorted(SOURCE_FILE_NAMES)}
 
     def fake_source_review(
@@ -3435,6 +3738,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         source_commit: str,
         source_hashes_sha256: str,
         source_bundle_sha256: str,
+        runtime_binary_sha256: str,
     ) -> dict[str, Any]:
         quorum = {"passed": True, "failures": [], "fixture": "production invalid copyback regression"}
         return {
@@ -3445,13 +3749,14 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
             "source_authority_commit": source_commit,
             "source_hashes_sha256": source_hashes_sha256,
             "source_bundle_sha256": source_bundle_sha256,
+            "runtime_binary_sha256": runtime_binary_sha256,
             "findings_sha256": "a" * 64,
             "review_report_sha256": "b" * 64,
         }
 
     def fake_materialize(_commit: str, destination: Path) -> None:
         destination.mkdir(parents=True, exist_ok=True)
-        for name in SOURCE_AUTHORITY_FILE_NAMES:
+        for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
             (destination / name).write_text("offline fixture\n", encoding="utf-8")
 
     def fake_transport_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
@@ -3570,6 +3875,7 @@ def controller_self_test() -> dict[str, Any]:
     runtime_gate = runtime_authority_gate_self_test()
     live_env_absent = target.validate_no_live_authority_env()
     source_hash_authority = source_hash_authority_regression()
+    runtime_overlay_mutation = runtime_binary_overlay_mutation_regression()
     temperature_authority = temperature_sensor_authority_regression()
     null_model_baseline = review_quorum_null_model_baseline()
     source_audit_regression = source_audit_quorum_regression()
@@ -3655,6 +3961,7 @@ def controller_self_test() -> dict[str, Any]:
         and runtime_gate["passed"]
         and live_env_absent["passed"]
         and source_hash_authority["passed"]
+        and runtime_overlay_mutation["passed"]
         and temperature_authority["passed"]
         and null_model_baseline["passed"]
         and source_audit_regression["passed"]
@@ -3669,6 +3976,7 @@ def controller_self_test() -> dict[str, Any]:
         "discovery_transport_self_test": discovery_transport,
         "runtime_authority_gate": runtime_gate,
         "source_hash_authority_regression": source_hash_authority,
+        "runtime_binary_overlay_mutation_regression": runtime_overlay_mutation,
         "temperature_sensor_authority_regression": temperature_authority,
         "review_quorum_null_model_baseline": null_model_baseline,
         "source_audit_quorum_regression": source_audit_regression,
@@ -3745,6 +4053,7 @@ def manifest() -> dict[str, Any]:
         expected_source_commit=source_authority_commit,
         expected_source_hashes_sha256=source_hashes["source_hashes_sha256"],
         expected_source_bundle_sha256=bundle["sha256"],
+        expected_runtime_binary_sha256=source_hashes["runtime_binary_authority"]["sha256"],
         review_report_present=SOURCE_AUDIT_REVIEW_PATH.exists(),
         excluded_agent_ids=prior_reviewer_ids,
     )
@@ -3805,6 +4114,7 @@ def manifest() -> dict[str, Any]:
             "source_authority_commit": source_authority_commit,
             "source_hashes_sha256": source_hashes["source_hashes_sha256"],
             "source_bundle_sha256": bundle["sha256"],
+            "runtime_binary_sha256": source_hashes["runtime_binary_authority"]["sha256"],
             "material_blocker_count": len(source_audit.get("material_blockers", [])) if isinstance(source_audit, dict) else None,
             "review_quorum": source_quorum,
         },
@@ -3840,6 +4150,7 @@ def manifest() -> dict[str, Any]:
         "expected_remote_output_root": public.EXPECTED_REMOTE_OUTPUT_ROOT,
         "schedule_hashes": schedule_sidecar,
         "source_hashes": source_hashes,
+        "runtime_binary_authority": source_hashes["runtime_binary_authority"],
         "source_bundle": bundle,
         "runtime_self_test": {
             "passed": runtime_result["passed"],
@@ -4064,7 +4375,7 @@ def commit_has_blob(commit: str, path: Path) -> bool:
 
 
 def final_evidence_paths() -> dict[str, Path]:
-    return {
+    paths = {
         "source audit findings": SOURCE_AUDIT_FINDINGS_PATH,
         "source audit report": SOURCE_AUDIT_REVIEW_PATH,
         "target discovery receipt": TARGET_DISCOVERY_RECEIPT,
@@ -4076,6 +4387,10 @@ def final_evidence_paths() -> dict[str, Path]:
         "manifest": MANIFEST_PATH,
         "manifest sidecar": MANIFEST_SHA_PATH,
     }
+    for role, (body_name, receipt_name) in SOURCE_AUDIT_REVIEW_ARCHIVE_FILES.items():
+        paths[f"source audit {role} body"] = SOURCE_AUDIT_REVIEW_DIR / body_name
+        paths[f"source audit {role} receipt"] = SOURCE_AUDIT_REVIEW_DIR / receipt_name
+    return paths
 
 
 def source_authority_commit_blob_verification(commit: str) -> dict[str, Any]:
@@ -4106,13 +4421,27 @@ def source_authority_commit_blob_verification(commit: str) -> dict[str, Any]:
         {k: v for k, v in source_hashes.items() if k != "source_hashes_sha256"}
     ):
         failures.append("source hash receipt blob digest mismatch")
+    runtime_authority = source_hashes.get("runtime_binary_authority", {}) if isinstance(source_hashes, dict) else {}
+    runtime_record = commit_blob_record(commit, BINARY_PATH)
+    files[RUNTIME_BINARY_NAME] = runtime_record
+    if not runtime_record["present"]:
+        failures.append("runtime binary blob missing")
+    elif not isinstance(runtime_authority, dict):
+        failures.append("runtime binary authority missing or malformed")
+    else:
+        if runtime_authority.get("git_blob_id") != runtime_record.get("blob_id"):
+            failures.append("runtime binary authority blob-id mismatch")
+        if runtime_authority.get("sha256") != runtime_record.get("sha256"):
+            failures.append("runtime binary authority sha256 mismatch")
+        if runtime_authority.get("size") != runtime_record.get("size"):
+            failures.append("runtime binary authority size mismatch")
     bundle_record = commit_blob_record(commit, SOURCE_BUNDLE)
     files[SOURCE_BUNDLE.name] = bundle_record
     bundle_reconstruction = source_bundle_reconstruction_from_commit(commit)
     if not bundle_record["present"]:
         failures.append("source bundle blob missing")
     elif not bundle_reconstruction["passed"] or bundle_reconstruction["sha256"] != bundle_record["sha256"]:
-        failures.append("source bundle blob does not match deterministic C1 reconstruction")
+        failures.append("source bundle blob does not match deterministic source reconstruction")
     for name in SOURCE_AUTHORITY_FILE_NAMES:
         if name in files:
             continue
@@ -4127,6 +4456,8 @@ def source_authority_commit_blob_verification(commit: str) -> dict[str, Any]:
         "files": files,
         "source_hashes_sha256": source_hashes.get("source_hashes_sha256") if isinstance(source_hashes, dict) else None,
         "source_bundle_sha256": bundle_record.get("sha256"),
+        "runtime_binary_sha256": runtime_record.get("sha256"),
+        "runtime_binary_blob_id": runtime_record.get("blob_id"),
         "source_bundle_reconstruction": bundle_reconstruction,
     }
 
@@ -4165,7 +4496,7 @@ def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict
     source_authority_blob_records: dict[str, dict[str, Any]] = {}
     changed_source_files: list[str] = []
     if commit_exists(source_commit) and commit_exists(evidence_commit):
-        for name in SOURCE_AUTHORITY_FILE_NAMES:
+        for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
             path = HERE / name
             source_record = commit_blob_record(source_commit, path)
             evidence_record = commit_blob_record(evidence_commit, path)
@@ -4173,12 +4504,12 @@ def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict
             source_authority_blob_records[name] = {
                 "source": source_record,
                 "evidence": evidence_record,
-                "unchanged_after_c1": unchanged,
+                "unchanged_after_c2": unchanged,
             }
             if not unchanged:
                 changed_source_files.append(name)
         if changed_source_files:
-            failures.append("evidence overlay changed source authority blobs")
+            failures.append("evidence overlay changed source/runtime authority blobs")
 
     evidence_blob_records = {
         label: commit_blob_record(evidence_commit, path) if commit_exists(evidence_commit) else {
@@ -4223,8 +4554,10 @@ def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict
         expected_source_commit=source_commit,
         expected_source_hashes_sha256=source_authority.get("source_hashes_sha256"),
         expected_source_bundle_sha256=source_authority.get("source_bundle_sha256"),
+        expected_runtime_binary_sha256=source_authority.get("runtime_binary_sha256"),
         review_report_present=evidence_blob_records.get("source audit report", {}).get("present") is True,
         excluded_agent_ids=exact_review_agent_ids(independent_review),
+        evidence_commit=evidence_commit,
     )
     if not source_quorum["passed"]:
         failures.append("source authority review quorum failed from evidence blob")
@@ -4235,6 +4568,7 @@ def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict
         "source_authority_commit": source_commit,
         "source_hashes_sha256": source_authority.get("source_hashes_sha256"),
         "source_bundle_sha256": source_authority.get("source_bundle_sha256"),
+        "runtime_binary_sha256": source_authority.get("runtime_binary_sha256"),
     }
 
     challenge = manifest_data.get("temperature_sensor_authority", {}).get("controller_challenge")
@@ -4242,11 +4576,13 @@ def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict
         failures.append("temperature challenge missing from evidence manifest")
         challenge = {}
     if challenge.get("authorized_commit") != source_commit:
-        failures.append("temperature challenge does not bind source C1")
+        failures.append("temperature challenge does not bind source authority commit")
     if challenge.get("source_hashes_sha256") != source_authority.get("source_hashes_sha256"):
         failures.append("temperature challenge source hash mismatch")
     if challenge.get("source_bundle_sha256") != source_authority.get("source_bundle_sha256"):
         failures.append("temperature challenge source bundle mismatch")
+    if challenge.get("runtime_binary_sha256") != source_authority.get("runtime_binary_sha256"):
+        failures.append("temperature challenge runtime binary mismatch")
     if challenge.get("source_authority_review") != evidence_source_review_binding:
         failures.append("temperature challenge source-review binding does not match evidence blobs")
     challenge_receipt = commit_blob_json(evidence_commit, DISCOVERY_CHALLENGE_PATH) if commit_exists(evidence_commit) else None
@@ -4352,6 +4688,7 @@ def replay_final_exact_objects(source_commit: str, evidence_commit: str) -> dict
         "source_authority": source_authority,
         "source_authority_blob_records": source_authority_blob_records,
         "changed_source_files_after_c1": changed_source_files,
+        "changed_source_files_after_c2": changed_source_files,
         "evidence_blob_records": evidence_blob_records,
         "independent_quorum": independent_quorum,
         "source_quorum": source_quorum,
@@ -4396,6 +4733,8 @@ def validate_final_exact_object_receipt(
         failures.append("final exact-object verification failure list does not match replay")
     if receipt.get("changed_source_files_after_c1") != replay["changed_source_files_after_c1"]:
         failures.append("final exact-object verification source-file delta does not match replay")
+    if receipt.get("changed_source_files_after_c2") not in (None, replay["changed_source_files_after_c2"]):
+        failures.append("final exact-object verification C2 source-file delta does not match replay")
     if receipt.get("source_authority") != replay["source_authority"]:
         failures.append("final exact-object source authority record does not match replay")
     if receipt.get("source_authority_blob_records") != replay["source_authority_blob_records"]:
@@ -4505,6 +4844,8 @@ def validate_receipt_chain(manifest_data: dict[str, Any]) -> list[str]:
             failures.append("source hashes receipt digest mismatch")
         if manifest_data.get("source_hashes") != source_hashes:
             failures.append("manifest source hashes mismatch")
+        if manifest_data.get("runtime_binary_authority") != source_hashes.get("runtime_binary_authority"):
+            failures.append("manifest runtime binary authority mismatch")
 
     offline = receipts.get("offline", {})
     if offline:
@@ -4534,6 +4875,16 @@ def validate_receipt_chain(manifest_data: dict[str, Any]) -> list[str]:
             failures.append("controller offline receipt link mismatch")
         if controller.get("transport_simulation_sha256") != receipts.get("transport", {}).get("transport_simulation_sha256"):
             failures.append("controller transport receipt link mismatch")
+
+    runtime = receipts.get("runtime", {})
+    if runtime:
+        if runtime.get("runtime_binary_authority") != source_hashes.get("runtime_binary_authority"):
+            failures.append("runtime receipt authority mismatch")
+        compile_equivalence = runtime.get("compile_equivalence")
+        if not isinstance(compile_equivalence, dict) or compile_equivalence.get("law") != "byte_exact_isolated_compile":
+            failures.append("runtime compile equivalence law missing")
+        elif compile_equivalence.get("passed") is not True:
+            failures.append("runtime compile equivalence did not pass")
 
     manifest_links = {
         ("runtime_self_test", "sha256"): receipts.get("runtime", {}).get("runtime_self_test_sha256"),
@@ -4720,6 +5071,7 @@ def final_exact_object_verification(*, evidence_commit: str | None = None) -> di
         "source_authority_commit": source_commit,
         "evidence_commit": evidence_commit,
         "changed_source_files_after_c1": replay["changed_source_files_after_c1"],
+        "changed_source_files_after_c2": replay["changed_source_files_after_c2"],
         "source_authority": replay["source_authority"],
         "source_authority_blob_records": replay["source_authority_blob_records"],
         "evidence_blob_records": replay["evidence_blob_records"],

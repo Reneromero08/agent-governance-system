@@ -1,4 +1,37 @@
 {
+  "runtime_binary_authority": {
+    "compile_command_identity": {
+      "flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2"
+      ],
+      "inputs": [
+        "family10h_carrier_tomography_runtime.c"
+      ],
+      "language_standard": "c11",
+      "output": "family10h_carrier_tomography_runtime"
+    },
+    "compile_equivalence_law": "byte_exact_isolated_compile",
+    "compiler_flags": [
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2"
+    ],
+    "compiler_identity": "gcc-compatible C compiler selected by controller find_c_compiler()",
+    "git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+    "path": "family10h_carrier_tomography_runtime",
+    "present": true,
+    "runtime_c_sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+    "runtime_h_sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
+    "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+    "size": 22928
+  },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_HASHES_V1",
   "source_files": {
     "CARRIER_TOMOGRAPHY_CONTRACT.md": {
@@ -30,13 +63,13 @@
       "size": 1368
     },
     "family10h_carrier_tomography_target.py": {
-      "sha256": "3ad92460eb9b042cf2e421154ff5eb8e0cbfa0cf7fa805ee7e56f503b514af99",
-      "size": 153775
+      "sha256": "d52d048c503e4528f9536f97269b949fc01071487a4eeaa1da3cbb25a3c2a625",
+      "size": 159739
     },
     "run_family10h_carrier_tomography_v1.py": {
-      "sha256": "6f50c1f6b575e08c5f239785bc43aee5bc53dc45ed1e49b9729215d507ea518e",
-      "size": 257548
+      "sha256": "ad5d7872c2171fb81210f51617bbd417d3d73755006f2fd96caf367038fbf21d",
+      "size": 279213
     }
   },
-  "source_hashes_sha256": "6a706f9e5489bb03204f04db2d9f36527a8ebd0651d5705d7067b1619ff489af"
+  "source_hashes_sha256": "489a66f073d111fda9ff09e09ee7aa4a7f5107541ce6bfb42d3b6d25af457124"
 }

@@ -84,7 +84,7 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "9a07d0949b70c5282a3373aa7240c8951795f4558d8b245c43a62a45d4e5d7a5",
+  "offline_validate_sha256": "021ccaf50666bde67369cf4723494541f8085bb078db47ee2492e3c9abddd31b",
   "pmu_acquisition_count": 0,
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -116,24 +116,41 @@
       "missing_authority_rejected_before_output_creation": true
     },
     "compile": {
+      "binary_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\carrier_tomography_runtime_gate_wfxomsgs\\family10h_carrier_tomography_runtime",
       "compile_command": [
         "C:\\Windows\\system32\\wsl.EXE",
         "bash",
         "-lc",
-        "gcc -std=c11 -Wall -Wextra -Werror -O2 -o \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime')\" \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime.c')\""
+        "gcc -std=c11 -Wall -Wextra -Werror -O2 -o \"$(wslpath 'C:\\Users\\rene_\\AppData\\Local\\Temp\\carrier_tomography_runtime_gate_wfxomsgs\\family10h_carrier_tomography_runtime')\" \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime.c')\""
       ],
+      "compile_command_identity": {
+        "flags": [
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-O2"
+        ],
+        "inputs": [
+          "family10h_carrier_tomography_runtime.c"
+        ],
+        "language_standard": "c11",
+        "output": "family10h_carrier_tomography_runtime"
+      },
       "compiler": [
         "C:\\Windows\\system32\\wsl.EXE",
         "gcc"
       ],
+      "compiler_identity": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0",
       "offline_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "offline_binary_size": 22928,
       "passed": true,
       "returncode": 0,
       "runtime_command": [
         "C:\\Windows\\system32\\wsl.EXE",
         "bash",
         "-lc",
-        "\"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime')\" --self-test"
+        "\"$(wslpath 'C:\\Users\\rene_\\AppData\\Local\\Temp\\carrier_tomography_runtime_gate_wfxomsgs\\family10h_carrier_tomography_runtime')\" --self-test"
       ],
       "stderr": "",
       "stdout": ""
@@ -141,29 +158,128 @@
     "live_invocation_count": 0,
     "passed": true,
     "pmu_acquisition_count": 0,
-    "runtime_authority_gate_self_test_sha256": "4cf2c54f8238fe145821fd3fb22890ab53a963c0aabbc788de0bebf24e9b2d6a",
+    "runtime_authority_gate_self_test_sha256": "bb9bbfece633dd26aef3e6119a96642ff52332e2836586f2d343c1d39e47fdc4",
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY_GATE_SELF_TEST_V1",
     "sensor_inventory_count": 0,
     "target_contact_count": 0
   },
+  "runtime_binary_overlay_mutation_regression": {
+    "binary_only_failures": [
+      "runtime authority: runtime binary authority mismatch git_blob_id",
+      "runtime authority: runtime binary authority mismatch sha256",
+      "runtime authority: runtime binary authority mismatch size"
+    ],
+    "checks": {
+      "binary_only_mutation_rejected": true,
+      "coherent_overlay_changes_runtime_blob_id": true,
+      "coherent_overlay_changes_runtime_sha256": true,
+      "coherent_overlay_source_root_can_be_made_internally_consistent": true,
+      "final_replay_policy_rejects_changed_runtime_blob": true
+    },
+    "coherent_overlay_runtime_authority": {
+      "compile_command_identity": {
+        "flags": [
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-O2"
+        ],
+        "inputs": [
+          "family10h_carrier_tomography_runtime.c"
+        ],
+        "language_standard": "c11",
+        "output": "family10h_carrier_tomography_runtime"
+      },
+      "compile_equivalence_law": "byte_exact_isolated_compile",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2"
+      ],
+      "compiler_identity": "gcc-compatible C compiler selected by controller find_c_compiler()",
+      "git_blob_id": "f910c7d39b4a21e2c4eb70f8a6a58a3f37ae7aea",
+      "path": "family10h_carrier_tomography_runtime",
+      "present": true,
+      "runtime_c_sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+      "runtime_h_sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+      "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
+      "sha256": "d54bba22830b5f0726be9cdc0cad64b3a480d37c4daabe3e5181fa0eb954c347",
+      "size": 22956
+    },
+    "coherent_overlay_validation_passed": true,
+    "passed": true,
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_OVERLAY_MUTATION_REGRESSION_V1",
+    "source_runtime_authority": {
+      "compile_command_identity": {
+        "flags": [
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-O2"
+        ],
+        "inputs": [
+          "family10h_carrier_tomography_runtime.c"
+        ],
+        "language_standard": "c11",
+        "output": "family10h_carrier_tomography_runtime"
+      },
+      "compile_equivalence_law": "byte_exact_isolated_compile",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2"
+      ],
+      "compiler_identity": "gcc-compatible C compiler selected by controller find_c_compiler()",
+      "git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+      "path": "family10h_carrier_tomography_runtime",
+      "present": true,
+      "runtime_c_sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+      "runtime_h_sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+      "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
+      "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "size": 22928
+    }
+  },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "967348e02357c50904ca63aa7bb88be4ee161884c34c02ef9e84192972bc50f2",
+  "self_test_sha256": "cf02c982424935751976b5e5d49e9264322de575f529a84a9979f621fcc7ca09",
   "sensor_inventory_count": 0,
   "source_audit_quorum_regression": {
     "checks": {
-      "altered_final_response_digest_blocked": true,
+      "body_changed_after_ack_blocked": true,
+      "body_hash_mismatch_blocked": true,
+      "c1_self_referential_receipt_schema_rejected": true,
+      "duplicate_reviewer_blocked": true,
       "exact_source_audit_quorum_passes": true,
+      "material_blocker_verdict_blocked": true,
       "missing_boundary_attestation_blocked": true,
+      "missing_fourth_reviewer_blocked": true,
+      "missing_receipt_blocked": true,
       "missing_report_blocked": true,
+      "missing_review_body_blocked": true,
+      "missing_second_acknowledgment_blocked": true,
+      "parent_created_receipt_blocked": true,
       "pre_contact_missing_or_mismatched_source_review_blocked": true,
       "prior_package_reviewer_reuse_blocked": true,
-      "provenance_free_receipt_blocked": true,
+      "receipt_changed_after_ack_blocked": true,
+      "receipt_from_different_thread_blocked": true,
       "self_authored_receipt_blocked": true,
-      "synthetic_agent_id_blocked": true,
       "target_derived_receipt_blocked": true,
+      "wrong_agent_id_blocked": true,
       "wrong_reviewer_commit_blocked": true,
-      "wrong_top_level_bundle_blocked": true
+      "wrong_role_blocked": true,
+      "wrong_runtime_binary_blocked": true,
+      "wrong_source_bundle_blocked": true,
+      "wrong_source_hash_blocked": true,
+      "wrong_thread_id_blocked": true,
+      "wrong_top_level_bundle_blocked": true,
+      "wrong_top_level_runtime_blocked": true
     },
     "passed": true,
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUDIT_QUORUM_REGRESSION_V1"
