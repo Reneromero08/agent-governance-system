@@ -36,6 +36,8 @@ SOURCE_FILE_NAMES = [
     "family10h_carrier_tomography_runtime.h",
     "run_family10h_carrier_tomography_v1.py",
 ]
+RUNTIME_BINARY_NAME = "family10h_carrier_tomography_runtime"
+RUNTIME_AUTHORITY_FILE_NAMES = [RUNTIME_BINARY_NAME]
 SOURCE_AUTHORITY_FILE_NAMES = SOURCE_FILE_NAMES + [
     "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
     "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
@@ -55,7 +57,7 @@ REQUIRED_REVIEW_ROLES = {
 SOURCE_AUDIT_REQUIRED_REVIEW_ROLES = {
     "physical_sensor_authority_auditor": "physical sensor-authority auditor",
     "discovery_transport_custody_auditor": "discovery transport and custody auditor",
-    "source_bundle_evidence_auditor": "source/bundle and evidence auditor",
+    "source_bundle_runtime_evidence_auditor": "source/bundle/runtime evidence auditor",
     "claim_boundary_adjudicator": "claim-boundary adjudicator",
 }
 REVIEW_ROLE_ALIASES = {
@@ -70,21 +72,27 @@ SOURCE_AUDIT_ROLE_ALIASES = {
     "physical_sensor_authority": "physical_sensor_authority_auditor",
     "discovery_transport_and_custody_auditor": "discovery_transport_custody_auditor",
     "discovery_transport_custody_auditor": "discovery_transport_custody_auditor",
-    "source_bundle_and_evidence_auditor": "source_bundle_evidence_auditor",
-    "source_bundle_evidence_auditor": "source_bundle_evidence_auditor",
+    "source_bundle_and_evidence_auditor": "source_bundle_runtime_evidence_auditor",
+    "source_bundle_evidence_auditor": "source_bundle_runtime_evidence_auditor",
+    "source_bundle_runtime_evidence_auditor": "source_bundle_runtime_evidence_auditor",
+    "source_bundle_and_runtime_evidence_auditor": "source_bundle_runtime_evidence_auditor",
+    "source_bundle_runtime_and_evidence_auditor": "source_bundle_runtime_evidence_auditor",
     "claim_boundary_adjudicator": "claim_boundary_adjudicator",
 }
 SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = {
     "schema",
     "issuer",
+    "receipt_kind",
     "thread_id",
     "agent_id",
     "role",
     "model",
-    "final_response_sha256",
+    "review_body_sha256",
+    "review_body_canonicalization",
     "audited_commit",
     "source_hashes_sha256",
     "source_bundle_sha256",
+    "runtime_binary_sha256",
     "no_git_write",
     "no_file_edits",
     "no_checkout_mutation",
@@ -94,9 +102,11 @@ SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = {
     "self_authored",
     "evidence_origin",
 }
-SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = "FAMILY10H_SOURCE_AUTHORITY_C1_REVIEWER_RECEIPT_V1"
+SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = "FAMILY10H_SOURCE_AUTHORITY_C2_REVIEWER_RECEIPT_V2"
 SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER = "codex_subagent_read_only_review"
-SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN = "codex_subagent_final_response"
+SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN = "codex_subagent_detached_receipt"
+SOURCE_AUDIT_REVIEW_BODY_CANONICALIZATION = "utf8_lf_single_trailing_newline"
+SOURCE_AUDIT_RECEIPT_KIND = "detached_review_body_acknowledgment"
 TEMPERATURE_IDENTITY_FIELDS = [
     "hwmon_name",
     "sensor_label",
@@ -149,6 +159,7 @@ REQUIRED_TEMPERATURE_AUTHORITY_CHALLENGE_KEYS = {
     "transaction_run_id",
     "source_hashes_sha256",
     "source_bundle_sha256",
+    "runtime_binary_sha256",
     "schedule_canonical_sha256",
     "schedule_json_sha256",
     "schedule_tsv_sha256",
@@ -164,6 +175,7 @@ SOURCE_REVIEW_BINDING_KEYS = {
     "source_authority_commit",
     "source_hashes_sha256",
     "source_bundle_sha256",
+    "runtime_binary_sha256",
 }
 CONTACT_COUNTER_KEYS = ["target_contact_count", "sensor_inventory_count", "live_invocation_count", "pmu_acquisition_count"]
 FROZEN_CONTACT_COUNTERS = {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}
@@ -286,9 +298,72 @@ def validate_source_file_authority(source_root: Path) -> dict[str, Any]:
         if expected_item.get("sha256") != public.sha256_file(path) or expected_item.get("size") != path.stat().st_size:
             failures.append(f"source file authority mismatch {name}")
             break
+    runtime_authority = validate_runtime_binary_authority(
+        source_root,
+        expected=receipt.get("runtime_binary_authority") if isinstance(receipt.get("runtime_binary_authority"), dict) else None,
+    )
+    if not runtime_authority["passed"]:
+        failures.extend("runtime authority: " + item for item in runtime_authority["failures"])
     if receipt.get("source_hashes_sha256") != public.digest({k: v for k, v in receipt.items() if k != "source_hashes_sha256"}):
         failures.append("source hash receipt digest mismatch")
-    return {"passed": not failures, "failures": failures, "checked_files": len(expected)}
+    return {
+        "passed": not failures,
+        "failures": failures,
+        "checked_files": len(expected),
+        "runtime_binary_authority": runtime_authority.get("authority"),
+    }
+
+
+def git_blob_id_for_bytes(data: bytes) -> str:
+    return hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\0" + data).hexdigest()
+
+
+def runtime_binary_authority(source_root: Path) -> dict[str, Any]:
+    binary_path = source_root / RUNTIME_BINARY_NAME
+    source_c_path = source_root / "family10h_carrier_tomography_runtime.c"
+    source_h_path = source_root / "family10h_carrier_tomography_runtime.h"
+    if not binary_path.exists():
+        return {
+            "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
+            "path": RUNTIME_BINARY_NAME,
+            "present": False,
+        }
+    payload = binary_path.read_bytes()
+    return {
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
+        "path": RUNTIME_BINARY_NAME,
+        "present": True,
+        "git_blob_id": git_blob_id_for_bytes(payload),
+        "sha256": hashlib.sha256(payload).hexdigest(),
+        "size": len(payload),
+        "compile_equivalence_law": "byte_exact_isolated_compile",
+        "compile_command_identity": {
+            "language_standard": "c11",
+            "flags": ["-std=c11", "-Wall", "-Wextra", "-Werror", "-O2"],
+            "inputs": ["family10h_carrier_tomography_runtime.c"],
+            "output": RUNTIME_BINARY_NAME,
+        },
+        "compiler_identity": "gcc-compatible C compiler selected by controller find_c_compiler()",
+        "compiler_flags": ["-std=c11", "-Wall", "-Wextra", "-Werror", "-O2"],
+        "runtime_c_sha256": public.sha256_file(source_c_path) if source_c_path.exists() else None,
+        "runtime_h_sha256": public.sha256_file(source_h_path) if source_h_path.exists() else None,
+    }
+
+
+def validate_runtime_binary_authority(source_root: Path, expected: dict[str, Any] | None = None) -> dict[str, Any]:
+    failures: list[str] = []
+    authority = runtime_binary_authority(source_root)
+    if authority.get("present") is not True:
+        failures.append("runtime binary missing")
+    if expected is None:
+        failures.append("runtime binary authority missing from source receipt")
+    elif set(expected) != set(authority):
+        failures.append("runtime binary authority field mismatch")
+    else:
+        for key, value in authority.items():
+            if expected.get(key) != value:
+                failures.append(f"runtime binary authority mismatch {key}")
+    return {"passed": not failures, "failures": failures, "authority": authority}
 
 
 def portable_basename(value: Any) -> str:
@@ -328,11 +403,15 @@ def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = Fa
         expected_pairs = {
             "schema": SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA,
             "issuer": SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER,
+            "receipt_kind": SOURCE_AUDIT_RECEIPT_KIND,
             "agent_id": item.get("agent_id"),
             "role": role_name,
+            "review_body_sha256": item.get("body_canonical_sha256"),
+            "review_body_canonicalization": SOURCE_AUDIT_REVIEW_BODY_CANONICALIZATION,
             "audited_commit": item.get("audited_commit"),
             "source_hashes_sha256": item.get("source_hashes_sha256"),
             "source_bundle_sha256": item.get("source_bundle_sha256"),
+            "runtime_binary_sha256": item.get("runtime_binary_sha256"),
             "evidence_origin": SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN,
             "self_authored": False,
             "no_git_write": True,
@@ -345,8 +424,8 @@ def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = Fa
         for key, expected in expected_pairs.items():
             if receipt.get(key) != expected:
                 receipt_failures.append(f"source audit reviewer receipt {key} mismatch {role}")
-        if re.fullmatch(r"[0-9a-f]{64}", str(receipt.get("final_response_sha256", ""))) is None:
-            receipt_failures.append(f"source audit reviewer final response digest invalid {role}")
+        if re.fullmatch(r"[0-9a-f]{64}", str(receipt.get("review_body_sha256", ""))) is None:
+            receipt_failures.append(f"source audit reviewer body digest invalid {role}")
         if not isinstance(receipt.get("thread_id"), str) or not receipt["thread_id"]:
             receipt_failures.append(f"source audit reviewer thread id missing {role}")
         if not isinstance(receipt.get("model"), str) or not receipt["model"]:
@@ -378,6 +457,8 @@ def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = Fa
             "audited_commit": item.get("audited_commit"),
             "source_hashes_sha256": item.get("source_hashes_sha256"),
             "source_bundle_sha256": item.get("source_bundle_sha256"),
+            "runtime_binary_sha256": item.get("runtime_binary_sha256"),
+            "body_canonical_sha256": item.get("body_canonical_sha256"),
             "boundary_attestation": item.get("boundary_attestation"),
             "review_receipt": item.get("review_receipt"),
             "passed": passed,
@@ -506,6 +587,7 @@ def validate_manifest_review_section(
     expected_source_commit: str | None = None,
     expected_source_hashes_sha256: str | None = None,
     expected_source_bundle_sha256: str | None = None,
+    expected_runtime_binary_sha256: str | None = None,
 ) -> set[str]:
     findings_path = validate_bound_file(source_root, section.get("findings_path"), section.get("findings_sha256"), f"{label} findings", failures)
     validate_bound_file(source_root, section.get("review_report_path"), section.get("review_report_sha256"), f"{label} report", failures)
@@ -526,6 +608,8 @@ def validate_manifest_review_section(
             failures.append(f"{label} source-hashes mismatch")
         if findings.get("source_bundle_sha256") != expected_source_bundle_sha256:
             failures.append(f"{label} source-bundle mismatch")
+        if findings.get("runtime_binary_sha256") != expected_runtime_binary_sha256:
+            failures.append(f"{label} runtime-binary mismatch")
         if findings.get("review_report_present") is not True:
             failures.append(f"{label} report presence not asserted")
         for role_name, role in (quorum.get("roles") or {}).items():
@@ -535,6 +619,8 @@ def validate_manifest_review_section(
                 failures.append(f"{label} role {role_name} source-hashes mismatch")
             if role.get("source_bundle_sha256") != expected_source_bundle_sha256:
                 failures.append(f"{label} role {role_name} source-bundle mismatch")
+            if role.get("runtime_binary_sha256") != expected_runtime_binary_sha256:
+                failures.append(f"{label} role {role_name} runtime-binary mismatch")
             boundary = role.get("boundary_attestation")
             if not isinstance(boundary, dict) or boundary.get("no_git_write") is not True or boundary.get("no_target_contact") is not True:
                 failures.append(f"{label} role {role_name} boundary attestation missing")
@@ -562,6 +648,12 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
     runtime_path = source_root / "family10h_carrier_tomography_runtime"
     if binary_hash and runtime_path.exists() and public.sha256_file(runtime_path) != binary_hash:
         failures.append("runtime binary hash mismatch")
+    runtime_authority = validate_runtime_binary_authority(
+        source_root,
+        expected=manifest.get("runtime_binary_authority") if isinstance(manifest.get("runtime_binary_authority"), dict) else None,
+    )
+    if not runtime_authority["passed"]:
+        failures.extend("runtime binary authority: " + item for item in runtime_authority["failures"])
     bundle_hash = manifest.get("source_bundle", {}).get("sha256")
     bundle_path = source_root / "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz"
     if not bundle_hash:
@@ -580,6 +672,8 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
         source_hash_data = read_json(source_hash_receipt)
         if source_hash_data.get("source_hashes_sha256") != manifest_source_hash:
             failures.append("manifest source hash binding mismatch")
+        if source_hash_data.get("runtime_binary_authority") != manifest.get("runtime_binary_authority"):
+            failures.append("manifest runtime binary authority binding mismatch")
     temperature_authority = manifest.get("temperature_sensor_authority", {})
     temperature_authority_result = validate_manifest_temperature_authority(manifest, source_root)
     failures.extend(temperature_authority_result["failures"])
@@ -604,12 +698,15 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
             expected_source_commit=manifest.get("source_authority_review", {}).get("source_authority_commit"),
             expected_source_hashes_sha256=manifest.get("source_hashes", {}).get("source_hashes_sha256"),
             expected_source_bundle_sha256=manifest.get("source_bundle", {}).get("sha256"),
+            expected_runtime_binary_sha256=manifest.get("runtime_binary_authority", {}).get("sha256")
+            if isinstance(manifest.get("runtime_binary_authority"), dict)
+            else None,
         )
         if independent_agent_ids & source_agent_ids:
             failures.append("source authority review reused independent reviewer agent ids")
         source_quorum = manifest.get("source_authority_review", {}).get("review_quorum", {})
         if source_quorum.get("passed") is not True:
-            failures.append("frozen package lacks exact C1 source-review quorum")
+            failures.append("frozen package lacks exact C2 source-review quorum")
         source_review = manifest.get("source_authority_review", {})
         if not isinstance(source_review.get("source_authority_commit"), str) or re.fullmatch(r"[0-9a-f]{40}", source_review.get("source_authority_commit", "")) is None:
             failures.append("frozen package source-authority commit missing or malformed")
@@ -617,6 +714,8 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
             failures.append("source authority review source-hashes binding mismatch")
         if source_review.get("source_bundle_sha256") != manifest.get("source_bundle", {}).get("sha256"):
             failures.append("source authority review source-bundle binding mismatch")
+        if source_review.get("runtime_binary_sha256") != manifest.get("runtime_binary_authority", {}).get("sha256"):
+            failures.append("source authority review runtime-binary binding mismatch")
         if manifest.get("offline_validate", {}).get("passed") is not True:
             failures.append("frozen package lacks passing offline validation")
         validate_target_offline_receipts(source_root, manifest, failures)
@@ -715,9 +814,9 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
                     if not isinstance(source_blob_records, dict):
                         failures.append("final exact-object source authority blob records missing")
                     else:
-                        for name in SOURCE_AUTHORITY_FILE_NAMES:
+                        for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
                             record = source_blob_records.get(name)
-                            if not isinstance(record, dict) or record.get("unchanged_after_c1") is not True:
+                            if not isinstance(record, dict) or record.get("unchanged_after_c2") is not True:
                                 failures.append(f"final exact-object source authority blob changed {name}")
     return {
         "passed": not failures,
@@ -836,6 +935,7 @@ def validate_temperature_authority_challenge(
         for field in (
             "source_hashes_sha256",
             "source_bundle_sha256",
+            "runtime_binary_sha256",
             "schedule_canonical_sha256",
             "schedule_json_sha256",
             "schedule_tsv_sha256",
@@ -1651,7 +1751,7 @@ def source_mutation_fixtures(source_root: Path) -> dict[str, Any]:
     baseline = validate_source_file_authority(source_root)
     with tempfile.TemporaryDirectory(prefix="carrier_tomography_source_mutation_") as tmp:
         temp_root = Path(tmp)
-        for name in SOURCE_AUTHORITY_FILE_NAMES:
+        for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
             path = source_root / name
             if path.exists():
                 (temp_root / name).write_bytes(path.read_bytes())
@@ -1660,7 +1760,7 @@ def source_mutation_fixtures(source_root: Path) -> dict[str, Any]:
         mutated_before = validate_source_file_authority(temp_root)
     with tempfile.TemporaryDirectory(prefix="carrier_tomography_source_mutation_") as tmp:
         temp_root = Path(tmp)
-        for name in SOURCE_AUTHORITY_FILE_NAMES:
+        for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
             path = source_root / name
             if path.exists():
                 (temp_root / name).write_bytes(path.read_bytes())
@@ -2024,6 +2124,7 @@ def expected_discovery_challenge(
         "transaction_run_id": public.TRANSACTION_RUN_ID,
         "source_hashes_sha256": source_hashes["source_hashes_sha256"],
         "source_bundle_sha256": deterministic_source_bundle_sha256(source_root),
+        "runtime_binary_sha256": source_hashes["runtime_binary_authority"]["sha256"],
         "schedule_canonical_sha256": schedule_sidecar["canonical_sha256"],
         "schedule_json_sha256": schedule_sidecar["json_sha256"],
         "schedule_tsv_sha256": schedule_sidecar["tsv_sha256"],
@@ -2043,6 +2144,7 @@ def fixture_source_review_binding(source_root: Path, authorized_commit: str) -> 
         "source_authority_commit": authorized_commit,
         "source_hashes_sha256": source_hashes["source_hashes_sha256"],
         "source_bundle_sha256": deterministic_source_bundle_sha256(source_root),
+        "runtime_binary_sha256": source_hashes["runtime_binary_authority"]["sha256"],
     }
 
 
@@ -2086,7 +2188,14 @@ def validate_discovery_challenge(source_root: Path, challenge: dict[str, Any], c
     else:
         if set(review) != SOURCE_REVIEW_BINDING_KEYS:
             failures.append("controller challenge source authority review field mismatch")
-        for field in ["findings_sha256", "review_report_sha256", "review_quorum_sha256", "source_hashes_sha256", "source_bundle_sha256"]:
+        for field in [
+            "findings_sha256",
+            "review_report_sha256",
+            "review_quorum_sha256",
+            "source_hashes_sha256",
+            "source_bundle_sha256",
+            "runtime_binary_sha256",
+        ]:
             if re.fullmatch(r"[0-9a-f]{64}", str(review.get(field, ""))) is None:
                 failures.append(f"controller challenge source authority review {field} invalid")
         if review.get("source_authority_commit") != authorized_commit:
@@ -2095,6 +2204,8 @@ def validate_discovery_challenge(source_root: Path, challenge: dict[str, Any], c
             failures.append("controller challenge source authority review source-hashes mismatch")
         if review.get("source_bundle_sha256") != challenge.get("source_bundle_sha256"):
             failures.append("controller challenge source authority review source-bundle mismatch")
+        if review.get("runtime_binary_sha256") != challenge.get("runtime_binary_sha256"):
+            failures.append("controller challenge source authority review runtime-binary mismatch")
     return {
         "passed": not failures,
         "failures": failures,
@@ -2197,7 +2308,7 @@ def discover_temperature_sensor_authority(
 
 def copy_source_fixture(source_root: Path, destination: Path) -> None:
     destination.mkdir(parents=True, exist_ok=True)
-    for name in SOURCE_AUTHORITY_FILE_NAMES:
+    for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES:
         path = source_root / name
         require(path.exists(), f"source fixture missing {name}")
         (destination / name).write_bytes(path.read_bytes())
