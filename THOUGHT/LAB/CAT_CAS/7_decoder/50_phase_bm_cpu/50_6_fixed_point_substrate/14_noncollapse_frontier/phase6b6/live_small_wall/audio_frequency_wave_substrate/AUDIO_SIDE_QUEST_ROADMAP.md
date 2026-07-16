@@ -1,12 +1,13 @@
 # CAT_CAS Audio-Frequency Wave Substrate Side Quest Roadmap
 
-**Status:** `ACTIVE_PARALLEL_LANE__RECURSIVE_PHASE_FOUNDATION_STARTED`  
+**Status:** `ACTIVE_PARALLEL_LANE__RECURSIVE_PHASE_REFERENCE_CANDIDATE`  
 **Roadmap version:** `1.2`  
 **Branch:** `codex/audio-frequency-wave-substrate`  
 **Base main commit:** `32b5af119a03bc48bb00f279e6cc0014406147ad`  
 **Frozen offline foundation commit:** `f028dfd292d2dd0fd11380459417d5b60f936ee3`  
 **Roadmap commit binding:** the Git commit containing this file  
 **Current accepted result:** `AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED`  
+**Recursive phase-tree software reference candidate:** `true`  
 **Recursive phase-tree software reference established:** `false`  
 **Recursive catalytic Ising emulator established:** `false`  
 **Physical carrier frozen:** `false`  
@@ -204,16 +205,21 @@ wrong-hierarchy inverse failure
 canonical deterministic tree identity
 ```
 
-Local pre-commit result:
+Committed-source reproduction candidate:
 
 ```text
-tests: 11 PASS, 0 FAIL
-reference source SHA-256: a8e794a7b864b5b60de59fddeb61cfb7feac849856fbc3550ba2570469faa4c0
-claim ceiling: SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY
+source commit:              c1075adee64a687e3787a65d501a8e4090d8e1b1
+source Git blob SHA-1:      f0c5b6003b84ac758ad8cb7353fce569b2292497
+source SHA-256:             a8e794a7b864b5b60de59fddeb61cfb7feac849856fbc3550ba2570469faa4c0
+exact local bytes matched:  true
+tests:                      11 PASS, 0 FAIL
+result SHA-256:             12ac30f54cac83319fa2e565440717cd64509c134041460eace65666e32e94fe
+claim ceiling:              SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY
 ```
 
-This local receipt is implementation evidence only. Repository or CI qualification must
-re-run the source from committed bytes before any established token is emitted.
+This establishes a source-bound candidate only. An independent clean-checkout rerun,
+committed result verification, changed-path review, and repository gates remain required
+before the established token is emitted.
 
 ---
 
@@ -241,7 +247,7 @@ distinguishes hierarchy through phase while amplitude-only controls remain null,
 mutates a borrowed software carrier, and restores it under the correct inverse
 ```
 
-Current state: **implementation started, not established**.
+Current state: **committed source-bound candidate, not established**.
 
 ### R1: Recursive wave operator
 
@@ -376,8 +382,8 @@ transducer operation, or physical restoration is authorized by this roadmap.
 The next bounded implementation packet is:
 
 ```text
-1. commit and re-run the thin recursive phase-tree reference
-2. emit a committed machine-readable result receipt
+1. rerun the committed reference from an independent clean checkout
+2. verify the committed machine-readable result receipt
 3. add deterministic complex/WAV fixtures derived from complete trees
 4. add exact tree serialization and parser round-trip
 5. add matched hierarchy controls with stronger spectrum matching
@@ -396,6 +402,7 @@ evidence, `SMALL_WALL_STATE.md`, live hardware, or preserved stashes.
 ```text
 AUDIO_RECURSIVE_CATALYTIC_ARCHITECTURE_CORRECTED
 AUDIO_RECURSIVE_PHASE_FOUNDATION_STARTED
+AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_CANDIDATE
 AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_NOT_YET_ESTABLISHED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 SMALL_WALL_CROSSED_NOT_PROMOTED
