@@ -1,0 +1,362 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "catalytic_predecessor_law": {
+      "const": "independent_reproduced_predecessor_no_latch_feedback",
+      "type": "string"
+    },
+    "claim_ceiling": {
+      "const": "SOFTWARE_RECURSIVE_PHASE_ISING_EMULATOR_ONLY",
+      "type": "string"
+    },
+    "collapse_stage": {
+      "const": "after_native_trajectory_return",
+      "type": "string"
+    },
+    "energy_tolerance": {
+      "const": 1e-12,
+      "type": "number"
+    },
+    "final_lock_tolerance": {
+      "const": 1e-08,
+      "type": "number"
+    },
+    "initial_orientations_rad": {
+      "const": [
+        0.31,
+        1.27,
+        -2.11,
+        2.53,
+        -0.83
+      ],
+      "items": {
+        "exclusiveMaximum": 3.141592653589793,
+        "minimum": -3.141592653589793,
+        "type": "number"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array"
+    },
+    "initial_state_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "lock_final": {
+      "const": 1.2,
+      "type": "number"
+    },
+    "lock_schedule": {
+      "const": "linear_in_step_index_0_to_999",
+      "type": "string"
+    },
+    "lock_start": {
+      "const": 0.0,
+      "type": "number"
+    },
+    "minimum_unique_optimum_gap": {
+      "const": 1.0,
+      "type": "number"
+    },
+    "native_dynamics": {
+      "const": "phase_difference_plus_field_plus_second_harmonic",
+      "type": "string"
+    },
+    "oracle_stage": {
+      "const": "after_collapse_boundary",
+      "type": "string"
+    },
+    "parents": {
+      "additionalProperties": false,
+      "properties": {
+        "r0": {
+          "additionalProperties": false,
+          "properties": {
+            "claim_ceiling": {
+              "const": "SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY",
+              "type": "string"
+            },
+            "fixture_manifest_sha256": {
+              "const": "7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa",
+              "type": "string"
+            },
+            "fixture_set_sha256": {
+              "const": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+              "type": "string"
+            },
+            "reference_result_sha256": {
+              "const": "46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab",
+              "type": "string"
+            },
+            "reference_tests_sha256": {
+              "const": "3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c",
+              "type": "string"
+            },
+            "source_byte_count": {
+              "const": 77043,
+              "type": "integer"
+            },
+            "source_git_blob_sha1": {
+              "const": "956adb0ae8e84c091c1dc1e3de650be374fa96d1",
+              "type": "string"
+            },
+            "source_sha256": {
+              "const": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887",
+              "type": "string"
+            }
+          },
+          "required": [
+            "claim_ceiling",
+            "fixture_manifest_sha256",
+            "fixture_set_sha256",
+            "reference_result_sha256",
+            "reference_tests_sha256",
+            "source_byte_count",
+            "source_git_blob_sha1",
+            "source_sha256"
+          ],
+          "title": "established_parent_identity",
+          "type": "object"
+        },
+        "r1": {
+          "additionalProperties": false,
+          "properties": {
+            "claim_ceiling": {
+              "const": "SOFTWARE_COMPLETE_TREE_TEMPORAL_RECURRENCE_REFERENCE_ONLY",
+              "type": "string"
+            },
+            "fixture_manifest_sha256": {
+              "const": "28cbcec8997f6f5eb49dc13e6bf919342af0863a5ba6cb1a70f10dea6fcdbc4e",
+              "type": "string"
+            },
+            "fixture_set_sha256": {
+              "const": "da62112c0459c49673675182e67011899d8ee1e841df3650c0c4a0aeecd137dd",
+              "type": "string"
+            },
+            "reference_result_sha256": {
+              "const": "37cb46f6806555cfaec60910f9b5b92fbcac5bf1d0e976fb67e7f2d2c0ec4139",
+              "type": "string"
+            },
+            "reference_tests_sha256": {
+              "const": "5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5",
+              "type": "string"
+            },
+            "source_byte_count": {
+              "const": 107055,
+              "type": "integer"
+            },
+            "source_git_blob_sha1": {
+              "const": "3685be9ae63dcd213b2155c8cd66f6f81e45c071",
+              "type": "string"
+            },
+            "source_sha256": {
+              "const": "26b2cfaa63f5fe6bfa97f6d9f64b97d0ee944bc39ac45d406092aea257b2179e",
+              "type": "string"
+            }
+          },
+          "required": [
+            "claim_ceiling",
+            "fixture_manifest_sha256",
+            "fixture_set_sha256",
+            "reference_result_sha256",
+            "reference_tests_sha256",
+            "source_byte_count",
+            "source_git_blob_sha1",
+            "source_sha256"
+          ],
+          "title": "established_parent_identity",
+          "type": "object"
+        },
+        "r2s": {
+          "additionalProperties": false,
+          "properties": {
+            "claim_ceiling": {
+              "const": "SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY",
+              "type": "string"
+            },
+            "fixture_manifest_sha256": {
+              "const": "5e8bfa247c513d189774ec671265b2d3dc1ea97004e5e8c40baa090f26db3cad",
+              "type": "string"
+            },
+            "fixture_set_sha256": {
+              "const": "e6e51ae655e184f8f43b2afa9fe0c75041046966b4cdecd6fde008b02b684aa8",
+              "type": "string"
+            },
+            "reference_result_sha256": {
+              "const": "bee5727f68fc10ee047d666198b3f060f669058e966aa44802e270f90abbdeeb",
+              "type": "string"
+            },
+            "reference_tests_sha256": {
+              "const": "ef888d8d8b48b2fbdc7897d6d42aa2f63f8c300517f6d9b8911346bf285438c6",
+              "type": "string"
+            },
+            "source_byte_count": {
+              "const": 117873,
+              "type": "integer"
+            },
+            "source_git_blob_sha1": {
+              "const": "63eed91f74252082b1258755bdd4371a2a48e105",
+              "type": "string"
+            },
+            "source_sha256": {
+              "const": "6c55861da950caf0738bb5ffb676f0c458a593a805ddd49419d6b2b427f6c33c",
+              "type": "string"
+            }
+          },
+          "required": [
+            "claim_ceiling",
+            "fixture_manifest_sha256",
+            "fixture_set_sha256",
+            "reference_result_sha256",
+            "reference_tests_sha256",
+            "source_byte_count",
+            "source_git_blob_sha1",
+            "source_sha256"
+          ],
+          "title": "established_parent_identity",
+          "type": "object"
+        }
+      },
+      "required": [
+        "r0",
+        "r1",
+        "r2s"
+      ],
+      "title": "established_parent_packet",
+      "type": "object"
+    },
+    "portable_metric_atol": {
+      "const": 1e-12,
+      "type": "number"
+    },
+    "portable_metric_rtol": {
+      "const": 1e-12,
+      "type": "number"
+    },
+    "problem_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "schema": {
+      "const": "recursive_catalytic_ising_contract_v1",
+      "type": "string"
+    },
+    "site_count": {
+      "const": 5,
+      "type": "integer"
+    },
+    "site_ids": {
+      "const": [
+        "site0",
+        "site1",
+        "site2",
+        "site3",
+        "site4"
+      ],
+      "type": "array"
+    },
+    "source_binding": {
+      "additionalProperties": false,
+      "properties": {
+        "byte_count": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "git_blob_sha1": {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        },
+        "lf_count": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "line_endings": {
+          "const": "LF",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "byte_count",
+        "git_blob_sha1",
+        "lf_count",
+        "line_endings",
+        "sha256"
+      ],
+      "title": "qualified_source_binding",
+      "type": "object"
+    },
+    "step_count": {
+      "const": 1000,
+      "type": "integer"
+    },
+    "time_step": {
+      "const": 0.03,
+      "type": "number"
+    },
+    "trajectory_byte_count": {
+      "const": 40040,
+      "type": "integer"
+    },
+    "trajectory_dtype": {
+      "const": "<f8",
+      "type": "string"
+    },
+    "trajectory_format": {
+      "const": "raw_little_endian_float64_phase_matrix",
+      "type": "string"
+    },
+    "trajectory_shape": {
+      "const": [
+        1001,
+        5
+      ],
+      "type": "array"
+    },
+    "tree_identity_record_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "wrap_interval": {
+      "const": "[-pi,pi)",
+      "type": "string"
+    }
+  },
+  "required": [
+    "catalytic_predecessor_law",
+    "claim_ceiling",
+    "collapse_stage",
+    "energy_tolerance",
+    "final_lock_tolerance",
+    "initial_orientations_rad",
+    "initial_state_sha256",
+    "lock_final",
+    "lock_schedule",
+    "lock_start",
+    "minimum_unique_optimum_gap",
+    "native_dynamics",
+    "oracle_stage",
+    "parents",
+    "portable_metric_atol",
+    "portable_metric_rtol",
+    "problem_sha256",
+    "schema",
+    "site_count",
+    "site_ids",
+    "source_binding",
+    "step_count",
+    "time_step",
+    "trajectory_byte_count",
+    "trajectory_dtype",
+    "trajectory_format",
+    "trajectory_shape",
+    "tree_identity_record_sha256",
+    "wrap_interval"
+  ],
+  "title": "recursive_catalytic_ising_contract_v1",
+  "type": "object"
+}

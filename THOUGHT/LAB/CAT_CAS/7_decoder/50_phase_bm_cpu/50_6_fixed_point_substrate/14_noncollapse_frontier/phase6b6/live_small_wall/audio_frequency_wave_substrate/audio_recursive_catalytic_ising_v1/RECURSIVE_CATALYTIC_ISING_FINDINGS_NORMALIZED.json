@@ -1,0 +1,35 @@
+{
+  "closed_material_count": 2,
+  "findings": [
+    {
+      "closure": "The final proof shape-hashes and scans the exact ten-node transitive native closure and rejects 26 root, helper, method, lifecycle, and module variants.",
+      "id": "RCI-MECHANISM-001",
+      "opened_by": "AUD-RCI-01-PHASE-MECHANISM",
+      "severity": "MATERIAL",
+      "status": "CLOSED",
+      "summary": "Reachable native helper and method bodies were outside the initial four-root AST freeze."
+    },
+    {
+      "closure": "All seven schemas are substantive; the tree record uses five complete strict positional schemas with items false and directly rejects numeric and missing-field entries.",
+      "id": "RCI-CUSTODY-001",
+      "opened_by": "AUD-RCI-03-CUSTODY-ORACLE",
+      "severity": "MATERIAL",
+      "status": "CLOSED",
+      "summary": "Initial schemas were shallow, and the first tree-array repair used Draft 2020-12 items semantics incorrectly."
+    }
+  ],
+  "open_material_count": 0,
+  "open_minor_count": 0,
+  "review_verdicts": {
+    "AUD-RCI-01-PHASE-MECHANISM": "PASS",
+    "AUD-RCI-02-NONCOLLAPSE": "PASS",
+    "AUD-RCI-03-CUSTODY-ORACLE": "PASS",
+    "AUD-RCI-04-CLAIMS": "PASS"
+  },
+  "schema": "recursive_catalytic_ising_normalized_findings_v1",
+  "source_binding": {
+    "byte_count": 146825,
+    "git_blob_sha1": "ac01c64d15498355daa844c7e3adba99b2fcc73a",
+    "sha256": "076fa3f392a9a0f1307e222deeabef38d558bf93db10c317af481ee40bf17b48"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "coupling_matrix": {
+      "const": [
+        [
+          0.0,
+          0.0,
+          1.0,
+          2.0,
+          -2.0
+        ],
+        [
+          0.0,
+          0.0,
+          2.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          2.0,
+          0.0,
+          2.0,
+          -1.0
+        ],
+        [
+          2.0,
+          -1.0,
+          2.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          -1.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "items": {
+        "items": {
+          "type": "number"
+        },
+        "maxItems": 5,
+        "minItems": 5,
+        "type": "array"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array"
+    },
+    "field_vector": {
+      "const": [
+        -0.5,
+        0.0,
+        0.5,
+        -1.0,
+        -0.5
+      ],
+      "items": {
+        "type": "number"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array"
+    },
+    "schema": {
+      "const": "recursive_catalytic_ising_problem_v1",
+      "type": "string"
+    },
+    "site_ids": {
+      "const": [
+        "site0",
+        "site1",
+        "site2",
+        "site3",
+        "site4"
+      ],
+      "type": "array"
+    }
+  },
+  "required": [
+    "coupling_matrix",
+    "field_vector",
+    "schema",
+    "site_ids"
+  ],
+  "title": "recursive_catalytic_ising_problem_v1",
+  "type": "object"
+}

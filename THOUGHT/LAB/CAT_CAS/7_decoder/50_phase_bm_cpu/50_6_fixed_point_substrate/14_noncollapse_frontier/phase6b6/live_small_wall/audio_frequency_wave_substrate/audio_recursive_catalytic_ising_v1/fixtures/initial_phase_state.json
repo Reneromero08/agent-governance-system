@@ -1,0 +1,20 @@
+{
+  "orientations_rad": [
+    0.31000000000000005,
+    1.2699999999999996,
+    -2.11,
+    2.5299999999999994,
+    -0.8300000000000001
+  ],
+  "schema": "recursive_catalytic_ising_phase_state_v1",
+  "site_ids": [
+    "site0",
+    "site1",
+    "site2",
+    "site3",
+    "site4"
+  ],
+  "stage": "initial_before_native_evolution",
+  "trajectory_row_index": 0,
+  "tree_identity_record_sha256": "091fa1687933abee7f14c3159254ee95ebaa550e821e49faa53b5f3141f807c1"
+}

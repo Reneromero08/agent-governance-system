@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "claim_ceiling": {
+      "const": "SOFTWARE_RECURSIVE_PHASE_ISING_EMULATOR_ONLY",
+      "type": "string"
+    },
+    "collapse_stage": {
+      "const": "after_native_trajectory_return",
+      "type": "string"
+    },
+    "final_antipodal_residual": {
+      "maximum": 1e-08,
+      "minimum": 0.0,
+      "type": "number"
+    },
+    "final_state_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "next_energy": {
+      "type": "number"
+    },
+    "observed_energy": {
+      "type": "number"
+    },
+    "observed_spins": {
+      "items": {
+        "enum": [
+          -1,
+          1
+        ],
+        "type": "integer"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array"
+    },
+    "optimum_energy": {
+      "type": "number"
+    },
+    "optimum_gap": {
+      "minimum": 1.0,
+      "type": "number"
+    },
+    "optimum_spins": {
+      "items": {
+        "enum": [
+          -1,
+          1
+        ],
+        "type": "integer"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array"
+    },
+    "oracle_table_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "schema": {
+      "const": "recursive_catalytic_ising_collapse_receipt_v1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "claim_ceiling",
+    "collapse_stage",
+    "final_antipodal_residual",
+    "final_state_sha256",
+    "next_energy",
+    "observed_energy",
+    "observed_spins",
+    "optimum_energy",
+    "optimum_gap",
+    "optimum_spins",
+    "oracle_table_sha256",
+    "schema"
+  ],
+  "title": "recursive_catalytic_ising_collapse_receipt_v1",
+  "type": "object"
+}

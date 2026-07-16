@@ -1,0 +1,26 @@
+{
+  "claim_ceiling": "SOFTWARE_RECURSIVE_PHASE_ISING_EMULATOR_ONLY",
+  "collapse_stage": "after_native_trajectory_return",
+  "final_antipodal_residual": 7.105427357601002e-15,
+  "final_state_sha256": "cf2ca24cccff4dc43e99bc879c402d6779a0622bd8fb08db580c26d8aaf5e053",
+  "next_energy": -11.5,
+  "observed_energy": -12.5,
+  "observed_spins": [
+    -1,
+    -1,
+    -1,
+    -1,
+    1
+  ],
+  "optimum_energy": -12.5,
+  "optimum_gap": 1.0,
+  "optimum_spins": [
+    -1,
+    -1,
+    -1,
+    -1,
+    1
+  ],
+  "oracle_table_sha256": "8977eafb8fadc6a6eac3734822188bf04a1ab3106b92768d8c710c23c5ae964f",
+  "schema": "recursive_catalytic_ising_collapse_receipt_v1"
+}

@@ -1,0 +1,83 @@
+{
+  "catalytic_predecessor_law": "independent_reproduced_predecessor_no_latch_feedback",
+  "claim_ceiling": "SOFTWARE_RECURSIVE_PHASE_ISING_EMULATOR_ONLY",
+  "collapse_stage": "after_native_trajectory_return",
+  "energy_tolerance": 1e-12,
+  "final_lock_tolerance": 1e-08,
+  "initial_orientations_rad": [
+    0.31,
+    1.27,
+    -2.11,
+    2.53,
+    -0.83
+  ],
+  "initial_state_sha256": "f8cdf2176904053c98bc02c331ee4b18314bee924c6c0d8b0c9ce25144d9f4ea",
+  "lock_final": 1.2,
+  "lock_schedule": "linear_in_step_index_0_to_999",
+  "lock_start": 0.0,
+  "minimum_unique_optimum_gap": 1.0,
+  "native_dynamics": "phase_difference_plus_field_plus_second_harmonic",
+  "oracle_stage": "after_collapse_boundary",
+  "parents": {
+    "r0": {
+      "claim_ceiling": "SOFTWARE_RECURSIVE_PHASE_TREE_REFERENCE_ONLY",
+      "fixture_manifest_sha256": "7112307fa4406cf4880736545a88e56c45fafc6f27cd0a6518a1b40963fb62fa",
+      "fixture_set_sha256": "6afb8adb0d14ab2e5a750df519ced073475fbf1554ee8be0732a2ebde5e15925",
+      "reference_result_sha256": "46e2cc7cb72217c647f8653ebe61a0dbf2060a222de0eec6624fbb7fbcb94eab",
+      "reference_tests_sha256": "3cecfa9f0d79babc4f9d76d7b463a1b8f825e209f2af592e590c52686dc95b2c",
+      "source_byte_count": 77043,
+      "source_git_blob_sha1": "956adb0ae8e84c091c1dc1e3de650be374fa96d1",
+      "source_sha256": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887"
+    },
+    "r1": {
+      "claim_ceiling": "SOFTWARE_COMPLETE_TREE_TEMPORAL_RECURRENCE_REFERENCE_ONLY",
+      "fixture_manifest_sha256": "28cbcec8997f6f5eb49dc13e6bf919342af0863a5ba6cb1a70f10dea6fcdbc4e",
+      "fixture_set_sha256": "da62112c0459c49673675182e67011899d8ee1e841df3650c0c4a0aeecd137dd",
+      "reference_result_sha256": "37cb46f6806555cfaec60910f9b5b92fbcac5bf1d0e976fb67e7f2d2c0ec4139",
+      "reference_tests_sha256": "5bf39db581fbc4f5cc290d1ad0ba34bc87315c2d1cf4777acf12d1d8a35023b5",
+      "source_byte_count": 107055,
+      "source_git_blob_sha1": "3685be9ae63dcd213b2155c8cd66f6f81e45c071",
+      "source_sha256": "26b2cfaa63f5fe6bfa97f6d9f64b97d0ee944bc39ac45d406092aea257b2179e"
+    },
+    "r2s": {
+      "claim_ceiling": "SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY",
+      "fixture_manifest_sha256": "5e8bfa247c513d189774ec671265b2d3dc1ea97004e5e8c40baa090f26db3cad",
+      "fixture_set_sha256": "e6e51ae655e184f8f43b2afa9fe0c75041046966b4cdecd6fde008b02b684aa8",
+      "reference_result_sha256": "bee5727f68fc10ee047d666198b3f060f669058e966aa44802e270f90abbdeeb",
+      "reference_tests_sha256": "ef888d8d8b48b2fbdc7897d6d42aa2f63f8c300517f6d9b8911346bf285438c6",
+      "source_byte_count": 117873,
+      "source_git_blob_sha1": "63eed91f74252082b1258755bdd4371a2a48e105",
+      "source_sha256": "6c55861da950caf0738bb5ffb676f0c458a593a805ddd49419d6b2b427f6c33c"
+    }
+  },
+  "portable_metric_atol": 1e-12,
+  "portable_metric_rtol": 1e-12,
+  "problem_sha256": "4bb1d08c4b22843a28b1323751b1469416c37253b520f4b672a0423d267cbfbb",
+  "schema": "recursive_catalytic_ising_contract_v1",
+  "site_count": 5,
+  "site_ids": [
+    "site0",
+    "site1",
+    "site2",
+    "site3",
+    "site4"
+  ],
+  "source_binding": {
+    "byte_count": 146825,
+    "git_blob_sha1": "ac01c64d15498355daa844c7e3adba99b2fcc73a",
+    "lf_count": 3335,
+    "line_endings": "LF",
+    "sha256": "076fa3f392a9a0f1307e222deeabef38d558bf93db10c317af481ee40bf17b48"
+  },
+  "step_count": 1000,
+  "time_step": 0.03,
+  "trajectory_byte_count": 40040,
+  "trajectory_dtype": "<f8",
+  "trajectory_format": "raw_little_endian_float64_phase_matrix",
+  "trajectory_shape": [
+    1001,
+    5
+  ],
+  "tree_identity_record_sha256": "091fa1687933abee7f14c3159254ee95ebaa550e821e49faa53b5f3141f807c1",
+  "wrap_interval": "[-pi,pi)"
+}
