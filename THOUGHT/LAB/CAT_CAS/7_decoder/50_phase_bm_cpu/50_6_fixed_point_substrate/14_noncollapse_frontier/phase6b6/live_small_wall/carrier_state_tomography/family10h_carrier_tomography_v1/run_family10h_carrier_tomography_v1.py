@@ -33,6 +33,7 @@ SOURCE_BUNDLE = HERE / "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz"
 SOURCE_HASHES = HERE / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json"
 TEMPERATURE_SENSOR_AUTHORITY = HERE / "CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_AUTHORITY.json"
 TARGET_DISCOVERY_RECEIPT = HERE / "CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json"
+TARGET_DISCOVERY_FAILURE_PATH = HERE / "CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_FAILURE.json"
 DISCOVERY_TRANSPORT_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT.json"
 DISCOVERY_CHALLENGE_PATH = HERE / "CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE.json"
 DISCOVERY_ATTEMPT_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.json"
@@ -42,6 +43,7 @@ ATTEMPT_HISTORY_DIR = HERE / "SENSOR_AUTHORITY_ATTEMPT_HISTORY"
 ATTEMPT_HISTORY_INDEX_PATH = ATTEMPT_HISTORY_DIR / "ATTEMPT_HISTORY_INDEX.json"
 C3_ATTEMPT_HISTORY_DIR = ATTEMPT_HISTORY_DIR / "c3_55e059bc_failed_affinity_precheck"
 C3_SOURCE_AUTHORITY_COMMIT = "55e059bc7acaafee3feacddac2069d7b5e40edd1"
+C4_SOURCE_AUTHORITY_COMMIT = "092d0a655e94d7c00f69efc1236cf1c8a2896ee1"
 C3_FAILURE_EVIDENCE_COMMIT = "35844e76317017a73dc0fa83f7e976642b80c66f"
 C3_FAILURE_REASON = "TargetError: platform affinity excludes frozen source or receiver CPU"
 FINAL_OBJECT_VERIFY_PATH = HERE / "CARRIER_TOMOGRAPHY_FINAL_OBJECT_VERIFY.json"
@@ -79,7 +81,7 @@ GENERATED_RECEIPTS = [
     MANIFEST_SHA_PATH,
 ]
 
-EXPECTED_STARTING_HEAD = "7647e872122e75edd07bdd423d9493a2796c8fd9"
+EXPECTED_STARTING_HEAD = "298049f515612a7a7bb2348cbe55cd86d33380fb"
 COMMIT_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_COMMIT_BINDING"
 MANIFEST_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_MANIFEST_SHA256"
 AUTHORITY_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_LIVE_AUTHORITY"
@@ -127,6 +129,11 @@ SOURCE_AUDIT_REVIEW_VERSIONED = {
         "review_dir": HERE / "SOURCE_AUTHORITY_C4_REVIEW",
         "findings_path": HERE / "SOURCE_AUTHORITY_C4_REVIEW_NORMALIZED.json",
         "review_path": HERE / "SOURCE_AUTHORITY_C4_REVIEW_REPORTS.md",
+    },
+    "C5": {
+        "review_dir": HERE / "SOURCE_AUTHORITY_C5_REVIEW",
+        "findings_path": HERE / "SOURCE_AUTHORITY_C5_REVIEW_NORMALIZED.json",
+        "review_path": HERE / "SOURCE_AUTHORITY_C5_REVIEW_REPORTS.md",
     },
 }
 SOURCE_AUDIT_REQUIRED_REVIEW_ROLES = {
@@ -293,17 +300,27 @@ def expected_source_audit_archive_paths(role: str, review_root: Path = SOURCE_AU
     return review_root / body_name, review_root / receipt_name
 
 
-def source_audit_paths_for_commit(source_commit: str | None) -> dict[str, Path]:
+def source_audit_version_for_commit(source_commit: str | None) -> str:
     if source_commit == C3_SOURCE_AUTHORITY_COMMIT:
+        return "C3"
+    if source_commit == C4_SOURCE_AUTHORITY_COMMIT:
+        return "C4"
+    return "C5"
+
+
+def source_audit_paths_for_commit(source_commit: str | None) -> dict[str, Path]:
+    version = source_audit_version_for_commit(source_commit)
+    if version == "C3":
         return {
             "review_dir": SOURCE_AUDIT_REVIEW_DIR,
             "findings_path": SOURCE_AUDIT_FINDINGS_PATH,
             "review_path": SOURCE_AUDIT_REVIEW_PATH,
         }
+    prefix = f"SOURCE_AUTHORITY_{version}_REVIEW"
     return {
-        "review_dir": HERE / "SOURCE_AUTHORITY_C4_REVIEW",
-        "findings_path": HERE / "SOURCE_AUTHORITY_C4_REVIEW_NORMALIZED.json",
-        "review_path": HERE / "SOURCE_AUTHORITY_C4_REVIEW_REPORTS.md",
+        "review_dir": HERE / prefix,
+        "findings_path": HERE / f"{prefix}_NORMALIZED.json",
+        "review_path": HERE / f"{prefix}_REPORTS.md",
     }
 
 
@@ -623,6 +640,15 @@ def run(command: list[str], *, timeout: float, check: bool = True, cwd: Path | N
             f"command failed rc={completed.returncode}: {' '.join(command)}\nSTDOUT:\n{completed.stdout}\nSTDERR:\n{completed.stderr}"
         )
     return completed
+
+
+def bounded_text(value: str, limit: int = 8192) -> dict[str, Any]:
+    value = value or ""
+    return {"text": value[:limit], "truncated": len(value) > limit, "char_count": len(value)}
+
+
+def sha256_text(value: str) -> str:
+    return hashlib.sha256((value or "").encode("utf-8", errors="replace")).hexdigest()
 
 
 def git_text(*args: str) -> str:
@@ -1117,6 +1143,12 @@ ATTEMPT_STATE_ORDER = {
     "complete": 6,
 }
 ATTEMPT_COUNTER_KEYS = ["target_contact_count", "sensor_inventory_count", "live_invocation_count", "pmu_acquisition_count"]
+LEGACY_AUTHORITATIVE_ATTEMPT_ACCOUNTING_FIELDS = {
+    "attempt_version",
+    "per_attempt_counters",
+    "prior_cumulative_lane_counters",
+    "cumulative_lane_counters",
+}
 ATTEMPT_STATE_SEQUENCE = [state for state, _index in sorted(ATTEMPT_STATE_ORDER.items(), key=lambda item: item[1])]
 ATTEMPT_STATE_COUNTERS = {
     "claimed_pre_contact": {"target_contact_count": 0, "sensor_inventory_count": 0, "live_invocation_count": 0, "pmu_acquisition_count": 0},
@@ -1227,16 +1259,65 @@ def validate_attempt_history_index(index: dict[str, Any]) -> dict[str, Any]:
 
 
 def history_cumulative_counters_or_zero() -> dict[str, int]:
+    raise ControllerError("historical lane counters are reporting metadata, not active transaction authority")
+
+
+def known_historical_lane_contact_report() -> dict[str, Any]:
+    components: list[dict[str, Any]] = []
+    failures: list[str] = []
+    counters = zero_attempt_counters()
     history = read_attempt_history_index()
     if history["passed"]:
-        return {key: history["cumulative_counters"][key] for key in ATTEMPT_COUNTER_KEYS}
-    return zero_attempt_counters()
+        c3 = {key: history["cumulative_counters"][key] for key in ATTEMPT_COUNTER_KEYS}
+        counters = counter_sum(counters, c3)
+        components.append({
+            "component": "C3 sensor-authority attempt history",
+            "authoritative_for_active_transaction": False,
+            "counters": c3,
+        })
+    else:
+        failures.extend("historical C3 metadata unavailable: " + item for item in history["failures"])
+    affinity_dir = HERE / "AFFINITY_CAPABILITY_OBSERVATION"
+    if affinity_dir.exists():
+        for receipt_path in sorted(affinity_dir.glob("*.sha256.json")):
+            try:
+                receipt = read_json(receipt_path)
+            except (OSError, json.JSONDecodeError, ValueError) as exc:
+                failures.append(f"affinity observation metadata unreadable {receipt_path.name}: {exc}")
+                continue
+            contact_count = receipt.get("target_contact_count_for_this_observation")
+            if not is_strict_int(contact_count):
+                failures.append(f"affinity observation contact counter invalid {receipt_path.name}")
+                continue
+            component_counters = {
+                "target_contact_count": contact_count,
+                "sensor_inventory_count": int(receipt.get("sensor_inventory_count", 0) or 0),
+                "live_invocation_count": int(receipt.get("live_invocation_count", 0) or 0),
+                "pmu_acquisition_count": int(receipt.get("pmu_acquisition_count", 0) or 0),
+            }
+            counters = counter_sum(counters, component_counters)
+            components.append({
+                "component": f"affinity observation {receipt_path.name}",
+                "authoritative_for_active_transaction": False,
+                "observation_sha256": receipt.get("observation_sha256"),
+                "counters": component_counters,
+            })
+    return {
+        "schema": "FAMILY10H_HISTORICAL_LANE_CONTACT_REPORT_V1",
+        "authoritative_for_active_transaction": False,
+        "complete_cryptographic_lane_ledger_claimed": False,
+        "passed": not failures,
+        "failures": failures,
+        "known_counters_before_active_attempt": counters,
+        "components": components,
+    }
 
 
 def active_attempt_paths() -> list[Path]:
     return [
         TEMPERATURE_SENSOR_AUTHORITY,
         TARGET_DISCOVERY_RECEIPT,
+        TARGET_DISCOVERY_FAILURE_PATH,
         DISCOVERY_TRANSPORT_PATH,
         DISCOVERY_ATTEMPT_PATH,
         DISCOVERY_ATTEMPT_JOURNAL_PATH,
@@ -1250,19 +1331,16 @@ def active_attempt_paths_present() -> list[Path]:
 
 
 def enrich_attempt_accounting(receipt: dict[str, Any]) -> None:
-    active = {key: receipt[key] for key in ATTEMPT_COUNTER_KEYS if key in receipt}
-    if set(active) != set(ATTEMPT_COUNTER_KEYS):
-        return
-    baseline = history_cumulative_counters_or_zero()
-    receipt.setdefault("attempt_version", "C4")
-    receipt.setdefault("per_attempt_counters", {"attempt_version": receipt["attempt_version"], **active})
-    receipt.setdefault("prior_cumulative_lane_counters", baseline)
-    receipt.setdefault("cumulative_lane_counters", counter_sum(baseline, active))
+    # C5 deliberately has no cumulative-history enrichment. Active counters are
+    # authoritative only when they match the current state machine below.
+    return
 
 
 def validate_discovery_attempt_transition(previous: dict[str, Any] | None, receipt: dict[str, Any]) -> None:
     state = receipt.get("attempt_state")
     require(state in ATTEMPT_STATE_ORDER, "discovery attempt state missing or invalid")
+    for field in LEGACY_AUTHORITATIVE_ATTEMPT_ACCOUNTING_FIELDS:
+        require(field not in receipt, f"legacy cumulative accounting field is non-authoritative and rejected: {field}")
     for key in ATTEMPT_COUNTER_KEYS:
         require(is_strict_counter(receipt.get(key)), f"discovery attempt counter missing or invalid {key}")
     require(
@@ -2112,9 +2190,7 @@ def acquire_temperature_sensor_authority(
     existing_active_paths = active_attempt_paths_present()
     if existing_active_paths:
         raise ControllerError("second discovery attempt rejected: authority, discovery, transport, cleanup, or attempt receipt already exists")
-    history = read_attempt_history_index()
-    if not history["passed"]:
-        raise ControllerError("C4 acquisition requires archived C3 attempt history: " + ",".join(history["failures"]))
+    historical_lane_report = known_historical_lane_contact_report()
     source_hashes = read_source_hash_authority()
     schedule_sidecar = read_json(public.SCHEDULE_SHA)
     bundle = read_existing_source_bundle_authority()
@@ -2131,7 +2207,7 @@ def acquire_temperature_sensor_authority(
         runtime_binary_sha256=source_hashes["runtime_binary_authority"]["sha256"],
     )
     if not source_review["passed"]:
-        raise ControllerError("source authority C3 review gate failed before target contact: " + ",".join(source_review["failures"]))
+        raise ControllerError("source authority C5 review gate failed before target contact: " + ",".join(source_review["failures"]))
     challenge = build_temperature_authority_challenge(
         source_hashes=source_hashes,
         source_bundle_sha256=bundle["sha256"],
@@ -2160,6 +2236,7 @@ def acquire_temperature_sensor_authority(
     receipt_copied_state_persisted = False
     target_discovery_file_sha: str | None = None
     transfer_plan: dict[str, Any] | None = None
+    target_failure: dict[str, Any] | None = None
     write_discovery_attempt_receipt(
         {
             "passed": False,
@@ -2277,46 +2354,54 @@ def acquire_temperature_sensor_authority(
             )
             completed = run(command, timeout=120.0, check=False)
             if completed.returncode != 0:
-                raise ControllerError(f"target discovery failed rc={completed.returncode}: {completed.stderr or completed.stdout}")
-            sha_command = f"sha256sum {sh_quote(remote_receipt)} | awk '{{print $1}}'"
-            command = ["ssh", "-o", "BatchMode=yes", target_host, sha_command]
-            commands.append(command)
-            remote_sha = run(command, timeout=20.0).stdout.strip()
-            command = ["scp", "-q", f"{target_host}:{remote_receipt}", str(local_copyback)]
-            commands.append(command)
-            run(command, timeout=30.0)
-            local_sha = public.sha256_file(local_copyback)
-            if local_sha != remote_sha:
-                raise ControllerError("discovery copy-back hash mismatch")
-            target_discovery_file_sha = local_sha
-            discovery = read_json(local_copyback)
-            authority = build_temperature_sensor_authority_receipt(
-                discovery=discovery,
-                controller_challenge=challenge,
-                controller_nonce=nonce,
-            )
-            write_discovery_attempt_receipt(
-                {
-                    "passed": False,
-                    "attempt_state": "receipt_copied_cleanup_pending",
-                    "source_authority_commit": source_commit,
-                    "source_authority": source_commit_check,
-                    "source_authority_review": source_review,
-                    "controller_challenge_sha256": public.digest(challenge),
-                    "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
-                    "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
-                    "discovery_transfer_plan": transfer_plan,
-                    "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256"),
-                    "target_discovery_receipt_file_sha256": local_sha,
-                    "discovery_transfer_plan": transfer_plan,
-                    "target_contact_count": 1,
-                    "sensor_inventory_count": 1,
-                    "live_invocation_count": 0,
-                    "pmu_acquisition_count": 0,
-                    "commands": commands,
+                target_failure = {
+                    "target_return_code": completed.returncode,
+                    "stdout_sha256": sha256_text(completed.stdout),
+                    "stderr_sha256": sha256_text(completed.stderr),
+                    "bounded_stdout": bounded_text(completed.stdout),
+                    "bounded_stderr": bounded_text(completed.stderr),
+                    "attempt_state": "target_command_invoked",
+                    "active_counters": dict(ATTEMPT_STATE_COUNTERS["target_command_invoked"]),
                 }
-            )
-            receipt_copied_state_persisted = True
+            else:
+                sha_command = f"sha256sum {sh_quote(remote_receipt)} | awk '{{print $1}}'"
+                command = ["ssh", "-o", "BatchMode=yes", target_host, sha_command]
+                commands.append(command)
+                remote_sha = run(command, timeout=20.0).stdout.strip()
+                command = ["scp", "-q", f"{target_host}:{remote_receipt}", str(local_copyback)]
+                commands.append(command)
+                run(command, timeout=30.0)
+                local_sha = public.sha256_file(local_copyback)
+                if local_sha != remote_sha:
+                    raise ControllerError("discovery copy-back hash mismatch")
+                target_discovery_file_sha = local_sha
+                discovery = read_json(local_copyback)
+                authority = build_temperature_sensor_authority_receipt(
+                    discovery=discovery,
+                    controller_challenge=challenge,
+                    controller_nonce=nonce,
+                )
+                write_discovery_attempt_receipt(
+                    {
+                        "passed": False,
+                        "attempt_state": "receipt_copied_cleanup_pending",
+                        "source_authority_commit": source_commit,
+                        "source_authority": source_commit_check,
+                        "source_authority_review": source_review,
+                        "controller_challenge_sha256": public.digest(challenge),
+                        "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
+                        "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
+                        "discovery_transfer_plan": transfer_plan,
+                        "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256"),
+                        "target_discovery_receipt_file_sha256": local_sha,
+                        "target_contact_count": 1,
+                        "sensor_inventory_count": 1,
+                        "live_invocation_count": 0,
+                        "pmu_acquisition_count": 0,
+                        "commands": commands,
+                    }
+                )
+                receipt_copied_state_persisted = True
         finally:
             if remote_root_owned or remote_root_may_exist:
                 cleanup["attempted"] = True
@@ -2416,6 +2501,34 @@ def acquire_temperature_sensor_authority(
                             "commands": commands,
                         }
                     )
+    if target_failure is not None:
+        failure_receipt = {
+            "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_FAILURE_V1",
+            "passed": False,
+            "source_authority_commit": source_commit,
+            "source_authority_review": source_review,
+            "controller_challenge_sha256": public.digest(challenge),
+            "challenge_receipt_canonical_sha256": challenge_receipt["challenge_receipt_canonical_sha256"],
+            "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
+            "discovery_transfer_plan": transfer_plan,
+            "target_failure": target_failure,
+            "attempt_state": "target_command_invoked",
+            "active_counters": dict(ATTEMPT_STATE_COUNTERS["target_command_invoked"]),
+            "target_contact_count": 1,
+            "sensor_inventory_count": 0,
+            "live_invocation_count": 0,
+            "pmu_acquisition_count": 0,
+            "runtime_launch_count": 0,
+            "cleanup": cleanup,
+            "cleanup_result": cleanup.get("passed"),
+            "remote_root_absence_result": cleanup.get("absence_verified"),
+            "commands": commands,
+        }
+        failure_receipt["target_discovery_failure_sha256"] = public.digest(
+            {k: v for k, v in failure_receipt.items() if k != "target_discovery_failure_sha256"}
+        )
+        write_json_atomic(TARGET_DISCOVERY_FAILURE_PATH, failure_receipt)
+        raise ControllerError(f"target discovery failed rc={target_failure['target_return_code']}: bounded failure persisted")
     if not cleanup["passed"] or not cleanup["absence_verified"]:
         raise ControllerError("discovery cleanup or remote-root absence verification failed")
     if discovery is None or authority is None:
@@ -3983,6 +4096,19 @@ def discovery_attempt_journal_regression() -> dict[str, Any]:
         {k: v for k, v in binding_mutated[2].items() if k != "discovery_attempt_sha256"}
     )
     post_terminal = [*valid_rows, seal({"attempt_state": "complete"})]
+    forged_counter = seal({"attempt_state": "target_command_invoked", "extra": {"target_contact_count": 0}})
+    legacy_cumulative = seal({"attempt_state": "complete", "extra": {"cumulative_lane_counters": dict(ATTEMPT_STATE_COUNTERS["complete"])}})
+    historical_metadata = seal(
+        {
+            "attempt_state": "target_command_invoked",
+            "extra": {
+                "historical_lane_contact_report": {
+                    "authoritative_for_active_transaction": False,
+                    "known_counters_before_active_attempt": {"target_contact_count": 999, "sensor_inventory_count": 999, "live_invocation_count": 999, "pmu_acquisition_count": 999},
+                }
+            },
+        }
+    )
 
     def snapshot_without_journal_rejected() -> bool:
         global DISCOVERY_ATTEMPT_PATH, DISCOVERY_ATTEMPT_JOURNAL_PATH
@@ -4012,6 +4138,9 @@ def discovery_attempt_journal_regression() -> dict[str, Any]:
         "post_terminal_append_rejected": not replay_attempt_journal_rows(post_terminal)["passed"],
         "reordered_rows_rejected": not replay_attempt_journal_rows([second, first, *valid_rows[2:]])["passed"],
         "digest_corruption_rejected": not replay_attempt_journal_rows([first, corrupted])["passed"],
+        "forged_active_counter_rejected": not replay_attempt_journal_rows([first, forged_counter, *valid_rows[2:]])["passed"],
+        "legacy_cumulative_attempt_field_rejected": not replay_attempt_journal_rows([*valid_rows[:-1], legacy_cumulative])["passed"],
+        "historical_metadata_does_not_alter_active_counters": replay_attempt_journal_rows([first, second, historical_metadata, *valid_rows[3:]])["passed"],
         "empty_journal_rejected": not replay_attempt_journal_rows([])["passed"],
         "snapshot_without_journal_rejected": snapshot_without_journal_rejected(),
     }
@@ -4264,6 +4393,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "DISCOVERY_TRANSPORT_PATH": DISCOVERY_TRANSPORT_PATH,
         "TARGET_DISCOVERY_RECEIPT": TARGET_DISCOVERY_RECEIPT,
         "DISCOVERY_CHALLENGE_PATH": DISCOVERY_CHALLENGE_PATH,
+        "TARGET_DISCOVERY_FAILURE_PATH": TARGET_DISCOVERY_FAILURE_PATH,
         "run": run,
         "read_source_hash_authority": read_source_hash_authority,
         "read_existing_source_bundle_authority": read_existing_source_bundle_authority,
@@ -4358,6 +4488,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
             globals()["DISCOVERY_TRANSPORT_PATH"] = temp_root / "transport.json"
             globals()["TARGET_DISCOVERY_RECEIPT"] = temp_root / "target_discovery.json"
             globals()["DISCOVERY_CHALLENGE_PATH"] = temp_root / "challenge.json"
+            globals()["TARGET_DISCOVERY_FAILURE_PATH"] = temp_root / "target_failure.json"
             globals()["run"] = fake_transport_run
             globals()["read_source_hash_authority"] = lambda: fake_source_hashes
             globals()["read_existing_source_bundle_authority"] = lambda: fake_bundle
@@ -4399,6 +4530,110 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         finally:
             for name, value in production_originals.items():
                 globals()[name] = value
+
+    c3_reuse_blocked = False
+    try:
+        acquire_temperature_sensor_authority(source_authority_commit=C3_SOURCE_AUTHORITY_COMMIT)
+    except ControllerError as exc:
+        c3_reuse_blocked = "C3 source authority acquisition already failed" in str(exc)
+
+    missing_review_contacted = False
+    missing_review_blocked = False
+
+    def failed_source_review(**_kwargs: Any) -> dict[str, Any]:
+        return {"passed": False, "failures": ["missing C5 review"], "review_quorum": {"passed": False}}
+
+    def contact_detecting_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        nonlocal missing_review_contacted
+        command_text = " ".join(str(item) for item in command)
+        if "python3 family10h_carrier_tomography_target.py" in command_text:
+            missing_review_contacted = True
+        return subprocess.CompletedProcess([str(item) for item in command], 0, "", "")
+
+    with tempfile.TemporaryDirectory(prefix="family10h_missing_c5_review_regression_") as tmp:
+        temp_root = Path(tmp)
+        try:
+            globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
+            globals()["DISCOVERY_ATTEMPT_JOURNAL_PATH"] = temp_root / "attempt.jsonl"
+            globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = temp_root / "cleanup.json"
+            globals()["TEMPERATURE_SENSOR_AUTHORITY"] = temp_root / "authority.json"
+            globals()["DISCOVERY_TRANSPORT_PATH"] = temp_root / "transport.json"
+            globals()["TARGET_DISCOVERY_RECEIPT"] = temp_root / "target_discovery.json"
+            globals()["DISCOVERY_CHALLENGE_PATH"] = temp_root / "challenge.json"
+            globals()["TARGET_DISCOVERY_FAILURE_PATH"] = temp_root / "target_failure.json"
+            globals()["run"] = contact_detecting_run
+            globals()["read_source_hash_authority"] = lambda: fake_source_hashes
+            globals()["read_existing_source_bundle_authority"] = lambda: fake_bundle
+            globals()["source_authority_commit_verification"] = lambda commit: {"passed": True, "failures": [], "commit": commit, "files": {}, "status": []}
+            globals()["read_source_authority_review_for_discovery"] = failed_source_review
+            try:
+                acquire_temperature_sensor_authority(source_authority_commit="1" * 40)
+            except ControllerError as exc:
+                missing_review_blocked = "source authority C5 review gate failed before target contact" in str(exc)
+        finally:
+            for name, value in production_originals.items():
+                globals()[name] = value
+
+    target_failure_error = ""
+    target_failure_receipt: dict[str, Any] = {}
+    target_failure_cleanup_invoked = False
+    target_failure_absence_probe_invoked = False
+
+    def failing_target_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        nonlocal target_failure_cleanup_invoked, target_failure_absence_probe_invoked
+        command_list = [str(item) for item in command]
+        if command_list and command_list[0] == "ssh":
+            script = command_list[-1]
+            if "FAMILY10H_DISCOVERY_PREFLIGHT" in script:
+                return subprocess.CompletedProcess(command_list, 0, "FAMILY10H_DISCOVERY_PREFLIGHT base_preexisting=0 root_created=1\n", "")
+            if "python3 family10h_carrier_tomography_target.py" in script:
+                return subprocess.CompletedProcess(command_list, 17, "bounded target stdout\n", "bounded target stderr\n")
+            if "rm -rf --" in script:
+                target_failure_cleanup_invoked = True
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if "test ! -e " in script:
+                target_failure_absence_probe_invoked = True
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        if command_list and command_list[0] == "scp":
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        return subprocess.CompletedProcess(command_list, 0, "", "")
+
+    with tempfile.TemporaryDirectory(prefix="family10h_target_failure_regression_") as tmp:
+        temp_root = Path(tmp)
+        try:
+            globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
+            globals()["DISCOVERY_ATTEMPT_JOURNAL_PATH"] = temp_root / "attempt.jsonl"
+            globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = temp_root / "cleanup.json"
+            globals()["TEMPERATURE_SENSOR_AUTHORITY"] = temp_root / "authority.json"
+            globals()["DISCOVERY_TRANSPORT_PATH"] = temp_root / "transport.json"
+            globals()["TARGET_DISCOVERY_RECEIPT"] = temp_root / "target_discovery.json"
+            globals()["DISCOVERY_CHALLENGE_PATH"] = temp_root / "challenge.json"
+            globals()["TARGET_DISCOVERY_FAILURE_PATH"] = temp_root / "target_failure.json"
+            globals()["run"] = failing_target_run
+            globals()["read_source_hash_authority"] = lambda: fake_source_hashes
+            globals()["read_existing_source_bundle_authority"] = lambda: fake_bundle
+            globals()["source_authority_commit_verification"] = lambda commit: {"passed": True, "failures": [], "commit": commit, "files": {}, "status": []}
+            globals()["read_source_authority_review_for_discovery"] = fake_source_review
+            globals()["materialize_source_authority_snapshot"] = fake_materialize
+            globals()["commit_exists"] = lambda _commit: False
+            try:
+                acquire_temperature_sensor_authority(source_authority_commit="1" * 40)
+            except ControllerError as exc:
+                target_failure_error = str(exc)
+            if TARGET_DISCOVERY_FAILURE_PATH.exists():
+                target_failure_receipt = read_json(TARGET_DISCOVERY_FAILURE_PATH)
+        finally:
+            for name, value in production_originals.items():
+                globals()[name] = value
+
+    original_history_index = ATTEMPT_HISTORY_INDEX_PATH
+    try:
+        globals()["ATTEMPT_HISTORY_INDEX_PATH"] = Path(tempfile.gettempdir()) / "family10h_missing_attempt_history_index_for_regression.json"
+        history_missing_report = known_historical_lane_contact_report()
+    finally:
+        globals()["ATTEMPT_HISTORY_INDEX_PATH"] = original_history_index
+
     checks = {
         "production_acquisition_has_no_injected_transport_surface": production_signature
         == {"target_host", "remote_root", "source_authority_commit"},
@@ -4409,6 +4644,14 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "boolean_journal_counter_rejected": not replay_attempt_journal_rows(bool_journal_rows)["passed"],
         "boolean_transport_counter_rejected": not validate_discovery_transport_receipt(seal_transport({"target_contact_count": True}))["passed"],
         "boolean_transport_retry_count_rejected": not validate_discovery_transport_receipt(seal_transport({"retry_count": False}))["passed"],
+        "c3_source_commit_reuse_blocked": c3_reuse_blocked,
+        "missing_c5_review_blocks_before_target_contact": missing_review_blocked and not missing_review_contacted,
+        "target_nonzero_failure_raises_no_retry": "target discovery failed rc=17" in target_failure_error,
+        "target_nonzero_failure_receipt_persisted": target_failure_receipt.get("target_failure", {}).get("target_return_code") == 17,
+        "target_nonzero_failure_stdout_bound_and_hashed": target_failure_receipt.get("target_failure", {}).get("stdout_sha256") == sha256_text("bounded target stdout\n"),
+        "target_nonzero_failure_stderr_bound_and_hashed": target_failure_receipt.get("target_failure", {}).get("stderr_sha256") == sha256_text("bounded target stderr\n"),
+        "target_nonzero_failure_cleanup_recorded": target_failure_cleanup_invoked and target_failure_absence_probe_invoked and target_failure_receipt.get("cleanup_result") is True and target_failure_receipt.get("remote_root_absence_result") is True,
+        "history_index_deletion_does_not_fabricate_active_authority": history_missing_report["authoritative_for_active_transaction"] is False and history_missing_report["complete_cryptographic_lane_ledger_claimed"] is False,
         "failure_cleanup_receipt_writes_without_success_journal": cleanup_valid["cleanup_custody_sha256"]
         == public.digest({k: v for k, v in cleanup_valid.items() if k != "cleanup_custody_sha256"}),
         "parsed_invalid_copyback_cleanup_receipt_sealed": parsed_invalid_cleanup_sealed,
@@ -4452,7 +4695,7 @@ def controller_self_test() -> dict[str, Any]:
     attempt_journal_regression = discovery_attempt_journal_regression()
     strict_json = strict_json_regression()
     challenge_receipt = challenge_receipt_regression()
-    attempt_history = read_attempt_history_index()
+    historical_lane_report = known_historical_lane_contact_report()
     acquisition_transaction = controller_acquisition_transaction_regression()
     clearances = {
         role: {
@@ -4540,7 +4783,8 @@ def controller_self_test() -> dict[str, Any]:
         and attempt_journal_regression["passed"]
         and strict_json["passed"]
         and challenge_receipt["passed"]
-        and attempt_history["passed"]
+        and historical_lane_report["authoritative_for_active_transaction"] is False
+        and historical_lane_report["complete_cryptographic_lane_ledger_claimed"] is False
         and acquisition_transaction["passed"]
         and all(quorum_regressions.values()),
         "offline_validate_sha256": validation["offline_validate_sha256"],
@@ -4557,7 +4801,7 @@ def controller_self_test() -> dict[str, Any]:
         "discovery_attempt_journal_regression": attempt_journal_regression,
         "strict_json_regression": strict_json,
         "challenge_receipt_regression": challenge_receipt,
-        "attempt_history_validation": attempt_history,
+        "historical_lane_contact_report": historical_lane_report,
         "controller_acquisition_transaction_regression": acquisition_transaction,
         "live_authority_env_absent": live_env_absent,
         "review_quorum_regressions": quorum_regressions,
@@ -4610,12 +4854,8 @@ def manifest() -> dict[str, Any]:
     )
     temperature_authority = read_temperature_sensor_authority(expected_challenge=temperature_challenge)
     contact_counters = authority_contact_counters(temperature_authority)
-    attempt_history = read_attempt_history_index()
-    prior_lane_counters = (
-        {key: attempt_history["cumulative_counters"][key] for key in ATTEMPT_COUNTER_KEYS}
-        if attempt_history["passed"]
-        else zero_attempt_counters()
-    )
+    historical_lane_report = known_historical_lane_contact_report()
+    prior_lane_counters = historical_lane_report["known_counters_before_active_attempt"]
     cumulative_lane_counters = counter_sum(prior_lane_counters, contact_counters)
     independent_review = {}
     if SUBAGENT_FINDINGS_PATH.exists():
@@ -4772,15 +5012,15 @@ def manifest() -> dict[str, Any]:
             "approved_sensor_identity": temperature_authority["approved_sensor_identity"],
             "source_authority_commit": source_authority_commit,
             "contact_counters": contact_counters,
-            "attempt_history": {
+            "historical_attempt_index_metadata_reporting_only": {
                 "path": str(ATTEMPT_HISTORY_INDEX_PATH) if ATTEMPT_HISTORY_INDEX_PATH.exists() else None,
                 "file_sha256": public.sha256_file(ATTEMPT_HISTORY_INDEX_PATH) if ATTEMPT_HISTORY_INDEX_PATH.exists() else None,
-                "passed": attempt_history["passed"],
-                "failures": attempt_history["failures"],
+                "authoritative_for_active_transaction": False,
             },
             "active_attempt_counters": contact_counters,
-            "prior_cumulative_lane_counters": prior_lane_counters,
-            "cumulative_lane_counters": cumulative_lane_counters,
+            "historical_lane_contact_report": historical_lane_report,
+            "known_prior_lane_counters_reporting_only": prior_lane_counters,
+            "known_cumulative_lane_counters_reporting_only": cumulative_lane_counters,
             "synthetic_or_provenance_free_identity_cannot_freeze": True,
             "self_authored_discovery_without_controller_challenge_cannot_freeze": True,
             "resolved_identity_bound_in_evidence": True,
@@ -4801,7 +5041,8 @@ def manifest() -> dict[str, Any]:
         },
         "contact_counter_attestation": contact_counters,
         "active_attempt_counter_attestation": contact_counters,
-        "cumulative_lane_counter_attestation": cumulative_lane_counters,
+        "historical_lane_contact_report": historical_lane_report,
+        "known_cumulative_lane_counters_reporting_only": cumulative_lane_counters,
         "zero_live_contact_attestation": {
             "target_contact_count": contact_counters["target_contact_count"],
             "sensor_inventory_count": contact_counters["sensor_inventory_count"],
@@ -4837,7 +5078,7 @@ def prepare_only() -> dict[str, Any]:
     controller = controller_self_test()
     manifest_result = manifest()
     contact_counters = manifest_result["contact_counter_attestation"]
-    cumulative_lane_counters = manifest_result["cumulative_lane_counter_attestation"]
+    cumulative_lane_counters = manifest_result["known_cumulative_lane_counters_reporting_only"]
     result = {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_PREPARE_ONLY_RECEIPT_V1",
         "passed": all(
@@ -4863,7 +5104,7 @@ def prepare_only() -> dict[str, Any]:
         "live_invocation_count": contact_counters["live_invocation_count"],
         "pmu_acquisition_count": contact_counters["pmu_acquisition_count"],
         "active_attempt_counters": contact_counters,
-        "cumulative_lane_counters": cumulative_lane_counters,
+        "known_cumulative_lane_counters_reporting_only": cumulative_lane_counters,
     }
     print(strict_json_dumps(result, indent=2))
     return result
@@ -5085,8 +5326,9 @@ def replay_final_exact_objects(
     if repo_root is not None or package_root is not None:
         replay_repo_root = Path(repo_root or REPO_ROOT).resolve()
         replay_package_root = Path(package_root or HERE).resolve()
-        replay_source_audit_dir_name = "SOURCE_AUTHORITY_C3_REVIEW" if source_commit == C3_SOURCE_AUTHORITY_COMMIT else "SOURCE_AUTHORITY_C4_REVIEW"
-        replay_source_audit_prefix = "SOURCE_AUTHORITY_C3" if source_commit == C3_SOURCE_AUTHORITY_COMMIT else "SOURCE_AUTHORITY_C4"
+        replay_source_audit_version = source_audit_version_for_commit(source_commit)
+        replay_source_audit_dir_name = f"SOURCE_AUTHORITY_{replay_source_audit_version}_REVIEW"
+        replay_source_audit_prefix = f"SOURCE_AUTHORITY_{replay_source_audit_version}"
         path_bindings = {
             "REPO_ROOT": replay_repo_root,
             "HERE": replay_package_root,
@@ -5660,6 +5902,7 @@ def validate_only() -> dict[str, Any]:
         DISCOVERY_TRANSPORT_PATH,
         DISCOVERY_CHALLENGE_PATH,
         DISCOVERY_ATTEMPT_PATH,
+        TARGET_DISCOVERY_FAILURE_PATH,
         FINAL_OBJECT_VERIFY_PATH,
     ]
     if any(path.exists() for path in discovery_artifacts):

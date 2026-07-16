@@ -361,6 +361,18 @@ strict process custody
 Target results remain provisional until controller copy-back and evidence
 verification close. There is no automatic retry.
 
+## C5 Sensor Authority Scope
+
+The temperature-sensor authority package may claim only the active acquisition
+transaction. Active counters are produced by the controller state machine:
+pre-contact `0/0/0/0`, target contact invoked `1/0/0/0`, inventory complete
+`1/1/0/0`, with runtime and PMU counts remaining zero. Prior C3, C4, and
+affinity observations are preserved as reporting metadata and known lane history;
+they are not inputs to sensor identity validity, controller challenge authority,
+final exact-object qualification, or package freeze. A future nonzero target
+discovery return code must be sealed as bounded failure evidence before the
+controller raises.
+
 ## Offline Artifacts
 
 The freeze artifacts are:
