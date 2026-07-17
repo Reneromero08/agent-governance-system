@@ -47,9 +47,12 @@ SOURCE_AUTHORITY_FILE_NAMES = SOURCE_FILE_NAMES + [
 DISCOVERY_TRANSFER_FILE_NAMES = SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES
 
 APPROVED_TEMPERATURE_HWMON_NAMES = ["k10temp"]
-APPROVED_TEMPERATURE_SENSOR_LABELS = ["Tctl", "Tdie"]
+APPROVED_TEMPERATURE_SENSOR_LABELS = ["Tctl"]
 APPROVED_TEMPERATURE_DEVICE_DRIVERS = ["k10temp"]
 APPROVED_TEMPERATURE_DEVICE_SUBSYSTEMS = ["pci"]
+LEGACY_FAMILY10H_TEMPERATURE_PROFILE = "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1"
+LEGACY_FAMILY10H_TEMPERATURE_INPUT = "temp1_input"
+LEGACY_FAMILY10H_TEMPERATURE_ROLE = "Tctl"
 REQUIRED_REVIEW_ROLES = {
     "physical_carrier_state_auditor": "physical carrier-state auditor",
     "experimental_design_operator_auditor": "experimental-design/operator auditor",
@@ -111,8 +114,11 @@ SOURCE_AUDIT_REVIEW_BODY_CANONICALIZATION = "utf8_lf_single_trailing_newline"
 SOURCE_AUDIT_RECEIPT_KIND = "detached_review_body_acknowledgment"
 TEMPERATURE_IDENTITY_FIELDS = [
     "hwmon_name",
-    "sensor_label",
+    "sensor_label_present",
+    "sensor_label_value",
     "sensor_input",
+    "sensor_semantic_role",
+    "sensor_semantic_profile",
     "class_path",
     "resolved_input_path",
     "resolved_hwmon_path",
@@ -149,7 +155,8 @@ TEMPERATURE_AUTHORITY_NONCE_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_AUTH
 TEMPERATURE_AUTHORITY_NONCE_SHA256_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_AUTHORITY_NONCE_SHA256"
 AUTHORITY_VALUE = public.TRANSACTION_RUN_ID
 TEMPERATURE_SENSOR_AUTHORITY_SCHEMA = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_AUTHORITY_V1"
-TEMPERATURE_SENSOR_DISCOVERY_SCHEMA = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_DISCOVERY_V1"
+TEMPERATURE_SENSOR_DISCOVERY_SCHEMA = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_DISCOVERY_V2"
+TEMPERATURE_SENSOR_DISCOVERY_FAILURE_SCHEMA = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_DISCOVERY_FAILURE_V2"
 TEMPERATURE_SENSOR_AUTHORITY_CHALLENGE_SCHEMA = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_AUTHORITY_CHALLENGE_V1"
 TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME = "CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json"
 DISCOVERY_TRANSPORT_RECEIPT_NAME = "CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT.json"
@@ -1073,16 +1080,8 @@ def validate_temperature_sensor_authority_payload(
         identity = None
     elif identity.get("identity_sha256") != public.temperature_identity_digest(identity):
         failures.append("approved temperature sensor identity digest mismatch")
-    elif (
-        identity.get("device_driver") != "k10temp"
-        or identity.get("device_subsystem") != "pci"
-        or not isinstance(identity.get("device_modalias"), str)
-        or not identity.get("device_modalias")
-        or not public.is_json_int(identity.get("input_st_dev"))
-        or not public.is_json_int(identity.get("input_st_ino"))
-        or not public.is_json_int(identity.get("input_st_mode"))
-    ):
-        failures.append("approved temperature sensor hardware identity incomplete")
+    elif not legacy_temperature_identity_is_approved(identity):
+        failures.append("approved temperature sensor legacy profile incomplete")
     if receipt.get("provenance_bound") is not True:
         failures.append("temperature sensor authority provenance not bound")
     if identity == public.synthetic_temperature_identity():
@@ -1150,6 +1149,8 @@ def validate_temperature_sensor_authority_payload(
             failures.append("temperature sensor discovery target contact count must be one")
         if not public.is_json_int(discovery.get("sensor_inventory_count")) or discovery.get("sensor_inventory_count") != 1:
             failures.append("temperature sensor discovery inventory count must be one")
+        if not public.is_json_int(discovery.get("candidate_scan_count")) or discovery.get("candidate_scan_count") != 1:
+            failures.append("temperature sensor discovery candidate scan count must be one")
         if not public.is_json_int(discovery.get("live_invocation_count")) or discovery.get("live_invocation_count") != 0:
             failures.append("temperature sensor discovery live invocation count must be zero")
         if not public.is_json_int(discovery.get("pmu_acquisition_count")) or discovery.get("pmu_acquisition_count") != 0:
@@ -1183,10 +1184,7 @@ def validate_temperature_sensor_authority_payload(
                 if candidate_identity.get("identity_sha256") != public.temperature_identity_digest(candidate_identity):
                     failures.append(f"temperature sensor discovery candidate identity digest mismatch {index}")
                     continue
-                expected_approved = (
-                    candidate_identity.get("hwmon_name") in APPROVED_TEMPERATURE_HWMON_NAMES
-                    and candidate_identity.get("sensor_label") in APPROVED_TEMPERATURE_SENSOR_LABELS
-                )
+                expected_approved = legacy_temperature_identity_is_approved(candidate_identity)
                 if candidate.get("approved") is not expected_approved:
                     failures.append(f"temperature sensor discovery candidate approval mismatch {index}")
                 if expected_approved:
@@ -1194,15 +1192,7 @@ def validate_temperature_sensor_authority_payload(
             if identity not in [candidate.get("identity") for candidate in approved_candidates]:
                 failures.append("temperature sensor discovery selected identity not in approved candidates")
             if approved_candidates:
-                label_rank = {"Tctl": 0, "Tdie": 1}
-                recomputed_selected = sorted(
-                    approved_candidates,
-                    key=lambda candidate: (
-                        label_rank.get(candidate["identity"]["sensor_label"], 99),
-                        candidate["identity"]["class_path"],
-                        candidate["identity"]["resolved_input_path"],
-                    ),
-                )[0]["identity"]
+                recomputed_selected = approved_candidates[0]["identity"] if len(approved_candidates) == 1 else None
                 if selected_identity != recomputed_selected:
                     failures.append("temperature sensor discovery deterministic selection mismatch")
                 selection = discovery.get("selection")
@@ -1213,7 +1203,7 @@ def validate_temperature_sensor_authority_payload(
                         failures.append("temperature sensor discovery deterministic law missing")
                     if selection.get("approved_count") != len(approved_candidates):
                         failures.append("temperature sensor discovery approved count mismatch")
-                    if selection.get("selected_class_path") != recomputed_selected.get("class_path"):
+                    if not isinstance(recomputed_selected, dict) or selection.get("selected_class_path") != recomputed_selected.get("class_path"):
                         failures.append("temperature sensor discovery selected class path mismatch")
             for field in ("identity_before", "identity_after"):
                 observed = discovery.get(field)
@@ -1227,8 +1217,14 @@ def validate_temperature_sensor_authority_payload(
                     failures.append("temperature sensor discovery sample identity mismatch")
                 if sample.get("path") != identity.get("class_path"):
                     failures.append("temperature sensor discovery sample path mismatch")
-                if sample.get("label") != identity.get("sensor_label"):
-                    failures.append("temperature sensor discovery sample label mismatch")
+                if sample.get("label_present") != identity.get("sensor_label_present"):
+                    failures.append("temperature sensor discovery sample label presence mismatch")
+                if sample.get("label_value") != identity.get("sensor_label_value"):
+                    failures.append("temperature sensor discovery sample label value mismatch")
+                if sample.get("semantic_role") != identity.get("sensor_semantic_role"):
+                    failures.append("temperature sensor discovery sample semantic role mismatch")
+                if sample.get("semantic_profile") != identity.get("sensor_semantic_profile"):
+                    failures.append("temperature sensor discovery sample semantic profile mismatch")
                 value = sample.get("value_c")
                 if not public.is_json_number(value) or not 0.0 < float(value) < 120.0:
                     failures.append("temperature sensor discovery sample value invalid")
@@ -1291,6 +1287,8 @@ def validate_temperature_sensor_authority_payload(
             failures.append("temperature discovery transport target contact count must be one")
         if not public.is_json_int(expected_transport_receipt.get("sensor_inventory_count")) or expected_transport_receipt.get("sensor_inventory_count") != 1:
             failures.append("temperature discovery transport inventory count must be one")
+        if not public.is_json_int(expected_transport_receipt.get("candidate_scan_count")) or expected_transport_receipt.get("candidate_scan_count") != 1:
+            failures.append("temperature discovery transport candidate scan count must be one")
         if not public.is_json_int(expected_transport_receipt.get("live_invocation_count")) or expected_transport_receipt.get("live_invocation_count") != 0:
             failures.append("temperature discovery transport live invocation count must be zero")
         if not public.is_json_int(expected_transport_receipt.get("pmu_acquisition_count")) or expected_transport_receipt.get("pmu_acquisition_count") != 0:
@@ -1298,13 +1296,17 @@ def validate_temperature_sensor_authority_payload(
     failures.extend(validate_temperature_authority_challenge(receipt, discovery, expected_challenge))
     if receipt.get("hwmon_name") not in APPROVED_TEMPERATURE_HWMON_NAMES:
         failures.append("temperature sensor authority hwmon name not approved")
-    if receipt.get("sensor_label") not in APPROVED_TEMPERATURE_SENSOR_LABELS:
-        failures.append("temperature sensor authority sensor label not approved")
+    if receipt.get("sensor_semantic_profile") != LEGACY_FAMILY10H_TEMPERATURE_PROFILE:
+        failures.append("temperature sensor authority semantic profile mismatch")
     if identity is not None:
         if receipt.get("hwmon_name") != identity.get("hwmon_name"):
             failures.append("temperature sensor authority hwmon name mismatch")
-        if receipt.get("sensor_label") != identity.get("sensor_label"):
-            failures.append("temperature sensor authority sensor label mismatch")
+        if receipt.get("sensor_label_present") != identity.get("sensor_label_present"):
+            failures.append("temperature sensor authority sensor label presence mismatch")
+        if receipt.get("sensor_label_value") != identity.get("sensor_label_value"):
+            failures.append("temperature sensor authority sensor label value mismatch")
+        if receipt.get("sensor_semantic_role") != identity.get("sensor_semantic_role"):
+            failures.append("temperature sensor authority semantic role mismatch")
     for key in ["target_contact_count", "sensor_inventory_count", "live_invocation_count", "pmu_acquisition_count"]:
         if not public.is_json_int(receipt.get(key)):
             failures.append(f"temperature sensor authority counter missing or invalid {key}")
@@ -1373,36 +1375,60 @@ def process_custody_fixture() -> dict[str, Any]:
     return {"passed": good["passed"] and all(rejected.values()), "valid_passes": good["passed"], "rejected": rejected}
 
 
-def write_fake_hwmon_sensor(root: Path, index: int, name: str, label: str, milli_c: str = "42000") -> Path:
+def write_fake_hwmon_sensor(
+    root: Path,
+    index: int,
+    name: str,
+    label: str | None = "Tctl",
+    milli_c: str = "42000",
+    *,
+    input_basename: str = "temp1_input",
+    device_driver: str = "k10temp",
+    device_subsystem: str = "pci",
+    device_modalias: str = "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+) -> Path:
     hwmon = root / f"hwmon{index}"
     hwmon.mkdir(parents=True, exist_ok=True)
     (hwmon / "name").write_text(name + "\n", encoding="utf-8")
-    (hwmon / "temp1_label").write_text(label + "\n", encoding="utf-8")
-    (hwmon / "temp1_input").write_text(milli_c + "\n", encoding="utf-8")
-    bus_root = root / "bus" / "pci"
-    driver_target = bus_root / "drivers" / "k10temp"
+    label_basename = input_basename.replace("_input", "_label")
+    if label is not None:
+        (hwmon / label_basename).write_text(label + "\n", encoding="utf-8")
+    (hwmon / input_basename).write_text(milli_c + "\n", encoding="utf-8")
+    bus_root = root / "bus" / device_subsystem
+    driver_target = bus_root / "drivers" / device_driver
     driver_target.mkdir(parents=True, exist_ok=True)
     bus_root.mkdir(parents=True, exist_ok=True)
     device = hwmon / "device"
     device.mkdir()
     (device / "driver").symlink_to(driver_target, target_is_directory=True)
     (device / "subsystem").symlink_to(bus_root, target_is_directory=True)
-    (device / "modalias").write_text("pci:v00001022d00001203sv00000000sd00000000bc06sc00i00\n", encoding="utf-8")
+    (device / "modalias").write_text(device_modalias + "\n", encoding="utf-8")
     (device / "identity").write_text(f"{name}:{label}\n", encoding="utf-8")
-    return hwmon / "temp1_input"
+    return hwmon / input_basename
 
 
 def temperature_sensor_identity_fixture() -> dict[str, Any]:
     with tempfile.TemporaryDirectory(prefix="carrier_tomography_hwmon_") as tmp:
         root = Path(tmp)
         write_fake_hwmon_sensor(root, 0, "acpitz", "temp1")
-        approved_path = write_fake_hwmon_sensor(root, 1, "k10temp", "Tctl")
+        approved_path = write_fake_hwmon_sensor(root, 1, "k10temp", None)
         first_non_cpu = read_temperature_sample(hwmon_root=root)
+        approved_identity = temperature_sensor_identity(approved_path)
 
         wrong_name_root = root / "wrong_name"
         write_fake_hwmon_sensor(wrong_name_root, 0, "acpitz", "Tctl")
-        wrong_label_root = root / "wrong_label"
-        write_fake_hwmon_sensor(wrong_label_root, 0, "k10temp", "ambient")
+        labeled_tctl_root = root / "labeled_tctl"
+        labeled_tctl_path = write_fake_hwmon_sensor(labeled_tctl_root, 0, "k10temp", "Tctl")
+        wrong_label_root = root / "wrong_label_tdie"
+        wrong_label_path = write_fake_hwmon_sensor(wrong_label_root, 0, "k10temp", "Tdie")
+        temp2_root = root / "temp2"
+        write_fake_hwmon_sensor(temp2_root, 0, "k10temp", None, input_basename="temp2_input")
+        wrong_driver_root = root / "wrong_driver"
+        write_fake_hwmon_sensor(wrong_driver_root, 0, "k10temp", None, device_driver="not_k10temp")
+        wrong_subsystem_root = root / "wrong_subsystem"
+        write_fake_hwmon_sensor(wrong_subsystem_root, 0, "k10temp", None, device_subsystem="platform")
+        wrong_modalias_root = root / "wrong_modalias"
+        write_fake_hwmon_sensor(wrong_modalias_root, 0, "k10temp", None, device_modalias="pci:v00008086d00001203sv00000000sd00000000bc06sc00i00")
         unreadable_root = root / "unreadable"
         unreadable_path = write_fake_hwmon_sensor(unreadable_root, 0, "k10temp", "Tctl")
         unreadable_path.write_text("not-an-integer\n", encoding="utf-8")
@@ -1427,7 +1453,14 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
 
         wrong_name_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=wrong_name_root))
         wrong_label_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=wrong_label_root))
+        temp2_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=temp2_root))
+        wrong_driver_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=wrong_driver_root))
+        wrong_subsystem_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=wrong_subsystem_root))
+        wrong_modalias_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=wrong_modalias_root))
         unreadable_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=unreadable_root))
+        labeled_tctl_accepted = read_temperature_sample(hwmon_root=labeled_tctl_root)["identity"]["sensor_label_value"] == "Tctl"
+        unlabeled_record = enumerate_temperature_candidates(root)[1]
+        wrong_label_record = enumerate_temperature_candidates(wrong_label_root)[0]
         required = temperature_sensor_identity(good_substitute)
         path_substitution_rejected = raises_target_error(
             lambda: read_temperature_sample(required_identity={**required, "class_path": str(substituted)}, hwmon_root=substitute_root)
@@ -1456,8 +1489,17 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
 
     checks = {
         "non_cpu_sensor_first_skipped": first_non_cpu["identity"]["class_path"] == str(approved_path),
+        "unlabeled_k10temp_temp1_input_accepted": approved_identity["sensor_label_present"] is False and approved_identity["sensor_label_value"] is None,
+        "labeled_k10temp_temp1_input_tctl_accepted": labeled_tctl_accepted,
         "wrong_hwmon_name_rejected": wrong_name_rejected,
-        "wrong_sensor_label_rejected": wrong_label_rejected,
+        "labeled_k10temp_temp1_input_tdie_rejected": wrong_label_rejected,
+        "unlabeled_temp2_input_rejected": temp2_rejected,
+        "wrong_pci_driver_rejected": wrong_driver_rejected,
+        "wrong_subsystem_rejected": wrong_subsystem_rejected,
+        "non_amd_modalias_rejected": wrong_modalias_rejected,
+        "missing_label_retained_in_candidate_record": unlabeled_record["sensor_label_present"] is False and unlabeled_record["sensor_label_value"] is None,
+        "wrong_label_retained_with_rejection_reason": wrong_label_record["sensor_label_value"] == "Tdie"
+        and "present temp1_label is not Tctl" in wrong_label_record["rejection_reasons"],
         "path_substitution_rejected": path_substitution_rejected,
         "same_class_path_substitution_rejected": same_class_path_substitution_rejected,
         "same_class_swap_restore_reads_pinned_descriptor": swap_restore_value_pinned_to_approved,
@@ -1468,7 +1510,7 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
         "passed": all(checks.values()),
         **checks,
         "approved_hwmon_names": APPROVED_TEMPERATURE_HWMON_NAMES,
-        "approved_sensor_labels": APPROVED_TEMPERATURE_SENSOR_LABELS,
+        "approved_sensor_semantic_profile": LEGACY_FAMILY10H_TEMPERATURE_PROFILE,
         "identity_fields": TEMPERATURE_IDENTITY_FIELDS,
     }
 
@@ -1482,7 +1524,7 @@ def policy_and_platform_fixture() -> dict[str, Any]:
         "strict_readable_policy_fields_required": True,
         "strict_temperature_required": True,
         "approved_temperature_hwmon_name_required": sensor["wrong_hwmon_name_rejected"],
-        "approved_temperature_sensor_label_required": sensor["wrong_sensor_label_rejected"],
+        "approved_temperature_sensor_label_required": sensor["labeled_k10temp_temp1_input_tdie_rejected"],
         "temperature_path_substitution_rejected": sensor["path_substitution_rejected"],
         "temperature_same_class_path_substitution_rejected": sensor["same_class_path_substitution_rejected"],
         "temperature_swap_restore_reads_pinned_descriptor": sensor["same_class_swap_restore_reads_pinned_descriptor"],
@@ -1538,7 +1580,10 @@ def manifest_live_gate_fixture() -> dict[str, Any]:
         "provenance_bound": True,
         "provenance": "claimed_target_inventory",
         "hwmon_name": identity["hwmon_name"],
-        "sensor_label": identity["sensor_label"],
+        "sensor_label_present": identity["sensor_label_present"],
+        "sensor_label_value": identity["sensor_label_value"],
+        "sensor_semantic_role": identity["sensor_semantic_role"],
+        "sensor_semantic_profile": identity["sensor_semantic_profile"],
         "approved_sensor_identity": identity,
     }
     synthetic_authority["temperature_sensor_authority_sha256"] = public.digest(
@@ -1608,7 +1653,10 @@ def manifest_live_gate_fixture() -> dict[str, Any]:
         "provenance_bound": True,
         "provenance": "claimed_target_inventory",
         "hwmon_name": forged_identity["hwmon_name"],
-        "sensor_label": forged_identity["sensor_label"],
+        "sensor_label_present": forged_identity["sensor_label_present"],
+        "sensor_label_value": forged_identity["sensor_label_value"],
+        "sensor_semantic_role": forged_identity["sensor_semantic_role"],
+        "sensor_semantic_profile": forged_identity["sensor_semantic_profile"],
         "approved_sensor_identity": forged_identity,
         "target_discovery_receipt": complete_forged_discovery,
         "controller_challenge": controller_challenge,
@@ -1853,102 +1901,365 @@ def source_mutation_fixtures(source_root: Path) -> dict[str, Any]:
     }
 
 
-def raw_temperature_sensor_identity(path: Path) -> dict[str, Any]:
+def read_optional_sysfs_text(path: Path) -> dict[str, Any]:
+    result: dict[str, Any] = {
+        "path": str(path),
+        "exists": path.exists(),
+        "readable": False,
+        "value": None,
+        "error": None,
+    }
+    if not result["exists"]:
+        return result
+    try:
+        result["value"] = path.read_text(encoding="utf-8", errors="replace").strip()
+        result["readable"] = True
+    except OSError as exc:
+        result["error"] = f"{type(exc).__name__}: {exc}"
+    return result
+
+
+def resolve_path_record(path: Path) -> dict[str, Any]:
+    result: dict[str, Any] = {"path": str(path), "exists": path.exists(), "resolved": None, "error": None}
+    if not result["exists"]:
+        return result
+    try:
+        result["resolved"] = str(path.resolve(strict=True))
+    except OSError as exc:
+        result["error"] = f"{type(exc).__name__}: {exc}"
+    return result
+
+
+def strict_millicelsius_parse(text: Any) -> tuple[int | None, str | None]:
+    if not isinstance(text, str):
+        return None, "missing raw input text"
+    if re.fullmatch(r"[+-]?\d+", text) is None:
+        return None, "temperature input is not a strict integer"
+    return int(text), None
+
+
+def amd_pci_modalias_vendor_1022(modalias: Any) -> bool:
+    return isinstance(modalias, str) and "v00001022" in modalias.lower()
+
+
+def identity_from_candidate_record(record: dict[str, Any]) -> dict[str, Any] | None:
+    fields = {
+        "hwmon_name": record.get("hwmon_name_value"),
+        "sensor_label_present": record.get("sensor_label_present"),
+        "sensor_label_value": record.get("sensor_label_value"),
+        "sensor_input": record.get("input_basename"),
+        "sensor_semantic_role": record.get("sensor_semantic_role"),
+        "sensor_semantic_profile": record.get("sensor_semantic_profile"),
+        "class_path": record.get("class_path"),
+        "resolved_input_path": record.get("resolved_input_path"),
+        "resolved_hwmon_path": record.get("resolved_hwmon_path"),
+        "resolved_device_path": record.get("resolved_device_path"),
+        "resolved_driver_path": record.get("resolved_driver_path"),
+        "resolved_subsystem_path": record.get("resolved_subsystem_path"),
+        "device_driver": record.get("device_driver"),
+        "device_subsystem": record.get("device_subsystem"),
+        "device_modalias": record.get("device_modalias_value"),
+        "input_st_dev": record.get("input_st_dev"),
+        "input_st_ino": record.get("input_st_ino"),
+        "input_st_mode": record.get("input_st_mode"),
+    }
+    for key, value in fields.items():
+        if key == "sensor_label_value":
+            if value is not None and not isinstance(value, str):
+                return None
+        elif key == "sensor_label_present":
+            if type(value) is not bool:
+                return None
+        elif key in {"input_st_dev", "input_st_ino", "input_st_mode"}:
+            if not public.is_json_int(value):
+                return None
+        elif not isinstance(value, str) or not value:
+            return None
+    return public.with_temperature_identity_digest(fields)
+
+
+def classify_legacy_family10h_candidate(
+    path: Path,
+    *,
+    hwmon_root: Path = Path("/sys/class/hwmon"),
+    platform_identity: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     hwmon_dir = path.parent
     name_path = hwmon_dir / "name"
     label_path = path.with_name(path.name.replace("_input", "_label"))
-    require(name_path.exists(), "temperature hwmon name missing")
-    require(label_path.exists(), "temperature sensor label missing")
-    hwmon_name = name_path.read_text(encoding="utf-8").strip()
-    sensor_label = label_path.read_text(encoding="utf-8").strip()
     device_path = hwmon_dir / "device"
-    require(device_path.exists(), "temperature hwmon device link missing")
-    resolved_input = path.resolve(strict=True)
-    resolved_hwmon = hwmon_dir.resolve(strict=True)
-    resolved_device = device_path.resolve(strict=True)
+    record: dict[str, Any] = {
+        "class_path": str(path),
+        "input_basename": path.name,
+        "input_path_exists": path.exists(),
+        "input_readability": False,
+        "raw_input_text": None,
+        "raw_input_parse_failure": None,
+        "parsed_millidegree_value": None,
+        "physical_range_passed": False,
+        "hwmon_name_path_exists": name_path.exists(),
+        "hwmon_name_readability": False,
+        "hwmon_name_value": None,
+        "sensor_label_path_exists": label_path.exists(),
+        "sensor_label_present": label_path.exists(),
+        "sensor_label_readability": False,
+        "sensor_label_value": None,
+        "resolved_input_path": None,
+        "resolved_hwmon_path": None,
+        "resolved_device_path": None,
+        "resolved_driver_path": None,
+        "resolved_subsystem_path": None,
+        "device_driver": None,
+        "device_subsystem": None,
+        "device_modalias_path_exists": False,
+        "device_modalias_readability": False,
+        "device_modalias_value": None,
+        "input_st_dev": None,
+        "input_st_ino": None,
+        "input_st_mode": None,
+        "observation_errors": [],
+        "approval_profile": LEGACY_FAMILY10H_TEMPERATURE_PROFILE,
+        "sensor_semantic_role": LEGACY_FAMILY10H_TEMPERATURE_ROLE,
+        "sensor_semantic_profile": LEGACY_FAMILY10H_TEMPERATURE_PROFILE,
+        "approved": False,
+        "rejection_reasons": [],
+        "identity": None,
+    }
+
+    input_text = read_optional_sysfs_text(path)
+    record["input_readability"] = input_text["readable"]
+    record["raw_input_text"] = input_text["value"]
+    if input_text["error"]:
+        record["observation_errors"].append(f"input read failed: {input_text['error']}")
+    parsed, parse_failure = strict_millicelsius_parse(input_text["value"])
+    record["parsed_millidegree_value"] = parsed
+    record["raw_input_parse_failure"] = parse_failure
+    record["physical_range_passed"] = public.is_json_int(parsed) and 0 < int(parsed) < 120000
+
+    name_text = read_optional_sysfs_text(name_path)
+    record["hwmon_name_readability"] = name_text["readable"]
+    record["hwmon_name_value"] = name_text["value"]
+    if name_text["error"]:
+        record["observation_errors"].append(f"hwmon name read failed: {name_text['error']}")
+
+    label_text = read_optional_sysfs_text(label_path)
+    record["sensor_label_readability"] = label_text["readable"]
+    record["sensor_label_value"] = label_text["value"] if label_text["readable"] else None
+    if label_text["error"]:
+        record["observation_errors"].append(f"sensor label read failed: {label_text['error']}")
+
+    for key, resolved in [
+        ("resolved_input_path", resolve_path_record(path)),
+        ("resolved_hwmon_path", resolve_path_record(hwmon_dir)),
+        ("resolved_device_path", resolve_path_record(device_path)),
+    ]:
+        record[key] = resolved["resolved"]
+        if resolved["error"]:
+            record["observation_errors"].append(f"{key} failed: {resolved['error']}")
+
+    resolved_device = Path(str(record["resolved_device_path"])) if isinstance(record.get("resolved_device_path"), str) else device_path
     driver_path = resolved_device / "driver"
     subsystem_path = resolved_device / "subsystem"
     modalias_path = resolved_device / "modalias"
-    require(driver_path.exists(), "temperature device driver link missing")
-    require(subsystem_path.exists(), "temperature device subsystem link missing")
-    require(modalias_path.exists(), "temperature device modalias missing")
-    resolved_driver = driver_path.resolve(strict=True)
-    resolved_subsystem = subsystem_path.resolve(strict=True)
-    device_driver = resolved_driver.name
-    device_subsystem = resolved_subsystem.name
-    device_modalias = modalias_path.read_text(encoding="utf-8").strip()
-    require(device_driver in APPROVED_TEMPERATURE_DEVICE_DRIVERS, f"temperature device driver not approved: {device_driver}")
-    require(device_subsystem in APPROVED_TEMPERATURE_DEVICE_SUBSYSTEMS, f"temperature device subsystem not approved: {device_subsystem}")
-    require(bool(device_modalias), "temperature device modalias empty")
-    input_stat = resolved_input.stat()
-    identity = {
-        "hwmon_name": hwmon_name,
-        "sensor_label": sensor_label,
-        "sensor_input": path.name,
-        "class_path": str(path),
-        "resolved_input_path": str(resolved_input),
-        "resolved_hwmon_path": str(resolved_hwmon),
-        "resolved_device_path": str(resolved_device),
-        "resolved_driver_path": str(resolved_driver),
-        "resolved_subsystem_path": str(resolved_subsystem),
-        "device_driver": device_driver,
-        "device_subsystem": device_subsystem,
-        "device_modalias": device_modalias,
-        "input_st_dev": input_stat.st_dev,
-        "input_st_ino": input_stat.st_ino,
-        "input_st_mode": input_stat.st_mode,
-    }
-    return public.with_temperature_identity_digest(identity)
+    for key, resolved in [
+        ("resolved_driver_path", resolve_path_record(driver_path)),
+        ("resolved_subsystem_path", resolve_path_record(subsystem_path)),
+    ]:
+        record[key] = resolved["resolved"]
+        if resolved["error"]:
+            record["observation_errors"].append(f"{key} failed: {resolved['error']}")
+    record["device_driver"] = Path(str(record["resolved_driver_path"])).name if isinstance(record.get("resolved_driver_path"), str) else None
+    record["device_subsystem"] = Path(str(record["resolved_subsystem_path"])).name if isinstance(record.get("resolved_subsystem_path"), str) else None
 
+    modalias_text = read_optional_sysfs_text(modalias_path)
+    record["device_modalias_path_exists"] = modalias_text["exists"]
+    record["device_modalias_readability"] = modalias_text["readable"]
+    record["device_modalias_value"] = modalias_text["value"]
+    if modalias_text["error"]:
+        record["observation_errors"].append(f"modalias read failed: {modalias_text['error']}")
 
-def temperature_sensor_identity(path: Path) -> dict[str, Any]:
-    identity = raw_temperature_sensor_identity(path)
-    require(identity["hwmon_name"] in APPROVED_TEMPERATURE_HWMON_NAMES, f"temperature hwmon name not approved: {identity['hwmon_name']}")
-    require(identity["sensor_label"] in APPROVED_TEMPERATURE_SENSOR_LABELS, f"temperature sensor label not approved: {identity['sensor_label']}")
-    return identity
+    if isinstance(record.get("resolved_input_path"), str):
+        try:
+            input_stat = Path(str(record["resolved_input_path"])).stat()
+            record["input_st_dev"] = input_stat.st_dev
+            record["input_st_ino"] = input_stat.st_ino
+            record["input_st_mode"] = input_stat.st_mode
+        except OSError as exc:
+            record["observation_errors"].append(f"input stat failed: {type(exc).__name__}: {exc}")
 
+    reasons: list[str] = []
+    if platform_identity is not None:
+        if platform_identity.get("vendor") != "AuthenticAMD":
+            reasons.append("target platform vendor is not AuthenticAMD")
+        if platform_identity.get("cpu_family") != 16:
+            reasons.append("target CPU family is not 16")
+        if platform_identity.get("operational_pin_capability_passed") is not True:
+            reasons.append("operational pin capability did not pass")
+    if record["input_basename"] != LEGACY_FAMILY10H_TEMPERATURE_INPUT:
+        reasons.append("legacy profile requires temp1_input")
+    if record["hwmon_name_value"] != "k10temp":
+        reasons.append("legacy profile requires hwmon name k10temp")
+    if record["sensor_label_present"]:
+        if record["sensor_label_readability"] is not True:
+            reasons.append("present temp1_label is unreadable")
+        elif record["sensor_label_value"] != LEGACY_FAMILY10H_TEMPERATURE_ROLE:
+            reasons.append("present temp1_label is not Tctl")
+    if record["device_driver"] != "k10temp":
+        reasons.append("legacy profile requires k10temp PCI driver")
+    if record["device_subsystem"] != "pci":
+        reasons.append("legacy profile requires pci subsystem")
+    if not isinstance(record.get("device_modalias_value"), str) or not record["device_modalias_value"]:
+        reasons.append("legacy profile requires nonempty PCI modalias")
+    elif not amd_pci_modalias_vendor_1022(record["device_modalias_value"]):
+        reasons.append("legacy profile requires AMD PCI vendor 1022 modalias")
+    if record["input_readability"] is not True:
+        reasons.append("temp1_input is unreadable")
+    if record["raw_input_parse_failure"] is not None:
+        reasons.append("temp1_input does not parse as a strict integer")
+    if record["physical_range_passed"] is not True:
+        reasons.append("temp1_input is outside physical custody range")
+    for field in ["resolved_input_path", "resolved_hwmon_path", "resolved_device_path", "resolved_driver_path", "resolved_subsystem_path"]:
+        if not isinstance(record.get(field), str) or not record[field]:
+            reasons.append(f"{field} missing")
+    for field in ["input_st_dev", "input_st_ino", "input_st_mode"]:
+        if not public.is_json_int(record.get(field)):
+            reasons.append(f"{field} missing")
 
-def temperature_candidate_record(path: Path) -> dict[str, Any]:
-    record: dict[str, Any] = {"class_path": str(path)}
-    try:
-        identity = raw_temperature_sensor_identity(path)
-        approved = identity["hwmon_name"] in APPROVED_TEMPERATURE_HWMON_NAMES and identity["sensor_label"] in APPROVED_TEMPERATURE_SENSOR_LABELS
-        record.update(
-            {
-                "identity": identity,
-                "approved": approved,
-                "approval_law": "hwmon_name in k10temp and sensor_label in Tctl/Tdie",
-                "rejection_reason": None if approved else "hwmon name or sensor label not approved",
-            }
-        )
-    except (OSError, TargetError) as exc:
-        record.update({"identity": None, "approved": False, "approval_law": "identity must be readable", "rejection_reason": str(exc)})
+    canonical_hwmon = hwmon_root == Path("/sys/class/hwmon")
+    record["canonical_path_law_active"] = canonical_hwmon
+    record["class_path_under_hwmon_root"] = str(path).startswith(str(hwmon_root) + os.sep)
+    record["resolved_input_under_sys_devices"] = isinstance(record.get("resolved_input_path"), str) and str(record["resolved_input_path"]).startswith("/sys/devices/")
+    record["resolved_device_under_sys_devices"] = isinstance(record.get("resolved_device_path"), str) and str(record["resolved_device_path"]).startswith("/sys/devices/")
+    if canonical_hwmon:
+        if not record["class_path_under_hwmon_root"]:
+            reasons.append("class path is outside /sys/class/hwmon")
+        if not record["resolved_input_under_sys_devices"]:
+            reasons.append("resolved input path is outside /sys/devices")
+        if not record["resolved_device_under_sys_devices"]:
+            reasons.append("resolved device path is outside /sys/devices")
+
+    identity = identity_from_candidate_record(record)
+    if identity is not None:
+        record["identity"] = identity
+    elif not reasons:
+        reasons.append("candidate identity fields incomplete")
+    record["rejection_reasons"] = sorted(set(reasons))
+    record["rejection_reason"] = "; ".join(record["rejection_reasons"]) if record["rejection_reasons"] else None
+    record["approved"] = identity is not None and not record["rejection_reasons"]
     return record
 
 
-def enumerate_temperature_candidates(hwmon_root: Path = Path("/sys/class/hwmon")) -> list[dict[str, Any]]:
-    return [temperature_candidate_record(path) for path in sorted(hwmon_root.glob("hwmon*/temp*_input"))]
+def raw_temperature_sensor_identity(path: Path) -> dict[str, Any]:
+    record = classify_legacy_family10h_candidate(path, hwmon_root=path.parents[1] if len(path.parents) > 1 else path.parent)
+    identity = record.get("identity")
+    if not isinstance(identity, dict):
+        raise TargetError(record.get("rejection_reason") or "temperature sensor identity incomplete")
+    return identity
 
 
-def select_approved_temperature_identity(candidates: list[dict[str, Any]], *, deterministic_law: bool = True) -> tuple[dict[str, Any], dict[str, Any]]:
+def temperature_sensor_identity(path: Path) -> dict[str, Any]:
+    record = classify_legacy_family10h_candidate(path, hwmon_root=path.parents[1] if len(path.parents) > 1 else path.parent)
+    identity = record.get("identity")
+    require(isinstance(identity, dict), record.get("rejection_reason") or "temperature sensor identity incomplete")
+    require(record.get("approved") is True, record.get("rejection_reason") or "temperature sensor identity not approved")
+    return identity
+
+
+def temperature_candidate_record(
+    path: Path,
+    *,
+    hwmon_root: Path = Path("/sys/class/hwmon"),
+    platform_identity: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    return classify_legacy_family10h_candidate(path, hwmon_root=hwmon_root, platform_identity=platform_identity)
+
+
+def hwmon_visibility_snapshot(hwmon_root: Path = Path("/sys/class/hwmon")) -> dict[str, Any]:
+    hwmon_dirs = sorted(path for path in hwmon_root.glob("hwmon*") if path.is_dir()) if hwmon_root.exists() else []
+    candidates = sorted(hwmon_root.glob("hwmon*/temp*_input")) if hwmon_root.exists() else []
+    k10temp_dirs: list[str] = []
+    for hwmon in hwmon_dirs:
+        name = read_optional_sysfs_text(hwmon / "name")
+        if name["readable"] and name["value"] == "k10temp":
+            k10temp_dirs.append(str(hwmon))
+    driver_root = Path("/sys/bus/pci/drivers/k10temp")
+    bound_devices = []
+    if driver_root.exists():
+        bound_devices = sorted(str(path) for path in driver_root.iterdir() if path.is_symlink())
+    force_path = Path("/sys/module/k10temp/parameters/force")
+    force_text = read_optional_sysfs_text(force_path)
+    return {
+        "hwmon_root": str(hwmon_root),
+        "hwmon_root_exists": hwmon_root.exists(),
+        "hwmon_directory_count": len(hwmon_dirs),
+        "temp_input_candidate_count": len(candidates),
+        "k10temp_hwmon_directory_count": len(k10temp_dirs),
+        "k10temp_hwmon_directories": k10temp_dirs,
+        "k10temp_driver_path": str(driver_root),
+        "k10temp_driver_exists": driver_root.exists(),
+        "bound_k10temp_pci_device_symlinks": bound_devices,
+        "k10temp_module_path": "/sys/module/k10temp",
+        "k10temp_module_exists": Path("/sys/module/k10temp").exists(),
+        "k10temp_force_parameter_exists": force_path.exists(),
+        "k10temp_force_parameter_readable": force_text["readable"],
+        "k10temp_force_parameter_value": force_text["value"],
+    }
+
+
+def enumerate_temperature_candidates(
+    hwmon_root: Path = Path("/sys/class/hwmon"),
+    *,
+    platform_identity: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    return [
+        temperature_candidate_record(path, hwmon_root=hwmon_root, platform_identity=platform_identity)
+        for path in sorted(hwmon_root.glob("hwmon*/temp*_input"))
+    ]
+
+
+def classify_temperature_discovery_failure(candidates: list[dict[str, Any]], visibility: dict[str, Any]) -> str:
+    if visibility.get("temp_input_candidate_count") == 0:
+        return "NO_HWMON_TEMPERATURE_CANDIDATES"
+    if visibility.get("k10temp_driver_exists") is not True:
+        return "K10TEMP_DRIVER_NOT_VISIBLE"
+    if visibility.get("k10temp_hwmon_directory_count") == 0:
+        return "K10TEMP_HWMON_NOT_VISIBLE"
+    legacy_candidates = [
+        candidate
+        for candidate in candidates
+        if candidate.get("hwmon_name_value") == "k10temp" and candidate.get("input_basename") == LEGACY_FAMILY10H_TEMPERATURE_INPUT
+    ]
+    if not legacy_candidates:
+        return "LEGACY_TEMP1_INPUT_NOT_VISIBLE"
     approved = [candidate for candidate in candidates if candidate.get("approved") is True and isinstance(candidate.get("identity"), dict)]
-    require(bool(approved), "no approved CPU temperature sensor found")
-    if len(approved) > 1 and not deterministic_law:
-        raise TargetError("multiple approved CPU temperature sensors require deterministic selection law")
-    label_rank = {"Tctl": 0, "Tdie": 1}
-    selected = sorted(
-        approved,
-        key=lambda candidate: (
-            label_rank.get(candidate["identity"]["sensor_label"], 99),
-            candidate["identity"]["class_path"],
-            candidate["identity"]["resolved_input_path"],
-        ),
-    )[0]
+    if len(approved) > 1:
+        return "MULTIPLE_APPROVED_LEGACY_CANDIDATES"
+    if any(
+        "temp1_input is unreadable" in candidate.get("rejection_reasons", [])
+        or "temp1_input does not parse as a strict integer" in candidate.get("rejection_reasons", [])
+        for candidate in legacy_candidates
+    ):
+        return "LEGACY_CANDIDATE_UNREADABLE"
+    return "LEGACY_CANDIDATE_REJECTED_IDENTITY"
+
+
+def select_approved_temperature_identity(
+    candidates: list[dict[str, Any]],
+    *,
+    deterministic_law: bool = True,
+    visibility: dict[str, Any] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    approved = [candidate for candidate in candidates if candidate.get("approved") is True and isinstance(candidate.get("identity"), dict)]
+    if len(approved) != 1:
+        classification = classify_temperature_discovery_failure(candidates, visibility or {"temp_input_candidate_count": len(candidates)})
+        raise TargetError(classification)
+    selected = approved[0]
     return selected["identity"], {
-        "law": "prefer Tctl over Tdie, then class_path, then resolved_input_path",
+        "law": "exactly one LEGACY_FAMILY10H_K10TEMP_TEMP1_V1 candidate",
         "approved_count": len(approved),
         "selected_class_path": selected["identity"]["class_path"],
         "deterministic_law": deterministic_law,
+        "approval_profile": LEGACY_FAMILY10H_TEMPERATURE_PROFILE,
     }
 
 
@@ -1976,6 +2287,25 @@ def identity_matches_required(identity: dict[str, Any], required_identity: dict[
     return all(identity.get(field) == required_identity.get(field) for field in TEMPERATURE_IDENTITY_FIELDS) and identity.get(
         "identity_sha256"
     ) == required_identity.get("identity_sha256")
+
+
+def legacy_temperature_identity_is_approved(identity: dict[str, Any]) -> bool:
+    label_present = identity.get("sensor_label_present")
+    label_value = identity.get("sensor_label_value")
+    label_law_passed = (label_present is False and label_value is None) or (label_present is True and label_value == LEGACY_FAMILY10H_TEMPERATURE_ROLE)
+    return (
+        identity.get("hwmon_name") == "k10temp"
+        and identity.get("sensor_input") == LEGACY_FAMILY10H_TEMPERATURE_INPUT
+        and identity.get("sensor_semantic_role") == LEGACY_FAMILY10H_TEMPERATURE_ROLE
+        and identity.get("sensor_semantic_profile") == LEGACY_FAMILY10H_TEMPERATURE_PROFILE
+        and label_law_passed
+        and identity.get("device_driver") == "k10temp"
+        and identity.get("device_subsystem") == "pci"
+        and amd_pci_modalias_vendor_1022(identity.get("device_modalias"))
+        and public.is_json_int(identity.get("input_st_dev"))
+        and public.is_json_int(identity.get("input_st_ino"))
+        and public.is_json_int(identity.get("input_st_mode"))
+    )
 
 
 class PinnedTemperatureSensor:
@@ -2019,7 +2349,10 @@ class PinnedTemperatureSensor:
         require(identity_matches_required(class_identity, self.required_identity), "temperature class-path identity drift")
         return {
             "path": self.required_identity["class_path"],
-            "label": self.required_identity["sensor_label"],
+            "label_present": self.required_identity["sensor_label_present"],
+            "label_value": self.required_identity["sensor_label_value"],
+            "semantic_role": self.required_identity["sensor_semantic_role"],
+            "semantic_profile": self.required_identity["sensor_semantic_profile"],
             "value_c": value,
             "identity": self.required_identity,
             "pinned_descriptor": self.descriptor,
@@ -2061,7 +2394,15 @@ def read_temperature_sample(
             rejected.append(f"{path}: temperature sensor identity changed during sample")
             continue
         if 0.0 < value < 120.0:
-            return {"path": str(path), "label": identity["sensor_label"], "value_c": value, "identity": post_read_identity}
+            return {
+                "path": str(path),
+                "label_present": identity["sensor_label_present"],
+                "label_value": identity["sensor_label_value"],
+                "semantic_role": identity["sensor_semantic_role"],
+                "semantic_profile": identity["sensor_semantic_profile"],
+                "value_c": value,
+                "identity": post_read_identity,
+            }
         rejected.append(f"{path}: temperature outside physical custody bounds")
     if required_identity is not None:
         raise TargetError("temperature sensor identity drift")
@@ -2541,8 +2882,64 @@ def discover_temperature_sensor_authority(
     )
     require(challenge_validation["passed"], "controller challenge invalid: " + ",".join(challenge_validation["failures"]))
     platform_identity = require_family10h_platform(cpuinfo_path)
-    candidates = enumerate_temperature_candidates(hwmon_root)
-    selected_identity, selection = select_approved_temperature_identity(candidates, deterministic_law=True)
+    visibility = hwmon_visibility_snapshot(hwmon_root)
+    candidates = enumerate_temperature_candidates(hwmon_root, platform_identity=platform_identity)
+    approved_count = len([candidate for candidate in candidates if candidate.get("approved") is True])
+    try:
+        selected_identity, selection = select_approved_temperature_identity(candidates, deterministic_law=True, visibility=visibility)
+    except TargetError as exc:
+        failure_classification = str(exc) if str(exc) else classify_temperature_discovery_failure(candidates, visibility)
+        result = {
+            "schema": TEMPERATURE_SENSOR_DISCOVERY_FAILURE_SCHEMA,
+            "discovery_mode": "target_read_only_sensor_inventory",
+            "passed": False,
+            "failure_classification": failure_classification,
+            "target_contact_count": 1,
+            "sensor_inventory_count": 0,
+            "candidate_scan_count": 1,
+            "live_invocation_count": 0,
+            "pmu_acquisition_count": 0,
+            "pmu_open_count": 0,
+            "runtime_launch_count": 0,
+            "tomography_output_root_created": False,
+            "source_root": str(source_root),
+            "receipt_path": str(receipt_path),
+            "hwmon_root": str(hwmon_root),
+            "provenance": {
+                "authority": "target_sensor_discovery",
+                "science_package_id": public.SCIENCE_PACKAGE_ID,
+                "transaction_run_id": public.TRANSACTION_RUN_ID,
+                "target_platform": platform_identity,
+                "discovery_monotonic_ns": time.monotonic_ns(),
+                "controller_challenge_sha256": challenge_validation["challenge_sha256"],
+                "authorized_commit": authorized_commit,
+            },
+            "controller_challenge_sha256": challenge_validation["challenge_sha256"],
+            "controller_nonce_sha256": challenge_validation["controller_nonce_sha256"],
+            "authorized_commit": authorized_commit,
+            "source_hashes_sha256": challenge.get("source_hashes_sha256"),
+            "source_bundle_sha256": challenge.get("source_bundle_sha256"),
+            "runtime_binary_sha256": challenge.get("runtime_binary_sha256"),
+            "source_authority_review": challenge.get("source_authority_review"),
+            "source_authority": challenge_validation["source_authority"],
+            "top_level_visibility_snapshot": visibility,
+            "observed_candidates": candidates,
+            "candidate_count": len(candidates),
+            "approved_count": approved_count,
+            "active_counters": {
+                "target_contact_count": 1,
+                "sensor_inventory_count": 0,
+                "live_invocation_count": 0,
+                "pmu_acquisition_count": 0,
+                "candidate_scan_count": 1,
+            },
+        }
+        result["target_discovery_receipt_sha256"] = public.digest(
+            {k: v for k, v in result.items() if k != "target_discovery_receipt_sha256"}
+        )
+        with receipt_path.open("xb") as handle:
+            handle.write((strict_json_dumps(result, indent=2) + "\n").encode("utf-8"))
+        raise TargetError(failure_classification) from exc
     identity_before = temperature_sensor_identity(Path(selected_identity["class_path"]))
     require(identity_matches_required(identity_before, selected_identity), "selected temperature identity changed before read")
     with PinnedTemperatureSensor(selected_identity) as sensor:
@@ -2555,6 +2952,9 @@ def discover_temperature_sensor_authority(
         "canonical_cpuinfo": str(cpuinfo_path) == "/proc/cpuinfo",
         "canonical_hwmon_root": str(hwmon_root) == "/sys/class/hwmon",
         "selected_class_path_is_sysfs_hwmon": str(selected_identity["class_path"]).startswith("/sys/class/hwmon/"),
+        "selected_input_is_legacy_temp1": selected_identity["sensor_input"] == LEGACY_FAMILY10H_TEMPERATURE_INPUT,
+        "selected_semantic_profile_is_legacy_family10h": selected_identity["sensor_semantic_profile"] == LEGACY_FAMILY10H_TEMPERATURE_PROFILE,
+        "selected_semantic_role_is_tctl": selected_identity["sensor_semantic_role"] == LEGACY_FAMILY10H_TEMPERATURE_ROLE,
         "resolved_input_is_sysfs_device": str(selected_identity["resolved_input_path"]).startswith("/sys/devices/"),
         "resolved_device_is_sysfs_device": str(selected_identity["resolved_device_path"]).startswith("/sys/devices/"),
         "resolved_driver_is_k10temp": selected_identity["device_driver"] == "k10temp",
@@ -2566,6 +2966,9 @@ def discover_temperature_sensor_authority(
             "canonical_cpuinfo",
             "canonical_hwmon_root",
             "selected_class_path_is_sysfs_hwmon",
+            "selected_input_is_legacy_temp1",
+            "selected_semantic_profile_is_legacy_family10h",
+            "selected_semantic_role_is_tctl",
             "resolved_input_is_sysfs_device",
             "resolved_device_is_sysfs_device",
             "resolved_driver_is_k10temp",
@@ -2577,6 +2980,7 @@ def discover_temperature_sensor_authority(
         "discovery_mode": "target_read_only_sensor_inventory",
         "target_contact_count": 1,
         "sensor_inventory_count": 1,
+        "candidate_scan_count": 1,
         "live_invocation_count": 0,
         "pmu_acquisition_count": 0,
         "pmu_open_count": 0,
@@ -2598,7 +3002,10 @@ def discover_temperature_sensor_authority(
         "controller_nonce_sha256": challenge_validation["controller_nonce_sha256"],
         "source_authority": challenge_validation["source_authority"],
         "authorizing_scope": authorizing_scope,
+        "top_level_visibility_snapshot": visibility,
         "observed_candidates": candidates,
+        "candidate_count": len(candidates),
+        "approved_count": approved_count,
         "selection": selection,
         "selected_identity": selected_identity,
         "identity_before": identity_before,
@@ -3118,8 +3525,11 @@ def target_sensor_discovery_fixture(source_root: Path) -> dict[str, Any]:
             )
         )
 
+        ambiguous_root = root / "ambiguous_hwmon"
+        write_fake_hwmon_sensor(ambiguous_root, 0, "k10temp", "Tctl", "42000")
+        write_fake_hwmon_sensor(ambiguous_root, 1, "k10temp", None, "43000")
         ambiguous_without_law_rejected = raises_target_error(
-            lambda: select_approved_temperature_identity(enumerate_temperature_candidates(hwmon), deterministic_law=False)
+            lambda: select_approved_temperature_identity(enumerate_temperature_candidates(ambiguous_root), deterministic_law=False)
         )
 
     checks = {
@@ -3132,7 +3542,8 @@ def target_sensor_discovery_fixture(source_root: Path) -> dict[str, Any]:
         "valid_discovery_no_pmu_open": receipt["pmu_open_count"] == 0,
         "valid_discovery_no_runtime_launch": receipt["runtime_launch_count"] == 0,
         "valid_discovery_no_tomography_output_root": receipt["tomography_output_root_created"] is False,
-        "valid_discovery_selected_tctl": receipt["selected_identity"]["sensor_label"] == "Tctl",
+        "valid_discovery_selected_tctl": receipt["selected_identity"]["sensor_semantic_role"] == "Tctl"
+        and receipt["selected_identity"]["sensor_semantic_profile"] == LEGACY_FAMILY10H_TEMPERATURE_PROFILE,
         "valid_discovery_records_all_candidates": len(receipt["observed_candidates"]) == 3,
         "missing_challenge_rejected": missing_challenge_rejected,
         "wrong_nonce_rejected": wrong_nonce_rejected,

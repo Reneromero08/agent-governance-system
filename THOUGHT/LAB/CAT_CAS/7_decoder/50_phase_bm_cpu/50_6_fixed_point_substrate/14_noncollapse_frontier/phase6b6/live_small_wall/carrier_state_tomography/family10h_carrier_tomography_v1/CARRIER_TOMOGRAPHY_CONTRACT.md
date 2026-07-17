@@ -373,6 +373,38 @@ final exact-object qualification, or package freeze. A future nonzero target
 discovery return code must be sealed as bounded failure evidence before the
 controller raises.
 
+## C6 Legacy Family 10h Temperature Sensor Authority
+
+C6 repairs only the temperature-sensor discovery law for legacy AMD Family 10h
+hosts. It does not authorize tomography, PMU acquisition, runtime execution, or
+any Small Wall claim.
+
+The only approved C6 temperature authority profile is:
+
+```text
+profile = LEGACY_FAMILY10H_K10TEMP_TEMP1_V1
+hwmon name = k10temp
+sensor input = temp1_input
+semantic role = Tctl
+driver = k10temp
+subsystem = pci
+PCI modalias vendor = 1022
+```
+
+`temp1_label` is optional on Family 10h. If the label is absent, the candidate
+may still be approved as `Tctl` under the legacy profile. If the label is
+present, it must be exactly `Tctl`; any other label, including `Tdie`, is
+rejected. The receiver must bind the resolved hwmon root, input path, device
+path, driver path, subsystem path, AMD modalias, descriptor device/inode/mode,
+and stable identity before and after sampling.
+
+The target must always persist a complete candidate inventory for the scan. A
+nonzero target discovery exit must copy back and hash the structured V2 failure
+receipt before cleanup, then preserve the exact receipt locally. C6 source
+review must use a distinct `SOURCE_AUTHORITY_C6_REVIEW` quorum bound to the C6
+source-authority commit and its source hash, deterministic source bundle, and
+runtime binary hashes.
+
 ## Offline Artifacts
 
 The freeze artifacts are:
