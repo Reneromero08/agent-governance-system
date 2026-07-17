@@ -141,8 +141,11 @@ RAW_RECORD_EXTRA_FIELDS = [
     "temperature_c",
     "temperature_sensor_identity_sha256",
     "temperature_sensor_hwmon_name",
-    "temperature_sensor_label",
+    "temperature_sensor_label_present",
+    "temperature_sensor_label_value",
     "temperature_sensor_input",
+    "temperature_sensor_semantic_role",
+    "temperature_sensor_semantic_profile",
     "temperature_sensor_class_path",
     "temperature_sensor_resolved_input_path",
     "temperature_sensor_resolved_hwmon_path",
@@ -167,8 +170,11 @@ EXPECTED_EVENT_ID_KEYS = [
 PACKET_KEYS = {"schema", "schedule_sha256", "raw_records", "source_death_receipts", "feature_freeze"}
 TEMPERATURE_SENSOR_IDENTITY_KEYS = {
     "hwmon_name",
-    "sensor_label",
+    "sensor_label_present",
+    "sensor_label_value",
     "sensor_input",
+    "sensor_semantic_role",
+    "sensor_semantic_profile",
     "class_path",
     "resolved_input_path",
     "resolved_hwmon_path",
@@ -314,8 +320,11 @@ def synthetic_temperature_identity() -> dict[str, Any]:
     return with_temperature_identity_digest(
         {
             "hwmon_name": "k10temp",
-            "sensor_label": "Tctl",
+            "sensor_label_present": True,
+            "sensor_label_value": "Tctl",
             "sensor_input": "temp1_input",
+            "sensor_semantic_role": "Tctl",
+            "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
             "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
             "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
             "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
@@ -336,8 +345,11 @@ def record_temperature_identity(record: dict[str, Any]) -> dict[str, Any]:
     return with_temperature_identity_digest(
         {
             "hwmon_name": record.get("temperature_sensor_hwmon_name"),
-            "sensor_label": record.get("temperature_sensor_label"),
+            "sensor_label_present": record.get("temperature_sensor_label_present"),
+            "sensor_label_value": record.get("temperature_sensor_label_value"),
             "sensor_input": record.get("temperature_sensor_input"),
+            "sensor_semantic_role": record.get("temperature_sensor_semantic_role"),
+            "sensor_semantic_profile": record.get("temperature_sensor_semantic_profile"),
             "class_path": record.get("temperature_sensor_class_path"),
             "resolved_input_path": record.get("temperature_sensor_resolved_input_path"),
             "resolved_hwmon_path": record.get("temperature_sensor_resolved_hwmon_path"),
@@ -354,12 +366,15 @@ def record_temperature_identity(record: dict[str, Any]) -> dict[str, Any]:
     )
 
 
-def identity_record_fields(identity: dict[str, Any]) -> dict[str, str]:
+def identity_record_fields(identity: dict[str, Any]) -> dict[str, Any]:
     return {
         "temperature_sensor_identity_sha256": identity["identity_sha256"],
         "temperature_sensor_hwmon_name": identity["hwmon_name"],
-        "temperature_sensor_label": identity["sensor_label"],
+        "temperature_sensor_label_present": identity["sensor_label_present"],
+        "temperature_sensor_label_value": identity["sensor_label_value"],
         "temperature_sensor_input": identity["sensor_input"],
+        "temperature_sensor_semantic_role": identity["sensor_semantic_role"],
+        "temperature_sensor_semantic_profile": identity["sensor_semantic_profile"],
         "temperature_sensor_class_path": identity["class_path"],
         "temperature_sensor_resolved_input_path": identity["resolved_input_path"],
         "temperature_sensor_resolved_hwmon_path": identity["resolved_hwmon_path"],
@@ -1023,8 +1038,9 @@ def validate_raw_record(record: dict[str, Any], schedule_row: dict[str, Any]) ->
     identity_fields = [
         "temperature_sensor_identity_sha256",
         "temperature_sensor_hwmon_name",
-        "temperature_sensor_label",
         "temperature_sensor_input",
+        "temperature_sensor_semantic_role",
+        "temperature_sensor_semantic_profile",
         "temperature_sensor_class_path",
         "temperature_sensor_resolved_input_path",
         "temperature_sensor_resolved_hwmon_path",
@@ -1037,6 +1053,10 @@ def validate_raw_record(record: dict[str, Any], schedule_row: dict[str, Any]) ->
     ]
     if any(not isinstance(record.get(field), str) or not record.get(field) for field in identity_fields):
         failures.append("temperature sensor identity missing")
+    elif type(record.get("temperature_sensor_label_present")) is not bool:
+        failures.append("temperature sensor label presence missing")
+    elif record.get("temperature_sensor_label_value") is not None and not isinstance(record.get("temperature_sensor_label_value"), str):
+        failures.append("temperature sensor label value malformed")
     elif any(not is_json_int(record.get(field)) for field in ["temperature_sensor_input_st_dev", "temperature_sensor_input_st_ino", "temperature_sensor_input_st_mode"]):
         failures.append("temperature sensor identity stat fields missing")
     else:

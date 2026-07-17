@@ -44,6 +44,7 @@ ATTEMPT_HISTORY_INDEX_PATH = ATTEMPT_HISTORY_DIR / "ATTEMPT_HISTORY_INDEX.json"
 C3_ATTEMPT_HISTORY_DIR = ATTEMPT_HISTORY_DIR / "c3_55e059bc_failed_affinity_precheck"
 C3_SOURCE_AUTHORITY_COMMIT = "55e059bc7acaafee3feacddac2069d7b5e40edd1"
 C4_SOURCE_AUTHORITY_COMMIT = "092d0a655e94d7c00f69efc1236cf1c8a2896ee1"
+C5_SOURCE_AUTHORITY_COMMIT = "8021563a6122b72316ddd218077b8b82e36f9055"
 C3_FAILURE_EVIDENCE_COMMIT = "35844e76317017a73dc0fa83f7e976642b80c66f"
 C3_FAILURE_REASON = "TargetError: platform affinity excludes frozen source or receiver CPU"
 FINAL_OBJECT_VERIFY_PATH = HERE / "CARRIER_TOMOGRAPHY_FINAL_OBJECT_VERIFY.json"
@@ -81,13 +82,13 @@ GENERATED_RECEIPTS = [
     MANIFEST_SHA_PATH,
 ]
 
-EXPECTED_STARTING_HEAD = "298049f515612a7a7bb2348cbe55cd86d33380fb"
+EXPECTED_STARTING_HEAD = "8021563a6122b72316ddd218077b8b82e36f9055"
 COMMIT_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_COMMIT_BINDING"
 MANIFEST_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_MANIFEST_SHA256"
 AUTHORITY_ENV = "FAMILY10H_CARRIER_TOMOGRAPHY_LIVE_AUTHORITY"
 AUTHORITY_VALUE = public.TRANSACTION_RUN_ID
 TEMPERATURE_SENSOR_AUTHORITY_SCHEMA = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_AUTHORITY_V1"
-TEMPERATURE_SENSOR_DISCOVERY_SCHEMA = "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_DISCOVERY_V1"
+TEMPERATURE_SENSOR_DISCOVERY_SCHEMA = target.TEMPERATURE_SENSOR_DISCOVERY_SCHEMA
 TEMPERATURE_AUTHORITY_NONCE_ENV = target.TEMPERATURE_AUTHORITY_NONCE_ENV
 TEMPERATURE_AUTHORITY_NONCE_SHA256_ENV = target.TEMPERATURE_AUTHORITY_NONCE_SHA256_ENV
 TEMPERATURE_SENSOR_AUTHORITY_CHALLENGE_SCHEMA = target.TEMPERATURE_SENSOR_AUTHORITY_CHALLENGE_SCHEMA
@@ -134,6 +135,11 @@ SOURCE_AUDIT_REVIEW_VERSIONED = {
         "review_dir": HERE / "SOURCE_AUTHORITY_C5_REVIEW",
         "findings_path": HERE / "SOURCE_AUTHORITY_C5_REVIEW_NORMALIZED.json",
         "review_path": HERE / "SOURCE_AUTHORITY_C5_REVIEW_REPORTS.md",
+    },
+    "C6": {
+        "review_dir": HERE / "SOURCE_AUTHORITY_C6_REVIEW",
+        "findings_path": HERE / "SOURCE_AUTHORITY_C6_REVIEW_NORMALIZED.json",
+        "review_path": HERE / "SOURCE_AUTHORITY_C6_REVIEW_REPORTS.md",
     },
 }
 SOURCE_AUDIT_REQUIRED_REVIEW_ROLES = {
@@ -305,7 +311,9 @@ def source_audit_version_for_commit(source_commit: str | None) -> str:
         return "C3"
     if source_commit == C4_SOURCE_AUTHORITY_COMMIT:
         return "C4"
-    return "C5"
+    if source_commit == C5_SOURCE_AUTHORITY_COMMIT:
+        return "C5"
+    return "C6"
 
 
 def source_audit_paths_for_commit(source_commit: str | None) -> dict[str, Path]:
@@ -1634,16 +1642,8 @@ def temperature_sensor_authority_from_receipt(
         identity = None
     elif identity.get("identity_sha256") != public.temperature_identity_digest(identity):
         failures.append("approved temperature sensor identity digest mismatch")
-    elif (
-        identity.get("device_driver") != "k10temp"
-        or identity.get("device_subsystem") != "pci"
-        or not isinstance(identity.get("device_modalias"), str)
-        or not identity.get("device_modalias")
-        or not is_strict_int(identity.get("input_st_dev"))
-        or not is_strict_int(identity.get("input_st_ino"))
-        or not is_strict_int(identity.get("input_st_mode"))
-    ):
-        failures.append("approved temperature sensor hardware identity incomplete")
+    elif not target.legacy_temperature_identity_is_approved(identity):
+        failures.append("approved temperature sensor legacy profile incomplete")
     if receipt.get("provenance_bound") is not True:
         failures.append("temperature sensor authority provenance not bound")
     if identity == public.synthetic_temperature_identity():
@@ -1709,6 +1709,8 @@ def temperature_sensor_authority_from_receipt(
             failures.append("temperature sensor discovery target contact count must be one")
         if not is_strict_int(discovery.get("sensor_inventory_count")) or discovery.get("sensor_inventory_count") != 1:
             failures.append("temperature sensor discovery inventory count must be one")
+        if not is_strict_int(discovery.get("candidate_scan_count")) or discovery.get("candidate_scan_count") != 1:
+            failures.append("temperature sensor discovery candidate scan count must be one")
         if not is_strict_int(discovery.get("live_invocation_count")) or discovery.get("live_invocation_count") != 0:
             failures.append("temperature sensor discovery live invocation count must be zero")
         if not is_strict_int(discovery.get("pmu_acquisition_count")) or discovery.get("pmu_acquisition_count") != 0:
@@ -1742,10 +1744,7 @@ def temperature_sensor_authority_from_receipt(
                 if candidate_identity.get("identity_sha256") != public.temperature_identity_digest(candidate_identity):
                     failures.append(f"temperature sensor discovery candidate identity digest mismatch {index}")
                     continue
-                expected_approved = (
-                    candidate_identity.get("hwmon_name") in target.APPROVED_TEMPERATURE_HWMON_NAMES
-                    and candidate_identity.get("sensor_label") in target.APPROVED_TEMPERATURE_SENSOR_LABELS
-                )
+                expected_approved = target.legacy_temperature_identity_is_approved(candidate_identity)
                 if candidate.get("approved") is not expected_approved:
                     failures.append(f"temperature sensor discovery candidate approval mismatch {index}")
                 if expected_approved:
@@ -1753,15 +1752,7 @@ def temperature_sensor_authority_from_receipt(
             if identity not in [candidate.get("identity") for candidate in approved_candidates]:
                 failures.append("temperature sensor discovery selected identity not in approved candidates")
             if approved_candidates:
-                label_rank = {"Tctl": 0, "Tdie": 1}
-                recomputed_selected = sorted(
-                    approved_candidates,
-                    key=lambda candidate: (
-                        label_rank.get(candidate["identity"]["sensor_label"], 99),
-                        candidate["identity"]["class_path"],
-                        candidate["identity"]["resolved_input_path"],
-                    ),
-                )[0]["identity"]
+                recomputed_selected = approved_candidates[0]["identity"] if len(approved_candidates) == 1 else None
                 if selected_identity != recomputed_selected:
                     failures.append("temperature sensor discovery deterministic selection mismatch")
                 selection = discovery.get("selection")
@@ -1772,7 +1763,7 @@ def temperature_sensor_authority_from_receipt(
                         failures.append("temperature sensor discovery deterministic law missing")
                     if selection.get("approved_count") != len(approved_candidates):
                         failures.append("temperature sensor discovery approved count mismatch")
-                    if selection.get("selected_class_path") != recomputed_selected.get("class_path"):
+                    if not isinstance(recomputed_selected, dict) or selection.get("selected_class_path") != recomputed_selected.get("class_path"):
                         failures.append("temperature sensor discovery selected class path mismatch")
             for field in ("identity_before", "identity_after"):
                 observed = discovery.get(field)
@@ -1786,8 +1777,14 @@ def temperature_sensor_authority_from_receipt(
                     failures.append("temperature sensor discovery sample identity mismatch")
                 if sample.get("path") != identity.get("class_path"):
                     failures.append("temperature sensor discovery sample path mismatch")
-                if sample.get("label") != identity.get("sensor_label"):
-                    failures.append("temperature sensor discovery sample label mismatch")
+                if sample.get("label_present") != identity.get("sensor_label_present"):
+                    failures.append("temperature sensor discovery sample label presence mismatch")
+                if sample.get("label_value") != identity.get("sensor_label_value"):
+                    failures.append("temperature sensor discovery sample label value mismatch")
+                if sample.get("semantic_role") != identity.get("sensor_semantic_role"):
+                    failures.append("temperature sensor discovery sample semantic role mismatch")
+                if sample.get("semantic_profile") != identity.get("sensor_semantic_profile"):
+                    failures.append("temperature sensor discovery sample semantic profile mismatch")
                 value = sample.get("value_c")
                 if not public.is_json_number(value) or not 0.0 < float(value) < 120.0:
                     failures.append("temperature sensor discovery sample value invalid")
@@ -1851,6 +1848,8 @@ def temperature_sensor_authority_from_receipt(
             failures.append("temperature discovery transport target contact count must be one")
         if not is_strict_int(expected_transport_receipt.get("sensor_inventory_count")) or expected_transport_receipt.get("sensor_inventory_count") != 1:
             failures.append("temperature discovery transport inventory count must be one")
+        if not is_strict_int(expected_transport_receipt.get("candidate_scan_count")) or expected_transport_receipt.get("candidate_scan_count") != 1:
+            failures.append("temperature discovery transport candidate scan count must be one")
         if not is_strict_int(expected_transport_receipt.get("live_invocation_count")) or expected_transport_receipt.get("live_invocation_count") != 0:
             failures.append("temperature discovery transport live invocation count must be zero")
         if not is_strict_int(expected_transport_receipt.get("pmu_acquisition_count")) or expected_transport_receipt.get("pmu_acquisition_count") != 0:
@@ -1858,13 +1857,17 @@ def temperature_sensor_authority_from_receipt(
     failures.extend(validate_temperature_authority_challenge(receipt, discovery, expected_challenge))
     if receipt.get("hwmon_name") not in target.APPROVED_TEMPERATURE_HWMON_NAMES:
         failures.append("temperature sensor authority hwmon name not approved")
-    if receipt.get("sensor_label") not in target.APPROVED_TEMPERATURE_SENSOR_LABELS:
-        failures.append("temperature sensor authority sensor label not approved")
+    if receipt.get("sensor_semantic_profile") != target.LEGACY_FAMILY10H_TEMPERATURE_PROFILE:
+        failures.append("temperature sensor authority semantic profile mismatch")
     if identity is not None:
         if receipt.get("hwmon_name") != identity.get("hwmon_name"):
             failures.append("temperature sensor authority hwmon name mismatch")
-        if receipt.get("sensor_label") != identity.get("sensor_label"):
-            failures.append("temperature sensor authority sensor label mismatch")
+        if receipt.get("sensor_label_present") != identity.get("sensor_label_present"):
+            failures.append("temperature sensor authority sensor label presence mismatch")
+        if receipt.get("sensor_label_value") != identity.get("sensor_label_value"):
+            failures.append("temperature sensor authority sensor label value mismatch")
+        if receipt.get("sensor_semantic_role") != identity.get("sensor_semantic_role"):
+            failures.append("temperature sensor authority semantic role mismatch")
     for key in ATTEMPT_COUNTER_KEYS:
         if not is_strict_int(receipt.get(key)):
             failures.append(f"temperature sensor authority counter missing or invalid {key}")
@@ -1959,7 +1962,10 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
             "provenance_bound": True,
             "provenance": "claimed_target_inventory",
             "hwmon_name": complete_forged_identity["hwmon_name"],
-            "sensor_label": complete_forged_identity["sensor_label"],
+            "sensor_label_present": complete_forged_identity["sensor_label_present"],
+            "sensor_label_value": complete_forged_identity["sensor_label_value"],
+            "sensor_semantic_role": complete_forged_identity["sensor_semantic_role"],
+            "sensor_semantic_profile": complete_forged_identity["sensor_semantic_profile"],
             "approved_sensor_identity": complete_forged_identity,
             "target_discovery_receipt": complete_forged_discovery,
             "controller_challenge": synthetic_challenge,
@@ -1991,7 +1997,10 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
         "provenance_bound": False,
         "provenance": "offline_synthetic_fixture",
         "hwmon_name": synthetic["hwmon_name"],
-        "sensor_label": synthetic["sensor_label"],
+        "sensor_label_present": synthetic["sensor_label_present"],
+        "sensor_label_value": synthetic["sensor_label_value"],
+        "sensor_semantic_role": synthetic["sensor_semantic_role"],
+        "sensor_semantic_profile": synthetic["sensor_semantic_profile"],
         "approved_sensor_identity": synthetic,
     }
     synthetic_true = seal_authority({**provenance_free, "provenance_bound": True, "provenance": "claimed_target_inventory"})
@@ -2012,7 +2021,10 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
             "provenance_bound": True,
             "provenance": "claimed_target_inventory",
             "hwmon_name": synthetic["hwmon_name"],
-            "sensor_label": synthetic["sensor_label"],
+            "sensor_label_present": synthetic["sensor_label_present"],
+            "sensor_label_value": synthetic["sensor_label_value"],
+            "sensor_semantic_role": synthetic["sensor_semantic_role"],
+            "sensor_semantic_profile": synthetic["sensor_semantic_profile"],
             "approved_sensor_identity": synthetic,
             "target_discovery_receipt": forged_discovery,
         }
@@ -2127,7 +2139,10 @@ def build_temperature_sensor_authority_receipt(
         "provenance_bound": True,
         "provenance": "controller_verified_target_sensor_inventory",
         "hwmon_name": identity["hwmon_name"],
-        "sensor_label": identity["sensor_label"],
+        "sensor_label_present": identity["sensor_label_present"],
+        "sensor_label_value": identity["sensor_label_value"],
+        "sensor_semantic_role": identity["sensor_semantic_role"],
+        "sensor_semantic_profile": identity["sensor_semantic_profile"],
         "approved_sensor_identity": identity,
         "target_discovery_receipt": discovery,
         "controller_challenge": controller_challenge,
@@ -2136,6 +2151,7 @@ def build_temperature_sensor_authority_receipt(
         "source_authority_commit": controller_challenge["authorized_commit"],
         "target_contact_count": discovery.get("target_contact_count"),
         "sensor_inventory_count": discovery.get("sensor_inventory_count"),
+        "candidate_scan_count": discovery.get("candidate_scan_count"),
         "live_invocation_count": discovery.get("live_invocation_count"),
         "pmu_acquisition_count": discovery.get("pmu_acquisition_count"),
     }
@@ -2178,6 +2194,62 @@ def serialized_json_sha256(value: Any) -> str:
     return hashlib.sha256((strict_json_dumps(value, indent=2) + "\n").encode("utf-8")).hexdigest()
 
 
+def validate_target_discovery_failure_receipt(
+    receipt: dict[str, Any] | None,
+    *,
+    expected_challenge: dict[str, Any],
+    expected_source_commit: str,
+) -> dict[str, Any]:
+    failures: list[str] = []
+    if not isinstance(receipt, dict):
+        return {"passed": False, "failures": ["structured target discovery failure receipt missing"]}
+    if receipt.get("schema") != target.TEMPERATURE_SENSOR_DISCOVERY_FAILURE_SCHEMA:
+        failures.append("structured target discovery failure schema mismatch")
+    if receipt.get("target_discovery_receipt_sha256") != public.digest(
+        {k: v for k, v in receipt.items() if k != "target_discovery_receipt_sha256"}
+    ):
+        failures.append("structured target discovery failure digest mismatch")
+    if receipt.get("controller_challenge_sha256") != public.digest(expected_challenge):
+        failures.append("structured target discovery failure challenge mismatch")
+    if receipt.get("controller_nonce_sha256") != expected_challenge.get("controller_nonce_sha256"):
+        failures.append("structured target discovery failure nonce mismatch")
+    if receipt.get("authorized_commit") != expected_source_commit:
+        failures.append("structured target discovery failure source commit mismatch")
+    if receipt.get("source_hashes_sha256") != expected_challenge.get("source_hashes_sha256"):
+        failures.append("structured target discovery failure source hash mismatch")
+    if receipt.get("source_bundle_sha256") != expected_challenge.get("source_bundle_sha256"):
+        failures.append("structured target discovery failure source bundle mismatch")
+    if receipt.get("runtime_binary_sha256") != expected_challenge.get("runtime_binary_sha256"):
+        failures.append("structured target discovery failure runtime hash mismatch")
+    if receipt.get("target_contact_count") != 1 or receipt.get("sensor_inventory_count") != 0:
+        failures.append("structured target discovery failure counters mismatch")
+    if receipt.get("candidate_scan_count") != 1:
+        failures.append("structured target discovery failure candidate scan counter mismatch")
+    if receipt.get("runtime_launch_count") != 0 or receipt.get("pmu_open_count") != 0 or receipt.get("pmu_acquisition_count") != 0:
+        failures.append("structured target discovery failure opened runtime or PMU")
+    if receipt.get("tomography_output_root_created") is not False:
+        failures.append("structured target discovery failure created tomography output root")
+    candidates = receipt.get("observed_candidates")
+    if not isinstance(candidates, list):
+        failures.append("structured target discovery failure candidates missing")
+    elif receipt.get("candidate_count") != len(candidates):
+        failures.append("structured target discovery failure candidate count mismatch")
+    approved = [candidate for candidate in candidates if isinstance(candidate, dict) and candidate.get("approved") is True]
+    if receipt.get("approved_count") != len(approved):
+        failures.append("structured target discovery failure approved count mismatch")
+    if receipt.get("failure_classification") not in {
+        "NO_HWMON_TEMPERATURE_CANDIDATES",
+        "K10TEMP_DRIVER_NOT_VISIBLE",
+        "K10TEMP_HWMON_NOT_VISIBLE",
+        "LEGACY_TEMP1_INPUT_NOT_VISIBLE",
+        "LEGACY_CANDIDATE_REJECTED_IDENTITY",
+        "LEGACY_CANDIDATE_UNREADABLE",
+        "MULTIPLE_APPROVED_LEGACY_CANDIDATES",
+    }:
+        failures.append("structured target discovery failure classification invalid")
+    return {"passed": not failures, "failures": failures}
+
+
 def acquire_temperature_sensor_authority(
     *,
     target_host: str = TARGET_HOST,
@@ -2207,7 +2279,7 @@ def acquire_temperature_sensor_authority(
         runtime_binary_sha256=source_hashes["runtime_binary_authority"]["sha256"],
     )
     if not source_review["passed"]:
-        raise ControllerError("source authority C5 review gate failed before target contact: " + ",".join(source_review["failures"]))
+        raise ControllerError("source authority C6 review gate failed before target contact: " + ",".join(source_review["failures"]))
     challenge = build_temperature_authority_challenge(
         source_hashes=source_hashes,
         source_bundle_sha256=bundle["sha256"],
@@ -2237,6 +2309,10 @@ def acquire_temperature_sensor_authority(
     target_discovery_file_sha: str | None = None
     transfer_plan: dict[str, Any] | None = None
     target_failure: dict[str, Any] | None = None
+    target_structured_failure: dict[str, Any] | None = None
+    target_structured_failure_file_sha: str | None = None
+    target_structured_failure_validation: dict[str, Any] | None = None
+    target_structured_failure_bytes: bytes | None = None
     write_discovery_attempt_receipt(
         {
             "passed": False,
@@ -2354,6 +2430,30 @@ def acquire_temperature_sensor_authority(
             )
             completed = run(command, timeout=120.0, check=False)
             if completed.returncode != 0:
+                failure_sha_command = f"if test -s {sh_quote(remote_receipt)}; then sha256sum {sh_quote(remote_receipt)} | awk '{{print $1}}'; fi"
+                command = ["ssh", "-o", "BatchMode=yes", target_host, failure_sha_command]
+                commands.append(command)
+                failure_remote_sha = run(command, timeout=20.0, check=False).stdout.strip()
+                if re.fullmatch(r"[0-9a-f]{64}", failure_remote_sha):
+                    command = ["scp", "-q", f"{target_host}:{remote_receipt}", str(local_copyback)]
+                    commands.append(command)
+                    run(command, timeout=30.0)
+                    target_structured_failure_file_sha = public.sha256_file(local_copyback)
+                    if target_structured_failure_file_sha == failure_remote_sha:
+                        target_structured_failure_bytes = local_copyback.read_bytes()
+                        target_structured_failure = read_json(local_copyback)
+                        target_structured_failure_validation = validate_target_discovery_failure_receipt(
+                            target_structured_failure,
+                            expected_challenge=challenge,
+                            expected_source_commit=source_commit,
+                        )
+                    else:
+                        target_structured_failure_validation = {
+                            "passed": False,
+                            "failures": ["structured target discovery failure copy-back hash mismatch"],
+                            "remote_sha256": failure_remote_sha,
+                            "local_sha256": target_structured_failure_file_sha,
+                        }
                 target_failure = {
                     "target_return_code": completed.returncode,
                     "stdout_sha256": sha256_text(completed.stdout),
@@ -2362,6 +2462,9 @@ def acquire_temperature_sensor_authority(
                     "bounded_stderr": bounded_text(completed.stderr),
                     "attempt_state": "target_command_invoked",
                     "active_counters": dict(ATTEMPT_STATE_COUNTERS["target_command_invoked"]),
+                    "structured_failure_receipt_present": target_structured_failure is not None,
+                    "structured_failure_receipt_file_sha256": target_structured_failure_file_sha,
+                    "structured_failure_validation": target_structured_failure_validation,
                 }
             else:
                 sha_command = f"sha256sum {sh_quote(remote_receipt)} | awk '{{print $1}}'"
@@ -2495,6 +2598,7 @@ def acquire_temperature_sensor_authority(
                             "discovery_transfer_plan": transfer_plan,
                             "target_contact_count": 1,
                             "sensor_inventory_count": 1 if discovery is not None else 0,
+                            "candidate_scan_count": 1 if target_structured_failure is not None else 0,
                             "live_invocation_count": 0,
                             "pmu_acquisition_count": 0,
                             "cleanup": cleanup,
@@ -2502,6 +2606,10 @@ def acquire_temperature_sensor_authority(
                         }
                     )
     if target_failure is not None:
+        if target_structured_failure_bytes is not None:
+            TARGET_DISCOVERY_RECEIPT.write_bytes(target_structured_failure_bytes)
+            if public.sha256_file(TARGET_DISCOVERY_RECEIPT) != target_structured_failure_file_sha:
+                raise ControllerError("structured target discovery failure local write verification failed")
         failure_receipt = {
             "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_FAILURE_V1",
             "passed": False,
@@ -2512,10 +2620,15 @@ def acquire_temperature_sensor_authority(
             "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
             "discovery_transfer_plan": transfer_plan,
             "target_failure": target_failure,
+            "structured_target_discovery_failure_receipt": target_structured_failure,
+            "structured_target_discovery_failure_validation": target_structured_failure_validation,
+            "target_discovery_receipt_path": str(TARGET_DISCOVERY_RECEIPT) if target_structured_failure is not None else None,
+            "target_discovery_receipt_file_sha256": target_structured_failure_file_sha,
             "attempt_state": "target_command_invoked",
             "active_counters": dict(ATTEMPT_STATE_COUNTERS["target_command_invoked"]),
             "target_contact_count": 1,
             "sensor_inventory_count": 0,
+            "candidate_scan_count": 1 if target_structured_failure is not None else 0,
             "live_invocation_count": 0,
             "pmu_acquisition_count": 0,
             "runtime_launch_count": 0,
@@ -2566,6 +2679,7 @@ def acquire_temperature_sensor_authority(
         "target_command_invoked": target_command_invoked,
         "target_contact_count": 1,
         "sensor_inventory_count": 1,
+        "candidate_scan_count": 1,
         "live_invocation_count": 0,
         "pmu_acquisition_count": 0,
     }
@@ -3207,7 +3321,10 @@ def discovery_transport_self_tests() -> dict[str, Any]:
             "provenance_bound": True,
             "provenance": "controller_verified_target_sensor_inventory",
             "hwmon_name": identity["hwmon_name"],
-            "sensor_label": identity["sensor_label"],
+            "sensor_label_present": identity["sensor_label_present"],
+            "sensor_label_value": identity["sensor_label_value"],
+            "sensor_semantic_role": identity["sensor_semantic_role"],
+            "sensor_semantic_profile": identity["sensor_semantic_profile"],
             "approved_sensor_identity": identity,
             "target_discovery_receipt": discovery,
             "controller_challenge": challenge,
@@ -4541,7 +4658,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
     missing_review_blocked = False
 
     def failed_source_review(**_kwargs: Any) -> dict[str, Any]:
-        return {"passed": False, "failures": ["missing C5 review"], "review_quorum": {"passed": False}}
+        return {"passed": False, "failures": ["missing C6 review"], "review_quorum": {"passed": False}}
 
     def contact_detecting_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
         nonlocal missing_review_contacted
@@ -4550,7 +4667,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
             missing_review_contacted = True
         return subprocess.CompletedProcess([str(item) for item in command], 0, "", "")
 
-    with tempfile.TemporaryDirectory(prefix="family10h_missing_c5_review_regression_") as tmp:
+    with tempfile.TemporaryDirectory(prefix="family10h_missing_c6_review_regression_") as tmp:
         temp_root = Path(tmp)
         try:
             globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
@@ -4569,7 +4686,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
             try:
                 acquire_temperature_sensor_authority(source_authority_commit="1" * 40)
             except ControllerError as exc:
-                missing_review_blocked = "source authority C5 review gate failed before target contact" in str(exc)
+                missing_review_blocked = "source authority C6 review gate failed before target contact" in str(exc)
         finally:
             for name, value in production_originals.items():
                 globals()[name] = value
@@ -4991,6 +5108,10 @@ def manifest() -> dict[str, Any]:
         "temperature_sensor_authority": {
             "approved_hwmon_names": target.APPROVED_TEMPERATURE_HWMON_NAMES,
             "approved_sensor_labels": target.APPROVED_TEMPERATURE_SENSOR_LABELS,
+            "legacy_family10h_sensor_profile": target.LEGACY_FAMILY10H_TEMPERATURE_PROFILE,
+            "legacy_family10h_sensor_input": target.LEGACY_FAMILY10H_TEMPERATURE_INPUT,
+            "legacy_family10h_sensor_role": target.LEGACY_FAMILY10H_TEMPERATURE_ROLE,
+            "legacy_family10h_label_law": "temp1_label absent is accepted; temp1_label present must be exactly Tctl",
             "required_identity_fields": target.TEMPERATURE_IDENTITY_FIELDS,
             "authority_receipt_path": str(TEMPERATURE_SENSOR_AUTHORITY) if TEMPERATURE_SENSOR_AUTHORITY.exists() else None,
             "authority_receipt_file_sha256": public.sha256_file(TEMPERATURE_SENSOR_AUTHORITY) if TEMPERATURE_SENSOR_AUTHORITY.exists() else None,
