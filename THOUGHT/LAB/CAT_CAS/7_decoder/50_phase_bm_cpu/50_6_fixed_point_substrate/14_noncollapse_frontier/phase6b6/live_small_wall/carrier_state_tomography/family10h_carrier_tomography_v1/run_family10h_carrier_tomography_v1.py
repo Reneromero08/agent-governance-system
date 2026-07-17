@@ -42,11 +42,15 @@ DISCOVERY_CLEANUP_CUSTODY_PATH = HERE / "CARRIER_TOMOGRAPHY_DISCOVERY_CLEANUP_CU
 ATTEMPT_HISTORY_DIR = HERE / "SENSOR_AUTHORITY_ATTEMPT_HISTORY"
 ATTEMPT_HISTORY_INDEX_PATH = ATTEMPT_HISTORY_DIR / "ATTEMPT_HISTORY_INDEX.json"
 C3_ATTEMPT_HISTORY_DIR = ATTEMPT_HISTORY_DIR / "c3_55e059bc_failed_affinity_precheck"
+C5_ATTEMPT_HISTORY_DIR = ATTEMPT_HISTORY_DIR / "c5_ca8f8490_no_approved_sensor"
 C3_SOURCE_AUTHORITY_COMMIT = "55e059bc7acaafee3feacddac2069d7b5e40edd1"
 C4_SOURCE_AUTHORITY_COMMIT = "092d0a655e94d7c00f69efc1236cf1c8a2896ee1"
 C5_SOURCE_AUTHORITY_COMMIT = "8021563a6122b72316ddd218077b8b82e36f9055"
+C5_ATTEMPT_SOURCE_COMMIT = "ca8f8490e9d2fc9b36debbfe7c927bfe2fde5c5e"
 C3_FAILURE_EVIDENCE_COMMIT = "35844e76317017a73dc0fa83f7e976642b80c66f"
 C3_FAILURE_REASON = "TargetError: platform affinity excludes frozen source or receiver CPU"
+C5_FAILURE_EVIDENCE_COMMIT = "8021563a6122b72316ddd218077b8b82e36f9055"
+C5_FAILURE_REASON = "TargetError: no approved CPU temperature sensor found"
 FINAL_OBJECT_VERIFY_PATH = HERE / "CARRIER_TOMOGRAPHY_FINAL_OBJECT_VERIFY.json"
 FINAL_EVIDENCE_COMMIT_PATH = HERE / "CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT.json"
 MANIFEST_PATH = HERE / "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json"
@@ -1201,58 +1205,77 @@ def validate_attempt_history_index(index: dict[str, Any]) -> dict[str, Any]:
         failures.append("attempt history index schema mismatch")
     if not isinstance(attempts_value, list):
         failures.append("attempt history attempts missing")
-    c3_records = [item for item in attempts if isinstance(item, dict) and item.get("attempt_version") == "C3"]
-    if len(c3_records) != 1:
-        failures.append("attempt history must contain exactly one C3 record")
-        c3 = {}
-    else:
-        c3 = c3_records[0]
-    if c3:
-        expected_counters = {
-            "target_contact_count": 1,
-            "sensor_inventory_count": 0,
-            "live_invocation_count": 0,
-            "pmu_acquisition_count": 0,
-        }
-        if c3.get("source_authority_commit") != C3_SOURCE_AUTHORITY_COMMIT:
-            failures.append("C3 history source authority commit mismatch")
-        if c3.get("failure_evidence_commit") != C3_FAILURE_EVIDENCE_COMMIT:
-            failures.append("C3 history failure evidence commit mismatch")
-        if c3.get("failure_reason") != C3_FAILURE_REASON:
-            failures.append("C3 history failure reason mismatch")
-        counters = c3.get("counters")
-        if not counter_dict_equal_strict(counters if isinstance(counters, dict) else {}, expected_counters):
-            failures.append("C3 history counters mismatch")
-        if c3.get("cleanup_result") is not True:
-            failures.append("C3 history cleanup result mismatch")
-        if c3.get("remote_root_absence_result") is not True:
-            failures.append("C3 history remote-root absence mismatch")
-        archived_files = c3.get("archived_files")
-        if not isinstance(archived_files, dict):
-            failures.append("C3 history archived files missing")
-            archived_files = {}
-        for label, item in archived_files.items():
-            if not isinstance(item, dict):
-                failures.append(f"C3 history archived file malformed {label}")
-                continue
-            path_value = item.get("path")
-            sha_value = item.get("sha256")
-            if not isinstance(path_value, str) or not isinstance(sha_value, str):
-                failures.append(f"C3 history archived file binding missing {label}")
-                continue
-            path = HERE / path_value if not Path(path_value).is_absolute() else Path(path_value)
-            if not path.exists():
-                failures.append(f"C3 history archived file absent {label}")
-            elif public.sha256_file(path) != sha_value:
-                failures.append(f"C3 history archived file digest mismatch {label}")
-    cumulative = index.get("cumulative_counters")
-    expected_cumulative = {
+    expected_counters = {
         "target_contact_count": 1,
         "sensor_inventory_count": 0,
         "live_invocation_count": 0,
         "pmu_acquisition_count": 0,
     }
-    if not counter_dict_equal_strict(cumulative if isinstance(cumulative, dict) else {}, expected_cumulative):
+    expected_attempts = {
+        "C3": {
+            "source_authority_commit": C3_SOURCE_AUTHORITY_COMMIT,
+            "failure_evidence_commit": C3_FAILURE_EVIDENCE_COMMIT,
+            "failure_reason": C3_FAILURE_REASON,
+            "required_archived_file_labels": {"attempt", "attempt_journal", "challenge", "cleanup_custody"},
+        },
+        "C5": {
+            "source_authority_commit": C5_ATTEMPT_SOURCE_COMMIT,
+            "failure_evidence_commit": C5_FAILURE_EVIDENCE_COMMIT,
+            "failure_reason": C5_FAILURE_REASON,
+            "required_archived_file_labels": {"attempt", "attempt_journal", "challenge", "cleanup_custody", "target_failure"},
+        },
+    }
+    attempt_versions = [item.get("attempt_version") for item in attempts if isinstance(item, dict)]
+    if sorted(attempt_versions) != sorted(expected_attempts):
+        failures.append("attempt history version set mismatch")
+    computed_cumulative = zero_attempt_counters()
+    for version, expected in expected_attempts.items():
+        records = [item for item in attempts if isinstance(item, dict) and item.get("attempt_version") == version]
+        if len(records) != 1:
+            failures.append(f"attempt history must contain exactly one {version} record")
+            continue
+        record = records[0]
+        if record.get("source_authority_commit") != expected["source_authority_commit"]:
+            failures.append(f"{version} history source authority commit mismatch")
+        if record.get("failure_evidence_commit") != expected["failure_evidence_commit"]:
+            failures.append(f"{version} history failure evidence commit mismatch")
+        if record.get("failure_reason") != expected["failure_reason"]:
+            failures.append(f"{version} history failure reason mismatch")
+        counters = record.get("counters")
+        if not counter_dict_equal_strict(counters if isinstance(counters, dict) else {}, expected_counters):
+            failures.append(f"{version} history counters mismatch")
+        else:
+            computed_cumulative = counter_sum(computed_cumulative, counters)
+        if record.get("cleanup_result") is not True:
+            failures.append(f"{version} history cleanup result mismatch")
+        if record.get("remote_root_absence_result") is not True:
+            failures.append(f"{version} history remote-root absence mismatch")
+        archived_files = record.get("archived_files")
+        if not isinstance(archived_files, dict):
+            failures.append(f"{version} history archived files missing")
+            archived_files = {}
+        labels = set(archived_files)
+        if labels != expected["required_archived_file_labels"]:
+            failures.append(f"{version} history archived file label mismatch")
+        for label, item in archived_files.items():
+            if not isinstance(item, dict):
+                failures.append(f"{version} history archived file malformed {label}")
+                continue
+            path_value = item.get("path")
+            sha_value = item.get("sha256")
+            bytes_value = item.get("bytes")
+            if not isinstance(path_value, str) or not isinstance(sha_value, str) or not is_strict_int(bytes_value):
+                failures.append(f"{version} history archived file binding missing {label}")
+                continue
+            path = HERE / path_value if not Path(path_value).is_absolute() else Path(path_value)
+            if not path.exists():
+                failures.append(f"{version} history archived file absent {label}")
+            elif public.sha256_file(path) != sha_value:
+                failures.append(f"{version} history archived file digest mismatch {label}")
+            elif path.stat().st_size != bytes_value:
+                failures.append(f"{version} history archived file byte-size mismatch {label}")
+    cumulative = index.get("cumulative_counters")
+    if not counter_dict_equal_strict(cumulative if isinstance(cumulative, dict) else {}, computed_cumulative):
         failures.append("attempt history cumulative counters mismatch")
     index_sha = index.get("attempt_history_index_sha256")
     if index_sha != public.digest({k: v for k, v in index.items() if k != "attempt_history_index_sha256"}):
@@ -1276,15 +1299,15 @@ def known_historical_lane_contact_report() -> dict[str, Any]:
     counters = zero_attempt_counters()
     history = read_attempt_history_index()
     if history["passed"]:
-        c3 = {key: history["cumulative_counters"][key] for key in ATTEMPT_COUNTER_KEYS}
-        counters = counter_sum(counters, c3)
+        archived_attempts = {key: history["cumulative_counters"][key] for key in ATTEMPT_COUNTER_KEYS}
+        counters = counter_sum(counters, archived_attempts)
         components.append({
-            "component": "C3 sensor-authority attempt history",
+            "component": "sensor-authority attempt history",
             "authoritative_for_active_transaction": False,
-            "counters": c3,
+            "counters": archived_attempts,
         })
     else:
-        failures.extend("historical C3 metadata unavailable: " + item for item in history["failures"])
+        failures.extend("historical sensor-authority metadata unavailable: " + item for item in history["failures"])
     affinity_dir = HERE / "AFFINITY_CAPABILITY_OBSERVATION"
     if affinity_dir.exists():
         for receipt_path in sorted(affinity_dir.glob("*.sha256.json")):
@@ -2203,8 +2226,90 @@ def validate_target_discovery_failure_receipt(
     failures: list[str] = []
     if not isinstance(receipt, dict):
         return {"passed": False, "failures": ["structured target discovery failure receipt missing"]}
+    candidate_keys = {
+        "class_path",
+        "input_basename",
+        "input_path_exists",
+        "input_readability",
+        "raw_input_text",
+        "raw_input_parse_failure",
+        "parsed_millidegree_value",
+        "physical_range_passed",
+        "hwmon_name_path_exists",
+        "hwmon_name_readability",
+        "hwmon_name_value",
+        "sensor_label_path_exists",
+        "sensor_label_present",
+        "sensor_label_readability",
+        "sensor_label_value",
+        "resolved_input_path",
+        "resolved_hwmon_path",
+        "resolved_device_path",
+        "resolved_driver_path",
+        "resolved_subsystem_path",
+        "device_driver",
+        "device_subsystem",
+        "device_modalias_path_exists",
+        "device_modalias_readability",
+        "device_modalias_value",
+        "input_st_dev",
+        "input_st_ino",
+        "input_st_mode",
+        "observation_errors",
+        "approval_profile",
+        "sensor_semantic_role",
+        "sensor_semantic_profile",
+        "approved",
+        "rejection_reasons",
+        "identity",
+        "canonical_path_law_active",
+        "class_path_under_hwmon_root",
+        "resolved_input_under_sys_devices",
+        "resolved_device_under_sys_devices",
+        "rejection_reason",
+    }
+    expected_keys = {
+        "schema",
+        "discovery_mode",
+        "passed",
+        "failure_classification",
+        "failure_detail",
+        "target_contact_count",
+        "sensor_inventory_count",
+        "candidate_scan_count",
+        "live_invocation_count",
+        "pmu_acquisition_count",
+        "pmu_open_count",
+        "runtime_launch_count",
+        "tomography_output_root_created",
+        "source_root",
+        "receipt_path",
+        "hwmon_root",
+        "provenance",
+        "controller_challenge_sha256",
+        "controller_nonce_sha256",
+        "authorized_commit",
+        "source_hashes_sha256",
+        "source_bundle_sha256",
+        "runtime_binary_sha256",
+        "source_authority_review",
+        "source_authority",
+        "challenge_validation",
+        "top_level_visibility_snapshot",
+        "observed_candidates",
+        "candidate_count",
+        "approved_count",
+        "active_counters",
+        "target_discovery_receipt_sha256",
+    }
+    if set(receipt) != expected_keys:
+        failures.append("structured target discovery failure keyset mismatch")
     if receipt.get("schema") != target.TEMPERATURE_SENSOR_DISCOVERY_FAILURE_SCHEMA:
         failures.append("structured target discovery failure schema mismatch")
+    if receipt.get("passed") is not False:
+        failures.append("structured target discovery failure pass bit must be false")
+    if receipt.get("discovery_mode") != "target_read_only_sensor_inventory":
+        failures.append("structured target discovery failure mode mismatch")
     if receipt.get("target_discovery_receipt_sha256") != public.digest(
         {k: v for k, v in receipt.items() if k != "target_discovery_receipt_sha256"}
     ):
@@ -2221,19 +2326,102 @@ def validate_target_discovery_failure_receipt(
         failures.append("structured target discovery failure source bundle mismatch")
     if receipt.get("runtime_binary_sha256") != expected_challenge.get("runtime_binary_sha256"):
         failures.append("structured target discovery failure runtime hash mismatch")
-    if receipt.get("target_contact_count") != 1 or receipt.get("sensor_inventory_count") != 0:
-        failures.append("structured target discovery failure counters mismatch")
-    if receipt.get("candidate_scan_count") != 1:
+    if receipt.get("source_authority_review") != expected_challenge.get("source_authority_review"):
+        failures.append("structured target discovery failure source-review binding mismatch")
+    transport_scope = expected_challenge.get("transport_scope") if isinstance(expected_challenge.get("transport_scope"), dict) else {}
+    if transport_scope:
+        if receipt.get("source_root") != transport_scope.get("remote_source_root"):
+            failures.append("structured target discovery failure source-root scope mismatch")
+        if receipt.get("receipt_path") != transport_scope.get("remote_receipt_path"):
+            failures.append("structured target discovery failure receipt-path scope mismatch")
+    provenance = receipt.get("provenance")
+    if not isinstance(provenance, dict):
+        failures.append("structured target discovery failure provenance missing")
+        provenance = {}
+    provenance_keys = {
+        "authority",
+        "science_package_id",
+        "transaction_run_id",
+        "target_platform",
+        "discovery_monotonic_ns",
+        "controller_challenge_sha256",
+        "authorized_commit",
+    }
+    if set(provenance) != provenance_keys:
+        failures.append("structured target discovery failure provenance keyset mismatch")
+    if provenance.get("authority") != "target_sensor_discovery":
+        failures.append("structured target discovery failure provenance authority mismatch")
+    if provenance.get("science_package_id") != public.SCIENCE_PACKAGE_ID or provenance.get("transaction_run_id") != public.TRANSACTION_RUN_ID:
+        failures.append("structured target discovery failure provenance package mismatch")
+    if provenance.get("controller_challenge_sha256") != public.digest(expected_challenge):
+        failures.append("structured target discovery failure provenance challenge mismatch")
+    if provenance.get("authorized_commit") != expected_source_commit:
+        failures.append("structured target discovery failure provenance source commit mismatch")
+    if not is_strict_int(provenance.get("discovery_monotonic_ns")):
+        failures.append("structured target discovery failure provenance monotonic time invalid")
+    challenge_validation = receipt.get("challenge_validation")
+    if not isinstance(challenge_validation, dict):
+        failures.append("structured target discovery failure challenge validation missing")
+        challenge_validation = {}
+    expected_counters = {
+        "target_contact_count": 1,
+        "sensor_inventory_count": 0,
+        "live_invocation_count": 0,
+        "pmu_acquisition_count": 0,
+        "candidate_scan_count": receipt.get("candidate_scan_count"),
+    }
+    if not is_strict_int(receipt.get("candidate_scan_count")) or receipt.get("candidate_scan_count") not in {0, 1}:
         failures.append("structured target discovery failure candidate scan counter mismatch")
-    if receipt.get("runtime_launch_count") != 0 or receipt.get("pmu_open_count") != 0 or receipt.get("pmu_acquisition_count") != 0:
+    elif not all(is_strict_int(receipt.get(key)) and receipt.get(key) == value for key, value in expected_counters.items()):
+        failures.append("structured target discovery failure counters mismatch")
+    if receipt.get("active_counters") != expected_counters or not counter_dict_equal_strict(receipt.get("active_counters"), expected_counters):
+        failures.append("structured target discovery failure active counters mismatch")
+    if (
+        not is_strict_int(receipt.get("runtime_launch_count"))
+        or not is_strict_int(receipt.get("pmu_open_count"))
+        or not is_strict_int(receipt.get("pmu_acquisition_count"))
+        or receipt.get("runtime_launch_count") != 0
+        or receipt.get("pmu_open_count") != 0
+        or receipt.get("pmu_acquisition_count") != 0
+    ):
         failures.append("structured target discovery failure opened runtime or PMU")
     if receipt.get("tomography_output_root_created") is not False:
         failures.append("structured target discovery failure created tomography output root")
     candidates = receipt.get("observed_candidates")
     if not isinstance(candidates, list):
         failures.append("structured target discovery failure candidates missing")
+        candidates = []
     elif receipt.get("candidate_count") != len(candidates):
         failures.append("structured target discovery failure candidate count mismatch")
+    for index, candidate in enumerate(candidates):
+        if not isinstance(candidate, dict):
+            failures.append(f"structured target discovery failure candidate malformed {index}")
+            continue
+        if set(candidate) != candidate_keys:
+            failures.append(f"structured target discovery failure candidate keyset mismatch {index}")
+        for key in [
+            "input_path_exists",
+            "input_readability",
+            "physical_range_passed",
+            "hwmon_name_path_exists",
+            "hwmon_name_readability",
+            "sensor_label_path_exists",
+            "sensor_label_present",
+            "sensor_label_readability",
+            "device_modalias_path_exists",
+            "device_modalias_readability",
+            "approved",
+            "canonical_path_law_active",
+            "class_path_under_hwmon_root",
+            "resolved_input_under_sys_devices",
+            "resolved_device_under_sys_devices",
+        ]:
+            if key in candidate and type(candidate.get(key)) is not bool:
+                failures.append(f"structured target discovery failure candidate boolean invalid {index}:{key}")
+        if not isinstance(candidate.get("observation_errors"), list) or not isinstance(candidate.get("rejection_reasons"), list):
+            failures.append(f"structured target discovery failure candidate list fields invalid {index}")
+        if candidate.get("approved") is True and not isinstance(candidate.get("identity"), dict):
+            failures.append(f"structured target discovery failure approved candidate identity missing {index}")
     approved = [candidate for candidate in candidates if isinstance(candidate, dict) and candidate.get("approved") is True]
     if receipt.get("approved_count") != len(approved):
         failures.append("structured target discovery failure approved count mismatch")
@@ -2245,8 +2433,22 @@ def validate_target_discovery_failure_receipt(
         "LEGACY_CANDIDATE_REJECTED_IDENTITY",
         "LEGACY_CANDIDATE_UNREADABLE",
         "MULTIPLE_APPROVED_LEGACY_CANDIDATES",
+        "CONTROLLER_CHALLENGE_MISSING",
+        "CONTROLLER_CHALLENGE_INVALID",
+        "PLATFORM_IDENTITY_INVALID",
+        "SELECTED_IDENTITY_CHANGED_BEFORE_READ",
+        "SELECTED_IDENTITY_CHANGED_AFTER_READ",
+        "PRE_SCAN_DISCOVERY_FAILURE",
     }:
         failures.append("structured target discovery failure classification invalid")
+    if receipt.get("candidate_scan_count") == 0 and receipt.get("observed_candidates") != []:
+        failures.append("structured target discovery failure pre-scan candidates must be empty")
+    visibility = receipt.get("top_level_visibility_snapshot")
+    if receipt.get("candidate_scan_count") == 1:
+        if not isinstance(visibility, dict):
+            failures.append("structured target discovery failure scan visibility missing")
+        elif visibility.get("temp_input_candidate_count") != len(candidates):
+            failures.append("structured target discovery failure visibility candidate count mismatch")
     return {"passed": not failures, "failures": failures}
 
 
@@ -2259,6 +2461,8 @@ def acquire_temperature_sensor_authority(
     source_commit = source_authority_commit or os.environ.get("FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUTHORITY_COMMIT") or git_text("rev-parse", "HEAD")
     if source_commit == C3_SOURCE_AUTHORITY_COMMIT:
         raise ControllerError("C3 source authority acquisition already failed and is preserved as no-retry")
+    if source_commit in {C5_ATTEMPT_SOURCE_COMMIT, C5_SOURCE_AUTHORITY_COMMIT, C5_FAILURE_EVIDENCE_COMMIT}:
+        raise ControllerError("C5 source authority acquisition already failed and is preserved as no-retry")
     existing_active_paths = active_attempt_paths_present()
     if existing_active_paths:
         raise ControllerError("second discovery attempt rejected: authority, discovery, transport, cleanup, or attempt receipt already exists")
@@ -2430,30 +2634,6 @@ def acquire_temperature_sensor_authority(
             )
             completed = run(command, timeout=120.0, check=False)
             if completed.returncode != 0:
-                failure_sha_command = f"if test -s {sh_quote(remote_receipt)}; then sha256sum {sh_quote(remote_receipt)} | awk '{{print $1}}'; fi"
-                command = ["ssh", "-o", "BatchMode=yes", target_host, failure_sha_command]
-                commands.append(command)
-                failure_remote_sha = run(command, timeout=20.0, check=False).stdout.strip()
-                if re.fullmatch(r"[0-9a-f]{64}", failure_remote_sha):
-                    command = ["scp", "-q", f"{target_host}:{remote_receipt}", str(local_copyback)]
-                    commands.append(command)
-                    run(command, timeout=30.0)
-                    target_structured_failure_file_sha = public.sha256_file(local_copyback)
-                    if target_structured_failure_file_sha == failure_remote_sha:
-                        target_structured_failure_bytes = local_copyback.read_bytes()
-                        target_structured_failure = read_json(local_copyback)
-                        target_structured_failure_validation = validate_target_discovery_failure_receipt(
-                            target_structured_failure,
-                            expected_challenge=challenge,
-                            expected_source_commit=source_commit,
-                        )
-                    else:
-                        target_structured_failure_validation = {
-                            "passed": False,
-                            "failures": ["structured target discovery failure copy-back hash mismatch"],
-                            "remote_sha256": failure_remote_sha,
-                            "local_sha256": target_structured_failure_file_sha,
-                        }
                 target_failure = {
                     "target_return_code": completed.returncode,
                     "stdout_sha256": sha256_text(completed.stdout),
@@ -2462,10 +2642,53 @@ def acquire_temperature_sensor_authority(
                     "bounded_stderr": bounded_text(completed.stderr),
                     "attempt_state": "target_command_invoked",
                     "active_counters": dict(ATTEMPT_STATE_COUNTERS["target_command_invoked"]),
-                    "structured_failure_receipt_present": target_structured_failure is not None,
-                    "structured_failure_receipt_file_sha256": target_structured_failure_file_sha,
-                    "structured_failure_validation": target_structured_failure_validation,
+                    "structured_failure_receipt_present": False,
+                    "structured_failure_receipt_file_sha256": None,
+                    "structured_failure_validation": {
+                        "passed": False,
+                        "failures": ["structured target discovery failure retrieval not attempted"],
+                    },
                 }
+                try:
+                    failure_sha_command = f"if test -s {sh_quote(remote_receipt)}; then sha256sum {sh_quote(remote_receipt)} | awk '{{print $1}}'; fi"
+                    command = ["ssh", "-o", "BatchMode=yes", target_host, failure_sha_command]
+                    commands.append(command)
+                    failure_remote_sha = run(command, timeout=20.0, check=False).stdout.strip()
+                    if re.fullmatch(r"[0-9a-f]{64}", failure_remote_sha):
+                        command = ["scp", "-q", f"{target_host}:{remote_receipt}", str(local_copyback)]
+                        commands.append(command)
+                        run(command, timeout=30.0)
+                        target_structured_failure_file_sha = public.sha256_file(local_copyback)
+                        if target_structured_failure_file_sha == failure_remote_sha:
+                            target_structured_failure_bytes = local_copyback.read_bytes()
+                            target_structured_failure = read_json(local_copyback)
+                            target_structured_failure_validation = validate_target_discovery_failure_receipt(
+                                target_structured_failure,
+                                expected_challenge=challenge,
+                                expected_source_commit=source_commit,
+                            )
+                        else:
+                            target_structured_failure_validation = {
+                                "passed": False,
+                                "failures": ["structured target discovery failure copy-back hash mismatch"],
+                                "remote_sha256": failure_remote_sha,
+                                "local_sha256": target_structured_failure_file_sha,
+                            }
+                    else:
+                        target_structured_failure_validation = {
+                            "passed": False,
+                            "failures": ["structured target discovery failure remote receipt missing"],
+                            "remote_sha256": failure_remote_sha,
+                        }
+                except Exception as exc:  # noqa: BLE001 - preserve outer failure evidence when copy-back fails
+                    target_structured_failure_validation = {
+                        "passed": False,
+                        "failures": ["structured target discovery failure retrieval exception"],
+                        "exception": f"{type(exc).__name__}: {exc}",
+                    }
+                target_failure["structured_failure_receipt_present"] = target_structured_failure is not None
+                target_failure["structured_failure_receipt_file_sha256"] = target_structured_failure_file_sha
+                target_failure["structured_failure_validation"] = target_structured_failure_validation
             else:
                 sha_command = f"sha256sum {sh_quote(remote_receipt)} | awk '{{print $1}}'"
                 command = ["ssh", "-o", "BatchMode=yes", target_host, sha_command]
@@ -2607,9 +2830,21 @@ def acquire_temperature_sensor_authority(
                     )
     if target_failure is not None:
         if target_structured_failure_bytes is not None:
-            TARGET_DISCOVERY_RECEIPT.write_bytes(target_structured_failure_bytes)
-            if public.sha256_file(TARGET_DISCOVERY_RECEIPT) != target_structured_failure_file_sha:
-                raise ControllerError("structured target discovery failure local write verification failed")
+            try:
+                TARGET_DISCOVERY_RECEIPT.write_bytes(target_structured_failure_bytes)
+                if public.sha256_file(TARGET_DISCOVERY_RECEIPT) != target_structured_failure_file_sha:
+                    target_structured_failure_validation = {
+                        "passed": False,
+                        "failures": ["structured target discovery failure local write verification failed"],
+                    }
+                    target_failure["structured_failure_validation"] = target_structured_failure_validation
+            except Exception as exc:  # noqa: BLE001 - outer failure receipt must still seal
+                target_structured_failure_validation = {
+                    "passed": False,
+                    "failures": ["structured target discovery failure local write exception"],
+                    "exception": f"{type(exc).__name__}: {exc}",
+                }
+                target_failure["structured_failure_validation"] = target_structured_failure_validation
         failure_receipt = {
             "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_FAILURE_V1",
             "passed": False,
@@ -2641,6 +2876,8 @@ def acquire_temperature_sensor_authority(
             {k: v for k, v in failure_receipt.items() if k != "target_discovery_failure_sha256"}
         )
         write_json_atomic(TARGET_DISCOVERY_FAILURE_PATH, failure_receipt)
+        if not isinstance(target_structured_failure_validation, dict) or target_structured_failure_validation.get("passed") is not True:
+            raise ControllerError(f"target discovery failed rc={target_failure['target_return_code']}: structured failure receipt invalid or missing")
         raise ControllerError(f"target discovery failed rc={target_failure['target_return_code']}: bounded failure persisted")
     if not cleanup["passed"] or not cleanup["absence_verified"]:
         raise ControllerError("discovery cleanup or remote-root absence verification failed")
@@ -4544,6 +4781,199 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
     invalid_discovery_file_sha = hashlib.sha256(invalid_discovery_bytes).hexdigest()
     fake_source_hashes = read_json(SOURCE_HASHES)
     fake_bundle = read_existing_source_bundle_authority()
+    structured_failure_commit = "1" * 40
+    structured_failure_runtime_sha = "f" * 64
+    structured_failure_nonce_sha = "9" * 64
+    structured_failure_challenge = build_temperature_authority_challenge(
+        source_hashes=fake_source_hashes,
+        source_bundle_sha256=fake_bundle["sha256"],
+        runtime_binary_sha256=structured_failure_runtime_sha,
+        schedule_sidecar=read_json(public.SCHEDULE_SHA),
+        authorized_commit=structured_failure_commit,
+        controller_nonce_sha256=structured_failure_nonce_sha,
+        transport_scope=fixture_transport_scope(HERE, structured_failure_nonce_sha),
+        source_authority_review=fixture_source_review_binding(
+            structured_failure_commit,
+            fake_source_hashes["source_hashes_sha256"],
+            fake_bundle["sha256"],
+            structured_failure_runtime_sha,
+        ),
+    )
+
+    def seal_structured_failure_receipt(overrides: dict[str, Any] | None = None) -> dict[str, Any]:
+        counters = {
+            "target_contact_count": 1,
+            "sensor_inventory_count": 0,
+            "live_invocation_count": 0,
+            "pmu_acquisition_count": 0,
+            "candidate_scan_count": 1,
+        }
+        candidate = {
+            "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+            "input_basename": "temp1_input",
+            "input_path_exists": True,
+            "input_readability": True,
+            "raw_input_text": "42000",
+            "raw_input_parse_failure": None,
+            "parsed_millidegree_value": 42000,
+            "physical_range_passed": True,
+            "hwmon_name_path_exists": True,
+            "hwmon_name_readability": True,
+            "hwmon_name_value": "k10temp",
+            "sensor_label_path_exists": True,
+            "sensor_label_present": True,
+            "sensor_label_readability": True,
+            "sensor_label_value": "ambient",
+            "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+            "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+            "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+            "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+            "resolved_subsystem_path": "/sys/bus/pci",
+            "device_driver": "k10temp",
+            "device_subsystem": "pci",
+            "device_modalias_path_exists": True,
+            "device_modalias_readability": True,
+            "device_modalias_value": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+            "input_st_dev": 1,
+            "input_st_ino": 2,
+            "input_st_mode": 33060,
+            "observation_errors": [],
+            "approval_profile": target.LEGACY_FAMILY10H_TEMPERATURE_PROFILE,
+            "sensor_semantic_role": target.LEGACY_FAMILY10H_TEMPERATURE_ROLE,
+            "sensor_semantic_profile": target.LEGACY_FAMILY10H_TEMPERATURE_PROFILE,
+            "approved": False,
+            "rejection_reasons": ["present temp1_label is not Tctl"],
+            "identity": None,
+            "canonical_path_law_active": True,
+            "class_path_under_hwmon_root": True,
+            "resolved_input_under_sys_devices": True,
+            "resolved_device_under_sys_devices": True,
+            "rejection_reason": "present temp1_label is not Tctl",
+        }
+        row = {
+            "schema": target.TEMPERATURE_SENSOR_DISCOVERY_FAILURE_SCHEMA,
+            "discovery_mode": "target_read_only_sensor_inventory",
+            "passed": False,
+            "failure_classification": "LEGACY_CANDIDATE_REJECTED_IDENTITY",
+            "failure_detail": "fixture rejected",
+            "target_contact_count": counters["target_contact_count"],
+            "sensor_inventory_count": counters["sensor_inventory_count"],
+            "candidate_scan_count": counters["candidate_scan_count"],
+            "live_invocation_count": counters["live_invocation_count"],
+            "pmu_acquisition_count": counters["pmu_acquisition_count"],
+            "pmu_open_count": 0,
+            "runtime_launch_count": 0,
+            "tomography_output_root_created": False,
+            "source_root": str(HERE),
+            "receipt_path": str(HERE / target.TEMPERATURE_SENSOR_DISCOVERY_RECEIPT_NAME),
+            "hwmon_root": "/sys/class/hwmon",
+            "provenance": {
+                "authority": "target_sensor_discovery",
+                "science_package_id": public.SCIENCE_PACKAGE_ID,
+                "transaction_run_id": public.TRANSACTION_RUN_ID,
+                "target_platform": {"vendor": "AuthenticAMD", "cpu_family": 16},
+                "discovery_monotonic_ns": 1,
+                "controller_challenge_sha256": public.digest(structured_failure_challenge),
+                "authorized_commit": structured_failure_commit,
+            },
+            "controller_challenge_sha256": public.digest(structured_failure_challenge),
+            "controller_nonce_sha256": structured_failure_nonce_sha,
+            "authorized_commit": structured_failure_commit,
+            "source_hashes_sha256": structured_failure_challenge["source_hashes_sha256"],
+            "source_bundle_sha256": structured_failure_challenge["source_bundle_sha256"],
+            "runtime_binary_sha256": structured_failure_challenge["runtime_binary_sha256"],
+            "source_authority_review": structured_failure_challenge["source_authority_review"],
+            "source_authority": {"passed": True, "fixture": True},
+            "challenge_validation": {"passed": True, "challenge_sha256": public.digest(structured_failure_challenge)},
+            "top_level_visibility_snapshot": {"temp_input_candidate_count": 1},
+            "observed_candidates": [candidate],
+            "candidate_count": 1,
+            "approved_count": 0,
+            "active_counters": counters,
+        }
+        if overrides:
+            row.update(overrides)
+        row["target_discovery_receipt_sha256"] = public.digest({k: v for k, v in row.items() if k != "target_discovery_receipt_sha256"})
+        return row
+
+    def mutated_failure_receipt(mutator: Any) -> dict[str, Any]:
+        row = seal_structured_failure_receipt()
+        mutator(row)
+        row["target_discovery_receipt_sha256"] = public.digest({k: v for k, v in row.items() if k != "target_discovery_receipt_sha256"})
+        return row
+
+    valid_structured_failure_validation = validate_target_discovery_failure_receipt(
+        seal_structured_failure_receipt(),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    boolean_top_level_failure_validation = validate_target_discovery_failure_receipt(
+        mutated_failure_receipt(lambda row: row.update({"target_contact_count": True})),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    boolean_active_counter_failure_validation = validate_target_discovery_failure_receipt(
+        mutated_failure_receipt(lambda row: row["active_counters"].update({"target_contact_count": True})),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    contradictory_active_counter_validation = validate_target_discovery_failure_receipt(
+        mutated_failure_receipt(lambda row: row["active_counters"].update({"candidate_scan_count": 0})),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    missing_source_review_validation = validate_target_discovery_failure_receipt(
+        mutated_failure_receipt(lambda row: row.pop("source_authority_review")),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    mismatched_source_review_validation = validate_target_discovery_failure_receipt(
+        mutated_failure_receipt(lambda row: row.update({"source_authority_review": {**structured_failure_challenge["source_authority_review"], "findings_sha256": "0" * 64}})),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    source_hash_mismatch_validation = validate_target_discovery_failure_receipt(
+        mutated_failure_receipt(lambda row: row.update({"source_hashes_sha256": "0" * 64})),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    source_commit_mismatch_validation = validate_target_discovery_failure_receipt(
+        mutated_failure_receipt(lambda row: row.update({"authorized_commit": "2" * 40})),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    candidate_mutation_validation = validate_target_discovery_failure_receipt(
+        mutated_failure_receipt(lambda row: row["observed_candidates"].append({"approved": False})),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    provenance_mutation_validation = validate_target_discovery_failure_receipt(
+        mutated_failure_receipt(lambda row: row["provenance"].pop("target_platform")),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    boolean_pmu_open_validation = validate_target_discovery_failure_receipt(
+        mutated_failure_receipt(lambda row: row.update({"pmu_open_count": False})),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    float_runtime_launch_validation = validate_target_discovery_failure_receipt(
+        mutated_failure_receipt(lambda row: row.update({"runtime_launch_count": 0.0})),
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    digest_corruption_receipt = seal_structured_failure_receipt()
+    digest_corruption_receipt["target_discovery_receipt_sha256"] = "0" * 64
+    digest_corruption_validation = validate_target_discovery_failure_receipt(
+        digest_corruption_receipt,
+        expected_challenge=structured_failure_challenge,
+        expected_source_commit=structured_failure_commit,
+    )
+    challenge_mismatch_validation = validate_target_discovery_failure_receipt(
+        seal_structured_failure_receipt(),
+        expected_challenge={**structured_failure_challenge, "source_bundle_sha256": "0" * 64},
+        expected_source_commit=structured_failure_commit,
+    )
 
     def fake_source_review(
         *,
@@ -4653,6 +5083,11 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         acquire_temperature_sensor_authority(source_authority_commit=C3_SOURCE_AUTHORITY_COMMIT)
     except ControllerError as exc:
         c3_reuse_blocked = "C3 source authority acquisition already failed" in str(exc)
+    c5_reuse_blocked = False
+    try:
+        acquire_temperature_sensor_authority(source_authority_commit=C5_ATTEMPT_SOURCE_COMMIT)
+    except ControllerError as exc:
+        c5_reuse_blocked = "C5 source authority acquisition already failed" in str(exc)
 
     missing_review_contacted = False
     missing_review_blocked = False
@@ -4762,8 +5197,26 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "boolean_transport_counter_rejected": not validate_discovery_transport_receipt(seal_transport({"target_contact_count": True}))["passed"],
         "boolean_transport_retry_count_rejected": not validate_discovery_transport_receipt(seal_transport({"retry_count": False}))["passed"],
         "c3_source_commit_reuse_blocked": c3_reuse_blocked,
+        "c5_source_commit_reuse_blocked": c5_reuse_blocked,
+        "valid_structured_target_failure_receipt_accepted": valid_structured_failure_validation["passed"] is True,
+        "structured_target_failure_top_level_boolean_counter_rejected": not boolean_top_level_failure_validation["passed"],
+        "structured_target_failure_active_boolean_counter_rejected": not boolean_active_counter_failure_validation["passed"],
+        "structured_target_failure_active_counter_contradiction_rejected": not contradictory_active_counter_validation["passed"],
+        "structured_target_failure_missing_source_review_rejected": not missing_source_review_validation["passed"],
+        "structured_target_failure_mismatched_source_review_rejected": not mismatched_source_review_validation["passed"],
+        "structured_target_failure_source_hash_mismatch_rejected": not source_hash_mismatch_validation["passed"],
+        "structured_target_failure_source_commit_mismatch_rejected": not source_commit_mismatch_validation["passed"],
+        "structured_target_failure_candidate_mutation_rejected": not candidate_mutation_validation["passed"],
+        "structured_target_failure_provenance_mutation_rejected": not provenance_mutation_validation["passed"],
+        "structured_target_failure_boolean_pmu_open_rejected": not boolean_pmu_open_validation["passed"],
+        "structured_target_failure_float_runtime_launch_rejected": not float_runtime_launch_validation["passed"],
+        "structured_target_failure_digest_corruption_rejected": not digest_corruption_validation["passed"],
+        "structured_target_failure_challenge_mismatch_rejected": not challenge_mismatch_validation["passed"],
         "missing_c5_review_blocks_before_target_contact": missing_review_blocked and not missing_review_contacted,
         "target_nonzero_failure_raises_no_retry": "target discovery failed rc=17" in target_failure_error,
+        "target_nonzero_missing_structured_failure_rejected": "structured failure receipt invalid or missing" in target_failure_error
+        and target_failure_receipt.get("target_failure", {}).get("structured_failure_receipt_present") is False
+        and target_failure_receipt.get("structured_target_discovery_failure_validation", {}).get("passed") is False,
         "target_nonzero_failure_receipt_persisted": target_failure_receipt.get("target_failure", {}).get("target_return_code") == 17,
         "target_nonzero_failure_stdout_bound_and_hashed": target_failure_receipt.get("target_failure", {}).get("stdout_sha256") == sha256_text("bounded target stdout\n"),
         "target_nonzero_failure_stderr_bound_and_hashed": target_failure_receipt.get("target_failure", {}).get("stderr_sha256") == sha256_text("bounded target stderr\n"),

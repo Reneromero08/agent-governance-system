@@ -1,6 +1,6 @@
 {
   "active_namespace_empty_after_archive": true,
-  "attempt_history_index_sha256": "70d92c3bcd1688ff3437ec439b6a0c6f39dc8af1bff43e09fb946f2bf932c5ab",
+  "attempt_history_index_sha256": "48eaee78049c3ac614b6fff1610b620a8400499c0b73f8cddc77864218768888",
   "attempts": [
     {
       "archived_files": {
@@ -52,9 +52,73 @@
       "source_authority_commit": "55e059bc7acaafee3feacddac2069d7b5e40edd1",
       "source_bundle_sha256": "b58b0967018fb0e41caa5b4bf494e2bf66542b9770409b4dd763d641467a9b43",
       "transfer_plan_hash": "9c8d3224abfab85f541df12d9765db56a2eb183af0d1ada361a70bf0d35e9714"
+    },
+    {
+      "archived_files": {
+        "attempt": {
+          "bytes": 44535,
+          "path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c5_ca8f8490_no_approved_sensor/CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.json",
+          "sha256": "fe88351ccc7443a998fbdf04781c3e6965a5b51726365bc1cd539d5e2d871e1f"
+        },
+        "attempt_journal": {
+          "bytes": 92117,
+          "path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c5_ca8f8490_no_approved_sensor/CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.jsonl",
+          "sha256": "d9a7efb266e1d8b04a5bdf9df6d01320c0dba0fddf77445bcdd5f6f7b6fb6c9e"
+        },
+        "challenge": {
+          "bytes": 3834,
+          "path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c5_ca8f8490_no_approved_sensor/CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE.json",
+          "sha256": "d992cbcc09ee6e7f287b2999151df6faa8e57cca6ed1a4b5109e1302513b5f30"
+        },
+        "cleanup_custody": {
+          "bytes": 38818,
+          "path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c5_ca8f8490_no_approved_sensor/CARRIER_TOMOGRAPHY_DISCOVERY_CLEANUP_CUSTODY.json",
+          "sha256": "767534217db9f0e32803284d84b3e8e187c63b5b9a4cee66a9427b2834be051f"
+        },
+        "target_failure": {
+          "bytes": 41481,
+          "path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c5_ca8f8490_no_approved_sensor/CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_FAILURE.json",
+          "sha256": "4f8a05d12c1b7bb12c446ed9a461a9889bce2b0336f1ee1f1ce237b22508fc1a"
+        }
+      },
+      "attempt_file_sha256": "fe88351ccc7443a998fbdf04781c3e6965a5b51726365bc1cd539d5e2d871e1f",
+      "attempt_journal_hash": "d9a7efb266e1d8b04a5bdf9df6d01320c0dba0fddf77445bcdd5f6f7b6fb6c9e",
+      "attempt_receipt_sha256": "d7fb96c516627ae28895094623299587f7b4cecb653cdc0dc026c7bbff154331",
+      "attempt_state": "target_command_invoked",
+      "attempt_version": "C5",
+      "challenge_file_sha256": "d992cbcc09ee6e7f287b2999151df6faa8e57cca6ed1a4b5109e1302513b5f30",
+      "challenge_hash": "09f44d624524cc8a04f53bd2a4c0b607706ea622abd6cd9963a29a9f468a9a1a",
+      "challenge_receipt_canonical_sha256": "bc01f714a2f6ce29575a6b5b4e121f67d375c43ffb83e068c5bd6a42131400f1",
+      "cleanup_custody_file_sha256": "767534217db9f0e32803284d84b3e8e187c63b5b9a4cee66a9427b2834be051f",
+      "cleanup_custody_sha256": "222f8c3c6adfd9600882772b16660976d31e970ebe7a7d73245b9c19ad9fccac",
+      "cleanup_result": true,
+      "controller_challenge_sha256": "09f44d624524cc8a04f53bd2a4c0b607706ea622abd6cd9963a29a9f468a9a1a",
+      "counters": {
+        "live_invocation_count": 0,
+        "pmu_acquisition_count": 0,
+        "sensor_inventory_count": 0,
+        "target_contact_count": 1
+      },
+      "failure_evidence_commit": "8021563a6122b72316ddd218077b8b82e36f9055",
+      "failure_reason": "TargetError: no approved CPU temperature sensor found",
+      "passed": false,
+      "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/002365c7bdf8eeab",
+      "remote_root_absence_result": true,
+      "runtime_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "source_authority_commit": "ca8f8490e9d2fc9b36debbfe7c927bfe2fde5c5e",
+      "source_bundle_sha256": "29aec7a6e2d9bbde7850ded261e42fbf5655f21d5899cef579c311a8901f22f0",
+      "target_discovery_failure_file_sha256": "4f8a05d12c1b7bb12c446ed9a461a9889bce2b0336f1ee1f1ce237b22508fc1a",
+      "target_discovery_failure_sha256": "f71e200daaa8db570e6ffa2a6f7fca4d9e07c993635addd06bcdbb6fc5d155d7",
+      "transfer_plan_hash": "9270efedeba385fb44cf45a37e9742c92b012d7763bfc6db41e813a4f6a3978c"
     }
   ],
   "c4_active_attempt_counters_before_contact": {
+    "live_invocation_count": 0,
+    "pmu_acquisition_count": 0,
+    "sensor_inventory_count": 0,
+    "target_contact_count": 0
+  },
+  "c6_active_attempt_counters_before_contact": {
     "live_invocation_count": 0,
     "pmu_acquisition_count": 0,
     "sensor_inventory_count": 0,
@@ -64,11 +128,12 @@
     "live_invocation_count": 0,
     "pmu_acquisition_count": 0,
     "sensor_inventory_count": 0,
-    "target_contact_count": 1
+    "target_contact_count": 2
   },
   "notes": [
     "C3 failed before sensor enumeration and before tomography execution.",
-    "C4 requires a distinct source-authority commit and separate review overlay."
+    "C5 contacted the target once and failed before preserving candidate inventory under the old no-approved-sensor law.",
+    "C6 requires a distinct source-authority commit, separate review overlay, and at most one new sensor-authority contact."
   ],
   "schema": "FAMILY10H_SENSOR_AUTHORITY_ATTEMPT_HISTORY_INDEX_V1"
 }
