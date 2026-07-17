@@ -1,0 +1,570 @@
+{
+  "$defs": {
+    "adjudication": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_ceiling": {"const": "PHYSICAL_PHASE_CARRIER_PI_RELATION_CHARACTERIZED"},
+        "control_ledger_sha256": {"$ref": "#/$defs/sha256"},
+        "decision": {"enum": ["PASS", "FAIL", "INVALID"]},
+        "kill_ids": {"items": {"type": "string"}, "type": "array"},
+        "metrics_bundle_sha256": {"$ref": "#/$defs/sha256"},
+        "raw_root_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "record_type": {"const": "adjudication"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "decision", "kill_ids", "raw_root_receipt_sha256", "control_ledger_sha256", "metrics_bundle_sha256", "claim_ceiling"],
+      "type": "object"
+    },
+    "arm_assignment_sealed": {
+      "additionalProperties": false,
+      "properties": {
+        "aad_sha256": {"$ref": "#/$defs/sha256"},
+        "cipher": {"const": "ChaCha20-Poly1305-IETF-RFC8439"},
+        "ciphertext_base64": {"pattern": "^[A-Za-z0-9+/]+={0,2}$", "type": "string"},
+        "commitment_sha256": {"$ref": "#/$defs/sha256"},
+        "custodian_id": {"minLength": 1, "type": "string"},
+        "key_sha256": {"$ref": "#/$defs/sha256"},
+        "nonce_base64": {"maxLength": 16, "minLength": 16, "pattern": "^[A-Za-z0-9+/]{16}$", "type": "string"},
+        "record_type": {"const": "arm_assignment_sealed"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "cipher", "nonce_base64", "ciphertext_base64", "aad_sha256", "commitment_sha256", "key_sha256", "custodian_id"],
+      "type": "object"
+    },
+    "arm_assignment_reveal": {
+      "additionalProperties": false,
+      "properties": {
+        "commitment_sha256": {"$ref": "#/$defs/sha256"},
+        "custodian_id": {"minLength": 1, "type": "string"},
+        "key_base64": {"maxLength": 44, "minLength": 44, "pattern": "^[A-Za-z0-9+/]{43}=$", "type": "string"},
+        "mapping_sha256": {"$ref": "#/$defs/sha256"},
+        "record_type": {"const": "arm_assignment_reveal"},
+        "released_utc": {"$ref": "#/$defs/timestamp"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "salt_base64": {"maxLength": 44, "minLength": 44, "pattern": "^[A-Za-z0-9+/]{43}=$", "type": "string"},
+        "schema_version": {"const": "p0-evidence-v1"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "key_base64", "salt_base64", "mapping_sha256", "commitment_sha256", "released_utc", "custodian_id"],
+      "type": "object"
+    },
+    "calibration": {
+      "additionalProperties": false,
+      "properties": {
+        "analysis_sha256": {"$ref": "#/$defs/sha256"},
+        "campaign_index": {"maximum": 2, "minimum": 1, "type": "integer"},
+        "conformance_sha256": {"$ref": "#/$defs/sha256"},
+        "created_utc": {"$ref": "#/$defs/timestamp"},
+        "dependency_lock_sha256": {"$ref": "#/$defs/sha256"},
+        "ed25519_public_key_base64": {"maxLength": 44, "minLength": 44, "pattern": "^[A-Za-z0-9+/]{43}=$", "type": "string"},
+        "ed25519_public_key_sha256": {"$ref": "#/$defs/sha256"},
+        "f_ref_hz": {"$ref": "#/$defs/finite_decimal"},
+        "instrument_configuration_sha256": {"$ref": "#/$defs/sha256"},
+        "parser_sha256": {"$ref": "#/$defs/sha256"},
+        "record_type": {"const": "calibration"},
+        "residual_skew_s": {"$ref": "#/$defs/finite_decimal"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_sha256": {"$ref": "#/$defs/sha256"},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "sealed_assignment_sha256": {"$ref": "#/$defs/sha256"},
+        "thresholds": {
+          "additionalProperties": false,
+          "properties": {
+            "T_A": {"$ref": "#/$defs/finite_decimal"},
+            "T_f": {"$ref": "#/$defs/finite_decimal"},
+            "T_feed": {"$ref": "#/$defs/finite_decimal"},
+            "T_neg": {"$ref": "#/$defs/finite_decimal"},
+            "T_phi_rad": {"$ref": "#/$defs/finite_decimal"},
+            "T_tau": {"$ref": "#/$defs/finite_decimal"}
+          },
+          "required": ["T_neg", "T_A", "T_f", "T_tau", "T_phi_rad", "T_feed"],
+          "type": "object"
+        },
+        "worm_medium_id": {"minLength": 1, "type": "string"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "created_utc", "campaign_index", "f_ref_hz", "residual_skew_s", "thresholds", "analysis_sha256", "dependency_lock_sha256", "schema_sha256", "conformance_sha256", "parser_sha256", "instrument_configuration_sha256", "sealed_assignment_sha256", "worm_medium_id", "ed25519_public_key_base64", "ed25519_public_key_sha256"],
+      "type": "object"
+    },
+    "calibration_root_receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "calibration_sha256": {"$ref": "#/$defs/sha256"},
+        "created_utc": {"$ref": "#/$defs/timestamp"},
+        "medium_id": {"minLength": 1, "type": "string"},
+        "previous_receipt_sha256": {"const": "0000000000000000000000000000000000000000000000000000000000000000"},
+        "public_key_sha256": {"$ref": "#/$defs/sha256"},
+        "record_type": {"const": "calibration_root_receipt"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "sequence_number": {"const": 1},
+        "signature_algorithm": {"const": "Ed25519"},
+        "signature_base64": {"maxLength": 88, "minLength": 88, "pattern": "^[A-Za-z0-9+/]{86}==$", "type": "string"},
+        "witness_id": {"minLength": 1, "type": "string"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "calibration_sha256", "created_utc", "witness_id", "medium_id", "sequence_number", "previous_receipt_sha256", "signature_algorithm", "public_key_sha256", "signature_base64"],
+      "type": "object"
+    },
+    "carrier_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "carrier_class": {"const": "hermetic_two_terminal_quartz_tuning_fork"},
+        "datasheet_sha256": {"$ref": "#/$defs/sha256"},
+        "electrode_a_net": {"type": "string"},
+        "electrode_b_net": {"type": "string"},
+        "loaded_bvd_fit_sha256": {"$ref": "#/$defs/sha256"},
+        "manufacturer": {"type": "string"},
+        "part_number": {"type": "string"},
+        "record_type": {"const": "carrier_identity"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "unit_id": {"type": "string"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "carrier_class", "manufacturer", "part_number", "unit_id", "datasheet_sha256", "electrode_a_net", "electrode_b_net", "loaded_bvd_fit_sha256"],
+      "type": "object"
+    },
+    "contact_counts": {
+      "additionalProperties": false,
+      "properties": {
+        "adc_or_dac_operations": {"minimum": 0, "type": "integer"},
+        "audio_play_or_record_operations": {"minimum": 0, "type": "integer"},
+        "hardware_operations": {"minimum": 0, "type": "integer"},
+        "instrument_operations": {"minimum": 0, "type": "integer"},
+        "physical_runs": {"minimum": 0, "type": "integer"},
+        "record_type": {"const": "contact_counts"},
+        "remote_target_contacts": {"minimum": 0, "type": "integer"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "vendor_contacts": {"minimum": 0, "type": "integer"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "physical_runs", "hardware_operations", "instrument_operations", "adc_or_dac_operations", "audio_play_or_record_operations", "remote_target_contacts", "vendor_contacts"],
+      "type": "object"
+    },
+    "control_outcome": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_sha256": {"$ref": "#/$defs/sha256"},
+        "outcome": {"enum": ["PASS", "FAIL", "INVALID"]}
+      },
+      "required": ["outcome", "evidence_sha256"],
+      "type": "object"
+    },
+    "control_evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "acquisition_id": {"minLength": 1, "type": "string"},
+        "control_id": {"minLength": 1, "type": "string"},
+        "execution_class": {"enum": ["OFFLINE", "PHYSICAL"]},
+        "files": {
+          "additionalProperties": {"$ref": "#/$defs/sha256"},
+          "minProperties": 1,
+          "propertyNames": {"$ref": "#/$defs/relative_path"},
+          "type": "object"
+        },
+        "physical_authority_consumed": {"type": "boolean"},
+        "record_type": {"const": "control_evidence"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "sequence_ordinal": {"maximum": 29, "minimum": 0, "type": "integer"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "control_id", "acquisition_id", "sequence_ordinal", "execution_class", "files", "physical_authority_consumed"],
+      "type": "object"
+    },
+    "controls": {
+      "additionalProperties": false,
+      "properties": {
+        "ledger_sha256": {"$ref": "#/$defs/sha256"},
+        "ordered_control_ids": {
+          "const": [
+            "offline_synthetic_conformance",
+            "zero_drive",
+            "resonator_removed",
+            "dummy_c0",
+            "switch_transient",
+            "detector_only_replay",
+            "controller_buffer_replay",
+            "reference_only",
+            "gate_only_isolation",
+            "relay_only_isolation",
+            "k1_stuck_closed",
+            "k2_stuck_closed",
+            "k3_failed_open",
+            "wrong_termination",
+            "off_resonance",
+            "source_remains_on",
+            "source_left_on",
+            "channel_cable_swap",
+            "opaque_matched_a",
+            "opaque_matched_b",
+            "amplitude_mismatch_0p800",
+            "wrong_frequency",
+            "timing_mismatch_quarter_cycle",
+            "wrong_phase_pi_over_2",
+            "random_phase_pi_over_7",
+            "random_phase_3pi_over_7",
+            "random_phase_5pi_over_7",
+            "environmental_disturbance_plus_1c",
+            "offline_wrong_guard_analysis",
+            "offline_phase_reference_inversion"
+          ]
+        },
+        "outcomes": {
+          "additionalProperties": false,
+          "properties": {
+            "amplitude_mismatch_0p800": {"$ref": "#/$defs/control_outcome"},
+            "channel_cable_swap": {"$ref": "#/$defs/control_outcome"},
+            "controller_buffer_replay": {"$ref": "#/$defs/control_outcome"},
+            "detector_only_replay": {"$ref": "#/$defs/control_outcome"},
+            "dummy_c0": {"$ref": "#/$defs/control_outcome"},
+            "environmental_disturbance_plus_1c": {"$ref": "#/$defs/control_outcome"},
+            "gate_only_isolation": {"$ref": "#/$defs/control_outcome"},
+            "k1_stuck_closed": {"$ref": "#/$defs/control_outcome"},
+            "k2_stuck_closed": {"$ref": "#/$defs/control_outcome"},
+            "k3_failed_open": {"$ref": "#/$defs/control_outcome"},
+            "off_resonance": {"$ref": "#/$defs/control_outcome"},
+            "offline_phase_reference_inversion": {"$ref": "#/$defs/control_outcome"},
+            "offline_synthetic_conformance": {"$ref": "#/$defs/control_outcome"},
+            "offline_wrong_guard_analysis": {"$ref": "#/$defs/control_outcome"},
+            "opaque_matched_a": {"$ref": "#/$defs/control_outcome"},
+            "opaque_matched_b": {"$ref": "#/$defs/control_outcome"},
+            "random_phase_3pi_over_7": {"$ref": "#/$defs/control_outcome"},
+            "random_phase_5pi_over_7": {"$ref": "#/$defs/control_outcome"},
+            "random_phase_pi_over_7": {"$ref": "#/$defs/control_outcome"},
+            "reference_only": {"$ref": "#/$defs/control_outcome"},
+            "relay_only_isolation": {"$ref": "#/$defs/control_outcome"},
+            "resonator_removed": {"$ref": "#/$defs/control_outcome"},
+            "source_left_on": {"$ref": "#/$defs/control_outcome"},
+            "source_remains_on": {"$ref": "#/$defs/control_outcome"},
+            "switch_transient": {"$ref": "#/$defs/control_outcome"},
+            "timing_mismatch_quarter_cycle": {"$ref": "#/$defs/control_outcome"},
+            "wrong_frequency": {"$ref": "#/$defs/control_outcome"},
+            "wrong_phase_pi_over_2": {"$ref": "#/$defs/control_outcome"},
+            "wrong_termination": {"$ref": "#/$defs/control_outcome"},
+            "zero_drive": {"$ref": "#/$defs/control_outcome"}
+          },
+          "required": [
+            "offline_synthetic_conformance", "zero_drive", "resonator_removed", "dummy_c0", "switch_transient",
+            "detector_only_replay", "controller_buffer_replay", "reference_only", "gate_only_isolation",
+            "relay_only_isolation", "k1_stuck_closed", "k2_stuck_closed", "k3_failed_open", "wrong_termination",
+            "off_resonance", "source_remains_on", "source_left_on", "channel_cable_swap", "opaque_matched_a",
+            "opaque_matched_b", "amplitude_mismatch_0p800", "wrong_frequency", "timing_mismatch_quarter_cycle",
+            "wrong_phase_pi_over_2", "random_phase_pi_over_7", "random_phase_3pi_over_7",
+            "random_phase_5pi_over_7", "environmental_disturbance_plus_1c", "offline_wrong_guard_analysis",
+            "offline_phase_reference_inversion"
+          ],
+          "type": "object"
+        },
+        "record_type": {"const": "controls"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "ordered_control_ids", "outcomes", "ledger_sha256"],
+      "type": "object"
+    },
+    "final_root_receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "created_utc": {"$ref": "#/$defs/timestamp"},
+        "manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "medium_id": {"minLength": 1, "type": "string"},
+        "previous_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "public_key_sha256": {"$ref": "#/$defs/sha256"},
+        "raw_root_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "record_type": {"const": "final_root_receipt"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "sequence_number": {"maximum": 4, "minimum": 3, "type": "integer"},
+        "signature_algorithm": {"const": "Ed25519"},
+        "signature_base64": {"maxLength": 88, "minLength": 88, "pattern": "^[A-Za-z0-9+/]{86}==$", "type": "string"},
+        "witness_id": {"type": "string"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "raw_root_receipt_sha256", "manifest_sha256", "created_utc", "witness_id", "medium_id", "sequence_number", "previous_receipt_sha256", "signature_algorithm", "public_key_sha256", "signature_base64"],
+      "type": "object"
+    },
+    "finite_decimal": {
+      "allOf": [
+        {"pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"},
+        {"not": {"pattern": "^-0(\\.0+)?([eE][+-]?0+)?$"}}
+      ],
+      "type": "string"
+    },
+    "hardware_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "datasheet_sha256": {"$ref": "#/$defs/sha256"},
+              "function": {"type": "string"},
+              "manufacturer": {"type": "string"},
+              "model": {"type": "string"},
+              "serial_or_lot": {"type": "string"}
+            },
+            "required": ["function", "manufacturer", "model", "serial_or_lot", "datasheet_sha256"],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "record_type": {"const": "hardware_identity"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "components"],
+      "type": "object"
+    },
+    "instruments": {
+      "additionalProperties": false,
+      "properties": {
+        "channel_map": {"const": ["CH0_SOURCE", "CH1_CARRIER", "CH2_SWITCH", "CH3_ACCELERATION"]},
+        "configuration_sha256": {"$ref": "#/$defs/sha256"},
+        "digitizer_firmware": {"type": "string"},
+        "digitizer_model": {"type": "string"},
+        "digitizer_serial": {"type": "string"},
+        "record_type": {"const": "instruments"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "sample_count": {"const": 3101000},
+        "sample_rate_hz": {"const": 1000000},
+        "schema_version": {"const": "p0-evidence-v1"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "digitizer_model", "digitizer_serial", "digitizer_firmware", "sample_rate_hz", "sample_count", "channel_map", "configuration_sha256"],
+      "type": "object"
+    },
+    "manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "files": {
+          "additionalProperties": {"$ref": "#/$defs/sha256"},
+          "minProperties": 1,
+          "propertyNames": {"$ref": "#/$defs/relative_path"},
+          "type": "object"
+        },
+        "record_type": {"const": "manifest"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "files"],
+      "type": "object"
+    },
+    "raw_manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "files": {
+          "additionalProperties": {"$ref": "#/$defs/sha256"},
+          "minProperties": 1,
+          "propertyNames": {"$ref": "#/$defs/relative_path"},
+          "type": "object"
+        },
+        "record_type": {"const": "raw_manifest"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "files"],
+      "type": "object"
+    },
+    "metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "arm_id": {"type": "string"},
+        "f_hat_hz": {"$ref": "#/$defs/finite_decimal"},
+        "iq_sha256": {"$ref": "#/$defs/sha256"},
+        "q_hat": {"$ref": "#/$defs/finite_decimal"},
+        "quality_gate_pass": {"type": "boolean"},
+        "record_type": {"const": "metrics"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "tau_a_s": {"$ref": "#/$defs/finite_decimal"},
+        "u95_f_hz": {"$ref": "#/$defs/finite_decimal"},
+        "u95_tau_s": {"$ref": "#/$defs/finite_decimal"},
+        "usable_cycles": {"minimum": 0, "type": "integer"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "arm_id", "iq_sha256", "f_hat_hz", "tau_a_s", "q_hat", "u95_f_hz", "u95_tau_s", "usable_cycles", "quality_gate_pass"],
+      "type": "object"
+    },
+    "relation_metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "antipode_in_u95": {"type": "boolean"},
+        "arm_0_id": {"minLength": 1, "type": "string"},
+        "arm_pi_id": {"minLength": 1, "type": "string"},
+        "epsilon_A": {"$ref": "#/$defs/finite_decimal"},
+        "epsilon_f": {"$ref": "#/$defs/finite_decimal"},
+        "epsilon_feed": {"$ref": "#/$defs/finite_decimal"},
+        "epsilon_neg": {"$ref": "#/$defs/finite_decimal"},
+        "epsilon_phi_rad": {"$ref": "#/$defs/finite_decimal"},
+        "epsilon_tau": {"$ref": "#/$defs/finite_decimal"},
+        "plus_minus_pi_over_2_excluded_u95": {"type": "boolean"},
+        "record_type": {"const": "relation_metrics"},
+        "residual_zero_in_u95": {"type": "boolean"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "u95_A": {"$ref": "#/$defs/finite_decimal"},
+        "u95_f": {"$ref": "#/$defs/finite_decimal"},
+        "u95_feed": {"$ref": "#/$defs/finite_decimal"},
+        "u95_neg": {"$ref": "#/$defs/finite_decimal"},
+        "u95_phi_rad": {"$ref": "#/$defs/finite_decimal"},
+        "u95_tau": {"$ref": "#/$defs/finite_decimal"},
+        "zero_excluded_u95": {"type": "boolean"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "arm_0_id", "arm_pi_id", "epsilon_neg", "epsilon_A", "epsilon_f", "epsilon_tau", "epsilon_phi_rad", "epsilon_feed", "u95_neg", "u95_A", "u95_f", "u95_tau", "u95_phi_rad", "u95_feed", "antipode_in_u95", "zero_excluded_u95", "plus_minus_pi_over_2_excluded_u95", "residual_zero_in_u95"],
+      "type": "object"
+    },
+    "packet": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_ceiling": {"const": "PHYSICAL_PHASE_CARRIER_PI_RELATION_CHARACTERIZED"},
+        "created_utc": {"$ref": "#/$defs/timestamp"},
+        "record_type": {"const": "packet"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "status": {"enum": ["ACQUIRING", "RAW_SEALED", "DERIVED", "ADJUDICATED", "INVALID"]}
+      },
+      "required": ["record_type", "schema_version", "run_id", "created_utc", "status", "claim_ceiling"],
+      "type": "object"
+    },
+    "attempt_entry": {
+      "additionalProperties": false,
+      "properties": {
+        "attempt_id": {"pattern": "^[a-z0-9][a-z0-9_-]{7,63}$", "type": "string"},
+        "acquisition_completed_utc": {"$ref": "#/$defs/timestamp"},
+        "acquisition_started_utc": {"$ref": "#/$defs/timestamp"},
+        "integrity_reason": {"enum": ["NONE", "BYTE_COUNT_OR_HASH", "CLIPPING_FLAG", "CH2_WITNESS", "INSTRUMENT_HEALTH", "ENVIRONMENT_LIMIT"]},
+        "outcome": {"enum": ["COMPLETE", "INTEGRITY_INVALID"]},
+        "phase_content_opened": {"type": "boolean"},
+        "preserved_invalid_packet_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "raw_root_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "selected_for_adjudication": {"type": "boolean"},
+        "sequence_index": {"maximum": 2, "minimum": 1, "type": "integer"}
+      },
+      "required": ["attempt_id", "sequence_index", "acquisition_started_utc", "acquisition_completed_utc", "outcome", "integrity_reason", "phase_content_opened", "selected_for_adjudication", "raw_root_receipt_sha256", "preserved_invalid_packet_manifest_sha256"],
+      "type": "object"
+    },
+    "attempt_ledger": {
+      "additionalProperties": false,
+      "properties": {
+        "attempts": {"items": {"$ref": "#/$defs/attempt_entry"}, "maxItems": 2, "minItems": 1, "type": "array"},
+        "record_type": {"const": "attempt_ledger"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "attempts"],
+      "type": "object"
+    },
+    "raw_descriptor": {
+      "additionalProperties": false,
+      "properties": {
+        "arm_id": {"type": "string"},
+        "acquisition_completed_utc": {"$ref": "#/$defs/timestamp"},
+        "acquisition_started_utc": {"$ref": "#/$defs/timestamp"},
+        "bit_width": {"minimum": 16, "type": "integer"},
+        "byte_order": {"enum": ["little", "big"]},
+        "channel_order": {"const": ["CH0", "CH1", "CH2", "CH3"]},
+        "export_version": {"type": "string"},
+        "firmware": {"type": "string"},
+        "frame_interleave": {"type": "string"},
+        "gain": {"items": {"$ref": "#/$defs/finite_decimal"}, "maxItems": 4, "minItems": 4, "type": "array"},
+        "header_bytes": {"minimum": 0, "type": "integer"},
+        "instrument_model": {"type": "string"},
+        "instrument_serial": {"type": "string"},
+        "offset": {"items": {"$ref": "#/$defs/finite_decimal"}, "maxItems": 4, "minItems": 4, "type": "array"},
+        "padding_bytes": {"minimum": 0, "type": "integer"},
+        "parser_sha256": {"$ref": "#/$defs/sha256"},
+        "precommand_count": {"const": 1101000},
+        "record_type": {"const": "raw_descriptor"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "sample_count": {"const": 3101000},
+        "sample_rate_hz": {"const": 1000000},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "signedness": {"enum": ["signed", "unsigned", "float"]},
+        "units": {"const": ["V", "V", "V", "m_s2"]}
+      },
+      "required": ["record_type", "schema_version", "run_id", "arm_id", "acquisition_started_utc", "acquisition_completed_utc", "instrument_model", "instrument_serial", "firmware", "export_version", "parser_sha256", "frame_interleave", "header_bytes", "padding_bytes", "signedness", "bit_width", "byte_order", "sample_rate_hz", "sample_count", "precommand_count", "channel_order", "gain", "offset", "units"],
+      "type": "object"
+    },
+    "raw_root_receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "acquisition_completed_utc": {"$ref": "#/$defs/timestamp"},
+        "acquisition_started_utc": {"$ref": "#/$defs/timestamp"},
+        "calibration_root_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "created_utc": {"$ref": "#/$defs/timestamp"},
+        "medium_id": {"minLength": 1, "type": "string"},
+        "previous_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "public_key_sha256": {"$ref": "#/$defs/sha256"},
+        "raw_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "record_type": {"const": "raw_root_receipt"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "sequence_number": {"maximum": 3, "minimum": 2, "type": "integer"},
+        "signature_algorithm": {"const": "Ed25519"},
+        "signature_base64": {"maxLength": 88, "minLength": 88, "pattern": "^[A-Za-z0-9+/]{86}==$", "type": "string"},
+        "witness_id": {"type": "string"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "raw_manifest_sha256", "calibration_root_receipt_sha256", "acquisition_started_utc", "acquisition_completed_utc", "created_utc", "witness_id", "medium_id", "sequence_number", "previous_receipt_sha256", "signature_algorithm", "public_key_sha256", "signature_base64"],
+      "type": "object"
+    },
+    "relative_path": {
+      "pattern": "^(?!/)(?!.*:)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))[A-Za-z0-9_-][A-Za-z0-9._-]*(?:/[A-Za-z0-9_-][A-Za-z0-9._-]*)*$",
+      "type": "string"
+    },
+    "run_id": {"pattern": "^[a-z0-9][a-z0-9_-]{7,63}$", "type": "string"},
+    "sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "timestamp": {"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{6}Z$", "type": "string"},
+    "topology": {
+      "additionalProperties": false,
+      "properties": {
+        "continuity_record_sha256": {"$ref": "#/$defs/sha256"},
+        "edge_list": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "from": {"type": "string"},
+              "kind": {"type": "string"},
+              "to": {"type": "string"}
+            },
+            "required": ["from", "to", "kind"],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "injection_scan_sha256": {"$ref": "#/$defs/sha256"},
+        "netlist_sha256": {"$ref": "#/$defs/sha256"},
+        "record_type": {"const": "topology"},
+        "run_id": {"$ref": "#/$defs/run_id"},
+        "schema_version": {"const": "p0-evidence-v1"},
+        "star_reference_node": {"type": "string"}
+      },
+      "required": ["record_type", "schema_version", "run_id", "netlist_sha256", "continuity_record_sha256", "injection_scan_sha256", "star_reference_node", "edge_list"],
+      "type": "object"
+    }
+  },
+  "$id": "https://cat-cas.local/schemas/p0-evidence-v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "catalog_usage": "Validate every evidence JSON against this root oneOf dispatcher; no direct $defs bypass is authoritative.",
+  "oneOf": [
+    {"$ref": "#/$defs/adjudication"},
+    {"$ref": "#/$defs/arm_assignment_sealed"},
+    {"$ref": "#/$defs/arm_assignment_reveal"},
+    {"$ref": "#/$defs/attempt_ledger"},
+    {"$ref": "#/$defs/calibration"},
+    {"$ref": "#/$defs/calibration_root_receipt"},
+    {"$ref": "#/$defs/carrier_identity"},
+    {"$ref": "#/$defs/contact_counts"},
+    {"$ref": "#/$defs/control_evidence"},
+    {"$ref": "#/$defs/controls"},
+    {"$ref": "#/$defs/final_root_receipt"},
+    {"$ref": "#/$defs/hardware_identity"},
+    {"$ref": "#/$defs/instruments"},
+    {"$ref": "#/$defs/manifest"},
+    {"$ref": "#/$defs/metrics"},
+    {"$ref": "#/$defs/relation_metrics"},
+    {"$ref": "#/$defs/packet"},
+    {"$ref": "#/$defs/raw_descriptor"},
+    {"$ref": "#/$defs/raw_manifest"},
+    {"$ref": "#/$defs/raw_root_receipt"},
+    {"$ref": "#/$defs/topology"}
+  ],
+  "title": "P0 evidence schema catalog"
+}
