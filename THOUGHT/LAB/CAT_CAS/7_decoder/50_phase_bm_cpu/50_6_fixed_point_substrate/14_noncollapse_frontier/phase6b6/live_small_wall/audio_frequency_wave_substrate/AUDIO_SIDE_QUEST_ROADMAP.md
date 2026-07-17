@@ -1,18 +1,19 @@
 # CAT_CAS Audio-Frequency Wave Substrate Side Quest Roadmap
 
-**Status:** `ACTIVE_PARALLEL_LANE__RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED`<br>
-**Roadmap version:** `1.6`<br>
+**Status:** `ACTIVE_PARALLEL_LANE__PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_FROZEN`<br>
+**Roadmap version:** `1.7`<br>
 **Branch:** `codex/audio-frequency-wave-substrate`<br>
 **Base main commit:** `32b5af119a03bc48bb00f279e6cc0014406147ad`<br>
 **Frozen offline foundation commit:** `f028dfd292d2dd0fd11380459417d5b60f936ee3`<br>
 **Roadmap commit binding:** the Git commit containing this file<br>
-**Current accepted results:** `AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED`; `AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`; `AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED`; `AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED`<br>
+**Current accepted results:** `AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED`; `AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED`; `AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED`; `AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED`; `AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED`<br>
 **Recursive phase-tree software reference candidate:** `false`<br>
 **Recursive phase-tree software reference established:** `true`<br>
 **Recursive wave operator established:** `true`<br>
 **Software catalytic wave loop established:** `true`<br>
-**Recursive catalytic Ising emulator established:** `false`<br>
-**Physical carrier frozen:** `false`<br>
+**Recursive catalytic Ising emulator established:** `true`<br>
+**Physical carrier architecture frozen:** `true`<br>
+**Physical carrier characterized:** `false`<br>
 **Physical audio computing established:** `false`<br>
 **Small Wall crossed:** `false`
 
@@ -419,20 +420,41 @@ transducer operation, or physical restoration is authorized by this roadmap.
 
 ---
 
-## 11. Immediate Next Work
+## 11. Selected P0 architecture boundary
 
-The bounded R3 packet is closed. No successor is selected automatically. The next exact
-boundary is:
+The explicitly selected successor is:
 
 ```text
-NEXT_AUDIO_PHASE_COMPUTING_BOUNDARY_REQUIRES_EXPLICIT_SELECTION
+PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_AND_MEASUREMENT_PACKET
 ```
 
-This roadmap update does not begin physical audio, silicon-phononic, scaling, or
-language/IR work.
+It freezes one non-executing mechanical carrier/access architecture:
 
-The implementation agent must not touch `audio_fm_wave_v1/`, `main`, Family 10h
-evidence, `SMALL_WALL_STATE.md`, live hardware, or preserved stashes.
+```text
+preferred:
+    hermetic electrode-addressed 32.768 kHz quartz tuning-fork mode
+
+fallback:
+    localized external-drive PZT/brass diaphragm mode near 6.3 kHz
+
+source-off:
+    phase-synchronous analog gate plus witnessed fail-safe guarded relay barrier
+
+claim ceiling:
+    NON_EXECUTING_PHYSICAL_PHASE_CARRIER_ARCHITECTURE_ONLY
+```
+
+It does not establish physical resonance, post-source persistence, a pi relation,
+physical computing, restoration, silicon operation, bit replacement, or a Wall crossing.
+
+The next exact boundary is:
+
+```text
+USER_AUTHORITY_FOR_P0_BUILD_PURCHASE_OR_PHYSICAL_EXECUTION
+```
+
+The lane stops before that boundary. No predecessor package, `main`, Family 10h
+evidence, `SMALL_WALL_STATE.md`, hardware, target, or preserved stash is touched.
 
 ---
 
@@ -447,5 +469,7 @@ AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED
 AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 SMALL_WALL_CROSSED_NOT_PROMOTED
-NEXT_AUDIO_PHASE_COMPUTING_BOUNDARY_REQUIRES_EXPLICIT_SELECTION
+PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_AND_MEASUREMENT_PACKET
+PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
+USER_AUTHORITY_FOR_P0_BUILD_PURCHASE_OR_PHYSICAL_EXECUTION
 ```

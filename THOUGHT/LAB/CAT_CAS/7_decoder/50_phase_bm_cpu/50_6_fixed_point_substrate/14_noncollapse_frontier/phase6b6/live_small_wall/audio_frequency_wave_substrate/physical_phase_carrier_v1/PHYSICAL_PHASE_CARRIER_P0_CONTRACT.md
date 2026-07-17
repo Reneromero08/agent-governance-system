@@ -1,11 +1,12 @@
 # Physical Phase Carrier P0 Contract
 
-**Status:** `BOUNDARY_SELECTED__CONTRACT_CANDIDATE__NO_HARDWARE_AUTHORITY`  
-**Package:** `physical_phase_carrier_v1`  
-**Selected next boundary:** `PHYSICAL_PHASE_CARRIER_P0_POST_SOURCE_PI_CHARACTERIZATION`  
-**Parent result:** `AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED`  
-**Root directive:** `REPLACE THE BIT WITH PI`  
-**Operation:** physical-carrier architecture and experiment contract only  
+**Status:** `ARCHITECTURE_PACKET_FROZEN__NO_HARDWARE_AUTHORITY`<br>
+**Package:** `physical_phase_carrier_v1`<br>
+**Architecture decision:** `PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN`<br>
+**Selected next boundary:** `USER_AUTHORITY_FOR_P0_BUILD_PURCHASE_OR_PHYSICAL_EXECUTION`<br>
+**Parent result:** `AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED`<br>
+**Root directive:** `REPLACE THE BIT WITH PI`<br>
+**Operation:** physical-carrier architecture and experiment contract only<br>
 **Hardware authority:** none
 
 ## 1. Selection
@@ -24,9 +25,10 @@ one deliberately addressable mechanical resonant mode
 -> prove the transducer/controller is not the retained state
 ```
 
-This contract selects an electrode-addressed piezoelectric or electromechanical resonator
-at audio or low-ultrasonic frequency as the first development carrier. Open-air speaker to
-room to microphone propagation is not the preferred P0 implementation.
+This contract selects one hermetic, electrode-addressed 32.768 kHz quartz tuning-fork
+mechanical mode as the preferred development carrier. A localized external-drive
+PZT/brass diaphragm mode near 6.3 kHz is the one fallback carrier class. Open-air speaker
+to room to microphone propagation is not the preferred P0 implementation.
 
 The eventual dense target remains a deliberately engineered silicon mechanical or phononic
 resonator. P0 is the slow, observable mechanical chart used to close the access model.
@@ -82,20 +84,26 @@ where `theta(t)` is the physical mode phase relative to a prospectively frozen r
 
 ## 4. Selected Development Class
 
-Preferred P0 carrier order:
+Frozen carrier classes:
 
 ```text
-1. electrode-addressed piezoelectric mechanical resonator
-2. electromechanical resonator with direct displacement-sensitive readout
-3. low-frequency electronic resonator only if mechanical access is unavailable
+preferred:
+    hermetic electrode-addressed 32.768 kHz quartz tuning-fork mechanical mode
+    reference datasheet class: Micro Crystal CC7V-T1A
+
+fallback:
+    localized external-drive PZT/brass diaphragm mechanical mode near 6.3 kHz
+    reference datasheet class: Murata 7BB-20-6
 ```
 
-The first implementation should avoid an uncontrolled open-air propagation path. A sealed
-or mechanically localized resonator is preferred because the carrier boundary is easier to
-identify and later transpose into silicon.
+The preferred access path uses phase-synchronous electrical preparation, an
+always-connected high-impedance differential electrode-voltage readout across
+the complete two-terminal loaded BVD network, and a two-stage source-off boundary:
+fast analog route-to-termination followed by a fail-safe, independently witnessed guarded
+relay barrier. The mechanical state is the quartz tine displacement/strain mode.
 
-This document does not select a commercial part number, authorize a purchase, or authorize
-powered execution.
+The reference candidates make the path buildable but are not purchase selections. The
+final ordering suffix, revision, and datasheet hash require later explicit authority.
 
 ## 5. Silicon Transposition
 
@@ -148,7 +156,23 @@ after observing the primary result.
 
 ## 7. Source-Off Boundary
 
-The source-off boundary must be explicit and observable.
+The source-off boundary is explicit and observable:
+
+```text
+stage A:
+    ADG1419BRMZ MSOP SPDT at +/-5 V, controlled through IN, routes the
+    source to 50 Ohm with a 560 ns full-temperature transition bound
+
+stage B:
+    K1 and K2 normally-open series relay contacts de-energize open
+    K3 normally-closed midpoint guard contact de-energizes to 50 Ohm
+
+witnesses:
+    source-side CH0, resonator-side CH1, contact-state CH2
+
+first admissible raw sample:
+    10.000 ms after the last stable physical contact transition
+```
 
 The contract must freeze:
 
@@ -230,7 +254,7 @@ zero-drive acquisition
 detector-only replay
 controller or buffer replay
 reference-phase inversion
-cable or channel swap where mechanically possible
+mandatory cable or channel swap, or stop if no load-preserving substitute closes
 matched 0/pi preparations
 unmatched-amplitude negative control
 wrong-frequency negative control
@@ -356,25 +380,32 @@ physical claim generation
 A later explicit execution authority must identify the actual hardware, limits, wiring,
 source-off mechanism, measurement chain, no-retry or retry law, and safety boundary.
 
-## 15. Immediate Next Work
+## 15. Frozen architecture packet
 
-The next bounded package is:
+The bounded non-executing architecture is:
 
 ```text
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_AND_MEASUREMENT_PACKET
 ```
 
-It must select the actual carrier class and access model, define the measurement chain,
-freeze the source-off law, define all metrics and controls, identify required equipment,
-and return a buildable but non-executed packet.
+It selects the preferred and fallback carrier classes, access and source-off model,
+measurement/metric law, preparation arms, controls, evidence formats, non-purchasing BOM,
+safety limits, silicon translation, and independent review requirements.
 
-The packet must not contact hardware.
+The next exact boundary is:
+
+```text
+USER_AUTHORITY_FOR_P0_BUILD_PURCHASE_OR_PHYSICAL_EXECUTION
+```
+
+This packet stops before that boundary.
 
 ## 16. Current Decision
 
 ```text
 AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED
 PHYSICAL_PHASE_CARRIER_P0_BOUNDARY_SELECTED
+PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
 PHYSICAL_PHASE_CARRIER_NOT_YET_OBSERVED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 PHYSICAL_SILICON_PHONONIC_COMPUTING_NOT_ESTABLISHED

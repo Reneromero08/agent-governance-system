@@ -244,19 +244,23 @@ Established:
 ```text
 AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED
 AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED
+AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED
+AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED
+AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED
 ```
 
-Active candidate:
+Frozen non-executing architecture:
 
 ```text
-AUDIO_RECURSIVE_WAVE_OPERATOR_SOURCE_CANDIDATE
+PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
 ```
 
 Not established:
 
 ```text
-software catalytic wave-loop closure
-recursive catalytic Ising
+physical carrier characterization
+post-source physical phase persistence
+physical antipodal pi relation
 physical phase-native computing
 physical restoration
 bit replacement in hardware
