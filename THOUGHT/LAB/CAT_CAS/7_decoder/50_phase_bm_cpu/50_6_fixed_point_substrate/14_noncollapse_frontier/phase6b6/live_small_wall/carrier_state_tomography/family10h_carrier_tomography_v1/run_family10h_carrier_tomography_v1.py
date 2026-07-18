@@ -1539,7 +1539,12 @@ def write_discovery_cleanup_custody_receipt(payload: dict[str, Any]) -> dict[str
     for key in ATTEMPT_COUNTER_KEYS:
         require(is_strict_counter(receipt.get(key)), f"cleanup custody counter missing or invalid {key}")
     require(is_strict_int(receipt.get("target_contact_count")) and receipt.get("target_contact_count") == 1, "cleanup custody requires recorded target contact")
-    require(is_strict_int(receipt.get("sensor_inventory_count")) and receipt.get("sensor_inventory_count") in (0, 1), "cleanup custody inventory counter invalid")
+    require(is_strict_int(receipt.get("candidate_scan_count")) and receipt.get("candidate_scan_count") in (0, 1), "cleanup custody candidate scan counter invalid")
+    expected_inventory_count = 1 if receipt.get("candidate_scan_count") == 1 else 0
+    require(
+        is_strict_int(receipt.get("sensor_inventory_count")) and receipt.get("sensor_inventory_count") == expected_inventory_count,
+        "cleanup custody inventory/candidate counter pair mismatch",
+    )
     require(is_strict_int(receipt.get("live_invocation_count")) and receipt.get("live_invocation_count") == 0, "cleanup custody live counter must be zero")
     require(is_strict_int(receipt.get("pmu_acquisition_count")) and receipt.get("pmu_acquisition_count") == 0, "cleanup custody PMU counter must be zero")
     cleanup = receipt.get("cleanup")
@@ -2753,13 +2758,24 @@ def acquire_temperature_sensor_authority(
     target_failure_preserved_before_cleanup = False
     target_failure_receipt_sealed_before_cleanup = False
 
-    def target_failure_candidate_scan_count() -> int:
-        if isinstance(target_structured_failure, dict) and is_strict_int(target_structured_failure.get("candidate_scan_count")):
-            return int(target_structured_failure["candidate_scan_count"])
-        return 0
+    def validated_failure_counter_pair() -> dict[str, int]:
+        if (
+            isinstance(target_structured_failure, dict)
+            and isinstance(target_structured_failure_validation, dict)
+            and target_structured_failure_validation.get("passed") is True
+            and is_strict_int(target_structured_failure.get("candidate_scan_count"))
+        ):
+            candidate_scan_count = int(target_structured_failure["candidate_scan_count"])
+            if candidate_scan_count in {0, 1}:
+                return {
+                    "candidate_scan_count": candidate_scan_count,
+                    "sensor_inventory_count": 1 if candidate_scan_count == 1 else 0,
+                }
+        return {"candidate_scan_count": 0, "sensor_inventory_count": 0}
 
     def seal_target_failure_receipt(*, before_cleanup: bool) -> dict[str, Any]:
         require(target_failure is not None, "target failure receipt requested without target failure")
+        counter_pair = validated_failure_counter_pair()
         failure_receipt = {
             "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_FAILURE_V1",
             "passed": False,
@@ -2777,13 +2793,13 @@ def acquire_temperature_sensor_authority(
             "attempt_state": "target_command_invoked",
             "active_counters": dict(ATTEMPT_STATE_COUNTERS["target_command_invoked"]),
             "target_contact_count": 1,
-            "sensor_inventory_count": 0,
-            "candidate_scan_count": target_failure_candidate_scan_count(),
+            "sensor_inventory_count": counter_pair["sensor_inventory_count"],
+            "candidate_scan_count": counter_pair["candidate_scan_count"],
             "live_invocation_count": 0,
             "pmu_acquisition_count": 0,
             "runtime_launch_count": 0,
             "target_failure_preserved_before_cleanup": target_failure_preserved_before_cleanup,
-            "target_failure_receipt_sealed_before_cleanup": target_failure_receipt_sealed_before_cleanup,
+            "target_failure_receipt_sealed_before_cleanup": before_cleanup or target_failure_receipt_sealed_before_cleanup,
             "failure_receipt_written_before_cleanup": before_cleanup,
             "cleanup": cleanup,
             "cleanup_result": cleanup.get("passed"),
@@ -2794,6 +2810,8 @@ def acquire_temperature_sensor_authority(
             {k: v for k, v in failure_receipt.items() if k != "target_discovery_failure_sha256"}
         )
         write_json_atomic(TARGET_DISCOVERY_FAILURE_PATH, failure_receipt)
+        sealed_receipt = read_json(TARGET_DISCOVERY_FAILURE_PATH)
+        require(sealed_receipt == failure_receipt, "target failure receipt seal reread mismatch")
         return failure_receipt
     write_discovery_attempt_receipt(
         {
@@ -3137,6 +3155,7 @@ def acquire_temperature_sensor_authority(
                     except Exception as exc:  # noqa: BLE001 - authority remains blocked by missing cleanup journal
                         cleanup["journal_error_after_cleanup"] = str(exc)
                 else:
+                    cleanup_counter_pair = validated_failure_counter_pair()
                     write_discovery_cleanup_custody_receipt(
                         {
                             "passed": cleanup["passed"] is True and cleanup["absence_verified"] is True,
@@ -3147,8 +3166,8 @@ def acquire_temperature_sensor_authority(
                             "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
                             "discovery_transfer_plan": transfer_plan,
                             "target_contact_count": 1,
-                            "sensor_inventory_count": 1 if discovery is not None else 0,
-                            "candidate_scan_count": target_failure_candidate_scan_count(),
+                            "sensor_inventory_count": cleanup_counter_pair["sensor_inventory_count"],
+                            "candidate_scan_count": cleanup_counter_pair["candidate_scan_count"],
                             "live_invocation_count": 0,
                             "pmu_acquisition_count": 0,
                             "cleanup": cleanup,
@@ -4952,6 +4971,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
                     "challenge_receipt_file_sha256": "4" * 64,
                     "target_contact_count": 1,
                     "sensor_inventory_count": 0,
+                    "candidate_scan_count": 0,
                     "live_invocation_count": 0,
                     "pmu_acquisition_count": 0,
                     "cleanup": {"attempted": True, "passed": True, "absence_verified": True},
@@ -4969,6 +4989,18 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
                 bool_cleanup_rejected = False
             except ControllerError:
                 bool_cleanup_rejected = True
+            try:
+                write_discovery_cleanup_custody_receipt(
+                    {
+                        **cleanup_valid,
+                        "cleanup_custody_sha256": None,
+                        "sensor_inventory_count": 1,
+                        "candidate_scan_count": 0,
+                    }
+                )
+                pair_cleanup_rejected = False
+            except ControllerError:
+                pair_cleanup_rejected = True
         finally:
             globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = original_cleanup_path
     original_paths = {
@@ -4999,7 +5031,8 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
                     "challenge_receipt_canonical_sha256": "3" * 64,
                     "challenge_receipt_file_sha256": "4" * 64,
                     "target_contact_count": 1,
-                    "sensor_inventory_count": 1,
+                    "sensor_inventory_count": 0,
+                    "candidate_scan_count": 0,
                     "live_invocation_count": 0,
                     "pmu_acquisition_count": 0,
                     "cleanup": {"attempted": True, "passed": True, "absence_verified": True},
@@ -5358,7 +5391,8 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
                     and cleanup_state.get("passed") is False
                     and cleanup_state.get("absence_verified") is False
                     and cleanup_state.get("skipped_reason") == "target command outcome was not locally preserved before cleanup"
-                    and cleanup_receipt.get("sensor_inventory_count") == 1
+                    and cleanup_receipt.get("sensor_inventory_count") == 0
+                    and cleanup_receipt.get("candidate_scan_count") == 0
                 )
             production_invalid_journal_stopped_before_receipt_copied = states == ATTEMPT_STATE_SEQUENCE[:3]
             production_invalid_no_success_cleanup_states = "cleanup_armed" not in states and "cleanup_completed" not in states
@@ -5519,7 +5553,9 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
                     structured_target_failure_preserved_before_cleanup_seen = (
                         pre_cleanup.get("failure_receipt_written_before_cleanup") is True
                         and pre_cleanup.get("target_failure_preserved_before_cleanup") is True
+                        and pre_cleanup.get("target_failure_receipt_sealed_before_cleanup") is True
                         and pre_cleanup.get("candidate_scan_count") == 1
+                        and pre_cleanup.get("sensor_inventory_count") == 1
                     )
                 return subprocess.CompletedProcess(command_list, 0, "", "")
             if "test ! -e " in script:
@@ -5643,6 +5679,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "production_invalid_copyback_no_success_cleanup_states": production_invalid_no_success_cleanup_states,
         "production_invalid_copyback_no_success_artifacts": production_invalid_no_success_artifacts,
         "boolean_cleanup_counter_rejected": bool_cleanup_rejected,
+        "cleanup_inventory_candidate_pair_rejected": pair_cleanup_rejected,
     }
     return {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_ACQUISITION_TRANSACTION_REGRESSION_V2",
