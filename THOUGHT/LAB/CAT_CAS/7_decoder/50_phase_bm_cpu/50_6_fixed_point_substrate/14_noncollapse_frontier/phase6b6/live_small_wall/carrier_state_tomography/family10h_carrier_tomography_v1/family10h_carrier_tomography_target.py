@@ -3102,9 +3102,10 @@ def write_temperature_discovery_failure_receipt(
 ) -> dict[str, Any]:
     challenge_data = challenge if isinstance(challenge, dict) else {}
     validation = challenge_validation if isinstance(challenge_validation, dict) else {}
+    sensor_inventory_count = 1 if candidate_scan_count else 0
     counters = {
         "target_contact_count": 1,
-        "sensor_inventory_count": 0,
+        "sensor_inventory_count": sensor_inventory_count,
         "live_invocation_count": 0,
         "pmu_acquisition_count": 0,
         "candidate_scan_count": candidate_scan_count,

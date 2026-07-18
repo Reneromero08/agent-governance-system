@@ -2594,12 +2594,14 @@ def validate_target_discovery_failure_receipt(
     if not isinstance(challenge_validation, dict):
         failures.append("structured target discovery failure challenge validation missing")
         challenge_validation = {}
+    candidate_scan_count = receipt.get("candidate_scan_count")
+    sensor_inventory_count = 1 if candidate_scan_count == 1 else 0
     expected_counters = {
         "target_contact_count": 1,
-        "sensor_inventory_count": 0,
+        "sensor_inventory_count": sensor_inventory_count,
         "live_invocation_count": 0,
         "pmu_acquisition_count": 0,
-        "candidate_scan_count": receipt.get("candidate_scan_count"),
+        "candidate_scan_count": candidate_scan_count,
     }
     if not is_strict_int(receipt.get("candidate_scan_count")) or receipt.get("candidate_scan_count") not in {0, 1}:
         failures.append("structured target discovery failure candidate scan counter mismatch")
@@ -2749,6 +2751,7 @@ def acquire_temperature_sensor_authority(
     target_structured_failure_validation: dict[str, Any] | None = None
     target_structured_failure_bytes: bytes | None = None
     target_failure_preserved_before_cleanup = False
+    target_failure_receipt_sealed_before_cleanup = False
 
     def target_failure_candidate_scan_count() -> int:
         if isinstance(target_structured_failure, dict) and is_strict_int(target_structured_failure.get("candidate_scan_count")):
@@ -2780,6 +2783,7 @@ def acquire_temperature_sensor_authority(
             "pmu_acquisition_count": 0,
             "runtime_launch_count": 0,
             "target_failure_preserved_before_cleanup": target_failure_preserved_before_cleanup,
+            "target_failure_receipt_sealed_before_cleanup": target_failure_receipt_sealed_before_cleanup,
             "failure_receipt_written_before_cleanup": before_cleanup,
             "cleanup": cleanup,
             "cleanup_result": cleanup.get("passed"),
@@ -2987,6 +2991,7 @@ def acquire_temperature_sensor_authority(
                         }
                         target_failure["structured_failure_validation"] = target_structured_failure_validation
                 seal_target_failure_receipt(before_cleanup=True)
+                target_failure_receipt_sealed_before_cleanup = True
             else:
                 sha_command = f"sha256sum {sh_quote(remote_receipt)} | awk '{{print $1}}'"
                 command = ["ssh", "-o", "BatchMode=yes", target_host, sha_command]
@@ -3028,10 +3033,27 @@ def acquire_temperature_sensor_authority(
                 receipt_copied_state_persisted = True
         finally:
             if remote_root_owned or remote_root_may_exist:
-                cleanup_allowed = target_failure is None or target_failure_preserved_before_cleanup
+                success_custody_ready = (
+                    target_command_invoked
+                    and receipt_copied_state_persisted
+                    and discovery is not None
+                    and authority is not None
+                    and target_discovery_file_sha is not None
+                )
+                failure_custody_ready = (
+                    target_failure is not None
+                    and target_failure_preserved_before_cleanup
+                    and target_failure_receipt_sealed_before_cleanup
+                )
+                cleanup_allowed = (not target_command_invoked) or success_custody_ready or failure_custody_ready
                 cleanup["attempted"] = cleanup_allowed
                 if not cleanup_allowed:
-                    cleanup["skipped_reason"] = "target failure evidence was not locally preserved before cleanup"
+                    if target_failure is not None and not target_failure_preserved_before_cleanup:
+                        cleanup["skipped_reason"] = "target failure evidence was not locally preserved before cleanup"
+                    elif target_failure is not None and not target_failure_receipt_sealed_before_cleanup:
+                        cleanup["skipped_reason"] = "target failure receipt was not durably sealed before cleanup"
+                    else:
+                        cleanup["skipped_reason"] = "target command outcome was not locally preserved before cleanup"
                 if receipt_copied_state_persisted:
                     try:
                         write_discovery_attempt_receipt(
@@ -5070,7 +5092,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         active_transport_scope = active_challenge.get("transport_scope") if isinstance(active_challenge.get("transport_scope"), dict) else {}
         counters = {
             "target_contact_count": 1,
-            "sensor_inventory_count": 0,
+            "sensor_inventory_count": 1,
             "live_invocation_count": 0,
             "pmu_acquisition_count": 0,
             "candidate_scan_count": 1,
@@ -5282,9 +5304,11 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
             if "rm -rf --" in script:
                 production_invalid_cleanup_invoked = True
                 return subprocess.CompletedProcess(command_list, 0, "", "")
+            if script.strip().endswith("false"):
+                return subprocess.CompletedProcess(command_list, 1, "", "")
             if "test ! -e " in script:
                 production_invalid_absence_probe_invoked = True
-                return subprocess.CompletedProcess(command_list, 0, "", "")
+                return subprocess.CompletedProcess(command_list, 1, "", "")
             return subprocess.CompletedProcess(command_list, 0, "", "")
         if command_list and command_list[0] == "scp":
             if len(command_list) >= 4 and command_list[2].startswith(f"{TARGET_HOST}:"):
@@ -5330,8 +5354,10 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
                 cleanup_state = cleanup_receipt.get("cleanup", {})
                 production_invalid_cleanup_receipt_records_absence = (
                     isinstance(cleanup_state, dict)
-                    and cleanup_state.get("passed") is True
-                    and cleanup_state.get("absence_verified") is True
+                    and cleanup_state.get("attempted") is False
+                    and cleanup_state.get("passed") is False
+                    and cleanup_state.get("absence_verified") is False
+                    and cleanup_state.get("skipped_reason") == "target command outcome was not locally preserved before cleanup"
                     and cleanup_receipt.get("sensor_inventory_count") == 1
                 )
             production_invalid_journal_stopped_before_receipt_copied = states == ATTEMPT_STATE_SEQUENCE[:3]
@@ -5609,7 +5635,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "parsed_invalid_copyback_journal_stops_before_success_cleanup": parsed_invalid_journal_stopped_before_success_cleanup,
         "parsed_invalid_copyback_no_success_artifacts": parsed_invalid_no_success_artifacts,
         "production_invalid_copyback_acquisition_raises_before_success": "discovery selected identity missing" in production_invalid_error,
-        "production_invalid_copyback_cleanup_invoked": production_invalid_cleanup_invoked,
+        "production_invalid_copyback_cleanup_not_invoked": not production_invalid_cleanup_invoked,
         "production_invalid_copyback_absence_probe_invoked": production_invalid_absence_probe_invoked,
         "production_invalid_copyback_cleanup_receipt_sealed": production_invalid_cleanup_receipt_sealed,
         "production_invalid_copyback_cleanup_receipt_records_absence": production_invalid_cleanup_receipt_records_absence,
