@@ -1,5 +1,5 @@
 {
-  "manifest_canonical_sha256": "b6ae775b6e9318f3b523ccedd3518e3e590cf47ddaa80fa233ea2766b456d0dc",
-  "manifest_file_sha256": "d53950c1c7fc41566d252ee188860db9f7dc031d1d1a644f96310363c8b264f8",
+  "manifest_canonical_sha256": "4e7a8ade3697d665daf5a2a7ad3c3be97445cb5a3f0ab7dadd1554871052eaab",
+  "manifest_file_sha256": "834aa222adbe94e2d2d689757b0a082d503c5e7517dd64c620ca577083236225",
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST_SHA256_V1"
 }
