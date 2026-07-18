@@ -1820,7 +1820,20 @@ def expected_temperature_authority_challenge_for_manifest(
         schedule_sidecar=schedule_sidecar,
         authorized_commit=fallback_authorized_commit,
     )
-    return challenge, fallback_authorized_commit if challenge else None
+    return challenge, fallback_authorized_commit
+
+
+def source_authority_commit_for_manifest(fallback_authorized_commit: str) -> str:
+    c6_findings = SOURCE_AUDIT_REVIEW_VERSIONED["C6"]["findings_path"]
+    if c6_findings.exists():
+        try:
+            source_audit = read_json(c6_findings)
+        except (OSError, json.JSONDecodeError, ValueError):
+            return fallback_authorized_commit
+        source_commit = source_audit.get("source_authority_commit")
+        if isinstance(source_commit, str) and re.fullmatch(r"[0-9a-f]{40}", source_commit):
+            return source_commit
+    return fallback_authorized_commit
 
 
 def validate_temperature_authority_challenge(
@@ -5178,6 +5191,76 @@ def challenge_receipt_regression() -> dict[str, Any]:
     return {"schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CHALLENGE_RECEIPT_REGRESSION_V1", "passed": all(checks.values()), "checks": checks}
 
 
+def source_authority_commit_binding_regression() -> dict[str, Any]:
+    fallback_commit = "9" * 40
+    review_commit = "8" * 40
+    old_challenge_path = DISCOVERY_CHALLENGE_PATH
+    old_c6_findings_path = SOURCE_AUDIT_REVIEW_VERSIONED["C6"]["findings_path"]
+    old_nonce = os.environ.pop(TEMPERATURE_AUTHORITY_NONCE_SHA256_ENV, None)
+    source_hashes = {
+        "source_hashes_sha256": "1" * 64,
+        "runtime_binary_authority": {"sha256": "2" * 64},
+    }
+    schedule_sidecar = {
+        "canonical_sha256": "3" * 64,
+        "json_sha256": "4" * 64,
+        "tsv_sha256": "5" * 64,
+    }
+    try:
+        with tempfile.TemporaryDirectory(prefix="family10h_source_authority_binding_") as tmp:
+            root = Path(tmp)
+            globals()["DISCOVERY_CHALLENGE_PATH"] = root / "missing_challenge.json"
+            SOURCE_AUDIT_REVIEW_VERSIONED["C6"]["findings_path"] = root / "missing_c6_review.json"
+            no_challenge, no_challenge_commit = expected_temperature_authority_challenge_for_manifest(
+                source_hashes=source_hashes,
+                source_bundle_sha256="6" * 64,
+                schedule_sidecar=schedule_sidecar,
+                fallback_authorized_commit=fallback_commit,
+            )
+            no_review_commit = source_authority_commit_for_manifest(fallback_commit)
+            c6_findings = root / "SOURCE_AUTHORITY_C6_REVIEW_NORMALIZED.json"
+            write_json(
+                c6_findings,
+                {
+                    "schema": "FAMILY10H_SOURCE_AUTHORITY_C6_REVIEW_NORMALIZED_V1",
+                    "source_authority_commit": review_commit,
+                },
+            )
+            SOURCE_AUDIT_REVIEW_VERSIONED["C6"]["findings_path"] = c6_findings
+            c6_review_commit = source_authority_commit_for_manifest(fallback_commit)
+            bad_findings = root / "BAD_SOURCE_AUTHORITY_C6_REVIEW_NORMALIZED.json"
+            write_json(bad_findings, {"source_authority_commit": "not-a-commit"})
+            SOURCE_AUDIT_REVIEW_VERSIONED["C6"]["findings_path"] = bad_findings
+            malformed_review_commit = source_authority_commit_for_manifest(fallback_commit)
+            invalid_challenge_path = root / "invalid_challenge.json"
+            invalid_challenge_path.write_text('{"not":"a valid challenge receipt"}\n', encoding="utf-8")
+            globals()["DISCOVERY_CHALLENGE_PATH"] = invalid_challenge_path
+            invalid_challenge, invalid_challenge_commit = expected_temperature_authority_challenge_for_manifest(
+                source_hashes=source_hashes,
+                source_bundle_sha256="6" * 64,
+                schedule_sidecar=schedule_sidecar,
+                fallback_authorized_commit=fallback_commit,
+            )
+    finally:
+        globals()["DISCOVERY_CHALLENGE_PATH"] = old_challenge_path
+        SOURCE_AUDIT_REVIEW_VERSIONED["C6"]["findings_path"] = old_c6_findings_path
+        if old_nonce is not None:
+            os.environ[TEMPERATURE_AUTHORITY_NONCE_SHA256_ENV] = old_nonce
+    checks = {
+        "no_nonce_does_not_mint_temperature_challenge": no_challenge is None,
+        "no_nonce_binds_fallback_source_authority_commit": no_challenge_commit == fallback_commit,
+        "no_review_uses_current_head_fallback": no_review_commit == fallback_commit,
+        "c6_review_findings_control_manifest_source_commit": c6_review_commit == review_commit,
+        "malformed_c6_review_commit_falls_back_to_head": malformed_review_commit == fallback_commit,
+        "invalid_existing_challenge_fails_closed": invalid_challenge is None and invalid_challenge_commit is None,
+    }
+    return {
+        "schema": "FAMILY10H_SOURCE_AUTHORITY_COMMIT_BINDING_REGRESSION_V1",
+        "passed": all(checks.values()),
+        "checks": checks,
+    }
+
+
 def controller_acquisition_transaction_regression() -> dict[str, Any]:
     def seal_attempt(state: str, overrides: dict[str, Any] | None = None) -> dict[str, Any]:
         row = {
@@ -6592,6 +6675,7 @@ def controller_self_test() -> dict[str, Any]:
     attempt_journal_regression = discovery_attempt_journal_regression()
     strict_json = strict_json_regression()
     challenge_receipt = challenge_receipt_regression()
+    source_authority_binding = source_authority_commit_binding_regression()
     historical_lane_report = known_historical_lane_contact_report()
     package_parse = package_json_parse_audit()
     acquisition_transaction = controller_acquisition_transaction_regression()
@@ -6681,6 +6765,7 @@ def controller_self_test() -> dict[str, Any]:
         and attempt_journal_regression["passed"]
         and strict_json["passed"]
         and challenge_receipt["passed"]
+        and source_authority_binding["passed"]
         and package_parse["passed"]
         and historical_lane_report["authoritative_for_active_transaction"] is False
         and historical_lane_report["complete_cryptographic_lane_ledger_claimed"] is False
@@ -6701,6 +6786,7 @@ def controller_self_test() -> dict[str, Any]:
         "strict_json_regression": strict_json,
         "package_json_parse_audit": package_parse,
         "challenge_receipt_regression": challenge_receipt,
+        "source_authority_commit_binding_regression": source_authority_binding,
         "historical_lane_contact_report": historical_lane_report,
         "controller_acquisition_transaction_regression": acquisition_transaction,
         "live_authority_env_absent": live_env_absent,
@@ -6746,11 +6832,12 @@ def manifest() -> dict[str, Any]:
     target_result = read_json(TARGET_SELF_TEST_PATH) if TARGET_SELF_TEST_PATH.exists() else target_self_test()
     controller_result = read_json(CONTROLLER_SELF_TEST_PATH) if CONTROLLER_SELF_TEST_PATH.exists() else controller_self_test()
     git = git_state()
+    fallback_source_authority_commit = source_authority_commit_for_manifest(git["head"])
     temperature_challenge, source_authority_commit = expected_temperature_authority_challenge_for_manifest(
         source_hashes=source_hashes,
         source_bundle_sha256=bundle["sha256"],
         schedule_sidecar=schedule_sidecar,
-        fallback_authorized_commit=git["head"],
+        fallback_authorized_commit=fallback_source_authority_commit,
     )
     temperature_authority = read_temperature_sensor_authority(expected_challenge=temperature_challenge)
     contact_counters = authority_contact_counters(temperature_authority)
