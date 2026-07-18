@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "mission_id": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
+  "authority_rank": 0,
+  "one_sentence": "Finite reusable catalytic substrate carries and evolves unresolved .holo geometry, extracts an invariant or fixed point, renders one classical answer at the final boundary, and restores the substrate, targeting unbounded effective compute leverage.",
+  "native_chain": [
+    "public_instance",
+    "no_smuggle_compile",
+    "holo_process_object",
+    "native_catalytic_evolution",
+    "invariant_or_fixed_point",
+    "collapse_boundary",
+    "classical_witness",
+    "external_verifier",
+    "restoration"
+  ],
+  "compute_metric": {
+    "id": "GAMMA_V1",
+    "formula": "C_classical / (C_compile + C_native + C_readout + C_restore)",
+    "strong_target": "Gamma(n) diverges with problem size",
+    "literal_infinite_instructions_claimed": false
+  },
+  "native_coordinate": {
+    "primary": "U(1)_OR_TORUS",
+    "pi_role": "antipodal_cancellation",
+    "two_pi_role": "closure",
+    "bit_role": "boundary_projection"
+  },
+  "task_classes": [
+    "flagship_compute",
+    "enabling_infrastructure",
+    "external_product",
+    "calibration",
+    "evidence_audit"
+  ],
+  "operator_modes": [
+    "native_holo",
+    "hybrid",
+    "materialized_fallback"
+  ],
+  "fatal_substitutions": [
+    "preseeded_witness",
+    "answer_cache",
+    "compiler_solves_target",
+    "hidden_candidate_enumeration",
+    "exponential_explicit_coefficients",
+    "premature_full_materialization",
+    "native_cost_matches_claimed_avoided_search",
+    "ceremonial_restoration",
+    "official_verifier_rejects",
+    "support_task_promoted_to_wall_crossing"
+  ]
+}

@@ -1,0 +1,50 @@
+name: CAT_CAS Control Plane
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'THOUGHT/LAB/CAT_CAS/**'
+      - '.github/workflows/cat-cas-control-plane.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'THOUGHT/LAB/CAT_CAS/**'
+      - '.github/workflows/cat-cas-control-plane.yml'
+
+concurrency:
+  group: cat-cas-control-plane-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Phase-Lock Control Plane
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch registered audio branch
+        run: git fetch origin codex/audio-frequency-wave-substrate:refs/remotes/origin/codex/audio-frequency-wave-substrate
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install control-plane dependencies
+        run: python -m pip install pytest jsonschema
+
+      - name: Validate control plane
+        run: python THOUGHT/LAB/CAT_CAS/tools/validate_control_plane.py
+
+      - name: Check generated capability graph
+        run: python THOUGHT/LAB/CAT_CAS/tools/generate_capability_graph.py --check
+
+      - name: Run cold-agent structural tests
+        run: python -m pytest THOUGHT/LAB/CAT_CAS/tests/control_plane/test_phase_lock_control_plane.py -q
+
+      - name: Run CAT_CAS governance critic
+        run: python CAPABILITY/TOOLS/governance/critic.py

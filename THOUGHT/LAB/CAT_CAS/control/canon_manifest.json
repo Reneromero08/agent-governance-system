@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0.0",
+  "authority_order": [
+    {
+      "rank": 0,
+      "id": "MISSION",
+      "path": "MISSION.md",
+      "role": "purpose_and_target_architecture"
+    },
+    {
+      "rank": 1,
+      "id": "CURRENT_STATE",
+      "path": "control/current_state.json",
+      "role": "current_evidence_and_frontier_state"
+    },
+    {
+      "rank": 2,
+      "id": "AGENTS",
+      "path": "AGENTS.md",
+      "role": "operating_mode_and_agent_behavior"
+    },
+    {
+      "rank": 3,
+      "id": "CAPABILITY_GRAPH",
+      "path": "control/capability_graph.json",
+      "role": "capability_lineage_and_transfer"
+    },
+    {
+      "rank": 4,
+      "id": "CAT_CAS_OS",
+      "path": "CAT_CAS_OS.md",
+      "role": "verification_and_claim_discipline"
+    },
+    {
+      "rank": 5,
+      "id": "MANIFESTO",
+      "path": "MANIFESTO.md",
+      "role": "mechanism_and_critic_contract"
+    },
+    {
+      "rank": 6,
+      "id": "MASTER_REPORT",
+      "path": "MASTER_REPORT.md",
+      "role": "historical_coverage_and_evidence_ledger"
+    },
+    {
+      "rank": 7,
+      "id": "EXPERIMENT_DOCS",
+      "path": "**/REPORT*.md",
+      "role": "local_evidence_and_history"
+    },
+    {
+      "rank": 8,
+      "id": "ARCHIVE",
+      "path": "docs/archive/**",
+      "role": "historical_only"
+    }
+  ],
+  "rules": [
+    "A lower-ranked document may not redefine the CAT_CAS mission.",
+    "Current state outranks historical summaries for active work.",
+    "The master report is never a sufficient phase-lock source by itself.",
+    "Evidence and claim ceilings are not overridden by mission language.",
+    "Every superseded canonical document must point to its successor."
+  ]
+}

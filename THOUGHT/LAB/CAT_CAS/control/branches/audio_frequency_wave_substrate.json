@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "branch": "codex/audio-frequency-wave-substrate",
+  "branch_commit": "6c1875b2b4c39588ab5bdc4878a317671329b0f0",
+  "base_main": "32b5af119a03bc48bb00f279e6cc0014406147ad",
+  "purpose": "Build the first bounded layers of a phase-topological computer whose primitive state is phase on S^1 rather than a bit.",
+  "prime_directive": "REPLACE THE BIT WITH PI",
+  "mission_relation": "Supplies the U(1) and toroidal carrier semantics required for native .holo evolution and eventual fixed-point compute leverage.",
+  "native_state": {
+    "single": "theta in S^1 = R / 2*pi*Z",
+    "composite": "Theta in T^N = (S^1)^N",
+    "pi_operation": "P_pi(theta) = theta + pi mod 2*pi",
+    "binary_shadow": "{0, pi} subset S^1"
+  },
+  "target_lifecycle": [
+    "recursive_phase_object",
+    "recursive_wave_evolution",
+    "hierarchy_sensitive_invariant_extraction",
+    "explicit_boundary_projection",
+    "reverse_traversal",
+    "carrier_restoration",
+    "surviving_result_reused_at_next_scale"
+  ],
+  "current_results": [
+    "AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED",
+    "AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED",
+    "AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED",
+    "AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED",
+    "AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED"
+  ],
+  "current_stage": "P0_BUILD_READINESS_COMPONENTS_SEEDED",
+  "physical_carrier_architecture_frozen": true,
+  "physical_carrier_characterized": false,
+  "physical_audio_computing_established": false,
+  "small_wall_crossed": false,
+  "entrypoints": [
+    "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AGENTS.md",
+    "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUDIO_SIDE_QUEST_ROADMAP.md",
+    "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/physical_phase_carrier_v1/P0_BUILD_READINESS_AUTHORITY.md",
+    "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/physical_phase_carrier_v1/P0_BUILD_READINESS_COMPONENT_SEED.md"
+  ],
+  "claim_ceiling": "NON_EXECUTING_PHYSICAL_PHASE_CARRIER_BUILD_READINESS_ONLY",
+  "forbidden_inferences": [
+    "physical_carrier_characterized",
+    "physical_audio_computing_established",
+    "small_wall_crossed",
+    "ising_is_the_native_architecture"
+  ]
+}

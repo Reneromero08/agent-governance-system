@@ -2,6 +2,20 @@
 
 # Changelog
 
+## 2026-07-17: CAT_CAS phase-lock control plane
+
+- Add an executable CAT_CAS mission and capability control plane that binds
+  finite-substrate unbounded effective compute, `.holo` non-collapse geometry,
+  pi-native toroidal carrier semantics, current Exp 50 evidence, the audio
+  research branch, and Track 8 external boundaries into task-scoped agent
+  packets.
+
+- Harden phase locking with branch inference, exact remote-head and code-path
+  bindings, recomputed context digests, receipt-to-task-contract consistency,
+  task-specific claim ceilings, adversarial cold-agent tests, and a dedicated
+  GitHub workflow that installs its validation dependencies and blocks stale or
+  malformed control-plane changes.
+
 ## 2026-07-11: Gate A process-custody bundle closure
 
 - Close exact local/rendered-remote process receipt and failure-code equivalence

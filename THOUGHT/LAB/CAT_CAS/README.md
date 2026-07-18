@@ -2,6 +2,12 @@
 
 **Root**: `THOUGHT/LAB/CAT_CAS/`
 
+> **Start here:** [`MISSION.md`](MISSION.md) defines why the system exists.
+> [`CAPABILITY_GRAPH.md`](CAPABILITY_GRAPH.md) shows how the experiments build toward
+> finite-substrate, unbounded effective compute and external classical answer extraction.
+> Run `python tools/phase_lock.py ...` before substantial work. This README remains the
+> chronological inventory, not the mission or current-state authority.
+
 > **Verification Status (2026-06-02):** This README is an experiment inventory and navigation
 > document. The canonical verification ledger is `docs/REPORTS/VIOLATIONS/ROADMAP_3.md`. The compact
 > truth ledger is `docs/REPORTS/master_report.md`. Some experiments have been partially verified,
@@ -23,10 +29,14 @@
 - [What Is NOT Present in CAT_CAS](#what-is-not-present-in-cat_cas)
 - [Compatibility with Holographic Brain + Eigen Buddy](#compatibility-with-holographic-brain--eigen-buddy)
 
-**Navigation docs** (in `docs/`):
-- [`docs/MAP.md`](docs/MAP.md) — track taxonomy and one-line purpose per experiment (visual track map)
-- [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) — naming and layout rules (single source of truth)
-- [`docs/STORAGE.md`](docs/STORAGE.md) — large-data index (per-experiment, gitignored)
+**Control and navigation docs:**
+- [`MISSION.md`](MISSION.md) - constitutional purpose and compute target.
+- [`control/current_state.json`](control/current_state.json) - current frontiers and blockers.
+- [`CAPABILITY_GRAPH.md`](CAPABILITY_GRAPH.md) - compute-leverage ladder and code lineage.
+- [`PRIMER.md`](PRIMER.md) - task-specific context routing.
+- [`docs/MAP.md`](docs/MAP.md) - track taxonomy and one-line purpose per experiment.
+- [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) - naming and layout rules.
+- [`docs/STORAGE.md`](docs/STORAGE.md) - large-data index.
 
 ## Theoretical Foundation
 

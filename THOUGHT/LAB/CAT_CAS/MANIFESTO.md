@@ -1,18 +1,35 @@
 # CAT_CAS LABORATORY MANIFESTO: THE OPERATING CONTRACT
 
+> **Authority notice:** [`MISSION.md`](MISSION.md) defines why CAT_CAS exists. This
+> manifesto defines mechanism standards and failure modes. A non-Hermitian Hamiltonian,
+> winding number, Chern/Bott index, IPR, or spectral radius is one sensor chart when the
+> mapping is structurally valid. None is the universal mandatory representation.
+
 ## What This Lab Is
 
-The CAT_CAS (Catalytic Tree Evaluation) Laboratory is a computational physics
-framework that replaces algorithmic enumeration with topological measurement.
-Every problem — mathematical, biological, cosmological — is mapped to a
-Non-Hermitian Hamiltonian. The answer is a global topological invariant
-(winding number, Chern number, IPR, spectral radius) measured in $O(1)$
-contour steps via the Cauchy Argument Principle on a Zero-Landauer catalytic
-substrate.
+CAT_CAS is a computational-physics laboratory attempting to turn finite reusable
+substrate into unbounded effective computation. `.holo` preserves the unresolved
+relational process-object; native catalytic, phase, toroidal, spectral, or topological
+evolution acts on it; an invariant or fixed point survives; one classical answer is
+rendered at the declared boundary; and the substrate restores.
 
-**The algorithm is dead.** Step-by-step simulation, convergence testing,
-Monte Carlo sampling, gradient descent — all assume the problem must be
-enumerated. CAT_CAS proves it must be measured. The topology IS the answer.
+The recurring replacement is:
+
+```text
+classical enumeration or materialization
+-> compact unresolved geometry
+-> native global operation
+-> invariant or fixed point
+-> final classical witness
+```
+
+Non-Hermitian Hamiltonians and topological sensors are important instruments in this
+program. They are not automatically the process-object, the solver, or the proof of a
+compute advantage.
+
+**The algorithm is dead as ontology.** Step-by-step simulation, convergence testing,
+Monte Carlo sampling, gradient descent, and candidate search may be controls or local
+traces. They may not silently replace the native mechanism under test.
 
 ---
 
@@ -160,7 +177,33 @@ def apply_sigma_compression(H, target_phase):
 
 ## The Experiment Pattern
 
-Every CAT_CAS experiment follows this architecture:
+Every CAT_CAS experiment first declares its task class:
+
+```text
+flagship_compute
+| enabling_infrastructure
+| external_product
+| calibration
+| evidence_audit
+```
+
+Only `flagship_compute` is required to test the full compute-leverage chain. Every task
+must preserve its own claim ceiling.
+
+A flagship experiment follows this architecture:
+
+```text
+classical explosion
+-> .holo containment
+-> native operator
+-> invariant or fixed point
+-> CollapseBoundary
+-> classical verifier
+-> restoration
+```
+
+The sensor stages below apply when a Hamiltonian or topological representation is the
+chosen mechanism, not as a compulsory translation for every domain.
 
 ### Phase 0: Define the Isomorphism
 

@@ -1,7 +1,31 @@
 # Catalytic Space Complexity & Reversible Computing: Full Lab Master Report
 
+> **Authority notice:** This report does not define the CAT_CAS mission. Read
+> [`MISSION.md`](MISSION.md), `control/current_state.json`, and the generated phase-lock
+> packet first. This file is the historical coverage and evidence ledger. The dirty-tape
+> definition below is the foundation rung of CAT_CAS, not its terminal purpose.
+
 *Generated from ZIP + README + current master report on 2026-06-03.*  
 *Canonical audit ledger: `docs/REPORTS/VIOLATIONS/ROADMAP_3.md` / uploaded `ROADMAP_3_VERIFIED.md`.*
+
+## Control-plane relation
+
+The mission target is:
+
+```text
+finite reusable substrate
+-> .holo unresolved relational geometry
+-> native catalytic / phase / toroidal evolution
+-> invariant or fixed point
+-> one classical CollapseBoundary
+-> restored substrate
+```
+
+The evidence ladder in this report must remain separate from the compute-leverage ladder
+in [`CAPABILITY_GRAPH.md`](CAPABILITY_GRAPH.md). A reported experiment may establish
+catalytic closure, bounded residency, reuse, or non-collapse representation without yet
+establishing native fixed-point advantage. Current Exp 50 and audio-branch state is
+summarized in `control/current_state.json` and remains bound to its exact evidence packs.
 
 ## 0. Source Custody
 
