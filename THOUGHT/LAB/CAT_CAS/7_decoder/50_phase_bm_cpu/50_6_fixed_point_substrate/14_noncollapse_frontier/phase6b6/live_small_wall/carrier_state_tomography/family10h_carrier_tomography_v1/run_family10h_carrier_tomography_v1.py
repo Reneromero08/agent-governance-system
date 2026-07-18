@@ -45,7 +45,7 @@ C3_ATTEMPT_HISTORY_DIR = ATTEMPT_HISTORY_DIR / "c3_55e059bc_failed_affinity_prec
 C5_ATTEMPT_HISTORY_DIR = ATTEMPT_HISTORY_DIR / "c5_ca8f8490_no_approved_sensor"
 C3_SOURCE_AUTHORITY_COMMIT = "55e059bc7acaafee3feacddac2069d7b5e40edd1"
 C4_SOURCE_AUTHORITY_COMMIT = "092d0a655e94d7c00f69efc1236cf1c8a2896ee1"
-C5_SOURCE_AUTHORITY_COMMIT = "8021563a6122b72316ddd218077b8b82e36f9055"
+C5_SOURCE_AUTHORITY_COMMIT = "ca8f8490e9d2fc9b36debbfe7c927bfe2fde5c5e"
 C5_ATTEMPT_SOURCE_COMMIT = "ca8f8490e9d2fc9b36debbfe7c927bfe2fde5c5e"
 C3_FAILURE_EVIDENCE_COMMIT = "35844e76317017a73dc0fa83f7e976642b80c66f"
 C3_FAILURE_REASON = "TargetError: platform affinity excludes frozen source or receiver CPU"
@@ -4835,8 +4835,29 @@ def source_audit_quorum_regression() -> dict[str, Any]:
         item["review_receipt"] = {**item["review_receipt"], **fields}
         rewrite_item_receipt(review_root, item, role_key)
 
+    c5_audit = read_json(SOURCE_AUDIT_REVIEW_VERSIONED["C5"]["findings_path"])
+    c5_paths = source_audit_paths_for_commit(C5_SOURCE_AUTHORITY_COMMIT)
+    c5_quorum = source_audit_quorum(
+        c5_audit,
+        expected_source_commit=C5_SOURCE_AUTHORITY_COMMIT,
+        expected_source_hashes_sha256=c5_audit["source_hashes_sha256"],
+        expected_source_bundle_sha256=c5_audit["source_bundle_sha256"],
+        expected_runtime_binary_sha256=c5_audit["runtime_binary_sha256"],
+        review_report_present=c5_paths["review_path"].exists(),
+        review_root=c5_paths["review_dir"],
+    )
+
     checks = {
         "exact_source_audit_quorum_passes": evaluate(),
+        "c5_actual_source_authority_commit_selects_c5": source_audit_version_for_commit(C5_SOURCE_AUTHORITY_COMMIT) == "C5",
+        "c5_actual_source_authority_commit_uses_v2_receipts": source_audit_receipt_schema_for_commit(C5_SOURCE_AUTHORITY_COMMIT)
+        == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2,
+        "c5_committed_v2_archive_replays": c5_quorum["passed"],
+        "c5_failure_evidence_commit_selects_c6": source_audit_version_for_commit(C5_FAILURE_EVIDENCE_COMMIT) == "C6",
+        "c5_failure_evidence_commit_uses_v3_receipts": source_audit_receipt_schema_for_commit(C5_FAILURE_EVIDENCE_COMMIT)
+        == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3,
+        "future_source_authority_commit_uses_v3_receipts": source_audit_receipt_schema_for_commit("f" * 40)
+        == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3,
         "missing_report_blocked": not evaluate(review_report_present=False),
         "wrong_top_level_bundle_blocked": not evaluate(lambda audit, _root: audit.update({"source_bundle_sha256": "5" * 64})),
         "wrong_top_level_runtime_blocked": not evaluate(lambda audit, _root: audit.update({"runtime_binary_sha256": "6" * 64})),
