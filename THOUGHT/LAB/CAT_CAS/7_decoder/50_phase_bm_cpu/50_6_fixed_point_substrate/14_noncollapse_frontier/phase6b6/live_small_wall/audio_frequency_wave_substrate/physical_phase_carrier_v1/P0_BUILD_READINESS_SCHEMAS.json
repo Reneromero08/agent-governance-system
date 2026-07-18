@@ -1,0 +1,194 @@
+{
+  "canonical_json": {
+    "boolean_as_number": "reject",
+    "duplicate_keys": "reject",
+    "encoding": "UTF-8",
+    "hashes": "lowercase-sha256",
+    "indent_spaces": 2,
+    "keys": "lexicographic",
+    "negative_zero": "reject-by-canonical-form",
+    "newline": "LF-final",
+    "nonfinite": "reject",
+    "unknown_fields": "reject"
+  },
+  "enforced_objects": {
+    "p0.environment-record.v1": {
+      "cadence_samples": 100000,
+      "canonical_decimal": "no-plus-no-leading-zero-no-negative-zero",
+      "canonical_index": "base-10-no-leading-zero",
+      "crc8": {
+        "initial": "0xff",
+        "polynomial": "0x31",
+        "word_order": "big-endian"
+      },
+      "format": "strict-csv",
+      "header": "nearest_raw_sample_index,monotonic_ns,utc_timestamp,sensor_serial_hex,command_hex,temperature_ticks_hex,temperature_crc8_hex,rh_ticks_hex,rh_crc8_hex,temperature_C,rh_percent",
+      "humidity_conversion": "-6+125*ticks/65535",
+      "humidity_rh": [
+        20.0,
+        60.0
+      ],
+      "measurement_command_hex": "fd",
+      "monotonic_cadence_ns": 100000000,
+      "sensor_identity": "lowercase-8-hex-bound-to-metadata",
+      "temperature_c": [
+        20.0,
+        30.0
+      ],
+      "temperature_conversion": "-45+175*ticks/65535",
+      "timestamp_cadence_microseconds": 100000,
+      "timestamp_year": "four-digit-year-not-hard-coded"
+    },
+    "p0.raw-bundle-manifest.v1": {
+      "exact_fields": [
+        "roles",
+        "schema"
+      ],
+      "metadata_hashes_required": true,
+      "role_entry_fields": [
+        "path",
+        "sha256"
+      ],
+      "roles": [
+        "arm_0",
+        "arm_pi",
+        "zero_drive",
+        "resonator_removed",
+        "dummy_c0"
+      ],
+      "unique_payloads_required": true
+    },
+    "p0.raw-bundle.v1": {
+      "assignment_reveal_required": true,
+      "cross_record_equal": [
+        "assignment_commitment_sha256",
+        "calibration_sha256",
+        "clock_identity",
+        "evidence_class",
+        "export_adapter_identity",
+        "f_ref_hz",
+        "instrument_identity_and_configuration",
+        "scale_per_code",
+        "source_setup_except_phase",
+        "thresholds"
+      ],
+      "exact_fields": [
+        "clock",
+        "custody",
+        "environment",
+        "evidence_class",
+        "export",
+        "instrument",
+        "payload",
+        "role",
+        "run_id",
+        "schema",
+        "source",
+        "thresholds",
+        "witness"
+      ],
+      "source_exact_fields": [
+        "model",
+        "phase_command_rad",
+        "phase_skew_standard_uncertainty_rad",
+        "phase_drive_cal_standard_uncertainty_rad",
+        "frequency_hz",
+        "amplitude_vpp",
+        "offset_v",
+        "reference_frequency_hz",
+        "reference_amplitude_vpp",
+        "reference_offset_v",
+        "reference_phase_command_rad",
+        "dual_channel_phase_locked",
+        "monitor_network",
+        "output_mode",
+        "load_mode",
+        "qualified_preparation_cycles",
+        "source_remains_on_through_record",
+        "output_ohms",
+        "setup_queryback_sha256"
+      ],
+      "source_frozen_setup": {
+        "c1_amplitude_vpp": "0.4",
+        "c1_offset_v": "0",
+        "c2_amplitude_vpp": "0.1",
+        "c2_offset_v": "0",
+        "load_mode": "HIGH_Z",
+        "physical_output_ohms": "50"
+      }
+    },
+    "p0.scientific-result.v1": {
+      "drive_phase_uncertainty": {
+        "cross_covariance_included": true,
+        "derived_error": "wrap(phi_C1-0.5*phi_C2-delta_command)",
+        "expanded_law": "1.96*sqrt(u_error_fit^2+u_skew^2+u_drive_cal^2)",
+        "fit_gradient": "g_C1-0.5*g_C2",
+        "hac_lag": 7,
+        "joint_design_columns": [
+          "cos(f_ref)",
+          "-sin(f_ref)",
+          "cos(2*f_ref)",
+          "-sin(2*f_ref)",
+          "constant"
+        ]
+      },
+      "physical_claim_authorized": false,
+      "required_custody": [
+        "analyzer_sha256",
+        "assignment_commitment_sha256",
+        "bundle_sha256",
+        "calibration_sha256",
+        "dependency_sha256",
+        "fixture_sha256",
+        "metadata_sha256",
+        "payload_sha256",
+        "schema_sha256",
+        "thresholds_sha256"
+      ]
+    },
+    "p0.synthetic-control-evidence.v1": {
+      "decision_independent_of_control_id": true,
+      "exact_fields": [
+        "control_id",
+        "controls",
+        "environment",
+        "epsilon",
+        "evidence_class",
+        "path",
+        "payload",
+        "physical_claim_requested",
+        "schema",
+        "source",
+        "transients",
+        "witness"
+      ],
+      "scientific_negative_execution": "summary_schema_and_decision_law_only__not_raw_analyzer_evidence"
+    }
+  },
+  "forbidden_acquisition_fields": [
+    "expected_result",
+    "expected_phase_relation",
+    "winner",
+    "pass_hint"
+  ],
+  "identities": [
+    "p0.build-readiness-contract.v1",
+    "p0.component-identity.v1",
+    "p0.document-identity.v1",
+    "p0.netlist.v1",
+    "p0.channel-map.v1",
+    "p0.source-off-topology.v1",
+    "p0.instrument-configuration.v1",
+    "p0.native-export-adapter-receipt.v1",
+    "p0.raw-bundle.v1",
+    "p0.calibration-packet.v1",
+    "p0.arm-assignment-commitment.v1",
+    "p0.environment-record.v1",
+    "p0.scientific-result.v1",
+    "p0.control-outcome.v1",
+    "p0.adjudication.v1",
+    "p0.build-readiness-manifest.v1",
+    "p0.contact-attestation.v1"
+  ],
+  "schema": "p0.build-readiness-schemas.v1"
+}

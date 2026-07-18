@@ -1,0 +1,351 @@
+{
+  "canonical_payload": {
+    "bytes_per_payload": 24808000,
+    "channels": 4,
+    "dtype": "signed-int16",
+    "endian": "little",
+    "layout": "sample-major-interleaved",
+    "materialized_replay_bytes": 124040000,
+    "role_count": 5,
+    "samples_per_channel": 3101000
+  },
+  "claim_law": {
+    "maximum_token": "SYNTHETIC_ANALYZER_PASS",
+    "synthetic_physical_claim": false
+  },
+  "generator": "p0_scientific_analyzer.py",
+  "malformed_or_custody_negative": [
+    {
+      "case": "truncated_binary",
+      "expected_rejection": "PAYLOAD_SIZE"
+    },
+    {
+      "case": "extra_samples",
+      "expected_rejection": "PAYLOAD_SIZE"
+    },
+    {
+      "case": "wrong_channel_count",
+      "expected_rejection": "CHANNEL_COUNT"
+    },
+    {
+      "case": "wrong_dtype",
+      "expected_rejection": "DTYPE"
+    },
+    {
+      "case": "wrong_endian",
+      "expected_rejection": "ENDIAN"
+    },
+    {
+      "case": "nonfinite_scale_metadata",
+      "expected_rejection": "NONFINITE_JSON"
+    },
+    {
+      "case": "missing_calibration",
+      "expected_rejection": "MISSING_FIELD"
+    },
+    {
+      "case": "malformed_json",
+      "expected_rejection": "MALFORMED_JSON"
+    },
+    {
+      "case": "duplicate_json_key",
+      "expected_rejection": "DUPLICATE_KEY"
+    },
+    {
+      "case": "unknown_field",
+      "expected_rejection": "UNKNOWN_FIELD"
+    },
+    {
+      "case": "path_traversal",
+      "expected_rejection": "UNSAFE_PATH"
+    },
+    {
+      "case": "hash_mutation",
+      "expected_rejection": "HASH_MISMATCH"
+    },
+    {
+      "case": "manifest_role_substitution",
+      "expected_rejection": "ROLE_SUBSTITUTION"
+    },
+    {
+      "case": "assignment_reveal_before_custody_closure",
+      "expected_rejection": "EARLY_ASSIGNMENT_REVEAL"
+    },
+    {
+      "case": "threshold_mutation_after_primary_data",
+      "expected_rejection": "THRESHOLD_CUSTODY"
+    }
+  ],
+  "positive": [
+    "ideal_source_off_ringdown",
+    "ideal_matched_0_pi_antipode",
+    "nonzero_noise_within_threshold",
+    "frequency_and_decay_match_at_equality",
+    "phase_relation_at_equality",
+    "minimum_256_cycle_usable_window",
+    "valid_ch2_transition_and_guard",
+    "valid_environment_at_boundaries"
+  ],
+  "raw_adversary": [
+    {
+      "case": "negative_scale_transform",
+      "expected_rejection": "SCALE_MISMATCH"
+    },
+    {
+      "case": "payload_reuse",
+      "expected_rejection": "PAYLOAD_ALIAS"
+    },
+    {
+      "case": "mixed_evidence_class",
+      "expected_rejection": "EVIDENCE_CLASS_MISMATCH"
+    },
+    {
+      "case": "assignment_not_revealed",
+      "expected_rejection": "ASSIGNMENT_NOT_REVEALED"
+    },
+    {
+      "case": "precommand_not_drive",
+      "expected_rejection": "CH2_ILLEGAL_STATE"
+    },
+    {
+      "case": "gate_first_sequence_skipped",
+      "expected_rejection": "GATE_FIRST_SEQUENCE"
+    },
+    {
+      "case": "source_left_on_raw",
+      "expected_rejection": "SOURCE_OFF_NOT_WITNESSED"
+    },
+    {
+      "case": "source_muted_preparation_middle_raw",
+      "expected_rejection": "SOURCE_PREPARATION_NOT_CONTINUOUS"
+    },
+    {
+      "case": "source_muted_at_gate_raw",
+      "expected_rejection": "SOURCE_MONITOR_NOT_CONTINUOUS"
+    },
+    {
+      "case": "source_muted_gate_guard_only_raw",
+      "expected_rejection": "SOURCE_MONITOR_NOT_CONTINUOUS"
+    },
+    {
+      "case": "source_muted_late_1300000_raw",
+      "expected_rejection": "SOURCE_MONITOR_NOT_CONTINUOUS"
+    },
+    {
+      "case": "source_muted_late_2000000_raw",
+      "expected_rejection": "SOURCE_MONITOR_NOT_CONTINUOUS"
+    },
+    {
+      "case": "source_muted_late_3000000_raw",
+      "expected_rejection": "SOURCE_MONITOR_NOT_CONTINUOUS"
+    },
+    {
+      "case": "reference_tone_missing_raw",
+      "expected_rejection": "SOURCE_REFERENCE_MISSING"
+    },
+    {
+      "case": "guard_before_series_open_raw",
+      "expected_rejection": "SERIES_OPEN_SEQUENCE"
+    },
+    {
+      "case": "matched_drive_phase_mismatch_raw",
+      "expected_rejection": "DRIVE_PHASE_MATCH"
+    },
+    {
+      "case": "matched_temperature_delta_raw",
+      "expected_rejection": "TEMPERATURE_MISMATCH"
+    },
+    {
+      "case": "noncanonical_metadata_raw",
+      "expected_rejection": "NONCANONICAL_JSON"
+    },
+    {
+      "case": "threshold_hash_mutation_raw",
+      "expected_rejection": "HASH_MISMATCH"
+    },
+    {
+      "case": "instrument_configuration_drift",
+      "expected_rejection": "INSTRUMENT_CONFIGURATION_MISMATCH"
+    },
+    {
+      "case": "export_adapter_drift",
+      "expected_rejection": "EXPORT_ADAPTER_MISMATCH"
+    },
+    {
+      "case": "source_configuration_drift",
+      "expected_rejection": "SOURCE_CONFIGURATION_MISMATCH"
+    },
+    {
+      "case": "source_amplitude_out_of_contract",
+      "expected_rejection": "SOURCE_SETUP"
+    },
+    {
+      "case": "environment_leading_zero_index",
+      "expected_rejection": "ENVIRONMENT_FORMAT"
+    },
+    {
+      "case": "environment_plus_decimal",
+      "expected_rejection": "NUMBER_ENCODING"
+    },
+    {
+      "case": "environment_exponent_decimal",
+      "expected_rejection": "NUMBER_ENCODING"
+    },
+    {
+      "case": "environment_repeated_timestamp",
+      "expected_rejection": "ENVIRONMENT_CADENCE"
+    },
+    {
+      "case": "environment_crc_mutation",
+      "expected_rejection": "ENVIRONMENT_CRC"
+    },
+    {
+      "case": "environment_monotonic_drift",
+      "expected_rejection": "ENVIRONMENT_CADENCE"
+    },
+    {
+      "case": "environment_sensor_identity_drift",
+      "expected_rejection": "ENVIRONMENT_SENSOR_IDENTITY"
+    },
+    {
+      "case": "negative_zero_metadata",
+      "expected_rejection": "NUMBER_ENCODING"
+    }
+  ],
+  "schema": "p0.scientific-fixtures.v1",
+  "scientific_negative": [
+    {
+      "case": "zero_drive",
+      "expected_rejection": "ZERO_DRIVE_CONTROL"
+    },
+    {
+      "case": "resonator_removed",
+      "expected_rejection": "RESONATOR_REMOVED_CONTROL"
+    },
+    {
+      "case": "dummy_c0_feedthrough",
+      "expected_rejection": "DUMMY_C0_FEEDTHROUGH"
+    },
+    {
+      "case": "source_left_on",
+      "expected_rejection": "SOURCE_OFF_NOT_WITNESSED"
+    },
+    {
+      "case": "off_resonance_response",
+      "expected_rejection": "OFF_RESONANCE_RESPONSE"
+    },
+    {
+      "case": "detector_impulse_memory",
+      "expected_rejection": "DETECTOR_MEMORY_OVER_10US"
+    },
+    {
+      "case": "controller_buffer_replay",
+      "expected_rejection": "POST_BARRIER_BUFFER_FORBIDDEN"
+    },
+    {
+      "case": "analog_switch_charge_transient",
+      "expected_rejection": "TRANSIENT_AFTER_ADMIT"
+    },
+    {
+      "case": "relay_bounce_transient",
+      "expected_rejection": "CONTACT_BOUNCE_AFTER_ADMIT"
+    },
+    {
+      "case": "source_leakage_after_guard",
+      "expected_rejection": "SOURCE_FEEDTHROUGH"
+    },
+    {
+      "case": "reference_leakage",
+      "expected_rejection": "REFERENCE_FEEDTHROUGH"
+    },
+    {
+      "case": "amplitude_mismatch",
+      "expected_rejection": "AMPLITUDE_MISMATCH"
+    },
+    {
+      "case": "frequency_mismatch",
+      "expected_rejection": "FREQUENCY_MISMATCH"
+    },
+    {
+      "case": "decay_mismatch",
+      "expected_rejection": "DECAY_MISMATCH"
+    },
+    {
+      "case": "pi_2_phase",
+      "expected_rejection": "HALF_TURN_PHASE_MISMATCH"
+    },
+    {
+      "case": "fixed_random_phases",
+      "expected_rejection": "FIXED_PHASE_CONTROL"
+    },
+    {
+      "case": "timing_mismatch",
+      "expected_rejection": "TIMING_MISMATCH_CONTROL"
+    },
+    {
+      "case": "wrong_termination",
+      "expected_rejection": "TERMINATION_IDENTITY_MISMATCH"
+    },
+    {
+      "case": "wrong_guard_interval",
+      "expected_rejection": "GUARD_INTERVAL_SHORT"
+    },
+    {
+      "case": "ch2_illegal_code",
+      "expected_rejection": "CH2_ILLEGAL_STATE"
+    },
+    {
+      "case": "ch2_nearest_code_ambiguity",
+      "expected_rejection": "CH2_AMBIGUOUS_LEVEL"
+    },
+    {
+      "case": "post_off_state_reentry",
+      "expected_rejection": "CH2_POST_OFF_REENTRY"
+    },
+    {
+      "case": "missing_witness",
+      "expected_rejection": "CH2_WITNESS_MISSING"
+    },
+    {
+      "case": "channel_swap",
+      "expected_rejection": "CHANNEL_ROLE_MISMATCH"
+    },
+    {
+      "case": "timebase_drift",
+      "expected_rejection": "TIMEBASE_MISMATCH"
+    },
+    {
+      "case": "channel_skew_violation",
+      "expected_rejection": "CHANNEL_SKEW_OVER_LIMIT"
+    },
+    {
+      "case": "clipping",
+      "expected_rejection": "CLIPPING"
+    },
+    {
+      "case": "adc_saturation",
+      "expected_rejection": "ADC_SATURATION"
+    },
+    {
+      "case": "environment_cadence_failure",
+      "expected_rejection": "ENVIRONMENT_CADENCE"
+    },
+    {
+      "case": "temperature_mismatch",
+      "expected_rejection": "TEMPERATURE_MISMATCH"
+    },
+    {
+      "case": "humidity_mismatch",
+      "expected_rejection": "HUMIDITY_MISMATCH"
+    },
+    {
+      "case": "vibration_mismatch",
+      "expected_rejection": "VIBRATION_MISMATCH"
+    }
+  ],
+  "scope_law": {
+    "raw_adversaries": "actual canonical raw-bundle analyzer execution",
+    "semantic_controls": "summary schema and decision-law conformance only",
+    "topology_only_cases": "require separately bound non-analyzer adjudication receipts"
+  }
+}

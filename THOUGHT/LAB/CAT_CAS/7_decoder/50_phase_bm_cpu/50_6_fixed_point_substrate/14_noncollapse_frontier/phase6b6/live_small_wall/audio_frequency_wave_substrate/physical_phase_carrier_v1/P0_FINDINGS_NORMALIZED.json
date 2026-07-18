@@ -1,6 +1,8 @@
 {
+  "active_authority": false,
   "architecture_content_sha256": "fb0f73d309634e0e0bf95a24af7eba3941214318996c0d51337322d3f4a0cfd7",
-  "decision": "PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN",
+  "decision": "HISTORICAL_OBSOLETE_REVIEW_RECORD__NO_CURRENT_AUTHORITY",
+  "historical_scope": "Resolved findings at the obsolete architecture-content root only; no current candidate review, freeze, or quorum authority.",
   "finding_count": 37,
   "findings": [
     {"id": "P0-CARRIER-001", "materiality": "MATERIAL", "reviewer_id": "AUD-P0-01-CARRIER", "status": "RESOLVED", "title": "Closed two-terminal post-source measurement circuit"},

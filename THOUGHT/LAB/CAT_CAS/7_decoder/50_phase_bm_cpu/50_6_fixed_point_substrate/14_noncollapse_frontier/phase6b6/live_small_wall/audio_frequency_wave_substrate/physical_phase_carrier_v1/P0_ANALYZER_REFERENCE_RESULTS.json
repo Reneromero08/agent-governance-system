@@ -1,0 +1,982 @@
+{
+  "artifact_custody": {
+    "analyzer_sha256": "e20de28434b0937bb81407e998baebfd0f29afbfb9cd796084375984a69007b7",
+    "dependency_identity": {
+      "byteorder": "little",
+      "machine": "AMD64",
+      "numpy_config": {
+        "Build Dependencies": {
+          "blas": {
+            "detection method": "pkgconfig",
+            "found": true,
+            "include directory": "/c/opt/64/include",
+            "lib directory": "/c/opt/64/lib",
+            "name": "openblas64",
+            "openblas configuration": "USE_64BITINT=1 DYNAMIC_ARCH=1 DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK= NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP= SKYLAKEX MAX_THREADS=2",
+            "pc file directory": "C:/opt/64/lib/pkgconfig",
+            "version": "0.3.23.dev"
+          },
+          "lapack": {
+            "detection method": "internal",
+            "found": true,
+            "include directory": "unknown",
+            "lib directory": "unknown",
+            "name": "dep2270588361616",
+            "openblas configuration": "unknown",
+            "pc file directory": "unknown",
+            "version": "1.26.4"
+          }
+        },
+        "Compilers": {
+          "c": {
+            "commands": "cl",
+            "linker": "link",
+            "name": "msvc",
+            "version": "19.29.30153"
+          },
+          "c++": {
+            "commands": "cl",
+            "linker": "link",
+            "name": "msvc",
+            "version": "19.29.30153"
+          },
+          "cython": {
+            "commands": "cython",
+            "linker": "cython",
+            "name": "cython",
+            "version": "3.0.8"
+          }
+        },
+        "Machine Information": {
+          "build": {
+            "cpu": "x86_64",
+            "endian": "little",
+            "family": "x86_64",
+            "system": "windows"
+          },
+          "host": {
+            "cpu": "x86_64",
+            "endian": "little",
+            "family": "x86_64",
+            "system": "windows"
+          }
+        },
+        "Python Information": {
+          "path": "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\cibw-run-j442zwj6\\cp311-win_amd64\\build\\venv\\Scripts\\python.exe",
+          "version": "3.11"
+        },
+        "SIMD Extensions": {
+          "baseline": [
+            "SSE",
+            "SSE2",
+            "SSE3"
+          ],
+          "found": [
+            "SSSE3",
+            "SSE41",
+            "POPCNT",
+            "SSE42",
+            "AVX",
+            "F16C",
+            "FMA3",
+            "AVX2"
+          ],
+          "not found": [
+            "AVX512F",
+            "AVX512CD",
+            "AVX512_SKX",
+            "AVX512_CLX",
+            "AVX512_CNL",
+            "AVX512_ICL"
+          ]
+        }
+      },
+      "numpy_core_binary_sha256": "c76d812fa5131fe21c8bf9ffbd910f27df80856f910fa61698f23f60cfd9d13e",
+      "numpy_distribution_record_sha256": "852cd4cdc45673affcba6e73dff58007a8b645bcf5290af8aae47d8fff65ba39",
+      "numpy_version": "1.26.4",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "python_cache_tag": "cpython-311",
+      "python_executable_sha256": "4bddd834fb6fc274cc20fa7cbfaa6e9b5ade6309429eb96a635538dba5d4a3ae",
+      "python_implementation": "CPython",
+      "python_version": "3.11.6",
+      "thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      }
+    },
+    "dependency_sha256": "7ed5c6a0295ea2089369804cf45631335f13c5e745904783ea70f8e877dd2cfb",
+    "fixture_sha256": "3896bf4a06284fd526e00cb2387123d971887ae571a0bae8d783df62fd23a3fa",
+    "schema_sha256": "40fb60c015386ea76081456305b02359b521b515936df302cd900ad450cd88ec"
+  },
+  "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
+  "fixture_count": 55,
+  "malformed_or_custody_negative_count": 15,
+  "malformed_outcomes": [
+    {
+      "case": "truncated_binary",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "PAYLOAD_SIZE"
+    },
+    {
+      "case": "extra_samples",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "PAYLOAD_SIZE"
+    },
+    {
+      "case": "wrong_channel_count",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "CHANNEL_COUNT"
+    },
+    {
+      "case": "wrong_dtype",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "DTYPE"
+    },
+    {
+      "case": "wrong_endian",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "ENDIAN"
+    },
+    {
+      "case": "nonfinite_scale_metadata",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "NONFINITE_JSON"
+    },
+    {
+      "case": "missing_calibration",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "MISSING_FIELD"
+    },
+    {
+      "case": "malformed_json",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "MALFORMED_JSON"
+    },
+    {
+      "case": "duplicate_json_key",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "DUPLICATE_KEY"
+    },
+    {
+      "case": "unknown_field",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "UNKNOWN_FIELD"
+    },
+    {
+      "case": "path_traversal",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "UNSAFE_PATH"
+    },
+    {
+      "case": "hash_mutation",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "HASH_MISMATCH"
+    },
+    {
+      "case": "manifest_role_substitution",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "ROLE_SUBSTITUTION"
+    },
+    {
+      "case": "assignment_reveal_before_custody_closure",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "EARLY_ASSIGNMENT_REVEAL"
+    },
+    {
+      "case": "threshold_mutation_after_primary_data",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "THRESHOLD_CUSTODY"
+    }
+  ],
+  "physical_claim_authorized": false,
+  "positive_count": 8,
+  "raw_adversary_count": 31,
+  "raw_adversary_outcomes": [
+    {
+      "case": "negative_scale_transform",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SCALE_MISMATCH"
+    },
+    {
+      "case": "payload_reuse",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "PAYLOAD_ALIAS"
+    },
+    {
+      "case": "mixed_evidence_class",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "EVIDENCE_CLASS_MISMATCH"
+    },
+    {
+      "case": "assignment_not_revealed",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "ASSIGNMENT_NOT_REVEALED"
+    },
+    {
+      "case": "precommand_not_drive",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "CH2_ILLEGAL_STATE"
+    },
+    {
+      "case": "gate_first_sequence_skipped",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "GATE_FIRST_SEQUENCE"
+    },
+    {
+      "case": "source_left_on_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_OFF_NOT_WITNESSED"
+    },
+    {
+      "case": "source_muted_preparation_middle_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_PREPARATION_NOT_CONTINUOUS"
+    },
+    {
+      "case": "source_muted_at_gate_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_MONITOR_NOT_CONTINUOUS"
+    },
+    {
+      "case": "source_muted_gate_guard_only_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_MONITOR_NOT_CONTINUOUS"
+    },
+    {
+      "case": "source_muted_late_1300000_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_MONITOR_NOT_CONTINUOUS"
+    },
+    {
+      "case": "source_muted_late_2000000_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_MONITOR_NOT_CONTINUOUS"
+    },
+    {
+      "case": "source_muted_late_3000000_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_MONITOR_NOT_CONTINUOUS"
+    },
+    {
+      "case": "reference_tone_missing_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_REFERENCE_MISSING"
+    },
+    {
+      "case": "guard_before_series_open_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SERIES_OPEN_SEQUENCE"
+    },
+    {
+      "case": "matched_drive_phase_mismatch_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "DRIVE_PHASE_MATCH"
+    },
+    {
+      "case": "matched_temperature_delta_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "TEMPERATURE_MISMATCH"
+    },
+    {
+      "case": "noncanonical_metadata_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "NONCANONICAL_JSON"
+    },
+    {
+      "case": "threshold_hash_mutation_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "HASH_MISMATCH"
+    },
+    {
+      "case": "instrument_configuration_drift",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "INSTRUMENT_CONFIGURATION_MISMATCH"
+    },
+    {
+      "case": "export_adapter_drift",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "EXPORT_ADAPTER_MISMATCH"
+    },
+    {
+      "case": "source_configuration_drift",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_CONFIGURATION_MISMATCH"
+    },
+    {
+      "case": "source_amplitude_out_of_contract",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_SETUP"
+    },
+    {
+      "case": "environment_leading_zero_index",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "ENVIRONMENT_FORMAT"
+    },
+    {
+      "case": "environment_plus_decimal",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "NUMBER_ENCODING"
+    },
+    {
+      "case": "environment_exponent_decimal",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "NUMBER_ENCODING"
+    },
+    {
+      "case": "environment_repeated_timestamp",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "ENVIRONMENT_CADENCE"
+    },
+    {
+      "case": "environment_crc_mutation",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "ENVIRONMENT_CRC"
+    },
+    {
+      "case": "environment_monotonic_drift",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "ENVIRONMENT_CADENCE"
+    },
+    {
+      "case": "environment_sensor_identity_drift",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "ENVIRONMENT_SENSOR_IDENTITY"
+    },
+    {
+      "case": "negative_zero_metadata",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "NUMBER_ENCODING"
+    }
+  ],
+  "raw_numerical_reference": {
+    "arms": {
+      "arm_0": {
+        "frequency_hz": 32768.00000272296,
+        "q": 18529.80934472782,
+        "r2_log_amplitude": 0.9999999933368685,
+        "tau_s": 0.1799994355175025,
+        "u95_frequency_hz": 6.7887336258753935e-06,
+        "u95_tau_s": 1.3619689097561667e-06,
+        "usable_cycles": 34854
+      },
+      "arm_pi": {
+        "frequency_hz": 32767.999998432126,
+        "q": 18529.89929450307,
+        "r2_log_amplitude": 0.9999999930728654,
+        "tau_s": 0.1800003093174009,
+        "u95_frequency_hz": 7.363088561783094e-06,
+        "u95_tau_s": 1.3772463450380534e-06,
+        "usable_cycles": 34854
+      }
+    },
+    "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
+    "claim_token": "SYNTHETIC_ANALYZER_PASS",
+    "drive_phase": {
+      "arm_0": {
+        "drive_reference_phase_covariance_rad2": -2.3231745092534514e-15,
+        "error_phase_fit_standard_uncertainty_rad": 3.689615411684835e-07,
+        "error_rad": -1.2375165647782183e-07,
+        "gauge_phase_fit_standard_uncertainty_rad": 3.268880220076725e-07,
+        "phase_drive_cal_standard_uncertainty_rad": 0.0001,
+        "phase_fit_standard_uncertainty_rad": 1.6417571507406485e-07,
+        "phase_skew_standard_uncertainty_rad": 0.0001,
+        "preparation_first_sample": 101000,
+        "preparation_last_sample": 1100999,
+        "preparation_residual_ratio_max": 6.272245578108614e-05,
+        "reference_phase_fit_standard_uncertainty_rad": 6.53776044015345e-07,
+        "u95_drive_rad": 0.00027718680157444117
+      },
+      "arm_pi": {
+        "drive_reference_phase_covariance_rad2": -2.9773877657833977e-15,
+        "error_phase_fit_standard_uncertainty_rad": 3.7089381760766703e-07,
+        "error_rad": -4.970015154981411e-08,
+        "gauge_phase_fit_standard_uncertainty_rad": 3.285094106832612e-07,
+        "phase_drive_cal_standard_uncertainty_rad": 0.0001,
+        "phase_fit_standard_uncertainty_rad": 1.6329850968806305e-07,
+        "phase_skew_standard_uncertainty_rad": 0.0001,
+        "preparation_first_sample": 101000,
+        "preparation_last_sample": 1100999,
+        "preparation_residual_ratio_max": 6.359532542183689e-05,
+        "reference_phase_fit_standard_uncertainty_rad": 6.570188213665224e-07,
+        "u95_drive_rad": 0.00027718681148106503
+      },
+      "matched_acceptance_lhs_rad": 0.0005544476645604343,
+      "matched_error_difference_rad": 7.405150492800772e-08,
+      "matched_u95_sum_rad": 0.0005543736130555062
+    },
+    "environment": {
+      "arm_0": {
+        "humidity_rh": 40.000228885328454,
+        "record_count": 10,
+        "temperature_c": 25.0,
+        "vibration_peak_m_s2": 0.005023133002224092,
+        "vibration_rms_m_s2": 0.0035354969637535556
+      },
+      "arm_pi": {
+        "humidity_rh": 40.000228885328454,
+        "record_count": 10,
+        "temperature_c": 25.0,
+        "vibration_peak_m_s2": 0.005017562627735032,
+        "vibration_rms_m_s2": 0.003534158786404532
+      }
+    },
+    "f_ref_hz": 32768.0,
+    "implementation_custody": {
+      "analyzer_sha256": "e20de28434b0937bb81407e998baebfd0f29afbfb9cd796084375984a69007b7",
+      "dependency_identity": {
+        "byteorder": "little",
+        "machine": "AMD64",
+        "numpy_config": {
+          "Build Dependencies": {
+            "blas": {
+              "detection method": "pkgconfig",
+              "found": true,
+              "include directory": "/c/opt/64/include",
+              "lib directory": "/c/opt/64/lib",
+              "name": "openblas64",
+              "openblas configuration": "USE_64BITINT=1 DYNAMIC_ARCH=1 DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK= NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP= SKYLAKEX MAX_THREADS=2",
+              "pc file directory": "C:/opt/64/lib/pkgconfig",
+              "version": "0.3.23.dev"
+            },
+            "lapack": {
+              "detection method": "internal",
+              "found": true,
+              "include directory": "unknown",
+              "lib directory": "unknown",
+              "name": "dep2270588361616",
+              "openblas configuration": "unknown",
+              "pc file directory": "unknown",
+              "version": "1.26.4"
+            }
+          },
+          "Compilers": {
+            "c": {
+              "commands": "cl",
+              "linker": "link",
+              "name": "msvc",
+              "version": "19.29.30153"
+            },
+            "c++": {
+              "commands": "cl",
+              "linker": "link",
+              "name": "msvc",
+              "version": "19.29.30153"
+            },
+            "cython": {
+              "commands": "cython",
+              "linker": "cython",
+              "name": "cython",
+              "version": "3.0.8"
+            }
+          },
+          "Machine Information": {
+            "build": {
+              "cpu": "x86_64",
+              "endian": "little",
+              "family": "x86_64",
+              "system": "windows"
+            },
+            "host": {
+              "cpu": "x86_64",
+              "endian": "little",
+              "family": "x86_64",
+              "system": "windows"
+            }
+          },
+          "Python Information": {
+            "path": "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\cibw-run-j442zwj6\\cp311-win_amd64\\build\\venv\\Scripts\\python.exe",
+            "version": "3.11"
+          },
+          "SIMD Extensions": {
+            "baseline": [
+              "SSE",
+              "SSE2",
+              "SSE3"
+            ],
+            "found": [
+              "SSSE3",
+              "SSE41",
+              "POPCNT",
+              "SSE42",
+              "AVX",
+              "F16C",
+              "FMA3",
+              "AVX2"
+            ],
+            "not found": [
+              "AVX512F",
+              "AVX512CD",
+              "AVX512_SKX",
+              "AVX512_CLX",
+              "AVX512_CNL",
+              "AVX512_ICL"
+            ]
+          }
+        },
+        "numpy_core_binary_sha256": "c76d812fa5131fe21c8bf9ffbd910f27df80856f910fa61698f23f60cfd9d13e",
+        "numpy_distribution_record_sha256": "852cd4cdc45673affcba6e73dff58007a8b645bcf5290af8aae47d8fff65ba39",
+        "numpy_version": "1.26.4",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python_cache_tag": "cpython-311",
+        "python_executable_sha256": "4bddd834fb6fc274cc20fa7cbfaa6e9b5ade6309429eb96a635538dba5d4a3ae",
+        "python_implementation": "CPython",
+        "python_version": "3.11.6",
+        "thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        }
+      },
+      "dependency_sha256": "7ed5c6a0295ea2089369804cf45631335f13c5e745904783ea70f8e877dd2cfb",
+      "fixture_sha256": "3896bf4a06284fd526e00cb2387123d971887ae571a0bae8d783df62fd23a3fa",
+      "schema_sha256": "40fb60c015386ea76081456305b02359b521b515936df302cd900ad450cd88ec"
+    },
+    "input_custody": {
+      "assignment_commitment_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+      "bundle_sha256": "0cce04ae5ecbc717c340ba6c6b1f92b7c23b841e6636089ed82aeb151044f9c1",
+      "calibration_sha256": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+      "metadata_sha256": {
+        "arm_0": "e24ff4fb415f0251137fc112468fb54a410a6c38ab52a96685beccb7174b3160",
+        "arm_pi": "41aa527cb4ef6648e290fd452325248410635d3c02a3f07cc47610181fb1df8b",
+        "dummy_c0": "99a8c5fc3eb72add532591e1142621dc872ec9f3af642dffab92ad367aef2077",
+        "resonator_removed": "652fb6fd1cf73c84482d750a7954c4b5d804af029d3136bfdfe4b3cbf70cc8de",
+        "zero_drive": "3ab8d3905687b2cadc8051100d81b4fe1ff7fd2dddcaad37f9f60323e25f054e"
+      },
+      "payload_sha256": {
+        "arm_0": "2eac63ea9432172d58922d3e603a7a284eed4d527534b5cbe1e469294c760a1a",
+        "arm_pi": "970269ceebb8dbf37ca4636036362fa7fcb6eaa69b910df0ddb488b5f460f009",
+        "dummy_c0": "80884001872d33d255b548e761a74cd2566fea7a7225ae5b1e60f47fbb84cc2c",
+        "resonator_removed": "4f705f8f77ce622c1f3146f39249e1fa81b706cce2ac23ac582cc443412b4502",
+        "zero_drive": "0392ee3f78be98f8195425c688f1b0ebd42cfc8803aee90ef5effbcc41a02496"
+      },
+      "thresholds_sha256": "c3bf8551dd06792db36fc4138d40aad4383e295eac165a5a374f0ecd897a6731"
+    },
+    "matched_guard_samples": 12499,
+    "noise_nonoverlapping_window_counts": {
+      "dummy_c0": 970,
+      "resonator_removed": 970,
+      "zero_drive": 970
+    },
+    "noise_sigma": 5.773502691896259e-06,
+    "physical_claim_authorized": false,
+    "relation_metrics": {
+      "common_relative_start_first": 12499,
+      "common_relative_start_last": 1075155,
+      "common_window_count": 4152,
+      "common_window_count_before_blocking": 4156,
+      "confidence_set": {
+        "antipode_in_set": true,
+        "minus_pi_over_2_excluded": true,
+        "plus_pi_over_2_excluded": true,
+        "residual_zero_in_set": true,
+        "zero_excluded": true
+      },
+      "discarded_incomplete_block_windows": 4,
+      "epsilon": {
+        "amplitude": 6.533791245468697e-06,
+        "decay": 5.430725655849588e-06,
+        "feedthrough": 5.863136745304592e-06,
+        "frequency": 1.4359557986961556e-10,
+        "neg": 9.151858632333109e-06,
+        "phase": 7.200860029143996e-06
+      },
+      "jackknife_blocks": 519,
+      "u95": {
+        "amplitude": 0.0010000002302842982,
+        "decay": 0.00100004095402593,
+        "feedthrough": 0.0010000001619917542,
+        "frequency": 1.000005643674309e-07,
+        "neg": 0.001000000421730404,
+        "phase": 0.001000099679306154
+      }
+    },
+    "schema": "p0.scientific-result.v1",
+    "scientific_pass": true,
+    "timing": {
+      "arm_0": {
+        "n_admit": 1113499,
+        "n_contact": 1103499,
+        "n_gate": 1101000,
+        "n_iso": 1103499,
+        "n_series_open": 1102249
+      },
+      "arm_pi": {
+        "n_admit": 1113499,
+        "n_contact": 1103499,
+        "n_gate": 1101000,
+        "n_iso": 1103499,
+        "n_series_open": 1102249
+      },
+      "dummy_c0": {
+        "n_admit": 1113499,
+        "n_contact": 1103499,
+        "n_gate": 1101000,
+        "n_iso": 1103499,
+        "n_series_open": 1102249
+      },
+      "resonator_removed": {
+        "n_admit": 1113499,
+        "n_contact": 1103499,
+        "n_gate": 1101000,
+        "n_iso": 1103499,
+        "n_series_open": 1102249
+      },
+      "zero_drive": {
+        "n_admit": 1113499,
+        "n_contact": 1103499,
+        "n_gate": 1101000,
+        "n_iso": 1103499,
+        "n_series_open": 1102249
+      }
+    }
+  },
+  "schema": "p0.analyzer-reference-results.v1",
+  "scientific_negative_count": 32,
+  "semantic_outcomes": [
+    {
+      "case": "ideal_source_off_ringdown",
+      "class": "positive",
+      "execution": "summary_schema_and_decision_law",
+      "outcome": "PASS"
+    },
+    {
+      "case": "ideal_matched_0_pi_antipode",
+      "class": "positive",
+      "execution": "summary_schema_and_decision_law",
+      "outcome": "PASS"
+    },
+    {
+      "case": "nonzero_noise_within_threshold",
+      "class": "positive",
+      "execution": "summary_schema_and_decision_law",
+      "outcome": "PASS"
+    },
+    {
+      "case": "frequency_and_decay_match_at_equality",
+      "class": "positive",
+      "execution": "summary_schema_and_decision_law",
+      "outcome": "PASS"
+    },
+    {
+      "case": "phase_relation_at_equality",
+      "class": "positive",
+      "execution": "summary_schema_and_decision_law",
+      "outcome": "PASS"
+    },
+    {
+      "case": "minimum_256_cycle_usable_window",
+      "class": "positive",
+      "execution": "summary_schema_and_decision_law",
+      "outcome": "PASS"
+    },
+    {
+      "case": "valid_ch2_transition_and_guard",
+      "class": "positive",
+      "execution": "summary_schema_and_decision_law",
+      "outcome": "PASS"
+    },
+    {
+      "case": "valid_environment_at_boundaries",
+      "class": "positive",
+      "execution": "summary_schema_and_decision_law",
+      "outcome": "PASS"
+    },
+    {
+      "case": "zero_drive",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "ZERO_DRIVE_CONTROL"
+    },
+    {
+      "case": "resonator_removed",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "RESONATOR_REMOVED_CONTROL"
+    },
+    {
+      "case": "dummy_c0_feedthrough",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "DUMMY_C0_FEEDTHROUGH"
+    },
+    {
+      "case": "source_left_on",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_OFF_NOT_WITNESSED"
+    },
+    {
+      "case": "off_resonance_response",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "OFF_RESONANCE_RESPONSE"
+    },
+    {
+      "case": "detector_impulse_memory",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "DETECTOR_MEMORY_OVER_10US"
+    },
+    {
+      "case": "controller_buffer_replay",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "POST_BARRIER_BUFFER_FORBIDDEN"
+    },
+    {
+      "case": "analog_switch_charge_transient",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "TRANSIENT_AFTER_ADMIT"
+    },
+    {
+      "case": "relay_bounce_transient",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "CONTACT_BOUNCE_AFTER_ADMIT"
+    },
+    {
+      "case": "source_leakage_after_guard",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_FEEDTHROUGH"
+    },
+    {
+      "case": "reference_leakage",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "REFERENCE_FEEDTHROUGH"
+    },
+    {
+      "case": "amplitude_mismatch",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "AMPLITUDE_MISMATCH"
+    },
+    {
+      "case": "frequency_mismatch",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "FREQUENCY_MISMATCH"
+    },
+    {
+      "case": "decay_mismatch",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "DECAY_MISMATCH"
+    },
+    {
+      "case": "pi_2_phase",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "HALF_TURN_PHASE_MISMATCH"
+    },
+    {
+      "case": "fixed_random_phases",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "FIXED_PHASE_CONTROL"
+    },
+    {
+      "case": "timing_mismatch",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "TIMING_MISMATCH_CONTROL"
+    },
+    {
+      "case": "wrong_termination",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "TERMINATION_IDENTITY_MISMATCH"
+    },
+    {
+      "case": "wrong_guard_interval",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "GUARD_INTERVAL_SHORT"
+    },
+    {
+      "case": "ch2_illegal_code",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "CH2_ILLEGAL_STATE"
+    },
+    {
+      "case": "ch2_nearest_code_ambiguity",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "CH2_AMBIGUOUS_LEVEL"
+    },
+    {
+      "case": "post_off_state_reentry",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "CH2_POST_OFF_REENTRY"
+    },
+    {
+      "case": "missing_witness",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "CH2_WITNESS_MISSING"
+    },
+    {
+      "case": "channel_swap",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "CHANNEL_ROLE_MISMATCH"
+    },
+    {
+      "case": "timebase_drift",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "TIMEBASE_MISMATCH"
+    },
+    {
+      "case": "channel_skew_violation",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "CHANNEL_SKEW_OVER_LIMIT"
+    },
+    {
+      "case": "clipping",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "CLIPPING"
+    },
+    {
+      "case": "adc_saturation",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "ADC_SATURATION"
+    },
+    {
+      "case": "environment_cadence_failure",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "ENVIRONMENT_CADENCE"
+    },
+    {
+      "case": "temperature_mismatch",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "TEMPERATURE_MISMATCH"
+    },
+    {
+      "case": "humidity_mismatch",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "HUMIDITY_MISMATCH"
+    },
+    {
+      "case": "vibration_mismatch",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "VIBRATION_MISMATCH"
+    },
+    {
+      "case": "negative_control_domain_invariant",
+      "class": "invariant_probe",
+      "execution": "summary_schema_and_decision_law",
+      "outcome": "PASS",
+      "rejected_by": "NUMBER_DOMAIN"
+    }
+  ]
+}

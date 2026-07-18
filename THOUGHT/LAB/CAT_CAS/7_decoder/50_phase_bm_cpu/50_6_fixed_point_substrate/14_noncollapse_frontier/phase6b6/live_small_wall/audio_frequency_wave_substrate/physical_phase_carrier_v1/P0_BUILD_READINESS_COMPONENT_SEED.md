@@ -1,6 +1,6 @@
 # P0 Build-Readiness Exact Component Seed
 
-**Status:** `RESEARCH_SEED__FINAL_BUILD_FREEZE_PENDING`  
+**Status:** `P0_BUILD_READINESS_BLOCKED`<br>
 **Authority:** `AUTHORIZE P0 BUILD-READINESS ONLY`  
 **Operation:** exact-component research and handoff only  
 **Purchasing authority:** none  
@@ -20,16 +20,17 @@ Manufacturer: Epson
 Family:       FC-135
 Frequency:    32.768 kHz
 Load:         12.5 pF
-Product code: Q13FC13500004
+Product code: Q13FC1350000401
+Packing code: 01 = any quantity, vinyl bag (tape cut)
 ```
 
 This is an explicit same-class substitution for build readiness. It remains a hermetic,
 electrode-addressed 3.2 mm x 1.5 mm x 0.9 mm tuning-fork quartz unit. It does not change
 the declared mechanical carrier, source-off law, phase observable, or silicon translation.
-The Micro Crystal CC7V-T1A remains the architecture reference because its public datasheet
-exposes a useful BVD planning envelope, but Micro Crystal states that the numeric `20xxxx`
-ordering identity is generated per specification and does not publish one universal order
-number.
+The Micro Crystal CC7V-T1A remains predecessor comparison context because its numeric
+`20xxxx` ordering identity is generated per specification and has no public universal order
+number. It is not a permitted P0 rev C substitution. The selected Epson exact-product brief,
+not the Micro Crystal comparison, supplies the prospective carrier limits.
 
 The exact Micro Crystal comparison specification is:
 
@@ -37,11 +38,10 @@ The exact Micro Crystal comparison specification is:
 CC7V-T1A / 32.768 kHz / 12.5 pF / +/-20 ppm / TA / QC
 ```
 
-The final packet must decide whether Epson becomes the frozen build carrier or whether a
-separately verified Micro Crystal numeric ordering identity is available without vendor
-contact. No primary execution threshold may be inherited from the Micro Crystal BVD values
-after selecting Epson; Epson-specific loaded characterization and conservative limits must
-be frozen.
+The final packet selects Epson `Q13FC1350000401`. No primary execution threshold is
+inherited from the Micro Crystal comparison; Epson-specific loaded characterization and
+conservative limits are frozen prospectively, and as-built characterization remains a
+separate later gate.
 
 Official sources:
 
@@ -57,20 +57,25 @@ Official sources:
 SIGLENT SDG1032X
 ```
 
-Required binding before freeze:
+Frozen build-readiness source contract:
 
 ```text
-N-cycle burst admits exactly 32768 cycles
+C1 is continuous 32768 Hz, exactly 0.400 Vpp, 0 V offset, phase 0 or pi
+C2 is continuous 65536 Hz, exactly 0.100 Vpp, 0 V offset, fixed zero phase
+both channels use HIGH_Z load mode while retaining 50 Ohm physical output impedance
+the final 32768 C1 cycles before the gate are the qualified preparation interval
 0 and pi phase commands are remote-readable and repeatable
-external trigger and sync outputs are captured
-output-memory behavior is documented
+no external trigger, sync cable, or self-ending burst exists
+both outputs remain on for the complete record and CH0 proves persistence
 output impedance and low-amplitude accuracy are calibrated
 firmware and programming-guide identities are frozen
 ```
 
-The current manufacturer page identifies dual channels, N-cycle burst, external/internal
-triggering, 150 MSa/s, and 14-bit generation. The packet must not trust a GUI display as
-execution custody; exact SCPI setup, queryback, and source-monitor evidence are required.
+The manufacturer material establishes the dual-channel source class. The frozen P0 setup
+does not use its burst or trigger features. The packet must not trust a GUI display as
+execution custody; exact per-channel queryback of model, serial, firmware, load mode,
+physical output impedance, waveform, frequency, amplitude, offset, phase, continuous mode,
+and output state plus CH0 source-monitor evidence are required.
 
 Official source:
 
@@ -97,7 +102,7 @@ Required binding before freeze:
 DC-coupled differential mode on all four channels simultaneously
 at least 3,101,000 native samples per channel in one continuous record
 raw integer-code export with no averaging or hidden DSP
-channel skew and trigger law
+channel skew, software-prearmed free-run start law, and explicit absence of external trigger
 input impedance, input capacitance, common-mode range, and ground/isolation law
 SDK/driver version and deterministic native parser
 ```
@@ -160,23 +165,22 @@ Official sources:
 
 ## 4. Carrier sense and environment
 
-### High-impedance sense candidate
+### High-impedance sense selection
 
 ```text
-Analog Devices ADA4530-1R-EBZ-BUF
+Texas Instruments OPA810IDT
 ```
 
-This assembled guarded buffer is preferred over an unqualified breadboard electrometer
-front end. The final topology must place the sensitive input adjacent to the carrier,
-measure the complete carrier-side input admittance, and close the frozen `Rin >= 100 Mohm`
-and `Cin <= 3.0 pF` envelope. The evaluation board is still only a candidate: connector,
-shield, protection, bias return, board capacitance, output settling, coherent backaction,
-and cable geometry must be included in the measured load.
+The exact SOIC-D buffer is frozen prospectively in unity gain on a guarded carrier board.
+The sensitive input is adjacent to the carrier. Because the official 2 pF common-mode and
+0.5 pF differential capacitances are typical rather than guaranteed, every populated
+coupon must independently close `Rin,U95 >= 100 Mohm` and `Cin,U95 <= 4.00 pF` before a
+full unpowered build can proceed.
 
 Official sources:
 
-- https://www.analog.com/en/products/ADA4530-1.html
-- https://www.analog.com/en/resources/app-notes/an-1373.html
+- https://www.ti.com/product/OPA810
+- https://www.ti.com/lit/ds/symlink/opa810.pdf
 
 ### Analog enclosure-vibration candidate
 
@@ -219,21 +223,48 @@ carrier footprint/adapter and low-strain PCB
 fixed >=100-Mohm bias return
 relay MOSFET drivers and flyback/suppression parts
 isolated gate/relay control supply and digital isolator
-ADA4530-1 supply, reference, protection, and output stage
+OPA810 supply, guarded carrier land, bias return, local bypass and output isolation
 ADXL354 board or custom mounting PCB and antialias components
 SHT45 carrier board and timestamping controller
 four-bit CH2 witness resistor network
 connectors, guarded/triax/coax cable identities, enclosure, and star-ground hardware
-source/reference distribution and master trigger
+continuous C1/C2 passive source-monitor distribution with software-prearmed free-run acquisition and no trigger cable
 calibration references and required adapters
 ESD, current limiting, fusing, and test points
 ```
 
 No final BOM is closed until every component has a manufacturer identity, quantity,
-permitted substitution law, datasheet/manual SHA-256, conservative operating limit, and
-netlist role.
+permitted substitution law, truthful source-custody state, conservative operating limit,
+and netlist role. A historical hash without the corresponding bytes is retained as a
+historical expectation, not relabeled as a local capture.
 
-## 6. Build-readiness decision boundary
+## 6. Canonical research custody dependency
+
+The authoritative repository-safe bundle is
+`research/P0_research_bundle_2026-07-18`, sourced from commit
+`cb53976612cbe83bec82df826a9889418f7e0b89`. Its canonical manifest contains
+35 records: 24 core component/instrument sources, one controller design-resource
+record, eight scientific-background sources, and two vendor-model resources.
+The current repository-safe custody snapshot records 11 private locally
+hash-verified captures, 6 URL-plus-legacy-hash records without local bytes, and
+18 manual captures. Source metadata and hashes are committed candidate inputs;
+third-party document/model bytes, HTML, receipts, and generated archives are
+ignored and remain private.
+
+From the bundle directory, a private refresh uses the repository virtual
+environment:
+
+```text
+python scripts/download_sources.py --all
+python scripts/verify_downloads.py
+python scripts/build_custody_snapshot.py
+```
+
+Revision custody explicitly uses ADR45xx Rev. G, ADuM140D Rev. K, ST UM2591
+Rev. 2 (April 2026), and SHT4x PDF Version 7.1 (March 2025) while preserving
+the product-page 04/2025 label and every historical byte/hash expectation.
+
+## 7. Build-readiness decision boundary
 
 This seed authorizes no purchase or hardware contact. It exists to prevent another agent
 from repeating broad carrier research and to force explicit resolution of the remaining

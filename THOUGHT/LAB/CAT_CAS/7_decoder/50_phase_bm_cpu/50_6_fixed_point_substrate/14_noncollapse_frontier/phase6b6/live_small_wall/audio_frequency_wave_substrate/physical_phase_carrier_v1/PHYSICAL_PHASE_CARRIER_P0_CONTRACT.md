@@ -1,12 +1,14 @@
 # Physical Phase Carrier P0 Contract
 
-**Status:** `ARCHITECTURE_PACKET_FROZEN__NO_HARDWARE_AUTHORITY`<br>
+**Status:** `P0_BUILD_READINESS_BLOCKED__NO_HARDWARE_AUTHORITY`<br>
 **Package:** `physical_phase_carrier_v1`<br>
 **Architecture decision:** `PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN`<br>
-**Selected next boundary:** `USER_AUTHORITY_FOR_P0_BUILD_PURCHASE_OR_PHYSICAL_EXECUTION`<br>
+**Authority:** `AUTHORIZE P0 BUILD-READINESS ONLY`<br>
+**Claim ceiling:** `NON_EXECUTING_P0_BUILD_READINESS_ONLY`<br>
+**Selected next boundary:** `USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD`<br>
 **Parent result:** `AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED`<br>
 **Root directive:** `REPLACE THE BIT WITH PI`<br>
-**Operation:** physical-carrier architecture and experiment contract only<br>
+**Operation:** physical-carrier architecture plus non-executing build readiness only<br>
 **Hardware authority:** none
 
 ## 1. Selection
@@ -89,7 +91,7 @@ Frozen carrier classes:
 ```text
 preferred:
     hermetic electrode-addressed 32.768 kHz quartz tuning-fork mechanical mode
-    reference datasheet class: Micro Crystal CC7V-T1A
+    exact prospective identity: Epson Q13FC1350000401 (FC-135, 12.5 pF; any-quantity tape-cut suffix)
 
 fallback:
     localized external-drive PZT/brass diaphragm mechanical mode near 6.3 kHz
@@ -102,8 +104,9 @@ the complete two-terminal loaded BVD network, and a two-stage source-off boundar
 fast analog route-to-termination followed by a fail-safe, independently witnessed guarded
 relay barrier. The mechanical state is the quartz tine displacement/strain mode.
 
-The reference candidates make the path buildable but are not purchase selections. The
-final ordering suffix, revision, and datasheet hash require later explicit authority.
+The Epson ordering identity is frozen prospectively but is not acquired, reserved, or
+authorized for purchase. Its official document bytes and all incoming lot identities remain
+mandatory gates under a later explicit authority.
 
 ## 5. Silicon Transposition
 
@@ -161,18 +164,33 @@ The source-off boundary is explicit and observable:
 ```text
 stage A:
     ADG1419BRMZ MSOP SPDT at +/-5 V, controlled through IN, routes the
-    source to 50 Ohm with a 560 ns full-temperature transition bound
+    downstream drive node away from C1 to 50 Ohm with a 560 ns
+    full-temperature transition bound
 
 stage B:
-    K1 and K2 normally-open series relay contacts de-energize open
-    K3 normally-closed midpoint guard contact de-energizes to 50 Ohm
+    K1 and K2 normally-open series relay contacts de-energize first
+    their auxiliary code must remain 0 for 1,000 samples while K3 stays energized
+    only then may K3 de-energize its midpoint guard contact to 50 Ohm
+    final auxiliary code 8 must remain stable for 1,000 samples
 
 witnesses:
-    source-side CH0, resonator-side CH1, contact-state CH2
+    source-side CH0, resonator-side CH1, auxiliary-contact-state CH2
+    actual signal-pole state requires a separately reviewed per-event witness
+    or exact force-guided-contact guarantee; CH2 alone is insufficient
 
 first admissible raw sample:
-    10.000 ms after the last stable physical contact transition
+    10.000 ms after the ordered auxiliary transition reaches stable code 8,
+    and never admissible for a physical source-disconnect claim until the
+    actual-signal-path evidence gate above is closed
 ```
+
+The frozen prospective source is one SDG1032X in `HIGH_Z` load mode with 50 Ohm
+physical outputs. C1 is a continuous 32,768 Hz, 0.400 Vpp, 0 V-offset sine at
+phase 0 or pi. C2 is a continuous 65,536 Hz, 0.100 Vpp, 0 V-offset sine at fixed
+zero phase that enters only the passive CH0 monitor. Both outputs remain on for
+the complete software-prearmed free-running record. No burst or external trigger
+is part of P0. CH2 locates the isolation event and the C2/C1 fit supplies the
+record-local phase gauge.
 
 The contract must freeze:
 
@@ -267,7 +285,7 @@ The package must distinguish:
 ```text
 mechanical ringdown
 from
-residual drive, electrical feedthrough, digitizer memory, filtering, trigger leakage,
+residual drive, electrical feedthrough, digitizer memory, filtering, software-start correlation,
 reference leakage, and offline waveform replay
 ```
 
@@ -395,7 +413,7 @@ safety limits, silicon translation, and independent review requirements.
 The next exact boundary is:
 
 ```text
-USER_AUTHORITY_FOR_P0_BUILD_PURCHASE_OR_PHYSICAL_EXECUTION
+USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD
 ```
 
 This packet stops before that boundary.
@@ -406,6 +424,7 @@ This packet stops before that boundary.
 AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED
 PHYSICAL_PHASE_CARRIER_P0_BOUNDARY_SELECTED
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
+P0_BUILD_READINESS_BLOCKED
 PHYSICAL_PHASE_CARRIER_NOT_YET_OBSERVED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 PHYSICAL_SILICON_PHONONIC_COMPUTING_NOT_ESTABLISHED

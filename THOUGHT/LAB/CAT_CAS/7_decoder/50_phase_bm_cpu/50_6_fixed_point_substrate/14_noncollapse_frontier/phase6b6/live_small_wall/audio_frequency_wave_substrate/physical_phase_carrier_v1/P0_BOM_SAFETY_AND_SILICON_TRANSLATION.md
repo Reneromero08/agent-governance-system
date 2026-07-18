@@ -14,20 +14,21 @@ under a later explicit authority.
 
 | Function | Frozen class / reference candidate | Current specification used by architecture | Requirement before execution |
 |---|---|---|---|
-| Preferred carrier | Micro Crystal CC7V-T1A-class hermetic 32.768 kHz quartz tuning-fork crystal | 32.768 kHz; 50/70 kOhm typical/max series resistance; 3.7 fF typical C1; 1.2 pF typical C0; 1.0 uW max drive; vacuum-sealed ceramic package | **CONFIRM:** exact ordering suffix, load capacitance, tolerance, temperature grade, max drive, ESR, C0/C1, revision, SHA-256 |
-| Preferred-class alternate | Epson FC-135-class 32.768 kHz crystal | 32.768 kHz; 70 kOhm typical ESR; 3.4 fF typical C1; 1.0 pF typical C0; 0.01-0.5 uW operating drive and 1.0 uW absolute max | **CONFIRM:** exact suffix and all limits; alternate does not silently replace the selected reference |
+| Preferred carrier | Epson `Q13FC1350000401` FC-135 hermetic 32.768 kHz quartz tuning-fork crystal | 32.768 kHz; 12.5 pF load; 70 kOhm maximum ESR; 0.5 uW maximum drive; suffix `01` is the any-quantity tape-cut packing code; the private local capture matches the retained legacy byte count/SHA-256, while the PDF itself remains uncommitted | **CONFIRM:** acquired marking, packing code, lot, revision, SHA-256, measured resonance and linearity under later authority |
+| Preferred-class alternate | Micro Crystal CC7V-T1A-class 32.768 kHz crystal | Architecture reference only; not a permitted substitution in P0 netlist rev C | Requires a new reviewed netlist/BOM root and cannot silently replace the selected Epson identity |
 | Fallback carrier | Murata 7BB-20-6-class external-drive PZT/brass diaphragm | 6.3 kHz nominal, plus/minus 0.6 kHz; 350 Ohm resonant impedance; 10 nF at 1 kHz; 20 mm brass plate | **CONFIRM:** current approval sheet, drive limit, Q, mount, acoustic enclosure; requires a new frozen calibration envelope |
 | Phase gate | ADG1419BRMZ, 8-lead MSOP, +/-5 V, IN-controlled SPDT | 4.5 Ohm typical on resistance; break-before-make; full-temperature transition max 560 ns; MSOP has no EN; nonzero off capacitance and charge injection | **CONFIRM:** exact revision, rails, IN truth table, loaded transition, charge injection, isolation at 32.768 kHz, leakage, SHA-256 |
 | Physical barrier | Three Omron G6K-2F-Y-class DPDT low-signal relays | 3 ms max operate; 3 ms max release; 3 ms max bounce; 1,000 MOhm min insulation at 500 VDC | **CONFIRM:** exact coil/contact form, break-before-make behavior, contact witness wiring, revision |
 | Terminations | 50.00 Ohm, 0.1%, low-inductance resistors; guarded midpoint network | Source route and source-side midpoint guard terminate at the single frozen star reference | Measure each resistor before topology seal; bind lot and calibration |
 | Current limiting | 100 kOhm minimum series resistance, 0.1% | Fault/current limiting only; it does not by itself guarantee motional current or power | Measure actual value and require calibrated drive to satisfy the lowest voltage, current, and power cap |
-| Sense stage | Guarded ADA4530-1-class electrometer voltage buffer, used as an always-connected differential-to-reference input | Effective `Rin>=100 MOhm`, total carrier-side `Cin<=3.0 pF`; ADA4530-1 reference has 2 MHz unity-gain crossover, 6 MHz typical closed-loop bandwidth, and <=20 fA input bias through 85 C; a manufacturer application note reports about 2 pF on its guarded buffer board | Freeze exact dual/single-ended implementation, input/bias/protection admittance, cable capacitance, transfer function, coherent input-referred backaction, settling <=10 us, noise, revision, SHA-256 |
-| Source | Phase-coherent low-voltage sine generator | Exact 32,768-cycle preparation, 0/pi phase command, <=1.000 us marker uncertainty | Freeze output impedance, clock accuracy, phase-command latency, waveform-memory behavior |
-| Acquisition | Four-channel simultaneous differential digitizer or oscilloscope | Exactly 1 MSa/s/channel, >=16 bits, DC coupled, 3,101,000 samples/channel, nominal command index 1,101,000, native raw export, no averaging | Freeze ranges, skew <=0.100 us and corrected residual <=0.020 us, trigger uncertainty <=1 sample, differential/common-mode and ground limits, native parser/hash |
+| Sense stage | Guarded Texas Instruments `OPA810IDT` unity-gain buffer | 12 GOhm || 2 pF common-mode plus 0.5 pF differential typical; hard as-built gates `Rin,U95>=100 MOhm` and `Cin,U95<=4.00 pF` | Bind SBOS799E SHA-256, exact SOIC pin map, guarded land, complete coupon admittance, transfer function, recovery and coherent backaction |
+| Sense input protection | No external clamp or series component on `N_ELECTRODE_A` | External protection is intentionally omitted because added leakage/capacitance would alter the carrier; normal drive is bounded by the upstream 100 kOhm limiter and K1/K2 barriers; OPA810 absolute/ESD ratings are not operating permissions | Grounded ESD handling with source, digitizer and cables absent; reject any added electrode component or failed as-built admittance gate |
+| Source | SIGLENT `SDG1032X` phase-coherent dual-channel generator | `HIGH_Z` load mode with 50 Ohm physical outputs; continuous C1 32.768 kHz, 0.400 Vpp, 0 V, 0/pi command; continuous C2 65.536 kHz, 0.100 Vpp, 0 V, fixed zero phase; both remain on for the whole record | Query back model, serial, firmware, load, impedance, waveform, frequency, amplitude, offset, phase, mode and output state per channel; calibrate accuracy, common-reference behavior, phase-command latency and CH0 persistence |
+| Acquisition | Spectrum `DN2.592-04` four-simultaneous-channel true-differential digitizer | Exactly 1 MSa/s/channel, 16 bits, DC coupled, 3,101,000 samples/channel, software-prearmed free run, native raw export, no averaging and no external trigger | Freeze ranges, input admittance, skew <=0.100 us and corrected residual <=0.020 us, differential/common-mode and ground limits, native parser/hash |
 | Reference/calibration instrument | Zurich Instruments MFLI-class lock-in / impedance analyzer is an optional reference, not the sole raw recorder | DC-500 kHz base range; 60 MSa/s, 16-bit input conversion; differential voltage/current inputs; optional impedance analysis | If used, bind options and disable demodulator output as primary evidence; full four-channel raw custody still required |
-| Mount | Low-strain carrier PCB in a closed conductive enclosure | Resonator package stationary; relay board physically separate by >=0.50 m of cable path | Freeze solder process, board strain relief, enclosure geometry, cable identity |
+| Mount | Low-strain carrier PCB in a closed conductive enclosure | Resonator package stationary; control and carrier enclosures are joined by the exact fixed 150 +/-2 mm harness; no contradictory 0.50 m separation claim remains | Freeze solder process, board strain relief, enclosure geometry, cable identity |
 | Shielding | Conductive enclosure, guarded cabling, single-point analog ground | No speaker, microphone, acoustic drive, wireless link, or floating reference | Photograph and continuity-test topology |
-| Environment | Calibrated temperature sensor, calibrated RH sensor, and enclosure accelerometer are all required | Temperature 20.00-30.00 C with matched mean delta <=0.20 C; RH 20.0-60.0 % with matched mean delta <=2.0 percentage points; demeaned raw CH3 RMS <=0.050 m/s^2, peak <=0.500 m/s^2, matched RMS delta <=0.010 m/s^2; temperature/RH exactly 10 samples/s | Bind every sensor calibration, master-trigger alignment, placement, units, clipping limit, and cadence |
+| Environment | Exact SHT45 raw-word/CRC record and ADXL354 analog Z channel are required | Temperature 20.00-30.00 C with matched mean delta <=0.20 C; RH 20.0-60.0 % with matched mean delta <=2.0 points; raw CH3 RMS <=0.050 m/s^2 and peak <=0.500 m/s^2; temperature/RH exactly 10 samples/s | Bind sensor serial, command, raw words, CRC-8, monotonic/UTC map, calibration, placement, units, clipping and cadence |
 
 ### Manufacturer and instrumentation links
 
@@ -37,13 +38,13 @@ under a later explicit authority.
 - [Epson FC-135 application datasheet](https://download.epsondevice.com/td/pdf/app/FC-135_en.pdf)
 - [Murata 7BB-20-6](https://www.murata.com/en-us/products/productdetail?partno=7BB-20-6)
 - [Analog Devices ADG1419](https://www.analog.com/en/products/adg1419.html)
-- [Analog Devices ADA4530-1](https://www.analog.com/en/products/ada4530-1.html)
-- [Analog Devices AN-1373 guarded-buffer capacitance note](https://www.analog.com/en/resources/app-notes/an-1373.html)
+- [Texas Instruments OPA810](https://www.ti.com/product/OPA810)
+- [Texas Instruments OPA810 SBOS799E](https://www.ti.com/lit/ds/symlink/opa810.pdf)
 - [Omron G6K relay family](https://components.omron.com/eu-en/products/relays/G6K)
 - [Zurich Instruments MFLI](https://www.zhinst.com/ch/en/products/mfli-lock-in-amplifier/)
 - [MFLI June 2025 product leaflet](https://www.zhinst.com/sites/default/files/documents/2025-07/zi_mfli_leaflet_v2.pdf)
 
-No vendor contact, quote request, inventory reservation, sample request, or
+No human vendor outreach, quote request, inventory reservation, sample request, or
 purchase occurred.
 
 ## 2. Conservative electrical and mechanical limits
@@ -53,15 +54,17 @@ values and can never be overridden by this packet.
 
 | Quantity | P0 architecture cap | Reason / confirmation law |
 |---|---:|---|
-| Quartz terminal amplitude | <=0.200 Vpp | Conservative relative to reference 1.0 uW max drive; **CONFIRM** from final BVD calibration |
-| Estimated motional power | <=0.100 uW | Tenfold below reference max; use the lower of voltage and power caps |
+| C1 source command | exactly 0.400 Vpp in `HIGH_Z` load mode, 0 V offset | Prospective frozen command; any queryback mismatch stops |
+| C2 gauge command | exactly 0.100 Vpp in `HIGH_Z` load mode, 0 V offset | C2 is not an intended carrier drive, but its bounded passive coupling through the CH0 summing network, finite C1 source impedance and limiter must be swept and bounded; any queryback mismatch stops |
+| Quartz terminal amplitude | planning <=0.164658 Vpp; hard cap <=0.200 Vpp | Resistive bound uses 0.400 Vpp source, 50 Ohm output, 100 kOhm limiter and 70 kOhm maximum ESR; **CONFIRM** from final loaded BVD calibration |
+| Estimated motional power | planning <=0.048415 uW; hard cap <=0.100 uW | Below the selected carrier's 0.5 uW maximum-drive identity; use the lower of voltage, current and power caps |
 | Estimated motional current | <=2.000 uA rms | Motional-branch cap; **CONFIRM** from loaded BVD fit |
-| Generator output | <=1.000 Vpp | Includes current-limiting network; no offset |
+| Generator output | C1 exactly 0.400 Vpp; C2 exactly 0.100 Vpp; both 0 V offset | The general safety ceiling remains 1.000 Vpp, but it does not authorize changing the frozen commands |
 | Source current under any normal state | <=5.000 uA rms | 100 kOhm minimum series limit |
 | Analog signal rails | <=plus/minus 5.0 V | Low-voltage bench envelope even if switch supports more |
 | Relay coil supply | exactly rated 5 V class, current-limited | **CONFIRM** exact coil suffix and suppression |
 | Detector output and digitizer input | remain within 80% of selected full scale | Any clipping kills the arm |
-| Preparation on-time | exactly `32768/f_ref` s | Exactly 32,768 calibrated carrier cycles; near 1 s, not asserted exactly 1 s |
+| Qualified preparation interval | exactly the final `32768/f_ref` s before `n_gate` | Both source channels are already continuously stable before recording; this is an analysis interval, not a self-ending burst |
 | Inter-arm wait | >=max(10*tau_A, 10 s) | Return-to-noise hygiene, not restoration |
 | Duty cycle over any 60 s | <=10% drive-on | Conservative heating and aging bound |
 | Ambient temperature | 20-30 C | Within ordinary lab range |
@@ -103,7 +106,33 @@ capacitance, drive limit, mounting stress, acoustic radiation, and stored
 energy require a new final-datasheet and calibration freeze. It may not inherit
 the quartz voltage, current, power, guard, or uncertainty thresholds.
 
-## 3. Silicon transposition
+## 3. Research custody and simulation boundary
+
+The canonical repository-safe research dependency is
+`research/P0_research_bundle_2026-07-18`, imported from source commit
+`cb53976612cbe83bec82df826a9889418f7e0b89`. Its manifest contains 35 source
+records. The bound custody snapshot records 11 private locally hash-verified
+captures, 6 URL-plus-legacy-hash records whose bytes are absent, and 18 manual
+captures. Metadata and hashes are candidate inputs; third-party PDFs, HTML,
+models, download receipts, and generated archives remain ignored and
+uncommitted. From the bundle directory, refresh with the repository virtual
+environment using `python scripts/download_sources.py --all`, then
+`python scripts/verify_downloads.py` and
+`python scripts/build_custody_snapshot.py`.
+
+The existing deterministic waveform generator is a signal-level analyzer test,
+not a first-principles complete-circuit prediction. The unresolved next layer
+must generate the canonical four-channel payload through the 100 kOhm limiter,
+ADG1419 model, relay states/parasitics, FC-135 BVD network, OPA810 vendor model,
+digitizer/common-mode loading, cable/PCB/enclosure parasitics, noise, and ADC
+quantization, then pass those bytes to the unchanged analyzer. Sweeps must cover
+motional R/L/C, C0, Q/resonance, sense capacitance/leakage, switch transient and
+leakage terms, relay timing, monitor feedthrough, digitizer admittance,
+clock/phase error, electrical noise, environmental perturbation, and matched
+empty/1 pF dummy controls. One favorable inserted ringdown is not evidence that
+the complete proposed circuit produces it.
+
+## 4. Silicon transposition
 
 | Target class | Mechanical state | Preparation interface | Readout interface | Source-off equivalent | Phase reference | Ringdown observable | Pi preparation | Likely P1 coupling | Fabrication/access barrier |
 |---|---|---|---|---|---|---|---|---|---|
@@ -112,7 +141,7 @@ the quartz voltage, current, power, guard, or uncertainty thresholds.
 | Silicon optomechanical resonator | Silicon mechanical mode coupled to an optical cavity | Radiation pressure, photothermal force, or external piezo | Homodyne/heterodyne optical displacement | Independent optical shutter/AOM plus pump monitor; bound cavity photon decay | Optical local oscillator | Optical phase/displacement ringdown | Optical-drive phase inversion | Optical bus, mechanical bridge, or radiation-pressure interaction | Laser noise, optical cavity access, alignment, heating, source/cavity separation |
 | Hybrid piezoelectric-on-silicon resonator | Silicon or composite elastic mode with localized piezoelectric transducer | Direct electrode drive through AlN, LiNbO3, quartz, or related film | Direct charge/current or optional optical cross-check | Guarded electrode isolation closely matching P0 | Electrical phase clock with independent switch witness | Piezoelectric current/displacement I/Q and decay | Voltage half-turn at the electrode | Elastic waveguide, mechanical bridge, tunable electrode coupling | Thin-film integration, electrode loss, foundry access, package parasitics |
 
-## 4. Selected future silicon target
+## 5. Selected future silicon target
 
 ```text
 hybrid piezoelectric-on-silicon phononic-crystal cavity
@@ -134,7 +163,7 @@ project's result:
 These sources establish feasibility of carrier classes only. They do not
 transfer any physical, computational, restoration, or silicon claim to P0.
 
-## 5. Boundary
+## 6. Boundary
 
 This packet defines what a later build would require. It does not authorize
 purchase, fabrication, assembly, wiring, powering, measurement, playback,

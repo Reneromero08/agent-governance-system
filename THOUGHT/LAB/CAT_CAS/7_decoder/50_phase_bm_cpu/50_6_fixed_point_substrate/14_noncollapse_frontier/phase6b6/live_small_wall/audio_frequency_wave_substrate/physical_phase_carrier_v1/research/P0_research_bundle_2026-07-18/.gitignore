@@ -1,0 +1,16 @@
+# Third-party and generated research-custody bytes stay local.
+sources/official/*.pdf
+sources/official/*.html
+sources/supplemental/*.pdf
+sources/supplemental/*.html
+sources/**/*.part
+sources/official/*
+!sources/official/README.md
+sources/supplemental/*
+!sources/supplemental/README.md
+*.tmp
+DOWNLOAD_RECEIPT.json
+VERIFICATION_REPORT.json
+*_complete.zip
+repo_context/*
+!repo_context/README.md

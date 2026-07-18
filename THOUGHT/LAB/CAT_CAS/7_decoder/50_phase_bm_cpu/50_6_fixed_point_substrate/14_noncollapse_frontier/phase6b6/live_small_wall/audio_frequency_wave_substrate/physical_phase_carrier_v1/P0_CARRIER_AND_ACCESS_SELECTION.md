@@ -12,8 +12,7 @@ Preferred P0 carrier class:
 
 ```text
 one hermetically packaged, electrode-addressed 32.768 kHz quartz tuning-fork
-mechanical mode, using a Micro Crystal CC7V-T1A-class unit as the reference
-datasheet candidate
+mechanical mode, using exact Epson FC-135 Q13FC1350000401 at 12.5 pF
 ```
 
 Fallback P0 carrier class:
@@ -32,17 +31,25 @@ continuous high-impedance piezoelectric electrode-voltage sensing. Source remova
 phase-synchronous analog gate followed by a fail-safe guarded relay barrier.
 The readout remains connected and unchanged across source-off.
 
-No commercial ordering suffix is frozen by this packet. Before any later
-purchase or execution, the final part number and revision must be bound to a
-downloaded manufacturer datasheet by SHA-256.
+The predecessor architecture packet stopped at a Micro Crystal reference class
+without a public universal numeric order code. Build-readiness revision C
+prospectively resolves that boundary by selecting Epson `Q13FC1350000401` under
+`AUTHORIZE P0 BUILD-READINESS ONLY`; suffix `01` is the exact any-quantity
+tape-cut packing code. Before any later purchase or execution, that complete
+identity and the official exact-product bytes must be receipt-bound by SHA-256.
+
+`P0_FINAL_NETLIST.json`, `P0_NONPURCHASING_BOM.json`, and the exact-product
+document receipt govern the later build identity; the Micro Crystal discussion
+below remains reference-class planning context and is not a permitted P0 rev C
+substitution.
 
 ## 2. Why this class
 
-The reference CC7V-T1A datasheet identifies a vacuum-sealed quartz tuning-fork
-resonator at 32.768 kHz with 50 kOhm typical / 70 kOhm maximum series
-resistance, 3.7 fF typical motional capacitance, 1.2 pF typical static
-capacitance, and 1.0 uW maximum drive level. Its hermetic, localized mode makes
-the mechanical boundary more identifiable than a room-scale acoustic path.
+The exact Epson FC-135 product brief identifies a 32.768 kHz tuning-fork quartz
+unit with 70 kOhm maximum ESR, 3.4 fF typical motional capacitance, 1.0 pF
+typical static capacitance, and 0.5 uW maximum drive level. Its hermetic,
+localized mode makes the mechanical boundary more identifiable than a
+room-scale acoustic path.
 
 For the series Butterworth-Van Dyke branch,
 
@@ -57,8 +64,8 @@ e-folding cycle count. Using the datasheet's typical `C_1`:
 
 | Planning case | R1 | Q_series | tau_A | amplitude e-fold cycles |
 |---|---:|---:|---:|---:|
-| Typical | 50 kOhm | 26,254 | 0.255 s | 8,357 |
-| 70 kOhm resistance case | 70 kOhm | 18,753 | 0.182 s | 5,969 |
+| Illustrative 50 kOhm case | 50 kOhm | 28,571 | 0.278 s | 9,094 |
+| 70 kOhm maximum-ESR case | 70 kOhm | 20,408 | 0.198 s | 6,496 |
 
 These are architecture estimates, not measured values or guaranteed minima,
 because the datasheet gives `C_1` as typical and the final electrical loading
@@ -94,7 +101,7 @@ to satisfy P0 merely because it is convenient.
 base phase clock / source waveform
         |
         v
-source monitor CH0 and continuous master phase clock
+upstream C1 plus C2 source monitor CH0 and continuous C2-derived phase gauge
         |
         v
 phase-synchronous analog gate -> 50 ohm source termination
@@ -108,13 +115,14 @@ electrode A of two-terminal quartz tuning fork
         v
 electrode B bonded to the carrier-side analog reference
 
-electrodes A/B -> always-connected >=100 MOhm, <=3.0 pF differential
+electrodes A/B -> as-built Rin,U95 >=100 MOhm, Cin,U95 <=4.00 pF voltage sense
                  voltage input and fixed >=100 MOhm bias return
         |
         v
 mechanical-sense CH1
 
-gate plus relay contact witnesses -> calibrated 4-bit resistor code on CH2
+gate plus relay auxiliary-contact witnesses -> calibrated 4-bit resistor code on CH2
+actual signal-pole opening -> separate future per-event path witness or exact force-guided-contact guarantee; currently unresolved
 enclosure vibration -> CH3
 temperature / humidity -> timestamped environmental record
 all raw channels -> immutable native capture -> offline I/Q and metrics
@@ -135,10 +143,10 @@ reduce measured Q; none may change between preparation and ringdown.
 | Quartz mechanical mode | Yes, elastic and kinetic | Yes, over measured ringdown | No independent source; it returns piezoelectric current | Only through its prepared phase | This is the claimed P0 state if controls close | Remove/replace resonator; off-resonance; disturb mount |
 | Drive source and buffer | Yes, electrically | Yes, output stages and filters | Yes | Yes | Yes | Keep running upstream while isolate; terminate; substitute dummy |
 | Analog phase gate | Parasitic charge only | Brief switching transient | Yes, through leakage/charge injection | Yes | Yes | Bypass/disable only in declared negative controls; dummy-load trace |
-| Guarded relay barrier | Coil and parasitic electrical energy | Contact bounce/transient | Yes during transition; no lawful post-guard source path | Through stray capacitance | Yes | Independent contact witnesses; source-side observation; continuity/injection tests of the midpoint guard |
+| Guarded relay barrier | Coil and parasitic electrical energy | Contact bounce/transient | Yes during transition; a lawful post-guard source path cannot be claimed from auxiliary contacts alone | Through stray capacitance | Yes | Ordered auxiliary witnesses plus source-side observation and continuity/injection tests; per-event actual signal-pole evidence remains mandatory |
 | 50 ohm termination | Negligible reactive energy if verified | No intended history | No | No intended reference | Only through parasitics | Substitute open/wrong termination negative arm |
 | High-impedance differential voltage detector | Yes, input/protection and amplifier energy | Yes, finite impulse response and saturation recovery | Its passive input admittance loads the carrier; coherent input-referred drive is forbidden above the detector-only bound | Yes through supply/coupling | Yes | Detector-only replay; dummy capacitance; power/reference ablation; input-admittance calibration |
-| Digitizer | Buffer memory only | Yes, serialized samples and trigger buffers | Cannot drive if input-only topology closes | Can correlate through shared clock | Yes in records | Zero-drive, replay, channel swap, native-byte inspection |
+| Digitizer | Buffer memory only | Yes, serialized samples and software-start buffers | Cannot drive if input-only topology closes | Can correlate through record start or internal clock; no external trigger is used | Yes in records | Zero-drive, replay, channel swap, native-byte inspection |
 | Reference clock/model | No carrier energy | Yes, numerical phase history | Not physically connected to carrier after preparation | It is the declared gauge | Can manufacture apparent phase offline | Reference inversion, omission, and substitution controls |
 | Controller | Electrical state | Yes, queues and buffers | Can command source/switches | Yes | Yes | Independent contact trace; controller-buffer replay control |
 | Evidence recorder | File storage only | Yes | No physical drive path | Metadata can leak labels | Can fake persistence only in records | Hashes, blind arm IDs, synthetic-replay control |
@@ -186,11 +194,12 @@ restoration and authorizes no R2 or Wall claim.
 
 ## 7. Primary and official sources
 
-Sources were read for architecture only; no vendor was contacted and no order
-or cart action occurred.
+Sources were read for architecture only. Automated public-source HTTP requests
+are disclosed in `research/P0_research_bundle_2026-07-18/SOURCE_CUSTODY.json`;
+no human vendor outreach, order, stock check, or cart action occurred.
 
-- [Micro Crystal CC7V-T1A datasheet](https://www.microcrystal.com/fileadmin/Media/Products/32kHz/Datasheet/CC7V-T1A.pdf) — preferred reference carrier specifications.
-- [Epson FC-135 application datasheet](https://download.epsondevice.com/td/pdf/app/FC-135_en.pdf) — independent 32.768 kHz quartz candidate with 70 kOhm typical ESR, 3.4 fF typical motional capacitance, and 1.0 uW absolute maximum drive.
+- [Micro Crystal CC7V-T1A datasheet](https://www.microcrystal.com/fileadmin/Media/Products/32kHz/Datasheet/CC7V-T1A.pdf) — predecessor reference-class comparison only; not a P0 rev C substitution.
+- [Epson FC-135 exact-product datasheet](https://download.epsondevice.com/td/pdf/td_xtal_32khz/FC-135_Q13FC13500004_en.pdf) — `Q13FC13500004xx` at 32.768 kHz and 12.5 pF, with 70 kOhm maximum ESR, 3.4 fF typical motional capacitance, 0.5 uW maximum drive; P0 uses `01`, the any-quantity tape-cut suffix, rather than `00`, the recommended 3000-piece reel suffix.
 - [Quartz tuning-fork resonance tracking and ringdown](https://pmc.ncbi.nlm.nih.gov/articles/PMC6960650/) — primary literature for source-off transient characterization and demodulator cautions.
 - [Murata 7BB-20-6 product page](https://www.murata.com/en-us/products/productdetail?partno=7BB-20-6) — fallback localized PZT/brass diaphragm class.
 

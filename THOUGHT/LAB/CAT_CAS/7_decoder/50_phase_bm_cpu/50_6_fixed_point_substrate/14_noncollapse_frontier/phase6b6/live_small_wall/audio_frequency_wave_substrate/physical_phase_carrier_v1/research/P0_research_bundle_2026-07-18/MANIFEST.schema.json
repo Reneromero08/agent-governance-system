@@ -1,0 +1,76 @@
+{
+  "$id": "p0.research-bundle-manifest.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema",
+    "bundle_version",
+    "created_utc_date",
+    "record_count",
+    "records"
+  ],
+  "properties": {
+    "schema": {
+      "const": "p0.research-bundle-manifest.v1"
+    },
+    "bundle_version": {
+      "type": "string"
+    },
+    "created_utc_date": {
+      "type": "string"
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "collection",
+          "local_filename",
+          "download_mode",
+          "official_product_page",
+          "direct_download_url",
+          "legacy_expected_bytes",
+          "legacy_expected_sha256"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "collection": {
+            "type": "string",
+            "minLength": 1
+          },
+          "local_filename": {
+            "type": "string",
+            "minLength": 1
+          },
+          "download_mode": {
+            "type": "string",
+            "minLength": 1
+          },
+          "official_product_page": {
+            "type": ["string", "null"]
+          },
+          "direct_download_url": {
+            "type": ["string", "null"]
+          },
+          "legacy_expected_bytes": {
+            "type": ["integer", "null"]
+          },
+          "legacy_expected_sha256": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": true
+}
