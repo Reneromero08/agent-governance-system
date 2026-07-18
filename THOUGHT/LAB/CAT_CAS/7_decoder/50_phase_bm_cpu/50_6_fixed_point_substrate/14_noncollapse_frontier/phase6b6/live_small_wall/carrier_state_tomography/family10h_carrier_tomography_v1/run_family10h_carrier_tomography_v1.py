@@ -170,7 +170,7 @@ SOURCE_AUDIT_ROLE_ALIASES = {
     "source_bundle_runtime_and_evidence_auditor": "source_bundle_runtime_evidence_auditor",
     "claim_boundary_adjudicator": "claim_boundary_adjudicator",
 }
-SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = {
+SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V2 = {
     "schema",
     "issuer",
     "receipt_kind",
@@ -193,7 +193,15 @@ SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = {
     "self_authored",
     "evidence_origin",
 }
-SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V2"
+SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V3 = SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V2 | {
+    "verdict",
+    "final_response",
+    "material_blocker_ids",
+}
+SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V3
+SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2 = "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V2"
+SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3 = "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V3"
+SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3
 SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER = "codex_subagent_read_only_review"
 SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN = "codex_subagent_detached_receipt"
 SOURCE_AUDIT_REVIEW_BODY_CANONICALIZATION = "utf8_lf_single_trailing_newline"
@@ -336,6 +344,20 @@ def source_audit_paths_for_commit(source_commit: str | None) -> dict[str, Path]:
     }
 
 
+def source_audit_receipt_schema_for_commit(source_commit: str | None) -> str:
+    if source_audit_version_for_commit(source_commit) in {"C3", "C4", "C5"}:
+        return SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2
+    return SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3
+
+
+def source_audit_receipt_keys_for_schema(schema: str) -> set[str]:
+    if schema == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2:
+        return SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V2
+    if schema == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3:
+        return SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V3
+    return set()
+
+
 def archive_path_matches(value: Any, expected: Path) -> bool:
     if not isinstance(value, str) or not value:
         return False
@@ -408,6 +430,8 @@ def source_audit_quorum(
 
     def validate_reviewer_archive(item: dict[str, Any], role: str, role_name: str) -> list[str]:
         receipt_failures: list[str] = []
+        expected_receipt_schema = source_audit_receipt_schema_for_commit(expected_source_commit)
+        expected_receipt_keys = source_audit_receipt_keys_for_schema(expected_receipt_schema)
         body_path, receipt_path = expected_source_audit_archive_paths(role, review_root)
         if not archive_path_matches(item.get("body_path"), body_path):
             receipt_failures.append(f"source audit reviewer body path mismatch {role}")
@@ -434,10 +458,10 @@ def source_audit_quorum(
             receipt_failures.append(f"source audit reviewer receipt file digest mismatch {role}")
         if item.get("review_receipt") != receipt:
             receipt_failures.append(f"source audit reviewer normalized receipt mismatch {role}")
-        if set(receipt) != SOURCE_AUDIT_REVIEW_RECEIPT_KEYS:
+        if set(receipt) != expected_receipt_keys:
             receipt_failures.append(f"source audit reviewer receipt field mismatch {role}")
         expected_pairs = {
-            "schema": SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA,
+            "schema": expected_receipt_schema,
             "issuer": SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER,
             "receipt_kind": SOURCE_AUDIT_RECEIPT_KIND,
             "thread_id": item.get("thread_id"),
@@ -459,6 +483,21 @@ def source_audit_quorum(
             "no_live_authority": True,
             "no_pmu": True,
         }
+        normalized_blocker_ids = item.get("material_blocker_ids")
+        if expected_receipt_schema == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3:
+            if (
+                not isinstance(normalized_blocker_ids, list)
+                or any(not isinstance(blocker_id, str) or not blocker_id for blocker_id in normalized_blocker_ids)
+            ):
+                receipt_failures.append(f"source audit reviewer material blocker ids missing or malformed {role}")
+                normalized_blocker_ids = []
+            expected_pairs.update(
+                {
+                    "verdict": item.get("verdict"),
+                    "final_response": item.get("final_response"),
+                    "material_blocker_ids": normalized_blocker_ids,
+                }
+            )
         for key, expected in expected_pairs.items():
             if receipt.get(key) != expected:
                 receipt_failures.append(f"source audit reviewer receipt {key} mismatch {role}")
@@ -492,6 +531,7 @@ def source_audit_quorum(
             "agent_id": item.get("agent_id"),
             "verdict": item.get("verdict"),
             "final_response": item.get("final_response"),
+            "material_blocker_ids": item.get("material_blocker_ids"),
             "audited_commit": item.get("audited_commit"),
             "source_hashes_sha256": item.get("source_hashes_sha256"),
             "source_bundle_sha256": item.get("source_bundle_sha256"),
@@ -526,6 +566,12 @@ def source_audit_quorum(
             role_entry["passed"] = False
         if role_entry["runtime_binary_sha256"] != expected_runtime_binary_sha256:
             failures.append(f"source audit reviewer runtime-binary mismatch {role}")
+            role_entry["passed"] = False
+        if (
+            source_audit_receipt_schema_for_commit(expected_source_commit) == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3
+            and role_entry["material_blocker_ids"] != []
+        ):
+            failures.append(f"source audit reviewer material blocker ids present {role}")
             role_entry["passed"] = False
         boundary = role_entry["boundary_attestation"]
         if (
@@ -4708,6 +4754,9 @@ def source_audit_quorum_regression() -> dict[str, Any]:
                 "source_hashes_sha256": source_hash,
                 "source_bundle_sha256": bundle_hash,
                 "runtime_binary_sha256": runtime_hash,
+                "verdict": "NO_MATERIAL_BLOCKER",
+                "final_response": True,
+                "material_blocker_ids": [],
                 "no_git_write": True,
                 "no_file_edits": True,
                 "no_checkout_mutation": True,
@@ -4725,6 +4774,7 @@ def source_audit_quorum_regression() -> dict[str, Any]:
                 "model": "gpt-5.6-sol",
                 "verdict": "NO_MATERIAL_BLOCKER",
                 "final_response": True,
+                "material_blocker_ids": [],
                 "audited_commit": source_commit,
                 "source_hashes_sha256": source_hash,
                 "source_bundle_sha256": bundle_hash,
@@ -4886,6 +4936,26 @@ def source_audit_quorum_regression() -> dict[str, Any]:
         ),
         "material_blocker_verdict_blocked": not evaluate(
             lambda audit, _root: role_item(audit, "claim_boundary_adjudicator").update({"verdict": "MATERIAL_BLOCKER", "final_response": False})
+        ),
+        "receipt_bound_blocker_cannot_be_cleared_by_normalized_json": not evaluate(
+            lambda audit, root: mutate_receipt(
+                audit,
+                root,
+                "claim_boundary_adjudicator",
+                verdict="MATERIAL_BLOCKER",
+                final_response=False,
+                material_blocker_ids=["C6-CLAIM-BOUNDARY-01"],
+            )
+        ),
+        "receipt_bound_nonfinal_cannot_be_cleared_by_normalized_json": not evaluate(
+            lambda audit, root: mutate_receipt(
+                audit,
+                root,
+                "claim_boundary_adjudicator",
+                verdict="NO_MATERIAL_BLOCKER",
+                final_response=False,
+                material_blocker_ids=[],
+            )
         ),
         "pre_contact_missing_or_mismatched_source_review_blocked": not read_source_authority_review_for_discovery(
             source_commit=source_commit,
