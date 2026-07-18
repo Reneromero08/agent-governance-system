@@ -1,0 +1,40 @@
+{
+  "authority": "AUTHORIZE P0 BUILD-READINESS ONLY",
+  "candidate_root": "27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247",
+  "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
+  "reviews": [
+    {
+      "agent_id": "AUD-P0-PARTS-CUSTODY-MECHANICS-R7-20260718",
+      "findings": [],
+      "independent": true,
+      "reviewed_root": "27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247",
+      "role": "parts_and_carrier",
+      "verdict": "PASS"
+    },
+    {
+      "agent_id": "AUD-P0-TOPOLOGY-SOURCEOFF-R7-20260718",
+      "findings": [],
+      "independent": true,
+      "reviewed_root": "27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247",
+      "role": "topology_and_source_off",
+      "verdict": "PASS"
+    },
+    {
+      "agent_id": "AUD-P0-ANALYZER-EVIDENCE-R7-20260718",
+      "findings": [],
+      "independent": true,
+      "reviewed_root": "27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247",
+      "role": "analyzer_and_evidence",
+      "verdict": "PASS"
+    },
+    {
+      "agent_id": "AUD-P0-CLAIMS-SAFETY-AUTHORITY-R7-20260718",
+      "findings": [],
+      "independent": true,
+      "reviewed_root": "27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247",
+      "role": "claims_safety_and_authority",
+      "verdict": "PASS"
+    }
+  ],
+  "schema": "p0.build-readiness-reviews.v1"
+}

@@ -1,0 +1,213 @@
+{
+  "authority": "AUTHORIZE P0 BUILD-READINESS ONLY",
+  "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
+  "contact_attestation": {
+    "audio_playback_or_recording": 0,
+    "cart_or_stock_check": 0,
+    "hardware": 0,
+    "human_vendor_outreach": 0,
+    "instrument_command": 0,
+    "purchase": 0,
+    "target": 0
+  },
+  "decision": "P0_BUILD_READINESS_BLOCKED",
+  "findings": [
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#admittance_budget",
+        "P0_BUILD_READINESS_PACKET.md#sense-admittance-and-the-opa810-correction",
+        "P0_COMPONENT_DOCUMENTS.json#OPA810"
+      ],
+      "finding_id": "P0BR-F001",
+      "original_summary": "The prior 8 pF sense part violated the frozen loading envelope.",
+      "severity": "BLOCKER",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#ground_model",
+        "P0_BUILD_READINESS_PACKET.md#software-prearmed-acquisition",
+        "p0_scientific_analyzer.py#software-prearmed-free-run"
+      ],
+      "finding_id": "P0BR-F002",
+      "original_summary": "The prior external trigger fanout was undefined and risked an undeclared ground bond.",
+      "severity": "BLOCKER",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#source_off_sequence",
+        "P0_BUILD_READINESS_PACKET.md#continuous-dual-tone-source-and-phase-gauge",
+        "P0_ANALYZER_REFERENCE_RESULTS.json#source_muted_at_gate_raw"
+      ],
+      "finding_id": "P0BR-F003",
+      "original_summary": "A self-ending burst contradicted physical source-off custody.",
+      "severity": "BLOCKER",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#control_fixtures",
+        "P0_AUTHORED_ASSEMBLY_DRAWINGS.md#D010",
+        "P0_NONPURCHASING_BOM.json#three-complete-fixtures"
+      ],
+      "finding_id": "P0BR-F004",
+      "original_summary": "Detector-only and dummy controls were connector labels rather than complete circuits.",
+      "severity": "MATERIAL",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#UISO_GATE_A",
+        "P0_FINAL_NETLIST.json#UISO_RELAY_A",
+        "p0_build_readiness_validator.py#check_netlist"
+      ],
+      "finding_id": "P0BR-F005",
+      "original_summary": "The isolator primary supply was incompatible with 3.3 V controller outputs.",
+      "severity": "MATERIAL",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#C_VDDIO_A",
+        "P0_FINAL_NETLIST.json#C_VSUPPLY_A",
+        "P0_NONPURCHASING_BOM.json#derived-electrical-inventory"
+      ],
+      "finding_id": "P0BR-F006",
+      "original_summary": "The vibration sensor and support-network bypass inventory was incomplete.",
+      "severity": "MATERIAL",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#ground_model",
+        "P0_AUTHORED_ASSEMBLY_DRAWINGS.md#D007",
+        "P0_UNPOWERED_ASSEMBLY_PACKET.md#Stage-U6"
+      ],
+      "finding_id": "P0BR-F007",
+      "original_summary": "Ground drawings disagreed on the sole inter-enclosure analog bond.",
+      "severity": "MATERIAL",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_PCB_FABRICATION_RELEASE.json",
+        "P0_AUTHORED_ASSEMBLY_DRAWINGS.md#D002-D007",
+        "p0_build_readiness_validator.py#check_fabrication"
+      ],
+      "finding_id": "P0BR-F008",
+      "original_summary": "Mechanical fit, placement, keepout, panel, mounting and strain-relief details were incomplete.",
+      "severity": "MATERIAL",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#boards-components-nets-power_domains",
+        "p0_build_readiness_validator.py#exact-net-projection",
+        "p0_build_readiness_design.py#suffixed"
+      ],
+      "finding_id": "P0BR-F009",
+      "original_summary": "Board ownership, no-connect semantics, rails and dangling control nets were incomplete.",
+      "severity": "MATERIAL",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#continuity_tests",
+        "P0_AUTHORED_ASSEMBLY_DRAWINGS.md#D003",
+        "P0_UNPOWERED_ASSEMBLY_PACKET.md#Stage-U4"
+      ],
+      "finding_id": "P0BR-F010",
+      "original_summary": "Relay continuity called for nonexistent test pads and conflicted with the electrode loading law.",
+      "severity": "MATERIAL",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "p0_build_readiness_validator.py#candidate_root",
+        "p0_build_readiness_validator.py#check_reviews",
+        "p0_build_readiness_mutation_test.py",
+        "P0_BUILD_READINESS_MUTATION_RESULTS.json"
+      ],
+      "finding_id": "P0BR-F011",
+      "original_summary": "The earlier candidate was not byte-root-bound. The current exhaustive mutation pass proves root sensitivity only; semantic rejection remains a separate validation responsibility and is not claimed by the mutation receipt.",
+      "severity": "BLOCKER",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_BUILD_READINESS_SCHEMAS.json#environment_csv",
+        "p0_scientific_analyzer.py#crc8",
+        "P0_ANALYZER_REFERENCE_RESULTS.json#environment-adversaries"
+      ],
+      "finding_id": "P0BR-F012",
+      "original_summary": "Environment custody omitted raw CRC/identity/clock evidence and hard-coded one year.",
+      "severity": "MATERIAL",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_BUILD_READINESS_AUTHORITY.md#current-status",
+        "PHYSICAL_PHASE_CARRIER_P0_CONTRACT.md#status",
+        "../AUDIO_SIDE_QUEST_ROADMAP.md#status",
+        "p0_build_readiness_validator.py#check_reviews"
+      ],
+      "finding_id": "P0BR-F013",
+      "original_summary": "Normative documents prematurely asserted a frozen decision and disagreed on authority tokens.",
+      "severity": "MATERIAL",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_BUILD_READINESS_PACKET.md#staged-restoration-ladder",
+        "P0_UNPOWERED_ASSEMBLY_PACKET.md#Stage-U0-U7",
+        "P0_FUTURE_PHYSICAL_EXECUTION_CONTRACT.md#required-prior-receipts"
+      ],
+      "finding_id": "P0BR-F014",
+      "original_summary": "Document, coupon, assembly and execution gates were circular.",
+      "severity": "MATERIAL",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#intra_enclosure_harnesses",
+        "P0_AUTHORED_ASSEMBLY_DRAWINGS.md#D002-D006",
+        "P0_UNPOWERED_ASSEMBLY_PACKET.md#Stage-U6"
+      ],
+      "finding_id": "P0BR-F015",
+      "original_summary": "The connector map ended at panel bulkheads and omitted Nucleo, panel-pigtail and carrier-to-vibration wiring.",
+      "severity": "BLOCKER",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#UISO_GATE_A",
+        "P0_FINAL_NETLIST.json#witness_law",
+        "P0_AUTHORED_ASSEMBLY_DRAWINGS.md#D008"
+      ],
+      "finding_id": "P0BR-F016",
+      "original_summary": "The CH2 ladder claimed binary conductance weights while b0 was driven from a different logic voltage.",
+      "severity": "BLOCKER",
+      "status": "CLOSED"
+    },
+    {
+      "closure_evidence": [
+        "P0_FINAL_NETLIST.json#source_off_sequence.signal_pole_evidence_boundary",
+        "P0_BUILD_READINESS_PACKET.md#physical-source-off-sequence",
+        "P0_FUTURE_PHYSICAL_EXECUTION_CONTRACT.md#future-source-off-contract"
+      ],
+      "finding_id": "P0BR-R3-SIGNAL-POLE",
+      "original_summary": "Auxiliary CH2 contacts do not provide per-event evidence that K1/K2 signal poles opened; physical source-disconnect claims remain blocked pending an actual-path witness or exact force-guided guarantee.",
+      "severity": "BLOCKER",
+      "status": "OPEN"
+    }
+  ],
+  "open_material_findings": 1,
+  "public_source_retrieval": {
+    "automated_http_attempts_occurred": true,
+    "repository_safe_receipt": "research/P0_research_bundle_2026-07-18/SOURCE_CUSTODY.json",
+    "third_party_bytes_private_and_ignored": true
+  },
+  "repair_review_gate": "P0_BUILD_READINESS_PACKET_FROZEN is prohibited while P0BR-R3-SIGNAL-POLE remains open; after a separately reviewed mechanical repair, four independent PASS receipts must bind the exact new candidate root",
+  "schema": "p0.build-readiness-findings.v2"
+}

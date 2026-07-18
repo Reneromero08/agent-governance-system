@@ -1,10 +1,16 @@
 # P0 Independent Review Reports
 
-**Packet status:** `FROZEN_ARCHITECTURE__NOT_EXECUTED`<br>
+> **Historical record only.** These reports bind obsolete architecture-content
+> root `fb0f73d309634e0e0bf95a24af7eba3941214318996c0d51337322d3f4a0cfd7`.
+> They do not review, authorize, freeze, or supply quorum for the current
+> build-readiness candidate. Current review authority exists only in fresh
+> receipts bound to the exact current candidate root.
+
+**Packet status:** `HISTORICAL_OBSOLETE_REVIEW_RECORD__NO_CURRENT_AUTHORITY`<br>
 **Claim ceiling:** `NON_EXECUTING_PHYSICAL_PHASE_CARRIER_ARCHITECTURE_ONLY`<br>
 **Architecture content SHA-256:** `fb0f73d309634e0e0bf95a24af7eba3941214318996c0d51337322d3f4a0cfd7`<br>
-**Open material findings:** 0<br>
-**Hardware/audio/target/vendor/purchase contacts:** 0
+**Open material findings at the historical root:** 0<br>
+**Historical hardware/audio/target/human-vendor-outreach/purchase contacts:** 0
 
 ## 1. Review binding
 

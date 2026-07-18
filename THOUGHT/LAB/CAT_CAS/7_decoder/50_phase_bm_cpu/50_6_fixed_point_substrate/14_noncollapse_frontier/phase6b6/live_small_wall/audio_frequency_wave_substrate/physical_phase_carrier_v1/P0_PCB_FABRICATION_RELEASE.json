@@ -1,0 +1,2923 @@
+{
+  "authority": "AUTHORIZE P0 BUILD-READINESS ONLY",
+  "boards": [
+    {
+      "board_id": "P0-SOURCE-OFF-CONTROL-REV-B-A",
+      "datum": "lower-left board corner, component side up",
+      "drill": {
+        "finished_mount_hole_mm": 3.2,
+        "plated": false,
+        "tolerance_mm": 0.08
+      },
+      "finish": "ENIG; IPC-6012 Class 2; no-clean flux prohibited on guarded carrier board",
+      "mount_holes_mm": [
+        [
+          4.0,
+          4.0
+        ],
+        [
+          80.0,
+          4.0
+        ],
+        [
+          4.0,
+          60.0
+        ],
+        [
+          80.0,
+          60.0
+        ]
+      ],
+      "outline_mm": [
+        84.0,
+        64.0,
+        1.6
+      ],
+      "placements": [
+        {
+          "ref": "C_GATE_IN_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_GATE_NEG_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_GATE_POS_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_GATE_PRI_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_GATE_SEC_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_RELAY_PRI_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_RELAY_SEC_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_REF_IN_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_REF_OUT_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_RELAY_IN_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_RELAY_POS_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SENSE_IN_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SENSE_NEG_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SENSE_POS_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SHT_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "D1_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "D2_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "D3_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "DZ1_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "DZ2_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "DZ3_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "F1_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "F2_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "F3_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "K1_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "K3_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "PS_GATE_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "PS_RELAY_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "PS_SENSE_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "Q1_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "Q2_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "Q3_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_G1_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_G2_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_G3_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GPD1_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GPD2_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GPD3_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GUARD_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_LIMIT_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_MON_BIAS_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_MON_C1_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_MON_C2_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_SCL_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_SDA_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_TERM_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_TERM_CONTROL_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W0_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W1_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W2_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W3_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "R_WPULL_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "UISO_GATE_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "UISO_RELAY_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "U_GATE_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "U_REF_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "U_TEMP_RH_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 58.0
+        }
+      ],
+      "stackup": "four-layer FR-4 1.6 mm, L2 solid domain-specific return, L3 power",
+      "tolerances_mm": {
+        "outline": 0.15,
+        "placement": 0.1,
+        "thickness": 0.1
+      }
+    },
+    {
+      "board_id": "P0-CARRIER-SENSE-DUT-REV-B-A",
+      "datum": "lower-left board corner, component side up",
+      "drill": {
+        "finished_mount_hole_mm": 3.2,
+        "plated": false,
+        "tolerance_mm": 0.08
+      },
+      "finish": "ENIG; IPC-6012 Class 2; no-clean flux prohibited on guarded carrier board",
+      "mount_holes_mm": [
+        [
+          4.0,
+          4.0
+        ],
+        [
+          64.0,
+          4.0
+        ],
+        [
+          4.0,
+          28.0
+        ],
+        [
+          64.0,
+          28.0
+        ]
+      ],
+      "outline_mm": [
+        68.0,
+        32.0,
+        1.0
+      ],
+      "placements": [
+        {
+          "ref": "C_OPA_NEG_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_OPA_POS_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 15.333,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "K2_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 24.667,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "R_BIAS_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 34.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "R_SENSE_OUT_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 43.333,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "U_SENSE_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 52.667,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "X1_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 6.0
+        }
+      ],
+      "stackup": "two-layer high-Tg FR-4, 1.0 mm; guarded input copper keepout on both layers",
+      "tolerances_mm": {
+        "outline": 0.15,
+        "placement": 0.1,
+        "thickness": 0.1
+      }
+    },
+    {
+      "board_id": "P0-ENV-SENSOR-REV-B-A",
+      "datum": "lower-left board corner, component side up",
+      "drill": {
+        "finished_mount_hole_mm": 2.7,
+        "plated": false,
+        "tolerance_mm": 0.08
+      },
+      "finish": "ENIG; IPC-6012 Class 2; no-clean flux prohibited on guarded carrier board",
+      "mount_holes_mm": [
+        [
+          2.5,
+          2.5
+        ],
+        [
+          21.5,
+          2.5
+        ],
+        [
+          2.5,
+          21.5
+        ],
+        [
+          21.5,
+          21.5
+        ]
+      ],
+      "outline_mm": [
+        24.0,
+        24.0,
+        1.0
+      ],
+      "placements": [
+        {
+          "ref": "C_1V8_ANA_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_1V8_DIG_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 12.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_VDDIO_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 18.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_VSUPPLY_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 10.0
+        },
+        {
+          "ref": "C_XOUT_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 12.0,
+          "y_mm": 10.0
+        },
+        {
+          "ref": "C_YOUT_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 18.0,
+          "y_mm": 10.0
+        },
+        {
+          "ref": "C_ZOUT_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 14.0
+        },
+        {
+          "ref": "R_DISCH_ANA_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 12.0,
+          "y_mm": 14.0
+        },
+        {
+          "ref": "R_DISCH_DIG_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 18.0,
+          "y_mm": 14.0
+        },
+        {
+          "ref": "U_ACCEL_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 18.0
+        }
+      ],
+      "stackup": "two-layer high-Tg FR-4, 1.0 mm; guarded input copper keepout on both layers",
+      "tolerances_mm": {
+        "outline": 0.15,
+        "placement": 0.1,
+        "thickness": 0.1
+      }
+    },
+    {
+      "board_id": "P0-SOURCE-OFF-CONTROL-REV-B-B",
+      "datum": "lower-left board corner, component side up",
+      "drill": {
+        "finished_mount_hole_mm": 3.2,
+        "plated": false,
+        "tolerance_mm": 0.08
+      },
+      "finish": "ENIG; IPC-6012 Class 2; no-clean flux prohibited on guarded carrier board",
+      "mount_holes_mm": [
+        [
+          4.0,
+          4.0
+        ],
+        [
+          80.0,
+          4.0
+        ],
+        [
+          4.0,
+          60.0
+        ],
+        [
+          80.0,
+          60.0
+        ]
+      ],
+      "outline_mm": [
+        84.0,
+        64.0,
+        1.6
+      ],
+      "placements": [
+        {
+          "ref": "C_GATE_IN_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_GATE_NEG_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_GATE_POS_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_GATE_PRI_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_GATE_SEC_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_RELAY_PRI_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_RELAY_SEC_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_REF_IN_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_REF_OUT_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_RELAY_IN_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_RELAY_POS_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SENSE_IN_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SENSE_NEG_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SENSE_POS_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SHT_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "D1_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "D2_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "D3_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "DZ1_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "DZ2_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "DZ3_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "F1_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "F2_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "F3_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "K1_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "K3_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "PS_GATE_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "PS_RELAY_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "PS_SENSE_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "Q1_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "Q2_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "Q3_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_G1_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_G2_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_G3_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GPD1_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GPD2_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GPD3_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GUARD_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_LIMIT_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_MON_BIAS_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_MON_C1_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_MON_C2_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_SCL_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_SDA_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_TERM_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_TERM_CONTROL_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W0_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W1_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W2_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W3_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "R_WPULL_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "UISO_GATE_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "UISO_RELAY_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "U_GATE_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "U_REF_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "U_TEMP_RH_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 58.0
+        }
+      ],
+      "stackup": "four-layer FR-4 1.6 mm, L2 solid domain-specific return, L3 power",
+      "tolerances_mm": {
+        "outline": 0.15,
+        "placement": 0.1,
+        "thickness": 0.1
+      }
+    },
+    {
+      "board_id": "P0-CARRIER-SENSE-DETECTOR_ONLY-REV-B-B",
+      "datum": "lower-left board corner, component side up",
+      "drill": {
+        "finished_mount_hole_mm": 3.2,
+        "plated": false,
+        "tolerance_mm": 0.08
+      },
+      "finish": "ENIG; IPC-6012 Class 2; no-clean flux prohibited on guarded carrier board",
+      "mount_holes_mm": [
+        [
+          4.0,
+          4.0
+        ],
+        [
+          64.0,
+          4.0
+        ],
+        [
+          4.0,
+          28.0
+        ],
+        [
+          64.0,
+          28.0
+        ]
+      ],
+      "outline_mm": [
+        68.0,
+        32.0,
+        1.0
+      ],
+      "placements": [
+        {
+          "ref": "C_OPA_NEG_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_OPA_POS_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 15.333,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "K2_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 24.667,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "R_BIAS_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 34.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "R_SENSE_OUT_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 43.333,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "U_SENSE_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 52.667,
+          "y_mm": 6.0
+        }
+      ],
+      "stackup": "two-layer high-Tg FR-4, 1.0 mm; guarded input copper keepout on both layers",
+      "tolerances_mm": {
+        "outline": 0.15,
+        "placement": 0.1,
+        "thickness": 0.1
+      }
+    },
+    {
+      "board_id": "P0-ENV-SENSOR-REV-B-B",
+      "datum": "lower-left board corner, component side up",
+      "drill": {
+        "finished_mount_hole_mm": 2.7,
+        "plated": false,
+        "tolerance_mm": 0.08
+      },
+      "finish": "ENIG; IPC-6012 Class 2; no-clean flux prohibited on guarded carrier board",
+      "mount_holes_mm": [
+        [
+          2.5,
+          2.5
+        ],
+        [
+          21.5,
+          2.5
+        ],
+        [
+          2.5,
+          21.5
+        ],
+        [
+          21.5,
+          21.5
+        ]
+      ],
+      "outline_mm": [
+        24.0,
+        24.0,
+        1.0
+      ],
+      "placements": [
+        {
+          "ref": "C_1V8_ANA_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_1V8_DIG_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 12.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_VDDIO_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 18.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_VSUPPLY_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 10.0
+        },
+        {
+          "ref": "C_XOUT_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 12.0,
+          "y_mm": 10.0
+        },
+        {
+          "ref": "C_YOUT_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 18.0,
+          "y_mm": 10.0
+        },
+        {
+          "ref": "C_ZOUT_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 14.0
+        },
+        {
+          "ref": "R_DISCH_ANA_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 12.0,
+          "y_mm": 14.0
+        },
+        {
+          "ref": "R_DISCH_DIG_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 18.0,
+          "y_mm": 14.0
+        },
+        {
+          "ref": "U_ACCEL_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 18.0
+        }
+      ],
+      "stackup": "two-layer high-Tg FR-4, 1.0 mm; guarded input copper keepout on both layers",
+      "tolerances_mm": {
+        "outline": 0.15,
+        "placement": 0.1,
+        "thickness": 0.1
+      }
+    },
+    {
+      "board_id": "P0-SOURCE-OFF-CONTROL-REV-B-C",
+      "datum": "lower-left board corner, component side up",
+      "drill": {
+        "finished_mount_hole_mm": 3.2,
+        "plated": false,
+        "tolerance_mm": 0.08
+      },
+      "finish": "ENIG; IPC-6012 Class 2; no-clean flux prohibited on guarded carrier board",
+      "mount_holes_mm": [
+        [
+          4.0,
+          4.0
+        ],
+        [
+          80.0,
+          4.0
+        ],
+        [
+          4.0,
+          60.0
+        ],
+        [
+          80.0,
+          60.0
+        ]
+      ],
+      "outline_mm": [
+        84.0,
+        64.0,
+        1.6
+      ],
+      "placements": [
+        {
+          "ref": "C_GATE_IN_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_GATE_NEG_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_GATE_POS_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_GATE_PRI_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_GATE_SEC_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_RELAY_PRI_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_ISO_RELAY_SEC_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_REF_IN_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_REF_OUT_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_RELAY_IN_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_RELAY_POS_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SENSE_IN_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SENSE_NEG_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SENSE_POS_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "C_SHT_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "D1_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "D2_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "D3_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "DZ1_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "DZ2_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 16.4
+        },
+        {
+          "ref": "DZ3_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "F1_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "F2_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "F3_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "K1_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "K3_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "PS_GATE_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "PS_RELAY_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "PS_SENSE_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "Q1_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 26.8
+        },
+        {
+          "ref": "Q2_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "Q3_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_G1_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_G2_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_G3_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GPD1_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GPD2_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GPD3_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_GUARD_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_LIMIT_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 37.2
+        },
+        {
+          "ref": "R_MON_BIAS_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_MON_C1_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_MON_C2_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_SCL_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_SDA_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_TERM_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_TERM_CONTROL_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W0_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W1_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 70.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W2_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 78.0,
+          "y_mm": 47.6
+        },
+        {
+          "ref": "R_W3_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "R_WPULL_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 14.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "UISO_GATE_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 22.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "UISO_RELAY_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 30.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "U_GATE_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 38.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "U_REF_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 46.0,
+          "y_mm": 58.0
+        },
+        {
+          "ref": "U_TEMP_RH_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 58.0
+        }
+      ],
+      "stackup": "four-layer FR-4 1.6 mm, L2 solid domain-specific return, L3 power",
+      "tolerances_mm": {
+        "outline": 0.15,
+        "placement": 0.1,
+        "thickness": 0.1
+      }
+    },
+    {
+      "board_id": "P0-CARRIER-SENSE-DUMMY_C0-REV-B-C",
+      "datum": "lower-left board corner, component side up",
+      "drill": {
+        "finished_mount_hole_mm": 3.2,
+        "plated": false,
+        "tolerance_mm": 0.08
+      },
+      "finish": "ENIG; IPC-6012 Class 2; no-clean flux prohibited on guarded carrier board",
+      "mount_holes_mm": [
+        [
+          4.0,
+          4.0
+        ],
+        [
+          64.0,
+          4.0
+        ],
+        [
+          4.0,
+          28.0
+        ],
+        [
+          64.0,
+          28.0
+        ]
+      ],
+      "outline_mm": [
+        68.0,
+        32.0,
+        1.0
+      ],
+      "placements": [
+        {
+          "ref": "C_DUMMY_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_OPA_NEG_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 15.333,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_OPA_POS_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 24.667,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "K2_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 34.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "R_BIAS_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 43.333,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "R_SENSE_OUT_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 52.667,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "U_SENSE_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 62.0,
+          "y_mm": 6.0
+        }
+      ],
+      "stackup": "two-layer high-Tg FR-4, 1.0 mm; guarded input copper keepout on both layers",
+      "tolerances_mm": {
+        "outline": 0.15,
+        "placement": 0.1,
+        "thickness": 0.1
+      }
+    },
+    {
+      "board_id": "P0-ENV-SENSOR-REV-B-C",
+      "datum": "lower-left board corner, component side up",
+      "drill": {
+        "finished_mount_hole_mm": 2.7,
+        "plated": false,
+        "tolerance_mm": 0.08
+      },
+      "finish": "ENIG; IPC-6012 Class 2; no-clean flux prohibited on guarded carrier board",
+      "mount_holes_mm": [
+        [
+          2.5,
+          2.5
+        ],
+        [
+          21.5,
+          2.5
+        ],
+        [
+          2.5,
+          21.5
+        ],
+        [
+          21.5,
+          21.5
+        ]
+      ],
+      "outline_mm": [
+        24.0,
+        24.0,
+        1.0
+      ],
+      "placements": [
+        {
+          "ref": "C_1V8_ANA_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_1V8_DIG_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 12.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_VDDIO_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 18.0,
+          "y_mm": 6.0
+        },
+        {
+          "ref": "C_VSUPPLY_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 10.0
+        },
+        {
+          "ref": "C_XOUT_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 12.0,
+          "y_mm": 10.0
+        },
+        {
+          "ref": "C_YOUT_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 18.0,
+          "y_mm": 10.0
+        },
+        {
+          "ref": "C_ZOUT_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 14.0
+        },
+        {
+          "ref": "R_DISCH_ANA_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 12.0,
+          "y_mm": 14.0
+        },
+        {
+          "ref": "R_DISCH_DIG_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 18.0,
+          "y_mm": 14.0
+        },
+        {
+          "ref": "U_ACCEL_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 6.0,
+          "y_mm": 18.0
+        }
+      ],
+      "stackup": "two-layer high-Tg FR-4, 1.0 mm; guarded input copper keepout on both layers",
+      "tolerances_mm": {
+        "outline": 0.15,
+        "placement": 0.1,
+        "thickness": 0.1
+      }
+    }
+  ],
+  "enclosure_design": {
+    "body_outer_mm": [
+      140.0,
+      98.0,
+      41.0
+    ],
+    "clear_internal_min_mm": [
+      124.0,
+      82.0,
+      36.0
+    ],
+    "closed_outer_mm": [
+      140.0,
+      98.0,
+      44.0
+    ],
+    "construction": "CNC-machined one-piece tub plus removable flat lid",
+    "datum": "lower-left corner of the unobstructed inner floor envelope; +x east, +y north, +z toward lid",
+    "design_id": "P0-CUSTOM-ENCLOSURE-124X82X36-REV-A",
+    "electrical_acceptance": {
+      "analog_star_to_body_mohm_min": 1000.0,
+      "body_to_lid_dc_ohm_max": 0.05,
+      "isolated_bulkhead_to_body_mohm_min": 1000.0
+    },
+    "finish": "bare machined aluminum, deburred and solvent-cleaned; no anodize, paint, conversion coating, gasket, or insulating film on body, lid, fastener seats, or seam",
+    "floor_thickness_mm": 5.0,
+    "lid_fasteners": {
+      "body_thread": "M3x0.5-6H blind tapped 5.0 mm minimum full thread depth",
+      "installation_torque_nm": 0.45,
+      "installation_torque_tolerance_nm": 0.05,
+      "lid_clearance_hole_mm": 3.4,
+      "part": "ISO 4762 M3x0.5x8 A2-70 stainless socket-head cap screw",
+      "positions_outer_xy_mm": [
+        [
+          35.0,
+          4.0
+        ],
+        [
+          70.0,
+          4.0
+        ],
+        [
+          105.0,
+          4.0
+        ],
+        [
+          136.0,
+          32.0
+        ],
+        [
+          136.0,
+          66.0
+        ],
+        [
+          35.0,
+          94.0
+        ],
+        [
+          70.0,
+          94.0
+        ],
+        [
+          105.0,
+          94.0
+        ],
+        [
+          4.0,
+          32.0
+        ],
+        [
+          4.0,
+          66.0
+        ]
+      ]
+    },
+    "lid_outline_mm": [
+      140.0,
+      98.0,
+      3.0
+    ],
+    "lid_seam": "continuous bare-metal 8.0 mm perimeter land; dry assembly with no gasket",
+    "lid_thickness_mm": 3.0,
+    "material": "ASTM B209 6061-T6 aluminum plate or billet with lot and mill-certificate custody",
+    "mechanical_acceptance": [
+      "material, heat treatment, lot, mill certificate, body identity, and lid identity match the reviewed receipt",
+      "the full 124.0x82.0x36.0 mm inner gauge envelope enters without interference at every mount and fastener location",
+      "body, lid, wall, floor, panel throat, holes, counterbores, blind threads, mount origins, and retention parts pass the stated tolerances",
+      "all edges are deburred 0.2 to 0.5 mm and every machined surface is clean and free of conductive debris",
+      "all ten lid screws are present at 0.45 plus or minus 0.05 N m and the dry perimeter seam has no visible gap",
+      "body-to-lid continuity and all isolated bulkhead/star-to-body resistance checks meet the electrical acceptance thresholds",
+      "every PEEK standoff, washer, board screw, tray, tray screw, blind floor thread, and lid screw matches the exact non-purchasing BOM identity and quantity",
+      "all three Nucleo trays pass every tray-specific dimensional, insertion, retention, keepout, flush-head, and visual acceptance requirement"
+    ],
+    "panel_face_axes": {
+      "east": [
+        "z",
+        "y"
+      ],
+      "floor": [
+        "x",
+        "y"
+      ],
+      "north": [
+        "x",
+        "z"
+      ],
+      "south": [
+        "x",
+        "z"
+      ],
+      "west": [
+        "z",
+        "y"
+      ]
+    },
+    "panel_face_datums": {
+      "east": {
+        "coordinate_1": "+z",
+        "coordinate_2": "+y",
+        "origin_inner_xyz_mm": [
+          124.0,
+          0.0,
+          0.0
+        ]
+      },
+      "floor": {
+        "coordinate_1": "+x",
+        "coordinate_2": "+y",
+        "origin_inner_xyz_mm": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "north": {
+        "coordinate_1": "+x",
+        "coordinate_2": "+z",
+        "origin_inner_xyz_mm": [
+          0.0,
+          82.0,
+          0.0
+        ]
+      },
+      "south": {
+        "coordinate_1": "+x",
+        "coordinate_2": "+z",
+        "origin_inner_xyz_mm": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "west": {
+        "coordinate_1": "+z",
+        "coordinate_2": "+y",
+        "origin_inner_xyz_mm": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "panel_land": "every vertical-panel through-hole is exterior-counterbored 5.0 mm deep, leaving an exact 3.0 mm inner throat",
+    "retention_systems": [
+      {
+        "applies_to_finished_hole_mm": 3.2,
+        "board_fastener": "ISO 4762 M3x0.5x6 A2-70 plus 0.5 mm PEEK flat washer",
+        "floor_interface": "M3x0.5 blind tapped 4.0 mm into the 5.0 mm floor, leaving at least 1.0 mm exterior floor",
+        "geometry": "6.0 mm hex body; M3x0.5 male floor stud 4.0 mm; M3x0.5 female top thread 6.0 mm; body length equals mount standoff_mm",
+        "id": "P0-PEEK-M3-STANDOFF-REV-A",
+        "material": "unfilled natural PEEK conforming to ASTM D6262 S-PAEK"
+      },
+      {
+        "applies_to_finished_hole_mm": 2.7,
+        "board_fastener": "ISO 4762 M2.5x0.45x5 A2-70 plus 0.5 mm PEEK flat washer",
+        "floor_interface": "M2.5x0.45 blind tapped 4.0 mm into the 5.0 mm floor, leaving at least 1.0 mm exterior floor",
+        "geometry": "5.0 mm hex body; M2.5x0.45 male floor stud 4.0 mm; M2.5x0.45 female top thread 5.0 mm; body length equals mount standoff_mm",
+        "id": "P0-PEEK-M2P5-STANDOFF-REV-A",
+        "material": "unfilled natural PEEK conforming to ASTM D6262 S-PAEK"
+      },
+      {
+        "anchor_hole": {
+          "countersink_angle_deg": 90.0,
+          "countersink_major_diameter_mm": 4.2,
+          "head_flush_mm_max": 0.0,
+          "head_recess_mm_max": 0.05,
+          "through_diameter_mm": 2.2
+        },
+        "anchor_holes_tray_xy_mm": [
+          [
+            2.5,
+            2.5
+          ],
+          [
+            53.5,
+            2.5
+          ],
+          [
+            2.5,
+            21.5
+          ],
+          [
+            53.5,
+            21.5
+          ]
+        ],
+        "assembly_method": "with power and all external cables absent, align the board over all four integral lead-in ramps and apply no more than 10.0 N total downward force distributed only across the outermost 1.0 mm PCB perimeter until all clips seat; the ramps may deflect each clip outward no more than 0.50 mm; no separate jig, pry tool, header, connector, component, pad, or test point may carry insertion force",
+        "board_admission_outline_mm": {
+          "law": "measure the bare PCB edge outline before insertion; reject any board outside both closed intervals",
+          "measured_max": [
+            50.05,
+            18.05
+          ],
+          "measured_min": [
+            49.95,
+            17.95
+          ],
+          "nominal": [
+            50.0,
+            18.0
+          ]
+        },
+        "board_seat": {
+          "cut": "no pocket; flat continuous seat except flush PEEK anchor heads",
+          "datum": "tray lower-left top face with components toward +z",
+          "envelope_mm": [
+            50.2,
+            18.2,
+            1.8
+          ],
+          "lower_left_tray_xy_mm": [
+            3.0,
+            3.0
+          ]
+        },
+        "clip_profile": {
+          "base_relief_radius_mm": 0.3,
+          "lead_in_ramp_angle_deg": 30.0,
+          "lead_in_ramp_vertical_height_mm": 0.8,
+          "overhang_inward_mm": 0.4,
+          "overhang_thickness_mm": 0.8,
+          "overhang_underside_above_tray_mm": 1.6,
+          "post_height_above_tray_mm": 2.4,
+          "post_thickness_mm": 1.0,
+          "post_width_along_perimeter_mm": 4.0,
+          "tip_chamfer_mm": 0.2
+        },
+        "floor_fastener": "P0-PEEK-CSK-M2X0P4X6-REV-A, unfilled natural PEEK, 90 degree countersunk head 4.0 mm maximum diameter; M2x0.4 male thread; four per tray into M2x0.4-6H blind floor holes 4.0 mm deep with at least 3.0 mm engagement and 1.0 mm exterior floor remaining",
+        "id": "P0-NUCLEO-PEEK-EDGE-TRAY-REV-B",
+        "insertion_clearance_budget_mm": {
+          "admitted_board_span_max": [
+            50.05,
+            18.05
+          ],
+          "allowed_outward_clip_deflection_max": 0.5,
+          "outward_clip_deflection_required_max": 0.425,
+          "overhang_inward_max": 0.45,
+          "per_side_clearance_min": [
+            0.025,
+            0.025
+          ],
+          "seat_span_min": [
+            50.1,
+            18.1
+          ]
+        },
+        "integral_clip_contact_rectangles_board_xy_mm": [
+          [
+            0.0,
+            0.0,
+            1.0,
+            4.0
+          ],
+          [
+            49.0,
+            0.0,
+            1.0,
+            4.0
+          ],
+          [
+            0.0,
+            14.0,
+            1.0,
+            4.0
+          ],
+          [
+            49.0,
+            14.0,
+            1.0,
+            4.0
+          ]
+        ],
+        "keepout": "clips contact only the outermost 1.0 mm board perimeter and do not cover connectors, headers, components, pads, test points, or copper beyond that perimeter",
+        "material": "unfilled natural PEEK conforming to ASTM D6262 S-PAEK",
+        "retention_acceptance": [
+          "the measured bare-PCB edge outline passes board_admission_outline_mm before insertion",
+          "all four PEEK anchor heads are flush to 0.05 mm below the seat and no metal is exposed beneath the board",
+          "board insertion requires no more than 0.50 mm outward clip deflection and leaves no crack, craze, chip, permanent set, or board witness mark",
+          "after insertion the board moves no more than 0.20 mm laterally under 2.0 N in either tray axis",
+          "the retained board withstands 5.0 N upward for 10 seconds without release, damage, connector/header contact, or permanent displacement",
+          "all four contact rectangles remain within the admitted board outline and every clip contact and keepout condition passes visual inspection at 10x"
+        ],
+        "tolerances_mm": {
+          "anchor_hole_diameter": 0.05,
+          "anchor_hole_position": 0.1,
+          "board_seat_envelope": 0.1,
+          "board_seat_position": 0.1,
+          "clip_overhang": 0.05,
+          "clip_post_height": 0.05,
+          "clip_post_thickness": 0.05,
+          "clip_underside_height": 0.05,
+          "countersink_major_diameter": 0.1,
+          "relief_and_chamfer": 0.05,
+          "tray_outer": 0.1,
+          "tray_thickness": 0.05
+        },
+        "tray_origin_from_board_origin_mm": [
+          -3.0,
+          -3.0,
+          -3.0
+        ],
+        "tray_outer_mm": [
+          56.0,
+          24.0,
+          3.0
+        ]
+      }
+    ],
+    "retention_tolerances_mm": {
+      "female_thread_depth": 0.1,
+      "floor_blind_thread_depth": 0.1,
+      "male_stud_length": 0.1,
+      "standoff_body_length": 0.1,
+      "standoff_hex_across_flats": 0.1,
+      "washer_outer_diameter": 0.1,
+      "washer_thickness": 0.05
+    },
+    "schema": "p0.custom-enclosure-design.v1",
+    "tolerances_mm": {
+      "body_outer": 0.2,
+      "clear_envelope_minimum": 0.0,
+      "counterbore_depth": 0.1,
+      "floor_and_wall": 0.1,
+      "hole_diameter": 0.1,
+      "hole_position": 0.1,
+      "lid": 0.1,
+      "mount_origin": 0.1
+    },
+    "wall_thickness_mm": 8.0
+  },
+  "enclosures": [
+    {
+      "assembly": "P0-DUT-A",
+      "enclosure": "ENC-CONTROL-A",
+      "minimum_clear_envelope_mm": [
+        124.0,
+        82.0,
+        36.0
+      ],
+      "mounts": [
+        {
+          "object": "P0-SOURCE-OFF-CONTROL-REV-B-A",
+          "origin_mm": [
+            4.0,
+            9.0,
+            6.0
+          ],
+          "retention_id": "P0-PEEK-M3-STANDOFF-REV-A",
+          "rotation_deg": 0,
+          "standoff_mm": 6.0
+        },
+        {
+          "local_to_machine_transform": {
+            "board_local_xyz_to_machine_xyz": "[x_m,y_m,z_m]=[117-y_b,16+x_b,3+z_b]",
+            "floor_anchor_centers_machine_xy_mm": [
+              [
+                117.5,
+                15.5
+              ],
+              [
+                117.5,
+                66.5
+              ],
+              [
+                98.5,
+                15.5
+              ],
+              [
+                98.5,
+                66.5
+              ]
+            ],
+            "tray_axes_machine": "+x_tray=+y_machine; +y_tray=-x_machine; +z_tray=+z_machine",
+            "tray_footprint_machine_xy_closed_mm": [
+              [
+                96.0,
+                13.0
+              ],
+              [
+                120.0,
+                69.0
+              ]
+            ],
+            "tray_local_xyz_to_machine_xyz": "[x_m,y_m,z_m]=[120-y_t,13+x_t,z_t]",
+            "tray_origin_machine_mm": [
+              120.0,
+              13.0,
+              0.0
+            ]
+          },
+          "object": "NUCLEO-G031K8-A",
+          "origin_datum": "board-local lower-left underside [0,0,0] at the tray seat",
+          "origin_mm": [
+            117.0,
+            16.0,
+            3.0
+          ],
+          "retention_id": "P0-NUCLEO-PEEK-EDGE-TRAY-REV-B",
+          "rotation_axis": "machine +z through origin_mm",
+          "rotation_convention": "counterclockwise from machine +x toward machine +y when viewed from +z toward the floor",
+          "rotation_deg": 90,
+          "standoff_mm": 3.0
+        }
+      ],
+      "panel_holes": [
+        {
+          "center_mm": [
+            18.0,
+            19.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "west",
+          "id": "J_SRC_C1_A"
+        },
+        {
+          "center_mm": [
+            18.0,
+            45.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "west",
+          "id": "J_SRC_C2_A"
+        },
+        {
+          "center_mm": [
+            18.0,
+            19.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH0_A"
+        },
+        {
+          "center_mm": [
+            18.0,
+            45.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH2_A"
+        },
+        {
+          "center_mm": [
+            47.0,
+            20.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 28.0,
+          "diameter_mm": 20.42,
+          "face": "north",
+          "id": "GLAND-C-A"
+        }
+      ],
+      "part_number": "P0-CUSTOM-ENCLOSURE-124X82X36-REV-A"
+    },
+    {
+      "assembly": "P0-DUT-A",
+      "enclosure": "ENC-CARRIER-A",
+      "minimum_clear_envelope_mm": [
+        124.0,
+        82.0,
+        36.0
+      ],
+      "mounts": [
+        {
+          "object": "P0-CARRIER-SENSE-DUT-REV-B-A",
+          "origin_mm": [
+            4.0,
+            25.0,
+            8.0
+          ],
+          "retention_id": "P0-PEEK-M3-STANDOFF-REV-A",
+          "rotation_deg": 0,
+          "standoff_mm": 8.0
+        },
+        {
+          "object": "P0-ENV-SENSOR-REV-B-A",
+          "origin_mm": [
+            76.0,
+            29.0,
+            8.0
+          ],
+          "retention_id": "P0-PEEK-M2P5-STANDOFF-REV-A",
+          "rotation_deg": 0,
+          "standoff_mm": 8.0
+        }
+      ],
+      "panel_holes": [
+        {
+          "center_mm": [
+            18.0,
+            19.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH1_A"
+        },
+        {
+          "center_mm": [
+            18.0,
+            45.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH3_A"
+        },
+        {
+          "center_mm": [
+            47.0,
+            20.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 28.0,
+          "diameter_mm": 20.42,
+          "face": "south",
+          "id": "GLAND-R-A"
+        },
+        {
+          "center_mm": [
+            94.0,
+            68.0
+          ],
+          "diameter_mm": 4.2,
+          "face": "floor",
+          "id": "AGND-STAR-A",
+          "insulated_from_enclosure": true
+        }
+      ],
+      "part_number": "P0-CUSTOM-ENCLOSURE-124X82X36-REV-A"
+    },
+    {
+      "assembly": "P0-DETECTOR-B",
+      "enclosure": "ENC-CONTROL-B",
+      "minimum_clear_envelope_mm": [
+        124.0,
+        82.0,
+        36.0
+      ],
+      "mounts": [
+        {
+          "object": "P0-SOURCE-OFF-CONTROL-REV-B-B",
+          "origin_mm": [
+            4.0,
+            9.0,
+            6.0
+          ],
+          "retention_id": "P0-PEEK-M3-STANDOFF-REV-A",
+          "rotation_deg": 0,
+          "standoff_mm": 6.0
+        },
+        {
+          "local_to_machine_transform": {
+            "board_local_xyz_to_machine_xyz": "[x_m,y_m,z_m]=[117-y_b,16+x_b,3+z_b]",
+            "floor_anchor_centers_machine_xy_mm": [
+              [
+                117.5,
+                15.5
+              ],
+              [
+                117.5,
+                66.5
+              ],
+              [
+                98.5,
+                15.5
+              ],
+              [
+                98.5,
+                66.5
+              ]
+            ],
+            "tray_axes_machine": "+x_tray=+y_machine; +y_tray=-x_machine; +z_tray=+z_machine",
+            "tray_footprint_machine_xy_closed_mm": [
+              [
+                96.0,
+                13.0
+              ],
+              [
+                120.0,
+                69.0
+              ]
+            ],
+            "tray_local_xyz_to_machine_xyz": "[x_m,y_m,z_m]=[120-y_t,13+x_t,z_t]",
+            "tray_origin_machine_mm": [
+              120.0,
+              13.0,
+              0.0
+            ]
+          },
+          "object": "NUCLEO-G031K8-B",
+          "origin_datum": "board-local lower-left underside [0,0,0] at the tray seat",
+          "origin_mm": [
+            117.0,
+            16.0,
+            3.0
+          ],
+          "retention_id": "P0-NUCLEO-PEEK-EDGE-TRAY-REV-B",
+          "rotation_axis": "machine +z through origin_mm",
+          "rotation_convention": "counterclockwise from machine +x toward machine +y when viewed from +z toward the floor",
+          "rotation_deg": 90,
+          "standoff_mm": 3.0
+        }
+      ],
+      "panel_holes": [
+        {
+          "center_mm": [
+            18.0,
+            19.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "west",
+          "id": "J_SRC_C1_B"
+        },
+        {
+          "center_mm": [
+            18.0,
+            45.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "west",
+          "id": "J_SRC_C2_B"
+        },
+        {
+          "center_mm": [
+            18.0,
+            19.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH0_B"
+        },
+        {
+          "center_mm": [
+            18.0,
+            45.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH2_B"
+        },
+        {
+          "center_mm": [
+            47.0,
+            20.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 28.0,
+          "diameter_mm": 20.42,
+          "face": "north",
+          "id": "GLAND-C-B"
+        }
+      ],
+      "part_number": "P0-CUSTOM-ENCLOSURE-124X82X36-REV-A"
+    },
+    {
+      "assembly": "P0-DETECTOR-B",
+      "enclosure": "ENC-CARRIER-B",
+      "minimum_clear_envelope_mm": [
+        124.0,
+        82.0,
+        36.0
+      ],
+      "mounts": [
+        {
+          "object": "P0-CARRIER-SENSE-DETECTOR_ONLY-REV-B-B",
+          "origin_mm": [
+            4.0,
+            25.0,
+            8.0
+          ],
+          "retention_id": "P0-PEEK-M3-STANDOFF-REV-A",
+          "rotation_deg": 0,
+          "standoff_mm": 8.0
+        },
+        {
+          "object": "P0-ENV-SENSOR-REV-B-B",
+          "origin_mm": [
+            76.0,
+            29.0,
+            8.0
+          ],
+          "retention_id": "P0-PEEK-M2P5-STANDOFF-REV-A",
+          "rotation_deg": 0,
+          "standoff_mm": 8.0
+        }
+      ],
+      "panel_holes": [
+        {
+          "center_mm": [
+            18.0,
+            19.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH1_B"
+        },
+        {
+          "center_mm": [
+            18.0,
+            45.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH3_B"
+        },
+        {
+          "center_mm": [
+            47.0,
+            20.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 28.0,
+          "diameter_mm": 20.42,
+          "face": "south",
+          "id": "GLAND-R-B"
+        },
+        {
+          "center_mm": [
+            94.0,
+            68.0
+          ],
+          "diameter_mm": 4.2,
+          "face": "floor",
+          "id": "AGND-STAR-B",
+          "insulated_from_enclosure": true
+        }
+      ],
+      "part_number": "P0-CUSTOM-ENCLOSURE-124X82X36-REV-A"
+    },
+    {
+      "assembly": "P0-DUMMY-C0-C",
+      "enclosure": "ENC-CONTROL-C",
+      "minimum_clear_envelope_mm": [
+        124.0,
+        82.0,
+        36.0
+      ],
+      "mounts": [
+        {
+          "object": "P0-SOURCE-OFF-CONTROL-REV-B-C",
+          "origin_mm": [
+            4.0,
+            9.0,
+            6.0
+          ],
+          "retention_id": "P0-PEEK-M3-STANDOFF-REV-A",
+          "rotation_deg": 0,
+          "standoff_mm": 6.0
+        },
+        {
+          "local_to_machine_transform": {
+            "board_local_xyz_to_machine_xyz": "[x_m,y_m,z_m]=[117-y_b,16+x_b,3+z_b]",
+            "floor_anchor_centers_machine_xy_mm": [
+              [
+                117.5,
+                15.5
+              ],
+              [
+                117.5,
+                66.5
+              ],
+              [
+                98.5,
+                15.5
+              ],
+              [
+                98.5,
+                66.5
+              ]
+            ],
+            "tray_axes_machine": "+x_tray=+y_machine; +y_tray=-x_machine; +z_tray=+z_machine",
+            "tray_footprint_machine_xy_closed_mm": [
+              [
+                96.0,
+                13.0
+              ],
+              [
+                120.0,
+                69.0
+              ]
+            ],
+            "tray_local_xyz_to_machine_xyz": "[x_m,y_m,z_m]=[120-y_t,13+x_t,z_t]",
+            "tray_origin_machine_mm": [
+              120.0,
+              13.0,
+              0.0
+            ]
+          },
+          "object": "NUCLEO-G031K8-C",
+          "origin_datum": "board-local lower-left underside [0,0,0] at the tray seat",
+          "origin_mm": [
+            117.0,
+            16.0,
+            3.0
+          ],
+          "retention_id": "P0-NUCLEO-PEEK-EDGE-TRAY-REV-B",
+          "rotation_axis": "machine +z through origin_mm",
+          "rotation_convention": "counterclockwise from machine +x toward machine +y when viewed from +z toward the floor",
+          "rotation_deg": 90,
+          "standoff_mm": 3.0
+        }
+      ],
+      "panel_holes": [
+        {
+          "center_mm": [
+            18.0,
+            19.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "west",
+          "id": "J_SRC_C1_C"
+        },
+        {
+          "center_mm": [
+            18.0,
+            45.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "west",
+          "id": "J_SRC_C2_C"
+        },
+        {
+          "center_mm": [
+            18.0,
+            19.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH0_C"
+        },
+        {
+          "center_mm": [
+            18.0,
+            45.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH2_C"
+        },
+        {
+          "center_mm": [
+            47.0,
+            20.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 28.0,
+          "diameter_mm": 20.42,
+          "face": "north",
+          "id": "GLAND-C-C"
+        }
+      ],
+      "part_number": "P0-CUSTOM-ENCLOSURE-124X82X36-REV-A"
+    },
+    {
+      "assembly": "P0-DUMMY-C0-C",
+      "enclosure": "ENC-CARRIER-C",
+      "minimum_clear_envelope_mm": [
+        124.0,
+        82.0,
+        36.0
+      ],
+      "mounts": [
+        {
+          "object": "P0-CARRIER-SENSE-DUMMY_C0-REV-B-C",
+          "origin_mm": [
+            4.0,
+            25.0,
+            8.0
+          ],
+          "retention_id": "P0-PEEK-M3-STANDOFF-REV-A",
+          "rotation_deg": 0,
+          "standoff_mm": 8.0
+        },
+        {
+          "object": "P0-ENV-SENSOR-REV-B-C",
+          "origin_mm": [
+            76.0,
+            29.0,
+            8.0
+          ],
+          "retention_id": "P0-PEEK-M2P5-STANDOFF-REV-A",
+          "rotation_deg": 0,
+          "standoff_mm": 8.0
+        }
+      ],
+      "panel_holes": [
+        {
+          "center_mm": [
+            18.0,
+            19.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH1_C"
+        },
+        {
+          "center_mm": [
+            18.0,
+            45.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 20.0,
+          "diameter_mm": 12.7,
+          "face": "east",
+          "id": "J_CH3_C"
+        },
+        {
+          "center_mm": [
+            47.0,
+            20.0
+          ],
+          "counterbore_depth_mm": 5.0,
+          "counterbore_diameter_mm": 28.0,
+          "diameter_mm": 20.42,
+          "face": "south",
+          "id": "GLAND-R-C"
+        },
+        {
+          "center_mm": [
+            94.0,
+            68.0
+          ],
+          "diameter_mm": 4.2,
+          "face": "floor",
+          "id": "AGND-STAR-C",
+          "insulated_from_enclosure": true
+        }
+      ],
+      "part_number": "P0-CUSTOM-ENCLOSURE-124X82X36-REV-A"
+    }
+  ],
+  "fabrication_authority": "NONE; coordinates are a reviewed prospective release only",
+  "harness": {
+    "finished_length_mm": 150.0,
+    "gland_hole_mm": 20.42,
+    "gland_hole_tolerance_mm": 0.1,
+    "length_tolerance_mm": 2.0,
+    "no_connector_or_splice": true
+  },
+  "mechanical_clearance": {
+    "board_to_board_mm_min": 4.0,
+    "board_to_lid_mm_min": 5.0,
+    "board_to_wall_mm_min": 4.0,
+    "coax_bend_radius_mm_min": 15.0,
+    "gland_to_board_mm_min": 8.0
+  },
+  "schema": "p0.pcb-fabrication-release.v1",
+  "status": "REVIEW_CANDIDATE__NOT_AUTHORIZED_FOR_FABRICATION"
+}

@@ -1,0 +1,16 @@
+{
+  "accepted": 0,
+  "accepted_examples": [],
+  "candidate_root": "27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247",
+  "class_counts": {
+    "delete_dict_key": 9485,
+    "delete_list_item": 2985,
+    "mutate_scalar": 10289,
+    "text_line": 9926
+  },
+  "evidence_class": "ROOT_BINDING_TAMPER_DETECTION_ONLY__NOT_SEMANTIC_VALIDATION",
+  "mutations_rejected": 32685,
+  "mutations_total": 32685,
+  "schema": "p0.build-readiness-mutation-results.v1",
+  "status": "PASS"
+}

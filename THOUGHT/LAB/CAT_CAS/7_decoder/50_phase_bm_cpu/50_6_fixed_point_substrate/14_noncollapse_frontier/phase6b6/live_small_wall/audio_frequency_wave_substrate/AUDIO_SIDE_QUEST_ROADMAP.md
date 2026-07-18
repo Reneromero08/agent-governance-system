@@ -1,7 +1,8 @@
 # CAT_CAS Audio-Frequency Wave Substrate Side Quest Roadmap
 
-**Status:** `ACTIVE_PARALLEL_LANE__PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_FROZEN`<br>
-**Roadmap version:** `1.7`<br>
+**Status:** `ACTIVE_PARALLEL_LANE__P0_BUILD_READINESS_BLOCKED`<br>
+**Roadmap version:** `1.9`<br>
+**P0 authority:** `AUTHORIZE P0 BUILD-READINESS ONLY`<br>
 **Branch:** `codex/audio-frequency-wave-substrate`<br>
 **Base main commit:** `32b5af119a03bc48bb00f279e6cc0014406147ad`<br>
 **Frozen offline foundation commit:** `f028dfd292d2dd0fd11380459417d5b60f936ee3`<br>
@@ -428,32 +429,41 @@ The explicitly selected successor is:
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_AND_MEASUREMENT_PACKET
 ```
 
-It freezes one non-executing mechanical carrier/access architecture:
+It records one non-executing mechanical carrier/access architecture and a
+separate build-readiness candidate; the latter is not frozen:
 
 ```text
 preferred:
-    hermetic electrode-addressed 32.768 kHz quartz tuning-fork mode
+    Epson FC-135 Q13FC1350000401 electrode-addressed 32.768 kHz quartz tuning-fork mode
 
 fallback:
     localized external-drive PZT/brass diaphragm mode near 6.3 kHz
 
 source-off:
-    phase-synchronous analog gate plus witnessed fail-safe guarded relay barrier
+    calibrated-f_ref SIGLENT SDG1032X through ADG1419 gate; K1/K2 release and
+    stabilize before K3 may guard; auxiliary CH2 timing does not prove the
+    actual signal poles, so physical source-disconnect authority remains blocked
+
+acquisition:
+    Spectrum DN2.592-04 four simultaneous true-differential paths; canonical 4 x 3,101,000 signed-int16 raw record
+
+build-readiness candidate:
+    revised complete-fixture topology, derived BOM, coordinate release, continuous dual-tone phase gauge, source-off witness, analyzer suites, and root-bound validator are ready for exact-byte independent review
 
 claim ceiling:
-    NON_EXECUTING_PHYSICAL_PHASE_CARRIER_ARCHITECTURE_ONLY
+    NON_EXECUTING_P0_BUILD_READINESS_ONLY
 ```
 
 It does not establish physical resonance, post-source persistence, a pi relation,
 physical computing, restoration, silicon operation, bit replacement, or a Wall crossing.
 
-The next exact boundary is:
+The still-unreached next authority boundary is:
 
 ```text
-USER_AUTHORITY_FOR_P0_BUILD_PURCHASE_OR_PHYSICAL_EXECUTION
+USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD
 ```
 
-The lane stops before that boundary. No predecessor package, `main`, Family 10h
+The lane remains blocked before that boundary by the missing per-event actual signal-pole witness or exact force-guided-contact guarantee. No predecessor package, `main`, Family 10h
 evidence, `SMALL_WALL_STATE.md`, hardware, target, or preserved stash is touched.
 
 ---
@@ -471,5 +481,6 @@ PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 SMALL_WALL_CROSSED_NOT_PROMOTED
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_AND_MEASUREMENT_PACKET
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
-USER_AUTHORITY_FOR_P0_BUILD_PURCHASE_OR_PHYSICAL_EXECUTION
+P0_BUILD_READINESS_BLOCKED
+USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD
 ```

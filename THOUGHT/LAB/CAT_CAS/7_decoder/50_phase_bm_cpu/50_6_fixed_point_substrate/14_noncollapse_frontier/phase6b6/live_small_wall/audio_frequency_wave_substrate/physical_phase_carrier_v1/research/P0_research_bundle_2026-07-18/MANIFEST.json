@@ -1,0 +1,359 @@
+{
+  "bundle_version": "1.0.0",
+  "created_utc_date": "2026-07-18",
+  "record_count": 35,
+  "records": [
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ADG1419.pdf",
+      "download_mode": "direct_pdf",
+      "id": "ADG1419_REV_A",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "ADI_ADG1419_Rev_A.pdf",
+      "official_product_page": "https://www.analog.com/en/products/adg1419.html"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ADR4520_4525_4530_4533_4540_4550.pdf",
+      "download_mode": "direct_pdf",
+      "id": "ADR45XX_REV_G",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "ADI_ADR45XX_Rev_G.pdf",
+      "official_product_page": "https://www.analog.com/en/products/adr4533.html"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/ADuM140D_140E_141D_141E_142D_142E.pdf",
+      "download_mode": "direct_pdf",
+      "id": "ADUM140D_REV_K",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "ADI_ADuM140D_Family_Rev_K.pdf",
+      "official_product_page": "https://www.analog.com/en/products/adum140d.html"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/adxl354_adxl355.pdf",
+      "download_mode": "direct_pdf",
+      "id": "ADXL354_REV_D",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "ADI_ADXL354_ADXL355_Rev_D.pdf",
+      "official_product_page": "https://www.analog.com/en/products/adxl354.html"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://download.epsondevice.com/td/pdf/td_xtal_32khz/FC-135_Q13FC13500004_en.pdf",
+      "download_mode": "direct_pdf",
+      "id": "EPSON_FC135",
+      "legacy_expected_bytes": 161924,
+      "legacy_expected_sha256": "7906f6bce8e15c8e4c570e31969ec27c1f4880917e28160529e898a0cbbf48b9",
+      "local_filename": "EPSON_FC135_Q13FC13500004_en.pdf",
+      "official_product_page": "https://www.epsondevice.com/crystal/en/products/crystal-unit/fc135.html"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
+      "id": "KEMET_C0G_CURRENT",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "KEMET_C0805C103J5GACTU_Product_Data.pdf",
+      "official_product_page": "https://www.yageo.com/en/Chart/Download/pdf/C0805C103J5GACTU"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
+      "id": "LITTELFUSE_0467_CURRENT",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "LITTELFUSE_0467_500NR_Datasheet.pdf",
+      "official_product_page": "https://www.littelfuse.com/products/fuses-overcurrent-protection/fuses/surface-mount-fuses/thin-film-chip-fuses/467/0467-500"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
+      "id": "MURATA_GJM_CURRENT",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "MURATA_GJM1555C1H1R0BB01D_Product_Data.pdf",
+      "official_product_page": "https://www.murata.com/en-us/products/productdetail?partno=GJM1555C1H1R0BB01D"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
+      "id": "MURATA_GRM_CURRENT",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "MURATA_GRM21BR71C104KA01L_Product_Data.pdf",
+      "official_product_page": "https://www.murata.com/en-us/products/productdetail?partno=GRM21BR71C104KA01L"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
+      "id": "MURATA_MEV1_CURRENT",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "MURATA_MEV1D0505SC_Datasheet.pdf",
+      "official_product_page": "https://www.murata.com/en-us/products/productdetail?partno=MEV1D0505SC"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://assets.nexperia.com/documents/data-sheet/1N4148W.pdf",
+      "download_mode": "direct_pdf",
+      "id": "NEXPERIA_1N4148",
+      "legacy_expected_bytes": 16777,
+      "legacy_expected_sha256": "13f368ed2f370fe0a613fe1993183cce06717202bcd6a96b912bde017f5cea0e",
+      "local_filename": "NEXPERIA_1N4148W.pdf",
+      "official_product_page": "https://www.nexperia.com/product/1N4148W"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://assets.nexperia.com/documents/data-sheet/2N7002PW.pdf",
+      "download_mode": "direct_pdf",
+      "id": "NEXPERIA_2N7002",
+      "legacy_expected_bytes": 284517,
+      "legacy_expected_sha256": "3ef49e87f0304160e534bb2750066bf596155b7d42578f3bc40a98955545e77e",
+      "local_filename": "NEXPERIA_2N7002PW.pdf",
+      "official_product_page": "https://www.nexperia.com/product/2N7002PW"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://assets.nexperia.com/documents/data-sheet/BZT52H_SER.pdf",
+      "download_mode": "direct_pdf",
+      "id": "NEXPERIA_BZT52",
+      "legacy_expected_bytes": 336144,
+      "legacy_expected_sha256": "a5e54de45bdf1af712c2d9fdfb0fd092804cd83b26eb66e3656b12dea0c8b592",
+      "local_filename": "NEXPERIA_BZT52H_SER.pdf",
+      "official_product_page": "https://www.nexperia.com/product/BZT52H-C12"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
+      "id": "OMRON_G6K_2026_06_01",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "OMRON_G6K_K106-E1_2026-06-01.pdf",
+      "official_product_page": "https://components.omron.com/us-en/products/relays/G6K"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://www.ti.com/lit/ds/symlink/opa810.pdf",
+      "download_mode": "direct_pdf",
+      "id": "OPA810",
+      "legacy_expected_bytes": 3406332,
+      "legacy_expected_sha256": "74c61ac238989c94c1cf0d70da41bff6e167a590f86e06bae7cdd734d8fd26fa",
+      "local_filename": "TI_OPA810_SBOS799E.pdf",
+      "official_product_page": "https://www.ti.com/product/OPA810"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://sensirion.com/media/documents/33FD6951/67EB9032/HT_DS_Datasheet_SHT4x_5.pdf",
+      "download_mode": "direct_pdf",
+      "id": "SHT4X_2025",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "SENSIRION_SHT4x_v7.1_March_2025.pdf",
+      "official_product_page": "https://sensirion.com/products/catalog/SHT45"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
+      "id": "SIGLENT_DATASHEET",
+      "legacy_expected_bytes": 2572702,
+      "legacy_expected_sha256": "ca889ea73c85de7aef40d1faf2e85212ea6ed1d16435ae17c279a858a1d99d3a",
+      "local_filename": "SIGLENT_SDG1000X_Datasheet.pdf",
+      "official_product_page": "https://siglentna.com/SDG1000X/"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://int.siglent.com/upload_file/user/SDG1000X_UserManual_UM0201X-E02D.pdf",
+      "download_mode": "direct_pdf",
+      "id": "SIGLENT_MANUAL",
+      "legacy_expected_bytes": 2930139,
+      "legacy_expected_sha256": "11c325f98fea514659be9790a001e90e445119584e31fd8d796b33e92d6e4bed",
+      "local_filename": "SIGLENT_SDG1000X_UserManual_UM0201X-E02D.pdf",
+      "official_product_page": "https://siglentna.com/SDG1000X/"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://int.siglent.com/upload_file/user/SDG_ProgrammingGuide_PG02-E04D.pdf",
+      "download_mode": "direct_pdf",
+      "id": "SIGLENT_PROGRAMMING",
+      "legacy_expected_bytes": 4240871,
+      "legacy_expected_sha256": "a27c841ef10ebeba8c437be88933079b358d80d55d20b0d3bbf032cbc8b7125d",
+      "local_filename": "SIGLENT_SDG_ProgrammingGuide_PG02-E04D.pdf",
+      "official_product_page": "https://siglentna.com/SDG1000X/"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://spectrum-instrumentation.com/dl/dn2_59x_datasheet_english.pdf",
+      "download_mode": "direct_pdf",
+      "id": "SPECTRUM_DATASHEET",
+      "legacy_expected_bytes": 1060774,
+      "legacy_expected_sha256": "5bba0c74b950ac27e447bb25df70973ce19ff8a7a3e4d784378e25a9407d8925",
+      "local_filename": "SPECTRUM_DN2_59x_Datasheet_English.pdf",
+      "official_product_page": "https://spectrum-instrumentation.com/products/details/DN2592-04.php"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://spectrum-instrumentation.com/dl/hardware_manual_dn2_59x_english.pdf",
+      "download_mode": "direct_pdf",
+      "id": "SPECTRUM_MANUAL",
+      "legacy_expected_bytes": 13171754,
+      "legacy_expected_sha256": "0cef0929de585c056ecc7605c570ba05c77b0f4fc6c414e393a2c1e578f6ca05",
+      "local_filename": "SPECTRUM_DN_59x_Hardware_Manual_English.pdf",
+      "official_product_page": "https://spectrum-instrumentation.com/products/details/DN2592-04.php"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://www.st.com/resource/en/user_manual/um2591-stm32g0-nucleo32-board-mb1455-stmicroelectronics.pdf",
+      "download_mode": "direct_pdf",
+      "id": "ST_UM2591_REV2",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "ST_UM2591_Rev2_April_2026.pdf",
+      "official_product_page": "https://www.st.com/en/evaluation-tools/nucleo-g031k8.html"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://www.vishay.com/docs/68002/crhv.pdf",
+      "download_mode": "direct_pdf",
+      "id": "VISHAY_CRHV",
+      "legacy_expected_bytes": 117230,
+      "legacy_expected_sha256": "8826283500cc095ea3ba24dcf3080bd9072ec90afa8cf7487d68b99bd11b8d6b",
+      "local_filename": "VISHAY_CRHV_68002.pdf",
+      "official_product_page": "https://www.vishay.com/en/product/68002/"
+    },
+    {
+      "collection": "core_component_document",
+      "direct_download_url": "https://www.vishay.com/docs/31006/tnpw_e3.pdf",
+      "download_mode": "direct_pdf",
+      "id": "VISHAY_TNPW",
+      "legacy_expected_bytes": 153883,
+      "legacy_expected_sha256": "42309eb5c95365801d46cbfdc020fb9171d756f5e9015b35a191b35d043890f9",
+      "local_filename": "VISHAY_TNPW_E3_31006.pdf",
+      "official_product_page": "https://www.vishay.com/en/product/28758/"
+    },
+    {
+      "collection": "design_resource",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
+      "id": "ST_NUCLEO_G031K8_D01_RESOURCES",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "ST_NUCLEO_G031K8_D01_Resources.url",
+      "official_product_page": "https://www.st.com/en/evaluation-tools/nucleo-g031k8.html"
+    },
+    {
+      "collection": "scientific_background",
+      "direct_download_url": "https://arxiv.org/pdf/1109.4705",
+      "download_mode": "direct_pdf",
+      "id": "GHZ_OPTOMECH_AIR_2011",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "PAPER_GHz_Optomechanical_Resonators_1109.4705.pdf",
+      "official_product_page": "https://arxiv.org/abs/1109.4705"
+    },
+    {
+      "collection": "scientific_background",
+      "direct_download_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8347380/pdf/sensors-21-05056.pdf",
+      "download_mode": "direct_pdf",
+      "id": "QTF_PASSIVE_ELECTRICAL_DAMPING_2021",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "PAPER_QTF_Passive_Electrical_Damping_PMC8347380.pdf",
+      "official_product_page": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8347380/"
+    },
+    {
+      "collection": "scientific_background",
+      "direct_download_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6960650/pdf/sensors-20-00206.pdf",
+      "download_mode": "direct_pdf",
+      "id": "QTF_RESONANCE_TRACKING_2019",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "PAPER_QTF_Resonance_Tracking_PMC6960650.pdf",
+      "official_product_page": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6960650/"
+    },
+    {
+      "collection": "scientific_background",
+      "direct_download_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4279570/pdf/sensors-14-24529.pdf",
+      "download_mode": "direct_pdf",
+      "id": "QTF_VOLTAGE_INDUCED_SHIFT_2014",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "PAPER_QTF_Voltage_Induced_Frequency_Shift_PMC4279570.pdf",
+      "official_product_page": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4279570/"
+    },
+    {
+      "collection": "scientific_background",
+      "direct_download_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10051664/pdf/sensors-23-03005.pdf",
+      "download_mode": "direct_pdf",
+      "id": "QTF_VOLTAGE_MODE_READOUT_2023",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "PAPER_QTF_Voltage_Mode_Readout_PMC10051664.pdf",
+      "official_product_page": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10051664/"
+    },
+    {
+      "collection": "scientific_background",
+      "direct_download_url": null,
+      "download_mode": "citation_or_paywalled",
+      "id": "SILICON_PHONONIC_SLAB_2011",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "CITATION_Silicon_Phononic_Slab_2011.url",
+      "official_product_page": "https://doi.org/10.1016/j.sna.2011.03.014"
+    },
+    {
+      "collection": "scientific_background",
+      "direct_download_url": "https://arxiv.org/pdf/2406.14660",
+      "download_mode": "direct_pdf",
+      "id": "THIN_FILM_QUARTZ_PHONONIC_2024",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "PAPER_Thin_Film_Quartz_Phononic_2406.14660.pdf",
+      "official_product_page": "https://arxiv.org/abs/2406.14660"
+    },
+    {
+      "collection": "scientific_background",
+      "direct_download_url": "https://arxiv.org/pdf/2606.00681",
+      "download_mode": "direct_pdf",
+      "id": "UNIFIED_QTF_THEORY_2026",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "PAPER_Unified_Theory_QTF_2606.00681.pdf",
+      "official_product_page": "https://arxiv.org/abs/2606.00681"
+    },
+    {
+      "collection": "simulation_resource",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
+      "id": "ADG1419_SIMULATION_MODELS",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "ADG1419_Models_manual_download.url",
+      "official_product_page": "https://www.analog.com/en/products/adg1419.html"
+    },
+    {
+      "collection": "simulation_resource",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
+      "id": "OPA810_SIMULATION_MODELS",
+      "legacy_expected_bytes": null,
+      "legacy_expected_sha256": null,
+      "local_filename": "OPA810_Models_manual_download.url",
+      "official_product_page": "https://www.ti.com/product/OPA810"
+    }
+  ],
+  "schema": "p0.research-bundle-manifest.v1",
+  "scope": "Non-executing research and document-custody bundle for the P0 physical phase-carrier work-in-progress."
+}

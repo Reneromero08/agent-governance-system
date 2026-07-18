@@ -1,6 +1,6 @@
 # P0 Measurement and Source-Off Plan
 
-**Status:** `FROZEN_ARCHITECTURE__NOT_EXECUTED`<br>
+**Status:** `P0_BUILD_READINESS_BLOCKED__NOT_EXECUTED`<br>
 **Carrier:** hermetic 32.768 kHz quartz tuning-fork mechanical mode<br>
 **Source-off topology:** phase gate plus witnessed guarded relay barrier<br>
 **Primary observable:** `z(t) = I(t) + iQ(t)`<br>
@@ -9,9 +9,9 @@
 ## 1. Frozen measurement chain
 
 ```text
-phase-coherent low-voltage sine source in the source domain
-  -> 100 kOhm minimum current-limiting resistor
-  -> CH0 source-side monitor
+phase-coherent low-voltage sine source C1 in the source domain
+  -> passive 100 kOhm CH0 source-monitor branch at C1_IN
+  -> separate 100 kOhm minimum current-limiting resistor
   -> ADG1419BRMZ 8-lead MSOP SPDT at +/-5 V, EN not present,
      switched only through IN
        DRIVE: guarded relay input
@@ -22,7 +22,7 @@ phase-coherent low-voltage sine source in the source domain
   -> electrode A of the two-terminal quartz tuning fork
 
 electrode B -> single carrier-side analog-reference bond
-electrodes A/B -> fixed >=100 MOhm, <=3.0 pF differential voltage input
+electrodes A/B -> as-built Rin,U95 >=100 MOhm, Cin,U95 <=4.00 pF voltage input
                   plus fixed >=100 MOhm common-mode bias return
                -> CH1 mechanical-sense voltage
 
@@ -40,9 +40,12 @@ state: both series contacts open and the midpoint terminates on the source side.
 Electrode A remains connected only to the characterized high-impedance sense
 load; electrode B remains at the single carrier-side reference bond.
 
-The analog phase gate gives deterministic preparation timing. The guarded relay
-barrier gives an auditable physical isolation state. Neither alone is
-sufficient for P0.
+The analog phase gate gives deterministic preparation timing. CH2 gives an
+auditable auxiliary-contact timing state, but its spare contacts do not prove
+the actual signal poles opened. Neither alone is sufficient for P0. A physical
+source-disconnect claim remains blocked until a separately reviewed per-event
+actual-signal-path witness or an exact force-guided-contact guarantee is bound
+to the selected relay and its failure modes.
 
 CH2 uses four weighted resistors to encode the gate logic state and the three
 independent spare relay contacts into 16 prospectively calibrated voltage
@@ -59,14 +62,17 @@ standard deviation `sigma_ch2`, the only accepted band is
 `abs(v-mu_c) <= 3*sigma_ch2`; bands must be disjoint and adjacent centroids
 must remain at least `10*sigma_ch2` apart. Values outside all bands reject.
 
-Lawful stable states are DRIVE `c=7` and OFF `c=8`. Any of the other fourteen
-decoded codes is permitted only during the transition interval from the first
-sample not decoded as 7 through the last sample before 1,000 consecutive
-samples decoded as 8. `t_gate` is the first sample not decoded as DRIVE after
-the command. `t_contact` is the timestamp of the 1,000th sample in that
-OFF-stability run; the extra 10 ms guard begins only then. Hysteresis and
-nearest-code filling are forbidden. Re-entry
-to any non-8 code after the stable run kills the arm.
+Lawful stable states are DRIVE `c=7`, SERIES-OPEN/K3-HELD `c=0`, and guarded
+OFF `c=8`. After 250 samples of `c=6`, K1/K2 may transition only through
+`{0,2,4,6}` while K3 remains energized. Code 0 must then remain stable for
+1,000 consecutive samples before K3 is permitted to release. K3 transition may
+use only `{0,8}`, after which code 8 must remain stable for 1,000 consecutive
+samples. `t_gate` is the first sample not decoded as DRIVE after the command;
+`t_series_open` and `t_contact` are the 1,000th samples of the code-0 and code-8
+stability runs. The full ordered transition must finish within 14,500 samples.
+The extra 10 ms guard begins only at `t_contact`. Hysteresis and nearest-code
+filling are forbidden. Re-entry to any non-8 code after the final stable run
+kills the arm.
 
 The preferred relay reference class is Omron G6K-2F-Y: maximum operate time
 3 ms, maximum release time 3 ms, maximum bounce time 3 ms, and minimum
@@ -77,21 +83,35 @@ full-temperature transition maximum is 560 ns and typical on resistance is
 4.5 Ohm. Nonzero charge injection, off capacitance, and the loaded transition
 must be measured as disturbances rather than inferred from the unloaded bound.
 
-All source/control grounds, shields, and returns are frozen as follows: one
-source-output return meets the carrier-side analog reference at one star bond;
-there is no second conductive return. Relay coils and gate logic use isolated
-control power; coil suppression closes only in the control domain; the
-digitizer uses differential inputs and does not add a ground bond. Shield
-drains terminate at the carrier-side enclosure only. A continuity survey and
-injection scan must prove this netlist before any later execution. CH2 records
-contact witnesses; no unallocated midpoint analog monitor is claimed.
+All source/control grounds, shields, and returns are frozen as follows: C1 is
+the only intentional low-impedance source return and one RG-178 shield is the
+only intentional low-impedance `AGND_EXPORT` to `AGND_STAR` bond. Relay coils
+and gate logic use isolated control power; coil suppression closes only in the
+control domain. The digitizer inputs are true differential but are not
+galvanically isolated. Their positive-to-ground, negative-to-ground, and
+differential admittances are calibrated parasitic return paths included in the
+loaded model; they are not claimed to vanish or to provide isolation. A
+continuity survey and injection scan must prove this netlist before any later
+execution. CH2 records contact witnesses; no unallocated midpoint analog
+monitor is claimed.
+
+C2 is not an intended carrier drive, but it is not topologically zero-coupled.
+The passive CH0 summing network provides a bounded linear path from C2 through
+`R_MON_C2`, the monitor node, `R_MON_C1`, finite C1 source impedance, and
+`R_LIMIT` toward the carrier while the source path is in DRIVE. The complete
+device/circuit model and the resonator-removed/dummy controls must include and
+bound that path. No later result may rely on the false shorthand that C2
+"never drives" or is perfectly isolated from the carrier.
 
 Official sources:
 
 - [Analog Devices ADG1419 datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/adg1419.pdf)
 - [Omron G6K relay datasheet](https://components.omron.com/system/files/2026-06/datasheet_pdf/K106-E1.pdf)
 
-No part has been purchased, wired, powered, or contacted.
+No part has been purchased, wired, powered, or physically contacted. No human
+vendor outreach, cart, stock check, or procurement contact occurred. Automated
+public-source HTTP retrieval attempts are disclosed separately in the research
+custody snapshot and private ignored receipt.
 
 ## 2. Frozen timing and acquisition envelope
 
@@ -108,56 +128,68 @@ No part has been purchased, wired, powered, or contacted.
 | Pre-command record | exactly 1,101,000 samples = 1.101000 s |
 | Post-command record | exactly 2,000,000 samples = 2.000000 s |
 | Preparation-onset requirement | observed onset index `n_prep >= 100,000` |
-| Preparation duration | exactly 32,768 drive cycles |
-| Preparation duration at nominal frequency | 1.000000 s |
-| Turn-on ramp | 8-cycle raised-cosine amplitude ramp |
-| Constant-amplitude interval | 32,760 cycles |
+| C1 source command | exactly 32,768 Hz, 0.400 Vpp, 0 V offset, `HIGH_Z` load mode, 50 Ohm physical output |
+| C2 gauge command | exactly 65,536 Hz, 0.100 Vpp, 0 V offset, zero phase, `HIGH_Z` load mode, 50 Ohm physical output |
+| Qualified preparation interval | exactly the 32,768 continuous C1 cycles immediately preceding `n_gate` |
+| Qualified preparation duration | 1.000000 s at nominal frequency |
+| Turn-on inside admitted record | none; both outputs are continuous and already stable before recording |
+| Constant-amplitude interval | entire record; the final 32,768 pre-gate cycles are the qualified preparation |
 | Turn-off ramp | none; source is physically routed away |
 | Arm phase offset | exactly 0 or pi |
 | Analog gate command-to-logic-edge calibration bound | <= 1.000 us; guard timing only |
 | Analog gate IN transition bound at +/-5 V | <= 0.560 us |
 | Relay command delay after analog gate | 0.250 ms |
-| Relay release plus bounce budget | <= 6.000 ms |
+| K1/K2 release plus bounce budget | <= 6.000 ms before the code-0 stability run |
+| K3 release plus bounce budget | <= 6.000 ms, commanded only after code 0 is stable for 1.000 ms |
+| Complete ordered contact transition | <= 14.500 ms from `t_gate` through the 1,000th code-8 sample |
 | Isolation guard | 10.000 ms after the last witnessed contact transition |
 | First admissible raw sample | first sample at or after the guard boundary |
 | Digitizer channel skew before correction | <= 0.100 us |
 | Residual CH0/CH1 phase-time skew after calibration | <= 0.020 us |
-| Trigger-to-sample uncertainty | <= 1 sample = 1.000 us |
+| Gate-witness sampling uncertainty | <= 1 sample = 1.000 us; not used as the phase gauge |
 | Voltage detector lower bandwidth bound | >= 327.68 kHz |
 | Voltage detector small-signal settling budget | <= 10.000 us |
 | Controller / driver data buffer in post-source path | none |
-| Temperature / RH record cadence | exactly 10 samples/s, master-trigger referenced |
+| Temperature / RH record cadence | exactly 10 samples/s, mapped to the raw sample counter by the frozen monotonic-clock mapping |
 | Primary temperature envelope | 20.00-30.00 C; matched-arm mean delta <= 0.20 C |
 | Primary RH envelope | 20.0-60.0 %RH; matched-arm mean delta <= 2.0 percentage points |
 | Primary CH3 acceleration | demeaned raw RMS <= 0.050 m/s^2; peak absolute <= 0.500 m/s^2 |
 | Matched-arm CH3 RMS delta | <= 0.010 m/s^2 |
 
-The record starts at least 100,000 samples before the witnessed 32,768-cycle
-preparation begins, contains the complete preparation, and continues for
-2,000,000 samples after the nominal source-off command. The digitizer therefore
-captures continuously across preparation and source-off. Trigger latency is
-recorded but is not the source-off time.
+The source is already continuously stable when the software-prearmed free-running
+record begins. The record contains at least 100,000 samples before the final
+qualified 32,768-cycle preparation interval, contains that complete interval,
+and continues for 2,000,000 samples after the nominal source-off command. The
+digitizer therefore captures continuously across preparation and source-off.
+There is no trigger cable. CH2 establishes the source-off event; CH0 establishes
+the phase gauge.
+
+CH0 must match the sample-level reconstructed C1+C2 waveform over every sample of
+the complete 1,000,000-sample qualified preparation interval with peak residual
+no greater than 5 percent of fitted C1 amplitude. This is independent of the
+post-gate whole-record reconstruction and contiguous persistence-segment checks.
 
 Define:
 
 ```text
 t_gate = observed CH2 analog-gate witness transition
-t_contact = latest observed stable K1/K2/K3 contact transition
+t_series_open = 1,000th stable code-0 sample while K3 remains energized
+t_contact = 1,000th stable code-8 sample after K3 is permitted to release
 t_iso = max(t_gate + 0.560 us, t_contact)
 t_admit = t_iso + 10.000 ms
 ```
 
 `t_gate` and `t_contact` are guard-boundary quantities, not the phase gauge.
 They are rounded conservatively to the next raw-sample time before adding the
-10.000 ms guard. Phase uses the continuous CH0/master-clock fit below, so the
+10.000 ms guard. Phase uses the continuous CH0 dual-tone gauge fit below, so the
 1 us witness sampling does not enter the half-turn phase estimate. The
 calibrated residual CH0/CH1 skew contributes at most 0.004118 rad at 32.768 kHz
 and is included in `u_phi`.
 
-If any contact witness is missing, contradictory, metastable, or changes after
-`t_admit`, the arm is killed. If `t_contact - t_gate > 7.250 ms` including the
-1,000-sample stability run, the arm is
-killed. A software command timestamp never substitutes for `t_iso`.
+If any contact witness is missing, contradictory, metastable, out of order, or
+changes after `t_admit`, the arm is killed. If `t_contact - t_gate > 14.500 ms`
+including both 1,000-sample stability runs, the arm is killed. A software
+command timestamp never substitutes for `t_iso`.
 
 ## 3. Real source-off law
 
@@ -166,19 +198,22 @@ The lawful post-source interval requires all of the following:
 1. CH0 proves the source remains present upstream or is terminated exactly as
    declared; it does not disappear into an unobserved software mute.
 2. The analog gate is in the OFF route to 50 Ohm.
-3. K1 and K2 are stably open.
-4. K3 is stably closed to its 50-Ohm guard termination.
+3. K1 and K2 auxiliary poles are stably open before K3 is allowed to release.
+4. K3's auxiliary pole is then stably in its deenergized guard state.
 5. No driver, coupling capacitor, active filter, transformer, or output buffer
    exists downstream of K2. The only connected CH1 load is the sealed
    high-impedance differential input, its protection, and its passive bias
    return.
 6. CH1 is within its linear range and its analog settling budget expired. Its
-   measured input admittance is `Rin >= 100 MOhm`, `Cin <= 3.0 pF`; coherent
+   measured input admittance is `Rin,U95 >= 100 MOhm`, `Cin,U95 <= 4.00 pF`; coherent
    detector-only response at `f_ref` is below `T_feed`, and detector-only
    impulse lifetime is <=10 us.
 7. The 10 ms guard expired after the final physical witness transition.
 8. Dummy-load and resonator-removed controls bound residual feedthrough under
    the frozen feedthrough law.
+9. A separately reviewed per-event actual-signal-path witness or exact
+   force-guided-contact guarantee proves the signal poles corresponding to
+   items 3 and 4. Auxiliary-contact code alone never satisfies this item.
 
 The loaded BVD model is the datasheet motional `R1-L1-C1` series branch in
 parallel with `C0`, `Rin`, `Cin`, the passive bias return, carrier-side cable
@@ -200,12 +235,14 @@ bounds.
 |---|---|---|
 | Intended phase offset | `delta = 0` | `delta = pi` |
 | Calibrated drive frequency | identical `f_ref` | identical `f_ref` |
-| Terminal amplitude | identical; <= 0.200 Vpp | identical; <= 0.200 Vpp |
-| Estimated motional power | <= 0.100 uW | <= 0.100 uW |
-| Estimated motional current | <= 2.000 uA rms | <= 2.000 uA rms |
-| Preparation cycles | 32,768 | 32,768 |
-| Turn-on ramp | 8-cycle raised cosine | same |
-| Constant interval | 32,760 cycles | same |
+| C1 source command | 0.400 Vpp, 0 V, `HIGH_Z` | identical |
+| C2 gauge command | 0.100 Vpp, 0 V, fixed zero phase | identical |
+| Carrier terminal planning bound | <= 0.164658 Vpp; hard cap <= 0.200 Vpp | identical |
+| Estimated motional power | planning <= 0.048415 uW; hard cap <= 0.100 uW | identical |
+| Estimated motional current | planning <= 0.831646 uA rms; hard cap <= 2.000 uA rms | identical |
+| Qualified preparation cycles | final 32,768 cycles of continuous source | identical |
+| Turn-on ramp inside record | none | none |
+| Constant interval | entire record | same |
 | Source-off schedule | frozen timing above | same |
 | Termination | analog 50 Ohm plus guarded relay | same |
 | Acquisition | same rate, range, channels, duration | same |
@@ -230,7 +267,7 @@ the individual bounds and the frozen matched-arm deltas above.
 Required negative preparations:
 
 ```text
-amplitude mismatch:  pi arm at 0.800 times calibrated amplitude
+amplitude mismatch:  pi arm C1 at 0.320 Vpp, exactly 0.800 times the frozen command
 frequency mismatch:  pi arm at f_ref + max(20 Hz, 20 calibrated linewidths)
 timing mismatch:     pi arm source-off 0.250 carrier cycle later
 wrong phase:         phase offset pi/2
@@ -244,39 +281,58 @@ The fixed random-phase set contains no runtime randomness.
 
 ### 5.1 Reference construction
 
-Calibration before primary acquisition freezes `f_ref`, a continuous master
-phase clock, and a hardware acquisition trigger at the master's positive-going
-zero crossing. Sample time is `t[n]=n/1,000,000` seconds from that trigger. The
-common gauge is independent of arm, source-off time, and measured CH0 phase:
+Calibration before primary acquisition freezes `f_ref`, the continuous C2
+phase-gauge method, channel skew, and the software-prearmed record-start law.
+There is no hardware trigger. Within each record, sample time is
+`t[n]=n/1,000,000` seconds from sample zero. First use exactly the final 100,000
+CH0 samples preceding `n_gate` to fit C1 and C2 jointly. Use the five-column
+design `X_joint=[cos(phi_index),-sin(phi_index),cos(2*phi_index),
+-sin(2*phi_index),1]`, solve one unweighted normal equation by Cholesky, and
+require rank 5 and `cond2(X_joint^T X_joint)<=1e8`. Let
+`beta=[a_1,b_1,a_2,b_2,c]`, `phi_1=atan2(b_1,a_1)`, and
+`phi_2=atan2(b_2,a_2)`. Form the two half-frequency candidates
+`wrap(phi_2/2)` and `wrap(phi_2/2+pi)`. Use `phi_1` to select the unique
+candidate minimizing `abs(wrap(phi_1-gauge-delta_command))`.
+This resolves the unavoidable half-angle branch without filenames or arm
+labels. Require the fitted C2/C1 amplitude ratio to lie in `[0.23,0.27]`.
+The record-local common gauge is then:
 
 ```text
-phi_master[n] = 2*pi*f_ref*t[n]
-r[n] = exp(i*phi_master[n])
+phi_index[n] = 2*pi*f_ref*t[n]
+r[n] = exp(i*phi_index[n])
+z_gauge[j] = z_index[j] * exp(-i*gauge)
 ```
 
 CH0 remains a monitor-only copy in the source domain even for zero-drive and
 resonator-removed controls. It never enters the carrier path downstream of the
-isolation barrier. Use exactly the final 100,000 CH0 samples preceding
-`n_gate`. With ascending-index binary64 sums, form
-`X[n]=[cos(phi_master[n]),-sin(phi_master[n]),1]`, solve the unweighted normal
-equations by Cholesky for `beta=[a,b,c]`, and require rank 3 and
-`cond2(X^T X)<=1e8`. Define `phi_drive=atan2(b,a)` and
-`e_drive=wrap(phi_drive-delta_command)`; `a^2+b^2` must be finite and positive.
+isolation barrier. All joint-fit sums are ascending-index binary64 sums.
+Define `phi_drive=phi_1` and
+`e_drive=wrap(phi_drive-gauge-delta_command)`; both tone-amplitude squares must
+be finite and positive.
 
-Drive-fit covariance is the Section 6 Newey-West sandwich with the same design,
-residuals, lag 7, and no finite-sample multiplier. With
-`g=[-b/(a^2+b^2),a/(a^2+b^2),0]`, set
-`u_fit=sqrt(g^T Cov(beta) g)` and
-`U95_drive=1.96*sqrt(u_fit^2+u_skew^2+u_drive_cal^2)`, where `u_skew` and
-`u_drive_cal` are sealed one-standard-uncertainty terms. Every arm requires
+Drive-fit covariance is the Section 6 Newey-West sandwich over the single
+five-column joint design and its joint residuals, with lag 7 and no
+finite-sample multiplier. Define
+`g_1=[-b_1/(a_1^2+b_1^2),a_1/(a_1^2+b_1^2),0,0,0]` and
+`g_2=[0,0,-b_2/(a_2^2+b_2^2),a_2/(a_2^2+b_2^2),0]`. The complete
+gauge-relative fit gradient is `g_e=g_1-0.5*g_2`; therefore
+`u_error_fit=sqrt(g_e^T Cov(beta) g_e)`. This explicitly includes the C1/C2
+cross-covariance as well as the half-C2 gauge-fit variance. Record
+`u_C1`, `u_C2`, `u_gauge=0.5*u_C2`, `Cov(phi_C1,phi_C2)`, and
+`u_error_fit` in each arm's result. Set
+`U95_drive=1.96*sqrt(u_error_fit^2+u_skew^2+u_drive_cal^2)`, where `u_skew` and
+`u_drive_cal` are sealed one-standard-uncertainty terms carried as exact source
+metadata fields `phase_skew_standard_uncertainty_rad` and
+`phase_drive_cal_standard_uncertainty_rad`. Every arm requires
 `abs(e_drive)+U95_drive<=0.010 rad`. The matched pair additionally requires
 `abs(wrap(e_drive_pi-e_drive_0))+U95_drive_pi+U95_drive_0<=0.010 rad`.
 Equality passes. Failure kills before CH1 metrics. The projection always uses
-`r[n]`, never an arm-fitted CH0 phase, so preparation error is measured rather
-than gauged away.
+the index reference and then applies the one record-local gauge rotation to all
+CH1 and control projections, so preparation error is measured before the
+rotation rather than silently fitted away.
 
-The timing-mismatch control delays source-off by exactly one quarter master
-cycle. Under an ideal steady locked response its master-relative phase is
+The timing-mismatch control delays source-off by exactly one quarter nominal
+carrier cycle. Under an ideal steady locked response its CH0-gauge-relative phase is
 expected to remain unchanged; the control measures termination/transient
 sensitivity and is categorically barred from matched evidence. No expected
 quarter-turn is asserted.
@@ -299,7 +355,7 @@ nonfinite input forbidden. For every 2,048-sample window:
 ```text
 w[k] = 0.5 - 0.5*cos(2*pi*k/2047), k = 0..2047
 W = diag(w[0], ..., w[2047])
-X[k] = [cos(phi_master[s_j+k]), -sin(phi_master[s_j+k]), 1]
+X[k] = [cos(phi_index[s_j+k]), -sin(phi_index[s_j+k]), 1]
 G = X^T W X; h = X^T W x
 beta = CholeskySolve(G, h), with sums accumulated in ascending k order
 I = beta[0]
@@ -330,7 +386,7 @@ NaN, infinity, failed rank/condition gate, missing samples, clipping, or nonmono
 ### 5.4 Noise and uncertainty
 
 The zero-drive, resonator-removed, and dummy-load controls use the identical
-projection and common master gauge. Within each control, use only windows
+projection and its record-local CH0 gauge. Within each control, use only windows
 `j=0,8,16,...` so noise windows do not overlap. For I and Q separately compute
 the MAD below and take the maximum across the three controls and the ADC
 quantization floor `q/sqrt(12)`:
@@ -363,7 +419,9 @@ discard a final incomplete block, recompute both arm fits and the relation
 metric after deleting each block, and set
 `SE_JK=sqrt((B-1)/B*sum((m_-b-mean(m_-b))^2))`. Require `B>=8`. If
 `C95_metric` is the prospectively sealed expanded calibration bound, define
-`U95_metric=sqrt((1.96*SE_JK)^2+C95_metric^2)`. No HAC term is added again.
+`U95_metric=sqrt((1.96*SE_JK)^2+C95_metric^2)`. `C95_metric` is an independent,
+prospectively sealed calibration field bound into the threshold hash; it may
+not be derived from `T_metric`. No HAC term is added again.
 For circular phase, jackknife the Cartesian mean unit vector, transform each
 delete-block vector with `atan2`, choose the unique representative within pi of
 the full-sample mean, and use the same formula; a zero resultant or an exact-pi
@@ -467,9 +525,19 @@ half-turn phase:
 
 feedthrough:
   epsilon_feed =
-    U95(rms(z_dummy_or_removed)) /
+    rms(z_dummy_or_removed) /
     min(rms(z_0), rms(z_pi))
 ```
+
+All three control traces are projected on the same post-event relative-start
+grid as the two relation arms. The analyzer intersects the exact retained arm
+indices and all control indices; positional pairing without equal indices is
+forbidden. `epsilon_feed` is the point-estimate RMS ratio above. For its
+expanded uncertainty, each delete-one-block replicate removes the same eight
+grid positions from both arms and all controls before recomputing the control
+RMS and arm denominator. `U95_feed` is the resulting jackknife term combined
+once with independently sealed `C95_feedthrough`. Acceptance uses the same law
+as every relation metric: `epsilon_feed + U95_feed <= T_feed`.
 
 If either denominator is zero, nonfinite, or below the admitted SNR floor, the
 metric rejects rather than returning zero.
@@ -625,6 +693,18 @@ gain, offset, units, sample count, precommand count, and export version.
 `[3101000,4]`, channel order CH0-CH3, no header or padding. Raw native bytes are
 write-once and SHA-256 bound before parsing or derivation.
 
+Build-readiness revision B adds a stricter analyzer boundary without claiming a
+proprietary parser: the DN2 SDK lossless-export mode must emit a headerless,
+sample-major, little-endian signed-int16 `[3101000,4]` payload of exactly
+24,808,000 bytes. That SDK export is the analyzer payload and its hashes/counts
+must be identical; any additional proprietary container remains immutable and
+separately hashed but is never parsed here. The adapter receipt binds its source
+hash, SDK/driver identity, export/payload hashes and counts, channel order,
+scaling and seven explicit no-transform assertions. `p0_scientific_analyzer.py`
+consumes only that canonical signed-int16 payload. The legacy `raw.f64le`
+projection remains a derived architecture-conformance artifact and is not
+authoritative analyzer input.
+
 `switch_state.u8` is the strict decode of CH2, one byte per raw sample with
 bit 0 analog-gate state, bits 1-3 K1/K2/K3 witness states, and bits 4-7 fixed
 zero. `reference.f64le` is little-endian binary64, frame-major `[3101000,2]`
@@ -635,13 +715,16 @@ fixed at start plus 1023.5 samples.
 Environment CSV columns are fixed:
 
 ```text
-nearest_raw_sample_index,utc_timestamp,temperature_C,rh_percent
+nearest_raw_sample_index,monotonic_ns,utc_timestamp,sensor_serial_hex,command_hex,temperature_ticks_hex,temperature_crc8_hex,rh_ticks_hex,rh_crc8_hex,temperature_C,rh_percent
 ```
 
 The CSV is UTF-8 without BOM, LF-terminated, unquoted, comma-delimited, with
-the exact header above. Integers are minimal unsigned decimal; timestamp grammar
-is fixed above; finite decimals use `-?(0|[1-9][0-9]*)(\.[0-9]+)?` and forbid
-negative zero. Rows are strictly increasing by raw index.
+the exact eleven-column header above. Integers are minimal unsigned decimal;
+timestamp grammar is fixed above; serial and raw-word fields are fixed-width
+lowercase hexadecimal; CRC-8 uses polynomial `0x31`, initial `0xff`, and
+big-endian word order. Finite decimals use
+`-?(0|[1-9][0-9]*)(\.[0-9]+)?` and forbid negative zero. Rows are strictly
+increasing by raw index, monotonic nanoseconds, and the exact 10 Hz cadence.
 
 The pre-acquisition calibration record freezes its own creation time, final thresholds, analysis
 source SHA-256, dependency lock SHA-256, schema hash, conformance-vector hash,
@@ -653,6 +736,13 @@ calibration bytes, including the sealed assignment hash. Only then may a later
 authorized acquisition begin. The post-acquisition raw manifest binds every
 raw byte and its signed raw-root receipt chains from the calibration receipt.
 Every rerun creates a new packet and may not overwrite an earlier byte.
+
+The dependency lock binds the full Python version and implementation, Python
+executable SHA-256, platform and architecture, byte order, NumPy version,
+NumPy distribution `RECORD` SHA-256, NumPy core-binary SHA-256, complete NumPy
+build/BLAS/LAPACK/SIMD configuration, and the frozen single-thread environment
+for OpenMP, OpenBLAS, MKL, NumExpr and vecLib. Byte-identical verification is
+valid only under that exact runtime identity.
 
 Immutability has three independently signed receipt stages. Before acquisition,
 the witness stores `<run_id>.calibration_root.json`. Before any parsing, it
@@ -752,7 +842,47 @@ Expected phase relation, expected metric, preferred arm, anticipated Q, and
 expected adjudication may not enter acquisition, filenames, metadata,
 preprocessing, or control flow.
 
-## 12. Current boundary
+## 12. Research dependency and unresolved device/circuit simulation
+
+The canonical repository-safe source dependency is
+`research/P0_research_bundle_2026-07-18`, imported from commit
+`cb53976612cbe83bec82df826a9889418f7e0b89`. Its manifest contains exactly 35
+records. Candidate-bound metadata records 11 private locally hash-verified
+captures, 6 URL-plus-legacy-hash records without local bytes, and 18 manual
+captures. PDFs, HTML, vendor models, receipts, and generated archives remain
+ignored and uncommitted. Private refresh uses the repository virtual
+environment to run `scripts/download_sources.py --all`,
+`scripts/verify_downloads.py`, and `scripts/build_custody_snapshot.py` from the
+bundle directory.
+
+The existing synthetic reference remains a valid signal-level analyzer test:
+it directly constructs deterministic ringdown waveforms and checks the actual
+analyzer. It is not a first-principles prediction of the complete proposed
+circuit. The separate unresolved generative layer is:
+
+```text
+source
+  -> 100 kOhm limiter
+  -> ADG1419 vendor model
+  -> relay state, bounce, release, leakage, and parasitic model
+  -> FC-135 Butterworth-Van Dyke motional R-L-C in parallel with C0
+  -> OPA810 vendor model
+  -> digitizer differential/common-mode loading
+  -> cable, PCB, enclosure, resistor, amplifier, and ADC effects
+  -> canonical four-channel raw payload
+  -> existing unchanged scientific analyzer
+```
+
+The model must sweep motional R/L/C, shunt capacitance, loaded Q/resonance,
+OPA810 input capacitance/leakage, switch off-capacitance/charge injection/
+leakage, relay timing, cable/board capacitance, source-monitor feedthrough
+including the bounded C2 path, digitizer differential/common-mode admittance,
+clock/phase-reference error, amplifier/resistor noise, ADC quantization,
+environmental perturbation, and matched empty/1 pF dummy controls. It must map
+the parameter region that survives the frozen analyzer; inserting one favorable
+ringdown cannot establish that the complete circuit generates it.
+
+## 13. Current boundary
 
 This plan is non-executing. It does not authorize powering a source, digitizer,
 switch, relay, detector, transducer, or resonator. It generates no physical
