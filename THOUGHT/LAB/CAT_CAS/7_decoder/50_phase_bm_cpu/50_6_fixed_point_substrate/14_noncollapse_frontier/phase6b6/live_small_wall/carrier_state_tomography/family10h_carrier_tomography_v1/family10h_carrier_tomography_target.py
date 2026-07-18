@@ -46,6 +46,10 @@ SOURCE_AUTHORITY_FILE_NAMES = SOURCE_FILE_NAMES + [
 ]
 DISCOVERY_TRANSFER_FILE_NAMES = SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES
 
+C3_SOURCE_AUTHORITY_COMMIT = "55e059bc7acaafee3feacddac2069d7b5e40edd1"
+C4_SOURCE_AUTHORITY_COMMIT = "092d0a655e94d7c00f69efc1236cf1c8a2896ee1"
+C5_SOURCE_AUTHORITY_COMMIT = "ca8f8490e9d2fc9b36debbfe7c927bfe2fde5c5e"
+C5_FAILURE_EVIDENCE_COMMIT = "8021563a6122b72316ddd218077b8b82e36f9055"
 APPROVED_TEMPERATURE_HWMON_NAMES = ["k10temp"]
 APPROVED_TEMPERATURE_SENSOR_LABELS = ["Tctl"]
 APPROVED_TEMPERATURE_DEVICE_DRIVERS = ["k10temp"]
@@ -84,7 +88,7 @@ SOURCE_AUDIT_ROLE_ALIASES = {
     "source_bundle_runtime_and_evidence_auditor": "source_bundle_runtime_evidence_auditor",
     "claim_boundary_adjudicator": "claim_boundary_adjudicator",
 }
-SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = {
+SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V2 = {
     "schema",
     "issuer",
     "receipt_kind",
@@ -107,7 +111,15 @@ SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = {
     "self_authored",
     "evidence_origin",
 }
-SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V2"
+SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V3 = SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V2 | {
+    "verdict",
+    "final_response",
+    "material_blocker_ids",
+}
+SOURCE_AUDIT_REVIEW_RECEIPT_KEYS = SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V3
+SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2 = "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V2"
+SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3 = "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V3"
+SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA = SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3
 SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER = "codex_subagent_read_only_review"
 SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN = "codex_subagent_detached_receipt"
 SOURCE_AUDIT_REVIEW_BODY_CANONICALIZATION = "utf8_lf_single_trailing_newline"
@@ -469,6 +481,30 @@ def normalized_role(value: str) -> str:
     return value.lower().replace("/", "_").replace("-", "_").replace(" ", "_")
 
 
+def source_audit_version_for_commit(source_commit: str | None) -> str:
+    if source_commit == C3_SOURCE_AUTHORITY_COMMIT:
+        return "C3"
+    if source_commit == C4_SOURCE_AUTHORITY_COMMIT:
+        return "C4"
+    if source_commit == C5_SOURCE_AUTHORITY_COMMIT:
+        return "C5"
+    return "C6"
+
+
+def source_audit_receipt_schema_for_commit(source_commit: str | None) -> str:
+    if source_audit_version_for_commit(source_commit) in {"C3", "C4", "C5"}:
+        return SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2
+    return SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3
+
+
+def source_audit_receipt_keys_for_schema(schema: str) -> set[str]:
+    if schema == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2:
+        return SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V2
+    if schema == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3:
+        return SOURCE_AUDIT_REVIEW_RECEIPT_KEYS_V3
+    return set()
+
+
 def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = False) -> dict[str, Any]:
     required_roles = SOURCE_AUDIT_REQUIRED_REVIEW_ROLES if source_audit else REQUIRED_REVIEW_ROLES
     aliases = SOURCE_AUDIT_ROLE_ALIASES if source_audit else REVIEW_ROLE_ALIASES
@@ -493,10 +529,13 @@ def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = Fa
         if not isinstance(receipt, dict):
             return [f"source audit reviewer receipt missing {role}"]
         receipt_failures: list[str] = []
-        if set(receipt) != SOURCE_AUDIT_REVIEW_RECEIPT_KEYS:
+        audited_commit = item.get("audited_commit") if isinstance(item.get("audited_commit"), str) else None
+        expected_receipt_schema = source_audit_receipt_schema_for_commit(audited_commit)
+        expected_receipt_keys = source_audit_receipt_keys_for_schema(expected_receipt_schema)
+        if set(receipt) != expected_receipt_keys:
             receipt_failures.append(f"source audit reviewer receipt field mismatch {role}")
         expected_pairs = {
-            "schema": SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA,
+            "schema": expected_receipt_schema,
             "issuer": SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER,
             "receipt_kind": SOURCE_AUDIT_RECEIPT_KIND,
             "agent_id": item.get("agent_id"),
@@ -516,6 +555,21 @@ def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = Fa
             "no_live_authority": True,
             "no_pmu": True,
         }
+        normalized_blocker_ids = item.get("material_blocker_ids")
+        if expected_receipt_schema == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3:
+            if (
+                not isinstance(normalized_blocker_ids, list)
+                or any(not isinstance(blocker_id, str) or not blocker_id for blocker_id in normalized_blocker_ids)
+            ):
+                receipt_failures.append(f"source audit reviewer material blocker ids missing or malformed {role}")
+                normalized_blocker_ids = []
+            expected_pairs.update(
+                {
+                    "verdict": item.get("verdict"),
+                    "final_response": item.get("final_response"),
+                    "material_blocker_ids": normalized_blocker_ids,
+                }
+            )
         for key, expected in expected_pairs.items():
             if receipt.get(key) != expected:
                 receipt_failures.append(f"source audit reviewer receipt {key} mismatch {role}")
@@ -525,7 +579,7 @@ def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = Fa
             receipt_failures.append(f"source audit reviewer thread id missing {role}")
         if not isinstance(receipt.get("model"), str) or not receipt["model"]:
             receipt_failures.append(f"source audit reviewer model missing {role}")
-        if item.get("self_authored") is True or item.get("evidence_origin") == "target-derived":
+        if item.get("self_authored") is True or item.get("evidence_origin") in {"target-derived", "parent-created"}:
             receipt_failures.append(f"source audit reviewer provenance rejected {role}")
         return receipt_failures
 
@@ -549,6 +603,7 @@ def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = Fa
             "agent_id": agent_id,
             "verdict": item.get("verdict"),
             "final_response": item.get("final_response"),
+            "material_blocker_ids": item.get("material_blocker_ids"),
             "audited_commit": item.get("audited_commit"),
             "source_hashes_sha256": item.get("source_hashes_sha256"),
             "source_bundle_sha256": item.get("source_bundle_sha256"),
@@ -561,6 +616,14 @@ def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = Fa
         receipt_failures = validate_source_review_receipt(item, role, required_roles[role])
         if receipt_failures:
             failures.extend(receipt_failures)
+            by_role[role]["passed"] = False
+        if (
+            source_audit
+            and source_audit_receipt_schema_for_commit(item.get("audited_commit") if isinstance(item.get("audited_commit"), str) else None)
+            == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3
+            and by_role[role]["material_blocker_ids"] != []
+        ):
+            failures.append(f"source audit reviewer material blocker ids present {role}")
             by_role[role]["passed"] = False
     missing = sorted(set(required_roles) - set(by_role))
     if missing:
@@ -2095,6 +2158,142 @@ def final_exact_object_falsey_manifest_fixture(source_root: Path) -> dict[str, A
         "execute_aborted_before_output": execute_aborted_before_output,
         "positive_control_failures": positive_failures,
         "failures_by_value": failures_by_value,
+    }
+
+
+def source_audit_receipt_version_fixture(source_root: Path) -> dict[str, Any]:
+    source_hashes = read_json(source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json")
+    source_hash = source_hashes["source_hashes_sha256"]
+    bundle_hash = deterministic_source_bundle_sha256(source_root)
+    runtime_hash = source_hashes["runtime_binary_authority"]["sha256"]
+
+    def build_audit(source_commit: str, *, force_schema: str | None = None) -> dict[str, Any]:
+        clearances: dict[str, dict[str, Any]] = {}
+        schema = force_schema or source_audit_receipt_schema_for_commit(source_commit)
+        for index, (role, label) in enumerate(SOURCE_AUDIT_REQUIRED_REVIEW_ROLES.items(), start=1):
+            agent_id = f"target-source-reviewer-{index}"
+            thread_id = f"target-source-thread-{index}"
+            body_hash = hashlib.sha256(f"{label} {source_commit}\n".encode("utf-8")).hexdigest()
+            item: dict[str, Any] = {
+                "role": label,
+                "agent_id": agent_id,
+                "thread_id": thread_id,
+                "model": "gpt-5.6-sol",
+                "verdict": "NO_MATERIAL_BLOCKER",
+                "final_response": True,
+                "material_blocker_ids": [],
+                "audited_commit": source_commit,
+                "source_hashes_sha256": source_hash,
+                "source_bundle_sha256": bundle_hash,
+                "runtime_binary_sha256": runtime_hash,
+                "body_canonical_sha256": body_hash,
+                "boundary_attestation": {
+                    "no_git_write": True,
+                    "no_file_edits": True,
+                    "no_checkout_mutation": True,
+                    "no_target_contact": True,
+                    "no_live_authority": True,
+                    "no_pmu": True,
+                },
+            }
+            receipt = {
+                "schema": schema,
+                "issuer": SOURCE_AUDIT_REVIEW_RECEIPT_ISSUER,
+                "receipt_kind": SOURCE_AUDIT_RECEIPT_KIND,
+                "thread_id": thread_id,
+                "agent_id": agent_id,
+                "role": label,
+                "model": "gpt-5.6-sol",
+                "review_body_sha256": body_hash,
+                "review_body_canonicalization": SOURCE_AUDIT_REVIEW_BODY_CANONICALIZATION,
+                "audited_commit": source_commit,
+                "source_hashes_sha256": source_hash,
+                "source_bundle_sha256": bundle_hash,
+                "runtime_binary_sha256": runtime_hash,
+                "no_git_write": True,
+                "no_file_edits": True,
+                "no_checkout_mutation": True,
+                "no_target_contact": True,
+                "no_live_authority": True,
+                "no_pmu": True,
+                "self_authored": False,
+                "evidence_origin": SOURCE_AUDIT_ALLOWED_EVIDENCE_ORIGIN,
+            }
+            if schema == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3:
+                receipt.update(
+                    {
+                        "verdict": item["verdict"],
+                        "final_response": item["final_response"],
+                        "material_blocker_ids": item["material_blocker_ids"],
+                    }
+                )
+            item["review_receipt"] = receipt
+            clearances[role] = item
+        return {
+            "schema": "FAMILY10H_TARGET_SOURCE_AUDIT_RECEIPT_VERSION_FIXTURE_V1",
+            "source_authority_commit": source_commit,
+            "source_hashes_sha256": source_hash,
+            "source_bundle_sha256": bundle_hash,
+            "runtime_binary_sha256": runtime_hash,
+            "review_report_present": True,
+            "material_blockers": [],
+            "reviewer_verdicts": clearances,
+        }
+
+    def mutated_v3_receipt(**fields: Any) -> dict[str, Any]:
+        audit = build_audit("f" * 40)
+        item = audit["reviewer_verdicts"]["claim_boundary_adjudicator"]
+        item["review_receipt"] = {**item["review_receipt"], **fields}
+        return audit
+
+    def normalized_nonempty_ids() -> dict[str, Any]:
+        audit = build_audit("e" * 40)
+        item = audit["reviewer_verdicts"]["claim_boundary_adjudicator"]
+        item["material_blocker_ids"] = ["TARGET-NORMALIZED-BLOCKER"]
+        item["review_receipt"] = {**item["review_receipt"], "material_blocker_ids": ["TARGET-NORMALIZED-BLOCKER"]}
+        return audit
+
+    c5_audit_path = source_root / "SOURCE_AUTHORITY_C5_REVIEW_NORMALIZED.json"
+    c5_audit_source = "committed_archive" if c5_audit_path.exists() else "synthetic_v2_archive"
+    c5_audit = read_json(c5_audit_path) if c5_audit_path.exists() else build_audit(
+        C5_SOURCE_AUTHORITY_COMMIT,
+        force_schema=SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2,
+    )
+    checks = {
+        "c5_actual_source_authority_commit_selects_c5": source_audit_version_for_commit(C5_SOURCE_AUTHORITY_COMMIT) == "C5",
+        "c5_actual_source_authority_commit_uses_v2_receipts": source_audit_receipt_schema_for_commit(C5_SOURCE_AUTHORITY_COMMIT)
+        == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2,
+        "c5_v2_archive_replays": recompute_review_quorum(c5_audit, source_audit=True)["passed"],
+        "c5_failure_evidence_commit_selects_c6": source_audit_version_for_commit(C5_FAILURE_EVIDENCE_COMMIT) == "C6",
+        "c5_failure_evidence_commit_uses_v3_receipts": source_audit_receipt_schema_for_commit(C5_FAILURE_EVIDENCE_COMMIT)
+        == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3,
+        "future_source_authority_commit_uses_v3_receipts": source_audit_receipt_schema_for_commit("f" * 40)
+        == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V3,
+        "valid_c6_v3_archive_replays": recompute_review_quorum(build_audit("f" * 40), source_audit=True)["passed"],
+        "v2_receipt_for_c5_failure_evidence_rejected": not recompute_review_quorum(
+            build_audit(C5_FAILURE_EVIDENCE_COMMIT, force_schema=SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2),
+            source_audit=True,
+        )["passed"],
+        "future_v2_receipt_rejected": not recompute_review_quorum(
+            build_audit("d" * 40, force_schema=SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2),
+            source_audit=True,
+        )["passed"],
+        "receipt_bound_material_verdict_rejected": not recompute_review_quorum(
+            mutated_v3_receipt(verdict="MATERIAL_BLOCKER", material_blocker_ids=["TARGET-BOUND-BLOCKER"]),
+            source_audit=True,
+        )["passed"],
+        "receipt_bound_nonfinal_rejected": not recompute_review_quorum(mutated_v3_receipt(final_response=False), source_audit=True)["passed"],
+        "receipt_bound_blocker_ids_rejected": not recompute_review_quorum(
+            mutated_v3_receipt(material_blocker_ids=["TARGET-BOUND-BLOCKER"]),
+            source_audit=True,
+        )["passed"],
+        "normalized_nonempty_blocker_ids_rejected": not recompute_review_quorum(normalized_nonempty_ids(), source_audit=True)["passed"],
+    }
+    return {
+        "schema": "FAMILY10H_TARGET_SOURCE_AUDIT_RECEIPT_VERSION_FIXTURE_V1",
+        "passed": all(checks.values()),
+        "c5_audit_source": c5_audit_source,
+        "checks": checks,
     }
 
 
@@ -4167,6 +4366,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
     policy = policy_and_platform_fixture()
     manifest_live_gate = manifest_live_gate_fixture()
     final_receipt_gate = final_exact_object_falsey_manifest_fixture(source_root)
+    source_audit_receipt_versions = source_audit_receipt_version_fixture(source_root)
     source_mutation = source_mutation_fixtures(source_root)
     discovery = target_sensor_discovery_fixture(source_root)
     env = validate_no_live_authority_env()
@@ -4187,6 +4387,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
         "policy_and_platform_fixture": policy,
         "manifest_live_gate_fixture": manifest_live_gate,
         "final_exact_object_falsey_manifest_fixture": final_receipt_gate,
+        "source_audit_receipt_version_fixture": source_audit_receipt_versions,
         "source_mutation_fixtures": source_mutation,
         "temperature_sensor_discovery_fixture": discovery,
         "live_authority_env_absent": env,
@@ -4202,6 +4403,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
             policy["passed"],
             manifest_live_gate["passed"],
             final_receipt_gate["passed"],
+            source_audit_receipt_versions["passed"],
             source_mutation["passed"],
             discovery["passed"],
             env["passed"],

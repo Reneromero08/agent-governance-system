@@ -1,9 +1,9 @@
 {
-  "deployment_layout_self_test_sha256": "b200a43c585f146dcbcc5dcce76c18e263bacbeefa0fae543a20fdd4059a3892",
+  "deployment_layout_self_test_sha256": "8db6ef7405a471be713698594e4ffd84a3e26cf575ef76ce2ea91a8ea8d6f8bb",
   "passed": true,
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DEPLOYMENT_LAYOUT_SELF_TEST_V1",
   "stderr_length": 0,
-  "stdout_sha256": "fadc4aff771ec583486c83962f100c8e802f70214a0ec5f2557e60e26bd6d16b",
+  "stdout_sha256": "7ecba0b039440b3af4f0b7a766c0add701f497301495e9d900420e7ca3887e03",
   "target_self_test_passed": true,
   "target_self_test_returncode": 0
 }
