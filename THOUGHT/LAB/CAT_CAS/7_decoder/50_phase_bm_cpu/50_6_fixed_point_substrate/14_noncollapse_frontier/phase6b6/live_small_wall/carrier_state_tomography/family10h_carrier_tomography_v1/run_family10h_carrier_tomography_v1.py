@@ -1450,6 +1450,42 @@ def strict_jsonl_loads(blob: bytes) -> list[dict[str, Any]]:
     return [strict_json_loads(line) for line in lines]
 
 
+def package_json_parse_audit(root: Path = HERE) -> dict[str, Any]:
+    failures: list[str] = []
+    json_count = 0
+    jsonl_count = 0
+    jsonl_row_count = 0
+    for path in sorted(root.rglob("*.json")):
+        if not path.is_file():
+            continue
+        json_count += 1
+        rel = path.relative_to(root).as_posix()
+        try:
+            strict_json_loads(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
+            failures.append(f"JSON parse failed {rel}: {exc}")
+    for path in sorted(root.rglob("*.jsonl")):
+        if not path.is_file():
+            continue
+        jsonl_count += 1
+        rel = path.relative_to(root).as_posix()
+        try:
+            rows = strict_jsonl_loads(path.read_bytes())
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
+            failures.append(f"JSONL parse failed {rel}: {exc}")
+            continue
+        jsonl_row_count += len(rows)
+    return {
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_JSON_PARSE_AUDIT_V1",
+        "root": str(root),
+        "json_count": json_count,
+        "jsonl_count": jsonl_count,
+        "jsonl_row_count": jsonl_row_count,
+        "failures": failures,
+        "passed": not failures,
+    }
+
+
 def append_discovery_attempt_journal(receipt: dict[str, Any]) -> None:
     row = strict_json_dumps(receipt).encode("utf-8") + b"\n"
     if not DISCOVERY_ATTEMPT_JOURNAL_PATH.exists():
@@ -5611,6 +5647,7 @@ def controller_self_test() -> dict[str, Any]:
     strict_json = strict_json_regression()
     challenge_receipt = challenge_receipt_regression()
     historical_lane_report = known_historical_lane_contact_report()
+    package_parse = package_json_parse_audit()
     acquisition_transaction = controller_acquisition_transaction_regression()
     clearances = {
         role: {
@@ -5698,6 +5735,7 @@ def controller_self_test() -> dict[str, Any]:
         and attempt_journal_regression["passed"]
         and strict_json["passed"]
         and challenge_receipt["passed"]
+        and package_parse["passed"]
         and historical_lane_report["authoritative_for_active_transaction"] is False
         and historical_lane_report["complete_cryptographic_lane_ledger_claimed"] is False
         and acquisition_transaction["passed"]
@@ -5715,6 +5753,7 @@ def controller_self_test() -> dict[str, Any]:
         "source_bundle_mode_regression": bundle_mode_regression,
         "discovery_attempt_journal_regression": attempt_journal_regression,
         "strict_json_regression": strict_json,
+        "package_json_parse_audit": package_parse,
         "challenge_receipt_regression": challenge_receipt,
         "historical_lane_contact_report": historical_lane_report,
         "controller_acquisition_transaction_regression": acquisition_transaction,
@@ -6851,6 +6890,9 @@ def validate_only() -> dict[str, Any]:
     feature_boundary = public.feature_boundary_self_test()
     if not feature_boundary["passed"]:
         failures.append("feature boundary scan failed")
+    package_parse = package_json_parse_audit()
+    if not package_parse["passed"]:
+        failures.append("package JSON/JSONL parsing failed")
     manifest_counters = manifest_data.get("contact_counter_attestation") or manifest_data.get("zero_live_contact_attestation") or {
         "target_contact_count": 0,
         "sensor_inventory_count": 0,
@@ -6866,6 +6908,7 @@ def validate_only() -> dict[str, Any]:
         "manifest_sha": sidecar,
         "feature_boundary_passed": feature_boundary["passed"],
         "feature_boundary_sha256": feature_boundary["feature_boundary_self_test_sha256"],
+        "package_json_parse": package_parse,
         "source_authority": source_authority,
         "source_bundle_reconstruction": bundle_preview,
         "target_contact_count": manifest_counters.get("target_contact_count", 0),
