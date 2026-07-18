@@ -2016,6 +2016,151 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
             "pmu_acquisition_count": complete_forged_discovery["pmu_acquisition_count"],
         }
     )
+
+    valid_consumer_identity = public.with_temperature_identity_digest(
+        {
+            **{key: synthetic[key] for key in synthetic if key != "identity_sha256"},
+            "class_path": "/sys/class/hwmon/hwmon9/temp1_input",
+            "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon9/temp1_input",
+            "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon9",
+            "input_st_ino": 99,
+        }
+    )
+    valid_consumer_platform = {
+        "vendor": "AuthenticAMD",
+        "cpu_family": 16,
+        "cpu_models": [10],
+        "processor_count": 6,
+        "processors": [
+            {"processor": cpu, "vendor_id": "AuthenticAMD", "cpu_family": 16, "model": 10}
+            for cpu in range(6)
+        ],
+        "checked_before_discovery": True,
+        "cpuinfo_path": "/proc/cpuinfo",
+        "source_cpu_expected": public.SOURCE_CPU_EXPECTED,
+        "receiver_cpu_expected": public.RECEIVER_CPU_EXPECTED,
+        "source_receiver_cpus_present": True,
+        "affinity_checked": True,
+        "affinity_cpus": list(range(6)),
+        "inherited_affinity_checked": True,
+        "inherited_affinity_cpus": list(range(6)),
+        "operational_pin_capability": target.fake_pin_probe(
+            {public.SOURCE_CPU_EXPECTED, public.RECEIVER_CPU_EXPECTED},
+            inherited_affinity=list(range(6)),
+        ),
+        "operational_pin_capability_passed": True,
+    }
+    valid_authorizing_scope = {
+        "canonical_cpuinfo": True,
+        "canonical_hwmon_root": True,
+        "selected_class_path_is_sysfs_hwmon": True,
+        "selected_input_is_legacy_temp1": True,
+        "selected_semantic_profile_is_legacy_family10h": True,
+        "selected_semantic_role_is_tctl": True,
+        "resolved_input_is_sysfs_device": True,
+        "resolved_device_is_sysfs_device": True,
+        "resolved_driver_is_k10temp": True,
+        "resolved_subsystem_is_pci": True,
+        "authorizing": True,
+        "cpuinfo_path": "/proc/cpuinfo",
+        "hwmon_root": "/sys/class/hwmon",
+    }
+
+    def coherent_consumer_authority(identity: dict[str, Any], platform: dict[str, Any]) -> dict[str, Any]:
+        discovery = {
+            "schema": TEMPERATURE_SENSOR_DISCOVERY_SCHEMA,
+            "discovery_mode": "target_read_only_sensor_inventory",
+            "target_contact_count": 1,
+            "sensor_inventory_count": 1,
+            "candidate_scan_count": 1,
+            "live_invocation_count": 0,
+            "pmu_acquisition_count": 0,
+            "pmu_open_count": 0,
+            "runtime_launch_count": 0,
+            "tomography_output_root_created": False,
+            "controller_nonce_sha256": synthetic_challenge["controller_nonce_sha256"],
+            "selected_identity": identity,
+            "identity_before": identity,
+            "identity_after": identity,
+            "observed_candidates": [{"identity": identity, "approved": True}],
+            "selection": {
+                "law": "exactly one LEGACY_FAMILY10H_K10TEMP_TEMP1_V1 candidate",
+                "approval_profile": target.LEGACY_FAMILY10H_TEMPERATURE_PROFILE,
+                "approved_count": 1,
+                "deterministic_law": True,
+                "selected_class_path": identity["class_path"],
+            },
+            "source_authority": {"passed": True},
+            "authorizing_scope": dict(valid_authorizing_scope),
+            "provenance": {
+                "authority": "target_sensor_discovery",
+                "science_package_id": public.SCIENCE_PACKAGE_ID,
+                "transaction_run_id": public.TRANSACTION_RUN_ID,
+                "target_platform": platform,
+                "discovery_monotonic_ns": 1,
+                "controller_challenge_sha256": synthetic_challenge_sha,
+                "authorized_commit": synthetic_challenge["authorized_commit"],
+            },
+            "sample": {
+                "identity": identity,
+                "path": identity["class_path"],
+                "label_present": identity["sensor_label_present"],
+                "label_value": identity["sensor_label_value"],
+                "semantic_role": identity["sensor_semantic_role"],
+                "semantic_profile": identity["sensor_semantic_profile"],
+                "value_c": 42.0,
+                "pinned_descriptor": target.expected_descriptor_identity(identity),
+                "read_law": "manifest-approved resolved input descriptor",
+            },
+        }
+        discovery["target_discovery_receipt_sha256"] = public.digest(
+            {k: v for k, v in discovery.items() if k != "target_discovery_receipt_sha256"}
+        )
+        return seal_authority(
+            {
+                "schema": TEMPERATURE_SENSOR_AUTHORITY_SCHEMA,
+                "provenance_bound": True,
+                "provenance": "controller_verified_target_sensor_inventory",
+                "hwmon_name": identity["hwmon_name"],
+                "sensor_label_present": identity["sensor_label_present"],
+                "sensor_label_value": identity["sensor_label_value"],
+                "sensor_semantic_role": identity["sensor_semantic_role"],
+                "sensor_semantic_profile": identity["sensor_semantic_profile"],
+                "approved_sensor_identity": identity,
+                "target_discovery_receipt": discovery,
+                "controller_challenge": synthetic_challenge,
+                "controller_challenge_sha256": synthetic_challenge_sha,
+                "controller_nonce": controller_nonce,
+                "source_authority_commit": synthetic_challenge["authorized_commit"],
+                "target_contact_count": discovery["target_contact_count"],
+                "sensor_inventory_count": discovery["sensor_inventory_count"],
+                "live_invocation_count": discovery["live_invocation_count"],
+                "pmu_acquisition_count": discovery["pmu_acquisition_count"],
+            }
+        )
+
+    valid_consumer_authority = coherent_consumer_authority(valid_consumer_identity, valid_consumer_platform)
+    missing_readback_platform = json.loads(json.dumps(valid_consumer_platform))
+    missing_readback_platform["operational_pin_capability"]["per_cpu"][str(public.SOURCE_CPU_EXPECTED)].pop("readback_affinity", None)
+    missing_readback_authority = coherent_consumer_authority(valid_consumer_identity, missing_readback_platform)
+    null_readback_platform = json.loads(json.dumps(valid_consumer_platform))
+    null_readback_platform["operational_pin_capability"]["per_cpu"][str(public.SOURCE_CPU_EXPECTED)]["readback_affinity"] = None
+    null_readback_authority = coherent_consumer_authority(valid_consumer_identity, null_readback_platform)
+    noncanonical_driver_identity = public.with_temperature_identity_digest(
+        {
+            **{key: valid_consumer_identity[key] for key in valid_consumer_identity if key != "identity_sha256"},
+            "resolved_driver_path": "/tmp/k10temp",
+        }
+    )
+    noncanonical_driver_authority = coherent_consumer_authority(noncanonical_driver_identity, valid_consumer_platform)
+    noncanonical_subsystem_identity = public.with_temperature_identity_digest(
+        {
+            **{key: valid_consumer_identity[key] for key in valid_consumer_identity if key != "identity_sha256"},
+            "resolved_subsystem_path": "/tmp/pci",
+        }
+    )
+    noncanonical_subsystem_authority = coherent_consumer_authority(noncanonical_subsystem_identity, valid_consumer_platform)
+
     boolean_discovery_counter = dict(complete_forged_discovery)
     boolean_discovery_counter["target_contact_count"] = True
     boolean_discovery_counter["target_discovery_receipt_sha256"] = public.digest(
@@ -2122,6 +2267,31 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
         expected_challenge=synthetic_challenge,
         require_transport=False,
     )
+    valid_consumer_result = temperature_sensor_authority_from_receipt(
+        valid_consumer_authority,
+        expected_challenge=synthetic_challenge,
+        require_transport=False,
+    )
+    missing_readback_result = temperature_sensor_authority_from_receipt(
+        missing_readback_authority,
+        expected_challenge=synthetic_challenge,
+        require_transport=False,
+    )
+    null_readback_result = temperature_sensor_authority_from_receipt(
+        null_readback_authority,
+        expected_challenge=synthetic_challenge,
+        require_transport=False,
+    )
+    noncanonical_driver_result = temperature_sensor_authority_from_receipt(
+        noncanonical_driver_authority,
+        expected_challenge=synthetic_challenge,
+        require_transport=False,
+    )
+    noncanonical_subsystem_result = temperature_sensor_authority_from_receipt(
+        noncanonical_subsystem_authority,
+        expected_challenge=synthetic_challenge,
+        require_transport=False,
+    )
     malformed_result = temperature_sensor_authority_from_receipt(malformed)
     expected_live_counters = {"target_contact_count": 1, "sensor_inventory_count": 1, "live_invocation_count": 0, "pmu_acquisition_count": 0}
     boolean_counter_values = {"target_contact_count": True, "sensor_inventory_count": True, "live_invocation_count": False, "pmu_acquisition_count": False}
@@ -2140,6 +2310,11 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
         "boolean_manifest_counter_object_rejected": not counter_dict_equal_strict(boolean_counter_values, expected_live_counters),
         "boolean_final_attempt_counter_rejected": not counters_equal_strict(boolean_counter_values, expected_live_counters),
         "boolean_offline_zero_receipt_counter_rejected": not zero_contact_counter_valid({"target_contact_count": False}, "target_contact_count"),
+        "canonical_consumer_authority_fixture_passes_without_transport": valid_consumer_result["passed"],
+        "missing_pin_readback_authority_rejected": any("operational pin CPU 4 readback mismatch" in item for item in missing_readback_result["failures"]),
+        "null_pin_readback_authority_rejected": any("operational pin CPU 4 readback mismatch" in item for item in null_readback_result["failures"]),
+        "noncanonical_driver_path_authority_rejected": any("resolved driver path is not canonical" in item for item in noncanonical_driver_result["failures"]),
+        "noncanonical_subsystem_path_authority_rejected": any("resolved subsystem path is not canonical" in item for item in noncanonical_subsystem_result["failures"]),
         "wrong_hwmon_authority_rejected": not malformed_result["passed"],
         "current_authority_present": current["present"],
         "current_authority_passed": current["passed"],
@@ -2159,6 +2334,11 @@ def temperature_sensor_authority_regression() -> dict[str, Any]:
         and result["boolean_manifest_counter_object_rejected"]
         and result["boolean_final_attempt_counter_rejected"]
         and result["boolean_offline_zero_receipt_counter_rejected"]
+        and result["canonical_consumer_authority_fixture_passes_without_transport"]
+        and result["missing_pin_readback_authority_rejected"]
+        and result["null_pin_readback_authority_rejected"]
+        and result["noncanonical_driver_path_authority_rejected"]
+        and result["noncanonical_subsystem_path_authority_rejected"]
         and result["wrong_hwmon_authority_rejected"]
     )
     return result
