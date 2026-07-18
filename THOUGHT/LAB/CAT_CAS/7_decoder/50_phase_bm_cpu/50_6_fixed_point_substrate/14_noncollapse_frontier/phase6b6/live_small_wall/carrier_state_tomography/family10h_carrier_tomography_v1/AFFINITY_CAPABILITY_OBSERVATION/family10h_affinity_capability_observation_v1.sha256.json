@@ -1,6 +1,6 @@
 {
   "schema": "FAMILY10H_AFFINITY_CAPABILITY_OBSERVATION_RECEIPT_V1",
-  "observation_file": "family10h_affinity_capability_observation_v1.json",
+  "observation_file": "family10h_affinity_capability_observation_v1.stdout",
   "observation_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
   "source_branch": "codex/family10h-tomography-repair",
   "source_branch_head_before_contact": "99846a8b9a5ce31ff746750ff9e2aa785e5e6f98",
