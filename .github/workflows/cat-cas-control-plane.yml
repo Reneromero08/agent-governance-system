@@ -34,8 +34,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install test dependency
-        run: python -m pip install pytest
+      - name: Install control-plane dependencies
+        run: python -m pip install pytest jsonschema
 
       - name: Validate control plane
         run: python THOUGHT/LAB/CAT_CAS/tools/validate_control_plane.py
