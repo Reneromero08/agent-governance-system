@@ -1,125 +1,170 @@
 {
-  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SUBAGENT_FINDINGS_NORMALIZED_V2",
-  "package_decision": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
-  "material_blockers": [],
-  "reviewer_verdicts": {
-    "physical_carrier_state_auditor": {
-      "agent_id": "019f6493-f1e2-70d2-8bba-49fd83cc59a3",
-      "exact_report": "final physical carrier-state review for regenerated hash set",
-      "final_response": true,
-      "originating_agent": "physical carrier-state auditor",
-      "role": "physical_carrier_state_auditor",
-      "verdict": "NO_MATERIAL_BLOCKER"
+  "checked_commit": "a27e4cf1f41d1b12f146ecb347f24e666e5f160b",
+  "findings": {
+    "CUSTODY-EVIDENCE-01": {
+      "agent_id": "019f7448-0de8-7bd0-9c6b-6cc00582065e",
+      "cited_source_file_function_line": "run_family10h_carrier_tomography_v1.py:6630 validate_receipt_chain; run_family10h_carrier_tomography_v1.py:6796 validate_only",
+      "consequence": "A stale generated receipt set could appear reviewable while manifest and receipt digests were no longer mutually closed.",
+      "exact_report": "custody/evidence final reviewer at a27e4cf1",
+      "independently_reproduced": true,
+      "mechanism": "Final generation order now runs standalone gates before prepare-only, and validate-only closes the manifest, source authority, source bundle reconstruction, runtime authority, receipt chain, feature boundary, and zero active counters.",
+      "minimal_repair": "Regenerated source hashes, source bundle, self-tests, offline validation, deployment layout, final manifest, and validate-only receipt after the code repair.",
+      "originating_agent": "custody/evidence final reviewer",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
+      "required_regression": "validate-only returned passed=true with failures=[], missing=[], tuple_count=8320, manifest canonical sha ac4f6ce09e7562a58d5e4a82ce538851f9f8cd96580edeb1f02bff71903171a9, and manifest file sha b016ec5cfc3cee811069ebbba0b35b8569e4b07bc2bd1e4639c3abd4f792825b."
     },
-    "experimental_design_operator_auditor": {
-      "agent_id": "019f6494-2f04-75e0-abd7-407cca5f541b",
-      "exact_report": "final experimental-design/operator review for regenerated hash set",
+    "CUSTODY-EVIDENCE-02": {
+      "agent_id": "019f7448-0de8-7bd0-9c6b-6cc00582065e",
+      "cited_source_file_function_line": "run_family10h_carrier_tomography_v1.py:1453 package_json_parse_audit; AFFINITY_CAPABILITY_OBSERVATION/family10h_affinity_capability_observation_v1.sha256.json:3",
+      "consequence": "A committed zero-byte .json historical evidence file violated the explicit package JSON/JSONL parse requirement.",
+      "exact_report": "custody/evidence final reviewer at a27e4cf1",
+      "independently_reproduced": true,
+      "mechanism": "The historical failed affinity stdout is preserved byte-for-byte under a non-JSON extension and the receipt now names family10h_affinity_capability_observation_v1.stdout while retaining the empty-file SHA-256.",
+      "minimal_repair": "Renamed the empty file from .json to .stdout, updated its receipt, and added recursive strict package JSON/JSONL parsing to controller self-test and validate-only.",
+      "originating_agent": "custody/evidence final reviewer",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
+      "required_regression": "Recursive parse audit passes for 48 committed JSON files, 2 JSONL files, and 6 JSONL rows; validate-only reports package_json_parse.passed=true."
+    },
+    "OBS-01": {
+      "agent_id": "019f7447-6c10-7d93-b22e-f081211d10a1",
+      "cited_source_file_function_line": "run_family10h_carrier_tomography_v1.py:1453 package_json_parse_audit; run_family10h_carrier_tomography_v1.py:6024 prepare ordering; run_family10h_carrier_tomography_v1.py:6876 validate-only final-tree gate",
+      "consequence": "Non-material reporting observation only: the stored controller self-test parse audit can count fewer JSON files than the final committed tree because it runs before the controller receipt and manifest are written.",
+      "exact_report": "experimental-design/operator-law final reviewer at a27e4cf1",
+      "independently_reproduced": true,
+      "mechanism": "prepare-only generation order writes some JSON artifacts after controller self-test, while validate-only re-audits the completed tree.",
+      "minimal_repair": "No material repair required for current package; future regeneration can persist a post-manifest parse receipt if desired.",
+      "originating_agent": "experimental-design/operator-law final reviewer",
+      "parent_disposition": "NON_MATERIAL_OBSERVATION",
+      "required_regression": "Final-tree validate-only package_json_parse reports 48 JSON files, 2 JSONL files, 6 rows, and no failures."
+    },
+    "OPER-REVIEW-01": {
+      "agent_id": "019f7447-6c10-7d93-b22e-f081211d10a1",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:43 query identities; family10h_carrier_tomography_public.py:1286 model_features; family10h_carrier_tomography_public.py:1822 evidence_samples",
+      "consequence": "Per-query responses remain visible to modeling and classification; query-order collapse and equal-contrast/different-raw-response attacks downgrade or remain distinguishable.",
+      "exact_report": "experimental-design/operator-law final reviewer at a27e4cf1",
+      "independently_reproduced": true,
+      "mechanism": "query_A, query_B, query_A_then_B, and query_B_then_A remain separate observations with raw change-to-dirty responses modeled directly.",
+      "minimal_repair": "Preserved raw per-query observations and kept matched contrasts as derived quantities for lifetime and sign-law analysis.",
+      "originating_agent": "experimental-design/operator-law final reviewer",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
+      "required_regression": "Operator self-test retains query/order collapse downgrades and equal-contrast/different-raw-response regressions."
+    },
+    "OPER-REVIEW-02": {
+      "agent_id": "019f7447-6c10-7d93-b22e-f081211d10a1",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:1753 heldout_bundle",
+      "consequence": "Held-out prediction cannot be rescued by seeing the same replicate, mapping, or delay level in training.",
+      "exact_report": "experimental-design/operator-law final reviewer at a27e4cf1",
+      "independently_reproduced": true,
+      "mechanism": "Strict replicate, mapping, and delay holdouts exclude the tested factor level from training.",
+      "minimal_repair": "Held out replicate 1, mapping map1, and delay 10ms as absent factor levels.",
+      "originating_agent": "experimental-design/operator-law final reviewer",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
+      "required_regression": "Mapping-scrambled, delay-scrambled, and in-sample-rescue fixtures cannot pass the strict holdout gate."
+    },
+    "OPER-REVIEW-03": {
+      "agent_id": "019f7447-6c10-7d93-b22e-f081211d10a1",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:1496 codeword_classifier; family10h_carrier_tomography_public.py:2133 operator_prediction_gate",
+      "consequence": "Observed status is downgraded unless held-out classification actually passes the predeclared threshold.",
+      "exact_report": "experimental-design/operator-law final reviewer at a27e4cf1",
+      "independently_reproduced": true,
+      "mechanism": "Nearest-centroid-by-q held-out classifier computes a 7x7 confusion matrix and balanced accuracy against a fixed 0.95 threshold.",
+      "minimal_repair": "Replaced asserted classification with computed held-out classifier output and hard fail-closed gate.",
+      "originating_agent": "experimental-design/operator-law final reviewer",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
+      "required_regression": "Perfect separation passes; confused, class-imbalanced trivial, and training-memorized held-out-failure attacks fail."
+    },
+    "OPER-REVIEW-04": {
+      "agent_id": "019f7447-6c10-7d93-b22e-f081211d10a1",
+      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:1943 lifetime_summary",
+      "consequence": "Variation-confounded, form-changing, or nonmonotonic packets downgrade instead of supporting observed status.",
+      "exact_report": "experimental-design/operator-law final reviewer at a27e4cf1",
+      "independently_reproduced": true,
+      "mechanism": "Lifetime analysis emits the complete five-class vocabulary and session, mapping, query, confidence, and polarity gates.",
+      "minimal_repair": "Added full lifetime vocabulary, mean persistence curve, variation summaries, confidence intervals, and hard downgrade gates.",
+      "originating_agent": "experimental-design/operator-law final reviewer",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
+      "required_regression": "Stable persistence, bounded decay, immediate-only, no-response, nonmonotonic form change, session/mapping/query confounds, crossover, sign reversal, and opposite-sign replicate fixtures pass or downgrade as expected."
+    },
+    "PHYS-REVIEW-01": {
+      "agent_id": "019f7447-b882-7c31-a59a-40e03d65d3e6",
+      "cited_source_file_function_line": "family10h_carrier_tomography_target.py:2414 operational_pin_capability_failures; family10h_carrier_tomography_target.py:2457 temperature physical authority; run_family10h_carrier_tomography_v1.py:1677 consumer validator",
+      "consequence": "Non-CPU sensors, path substitution, identity drift, synthetic authority, missing/null/non-list pin readbacks, and noncanonical driver/subsystem paths cannot authorize the package.",
+      "exact_report": "physical sensor-authority final reviewer at a27e4cf1",
+      "independently_reproduced": true,
+      "mechanism": "Temperature custody is restricted to k10temp/temp1_input CPU sensor identity with label, AMD PCI identity, canonical driver/subsystem paths, descriptor pinning, identity stability, and strict CPU 4/5 pin evidence.",
+      "minimal_repair": "Bound approved CPU temperature identity and added target/controller regressions for wrong sensors, wrong labels, path substitution, identity drift, unreadable sensor, missing/null/non-list/non-exact affinity readback, and noncanonical /tmp paths.",
+      "originating_agent": "physical sensor-authority final reviewer",
+      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
+      "required_regression": "Target and controller self-test receipts record physical-authority attacks rejected; package parse repair left target, public model, runtime sources, and runtime binary unchanged."
+    }
+  },
+  "material_blockers": [],
+  "non_material_observations": [
+    "OBS-01"
+  ],
+  "package_decision": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+  "remaining_blockers": [
+    "actual provenance-bound temperature sensor authority receipt absent",
+    "SOURCE_AUTHORITY_C6_REVIEW quorum, live sensor acquisition, and final exact-object evidence remain unperformed and unauthorized in this repair branch"
+  ],
+  "reviewer_verdicts": {
+    "claim_boundary_adjudicator": {
+      "agent_id": "019f7448-58a5-7e21-a2db-3c4d5ca9c9ea",
+      "audited_commit": "a27e4cf1f41d1b12f146ecb347f24e666e5f160b",
+      "exact_report": "claim-boundary / live-authority final reviewer at a27e4cf1",
       "final_response": true,
-      "originating_agent": "experimental-design/operator auditor",
-      "role": "experimental_design_operator_auditor",
+      "model": "gpt-5.6-sol",
+      "originating_agent": "claim-boundary / live-authority final reviewer",
+      "role": "claim_boundary_adjudicator",
+      "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
+      "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
       "verdict": "NO_MATERIAL_BLOCKER"
     },
     "custody_evidence_auditor": {
-      "agent_id": "019f6494-7489-7fe3-88cb-7ab61828b951",
-      "exact_report": "final custody/evidence review for regenerated hash set",
+      "agent_id": "019f7448-0de8-7bd0-9c6b-6cc00582065e",
+      "audited_commit": "a27e4cf1f41d1b12f146ecb347f24e666e5f160b",
+      "exact_report": "custody/evidence final reviewer at a27e4cf1",
       "final_response": true,
-      "originating_agent": "custody/evidence auditor",
+      "model": "gpt-5.6-sol",
+      "originating_agent": "custody/evidence final reviewer",
       "role": "custody_evidence_auditor",
+      "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
+      "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
       "verdict": "NO_MATERIAL_BLOCKER"
     },
-    "claim_boundary_adjudicator": {
-      "agent_id": "019f64a2-aee1-78a2-9af4-58c8b57611c8",
-      "exact_report": "final claim-boundary reassessment after main generated-log attribution",
+    "experimental_design_operator_auditor": {
+      "agent_id": "019f7447-6c10-7d93-b22e-f081211d10a1",
+      "audited_commit": "a27e4cf1f41d1b12f146ecb347f24e666e5f160b",
+      "exact_report": "experimental-design/operator-law final reviewer at a27e4cf1",
       "final_response": true,
-      "originating_agent": "claim-boundary adjudicator",
-      "role": "claim_boundary_adjudicator",
+      "model": "gpt-5.6-sol",
+      "originating_agent": "experimental-design/operator-law final reviewer",
+      "role": "experimental_design_operator_auditor",
+      "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
+      "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
+      "verdict": "NO_MATERIAL_BLOCKER"
+    },
+    "physical_carrier_state_auditor": {
+      "agent_id": "019f7447-b882-7c31-a59a-40e03d65d3e6",
+      "audited_commit": "a27e4cf1f41d1b12f146ecb347f24e666e5f160b",
+      "exact_report": "physical sensor-authority final reviewer at a27e4cf1",
+      "final_response": true,
+      "model": "gpt-5.6-sol",
+      "originating_agent": "physical sensor-authority final reviewer",
+      "role": "physical_carrier_state_auditor",
+      "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
+      "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
       "verdict": "NO_MATERIAL_BLOCKER"
     }
   },
-  "findings": {
-    "PHYS-REVIEW-01": {
-      "originating_agent": "physical carrier-state auditor",
-      "agent_id": "019f6493-f1e2-70d2-8bba-49fd83cc59a3",
-      "exact_report": "final physical carrier-state review for regenerated hash set",
-      "cited_source_file_function_line": "family10h_carrier_tomography_target.py:validate_temperature_sensor_authority_payload:320-407; PinnedTemperatureSensor:806-891",
-      "mechanism": "Temperature custody is now restricted to an approved CPU sensor identity with hwmon name, label, resolved paths, digest, descriptor pinning, and identity-stability checks. Self-authored discovery receipts require an external controller challenge and nonce binding.",
-      "consequence": "Non-CPU sensors, path substitutions, identity drift, synthetic identities, and recomputed forged discovery receipts cannot authorize frozen status.",
-      "minimal_repair": "Implemented approved k10temp/Tctl-or-Tdie identity binding plus controller-challenge-bound temperature authority validation.",
-      "required_regression": "Target and controller regressions reject non-CPU-first sensors, wrong hwmon/label, substitutions, drift, unreadable sensors, synthetic authority, and well-formed self-authored discovery without the expected challenge.",
-      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
-      "independently_reproduced": true
-    },
-    "OPER-REVIEW-01": {
-      "originating_agent": "experimental-design/operator auditor",
-      "agent_id": "019f6494-2f04-75e0-abd7-407cca5f541b",
-      "exact_report": "final experimental-design/operator review for regenerated hash set",
-      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:evidence_samples:1713-1781; model_features:1217-1267",
-      "mechanism": "The operator path now preserves query_A, query_B, query_A_then_B, and query_B_then_A as raw modeled observations. Matched contrasts remain derived quantities for lifetime/sign laws only. Query order is reported as order-encoded query identity rather than an unsupported independent main effect.",
-      "consequence": "Per-query responses remain visible to modeling/classification, and identical pairwise contrasts with different raw responses remain distinguishable.",
-      "minimal_repair": "Use raw change_to_dirty as operator y, store matched_contrast_y separately, remove duplicate query_order basis, and expose on-support identifiability.",
-      "required_regression": "Equal-pairwise-contrast different-raw-response fixture remains distinct; query/order/source-order structure gates pass.",
-      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
-      "independently_reproduced": true
-    },
-    "OPER-REVIEW-02": {
-      "originating_agent": "experimental-design/operator auditor",
-      "agent_id": "019f6494-2f04-75e0-abd7-407cca5f541b",
-      "exact_report": "final experimental-design/operator review for regenerated hash set",
-      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:heldout_bundle:1318-1352",
-      "mechanism": "Strict held-out replicate, mapping, and delay tests remove the tested factor level from training.",
-      "consequence": "Held-out prediction is no longer rescued by seeing the same mapping or delay level in training.",
-      "minimal_repair": "Train/test predicates now isolate replicate 1, map1, and 10ms as absent held-out levels.",
-      "required_regression": "Mapping-scrambled, delay-scrambled, and in-sample-rescue fixtures remain candidate/fail the strict holdout gate.",
-      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
-      "independently_reproduced": true
-    },
-    "OPER-REVIEW-03": {
-      "originating_agent": "experimental-design/operator auditor",
-      "agent_id": "019f6494-2f04-75e0-abd7-407cca5f541b",
-      "exact_report": "final experimental-design/operator review for regenerated hash set",
-      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:codeword_classifier:1427-1483; operator_prediction_gate:2064-2083",
-      "mechanism": "Cross-validated classification is computed using a nearest-centroid-by-q classifier, held-out replicate split, 7x7 confusion matrix, balanced accuracy, and a fixed 0.95 threshold.",
-      "consequence": "Observed status is downgraded unless held-out classification actually passes.",
-      "minimal_repair": "Replace asserted classification boolean with computed classifier output and hard gate.",
-      "required_regression": "Perfectly separated codewords pass; deliberately confused, class-imbalanced, and training-memorized held-out-failure fixtures fail.",
-      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
-      "independently_reproduced": true
-    },
-    "OPER-REVIEW-04": {
-      "originating_agent": "experimental-design/operator auditor",
-      "agent_id": "019f6494-2f04-75e0-abd7-407cca5f541b",
-      "exact_report": "final experimental-design/operator review for regenerated hash set",
-      "cited_source_file_function_line": "family10h_carrier_tomography_public.py:lifetime_summary:1874-2012",
-      "mechanism": "Lifetime analysis emits the full five-class vocabulary and session, mapping, query, confidence, and polarity variation gates.",
-      "consequence": "Variation-confounded or form-changing packets downgrade instead of supporting observed status.",
-      "minimal_repair": "Add full lifetime vocabulary, mean persistence curve, variation summaries, confidence intervals, and hard downgrade gates.",
-      "required_regression": "Stable persistence, bounded decay, immediate-only, no-response, nonmonotonic form change, session/mapping/query confounds, equal-marginal crossover, sign reversal, and opposite-sign replicate fixtures pass/downgrade as expected.",
-      "parent_disposition": "REPAIRED_FOR_BLOCKED_INTEGRATION_REVIEW",
-      "independently_reproduced": true
-    }
-  },
-  "non_material_clearances": {
-    "claim_boundary": {
-      "agent_id": "019f64a2-aee1-78a2-9af4-58c8b57611c8",
-      "originating_agent": "claim-boundary adjudicator",
-      "verdict": "NO_MATERIAL_BLOCKER"
-    },
-    "custody_evidence": {
-      "agent_id": "019f6494-7489-7fe3-88cb-7ab61828b951",
-      "originating_agent": "custody/evidence auditor",
-      "verdict": "NO_MATERIAL_BLOCKER"
-    }
-  },
+  "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SUBAGENT_FINDINGS_NORMALIZED_V3",
+  "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
+  "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
   "zero_contact_attestation": {
-    "target_contact_count": 0,
-    "live_invocation_count": 0
-  },
-  "remaining_blockers": [
-    "actual provenance-bound temperature sensor authority receipt absent"
-  ],
-  "main_worktree_attribution": {
-    "path": "NAVIGATION/CORTEX/_generated/search_log.jsonl",
-    "disposition": "preserved and excluded from repair branch",
-    "reason": "generated Cortex startup/search log entries in the separate main worktree"
+    "live_invocation_count": 0,
+    "pmu_acquisition_count": 0,
+    "sensor_inventory_count": 0,
+    "target_contact_count": 0
   }
 }
