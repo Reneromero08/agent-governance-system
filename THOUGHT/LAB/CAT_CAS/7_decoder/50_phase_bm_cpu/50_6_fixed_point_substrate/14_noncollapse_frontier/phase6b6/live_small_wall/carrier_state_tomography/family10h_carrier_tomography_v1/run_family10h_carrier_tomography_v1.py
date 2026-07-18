@@ -1344,6 +1344,70 @@ def known_historical_lane_contact_report() -> dict[str, Any]:
     }
 
 
+def git_text_canonical_bytes(path: Path) -> bytes:
+    return path.read_bytes().replace(b"\r\n", b"\n")
+
+
+def attempt_history_index_metadata_reporting_only() -> dict[str, Any]:
+    metadata: dict[str, Any] = {
+        "path": str(ATTEMPT_HISTORY_INDEX_PATH) if ATTEMPT_HISTORY_INDEX_PATH.exists() else None,
+        "file_sha256": None,
+        "checkout_file_sha256": None,
+        "file_sha256_canonicalization": "git_text_auto_lf",
+        "git_head": None,
+        "git_blob_sha256": None,
+        "git_blob_size": None,
+        "git_blob_id": None,
+        "git_blob_matches_file_sha256": None,
+        "authoritative_for_active_transaction": False,
+    }
+    if not ATTEMPT_HISTORY_INDEX_PATH.exists():
+        return metadata
+    checkout_bytes = ATTEMPT_HISTORY_INDEX_PATH.read_bytes()
+    canonical_bytes = git_text_canonical_bytes(ATTEMPT_HISTORY_INDEX_PATH)
+    metadata["checkout_file_sha256"] = hashlib.sha256(checkout_bytes).hexdigest()
+    metadata["file_sha256"] = hashlib.sha256(canonical_bytes).hexdigest()
+    try:
+        head = git_text("rev-parse", "HEAD")
+        blob = commit_blob_record(head, ATTEMPT_HISTORY_INDEX_PATH)
+    except ControllerError:
+        return metadata
+    metadata["git_head"] = head
+    metadata["git_blob_sha256"] = blob.get("sha256")
+    metadata["git_blob_size"] = blob.get("size")
+    metadata["git_blob_id"] = blob.get("blob_id")
+    metadata["git_blob_matches_file_sha256"] = blob.get("sha256") == metadata["file_sha256"] if blob.get("present") is True else False
+    return metadata
+
+
+def validate_attempt_history_index_manifest_binding(manifest_data: dict[str, Any]) -> dict[str, Any]:
+    failures: list[str] = []
+    metadata = (
+        manifest_data.get("temperature_sensor_authority", {}).get("historical_attempt_index_metadata_reporting_only")
+        if isinstance(manifest_data.get("temperature_sensor_authority"), dict)
+        else None
+    )
+    if not isinstance(metadata, dict):
+        return {"passed": False, "failures": ["manifest attempt-history metadata missing"]}
+    expected = attempt_history_index_metadata_reporting_only()
+    for key in [
+        "path",
+        "file_sha256",
+        "checkout_file_sha256",
+        "file_sha256_canonicalization",
+        "git_blob_sha256",
+        "git_blob_size",
+        "git_blob_id",
+        "git_blob_matches_file_sha256",
+        "authoritative_for_active_transaction",
+    ]:
+        if metadata.get(key) != expected.get(key):
+            failures.append(f"manifest attempt-history metadata {key} mismatch")
+    if expected.get("checkout_file_sha256") and metadata.get("file_sha256") == expected.get("checkout_file_sha256") != expected.get("file_sha256"):
+        failures.append("manifest attempt-history metadata used checkout digest instead of Git text blob digest")
+    return {"passed": not failures, "failures": failures, "expected": expected}
+
+
 def active_attempt_paths() -> list[Path]:
     return [
         TEMPERATURE_SENSOR_AUTHORITY,
@@ -5612,6 +5676,23 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         history_missing_report = known_historical_lane_contact_report()
     finally:
         globals()["ATTEMPT_HISTORY_INDEX_PATH"] = original_history_index
+    history_index_metadata = attempt_history_index_metadata_reporting_only()
+    stale_crlf_checkout_sha256 = "0a4444d7d01602bb2390c495cd1d76a1fdb072b1a56acfb6bdde2df1628b2e45"
+    stale_checkout_manifest = {
+        "temperature_sensor_authority": {
+            "historical_attempt_index_metadata_reporting_only": {
+                **history_index_metadata,
+                "file_sha256": stale_crlf_checkout_sha256,
+            }
+        }
+    }
+    valid_history_index_manifest = {
+        "temperature_sensor_authority": {
+            "historical_attempt_index_metadata_reporting_only": history_index_metadata,
+        }
+    }
+    stale_checkout_history_binding = validate_attempt_history_index_manifest_binding(stale_checkout_manifest)
+    valid_history_binding = validate_attempt_history_index_manifest_binding(valid_history_index_manifest)
 
     checks = {
         "production_acquisition_has_no_injected_transport_surface": production_signature
@@ -5665,6 +5746,10 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         and structured_target_failure_receipt.get("structured_target_discovery_failure_receipt", {}).get("candidate_scan_count") == 1,
         "target_nonzero_valid_structured_failure_file_hash_bound": structured_target_failure_file_hash_bound_seen,
         "history_index_deletion_does_not_fabricate_active_authority": history_missing_report["authoritative_for_active_transaction"] is False and history_missing_report["complete_cryptographic_lane_ledger_claimed"] is False,
+        "history_index_manifest_binds_git_text_blob": valid_history_binding["passed"] is True
+        and history_index_metadata.get("file_sha256") == history_index_metadata.get("git_blob_sha256")
+        and history_index_metadata.get("git_blob_matches_file_sha256") is True,
+        "history_index_manifest_rejects_checkout_digest": stale_checkout_history_binding["passed"] is False,
         "failure_cleanup_receipt_writes_without_success_journal": cleanup_valid["cleanup_custody_sha256"]
         == public.digest({k: v for k, v in cleanup_valid.items() if k != "cleanup_custody_sha256"}),
         "parsed_invalid_copyback_cleanup_receipt_sealed": parsed_invalid_cleanup_sealed,
@@ -6034,9 +6119,7 @@ def manifest() -> dict[str, Any]:
             "source_authority_commit": source_authority_commit,
             "contact_counters": contact_counters,
             "historical_attempt_index_metadata_reporting_only": {
-                "path": str(ATTEMPT_HISTORY_INDEX_PATH) if ATTEMPT_HISTORY_INDEX_PATH.exists() else None,
-                "file_sha256": public.sha256_file(ATTEMPT_HISTORY_INDEX_PATH) if ATTEMPT_HISTORY_INDEX_PATH.exists() else None,
-                "authoritative_for_active_transaction": False,
+                **attempt_history_index_metadata_reporting_only(),
             },
             "active_attempt_counters": contact_counters,
             "historical_lane_contact_report": historical_lane_report,
@@ -6950,6 +7033,9 @@ def validate_only() -> dict[str, Any]:
     if SOURCE_BUNDLE.exists() and (public.sha256_file(SOURCE_BUNDLE) != manifest_bundle_sha or bundle_preview["sha256"] != manifest_bundle_sha):
         failures.append("source bundle reconstruction mismatch")
     failures.extend(validate_receipt_chain(manifest_data))
+    history_index_binding = validate_attempt_history_index_manifest_binding(manifest_data)
+    if not history_index_binding["passed"]:
+        failures.append("attempt history index manifest binding mismatch")
     feature_boundary = public.feature_boundary_self_test()
     if not feature_boundary["passed"]:
         failures.append("feature boundary scan failed")
