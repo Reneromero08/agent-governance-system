@@ -6,9 +6,12 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
+
+import phase_lock as phase_lock_tool
 
 
 MISSION_ID = "CAT_CAS_UNBOUNDED_COMPUTE_V1"
@@ -51,6 +54,111 @@ def missing_or_placeholder(value: Any) -> bool:
     if value is None or value == "" or value == [] or value == {}:
         return True
     return bool(PLACEHOLDER.search(str(value)))
+
+
+def git_succeeds(root: Path, *args: str) -> bool:
+    try:
+        subprocess.run(
+            ["git", *args],
+            cwd=root,
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        return True
+    except (OSError, subprocess.CalledProcessError):
+        return False
+
+
+def validate_context_binding(
+    root: Path,
+    record: dict[str, Any],
+    errors: list[str],
+    *,
+    source: Path,
+    task_field: str,
+) -> None:
+    branch = str(record.get("branch", ""))
+    branch_commit = str(record.get("commit", ""))
+    control_plane_commit = str(record.get("control_plane_commit", ""))
+    task = str(record.get(task_field, ""))
+    mode = str(record.get("mode", ""))
+    task_class = str(record.get("task_class", ""))
+    selected_ids = record.get("selected_capability_nodes", [])
+
+    for field, value in (
+        ("branch", branch),
+        ("commit", branch_commit),
+        ("control_plane_commit", control_plane_commit),
+        (task_field, task),
+        ("context_digest", record.get("context_digest")),
+    ):
+        if missing_or_placeholder(value):
+            errors.append(f"{source}: incomplete {field}")
+            return
+
+    registry = load(root / "control" / "branch_registry.json")
+    context = phase_lock_tool.load_branch_context(root, branch, registry)
+    if context.get("status") in {
+        "UNREGISTERED_BRANCH",
+        "MISSING_CONTEXT_SOURCE",
+        "MISSING_REQUIRED_BRANCH_STATE",
+    }:
+        errors.append(f"{source}: invalid branch context {context.get('status')}")
+        return
+
+    current_branch = phase_lock_tool.git_value(root, "branch", "--show-current")
+    resolved_commit = phase_lock_tool.resolve_branch_commit(root, branch, current_branch)
+    if resolved_commit != branch_commit:
+        errors.append(
+            f"{source}: stale or wrong branch commit {branch_commit}; expected {resolved_commit}"
+        )
+    if not git_succeeds(root, "cat-file", "-e", f"{control_plane_commit}^{{commit}}"):
+        errors.append(f"{source}: control_plane_commit is not a Git commit")
+
+    graph = load(root / "control" / "capability_graph.json")
+    by_id = {node.get("id"): node for node in graph.get("nodes", [])}
+    if not isinstance(selected_ids, list) or not selected_ids:
+        errors.append(f"{source}: selected_capability_nodes missing")
+        return
+    unknown = [node_id for node_id in selected_ids if node_id not in by_id]
+    if unknown:
+        errors.append(f"{source}: unknown capability nodes {unknown}")
+        return
+    selected = [by_id[node_id] for node_id in selected_ids]
+
+    expected_paths = sorted(
+        {
+            path
+            for node in selected
+            for path in node.get("code_entrypoints", [])
+        }
+    )
+    if record.get("selected_code_paths") != expected_paths:
+        errors.append(f"{source}: selected_code_paths do not match capability nodes")
+
+    mission = load(root / "control" / "mission.json")
+    state = load(root / "control" / "current_state.json")
+    expected_digest = phase_lock_tool.build_digest(
+        mission,
+        state,
+        context,
+        selected,
+        task,
+        mode,
+        task_class,
+        branch,
+        branch_commit,
+        control_plane_commit,
+    )
+    if record.get("context_digest") != expected_digest:
+        errors.append(f"{source}: context_digest does not match current control inputs")
+
+    if task_class == "flagship_compute" and "HOLO_GEN5" not in selected_ids:
+        errors.append(f"{source}: flagship_compute omitted HOLO_GEN5")
+    if any(term in task.lower() for term in ("bounty", "external", "prize", "verifier")):
+        if "TRACK8" not in selected_ids:
+            errors.append(f"{source}: external task omitted TRACK8")
 
 
 def require_files(root: Path, errors: list[str]) -> None:
@@ -181,7 +289,17 @@ def validate_graph(root: Path, errors: list[str]) -> None:
         if relative and not node.get("branch") and not (root / relative).exists():
             errors.append(f"{node_id}: missing local path {relative}")
         for code_path in node.get("code_entrypoints", []):
-            if not (root / code_path).exists():
+            if node.get("branch"):
+                repo_root_value = phase_lock_tool.git_value(root, "rev-parse", "--show-toplevel")
+                repo_root = Path(repo_root_value) if repo_root_value != "UNKNOWN" else None
+                branch_commit = node.get("branch_commit")
+                if repo_root is None or not branch_commit:
+                    errors.append(f"{node_id}: cannot validate branch code entrypoint {code_path}")
+                    continue
+                object_path = (root.relative_to(repo_root) / code_path).as_posix()
+                if not git_succeeds(root, "cat-file", "-e", f"{branch_commit}:{object_path}"):
+                    errors.append(f"{node_id}: missing branch code entrypoint {code_path}")
+            elif not (root / code_path).exists():
                 errors.append(f"{node_id}: missing code entrypoint {code_path}")
 
     for edge in graph.get("edges", []):
@@ -212,6 +330,48 @@ def validate_branch_registry(root: Path, errors: list[str]) -> None:
         errors.append("audio branch prime directive changed")
     if audio.get("physical_audio_computing_established") is not False:
         errors.append("audio branch context inflates physical audio status")
+
+    audio_record = next(
+        (
+            record
+            for record in registry.get("branches", [])
+            if record.get("pattern") == "codex/audio-frequency-wave-substrate"
+        ),
+        {},
+    )
+    graph = load(root / "control" / "capability_graph.json")
+    audio_node = next(
+        (node for node in graph.get("nodes", []) if node.get("id") == "AUDIO_SIDEQUEST"),
+        {},
+    )
+    state = load(root / "control" / "current_state.json")
+    audio_frontier = next(
+        (
+            frontier
+            for frontier in state.get("active_frontiers", [])
+            if frontier.get("id") == "AUDIO_PHASE_TORUS"
+        ),
+        {},
+    )
+    heads = {
+        audio.get("branch_commit"),
+        audio_record.get("frozen_head"),
+        audio_node.get("branch_commit"),
+        audio_frontier.get("branch_commit"),
+    }
+    if None in heads or len(heads) != 1:
+        errors.append("audio branch head bindings disagree across control files")
+    else:
+        frozen_head = str(next(iter(heads)))
+        resolved = phase_lock_tool.resolve_branch_commit(
+            root,
+            "codex/audio-frequency-wave-substrate",
+            phase_lock_tool.git_value(root, "branch", "--show-current"),
+        )
+        if resolved != "UNKNOWN" and resolved != frozen_head:
+            errors.append(
+                f"audio branch advanced or diverged: frozen {frozen_head}, resolved {resolved}"
+            )
 
 
 def validate_evals(root: Path, errors: list[str]) -> None:
@@ -263,7 +423,7 @@ def validate_boot_docs(root: Path, errors: list[str]) -> None:
         errors.append("README.md does not route through mission and capability views")
 
 
-def validate_receipt(path: Path, errors: list[str]) -> None:
+def validate_receipt(root: Path, path: Path, errors: list[str]) -> None:
     receipt = load(path)
     if receipt.get("mission_id") != MISSION_ID:
         errors.append(f"{path}: mission mismatch")
@@ -296,11 +456,27 @@ def validate_receipt(path: Path, errors: list[str]) -> None:
             errors.append(f"{path}: incomplete {field}")
     if receipt.get("phase_locked") is not True:
         errors.append(f"{path}: phase_locked must be true")
-    if not receipt.get("context_digest"):
-        errors.append(f"{path}: context_digest missing")
+    validate_context_binding(root, receipt, errors, source=path, task_field="task")
+
+    sibling = path.with_name("TASK_CONTRACT.json")
+    if sibling.exists():
+        contract = load(sibling)
+        for field, receipt_field, contract_field in (
+            ("branch", "branch", "branch"),
+            ("commit", "commit", "commit"),
+            ("control_plane_commit", "control_plane_commit", "control_plane_commit"),
+            ("context_digest", "context_digest", "context_digest"),
+            ("mode", "mode", "mode"),
+            ("task_class", "task_class", "task_class"),
+            ("task", "task", "requested_operation"),
+            ("selected_capability_nodes", "selected_capability_nodes", "selected_capability_nodes"),
+            ("selected_code_paths", "selected_code_paths", "selected_code_paths"),
+        ):
+            if receipt.get(receipt_field) != contract.get(contract_field):
+                errors.append(f"{path}: {field} disagrees with sibling TASK_CONTRACT.json")
 
 
-def validate_task_contract(path: Path, errors: list[str]) -> None:
+def validate_task_contract(root: Path, path: Path, errors: list[str]) -> None:
     contract = load(path)
     if contract.get("mission_id") != MISSION_ID:
         errors.append(f"{path}: mission mismatch")
@@ -322,6 +498,13 @@ def validate_task_contract(path: Path, errors: list[str]) -> None:
     for field in common + (flagship if task_class == "flagship_compute" else ()):
         if missing_or_placeholder(contract.get(field)):
             errors.append(f"{path}: incomplete {field}")
+    validate_context_binding(
+        root,
+        contract,
+        errors,
+        source=path,
+        task_field="requested_operation",
+    )
 
 
 def validate_experiment(path: Path, errors: list[str]) -> None:
@@ -370,9 +553,9 @@ def main() -> int:
             validate_evals(root, errors)
             validate_boot_docs(root, errors)
         if args.receipt:
-            validate_receipt(args.receipt.resolve(), errors)
+            validate_receipt(root, args.receipt.resolve(), errors)
         if args.task_contract:
-            validate_task_contract(args.task_contract.resolve(), errors)
+            validate_task_contract(root, args.task_contract.resolve(), errors)
         if args.experiment:
             validate_experiment(args.experiment.resolve(), errors)
     except ValidationError as exc:

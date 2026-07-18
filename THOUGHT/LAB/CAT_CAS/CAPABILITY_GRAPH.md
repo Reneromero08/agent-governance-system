@@ -136,6 +136,13 @@ Code entrypoints:
 - Capabilities: U1_phase_state, torus_relations, recursive_phase_tree, recursive_wave_operator, software_catalytic_wave_loop, recursive_catalytic_ising_emulator, classical_waveform_projection
 - Open blockers: none
 
+Code entrypoints:
+
+- `7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AGENTS.md`
+- `7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUDIO_SIDE_QUEST_ROADMAP.md`
+- `7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/physical_phase_carrier_v1/p0_analysis_conformance.py`
+- `7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/physical_phase_carrier_v1/p0_packet_validator.py`
+
 ### TRACK8 - Externally adjudicated bounty transfer
 
 - Path: `8_external_frontiers`

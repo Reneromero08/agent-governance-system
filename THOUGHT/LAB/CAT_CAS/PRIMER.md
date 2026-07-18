@@ -14,7 +14,11 @@ python tools/phase_lock.py \
 ```
 
 The command compiles a small task-scoped packet from the mission, current state,
-capability graph, branch registry, and relevant code paths.
+capability graph, branch registry, and relevant code paths. When the highest-priority
+capability lives on a registered research branch, the tool automatically targets that
+branch and binds its remote commit. Use `--branch` only to override that inference. If
+the control-plane checkout differs from the target branch, the packet is planning
+context; perform edits in a worktree based on the recorded target commit.
 
 ---
 

@@ -215,6 +215,12 @@
         "recursive_catalytic_ising_emulator",
         "classical_waveform_projection"
       ],
+      "code_entrypoints": [
+        "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AGENTS.md",
+        "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUDIO_SIDE_QUEST_ROADMAP.md",
+        "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/physical_phase_carrier_v1/p0_analysis_conformance.py",
+        "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/physical_phase_carrier_v1/p0_packet_validator.py"
+      ],
       "prime_directive": "REPLACE THE BIT WITH PI",
       "does_not_establish": [
         "physical_audio_computing",

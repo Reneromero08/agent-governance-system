@@ -19,6 +19,11 @@ python tools/phase_lock.py \
   --task-class <flagship_compute|enabling_infrastructure|external_product|calibration|evidence_audit>
 ```
 
+The tool infers a registered target branch from the highest-priority capability when
+one exists. Use `--branch` only to override that inference. If the packet says the
+control-plane checkout does not match the target, it authorizes planning only; perform
+edits in a worktree based on the recorded target commit.
+
 This creates:
 
 ```text
@@ -27,15 +32,21 @@ _agent/PHASE_LOCK_RECEIPT.json
 _agent/TASK_CONTRACT.json
 ```
 
-Read the packet, complete the receipt, and validate it before implementation:
+Read the packet, complete both generated JSON files, and validate them before
+implementation:
 
 ```text
-python tools/validate_control_plane.py --receipt _agent/PHASE_LOCK_RECEIPT.json
+python tools/validate_control_plane.py \
+  --receipt _agent/PHASE_LOCK_RECEIPT.json \
+  --task-contract _agent/TASK_CONTRACT.json
 ```
 
-A failed or incomplete phase-lock receipt blocks implementation. The receipt is not a
-slogan test. It must identify the task-specific compute leverage, current claim ceiling,
-relevant code, final boundary, restoration law, and killer control.
+A failed, stale, or incomplete phase-lock pair blocks implementation. Validation
+recomputes the context digest, checks the target branch commit, binds the receipt to the
+task contract, and verifies that capability nodes resolve to the exact code paths. The
+receipt is not a slogan test. It must identify the task-specific compute leverage,
+current claim ceiling, relevant code, final boundary, restoration law, and killer
+control.
 
 The control documents and their roles:
 
@@ -213,9 +224,10 @@ critic). The essentials:
 
 ## 5. Practical operations
 
-- **Run with the repository venv when available:** from the repository root use
-  `.venv/Scripts/python.exe` on Windows or `.venv/bin/python` on Unix. The control-plane
-  tools are standard-library only and may be run with the active Python interpreter.
+- **Run scientific code and repository-wide tests with the repository venv.** Managed
+  worktrees may not contain their own `.venv`; use the source checkout's venv when a
+  dependency is required. The phase-lock and control-plane tools are standard-library
+  only, so the active `python` interpreter is the portable boot path.
 - **Prime before editing:** run `python tools/phase_lock.py ...` from this directory and
   validate the completed receipt.
 - **Stay in the lab.** Work under `THOUGHT/LAB/CAT_CAS/`. Do **not** modify the main AGS

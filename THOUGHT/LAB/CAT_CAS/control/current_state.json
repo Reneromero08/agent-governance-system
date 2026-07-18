@@ -61,7 +61,11 @@
       "id": "TRACK8_EXTERNAL_FRONTIERS",
       "state": "ARCHITECTURE_AND_ROADMAPS_PRESENT__DOMAIN_ADAPTERS_NOT_YET_PROMOTED_TO_EXTERNAL_ACCEPTANCE",
       "state_source": "8_external_frontiers/README.md",
-      "required_transfer": "EXPLICIT_EXP50_OR_HOLO_CAPABILITY_TO_EXTERNAL_BOUNDARY"
+      "required_transfer": "EXPLICIT_EXP50_OR_HOLO_CAPABILITY_TO_EXTERNAL_BOUNDARY",
+      "claim_tokens": [
+        "TRACK8_DOMAIN_ADAPTERS_NOT_SUBMISSION_READY",
+        "EXTERNAL_BOUNTY_ACCEPTANCE_NOT_ESTABLISHED"
+      ]
     }
   ],
   "critical_blockers": [

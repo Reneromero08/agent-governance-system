@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "branch": "codex/audio-frequency-wave-substrate",
-  "head": "6c1875b2b4c39588ab5bdc4878a317671329b0f0",
+  "branch_commit": "6c1875b2b4c39588ab5bdc4878a317671329b0f0",
   "base_main": "32b5af119a03bc48bb00f279e6cc0014406147ad",
   "purpose": "Build the first bounded layers of a phase-topological computer whose primitive state is phase on S^1 rather than a bit.",
   "prime_directive": "REPLACE THE BIT WITH PI",

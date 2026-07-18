@@ -2,7 +2,7 @@
 # Patterns use **/ so they survive the track-folder reorganization.
 
 # Build and phase-lock artifacts (regenerable)
-_agent/
+_agent*/
 **/__pycache__/
 *.pyc
 *.pyo

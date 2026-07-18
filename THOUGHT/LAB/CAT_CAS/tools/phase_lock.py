@@ -101,11 +101,46 @@ def node_score(task: str, node: dict[str, Any]) -> int:
     return score
 
 
-def select_nodes(task: str, graph: dict[str, Any], limit: int) -> list[dict[str, Any]]:
+def select_nodes(
+    task: str,
+    graph: dict[str, Any],
+    limit: int,
+    task_class: str,
+) -> list[dict[str, Any]]:
     nodes = graph.get("nodes", [])
+    by_id = {node.get("id"): node for node in nodes}
     ranked = sorted(nodes, key=lambda item: (node_score(task, item), item.get("id", "")), reverse=True)
-    selected = [node for node in ranked if node_score(task, node) > 0][:limit]
-    return selected or ranked[: min(limit, len(ranked))]
+
+    task_lower = task.lower()
+    anchor_ids: list[str] = []
+    if task_class == "flagship_compute":
+        anchor_ids.extend(["HOLO_GEN5", "EXP49", "EXP50", "EXP20_11", "EXP01"])
+    if any(term in task_lower for term in ("bounty", "external", "prize", "verifier")):
+        anchor_ids.insert(0, "TRACK8")
+    if any(term in task_lower for term in ("audio", "torus", "wave", "pi-native")):
+        anchor_ids = ["AUDIO_SIDEQUEST", "HOLO_GEN5", "EXP50", "EXP20_11", *anchor_ids]
+    if task_class == "external_product":
+        anchor_ids.insert(0, "TRACK8")
+
+    selected: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for node_id in anchor_ids:
+        node = by_id.get(node_id)
+        if node is not None and node_id not in seen:
+            selected.append(node)
+            seen.add(node_id)
+    for node in ranked:
+        node_id = str(node.get("id"))
+        if node_id in seen or node_score(task, node) <= 0:
+            continue
+        selected.append(node)
+        seen.add(node_id)
+        if len(selected) >= limit:
+            break
+
+    if not selected:
+        selected = ranked[: min(limit, len(ranked))]
+    return selected[:limit]
 
 
 def branch_record(branch: str, registry: dict[str, Any]) -> dict[str, Any] | None:
@@ -136,22 +171,56 @@ def load_branch_context(root: Path, branch: str, registry: dict[str, Any]) -> di
             "status": "MISSING_CONTEXT_SOURCE",
             "expected": source,
         }
+    elif record.get("requires_branch_state"):
+        path = root / str(record.get("branch_state_filename", "BRANCH_STATE.json"))
+        context = read_json(path) if path.exists() else {
+            "status": "MISSING_REQUIRED_BRANCH_STATE",
+            "expected": str(path.relative_to(root)),
+        }
     else:
         context = {"status": "REGISTERED_WITHOUT_CONTEXT_SOURCE"}
 
     context = dict(context)
+    context.setdefault("status", "REGISTERED_CONTEXT_LOADED")
     context.setdefault("branch", branch)
     context["registry_record"] = record
     return context
 
 
-def context_claim_ceiling(branch_context: dict[str, Any], state: dict[str, Any]) -> str:
+def resolve_branch_commit(root: Path, branch: str, checked_out_branch: str) -> str:
+    if branch == checked_out_branch:
+        return git_value(root, "rev-parse", "HEAD")
+    candidates = (f"origin/{branch}", f"refs/remotes/origin/{branch}", branch)
+    for candidate in candidates:
+        value = git_value(root, "rev-parse", "--verify", candidate)
+        if value != "UNKNOWN":
+            return value
+    return "UNKNOWN"
+
+
+def context_claim_ceiling(
+    branch_context: dict[str, Any],
+    state: dict[str, Any],
+    selected: list[dict[str, Any]],
+) -> str:
     if branch_context.get("claim_ceiling"):
         return str(branch_context["claim_ceiling"])
+
+    frontier_for_node = {
+        "EXP50": "EXP50_SMALL_WALL",
+        "AUDIO_SIDEQUEST": "AUDIO_PHASE_TORUS",
+        "TRACK8": "TRACK8_EXTERNAL_FRONTIERS",
+    }
+    selected_frontiers = {
+        frontier_for_node[node.get("id")]
+        for node in selected
+        if node.get("id") in frontier_for_node
+    }
     tokens: list[str] = []
     for frontier in state.get("active_frontiers", []):
-        tokens.extend(frontier.get("claim_tokens", []))
-    return " | ".join(tokens) if tokens else "SEE_CURRENT_STATE"
+        if frontier.get("id") in selected_frontiers:
+            tokens.extend(frontier.get("claim_tokens", []))
+    return " | ".join(dict.fromkeys(tokens)) if tokens else "SEE_CURRENT_STATE"
 
 
 def build_digest(
@@ -162,6 +231,9 @@ def build_digest(
     task: str,
     mode: str,
     task_class: str,
+    branch: str,
+    branch_commit: str,
+    control_plane_commit: str,
 ) -> str:
     return sha256_bytes(
         canonical_json(
@@ -173,6 +245,9 @@ def build_digest(
                 "task": task,
                 "mode": mode,
                 "task_class": task_class,
+                "branch": branch,
+                "branch_commit": branch_commit,
+                "control_plane_commit": control_plane_commit,
             }
         )
     )
@@ -189,7 +264,11 @@ def write_packet(
     mode: str,
     task_class: str,
     branch: str,
-    commit: str,
+    branch_commit: str,
+    checked_out_branch: str,
+    control_plane_commit: str,
+    receipt_display: str,
+    contract_display: str,
     digest: str,
 ) -> None:
     lines = [
@@ -200,8 +279,11 @@ def write_packet(
         f"- Task: {task}",
         f"- Mode: `{mode}`",
         f"- Task class: `{task_class}`",
-        f"- Branch: `{branch}`",
-        f"- Commit: `{commit}`",
+        f"- Target branch: `{branch}`",
+        f"- Target branch commit: `{branch_commit}`",
+        f"- Control-plane checkout: `{checked_out_branch}`",
+        f"- Control-plane commit: `{control_plane_commit}`",
+        f"- Implementation checkout matches target: `{checked_out_branch == branch}`",
         "",
         "## Mission",
         "",
@@ -249,15 +331,20 @@ def write_packet(
         [
             "## Required reconstruction",
             "",
-            "Complete `PHASE_LOCK_RECEIPT.json` before implementation. A flagship task",
-            "must identify the classical explosion, `.holo` process-object, native",
-            "operator, invariant or fixed point, final classical boundary, restoration",
-            "law, no-smuggle killer control, and current claim ceiling.",
+            "Complete both `PHASE_LOCK_RECEIPT.json` and `TASK_CONTRACT.json` before",
+            "implementation. A flagship task must identify the classical explosion,",
+            "`.holo` process-object, native operator, invariant or fixed point, final",
+            "classical boundary, restoration law, no-smuggle killer control, and current",
+            "claim ceiling.",
             "",
-            "The receipt must be validated with:",
+            "If the target branch differs from the control-plane checkout, this packet",
+            "is planning context only. Perform edits in a worktree based on the target",
+            "branch commit recorded above.",
+            "",
+            "Validate the completed pair with:",
             "",
             "```text",
-            "python tools/validate_control_plane.py --receipt _agent/PHASE_LOCK_RECEIPT.json",
+            f"python tools/validate_control_plane.py --receipt {receipt_display} --task-contract {contract_display}",
             "```",
         ]
     )
@@ -282,17 +369,45 @@ def main() -> None:
     graph = read_json(root / "control" / "capability_graph.json")
     registry = read_json(root / "control" / "branch_registry.json")
 
-    branch = args.branch or git_value(root, "branch", "--show-current")
-    commit = git_value(root, "rev-parse", "HEAD")
+    selected = select_nodes(args.task, graph, args.max_nodes, args.task_class)
+    checked_out_branch = git_value(root, "branch", "--show-current")
+    control_plane_commit = git_value(root, "rev-parse", "HEAD")
+    inferred_branch = selected[0].get("branch") if selected else None
+    branch = args.branch or inferred_branch or checked_out_branch
+    branch_commit = resolve_branch_commit(root, branch, checked_out_branch)
+    if branch_commit == "UNKNOWN":
+        raise SystemExit(f"Cannot resolve target branch commit: {branch}")
     context = load_branch_context(root, branch, registry)
-    selected = select_nodes(args.task, graph, args.max_nodes)
-    digest = build_digest(mission, state, context, selected, args.task, args.mode, args.task_class)
+    if context.get("status") in {
+        "UNREGISTERED_BRANCH",
+        "MISSING_CONTEXT_SOURCE",
+        "MISSING_REQUIRED_BRANCH_STATE",
+    } and args.mode in {"engineering", "verification"}:
+        raise SystemExit(f"Branch context blocks {args.mode}: {context.get('status')}")
+    digest = build_digest(
+        mission,
+        state,
+        context,
+        selected,
+        args.task,
+        args.mode,
+        args.task_class,
+        branch,
+        branch_commit,
+        control_plane_commit,
+    )
 
     output = root / args.output
     output.mkdir(parents=True, exist_ok=True)
     packet_path = output / "PHASE_LOCK_PACKET.md"
     receipt_path = output / "PHASE_LOCK_RECEIPT.json"
     task_contract_path = output / "TASK_CONTRACT.json"
+
+    def display_path(path: Path) -> str:
+        try:
+            return path.relative_to(root).as_posix()
+        except ValueError:
+            return path.as_posix()
 
     write_packet(
         packet_path,
@@ -304,7 +419,11 @@ def main() -> None:
         mode=args.mode,
         task_class=args.task_class,
         branch=branch,
-        commit=commit,
+        branch_commit=branch_commit,
+        checked_out_branch=checked_out_branch,
+        control_plane_commit=control_plane_commit,
+        receipt_display=display_path(receipt_path),
+        contract_display=display_path(task_contract_path),
         digest=digest,
     )
 
@@ -320,12 +439,14 @@ def main() -> None:
         {
             "timestamp": dt.datetime.now(dt.timezone.utc).isoformat(),
             "branch": branch,
-            "commit": commit,
+            "commit": branch_commit,
+            "checked_out_branch": checked_out_branch,
+            "control_plane_commit": control_plane_commit,
             "mode": args.mode,
             "task_class": args.task_class,
             "task": args.task,
             "context_digest": digest,
-            "current_claim_ceiling": context_claim_ceiling(context, state),
+            "current_claim_ceiling": context_claim_ceiling(context, state, selected),
             "selected_capability_nodes": [node.get("id") for node in selected],
             "selected_code_paths": code_paths,
         }
@@ -339,8 +460,12 @@ def main() -> None:
             "mode": args.mode,
             "task_class": args.task_class,
             "branch": branch,
+            "commit": branch_commit,
+            "checked_out_branch": checked_out_branch,
+            "control_plane_commit": control_plane_commit,
+            "context_digest": digest,
             "requested_operation": args.task,
-            "current_claim_ceiling": context_claim_ceiling(context, state),
+            "current_claim_ceiling": context_claim_ceiling(context, state, selected),
             "selected_capability_nodes": [node.get("id") for node in selected],
             "selected_code_paths": code_paths,
         }

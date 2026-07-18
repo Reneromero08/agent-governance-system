@@ -5,6 +5,8 @@
   "timestamp": "REPLACE",
   "branch": "REPLACE",
   "commit": "REPLACE",
+  "checked_out_branch": "REPLACE",
+  "control_plane_commit": "REPLACE",
   "mode": "REPLACE",
   "task_class": "REPLACE",
   "task": "REPLACE",
