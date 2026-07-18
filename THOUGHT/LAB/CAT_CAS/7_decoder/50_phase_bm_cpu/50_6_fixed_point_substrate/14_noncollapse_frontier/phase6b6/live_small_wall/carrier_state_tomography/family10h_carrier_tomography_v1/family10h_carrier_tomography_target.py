@@ -1458,6 +1458,27 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
         approved_path = write_fake_hwmon_sensor(root, 1, "k10temp", None)
         first_non_cpu = fixture_sample(root)
         approved_identity = temperature_sensor_identity(approved_path)
+        canonical_identity = public.synthetic_temperature_identity()
+        noncanonical_driver_identity = public.with_temperature_identity_digest(
+            {
+                **{key: canonical_identity[key] for key in canonical_identity if key != "identity_sha256"},
+                "resolved_driver_path": "/tmp/k10temp",
+            }
+        )
+        noncanonical_subsystem_identity = public.with_temperature_identity_digest(
+            {
+                **{key: canonical_identity[key] for key in canonical_identity if key != "identity_sha256"},
+                "resolved_subsystem_path": "/tmp/pci",
+            }
+        )
+        noncanonical_driver_path_rejected = any(
+            "resolved driver path is not canonical" in failure
+            for failure in temperature_physical_authority_failures(noncanonical_driver_identity)
+        )
+        noncanonical_subsystem_path_rejected = any(
+            "resolved subsystem path is not canonical" in failure
+            for failure in temperature_physical_authority_failures(noncanonical_subsystem_identity)
+        )
 
         wrong_name_root = root / "wrong_name"
         write_fake_hwmon_sensor(wrong_name_root, 0, "acpitz", "Tctl")
@@ -1592,6 +1613,8 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
         "wrong_label_retained_with_rejection_reason": wrong_label_record["sensor_label_value"] == "Tdie"
         and "present temp1_label is not Tctl" in wrong_label_record["rejection_reasons"],
         "path_substitution_rejected": path_substitution_rejected,
+        "noncanonical_resolved_driver_path_rejected": noncanonical_driver_path_rejected,
+        "noncanonical_resolved_subsystem_path_rejected": noncanonical_subsystem_path_rejected,
         "same_class_path_substitution_rejected": same_class_path_substitution_rejected,
         "same_class_swap_restore_reads_pinned_descriptor": swap_restore_value_pinned_to_approved,
         "identity_drift_rejected": identity_drift_rejected,
@@ -1617,6 +1640,8 @@ def policy_and_platform_fixture() -> dict[str, Any]:
         "approved_temperature_hwmon_name_required": sensor["wrong_hwmon_name_rejected"],
         "approved_temperature_sensor_label_required": sensor["labeled_k10temp_temp1_input_tdie_rejected"],
         "temperature_path_substitution_rejected": sensor["path_substitution_rejected"],
+        "temperature_noncanonical_driver_path_rejected": sensor["noncanonical_resolved_driver_path_rejected"],
+        "temperature_noncanonical_subsystem_path_rejected": sensor["noncanonical_resolved_subsystem_path_rejected"],
         "temperature_same_class_path_substitution_rejected": sensor["same_class_path_substitution_rejected"],
         "temperature_swap_restore_reads_pinned_descriptor": sensor["same_class_swap_restore_reads_pinned_descriptor"],
         "temperature_identity_drift_rejected": sensor["identity_drift_rejected"],
@@ -2422,7 +2447,7 @@ def operational_pin_capability_failures(platform_identity: dict[str, Any] | None
             if item.get("requested_affinity") != [cpu]:
                 failures.append(f"temperature sensor discovery operational pin CPU {cpu} requested affinity mismatch")
             readback = item.get("readback_affinity")
-            if isinstance(readback, list) and readback != [cpu]:
+            if not isinstance(readback, list) or readback != [cpu]:
                 failures.append(f"temperature sensor discovery operational pin CPU {cpu} readback mismatch")
             if item.get("parent_affinity_restored") is not True:
                 failures.append(f"temperature sensor discovery operational pin CPU {cpu} parent affinity was not restored")
@@ -2468,6 +2493,8 @@ def temperature_physical_authority_failures(
     resolved_input = str(identity.get("resolved_input_path", ""))
     resolved_hwmon = str(identity.get("resolved_hwmon_path", ""))
     resolved_device = str(identity.get("resolved_device_path", ""))
+    resolved_driver = str(identity.get("resolved_driver_path", ""))
+    resolved_subsystem = str(identity.get("resolved_subsystem_path", ""))
     if require_canonical_paths:
         if re.fullmatch(r"/sys/class/hwmon/hwmon\d+/temp1_input", class_path) is None:
             failures.append("temperature physical authority class path is not canonical sysfs temp1_input")
@@ -2481,6 +2508,10 @@ def temperature_physical_authority_failures(
             failures.append("temperature physical authority resolved input does not match resolved hwmon/temp1_input")
         if resolved_device and resolved_hwmon and not resolved_hwmon.startswith(resolved_device.rstrip("/") + "/"):
             failures.append("temperature physical authority resolved hwmon is not below resolved device")
+        if resolved_driver != "/sys/bus/pci/drivers/k10temp":
+            failures.append("temperature physical authority resolved driver path is not canonical k10temp sysfs driver")
+        if resolved_subsystem != "/sys/bus/pci":
+            failures.append("temperature physical authority resolved subsystem path is not canonical pci sysfs bus")
     if isinstance(authorizing_scope, dict):
         expected_scope = {
             "canonical_cpuinfo": True,
@@ -3398,11 +3429,26 @@ def platform_identity_regression(root: Path) -> dict[str, bool]:
     conflicting.write_text("processor\t: 0\nvendor_id\t: AuthenticAMD\nvendor_id\t: GenuineIntel\ncpu family\t: 16\nmodel\t\t: 10\n", encoding="utf-8")
     malformed = root / "cpuinfo_malformed"
     malformed.write_text("processor\t 0\nvendor_id\t: AuthenticAMD\ncpu family\t: 16\nmodel\t\t: 10\n", encoding="utf-8")
+    valid_platform = require_family10h_platform(
+        valid,
+        inherited_affinity_cpus=list(range(6)),
+        pin_probe=lambda required: fake_pin_probe(required, inherited_affinity=list(range(6))),
+    )
     inherited_excludes_pass = require_family10h_platform(
         valid,
         inherited_affinity_cpus=[0, 1, 2, 3],
         pin_probe=lambda required: fake_pin_probe(required, inherited_affinity=[0, 1, 2, 3]),
     )
+
+    def cloned_platform_with_readback(readback_value: Any, *, omit: bool = False) -> dict[str, Any]:
+        platform = json.loads(json.dumps(valid_platform))
+        per_cpu = platform["operational_pin_capability"]["per_cpu"][str(public.SOURCE_CPU_EXPECTED)]
+        if omit:
+            per_cpu.pop("readback_affinity", None)
+        else:
+            per_cpu["readback_affinity"] = readback_value
+        return platform
+
     return {
         "valid_family10h_platform_passes": require_family10h_platform(valid)["processor_count"] == 6,
         "intel_platform_rejected": raises_target_error(lambda: require_family10h_platform(intel)),
@@ -3474,6 +3520,9 @@ def platform_identity_regression(root: Path) -> dict[str, bool]:
             ),
             "operational pin capability failed for CPU 4: child affinity readback differs",
         ),
+        "child_affinity_readback_missing_rejected": bool(operational_pin_capability_failures(cloned_platform_with_readback(None, omit=True))),
+        "child_affinity_readback_null_rejected": bool(operational_pin_capability_failures(cloned_platform_with_readback(None))),
+        "child_affinity_readback_nonlist_rejected": bool(operational_pin_capability_failures(cloned_platform_with_readback(str(public.SOURCE_CPU_EXPECTED)))),
         "parent_affinity_change_rejected": raises_target_error_containing(
             lambda: require_family10h_platform(
                 valid,
