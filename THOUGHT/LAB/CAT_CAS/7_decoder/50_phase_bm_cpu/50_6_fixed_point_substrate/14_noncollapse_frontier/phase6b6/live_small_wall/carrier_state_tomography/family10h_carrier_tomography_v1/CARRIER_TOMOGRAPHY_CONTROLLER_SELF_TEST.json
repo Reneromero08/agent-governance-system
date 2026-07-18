@@ -29,7 +29,7 @@
       "production_acquisition_has_no_injected_transport_surface": true,
       "production_invalid_copyback_absence_probe_invoked": true,
       "production_invalid_copyback_acquisition_raises_before_success": true,
-      "production_invalid_copyback_cleanup_invoked": true,
+      "production_invalid_copyback_cleanup_not_invoked": true,
       "production_invalid_copyback_cleanup_receipt_records_absence": true,
       "production_invalid_copyback_cleanup_receipt_sealed": true,
       "production_invalid_copyback_journal_stops_before_receipt_copied": true,
@@ -167,10 +167,10 @@
     "present_authority_env": []
   },
   "live_invocation_count": 0,
-  "offline_validate_sha256": "1e29e1bead1b820ef67cea1b48aeba6d1e976f9dec3b589fd0c5343e6c177b90",
+  "offline_validate_sha256": "46d7d55ce76f5a14209a6d37504320d14555fad1f03c01bac7d1baa23b63a602",
   "package_json_parse_audit": {
     "failures": [],
-    "json_count": 46,
+    "json_count": 48,
     "jsonl_count": 2,
     "jsonl_row_count": 6,
     "passed": true,
@@ -251,9 +251,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "5bc45fdcc7614d65f8000ec3187d3c2eb4fa3266",
           "name": "CARRIER_TOMOGRAPHY_CONTRACT.md",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/CARRIER_TOMOGRAPHY_CONTRACT.md",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/CARRIER_TOMOGRAPHY_CONTRACT.md",
           "sha256": "e2ed0d3ef73766486983e15365d3ead38d3a9a963c3b0cad91b74d8150d24d22",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_CONTRACT.md"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_CONTRACT.md"
         },
         {
           "authority_class": "source",
@@ -261,9 +261,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "c8c959a09f050e90abfc90cc8f5e0505feffd3d5",
           "name": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
           "sha256": "9658ea725d69ae384c85c5664505e59497d1e3291376128ee2160824ee7e0648",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json"
         },
         {
           "authority_class": "source",
@@ -271,9 +271,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "d36b0626d215596d18442a8712021fc506a000b1",
           "name": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
           "sha256": "b788a89f66eeb1074f5a8a591f669933efaaaa2ccfd7ef9ebb3715104fc25690",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv"
         },
         {
           "authority_class": "source",
@@ -281,9 +281,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "0d39563561219c761f93df904b7e1cecb14c3ca1",
           "name": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
           "sha256": "0eb44bbd0e0cd1f5a637fedc747acbd6f4069ad51aa52b73ad7aa86e17f94880",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256"
         },
         {
           "authority_class": "source",
@@ -291,19 +291,19 @@
           "git_blob_id": null,
           "local_git_blob_id": "5a60691c1ab47849131ed3106d29c71ecf3b80e0",
           "name": "family10h_carrier_tomography_public.py",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/family10h_carrier_tomography_public.py",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/family10h_carrier_tomography_public.py",
           "sha256": "c9a4ba581f4e1a45ab3396412be7587a5278c8ace97ddd00ee1ff2f5f88828c8",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\family10h_carrier_tomography_public.py"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\family10h_carrier_tomography_public.py"
         },
         {
           "authority_class": "source",
-          "byte_size": 226472,
+          "byte_size": 226555,
           "git_blob_id": null,
-          "local_git_blob_id": "3dcabeb2dbb25a1ffd0ab27f3afbd4a44097d504",
+          "local_git_blob_id": "2c187ff74ec98d0e16235872f7d37fe22bc4bb9e",
           "name": "family10h_carrier_tomography_target.py",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/family10h_carrier_tomography_target.py",
-          "sha256": "89878a87f250276ab08e5c6a1372bc7db2da6298c7133a472e2a7af6e825cfef",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\family10h_carrier_tomography_target.py"
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/family10h_carrier_tomography_target.py",
+          "sha256": "5539a0990068daafc387d265ef28910494ca5bbb219bd02e464d79d24f071c5d",
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\family10h_carrier_tomography_target.py"
         },
         {
           "authority_class": "source",
@@ -311,9 +311,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "b561cb8fc19cab44308782a4b6d3febff996fa2b",
           "name": "family10h_carrier_tomography_runtime.c",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/family10h_carrier_tomography_runtime.c",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/family10h_carrier_tomography_runtime.c",
           "sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\family10h_carrier_tomography_runtime.c"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\family10h_carrier_tomography_runtime.c"
         },
         {
           "authority_class": "source",
@@ -321,39 +321,39 @@
           "git_blob_id": null,
           "local_git_blob_id": "73254dcbe65cc856db458b60fca46f882f3e68be",
           "name": "family10h_carrier_tomography_runtime.h",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/family10h_carrier_tomography_runtime.h",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/family10h_carrier_tomography_runtime.h",
           "sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\family10h_carrier_tomography_runtime.h"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\family10h_carrier_tomography_runtime.h"
         },
         {
           "authority_class": "source",
-          "byte_size": 386987,
+          "byte_size": 388715,
           "git_blob_id": null,
-          "local_git_blob_id": "79f470e3a2199699e41e87ad1d9c2f7a989e6a53",
+          "local_git_blob_id": "bd6cd617d184b24a0dea7b83789f079373c3e974",
           "name": "run_family10h_carrier_tomography_v1.py",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/run_family10h_carrier_tomography_v1.py",
-          "sha256": "a47bcd8a9ad287e492709c26d4f468454fc09b486dcabb2f2b2d316748c5f9ce",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\run_family10h_carrier_tomography_v1.py"
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/run_family10h_carrier_tomography_v1.py",
+          "sha256": "2f9e243097ba2257f86c9dd305cbfb81b6cfacaf3b7a4ca234130c8f915ab908",
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\run_family10h_carrier_tomography_v1.py"
         },
         {
           "authority_class": "generated authority",
           "byte_size": 2733,
           "git_blob_id": null,
-          "local_git_blob_id": "83ce5939cdbe28f293528ab7a1146e44d91d3543",
+          "local_git_blob_id": "6cfd84f4883f8ea72868b9c7c741c9b96bff2a0c",
           "name": "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-          "sha256": "48457b9b63c90ff4937289aafec3ec50b0517f7d19283cf6255ec1b4512cfbff",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_SOURCE_HASHES.json"
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+          "sha256": "932c13bcfc5ac1457892b9b4a39ecab496f11db01c96f4f7f73c881b993ea1a9",
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_SOURCE_HASHES.json"
         },
         {
           "authority_class": "generated authority",
-          "byte_size": 721221,
+          "byte_size": 721451,
           "git_blob_id": null,
-          "local_git_blob_id": "deee13c652d0a4106b2e21e010ebd741a0a2a793",
+          "local_git_blob_id": "6783bdd2a93338a69e53c0f1b11b694e3ebe51de",
           "name": "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-          "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz"
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+          "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz"
         },
         {
           "authority_class": "generated authority",
@@ -361,9 +361,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "961e19e6f4c6dbbdb8137d8c0db47be5a01db8be",
           "name": "SUBAGENT_FINDINGS_NORMALIZED.json",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\differing_keyset/SUBAGENT_FINDINGS_NORMALIZED.json",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\differing_keyset/SUBAGENT_FINDINGS_NORMALIZED.json",
           "sha256": "609b7dfe8d80ef8c0af09d24d4f2546d8c471af6658703cfdb675df464705ff3",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\SUBAGENT_FINDINGS_NORMALIZED.json"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\SUBAGENT_FINDINGS_NORMALIZED.json"
         }
       ],
       "runtime_binary_authority": {
@@ -438,13 +438,13 @@
           "size": 22928
         }
       },
-      "source_bundle_file_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-      "source_bundle_reconstruction_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-      "transfer_plan_sha256": "1980cef8d4c8b0264ab28bea4b92d7a348dcbbc3908460ba2d9e4e74f723a2c7"
+      "source_bundle_file_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+      "source_bundle_reconstruction_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+      "transfer_plan_sha256": "e827cd2a27dd935e8d99f3cf5abce53d670c0f5cd83fed18e8f57d0f95b7073b"
     },
     "failures": [],
     "fresh_root_validation": {
-      "challenge_sha256": "02e722b945df95e90e13b3da936c0eec021358f3ffe95597be9b89c1e79aeffb",
+      "challenge_sha256": "c375161779d2693969993fe37cf39e6283dc0043642e3aea1d2974fdf0a6616f",
       "controller_nonce_sha256": "ffe054fe7ae0cb6dc65c3af9b61d5209f439851db43d0ba5997337df154668eb",
       "discovery_transfer_root": {
         "expected_files": [
@@ -519,9 +519,9 @@
             "size": 22928
           }
         },
-        "source_bundle_file_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_bundle_reconstruction_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
+        "source_bundle_file_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_bundle_reconstruction_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646",
         "unexpected_files": []
       },
       "expected_challenge": {
@@ -540,17 +540,17 @@
           "review_report_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
           "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
           "source_authority_commit": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-          "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-          "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31"
+          "source_bundle_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+          "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646"
         },
-        "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
+        "source_bundle_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646",
         "transaction_run_id": "family10h_carrier_tomography_v1_0",
         "transport_scope": {
-          "remote_base_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk",
-          "remote_receipt_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\target_source\\CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json",
-          "remote_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk",
-          "remote_source_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\target_source",
+          "remote_base_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89",
+          "remote_receipt_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\target_source\\CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json",
+          "remote_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89",
+          "remote_source_root": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\target_source",
           "target_host": "offline_fixture"
         }
       },
@@ -672,9 +672,9 @@
             "size": 22928
           }
         },
-        "source_bundle_file_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_bundle_reconstruction_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
+        "source_bundle_file_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_bundle_reconstruction_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646",
         "unexpected_files": [
           "unexpected_authority_file.txt"
         ]
@@ -760,9 +760,9 @@
             "size": 22928
           }
         },
-        "source_bundle_file_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
+        "source_bundle_file_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
         "source_bundle_reconstruction_sha256": null,
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646",
         "unexpected_files": []
       },
       "runtime_bytes_mutated": {
@@ -846,9 +846,9 @@
             "size": 22954
           }
         },
-        "source_bundle_file_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_bundle_reconstruction_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
+        "source_bundle_file_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_bundle_reconstruction_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646",
         "unexpected_files": []
       },
       "runtime_omitted": {
@@ -904,9 +904,9 @@
             "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1"
           }
         },
-        "source_bundle_file_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_bundle_reconstruction_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
+        "source_bundle_file_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_bundle_reconstruction_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646",
         "unexpected_files": []
       },
       "runtime_size_mutated": {
@@ -990,9 +990,9 @@
             "size": 22927
           }
         },
-        "source_bundle_file_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_bundle_reconstruction_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
+        "source_bundle_file_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_bundle_reconstruction_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646",
         "unexpected_files": []
       },
       "source_bundle_bytes_mutated": {
@@ -1070,9 +1070,9 @@
             "size": 22928
           }
         },
-        "source_bundle_file_sha256": "12164120bbb3ff9a4aea2529c947a244ad574044e3267b24a049bb05a8bb7cae",
-        "source_bundle_reconstruction_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
+        "source_bundle_file_sha256": "a9a47a5c223792ce66cfb2d5d35e8dc2ec62b0d2dbd9aa33855ea4b4d4c782be",
+        "source_bundle_reconstruction_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646",
         "unexpected_files": []
       },
       "source_bundle_omitted": {
@@ -1154,8 +1154,8 @@
           }
         },
         "source_bundle_file_sha256": null,
-        "source_bundle_reconstruction_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
+        "source_bundle_reconstruction_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646",
         "unexpected_files": []
       },
       "source_bundle_reconstruction_mismatch": {
@@ -1236,9 +1236,9 @@
             "size": 22928
           }
         },
-        "source_bundle_file_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_bundle_reconstruction_sha256": "2c2fbd6831a1a779ecc1c942b354786327ed488e2c4f39fea6a30070b9ff626a",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31",
+        "source_bundle_file_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_bundle_reconstruction_sha256": "c7846b7e9da673be033c484ad39fac504af8f5bcb59f600710ffd96363401ab0",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646",
         "unexpected_files": []
       },
       "source_hash_omitted": {
@@ -1289,14 +1289,14 @@
           ],
           "passed": false
         },
-        "source_bundle_file_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_bundle_reconstruction_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
+        "source_bundle_file_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_bundle_reconstruction_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
         "source_hashes_sha256": null,
         "unexpected_files": []
       }
     },
     "passed": true,
-    "regression_sha256": "6e2b2a45e1a6a0eeff4e82ae7a36942018b5965fc4a3742804ff6917078c1a2d",
+    "regression_sha256": "9b199370fba76be93cff9da08957565dbdae75156294010905875d056a7dc7d2",
     "runtime_blob_mismatch_plan": {
       "actual_file_names": [
         "CARRIER_TOMOGRAPHY_CONTRACT.md",
@@ -1342,9 +1342,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "5bc45fdcc7614d65f8000ec3187d3c2eb4fa3266",
           "name": "CARRIER_TOMOGRAPHY_CONTRACT.md",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_CONTRACT.md",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_CONTRACT.md",
           "sha256": "e2ed0d3ef73766486983e15365d3ead38d3a9a963c3b0cad91b74d8150d24d22",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_CONTRACT.md"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_CONTRACT.md"
         },
         {
           "authority_class": "source",
@@ -1352,9 +1352,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "c8c959a09f050e90abfc90cc8f5e0505feffd3d5",
           "name": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
           "sha256": "9658ea725d69ae384c85c5664505e59497d1e3291376128ee2160824ee7e0648",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json"
         },
         {
           "authority_class": "source",
@@ -1362,9 +1362,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "d36b0626d215596d18442a8712021fc506a000b1",
           "name": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
           "sha256": "b788a89f66eeb1074f5a8a591f669933efaaaa2ccfd7ef9ebb3715104fc25690",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv"
         },
         {
           "authority_class": "source",
@@ -1372,9 +1372,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "0d39563561219c761f93df904b7e1cecb14c3ca1",
           "name": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
           "sha256": "0eb44bbd0e0cd1f5a637fedc747acbd6f4069ad51aa52b73ad7aa86e17f94880",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256"
         },
         {
           "authority_class": "source",
@@ -1382,19 +1382,19 @@
           "git_blob_id": null,
           "local_git_blob_id": "5a60691c1ab47849131ed3106d29c71ecf3b80e0",
           "name": "family10h_carrier_tomography_public.py",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/family10h_carrier_tomography_public.py",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/family10h_carrier_tomography_public.py",
           "sha256": "c9a4ba581f4e1a45ab3396412be7587a5278c8ace97ddd00ee1ff2f5f88828c8",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\family10h_carrier_tomography_public.py"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\family10h_carrier_tomography_public.py"
         },
         {
           "authority_class": "source",
-          "byte_size": 226472,
+          "byte_size": 226555,
           "git_blob_id": null,
-          "local_git_blob_id": "3dcabeb2dbb25a1ffd0ab27f3afbd4a44097d504",
+          "local_git_blob_id": "2c187ff74ec98d0e16235872f7d37fe22bc4bb9e",
           "name": "family10h_carrier_tomography_target.py",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/family10h_carrier_tomography_target.py",
-          "sha256": "89878a87f250276ab08e5c6a1372bc7db2da6298c7133a472e2a7af6e825cfef",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\family10h_carrier_tomography_target.py"
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/family10h_carrier_tomography_target.py",
+          "sha256": "5539a0990068daafc387d265ef28910494ca5bbb219bd02e464d79d24f071c5d",
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\family10h_carrier_tomography_target.py"
         },
         {
           "authority_class": "source",
@@ -1402,9 +1402,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "b561cb8fc19cab44308782a4b6d3febff996fa2b",
           "name": "family10h_carrier_tomography_runtime.c",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/family10h_carrier_tomography_runtime.c",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/family10h_carrier_tomography_runtime.c",
           "sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\family10h_carrier_tomography_runtime.c"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\family10h_carrier_tomography_runtime.c"
         },
         {
           "authority_class": "source",
@@ -1412,39 +1412,39 @@
           "git_blob_id": null,
           "local_git_blob_id": "73254dcbe65cc856db458b60fca46f882f3e68be",
           "name": "family10h_carrier_tomography_runtime.h",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/family10h_carrier_tomography_runtime.h",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/family10h_carrier_tomography_runtime.h",
           "sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\family10h_carrier_tomography_runtime.h"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\family10h_carrier_tomography_runtime.h"
         },
         {
           "authority_class": "source",
-          "byte_size": 386987,
+          "byte_size": 388715,
           "git_blob_id": null,
-          "local_git_blob_id": "79f470e3a2199699e41e87ad1d9c2f7a989e6a53",
+          "local_git_blob_id": "bd6cd617d184b24a0dea7b83789f079373c3e974",
           "name": "run_family10h_carrier_tomography_v1.py",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/run_family10h_carrier_tomography_v1.py",
-          "sha256": "a47bcd8a9ad287e492709c26d4f468454fc09b486dcabb2f2b2d316748c5f9ce",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\run_family10h_carrier_tomography_v1.py"
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/run_family10h_carrier_tomography_v1.py",
+          "sha256": "2f9e243097ba2257f86c9dd305cbfb81b6cfacaf3b7a4ca234130c8f915ab908",
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\run_family10h_carrier_tomography_v1.py"
         },
         {
           "authority_class": "generated authority",
           "byte_size": 2733,
           "git_blob_id": null,
-          "local_git_blob_id": "83ce5939cdbe28f293528ab7a1146e44d91d3543",
+          "local_git_blob_id": "6cfd84f4883f8ea72868b9c7c741c9b96bff2a0c",
           "name": "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-          "sha256": "48457b9b63c90ff4937289aafec3ec50b0517f7d19283cf6255ec1b4512cfbff",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_SOURCE_HASHES.json"
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+          "sha256": "932c13bcfc5ac1457892b9b4a39ecab496f11db01c96f4f7f73c881b993ea1a9",
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_SOURCE_HASHES.json"
         },
         {
           "authority_class": "generated authority",
-          "byte_size": 721221,
+          "byte_size": 721451,
           "git_blob_id": null,
-          "local_git_blob_id": "deee13c652d0a4106b2e21e010ebd741a0a2a793",
+          "local_git_blob_id": "6783bdd2a93338a69e53c0f1b11b694e3ebe51de",
           "name": "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-          "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz"
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+          "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz"
         },
         {
           "authority_class": "generated authority",
@@ -1452,9 +1452,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "961e19e6f4c6dbbdb8137d8c0db47be5a01db8be",
           "name": "SUBAGENT_FINDINGS_NORMALIZED.json",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/SUBAGENT_FINDINGS_NORMALIZED.json",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/SUBAGENT_FINDINGS_NORMALIZED.json",
           "sha256": "609b7dfe8d80ef8c0af09d24d4f2546d8c471af6658703cfdb675df464705ff3",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\SUBAGENT_FINDINGS_NORMALIZED.json"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\SUBAGENT_FINDINGS_NORMALIZED.json"
         },
         {
           "authority_class": "runtime binary",
@@ -1462,9 +1462,9 @@
           "git_blob_id": null,
           "local_git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
           "name": "family10h_carrier_tomography_runtime",
-          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\wrong_runtime_blob/family10h_carrier_tomography_runtime",
+          "remote_destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\wrong_runtime_blob/family10h_carrier_tomography_runtime",
           "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
-          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_j__5_oxk\\source_stage\\family10h_carrier_tomography_runtime"
+          "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_production_transfer_plan_5cr13l89\\source_stage\\family10h_carrier_tomography_runtime"
         }
       ],
       "runtime_binary_authority": {
@@ -1539,14 +1539,14 @@
           "size": 22928
         }
       },
-      "source_bundle_file_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-      "source_bundle_reconstruction_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-      "transfer_plan_sha256": "be2c080e772f2d6148ade6d0febac4fd4ac6d18f89c1e5fba31a199a09557c14"
+      "source_bundle_file_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+      "source_bundle_reconstruction_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+      "transfer_plan_sha256": "78be18275151f73384a6fc6a31777bda273a5de985f727994c16e9d4a3568b2e"
     },
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_PRODUCTION_DISCOVERY_TRANSFER_PLAN_REGRESSION_V1",
     "source_authority_commit_used_for_blob_checks": null,
     "transfer_plan_file_count": 13,
-    "transfer_plan_sha256": "5fca759d5684c6b2036be70b0d20dba7e8011fbc2c9741f321bd689309862329"
+    "transfer_plan_sha256": "0dbfc94ea45dbd3a6d8add9418dfe03c4e39c4b59c85f9ca2036ca74cafa6615"
   },
   "review_quorum_null_model_baseline": {
     "null_baseline_failures": [
@@ -1578,12 +1578,12 @@
       "missing_authority_rejected_before_output_creation": true
     },
     "compile": {
-      "binary_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\carrier_tomography_runtime_gate_3twb7nf3\\family10h_carrier_tomography_runtime",
+      "binary_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\carrier_tomography_runtime_gate_babc0ty0\\family10h_carrier_tomography_runtime",
       "compile_command": [
         "C:\\Windows\\system32\\wsl.EXE",
         "bash",
         "-lc",
-        "gcc -std=c11 -Wall -Wextra -Werror -O2 -o \"$(wslpath 'C:\\Users\\rene_\\AppData\\Local\\Temp\\carrier_tomography_runtime_gate_3twb7nf3\\family10h_carrier_tomography_runtime')\" \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime.c')\""
+        "gcc -std=c11 -Wall -Wextra -Werror -O2 -o \"$(wslpath 'C:\\Users\\rene_\\AppData\\Local\\Temp\\carrier_tomography_runtime_gate_babc0ty0\\family10h_carrier_tomography_runtime')\" \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime.c')\""
       ],
       "compile_command_identity": {
         "flags": [
@@ -1612,7 +1612,7 @@
         "C:\\Windows\\system32\\wsl.EXE",
         "bash",
         "-lc",
-        "\"$(wslpath 'C:\\Users\\rene_\\AppData\\Local\\Temp\\carrier_tomography_runtime_gate_3twb7nf3\\family10h_carrier_tomography_runtime')\" --self-test"
+        "\"$(wslpath 'C:\\Users\\rene_\\AppData\\Local\\Temp\\carrier_tomography_runtime_gate_babc0ty0\\family10h_carrier_tomography_runtime')\" --self-test"
       ],
       "stderr": "",
       "stdout": ""
@@ -1620,13 +1620,13 @@
     "live_invocation_count": 0,
     "passed": true,
     "pmu_acquisition_count": 0,
-    "runtime_authority_gate_self_test_sha256": "def29b0bb5078c88d8487af9a2874012b6ff2eb625702f7b89b093a46a87300b",
+    "runtime_authority_gate_self_test_sha256": "8de913087441396d758342711d6254db41e626393ec16f24fa0310da8a0d413f",
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY_GATE_SELF_TEST_V1",
     "sensor_inventory_count": 0,
     "target_contact_count": 0
   },
   "runtime_binary_overlay_mutation_regression": {
-    "baseline_evidence_commit": "1d86128eb1ebb7a69031d518fb7787a887a2f3bb",
+    "baseline_evidence_commit": "fb6acc71e50ae8ae649a5deab366f2c090a1a0e0",
     "baseline_replay": {
       "attempt_journal": {
         "failures": [
@@ -1876,7 +1876,7 @@
       "manifest_file_sha256": null,
       "passed": false,
       "source_authority": {
-        "commit": "3641d4efd6075efaa20fed6c272223231a99740f",
+        "commit": "e05efc443107ea84f9954ee427cf9c9fe6013ce6",
         "failures": [],
         "files": {
           "CARRIER_TOMOGRAPHY_CONTRACT.md": {
@@ -1912,19 +1912,19 @@
             "size": 4327644
           },
           "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz": {
-            "blob_id": "deee13c652d0a4106b2e21e010ebd741a0a2a793",
+            "blob_id": "6783bdd2a93338a69e53c0f1b11b694e3ebe51de",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-            "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-            "size": 721221
+            "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+            "size": 721451
           },
           "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json": {
-            "blob_id": "83ce5939cdbe28f293528ab7a1146e44d91d3543",
+            "blob_id": "6cfd84f4883f8ea72868b9c7c741c9b96bff2a0c",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-            "sha256": "48457b9b63c90ff4937289aafec3ec50b0517f7d19283cf6255ec1b4512cfbff",
+            "sha256": "932c13bcfc5ac1457892b9b4a39ecab496f11db01c96f4f7f73c881b993ea1a9",
             "size": 2733
           },
           "SUBAGENT_FINDINGS_NORMALIZED.json": {
@@ -1968,20 +1968,20 @@
             "size": 1368
           },
           "family10h_carrier_tomography_target.py": {
-            "blob_id": "3dcabeb2dbb25a1ffd0ab27f3afbd4a44097d504",
+            "blob_id": "2c187ff74ec98d0e16235872f7d37fe22bc4bb9e",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/family10h_carrier_tomography_target.py",
-            "sha256": "89878a87f250276ab08e5c6a1372bc7db2da6298c7133a472e2a7af6e825cfef",
-            "size": 226472
+            "sha256": "5539a0990068daafc387d265ef28910494ca5bbb219bd02e464d79d24f071c5d",
+            "size": 226555
           },
           "run_family10h_carrier_tomography_v1.py": {
-            "blob_id": "79f470e3a2199699e41e87ad1d9c2f7a989e6a53",
+            "blob_id": "bd6cd617d184b24a0dea7b83789f079373c3e974",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/run_family10h_carrier_tomography_v1.py",
-            "sha256": "a47bcd8a9ad287e492709c26d4f468454fc09b486dcabb2f2b2d316748c5f9ce",
-            "size": 386987
+            "sha256": "2f9e243097ba2257f86c9dd305cbfb81b6cfacaf3b7a4ca234130c8f915ab908",
+            "size": 388715
           }
         },
         "passed": true,
@@ -2008,11 +2008,11 @@
           "member_uid": 0,
           "member_uname": "",
           "passed": true,
-          "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-          "size": 721221
+          "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+          "size": 721451
         },
-        "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31"
+        "source_bundle_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646"
       },
       "source_authority_blob_records": {
         "CARRIER_TOMOGRAPHY_CONTRACT.md": {
@@ -2093,38 +2093,38 @@
         },
         "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz": {
           "evidence": {
-            "blob_id": "deee13c652d0a4106b2e21e010ebd741a0a2a793",
+            "blob_id": "6783bdd2a93338a69e53c0f1b11b694e3ebe51de",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-            "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-            "size": 721221
+            "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+            "size": 721451
           },
           "source": {
-            "blob_id": "deee13c652d0a4106b2e21e010ebd741a0a2a793",
+            "blob_id": "6783bdd2a93338a69e53c0f1b11b694e3ebe51de",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-            "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-            "size": 721221
+            "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+            "size": 721451
           },
           "unchanged_after_c2": true
         },
         "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json": {
           "evidence": {
-            "blob_id": "83ce5939cdbe28f293528ab7a1146e44d91d3543",
+            "blob_id": "6cfd84f4883f8ea72868b9c7c741c9b96bff2a0c",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-            "sha256": "48457b9b63c90ff4937289aafec3ec50b0517f7d19283cf6255ec1b4512cfbff",
+            "sha256": "932c13bcfc5ac1457892b9b4a39ecab496f11db01c96f4f7f73c881b993ea1a9",
             "size": 2733
           },
           "source": {
-            "blob_id": "83ce5939cdbe28f293528ab7a1146e44d91d3543",
+            "blob_id": "6cfd84f4883f8ea72868b9c7c741c9b96bff2a0c",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-            "sha256": "48457b9b63c90ff4937289aafec3ec50b0517f7d19283cf6255ec1b4512cfbff",
+            "sha256": "932c13bcfc5ac1457892b9b4a39ecab496f11db01c96f4f7f73c881b993ea1a9",
             "size": 2733
           },
           "unchanged_after_c2": true
@@ -2226,39 +2226,39 @@
         },
         "family10h_carrier_tomography_target.py": {
           "evidence": {
-            "blob_id": "3dcabeb2dbb25a1ffd0ab27f3afbd4a44097d504",
+            "blob_id": "2c187ff74ec98d0e16235872f7d37fe22bc4bb9e",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/family10h_carrier_tomography_target.py",
-            "sha256": "89878a87f250276ab08e5c6a1372bc7db2da6298c7133a472e2a7af6e825cfef",
-            "size": 226472
+            "sha256": "5539a0990068daafc387d265ef28910494ca5bbb219bd02e464d79d24f071c5d",
+            "size": 226555
           },
           "source": {
-            "blob_id": "3dcabeb2dbb25a1ffd0ab27f3afbd4a44097d504",
+            "blob_id": "2c187ff74ec98d0e16235872f7d37fe22bc4bb9e",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/family10h_carrier_tomography_target.py",
-            "sha256": "89878a87f250276ab08e5c6a1372bc7db2da6298c7133a472e2a7af6e825cfef",
-            "size": 226472
+            "sha256": "5539a0990068daafc387d265ef28910494ca5bbb219bd02e464d79d24f071c5d",
+            "size": 226555
           },
           "unchanged_after_c2": true
         },
         "run_family10h_carrier_tomography_v1.py": {
           "evidence": {
-            "blob_id": "79f470e3a2199699e41e87ad1d9c2f7a989e6a53",
+            "blob_id": "bd6cd617d184b24a0dea7b83789f079373c3e974",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/run_family10h_carrier_tomography_v1.py",
-            "sha256": "a47bcd8a9ad287e492709c26d4f468454fc09b486dcabb2f2b2d316748c5f9ce",
-            "size": 386987
+            "sha256": "2f9e243097ba2257f86c9dd305cbfb81b6cfacaf3b7a4ca234130c8f915ab908",
+            "size": 388715
           },
           "source": {
-            "blob_id": "79f470e3a2199699e41e87ad1d9c2f7a989e6a53",
+            "blob_id": "bd6cd617d184b24a0dea7b83789f079373c3e974",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/run_family10h_carrier_tomography_v1.py",
-            "sha256": "a47bcd8a9ad287e492709c26d4f468454fc09b486dcabb2f2b2d316748c5f9ce",
-            "size": 386987
+            "sha256": "2f9e243097ba2257f86c9dd305cbfb81b6cfacaf3b7a4ca234130c8f915ab908",
+            "size": 388715
           },
           "unchanged_after_c2": true
         }
@@ -2296,9 +2296,9 @@
         "review_quorum_sha256": "92f3782f142f3ba86c1234d7d64d2f0a3d1292224b3c5ee89d2763e089da25b5",
         "review_report_sha256": null,
         "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
-        "source_authority_commit": "3641d4efd6075efaa20fed6c272223231a99740f",
-        "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31"
+        "source_authority_commit": "e05efc443107ea84f9954ee427cf9c9fe6013ce6",
+        "source_bundle_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646"
       }
     },
     "checks": {
@@ -2561,7 +2561,7 @@
       "manifest_file_sha256": null,
       "passed": false,
       "source_authority": {
-        "commit": "3641d4efd6075efaa20fed6c272223231a99740f",
+        "commit": "e05efc443107ea84f9954ee427cf9c9fe6013ce6",
         "failures": [],
         "files": {
           "CARRIER_TOMOGRAPHY_CONTRACT.md": {
@@ -2597,19 +2597,19 @@
             "size": 4327644
           },
           "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz": {
-            "blob_id": "deee13c652d0a4106b2e21e010ebd741a0a2a793",
+            "blob_id": "6783bdd2a93338a69e53c0f1b11b694e3ebe51de",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-            "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-            "size": 721221
+            "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+            "size": 721451
           },
           "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json": {
-            "blob_id": "83ce5939cdbe28f293528ab7a1146e44d91d3543",
+            "blob_id": "6cfd84f4883f8ea72868b9c7c741c9b96bff2a0c",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-            "sha256": "48457b9b63c90ff4937289aafec3ec50b0517f7d19283cf6255ec1b4512cfbff",
+            "sha256": "932c13bcfc5ac1457892b9b4a39ecab496f11db01c96f4f7f73c881b993ea1a9",
             "size": 2733
           },
           "SUBAGENT_FINDINGS_NORMALIZED.json": {
@@ -2653,20 +2653,20 @@
             "size": 1368
           },
           "family10h_carrier_tomography_target.py": {
-            "blob_id": "3dcabeb2dbb25a1ffd0ab27f3afbd4a44097d504",
+            "blob_id": "2c187ff74ec98d0e16235872f7d37fe22bc4bb9e",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/family10h_carrier_tomography_target.py",
-            "sha256": "89878a87f250276ab08e5c6a1372bc7db2da6298c7133a472e2a7af6e825cfef",
-            "size": 226472
+            "sha256": "5539a0990068daafc387d265ef28910494ca5bbb219bd02e464d79d24f071c5d",
+            "size": 226555
           },
           "run_family10h_carrier_tomography_v1.py": {
-            "blob_id": "79f470e3a2199699e41e87ad1d9c2f7a989e6a53",
+            "blob_id": "bd6cd617d184b24a0dea7b83789f079373c3e974",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/run_family10h_carrier_tomography_v1.py",
-            "sha256": "a47bcd8a9ad287e492709c26d4f468454fc09b486dcabb2f2b2d316748c5f9ce",
-            "size": 386987
+            "sha256": "2f9e243097ba2257f86c9dd305cbfb81b6cfacaf3b7a4ca234130c8f915ab908",
+            "size": 388715
           }
         },
         "passed": true,
@@ -2693,11 +2693,11 @@
           "member_uid": 0,
           "member_uname": "",
           "passed": true,
-          "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-          "size": 721221
+          "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+          "size": 721451
         },
-        "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31"
+        "source_bundle_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646"
       },
       "source_authority_blob_records": {
         "CARRIER_TOMOGRAPHY_CONTRACT.md": {
@@ -2778,38 +2778,38 @@
         },
         "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz": {
           "evidence": {
-            "blob_id": "deee13c652d0a4106b2e21e010ebd741a0a2a793",
+            "blob_id": "6783bdd2a93338a69e53c0f1b11b694e3ebe51de",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-            "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-            "size": 721221
+            "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+            "size": 721451
           },
           "source": {
-            "blob_id": "deee13c652d0a4106b2e21e010ebd741a0a2a793",
+            "blob_id": "6783bdd2a93338a69e53c0f1b11b694e3ebe51de",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-            "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-            "size": 721221
+            "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+            "size": 721451
           },
           "unchanged_after_c2": true
         },
         "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json": {
           "evidence": {
-            "blob_id": "83ce5939cdbe28f293528ab7a1146e44d91d3543",
+            "blob_id": "6cfd84f4883f8ea72868b9c7c741c9b96bff2a0c",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-            "sha256": "48457b9b63c90ff4937289aafec3ec50b0517f7d19283cf6255ec1b4512cfbff",
+            "sha256": "932c13bcfc5ac1457892b9b4a39ecab496f11db01c96f4f7f73c881b993ea1a9",
             "size": 2733
           },
           "source": {
-            "blob_id": "83ce5939cdbe28f293528ab7a1146e44d91d3543",
+            "blob_id": "6cfd84f4883f8ea72868b9c7c741c9b96bff2a0c",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-            "sha256": "48457b9b63c90ff4937289aafec3ec50b0517f7d19283cf6255ec1b4512cfbff",
+            "sha256": "932c13bcfc5ac1457892b9b4a39ecab496f11db01c96f4f7f73c881b993ea1a9",
             "size": 2733
           },
           "unchanged_after_c2": true
@@ -2892,39 +2892,39 @@
         },
         "family10h_carrier_tomography_target.py": {
           "evidence": {
-            "blob_id": "3dcabeb2dbb25a1ffd0ab27f3afbd4a44097d504",
+            "blob_id": "2c187ff74ec98d0e16235872f7d37fe22bc4bb9e",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/family10h_carrier_tomography_target.py",
-            "sha256": "89878a87f250276ab08e5c6a1372bc7db2da6298c7133a472e2a7af6e825cfef",
-            "size": 226472
+            "sha256": "5539a0990068daafc387d265ef28910494ca5bbb219bd02e464d79d24f071c5d",
+            "size": 226555
           },
           "source": {
-            "blob_id": "3dcabeb2dbb25a1ffd0ab27f3afbd4a44097d504",
+            "blob_id": "2c187ff74ec98d0e16235872f7d37fe22bc4bb9e",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/family10h_carrier_tomography_target.py",
-            "sha256": "89878a87f250276ab08e5c6a1372bc7db2da6298c7133a472e2a7af6e825cfef",
-            "size": 226472
+            "sha256": "5539a0990068daafc387d265ef28910494ca5bbb219bd02e464d79d24f071c5d",
+            "size": 226555
           },
           "unchanged_after_c2": true
         },
         "run_family10h_carrier_tomography_v1.py": {
           "evidence": {
-            "blob_id": "79f470e3a2199699e41e87ad1d9c2f7a989e6a53",
+            "blob_id": "bd6cd617d184b24a0dea7b83789f079373c3e974",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/run_family10h_carrier_tomography_v1.py",
-            "sha256": "a47bcd8a9ad287e492709c26d4f468454fc09b486dcabb2f2b2d316748c5f9ce",
-            "size": 386987
+            "sha256": "2f9e243097ba2257f86c9dd305cbfb81b6cfacaf3b7a4ca234130c8f915ab908",
+            "size": 388715
           },
           "source": {
-            "blob_id": "79f470e3a2199699e41e87ad1d9c2f7a989e6a53",
+            "blob_id": "bd6cd617d184b24a0dea7b83789f079373c3e974",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/run_family10h_carrier_tomography_v1.py",
-            "sha256": "a47bcd8a9ad287e492709c26d4f468454fc09b486dcabb2f2b2d316748c5f9ce",
-            "size": 386987
+            "sha256": "2f9e243097ba2257f86c9dd305cbfb81b6cfacaf3b7a4ca234130c8f915ab908",
+            "size": 388715
           },
           "unchanged_after_c2": true
         }
@@ -2962,12 +2962,12 @@
         "review_quorum_sha256": "92f3782f142f3ba86c1234d7d64d2f0a3d1292224b3c5ee89d2763e089da25b5",
         "review_report_sha256": null,
         "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
-        "source_authority_commit": "3641d4efd6075efaa20fed6c272223231a99740f",
-        "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31"
+        "source_authority_commit": "e05efc443107ea84f9954ee427cf9c9fe6013ce6",
+        "source_bundle_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646"
       }
     },
-    "mutated_evidence_commit": "0ce02ac75714b4bf0f7553835bd22e3e574124d5",
+    "mutated_evidence_commit": "8844753d3600e55b395434b32447ac4f988915bb",
     "mutated_replay": {
       "attempt_journal": {
         "failures": [
@@ -3222,7 +3222,7 @@
       "manifest_file_sha256": null,
       "passed": false,
       "source_authority": {
-        "commit": "3641d4efd6075efaa20fed6c272223231a99740f",
+        "commit": "e05efc443107ea84f9954ee427cf9c9fe6013ce6",
         "failures": [],
         "files": {
           "CARRIER_TOMOGRAPHY_CONTRACT.md": {
@@ -3258,19 +3258,19 @@
             "size": 4327644
           },
           "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz": {
-            "blob_id": "deee13c652d0a4106b2e21e010ebd741a0a2a793",
+            "blob_id": "6783bdd2a93338a69e53c0f1b11b694e3ebe51de",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-            "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-            "size": 721221
+            "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+            "size": 721451
           },
           "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json": {
-            "blob_id": "83ce5939cdbe28f293528ab7a1146e44d91d3543",
+            "blob_id": "6cfd84f4883f8ea72868b9c7c741c9b96bff2a0c",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-            "sha256": "48457b9b63c90ff4937289aafec3ec50b0517f7d19283cf6255ec1b4512cfbff",
+            "sha256": "932c13bcfc5ac1457892b9b4a39ecab496f11db01c96f4f7f73c881b993ea1a9",
             "size": 2733
           },
           "SUBAGENT_FINDINGS_NORMALIZED.json": {
@@ -3314,20 +3314,20 @@
             "size": 1368
           },
           "family10h_carrier_tomography_target.py": {
-            "blob_id": "3dcabeb2dbb25a1ffd0ab27f3afbd4a44097d504",
+            "blob_id": "2c187ff74ec98d0e16235872f7d37fe22bc4bb9e",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/family10h_carrier_tomography_target.py",
-            "sha256": "89878a87f250276ab08e5c6a1372bc7db2da6298c7133a472e2a7af6e825cfef",
-            "size": 226472
+            "sha256": "5539a0990068daafc387d265ef28910494ca5bbb219bd02e464d79d24f071c5d",
+            "size": 226555
           },
           "run_family10h_carrier_tomography_v1.py": {
-            "blob_id": "79f470e3a2199699e41e87ad1d9c2f7a989e6a53",
+            "blob_id": "bd6cd617d184b24a0dea7b83789f079373c3e974",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/run_family10h_carrier_tomography_v1.py",
-            "sha256": "a47bcd8a9ad287e492709c26d4f468454fc09b486dcabb2f2b2d316748c5f9ce",
-            "size": 386987
+            "sha256": "2f9e243097ba2257f86c9dd305cbfb81b6cfacaf3b7a4ca234130c8f915ab908",
+            "size": 388715
           }
         },
         "passed": true,
@@ -3354,11 +3354,11 @@
           "member_uid": 0,
           "member_uname": "",
           "passed": true,
-          "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-          "size": 721221
+          "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+          "size": 721451
         },
-        "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31"
+        "source_bundle_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646"
       },
       "source_authority_blob_records": {
         "CARRIER_TOMOGRAPHY_CONTRACT.md": {
@@ -3439,38 +3439,38 @@
         },
         "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz": {
           "evidence": {
-            "blob_id": "deee13c652d0a4106b2e21e010ebd741a0a2a793",
+            "blob_id": "6783bdd2a93338a69e53c0f1b11b694e3ebe51de",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-            "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-            "size": 721221
+            "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+            "size": 721451
           },
           "source": {
-            "blob_id": "deee13c652d0a4106b2e21e010ebd741a0a2a793",
+            "blob_id": "6783bdd2a93338a69e53c0f1b11b694e3ebe51de",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-            "sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-            "size": 721221
+            "sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+            "size": 721451
           },
           "unchanged_after_c2": true
         },
         "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json": {
           "evidence": {
-            "blob_id": "83ce5939cdbe28f293528ab7a1146e44d91d3543",
+            "blob_id": "6cfd84f4883f8ea72868b9c7c741c9b96bff2a0c",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-            "sha256": "48457b9b63c90ff4937289aafec3ec50b0517f7d19283cf6255ec1b4512cfbff",
+            "sha256": "932c13bcfc5ac1457892b9b4a39ecab496f11db01c96f4f7f73c881b993ea1a9",
             "size": 2733
           },
           "source": {
-            "blob_id": "83ce5939cdbe28f293528ab7a1146e44d91d3543",
+            "blob_id": "6cfd84f4883f8ea72868b9c7c741c9b96bff2a0c",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
-            "sha256": "48457b9b63c90ff4937289aafec3ec50b0517f7d19283cf6255ec1b4512cfbff",
+            "sha256": "932c13bcfc5ac1457892b9b4a39ecab496f11db01c96f4f7f73c881b993ea1a9",
             "size": 2733
           },
           "unchanged_after_c2": true
@@ -3572,39 +3572,39 @@
         },
         "family10h_carrier_tomography_target.py": {
           "evidence": {
-            "blob_id": "3dcabeb2dbb25a1ffd0ab27f3afbd4a44097d504",
+            "blob_id": "2c187ff74ec98d0e16235872f7d37fe22bc4bb9e",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/family10h_carrier_tomography_target.py",
-            "sha256": "89878a87f250276ab08e5c6a1372bc7db2da6298c7133a472e2a7af6e825cfef",
-            "size": 226472
+            "sha256": "5539a0990068daafc387d265ef28910494ca5bbb219bd02e464d79d24f071c5d",
+            "size": 226555
           },
           "source": {
-            "blob_id": "3dcabeb2dbb25a1ffd0ab27f3afbd4a44097d504",
+            "blob_id": "2c187ff74ec98d0e16235872f7d37fe22bc4bb9e",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/family10h_carrier_tomography_target.py",
-            "sha256": "89878a87f250276ab08e5c6a1372bc7db2da6298c7133a472e2a7af6e825cfef",
-            "size": 226472
+            "sha256": "5539a0990068daafc387d265ef28910494ca5bbb219bd02e464d79d24f071c5d",
+            "size": 226555
           },
           "unchanged_after_c2": true
         },
         "run_family10h_carrier_tomography_v1.py": {
           "evidence": {
-            "blob_id": "79f470e3a2199699e41e87ad1d9c2f7a989e6a53",
+            "blob_id": "bd6cd617d184b24a0dea7b83789f079373c3e974",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/run_family10h_carrier_tomography_v1.py",
-            "sha256": "a47bcd8a9ad287e492709c26d4f468454fc09b486dcabb2f2b2d316748c5f9ce",
-            "size": 386987
+            "sha256": "2f9e243097ba2257f86c9dd305cbfb81b6cfacaf3b7a4ca234130c8f915ab908",
+            "size": 388715
           },
           "source": {
-            "blob_id": "79f470e3a2199699e41e87ad1d9c2f7a989e6a53",
+            "blob_id": "bd6cd617d184b24a0dea7b83789f079373c3e974",
             "object_type": "blob",
             "present": true,
             "repo_path": "pkg/run_family10h_carrier_tomography_v1.py",
-            "sha256": "a47bcd8a9ad287e492709c26d4f468454fc09b486dcabb2f2b2d316748c5f9ce",
-            "size": 386987
+            "sha256": "2f9e243097ba2257f86c9dd305cbfb81b6cfacaf3b7a4ca234130c8f915ab908",
+            "size": 388715
           },
           "unchanged_after_c2": true
         }
@@ -3642,18 +3642,18 @@
         "review_quorum_sha256": "92f3782f142f3ba86c1234d7d64d2f0a3d1292224b3c5ee89d2763e089da25b5",
         "review_report_sha256": null,
         "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
-        "source_authority_commit": "3641d4efd6075efaa20fed6c272223231a99740f",
-        "source_bundle_sha256": "5b5d296802c443047e0d058367cf1ec59d89e8749438a601a7028f2661a86562",
-        "source_hashes_sha256": "6c7fd544762b8324c6396db9833ed52751b59fd7110c54268d77887024baed31"
+        "source_authority_commit": "e05efc443107ea84f9954ee427cf9c9fe6013ce6",
+        "source_bundle_sha256": "dee20de9f9e43dbee400e100ff49d13bd540a0729b407f546b4d2e1ecd6ec4c8",
+        "source_hashes_sha256": "092c3a536bea542a8ab925af94785074ed28f57f9f0df88609d84b86e118f646"
       }
     },
     "passed": true,
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_OVERLAY_MUTATION_REGRESSION_V1",
-    "source_commit": "3641d4efd6075efaa20fed6c272223231a99740f"
+    "source_commit": "e05efc443107ea84f9954ee427cf9c9fe6013ce6"
   },
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST_V1",
   "self_test_passed": true,
-  "self_test_sha256": "3f8908981e050c60085b9d5324a5572796e1301f3298c79c8a59568d3dfc987f",
+  "self_test_sha256": "151f04af2b5c109794e9d21f545cf2c539a8e34319f012fc8128aeda79eb3aae",
   "sensor_inventory_count": 0,
   "source_audit_quorum_regression": {
     "checks": {
