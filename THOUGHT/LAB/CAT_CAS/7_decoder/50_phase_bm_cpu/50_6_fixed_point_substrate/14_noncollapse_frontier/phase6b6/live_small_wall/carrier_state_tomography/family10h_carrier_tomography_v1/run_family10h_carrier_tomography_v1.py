@@ -618,20 +618,91 @@ def write_json(path: Path, value: Any) -> None:
     path.write_bytes((strict_json_dumps(value, indent=2) + "\n").encode("utf-8"))
 
 
-def durable_write_bytes_exclusive(path: Path, data: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
+def durable_sync_directory(path: Path) -> None:
+    if os.name == "nt":
+        import ctypes
+
+        generic_write = 0x40000000
+        file_share_read = 0x00000001
+        file_share_write = 0x00000002
+        file_share_delete = 0x00000004
+        open_existing = 3
+        file_flag_backup_semantics = 0x02000000
+        invalid_handle_value = ctypes.c_void_p(-1).value
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.CreateFileW.argtypes = [
+            ctypes.c_wchar_p,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.c_void_p,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.c_void_p,
+        ]
+        kernel32.CreateFileW.restype = ctypes.c_void_p
+        kernel32.FlushFileBuffers.argtypes = [ctypes.c_void_p]
+        kernel32.FlushFileBuffers.restype = ctypes.c_int
+        kernel32.CloseHandle.argtypes = [ctypes.c_void_p]
+        kernel32.CloseHandle.restype = ctypes.c_int
+        handle = kernel32.CreateFileW(
+            str(path),
+            generic_write,
+            file_share_read | file_share_write | file_share_delete,
+            None,
+            open_existing,
+            file_flag_backup_semantics,
+            None,
+        )
+        if handle in (None, invalid_handle_value):
+            raise OSError(ctypes.get_last_error(), f"directory open failed for durable barrier: {path}")
+        try:
+            if not kernel32.FlushFileBuffers(handle):
+                raise OSError(ctypes.get_last_error(), f"directory flush failed for durable barrier: {path}")
+        finally:
+            kernel32.CloseHandle(handle)
+        return
+    flags = os.O_RDONLY
+    if hasattr(os, "O_DIRECTORY"):
+        flags |= os.O_DIRECTORY
+    fd = os.open(str(path), flags)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
+def ensure_directory(path: Path, *, require_directory_sync: bool = False) -> None:
+    missing: list[Path] = []
+    cursor = path
+    while not cursor.exists():
+        missing.append(cursor)
+        cursor = cursor.parent
+    path.mkdir(parents=True, exist_ok=True)
+    if require_directory_sync:
+        for created in reversed(missing):
+            durable_sync_directory(created.parent)
+
+
+def durable_write_bytes_exclusive(path: Path, data: bytes, *, require_directory_sync: bool = False) -> None:
+    ensure_directory(path.parent, require_directory_sync=require_directory_sync)
     with path.open("xb") as handle:
         handle.write(data)
         handle.flush()
         os.fsync(handle.fileno())
+    if require_directory_sync:
+        durable_sync_directory(path.parent)
 
 
-def write_json_exclusive(path: Path, value: Any) -> None:
-    durable_write_bytes_exclusive(path, (strict_json_dumps(value, indent=2) + "\n").encode("utf-8"))
+def write_json_exclusive(path: Path, value: Any, *, require_directory_sync: bool = False) -> None:
+    durable_write_bytes_exclusive(
+        path,
+        (strict_json_dumps(value, indent=2) + "\n").encode("utf-8"),
+        require_directory_sync=require_directory_sync,
+    )
 
 
-def write_json_atomic(path: Path, value: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
+def write_json_atomic(path: Path, value: Any, *, require_directory_sync: bool = False) -> None:
+    ensure_directory(path.parent, require_directory_sync=require_directory_sync)
     data = (strict_json_dumps(value, indent=2) + "\n").encode("utf-8")
     with tempfile.NamedTemporaryFile("wb", delete=False, dir=path.parent, prefix=path.name + ".", suffix=".tmp") as handle:
         tmp_name = handle.name
@@ -639,6 +710,8 @@ def write_json_atomic(path: Path, value: Any) -> None:
         handle.flush()
         os.fsync(handle.fileno())
     os.replace(tmp_name, path)
+    if require_directory_sync:
+        durable_sync_directory(path.parent)
 
 
 def read_json(path: Path) -> Any:
@@ -1566,10 +1639,10 @@ def package_json_parse_audit(root: Path = HERE) -> dict[str, Any]:
     }
 
 
-def append_discovery_attempt_journal(receipt: dict[str, Any]) -> None:
+def append_discovery_attempt_journal(receipt: dict[str, Any], *, require_directory_sync: bool = False) -> None:
     row = strict_json_dumps(receipt).encode("utf-8") + b"\n"
     if not DISCOVERY_ATTEMPT_JOURNAL_PATH.exists():
-        durable_write_bytes_exclusive(DISCOVERY_ATTEMPT_JOURNAL_PATH, row)
+        durable_write_bytes_exclusive(DISCOVERY_ATTEMPT_JOURNAL_PATH, row, require_directory_sync=require_directory_sync)
         return
     with DISCOVERY_ATTEMPT_JOURNAL_PATH.open("ab") as handle:
         handle.write(row)
@@ -1577,7 +1650,7 @@ def append_discovery_attempt_journal(receipt: dict[str, Any]) -> None:
         os.fsync(handle.fileno())
 
 
-def write_discovery_attempt_receipt(payload: dict[str, Any]) -> dict[str, Any]:
+def write_discovery_attempt_receipt(payload: dict[str, Any], *, require_directory_sync: bool = False) -> dict[str, Any]:
     receipt = dict(payload)
     receipt["schema"] = "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT_V1"
     enrich_attempt_accounting(receipt)
@@ -1588,8 +1661,8 @@ def write_discovery_attempt_receipt(payload: dict[str, Any]) -> dict[str, Any]:
     if previous is not None and not DISCOVERY_ATTEMPT_JOURNAL_PATH.exists():
         raise ControllerError("discovery attempt snapshot exists without journal")
     validate_discovery_attempt_transition(previous, receipt)
-    append_discovery_attempt_journal(receipt)
-    write_json_atomic(DISCOVERY_ATTEMPT_PATH, receipt)
+    append_discovery_attempt_journal(receipt, require_directory_sync=require_directory_sync)
+    write_json_atomic(DISCOVERY_ATTEMPT_PATH, receipt, require_directory_sync=require_directory_sync)
     return receipt
 
 
@@ -1612,7 +1685,7 @@ def parse_preflight_stdout(stdout: str) -> dict[str, Any]:
     }
 
 
-def write_discovery_cleanup_custody_receipt(payload: dict[str, Any]) -> dict[str, Any]:
+def write_discovery_cleanup_custody_receipt(payload: dict[str, Any], *, require_directory_sync: bool = False) -> dict[str, Any]:
     receipt = dict(payload)
     receipt["schema"] = "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_FAILURE_CLEANUP_CUSTODY_V1"
     enrich_attempt_accounting(receipt)
@@ -1630,7 +1703,7 @@ def write_discovery_cleanup_custody_receipt(payload: dict[str, Any]) -> dict[str
     cleanup = receipt.get("cleanup")
     require(isinstance(cleanup, dict), "cleanup custody cleanup payload missing")
     receipt["cleanup_custody_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "cleanup_custody_sha256"})
-    write_json_atomic(DISCOVERY_CLEANUP_CUSTODY_PATH, receipt)
+    write_json_atomic(DISCOVERY_CLEANUP_CUSTODY_PATH, receipt, require_directory_sync=require_directory_sync)
     return receipt
 
 
@@ -2893,7 +2966,7 @@ def acquire_temperature_sensor_authority(
         failure_receipt["target_discovery_failure_sha256"] = public.digest(
             {k: v for k, v in failure_receipt.items() if k != "target_discovery_failure_sha256"}
         )
-        write_json_atomic(TARGET_DISCOVERY_FAILURE_PATH, failure_receipt)
+        write_json_atomic(TARGET_DISCOVERY_FAILURE_PATH, failure_receipt, require_directory_sync=before_cleanup)
         sealed_receipt = read_json(TARGET_DISCOVERY_FAILURE_PATH)
         require(sealed_receipt == failure_receipt, "target failure receipt seal reread mismatch")
         return failure_receipt
@@ -3075,7 +3148,11 @@ def acquire_temperature_sensor_authority(
                     and target_structured_failure_validation.get("passed") is True
                 ):
                     try:
-                        durable_write_bytes_exclusive(TARGET_DISCOVERY_RECEIPT, target_structured_failure_bytes)
+                        durable_write_bytes_exclusive(
+                            TARGET_DISCOVERY_RECEIPT,
+                            target_structured_failure_bytes,
+                            require_directory_sync=True,
+                        )
                         if public.sha256_file(TARGET_DISCOVERY_RECEIPT) != target_structured_failure_file_sha:
                             target_structured_failure_validation = {
                                 "passed": False,
@@ -3116,11 +3193,11 @@ def acquire_temperature_sensor_authority(
                     controller_nonce=nonce,
                 )
                 authority_file_sha = serialized_json_sha256(authority)
-                durable_write_bytes_exclusive(TARGET_DISCOVERY_RECEIPT, target_discovery_bytes)
+                durable_write_bytes_exclusive(TARGET_DISCOVERY_RECEIPT, target_discovery_bytes, require_directory_sync=True)
                 if public.sha256_file(TARGET_DISCOVERY_RECEIPT) != target_discovery_file_sha or read_json(TARGET_DISCOVERY_RECEIPT) != discovery:
                     raise ControllerError("discovery receipt local seal verification failed before cleanup")
                 target_discovery_receipt_sealed_before_cleanup = True
-                write_json_exclusive(TEMPERATURE_SENSOR_AUTHORITY, authority)
+                write_json_exclusive(TEMPERATURE_SENSOR_AUTHORITY, authority, require_directory_sync=True)
                 if public.sha256_file(TEMPERATURE_SENSOR_AUTHORITY) != authority_file_sha or read_json(TEMPERATURE_SENSOR_AUTHORITY) != authority:
                     raise ControllerError("temperature authority receipt local seal verification failed before cleanup")
                 authority_receipt_sealed_before_cleanup = True
@@ -3146,7 +3223,8 @@ def acquire_temperature_sensor_authority(
                         "live_invocation_count": 0,
                         "pmu_acquisition_count": 0,
                         "commands": commands,
-                    }
+                    },
+                    require_directory_sync=True,
                 )
                 receipt_copied_state_persisted = True
         finally:
@@ -3192,7 +3270,8 @@ def acquire_temperature_sensor_authority(
                                 "pmu_acquisition_count": 0,
                                 "cleanup": cleanup,
                                 "commands": commands,
-                            }
+                            },
+                            require_directory_sync=True,
                         )
                         cleanup_armed_state_persisted = True
                     except Exception as exc:  # noqa: BLE001 - local receipt failure must preserve remote evidence
@@ -5202,6 +5281,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "materialize_source_authority_snapshot": materialize_source_authority_snapshot,
         "commit_exists": commit_exists,
         "durable_write_bytes_exclusive": durable_write_bytes_exclusive,
+        "durable_sync_directory": durable_sync_directory,
     }
     production_invalid_error = ""
     production_invalid_cleanup_invoked = False
@@ -5214,10 +5294,17 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
     production_success_cleanup_invoked = False
     production_success_absence_probe_invoked = False
     production_success_receipts_sealed_at_cleanup = False
+    production_success_directory_barriers_before_cleanup = False
     production_success_transport_passed = False
     production_seal_failure_error = ""
     production_seal_failure_cleanup_invoked = False
     production_seal_failure_absence_probe_invoked = False
+    production_target_directory_sync_failure_error = ""
+    production_target_directory_sync_failure_cleanup_invoked = False
+    production_target_directory_sync_failure_absence_probe_invoked = False
+    production_authority_directory_sync_failure_error = ""
+    production_authority_directory_sync_failure_cleanup_invoked = False
+    production_authority_directory_sync_failure_absence_probe_invoked = False
     production_post_cleanup_error = ""
     production_post_cleanup_cleanup_invoked = False
     production_post_cleanup_receipt_recoverable = False
@@ -5656,6 +5743,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
     success_discovery_payload: dict[str, Any] | None = None
     success_discovery_bytes = b""
     success_discovery_sha = ""
+    success_directory_barriers: list[Path] = []
 
     def successful_target_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
         nonlocal success_challenge_seen
@@ -5665,6 +5753,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         nonlocal production_success_cleanup_invoked
         nonlocal production_success_absence_probe_invoked
         nonlocal production_success_receipts_sealed_at_cleanup
+        nonlocal production_success_directory_barriers_before_cleanup
         command_list = [str(item) for item in command]
         if command_list and command_list[0] == "ssh":
             script = command_list[-1]
@@ -5688,6 +5777,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
                     and public.sha256_file(TARGET_DISCOVERY_RECEIPT) == success_discovery_sha
                     and read_json(TEMPERATURE_SENSOR_AUTHORITY).get("target_discovery_receipt") == success_discovery_payload
                 )
+                production_success_directory_barriers_before_cleanup = success_directory_barriers.count(TARGET_DISCOVERY_RECEIPT.parent) >= 4
                 return subprocess.CompletedProcess(command_list, 0, "", "")
             if "test ! -e " in script:
                 production_success_absence_probe_invoked = True
@@ -5703,6 +5793,10 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
 
     with tempfile.TemporaryDirectory(prefix="family10h_production_success_copyback_regression_") as tmp:
         temp_root = Path(tmp)
+
+        def recording_directory_barrier(path: Path) -> None:
+            success_directory_barriers.append(Path(path))
+
         try:
             globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
             globals()["DISCOVERY_ATTEMPT_JOURNAL_PATH"] = temp_root / "attempt.jsonl"
@@ -5713,6 +5807,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
             globals()["DISCOVERY_CHALLENGE_PATH"] = temp_root / "challenge.json"
             globals()["TARGET_DISCOVERY_FAILURE_PATH"] = temp_root / "target_failure.json"
             globals()["run"] = successful_target_run
+            globals()["durable_sync_directory"] = recording_directory_barrier
             globals()["read_source_hash_authority"] = lambda: fake_source_hashes
             globals()["read_existing_source_bundle_authority"] = lambda: fake_bundle
             globals()["source_authority_commit_verification"] = lambda commit: {
@@ -5775,10 +5870,10 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
     with tempfile.TemporaryDirectory(prefix="family10h_production_success_seal_failure_regression_") as tmp:
         temp_root = Path(tmp)
 
-        def failing_durable_write(path: Path, data: bytes) -> None:
+        def failing_durable_write(path: Path, data: bytes, *, require_directory_sync: bool = False) -> None:
             if Path(path) == temp_root / "target_discovery.json":
                 raise OSError("fixture target discovery local seal failure")
-            production_originals["durable_write_bytes_exclusive"](path, data)
+            production_originals["durable_write_bytes_exclusive"](path, data, require_directory_sync=require_directory_sync)
 
         try:
             globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
@@ -5801,6 +5896,159 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
                 acquire_temperature_sensor_authority(source_authority_commit="1" * 40)
             except Exception as exc:  # noqa: BLE001 - fixture injects raw local I/O failure
                 production_seal_failure_error = str(exc)
+        finally:
+            for name, value in production_originals.items():
+                globals()[name] = value
+
+    target_directory_sync_challenge_seen: dict[str, Any] | None = None
+    target_directory_sync_bytes = b""
+    target_directory_sync_sha = ""
+
+    def target_directory_sync_failure_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        nonlocal target_directory_sync_challenge_seen
+        nonlocal target_directory_sync_bytes
+        nonlocal target_directory_sync_sha
+        nonlocal production_target_directory_sync_failure_cleanup_invoked
+        nonlocal production_target_directory_sync_failure_absence_probe_invoked
+        command_list = [str(item) for item in command]
+        if command_list and command_list[0] == "ssh":
+            script = command_list[-1]
+            if "FAMILY10H_DISCOVERY_PREFLIGHT" in script:
+                return subprocess.CompletedProcess(command_list, 0, "FAMILY10H_DISCOVERY_PREFLIGHT base_preexisting=0 root_created=1\n", "")
+            if "python3 family10h_carrier_tomography_target.py" in script:
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if script.startswith("sha256sum "):
+                if target_directory_sync_challenge_seen is None:
+                    return subprocess.CompletedProcess(command_list, 1, "", "")
+                discovery_payload = seal_success_discovery_receipt(target_directory_sync_challenge_seen, "1" * 40)
+                target_directory_sync_bytes = (strict_json_dumps(discovery_payload, indent=2) + "\n").encode("utf-8")
+                target_directory_sync_sha = hashlib.sha256(target_directory_sync_bytes).hexdigest()
+                return subprocess.CompletedProcess(command_list, 0, target_directory_sync_sha + "\n", "")
+            if "rm -rf --" in script:
+                production_target_directory_sync_failure_cleanup_invoked = True
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if "test ! -e " in script:
+                production_target_directory_sync_failure_absence_probe_invoked = True
+                return subprocess.CompletedProcess(command_list, 1, "", "")
+            if script == "set -u; false":
+                return subprocess.CompletedProcess(command_list, 1, "", "")
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        if command_list and command_list[0] == "scp":
+            if len(command_list) >= 4 and Path(command_list[2]).name == "controller_challenge.json":
+                target_directory_sync_challenge_seen = read_json(Path(command_list[2]))
+            elif len(command_list) >= 4 and command_list[2].startswith(f"{TARGET_HOST}:"):
+                Path(command_list[3]).write_bytes(target_directory_sync_bytes)
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        return subprocess.CompletedProcess(command_list, 0, "", "")
+
+    with tempfile.TemporaryDirectory(prefix="family10h_production_target_directory_sync_failure_regression_") as tmp:
+        temp_root = Path(tmp)
+
+        def failing_target_directory_barrier(path: Path) -> None:
+            if Path(path) == temp_root:
+                raise OSError("fixture target discovery directory sync failure")
+            production_originals["durable_sync_directory"](path)
+
+        try:
+            globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
+            globals()["DISCOVERY_ATTEMPT_JOURNAL_PATH"] = temp_root / "attempt.jsonl"
+            globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = temp_root / "cleanup.json"
+            globals()["TEMPERATURE_SENSOR_AUTHORITY"] = temp_root / "authority.json"
+            globals()["DISCOVERY_TRANSPORT_PATH"] = temp_root / "transport.json"
+            globals()["TARGET_DISCOVERY_RECEIPT"] = temp_root / "target_discovery.json"
+            globals()["DISCOVERY_CHALLENGE_PATH"] = temp_root / "challenge.json"
+            globals()["TARGET_DISCOVERY_FAILURE_PATH"] = temp_root / "target_failure.json"
+            globals()["run"] = target_directory_sync_failure_run
+            globals()["durable_sync_directory"] = failing_target_directory_barrier
+            globals()["read_source_hash_authority"] = lambda: fake_source_hashes
+            globals()["read_existing_source_bundle_authority"] = lambda: fake_bundle
+            globals()["source_authority_commit_verification"] = lambda commit: {"passed": True, "failures": [], "commit": commit, "files": {}, "status": []}
+            globals()["read_source_authority_review_for_discovery"] = fake_source_review
+            globals()["materialize_source_authority_snapshot"] = fake_materialize
+            globals()["commit_exists"] = lambda _commit: False
+            try:
+                acquire_temperature_sensor_authority(source_authority_commit="1" * 40)
+            except Exception as exc:  # noqa: BLE001 - fixture injects required local directory barrier failure
+                production_target_directory_sync_failure_error = str(exc)
+        finally:
+            for name, value in production_originals.items():
+                globals()[name] = value
+
+    authority_directory_sync_challenge_seen: dict[str, Any] | None = None
+    authority_directory_sync_bytes = b""
+    authority_directory_sync_sha = ""
+
+    def authority_directory_sync_failure_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        nonlocal authority_directory_sync_challenge_seen
+        nonlocal authority_directory_sync_bytes
+        nonlocal authority_directory_sync_sha
+        nonlocal production_authority_directory_sync_failure_cleanup_invoked
+        nonlocal production_authority_directory_sync_failure_absence_probe_invoked
+        command_list = [str(item) for item in command]
+        if command_list and command_list[0] == "ssh":
+            script = command_list[-1]
+            if "FAMILY10H_DISCOVERY_PREFLIGHT" in script:
+                return subprocess.CompletedProcess(command_list, 0, "FAMILY10H_DISCOVERY_PREFLIGHT base_preexisting=0 root_created=1\n", "")
+            if "python3 family10h_carrier_tomography_target.py" in script:
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if script.startswith("sha256sum "):
+                if authority_directory_sync_challenge_seen is None:
+                    return subprocess.CompletedProcess(command_list, 1, "", "")
+                discovery_payload = seal_success_discovery_receipt(authority_directory_sync_challenge_seen, "1" * 40)
+                authority_directory_sync_bytes = (strict_json_dumps(discovery_payload, indent=2) + "\n").encode("utf-8")
+                authority_directory_sync_sha = hashlib.sha256(authority_directory_sync_bytes).hexdigest()
+                return subprocess.CompletedProcess(command_list, 0, authority_directory_sync_sha + "\n", "")
+            if "rm -rf --" in script:
+                production_authority_directory_sync_failure_cleanup_invoked = True
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if "test ! -e " in script:
+                production_authority_directory_sync_failure_absence_probe_invoked = True
+                return subprocess.CompletedProcess(command_list, 1, "", "")
+            if script == "set -u; false":
+                return subprocess.CompletedProcess(command_list, 1, "", "")
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        if command_list and command_list[0] == "scp":
+            if len(command_list) >= 4 and Path(command_list[2]).name == "controller_challenge.json":
+                authority_directory_sync_challenge_seen = read_json(Path(command_list[2]))
+            elif len(command_list) >= 4 and command_list[2].startswith(f"{TARGET_HOST}:"):
+                Path(command_list[3]).write_bytes(authority_directory_sync_bytes)
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        return subprocess.CompletedProcess(command_list, 0, "", "")
+
+    with tempfile.TemporaryDirectory(prefix="family10h_production_authority_directory_sync_failure_regression_") as tmp:
+        temp_root = Path(tmp)
+        authority_directory_sync_count = 0
+
+        def failing_authority_directory_barrier(path: Path) -> None:
+            nonlocal authority_directory_sync_count
+            if Path(path) == temp_root:
+                authority_directory_sync_count += 1
+                if authority_directory_sync_count == 2:
+                    raise OSError("fixture authority receipt directory sync failure")
+            else:
+                production_originals["durable_sync_directory"](path)
+
+        try:
+            globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
+            globals()["DISCOVERY_ATTEMPT_JOURNAL_PATH"] = temp_root / "attempt.jsonl"
+            globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = temp_root / "cleanup.json"
+            globals()["TEMPERATURE_SENSOR_AUTHORITY"] = temp_root / "authority.json"
+            globals()["DISCOVERY_TRANSPORT_PATH"] = temp_root / "transport.json"
+            globals()["TARGET_DISCOVERY_RECEIPT"] = temp_root / "target_discovery.json"
+            globals()["DISCOVERY_CHALLENGE_PATH"] = temp_root / "challenge.json"
+            globals()["TARGET_DISCOVERY_FAILURE_PATH"] = temp_root / "target_failure.json"
+            globals()["run"] = authority_directory_sync_failure_run
+            globals()["durable_sync_directory"] = failing_authority_directory_barrier
+            globals()["read_source_hash_authority"] = lambda: fake_source_hashes
+            globals()["read_existing_source_bundle_authority"] = lambda: fake_bundle
+            globals()["source_authority_commit_verification"] = lambda commit: {"passed": True, "failures": [], "commit": commit, "files": {}, "status": []}
+            globals()["read_source_authority_review_for_discovery"] = fake_source_review
+            globals()["materialize_source_authority_snapshot"] = fake_materialize
+            globals()["commit_exists"] = lambda _commit: False
+            try:
+                acquire_temperature_sensor_authority(source_authority_commit="1" * 40)
+            except Exception as exc:  # noqa: BLE001 - fixture injects required local directory barrier failure
+                production_authority_directory_sync_failure_error = str(exc)
         finally:
             for name, value in production_originals.items():
                 globals()[name] = value
@@ -6191,12 +6439,21 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "history_index_manifest_rejects_missing_git_blob": missing_history_index_binding["passed"] is False
         and missing_history_index_metadata.get("git_blob_sha256") is None,
         "production_success_copyback_receipts_sealed_before_cleanup": production_success_receipts_sealed_at_cleanup,
+        "production_success_directory_barriers_before_cleanup": production_success_directory_barriers_before_cleanup,
         "production_success_acquisition_completes_after_precleanup_seal": production_success_transport_passed
         and production_success_cleanup_invoked
         and production_success_absence_probe_invoked,
         "production_success_local_seal_failure_blocks_remote_cleanup": "fixture target discovery local seal failure" in production_seal_failure_error
         and not production_seal_failure_cleanup_invoked
         and production_seal_failure_absence_probe_invoked,
+        "production_success_target_directory_sync_failure_blocks_remote_cleanup": "fixture target discovery directory sync failure"
+        in production_target_directory_sync_failure_error
+        and not production_target_directory_sync_failure_cleanup_invoked
+        and production_target_directory_sync_failure_absence_probe_invoked,
+        "production_success_authority_directory_sync_failure_blocks_remote_cleanup": "fixture authority receipt directory sync failure"
+        in production_authority_directory_sync_failure_error
+        and not production_authority_directory_sync_failure_cleanup_invoked
+        and production_authority_directory_sync_failure_absence_probe_invoked,
         "production_success_post_cleanup_failure_preserves_receipts": "discovery cleanup or remote-root absence verification failed" in production_post_cleanup_error
         and production_post_cleanup_receipt_recoverable
         and production_post_cleanup_authority_recoverable,

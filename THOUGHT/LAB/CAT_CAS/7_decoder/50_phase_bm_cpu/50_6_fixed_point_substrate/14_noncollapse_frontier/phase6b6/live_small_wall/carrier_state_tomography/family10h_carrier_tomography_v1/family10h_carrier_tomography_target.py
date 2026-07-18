@@ -831,8 +831,9 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
         if isinstance(final_path_value, str) and final_file_sha and isinstance(final_evidence_path_value, str) and final_evidence_file_sha:
             final_path = source_root / portable_basename(final_path_value)
             final_evidence_path = source_root / portable_basename(final_evidence_path_value)
-            final_receipt: dict[str, Any] = {}
-            final_evidence_receipt: dict[str, Any] = {}
+            final_receipt: Any = None
+            final_evidence_receipt: Any = None
+            final_receipt_loaded = False
             if not final_path.exists():
                 failures.append("final exact-object verification receipt missing")
             elif public.sha256_file(final_path) != final_file_sha:
@@ -840,6 +841,7 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
             else:
                 try:
                     final_receipt = read_json(final_path)
+                    final_receipt_loaded = True
                 except json.JSONDecodeError as exc:
                     failures.append(f"final exact-object verification JSON invalid: {exc}")
             if not final_evidence_path.exists():
@@ -852,11 +854,22 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
                 except json.JSONDecodeError as exc:
                     failures.append(f"final evidence commit authority JSON invalid: {exc}")
                 else:
-                    if final_evidence_receipt.get("schema") != "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT_V1":
-                        failures.append("final evidence commit authority schema mismatch")
-                    if final_evidence_receipt.get("final_evidence_commit_sha256") != public.digest({k: v for k, v in final_evidence_receipt.items() if k != "final_evidence_commit_sha256"}):
-                        failures.append("final evidence commit authority digest mismatch")
-            if final_receipt:
+                    if not isinstance(final_evidence_receipt, dict) or not final_evidence_receipt:
+                        failures.append("final evidence commit authority must be a nonempty JSON object")
+                        final_evidence_receipt = {}
+                    else:
+                        if final_evidence_receipt.get("schema") != "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT_V1":
+                            failures.append("final evidence commit authority schema mismatch")
+                        if final_evidence_receipt.get("final_evidence_commit_sha256") != public.digest(
+                            {k: v for k, v in final_evidence_receipt.items() if k != "final_evidence_commit_sha256"}
+                        ):
+                            failures.append("final evidence commit authority digest mismatch")
+            if final_receipt_loaded:
+                if not isinstance(final_receipt, dict) or not final_receipt:
+                    failures.append("final exact-object verification receipt must be a nonempty JSON object")
+                    final_receipt = {}
+                else:
+                    final_evidence_object = final_evidence_receipt if isinstance(final_evidence_receipt, dict) else {}
                     digest = final_receipt.get("final_exact_object_verification_sha256")
                     if final_receipt.get("schema") != "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EXACT_OBJECT_VERIFICATION_V1":
                         failures.append("final exact-object verification schema mismatch")
@@ -866,19 +879,19 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
                         failures.append("final exact-object verification did not pass")
                     if final_receipt.get("source_authority_commit") != source_review.get("source_authority_commit"):
                         failures.append("final exact-object source commit mismatch")
-                    if final_receipt.get("evidence_commit") != final_evidence_receipt.get("evidence_commit"):
+                    if final_receipt.get("evidence_commit") != final_evidence_object.get("evidence_commit"):
                         failures.append("final exact-object evidence commit mismatch")
-                    if final_receipt.get("manifest_file_sha256") != final_evidence_receipt.get("evidence_manifest_file_sha256"):
+                    if final_receipt.get("manifest_file_sha256") != final_evidence_object.get("evidence_manifest_file_sha256"):
                         failures.append("final exact-object evidence manifest file mismatch")
-                    if final_receipt.get("manifest_canonical_sha256") != final_evidence_receipt.get("evidence_manifest_canonical_sha256"):
+                    if final_receipt.get("manifest_canonical_sha256") != final_evidence_object.get("evidence_manifest_canonical_sha256"):
                         failures.append("final exact-object evidence manifest canonical mismatch")
-                    if final_receipt.get("final_evidence_commit_sha256") != final_evidence_receipt.get("final_evidence_commit_sha256"):
+                    if final_receipt.get("final_evidence_commit_sha256") != final_evidence_object.get("final_evidence_commit_sha256"):
                         failures.append("final exact-object final evidence authority mismatch")
-                    if final_section.get("evidence_manifest_file_sha256") != final_evidence_receipt.get("evidence_manifest_file_sha256"):
+                    if final_section.get("evidence_manifest_file_sha256") != final_evidence_object.get("evidence_manifest_file_sha256"):
                         failures.append("final section evidence manifest file mismatch")
-                    if final_section.get("evidence_manifest_canonical_sha256") != final_evidence_receipt.get("evidence_manifest_canonical_sha256"):
+                    if final_section.get("evidence_manifest_canonical_sha256") != final_evidence_object.get("evidence_manifest_canonical_sha256"):
                         failures.append("final section evidence manifest canonical mismatch")
-                    if final_section.get("evidence_manifest_sidecar_sha256") != final_evidence_receipt.get("evidence_manifest_sidecar_sha256"):
+                    if final_section.get("evidence_manifest_sidecar_sha256") != final_evidence_object.get("evidence_manifest_sidecar_sha256"):
                         failures.append("final section evidence manifest sidecar mismatch")
                     evidence_records = final_receipt.get("evidence_blob_records")
                     if not isinstance(evidence_records, dict):
@@ -886,9 +899,9 @@ def validate_manifest_authority(source_root: Path) -> dict[str, Any]:
                     else:
                         manifest_record = evidence_records.get("manifest", {})
                         sidecar_record = evidence_records.get("manifest sidecar", {})
-                        if not isinstance(manifest_record, dict) or manifest_record.get("sha256") != final_evidence_receipt.get("evidence_manifest_file_sha256"):
+                        if not isinstance(manifest_record, dict) or manifest_record.get("sha256") != final_evidence_object.get("evidence_manifest_file_sha256"):
                             failures.append("final exact-object evidence manifest blob mismatch")
-                        if not isinstance(sidecar_record, dict) or sidecar_record.get("sha256") != final_evidence_receipt.get("evidence_manifest_sidecar_sha256"):
+                        if not isinstance(sidecar_record, dict) or sidecar_record.get("sha256") != final_evidence_object.get("evidence_manifest_sidecar_sha256"):
                             failures.append("final exact-object evidence sidecar blob mismatch")
                         for label in [
                             "source audit findings",
@@ -1888,6 +1901,201 @@ def manifest_live_gate_fixture() -> dict[str, Any]:
         "explicit_live_authority_still_required": True,
     }
     return {"passed": all(checks.values()), "checks": checks}
+
+
+def final_exact_object_falsey_manifest_fixture(source_root: Path) -> dict[str, Any]:
+    falsey_values = {
+        "empty_object": {},
+        "empty_array": [],
+        "null": None,
+        "false": False,
+        "zero": 0,
+        "empty_string": "",
+    }
+    falsey_failure = "final exact-object verification receipt must be a nonempty JSON object"
+    copied_names = sorted(set(SOURCE_FILE_NAMES + ["CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz", "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json", RUNTIME_BINARY_NAME]))
+    rejected: dict[str, bool] = {}
+    execute_aborted_before_output: dict[str, bool] = {}
+    failures_by_value: dict[str, list[str]] = {}
+    original_expected_root = public.EXPECTED_REMOTE_ROOT
+    original_expected_output_root = public.EXPECTED_REMOTE_OUTPUT_ROOT
+    env_keys = [AUTHORITY_ENV, COMMIT_ENV, MANIFEST_ENV, TEMPERATURE_AUTHORITY_NONCE_ENV]
+    original_env = {key: os.environ.get(key) for key in env_keys}
+
+    def clone_json(value: Any) -> Any:
+        return strict_json_loads(strict_json_dumps(value))
+
+    def seal_fixture_manifest(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
+        manifest_path = root / "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json"
+        sidecar_path = root / "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256"
+        write_json(manifest_path, manifest)
+        sidecar = {
+            "manifest_file_sha256": public.sha256_file(manifest_path),
+            "manifest_canonical_sha256": public.digest({k: v for k, v in manifest.items() if k != "manifest_canonical_sha256"}),
+        }
+        write_json(sidecar_path, sidecar)
+        return sidecar
+
+    def final_evidence_authority() -> dict[str, Any]:
+        receipt = {
+            "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT_V1",
+            "evidence_commit": "2" * 40,
+            "evidence_manifest_file_sha256": "a" * 64,
+            "evidence_manifest_canonical_sha256": "b" * 64,
+            "evidence_manifest_sidecar_sha256": "c" * 64,
+        }
+        receipt["final_evidence_commit_sha256"] = public.digest({k: v for k, v in receipt.items() if k != "final_evidence_commit_sha256"})
+        return receipt
+
+    def final_exact_positive_receipt(manifest: dict[str, Any], evidence_authority: dict[str, Any]) -> dict[str, Any]:
+        evidence_records = {
+            label: {"present": True, "object_type": "blob", "sha256": "d" * 64}
+            for label in [
+                "source audit findings",
+                "source audit report",
+                "target discovery receipt",
+                "temperature authority receipt",
+                "discovery transport receipt",
+                "discovery challenge receipt",
+                "discovery attempt receipt",
+                "discovery attempt journal",
+                "manifest",
+                "manifest sidecar",
+            ]
+        }
+        evidence_records["manifest"]["sha256"] = evidence_authority["evidence_manifest_file_sha256"]
+        evidence_records["manifest sidecar"]["sha256"] = evidence_authority["evidence_manifest_sidecar_sha256"]
+        receipt = {
+            "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_FINAL_EXACT_OBJECT_VERIFICATION_V1",
+            "passed": True,
+            "failures": [],
+            "source_authority_commit": manifest.get("source_authority_review", {}).get("source_authority_commit"),
+            "evidence_commit": evidence_authority["evidence_commit"],
+            "manifest_file_sha256": evidence_authority["evidence_manifest_file_sha256"],
+            "manifest_canonical_sha256": evidence_authority["evidence_manifest_canonical_sha256"],
+            "final_evidence_commit_sha256": evidence_authority["final_evidence_commit_sha256"],
+            "evidence_blob_records": evidence_records,
+            "source_authority_blob_records": {
+                name: {"present": True, "object_type": "blob", "unchanged_after_c2": True}
+                for name in SOURCE_AUTHORITY_FILE_NAMES + RUNTIME_AUTHORITY_FILE_NAMES
+            },
+        }
+        receipt["final_exact_object_verification_sha256"] = public.digest(
+            {k: v for k, v in receipt.items() if k != "final_exact_object_verification_sha256"}
+        )
+        return receipt
+
+    with tempfile.TemporaryDirectory(prefix="family10h_falsey_final_receipt_fixture_") as tmp:
+        fixture_root = Path(tmp)
+        for name in copied_names:
+            source_path = source_root / name
+            if source_path.exists():
+                (fixture_root / name).write_bytes(source_path.read_bytes())
+        source_hash_receipt = read_json(source_root / "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json")
+        source_hashes_sha256 = source_hash_receipt.get("source_hashes_sha256")
+        source_bundle_sha256 = public.sha256_file(source_root / "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz")
+        runtime_authority = source_hash_receipt.get("runtime_binary_authority") if isinstance(source_hash_receipt.get("runtime_binary_authority"), dict) else {}
+        base_manifest = {
+            "package_decision": public.PACKAGE_DECISION_FROZEN,
+            "git_state_at_manifest_build": {"head": "1" * 40},
+            "runtime_self_test": {"offline_binary_sha256": runtime_authority.get("sha256")},
+            "runtime_binary_authority": runtime_authority,
+            "source_bundle": {"sha256": source_bundle_sha256},
+            "source_hashes": {"source_hashes_sha256": source_hashes_sha256},
+            "temperature_sensor_authority": {},
+            "independent_review": {"review_quorum": {"passed": True}},
+            "source_authority_review": {
+                "review_quorum": {"passed": True},
+                "source_authority_commit": "1" * 40,
+                "source_hashes_sha256": source_hashes_sha256,
+                "source_bundle_sha256": source_bundle_sha256,
+                "runtime_binary_sha256": runtime_authority.get("sha256"),
+            },
+            "offline_validate": {"passed": True},
+            "contact_counter_attestation": dict(FROZEN_CONTACT_COUNTERS),
+        }
+        evidence_path = fixture_root / "CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT.json"
+        final_path = fixture_root / "CARRIER_TOMOGRAPHY_FINAL_OBJECT_VERIFY.json"
+        evidence_authority = final_evidence_authority()
+        write_json(evidence_path, evidence_authority)
+        public.EXPECTED_REMOTE_ROOT = str(fixture_root)
+        try:
+            for label, value in falsey_values.items():
+                output_root = fixture_root / f"output_{label}"
+                public.EXPECTED_REMOTE_OUTPUT_ROOT = str(output_root)
+                write_json(final_path, value)
+                manifest = clone_json(base_manifest)
+                manifest["final_exact_object_verification"] = {
+                    "passed": True,
+                    "path": str(final_path),
+                    "file_sha256": public.sha256_file(final_path),
+                    "final_evidence_commit_path": str(evidence_path),
+                    "final_evidence_commit_file_sha256": public.sha256_file(evidence_path),
+                    "source_authority_commit": manifest.get("source_authority_review", {}).get("source_authority_commit"),
+                    "evidence_commit": evidence_authority["evidence_commit"],
+                    "evidence_manifest_file_sha256": evidence_authority["evidence_manifest_file_sha256"],
+                    "evidence_manifest_canonical_sha256": evidence_authority["evidence_manifest_canonical_sha256"],
+                    "evidence_manifest_sidecar_sha256": evidence_authority["evidence_manifest_sidecar_sha256"],
+                }
+                sidecar = seal_fixture_manifest(fixture_root, manifest)
+                validation = validate_manifest_authority(fixture_root)
+                failures_by_value[label] = validation["failures"]
+                rejected[label] = validation["passed"] is False and falsey_failure in validation["failures"]
+                os.environ[AUTHORITY_ENV] = AUTHORITY_VALUE
+                os.environ[COMMIT_ENV] = "1" * 40
+                os.environ[MANIFEST_ENV] = sidecar["manifest_file_sha256"]
+                execute_aborted_before_output[label] = (
+                    raises_target_error_containing(lambda: execute_authorized(fixture_root, output_root), "manifest authority mismatch")
+                    and not output_root.exists()
+                )
+            positive_manifest = clone_json(base_manifest)
+            positive_receipt = final_exact_positive_receipt(positive_manifest, evidence_authority)
+            write_json(final_path, positive_receipt)
+            positive_manifest["final_exact_object_verification"] = {
+                "passed": True,
+                "path": str(final_path),
+                "file_sha256": public.sha256_file(final_path),
+                "final_evidence_commit_path": str(evidence_path),
+                "final_evidence_commit_file_sha256": public.sha256_file(evidence_path),
+                "source_authority_commit": positive_receipt["source_authority_commit"],
+                "evidence_commit": evidence_authority["evidence_commit"],
+                "evidence_manifest_file_sha256": evidence_authority["evidence_manifest_file_sha256"],
+                "evidence_manifest_canonical_sha256": evidence_authority["evidence_manifest_canonical_sha256"],
+                "evidence_manifest_sidecar_sha256": evidence_authority["evidence_manifest_sidecar_sha256"],
+            }
+            seal_fixture_manifest(fixture_root, positive_manifest)
+            positive_validation = validate_manifest_authority(fixture_root)
+            positive_failures = positive_validation["failures"]
+        finally:
+            public.EXPECTED_REMOTE_ROOT = original_expected_root
+            public.EXPECTED_REMOTE_OUTPUT_ROOT = original_expected_output_root
+            for key, value in original_env.items():
+                if value is None:
+                    os.environ.pop(key, None)
+                else:
+                    os.environ[key] = value
+    positive_control = falsey_failure not in positive_failures and all(
+        forbidden not in positive_failures
+        for forbidden in [
+            "final exact-object verification schema mismatch",
+            "final exact-object verification digest mismatch",
+            "final exact-object verification did not pass",
+        ]
+    )
+    checks = {
+        "falsey_final_receipts_rejected": all(rejected.values()) and set(rejected) == set(falsey_values),
+        "falsey_final_execute_aborts_before_output_root": all(execute_aborted_before_output.values())
+        and set(execute_aborted_before_output) == set(falsey_values),
+        "valid_final_receipt_positive_control": positive_control,
+    }
+    return {
+        "passed": all(checks.values()),
+        "checks": checks,
+        "falsey_receipts": rejected,
+        "execute_aborted_before_output": execute_aborted_before_output,
+        "positive_control_failures": positive_failures,
+        "failures_by_value": failures_by_value,
+    }
 
 
 def validate_minimal_evidence_root(root: Path, schedule: dict[str, Any]) -> dict[str, Any]:
@@ -3958,6 +4166,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
     process = process_custody_fixture()
     policy = policy_and_platform_fixture()
     manifest_live_gate = manifest_live_gate_fixture()
+    final_receipt_gate = final_exact_object_falsey_manifest_fixture(source_root)
     source_mutation = source_mutation_fixtures(source_root)
     discovery = target_sensor_discovery_fixture(source_root)
     env = validate_no_live_authority_env()
@@ -3977,6 +4186,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
         "source_death_process_custody": process,
         "policy_and_platform_fixture": policy,
         "manifest_live_gate_fixture": manifest_live_gate,
+        "final_exact_object_falsey_manifest_fixture": final_receipt_gate,
         "source_mutation_fixtures": source_mutation,
         "temperature_sensor_discovery_fixture": discovery,
         "live_authority_env_absent": env,
@@ -3991,6 +4201,7 @@ def self_test(source_root: Path, output_root: Path) -> dict[str, Any]:
             process["passed"],
             policy["passed"],
             manifest_live_gate["passed"],
+            final_receipt_gate["passed"],
             source_mutation["passed"],
             discovery["passed"],
             env["passed"],
