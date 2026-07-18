@@ -1100,6 +1100,7 @@ def validate_temperature_sensor_authority_payload(
     if identity == public.synthetic_temperature_identity():
         failures.append("synthetic temperature sensor identity cannot authorize frozen status")
     discovery = receipt.get("target_discovery_receipt")
+    platform_identity: dict[str, Any] | None = None
     if not isinstance(discovery, dict):
         failures.append("temperature sensor discovery receipt missing")
         discovery = {}
@@ -1130,6 +1131,7 @@ def validate_temperature_sensor_authority_payload(
             if not isinstance(platform, dict):
                 failures.append("temperature sensor discovery target platform missing")
             else:
+                platform_identity = platform
                 if platform.get("vendor") != "AuthenticAMD" or platform.get("cpu_family") != 16:
                     failures.append("temperature sensor discovery target platform is not AMD Family 10h")
                 if platform.get("checked_before_discovery") is not True:
@@ -1140,9 +1142,7 @@ def validate_temperature_sensor_authority_payload(
                     or platform.get("source_receiver_cpus_present") is not True
                 ):
                     failures.append("temperature sensor discovery source/receiver CPU boundary missing")
-                pin_capability = platform.get("operational_pin_capability")
-                if platform.get("operational_pin_capability_passed") is not True or not isinstance(pin_capability, dict) or pin_capability.get("passed") is not True:
-                    failures.append("temperature sensor discovery operational pin capability missing or failed")
+                failures.extend(operational_pin_capability_failures(platform))
             if not public.is_json_int(provenance.get("discovery_monotonic_ns")) or provenance.get("discovery_monotonic_ns", 0) <= 0:
                 failures.append("temperature sensor discovery monotonic timestamp missing")
             if expected_challenge is not None:
@@ -1158,6 +1158,16 @@ def validate_temperature_sensor_authority_payload(
         authorizing_scope = discovery.get("authorizing_scope")
         if not isinstance(authorizing_scope, dict) or authorizing_scope.get("authorizing") is not True:
             failures.append("temperature sensor discovery was not captured from canonical target sensor roots")
+        if identity is not None:
+            failures.extend(
+                temperature_physical_authority_failures(
+                    identity,
+                    authorizing_scope=authorizing_scope if isinstance(authorizing_scope, dict) else None,
+                    platform_identity=platform_identity,
+                    require_authorizing_scope=True,
+                    require_pin_evidence=True,
+                )
+            )
         if not public.is_json_int(discovery.get("target_contact_count")) or discovery.get("target_contact_count") != 1:
             failures.append("temperature sensor discovery target contact count must be one")
         if not public.is_json_int(discovery.get("sensor_inventory_count")) or discovery.get("sensor_inventory_count") != 1:
@@ -1197,7 +1207,9 @@ def validate_temperature_sensor_authority_payload(
                 if candidate_identity.get("identity_sha256") != public.temperature_identity_digest(candidate_identity):
                     failures.append(f"temperature sensor discovery candidate identity digest mismatch {index}")
                     continue
-                expected_approved = legacy_temperature_identity_is_approved(candidate_identity)
+                expected_approved = legacy_temperature_identity_is_approved(candidate_identity) and not temperature_physical_authority_failures(
+                    candidate_identity
+                )
                 if candidate.get("approved") is not expected_approved:
                     failures.append(f"temperature sensor discovery candidate approval mismatch {index}")
                 if expected_approved:
@@ -1423,9 +1435,28 @@ def write_fake_hwmon_sensor(
 def temperature_sensor_identity_fixture() -> dict[str, Any]:
     with tempfile.TemporaryDirectory(prefix="carrier_tomography_hwmon_") as tmp:
         root = Path(tmp)
+
+        def selected_identity_for_fixture(hwmon_root: Path) -> dict[str, Any]:
+            selected, _selection = select_approved_temperature_identity(
+                enumerate_temperature_candidates(hwmon_root),
+                visibility=hwmon_visibility_snapshot(hwmon_root),
+            )
+            return selected
+
+        def fixture_sample(hwmon_root: Path, *, mutation_hook: Any | None = None) -> dict[str, Any]:
+            return read_temperature_sample(
+                selected_identity_for_fixture(hwmon_root),
+                hwmon_root=hwmon_root,
+                mutation_hook=mutation_hook,
+                allow_noncanonical_fixture=True,
+            )
+
+        def fixture_selection_rejected(hwmon_root: Path) -> bool:
+            return raises_target_error(lambda: selected_identity_for_fixture(hwmon_root))
+
         write_fake_hwmon_sensor(root, 0, "acpitz", "temp1")
         approved_path = write_fake_hwmon_sensor(root, 1, "k10temp", None)
-        first_non_cpu = read_temperature_sample(hwmon_root=root)
+        first_non_cpu = fixture_sample(root)
         approved_identity = temperature_sensor_identity(approved_path)
 
         wrong_name_root = root / "wrong_name"
@@ -1484,24 +1515,28 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
         drift_root = root / "drift"
         drift_path = write_fake_hwmon_sensor(drift_root, 0, "k10temp", "Tctl")
 
-        wrong_name_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=wrong_name_root))
-        wrong_label_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=wrong_label_root))
-        temp2_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=temp2_root))
-        wrong_driver_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=wrong_driver_root))
-        wrong_subsystem_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=wrong_subsystem_root))
-        wrong_modalias_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=wrong_modalias_root))
-        spoofed_subvendor_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=spoofed_subvendor_root))
+        wrong_name_rejected = fixture_selection_rejected(wrong_name_root)
+        wrong_label_rejected = fixture_selection_rejected(wrong_label_root)
+        temp2_rejected = fixture_selection_rejected(temp2_root)
+        wrong_driver_rejected = fixture_selection_rejected(wrong_driver_root)
+        wrong_subsystem_rejected = fixture_selection_rejected(wrong_subsystem_root)
+        wrong_modalias_rejected = fixture_selection_rejected(wrong_modalias_root)
+        spoofed_subvendor_rejected = fixture_selection_rejected(spoofed_subvendor_root)
         spoofed_subvendor_identity = identity_from_candidate_record(temperature_candidate_record(spoofed_subvendor_path, hwmon_root=spoofed_subvendor_root))
-        trailing_modalias_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=trailing_modalias_root))
-        truncated_modalias_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=truncated_modalias_root))
-        malformed_modalias_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=malformed_modalias_root))
-        unreadable_rejected = raises_target_error(lambda: read_temperature_sample(hwmon_root=unreadable_root))
-        labeled_tctl_accepted = read_temperature_sample(hwmon_root=labeled_tctl_root)["identity"]["sensor_label_value"] == "Tctl"
+        trailing_modalias_rejected = fixture_selection_rejected(trailing_modalias_root)
+        truncated_modalias_rejected = fixture_selection_rejected(truncated_modalias_root)
+        malformed_modalias_rejected = fixture_selection_rejected(malformed_modalias_root)
+        unreadable_rejected = fixture_selection_rejected(unreadable_root)
+        labeled_tctl_accepted = fixture_sample(labeled_tctl_root)["identity"]["sensor_label_value"] == "Tctl"
         unlabeled_record = enumerate_temperature_candidates(root)[1]
         wrong_label_record = enumerate_temperature_candidates(wrong_label_root)[0]
         required = temperature_sensor_identity(good_substitute)
         path_substitution_rejected = raises_target_error(
-            lambda: read_temperature_sample(required_identity={**required, "class_path": str(substituted)}, hwmon_root=substitute_root)
+            lambda: read_temperature_sample(
+                required_identity={**required, "class_path": str(substituted)},
+                hwmon_root=substitute_root,
+                allow_noncanonical_fixture=True,
+            )
         )
         same_path_required = temperature_sensor_identity(same_path)
         same_class_path_substitution_rejected = raises_target_error(
@@ -1509,6 +1544,7 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
                 required_identity=same_path_required,
                 hwmon_root=same_path_root,
                 mutation_hook=lambda path: (path.parent / "name").write_text("acpitz\n", encoding="utf-8"),
+                allow_noncanonical_fixture=True,
             )
         )
         swap_required = temperature_sensor_identity(class_hwmon / "temp1_input")
@@ -1519,11 +1555,22 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
             class_hwmon.unlink()
             class_hwmon.symlink_to(approved_real_path.parent, target_is_directory=True)
 
-        swap_sample = read_temperature_sample(required_identity=swap_required, hwmon_root=class_root, mutation_hook=swap_restore)
+        swap_sample = read_temperature_sample(
+            required_identity=swap_required,
+            hwmon_root=class_root,
+            mutation_hook=swap_restore,
+            allow_noncanonical_fixture=True,
+        )
         swap_restore_value_pinned_to_approved = swap_sample["value_c"] == 42.0 and swap_sample["value_c"] != 99.0
         drift_identity = temperature_sensor_identity(drift_path)
         (drift_path.parent / "temp1_label").write_text("Tdie\n", encoding="utf-8")
-        identity_drift_rejected = raises_target_error(lambda: read_temperature_sample(required_identity=drift_identity, hwmon_root=drift_root))
+        identity_drift_rejected = raises_target_error(
+            lambda: read_temperature_sample(
+                required_identity=drift_identity,
+                hwmon_root=drift_root,
+                allow_noncanonical_fixture=True,
+            )
+        )
 
     checks = {
         "non_cpu_sensor_first_skipped": first_non_cpu["identity"]["class_path"] == str(approved_path),
@@ -2339,6 +2386,49 @@ def identity_matches_required(identity: dict[str, Any], required_identity: dict[
     ) == required_identity.get("identity_sha256")
 
 
+def operational_pin_capability_failures(platform_identity: dict[str, Any] | None) -> list[str]:
+    failures: list[str] = []
+    if not isinstance(platform_identity, dict):
+        return ["temperature sensor discovery target platform missing"]
+    pin = platform_identity.get("operational_pin_capability")
+    if platform_identity.get("operational_pin_capability_passed") is not True or not isinstance(pin, dict):
+        return ["temperature sensor discovery operational pin capability missing or failed"]
+    expected_cpus = [public.SOURCE_CPU_EXPECTED, public.RECEIVER_CPU_EXPECTED]
+    if pin.get("schema") != "FAMILY10H_OPERATIONAL_PIN_CAPABILITY_PROBE_V1":
+        failures.append("temperature sensor discovery operational pin capability schema mismatch")
+    if pin.get("required_cpus") != expected_cpus:
+        failures.append("temperature sensor discovery operational pin required CPUs mismatch")
+    if pin.get("passed") is not True:
+        failures.append("temperature sensor discovery operational pin capability did not pass")
+    if pin.get("parent_affinity_restored") is not True:
+        failures.append("temperature sensor discovery operational pin parent affinity was not restored")
+    if pin.get("opened_pmu") is not False or pin.get("launched_runtime") is not False or pin.get("created_tomography_output_root") is not False:
+        failures.append("temperature sensor discovery operational pin performed forbidden live work")
+    if "skipped_reason" in pin:
+        failures.append("temperature sensor discovery operational pin capability was skipped")
+    per_cpu = pin.get("per_cpu")
+    if not isinstance(per_cpu, dict) or set(per_cpu) != {str(cpu) for cpu in expected_cpus}:
+        failures.append("temperature sensor discovery operational pin per-CPU evidence mismatch")
+    else:
+        for cpu in expected_cpus:
+            item = per_cpu.get(str(cpu))
+            if not isinstance(item, dict):
+                failures.append(f"temperature sensor discovery operational pin CPU {cpu} evidence missing")
+                continue
+            if item.get("cpu") != cpu:
+                failures.append(f"temperature sensor discovery operational pin CPU {cpu} identity mismatch")
+            if item.get("passed") is not True:
+                failures.append(f"temperature sensor discovery operational pin CPU {cpu} did not pass")
+            if item.get("requested_affinity") != [cpu]:
+                failures.append(f"temperature sensor discovery operational pin CPU {cpu} requested affinity mismatch")
+            readback = item.get("readback_affinity")
+            if isinstance(readback, list) and readback != [cpu]:
+                failures.append(f"temperature sensor discovery operational pin CPU {cpu} readback mismatch")
+            if item.get("parent_affinity_restored") is not True:
+                failures.append(f"temperature sensor discovery operational pin CPU {cpu} parent affinity was not restored")
+    return failures
+
+
 def legacy_temperature_identity_is_approved(identity: dict[str, Any]) -> bool:
     label_present = identity.get("sensor_label_present")
     label_value = identity.get("sensor_label_value")
@@ -2358,13 +2448,80 @@ def legacy_temperature_identity_is_approved(identity: dict[str, Any]) -> bool:
     )
 
 
+def temperature_physical_authority_failures(
+    identity: dict[str, Any] | None,
+    *,
+    authorizing_scope: dict[str, Any] | None = None,
+    platform_identity: dict[str, Any] | None = None,
+    require_canonical_paths: bool = True,
+    require_authorizing_scope: bool = False,
+    require_pin_evidence: bool = False,
+) -> list[str]:
+    failures: list[str] = []
+    if not isinstance(identity, dict) or set(identity) != public.TEMPERATURE_SENSOR_IDENTITY_KEYS:
+        return ["temperature physical authority identity missing or malformed"]
+    if identity.get("identity_sha256") != public.temperature_identity_digest(identity):
+        failures.append("temperature physical authority identity digest mismatch")
+    if not legacy_temperature_identity_is_approved(identity):
+        failures.append("temperature physical authority legacy identity incomplete")
+    class_path = str(identity.get("class_path", ""))
+    resolved_input = str(identity.get("resolved_input_path", ""))
+    resolved_hwmon = str(identity.get("resolved_hwmon_path", ""))
+    resolved_device = str(identity.get("resolved_device_path", ""))
+    if require_canonical_paths:
+        if re.fullmatch(r"/sys/class/hwmon/hwmon\d+/temp1_input", class_path) is None:
+            failures.append("temperature physical authority class path is not canonical sysfs temp1_input")
+        if not resolved_input.startswith("/sys/devices/") or not resolved_input.endswith("/temp1_input"):
+            failures.append("temperature physical authority resolved input is not canonical sysfs temp1_input")
+        if not resolved_hwmon.startswith("/sys/devices/") or "/hwmon/hwmon" not in resolved_hwmon:
+            failures.append("temperature physical authority resolved hwmon path is not under sysfs devices")
+        if not resolved_device.startswith("/sys/devices/"):
+            failures.append("temperature physical authority resolved device path is not under sysfs devices")
+        if resolved_hwmon and resolved_input and resolved_input != resolved_hwmon.rstrip("/") + "/temp1_input":
+            failures.append("temperature physical authority resolved input does not match resolved hwmon/temp1_input")
+        if resolved_device and resolved_hwmon and not resolved_hwmon.startswith(resolved_device.rstrip("/") + "/"):
+            failures.append("temperature physical authority resolved hwmon is not below resolved device")
+    if isinstance(authorizing_scope, dict):
+        expected_scope = {
+            "canonical_cpuinfo": True,
+            "canonical_hwmon_root": True,
+            "selected_class_path_is_sysfs_hwmon": True,
+            "selected_input_is_legacy_temp1": True,
+            "selected_semantic_profile_is_legacy_family10h": True,
+            "selected_semantic_role_is_tctl": True,
+            "resolved_input_is_sysfs_device": True,
+            "resolved_device_is_sysfs_device": True,
+            "resolved_driver_is_k10temp": True,
+            "resolved_subsystem_is_pci": True,
+            "authorizing": True,
+        }
+        for key, expected in expected_scope.items():
+            if authorizing_scope.get(key) is not expected:
+                failures.append(f"temperature physical authority scope {key} mismatch")
+        if authorizing_scope.get("cpuinfo_path") != "/proc/cpuinfo":
+            failures.append("temperature physical authority cpuinfo path is not canonical")
+        if authorizing_scope.get("hwmon_root") != "/sys/class/hwmon":
+            failures.append("temperature physical authority hwmon root is not canonical")
+    elif require_authorizing_scope:
+        failures.append("temperature physical authority scope missing")
+    if require_pin_evidence:
+        failures.extend(operational_pin_capability_failures(platform_identity))
+    return failures
+
+
 class PinnedTemperatureSensor:
-    def __init__(self, required_identity: dict[str, Any]):
+    def __init__(self, required_identity: dict[str, Any], *, allow_noncanonical_fixture: bool = False):
         self.required_identity = required_identity
+        self.allow_noncanonical_fixture = allow_noncanonical_fixture
         self.fd: int | None = None
         self.descriptor: dict[str, Any] | None = None
 
     def __enter__(self) -> "PinnedTemperatureSensor":
+        authority_failures = temperature_physical_authority_failures(
+            self.required_identity,
+            require_canonical_paths=not self.allow_noncanonical_fixture,
+        )
+        require(not authority_failures, "temperature physical authority failed: " + "; ".join(authority_failures))
         class_path = Path(str(self.required_identity["class_path"]))
         current_identity = temperature_sensor_identity(class_path)
         require(identity_matches_required(current_identity, self.required_identity), "temperature class-path identity drift")
@@ -2411,56 +2568,19 @@ class PinnedTemperatureSensor:
 
 
 def read_temperature_sample(
-    required_identity: dict[str, Any] | None = None,
+    required_identity: dict[str, Any],
     hwmon_root: Path = Path("/sys/class/hwmon"),
     mutation_hook: Any | None = None,
+    allow_noncanonical_fixture: bool = False,
 ) -> dict[str, Any]:
-    if required_identity is not None:
-        with PinnedTemperatureSensor(required_identity) as sensor:
-            return sensor.read_sample(mutation_hook=mutation_hook)
-    rejected: list[str] = []
-    for path in sorted(hwmon_root.glob("hwmon*/temp*_input")):
-        try:
-            identity = temperature_sensor_identity(path)
-        except (OSError, TargetError) as exc:
-            rejected.append(f"{path}: {exc}")
-            continue
-        if required_identity is not None and not identity_matches_required(identity, required_identity):
-            rejected.append(f"{path}: temperature sensor identity drift")
-            continue
-        if mutation_hook is not None:
-            mutation_hook(path)
-        try:
-            value = int(path.read_text(encoding="utf-8").strip()) / 1000.0
-        except (OSError, ValueError) as exc:
-            rejected.append(f"{path}: temperature unreadable: {exc}")
-            continue
-        try:
-            post_read_identity = temperature_sensor_identity(path)
-        except (OSError, TargetError) as exc:
-            rejected.append(f"{path}: temperature identity changed during sample: {exc}")
-            continue
-        if not identity_matches_required(post_read_identity, identity):
-            rejected.append(f"{path}: temperature sensor identity changed during sample")
-            continue
-        if 0.0 < value < 120.0:
-            return {
-                "path": str(path),
-                "label_present": identity["sensor_label_present"],
-                "label_value": identity["sensor_label_value"],
-                "semantic_role": identity["sensor_semantic_role"],
-                "semantic_profile": identity["sensor_semantic_profile"],
-                "value_c": value,
-                "identity": post_read_identity,
-            }
-        rejected.append(f"{path}: temperature outside physical custody bounds")
-    if required_identity is not None:
-        raise TargetError("temperature sensor identity drift")
-    raise TargetError("approved CPU temperature sensor unreadable: " + "; ".join(rejected[:4]))
+    del hwmon_root
+    require(isinstance(required_identity, dict), "explicit temperature identity is required")
+    with PinnedTemperatureSensor(required_identity, allow_noncanonical_fixture=allow_noncanonical_fixture) as sensor:
+        return sensor.read_sample(mutation_hook=mutation_hook)
 
 
-def read_temperature_c() -> float:
-    return float(read_temperature_sample()["value_c"])
+def read_temperature_c(required_identity: dict[str, Any]) -> float:
+    return float(read_temperature_sample(required_identity)["value_c"])
 
 
 def policy_custody_snapshot() -> dict[str, Any]:
@@ -3068,7 +3188,7 @@ def discover_temperature_sensor_authority(
     try:
         identity_before = temperature_sensor_identity(Path(selected_identity["class_path"]))
         require(identity_matches_required(identity_before, selected_identity), "selected temperature identity changed before read")
-        with PinnedTemperatureSensor(selected_identity) as sensor:
+        with PinnedTemperatureSensor(selected_identity, allow_noncanonical_fixture=hwmon_root != Path("/sys/class/hwmon")) as sensor:
             sample = sensor.read_sample()
         identity_after = temperature_sensor_identity(Path(selected_identity["class_path"]))
         require(identity_matches_required(identity_after, selected_identity), "selected temperature identity changed after read")
