@@ -1370,7 +1370,7 @@ def attempt_history_index_metadata_reporting_only() -> dict[str, Any]:
     try:
         head = git_text("rev-parse", "HEAD")
         blob = commit_blob_record(head, ATTEMPT_HISTORY_INDEX_PATH)
-    except ControllerError:
+    except (ControllerError, ValueError):
         return metadata
     metadata["git_head"] = head
     metadata["git_blob_sha256"] = blob.get("sha256")
@@ -1395,6 +1395,7 @@ def validate_attempt_history_index_manifest_binding(manifest_data: dict[str, Any
         "file_sha256",
         "checkout_file_sha256",
         "file_sha256_canonicalization",
+        "git_head",
         "git_blob_sha256",
         "git_blob_size",
         "git_blob_id",
@@ -1405,6 +1406,21 @@ def validate_attempt_history_index_manifest_binding(manifest_data: dict[str, Any
             failures.append(f"manifest attempt-history metadata {key} mismatch")
     if expected.get("checkout_file_sha256") and metadata.get("file_sha256") == expected.get("checkout_file_sha256") != expected.get("file_sha256"):
         failures.append("manifest attempt-history metadata used checkout digest instead of Git text blob digest")
+    if not ATTEMPT_HISTORY_INDEX_PATH.exists():
+        failures.append("manifest attempt-history index file missing")
+    if metadata.get("file_sha256") != metadata.get("git_blob_sha256"):
+        failures.append("manifest attempt-history file digest does not match Git blob digest")
+    if metadata.get("git_blob_matches_file_sha256") is not True:
+        failures.append("manifest attempt-history Git blob match is not true")
+    if re.fullmatch(r"[0-9a-f]{40}", str(metadata.get("git_head", ""))) is None:
+        failures.append("manifest attempt-history Git head missing or invalid")
+    for field in ["file_sha256", "checkout_file_sha256", "git_blob_sha256"]:
+        if re.fullmatch(r"[0-9a-f]{64}", str(metadata.get(field, ""))) is None:
+            failures.append(f"manifest attempt-history {field} missing or invalid")
+    if re.fullmatch(r"[0-9a-f]{40}", str(metadata.get("git_blob_id", ""))) is None:
+        failures.append("manifest attempt-history Git blob id missing or invalid")
+    if not is_strict_int(metadata.get("git_blob_size")) or metadata.get("git_blob_size", 0) <= 0:
+        failures.append("manifest attempt-history Git blob size missing or invalid")
     return {"passed": not failures, "failures": failures, "expected": expected}
 
 
@@ -2812,7 +2828,11 @@ def acquire_temperature_sensor_authority(
     discovery: dict[str, Any] | None = None
     authority: dict[str, Any] | None = None
     receipt_copied_state_persisted = False
+    target_discovery_receipt_sealed_before_cleanup = False
+    authority_receipt_sealed_before_cleanup = False
+    cleanup_armed_state_persisted = False
     target_discovery_file_sha: str | None = None
+    authority_file_sha: str | None = None
     transfer_plan: dict[str, Any] | None = None
     target_failure: dict[str, Any] | None = None
     target_structured_failure: dict[str, Any] | None = None
@@ -3086,12 +3106,24 @@ def acquire_temperature_sensor_authority(
                 if local_sha != remote_sha:
                     raise ControllerError("discovery copy-back hash mismatch")
                 target_discovery_file_sha = local_sha
+                target_discovery_bytes = local_copyback.read_bytes()
                 discovery = read_json(local_copyback)
+                if serialized_json_sha256(discovery) != target_discovery_file_sha:
+                    raise ControllerError("discovery receipt serialized hash verification failed before cleanup")
                 authority = build_temperature_sensor_authority_receipt(
                     discovery=discovery,
                     controller_challenge=challenge,
                     controller_nonce=nonce,
                 )
+                authority_file_sha = serialized_json_sha256(authority)
+                durable_write_bytes_exclusive(TARGET_DISCOVERY_RECEIPT, target_discovery_bytes)
+                if public.sha256_file(TARGET_DISCOVERY_RECEIPT) != target_discovery_file_sha or read_json(TARGET_DISCOVERY_RECEIPT) != discovery:
+                    raise ControllerError("discovery receipt local seal verification failed before cleanup")
+                target_discovery_receipt_sealed_before_cleanup = True
+                write_json_exclusive(TEMPERATURE_SENSOR_AUTHORITY, authority)
+                if public.sha256_file(TEMPERATURE_SENSOR_AUTHORITY) != authority_file_sha or read_json(TEMPERATURE_SENSOR_AUTHORITY) != authority:
+                    raise ControllerError("temperature authority receipt local seal verification failed before cleanup")
+                authority_receipt_sealed_before_cleanup = True
                 write_discovery_attempt_receipt(
                     {
                         "passed": False,
@@ -3105,6 +3137,10 @@ def acquire_temperature_sensor_authority(
                         "discovery_transfer_plan": transfer_plan,
                         "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256"),
                         "target_discovery_receipt_file_sha256": local_sha,
+                        "target_discovery_receipt_sealed_before_cleanup": target_discovery_receipt_sealed_before_cleanup,
+                        "authority_receipt_sha256": authority.get("temperature_sensor_authority_sha256"),
+                        "authority_receipt_file_sha256": authority_file_sha,
+                        "authority_receipt_sealed_before_cleanup": authority_receipt_sealed_before_cleanup,
                         "target_contact_count": 1,
                         "sensor_inventory_count": 1,
                         "live_invocation_count": 0,
@@ -3121,6 +3157,9 @@ def acquire_temperature_sensor_authority(
                     and discovery is not None
                     and authority is not None
                     and target_discovery_file_sha is not None
+                    and authority_file_sha is not None
+                    and target_discovery_receipt_sealed_before_cleanup
+                    and authority_receipt_sealed_before_cleanup
                 )
                 failure_custody_ready = (
                     target_failure is not None
@@ -3128,15 +3167,7 @@ def acquire_temperature_sensor_authority(
                     and target_failure_receipt_sealed_before_cleanup
                 )
                 cleanup_allowed = (not target_command_invoked) or success_custody_ready or failure_custody_ready
-                cleanup["attempted"] = cleanup_allowed
-                if not cleanup_allowed:
-                    if target_failure is not None and not target_failure_preserved_before_cleanup:
-                        cleanup["skipped_reason"] = "target failure evidence was not locally preserved before cleanup"
-                    elif target_failure is not None and not target_failure_receipt_sealed_before_cleanup:
-                        cleanup["skipped_reason"] = "target failure receipt was not durably sealed before cleanup"
-                    else:
-                        cleanup["skipped_reason"] = "target command outcome was not locally preserved before cleanup"
-                if receipt_copied_state_persisted:
+                if receipt_copied_state_persisted and cleanup_allowed:
                     try:
                         write_discovery_attempt_receipt(
                             {
@@ -3151,6 +3182,10 @@ def acquire_temperature_sensor_authority(
                                 "discovery_transfer_plan": transfer_plan,
                                 "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256") if isinstance(discovery, dict) else None,
                                 "target_discovery_receipt_file_sha256": target_discovery_file_sha,
+                                "target_discovery_receipt_sealed_before_cleanup": target_discovery_receipt_sealed_before_cleanup,
+                                "authority_receipt_sha256": authority.get("temperature_sensor_authority_sha256") if isinstance(authority, dict) else None,
+                                "authority_receipt_file_sha256": authority_file_sha,
+                                "authority_receipt_sealed_before_cleanup": authority_receipt_sealed_before_cleanup,
                                 "target_contact_count": 1,
                                 "sensor_inventory_count": 1,
                                 "live_invocation_count": 0,
@@ -3159,8 +3194,24 @@ def acquire_temperature_sensor_authority(
                                 "commands": commands,
                             }
                         )
-                    except Exception as exc:  # noqa: BLE001 - local receipt failure must not skip remote cleanup
+                        cleanup_armed_state_persisted = True
+                    except Exception as exc:  # noqa: BLE001 - local receipt failure must preserve remote evidence
                         cleanup["journal_error_before_cleanup"] = str(exc)
+                        cleanup_allowed = False
+                if target_command_invoked and not cleanup_allowed:
+                    if target_failure is not None and not target_failure_preserved_before_cleanup:
+                        cleanup["skipped_reason"] = "target failure evidence was not locally preserved before cleanup"
+                    elif target_failure is not None and not target_failure_receipt_sealed_before_cleanup:
+                        cleanup["skipped_reason"] = "target failure receipt was not durably sealed before cleanup"
+                    elif discovery is not None and not target_discovery_receipt_sealed_before_cleanup:
+                        cleanup["skipped_reason"] = "target discovery receipt was not durably sealed before cleanup"
+                    elif authority is not None and not authority_receipt_sealed_before_cleanup:
+                        cleanup["skipped_reason"] = "temperature authority receipt was not durably sealed before cleanup"
+                    elif receipt_copied_state_persisted and not cleanup_armed_state_persisted:
+                        cleanup["skipped_reason"] = "cleanup armed attempt state was not durably sealed before cleanup"
+                    else:
+                        cleanup["skipped_reason"] = "target command outcome was not locally preserved before cleanup"
+                cleanup["attempted"] = cleanup_allowed
                 cleanup_script = (
                     (
                         "set -u; "
@@ -3208,6 +3259,10 @@ def acquire_temperature_sensor_authority(
                                 "discovery_transfer_plan": transfer_plan,
                                 "target_discovery_receipt_sha256": discovery.get("target_discovery_receipt_sha256") if isinstance(discovery, dict) else None,
                                 "target_discovery_receipt_file_sha256": target_discovery_file_sha,
+                                "target_discovery_receipt_sealed_before_cleanup": target_discovery_receipt_sealed_before_cleanup,
+                                "authority_receipt_sha256": authority.get("temperature_sensor_authority_sha256") if isinstance(authority, dict) else None,
+                                "authority_receipt_file_sha256": authority_file_sha,
+                                "authority_receipt_sealed_before_cleanup": authority_receipt_sealed_before_cleanup,
                                 "target_contact_count": 1,
                                 "sensor_inventory_count": 1,
                                 "live_invocation_count": 0,
@@ -3249,7 +3304,8 @@ def acquire_temperature_sensor_authority(
         raise ControllerError("discovery receipt or authority receipt missing after cleanup")
     if target_discovery_file_sha is None or serialized_json_sha256(discovery) != target_discovery_file_sha:
         raise ControllerError("discovery receipt serialized hash verification failed")
-    authority_file_sha = serialized_json_sha256(authority)
+    if authority_file_sha is None or serialized_json_sha256(authority) != authority_file_sha:
+        raise ControllerError("temperature authority receipt serialized hash verification failed")
     result = {
         "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT_V1",
         "passed": True,
@@ -3270,9 +3326,11 @@ def acquire_temperature_sensor_authority(
         "target_discovery_receipt_path": str(TARGET_DISCOVERY_RECEIPT),
         "target_discovery_receipt_sha256": discovery["target_discovery_receipt_sha256"],
         "target_discovery_receipt_file_sha256": target_discovery_file_sha,
+        "target_discovery_receipt_sealed_before_cleanup": target_discovery_receipt_sealed_before_cleanup,
         "authority_receipt_path": str(TEMPERATURE_SENSOR_AUTHORITY),
         "authority_receipt_sha256": authority["temperature_sensor_authority_sha256"],
         "authority_receipt_file_sha256": authority_file_sha,
+        "authority_receipt_sealed_before_cleanup": authority_receipt_sealed_before_cleanup,
         "approved_sensor_identity": authority["approved_sensor_identity"],
         "cleanup": cleanup,
         "commands": commands,
@@ -3293,12 +3351,14 @@ def acquire_temperature_sensor_authority(
     )
     if not final_validation["passed"]:
         raise ControllerError("final temperature authority chain invalid: " + ",".join(final_validation["failures"]))
-    TARGET_DISCOVERY_RECEIPT.write_bytes((strict_json_dumps(discovery, indent=2) + "\n").encode("utf-8"))
-    if public.sha256_file(TARGET_DISCOVERY_RECEIPT) != target_discovery_file_sha:
-        raise ControllerError("discovery receipt local write verification failed")
-    write_json(TEMPERATURE_SENSOR_AUTHORITY, authority)
+    if not TARGET_DISCOVERY_RECEIPT.exists():
+        raise ControllerError("discovery receipt missing after cleanup despite pre-cleanup seal")
+    if public.sha256_file(TARGET_DISCOVERY_RECEIPT) != target_discovery_file_sha or read_json(TARGET_DISCOVERY_RECEIPT) != discovery:
+        raise ControllerError("discovery receipt pre-cleanup seal verification failed after cleanup")
+    if not TEMPERATURE_SENSOR_AUTHORITY.exists():
+        raise ControllerError("temperature authority receipt missing after cleanup despite pre-cleanup seal")
     if public.sha256_file(TEMPERATURE_SENSOR_AUTHORITY) != authority_file_sha or read_json(TEMPERATURE_SENSOR_AUTHORITY) != authority:
-        raise ControllerError("temperature authority receipt write verification failed")
+        raise ControllerError("temperature authority receipt pre-cleanup seal verification failed after cleanup")
     write_json(DISCOVERY_TRANSPORT_PATH, result)
     write_discovery_attempt_receipt(
         {
@@ -3312,8 +3372,10 @@ def acquire_temperature_sensor_authority(
             "challenge_receipt_file_sha256": challenge_receipt["challenge_receipt_file_sha256"],
             "target_discovery_receipt_sha256": result["target_discovery_receipt_sha256"],
             "target_discovery_receipt_file_sha256": result["target_discovery_receipt_file_sha256"],
+            "target_discovery_receipt_sealed_before_cleanup": result["target_discovery_receipt_sealed_before_cleanup"],
             "authority_receipt_sha256": result["authority_receipt_sha256"],
             "authority_receipt_file_sha256": result["authority_receipt_file_sha256"],
+            "authority_receipt_sealed_before_cleanup": result["authority_receipt_sealed_before_cleanup"],
             "discovery_transport_sha256": result["discovery_transport_sha256"],
             "target_contact_count": 1,
             "sensor_inventory_count": 1,
@@ -3724,6 +3786,10 @@ def validate_discovery_transport_receipt(receipt: dict[str, Any] | None) -> dict
     cleanup = receipt.get("cleanup")
     if not isinstance(cleanup, dict) or cleanup.get("passed") is not True or cleanup.get("absence_verified") is not True:
         failures.append("discovery cleanup and absence verification required")
+    if receipt.get("target_discovery_receipt_sealed_before_cleanup") is not True:
+        failures.append("discovery target receipt was not sealed before cleanup")
+    if receipt.get("authority_receipt_sealed_before_cleanup") is not True:
+        failures.append("discovery authority receipt was not sealed before cleanup")
     if not is_strict_int(receipt.get("target_contact_count")) or receipt.get("target_contact_count") != 1:
         failures.append("discovery target contact count must be one")
     if not is_strict_int(receipt.get("sensor_inventory_count")) or receipt.get("sensor_inventory_count") != 1:
@@ -3823,8 +3889,10 @@ def discovery_transport_self_tests() -> dict[str, Any]:
             "discovery_transfer_plan": fake_transfer_plan(base_scope),
             "target_discovery_receipt_sha256": "3" * 64,
             "target_discovery_receipt_file_sha256": "5" * 64,
+            "target_discovery_receipt_sealed_before_cleanup": True,
             "authority_receipt_sha256": "4" * 64,
             "authority_receipt_file_sha256": "6" * 64,
+            "authority_receipt_sealed_before_cleanup": True,
             "target_contact_count": 1,
             "sensor_inventory_count": 1,
             "live_invocation_count": 0,
@@ -5133,6 +5201,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         "read_source_authority_review_for_discovery": read_source_authority_review_for_discovery,
         "materialize_source_authority_snapshot": materialize_source_authority_snapshot,
         "commit_exists": commit_exists,
+        "durable_write_bytes_exclusive": durable_write_bytes_exclusive,
     }
     production_invalid_error = ""
     production_invalid_cleanup_invoked = False
@@ -5142,6 +5211,17 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
     production_invalid_journal_stopped_before_receipt_copied = False
     production_invalid_no_success_artifacts = False
     production_invalid_no_success_cleanup_states = False
+    production_success_cleanup_invoked = False
+    production_success_absence_probe_invoked = False
+    production_success_receipts_sealed_at_cleanup = False
+    production_success_transport_passed = False
+    production_seal_failure_error = ""
+    production_seal_failure_cleanup_invoked = False
+    production_seal_failure_absence_probe_invoked = False
+    production_post_cleanup_error = ""
+    production_post_cleanup_cleanup_invoked = False
+    production_post_cleanup_receipt_recoverable = False
+    production_post_cleanup_authority_recoverable = False
     invalid_discovery = {
         "schema": TEMPERATURE_SENSOR_DISCOVERY_SCHEMA,
         "discovery_mode": "target_read_only_sensor_inventory",
@@ -5387,6 +5467,109 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         for name in DISCOVERY_TRANSFER_FILE_NAMES:
             shutil.copy2(HERE / name, destination / name)
 
+    def seal_success_discovery_receipt(active_challenge: dict[str, Any], source_commit: str) -> dict[str, Any]:
+        scope = active_challenge.get("transport_scope") if isinstance(active_challenge.get("transport_scope"), dict) else {}
+        identity = public.with_temperature_identity_digest(
+            {
+                **{key: public.synthetic_temperature_identity()[key] for key in public.synthetic_temperature_identity() if key != "identity_sha256"},
+                "class_path": "/sys/class/hwmon/hwmon9/temp1_input",
+                "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon9/temp1_input",
+                "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon9",
+                "input_st_ino": 99,
+            }
+        )
+        platform = {
+            "vendor": "AuthenticAMD",
+            "cpu_family": 16,
+            "cpu_models": [10],
+            "processor_count": 6,
+            "processors": [
+                {"processor": cpu, "vendor_id": "AuthenticAMD", "cpu_family": 16, "model": 10}
+                for cpu in range(6)
+            ],
+            "checked_before_discovery": True,
+            "cpuinfo_path": "/proc/cpuinfo",
+            "source_cpu_expected": public.SOURCE_CPU_EXPECTED,
+            "receiver_cpu_expected": public.RECEIVER_CPU_EXPECTED,
+            "source_receiver_cpus_present": True,
+            "affinity_checked": True,
+            "affinity_cpus": list(range(6)),
+            "inherited_affinity_checked": True,
+            "inherited_affinity_cpus": list(range(6)),
+            "operational_pin_capability": target.fake_pin_probe(
+                {public.SOURCE_CPU_EXPECTED, public.RECEIVER_CPU_EXPECTED},
+                inherited_affinity=list(range(6)),
+            ),
+            "operational_pin_capability_passed": True,
+        }
+        authorizing_scope = {
+            "canonical_cpuinfo": True,
+            "canonical_hwmon_root": True,
+            "selected_class_path_is_sysfs_hwmon": True,
+            "selected_input_is_legacy_temp1": True,
+            "selected_semantic_profile_is_legacy_family10h": True,
+            "selected_semantic_role_is_tctl": True,
+            "resolved_input_is_sysfs_device": True,
+            "resolved_device_is_sysfs_device": True,
+            "resolved_driver_is_k10temp": True,
+            "resolved_subsystem_is_pci": True,
+            "authorizing": True,
+            "cpuinfo_path": "/proc/cpuinfo",
+            "hwmon_root": "/sys/class/hwmon",
+        }
+        receipt = {
+            "schema": TEMPERATURE_SENSOR_DISCOVERY_SCHEMA,
+            "discovery_mode": "target_read_only_sensor_inventory",
+            "target_contact_count": 1,
+            "sensor_inventory_count": 1,
+            "candidate_scan_count": 1,
+            "live_invocation_count": 0,
+            "pmu_acquisition_count": 0,
+            "pmu_open_count": 0,
+            "runtime_launch_count": 0,
+            "tomography_output_root_created": False,
+            "source_root": scope.get("remote_source_root"),
+            "receipt_path": scope.get("remote_receipt_path"),
+            "controller_nonce_sha256": active_challenge["controller_nonce_sha256"],
+            "selected_identity": identity,
+            "identity_before": identity,
+            "identity_after": identity,
+            "observed_candidates": [{"identity": identity, "approved": True}],
+            "selection": {
+                "law": "exactly one LEGACY_FAMILY10H_K10TEMP_TEMP1_V1 candidate",
+                "approval_profile": target.LEGACY_FAMILY10H_TEMPERATURE_PROFILE,
+                "approved_count": 1,
+                "deterministic_law": True,
+                "selected_class_path": identity["class_path"],
+            },
+            "source_authority": {"passed": True, "fixture": True},
+            "authorizing_scope": authorizing_scope,
+            "provenance": {
+                "authority": "target_sensor_discovery",
+                "science_package_id": public.SCIENCE_PACKAGE_ID,
+                "transaction_run_id": public.TRANSACTION_RUN_ID,
+                "target_platform": platform,
+                "discovery_monotonic_ns": 1,
+                "controller_challenge_sha256": public.digest(active_challenge),
+                "authorized_commit": source_commit,
+            },
+            "sample": {
+                "identity": identity,
+                "path": identity["class_path"],
+                "label_present": identity["sensor_label_present"],
+                "label_value": identity["sensor_label_value"],
+                "semantic_role": identity["sensor_semantic_role"],
+                "semantic_profile": identity["sensor_semantic_profile"],
+                "value_c": 42.0,
+                "pinned_descriptor": target.expected_descriptor_identity(identity),
+                "read_law": "manifest-approved resolved input descriptor",
+            },
+        }
+        receipt["target_discovery_receipt_sha256"] = public.digest(
+            {k: v for k, v in receipt.items() if k != "target_discovery_receipt_sha256"}
+        )
+        return receipt
+
     def fake_transport_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
         nonlocal production_invalid_cleanup_invoked, production_invalid_absence_probe_invoked
         command_list = [str(item) for item in command]
@@ -5454,7 +5637,7 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
                     and cleanup_state.get("attempted") is False
                     and cleanup_state.get("passed") is False
                     and cleanup_state.get("absence_verified") is False
-                    and cleanup_state.get("skipped_reason") == "target command outcome was not locally preserved before cleanup"
+                    and cleanup_state.get("skipped_reason") == "target discovery receipt was not durably sealed before cleanup"
                     and cleanup_receipt.get("sensor_inventory_count") == 0
                     and cleanup_receipt.get("candidate_scan_count") == 0
                 )
@@ -5464,6 +5647,235 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
                 not TEMPERATURE_SENSOR_AUTHORITY.exists()
                 and not DISCOVERY_TRANSPORT_PATH.exists()
                 and not TARGET_DISCOVERY_RECEIPT.exists()
+            )
+        finally:
+            for name, value in production_originals.items():
+                globals()[name] = value
+
+    success_challenge_seen: dict[str, Any] | None = None
+    success_discovery_payload: dict[str, Any] | None = None
+    success_discovery_bytes = b""
+    success_discovery_sha = ""
+
+    def successful_target_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        nonlocal success_challenge_seen
+        nonlocal success_discovery_payload
+        nonlocal success_discovery_bytes
+        nonlocal success_discovery_sha
+        nonlocal production_success_cleanup_invoked
+        nonlocal production_success_absence_probe_invoked
+        nonlocal production_success_receipts_sealed_at_cleanup
+        command_list = [str(item) for item in command]
+        if command_list and command_list[0] == "ssh":
+            script = command_list[-1]
+            if "FAMILY10H_DISCOVERY_PREFLIGHT" in script:
+                return subprocess.CompletedProcess(command_list, 0, "FAMILY10H_DISCOVERY_PREFLIGHT base_preexisting=0 root_created=1\n", "")
+            if "python3 family10h_carrier_tomography_target.py" in script:
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if script.startswith("sha256sum "):
+                if success_challenge_seen is None:
+                    return subprocess.CompletedProcess(command_list, 1, "", "")
+                success_discovery_payload = seal_success_discovery_receipt(success_challenge_seen, "1" * 40)
+                success_discovery_bytes = (strict_json_dumps(success_discovery_payload, indent=2) + "\n").encode("utf-8")
+                success_discovery_sha = hashlib.sha256(success_discovery_bytes).hexdigest()
+                return subprocess.CompletedProcess(command_list, 0, success_discovery_sha + "\n", "")
+            if "rm -rf --" in script:
+                production_success_cleanup_invoked = True
+                production_success_receipts_sealed_at_cleanup = (
+                    bool(success_discovery_sha)
+                    and TARGET_DISCOVERY_RECEIPT.exists()
+                    and TEMPERATURE_SENSOR_AUTHORITY.exists()
+                    and public.sha256_file(TARGET_DISCOVERY_RECEIPT) == success_discovery_sha
+                    and read_json(TEMPERATURE_SENSOR_AUTHORITY).get("target_discovery_receipt") == success_discovery_payload
+                )
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if "test ! -e " in script:
+                production_success_absence_probe_invoked = True
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        if command_list and command_list[0] == "scp":
+            if len(command_list) >= 4 and Path(command_list[2]).name == "controller_challenge.json":
+                success_challenge_seen = read_json(Path(command_list[2]))
+            elif len(command_list) >= 4 and command_list[2].startswith(f"{TARGET_HOST}:"):
+                Path(command_list[3]).write_bytes(success_discovery_bytes)
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        return subprocess.CompletedProcess(command_list, 0, "", "")
+
+    with tempfile.TemporaryDirectory(prefix="family10h_production_success_copyback_regression_") as tmp:
+        temp_root = Path(tmp)
+        try:
+            globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
+            globals()["DISCOVERY_ATTEMPT_JOURNAL_PATH"] = temp_root / "attempt.jsonl"
+            globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = temp_root / "cleanup.json"
+            globals()["TEMPERATURE_SENSOR_AUTHORITY"] = temp_root / "authority.json"
+            globals()["DISCOVERY_TRANSPORT_PATH"] = temp_root / "transport.json"
+            globals()["TARGET_DISCOVERY_RECEIPT"] = temp_root / "target_discovery.json"
+            globals()["DISCOVERY_CHALLENGE_PATH"] = temp_root / "challenge.json"
+            globals()["TARGET_DISCOVERY_FAILURE_PATH"] = temp_root / "target_failure.json"
+            globals()["run"] = successful_target_run
+            globals()["read_source_hash_authority"] = lambda: fake_source_hashes
+            globals()["read_existing_source_bundle_authority"] = lambda: fake_bundle
+            globals()["source_authority_commit_verification"] = lambda commit: {
+                "passed": True,
+                "failures": [],
+                "commit": commit,
+                "files": {},
+                "status": [],
+            }
+            globals()["read_source_authority_review_for_discovery"] = fake_source_review
+            globals()["materialize_source_authority_snapshot"] = fake_materialize
+            globals()["commit_exists"] = lambda _commit: False
+            transport_receipt = acquire_temperature_sensor_authority(source_authority_commit="1" * 40)
+            production_success_transport_passed = transport_receipt.get("passed") is True
+        finally:
+            for name, value in production_originals.items():
+                globals()[name] = value
+
+    seal_failure_challenge_seen: dict[str, Any] | None = None
+    seal_failure_bytes = b""
+    seal_failure_sha = ""
+
+    def seal_failure_target_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        nonlocal seal_failure_challenge_seen
+        nonlocal seal_failure_bytes
+        nonlocal seal_failure_sha
+        nonlocal production_seal_failure_cleanup_invoked
+        nonlocal production_seal_failure_absence_probe_invoked
+        command_list = [str(item) for item in command]
+        if command_list and command_list[0] == "ssh":
+            script = command_list[-1]
+            if "FAMILY10H_DISCOVERY_PREFLIGHT" in script:
+                return subprocess.CompletedProcess(command_list, 0, "FAMILY10H_DISCOVERY_PREFLIGHT base_preexisting=0 root_created=1\n", "")
+            if "python3 family10h_carrier_tomography_target.py" in script:
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if script.startswith("sha256sum "):
+                if seal_failure_challenge_seen is None:
+                    return subprocess.CompletedProcess(command_list, 1, "", "")
+                discovery_payload = seal_success_discovery_receipt(seal_failure_challenge_seen, "1" * 40)
+                seal_failure_bytes = (strict_json_dumps(discovery_payload, indent=2) + "\n").encode("utf-8")
+                seal_failure_sha = hashlib.sha256(seal_failure_bytes).hexdigest()
+                return subprocess.CompletedProcess(command_list, 0, seal_failure_sha + "\n", "")
+            if "rm -rf --" in script:
+                production_seal_failure_cleanup_invoked = True
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if "test ! -e " in script:
+                production_seal_failure_absence_probe_invoked = True
+                return subprocess.CompletedProcess(command_list, 1, "", "")
+            if script == "set -u; false":
+                return subprocess.CompletedProcess(command_list, 1, "", "")
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        if command_list and command_list[0] == "scp":
+            if len(command_list) >= 4 and Path(command_list[2]).name == "controller_challenge.json":
+                seal_failure_challenge_seen = read_json(Path(command_list[2]))
+            elif len(command_list) >= 4 and command_list[2].startswith(f"{TARGET_HOST}:"):
+                Path(command_list[3]).write_bytes(seal_failure_bytes)
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        return subprocess.CompletedProcess(command_list, 0, "", "")
+
+    with tempfile.TemporaryDirectory(prefix="family10h_production_success_seal_failure_regression_") as tmp:
+        temp_root = Path(tmp)
+
+        def failing_durable_write(path: Path, data: bytes) -> None:
+            if Path(path) == temp_root / "target_discovery.json":
+                raise OSError("fixture target discovery local seal failure")
+            production_originals["durable_write_bytes_exclusive"](path, data)
+
+        try:
+            globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
+            globals()["DISCOVERY_ATTEMPT_JOURNAL_PATH"] = temp_root / "attempt.jsonl"
+            globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = temp_root / "cleanup.json"
+            globals()["TEMPERATURE_SENSOR_AUTHORITY"] = temp_root / "authority.json"
+            globals()["DISCOVERY_TRANSPORT_PATH"] = temp_root / "transport.json"
+            globals()["TARGET_DISCOVERY_RECEIPT"] = temp_root / "target_discovery.json"
+            globals()["DISCOVERY_CHALLENGE_PATH"] = temp_root / "challenge.json"
+            globals()["TARGET_DISCOVERY_FAILURE_PATH"] = temp_root / "target_failure.json"
+            globals()["run"] = seal_failure_target_run
+            globals()["durable_write_bytes_exclusive"] = failing_durable_write
+            globals()["read_source_hash_authority"] = lambda: fake_source_hashes
+            globals()["read_existing_source_bundle_authority"] = lambda: fake_bundle
+            globals()["source_authority_commit_verification"] = lambda commit: {"passed": True, "failures": [], "commit": commit, "files": {}, "status": []}
+            globals()["read_source_authority_review_for_discovery"] = fake_source_review
+            globals()["materialize_source_authority_snapshot"] = fake_materialize
+            globals()["commit_exists"] = lambda _commit: False
+            try:
+                acquire_temperature_sensor_authority(source_authority_commit="1" * 40)
+            except Exception as exc:  # noqa: BLE001 - fixture injects raw local I/O failure
+                production_seal_failure_error = str(exc)
+        finally:
+            for name, value in production_originals.items():
+                globals()[name] = value
+
+    post_cleanup_challenge_seen: dict[str, Any] | None = None
+    post_cleanup_discovery_payload: dict[str, Any] | None = None
+    post_cleanup_discovery_bytes = b""
+    post_cleanup_discovery_sha = ""
+
+    def post_cleanup_failure_run(command: list[str], **_kwargs: Any) -> subprocess.CompletedProcess[str]:
+        nonlocal post_cleanup_challenge_seen
+        nonlocal post_cleanup_discovery_payload
+        nonlocal post_cleanup_discovery_bytes
+        nonlocal post_cleanup_discovery_sha
+        nonlocal production_post_cleanup_cleanup_invoked
+        command_list = [str(item) for item in command]
+        if command_list and command_list[0] == "ssh":
+            script = command_list[-1]
+            if "FAMILY10H_DISCOVERY_PREFLIGHT" in script:
+                return subprocess.CompletedProcess(command_list, 0, "FAMILY10H_DISCOVERY_PREFLIGHT base_preexisting=0 root_created=1\n", "")
+            if "python3 family10h_carrier_tomography_target.py" in script:
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if script.startswith("sha256sum "):
+                if post_cleanup_challenge_seen is None:
+                    return subprocess.CompletedProcess(command_list, 1, "", "")
+                post_cleanup_discovery_payload = seal_success_discovery_receipt(post_cleanup_challenge_seen, "1" * 40)
+                post_cleanup_discovery_bytes = (strict_json_dumps(post_cleanup_discovery_payload, indent=2) + "\n").encode("utf-8")
+                post_cleanup_discovery_sha = hashlib.sha256(post_cleanup_discovery_bytes).hexdigest()
+                return subprocess.CompletedProcess(command_list, 0, post_cleanup_discovery_sha + "\n", "")
+            if "rm -rf --" in script:
+                production_post_cleanup_cleanup_invoked = True
+                return subprocess.CompletedProcess(command_list, 0, "", "")
+            if "test ! -e " in script:
+                return subprocess.CompletedProcess(command_list, 1, "", "")
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        if command_list and command_list[0] == "scp":
+            if len(command_list) >= 4 and Path(command_list[2]).name == "controller_challenge.json":
+                post_cleanup_challenge_seen = read_json(Path(command_list[2]))
+            elif len(command_list) >= 4 and command_list[2].startswith(f"{TARGET_HOST}:"):
+                Path(command_list[3]).write_bytes(post_cleanup_discovery_bytes)
+            return subprocess.CompletedProcess(command_list, 0, "", "")
+        return subprocess.CompletedProcess(command_list, 0, "", "")
+
+    with tempfile.TemporaryDirectory(prefix="family10h_production_post_cleanup_failure_regression_") as tmp:
+        temp_root = Path(tmp)
+        try:
+            globals()["DISCOVERY_ATTEMPT_PATH"] = temp_root / "attempt.json"
+            globals()["DISCOVERY_ATTEMPT_JOURNAL_PATH"] = temp_root / "attempt.jsonl"
+            globals()["DISCOVERY_CLEANUP_CUSTODY_PATH"] = temp_root / "cleanup.json"
+            globals()["TEMPERATURE_SENSOR_AUTHORITY"] = temp_root / "authority.json"
+            globals()["DISCOVERY_TRANSPORT_PATH"] = temp_root / "transport.json"
+            globals()["TARGET_DISCOVERY_RECEIPT"] = temp_root / "target_discovery.json"
+            globals()["DISCOVERY_CHALLENGE_PATH"] = temp_root / "challenge.json"
+            globals()["TARGET_DISCOVERY_FAILURE_PATH"] = temp_root / "target_failure.json"
+            globals()["run"] = post_cleanup_failure_run
+            globals()["read_source_hash_authority"] = lambda: fake_source_hashes
+            globals()["read_existing_source_bundle_authority"] = lambda: fake_bundle
+            globals()["source_authority_commit_verification"] = lambda commit: {"passed": True, "failures": [], "commit": commit, "files": {}, "status": []}
+            globals()["read_source_authority_review_for_discovery"] = fake_source_review
+            globals()["materialize_source_authority_snapshot"] = fake_materialize
+            globals()["commit_exists"] = lambda _commit: False
+            try:
+                acquire_temperature_sensor_authority(source_authority_commit="1" * 40)
+            except ControllerError as exc:
+                production_post_cleanup_error = str(exc)
+            production_post_cleanup_receipt_recoverable = (
+                production_post_cleanup_cleanup_invoked
+                and TARGET_DISCOVERY_RECEIPT.exists()
+                and public.sha256_file(TARGET_DISCOVERY_RECEIPT) == post_cleanup_discovery_sha
+                and read_json(TARGET_DISCOVERY_RECEIPT) == post_cleanup_discovery_payload
+            )
+            production_post_cleanup_authority_recoverable = (
+                production_post_cleanup_cleanup_invoked
+                and TEMPERATURE_SENSOR_AUTHORITY.exists()
+                and read_json(TEMPERATURE_SENSOR_AUTHORITY).get("target_discovery_receipt") == post_cleanup_discovery_payload
             )
         finally:
             for name, value in production_originals.items():
@@ -5693,6 +6105,30 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
     }
     stale_checkout_history_binding = validate_attempt_history_index_manifest_binding(stale_checkout_manifest)
     valid_history_binding = validate_attempt_history_index_manifest_binding(valid_history_index_manifest)
+    with tempfile.TemporaryDirectory(prefix="family10h_untracked_history_index_regression_", dir=HERE) as tmp:
+        temp_root = Path(tmp)
+        try:
+            globals()["ATTEMPT_HISTORY_INDEX_PATH"] = temp_root / "ATTEMPT_HISTORY_INDEX.json"
+            write_json(ATTEMPT_HISTORY_INDEX_PATH, {"schema": "FAMILY10H_UNTRACKED_HISTORY_INDEX_FIXTURE_V1"})
+            untracked_history_index_metadata = attempt_history_index_metadata_reporting_only()
+            untracked_history_index_binding = validate_attempt_history_index_manifest_binding(
+                {
+                    "temperature_sensor_authority": {
+                        "historical_attempt_index_metadata_reporting_only": untracked_history_index_metadata,
+                    }
+                }
+            )
+            globals()["ATTEMPT_HISTORY_INDEX_PATH"] = temp_root / "MISSING_ATTEMPT_HISTORY_INDEX.json"
+            missing_history_index_metadata = attempt_history_index_metadata_reporting_only()
+            missing_history_index_binding = validate_attempt_history_index_manifest_binding(
+                {
+                    "temperature_sensor_authority": {
+                        "historical_attempt_index_metadata_reporting_only": missing_history_index_metadata,
+                    }
+                }
+            )
+        finally:
+            globals()["ATTEMPT_HISTORY_INDEX_PATH"] = original_history_index
 
     checks = {
         "production_acquisition_has_no_injected_transport_surface": production_signature
@@ -5750,6 +6186,20 @@ def controller_acquisition_transaction_regression() -> dict[str, Any]:
         and history_index_metadata.get("file_sha256") == history_index_metadata.get("git_blob_sha256")
         and history_index_metadata.get("git_blob_matches_file_sha256") is True,
         "history_index_manifest_rejects_checkout_digest": stale_checkout_history_binding["passed"] is False,
+        "history_index_manifest_rejects_false_git_blob_match": untracked_history_index_binding["passed"] is False
+        and untracked_history_index_metadata.get("git_blob_matches_file_sha256") is False,
+        "history_index_manifest_rejects_missing_git_blob": missing_history_index_binding["passed"] is False
+        and missing_history_index_metadata.get("git_blob_sha256") is None,
+        "production_success_copyback_receipts_sealed_before_cleanup": production_success_receipts_sealed_at_cleanup,
+        "production_success_acquisition_completes_after_precleanup_seal": production_success_transport_passed
+        and production_success_cleanup_invoked
+        and production_success_absence_probe_invoked,
+        "production_success_local_seal_failure_blocks_remote_cleanup": "fixture target discovery local seal failure" in production_seal_failure_error
+        and not production_seal_failure_cleanup_invoked
+        and production_seal_failure_absence_probe_invoked,
+        "production_success_post_cleanup_failure_preserves_receipts": "discovery cleanup or remote-root absence verification failed" in production_post_cleanup_error
+        and production_post_cleanup_receipt_recoverable
+        and production_post_cleanup_authority_recoverable,
         "failure_cleanup_receipt_writes_without_success_journal": cleanup_valid["cleanup_custody_sha256"]
         == public.digest({k: v for k, v in cleanup_valid.items() if k != "cleanup_custody_sha256"}),
         "parsed_invalid_copyback_cleanup_receipt_sealed": parsed_invalid_cleanup_sealed,
