@@ -20,7 +20,7 @@
   },
   "controller_self_test": {
     "passed": true,
-    "sha256": "7796aeadf0ab20ca78a288d756cda93048f15cfa471368ac208b075c786f3b01"
+    "sha256": "c6782a3b738679db9826628a4faa2d1a5fdf6c780767b4d9a3c5ba103188b0b1"
   },
   "delay_grid": [
     {
@@ -46,7 +46,7 @@
   ],
   "deployment_layout": {
     "passed": true,
-    "sha256": "796a284adc40563e337f6a58fdbf646d01bdb974eca82a9e5ae30cccc2423df8"
+    "sha256": "9abaa0c14c380d1b21e8858b00fd29e3271bcced6fb8732ebea20f39038d8467"
   },
   "exact_tuple_count": 8320,
   "expected_local_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0",
@@ -149,7 +149,7 @@
   },
   "git_state_at_manifest_build": {
     "branch": "codex/family10h-tomography-repair",
-    "head": "e52f12f3a437f2dc53a90ad00ccea6050e187f2a",
+    "head": "935dea0b519fef04a4487fc81b886436eb8aacfd",
     "origin_main": "ab04503c9f8e7585b893a0db9326ba4ad4a39030",
     "stash_list": [
       "stash@{0}: On main: preserve superseded pmu first-light work before micro_equal_1 closure",
@@ -260,10 +260,10 @@
     "sensor_inventory_count": 0,
     "target_contact_count": 4
   },
-  "manifest_canonical_sha256": "cc1e2ec4768793ed5f8532e899166c93cbdf01f9b1235818e624de32f9e99a02",
+  "manifest_canonical_sha256": "dcf5b3e8014ea8eb93ff9d6abe9fe5f243245ed84b26d528a714c78c6815eeeb",
   "offline_validate": {
     "passed": true,
-    "sha256": "34c07b4f6719cf98120cae83a00ad943c4b41d95bdbe4e14328cff15e38fdda3"
+    "sha256": "0a7fdb8363a466f417e094bde038e2a58782873692b70de3d36c19281f0bfb87"
   },
   "operator_ladder": [
     "S0 scalar preparation amplitude",
@@ -425,7 +425,7 @@
   "runtime_self_test": {
     "offline_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
     "passed": true,
-    "sha256": "b48edee3dd081bff893ecbb9ec805c8972095cf15612cbf1995581fdad5dc533"
+    "sha256": "1d2069a2056f55822b80fcda0a249682c639ac2a9885bdcf61c24116ecb46c74"
   },
   "schedule_hashes": {
     "canonical_sha256": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
@@ -471,8 +471,8 @@
     "review_report_sha256": null,
     "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
     "source_authority_commit": null,
-    "source_bundle_sha256": "7a3b00d49a51725f7039e6a9f9b9185355d40a953f28ddf170ad16457f45530f",
-    "source_hashes_sha256": "dffca931c8ff9924dd75d81932c6670aaa228528d424c8bd67c68b1a6a0f45a0"
+    "source_bundle_sha256": "6c5b4c9b72833d9e6db08b2f8122ffcca784424c9980db8289002bf438fdab01",
+    "source_hashes_sha256": "932efd5f43b12d2cc300d12486aa2c5ecc60aea6fce281af398f36c52b3ed102"
   },
   "source_bundle": {
     "file_count": 9,
@@ -488,7 +488,7 @@
       "run_family10h_carrier_tomography_v1.py"
     ],
     "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-    "sha256": "7a3b00d49a51725f7039e6a9f9b9185355d40a953f28ddf170ad16457f45530f"
+    "sha256": "6c5b4c9b72833d9e6db08b2f8122ffcca784424c9980db8289002bf438fdab01"
   },
   "source_hashes": {
     "runtime_binary_authority": {
@@ -559,16 +559,16 @@
         "size": 226555
       },
       "run_family10h_carrier_tomography_v1.py": {
-        "sha256": "f7e69744fa94b2730b874fddff87b70449bc40961f5bf3548f98aad5bf5a039f",
-        "size": 394862
+        "sha256": "8cfee8770b47296eba8b468d57d0c88a19e2a333a0a8829f36c3387137801a36",
+        "size": 424310
       }
     },
-    "source_hashes_sha256": "dffca931c8ff9924dd75d81932c6670aaa228528d424c8bd67c68b1a6a0f45a0"
+    "source_hashes_sha256": "932efd5f43b12d2cc300d12486aa2c5ecc60aea6fce281af398f36c52b3ed102"
   },
   "starting_head_required": "8021563a6122b72316ddd218077b8b82e36f9055",
   "target_self_test": {
     "passed": true,
-    "sha256": "ebac87ca8b17363ac860ea2c9412a68e66260a4134ec0047c95aa54834391e84"
+    "sha256": "13d6cc79adc383505e18c1f678c82bcbd45baea30f1dc6548cebbb65065d16bd"
   },
   "temperature_sensor_authority": {
     "active_attempt_counters": {
@@ -616,7 +616,7 @@
       "git_blob_matches_file_sha256": true,
       "git_blob_sha256": "74f4934e19bdc43abb3bf4ee1ad101f53307e46c003a969ce03c33cc57c88642",
       "git_blob_size": 7808,
-      "git_head": "e52f12f3a437f2dc53a90ad00ccea6050e187f2a",
+      "git_head": "935dea0b519fef04a4487fc81b886436eb8aacfd",
       "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\SENSOR_AUTHORITY_ATTEMPT_HISTORY\\ATTEMPT_HISTORY_INDEX.json"
     },
     "historical_lane_contact_report": {
