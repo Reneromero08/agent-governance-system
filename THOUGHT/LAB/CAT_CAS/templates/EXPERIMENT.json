@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "experiment_id": "REPLACE",
+  "title": "REPLACE",
+  "status": "OPEN",
+  "task_class": "flagship_compute",
+  "mission_id": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
+  "mission_rung": "REPLACE",
+  "hypothesis": "REPLACE",
+  "classical_explosion": {
+    "object": "REPLACE",
+    "size_model": "REPLACE",
+    "matched_baseline": "REPLACE"
+  },
+  "holo_process_object": {
+    "type": "REPLACE",
+    "operator_mode": "native_holo",
+    "geometry_basis": "REPLACE",
+    "coordinates": "REPLACE",
+    "relation_graph": "REPLACE",
+    "carrier": "REPLACE"
+  },
+  "native_operator": "REPLACE",
+  "invariant_or_fixed_point": "REPLACE",
+  "collapse_boundary": "REPLACE",
+  "classical_output": "REPLACE",
+  "external_verifier": "REPLACE",
+  "restoration_law": "REPLACE",
+  "no_smuggle_killer_control": "REPLACE",
+  "scaling_hypothesis": {
+    "classical_cost": "REPLACE",
+    "compile_cost": "REPLACE",
+    "native_cost": "REPLACE",
+    "readout_cost": "REPLACE",
+    "restore_cost": "REPLACE",
+    "gamma_target": "REPLACE"
+  },
+  "result_classes": [],
+  "claim_ceiling": "REPLACE",
+  "code_entrypoints": [],
+  "evidence_paths": [],
+  "reusable_components": [],
+  "forbidden_claims": []
+}

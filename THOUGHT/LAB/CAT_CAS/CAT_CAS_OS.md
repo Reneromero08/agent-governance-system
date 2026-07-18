@@ -102,6 +102,40 @@ The deeper primitive is:
 
 > Measure the global invariant instead of walking every local path.
 
+### 2.1 Mission relation
+
+`MISSION.md` defines the terminal purpose:
+
+```text
+finite reusable substrate
+-> .holo unresolved relational geometry
+-> native global evolution
+-> invariant or fixed point
+-> one classical answer
+-> restoration
+```
+
+The operating system must preserve that purpose without inflating the evidence.
+Restoration, topological sensing, non-collapse representation, and physical carrier
+work are rungs of the machine. They are not substitutes for the compute advantage.
+
+For any flagship compute proposal, the agent must identify:
+
+```text
+classical explosion
+.holo process-object
+native operator
+invariant or fixed point
+expected scaling law
+final CollapseBoundary
+restoration law
+no-smuggle killer control
+external verifier
+```
+
+If the proposal cannot identify these, reclassify it as enabling infrastructure,
+external product, calibration, or evidence audit before proceeding.
+
 ---
 
 ## 3. Agent Role
@@ -473,18 +507,24 @@ The roadmap is a truth ledger, not a progress trophy.
 
 Before editing any file, answer:
 
-1. What experiment am I touching?
-2. What hypothesis is being tested?
-3. What mechanism implements it?
-4. What invariant is being measured?
-5. What representation is being used?
-6. What would count as a ceremonial fix?
-7. What would count as genuine verification?
-8. What is the current roadmap status?
-9. What evidence would justify changing that status?
-10. Could this edit accidentally satisfy the critic while weakening the experiment?
+1. What experiment or control-plane object am I touching?
+2. What task class applies?
+3. What hypothesis is being tested?
+4. What classical work or representation explodes?
+5. What `.holo` process-object preserves it without collapse?
+6. What native operator implements the compute?
+7. What invariant or fixed point is being measured?
+8. What final classical `CollapseBoundary` is authorized?
+9. What restoration law applies?
+10. What no-smuggle control can kill the mechanism?
+11. What is the current claim ceiling and roadmap status?
+12. What evidence would justify changing that status?
+13. What would count as a ceremonial fix?
+14. Could this edit satisfy the critic while weakening the geodesic?
 
-If you cannot answer these, do not edit yet.
+For non-flagship tasks, mark non-applicable compute fields explicitly and preserve the
+honest task classification. If you cannot answer the applicable questions, do not edit
+yet.
 
 ---
 

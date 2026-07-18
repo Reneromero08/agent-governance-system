@@ -1,7 +1,8 @@
 # === CAT_CAS lab hygiene ===
 # Patterns use **/ so they survive the track-folder reorganization.
 
-# Build artifacts (regenerable: cargo build / python import)
+# Build and phase-lock artifacts (regenerable)
+_agent/
 **/__pycache__/
 *.pyc
 *.pyo

@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "branches": [
+    {
+      "pattern": "main",
+      "role": "canonical_integration",
+      "context_source": "control/current_state.json"
+    },
+    {
+      "pattern": "codex/audio-frequency-wave-substrate",
+      "role": "pi_native_audio_and_toroidal_compute",
+      "frozen_head": "6c1875b2b4c39588ab5bdc4878a317671329b0f0",
+      "context_source": "control/branches/audio_frequency_wave_substrate.json"
+    },
+    {
+      "pattern": "codex/cat-cas-phase-lock-control-plane",
+      "role": "control_plane_implementation",
+      "context_source": "control/current_state.json"
+    },
+    {
+      "pattern": "codex/*",
+      "role": "agent_work_branch",
+      "requires_branch_state": true,
+      "branch_state_filename": "BRANCH_STATE.json"
+    }
+  ],
+  "rules": [
+    "Exact branch matches take precedence over wildcard matches.",
+    "A long-lived research branch must have a registered purpose and state source.",
+    "An unregistered branch may be inspected but must not make mission or claim decisions.",
+    "Branch context may refine current state but may not override the mission or inflate evidence."
+  ]
+}

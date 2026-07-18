@@ -1,48 +1,120 @@
 # AGENTS.md - Phase-Lock Protocol for the CAT_CAS Lab
 
-**Read this first.** It is the entry point. It tells you how to operate here and when to
-read the deeper docs. Its companion is **`PRIMER.md`**, which tells you *what to load* to
-phase-lock (curated bundles by task + a prioritized catalog of every reference). If you
-read nothing else here, read Sections 1, 2, and 3.
+**Read `MISSION.md` first.** It defines why CAT_CAS exists. This file defines how to
+operate. `control/current_state.json` defines what is true now. `CAPABILITY_GRAPH.md`
+defines which experiments and code paths implement each rung of the machine.
 
-The other docs and what they are for:
-- `PRIMER.md` - what to read and in what order; the loading bundles (minimal /
-  engineering / theoretic) and the full prioritized reference catalog.
-- `README.md` - the experiment inventory / navigation map (what exists, exp 01-50).
-- `MANIFESTO.md` - the operating contract: core primitives, failure modes, and the
-  mechanical critic (M-1..M-8) that runs on every commit.
-- `master_report.md` / `docs/REPORTS/` - the compact truth ledger (what each result means,
-  what is verified vs partial vs deprecated). Check here for an experiment's real status.
-- `CAT_CAS_OS.md` - the full agent operating system: prime directive, claim hierarchy,
-  failure hierarchy, verification standards, the oath. The verification-mode bible.
-- `Explainers/My System - FINAL.md` (in the Obsidian vault) - the canonical, exact
-  statement of the whole system. Read for the unified mental model.
+Do not begin substantial work from `README.md`, `MASTER_REPORT.md`, or an experiment
+roadmap alone. They are navigation, evidence, and local-state documents, not mission
+authority.
+
+## Mandatory startup
+
+From `THOUGHT/LAB/CAT_CAS/`, run:
+
+```text
+python tools/phase_lock.py \
+  --task "<exact task>" \
+  --mode <exploration|engineering|verification|compression> \
+  --task-class <flagship_compute|enabling_infrastructure|external_product|calibration|evidence_audit>
+```
+
+This creates:
+
+```text
+_agent/PHASE_LOCK_PACKET.md
+_agent/PHASE_LOCK_RECEIPT.json
+_agent/TASK_CONTRACT.json
+```
+
+Read the packet, complete the receipt, and validate it before implementation:
+
+```text
+python tools/validate_control_plane.py --receipt _agent/PHASE_LOCK_RECEIPT.json
+```
+
+A failed or incomplete phase-lock receipt blocks implementation. The receipt is not a
+slogan test. It must identify the task-specific compute leverage, current claim ceiling,
+relevant code, final boundary, restoration law, and killer control.
+
+The control documents and their roles:
+
+- `MISSION.md`: constitutional purpose and final architecture.
+- `control/current_state.json`: current frontiers, claim tokens, and blockers.
+- `CAPABILITY_GRAPH.md`: capability lineage from catalytic closure to external acceptance.
+- `PRIMER.md`: task routing and deeper reading catalog.
+- `CAT_CAS_OS.md`: verification discipline and claim hierarchy.
+- `MANIFESTO.md`: mechanism standards and mechanical critic.
+- `MASTER_REPORT.md`: historical coverage and evidence ledger.
+- `README.md`: experiment inventory and navigation.
 
 ---
 
 ## 1. The lab in one breath
 
-CAT_CAS is a frontier laboratory testing one thesis: **the primitive of computation is
-not `bit -> gate -> erase` but `phase -> loop -> invariant -> restore`.** You borrow
-dirty physical state, drive it through a closed reversible trajectory around a
-zero-boundary, read the global topological invariant that survives interference, and
-restore the substrate byte-for-byte. The answer is *measured*, not searched.
+CAT_CAS exists to turn a **finite reusable catalytic substrate into unbounded effective
+computation**.
 
-Compressed mental model (for depth see `My System - FINAL.md`):
-- **Catalysis is the primitive.** Borrow state `tau`, compute reversibly, return `tau`
-  exactly (SHA-256 pre == post). Zero logical erasure -> no necessary Landauer heat.
-- **Topology is more fundamental than geometry.** Map the problem to a non-Hermitian
-  Hamiltonian; read a winding number / Chern-Bott index / IPR / spectral gap in O(1).
-- **It from phase.** Phase is the implicate order; the bit is a collapsed phase
-  measurement, the qubit a temporary phase configuration. Map data onto S^1 and the
-  geometry does the work: you do not jump the cliff, you rotate the phase.
-- **Entropy is the boundary** (the boldest, least-settled claim - held at conjecture).
-- **The algorithm is dead** as a *prejudice* (do not default to enumeration), **alive**
-  as a *necessity* (where no structural duality binds encoding to answer, search is
-  irreducible - we located that wall at lattice hardness; see `49_the_decoder/`).
+The intended machine is:
 
-You are a **co-architect, not a gatekeeper.** A good response helps cross the next
-boundary. A bad response stands at the boundary explaining why boundaries exist.
+```text
+classical public instance
+-> no-smuggle compiler
+-> .holo executable relational geometry
+-> native catalytic / phase / toroidal evolution
+-> global invariant or fixed point
+-> one explicit CollapseBoundary
+-> classical witness accepted by the outside world
+-> substrate restoration
+```
+
+The native computational object is not a candidate list, scalar score, dense matrix, or
+executed algorithmic trace. It is the unresolved relational polytope preserved in
+`.holo`. The operator acts on that object without materializing its classical path
+space. The bounty answer may be completely classical because the bounty is the external
+Wall.
+
+The compute target is a leverage ratio:
+
+```text
+Gamma(n) = classical path-work represented / native catalytic work
+```
+
+whose growth is unbounded with problem size. Restoration is necessary closure. It is
+not the product by itself.
+
+The phase-native carrier target is:
+
+```text
+S^1 ~= R / 2*pi*Z ~= U(1)
+0   <-> phase 0
+1   <-> phase pi
+pi      = antipodal cancellation
+2*pi    = closure
+winding = memory of continuous traversal
+```
+
+The audio lane compresses this as `REPLACE THE BIT WITH PI`. A product torus carries
+multiple phase relations. The bit is an allowed final shadow of the torus, not the
+required ontology of the computation.
+
+Compressed mental model:
+
+- **Catalysis closes and reuses the substrate.** Borrow, genuinely use, uncompute, and
+  restore.
+- **`.holo` keeps the computation alive.** Geometry, relation, carrier, path history,
+  invariant family, boundary, and restoration remain explicit.
+- **Native evolution is the compute.** It must not hide candidate enumeration or full
+  classical materialization.
+- **Topology remembers the closed process.** Winding, holonomy, Chern/Bott structure,
+  or another predeclared invariant may survive local cancellation.
+- **The Wall emits the answer.** Classical parsing and official verification are lawful;
+  premature classical collapse inside the native core is not.
+- **The algorithm is dead as ontology.** Algorithms remain local tools at the input,
+  output, and control boundaries.
+
+You are a co-architect, not a gatekeeper. Preserve the full object, find the unique
+mechanism, and drive it toward the fastest no-smuggle experiment.
 
 ---
 
@@ -141,8 +213,11 @@ critic). The essentials:
 
 ## 5. Practical operations
 
-- **Run with the venv:** `.venv/Scripts/python.exe` from repo root
-  `D:\CCC 2.0\AI\agent-governance-system`.
+- **Run with the repository venv when available:** from the repository root use
+  `.venv/Scripts/python.exe` on Windows or `.venv/bin/python` on Unix. The control-plane
+  tools are standard-library only and may be run with the active Python interpreter.
+- **Prime before editing:** run `python tools/phase_lock.py ...` from this directory and
+  validate the completed receipt.
 - **Stay in the lab.** Work under `THOUGHT/LAB/CAT_CAS/`. Do **not** modify the main AGS
   repo (LAW/, NAVIGATION/, production CAPABILITY/). Reading the lab critic at
   `CAPABILITY/TOOLS/governance/critic.py` is fine.
@@ -179,14 +254,15 @@ oracle           -> possibility generation -> interaction -> cancellation/scorin
                     invariant extraction -> readable guidance -> substrate restoration
                     (NOT prophecy; NOT to be dismissed for sounding grand)
 phase cavity     -> eigenbasis / resonant subspace; one-pass harmonic sieve
-the decoder      -> resonance as the measurement operator: encode as phase geometry,
-                    interfere, measure R_i = |<candidate_i|psi>|^2, return argmax
-                    (the crux; characterized in 49_the_decoder/)
+the decoder      -> boundary readout of a global invariant; candidate resonance and
+                    argmax are one collapsed chart, not the universal native mechanism
+                    (the measured boundary is characterized in 7_decoder/49_the_decoder/)
 winding W        -> topological count of phase wrapping (halting: W=0 acyclic)
 Chern/Bott       -> global topological invariant; integer, cannot continuously diverge
 exceptional pt   -> spectral singularity where eigenvalues+eigenvectors coalesce
-.holo            -> compressed eigenbasis / boundary representation; answer not stored,
-                    it EMERGES under illumination
+.holo            -> executable non-collapse geometric memory: basis, coordinates,
+                    relation graph, carrier, native operator, path history, invariant
+                    family, CollapseBoundary, and restoration law
 MUSIC / grating  -> subspace separation + phase steering + peak detection
 0 / the boundary -> where the observable cancels but the hidden structure survives
 ```
@@ -218,6 +294,6 @@ building artifacts, and extracting invariants.
 
 ## 8. The one line
 
-> Engage the architecture first. Work in the mode requested. Hold the vision at full
-> altitude in exploration; bring the absolute critic in verification; never confuse the
-> two. Help cross the next boundary. Measure the invariant. Restore the substrate.
+> Finite substrate, unresolved geometry, native closed evolution, surviving invariant,
+> one classical answer, restored substrate. Work in the requested mode, preserve the
+> polytope, and never substitute restoration or documentation for the compute advantage.

@@ -1,0 +1,295 @@
+{
+  "schema_version": "1.0.0",
+  "mission_id": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
+  "compute_rungs": [
+    {
+      "id": "C0_CATALYTIC_CLOSURE",
+      "definition": "The substrate is genuinely borrowed, used, uncomputed, and restored."
+    },
+    {
+      "id": "C1_BOUNDED_RESIDENCY",
+      "definition": "Clean or resident memory stops scaling with logical problem extent."
+    },
+    {
+      "id": "C2_REUSE_AND_MULTIPLEX",
+      "definition": "One finite substrate serves unbounded cumulative work or demand over time."
+    },
+    {
+      "id": "C3_NONCOLLAPSE_REPRESENTATION",
+      "definition": ".holo preserves an object whose classical materialization is much larger."
+    },
+    {
+      "id": "C4_NATIVE_GLOBAL_OPERATOR",
+      "definition": "An operator acts on compact relational geometry without enumerating or materializing the classical path space."
+    },
+    {
+      "id": "C5_FIXED_POINT_ADVANTAGE",
+      "definition": "Native substrate extraction scales asymptotically better than forward construction under no-smuggle controls."
+    },
+    {
+      "id": "C6_EXTERNAL_ACCEPTANCE",
+      "definition": "A classical witness emitted at the final Wall is accepted by an independent official boundary."
+    },
+    {
+      "id": "C7_CROSS_DOMAIN_TRANSFER",
+      "definition": "The same native mechanism reaches external acceptance on a materially different frontier."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "EXP01",
+      "title": "Catalytic closure and bounded clean workspace",
+      "path": "1_foundations/01_tree_evaluation",
+      "mission_rungs": [
+        "C0_CATALYTIC_CLOSURE",
+        "C1_BOUNDED_RESIDENCY"
+      ],
+      "task_class": "enabling_infrastructure",
+      "status": "REPORTED_BASELINE",
+      "capabilities": [
+        "dirty_substrate_borrow",
+        "reversible_traversal",
+        "exact_restore",
+        "bounded_clean_space"
+      ],
+      "does_not_establish": [
+        "native_global_compute",
+        "fixed_point_substrate"
+      ]
+    },
+    {
+      "id": "EXP08",
+      "title": "Finite resident substrate with unbounded queued demand",
+      "path": "2_substrate_expansion/08_catalytic_gpt",
+      "mission_rungs": [
+        "C2_REUSE_AND_MULTIPLEX"
+      ],
+      "task_class": "enabling_infrastructure",
+      "status": "REPORTED_BASELINE",
+      "capabilities": [
+        "shared_vram_tape",
+        "lease_return",
+        "bounded_resident_workspace"
+      ]
+    },
+    {
+      "id": "EXP12",
+      "title": "Structured tape and recursive compute reuse",
+      "path": "2_substrate_expansion/12_structured_tape_acceleration",
+      "mission_rungs": [
+        "C2_REUSE_AND_MULTIPLEX"
+      ],
+      "task_class": "enabling_infrastructure",
+      "status": "REPORTED_BASELINE",
+      "capabilities": [
+        "warm_tape_reuse",
+        "fingerprinted_cache",
+        "cross_instance_transfer"
+      ],
+      "risks": [
+        "precomputation_accounting",
+        "answer_cache_confusion"
+      ]
+    },
+    {
+      "id": "EXP14",
+      "title": "Unbounded cumulative work through fixed restored substrate",
+      "path": "3_physics_complexity/14_bekenstein_violator",
+      "mission_rungs": [
+        "C2_REUSE_AND_MULTIPLEX"
+      ],
+      "task_class": "calibration",
+      "status": "REPORTED_BASELINE",
+      "capabilities": [
+        "repeated_restored_cycles",
+        "throughput_over_static_capacity"
+      ]
+    },
+    {
+      "id": "EXP20_11",
+      "title": "Contained phase-native .holo",
+      "path": "3_physics_complexity/20_catalytic_eigen_shor/20_11_contained_holo_verifier",
+      "mission_rungs": [
+        "C3_NONCOLLAPSE_REPRESENTATION"
+      ],
+      "task_class": "enabling_infrastructure",
+      "status": "REPORTED_BASELINE",
+      "capabilities": [
+        "phase_eigenbasis",
+        "answer_not_stored",
+        "illumination_readout",
+        "streaming_materialization_avoidance"
+      ],
+      "code_entrypoints": [
+        "3_physics_complexity/20_catalytic_eigen_shor/20_11_contained_holo_verifier/20_11a_contained_holo/contained_holo_verifier.py",
+        "3_physics_complexity/20_catalytic_eigen_shor/20_11_contained_holo_verifier/20_11b_self_observing/self_observing_loop.py",
+        "3_physics_complexity/20_catalytic_eigen_shor/20_11_contained_holo_verifier/20_11g_streaming/streaming_shor.py"
+      ]
+    },
+    {
+      "id": "HOLO_GEN5",
+      "title": "Executable geometric memory runtime",
+      "path": "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier",
+      "mission_rungs": [
+        "C3_NONCOLLAPSE_REPRESENTATION",
+        "C4_NATIVE_GLOBAL_OPERATOR"
+      ],
+      "task_class": "enabling_infrastructure",
+      "status": "IMPLEMENTED_ACTIVE_FRONTIER",
+      "capabilities": [
+        "geometry_basis",
+        "relation_graph",
+        "ordered_path_memory",
+        "semantic_reexecution",
+        "typed_invariant_family",
+        "atomic_collapse_boundary",
+        "restoration_record"
+      ],
+      "code_entrypoints": [
+        "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime/holo_geometry.c",
+        "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime/holo_semantic_integrity.c",
+        "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/holo_runtime/holo_invariant_family.c",
+        "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/l4b_orbitstate/holo_path_history.c"
+      ]
+    },
+    {
+      "id": "EXP49",
+      "title": "Decoder and forward-wall characterization",
+      "path": "7_decoder/49_the_decoder",
+      "mission_rungs": [
+        "C4_NATIVE_GLOBAL_OPERATOR"
+      ],
+      "task_class": "evidence_audit",
+      "status": "CLOSED_OUT_LOCAL_CLAIM",
+      "capabilities": [
+        "extractive_readout",
+        "wrong_answer_controls",
+        "wall_localization",
+        "public_fixed_point_target_generation"
+      ],
+      "current_handoff": "The secret emerges as a fixed point of a public map whose forward evaluation remains exponential; the substrate is the next Wall."
+    },
+    {
+      "id": "EXP50",
+      "title": "Physical substrate and Small Wall",
+      "path": "7_decoder/50_phase_bm_cpu",
+      "mission_rungs": [
+        "C4_NATIVE_GLOBAL_OPERATOR",
+        "C5_FIXED_POINT_ADVANTAGE"
+      ],
+      "task_class": "flagship_compute",
+      "status": "ACTIVE_WITH_BLOCKERS",
+      "capabilities": [
+        "physical_carrier_executor",
+        "noncollapse_runtime",
+        "gain_covariant_projection_transduction",
+        "source_and_receiver_custody",
+        "restoration_custody"
+      ],
+      "open_blockers": [
+        "query_separated_identifiability",
+        "answer_cache_exclusion",
+        "physical_R2_restoration",
+        "fixed_point_scaling"
+      ],
+      "state_source": "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/SMALL_WALL_STATE.md"
+    },
+    {
+      "id": "AUDIO_SIDEQUEST",
+      "title": "Pi-native audio and toroidal compute",
+      "path": "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate",
+      "branch": "codex/audio-frequency-wave-substrate",
+      "branch_commit": "6c1875b2b4c39588ab5bdc4878a317671329b0f0",
+      "mission_rungs": [
+        "C3_NONCOLLAPSE_REPRESENTATION",
+        "C4_NATIVE_GLOBAL_OPERATOR"
+      ],
+      "task_class": "enabling_infrastructure",
+      "status": "P0_BUILD_READINESS_COMPONENTS_SEEDED",
+      "capabilities": [
+        "U1_phase_state",
+        "torus_relations",
+        "recursive_phase_tree",
+        "recursive_wave_operator",
+        "software_catalytic_wave_loop",
+        "recursive_catalytic_ising_emulator",
+        "classical_waveform_projection"
+      ],
+      "prime_directive": "REPLACE THE BIT WITH PI",
+      "does_not_establish": [
+        "physical_audio_computing",
+        "physical_carrier_characterization",
+        "small_wall_crossing"
+      ]
+    },
+    {
+      "id": "TRACK8",
+      "title": "Externally adjudicated bounty transfer",
+      "path": "8_external_frontiers",
+      "mission_rungs": [
+        "C6_EXTERNAL_ACCEPTANCE",
+        "C7_CROSS_DOMAIN_TRANSFER"
+      ],
+      "task_class": "flagship_compute",
+      "status": "ARCHITECTURE_PRESENT_ADAPTERS_PENDING",
+      "capabilities": [
+        "source_freeze_contract",
+        "official_verifier_boundary",
+        "classical_witness_contract",
+        "transfer_record_design"
+      ]
+    }
+  ],
+  "edges": [
+    [
+      "EXP01",
+      "EXP08",
+      "generalizes restored substrate into multiplexed use"
+    ],
+    [
+      "EXP08",
+      "EXP12",
+      "adds retained relational work and warm reuse"
+    ],
+    [
+      "EXP12",
+      "EXP14",
+      "separates finite substrate capacity from cumulative logical throughput"
+    ],
+    [
+      "EXP14",
+      "EXP20_11",
+      "moves from repeated reuse into noncollapse representation"
+    ],
+    [
+      "EXP20_11",
+      "HOLO_GEN5",
+      "unifies containment with executable geometry and explicit boundaries"
+    ],
+    [
+      "HOLO_GEN5",
+      "EXP49",
+      "supplies process objects for extractive invariant readout"
+    ],
+    [
+      "EXP49",
+      "EXP50",
+      "moves the Wall from readout to physical substrate"
+    ],
+    [
+      "AUDIO_SIDEQUEST",
+      "HOLO_GEN5",
+      "supplies pi-native carrier semantics and recursive toroidal composition"
+    ],
+    [
+      "EXP50",
+      "TRACK8",
+      "exports substrate-native compute leverage to external Walls"
+    ],
+    [
+      "HOLO_GEN5",
+      "TRACK8",
+      "exports noncollapse process objects and boundary discipline"
+    ]
+  ]
+}

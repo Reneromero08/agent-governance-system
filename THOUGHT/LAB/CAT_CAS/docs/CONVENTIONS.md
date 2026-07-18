@@ -11,15 +11,41 @@ file disagrees with this document, the directory is wrong. Linked from
 ```
 CAT_CAS/
   _lib/                  shared primitives (one copy each; see section 6)
+  control/               machine-readable mission, state, branches, capabilities
+  templates/             phase-lock, task, and experiment contract templates
+  tools/                 phase-lock compiler and control-plane validators
+  tests/control_plane/   cold-agent and structural control-plane tests
   docs/                  navigation + conventions; holds REPORTS/ (audit ledger)
   N_track_name/          thematic tracks (section 2) containing experiments
   workspace/             shared experiment fixtures (exp 02/03)
-  AGENTS.md CAT_CAS_OS.md MANIFESTO.md MASTER_REPORT.md PRIMER.md README.md
+  MISSION.md CAPABILITY_GRAPH.md AGENTS.md CAT_CAS_OS.md MANIFESTO.md
+  MASTER_REPORT.md PRIMER.md README.md
 ```
 
 The leading-underscore folders (`_lib`) sort above the numbered tracks and signal
-"infrastructure, not an experiment." The visualizer was promoted out to its own
-sibling lab at `THOUGHT/LAB/ORACLE/`.
+"infrastructure, not an experiment." `control/` is the phase-lock control plane, not
+scientific evidence. Its current-state claims must point to experiment evidence. The
+visualizer was promoted out to its own sibling lab at `THOUGHT/LAB/ORACLE/`.
+
+## 1.1 Control-plane files
+
+| File | Role |
+|------|------|
+| `MISSION.md` | Highest-level purpose and final architecture |
+| `control/mission.json` | Machine-readable mission contract |
+| `control/current_state.json` | Compact current frontier state and blockers |
+| `control/capability_graph.json` | Compute-leverage lineage and exact code transfer |
+| `control/branch_registry.json` | Long-lived branch purpose and context routing |
+| `CAPABILITY_GRAPH.md` | Generated human view of the capability graph |
+| `templates/PHASE_LOCK_RECEIPT.json` | Agent reconstruction handshake |
+| `templates/TASK_CONTRACT.json` | Task freeze before implementation |
+| `templates/EXPERIMENT.json` | Experiment-level compute-leverage contract |
+| `tools/phase_lock.py` | Generates task-scoped context and receipts |
+| `tools/validate_control_plane.py` | Fails closed on incomplete or inconsistent control state |
+
+The authority order is declared in `control/canon_manifest.json`. Mission language may
+not inflate evidence. Historical reports may not redefine the mission. Branch-local
+state may refine the current state only within its recorded claim ceiling.
 
 ## 2. Tracks
 

@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "branch": "REPLACE",
+  "base_commit": "REPLACE",
+  "purpose": "REPLACE",
+  "mission_relation": "REPLACE",
+  "mission_rung": "REPLACE",
+  "task_class": "REPLACE",
+  "active_files": [],
+  "code_entrypoints": [],
+  "latest_commits": [],
+  "current_results": [],
+  "claim_ceiling": "REPLACE",
+  "blocked_by": [],
+  "authorized_next_actions": [],
+  "merge_target": "main",
+  "forbidden_inferences": [],
+  "supersedes": []
+}

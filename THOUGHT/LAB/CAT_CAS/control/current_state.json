@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0.0",
+  "mission_id": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
+  "state_date": "2026-07-17",
+  "source_freeze": {
+    "main_commit_at_control_plane_start": "32b5af119a03bc48bb00f279e6cc0014406147ad",
+    "audio_branch": "codex/audio-frequency-wave-substrate",
+    "audio_branch_commit": "6c1875b2b4c39588ab5bdc4878a317671329b0f0"
+  },
+  "target_architecture": {
+    "compute_rung": "C5_FIXED_POINT_ADVANTAGE",
+    "external_goal": "C6_EXTERNAL_ACCEPTANCE",
+    "native_state_space": "U(1)^m_OR_RELATIONAL_POLYTOPE",
+    "final_output": "CLASSICAL_WITNESS_ACCEPTED_BY_OFFICIAL_VERIFIER"
+  },
+  "current_capabilities": {
+    "catalytic_closure": "ESTABLISHED_IN_SOFTWARE",
+    "bounded_clean_or_resident_memory": "ESTABLISHED_IN_INTERNAL_EXPERIMENTS",
+    "noncollapse_holo_architecture": "IMPLEMENTED_AND_HARDENED",
+    "phase_native_projection_transduction": "GAIN_COVARIANT_RESULT_ESTABLISHED",
+    "query_separated_relational_access": "NOT_RESOLVED",
+    "physical_fixed_point_advantage": "NOT_ESTABLISHED",
+    "external_bounty_acceptance": "NOT_YET_RECORDED"
+  },
+  "active_frontiers": [
+    {
+      "id": "EXP50_SMALL_WALL",
+      "state": "GAIN_COVARIANT_FINAL_CONFIRMATION_PACKAGE_RETIRED__QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED__FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+      "claim_tokens": [
+        "GAIN_COVARIANT_ORBITSTATE_PROJECTION_TRANSDUCTION_ESTABLISHED",
+        "GAIN_COVARIANT_FINAL_CONFIRMATION_PACKAGE_RETIRED",
+        "QUERY_SEPARATED_ARCHITECTURE_BLOCKED",
+        "QUERY_SEPARATED_IDENTIFIABILITY_NOT_RESOLVED",
+        "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_BLOCKED",
+        "SMALL_WALL_CROSSED_NOT_PROMOTED"
+      ],
+      "state_source": "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/SMALL_WALL_STATE.md",
+      "authorized_next_action": "REPAIR_AND_REAUDIT_CARRIER_TOMOGRAPHY_OR_DEFINE_RICHER_ACCESS_MODEL",
+      "live_authority": "NONE_INHERITED"
+    },
+    {
+      "id": "AUDIO_PHASE_TORUS",
+      "branch": "codex/audio-frequency-wave-substrate",
+      "branch_commit": "6c1875b2b4c39588ab5bdc4878a317671329b0f0",
+      "state": "P0_BUILD_READINESS_COMPONENTS_SEEDED",
+      "accepted_results": [
+        "AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED",
+        "AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED",
+        "AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED",
+        "AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED",
+        "AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED"
+      ],
+      "physical_carrier_architecture_frozen": true,
+      "physical_carrier_characterized": false,
+      "physical_audio_computing_established": false,
+      "small_wall_crossed": false,
+      "state_source": "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUDIO_SIDE_QUEST_ROADMAP.md",
+      "prime_directive_source": "7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AGENTS.md"
+    },
+    {
+      "id": "TRACK8_EXTERNAL_FRONTIERS",
+      "state": "ARCHITECTURE_AND_ROADMAPS_PRESENT__DOMAIN_ADAPTERS_NOT_YET_PROMOTED_TO_EXTERNAL_ACCEPTANCE",
+      "state_source": "8_external_frontiers/README.md",
+      "required_transfer": "EXPLICIT_EXP50_OR_HOLO_CAPABILITY_TO_EXTERNAL_BOUNDARY"
+    }
+  ],
+  "critical_blockers": [
+    "QUERY_SEPARATED_IDENTIFIABILITY",
+    "ANSWER_CACHE_EXCLUSION",
+    "PHYSICAL_R2_RESTORATION",
+    "PHYSICAL_FIXED_POINT_SCALING",
+    "FIRST_EXTERNAL_ACCEPTANCE"
+  ],
+  "state_rules": [
+    "This file is the compact control surface, not a replacement for evidence packs.",
+    "Current branch manifests may refine this state but may not inflate claim ceilings.",
+    "Mission target and current evidence must remain separate.",
+    "No live authority is inherited from a roadmap, manifest, branch name, or prior run."
+  ]
+}
