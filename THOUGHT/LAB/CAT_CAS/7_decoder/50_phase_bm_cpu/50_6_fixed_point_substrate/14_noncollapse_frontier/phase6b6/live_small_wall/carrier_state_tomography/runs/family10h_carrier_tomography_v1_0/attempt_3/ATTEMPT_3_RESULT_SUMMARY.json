@@ -1,0 +1,139 @@
+{
+  "adjudication_passed": true,
+  "attempt": 3,
+  "elapsed_seconds": 14.018,
+  "exclusive_result_class": true,
+  "local_validation": {
+    "expected_count": 8320,
+    "failures": [],
+    "observed_count": 8320,
+    "passed": true
+  },
+  "operator_prediction_gate_passed": false,
+  "output_hashes": {
+    "feature_freeze.json": {
+      "sha256": "c7a83cf130a503bc7b4454ca36a411424cae4cc49523551e5cefef1620e0fdd9",
+      "size": 1210
+    },
+    "raw_records.jsonl": {
+      "sha256": "024406f6cd94edbe1bd47023484182969b62f1fb13cdfac071034621a6595405",
+      "size": 26780234
+    },
+    "source_death_receipts.jsonl": {
+      "sha256": "63c10e81a02bdf703715d30e41cf6da125d1d2f00f22d6de62471685e15e9204",
+      "size": 4159354
+    }
+  },
+  "package_bytes_unchanged": true,
+  "raw_record_count": 8320,
+  "result_class": "FAMILY10H_POST_SOURCE_STATE_NOT_OBSERVED",
+  "retry_authorization_note": "User authorized retry after attempt 2 failure; attempt 3 used unchanged package bytes with chrt -f 80 launch wrapper.",
+  "schedule_sha256": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
+  "schema": "FAMILY10H_ATTEMPT3_RESULT_SUMMARY_V1",
+  "source_death_receipt_count": 8320,
+  "strata": {
+    "session_0:replicate_0": {
+      "contrast_by_q": {
+        "-1536": -1.1,
+        "-1024": 0.0,
+        "-512": 0.0,
+        "0": -0.125,
+        "512": 0.0,
+        "1024": 0.425,
+        "1536": -0.7
+      },
+      "magnitude_pass": true,
+      "max_signal": 1.1,
+      "not_observed_pass": true,
+      "null_mean_abs_by_control": {
+        "carrier_off": 0.17857142857142858,
+        "query_sham": 0.5714285714285714,
+        "source_off": 0.2
+      },
+      "null_pass": true,
+      "observed_pass": false,
+      "sign_pass": false
+    },
+    "session_0:replicate_1": {
+      "contrast_by_q": {
+        "-1536": -0.55,
+        "-1024": -0.025,
+        "-512": 0.45,
+        "0": -0.05,
+        "512": -0.075,
+        "1024": -0.2,
+        "1536": -0.05
+      },
+      "magnitude_pass": false,
+      "max_signal": 0.55,
+      "not_observed_pass": true,
+      "null_mean_abs_by_control": {
+        "carrier_off": 1.2428571428571429,
+        "query_sham": 0.17142857142857143,
+        "source_off": 0.4
+      },
+      "null_pass": true,
+      "observed_pass": false,
+      "sign_pass": false
+    },
+    "session_1:replicate_0": {
+      "contrast_by_q": {
+        "-1536": -1.6,
+        "-1024": 0.25,
+        "-512": -0.775,
+        "0": -0.125,
+        "512": 0.0,
+        "1024": -0.125,
+        "1536": 0.05
+      },
+      "magnitude_pass": false,
+      "max_signal": 1.6,
+      "not_observed_pass": true,
+      "null_mean_abs_by_control": {
+        "carrier_off": 0.29285714285714287,
+        "query_sham": 0.0,
+        "source_off": 0.4583333333333333
+      },
+      "null_pass": true,
+      "observed_pass": false,
+      "sign_pass": false
+    },
+    "session_1:replicate_1": {
+      "contrast_by_q": {
+        "-1536": 0.475,
+        "-1024": 0.55,
+        "-512": -0.175,
+        "0": 0.0,
+        "512": 0.0,
+        "1024": 0.0,
+        "1536": 0.725
+      },
+      "magnitude_pass": true,
+      "max_signal": 0.725,
+      "not_observed_pass": true,
+      "null_mean_abs_by_control": {
+        "carrier_off": 0.2714285714285714,
+        "query_sham": 0.34285714285714286,
+        "source_off": 0.4083333333333333
+      },
+      "null_pass": true,
+      "observed_pass": false,
+      "sign_pass": false
+    }
+  },
+  "target_evidence_validation": {
+    "failures": [],
+    "passed": true,
+    "validation": {
+      "expected_count": 8320,
+      "failures": [],
+      "observed_count": 8320,
+      "passed": true
+    }
+  },
+  "target_returncode": 0,
+  "target_status": "TARGET_EXECUTION_COMPLETE",
+  "temperature_after_c": 51.0,
+  "temperature_before_c": 39.625,
+  "temperature_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137"
+}

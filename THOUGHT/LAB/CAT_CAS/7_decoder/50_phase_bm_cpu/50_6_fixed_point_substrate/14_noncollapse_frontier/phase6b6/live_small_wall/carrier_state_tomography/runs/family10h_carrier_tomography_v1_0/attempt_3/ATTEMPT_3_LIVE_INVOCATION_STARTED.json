@@ -1,0 +1,23 @@
+{
+  "schema": "FAMILY10H_ATTEMPT3_LIVE_INVOCATION_STARTED_V1",
+  "attempt": 3,
+  "started_at": "2026-07-19T12:33:15.819881+00:00",
+  "target_host": "root@192.168.137.100",
+  "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0",
+  "remote_output_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/output",
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=8",
+    "root@192.168.137.100",
+    "set -eu; cd /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0; unset FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY; FAMILY10H_CARRIER_TOMOGRAPHY_LIVE_AUTHORITY=family10h_carrier_tomography_v1_0 FAMILY10H_CARRIER_TOMOGRAPHY_COMMIT_BINDING=a121381130ef6eef2757ff5c014e22990a88f774 FAMILY10H_CARRIER_TOMOGRAPHY_MANIFEST_SHA256=14584872574ad9bf786f98e3d7a7073ec656ed8f2305951aeba8eee8dbc223e2 FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_AUTHORITY_NONCE=277966b4264c61771b5c897ce3ae95c6f2c852d0a01890a1867cf64db15182ec chrt -f 80 python3 -B family10h_carrier_tomography_target.py --execute-authorized --source-root /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0 --output-root /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/output"
+  ],
+  "uses_chrt_fifo_80_wrapper": true,
+  "package_bytes_unchanged": true,
+  "live_authority": "family10h_carrier_tomography_v1_0",
+  "commit_binding": "a121381130ef6eef2757ff5c014e22990a88f774",
+  "manifest_sha256": "14584872574ad9bf786f98e3d7a7073ec656ed8f2305951aeba8eee8dbc223e2",
+  "temperature_authority_nonce_sha256": "f11c13d72d43f3ab10f4886f5a23bef11567b8d0a138f63be6e3d0840763be33"
+}

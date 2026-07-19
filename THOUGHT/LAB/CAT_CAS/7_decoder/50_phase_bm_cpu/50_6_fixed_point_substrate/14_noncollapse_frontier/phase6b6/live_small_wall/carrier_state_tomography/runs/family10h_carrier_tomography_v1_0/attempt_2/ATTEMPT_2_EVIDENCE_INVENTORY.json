@@ -1,0 +1,56 @@
+{
+  "schema": "FAMILY10H_ATTEMPT2_EVIDENCE_INVENTORY_V1",
+  "attempt": 2,
+  "committed_scope": "receipts, summaries, adjudication where present, stdout/stderr, and exact remote-root tar archive",
+  "extracted_snapshot_staged": false,
+  "extracted_snapshot_reason": "Exact remote root is preserved by ATTEMPT_2_REMOTE_ROOT.tar.gz; extracted copy remains local for inspection and is not staged to avoid modifying historical whitespace.",
+  "unstaged_extracted_snapshot_file_count": 107,
+  "remote_root_archive": {
+    "relative_path": "ATTEMPT_2_REMOTE_ROOT.tar.gz",
+    "size": 1788186,
+    "sha256": "8386e923e84587f560c90e65b572f29b11b948b06bca5bdc9b4fb4b8365ecfbe"
+  },
+  "file_count": 8,
+  "files": [
+    {
+      "relative_path": "ATTEMPT_2_CLEANUP_RECEIPT.json",
+      "size": 2143,
+      "sha256": "4ba4979bbe0d8af0ed9e57ef1415cf7536ed0ee3b6cb780259a4f9f5ca27a4b6"
+    },
+    {
+      "relative_path": "ATTEMPT_2_COPYBACK_RECEIPT.json",
+      "size": 23600,
+      "sha256": "f42882bf29cb998bd0d24ba168f642f741a7d9e7911e00344129f5040be3fdd9"
+    },
+    {
+      "relative_path": "ATTEMPT_2_DEPLOYMENT_RECEIPT.json",
+      "size": 5054,
+      "sha256": "87400904b0889c866359bcc911cc13ae568bf365d0285fc460428476e6209e41"
+    },
+    {
+      "relative_path": "ATTEMPT_2_LIVE_INVOCATION_STARTED.json",
+      "size": 1843,
+      "sha256": "081afca4819652be8d93cc88d3cb88e1e43b713ed141ef171b9b4a0f2a0c4074"
+    },
+    {
+      "relative_path": "ATTEMPT_2_REMOTE_ROOT.tar.gz",
+      "size": 1788186,
+      "sha256": "8386e923e84587f560c90e65b572f29b11b948b06bca5bdc9b4fb4b8365ecfbe"
+    },
+    {
+      "relative_path": "ATTEMPT_2_RESULT_SUMMARY.json",
+      "size": 1118,
+      "sha256": "c82a005a01283efdf017a558a7899d17cef6840bc49d0ba6ac6de2f1ea6095b2"
+    },
+    {
+      "relative_path": "ATTEMPT_2_TARGET_STDERR.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "ATTEMPT_2_TARGET_STDOUT.txt",
+      "size": 8573,
+      "sha256": "69349d140cd758c067ddddf095122eb8e86f4c7d13e67664edf3ccfc3a6a2425"
+    }
+  ]
+}

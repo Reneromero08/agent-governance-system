@@ -1,0 +1,29 @@
+{
+  "cleanup": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "root@192.168.137.100",
+      "set -eu; if test -f /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/.family10h_carrier_tomography_attempt2_owner && grep -qx family10h_carrier_tomography_v1_0_attempt_2_42eb655175a400224cd0be6ed22c4348dfd9fab4 /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/.family10h_carrier_tomography_attempt2_owner; then rm -rf -- /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0; else echo OWNER_MARKER_MISMATCH; exit 20; fi; rm -f -- /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_attempt2_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0; test ! -e /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_attempt2_remote_root.tar.gz; echo ATTEMPT2_CLEANUP_COMPLETE"
+    ],
+    "elapsed_seconds": 0.454,
+    "returncode": 0,
+    "stderr": "",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "ATTEMPT2_CLEANUP_COMPLETE\n",
+    "stdout_sha256": "048c54331c9dc18747fafdfb6150cce0fcdcfba8603d6f17b96247932a2ca437"
+  },
+  "created_at": "2026-07-19T12:29:48.344320+00:00",
+  "local_archive": {
+    "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_2\\ATTEMPT_2_REMOTE_ROOT.tar.gz",
+    "sha256": "8386e923e84587f560c90e65b572f29b11b948b06bca5bdc9b4fb4b8365ecfbe",
+    "size": 1788186
+  },
+  "owner_marker": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/.family10h_carrier_tomography_attempt2_owner",
+  "passed": true,
+  "remote_archive": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_attempt2_remote_root.tar.gz",
+  "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0",
+  "schema": "FAMILY10H_ATTEMPT2_CLEANUP_RECEIPT_V1",
+  "target_host": "root@192.168.137.100"
+}
