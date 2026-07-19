@@ -1,0 +1,2072 @@
+{
+  "channel_specificity": {
+    "attempt_3_observation": "attempt_3_strongest_scalar_q_signal_is_in_dirty_probe_response_under_this_sidecar",
+    "attempt_3_primary_passed": true,
+    "attempt_3_secondary_channels_failed_same_law": true,
+    "diagnostic_only": true,
+    "primary_endpoint": "dirty_probe_response",
+    "primary_endpoint_requirement": "primary paired dirty-probe law must independently pass all primary gates",
+    "prospective_gate": false,
+    "reports": {
+      "change_to_dirty": {
+        "passed": false,
+        "r2": -0.001011567320134299,
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+        "rmse": 7.3069192030428205,
+        "slope": 0.00019356863839285713,
+        "source_off_abs_max": 16.0
+      },
+      "cpu_cycles": {
+        "passed": false,
+        "r2": -0.0010115673201320785,
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+        "rmse": 73.0691920304282,
+        "slope": 0.0019356863839285715,
+        "source_off_abs_max": 160.0
+      },
+      "dirty_probe_response": {
+        "passed": true,
+        "r2": 1.0,
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
+        "rmse": 0.0,
+        "slope": 2.0,
+        "source_off_abs_max": 0.0
+      },
+      "duration_ns": {
+        "passed": false,
+        "r2": -0.001011567320134077,
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+        "rmse": 730.691920304282,
+        "slope": 0.019356863839285716,
+        "source_off_abs_max": 1600.0
+      }
+    },
+    "secondary_channel_policy": "secondary channels may pass or fail without invalidating the primary result and may not substitute for primary endpoint failure"
+  },
+  "claim_boundary": {
+    "catalytic_borrowing_established": false,
+    "dimension": "one_dimensional_scalar_codeword_readout",
+    "full_carrier_state_tomography_established": false,
+    "physical_relational_memory_established": false,
+    "relational_carrier_established": false,
+    "reproducible_public_q_dependent_response_observed": true,
+    "small_wall_promoted": false,
+    "v1_0_retained_evidence_unchanged": true
+  },
+  "controls": {
+    "source_off_abs_max": 0.0,
+    "source_off_abs_mean": 0.0,
+    "source_off_max_pass": true,
+    "source_off_mean_pass": true,
+    "source_off_pair_count": 80
+  },
+  "delay_slope_relative_disagreement": 0.0,
+  "delay_slopes": {
+    "0ns": 2.0,
+    "100ms": 2.0,
+    "100us": 2.0,
+    "10ms": 2.0,
+    "1ms": 2.0
+  },
+  "factor_balance": {
+    "active_full_factor_q": {
+      "factors": [
+        "session",
+        "replicate",
+        "mapping",
+        "delay_label",
+        "source_order",
+        "q"
+      ],
+      "max_cell_count": 1,
+      "min_cell_count": 1,
+      "passed": true,
+      "total_rows": 560,
+      "unique_cells": 560
+    },
+    "source_off_full_factor": {
+      "factors": [
+        "session",
+        "replicate",
+        "mapping",
+        "delay_label",
+        "source_order"
+      ],
+      "max_cell_count": 1,
+      "min_cell_count": 1,
+      "passed": true,
+      "total_rows": 80,
+      "unique_cells": 80
+    }
+  },
+  "gates": {
+    "all_strata": true,
+    "delay_slope_agreement": true,
+    "factor_balance": true,
+    "global_classifier": true,
+    "global_intercept": true,
+    "global_odd_symmetry": true,
+    "global_r2": true,
+    "heldout_classifier_delay": true,
+    "heldout_classifier_mapping": true,
+    "heldout_classifier_replicate": true,
+    "heldout_classifier_session": true,
+    "heldout_classifier_source_order": true,
+    "heldout_delay": true,
+    "heldout_mapping": true,
+    "heldout_replicate": true,
+    "heldout_session": true,
+    "heldout_source_order": true,
+    "mapping_slope_agreement": true,
+    "pair_completeness": true,
+    "query_observations_preserved": true,
+    "session_slope_agreement": true,
+    "signal_to_null_ratio": true,
+    "source_off_max_abs": true,
+    "source_off_mean_abs": true,
+    "source_off_strata": true,
+    "source_order_slope_agreement": true
+  },
+  "global_fit": {
+    "field_slope_per_q": 2.0,
+    "nearest_q_classifier": {
+      "confusion_matrix": {
+        "-1024": {
+          "-1024": 80,
+          "-1536": 0,
+          "-512": 0,
+          "0": 0,
+          "1024": 0,
+          "1536": 0,
+          "512": 0
+        },
+        "-1536": {
+          "-1024": 0,
+          "-1536": 80,
+          "-512": 0,
+          "0": 0,
+          "1024": 0,
+          "1536": 0,
+          "512": 0
+        },
+        "-512": {
+          "-1024": 0,
+          "-1536": 0,
+          "-512": 80,
+          "0": 0,
+          "1024": 0,
+          "1536": 0,
+          "512": 0
+        },
+        "0": {
+          "-1024": 0,
+          "-1536": 0,
+          "-512": 0,
+          "0": 80,
+          "1024": 0,
+          "1536": 0,
+          "512": 0
+        },
+        "1024": {
+          "-1024": 0,
+          "-1536": 0,
+          "-512": 0,
+          "0": 0,
+          "1024": 80,
+          "1536": 0,
+          "512": 0
+        },
+        "1536": {
+          "-1024": 0,
+          "-1536": 0,
+          "-512": 0,
+          "0": 0,
+          "1024": 0,
+          "1536": 80,
+          "512": 0
+        },
+        "512": {
+          "-1024": 0,
+          "-1536": 0,
+          "-512": 0,
+          "0": 0,
+          "1024": 0,
+          "1536": 0,
+          "512": 80
+        }
+      },
+      "count": 560,
+      "exact_q_accuracy": 1.0,
+      "nonzero_sign_accuracy": 1.0,
+      "passed": true,
+      "slope_used": 2.0
+    },
+    "observable": "dirty_probe_response",
+    "odd_symmetry": {
+      "pairs": {
+        "1024": {
+          "negative_mean": -2048.0,
+          "passed": true,
+          "positive_mean": 2048.0,
+          "relative_error": 0.0,
+          "sum_residual": 0.0
+        },
+        "1536": {
+          "negative_mean": -3072.0,
+          "passed": true,
+          "positive_mean": 3072.0,
+          "relative_error": 0.0,
+          "sum_residual": 0.0
+        },
+        "512": {
+          "negative_mean": -1024.0,
+          "passed": true,
+          "positive_mean": 1024.0,
+          "relative_error": 0.0,
+          "sum_residual": 0.0
+        }
+      },
+      "passed": true,
+      "threshold": 0.1
+    },
+    "ordinary_least_squares": {
+      "count": 560,
+      "intercept": 0.0,
+      "intercept_abs_pass": true,
+      "r2": 1.0,
+      "rmse": 0.0,
+      "slope": 2.0
+    },
+    "q_means": {
+      "-1024": -2048.0,
+      "-1536": -3072.0,
+      "-512": -1024.0,
+      "0": 0.0,
+      "1024": 2048.0,
+      "1536": 3072.0,
+      "512": 1024.0
+    },
+    "r2": 1.0,
+    "rmse": 0.0,
+    "signal_to_null_ratio": 3072.0,
+    "slope_dirty_probe_per_q": 2.0
+  },
+  "heldout": {
+    "delay_label": {
+      "0ns": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 112,
+        "test_rmse": 0.0,
+        "train_count": 448,
+        "train_slope": 2.0
+      },
+      "100ms": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 112,
+        "test_rmse": 0.0,
+        "train_count": 448,
+        "train_slope": 2.0
+      },
+      "100us": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 112,
+        "test_rmse": 0.0,
+        "train_count": 448,
+        "train_slope": 2.0
+      },
+      "10ms": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 112,
+        "test_rmse": 0.0,
+        "train_count": 448,
+        "train_slope": 2.0
+      },
+      "1ms": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 112,
+        "test_rmse": 0.0,
+        "train_count": 448,
+        "train_slope": 2.0
+      }
+    },
+    "mapping": {
+      "map0": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 280,
+        "test_rmse": 0.0,
+        "train_count": 280,
+        "train_slope": 2.0
+      },
+      "map1": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 280,
+        "test_rmse": 0.0,
+        "train_count": 280,
+        "train_slope": 2.0
+      }
+    },
+    "replicate": {
+      "0": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 280,
+        "test_rmse": 0.0,
+        "train_count": 280,
+        "train_slope": 2.0
+      },
+      "1": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 280,
+        "test_rmse": 0.0,
+        "train_count": 280,
+        "train_slope": 2.0
+      }
+    },
+    "session": {
+      "session_0": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 280,
+        "test_rmse": 0.0,
+        "train_count": 280,
+        "train_slope": 2.0
+      },
+      "session_1": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 280,
+        "test_rmse": 0.0,
+        "train_count": 280,
+        "train_slope": 2.0
+      }
+    },
+    "source_order": {
+      "A_then_B": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 280,
+        "test_rmse": 0.0,
+        "train_count": 280,
+        "train_slope": 2.0
+      },
+      "B_then_A": {
+        "passed": true,
+        "relative_rmse_to_q1536": 0.0,
+        "test_count": 280,
+        "test_rmse": 0.0,
+        "train_count": 280,
+        "train_slope": 2.0
+      }
+    }
+  },
+  "heldout_classifier": {
+    "delay_label": {
+      "0ns": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 16,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 16,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 16,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 16,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 16,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 16,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 16
+          }
+        },
+        "count": 112,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "100ms": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 16,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 16,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 16,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 16,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 16,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 16,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 16
+          }
+        },
+        "count": 112,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "100us": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 16,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 16,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 16,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 16,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 16,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 16,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 16
+          }
+        },
+        "count": 112,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "10ms": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 16,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 16,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 16,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 16,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 16,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 16,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 16
+          }
+        },
+        "count": 112,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "1ms": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 16,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 16,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 16,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 16,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 16,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 16,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 16
+          }
+        },
+        "count": 112,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      }
+    },
+    "mapping": {
+      "map0": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 40,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 40,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 40,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 40,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 40,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 40,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 40
+          }
+        },
+        "count": 280,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "map1": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 40,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 40,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 40,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 40,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 40,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 40,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 40
+          }
+        },
+        "count": 280,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      }
+    },
+    "replicate": {
+      "0": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 40,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 40,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 40,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 40,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 40,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 40,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 40
+          }
+        },
+        "count": 280,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "1": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 40,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 40,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 40,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 40,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 40,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 40,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 40
+          }
+        },
+        "count": 280,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      }
+    },
+    "session": {
+      "session_0": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 40,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 40,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 40,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 40,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 40,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 40,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 40
+          }
+        },
+        "count": 280,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "session_1": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 40,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 40,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 40,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 40,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 40,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 40,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 40
+          }
+        },
+        "count": 280,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      }
+    },
+    "source_order": {
+      "A_then_B": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 40,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 40,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 40,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 40,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 40,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 40,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 40
+          }
+        },
+        "count": 280,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "B_then_A": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 40,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 40,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 40,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 40,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 40,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 40,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 40
+          }
+        },
+        "count": 280,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      }
+    }
+  },
+  "mapping_slope_relative_disagreement": 0.0,
+  "mapping_slopes": {
+    "map0": 2.0,
+    "map1": 2.0
+  },
+  "observable_law": {
+    "field": "dirty_probe_response",
+    "mapping_policy": "logical_query_identity",
+    "mapping_policy_reason": "Runtime maps logical query lanes through the same map variant used during preparation; map is therefore a consistency factor for logical query_A/query_B, not a sign inversion.",
+    "paired_observable": "D_single = dirty_probe_response(query_A) - dirty_probe_response(query_B)",
+    "threshold_provenance": {
+      "attempt_3_limitation": "attempt_3_cannot_independently_validate_thresholds_derived_after_examining_attempt_3",
+      "attempt_3_status": "retrospective_thresholds_selected_after_attempt_3_inspection",
+      "post_v1_1_revision": "no_post_v1_1_run_threshold_revision_allowed",
+      "v1_1_status": "thresholds_are_prospectively_frozen_only_for_the_proposed_v1_1_confirmation"
+    }
+  },
+  "official_result_replaced": false,
+  "pair_failure_count": 0,
+  "pair_failures": [],
+  "passed": true,
+  "prospective_claim_ceiling": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
+  "query_observations": {
+    "counts": {
+      "factorial_nonadditivity|query_A_then_B": 2240,
+      "factorial_nonadditivity|query_B_then_A": 2240,
+      "persistence_matrix|carrier_off": 640,
+      "persistence_matrix|query_A": 640,
+      "persistence_matrix|query_A_then_B": 640,
+      "persistence_matrix|query_B": 640,
+      "persistence_matrix|query_B_then_A": 640,
+      "persistence_matrix|query_sham": 640
+    },
+    "missing_required_observations": [],
+    "ordered_query_observations_retained_not_fit": {
+      "factorial_nonadditivity|query_A_then_B": 2240,
+      "factorial_nonadditivity|query_B_then_A": 2240,
+      "persistence_matrix|query_A_then_B": 640,
+      "persistence_matrix|query_B_then_A": 640
+    },
+    "passed": true,
+    "primary_fit_inputs": {
+      "persistence_matrix|query_A": 640,
+      "persistence_matrix|query_B": 640
+    },
+    "total_raw_records": 8320
+  },
+  "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
+  "sample_count": 560,
+  "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_PROSPECTIVE_ADJUDICATION_V1",
+  "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
+  "session_slope_relative_disagreement": 0.0,
+  "session_slopes": {
+    "session_0": 2.0,
+    "session_1": 2.0
+  },
+  "small_wall_promoted": false,
+  "source_evidence": {
+    "archive_negative_fixture": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3",
+    "archive_negative_fixture_run_id": "family10h_carrier_tomography_v1_0",
+    "source": "synthetic_v1_1_software_fixture"
+  },
+  "source_off_strata": {
+    "factor_reports": {
+      "delay_label": {
+        "levels": {
+          "0ns": {
+            "count": 16,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          },
+          "100ms": {
+            "count": 16,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          },
+          "100us": {
+            "count": 16,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          },
+          "10ms": {
+            "count": 16,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          },
+          "1ms": {
+            "count": 16,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          }
+        },
+        "passed": true
+      },
+      "mapping": {
+        "levels": {
+          "map0": {
+            "count": 40,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          },
+          "map1": {
+            "count": 40,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          }
+        },
+        "passed": true
+      },
+      "replicate": {
+        "levels": {
+          "0": {
+            "count": 40,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          },
+          "1": {
+            "count": 40,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          }
+        },
+        "passed": true
+      },
+      "session": {
+        "levels": {
+          "session_0": {
+            "count": 40,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          },
+          "session_1": {
+            "count": 40,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          }
+        },
+        "passed": true
+      },
+      "source_order": {
+        "levels": {
+          "A_then_B": {
+            "count": 40,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          },
+          "B_then_A": {
+            "count": 40,
+            "max_abs": 0.0,
+            "max_pass": true,
+            "mean_abs": 0.0,
+            "mean_pass": true
+          }
+        },
+        "passed": true
+      }
+    },
+    "full_cell_abs_max": 0.0,
+    "full_cell_count": 80,
+    "full_cell_factors": [
+      "session",
+      "replicate",
+      "mapping",
+      "delay_label",
+      "source_order"
+    ],
+    "full_cell_max_count": 1,
+    "full_cell_min_count": 1,
+    "full_cell_violations": [],
+    "passed": true
+  },
+  "source_order_slope_relative_disagreement": 0.0,
+  "source_order_slopes": {
+    "A_then_B": 2.0,
+    "B_then_A": 2.0
+  },
+  "strata": {
+    "session_0:replicate_0": {
+      "count": 140,
+      "field_slope_per_q": 2.0,
+      "nearest_q_classifier": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 20,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 20,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 20,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 20,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 20,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 20,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 20
+          }
+        },
+        "count": 140,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "odd_symmetry": {
+        "pairs": {
+          "1024": {
+            "negative_mean": -2048.0,
+            "passed": true,
+            "positive_mean": 2048.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          },
+          "1536": {
+            "negative_mean": -3072.0,
+            "passed": true,
+            "positive_mean": 3072.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          },
+          "512": {
+            "negative_mean": -1024.0,
+            "passed": true,
+            "positive_mean": 1024.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          }
+        },
+        "passed": true,
+        "threshold": 0.1
+      },
+      "ordinary_least_squares": {
+        "count": 140,
+        "intercept": 0.0,
+        "intercept_abs_pass": true,
+        "r2": 1.0,
+        "rmse": 0.0,
+        "slope": 2.0
+      },
+      "passed": true,
+      "q_law": {
+        "magnitude_failures": [],
+        "missing_q": [],
+        "passed": true,
+        "q0_abs_mean": 0.0,
+        "q0_pass": true,
+        "q1536_floor_pass": true,
+        "sign_failures": []
+      },
+      "q_means": {
+        "-1024": -2048.0,
+        "-1536": -3072.0,
+        "-512": -1024.0,
+        "0": 0.0,
+        "1024": 2048.0,
+        "1536": 3072.0,
+        "512": 1024.0
+      },
+      "r2": 1.0,
+      "rmse": 0.0,
+      "slope_dirty_probe_per_q": 2.0
+    },
+    "session_0:replicate_1": {
+      "count": 140,
+      "field_slope_per_q": 2.0,
+      "nearest_q_classifier": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 20,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 20,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 20,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 20,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 20,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 20,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 20
+          }
+        },
+        "count": 140,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "odd_symmetry": {
+        "pairs": {
+          "1024": {
+            "negative_mean": -2048.0,
+            "passed": true,
+            "positive_mean": 2048.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          },
+          "1536": {
+            "negative_mean": -3072.0,
+            "passed": true,
+            "positive_mean": 3072.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          },
+          "512": {
+            "negative_mean": -1024.0,
+            "passed": true,
+            "positive_mean": 1024.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          }
+        },
+        "passed": true,
+        "threshold": 0.1
+      },
+      "ordinary_least_squares": {
+        "count": 140,
+        "intercept": 0.0,
+        "intercept_abs_pass": true,
+        "r2": 1.0,
+        "rmse": 0.0,
+        "slope": 2.0
+      },
+      "passed": true,
+      "q_law": {
+        "magnitude_failures": [],
+        "missing_q": [],
+        "passed": true,
+        "q0_abs_mean": 0.0,
+        "q0_pass": true,
+        "q1536_floor_pass": true,
+        "sign_failures": []
+      },
+      "q_means": {
+        "-1024": -2048.0,
+        "-1536": -3072.0,
+        "-512": -1024.0,
+        "0": 0.0,
+        "1024": 2048.0,
+        "1536": 3072.0,
+        "512": 1024.0
+      },
+      "r2": 1.0,
+      "rmse": 0.0,
+      "slope_dirty_probe_per_q": 2.0
+    },
+    "session_1:replicate_0": {
+      "count": 140,
+      "field_slope_per_q": 2.0,
+      "nearest_q_classifier": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 20,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 20,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 20,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 20,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 20,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 20,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 20
+          }
+        },
+        "count": 140,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "odd_symmetry": {
+        "pairs": {
+          "1024": {
+            "negative_mean": -2048.0,
+            "passed": true,
+            "positive_mean": 2048.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          },
+          "1536": {
+            "negative_mean": -3072.0,
+            "passed": true,
+            "positive_mean": 3072.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          },
+          "512": {
+            "negative_mean": -1024.0,
+            "passed": true,
+            "positive_mean": 1024.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          }
+        },
+        "passed": true,
+        "threshold": 0.1
+      },
+      "ordinary_least_squares": {
+        "count": 140,
+        "intercept": 0.0,
+        "intercept_abs_pass": true,
+        "r2": 1.0,
+        "rmse": 0.0,
+        "slope": 2.0
+      },
+      "passed": true,
+      "q_law": {
+        "magnitude_failures": [],
+        "missing_q": [],
+        "passed": true,
+        "q0_abs_mean": 0.0,
+        "q0_pass": true,
+        "q1536_floor_pass": true,
+        "sign_failures": []
+      },
+      "q_means": {
+        "-1024": -2048.0,
+        "-1536": -3072.0,
+        "-512": -1024.0,
+        "0": 0.0,
+        "1024": 2048.0,
+        "1536": 3072.0,
+        "512": 1024.0
+      },
+      "r2": 1.0,
+      "rmse": 0.0,
+      "slope_dirty_probe_per_q": 2.0
+    },
+    "session_1:replicate_1": {
+      "count": 140,
+      "field_slope_per_q": 2.0,
+      "nearest_q_classifier": {
+        "confusion_matrix": {
+          "-1024": {
+            "-1024": 20,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-1536": {
+            "-1024": 0,
+            "-1536": 20,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "-512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 20,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "0": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 20,
+            "1024": 0,
+            "1536": 0,
+            "512": 0
+          },
+          "1024": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 20,
+            "1536": 0,
+            "512": 0
+          },
+          "1536": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 20,
+            "512": 0
+          },
+          "512": {
+            "-1024": 0,
+            "-1536": 0,
+            "-512": 0,
+            "0": 0,
+            "1024": 0,
+            "1536": 0,
+            "512": 20
+          }
+        },
+        "count": 140,
+        "exact_q_accuracy": 1.0,
+        "nonzero_sign_accuracy": 1.0,
+        "passed": true,
+        "slope_used": 2.0
+      },
+      "odd_symmetry": {
+        "pairs": {
+          "1024": {
+            "negative_mean": -2048.0,
+            "passed": true,
+            "positive_mean": 2048.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          },
+          "1536": {
+            "negative_mean": -3072.0,
+            "passed": true,
+            "positive_mean": 3072.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          },
+          "512": {
+            "negative_mean": -1024.0,
+            "passed": true,
+            "positive_mean": 1024.0,
+            "relative_error": 0.0,
+            "sum_residual": 0.0
+          }
+        },
+        "passed": true,
+        "threshold": 0.1
+      },
+      "ordinary_least_squares": {
+        "count": 140,
+        "intercept": 0.0,
+        "intercept_abs_pass": true,
+        "r2": 1.0,
+        "rmse": 0.0,
+        "slope": 2.0
+      },
+      "passed": true,
+      "q_law": {
+        "magnitude_failures": [],
+        "missing_q": [],
+        "passed": true,
+        "q0_abs_mean": 0.0,
+        "q0_pass": true,
+        "q1536_floor_pass": true,
+        "sign_failures": []
+      },
+      "q_means": {
+        "-1024": -2048.0,
+        "-1536": -3072.0,
+        "-512": -1024.0,
+        "0": 0.0,
+        "1024": 2048.0,
+        "1536": 3072.0,
+        "512": 1024.0
+      },
+      "r2": 1.0,
+      "rmse": 0.0,
+      "slope_dirty_probe_per_q": 2.0
+    }
+  },
+  "thresholds": {
+    "classifier_min_exact_accuracy": 0.95,
+    "classifier_min_sign_accuracy": 1.0,
+    "heldout_max_relative_rmse": 0.1,
+    "intercept_abs_max": 64.0,
+    "model_min_r2": 0.98,
+    "odd_symmetry_max_relative_error": 0.1,
+    "q0_abs_mean_max": 64.0,
+    "q1536_abs_mean_min": 2000.0,
+    "signal_to_null_min_ratio": 20.0,
+    "slope_max_relative_disagreement": 0.1,
+    "source_off_pair_abs_max": 128.0,
+    "source_off_pair_abs_mean": 32.0
+  },
+  "validation": {
+    "expected_count": 8320,
+    "failures": [],
+    "observed_count": 8320,
+    "passed": true
+  }
+}
