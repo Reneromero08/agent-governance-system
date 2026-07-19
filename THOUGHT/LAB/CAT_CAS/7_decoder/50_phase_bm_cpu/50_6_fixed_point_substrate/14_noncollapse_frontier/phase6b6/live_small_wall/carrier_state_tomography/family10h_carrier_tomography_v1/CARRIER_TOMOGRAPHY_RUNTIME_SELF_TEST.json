@@ -1,11 +1,11 @@
 {
   "compile": {
-    "binary_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_runtime_compile_gv9_w2si\\family10h_carrier_tomography_runtime",
+    "binary_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_runtime_compile_v_x140jm\\family10h_carrier_tomography_runtime",
     "compile_command": [
       "C:\\Windows\\system32\\wsl.EXE",
       "bash",
       "-lc",
-      "gcc -std=c11 -Wall -Wextra -Werror -O2 -o \"$(wslpath 'C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_runtime_compile_gv9_w2si\\family10h_carrier_tomography_runtime')\" \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime.c')\""
+      "gcc -std=c11 -Wall -Wextra -Werror -O2 -o \"$(wslpath 'C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_runtime_compile_v_x140jm\\family10h_carrier_tomography_runtime')\" \"$(wslpath 'D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\family10h_carrier_tomography_runtime.c')\""
     ],
     "compile_command_identity": {
       "flags": [
@@ -34,7 +34,7 @@
       "C:\\Windows\\system32\\wsl.EXE",
       "bash",
       "-lc",
-      "\"$(wslpath 'C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_runtime_compile_gv9_w2si\\family10h_carrier_tomography_runtime')\" --self-test"
+      "\"$(wslpath 'C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_runtime_compile_v_x140jm\\family10h_carrier_tomography_runtime')\" --self-test"
     ],
     "stderr": "",
     "stdout": ""
@@ -103,7 +103,7 @@
     "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST_V1"
   },
   "runtime_returncode": 0,
-  "runtime_self_test_sha256": "80b9e5dd683f755ad1882a5141a86b08844f679765850af99762ded7ae86c41f",
+  "runtime_self_test_sha256": "c1678ade7b28442a612c12fe5050e016d33a05bc7ff91f84e5831e81e27070d4",
   "runtime_stderr": "",
   "runtime_stdout": "{\"schema\":\"FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST_V1\",\"passed\":true}\n",
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST_RECEIPT_V1"
