@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/family10h_carrier_tomography_target.py", line 4610, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/family10h_carrier_tomography_target.py", line 4585, in main
+    result = execute_authorized(args.source_root.resolve(), args.output_root.resolve())
+  File "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/family10h_carrier_tomography_target.py", line 4460, in execute_authorized
+    require(manifest_authority["passed"], "manifest authority mismatch")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/family10h_carrier_tomography_target.py", line 217, in require
+    raise TargetError(message)
+TargetError: manifest authority mismatch
