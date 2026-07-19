@@ -1,10 +1,10 @@
 {
   "admittance_budget": {
     "derivation": {
-      "capacitive_reactance_ohm": 1214255.852,
-      "esr_to_reactance_ratio": 0.057648,
+      "capacitive_reactance_ohm_minimum": 1212331.986,
+      "esr_to_reactance_ratio_maximum": 0.05774,
       "fc135_max_esr_ohm": 70000,
-      "frequency_hz": 32768.0,
+      "frequency_hz_worst_case": 32820.0,
       "hard_capacitance_f": 4e-12
     },
     "hard_execution": {
@@ -170,7 +170,7 @@
       "assembly": "P0-DUT-A",
       "channel": "CH0",
       "negative": "AGND_EXPORT_A",
-      "observable": "passive C1 32768 Hz source monitor plus fixed C2 65536 Hz phase-gauge tone",
+      "observable": "passive C1 bound-f_carrier source monitor plus C2 bound-2xf_carrier phase-gauge tone",
       "positive": "N_SOURCE_MONITOR_SUM_A"
     },
     {
@@ -198,7 +198,7 @@
       "assembly": "P0-DETECTOR-B",
       "channel": "CH0",
       "negative": "AGND_EXPORT_B",
-      "observable": "passive C1 32768 Hz source monitor plus fixed C2 65536 Hz phase-gauge tone",
+      "observable": "passive C1 bound-f_carrier source monitor plus C2 bound-2xf_carrier phase-gauge tone",
       "positive": "N_SOURCE_MONITOR_SUM_B"
     },
     {
@@ -226,7 +226,7 @@
       "assembly": "P0-DUMMY-C0-C",
       "channel": "CH0",
       "negative": "AGND_EXPORT_C",
-      "observable": "passive C1 32768 Hz source monitor plus fixed C2 65536 Hz phase-gauge tone",
+      "observable": "passive C1 bound-f_carrier source monitor plus C2 bound-2xf_carrier phase-gauge tone",
       "positive": "N_SOURCE_MONITOR_SUM_C"
     },
     {
@@ -6982,7 +6982,7 @@
   "source_off_sequence": {
     "acquisition": "software-prearmed free-running continuous record; CH2 locates the event and CH0 dual-tone reconstruction supplies the phase gauge",
     "contact_limit_samples": 14500,
-    "drive": "SDG1032X C1 32768 Hz 0.400 Vpp continuous sine with 0 V offset and 0/pi phase; C2 65536 Hz 0.100 Vpp continuous fixed-zero-phase reference with 0 V offset; HIGH_Z load setting; both remain on for the whole record",
+    "drive": "SDG1032X C1 at calibration-bound f_carrier_hz, 0.400 Vpp continuous sine with 0 V offset and 0/pi phase; C2 at exactly 2*f_carrier_hz, 0.100 Vpp continuous fixed-zero-phase reference with 0 V offset; HIGH_Z load setting; both remain on for the whole record",
     "first_admissible": "max(t_gate+0.560 us, end of 1000-sample stable code-8 run)+10.000 ms",
     "gate": "ADG1419 routes C1 from DRIVE to 50.00 ohm termination",
     "guard_samples": 10000,
@@ -7013,11 +7013,16 @@
       },
       "witness_model": "P0_SIGNAL_PATH_CIRCUIT_MODEL.json"
     },
-    "source_persistence_proof": "CH0 must match the sample-level reconstructed 32768 Hz C1 plus 65536 Hz C2 waveform from t_gate through record end with peak residual <=5 percent of the fitted C1 amplitude, and both tones must remain within 2 percent amplitude and 0.010 rad phase in contiguous 100000-sample segments beginning at t_gate and covering record end; the bounded passive C2-to-C1 coupling through the monitor network is modeled and controlled rather than called zero",
+    "source_persistence_proof": "CH0 must match the sample-level reconstruction at bound f_carrier_hz and bound f_witness_hz from t_gate through record end with peak residual <=5 percent of the fitted C1 amplitude, and both tones must remain within 2 percent amplitude and 0.010 rad phase in contiguous 100000-sample segments beginning at t_gate and covering record end; the bounded passive C2-to-C1 coupling through the monitor network is modeled and controlled rather than called zero",
     "source_setup": {
       "c1": {
+        "accepted_frequency_hz": [
+          32768.0,
+          32820.0
+        ],
         "amplitude_vpp": 0.4,
-        "frequency_hz": 32768,
+        "frequency_binding": "f_carrier_hz",
+        "maximum_u95_hz": 0.05,
         "offset_v": 0.0,
         "phase_command_rad": [
           0.0,
@@ -7026,7 +7031,8 @@
       },
       "c2": {
         "amplitude_vpp": 0.1,
-        "frequency_hz": 65536,
+        "frequency_binding": "f_witness_hz",
+        "frequency_relation": "f_witness_hz == 2 * f_carrier_hz",
         "offset_v": 0.0,
         "phase_command_rad": 0.0
       },
@@ -7049,7 +7055,8 @@
       "model": "SIGLENT SDG1032X",
       "output_mode": "CONTINUOUS_SINE",
       "physical_output_ohms": 50.0,
-      "qualified_preparation_cycles": 32768,
+      "qualified_preparation_cycles_law": "ceil(3 * f_carrier_hz)",
+      "qualified_preparation_seconds_minimum": 3.0,
       "queryback_fields_per_channel": [
         "model",
         "serial",

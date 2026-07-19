@@ -189,8 +189,9 @@ first admissible raw sample:
 ```
 
 The frozen prospective source is one SDG1032X in `HIGH_Z` load mode with 50 Ohm
-physical outputs. C1 is a continuous 32,768 Hz, 0.400 Vpp, 0 V-offset sine at
-phase 0 or pi. C2 is a continuous 65,536 Hz, 0.100 Vpp, 0 V-offset sine at fixed
+physical outputs. After calibration and before assignment, C1 is a continuous
+0.400 Vpp, 0 V-offset sine at bound `f_carrier_hz` with phase 0 or pi. C2 is a
+continuous 0.100 Vpp, 0 V-offset sine at bound `f_witness_hz = 2 * f_carrier_hz` with fixed
 zero phase that enters the passive CH0 monitor and the exact 1.00 Mohm branch
 to N_GATE_OUT downstream of ADG1419. The exact 100 kOhm `N_SRC` drive shunt is
 on the D/SA side after ADG OFF and cannot define the C2 witness. Both outputs remain on for

@@ -75,10 +75,15 @@
         "instrument_queryback",
         "native_export_receipt",
         "nonlinear_control",
+        "resonance_calibration_analyzer",
+        "resonance_calibration_artifact",
+        "resonance_calibration_raw",
+        "resonance_calibration_source_queryback",
         "source_queryback",
         "topology_receipt",
         "topology_scan"
       ],
+      "calibration_before_assignment_required": true,
       "chronology_utc_format": "YYYY-MM-DDTHH:MM:SS.ffffffZ",
       "cross_record_equal": [
         "assignment_commitment_sha256",
@@ -86,7 +91,9 @@
         "clock_identity",
         "evidence_class",
         "export_adapter_identity",
-        "f_ref_hz",
+        "f_carrier_hz",
+        "f_carrier_u95_hz",
+        "f_witness_hz",
         "instrument_identity_and_configuration",
         "scale_per_code",
         "signal_path_invariant_fields",
@@ -100,6 +107,7 @@
         "environment",
         "evidence_class",
         "export",
+        "frequency_binding",
         "instrument",
         "payload",
         "role",
@@ -109,6 +117,15 @@
         "source",
         "thresholds",
         "witness"
+      ],
+      "frequency_binding_exact_fields": [
+        "calibration_analyzer_sha256",
+        "calibration_artifact_sha256",
+        "calibration_raw_sha256",
+        "f_carrier_hz",
+        "f_carrier_u95_hz",
+        "f_witness_hz",
+        "relation"
       ],
       "nonlinear_control_hashes_unique_per_role": true,
       "role_to_assembly": {
@@ -161,6 +178,7 @@
         "load_mode": "HIGH_Z",
         "physical_output_ohms": "50"
       },
+      "source_preparation_seconds_minimum": 3.0,
       "topology_scan_hashes_unique_per_role": true
     },
     "p0.scientific-result.v1": {

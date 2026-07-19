@@ -60,10 +60,10 @@ SIGLENT SDG1032X
 Frozen build-readiness source contract:
 
 ```text
-C1 is continuous 32768 Hz, exactly 0.400 Vpp, 0 V offset, phase 0 or pi
-C2 is continuous 65536 Hz, exactly 0.100 Vpp, 0 V offset, fixed zero phase
+C1 is continuous at calibration-bound f_carrier_hz, exactly 0.400 Vpp, 0 V offset, phase 0 or pi
+C2 is continuous at bound f_witness_hz = 2 * f_carrier_hz, exactly 0.100 Vpp, 0 V offset, fixed zero phase
 both channels use HIGH_Z load mode while retaining 50 Ohm physical output impedance
-the final 32768 C1 cycles before the gate are the qualified preparation interval
+at least ceil(3 * f_carrier_hz) C1 cycles before the gate are the qualified preparation interval
 0 and pi phase commands are remote-readable and repeatable
 no external trigger, sync cable, or self-ending burst exists
 both outputs remain on for the complete record and CH0 proves persistence

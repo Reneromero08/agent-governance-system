@@ -172,7 +172,7 @@ def require_return_contract(transfer: ast.FunctionDef) -> None:
     if not isinstance(claim, ast.Constant) or claim.value != "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT":
         raise ProofFailure("TRANSFER_CLAIM")
     exact_names = {
-        "common_mode_peak_v": "common_mode_peak",
+        "differential_peak_v": "raw_peak",
         "pre_open_complex_separation": "separation",
         "pre_pilot_snr": "pre_snr",
         "r_drop": "r_drop",
@@ -222,7 +222,7 @@ def prove_bytes(data: bytes) -> dict[str, Any]:
     if not isinstance(guard_statement.value, ast.Call) or not isinstance(guard_statement.value.func, ast.Name) or guard_statement.value.func.id != "decode_guard_witness":
         raise ProofFailure("CALL_ASSIGNMENT:guard")
 
-    require_call_args(path_call, ("ch0", "ch1", "n_gate", "records[role]['series_start']", "records[role]['n_series_open']", "meta['_signal_model']"), "signal_path_transfer")
+    require_call_args(path_call, ("ch0", "ch1", "n_gate", "records[role]['series_start']", "records[role]['n_series_open']", "meta['_signal_model']", "common['f_ref']", "common['f_witness']", "2.0 * common['f_carrier_u95']"), "signal_path_transfer")
     require_call_args(drive_call, ("ch0", "n_gate", "decimal(meta['source']['phase_command_rad'], 'phase')", "common['f_ref']", "nonnegative_decimal(meta['source']['phase_skew_standard_uncertainty_rad'], 'source.phase_skew_standard_uncertainty_rad')", "nonnegative_decimal(meta['source']['phase_drive_cal_standard_uncertainty_rad'], 'source.phase_drive_cal_standard_uncertainty_rad')"), "drive_fit")
     require_call_args(guard_statement.value, ("records[role]['decoded']", "n_gate", "records[role]['n_series_open']", "meta['witness']"), "decode_guard_witness")
 
@@ -251,10 +251,10 @@ def prove_bytes(data: bytes) -> dict[str, Any]:
         raise ProofFailure("HIDDEN_GUARD_ACCEPTANCE")
 
     assignments = {
-        "pre0": "signal_path_tone_fit(ch0, pre_start, pre_stop, thresholds)",
-        "pre1": "signal_path_tone_fit(ch1, pre_start, pre_stop, thresholds)",
-        "open0": "signal_path_tone_fit(ch0, open_start, open_stop, thresholds)",
-        "open1": "signal_path_tone_fit(ch1, open_start, open_stop, thresholds)",
+        "pre0": "signal_path_tone_fit(ch0, pre_start, pre_stop, thresholds, f_carrier_hz)",
+        "pre1": "signal_path_tone_fit(ch1, pre_start, pre_stop, thresholds, f_carrier_hz)",
+        "open0": "signal_path_tone_fit(ch0, open_start, open_stop, thresholds, f_carrier_hz)",
+        "open1": "signal_path_tone_fit(ch1, open_start, open_stop, thresholds, f_carrier_hz)",
         "h_pre": "pre1['c2'] / pre0['c2']",
         "h_open": "open1['c2'] / open0['c2']",
         "pre_snr": "abs(pre1['c2']) / math.sqrt(max(pre1['c2_variance'], 1e-30))",
@@ -262,17 +262,15 @@ def prove_bytes(data: bytes) -> dict[str, Any]:
         "r_drop": "abs(open1['c2']) / abs(pre1['c2'])",
         "phase_pre": "math.atan2(h_pre.imag, h_pre.real)",
         "phase_open": "math.atan2(h_open.imag, h_open.real)",
-        "common_mode_peak": "0.5 * raw_peak",
     }
     for name, expected in assignments.items():
         require_assignment(transfer, name, expected)
 
     gates = (
         ("SIGNAL_PATH_WINDOW_ORDER", "pre_stop - pre_start != int(pre_spec['samples']) or open_stop - open_start != int(open_spec['samples']) or pre_stop > n_gate + 250 or n_gate + 250 > series_start or open_stop > n_series_open + 1"),
-        ("SIGNAL_PATH_WINDOW_CYCLES", "(pre_stop - pre_start) * F_WITNESS / FS < model_number(pre_spec['valid_cycles'], 'model.pre_valid_cycles') - 1e-12"),
-        ("SIGNAL_PATH_WINDOW_CYCLES", "(open_stop - open_start) * F_WITNESS / FS < model_number(open_spec['valid_cycles'], 'model.open_valid_cycles') - 1e-12"),
+        ("SIGNAL_PATH_WINDOW_CYCLES", "(pre_stop - pre_start) * (f_witness_hz - f_witness_u95_hz) / FS < model_number(pre_spec['valid_cycles'], 'model.pre_valid_cycles') - 1e-12"),
+        ("SIGNAL_PATH_WINDOW_CYCLES", "(open_stop - open_start) * (f_witness_hz - f_witness_u95_hz) / FS < model_number(open_spec['valid_cycles'], 'model.open_valid_cycles') - 1e-12"),
         ("SIGNAL_PATH_CLIPPING", "raw_peak > clip"),
-        ("SIGNAL_PATH_COMMON_MODE", "common_mode_peak > model_number(thresholds['common_mode_abs_v_max'], 'model.common_mode_abs_v_max')"),
         ("SIGNAL_PATH_C2_MISSING", "abs(pre0['c2']) <= 0.0 or abs(open0['c2']) <= 0.0"),
         ("SIGNAL_PATH_C2_MISSING", "source_snr < model_number(thresholds['minimum_pre_pilot_snr'], 'model.minimum_pre_pilot_snr')"),
         ("SIGNAL_PATH_PRE_SNR", "pre_snr < model_number(thresholds['minimum_pre_pilot_snr'], 'model.minimum_pre_pilot_snr')"),
@@ -318,7 +316,7 @@ def prove_bytes(data: bytes) -> dict[str, Any]:
             "source_continuity_precedes_path_gate": True,
         },
         "result": "PASS",
-        "schema": "p0.signal-path-ordering-proof.v4",
+        "schema": "p0.signal-path-ordering-proof.v5",
         "transfer_gate_count": len(gates),
     }
 

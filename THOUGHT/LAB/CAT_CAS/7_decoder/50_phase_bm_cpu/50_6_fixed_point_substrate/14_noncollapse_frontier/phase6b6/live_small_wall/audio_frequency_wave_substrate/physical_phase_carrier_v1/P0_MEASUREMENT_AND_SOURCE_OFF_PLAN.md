@@ -133,12 +133,12 @@ custody snapshot and private ignored receipt.
 | Pre-command record | exactly 1,101,000 samples = 1.101000 s |
 | Post-command record | exactly 2,000,000 samples = 2.000000 s |
 | Preparation-onset requirement | observed onset index `n_prep >= 100,000` |
-| C1 source command | exactly 32,768 Hz, 0.400 Vpp, 0 V offset, `HIGH_Z` load mode, 50 Ohm physical output |
-| C2 gauge command | exactly 65,536 Hz, 0.100 Vpp, 0 V offset, zero phase, `HIGH_Z` load mode, 50 Ohm physical output |
-| Qualified preparation interval | exactly the 32,768 continuous C1 cycles immediately preceding `n_gate` |
-| Qualified preparation duration | 1.000000 s at nominal frequency |
+| C1 source command | calibration-bound `f_carrier_hz` in 32,768..32,820 Hz, 0.400 Vpp, 0 V offset, `HIGH_Z` load mode, 50 Ohm physical output |
+| C2 gauge command | bound `f_witness_hz = 2 * f_carrier_hz`, 0.100 Vpp, 0 V offset, zero phase, `HIGH_Z` load mode, 50 Ohm physical output |
+| Qualified preparation interval | at least `ceil(3 * f_carrier_hz)` continuous C1 cycles immediately preceding `n_gate`; chronology must satisfy calibration complete < assignment committed <= preparation start <= acquisition start - 3.000 s |
+| Qualified preparation duration | at least 3.000000 s at the bound frequency |
 | Turn-on inside admitted record | none; both outputs are continuous and already stable before recording |
-| Constant-amplitude interval | entire record; the final 32,768 pre-gate cycles are the qualified preparation |
+| Constant-amplitude interval | entire record; the final at-least-3.000 s pre-gate interval is the qualified preparation |
 | Turn-off ramp | none; source is physically routed away |
 | Arm phase offset | exactly 0 or pi |
 | Analog gate command-to-logic-edge calibration bound | <= 1.000 us; guard timing only |
@@ -163,14 +163,14 @@ custody snapshot and private ignored receipt.
 
 The source is already continuously stable when the software-prearmed free-running
 record begins. The record contains at least 100,000 samples before the final
-qualified 32,768-cycle preparation interval, contains that complete interval,
+qualified at-least-3.000-second preparation interval, contains the recorded final portion of that interval,
 and continues for 2,000,000 samples after the nominal source-off command. The
 digitizer therefore captures continuously across preparation and source-off.
 There is no trigger cable. CH2 establishes the source-off event; CH0 establishes
 the phase gauge.
 
 CH0 must match the sample-level reconstructed C1+C2 waveform over every sample of
-the complete 1,000,000-sample qualified preparation interval with peak residual
+the recorded final 1,000,000-sample preparation witness with peak residual
 no greater than 5 percent of fitted C1 amplitude. This is independent of the
 post-gate whole-record reconstruction and contiguous persistence-segment checks.
 
@@ -256,7 +256,7 @@ bounds.
 | Carrier terminal complete-corner bound | <= 0.187807 Vpp; hard cap <= 0.200 Vpp | identical |
 | Estimated motional power | complete-corner <= 0.002298 uW; hard cap <= 0.100 uW | identical |
 | Estimated motional current | complete-corner <= 0.186507 uA rms; hard cap <= 2.000 uA rms | identical |
-| Qualified preparation cycles | final 32,768 cycles of continuous source | identical |
+| Qualified preparation cycles | at least `ceil(3 * f_carrier_hz)` cycles of continuous source | identical |
 | Turn-on ramp inside record | none | none |
 | Constant interval | entire record | same |
 | Source-off schedule | frozen timing above | same |
@@ -897,7 +897,7 @@ drive shunt that preserves the 0.200 Vpp terminal cap and remains isolated from
 actual adapter/queryback/native/assignment/calibration/chronology bytes, a
 role-bound assembly manifest, an event-specific version-2 topology receipt, a
 unique four-state raw topology scan, a unique C1-only nonlinear-control trace,
-canonical parsed-UTC scan/acquisition chronology, and raw-derived common mode.
+canonical parsed-UTC calibration/assignment/scan/acquisition chronology, and directly observed differential clipping. True input common mode remains a future operating-envelope prerequisite and is not derived from these bytes.
 No future physical data may tune these thresholds.
 
 ## 13. Current boundary

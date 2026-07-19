@@ -98,27 +98,30 @@ Use the official product page when a direct link fails. Dynamic product pages of
 - Access mode: `manual_product_page`
 - Why it matters: Input/output ratings, isolation, regulation, ripple, load requirements, capacitance across barrier and package pinout.
 
-### NEXPERIA_1N4148: 1N4148W data sheet
+### NEXPERIA_1N4148: legacy 1N4148W source record
 
 - Role: relay clamp steering diode
-- Exact part: `1N4148W,115`
-- [Direct download](https://assets.nexperia.com/documents/data-sheet/1N4148W.pdf)
-- [Official product/article page](https://www.nexperia.com/product/1N4148W)
-- Access mode: `direct_pdf`
+- Frozen P0 part: `1N4148W,115`
+- [Current Nexperia switching-diode portfolio](https://www.nexperia.com/products/diodes/switching-diodes)
+- Access mode: `manual_product_page`
 - Legacy expected SHA-256: `13f368ed2f370fe0a613fe1993183cce06717202bcd6a96b912bde017f5cea0e`
 - Legacy expected bytes: `16777`
-- Why it matters: Clamp current, reverse voltage, package, and pin orientation.
+- Source status: the exact current Nexperia product page and PDF for `1N4148W,115` could not be verified. The frozen design identity is retained rather than silently substituted.
+- Alternative family candidate: Vishay `1N4148W` (official product 86356). No exact ordering suffix, document revision, or procurement identity is bound here. Any substitution requires explicit electrical, capacitance, polarity, footprint, lifecycle, and ordering-identity review before entering the P0 design.
+- Why it matters: Clamp current, reverse voltage, recovery time, capacitance, package and pin orientation.
 
 ### NEXPERIA_2N7002: 2N7002PW data sheet
 
 - Role: relay MOSFET driver
-- Exact part: `2N7002PW,115`
+- Frozen P0 part: `2N7002PW,115`
 - [Direct download](https://assets.nexperia.com/documents/data-sheet/2N7002PW.pdf)
 - [Official product/article page](https://www.nexperia.com/product/2N7002PW)
 - Access mode: `direct_pdf`
 - Legacy expected SHA-256: `3ef49e87f0304160e534bb2750066bf596155b7d42578f3bc40a98955545e77e`
 - Legacy expected bytes: `284517`
-- Why it matters: Relay driver pinout, voltage/current ratings, switching, and package.
+- Lifecycle status: Nexperia marks `2N7002PW` Not for Design In. The frozen design identity remains explicit; this record does not recommend it for a new procurement.
+- Alternative type candidate: Nexperia `NX6008NBKW`, currently listed in production in SOT323. No exact ordering suffix or pin-compatible substitution is asserted here. Its pin map, 3.3 V gate behavior, on resistance, coil current, thermal margin, switching timing, and ordering identity must be qualified before substitution.
+- Why it matters: Relay-driver pinout, voltage/current ratings, gate-drive margin, switching, lifecycle and package.
 
 ### NEXPERIA_BZT52: BZT52H series data sheet
 
@@ -164,21 +167,22 @@ Use the official product page when a direct link fails. Dynamic product pages of
 ### SIGLENT_DATASHEET: SDG1000X data sheet
 
 - Role: source specifications
-- Exact part: `SDG1032X`
-- [Official product/article page](https://siglentna.com/SDG1000X/)
-- [Fallback or asset page](https://www.siglent.com/my/products-overview/sdg1000x/)
+- Exact instrument assumption: existing-lab `SDG1032X`; ownership and current regional availability are not asserted; this is not a new-procurement recommendation
+- [Official product/article page](https://www.siglent.com/int/products-overview/sdg1000x/)
 - Access mode: `manual_product_page`
+- Current authoritative listing: `EN01I`, 2025-03-18.
 - Legacy expected SHA-256: `ca889ea73c85de7aef40d1faf2e85212ea6ed1d16435ae17c279a858a1d99d3a`
 - Legacy expected bytes: `2572702`
+- Lifecycle alert: SIGLENT North America marks `SDG1032X` obsolete and points to `SDG1032X Plus`, while SIGLENT's global SDG1000X page still lists the original model. Treat lifecycle and availability as region-dependent. The Plus model is not an automatic substitution and requires separate phase/queryback qualification.
 - Why it matters: Amplitude, phase, output-impedance, channel-coherence, and accuracy limits.
 
 ### SIGLENT_MANUAL: SDG1000X user manual
 
 - Role: source operation and phase setup
-- Exact part: `SDG1032X`
-- [Direct download](https://int.siglent.com/upload_file/user/SDG1000X_UserManual_UM0201X-E02D.pdf)
-- [Official product/article page](https://siglentna.com/SDG1000X/)
-- Access mode: `direct_pdf`
+- Exact instrument assumption: existing-lab `SDG1032X`; ownership is not asserted
+- [Official product/article page](https://www.siglent.com/int/products-overview/sdg1000x/)
+- Access mode: `manual_product_page`
+- Current authoritative listing: `EN01J`, 2025-09-22.
 - Legacy expected SHA-256: `11c325f98fea514659be9790a001e90e445119584e31fd8d796b33e92d6e4bed`
 - Legacy expected bytes: `2930139`
 - Why it matters: Source topology, High-Z display mode versus physical 50-ohm output, dual-channel phase setup, and continuous-output operation.
@@ -186,10 +190,10 @@ Use the official product page when a direct link fails. Dynamic product pages of
 ### SIGLENT_PROGRAMMING: SDG programming guide
 
 - Role: source remote-control/queryback
-- Exact part: `SDG1032X / SDG1000X family`
-- [Direct download](https://int.siglent.com/upload_file/user/SDG_ProgrammingGuide_PG02-E04D.pdf)
-- [Official product/article page](https://siglentna.com/SDG1000X/)
-- Access mode: `direct_pdf`
+- Exact instrument family assumption: existing-lab `SDG1032X / SDG1000X`; ownership is not asserted
+- [Official product/article page](https://www.siglent.com/int/products-overview/sdg1000x/)
+- Access mode: `manual_product_page`
+- Current authoritative listing: `E05C`, 2026-06-30.
 - Legacy expected SHA-256: `a27c841ef10ebeba8c437be88933079b358d80d55d20b0d3bbf032cbc8b7125d`
 - Legacy expected bytes: `4240871`
 - Why it matters: Defines command/queryback behavior needed to prove frequency, amplitude, phase, load mode, and output state.
@@ -203,15 +207,16 @@ Use the official product page when a direct link fails. Dynamic product pages of
 - Access mode: `direct_pdf`
 - Legacy expected SHA-256: `5bba0c74b950ac27e447bb25df70973ce19ff8a7a3e4d784378e25a9407d8925`
 - Legacy expected bytes: `1060774`
+- Current product-page listing: data sheet dated 2026-05-19. The official direct URL currently yields bytes matching the retained legacy hash, so no distinct newer byte revision is asserted.
 - Why it matters: Confirms simultaneous channel architecture, resolution, sample rates, and input characteristics.
 
-### SPECTRUM_MANUAL: DN.59x hardware manual
+### SPECTRUM_MANUAL: DNx.59x hardware manual
 
 - Role: digitizer setup, input, clock, and SDK custody
 - Exact part: `DN2.592-04`
-- [Direct download](https://spectrum-instrumentation.com/dl/hardware_manual_dn2_59x_english.pdf)
 - [Official product/article page](https://spectrum-instrumentation.com/products/details/DN2592-04.php)
-- Access mode: `direct_pdf`
+- Access mode: `manual_product_page`
+- Current authoritative listing: manual dated 2026-05-19; Windows/Linux driver version `7.010` dated 2026-05-19.
 - Legacy expected SHA-256: `0cef0929de585c056ecc7605c570ba05c77b0f4fc6c414e393a2c1e578f6ca05`
 - Legacy expected bytes: `13171754`
 - Why it matters: Input loading, clocking, acquisition mode, channel simultaneity, native data, and SDK/export behavior.
@@ -240,10 +245,11 @@ Use the official product page when a direct link fails. Dynamic product pages of
 ### VISHAY_TNPW: TNPW e3 thin-film resistor data sheet
 
 - Role: precision low-value and timing resistors
-- Exact part: `Multiple exact TNPW0805 values`
-- [Direct download](https://www.vishay.com/docs/31006/tnpw_e3.pdf)
+- Exact part: `Multiple exact TNPW0805 e3 values`
+- [Direct download](https://www.vishay.com/docs/28758/tnpw_e3.pdf)
 - [Official product/article page](https://www.vishay.com/en/product/28758/)
 - Access mode: `direct_pdf`
+- Current identity: document `28758`, revision 10-Apr-2026. Document `31006` is the distinct lead-bearing TNPW family and is not the authority for the P0 e3 parts.
 - Legacy expected SHA-256: `42309eb5c95365801d46cbfdc020fb9171d756f5e9015b35a191b35d043890f9`
 - Legacy expected bytes: `153883`
 - Why it matters: Tolerance, temperature coefficient, voltage limits, package, and exact value availability.
@@ -271,33 +277,36 @@ Use the official product page when a direct link fails. Dynamic product pages of
 ### QTF_PASSIVE_ELECTRICAL_DAMPING_2021: Passive Electrical Damping of a Quartz Tuning Fork
 
 - Role: BVD loading and damping
-- [Direct download](https://pmc.ncbi.nlm.nih.gov/articles/PMC8347380/pdf/sensors-21-05056.pdf)
-- [Official product/article page](https://pmc.ncbi.nlm.nih.gov/articles/PMC8347380/)
-- Access mode: `direct_pdf`
+- [Official open-access article page](https://pmc.ncbi.nlm.nih.gov/articles/PMC8347380/)
+- Access mode: `manual_product_page`
+- Download note: the attempted PMC filename endpoint currently resolves to HTML rather than a PDF in automated retrieval. Save the PDF through the article page and hash the resulting bytes.
 - Why it matters: Explains the BVD motional RLC plus parallel electrode capacitance and how electrical loading alters QTF dynamics.
 
 ### QTF_RESONANCE_TRACKING_2019: Quartz Tuning Fork Resonance Tracking and application
 
 - Role: time-domain QTF resonance and ringdown methods
-- [Direct download](https://pmc.ncbi.nlm.nih.gov/articles/PMC6960650/pdf/sensors-20-00206.pdf)
-- [Official product/article page](https://pmc.ncbi.nlm.nih.gov/articles/PMC6960650/)
-- Access mode: `direct_pdf`
+- Article identity: *Sensors* 2019, 19, 5565
+- [Official open-access article page](https://pmc.ncbi.nlm.nih.gov/articles/PMC6960650/)
+- Access mode: `manual_product_page`
+- Download note: the attempted PMC filename endpoint currently resolves to HTML rather than a PDF in automated retrieval. Save the PDF through the article page and hash the resulting bytes.
 - Why it matters: Directly relevant 32.768 kHz quartz tuning-fork characterization, transient/ringdown and BVD fitting.
 
-### QTF_VOLTAGE_INDUCED_SHIFT_2014: Voltage Induced Frequency Shift on a Quartz Tuning Fork
+### QTF_VOLTAGE_INDUCED_SHIFT_2014: The Coefficient of the Voltage Induced Frequency Shift Measurement on a Quartz Tuning Fork
 
 - Role: drive/bias perturbation of 32.768 kHz QTF
-- [Direct download](https://pmc.ncbi.nlm.nih.gov/articles/PMC4279570/pdf/sensors-14-24529.pdf)
-- [Official product/article page](https://pmc.ncbi.nlm.nih.gov/articles/PMC4279570/)
-- Access mode: `direct_pdf`
-- Why it matters: Shows that applied voltage can perturb the eigenfrequency of a 32.768 kHz fork.
+- Article identity: *Sensors* 2014, 14, 21941–21949
+- [Official open-access article page](https://pmc.ncbi.nlm.nih.gov/articles/PMC4279570/)
+- Access mode: `manual_product_page`
+- Download note: the attempted PMC filename endpoint currently resolves to HTML rather than a PDF in automated retrieval. Save the PDF through the article page and hash the resulting bytes.
+- Why it matters: Shows a small parabolic frequency shift under large applied DC bias, measured from -130 V to +130 V. It establishes a possible large-bias perturbation mechanism, not a significant shift under P0's low-voltage AC preparation.
 
 ### QTF_VOLTAGE_MODE_READOUT_2023: Signal-to-Noise Ratio Analysis for Voltage-Mode Read-Out of Quartz Tuning Forks
 
 - Role: QTF BVD/readout loading and SPICE model
-- [Direct download](https://pmc.ncbi.nlm.nih.gov/articles/PMC10051664/pdf/sensors-23-03005.pdf)
-- [Official product/article page](https://pmc.ncbi.nlm.nih.gov/articles/PMC10051664/)
-- Access mode: `direct_pdf`
+- Article identity: *Micromachines* 2023, 14, 619
+- [Official open-access article page](https://pmc.ncbi.nlm.nih.gov/articles/PMC10051664/)
+- Access mode: `manual_product_page`
+- Download note: the attempted PMC filename endpoint currently resolves to HTML rather than a PDF in automated retrieval. Save the PDF through the article page and hash the resulting bytes.
 - Why it matters: Uses a 32,768 Hz BVD model and SPICE to show how input capacitance and load resistance shift readout response and SNR.
 
 ### SILICON_PHONONIC_SLAB_2011: Simultaneous high-Q confinement and selective direct piezoelectric excitation in a silicon phononic crystal slab resonator
@@ -321,7 +330,7 @@ Use the official product page when a direct link fails. Dynamic product pages of
 - [Direct download](https://arxiv.org/pdf/2606.00681)
 - [Official product/article page](https://arxiv.org/abs/2606.00681)
 - Access mode: `direct_pdf`
-- Why it matters: Recent first-principles electroelastic treatment of electrically observed QTF modes.
+- Why it matters: Recent arXiv preprint proposing a first-principles electroelastic treatment of electrically observed QTF modes; peer review and independent replication are not asserted.
 
 ## Official simulation resources
 
@@ -331,7 +340,7 @@ Use the official product page when a direct link fails. Dynamic product pages of
 - Exact part: `ADG1419BRMZ`
 - [Official product/article page](https://www.analog.com/en/products/adg1419.html)
 - Access mode: `manual_product_page`
-- Why it matters: Needed to move from direct synthetic waveform construction toward circuit-level source-off simulation.
+- Why it matters: Needed to move from direct synthetic waveform construction toward circuit-level source-off simulation. Pin the exact model and simulator versions and validate DC truth table, on resistance, leakage, off isolation and switching transients against the data sheet before using model output as evidence. A recent Analog Devices support thread reports a reproducible LTspice 26.0.1 model issue; that report is version-specific and does not establish that every model or simulator version is defective.
 
 ### OPA810_SIMULATION_MODELS: OPA810 PSpice and TINA-TI models
 

@@ -1,41 +1,41 @@
 {
   "authority": "AUTHORIZE P0 BUILD-READINESS ONLY",
-  "candidate_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+  "candidate_root": "97441363687e8d8de2daeffb1fbad157cf94f01b30e1feeb05bdeff718aa33b4",
   "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
   "reviews": [
     {
-      "agent_id": "/root/p0sp_circuit_carrier",
+      "agent_id": "p0r-root-circuit-20260719",
       "findings": [],
       "independent": true,
       "review_id": "AUD-P0SP-01-CIRCUIT-AND-CARRIER",
-      "reviewed_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+      "reviewed_root": "97441363687e8d8de2daeffb1fbad157cf94f01b30e1feeb05bdeff718aa33b4",
       "role": "circuit_and_carrier",
       "verdict": "PASS"
     },
     {
-      "agent_id": "/root/p0sp_path_sourceoff",
+      "agent_id": "p0r-root-custody-20260719",
       "findings": [],
       "independent": true,
       "review_id": "AUD-P0SP-02-PATH-AND-SOURCE-OFF",
-      "reviewed_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+      "reviewed_root": "97441363687e8d8de2daeffb1fbad157cf94f01b30e1feeb05bdeff718aa33b4",
       "role": "path_and_source_off",
       "verdict": "PASS"
     },
     {
-      "agent_id": "/root/p0sp_analyzer_controls",
+      "agent_id": "codex-p0r-root-analyzer-20260719",
       "findings": [],
       "independent": true,
       "review_id": "AUD-P0SP-03-ANALYZER-AND-CONTROLS",
-      "reviewed_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+      "reviewed_root": "97441363687e8d8de2daeffb1fbad157cf94f01b30e1feeb05bdeff718aa33b4",
       "role": "analyzer_and_controls",
       "verdict": "PASS"
     },
     {
-      "agent_id": "/root/p0sp_claims_authority",
+      "agent_id": "/root/p0r_root_claims",
       "findings": [],
       "independent": true,
       "review_id": "AUD-P0SP-04-CLAIMS-AUTHORITY",
-      "reviewed_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+      "reviewed_root": "97441363687e8d8de2daeffb1fbad157cf94f01b30e1feeb05bdeff718aa33b4",
       "role": "claims_authority",
       "verdict": "PASS"
     }

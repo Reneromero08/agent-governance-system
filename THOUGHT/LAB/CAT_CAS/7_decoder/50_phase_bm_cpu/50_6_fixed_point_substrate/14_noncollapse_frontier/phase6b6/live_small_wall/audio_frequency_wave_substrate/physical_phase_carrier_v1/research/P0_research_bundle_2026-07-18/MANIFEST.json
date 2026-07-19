@@ -105,13 +105,13 @@
     },
     {
       "collection": "core_component_document",
-      "direct_download_url": "https://assets.nexperia.com/documents/data-sheet/1N4148W.pdf",
-      "download_mode": "direct_pdf",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
       "id": "NEXPERIA_1N4148",
       "legacy_expected_bytes": 16777,
       "legacy_expected_sha256": "13f368ed2f370fe0a613fe1993183cce06717202bcd6a96b912bde017f5cea0e",
       "local_filename": "NEXPERIA_1N4148W.pdf",
-      "official_product_page": "https://www.nexperia.com/product/1N4148W"
+      "official_product_page": "https://www.nexperia.com/products/diodes/switching-diodes"
     },
     {
       "collection": "core_component_document",
@@ -170,28 +170,28 @@
       "id": "SIGLENT_DATASHEET",
       "legacy_expected_bytes": 2572702,
       "legacy_expected_sha256": "ca889ea73c85de7aef40d1faf2e85212ea6ed1d16435ae17c279a858a1d99d3a",
-      "local_filename": "SIGLENT_SDG1000X_Datasheet.pdf",
-      "official_product_page": "https://siglentna.com/SDG1000X/"
+      "local_filename": "SIGLENT_SDG1000X_Datasheet_EN01I_2025-03-18.pdf",
+      "official_product_page": "https://www.siglent.com/int/products-overview/sdg1000x/"
     },
     {
       "collection": "core_component_document",
-      "direct_download_url": "https://int.siglent.com/upload_file/user/SDG1000X_UserManual_UM0201X-E02D.pdf",
-      "download_mode": "direct_pdf",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
       "id": "SIGLENT_MANUAL",
       "legacy_expected_bytes": 2930139,
       "legacy_expected_sha256": "11c325f98fea514659be9790a001e90e445119584e31fd8d796b33e92d6e4bed",
-      "local_filename": "SIGLENT_SDG1000X_UserManual_UM0201X-E02D.pdf",
-      "official_product_page": "https://siglentna.com/SDG1000X/"
+      "local_filename": "SIGLENT_SDG1000X_UserManual_EN01J_2025-09-22.pdf",
+      "official_product_page": "https://www.siglent.com/int/products-overview/sdg1000x/"
     },
     {
       "collection": "core_component_document",
-      "direct_download_url": "https://int.siglent.com/upload_file/user/SDG_ProgrammingGuide_PG02-E04D.pdf",
-      "download_mode": "direct_pdf",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
       "id": "SIGLENT_PROGRAMMING",
       "legacy_expected_bytes": 4240871,
       "legacy_expected_sha256": "a27c841ef10ebeba8c437be88933079b358d80d55d20b0d3bbf032cbc8b7125d",
-      "local_filename": "SIGLENT_SDG_ProgrammingGuide_PG02-E04D.pdf",
-      "official_product_page": "https://siglentna.com/SDG1000X/"
+      "local_filename": "SIGLENT_SDG_ProgrammingGuide_E05C_2026-06-30.pdf",
+      "official_product_page": "https://www.siglent.com/int/products-overview/sdg1000x/"
     },
     {
       "collection": "core_component_document",
@@ -205,12 +205,12 @@
     },
     {
       "collection": "core_component_document",
-      "direct_download_url": "https://spectrum-instrumentation.com/dl/hardware_manual_dn2_59x_english.pdf",
-      "download_mode": "direct_pdf",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
       "id": "SPECTRUM_MANUAL",
       "legacy_expected_bytes": 13171754,
       "legacy_expected_sha256": "0cef0929de585c056ecc7605c570ba05c77b0f4fc6c414e393a2c1e578f6ca05",
-      "local_filename": "SPECTRUM_DN_59x_Hardware_Manual_English.pdf",
+      "local_filename": "SPECTRUM_DNx_59x_Hardware_Manual_2026-05-19.pdf",
       "official_product_page": "https://spectrum-instrumentation.com/products/details/DN2592-04.php"
     },
     {
@@ -235,12 +235,12 @@
     },
     {
       "collection": "core_component_document",
-      "direct_download_url": "https://www.vishay.com/docs/31006/tnpw_e3.pdf",
+      "direct_download_url": "https://www.vishay.com/docs/28758/tnpw_e3.pdf",
       "download_mode": "direct_pdf",
       "id": "VISHAY_TNPW",
       "legacy_expected_bytes": 153883,
       "legacy_expected_sha256": "42309eb5c95365801d46cbfdc020fb9171d756f5e9015b35a191b35d043890f9",
-      "local_filename": "VISHAY_TNPW_E3_31006.pdf",
+      "local_filename": "VISHAY_TNPW_E3_28758_2026-04-10.pdf",
       "official_product_page": "https://www.vishay.com/en/product/28758/"
     },
     {
@@ -265,8 +265,8 @@
     },
     {
       "collection": "scientific_background",
-      "direct_download_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8347380/pdf/sensors-21-05056.pdf",
-      "download_mode": "direct_pdf",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
       "id": "QTF_PASSIVE_ELECTRICAL_DAMPING_2021",
       "legacy_expected_bytes": null,
       "legacy_expected_sha256": null,
@@ -275,8 +275,8 @@
     },
     {
       "collection": "scientific_background",
-      "direct_download_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6960650/pdf/sensors-20-00206.pdf",
-      "download_mode": "direct_pdf",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
       "id": "QTF_RESONANCE_TRACKING_2019",
       "legacy_expected_bytes": null,
       "legacy_expected_sha256": null,
@@ -285,8 +285,8 @@
     },
     {
       "collection": "scientific_background",
-      "direct_download_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4279570/pdf/sensors-14-24529.pdf",
-      "download_mode": "direct_pdf",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
       "id": "QTF_VOLTAGE_INDUCED_SHIFT_2014",
       "legacy_expected_bytes": null,
       "legacy_expected_sha256": null,
@@ -295,8 +295,8 @@
     },
     {
       "collection": "scientific_background",
-      "direct_download_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10051664/pdf/sensors-23-03005.pdf",
-      "download_mode": "direct_pdf",
+      "direct_download_url": null,
+      "download_mode": "manual_product_page",
       "id": "QTF_VOLTAGE_MODE_READOUT_2023",
       "legacy_expected_bytes": null,
       "legacy_expected_sha256": null,

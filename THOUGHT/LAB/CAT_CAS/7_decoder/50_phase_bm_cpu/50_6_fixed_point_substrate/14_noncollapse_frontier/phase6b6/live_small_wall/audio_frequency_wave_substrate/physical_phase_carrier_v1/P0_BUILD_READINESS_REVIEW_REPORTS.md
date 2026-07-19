@@ -1,57 +1,59 @@
-# P0 signal-path witness final independent review reports
+# P0 corrected-root final independent review reports
 
 Authority: `AUTHORIZE P0 BUILD-READINESS ONLY`
 
 Claim ceiling: `NON_EXECUTING_P0_BUILD_READINESS_ONLY`
 
-Reviewed candidate root: `844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e`
+Reviewed candidate root: `97441363687e8d8de2daeffb1fbad157cf94f01b30e1feeb05bdeff718aa33b4`
 
-These four focused reviews qualify only the non-executing P0 build-readiness
-repair. They report no physical observation and grant no procurement, build,
-connection, power, acquisition, playback, recording, or execution authority.
+These four fresh, role-separated reviews inspected the corrected candidate bytes
+read-only. They do not reuse or mechanically rebind the obsolete-root reviews.
+They qualify only the non-executing P0 build-readiness packet and report no
+physical observation or authority for procurement, assembly, connection, power,
+acquisition, playback, recording, or execution.
 
 ## AUD-P0SP-01-CIRCUIT-AND-CARRIER
 
-- agent: `/root/p0sp_circuit_carrier`
+- agent: `p0r-root-circuit-20260719`
 - verdict: PASS
 - findings: none
-- closure: the byte-identical `131072`-corner circuit model, exact 1 Mohm / 0.100
-  Vpp injection, 100 kohm source-side shunt, carrier-loading envelope, v4
-  ordering proof, 54 raw adversaries, 80 targeted mutations, and 40,151 root
-  mutations are mutually consistent under the non-executing claim ceiling.
+- closure: all locally captured research sources match their declared bytes and
+  hashes; BOM, netlist, component registry, corrected Vishay TNPW source identity,
+  lifecycle limitations, and regenerated receipts consistently bind this root.
+  The circuit, carrier, analyzer, netlist, fabrication, and signal-path evidence
+  remain byte-identical to the established witness inputs.
 
 ## AUD-P0SP-02-PATH-AND-SOURCE-OFF
 
-- agent: `/root/p0sp_path_sourceoff`
+- agent: `p0r-root-custody-20260719`
 - verdict: PASS
 - findings: none
-- closure: five distinct nonlinear-control hashes are enforced; correctly
-  rebound control replay rejects; all scan/acquisition timestamps require exact
-  `YYYY-MM-DDTHH:MM:SS.ffffffZ`, parsed comparison, and canonical round-trip;
-  malformed, alternate-offset, truncated-precision, lexically deceptive, and
-  post-acquisition adversaries reject. Actual-path evaluation remains pre-K3
-  and supports only at least one interrupted series pole.
+- closure: all 35 research custody records cross-bind and deterministic temporary
+  regeneration reproduced custody and design outputs byte-for-byte. The C2
+  witness still evaluates the actual K1/K2 path before K3 guard acceptance and
+  proves only at least one series interruption, never an individual pole or both.
 
 ## AUD-P0SP-03-ANALYZER-AND-CONTROLS
 
-- agent: `/root/p0sp_analyzer_controls`
+- agent: `codex-p0r-root-analyzer-20260719`
 - verdict: PASS
 - findings: none
-- closure: 55 preserved fixtures, all 54 actual-bundle raw adversaries, proof
-  v4, deterministic model reproduction, 80/80 targeted mutation rejection,
-  and 40,151/40,151 root mutation rejection reproduce at the exact root with
-  every physical-claim authorization field false.
+- closure: pre-review independently reproduced the exact root; analyzer,
+  fixtures, schemas, circuit model, ordering proof, netlist, and source-off plans
+  are byte-identical to HEAD. The regenerated root receipt rejects 40,181 of
+  40,181 mutations and the signal-path receipt rejects all 80 targeted mutations.
 
 ## AUD-P0SP-04-CLAIMS-AUTHORITY
 
-- agent: `/root/p0sp_claims_authority`
+- agent: `/root/p0r_root_claims`
 - verdict: PASS
 - findings: none
-- closure: all 17 normalized packet findings are closed, zero material findings
-  remain, the path token means at least one series interruption only, no pole is
-  identified, no physical observation is promoted, and the next boundary
-  remains `USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD`.
+- closure: corrected research claims distinguish current bytes, historical
+  identities, unresolved custody, lifecycle warnings, and unqualified
+  replacements. The claim ceiling remains non-executing, all physical-contact
+  counters remain zero, and the next boundary remains
+  `USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD`.
 
-All reviewers attested to zero file mutation, network access, hardware or target
-contact, audio operation, instrument command, vendor contact, and procurement
-action during their reviews.
+All reviewers returned PASS with empty findings and changed no candidate file.
+The review declarations themselves do not establish physical resonance,
+waveform computation, persistence, optimization advantage, or any Wall claim.

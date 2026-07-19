@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+"""Deterministic offline checks for the prospective P0 resonance/load law."""
+
+from __future__ import annotations
+
+import ast
+import math
+from pathlib import Path
+
+import p0_scientific_analyzer as analyzer
+
+from p0_resonance_load_law import (
+    ACCEPT_MAX_HZ,
+    ACCEPT_MIN_HZ,
+    MAX_Q,
+    MIN_Q,
+    MIN_PREPARATION_SECONDS,
+    prospective_sanity_document,
+)
+
+
+ROOT = Path(__file__).resolve().parent
+ANALYZER = ROOT / "p0_scientific_analyzer.py"
+OPERATIONAL_FUNCTIONS = {
+    "validate_metadata",
+    "topology_scan_metrics",
+    "nonlinear_control_ratio",
+    "signal_path_tone_fit",
+    "signal_path_transfer",
+    "drive_fit",
+    "tone_fit",
+    "joint_drive_reference_fit",
+    "project",
+    "arm_metrics",
+    "relation_metrics",
+}
+
+
+def hard_coded_frequency_regression() -> None:
+    tree = ast.parse(ANALYZER.read_text(encoding="utf-8"), filename=str(ANALYZER))
+    offenders: list[str] = []
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name in OPERATIONAL_FUNCTIONS:
+            for child in ast.walk(node):
+                if isinstance(child, ast.Name) and child.id in {"SYNTHETIC_F_CARRIER_HZ", "SYNTHETIC_F_WITNESS_HZ"}:
+                    offenders.append(f"{node.name}:{child.lineno}:{child.id}")
+                if isinstance(child, ast.Constant) and child.value in {32768, 32768.0, 65536, 65536.0}:
+                    offenders.append(f"{node.name}:{child.lineno}:{child.value}")
+    if offenders:
+        raise AssertionError("operational hard-coded frequency: " + ", ".join(offenders))
+
+
+def sanity_model_checks() -> None:
+    document = prospective_sanity_document()
+    assert document["authority"] == "PROSPECTIVE_MODEL_ONLY__NO_PHYSICAL_MEASUREMENT"
+    assert document["scope"]["sweep_name"] == "complete binary-corner sweep"
+    assert document["scope"]["continuous_uncertainty_envelope_claimed"] is False
+    assert document["preparation_law"]["minimum_seconds"] == MIN_PREPARATION_SECONDS
+    assert document["selected_load_topology"]["series_limiter_ohm"] == 100_000.0
+    assert document["selected_load_topology"]["drive_shunt_ohm"] == 100_000.0
+    envelope = document["predicted_envelope"]
+    assert ACCEPT_MIN_HZ <= envelope["series_resonance_hz"][0] <= envelope["series_resonance_hz"][1] <= ACCEPT_MAX_HZ
+    assert MIN_Q <= envelope["q_factor"][0] <= envelope["q_factor"][1] <= MAX_Q
+    assert all(row["loaded_terminal_vpp_at_0p100_vpp"] < 0.100 for row in document["prospective_bvd_binary_corners"])
+    assert all(row["ring_up_fraction_after_3s"] > 0.998 for row in document["prospective_bvd_binary_corners"])
+
+
+def raw_calibration_recomputation_checks() -> None:
+    f_carrier_hz = 32_800.0
+    decay_seconds = 0.1
+    q_factor = math.pi * f_carrier_hz * decay_seconds
+    data = analyzer.resonance_calibration_raw_bytes("arm_0", f_carrier_hz, q_factor)
+    metrics = analyzer.parse_resonance_calibration_raw(data, "arm_0", f_carrier_hz, 0.025, q_factor, decay_seconds)
+    assert metrics["response_ratio"] == 0.019
+    assert metrics["required_separation_hz"] >= 20.0
+    assert math.isclose(metrics["fitted_q_factor"], q_factor, rel_tol=1e-9)
+    assert math.isclose(metrics["fitted_decay_seconds"], decay_seconds, rel_tol=1e-9)
+    try:
+        analyzer.parse_resonance_calibration_raw(b"not calibration data\n", "arm_0", f_carrier_hz, 0.025, q_factor, decay_seconds)
+    except analyzer.Reject as exc:
+        assert exc.code == "RESONANCE_CALIBRATION_RAW"
+    else:
+        raise AssertionError("self-consistently rebound invalid calibration bytes survived")
+    try:
+        analyzer.parse_resonance_calibration_raw(data, "arm_0", f_carrier_hz, 0.025, 1.01 * q_factor, decay_seconds)
+    except analyzer.Reject as exc:
+        assert exc.code == "RESONANCE_CALIBRATION_RAW"
+    else:
+        raise AssertionError("artifact Q substituted for raw fitted Q")
+
+
+def main() -> int:
+    hard_coded_frequency_regression()
+    sanity_model_checks()
+    raw_calibration_recomputation_checks()
+    print("P0_RESONANCE_LOAD_LAW_TEST_PASS")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
