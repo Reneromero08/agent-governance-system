@@ -1,0 +1,709 @@
+{
+  "approved_sensor_identity": {
+    "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "device_driver": "k10temp",
+    "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+    "device_subsystem": "pci",
+    "hwmon_name": "k10temp",
+    "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+    "input_st_dev": 22,
+    "input_st_ino": 30803,
+    "input_st_mode": 33060,
+    "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+    "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+    "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+    "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+    "resolved_subsystem_path": "/sys/bus/pci",
+    "sensor_input": "temp1_input",
+    "sensor_label_present": false,
+    "sensor_label_value": null,
+    "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+    "sensor_semantic_role": "Tctl"
+  },
+  "authority_receipt_file_sha256": "f11b996b8843a5636d769c5d0573c0dc771fe01af0c4178e55b444df6e724c57",
+  "authority_receipt_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_AUTHORITY.json",
+  "authority_receipt_sealed_before_cleanup": true,
+  "authority_receipt_sha256": "72ab7571611259b1844aacb808ab39b8549369b1e3e1baa23b16b33d2e5a0a0f",
+  "candidate_scan_count": 1,
+  "challenge_receipt_canonical_sha256": "44d08566935c67099b7261f83d7f087c1db36f8fb93e316d74f1198e1436fa04",
+  "challenge_receipt_file_sha256": "bbbdd436ed243dc396ec6f60b55fe549bface85ed3196573dcd25a48c379c9e7",
+  "challenge_receipt_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE.json",
+  "cleanup": {
+    "absence_returncode": 0,
+    "absence_verified": true,
+    "attempted": true,
+    "owner_marker": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/.family10h_temperature_discovery_owner",
+    "passed": true,
+    "preflight": {
+      "passed": true,
+      "raw_stdout_sha256": "55bc41e8f85d452ebbc5f9a6aa9df20184f99683b655c8bf659972c6b7c9ada4",
+      "remote_base_preexisting": false,
+      "root_created": true
+    },
+    "remote_base_preexisting": false,
+    "returncode": 0
+  },
+  "commands": [
+    [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; base_preexisting=0; if test -e /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery; then base_preexisting=1; fi; test ! -e /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab; install -d -m 0700 /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery; mkdir -m 0700 /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab; printf '%s\\n' f11c13d72d43f3ab10f4886f5a23bef11567b8d0a138f63be6e3d0840763be33 > /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/.family10h_temperature_discovery_owner; trap 'if test -f /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/.family10h_temperature_discovery_owner && grep -qx f11c13d72d43f3ab10f4886f5a23bef11567b8d0a138f63be6e3d0840763be33 /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/.family10h_temperature_discovery_owner; then rm -rf -- /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab; fi' HUP INT TERM EXIT; install -d -m 0700 /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source; test \"$(cat /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/.family10h_temperature_discovery_owner)\" = f11c13d72d43f3ab10f4886f5a23bef11567b8d0a138f63be6e3d0840763be33; trap - HUP INT TERM EXIT; printf 'FAMILY10H_DISCOVERY_PREFLIGHT base_preexisting=%s root_created=1\\n' \"$base_preexisting\""
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_CONTRACT.md",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_CONTRACT.md"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\family10h_carrier_tomography_public.py",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/family10h_carrier_tomography_public.py"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\family10h_carrier_tomography_target.py",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/family10h_carrier_tomography_target.py"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\family10h_carrier_tomography_runtime.c",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/family10h_carrier_tomography_runtime.c"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\family10h_carrier_tomography_runtime.h",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/family10h_carrier_tomography_runtime.h"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\run_family10h_carrier_tomography_v1.py",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/run_family10h_carrier_tomography_v1.py"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\SUBAGENT_FINDINGS_NORMALIZED.json",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/SUBAGENT_FINDINGS_NORMALIZED.json"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\family10h_carrier_tomography_runtime",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/family10h_carrier_tomography_runtime"
+    ],
+    [
+      "scp",
+      "-q",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\controller_challenge.json",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/controller_challenge.json"
+    ],
+    [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "root@192.168.137.100",
+      "cd /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source && python3 family10h_carrier_tomography_target.py --discover-temperature-sensor-authority --source-root /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source --controller-challenge /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/controller_challenge.json --controller-nonce <controller_nonce> --authorized-commit 52040b0e3eecd4dd50370bcd518ef48dba6b4c53 --receipt-path /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json"
+    ],
+    [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "root@192.168.137.100",
+      "sha256sum /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json | awk '{print $1}'"
+    ],
+    [
+      "scp",
+      "-q",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json",
+      "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json"
+    ],
+    [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "root@192.168.137.100",
+      "set -u; if test -f /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/.family10h_temperature_discovery_owner && grep -qx f11c13d72d43f3ab10f4886f5a23bef11567b8d0a138f63be6e3d0840763be33 /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/.family10h_temperature_discovery_owner; then rm -rf -- /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab; fi; rmdir -- /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery 2>/dev/null || true; true"
+    ],
+    [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "root@192.168.137.100",
+      "test ! -e /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab && test ! -e /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery"
+    ]
+  ],
+  "controller_challenge": {
+    "authority": "controller_issued_temperature_sensor_challenge",
+    "authorized_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+    "controller_nonce_sha256": "f11c13d72d43f3ab10f4886f5a23bef11567b8d0a138f63be6e3d0840763be33",
+    "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+    "schedule_canonical_sha256": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
+    "schedule_json_sha256": "9658ea725d69ae384c85c5664505e59497d1e3291376128ee2160824ee7e0648",
+    "schedule_tsv_sha256": "b788a89f66eeb1074f5a8a591f669933efaaaa2ccfd7ef9ebb3715104fc25690",
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_AUTHORITY_CHALLENGE_V1",
+    "science_package_id": "family10h_carrier_tomography_v1_0",
+    "source_authority_review": {
+      "findings_sha256": "7ccd02dcca1aabbf77735684ee3079722683470404f51c9ee0589a2e38b9a562",
+      "review_quorum_sha256": "36498ace6893aa8179e48f81c39858fd0ab689b001a8fb9254b79dd32c2765b7",
+      "review_report_sha256": "ea74e419854ef13ec139a34e78ebb00e97ed478f584e8ad15ef4f148222967fa",
+      "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "source_authority_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+      "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+      "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d"
+    },
+    "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+    "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+    "transaction_run_id": "family10h_carrier_tomography_v1_0",
+    "transport_scope": {
+      "remote_base_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery",
+      "remote_receipt_path": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json",
+      "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab",
+      "remote_source_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source",
+      "target_host": "root@192.168.137.100"
+    }
+  },
+  "controller_challenge_sha256": "5601fee537e3f446c496d1b91daf78a3d4ce7052ee85ce94ae3dcaf834e8ae1b",
+  "controller_nonce_sha256": "f11c13d72d43f3ab10f4886f5a23bef11567b8d0a138f63be6e3d0840763be33",
+  "discovery_transfer_plan": {
+    "actual_file_names": [
+      "CARRIER_TOMOGRAPHY_CONTRACT.md",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+      "family10h_carrier_tomography_public.py",
+      "family10h_carrier_tomography_target.py",
+      "family10h_carrier_tomography_runtime.c",
+      "family10h_carrier_tomography_runtime.h",
+      "run_family10h_carrier_tomography_v1.py",
+      "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+      "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+      "SUBAGENT_FINDINGS_NORMALIZED.json",
+      "family10h_carrier_tomography_runtime"
+    ],
+    "expected_file_names": [
+      "CARRIER_TOMOGRAPHY_CONTRACT.md",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+      "family10h_carrier_tomography_public.py",
+      "family10h_carrier_tomography_target.py",
+      "family10h_carrier_tomography_runtime.c",
+      "family10h_carrier_tomography_runtime.h",
+      "run_family10h_carrier_tomography_v1.py",
+      "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+      "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+      "SUBAGENT_FINDINGS_NORMALIZED.json",
+      "family10h_carrier_tomography_runtime"
+    ],
+    "extra_files": [],
+    "failures": [],
+    "file_count": 13,
+    "missing_files": [],
+    "passed": true,
+    "records": [
+      {
+        "authority_class": "source",
+        "byte_size": 11358,
+        "git_blob_id": "5bc45fdcc7614d65f8000ec3187d3c2eb4fa3266",
+        "local_git_blob_id": "5bc45fdcc7614d65f8000ec3187d3c2eb4fa3266",
+        "name": "CARRIER_TOMOGRAPHY_CONTRACT.md",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_CONTRACT.md",
+        "sha256": "e2ed0d3ef73766486983e15365d3ead38d3a9a963c3b0cad91b74d8150d24d22",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_CONTRACT.md"
+      },
+      {
+        "authority_class": "source",
+        "byte_size": 12489213,
+        "git_blob_id": "c8c959a09f050e90abfc90cc8f5e0505feffd3d5",
+        "local_git_blob_id": "c8c959a09f050e90abfc90cc8f5e0505feffd3d5",
+        "name": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+        "sha256": "9658ea725d69ae384c85c5664505e59497d1e3291376128ee2160824ee7e0648",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json"
+      },
+      {
+        "authority_class": "source",
+        "byte_size": 4327644,
+        "git_blob_id": "d36b0626d215596d18442a8712021fc506a000b1",
+        "local_git_blob_id": "d36b0626d215596d18442a8712021fc506a000b1",
+        "name": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+        "sha256": "b788a89f66eeb1074f5a8a591f669933efaaaa2ccfd7ef9ebb3715104fc25690",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv"
+      },
+      {
+        "authority_class": "source",
+        "byte_size": 355,
+        "git_blob_id": "0d39563561219c761f93df904b7e1cecb14c3ca1",
+        "local_git_blob_id": "0d39563561219c761f93df904b7e1cecb14c3ca1",
+        "name": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+        "sha256": "0eb44bbd0e0cd1f5a637fedc747acbd6f4069ad51aa52b73ad7aa86e17f94880",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256"
+      },
+      {
+        "authority_class": "source",
+        "byte_size": 148569,
+        "git_blob_id": "5a60691c1ab47849131ed3106d29c71ecf3b80e0",
+        "local_git_blob_id": "5a60691c1ab47849131ed3106d29c71ecf3b80e0",
+        "name": "family10h_carrier_tomography_public.py",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/family10h_carrier_tomography_public.py",
+        "sha256": "c9a4ba581f4e1a45ab3396412be7587a5278c8ace97ddd00ee1ff2f5f88828c8",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\family10h_carrier_tomography_public.py"
+      },
+      {
+        "authority_class": "source",
+        "byte_size": 250445,
+        "git_blob_id": "69f0675dda7c627c3196233b3484e8a2b9b939c5",
+        "local_git_blob_id": "69f0675dda7c627c3196233b3484e8a2b9b939c5",
+        "name": "family10h_carrier_tomography_target.py",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/family10h_carrier_tomography_target.py",
+        "sha256": "12c1ced11a32f5599f514a667b8b4ea80c433f22aeb14feadfac41d7fa633e2f",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\family10h_carrier_tomography_target.py"
+      },
+      {
+        "authority_class": "source",
+        "byte_size": 25414,
+        "git_blob_id": "b561cb8fc19cab44308782a4b6d3febff996fa2b",
+        "local_git_blob_id": "b561cb8fc19cab44308782a4b6d3febff996fa2b",
+        "name": "family10h_carrier_tomography_runtime.c",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/family10h_carrier_tomography_runtime.c",
+        "sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\family10h_carrier_tomography_runtime.c"
+      },
+      {
+        "authority_class": "source",
+        "byte_size": 1368,
+        "git_blob_id": "73254dcbe65cc856db458b60fca46f882f3e68be",
+        "local_git_blob_id": "73254dcbe65cc856db458b60fca46f882f3e68be",
+        "name": "family10h_carrier_tomography_runtime.h",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/family10h_carrier_tomography_runtime.h",
+        "sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\family10h_carrier_tomography_runtime.h"
+      },
+      {
+        "authority_class": "source",
+        "byte_size": 453074,
+        "git_blob_id": "a2ef111b6920ecb22444a6b2017187fc6b734065",
+        "local_git_blob_id": "a2ef111b6920ecb22444a6b2017187fc6b734065",
+        "name": "run_family10h_carrier_tomography_v1.py",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/run_family10h_carrier_tomography_v1.py",
+        "sha256": "82d9e37d380211a99b5b4ebeb424acd104852e873dfd83472eb6271ad64cfe4d",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\run_family10h_carrier_tomography_v1.py"
+      },
+      {
+        "authority_class": "generated authority",
+        "byte_size": 2733,
+        "git_blob_id": "30a3c82fda29823ee4b79b9b18c64c003cbda515",
+        "local_git_blob_id": "30a3c82fda29823ee4b79b9b18c64c003cbda515",
+        "name": "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+        "sha256": "b53891d2a0b9a8f590be6b9604d8d7f366e30abc4e103749e0f297588c49034b",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_SOURCE_HASHES.json"
+      },
+      {
+        "authority_class": "generated authority",
+        "byte_size": 733175,
+        "git_blob_id": "0935ce94500af8c933855c111496abedf7d826b5",
+        "local_git_blob_id": "0935ce94500af8c933855c111496abedf7d826b5",
+        "name": "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+        "sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz"
+      },
+      {
+        "authority_class": "generated authority",
+        "byte_size": 13605,
+        "git_blob_id": "961e19e6f4c6dbbdb8137d8c0db47be5a01db8be",
+        "local_git_blob_id": "961e19e6f4c6dbbdb8137d8c0db47be5a01db8be",
+        "name": "SUBAGENT_FINDINGS_NORMALIZED.json",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/SUBAGENT_FINDINGS_NORMALIZED.json",
+        "sha256": "609b7dfe8d80ef8c0af09d24d4f2546d8c471af6658703cfdb675df464705ff3",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\SUBAGENT_FINDINGS_NORMALIZED.json"
+      },
+      {
+        "authority_class": "runtime binary",
+        "byte_size": 22928,
+        "git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+        "local_git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+        "name": "family10h_carrier_tomography_runtime",
+        "remote_destination": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/family10h_carrier_tomography_runtime",
+        "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+        "source_path": "C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_temperature_discovery_qjumwkp3\\source_authority_snapshot\\family10h_carrier_tomography_runtime"
+      }
+    ],
+    "runtime_binary_authority": {
+      "compile_command_identity": {
+        "flags": [
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-O2"
+        ],
+        "inputs": [
+          "family10h_carrier_tomography_runtime.c"
+        ],
+        "language_standard": "c11",
+        "output": "family10h_carrier_tomography_runtime"
+      },
+      "compile_equivalence_law": "byte_exact_isolated_compile",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2"
+      ],
+      "compiler_identity": "gcc-compatible C compiler selected by controller find_c_compiler()",
+      "git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+      "path": "family10h_carrier_tomography_runtime",
+      "present": true,
+      "runtime_c_sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+      "runtime_h_sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+      "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
+      "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "size": 22928
+    },
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSFER_PLAN_V1",
+    "source_authority": {
+      "checked_files": 9,
+      "failures": [],
+      "passed": true,
+      "runtime_binary_authority": {
+        "compile_command_identity": {
+          "flags": [
+            "-std=c11",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2"
+          ],
+          "inputs": [
+            "family10h_carrier_tomography_runtime.c"
+          ],
+          "language_standard": "c11",
+          "output": "family10h_carrier_tomography_runtime"
+        },
+        "compile_equivalence_law": "byte_exact_isolated_compile",
+        "compiler_flags": [
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-O2"
+        ],
+        "compiler_identity": "gcc-compatible C compiler selected by controller find_c_compiler()",
+        "git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+        "path": "family10h_carrier_tomography_runtime",
+        "present": true,
+        "runtime_c_sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+        "runtime_h_sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
+        "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+        "size": 22928
+      }
+    },
+    "source_bundle_file_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+    "source_bundle_reconstruction_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+    "transfer_plan_sha256": "8330578ceeea45326aa620a3ce764d3a0ad0480b0886a9ba3e4fb6f944ad48a0"
+  },
+  "discovery_transport_sha256": "aa6f080883d6fc32f62133d720840b0f4081470e03d1f38a2e9c794c3e585a22",
+  "live_invocation_count": 0,
+  "passed": true,
+  "pmu_acquisition_count": 0,
+  "remote_base_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery",
+  "remote_receipt_path": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json",
+  "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab",
+  "remote_source_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source",
+  "retry_count": 0,
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT_V1",
+  "sensor_inventory_count": 1,
+  "source_authority_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+  "source_authority_review": {
+    "failures": [],
+    "findings_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\SOURCE_AUTHORITY_C6_REVIEW_NORMALIZED.json",
+    "findings_sha256": "7ccd02dcca1aabbf77735684ee3079722683470404f51c9ee0589a2e38b9a562",
+    "passed": true,
+    "review_quorum": {
+      "failures": [],
+      "material_blockers": [],
+      "missing_roles": [],
+      "passed": true,
+      "required_roles": {
+        "claim_boundary_adjudicator": "claim-boundary adjudicator",
+        "discovery_transport_custody_auditor": "discovery transport and custody auditor",
+        "physical_sensor_authority_auditor": "physical sensor-authority auditor",
+        "source_bundle_runtime_evidence_auditor": "source/bundle/runtime evidence auditor"
+      },
+      "roles": {
+        "claim_boundary_adjudicator": {
+          "agent_id": "019f77eb-293a-7ff2-bc04-536956c9ec14",
+          "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+          "body_canonical_sha256": "912590c1d812b945aeb006ab1d9e6b2107c181608a134b0a488b3dee75c587a9",
+          "body_file_sha256": "912590c1d812b945aeb006ab1d9e6b2107c181608a134b0a488b3dee75c587a9",
+          "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/claim_boundary_body.md",
+          "boundary_attestation": {
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true
+          },
+          "final_response": true,
+          "material_blocker_ids": [],
+          "model": "gpt-5.6-sol",
+          "passed": true,
+          "receipt_file_sha256": "6efa4328ccf231698587267b822493453e3ca446f6eb38ec8ff0c1d1e240c131",
+          "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/claim_boundary_receipt.json",
+          "review_receipt": {
+            "agent_id": "019f77eb-293a-7ff2-bc04-536956c9ec14",
+            "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+            "evidence_origin": "codex_subagent_detached_receipt",
+            "final_response": true,
+            "issuer": "codex_subagent_read_only_review",
+            "material_blocker_ids": [],
+            "model": "gpt-5.6-sol",
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true,
+            "receipt_kind": "detached_review_body_acknowledgment",
+            "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+            "review_body_sha256": "912590c1d812b945aeb006ab1d9e6b2107c181608a134b0a488b3dee75c587a9",
+            "role": "claim-boundary adjudicator",
+            "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+            "schema": "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V3",
+            "self_authored": false,
+            "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+            "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+            "thread_id": "019f77eb-293a-7ff2-bc04-536956c9ec14",
+            "verdict": "NO_MATERIAL_BLOCKER"
+          },
+          "role": "claim-boundary adjudicator",
+          "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+          "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+          "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+          "thread_id": "019f77eb-293a-7ff2-bc04-536956c9ec14",
+          "verdict": "NO_MATERIAL_BLOCKER"
+        },
+        "discovery_transport_custody_auditor": {
+          "agent_id": "019f77ea-fc0f-73e3-974f-a93cf7588652",
+          "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+          "body_canonical_sha256": "6622525d4ed9214b0444a0a5414fca6ed039b88b5029fc481b1b165379eecaa0",
+          "body_file_sha256": "6622525d4ed9214b0444a0a5414fca6ed039b88b5029fc481b1b165379eecaa0",
+          "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/discovery_transport_custody_body.md",
+          "boundary_attestation": {
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true
+          },
+          "final_response": true,
+          "material_blocker_ids": [],
+          "model": "gpt-5.6-sol",
+          "passed": true,
+          "receipt_file_sha256": "3113779b70aa653f7a9c1355ae8256178a0591c1c6e8d06a4f8bad8f007c6b8e",
+          "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/discovery_transport_custody_receipt.json",
+          "review_receipt": {
+            "agent_id": "019f77ea-fc0f-73e3-974f-a93cf7588652",
+            "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+            "evidence_origin": "codex_subagent_detached_receipt",
+            "final_response": true,
+            "issuer": "codex_subagent_read_only_review",
+            "material_blocker_ids": [],
+            "model": "gpt-5.6-sol",
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true,
+            "receipt_kind": "detached_review_body_acknowledgment",
+            "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+            "review_body_sha256": "6622525d4ed9214b0444a0a5414fca6ed039b88b5029fc481b1b165379eecaa0",
+            "role": "discovery transport and custody auditor",
+            "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+            "schema": "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V3",
+            "self_authored": false,
+            "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+            "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+            "thread_id": "019f77ea-fc0f-73e3-974f-a93cf7588652",
+            "verdict": "NO_MATERIAL_BLOCKER"
+          },
+          "role": "discovery transport and custody auditor",
+          "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+          "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+          "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+          "thread_id": "019f77ea-fc0f-73e3-974f-a93cf7588652",
+          "verdict": "NO_MATERIAL_BLOCKER"
+        },
+        "physical_sensor_authority_auditor": {
+          "agent_id": "019f77ea-e7b0-7dc0-a977-05de4932e6d5",
+          "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+          "body_canonical_sha256": "e83b249d51db7640936058cfef3bbdbe69571a05a9275ca704e542287384033c",
+          "body_file_sha256": "e83b249d51db7640936058cfef3bbdbe69571a05a9275ca704e542287384033c",
+          "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/physical_sensor_authority_body.md",
+          "boundary_attestation": {
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true
+          },
+          "final_response": true,
+          "material_blocker_ids": [],
+          "model": "gpt-5.6-sol",
+          "passed": true,
+          "receipt_file_sha256": "920df5a7aeb0ad795d7d5ad1ad58bde06e160924100930e8d6a68a01b952c1da",
+          "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/physical_sensor_authority_receipt.json",
+          "review_receipt": {
+            "agent_id": "019f77ea-e7b0-7dc0-a977-05de4932e6d5",
+            "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+            "evidence_origin": "codex_subagent_detached_receipt",
+            "final_response": true,
+            "issuer": "codex_subagent_read_only_review",
+            "material_blocker_ids": [],
+            "model": "gpt-5.6-sol",
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true,
+            "receipt_kind": "detached_review_body_acknowledgment",
+            "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+            "review_body_sha256": "e83b249d51db7640936058cfef3bbdbe69571a05a9275ca704e542287384033c",
+            "role": "physical sensor-authority auditor",
+            "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+            "schema": "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V3",
+            "self_authored": false,
+            "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+            "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+            "thread_id": "019f77ea-e7b0-7dc0-a977-05de4932e6d5",
+            "verdict": "NO_MATERIAL_BLOCKER"
+          },
+          "role": "physical sensor-authority auditor",
+          "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+          "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+          "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+          "thread_id": "019f77ea-e7b0-7dc0-a977-05de4932e6d5",
+          "verdict": "NO_MATERIAL_BLOCKER"
+        },
+        "source_bundle_runtime_evidence_auditor": {
+          "agent_id": "019f77eb-10ef-7403-8a8b-a15d20395e55",
+          "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+          "body_canonical_sha256": "aef586cce1b0d421f0b15d221227c6269a09605ebf9faf9caefb0c4566f0c307",
+          "body_file_sha256": "aef586cce1b0d421f0b15d221227c6269a09605ebf9faf9caefb0c4566f0c307",
+          "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/source_bundle_evidence_body.md",
+          "boundary_attestation": {
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true
+          },
+          "final_response": true,
+          "material_blocker_ids": [],
+          "model": "gpt-5.6-sol",
+          "passed": true,
+          "receipt_file_sha256": "6c20ec1a8eb8f450409966a7291f242aba1d9d4f466a203770d0e57c436911ad",
+          "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/source_bundle_evidence_receipt.json",
+          "review_receipt": {
+            "agent_id": "019f77eb-10ef-7403-8a8b-a15d20395e55",
+            "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+            "evidence_origin": "codex_subagent_detached_receipt",
+            "final_response": true,
+            "issuer": "codex_subagent_read_only_review",
+            "material_blocker_ids": [],
+            "model": "gpt-5.6-sol",
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true,
+            "receipt_kind": "detached_review_body_acknowledgment",
+            "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+            "review_body_sha256": "aef586cce1b0d421f0b15d221227c6269a09605ebf9faf9caefb0c4566f0c307",
+            "role": "source/bundle/runtime evidence auditor",
+            "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+            "schema": "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V3",
+            "self_authored": false,
+            "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+            "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+            "thread_id": "019f77eb-10ef-7403-8a8b-a15d20395e55",
+            "verdict": "NO_MATERIAL_BLOCKER"
+          },
+          "role": "source/bundle/runtime evidence auditor",
+          "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+          "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+          "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+          "thread_id": "019f77eb-10ef-7403-8a8b-a15d20395e55",
+          "verdict": "NO_MATERIAL_BLOCKER"
+        }
+      }
+    },
+    "review_quorum_sha256": "36498ace6893aa8179e48f81c39858fd0ab689b001a8fb9254b79dd32c2765b7",
+    "review_report_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\SOURCE_AUTHORITY_C6_REVIEW_REPORTS.md",
+    "review_report_sha256": "ea74e419854ef13ec139a34e78ebb00e97ed478f584e8ad15ef4f148222967fa",
+    "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+    "source_authority_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+    "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+    "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d"
+  },
+  "target_command_invoked": true,
+  "target_contact_count": 1,
+  "target_discovery_receipt_file_sha256": "464ec8b5b0db8a969548064f46a0fc447b699486f962547529cf4dc047172ca8",
+  "target_discovery_receipt_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json",
+  "target_discovery_receipt_sealed_before_cleanup": true,
+  "target_discovery_receipt_sha256": "369e31470b7599932f10597919b7591c7484c76d57ea0f73d892c08ac574d720",
+  "target_host": "root@192.168.137.100"
+}
