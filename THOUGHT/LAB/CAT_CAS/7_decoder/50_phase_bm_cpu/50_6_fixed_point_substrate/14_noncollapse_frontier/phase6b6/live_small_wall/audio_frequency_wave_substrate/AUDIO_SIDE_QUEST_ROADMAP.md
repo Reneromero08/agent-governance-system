@@ -1,7 +1,7 @@
 # CAT_CAS Audio-Frequency Wave Substrate Side Quest Roadmap
 
-**Status:** `ACTIVE_PARALLEL_LANE__P0_BUILD_READINESS_BLOCKED`<br>
-**Roadmap version:** `1.9`<br>
+**Status:** `ACTIVE_PARALLEL_LANE__P0_BUILD_READINESS_PACKET_FROZEN`<br>
+**Roadmap version:** `2.0`<br>
 **P0 authority:** `AUTHORIZE P0 BUILD-READINESS ONLY`<br>
 **Branch:** `codex/audio-frequency-wave-substrate`<br>
 **Base main commit:** `32b5af119a03bc48bb00f279e6cc0014406147ad`<br>
@@ -14,6 +14,7 @@
 **Software catalytic wave loop established:** `true`<br>
 **Recursive catalytic Ising emulator established:** `true`<br>
 **Physical carrier architecture frozen:** `true`<br>
+**P0 build-readiness packet frozen:** `true`<br>
 **Physical carrier characterized:** `false`<br>
 **Physical audio computing established:** `false`<br>
 **Small Wall crossed:** `false`
@@ -430,7 +431,7 @@ PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_AND_MEASUREMENT_PACKET
 ```
 
 It records one non-executing mechanical carrier/access architecture and a
-separate build-readiness candidate; the latter is not frozen:
+separate build-readiness packet; both are frozen prospectively:
 
 ```text
 preferred:
@@ -441,14 +442,23 @@ fallback:
 
 source-off:
     calibrated-f_ref SIGLENT SDG1032X through ADG1419 gate; K1/K2 release and
-    stabilize before K3 may guard; auxiliary CH2 timing does not prove the
-    actual signal poles, so physical source-disconnect authority remains blocked
+    stabilize before K3 may guard; continuous C2 is injected through exact
+    1.00 Mohm at N_GATE_OUT, while an exact 100 kOhm N_SRC shunt enforces the
+    carrier-voltage cap and stays isolated on the ADG D/SA side during OFF;
+    the same-ADG-state complex CH0-to-CH1 transfer
+    must prove complete-path isolation before K3 guard acceptance; auxiliary
+    CH2 never identifies either individual signal pole
 
 acquisition:
     Spectrum DN2.592-04 four simultaneous true-differential paths; canonical 4 x 3,101,000 signed-int16 raw record
 
-build-readiness candidate:
-    revised complete-fixture topology, derived BOM, coordinate release, continuous dual-tone phase gauge, source-off witness, analyzer suites, and root-bound validator are ready for exact-byte independent review
+build-readiness packet:
+    revised complete-fixture topology, derived BOM, coordinate release,
+    complete-corner C2 witness model, frozen numeric gates, pre-K3 analyzer
+    ordering, assembly/role/event/queryback/chronology-bound topology custody,
+    canonical parsed-UTC ordering, cross-assembly/cross-event scan and control
+    replay rejection, controls, mutation suites,
+    and four exact-root PASS reviews are qualified and frozen
 
 claim ceiling:
     NON_EXECUTING_P0_BUILD_READINESS_ONLY
@@ -463,8 +473,14 @@ The still-unreached next authority boundary is:
 USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD
 ```
 
-The lane remains blocked before that boundary by the missing per-event actual signal-pole witness or exact force-guided-contact guarantee. No predecessor package, `main`, Family 10h
-evidence, `SMALL_WALL_STATE.md`, hardware, target, or preserved stash is touched.
+The lane stops at that boundary. The repair establishes a prospective per-event
+complete-path witness only. Each record is bound to its exact assembly manifest,
+role, carrier population, native payload, chronology, querybacks and unique
+pre-acquisition topology scan and nonlinear-control trace; all timestamps use
+canonical parsed UTC, and replay across A/B/C or across events is rejected.
+It does not identify either individual relay pole and does not establish a
+physical observation. No predecessor package, `main`, Family 10h evidence,
+`SMALL_WALL_STATE.md`, hardware, target, or preserved stash is touched.
 
 ---
 
@@ -481,6 +497,7 @@ PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 SMALL_WALL_CROSSED_NOT_PROMOTED
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_AND_MEASUREMENT_PACKET
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
-P0_BUILD_READINESS_BLOCKED
+P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED
+P0_BUILD_READINESS_PACKET_FROZEN
 USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD
 ```

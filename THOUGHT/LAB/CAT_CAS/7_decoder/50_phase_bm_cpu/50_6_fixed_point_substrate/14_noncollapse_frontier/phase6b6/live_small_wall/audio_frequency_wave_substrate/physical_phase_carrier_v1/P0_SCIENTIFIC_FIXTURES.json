@@ -10,7 +10,7 @@
     "samples_per_channel": 3101000
   },
   "claim_law": {
-    "maximum_token": "SYNTHETIC_ANALYZER_PASS",
+    "maximum_token": "SYNTHETIC_ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
     "synthetic_physical_claim": false
   },
   "generator": "p0_scientific_analyzer.py",
@@ -210,6 +210,98 @@
     {
       "case": "negative_zero_metadata",
       "expected_rejection": "NUMBER_ENCODING"
+    },
+    {
+      "case": "signal_path_c2_absent_raw",
+      "expected_rejection": "SOURCE_REFERENCE_MISSING"
+    },
+    {
+      "case": "signal_path_no_downstream_injection_raw",
+      "expected_rejection": "SIGNAL_PATH_PRE_SNR"
+    },
+    {
+      "case": "signal_path_guard_masked_pre_raw",
+      "expected_rejection": "SIGNAL_PATH_PRE_SNR"
+    },
+    {
+      "case": "signal_path_closed_not_isolated_raw",
+      "expected_rejection": "SIGNAL_PATH_NOT_ISOLATED"
+    },
+    {
+      "case": "signal_path_phase_inversion_raw",
+      "expected_rejection": "SIGNAL_PATH_PHASE"
+    },
+    {
+      "case": "signal_path_open_feedthrough_raw",
+      "expected_rejection": "SIGNAL_PATH_NOT_ISOLATED"
+    },
+    {
+      "case": "signal_path_wrong_node_metadata",
+      "expected_rejection": "SIGNAL_PATH_TOPOLOGY_CUSTODY"
+    },
+    {
+      "case": "signal_path_wrong_node_raw_nominal_labels",
+      "expected_rejection": "SIGNAL_PATH_TOPOLOGY_SCAN"
+    },
+    {
+      "case": "signal_path_threshold_hash_metadata",
+      "expected_rejection": "SIGNAL_PATH_THRESHOLD_CUSTODY"
+    },
+    {
+      "case": "signal_path_k3_guard_metadata",
+      "expected_rejection": "SIGNAL_PATH_GUARD_MASKING"
+    },
+    {
+      "case": "signal_path_k3_guard_signal_raw",
+      "expected_rejection": "SIGNAL_PATH_PHASE"
+    },
+    {
+      "case": "signal_path_nonlinear_2f_raw",
+      "expected_rejection": "SIGNAL_PATH_2F_RESIDUE"
+    },
+    {
+      "case": "signal_path_common_mode_raw",
+      "expected_rejection": "SIGNAL_PATH_COMMON_MODE"
+    },
+    {
+      "case": "signal_path_assembly_a_replay_into_b",
+      "expected_rejection": "SIGNAL_PATH_ASSEMBLY_ROLE"
+    },
+    {
+      "case": "signal_path_assembly_a_replay_into_c",
+      "expected_rejection": "SIGNAL_PATH_ASSEMBLY_ROLE"
+    },
+    {
+      "case": "signal_path_topology_receipt_wrong_event",
+      "expected_rejection": "SIGNAL_PATH_TOPOLOGY_CUSTODY"
+    },
+    {
+      "case": "signal_path_scan_after_acquisition",
+      "expected_rejection": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "signal_path_duplicate_topology_scan_hash",
+      "expected_rejection": "SIGNAL_PATH_TOPOLOGY_SCAN_REPLAY"
+    },
+    {
+      "case": "signal_path_duplicate_nonlinear_control_hash",
+      "expected_rejection": "SIGNAL_PATH_NONLINEAR_CONTROL_REPLAY"
+    },
+    {
+      "case": "signal_path_scan_time_malformed",
+      "expected_rejection": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "signal_path_scan_time_alternate_offset",
+      "expected_rejection": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "signal_path_acquisition_time_truncated_precision",
+      "expected_rejection": "CHRONOLOGY_CUSTODY"
+    },
+    {
+      "case": "signal_path_scan_time_lexical_deception",
+      "expected_rejection": "SIGNAL_PATH_SCAN_CHRONOLOGY"
     }
   ],
   "schema": "p0.scientific-fixtures.v1",
@@ -344,8 +436,84 @@
     }
   ],
   "scope_law": {
+    "existing_fixture_count_preserved": 55,
     "raw_adversaries": "actual canonical raw-bundle analyzer execution",
     "semantic_controls": "summary schema and decision-law conformance only",
-    "topology_only_cases": "require separately bound non-analyzer adjudication receipts"
-  }
+    "signal_path_controls": "strict circuit-envelope and ordering decision law",
+    "topology_only_cases": "per-event assembly-bound topology receipts and raw replay adversaries"
+  },
+  "signal_path_custody_negative": [
+    {
+      "case": "signal_path_model_hash_mutation",
+      "expected_rejection": "SIGNAL_PATH_THRESHOLD_CUSTODY"
+    },
+    {
+      "case": "signal_path_topology_receipt_mutation",
+      "expected_rejection": "SIGNAL_PATH_THRESHOLD_CUSTODY"
+    },
+    {
+      "case": "signal_path_missing_field",
+      "expected_rejection": "MISSING_FIELD"
+    },
+    {
+      "case": "signal_path_unknown_field",
+      "expected_rejection": "UNKNOWN_FIELD"
+    }
+  ],
+  "signal_path_positive": [
+    "closed_closed_k3_open_transfer",
+    "k1_open_k2_closed_isolated",
+    "k1_closed_k2_open_isolated",
+    "k1_open_k2_open_isolated",
+    "adg_off_closed_path_transfer",
+    "carrier_removed_isolated",
+    "exact_1pf_dummy_isolated",
+    "maximum_open_capacitance_boundary"
+  ],
+  "signal_path_scientific_negative": [
+    {
+      "case": "early_k3_guard_masking",
+      "expected_rejection": "SIGNAL_PATH_GUARD_MASKING"
+    },
+    {
+      "case": "c2_absent",
+      "expected_rejection": "SIGNAL_PATH_C2_MISSING"
+    },
+    {
+      "case": "wrong_node_injection",
+      "expected_rejection": "SIGNAL_PATH_TOPOLOGY_CUSTODY"
+    },
+    {
+      "case": "relay_bounce",
+      "expected_rejection": "SIGNAL_PATH_RELAY_BOUNCE"
+    },
+    {
+      "case": "contact_reentry",
+      "expected_rejection": "SIGNAL_PATH_CONTACT_REENTRY"
+    },
+    {
+      "case": "signal_path_channel_swap",
+      "expected_rejection": "CHANNEL_ROLE_MISMATCH"
+    },
+    {
+      "case": "signal_path_phase_inversion",
+      "expected_rejection": "SIGNAL_PATH_PHASE"
+    },
+    {
+      "case": "signal_path_scale_mutation",
+      "expected_rejection": "SCALE_MISMATCH"
+    },
+    {
+      "case": "signal_path_threshold_mutation",
+      "expected_rejection": "SIGNAL_PATH_THRESHOLD_CUSTODY"
+    },
+    {
+      "case": "signal_path_window_mutation",
+      "expected_rejection": "SIGNAL_PATH_WINDOW_ORDER"
+    },
+    {
+      "case": "signal_path_k3_order_mutation",
+      "expected_rejection": "SIGNAL_PATH_GUARD_ORDER"
+    }
+  ]
 }

@@ -27,6 +27,7 @@ MANIFEST = "P0_BUILD_READINESS_MANIFEST.json"
 RESULT = "P0_BUILD_READINESS_RESULTS.json"
 REVIEWS = "P0_BUILD_READINESS_REVIEWS.json"
 MUTATION_RESULT = "P0_BUILD_READINESS_MUTATION_RESULTS.json"
+SIGNAL_MUTATION_RESULT = "P0_SIGNAL_PATH_MUTATION_RESULTS.json"
 RESEARCH_PREFIX = "research/P0_research_bundle_2026-07-18"
 RESEARCH_SOURCE_COMMIT = "cb53976612cbe83bec82df826a9889418f7e0b89"
 RESEARCH_NAMES = (
@@ -68,6 +69,7 @@ CANDIDATE_NAMES = (
     "P0_FINDINGS_NORMALIZED.json",
     "P0_BUILD_READINESS_AUTHORITY.md",
     "P0_BUILD_READINESS_COMPONENT_SEED.md",
+    "P0_SIGNAL_PATH_WITNESS_REPAIR_CONTRACT.md",
     "PHYSICAL_PHASE_CARRIER_P0_CONTRACT.md",
     "P0_BUILD_READINESS_PACKET.md",
     "P0_FINAL_NETLIST.json",
@@ -80,18 +82,24 @@ CANDIDATE_NAMES = (
     "P0_BUILD_READINESS_SCHEMAS.json",
     "P0_SCIENTIFIC_FIXTURES.json",
     "P0_ANALYZER_REFERENCE_RESULTS.json",
+    "P0_SIGNAL_PATH_CIRCUIT_MODEL.json",
+    "P0_SIGNAL_PATH_ORDERING_PROOF.json",
     "p0_scientific_analyzer.py",
+    "p0_signal_path_witness_model.py",
+    "p0_signal_path_ordering_proof.py",
+    "p0_signal_path_witness_mutation_test.py",
     "p0_build_readiness_design.py",
     "p0_build_readiness_validator.py",
     "p0_build_readiness_mutation_test.py",
     "P0_BUILD_READINESS_FINDINGS.json",
     "../AUDIO_SIDE_QUEST_ROADMAP.md",
 ) + tuple(f"{RESEARCH_PREFIX}/{name}" for name in RESEARCH_NAMES)
-FINAL_ONLY = (REVIEWS, "P0_BUILD_READINESS_REVIEW_REPORTS.md", MUTATION_RESULT)
+FINAL_ONLY = (REVIEWS, "P0_BUILD_READINESS_REVIEW_REPORTS.md", MUTATION_RESULT, SIGNAL_MUTATION_RESULT)
 PRETTY_JSON = {
     "P0_FINAL_NETLIST.json", "P0_NONPURCHASING_BOM.json", "P0_PCB_FABRICATION_RELEASE.json",
     "P0_COMPONENT_DOCUMENTS.json", "P0_BUILD_READINESS_SCHEMAS.json", "P0_SCIENTIFIC_FIXTURES.json",
     "P0_ANALYZER_REFERENCE_RESULTS.json", "P0_BUILD_READINESS_FINDINGS.json",
+    "P0_SIGNAL_PATH_CIRCUIT_MODEL.json", "P0_SIGNAL_PATH_ORDERING_PROOF.json",
     f"{RESEARCH_PREFIX}/MANIFEST.json", f"{RESEARCH_PREFIX}/SOURCE_CUSTODY.json",
 }
 HEX = set("0123456789abcdef")
@@ -151,7 +159,7 @@ def read_snapshot(include_final: bool = False) -> dict[str, bytes]:
 
 
 def candidate_root(snapshot: Mapping[str, bytes]) -> str:
-    digest = hashlib.sha256(b"P0-BUILD-READINESS-CANDIDATE-ROOT-V2\0")
+    digest = hashlib.sha256(b"P0-BUILD-READINESS-CANDIDATE-ROOT-V3\0")
     for name in sorted(CANDIDATE_NAMES):
         if name not in snapshot:
             raise Failure(f"candidate root missing {name}")
@@ -174,7 +182,7 @@ def text(name: str, snapshot: Mapping[str, bytes]) -> str:
 def check_scripts(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
     forbidden = {"socket", "requests", "urllib", "http", "serial", "sounddevice", "pyaudio", "subprocess", "paramiko"}
     report: dict[str, Any] = {}
-    for name in ("p0_scientific_analyzer.py", "p0_build_readiness_design.py", "p0_build_readiness_validator.py", "p0_build_readiness_mutation_test.py"):
+    for name in ("p0_scientific_analyzer.py", "p0_signal_path_witness_model.py", "p0_signal_path_ordering_proof.py", "p0_signal_path_witness_mutation_test.py", "p0_build_readiness_design.py", "p0_build_readiness_validator.py", "p0_build_readiness_mutation_test.py"):
         source = text(name, snapshot)
         tree = ast.parse(source, filename=name)
         imports: set[str] = set()
@@ -188,7 +196,7 @@ def check_scripts(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
             raise Failure(f"forbidden capability import in {name}: {overlap}")
         report[name] = {"bytes": len(snapshot[name]), "sha256": sha256(snapshot[name]), "git_blob_sha1": git_blob(snapshot[name]), "forbidden_capability_imports": []}
     analyzer = text("p0_scientific_analyzer.py", snapshot)
-    for token in ("build", "self-test", "verify", "analyze", "SYNTHETIC_ANALYZER_PASS", "physical_claim_authorized", "source_muted_at_gate_raw", "reference_tone_missing_raw", "ENVIRONMENT_CRC"):
+    for token in ("build", "self-test", "verify", "analyze", "SYNTHETIC_ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT", "physical_claim_authorized", "signal_path_transfer", "decode_guard_witness", "source_muted_at_gate_raw", "reference_tone_missing_raw", "ENVIRONMENT_CRC"):
         if token not in analyzer:
             raise Failure(f"analyzer missing required mechanism: {token}")
     return report
@@ -334,7 +342,7 @@ def check_netlist(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
         "relay_coil_driver_map", "relay_contact_map", "revision", "schema", "source_off_sequence",
         "source_off_state_table", "status", "switch_truth_table", "test_point_map", "witness_law",
     }
-    if set(netlist) != required_root or netlist["schema"] != "p0.final-netlist.v3" or netlist["revision"] != "P0-NETLIST-REV-C-20260717" or netlist["authority"] != AUTHORITY or netlist["claim_ceiling"] != CEILING:
+    if set(netlist) != required_root or netlist["schema"] != "p0.final-netlist.v4" or netlist["revision"] != "P0-NETLIST-REV-D-20260718" or netlist["authority"] != AUTHORITY or netlist["claim_ceiling"] != CEILING:
         raise Failure("netlist root/schema/authority/ceiling")
     components = netlist["components"]
     if not isinstance(components, list) or not components:
@@ -428,6 +436,12 @@ def check_netlist(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
             raise Failure(f"ADG1419 MSOP physical pin map: fixture {suffix}")
         if by_ref[f"R_MON_C1_{suffix}"]["pins"] != {"1": f"C1_IN_{suffix}", "2": f"N_SOURCE_MONITOR_SUM_{suffix}"}:
             raise Failure(f"C1 monitor must remain upstream of limiter/gate: fixture {suffix}")
+        pilot = by_ref.get(f"R_C2_INJECT_{suffix}", {})
+        if pilot.get("manufacturer") != "Vishay" or pilot.get("part_number") != "TNPW08051M00BEEN" or pilot.get("pins") != {"1": f"C2_REF_IN_{suffix}", "2": f"N_GATE_OUT_{suffix}"}:
+            raise Failure(f"C2 exact 1.00 Mohm witness injection: fixture {suffix}")
+        drive_shunt = by_ref.get(f"R_DRIVE_SHUNT_{suffix}", {})
+        if drive_shunt.get("manufacturer") != "Vishay" or drive_shunt.get("part_number") != "TNPW0805100KBEEN" or drive_shunt.get("pins") != {"1": f"N_SRC_{suffix}", "2": f"AGND_EXPORT_{suffix}"}:
+            raise Failure(f"exact 100 kohm N_SRC safety shunt: fixture {suffix}")
         expected_accel = {"1": f"AGND_STAR_{suffix}", "2": f"AGND_STAR_{suffix}", "3": f"AGND_STAR_{suffix}", "4": f"NC::U_ACCEL_{suffix}.4", "5": f"ADR_REF_3V3_{suffix}", "6": f"AGND_STAR_{suffix}", "7": f"ADR_REF_3V3_{suffix}", "8": f"ADXL_1V8_DIG_{suffix}", "9": f"AGND_STAR_{suffix}", "10": f"ADXL_1V8_ANA_{suffix}", "11": f"ADR_REF_3V3_{suffix}", "12": f"ADXL_XOUT_{suffix}", "13": f"ADXL_YOUT_{suffix}", "14": f"N_ACCEL_Z_{suffix}"}
         if by_ref[f"U_ACCEL_{suffix}"]["pins"] != expected_accel:
             raise Failure(f"ADXL354 physical pin/power map: fixture {suffix}")
@@ -493,21 +507,25 @@ def check_netlist(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
     if set(source) != {"acquisition", "contact_limit_samples", "drive", "first_admissible", "gate", "guard_samples", "relay_order", "relay_release_delay_us", "series_open_stable_samples", "signal_pole_evidence_boundary", "source_persistence_proof", "source_setup", "stable_off_samples"}:
         raise Failure("source-off sequence exact fields")
     setup = source["source_setup"]
-    if set(setup) != {"c1", "c2", "conservative_c1_resistive_bound", "load_mode", "model", "output_mode", "physical_output_ohms", "qualified_preparation_cycles", "queryback_fields_per_channel"}:
+    if set(setup) != {"c1", "c2", "complete_corner_c1_bound", "load_mode", "model", "output_mode", "physical_output_ohms", "qualified_preparation_cycles", "queryback_fields_per_channel"}:
         raise Failure("source setup exact fields")
     if setup["c1"] != {"amplitude_vpp": 0.4, "frequency_hz": 32768, "offset_v": 0.0, "phase_command_rad": [0.0, 3.141592653589793]} or setup["c2"] != {"amplitude_vpp": 0.1, "frequency_hz": 65536, "offset_v": 0.0, "phase_command_rad": 0.0}:
         raise Failure("source frequency/amplitude/offset/phase setup")
     if setup["model"] != "SIGLENT SDG1032X" or setup["load_mode"] != "HIGH_Z" or setup["physical_output_ohms"] != 50.0 or setup["output_mode"] != "CONTINUOUS_SINE" or setup["qualified_preparation_cycles"] != 32768:
         raise Failure("source identity/load/mode setup")
-    if setup["conservative_c1_resistive_bound"] != {"carrier_esr_ohms_max": 70000.0, "carrier_terminal_vpp_max": 0.164658, "motional_current_ua_max": 0.831646, "motional_power_uw_max": 0.048415, "series_limiter_ohms": 100000.0, "source_output_ohms": 50.0, "source_vrms": 0.141421356}:
-        raise Failure("source conservative drive bound")
+    if setup["complete_corner_c1_bound"] != {"carrier_motional_resistance_ohms_range": [30000.0, 70000.0], "carrier_terminal_vpp_max": 0.187806545796, "motional_current_ua_max": 0.18650660164, "motional_power_uw_max": 0.00229706934984, "series_limiter_ohms": 100000.0, "source_output_ohms_range": [47.5, 52.5], "source_vrms": 0.141421356}:
+        raise Failure("source complete-corner drive bound")
     if setup["queryback_fields_per_channel"] != ["model", "serial", "firmware", "load_mode", "physical_output_ohms", "waveform", "frequency_hz", "amplitude_vpp", "offset_v", "phase_command_rad", "output_mode", "output_state"]:
         raise Failure("source queryback contract")
     expected_signal_boundary = {
-        "accepted_prerequisites": ["PER_EVENT_ACTUAL_SIGNAL_PATH_WITNESS", "EXACT_FORCE_GUIDED_CONTACT_GUARANTEE"],
+        "accepted_prerequisites": ["PRE_K3_COMPLEX_C2_END_TO_END_TRANSFER_WITNESS"],
+        "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
         "auxiliary_contacts_sufficient": False,
+        "individual_pole_identity_claim_authorized": False,
         "physical_execution_authorized": False,
-        "source_disconnect_claim_authorized": False,
+        "source_disconnect_claim_authorized_only_on_future_passing_event": True,
+        "topology": {"injection": "C2_REF_IN through exact TNPW 1.00 Mohm R_C2_INJECT to N_GATE_OUT; exact 100 kohm R_DRIVE_SHUNT remains on N_SRC and is isolated by ADG1419 during both H2 windows", "k3_during_h2": "energized and electrically open", "measured_path": ["N_GATE_OUT", "K1 signal pole", "N_MIDPOINT", "K2 signal pole", "N_ELECTRODE_A", "OPA810", "CH1"]},
+        "witness_model": "P0_SIGNAL_PATH_CIRCUIT_MODEL.json",
     }
     expected_persistence = "CH0 must match the sample-level reconstructed 32768 Hz C1 plus 65536 Hz C2 waveform from t_gate through record end with peak residual <=5 percent of the fitted C1 amplitude, and both tones must remain within 2 percent amplitude and 0.010 rad phase in contiguous 100000-sample segments beginning at t_gate and covering record end; the bounded passive C2-to-C1 coupling through the monitor network is modeled and controlled rather than called zero"
     if "continuous" not in source["drive"].lower() or "0.400 Vpp" not in source["drive"] or "0.100 Vpp" not in source["drive"] or source["source_persistence_proof"] != expected_persistence or source["relay_release_delay_us"] != 250 or source["series_open_stable_samples"] != 1000 or source["stable_off_samples"] != 1000 or source["contact_limit_samples"] != 14500 or "deenergize K1 and K2" not in source["relay_order"] or source["signal_pole_evidence_boundary"] != expected_signal_boundary or netlist["ground_model"]["external_trigger"] != "absent":
@@ -770,6 +788,88 @@ def check_documents(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
     }
 
 
+def check_signal_path(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
+    model = parse_json("P0_SIGNAL_PATH_CIRCUIT_MODEL.json", snapshot)
+    if set(model) != {"authority", "candidate_grid", "claim_ceiling", "contact_attestation", "corner_count_per_candidate", "decision", "edge_conventions", "fixed_parameters", "frozen_thresholds", "mechanism", "model_scope", "parameter_ranges", "schema", "selected_envelope", "sweep_law", "thresholds_sha256"}:
+        raise Failure("signal-path model exact root")
+    if model["schema"] != "p0.signal-path-circuit-model.v1" or model["authority"] != AUTHORITY or model["claim_ceiling"] != "NON_EXECUTING_P0_SIGNAL_PATH_WITNESS_REPAIR_ONLY" or model["decision"] != "P0_SIGNAL_PATH_WITNESS_MODEL_FEASIBLE":
+        raise Failure("signal-path model identity/authority")
+    if model["corner_count_per_candidate"] != 131072 or len(model["candidate_grid"]) != 35 or sum(item.get("feasible") is True for item in model["candidate_grid"]) != 23:
+        raise Failure("signal-path complete-corner candidate sweep")
+    mechanism = model["mechanism"]
+    expected_mechanism = {
+        "first_candidate_rejected": False,
+        "injection_node": "N_GATE_OUT",
+        "path": ["N_GATE_OUT", "K1_SIGNAL", "N_MIDPOINT", "K2_SIGNAL", "N_ELECTRODE_A", "OPA810", "CH1"],
+        "reference_monitor": "C2_REF_IN_TO_R_MON_C2_TO_CH0",
+        "selected_amplitude_vpp": 0.1,
+        "selected_network": {"drive_shunt_node": "N_SRC", "drive_shunt_part": "Vishay TNPW0805100KBEEN", "drive_shunt_resistance_ohm": 100000.0, "injection_part": "Vishay TNPW08051M00BEEN", "injection_parts_per_channel": 1},
+        "selected_part": "Vishay TNPW08051M00BEEN",
+        "selected_resistance_ohm": 1000000.0,
+    }
+    if mechanism != expected_mechanism:
+        raise Failure("signal-path selected mechanism")
+    selected = model["selected_envelope"]
+    if selected.get("amplitude_vpp") != 0.1 or selected.get("injection_resistor_ohm") != 1000000.0 or selected.get("feasible") is not True:
+        raise Failure("signal-path selected candidate")
+    envelope = selected.get("envelope", {})
+    expected_envelope = {
+        "detector_only_isolated_abs_h2": [0.00637846879964, 0.13477890721],
+        "detector_only_pre_abs_h2": [0.220656310269, 0.490296277286],
+        "dummy_1pf_isolated_abs_h2": [0.00515176524481, 0.108422686865],
+        "dummy_1pf_pre_abs_h2": [0.212836975188, 0.45518680566],
+        "f1_carrier_terminal_vpp": [0.184850331492, 0.187806545796],
+        "f1_motional_current_ua_rms": [0.175995826802, 0.18650660164],
+        "f1_motional_power_uw": [0.000981761229286, 0.00229706934984],
+        "f2_carrier_terminal_vpp": [0.00856756965672, 0.017974012198],
+        "f2_motional_current_ua_rms": [0.00100591841377, 0.00304786499055],
+        "f2_motional_real_power_uw": [4.66458045444e-14, 1.19468261052e-11],
+        "guard_mask_abs_h2": [0.000123285075765, 0.000129103280583],
+        "guard_mask_phase_h2_rad": [0.480297899102, 0.540199758328],
+        "isolated_abs_h2": [0.00496186599843, 0.112950521378],
+        "isolated_phase_h2_rad": [-0.984356063889, -0.766030151148],
+        "isolated_u95_h2": [0.000439618739769, 0.000654870098811],
+        "pilot_f1_fractional_perturbation": [0.0460284591996, 0.0468586029807],
+        "pre_abs_h2": [0.21134632766, 0.461975255089],
+        "pre_open_complex_h2_separation": [0.170644231271, 0.417957736376],
+        "pre_phase_h2_rad": [-1.00307665601, -0.847632196431],
+        "pre_pilot_snr": [30.1231984757, 90.6879178821],
+        "r_drop": [0.0663094749239, 0.256963000215],
+        "wrong_node_abs_h2": [4.69667501961e-05, 9.96697580559e-05],
+        "wrong_node_phase_h2_rad": [0.481564474042, 0.542219452296],
+    }
+    if envelope != expected_envelope:
+        raise Failure("signal-path selected numeric envelope")
+    thresholds = model["frozen_thresholds"]
+    required_thresholds = {"clipping_abs_v_max": 0.45, "common_mode_abs_v_max": 0.1, "detector_only_isolated_abs_h2_max": 0.145, "dummy_1pf_isolated_abs_h2_max": 0.119, "fit_condition_number_max": 1000000.0, "fit_rank_required": 5, "frozen_before_primary": True, "isolated_abs_h2_max": 0.123, "isolated_phase_h2_rad": {"maximum": -0.716, "minimum": -1.035}, "isolated_u95_h2_max": 0.01, "maximum_pre_abs_h2": 0.472, "minimum_pre_abs_h2": 0.201, "minimum_pre_open_complex_separation": 0.02, "minimum_pre_pilot_snr": 20.0, "nonlinear_or_mechanical_2f_residue_ratio_max": 0.02, "open_window": {"end_offset_from_series_run_start_samples": 980, "samples": 960, "start_offset_from_series_run_start_samples": 20, "valid_cycles": 62.91456}, "pilot_f1_fractional_perturbation_max": 0.05, "pre_phase_h2_rad": {"maximum": -0.797, "minimum": -1.054}, "pre_window": {"end_offset_from_gate_samples": 240, "samples": 192, "start_offset_from_gate_samples": 48, "valid_cycles": 12.582912}, "r_drop_max": 0.277, "same_adg_state_both_windows": "OFF_D_TO_SA_50R"}
+    if thresholds != required_thresholds:
+        raise Failure("prospectively frozen signal-path thresholds/windows")
+    if model["thresholds_sha256"] != sha256(canonical(thresholds)):
+        raise Failure("signal-path threshold hash")
+    fixed = model["fixed_parameters"]
+    if fixed != {"adg_d_sa_on_resistance_ohm": 5.0, "adg_sa_termination_resistance_ohm": 50.05, "digitizer_mode": "1_MOHM_PARALLEL_30_PF_TRUE_DIFFERENTIAL", "digitizer_negative_leg_reference": "CALIBRATED_AGND", "drive_shunt_part": "Vishay TNPW0805100KBEEN", "drive_shunt_resistance_ohm": 100000.0, "fc135_loaded_frequency_capacitance_f": 1.25e-11, "fc135_loaded_frequency_hz": 32768.0, "opa810_output_resistance_ohm": 50.0}:
+        raise Failure("signal-path fixed loaded topology")
+    ranges = model["parameter_ranges"]
+    if ranges.get("fc135_motional_capacitance_f") != [3e-15, 1.5e-14] or ranges.get("injection_resistor_fraction") != [0.999, 1.001] or ranges.get("drive_shunt_resistor_fraction") != [0.999, 1.001] or ranges.get("digitizer_input_resistance_ohm") != [950000.0, 1050000.0] or ranges.get("digitizer_input_capacitance_f") != [2.8e-11, 3.2e-11]:
+        raise Failure("signal-path physical parameter ranges")
+    first = model["candidate_grid"][0]
+    if first.get("amplitude_vpp") != 0.1 or first.get("injection_resistor_ohm") != 1000000.0 or first.get("feasible") is not True or selected != first:
+        raise Failure("requested first candidate must be the selected feasible point")
+    if any(value != 0 for value in model["contact_attestation"].values()) or model["model_scope"].get("physical_observation") is not False:
+        raise Failure("signal-path zero-contact/model-only fence")
+    proof = parse_json("P0_SIGNAL_PATH_ORDERING_PROOF.json", snapshot)
+    if proof.get("schema") != "p0.signal-path-ordering-proof.v4" or proof.get("result") != "PASS" or proof.get("analyzer_sha256") != sha256(snapshot["p0_scientific_analyzer.py"]) or proof.get("physical_claim_authorized") is not False or proof.get("transfer_gate_count") != 16 or proof.get("def_use_assignment_count") != 12 or proof.get("assembly_custody_fragment_count") != 14 or any(value is not True for value in proof.get("properties", {}).values()):
+        raise Failure("signal-path AST/data-flow ordering proof")
+    lines = proof.get("ordered_call_lines", {})
+    if not (lines.get("decode_series_witness", 0) < lines.get("drive_fit", 0) < lines.get("signal_path_transfer", 0) < lines.get("decode_guard_witness", 0) < lines.get("project", 0)):
+        raise Failure("signal-path pre-K3 call order")
+    contract = text("P0_SIGNAL_PATH_WITNESS_REPAIR_CONTRACT.md", snapshot)
+    for token in ("N_GATE_OUT", "new high-value, current-limited witness injection", "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT", "K3 remains energized"):
+        if token not in contract:
+            raise Failure(f"signal-path frozen contract token: {token}")
+    return {"candidate_count": 35, "corner_count_per_candidate": 131072, "feasible_candidates": 23, "model_sha256": sha256(snapshot["P0_SIGNAL_PATH_CIRCUIT_MODEL.json"]), "ordering_proof_sha256": sha256(snapshot["P0_SIGNAL_PATH_ORDERING_PROOF.json"]), "selected_part": mechanism["selected_part"], "selected_amplitude_vpp": 0.1, "selected_resistance_ohm": 1000000.0}
+
+
 def check_analyzer(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
     fixtures = parse_json("P0_SCIENTIFIC_FIXTURES.json", snapshot)
     results = parse_json("P0_ANALYZER_REFERENCE_RESULTS.json", snapshot)
@@ -777,31 +877,75 @@ def check_analyzer(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
     counts = (len(fixtures.get("positive", [])), len(fixtures.get("scientific_negative", [])), len(fixtures.get("malformed_or_custody_negative", [])))
     if counts != (8, 32, 15):
         raise Failure(f"fixture counts: {counts}")
-    if len(fixtures.get("raw_adversary", [])) != 31 or fixtures.get("scope_law") != {"raw_adversaries": "actual canonical raw-bundle analyzer execution", "semantic_controls": "summary schema and decision-law conformance only", "topology_only_cases": "require separately bound non-analyzer adjudication receipts"}:
+    expected_scope = {"existing_fixture_count_preserved": 55, "raw_adversaries": "actual canonical raw-bundle analyzer execution", "semantic_controls": "summary schema and decision-law conformance only", "signal_path_controls": "strict circuit-envelope and ordering decision law", "topology_only_cases": "per-event assembly-bound topology receipts and raw replay adversaries"}
+    if len(fixtures.get("raw_adversary", [])) != 54 or len(fixtures.get("signal_path_positive", [])) != 8 or len(fixtures.get("signal_path_scientific_negative", [])) != 11 or len(fixtures.get("signal_path_custody_negative", [])) != 4 or fixtures.get("scope_law") != expected_scope:
         raise Failure("raw/semantic fixture scope")
-    if results.get("schema") != "p0.analyzer-reference-results.v1" or results.get("fixture_count") != 55 or results.get("positive_count") != 8 or results.get("scientific_negative_count") != 32 or results.get("malformed_or_custody_negative_count") != 15 or results.get("raw_adversary_count") != 31:
+    if results.get("schema") != "p0.analyzer-reference-results.v1" or results.get("fixture_count") != 55 or results.get("positive_count") != 8 or results.get("scientific_negative_count") != 32 or results.get("malformed_or_custody_negative_count") != 15 or results.get("raw_adversary_count") != 54 or results.get("signal_path_positive_count") != 8 or results.get("signal_path_scientific_negative_count") != 11 or results.get("signal_path_custody_negative_count") != 4:
         raise Failure("reference-result counts/schema")
     if results.get("physical_claim_authorized") is not False or results.get("claim_ceiling") != CEILING:
         raise Failure("analyzer physical-claim fence")
-    if any(item.get("outcome") != "PASS" for item in results["semantic_outcomes"] + results["malformed_outcomes"] + results["raw_adversary_outcomes"]):
+    if any(item.get("outcome") != "PASS" for item in results["semantic_outcomes"] + results["signal_path_control_outcomes"] + results["malformed_outcomes"] + results["raw_adversary_outcomes"]):
         raise Failure("reference outcome failure")
     if any(item.get("execution") != "actual_bundle_analyzer" for item in results["malformed_outcomes"] + results["raw_adversary_outcomes"]):
         raise Failure("raw/malformed adversary did not execute actual bundle analyzer")
-    required_raw = {"source_muted_preparation_middle_raw", "source_muted_at_gate_raw", "source_muted_gate_guard_only_raw", "source_muted_late_1300000_raw", "source_muted_late_2000000_raw", "source_muted_late_3000000_raw", "guard_before_series_open_raw", "matched_drive_phase_mismatch_raw", "reference_tone_missing_raw", "source_amplitude_out_of_contract", "environment_crc_mutation", "environment_monotonic_drift", "environment_sensor_identity_drift", "instrument_configuration_drift", "source_configuration_drift"}
+    required_raw = {"source_muted_preparation_middle_raw", "source_muted_at_gate_raw", "source_muted_gate_guard_only_raw", "source_muted_late_1300000_raw", "source_muted_late_2000000_raw", "source_muted_late_3000000_raw", "guard_before_series_open_raw", "matched_drive_phase_mismatch_raw", "reference_tone_missing_raw", "source_amplitude_out_of_contract", "environment_crc_mutation", "environment_monotonic_drift", "environment_sensor_identity_drift", "instrument_configuration_drift", "source_configuration_drift", "signal_path_c2_absent_raw", "signal_path_no_downstream_injection_raw", "signal_path_guard_masked_pre_raw", "signal_path_closed_not_isolated_raw", "signal_path_phase_inversion_raw", "signal_path_open_feedthrough_raw", "signal_path_wrong_node_metadata", "signal_path_wrong_node_raw_nominal_labels", "signal_path_threshold_hash_metadata", "signal_path_k3_guard_metadata", "signal_path_k3_guard_signal_raw", "signal_path_nonlinear_2f_raw", "signal_path_common_mode_raw", "signal_path_assembly_a_replay_into_b", "signal_path_assembly_a_replay_into_c", "signal_path_topology_receipt_wrong_event", "signal_path_scan_after_acquisition", "signal_path_duplicate_topology_scan_hash", "signal_path_duplicate_nonlinear_control_hash", "signal_path_scan_time_malformed", "signal_path_scan_time_alternate_offset", "signal_path_acquisition_time_truncated_precision", "signal_path_scan_time_lexical_deception"}
     if not required_raw.issubset({item["case"] for item in results["raw_adversary_outcomes"]}):
         raise Failure("missing raw adversary")
     custody = results.get("artifact_custody", {})
     if custody.get("analyzer_sha256") != sha256(snapshot["p0_scientific_analyzer.py"]) or custody.get("fixture_sha256") != sha256(snapshot["P0_SCIENTIFIC_FIXTURES.json"]) or custody.get("schema_sha256") != sha256(snapshot["P0_BUILD_READINESS_SCHEMAS.json"]):
         raise Failure("analyzer artifact custody")
     raw = results.get("raw_numerical_reference", {})
-    if raw.get("scientific_pass") is not True or raw.get("physical_claim_authorized") is not False or raw.get("matched_guard_samples") != 12499 or raw.get("claim_token") != "SYNTHETIC_ANALYZER_PASS":
+    if raw.get("scientific_pass") is not True or raw.get("physical_claim_authorized") is not False or raw.get("matched_guard_samples") != 12499 or raw.get("claim_token") != "SYNTHETIC_ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT":
         raise Failure("raw numerical reference")
+    if raw.get("implementation_custody", {}).get("signal_path_model_sha256") != sha256(snapshot["P0_SIGNAL_PATH_CIRCUIT_MODEL.json"]):
+        raise Failure("raw signal-path model custody")
+    path_metrics = raw.get("signal_path", {})
+    if set(path_metrics) != set(ROLE_ORDER := ("arm_0", "arm_pi", "zero_drive", "resonator_removed", "dummy_c0")):
+        raise Failure("signal-path raw role coverage")
+    for role in ROLE_ORDER:
+        metrics = path_metrics[role]
+        timing = raw["timing"][role]
+        pre_h2 = metrics.get("h2_pre", {})
+        open_h2 = metrics.get("h2_open", {})
+        if metrics.get("actual_path_claim") != "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT" or metrics.get("pre_window") != [timing["n_gate"] + 48, timing["n_gate"] + 240] or metrics.get("open_window") != [timing["series_start"] + 20, timing["series_start"] + 980] or metrics.get("open_window", [10**9])[1] > timing["n_series_open"] + 1 or not 0.201 <= pre_h2.get("magnitude", 0) <= 0.472 or not -1.054 <= pre_h2.get("phase_rad", 0) <= -0.797 or open_h2.get("magnitude", 1) > 0.123 or not -1.035 <= open_h2.get("phase_rad", 0) <= -0.716 or open_h2.get("u95", 1) > 0.01 or metrics.get("r_drop", 1) > 0.277 or metrics.get("common_mode_peak_v", 1) > 0.1:
+            raise Failure(f"signal-path raw transfer/order gate: {role}")
     # The zero-drive, resonator-removed, and exact-C0 dummy records are the
     # mandatory physical-topology null baselines; a positive pair alone cannot
     # satisfy the analyzer custody gate.
     null_payloads = raw.get("input_custody", {}).get("payload_sha256", {})
     if set(null_payloads) != {"arm_0", "arm_pi", "dummy_c0", "resonator_removed", "zero_drive"}:
         raise Failure("exact positive and null-baseline payload custody")
+    receipt_names = {"adapter_source", "assembly_manifest", "assignment_commitment", "assignment_reveal", "calibration_receipt", "chronology_receipt", "instrument_queryback", "native_export_receipt", "nonlinear_control", "source_queryback", "topology_receipt", "topology_scan"}
+    byte_receipts = raw.get("input_custody", {}).get("byte_receipt_sha256", {})
+    if set(byte_receipts) != set(ROLE_ORDER) or any(set(role_receipts) != receipt_names or any(not isinstance(value, str) or len(value) != 64 or any(character not in HEX for character in value) for value in role_receipts.values()) for role_receipts in byte_receipts.values()):
+        raise Failure("actual byte-receipt custody")
+    expected_assembly_ids = {"arm_0": "P0-DUT-A", "arm_pi": "P0-DUT-A", "zero_drive": "P0-DUT-A", "resonator_removed": "P0-DETECTOR-B", "dummy_c0": "P0-DUMMY-C0-C"}
+    expected_populations = {"P0-DUT-A": "EPSON_Q13FC1350000401", "P0-DETECTOR-B": "CARRIER_POSITION_OPEN", "P0-DUMMY-C0-C": "MURATA_GJM1555C1H1R0BB01D_1PF_C0G"}
+    assemblies = raw.get("input_custody", {}).get("assembly", {})
+    if set(assemblies) != set(ROLE_ORDER):
+        raise Failure("assembly custody role coverage")
+    for role, expected_id in expected_assembly_ids.items():
+        if assemblies[role] != {"assembly_id": expected_id, "assembly_manifest_sha256": byte_receipts[role]["assembly_manifest"], "carrier_population": expected_populations[expected_id]}:
+            raise Failure(f"assembly custody identity: {role}")
+    if len({byte_receipts[role]["topology_scan"] for role in ROLE_ORDER}) != len(ROLE_ORDER):
+        raise Failure("topology scan replay/alias")
+    if len({byte_receipts[role]["topology_receipt"] for role in ROLE_ORDER}) != len(ROLE_ORDER):
+        raise Failure("topology receipt replay/alias")
+    if len({byte_receipts[role]["nonlinear_control"] for role in ROLE_ORDER}) != len(ROLE_ORDER):
+        raise Failure("nonlinear-control replay/alias")
+    if not (byte_receipts["arm_0"]["assembly_manifest"] == byte_receipts["arm_pi"]["assembly_manifest"] == byte_receipts["zero_drive"]["assembly_manifest"]):
+        raise Failure("DUT assembly manifest mismatch")
+    if len({byte_receipts["arm_0"]["assembly_manifest"], byte_receipts["resonator_removed"]["assembly_manifest"], byte_receipts["dummy_c0"]["assembly_manifest"]}) != 3:
+        raise Failure("A/B/C assembly manifest replay/alias")
+    signal_receipts = raw.get("signal_path_receipts", {})
+    if set(signal_receipts) != set(ROLE_ORDER):
+        raise Failure("signal-path receipt role coverage")
+    for role, receipt in signal_receipts.items():
+        scan = receipt.get("topology_scan", {})
+        if set(scan) != {"both_open", "closed_closed", "k1_open", "k2_open"} or receipt.get("nonlinear_2f_residue_ratio", 1.0) > 0.02:
+            raise Failure(f"signal-path raw receipt: {role}")
+        if not 0.201 <= scan["closed_closed"].get("magnitude", 0.0) <= 0.472 or any(scan[state].get("magnitude", 1.0) > 0.123 for state in ("both_open", "k1_open", "k2_open")):
+            raise Failure(f"signal-path topology scan envelope: {role}")
     relation = raw.get("relation_metrics", {})
     if relation.get("common_window_count", 0) % 8 != 0 or relation.get("jackknife_blocks") != relation.get("common_window_count", 0) // 8 or relation.get("common_window_count_before_blocking", 0) - relation.get("common_window_count", 0) != relation.get("discarded_incomplete_block_windows") or not 0 <= relation.get("discarded_incomplete_block_windows", -1) < 8:
         raise Failure("identical blocked common grid for relation point estimate and jackknife")
@@ -827,6 +971,10 @@ def check_analyzer(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
     source_schema = schemas.get("enforced_objects", {}).get("p0.raw-bundle.v1", {})
     if source_schema.get("source_frozen_setup") != {"c1_amplitude_vpp": "0.4", "c1_offset_v": "0", "c2_amplitude_vpp": "0.1", "c2_offset_v": "0", "load_mode": "HIGH_Z", "physical_output_ohms": "50"}:
         raise Failure("analyzer source schema envelope")
+    if source_schema.get("byte_receipts_required") != ["adapter_source", "assembly_manifest", "assignment_commitment", "assignment_reveal", "calibration_receipt", "chronology_receipt", "instrument_queryback", "native_export_receipt", "nonlinear_control", "source_queryback", "topology_receipt", "topology_scan"]:
+        raise Failure("analyzer byte-receipt schema")
+    if source_schema.get("assembly_exact_fields") != ["assembly_id", "assembly_manifest_sha256", "carrier_population"] or source_schema.get("role_to_assembly") != expected_assembly_ids or source_schema.get("topology_scan_hashes_unique_per_role") is not True or source_schema.get("nonlinear_control_hashes_unique_per_role") is not True or source_schema.get("chronology_utc_format") != "YYYY-MM-DDTHH:MM:SS.ffffffZ":
+        raise Failure("analyzer assembly/topology custody schema")
     if not {"phase_skew_standard_uncertainty_rad", "phase_drive_cal_standard_uncertainty_rad"}.issubset(set(source_schema.get("source_exact_fields", []))):
         raise Failure("drive-phase uncertainty metadata schema")
     result_schema = schemas.get("enforced_objects", {}).get("p0.scientific-result.v1", {})
@@ -839,7 +987,12 @@ def check_analyzer(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
     semantic_schema = schemas.get("enforced_objects", {}).get("p0.synthetic-control-evidence.v1", {})
     if semantic_schema.get("scientific_negative_execution") != "summary_schema_and_decision_law_only__not_raw_analyzer_evidence":
         raise Failure("summary-vs-raw scientific fixture scope")
-    return {"fixture_count": 55, "positive": 8, "scientific_negative": 32, "malformed_or_custody_negative": 15, "raw_adversaries": 31, "fixture_sha256": sha256(snapshot["P0_SCIENTIFIC_FIXTURES.json"]), "result_sha256": sha256(snapshot["P0_ANALYZER_REFERENCE_RESULTS.json"]), "schema_sha256": sha256(snapshot["P0_BUILD_READINESS_SCHEMAS.json"])}
+    signal_schema = schemas.get("enforced_objects", {}).get("p0.signal-path-control.v1", {})
+    if signal_schema.get("threshold_source") != "P0_SIGNAL_PATH_CIRCUIT_MODEL.json" or signal_schema.get("physical_claim_authorized") is not False:
+        raise Failure("signal-path control schema")
+    if not {"drive_shunt_node", "drive_shunt_resistance_ohm"}.issubset(set(source_schema.get("signal_path_exact_fields", []))):
+        raise Failure("source-side safety-shunt schema")
+    return {"fixture_count": 55, "positive": 8, "scientific_negative": 32, "malformed_or_custody_negative": 15, "signal_path_positive": 8, "signal_path_scientific_negative": 11, "signal_path_custody_negative": 4, "raw_adversaries": 54, "fixture_sha256": sha256(snapshot["P0_SCIENTIFIC_FIXTURES.json"]), "result_sha256": sha256(snapshot["P0_ANALYZER_REFERENCE_RESULTS.json"]), "schema_sha256": sha256(snapshot["P0_BUILD_READINESS_SCHEMAS.json"])}
 
 
 def check_claims_and_findings(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
@@ -859,7 +1012,7 @@ def check_claims_and_findings(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
     if any(f"D{index:03d}" not in drawings for index in range(1, 11)):
         raise Failure("drawing-set coverage")
     for content, name in ((authority, "authority"), (contract, "contract"), (roadmap, "roadmap")):
-        if AUTHORITY not in content or CEILING not in content or NEXT not in content or "P0_BUILD_READINESS_BLOCKED" not in content:
+        if AUTHORITY not in content or CEILING not in content or NEXT not in content or "P0_BUILD_READINESS_PACKET_FROZEN" not in content:
             raise Failure(f"lane authority alignment: {name}")
     if "commits, and pushes" in authority or "commit or push without a separate explicit user instruction" not in authority or "human vendor communication or quote request" not in authority:
         raise Failure("active authority commit/push/vendor-communication fence")
@@ -876,24 +1029,24 @@ def check_claims_and_findings(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
         if forbidden in combined:
             raise Failure(f"retired design token remains: {forbidden.decode('ascii')}")
     findings = parse_json("P0_BUILD_READINESS_FINDINGS.json", snapshot)
-    if findings.get("schema") != "p0.build-readiness-findings.v2" or findings.get("authority") != AUTHORITY or findings.get("claim_ceiling") != CEILING or findings.get("decision") != "P0_BUILD_READINESS_BLOCKED" or findings.get("open_material_findings") != 1:
+    if findings.get("schema") != "p0.build-readiness-findings.v3" or findings.get("authority") != AUTHORITY or findings.get("claim_ceiling") != CEILING or findings.get("decision") != "P0_BUILD_READINESS_PACKET_FROZEN" or findings.get("repair_decision") != "P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED" or findings.get("open_material_findings") != 0:
         raise Failure("findings root/closure")
     entries = findings.get("findings")
     if not isinstance(entries, list) or len(entries) != 17:
         raise Failure("normalized finding cardinality")
     closed = [entry for entry in entries if entry.get("status") == "CLOSED"]
     opened = [entry for entry in entries if entry.get("status") == "OPEN"]
-    if len(closed) != 16 or any(not entry.get("closure_evidence") for entry in closed):
-        raise Failure("all sixteen repaired findings must remain explicitly closed")
-    expected_open = {
-        "closure_evidence": ["P0_FINAL_NETLIST.json#source_off_sequence.signal_pole_evidence_boundary", "P0_BUILD_READINESS_PACKET.md#physical-source-off-sequence", "P0_FUTURE_PHYSICAL_EXECUTION_CONTRACT.md#future-source-off-contract"],
+    if len(closed) != 17 or opened or any(not entry.get("closure_evidence") for entry in closed):
+        raise Failure("all seventeen repaired findings must be explicitly closed")
+    expected_repair = {
+        "closure_evidence": ["P0_SIGNAL_PATH_CIRCUIT_MODEL.json", "P0_FINAL_NETLIST.json#source_off_sequence.signal_pole_evidence_boundary", "p0_scientific_analyzer.py#signal_path_transfer", "p0_scientific_analyzer.py#ASSEMBLY_FOR_ROLE", "P0_SIGNAL_PATH_ORDERING_PROOF.json", "P0_ANALYZER_REFERENCE_RESULTS.json#signal_path_control_outcomes", "P0_SIGNAL_PATH_MUTATION_RESULTS.json", "P0_BUILD_READINESS_REVIEWS.json"],
         "finding_id": "P0BR-R3-SIGNAL-POLE",
-        "original_summary": "Auxiliary CH2 contacts do not provide per-event evidence that K1/K2 signal poles opened; physical source-disconnect claims remain blocked pending an actual-path witness or exact force-guided guarantee.",
+        "original_summary": "Auxiliary CH2 contacts do not provide per-event evidence that K1/K2 signal poles opened; closure requires a prospective actual-path witness plus assembly-, role-, event-, queryback- and parsed-UTC chronology custody that rejects A-to-B/C, cross-event scan/receipt/control replay and noncanonical time text.",
         "severity": "BLOCKER",
-        "status": "OPEN",
+        "status": "CLOSED",
     }
-    if opened != [expected_open]:
-        raise Failure("exact actual-signal-pole blocker")
+    if [entry for entry in entries if entry.get("finding_id") == "P0BR-R3-SIGNAL-POLE"] != [expected_repair]:
+        raise Failure("exact actual-signal-path repair closure")
     if len({entry.get("finding_id") for entry in entries}) != 17:
         raise Failure("finding identities")
     attestation = findings.get("contact_attestation", {})
@@ -906,7 +1059,7 @@ def check_claims_and_findings(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
     historical_findings = parse_json("P0_FINDINGS_NORMALIZED.json", snapshot, canonical_required=False)
     if "Historical record only" not in historical_report or "HISTORICAL_OBSOLETE_REVIEW_RECORD__NO_CURRENT_AUTHORITY" not in historical_report or historical_findings.get("active_authority") is not False or historical_findings.get("decision") != "HISTORICAL_OBSOLETE_REVIEW_RECORD__NO_CURRENT_AUTHORITY" or "no current candidate review" not in historical_findings.get("historical_scope", ""):
         raise Failure("obsolete review/finding retirement")
-    return {"claim_ceiling": CEILING, "closed_findings": 16, "decision": "P0_BUILD_READINESS_BLOCKED", "open_material_findings": 1, "next_boundary": NEXT, "zero_contact": attestation}
+    return {"claim_ceiling": CEILING, "closed_findings": 17, "decision": "P0_BUILD_READINESS_PACKET_FROZEN", "open_material_findings": 0, "repair_decision": "P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED", "next_boundary": NEXT, "zero_contact": attestation}
 
 
 def validate_candidate(snapshot: Mapping[str, bytes], expected_root: str | None = None) -> dict[str, Any]:
@@ -924,9 +1077,10 @@ def validate_candidate(snapshot: Mapping[str, bytes], expected_root: str | None 
     bom_summary = check_bom(snapshot)
     fabrication_summary = check_fabrication(snapshot)
     document_summary = check_documents(snapshot)
+    signal_path_summary = check_signal_path(snapshot)
     analyzer_summary = check_analyzer(snapshot)
     claims_summary = check_claims_and_findings(snapshot)
-    return {"candidate_root": root, "scripts": scripts, "research": research_summary, "netlist": netlist_summary, "bom": bom_summary, "fabrication": fabrication_summary, "component_documents": document_summary, "analyzer": analyzer_summary, "claims": claims_summary}
+    return {"candidate_root": root, "scripts": scripts, "research": research_summary, "netlist": netlist_summary, "bom": bom_summary, "fabrication": fabrication_summary, "component_documents": document_summary, "signal_path": signal_path_summary, "analyzer": analyzer_summary, "claims": claims_summary}
 
 
 def check_reviews(snapshot: Mapping[str, bytes], root: str) -> dict[str, Any]:
@@ -934,14 +1088,15 @@ def check_reviews(snapshot: Mapping[str, bytes], root: str) -> dict[str, Any]:
     if set(reviews) != {"authority", "candidate_root", "claim_ceiling", "reviews", "schema"} or reviews["schema"] != "p0.build-readiness-reviews.v1" or reviews["authority"] != AUTHORITY or reviews["claim_ceiling"] != CEILING or reviews["candidate_root"] != root:
         raise Failure("structured review root/schema")
     entries = reviews["reviews"]
-    required_roles = {"parts_and_carrier", "topology_and_source_off", "analyzer_and_evidence", "claims_safety_and_authority"}
-    if not isinstance(entries, list) or len(entries) != 4 or {entry.get("role") for entry in entries} != required_roles:
+    required_roles = {"circuit_and_carrier", "path_and_source_off", "analyzer_and_controls", "claims_authority"}
+    required_review_ids = {"AUD-P0SP-01-CIRCUIT-AND-CARRIER", "AUD-P0SP-02-PATH-AND-SOURCE-OFF", "AUD-P0SP-03-ANALYZER-AND-CONTROLS", "AUD-P0SP-04-CLAIMS-AUTHORITY"}
+    if not isinstance(entries, list) or len(entries) != 4 or {entry.get("role") for entry in entries} != required_roles or {entry.get("review_id") for entry in entries} != required_review_ids:
         raise Failure("four exact independent review roles required")
     agent_ids = [entry.get("agent_id") for entry in entries]
     if any(not isinstance(agent_id, str) or not agent_id for agent_id in agent_ids) or len(set(agent_ids)) != 4:
         raise Failure("four distinct reviewer IDs required")
     for entry in entries:
-        if set(entry) != {"agent_id", "findings", "independent", "reviewed_root", "role", "verdict"} or entry["verdict"] != "PASS" or entry["findings"] != [] or entry["independent"] is not True or entry["reviewed_root"] != root:
+        if set(entry) != {"agent_id", "findings", "independent", "review_id", "reviewed_root", "role", "verdict"} or entry["verdict"] != "PASS" or entry["findings"] != [] or entry["independent"] is not True or entry["reviewed_root"] != root:
             raise Failure(f"review did not close cleanly: {entry.get('role')}")
     report = text("P0_BUILD_READINESS_REVIEW_REPORTS.md", snapshot)
     if root not in report or any(agent_id not in report for agent_id in agent_ids) or report.count("verdict: PASS") != 4:
@@ -958,16 +1113,86 @@ def check_mutation_result(snapshot: Mapping[str, bytes], root: str) -> dict[str,
     return result
 
 
+def check_signal_mutation_result(snapshot: Mapping[str, bytes], root: str) -> dict[str, Any]:
+    result = parse_json(SIGNAL_MUTATION_RESULT, snapshot)
+    if result.get("schema") != "p0.signal-path-mutation-results.v2" or result.get("candidate_root") != root or result.get("result") != "PASS" or result.get("claim_ceiling") != "NON_EXECUTING_P0_SIGNAL_PATH_WITNESS_REPAIR_ONLY":
+        raise Failure("signal-path mutation result root/status")
+    if result.get("semantic_input_mutation_count") != 15 or result.get("structural_mutation_count") != 50 or result.get("raw_boundary_control_count") != 14 or result.get("total_mutation_count") != 80 or result.get("surviving_mutants") != 0:
+        raise Failure("signal-path mutation coverage")
+    if result.get("model_mutation", {}).get("outcome") != "PASS" or len(result.get("structural_outcomes", [])) != 50 or any(item.get("outcome") != "PASS" for item in result.get("structural_outcomes", [])) or len(result.get("raw_boundary_controls", [])) != 14 or any(item.get("outcome") != "PASS" for item in result.get("raw_boundary_controls", [])):
+        raise Failure("signal-path mutation outcome")
+    if any(value != 0 for value in result.get("contact_attestation", {}).values()):
+        raise Failure("signal-path mutation zero-contact fence")
+    return result
+
+
 def final_files(snapshot: Mapping[str, bytes]) -> list[dict[str, Any]]:
     return [{"path": name, "bytes": len(snapshot[name]), "sha256": sha256(snapshot[name])} for name in sorted(CANDIDATE_NAMES + FINAL_ONLY)]
 
 
+def final_documents(snapshot: Mapping[str, bytes]) -> tuple[dict[str, Any], dict[str, Any]]:
+    candidate = validate_candidate(snapshot)
+    root = candidate["candidate_root"]
+    reviews = check_reviews(snapshot, root)
+    mutation = check_mutation_result(snapshot, root)
+    signal_mutation = check_signal_mutation_result(snapshot, root)
+    manifest = {
+        "authority": AUTHORITY,
+        "build_readiness_decision": "P0_BUILD_READINESS_PACKET_FROZEN",
+        "candidate_root": root,
+        "claim_ceiling": CEILING,
+        "contact_attestation": {"audio_playback_or_recording": 0, "cart_or_stock_check": 0, "hardware": 0, "human_vendor_outreach": 0, "instrument_command": 0, "purchase": 0, "target": 0},
+        "files": final_files(snapshot),
+        "next_authority_boundary": NEXT,
+        "repair_decision": "P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED",
+        "review_agent_ids": reviews["agent_ids"],
+        "schema": "p0.build-readiness-manifest.v3",
+    }
+    results = {
+        "authority": AUTHORITY,
+        "build_readiness_decision": "P0_BUILD_READINESS_PACKET_FROZEN",
+        "candidate_root": root,
+        "claim_ceiling": CEILING,
+        "manifest_sha256": sha256(canonical(manifest)),
+        "mutation": {"full_mutations_rejected": mutation["mutations_rejected"], "signal_path_mutations_rejected": signal_mutation["total_mutation_count"], "surviving_mutants": 0},
+        "next_authority_boundary": NEXT,
+        "open_material_findings": 0,
+        "physical_observation": False,
+        "qualification": candidate,
+        "repair_decision": "P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED",
+        "reviews": reviews,
+        "schema": "p0.build-readiness-results.v3",
+        "status": "PASS",
+        "zero_hardware_contact": True,
+    }
+    return manifest, results
+
+
+def write_atomic(path: Path, data: bytes) -> None:
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_bytes(data)
+    temporary.replace(path)
+
+
 def build() -> dict[str, Any]:
-    raise Failure("AUTOMATIC_FREEZE_DISABLED__EXTERNAL_REVIEW_PROVENANCE_AND_ZERO_OPEN_FINDINGS_REQUIRED")
+    snapshot = read_snapshot(True)
+    manifest, results = final_documents(snapshot)
+    manifest_bytes = canonical(manifest)
+    result_bytes = canonical(results)
+    write_atomic(ROOT / MANIFEST, manifest_bytes)
+    write_atomic(ROOT / RESULT, result_bytes)
+    return {"candidate_root": manifest["candidate_root"], "manifest_sha256": sha256(manifest_bytes), "result_sha256": sha256(result_bytes), "status": "PASS"}
 
 
 def verify() -> dict[str, Any]:
-    raise Failure("AUTOMATIC_FREEZE_DISABLED__EXTERNAL_REVIEW_PROVENANCE_AND_ZERO_OPEN_FINDINGS_REQUIRED")
+    snapshot = read_snapshot(True)
+    manifest, results = final_documents(snapshot)
+    expected = {MANIFEST: canonical(manifest), RESULT: canonical(results)}
+    for name, data in expected.items():
+        path = ROOT / name
+        if not path.is_file() or path.read_bytes() != data:
+            raise Failure(f"committed final byte mismatch: {name}")
+    return {"candidate_root": manifest["candidate_root"], "manifest_sha256": sha256(expected[MANIFEST]), "result_sha256": sha256(expected[RESULT]), "status": "PASS"}
 
 
 def main(argv: list[str] | None = None) -> int:

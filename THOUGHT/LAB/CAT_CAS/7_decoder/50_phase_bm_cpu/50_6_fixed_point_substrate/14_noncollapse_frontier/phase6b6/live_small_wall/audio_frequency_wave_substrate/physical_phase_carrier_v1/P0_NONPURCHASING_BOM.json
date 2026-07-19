@@ -7,9 +7,9 @@
     "fallback_only",
     "silicon_future"
   ],
-  "electrical_component_count": 224,
+  "electrical_component_count": 230,
   "inventory": "prospective exact identities; no stock was inspected or reserved",
-  "inventory_sha256": "32361d0cf569ec59e839f9678bbfba0e16e8f4c8ecd38b632f455264cfbde7e6",
+  "inventory_sha256": "d583471518378c91da6744dbaaf7c818c74fc341edb45f83ea2f01bf294d3969",
   "items": [
     {
       "allowed_substitution": "NONE",
@@ -491,11 +491,11 @@
       "assembly_gate": "reference, pin map, package, value and count must equal P0_FINAL_NETLIST.json",
       "category": "required_p0_build",
       "conservative_limit": "the frozen netlist and all component-specific qualification gates apply",
-      "critical_value": "ADXL354 V1P8ANA discharge; ADXL354 V1P8DIG discharge; C1 source limiter; K1 gate fail-low pull-down; K2 gate fail-low pull-down; K3 gate fail-low pull-down; fixed 2x reference-tone monitor contribution; upstream C1 monitor contribution",
+      "critical_value": "100 kohm N_SRC drive shunt enforcing the 0.200 Vpp carrier-terminal cap; isolated from N_GATE_OUT when ADG1419 is OFF; ADXL354 V1P8ANA discharge; ADXL354 V1P8DIG discharge; C1 source limiter; K1 gate fail-low pull-down; K2 gate fail-low pull-down; K3 gate fail-low pull-down; fixed 2x reference-tone monitor contribution; upstream C1 monitor contribution",
       "datasheet_hash": "LEGACY_EXPECTED_SHA256__BYTES_NOT_LOCAL__42309eb5c95365801d46cbfdc020fb9171d756f5e9015b35a191b35d043890f9",
       "execution_gate": "component and complete-path characterization remains separately unauthorized",
       "forbidden_substitution": "any different manufacturer, suffix, value, package, tolerance or topology",
-      "function": "ADXL354 V1P8ANA discharge; ADXL354 V1P8DIG discharge; C1 source limiter; K1 gate fail-low pull-down; K2 gate fail-low pull-down; K3 gate fail-low pull-down; fixed 2x reference-tone monitor contribution; upstream C1 monitor contribution",
+      "function": "100 kohm N_SRC drive shunt enforcing the 0.200 Vpp carrier-terminal cap; isolated from N_GATE_OUT when ADG1419 is OFF; ADXL354 V1P8ANA discharge; ADXL354 V1P8DIG discharge; C1 source limiter; K1 gate fail-low pull-down; K2 gate fail-low pull-down; K3 gate fail-low pull-down; fixed 2x reference-tone monitor contribution; upstream C1 monitor contribution",
       "line": 18,
       "manufacturer": "Vishay",
       "netlist_refs": [
@@ -505,6 +505,9 @@
         "R_DISCH_DIG_A",
         "R_DISCH_DIG_B",
         "R_DISCH_DIG_C",
+        "R_DRIVE_SHUNT_A",
+        "R_DRIVE_SHUNT_B",
+        "R_DRIVE_SHUNT_C",
         "R_GPD1_A",
         "R_GPD1_B",
         "R_GPD1_C",
@@ -527,7 +530,7 @@
       "package": "0805",
       "part_number": "TNPW0805100KBEEN",
       "procurement_gate": "exact order identity, official-document byte hash, lot and packing code",
-      "quantity": 24
+      "quantity": 27
     },
     {
       "allowed_substitution": "NONE",
@@ -593,14 +596,17 @@
       "assembly_gate": "reference, pin map, package, value and count must equal P0_FINAL_NETLIST.json",
       "category": "required_p0_build",
       "conservative_limit": "the frozen netlist and all component-specific qualification gates apply",
-      "critical_value": "CH0 passive monitor return",
+      "critical_value": "CH0 passive monitor return; continuous 1.00 Mohm C2 actual-signal-path witness injection downstream of ADG1419 and upstream of K1",
       "datasheet_hash": "LEGACY_EXPECTED_SHA256__BYTES_NOT_LOCAL__42309eb5c95365801d46cbfdc020fb9171d756f5e9015b35a191b35d043890f9",
       "execution_gate": "component and complete-path characterization remains separately unauthorized",
       "forbidden_substitution": "any different manufacturer, suffix, value, package, tolerance or topology",
-      "function": "CH0 passive monitor return",
+      "function": "CH0 passive monitor return; continuous 1.00 Mohm C2 actual-signal-path witness injection downstream of ADG1419 and upstream of K1",
       "line": 21,
       "manufacturer": "Vishay",
       "netlist_refs": [
+        "R_C2_INJECT_A",
+        "R_C2_INJECT_B",
+        "R_C2_INJECT_C",
         "R_MON_BIAS_A",
         "R_MON_BIAS_B",
         "R_MON_BIAS_C"
@@ -608,7 +614,7 @@
       "package": "0805",
       "part_number": "TNPW08051M00BEEN",
       "procurement_gate": "exact order identity, official-document byte hash, lot and packing code",
-      "quantity": 3
+      "quantity": 6
     },
     {
       "allowed_substitution": "NONE",

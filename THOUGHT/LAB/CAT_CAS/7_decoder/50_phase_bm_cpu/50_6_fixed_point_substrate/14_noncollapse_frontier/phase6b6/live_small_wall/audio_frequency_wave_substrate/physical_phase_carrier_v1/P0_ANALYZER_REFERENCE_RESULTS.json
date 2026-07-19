@@ -1,6 +1,6 @@
 {
   "artifact_custody": {
-    "analyzer_sha256": "e20de28434b0937bb81407e998baebfd0f29afbfb9cd796084375984a69007b7",
+    "analyzer_sha256": "33fc447ef5c545a8408cbd0e6330cdd71a72a5a097d80296b24240f37d0b750f",
     "dependency_identity": {
       "byteorder": "little",
       "machine": "AMD64",
@@ -108,8 +108,8 @@
       }
     },
     "dependency_sha256": "7ed5c6a0295ea2089369804cf45631335f13c5e745904783ea70f8e877dd2cfb",
-    "fixture_sha256": "3896bf4a06284fd526e00cb2387123d971887ae571a0bae8d783df62fd23a3fa",
-    "schema_sha256": "40fb60c015386ea76081456305b02359b521b515936df302cd900ad450cd88ec"
+    "fixture_sha256": "f7cae242dfb96f00a70ab88957c04a060e4859ef13df823867b2ed50fc042ff7",
+    "schema_sha256": "21ca54f27528701fb9154108681775fed38c648f4706c16c89397255200c9b7d"
   },
   "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
   "fixture_count": 55,
@@ -223,7 +223,7 @@
   ],
   "physical_claim_authorized": false,
   "positive_count": 8,
-  "raw_adversary_count": 31,
+  "raw_adversary_count": 54,
   "raw_adversary_outcomes": [
     {
       "case": "negative_scale_transform",
@@ -410,63 +410,201 @@
       "execution": "actual_bundle_analyzer",
       "outcome": "PASS",
       "rejected_by": "NUMBER_ENCODING"
+    },
+    {
+      "case": "signal_path_c2_absent_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_REFERENCE_MISSING"
+    },
+    {
+      "case": "signal_path_no_downstream_injection_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_PRE_SNR"
+    },
+    {
+      "case": "signal_path_guard_masked_pre_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_PRE_SNR"
+    },
+    {
+      "case": "signal_path_closed_not_isolated_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_NOT_ISOLATED"
+    },
+    {
+      "case": "signal_path_phase_inversion_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_PHASE"
+    },
+    {
+      "case": "signal_path_open_feedthrough_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_NOT_ISOLATED"
+    },
+    {
+      "case": "signal_path_wrong_node_metadata",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_TOPOLOGY_CUSTODY"
+    },
+    {
+      "case": "signal_path_wrong_node_raw_nominal_labels",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_TOPOLOGY_SCAN"
+    },
+    {
+      "case": "signal_path_threshold_hash_metadata",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_THRESHOLD_CUSTODY"
+    },
+    {
+      "case": "signal_path_k3_guard_metadata",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_GUARD_MASKING"
+    },
+    {
+      "case": "signal_path_k3_guard_signal_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_PHASE"
+    },
+    {
+      "case": "signal_path_nonlinear_2f_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_2F_RESIDUE"
+    },
+    {
+      "case": "signal_path_common_mode_raw",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_COMMON_MODE"
+    },
+    {
+      "case": "signal_path_assembly_a_replay_into_b",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_ASSEMBLY_ROLE"
+    },
+    {
+      "case": "signal_path_assembly_a_replay_into_c",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_ASSEMBLY_ROLE"
+    },
+    {
+      "case": "signal_path_topology_receipt_wrong_event",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_TOPOLOGY_CUSTODY"
+    },
+    {
+      "case": "signal_path_scan_after_acquisition",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "signal_path_duplicate_topology_scan_hash",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_TOPOLOGY_SCAN_REPLAY"
+    },
+    {
+      "case": "signal_path_duplicate_nonlinear_control_hash",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_NONLINEAR_CONTROL_REPLAY"
+    },
+    {
+      "case": "signal_path_scan_time_malformed",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "signal_path_scan_time_alternate_offset",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "signal_path_acquisition_time_truncated_precision",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "CHRONOLOGY_CUSTODY"
+    },
+    {
+      "case": "signal_path_scan_time_lexical_deception",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_SCAN_CHRONOLOGY"
     }
   ],
   "raw_numerical_reference": {
     "arms": {
       "arm_0": {
-        "frequency_hz": 32768.00000272296,
-        "q": 18529.80934472782,
-        "r2_log_amplitude": 0.9999999933368685,
-        "tau_s": 0.1799994355175025,
-        "u95_frequency_hz": 6.7887336258753935e-06,
-        "u95_tau_s": 1.3619689097561667e-06,
+        "frequency_hz": 32768.000002273686,
+        "q": 18529.878163851037,
+        "r2_log_amplitude": 0.999999993389322,
+        "tau_s": 0.18000010403215538,
+        "u95_frequency_hz": 7.400050392966584e-06,
+        "u95_tau_s": 1.3082341107571698e-06,
         "usable_cycles": 34854
       },
       "arm_pi": {
-        "frequency_hz": 32767.999998432126,
-        "q": 18529.89929450307,
-        "r2_log_amplitude": 0.9999999930728654,
-        "tau_s": 0.1800003093174009,
-        "u95_frequency_hz": 7.363088561783094e-06,
-        "u95_tau_s": 1.3772463450380534e-06,
-        "usable_cycles": 34854
+        "frequency_hz": 32768.0000004361,
+        "q": 18529.910532886104,
+        "r2_log_amplitude": 0.999999992843303,
+        "tau_s": 0.18000041847657172,
+        "u95_frequency_hz": 7.119714286490875e-06,
+        "u95_tau_s": 1.368378601169523e-06,
+        "usable_cycles": 34863
       }
     },
     "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
-    "claim_token": "SYNTHETIC_ANALYZER_PASS",
+    "claim_token": "SYNTHETIC_ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
     "drive_phase": {
       "arm_0": {
-        "drive_reference_phase_covariance_rad2": -2.3231745092534514e-15,
-        "error_phase_fit_standard_uncertainty_rad": 3.689615411684835e-07,
-        "error_rad": -1.2375165647782183e-07,
-        "gauge_phase_fit_standard_uncertainty_rad": 3.268880220076725e-07,
+        "drive_reference_phase_covariance_rad2": -3.054718190227044e-16,
+        "error_phase_fit_standard_uncertainty_rad": 2.2120062863340433e-07,
+        "error_rad": 7.292143777704041e-09,
+        "gauge_phase_fit_standard_uncertainty_rad": 1.467189444422173e-07,
         "phase_drive_cal_standard_uncertainty_rad": 0.0001,
-        "phase_fit_standard_uncertainty_rad": 1.6417571507406485e-07,
+        "phase_fit_standard_uncertainty_rad": 1.6461408697481543e-07,
         "phase_skew_standard_uncertainty_rad": 0.0001,
         "preparation_first_sample": 101000,
         "preparation_last_sample": 1100999,
-        "preparation_residual_ratio_max": 6.272245578108614e-05,
-        "reference_phase_fit_standard_uncertainty_rad": 6.53776044015345e-07,
-        "u95_drive_rad": 0.00027718680157444117
+        "preparation_residual_ratio_max": 6.44953040025358e-05,
+        "reference_phase_fit_standard_uncertainty_rad": 2.934378888844346e-07,
+        "u95_drive_rad": 0.0002771861972905669
       },
       "arm_pi": {
-        "drive_reference_phase_covariance_rad2": -2.9773877657833977e-15,
-        "error_phase_fit_standard_uncertainty_rad": 3.7089381760766703e-07,
-        "error_rad": -4.970015154981411e-08,
-        "gauge_phase_fit_standard_uncertainty_rad": 3.285094106832612e-07,
+        "drive_reference_phase_covariance_rad2": 1.6738899709751513e-15,
+        "error_phase_fit_standard_uncertainty_rad": 2.112609227358066e-07,
+        "error_rad": -6.963424326045242e-08,
+        "gauge_phase_fit_standard_uncertainty_rad": 1.425354921896937e-07,
         "phase_drive_cal_standard_uncertainty_rad": 0.0001,
-        "phase_fit_standard_uncertainty_rad": 1.6329850968806305e-07,
+        "phase_fit_standard_uncertainty_rad": 1.612101141752631e-07,
         "phase_skew_standard_uncertainty_rad": 0.0001,
         "preparation_first_sample": 101000,
         "preparation_last_sample": 1100999,
-        "preparation_residual_ratio_max": 6.359532542183689e-05,
-        "reference_phase_fit_standard_uncertainty_rad": 6.570188213665224e-07,
-        "u95_drive_rad": 0.00027718681148106503
+        "preparation_residual_ratio_max": 6.309840802413699e-05,
+        "reference_phase_fit_standard_uncertainty_rad": 2.850709843793874e-07,
+        "u95_drive_rad": 0.0002771861675032349
       },
-      "matched_acceptance_lhs_rad": 0.0005544476645604343,
-      "matched_error_difference_rad": 7.405150492800772e-08,
-      "matched_u95_sum_rad": 0.0005543736130555062
+      "matched_acceptance_lhs_rad": 0.0005544492911808399,
+      "matched_error_difference_rad": -7.692638703815646e-08,
+      "matched_u95_sum_rad": 0.0005543723647938017
     },
     "environment": {
       "arm_0": {
@@ -480,13 +618,13 @@
         "humidity_rh": 40.000228885328454,
         "record_count": 10,
         "temperature_c": 25.0,
-        "vibration_peak_m_s2": 0.005017562627735032,
-        "vibration_rms_m_s2": 0.003534158786404532
+        "vibration_peak_m_s2": 0.005016704571063702,
+        "vibration_rms_m_s2": 0.00353416734078984
       }
     },
     "f_ref_hz": 32768.0,
     "implementation_custody": {
-      "analyzer_sha256": "e20de28434b0937bb81407e998baebfd0f29afbfb9cd796084375984a69007b7",
+      "analyzer_sha256": "33fc447ef5c545a8408cbd0e6330cdd71a72a5a097d80296b24240f37d0b750f",
       "dependency_identity": {
         "byteorder": "little",
         "machine": "AMD64",
@@ -594,26 +732,126 @@
         }
       },
       "dependency_sha256": "7ed5c6a0295ea2089369804cf45631335f13c5e745904783ea70f8e877dd2cfb",
-      "fixture_sha256": "3896bf4a06284fd526e00cb2387123d971887ae571a0bae8d783df62fd23a3fa",
-      "schema_sha256": "40fb60c015386ea76081456305b02359b521b515936df302cd900ad450cd88ec"
+      "fixture_sha256": "f7cae242dfb96f00a70ab88957c04a060e4859ef13df823867b2ed50fc042ff7",
+      "schema_sha256": "21ca54f27528701fb9154108681775fed38c648f4706c16c89397255200c9b7d",
+      "signal_path_model_sha256": "7cd08c67e10cad4e1b83082f7fa2beaf8bcc2361a16ee9b861fdddd293594b28"
     },
     "input_custody": {
-      "assignment_commitment_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
-      "bundle_sha256": "0cce04ae5ecbc717c340ba6c6b1f92b7c23b841e6636089ed82aeb151044f9c1",
+      "assembly": {
+        "arm_0": {
+          "assembly_id": "P0-DUT-A",
+          "assembly_manifest_sha256": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "carrier_population": "EPSON_Q13FC1350000401"
+        },
+        "arm_pi": {
+          "assembly_id": "P0-DUT-A",
+          "assembly_manifest_sha256": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "carrier_population": "EPSON_Q13FC1350000401"
+        },
+        "dummy_c0": {
+          "assembly_id": "P0-DUMMY-C0-C",
+          "assembly_manifest_sha256": "af929cd9ee779f754a2ed0d56eab19b17a4abca423cdab5c6970688fcd09cad8",
+          "carrier_population": "MURATA_GJM1555C1H1R0BB01D_1PF_C0G"
+        },
+        "resonator_removed": {
+          "assembly_id": "P0-DETECTOR-B",
+          "assembly_manifest_sha256": "895309dc882c2c882db37b6861c183cefa630bdc34fff4b802e7b577f3499b8a",
+          "carrier_population": "CARRIER_POSITION_OPEN"
+        },
+        "zero_drive": {
+          "assembly_id": "P0-DUT-A",
+          "assembly_manifest_sha256": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "carrier_population": "EPSON_Q13FC1350000401"
+        }
+      },
+      "assignment_commitment_sha256": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
+      "bundle_sha256": "560d443b2be487dbe5a203676a5e6b06895e162c38fb87bcd67d7546c06e839f",
+      "byte_receipt_sha256": {
+        "arm_0": {
+          "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
+          "assembly_manifest": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "assignment_commitment": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
+          "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
+          "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+          "chronology_receipt": "caf2e8e21bf8daf53ab66e03fb35870d31a6f383e1332934a921e4b9f34a07fe",
+          "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
+          "native_export_receipt": "82294841c58a586a777cb4de192ccdc4026649c984ed24f1d9fac36a543f1eff",
+          "nonlinear_control": "ba7627e92f644a47f2c0e6d8668b7de4817cc414542cf986e0de12ef6f3913b0",
+          "source_queryback": "22a949fc0e145a419074df288bfe60ed017ef376394cac847772f69731cc2370",
+          "topology_receipt": "471c5b331bbbfdcf8af911e491778f56ca5dca3610439ced76ee43cdc2a8d2c9",
+          "topology_scan": "dea79e0360ea2d365f289dcd3c4a41a4e83897ddcab11c9971e8c33ae47c247a"
+        },
+        "arm_pi": {
+          "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
+          "assembly_manifest": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "assignment_commitment": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
+          "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
+          "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+          "chronology_receipt": "9f12d22dea0633b2febb166121fbe33f92e7a770fd1f82fc75df7c204d93716b",
+          "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
+          "native_export_receipt": "7692cc581c9e704095fe397367254d12bafa7560e56616aeb259ba3eef10e946",
+          "nonlinear_control": "0a82adaa174abe32073ab8ac84a9f5bbf3159332622a79de27f9ea096e71cb77",
+          "source_queryback": "9ea27dfa2591a724fa33ec8148f64fdff5ff9d3b90f842bc90e1751293b0b5e8",
+          "topology_receipt": "2a129b13a6a2d7bacefbd26527b739d85cece547e9cbf0f6393359f1995a531c",
+          "topology_scan": "b1acf154441ba229ca4492bb7579b474b44e0905a2cf4fc47e6d88a788dbd011"
+        },
+        "dummy_c0": {
+          "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
+          "assembly_manifest": "af929cd9ee779f754a2ed0d56eab19b17a4abca423cdab5c6970688fcd09cad8",
+          "assignment_commitment": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
+          "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
+          "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+          "chronology_receipt": "fff32ed147c4aab35c58d62de2ce203d6c5c2daab4646ffa2ef52dc2ebd59a64",
+          "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
+          "native_export_receipt": "a95faa38146d7db7d87d56e63f6052175a6dcb361678d896a907c37a6ecb73bb",
+          "nonlinear_control": "d396731257d3251548efb3bf0bd46de832b9e2828345b9b8439132ffc6fc7e24",
+          "source_queryback": "22a949fc0e145a419074df288bfe60ed017ef376394cac847772f69731cc2370",
+          "topology_receipt": "70682fd531aeccdd4fad85a6ecc9fa8d77360142f68ed026761977c175b6e966",
+          "topology_scan": "747af2ee03095b6d2785f4f5af439a570bf26cd70713affbfb1b3ec06d89d4ff"
+        },
+        "resonator_removed": {
+          "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
+          "assembly_manifest": "895309dc882c2c882db37b6861c183cefa630bdc34fff4b802e7b577f3499b8a",
+          "assignment_commitment": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
+          "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
+          "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+          "chronology_receipt": "9a82a3c8f312226b05b23b52b4837b2fec7cef73b8ce36119c5b9c318200b0d6",
+          "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
+          "native_export_receipt": "f55d18449946ec8b09a697ba4d538d1175785d77814e0f52a24b183ca720c893",
+          "nonlinear_control": "b59d5fccb0807a10cadb6c113153c668406f15f5723efeeb2c29b5defea0982b",
+          "source_queryback": "22a949fc0e145a419074df288bfe60ed017ef376394cac847772f69731cc2370",
+          "topology_receipt": "c36e0a4d186b438c8c7f8c1eee19cf21eb604e509ed27bfa8e1cb9b021bde3cc",
+          "topology_scan": "71f61ebe25f2619a1095abe5f6a16045a18cb8e037b196166d2ba90072785829"
+        },
+        "zero_drive": {
+          "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
+          "assembly_manifest": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "assignment_commitment": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
+          "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
+          "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+          "chronology_receipt": "88e9d53423a1da1fddad11c57add105e5257a50f3f092954ca89c323c0063bca",
+          "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
+          "native_export_receipt": "07509814275175032f52ace905e5cc448a70ad816c8724f4951c443d98423b8f",
+          "nonlinear_control": "fc2ad8097e899816545f5dedd60fe09286837c651243811f3cd6fab9923f1d7a",
+          "source_queryback": "22a949fc0e145a419074df288bfe60ed017ef376394cac847772f69731cc2370",
+          "topology_receipt": "2414dc45e7313cf73041eebd2a180875c192663be772bd7cc9b53c02849b0289",
+          "topology_scan": "8626fefa6fb95afcd20cac3613f8091fd25882af39714c708e6d2200ea446f96"
+        }
+      },
       "calibration_sha256": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
       "metadata_sha256": {
-        "arm_0": "e24ff4fb415f0251137fc112468fb54a410a6c38ab52a96685beccb7174b3160",
-        "arm_pi": "41aa527cb4ef6648e290fd452325248410635d3c02a3f07cc47610181fb1df8b",
-        "dummy_c0": "99a8c5fc3eb72add532591e1142621dc872ec9f3af642dffab92ad367aef2077",
-        "resonator_removed": "652fb6fd1cf73c84482d750a7954c4b5d804af029d3136bfdfe4b3cbf70cc8de",
-        "zero_drive": "3ab8d3905687b2cadc8051100d81b4fe1ff7fd2dddcaad37f9f60323e25f054e"
+        "arm_0": "632247e276dea9584c9ac6cafe83d0d22216f163b31be8286831a1d0894fd575",
+        "arm_pi": "343055419a46906280fbcc3468453143155e8316f6b1366bbfa4e5aed76e01f1",
+        "dummy_c0": "150d449667d2dc0f48b3215a876cddc2498e16096c46240d8919fe72ab6b5e50",
+        "resonator_removed": "d70f427d6adfc6e9bebff31e8f112a19c2189784ba376abdd1c8f1b843882a51",
+        "zero_drive": "dfae26ba3081f8cf1877ed79189154a39d8019e7273d3dd6489d4c3f853296b2"
       },
       "payload_sha256": {
-        "arm_0": "2eac63ea9432172d58922d3e603a7a284eed4d527534b5cbe1e469294c760a1a",
-        "arm_pi": "970269ceebb8dbf37ca4636036362fa7fcb6eaa69b910df0ddb488b5f460f009",
-        "dummy_c0": "80884001872d33d255b548e761a74cd2566fea7a7225ae5b1e60f47fbb84cc2c",
-        "resonator_removed": "4f705f8f77ce622c1f3146f39249e1fa81b706cce2ac23ac582cc443412b4502",
-        "zero_drive": "0392ee3f78be98f8195425c688f1b0ebd42cfc8803aee90ef5effbcc41a02496"
+        "arm_0": "b97e455ee72a13a5e1a7f890f0289a27ade2baa370d539df051ed046c9347d1b",
+        "arm_pi": "27bf1068feec46d1d3d773bd1fa1f8f3177cb17eef495558b05134be8dfa41ce",
+        "dummy_c0": "8049f248b58a9edcac4ea0700e33c5b43ed18902ac78e9b53669c08fce1819aa",
+        "resonator_removed": "664ade5a24b803ae7930bce45fb4c5b10ca733bc15f19c1057e35847ec6190b9",
+        "zero_drive": "0e12c949ed2cecb54072d6004dd5c0eecffea590e0b9fbe2f260dd315d147a03"
       },
       "thresholds_sha256": "c3bf8551dd06792db36fc4138d40aad4383e295eac165a5a374f0ecd897a6731"
     },
@@ -639,60 +877,359 @@
       },
       "discarded_incomplete_block_windows": 4,
       "epsilon": {
-        "amplitude": 6.533791245468697e-06,
-        "decay": 5.430725655849588e-06,
-        "feedthrough": 5.863136745304592e-06,
-        "frequency": 1.4359557986961556e-10,
-        "neg": 9.151858632333109e-06,
-        "phase": 7.200860029143996e-06
+        "amplitude": 6.450220654481168e-06,
+        "decay": 1.53266653091672e-06,
+        "feedthrough": 5.458071528327656e-06,
+        "frequency": 7.5233153038314e-11,
+        "neg": 9.300328596392704e-06,
+        "phase": 2.562995865318385e-06
       },
       "jackknife_blocks": 519,
       "u95": {
-        "amplitude": 0.0010000002302842982,
-        "decay": 0.00100004095402593,
-        "feedthrough": 0.0010000001619917542,
-        "frequency": 1.000005643674309e-07,
-        "neg": 0.001000000421730404,
-        "phase": 0.001000099679306154
+        "amplitude": 0.0010000002392466312,
+        "decay": 0.0010000551159739732,
+        "feedthrough": 0.0010000001471267945,
+        "frequency": 1.0000053234114618e-07,
+        "neg": 0.0010000004450747618,
+        "phase": 0.0010000984479715265
       }
     },
     "schema": "p0.scientific-result.v1",
     "scientific_pass": true,
+    "signal_path": {
+      "arm_0": {
+        "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
+        "common_mode_peak_v": 0.0625,
+        "h2_open": {
+          "imag": -0.039152847899462655,
+          "magnitude": 0.04998616937912963,
+          "phase_rad": -0.8999142781597314,
+          "real": 0.031075257530076544,
+          "u95": 0.0002839029010624909
+        },
+        "h2_pre": {
+          "imag": -0.23500493854213933,
+          "magnitude": 0.29998311790845866,
+          "phase_rad": -0.9001077435806757,
+          "real": 0.1864471772135087
+        },
+        "open_window": [
+          1101270,
+          1102230
+        ],
+        "pre_open_complex_separation": 0.24999694965183503,
+        "pre_pilot_snr": 2748.5795900637677,
+        "pre_window": [
+          1101048,
+          1101240
+        ],
+        "r_drop": 0.1666307760274845,
+        "source_pilot_snr": 110004.35144108803
+      },
+      "arm_pi": {
+        "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
+        "common_mode_peak_v": 0.0625,
+        "h2_open": {
+          "imag": -0.039171010425785954,
+          "magnitude": 0.05000450633152917,
+          "phase_rad": -0.9000365160646185,
+          "real": 0.031081869243707164,
+          "u95": 0.0002835490549473238
+        },
+        "h2_pre": {
+          "imag": -0.23502134239913514,
+          "magnitude": 0.30005680587613964,
+          "phase_rad": -0.8998861959479564,
+          "real": 0.18654504916909437
+        },
+        "open_window": [
+          1101270,
+          1102230
+        ],
+        "pre_open_complex_separation": 0.2500523002225422,
+        "pre_pilot_snr": 2889.9110936866564,
+        "pre_window": [
+          1101048,
+          1101240
+        ],
+        "r_drop": 0.1666505467052627,
+        "source_pilot_snr": 107982.35176875295
+      },
+      "dummy_c0": {
+        "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
+        "common_mode_peak_v": 0.0625,
+        "h2_open": {
+          "imag": -0.03916714375593986,
+          "magnitude": 0.0500006252723576,
+          "phase_rad": -0.9000099251939113,
+          "real": 0.03108049834909773,
+          "u95": 7.084928942223104e-05
+        },
+        "h2_pre": {
+          "imag": -0.23501280320946988,
+          "magnitude": 0.30001587474790664,
+          "phase_rad": -0.9000123072906085,
+          "real": 0.1864899660259999
+        },
+        "open_window": [
+          1101270,
+          1102230
+        ],
+        "pre_open_complex_separation": 0.2500152494757193,
+        "pre_pilot_snr": 3395.862225975431,
+        "pre_window": [
+          1101048,
+          1101240
+        ],
+        "r_drop": 0.16666076666734542,
+        "source_pilot_snr": 110004.35144108803
+      },
+      "resonator_removed": {
+        "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
+        "common_mode_peak_v": 0.0625,
+        "h2_open": {
+          "imag": -0.03916714375593986,
+          "magnitude": 0.0500006252723576,
+          "phase_rad": -0.9000099251939113,
+          "real": 0.03108049834909773,
+          "u95": 7.084928942223104e-05
+        },
+        "h2_pre": {
+          "imag": -0.23501280320946988,
+          "magnitude": 0.30001587474790664,
+          "phase_rad": -0.9000123072906085,
+          "real": 0.1864899660259999
+        },
+        "open_window": [
+          1101270,
+          1102230
+        ],
+        "pre_open_complex_separation": 0.2500152494757193,
+        "pre_pilot_snr": 3395.862225975431,
+        "pre_window": [
+          1101048,
+          1101240
+        ],
+        "r_drop": 0.16666076666734542,
+        "source_pilot_snr": 110004.35144108803
+      },
+      "zero_drive": {
+        "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
+        "common_mode_peak_v": 0.0625,
+        "h2_open": {
+          "imag": -0.03916714375593986,
+          "magnitude": 0.0500006252723576,
+          "phase_rad": -0.9000099251939113,
+          "real": 0.03108049834909773,
+          "u95": 7.084928942223104e-05
+        },
+        "h2_pre": {
+          "imag": -0.23501280320946988,
+          "magnitude": 0.30001587474790664,
+          "phase_rad": -0.9000123072906085,
+          "real": 0.1864899660259999
+        },
+        "open_window": [
+          1101270,
+          1102230
+        ],
+        "pre_open_complex_separation": 0.2500152494757193,
+        "pre_pilot_snr": 3395.862225975431,
+        "pre_window": [
+          1101048,
+          1101240
+        ],
+        "r_drop": 0.16666076666734542,
+        "source_pilot_snr": 110004.35144108803
+      }
+    },
+    "signal_path_receipts": {
+      "arm_0": {
+        "nonlinear_2f_residue_ratio": 0.004999999999999833,
+        "topology_scan": {
+          "both_open": {
+            "imag": -0.023499807288824535,
+            "magnitude": 0.030000000000000006,
+            "phase_rad": -0.9000000000000015,
+            "real": 0.018648299048119904
+          },
+          "closed_closed": {
+            "imag": -0.2349980728882452,
+            "magnitude": 0.2999999999999999,
+            "phase_rad": -0.9000000000000015,
+            "real": 0.18648299048119893
+          },
+          "k1_open": {
+            "imag": -0.03916634548137422,
+            "magnitude": 0.05000000000000002,
+            "phase_rad": -0.9000000000000015,
+            "real": 0.031080498413533175
+          },
+          "k2_open": {
+            "imag": -0.04699961457764907,
+            "magnitude": 0.06000000000000001,
+            "phase_rad": -0.9000000000000015,
+            "real": 0.03729659809623981
+          }
+        }
+      },
+      "arm_pi": {
+        "nonlinear_2f_residue_ratio": 0.005099999999999888,
+        "topology_scan": {
+          "both_open": {
+            "imag": -0.023796376975695678,
+            "magnitude": 0.030500000000000013,
+            "phase_rad": -0.8949999999999991,
+            "real": 0.019078323899928456
+          },
+          "closed_closed": {
+            "imag": -0.23484293343227522,
+            "magnitude": 0.30099999999999993,
+            "phase_rad": -0.8949999999999992,
+            "real": 0.18828116373372003
+          },
+          "k1_open": {
+            "imag": -0.039400558599102666,
+            "magnitude": 0.05050000000000001,
+            "phase_rad": -0.8949999999999989,
+            "real": 0.0315887002277504
+          },
+          "k2_open": {
+            "imag": -0.04720264941080614,
+            "magnitude": 0.06049999999999997,
+            "phase_rad": -0.8949999999999991,
+            "real": 0.037843888391661334
+          }
+        }
+      },
+      "dummy_c0": {
+        "nonlinear_2f_residue_ratio": 0.00539999999999985,
+        "topology_scan": {
+          "both_open": {
+            "imag": -0.02466364412476699,
+            "magnitude": 0.032,
+            "phase_rad": -0.8799999999999986,
+            "real": 0.020388836614354602
+          },
+          "closed_closed": {
+            "imag": -0.23430461918528625,
+            "magnitude": 0.3039999999999998,
+            "phase_rad": -0.8799999999999986,
+            "real": 0.19369394783636862
+          },
+          "k1_open": {
+            "imag": -0.040078421702746364,
+            "magnitude": 0.052000000000000005,
+            "phase_rad": -0.8799999999999987,
+            "real": 0.03313185949832623
+          },
+          "k2_open": {
+            "imag": -0.047785810491736046,
+            "magnitude": 0.062000000000000006,
+            "phase_rad": -0.8799999999999986,
+            "real": 0.039503370940312046
+          }
+        }
+      },
+      "resonator_removed": {
+        "nonlinear_2f_residue_ratio": 0.005299999999999898,
+        "topology_scan": {
+          "both_open": {
+            "imag": -0.024378322094597595,
+            "magnitude": 0.03149999999999999,
+            "phase_rad": -0.8850000000000013,
+            "real": 0.019948619296885045
+          },
+          "closed_closed": {
+            "imag": -0.23449624110041503,
+            "magnitude": 0.303,
+            "phase_rad": -0.8850000000000015,
+            "real": 0.1918867189509895
+          },
+          "k1_open": {
+            "imag": -0.039856621837199256,
+            "magnitude": 0.05150000000000001,
+            "phase_rad": -0.8850000000000012,
+            "real": 0.03261440932665335
+          },
+          "k2_open": {
+            "imag": -0.04759577170850008,
+            "magnitude": 0.061499999999999985,
+            "phase_rad": -0.8850000000000018,
+            "real": 0.038947304341537446
+          }
+        }
+      },
+      "zero_drive": {
+        "nonlinear_2f_residue_ratio": 0.005199999999999936,
+        "topology_scan": {
+          "both_open": {
+            "imag": -0.02408922417333155,
+            "magnitude": 0.031000000000000007,
+            "phase_rad": -0.8900000000000002,
+            "real": 0.019511772823784603
+          },
+          "closed_closed": {
+            "imag": -0.23467566775310073,
+            "magnitude": 0.3019999999999998,
+            "phase_rad": -0.8900000000000003,
+            "real": 0.19008243202525626
+          },
+          "k1_open": {
+            "imag": -0.039630659123868026,
+            "magnitude": 0.051,
+            "phase_rad": -0.8900000000000003,
+            "real": 0.03210001335525853
+          },
+          "k2_open": {
+            "imag": -0.04740137659913627,
+            "magnitude": 0.06100000000000001,
+            "phase_rad": -0.8900000000000001,
+            "real": 0.03839413362099551
+          }
+        }
+      }
+    },
     "timing": {
       "arm_0": {
         "n_admit": 1113499,
         "n_contact": 1103499,
         "n_gate": 1101000,
         "n_iso": 1103499,
-        "n_series_open": 1102249
+        "n_series_open": 1102249,
+        "series_start": 1101250
       },
       "arm_pi": {
         "n_admit": 1113499,
         "n_contact": 1103499,
         "n_gate": 1101000,
         "n_iso": 1103499,
-        "n_series_open": 1102249
+        "n_series_open": 1102249,
+        "series_start": 1101250
       },
       "dummy_c0": {
         "n_admit": 1113499,
         "n_contact": 1103499,
         "n_gate": 1101000,
         "n_iso": 1103499,
-        "n_series_open": 1102249
+        "n_series_open": 1102249,
+        "series_start": 1101250
       },
       "resonator_removed": {
         "n_admit": 1113499,
         "n_contact": 1103499,
         "n_gate": 1101000,
         "n_iso": 1103499,
-        "n_series_open": 1102249
+        "n_series_open": 1102249,
+        "series_start": 1101250
       },
       "zero_drive": {
         "n_admit": 1113499,
         "n_contact": 1103499,
         "n_gate": 1101000,
         "n_iso": 1103499,
-        "n_series_open": 1102249
+        "n_series_open": 1102249,
+        "series_start": 1101250
       }
     }
   },
@@ -978,5 +1515,148 @@
       "outcome": "PASS",
       "rejected_by": "NUMBER_DOMAIN"
     }
-  ]
+  ],
+  "signal_path_control_outcomes": [
+    {
+      "case": "closed_closed_k3_open_transfer",
+      "class": "signal_path_positive",
+      "outcome": "PASS",
+      "token": "C2_TRANSFER_MEASURABLE_WITH_ADG_OFF_AND_K1_K2_CLOSED"
+    },
+    {
+      "case": "k1_open_k2_closed_isolated",
+      "class": "signal_path_positive",
+      "outcome": "PASS",
+      "token": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT"
+    },
+    {
+      "case": "k1_closed_k2_open_isolated",
+      "class": "signal_path_positive",
+      "outcome": "PASS",
+      "token": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT"
+    },
+    {
+      "case": "k1_open_k2_open_isolated",
+      "class": "signal_path_positive",
+      "outcome": "PASS",
+      "token": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT"
+    },
+    {
+      "case": "adg_off_closed_path_transfer",
+      "class": "signal_path_positive",
+      "outcome": "PASS",
+      "token": "C2_TRANSFER_MEASURABLE_WITH_ADG_OFF_AND_K1_K2_CLOSED"
+    },
+    {
+      "case": "carrier_removed_isolated",
+      "class": "signal_path_positive",
+      "outcome": "PASS",
+      "token": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT"
+    },
+    {
+      "case": "exact_1pf_dummy_isolated",
+      "class": "signal_path_positive",
+      "outcome": "PASS",
+      "token": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT"
+    },
+    {
+      "case": "maximum_open_capacitance_boundary",
+      "class": "signal_path_positive",
+      "outcome": "PASS",
+      "token": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT"
+    },
+    {
+      "case": "early_k3_guard_masking",
+      "class": "signal_path_scientific_negative",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_GUARD_MASKING"
+    },
+    {
+      "case": "c2_absent",
+      "class": "signal_path_scientific_negative",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_C2_MISSING"
+    },
+    {
+      "case": "wrong_node_injection",
+      "class": "signal_path_scientific_negative",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_TOPOLOGY_CUSTODY"
+    },
+    {
+      "case": "relay_bounce",
+      "class": "signal_path_scientific_negative",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_RELAY_BOUNCE"
+    },
+    {
+      "case": "contact_reentry",
+      "class": "signal_path_scientific_negative",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_CONTACT_REENTRY"
+    },
+    {
+      "case": "signal_path_channel_swap",
+      "class": "signal_path_scientific_negative",
+      "outcome": "PASS",
+      "rejected_by": "CHANNEL_ROLE_MISMATCH"
+    },
+    {
+      "case": "signal_path_phase_inversion",
+      "class": "signal_path_scientific_negative",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_PHASE"
+    },
+    {
+      "case": "signal_path_scale_mutation",
+      "class": "signal_path_scientific_negative",
+      "outcome": "PASS",
+      "rejected_by": "SCALE_MISMATCH"
+    },
+    {
+      "case": "signal_path_threshold_mutation",
+      "class": "signal_path_scientific_negative",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_THRESHOLD_CUSTODY"
+    },
+    {
+      "case": "signal_path_window_mutation",
+      "class": "signal_path_scientific_negative",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_WINDOW_ORDER"
+    },
+    {
+      "case": "signal_path_k3_order_mutation",
+      "class": "signal_path_scientific_negative",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_GUARD_ORDER"
+    },
+    {
+      "case": "signal_path_model_hash_mutation",
+      "class": "signal_path_custody_negative",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_THRESHOLD_CUSTODY"
+    },
+    {
+      "case": "signal_path_topology_receipt_mutation",
+      "class": "signal_path_custody_negative",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_THRESHOLD_CUSTODY"
+    },
+    {
+      "case": "signal_path_missing_field",
+      "class": "signal_path_custody_negative",
+      "outcome": "PASS",
+      "rejected_by": "MISSING_FIELD"
+    },
+    {
+      "case": "signal_path_unknown_field",
+      "class": "signal_path_custody_negative",
+      "outcome": "PASS",
+      "rejected_by": "UNKNOWN_FIELD"
+    }
+  ],
+  "signal_path_custody_negative_count": 4,
+  "signal_path_positive_count": 8,
+  "signal_path_scientific_negative_count": 11
 }

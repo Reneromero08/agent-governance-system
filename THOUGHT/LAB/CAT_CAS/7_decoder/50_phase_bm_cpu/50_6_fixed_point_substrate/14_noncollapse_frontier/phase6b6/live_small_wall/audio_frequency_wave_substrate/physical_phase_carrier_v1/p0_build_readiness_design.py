@@ -100,6 +100,8 @@ def suffixed(mapping: dict[str, str], suffix: str) -> dict[str, str]:
 
 
 def build_netlist() -> dict[str, Any]:
+    signal_model = read_canonical_json(ROOT / "P0_SIGNAL_PATH_CIRCUIT_MODEL.json")
+    signal_envelope = signal_model["selected_envelope"]["envelope"]
     boards: list[dict[str, Any]] = []
     components: list[dict[str, Any]] = []
     connectors: list[dict[str, Any]] = []
@@ -134,6 +136,8 @@ def build_netlist() -> dict[str, Any]:
         c("R_MON_C1", ctrl_board, "Vishay", "TNPW0805100KBEEN", "upstream C1 monitor contribution", {"1": "C1_IN", "2": "N_SOURCE_MONITOR_SUM"}, "ANALOG", "VISHAY_TNPW")
         c("R_MON_C2", ctrl_board, "Vishay", "TNPW0805100KBEEN", "fixed 2x reference-tone monitor contribution", {"1": "C2_REF_IN", "2": "N_SOURCE_MONITOR_SUM"}, "ANALOG", "VISHAY_TNPW")
         c("R_MON_BIAS", ctrl_board, "Vishay", "TNPW08051M00BEEN", "CH0 passive monitor return", {"1": "N_SOURCE_MONITOR_SUM", "2": "AGND_EXPORT"}, "ANALOG", "VISHAY_TNPW")
+        c("R_C2_INJECT", ctrl_board, "Vishay", "TNPW08051M00BEEN", "continuous 1.00 Mohm C2 actual-signal-path witness injection downstream of ADG1419 and upstream of K1", {"1": "C2_REF_IN", "2": "N_GATE_OUT"}, "ANALOG", "VISHAY_TNPW")
+        c("R_DRIVE_SHUNT", ctrl_board, "Vishay", "TNPW0805100KBEEN", "100 kohm N_SRC drive shunt enforcing the 0.200 Vpp carrier-terminal cap; isolated from N_GATE_OUT when ADG1419 is OFF", {"1": "N_SRC", "2": "AGND_EXPORT"}, "ANALOG", "VISHAY_TNPW")
         c("U_GATE", ctrl_board, "Analog Devices", "ADG1419BRMZ", "C1 DRIVE/OFF route", {"1": "N_SRC", "2": "N_GATE_TERM", "3": "AGND_EXPORT", "4": "+5V_GATE", "5": "NC::U_GATE.5", "6": "IN_GATE", "7": "-5V_GATE", "8": "N_GATE_OUT"}, "GATE", "ADG1419_REV_A")
         c("R_TERM", ctrl_board, "Vishay", "TNPW080550R0BEEN", "normal 50.00 ohm OFF termination", {"1": "N_GATE_TERM", "2": "AGND_EXPORT"}, "ANALOG", "VISHAY_TNPW")
         c("R_TERM_CONTROL", ctrl_board, "Vishay", "TNPW080575R0BEEN", "75.00 ohm wrong-termination control; DNP in primary configuration", {"1": "DNP::TERM_CONTROL", "2": "DNP::TERM_CONTROL"}, "CONTROL_FIXTURE", "VISHAY_TNPW")
@@ -394,8 +398,8 @@ def build_netlist() -> dict[str, Any]:
             {"failure": "relay-domain supply loss", "physical_effect": "K1/K2 deenergize open and K3 deenergizes to guard", "scientific_action": "REJECT unless the complete stable-code and actual-path continuity receipts remain valid"},
             {"failure": "sense/reference supply loss", "physical_effect": "CH1, CH2 and ADXL reference custody are invalid", "scientific_action": "REJECT"},
             {"failure": "ADG1419 stuck in DRIVE or wrong termination", "physical_effect": "K1/K2 still provide independent series opens and K3 guards the midpoint", "scientific_action": "REJECT by topology/termination receipt and raw wrong-termination gates"},
-            {"failure": "K1 signal pole stuck closed", "physical_effect": "K2 remains an independent series open and K3 guards the midpoint", "scientific_action": "REJECT; auxiliary witness cannot substitute for signal-pole receipt"},
-            {"failure": "K2 signal pole stuck closed", "physical_effect": "K1 remains an independent series open and K3 guards the midpoint", "scientific_action": "REJECT; auxiliary witness cannot substitute for signal-pole receipt"},
+            {"failure": "K1 signal pole stuck closed", "physical_effect": "K2 remains an independent series open and K3 guards the midpoint", "scientific_action": "REJECT a known stuck-contact fixture; an otherwise passing end-to-end event can establish path isolation but never identify which individual contact opened"},
+            {"failure": "K2 signal pole stuck closed", "physical_effect": "K1 remains an independent series open and K3 guards the midpoint", "scientific_action": "REJECT a known stuck-contact fixture; an otherwise passing end-to-end event can establish path isolation but never identify which individual contact opened"},
             {"failure": "K3 guard pole fails to close", "physical_effect": "K1/K2 remain series-open but midpoint termination is absent", "scientific_action": "REJECT"},
             {"failure": "CH2 ambiguity, illegal code, late contact or re-entry", "physical_effect": "source-off ancestry is not established", "scientific_action": "REJECT with no retry implied"},
         ],
@@ -412,8 +416,8 @@ def build_netlist() -> dict[str, Any]:
         "power_domains": power_domains,
         "relay_coil_driver_map": relay_drivers,
         "relay_contact_map": relay_contacts,
-        "revision": "P0-NETLIST-REV-C-20260717",
-        "schema": "p0.final-netlist.v3",
+        "revision": "P0-NETLIST-REV-D-20260718",
+        "schema": "p0.final-netlist.v4",
         "source_off_state_table": [
             {"adg_route": "DRIVE D-to-SB", "admissible_for_science": False, "expected_ch2_code": 7, "gate": 1, "k1": 1, "k2": 1, "k3": 1, "state": "S0_DRIVE"},
             {"adg_route": "OFF D-to-SA-to-50.00-ohm", "admissible_for_science": False, "expected_ch2_code": 6, "gate": 0, "k1": 1, "k2": 1, "k3": 1, "state": "S1_GATE_TERMINATED"},
@@ -425,32 +429,36 @@ def build_netlist() -> dict[str, Any]:
         ],
         "source_off_sequence": {
             "acquisition": "software-prearmed free-running continuous record; CH2 locates the event and CH0 dual-tone reconstruction supplies the phase gauge",
-            "drive": "SDG1032X C1 32768 Hz 0.400 Vpp continuous sine with 0 V offset and 0/pi phase; C2 65536 Hz 0.100 Vpp continuous fixed-zero-phase reference with 0 V offset; HIGH_Z load setting; both remain on for the whole record",
+            "drive": f"SDG1032X C1 32768 Hz 0.400 Vpp continuous sine with 0 V offset and 0/pi phase; C2 65536 Hz {signal_model['mechanism']['selected_amplitude_vpp']:.3f} Vpp continuous fixed-zero-phase reference with 0 V offset; HIGH_Z load setting; both remain on for the whole record",
             "gate": "ADG1419 routes C1 from DRIVE to 50.00 ohm termination",
             "relay_release_delay_us": 250,
-            "relay_order": "deenergize K1 and K2, require 1000 consecutive samples of code 0 while K3 remains energized, then deenergize K3 to its guard state and require 1000 consecutive samples of code 8",
+            "relay_order": "with ADG1419 already OFF, finish the 192-sample C2 pre-transfer window; deenergize K1 and K2; require 1000 consecutive samples of code 0 while K3 remains energized and evaluate the 960-sample end-to-end isolated C2 window; only after both gates pass may K3 deenergize to guard and code 8 stabilize",
             "series_open_stable_samples": 1000,
             "stable_off_samples": 1000,
             "guard_samples": 10000,
             "contact_limit_samples": 14500,
             "signal_pole_evidence_boundary": {
-                "accepted_prerequisites": ["PER_EVENT_ACTUAL_SIGNAL_PATH_WITNESS", "EXACT_FORCE_GUIDED_CONTACT_GUARANTEE"],
+                "accepted_prerequisites": ["PRE_K3_COMPLEX_C2_END_TO_END_TRANSFER_WITNESS"],
+                "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
                 "auxiliary_contacts_sufficient": False,
+                "individual_pole_identity_claim_authorized": False,
                 "physical_execution_authorized": False,
-                "source_disconnect_claim_authorized": False,
+                "source_disconnect_claim_authorized_only_on_future_passing_event": True,
+                "topology": {"injection": "C2_REF_IN through exact TNPW 1.00 Mohm R_C2_INJECT to N_GATE_OUT; exact 100 kohm R_DRIVE_SHUNT remains on N_SRC and is isolated by ADG1419 during both H2 windows", "measured_path": ["N_GATE_OUT", "K1 signal pole", "N_MIDPOINT", "K2 signal pole", "N_ELECTRODE_A", "OPA810", "CH1"], "k3_during_h2": "energized and electrically open"},
+                "witness_model": "P0_SIGNAL_PATH_CIRCUIT_MODEL.json",
             },
             "first_admissible": "max(t_gate+0.560 us, end of 1000-sample stable code-8 run)+10.000 ms",
             "source_persistence_proof": "CH0 must match the sample-level reconstructed 32768 Hz C1 plus 65536 Hz C2 waveform from t_gate through record end with peak residual <=5 percent of the fitted C1 amplitude, and both tones must remain within 2 percent amplitude and 0.010 rad phase in contiguous 100000-sample segments beginning at t_gate and covering record end; the bounded passive C2-to-C1 coupling through the monitor network is modeled and controlled rather than called zero",
             "source_setup": {
                 "model": "SIGLENT SDG1032X",
                 "c1": {"frequency_hz": 32768, "amplitude_vpp": 0.400, "offset_v": 0.0, "phase_command_rad": [0.0, math.pi]},
-                "c2": {"frequency_hz": 65536, "amplitude_vpp": 0.100, "offset_v": 0.0, "phase_command_rad": 0.0},
+                "c2": {"frequency_hz": 65536, "amplitude_vpp": signal_model["mechanism"]["selected_amplitude_vpp"], "offset_v": 0.0, "phase_command_rad": 0.0},
                 "load_mode": "HIGH_Z",
                 "physical_output_ohms": 50.0,
                 "output_mode": "CONTINUOUS_SINE",
                 "qualified_preparation_cycles": 32768,
                 "queryback_fields_per_channel": ["model", "serial", "firmware", "load_mode", "physical_output_ohms", "waveform", "frequency_hz", "amplitude_vpp", "offset_v", "phase_command_rad", "output_mode", "output_state"],
-                "conservative_c1_resistive_bound": {"series_limiter_ohms": 100000.0, "source_output_ohms": 50.0, "carrier_esr_ohms_max": 70000.0, "source_vrms": 0.141421356, "motional_current_ua_max": 0.831646, "carrier_terminal_vpp_max": 0.164658, "motional_power_uw_max": 0.048415},
+                "complete_corner_c1_bound": {"series_limiter_ohms": 100000.0, "source_output_ohms_range": [47.5, 52.5], "carrier_motional_resistance_ohms_range": [30000.0, 70000.0], "source_vrms": 0.141421356, "motional_current_ua_max": signal_envelope["f1_motional_current_ua_rms"][1], "carrier_terminal_vpp_max": signal_envelope["f1_carrier_terminal_vpp"][1], "motional_power_uw_max": signal_envelope["f1_motional_power_uw"][1]},
             },
         },
         "status": "REVIEW_CANDIDATE__NO_HARDWARE_AUTHORITY",
@@ -499,6 +507,7 @@ def document_hash(document_id: str) -> str:
 
 
 def build_bom(netlist: dict[str, Any]) -> dict[str, Any]:
+    model = read_canonical_json(ROOT / "P0_SIGNAL_PATH_CIRCUIT_MODEL.json")
     grouped: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
     for item in netlist["components"]:
         key = (item["manufacturer"], item["part_number"], item["exact_document"])
@@ -527,7 +536,7 @@ def build_bom(netlist: dict[str, Any]) -> dict[str, Any]:
         })
 
     additions = [
-        ("existing_lab_equipment_assumption", "SIGLENT", "SDG1032X", 1, "bench instrument", "HIGH_Z continuous source: C1 32768 Hz 0.400 Vpp 0 V 0/pi; C2 65536 Hz 0.100 Vpp 0 V zero phase; 50 ohm physical outputs", document_hash("SIGLENT_MANUAL")),
+        ("existing_lab_equipment_assumption", "SIGLENT", "SDG1032X", 1, "bench instrument", f"HIGH_Z continuous source: C1 32768 Hz 0.400 Vpp 0 V 0/pi; C2 65536 Hz {model['mechanism']['selected_amplitude_vpp']:.3f} Vpp 0 V zero phase; 50 ohm physical outputs", document_hash("SIGLENT_MANUAL")),
         ("existing_lab_equipment_assumption", "Spectrum Instrumentation", "DN2.592-04", 1, "digitizerNETBOX", "four simultaneous true-differential inputs at 1 MS/s", DOC["SPECTRUM_DATASHEET"]["sha256"]),
         ("required_p0_build", "authored", "P0-SOURCE-OFF-CONTROL-REV-B", 3, "84x64x1.6 mm four-layer PCB", "three matched control boards", "AUTHORED_BYTES_BOUND_BY_QUALIFICATION_ROOT"),
         ("required_p0_build", "authored", "P0-CARRIER-SENSE-REV-B variants A/B/C", 3, "68x32x1.0 mm two-layer PCB", "DUT, detector-only and exact-C0 variants", "AUTHORED_BYTES_BOUND_BY_QUALIFICATION_ROOT"),
@@ -572,18 +581,22 @@ def build_bom(netlist: dict[str, Any]) -> dict[str, Any]:
 
 
 def board_placements(netlist: dict[str, Any], board_id: str, width: float, height: float) -> list[dict[str, Any]]:
-    members = sorted((item for item in netlist["components"] if item["board"] == board_id), key=lambda item: item["ref"])
+    pilot = [item for item in netlist["components"] if item["board"] == board_id and (item["ref"].startswith("R_C2_INJECT_") or item["ref"].startswith("R_DRIVE_SHUNT_"))]
+    members = sorted((item for item in netlist["components"] if item["board"] == board_id and item not in pilot), key=lambda item: item["ref"])
     columns = 10 if width >= 80 else 7 if width >= 60 else 3
     x_step = (width - 12.0) / max(columns - 1, 1)
     rows = max(1, math.ceil(len(members) / columns))
     y_step = (height - 12.0) / max(rows - 1, 1)
-    return [
+    placements = [
         {
             "ref": item["ref"], "x_mm": round(6.0 + (index % columns) * x_step, 3),
             "y_mm": round(6.0 + (index // columns) * y_step, 3), "rotation_deg": 0, "side": "top",
         }
         for index, item in enumerate(members)
     ]
+    for index, item in enumerate(sorted(pilot, key=lambda value: value["ref"])):
+        placements.append({"ref": item["ref"], "x_mm": 54.0 + 4.0 * (index % 3), "y_mm": 56.0 + 3.0 * (index // 3), "rotation_deg": 0, "side": "top"})
+    return sorted(placements, key=lambda item: item["ref"])
 
 
 def build_fabrication(netlist: dict[str, Any]) -> dict[str, Any]:
@@ -780,6 +793,10 @@ def build_packet(netlist: dict[str, Any], bom: dict[str, Any], fabrication: dict
     net_hash = sha256_bytes(canonical(netlist))
     bom_hash = sha256_bytes(canonical(bom))
     fab_hash = sha256_bytes(canonical(fabrication))
+    model_bytes = (ROOT / "P0_SIGNAL_PATH_CIRCUIT_MODEL.json").read_bytes()
+    model = read_canonical_json(ROOT / "P0_SIGNAL_PATH_CIRCUIT_MODEL.json")
+    model_hash = sha256_bytes(model_bytes)
+    selected = model["selected_envelope"]["envelope"]
     research_manifest, research_custody = research_metadata()
     research_manifest_hash = sha256_bytes((RESEARCH_ROOT / "MANIFEST.json").read_bytes())
     custody_counts = research_custody["custody_state_counts"]
@@ -790,8 +807,8 @@ def build_packet(netlist: dict[str, Any], bom: dict[str, Any], fabrication: dict
 - authority: `{AUTHORITY}`
 - claim ceiling: `{CEILING}`
 - next authority boundary: `{NEXT}`
-- status: `P0_BUILD_READINESS_BLOCKED`; the actual signal-pole witness is unresolved, and no procurement, fabrication, assembly, connection, power, playback, acquisition, or instrument command is authorized
-- exact design hashes: netlist `{net_hash}`, BOM `{bom_hash}`, fabrication `{fab_hash}`
+- status: `P0_BUILD_READINESS_PACKET_FROZEN`; the prospective actual-path witness repair is mechanically qualified, but no procurement, fabrication, assembly, connection, power, playback, acquisition, or instrument command is authorized
+- exact design hashes: netlist `{net_hash}`, BOM `{bom_hash}`, fabrication `{fab_hash}`, signal-path model `{model_hash}`
 
 This packet describes a prospective physical experiment. It reports no physical result. No human vendor outreach, cart, stock, procurement, instrument command, audio interface, target, or hardware contact occurred while producing it. Automated public-source HTTP retrieval attempts are separately disclosed in the research custody snapshot and private ignored download receipt; they are not described as zero network or zero server contact.
 
@@ -815,11 +832,15 @@ The selected sense part is Texas Instruments `OPA810IDT`, official `SBOS799E`, S
 
 ## Continuous dual-tone source and phase gauge
 
-The assumed source is one SIGLENT `SDG1032X` in `HIGH_Z` load mode; its physical output impedance remains 50 ohm. C1 is a continuous 32,768 Hz sine at exactly 0.400 Vpp and 0 V offset with phase command 0 or pi. C2 is a continuous 65,536 Hz sine at exactly 0.100 Vpp and 0 V offset with fixed zero phase. Both outputs share the source's internal reference; no burst and no external trigger is used. The C1 passive monitor tap is at `C1_IN`, upstream of the exact 100 kohm limiter and ADG1419, so routing the downstream node to 50 ohm cannot erase the source witness. C1 and C2 are each passively presented through 100 kohm to CH0, with 1 Mohm return, so CH0 carries a source-continuity witness and a 2x phase gauge. C2 is not an intended carrier drive, but the passive monitor network creates a bounded linear C2-to-C1 coupling path through `R_MON_C2`, the monitor node, `R_MON_C1`, the finite C1 source impedance and `R_LIMIT`; that path must be included in the circuit model, feedthrough sweep and empty/dummy controls rather than asserted to be zero. Its fixture-end BNC shell has no internal conductor, preventing a second low-impedance source-return bond.
+The assumed source is one SIGLENT `SDG1032X` in `HIGH_Z` load mode; its physical output impedance remains 50 ohm. C1 is a continuous 32,768 Hz sine at exactly 0.400 Vpp and 0 V offset with phase command 0 or pi. C2 is a continuous 65,536 Hz sine at exactly {model['mechanism']['selected_amplitude_vpp']:.3f} Vpp and 0 V offset with fixed zero phase. Both outputs share the source's internal reference; no burst and no external trigger is used. The C1 passive monitor tap is at `C1_IN`, upstream of the exact 100 kohm limiter and ADG1419, so routing the downstream node to 50 ohm cannot erase the source witness. C1 and C2 are each passively presented through 100 kohm to CH0, with 1 Mohm return, so CH0 carries a source-continuity witness and a 2x phase gauge. C2 is not an intended carrier drive, but the passive monitor network creates a bounded linear C2-to-C1 coupling path through `R_MON_C2`, the monitor node, `R_MON_C1`, the finite C1 source impedance and `R_LIMIT`; that path is included in the circuit model, feedthrough sweep and empty/dummy controls rather than asserted to be zero. Its fixture-end BNC shell has no internal conductor, preventing a second low-impedance source-return bond.
 
-The C1 ceiling is prospective and conservative: 0.400 Vpp is 0.141421356 Vrms; with 50 ohm source impedance, the exact 100 kohm limiter and the FC-135 70 kohm maximum ESR, the resistive bound is 0.831646 microampere rms, 0.164658 Vpp across the ESR and 0.048415 microwatt motional dissipation. These are planning bounds only; a future as-built path must meet the separately frozen terminal-voltage, current and power caps by calibrated measurement.
+The corrected complete-corner BVD/load model bounds the C1 carrier terminal voltage to {selected['f1_carrier_terminal_vpp'][0]:.6f}..{selected['f1_carrier_terminal_vpp'][1]:.6f} Vpp, motional current to {selected['f1_motional_current_ua_rms'][0]:.6f}..{selected['f1_motional_current_ua_rms'][1]:.6f} microampere rms, and motional dissipation to {selected['f1_motional_power_uw'][0]:.6f}..{selected['f1_motional_power_uw'][1]:.6f} microwatt. These are prospective model bounds only; a future as-built path must meet the separately frozen terminal-voltage, current and power caps by calibrated measurement.
+
+The requested first 1.00 Mohm/0.100 Vpp witness point survives the complete corrected model. One Vishay `TNPW08051M00BEEN` per channel connects `C2_REF_IN` to `N_GATE_OUT`, downstream of ADG1419 and upstream of K1. One exact 100 kohm `TNPW0805100KBEEN` shunts `N_SRC` to analog ground, holding the inherited carrier-terminal ceiling below 0.200 Vpp while remaining on the ADG D/SA side after OFF; it therefore cannot erase the C2 witness on SB/N_GATE_OUT. C2 remains visible on CH0 and independently traverses `N_GATE_OUT -> K1 -> N_MIDPOINT -> K2 -> N_ELECTRODE_A -> OPA810 -> CH1`. The complete {model['corner_count_per_candidate']}-corner sweep bounds pre-open `|H2|` to {selected['pre_abs_h2'][0]:.6f}..{selected['pre_abs_h2'][1]:.6f}, every legitimate one- or both-contact-open `|H2|` to {selected['isolated_abs_h2'][0]:.6f}..{selected['isolated_abs_h2'][1]:.6f}, f1 terminal perturbation to at most {selected['pilot_f1_fractional_perturbation'][1]:.6f}, f1 carrier terminal voltage to at most {selected['f1_carrier_terminal_vpp'][1]:.6f} Vpp, and f2 carrier terminal voltage to at most {selected['f2_carrier_terminal_vpp'][1]:.6f} Vpp. Separate complete envelopes are frozen for DUT, detector-only, exact-1-pF dummy, wrong-node, and K3-guarded populations. These are prospective model envelopes, not physical observations.
 
 For a future record the source must be queried back for model, serial, firmware, output impedance, waveform, frequency, amplitude, offset, phase, continuous mode and output state on both channels. The record metadata also binds the sealed one-standard-uncertainty fields `phase_skew_standard_uncertainty_rad` and `phase_drive_cal_standard_uncertainty_rad`; the analyzer combines them with lag-7 Newey-West drive-fit covariance for the individual and matched-arm phase gates. Any mismatch stops before accepting bytes.
+
+Topology custody is assembly- and event-specific. Each record carries its own canonical assembly manifest, four-state topology scan, C1-only nonlinear-control trace and version-2 topology receipt. That receipt binds the exact assembly identifier, carrier population, assembly-manifest hash, assigned role, native payload hash, chronology receipt, source and instrument querybacks, scan bytes, nonlinear-control bytes and scan-start/scan-completion times. All four scan/acquisition times use exact `YYYY-MM-DDTHH:MM:SS.ffffffZ` UTC form, are parsed as instants, and must establish scan start < scan completion <= acquisition start < acquisition completion. The three A roles must share the exact A manifest; B and C must use distinct manifests and their exact open-carrier and 1 pF populations. Every event's scan bytes, nonlinear-control bytes and topology receipt must be unique. Replaying A evidence into B or C, replaying a receipt or nonlinear-control trace across events, duplicating scan bytes, using noncanonical time text, or moving the scan after acquisition is a hard rejection.
 
 ## Software-prearmed acquisition
 
@@ -831,9 +852,9 @@ No proprietary DN2 container parser is claimed. The frozen acquisition boundary 
 
 ## Physical source-off sequence
 
-At the decoded gate event, ADG1419 routes C1 away from the drive path to an exact 50.00 ohm termination while C1 and C2 remain continuously energized. After 250 microseconds K1 and K2 release while K3 remains energized and therefore cannot clamp the carrier midpoint. CH2 must first decode code 0 for 1,000 consecutive samples. Only then may K3 deenergize to the guard state; CH2 must then decode code 8 for 1,000 consecutive samples. The complete ordered transition must settle within 14,500 samples. The first admissible post-isolation sample is `max(t_gate + 0.560 us, final stable-code-run end) + 10.000 ms`. CH0 must match the sample-level reconstructed C1+C2 waveform throughout the complete one-second pre-gate preparation and from the gate through record end, and both tones must also remain within 2 percent amplitude and 0.010 rad phase in the frozen contiguous segments. A muted source, absent reference tone, wrong ordering, late contact, or hidden trigger is a hard rejection.
+At the decoded gate event, ADG1419 routes C1 away from the drive path to an exact 50.00 ohm termination while C1 and C2 remain continuously energized. With K1/K2 still closed and K3 energized/open, the analyzer completes the frozen 192-sample C2 pre-transfer window from gate offsets 48 through 239. After the fixed 250 microseconds K1 and K2 release while K3 remains energized and electrically open. CH2 must decode code 0 for 1,000 consecutive samples; within that same run the analyzer evaluates the 960-sample C2 isolated-path window at offsets 20 through 979. It requires the prospectively frozen complex-transfer, uncertainty, separation and drop gates before K3 may deenergize to guard. CH2 must then decode code 8 for 1,000 consecutive samples and the ordinary 10 ms guard follows. The complete ordered transition must settle within 14,500 samples. CH0 source continuity remains mandatory. A muted source, missing or wrong-node C2 injection, guard-masked path, inverted phase, wrong ordering, late contact, or hidden trigger is a hard rejection.
 
-CH2 observes auxiliary poles, not the actual signal poles. The ordered sequence prevents the candidate's earlier K2/K3 clamp hazard, but it does not by itself prove that K1/K2 signal contacts opened during a particular event. Physical execution and every source-disconnect claim remain blocked until a separately reviewed per-event actual-signal-path witness or an exact force-guided-contact guarantee is mechanically bound to the selected relay and failure modes.
+CH2 still observes auxiliary poles and never proves either individual signal contact. The additional C2 transfer measures the complete actual source-to-carrier path before K3 can mask it. A passing future event supports only `ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT`, meaning at least one of the two series contacts interrupted the path. It never identifies which pole opened, never claims both opened, and supplies no physical observation under current authority.
 
 The ADuM gate-secondary logic supply and the three relay witness contacts use the same exact `ADR_REF_3V3` rail. The gate bit is actively driven low when inactive, so its 80.6 kohm branch remains a shunt in every b0=0 code; inactive relay-contact branches float. The corrected nominal 80.6/40.2/20.0/10.0 kohm ladder into 1.00 kohm has ordered code centroids from 0 to 520.543716 mV, stable-OFF code 8 at 296.654026 mV, and a minimum adjacent gap of 24.996066 mV. Those nominal values are not calibration: a future unpowered build must measure every resistor, verify low-drive impedance, recompute all sixteen prospective centroids, and a later powered calibration must establish unique ten-sigma-separated measured centroids before any record can be admissible.
 
@@ -849,11 +870,9 @@ C1 provides the sole intentional low-impedance source return. The inter-enclosur
 
 Each SHT45 row contains monotonic nanoseconds, UTC, sensor serial, command `0xfd`, raw temperature and RH words, both CRC-8 bytes, and converted values. CRC uses polynomial 0x31 and initial value 0xff. UTC is linked to the monotonic clock by a frozen mapping. CH3 raw ADXL354 data must satisfy RMS <=0.050 m/s2 and peak <=0.500 m/s2, with axis, gain, offset and filter calibration bound to the record.
 
-## Simulation boundary and unresolved physics layer
+## Deterministic complete-circuit model boundary
 
-The current reference is a valid signal-level analyzer test: it directly constructs deterministic four-channel synthetic ringdown records and proves that the unchanged analyzer recovers or rejects them. It is not a first-principles prediction that the complete proposed circuit produces those records. The separate unresolved device/circuit layer is `source -> 100 kohm limiter -> ADG1419 vendor model -> relay state/parasitic model -> FC-135 Butterworth-Van Dyke model -> OPA810 vendor model -> digitizer differential/common-mode loading -> cable/PCB/enclosure parasitics and resistor/amplifier noise -> ADC quantization -> canonical four-channel raw payload -> existing unchanged scientific analyzer`.
-
-That future layer must sweep motional R/L/C, shunt capacitance, loaded Q and resonance, OPA810 input capacitance and leakage, switch off-capacitance/charge-injection/leakage, relay bounce and release timing, cable and board capacitance, source-monitor feedthrough including the bounded C2 path, digitizer differential/common-mode admittance, clock/phase-reference error, amplifier/resistor noise, ADC quantization, environmental perturbation, and matched empty/1 pF dummy controls. Its output is the region of parameter space that survives the fixed analyzer, not one favorable inserted ringdown. Until that separate test exists, complete-circuit physical plausibility remains unresolved.
+`P0_SIGNAL_PATH_CIRCUIT_MODEL.json` and its generator implement the prospective C2 path from the 50-ohm source through monitor and injection networks; explicit ADG1419 SB, D and SA nodes with D-to-SA-to-50-ohm OFF routing; every K1/K2 state; K3 energized-open capacitance; the FC-135 BVD model derived from the documented 12.5 pF loaded-frequency identity with 3.4 fF inside the motional-capacitance range; OPA810 input/output/gain; the frozen 1 Mohm-parallel-30 pF digitizer mode; board/layout loading; resistor/amplifier noise; ADC quantization; f1 loading; and raw-bound nonlinear 2f and topology scans. It evaluates all {model['corner_count_per_candidate']} complete binary corners for every resistor candidate and the frozen amplitude grid without inserting one favorable point. This closes build-readiness plausibility only. Exact as-built parameters, nonlinear residue and transfer must still pass future calibration without tuning any threshold.
 
 ## Staged restoration ladder
 
@@ -867,7 +886,7 @@ No stage bootstraps authority for the next one.
 
 ## Claim law
 
-Offline PASS means only that the deterministic analyzer distinguishes the frozen synthetic positive fixtures from the frozen adversaries. A future physical claim requires committed raw bytes, exact identities, complete source-off witnesses, matched controls and independent adjudication. No optimization, Ising, catalytic-loop, capacity, restoration, Wall, or computation-advantage claim is authorized.
+Offline PASS means only that the deterministic model and analyzer distinguish the frozen synthetic transfer/isolation fixtures from the frozen adversaries. A future physical claim requires committed raw bytes, exact identities, complete source-off witnesses, matched controls and independent adjudication. No optimization, Ising, catalytic-loop, capacity, restoration, Wall, or computation-advantage claim is authorized.
 """
 
 
@@ -984,6 +1003,7 @@ No step in this packet authorizes power, playback, recording, instrument command
 
 
 def build_execution_contract(netlist: dict[str, Any]) -> str:
+    model = read_canonical_json(ROOT / "P0_SIGNAL_PATH_CIRCUIT_MODEL.json")
     return f"""# Future P0 physical execution contract
 
 Status: **NOT AUTHORIZED**. Claim ceiling: `{CEILING}`. This contract is a prospective hard-stop checklist and grants no authority.
@@ -998,15 +1018,15 @@ Status: **NOT AUTHORIZED**. Claim ceiling: `{CEILING}`. This contract is a prosp
 
 ## Future source contract
 
-One exact SDG1032X in `HIGH_Z` load mode, with 50 ohm physical output impedance, supplies continuous C1=32768 Hz at 0.400 Vpp and 0 V offset and phase-locked C2=65536 Hz at 0.100 Vpp and 0 V offset. C1 carries the 0/pi arm command; C2 remains fixed at zero and only enters the passive CH0 monitor. Both stay on through the entire record. No burst and no external trigger is allowed. Model, serial, firmware, load mode, output impedance, waveform, frequency, amplitude, offset, phase, continuous mode and output state are queried back per channel. Sealed standard phase-skew and drive-calibration uncertainties are separately bound in metadata and combined with the analyzer's Newey-West fit covariance. All querybacks, complete-preparation reconstruction, post-gate continuity/gauge checks and individual/matched uncertainty gates are mandatory.
+One exact SDG1032X in `HIGH_Z` load mode, with 50 ohm physical output impedance, supplies continuous C1=32768 Hz at 0.400 Vpp and 0 V offset and phase-locked C2=65536 Hz at {model['mechanism']['selected_amplitude_vpp']:.3f} Vpp and 0 V offset. C1 carries the 0/pi arm command. C2 remains fixed at zero phase, enters the passive CH0 monitor, and also enters the exact 1.00 Mohm TNPW branch to `N_GATE_OUT`; it never passes through ADG1419. The exact 100 kohm `N_SRC` drive shunt is on the ADG D/SA side during OFF and cannot define the C2 witness. Both source channels stay on through the entire record. No burst and no external trigger is allowed. All source/queryback and uncertainty custody remains mandatory.
 
 ## Future acquisition contract
 
-One exact DN2.592-04 captures four simultaneous true-differential channels at 1,000,000 samples/s for 3,101,000 samples/channel using software-prearmed free run. CH2 locates source isolation and C2 supplies the phase gauge. No proprietary container parser is claimed by this packet. A separately authorized acquisition must preserve any original proprietary container, run the frozen SDK lossless-export mode to the exact 24,808,000-byte signed-int16 canonical payload, require SDK-export and analyzer-payload hashes/counts to be identical, and bind adapter source, SDK/driver, querybacks, clock map and SHT45 raw words/CRCs before analysis. Missing exact adapter or native-byte custody is a hard stop.
+One exact DN2.592-04 captures four simultaneous true-differential channels at 1,000,000 samples/s for 3,101,000 samples/channel using software-prearmed free run. Its input mode is frozen to 1 Mohm in parallel with 30 pF and both negative legs are bound to calibrated AGND so common mode is derived from raw differential bytes. CH2 locates source isolation and C2 supplies the phase gauge. No proprietary container parser is claimed by this packet. A separately authorized acquisition must preserve any original proprietary container, run the frozen SDK lossless-export mode to the exact 24,808,000-byte signed-int16 canonical payload, require SDK-export and analyzer-payload hashes/counts to be identical, and supply actual byte descriptors for adapter source, instrument/source querybacks, native export, assignment commitment/reveal, calibration, chronology, the assembly manifest, the event-specific version-2 topology receipt, a unique four-state C2 topology scan and a unique C1-only nonlinear-control trace. The receipt must bind the assigned role, exact A/B/C assembly and population, native payload, chronology, querybacks, raw scan/control bytes and pre-acquisition scan times. All four times must parse from exact `YYYY-MM-DDTHH:MM:SS.ffffffZ` UTC form. A roles reuse one exact A manifest; B and C use distinct manifests. Cross-assembly, cross-event, duplicate-scan, duplicate-control, noncanonical-time or post-acquisition replay is a hard stop. Missing or mismatched bytes are a hard stop; hash-shaped metadata alone is insufficient.
 
 ## Future source-off contract
 
-ADG1419 terminates C1 into 50.00 ohm, then K1/K2 release after 250 microseconds while K3 stays energized. Code 0 must remain stable for 1,000 samples before K3 may release to guard; code 8 must then remain stable for 1,000 samples. Contacts must meet the 14,500-sample ordered-transition deadline, both source tones must persist through record end, and the first admissible sample law in the netlist must hold. Auxiliary contacts do not prove actual signal-pole opening: future execution remains blocked until a separately reviewed per-event actual-path witness or force-guided-contact guarantee is bound. Any hidden buffer, replay, trigger, muted source, wrong termination, wrong fixture, missing reference tone, invalid CRC or ancestry mismatch rejects the record.
+ADG1419 terminates C1 into 50.00 ohm. The same-ADG-state 192-sample C2 pre-window completes before K1/K2 release at 250 microseconds. K3 stays energized/electrically open while code 0 remains stable for 1,000 samples and the 960-sample C2 isolated-path window passes. Only then may K3 release to guard; code 8 must remain stable for 1,000 samples and the 10 ms guard follows. Auxiliary contacts do not identify either signal pole. A passing end-to-end transfer event supports only the exact actual-path isolation token and at least one-open meaning. Any guard masking, wrong-node injection, missing C2, excessive open feedthrough, inversion, bounce, re-entry, hidden buffer, replay, trigger, muted source, wrong termination, wrong fixture, invalid CRC or ancestry mismatch rejects the record.
 
 ## Future controls
 
@@ -1040,20 +1060,21 @@ def build_findings() -> dict[str, Any]:
     return {
         "authority": AUTHORITY,
         "claim_ceiling": CEILING,
-        "decision": "P0_BUILD_READINESS_BLOCKED",
+        "decision": "P0_BUILD_READINESS_PACKET_FROZEN",
         "findings": [
             {"closure_evidence": evidence, "finding_id": finding_id, "original_summary": summary, "severity": severity, "status": "CLOSED"}
             for finding_id, severity, summary, evidence in closures
         ] + [{
-            "closure_evidence": ["P0_FINAL_NETLIST.json#source_off_sequence.signal_pole_evidence_boundary", "P0_BUILD_READINESS_PACKET.md#physical-source-off-sequence", "P0_FUTURE_PHYSICAL_EXECUTION_CONTRACT.md#future-source-off-contract"],
+            "closure_evidence": ["P0_SIGNAL_PATH_CIRCUIT_MODEL.json", "P0_FINAL_NETLIST.json#source_off_sequence.signal_pole_evidence_boundary", "p0_scientific_analyzer.py#signal_path_transfer", "p0_scientific_analyzer.py#ASSEMBLY_FOR_ROLE", "P0_SIGNAL_PATH_ORDERING_PROOF.json", "P0_ANALYZER_REFERENCE_RESULTS.json#signal_path_control_outcomes", "P0_SIGNAL_PATH_MUTATION_RESULTS.json", "P0_BUILD_READINESS_REVIEWS.json"],
             "finding_id": "P0BR-R3-SIGNAL-POLE",
-            "original_summary": "Auxiliary CH2 contacts do not provide per-event evidence that K1/K2 signal poles opened; physical source-disconnect claims remain blocked pending an actual-path witness or exact force-guided guarantee.",
+            "original_summary": "Auxiliary CH2 contacts do not provide per-event evidence that K1/K2 signal poles opened; closure requires a prospective actual-path witness plus assembly-, role-, event-, queryback- and parsed-UTC chronology custody that rejects A-to-B/C, cross-event scan/receipt/control replay and noncanonical time text.",
             "severity": "BLOCKER",
-            "status": "OPEN",
+            "status": "CLOSED",
         }],
-        "open_material_findings": 1,
-        "repair_review_gate": "P0_BUILD_READINESS_PACKET_FROZEN is prohibited while P0BR-R3-SIGNAL-POLE remains open; after a separately reviewed mechanical repair, four independent PASS receipts must bind the exact new candidate root",
-        "schema": "p0.build-readiness-findings.v2",
+        "open_material_findings": 0,
+        "repair_decision": "P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED",
+        "repair_review_gate": "satisfied only by four focused PASS receipts bound to the exact final candidate root",
+        "schema": "p0.build-readiness-findings.v3",
         "contact_attestation": {"audio_playback_or_recording": 0, "cart_or_stock_check": 0, "hardware": 0, "human_vendor_outreach": 0, "instrument_command": 0, "purchase": 0, "target": 0},
         "public_source_retrieval": {"automated_http_attempts_occurred": True, "repository_safe_receipt": f"{RESEARCH_RELATIVE_PATH}/SOURCE_CUSTODY.json", "third_party_bytes_private_and_ignored": True},
     }
