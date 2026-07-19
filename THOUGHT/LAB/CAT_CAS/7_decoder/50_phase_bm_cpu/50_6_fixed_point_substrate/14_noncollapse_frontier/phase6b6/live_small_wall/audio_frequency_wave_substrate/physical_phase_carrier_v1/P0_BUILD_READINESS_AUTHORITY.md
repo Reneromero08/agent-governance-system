@@ -5,7 +5,8 @@
 **Authority parent:** `2cfa87a7f10aae224768a0c3283b3e035a10123b`  
 **Package:** `physical_phase_carrier_v1`  
 **Claim ceiling:** `NON_EXECUTING_P0_BUILD_READINESS_ONLY`  
-**Current status:** `P0_BUILD_READINESS_PACKET_FROZEN`<br>
+**Current status:** `P0_BUILD_READINESS_BLOCKED__POST_QUALIFICATION_AUDIT`<br>
+**Current engineering boundary:** `P0_RESONANCE_LOAD_LAW_REPAIR_REQUIRED`<br>
 **Physical authority:** none
 
 ## 1. Authorized work
@@ -26,6 +27,7 @@ produce a procurement-readiness packet
 produce an unpowered-build packet
 produce a separate bounded physical-execution contract
 run read-only reviews and repository checks
+repair the resonance/load, continuous-envelope, and common-mode laws identified by the post-qualification audit
 ```
 
 The package may replace a reference-class candidate with an exact component only when the
@@ -76,6 +78,9 @@ assembly-, role-, event-, queryback-, and chronology-bound topology custody
 synthetic ideal, feedthrough, detector-memory, switch-transient, phase, decay, and null fixtures
 analysis portability and numeric-reproduction law
 final conservative limits derived from the selected parts
+prospectively closed resonance/load and preparation-frequency law
+rigorous continuous-parameter enclosure or explicitly bounded binary-corner wording
+observable or conservatively proven common-mode operating law
 non-purchasing BOM with quantities, alternates, and disallowed substitutions
 unpowered assembly procedure that remains separately unauthorized
 bounded execution contract that remains separately unauthorized
@@ -102,9 +107,19 @@ The package-local validator proves candidate-byte structure and tamper detection
 It may emit the frozen token only after four externally attributable independent
 PASS receipts bind the exact candidate root and zero material findings remain.
 
-## 5. Stop boundary
+The signal-path repair token does not by itself satisfy the full build-readiness token.
 
-After build readiness closes, stop at:
+## 5. Current stop boundary
+
+The active engineering boundary is:
+
+```text
+P0_RESONANCE_LOAD_LAW_REPAIR_REQUIRED
+```
+
+No procurement or unpowered-build authority should be consumed while this audit hold is open.
+
+Only after build readiness is re-established may the lane stop at:
 
 ```text
 USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD
@@ -121,9 +136,17 @@ wiring inspection, operating limits, retry law, and safety boundary.
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
 P0_BUILD_READINESS_AUTHORIZED
 P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED
-P0_BUILD_READINESS_PACKET_FROZEN
+P0_BUILD_READINESS_BLOCKED
+P0_RESONANCE_LOAD_LAW_REPAIR_REQUIRED
 PHYSICAL_PHASE_CARRIER_NOT_YET_OBSERVED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 PHYSICAL_SILICON_PHONONIC_COMPUTING_NOT_ESTABLISHED
 SMALL_WALL_CROSSED_NOT_PROMOTED
+```
+
+Binding audit and repair documents:
+
+```text
+P0_POST_QUALIFICATION_AUDIT.md
+P0_RESONANCE_LOAD_LAW_REPAIR_CONTRACT.md
 ```
