@@ -1,0 +1,109 @@
+{
+  "live_invocation_count": 0,
+  "offline_validate_sha256": "bcc0c77c5c1c62b73e79abdcf737c38509e4817ed474c7d91e5d3ab2a0ac307c",
+  "passed": true,
+  "pmu_acquisition_count": 0,
+  "runtime_authority": {
+    "authority": {
+      "compile_command_identity": {
+        "flags": [
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-O2"
+        ],
+        "inputs": [
+          "family10h_carrier_tomography_runtime.c"
+        ],
+        "language_standard": "c11",
+        "output": "family10h_carrier_tomography_runtime"
+      },
+      "compile_equivalence_law": "byte_exact_isolated_compile",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2"
+      ],
+      "compiler_identity": "gcc-compatible C compiler selected by controller find_c_compiler()",
+      "git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+      "path": "family10h_carrier_tomography_runtime",
+      "present": true,
+      "runtime_c_sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+      "runtime_h_sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+      "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
+      "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "size": 22928
+    },
+    "failures": [],
+    "passed": true
+  },
+  "schedule_validation": {
+    "block_counts": {
+      "factorial_nonadditivity": 4480,
+      "persistence_matrix": 3840
+    },
+    "expected_blocks": {
+      "factorial_nonadditivity": 4480,
+      "persistence_matrix": 3840
+    },
+    "failures": [],
+    "passed": true,
+    "tuple_count": 8320
+  },
+  "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_V1_1_OFFLINE_VALIDATE_V1",
+  "science_package_id": "family10h_carrier_tomography_v1_1_paired_dirty_probe",
+  "sensor_inventory_count": 0,
+  "software_fixture": {
+    "fixture_adjudication_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1_1_paired_dirty_probe\\PAIRED_DIRTY_PROBE_V1_0_FIXTURE_ADJUDICATION.json",
+    "fixture_adjudication_sha256": "4a4948dfcc6980546714e9965763e223d892ac0ae1f71a0a21c71bbdb201e173",
+    "fixture_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
+    "fixture_result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
+    "fixture_self_test_passed": true,
+    "fixture_self_test_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1_1_paired_dirty_probe\\PAIRED_DIRTY_PROBE_V1_0_FIXTURE_SELF_TEST.json",
+    "fixture_self_test_sha256": "45f724c61d246356ba086b418d762c38e92ff723192e08c13765ea2ea91f8c0e"
+  },
+  "source_authority": {
+    "checked_files": 10,
+    "failures": [],
+    "passed": true,
+    "runtime_binary_authority": {
+      "compile_command_identity": {
+        "flags": [
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-O2"
+        ],
+        "inputs": [
+          "family10h_carrier_tomography_runtime.c"
+        ],
+        "language_standard": "c11",
+        "output": "family10h_carrier_tomography_runtime"
+      },
+      "compile_equivalence_law": "byte_exact_isolated_compile",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2"
+      ],
+      "compiler_identity": "gcc-compatible C compiler selected by controller find_c_compiler()",
+      "git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+      "path": "family10h_carrier_tomography_runtime",
+      "present": true,
+      "runtime_c_sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+      "runtime_h_sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+      "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
+      "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "size": 22928
+    }
+  },
+  "target_contact_count": 0,
+  "threshold_source": "PROSPECTIVE_PAIRED_DIRTY_PROBE_CONFIRMATION_CONTRACT.md copied as CARRIER_TOMOGRAPHY_CONTRACT.md",
+  "transaction_run_id": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0"
+}

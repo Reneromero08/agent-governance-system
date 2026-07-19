@@ -1,0 +1,81 @@
+{
+  "runtime_binary_authority": {
+    "compile_command_identity": {
+      "flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2"
+      ],
+      "inputs": [
+        "family10h_carrier_tomography_runtime.c"
+      ],
+      "language_standard": "c11",
+      "output": "family10h_carrier_tomography_runtime"
+    },
+    "compile_equivalence_law": "byte_exact_isolated_compile",
+    "compiler_flags": [
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2"
+    ],
+    "compiler_identity": "gcc-compatible C compiler selected by controller find_c_compiler()",
+    "git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+    "path": "family10h_carrier_tomography_runtime",
+    "present": true,
+    "runtime_c_sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+    "runtime_h_sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
+    "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+    "size": 22928
+  },
+  "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_V1_1_SOURCE_HASHES_V1",
+  "science_package_id": "family10h_carrier_tomography_v1_1_paired_dirty_probe",
+  "source_files": {
+    "CARRIER_TOMOGRAPHY_CONTRACT.md": {
+      "sha256": "9383918bde310c6fd6aa2d5a1a425be105b88a2527579a4f4a1e5fafe9ad752f",
+      "size": 5005
+    },
+    "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json": {
+      "sha256": "56fb088909d7281d32c07be3a520b8057e2072a351a39c0f19c28ffbab4ef3d5",
+      "size": 12664055
+    },
+    "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "1ec754728878d349ddeed8e17c40d75d120c0365afd7cfdef20a2f72e074d95a",
+      "size": 355
+    },
+    "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "97d38baa7f9285d5e965d6fcfc3421b2cc666a8a9b4ea36aefc6bf114c4ede0c",
+      "size": 4502364
+    },
+    "family10h_carrier_tomography_public.py": {
+      "sha256": "b408b2a007427ad626b4d3e5d091689a18017880d569543722f16a9995f9efa1",
+      "size": 148691
+    },
+    "family10h_carrier_tomography_runtime.c": {
+      "sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+      "size": 25414
+    },
+    "family10h_carrier_tomography_runtime.h": {
+      "sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+      "size": 1368
+    },
+    "family10h_carrier_tomography_target.py": {
+      "sha256": "65511c63515d443837a7043585460196e98fdc19db9fc1e6fcc7b5e66a644cf4",
+      "size": 253874
+    },
+    "paired_dirty_probe_prospective_adjudication.py": {
+      "sha256": "24082f8a274f65057362690d3267572272838f2ff4c4706d6023a66dc7a67734",
+      "size": 58106
+    },
+    "run_family10h_carrier_tomography_v1_1_paired_dirty_probe.py": {
+      "sha256": "48f6661275f2707b5cb268d15f61c0a11eacb56f51c349296468462554fc1ec8",
+      "size": 30483
+    }
+  },
+  "source_hashes_sha256": "2c93720828a00fbe525d81426f4dab924484682c90c34fc1df552c14cdc653ef",
+  "transaction_run_id": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0"
+}
