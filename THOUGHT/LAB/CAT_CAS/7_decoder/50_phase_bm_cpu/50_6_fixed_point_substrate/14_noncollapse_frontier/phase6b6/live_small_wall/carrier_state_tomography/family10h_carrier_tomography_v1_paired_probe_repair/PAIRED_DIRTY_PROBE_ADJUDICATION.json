@@ -1,11 +1,17 @@
 {
   "channel_specificity": {
-    "passed": true,
+    "attempt_3_observation": "attempt_3_strongest_scalar_q_signal_is_in_dirty_probe_response_under_this_sidecar",
+    "attempt_3_primary_passed": true,
+    "attempt_3_secondary_channels_failed_same_law": true,
+    "diagnostic_only": true,
+    "primary_endpoint": "dirty_probe_response",
+    "primary_endpoint_requirement": "primary paired dirty-probe law must independently pass all primary gates",
+    "prospective_gate": false,
     "reports": {
       "change_to_dirty": {
         "passed": false,
         "r2": 0.007805525669818403,
-        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
         "rmse": 3.546058888622922,
         "slope": 0.00030953543526785713,
         "source_off_abs_max": 26.0
@@ -13,7 +19,7 @@
       "cpu_cycles": {
         "passed": false,
         "r2": 0.6863528000322364,
-        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
         "rmse": 17108.415716328873,
         "slope": -24.717034912109376,
         "source_off_abs_max": 135145.0
@@ -21,7 +27,7 @@
       "dirty_probe_response": {
         "passed": true,
         "r2": 0.9955421082831637,
-        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_SUPPORTED_RETROSPECTIVE",
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_SUPPORTED_RETROSPECTIVE",
         "rmse": 128.80767152163438,
         "slope": 1.8797825404575892,
         "source_off_abs_max": 45.0
@@ -29,12 +35,23 @@
       "duration_ns": {
         "passed": false,
         "r2": 0.6635832051280859,
-        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
         "rmse": 5073.487385919993,
         "slope": -6.9590576171875,
         "source_off_abs_max": 23086.0
       }
-    }
+    },
+    "secondary_channel_policy": "secondary channels may pass or fail without invalidating the primary result and may not substitute for primary endpoint failure"
+  },
+  "claim_boundary": {
+    "catalytic_borrowing_established": false,
+    "dimension": "one_dimensional_scalar_codeword_readout",
+    "full_carrier_state_tomography_established": false,
+    "official_frozen_attempt3_result_unchanged": true,
+    "physical_relational_memory_established": false,
+    "relational_carrier_established": false,
+    "reproducible_public_q_dependent_response_observed": true,
+    "small_wall_promoted": false
   },
   "controls": {
     "source_off_abs_max": 45.0,
@@ -84,7 +101,6 @@
   },
   "gates": {
     "all_strata": true,
-    "channel_specificity": true,
     "delay_slope_agreement": true,
     "factor_balance": true,
     "global_classifier": true,
@@ -1309,12 +1325,18 @@
     "mapping_policy": "logical_query_identity",
     "mapping_policy_reason": "Runtime maps logical query lanes through the same map variant used during preparation; map is therefore a consistency factor for logical query_A/query_B, not a sign inversion.",
     "paired_observable": "D_single = dirty_probe_response(query_A) - dirty_probe_response(query_B)",
-    "source_of_thresholds": "prospective constants in this sidecar, not tuned by a live retry"
+    "threshold_provenance": {
+      "attempt_3_limitation": "attempt_3_cannot_independently_validate_thresholds_derived_after_examining_attempt_3",
+      "attempt_3_status": "retrospective_thresholds_selected_after_attempt_3_inspection",
+      "post_v1_1_revision": "no_post_v1_1_run_threshold_revision_allowed",
+      "v1_1_status": "thresholds_are_prospectively_frozen_only_for_the_proposed_v1_1_confirmation"
+    }
   },
   "official_result_replaced": false,
   "pair_failure_count": 0,
   "pair_failures": [],
   "passed": true,
+  "prospective_claim_ceiling": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
   "query_observations": {
     "counts": {
       "factorial_nonadditivity|query_A_then_B": 2240,
@@ -1340,7 +1362,8 @@
     },
     "total_raw_records": 8320
   },
-  "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_SUPPORTED_RETROSPECTIVE",
+  "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_SUPPORTED_RETROSPECTIVE",
+  "retrospective_claim": "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_OBSERVED_RETROSPECTIVE",
   "sample_count": 560,
   "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_ADJUDICATION_V1",
   "session_slope_relative_disagreement": 0.0034496969360207717,
@@ -1350,7 +1373,45 @@
   },
   "small_wall_promoted": false,
   "source_evidence": {
+    "archive": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\ATTEMPT_3_REMOTE_ROOT.tar.gz",
+    "archive_member_hashes": {
+      "feature_freeze.json": {
+        "archive_member": "family10h_carrier_tomography_v1_0/output/feature_freeze.json",
+        "copyback_snapshot_bound": true,
+        "relative_path": "output/feature_freeze.json",
+        "sha256": "c7a83cf130a503bc7b4454ca36a411424cae4cc49523551e5cefef1620e0fdd9",
+        "size": 1210
+      },
+      "output_target_execution_receipt.json": {
+        "archive_member": "family10h_carrier_tomography_v1_0/output_target_execution_receipt.json",
+        "copyback_snapshot_bound": true,
+        "relative_path": "output_target_execution_receipt.json",
+        "sha256": "f30cff4dee658bf9c3b9c614dbe2eecc537b00067e50e7f36dcbb501eb5e5682",
+        "size": 10521
+      },
+      "raw_records.jsonl": {
+        "archive_member": "family10h_carrier_tomography_v1_0/output/raw_records.jsonl",
+        "copyback_snapshot_bound": true,
+        "relative_path": "output/raw_records.jsonl",
+        "sha256": "024406f6cd94edbe1bd47023484182969b62f1fb13cdfac071034621a6595405",
+        "size": 26780234
+      },
+      "source_death_receipts.jsonl": {
+        "archive_member": "family10h_carrier_tomography_v1_0/output/source_death_receipts.jsonl",
+        "copyback_snapshot_bound": true,
+        "relative_path": "output/source_death_receipts.jsonl",
+        "sha256": "63c10e81a02bdf703715d30e41cf6da125d1d2f00f22d6de62471685e15e9204",
+        "size": 4159354
+      }
+    },
+    "archive_sha256": "4743e01adad215efbbe3b0416b6e4846501858f056db27c00e9d30268a8267e6",
+    "archive_size": 3041639,
     "attempt_dir": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3",
+    "authoritative_input": "ATTEMPT_3_REMOTE_ROOT.tar.gz",
+    "copyback_receipt": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\ATTEMPT_3_COPYBACK_RECEIPT.json",
+    "copyback_receipt_sha256": "10fb0fb255df559342e686c9b3366a38d16578e285eab54ab42f9cd229bdd61e",
+    "evidence_inventory": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\ATTEMPT_3_EVIDENCE_INVENTORY.json",
+    "evidence_inventory_sha256": "bbc90e4d5d28aa2d24e223e8c1316b621aaab5019cf1bd912ec56e9a20ad9227",
     "output_hashes": {
       "feature_freeze.json": {
         "sha256": "c7a83cf130a503bc7b4454ca36a411424cae4cc49523551e5cefef1620e0fdd9",
@@ -1370,8 +1431,46 @@
       }
     },
     "schedule_sha256": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
-    "snapshot_output": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\remote_root_snapshot\\family10h_carrier_tomography_v1_0\\output",
-    "source": "extracted_snapshot",
+    "snapshot_cache": {
+      "authoritative": false,
+      "comparisons": {
+        "feature_freeze.json": {
+          "archive_sha256": "c7a83cf130a503bc7b4454ca36a411424cae4cc49523551e5cefef1620e0fdd9",
+          "archive_size": 1210,
+          "matches_archive": true,
+          "snapshot_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\remote_root_snapshot\\family10h_carrier_tomography_v1_0\\output\\feature_freeze.json",
+          "snapshot_sha256": "c7a83cf130a503bc7b4454ca36a411424cae4cc49523551e5cefef1620e0fdd9",
+          "snapshot_size": 1210
+        },
+        "output_target_execution_receipt.json": {
+          "archive_sha256": "f30cff4dee658bf9c3b9c614dbe2eecc537b00067e50e7f36dcbb501eb5e5682",
+          "archive_size": 10521,
+          "matches_archive": true,
+          "snapshot_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\remote_root_snapshot\\family10h_carrier_tomography_v1_0\\output_target_execution_receipt.json",
+          "snapshot_sha256": "f30cff4dee658bf9c3b9c614dbe2eecc537b00067e50e7f36dcbb501eb5e5682",
+          "snapshot_size": 10521
+        },
+        "raw_records.jsonl": {
+          "archive_sha256": "024406f6cd94edbe1bd47023484182969b62f1fb13cdfac071034621a6595405",
+          "archive_size": 26780234,
+          "matches_archive": true,
+          "snapshot_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\remote_root_snapshot\\family10h_carrier_tomography_v1_0\\output\\raw_records.jsonl",
+          "snapshot_sha256": "024406f6cd94edbe1bd47023484182969b62f1fb13cdfac071034621a6595405",
+          "snapshot_size": 26780234
+        },
+        "source_death_receipts.jsonl": {
+          "archive_sha256": "63c10e81a02bdf703715d30e41cf6da125d1d2f00f22d6de62471685e15e9204",
+          "archive_size": 4159354,
+          "matches_archive": true,
+          "snapshot_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\remote_root_snapshot\\family10h_carrier_tomography_v1_0\\output\\source_death_receipts.jsonl",
+          "snapshot_sha256": "63c10e81a02bdf703715d30e41cf6da125d1d2f00f22d6de62471685e15e9204",
+          "snapshot_size": 4159354
+        }
+      },
+      "present": true,
+      "status": "snapshot_cache_verified_equal_to_archive_but_not_used_as_authority"
+    },
+    "source": "verified_committed_remote_root_archive",
     "target_evidence_validation": {
       "failures": [],
       "passed": true,

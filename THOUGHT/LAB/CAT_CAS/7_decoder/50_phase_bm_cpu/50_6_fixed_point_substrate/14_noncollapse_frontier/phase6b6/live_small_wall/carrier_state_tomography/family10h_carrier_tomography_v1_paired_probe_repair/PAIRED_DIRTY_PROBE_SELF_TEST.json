@@ -1,11 +1,46 @@
 {
-  "channel_specificity": {
+  "archive_negative_self_tests": {
     "passed": true,
+    "tests": {
+      "copyback_receipt_mismatch": {
+        "error": "copy-back receipt local_archive mismatch: C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_q_readout_negative_y2e7fr6u\\wrong-name.tar.gz != D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\ATTEMPT_3_REMOTE_ROOT.tar.gz",
+        "passed": true
+      },
+      "duplicate_matching_archive_member": {
+        "error": "remote-root archive duplicate output file matches: {'raw_records.jsonl': ['family10h_carrier_tomography_v1_0/output/raw_records.jsonl', 'family10h_carrier_tomography_v1_0/output/raw_records.jsonl']}",
+        "passed": true
+      },
+      "missing_required_member": {
+        "error": "remote-root archive missing output files: ['raw_records.jsonl']",
+        "passed": true
+      },
+      "snapshot_archive_content_mismatch": {
+        "error": "snapshot cache differs from verified archive members: ['feature_freeze.json']",
+        "passed": true
+      },
+      "wrong_archive_hash": {
+        "error": "archive sha mismatch: expected 0000000000000000000000000000000000000000000000000000000000000000, observed 4743e01adad215efbbe3b0416b6e4846501858f056db27c00e9d30268a8267e6",
+        "passed": true
+      },
+      "wrong_archive_size": {
+        "error": "archive size mismatch: expected 3041640, observed 3041639",
+        "passed": true
+      }
+    }
+  },
+  "channel_specificity": {
+    "attempt_3_observation": "attempt_3_strongest_scalar_q_signal_is_in_dirty_probe_response_under_this_sidecar",
+    "attempt_3_primary_passed": true,
+    "attempt_3_secondary_channels_failed_same_law": true,
+    "diagnostic_only": true,
+    "primary_endpoint": "dirty_probe_response",
+    "primary_endpoint_requirement": "primary paired dirty-probe law must independently pass all primary gates",
+    "prospective_gate": false,
     "reports": {
       "change_to_dirty": {
         "passed": false,
         "r2": 0.007805525669818403,
-        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
         "rmse": 3.546058888622922,
         "slope": 0.00030953543526785713,
         "source_off_abs_max": 26.0
@@ -13,7 +48,7 @@
       "cpu_cycles": {
         "passed": false,
         "r2": 0.6863528000322364,
-        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
         "rmse": 17108.415716328873,
         "slope": -24.717034912109376,
         "source_off_abs_max": 135145.0
@@ -21,7 +56,7 @@
       "dirty_probe_response": {
         "passed": true,
         "r2": 0.9955421082831637,
-        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_SUPPORTED_RETROSPECTIVE",
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_SUPPORTED_RETROSPECTIVE",
         "rmse": 128.80767152163438,
         "slope": 1.8797825404575892,
         "source_off_abs_max": 45.0
@@ -29,21 +64,23 @@
       "duration_ns": {
         "passed": false,
         "r2": 0.6635832051280859,
-        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
         "rmse": 5073.487385919993,
         "slope": -6.9590576171875,
         "source_off_abs_max": 23086.0
       }
-    }
+    },
+    "secondary_channel_policy": "secondary channels may pass or fail without invalidating the primary result and may not substitute for primary endpoint failure"
   },
   "checks": {
+    "archive_negative_self_tests": true,
     "change_to_dirty_channel_not_sufficient": true,
     "cpu_cycles_channel_not_sufficient": true,
     "duration_channel_not_sufficient": true,
     "flat_signal_rejected": true,
     "legacy_mapping_sign_cancels_signal": true,
     "negated_q_label_rejected": true,
-    "paired_dirty_probe_attempt3_supported": true,
+    "paired_dirty_probe_attempt3_q_readout_supported": true,
     "source_off_pair_smuggle_rejected": true,
     "swapped_query_pair_rejected": true
   },
@@ -77,7 +114,6 @@
   },
   "negated_q_mutant_gates": {
     "all_strata": false,
-    "channel_specificity": false,
     "delay_slope_agreement": true,
     "factor_balance": true,
     "global_classifier": true,
@@ -106,15 +142,15 @@
   },
   "passed": true,
   "regression_classes": {
-    "change_to_dirty": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
-    "cpu_cycles": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
-    "duration_ns": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
-    "flat_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
-    "legacy_mapping": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
-    "negated_q_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
-    "repaired": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_SUPPORTED_RETROSPECTIVE",
-    "source_off_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE",
-    "swapped_query_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE"
+    "change_to_dirty": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+    "cpu_cycles": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+    "duration_ns": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+    "flat_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+    "legacy_mapping": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+    "negated_q_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+    "repaired": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_SUPPORTED_RETROSPECTIVE",
+    "source_off_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+    "swapped_query_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE"
   },
   "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_SELF_TEST_V1",
   "source_off_mutant_controls": {
@@ -126,7 +162,6 @@
   },
   "swapped_query_mutant_gates": {
     "all_strata": false,
-    "channel_specificity": false,
     "delay_slope_agreement": true,
     "factor_balance": true,
     "global_classifier": true,
