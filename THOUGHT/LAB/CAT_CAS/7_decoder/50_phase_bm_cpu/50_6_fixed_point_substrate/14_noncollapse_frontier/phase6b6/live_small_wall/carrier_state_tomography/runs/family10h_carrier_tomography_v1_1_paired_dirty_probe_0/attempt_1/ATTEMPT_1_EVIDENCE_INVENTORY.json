@@ -1,0 +1,192 @@
+{
+  "attempt": 1,
+  "failures": [],
+  "files": [
+    {
+      "relative_path": "ATTEMPT_1_REMOTE_ROOT.tar.gz",
+      "sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+      "size": 2726728
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/family10h_carrier_tomography_runtime.c",
+      "relative_path": "family10h_carrier_tomography_runtime.c",
+      "sha256": "2807f91a8c9369fe60f610c5582ccd1af6afc5826043bc80047838b6ee0f66b8",
+      "size": 25435
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/family10h_carrier_tomography_target.py",
+      "relative_path": "family10h_carrier_tomography_target.py",
+      "sha256": "65511c63515d443837a7043585460196e98fdc19db9fc1e6fcc7b5e66a644cf4",
+      "size": 253874
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/.family10h_carrier_tomography_v1_1_paired_dirty_probe_0_owner",
+      "relative_path": ".family10h_carrier_tomography_v1_1_paired_dirty_probe_0_owner",
+      "sha256": "07c5f9ec36b2f3325541f27bffc08e6fa533c7738dd018e25ddc41f8abe822be",
+      "size": 194
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/CARRIER_TOMOGRAPHY_OFFLINE_VALIDATE.json",
+      "relative_path": "CARRIER_TOMOGRAPHY_OFFLINE_VALIDATE.json",
+      "sha256": "601f25cdc27ccf6d1b2ce7875b689948aa7f27da62023de10d4e2d3687dd9ffe",
+      "size": 4649
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output/raw_records.jsonl",
+      "relative_path": "output/raw_records.jsonl",
+      "sha256": "c690c77d135d30f24b5f0efbe5ce4a3ea86bfc7aadf27fd0a996f31d9f9e27f7",
+      "size": 26980062
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output/feature_freeze.json",
+      "relative_path": "output/feature_freeze.json",
+      "sha256": "2773f673694e4549690e12e9a13149388df57cd28ad2493e1241fb56c305984f",
+      "size": 1210
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output/source_death_receipts.jsonl",
+      "relative_path": "output/source_death_receipts.jsonl",
+      "sha256": "d61d69bbe50dca2b40c908dafcff47118b719838ecaff997b46e224b261fbc59",
+      "size": 4350250
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output_target_execution_receipt.json",
+      "relative_path": "output_target_execution_receipt.json",
+      "sha256": "266678dd95400dd6af12427a97b61fcd80485c3b223b05d535ecdff89a241d4e",
+      "size": 10036
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/paired_dirty_probe_prospective_adjudication.py",
+      "relative_path": "paired_dirty_probe_prospective_adjudication.py",
+      "sha256": "24082f8a274f65057362690d3267572272838f2ff4c4706d6023a66dc7a67734",
+      "size": 58106
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/CARRIER_TOMOGRAPHY_CONTRACT.md",
+      "relative_path": "CARRIER_TOMOGRAPHY_CONTRACT.md",
+      "sha256": "9383918bde310c6fd6aa2d5a1a425be105b88a2527579a4f4a1e5fafe9ad752f",
+      "size": 5005
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/run_family10h_carrier_tomography_v1_1_paired_dirty_probe.py",
+      "relative_path": "run_family10h_carrier_tomography_v1_1_paired_dirty_probe.py",
+      "sha256": "48f6661275f2707b5cb268d15f61c0a11eacb56f51c349296468462554fc1ec8",
+      "size": 30483
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/family10h_carrier_tomography_runtime",
+      "relative_path": "family10h_carrier_tomography_runtime",
+      "sha256": "1f5e070671d35bde6c77364d409cb86f2ae7a35470a203a12067316f35a90575",
+      "size": 22928
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+      "relative_path": "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+      "sha256": "833064d94222efa38431a453f8a83ad628237b74d3d54b72f982cd88a6384ba1",
+      "size": 3167
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+      "relative_path": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+      "sha256": "56fb088909d7281d32c07be3a520b8057e2072a351a39c0f19c28ffbab4ef3d5",
+      "size": 12664055
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+      "relative_path": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+      "sha256": "1ec754728878d349ddeed8e17c40d75d120c0365afd7cfdef20a2f72e074d95a",
+      "size": 355
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256",
+      "relative_path": "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256",
+      "sha256": "d6674827ed5c46e00646beb3ce35a42522cb79ed563fa732dc410e5563cc0631",
+      "size": 269
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+      "relative_path": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+      "sha256": "97d38baa7f9285d5e965d6fcfc3421b2cc666a8a9b4ea36aefc6bf114c4ede0c",
+      "size": 4502364
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/family10h_carrier_tomography_public.py",
+      "relative_path": "family10h_carrier_tomography_public.py",
+      "sha256": "b408b2a007427ad626b4d3e5d091689a18017880d569543722f16a9995f9efa1",
+      "size": 148691
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/family10h_carrier_tomography_runtime.h",
+      "relative_path": "family10h_carrier_tomography_runtime.h",
+      "sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
+      "size": 1368
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json",
+      "relative_path": "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json",
+      "sha256": "20b5f758e22cc916af36a5b8f7f87ca27171c5d5314b233b63528dcc3635df65",
+      "size": 10650
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/PAIRED_DIRTY_PROBE_V1_0_FIXTURE_ADJUDICATION.json",
+      "relative_path": "PAIRED_DIRTY_PROBE_V1_0_FIXTURE_ADJUDICATION.json",
+      "sha256": "4a4948dfcc6980546714e9965763e223d892ac0ae1f71a0a21c71bbdb201e173",
+      "size": 50786
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+      "relative_path": "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+      "sha256": "f14e708bb0abecbf2968625dfb3ed5f7ea3e57b704cf13ec4e21de55204f268c",
+      "size": 687598
+    },
+    {
+      "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/PAIRED_DIRTY_PROBE_V1_0_FIXTURE_SELF_TEST.json",
+      "relative_path": "PAIRED_DIRTY_PROBE_V1_0_FIXTURE_SELF_TEST.json",
+      "sha256": "e96f056bf40e4bb41b9e04d73aceded26ed5ad7020749e9ead6812b7928ad174",
+      "size": 13519
+    }
+  ],
+  "passed": true,
+  "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0",
+  "remote_root_archive": {
+    "relative_path": "ATTEMPT_1_REMOTE_ROOT.tar.gz",
+    "sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+    "size": 2726728
+  },
+  "required_member_matches": {
+    "output/feature_freeze.json": [
+      {
+        "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output/feature_freeze.json",
+        "relative_path": "output/feature_freeze.json",
+        "sha256": "2773f673694e4549690e12e9a13149388df57cd28ad2493e1241fb56c305984f",
+        "size": 1210
+      }
+    ],
+    "output/raw_records.jsonl": [
+      {
+        "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output/raw_records.jsonl",
+        "relative_path": "output/raw_records.jsonl",
+        "sha256": "c690c77d135d30f24b5f0efbe5ce4a3ea86bfc7aadf27fd0a996f31d9f9e27f7",
+        "size": 26980062
+      }
+    ],
+    "output/source_death_receipts.jsonl": [
+      {
+        "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output/source_death_receipts.jsonl",
+        "relative_path": "output/source_death_receipts.jsonl",
+        "sha256": "d61d69bbe50dca2b40c908dafcff47118b719838ecaff997b46e224b261fbc59",
+        "size": 4350250
+      }
+    ],
+    "output_target_execution_receipt.json": [
+      {
+        "archive_member": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output_target_execution_receipt.json",
+        "relative_path": "output_target_execution_receipt.json",
+        "sha256": "266678dd95400dd6af12427a97b61fcd80485c3b223b05d535ecdff89a241d4e",
+        "size": 10036
+      }
+    ]
+  },
+  "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_V1_1_EVIDENCE_INVENTORY_V1",
+  "transaction_run_id": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0"
+}

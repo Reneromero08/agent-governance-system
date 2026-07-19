@@ -1,0 +1,319 @@
+{
+  "archive_negative_self_tests": {
+    "passed": true,
+    "tests": {
+      "copyback_receipt_mismatch": {
+        "error": "copy-back receipt local_archive mismatch: C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_q_readout_negative_bxjp_z10\\wrong-name.tar.gz != D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_1_paired_dirty_probe_0\\attempt_1\\ATTEMPT_1_REMOTE_ROOT.tar.gz",
+        "passed": true
+      },
+      "duplicate_matching_archive_member": {
+        "error": "remote-root archive duplicate output file matches: {'raw_records.jsonl': ['family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output/raw_records.jsonl', 'family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output/raw_records.jsonl']}",
+        "passed": true
+      },
+      "missing_required_member": {
+        "error": "remote-root archive missing output files: ['raw_records.jsonl']",
+        "passed": true
+      },
+      "snapshot_archive_content_mismatch": {
+        "error": "snapshot cache differs from verified archive members: ['feature_freeze.json']",
+        "passed": true
+      },
+      "wrong_archive_hash": {
+        "error": "archive sha mismatch: expected 0000000000000000000000000000000000000000000000000000000000000000, observed 0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+        "passed": true
+      },
+      "wrong_archive_size": {
+        "error": "archive size mismatch: expected 2726729, observed 2726728",
+        "passed": true
+      }
+    }
+  },
+  "channel_specificity": {
+    "attempt_3_observation": "attempt_3_strongest_scalar_q_signal_is_in_dirty_probe_response_under_this_sidecar",
+    "attempt_3_primary_passed": true,
+    "attempt_3_secondary_channels_failed_same_law": true,
+    "diagnostic_only": true,
+    "primary_endpoint": "dirty_probe_response",
+    "primary_endpoint_requirement": "primary paired dirty-probe law must independently pass all primary gates",
+    "prospective_gate": false,
+    "reports": {
+      "change_to_dirty": {
+        "passed": false,
+        "r2": 0.008439132570258967,
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+        "rmse": 1.6618275838267178,
+        "slope": -0.00015694754464285715,
+        "source_off_abs_max": 25.0
+      },
+      "cpu_cycles": {
+        "passed": false,
+        "r2": 0.8012369213244735,
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+        "rmse": 13331.709601802198,
+        "slope": -26.139733014787947,
+        "source_off_abs_max": 21279.0
+      },
+      "dirty_probe_response": {
+        "passed": true,
+        "r2": 0.9940325834039669,
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
+        "rmse": 147.67326346480917,
+        "slope": 1.8612688337053571,
+        "source_off_abs_max": 33.0
+      },
+      "duration_ns": {
+        "passed": false,
+        "r2": 0.8441673609200953,
+        "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+        "rmse": 3695.921984547855,
+        "slope": -8.400556291852679,
+        "source_off_abs_max": 6643.0
+      }
+    },
+    "secondary_channel_policy": "secondary channels may pass or fail without invalidating the primary result and may not substitute for primary endpoint failure"
+  },
+  "checks": {
+    "archive_negative_self_tests": true,
+    "change_to_dirty_channel_not_sufficient": true,
+    "cpu_cycles_channel_not_sufficient": true,
+    "custody_invalid_fails_closed_claim_state": true,
+    "custody_invalid_packet_rejected": true,
+    "duration_channel_not_sufficient": true,
+    "flat_signal_rejected": true,
+    "legacy_mapping_sign_cancels_signal": true,
+    "negated_q_label_rejected": true,
+    "negative_replays_fail_closed_claim_state": true,
+    "paired_dirty_probe_v1_1_positive_claim": true,
+    "paired_dirty_probe_v1_1_q_readout_confirmed": true,
+    "source_off_pair_smuggle_rejected": true,
+    "swapped_query_pair_rejected": true,
+    "synthetic_negative_packet_rejected": true
+  },
+  "custody_invalid_claim_state": {
+    "checks": {
+      "positive_scientific_claim_absent": true,
+      "q_dependent_response_observed_false": true,
+      "result_class_not_supported": true
+    },
+    "passed": true,
+    "reproducible_public_q_dependent_response_observed": false,
+    "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CUSTODY_INVALID",
+    "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_NOT_ESTABLISHED_PROSPECTIVE"
+  },
+  "custody_invalid_validation": {
+    "expected_count": 8320,
+    "failures": [
+      "raw record count mismatch",
+      "exact tuple equality failed",
+      "exact executed order failed"
+    ],
+    "observed_count": 0,
+    "passed": false
+  },
+  "legacy_mapping_gates": {
+    "all_strata": false,
+    "delay_slope_agreement": false,
+    "factor_balance": true,
+    "global_classifier": false,
+    "global_intercept": true,
+    "global_odd_symmetry": false,
+    "global_r2": false,
+    "heldout_classifier_delay": false,
+    "heldout_classifier_mapping": false,
+    "heldout_classifier_replicate": false,
+    "heldout_classifier_session": false,
+    "heldout_classifier_source_order": false,
+    "heldout_delay": false,
+    "heldout_mapping": false,
+    "heldout_replicate": false,
+    "heldout_session": false,
+    "heldout_source_order": false,
+    "mapping_slope_agreement": true,
+    "pair_completeness": true,
+    "query_observations_preserved": true,
+    "session_slope_agreement": false,
+    "signal_to_null_ratio": false,
+    "source_off_max_abs": true,
+    "source_off_mean_abs": true,
+    "source_off_strata": true,
+    "source_order_slope_agreement": false
+  },
+  "negated_q_mutant_gates": {
+    "all_strata": false,
+    "delay_slope_agreement": true,
+    "factor_balance": true,
+    "global_classifier": true,
+    "global_intercept": true,
+    "global_odd_symmetry": true,
+    "global_r2": true,
+    "heldout_classifier_delay": true,
+    "heldout_classifier_mapping": true,
+    "heldout_classifier_replicate": true,
+    "heldout_classifier_session": true,
+    "heldout_classifier_source_order": true,
+    "heldout_delay": true,
+    "heldout_mapping": true,
+    "heldout_replicate": true,
+    "heldout_session": true,
+    "heldout_source_order": true,
+    "mapping_slope_agreement": true,
+    "pair_completeness": true,
+    "query_observations_preserved": true,
+    "session_slope_agreement": true,
+    "signal_to_null_ratio": true,
+    "source_off_max_abs": true,
+    "source_off_mean_abs": true,
+    "source_off_strata": true,
+    "source_order_slope_agreement": true
+  },
+  "negative_claim_state": {
+    "change_to_dirty": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_NOT_ESTABLISHED_PROSPECTIVE"
+    },
+    "cpu_cycles": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_NOT_ESTABLISHED_PROSPECTIVE"
+    },
+    "duration_ns": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_NOT_ESTABLISHED_PROSPECTIVE"
+    },
+    "flat_mutant": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_NOT_ESTABLISHED_PROSPECTIVE"
+    },
+    "legacy_mapping": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_NOT_ESTABLISHED_PROSPECTIVE"
+    },
+    "negated_q_mutant": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_NOT_ESTABLISHED_PROSPECTIVE"
+    },
+    "source_off_mutant": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_NOT_ESTABLISHED_PROSPECTIVE"
+    },
+    "swapped_query_mutant": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_NOT_ESTABLISHED_PROSPECTIVE"
+    },
+    "synthetic_negative_packet": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_NOT_ESTABLISHED_PROSPECTIVE"
+    }
+  },
+  "passed": true,
+  "regression_classes": {
+    "change_to_dirty": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+    "cpu_cycles": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+    "duration_ns": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+    "flat_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+    "legacy_mapping": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+    "negated_q_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+    "repaired": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
+    "source_off_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+    "swapped_query_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE",
+    "synthetic_negative_packet": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_CONFIRMED_PROSPECTIVE"
+  },
+  "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_PROSPECTIVE_SELF_TEST_V1",
+  "source_off_mutant_controls": {
+    "source_off_abs_max": 1000.0,
+    "source_off_abs_mean": 13.6625,
+    "source_off_max_pass": false,
+    "source_off_mean_pass": true,
+    "source_off_pair_count": 80
+  },
+  "swapped_query_mutant_gates": {
+    "all_strata": false,
+    "delay_slope_agreement": true,
+    "factor_balance": true,
+    "global_classifier": true,
+    "global_intercept": true,
+    "global_odd_symmetry": true,
+    "global_r2": true,
+    "heldout_classifier_delay": true,
+    "heldout_classifier_mapping": true,
+    "heldout_classifier_replicate": true,
+    "heldout_classifier_session": true,
+    "heldout_classifier_source_order": true,
+    "heldout_delay": true,
+    "heldout_mapping": true,
+    "heldout_replicate": true,
+    "heldout_session": true,
+    "heldout_source_order": true,
+    "mapping_slope_agreement": true,
+    "pair_completeness": true,
+    "query_observations_preserved": true,
+    "session_slope_agreement": true,
+    "signal_to_null_ratio": true,
+    "source_off_max_abs": true,
+    "source_off_mean_abs": true,
+    "source_off_strata": true,
+    "source_order_slope_agreement": true
+  }
+}

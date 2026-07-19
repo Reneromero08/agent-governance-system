@@ -1,0 +1,40 @@
+{
+  "attempt": 1,
+  "created_at": "2026-07-19T15:59:01.214202+00:00",
+  "freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+  "live_invocation_authorized_count": 1,
+  "manifest_canonical_sha256": "e6f27e3e92f2273fa91c225996a471aa69f2f699c6d7bbd8906c37329090c27b",
+  "manifest_file_sha256": "20b5f758e22cc916af36a5b8f7f87ca27171c5d5314b233b63528dcc3635df65",
+  "package": {
+    "file_count": 18,
+    "files": [
+      "CARRIER_TOMOGRAPHY_CONTRACT.md",
+      "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json",
+      "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256",
+      "CARRIER_TOMOGRAPHY_OFFLINE_VALIDATE.json",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+      "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+      "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+      "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+      "family10h_carrier_tomography_public.py",
+      "family10h_carrier_tomography_runtime",
+      "family10h_carrier_tomography_runtime.c",
+      "family10h_carrier_tomography_runtime.h",
+      "family10h_carrier_tomography_target.py",
+      "paired_dirty_probe_prospective_adjudication.py",
+      "PAIRED_DIRTY_PROBE_V1_0_FIXTURE_ADJUDICATION.json",
+      "PAIRED_DIRTY_PROBE_V1_0_FIXTURE_SELF_TEST.json",
+      "run_family10h_carrier_tomography_v1_1_paired_dirty_probe.py"
+    ],
+    "path": "C:\\tmp\\family10h_carrier_tomography_v1_1_paired_dirty_probe_0_source_package.tar.gz",
+    "sha256": "7bed56216600864c4c1405f0a0d25269e9347c29f4cb608d487c32455c99326b",
+    "size": 1396481
+  },
+  "remote_archive": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0_attempt1_remote_root.tar.gz",
+  "remote_package": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0_source_package.tar.gz",
+  "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0",
+  "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_V1_1_ATTEMPT1_DEPLOYMENT_RECEIPT_V1",
+  "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda",
+  "target_host": "root@192.168.137.100"
+}
