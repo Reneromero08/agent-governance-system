@@ -1,0 +1,71 @@
+{
+  "attempts": {
+    "attempt_2": {
+      "cleanup_passed": true,
+      "copyback_passed": true,
+      "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_2",
+      "remote_output_files": {
+        "raw_measurements.jsonl": {
+          "sha256": "f1f40c3c2acfe92cedc9c8937c4a577e730f2ed5b9e7e09f1ca37aa30fac286f",
+          "size": 734
+        },
+        "source_death_receipts.jsonl": {
+          "sha256": "e39d286909f8c21c23acf965cca4fffd045c4fc1a44dadf78f9652d7126aeca0",
+          "size": 497
+        }
+      },
+      "result_class": "FAMILY10H_CARRIER_TOMOGRAPHY_CUSTODY_INVALID",
+      "target_returncode": 13,
+      "target_status": "TARGET_EXECUTION_FAILED"
+    },
+    "attempt_3": {
+      "copyback_archive_sha256": "4743e01adad215efbbe3b0416b6e4846501858f056db27c00e9d30268a8267e6",
+      "local_validation": {
+        "expected_count": 8320,
+        "failures": [],
+        "observed_count": 8320,
+        "passed": true
+      },
+      "operator_prediction_gate_passed": false,
+      "output_hashes": {
+        "feature_freeze.json": {
+          "sha256": "c7a83cf130a503bc7b4454ca36a411424cae4cc49523551e5cefef1620e0fdd9",
+          "size": 1210
+        },
+        "raw_records.jsonl": {
+          "sha256": "024406f6cd94edbe1bd47023484182969b62f1fb13cdfac071034621a6595405",
+          "size": 26780234
+        },
+        "source_death_receipts.jsonl": {
+          "sha256": "63c10e81a02bdf703715d30e41cf6da125d1d2f00f22d6de62471685e15e9204",
+          "size": 4159354
+        }
+      },
+      "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3",
+      "result_class": "FAMILY10H_POST_SOURCE_STATE_NOT_OBSERVED",
+      "target_returncode": 0,
+      "target_status": "TARGET_EXECUTION_COMPLETE",
+      "uses_chrt_fifo_80_wrapper": true
+    }
+  },
+  "branch": "codex/family10h-tomography-repair",
+  "final_conclusion": "FAMILY10H_POST_SOURCE_STATE_NOT_OBSERVED",
+  "package_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1",
+  "run_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0",
+  "schema": "FAMILY10H_SECOND_FIRST_LIGHT_ATTEMPTS_ARCHIVE_SUMMARY_V1",
+  "small_wall_state": "not_promoted_by_family10h_tomography_attempts",
+  "starting_head": "42eb655175a400224cd0be6ed22c4348dfd9fab4",
+  "unchanged_identities": {
+    "live_commit_binding": "a121381130ef6eef2757ff5c014e22990a88f774",
+    "manifest_canonical_sha256": "9da76d1f494a0469a3bc5b81d888706091cc0335a214efdc6d3f9600a7fd7687",
+    "manifest_file_sha256": "14584872574ad9bf786f98e3d7a7073ec656ed8f2305951aeba8eee8dbc223e2",
+    "runtime_blob": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+    "runtime_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+    "sensor_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+    "source_authority_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+    "source_bundle_file_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+    "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+    "source_hashes_file_sha256": "b53891d2a0b9a8f590be6b9604d8d7f366e30abc4e103749e0f297588c49034b",
+    "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "attempt": 2,
+  "classification_reason": "target runtime returned 13 before complete evidence validation; only partial remote output was present",
+  "cleanup_passed": true,
+  "copyback_passed": true,
+  "package_bytes_unchanged": true,
+  "remote_execution_receipt_sha256": "69349d140cd758c067ddddf095122eb8e86f4c7d13e67664edf3ccfc3a6a2425",
+  "remote_output_files": {
+    "raw_measurements.jsonl": {
+      "sha256": "f1f40c3c2acfe92cedc9c8937c4a577e730f2ed5b9e7e09f1ca37aa30fac286f",
+      "size": 734
+    },
+    "source_death_receipts.jsonl": {
+      "sha256": "e39d286909f8c21c23acf965cca4fffd045c4fc1a44dadf78f9652d7126aeca0",
+      "size": 497
+    }
+  },
+  "result_class": "FAMILY10H_CARRIER_TOMOGRAPHY_CUSTODY_INVALID",
+  "schema": "FAMILY10H_ATTEMPT2_RESULT_SUMMARY_V1",
+  "target_evidence_validation": {
+    "failures": [
+      "runtime failed before evidence validation"
+    ],
+    "passed": false
+  },
+  "target_returncode": 13,
+  "target_status": "TARGET_EXECUTION_FAILED",
+  "temperature_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137"
+}

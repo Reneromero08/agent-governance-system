@@ -1,0 +1,292 @@
+{
+  "evidence_validation": {
+    "failures": [],
+    "passed": true,
+    "validation": {
+      "expected_count": 8320,
+      "failures": [],
+      "observed_count": 8320,
+      "passed": true
+    }
+  },
+  "execution_receipt_path": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/output_target_execution_receipt.json",
+  "output_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/output",
+  "platform_identity": {
+    "affinity_checked": true,
+    "affinity_cpus": [
+      0,
+      1
+    ],
+    "checked_before_discovery": true,
+    "cpu_family": 16,
+    "cpu_models": [
+      10
+    ],
+    "cpuinfo_path": "/proc/cpuinfo",
+    "inherited_affinity_checked": true,
+    "inherited_affinity_cpus": [
+      0,
+      1
+    ],
+    "operational_pin_capability": {
+      "created_tomography_output_root": false,
+      "inherited_affinity_excluded_required_cpus": [
+        4,
+        5
+      ],
+      "inherited_mask_restriction_only": true,
+      "inherited_parent_affinity": [
+        0,
+        1
+      ],
+      "launched_runtime": false,
+      "opened_pmu": false,
+      "parent_affinity_after_all_probes": [
+        0,
+        1
+      ],
+      "parent_affinity_restored": true,
+      "passed": true,
+      "per_cpu": {
+        "4": {
+          "actual_execution_cpu": 4,
+          "actual_execution_cpu_available": true,
+          "child_exit_status": 0,
+          "child_inherited_affinity": [
+            0,
+            1
+          ],
+          "child_pid": 1908,
+          "cpu": 4,
+          "diagnostic": "operational pin capability passed",
+          "errno": null,
+          "errno_name": null,
+          "failure_class": null,
+          "parent_affinity_after": [
+            0,
+            1
+          ],
+          "parent_affinity_before": [
+            0,
+            1
+          ],
+          "parent_affinity_restored": true,
+          "passed": true,
+          "readback_affinity": [
+            4
+          ],
+          "requested_affinity": [
+            4
+          ]
+        },
+        "5": {
+          "actual_execution_cpu": 5,
+          "actual_execution_cpu_available": true,
+          "child_exit_status": 0,
+          "child_inherited_affinity": [
+            0,
+            1
+          ],
+          "child_pid": 1909,
+          "cpu": 5,
+          "diagnostic": "operational pin capability passed",
+          "errno": null,
+          "errno_name": null,
+          "failure_class": null,
+          "parent_affinity_after": [
+            0,
+            1
+          ],
+          "parent_affinity_before": [
+            0,
+            1
+          ],
+          "parent_affinity_restored": true,
+          "passed": true,
+          "readback_affinity": [
+            5
+          ],
+          "requested_affinity": [
+            5
+          ]
+        }
+      },
+      "required_cpus": [
+        4,
+        5
+      ],
+      "schema": "FAMILY10H_OPERATIONAL_PIN_CAPABILITY_PROBE_V1"
+    },
+    "operational_pin_capability_passed": true,
+    "processor_count": 6,
+    "processors": [
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 0,
+        "vendor_id": "AuthenticAMD"
+      },
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 1,
+        "vendor_id": "AuthenticAMD"
+      },
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 2,
+        "vendor_id": "AuthenticAMD"
+      },
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 3,
+        "vendor_id": "AuthenticAMD"
+      },
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 4,
+        "vendor_id": "AuthenticAMD"
+      },
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 5,
+        "vendor_id": "AuthenticAMD"
+      }
+    ],
+    "receiver_cpu_expected": 5,
+    "source_cpu_expected": 4,
+    "source_receiver_cpus_present": true,
+    "vendor": "AuthenticAMD"
+  },
+  "policy_after": {
+    "state": "policy_readable_stable",
+    "values": {
+      "/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq": "3200000",
+      "/sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq": "800000",
+      "/sys/devices/system/cpu/cpufreq/policy5/scaling_max_freq": "3200000",
+      "/sys/devices/system/cpu/cpufreq/policy5/scaling_min_freq": "800000"
+    }
+  },
+  "policy_before": {
+    "state": "policy_readable_stable",
+    "values": {
+      "/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq": "3200000",
+      "/sys/devices/system/cpu/cpufreq/policy4/scaling_min_freq": "800000",
+      "/sys/devices/system/cpu/cpufreq/policy5/scaling_max_freq": "3200000",
+      "/sys/devices/system/cpu/cpufreq/policy5/scaling_min_freq": "800000"
+    }
+  },
+  "retry_count": 0,
+  "returncode": 0,
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TARGET_EXECUTION_RECEIPT_V1",
+  "status": "TARGET_EXECUTION_COMPLETE",
+  "stderr": "",
+  "stdout": "",
+  "temperature_after": {
+    "identity": {
+      "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "device_driver": "k10temp",
+      "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+      "device_subsystem": "pci",
+      "hwmon_name": "k10temp",
+      "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+      "input_st_dev": 22,
+      "input_st_ino": 30803,
+      "input_st_mode": 33060,
+      "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+      "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+      "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+      "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+      "resolved_subsystem_path": "/sys/bus/pci",
+      "sensor_input": "temp1_input",
+      "sensor_label_present": false,
+      "sensor_label_value": null,
+      "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+      "sensor_semantic_role": "Tctl"
+    },
+    "label_present": false,
+    "label_value": null,
+    "path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "pinned_descriptor": {
+      "input_st_dev": 22,
+      "input_st_ino": 30803,
+      "input_st_mode": 33060,
+      "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input"
+    },
+    "read_law": "manifest-approved resolved input descriptor",
+    "semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+    "semantic_role": "Tctl",
+    "value_c": 51.0
+  },
+  "temperature_authority_controller_challenge": {
+    "authority": "controller_issued_temperature_sensor_challenge",
+    "authorized_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+    "controller_nonce_sha256": "f11c13d72d43f3ab10f4886f5a23bef11567b8d0a138f63be6e3d0840763be33",
+    "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+    "schedule_canonical_sha256": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
+    "schedule_json_sha256": "9658ea725d69ae384c85c5664505e59497d1e3291376128ee2160824ee7e0648",
+    "schedule_tsv_sha256": "b788a89f66eeb1074f5a8a591f669933efaaaa2ccfd7ef9ebb3715104fc25690",
+    "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_AUTHORITY_CHALLENGE_V1",
+    "science_package_id": "family10h_carrier_tomography_v1_0",
+    "source_authority_review": {
+      "findings_sha256": "7ccd02dcca1aabbf77735684ee3079722683470404f51c9ee0589a2e38b9a562",
+      "review_quorum_sha256": "36498ace6893aa8179e48f81c39858fd0ab689b001a8fb9254b79dd32c2765b7",
+      "review_report_sha256": "ea74e419854ef13ec139a34e78ebb00e97ed478f584e8ad15ef4f148222967fa",
+      "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "source_authority_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+      "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+      "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d"
+    },
+    "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+    "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+    "transaction_run_id": "family10h_carrier_tomography_v1_0",
+    "transport_scope": {
+      "remote_base_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery",
+      "remote_receipt_path": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source/CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json",
+      "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab",
+      "remote_source_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0_sensor_authority_discovery/f11c13d72d43f3ab/source",
+      "target_host": "root@192.168.137.100"
+    }
+  },
+  "temperature_authority_controller_challenge_sha256": "5601fee537e3f446c496d1b91daf78a3d4ce7052ee85ce94ae3dcaf834e8ae1b",
+  "temperature_before": {
+    "identity": {
+      "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "device_driver": "k10temp",
+      "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+      "device_subsystem": "pci",
+      "hwmon_name": "k10temp",
+      "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+      "input_st_dev": 22,
+      "input_st_ino": 30803,
+      "input_st_mode": 33060,
+      "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+      "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+      "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+      "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+      "resolved_subsystem_path": "/sys/bus/pci",
+      "sensor_input": "temp1_input",
+      "sensor_label_present": false,
+      "sensor_label_value": null,
+      "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+      "sensor_semantic_role": "Tctl"
+    },
+    "label_present": false,
+    "label_value": null,
+    "path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "pinned_descriptor": {
+      "input_st_dev": 22,
+      "input_st_ino": 30803,
+      "input_st_mode": 33060,
+      "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input"
+    },
+    "read_law": "manifest-approved resolved input descriptor",
+    "semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+    "semantic_role": "Tctl",
+    "value_c": 39.625
+  }
+}

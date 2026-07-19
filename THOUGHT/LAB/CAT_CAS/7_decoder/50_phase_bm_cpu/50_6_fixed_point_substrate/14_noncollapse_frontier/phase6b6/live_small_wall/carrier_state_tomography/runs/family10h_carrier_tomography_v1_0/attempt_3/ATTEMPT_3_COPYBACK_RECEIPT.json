@@ -1,0 +1,589 @@
+{
+  "schema": "FAMILY10H_ATTEMPT3_COPYBACK_RECEIPT_V1",
+  "attempt": 3,
+  "started_at": "2026-07-19T12:37:20.852335+00:00",
+  "ended_at": "2026-07-19T12:37:23.345445+00:00",
+  "target_host": "root@192.168.137.100",
+  "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0",
+  "remote_archive": "/root/catcas_live_small_wall/family10h_attempt3_remote_root.tar.gz",
+  "local_tmp_archive": "C:\\tmp\\family10h_attempt3_remote_root.tar.gz",
+  "local_archive": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\ATTEMPT_3_REMOTE_ROOT.tar.gz",
+  "local_archive_sha256": "4743e01adad215efbbe3b0416b6e4846501858f056db27c00e9d30268a8267e6",
+  "local_archive_size": 3041639,
+  "make_archive": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "root@192.168.137.100",
+      "set -eu; test -d /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0; rm -f /root/catcas_live_small_wall/family10h_attempt3_remote_root.tar.gz; tar -czf /root/catcas_live_small_wall/family10h_attempt3_remote_root.tar.gz -C /root/catcas_live_small_wall family10h_carrier_tomography_v1_0; sha256sum /root/catcas_live_small_wall/family10h_attempt3_remote_root.tar.gz; du -b /root/catcas_live_small_wall/family10h_attempt3_remote_root.tar.gz"
+    ],
+    "elapsed_seconds": 1.078,
+    "returncode": 0,
+    "stdout": "4743e01adad215efbbe3b0416b6e4846501858f056db27c00e9d30268a8267e6  /root/catcas_live_small_wall/family10h_attempt3_remote_root.tar.gz\n3041639\t/root/catcas_live_small_wall/family10h_attempt3_remote_root.tar.gz\n",
+    "stderr": "",
+    "stdout_sha256": "3894829b2d8d7442fbd7301e5d7200c0ea722d2561173a76aea48fdd405db854",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "scp_archive": {
+    "command": [
+      "scp",
+      "-O",
+      "-o",
+      "BatchMode=yes",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_attempt3_remote_root.tar.gz",
+      "C:\\tmp\\family10h_attempt3_remote_root.tar.gz"
+    ],
+    "elapsed_seconds": 0.22,
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "snapshot_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\remote_root_snapshot\\family10h_carrier_tomography_v1_0",
+  "snapshot_file_count": 108,
+  "snapshot_files": [
+    {
+      "relative_path": ".family10h_carrier_tomography_attempt3_owner",
+      "size": 85,
+      "sha256": "9096c124125a64e2c48efc450b939a2a7766b9e678580d11d916f6bae474a03f"
+    },
+    {
+      "relative_path": "AFFINITY_CAPABILITY_OBSERVATION/family10h_affinity_capability_observation_v1.sha256.json",
+      "size": 21673,
+      "sha256": "2218beb6c7008ee454a3c37ea27561065a8f7622a7653b1bbf02fb079498d740"
+    },
+    {
+      "relative_path": "AFFINITY_CAPABILITY_OBSERVATION/family10h_affinity_capability_observation_v1.stdout",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "AFFINITY_CAPABILITY_OBSERVATION/family10h_affinity_capability_observation_v1_stdin.json",
+      "size": 1254,
+      "sha256": "a516a56aed1154f2442cb68b4e0a25a79a01cb6dab4a1bf9cc6815b7095db4c2"
+    },
+    {
+      "relative_path": "AFFINITY_CAPABILITY_OBSERVATION/family10h_affinity_capability_observation_v1_stdin.sha256.json",
+      "size": 3223,
+      "sha256": "e7750dfe847549c4fe8c031673e6ca5957dca9c146147d0fb22e7ce080b5005e"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_CONTRACT.md",
+      "size": 11358,
+      "sha256": "e2ed0d3ef73766486983e15365d3ead38d3a9a963c3b0cad91b74d8150d24d22"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST.json",
+      "size": 173971,
+      "sha256": "cb169bc7c456113aeb15fd8468c0e1481a5ae32a2b6e328200a1d685b33d0813"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_DEPLOYMENT_LAYOUT_SELF_TEST.json",
+      "size": 484,
+      "sha256": "b9f6c13e883584145addb598adcee7d633f74d09bc9445686c4a200b982e10e1"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.json",
+      "size": 34240,
+      "sha256": "0d9f8a2b8bbd90ccb55fe3beb70cde087f69902f52aaa618f5423db5523cdfbc"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.jsonl",
+      "size": 247311,
+      "sha256": "8525fb522e0a18d2bb1bfd79e452d19471db2f969147388cfe12865c4fff7fe6"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_DISCOVERY_TRANSPORT.json",
+      "size": 45820,
+      "sha256": "f4b5889da98d6f69262a4c636f250a3de855322572b7c8be4dce269fd7511ed0"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_EXACT_COVERAGE_SELF_TEST.json",
+      "size": 1610,
+      "sha256": "969be7c53fcd473c6b20bdcb67a9a297b9023ec7c37c265e84511b2685497f8c"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_FACTORIAL_ARM_SELF_TEST.json",
+      "size": 476,
+      "sha256": "e99ac56140039c18520f833849e44dff1e4e59affbce7bb32f7dd09053372a91"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_FEATURE_BOUNDARY_SELF_TEST.json",
+      "size": 981,
+      "sha256": "96dc76e5bc52e5fead8384f723065a1474e97060c6367d1d08b106c7f8f5af7f"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT.json",
+      "size": 629,
+      "sha256": "8b0e96a77ae37f5fa5df32c24f118d02d254fff13496284447c418e8d4117f8c"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_FINAL_OBJECT_VERIFY.json",
+      "size": 91396,
+      "sha256": "f9ccb8716c47d83f3616bd3fc25934d63dcaeee3048876167eaa27780c6d0dc2"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json",
+      "size": 50882,
+      "sha256": "14584872574ad9bf786f98e3d7a7073ec656ed8f2305951aeba8eee8dbc223e2"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256",
+      "size": 274,
+      "sha256": "711d80558a1f2027e991cd9acaaff35a52945060d53afd3e83ee559c55a1213c"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_OFFLINE_VALIDATE.json",
+      "size": 2129,
+      "sha256": "efc3c60f0adcc64d6a709e9eddf5f04f5c27d90497e7a36b840a0265297b7d18"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_OPERATOR_ANALYSIS_SELF_TEST.json",
+      "size": 169401,
+      "sha256": "cba5264140b7d3b699dda3b5f653c78330c262d63c26dd934a47696df3954a54"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.json",
+      "size": 12489213,
+      "sha256": "9658ea725d69ae384c85c5664505e59497d1e3291376128ee2160824ee7e0648"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.sha256",
+      "size": 355,
+      "sha256": "0eb44bbd0e0cd1f5a637fedc747acbd6f4069ad51aa52b73ad7aa86e17f94880"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE.tsv",
+      "size": 4327644,
+      "sha256": "b788a89f66eeb1074f5a8a591f669933efaaaa2ccfd7ef9ebb3715104fc25690"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST.json",
+      "size": 4191,
+      "sha256": "d8e9978662b4a8c6b289a25b10516de37d45aba3a2fcb2b46a30822abcc1630d"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_SELF_TEST.json",
+      "size": 175119,
+      "sha256": "e9f1210376fa00f2ca020b90688eab9234bd0ec4f9279f7a476a3bbbb454935b"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
+      "size": 733175,
+      "sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_SOURCE_DEATH_CUSTODY_SELF_TEST.json",
+      "size": 546,
+      "sha256": "af1d1caa95e31ba4d977767dc35f5da9de4fe6e1ffadfdc1ec564ce73882c58d"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_SOURCE_HASHES.json",
+      "size": 2733,
+      "sha256": "b53891d2a0b9a8f590be6b9604d8d7f366e30abc4e103749e0f297588c49034b"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_RECEIPT.json",
+      "size": 18628,
+      "sha256": "464ec8b5b0db8a969548064f46a0fc447b699486f962547529cf4dc047172ca8"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_TARGET_SELF_TEST.json",
+      "size": 58705,
+      "sha256": "80f3abf7a1324513129a3ef976c68d5dec84f655369a248a182330ff89b9fab0"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_AUTHORITY.json",
+      "size": 23926,
+      "sha256": "f11b996b8843a5636d769c5d0573c0dc771fe01af0c4178e55b444df6e724c57"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE.json",
+      "size": 3834,
+      "sha256": "bbbdd436ed243dc396ec6f60b55fe549bface85ed3196573dcd25a48c379c9e7"
+    },
+    {
+      "relative_path": "CARRIER_TOMOGRAPHY_TRANSPORT_SIMULATION.json",
+      "size": 1677,
+      "sha256": "bc40c007f0db8502e0b4c4bf33714e3792843c140d53b44b890fb86cdd5c5fa1"
+    },
+    {
+      "relative_path": "family10h_carrier_tomography_public.py",
+      "size": 148569,
+      "sha256": "c9a4ba581f4e1a45ab3396412be7587a5278c8ace97ddd00ee1ff2f5f88828c8"
+    },
+    {
+      "relative_path": "family10h_carrier_tomography_runtime",
+      "size": 22928,
+      "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89"
+    },
+    {
+      "relative_path": "family10h_carrier_tomography_runtime.c",
+      "size": 25414,
+      "sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8"
+    },
+    {
+      "relative_path": "family10h_carrier_tomography_runtime.h",
+      "size": 1368,
+      "sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e"
+    },
+    {
+      "relative_path": "family10h_carrier_tomography_target.py",
+      "size": 250445,
+      "sha256": "12c1ced11a32f5599f514a667b8b4ea80c433f22aeb14feadfac41d7fa633e2f"
+    },
+    {
+      "relative_path": "output/feature_freeze.json",
+      "size": 1210,
+      "sha256": "c7a83cf130a503bc7b4454ca36a411424cae4cc49523551e5cefef1620e0fdd9"
+    },
+    {
+      "relative_path": "output/raw_records.jsonl",
+      "size": 26780234,
+      "sha256": "024406f6cd94edbe1bd47023484182969b62f1fb13cdfac071034621a6595405"
+    },
+    {
+      "relative_path": "output/source_death_receipts.jsonl",
+      "size": 4159354,
+      "sha256": "63c10e81a02bdf703715d30e41cf6da125d1d2f00f22d6de62471685e15e9204"
+    },
+    {
+      "relative_path": "output_target_execution_receipt.json",
+      "size": 10521,
+      "sha256": "f30cff4dee658bf9c3b9c614dbe2eecc537b00067e50e7f36dcbb501eb5e5682"
+    },
+    {
+      "relative_path": "run_family10h_carrier_tomography_v1.py",
+      "size": 453074,
+      "sha256": "82d9e37d380211a99b5b4ebeb424acd104852e873dfd83472eb6271ad64cfe4d"
+    },
+    {
+      "relative_path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/ATTEMPT_HISTORY_INDEX.json",
+      "size": 7947,
+      "sha256": "0a4444d7d01602bb2390c495cd1d76a1fdb072b1a56acfb6bdde2df1628b2e45"
+    },
+    {
+      "relative_path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c3_55e059bc_failed_affinity_precheck/CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.json",
+      "size": 44534,
+      "sha256": "1e31858b28d65cb2313ea7dc69260f2ffe3c3385da8803b6f18ae49c031b001a"
+    },
+    {
+      "relative_path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c3_55e059bc_failed_affinity_precheck/CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.jsonl",
+      "size": 92115,
+      "sha256": "8335e565f1e228e273b4614940c17ca22b6b9907cb2c0ebf886e13cd8ff32d92"
+    },
+    {
+      "relative_path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c3_55e059bc_failed_affinity_precheck/CARRIER_TOMOGRAPHY_DISCOVERY_CLEANUP_CUSTODY.json",
+      "size": 38817,
+      "sha256": "846b77c0600cae6b9ad6d3a7986bcf65cf72e88932e0258100fbb75a74fa7fcf"
+    },
+    {
+      "relative_path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c3_55e059bc_failed_affinity_precheck/CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE.json",
+      "size": 3834,
+      "sha256": "f5457f82335434a5a7a6e2ffbd1186f4888f57e00482a1de60046352e9554f75"
+    },
+    {
+      "relative_path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c5_ca8f8490_no_approved_sensor/CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.json",
+      "size": 44535,
+      "sha256": "fe88351ccc7443a998fbdf04781c3e6965a5b51726365bc1cd539d5e2d871e1f"
+    },
+    {
+      "relative_path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c5_ca8f8490_no_approved_sensor/CARRIER_TOMOGRAPHY_DISCOVERY_ATTEMPT.jsonl",
+      "size": 92117,
+      "sha256": "d9a7efb266e1d8b04a5bdf9df6d01320c0dba0fddf77445bcdd5f6f7b6fb6c9e"
+    },
+    {
+      "relative_path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c5_ca8f8490_no_approved_sensor/CARRIER_TOMOGRAPHY_DISCOVERY_CLEANUP_CUSTODY.json",
+      "size": 38818,
+      "sha256": "767534217db9f0e32803284d84b3e8e187c63b5b9a4cee66a9427b2834be051f"
+    },
+    {
+      "relative_path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c5_ca8f8490_no_approved_sensor/CARRIER_TOMOGRAPHY_TARGET_DISCOVERY_FAILURE.json",
+      "size": 41481,
+      "sha256": "4f8a05d12c1b7bb12c446ed9a461a9889bce2b0336f1ee1f1ce237b22508fc1a"
+    },
+    {
+      "relative_path": "SENSOR_AUTHORITY_ATTEMPT_HISTORY/c5_ca8f8490_no_approved_sensor/CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_CHALLENGE.json",
+      "size": 3834,
+      "sha256": "d992cbcc09ee6e7f287b2999151df6faa8e57cca6ed1a4b5109e1302513b5f30"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C1_REVIEW_NORMALIZED.json",
+      "size": 8367,
+      "sha256": "e6b51a7eeef675ba9831680e9c519d18e9660a6f684f73cd14ed3373b162c263"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C1_REVIEW_REPORTS.md",
+      "size": 18753,
+      "sha256": "d72bd4069d36ef47ee2da5067192301c412a993ff035521366f89fe4e952ffd8"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C2_REVIEW/claim_boundary_body.md",
+      "size": 6335,
+      "sha256": "fbf3f5d9915a0aff05959e5372a848fac0abbac65b1d27ab07fad043a178aaa6"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C2_REVIEW/claim_boundary_receipt.json",
+      "size": 1094,
+      "sha256": "a3cac6bcce025b7fb3e55c3fca4c4b581005e0cd2343f2257d92fb6f7353935e"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C2_REVIEW/discovery_transport_custody_body.md",
+      "size": 6064,
+      "sha256": "59379d0b67cfcb24eccc5cbb1ad0f295c4f136f4d275d708f94e51087d929ec1"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C2_REVIEW/discovery_transport_custody_receipt.json",
+      "size": 1107,
+      "sha256": "8ffce1181ba4d4ae5966859c34d2d18a3a858add4d176af3fb21745124f06c03"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C2_REVIEW/physical_sensor_authority_body.md",
+      "size": 5875,
+      "sha256": "3621a61916cab0d5bab1f2bf416774ad80ba1beb8f08444cdd89f034f7ebc496"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C2_REVIEW/physical_sensor_authority_receipt.json",
+      "size": 1101,
+      "sha256": "abc180f30e82b2f7c88bddc0122ffc00cb613c756d6bf0622fd91dd6d691ded7"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C2_REVIEW/source_bundle_evidence_body.md",
+      "size": 5668,
+      "sha256": "4013016d02836fc24306b9ff490ab365bd4b9f415f2be6374cbdfbf4f806107b"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C2_REVIEW/source_bundle_evidence_receipt.json",
+      "size": 1106,
+      "sha256": "4861cc107dc1f6fd1a26a1896f7c9d16b7e7560a9feba193a8917019b3466d74"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C2_REVIEW_NORMALIZED.json",
+      "size": 21096,
+      "sha256": "ce0fb8aa233cca453ddcde573ab4048232f80697113a489f11feb4cbdf8bbbb7"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C2_REVIEW_REPORTS.md",
+      "size": 34354,
+      "sha256": "9b780fc4cdadce0b32b65364d00de1cd30de0c8d6ea197e95116572aa21ce7b8"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C3_REVIEW/claim_boundary_body.md",
+      "size": 5038,
+      "sha256": "593afba561a5f28fbc3ed5e1e01c66b3674e1fbda85531ac76d66496c31e2ff1"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C3_REVIEW/claim_boundary_receipt.json",
+      "size": 1091,
+      "sha256": "124cc4825a9881a53aebe8e1d2bb55f3561bf42436fda7950f35a0b0693adcb6"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C3_REVIEW/discovery_transport_custody_body.md",
+      "size": 4706,
+      "sha256": "2b13606d0cbaa8ebd0120eba54006c89f27f39985c1abba9299ce696a1fba81a"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C3_REVIEW/discovery_transport_custody_receipt.json",
+      "size": 1104,
+      "sha256": "a3c3fec7a00813355c719d8d3160a88e3bca83b4bb7726b6948fe21e4c585302"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C3_REVIEW/physical_sensor_authority_body.md",
+      "size": 5065,
+      "sha256": "d6b6d29b62ffe601864ee4c120736e2a15605a4fa013820f19c5c6a36fce1b9e"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C3_REVIEW/physical_sensor_authority_receipt.json",
+      "size": 1098,
+      "sha256": "8d31ce921a4f4124ec29e9d04d43ce1130e91f2d9c215ba9639b51a49f025324"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C3_REVIEW/source_bundle_evidence_body.md",
+      "size": 4295,
+      "sha256": "423c6a99d7bd0aa2ab965ce8cf6d5bb47823dad2fd6cf145c21af599659e573a"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C3_REVIEW/source_bundle_evidence_receipt.json",
+      "size": 1103,
+      "sha256": "724594d18a22dd6d8a282189c4f663ea5481610afe00b7c1c01de66a1bc9b581"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C3_REVIEW_NORMALIZED.json",
+      "size": 12718,
+      "sha256": "d237afaee58b038edd83622c86a0792ac8caab38c84089f8bc2e597a6b662470"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C3_REVIEW_REPORTS.md",
+      "size": 21339,
+      "sha256": "3f7ad5713e400ebd4b0854e3f1dca87980e9a336d08eacc3d9e7b2a496a8d0ea"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C4_REVIEW/claim_boundary_body.md",
+      "size": 5904,
+      "sha256": "2fe7e2dc4fd789e27e39acc823663050d8ade4b0f7d33b84af38cdf95818da73"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C4_REVIEW/claim_boundary_receipt.json",
+      "size": 1091,
+      "sha256": "bc85d722dfd5a61216ee6a9a87b6b6db07c8c3678eac854891bca98d858b99ce"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C4_REVIEW/discovery_transport_custody_body.md",
+      "size": 5443,
+      "sha256": "5b61cf619bab7191104f08c982aa7a485091fc63b57fc5005c9cb7c7adce603d"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C4_REVIEW/discovery_transport_custody_receipt.json",
+      "size": 1104,
+      "sha256": "44a8afd7c5b43f912501745f5ae72664b0b123166849a9560bba05c6f49ce601"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C4_REVIEW/physical_sensor_authority_body.md",
+      "size": 4949,
+      "sha256": "e5f3f1d872d13f77ebb7db1c19a9b55be6d34abfb4d80a69cf53934328445c02"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C4_REVIEW/physical_sensor_authority_receipt.json",
+      "size": 1098,
+      "sha256": "cb026934de7216fe129f4cced7c57b3b9968ae295587add8486ff79d9447b0c4"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C4_REVIEW/source_bundle_evidence_body.md",
+      "size": 5501,
+      "sha256": "b9adde950e6c5a15157352d12304b09e4905d1922caceb55fd7e5d3accffd75d"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C4_REVIEW/source_bundle_evidence_receipt.json",
+      "size": 1103,
+      "sha256": "56a204f9d9ce1b105e1b76e90321f986f263296df178f32e35ad85ef1a36da3f"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C4_REVIEW_NORMALIZED.json",
+      "size": 16901,
+      "sha256": "444e699f09768416508ab575afd3fb9ff2189867c4cdbc7a11eefbee16936ff5"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C4_REVIEW_REPORTS.md",
+      "size": 22350,
+      "sha256": "f981d19182bb17a5371f6e5bdd5050d1750763b34ee37e77e3b362f05baf23ea"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C5_REVIEW/claim_boundary_body.md",
+      "size": 5334,
+      "sha256": "da67441acc6870a43042ae000acb7fc7aee7b12739ab4454ac3c3ec8fc98eff5"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C5_REVIEW/claim_boundary_receipt.json",
+      "size": 1091,
+      "sha256": "5a6f9bcc7792150a495c24dbf4f30d242bf5b6c86543b0f310d1e594b91a83ea"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C5_REVIEW/discovery_transport_custody_body.md",
+      "size": 4878,
+      "sha256": "4cc12b71f36af7d74becfbc27d76b1ddcfc675a3b25b6bc08591ffe7a2fff14d"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C5_REVIEW/discovery_transport_custody_receipt.json",
+      "size": 1104,
+      "sha256": "aeece762aa8ddb59a11b9fee809dea1df8ceea66afa5030a20b7dea5dff279cd"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C5_REVIEW/physical_sensor_authority_body.md",
+      "size": 4709,
+      "sha256": "9916fc64c987a96c823ae4d5e093f3a0ee4489a0ee6db8f2f71c0b41d2815619"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C5_REVIEW/physical_sensor_authority_receipt.json",
+      "size": 1098,
+      "sha256": "698d3842b77ebcd474ad30122fe63d6bcfa2a82ce0bbdb3a97ee340159143092"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C5_REVIEW/source_bundle_evidence_body.md",
+      "size": 4837,
+      "sha256": "92b679c149e1753d493ccbc06b2563a2b5fd30a627f502a1c75408ab6efe7377"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C5_REVIEW/source_bundle_evidence_receipt.json",
+      "size": 1103,
+      "sha256": "70789bc5aac90e632888356b0e202e2d2fefe69f969e63e4fd4949bf2821501e"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C5_REVIEW_NORMALIZED.json",
+      "size": 12718,
+      "sha256": "71d095916f948f0ff905af09900a49f7bcc1909f6c4ab7ebbc2d44ab525ed3ed"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C5_REVIEW_REPORTS.md",
+      "size": 20278,
+      "sha256": "2f1dfcab195b014eb6b2c4a416205eef9924f1de009c8e9eeb7244bb005977c8"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C6_REVIEW/claim_boundary_body.md",
+      "size": 3626,
+      "sha256": "912590c1d812b945aeb006ab1d9e6b2107c181608a134b0a488b3dee75c587a9"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C6_REVIEW/claim_boundary_receipt.json",
+      "size": 1183,
+      "sha256": "6efa4328ccf231698587267b822493453e3ca446f6eb38ec8ff0c1d1e240c131"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C6_REVIEW/discovery_transport_custody_body.md",
+      "size": 6171,
+      "sha256": "6622525d4ed9214b0444a0a5414fca6ed039b88b5029fc481b1b165379eecaa0"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C6_REVIEW/discovery_transport_custody_receipt.json",
+      "size": 1196,
+      "sha256": "3113779b70aa653f7a9c1355ae8256178a0591c1c6e8d06a4f8bad8f007c6b8e"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C6_REVIEW/physical_sensor_authority_body.md",
+      "size": 5709,
+      "sha256": "e83b249d51db7640936058cfef3bbdbe69571a05a9275ca704e542287384033c"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C6_REVIEW/physical_sensor_authority_receipt.json",
+      "size": 1190,
+      "sha256": "920df5a7aeb0ad795d7d5ad1ad58bde06e160924100930e8d6a68a01b952c1da"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C6_REVIEW/source_bundle_evidence_body.md",
+      "size": 3480,
+      "sha256": "aef586cce1b0d421f0b15d221227c6269a09605ebf9faf9caefb0c4566f0c307"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C6_REVIEW/source_bundle_evidence_receipt.json",
+      "size": 1195,
+      "sha256": "6c20ec1a8eb8f450409966a7291f242aba1d9d4f466a203770d0e57c436911ad"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C6_REVIEW_NORMALIZED.json",
+      "size": 13654,
+      "sha256": "7ccd02dcca1aabbf77735684ee3079722683470404f51c9ee0589a2e38b9a562"
+    },
+    {
+      "relative_path": "SOURCE_AUTHORITY_C6_REVIEW_REPORTS.md",
+      "size": 19515,
+      "sha256": "ea74e419854ef13ec139a34e78ebb00e97ed478f584e8ad15ef4f148222967fa"
+    },
+    {
+      "relative_path": "SUBAGENT_FINDINGS_NORMALIZED.json",
+      "size": 13605,
+      "sha256": "609b7dfe8d80ef8c0af09d24d4f2546d8c471af6658703cfdb675df464705ff3"
+    },
+    {
+      "relative_path": "SUBAGENT_REVIEW_REPORTS.md",
+      "size": 14284,
+      "sha256": "fcbe3cb4efbc04ef553928fee035c866e24adff7f136eecf340177d8c816f71d"
+    },
+    {
+      "relative_path": "TOMOGRAPHY_REPAIR_BOOTSTRAP.md",
+      "size": 6647,
+      "sha256": "15342dd7aa72951f390510f49043113cc9d1e953530c024e51eec2caedb7ed81"
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,28 @@
+{
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "root@192.168.137.100",
+    "<sealed live target command with env bindings>"
+  ],
+  "env_bindings": {
+    "FAMILY10H_CARRIER_TOMOGRAPHY_COMMIT_BINDING": "a121381130ef6eef2757ff5c014e22990a88f774",
+    "FAMILY10H_CARRIER_TOMOGRAPHY_LIVE_AUTHORITY": "family10h_carrier_tomography_v1_0",
+    "FAMILY10H_CARRIER_TOMOGRAPHY_MANIFEST_SHA256": "14584872574ad9bf786f98e3d7a7073ec656ed8f2305951aeba8eee8dbc223e2",
+    "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY": "unset before target entrypoint; target sets for runtime",
+    "FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_AUTHORITY_NONCE_SHA256": "f11c13d72d43f3ab10f4886f5a23bef11567b8d0a138f63be6e3d0840763be33"
+  },
+  "live_invocation_count": 1,
+  "pid": 2904,
+  "pmu_acquisition_authorized": true,
+  "remote_output_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/output",
+  "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0",
+  "retry_count": 0,
+  "runtime_launch_authorized": true,
+  "schema": "FAMILY10H_ATTEMPT2_LIVE_INVOCATION_START_V1",
+  "started_at": "2026-07-19T12:26:16.622030+00:00",
+  "stderr_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_2\\ATTEMPT_2_TARGET_STDERR.txt",
+  "stdout_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_2\\ATTEMPT_2_TARGET_STDOUT.txt",
+  "target_host": "root@192.168.137.100"
+}

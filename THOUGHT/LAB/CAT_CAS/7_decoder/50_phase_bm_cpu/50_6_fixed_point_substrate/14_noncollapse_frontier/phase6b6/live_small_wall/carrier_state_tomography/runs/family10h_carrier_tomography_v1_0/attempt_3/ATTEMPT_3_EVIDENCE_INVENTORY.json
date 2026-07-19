@@ -1,0 +1,71 @@
+{
+  "schema": "FAMILY10H_ATTEMPT3_EVIDENCE_INVENTORY_V1",
+  "attempt": 3,
+  "committed_scope": "receipts, summaries, adjudication where present, stdout/stderr, and exact remote-root tar archive",
+  "extracted_snapshot_staged": false,
+  "extracted_snapshot_reason": "Exact remote root is preserved by ATTEMPT_3_REMOTE_ROOT.tar.gz; extracted copy remains local for inspection and is not staged to avoid modifying historical whitespace.",
+  "unstaged_extracted_snapshot_file_count": 108,
+  "remote_root_archive": {
+    "relative_path": "ATTEMPT_3_REMOTE_ROOT.tar.gz",
+    "size": 3041639,
+    "sha256": "4743e01adad215efbbe3b0416b6e4846501858f056db27c00e9d30268a8267e6"
+  },
+  "file_count": 11,
+  "files": [
+    {
+      "relative_path": "ATTEMPT_3_ADJUDICATION.json",
+      "size": 565650,
+      "sha256": "43638addf44d55af8b5cd9aa698cd7ac36c78bb2b0c731736a05b4bb9821bdca"
+    },
+    {
+      "relative_path": "ATTEMPT_3_ANALYSIS.json",
+      "size": 1107244,
+      "sha256": "609d5fb88ba8ec08f9d3b27b010550a376d4c348c8a8e31216f3b844d56d5e02"
+    },
+    {
+      "relative_path": "ATTEMPT_3_CLEANUP_RECEIPT.json",
+      "size": 1638,
+      "sha256": "2eb151eb94bdd277ea7939c6d497c85c1e75806b0a1bb1064c7d276a67ca0dd8"
+    },
+    {
+      "relative_path": "ATTEMPT_3_COPYBACK_RECEIPT.json",
+      "size": 24968,
+      "sha256": "10fb0fb255df559342e686c9b3366a38d16578e285eab54ab42f9cd229bdd61e"
+    },
+    {
+      "relative_path": "ATTEMPT_3_DEPLOYMENT_RECEIPT.json",
+      "size": 5601,
+      "sha256": "7f7d7b9ee9f38e9a2de22454adc5f327724c65bc21c4202d09cd8d67f6677b85"
+    },
+    {
+      "relative_path": "ATTEMPT_3_LIVE_INVOCATION_COMPLETED.json",
+      "size": 2240,
+      "sha256": "c4ec2293e1ce5054e016f91b2c8cdd20ab46783c56fe93d29d489696dd1b7d30"
+    },
+    {
+      "relative_path": "ATTEMPT_3_LIVE_INVOCATION_STARTED.json",
+      "size": 1664,
+      "sha256": "18d19a329415d62e7bcd4e6d91cd98c1f1d7ebe80c9df6c115c76d0a77335b96"
+    },
+    {
+      "relative_path": "ATTEMPT_3_REMOTE_ROOT.tar.gz",
+      "size": 3041639,
+      "sha256": "4743e01adad215efbbe3b0416b6e4846501858f056db27c00e9d30268a8267e6"
+    },
+    {
+      "relative_path": "ATTEMPT_3_RESULT_SUMMARY.json",
+      "size": 4021,
+      "sha256": "f85843046366addb8b4e3f6eaa470fb83500e16ca625c594f3ca574a887642bd"
+    },
+    {
+      "relative_path": "ATTEMPT_3_TARGET_STDERR.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "ATTEMPT_3_TARGET_STDOUT.txt",
+      "size": 10813,
+      "sha256": "0440b06e0faa19441e70166e0c0590e707cf1aadbcb0e03a4d48501892899197"
+    }
+  ]
+}

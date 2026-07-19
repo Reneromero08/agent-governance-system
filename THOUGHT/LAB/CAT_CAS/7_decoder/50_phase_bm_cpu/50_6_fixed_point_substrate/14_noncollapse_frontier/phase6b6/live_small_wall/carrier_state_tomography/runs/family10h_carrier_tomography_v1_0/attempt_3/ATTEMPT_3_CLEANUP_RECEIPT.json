@@ -1,0 +1,24 @@
+{
+  "schema": "FAMILY10H_ATTEMPT3_CLEANUP_RECEIPT_V1",
+  "attempt": 3,
+  "created_at": "2026-07-19T12:37:52.992608+00:00",
+  "target_host": "root@192.168.137.100",
+  "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0",
+  "remote_archive": "/root/catcas_live_small_wall/family10h_attempt3_remote_root.tar.gz",
+  "owner_marker": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/.family10h_carrier_tomography_attempt3_owner",
+  "owner_value_sha256": "972c38f1895b1ca8975ab95a922e1576b23d2d647d5d993f4ecad0aa8a11c9a2",
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "root@192.168.137.100",
+    "set -eu; test -f /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/.family10h_carrier_tomography_attempt3_owner; test \"$(cat /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/.family10h_carrier_tomography_attempt3_owner)\" = family10h_carrier_tomography_v1_0_attempt_3_42eb655175a400224cd0be6ed22c4348dfd9fab4; rm -rf /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0; rm -f /root/catcas_live_small_wall/family10h_attempt3_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0; test ! -e /root/catcas_live_small_wall/family10h_attempt3_remote_root.tar.gz; echo ATTEMPT3_REMOTE_CLEANED"
+  ],
+  "elapsed_seconds": 0.48,
+  "returncode": 0,
+  "stdout": "ATTEMPT3_REMOTE_CLEANED\n",
+  "stderr": "",
+  "stdout_sha256": "dd33c9cdf3386439e74b1deb6be0c0292722d07d87cfa059981619aa23290123",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "passed": true
+}
