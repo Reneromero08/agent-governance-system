@@ -1,6 +1,6 @@
 {
   "live_invocation_count": 0,
-  "offline_validate_sha256": "bcc0c77c5c1c62b73e79abdcf737c38509e4817ed474c7d91e5d3ab2a0ac307c",
+  "offline_validate_sha256": "278a1a9d228d7581a8277319df27c3967860dfc8655a7e0f2fa13c2f94d45e80",
   "passed": true,
   "pmu_acquisition_count": 0,
   "runtime_authority": {
@@ -28,13 +28,13 @@
         "-O2"
       ],
       "compiler_identity": "gcc-compatible C compiler selected by controller find_c_compiler()",
-      "git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+      "git_blob_id": "42bdb8ccea03c4cbd7bb0a5878acf0aae2aed31a",
       "path": "family10h_carrier_tomography_runtime",
       "present": true,
-      "runtime_c_sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+      "runtime_c_sha256": "2807f91a8c9369fe60f610c5582ccd1af6afc5826043bc80047838b6ee0f66b8",
       "runtime_h_sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
       "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
-      "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "sha256": "1f5e070671d35bde6c77364d409cb86f2ae7a35470a203a12067316f35a90575",
       "size": 22928
     },
     "failures": [],
@@ -63,7 +63,7 @@
     "fixture_result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
     "fixture_self_test_passed": true,
     "fixture_self_test_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1_1_paired_dirty_probe\\PAIRED_DIRTY_PROBE_V1_0_FIXTURE_SELF_TEST.json",
-    "fixture_self_test_sha256": "45f724c61d246356ba086b418d762c38e92ff723192e08c13765ea2ea91f8c0e"
+    "fixture_self_test_sha256": "e96f056bf40e4bb41b9e04d73aceded26ed5ad7020749e9ead6812b7928ad174"
   },
   "source_authority": {
     "checked_files": 10,
@@ -93,13 +93,13 @@
         "-O2"
       ],
       "compiler_identity": "gcc-compatible C compiler selected by controller find_c_compiler()",
-      "git_blob_id": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+      "git_blob_id": "42bdb8ccea03c4cbd7bb0a5878acf0aae2aed31a",
       "path": "family10h_carrier_tomography_runtime",
       "present": true,
-      "runtime_c_sha256": "bff8d13a02b375029625164b98fb98e9c1e0f134c3b21a743f1b3a13770f85f8",
+      "runtime_c_sha256": "2807f91a8c9369fe60f610c5582ccd1af6afc5826043bc80047838b6ee0f66b8",
       "runtime_h_sha256": "9e9fd1cb3ac1395d76791f9578695e781eaa01467b73801a371bdbceeb0e403e",
       "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_BINARY_AUTHORITY_V1",
-      "sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+      "sha256": "1f5e070671d35bde6c77364d409cb86f2ae7a35470a203a12067316f35a90575",
       "size": 22928
     }
   },
