@@ -20,7 +20,7 @@
   },
   "controller_self_test": {
     "passed": true,
-    "sha256": "1c5e12a8fe95a7f3f44764a35792341a308a5b090da839a439b32d82fe6df17f"
+    "sha256": "f6124e8ed42df3486e7e8f4cca108311deab554edf992a359b4ff69d8ee9ee60"
   },
   "delay_grid": [
     {
@@ -46,7 +46,7 @@
   ],
   "deployment_layout": {
     "passed": true,
-    "sha256": "5c82e2926d8c27d5c9a80b39b974dd22f71c87800b49f5f5b343e565b11794fc"
+    "sha256": "881a77fbe15fab9e9254bbc0669e9da6a2995414d0368ce2c3017c21f1d230e4"
   },
   "exact_tuple_count": 8320,
   "expected_local_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0",
@@ -150,13 +150,13 @@
   },
   "git_state_at_manifest_build": {
     "branch": "codex/family10h-tomography-repair",
-    "head": "8e70d654421c43d405253ede3a7ae31489f7670b",
+    "head": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
     "origin_main": "ab04503c9f8e7585b893a0db9326ba4ad4a39030",
     "stash_list": [
       "stash@{0}: On main: preserve superseded pmu first-light work before micro_equal_1 closure",
       "stash@{1}: On phase6/combined-observability-executor: codex-stale-pr10-hardening-before-0c4244d9-verification"
     ],
-    "status_porcelain": " M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_DEPLOYMENT_LAYOUT_SELF_TEST.json\n D THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json\n D THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_OFFLINE_VALIDATE.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_SOURCE_HASHES.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_TARGET_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/family10h_carrier_tomography_target.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/run_family10h_carrier_tomography_v1.py"
+    "status_porcelain": " M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_CONTROLLER_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_DEPLOYMENT_LAYOUT_SELF_TEST.json\n D THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json\n D THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_OFFLINE_VALIDATE.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_RUNTIME_SELF_TEST.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_TARGET_SELF_TEST.json\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW_NORMALIZED.json\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW_REPORTS.md"
   },
   "historical_lane_contact_report": {
     "authoritative_for_active_transaction": false,
@@ -261,10 +261,10 @@
     "sensor_inventory_count": 0,
     "target_contact_count": 4
   },
-  "manifest_canonical_sha256": "19fa88116d87e6bf41af562b28fe69da8dd204acdbeef49489c39f4417a7e790",
+  "manifest_canonical_sha256": "919fa466b7453e0737c1329232b669caddd4d1177d19b2735015848b0fe521f5",
   "offline_validate": {
     "passed": true,
-    "sha256": "4c4f3eafb7eb5d5df7d8011259923771d2b1afceb3743cc49b239a0ee8844856"
+    "sha256": "4ebbf1f6f85be06627ca5b35a85cc8fb9faed89b66d7bb0eb587e85cd3f24114"
   },
   "operator_ladder": [
     "S0 scalar preparation amplitude",
@@ -426,7 +426,7 @@
   "runtime_self_test": {
     "offline_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
     "passed": true,
-    "sha256": "f57b37985a8111e71564d4f72f6c3122af96a73a75f342424ec0f5e77814e1a5"
+    "sha256": "176a92589ee38b8f95c7de601837af1de81ea6ce8b616c4a0b76603d357851f8"
   },
   "schedule_hashes": {
     "canonical_sha256": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
@@ -438,41 +438,239 @@
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST_V1",
   "science_package_id": "family10h_carrier_tomography_v1_0",
   "source_authority_review": {
-    "findings_path": null,
-    "findings_sha256": null,
+    "findings_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\SOURCE_AUTHORITY_C6_REVIEW_NORMALIZED.json",
+    "findings_sha256": "7ccd02dcca1aabbf77735684ee3079722683470404f51c9ee0589a2e38b9a562",
     "material_blocker_count": 0,
     "review_quorum": {
-      "failures": [
-        "source audit commit mismatch",
-        "source audit source-hashes mismatch",
-        "source audit source-bundle mismatch",
-        "source audit runtime-binary mismatch",
-        "source audit review report missing",
-        "source audit material blockers missing or malformed",
-        "source audit reviewer verdicts missing or malformed",
-        "source audit reviewer verdict count must be exactly four",
-        "missing source audit reviewer roles: claim_boundary_adjudicator,discovery_transport_custody_auditor,physical_sensor_authority_auditor,source_bundle_runtime_evidence_auditor"
-      ],
+      "failures": [],
       "material_blockers": [],
-      "missing_roles": [
-        "claim_boundary_adjudicator",
-        "discovery_transport_custody_auditor",
-        "physical_sensor_authority_auditor",
-        "source_bundle_runtime_evidence_auditor"
-      ],
-      "passed": false,
+      "missing_roles": [],
+      "passed": true,
       "required_roles": {
         "claim_boundary_adjudicator": "claim-boundary adjudicator",
         "discovery_transport_custody_auditor": "discovery transport and custody auditor",
         "physical_sensor_authority_auditor": "physical sensor-authority auditor",
         "source_bundle_runtime_evidence_auditor": "source/bundle/runtime evidence auditor"
       },
-      "roles": {}
+      "roles": {
+        "claim_boundary_adjudicator": {
+          "agent_id": "019f77eb-293a-7ff2-bc04-536956c9ec14",
+          "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+          "body_canonical_sha256": "912590c1d812b945aeb006ab1d9e6b2107c181608a134b0a488b3dee75c587a9",
+          "body_file_sha256": "912590c1d812b945aeb006ab1d9e6b2107c181608a134b0a488b3dee75c587a9",
+          "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/claim_boundary_body.md",
+          "boundary_attestation": {
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true
+          },
+          "final_response": true,
+          "material_blocker_ids": [],
+          "model": "gpt-5.6-sol",
+          "passed": true,
+          "receipt_file_sha256": "6efa4328ccf231698587267b822493453e3ca446f6eb38ec8ff0c1d1e240c131",
+          "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/claim_boundary_receipt.json",
+          "review_receipt": {
+            "agent_id": "019f77eb-293a-7ff2-bc04-536956c9ec14",
+            "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+            "evidence_origin": "codex_subagent_detached_receipt",
+            "final_response": true,
+            "issuer": "codex_subagent_read_only_review",
+            "material_blocker_ids": [],
+            "model": "gpt-5.6-sol",
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true,
+            "receipt_kind": "detached_review_body_acknowledgment",
+            "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+            "review_body_sha256": "912590c1d812b945aeb006ab1d9e6b2107c181608a134b0a488b3dee75c587a9",
+            "role": "claim-boundary adjudicator",
+            "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+            "schema": "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V3",
+            "self_authored": false,
+            "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+            "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+            "thread_id": "019f77eb-293a-7ff2-bc04-536956c9ec14",
+            "verdict": "NO_MATERIAL_BLOCKER"
+          },
+          "role": "claim-boundary adjudicator",
+          "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+          "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+          "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+          "thread_id": "019f77eb-293a-7ff2-bc04-536956c9ec14",
+          "verdict": "NO_MATERIAL_BLOCKER"
+        },
+        "discovery_transport_custody_auditor": {
+          "agent_id": "019f77ea-fc0f-73e3-974f-a93cf7588652",
+          "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+          "body_canonical_sha256": "6622525d4ed9214b0444a0a5414fca6ed039b88b5029fc481b1b165379eecaa0",
+          "body_file_sha256": "6622525d4ed9214b0444a0a5414fca6ed039b88b5029fc481b1b165379eecaa0",
+          "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/discovery_transport_custody_body.md",
+          "boundary_attestation": {
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true
+          },
+          "final_response": true,
+          "material_blocker_ids": [],
+          "model": "gpt-5.6-sol",
+          "passed": true,
+          "receipt_file_sha256": "3113779b70aa653f7a9c1355ae8256178a0591c1c6e8d06a4f8bad8f007c6b8e",
+          "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/discovery_transport_custody_receipt.json",
+          "review_receipt": {
+            "agent_id": "019f77ea-fc0f-73e3-974f-a93cf7588652",
+            "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+            "evidence_origin": "codex_subagent_detached_receipt",
+            "final_response": true,
+            "issuer": "codex_subagent_read_only_review",
+            "material_blocker_ids": [],
+            "model": "gpt-5.6-sol",
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true,
+            "receipt_kind": "detached_review_body_acknowledgment",
+            "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+            "review_body_sha256": "6622525d4ed9214b0444a0a5414fca6ed039b88b5029fc481b1b165379eecaa0",
+            "role": "discovery transport and custody auditor",
+            "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+            "schema": "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V3",
+            "self_authored": false,
+            "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+            "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+            "thread_id": "019f77ea-fc0f-73e3-974f-a93cf7588652",
+            "verdict": "NO_MATERIAL_BLOCKER"
+          },
+          "role": "discovery transport and custody auditor",
+          "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+          "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+          "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+          "thread_id": "019f77ea-fc0f-73e3-974f-a93cf7588652",
+          "verdict": "NO_MATERIAL_BLOCKER"
+        },
+        "physical_sensor_authority_auditor": {
+          "agent_id": "019f77ea-e7b0-7dc0-a977-05de4932e6d5",
+          "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+          "body_canonical_sha256": "e83b249d51db7640936058cfef3bbdbe69571a05a9275ca704e542287384033c",
+          "body_file_sha256": "e83b249d51db7640936058cfef3bbdbe69571a05a9275ca704e542287384033c",
+          "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/physical_sensor_authority_body.md",
+          "boundary_attestation": {
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true
+          },
+          "final_response": true,
+          "material_blocker_ids": [],
+          "model": "gpt-5.6-sol",
+          "passed": true,
+          "receipt_file_sha256": "920df5a7aeb0ad795d7d5ad1ad58bde06e160924100930e8d6a68a01b952c1da",
+          "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/physical_sensor_authority_receipt.json",
+          "review_receipt": {
+            "agent_id": "019f77ea-e7b0-7dc0-a977-05de4932e6d5",
+            "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+            "evidence_origin": "codex_subagent_detached_receipt",
+            "final_response": true,
+            "issuer": "codex_subagent_read_only_review",
+            "material_blocker_ids": [],
+            "model": "gpt-5.6-sol",
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true,
+            "receipt_kind": "detached_review_body_acknowledgment",
+            "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+            "review_body_sha256": "e83b249d51db7640936058cfef3bbdbe69571a05a9275ca704e542287384033c",
+            "role": "physical sensor-authority auditor",
+            "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+            "schema": "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V3",
+            "self_authored": false,
+            "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+            "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+            "thread_id": "019f77ea-e7b0-7dc0-a977-05de4932e6d5",
+            "verdict": "NO_MATERIAL_BLOCKER"
+          },
+          "role": "physical sensor-authority auditor",
+          "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+          "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+          "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+          "thread_id": "019f77ea-e7b0-7dc0-a977-05de4932e6d5",
+          "verdict": "NO_MATERIAL_BLOCKER"
+        },
+        "source_bundle_runtime_evidence_auditor": {
+          "agent_id": "019f77eb-10ef-7403-8a8b-a15d20395e55",
+          "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+          "body_canonical_sha256": "aef586cce1b0d421f0b15d221227c6269a09605ebf9faf9caefb0c4566f0c307",
+          "body_file_sha256": "aef586cce1b0d421f0b15d221227c6269a09605ebf9faf9caefb0c4566f0c307",
+          "body_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/source_bundle_evidence_body.md",
+          "boundary_attestation": {
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true
+          },
+          "final_response": true,
+          "material_blocker_ids": [],
+          "model": "gpt-5.6-sol",
+          "passed": true,
+          "receipt_file_sha256": "6c20ec1a8eb8f450409966a7291f242aba1d9d4f466a203770d0e57c436911ad",
+          "receipt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/SOURCE_AUTHORITY_C6_REVIEW/source_bundle_evidence_receipt.json",
+          "review_receipt": {
+            "agent_id": "019f77eb-10ef-7403-8a8b-a15d20395e55",
+            "audited_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+            "evidence_origin": "codex_subagent_detached_receipt",
+            "final_response": true,
+            "issuer": "codex_subagent_read_only_review",
+            "material_blocker_ids": [],
+            "model": "gpt-5.6-sol",
+            "no_checkout_mutation": true,
+            "no_file_edits": true,
+            "no_git_write": true,
+            "no_live_authority": true,
+            "no_pmu": true,
+            "no_target_contact": true,
+            "receipt_kind": "detached_review_body_acknowledgment",
+            "review_body_canonicalization": "utf8_lf_single_trailing_newline",
+            "review_body_sha256": "aef586cce1b0d421f0b15d221227c6269a09605ebf9faf9caefb0c4566f0c307",
+            "role": "source/bundle/runtime evidence auditor",
+            "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+            "schema": "FAMILY10H_SOURCE_AUTHORITY_REVIEWER_RECEIPT_V3",
+            "self_authored": false,
+            "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+            "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+            "thread_id": "019f77eb-10ef-7403-8a8b-a15d20395e55",
+            "verdict": "NO_MATERIAL_BLOCKER"
+          },
+          "role": "source/bundle/runtime evidence auditor",
+          "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+          "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+          "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d",
+          "thread_id": "019f77eb-10ef-7403-8a8b-a15d20395e55",
+          "verdict": "NO_MATERIAL_BLOCKER"
+        }
+      }
     },
-    "review_report_path": null,
-    "review_report_sha256": null,
+    "review_report_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\SOURCE_AUTHORITY_C6_REVIEW_REPORTS.md",
+    "review_report_sha256": "ea74e419854ef13ec139a34e78ebb00e97ed478f584e8ad15ef4f148222967fa",
     "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
-    "source_authority_commit": "8e70d654421c43d405253ede3a7ae31489f7670b",
+    "source_authority_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
     "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
     "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d"
   },
@@ -570,7 +768,7 @@
   "starting_head_required": "8021563a6122b72316ddd218077b8b82e36f9055",
   "target_self_test": {
     "passed": true,
-    "sha256": "2ed761b59c79291bab6baddd3a1e5100a540378fd46e3fc61195209d7c3c09ef"
+    "sha256": "84b0effeabeab6d9f1fecc950cc61f835ee75bc12c75cb8358a6c197bf6b590c"
   },
   "temperature_sensor_authority": {
     "active_attempt_counters": {
@@ -618,7 +816,7 @@
       "git_blob_matches_file_sha256": true,
       "git_blob_sha256": "74f4934e19bdc43abb3bf4ee1ad101f53307e46c003a969ce03c33cc57c88642",
       "git_blob_size": 7808,
-      "git_head": "8e70d654421c43d405253ede3a7ae31489f7670b",
+      "git_head": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
       "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\SENSOR_AUTHORITY_ATTEMPT_HISTORY\\ATTEMPT_HISTORY_INDEX.json"
     },
     "historical_lane_contact_report": {
@@ -712,7 +910,7 @@
     ],
     "resolved_identity_bound_in_evidence": true,
     "self_authored_discovery_without_controller_challenge_cannot_freeze": true,
-    "source_authority_commit": "8e70d654421c43d405253ede3a7ae31489f7670b",
+    "source_authority_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
     "synthetic_or_provenance_free_identity_cannot_freeze": true,
     "target_discovery_receipt_file_sha256": null,
     "target_discovery_receipt_path": null
