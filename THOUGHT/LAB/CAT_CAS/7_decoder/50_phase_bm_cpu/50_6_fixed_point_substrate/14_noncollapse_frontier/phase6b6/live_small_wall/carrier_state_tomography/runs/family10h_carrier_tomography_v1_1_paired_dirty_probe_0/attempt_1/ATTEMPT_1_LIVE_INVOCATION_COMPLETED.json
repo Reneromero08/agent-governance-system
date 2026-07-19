@@ -1,0 +1,28 @@
+{
+  "attempt": 1,
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=8",
+    "root@192.168.137.100",
+    "set -eu; cd /root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0; test -f .family10h_carrier_tomography_v1_1_paired_dirty_probe_0_owner; unset FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY; FAMILY10H_CARRIER_TOMOGRAPHY_LIVE_AUTHORITY=family10h_carrier_tomography_v1_1_paired_dirty_probe_0 FAMILY10H_CARRIER_TOMOGRAPHY_COMMIT_BINDING=cac5d33536768e00aa0de5f515e626fecccdeeda FAMILY10H_CARRIER_TOMOGRAPHY_MANIFEST_SHA256=20b5f758e22cc916af36a5b8f7f87ca27171c5d5314b233b63528dcc3635df65 FAMILY10H_CARRIER_TOMOGRAPHY_TEMPERATURE_AUTHORITY_NONCE=84a4eb1ff15f89a51f6dfe0bfb8c8df61c53bcce3a7b6108475af0b3489ec1c2 chrt -f 80 python3 -B family10h_carrier_tomography_target.py --execute-authorized --source-root /root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0 --output-root /root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output"
+  ],
+  "elapsed_seconds": 214.0,
+  "ended_at": "2026-07-19T16:02:36.284178+00:00",
+  "live_invocation_count": 1,
+  "pmu_acquisition_count": 1,
+  "remote_output_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0/output",
+  "remote_root": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0",
+  "returncode": 0,
+  "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_V1_1_ATTEMPT1_LIVE_INVOCATION_COMPLETED_V1",
+  "started_at": "2026-07-19T15:59:02.289582+00:00",
+  "stderr_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_1_paired_dirty_probe_0\\attempt_1\\ATTEMPT_1_TARGET_STDERR.txt",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_size": 0,
+  "stdout_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_1_paired_dirty_probe_0\\attempt_1\\ATTEMPT_1_TARGET_STDOUT.txt",
+  "stdout_sha256": "266678dd95400dd6af12427a97b61fcd80485c3b223b05d535ecdff89a241d4e",
+  "stdout_size": 10036,
+  "target_host": "root@192.168.137.100"
+}
