@@ -1,6 +1,6 @@
 {
   "artifact_custody": {
-    "analyzer_sha256": "33fc447ef5c545a8408cbd0e6330cdd71a72a5a097d80296b24240f37d0b750f",
+    "analyzer_sha256": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
     "dependency_identity": {
       "byteorder": "little",
       "machine": "AMD64",
@@ -108,12 +108,773 @@
       }
     },
     "dependency_sha256": "7ed5c6a0295ea2089369804cf45631335f13c5e745904783ea70f8e877dd2cfb",
-    "fixture_sha256": "f7cae242dfb96f00a70ab88957c04a060e4859ef13df823867b2ed50fc042ff7",
-    "schema_sha256": "21ca54f27528701fb9154108681775fed38c648f4706c16c89397255200c9b7d"
+    "fixture_sha256": "44cf9b9d1f277cdb04692fd46ffe75f6cf439a2078b21680ba15f3ee0b113342",
+    "schema_sha256": "d08b050dcd7615267439cf722598e49f4475bc217313ce14ed004aedb8eefc21"
   },
   "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
-  "fixture_count": 55,
-  "malformed_or_custody_negative_count": 15,
+  "dynamic_frequency_reference": {
+    "arms": {
+      "arm_0": {
+        "frequency_hz": 32800.00000084997,
+        "q": 18548.09342339777,
+        "r2_log_amplitude": 0.9999999920166573,
+        "tau_s": 0.1800012654382642,
+        "u95_frequency_calibration_hz": 0.025,
+        "u95_frequency_fit_hz": 5.938207656661751e-06,
+        "u95_frequency_hz": 0.025005938207656665,
+        "u95_tau_s": 1.4024646989693813e-06,
+        "usable_cycles": 34888
+      },
+      "arm_pi": {
+        "frequency_hz": 32799.99999479492,
+        "q": 18547.952005223065,
+        "r2_log_amplitude": 0.999999992584624,
+        "tau_s": 0.17999989306895978,
+        "u95_frequency_calibration_hz": 0.025,
+        "u95_frequency_fit_hz": 6.702760428655278e-06,
+        "u95_frequency_hz": 0.025006702760428656,
+        "u95_tau_s": 1.4741020410190041e-06,
+        "usable_cycles": 34888
+      }
+    },
+    "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
+    "claim_token": "SYNTHETIC_ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
+    "drive_phase": {
+      "arm_0": {
+        "drive_reference_phase_covariance_rad2": 1.5399751329297076e-14,
+        "error_phase_fit_standard_uncertainty_rad": 1.683734145300031e-07,
+        "error_rad": -2.6645352591003757e-15,
+        "gauge_phase_fit_standard_uncertainty_rad": 1.42390665152352e-07,
+        "phase_drive_cal_standard_uncertainty_rad": 0.0001,
+        "phase_fit_standard_uncertainty_rad": 1.5321310820964405e-07,
+        "phase_skew_standard_uncertainty_rad": 0.0001,
+        "preparation_first_sample": 101000,
+        "preparation_last_sample": 1100999,
+        "preparation_residual_ratio_max": 6.501562689754279e-05,
+        "reference_phase_fit_standard_uncertainty_rad": 2.84781330304704e-07,
+        "u95_drive_rad": 0.00027718605467780873
+      },
+      "arm_pi": {
+        "drive_reference_phase_covariance_rad2": 1.5402076330564493e-14,
+        "error_phase_fit_standard_uncertainty_rad": 1.6837182578531802e-07,
+        "error_rad": -3.552713678800501e-15,
+        "gauge_phase_fit_standard_uncertainty_rad": 1.4239336839618673e-07,
+        "phase_drive_cal_standard_uncertainty_rad": 0.0001,
+        "phase_fit_standard_uncertainty_rad": 1.5321643738722626e-07,
+        "phase_skew_standard_uncertainty_rad": 0.0001,
+        "preparation_first_sample": 101000,
+        "preparation_last_sample": 1100999,
+        "preparation_residual_ratio_max": 6.501564324933071e-05,
+        "reference_phase_fit_standard_uncertainty_rad": 2.8478673679237345e-07,
+        "u95_drive_rad": 0.0002771860546741013
+      },
+      "matched_acceptance_lhs_rad": 0.0005543721093527982,
+      "matched_error_difference_rad": -8.881784197001252e-16,
+      "matched_u95_sum_rad": 0.00055437210935191
+    },
+    "environment": {
+      "arm_0": {
+        "humidity_rh": 40.000228885328454,
+        "record_count": 10,
+        "temperature_c": 25.0,
+        "vibration_peak_m_s2": 0.005023133002224092,
+        "vibration_rms_m_s2": 0.0035354969637535556
+      },
+      "arm_pi": {
+        "humidity_rh": 40.000228885328454,
+        "record_count": 10,
+        "temperature_c": 25.0,
+        "vibration_peak_m_s2": 0.005017562627735032,
+        "vibration_rms_m_s2": 0.003534158786404532
+      }
+    },
+    "f_carrier_u95_hz": 0.025,
+    "f_ref_hz": 32800.0,
+    "f_witness_hz": 65600.0,
+    "implementation_custody": {
+      "analyzer_sha256": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+      "dependency_identity": {
+        "byteorder": "little",
+        "machine": "AMD64",
+        "numpy_config": {
+          "Build Dependencies": {
+            "blas": {
+              "detection method": "pkgconfig",
+              "found": true,
+              "include directory": "/c/opt/64/include",
+              "lib directory": "/c/opt/64/lib",
+              "name": "openblas64",
+              "openblas configuration": "USE_64BITINT=1 DYNAMIC_ARCH=1 DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK= NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP= SKYLAKEX MAX_THREADS=2",
+              "pc file directory": "C:/opt/64/lib/pkgconfig",
+              "version": "0.3.23.dev"
+            },
+            "lapack": {
+              "detection method": "internal",
+              "found": true,
+              "include directory": "unknown",
+              "lib directory": "unknown",
+              "name": "dep2270588361616",
+              "openblas configuration": "unknown",
+              "pc file directory": "unknown",
+              "version": "1.26.4"
+            }
+          },
+          "Compilers": {
+            "c": {
+              "commands": "cl",
+              "linker": "link",
+              "name": "msvc",
+              "version": "19.29.30153"
+            },
+            "c++": {
+              "commands": "cl",
+              "linker": "link",
+              "name": "msvc",
+              "version": "19.29.30153"
+            },
+            "cython": {
+              "commands": "cython",
+              "linker": "cython",
+              "name": "cython",
+              "version": "3.0.8"
+            }
+          },
+          "Machine Information": {
+            "build": {
+              "cpu": "x86_64",
+              "endian": "little",
+              "family": "x86_64",
+              "system": "windows"
+            },
+            "host": {
+              "cpu": "x86_64",
+              "endian": "little",
+              "family": "x86_64",
+              "system": "windows"
+            }
+          },
+          "Python Information": {
+            "path": "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\cibw-run-j442zwj6\\cp311-win_amd64\\build\\venv\\Scripts\\python.exe",
+            "version": "3.11"
+          },
+          "SIMD Extensions": {
+            "baseline": [
+              "SSE",
+              "SSE2",
+              "SSE3"
+            ],
+            "found": [
+              "SSSE3",
+              "SSE41",
+              "POPCNT",
+              "SSE42",
+              "AVX",
+              "F16C",
+              "FMA3",
+              "AVX2"
+            ],
+            "not found": [
+              "AVX512F",
+              "AVX512CD",
+              "AVX512_SKX",
+              "AVX512_CLX",
+              "AVX512_CNL",
+              "AVX512_ICL"
+            ]
+          }
+        },
+        "numpy_core_binary_sha256": "c76d812fa5131fe21c8bf9ffbd910f27df80856f910fa61698f23f60cfd9d13e",
+        "numpy_distribution_record_sha256": "852cd4cdc45673affcba6e73dff58007a8b645bcf5290af8aae47d8fff65ba39",
+        "numpy_version": "1.26.4",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python_cache_tag": "cpython-311",
+        "python_executable_sha256": "4bddd834fb6fc274cc20fa7cbfaa6e9b5ade6309429eb96a635538dba5d4a3ae",
+        "python_implementation": "CPython",
+        "python_version": "3.11.6",
+        "thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        }
+      },
+      "dependency_sha256": "7ed5c6a0295ea2089369804cf45631335f13c5e745904783ea70f8e877dd2cfb",
+      "fixture_sha256": "44cf9b9d1f277cdb04692fd46ffe75f6cf439a2078b21680ba15f3ee0b113342",
+      "schema_sha256": "d08b050dcd7615267439cf722598e49f4475bc217313ce14ed004aedb8eefc21",
+      "signal_path_model_sha256": "31208cdcb39248a44bd90720459c97283e7135d6b0b9b0388c8e535ce46913be"
+    },
+    "input_custody": {
+      "assembly": {
+        "arm_0": {
+          "assembly_id": "P0-DUT-A",
+          "assembly_manifest_sha256": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "carrier_population": "EPSON_Q13FC1350000401"
+        },
+        "arm_pi": {
+          "assembly_id": "P0-DUT-A",
+          "assembly_manifest_sha256": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "carrier_population": "EPSON_Q13FC1350000401"
+        },
+        "dummy_c0": {
+          "assembly_id": "P0-DUMMY-C0-C",
+          "assembly_manifest_sha256": "af929cd9ee779f754a2ed0d56eab19b17a4abca423cdab5c6970688fcd09cad8",
+          "carrier_population": "MURATA_GJM1555C1H1R0BB01D_1PF_C0G"
+        },
+        "resonator_removed": {
+          "assembly_id": "P0-DETECTOR-B",
+          "assembly_manifest_sha256": "895309dc882c2c882db37b6861c183cefa630bdc34fff4b802e7b577f3499b8a",
+          "carrier_population": "CARRIER_POSITION_OPEN"
+        },
+        "zero_drive": {
+          "assembly_id": "P0-DUT-A",
+          "assembly_manifest_sha256": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "carrier_population": "EPSON_Q13FC1350000401"
+        }
+      },
+      "assignment_commitment_sha256": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
+      "bundle_sha256": "44e1c59fc502c0cf53b5546c8aed1069d7eee10d6ae104c5baa0b0a2b8b2a527",
+      "byte_receipt_sha256": {
+        "arm_0": {
+          "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
+          "assembly_manifest": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "assignment_commitment": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
+          "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
+          "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+          "chronology_receipt": "e5637f6957df6a82b5d14635184c28f3a47d2816c13e58a5875d64749d296b49",
+          "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
+          "native_export_receipt": "f0659ec37343759bad1fbc6f5dc812d866f4b139143bf465d8b3b6cce6381d2f",
+          "nonlinear_control": "f3d99d16190373005dcb1ef65b373b34b96cd8f52ddbd0bf1ce5a9a62e50242d",
+          "resonance_calibration_analyzer": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+          "resonance_calibration_artifact": "ad776c5cca931e9be6d3fe5102a8fcefcbfc19e15bc9df0b3964118a373963c3",
+          "resonance_calibration_raw": "1f71b77bcb30534cdec194b43ecc8f9b8b1d18ddf4d6d1ed70703adde1e7243f",
+          "resonance_calibration_source_queryback": "08bb2a0f8f0c78db890ef3833156917689564ee5b1faa5501442ffd0f6d5ef1b",
+          "source_queryback": "20017b1fef8e19dc963c07346d1a5bdc255122763f09ae2311a15a2495fdcfb3",
+          "topology_receipt": "d791c6e79adad1b7af7e2fde53c5f17690f4f2394d794e36a86ed24cc23850d5",
+          "topology_scan": "cec0e0d0668bd7d833010720cafcea68d27ebc603df39b85f10bb7bc10252da0"
+        },
+        "arm_pi": {
+          "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
+          "assembly_manifest": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "assignment_commitment": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
+          "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
+          "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+          "chronology_receipt": "9722430eb026775fb0e767909baf7d85532c2884453deed6945ac0b8e046310d",
+          "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
+          "native_export_receipt": "d204095b9d10b479ba462af9ca0523c5e000095f917f41527c2165c5ecb03554",
+          "nonlinear_control": "e646c819f0a3a41593678ef1bf2505752f7e9dcdafa486253cb8a63269756c54",
+          "resonance_calibration_analyzer": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+          "resonance_calibration_artifact": "b243c50b4ec18cb9e8e882292eab4098efaeb5dccf3fd98bf254bb1106ada655",
+          "resonance_calibration_raw": "c2e397ae8dcc19eaf99fa56afde4d92579fe4216ac385fa617cf2a0b80e04fee",
+          "resonance_calibration_source_queryback": "08bb2a0f8f0c78db890ef3833156917689564ee5b1faa5501442ffd0f6d5ef1b",
+          "source_queryback": "6231abffbdb21427e648beb029f1c6058c6d15dd6e8758b675df6613db16bf92",
+          "topology_receipt": "bb6b4013d39d9aa99b4c1986190b1dfcfd9cb3f744dcd936fc26e5b22dae4a35",
+          "topology_scan": "d4c27fbfc795553e30f02744e59b4c0d5c0b9355dddef05b47d98ce8f66bcc85"
+        },
+        "dummy_c0": {
+          "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
+          "assembly_manifest": "af929cd9ee779f754a2ed0d56eab19b17a4abca423cdab5c6970688fcd09cad8",
+          "assignment_commitment": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
+          "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
+          "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+          "chronology_receipt": "b834044dde9bf0b7656a0a9a9c6a268c9449f989597cc430eca852b51da10d90",
+          "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
+          "native_export_receipt": "f97b9ee3e37d46aa85504c0edd2880c29f859eaf611b7308b5ebe9dcd5be6511",
+          "nonlinear_control": "b96a4ea76ad4a35e4d6b49bed4dddb00d5dad18624e57a5ad354647654515d21",
+          "resonance_calibration_analyzer": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+          "resonance_calibration_artifact": "7c7b1fbfbbfc9d27f50dcc2bb413802d4eb4878ba0bdef3b914ef65c52c9c3d2",
+          "resonance_calibration_raw": "184be946955eff7508646ad7a0cfb2b01201a048257f9d6aa6f972d23be3b2fe",
+          "resonance_calibration_source_queryback": "08bb2a0f8f0c78db890ef3833156917689564ee5b1faa5501442ffd0f6d5ef1b",
+          "source_queryback": "20017b1fef8e19dc963c07346d1a5bdc255122763f09ae2311a15a2495fdcfb3",
+          "topology_receipt": "8fcf84f4f4e8ba4e55c371859cfe1d14a26e4646722231915de9bf60b855b7fc",
+          "topology_scan": "c3c9626d465addaa416587c92abafc012922d3ec8216ae271766a649edc436ef"
+        },
+        "resonator_removed": {
+          "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
+          "assembly_manifest": "895309dc882c2c882db37b6861c183cefa630bdc34fff4b802e7b577f3499b8a",
+          "assignment_commitment": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
+          "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
+          "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+          "chronology_receipt": "5cd62e0247a1fe770890e44a3564a4c9b6c88e5fc9f8d1d7ba36643692390f7e",
+          "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
+          "native_export_receipt": "967b4fe46d399ed3d3df4875885ab750b729fdad5e5d9b5d9eaef84edbe9bd3f",
+          "nonlinear_control": "950820970fdf0afbbcabe18905754e2a9b0cb6c46845770de5b7bd91037339fe",
+          "resonance_calibration_analyzer": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+          "resonance_calibration_artifact": "d3b762e9ce83f40631408548b6e60274c6f77b1bace997ffc1ec77f999dd5f90",
+          "resonance_calibration_raw": "8a9e26944b8c1e25fcaa906fb62e8f39d058379179e885af5b2faf36e1959df8",
+          "resonance_calibration_source_queryback": "08bb2a0f8f0c78db890ef3833156917689564ee5b1faa5501442ffd0f6d5ef1b",
+          "source_queryback": "20017b1fef8e19dc963c07346d1a5bdc255122763f09ae2311a15a2495fdcfb3",
+          "topology_receipt": "2cc29a58ca830b1bc44afeef3cdbdb8582490584874636c87dca4b72769aa4ea",
+          "topology_scan": "b50caa757c0c20a0926440f69e6c95be7fac7788a028fe42c7ad8d94135acb1f"
+        },
+        "zero_drive": {
+          "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
+          "assembly_manifest": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
+          "assignment_commitment": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
+          "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
+          "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+          "chronology_receipt": "7cd590ea3408381ae23347a479e0d94148bf2122741760657c70cede12949bfb",
+          "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
+          "native_export_receipt": "6683506f48d36a29bd4440002978cf278d8cad4b503d921bef65ad1070a3f570",
+          "nonlinear_control": "11771ce16f4772941f2cd3ebd521663634248a2a3d245295bb61d532f637292f",
+          "resonance_calibration_analyzer": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+          "resonance_calibration_artifact": "ad3dfe408ab6edc0764171b08c0c7b9e178f3e380f822e07f9055b379cf6e8ad",
+          "resonance_calibration_raw": "7f8e82975d66858a719ae5b63121b05893a77a3ea6e645fc34793f12897244ef",
+          "resonance_calibration_source_queryback": "08bb2a0f8f0c78db890ef3833156917689564ee5b1faa5501442ffd0f6d5ef1b",
+          "source_queryback": "20017b1fef8e19dc963c07346d1a5bdc255122763f09ae2311a15a2495fdcfb3",
+          "topology_receipt": "8b3b4d71152befd1356681db9f89eb5f08b5580528c2e59836d124986d9d892e",
+          "topology_scan": "df8895a1273a88ac98bd579ba8cdebbf9559cce349afe178723b20c2c61fb552"
+        }
+      },
+      "calibration_sha256": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
+      "metadata_sha256": {
+        "arm_0": "d7f2be10cf560ac3d0fe893c03b2a1d9d2265e35d3b84ed0d5975680f30d87b9",
+        "arm_pi": "d0c8c8535838270c43fe1181383c66f79fd597b3998e5f54aa6555d727667be2",
+        "dummy_c0": "481843df9fa298a8eaf3328798434a6201ca1a616fb80c04d390df329bade152",
+        "resonator_removed": "e028577c02f8e27d5eb80b9963fb2723c14d45574cc6c7b62bff01a4d5d37ef0",
+        "zero_drive": "2f14b6c17796367b7a3ae1f85b168b252c353368cc5a5bfb181e33d025495d04"
+      },
+      "payload_sha256": {
+        "arm_0": "aac78aeaaeb40bf0c135d5c486c4e10dd8742d11344b58b9e932d087d1475d81",
+        "arm_pi": "6c932c693ed6d5275e90d2361fe7cdd03930bce2b0dabf34c628ae8e01d8197d",
+        "dummy_c0": "e2f499ec7810014a6b2f93be638c05de8f12829aa94e8644810715219be7c48b",
+        "resonator_removed": "cd151f44db401e83e21f4eb8517b0b4aaf4fc1247569e7eb35c541af306d3b2f",
+        "zero_drive": "3a8e6ed7f3fd65600f8722ffccdee031bfaecdb221c66bc2e82786a84769d633"
+      },
+      "thresholds_sha256": "c3bf8551dd06792db36fc4138d40aad4383e295eac165a5a374f0ecd897a6731"
+    },
+    "matched_guard_samples": 12499,
+    "noise_nonoverlapping_window_counts": {
+      "dummy_c0": 970,
+      "resonator_removed": 970,
+      "zero_drive": 970
+    },
+    "noise_sigma": 5.773502691896259e-06,
+    "off_resonance_controls": {
+      "arm_0": {
+        "fitted_decay_seconds": 0.09999999999999842,
+        "fitted_f_carrier_hz": 32799.999999999985,
+        "fitted_q_factor": 10304.423903774354,
+        "fitted_u95_hz": 0.02500000000145519,
+        "linewidth_hz": 3.183098861837957,
+        "probe_frequency_hz": 32863.661977236756,
+        "required_separation_hz": 63.66197723675914,
+        "response_ratio": 0.019
+      },
+      "arm_pi": {
+        "fitted_decay_seconds": 0.09999999999999842,
+        "fitted_f_carrier_hz": 32799.999999999985,
+        "fitted_q_factor": 10304.423903774354,
+        "fitted_u95_hz": 0.02500000000145519,
+        "linewidth_hz": 3.183098861837957,
+        "probe_frequency_hz": 32863.661977236756,
+        "required_separation_hz": 63.66197723675914,
+        "response_ratio": 0.019
+      },
+      "dummy_c0": {
+        "fitted_decay_seconds": 0.09999999999999842,
+        "fitted_f_carrier_hz": 32799.999999999985,
+        "fitted_q_factor": 10304.423903774354,
+        "fitted_u95_hz": 0.02500000000145519,
+        "linewidth_hz": 3.183098861837957,
+        "probe_frequency_hz": 32863.661977236756,
+        "required_separation_hz": 63.66197723675914,
+        "response_ratio": 0.019
+      },
+      "resonator_removed": {
+        "fitted_decay_seconds": 0.09999999999999842,
+        "fitted_f_carrier_hz": 32799.999999999985,
+        "fitted_q_factor": 10304.423903774354,
+        "fitted_u95_hz": 0.02500000000145519,
+        "linewidth_hz": 3.183098861837957,
+        "probe_frequency_hz": 32863.661977236756,
+        "required_separation_hz": 63.66197723675914,
+        "response_ratio": 0.019
+      },
+      "zero_drive": {
+        "fitted_decay_seconds": 0.09999999999999842,
+        "fitted_f_carrier_hz": 32799.999999999985,
+        "fitted_q_factor": 10304.423903774354,
+        "fitted_u95_hz": 0.02500000000145519,
+        "linewidth_hz": 3.183098861837957,
+        "probe_frequency_hz": 32863.661977236756,
+        "required_separation_hz": 63.66197723675914,
+        "response_ratio": 0.019
+      }
+    },
+    "physical_claim_authorized": false,
+    "relation_metrics": {
+      "common_relative_start_first": 12499,
+      "common_relative_start_last": 1075155,
+      "common_window_count": 4152,
+      "common_window_count_before_blocking": 4156,
+      "confidence_set": {
+        "antipode_in_set": true,
+        "minus_pi_over_2_excluded": true,
+        "plus_pi_over_2_excluded": true,
+        "residual_zero_in_set": true,
+        "zero_excluded": true
+      },
+      "discarded_incomplete_block_windows": 4,
+      "epsilon": {
+        "amplitude": 6.4664489832878124e-06,
+        "decay": 7.148999960117456e-06,
+        "feedthrough": 6.214837485964869e-06,
+        "frequency": 1.898233011545281e-10,
+        "neg": 9.104350164463324e-06,
+        "phase": 6.195529147934309e-06
+      },
+      "jackknife_blocks": 519,
+      "u95": {
+        "amplitude": 0.001000000237322423,
+        "decay": 0.001000063333981539,
+        "feedthrough": 0.001000000192201594,
+        "frequency": 1.0000032472662885e-07,
+        "neg": 0.0010000004122306466,
+        "phase": 0.0010000632948047171
+      }
+    },
+    "schema": "p0.scientific-result.v1",
+    "scientific_pass": true,
+    "signal_path": {
+      "arm_0": {
+        "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
+        "differential_peak_v": 0.125,
+        "h2_open": {
+          "imag": -0.03916654975739623,
+          "magnitude": 0.05000138190264577,
+          "phase_rad": -0.8999717454466002,
+          "real": 0.031082464063771343,
+          "u95": 0.00028389967647191104
+        },
+        "h2_pre": {
+          "imag": -0.23496423731896335,
+          "magnitude": 0.29996661516823203,
+          "phase_rad": -0.8999587898722018,
+          "real": 0.18647192120156875
+        },
+        "open_window": [
+          1101270,
+          1102230
+        ],
+        "pre_open_complex_separation": 0.24996523327062192,
+        "pre_pilot_snr": 2858.8300993724765,
+        "pre_window": [
+          1101048,
+          1101240
+        ],
+        "r_drop": 0.16669136822663772,
+        "source_pilot_snr": 105812.27336364171
+      },
+      "arm_pi": {
+        "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
+        "differential_peak_v": 0.125,
+        "h2_open": {
+          "imag": -0.039164212143534875,
+          "magnitude": 0.049996472917252545,
+          "phase_rad": -0.9000202562206945,
+          "real": 0.031077512631189814,
+          "u95": 0.00028400374267588445
+        },
+        "h2_pre": {
+          "imag": -0.23500270682513108,
+          "magnitude": 0.29999927793073505,
+          "phase_rad": -0.9000278827416017,
+          "real": 0.18647598918848482
+        },
+        "open_window": [
+          1101270,
+          1102230
+        ],
+        "pre_open_complex_separation": 0.25000280501522726,
+        "pre_pilot_snr": 2633.314412362464,
+        "pre_window": [
+          1101048,
+          1101240
+        ],
+        "r_drop": 0.1666541870530558,
+        "source_pilot_snr": 109569.5101235888
+      },
+      "dummy_c0": {
+        "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
+        "differential_peak_v": 0.125,
+        "h2_open": {
+          "imag": -0.03916253452027508,
+          "magnitude": 0.04999560603657844,
+          "phase_rad": -0.8999881249978865,
+          "real": 0.031078232139441615,
+          "u95": 7.092535277561725e-05
+        },
+        "h2_pre": {
+          "imag": -0.23499722658061567,
+          "magnitude": 0.3000036695682413,
+          "phase_rad": -0.8999800481165345,
+          "real": 0.18648996019579528
+        },
+        "open_window": [
+          1101270,
+          1102230
+        ],
+        "pre_open_complex_separation": 0.25000806353361976,
+        "pre_pilot_snr": 3420.176705643406,
+        "pre_window": [
+          1101048,
+          1101240
+        ],
+        "r_drop": 0.16665152681978598,
+        "source_pilot_snr": 105812.27336364171
+      },
+      "resonator_removed": {
+        "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
+        "differential_peak_v": 0.125,
+        "h2_open": {
+          "imag": -0.03916253452027508,
+          "magnitude": 0.04999560603657844,
+          "phase_rad": -0.8999881249978865,
+          "real": 0.031078232139441615,
+          "u95": 7.092535277561725e-05
+        },
+        "h2_pre": {
+          "imag": -0.23499722658061567,
+          "magnitude": 0.3000036695682413,
+          "phase_rad": -0.8999800481165345,
+          "real": 0.18648996019579528
+        },
+        "open_window": [
+          1101270,
+          1102230
+        ],
+        "pre_open_complex_separation": 0.25000806353361976,
+        "pre_pilot_snr": 3420.176705643406,
+        "pre_window": [
+          1101048,
+          1101240
+        ],
+        "r_drop": 0.16665152681978598,
+        "source_pilot_snr": 105812.27336364171
+      },
+      "zero_drive": {
+        "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
+        "differential_peak_v": 0.125,
+        "h2_open": {
+          "imag": -0.03916253452027508,
+          "magnitude": 0.04999560603657844,
+          "phase_rad": -0.8999881249978865,
+          "real": 0.031078232139441615,
+          "u95": 7.092535277561725e-05
+        },
+        "h2_pre": {
+          "imag": -0.23499722658061567,
+          "magnitude": 0.3000036695682413,
+          "phase_rad": -0.8999800481165345,
+          "real": 0.18648996019579528
+        },
+        "open_window": [
+          1101270,
+          1102230
+        ],
+        "pre_open_complex_separation": 0.25000806353361976,
+        "pre_pilot_snr": 3420.176705643406,
+        "pre_window": [
+          1101048,
+          1101240
+        ],
+        "r_drop": 0.16665152681978598,
+        "source_pilot_snr": 105812.27336364171
+      }
+    },
+    "signal_path_receipts": {
+      "arm_0": {
+        "nonlinear_2f_residue_ratio": 0.005000000000004745,
+        "topology_scan": {
+          "both_open": {
+            "imag": -0.023499807288824507,
+            "magnitude": 0.02999999999999998,
+            "phase_rad": -0.900000000000001,
+            "real": 0.018648299048119897
+          },
+          "closed_closed": {
+            "imag": -0.23499807288824512,
+            "magnitude": 0.2999999999999998,
+            "phase_rad": -0.9000000000000014,
+            "real": 0.1864829904811989
+          },
+          "k1_open": {
+            "imag": -0.03916634548137422,
+            "magnitude": 0.05,
+            "phase_rad": -0.9000000000000017,
+            "real": 0.03108049841353316
+          },
+          "k2_open": {
+            "imag": -0.046999614577649014,
+            "magnitude": 0.05999999999999996,
+            "phase_rad": -0.900000000000001,
+            "real": 0.037296598096239794
+          }
+        }
+      },
+      "arm_pi": {
+        "nonlinear_2f_residue_ratio": 0.005100000000004574,
+        "topology_scan": {
+          "both_open": {
+            "imag": -0.023796376975695654,
+            "magnitude": 0.030499999999999982,
+            "phase_rad": -0.8949999999999991,
+            "real": 0.01907832389992844
+          },
+          "closed_closed": {
+            "imag": -0.2348429334322751,
+            "magnitude": 0.30099999999999977,
+            "phase_rad": -0.894999999999999,
+            "real": 0.18828116373372
+          },
+          "k1_open": {
+            "imag": -0.039400558599102645,
+            "magnitude": 0.05049999999999998,
+            "phase_rad": -0.894999999999999,
+            "real": 0.03158870022775038
+          },
+          "k2_open": {
+            "imag": -0.047202649410806104,
+            "magnitude": 0.06049999999999995,
+            "phase_rad": -0.8949999999999987,
+            "real": 0.03784388839166134
+          }
+        }
+      },
+      "dummy_c0": {
+        "nonlinear_2f_residue_ratio": 0.005400000000004631,
+        "topology_scan": {
+          "both_open": {
+            "imag": -0.024663644124766976,
+            "magnitude": 0.03199999999999999,
+            "phase_rad": -0.8799999999999985,
+            "real": 0.020388836614354595
+          },
+          "closed_closed": {
+            "imag": -0.23430461918528633,
+            "magnitude": 0.3039999999999999,
+            "phase_rad": -0.8799999999999987,
+            "real": 0.19369394783636865
+          },
+          "k1_open": {
+            "imag": -0.04007842170274634,
+            "magnitude": 0.05199999999999998,
+            "phase_rad": -0.8799999999999988,
+            "real": 0.033131859498326206
+          },
+          "k2_open": {
+            "imag": -0.04778581049173602,
+            "magnitude": 0.06199999999999997,
+            "phase_rad": -0.8799999999999987,
+            "real": 0.03950337094031202
+          }
+        }
+      },
+      "resonator_removed": {
+        "nonlinear_2f_residue_ratio": 0.005300000000004563,
+        "topology_scan": {
+          "both_open": {
+            "imag": -0.02437832209459759,
+            "magnitude": 0.03149999999999999,
+            "phase_rad": -0.8850000000000012,
+            "real": 0.019948619296885045
+          },
+          "closed_closed": {
+            "imag": -0.2344962411004147,
+            "magnitude": 0.30299999999999966,
+            "phase_rad": -0.8850000000000012,
+            "real": 0.1918867189509893
+          },
+          "k1_open": {
+            "imag": -0.039856621837199235,
+            "magnitude": 0.05149999999999998,
+            "phase_rad": -0.8850000000000012,
+            "real": 0.032614409326653326
+          },
+          "k2_open": {
+            "imag": -0.047595771708500025,
+            "magnitude": 0.061499999999999944,
+            "phase_rad": -0.8850000000000011,
+            "real": 0.038947304341537446
+          }
+        }
+      },
+      "zero_drive": {
+        "nonlinear_2f_residue_ratio": 0.005200000000004539,
+        "topology_scan": {
+          "both_open": {
+            "imag": -0.024089224173331526,
+            "magnitude": 0.030999999999999986,
+            "phase_rad": -0.8899999999999999,
+            "real": 0.019511772823784596
+          },
+          "closed_closed": {
+            "imag": -0.2346756677531007,
+            "magnitude": 0.30199999999999977,
+            "phase_rad": -0.8900000000000003,
+            "real": 0.19008243202525624
+          },
+          "k1_open": {
+            "imag": -0.03963065912386801,
+            "magnitude": 0.05099999999999998,
+            "phase_rad": -0.8900000000000002,
+            "real": 0.03210001335525852
+          },
+          "k2_open": {
+            "imag": -0.047401376599136257,
+            "magnitude": 0.06099999999999999,
+            "phase_rad": -0.8900000000000002,
+            "real": 0.03839413362099549
+          }
+        }
+      }
+    },
+    "timing": {
+      "arm_0": {
+        "n_admit": 1113499,
+        "n_contact": 1103499,
+        "n_gate": 1101000,
+        "n_iso": 1103499,
+        "n_series_open": 1102249,
+        "series_start": 1101250
+      },
+      "arm_pi": {
+        "n_admit": 1113499,
+        "n_contact": 1103499,
+        "n_gate": 1101000,
+        "n_iso": 1103499,
+        "n_series_open": 1102249,
+        "series_start": 1101250
+      },
+      "dummy_c0": {
+        "n_admit": 1113499,
+        "n_contact": 1103499,
+        "n_gate": 1101000,
+        "n_iso": 1103499,
+        "n_series_open": 1102249,
+        "series_start": 1101250
+      },
+      "resonator_removed": {
+        "n_admit": 1113499,
+        "n_contact": 1103499,
+        "n_gate": 1101000,
+        "n_iso": 1103499,
+        "n_series_open": 1102249,
+        "series_start": 1101250
+      },
+      "zero_drive": {
+        "n_admit": 1113499,
+        "n_contact": 1103499,
+        "n_gate": 1101000,
+        "n_iso": 1103499,
+        "n_series_open": 1102249,
+        "series_start": 1101250
+      }
+    }
+  },
+  "fixture_count": 61,
+  "malformed_or_custody_negative_count": 20,
   "malformed_outcomes": [
     {
       "case": "truncated_binary",
@@ -219,11 +980,46 @@
       "execution": "actual_bundle_analyzer",
       "outcome": "PASS",
       "rejected_by": "THRESHOLD_CUSTODY"
+    },
+    {
+      "case": "unbound_carrier_frequency",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "MISSING_FIELD"
+    },
+    {
+      "case": "wrong_resonance_calibration_hash",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "calibration_after_assignment",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "source_queryback_frequency_mismatch",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "SOURCE_CONFIGURATION_MISMATCH"
+    },
+    {
+      "case": "witness_frequency_relation_mismatch",
+      "class": "malformed_or_custody_negative",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "WITNESS_FREQUENCY_RELATION"
     }
   ],
   "physical_claim_authorized": false,
   "positive_count": 8,
-  "raw_adversary_count": 54,
+  "raw_adversary_count": 58,
   "raw_adversary_outcomes": [
     {
       "case": "negative_scale_transform",
@@ -484,12 +1280,6 @@
       "rejected_by": "SIGNAL_PATH_2F_RESIDUE"
     },
     {
-      "case": "signal_path_common_mode_raw",
-      "execution": "actual_bundle_analyzer",
-      "outcome": "PASS",
-      "rejected_by": "SIGNAL_PATH_COMMON_MODE"
-    },
-    {
       "case": "signal_path_assembly_a_replay_into_b",
       "execution": "actual_bundle_analyzer",
       "outcome": "PASS",
@@ -548,6 +1338,36 @@
       "execution": "actual_bundle_analyzer",
       "outcome": "PASS",
       "rejected_by": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "resonance_calibration_raw_garbage",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_RAW"
+    },
+    {
+      "case": "resonance_calibration_q_claim_mismatch",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_RAW"
+    },
+    {
+      "case": "source_preparation_before_assignment",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "CHRONOLOGY_CUSTODY"
+    },
+    {
+      "case": "off_resonance_raw_response",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "OFF_RESONANCE_RESPONSE"
+    },
+    {
+      "case": "off_resonance_probe_too_close",
+      "execution": "actual_bundle_analyzer",
+      "outcome": "PASS",
+      "rejected_by": "OFF_RESONANCE_PROBE_BINDING"
     }
   ],
   "raw_numerical_reference": {
@@ -557,7 +1377,9 @@
         "q": 18529.878163851037,
         "r2_log_amplitude": 0.999999993389322,
         "tau_s": 0.18000010403215538,
-        "u95_frequency_hz": 7.400050392966584e-06,
+        "u95_frequency_calibration_hz": 0.025,
+        "u95_frequency_fit_hz": 7.400050392966584e-06,
+        "u95_frequency_hz": 0.025007400050392967,
         "u95_tau_s": 1.3082341107571698e-06,
         "usable_cycles": 34854
       },
@@ -566,7 +1388,9 @@
         "q": 18529.910532886104,
         "r2_log_amplitude": 0.999999992843303,
         "tau_s": 0.18000041847657172,
-        "u95_frequency_hz": 7.119714286490875e-06,
+        "u95_frequency_calibration_hz": 0.025,
+        "u95_frequency_fit_hz": 7.119714286490875e-06,
+        "u95_frequency_hz": 0.025007119714286492,
         "u95_tau_s": 1.368378601169523e-06,
         "usable_cycles": 34863
       }
@@ -622,9 +1446,11 @@
         "vibration_rms_m_s2": 0.00353416734078984
       }
     },
+    "f_carrier_u95_hz": 0.025,
     "f_ref_hz": 32768.0,
+    "f_witness_hz": 65536.0,
     "implementation_custody": {
-      "analyzer_sha256": "33fc447ef5c545a8408cbd0e6330cdd71a72a5a097d80296b24240f37d0b750f",
+      "analyzer_sha256": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
       "dependency_identity": {
         "byteorder": "little",
         "machine": "AMD64",
@@ -732,9 +1558,9 @@
         }
       },
       "dependency_sha256": "7ed5c6a0295ea2089369804cf45631335f13c5e745904783ea70f8e877dd2cfb",
-      "fixture_sha256": "f7cae242dfb96f00a70ab88957c04a060e4859ef13df823867b2ed50fc042ff7",
-      "schema_sha256": "21ca54f27528701fb9154108681775fed38c648f4706c16c89397255200c9b7d",
-      "signal_path_model_sha256": "7cd08c67e10cad4e1b83082f7fa2beaf8bcc2361a16ee9b861fdddd293594b28"
+      "fixture_sha256": "44cf9b9d1f277cdb04692fd46ffe75f6cf439a2078b21680ba15f3ee0b113342",
+      "schema_sha256": "d08b050dcd7615267439cf722598e49f4475bc217313ce14ed004aedb8eefc21",
+      "signal_path_model_sha256": "31208cdcb39248a44bd90720459c97283e7135d6b0b9b0388c8e535ce46913be"
     },
     "input_custody": {
       "assembly": {
@@ -764,87 +1590,107 @@
           "carrier_population": "EPSON_Q13FC1350000401"
         }
       },
-      "assignment_commitment_sha256": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
-      "bundle_sha256": "560d443b2be487dbe5a203676a5e6b06895e162c38fb87bcd67d7546c06e839f",
+      "assignment_commitment_sha256": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
+      "bundle_sha256": "97c03aa42c4c58354fe0a9870783421cfb67b68cc3643a4ca0156af30bdc9937",
       "byte_receipt_sha256": {
         "arm_0": {
           "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
           "assembly_manifest": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
-          "assignment_commitment": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
+          "assignment_commitment": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
           "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
           "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
-          "chronology_receipt": "caf2e8e21bf8daf53ab66e03fb35870d31a6f383e1332934a921e4b9f34a07fe",
+          "chronology_receipt": "05fc460b26047fb656bd799c531e3c706498b42f129643f5a52bbfa20a05a9fc",
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "82294841c58a586a777cb4de192ccdc4026649c984ed24f1d9fac36a543f1eff",
           "nonlinear_control": "ba7627e92f644a47f2c0e6d8668b7de4817cc414542cf986e0de12ef6f3913b0",
-          "source_queryback": "22a949fc0e145a419074df288bfe60ed017ef376394cac847772f69731cc2370",
-          "topology_receipt": "471c5b331bbbfdcf8af911e491778f56ca5dca3610439ced76ee43cdc2a8d2c9",
+          "resonance_calibration_analyzer": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+          "resonance_calibration_artifact": "89430fab7d33bc2191e7d27cc61d84b7e966013bb779db6609c26373ba42c253",
+          "resonance_calibration_raw": "2a761eba250d27753525da47f25fffcd629ae6eb61601089ab84c19724d79b53",
+          "resonance_calibration_source_queryback": "08bb2a0f8f0c78db890ef3833156917689564ee5b1faa5501442ffd0f6d5ef1b",
+          "source_queryback": "bc073b9dce1cff4d5415e294b2f1a1019a78b7aab993c47debb7091210fd3423",
+          "topology_receipt": "070ad16be90673e116eac70af0d48c92518302d213d71a2ae021b3177168aadd",
           "topology_scan": "dea79e0360ea2d365f289dcd3c4a41a4e83897ddcab11c9971e8c33ae47c247a"
         },
         "arm_pi": {
           "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
           "assembly_manifest": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
-          "assignment_commitment": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
+          "assignment_commitment": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
           "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
           "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
-          "chronology_receipt": "9f12d22dea0633b2febb166121fbe33f92e7a770fd1f82fc75df7c204d93716b",
+          "chronology_receipt": "65e1868a85222a608d88033a2023d3dab1e5a7a158e6e6f165e6eb6265c5a257",
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "7692cc581c9e704095fe397367254d12bafa7560e56616aeb259ba3eef10e946",
           "nonlinear_control": "0a82adaa174abe32073ab8ac84a9f5bbf3159332622a79de27f9ea096e71cb77",
-          "source_queryback": "9ea27dfa2591a724fa33ec8148f64fdff5ff9d3b90f842bc90e1751293b0b5e8",
-          "topology_receipt": "2a129b13a6a2d7bacefbd26527b739d85cece547e9cbf0f6393359f1995a531c",
+          "resonance_calibration_analyzer": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+          "resonance_calibration_artifact": "e9d6393a8ab8ef2f35ef3f87f6db032b5d737233c29cd3a4e73b2f968877296b",
+          "resonance_calibration_raw": "ca0203e62cdb894e4a5d5ace493f5ff7903b4f67f232cd3dff07c1806fb6a2aa",
+          "resonance_calibration_source_queryback": "08bb2a0f8f0c78db890ef3833156917689564ee5b1faa5501442ffd0f6d5ef1b",
+          "source_queryback": "f27e05f44097f73e0ab06952821fd7439166117059098e336757ce73163140f8",
+          "topology_receipt": "50a724582a68da3ea8a1e1cb10877735c3c6d7de6be8c09035613f598abf915d",
           "topology_scan": "b1acf154441ba229ca4492bb7579b474b44e0905a2cf4fc47e6d88a788dbd011"
         },
         "dummy_c0": {
           "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
           "assembly_manifest": "af929cd9ee779f754a2ed0d56eab19b17a4abca423cdab5c6970688fcd09cad8",
-          "assignment_commitment": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
+          "assignment_commitment": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
           "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
           "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
-          "chronology_receipt": "fff32ed147c4aab35c58d62de2ce203d6c5c2daab4646ffa2ef52dc2ebd59a64",
+          "chronology_receipt": "19428c2da0460fb30d4ff645555957753b9b2479b7b8e8f695f2557e62e832a2",
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "a95faa38146d7db7d87d56e63f6052175a6dcb361678d896a907c37a6ecb73bb",
           "nonlinear_control": "d396731257d3251548efb3bf0bd46de832b9e2828345b9b8439132ffc6fc7e24",
-          "source_queryback": "22a949fc0e145a419074df288bfe60ed017ef376394cac847772f69731cc2370",
-          "topology_receipt": "70682fd531aeccdd4fad85a6ecc9fa8d77360142f68ed026761977c175b6e966",
+          "resonance_calibration_analyzer": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+          "resonance_calibration_artifact": "0c54105ce09c34f21824f382a57b58833d6f25d4a1fe3bed1e4cfd55309ed3d9",
+          "resonance_calibration_raw": "f3b637211e3aba9eec7f2a97dce0c4841ff62c76db006d22e662e78380fbf740",
+          "resonance_calibration_source_queryback": "08bb2a0f8f0c78db890ef3833156917689564ee5b1faa5501442ffd0f6d5ef1b",
+          "source_queryback": "bc073b9dce1cff4d5415e294b2f1a1019a78b7aab993c47debb7091210fd3423",
+          "topology_receipt": "0c2c6721acb8ee25dc8abf9b19ceb1057222599b0f74996c40ac9a57269650c8",
           "topology_scan": "747af2ee03095b6d2785f4f5af439a570bf26cd70713affbfb1b3ec06d89d4ff"
         },
         "resonator_removed": {
           "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
           "assembly_manifest": "895309dc882c2c882db37b6861c183cefa630bdc34fff4b802e7b577f3499b8a",
-          "assignment_commitment": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
+          "assignment_commitment": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
           "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
           "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
-          "chronology_receipt": "9a82a3c8f312226b05b23b52b4837b2fec7cef73b8ce36119c5b9c318200b0d6",
+          "chronology_receipt": "5fb8d236cf5819ba938784364604aae9698c3cac793ccea146a143adaab68962",
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "f55d18449946ec8b09a697ba4d538d1175785d77814e0f52a24b183ca720c893",
           "nonlinear_control": "b59d5fccb0807a10cadb6c113153c668406f15f5723efeeb2c29b5defea0982b",
-          "source_queryback": "22a949fc0e145a419074df288bfe60ed017ef376394cac847772f69731cc2370",
-          "topology_receipt": "c36e0a4d186b438c8c7f8c1eee19cf21eb604e509ed27bfa8e1cb9b021bde3cc",
+          "resonance_calibration_analyzer": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+          "resonance_calibration_artifact": "1a6332ab8d6f5a2c985fa6c4f31c01dabe408f339fc371d493ea72048f0e8613",
+          "resonance_calibration_raw": "c470c580e9ccd620af34d414de1aef65a37887ec8c65616ead754598d06a5c51",
+          "resonance_calibration_source_queryback": "08bb2a0f8f0c78db890ef3833156917689564ee5b1faa5501442ffd0f6d5ef1b",
+          "source_queryback": "bc073b9dce1cff4d5415e294b2f1a1019a78b7aab993c47debb7091210fd3423",
+          "topology_receipt": "07ccc56ec489feaa5af3dd3b48a0397c0ca2494a606aa4b75887200857a42419",
           "topology_scan": "71f61ebe25f2619a1095abe5f6a16045a18cb8e037b196166d2ba90072785829"
         },
         "zero_drive": {
           "adapter_source": "2eaf66231e49a7e5f2673101b4703a0cbbe92c314570ac8281f3794e5c1cf1f9",
           "assembly_manifest": "14e16c4aa2ef6fb9446aa2542f355ff10bfba87b9cad049b5146c51642e6a5f4",
-          "assignment_commitment": "958ade804c74484ed7cb5eceadc2203f876b66907f2e6c1e9a78b34bde754c0a",
+          "assignment_commitment": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
           "assignment_reveal": "32a15e11369c68ee3a32dea08aded26784cf928730ebcf65a6dc137dffbf8976",
           "calibration_receipt": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
-          "chronology_receipt": "88e9d53423a1da1fddad11c57add105e5257a50f3f092954ca89c323c0063bca",
+          "chronology_receipt": "873cccf8a23918cd672ffe5d5b96c82627dae52e444d9ecdb105e532cccb0941",
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "07509814275175032f52ace905e5cc448a70ad816c8724f4951c443d98423b8f",
           "nonlinear_control": "fc2ad8097e899816545f5dedd60fe09286837c651243811f3cd6fab9923f1d7a",
-          "source_queryback": "22a949fc0e145a419074df288bfe60ed017ef376394cac847772f69731cc2370",
-          "topology_receipt": "2414dc45e7313cf73041eebd2a180875c192663be772bd7cc9b53c02849b0289",
+          "resonance_calibration_analyzer": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+          "resonance_calibration_artifact": "ac073e985dc0d316ed2d6a6fe0d2dde9054b815adad8f66c0e3fc7ec885932ac",
+          "resonance_calibration_raw": "d61cecadc374635fd040c4f9b984074c2ae69f4d9bf88f778bcbdff51def8e43",
+          "resonance_calibration_source_queryback": "08bb2a0f8f0c78db890ef3833156917689564ee5b1faa5501442ffd0f6d5ef1b",
+          "source_queryback": "bc073b9dce1cff4d5415e294b2f1a1019a78b7aab993c47debb7091210fd3423",
+          "topology_receipt": "6d254b7001a1a0d372cf79ee29119c678fe7b11342a6973f41b4fa1b09bf268c",
           "topology_scan": "8626fefa6fb95afcd20cac3613f8091fd25882af39714c708e6d2200ea446f96"
         }
       },
       "calibration_sha256": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
       "metadata_sha256": {
-        "arm_0": "632247e276dea9584c9ac6cafe83d0d22216f163b31be8286831a1d0894fd575",
-        "arm_pi": "343055419a46906280fbcc3468453143155e8316f6b1366bbfa4e5aed76e01f1",
-        "dummy_c0": "150d449667d2dc0f48b3215a876cddc2498e16096c46240d8919fe72ab6b5e50",
-        "resonator_removed": "d70f427d6adfc6e9bebff31e8f112a19c2189784ba376abdd1c8f1b843882a51",
-        "zero_drive": "dfae26ba3081f8cf1877ed79189154a39d8019e7273d3dd6489d4c3f853296b2"
+        "arm_0": "7573bade1179873f383d1177c0ac3265ce230a3f2c0be8f02e3e6c795f5d1064",
+        "arm_pi": "5e3b851845c2204a11d440dfe51a139bddf4ed07e0a950ff6497b9db2adba75a",
+        "dummy_c0": "00f53b8a94ff766cde798556d635560e04fd8548bc5f71819ff0781e11414f7f",
+        "resonator_removed": "553bab4987d34e6bb2c1413397d717aa7186cc990cc4d507281d564c8c9c3633",
+        "zero_drive": "9d00e6a926b0f272c93ed534bc802d488dde740b5d2d11e887c5d3a933210e93"
       },
       "payload_sha256": {
         "arm_0": "b97e455ee72a13a5e1a7f890f0289a27ade2baa370d539df051ed046c9347d1b",
@@ -862,6 +1708,58 @@
       "zero_drive": 970
     },
     "noise_sigma": 5.773502691896259e-06,
+    "off_resonance_controls": {
+      "arm_0": {
+        "fitted_decay_seconds": 0.09999999999999978,
+        "fitted_f_carrier_hz": 32767.999999999993,
+        "fitted_q_factor": 10294.370807283009,
+        "fitted_u95_hz": 0.02500000000145519,
+        "linewidth_hz": 3.183098861837914,
+        "probe_frequency_hz": 32831.661977236756,
+        "required_separation_hz": 63.66197723675828,
+        "response_ratio": 0.019
+      },
+      "arm_pi": {
+        "fitted_decay_seconds": 0.09999999999999978,
+        "fitted_f_carrier_hz": 32767.999999999993,
+        "fitted_q_factor": 10294.370807283009,
+        "fitted_u95_hz": 0.02500000000145519,
+        "linewidth_hz": 3.183098861837914,
+        "probe_frequency_hz": 32831.661977236756,
+        "required_separation_hz": 63.66197723675828,
+        "response_ratio": 0.019
+      },
+      "dummy_c0": {
+        "fitted_decay_seconds": 0.09999999999999978,
+        "fitted_f_carrier_hz": 32767.999999999993,
+        "fitted_q_factor": 10294.370807283009,
+        "fitted_u95_hz": 0.02500000000145519,
+        "linewidth_hz": 3.183098861837914,
+        "probe_frequency_hz": 32831.661977236756,
+        "required_separation_hz": 63.66197723675828,
+        "response_ratio": 0.019
+      },
+      "resonator_removed": {
+        "fitted_decay_seconds": 0.09999999999999978,
+        "fitted_f_carrier_hz": 32767.999999999993,
+        "fitted_q_factor": 10294.370807283009,
+        "fitted_u95_hz": 0.02500000000145519,
+        "linewidth_hz": 3.183098861837914,
+        "probe_frequency_hz": 32831.661977236756,
+        "required_separation_hz": 63.66197723675828,
+        "response_ratio": 0.019
+      },
+      "zero_drive": {
+        "fitted_decay_seconds": 0.09999999999999978,
+        "fitted_f_carrier_hz": 32767.999999999993,
+        "fitted_q_factor": 10294.370807283009,
+        "fitted_u95_hz": 0.02500000000145519,
+        "linewidth_hz": 3.183098861837914,
+        "probe_frequency_hz": 32831.661977236756,
+        "required_separation_hz": 63.66197723675828,
+        "response_ratio": 0.019
+      }
+    },
     "physical_claim_authorized": false,
     "relation_metrics": {
       "common_relative_start_first": 12499,
@@ -899,7 +1797,7 @@
     "signal_path": {
       "arm_0": {
         "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
-        "common_mode_peak_v": 0.0625,
+        "differential_peak_v": 0.125,
         "h2_open": {
           "imag": -0.039152847899462655,
           "magnitude": 0.04998616937912963,
@@ -928,7 +1826,7 @@
       },
       "arm_pi": {
         "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
-        "common_mode_peak_v": 0.0625,
+        "differential_peak_v": 0.125,
         "h2_open": {
           "imag": -0.039171010425785954,
           "magnitude": 0.05000450633152917,
@@ -957,7 +1855,7 @@
       },
       "dummy_c0": {
         "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
-        "common_mode_peak_v": 0.0625,
+        "differential_peak_v": 0.125,
         "h2_open": {
           "imag": -0.03916714375593986,
           "magnitude": 0.0500006252723576,
@@ -986,7 +1884,7 @@
       },
       "resonator_removed": {
         "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
-        "common_mode_peak_v": 0.0625,
+        "differential_peak_v": 0.125,
         "h2_open": {
           "imag": -0.03916714375593986,
           "magnitude": 0.0500006252723576,
@@ -1015,7 +1913,7 @@
       },
       "zero_drive": {
         "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
-        "common_mode_peak_v": 0.0625,
+        "differential_peak_v": 0.125,
         "h2_open": {
           "imag": -0.03916714375593986,
           "magnitude": 0.0500006252723576,
@@ -1234,7 +2132,7 @@
     }
   },
   "schema": "p0.analyzer-reference-results.v1",
-  "scientific_negative_count": 32,
+  "scientific_negative_count": 33,
   "semantic_outcomes": [
     {
       "case": "ideal_source_off_ringdown",
@@ -1318,6 +2216,13 @@
       "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
       "outcome": "PASS",
       "rejected_by": "OFF_RESONANCE_RESPONSE"
+    },
+    {
+      "case": "off_resonance_probe_binding",
+      "class": "scientific_negative",
+      "execution": "summary_schema_and_decision_law__not_raw_analyzer_evidence",
+      "outcome": "PASS",
+      "rejected_by": "OFF_RESONANCE_PROBE_BINDING"
     },
     {
       "case": "detector_impulse_memory",

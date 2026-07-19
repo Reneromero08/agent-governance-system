@@ -1,12 +1,12 @@
 {
   "authority": "AUTHORIZE P0 BUILD-READINESS ONLY",
   "build_readiness_decision": "P0_BUILD_READINESS_PACKET_FROZEN",
-  "candidate_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+  "candidate_root": "b153b3842c579d69005e3c34163a98aab1c7e04f896ea1c894c684921154daa2",
   "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
-  "manifest_sha256": "3e6d99d07f6540cb075e8d872966286f52a69a411a8345344c6bc7ef9394367f",
+  "manifest_sha256": "a63d3ceeead99a640c50622b43f9e0a310386c94b448367ad2179db02b09cf6f",
   "mutation": {
-    "full_mutations_rejected": 40151,
-    "signal_path_mutations_rejected": 80,
+    "full_mutations_rejected": 42496,
+    "signal_path_mutations_rejected": 82,
     "surviving_mutants": 0
   },
   "next_authority_boundary": "USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD",
@@ -14,14 +14,14 @@
   "physical_observation": false,
   "qualification": {
     "analyzer": {
-      "fixture_count": 55,
-      "fixture_sha256": "f7cae242dfb96f00a70ab88957c04a060e4859ef13df823867b2ed50fc042ff7",
-      "malformed_or_custody_negative": 15,
+      "fixture_count": 61,
+      "fixture_sha256": "44cf9b9d1f277cdb04692fd46ffe75f6cf439a2078b21680ba15f3ee0b113342",
+      "malformed_or_custody_negative": 20,
       "positive": 8,
-      "raw_adversaries": 54,
-      "result_sha256": "6fe0893b9a0e40db0bf420538efc946a39d5048200cc1fe5e7ca0b8c6f26c857",
-      "schema_sha256": "21ca54f27528701fb9154108681775fed38c648f4706c16c89397255200c9b7d",
-      "scientific_negative": 32,
+      "raw_adversaries": 58,
+      "result_sha256": "36e670503c36a4ad9969d995aac57b4752f850e651d09951cd609d308040eaa0",
+      "schema_sha256": "d08b050dcd7615267439cf722598e49f4475bc217313ce14ed004aedb8eefc21",
+      "scientific_negative": 33,
       "signal_path_custody_negative": 4,
       "signal_path_positive": 8,
       "signal_path_scientific_negative": 11
@@ -29,9 +29,9 @@
     "bom": {
       "electrical_component_count": 230,
       "line_count": 48,
-      "sha256": "9b83eb29cd2d94e0eee3ff7fcab532ce8e1a862df63167abba420289bb6bd47c"
+      "sha256": "446641c58ea4b8671277347d8612837f9f604441f340820b7f9519fdde05e31d"
     },
-    "candidate_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+    "candidate_root": "b153b3842c579d69005e3c34163a98aab1c7e04f896ea1c894c684921154daa2",
     "claims": {
       "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
       "closed_findings": 17,
@@ -52,17 +52,19 @@
     "component_documents": {
       "component_custody_state_counts": {
         "LOCAL_BYTES_CAPTURED_AND_HASH_VERIFIED": 8,
+        "LOCAL_CURRENT_BYTES_CAPTURED__LEGACY_DIFFERS": 1,
         "MANUAL_CAPTURE_REQUIRED": 10,
-        "URL_AND_LEGACY_HASH_RECORDED__BYTES_NOT_LOCAL": 6
+        "URL_AND_LEGACY_HASH_RECORDED__BYTES_NOT_LOCAL": 5
       },
       "records": 24,
       "research_custody_state_counts": {
         "LOCAL_BYTES_CAPTURED_AND_HASH_VERIFIED": 11,
+        "LOCAL_CURRENT_BYTES_CAPTURED__LEGACY_DIFFERS": 1,
         "MANUAL_CAPTURE_REQUIRED": 18,
-        "URL_AND_LEGACY_HASH_RECORDED__BYTES_NOT_LOCAL": 6
+        "URL_AND_LEGACY_HASH_RECORDED__BYTES_NOT_LOCAL": 5
       },
       "research_record_count": 35,
-      "sha256": "a0457763d93dcd71581c03103db762872176eb0c33a293a6da497f7aea6a6131"
+      "sha256": "2ec0c8f430082c9c23bcaa7863b584d4bb5bdc47038337803d67e5127b1d1e24"
     },
     "fabrication": {
       "board_instances": 9,
@@ -77,20 +79,21 @@
       "connectors": 18,
       "fixtures": 3,
       "nets": 162,
-      "sha256": "10dc13d96668731e50db02a4c22e49b4398e90d1ddb3c887167da6491c8c5603"
+      "sha256": "f37baa5063a642526f86a2d6b2f2fd85c86e8019d6d0c8ed794f747efe548b72"
     },
     "research": {
       "custody_state_counts": {
         "LOCAL_BYTES_CAPTURED_AND_HASH_VERIFIED": 11,
+        "LOCAL_CURRENT_BYTES_CAPTURED__LEGACY_DIFFERS": 1,
         "MANUAL_CAPTURE_REQUIRED": 18,
-        "URL_AND_LEGACY_HASH_RECORDED__BYTES_NOT_LOCAL": 6
+        "URL_AND_LEGACY_HASH_RECORDED__BYTES_NOT_LOCAL": 5
       },
       "manifest_schema": "p0.research-bundle-manifest.v1",
-      "manifest_sha256": "4dd4df0d806b083d9a9e7fe3c0f255fc56e729d3be83de1ba567fade42166fad",
+      "manifest_sha256": "ed9118d3a6a08ca3b20d25805cdbb90ee695fb12b79fccb209eddca439353c30",
       "record_count": 35,
       "repository_safe_file_count": 23,
       "scripts": {
-        "scripts/build_custody_snapshot.py": "45b786689be9052aae143b0effc2ed5fda750595763437be54eea0ec47c5e804",
+        "scripts/build_custody_snapshot.py": "6a12abd2fc07e4a0d08c0a499ae0a67cbf4dfd4ca2a396fdd1d2d193686dd0dd",
         "scripts/download_sources.py": "34b3a3ae2c3ae4d0ad55f4dacabf3f072fa4012aac90df89e60fad922892d4d5",
         "scripts/import_repo_context.py": "322524ecd1b16218affa9d1421ea420c083fbde35677469a0c58a43c19a289bf",
         "scripts/make_complete_archive.py": "b05216f120e18329f16c07397ae416691142635e0ef217c89c1d9c50a95ec51c",
@@ -98,12 +101,29 @@
       },
       "source_commit": "cb53976612cbe83bec82df826a9889418f7e0b89"
     },
+    "resonance_load_law": {
+      "model_sha256": "a37b5abdb31f8e740c9cd97ed951efcffd73b8023638b462e3a0314789532812",
+      "predicted_envelope": {
+        "decay_seconds": [
+          0.22857142857142856,
+          0.4799999999999999
+        ],
+        "q_factor": [
+          23534.298886571858,
+          49476.31438285494
+        ],
+        "series_resonance_hz": [
+          32774.0,
+          32810.00000000001
+        ]
+      }
+    },
     "scripts": {
       "p0_build_readiness_design.py": {
-        "bytes": 120424,
+        "bytes": 124125,
         "forbidden_capability_imports": [],
-        "git_blob_sha1": "637b74b3eeddd2755dabb52a80adbcbe521b851b",
-        "sha256": "42c9392a4676d87b03287a10c343ad4946683fadf554fdcb4c3a7cfc01d38241"
+        "git_blob_sha1": "83c12c3f457e43b48979c2de9e0b0ea741fb4372",
+        "sha256": "44694f2bde31ffa15962474c09ff6eef18094310ce234ca7385d8a244b5f8625"
       },
       "p0_build_readiness_mutation_test.py": {
         "bytes": 5497,
@@ -112,42 +132,42 @@
         "sha256": "1304eaeb26dd188523548e9d9fd68095461d70ac1075f6b49cbb0b3387096986"
       },
       "p0_build_readiness_validator.py": {
-        "bytes": 102204,
+        "bytes": 109453,
         "forbidden_capability_imports": [],
-        "git_blob_sha1": "ffa226f7819117cc98441708dd681f89a32349c5",
-        "sha256": "6c3e0d8f045e20654d4d2b96b1d0b556315f42aa3b245366dc1a277519f414e1"
+        "git_blob_sha1": "04536d116dbb1f7733987f0ce9d76b6b4a9f8003",
+        "sha256": "d07fc28d42041cb4923293f7c7087bbc7a515aa5f385b4088c3977fbc1a023d8"
       },
       "p0_scientific_analyzer.py": {
-        "bytes": 179630,
+        "bytes": 205268,
         "forbidden_capability_imports": [],
-        "git_blob_sha1": "a730d59cb834d7ee57e98155eec6b5acd55f681f",
-        "sha256": "33fc447ef5c545a8408cbd0e6330cdd71a72a5a097d80296b24240f37d0b750f"
+        "git_blob_sha1": "c61b5708acb9ed9974c85bc15679e9a1b43fa618",
+        "sha256": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6"
       },
       "p0_signal_path_ordering_proof.py": {
-        "bytes": 18023,
+        "bytes": 18009,
         "forbidden_capability_imports": [],
-        "git_blob_sha1": "e12939e51a4f84c66e511f5c609ac2bbc24dab99",
-        "sha256": "3bb6e9e86994bea8bbd9e50e61a5905147eda89cfcca805fb78a6464b4b61f9d"
+        "git_blob_sha1": "249be4a3385c20e3da283e4604f315329a9c6c16",
+        "sha256": "c10c62f8f36b5738c1d4ea6cb665d1d1339a196fb142cd10e5dd6abd4b55e78b"
       },
       "p0_signal_path_witness_model.py": {
-        "bytes": 30424,
+        "bytes": 30560,
         "forbidden_capability_imports": [],
-        "git_blob_sha1": "e804cf65007178be3ac69b818e3f0b1318052260",
-        "sha256": "e087fd4bf9d6b9d86e8aa1893cca0894685f86469980a8718897db5b2d35a407"
+        "git_blob_sha1": "b1ed4554db245db8ce85fe40a91f635f9e29c245",
+        "sha256": "170ef8060e60947be7b71caa8507f0308018ab2a05341082b4597bf6bfca5747"
       },
       "p0_signal_path_witness_mutation_test.py": {
-        "bytes": 15117,
+        "bytes": 15216,
         "forbidden_capability_imports": [],
-        "git_blob_sha1": "0fb025b3cc7d68c312f113b5a7fb0f206523acfe",
-        "sha256": "2043b0e2c26e493274a82dbfa7e43462b1c9edc30a7d772cfdae6a62aaac614a"
+        "git_blob_sha1": "b8e5a68f40beae41a1ba5f5ee99736c7af0568a2",
+        "sha256": "a143f7d542e42e533ae5aa466c30737866c249bd371cc48aed268af9ac5b26de"
       }
     },
     "signal_path": {
       "candidate_count": 35,
       "corner_count_per_candidate": 131072,
       "feasible_candidates": 23,
-      "model_sha256": "7cd08c67e10cad4e1b83082f7fa2beaf8bcc2361a16ee9b861fdddd293594b28",
-      "ordering_proof_sha256": "baf5f003bc957cfd192db60ad23716ce9dd03972e8b87758e55bdce75762c818",
+      "model_sha256": "31208cdcb39248a44bd90720459c97283e7135d6b0b9b0388c8e535ce46913be",
+      "ordering_proof_sha256": "4e2daca265a238e569c1691ccfdb1a3a48d7500f59d5e2b60a030f901d592505",
       "selected_amplitude_vpp": 0.1,
       "selected_part": "Vishay TNPW08051M00BEEN",
       "selected_resistance_ohm": 1000000.0
@@ -156,12 +176,14 @@
   "repair_decision": "P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED",
   "reviews": {
     "agent_ids": [
-      "/root/p0sp_circuit_carrier",
-      "/root/p0sp_path_sourceoff",
-      "/root/p0sp_analyzer_controls",
-      "/root/p0sp_claims_authority"
+      "p0r-root-circuit-20260719",
+      "p0r-root-custody-20260719",
+      "codex-p0r-root-analyzer-20260719",
+      "/root/p0r_root_claims"
     ],
     "count": 4,
+    "description": "role-separated root-bound declarations; not externally reproducible independence",
+    "focused_repair_reviewer": "codex-p0-numerical-repro-review-20260719",
     "open_findings": 0,
     "verdict": "PASS"
   },

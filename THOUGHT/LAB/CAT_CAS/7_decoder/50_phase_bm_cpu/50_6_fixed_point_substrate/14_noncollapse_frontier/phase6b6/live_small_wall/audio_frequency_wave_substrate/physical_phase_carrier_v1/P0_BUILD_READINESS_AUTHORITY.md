@@ -2,151 +2,39 @@
 
 **Authority:** `AUTHORIZE P0 BUILD-READINESS ONLY`  
 **Authority date:** `2026-07-16`  
-**Authority parent:** `2cfa87a7f10aae224768a0c3283b3e035a10123b`  
 **Package:** `physical_phase_carrier_v1`  
 **Claim ceiling:** `NON_EXECUTING_P0_BUILD_READINESS_ONLY`  
-**Current status:** `P0_BUILD_READINESS_BLOCKED__POST_QUALIFICATION_AUDIT`<br>
-**Current engineering boundary:** `P0_RESONANCE_LOAD_LAW_REPAIR_REQUIRED`<br>
+**Current status:** `P0_BUILD_READINESS_PACKET_FROZEN`
 **Physical authority:** none
 
-## 1. Authorized work
+## Authorized result
 
-This authority permits only the final non-executing preparation required before a later
-procurement or physical-execution decision:
+The package now contains an exact non-purchasing architecture, deterministic offline analyzer, synthetic fixtures and adversaries, calibration-derived resonance/load law, bounded binary-corner modeling, and reviewed source/path custody.
 
-```text
-select exact manufacturer parts and ordering identities
-freeze the exact four-channel acquisition and source topology
-freeze exact gate, relay, detector, environment, limiting, and witness components
-draft the final wiring/netlist and assembly drawings
-implement and qualify the raw-to-derived scientific analyzer
-implement malformed-payload, calibration, custody, and synthetic-control fixtures
-bind final manufacturer datasheets and manuals by SHA-256 when locally materialized
-produce an exact non-purchasing BOM
-produce a procurement-readiness packet
-produce an unpowered-build packet
-produce a separate bounded physical-execution contract
-run read-only reviews and repository checks
-repair the resonance/load, continuous-envelope, and common-mode laws identified by the post-qualification audit
-```
-
-The package may replace a reference-class candidate with an exact component only when the
-replacement remains inside the already frozen carrier/access class and the substitution is
-explicitly documented. It may not silently change the physical state, source-off law,
-observable, metric law, claim ceiling, or silicon-transposition target.
-
-## 2. Forbidden work
-
-This authority does not permit:
+The resonance/load repair establishes only:
 
 ```text
-human vendor communication or quote request
-inventory reservation or sample request
-cart action or purchase
-commit or push without a separate explicit user instruction
-fabrication order
-unpowered physical assembly
-soldering, wiring, probing, continuity measurement, or inspection of actual parts
-power application
-waveform generation
-ADC, DAC, oscilloscope, digitizer, lock-in, or instrument operation
-piezo, quartz, relay, switch, accelerometer, or transducer operation
-audio playback or recording
-live hardware, target, SSH, or SCP contact
-physical data generation
-physical claim generation
-retry or no-retry execution authority
-```
-
-No document produced under this authority may imply that a part was acquired, inspected,
-calibrated, connected, or operated.
-
-## 3. Required build-readiness deliverables
-
-The build-readiness packet must close all of the following before promotion:
-
-```text
-exact carrier ordering specification and permitted procurement substitutions
-exact source, source monitor, current limiter, gate, relay, guard, and termination parts
-exact high-impedance sensing implementation and input-admittance budget
-exact four-simultaneous-channel 16-bit acquisition instrument and raw export law
-exact environment sensors and trigger/timebase integration
-final channel map, star-ground/shield law, relay witness code, and source-off netlist
-raw scientific analyzer with build/self-test/verify modes
-strict raw/evidence/calibration schemas and malformed-payload negative suites
-assembly-, role-, event-, queryback-, and chronology-bound topology custody
-synthetic ideal, feedthrough, detector-memory, switch-transient, phase, decay, and null fixtures
-analysis portability and numeric-reproduction law
-final conservative limits derived from the selected parts
-prospectively closed resonance/load and preparation-frequency law
-rigorous continuous-parameter enclosure or explicitly bounded binary-corner wording
-observable or conservatively proven common-mode operating law
-non-purchasing BOM with quantities, alternates, and disallowed substitutions
-unpowered assembly procedure that remains separately unauthorized
-bounded execution contract that remains separately unauthorized
-four independent read-only reviews with externally checkable task/receipt
-provenance and zero open material findings
-```
-
-## 4. Required decision token
-
-The build-readiness package may emit exactly one:
-
-```text
+P0_RESONANCE_LOAD_LAW_REPAIR_ESTABLISHED
+P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED
 P0_BUILD_READINESS_PACKET_FROZEN
-P0_BUILD_READINESS_BLOCKED
-P0_BUILD_READINESS_INCONCLUSIVE
 ```
 
-`P0_BUILD_READINESS_PACKET_FROZEN` means only that exact parts, source code, schemas,
-fixtures, topology, limits, and later execution law are ready for a separate user decision.
-It establishes no physical resonance, post-source persistence, pi relation, computation,
-restoration, silicon behavior, bit replacement, or Wall crossing.
+It establishes no physical resonance, persistence, phase relation, computation, restoration, silicon behavior, bit replacement, or Wall crossing.
 
-The package-local validator proves candidate-byte structure and tamper detection.
-It may emit the frozen token only after four externally attributable independent
-PASS receipts bind the exact candidate root and zero material findings remain.
+## Forbidden work
 
-The signal-path repair token does not by itself satisfy the full build-readiness token.
+This authority does not permit human vendor communication or quote request, inventory or cart action, purchase, fabrication, assembly, soldering, wiring, probing, physical inspection, power, waveform generation, instrument operation, playback, recording, acquisition, physical calibration, SSH/SCP, target contact, or physical claims. It also does not permit commit or push without a separate explicit user instruction; that separate instruction governs repository publication only and grants no physical authority.
 
-## 5. Current stop boundary
+The committed common-mode law is prospective: current differential bytes support only differential clipping. A future powered operating envelope must separately define and validate common-mode observability.
 
-The active engineering boundary is:
+## Review statement
 
-```text
-P0_RESONANCE_LOAD_LAW_REPAIR_REQUIRED
-```
+The research correction has four role-separated root-bound PASS declarations at root `97441363687e8d8de2daeffb1fbad157cf94f01b30e1feeb05bdeff718aa33b4`. They are not described as externally reproducible independence. The resonance/load repair adds one focused final read-only review bound to its exact candidate root.
 
-No procurement or unpowered-build authority should be consumed while this audit hold is open.
-
-Only after build readiness is re-established may the lane stop at:
+## Stop boundary
 
 ```text
 USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD
 ```
 
-A later procurement authority does not automatically authorize assembly. A later unpowered
-build authority does not automatically authorize powered execution. A later powered
-execution authority must bind the actual acquired part identities, calibration records,
-wiring inspection, operating limits, retry law, and safety boundary.
-
-## 6. Current decision
-
-```text
-PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
-P0_BUILD_READINESS_AUTHORIZED
-P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED
-P0_BUILD_READINESS_BLOCKED
-P0_RESONANCE_LOAD_LAW_REPAIR_REQUIRED
-PHYSICAL_PHASE_CARRIER_NOT_YET_OBSERVED
-PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
-PHYSICAL_SILICON_PHONONIC_COMPUTING_NOT_ESTABLISHED
-SMALL_WALL_CROSSED_NOT_PROMOTED
-```
-
-Binding audit and repair documents:
-
-```text
-P0_POST_QUALIFICATION_AUDIT.md
-P0_RESONANCE_LOAD_LAW_REPAIR_CONTRACT.md
-```
+That boundary is not consumed by this packet. Procurement, unpowered build, and powered execution remain separate future authority decisions.

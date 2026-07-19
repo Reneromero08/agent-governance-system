@@ -74,6 +74,26 @@
     {
       "case": "threshold_mutation_after_primary_data",
       "expected_rejection": "THRESHOLD_CUSTODY"
+    },
+    {
+      "case": "unbound_carrier_frequency",
+      "expected_rejection": "MISSING_FIELD"
+    },
+    {
+      "case": "wrong_resonance_calibration_hash",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "calibration_after_assignment",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "source_queryback_frequency_mismatch",
+      "expected_rejection": "SOURCE_CONFIGURATION_MISMATCH"
+    },
+    {
+      "case": "witness_frequency_relation_mismatch",
+      "expected_rejection": "WITNESS_FREQUENCY_RELATION"
     }
   ],
   "positive": [
@@ -260,10 +280,6 @@
       "expected_rejection": "SIGNAL_PATH_2F_RESIDUE"
     },
     {
-      "case": "signal_path_common_mode_raw",
-      "expected_rejection": "SIGNAL_PATH_COMMON_MODE"
-    },
-    {
       "case": "signal_path_assembly_a_replay_into_b",
       "expected_rejection": "SIGNAL_PATH_ASSEMBLY_ROLE"
     },
@@ -302,6 +318,26 @@
     {
       "case": "signal_path_scan_time_lexical_deception",
       "expected_rejection": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "resonance_calibration_raw_garbage",
+      "expected_rejection": "RESONANCE_CALIBRATION_RAW"
+    },
+    {
+      "case": "resonance_calibration_q_claim_mismatch",
+      "expected_rejection": "RESONANCE_CALIBRATION_RAW"
+    },
+    {
+      "case": "source_preparation_before_assignment",
+      "expected_rejection": "CHRONOLOGY_CUSTODY"
+    },
+    {
+      "case": "off_resonance_raw_response",
+      "expected_rejection": "OFF_RESONANCE_RESPONSE"
+    },
+    {
+      "case": "off_resonance_probe_too_close",
+      "expected_rejection": "OFF_RESONANCE_PROBE_BINDING"
     }
   ],
   "schema": "p0.scientific-fixtures.v1",
@@ -325,6 +361,10 @@
     {
       "case": "off_resonance_response",
       "expected_rejection": "OFF_RESONANCE_RESPONSE"
+    },
+    {
+      "case": "off_resonance_probe_binding",
+      "expected_rejection": "OFF_RESONANCE_PROBE_BINDING"
     },
     {
       "case": "detector_impulse_memory",

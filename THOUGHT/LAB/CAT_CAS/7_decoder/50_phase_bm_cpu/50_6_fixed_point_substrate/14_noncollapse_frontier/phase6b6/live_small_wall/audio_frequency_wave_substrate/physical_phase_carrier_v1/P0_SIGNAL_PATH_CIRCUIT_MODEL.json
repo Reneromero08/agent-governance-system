@@ -2411,7 +2411,6 @@
   },
   "frozen_thresholds": {
     "clipping_abs_v_max": 0.45,
-    "common_mode_abs_v_max": 0.1,
     "detector_only_isolated_abs_h2_max": 0.145,
     "dummy_1pf_isolated_abs_h2_max": 0.119,
     "fit_condition_number_max": 1000000.0,
@@ -2432,7 +2431,7 @@
       "end_offset_from_series_run_start_samples": 980,
       "samples": 960,
       "start_offset_from_series_run_start_samples": 20,
-      "valid_cycles": 62.91456
+      "valid_cycles": 62.914464
     },
     "pilot_f1_fractional_perturbation_max": 0.05,
     "pre_phase_h2_rad": {
@@ -2443,7 +2442,7 @@
       "end_offset_from_gate_samples": 240,
       "samples": 192,
       "start_offset_from_gate_samples": 48,
-      "valid_cycles": 12.582912
+      "valid_cycles": 12.5828928
     },
     "r_drop_max": 0.277,
     "same_adg_state_both_windows": "OFF_D_TO_SA_50R"
@@ -2711,5 +2710,5 @@
       4700000.0
     ]
   },
-  "thresholds_sha256": "3baf673f7093d2c4006ab756c7a7112aa8ff72106799b567953babfdb25b9ed0"
+  "thresholds_sha256": "816bd73a5c2b29b26d34206744d401c27901a6943a3449e63ca981a8517d3f70"
 }

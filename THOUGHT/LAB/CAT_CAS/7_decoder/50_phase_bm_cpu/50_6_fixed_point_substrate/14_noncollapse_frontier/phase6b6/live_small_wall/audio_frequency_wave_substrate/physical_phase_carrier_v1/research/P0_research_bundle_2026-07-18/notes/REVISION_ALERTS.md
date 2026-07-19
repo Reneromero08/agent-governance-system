@@ -1,9 +1,17 @@
-# Revision alerts
+# Revision and lifecycle alerts
 
-| Record | Existing label | Current authoritative information | Required response |
+| Record | Prior state | Current authoritative information | Required response |
 |---|---|---|---|
-| ADR45xx | Rev. F | Current data sheet is Rev. G | Retain Rev. G bytes and preserve the old expectation as history. |
-| ST UM2591 | Prior/unspecified | Rev. 2, April 2026; current D01 resource set | Freeze actual board revision and recheck connector/power maps. |
-| SHT4x | 04/2025 | PDF cover says Version 7.1, March 2025 | Record both page label and PDF identity. |
-| Omron G6K | Earlier K106-E1 URL | Official page lists update 06/01/2026 | Download current asset from the official resource page. |
-| Nexperia 1N4148W | Legacy 16,777-byte hash | Current direct PDF identity needs manual confirmation | Do not discard the legacy hash if current bytes differ. |
+| ADR45xx | Rev. F label | Current data sheet is Rev. G | Retain Rev. G bytes and preserve the old expectation as history. |
+| ST UM2591 | Prior/unspecified | Rev. 2, April 2026; current D01 resource set | Freeze the actual board revision and recheck connector/power maps. |
+| SHT4x | 04/2025 page label | PDF cover says Version 7.1, March 2025 | Record both page label and PDF identity. |
+| Omron G6K | Earlier K106-E1 URL | Official page lists update 2026-06-01 | Capture the current asset from the official resource page before procurement. |
+| Nexperia 2N7002PW | Frozen exact part `2N7002PW,115` | Nexperia marks the type Not for Design In | Retain the frozen identity and captured source as design history. Treat production type `NX6008NBKW` only as a same-package-family candidate. No exact suffix or pin-compatible substitution is asserted until pin map, 3.3 V gate margin, on resistance, coil current, thermal behavior, timing and procurement identity pass an explicit review. |
+| Nexperia 1N4148W | Frozen exact part `1N4148W,115`; broken first-party page/PDF identity | Exact current Nexperia source could not be verified | Retain the legacy hash and mark current source custody unresolved. Treat Vishay's current `1N4148W` product family only as an alternative candidate; exact suffix and revision are not bound until electrical limits, capacitance, polarity, footprint, lifecycle and procurement identity pass an explicit substitution review. |
+| SIGLENT SDG1032X | Treated as an unqualified exact source candidate | SIGLENT North America marks it obsolete and recommends SDG1032X Plus, while SIGLENT's global SDG1000X page still lists the original model; current documents are data sheet EN01I (2025-03-18), user manual EN01J (2025-09-22), and programming guide E05C (2026-06-30) | Treat lifecycle and availability as region-dependent. Retain SDG1032X only as an existing-lab-equipment assumption with ownership unasserted. Do not recommend a new purchase. SDG1032X Plus is not an automatic substitution. |
+| Spectrum DN2.59x | Earlier metadata labeled documents 2026-04-23 | Product page lists the data sheet/manual and driver 7.010 dated 2026-05-19; the current data-sheet URL yields bytes matching the retained hash | Record the product-page date separately from byte identity. Do not assert a distinct newer data-sheet revision; capture the current manual before equipment use or procurement. |
+| Vishay TNPW e3 | Direct URL incorrectly used document path `31006` | Current TNPW e3 authority is document `28758`, revision 10-Apr-2026; document `31006` is the distinct lead-bearing TNPW family | Use the `28758/tnpw_e3.pdf` source and retain any old hash only as historical custody. |
+| PMC QTF paper downloads | Guessed filename endpoints were treated as direct PDFs | The passive-damping, resonance-tracking, voltage-shift and voltage-mode endpoints currently return HTML in automated retrieval | Remove direct-PDF claims. Retain the stable article pages, capture the PDF manually through the article interface, and hash the resulting bytes. |
+| QTF voltage-shift paper | Broad low-voltage implication | The 2014 experiment used -130 V to +130 V DC bias and reported a small parabolic shift | Treat only as evidence of a possible large-bias perturbation mechanism, not a material P0 low-voltage AC shift. |
+| ADG1419 model resources | Existence treated as sufficient qualification | Official LTspice, SPICE and IBIS resources exist; an Analog Devices support thread reports a reproducible issue in LTspice 26.0.1 | Treat the report as a version-specific warning, not proof that every model version is defective. Pin model and simulator versions and reproduce data-sheet truth table, on resistance, leakage, off isolation and transition behavior before use as evidence. |
+| Unified QTF theory 2026 | Described as recent theory | arXiv preprint dated May 2026 | Keep it explicitly labeled as a preprint; peer review and independent replication are not asserted. |

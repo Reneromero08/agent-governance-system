@@ -22,6 +22,9 @@ ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "P0_SIGNAL_PATH_CIRCUIT_MODEL.json"
 F1 = 32_768.0
 F2 = 65_536.0
+F_CARRIER_MIN_HZ = 32_768.0
+F_CARRIER_U95_MAX_HZ = 0.05
+F_WITNESS_LOWER_BOUND_HZ = 2.0 * (F_CARRIER_MIN_HZ - F_CARRIER_U95_MAX_HZ)
 FS = 1_000_000
 KB = 1.380649e-23
 TEMPERATURE_K = 303.15
@@ -490,7 +493,6 @@ def build_document() -> dict[str, Any]:
     # corner envelope.  They are fixed here before primary synthetic fixtures.
     thresholds = {
         "clipping_abs_v_max": 0.45,
-        "common_mode_abs_v_max": 0.10,
         "detector_only_isolated_abs_h2_max": math.ceil((envelope["detector_only_isolated_abs_h2"][1] + 0.010) * 1000.0) / 1000.0,
         "dummy_1pf_isolated_abs_h2_max": math.ceil((envelope["dummy_1pf_isolated_abs_h2"][1] + 0.010) * 1000.0) / 1000.0,
         "fit_condition_number_max": 1_000_000.0,
@@ -507,10 +509,10 @@ def build_document() -> dict[str, Any]:
         "minimum_pre_open_complex_separation": 0.020,
         "minimum_pre_pilot_snr": 20.0,
         "nonlinear_or_mechanical_2f_residue_ratio_max": 0.020,
-        "open_window": {"end_offset_from_series_run_start_samples": 980, "samples": OPEN_WINDOW_SAMPLES, "start_offset_from_series_run_start_samples": 20, "valid_cycles": OPEN_WINDOW_SAMPLES * F2 / FS},
+        "open_window": {"end_offset_from_series_run_start_samples": 980, "samples": OPEN_WINDOW_SAMPLES, "start_offset_from_series_run_start_samples": 20, "valid_cycles": OPEN_WINDOW_SAMPLES * F_WITNESS_LOWER_BOUND_HZ / FS},
         "pilot_f1_fractional_perturbation_max": 0.050,
         "pre_phase_h2_rad": {"maximum": math.ceil((envelope["pre_phase_h2_rad"][1] + 0.05) * 1000.0) / 1000.0, "minimum": math.floor((envelope["pre_phase_h2_rad"][0] - 0.05) * 1000.0) / 1000.0},
-        "pre_window": {"end_offset_from_gate_samples": 240, "samples": PRE_WINDOW_SAMPLES, "start_offset_from_gate_samples": 48, "valid_cycles": PRE_WINDOW_SAMPLES * F2 / FS},
+        "pre_window": {"end_offset_from_gate_samples": 240, "samples": PRE_WINDOW_SAMPLES, "start_offset_from_gate_samples": 48, "valid_cycles": PRE_WINDOW_SAMPLES * F_WITNESS_LOWER_BOUND_HZ / FS},
         "r_drop_max": math.ceil((envelope["r_drop"][1] + 0.02) * 1000.0) / 1000.0,
         "same_adg_state_both_windows": "OFF_D_TO_SA_50R",
     }

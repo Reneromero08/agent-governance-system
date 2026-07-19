@@ -1,5 +1,5 @@
 {
-  "candidate_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+  "candidate_root": "b153b3842c579d69005e3c34163a98aab1c7e04f896ea1c894c684921154daa2",
   "claim_ceiling": "NON_EXECUTING_P0_SIGNAL_PATH_WITNESS_REPAIR_ONLY",
   "contact_attestation": {
     "audio_playback_or_recording": 0,
@@ -13,7 +13,7 @@
     "outcome": "PASS",
     "rejected_by": "COMMITTED_MODEL_STALE"
   },
-  "raw_boundary_control_count": 14,
+  "raw_boundary_control_count": 18,
   "raw_boundary_controls": [
     {
       "case": "signal_path_wrong_node_raw_nominal_labels",
@@ -29,11 +29,6 @@
       "case": "signal_path_nonlinear_2f_raw",
       "outcome": "PASS",
       "rejected_by": "SIGNAL_PATH_2F_RESIDUE"
-    },
-    {
-      "case": "signal_path_common_mode_raw",
-      "outcome": "PASS",
-      "rejected_by": "SIGNAL_PATH_COMMON_MODE"
     },
     {
       "case": "signal_path_assembly_a_replay_into_b",
@@ -84,13 +79,38 @@
       "case": "signal_path_scan_time_lexical_deception",
       "outcome": "PASS",
       "rejected_by": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "resonance_calibration_raw_garbage",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_RAW"
+    },
+    {
+      "case": "resonance_calibration_q_claim_mismatch",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_RAW"
+    },
+    {
+      "case": "source_preparation_before_assignment",
+      "outcome": "PASS",
+      "rejected_by": "CHRONOLOGY_CUSTODY"
+    },
+    {
+      "case": "off_resonance_raw_response",
+      "outcome": "PASS",
+      "rejected_by": "OFF_RESONANCE_RESPONSE"
+    },
+    {
+      "case": "off_resonance_probe_too_close",
+      "outcome": "PASS",
+      "rejected_by": "OFF_RESONANCE_PROBE_BINDING"
     }
   ],
   "result": "PASS",
   "schema": "p0.signal-path-mutation-results.v2",
   "semantic_input_mutation_count": 15,
   "semantic_outcomes_sha256": "062359e3434ce6140785a04ab879b3fbacd2af151ae409adc8c4057772f4235f",
-  "structural_mutation_count": 50,
+  "structural_mutation_count": 48,
   "structural_outcomes": [
     {
       "mutation_id": "remove_actual_path_call",
@@ -198,29 +218,19 @@
       "rejected_by": "DEF_USE:phase_open"
     },
     {
-      "mutation_id": "substitute_common_mode_derivation",
-      "outcome": "PASS",
-      "rejected_by": "DEF_USE:common_mode_peak"
-    },
-    {
       "mutation_id": "remove_pre_window_cycle_gate",
       "outcome": "PASS",
-      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_WINDOW_CYCLES:(pre_stop - pre_start) * F_WITNESS / FS < model_number(pre_spec['valid_cycles'], 'model.pre_valid_cycles') - 1e-12"
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_WINDOW_CYCLES:(pre_stop - pre_start) * (f_witness_hz - f_witness_u95_hz) / FS < model_number(pre_spec['valid_cycles'], 'model.pre_valid_cycles') - 1e-12"
     },
     {
       "mutation_id": "remove_open_window_cycle_gate",
       "outcome": "PASS",
-      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_WINDOW_CYCLES:(open_stop - open_start) * F_WITNESS / FS < model_number(open_spec['valid_cycles'], 'model.open_valid_cycles') - 1e-12"
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_WINDOW_CYCLES:(open_stop - open_start) * (f_witness_hz - f_witness_u95_hz) / FS < model_number(open_spec['valid_cycles'], 'model.open_valid_cycles') - 1e-12"
     },
     {
       "mutation_id": "invert_clipping_gate",
       "outcome": "PASS",
       "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_CLIPPING:raw_peak > clip"
-    },
-    {
-      "mutation_id": "invert_common_mode_gate",
-      "outcome": "PASS",
-      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_COMMON_MODE:common_mode_peak > model_number(thresholds['common_mode_abs_v_max'], 'model.common_mode_abs_v_max')"
     },
     {
       "mutation_id": "remove_c2_presence_gate",
@@ -344,5 +354,5 @@
     }
   ],
   "surviving_mutants": 0,
-  "total_mutation_count": 80
+  "total_mutation_count": 82
 }

@@ -1,0 +1,136 @@
+{
+  "authority": "PROSPECTIVE_MODEL_ONLY__NO_PHYSICAL_MEASUREMENT",
+  "calibration_law": {
+    "accept_frequency_hz": [
+      32768.0,
+      32820.0
+    ],
+    "calibration_drive_vpp": 0.1,
+    "coarse_search_hz": [
+      32760.0,
+      32820.0,
+      1.0
+    ],
+    "fine_search": {
+      "half_span_hz": 1.0,
+      "step_hz": 0.025
+    },
+    "fit": "bounded_complex_BVD_magnitude_and_phase",
+    "maximum_f_carrier_u95_hz": 0.05,
+    "q_factor": [
+      4000.0,
+      60000.0
+    ],
+    "retry_law": "ONE_CALIBRATION_PASS__REJECT_ON_FAILURE",
+    "selection": "maximum_fitted_motional_response_within_accepted_interval"
+  },
+  "frequency_binding": {
+    "f_witness_relation": "f_witness_hz == 2 * f_carrier_hz",
+    "propagation": [
+      "source_queryback",
+      "drive_fit",
+      "C2_transfer",
+      "I_Q_projection",
+      "reconstruction",
+      "cycle_counting",
+      "off_resonance_controls",
+      "matched_comparison"
+    ]
+  },
+  "predicted_envelope": {
+    "decay_seconds": [
+      0.22857142857142856,
+      0.4799999999999999
+    ],
+    "q_factor": [
+      23534.298886571858,
+      49476.31438285494
+    ],
+    "series_resonance_hz": [
+      32774.0,
+      32810.00000000001
+    ]
+  },
+  "preparation_law": {
+    "minimum_seconds": 3.0,
+    "proof": "source_preparation_started_utc <= acquisition_started_utc - 3 seconds"
+  },
+  "prospective_bvd_binary_corners": [
+    {
+      "c0_f": 8e-13,
+      "cm_f": 2.9477549514666957e-15,
+      "decay_seconds": 0.22857142857142856,
+      "lm_h": 8000.0,
+      "loaded_terminal_vpp_at_0p100_vpp": 0.04112014299227876,
+      "motional_current_ua_rms_at_0p100_vpp": 0.20768808538000574,
+      "motional_power_uw_at_0p100_vpp": 0.003019403856616879,
+      "q_factor": 23534.298886571858,
+      "ring_up_fraction_after_3s": 0.9999980052662996,
+      "rm_ohm": 70000.0,
+      "sense_load_f": 3.2e-12,
+      "series_resonance_hz": 32774.0,
+      "source_node_vpp_at_0p100_vpp": 0.09992062762580912
+    },
+    {
+      "c0_f": 1.2e-12,
+      "cm_f": 2.945597531472007e-15,
+      "decay_seconds": 0.32,
+      "lm_h": 8000.0,
+      "loaded_terminal_vpp_at_0p100_vpp": 0.03328436006011795,
+      "motional_current_ua_rms_at_0p100_vpp": 0.23535596705964082,
+      "motional_power_uw_at_0p100_vpp": 0.002769621561528937,
+      "q_factor": 32960.08215699038,
+      "ring_up_fraction_after_3s": 0.9999151817647536,
+      "rm_ohm": 50000.0,
+      "sense_load_f": 4e-12,
+      "series_resonance_hz": 32785.99999999999,
+      "source_node_vpp_at_0p100_vpp": 0.09991671486437625
+    },
+    {
+      "c0_f": 8e-13,
+      "cm_f": 1.962055689088251e-15,
+      "decay_seconds": 0.34285714285714286,
+      "lm_h": 12000.0,
+      "loaded_terminal_vpp_at_0p100_vpp": 0.04110969391583979,
+      "motional_current_ua_rms_at_0p100_vpp": 0.20763530957424045,
+      "motional_power_uw_at_0p100_vpp": 0.003017869524739347,
+      "q_factor": 35329.45338436979,
+      "ring_up_fraction_after_3s": 0.9998415386748842,
+      "rm_ohm": 70000.0,
+      "sense_load_f": 4e-12,
+      "series_resonance_hz": 32800.0,
+      "source_node_vpp_at_0p100_vpp": 0.099920617195568
+    },
+    {
+      "c0_f": 1.2e-12,
+      "cm_f": 1.960859860568657e-15,
+      "decay_seconds": 0.4799999999999999,
+      "lm_h": 12000.0,
+      "loaded_terminal_vpp_at_0p100_vpp": 0.03329036028714714,
+      "motional_current_ua_rms_at_0p100_vpp": 0.23539839507185079,
+      "motional_power_uw_at_0p100_vpp": 0.0027706202201201575,
+      "q_factor": 49476.31438285494,
+      "ring_up_fraction_after_3s": 0.9980695458637723,
+      "rm_ohm": 50000.0,
+      "sense_load_f": 3.2e-12,
+      "series_resonance_hz": 32810.00000000001,
+      "source_node_vpp_at_0p100_vpp": 0.09991672085483248
+    }
+  ],
+  "schema": "p0.resonance-load-sanity.v1",
+  "scope": {
+    "continuous_uncertainty_envelope_claimed": false,
+    "physical_claim_authorized": false,
+    "sweep_name": "complete binary-corner sweep"
+  },
+  "selected_load_topology": {
+    "drive_shunt_ohm": 100000.0,
+    "sense_load_f": [
+      3.2e-12,
+      4e-12
+    ],
+    "series_limiter_ohm": 100000.0,
+    "source_output_ohm": 50.0,
+    "topology": "50R_SOURCE__100K_SHUNT__100K_SERIES_LIMITER__FC135_BVD_PARALLEL_C0_AND_SENSE_LOAD"
+  }
+}

@@ -1,222 +1,85 @@
 # P0 resonance and load-law repair contract
 
-**Status:** `P0_RESONANCE_LOAD_LAW_REPAIR_CONTRACT_FROZEN`  
+**Status:** `P0_RESONANCE_LOAD_LAW_REPAIR_ESTABLISHED`
 **Parent audit:** `P0_POST_QUALIFICATION_AUDIT.md`  
 **Preserved result:** `P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED`  
-**Inherited decision:** `P0_BUILD_READINESS_BLOCKED`  
-**Claim ceiling:** `NON_EXECUTING_P0_RESONANCE_LOAD_LAW_REPAIR_ONLY`  
-**Authority:** inherited `AUTHORIZE P0 BUILD-READINESS ONLY`
+**Restored decision:** `P0_BUILD_READINESS_PACKET_FROZEN`
+**Claim ceiling:** `NON_EXECUTING_P0_BUILD_READINESS_ONLY`
 
-This contract authorizes only offline architecture, modeling, implementation, synthetic evidence, review, commit, and push. It authorizes no vendor contact, cart action, purchase, fabrication, assembly, wiring, probing, power, instrument command, playback, recording, acquisition, calibration, target contact, or physical claim.
+This is an offline architecture and synthetic-reference result. It authorizes no vendor contact, cart action, purchase, fabrication, assembly, wiring, probing, power, instrument command, playback, recording, acquisition, physical calibration, target contact, or physical claim.
 
-## 1. Mechanism defect
+## Selected route
 
-The exact carrier ordering identity is a 12.5 pF-load FC-135 crystal. The final carrier node is modeled and constrained near 3.2-4.0 pF. The current source and analyzer nevertheless freeze 32768 Hz before the as-built loaded resonance exists.
+The repair selects a calibration-derived carrier frequency. It does not add a load-matching network and does not freeze a physical operating frequency before an as-built assembly exists.
 
-The committed BVD relation therefore predicts a material resonance range rather than exact nominal operation. The build-readiness packet has not yet shown that the selected source amplitude, preparation interval, detector loading, and fixed analysis law will prepare and observe the intended mechanical state across the selected-part uncertainty region.
-
-## 2. Required architecture decision
-
-Reconstruct and compare the strongest coherent forms of exactly these two routes:
-
-### Route A: load-matched carrier
-
-Add an explicit, exact, low-loss load network that makes the selected crystal's effective load conform to its 12.5 pF ordering identity.
-
-Route A must re-close:
+The prospective one-pass calibration law is frozen in `P0_RESONANCE_LOAD_SANITY_MODEL.json`:
 
 ```text
-OPA810 input-admittance law
-carrier terminal voltage/current/power
-loaded Q and ringdown duration
-source-off feedthrough
-C2 actual-path witness transfer
-empty and 1 pF dummy controls
-board and cable parasitics
-noise and uncertainty
+coarse search: 32760..32820 Hz at 1 Hz
+fine search: +/-1 Hz at 0.025 Hz
+calibration excitation: 0.100 Vpp
+fit: bounded complex BVD magnitude and phase
+accepted f_carrier_hz: 32768..32820 Hz
+maximum f_carrier_u95_hz: 0.050 Hz
+accepted Q: 4000..60000
+selection: maximum fitted motional response in the accepted interval
+retry law: one pass; reject on failure
 ```
 
-Do not add capacitance merely to force 32768 Hz while destroying observability or source separation.
+The prospective BVD binary-corner sanity model bounds expected resonance, Q, decay, and terminal amplitude. It is not a continuous enclosure, physical calibration, or permission to operate anything.
 
-### Route B: calibration-derived carrier frequency
+## Strict frequency custody
 
-Retain the low-capacitance sense node and treat the selected part's actual loaded resonance as a prospectively measured calibration coordinate.
-
-Route B must freeze before any future primary arm:
-
-```text
-search interval
-frequency grid or estimator
-calibration excitation limit
-calibration stopping law
-resonance-selection law
-uncertainty law
-accepted resonance/Q region
-f_carrier binding
-f_witness binding
-source queryback binding
-analyzer and schema binding
-retry/no-retry law
-```
-
-The calibration record may select the frequency only from predeclared resonance data obtained before arm assignment or primary observation. It may not select a favorable phase, decay, or antipodal result.
-
-The analyzer must receive the bound frequency through strict custody. A mutable metadata scalar is insufficient. Frequency identity must be bound to calibration bytes, source queryback, topology receipt, native record, and threshold package.
-
-## 3. Dynamic carrier model
-
-The repair must add a deterministic time-domain or analytically equivalent dynamic model from source preparation through source isolation and ringdown.
-
-At minimum model:
-
-```text
-selected FC-135 BVD parameter region
-actual external load region
-source and limiter impedance
-ADG1419 DRIVE and OFF networks
-K1/K2 closed and open parasitics
-OPA810 and digitizer loading
-preparation duration
-source phase 0 and pi
-switching transient
-post-source free decay
-ADC/noise observation
-```
-
-Required outputs:
-
-```text
-loaded resonance interval
-series and loaded Q intervals
-linewidth interval
-steady-state preparation amplitude interval
-time to reach the frozen preparation fraction
-post-source initial ringdown amplitude interval
-usable-cycle interval
-phase uncertainty interval
-expected source-off transfer/feedthrough interval
-```
-
-A favorable synthetic ringdown inserted after the circuit is not a dynamic closure.
-
-## 4. Frequency-native analyzer repair
-
-Remove hidden dependence on module constants where the physical frequency is not fixed by the acquired topology.
-
-The strict evidence object must bind:
+Every future record must bind:
 
 ```text
 f_carrier_hz
 f_carrier_u95_hz
 f_witness_hz
-frequency-relation law
+f_witness_hz == 2 * f_carrier_hz
 calibration artifact SHA-256
+calibration raw-data SHA-256
 calibration analyzer SHA-256
-source queryback SHA-256
+source and instrument queryback SHA-256
 ```
 
-Every relevant analyzer operation must use the bound value:
+The calibration artifact must also bind the exact assembly, carrier population, Q or decay, completion time, and `primary_observed=false`. Calibration must complete before the assignment commitment. The source-preparation receipt must begin at least 3.000 s before primary acquisition.
+
+The analyzer propagates the bound tuple through the source queryback, drive/reference fit, C2 transfer, I/Q projection, reconstruction, cycle counting, off-resonance controls, and matched-arm comparison. Nominal-frequency constants are restricted to synthetic fixture generation; an AST regression test rejects their use by operational analysis functions.
+
+The calibration receipt alone is not sufficient. The bound raw file must be a strict coarse/fine complex sweep whose selected frequency, Q, decay, and uncertainty are recomputed by the offline analyzer. Each role also carries a raw off-resonance response at exactly `f_carrier + max(20 Hz, 20 calibrated linewidths)`. Self-consistently rehashed invalid bytes, a too-close probe, or a response ratio above 0.020 are hard rejections.
+
+## Corrected claim laws
+
+The 131072-point result is called a `complete binary-corner sweep`. It is not called a complete continuous uncertainty envelope.
+
+The analyzer retains the directly observable differential clipping gate. It no longer derives or claims true input common mode from differential bytes. Any future powered operating envelope must separately define and validate common-mode observability before authority.
+
+The earlier four research-correction reviews are described as four role-separated root-bound review declarations. Their structured booleans do not establish externally reproducible independence. This repair requires one focused final read-only review of the exact repaired candidate root.
+
+## Required deterministic controls
+
+The package must pass:
 
 ```text
-drive/reference joint fit
-actual-path transfer fit
-I/Q projection
-phase slope and frequency reconstruction
-off-resonance controls
-minimum-cycle gates
-matched-arm comparison
+positive bound-frequency reproduction
+unbound frequency rejection
+wrong calibration hash rejection
+calibration-after-assignment rejection
+source-queryback frequency mismatch rejection
+witness 2:1 relation mismatch rejection
+hard-coded operational-frequency regression scan
+existing signal-path model, analyzer, controls, ordering proof, and validator
 ```
 
-If `f_witness = 2 * f_carrier` is retained, preserve the C1-only nonlinear-control law and prove that mechanical/electronic 2f residue cannot satisfy the path witness. If the harmonic relation cannot close, redesign the gauge and witness without collapsing the phase law.
-
-## 5. Continuous uncertainty closure
-
-Replace the phrase `complete uncertainty envelope` with `complete binary-corner sweep` unless a rigorous continuous enclosure is added.
-
-To restore a continuous-envelope claim, provide at least one:
-
-```text
-analytic monotonicity and stationary-point proof
-validated interval arithmetic
-global branch-and-bound enclosure
-another explicitly justified rigorous enclosure method
-```
-
-The method must cover complex transfer magnitude and phase, resonance, Q, preparation amplitude, ringdown amplitude, uncertainty, perturbation, current, and power. Dense random or grid sampling may be supplemental only.
-
-## 6. Common-mode observability repair
-
-The current differential payload cannot by itself prove true instrument input common mode.
-
-Freeze one lawful route:
-
-```text
-A. acquire and bind each input leg relative to the declared reference;
-B. add an independently calibrated common-mode witness;
-C. prove from the exact return network and instrument admittance that the derived differential bound is conservative;
-D. replace the unobservable common-mode metric with a directly observable operating-envelope gate.
-```
-
-The selected route must survive ground-return, channel-swap, negative-leg drift, and digitizer-admittance controls.
-
-## 7. Required controls
-
-Add at minimum:
-
-```text
-nominal 12.5 pF load versus actual low-load state
-frequency selected before versus after primary observation
-nominal 32768 drive under worst detuning
-calibrated-resonance drive
-wrong calibration artifact
-replayed calibration across assembly or event
-mutated f_carrier metadata
-source queryback frequency mismatch
-witness frequency mismatch
-loaded-Q outside accepted region
-preparation too short
-ringdown below minimum observable amplitude
-nonlinear 2f residue
-common-mode/negative-leg drift
-continuous-interior parameter challenge against corner bounds
-```
-
-Each control must fail for its declared mechanism or custody reason.
-
-## 8. Claim and status law
-
-The signal-path result remains:
-
-```text
-P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED
-```
-
-The build-readiness state remains:
-
-```text
-P0_BUILD_READINESS_BLOCKED
-```
-
-until this repair emits exactly one:
+## Adjudication
 
 ```text
 P0_RESONANCE_LOAD_LAW_REPAIR_ESTABLISHED
-P0_RESONANCE_LOAD_LAW_REPAIR_BLOCKED
-P0_RESONANCE_LOAD_LAW_REPAIR_INCONCLUSIVE
-```
-
-`ESTABLISHED` additionally requires closure of the continuous-envelope wording and common-mode observability findings, four exact-root independent PASS reviews, zero open material findings, deterministic reproduction, mutation qualification, and coherent regeneration of all affected netlist, BOM, fabrication, analyzer, schema, fixture, result, review, finding, roadmap, and authority artifacts.
-
-Only then may the package restore:
-
-```text
+P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED
 P0_BUILD_READINESS_PACKET_FROZEN
-```
-
-The later authority boundary remains:
-
-```text
+NON_EXECUTING_P0_BUILD_READINESS_ONLY
 USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD
 ```
 
-Nothing in this contract grants that authority.
+Nothing here grants procurement, build, or execution authority.

@@ -1,20 +1,20 @@
 {
-  "analyzer_sha256": "33fc447ef5c545a8408cbd0e6330cdd71a72a5a097d80296b24240f37d0b750f",
+  "analyzer_sha256": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
   "assembly_custody_fragment_count": 14,
   "claim_ceiling": "NON_EXECUTING_P0_SIGNAL_PATH_WITNESS_REPAIR_ONLY",
-  "def_use_assignment_count": 12,
+  "def_use_assignment_count": 11,
   "function_ast_sha256": {
-    "analyze_bundle": "af3161450dea8574dc5371ecceaf49c36c6e778b425d5437fcc45652b2cb04f3",
+    "analyze_bundle": "06fb904eccde031a07ffcaf60247f46fa54ba17b86c5209183f9d914ffcc9dae",
     "decode_guard_witness": "6af817ec9ebe3fef9947a03f2376237bc9238a6ea83a789947ae357d5a79555a",
     "decode_series_witness": "b37f1bbb6cce4c8728fbc95b8c90c74190f84b16e82d11e60d66940caaa86520",
-    "signal_path_transfer": "12dcedb7d99bfd0bd90267d167ddba8a5fb5527b1464e3a3b029c116f01a407d"
+    "signal_path_transfer": "dd3adafec5738c27f0908a0692a52b13a25bd9e6352e26f7a3559ee9e0d75044"
   },
   "ordered_call_lines": {
-    "decode_guard_witness": 1538,
-    "decode_series_witness": 1506,
-    "drive_fit": 1522,
-    "project": 1563,
-    "signal_path_transfer": 1530
+    "decode_guard_witness": 1706,
+    "decode_series_witness": 1671,
+    "drive_fit": 1687,
+    "project": 1731,
+    "signal_path_transfer": 1695
   },
   "physical_claim_authorized": false,
   "properties": {
@@ -33,6 +33,6 @@
     "topology_scan_replay_rejected": true
   },
   "result": "PASS",
-  "schema": "p0.signal-path-ordering-proof.v4",
-  "transfer_gate_count": 16
+  "schema": "p0.signal-path-ordering-proof.v5",
+  "transfer_gate_count": 15
 }

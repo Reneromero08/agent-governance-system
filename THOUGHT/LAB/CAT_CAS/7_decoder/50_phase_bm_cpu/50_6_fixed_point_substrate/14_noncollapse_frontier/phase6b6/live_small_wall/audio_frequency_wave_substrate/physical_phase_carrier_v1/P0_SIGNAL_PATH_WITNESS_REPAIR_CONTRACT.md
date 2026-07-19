@@ -58,7 +58,7 @@ K3 may not participate in, clamp, or explain the actual-path witness. Any topolo
 
 ## 4. Observable
 
-At `f2 = 65536 Hz`, estimate the complex transfer:
+At bound `f2 = f_witness_hz = 2 * f_carrier_hz`, estimate the complex transfer:
 
 ```text
 H2(window) = Z_CH1,f2(window) / Z_CH0,f2(window)
@@ -81,11 +81,11 @@ minimum pre-open pilot SNR
 maximum isolated-path transfer magnitude
 maximum isolated-path transfer uncertainty
 minimum pre/open separation
-maximum permitted pilot-induced change to the 32.768 kHz carrier preparation
+maximum permitted pilot-induced change to the bound-frequency carrier preparation
 maximum permitted 65.536 kHz nonlinear or resonant residue
 window placement and sample count
 rank and condition-number gates
-clipping and common-mode gates
+differential clipping gate; true input common-mode observability remains a future prerequisite
 ```
 
 Thresholds must be derived from the exact component/circuit model and committed synthetic calibration packet before any physical data. They may not be fitted to a future DUT record.

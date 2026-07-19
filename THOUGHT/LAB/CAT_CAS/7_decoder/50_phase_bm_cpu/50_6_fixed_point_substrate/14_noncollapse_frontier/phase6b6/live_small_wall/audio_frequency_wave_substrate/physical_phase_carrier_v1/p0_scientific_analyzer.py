@@ -49,8 +49,11 @@ WINDOW = 2_048
 HOP = 256
 NW_LAG = 7
 BLOCK = 8
-F_REF = 32_768.0
-F_WITNESS = 65_536.0
+SYNTHETIC_F_CARRIER_HZ = 32_768.0
+SYNTHETIC_F_WITNESS_HZ = 65_536.0
+F_CARRIER_MIN_HZ = 32_768.0
+F_CARRIER_MAX_HZ = 32_820.0
+F_CARRIER_U95_MAX_HZ = 0.050
 TOPOLOGY_SCAN_SAMPLES = 256
 NONLINEAR_CONTROL_SAMPLES = 4096
 TOPOLOGY_SCAN_STATES = ("closed_closed", "k1_open", "k2_open", "both_open")
@@ -99,6 +102,7 @@ SCIENTIFIC_NEGATIVES = {
     "dummy_c0_feedthrough": "DUMMY_C0_FEEDTHROUGH",
     "source_left_on": "SOURCE_OFF_NOT_WITNESSED",
     "off_resonance_response": "OFF_RESONANCE_RESPONSE",
+    "off_resonance_probe_binding": "OFF_RESONANCE_PROBE_BINDING",
     "detector_impulse_memory": "DETECTOR_MEMORY_OVER_10US",
     "controller_buffer_replay": "POST_BARRIER_BUFFER_FORBIDDEN",
     "analog_switch_charge_transient": "TRANSIENT_AFTER_ADMIT",
@@ -143,6 +147,11 @@ MALFORMED_NEGATIVES = {
     "manifest_role_substitution": "ROLE_SUBSTITUTION",
     "assignment_reveal_before_custody_closure": "EARLY_ASSIGNMENT_REVEAL",
     "threshold_mutation_after_primary_data": "THRESHOLD_CUSTODY",
+    "unbound_carrier_frequency": "MISSING_FIELD",
+    "wrong_resonance_calibration_hash": "RESONANCE_CALIBRATION_CUSTODY",
+    "calibration_after_assignment": "RESONANCE_CALIBRATION_CUSTODY",
+    "source_queryback_frequency_mismatch": "SOURCE_CONFIGURATION_MISMATCH",
+    "witness_frequency_relation_mismatch": "WITNESS_FREQUENCY_RELATION",
 }
 
 
@@ -354,13 +363,101 @@ def load_bound_json(base: Path, descriptor: Any, where: str) -> tuple[Path, dict
     return path, value
 
 
-def topology_scan_metrics(path: Path, model: dict[str, Any]) -> dict[str, Any]:
+def resonance_response(frequency_hz: float, f_carrier_hz: float, q_factor: float) -> complex:
+    detuning = 2.0 * q_factor * (frequency_hz - f_carrier_hz) / f_carrier_hz
+    return 1.0 / complex(1.0, detuning)
+
+
+def resonance_calibration_raw_bytes(role: str, f_carrier_hz: float, q_factor: float) -> bytes:
+    rows = ["sweep,role,frequency_hz,response_real,response_imag"]
+    coarse_rows: list[tuple[float, complex]] = []
+    for index in range(61):
+        frequency = 32_760.0 + index
+        response = resonance_response(frequency, f_carrier_hz, q_factor)
+        coarse_rows.append((frequency, response))
+        rows.append(f"coarse,{role},{frequency:.17g},{response.real:.17g},{response.imag:.17g}")
+    coarse_peak_hz = max(coarse_rows, key=lambda item: abs(item[1]))[0]
+    for index in range(81):
+        frequency = coarse_peak_hz - 1.0 + 0.025 * index
+        response = resonance_response(frequency, f_carrier_hz, q_factor)
+        rows.append(f"fine,{role},{frequency:.17g},{response.real:.17g},{response.imag:.17g}")
+    linewidth_hz = f_carrier_hz / q_factor
+    probe_frequency_hz = f_carrier_hz + max(20.0, 20.0 * linewidth_hz)
+    rows.append(f"off_resonance,{role},{probe_frequency_hz:.17g},0.019,0")
+    return ("\n".join(rows) + "\n").encode("ascii")
+
+
+def parse_resonance_calibration_raw(
+    data: bytes,
+    role: str,
+    f_carrier_hz: float,
+    f_carrier_u95_hz: float,
+    q_factor: float,
+    decay_seconds: float,
+) -> dict[str, float]:
+    try:
+        text = data.decode("ascii")
+    except UnicodeDecodeError as exc:
+        raise Reject("RESONANCE_CALIBRATION_RAW") from exc
+    if "\r" in text or not text.endswith("\n"):
+        raise Reject("RESONANCE_CALIBRATION_RAW")
+    lines = text.splitlines()
+    if len(lines) != 144 or lines[0] != "sweep,role,frequency_hz,response_real,response_imag":
+        raise Reject("RESONANCE_CALIBRATION_RAW")
+    parsed: dict[str, list[tuple[float, complex]]] = {"coarse": [], "fine": [], "off_resonance": []}
+    for line in lines[1:]:
+        fields = line.split(",")
+        if len(fields) != 5 or fields[0] not in parsed or fields[1] != role:
+            raise Reject("RESONANCE_CALIBRATION_RAW")
+        frequency = decimal(fields[2], "resonance_raw.frequency_hz")
+        real = decimal(fields[3], "resonance_raw.response_real")
+        imag = decimal(fields[4], "resonance_raw.response_imag")
+        parsed[fields[0]].append((frequency, complex(real, imag)))
+    expected_coarse = [32_760.0 + index for index in range(61)]
+    coarse_peak_hz = max(parsed["coarse"], key=lambda item: abs(item[1]))[0]
+    expected_fine = [coarse_peak_hz - 1.0 + 0.025 * index for index in range(81)]
+    if [item[0] for item in parsed["coarse"]] != expected_coarse or [item[0] for item in parsed["fine"]] != expected_fine or len(parsed["off_resonance"]) != 1:
+        raise Reject("RESONANCE_CALIBRATION_RAW")
+    fit_rows = parsed["coarse"] + parsed["fine"]
+    fit_frequencies = np.asarray([item[0] for item in fit_rows], dtype=np.float64)
+    fit_responses = np.asarray([item[1] for item in fit_rows], dtype=np.complex128)
+    if np.any(np.abs(fit_responses) <= 0.0):
+        raise Reject("RESONANCE_CALIBRATION_RAW")
+    inverse_response = 1.0 / fit_responses
+    if float(np.max(np.abs(inverse_response.real - 1.0))) > 1e-10:
+        raise Reject("RESONANCE_CALIBRATION_RAW")
+    design = np.column_stack((fit_frequencies, np.ones(len(fit_frequencies), dtype=np.float64)))
+    slope, intercept = np.linalg.lstsq(design, inverse_response.imag, rcond=None)[0]
+    if not math.isfinite(float(slope)) or slope <= 0.0:
+        raise Reject("RESONANCE_CALIBRATION_RAW")
+    fitted_f_carrier_hz = float(-intercept / slope)
+    fitted_q_factor = float(0.5 * slope * fitted_f_carrier_hz)
+    fitted_decay_seconds = fitted_q_factor / (math.pi * fitted_f_carrier_hz)
+    fit_residual = inverse_response.imag - (slope * fit_frequencies + intercept)
+    if float(np.max(np.abs(fit_residual))) > 1e-9:
+        raise Reject("RESONANCE_CALIBRATION_RAW")
+    fine_peak = max(parsed["fine"], key=lambda item: abs(item[1]))[0]
+    fitted_u95_hz = parsed["fine"][1][0] - parsed["fine"][0][0]
+    if abs(fine_peak - fitted_f_carrier_hz) > 0.5 * fitted_u95_hz + 1e-9 or abs(f_carrier_hz - fitted_f_carrier_hz) > f_carrier_u95_hz or not math.isclose(f_carrier_u95_hz, fitted_u95_hz, rel_tol=1e-12, abs_tol=1e-9) or not math.isclose(q_factor, fitted_q_factor, rel_tol=1e-9, abs_tol=1e-9) or not math.isclose(decay_seconds, fitted_decay_seconds, rel_tol=1e-9, abs_tol=1e-12):
+        raise Reject("RESONANCE_CALIBRATION_RAW")
+    probe_frequency_hz, probe_response = parsed["off_resonance"][0]
+    linewidth_hz = fitted_f_carrier_hz / fitted_q_factor
+    required_separation_hz = max(20.0, 20.0 * linewidth_hz)
+    if not math.isclose(probe_frequency_hz - fitted_f_carrier_hz, required_separation_hz, rel_tol=1e-12, abs_tol=1e-9):
+        raise Reject("OFF_RESONANCE_PROBE_BINDING")
+    response_ratio = abs(probe_response)
+    if response_ratio > 0.020:
+        raise Reject("OFF_RESONANCE_RESPONSE")
+    return {"fitted_decay_seconds": fitted_decay_seconds, "fitted_f_carrier_hz": fitted_f_carrier_hz, "fitted_q_factor": fitted_q_factor, "fitted_u95_hz": fitted_u95_hz, "linewidth_hz": linewidth_hz, "probe_frequency_hz": probe_frequency_hz, "required_separation_hz": required_separation_hz, "response_ratio": response_ratio}
+
+
+def topology_scan_metrics(path: Path, model: dict[str, Any], f_witness_hz: float) -> dict[str, Any]:
     expected_bytes = len(TOPOLOGY_SCAN_STATES) * TOPOLOGY_SCAN_SAMPLES * 2 * 8
     if path.stat().st_size != expected_bytes:
         raise Reject("SIGNAL_PATH_TOPOLOGY_SCAN", "size")
     values = np.fromfile(path, dtype="<f8").reshape(len(TOPOLOGY_SCAN_STATES), TOPOLOGY_SCAN_SAMPLES, 2)
     n = np.arange(TOPOLOGY_SCAN_SAMPLES, dtype=np.float64)
-    phase = 2.0 * math.pi * F_WITNESS * n / FS
+    phase = 2.0 * math.pi * f_witness_hz * n / FS
     design = np.column_stack((np.cos(phase), -np.sin(phase), np.ones(len(n))))
     thresholds = model["frozen_thresholds"]
     pre_phase = thresholds["pre_phase_h2_rad"]
@@ -406,7 +503,7 @@ def topology_scan_metrics(path: Path, model: dict[str, Any]) -> dict[str, Any]:
     return outcomes
 
 
-def nonlinear_control_ratio(path: Path) -> float:
+def nonlinear_control_ratio(path: Path, f_carrier_hz: float, f_witness_hz: float) -> float:
     expected_bytes = NONLINEAR_CONTROL_SAMPLES * 2 * 8
     if path.stat().st_size != expected_bytes:
         raise Reject("SIGNAL_PATH_2F_CONTROL", "size")
@@ -414,10 +511,10 @@ def nonlinear_control_ratio(path: Path) -> float:
     n = np.arange(NONLINEAR_CONTROL_SAMPLES, dtype=np.float64)
     design = np.column_stack(
         (
-            np.cos(2.0 * math.pi * F_REF * n / FS),
-            -np.sin(2.0 * math.pi * F_REF * n / FS),
-            np.cos(2.0 * math.pi * F_WITNESS * n / FS),
-            -np.sin(2.0 * math.pi * F_WITNESS * n / FS),
+            np.cos(2.0 * math.pi * f_carrier_hz * n / FS),
+            -np.sin(2.0 * math.pi * f_carrier_hz * n / FS),
+            np.cos(2.0 * math.pi * f_witness_hz * n / FS),
+            -np.sin(2.0 * math.pi * f_witness_hz * n / FS),
             np.ones(len(n)),
         )
     )
@@ -534,7 +631,7 @@ def parse_environment_csv(
 
 
 def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str, Any]]:
-    exact_fields(meta, {"schema", "run_id", "evidence_class", "role", "assembly", "instrument", "export", "payload", "clock", "source", "signal_path", "witness", "environment", "custody", "thresholds"}, "root")
+    exact_fields(meta, {"schema", "run_id", "evidence_class", "role", "assembly", "instrument", "export", "payload", "clock", "source", "frequency_binding", "signal_path", "witness", "environment", "custody", "thresholds"}, "root")
     if meta["schema"] != SCHEMA or meta["evidence_class"] not in ("SYNTHETIC", "PHYSICAL") or meta["role"] not in ROLE_ORDER:
         raise Reject("ENUM", "root")
     if not isinstance(meta["run_id"], str) or not meta["run_id"]:
@@ -546,6 +643,17 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
     expected_population = CARRIER_POPULATION_FOR_ASSEMBLY[expected_assembly]
     if assembly["assembly_id"] != expected_assembly or assembly["carrier_population"] != expected_population:
         raise Reject("SIGNAL_PATH_ASSEMBLY_ROLE")
+    frequency_binding = meta["frequency_binding"]
+    exact_fields(frequency_binding, {"calibration_analyzer_sha256", "calibration_artifact_sha256", "calibration_raw_sha256", "f_carrier_hz", "f_carrier_u95_hz", "f_witness_hz", "relation"}, "frequency_binding")
+    for key in ("calibration_analyzer_sha256", "calibration_artifact_sha256", "calibration_raw_sha256"):
+        lower_hash(frequency_binding[key], f"frequency_binding.{key}")
+    f_carrier_hz = decimal(frequency_binding["f_carrier_hz"], "frequency_binding.f_carrier_hz")
+    f_carrier_u95_hz = nonnegative_decimal(frequency_binding["f_carrier_u95_hz"], "frequency_binding.f_carrier_u95_hz")
+    f_witness_hz = decimal(frequency_binding["f_witness_hz"], "frequency_binding.f_witness_hz")
+    if not F_CARRIER_MIN_HZ <= f_carrier_hz <= F_CARRIER_MAX_HZ or f_carrier_u95_hz > F_CARRIER_U95_MAX_HZ:
+        raise Reject("RESONANCE_CALIBRATION_RANGE")
+    if frequency_binding["relation"] != "f_witness_hz == 2 * f_carrier_hz" or f_witness_hz != 2.0 * f_carrier_hz:
+        raise Reject("WITNESS_FREQUENCY_RELATION")
     instrument = meta["instrument"]
     exact_fields(instrument, {"manufacturer", "model", "serial", "firmware", "driver", "configuration_queryback_sha256"}, "instrument")
     lower_hash(instrument["configuration_queryback_sha256"], "instrument.configuration_queryback_sha256")
@@ -597,11 +705,11 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
         raise Reject("SOURCE_PHASE")
     f_ref = decimal(clock["frequency_hz"], "clock.frequency_hz")
     if (
-        f_ref != F_REF
-        or decimal(source["frequency_hz"], "source.frequency_hz") != f_ref
+        f_ref != f_carrier_hz
+        or decimal(source["frequency_hz"], "source.frequency_hz") != f_carrier_hz
         or decimal(source["amplitude_vpp"], "source.amplitude_vpp") != 0.400
         or decimal(source["offset_v"], "source.offset_v") != 0.0
-        or decimal(source["reference_frequency_hz"], "source.reference_frequency_hz") != 2.0 * f_ref
+        or decimal(source["reference_frequency_hz"], "source.reference_frequency_hz") != f_witness_hz
         or decimal(source["reference_amplitude_vpp"], "source.reference_amplitude_vpp") != 0.100
         or decimal(source["reference_offset_v"], "source.reference_offset_v") != 0.0
         or decimal(source["reference_phase_command_rad"], "source.reference_phase_command_rad") != 0.0
@@ -609,7 +717,7 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
         or source["monitor_network"] != "PASSIVE_100K_PLUS_100K_DUAL_TONE_SUM"
         or source["output_mode"] != "CONTINUOUS_SINE"
         or source["load_mode"] != "HIGH_Z"
-        or source["qualified_preparation_cycles"] != 32768
+        or source["qualified_preparation_cycles"] < int(math.ceil(3.0 * f_carrier_hz))
         or source["source_remains_on_through_record"] is not True
         or decimal(source["output_ohms"], "source.output_ohms") != 50.0
     ):
@@ -701,6 +809,10 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
         "instrument_queryback",
         "native_export_receipt",
         "nonlinear_control",
+        "resonance_calibration_analyzer",
+        "resonance_calibration_artifact",
+        "resonance_calibration_raw",
+        "resonance_calibration_source_queryback",
         "source_queryback",
         "topology_receipt",
         "topology_scan",
@@ -716,6 +828,10 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
     _, assignment_commitment = load_bound_json(base, receipts["assignment_commitment"], "custody.assignment_commitment")
     _, assignment_reveal = load_bound_json(base, receipts["assignment_reveal"], "custody.assignment_reveal")
     _, chronology_receipt = load_bound_json(base, receipts["chronology_receipt"], "custody.chronology_receipt")
+    _, resonance_calibration = load_bound_json(base, receipts["resonance_calibration_artifact"], "custody.resonance_calibration_artifact")
+    _, resonance_calibration_raw = validate_bound_file(base, receipts["resonance_calibration_raw"], "custody.resonance_calibration_raw")
+    validate_bound_file(base, receipts["resonance_calibration_analyzer"], "custody.resonance_calibration_analyzer")
+    _, resonance_calibration_source = load_bound_json(base, receipts["resonance_calibration_source_queryback"], "custody.resonance_calibration_source_queryback")
     _, topology_receipt = load_bound_json(base, receipts["topology_receipt"], "custody.topology_receipt")
     topology_scan_path, _ = validate_bound_file(base, receipts["topology_scan"], "custody.topology_scan")
     nonlinear_path, _ = validate_bound_file(base, receipts["nonlinear_control"], "custody.nonlinear_control")
@@ -736,21 +852,67 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
     exact_fields(native_receipt, {"adapter_sha256", "native_file_bytes", "native_file_sha256", "schema"}, "native_export_receipt")
     if native_receipt != {"adapter_sha256": export["adapter_sha256"], "native_file_bytes": payload["bytes"], "native_file_sha256": payload["sha256"], "schema": "p0.native-export-receipt.v1"}:
         raise Reject("NATIVE_EXPORT_RECEIPT")
-    exact_fields(assignment_commitment, {"reveal_sha256", "schema"}, "assignment_commitment")
+    exact_fields(assignment_commitment, {"created_utc", "reveal_sha256", "schema"}, "assignment_commitment")
     exact_fields(assignment_reveal, {"assemblies", "assignments", "schema"}, "assignment_reveal")
     expected_assignments = {item: ("PRIMARY_ARM" if item in ("arm_0", "arm_pi") else "CONTROL") for item in ROLE_ORDER}
     expected_assemblies = {item: ASSEMBLY_FOR_ROLE[item] for item in ROLE_ORDER}
     if (
         custody["assignment_commitment_sha256"] != receipts["assignment_commitment"]["sha256"]
-        or assignment_commitment != {"reveal_sha256": receipts["assignment_reveal"]["sha256"], "schema": "p0.assignment-commitment.v2"}
+        or assignment_commitment["reveal_sha256"] != receipts["assignment_reveal"]["sha256"]
+        or assignment_commitment["schema"] != "p0.assignment-commitment.v3"
         or assignment_reveal != {"assemblies": expected_assemblies, "assignments": expected_assignments, "schema": "p0.assignment-reveal.v2"}
     ):
         raise Reject("ASSIGNMENT_CUSTODY")
-    exact_fields(chronology_receipt, {"acquisition_completed_utc", "acquisition_started_utc", "native_file_sha256", "schema"}, "chronology_receipt")
+    exact_fields(chronology_receipt, {"acquisition_completed_utc", "acquisition_started_utc", "native_file_sha256", "schema", "source_preparation_started_utc"}, "chronology_receipt")
     acquisition_started = canonical_utc(chronology_receipt["acquisition_started_utc"], "CHRONOLOGY_CUSTODY")
     acquisition_completed = canonical_utc(chronology_receipt["acquisition_completed_utc"], "CHRONOLOGY_CUSTODY")
-    if chronology_receipt["schema"] != "p0.chronology-receipt.v1" or chronology_receipt["native_file_sha256"] != payload["sha256"] or not acquisition_started < acquisition_completed:
+    source_preparation_started = canonical_utc(chronology_receipt["source_preparation_started_utc"], "CHRONOLOGY_CUSTODY")
+    assignment_created = canonical_utc(assignment_commitment["created_utc"], "ASSIGNMENT_CUSTODY")
+    if chronology_receipt["schema"] != "p0.chronology-receipt.v2" or chronology_receipt["native_file_sha256"] != payload["sha256"] or not acquisition_started < acquisition_completed or (acquisition_started - source_preparation_started).total_seconds() < 3.0:
         raise Reject("CHRONOLOGY_CUSTODY")
+    exact_fields(resonance_calibration, {"analyzer_sha256", "assembly_id", "calibration_excitation_vpp", "carrier_population", "coarse_search", "completed_utc", "decay_seconds", "f_carrier_hz", "f_carrier_u95_hz", "f_witness_hz", "fine_search", "fit_identity", "instrument_queryback_sha256", "primary_observed", "q_factor", "raw_data_sha256", "retry_law", "schema", "selection_law", "source_queryback_sha256"}, "resonance_calibration")
+    exact_fields(resonance_calibration_source, {"configuration", "schema"}, "resonance_calibration_source_queryback")
+    calibration_completed = canonical_utc(resonance_calibration["completed_utc"], "RESONANCE_CALIBRATION_CUSTODY")
+    calibration_q_factor = decimal(resonance_calibration["q_factor"], "resonance_calibration.q_factor")
+    calibration_decay_seconds = decimal(resonance_calibration["decay_seconds"], "resonance_calibration.decay_seconds")
+    if (
+        frequency_binding["calibration_artifact_sha256"] != receipts["resonance_calibration_artifact"]["sha256"]
+        or frequency_binding["calibration_raw_sha256"] != receipts["resonance_calibration_raw"]["sha256"]
+        or frequency_binding["calibration_analyzer_sha256"] != receipts["resonance_calibration_analyzer"]["sha256"]
+        or resonance_calibration["schema"] != "p0.resonance-calibration.v1"
+        or resonance_calibration["assembly_id"] != expected_assembly
+        or resonance_calibration["carrier_population"] != expected_population
+        or resonance_calibration["raw_data_sha256"] != receipts["resonance_calibration_raw"]["sha256"]
+        or resonance_calibration["analyzer_sha256"] != receipts["resonance_calibration_analyzer"]["sha256"]
+        or decimal(resonance_calibration["f_carrier_hz"], "resonance_calibration.f_carrier_hz") != f_carrier_hz
+        or nonnegative_decimal(resonance_calibration["f_carrier_u95_hz"], "resonance_calibration.f_carrier_u95_hz") != f_carrier_u95_hz
+        or decimal(resonance_calibration["f_witness_hz"], "resonance_calibration.f_witness_hz") != f_witness_hz
+        or not 4_000.0 <= calibration_q_factor <= 60_000.0
+        or calibration_decay_seconds <= 0.0
+        or resonance_calibration["source_queryback_sha256"] != receipts["resonance_calibration_source_queryback"]["sha256"]
+        or resonance_calibration["instrument_queryback_sha256"] != receipts["instrument_queryback"]["sha256"]
+        or decimal(resonance_calibration["calibration_excitation_vpp"], "resonance_calibration.calibration_excitation_vpp") != 0.100
+        or resonance_calibration["coarse_search"] != {"maximum_hz": "32820", "minimum_hz": "32760", "step_hz": "1"}
+        or resonance_calibration["fine_search"] != {"half_span_hz": "1", "step_hz": "0.025"}
+        or resonance_calibration["fit_identity"] != "BOUNDED_COMPLEX_BVD_MAGNITUDE_AND_PHASE_V1"
+        or resonance_calibration["selection_law"] != "MAXIMUM_FITTED_MOTIONAL_RESPONSE_IN_ACCEPTED_INTERVAL"
+        or resonance_calibration["retry_law"] != "ONE_PASS__REJECT_ON_FAILURE"
+        or resonance_calibration_source["schema"] != "p0.resonance-calibration-source-queryback.v1"
+        or resonance_calibration_source["configuration"] != {"amplitude_vpp": "0.1", "coarse_maximum_hz": "32820", "coarse_minimum_hz": "32760", "coarse_step_hz": "1", "fine_half_span_hz": "1", "fine_step_hz": "0.025", "load_mode": "HIGH_Z", "offset_v": "0", "output_mode": "CONTINUOUS_SINE", "physical_output_ohms": "50"}
+        or resonance_calibration["primary_observed"] is not False
+        or not calibration_completed < assignment_created < acquisition_started
+    ):
+        raise Reject("RESONANCE_CALIBRATION_CUSTODY")
+    if not calibration_completed < assignment_created <= source_preparation_started or (acquisition_started - source_preparation_started).total_seconds() < 3.0:
+        raise Reject("CHRONOLOGY_CUSTODY")
+    meta["_off_resonance_control"] = parse_resonance_calibration_raw(
+        resonance_calibration_raw,
+        meta["role"],
+        f_carrier_hz,
+        f_carrier_u95_hz,
+        calibration_q_factor,
+        calibration_decay_seconds,
+    )
     exact_fields(assembly_manifest, {"assembly_id", "board_serials", "carrier_population", "coax_serials", "controller_serial", "enclosure_serials", "harness_serial", "schema"}, "assembly_manifest")
     exact_fields(assembly_manifest["board_serials"], {"carrier", "control", "sensor"}, "assembly_manifest.board_serials")
     if (
@@ -795,8 +957,8 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
         raise Reject("SIGNAL_PATH_TOPOLOGY_CUSTODY")
     if not scan_started < scan_completed <= acquisition_started < acquisition_completed:
         raise Reject("SIGNAL_PATH_SCAN_CHRONOLOGY")
-    topology_metrics = topology_scan_metrics(topology_scan_path, model)
-    nonlinear_ratio = nonlinear_control_ratio(nonlinear_path)
+    topology_metrics = topology_scan_metrics(topology_scan_path, model, f_witness_hz)
+    nonlinear_ratio = nonlinear_control_ratio(nonlinear_path, f_carrier_hz, f_witness_hz)
     if nonlinear_ratio > model_number(model_thresholds["nonlinear_or_mechanical_2f_residue_ratio_max"], "model.max_2f_residue"):
         raise Reject("SIGNAL_PATH_2F_RESIDUE")
     thresholds = meta["thresholds"]
@@ -830,6 +992,8 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
         raise Reject("HASH_MISMATCH", "native export")
     payload["_scales"] = scales
     meta["_f_ref"] = f_ref
+    meta["_f_witness"] = f_witness_hz
+    meta["_f_carrier_u95"] = f_carrier_u95_hz
     meta["_signal_model"] = model
     meta["_signal_path_receipts"] = {"nonlinear_2f_residue_ratio": nonlinear_ratio, "topology_scan": topology_metrics}
     environment["_records"] = records
@@ -994,11 +1158,11 @@ def joint_drive_reference_fit(ch0: np.ndarray, start: int, stop: int, f_ref: flo
     }
 
 
-def signal_path_tone_fit(signal: np.ndarray, start: int, stop: int, thresholds: dict[str, Any]) -> dict[str, Any]:
+def signal_path_tone_fit(signal: np.ndarray, start: int, stop: int, thresholds: dict[str, Any], f_carrier_hz: float) -> dict[str, Any]:
     if start < 0 or stop > len(signal) or stop <= start:
         raise Reject("SIGNAL_PATH_WINDOW_ORDER")
     idx = np.arange(start, stop, dtype=np.float64)
-    phase = 2.0 * math.pi * F_REF * idx / FS
+    phase = 2.0 * math.pi * f_carrier_hz * idx / FS
     x = np.column_stack((np.cos(phase), -np.sin(phase), np.cos(2.0 * phase), -np.sin(2.0 * phase), np.ones(len(idx))))
     rank = int(np.linalg.matrix_rank(x))
     condition = float(np.linalg.cond(x, 2))
@@ -1025,6 +1189,9 @@ def signal_path_transfer(
     series_start: int,
     n_series_open: int,
     model: dict[str, Any],
+    f_carrier_hz: float,
+    f_witness_hz: float,
+    f_witness_u95_hz: float,
 ) -> dict[str, Any]:
     thresholds = model["frozen_thresholds"]
     pre_spec = thresholds["pre_window"]
@@ -1041,23 +1208,18 @@ def signal_path_transfer(
         or open_stop > n_series_open + 1
     ):
         raise Reject("SIGNAL_PATH_WINDOW_ORDER")
-    if (pre_stop - pre_start) * F_WITNESS / FS < model_number(pre_spec["valid_cycles"], "model.pre_valid_cycles") - 1e-12:
+    if (pre_stop - pre_start) * (f_witness_hz - f_witness_u95_hz) / FS < model_number(pre_spec["valid_cycles"], "model.pre_valid_cycles") - 1e-12:
         raise Reject("SIGNAL_PATH_WINDOW_CYCLES")
-    if (open_stop - open_start) * F_WITNESS / FS < model_number(open_spec["valid_cycles"], "model.open_valid_cycles") - 1e-12:
+    if (open_stop - open_start) * (f_witness_hz - f_witness_u95_hz) / FS < model_number(open_spec["valid_cycles"], "model.open_valid_cycles") - 1e-12:
         raise Reject("SIGNAL_PATH_WINDOW_CYCLES")
     clip = model_number(thresholds["clipping_abs_v_max"], "model.clipping_abs_v_max")
     raw_peak = max(float(np.max(np.abs(ch0[pre_start:open_stop]))), float(np.max(np.abs(ch1[pre_start:open_stop]))))
     if raw_peak > clip:
         raise Reject("SIGNAL_PATH_CLIPPING")
-    # The byte-bound topology receipt freezes both negative digitizer legs to
-    # calibrated AGND, so common mode is derived from raw differential bytes.
-    common_mode_peak = 0.5 * raw_peak
-    if common_mode_peak > model_number(thresholds["common_mode_abs_v_max"], "model.common_mode_abs_v_max"):
-        raise Reject("SIGNAL_PATH_COMMON_MODE")
-    pre0 = signal_path_tone_fit(ch0, pre_start, pre_stop, thresholds)
-    pre1 = signal_path_tone_fit(ch1, pre_start, pre_stop, thresholds)
-    open0 = signal_path_tone_fit(ch0, open_start, open_stop, thresholds)
-    open1 = signal_path_tone_fit(ch1, open_start, open_stop, thresholds)
+    pre0 = signal_path_tone_fit(ch0, pre_start, pre_stop, thresholds, f_carrier_hz)
+    pre1 = signal_path_tone_fit(ch1, pre_start, pre_stop, thresholds, f_carrier_hz)
+    open0 = signal_path_tone_fit(ch0, open_start, open_stop, thresholds, f_carrier_hz)
+    open1 = signal_path_tone_fit(ch1, open_start, open_stop, thresholds, f_carrier_hz)
     if abs(pre0["c2"]) <= 0.0 or abs(open0["c2"]) <= 0.0:
         raise Reject("SIGNAL_PATH_C2_MISSING")
     source_snr = min(
@@ -1099,7 +1261,7 @@ def signal_path_transfer(
         raise Reject("SIGNAL_PATH_R_DROP")
     return {
         "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
-        "common_mode_peak_v": common_mode_peak,
+        "differential_peak_v": raw_peak,
         "h2_open": {"imag": h_open.imag, "magnitude": abs(h_open), "phase_rad": phase_open, "real": h_open.real, "u95": open_u95},
         "h2_pre": {"imag": h_pre.imag, "magnitude": abs(h_pre), "phase_rad": phase_pre, "real": h_pre.real},
         "open_window": [open_start, open_stop],
@@ -1112,7 +1274,7 @@ def signal_path_transfer(
 
 
 def drive_fit(ch0: np.ndarray, n_gate: int, phase_command: float, f_ref: float, u_skew: float, u_drive_cal: float) -> dict[str, float]:
-    preparation_samples = int(round(FS * 32768 / f_ref))
+    preparation_samples = FS
     if n_gate - preparation_samples < 0:
         raise Reject("PREPARATION_WINDOW")
     joint_tones = joint_drive_reference_fit(ch0, n_gate - 100_000, n_gate, f_ref)
@@ -1236,7 +1398,7 @@ def nw_fit(times: np.ndarray, values: np.ndarray) -> tuple[np.ndarray, np.ndarra
     return beta, cov, r2
 
 
-def arm_metrics(z: np.ndarray, starts: np.ndarray, n_gate: int, sigma: float, f_ref: float) -> dict[str, Any]:
+def arm_metrics(z: np.ndarray, starts: np.ndarray, n_gate: int, sigma: float, f_ref: float, f_carrier_u95_hz: float) -> dict[str, Any]:
     amp = np.abs(z)
     phase = np.angle(z)
     good = amp / sigma >= max(10.0, 1.96 / 0.050)
@@ -1264,7 +1426,8 @@ def arm_metrics(z: np.ndarray, starts: np.ndarray, n_gate: int, sigma: float, f_
         raise Reject("FREQUENCY_DECAY_SIGN")
     tau = -1.0 / slope
     q = math.pi * frequency * tau
-    u95_f = 1.96 * math.sqrt(max(0.0, phase_cov[1, 1])) / (2 * math.pi)
+    u95_f_fit = 1.96 * math.sqrt(max(0.0, phase_cov[1, 1])) / (2 * math.pi)
+    u95_f = u95_f_fit + f_carrier_u95_hz
     u95_tau = 1.96 * math.sqrt(max(0.0, amp_cov[1, 1])) / (slope * slope)
     usable = math.floor(frequency * (times[-1] - times[0]))
     if usable < 256 or r2 < 0.95 or log_amp[0] - log_amp[-1] < 0.25 or u95_f / frequency > 2e-6 or u95_tau / tau > 0.10:
@@ -1272,7 +1435,7 @@ def arm_metrics(z: np.ndarray, starts: np.ndarray, n_gate: int, sigma: float, f_
     if np.any(1.96 * sigma / amp > 0.050):
         raise Reject("PHASE_UNCERTAINTY")
     selected_starts = starts[first:end]
-    return {"z": z[first:end], "absolute_starts": selected_starts, "relative_starts": selected_starts - n_gate, "amplitude": amp, "phase": phase, "times": times, "frequency_hz": frequency, "tau_s": tau, "q": q, "u95_frequency_hz": u95_f, "u95_tau_s": u95_tau, "r2_log_amplitude": r2, "usable_cycles": usable}
+    return {"z": z[first:end], "absolute_starts": selected_starts, "relative_starts": selected_starts - n_gate, "amplitude": amp, "phase": phase, "times": times, "frequency_hz": frequency, "tau_s": tau, "q": q, "u95_frequency_fit_hz": u95_f_fit, "u95_frequency_calibration_hz": f_carrier_u95_hz, "u95_frequency_hz": u95_f, "u95_tau_s": u95_tau, "r2_log_amplitude": r2, "usable_cycles": usable}
 
 
 def norm2(values: np.ndarray) -> float:
@@ -1444,6 +1607,8 @@ def analyze_bundle(bundle_path: Path, identity_directory: Path | None = None) ->
         "assignment": first["custody"]["assignment_commitment_sha256"],
         "evidence_class": first["evidence_class"],
         "f_ref": first["_f_ref"],
+        "f_witness": first["_f_witness"],
+        "f_carrier_u95": first["_f_carrier_u95"],
         "scales": first["payload"]["_scales"],
         "thresholds": canonical_bytes(first["thresholds"]),
         "instrument": canonical_bytes(first["instrument"]),
@@ -1463,7 +1628,7 @@ def analyze_bundle(bundle_path: Path, identity_directory: Path | None = None) ->
             raise Reject("ASSIGNMENT_MISMATCH")
         if meta["evidence_class"] != common["evidence_class"]:
             raise Reject("EVIDENCE_CLASS_MISMATCH")
-        if meta["_f_ref"] != common["f_ref"]:
+        if meta["_f_ref"] != common["f_ref"] or meta["_f_witness"] != common["f_witness"] or meta["_f_carrier_u95"] != common["f_carrier_u95"]:
             raise Reject("TIMEBASE_MISMATCH")
         if meta["payload"]["_scales"] != common["scales"]:
             raise Reject("SCALE_MISMATCH")
@@ -1534,6 +1699,9 @@ def analyze_bundle(bundle_path: Path, identity_directory: Path | None = None) ->
                 records[role]["series_start"],
                 records[role]["n_series_open"],
                 meta["_signal_model"],
+                common["f_ref"],
+                common["f_witness"],
+                2.0 * common["f_carrier_u95"],
             )
             n_contact, n_iso, n_admit = decode_guard_witness(
                 records[role]["decoded"],
@@ -1581,8 +1749,8 @@ def analyze_bundle(bundle_path: Path, identity_directory: Path | None = None) ->
         raise Reject("ZERO_MAD")
     quant = decimal(records["arm_0"]["meta"]["payload"]["scale_per_code"][1], "scale") / math.sqrt(12)
     sigma = max(noise_i + [quant]) + max(noise_q + [quant])
-    a0 = arm_metrics(projected["arm_0"], records["arm_0"]["starts"], records["arm_0"]["n_gate"], sigma, common["f_ref"])
-    api = arm_metrics(projected["arm_pi"], records["arm_pi"]["starts"], records["arm_pi"]["n_gate"], sigma, common["f_ref"])
+    a0 = arm_metrics(projected["arm_0"], records["arm_0"]["starts"], records["arm_0"]["n_gate"], sigma, common["f_ref"], common["f_carrier_u95"])
+    api = arm_metrics(projected["arm_pi"], records["arm_pi"]["starts"], records["arm_pi"]["n_gate"], sigma, common["f_ref"], common["f_carrier_u95"])
     thresholds = records["arm_0"]["meta"]["thresholds"]
     metrics = relation_metrics(a0, api, [(projected[role], records[role]["starts"] - records[role]["n_gate"]) for role in ROLE_ORDER[2:]], thresholds, common["f_ref"])
     environments: dict[str, dict[str, float]] = {}
@@ -1610,10 +1778,13 @@ def analyze_bundle(bundle_path: Path, identity_directory: Path | None = None) ->
         "input_custody": {"assembly": {role: records[role]["meta"]["assembly"] for role in ROLE_ORDER}, "bundle_sha256": sha256_file(bundle_path), "metadata_sha256": {role: records[role]["metadata_sha256"] for role in ROLE_ORDER}, "payload_sha256": {role: records[role]["meta"]["payload"]["sha256"] for role in ROLE_ORDER}, "byte_receipt_sha256": {role: {name: descriptor["sha256"] for name, descriptor in records[role]["meta"]["custody"]["byte_receipts"].items()} for role in ROLE_ORDER}, "assignment_commitment_sha256": common["assignment"], "calibration_sha256": common["calibration"], "thresholds_sha256": records["arm_0"]["meta"]["thresholds"]["sha256"]},
         "implementation_custody": {"analyzer_sha256": sha256_file(Path(__file__).resolve()), "schema_sha256": sha256_file(schema_path), "fixture_sha256": sha256_file(fixture_path), "signal_path_model_sha256": sha256_file(identity_root / SIGNAL_MODEL_NAME), "dependency_identity": dependency, "dependency_sha256": sha256_bytes(canonical_bytes(dependency))},
         "f_ref_hz": common["f_ref"],
+        "f_witness_hz": common["f_witness"],
+        "f_carrier_u95_hz": common["f_carrier_u95"],
         "matched_guard_samples": matched_guard,
         "timing": {role: {key: records[role][key] for key in ("n_gate", "series_start", "n_series_open", "n_contact", "n_iso", "n_admit")} for role in ROLE_ORDER},
         "signal_path": {role: records[role]["path_metrics"] for role in ROLE_ORDER},
         "signal_path_receipts": {role: records[role]["meta"]["_signal_path_receipts"] for role in ROLE_ORDER},
+        "off_resonance_controls": {role: records[role]["meta"]["_off_resonance_control"] for role in ROLE_ORDER},
         "environment": environments,
         "noise_sigma": sigma,
         "noise_nonoverlapping_window_counts": {role: len(nonoverlapping_controls[role]) for role in ROLE_ORDER[2:]},
@@ -1624,18 +1795,18 @@ def analyze_bundle(bundle_path: Path, identity_directory: Path | None = None) ->
             "matched_u95_sum_rad": drive_u95_sum,
             "matched_acceptance_lhs_rad": drive_pair_lhs,
         },
-        "arms": {"arm_0": {key: a0[key] for key in ("frequency_hz", "tau_s", "q", "u95_frequency_hz", "u95_tau_s", "r2_log_amplitude", "usable_cycles")}, "arm_pi": {key: api[key] for key in ("frequency_hz", "tau_s", "q", "u95_frequency_hz", "u95_tau_s", "r2_log_amplitude", "usable_cycles")}},
+        "arms": {"arm_0": {key: a0[key] for key in ("frequency_hz", "tau_s", "q", "u95_frequency_fit_hz", "u95_frequency_calibration_hz", "u95_frequency_hz", "u95_tau_s", "r2_log_amplitude", "usable_cycles")}, "arm_pi": {key: api[key] for key in ("frequency_hz", "tau_s", "q", "u95_frequency_fit_hz", "u95_frequency_calibration_hz", "u95_frequency_hz", "u95_tau_s", "r2_log_amplitude", "usable_cycles")}},
         "relation_metrics": metrics,
     }
     return result
 
 
-def synthetic_record(role: str) -> np.ndarray:
+def synthetic_record(role: str, f_carrier_hz: float = SYNTHETIC_F_CARRIER_HZ) -> np.ndarray:
     n = np.arange(SAMPLES, dtype=np.float64)
     phase_offset = math.pi if role == "arm_pi" else 0.0
-    phase = 2 * math.pi * F_REF * n / FS + phase_offset
+    phase = 2 * math.pi * f_carrier_hz * n / FS + phase_offset
     raw = np.zeros((SAMPLES, CHANNELS), dtype="<i2")
-    reference_phase = 2 * math.pi * (2.0 * F_REF) * n / FS
+    reference_phase = 2 * math.pi * (2.0 * f_carrier_hz) * n / FS
     raw[:, 0] = np.rint(8000 * np.cos(phase) + 4500 * np.cos(reference_phase)).astype(np.int16)
     noise = 3.0 * np.sin(2 * math.pi * 7919 * n / FS) + 2.0 * np.sin(2 * math.pi * 12347 * n / FS)
     if role in ("arm_0", "arm_pi"):
@@ -1715,9 +1886,9 @@ def synthetic_assembly_manifest(assembly_id: str) -> dict[str, Any]:
     }
 
 
-def synthetic_topology_scan_bytes(wrong_node: bool = False, variant: int = 0) -> bytes:
+def synthetic_topology_scan_bytes(wrong_node: bool = False, variant: int = 0, f_carrier_hz: float = SYNTHETIC_F_CARRIER_HZ) -> bytes:
     n = np.arange(TOPOLOGY_SCAN_SAMPLES, dtype=np.float64)
-    phase = 2.0 * math.pi * F_WITNESS * n / FS
+    phase = 2.0 * math.pi * (2.0 * f_carrier_hz) * n / FS
     data = np.empty((len(TOPOLOGY_SCAN_STATES), TOPOLOGY_SCAN_SAMPLES, 2), dtype="<f8")
     if wrong_node:
         transfers = (0.00002, 0.000015, 0.000012, 0.00001)
@@ -1731,17 +1902,17 @@ def synthetic_topology_scan_bytes(wrong_node: bool = False, variant: int = 0) ->
     return data.tobytes(order="C")
 
 
-def synthetic_nonlinear_control_bytes(residue_ratio: float = 0.005) -> bytes:
+def synthetic_nonlinear_control_bytes(residue_ratio: float = 0.005, f_carrier_hz: float = SYNTHETIC_F_CARRIER_HZ) -> bytes:
     n = np.arange(NONLINEAR_CONTROL_SAMPLES, dtype=np.float64)
     data = np.empty((NONLINEAR_CONTROL_SAMPLES, 2), dtype="<f8")
-    f1 = 2.0 * math.pi * F_REF * n / FS
-    f2 = 2.0 * math.pi * F_WITNESS * n / FS
+    f1 = 2.0 * math.pi * f_carrier_hz * n / FS
+    f2 = 2.0 * math.pi * (2.0 * f_carrier_hz) * n / FS
     data[:, 0] = 0.100 * np.cos(f1)
     data[:, 1] = 0.050 * np.cos(f1 - 0.2) + 0.050 * residue_ratio * np.cos(f2 + 0.4)
     return data.tobytes(order="C")
 
 
-def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: str, environment_name: str, environment_hash: str, environment_bytes: int) -> dict[str, Any]:
+def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: str, environment_name: str, environment_hash: str, environment_bytes: int, f_carrier_hz: float = SYNTHETIC_F_CARRIER_HZ) -> dict[str, Any]:
     phase = math.pi if role == "arm_pi" else 0.0
     frozen = {"neg": "0.020", "amplitude": "0.020", "frequency": "0.000001", "decay": "0.020", "phase": "0.020", "feedthrough": "0.020", "calibration_u95": {"neg": "0.001", "amplitude": "0.001", "frequency": "0.0000001", "decay": "0.001", "phase": "0.001", "feedthrough": "0.001"}}
     frozen_hash = sha256_bytes(canonical_bytes(frozen))
@@ -1752,7 +1923,9 @@ def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: s
     calibration_hash = sha256_bytes(canonical_bytes({"clock_identity": "SYNTHETIC-1MHZ-MASTER", "environment_cadence_hz": "10", "environment_sensor_serial_hex": "00000001", "environment_measurement_command_hex": "fd", "clock_mapping_sha256": clock_mapping_hash, "witness_calibration_sha256": witness_hash}))
     model, model_hash = signal_model()
     instrument = {"manufacturer": "SYNTHETIC", "model": "P0-CANONICAL-RAW-GENERATOR", "serial": "NONE", "firmware": "NONE", "driver": "numpy-1.26.4"}
-    source = {"model": "SIGLENT SDG1032X", "phase_command_rad": format(phase, ".17g"), "phase_skew_standard_uncertainty_rad": "0.0001", "phase_drive_cal_standard_uncertainty_rad": "0.0001", "frequency_hz": "32768", "amplitude_vpp": "0.4", "offset_v": "0", "reference_frequency_hz": "65536", "reference_amplitude_vpp": "0.1", "reference_offset_v": "0", "reference_phase_command_rad": "0", "dual_channel_phase_locked": True, "monitor_network": "PASSIVE_100K_PLUS_100K_DUAL_TONE_SUM", "output_mode": "CONTINUOUS_SINE", "load_mode": "HIGH_Z", "qualified_preparation_cycles": 32768, "source_remains_on_through_record": True, "output_ohms": "50"}
+    f_text = format(f_carrier_hz, ".17g")
+    f_witness_text = format(2.0 * f_carrier_hz, ".17g")
+    source = {"model": "SIGLENT SDG1032X", "phase_command_rad": format(phase, ".17g"), "phase_skew_standard_uncertainty_rad": "0.0001", "phase_drive_cal_standard_uncertainty_rad": "0.0001", "frequency_hz": f_text, "amplitude_vpp": "0.4", "offset_v": "0", "reference_frequency_hz": f_witness_text, "reference_amplitude_vpp": "0.1", "reference_offset_v": "0", "reference_phase_command_rad": "0", "dual_channel_phase_locked": True, "monitor_network": "PASSIVE_100K_PLUS_100K_DUAL_TONE_SUM", "output_mode": "CONTINUOUS_SINE", "load_mode": "HIGH_Z", "qualified_preparation_cycles": int(math.ceil(3.0 * f_carrier_hz)), "source_remains_on_through_record": True, "output_ohms": "50"}
     assembly_id = ASSEMBLY_FOR_ROLE[role]
     carrier_population = CARRIER_POPULATION_FOR_ASSEMBLY[assembly_id]
     common_files = {
@@ -1767,25 +1940,40 @@ def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: s
             path.write_bytes(data)
     reveal_descriptor = bound_descriptor(directory / common_files["assignment_reveal"][0])
     assignment_commitment_path = directory / "assignment_commitment.json"
-    assignment_commitment_path.write_bytes(canonical_bytes({"reveal_sha256": reveal_descriptor["sha256"], "schema": "p0.assignment-commitment.v2"}))
+    assignment_commitment_path.write_bytes(canonical_bytes({"created_utc": "2037-07-15T23:59:52.000000Z", "reveal_sha256": reveal_descriptor["sha256"], "schema": "p0.assignment-commitment.v3"}))
     source_queryback_path = directory / f"{role}.source_queryback.json"
     source_queryback_path.write_bytes(canonical_bytes({"configuration": source, "schema": "p0.source-queryback.v1"}))
     adapter_descriptor = bound_descriptor(directory / common_files["adapter_source"][0])
     instrument_descriptor = bound_descriptor(directory / common_files["instrument_queryback"][0])
     source_descriptor = bound_descriptor(source_queryback_path)
+    resonance_source_path = directory / f"{role}.resonance_calibration_source_queryback.json"
+    resonance_source_path.write_bytes(canonical_bytes({"configuration": {"amplitude_vpp": "0.1", "coarse_maximum_hz": "32820", "coarse_minimum_hz": "32760", "coarse_step_hz": "1", "fine_half_span_hz": "1", "fine_step_hz": "0.025", "load_mode": "HIGH_Z", "offset_v": "0", "output_mode": "CONTINUOUS_SINE", "physical_output_ohms": "50"}, "schema": "p0.resonance-calibration-source-queryback.v1"}))
+    resonance_source_descriptor = bound_descriptor(resonance_source_path)
+    resonance_raw_path = directory / f"{role}.resonance_calibration.csv"
+    calibration_decay_seconds = 0.1
+    calibration_q_factor = math.pi * f_carrier_hz * calibration_decay_seconds
+    resonance_raw_path.write_bytes(resonance_calibration_raw_bytes(role, f_carrier_hz, calibration_q_factor))
+    resonance_analyzer_path = directory / "resonance_calibration_analyzer.py"
+    if not resonance_analyzer_path.exists():
+        resonance_analyzer_path.write_bytes(Path(__file__).resolve().read_bytes())
+    resonance_raw_descriptor = bound_descriptor(resonance_raw_path)
+    resonance_analyzer_descriptor = bound_descriptor(resonance_analyzer_path)
+    resonance_artifact_path = directory / f"{role}.resonance_calibration.json"
+    resonance_artifact_path.write_bytes(canonical_bytes({"analyzer_sha256": resonance_analyzer_descriptor["sha256"], "assembly_id": assembly_id, "calibration_excitation_vpp": "0.1", "carrier_population": carrier_population, "coarse_search": {"maximum_hz": "32820", "minimum_hz": "32760", "step_hz": "1"}, "completed_utc": "2037-07-15T23:59:50.000000Z", "decay_seconds": format(calibration_decay_seconds, ".17g"), "f_carrier_hz": f_text, "f_carrier_u95_hz": "0.025", "f_witness_hz": f_witness_text, "fine_search": {"half_span_hz": "1", "step_hz": "0.025"}, "fit_identity": "BOUNDED_COMPLEX_BVD_MAGNITUDE_AND_PHASE_V1", "instrument_queryback_sha256": instrument_descriptor["sha256"], "primary_observed": False, "q_factor": format(calibration_q_factor, ".17g"), "raw_data_sha256": resonance_raw_descriptor["sha256"], "retry_law": "ONE_PASS__REJECT_ON_FAILURE", "schema": "p0.resonance-calibration.v1", "selection_law": "MAXIMUM_FITTED_MOTIONAL_RESPONSE_IN_ACCEPTED_INTERVAL", "source_queryback_sha256": resonance_source_descriptor["sha256"]}))
+    resonance_artifact_descriptor = bound_descriptor(resonance_artifact_path)
     native_receipt_path = directory / f"{role}.native_export_receipt.json"
     native_receipt_path.write_bytes(canonical_bytes({"adapter_sha256": adapter_descriptor["sha256"], "native_file_bytes": PAYLOAD_BYTES, "native_file_sha256": payload_hash, "schema": "p0.native-export-receipt.v1"}))
     chronology_path = directory / f"{role}.chronology_receipt.json"
-    chronology_path.write_bytes(canonical_bytes({"acquisition_completed_utc": "2037-07-16T00:00:04.000000Z", "acquisition_started_utc": "2037-07-16T00:00:00.000000Z", "native_file_sha256": payload_hash, "schema": "p0.chronology-receipt.v1"}))
+    chronology_path.write_bytes(canonical_bytes({"acquisition_completed_utc": "2037-07-16T00:00:04.000000Z", "acquisition_started_utc": "2037-07-16T00:00:00.000000Z", "native_file_sha256": payload_hash, "schema": "p0.chronology-receipt.v2", "source_preparation_started_utc": "2037-07-15T23:59:56.000000Z"}))
     chronology_descriptor = bound_descriptor(chronology_path)
     assembly_manifest_path = directory / f"{assembly_id}.assembly_manifest.json"
     assembly_manifest_path.write_bytes(canonical_bytes(synthetic_assembly_manifest(assembly_id)))
     assembly_manifest_descriptor = bound_descriptor(assembly_manifest_path)
     topology_scan_path = directory / f"{role}.topology_scan.f64le"
-    topology_scan_path.write_bytes(synthetic_topology_scan_bytes(variant=ROLE_ORDER.index(role)))
+    topology_scan_path.write_bytes(synthetic_topology_scan_bytes(variant=ROLE_ORDER.index(role), f_carrier_hz=f_carrier_hz))
     topology_scan_descriptor = bound_descriptor(topology_scan_path)
     nonlinear_path = directory / f"{role}.nonlinear_control.f64le"
-    nonlinear_path.write_bytes(synthetic_nonlinear_control_bytes(0.005 + 0.0001 * ROLE_ORDER.index(role)))
+    nonlinear_path.write_bytes(synthetic_nonlinear_control_bytes(0.005 + 0.0001 * ROLE_ORDER.index(role), f_carrier_hz=f_carrier_hz))
     nonlinear_descriptor = bound_descriptor(nonlinear_path)
     topology_receipt_path = directory / f"{role}.topology_receipt.json"
     topology_receipt_path.write_bytes(canonical_bytes({"acquisition_chronology_sha256": chronology_descriptor["sha256"], "assembly_id": assembly_id, "assembly_manifest_sha256": assembly_manifest_descriptor["sha256"], "carrier_population": carrier_population, "digitizer_input_mode": "1_MOHM_PARALLEL_30_PF_TRUE_DIFFERENTIAL", "digitizer_negative_leg_reference": "CALIBRATED_AGND", "drive_shunt_node": "N_SRC", "drive_shunt_resistance_ohm": "100000", "injection_network": "TNPW_1M_INJECTION__TNPW_100K_N_SRC_SHUNT", "injection_node": "N_GATE_OUT", "instrument_queryback_sha256": instrument_descriptor["sha256"], "k3_state_during_scan": "ENERGIZED_ELECTRICALLY_OPEN", "nonlinear_control_sha256": nonlinear_descriptor["sha256"], "qualified_native_file_sha256": payload_hash, "role": role, "scan_completed_utc": "2037-07-15T23:59:59.000000Z", "scan_started_utc": "2037-07-15T23:59:58.000000Z", "schema": "p0.signal-path-topology-receipt.v2", "source_queryback_sha256": source_descriptor["sha256"], "topology_scan_sha256": topology_scan_descriptor["sha256"]}))
@@ -1799,6 +1987,10 @@ def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: s
         "instrument_queryback": instrument_descriptor,
         "native_export_receipt": bound_descriptor(native_receipt_path),
         "nonlinear_control": nonlinear_descriptor,
+        "resonance_calibration_analyzer": resonance_analyzer_descriptor,
+        "resonance_calibration_artifact": resonance_artifact_descriptor,
+        "resonance_calibration_raw": resonance_raw_descriptor,
+        "resonance_calibration_source_queryback": resonance_source_descriptor,
         "source_queryback": source_descriptor,
         "topology_receipt": bound_descriptor(topology_receipt_path),
         "topology_scan": topology_scan_descriptor,
@@ -1812,8 +2004,9 @@ def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: s
         "instrument": {**instrument, "configuration_queryback_sha256": receipts["instrument_queryback"]["sha256"]},
         "export": {"adapter_id": "P0-DN2-SDK-EXPORT-ADAPTER-V1", "adapter_sha256": receipts["adapter_source"]["sha256"], "native_file_sha256": payload_hash, "native_file_bytes": PAYLOAD_BYTES, "lossless_assertions": {"sample_loss": False, "reordering": False, "averaging": False, "filtering": False, "resampling": False, "clipping_concealment": False, "unit_ambiguity": False}},
         "payload": {"path": payload_name, "sha256": payload_hash, "bytes": PAYLOAD_BYTES, "dtype": "int16", "endian": "little", "layout": "sample-major-interleaved", "channels": ["CH0_SOURCE", "CH1_CARRIER", "CH2_WITNESS", "CH3_VIBRATION"], "samples_per_channel": SAMPLES, "sample_rate_hz": FS, "scale_per_code": ["0.00001", "0.00001", "0.0001", "0.0001"], "offset": ["0", "0", "0", "0"]},
-        "clock": {"identity": "SYNTHETIC-1MHZ-MASTER", "frequency_hz": "32768", "sample_rate_hz": "1000000", "channel_skew_seconds": "0", "record_start_mode": "SOFTWARE_PREARM_FREE_RUN", "external_trigger_connected": False, "phase_gauge": "CH0_SOURCE", "alignment": "CH2_WITNESS"},
+        "clock": {"identity": "SYNTHETIC-1MHZ-MASTER", "frequency_hz": f_text, "sample_rate_hz": "1000000", "channel_skew_seconds": "0", "record_start_mode": "SOFTWARE_PREARM_FREE_RUN", "external_trigger_connected": False, "phase_gauge": "CH0_SOURCE", "alignment": "CH2_WITNESS"},
         "source": {**source, "setup_queryback_sha256": receipts["source_queryback"]["sha256"]},
+        "frequency_binding": {"calibration_analyzer_sha256": receipts["resonance_calibration_analyzer"]["sha256"], "calibration_artifact_sha256": receipts["resonance_calibration_artifact"]["sha256"], "calibration_raw_sha256": receipts["resonance_calibration_raw"]["sha256"], "f_carrier_hz": f_text, "f_carrier_u95_hz": "0.025", "f_witness_hz": f_witness_text, "relation": "f_witness_hz == 2 * f_carrier_hz"},
         "signal_path": {"adg_state_during_windows": "OFF_D_TO_SA_50R", "c2_continuous": True, "circuit_model_sha256": model_hash, "digitizer_input_mode": "1_MOHM_PARALLEL_30_PF_TRUE_DIFFERENTIAL", "drive_shunt_node": "N_SRC", "drive_shunt_resistance_ohm": "100000", "injection_network": "TNPW_1M_INJECTION__TNPW_100K_N_SRC_SHUNT", "injection_node": "N_GATE_OUT", "injection_resistance_ohm": "1000000", "k3_state_during_open_window": "ENERGIZED_ELECTRICALLY_OPEN", "thresholds_sha256": model["thresholds_sha256"], "topology_receipt_sha256": receipts["topology_receipt"]["sha256"]},
         "witness": {**witness_body, "calibration_sha256": witness_hash},
         "environment": {"cadence_hz": "10", "temperature_c": temperature_text, "humidity_rh": humidity_text, "vibration_rms_m_s2": "0.003535533905932738", "vibration_peak_m_s2": "0.005", "sensor_serial_hex": "00000001", "measurement_command_hex": "fd", "clock_mapping_sha256": clock_mapping_hash, "calibration_sha256": calibration_hash, "record_path": environment_name, "record_sha256": environment_hash, "record_bytes": environment_bytes, "record_count": len(range(0, SAMPLES, 100_000))},
@@ -1822,16 +2015,16 @@ def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: s
     }
 
 
-def materialize_synthetic(directory: Path) -> Path:
+def materialize_synthetic(directory: Path, f_carrier_hz: float = SYNTHETIC_F_CARRIER_HZ) -> Path:
     roles: dict[str, dict[str, str]] = {}
     for role in ROLE_ORDER:
         payload_name = f"{role}.raw"
         payload_path = directory / payload_name
-        synthetic_record(role).tofile(payload_path)
+        synthetic_record(role, f_carrier_hz).tofile(payload_path)
         environment_name = f"{role}.environment.csv"
         environment_path = directory / environment_name
         environment_path.write_bytes(synthetic_environment_bytes())
-        meta = base_metadata(directory, role, payload_name, sha256_file(payload_path), environment_name, sha256_file(environment_path), environment_path.stat().st_size)
+        meta = base_metadata(directory, role, payload_name, sha256_file(payload_path), environment_name, sha256_file(environment_path), environment_path.stat().st_size, f_carrier_hz)
         meta_name = f"{role}.json"
         meta_path = directory / meta_name
         meta_path.write_bytes(canonical_bytes(meta))
@@ -1924,7 +2117,7 @@ def analyze_signal_path_control(record: dict[str, Any], identity_directory: Path
     if order["contact_reentry_samples"]:
         raise Reject("SIGNAL_PATH_CONTACT_REENTRY")
     payload = record["payload"]
-    exact_fields(payload, {"channel_roles", "clipping_abs_v", "common_mode_abs_v", "condition_number", "open_window_samples", "pre_window_samples", "rank", "scale_per_code_v"}, "signal_path_control.payload")
+    exact_fields(payload, {"channel_roles", "clipping_abs_v", "condition_number", "open_window_samples", "pre_window_samples", "rank", "scale_per_code_v"}, "signal_path_control.payload")
     if payload["channel_roles"] != ["CH0_SOURCE", "CH1_CARRIER", "CH2_WITNESS", "CH3_VIBRATION"]:
         raise Reject("CHANNEL_ROLE_MISMATCH")
     if decimal(payload["scale_per_code_v"], "signal_path_control.payload.scale") != 0.00001:
@@ -1937,8 +2130,6 @@ def analyze_signal_path_control(record: dict[str, Any], identity_directory: Path
         raise Reject("SIGNAL_PATH_FIT_CONDITION")
     if nonnegative_decimal(payload["clipping_abs_v"], "signal_path_control.payload.clipping") > model_number(limits["clipping_abs_v_max"], "model.clipping_abs_v_max"):
         raise Reject("SIGNAL_PATH_CLIPPING")
-    if nonnegative_decimal(payload["common_mode_abs_v"], "signal_path_control.payload.common_mode") > model_number(limits["common_mode_abs_v_max"], "model.common_mode_abs_v_max"):
-        raise Reject("SIGNAL_PATH_COMMON_MODE")
     metrics = record["metrics"]
     exact_fields(metrics, {"isolated_abs_h2", "isolated_phase_h2_rad", "isolated_u95_h2", "pre_abs_h2", "pre_open_complex_separation", "pre_phase_h2_rad", "pre_pilot_snr", "r_drop"}, "signal_path_control.metrics")
     values = {key: nonnegative_decimal(metrics[key], f"signal_path_control.metrics.{key}") for key in metrics if key not in ("pre_phase_h2_rad", "isolated_phase_h2_rad")}
@@ -1977,7 +2168,7 @@ def signal_path_control_base(case_id: str, identity_directory: Path | None = Non
         "evidence_class": "SYNTHETIC",
         "metrics": {"isolated_abs_h2": "0.05", "isolated_phase_h2_rad": "-0.9", "isolated_u95_h2": "0.001", "pre_abs_h2": "0.3", "pre_open_complex_separation": "0.25", "pre_phase_h2_rad": "-0.9", "pre_pilot_snr": "50", "r_drop": "0.166666666666667"},
         "order": {"bounce_samples": 0, "code0_samples": 1000, "contact_reentry_samples": 0, "h2_completed_before_k3": True, "k3_guarded_during_h2": False, "pre_completed_before_release": True},
-        "payload": {"channel_roles": ["CH0_SOURCE", "CH1_CARRIER", "CH2_WITNESS", "CH3_VIBRATION"], "clipping_abs_v": "0.1", "common_mode_abs_v": "0.01", "condition_number": "2", "open_window_samples": 960, "pre_window_samples": 192, "rank": 5, "scale_per_code_v": "0.00001"},
+        "payload": {"channel_roles": ["CH0_SOURCE", "CH1_CARRIER", "CH2_WITNESS", "CH3_VIBRATION"], "clipping_abs_v": "0.1", "condition_number": "2", "open_window_samples": 960, "pre_window_samples": 192, "rank": 5, "scale_per_code_v": "0.00001"},
         "physical_claim_requested": False,
         "schema": "p0.signal-path-control.v1",
         "topology": {"adg_state": "OFF_D_TO_SA_50R", "c2_present": True, "carrier_population": "FC135", "evaluation": "ISOLATION", "injection_node": "N_GATE_OUT", "k1": "OPEN", "k2": "OPEN", "k3": "ENERGIZED_OPEN"},
@@ -2105,7 +2296,6 @@ RAW_ADVERSARIES = {
     "signal_path_k3_guard_metadata": "SIGNAL_PATH_GUARD_MASKING",
     "signal_path_k3_guard_signal_raw": "SIGNAL_PATH_PHASE",
     "signal_path_nonlinear_2f_raw": "SIGNAL_PATH_2F_RESIDUE",
-    "signal_path_common_mode_raw": "SIGNAL_PATH_COMMON_MODE",
     "signal_path_assembly_a_replay_into_b": "SIGNAL_PATH_ASSEMBLY_ROLE",
     "signal_path_assembly_a_replay_into_c": "SIGNAL_PATH_ASSEMBLY_ROLE",
     "signal_path_topology_receipt_wrong_event": "SIGNAL_PATH_TOPOLOGY_CUSTODY",
@@ -2116,6 +2306,11 @@ RAW_ADVERSARIES = {
     "signal_path_scan_time_alternate_offset": "SIGNAL_PATH_SCAN_CHRONOLOGY",
     "signal_path_acquisition_time_truncated_precision": "CHRONOLOGY_CUSTODY",
     "signal_path_scan_time_lexical_deception": "SIGNAL_PATH_SCAN_CHRONOLOGY",
+    "resonance_calibration_raw_garbage": "RESONANCE_CALIBRATION_RAW",
+    "resonance_calibration_q_claim_mismatch": "RESONANCE_CALIBRATION_RAW",
+    "source_preparation_before_assignment": "CHRONOLOGY_CUSTODY",
+    "off_resonance_raw_response": "OFF_RESONANCE_RESPONSE",
+    "off_resonance_probe_too_close": "OFF_RESONANCE_PROBE_BINDING",
 }
 
 
@@ -2137,7 +2332,7 @@ def rebind_mutated_payload(directory: Path, bundle: dict[str, Any], role: str, m
     native_path = directory / f"{role}.native_export_receipt.json"
     native_path.write_bytes(canonical_bytes({"adapter_sha256": meta["export"]["adapter_sha256"], "native_file_bytes": PAYLOAD_BYTES, "native_file_sha256": payload_hash, "schema": "p0.native-export-receipt.v1"}))
     chronology_path = directory / f"{role}.chronology_receipt.json"
-    chronology_path.write_bytes(canonical_bytes({"acquisition_completed_utc": "2037-07-16T00:00:04.000000Z", "acquisition_started_utc": "2037-07-16T00:00:00.000000Z", "native_file_sha256": payload_hash, "schema": "p0.chronology-receipt.v1"}))
+    chronology_path.write_bytes(canonical_bytes({"acquisition_completed_utc": "2037-07-16T00:00:04.000000Z", "acquisition_started_utc": "2037-07-16T00:00:00.000000Z", "native_file_sha256": payload_hash, "schema": "p0.chronology-receipt.v2", "source_preparation_started_utc": "2037-07-15T23:59:56.000000Z"}))
     meta["custody"]["byte_receipts"]["native_export_receipt"] = bound_descriptor(native_path)
     meta["custody"]["byte_receipts"]["chronology_receipt"] = bound_descriptor(chronology_path)
     write_mutated_metadata(directory, bundle, role, meta)
@@ -2226,6 +2421,68 @@ def mutate_acquisition_times(directory: Path, bundle: dict[str, Any], role: str,
     rebind_signal_receipts(directory, bundle, role)
 
 
+def mutate_source_preparation_time(directory: Path, bundle: dict[str, Any], role: str, started: str) -> None:
+    meta_path = directory / bundle["roles"][role]["path"]
+    meta = plain_json(meta_path)
+    descriptor = meta["custody"]["byte_receipts"]["chronology_receipt"]
+    receipt_path = directory / descriptor["path"]
+    receipt = plain_json(receipt_path)
+    receipt["source_preparation_started_utc"] = started
+    receipt_path.write_bytes(canonical_bytes(receipt))
+    meta["custody"]["byte_receipts"]["chronology_receipt"] = bound_descriptor(receipt_path)
+    meta_path.write_bytes(canonical_bytes(meta))
+    bundle["roles"][role]["sha256"] = sha256_file(meta_path)
+    (directory / "bundle.json").write_bytes(canonical_bytes(bundle))
+    rebind_signal_receipts(directory, bundle, role)
+
+
+def mutate_resonance_calibration_raw(directory: Path, bundle: dict[str, Any], role: str, data: bytes) -> None:
+    meta_path = directory / bundle["roles"][role]["path"]
+    meta = plain_json(meta_path)
+    receipts = meta["custody"]["byte_receipts"]
+    raw_path = directory / receipts["resonance_calibration_raw"]["path"]
+    raw_path.write_bytes(data)
+    raw_descriptor = bound_descriptor(raw_path)
+    artifact_path = directory / receipts["resonance_calibration_artifact"]["path"]
+    artifact = plain_json(artifact_path)
+    artifact["raw_data_sha256"] = raw_descriptor["sha256"]
+    artifact_path.write_bytes(canonical_bytes(artifact))
+    artifact_descriptor = bound_descriptor(artifact_path)
+    receipts["resonance_calibration_raw"] = raw_descriptor
+    receipts["resonance_calibration_artifact"] = artifact_descriptor
+    meta["frequency_binding"]["calibration_raw_sha256"] = raw_descriptor["sha256"]
+    meta["frequency_binding"]["calibration_artifact_sha256"] = artifact_descriptor["sha256"]
+    write_mutated_metadata(directory, bundle, role, meta)
+
+
+def mutate_resonance_calibration(directory: Path, bundle: dict[str, Any], role: str, key: str, value: Any) -> None:
+    meta_path = directory / bundle["roles"][role]["path"]
+    meta = plain_json(meta_path)
+    descriptor = meta["custody"]["byte_receipts"]["resonance_calibration_artifact"]
+    artifact_path = directory / descriptor["path"]
+    artifact = plain_json(artifact_path)
+    artifact[key] = value
+    artifact_path.write_bytes(canonical_bytes(artifact))
+    rebound = bound_descriptor(artifact_path)
+    meta["custody"]["byte_receipts"]["resonance_calibration_artifact"] = rebound
+    meta["frequency_binding"]["calibration_artifact_sha256"] = rebound["sha256"]
+    write_mutated_metadata(directory, bundle, role, meta)
+
+
+def mutate_source_queryback_frequency(directory: Path, bundle: dict[str, Any], role: str, value: str) -> None:
+    meta_path = directory / bundle["roles"][role]["path"]
+    meta = plain_json(meta_path)
+    descriptor = meta["custody"]["byte_receipts"]["source_queryback"]
+    queryback_path = directory / descriptor["path"]
+    queryback = plain_json(queryback_path)
+    queryback["configuration"]["frequency_hz"] = value
+    queryback_path.write_bytes(canonical_bytes(queryback))
+    rebound = bound_descriptor(queryback_path)
+    meta["custody"]["byte_receipts"]["source_queryback"] = rebound
+    meta["source"]["setup_queryback_sha256"] = rebound["sha256"]
+    write_mutated_metadata(directory, bundle, role, meta)
+
+
 def execute_bundle_adversary(directory: Path, case: str, identity_directory: Path, expected: str) -> dict[str, Any]:
     bundle_path = directory / "bundle.json"
     tracked = [
@@ -2234,9 +2491,15 @@ def execute_bundle_adversary(directory: Path, case: str, identity_directory: Pat
         *[directory / f"{role}.environment.csv" for role in ROLE_ORDER],
         *[directory / f"{role}.native_export_receipt.json" for role in ROLE_ORDER],
         *[directory / f"{role}.chronology_receipt.json" for role in ROLE_ORDER],
+        *[directory / f"{role}.resonance_calibration.csv" for role in ROLE_ORDER],
+        *[directory / f"{role}.resonance_calibration.json" for role in ROLE_ORDER],
+        *[directory / f"{role}.resonance_calibration_source_queryback.json" for role in ROLE_ORDER],
         *[directory / f"{role}.topology_scan.f64le" for role in ROLE_ORDER],
         *[directory / f"{role}.nonlinear_control.f64le" for role in ROLE_ORDER],
+        *[directory / f"{role}.source_queryback.json" for role in ROLE_ORDER],
         *[directory / f"{role}.topology_receipt.json" for role in ROLE_ORDER],
+        directory / "assignment_commitment.json",
+        directory / "resonance_calibration_analyzer.py",
     ]
     originals = {path: path.read_bytes() for path in tracked}
     extra = directory / "adversary.raw"
@@ -2287,6 +2550,36 @@ def execute_bundle_adversary(directory: Path, case: str, identity_directory: Pat
         elif case == "threshold_mutation_after_primary_data":
             meta["custody"]["thresholds_frozen_before_primary"] = False
             write_mutated_metadata(directory, bundle, role, meta)
+        elif case == "unbound_carrier_frequency":
+            del meta["frequency_binding"]["f_carrier_hz"]
+            write_mutated_metadata(directory, bundle, role, meta)
+        elif case == "wrong_resonance_calibration_hash":
+            meta["frequency_binding"]["calibration_raw_sha256"] = "0" * 64
+            write_mutated_metadata(directory, bundle, role, meta)
+        elif case == "calibration_after_assignment":
+            mutate_resonance_calibration(directory, bundle, role, "completed_utc", "2037-07-15T23:59:53.000000Z")
+        elif case == "source_queryback_frequency_mismatch":
+            mutate_source_queryback_frequency(directory, bundle, role, "32769")
+        elif case == "witness_frequency_relation_mismatch":
+            meta["frequency_binding"]["f_witness_hz"] = "65537"
+            write_mutated_metadata(directory, bundle, role, meta)
+        elif case == "resonance_calibration_raw_garbage":
+            mutate_resonance_calibration_raw(directory, bundle, role, b"not calibration data\n")
+        elif case == "resonance_calibration_q_claim_mismatch":
+            current = plain_json(directory / meta["custody"]["byte_receipts"]["resonance_calibration_artifact"]["path"])
+            mutate_resonance_calibration(directory, bundle, role, "q_factor", format(1.01 * decimal(current["q_factor"], "resonance_calibration.q_factor"), ".17g"))
+        elif case == "source_preparation_before_assignment":
+            mutate_source_preparation_time(directory, bundle, role, "2037-07-15T23:00:00.000000Z")
+        elif case in ("off_resonance_raw_response", "off_resonance_probe_too_close"):
+            raw_path = directory / meta["custody"]["byte_receipts"]["resonance_calibration_raw"]["path"]
+            lines = raw_path.read_text(encoding="ascii").splitlines()
+            fields = lines[-1].split(",")
+            if case == "off_resonance_raw_response":
+                fields[3] = "0.021"
+            else:
+                fields[2] = format(decimal(meta["frequency_binding"]["f_carrier_hz"], "frequency_binding.f_carrier_hz") + 1.0, ".17g")
+            lines[-1] = ",".join(fields)
+            mutate_resonance_calibration_raw(directory, bundle, role, ("\n".join(lines) + "\n").encode("ascii"))
         elif case == "negative_scale_transform":
             meta["payload"]["scale_per_code"][0] = "-0.00001"
             write_mutated_metadata(directory, bundle, role, meta)
@@ -2336,7 +2629,7 @@ def execute_bundle_adversary(directory: Path, case: str, identity_directory: Pat
             mutate_acquisition_times(directory, bundle, "arm_0", "2037-07-16T00:00:00Z", "2037-07-16T00:00:04.000000Z")
         elif case == "signal_path_scan_time_lexical_deception":
             mutate_topology_scan_times(directory, bundle, "arm_0", "0", "1")
-        elif case in ("precommand_not_drive", "gate_first_sequence_skipped", "source_left_on_raw", "source_muted_preparation_middle_raw", "source_muted_at_gate_raw", "source_muted_gate_guard_only_raw", "source_muted_late_1300000_raw", "source_muted_late_2000000_raw", "source_muted_late_3000000_raw", "reference_tone_missing_raw", "guard_before_series_open_raw", "matched_drive_phase_mismatch_raw", "signal_path_c2_absent_raw", "signal_path_no_downstream_injection_raw", "signal_path_guard_masked_pre_raw", "signal_path_closed_not_isolated_raw", "signal_path_phase_inversion_raw", "signal_path_open_feedthrough_raw", "signal_path_k3_guard_signal_raw", "signal_path_common_mode_raw"):
+        elif case in ("precommand_not_drive", "gate_first_sequence_skipped", "source_left_on_raw", "source_muted_preparation_middle_raw", "source_muted_at_gate_raw", "source_muted_gate_guard_only_raw", "source_muted_late_1300000_raw", "source_muted_late_2000000_raw", "source_muted_late_3000000_raw", "reference_tone_missing_raw", "guard_before_series_open_raw", "matched_drive_phase_mismatch_raw", "signal_path_c2_absent_raw", "signal_path_no_downstream_injection_raw", "signal_path_guard_masked_pre_raw", "signal_path_closed_not_isolated_raw", "signal_path_phase_inversion_raw", "signal_path_open_feedthrough_raw", "signal_path_k3_guard_signal_raw"):
             if case == "matched_drive_phase_mismatch_raw":
                 role = "arm_pi"
                 meta_path = directory / bundle["roles"][role]["path"]
@@ -2360,14 +2653,14 @@ def execute_bundle_adversary(directory: Path, case: str, identity_directory: Pat
                 raw[N_CMD + 300 : N_CMD + 310, 2] = 9000
             elif case == "matched_drive_phase_mismatch_raw":
                 n = np.arange(SAMPLES, dtype=np.float64)
-                raw[:, 0] = np.rint(8000 * np.cos(2 * math.pi * F_REF * n / FS + math.pi + 0.0095) + 4500 * np.cos(2 * math.pi * (2.0 * F_REF) * n / FS)).astype(np.int16)
+                raw[:, 0] = np.rint(8000 * np.cos(2 * math.pi * SYNTHETIC_F_CARRIER_HZ * n / FS + math.pi + 0.0095) + 4500 * np.cos(2 * math.pi * SYNTHETIC_F_WITNESS_HZ * n / FS)).astype(np.int16)
             elif case.startswith("signal_path_"):
                 n = np.arange(SAMPLES, dtype=np.float64)
-                reference = np.cos(2.0 * math.pi * F_WITNESS * n / FS)
+                reference = np.cos(2.0 * math.pi * SYNTHETIC_F_WITNESS_HZ * n / FS)
                 pilot_amplitude = np.full(SAMPLES, 1350.0, dtype=np.float64)
                 pilot_amplitude[N_CMD + 250 : N_CMD + 1500] = 225.0
                 pilot_amplitude[N_CMD + 1500 :] = 2.0
-                pilot = np.rint(pilot_amplitude * np.cos(2.0 * math.pi * F_WITNESS * n / FS - 0.90)).astype(np.int32)
+                pilot = np.rint(pilot_amplitude * np.cos(2.0 * math.pi * SYNTHETIC_F_WITNESS_HZ * n / FS - 0.90)).astype(np.int32)
                 ch1_mutated = raw[:, 1].astype(np.int32)
                 if case == "signal_path_c2_absent_raw":
                     raw[:, 0] = np.clip(raw[:, 0].astype(np.int32) - np.rint(4500.0 * reference).astype(np.int32), -32768, 32767).astype(np.int16)
@@ -2379,23 +2672,21 @@ def execute_bundle_adversary(directory: Path, case: str, identity_directory: Pat
                     ch1_mutated[start:stop] -= pilot[start:stop]
                 elif case == "signal_path_closed_not_isolated_raw":
                     start, stop = N_CMD + 250, N_CMD + 1250
-                    ch1_mutated[start:stop] += np.rint(400.0 * np.cos(2.0 * math.pi * F_WITNESS * n[start:stop] / FS - 0.90)).astype(np.int32)
+                    ch1_mutated[start:stop] += np.rint(400.0 * np.cos(2.0 * math.pi * SYNTHETIC_F_WITNESS_HZ * n[start:stop] / FS - 0.90)).astype(np.int32)
                 elif case == "signal_path_phase_inversion_raw":
                     ch1_mutated -= 2 * pilot
                 elif case == "signal_path_k3_guard_signal_raw":
                     start, stop = N_CMD + 250, N_CMD + 1250
                     ch1_mutated[start:stop] -= pilot[start:stop]
-                    ch1_mutated[start:stop] += np.rint(23.0 * np.cos(2.0 * math.pi * F_WITNESS * n[start:stop] / FS + 0.51)).astype(np.int32)
-                elif case == "signal_path_common_mode_raw":
-                    ch1_mutated += 22000
+                    ch1_mutated[start:stop] += np.rint(23.0 * np.cos(2.0 * math.pi * SYNTHETIC_F_WITNESS_HZ * n[start:stop] / FS + 0.51)).astype(np.int32)
                 else:
                     start, stop = N_CMD + 250, N_CMD + 1250
-                    ch1_mutated[start:stop] += np.rint(400.0 * np.cos(2.0 * math.pi * F_WITNESS * n[start:stop] / FS - 0.90)).astype(np.int32)
+                    ch1_mutated[start:stop] += np.rint(400.0 * np.cos(2.0 * math.pi * SYNTHETIC_F_WITNESS_HZ * n[start:stop] / FS - 0.90)).astype(np.int32)
                 raw[:, 1] = np.clip(ch1_mutated, -32768, 32767).astype(np.int16)
             else:
                 n = np.arange(SAMPLES, dtype=np.float64)
                 phase_offset = math.pi if role == "arm_pi" else 0.0
-                raw[:, 0] = np.rint(8000 * np.cos(2 * math.pi * F_REF * n / FS + phase_offset)).astype(np.int16)
+                raw[:, 0] = np.rint(8000 * np.cos(2 * math.pi * SYNTHETIC_F_CARRIER_HZ * n / FS + phase_offset)).astype(np.int16)
             raw.tofile(extra)
             rebind_mutated_payload(directory, bundle, role, meta, extra)
         elif case == "matched_temperature_delta_raw":
@@ -2486,7 +2777,13 @@ def analyze_control_record(data: bytes) -> None:
     if control_id not in set(POSITIVE_CASES) | set(SCIENTIFIC_NEGATIVES):
         raise Reject("CONTROL_ID")
     source = record["source"]
-    exact_fields(source, {"stable_state_code", "residual_drive_ratio"}, "control.source")
+    exact_fields(source, {"f_carrier_hz", "f_carrier_u95_hz", "f_witness_hz", "frequency_relation", "q_factor", "stable_state_code", "residual_drive_ratio"}, "control.source")
+    control_f_carrier = decimal(source["f_carrier_hz"], "control.source.f_carrier_hz")
+    control_f_u95 = nonnegative_decimal(source["f_carrier_u95_hz"], "control.source.f_carrier_u95_hz")
+    control_f_witness = decimal(source["f_witness_hz"], "control.source.f_witness_hz")
+    control_q_factor = decimal(source["q_factor"], "control.source.q_factor")
+    if not F_CARRIER_MIN_HZ <= control_f_carrier <= F_CARRIER_MAX_HZ or control_f_u95 > F_CARRIER_U95_MAX_HZ or source["frequency_relation"] != "f_witness_hz == 2 * f_carrier_hz" or control_f_witness != 2.0 * control_f_carrier:
+        raise Reject("CONTROL_FREQUENCY_BINDING")
     nonnegative_int(source["stable_state_code"], "control.source.stable_state_code")
     if source["stable_state_code"] != 8 or nonnegative_decimal(source["residual_drive_ratio"], "control.source.residual_drive_ratio") > 0.001:
         raise Reject("SOURCE_OFF_NOT_WITNESSED")
@@ -2552,7 +2849,11 @@ def analyze_control_record(data: bytes) -> None:
     if nonnegative_decimal(environment["vibration_rms_delta_m_s2"], "control.environment.vibration_rms_delta_m_s2") > 0.010:
         raise Reject("VIBRATION_MISMATCH")
     controls = record["controls"]
-    exact_fields(controls, {"zero_drive_response_ratio", "resonator_removed_response_ratio", "dummy_c0_feedthrough_ratio", "off_resonance_response_ratio", "reference_leakage_ratio", "fixed_phase_concentration"}, "control.controls")
+    exact_fields(controls, {"zero_drive_response_ratio", "resonator_removed_response_ratio", "dummy_c0_feedthrough_ratio", "off_resonance_probe_hz", "off_resonance_response_ratio", "reference_leakage_ratio", "fixed_phase_concentration"}, "control.controls")
+    control_probe_separation = abs(decimal(controls["off_resonance_probe_hz"], "control.controls.off_resonance_probe_hz") - control_f_carrier)
+    control_required_separation = max(20.0, 20.0 * control_f_carrier / control_q_factor) if control_q_factor > 0.0 else math.inf
+    if control_q_factor <= 0.0 or (control_probe_separation < control_required_separation and not math.isclose(control_probe_separation, control_required_separation, rel_tol=1e-12, abs_tol=1e-9)):
+        raise Reject("OFF_RESONANCE_PROBE_BINDING")
     for key, code in (
         ("zero_drive_response_ratio", "ZERO_DRIVE_CONTROL"),
         ("resonator_removed_response_ratio", "RESONATOR_REMOVED_CONTROL"),
@@ -2574,18 +2875,20 @@ def analyze_control_record(data: bytes) -> None:
 
 def run_semantic_suite() -> list[dict[str, Any]]:
     outcomes: list[dict[str, Any]] = []
+    semantic_q_factor = math.pi * SYNTHETIC_F_CARRIER_HZ * 0.1
+    semantic_probe_hz = SYNTHETIC_F_CARRIER_HZ + max(20.0, 20.0 * SYNTHETIC_F_CARRIER_HZ / semantic_q_factor)
     base = {
         "schema": "p0.synthetic-control-evidence.v1",
         "control_id": "",
         "evidence_class": "SYNTHETIC",
         "physical_claim_requested": False,
-        "source": {"stable_state_code": 8, "residual_drive_ratio": "0"},
+        "source": {"f_carrier_hz": "32768", "f_carrier_u95_hz": "0.025", "f_witness_hz": "65536", "frequency_relation": "f_witness_hz == 2 * f_carrier_hz", "q_factor": format(semantic_q_factor, ".17g"), "stable_state_code": 8, "residual_drive_ratio": "0"},
         "path": {"post_barrier_active_elements": 0, "termination_id": "50R0-TNPW0805"},
         "transients": {"settled_after_admit": True, "detector_memory_seconds": "0.000010", "bounce_end_sample": 1_100_000, "n_admit": 1_100_000, "timing_mismatch_samples": 0},
         "witness": {"sample_count": SAMPLES, "guard_samples": 10_000, "invalid_samples": 0, "ambiguous_samples": 0, "post_off_reentry_samples": 0},
         "payload": {"channel_roles": ["CH0_SOURCE", "CH1_CARRIER", "CH2_WITNESS", "CH3_VIBRATION"], "sample_rate_hz": FS, "channel_skew_seconds": "0.0000001", "clipped_samples": 0, "saturated_samples": 0},
         "environment": {"cadence_samples": 100_000, "temperature_delta_c": "0.20", "humidity_delta_rh": "2", "vibration_rms_delta_m_s2": "0.010"},
-        "controls": {"zero_drive_response_ratio": "0.020", "resonator_removed_response_ratio": "0.020", "dummy_c0_feedthrough_ratio": "0.020", "off_resonance_response_ratio": "0.020", "reference_leakage_ratio": "0.020", "fixed_phase_concentration": "0.950"},
+        "controls": {"zero_drive_response_ratio": "0.020", "resonator_removed_response_ratio": "0.020", "dummy_c0_feedthrough_ratio": "0.020", "off_resonance_probe_hz": format(semantic_probe_hz, ".17g"), "off_resonance_response_ratio": "0.020", "reference_leakage_ratio": "0.020", "fixed_phase_concentration": "0.950"},
         "epsilon": {"neg": "0", "amplitude": "0", "frequency": "0", "decay": "0", "phase": "0", "feedthrough": "0"},
     }
     for case in POSITIVE_CASES:
@@ -2599,6 +2902,7 @@ def run_semantic_suite() -> list[dict[str, Any]]:
         "dummy_c0_feedthrough": (("controls", "dummy_c0_feedthrough_ratio"), "0.021"),
         "source_left_on": (("source", "stable_state_code"), 7),
         "off_resonance_response": (("controls", "off_resonance_response_ratio"), "0.021"),
+        "off_resonance_probe_binding": (("controls", "off_resonance_probe_hz"), "32769"),
         "detector_impulse_memory": (("transients", "detector_memory_seconds"), "0.000011"),
         "controller_buffer_replay": (("path", "post_barrier_active_elements"), 1),
         "analog_switch_charge_transient": (("transients", "settled_after_admit"), False),
@@ -2695,7 +2999,7 @@ def schema_document() -> dict[str, Any]:
         "canonical_json": {"encoding": "UTF-8", "newline": "LF-final", "keys": "lexicographic", "indent_spaces": 2, "duplicate_keys": "reject", "unknown_fields": "reject", "nonfinite": "reject", "boolean_as_number": "reject", "hashes": "lowercase-sha256", "negative_zero": "reject-by-canonical-form"},
         "enforced_objects": {
             "p0.raw-bundle-manifest.v1": {"exact_fields": ["roles", "schema"], "role_entry_fields": ["path", "sha256"], "roles": list(ROLE_ORDER), "metadata_hashes_required": True, "unique_payloads_required": True},
-            SCHEMA: {"exact_fields": ["assembly", "clock", "custody", "environment", "evidence_class", "export", "instrument", "payload", "role", "run_id", "schema", "signal_path", "source", "thresholds", "witness"], "assembly_exact_fields": ["assembly_id", "assembly_manifest_sha256", "carrier_population"], "source_exact_fields": ["model", "phase_command_rad", "phase_skew_standard_uncertainty_rad", "phase_drive_cal_standard_uncertainty_rad", "frequency_hz", "amplitude_vpp", "offset_v", "reference_frequency_hz", "reference_amplitude_vpp", "reference_offset_v", "reference_phase_command_rad", "dual_channel_phase_locked", "monitor_network", "output_mode", "load_mode", "qualified_preparation_cycles", "source_remains_on_through_record", "output_ohms", "setup_queryback_sha256"], "signal_path_exact_fields": ["adg_state_during_windows", "c2_continuous", "circuit_model_sha256", "digitizer_input_mode", "drive_shunt_node", "drive_shunt_resistance_ohm", "injection_network", "injection_node", "injection_resistance_ohm", "k3_state_during_open_window", "thresholds_sha256", "topology_receipt_sha256"], "source_frozen_setup": {"c1_amplitude_vpp": "0.4", "c1_offset_v": "0", "c2_amplitude_vpp": "0.1", "c2_offset_v": "0", "load_mode": "HIGH_Z", "physical_output_ohms": "50"}, "cross_record_equal": ["assignment_commitment_sha256", "calibration_sha256", "clock_identity", "evidence_class", "export_adapter_identity", "f_ref_hz", "instrument_identity_and_configuration", "scale_per_code", "signal_path_invariant_fields", "source_setup_except_phase", "thresholds"], "role_to_assembly": ASSEMBLY_FOR_ROLE, "topology_scan_hashes_unique_per_role": True, "nonlinear_control_hashes_unique_per_role": True, "chronology_utc_format": "YYYY-MM-DDTHH:MM:SS.ffffffZ", "assignment_reveal_required": True, "byte_receipts_required": ["adapter_source", "assembly_manifest", "assignment_commitment", "assignment_reveal", "calibration_receipt", "chronology_receipt", "instrument_queryback", "native_export_receipt", "nonlinear_control", "source_queryback", "topology_receipt", "topology_scan"]},
+            SCHEMA: {"exact_fields": ["assembly", "clock", "custody", "environment", "evidence_class", "export", "frequency_binding", "instrument", "payload", "role", "run_id", "schema", "signal_path", "source", "thresholds", "witness"], "assembly_exact_fields": ["assembly_id", "assembly_manifest_sha256", "carrier_population"], "frequency_binding_exact_fields": ["calibration_analyzer_sha256", "calibration_artifact_sha256", "calibration_raw_sha256", "f_carrier_hz", "f_carrier_u95_hz", "f_witness_hz", "relation"], "source_exact_fields": ["model", "phase_command_rad", "phase_skew_standard_uncertainty_rad", "phase_drive_cal_standard_uncertainty_rad", "frequency_hz", "amplitude_vpp", "offset_v", "reference_frequency_hz", "reference_amplitude_vpp", "reference_offset_v", "reference_phase_command_rad", "dual_channel_phase_locked", "monitor_network", "output_mode", "load_mode", "qualified_preparation_cycles", "source_remains_on_through_record", "output_ohms", "setup_queryback_sha256"], "signal_path_exact_fields": ["adg_state_during_windows", "c2_continuous", "circuit_model_sha256", "digitizer_input_mode", "drive_shunt_node", "drive_shunt_resistance_ohm", "injection_network", "injection_node", "injection_resistance_ohm", "k3_state_during_open_window", "thresholds_sha256", "topology_receipt_sha256"], "source_frozen_setup": {"c1_amplitude_vpp": "0.4", "c1_offset_v": "0", "c2_amplitude_vpp": "0.1", "c2_offset_v": "0", "load_mode": "HIGH_Z", "physical_output_ohms": "50"}, "cross_record_equal": ["assignment_commitment_sha256", "calibration_sha256", "clock_identity", "evidence_class", "export_adapter_identity", "f_carrier_hz", "f_carrier_u95_hz", "f_witness_hz", "instrument_identity_and_configuration", "scale_per_code", "signal_path_invariant_fields", "source_setup_except_phase", "thresholds"], "role_to_assembly": ASSEMBLY_FOR_ROLE, "topology_scan_hashes_unique_per_role": True, "nonlinear_control_hashes_unique_per_role": True, "chronology_utc_format": "YYYY-MM-DDTHH:MM:SS.ffffffZ", "assignment_reveal_required": True, "calibration_before_assignment_required": True, "source_preparation_seconds_minimum": 3.0, "byte_receipts_required": ["adapter_source", "assembly_manifest", "assignment_commitment", "assignment_reveal", "calibration_receipt", "chronology_receipt", "instrument_queryback", "native_export_receipt", "nonlinear_control", "resonance_calibration_analyzer", "resonance_calibration_artifact", "resonance_calibration_raw", "resonance_calibration_source_queryback", "source_queryback", "topology_receipt", "topology_scan"]},
             "p0.environment-record.v1": {"format": "strict-csv", "header": ENVIRONMENT_HEADER, "cadence_samples": 100000, "monotonic_cadence_ns": 100000000, "timestamp_cadence_microseconds": 100000, "timestamp_year": "four-digit-year-not-hard-coded", "sensor_identity": "lowercase-8-hex-bound-to-metadata", "measurement_command_hex": "fd", "crc8": {"polynomial": "0x31", "initial": "0xff", "word_order": "big-endian"}, "canonical_index": "base-10-no-leading-zero", "canonical_decimal": "no-plus-no-leading-zero-no-negative-zero", "temperature_conversion": "-45+175*ticks/65535", "humidity_conversion": "-6+125*ticks/65535", "temperature_c": [20.0, 30.0], "humidity_rh": [20.0, 60.0]},
             "p0.synthetic-control-evidence.v1": {"exact_fields": ["control_id", "controls", "environment", "epsilon", "evidence_class", "path", "payload", "physical_claim_requested", "schema", "source", "transients", "witness"], "decision_independent_of_control_id": True, "scientific_negative_execution": "summary_schema_and_decision_law_only__not_raw_analyzer_evidence"},
             "p0.signal-path-control.v1": {"exact_fields": ["case_id", "custody", "evidence_class", "metrics", "order", "payload", "physical_claim_requested", "schema", "topology"], "decision_independent_of_case_id": True, "threshold_source": "P0_SIGNAL_PATH_CIRCUIT_MODEL.json", "physical_claim_authorized": False},
@@ -2715,6 +3019,9 @@ def reference_document(identity_directory: Path) -> dict[str, Any]:
         raw_result = analyze_bundle(bundle, identity_directory)
         malformed = run_malformed_suite(temp_path, identity_directory)
         raw_adversaries = run_raw_adversary_suite(temp_path, identity_directory)
+        dynamic_path = temp_path / "dynamic-32800"
+        dynamic_path.mkdir()
+        dynamic_result = analyze_bundle(materialize_synthetic(dynamic_path, 32_800.0), identity_directory)
     dependency = dependency_identity()
     return {
         "schema": "p0.analyzer-reference-results.v1",
@@ -2731,6 +3038,7 @@ def reference_document(identity_directory: Path) -> dict[str, Any]:
         "malformed_outcomes": malformed,
         "raw_adversary_outcomes": raw_adversaries,
         "raw_numerical_reference": raw_result,
+        "dynamic_frequency_reference": dynamic_result,
         "artifact_custody": {"analyzer_sha256": sha256_file(Path(__file__).resolve()), "fixture_sha256": sha256_file(identity_directory / "P0_SCIENTIFIC_FIXTURES.json"), "schema_sha256": sha256_file(identity_directory / "P0_BUILD_READINESS_SCHEMAS.json"), "dependency_identity": dependency, "dependency_sha256": sha256_bytes(canonical_bytes(dependency))},
         "physical_claim_authorized": False,
         "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
@@ -2751,6 +3059,7 @@ def self_test(full_raw: bool) -> dict[str, Any]:
     semantic = run_semantic_suite()
     signal_path_controls = run_signal_path_control_suite(Path(__file__).resolve().parent)
     raw_result: dict[str, Any] | None = None
+    dynamic_result: dict[str, Any] | None = None
     raw_adversaries: list[dict[str, Any]] = []
     with tempfile.TemporaryDirectory(prefix="p0-scientific-") as temp:
         temp_path = Path(temp)
@@ -2759,7 +3068,10 @@ def self_test(full_raw: bool) -> dict[str, Any]:
         if full_raw:
             raw_result = analyze_bundle(bundle, Path(__file__).resolve().parent)
             raw_adversaries = run_raw_adversary_suite(temp_path, Path(__file__).resolve().parent)
-    return {"self_test": "PASS", "positive": len(POSITIVE_CASES), "scientific_negative": len(SCIENTIFIC_NEGATIVES), "malformed_or_custody_negative": len(MALFORMED_NEGATIVES), "signal_path_positive": len(SIGNAL_PATH_POSITIVES), "signal_path_scientific_negative": len(SIGNAL_PATH_NEGATIVES), "signal_path_custody_negative": len(SIGNAL_PATH_CUSTODY_NEGATIVES), "raw_adversary_count": len(raw_adversaries), "full_raw": full_raw, "raw_result": raw_result, "raw_adversaries": raw_adversaries, "semantic_hash": sha256_bytes(canonical_bytes(semantic + signal_path_controls + malformed + raw_adversaries))}
+            dynamic_path = temp_path / "dynamic-32800"
+            dynamic_path.mkdir()
+            dynamic_result = analyze_bundle(materialize_synthetic(dynamic_path, 32_800.0), Path(__file__).resolve().parent)
+    return {"self_test": "PASS", "positive": len(POSITIVE_CASES), "scientific_negative": len(SCIENTIFIC_NEGATIVES), "malformed_or_custody_negative": len(MALFORMED_NEGATIVES), "signal_path_positive": len(SIGNAL_PATH_POSITIVES), "signal_path_scientific_negative": len(SIGNAL_PATH_NEGATIVES), "signal_path_custody_negative": len(SIGNAL_PATH_CUSTODY_NEGATIVES), "raw_adversary_count": len(raw_adversaries), "full_raw": full_raw, "raw_result": raw_result, "dynamic_frequency_result": dynamic_result, "raw_adversaries": raw_adversaries, "semantic_hash": sha256_bytes(canonical_bytes(semantic + signal_path_controls + malformed + raw_adversaries))}
 
 
 def verify(directory: Path, full_raw: bool) -> dict[str, Any]:
