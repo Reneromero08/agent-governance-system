@@ -116,12 +116,21 @@ source-off paired smuggle
 flat query_A/query_B signal
 swapped query-pair values
 negated q labels
+synthetic all-zero paired signal
 wrong archive hash
 wrong archive size
 missing required archive member
 duplicate matching archive member
 snapshot/archive content mismatch
 copy-back receipt mismatch
+```
+
+Every negative replay and custody-invalid regression is required to fail closed with:
+
+```text
+result class != FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_SUPPORTED_RETROSPECTIVE
+claim != PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_OBSERVED_RETROSPECTIVE
+reproducible_public_q_dependent_response_observed = false
 ```
 
 ## Threshold Provenance

@@ -3,7 +3,7 @@
     "passed": true,
     "tests": {
       "copyback_receipt_mismatch": {
-        "error": "copy-back receipt local_archive mismatch: C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_q_readout_negative_y2e7fr6u\\wrong-name.tar.gz != D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\ATTEMPT_3_REMOTE_ROOT.tar.gz",
+        "error": "copy-back receipt local_archive mismatch: C:\\Users\\rene_\\AppData\\Local\\Temp\\family10h_q_readout_negative_2xrip5oq\\wrong-name.tar.gz != D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0\\attempt_3\\ATTEMPT_3_REMOTE_ROOT.tar.gz",
         "passed": true
       },
       "duplicate_matching_archive_member": {
@@ -76,13 +76,39 @@
     "archive_negative_self_tests": true,
     "change_to_dirty_channel_not_sufficient": true,
     "cpu_cycles_channel_not_sufficient": true,
+    "custody_invalid_fails_closed_claim_state": true,
+    "custody_invalid_packet_rejected": true,
     "duration_channel_not_sufficient": true,
     "flat_signal_rejected": true,
     "legacy_mapping_sign_cancels_signal": true,
     "negated_q_label_rejected": true,
+    "negative_replays_fail_closed_claim_state": true,
+    "paired_dirty_probe_attempt3_positive_claim": true,
     "paired_dirty_probe_attempt3_q_readout_supported": true,
     "source_off_pair_smuggle_rejected": true,
-    "swapped_query_pair_rejected": true
+    "swapped_query_pair_rejected": true,
+    "synthetic_negative_packet_rejected": true
+  },
+  "custody_invalid_claim_state": {
+    "checks": {
+      "positive_retrospective_claim_absent": true,
+      "q_dependent_response_observed_false": true,
+      "result_class_not_supported": true
+    },
+    "passed": true,
+    "reproducible_public_q_dependent_response_observed": false,
+    "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CUSTODY_INVALID",
+    "retrospective_claim": "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE"
+  },
+  "custody_invalid_validation": {
+    "expected_count": 8320,
+    "failures": [
+      "raw record count mismatch",
+      "exact tuple equality failed",
+      "exact executed order failed"
+    ],
+    "observed_count": 0,
+    "passed": false
   },
   "legacy_mapping_gates": {
     "all_strata": false,
@@ -140,6 +166,107 @@
     "source_off_strata": true,
     "source_order_slope_agreement": true
   },
+  "negative_claim_state": {
+    "change_to_dirty": {
+      "checks": {
+        "positive_retrospective_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+      "retrospective_claim": "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE"
+    },
+    "cpu_cycles": {
+      "checks": {
+        "positive_retrospective_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+      "retrospective_claim": "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE"
+    },
+    "duration_ns": {
+      "checks": {
+        "positive_retrospective_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+      "retrospective_claim": "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE"
+    },
+    "flat_mutant": {
+      "checks": {
+        "positive_retrospective_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+      "retrospective_claim": "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE"
+    },
+    "legacy_mapping": {
+      "checks": {
+        "positive_retrospective_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+      "retrospective_claim": "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE"
+    },
+    "negated_q_mutant": {
+      "checks": {
+        "positive_retrospective_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+      "retrospective_claim": "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE"
+    },
+    "source_off_mutant": {
+      "checks": {
+        "positive_retrospective_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+      "retrospective_claim": "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE"
+    },
+    "swapped_query_mutant": {
+      "checks": {
+        "positive_retrospective_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+      "retrospective_claim": "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE"
+    },
+    "synthetic_negative_packet": {
+      "checks": {
+        "positive_retrospective_claim_absent": true,
+        "q_dependent_response_observed_false": true,
+        "result_class_not_supported": true
+      },
+      "passed": true,
+      "reproducible_public_q_dependent_response_observed": false,
+      "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+      "retrospective_claim": "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE"
+    }
+  },
   "passed": true,
   "regression_classes": {
     "change_to_dirty": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
@@ -150,7 +277,8 @@
     "negated_q_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
     "repaired": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_SUPPORTED_RETROSPECTIVE",
     "source_off_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
-    "swapped_query_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE"
+    "swapped_query_mutant": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE",
+    "synthetic_negative_packet": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE"
   },
   "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_SELF_TEST_V1",
   "source_off_mutant_controls": {

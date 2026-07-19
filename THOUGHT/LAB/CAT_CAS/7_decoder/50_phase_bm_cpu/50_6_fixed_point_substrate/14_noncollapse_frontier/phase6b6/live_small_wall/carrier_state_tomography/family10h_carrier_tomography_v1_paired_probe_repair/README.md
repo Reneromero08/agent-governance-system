@@ -48,6 +48,8 @@ The primary fit uses only persistence `query_A` and `query_B` pairs. Persistence
 
 The same law rejects map-sign inversion, source-off smuggling, flat signal, swapped query-pair values, and negated q labels. Attempt-3 diagnostic replay also shows the strongest scalar q signal is in `dirty_probe_response`; `change_to_dirty`, `cpu_cycles`, and `duration_ns` are secondary diagnostics and are not prospective exclusion gates.
 
+Negative and custody-invalid outputs fail closed: they emit `PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE`, never the positive retrospective claim, and set `reproducible_public_q_dependent_response_observed = false`.
+
 ## Threshold Provenance
 
 The attempt-3 thresholds are retrospective because they were selected after inspecting attempt-3 evidence. They are prospectively frozen only for a proposed v1.1 confirmation. Attempt 3 cannot independently validate thresholds derived after examining attempt 3, and no post-v1.1-run threshold revision is allowed.

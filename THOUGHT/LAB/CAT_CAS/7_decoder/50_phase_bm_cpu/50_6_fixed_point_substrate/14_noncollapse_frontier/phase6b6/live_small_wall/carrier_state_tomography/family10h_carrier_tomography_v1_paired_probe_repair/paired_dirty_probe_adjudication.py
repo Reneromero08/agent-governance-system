@@ -33,6 +33,7 @@ RESULT_SUPPORTED = "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_SUPPORTED_RETROSPECTI
 RESULT_NOT_SUPPORTED = "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE"
 RESULT_INVALID = "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CUSTODY_INVALID"
 RETROSPECTIVE_CLAIM = "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_OBSERVED_RETROSPECTIVE"
+RETROSPECTIVE_CLAIM_NOT_ESTABLISHED = "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_NOT_ESTABLISHED_RETROSPECTIVE"
 PROSPECTIVE_CLAIM_CEILING = "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED"
 
 PAIR_SOURCE_OFF_MAX_ABS = 128.0
@@ -89,6 +90,32 @@ def load_public_module() -> Any:
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+def invalid_adjudication_result(validation: dict[str, Any], provenance: dict[str, Any] | None = None) -> dict[str, Any]:
+    result = {
+        "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_ADJUDICATION_V1",
+        "result_class": RESULT_INVALID,
+        "passed": False,
+        "retrospective_claim": RETROSPECTIVE_CLAIM_NOT_ESTABLISHED,
+        "prospective_claim_ceiling": PROSPECTIVE_CLAIM_CEILING,
+        "claim_boundary": {
+            "reproducible_public_q_dependent_response_observed": False,
+            "dimension": "one_dimensional_scalar_codeword_readout",
+            "full_carrier_state_tomography_established": False,
+            "official_frozen_attempt3_result_unchanged": True,
+            "small_wall_promoted": False,
+            "catalytic_borrowing_established": False,
+            "physical_relational_memory_established": False,
+            "relational_carrier_established": False,
+        },
+        "validation": validation,
+        "official_result_replaced": False,
+        "small_wall_promoted": False,
+    }
+    if provenance is not None:
+        result["source_evidence"] = provenance
+    return result
 
 
 def parse_jsonl_bytes(data: bytes, name: str) -> list[dict[str, Any]]:
@@ -797,7 +824,7 @@ def adjudicate_packet(
         "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_ADJUDICATION_V1",
         "result_class": RESULT_SUPPORTED if passed else RESULT_NOT_SUPPORTED,
         "passed": passed,
-        "retrospective_claim": RETROSPECTIVE_CLAIM,
+        "retrospective_claim": RETROSPECTIVE_CLAIM if passed else RETROSPECTIVE_CLAIM_NOT_ESTABLISHED,
         "prospective_claim_ceiling": PROSPECTIVE_CLAIM_CEILING,
         "claim_boundary": {
             "reproducible_public_q_dependent_response_observed": passed,
@@ -926,6 +953,32 @@ def mutate_negate_active_q_schedule(schedule: dict[str, Any]) -> dict[str, Any]:
     return mutated
 
 
+def mutate_synthetic_negative_packet(packet: dict[str, Any], schedule: dict[str, Any]) -> dict[str, Any]:
+    rows_by_id = {row["tuple_id"]: row for row in schedule["rows"]}
+    mutated = json.loads(json.dumps(packet))
+    for record in mutated["raw_records"]:
+        row = rows_by_id[record["tuple_id"]]
+        if row["matrix_block"] == "persistence_matrix" and row["query"] in {"query_A", "query_B"}:
+            record["dirty_probe_response"] = 0
+    return mutated
+
+
+def fail_closed_claim_state(report: dict[str, Any]) -> dict[str, Any]:
+    boundary = report.get("claim_boundary", {})
+    checks = {
+        "result_class_not_supported": report.get("result_class") != RESULT_SUPPORTED,
+        "positive_retrospective_claim_absent": report.get("retrospective_claim") != RETROSPECTIVE_CLAIM,
+        "q_dependent_response_observed_false": boundary.get("reproducible_public_q_dependent_response_observed") is False,
+    }
+    return {
+        "passed": all(checks.values()),
+        "result_class": report.get("result_class"),
+        "retrospective_claim": report.get("retrospective_claim"),
+        "reproducible_public_q_dependent_response_observed": boundary.get("reproducible_public_q_dependent_response_observed"),
+        "checks": checks,
+    }
+
+
 def expect_runtime_error(label: str, fn: Any) -> dict[str, Any]:
     try:
         fn()
@@ -1037,7 +1090,7 @@ def archive_negative_self_tests(attempt_dir: Path) -> dict[str, Any]:
     }
 
 
-def run_self_tests(packet: dict[str, Any], schedule: dict[str, Any], attempt_dir: Path) -> dict[str, Any]:
+def run_self_tests(public: Any, packet: dict[str, Any], schedule: dict[str, Any], attempt_dir: Path) -> dict[str, Any]:
     repaired = adjudicate_packet(packet, schedule)
     change_to_dirty = adjudicate_packet(packet, schedule, field="change_to_dirty")
     cpu_cycles = adjudicate_packet(packet, schedule, field="cpu_cycles")
@@ -1047,9 +1100,30 @@ def run_self_tests(packet: dict[str, Any], schedule: dict[str, Any], attempt_dir
     flat_mutant = adjudicate_packet(mutate_flat_signal(packet, schedule), schedule)
     swapped_query_mutant = adjudicate_packet(mutate_swap_query_pair_values(packet, schedule), schedule)
     negated_q_mutant = adjudicate_packet(packet, mutate_negate_active_q_schedule(schedule))
+    synthetic_negative = adjudicate_packet(mutate_synthetic_negative_packet(packet, schedule), schedule)
+    negative_reports = {
+        "change_to_dirty": change_to_dirty,
+        "cpu_cycles": cpu_cycles,
+        "duration_ns": duration_ns,
+        "legacy_mapping": legacy_mapping,
+        "source_off_mutant": source_off_mutant,
+        "flat_mutant": flat_mutant,
+        "swapped_query_mutant": swapped_query_mutant,
+        "negated_q_mutant": negated_q_mutant,
+        "synthetic_negative_packet": synthetic_negative,
+    }
+    negative_claim_state = {
+        label: fail_closed_claim_state(report) for label, report in negative_reports.items()
+    }
+    invalid_packet = json.loads(json.dumps(packet))
+    invalid_packet["raw_records"] = []
+    invalid_validation = public.validate_evidence_packet(invalid_packet, schedule)
+    custody_invalid = invalid_adjudication_result(invalid_validation)
+    custody_invalid_claim_state = fail_closed_claim_state(custody_invalid)
     archive_negatives = archive_negative_self_tests(attempt_dir)
     checks = {
         "paired_dirty_probe_attempt3_q_readout_supported": repaired["passed"],
+        "paired_dirty_probe_attempt3_positive_claim": repaired["retrospective_claim"] == RETROSPECTIVE_CLAIM,
         "archive_negative_self_tests": archive_negatives["passed"],
         "change_to_dirty_channel_not_sufficient": not change_to_dirty["passed"],
         "cpu_cycles_channel_not_sufficient": not cpu_cycles["passed"],
@@ -1059,6 +1133,10 @@ def run_self_tests(packet: dict[str, Any], schedule: dict[str, Any], attempt_dir
         "flat_signal_rejected": not flat_mutant["passed"],
         "swapped_query_pair_rejected": not swapped_query_mutant["passed"],
         "negated_q_label_rejected": not negated_q_mutant["passed"],
+        "synthetic_negative_packet_rejected": not synthetic_negative["passed"],
+        "negative_replays_fail_closed_claim_state": all(item["passed"] for item in negative_claim_state.values()),
+        "custody_invalid_packet_rejected": not invalid_validation["passed"],
+        "custody_invalid_fails_closed_claim_state": custody_invalid_claim_state["passed"],
     }
     return {
         "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_SELF_TEST_V1",
@@ -1074,7 +1152,11 @@ def run_self_tests(packet: dict[str, Any], schedule: dict[str, Any], attempt_dir
             "flat_mutant": flat_mutant["result_class"],
             "swapped_query_mutant": swapped_query_mutant["result_class"],
             "negated_q_mutant": negated_q_mutant["result_class"],
+            "synthetic_negative_packet": synthetic_negative["result_class"],
         },
+        "negative_claim_state": negative_claim_state,
+        "custody_invalid_claim_state": custody_invalid_claim_state,
+        "custody_invalid_validation": invalid_validation,
         "legacy_mapping_gates": legacy_mapping["gates"],
         "source_off_mutant_controls": source_off_mutant["controls"],
         "swapped_query_mutant_gates": swapped_query_mutant["gates"],
@@ -1100,15 +1182,7 @@ def main() -> int:
     packet, schedule, provenance = build_packet(public, args.attempt_dir)
     validation = public.validate_evidence_packet(packet, schedule)
     if not validation["passed"]:
-        result = {
-            "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_ADJUDICATION_V1",
-            "result_class": RESULT_INVALID,
-            "passed": False,
-            "validation": validation,
-            "source_evidence": provenance,
-            "official_result_replaced": False,
-            "small_wall_promoted": False,
-        }
+        result = invalid_adjudication_result(validation, provenance)
     else:
         result = adjudicate_packet(packet, schedule)
         result["validation"] = validation
@@ -1117,7 +1191,7 @@ def main() -> int:
         result["source_evidence"]["schedule_sha256"] = public.digest(schedule)
     write_json(args.out, result)
     if args.self_test:
-        self_test = run_self_tests(packet, schedule, args.attempt_dir) if validation["passed"] else {"schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_SELF_TEST_V1", "passed": False, "reason": "base packet invalid", "validation": validation}
+        self_test = run_self_tests(public, packet, schedule, args.attempt_dir) if validation["passed"] else {"schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_SELF_TEST_V1", "passed": False, "reason": "base packet invalid", "validation": validation}
         write_json(args.self_test_out, self_test)
         if not self_test["passed"]:
             print(json.dumps(self_test, indent=2, sort_keys=True))
