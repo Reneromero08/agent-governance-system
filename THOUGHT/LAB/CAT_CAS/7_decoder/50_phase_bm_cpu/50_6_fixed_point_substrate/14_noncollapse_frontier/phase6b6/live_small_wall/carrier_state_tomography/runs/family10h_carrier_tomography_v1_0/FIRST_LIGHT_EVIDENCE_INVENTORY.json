@@ -1,0 +1,129 @@
+{
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_FIRST_LIGHT_EVIDENCE_INVENTORY_V1",
+  "science_package_id": "family10h_carrier_tomography_v1_0",
+  "result_class": "FAMILY10H_CARRIER_TOMOGRAPHY_CUSTODY_INVALID",
+  "archive_is_authoritative_for_remote_root": true,
+  "file_count": 24,
+  "files": [
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/copy_back/remote_root_failure_copyback.tar",
+      "size": 21954560,
+      "sha256": "6dd792997ed49302250d08ef1d1bd84e9c9550320b78ba7b5b5c8433d287e0fd"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/FIRST_LIGHT_RUN_RECEIPT.json",
+      "size": 6064,
+      "sha256": "ebf3fe44bb59b290d907a9df94015d7c3c13e75d63829bbcf7bd45b5eaf8f3d6"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/000_package_tar_sha256.txt",
+      "size": 116,
+      "sha256": "cf9df170f5c9e348d68d726bb41640d04fdbfb2775c98edc2ca5fe8a0f277dc9"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/010_remote_create_root.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/010_remote_create_root.stdout.txt",
+      "size": 28,
+      "sha256": "3ef795442dc079cd1271c6f67dbf55bee96b951f2871379e526b20489b232b35"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/020_upload_package.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/020_upload_package.stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/030_remote_extract_package.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/030_remote_extract_package.stdout.txt",
+      "size": 106,
+      "sha256": "3fa90033146f99d349208ef2b7b578fcefda8d6f867f1f571cc157f39319a1d3"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/040_remote_identity_preflight.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/040_remote_identity_preflight.stdout.txt",
+      "size": 1315,
+      "sha256": "d26f2a9323e857ea63f72ec99a843c251e54b63b76e930a320fda0460f197b0a"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/050_execute_authorized.stderr.txt",
+      "size": 954,
+      "sha256": "e33473b0aae6c92e4236bd8695d7329a3257b482b4a05ab29e52cf208ace39a0"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/050_execute_authorized.stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/060_remote_manifest_failure_classification.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/060_remote_manifest_failure_classification.stdout.txt",
+      "size": 3962,
+      "sha256": "e00519715bb483ee057d984c86d4fa8321e25ad5d58ecaf2568704aeb3a11006"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/070_remote_tar_copyback.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/070_remote_tar_copyback.stdout.txt",
+      "size": 121,
+      "sha256": "8c040b547eb08c5c7733c0d47581434748654b7d39f46ad38e65859b52226096"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/080_download_copyback.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/080_download_copyback.stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/081_download_copyback_sha256.txt",
+      "size": 295,
+      "sha256": "f13ddd3264df6a8572cab71230f9ce9bfea8a7bfa8e851b5257317b5f5dea0a6"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/090_remote_cleanup.stderr.txt",
+      "size": 579,
+      "sha256": "16c2a8dd8ce4ab2cf5406de5ec65f64e7f3eac47d21b0ba7ae8c800e2b411fb5"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/090_remote_cleanup.stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/091_remote_cleanup_retry.stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/091_remote_cleanup_retry.stdout.txt",
+      "size": 34,
+      "sha256": "475ef6c0f588b24dd23f1b95ded7144fb75c5ae6c15aa50dcdd15b3706ed7e5e"
+    }
+  ]
+}

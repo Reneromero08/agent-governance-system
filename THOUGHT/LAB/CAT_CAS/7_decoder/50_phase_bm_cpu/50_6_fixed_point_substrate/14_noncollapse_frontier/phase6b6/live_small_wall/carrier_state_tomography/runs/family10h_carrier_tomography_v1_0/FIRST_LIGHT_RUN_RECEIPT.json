@@ -1,0 +1,91 @@
+{
+  "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_FIRST_LIGHT_RUN_RECEIPT_V1",
+  "science_package_id": "family10h_carrier_tomography_v1_0",
+  "result_class": "FAMILY10H_CARRIER_TOMOGRAPHY_CUSTODY_INVALID",
+  "plain_language_conclusion": "The authorized first-light invocation was consumed, but the target rejected the frozen package at manifest-authority validation before runtime launch, PMU acquisition, carrier preparation, receiver query, or tomography. This is an invalid implementation/custody run, not a scientific null.",
+  "starting_head": "2d8fa8559ad7319f242d68fbbd5978e50657e0d5",
+  "local_head_at_receipt": "2d8fa8559ad7319f242d68fbbd5978e50657e0d5",
+  "origin_head_at_receipt": "2d8fa8559ad7319f242d68fbbd5978e50657e0d5",
+  "frozen_evidence_commit": "a121381130ef6eef2757ff5c014e22990a88f774",
+  "source_authority_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+  "manifest_canonical_sha256": "26f74c9f40004aba00e55aa8843069342334c35f826709faaea9014e7c14684b",
+  "manifest_file_sha256": "a72b5dbbf65dfe635f0364c6fe665d6a40d3b97c2f5309a5222bd4668580a764",
+  "runtime_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+  "runtime_blob": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+  "sensor_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+  "final_exact_object_verification_file_sha256": "bfca827f115e276ba9f9d2a77100f0517b76df7e9d921954078d21a13af5934b",
+  "remote_preflight_identity": {
+    "authorized_commit": "a121381130ef6eef2757ff5c014e22990a88f774",
+    "controller_nonce_present": true,
+    "controller_nonce_sha256": "f11c13d72d43f3ab10f4886f5a23bef11567b8d0a138f63be6e3d0840763be33",
+    "final_object_sha256": "bfca827f115e276ba9f9d2a77100f0517b76df7e9d921954078d21a13af5934b",
+    "manifest_file_sha256": "a72b5dbbf65dfe635f0364c6fe665d6a40d3b97c2f5309a5222bd4668580a764",
+    "manifest_sidecar_file_sha256": "5efec2d38506ffd9cf2404771b44be1f51cda6380fe9915288ef36fa24f3b009",
+    "manifest_sidecar_manifest_canonical_sha256": "26f74c9f40004aba00e55aa8843069342334c35f826709faaea9014e7c14684b",
+    "manifest_sidecar_manifest_file_sha256": "a72b5dbbf65dfe635f0364c6fe665d6a40d3b97c2f5309a5222bd4668580a764",
+    "output_root_exists": false,
+    "package_decision": "FAMILY10H_CARRIER_TOMOGRAPHY_PACKAGE_FROZEN_AWAITING_AUTHORIZATION",
+    "runtime_blob": "3c007e278b7c3f2b206708739fd9abab5d3e91e7",
+    "runtime_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+    "sensor_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+    "source_authority_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
+    "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+    "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d"
+  },
+  "canonical_entry_point": "python3 family10h_carrier_tomography_target.py --execute-authorized --source-root /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0 --output-root /root/catcas_live_small_wall/family10h_carrier_tomography_v1_0/output",
+  "live_invocation": {
+    "occurred": true,
+    "exit_code": 1,
+    "stdout_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/050_execute_authorized.stdout.txt",
+    "stderr_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/host_logs/050_execute_authorized.stderr.txt",
+    "failure_boundary": "target execute_authorized manifest authority gate",
+    "failure_exception": "TargetError: manifest authority mismatch",
+    "manifest_authority_failures": [
+      "independent review manifest quorum summary differs from findings replay"
+    ]
+  },
+  "event_counters": {
+    "target_contact_occurred": true,
+    "live_invocation_count": 1,
+    "runtime_launch_count": 0,
+    "pmu_acquisition_count": 0,
+    "carrier_preparation_count": 0,
+    "receiver_query_count": 0,
+    "tomography_execution_count": 0,
+    "target_execution_receipt_count": 0,
+    "output_root_created": false
+  },
+  "scientific_interpretation": {
+    "post_source_state_observed": false,
+    "post_source_state_not_observed": false,
+    "invalid_run": true,
+    "reason": "Manifest-authority replay failure occurred before measurement, so no physical carrier-state evidence was acquired.",
+    "forbidden_promotions": [
+      "ORBITSTATE_ACCESS_ESTABLISHED",
+      "RELATIONAL_CARRIER_ESTABLISHED",
+      "PHYSICAL_RELATIONAL_MEMORY_ESTABLISHED",
+      "CATALYTIC_BORROWING_ESTABLISHED",
+      "SMALL_WALL_CROSSED"
+    ]
+  },
+  "copy_back": {
+    "remote_tar_sha256_line": "6dd792997ed49302250d08ef1d1bd84e9c9550320b78ba7b5b5c8433d287e0fd  family10h_carrier_tomography_v1_0_failure_copyback.tar",
+    "local_tar_sha256": "6dd792997ed49302250d08ef1d1bd84e9c9550320b78ba7b5b5c8433d287e0fd",
+    "archive_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_0/copy_back/remote_root_failure_copyback.tar",
+    "extracted_root_path": null,
+    "archive_is_authoritative": true
+  },
+  "cleanup": {
+    "first_cleanup_command_failed_before_removal": true,
+    "corrected_cleanup_result": "FAMILY10H_REMOTE_CLEANUP_COMPLETE",
+    "remote_root_present_after_cleanup": false,
+    "remote_archive_present_after_cleanup": false
+  },
+  "source_runtime_change_attestation": {
+    "frozen_source_files_modified": false,
+    "frozen_runtime_blob_modified": false,
+    "runtime_sha256_after_run": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
+    "runtime_blob_after_run": "3c007e278b7c3f2b206708739fd9abab5d3e91e7"
+  },
+  "git_status_short_at_receipt": ""
+}
