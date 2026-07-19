@@ -56,9 +56,9 @@ values and can never be overridden by this packet.
 |---|---:|---|
 | C1 source command | exactly 0.400 Vpp in `HIGH_Z` load mode, 0 V offset | Prospective frozen command; any queryback mismatch stops |
 | C2 gauge command | exactly 0.100 Vpp in `HIGH_Z` load mode, 0 V offset | C2 is not an intended carrier drive, but its bounded passive coupling through the CH0 summing network, finite C1 source impedance and limiter must be swept and bounded; any queryback mismatch stops |
-| Quartz terminal amplitude | planning <=0.164658 Vpp; hard cap <=0.200 Vpp | Resistive bound uses 0.400 Vpp source, 50 Ohm output, 100 kOhm limiter and 70 kOhm maximum ESR; **CONFIRM** from final loaded BVD calibration |
-| Estimated motional power | planning <=0.048415 uW; hard cap <=0.100 uW | Below the selected carrier's 0.5 uW maximum-drive identity; use the lower of voltage, current and power caps |
-| Estimated motional current | <=2.000 uA rms | Motional-branch cap; **CONFIRM** from loaded BVD fit |
+| Quartz terminal amplitude | complete-corner prospective <=0.187807 Vpp; hard cap <=0.200 Vpp | The loaded BVD model includes the exact 100 kOhm `N_SRC` drive shunt and both resistor tolerances; **CONFIRM** from final as-built loaded BVD calibration |
+| Estimated motional power | complete-corner prospective <=0.002298 uW; hard cap <=0.100 uW | Below the selected carrier's 0.5 uW maximum-drive identity; use the lower of voltage, current and power caps |
+| Estimated motional current | complete-corner prospective <=0.186507 uA rms; hard cap <=2.000 uA rms | Motional-branch cap; **CONFIRM** from the as-built loaded BVD fit |
 | Generator output | C1 exactly 0.400 Vpp; C2 exactly 0.100 Vpp; both 0 V offset | The general safety ceiling remains 1.000 Vpp, but it does not authorize changing the frozen commands |
 | Source current under any normal state | <=5.000 uA rms | 100 kOhm minimum series limit |
 | Analog signal rails | <=plus/minus 5.0 V | Low-voltage bench envelope even if switch supports more |
@@ -120,17 +120,16 @@ environment using `python scripts/download_sources.py --all`, then
 `python scripts/verify_downloads.py` and
 `python scripts/build_custody_snapshot.py`.
 
-The existing deterministic waveform generator is a signal-level analyzer test,
-not a first-principles complete-circuit prediction. The unresolved next layer
-must generate the canonical four-channel payload through the 100 kOhm limiter,
-ADG1419 model, relay states/parasitics, FC-135 BVD network, OPA810 vendor model,
-digitizer/common-mode loading, cable/PCB/enclosure parasitics, noise, and ADC
-quantization, then pass those bytes to the unchanged analyzer. Sweeps must cover
-motional R/L/C, C0, Q/resonance, sense capacitance/leakage, switch transient and
-leakage terms, relay timing, monitor feedthrough, digitizer admittance,
-clock/phase error, electrical noise, environmental perturbation, and matched
-empty/1 pF dummy controls. One favorable inserted ringdown is not evidence that
-the complete proposed circuit produces it.
+The deterministic waveform generator remains a signal-level analyzer test, not
+a physical observation. The separate root-bound circuit model now closes the
+prospective source path over 131,072 complete binary corners per candidate: the
+100 kOhm source limiter and `N_SRC` shunt, ADG1419 D/SA/SB nodes, relay
+states/parasitics, FC-135 loaded-frequency BVD network, OPA810 input/output,
+digitizer differential/common-mode loading, cable/PCB/enclosure capacitance,
+noise, ADC quantization, and independent 1 MOhm injection tolerance. It also
+freezes detector-only and exact-1-pF controls. A future physical result still
+requires as-built calibration and raw-byte custody; one favorable synthetic
+record is not evidence that the physical circuit produced it.
 
 ## 4. Silicon transposition
 

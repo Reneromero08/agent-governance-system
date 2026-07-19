@@ -1,6 +1,6 @@
 # P0 Measurement and Source-Off Plan
 
-**Status:** `P0_BUILD_READINESS_BLOCKED__NOT_EXECUTED`<br>
+**Status:** `P0_BUILD_READINESS_PACKET_FROZEN__NOT_EXECUTED`<br>
 **Carrier:** hermetic 32.768 kHz quartz tuning-fork mechanical mode<br>
 **Source-off topology:** phase gate plus witnessed guarded relay barrier<br>
 **Primary observable:** `z(t) = I(t) + iQ(t)`<br>
@@ -36,16 +36,21 @@ four simultaneous differential raw channels -> immutable native capture
 `K1` and `K2` are normally open contacts and `K3` is a normally closed
 midpoint-to-50-Ohm guard contact. Coil power is required to create the drive
 path. Loss of controller or relay power therefore produces the source-off
-state: both series contacts open and the midpoint terminates on the source side.
+commanded fail-safe state: both normally-open series relays deenergized and the
+midpoint terminated on the source side. No event claim identifies either
+individual signal-contact state from command or auxiliary contacts alone.
 Electrode A remains connected only to the characterized high-impedance sense
 load; electrode B remains at the single carrier-side reference bond.
 
 The analog phase gate gives deterministic preparation timing. CH2 gives an
 auditable auxiliary-contact timing state, but its spare contacts do not prove
-the actual signal poles opened. Neither alone is sufficient for P0. A physical
-source-disconnect claim remains blocked until a separately reviewed per-event
-actual-signal-path witness or an exact force-guided-contact guarantee is bound
-to the selected relay and its failure modes.
+the actual signal poles opened. The repaired prospective contract adds a
+continuous 65.536 kHz C2 branch through an exact 1.00 Mohm TNPW resistor to
+`N_GATE_OUT`, downstream of ADG1419, plus an exact 100 kOhm `N_SRC` drive shunt
+that remains isolated on the D/SA side during OFF. A future passing pre-K3 complex-transfer
+witness supports only that at least one K1/K2 series signal contact interrupted
+the complete source-to-carrier path. It never proves which contact, never proves
+both, and never uses K3's auxiliary contact as actual-pole evidence.
 
 CH2 uses four weighted resistors to encode the gate logic state and the three
 independent spare relay contacts into 16 prospectively calibrated voltage
@@ -211,9 +216,20 @@ The lawful post-source interval requires all of the following:
 7. The 10 ms guard expired after the final physical witness transition.
 8. Dummy-load and resonator-removed controls bound residual feedthrough under
    the frozen feedthrough law.
-9. A separately reviewed per-event actual-signal-path witness or exact
-   force-guided-contact guarantee proves the signal poles corresponding to
-   items 3 and 4. Auxiliary-contact code alone never satisfies this item.
+9. Before K3 may deenergize, the event-specific byte-bound four-state topology
+   scan and the event's complex C2 transfer satisfy the frozen closed/open
+   magnitude, phase, uncertainty, separation and drop gates. Its version-2
+   topology receipt binds the exact assembly manifest, assigned role, carrier
+   population, native payload, chronology, source and instrument querybacks,
+   scan/control bytes and pre-acquisition scan times. The three A roles share
+   one exact A manifest; B and C use distinct manifests and populations. Scan
+   bytes and receipts are unique per event. Cross-assembly, cross-event,
+   duplicate-scan, duplicate-control, noncanonical-time and post-acquisition
+   replay are hard rejections. All scan/acquisition times use exact
+   `YYYY-MM-DDTHH:MM:SS.ffffffZ` UTC form and are compared as parsed instants. K3 guard
+   masking has a disjoint phase envelope and is rejected. A pass supports only
+   `ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT`; auxiliary
+   code alone never satisfies this item and no individual pole is identified.
 
 The loaded BVD model is the datasheet motional `R1-L1-C1` series branch in
 parallel with `C0`, `Rin`, `Cin`, the passive bias return, carrier-side cable
@@ -237,9 +253,9 @@ bounds.
 | Calibrated drive frequency | identical `f_ref` | identical `f_ref` |
 | C1 source command | 0.400 Vpp, 0 V, `HIGH_Z` | identical |
 | C2 gauge command | 0.100 Vpp, 0 V, fixed zero phase | identical |
-| Carrier terminal planning bound | <= 0.164658 Vpp; hard cap <= 0.200 Vpp | identical |
-| Estimated motional power | planning <= 0.048415 uW; hard cap <= 0.100 uW | identical |
-| Estimated motional current | planning <= 0.831646 uA rms; hard cap <= 2.000 uA rms | identical |
+| Carrier terminal complete-corner bound | <= 0.187807 Vpp; hard cap <= 0.200 Vpp | identical |
+| Estimated motional power | complete-corner <= 0.002298 uW; hard cap <= 0.100 uW | identical |
+| Estimated motional current | complete-corner <= 0.186507 uA rms; hard cap <= 2.000 uA rms | identical |
 | Qualified preparation cycles | final 32,768 cycles of continuous source | identical |
 | Turn-on ramp inside record | none | none |
 | Constant interval | entire record | same |
@@ -842,7 +858,7 @@ Expected phase relation, expected metric, preferred arm, anticipated Q, and
 expected adjudication may not enter acquisition, filenames, metadata,
 preprocessing, or control flow.
 
-## 12. Research dependency and unresolved device/circuit simulation
+## 12. Research dependency and closed prospective device/circuit model
 
 The canonical repository-safe source dependency is
 `research/P0_research_bundle_2026-07-18`, imported from commit
@@ -855,32 +871,34 @@ environment to run `scripts/download_sources.py --all`,
 `scripts/verify_downloads.py`, and `scripts/build_custody_snapshot.py` from the
 bundle directory.
 
-The existing synthetic reference remains a valid signal-level analyzer test:
-it directly constructs deterministic ringdown waveforms and checks the actual
-analyzer. It is not a first-principles prediction of the complete proposed
-circuit. The separate unresolved generative layer is:
+The existing synthetic reference remains a signal-level analyzer test and is
+not a physical observation. `P0_SIGNAL_PATH_CIRCUIT_MODEL.json` now closes the
+prospective build-readiness layer for the selected witness:
 
 ```text
 source
-  -> 100 kOhm limiter
-  -> ADG1419 vendor model
-  -> relay state, bounce, release, leakage, and parasitic model
-  -> FC-135 Butterworth-Van Dyke motional R-L-C in parallel with C0
-  -> OPA810 vendor model
-  -> digitizer differential/common-mode loading
+  -> passive C1/C2 monitor, 1.00 Mohm C2 injection, and 100 kOhm N_SRC shunt
+  -> explicit ADG1419 SB, D and SA nodes with D-to-SA-to-50-Ohm OFF routing
+  -> every K1/K2 open/closed state and K3 open/guard parasitic state
+  -> FC-135 BVD branch derived from the 12.5 pF loaded-frequency identity
+  -> OPA810 input, output and gain
+  -> frozen 1 Mohm || 30 pF digitizer differential/common-mode loading
   -> cable, PCB, enclosure, resistor, amplifier, and ADC effects
   -> canonical four-channel raw payload
   -> existing unchanged scientific analyzer
 ```
 
-The model must sweep motional R/L/C, shunt capacitance, loaded Q/resonance,
-OPA810 input capacitance/leakage, switch off-capacitance/charge injection/
-leakage, relay timing, cable/board capacitance, source-monitor feedthrough
-including the bounded C2 path, digitizer differential/common-mode admittance,
-clock/phase-reference error, amplifier/resistor noise, ADC quantization,
-environmental perturbation, and matched empty/1 pF dummy controls. It must map
-the parameter region that survives the frozen analyzer; inserting one favorable
-ringdown cannot establish that the complete circuit generates it.
+The deterministic model evaluates all 131,072 binary tolerance corners for each
+candidate region and separately freezes DUT, detector-only, exact-1-pF dummy,
+wrong-node and K3-guarded envelopes. The requested first 1.00 Mohm/0.100 Vpp
+point is the selected feasible point after adding the exact 100 kOhm `N_SRC`
+drive shunt that preserves the 0.200 Vpp terminal cap and remains isolated from
+`N_GATE_OUT` during ADG OFF. Future physical acceptance additionally requires
+actual adapter/queryback/native/assignment/calibration/chronology bytes, a
+role-bound assembly manifest, an event-specific version-2 topology receipt, a
+unique four-state raw topology scan, a unique C1-only nonlinear-control trace,
+canonical parsed-UTC scan/acquisition chronology, and raw-derived common mode.
+No future physical data may tune these thresholds.
 
 ## 13. Current boundary
 

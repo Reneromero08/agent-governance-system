@@ -1,0 +1,348 @@
+{
+  "candidate_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+  "claim_ceiling": "NON_EXECUTING_P0_SIGNAL_PATH_WITNESS_REPAIR_ONLY",
+  "contact_attestation": {
+    "audio_playback_or_recording": 0,
+    "hardware": 0,
+    "instrument_command": 0,
+    "purchase": 0,
+    "target": 0
+  },
+  "model_mutation": {
+    "mutation_id": "mutate_frozen_model_threshold",
+    "outcome": "PASS",
+    "rejected_by": "COMMITTED_MODEL_STALE"
+  },
+  "raw_boundary_control_count": 14,
+  "raw_boundary_controls": [
+    {
+      "case": "signal_path_wrong_node_raw_nominal_labels",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_TOPOLOGY_SCAN"
+    },
+    {
+      "case": "signal_path_k3_guard_signal_raw",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_PHASE"
+    },
+    {
+      "case": "signal_path_nonlinear_2f_raw",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_2F_RESIDUE"
+    },
+    {
+      "case": "signal_path_common_mode_raw",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_COMMON_MODE"
+    },
+    {
+      "case": "signal_path_assembly_a_replay_into_b",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_ASSEMBLY_ROLE"
+    },
+    {
+      "case": "signal_path_assembly_a_replay_into_c",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_ASSEMBLY_ROLE"
+    },
+    {
+      "case": "signal_path_topology_receipt_wrong_event",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_TOPOLOGY_CUSTODY"
+    },
+    {
+      "case": "signal_path_scan_after_acquisition",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "signal_path_duplicate_topology_scan_hash",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_TOPOLOGY_SCAN_REPLAY"
+    },
+    {
+      "case": "signal_path_duplicate_nonlinear_control_hash",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_NONLINEAR_CONTROL_REPLAY"
+    },
+    {
+      "case": "signal_path_scan_time_malformed",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "signal_path_scan_time_alternate_offset",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    },
+    {
+      "case": "signal_path_acquisition_time_truncated_precision",
+      "outcome": "PASS",
+      "rejected_by": "CHRONOLOGY_CUSTODY"
+    },
+    {
+      "case": "signal_path_scan_time_lexical_deception",
+      "outcome": "PASS",
+      "rejected_by": "SIGNAL_PATH_SCAN_CHRONOLOGY"
+    }
+  ],
+  "result": "PASS",
+  "schema": "p0.signal-path-mutation-results.v2",
+  "semantic_input_mutation_count": 15,
+  "semantic_outcomes_sha256": "062359e3434ce6140785a04ab879b3fbacd2af151ae409adc8c4057772f4235f",
+  "structural_mutation_count": 50,
+  "structural_outcomes": [
+    {
+      "mutation_id": "remove_actual_path_call",
+      "outcome": "PASS",
+      "rejected_by": "CALL_ASSIGNMENT:path_metrics:signal_path_transfer"
+    },
+    {
+      "mutation_id": "accept_guard_before_actual_path",
+      "outcome": "PASS",
+      "rejected_by": "CALL_ASSIGNMENT:guard"
+    },
+    {
+      "mutation_id": "invert_code0_window_bound",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_WINDOW_ORDER:pre_stop - pre_start != int(pre_spec['samples']) or open_stop - open_start != int(open_spec['samples']) or pre_stop > n_gate + 250 or n_gate + 250 > series_start or open_stop > n_series_open + 1"
+    },
+    {
+      "mutation_id": "remove_exact_actual_path_claim",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_CLAIM"
+    },
+    {
+      "mutation_id": "dead_code_actual_path_call",
+      "outcome": "PASS",
+      "rejected_by": "PRE_K3_CONTROL_FLOW"
+    },
+    {
+      "mutation_id": "drop_result_def_use",
+      "outcome": "PASS",
+      "rejected_by": "PATH_RESULT_NOT_CARRIED"
+    },
+    {
+      "mutation_id": "substitute_call_ch1_with_ch0",
+      "outcome": "PASS",
+      "rejected_by": "CALL_ARGUMENTS:signal_path_transfer:ch1"
+    },
+    {
+      "mutation_id": "substitute_call_series_start",
+      "outcome": "PASS",
+      "rejected_by": "CALL_ARGUMENTS:signal_path_transfer:records[role]['series_start']"
+    },
+    {
+      "mutation_id": "substitute_call_series_end",
+      "outcome": "PASS",
+      "rejected_by": "CALL_ARGUMENTS:signal_path_transfer:records[role]['n_series_open']"
+    },
+    {
+      "mutation_id": "substitute_call_model",
+      "outcome": "PASS",
+      "rejected_by": "CALL_ARGUMENTS:signal_path_transfer:meta['_signal_model']"
+    },
+    {
+      "mutation_id": "substitute_pre_source_channel",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:pre0"
+    },
+    {
+      "mutation_id": "substitute_pre_carrier_channel",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:pre1"
+    },
+    {
+      "mutation_id": "substitute_open_source_channel",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:open0"
+    },
+    {
+      "mutation_id": "substitute_open_carrier_channel",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:open1"
+    },
+    {
+      "mutation_id": "substitute_pre_transfer_denominator",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:h_pre"
+    },
+    {
+      "mutation_id": "substitute_open_transfer_numerator",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:h_open"
+    },
+    {
+      "mutation_id": "substitute_pre_snr_variance",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:pre_snr"
+    },
+    {
+      "mutation_id": "substitute_separation",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:separation"
+    },
+    {
+      "mutation_id": "substitute_r_drop",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:r_drop"
+    },
+    {
+      "mutation_id": "substitute_pre_phase",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:phase_pre"
+    },
+    {
+      "mutation_id": "substitute_open_phase",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:phase_open"
+    },
+    {
+      "mutation_id": "substitute_common_mode_derivation",
+      "outcome": "PASS",
+      "rejected_by": "DEF_USE:common_mode_peak"
+    },
+    {
+      "mutation_id": "remove_pre_window_cycle_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_WINDOW_CYCLES:(pre_stop - pre_start) * F_WITNESS / FS < model_number(pre_spec['valid_cycles'], 'model.pre_valid_cycles') - 1e-12"
+    },
+    {
+      "mutation_id": "remove_open_window_cycle_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_WINDOW_CYCLES:(open_stop - open_start) * F_WITNESS / FS < model_number(open_spec['valid_cycles'], 'model.open_valid_cycles') - 1e-12"
+    },
+    {
+      "mutation_id": "invert_clipping_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_CLIPPING:raw_peak > clip"
+    },
+    {
+      "mutation_id": "invert_common_mode_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_COMMON_MODE:common_mode_peak > model_number(thresholds['common_mode_abs_v_max'], 'model.common_mode_abs_v_max')"
+    },
+    {
+      "mutation_id": "remove_c2_presence_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_C2_MISSING:abs(pre0['c2']) <= 0.0 or abs(open0['c2']) <= 0.0"
+    },
+    {
+      "mutation_id": "invert_source_snr_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_C2_MISSING:source_snr < model_number(thresholds['minimum_pre_pilot_snr'], 'model.minimum_pre_pilot_snr')"
+    },
+    {
+      "mutation_id": "invert_pre_snr_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_PRE_SNR:pre_snr < model_number(thresholds['minimum_pre_pilot_snr'], 'model.minimum_pre_pilot_snr')"
+    },
+    {
+      "mutation_id": "invert_minimum_pre_transfer_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_PRE_TRANSFER:abs(h_pre) < model_number(thresholds['minimum_pre_abs_h2'], 'model.minimum_pre_abs_h2')"
+    },
+    {
+      "mutation_id": "invert_maximum_pre_transfer_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_PRE_TRANSFER:abs(h_pre) > model_number(thresholds['maximum_pre_abs_h2'], 'model.maximum_pre_abs_h2')"
+    },
+    {
+      "mutation_id": "remove_pre_phase_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_PHASE:not model_number(phase_limits['minimum'], 'model.pre_phase.minimum') <= phase_pre <= model_number(phase_limits['maximum'], 'model.pre_phase.maximum')"
+    },
+    {
+      "mutation_id": "invert_isolation_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_NOT_ISOLATED:abs(h_open) > model_number(thresholds['isolated_abs_h2_max'], 'model.isolated_abs_h2_max')"
+    },
+    {
+      "mutation_id": "remove_isolated_phase_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_PHASE:not model_number(isolated_phase_limits['minimum'], 'model.isolated_phase.minimum') <= phase_open <= model_number(isolated_phase_limits['maximum'], 'model.isolated_phase.maximum')"
+    },
+    {
+      "mutation_id": "invert_uncertainty_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_UNCERTAINTY:open_u95 > model_number(thresholds['isolated_u95_h2_max'], 'model.isolated_u95_h2_max')"
+    },
+    {
+      "mutation_id": "invert_separation_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_SEPARATION:separation < model_number(thresholds['minimum_pre_open_complex_separation'], 'model.minimum_pre_open_complex_separation')"
+    },
+    {
+      "mutation_id": "invert_r_drop_gate",
+      "outcome": "PASS",
+      "rejected_by": "TRANSFER_GATE:SIGNAL_PATH_R_DROP:r_drop > model_number(thresholds['r_drop_max'], 'model.r_drop_max')"
+    },
+    {
+      "mutation_id": "substitute_assembly_role_mapping",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:role_mapping"
+    },
+    {
+      "mutation_id": "remove_assembly_role_gate",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:role_gate"
+    },
+    {
+      "mutation_id": "remove_assembly_manifest_binding",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:manifest_binding"
+    },
+    {
+      "mutation_id": "remove_topology_event_binding",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:event_binding"
+    },
+    {
+      "mutation_id": "remove_topology_scan_chronology_gate",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:chronology_gate"
+    },
+    {
+      "mutation_id": "remove_signal_path_invariant_comparison",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:invariant_comparison"
+    },
+    {
+      "mutation_id": "remove_duplicate_topology_scan_gate",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:scan_replay_gate"
+    },
+    {
+      "mutation_id": "remove_canonical_utc_grammar_gate",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:canonical_utc_grammar_gate"
+    },
+    {
+      "mutation_id": "remove_canonical_utc_parse_call",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:canonical_utc_parse_call"
+    },
+    {
+      "mutation_id": "remove_canonical_utc_roundtrip_gate",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:canonical_utc_roundtrip_gate"
+    },
+    {
+      "mutation_id": "remove_acquisition_utc_parse",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:acquisition_utc_parse"
+    },
+    {
+      "mutation_id": "remove_scan_utc_parse",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:scan_utc_parse"
+    },
+    {
+      "mutation_id": "remove_duplicate_nonlinear_control_gate",
+      "outcome": "PASS",
+      "rejected_by": "ASSEMBLY_CUSTODY:nonlinear_control_replay_gate"
+    }
+  ],
+  "surviving_mutants": 0,
+  "total_mutation_count": 80
+}

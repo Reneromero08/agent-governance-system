@@ -59,7 +59,27 @@
       "unique_payloads_required": true
     },
     "p0.raw-bundle.v1": {
+      "assembly_exact_fields": [
+        "assembly_id",
+        "assembly_manifest_sha256",
+        "carrier_population"
+      ],
       "assignment_reveal_required": true,
+      "byte_receipts_required": [
+        "adapter_source",
+        "assembly_manifest",
+        "assignment_commitment",
+        "assignment_reveal",
+        "calibration_receipt",
+        "chronology_receipt",
+        "instrument_queryback",
+        "native_export_receipt",
+        "nonlinear_control",
+        "source_queryback",
+        "topology_receipt",
+        "topology_scan"
+      ],
+      "chronology_utc_format": "YYYY-MM-DDTHH:MM:SS.ffffffZ",
       "cross_record_equal": [
         "assignment_commitment_sha256",
         "calibration_sha256",
@@ -69,10 +89,12 @@
         "f_ref_hz",
         "instrument_identity_and_configuration",
         "scale_per_code",
+        "signal_path_invariant_fields",
         "source_setup_except_phase",
         "thresholds"
       ],
       "exact_fields": [
+        "assembly",
         "clock",
         "custody",
         "environment",
@@ -83,9 +105,32 @@
         "role",
         "run_id",
         "schema",
+        "signal_path",
         "source",
         "thresholds",
         "witness"
+      ],
+      "nonlinear_control_hashes_unique_per_role": true,
+      "role_to_assembly": {
+        "arm_0": "P0-DUT-A",
+        "arm_pi": "P0-DUT-A",
+        "dummy_c0": "P0-DUMMY-C0-C",
+        "resonator_removed": "P0-DETECTOR-B",
+        "zero_drive": "P0-DUT-A"
+      },
+      "signal_path_exact_fields": [
+        "adg_state_during_windows",
+        "c2_continuous",
+        "circuit_model_sha256",
+        "digitizer_input_mode",
+        "drive_shunt_node",
+        "drive_shunt_resistance_ohm",
+        "injection_network",
+        "injection_node",
+        "injection_resistance_ohm",
+        "k3_state_during_open_window",
+        "thresholds_sha256",
+        "topology_receipt_sha256"
       ],
       "source_exact_fields": [
         "model",
@@ -115,7 +160,8 @@
         "c2_offset_v": "0",
         "load_mode": "HIGH_Z",
         "physical_output_ohms": "50"
-      }
+      },
+      "topology_scan_hashes_unique_per_role": true
     },
     "p0.scientific-result.v1": {
       "drive_phase_uncertainty": {
@@ -137,6 +183,7 @@
         "analyzer_sha256",
         "assignment_commitment_sha256",
         "bundle_sha256",
+        "byte_receipt_sha256",
         "calibration_sha256",
         "dependency_sha256",
         "fixture_sha256",
@@ -145,6 +192,22 @@
         "schema_sha256",
         "thresholds_sha256"
       ]
+    },
+    "p0.signal-path-control.v1": {
+      "decision_independent_of_case_id": true,
+      "exact_fields": [
+        "case_id",
+        "custody",
+        "evidence_class",
+        "metrics",
+        "order",
+        "payload",
+        "physical_claim_requested",
+        "schema",
+        "topology"
+      ],
+      "physical_claim_authorized": false,
+      "threshold_source": "P0_SIGNAL_PATH_CIRCUIT_MODEL.json"
     },
     "p0.synthetic-control-evidence.v1": {
       "decision_independent_of_control_id": true,
@@ -178,6 +241,8 @@
     "p0.netlist.v1",
     "p0.channel-map.v1",
     "p0.source-off-topology.v1",
+    "p0.signal-path-circuit-model.v1",
+    "p0.signal-path-control.v1",
     "p0.instrument-configuration.v1",
     "p0.native-export-adapter-receipt.v1",
     "p0.raw-bundle.v1",

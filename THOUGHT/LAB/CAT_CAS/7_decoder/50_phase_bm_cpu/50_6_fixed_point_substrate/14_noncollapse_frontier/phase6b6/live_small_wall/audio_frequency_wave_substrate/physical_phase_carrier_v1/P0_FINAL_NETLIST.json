@@ -307,6 +307,32 @@
     },
     {
       "board": "P0-SOURCE-OFF-CONTROL-REV-B-A",
+      "domain": "ANALOG",
+      "exact_document": "VISHAY_TNPW",
+      "function": "continuous 1.00 Mohm C2 actual-signal-path witness injection downstream of ADG1419 and upstream of K1",
+      "manufacturer": "Vishay",
+      "part_number": "TNPW08051M00BEEN",
+      "pins": {
+        "1": "C2_REF_IN_A",
+        "2": "N_GATE_OUT_A"
+      },
+      "ref": "R_C2_INJECT_A"
+    },
+    {
+      "board": "P0-SOURCE-OFF-CONTROL-REV-B-A",
+      "domain": "ANALOG",
+      "exact_document": "VISHAY_TNPW",
+      "function": "100 kohm N_SRC drive shunt enforcing the 0.200 Vpp carrier-terminal cap; isolated from N_GATE_OUT when ADG1419 is OFF",
+      "manufacturer": "Vishay",
+      "part_number": "TNPW0805100KBEEN",
+      "pins": {
+        "1": "N_SRC_A",
+        "2": "AGND_EXPORT_A"
+      },
+      "ref": "R_DRIVE_SHUNT_A"
+    },
+    {
+      "board": "P0-SOURCE-OFF-CONTROL-REV-B-A",
       "domain": "GATE",
       "exact_document": "ADG1419_REV_A",
       "function": "C1 DRIVE/OFF route",
@@ -1380,6 +1406,32 @@
     },
     {
       "board": "P0-SOURCE-OFF-CONTROL-REV-B-B",
+      "domain": "ANALOG",
+      "exact_document": "VISHAY_TNPW",
+      "function": "continuous 1.00 Mohm C2 actual-signal-path witness injection downstream of ADG1419 and upstream of K1",
+      "manufacturer": "Vishay",
+      "part_number": "TNPW08051M00BEEN",
+      "pins": {
+        "1": "C2_REF_IN_B",
+        "2": "N_GATE_OUT_B"
+      },
+      "ref": "R_C2_INJECT_B"
+    },
+    {
+      "board": "P0-SOURCE-OFF-CONTROL-REV-B-B",
+      "domain": "ANALOG",
+      "exact_document": "VISHAY_TNPW",
+      "function": "100 kohm N_SRC drive shunt enforcing the 0.200 Vpp carrier-terminal cap; isolated from N_GATE_OUT when ADG1419 is OFF",
+      "manufacturer": "Vishay",
+      "part_number": "TNPW0805100KBEEN",
+      "pins": {
+        "1": "N_SRC_B",
+        "2": "AGND_EXPORT_B"
+      },
+      "ref": "R_DRIVE_SHUNT_B"
+    },
+    {
+      "board": "P0-SOURCE-OFF-CONTROL-REV-B-B",
       "domain": "GATE",
       "exact_document": "ADG1419_REV_A",
       "function": "C1 DRIVE/OFF route",
@@ -2437,6 +2489,32 @@
         "2": "AGND_EXPORT_C"
       },
       "ref": "R_MON_BIAS_C"
+    },
+    {
+      "board": "P0-SOURCE-OFF-CONTROL-REV-B-C",
+      "domain": "ANALOG",
+      "exact_document": "VISHAY_TNPW",
+      "function": "continuous 1.00 Mohm C2 actual-signal-path witness injection downstream of ADG1419 and upstream of K1",
+      "manufacturer": "Vishay",
+      "part_number": "TNPW08051M00BEEN",
+      "pins": {
+        "1": "C2_REF_IN_C",
+        "2": "N_GATE_OUT_C"
+      },
+      "ref": "R_C2_INJECT_C"
+    },
+    {
+      "board": "P0-SOURCE-OFF-CONTROL-REV-B-C",
+      "domain": "ANALOG",
+      "exact_document": "VISHAY_TNPW",
+      "function": "100 kohm N_SRC drive shunt enforcing the 0.200 Vpp carrier-terminal cap; isolated from N_GATE_OUT when ADG1419 is OFF",
+      "manufacturer": "Vishay",
+      "part_number": "TNPW0805100KBEEN",
+      "pins": {
+        "1": "N_SRC_C",
+        "2": "AGND_EXPORT_C"
+      },
+      "ref": "R_DRIVE_SHUNT_C"
     },
     {
       "board": "P0-SOURCE-OFF-CONTROL-REV-B-C",
@@ -3929,12 +4007,12 @@
     {
       "failure": "K1 signal pole stuck closed",
       "physical_effect": "K2 remains an independent series open and K3 guards the midpoint",
-      "scientific_action": "REJECT; auxiliary witness cannot substitute for signal-pole receipt"
+      "scientific_action": "REJECT a known stuck-contact fixture; an otherwise passing end-to-end event can establish path isolation but never identify which individual contact opened"
     },
     {
       "failure": "K2 signal pole stuck closed",
       "physical_effect": "K1 remains an independent series open and K3 guards the midpoint",
-      "scientific_action": "REJECT; auxiliary witness cannot substitute for signal-pole receipt"
+      "scientific_action": "REJECT a known stuck-contact fixture; an otherwise passing end-to-end event can establish path isolation but never identify which individual contact opened"
     },
     {
       "failure": "K3 guard pole fails to close",
@@ -5267,6 +5345,7 @@
         "J_SRC_C1_A.return",
         "PS_GATE_A.0V",
         "PS_SENSE_A.0V",
+        "R_DRIVE_SHUNT_A.2",
         "R_GUARD_A.2",
         "R_MON_BIAS_A.2",
         "R_TERM_A.2",
@@ -5292,6 +5371,7 @@
         "J_SRC_C1_B.return",
         "PS_GATE_B.0V",
         "PS_SENSE_B.0V",
+        "R_DRIVE_SHUNT_B.2",
         "R_GUARD_B.2",
         "R_MON_BIAS_B.2",
         "R_TERM_B.2",
@@ -5317,6 +5397,7 @@
         "J_SRC_C1_C.return",
         "PS_GATE_C.0V",
         "PS_SENSE_C.0V",
+        "R_DRIVE_SHUNT_C.2",
         "R_GUARD_C.2",
         "R_MON_BIAS_C.2",
         "R_TERM_C.2",
@@ -5429,6 +5510,7 @@
     {
       "members": [
         "J_SRC_C2_A.center",
+        "R_C2_INJECT_A.1",
         "R_MON_C2_A.1"
       ],
       "name": "C2_REF_IN_A"
@@ -5436,6 +5518,7 @@
     {
       "members": [
         "J_SRC_C2_B.center",
+        "R_C2_INJECT_B.1",
         "R_MON_C2_B.1"
       ],
       "name": "C2_REF_IN_B"
@@ -5443,6 +5526,7 @@
     {
       "members": [
         "J_SRC_C2_C.center",
+        "R_C2_INJECT_C.1",
         "R_MON_C2_C.1"
       ],
       "name": "C2_REF_IN_C"
@@ -6142,6 +6226,7 @@
     {
       "members": [
         "K1_A.3",
+        "R_C2_INJECT_A.2",
         "U_GATE_A.8"
       ],
       "name": "N_GATE_OUT_A"
@@ -6149,6 +6234,7 @@
     {
       "members": [
         "K1_B.3",
+        "R_C2_INJECT_B.2",
         "U_GATE_B.8"
       ],
       "name": "N_GATE_OUT_B"
@@ -6156,6 +6242,7 @@
     {
       "members": [
         "K1_C.3",
+        "R_C2_INJECT_C.2",
         "U_GATE_C.8"
       ],
       "name": "N_GATE_OUT_C"
@@ -6279,6 +6366,7 @@
     },
     {
       "members": [
+        "R_DRIVE_SHUNT_A.1",
         "R_LIMIT_A.2",
         "U_GATE_A.1"
       ],
@@ -6286,6 +6374,7 @@
     },
     {
       "members": [
+        "R_DRIVE_SHUNT_B.1",
         "R_LIMIT_B.2",
         "U_GATE_B.1"
       ],
@@ -6293,6 +6382,7 @@
     },
     {
       "members": [
+        "R_DRIVE_SHUNT_C.1",
         "R_LIMIT_C.2",
         "U_GATE_C.1"
       ],
@@ -6887,8 +6977,8 @@
       "role": "b3 high only when deenergized"
     }
   ],
-  "revision": "P0-NETLIST-REV-C-20260717",
-  "schema": "p0.final-netlist.v3",
+  "revision": "P0-NETLIST-REV-D-20260718",
+  "schema": "p0.final-netlist.v4",
   "source_off_sequence": {
     "acquisition": "software-prearmed free-running continuous record; CH2 locates the event and CH0 dual-tone reconstruction supplies the phase gauge",
     "contact_limit_samples": 14500,
@@ -6896,17 +6986,32 @@
     "first_admissible": "max(t_gate+0.560 us, end of 1000-sample stable code-8 run)+10.000 ms",
     "gate": "ADG1419 routes C1 from DRIVE to 50.00 ohm termination",
     "guard_samples": 10000,
-    "relay_order": "deenergize K1 and K2, require 1000 consecutive samples of code 0 while K3 remains energized, then deenergize K3 to its guard state and require 1000 consecutive samples of code 8",
+    "relay_order": "with ADG1419 already OFF, finish the 192-sample C2 pre-transfer window; deenergize K1 and K2; require 1000 consecutive samples of code 0 while K3 remains energized and evaluate the 960-sample end-to-end isolated C2 window; only after both gates pass may K3 deenergize to guard and code 8 stabilize",
     "relay_release_delay_us": 250,
     "series_open_stable_samples": 1000,
     "signal_pole_evidence_boundary": {
       "accepted_prerequisites": [
-        "PER_EVENT_ACTUAL_SIGNAL_PATH_WITNESS",
-        "EXACT_FORCE_GUIDED_CONTACT_GUARANTEE"
+        "PRE_K3_COMPLEX_C2_END_TO_END_TRANSFER_WITNESS"
       ],
+      "actual_path_claim": "ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT",
       "auxiliary_contacts_sufficient": false,
+      "individual_pole_identity_claim_authorized": false,
       "physical_execution_authorized": false,
-      "source_disconnect_claim_authorized": false
+      "source_disconnect_claim_authorized_only_on_future_passing_event": true,
+      "topology": {
+        "injection": "C2_REF_IN through exact TNPW 1.00 Mohm R_C2_INJECT to N_GATE_OUT; exact 100 kohm R_DRIVE_SHUNT remains on N_SRC and is isolated by ADG1419 during both H2 windows",
+        "k3_during_h2": "energized and electrically open",
+        "measured_path": [
+          "N_GATE_OUT",
+          "K1 signal pole",
+          "N_MIDPOINT",
+          "K2 signal pole",
+          "N_ELECTRODE_A",
+          "OPA810",
+          "CH1"
+        ]
+      },
+      "witness_model": "P0_SIGNAL_PATH_CIRCUIT_MODEL.json"
     },
     "source_persistence_proof": "CH0 must match the sample-level reconstructed 32768 Hz C1 plus 65536 Hz C2 waveform from t_gate through record end with peak residual <=5 percent of the fitted C1 amplitude, and both tones must remain within 2 percent amplitude and 0.010 rad phase in contiguous 100000-sample segments beginning at t_gate and covering record end; the bounded passive C2-to-C1 coupling through the monitor network is modeled and controlled rather than called zero",
     "source_setup": {
@@ -6925,13 +7030,19 @@
         "offset_v": 0.0,
         "phase_command_rad": 0.0
       },
-      "conservative_c1_resistive_bound": {
-        "carrier_esr_ohms_max": 70000.0,
-        "carrier_terminal_vpp_max": 0.164658,
-        "motional_current_ua_max": 0.831646,
-        "motional_power_uw_max": 0.048415,
+      "complete_corner_c1_bound": {
+        "carrier_motional_resistance_ohms_range": [
+          30000.0,
+          70000.0
+        ],
+        "carrier_terminal_vpp_max": 0.187806545796,
+        "motional_current_ua_max": 0.18650660164,
+        "motional_power_uw_max": 0.00229706934984,
         "series_limiter_ohms": 100000.0,
-        "source_output_ohms": 50.0,
+        "source_output_ohms_range": [
+          47.5,
+          52.5
+        ],
         "source_vrms": 0.141421356
       },
       "load_mode": "HIGH_Z",

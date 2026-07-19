@@ -1,0 +1,341 @@
+{
+  "authority": "AUTHORIZE P0 BUILD-READINESS ONLY",
+  "build_readiness_decision": "P0_BUILD_READINESS_PACKET_FROZEN",
+  "candidate_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+  "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
+  "contact_attestation": {
+    "audio_playback_or_recording": 0,
+    "cart_or_stock_check": 0,
+    "hardware": 0,
+    "human_vendor_outreach": 0,
+    "instrument_command": 0,
+    "purchase": 0,
+    "target": 0
+  },
+  "files": [
+    {
+      "bytes": 16119,
+      "path": "../AUDIO_SIDE_QUEST_ROADMAP.md",
+      "sha256": "d3eaa6824e9266b2737f7eff99d2fa2457edf6e5e8264e983a4a652dca4cd539"
+    },
+    {
+      "bytes": 8833,
+      "path": "P0_ANALYSIS_CONFORMANCE_VECTORS.json",
+      "sha256": "b9d3d007decc8e0ca70dda29c1e2eebb4c5048dda975697e3e4269d11defa6ba"
+    },
+    {
+      "bytes": 58239,
+      "path": "P0_ANALYZER_REFERENCE_RESULTS.json",
+      "sha256": "6fe0893b9a0e40db0bf420538efc946a39d5048200cc1fe5e7ca0b8c6f26c857"
+    },
+    {
+      "bytes": 5807,
+      "path": "P0_AUTHORED_ASSEMBLY_DRAWINGS.md",
+      "sha256": "0294d288850a2c92cab16c0844cdd343b87a7724f5046d38c1e86bb651647bd0"
+    },
+    {
+      "bytes": 17150,
+      "path": "P0_BOM_SAFETY_AND_SILICON_TRANSLATION.md",
+      "sha256": "70abb2be236cf216c23848d2a146a48c32c34fa0905b80b3ef3bb97b396500ea"
+    },
+    {
+      "bytes": 5326,
+      "path": "P0_BUILD_READINESS_AUTHORITY.md",
+      "sha256": "57604a983f5a1a0eade31f9f02f27111c3c408ee2e1535be62c2781c93211162"
+    },
+    {
+      "bytes": 10404,
+      "path": "P0_BUILD_READINESS_COMPONENT_SEED.md",
+      "sha256": "754166b257b103f6d7b48cec285e1f2bbe97dd01fa21a124cfd1ea1fb2c0b9fe"
+    },
+    {
+      "bytes": 8710,
+      "path": "P0_BUILD_READINESS_FINDINGS.json",
+      "sha256": "618a1e0dd8fca93b904c312d8e0469a36dfeeaef05226ce370c75333b1099fde"
+    },
+    {
+      "bytes": 487,
+      "path": "P0_BUILD_READINESS_MUTATION_RESULTS.json",
+      "sha256": "80581821f35b7eb171f0a1b97d5617a03a5d98733daeef4bc219c7da6b550bfb"
+    },
+    {
+      "bytes": 17330,
+      "path": "P0_BUILD_READINESS_PACKET.md",
+      "sha256": "6f8287c1051fc7aa39502f543abf8f1c029bbbffa7742b1096e6da308a5f1dd6"
+    },
+    {
+      "bytes": 1531,
+      "path": "P0_BUILD_READINESS_REVIEWS.json",
+      "sha256": "a3c4db67271b99879168d12d88927a61b6df78b97aae6a3e8912bdf9e3d53949"
+    },
+    {
+      "bytes": 2441,
+      "path": "P0_BUILD_READINESS_REVIEW_REPORTS.md",
+      "sha256": "c20c7b9bfe4f9256b165ece16f03f22b9b3a12cfa1604301182f8ece1b3a6f16"
+    },
+    {
+      "bytes": 7386,
+      "path": "P0_BUILD_READINESS_SCHEMAS.json",
+      "sha256": "21ca54f27528701fb9154108681775fed38c648f4706c16c89397255200c9b7d"
+    },
+    {
+      "bytes": 14979,
+      "path": "P0_CARRIER_AND_ACCESS_SELECTION.md",
+      "sha256": "ae9c5fba08b068628a7a27a365ffb9317ab9b1538e302d5322db5b7f8e6142f8"
+    },
+    {
+      "bytes": 24023,
+      "path": "P0_COMPONENT_DOCUMENTS.json",
+      "sha256": "a0457763d93dcd71581c03103db762872176eb0c33a293a6da497f7aea6a6131"
+    },
+    {
+      "bytes": 15982,
+      "path": "P0_CONTROL_KILL_AND_ADJUDICATION.md",
+      "sha256": "397f78f7c2de682d2872d27b8855cd0d8857950292e3631108fabb7731f7ccab"
+    },
+    {
+      "bytes": 28848,
+      "path": "P0_EVIDENCE_SCHEMAS.json",
+      "sha256": "40d0b8077d8d6337fa3235ae12082baa6379cf9cfff8f827fb00867156c0faab"
+    },
+    {
+      "bytes": 201418,
+      "path": "P0_FINAL_NETLIST.json",
+      "sha256": "10dc13d96668731e50db02a4c22e49b4398e90d1ddb3c887167da6491c8c5603"
+    },
+    {
+      "bytes": 7004,
+      "path": "P0_FINDINGS_NORMALIZED.json",
+      "sha256": "cdc93864d1b63dd459e08c59b557703637fb89f2b87c31ced0b5245384ec57cc"
+    },
+    {
+      "bytes": 4558,
+      "path": "P0_FUTURE_PHYSICAL_EXECUTION_CONTRACT.md",
+      "sha256": "75f77b9228ac61338193df87ddc12190ad54cff44e8e5a036c2cf59ca433d4b4"
+    },
+    {
+      "bytes": 49117,
+      "path": "P0_MEASUREMENT_AND_SOURCE_OFF_PLAN.md",
+      "sha256": "bdbc446eeebb8e9a3b6d350ab12a5c82d8d1fdc0ff3b6f521453036d6af9ff62"
+    },
+    {
+      "bytes": 56449,
+      "path": "P0_NONPURCHASING_BOM.json",
+      "sha256": "9b83eb29cd2d94e0eee3ff7fcab532ce8e1a862df63167abba420289bb6bd47c"
+    },
+    {
+      "bytes": 70099,
+      "path": "P0_PCB_FABRICATION_RELEASE.json",
+      "sha256": "c137482d45ebdc62c832cac612cfc365795014258e940907a23b0f5fa7204438"
+    },
+    {
+      "bytes": 5491,
+      "path": "P0_REVIEW_REPORTS.md",
+      "sha256": "1324789a90c042641c255d404e18a1221c5da444fdbe80b4ce691f7fa1d29915"
+    },
+    {
+      "bytes": 14187,
+      "path": "P0_SCIENTIFIC_FIXTURES.json",
+      "sha256": "f7cae242dfb96f00a70ab88957c04a060e4859ef13df823867b2ed50fc042ff7"
+    },
+    {
+      "bytes": 65826,
+      "path": "P0_SIGNAL_PATH_CIRCUIT_MODEL.json",
+      "sha256": "7cd08c67e10cad4e1b83082f7fa2beaf8bcc2361a16ee9b861fdddd293594b28"
+    },
+    {
+      "bytes": 11786,
+      "path": "P0_SIGNAL_PATH_MUTATION_RESULTS.json",
+      "sha256": "d8f83a47461256904c85b4b17f75c0548777662af631124fa216980922857c30"
+    },
+    {
+      "bytes": 1620,
+      "path": "P0_SIGNAL_PATH_ORDERING_PROOF.json",
+      "sha256": "baf5f003bc957cfd192db60ad23716ce9dd03972e8b87758e55bdce75762c818"
+    },
+    {
+      "bytes": 7530,
+      "path": "P0_SIGNAL_PATH_WITNESS_REPAIR_CONTRACT.md",
+      "sha256": "4a821bb9795686345657885b43e9a7e5217e859b302cf565a093cc0eb13ae2a0"
+    },
+    {
+      "bytes": 6474,
+      "path": "P0_UNPOWERED_ASSEMBLY_PACKET.md",
+      "sha256": "304a158febe55405ccf549db3cfe86a6917d287a88da79e54f3860d0bbfdf42b"
+    },
+    {
+      "bytes": 15095,
+      "path": "PHYSICAL_PHASE_CARRIER_P0_CONTRACT.md",
+      "sha256": "f63226f4a5d35605644d9f682db5fbcca1872b5db55a2acceb81868b940ecd1b"
+    },
+    {
+      "bytes": 54920,
+      "path": "p0_analysis_conformance.py",
+      "sha256": "deab27cac5be7d6b3fb21c7ad478daac3e10e9a847301c270e76043198259ea9"
+    },
+    {
+      "bytes": 120424,
+      "path": "p0_build_readiness_design.py",
+      "sha256": "42c9392a4676d87b03287a10c343ad4946683fadf554fdcb4c3a7cfc01d38241"
+    },
+    {
+      "bytes": 5497,
+      "path": "p0_build_readiness_mutation_test.py",
+      "sha256": "1304eaeb26dd188523548e9d9fd68095461d70ac1075f6b49cbb0b3387096986"
+    },
+    {
+      "bytes": 102204,
+      "path": "p0_build_readiness_validator.py",
+      "sha256": "6c3e0d8f045e20654d4d2b96b1d0b556315f42aa3b245366dc1a277519f414e1"
+    },
+    {
+      "bytes": 34399,
+      "path": "p0_packet_validator.py",
+      "sha256": "679911f646200b65aa79622cc71833e216919f550146f92b4c9d133d0250ce66"
+    },
+    {
+      "bytes": 179630,
+      "path": "p0_scientific_analyzer.py",
+      "sha256": "33fc447ef5c545a8408cbd0e6330cdd71a72a5a097d80296b24240f37d0b750f"
+    },
+    {
+      "bytes": 18023,
+      "path": "p0_signal_path_ordering_proof.py",
+      "sha256": "3bb6e9e86994bea8bbd9e50e61a5905147eda89cfcca805fb78a6464b4b61f9d"
+    },
+    {
+      "bytes": 30424,
+      "path": "p0_signal_path_witness_model.py",
+      "sha256": "e087fd4bf9d6b9d86e8aa1893cca0894685f86469980a8718897db5b2d35a407"
+    },
+    {
+      "bytes": 15117,
+      "path": "p0_signal_path_witness_mutation_test.py",
+      "sha256": "2043b0e2c26e493274a82dbfa7e43462b1c9edc30a7d772cfdae6a62aaac614a"
+    },
+    {
+      "bytes": 392,
+      "path": "research/P0_research_bundle_2026-07-18/.gitignore",
+      "sha256": "48499dd3d11c7ac252a1539dd77e23da3b91bb5fc0ae0e62d6487e9d2ae920a3"
+    },
+    {
+      "bytes": 17855,
+      "path": "research/P0_research_bundle_2026-07-18/DOWNLOAD_LINKS.md",
+      "sha256": "25644a7dac258831e0b9e616030854aa1cda381a28314a479b4a5a111fedbab1"
+    },
+    {
+      "bytes": 16313,
+      "path": "research/P0_research_bundle_2026-07-18/MANIFEST.json",
+      "sha256": "4dd4df0d806b083d9a9e7fe3c0f255fc56e729d3be83de1ba567fade42166fad"
+    },
+    {
+      "bytes": 1766,
+      "path": "research/P0_research_bundle_2026-07-18/MANIFEST.schema.json",
+      "sha256": "1f5d29a8ff7c536bbcbb3edccb0e9ffdf7743dbec8d97ce8872d8fb808626408"
+    },
+    {
+      "bytes": 2239,
+      "path": "research/P0_research_bundle_2026-07-18/OPEN_GAPS.md",
+      "sha256": "0f1aaa607e07c2f99ef8075e2f05af104d2edd685ebd59e39545d481e5e60cc8"
+    },
+    {
+      "bytes": 3300,
+      "path": "research/P0_research_bundle_2026-07-18/README.md",
+      "sha256": "a9a4edb579a8582b8bad4058f4e7c4e134f9673f01c315dded6a475ba9b66a43"
+    },
+    {
+      "bytes": 1446,
+      "path": "research/P0_research_bundle_2026-07-18/REGISTRY_RECONCILIATION.md",
+      "sha256": "774274a3cb961b6944b3323a4c0812f52f377e32160e9e98f65ac5afbf79cd8f"
+    },
+    {
+      "bytes": 5064,
+      "path": "research/P0_research_bundle_2026-07-18/RESEARCH_SYNTHESIS.md",
+      "sha256": "da35f50acaf5216f322423f00d014974b4b97c0449d377d700709a6c376d169f"
+    },
+    {
+      "bytes": 42838,
+      "path": "research/P0_research_bundle_2026-07-18/SOURCE_CUSTODY.json",
+      "sha256": "3daceee5087eda69cf89a19222a0a8aa8ff9b8d3170a127dc09de58e61213387"
+    },
+    {
+      "bytes": 961,
+      "path": "research/P0_research_bundle_2026-07-18/THIRD_PARTY_RIGHTS.md",
+      "sha256": "b2fba5c2a1c6ce47508f0222be8f886cee416f4523c49438e94bac462a66fe1f"
+    },
+    {
+      "bytes": 1810,
+      "path": "research/P0_research_bundle_2026-07-18/notes/INSTALL_IN_REPO.md",
+      "sha256": "6c017018a735bb85e38960d37a954fd35eda97bbb719319529ffb323e90e9c7a"
+    },
+    {
+      "bytes": 785,
+      "path": "research/P0_research_bundle_2026-07-18/notes/REVISION_ALERTS.md",
+      "sha256": "c88a785039bc5ecf67a5a66fea2077ef723b97538fd574f234bc89dd6f921696"
+    },
+    {
+      "bytes": 1288,
+      "path": "research/P0_research_bundle_2026-07-18/notes/SCIENCE_RESEARCH_NOTES.md",
+      "sha256": "9471c01d3e2a7a9321f4ca892f376f2e829861798e4a6e81bfe7c0d950c9ef39"
+    },
+    {
+      "bytes": 132,
+      "path": "research/P0_research_bundle_2026-07-18/repo_context/README.md",
+      "sha256": "7e5f47e1984945f1c8e58fba20f5b6358263cb9017c0cd1e966e8c91c128bc54"
+    },
+    {
+      "bytes": 424,
+      "path": "research/P0_research_bundle_2026-07-18/scripts/bootstrap_windows.ps1",
+      "sha256": "4cc63c3c8224270ff3960f98cbdc0e3246373e9329c42d1d962d663f75cd1261"
+    },
+    {
+      "bytes": 9789,
+      "path": "research/P0_research_bundle_2026-07-18/scripts/build_custody_snapshot.py",
+      "sha256": "45b786689be9052aae143b0effc2ed5fda750595763437be54eea0ec47c5e804"
+    },
+    {
+      "bytes": 5265,
+      "path": "research/P0_research_bundle_2026-07-18/scripts/download_sources.py",
+      "sha256": "34b3a3ae2c3ae4d0ad55f4dacabf3f072fa4012aac90df89e60fad922892d4d5"
+    },
+    {
+      "bytes": 2765,
+      "path": "research/P0_research_bundle_2026-07-18/scripts/import_repo_context.py",
+      "sha256": "322524ecd1b16218affa9d1421ea420c083fbde35677469a0c58a43c19a289bf"
+    },
+    {
+      "bytes": 713,
+      "path": "research/P0_research_bundle_2026-07-18/scripts/make_complete_archive.py",
+      "sha256": "b05216f120e18329f16c07397ae416691142635e0ef217c89c1d9c50a95ec51c"
+    },
+    {
+      "bytes": 2942,
+      "path": "research/P0_research_bundle_2026-07-18/scripts/verify_downloads.py",
+      "sha256": "af1b9f3df50a95e27af4db487e81644fb323453abd867651caa90bc454c6f799"
+    },
+    {
+      "bytes": 735,
+      "path": "research/P0_research_bundle_2026-07-18/sources/README.md",
+      "sha256": "be3f838512b84455b58f70debe829823212726cddaa22de2ae39ef7bfba6120e"
+    },
+    {
+      "bytes": 80,
+      "path": "research/P0_research_bundle_2026-07-18/sources/official/README.md",
+      "sha256": "4007579707f562a87317f8c6d43d5ff0a199930401860409b9724845dd83ae3c"
+    },
+    {
+      "bytes": 92,
+      "path": "research/P0_research_bundle_2026-07-18/sources/supplemental/README.md",
+      "sha256": "448b2c566b7fafbe0e239f0472a1682133a2a334e325d5bd3b7717cb4edee628"
+    }
+  ],
+  "next_authority_boundary": "USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD",
+  "repair_decision": "P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED",
+  "review_agent_ids": [
+    "/root/p0sp_circuit_carrier",
+    "/root/p0sp_path_sourceoff",
+    "/root/p0sp_analyzer_controls",
+    "/root/p0sp_claims_authority"
+  ],
+  "schema": "p0.build-readiness-manifest.v3"
+}

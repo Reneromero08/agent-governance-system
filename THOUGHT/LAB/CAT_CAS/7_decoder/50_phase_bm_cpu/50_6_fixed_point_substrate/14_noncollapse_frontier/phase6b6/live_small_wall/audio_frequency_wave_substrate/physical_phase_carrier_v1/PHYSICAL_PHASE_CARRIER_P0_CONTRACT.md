@@ -1,6 +1,6 @@
 # Physical Phase Carrier P0 Contract
 
-**Status:** `P0_BUILD_READINESS_BLOCKED__NO_HARDWARE_AUTHORITY`<br>
+**Status:** `P0_BUILD_READINESS_PACKET_FROZEN__NO_HARDWARE_AUTHORITY`<br>
 **Package:** `physical_phase_carrier_v1`<br>
 **Architecture decision:** `PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN`<br>
 **Authority:** `AUTHORIZE P0 BUILD-READINESS ONLY`<br>
@@ -175,19 +175,25 @@ stage B:
 
 witnesses:
     source-side CH0, resonator-side CH1, auxiliary-contact-state CH2
-    actual signal-pole state requires a separately reviewed per-event witness
-    or exact force-guided-contact guarantee; CH2 alone is insufficient
+    continuous C2 also enters N_GATE_OUT through exact 1.00 Mohm
+    an exact 100 kOhm shunt at N_SRC enforces the carrier-voltage cap and
+    remains isolated on the ADG D/SA side during the C2 witness windows
+    the pre-K3 CH0-to-CH1 complex C2 transfer proves only complete-path isolation
+    on a passing future event; CH2 alone remains insufficient and neither
+    individual K1/K2 pole is identified
 
 first admissible raw sample:
     10.000 ms after the ordered auxiliary transition reaches stable code 8,
-    and never admissible for a physical source-disconnect claim until the
-    actual-signal-path evidence gate above is closed
+    and never admissible for a physical source-disconnect claim unless the
+    prospective actual-signal-path gate above passes on that future event
 ```
 
 The frozen prospective source is one SDG1032X in `HIGH_Z` load mode with 50 Ohm
 physical outputs. C1 is a continuous 32,768 Hz, 0.400 Vpp, 0 V-offset sine at
 phase 0 or pi. C2 is a continuous 65,536 Hz, 0.100 Vpp, 0 V-offset sine at fixed
-zero phase that enters only the passive CH0 monitor. Both outputs remain on for
+zero phase that enters the passive CH0 monitor and the exact 1.00 Mohm branch
+to N_GATE_OUT downstream of ADG1419. The exact 100 kOhm `N_SRC` drive shunt is
+on the D/SA side after ADG OFF and cannot define the C2 witness. Both outputs remain on for
 the complete software-prearmed free-running record. No burst or external trigger
 is part of P0. CH2 locates the isolation event and the C2/C1 fit supplies the
 record-local phase gauge.
@@ -203,6 +209,16 @@ acquisition guard interval
 first admitted post-source sample
 maximum accepted controller or buffer latency
 ```
+
+Each future record must additionally bind a canonical assembly manifest and a
+unique version-2 topology receipt to the assigned role, exact A/B/C carrier
+population, native payload, chronology receipt, source and instrument
+querybacks, raw topology-scan/control bytes, and scan times completed before
+acquisition. The three A roles reuse the exact A manifest; B and C use distinct
+manifests. All four scan/acquisition times use exact
+`YYYY-MM-DDTHH:MM:SS.ffffffZ` UTC form and are compared as parsed instants.
+Cross-assembly, cross-event, duplicate-scan, duplicate-control,
+noncanonical-time, and post-acquisition replay are inadmissible.
 
 A software mute command alone is not sufficient evidence of source removal. Qualification
 must show what electrical or physical path is disconnected, gated, terminated, or bounded.
@@ -424,7 +440,8 @@ This packet stops before that boundary.
 AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED
 PHYSICAL_PHASE_CARRIER_P0_BOUNDARY_SELECTED
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
-P0_BUILD_READINESS_BLOCKED
+P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED
+P0_BUILD_READINESS_PACKET_FROZEN
 PHYSICAL_PHASE_CARRIER_NOT_YET_OBSERVED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 PHYSICAL_SILICON_PHONONIC_COMPUTING_NOT_ESTABLISHED

@@ -259,6 +259,20 @@
           "y_mm": 37.2
         },
         {
+          "ref": "R_C2_INJECT_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 56.0
+        },
+        {
+          "ref": "R_DRIVE_SHUNT_A",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 58.0,
+          "y_mm": 56.0
+        },
+        {
           "ref": "R_G1_A",
           "rotation_deg": 0,
           "side": "top",
@@ -900,6 +914,20 @@
           "y_mm": 37.2
         },
         {
+          "ref": "R_C2_INJECT_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 56.0
+        },
+        {
+          "ref": "R_DRIVE_SHUNT_B",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 58.0,
+          "y_mm": 56.0
+        },
+        {
           "ref": "R_G1_B",
           "rotation_deg": 0,
           "side": "top",
@@ -1532,6 +1560,20 @@
           "side": "top",
           "x_mm": 14.0,
           "y_mm": 37.2
+        },
+        {
+          "ref": "R_C2_INJECT_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 54.0,
+          "y_mm": 56.0
+        },
+        {
+          "ref": "R_DRIVE_SHUNT_C",
+          "rotation_deg": 0,
+          "side": "top",
+          "x_mm": 58.0,
+          "y_mm": 56.0
         },
         {
           "ref": "R_G1_C",

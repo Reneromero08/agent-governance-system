@@ -122,7 +122,7 @@ electrodes A/B -> as-built Rin,U95 >=100 MOhm, Cin,U95 <=4.00 pF voltage sense
 mechanical-sense CH1
 
 gate plus relay auxiliary-contact witnesses -> calibrated 4-bit resistor code on CH2
-actual signal-pole opening -> separate future per-event path witness or exact force-guided-contact guarantee; currently unresolved
+actual end-to-end signal-path isolation -> prospectively frozen pre-K3 complex C2 witness; no individual K1/K2 pole identity claim
 enclosure vibration -> CH3
 temperature / humidity -> timestamped environmental record
 all raw channels -> immutable native capture -> offline I/Q and metrics

@@ -10,7 +10,7 @@
     "purchase": 0,
     "target": 0
   },
-  "decision": "P0_BUILD_READINESS_BLOCKED",
+  "decision": "P0_BUILD_READINESS_PACKET_FROZEN",
   "findings": [
     {
       "closure_evidence": [
@@ -192,22 +192,28 @@
     },
     {
       "closure_evidence": [
+        "P0_SIGNAL_PATH_CIRCUIT_MODEL.json",
         "P0_FINAL_NETLIST.json#source_off_sequence.signal_pole_evidence_boundary",
-        "P0_BUILD_READINESS_PACKET.md#physical-source-off-sequence",
-        "P0_FUTURE_PHYSICAL_EXECUTION_CONTRACT.md#future-source-off-contract"
+        "p0_scientific_analyzer.py#signal_path_transfer",
+        "p0_scientific_analyzer.py#ASSEMBLY_FOR_ROLE",
+        "P0_SIGNAL_PATH_ORDERING_PROOF.json",
+        "P0_ANALYZER_REFERENCE_RESULTS.json#signal_path_control_outcomes",
+        "P0_SIGNAL_PATH_MUTATION_RESULTS.json",
+        "P0_BUILD_READINESS_REVIEWS.json"
       ],
       "finding_id": "P0BR-R3-SIGNAL-POLE",
-      "original_summary": "Auxiliary CH2 contacts do not provide per-event evidence that K1/K2 signal poles opened; physical source-disconnect claims remain blocked pending an actual-path witness or exact force-guided guarantee.",
+      "original_summary": "Auxiliary CH2 contacts do not provide per-event evidence that K1/K2 signal poles opened; closure requires a prospective actual-path witness plus assembly-, role-, event-, queryback- and parsed-UTC chronology custody that rejects A-to-B/C, cross-event scan/receipt/control replay and noncanonical time text.",
       "severity": "BLOCKER",
-      "status": "OPEN"
+      "status": "CLOSED"
     }
   ],
-  "open_material_findings": 1,
+  "open_material_findings": 0,
   "public_source_retrieval": {
     "automated_http_attempts_occurred": true,
     "repository_safe_receipt": "research/P0_research_bundle_2026-07-18/SOURCE_CUSTODY.json",
     "third_party_bytes_private_and_ignored": true
   },
-  "repair_review_gate": "P0_BUILD_READINESS_PACKET_FROZEN is prohibited while P0BR-R3-SIGNAL-POLE remains open; after a separately reviewed mechanical repair, four independent PASS receipts must bind the exact new candidate root",
-  "schema": "p0.build-readiness-findings.v2"
+  "repair_decision": "P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED",
+  "repair_review_gate": "satisfied only by four focused PASS receipts bound to the exact final candidate root",
+  "schema": "p0.build-readiness-findings.v3"
 }

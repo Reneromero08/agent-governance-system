@@ -5,7 +5,7 @@
 **Authority parent:** `2cfa87a7f10aae224768a0c3283b3e035a10123b`  
 **Package:** `physical_phase_carrier_v1`  
 **Claim ceiling:** `NON_EXECUTING_P0_BUILD_READINESS_ONLY`  
-**Current status:** `P0_BUILD_READINESS_BLOCKED`<br>
+**Current status:** `P0_BUILD_READINESS_PACKET_FROZEN`<br>
 **Physical authority:** none
 
 ## 1. Authorized work
@@ -72,6 +72,7 @@ exact environment sensors and trigger/timebase integration
 final channel map, star-ground/shield law, relay witness code, and source-off netlist
 raw scientific analyzer with build/self-test/verify modes
 strict raw/evidence/calibration schemas and malformed-payload negative suites
+assembly-, role-, event-, queryback-, and chronology-bound topology custody
 synthetic ideal, feedthrough, detector-memory, switch-transient, phase, decay, and null fixtures
 analysis portability and numeric-reproduction law
 final conservative limits derived from the selected parts
@@ -97,11 +98,9 @@ fixtures, topology, limits, and later execution law are ready for a separate use
 It establishes no physical resonance, post-source persistence, pi relation, computation,
 restoration, silicon behavior, bit replacement, or Wall crossing.
 
-The package-local validator may prove candidate-byte structure and tamper
-detection, but it may not mint this token from self-asserted local reviewer
-strings. Automatic `build`/`verify` freeze emission remains disabled until
-externally checkable review provenance and zero open material findings are
-separately supplied and reviewed.
+The package-local validator proves candidate-byte structure and tamper detection.
+It may emit the frozen token only after four externally attributable independent
+PASS receipts bind the exact candidate root and zero material findings remain.
 
 ## 5. Stop boundary
 
@@ -121,8 +120,8 @@ wiring inspection, operating limits, retry law, and safety boundary.
 ```text
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
 P0_BUILD_READINESS_AUTHORIZED
-P0_BUILD_READINESS_BLOCKED
-P0_BUILD_READINESS_PACKET_NOT_FROZEN
+P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED
+P0_BUILD_READINESS_PACKET_FROZEN
 PHYSICAL_PHASE_CARRIER_NOT_YET_OBSERVED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 PHYSICAL_SILICON_PHONONIC_COMPUTING_NOT_ESTABLISHED

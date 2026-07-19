@@ -1,38 +1,42 @@
 {
   "authority": "AUTHORIZE P0 BUILD-READINESS ONLY",
-  "candidate_root": "27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247",
+  "candidate_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
   "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
   "reviews": [
     {
-      "agent_id": "AUD-P0-PARTS-CUSTODY-MECHANICS-R7-20260718",
+      "agent_id": "/root/p0sp_circuit_carrier",
       "findings": [],
       "independent": true,
-      "reviewed_root": "27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247",
-      "role": "parts_and_carrier",
+      "review_id": "AUD-P0SP-01-CIRCUIT-AND-CARRIER",
+      "reviewed_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+      "role": "circuit_and_carrier",
       "verdict": "PASS"
     },
     {
-      "agent_id": "AUD-P0-TOPOLOGY-SOURCEOFF-R7-20260718",
+      "agent_id": "/root/p0sp_path_sourceoff",
       "findings": [],
       "independent": true,
-      "reviewed_root": "27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247",
-      "role": "topology_and_source_off",
+      "review_id": "AUD-P0SP-02-PATH-AND-SOURCE-OFF",
+      "reviewed_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+      "role": "path_and_source_off",
       "verdict": "PASS"
     },
     {
-      "agent_id": "AUD-P0-ANALYZER-EVIDENCE-R7-20260718",
+      "agent_id": "/root/p0sp_analyzer_controls",
       "findings": [],
       "independent": true,
-      "reviewed_root": "27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247",
-      "role": "analyzer_and_evidence",
+      "review_id": "AUD-P0SP-03-ANALYZER-AND-CONTROLS",
+      "reviewed_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+      "role": "analyzer_and_controls",
       "verdict": "PASS"
     },
     {
-      "agent_id": "AUD-P0-CLAIMS-SAFETY-AUTHORITY-R7-20260718",
+      "agent_id": "/root/p0sp_claims_authority",
       "findings": [],
       "independent": true,
-      "reviewed_root": "27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247",
-      "role": "claims_safety_and_authority",
+      "review_id": "AUD-P0SP-04-CLAIMS-AUTHORITY",
+      "reviewed_root": "844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e",
+      "role": "claims_authority",
       "verdict": "PASS"
     }
   ],

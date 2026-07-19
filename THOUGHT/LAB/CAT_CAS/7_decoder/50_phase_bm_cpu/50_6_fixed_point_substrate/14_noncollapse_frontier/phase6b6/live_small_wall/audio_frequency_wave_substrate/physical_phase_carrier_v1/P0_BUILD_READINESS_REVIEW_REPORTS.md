@@ -1,52 +1,57 @@
-# P0 build-readiness independent review reports
+# P0 signal-path witness final independent review reports
 
 Authority: `AUTHORIZE P0 BUILD-READINESS ONLY`
+
 Claim ceiling: `NON_EXECUTING_P0_BUILD_READINESS_ONLY`
-Reviewed candidate root: `27ca05544f561d1b9f31e071735e47523bd9869f6ce2a6cb85ab57d3720f5247`
 
-These receipts qualify only the internal consistency of the candid
-`P0_BUILD_READINESS_BLOCKED` non-executing packet. They do not close
-`P0BR-R3-SIGNAL-POLE`, freeze the packet, authorize a physical stage, or
-establish physical carrier behavior.
+Reviewed candidate root: `844ef33332dcbfdfca6a4332f958894ee4dc02cb39087d82d3c6b15a0289ef2e`
 
-## Parts, custody, and mechanics
+These four focused reviews qualify only the non-executing P0 build-readiness
+repair. They report no physical observation and grant no procurement, build,
+connection, power, acquisition, playback, recording, or execution authority.
 
-- agent: `AUD-P0-PARTS-CUSTODY-MECHANICS-R7-20260718`
+## AUD-P0SP-01-CIRCUIT-AND-CARRIER
+
+- agent: `/root/p0sp_circuit_carrier`
 - verdict: PASS
 - findings: none
-- closure: the admitted 50 x 18 mm board envelope, four in-outline contacts,
-  0.425 mm worst-case clip displacement, 56 x 24 x 3 mm tray, exact +z
-  rotation convention, machine transforms, resolved anchors, 8 mm board gap,
-  and enclosure clearances are mutually consistent.
+- closure: the byte-identical `131072`-corner circuit model, exact 1 Mohm / 0.100
+  Vpp injection, 100 kohm source-side shunt, carrier-loading envelope, v4
+  ordering proof, 54 raw adversaries, 80 targeted mutations, and 40,151 root
+  mutations are mutually consistent under the non-executing claim ceiling.
 
-## Topology and source-off
+## AUD-P0SP-02-PATH-AND-SOURCE-OFF
 
-- agent: `AUD-P0-TOPOLOGY-SOURCEOFF-R7-20260718`
+- agent: `/root/p0sp_path_sourceoff`
 - verdict: PASS
 - findings: none
-- closure: the authored net topology, source-off ordering, CH0 continuity,
-  CH2 auxiliary-only boundary, nonzero coupling paths, and open actual-pole
-  evidence blocker are mutually consistent.
+- closure: five distinct nonlinear-control hashes are enforced; correctly
+  rebound control replay rejects; all scan/acquisition timestamps require exact
+  `YYYY-MM-DDTHH:MM:SS.ffffffZ`, parsed comparison, and canonical round-trip;
+  malformed, alternate-offset, truncated-precision, lexically deceptive, and
+  post-acquisition adversaries reject. Actual-path evaluation remains pre-K3
+  and supports only at least one interrupted series pole.
 
-## Analyzer and evidence
+## AUD-P0SP-03-ANALYZER-AND-CONTROLS
 
-- agent: `AUD-P0-ANALYZER-EVIDENCE-R7-20260718`
+- agent: `/root/p0sp_analyzer_controls`
 - verdict: PASS
 - findings: none
-- closure: the joint C1/C2 fit, lag-7 HAC covariance, cross-covariance,
-  derived-error uncertainty, matched-pair gate, full preparation continuity,
-  common-grid truncation, nonoverlap controls, and 31 raw adversaries are
-  internally consistent and synthetic-only.
+- closure: 55 preserved fixtures, all 54 actual-bundle raw adversaries, proof
+  v4, deterministic model reproduction, 80/80 targeted mutation rejection,
+  and 40,151/40,151 root mutation rejection reproduce at the exact root with
+  every physical-claim authorization field false.
 
-## Claims, safety, and authority
+## AUD-P0SP-04-CLAIMS-AUTHORITY
 
-- agent: `AUD-P0-CLAIMS-SAFETY-AUTHORITY-R7-20260718`
+- agent: `/root/p0sp_claims_authority`
 - verdict: PASS
 - findings: none
-- closure: authority, third-party custody, retrieval disclosure, zero-contact
-  law, claim ceiling, hard stops, historical-review retirement, and successor
-  boundary contain no promotion or freeze authority.
+- closure: all 17 normalized packet findings are closed, zero material findings
+  remain, the path token means at least one series interruption only, no pole is
+  identified, no physical observation is promoted, and the next boundary
+  remains `USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD`.
 
-All four reviews were read-only and independently bound to the exact root.
-No reviewer edited files or used network, hardware, audio, instruments,
-procurement, targets, or human/vendor contact.
+All reviewers attested to zero file mutation, network access, hardware or target
+contact, audio operation, instrument command, vendor contact, and procurement
+action during their reviews.
