@@ -1,0 +1,170 @@
+{
+  "canonical_summary_digest": "e1c739731555852db87bcbd6a1d75955fbdaa41570bfeae0735fb542485aaaf6",
+  "claim_ceiling": "one-dimensional public scalar q-codeword readout only",
+  "cleanup_custody_observation": {
+    "archived_marker_has_correct_identity": true,
+    "classification": "non-scientific cleanup-custody observation",
+    "cleanup_confirmed_final_path_absence": true,
+    "cleanup_confirmed_marker_presence_before_deletion": true,
+    "cleanup_did_not_compare_marker_contents_before_deletion": true,
+    "cleanup_receipt_rewritten": false,
+    "controller_created_root_and_wrote_marker_during_same_attempt": true,
+    "remote_canonical_paths_checked_absent_before_deployment": true,
+    "scientific_packet_invalidated": false
+  },
+  "created_utc": "2026-07-19T16:02:37.612242+00:00",
+  "existing_evidence_modified": false,
+  "existing_evidence_modified_or_deleted_since_pre_audit_commit": [],
+  "failed_gates": [],
+  "feature_freeze": {
+    "sha256": "2773f673694e4549690e12e9a13149388df57cd28ad2493e1241fb56c305984f",
+    "size": 1210
+  },
+  "forbidden_promotions": [
+    "full tomography",
+    "relational carrier",
+    "physical relational memory",
+    "catalytic borrowing",
+    "SMALL_WALL_CROSSED"
+  ],
+  "manifest": {
+    "archive_member_file_sha256": "20b5f758e22cc916af36a5b8f7f87ca27171c5d5314b233b63528dcc3635df65",
+    "canonical_sha256": "e6f27e3e92f2273fa91c225996a471aa69f2f699c6d7bbd8906c37329090c27b",
+    "file_sha256": "20b5f758e22cc916af36a5b8f7f87ca27171c5d5314b233b63528dcc3635df65",
+    "size": 10650
+  },
+  "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+  "postrun_custody_audit_hashes": {
+    "json": {
+      "relative_path": "ATTEMPT_1_POSTRUN_CUSTODY_AUDIT.json",
+      "sha256": "a93314e396c962876655e868c45d0de7cccb4a394f3c4aaad5f5293cc50b9e7b",
+      "size": 7122
+    },
+    "markdown": {
+      "relative_path": "ATTEMPT_1_POSTRUN_CUSTODY_AUDIT.md",
+      "sha256": "c16b03c1c72caca9a7ac324981c6bfe8f4b574d7693de56645804d58706765ed",
+      "size": 3567
+    }
+  },
+  "pre_audit_evidence_commit": "cb054593b69de59e262d38793e9aa22e36f551e5",
+  "prospective_result_remains_valid": true,
+  "raw_records": {
+    "count": 8320,
+    "sha256": "c690c77d135d30f24b5f0efbe5ce4a3ea86bfc7aadf27fd0a996f31d9f9e27f7",
+    "size": 26980062
+  },
+  "receipt_hashes": {
+    "adjudication": {
+      "relative_path": "ATTEMPT_1_PROSPECTIVE_ADJUDICATION.json",
+      "sha256": "d31fddc5e05831ea31bfcd75aeda5f5c433ba30904816e9a56836ca2c7a7d84b",
+      "size": 57098
+    },
+    "cleanup": {
+      "relative_path": "ATTEMPT_1_CLEANUP_RECEIPT.json",
+      "sha256": "08a547dd4a4a259669c98956ec409de8c9f4c503a3d5af6934df341e59d23937",
+      "size": 1662
+    },
+    "copy_back": {
+      "relative_path": "ATTEMPT_1_COPYBACK_RECEIPT.json",
+      "sha256": "b6601bedc2f14ebabe36a069aa0e5ae3babb9afdd3115c78d3fbac2b16b8df0a",
+      "size": 7209
+    },
+    "deployment": {
+      "relative_path": "ATTEMPT_1_DEPLOYMENT_RECEIPT.json",
+      "sha256": "428c00c076caffa72d612501698cdc0bceab0ac4c110a414d46a629d3e0e17d2",
+      "size": 2164
+    },
+    "inventory": {
+      "relative_path": "ATTEMPT_1_EVIDENCE_INVENTORY.json",
+      "sha256": "ceb7c1d178e7aa59d9438187536653c59d9cf688d85a639aad010b6fdf660bd3",
+      "size": 9382
+    },
+    "live_completion": {
+      "relative_path": "ATTEMPT_1_LIVE_INVOCATION_COMPLETED.json",
+      "sha256": "743ff324eb703c2bc1017d4b834421f893688bcd6b5ceaa8c7c86c7e70146b12",
+      "size": 2537
+    },
+    "live_start": {
+      "relative_path": "ATTEMPT_1_LIVE_INVOCATION_STARTED.json",
+      "sha256": "5db7ac75b09bdbf127fc38f19500fb00e015901f2f9ae38536fdd7a7699cec80",
+      "size": 1936
+    },
+    "self_test": {
+      "relative_path": "ATTEMPT_1_PROSPECTIVE_SELF_TEST.json",
+      "sha256": "0478df1098777e135bdabad407097666d72764fbc7b27a61e3d0c117f22eb562",
+      "size": 13629
+    }
+  },
+  "remote_root_archive": {
+    "sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+    "size": 2726728
+  },
+  "result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
+  "retained_attempt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_1_paired_dirty_probe_0/attempt_1",
+  "retired_nonce_observation": {
+    "completed_controller_embedded_full_nonce_in_committed_source": true,
+    "full_nonce_value_redacted_from_new_postrun_artifacts": true,
+    "future_controller_requirement": {
+      "committed_nonce_may_not_be_treated_as_independent_secret_authorization_factor": true,
+      "full_command_receipts_redact_nonce_value": true,
+      "nonce_supplied_externally_at_execution_time": true,
+      "only_nonce_hash_committed_or_retained": true,
+      "source_manifest_run_identity_and_one_attempt_authority_remain_separately_bound": true
+    },
+    "historical_evidence_deleted_or_rewritten": false,
+    "live_completion_receipt_contains_unredacted_nonce": true,
+    "live_start_receipt_contains_unredacted_nonce": true,
+    "retired_and_forbidden_from_reuse": true,
+    "temperature_authority_nonce_sha256": "b7327e407f42eccadb0985312316daa1f76359d71766b0458ec84b1cbcf85f7f"
+  },
+  "runtime_binary_sha256": "1f5e070671d35bde6c77364d409cb86f2ae7a35470a203a12067316f35a90575",
+  "runtime_binary_size": 22928,
+  "schedule": {
+    "canonical_sha256": "84a0eb7c7c6ff170e6499f2f8a2cdb6eb9012047dacfdd520d6f0483514f241a",
+    "json_sha256": "56fb088909d7281d32c07be3a520b8057e2072a351a39c0f19c28ffbab4ef3d5",
+    "json_size": 12664055,
+    "receipt_file_sha256": "1ec754728878d349ddeed8e17c40d75d120c0365afd7cfdef20a2f72e074d95a",
+    "receipt_size": 355,
+    "tsv_sha256": "97d38baa7f9285d5e965d6fcfc3421b2cc666a8a9b4ea36aefc6bf114c4ede0c",
+    "tsv_size": 4502364
+  },
+  "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_V1_1_ATTEMPT1_FINAL_EVIDENCE_SUMMARY_V1",
+  "scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
+  "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda",
+  "source_bundle": {
+    "sha256": "f14e708bb0abecbf2968625dfb3ed5f7ea3e57b704cf13ec4e21de55204f268c",
+    "size": 687598
+  },
+  "source_death_receipts": {
+    "count": 8320,
+    "sha256": "d61d69bbe50dca2b40c908dafcff47118b719838ecaff997b46e224b261fbc59",
+    "size": 4350250
+  },
+  "source_hashes": {
+    "canonical_sha256": "b5a27d5f289eee4ad778e6e6ba370d442a30214d9e7e07480af9a09e013f63e9",
+    "file_sha256": "833064d94222efa38431a453f8a83ad628237b74d3d54b72f982cd88a6384ba1",
+    "size": 3167
+  },
+  "source_package_diff_from_manifest_freeze_commit": [],
+  "source_package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1_1_paired_dirty_probe",
+  "stale_label_semantic_overlay": {
+    "bindings": {
+      "channel_specificity.attempt_3_observation": "channel_specificity.prospective_attempt_1_observation",
+      "channel_specificity.attempt_3_primary_passed": "channel_specificity.prospective_attempt_1_primary_passed",
+      "channel_specificity.attempt_3_secondary_channels_failed_same_law": "channel_specificity.prospective_attempt_1_secondary_channels_failed_same_law"
+    },
+    "classification": "metadata-label-defect-only",
+    "does_not_alter_metrics_gates_result_class_or_scientific_claim": true,
+    "observed_values": {
+      "attempt_3_observation": "attempt_3_strongest_scalar_q_signal_is_in_dirty_probe_response_under_this_sidecar",
+      "attempt_3_primary_passed": true,
+      "attempt_3_secondary_channels_failed_same_law": true
+    }
+  },
+  "target_execution_receipt": {
+    "sha256": "266678dd95400dd6af12427a97b61fcd80485c3b223b05d535ecdff89a241d4e",
+    "size": 10036
+  },
+  "v1_0_package_or_evidence_diff_from_pre_audit_commit": [],
+  "zero_target_contact_by_postrun_audit": true
+}

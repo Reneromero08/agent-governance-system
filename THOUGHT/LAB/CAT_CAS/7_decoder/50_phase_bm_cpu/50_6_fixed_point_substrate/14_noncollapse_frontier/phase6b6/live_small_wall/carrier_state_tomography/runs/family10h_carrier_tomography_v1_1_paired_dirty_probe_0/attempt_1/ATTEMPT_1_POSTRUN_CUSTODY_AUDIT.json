@@ -1,0 +1,123 @@
+{
+  "archived_ownership_marker": {
+    "archive_member_path": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0/.family10h_carrier_tomography_v1_1_paired_dirty_probe_0_owner",
+    "exact_match": {
+      "freeze_commit": true,
+      "source_authority_commit": true,
+      "transaction_run_id": true
+    },
+    "expected_manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+    "expected_source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda",
+    "expected_transaction_run_id": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0",
+    "file_sha256": "07c5f9ec36b2f3325541f27bffc08e6fa533c7738dd018e25ddc41f8abe822be",
+    "file_size": 194,
+    "parsed_marker_fields": {
+      "freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+      "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda",
+      "transaction_run_id": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0"
+    },
+    "passed": true
+  },
+  "audit_scope": "offline additions-only evidence closure; no target contact or live action",
+  "authorization_token_handling": {
+    "completed_controller_embedded_full_nonce_in_committed_source": true,
+    "full_nonce_value_redacted_from_new_postrun_artifacts": true,
+    "future_controller_requirement": {
+      "committed_nonce_may_not_be_treated_as_independent_secret_authorization_factor": true,
+      "full_command_receipts_redact_nonce_value": true,
+      "nonce_supplied_externally_at_execution_time": true,
+      "only_nonce_hash_committed_or_retained": true,
+      "source_manifest_run_identity_and_one_attempt_authority_remain_separately_bound": true
+    },
+    "historical_evidence_deleted_or_rewritten": false,
+    "live_completion_receipt_contains_unredacted_nonce": true,
+    "live_start_receipt_contains_unredacted_nonce": true,
+    "retired_and_forbidden_from_reuse": true,
+    "temperature_authority_nonce_sha256": "b7327e407f42eccadb0985312316daa1f76359d71766b0458ec84b1cbcf85f7f"
+  },
+  "cleanup_custody_observation": {
+    "archived_marker_has_correct_identity": true,
+    "classification": "non-scientific cleanup-custody observation",
+    "cleanup_confirmed_final_path_absence": true,
+    "cleanup_confirmed_marker_presence_before_deletion": true,
+    "cleanup_did_not_compare_marker_contents_before_deletion": true,
+    "cleanup_receipt_rewritten": false,
+    "controller_created_root_and_wrote_marker_during_same_attempt": true,
+    "remote_canonical_paths_checked_absent_before_deployment": true,
+    "scientific_packet_invalidated": false
+  },
+  "created_utc": "2026-07-19T16:02:37.612242+00:00",
+  "existing_evidence_modified_or_deleted_since_pre_audit_commit": [],
+  "future_controller_regressions_required": [
+    "target/local archive hash mismatch",
+    "target/local archive size mismatch",
+    "missing or malformed target archive report",
+    "ownership marker missing",
+    "ownership marker content mismatch",
+    "ownership marker source-authority mismatch",
+    "ownership marker freeze-commit mismatch",
+    "ownership marker run-identity mismatch",
+    "committed or reused full live nonce",
+    "unredacted nonce in command receipts"
+  ],
+  "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+  "null_model_scope": "not applicable: this postrun audit adds no scientific hardening gate, classifier, shuffled baseline, random baseline, or model-selection law; it checks exact custody equality and metadata labels only",
+  "passed": true,
+  "pre_audit_evidence_commit": "cb054593b69de59e262d38793e9aa22e36f551e5",
+  "remote_local_archive_equality": {
+    "actual_archive_custody_valid_because_recorded_values_match_exactly": true,
+    "adjudication_source_evidence_archive": {
+      "sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+      "size": 2726728
+    },
+    "checks": {
+      "adjudication_sha_equals_target_and_local": true,
+      "adjudication_size_equals_target_and_local": true,
+      "inventory_sha_equals_target_and_local": true,
+      "inventory_size_equals_target_and_local": true,
+      "target_reported_sha_equals_committed_local_sha": true,
+      "target_reported_size_equals_committed_local_size": true
+    },
+    "committed_local_archive": {
+      "relative_path": "ATTEMPT_1_REMOTE_ROOT.tar.gz",
+      "sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+      "size": 2726728
+    },
+    "evidence_inventory_archive": {
+      "relative_path": "ATTEMPT_1_REMOTE_ROOT.tar.gz",
+      "sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+      "size": 2726728
+    },
+    "historical_controller_did_not_parse_and_enforce_target_local_equality_before_copyback_passed": true,
+    "historical_controller_stored_matching_values": true,
+    "passed": true,
+    "postrun_audit_closes_equality_retrospectively": true,
+    "target_reported_archive": {
+      "raw_stdout": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041  /root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0_attempt1_remote_root.tar.gz\n2726728\t/root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0_attempt1_remote_root.tar.gz\n",
+      "sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+      "sha_path": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0_attempt1_remote_root.tar.gz",
+      "size": 2726728,
+      "size_path": "/root/catcas_live_small_wall/family10h_carrier_tomography_v1_1_paired_dirty_probe_0_attempt1_remote_root.tar.gz"
+    }
+  },
+  "retained_attempt_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_carrier_tomography_v1_1_paired_dirty_probe_0/attempt_1",
+  "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_V1_1_ATTEMPT1_POSTRUN_CUSTODY_AUDIT_V1",
+  "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda",
+  "source_package_diff_from_manifest_freeze_commit": [],
+  "stale_diagnostic_semantic_overlay": {
+    "bindings": {
+      "channel_specificity.attempt_3_observation": "channel_specificity.prospective_attempt_1_observation",
+      "channel_specificity.attempt_3_primary_passed": "channel_specificity.prospective_attempt_1_primary_passed",
+      "channel_specificity.attempt_3_secondary_channels_failed_same_law": "channel_specificity.prospective_attempt_1_secondary_channels_failed_same_law"
+    },
+    "classification": "metadata-label-defect-only",
+    "does_not_alter_metrics_gates_result_class_or_scientific_claim": true,
+    "observed_values": {
+      "attempt_3_observation": "attempt_3_strongest_scalar_q_signal_is_in_dirty_probe_response_under_this_sidecar",
+      "attempt_3_primary_passed": true,
+      "attempt_3_secondary_channels_failed_same_law": true
+    }
+  },
+  "transaction_run_id": "family10h_carrier_tomography_v1_1_paired_dirty_probe_0",
+  "v1_0_package_or_evidence_diff_from_pre_audit_commit": []
+}
