@@ -20,7 +20,7 @@
   },
   "controller_self_test": {
     "passed": true,
-    "sha256": "816149353e61274b9eced13116dcac21e4a8fd02987e6bfd94d74e1b1e7af5a1"
+    "sha256": "1c5e12a8fe95a7f3f44764a35792341a308a5b090da839a439b32d82fe6df17f"
   },
   "delay_grid": [
     {
@@ -46,7 +46,7 @@
   ],
   "deployment_layout": {
     "passed": true,
-    "sha256": "3153740a6301a60350f89a39bf3c831cfc14281b9c571ff70251bbfd11f00f23"
+    "sha256": "5c82e2926d8c27d5c9a80b39b974dd22f71c87800b49f5f5b343e565b11794fc"
   },
   "exact_tuple_count": 8320,
   "expected_local_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_0",
@@ -150,7 +150,7 @@
   },
   "git_state_at_manifest_build": {
     "branch": "codex/family10h-tomography-repair",
-    "head": "6c1147d09a9838ae86a00cb81e44952965486e6a",
+    "head": "8e70d654421c43d405253ede3a7ae31489f7670b",
     "origin_main": "ab04503c9f8e7585b893a0db9326ba4ad4a39030",
     "stash_list": [
       "stash@{0}: On main: preserve superseded pmu first-light work before micro_equal_1 closure",
@@ -261,10 +261,10 @@
     "sensor_inventory_count": 0,
     "target_contact_count": 4
   },
-  "manifest_canonical_sha256": "65acfca3685b6d9f217762a626fc686ca13b92d691abc8eda8b0e3c287c4f035",
+  "manifest_canonical_sha256": "19fa88116d87e6bf41af562b28fe69da8dd204acdbeef49489c39f4417a7e790",
   "offline_validate": {
     "passed": true,
-    "sha256": "e7aba8808f6eaee4d4737147f9b7750f059d1c4e3dd8efdf1497d3dd9f8d9ce7"
+    "sha256": "4c4f3eafb7eb5d5df7d8011259923771d2b1afceb3743cc49b239a0ee8844856"
   },
   "operator_ladder": [
     "S0 scalar preparation amplitude",
@@ -426,7 +426,7 @@
   "runtime_self_test": {
     "offline_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
     "passed": true,
-    "sha256": "f5243e065e2a7e27635bd2069d9abbdbb0a5e528a6a2e60a2ff15189da72977f"
+    "sha256": "f57b37985a8111e71564d4f72f6c3122af96a73a75f342424ec0f5e77814e1a5"
   },
   "schedule_hashes": {
     "canonical_sha256": "50b8dae91e8c84523b1bf22dc0ef7afea76ca39c3ec8faede1cecf0749eec6c9",
@@ -472,9 +472,9 @@
     "review_report_path": null,
     "review_report_sha256": null,
     "runtime_binary_sha256": "e40055465f137c8767b565b93ae10cbfe09f51f75e8f3e5371115c14fa4afe89",
-    "source_authority_commit": "6c1147d09a9838ae86a00cb81e44952965486e6a",
-    "source_bundle_sha256": "8c5e2f534bb325d5990e89d63bad7bf5386db2cd1170f69b6228b831eebb822e",
-    "source_hashes_sha256": "08a096b09bfe13f8071213275a7377a657e937d5f341a0214e982c372dcf4663"
+    "source_authority_commit": "8e70d654421c43d405253ede3a7ae31489f7670b",
+    "source_bundle_sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97",
+    "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d"
   },
   "source_bundle": {
     "file_count": 9,
@@ -490,7 +490,7 @@
       "run_family10h_carrier_tomography_v1.py"
     ],
     "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_SOURCE_BUNDLE.tar.gz",
-    "sha256": "8c5e2f534bb325d5990e89d63bad7bf5386db2cd1170f69b6228b831eebb822e"
+    "sha256": "7ccb1382bc070b1788c9c0bbbf1a27f0cf0dd791e8429b3305a1f8a9bbf8ba97"
   },
   "source_hashes": {
     "runtime_binary_authority": {
@@ -557,20 +557,20 @@
         "size": 1368
       },
       "family10h_carrier_tomography_target.py": {
-        "sha256": "bc0d77e0ce7f9b81fb042effb8f09843f0ab5d008292897cde69cf70ba9608bd",
-        "size": 250125
+        "sha256": "12c1ced11a32f5599f514a667b8b4ea80c433f22aeb14feadfac41d7fa633e2f",
+        "size": 250445
       },
       "run_family10h_carrier_tomography_v1.py": {
-        "sha256": "d1ace6786ca4774dc6c7ed46e95d176c36efb0ba3c26d44a93687fb011a8c1ad",
-        "size": 449440
+        "sha256": "82d9e37d380211a99b5b4ebeb424acd104852e873dfd83472eb6271ad64cfe4d",
+        "size": 453074
       }
     },
-    "source_hashes_sha256": "08a096b09bfe13f8071213275a7377a657e937d5f341a0214e982c372dcf4663"
+    "source_hashes_sha256": "660b470e2586fc46991f82350e3a97df1a3c0bf29ec57e29f492aa145afcdd3d"
   },
   "starting_head_required": "8021563a6122b72316ddd218077b8b82e36f9055",
   "target_self_test": {
     "passed": true,
-    "sha256": "40ee3dd774c701d9bb6e97eaa112d2b813533f42ba1c5fc636a6f38d46903213"
+    "sha256": "2ed761b59c79291bab6baddd3a1e5100a540378fd46e3fc61195209d7c3c09ef"
   },
   "temperature_sensor_authority": {
     "active_attempt_counters": {
@@ -618,7 +618,7 @@
       "git_blob_matches_file_sha256": true,
       "git_blob_sha256": "74f4934e19bdc43abb3bf4ee1ad101f53307e46c003a969ce03c33cc57c88642",
       "git_blob_size": 7808,
-      "git_head": "6c1147d09a9838ae86a00cb81e44952965486e6a",
+      "git_head": "8e70d654421c43d405253ede3a7ae31489f7670b",
       "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\SENSOR_AUTHORITY_ATTEMPT_HISTORY\\ATTEMPT_HISTORY_INDEX.json"
     },
     "historical_lane_contact_report": {
@@ -712,7 +712,7 @@
     ],
     "resolved_identity_bound_in_evidence": true,
     "self_authored_discovery_without_controller_challenge_cannot_freeze": true,
-    "source_authority_commit": "6c1147d09a9838ae86a00cb81e44952965486e6a",
+    "source_authority_commit": "8e70d654421c43d405253ede3a7ae31489f7670b",
     "synthetic_or_provenance_free_identity_cannot_freeze": true,
     "target_discovery_receipt_file_sha256": null,
     "target_discovery_receipt_path": null

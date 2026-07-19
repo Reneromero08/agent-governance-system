@@ -4851,6 +4851,55 @@ def source_audit_quorum_regression() -> dict[str, Any]:
                 review_root=review_root,
             )["passed"]
 
+    def controller_target_populated_quorum_replay() -> dict[str, Any]:
+        with tempfile.TemporaryDirectory(prefix="family10h_c6_source_audit_replay_") as tmp:
+            root = Path(tmp)
+            review_root = root / "SOURCE_AUTHORITY_C6_REVIEW"
+            source_root = root / "source"
+            source_root.mkdir()
+            audit = build_archive(review_root)
+            controller_quorum = source_audit_quorum(
+                audit,
+                expected_source_commit=source_commit,
+                expected_source_hashes_sha256=source_hash,
+                expected_source_bundle_sha256=bundle_hash,
+                expected_runtime_binary_sha256=runtime_hash,
+                review_report_present=True,
+                review_root=review_root,
+            )
+            target_quorum = target.recompute_review_quorum(audit, source_audit=True)
+            findings_path = source_root / "SOURCE_AUTHORITY_C6_REVIEW_NORMALIZED.json"
+            report_path = source_root / "SOURCE_AUTHORITY_C6_REVIEW_REPORTS.md"
+            write_json(findings_path, audit)
+            report_path.write_text("C6 source-authority review reports fixture\n", encoding="utf-8")
+            section = {
+                "findings_path": str(findings_path),
+                "findings_sha256": public.sha256_file(findings_path),
+                "review_report_path": str(report_path),
+                "review_report_sha256": public.sha256_file(report_path),
+                "review_quorum": controller_quorum,
+                "material_blocker_count": 0,
+            }
+            manifest_failures: list[str] = []
+            target.validate_manifest_review_section(
+                source_root,
+                section,
+                "source authority review",
+                manifest_failures,
+                source_audit=True,
+                expected_source_commit=source_commit,
+                expected_source_hashes_sha256=source_hash,
+                expected_source_bundle_sha256=bundle_hash,
+                expected_runtime_binary_sha256=runtime_hash,
+            )
+            return {
+                "controller_quorum_passed": controller_quorum["passed"],
+                "target_quorum_passed": target_quorum["passed"],
+                "controller_target_quorum_equal": controller_quorum == target_quorum,
+                "target_manifest_section_failures": manifest_failures,
+                "target_manifest_section_passed": manifest_failures == [],
+            }
+
     def role_item(audit: dict[str, Any], role: str = "source_bundle_runtime_evidence_auditor") -> dict[str, Any]:
         return audit["reviewer_verdicts"][role]
 
@@ -4870,9 +4919,14 @@ def source_audit_quorum_regression() -> dict[str, Any]:
         review_report_present=c5_paths["review_path"].exists(),
         review_root=c5_paths["review_dir"],
     )
+    populated_replay = controller_target_populated_quorum_replay()
 
     checks = {
         "exact_source_audit_quorum_passes": evaluate(),
+        "populated_v3_controller_quorum_passes": populated_replay["controller_quorum_passed"],
+        "populated_v3_target_quorum_passes": populated_replay["target_quorum_passed"],
+        "populated_v3_controller_target_quorum_equal": populated_replay["controller_target_quorum_equal"],
+        "populated_v3_target_manifest_section_passes": populated_replay["target_manifest_section_passed"],
         "c5_actual_source_authority_commit_selects_c5": source_audit_version_for_commit(C5_SOURCE_AUTHORITY_COMMIT) == "C5",
         "c5_actual_source_authority_commit_uses_v2_receipts": source_audit_receipt_schema_for_commit(C5_SOURCE_AUTHORITY_COMMIT)
         == SOURCE_AUDIT_REVIEW_RECEIPT_SCHEMA_V2,
@@ -4912,6 +4966,18 @@ def source_audit_quorum_regression() -> dict[str, Any]:
         ),
         "body_hash_mismatch_blocked": not evaluate(
             lambda audit, _root: role_item(audit).update({"body_canonical_sha256": "9" * 64})
+        ),
+        "body_path_omission_blocked": not evaluate(
+            lambda audit, _root: role_item(audit).pop("body_path")
+        ),
+        "receipt_path_omission_blocked": not evaluate(
+            lambda audit, _root: role_item(audit).pop("receipt_path")
+        ),
+        "thread_id_normalized_mutation_blocked": not evaluate(
+            lambda audit, _root: role_item(audit).update({"thread_id": "wrong-normalized-thread"})
+        ),
+        "model_normalized_mutation_blocked": not evaluate(
+            lambda audit, _root: role_item(audit).update({"model": "wrong-normalized-model"})
         ),
         "body_changed_after_ack_blocked": not evaluate(
             lambda audit, root: expected_source_audit_archive_paths("source_bundle_runtime_evidence_auditor", root)[0].write_bytes(b"changed body\n")
@@ -5009,7 +5075,12 @@ def source_audit_quorum_regression() -> dict[str, Any]:
             runtime_binary_sha256=runtime_hash,
         )["passed"],
     }
-    return {"schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUDIT_QUORUM_REGRESSION_V1", "passed": all(checks.values()), "checks": checks}
+    return {
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_SOURCE_AUDIT_QUORUM_REGRESSION_V1",
+        "passed": all(checks.values()),
+        "checks": checks,
+        "populated_v3_replay": populated_replay,
+    }
 
 
 def source_bundle_mode_regression() -> dict[str, Any]:
