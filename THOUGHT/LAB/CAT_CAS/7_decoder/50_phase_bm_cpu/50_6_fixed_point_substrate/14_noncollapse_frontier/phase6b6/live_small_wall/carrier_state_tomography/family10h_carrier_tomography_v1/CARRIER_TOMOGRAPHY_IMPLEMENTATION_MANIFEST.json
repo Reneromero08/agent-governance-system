@@ -63,19 +63,19 @@
     "interpretation_ceiling": "observed nonadditivity under matched arms only"
   },
   "final_exact_object_verification": {
-    "evidence_commit": "a121381130ef6eef2757ff5c014e22990a88f774",
-    "evidence_manifest_canonical_sha256": "33af05e9699863bac649a905b43c0091c53af813202b117ec6e3eb75ff08964d",
-    "evidence_manifest_file_sha256": "465d7d6d3727a1cfc3338e306f2b89c0e388340e63ed0d6179a794babe67f1a0",
-    "evidence_manifest_sidecar_sha256": "9fad82b709728d41229eb35d831ee4b523f515baae6d9cadc1051f0b35133bda",
+    "evidence_commit": "ffc7a66076c96310a6d22f7ceb85e4b82229000b",
+    "evidence_manifest_canonical_sha256": "3ea96fd656ab52fb9f8437b2112456d4491c5bb0cd04ba5a12d8a45ee2263294",
+    "evidence_manifest_file_sha256": "cbe9e134149386081b9c14cc333c3a1083335d983a6717b81a9ce8998357e3b0",
+    "evidence_manifest_sidecar_sha256": "dfe0fa7ae4a6037d8cf6c9e0149790ea7eb296b2b01f4aa9c8c3d5409a5038cc",
     "failures": [],
-    "file_sha256": "bfca827f115e276ba9f9d2a77100f0517b76df7e9d921954078d21a13af5934b",
-    "final_evidence_commit_file_sha256": "a940f4d39a4105acb0b8fd382a23b8157d3be597d347e99dcba1f6c1ee817c1b",
+    "file_sha256": "f9ccb8716c47d83f3616bd3fc25934d63dcaeee3048876167eaa27780c6d0dc2",
+    "final_evidence_commit_file_sha256": "8b0e96a77ae37f5fa5df32c24f118d02d254fff13496284447c418e8d4117f8c",
     "final_evidence_commit_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT.json",
-    "final_evidence_commit_sha256": "d6111807fcb0e1db1cdbfec5498b817e61fb02e1d967090b1ae4df3deabef89e",
+    "final_evidence_commit_sha256": "1323c5d64c8c0dd858a0ce91f4f579a358d09e77dd45136677c7dae837d83b36",
     "passed": true,
     "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_FINAL_OBJECT_VERIFY.json",
     "source_authority_commit": "52040b0e3eecd4dd50370bcd518ef48dba6b4c53",
-    "verification_sha256": "3c5fa638603c21284b1bf61be220432b59d372086f990bec49e4322d20ac5015"
+    "verification_sha256": "256938f41a4f477388fef33048c17cf10aaf98b198294be1491a51777d6a0a9e"
   },
   "forbidden_result_classes": [
     "ORBITSTATE_ACCESS_ESTABLISHED",
@@ -261,7 +261,7 @@
     "sensor_inventory_count": 1,
     "target_contact_count": 5
   },
-  "manifest_canonical_sha256": "3ea96fd656ab52fb9f8437b2112456d4491c5bb0cd04ba5a12d8a45ee2263294",
+  "manifest_canonical_sha256": "9da76d1f494a0469a3bc5b81d888706091cc0335a214efdc6d3f9600a7fd7687",
   "offline_validate": {
     "passed": true,
     "sha256": "b127bd7cb821e9640150479b67d9837a85863df28ce71c3b4a36cb27aec72371"
