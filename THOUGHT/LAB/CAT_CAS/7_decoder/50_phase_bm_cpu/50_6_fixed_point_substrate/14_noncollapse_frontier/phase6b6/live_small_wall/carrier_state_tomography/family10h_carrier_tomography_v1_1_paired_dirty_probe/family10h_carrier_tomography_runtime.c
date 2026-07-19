@@ -47,7 +47,7 @@ typedef struct {
 } F10CarrierShared;
 
 #define F10_RUNTIME_AUTH_ENV "FAMILY10H_CARRIER_TOMOGRAPHY_RUNTIME_AUTHORITY"
-#define F10_RUNTIME_AUTH_VALUE "family10h_carrier_tomography_v1_0"
+#define F10_RUNTIME_AUTH_VALUE "family10h_carrier_tomography_v1_1_paired_dirty_probe_0"
 
 static long perf_event_open_call(struct perf_event_attr *attr, pid_t pid, int cpu, int group_fd, unsigned long flags) {
     return syscall(__NR_perf_event_open, attr, pid, cpu, group_fd, flags);
