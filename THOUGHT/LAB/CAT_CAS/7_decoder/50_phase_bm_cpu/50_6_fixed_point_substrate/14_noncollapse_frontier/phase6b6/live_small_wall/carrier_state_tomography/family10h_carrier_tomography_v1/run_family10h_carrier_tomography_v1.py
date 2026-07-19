@@ -3844,10 +3844,20 @@ def deployment_layout_self_test() -> dict[str, Any]:
             path = HERE / name
             if path.exists():
                 shutil.copy2(path, source / name)
+        python_executable = str(getattr(sys, "_base_executable", "") or sys.executable)
         completed = run(
-            [sys.executable, str(source / "family10h_carrier_tomography_target.py"), "--self-test", "--source-root", str(source), "--output-root", str(output)],
+            [
+                python_executable,
+                str(source / "family10h_carrier_tomography_target.py"),
+                "--self-test",
+                "--source-root",
+                str(source),
+                "--output-root",
+                str(output),
+            ],
             timeout=60.0,
             check=False,
+            cwd=source,
         )
         try:
             data = strict_json_loads(completed.stdout)
@@ -3860,6 +3870,7 @@ def deployment_layout_self_test() -> dict[str, Any]:
         "target_self_test_passed": data.get("self_test_passed") is True,
         "stdout_sha256": hashlib.sha256(completed.stdout.encode("utf-8")).hexdigest(),
         "stderr_length": len(completed.stderr),
+        "python_executable": python_executable,
     }
     result["deployment_layout_self_test_sha256"] = public.digest(
         {k: v for k, v in result.items() if k != "deployment_layout_self_test_sha256"}

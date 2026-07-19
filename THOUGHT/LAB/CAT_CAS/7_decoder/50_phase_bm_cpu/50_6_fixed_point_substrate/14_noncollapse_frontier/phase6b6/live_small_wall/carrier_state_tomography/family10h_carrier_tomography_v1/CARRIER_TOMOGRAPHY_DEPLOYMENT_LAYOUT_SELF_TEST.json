@@ -1,9 +1,10 @@
 {
-  "deployment_layout_self_test_sha256": "7e82f7afd17912fb56ba07f660aae1cfcc2d22d1370466eb3f19c554c02677d3",
+  "deployment_layout_self_test_sha256": "3153740a6301a60350f89a39bf3c831cfc14281b9c571ff70251bbfd11f00f23",
   "passed": true,
+  "python_executable": "C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
   "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_DEPLOYMENT_LAYOUT_SELF_TEST_V1",
   "stderr_length": 0,
-  "stdout_sha256": "828a6ac95716199b62cc2643eb924b017d5e9889a66b7b3c5fe19e07a11e67d8",
+  "stdout_sha256": "65fad13b403ddec26164faf46e775ed9979d6a623d208d2863518085d0aec829",
   "target_self_test_passed": true,
   "target_self_test_returncode": 0
 }

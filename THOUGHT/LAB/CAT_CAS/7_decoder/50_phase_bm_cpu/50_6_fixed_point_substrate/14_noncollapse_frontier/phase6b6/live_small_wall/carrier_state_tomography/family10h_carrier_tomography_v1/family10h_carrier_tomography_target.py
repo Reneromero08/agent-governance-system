@@ -638,7 +638,14 @@ def recompute_review_quorum(findings: dict[str, Any], *, source_audit: bool = Fa
     failed = [role for role, item in by_role.items() if not item["passed"]]
     if failed:
         failures.append("non-clear reviewer roles: " + ",".join(sorted(failed)))
-    return {"passed": not failures, "failures": failures, "roles": by_role, "material_blockers": material_blockers}
+    return {
+        "required_roles": required_roles,
+        "roles": by_role,
+        "material_blockers": material_blockers,
+        "missing_roles": missing,
+        "failures": failures,
+        "passed": not failures,
+    }
 
 
 def review_agent_ids(quorum: dict[str, Any]) -> set[str]:
@@ -1530,9 +1537,39 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
         def fixture_selection_rejected(hwmon_root: Path) -> bool:
             return raises_target_error(lambda: selected_identity_for_fixture(hwmon_root))
 
+        def candidate_selection_temperature_input_reads(hwmon_root: Path) -> list[str]:
+            reads: list[str] = []
+            original_read_text = Path.read_text
+
+            def spy_read_text(path_self: Path, *args: Any, **kwargs: Any) -> str:
+                if path_self.name.endswith("_input"):
+                    reads.append(str(path_self))
+                return original_read_text(path_self, *args, **kwargs)
+
+            try:
+                Path.read_text = spy_read_text  # type: ignore[method-assign]
+                selected_identity_for_fixture(hwmon_root)
+            finally:
+                Path.read_text = original_read_text  # type: ignore[method-assign]
+            return reads
+
+        def pinned_read_oserror_rejected(hwmon_root: Path) -> bool:
+            original_read = os.read
+
+            def failing_read(_fd: int, _size: int) -> bytes:
+                raise OSError("fixture unreadable approved sensor")
+
+            try:
+                os.read = failing_read  # type: ignore[assignment]
+                return raises_target_error(lambda: fixture_sample(hwmon_root))
+            finally:
+                os.read = original_read  # type: ignore[assignment]
+
         write_fake_hwmon_sensor(root, 0, "acpitz", "temp1")
         approved_path = write_fake_hwmon_sensor(root, 1, "k10temp", None)
+        candidate_input_reads = candidate_selection_temperature_input_reads(root)
         first_non_cpu = fixture_sample(root)
+        root_candidates = enumerate_temperature_candidates(root)
         approved_identity = temperature_sensor_identity(approved_path)
         canonical_identity = public.synthetic_temperature_identity()
         noncanonical_driver_identity = public.with_temperature_identity_digest(
@@ -1591,11 +1628,10 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
         malformed_modalias_root = root / "malformed_modalias"
         write_fake_hwmon_sensor(malformed_modalias_root, 0, "k10temp", None, device_modalias="not-a-pci-modalias")
         unreadable_root = root / "unreadable"
-        unreadable_path = write_fake_hwmon_sensor(unreadable_root, 0, "k10temp", "Tctl")
-        unreadable_path.write_text("not-an-integer\n", encoding="utf-8")
+        write_fake_hwmon_sensor(unreadable_root, 0, "k10temp", "Tctl")
         substitute_root = root / "substitute"
         good_substitute = write_fake_hwmon_sensor(substitute_root, 0, "k10temp", "Tctl")
-        substituted = write_fake_hwmon_sensor(substitute_root, 1, "k10temp", "Tdie")
+        substituted = write_fake_hwmon_sensor(substitute_root, 1, "k10temp", "Tctl", "99000")
         same_path_root = root / "same_path_substitution"
         same_path = write_fake_hwmon_sensor(same_path_root, 0, "k10temp", "Tctl")
         swap_restore_root = root / "swap_restore"
@@ -1623,14 +1659,17 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
         trailing_modalias_rejected = fixture_selection_rejected(trailing_modalias_root)
         truncated_modalias_rejected = fixture_selection_rejected(truncated_modalias_root)
         malformed_modalias_rejected = fixture_selection_rejected(malformed_modalias_root)
-        unreadable_rejected = fixture_selection_rejected(unreadable_root)
+        unreadable_rejected = pinned_read_oserror_rejected(unreadable_root)
         labeled_tctl_accepted = fixture_sample(labeled_tctl_root)["identity"]["sensor_label_value"] == "Tctl"
         unlabeled_record = enumerate_temperature_candidates(root)[1]
         wrong_label_record = enumerate_temperature_candidates(wrong_label_root)[0]
         required = temperature_sensor_identity(good_substitute)
+        substituted_required = public.with_temperature_identity_digest(
+            {**{key: required[key] for key in required if key != "identity_sha256"}, "class_path": str(substituted)}
+        )
         path_substitution_rejected = raises_target_error(
             lambda: read_temperature_sample(
-                required_identity={**required, "class_path": str(substituted)},
+                required_identity=substituted_required,
                 hwmon_root=substitute_root,
                 allow_noncanonical_fixture=True,
             )
@@ -1671,6 +1710,13 @@ def temperature_sensor_identity_fixture() -> dict[str, Any]:
 
     checks = {
         "non_cpu_sensor_first_skipped": first_non_cpu["identity"]["class_path"] == str(approved_path),
+        "candidate_classification_does_not_read_temperature_inputs": candidate_input_reads == [],
+        "candidate_records_are_metadata_only": all(
+            candidate.get("raw_input_text") is None
+            and candidate.get("parsed_millidegree_value") is None
+            and candidate.get("raw_input_parse_failure") is None
+            for candidate in root_candidates
+        ),
         "unlabeled_k10temp_temp1_input_accepted": approved_identity["sensor_label_present"] is False and approved_identity["sensor_label_value"] is None,
         "labeled_k10temp_temp1_input_tctl_accepted": labeled_tctl_accepted,
         "wrong_hwmon_name_rejected": wrong_name_rejected,
@@ -2555,15 +2601,9 @@ def classify_legacy_family10h_candidate(
         "identity": None,
     }
 
-    input_text = read_optional_sysfs_text(path)
-    record["input_readability"] = input_text["readable"]
-    record["raw_input_text"] = input_text["value"]
-    if input_text["error"]:
-        record["observation_errors"].append(f"input read failed: {input_text['error']}")
-    parsed, parse_failure = strict_millicelsius_parse(input_text["value"])
-    record["parsed_millidegree_value"] = parsed
-    record["raw_input_parse_failure"] = parse_failure
-    record["physical_range_passed"] = public.is_json_int(parsed) and 0 < int(parsed) < 120000
+    # Candidate classification is metadata-only. The first temperature value read
+    # occurs only after one approved identity has been selected and pinned.
+    record["input_readability"] = path.exists()
 
     name_text = read_optional_sysfs_text(name_path)
     record["hwmon_name_readability"] = name_text["readable"]
@@ -2641,12 +2681,6 @@ def classify_legacy_family10h_candidate(
         reasons.append("legacy profile requires nonempty PCI modalias")
     elif not amd_pci_modalias_vendor_1022(record["device_modalias_value"]):
         reasons.append("legacy profile requires AMD PCI vendor 1022 modalias")
-    if record["input_readability"] is not True:
-        reasons.append("temp1_input is unreadable")
-    if record["raw_input_parse_failure"] is not None:
-        reasons.append("temp1_input does not parse as a strict integer")
-    if record["physical_range_passed"] is not True:
-        reasons.append("temp1_input is outside physical custody range")
     for field in ["resolved_input_path", "resolved_hwmon_path", "resolved_device_path", "resolved_driver_path", "resolved_subsystem_path"]:
         if not isinstance(record.get(field), str) or not record[field]:
             reasons.append(f"{field} missing")
@@ -2763,12 +2797,6 @@ def classify_temperature_discovery_failure(candidates: list[dict[str, Any]], vis
     approved = [candidate for candidate in candidates if candidate.get("approved") is True and isinstance(candidate.get("identity"), dict)]
     if len(approved) > 1:
         return "MULTIPLE_APPROVED_LEGACY_CANDIDATES"
-    if any(
-        "temp1_input is unreadable" in candidate.get("rejection_reasons", [])
-        or "temp1_input does not parse as a strict integer" in candidate.get("rejection_reasons", [])
-        for candidate in legacy_candidates
-    ):
-        return "LEGACY_CANDIDATE_UNREADABLE"
     return "LEGACY_CANDIDATE_REJECTED_IDENTITY"
 
 
@@ -3486,6 +3514,8 @@ def classify_temperature_discovery_exception(message: str, *, candidate_scan_cou
         return "SELECTED_IDENTITY_CHANGED_BEFORE_READ"
     if "selected temperature identity changed after read" in message:
         return "SELECTED_IDENTITY_CHANGED_AFTER_READ"
+    if "temperature unreadable from pinned descriptor" in message or "temperature outside physical custody bounds" in message:
+        return "LEGACY_CANDIDATE_UNREADABLE"
     if candidate_scan_count:
         return "LEGACY_CANDIDATE_REJECTED_IDENTITY"
     return "PRE_SCAN_DISCOVERY_FAILURE"
