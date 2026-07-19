@@ -1,4 +1,4 @@
-# Prospective Paired Dirty-Probe Tomography Confirmation Contract
+# Prospective Paired Dirty-Probe Scalar Q-Readout Confirmation Contract
 
 This contract freezes the repaired analysis law for the next confirmation package. It does not authorize live execution.
 
@@ -7,7 +7,8 @@ This contract freezes the repaired analysis law for the next confirmation packag
 ```text
 science package = family10h_carrier_tomography_v1_1_paired_dirty_probe
 base evidence = family10h_carrier_tomography_v1_0 attempt_3 diagnostic only
-claim ceiling = public Family 10h carrier-state tomography
+claim ceiling = PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED
+full carrier-state tomography = not established by this contract
 small wall promotion = forbidden by this contract
 ```
 
@@ -28,6 +29,8 @@ session, replicate, delay_label, mapping, source_order, q, source_off_control
 `query_A` and `query_B` are logical query names. Because the runtime maps query lanes through the same `map_variant` used during preparation, map0/map1 must be evaluated as consistency strata, not as a sign inversion.
 
 ## Fixed Thresholds
+
+The thresholds below are retrospective when applied to attempt 3 because they were selected after inspecting attempt-3 evidence. Attempt 3 cannot independently validate thresholds derived after examining attempt 3. These thresholds are prospectively frozen only for the proposed v1.1 confirmation, and no post-v1.1-run threshold revision is allowed.
 
 The next run must use these thresholds without post-run revision:
 
@@ -73,10 +76,15 @@ linear intercept bound passes globally and in every session/replicate stratum
 all held-out session/replicate/mapping/delay/source-order tests pass
 all held-out session/replicate/mapping/delay/source-order nearest-q classifiers pass
 map, delay, session, and source-order slope consistency pass
-dirty_probe_response passes while change_to_dirty, cpu_cycles, and duration_ns fail the same paired law
+predeclared primary dirty_probe_response endpoint passes all required primary gates
+other PMU or timing channels are reported as secondary exploratory/supportive observables only
+secondary channels may pass or fail without invalidating the primary dirty-probe result
+no secondary channel may substitute for failure of the primary endpoint
+secondary-channel interpretation is separately labeled and claim-bounded
 no target-derived feature selection
 no post-run threshold revision
 no SMALL_WALL_CROSSED promotion from this package alone
+no catalytic borrowing, physical relational memory, relational carrier, or full tomography promotion
 ```
 
 ## Required Negative Regressions
@@ -93,4 +101,14 @@ flat query_A/query_B signal
 swapped query-pair values
 negated q labels
 invalid/missing packet rows
+wrong archive hash
+wrong archive size
+missing required archive member
+duplicate matching archive member
+snapshot/archive content mismatch
+copy-back receipt mismatch
 ```
+
+## Successor Tomography Requirement
+
+Full carrier-state tomography remains a successor claim. It requires at least one additional independently identifiable observable or operator dimension beyond scalar q, with predeclared endpoint semantics, independent controls, held-out prediction, custody, and no-smuggle laws. Passing this contract alone can establish at most `PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED`.

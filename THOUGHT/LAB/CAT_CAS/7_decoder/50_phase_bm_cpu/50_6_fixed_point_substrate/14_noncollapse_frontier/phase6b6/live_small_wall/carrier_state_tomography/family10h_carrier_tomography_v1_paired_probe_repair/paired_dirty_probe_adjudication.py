@@ -9,13 +9,16 @@ does not promote SMALL_WALL_CROSSED.
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import importlib.util
+import io
 import json
 import math
 import statistics
 import sys
 import tarfile
+import tempfile
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
@@ -26,9 +29,11 @@ PACKAGE_ROOT = CARRIER_ROOT / "family10h_carrier_tomography_v1"
 RUN_ID = "family10h_carrier_tomography_v1_0"
 DEFAULT_ATTEMPT_DIR = CARRIER_ROOT / "runs" / RUN_ID / "attempt_3"
 
-RESULT_SUPPORTED = "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_SUPPORTED_RETROSPECTIVE"
-RESULT_NOT_SUPPORTED = "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_NOT_SUPPORTED_RETROSPECTIVE"
-RESULT_INVALID = "FAMILY10H_PAIRED_DIRTY_PROBE_TOMOGRAPHY_CUSTODY_INVALID"
+RESULT_SUPPORTED = "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_SUPPORTED_RETROSPECTIVE"
+RESULT_NOT_SUPPORTED = "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_NOT_SUPPORTED_RETROSPECTIVE"
+RESULT_INVALID = "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CUSTODY_INVALID"
+RETROSPECTIVE_CLAIM = "PUBLIC_POST_SOURCE_SCALAR_Q_CODEWORD_READOUT_OBSERVED_RETROSPECTIVE"
+PROSPECTIVE_CLAIM_CEILING = "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED"
 
 PAIR_SOURCE_OFF_MAX_ABS = 128.0
 PAIR_SOURCE_OFF_MEAN_ABS = 32.0
@@ -47,6 +52,18 @@ ACTIVE_QS = [-1536, -1024, -512, 0, 512, 1024, 1536]
 SIGN_QS = [-1536, -1024, -512, 512, 1024, 1536]
 MAG_CHAIN_POS = [(512, 1024), (1024, 1536)]
 MAG_CHAIN_NEG = [(-512, -1024), (-1024, -1536)]
+REQUIRED_ARCHIVE_MEMBERS = {
+    "raw_records.jsonl": "output/raw_records.jsonl",
+    "source_death_receipts.jsonl": "output/source_death_receipts.jsonl",
+    "feature_freeze.json": "output/feature_freeze.json",
+    "output_target_execution_receipt.json": "output_target_execution_receipt.json",
+}
+THRESHOLD_PROVENANCE = {
+    "attempt_3_status": "retrospective_thresholds_selected_after_attempt_3_inspection",
+    "attempt_3_limitation": "attempt_3_cannot_independently_validate_thresholds_derived_after_examining_attempt_3",
+    "v1_1_status": "thresholds_are_prospectively_frozen_only_for_the_proposed_v1_1_confirmation",
+    "post_v1_1_revision": "no_post_v1_1_run_threshold_revision_allowed",
+}
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -87,60 +104,183 @@ def parse_jsonl_bytes(data: bytes, name: str) -> list[dict[str, Any]]:
     return rows
 
 
-def read_output_bytes_from_tar(tar_path: Path) -> dict[str, bytes]:
-    wanted_suffixes = {
-        "raw_records.jsonl": "/output/raw_records.jsonl",
-        "source_death_receipts.jsonl": "/output/source_death_receipts.jsonl",
-        "feature_freeze.json": "/output/feature_freeze.json",
-        "output_target_execution_receipt.json": "/output_target_execution_receipt.json",
+def load_json_path(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def normalize_archive_member_name(name: str) -> str:
+    normalized = name.replace("\\", "/").lstrip("/")
+    prefix = f"{RUN_ID}/"
+    if normalized.startswith(prefix):
+        normalized = normalized[len(prefix):]
+    return normalized
+
+
+def receipt_snapshot_index(copyback_receipt: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    index: dict[str, dict[str, Any]] = {}
+    for item in copyback_receipt.get("snapshot_files", []):
+        relative_path = item.get("relative_path")
+        if relative_path:
+            index[str(relative_path).replace("\\", "/")] = item
+    return index
+
+
+def verify_archive_receipts(
+    attempt_dir: Path,
+    tar_path: Path,
+    copyback_receipt: dict[str, Any],
+    inventory: dict[str, Any],
+) -> dict[str, Any]:
+    actual_sha = sha256_path(tar_path)
+    actual_size = tar_path.stat().st_size
+    expected_sha = copyback_receipt.get("local_archive_sha256")
+    expected_size = copyback_receipt.get("local_archive_size")
+    if expected_sha != actual_sha:
+        raise RuntimeError(f"archive sha mismatch: expected {expected_sha}, observed {actual_sha}")
+    if int(expected_size) != actual_size:
+        raise RuntimeError(f"archive size mismatch: expected {expected_size}, observed {actual_size}")
+    receipt_archive_path = Path(str(copyback_receipt.get("local_archive", ""))).resolve()
+    if receipt_archive_path != tar_path.resolve():
+        raise RuntimeError(f"copy-back receipt local_archive mismatch: {receipt_archive_path} != {tar_path.resolve()}")
+    remote_root = inventory.get("remote_root_archive", {})
+    if remote_root.get("relative_path") != tar_path.name:
+        raise RuntimeError("evidence inventory remote archive path mismatch")
+    if remote_root.get("sha256") != actual_sha:
+        raise RuntimeError("evidence inventory remote archive sha mismatch")
+    if int(remote_root.get("size", -1)) != actual_size:
+        raise RuntimeError("evidence inventory remote archive size mismatch")
+    files = {
+        item.get("relative_path"): item
+        for item in inventory.get("files", [])
     }
-    found: dict[str, bytes] = {}
+    inventory_archive = files.get(tar_path.name)
+    if not inventory_archive:
+        raise RuntimeError("evidence inventory missing archive file entry")
+    if inventory_archive.get("sha256") != actual_sha:
+        raise RuntimeError("evidence inventory archive file sha mismatch")
+    if int(inventory_archive.get("size", -1)) != actual_size:
+        raise RuntimeError("evidence inventory archive file size mismatch")
+    return {
+        "copyback_receipt": str(attempt_dir / "ATTEMPT_3_COPYBACK_RECEIPT.json"),
+        "copyback_receipt_sha256": sha256_path(attempt_dir / "ATTEMPT_3_COPYBACK_RECEIPT.json"),
+        "evidence_inventory": str(attempt_dir / "ATTEMPT_3_EVIDENCE_INVENTORY.json"),
+        "evidence_inventory_sha256": sha256_path(attempt_dir / "ATTEMPT_3_EVIDENCE_INVENTORY.json"),
+        "archive": str(tar_path),
+        "archive_sha256": actual_sha,
+        "archive_size": actual_size,
+    }
+
+
+def read_output_bytes_from_verified_archive(
+    tar_path: Path,
+    copyback_receipt: dict[str, Any],
+) -> tuple[dict[str, bytes], dict[str, Any]]:
+    matches: dict[str, list[tarfile.TarInfo]] = defaultdict(list)
+    payload: dict[str, bytes] = {}
     with tarfile.open(tar_path, "r:gz") as archive:
         for member in archive.getmembers():
             if not member.isfile():
                 continue
-            normalized = "/" + member.name.replace("\\", "/")
-            for key, suffix in wanted_suffixes.items():
-                if normalized.endswith(suffix):
-                    extracted = archive.extractfile(member)
-                    if extracted is None:
-                        raise RuntimeError(f"cannot extract {member.name}")
-                    found[key] = extracted.read()
-    missing = sorted(set(wanted_suffixes) - set(found))
+            normalized = normalize_archive_member_name(member.name)
+            for key, relative_path in REQUIRED_ARCHIVE_MEMBERS.items():
+                if normalized == relative_path:
+                    matches[key].append(member)
+    missing = sorted(set(REQUIRED_ARCHIVE_MEMBERS) - set(matches))
     if missing:
         raise RuntimeError(f"remote-root archive missing output files: {missing}")
-    return found
+    duplicates = {
+        key: [member.name for member in members]
+        for key, members in matches.items()
+        if len(members) != 1
+    }
+    if duplicates:
+        raise RuntimeError(f"remote-root archive duplicate output file matches: {duplicates}")
+    snapshot_index = receipt_snapshot_index(copyback_receipt)
+    member_provenance: dict[str, Any] = {}
+    with tarfile.open(tar_path, "r:gz") as archive:
+        for key, members in matches.items():
+            member = members[0]
+            extracted = archive.extractfile(member)
+            if extracted is None:
+                raise RuntimeError(f"cannot extract {member.name}")
+            data = extracted.read()
+            relative_path = REQUIRED_ARCHIVE_MEMBERS[key]
+            expected = snapshot_index.get(relative_path)
+            if expected is None:
+                raise RuntimeError(f"copy-back receipt missing snapshot hash for {relative_path}")
+            observed_sha = sha256_bytes(data)
+            observed_size = len(data)
+            if expected.get("sha256") != observed_sha:
+                raise RuntimeError(f"archive member sha mismatch for {relative_path}")
+            if int(expected.get("size", -1)) != observed_size:
+                raise RuntimeError(f"archive member size mismatch for {relative_path}")
+            payload[key] = data
+            member_provenance[key] = {
+                "archive_member": member.name,
+                "relative_path": relative_path,
+                "sha256": observed_sha,
+                "size": observed_size,
+                "copyback_snapshot_bound": True,
+            }
+    return payload, member_provenance
+
+
+def snapshot_payload_if_equal(attempt_dir: Path, archive_payload: dict[str, bytes]) -> dict[str, Any]:
+    snapshot_root = attempt_dir / "remote_root_snapshot" / RUN_ID
+    snapshot_files = {
+        "raw_records.jsonl": snapshot_root / "output" / "raw_records.jsonl",
+        "source_death_receipts.jsonl": snapshot_root / "output" / "source_death_receipts.jsonl",
+        "feature_freeze.json": snapshot_root / "output" / "feature_freeze.json",
+        "output_target_execution_receipt.json": snapshot_root / "output_target_execution_receipt.json",
+    }
+    if not all(path.exists() for path in snapshot_files.values()):
+        return {
+            "present": False,
+            "authoritative": False,
+            "status": "snapshot_cache_absent_or_incomplete",
+        }
+    comparisons = {}
+    for key, path in snapshot_files.items():
+        snapshot_bytes = path.read_bytes()
+        archive_bytes = archive_payload[key]
+        comparisons[key] = {
+            "snapshot_path": str(path),
+            "snapshot_sha256": sha256_bytes(snapshot_bytes),
+            "archive_sha256": sha256_bytes(archive_bytes),
+            "snapshot_size": len(snapshot_bytes),
+            "archive_size": len(archive_bytes),
+            "matches_archive": snapshot_bytes == archive_bytes,
+        }
+    mismatches = [key for key, item in comparisons.items() if not item["matches_archive"]]
+    if mismatches:
+        raise RuntimeError(f"snapshot cache differs from verified archive members: {mismatches}")
+    return {
+        "present": True,
+        "authoritative": False,
+        "status": "snapshot_cache_verified_equal_to_archive_but_not_used_as_authority",
+        "comparisons": comparisons,
+    }
 
 
 def read_attempt_output(attempt_dir: Path) -> tuple[dict[str, bytes], dict[str, Any]]:
-    snapshot_output = attempt_dir / "remote_root_snapshot" / RUN_ID / "output"
-    snapshot_receipt = attempt_dir / "remote_root_snapshot" / RUN_ID / "output_target_execution_receipt.json"
-    provenance: dict[str, Any]
-    if snapshot_output.exists():
-        payload = {
-            "raw_records.jsonl": (snapshot_output / "raw_records.jsonl").read_bytes(),
-            "source_death_receipts.jsonl": (snapshot_output / "source_death_receipts.jsonl").read_bytes(),
-            "feature_freeze.json": (snapshot_output / "feature_freeze.json").read_bytes(),
-            "output_target_execution_receipt.json": snapshot_receipt.read_bytes(),
-        }
-        provenance = {
-            "source": "extracted_snapshot",
-            "snapshot_output": str(snapshot_output),
-        }
-    else:
-        attempt_number = attempt_dir.name.split("_")[-1]
-        tar_path = attempt_dir / f"ATTEMPT_{attempt_number}_REMOTE_ROOT.tar.gz"
-        payload = read_output_bytes_from_tar(tar_path)
-        provenance = {
-            "source": "remote_root_archive",
-            "archive": str(tar_path),
-            "archive_sha256": sha256_path(tar_path),
-            "archive_size": tar_path.stat().st_size,
-        }
-    provenance["output_hashes"] = {
-        key: {"sha256": sha256_bytes(value), "size": len(value)}
-        for key, value in payload.items()
-    }
+    attempt_number = attempt_dir.name.split("_")[-1]
+    tar_path = attempt_dir / f"ATTEMPT_{attempt_number}_REMOTE_ROOT.tar.gz"
+    copyback_path = attempt_dir / f"ATTEMPT_{attempt_number}_COPYBACK_RECEIPT.json"
+    inventory_path = attempt_dir / f"ATTEMPT_{attempt_number}_EVIDENCE_INVENTORY.json"
+    copyback_receipt = load_json_path(copyback_path)
+    inventory = load_json_path(inventory_path)
+    provenance = verify_archive_receipts(attempt_dir, tar_path, copyback_receipt, inventory)
+    payload, member_provenance = read_output_bytes_from_verified_archive(tar_path, copyback_receipt)
+    provenance.update({
+        "source": "verified_committed_remote_root_archive",
+        "authoritative_input": "ATTEMPT_3_REMOTE_ROOT.tar.gz",
+        "archive_member_hashes": member_provenance,
+        "snapshot_cache": snapshot_payload_if_equal(attempt_dir, payload),
+        "output_hashes": {
+            key: {"sha256": sha256_bytes(value), "size": len(value)}
+            for key, value in payload.items()
+        },
+    })
     return payload, provenance
 
 
@@ -518,10 +658,16 @@ def channel_specificity_report(packet: dict[str, Any], schedule: dict[str, Any])
             "source_off_abs_max": candidate["controls"]["source_off_abs_max"],
         }
     return {
+        "diagnostic_only": True,
+        "prospective_gate": False,
+        "primary_endpoint": "dirty_probe_response",
+        "primary_endpoint_requirement": "primary paired dirty-probe law must independently pass all primary gates",
+        "secondary_channel_policy": "secondary channels may pass or fail without invalidating the primary result and may not substitute for primary endpoint failure",
         "reports": reports,
-        "passed": (
-            reports["dirty_probe_response"]["passed"]
-            and not reports["change_to_dirty"]["passed"]
+        "attempt_3_observation": "attempt_3_strongest_scalar_q_signal_is_in_dirty_probe_response_under_this_sidecar",
+        "attempt_3_primary_passed": reports["dirty_probe_response"]["passed"],
+        "attempt_3_secondary_channels_failed_same_law": (
+            not reports["change_to_dirty"]["passed"]
             and not reports["cpu_cycles"]["passed"]
             and not reports["duration_ns"]["passed"]
         ),
@@ -646,13 +792,23 @@ def adjudicate_packet(
         "heldout_classifier_delay": all(item["passed"] for item in heldout_classifier["delay_label"].values()),
         "heldout_classifier_source_order": all(item["passed"] for item in heldout_classifier["source_order"].values()),
     }
-    if channel_specificity is not None:
-        gates["channel_specificity"] = channel_specificity["passed"]
     passed = all(gates.values())
     return {
         "schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_ADJUDICATION_V1",
         "result_class": RESULT_SUPPORTED if passed else RESULT_NOT_SUPPORTED,
         "passed": passed,
+        "retrospective_claim": RETROSPECTIVE_CLAIM,
+        "prospective_claim_ceiling": PROSPECTIVE_CLAIM_CEILING,
+        "claim_boundary": {
+            "reproducible_public_q_dependent_response_observed": passed,
+            "dimension": "one_dimensional_scalar_codeword_readout",
+            "full_carrier_state_tomography_established": False,
+            "official_frozen_attempt3_result_unchanged": True,
+            "small_wall_promoted": False,
+            "catalytic_borrowing_established": False,
+            "physical_relational_memory_established": False,
+            "relational_carrier_established": False,
+        },
         "official_result_replaced": False,
         "small_wall_promoted": False,
         "observable_law": {
@@ -660,7 +816,7 @@ def adjudicate_packet(
             "paired_observable": "D_single = dirty_probe_response(query_A) - dirty_probe_response(query_B)",
             "mapping_policy": mapping_policy,
             "mapping_policy_reason": "Runtime maps logical query lanes through the same map variant used during preparation; map is therefore a consistency factor for logical query_A/query_B, not a sign inversion.",
-            "source_of_thresholds": "prospective constants in this sidecar, not tuned by a live retry",
+            "threshold_provenance": THRESHOLD_PROVENANCE,
         },
         "thresholds": {
             "source_off_pair_abs_max": PAIR_SOURCE_OFF_MAX_ABS,
@@ -770,7 +926,118 @@ def mutate_negate_active_q_schedule(schedule: dict[str, Any]) -> dict[str, Any]:
     return mutated
 
 
-def run_self_tests(packet: dict[str, Any], schedule: dict[str, Any]) -> dict[str, Any]:
+def expect_runtime_error(label: str, fn: Any) -> dict[str, Any]:
+    try:
+        fn()
+    except RuntimeError as exc:
+        return {"passed": True, "error": str(exc)}
+    return {"passed": False, "error": f"{label} did not fail closed"}
+
+
+def write_test_tar(path: Path, members: dict[str, bytes], *, duplicate: str | None = None, omit: str | None = None) -> None:
+    with tarfile.open(path, "w:gz") as archive:
+        for relative_path, data in members.items():
+            if relative_path == omit:
+                continue
+            member_name = f"{RUN_ID}/{relative_path}"
+            info = tarfile.TarInfo(member_name)
+            info.size = len(data)
+            archive.addfile(info, io.BytesIO(data))
+            if duplicate == relative_path:
+                duplicate_info = tarfile.TarInfo(member_name)
+                duplicate_info.size = len(data)
+                archive.addfile(duplicate_info, io.BytesIO(data))
+
+
+def archive_negative_self_tests(attempt_dir: Path) -> dict[str, Any]:
+    attempt_number = attempt_dir.name.split("_")[-1]
+    tar_path = attempt_dir / f"ATTEMPT_{attempt_number}_REMOTE_ROOT.tar.gz"
+    copyback = load_json_path(attempt_dir / f"ATTEMPT_{attempt_number}_COPYBACK_RECEIPT.json")
+    inventory = load_json_path(attempt_dir / f"ATTEMPT_{attempt_number}_EVIDENCE_INVENTORY.json")
+    payload, _ = read_attempt_output(attempt_dir)
+    member_payload = {
+        relative_path: payload[key]
+        for key, relative_path in REQUIRED_ARCHIVE_MEMBERS.items()
+    }
+
+    def with_archive_values(path: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+        archive_sha = sha256_path(path)
+        archive_size = path.stat().st_size
+        mutated_copyback = copy.deepcopy(copyback)
+        mutated_inventory = copy.deepcopy(inventory)
+        mutated_copyback["local_archive"] = str(path.resolve())
+        mutated_copyback["local_archive_sha256"] = archive_sha
+        mutated_copyback["local_archive_size"] = archive_size
+        mutated_inventory["remote_root_archive"]["relative_path"] = path.name
+        mutated_inventory["remote_root_archive"]["sha256"] = archive_sha
+        mutated_inventory["remote_root_archive"]["size"] = archive_size
+        for item in mutated_inventory["files"]:
+            if item.get("relative_path") == tar_path.name:
+                item["relative_path"] = path.name
+                item["sha256"] = archive_sha
+                item["size"] = archive_size
+        return mutated_copyback, mutated_inventory
+
+    with tempfile.TemporaryDirectory(prefix="family10h_q_readout_negative_") as tmp:
+        tmpdir = Path(tmp)
+        missing_tar = tmpdir / "missing_member.tar.gz"
+        duplicate_tar = tmpdir / "duplicate_member.tar.gz"
+        write_test_tar(missing_tar, member_payload, omit="output/raw_records.jsonl")
+        write_test_tar(duplicate_tar, member_payload, duplicate="output/raw_records.jsonl")
+        missing_copyback, missing_inventory = with_archive_values(missing_tar)
+        duplicate_copyback, duplicate_inventory = with_archive_values(duplicate_tar)
+
+        snapshot_attempt_dir = tmpdir / "snapshot_attempt"
+        snapshot_root = snapshot_attempt_dir / "remote_root_snapshot" / RUN_ID
+        (snapshot_root / "output").mkdir(parents=True)
+        for key, relative_path in REQUIRED_ARCHIVE_MEMBERS.items():
+            target = snapshot_root / relative_path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            data = payload[key]
+            if key == "feature_freeze.json":
+                data = data + b"\n"
+            target.write_bytes(data)
+
+        wrong_hash = copy.deepcopy(copyback)
+        wrong_hash["local_archive_sha256"] = "0" * 64
+        wrong_size = copy.deepcopy(copyback)
+        wrong_size["local_archive_size"] = int(wrong_size["local_archive_size"]) + 1
+        receipt_mismatch = copy.deepcopy(copyback)
+        receipt_mismatch["local_archive"] = str((tmpdir / "wrong-name.tar.gz").resolve())
+
+        tests = {
+            "wrong_archive_hash": expect_runtime_error(
+                "wrong_archive_hash",
+                lambda: verify_archive_receipts(attempt_dir, tar_path, wrong_hash, inventory),
+            ),
+            "wrong_archive_size": expect_runtime_error(
+                "wrong_archive_size",
+                lambda: verify_archive_receipts(attempt_dir, tar_path, wrong_size, inventory),
+            ),
+            "copyback_receipt_mismatch": expect_runtime_error(
+                "copyback_receipt_mismatch",
+                lambda: verify_archive_receipts(attempt_dir, tar_path, receipt_mismatch, inventory),
+            ),
+            "missing_required_member": expect_runtime_error(
+                "missing_required_member",
+                lambda: read_output_bytes_from_verified_archive(missing_tar, missing_copyback),
+            ),
+            "duplicate_matching_archive_member": expect_runtime_error(
+                "duplicate_matching_archive_member",
+                lambda: read_output_bytes_from_verified_archive(duplicate_tar, duplicate_copyback),
+            ),
+            "snapshot_archive_content_mismatch": expect_runtime_error(
+                "snapshot_archive_content_mismatch",
+                lambda: snapshot_payload_if_equal(snapshot_attempt_dir, payload),
+            ),
+        }
+    return {
+        "passed": all(item["passed"] for item in tests.values()),
+        "tests": tests,
+    }
+
+
+def run_self_tests(packet: dict[str, Any], schedule: dict[str, Any], attempt_dir: Path) -> dict[str, Any]:
     repaired = adjudicate_packet(packet, schedule)
     change_to_dirty = adjudicate_packet(packet, schedule, field="change_to_dirty")
     cpu_cycles = adjudicate_packet(packet, schedule, field="cpu_cycles")
@@ -780,8 +1047,10 @@ def run_self_tests(packet: dict[str, Any], schedule: dict[str, Any]) -> dict[str
     flat_mutant = adjudicate_packet(mutate_flat_signal(packet, schedule), schedule)
     swapped_query_mutant = adjudicate_packet(mutate_swap_query_pair_values(packet, schedule), schedule)
     negated_q_mutant = adjudicate_packet(packet, mutate_negate_active_q_schedule(schedule))
+    archive_negatives = archive_negative_self_tests(attempt_dir)
     checks = {
-        "paired_dirty_probe_attempt3_supported": repaired["passed"],
+        "paired_dirty_probe_attempt3_q_readout_supported": repaired["passed"],
+        "archive_negative_self_tests": archive_negatives["passed"],
         "change_to_dirty_channel_not_sufficient": not change_to_dirty["passed"],
         "cpu_cycles_channel_not_sufficient": not cpu_cycles["passed"],
         "duration_channel_not_sufficient": not duration_ns["passed"],
@@ -811,6 +1080,7 @@ def run_self_tests(packet: dict[str, Any], schedule: dict[str, Any]) -> dict[str
         "swapped_query_mutant_gates": swapped_query_mutant["gates"],
         "negated_q_mutant_gates": negated_q_mutant["gates"],
         "channel_specificity": repaired["channel_specificity"],
+        "archive_negative_self_tests": archive_negatives,
     }
 
 
@@ -847,7 +1117,7 @@ def main() -> int:
         result["source_evidence"]["schedule_sha256"] = public.digest(schedule)
     write_json(args.out, result)
     if args.self_test:
-        self_test = run_self_tests(packet, schedule) if validation["passed"] else {"schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_SELF_TEST_V1", "passed": False, "reason": "base packet invalid", "validation": validation}
+        self_test = run_self_tests(packet, schedule, args.attempt_dir) if validation["passed"] else {"schema": "FAMILY10H_PAIRED_DIRTY_PROBE_REPAIR_SELF_TEST_V1", "passed": False, "reason": "base packet invalid", "validation": validation}
         write_json(args.self_test_out, self_test)
         if not self_test["passed"]:
             print(json.dumps(self_test, indent=2, sort_keys=True))
