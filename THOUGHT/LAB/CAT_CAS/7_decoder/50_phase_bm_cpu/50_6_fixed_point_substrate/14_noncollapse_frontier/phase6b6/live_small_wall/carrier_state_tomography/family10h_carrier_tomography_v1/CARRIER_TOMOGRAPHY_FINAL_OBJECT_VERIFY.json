@@ -554,19 +554,19 @@
       "size": 45820
     },
     "manifest": {
-      "blob_id": "b380ddcf015d39d897495158d76b98bd7cdb4eb8",
+      "blob_id": "7111dbbd0d56ee7d92bdec30b18102b2894e6c17",
       "object_type": "blob",
       "present": true,
       "repo_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.json",
-      "sha256": "465d7d6d3727a1cfc3338e306f2b89c0e388340e63ed0d6179a794babe67f1a0",
-      "size": 50594
+      "sha256": "cbe9e134149386081b9c14cc333c3a1083335d983a6717b81a9ce8998357e3b0",
+      "size": 50882
     },
     "manifest sidecar": {
-      "blob_id": "23a317228614e684e5b78fde76a8d02bb67b7a7f",
+      "blob_id": "cc221f032f0c3580d8418b2f7746993d6e003ea5",
       "object_type": "blob",
       "present": true,
       "repo_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/CARRIER_TOMOGRAPHY_IMPLEMENTATION_MANIFEST.sha256",
-      "sha256": "9fad82b709728d41229eb35d831ee4b523f515baae6d9cadc1051f0b35133bda",
+      "sha256": "dfe0fa7ae4a6037d8cf6c9e0149790ea7eb296b2b01f4aa9c8c3d5409a5038cc",
       "size": 274
     },
     "source audit claim_boundary_adjudicator body": {
@@ -666,12 +666,12 @@
       "size": 23926
     }
   },
-  "evidence_commit": "a121381130ef6eef2757ff5c014e22990a88f774",
+  "evidence_commit": "ffc7a66076c96310a6d22f7ceb85e4b82229000b",
   "failures": [],
-  "final_evidence_commit_file_sha256": "a940f4d39a4105acb0b8fd382a23b8157d3be597d347e99dcba1f6c1ee817c1b",
+  "final_evidence_commit_file_sha256": "8b0e96a77ae37f5fa5df32c24f118d02d254fff13496284447c418e8d4117f8c",
   "final_evidence_commit_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_FINAL_EVIDENCE_COMMIT.json",
-  "final_evidence_commit_sha256": "d6111807fcb0e1db1cdbfec5498b817e61fb02e1d967090b1ae4df3deabef89e",
-  "final_exact_object_verification_sha256": "3c5fa638603c21284b1bf61be220432b59d372086f990bec49e4322d20ac5015",
+  "final_evidence_commit_sha256": "1323c5d64c8c0dd858a0ce91f4f579a358d09e77dd45136677c7dae837d83b36",
+  "final_exact_object_verification_sha256": "256938f41a4f477388fef33048c17cf10aaf98b198294be1491a51777d6a0a9e",
   "independent_quorum": {
     "failures": [],
     "material_blockers": [],
@@ -714,8 +714,8 @@
       }
     }
   },
-  "manifest_canonical_sha256": "33af05e9699863bac649a905b43c0091c53af813202b117ec6e3eb75ff08964d",
-  "manifest_file_sha256": "465d7d6d3727a1cfc3338e306f2b89c0e388340e63ed0d6179a794babe67f1a0",
+  "manifest_canonical_sha256": "3ea96fd656ab52fb9f8437b2112456d4491c5bb0cd04ba5a12d8a45ee2263294",
+  "manifest_file_sha256": "cbe9e134149386081b9c14cc333c3a1083335d983a6717b81a9ce8998357e3b0",
   "missing_evidence_paths": [],
   "passed": true,
   "required_evidence_paths": {
