@@ -1,0 +1,154 @@
+{
+  "evidence_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
+  "report": {
+    "between_state_vs_within_state_distances": {
+      "between_q_centroid_distance": {
+        "count": 21,
+        "max": 49.98317937220794,
+        "mean": 20.945332308354875,
+        "mean_abs": 20.945332308354875,
+        "median": 19.993271748882506,
+        "min": 2.255700137698441e-12,
+        "std": 13.76377984275961
+      },
+      "between_to_within_mean_ratio": 0.08449015703286661,
+      "state_label": "q",
+      "within_q_row_distance": {
+        "count": 560,
+        "max": 764.7049899344621,
+        "mean": 247.90263202146915,
+        "mean_abs": 247.90263202146915,
+        "median": 210.50839176147292,
+        "min": 51.389353753563064,
+        "std": 128.1207563701076
+      }
+    },
+    "bootstrap_stability": {
+      "first_residual_axis_abs_cosine_to_full_sample": {
+        "count": 64,
+        "max": 0.9995449781033744,
+        "mean": 0.9931030059944924,
+        "mean_abs": 0.9931030059944924,
+        "median": 0.9945712321544545,
+        "min": 0.9732572340382599,
+        "std": 0.005368058402856089
+      },
+      "second_singular_value": {
+        "count": 64,
+        "max": 3255.772075665809,
+        "mean": 2918.345937425845,
+        "mean_abs": 2918.345937425845,
+        "median": 2898.2280178568435,
+        "min": 2703.920232971347,
+        "std": 114.35026893921788
+      },
+      "seed": 20260720
+    },
+    "columns": [
+      "Y_query_A",
+      "Y_query_B",
+      "Y_query_A_then_B",
+      "Y_query_B_then_A",
+      "D_single",
+      "D_order",
+      "S_order",
+      "J_query_A_then_B",
+      "J_query_B_then_A",
+      "J_order"
+    ],
+    "interpretation": "residual rank is not a physical dimension by itself; no stable second direction survives matched null and held-out law requirements",
+    "matched_null_baselines": {
+      "second_above_unrestricted_shuffle_p95": true,
+      "second_above_within_stratum_shuffle_p95": true,
+      "shuffle_seed": 20260720,
+      "unrestricted_shuffle_second_singular": {
+        "count": 64,
+        "max": 2493.39955570245,
+        "mean": 2419.3504243492835,
+        "mean_abs": 2419.3504243492835,
+        "median": 2414.6041889047274,
+        "min": 2360.7140599236636,
+        "std": 30.614862794872668
+      },
+      "within_q_mapping_delay_source_order_shuffle_second_singular": {
+        "count": 64,
+        "max": 2586.1539191039947,
+        "mean": 2479.101379669356,
+        "mean_abs": 2479.101379669356,
+        "median": 2476.1235626974267,
+        "min": 2408.4590638804784,
+        "std": 38.87828278773782
+      }
+    },
+    "principal_axis_loadings": {
+      "axis_1": {
+        "D_order": -0.11000930168249956,
+        "D_single": -0.0011557357919553535,
+        "J_order": -0.8034217026998346,
+        "J_query_A_then_B": -0.38543610592196914,
+        "J_query_B_then_A": 0.41798559677786523,
+        "S_order": -0.09293309494543626,
+        "Y_query_A": 0.007506168590059374,
+        "Y_query_A_then_B": -0.10147119831396818,
+        "Y_query_B": 0.008661904382014765,
+        "Y_query_B_then_A": 0.008538103368531363
+      },
+      "axis_2": {
+        "D_order": -0.15757116347668265,
+        "D_single": -0.1064645412066118,
+        "J_order": -0.0710158569291084,
+        "J_query_A_then_B": -0.0925295448774201,
+        "J_query_B_then_A": -0.021513687948311634,
+        "S_order": 0.7881059998698693,
+        "Y_query_A": -0.05643671543358536,
+        "Y_query_A_then_B": 0.31526741819659343,
+        "Y_query_B": 0.050027825773026835,
+        "Y_query_B_then_A": 0.4728385816732756
+      },
+      "axis_3": {
+        "D_order": 0.787064134559781,
+        "D_single": -0.06497475428813632,
+        "J_order": -0.12211488871251154,
+        "J_query_A_then_B": 0.004702673757239829,
+        "J_query_B_then_A": 0.12681756246975104,
+        "S_order": 0.14410928150269814,
+        "Y_query_A": 0.0013830467752415161,
+        "Y_query_A_then_B": 0.46558670803124047,
+        "Y_query_B": 0.06635780106337806,
+        "Y_query_B_then_A": -0.3214774265285414
+      }
+    },
+    "raw_effective_rank": 2.2412569172073042,
+    "raw_response_matrix_rank": 6,
+    "raw_singular_spectrum": [
+      55406.47428781016,
+      4171.009930551427,
+      3305.6103415291655,
+      2781.5668049744404,
+      2291.8600166857004,
+      1247.5661099177823,
+      7.99000775708831e-12,
+      2.0046750916595378e-12,
+      1.1602973021048979e-12,
+      8.956917153597666e-13
+    ],
+    "residual_effective_rank": 5.641755164817653,
+    "residual_response_matrix_rank": 6,
+    "residual_singular_spectrum": [
+      4101.298487642341,
+      2884.5245980355503,
+      2699.896927640617,
+      2267.1953912227355,
+      2201.8588591913112,
+      1157.3174149532174,
+      2.246351051849736e-11,
+      9.639915472437524e-12,
+      8.448903369416232e-12,
+      1.193292907637961e-12
+    ],
+    "residualization_model": "q polynomial, temperature, session, replicate, mapping, delay, source order, and q x nuisance",
+    "second_direction_survives_required_strata": false,
+    "second_singular_value": 2884.5245980355503
+  },
+  "schema": "FAMILY10H_OPERATOR_DIMENSION_RESIDUAL_RESPONSE_GEOMETRY_V1"
+}

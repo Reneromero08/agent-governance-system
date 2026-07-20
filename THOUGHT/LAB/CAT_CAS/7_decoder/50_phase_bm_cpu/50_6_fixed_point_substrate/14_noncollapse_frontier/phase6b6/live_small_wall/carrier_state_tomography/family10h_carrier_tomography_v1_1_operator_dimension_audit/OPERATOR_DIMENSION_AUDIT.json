@@ -1,0 +1,745 @@
+{
+  "archive_sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+  "candidate_observables": {
+    "D_order": {
+      "between_q_mean_std": 14.760335146006984,
+      "between_to_within_ratio": 0.1593990717653054,
+      "by_q": {
+        "-1024": {
+          "count": 80,
+          "max": 265.0,
+          "mean": 2.675,
+          "mean_abs": 79.95,
+          "median": -4.0,
+          "min": -257.0,
+          "std": 102.73178366503718
+        },
+        "-1536": {
+          "count": 80,
+          "max": 258.0,
+          "mean": -29.625,
+          "mean_abs": 99.9,
+          "median": -9.0,
+          "min": -313.0,
+          "std": 128.78600224791512
+        },
+        "-512": {
+          "count": 80,
+          "max": 166.0,
+          "mean": -1.65,
+          "mean_abs": 55.95,
+          "median": -1.0,
+          "min": -210.0,
+          "std": 70.2646959717325
+        },
+        "0": {
+          "count": 80,
+          "max": 154.0,
+          "mean": 17.15,
+          "mean_abs": 51.925,
+          "median": 23.0,
+          "min": -167.0,
+          "std": 61.11446228185273
+        },
+        "1024": {
+          "count": 80,
+          "max": 226.0,
+          "mean": 9.55,
+          "mean_abs": 77.25,
+          "median": 1.5,
+          "min": -226.0,
+          "std": 96.3584324280963
+        },
+        "1536": {
+          "count": 80,
+          "max": 323.0,
+          "mean": -14.0,
+          "mean_abs": 84.075,
+          "median": -14.0,
+          "min": -317.0,
+          "std": 120.49522812128288
+        },
+        "512": {
+          "count": 80,
+          "max": 156.0,
+          "mean": -13.3625,
+          "mean_abs": 53.8125,
+          "median": -5.5,
+          "min": -180.0,
+          "std": 68.44856531549803
+        }
+      },
+      "correlation_with_q": 0.03602813926187753,
+      "definition": "dirty_probe_response(query_A_then_B) - dirty_probe_response(query_B_then_A)",
+      "initial_interpretation": "ordered-query contrast coordinate requiring stable transformation law beyond scalar replay",
+      "mean_within_q_std": 92.59988143305925,
+      "summary": {
+        "count": 560,
+        "max": 323.0,
+        "mean": -4.180357142857143,
+        "mean_abs": 71.8375,
+        "median": -2.0,
+        "min": -317.0,
+        "std": 96.97281268413559
+      }
+    },
+    "J_order": {
+      "between_q_mean_std": 15.258635895379218,
+      "between_to_within_ratio": 0.11130515974058418,
+      "by_q": {
+        "-1024": {
+          "count": 80,
+          "max": 291.0,
+          "mean": 3.0625,
+          "mean_abs": 93.7125,
+          "median": 2.5,
+          "min": -272.0,
+          "std": 116.96872912770318
+        },
+        "-1536": {
+          "count": 80,
+          "max": 363.0,
+          "mean": -30.6125,
+          "mean_abs": 139.6875,
+          "median": -27.5,
+          "min": -615.0,
+          "std": 183.18252466802068
+        },
+        "-512": {
+          "count": 80,
+          "max": 242.0,
+          "mean": 1.65,
+          "mean_abs": 87.35,
+          "median": -11.5,
+          "min": -280.0,
+          "std": 107.81571082175361
+        },
+        "0": {
+          "count": 80,
+          "max": 211.0,
+          "mean": 4.525,
+          "mean_abs": 74.7,
+          "median": -1.5,
+          "min": -217.0,
+          "std": 92.28569431390761
+        },
+        "1024": {
+          "count": 80,
+          "max": 398.0,
+          "mean": 21.6625,
+          "mean_abs": 114.7875,
+          "median": 33.5,
+          "min": -449.0,
+          "std": 147.12638646330575
+        },
+        "1536": {
+          "count": 80,
+          "max": 509.0,
+          "mean": -14.825,
+          "mean_abs": 143.35,
+          "median": 0.0,
+          "min": -542.0,
+          "std": 192.6388963189937
+        },
+        "512": {
+          "count": 80,
+          "max": 325.0,
+          "mean": -5.125,
+          "mean_abs": 89.25,
+          "median": -10.5,
+          "min": -397.0,
+          "std": 119.60020641704595
+        }
+      },
+      "correlation_with_q": 0.03900157952408043,
+      "definition": "J_query_A_then_B - J_query_B_then_A",
+      "initial_interpretation": "factorial nonadditivity coordinate requiring matched-arm survival and held-out generalization",
+      "mean_within_q_std": 137.08830687581863,
+      "summary": {
+        "count": 560,
+        "max": 509.0,
+        "mean": -2.8089285714285714,
+        "mean_abs": 106.11964285714286,
+        "median": -5.5,
+        "min": -615.0,
+        "std": 142.46217891173998
+      }
+    },
+    "J_query_A_then_B": {
+      "between_q_mean_std": 14.684374938925348,
+      "between_to_within_ratio": 0.15496411018988837,
+      "by_q": {
+        "-1024": {
+          "count": 80,
+          "max": 270.0,
+          "mean": -0.65,
+          "mean_abs": 75.0,
+          "median": 11.5,
+          "min": -254.0,
+          "std": 96.23254387160301
+        },
+        "-1536": {
+          "count": 80,
+          "max": 292.0,
+          "mean": -22.95,
+          "mean_abs": 88.9,
+          "median": -28.0,
+          "min": -383.0,
+          "std": 118.41409333352173
+        },
+        "-512": {
+          "count": 80,
+          "max": 233.0,
+          "mean": -29.0625,
+          "mean_abs": 68.8125,
+          "median": -39.5,
+          "min": -168.0,
+          "std": 80.52660177699045
+        },
+        "0": {
+          "count": 80,
+          "max": 147.0,
+          "mean": -23.05,
+          "mean_abs": 57.425,
+          "median": -25.0,
+          "min": -166.0,
+          "std": 65.5461478654543
+        },
+        "1024": {
+          "count": 80,
+          "max": 184.0,
+          "mean": -12.0625,
+          "mean_abs": 72.7125,
+          "median": -5.5,
+          "min": -211.0,
+          "std": 91.46137760688934
+        },
+        "1536": {
+          "count": 80,
+          "max": 258.0,
+          "mean": -45.6875,
+          "mean_abs": 98.7375,
+          "median": -34.0,
+          "min": -386.0,
+          "std": 128.6063367169363
+        },
+        "512": {
+          "count": 80,
+          "max": 187.0,
+          "mean": -42.225,
+          "mean_abs": 74.375,
+          "median": -49.0,
+          "min": -217.0,
+          "std": 82.53180826202707
+        }
+      },
+      "correlation_with_q": -0.07591302174606653,
+      "definition": "both_active - A_active_B_dummy - A_dummy_B_active + both_dummy for query_A_then_B",
+      "initial_interpretation": "factorial nonadditivity coordinate requiring matched-arm survival and held-out generalization",
+      "mean_within_q_std": 94.75984420477461,
+      "summary": {
+        "count": 560,
+        "max": 292.0,
+        "mean": -25.098214285714285,
+        "mean_abs": 76.56607142857143,
+        "median": -29.0,
+        "min": -386.0,
+        "std": 98.0445379681227
+      }
+    },
+    "J_query_B_then_A": {
+      "between_q_mean_std": 15.87778579124473,
+      "between_to_within_ratio": 0.16433966773315725,
+      "by_q": {
+        "-1024": {
+          "count": 80,
+          "max": 194.0,
+          "mean": -3.7125,
+          "mean_abs": 61.9375,
+          "median": -6.5,
+          "min": -304.0,
+          "std": 83.65796342100374
+        },
+        "-1536": {
+          "count": 80,
+          "max": 368.0,
+          "mean": 7.6625,
+          "mean_abs": 102.1625,
+          "median": 14.0,
+          "min": -425.0,
+          "std": 139.79538116028726
+        },
+        "-512": {
+          "count": 80,
+          "max": 145.0,
+          "mean": -30.7125,
+          "mean_abs": 69.2375,
+          "median": -31.5,
+          "min": -228.0,
+          "std": 79.7254968234755
+        },
+        "0": {
+          "count": 80,
+          "max": 141.0,
+          "mean": -27.575,
+          "mean_abs": 66.275,
+          "median": -50.0,
+          "min": -169.0,
+          "std": 70.51432035409546
+        },
+        "1024": {
+          "count": 80,
+          "max": 291.0,
+          "mean": -33.725,
+          "mean_abs": 79.775,
+          "median": -29.0,
+          "min": -251.0,
+          "std": 99.81870754022013
+        },
+        "1536": {
+          "count": 80,
+          "max": 318.0,
+          "mean": -30.8625,
+          "mean_abs": 98.2375,
+          "median": -26.5,
+          "min": -323.0,
+          "std": 126.8320487643009
+        },
+        "512": {
+          "count": 80,
+          "max": 180.0,
+          "mean": -37.1,
+          "mean_abs": 68.15,
+          "median": -41.0,
+          "min": -221.0,
+          "std": 75.96571595134215
+        }
+      },
+      "correlation_with_q": -0.12866035487776364,
+      "definition": "both_active - A_active_B_dummy - A_dummy_B_active + both_dummy for query_B_then_A",
+      "initial_interpretation": "factorial nonadditivity coordinate requiring matched-arm survival and held-out generalization",
+      "mean_within_q_std": 96.61566200210359,
+      "summary": {
+        "count": 560,
+        "max": 368.0,
+        "mean": -22.289285714285715,
+        "mean_abs": 77.96785714285714,
+        "median": -24.0,
+        "min": -425.0,
+        "std": 101.03428639853516
+      }
+    },
+    "S_order": {
+      "between_q_mean_std": 14.480039701081623,
+      "between_to_within_ratio": 0.13331543138001906,
+      "by_q": {
+        "-1024": {
+          "count": 80,
+          "max": 7882.0,
+          "mean": 7658.85,
+          "mean_abs": 7658.85,
+          "median": 7678.5,
+          "min": 7280.0,
+          "std": 118.12684919187508
+        },
+        "-1536": {
+          "count": 80,
+          "max": 7848.0,
+          "mean": 7639.575,
+          "mean_abs": 7639.575,
+          "median": 7678.5,
+          "min": 7201.0,
+          "std": 148.2649465484003
+        },
+        "-512": {
+          "count": 80,
+          "max": 7824.0,
+          "mean": 7672.925,
+          "mean_abs": 7672.925,
+          "median": 7676.0,
+          "min": 7407.0,
+          "std": 85.79448918782604
+        },
+        "0": {
+          "count": 80,
+          "max": 7774.0,
+          "mean": 7662.075,
+          "mean_abs": 7662.075,
+          "median": 7673.0,
+          "min": 7520.0,
+          "std": 59.720552366835996
+        },
+        "1024": {
+          "count": 80,
+          "max": 7865.0,
+          "mean": 7647.425,
+          "mean_abs": 7647.425,
+          "median": 7677.5,
+          "min": 7270.0,
+          "std": 128.61364381355503
+        },
+        "1536": {
+          "count": 80,
+          "max": 7891.0,
+          "mean": 7676.85,
+          "mean_abs": 7676.85,
+          "median": 7702.0,
+          "min": 7112.0,
+          "std": 147.63850276943342
+        },
+        "512": {
+          "count": 80,
+          "max": 7832.0,
+          "mean": 7682.1875,
+          "mean_abs": 7682.1875,
+          "median": 7676.5,
+          "min": 7490.0,
+          "std": 72.14518240152977
+        }
+      },
+      "correlation_with_q": 0.06124911546051769,
+      "definition": "dirty_probe_response(query_A_then_B) + dirty_probe_response(query_B_then_A)",
+      "initial_interpretation": "ordered-query magnitude/total coordinate; not automatically an independent operator dimension",
+      "mean_within_q_std": 108.61488089706509,
+      "summary": {
+        "count": 560,
+        "max": 7891.0,
+        "mean": 7662.841071428571,
+        "mean_abs": 7662.841071428571,
+        "median": 7679.5,
+        "min": 7112.0,
+        "std": 114.56433669213637
+      }
+    }
+  },
+  "canonical_audit_digest": "842648cc546e1d0e0a6ff51197d03c796ec542f37046dbfc66b5e6cb9e16202c",
+  "claim_boundary": {
+    "full_tomography_established": false,
+    "nonseparability_established": false,
+    "physical_mechanism_resolved": false,
+    "r2_restoration_resolved": false,
+    "scalar_carrier_baseline_established": true,
+    "scalar_q_readout_confirmed_prospectively": true,
+    "scalar_replay_exclusion_established": false,
+    "small_wall_crossed": false
+  },
+  "decision": {
+    "candidate_found": false,
+    "candidate_observables": [],
+    "prospective_confirmation_contract_required": false,
+    "rationale": "No candidate survived the full retrospective law: ordered and factorial residuals lack a stable preexisting transformation law, matched-null survival, held-out stratum survival, and nonseparability.",
+    "result_class": "FAMILY10H_SECOND_OPERATOR_DIMENSION_UNRESOLVED_RETROSPECTIVE",
+    "scientific_claim": null
+  },
+  "evidence": {
+    "adjudication_result_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
+    "adjudication_scientific_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
+    "archive": {
+      "path": "THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_1_paired_dirty_probe_0\\attempt_1\\ATTEMPT_1_REMOTE_ROOT.tar.gz",
+      "sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+      "size": 2726728
+    },
+    "attempt_path": "THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_carrier_tomography_v1_1_paired_dirty_probe_0\\attempt_1",
+    "failures": [],
+    "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+    "passed": true,
+    "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
+    "sealed_postrun_audit_passed": true,
+    "sealed_summary_digest": "e1c739731555852db87bcbd6a1d75955fbdaa41570bfeae0735fb542485aaaf6",
+    "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda",
+    "validations": {
+      "archive_sha256_matches_bound_identity": true,
+      "archive_size": 2726728,
+      "member_hashes_checked": 23,
+      "member_hashes_passed": true,
+      "packet_schedule_columns_checked": 38,
+      "packet_schedule_mismatches": [],
+      "passed": true,
+      "raw_record_count": 8320,
+      "schedule_hash_receipt": {
+        "canonical_sha256": "84a0eb7c7c6ff170e6499f2f8a2cdb6eb9012047dacfdd520d6f0483514f241a",
+        "json_sha256": "56fb088909d7281d32c07be3a520b8057e2072a351a39c0f19c28ffbab4ef3d5",
+        "schema": "FAMILY10H_CARRIER_TOMOGRAPHY_PUBLIC_SCHEDULE_SHA256_V1",
+        "tsv_sha256": "97d38baa7f9285d5e965d6fcfc3421b2cc666a8a9b4ea36aefc6bf114c4ede0c",
+        "tuple_count": 8320
+      },
+      "schedule_tuple_count": 8320,
+      "source_death_failures": [],
+      "source_death_receipt_count": 8320
+    }
+  },
+  "malformed_packet_regressions": {
+    "archive_sha_mismatch_rejected": true,
+    "passed": true,
+    "record_count_law_rejects_extra_raw_row": true,
+    "record_count_law_rejects_missing_raw_row": true,
+    "required_factorial_cell_law_rejects_missing_arm": true,
+    "required_primary_cell_law_rejects_missing_query_B": true,
+    "tuple_order_law_rejects_reversed_rows": true
+  },
+  "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+  "matched_cell_completeness": {
+    "complete_primary_cells": 560,
+    "factorial_complete_groups": 1120,
+    "factorial_rows": 4480,
+    "failures": [],
+    "passed": true,
+    "primary_cells": 560,
+    "primary_rows": 3360
+  },
+  "permutation_regressions": {
+    "seed": 20260720,
+    "targets": {
+      "D_order": {
+        "observed_abs_corr_with_q": 0.03602813926187753,
+        "observed_between_to_within_ratio": 0.1593990717653054,
+        "observed_exceeds_shuffle_p95_for_both": false,
+        "shuffle_abs_corr_with_q": {
+          "count": 128,
+          "max": 0.10846191681699903,
+          "mean": 0.03566430730672288,
+          "mean_abs": 0.03566430730672288,
+          "median": 0.03078458564326285,
+          "min": 0.00028542609688684585,
+          "std": 0.02324154966805983
+        },
+        "shuffle_between_to_within_ratio": {
+          "count": 128,
+          "max": 0.18795926635645072,
+          "mean": 0.10414299276359018,
+          "mean_abs": 0.10414299276359018,
+          "median": 0.10530927530189041,
+          "min": 0.04169277131446462,
+          "std": 0.029892803790186797
+        }
+      },
+      "J_order": {
+        "observed_abs_corr_with_q": 0.03900157952408043,
+        "observed_between_to_within_ratio": 0.11130515974058418,
+        "observed_exceeds_shuffle_p95_for_both": false,
+        "shuffle_abs_corr_with_q": {
+          "count": 128,
+          "max": 0.13042308691886773,
+          "mean": 0.0379665891306056,
+          "mean_abs": 0.0379665891306056,
+          "median": 0.03430108383983484,
+          "min": 0.000263227758317746,
+          "std": 0.028392308780182327
+        },
+        "shuffle_between_to_within_ratio": {
+          "count": 128,
+          "max": 0.16032289425256802,
+          "mean": 0.09967431677511085,
+          "mean_abs": 0.09967431677511085,
+          "median": 0.10015260336723647,
+          "min": 0.04412486820448498,
+          "std": 0.025997895962948027
+        }
+      },
+      "J_query_A_then_B": {
+        "observed_abs_corr_with_q": 0.07591302174606653,
+        "observed_between_to_within_ratio": 0.15496411018988837,
+        "observed_exceeds_shuffle_p95_for_both": false,
+        "shuffle_abs_corr_with_q": {
+          "count": 128,
+          "max": 0.10504519024002847,
+          "mean": 0.033415494836615364,
+          "mean_abs": 0.033415494836615364,
+          "median": 0.03063021216925321,
+          "min": 0.0004553324241006921,
+          "std": 0.02265601205188351
+        },
+        "shuffle_between_to_within_ratio": {
+          "count": 128,
+          "max": 0.18427782972787685,
+          "mean": 0.10201355626906687,
+          "mean_abs": 0.10201355626906687,
+          "median": 0.10148934138550869,
+          "min": 0.03790157474367614,
+          "std": 0.030694974388887932
+        }
+      },
+      "J_query_B_then_A": {
+        "observed_abs_corr_with_q": 0.12866035487776364,
+        "observed_between_to_within_ratio": 0.16433966773315725,
+        "observed_exceeds_shuffle_p95_for_both": true,
+        "shuffle_abs_corr_with_q": {
+          "count": 128,
+          "max": 0.11627064284131718,
+          "mean": 0.03293406057138201,
+          "mean_abs": 0.03293406057138201,
+          "median": 0.028826847833729317,
+          "min": 7.953452805137445e-05,
+          "std": 0.02380005519915983
+        },
+        "shuffle_between_to_within_ratio": {
+          "count": 128,
+          "max": 0.17510660540120765,
+          "mean": 0.10144367436859653,
+          "mean_abs": 0.10144367436859653,
+          "median": 0.09882536902208067,
+          "min": 0.04278469807657592,
+          "std": 0.02802025524184735
+        }
+      },
+      "S_order": {
+        "observed_abs_corr_with_q": 0.06124911546051769,
+        "observed_between_to_within_ratio": 0.13331543138001906,
+        "observed_exceeds_shuffle_p95_for_both": false,
+        "shuffle_abs_corr_with_q": {
+          "count": 128,
+          "max": 0.11944317897288384,
+          "mean": 0.035412141231038176,
+          "mean_abs": 0.035412141231038176,
+          "median": 0.02806439302370839,
+          "min": 0.002400397959261923,
+          "std": 0.02612182748721337
+        },
+        "shuffle_between_to_within_ratio": {
+          "count": 128,
+          "max": 0.1662586758240201,
+          "mean": 0.09976085659823163,
+          "mean_abs": 0.09976085659823163,
+          "median": 0.09612466853603058,
+          "min": 0.04451201303790178,
+          "std": 0.02621818625698395
+        }
+      }
+    }
+  },
+  "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
+  "scalar_baseline": {
+    "cell_count": 560,
+    "confirmed_result_class_reproduced": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
+    "confirmed_scientific_claim_reproduced": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
+    "nearest_q_classifier_accuracy": 1.0,
+    "observable": "D_single = dirty_probe_response(query_A) - dirty_probe_response(query_B)",
+    "ols": {
+      "intercept": -0.9857142857138292,
+      "r2": 0.9940328492833816,
+      "rmse": 147.66997362258138,
+      "slope": 1.8612688337053558
+    },
+    "q_means": {
+      "-1024": -1904.3,
+      "-1536": -2858.7375,
+      "-512": -956.8625,
+      "0": 1.375,
+      "1024": 1896.675,
+      "1536": 2866.5875,
+      "512": 948.3625
+    }
+  },
+  "schema": "FAMILY10H_OPERATOR_DIMENSION_AUDIT_V1",
+  "secondary_pmu_and_timing_observables": {
+    "fields": {
+      "D_order_cycles": {
+        "between_to_within_by_q": 0.07338036290158544,
+        "correlation_with_q": 0.016927013505147064,
+        "summary": {
+          "count": 560,
+          "max": 225529.0,
+          "mean": -711.9482142857142,
+          "mean_abs": 7202.844642857143,
+          "median": 13.5,
+          "min": -235632.0,
+          "std": 22219.4499021971
+        }
+      },
+      "D_order_duration": {
+        "between_to_within_by_q": 0.15372339833877888,
+        "correlation_with_q": -0.013614247011018429,
+        "summary": {
+          "count": 560,
+          "max": 58108.0,
+          "mean": 135.18035714285713,
+          "mean_abs": 2322.1696428571427,
+          "median": 0.0,
+          "min": -71694.0,
+          "std": 5744.441828968232
+        }
+      },
+      "J_order_cycles": {
+        "between_to_within_by_q": 0.2292040689996557,
+        "correlation_with_q": 0.1767613639936689,
+        "summary": {
+          "count": 560,
+          "max": 318236.0,
+          "mean": -379.4428571428571,
+          "mean_abs": 26102.542857142857,
+          "median": 4.0,
+          "min": -325730.0,
+          "std": 56997.254786746584
+        }
+      },
+      "J_order_duration": {
+        "between_to_within_by_q": 0.13009657089939158,
+        "correlation_with_q": -0.0451994604271072,
+        "summary": {
+          "count": 560,
+          "max": 95415.0,
+          "mean": -228.92142857142858,
+          "mean_abs": 7759.664285714286,
+          "median": 67.5,
+          "min": -109923.0,
+          "std": 14554.278513461186
+        }
+      },
+      "J_query_A_then_B_cycles": {
+        "between_to_within_by_q": 0.14057545519116424,
+        "correlation_with_q": 0.072250946521926,
+        "summary": {
+          "count": 560,
+          "max": 285806.0,
+          "mean": -2789.1803571428572,
+          "mean_abs": 15826.5875,
+          "median": -1479.5,
+          "min": -331811.0,
+          "std": 40262.47302976841
+        }
+      },
+      "J_query_A_then_B_duration": {
+        "between_to_within_by_q": 0.15949003122019662,
+        "correlation_with_q": -0.03148202201872475,
+        "summary": {
+          "count": 560,
+          "max": 88973.0,
+          "mean": -457.5125,
+          "mean_abs": 5054.905357142857,
+          "median": -379.0,
+          "min": -103675.0,
+          "std": 11556.90766025674
+        }
+      },
+      "J_query_B_then_A_cycles": {
+        "between_to_within_by_q": 0.22429787126975567,
+        "correlation_with_q": -0.1703366257672502,
+        "summary": {
+          "count": 560,
+          "max": 290164.0,
+          "mean": -2409.7375,
+          "mean_abs": 16300.3625,
+          "median": -1694.0,
+          "min": -317430.0,
+          "std": 42069.11274664611
+        }
+      },
+      "J_query_B_then_A_duration": {
+        "between_to_within_by_q": 0.08457076144363063,
+        "correlation_with_q": 0.03242167768853937,
+        "summary": {
+          "count": 560,
+          "max": 63036.0,
+          "mean": -228.59107142857144,
+          "mean_abs": 4749.083928571428,
+          "median": -548.0,
+          "min": -96403.0,
+          "std": 9068.337459589366
+        }
+      }
+    },
+    "scope": "secondary PMU and timing observables are diagnostic only; they are not promoted above dirty_probe_response"
+  },
+  "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda",
+  "zero_live_activity_by_this_audit": true
+}
