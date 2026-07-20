@@ -1,0 +1,28 @@
+{
+  "file_count": 4,
+  "files": [
+    {
+      "bytes": 3775,
+      "path": "HELD_OUT_GENERALIZATION_CONTRACT.json",
+      "sha256": "ba91068af9fc7bffbed9384fa78ae3f3b5f47a7afbef1409a698b5bbc4263783"
+    },
+    {
+      "bytes": 4216,
+      "path": "HELD_OUT_GENERALIZATION_EXECUTION_TRACE.json",
+      "sha256": "815ec45e3510bcf40e9972786c3ba1f46f7cc045afdf822b798b23e0b1474d12"
+    },
+    {
+      "bytes": 858,
+      "path": "fixtures/heldout_latch.json",
+      "sha256": "86acd75c08d7e4e673ce0f740ed8934dd94746de98345395029e8a41d432cf60"
+    },
+    {
+      "bytes": 906,
+      "path": "fixtures/reuse_latch.json",
+      "sha256": "75a4510cf9c1cbb121552744f413e88a971e7dcde4fa60006956873e7ebb6542"
+    }
+  ],
+  "fixture_root_sha256": "118759fd454d1c93ff62e8bdfdca6e420f5bf86efa28be2b7b7c191670e25501",
+  "schema": "catalytic_waveform_ising_heldout_manifest_v1",
+  "total_bytes": 9755
+}
