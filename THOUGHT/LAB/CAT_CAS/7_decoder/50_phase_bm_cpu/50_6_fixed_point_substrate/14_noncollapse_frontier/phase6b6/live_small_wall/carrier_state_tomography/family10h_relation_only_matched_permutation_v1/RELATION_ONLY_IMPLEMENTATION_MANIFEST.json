@@ -45,8 +45,8 @@
   "grammar_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
   "live_controller_self_test_passed": false,
   "live_controller_self_test_schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_LIVE_CONTROLLER_SELF_TEST_V1",
-  "manifest_sha256": "4ef8f7ab3542d41e80b2fc2f8981d34b236bd10b270e4e9fadc2b62e31656321",
-  "marginal_equality_proof_sha256": "8b9ba39a1537c16cf318e78e34bc0384dc421daebc07da4ac481d537a8cb7ce9",
+  "manifest_sha256": "698d5906a136c4146a1ee21780cb8f388cd326d1ff92926e0728adb2635cc329",
+  "marginal_equality_proof_sha256": "ab798b7403c9889bb546ac1878f684b6bd7cf955c0917bea957d54047552d107",
   "offline_validate_passed": false,
   "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READINESS_BLOCKED",
   "physical_adjudicator_self_test_sha256": "e64b2a159a347211cfff506f99e6902c20562ec8e3fda1e728b9f1a0b000c9e1",
@@ -93,13 +93,13 @@
       "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
       "size": 111928
     },
-    "runtime_build_sha256": "ea21fa84895859c6f29a9af938e8e390e0e5a6fe9f01883ae742b399f826a345"
+    "runtime_build_sha256": "43efe7a8520e86601645b4157b1acb0e9176638d01012075c222eafe0f115bb6"
   },
   "schedule_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
   "schedule_tuple_count": 32256,
   "schema": "FAMILY10H_RELATION_ONLY_IMPLEMENTATION_MANIFEST_V2",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
-  "self_test_sha256": "1049f216d875981bfd56132a94df9ab7d250de42b2e259a2e11a32288ef2cb07",
+  "self_test_sha256": "49468b77d3d4ad60a17e411117fcf467ae252e62b2253ca7e79bb457527307a0",
   "source_hashes": {
     "files": {
       "RELATION_ONLY_CONTRACT.md": {
@@ -131,8 +131,8 @@
         "size": 2239
       },
       "relation_only_target.py": {
-        "sha256": "6b9b4ad2ebdcf3c8373906887e69540a011bea092b40621aae3365cf5e981fe3",
-        "size": 67214
+        "sha256": "0b874bb60e5ba4f842b8bf9c5d3c4d11c2ab0b7caa17010e94157470038e10b7",
+        "size": 67651
       },
       "run_relation_only_matched_permutation.py": {
         "sha256": "81d238c023628b540c46df70320fa0e90586181769a0049d946aeb53fea165bd",
@@ -173,7 +173,7 @@
       "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
       "size": 111928
     },
-    "runtime_build_receipt_sha256": "574859ba6fb39db076f2066f944ca9f5627e20fb9c498bfd0b167a684a02fcd5",
+    "runtime_build_receipt_sha256": "9698a9efc967afcef1f5b7ffae61d524e223373aa8570861ffefe48801a1d08d",
     "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V2",
     "science_package_id": "family10h_relation_only_matched_permutation_v1",
     "source_bundle": {
@@ -189,7 +189,7 @@
         "run_relation_only_matched_permutation.py"
       ],
       "path": "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
-      "sha256": "46cd68540f42b54885f595b75fe9ddf861bb902259151ca8e1c94a127ad6f482"
+      "sha256": "6fd1b5b8046a958d11a90fd676dfcd283118d0ac4b638d392ab1ddd4a50f5e6d"
     }
   },
   "target_self_test_passed": false,

@@ -16,6 +16,7 @@ import os
 import re
 import shutil
 import subprocess
+import tempfile
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterator
@@ -1206,64 +1207,71 @@ def write_deployment_custody(path: Path, source_root: Path, freeze_commit: str =
 def run_physical_preflight_mock_suite(source_root: Path, parent: Path) -> dict[str, Any]:
     output_root = parent / "physical_preflight_attempt"
     base = base_physical_mock(source_root, output_root)
-    custody_path = parent / pub.DEPLOYMENT_CUSTODY_FILENAME
-    write_deployment_custody(custody_path, source_root)
-
-    def run_case(candidate_root: Path, observed: dict[str, Any], env_override: dict[str, str | None] | None = None) -> dict[str, Any]:
-        mock_path = parent / f"physical_mock_{len(results)}.json"
-        write_fixture(mock_path, observed)
-        env = {
-            **target_authority_env(source_root, None, synthetic=True),
-            PREFLIGHT_SYSTEM_MOCK_ENV: str(mock_path),
-            DEPLOYMENT_CUSTODY_ENV: str(custody_path),
-            **(env_override or {}),
-        }
-        with temporary_env(env):
-            return target_preflight(source_root, candidate_root, None)
-
-    cases: dict[str, tuple[str | None, dict[str, Any], dict[str, str | None] | None]] = {
-        "complete_physical_mock": (None, base, None),
-        "wrong_cpu_family": ("cpu_vendor_family_model", {**base, "cpu": {**base["cpu"], "family": 15}}, None),
-        "failed_cpu_pinning": ("operational_pinning_capability", {**base, "cpu": {**base["cpu"], "operational_pinning": False}}, None),
-        "pmu_event_mismatch": ("pmu_event_identities", {**base, "pmu": {**base["pmu"], "events": {}}}, None),
-        "grouped_pmu_failure": ("grouped_pmu_open_capability", {**base, "pmu": {**base["pmu"], "grouped_open_capability": False}}, None),
-        "sensor_mismatch": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "identity_sha256": "0" * 64}}, None),
-        "policy_mismatch": ("cpu_frequency_policy_custody", {**base, "frequency_policy": {**base["frequency_policy"], "policy_locked": False}}, None),
-        "invalid_owner_marker": ("attempt_ownership_marker", {**base, "attempt": {**base["attempt"], "owner_marker": "wrong-owner"}}, None),
-        "old_scalar_source_commit_rejected": ("source_authority_commit_binding", base, {SOURCE_AUTHORITY_ENV: pub.SCALAR_EVIDENCE_SOURCE_AUTHORITY_COMMIT}),
-        "old_scalar_freeze_commit_rejected": ("freeze_commit_binding", base, {FREEZE_COMMIT_ENV: pub.SCALAR_EVIDENCE_MANIFEST_FREEZE_COMMIT}),
-    }
     results: dict[str, Any] = {}
-    for label, (expected_failure, observed, env_override) in cases.items():
-        result = run_case(output_root, observed, env_override)
-        if expected_failure is None:
-            passed = result["passed"] and result.get("preflight_backend") == "physical_observed"
-        else:
-            passed = not result["passed"] and expected_failure in result["failures"]
-        results[label] = {
-            "passed": passed,
-            "expected_failure": expected_failure,
+
+    with tempfile.TemporaryDirectory(
+        prefix="relation_only_physical_preflight_",
+        dir="C:/tmp" if os.name == "nt" else None,
+    ) as scratch_text:
+        scratch = Path(scratch_text)
+        custody_path = scratch / pub.DEPLOYMENT_CUSTODY_FILENAME
+        write_deployment_custody(custody_path, source_root)
+
+        def run_case(candidate_root: Path, observed: dict[str, Any], env_override: dict[str, str | None] | None = None) -> dict[str, Any]:
+            mock_path = scratch / f"physical_mock_{len(results)}.json"
+            write_fixture(mock_path, observed)
+            env = {
+                **target_authority_env(source_root, None, synthetic=True),
+                PREFLIGHT_SYSTEM_MOCK_ENV: str(mock_path),
+                DEPLOYMENT_CUSTODY_ENV: str(custody_path),
+                **(env_override or {}),
+            }
+            with temporary_env(env):
+                return target_preflight(source_root, candidate_root, None)
+
+        cases: dict[str, tuple[str | None, dict[str, Any], dict[str, str | None] | None]] = {
+            "complete_physical_mock": (None, base, None),
+            "wrong_cpu_family": ("cpu_vendor_family_model", {**base, "cpu": {**base["cpu"], "family": 15}}, None),
+            "failed_cpu_pinning": ("operational_pinning_capability", {**base, "cpu": {**base["cpu"], "operational_pinning": False}}, None),
+            "pmu_event_mismatch": ("pmu_event_identities", {**base, "pmu": {**base["pmu"], "events": {}}}, None),
+            "grouped_pmu_failure": ("grouped_pmu_open_capability", {**base, "pmu": {**base["pmu"], "grouped_open_capability": False}}, None),
+            "sensor_mismatch": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "identity_sha256": "0" * 64}}, None),
+            "policy_mismatch": ("cpu_frequency_policy_custody", {**base, "frequency_policy": {**base["frequency_policy"], "policy_locked": False}}, None),
+            "invalid_owner_marker": ("attempt_ownership_marker", {**base, "attempt": {**base["attempt"], "owner_marker": "wrong-owner"}}, None),
+            "old_scalar_source_commit_rejected": ("source_authority_commit_binding", base, {SOURCE_AUTHORITY_ENV: pub.SCALAR_EVIDENCE_SOURCE_AUTHORITY_COMMIT}),
+            "old_scalar_freeze_commit_rejected": ("freeze_commit_binding", base, {FREEZE_COMMIT_ENV: pub.SCALAR_EVIDENCE_MANIFEST_FREEZE_COMMIT}),
+        }
+
+        for label, (expected_failure, observed, env_override) in cases.items():
+            result = run_case(output_root, observed, env_override)
+            if expected_failure is None:
+                passed = result["passed"] and result.get("preflight_backend") == "physical_observed"
+            else:
+                passed = not result["passed"] and expected_failure in result["failures"]
+            results[label] = {
+                "passed": passed,
+                "expected_failure": expected_failure,
+                "status": result["status"],
+                "failures": result["failures"],
+            }
+
+        preexisting = parent / "physical_preexisting_attempt"
+        preexisting.mkdir()
+        result = run_case(preexisting, {**base, "output": {**base["output"], "root": str(preexisting)}})
+        results["preexisting_output_root"] = {
+            "passed": not result["passed"] and "output_root_absence" in result["failures"],
+            "expected_failure": "output_root_absence",
             "status": result["status"],
             "failures": result["failures"],
         }
-
-    preexisting = parent / "physical_preexisting_attempt"
-    preexisting.mkdir()
-    result = run_case(preexisting, {**base, "output": {**base["output"], "root": str(preexisting)}})
-    results["preexisting_output_root"] = {
-        "passed": not result["passed"] and "output_root_absence" in result["failures"],
-        "expected_failure": "output_root_absence",
-        "status": result["status"],
-        "failures": result["failures"],
-    }
-    escaped = source_root / "physical_escape_attempt"
-    result = run_case(escaped, {**base, "output": {**base["output"], "root": str(escaped)}})
-    results["output_path_escape"] = {
-        "passed": not result["passed"] and "output_root_absence" in result["failures"],
-        "expected_failure": "output_root_absence",
-        "status": result["status"],
-        "failures": result["failures"],
-    }
+        escaped = source_root / "physical_escape_attempt"
+        result = run_case(escaped, {**base, "output": {**base["output"], "root": str(escaped)}})
+        results["output_path_escape"] = {
+            "passed": not result["passed"] and "output_root_absence" in result["failures"],
+            "expected_failure": "output_root_absence",
+            "status": result["status"],
+            "failures": result["failures"],
+        }
     return {
         "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_PREFLIGHT_MOCK_SUITE_V1",
         "results": results,
