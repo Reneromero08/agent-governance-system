@@ -131,7 +131,7 @@
     }
   },
   "live_controller_summary": {
-    "passed": false,
+    "passed": true,
     "physical_pmu_acquisition_count": 0,
     "target_contact_count": 0
   },
@@ -482,7 +482,7 @@
       }
     }
   },
-  "passed": false,
+  "passed": true,
   "physical_adjudicator_summary": {
     "negative_results": {
       "distance_only": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
@@ -558,10 +558,10 @@
     "tuple_count": 32256
   },
   "schema": "FAMILY10H_RELATION_ONLY_SELF_TEST_V2",
-  "self_test_sha256": "49468b77d3d4ad60a17e411117fcf467ae252e62b2253ca7e79bb457527307a0",
+  "self_test_sha256": "e2792c1866192f6c626020bb09e0aeccb61ba6bf494e802ccf58764b434ed1d0",
   "target_self_test_summary": {
     "live_invocation_count": 0,
-    "passed": false,
+    "passed": true,
     "pmu_acquisition_count": 0
   },
   "tests": {
@@ -573,16 +573,16 @@
     "no_offline_physical_claim": true,
     "origin_specific_artifact_rejected": true,
     "physical_adjudicator_self_test_passed": true,
-    "physical_preflight_mock_suite_passed": false,
+    "physical_preflight_mock_suite_passed": true,
     "route_pressure_adversary_rejected": true,
     "runtime_compile_and_self_test_passed": true,
     "scalar_replay_adversary_rejected": true,
     "schedule_validation_passed": true,
     "separable_replay_adversary_rejected": true,
     "small_wall_not_crossed": true,
-    "synthetic_live_controller_passed": false,
+    "synthetic_live_controller_passed": true,
     "synthetic_positive_fixture_detected": true,
-    "target_self_test_passed": false,
+    "target_self_test_passed": true,
     "true_heldout_transport_passed": true
   },
   "transport_summary": {

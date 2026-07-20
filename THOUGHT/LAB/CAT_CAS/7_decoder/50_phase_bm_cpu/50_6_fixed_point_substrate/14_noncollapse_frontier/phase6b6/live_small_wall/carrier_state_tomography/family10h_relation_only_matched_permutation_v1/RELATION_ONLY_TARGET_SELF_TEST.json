@@ -15,27 +15,27 @@
       },
       "freeze_commit_mismatch": {
         "passed": true,
-        "reason": "target preflight failed: source_authority_commit_binding,freeze_commit_binding,manifest_file_hash,source_root_identity,grammar_hash,compact_schedule_manifest_binding,expanded_schedule_tsv_hash,runtime_binary_hash,runtime_binary_format_and_abi,source_bundle_hash,source_file_hashes"
+        "reason": "target preflight failed: freeze_commit_binding"
       },
       "manifest_hash_mismatch": {
         "passed": true,
-        "reason": "target preflight failed: source_authority_commit_binding,manifest_file_hash,source_root_identity,grammar_hash,compact_schedule_manifest_binding,expanded_schedule_tsv_hash,runtime_binary_hash,runtime_binary_format_and_abi,source_bundle_hash,source_file_hashes"
+        "reason": "target preflight failed: manifest_file_hash"
       },
       "old_scalar_freeze_commit_substitution": {
         "passed": true,
-        "reason": "target preflight failed: source_authority_commit_binding,freeze_commit_binding,relation_freeze_authority_not_scalar,manifest_file_hash,source_root_identity,grammar_hash,compact_schedule_manifest_binding,expanded_schedule_tsv_hash,runtime_binary_hash,runtime_binary_format_and_abi,source_bundle_hash,source_file_hashes"
+        "reason": "target preflight failed: freeze_commit_binding,relation_freeze_authority_not_scalar"
       },
       "old_scalar_source_commit_substitution": {
         "passed": true,
-        "reason": "target preflight failed: source_authority_commit_binding,manifest_file_hash,source_root_identity,grammar_hash,compact_schedule_manifest_binding,expanded_schedule_tsv_hash,runtime_binary_hash,runtime_binary_format_and_abi,source_bundle_hash,source_file_hashes"
+        "reason": "target preflight failed: source_authority_commit_binding"
       },
       "source_authority_mismatch": {
         "passed": true,
-        "reason": "target preflight failed: source_authority_commit_binding,manifest_file_hash,source_root_identity,grammar_hash,compact_schedule_manifest_binding,expanded_schedule_tsv_hash,runtime_binary_hash,runtime_binary_format_and_abi,source_bundle_hash,source_file_hashes"
+        "reason": "target preflight failed: source_authority_commit_binding"
       },
       "wrong_authority": {
         "passed": true,
-        "reason": "target preflight failed: live_authority,source_authority_commit_binding,manifest_file_hash,source_root_identity,grammar_hash,compact_schedule_manifest_binding,expanded_schedule_tsv_hash,runtime_binary_hash,runtime_binary_format_and_abi,source_bundle_hash,source_file_hashes"
+        "reason": "target preflight failed: live_authority"
       }
     }
   },
@@ -51,7 +51,7 @@
   "maximum_future_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_CONFIRMED",
   "offline_only": true,
   "physical_preflight_mock_suite": {
-    "passed": false,
+    "passed": true,
     "pmu_preflight_behavior": {
       "disabled_group_open_close_only": true,
       "pmu_acquisition_count": 0,
@@ -60,34 +60,13 @@
     "results": {
       "complete_physical_mock": {
         "expected_failure": null,
-        "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes"
-        ],
-        "passed": false,
-        "status": "TARGET_PREFLIGHT_FAILED"
+        "failures": [],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_PASSED"
       },
       "failed_cpu_pinning": {
         "expected_failure": "operational_pinning_capability",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "operational_pinning_capability"
         ],
         "passed": true,
@@ -96,16 +75,6 @@
       "grouped_pmu_failure": {
         "expected_failure": "grouped_pmu_open_capability",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "grouped_pmu_open_capability"
         ],
         "passed": true,
@@ -114,16 +83,6 @@
       "invalid_owner_marker": {
         "expected_failure": "attempt_ownership_marker",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "attempt_ownership_marker"
         ],
         "passed": true,
@@ -132,19 +91,9 @@
       "old_scalar_freeze_commit_rejected": {
         "expected_failure": "freeze_commit_binding",
         "failures": [
-          "source_authority_commit_binding",
           "freeze_commit_binding",
           "relation_freeze_authority_not_scalar",
-          "deployment_custody_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes"
+          "deployment_custody_binding"
         ],
         "passed": true,
         "status": "TARGET_PREFLIGHT_FAILED"
@@ -152,16 +101,7 @@
       "old_scalar_source_commit_rejected": {
         "expected_failure": "source_authority_commit_binding",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes"
+          "source_authority_commit_binding"
         ],
         "passed": true,
         "status": "TARGET_PREFLIGHT_FAILED"
@@ -169,16 +109,6 @@
       "output_path_escape": {
         "expected_failure": "output_root_absence",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "output_root_absence"
         ],
         "passed": true,
@@ -187,16 +117,6 @@
       "pmu_event_mismatch": {
         "expected_failure": "pmu_event_identities",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "pmu_event_identities"
         ],
         "passed": true,
@@ -205,16 +125,6 @@
       "policy_mismatch": {
         "expected_failure": "cpu_frequency_policy_custody",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "cpu_frequency_policy_custody"
         ],
         "passed": true,
@@ -223,16 +133,6 @@
       "preexisting_output_root": {
         "expected_failure": "output_root_absence",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "output_root_absence"
         ],
         "passed": true,
@@ -241,16 +141,6 @@
       "sensor_mismatch": {
         "expected_failure": "temperature_sensor_authority",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "temperature_sensor_authority"
         ],
         "passed": true,
@@ -259,16 +149,6 @@
       "wrong_cpu_family": {
         "expected_failure": "cpu_vendor_family_model",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "cpu_vendor_family_model"
         ],
         "passed": true,
@@ -290,28 +170,68 @@
   },
   "schema": "FAMILY10H_RELATION_ONLY_TARGET_SELF_TEST_V2",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
-  "self_test_passed": false,
-  "self_test_sha256": "b880663d42bc142db72d29144b23caf721187bce97e1912410598bdaa7a1ab25",
+  "self_test_passed": true,
+  "self_test_sha256": "2a51d4aedb7a959b90b5c68a5b9ffaa5bf99e535ecc136b1ee132f23add78fbb",
   "sensor_inventory_count": 0,
   "small_wall_crossed": false,
   "source_root_validation": {
-    "failures": [
-      "relation source authority missing or invalid for build-ready package"
-    ],
-    "passed": false,
+    "failures": [],
+    "passed": true,
     "required_file_count": 23
   },
   "stderr": "",
-  "subprocess_returncode": 1,
+  "subprocess_returncode": 0,
   "synthetic_target_wrapper_execution": {
+    "duplicate_invocation_refusal": {
+      "passed": true,
+      "reason": "target preflight failed: output_root_absence"
+    },
+    "feature_freeze": {
+      "physical_measurement": false,
+      "post_observation_feature_selection": false,
+      "primary_endpoint": "dirty_probe_response",
+      "raw_record_count": 32256,
+      "schedule_path": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/RELATION_ONLY_PUBLIC_SCHEDULE.tsv",
+      "schedule_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
+      "schema": "FAMILY10H_RELATION_ONLY_FEATURE_FREEZE_V1",
+      "secondary_endpoints": [
+        "change_to_dirty",
+        "cpu_cycles",
+        "duration_ns"
+      ]
+    },
+    "launch_mode": "wsl_linux_binary",
     "live_invocation_count": 0,
     "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_only_matched_permutation_v1\\_relation_only_owned_outputs\\synthetic_target_wrapper_attempt",
-    "passed": false,
+    "passed": true,
     "physical_measurement": false,
     "pmu_acquisition_count": 0,
+    "pmu_open_count": 0,
     "positive_physical_claim": false,
     "preflight": {
-      "artifact_identity": {},
+      "artifact_identity": {
+        "grammar_canonical_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
+        "grammar_file_sha256": "c0ef84e5d37670a0c6a3cbe48139aa4f46ac344dbb27f6649505ec859359eff2",
+        "manifest_canonical_sha256": "ebd28b330c99cd97845b472cbcafc3403f8d8020174f29e8fb257e767a8a55f9",
+        "manifest_file_sha256": "eb53a697c7d3ef9b99a67f43f825c1c35e394fe1cbe9a08ab611caeaceb7b0ab",
+        "runtime_binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
+        "runtime_binary_sha256": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
+        "schedule_canonical_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
+        "schedule_manifest_sha256": "a7f575bc5ac8ef6e8b4ca4080c01e4a5efd992fd651f70ab1dde8ddc42c57a83",
+        "schedule_tsv_sha256": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
+        "source_bundle_sha256": "6fd1b5b8046a958d11a90fd676dfcd283118d0ac4b638d392ab1ddd4a50f5e6d",
+        "source_file_hashes": {
+          "RELATION_ONLY_CONTRACT.md": "348b576cbc2bf38c1bc7c338609174c3aa02e95993098b535de10492bac0eb33",
+          "relation_only_adjudication.py": "c5c268adb4a4ed7666ebabc524be4de6ca34a86a977e86898eaa69dfc9012dd1",
+          "relation_only_live_controller.py": "d3f90edcfbeeba18c40f2a96fe21b00618f936eec131d5c3fb7d138b3957a8fc",
+          "relation_only_physical_adjudication.py": "e61c7e8acd89da2516a0aaf3f1c75f1f4632de1b8c7724cc40c4ceae0f19c959",
+          "relation_only_public.py": "5719a1076958643034d984ec3fae9eae96cd2c1aa35e364a4e4c964278fa8959",
+          "relation_only_runtime.c": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
+          "relation_only_runtime.h": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
+          "relation_only_target.py": "0b874bb60e5ba4f842b8bf9c5d3c4d11c2ab0b7caa17010e94157470038e10b7",
+          "run_relation_only_matched_permutation.py": "81d238c023628b540c46df70320fa0e90586181769a0049d946aeb53fea165bd"
+        }
+      },
       "checks": {
         "actual_physical_geometry_status": {
           "detail": {
@@ -331,14 +251,14 @@
           "passed": true
         },
         "canonical_manifest_digest": {
-          "detail": "04579711f43b245cf4684dec91c7ef49415984e7c220d70814d145ab76347967",
+          "detail": "ebd28b330c99cd97845b472cbcafc3403f8d8020174f29e8fb257e767a8a55f9",
           "name": "canonical_manifest_digest",
           "passed": true
         },
         "compact_schedule_manifest_binding": {
           "detail": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
           "name": "compact_schedule_manifest_binding",
-          "passed": false
+          "passed": true
         },
         "cpu_frequency_policy_custody": {
           "detail": {
@@ -371,7 +291,7 @@
         "expanded_schedule_tsv_hash": {
           "detail": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
           "name": "expanded_schedule_tsv_hash",
-          "passed": false
+          "passed": true
         },
         "freeze_commit_binding": {
           "detail": {
@@ -385,7 +305,7 @@
         "grammar_hash": {
           "detail": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
           "name": "grammar_hash",
-          "passed": false
+          "passed": true
         },
         "grouped_pmu_open_capability": {
           "detail": {
@@ -415,12 +335,12 @@
         },
         "manifest_file_hash": {
           "detail": {
-            "env": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
-            "expected": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
+            "env": "eb53a697c7d3ef9b99a67f43f825c1c35e394fe1cbe9a08ab611caeaceb7b0ab",
+            "expected": "eb53a697c7d3ef9b99a67f43f825c1c35e394fe1cbe9a08ab611caeaceb7b0ab",
             "observed_backend": "fixture"
           },
           "name": "manifest_file_hash",
-          "passed": false
+          "passed": true
         },
         "operational_pinning_capability": {
           "detail": {
@@ -475,44 +395,54 @@
           "passed": true
         },
         "relation_source_authority_not_scalar": {
-          "detail": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
+          "detail": "1094d3b3c613558dd31ec297ad95ef927a1e06db",
           "name": "relation_source_authority_not_scalar",
           "passed": true
         },
         "runtime_binary_format_and_abi": {
           "detail": {
-            "format": "",
+            "format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
             "required": [
               "ELF 64-bit",
               "x86-64"
             ]
           },
           "name": "runtime_binary_format_and_abi",
-          "passed": false
+          "passed": true
         },
         "runtime_binary_hash": {
           "detail": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
           "name": "runtime_binary_hash",
-          "passed": false
+          "passed": true
         },
         "source_authority_commit_binding": {
           "detail": {
-            "env": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
-            "expected": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
+            "env": "1094d3b3c613558dd31ec297ad95ef927a1e06db",
+            "expected": "1094d3b3c613558dd31ec297ad95ef927a1e06db",
             "observed_backend": "fixture"
           },
           "name": "source_authority_commit_binding",
-          "passed": false
+          "passed": true
         },
         "source_bundle_hash": {
           "detail": "6fd1b5b8046a958d11a90fd676dfcd283118d0ac4b638d392ab1ddd4a50f5e6d",
           "name": "source_bundle_hash",
-          "passed": false
+          "passed": true
         },
         "source_file_hashes": {
-          "detail": null,
+          "detail": {
+            "RELATION_ONLY_CONTRACT.md": "348b576cbc2bf38c1bc7c338609174c3aa02e95993098b535de10492bac0eb33",
+            "relation_only_adjudication.py": "c5c268adb4a4ed7666ebabc524be4de6ca34a86a977e86898eaa69dfc9012dd1",
+            "relation_only_live_controller.py": "d3f90edcfbeeba18c40f2a96fe21b00618f936eec131d5c3fb7d138b3957a8fc",
+            "relation_only_physical_adjudication.py": "e61c7e8acd89da2516a0aaf3f1c75f1f4632de1b8c7724cc40c4ceae0f19c959",
+            "relation_only_public.py": "5719a1076958643034d984ec3fae9eae96cd2c1aa35e364a4e4c964278fa8959",
+            "relation_only_runtime.c": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
+            "relation_only_runtime.h": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
+            "relation_only_target.py": "0b874bb60e5ba4f842b8bf9c5d3c4d11c2ab0b7caa17010e94157470038e10b7",
+            "run_relation_only_matched_permutation.py": "81d238c023628b540c46df70320fa0e90586181769a0049d946aeb53fea165bd"
+          },
           "name": "source_file_hashes",
-          "passed": false
+          "passed": true
         },
         "source_receiver_cpu_identity": {
           "detail": {
@@ -530,14 +460,12 @@
         },
         "source_root_identity": {
           "detail": {
-            "failures": [
-              "relation source authority missing or invalid for build-ready package"
-            ],
-            "passed": false,
+            "failures": [],
+            "passed": true,
             "required_file_count": 23
           },
           "name": "source_root_identity",
-          "passed": false
+          "passed": true
         },
         "temperature_sensor_authority": {
           "detail": {
@@ -556,21 +484,10 @@
           "passed": true
         }
       },
-      "failures": [
-        "source_authority_commit_binding",
-        "manifest_file_hash",
-        "source_root_identity",
-        "grammar_hash",
-        "compact_schedule_manifest_binding",
-        "expanded_schedule_tsv_hash",
-        "runtime_binary_hash",
-        "runtime_binary_format_and_abi",
-        "source_bundle_hash",
-        "source_file_hashes"
-      ],
+      "failures": [],
       "live_invocation_count": 0,
       "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_only_matched_permutation_v1\\_relation_only_owned_outputs\\synthetic_target_wrapper_attempt",
-      "passed": false,
+      "passed": true,
       "physical_observation": null,
       "pmu_acquisition_count": 0,
       "pmu_open_count": 0,
@@ -578,51 +495,47 @@
       "schema": "FAMILY10H_RELATION_ONLY_TARGET_PREFLIGHT_V2",
       "sensor_inventory_count": 0,
       "small_wall_crossed": false,
-      "status": "TARGET_PREFLIGHT_FAILED",
+      "status": "TARGET_PREFLIGHT_PASSED",
       "target_contact_count": 0
     },
-    "reason": "target preflight failed: source_authority_commit_binding,manifest_file_hash,source_root_identity,grammar_hash,compact_schedule_manifest_binding,expanded_schedule_tsv_hash,runtime_binary_hash,runtime_binary_format_and_abi,source_bundle_hash,source_file_hashes",
+    "raw_record_count": 32256,
+    "returncode": 0,
+    "runtime_execution_receipt": {
+      "feature_freeze_written": true,
+      "live_activity": false,
+      "physical_measurement": false,
+      "pmu_opened": false,
+      "raw_record_count": 32256,
+      "returncode": 0,
+      "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_EXECUTOR_PACKET_V1",
+      "small_wall_crossed": false,
+      "source_death_receipt_count": 32256,
+      "status": "complete"
+    },
+    "runtime_mode": "--synthetic-execute-schedule",
     "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_TARGET_WRAPPER_EXECUTION_V1",
     "scientific_claim_emitted": false,
     "sensor_inventory_count": 0,
     "small_wall_crossed": false,
-    "status": "TARGET_WRAPPER_EXECUTION_REFUSED",
+    "source_death_receipt_count": 32256,
+    "status": "TARGET_WRAPPER_EXECUTION_COMPLETE",
+    "stderr": "",
+    "stdout": "",
     "target_contact_count": 0
   },
   "target_contact_count": 0,
   "target_preflight_fixture_suite": {
-    "passed": false,
+    "passed": true,
     "results": {
       "complete_passing_fixture": {
         "expected_failure": null,
-        "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes"
-        ],
-        "passed": false,
-        "status": "TARGET_PREFLIGHT_FAILED"
+        "failures": [],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_PASSED"
       },
       "failed_operational_pinning": {
         "expected_failure": "operational_pinning_capability",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "operational_pinning_capability"
         ],
         "passed": true,
@@ -631,16 +544,6 @@
       "grouped_pmu_failure": {
         "expected_failure": "grouped_pmu_open_capability",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "grouped_pmu_open_capability"
         ],
         "passed": true,
@@ -648,16 +551,6 @@
       },
       "malformed_output_path": {
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "output_root_absence"
         ],
         "passed": true,
@@ -665,16 +558,6 @@
       },
       "missing_parent": {
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "output_root_absence"
         ],
         "passed": true,
@@ -683,16 +566,6 @@
       "missing_receiver_cpu": {
         "expected_failure": "source_receiver_cpu_identity",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "source_receiver_cpu_identity"
         ],
         "passed": true,
@@ -701,16 +574,6 @@
       "missing_source_cpu": {
         "expected_failure": "source_receiver_cpu_identity",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "source_receiver_cpu_identity"
         ],
         "passed": true,
@@ -718,16 +581,6 @@
       },
       "output_path_escape": {
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "output_root_absence"
         ],
         "passed": true,
@@ -736,16 +589,6 @@
       "owner_marker_mismatch": {
         "expected_failure": "attempt_ownership_marker",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "attempt_ownership_marker"
         ],
         "passed": true,
@@ -753,16 +596,6 @@
       },
       "partial_output": {
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "output_root_absence"
         ],
         "passed": true,
@@ -771,16 +604,6 @@
       "permission_failure": {
         "expected_failure": "output_root_absence",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "output_root_absence"
         ],
         "passed": true,
@@ -789,16 +612,6 @@
       "policy_mismatch": {
         "expected_failure": "cpu_frequency_policy_custody",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "cpu_frequency_policy_custody"
         ],
         "passed": true,
@@ -806,16 +619,6 @@
       },
       "preexisting_output_root": {
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "output_root_absence"
         ],
         "passed": true,
@@ -824,16 +627,6 @@
       "sensor_identity_mismatch": {
         "expected_failure": "temperature_sensor_authority",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "temperature_sensor_authority"
         ],
         "passed": true,
@@ -842,16 +635,6 @@
       "unavailable_pmu_event": {
         "expected_failure": "pmu_event_identities",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "pmu_event_identities"
         ],
         "passed": true,
@@ -859,34 +642,14 @@
       },
       "unresolved_physical_geometry_lowered": {
         "expected_failure": null,
-        "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes"
-        ],
-        "passed": false,
-        "status": "TARGET_PREFLIGHT_FAILED"
+        "failures": [],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_PASSED"
       },
       "wrong_binary_hash": {
         "expected_failure": "runtime_binary_hash",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes"
+          "runtime_binary_hash"
         ],
         "passed": true,
         "status": "TARGET_PREFLIGHT_FAILED"
@@ -894,16 +657,6 @@
       "wrong_cpu_family": {
         "expected_failure": "cpu_vendor_family_model",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes",
           "cpu_vendor_family_model"
         ],
         "passed": true,
@@ -912,16 +665,7 @@
       "wrong_manifest_hash": {
         "expected_failure": "manifest_file_hash",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes"
+          "manifest_file_hash"
         ],
         "passed": true,
         "status": "TARGET_PREFLIGHT_FAILED"
@@ -929,16 +673,7 @@
       "wrong_schedule_hash": {
         "expected_failure": "expanded_schedule_tsv_hash",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes"
+          "expanded_schedule_tsv_hash"
         ],
         "passed": true,
         "status": "TARGET_PREFLIGHT_FAILED"
@@ -946,16 +681,7 @@
       "wrong_source_authority_commit": {
         "expected_failure": "source_authority_commit_binding",
         "failures": [
-          "source_authority_commit_binding",
-          "manifest_file_hash",
-          "source_root_identity",
-          "grammar_hash",
-          "compact_schedule_manifest_binding",
-          "expanded_schedule_tsv_hash",
-          "runtime_binary_hash",
-          "runtime_binary_format_and_abi",
-          "source_bundle_hash",
-          "source_file_hashes"
+          "source_authority_commit_binding"
         ],
         "passed": true,
         "status": "TARGET_PREFLIGHT_FAILED"
@@ -964,7 +690,29 @@
     "schema": "FAMILY10H_RELATION_ONLY_TARGET_PREFLIGHT_FIXTURE_SUITE_V1"
   },
   "target_preflight_refuses_without_authority": {
-    "artifact_identity": {},
+    "artifact_identity": {
+      "grammar_canonical_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
+      "grammar_file_sha256": "c0ef84e5d37670a0c6a3cbe48139aa4f46ac344dbb27f6649505ec859359eff2",
+      "manifest_canonical_sha256": "ebd28b330c99cd97845b472cbcafc3403f8d8020174f29e8fb257e767a8a55f9",
+      "manifest_file_sha256": "eb53a697c7d3ef9b99a67f43f825c1c35e394fe1cbe9a08ab611caeaceb7b0ab",
+      "runtime_binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "runtime_binary_sha256": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
+      "schedule_canonical_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
+      "schedule_manifest_sha256": "a7f575bc5ac8ef6e8b4ca4080c01e4a5efd992fd651f70ab1dde8ddc42c57a83",
+      "schedule_tsv_sha256": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
+      "source_bundle_sha256": "6fd1b5b8046a958d11a90fd676dfcd283118d0ac4b638d392ab1ddd4a50f5e6d",
+      "source_file_hashes": {
+        "RELATION_ONLY_CONTRACT.md": "348b576cbc2bf38c1bc7c338609174c3aa02e95993098b535de10492bac0eb33",
+        "relation_only_adjudication.py": "c5c268adb4a4ed7666ebabc524be4de6ca34a86a977e86898eaa69dfc9012dd1",
+        "relation_only_live_controller.py": "d3f90edcfbeeba18c40f2a96fe21b00618f936eec131d5c3fb7d138b3957a8fc",
+        "relation_only_physical_adjudication.py": "e61c7e8acd89da2516a0aaf3f1c75f1f4632de1b8c7724cc40c4ceae0f19c959",
+        "relation_only_public.py": "5719a1076958643034d984ec3fae9eae96cd2c1aa35e364a4e4c964278fa8959",
+        "relation_only_runtime.c": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
+        "relation_only_runtime.h": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
+        "relation_only_target.py": "0b874bb60e5ba4f842b8bf9c5d3c4d11c2ab0b7caa17010e94157470038e10b7",
+        "run_relation_only_matched_permutation.py": "81d238c023628b540c46df70320fa0e90586181769a0049d946aeb53fea165bd"
+      }
+    },
     "checks": {
       "actual_physical_geometry_status": {
         "detail": {
@@ -984,14 +732,14 @@
         "passed": true
       },
       "canonical_manifest_digest": {
-        "detail": "04579711f43b245cf4684dec91c7ef49415984e7c220d70814d145ab76347967",
+        "detail": "ebd28b330c99cd97845b472cbcafc3403f8d8020174f29e8fb257e767a8a55f9",
         "name": "canonical_manifest_digest",
         "passed": true
       },
       "compact_schedule_manifest_binding": {
         "detail": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
         "name": "compact_schedule_manifest_binding",
-        "passed": false
+        "passed": true
       },
       "cpu_frequency_policy_custody": {
         "detail": {
@@ -1024,7 +772,7 @@
       "expanded_schedule_tsv_hash": {
         "detail": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
         "name": "expanded_schedule_tsv_hash",
-        "passed": false
+        "passed": true
       },
       "freeze_commit_binding": {
         "detail": {
@@ -1038,7 +786,7 @@
       "grammar_hash": {
         "detail": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
         "name": "grammar_hash",
-        "passed": false
+        "passed": true
       },
       "grouped_pmu_open_capability": {
         "detail": {
@@ -1069,7 +817,7 @@
       "manifest_file_hash": {
         "detail": {
           "env": null,
-          "expected": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
+          "expected": "eb53a697c7d3ef9b99a67f43f825c1c35e394fe1cbe9a08ab611caeaceb7b0ab",
           "observed_backend": "fixture"
         },
         "name": "manifest_file_hash",
@@ -1128,30 +876,30 @@
         "passed": true
       },
       "relation_source_authority_not_scalar": {
-        "detail": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
+        "detail": "1094d3b3c613558dd31ec297ad95ef927a1e06db",
         "name": "relation_source_authority_not_scalar",
         "passed": true
       },
       "runtime_binary_format_and_abi": {
         "detail": {
-          "format": "",
+          "format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
           "required": [
             "ELF 64-bit",
             "x86-64"
           ]
         },
         "name": "runtime_binary_format_and_abi",
-        "passed": false
+        "passed": true
       },
       "runtime_binary_hash": {
         "detail": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
         "name": "runtime_binary_hash",
-        "passed": false
+        "passed": true
       },
       "source_authority_commit_binding": {
         "detail": {
           "env": null,
-          "expected": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
+          "expected": "1094d3b3c613558dd31ec297ad95ef927a1e06db",
           "observed_backend": "fixture"
         },
         "name": "source_authority_commit_binding",
@@ -1160,12 +908,22 @@
       "source_bundle_hash": {
         "detail": "6fd1b5b8046a958d11a90fd676dfcd283118d0ac4b638d392ab1ddd4a50f5e6d",
         "name": "source_bundle_hash",
-        "passed": false
+        "passed": true
       },
       "source_file_hashes": {
-        "detail": null,
+        "detail": {
+          "RELATION_ONLY_CONTRACT.md": "348b576cbc2bf38c1bc7c338609174c3aa02e95993098b535de10492bac0eb33",
+          "relation_only_adjudication.py": "c5c268adb4a4ed7666ebabc524be4de6ca34a86a977e86898eaa69dfc9012dd1",
+          "relation_only_live_controller.py": "d3f90edcfbeeba18c40f2a96fe21b00618f936eec131d5c3fb7d138b3957a8fc",
+          "relation_only_physical_adjudication.py": "e61c7e8acd89da2516a0aaf3f1c75f1f4632de1b8c7724cc40c4ceae0f19c959",
+          "relation_only_public.py": "5719a1076958643034d984ec3fae9eae96cd2c1aa35e364a4e4c964278fa8959",
+          "relation_only_runtime.c": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
+          "relation_only_runtime.h": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
+          "relation_only_target.py": "0b874bb60e5ba4f842b8bf9c5d3c4d11c2ab0b7caa17010e94157470038e10b7",
+          "run_relation_only_matched_permutation.py": "81d238c023628b540c46df70320fa0e90586181769a0049d946aeb53fea165bd"
+        },
         "name": "source_file_hashes",
-        "passed": false
+        "passed": true
       },
       "source_receiver_cpu_identity": {
         "detail": {
@@ -1183,14 +941,12 @@
       },
       "source_root_identity": {
         "detail": {
-          "failures": [
-            "relation source authority missing or invalid for build-ready package"
-          ],
-          "passed": false,
+          "failures": [],
+          "passed": true,
           "required_file_count": 23
         },
         "name": "source_root_identity",
-        "passed": false
+        "passed": true
       },
       "temperature_sensor_authority": {
         "detail": {
@@ -1213,15 +969,7 @@
       "live_authority",
       "source_authority_commit_binding",
       "freeze_commit_binding",
-      "manifest_file_hash",
-      "source_root_identity",
-      "grammar_hash",
-      "compact_schedule_manifest_binding",
-      "expanded_schedule_tsv_hash",
-      "runtime_binary_hash",
-      "runtime_binary_format_and_abi",
-      "source_bundle_hash",
-      "source_file_hashes"
+      "manifest_file_hash"
     ],
     "live_invocation_count": 0,
     "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_only_matched_permutation_v1\\_relation_only_owned_outputs\\missing_authority_attempt",

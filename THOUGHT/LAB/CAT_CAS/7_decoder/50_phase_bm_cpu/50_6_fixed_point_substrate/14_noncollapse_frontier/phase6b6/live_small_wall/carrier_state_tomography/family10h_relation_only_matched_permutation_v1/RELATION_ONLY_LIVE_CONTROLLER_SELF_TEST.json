@@ -1,375 +1,105 @@
 {
-  "live_runtime_execution_count": 0,
-  "passed": false,
-  "physical_pmu_acquisition_count": 0,
-  "preflight": {
-    "artifact_identity": {},
-    "checks": {
-      "actual_physical_geometry_status": {
-        "detail": {
-          "claim_ceiling_lowered": true,
-          "status": "unresolved_contractually_lowered"
-        },
-        "name": "actual_physical_geometry_status",
-        "passed": true
-      },
-      "attempt_ownership_marker": {
-        "detail": {
-          "attempt_ceiling": 1,
-          "attempt_count_before": 0,
-          "owner_marker": "family10h_relation_only_matched_permutation_v1_0"
-        },
-        "name": "attempt_ownership_marker",
-        "passed": true
-      },
-      "canonical_manifest_digest": {
-        "detail": "04579711f43b245cf4684dec91c7ef49415984e7c220d70814d145ab76347967",
-        "name": "canonical_manifest_digest",
-        "passed": true
-      },
-      "compact_schedule_manifest_binding": {
-        "detail": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
-        "name": "compact_schedule_manifest_binding",
-        "passed": false
-      },
-      "cpu_frequency_policy_custody": {
-        "detail": {
-          "governor": "performance",
-          "identity_stability": true,
-          "policy_locked": true
-        },
-        "name": "cpu_frequency_policy_custody",
-        "passed": true
-      },
-      "cpu_vendor_family_model": {
-        "detail": {
-          "family": 16,
-          "model": 6,
-          "operational_pinning": true,
-          "receiver_cpu": 5,
-          "receiver_cpu_present": true,
-          "source_cpu": 4,
-          "source_cpu_present": true,
-          "vendor": "AuthenticAMD"
-        },
-        "name": "cpu_vendor_family_model",
-        "passed": true
-      },
-      "deployment_custody_binding": {
-        "detail": {
-          "controller_deployment_root": "C:\\tmp\\relation_only_controller_7z6hxtrg\\remote_relation_only_root",
-          "controller_verified_clean_worktree": true,
-          "controller_verified_head_equals_origin": true,
-          "fixture_backend_allowed": false,
-          "manifest_file_sha256": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
-          "one_attempt_ceiling": 1,
-          "relation_manifest_freeze_commit": "ffffffffffffffffffffffffffffffffffffffff",
-          "relation_source_authority_commit": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
-          "schema": "FAMILY10H_RELATION_ONLY_DEPLOYMENT_CUSTODY_V1",
-          "science_package_id": "family10h_relation_only_matched_permutation_v1",
-          "transaction_run_id": "family10h_relation_only_matched_permutation_v1_0"
-        },
-        "name": "deployment_custody_binding",
-        "passed": true
-      },
-      "expanded_schedule_tsv_hash": {
-        "detail": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
-        "name": "expanded_schedule_tsv_hash",
-        "passed": false
-      },
-      "freeze_commit_binding": {
-        "detail": {
-          "env": "ffffffffffffffffffffffffffffffffffffffff",
-          "expected": "ffffffffffffffffffffffffffffffffffffffff",
-          "observed_backend": "physical_observed"
-        },
-        "name": "freeze_commit_binding",
-        "passed": true
-      },
-      "grammar_hash": {
-        "detail": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
-        "name": "grammar_hash",
-        "passed": false
-      },
-      "grouped_pmu_open_capability": {
-        "detail": {
-          "enabled_measurement_interval": false,
-          "events": {
-            "cache_block_commands_change_to_dirty": {
-              "event": "0xea",
-              "umask": "0x20"
-            },
-            "cpu_cycles_not_halted": {
-              "event": "0x76",
-              "umask": "0x00"
-            },
-            "probe_responses_dirty": {
-              "event": "0xec",
-              "umask": "0x0c"
-            }
-          },
-          "grouped_open_capability": true,
-          "pmu_acquisition_count": 0,
-          "pmu_open_count": 3,
-          "scientific_data_collected": false
-        },
-        "name": "grouped_pmu_open_capability",
-        "passed": true
-      },
-      "live_authority": {
-        "detail": "family10h_relation_only_matched_permutation_v1_0",
-        "name": "live_authority",
-        "passed": true
-      },
-      "manifest_file_hash": {
-        "detail": {
-          "env": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
-          "expected": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
-          "observed_backend": "physical_observed"
-        },
-        "name": "manifest_file_hash",
-        "passed": false
-      },
-      "operational_pinning_capability": {
-        "detail": {
-          "family": 16,
-          "model": 6,
-          "operational_pinning": true,
-          "receiver_cpu": 5,
-          "receiver_cpu_present": true,
-          "source_cpu": 4,
-          "source_cpu_present": true,
-          "vendor": "AuthenticAMD"
-        },
-        "name": "operational_pinning_capability",
-        "passed": true
-      },
-      "output_root_absence": {
-        "detail": {
-          "expected_parent": "C:\\tmp\\relation_only_controller_7z6hxtrg\\remote_relation_only_root\\_relation_only_owned_outputs",
-          "failures": [],
-          "output_root": "C:\\tmp\\relation_only_controller_7z6hxtrg\\remote_relation_only_root\\_relation_only_owned_outputs\\attempt_1",
-          "passed": true
-        },
-        "name": "output_root_absence",
-        "passed": true
-      },
-      "package_decision": {
-        "detail": "FAMILY10H_RELATION_ONLY_BUILD_READY_AWAITING_AUTHORIZATION",
-        "name": "package_decision",
-        "passed": true
-      },
-      "pmu_event_identities": {
-        "detail": {
-          "cache_block_commands_change_to_dirty": {
-            "event": "0xea",
-            "umask": "0x20"
-          },
-          "cpu_cycles_not_halted": {
-            "event": "0x76",
-            "umask": "0x00"
-          },
-          "probe_responses_dirty": {
-            "event": "0xec",
-            "umask": "0x0c"
-          }
-        },
-        "name": "pmu_event_identities",
-        "passed": true
-      },
-      "relation_freeze_authority_not_scalar": {
-        "detail": "ffffffffffffffffffffffffffffffffffffffff",
-        "name": "relation_freeze_authority_not_scalar",
-        "passed": true
-      },
-      "relation_source_authority_not_scalar": {
-        "detail": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
-        "name": "relation_source_authority_not_scalar",
-        "passed": true
-      },
-      "runtime_binary_format_and_abi": {
-        "detail": {
-          "format": "",
-          "required": [
-            "ELF 64-bit",
-            "x86-64"
-          ]
-        },
-        "name": "runtime_binary_format_and_abi",
-        "passed": false
-      },
-      "runtime_binary_hash": {
-        "detail": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
-        "name": "runtime_binary_hash",
-        "passed": false
-      },
-      "source_authority_commit_binding": {
-        "detail": {
-          "env": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
-          "expected": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
-          "observed_backend": "physical_observed"
-        },
-        "name": "source_authority_commit_binding",
-        "passed": false
-      },
-      "source_bundle_hash": {
-        "detail": "6fd1b5b8046a958d11a90fd676dfcd283118d0ac4b638d392ab1ddd4a50f5e6d",
-        "name": "source_bundle_hash",
-        "passed": false
-      },
-      "source_file_hashes": {
-        "detail": null,
-        "name": "source_file_hashes",
-        "passed": false
-      },
-      "source_receiver_cpu_identity": {
-        "detail": {
-          "family": 16,
-          "model": 6,
-          "operational_pinning": true,
-          "receiver_cpu": 5,
-          "receiver_cpu_present": true,
-          "source_cpu": 4,
-          "source_cpu_present": true,
-          "vendor": "AuthenticAMD"
-        },
-        "name": "source_receiver_cpu_identity",
-        "passed": true
-      },
-      "source_root_identity": {
-        "detail": {
-          "failures": [
-            "relation source authority missing or invalid for build-ready package"
-          ],
-          "passed": false,
-          "required_file_count": 23
-        },
-        "name": "source_root_identity",
-        "passed": false
-      },
-      "temperature_sensor_authority": {
-        "detail": {
-          "hwmon_name": "k10temp",
-          "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
-          "identity_stability": true,
-          "resolved_device_identity": "fixture-family10h-k10temp",
-          "sensor_label": "Tctl"
-        },
-        "name": "temperature_sensor_authority",
-        "passed": true
-      },
-      "transaction_identity": {
-        "detail": "family10h_relation_only_matched_permutation_v1_0",
-        "name": "transaction_identity",
-        "passed": true
-      }
-    },
-    "failures": [
-      "source_authority_commit_binding",
-      "manifest_file_hash",
-      "source_root_identity",
-      "grammar_hash",
-      "compact_schedule_manifest_binding",
-      "expanded_schedule_tsv_hash",
-      "runtime_binary_hash",
-      "runtime_binary_format_and_abi",
-      "source_bundle_hash",
-      "source_file_hashes"
+  "archive": {
+    "member_count": 44,
+    "members": [
+      "RELATION_GRAMMAR.json",
+      "RELATION_GRAMMAR.sha256",
+      "RELATION_GRAMMAR.tsv",
+      "RELATION_MARGINAL_EQUALITY_PROOF.json",
+      "RELATION_ONLY_ADVERSARY_TEST.json",
+      "RELATION_ONLY_BUILD_READINESS.json",
+      "RELATION_ONLY_CONTRACT.md",
+      "RELATION_ONLY_DEPLOYMENT_CUSTODY.json",
+      "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json",
+      "RELATION_ONLY_IMPLEMENTATION_MANIFEST.sha256",
+      "RELATION_ONLY_LIVE_CONTROLLER_SELF_TEST.json",
+      "RELATION_ONLY_OFFLINE_VALIDATE.json",
+      "RELATION_ONLY_PHYSICAL_ADJUDICATOR_SELF_TEST.json",
+      "RELATION_ONLY_PHYSICAL_PREFLIGHT_MOCK.json",
+      "RELATION_ONLY_PHYSICAL_THRESHOLD_CONTRACT.json",
+      "RELATION_ONLY_PUBLIC_SCHEDULE.json",
+      "RELATION_ONLY_PUBLIC_SCHEDULE.sha256",
+      "RELATION_ONLY_PUBLIC_SCHEDULE.tsv",
+      "RELATION_ONLY_RUNTIME_BUILD_SELF_TEST.json",
+      "RELATION_ONLY_RUNTIME_CONTROL_FLOW_AUDIT.json",
+      "RELATION_ONLY_SELF_TEST.json",
+      "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
+      "RELATION_ONLY_SOURCE_HASHES.json",
+      "RELATION_ONLY_SYNTHETIC_EXECUTOR_SELF_TEST.json",
+      "RELATION_ONLY_SYNTHETIC_TARGET_WRAPPER_SELF_TEST.json",
+      "RELATION_ONLY_TARGET_PREFLIGHT_SELF_TEST.json",
+      "RELATION_ONLY_TARGET_SELF_TEST.json",
+      "RELATION_ONLY_TOOLCHAIN_DISCOVERY.json",
+      "RELATION_ONLY_TRANSPORT_SIMULATION.json",
+      "_relation_only_owned_outputs",
+      "_relation_only_owned_outputs/attempt_1",
+      "_relation_only_owned_outputs/attempt_1/feature_freeze.json",
+      "_relation_only_owned_outputs/attempt_1/raw_records.jsonl",
+      "_relation_only_owned_outputs/attempt_1/source_death_receipts.jsonl",
+      "_relation_only_owned_outputs/attempt_1/target_execution_receipt.json",
+      "relation_only_adjudication.py",
+      "relation_only_live_controller.py",
+      "relation_only_physical_adjudication.py",
+      "relation_only_public.py",
+      "relation_only_runtime",
+      "relation_only_runtime.c",
+      "relation_only_runtime.h",
+      "relation_only_target.py",
+      "run_relation_only_matched_permutation.py"
     ],
-    "live_invocation_count": 0,
-    "output_root": "C:\\tmp\\relation_only_controller_7z6hxtrg\\remote_relation_only_root\\_relation_only_owned_outputs\\attempt_1",
-    "passed": false,
-    "physical_observation": {
-      "attempt": {
-        "attempt_ceiling": 1,
-        "attempt_count_before": 0,
-        "owner_marker": "family10h_relation_only_matched_permutation_v1_0"
-      },
-      "backend": "mocked_physical_system_interface",
-      "cpu": {
-        "family": 16,
-        "model": 6,
-        "operational_pinning": true,
-        "receiver_cpu": 5,
-        "receiver_cpu_present": true,
-        "source_cpu": 4,
-        "source_cpu_present": true,
-        "vendor": "AuthenticAMD"
-      },
-      "expected_artifacts": {
-        "grammar_canonical_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
-        "manifest_canonical_sha256": "04579711f43b245cf4684dec91c7ef49415984e7c220d70814d145ab76347967",
-        "manifest_file_sha256": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
-        "relation_freeze_authority_commit": "ffffffffffffffffffffffffffffffffffffffff",
-        "relation_source_authority_commit": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
-        "runtime_binary_sha256": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
-        "schedule_canonical_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
-        "schedule_tsv_sha256": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
-        "source_bundle_sha256": "6fd1b5b8046a958d11a90fd676dfcd283118d0ac4b638d392ab1ddd4a50f5e6d"
-      },
-      "frequency_policy": {
-        "governor": "performance",
-        "identity_stability": true,
-        "policy_locked": true
-      },
-      "output": {
-        "parent_writable": true,
-        "root": "C:\\tmp\\relation_only_controller_7z6hxtrg\\remote_relation_only_root\\_relation_only_owned_outputs\\attempt_1"
-      },
-      "physical_geometry": {
-        "claim_ceiling_lowered": true,
-        "status": "unresolved_contractually_lowered"
-      },
-      "pmu": {
-        "enabled_measurement_interval": false,
-        "events": {
-          "cache_block_commands_change_to_dirty": {
-            "event": "0xea",
-            "umask": "0x20"
-          },
-          "cpu_cycles_not_halted": {
-            "event": "0x76",
-            "umask": "0x00"
-          },
-          "probe_responses_dirty": {
-            "event": "0xec",
-            "umask": "0x0c"
-          }
-        },
-        "grouped_open_capability": true,
-        "pmu_acquisition_count": 0,
-        "pmu_open_count": 3,
-        "scientific_data_collected": false
-      },
-      "runtime_binary_format_contains": [
-        "ELF 64-bit",
-        "x86-64"
-      ],
-      "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_PREFLIGHT_OBSERVATION_V1",
-      "sensor": {
-        "hwmon_name": "k10temp",
-        "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
-        "identity_stability": true,
-        "resolved_device_identity": "fixture-family10h-k10temp",
-        "sensor_label": "Tctl"
-      }
-    },
-    "pmu_acquisition_count": 0,
-    "pmu_open_count": 3,
-    "preflight_backend": "physical_observed",
-    "schema": "FAMILY10H_RELATION_ONLY_TARGET_PREFLIGHT_V2",
-    "sensor_inventory_count": 1,
-    "small_wall_crossed": false,
-    "status": "TARGET_PREFLIGHT_FAILED",
-    "target_contact_count": 0
+    "path": "C:\\tmp\\relation_only_controller_0yg265c1\\ATTEMPT_1_REMOTE_ROOT.tar.gz",
+    "sha256": "5865526d257c4e6767f5b25997e6f3b0319e2981b6006a337ef1565fd06b19de",
+    "size_bytes": 3873906
   },
-  "reason": "target preflight failed: source_authority_commit_binding,manifest_file_hash,source_root_identity,grammar_hash,compact_schedule_manifest_binding,expanded_schedule_tsv_hash,runtime_binary_hash,runtime_binary_format_and_abi,source_bundle_hash,source_file_hashes",
+  "automatic_physical_retry_refused": true,
+  "cleanup": {
+    "failure_evidence_retention_policy": "retain deployment root and output if copy-back or adjudication handoff fails",
+    "owned_output_parent_exists_after_cleanup": false,
+    "owned_path_cleanup_performed_after_verified_copyback": true
+  },
+  "copyback": {
+    "matches_remote_archive": true,
+    "path": "C:\\tmp\\relation_only_controller_0yg265c1\\copyback_ATTEMPT_1_REMOTE_ROOT.tar.gz",
+    "sha256": "5865526d257c4e6767f5b25997e6f3b0319e2981b6006a337ef1565fd06b19de",
+    "size_bytes": 3873906
+  },
+  "deployed_file_count": 36,
+  "execution": {
+    "passed": true,
+    "physical_measurement": false,
+    "pmu_acquisition_count": 0,
+    "pmu_open_count": 0,
+    "raw_record_count": 32256,
+    "scientific_claim_emitted": false,
+    "source_death_receipt_count": 32256
+  },
+  "freeze_authority": {
+    "clean_worktree": false,
+    "expected_freeze_commit": "ffffffffffffffffffffffffffffffffffffffff",
+    "head": "1094d3b3e7de668561229809830cd157f503d9f8",
+    "head_origin_required_for_live": true,
+    "origin": "d54e755aa503e346091a0f6f7402548ae77dc1bf",
+    "passed": true,
+    "schema": "FAMILY10H_RELATION_ONLY_CONTROLLER_FREEZE_AUTHORITY_V1",
+    "synthetic": true
+  },
+  "live_runtime_execution_count": 0,
+  "one_attempt_consumed_after_preflight_only": true,
+  "owned_paths_only": true,
+  "passed": true,
+  "physical_pmu_acquisition_count": 0,
+  "prospective_adjudication_handoff": {
+    "positive_claim_emitted": false,
+    "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+  },
+  "relation_manifest_freeze_commit": "ffffffffffffffffffffffffffffffffffffffff",
+  "relation_source_authority_commit": "1094d3b3c613558dd31ec297ad95ef927a1e06db",
+  "remote_canonical_path_absence_checked": true,
   "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_LIVE_CONTROLLER_SELF_TEST_V1",
   "scp_count": 0,
   "sensor_discovery_count": 0,
   "ssh_count": 0,
-  "status": "SYNTHETIC_CONTROLLER_EXECUTION_REFUSED",
   "stderr": "",
-  "subprocess_returncode": 1,
+  "subprocess_returncode": 0,
   "target_contact_count": 0
 }
