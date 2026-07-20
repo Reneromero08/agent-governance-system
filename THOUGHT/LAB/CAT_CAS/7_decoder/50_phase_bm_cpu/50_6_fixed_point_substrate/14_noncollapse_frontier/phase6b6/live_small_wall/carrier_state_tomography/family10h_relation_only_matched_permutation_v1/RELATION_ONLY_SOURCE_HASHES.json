@@ -8,13 +8,17 @@
       "sha256": "c5c268adb4a4ed7666ebabc524be4de6ca34a86a977e86898eaa69dfc9012dd1",
       "size": 10646
     },
+    "relation_only_live_controller.py": {
+      "sha256": "baa9e57123e236e0d9000d31c12683ebe4cecd39ab6da8007b644dc57e991a83",
+      "size": 10550
+    },
     "relation_only_physical_adjudication.py": {
-      "sha256": "4d6fd62840882542a1c6255f1e914a6b8bb8406de771bb15251b64e823565fe3",
-      "size": 26842
+      "sha256": "e61c7e8acd89da2516a0aaf3f1c75f1f4632de1b8c7724cc40c4ceae0f19c959",
+      "size": 26706
     },
     "relation_only_public.py": {
-      "sha256": "f5fda2dfe3c56e8e0f63f246d264c884681e2aee95dac922e3d330996d68d953",
-      "size": 37892
+      "sha256": "5719a1076958643034d984ec3fae9eae96cd2c1aa35e364a4e4c964278fa8959",
+      "size": 38751
     },
     "relation_only_runtime.c": {
       "sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
@@ -25,12 +29,12 @@
       "size": 2239
     },
     "relation_only_target.py": {
-      "sha256": "3045b7c2cc81724882777c0a3f2f69f503aa29698fee36d734976e1094a67078",
-      "size": 48024
+      "sha256": "afe72bc3c13f8347c6f01c896e88f1f3424c9470dfd58afe3ebf6e6991e90d25",
+      "size": 66092
     },
     "run_relation_only_matched_permutation.py": {
-      "sha256": "c0b0ba834fdcc9b723011254760a1d15c9a62efea84915e27cf9946114854661",
-      "size": 68707
+      "sha256": "5010e17678f55eaf64e78973fb3b04c1c6f0d9778126aa179c023cdb200b3c3e",
+      "size": 73713
     }
   },
   "runtime_binary_authority": {
@@ -67,13 +71,14 @@
     "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
     "size": 111928
   },
-  "runtime_build_receipt_sha256": "e96b791f0340bbfc7693b3111a593fa67c38bc72bf064719f4540a535451c21c",
+  "runtime_build_receipt_sha256": "6b74873b405cf803dcdc1545093eb7a8ef5195e391cc4fe56b5c76cba5f5ee4d",
   "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V2",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
   "source_bundle": {
     "members": [
       "RELATION_ONLY_CONTRACT.md",
       "relation_only_adjudication.py",
+      "relation_only_live_controller.py",
       "relation_only_physical_adjudication.py",
       "relation_only_public.py",
       "relation_only_runtime.c",
@@ -82,6 +87,6 @@
       "run_relation_only_matched_permutation.py"
     ],
     "path": "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
-    "sha256": "48bf4133c1a9b8626e79a9a4c6dcde7fd14137c80f6f574c8d7698743bd2b6db"
+    "sha256": "373f6e89bec195b6459761db3b36ebc683bbeed9474cd040660c4cba8f4ae65b"
   }
 }
