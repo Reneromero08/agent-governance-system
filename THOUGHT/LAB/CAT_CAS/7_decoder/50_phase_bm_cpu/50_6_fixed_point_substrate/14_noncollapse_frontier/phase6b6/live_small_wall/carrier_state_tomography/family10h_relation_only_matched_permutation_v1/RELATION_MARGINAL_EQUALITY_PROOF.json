@@ -1,44 +1,121 @@
 {
   "checks": {
+    "actual_cache_index_unresolved_not_claimed": true,
+    "compiled_binary_hash_bound": false,
+    "cyclic_origin_balance": true,
+    "relation_cells_balanced_across_origins": true,
     "relations_distinct": true,
+    "runtime_self_test_receipt_bound": true,
     "same_A_address_set": true,
     "same_A_work_count": true,
     "same_B_address_set": true,
     "same_B_work_count": true,
-    "same_allocation_and_prefault_behavior": true,
+    "same_allocation_order": true,
     "same_branch_structure": true,
-    "same_cache_set_histogram": true,
     "same_delay_distribution": true,
     "same_line_count": true,
+    "same_logical_line_histogram": true,
     "same_page_count": true,
     "same_pair_distance_histogram": true,
     "same_permutation_cycle_structure_class": true,
     "same_pmu_event_group": true,
+    "same_prefault_order": true,
     "same_read_count": true,
     "same_receiver_loop_length": true,
+    "same_relation_table_lookup_count": true,
     "same_source_and_receiver_cpu": true,
     "same_source_loop_length": true,
     "same_source_order_and_query_order_counts": true,
     "same_total_work": true,
-    "same_write_count": true
+    "same_virtual_offset_histogram": true,
+    "same_write_count": true,
+    "source_hashes_bound": true
   },
-  "grammar_sha256": "bac08aac11fe31efc6f69b65b481fbd5f8b482cd71d31a015a9cac4a53071bf7",
-  "passed": true,
-  "proof_basis": "relation_r0 and relation_r1 are inverse one-step modular permutations over the same 4096-line A/B sets",
-  "proof_sha256": "a14610d01c24ef7940e1857fce83fc8851844063be72bc1f00a3adec07c49663",
+  "full_sequence_digests": {
+    "relation_r0": {
+      "0": {
+        "A_sequence_sha256": "cb2249fa75b0f55c6f8922ce37038f8596d44b3ecf325f1ddc6d9d8a301d7e66",
+        "B_sequence_sha256": "2a4aaf6b2a35b3afadf691ef96b7ec6098cd8da1d2cb1f9ac3b0575c2d842a0c",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "1024": {
+        "A_sequence_sha256": "2e6c92de8214672196daad4371f3d6b5089b91f1842700edc2dbd8f4253b890c",
+        "B_sequence_sha256": "923e08be695bba7319f6f2f57bf94596575b45165991a6a5cc58e9960f75eebd",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "2048": {
+        "A_sequence_sha256": "161625401844900749da18daf2b8388994fea350d9c058028ba40f49179daaa2",
+        "B_sequence_sha256": "ec326a22c4851b8995494e70735a580755ba3139f39a9abddd5ef89b9ae041b3",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "3072": {
+        "A_sequence_sha256": "df2eb5ef8fb89ac570def7ea3a351457cc88b1cd4745b0b3a098486bfe94e08b",
+        "B_sequence_sha256": "13d8d4c23f481fcd57a39ee16c6d42482701c04c06ca6d406cd2598f4998b8f6",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      }
+    },
+    "relation_r1": {
+      "0": {
+        "A_sequence_sha256": "cb2249fa75b0f55c6f8922ce37038f8596d44b3ecf325f1ddc6d9d8a301d7e66",
+        "B_sequence_sha256": "f5a6835d06857e26c302655c80d7abd956b1742e6d799d71ec3e0d69cb1e47bf",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "1024": {
+        "A_sequence_sha256": "2e6c92de8214672196daad4371f3d6b5089b91f1842700edc2dbd8f4253b890c",
+        "B_sequence_sha256": "8dc9a850dd20f09bbd7b904f894df14ee923f2aba7112c277d8d05cc9d10ac74",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "2048": {
+        "A_sequence_sha256": "161625401844900749da18daf2b8388994fea350d9c058028ba40f49179daaa2",
+        "B_sequence_sha256": "32eaf243982249ddab6bbfaa07436397c4a2edec82cde67978e20dc1e8a7d78c",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "3072": {
+        "A_sequence_sha256": "df2eb5ef8fb89ac570def7ea3a351457cc88b1cd4745b0b3a098486bfe94e08b",
+        "B_sequence_sha256": "035e37eff97f20c717469e563540bd07658c90bf29eab9fa4c0a559b71edd304",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      }
+    }
+  },
+  "grammar_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
+  "origin_counts": {
+    "0": 8064,
+    "1024": 8064,
+    "2048": 8064,
+    "3072": 8064
+  },
+  "passed": false,
+  "proof_basis": "generated full permutation tables, generated origin-rotated A/B sequences, schedule rows, source hashes, and runtime build receipt",
+  "proof_sha256": "4a0699764c0b68b2e7c0a68efc11e39534876bfeafb12a1b7a4a91776a33e7ad",
+  "relation_origin_counts_sha256": "6f57975f19183dc8a3f9bdadbd5076d529a6404812cb540ee73762016eb693ae",
   "relation_r0": {
-    "cache_set_histogram_sha256": "106ccbc049129975331e8601251beb56aa4044708da85ec1b853924e63921413",
+    "actual_cache_index_status": "unresolved_until_authorized_target_preflight",
     "cycle_structure_sha256": "ea525d40c2924208604b75acf78ccb35852bc1482f0887b04e8feafb7c002fb9",
     "formula": "B_index = (A_index + 1) mod 4096",
+    "logical_line_histogram_sha256": "cff9412b536b4b163928c652db0827a5541092dd88e0f60adcc3a0877ee779be",
     "pair_distance_histogram_sha256": "a8fdd4718adf92b34415cf6eb34ddc8d178253e9ef5af9022178849a26e27469",
-    "permutation_sha256": "2a4aaf6b2a35b3afadf691ef96b7ec6098cd8da1d2cb1f9ac3b0575c2d842a0c"
+    "permutation_sha256": "2a4aaf6b2a35b3afadf691ef96b7ec6098cd8da1d2cb1f9ac3b0575c2d842a0c",
+    "virtual_offset_histogram_sha256": "3bed852658892707a63af1833954e40112bf5aed7e438f889b05f27c7185139d"
   },
   "relation_r1": {
-    "cache_set_histogram_sha256": "106ccbc049129975331e8601251beb56aa4044708da85ec1b853924e63921413",
+    "actual_cache_index_status": "unresolved_until_authorized_target_preflight",
     "cycle_structure_sha256": "ea525d40c2924208604b75acf78ccb35852bc1482f0887b04e8feafb7c002fb9",
     "formula": "B_index = (A_index - 1) mod 4096",
+    "logical_line_histogram_sha256": "cff9412b536b4b163928c652db0827a5541092dd88e0f60adcc3a0877ee779be",
     "pair_distance_histogram_sha256": "a8fdd4718adf92b34415cf6eb34ddc8d178253e9ef5af9022178849a26e27469",
-    "permutation_sha256": "f5a6835d06857e26c302655c80d7abd956b1742e6d799d71ec3e0d69cb1e47bf"
+    "permutation_sha256": "f5a6835d06857e26c302655c80d7abd956b1742e6d799d71ec3e0d69cb1e47bf",
+    "virtual_offset_histogram_sha256": "3bed852658892707a63af1833954e40112bf5aed7e438f889b05f27c7185139d"
   },
-  "schema": "FAMILY10H_RELATION_MARGINAL_EQUALITY_PROOF_V1"
+  "runtime_build_receipt_passed": false,
+  "runtime_build_receipt_sha256": "0be94fd7b383a064fb3b5739b9f53571b5b065471bd5a6e36d3dc02cf31b13c2",
+  "schema": "FAMILY10H_RELATION_MARGINAL_EQUALITY_PROOF_V2",
+  "source_hashes_sha256": "73c32cd45e54ce8a09ea626069c60debd7355a335ec7166f74a147f2c0b711c9"
 }

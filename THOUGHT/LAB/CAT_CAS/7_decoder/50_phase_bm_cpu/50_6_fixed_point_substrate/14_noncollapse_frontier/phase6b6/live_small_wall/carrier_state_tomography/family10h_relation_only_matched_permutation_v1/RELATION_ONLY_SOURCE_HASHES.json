@@ -1,40 +1,51 @@
 {
   "files": {
     "RELATION_ONLY_CONTRACT.md": {
-      "sha256": "90099c3213e5ebc212d769feaa46df5490d7d2bad829e18c580f4445b658880f",
-      "size": 4567
+      "sha256": "348b576cbc2bf38c1bc7c338609174c3aa02e95993098b535de10492bac0eb33",
+      "size": 5035
     },
     "relation_only_adjudication.py": {
-      "sha256": "31519bf6e221a4d78d70f882fc5979f1e1e882983aea07c37d613207d75b9464",
-      "size": 9569
+      "sha256": "c5c268adb4a4ed7666ebabc524be4de6ca34a86a977e86898eaa69dfc9012dd1",
+      "size": 10646
+    },
+    "relation_only_physical_adjudication.py": {
+      "sha256": "4d6fd62840882542a1c6255f1e914a6b8bb8406de771bb15251b64e823565fe3",
+      "size": 26842
     },
     "relation_only_public.py": {
-      "sha256": "4979463ffc371d33872dd7ea63f118c77ec113bc4cf0ba7995dc16ed1842f386",
-      "size": 25431
+      "sha256": "7531472cbc527ed84e6e919ed8e2a789c18bb5744645ec95845edb9aa21253c7",
+      "size": 36335
     },
     "relation_only_runtime.c": {
-      "sha256": "3886ca3f0d94ded0e56eb0168f12e225948d8c7d843405f2b0f53ecf3511213b",
-      "size": 486
+      "sha256": "db7940a830935297722afe38ba793ab97785e38cff108dbe73b8f17cbdc3c2d8",
+      "size": 10481
     },
     "relation_only_runtime.h": {
-      "sha256": "142eb590f33fa35600dddfb071ef6432a70bea8569223900bcbc1fb1b151cd68",
-      "size": 711
+      "sha256": "7ad185d98e064755cecbde13e680b920d4b7bcf7ed38dc67663338c1dbdfdec9",
+      "size": 2224
     },
     "relation_only_target.py": {
-      "sha256": "b3595a4196804ea5a2317324fbfead6944db000c84805cc9a3c9d84f83a8ad5a",
-      "size": 494
+      "sha256": "0d6a0d75bc983746d0efcb40624d051f678134fcf35715c061b94e070dfa6aeb",
+      "size": 9735
     },
     "run_relation_only_matched_permutation.py": {
-      "sha256": "a74273f224f5b6f0a36513d342f1bf0e61ab70ac868be544929bceb98713ca40",
-      "size": 21684
+      "sha256": "25eb406f7def808aefa673705f397eeb082b863a43e1f0d3adcb2be632ceede5",
+      "size": 36438
     }
   },
-  "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V1",
+  "runtime_binary_authority": {
+    "compile_status": "not_compiled_no_compiler",
+    "compiled_binary_sha256": null,
+    "present": false
+  },
+  "runtime_build_receipt_sha256": "0be94fd7b383a064fb3b5739b9f53571b5b065471bd5a6e36d3dc02cf31b13c2",
+  "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V2",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
   "source_bundle": {
     "members": [
       "RELATION_ONLY_CONTRACT.md",
       "relation_only_adjudication.py",
+      "relation_only_physical_adjudication.py",
       "relation_only_public.py",
       "relation_only_runtime.c",
       "relation_only_runtime.h",
@@ -42,6 +53,6 @@
       "run_relation_only_matched_permutation.py"
     ],
     "path": "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
-    "sha256": "b3ad7ad07bec77528b9477138ac8fa732124b588191069836e44c33b5b168fd5"
+    "sha256": "6861faded99ff22bb93acd13c70d0a310dcf8b9653b5976f351fb249a7772959"
   }
 }

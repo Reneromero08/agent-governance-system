@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Fail-closed relation-only adjudication helpers for synthetic/offline tests."""
+"""Synthetic fixture helper for relation-only offline tests.
+
+This module deliberately emits only synthetic result classes. The physical
+prospective law lives in relation_only_physical_adjudication.py.
+"""
 
 from __future__ import annotations
 
@@ -13,8 +17,8 @@ SYNTHETIC_DETECTED = "SYNTHETIC_RELATION_MATCH_SIGNAL_DETECTED"
 SYNTHETIC_NOT_DETECTED = "SYNTHETIC_RELATION_MATCH_SIGNAL_NOT_DETECTED"
 SYNTHETIC_CUSTODY_INVALID = "SYNTHETIC_RELATION_MATCH_CUSTODY_INVALID"
 
-R_MATCH_ABS_THRESHOLD = 50.0
-SCALAR_EQUIVALENCE_TOLERANCE = 5.0
+R_MATCH_ABS_THRESHOLD_SYNTHETIC = 50.0
+SCALAR_EQUIVALENCE_TOLERANCE_SYNTHETIC = 5.0
 
 
 def validate_packet(packet: dict[str, Any], schedule: dict[str, Any]) -> dict[str, Any]:
@@ -35,12 +39,16 @@ def validate_packet(packet: dict[str, Any], schedule: dict[str, Any]) -> dict[st
         if expected is None:
             failures.append("unexpected tuple_id")
             continue
-        if row.get("execution_ordinal") != expected["execution_ordinal"]:
-            failures.append("execution ordinal mismatch")
-        if row.get("row_role") != expected["row_role"]:
-            failures.append("row_role mismatch")
-        if row.get("r_prepare") != expected["r_prepare"] or row.get("r_query") != expected["r_query"]:
-            failures.append("relation label mismatch")
+        for field in [
+            "execution_ordinal",
+            "row_role",
+            "r_prepare",
+            "r_query",
+            "query",
+            "cyclic_origin",
+        ]:
+            if row.get(field) != expected[field]:
+                failures.append(f"{field} mismatch")
         value = row.get("dirty_probe_response")
         if type(value) not in {int, float}:
             failures.append("dirty_probe_response not numeric")
@@ -49,6 +57,10 @@ def validate_packet(packet: dict[str, Any], schedule: dict[str, Any]) -> dict[st
         if len(failures) > 20:
             break
     return {"passed": not failures, "failures": failures}
+
+
+def mean(values: list[float]) -> float:
+    return sum(values) / len(values) if values else 0.0
 
 
 def compute_r_match(rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -69,14 +81,15 @@ def compute_r_match(rows: list[dict[str, Any]]) -> dict[str, Any]:
             - (cells[("relation_r0", "relation_r1")] + cells[("relation_r1", "relation_r0")])
         )
         values.append(r_match)
-    mean = sum(values) / len(values) if values else 0.0
+    value_mean = mean(values)
     return {
         "passed": not failures,
         "failures": failures,
         "block_count": len(by_block),
-        "R_match_values": values,
-        "R_match_mean": mean,
-        "R_match_abs_mean": abs(mean),
+        "R_match_mean": value_mean,
+        "R_match_abs_mean": abs(value_mean),
+        "R_match_min": min(values) if values else 0.0,
+        "R_match_max": max(values) if values else 0.0,
     }
 
 
@@ -92,13 +105,13 @@ def scalar_equivalence(rows: list[dict[str, Any]]) -> dict[str, Any]:
         b = by_query.get("query_B", [])
         if not a or not b:
             continue
-        relation_d[relation] = (sum(a) / len(a)) - (sum(b) / len(b))
+        relation_d[relation] = mean(a) - mean(b)
     drift = abs(relation_d.get("relation_r0", 0.0) - relation_d.get("relation_r1", 0.0))
     return {
         "relation_D_single": relation_d,
         "relation_D_single_drift": drift,
-        "tolerance": SCALAR_EQUIVALENCE_TOLERANCE,
-        "passed": drift <= SCALAR_EQUIVALENCE_TOLERANCE,
+        "tolerance": SCALAR_EQUIVALENCE_TOLERANCE_SYNTHETIC,
+        "passed": drift <= SCALAR_EQUIVALENCE_TOLERANCE_SYNTHETIC,
     }
 
 
@@ -112,7 +125,7 @@ def label_scramble_collapse(rows: list[dict[str, Any]]) -> dict[str, Any]:
     metric = compute_r_match(scrambled)
     return {
         "scrambled_R_match_abs_mean": metric["R_match_abs_mean"],
-        "passed": metric["R_match_abs_mean"] < R_MATCH_ABS_THRESHOLD,
+        "passed": metric["R_match_abs_mean"] < R_MATCH_ABS_THRESHOLD_SYNTHETIC,
     }
 
 
@@ -131,7 +144,7 @@ def adjudicate_packet(packet: dict[str, Any], schedule: dict[str, Any]) -> dict[
     scramble = label_scramble_collapse(rows)
     detected = (
         relation["passed"]
-        and relation["R_match_abs_mean"] >= R_MATCH_ABS_THRESHOLD
+        and relation["R_match_abs_mean"] >= R_MATCH_ABS_THRESHOLD_SYNTHETIC
         and scalar["passed"]
         and scramble["passed"]
     )
@@ -142,6 +155,11 @@ def adjudicate_packet(packet: dict[str, Any], schedule: dict[str, Any]) -> dict[
         "R_match": relation,
         "scalar_equivalence": scalar,
         "label_scramble": scramble,
+        "synthetic_thresholds": {
+            "R_match_abs_threshold": R_MATCH_ABS_THRESHOLD_SYNTHETIC,
+            "scalar_equivalence_tolerance": SCALAR_EQUIVALENCE_TOLERANCE_SYNTHETIC,
+            "physical_threshold_status": "not_a_physical_threshold",
+        },
         "future_physical_result_classes_predeclared": pub.FUTURE_RESULT_CLASSES,
         "maximum_future_claim": pub.MAXIMUM_FUTURE_CLAIM,
         "small_wall_crossed": False,
@@ -166,6 +184,8 @@ def fixture_packet(schedule: dict[str, Any], mode: str) -> dict[str, Any]:
                 value += 30.0
             elif mode == "distance_only":
                 value += 25.0
+            elif mode == "origin_specific":
+                value += (80.0 if expected["relation_match"] else -80.0) if expected["cyclic_origin"] == 0 else 0.0
         elif expected["row_role"] == "scalar_control":
             if expected["query"] == "query_A":
                 value += 40.0
@@ -173,22 +193,25 @@ def fixture_packet(schedule: dict[str, Any], mode: str) -> dict[str, Any]:
                 value -= 40.0
         rows.append(
             {
-                "tuple_id": expected["tuple_id"],
-                "execution_ordinal": expected["execution_ordinal"],
-                "block_id": expected["block_id"],
-                "row_role": expected["row_role"],
-                "r_prepare": expected["r_prepare"],
-                "r_query": expected["r_query"],
-                "relation_match": expected["relation_match"],
-                "query": expected["query"],
+                **{key: expected[key] for key in [
+                    "tuple_id",
+                    "execution_ordinal",
+                    "block_id",
+                    "row_role",
+                    "r_prepare",
+                    "r_query",
+                    "relation_match",
+                    "query",
+                    "cyclic_origin",
+                ]},
                 "dirty_probe_response": value,
                 "change_to_dirty": 1 if value > scalar else 0,
-                "cpu_cycles": 1000000,
-                "duration_ns": 100000,
+                "cpu_cycles": 1_000_000,
+                "duration_ns": 100_000,
                 "positive_physical_claim": False,
             }
         )
-    return {"schema": "SYNTHETIC_RELATION_ONLY_FIXTURE_PACKET_V1", "mode": mode, "raw_records": rows}
+    return {"schema": "SYNTHETIC_RELATION_ONLY_FIXTURE_PACKET_V2", "mode": mode, "raw_records": rows}
 
 
 def run_adversary_tests(schedule: dict[str, Any]) -> dict[str, Any]:
@@ -197,6 +220,7 @@ def run_adversary_tests(schedule: dict[str, Any]) -> dict[str, Any]:
     separable = adjudicate_packet(fixture_packet(schedule, "separable_replay"), schedule)
     route = adjudicate_packet(fixture_packet(schedule, "route_pressure"), schedule)
     distance = adjudicate_packet(fixture_packet(schedule, "distance_only"), schedule)
+    origin_specific = adjudicate_packet(fixture_packet(schedule, "origin_specific"), schedule)
     invalid_packet = fixture_packet(schedule, "positive")
     invalid_packet["raw_records"] = invalid_packet["raw_records"][:-1]
     invalid = adjudicate_packet(invalid_packet, schedule)
@@ -206,17 +230,23 @@ def run_adversary_tests(schedule: dict[str, Any]) -> dict[str, Any]:
         "separable_replay_rejected": separable["result_class"] == SYNTHETIC_NOT_DETECTED,
         "route_pressure_replay_rejected": route["result_class"] == SYNTHETIC_NOT_DETECTED,
         "distance_only_replay_rejected": distance["result_class"] == SYNTHETIC_NOT_DETECTED,
+        "origin_specific_artifact_not_sufficient": origin_specific["result_class"] == SYNTHETIC_NOT_DETECTED,
         "invalid_packet_no_positive_claim": invalid["result_class"] == SYNTHETIC_CUSTODY_INVALID
         and not invalid["reproducible_relation_match_coordinate_observed"],
     }
     return {
-        "schema": "FAMILY10H_RELATION_ONLY_ADVERSARY_TEST_V1",
-        "threshold": R_MATCH_ABS_THRESHOLD,
+        "schema": "FAMILY10H_RELATION_ONLY_ADVERSARY_TEST_V2",
+        "thresholds": {
+            "synthetic_R_match_abs_threshold": R_MATCH_ABS_THRESHOLD_SYNTHETIC,
+            "synthetic_scalar_equivalence_tolerance": SCALAR_EQUIVALENCE_TOLERANCE_SYNTHETIC,
+            "physical_threshold_status": "synthetic_only",
+        },
         "positive": positive,
         "scalar_replay": scalar,
         "separable_replay": separable,
         "route_pressure": route,
         "distance_only": distance,
+        "origin_specific": origin_specific,
         "invalid_packet": invalid,
         "tests": tests,
         "passed": all(tests.values()),

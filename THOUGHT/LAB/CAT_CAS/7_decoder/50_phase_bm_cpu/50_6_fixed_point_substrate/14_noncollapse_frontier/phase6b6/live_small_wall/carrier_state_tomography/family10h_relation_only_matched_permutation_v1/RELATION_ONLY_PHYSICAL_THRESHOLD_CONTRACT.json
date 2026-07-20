@@ -1,0 +1,36 @@
+{
+  "absolute_thresholds": {
+    "control_null_abs_max": 128.0,
+    "r_match_abs_min": 512.0,
+    "scalar_D_single_drift_abs_max": 128.0,
+    "source_off_abs_max": 128.0
+  },
+  "provenance_law": {
+    "control_null_abs_max": "sealed v1.1 source-off absolute null ceiling",
+    "no_post_run_revision": true,
+    "r_match_abs_min": "four times the sealed v1.1 source-off absolute null ceiling",
+    "scalar_D_single_drift_abs_max": "one sealed v1.1 source-off absolute null ceiling",
+    "synthetic_thresholds_are_not_physical_thresholds": true
+  },
+  "relative_thresholds": {
+    "heldout_relative_error_max": 0.25,
+    "q_intercept_abs_max": 128.0,
+    "q_slope_relative_disagreement_max": 0.25
+  },
+  "resampling_thresholds": {
+    "bootstrap_sign_fraction_min": 0.95,
+    "label_scramble_abs_max": 128.0,
+    "matched_permutation_null_abs_max": 128.0
+  },
+  "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_THRESHOLD_CONTRACT_V1",
+  "source_evidence": {
+    "archive_sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+    "basis": "sealed_family10h_v1_1_scalar_q_readout_attempt_1_and_pre_run_logic",
+    "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+    "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
+    "relation_only_target_data_used": false,
+    "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda"
+  },
+  "threshold_contract_sha256": "f2725ad459c8e04d1ba237c33c4c85af02a2d4bdba6f88b0d829784cd600482a",
+  "threshold_status": "prospective_physical_thresholds_frozen_before_relation_only_acquisition"
+}

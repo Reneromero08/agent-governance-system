@@ -1,0 +1,126 @@
+{
+  "checks": {
+    "distance_only_rejected": true,
+    "invalid_packet_custody_invalid": true,
+    "negative_and_invalid_fail_closed": true,
+    "positive_fixture_confirmed": true,
+    "route_pressure_rejected": true,
+    "scalar_replay_rejected": true,
+    "separable_replay_rejected": true,
+    "stratum_specific_artifact_fails_true_heldout": true
+  },
+  "negative_claim_states": {
+    "distance_only": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "invalid": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "origin_specific": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "route_pressure": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "scalar_replay": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "separable_replay": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    }
+  },
+  "negative_results": {
+    "distance_only": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "invalid": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+    "origin_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "route_pressure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "scalar_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "separable_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+  },
+  "passed": true,
+  "positive_result": {
+    "R_match_abs_mean": 640.0,
+    "heldout_passed": true,
+    "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CONFIRMED_PROSPECTIVE"
+  },
+  "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_ADJUDICATOR_SELF_TEST_V1",
+  "self_test_sha256": "69c50709be5f5ce923b754a4eaa98135f4fd349495a95298949e2514e41b49a6",
+  "threshold_contract": {
+    "absolute_thresholds": {
+      "control_null_abs_max": 128.0,
+      "r_match_abs_min": 512.0,
+      "scalar_D_single_drift_abs_max": 128.0,
+      "source_off_abs_max": 128.0
+    },
+    "provenance_law": {
+      "control_null_abs_max": "sealed v1.1 source-off absolute null ceiling",
+      "no_post_run_revision": true,
+      "r_match_abs_min": "four times the sealed v1.1 source-off absolute null ceiling",
+      "scalar_D_single_drift_abs_max": "one sealed v1.1 source-off absolute null ceiling",
+      "synthetic_thresholds_are_not_physical_thresholds": true
+    },
+    "relative_thresholds": {
+      "heldout_relative_error_max": 0.25,
+      "q_intercept_abs_max": 128.0,
+      "q_slope_relative_disagreement_max": 0.25
+    },
+    "resampling_thresholds": {
+      "bootstrap_sign_fraction_min": 0.95,
+      "label_scramble_abs_max": 128.0,
+      "matched_permutation_null_abs_max": 128.0
+    },
+    "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_THRESHOLD_CONTRACT_V1",
+    "source_evidence": {
+      "archive_sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+      "basis": "sealed_family10h_v1_1_scalar_q_readout_attempt_1_and_pre_run_logic",
+      "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+      "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
+      "relation_only_target_data_used": false,
+      "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda"
+    },
+    "threshold_contract_sha256": "f2725ad459c8e04d1ba237c33c4c85af02a2d4bdba6f88b0d829784cd600482a",
+    "threshold_status": "prospective_physical_thresholds_frozen_before_relation_only_acquisition"
+  }
+}

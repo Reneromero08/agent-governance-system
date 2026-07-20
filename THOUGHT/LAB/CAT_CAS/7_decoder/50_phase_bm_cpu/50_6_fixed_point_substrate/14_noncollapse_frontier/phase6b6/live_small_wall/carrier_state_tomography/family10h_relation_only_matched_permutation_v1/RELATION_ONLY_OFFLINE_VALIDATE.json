@@ -1,8 +1,10 @@
 {
+  "build_ready": false,
   "failures": [],
   "grammar_json_parse": true,
   "missing_artifacts": [],
-  "offline_validate_sha256": "d8b5a048be92323c50e9989d506a680bb87aa43a9697c977a403c5920ba8a758",
+  "offline_validate_sha256": "c161881c7732078b45028bdedd77d1ed74f282559fed5650e0a1ebc46bfbb197",
+  "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READINESS_BLOCKED",
   "passed": true,
   "required_artifacts": [
     "RELATION_ONLY_CONTRACT.md",
@@ -15,6 +17,7 @@
     "relation_only_target.py",
     "run_relation_only_matched_permutation.py",
     "relation_only_adjudication.py",
+    "relation_only_physical_adjudication.py",
     "RELATION_MARGINAL_EQUALITY_PROOF.json",
     "RELATION_ONLY_SELF_TEST.json",
     "RELATION_ONLY_ADVERSARY_TEST.json",
@@ -23,10 +26,15 @@
     "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json",
     "RELATION_ONLY_IMPLEMENTATION_MANIFEST.sha256",
     "RELATION_ONLY_SOURCE_HASHES.json",
-    "RELATION_ONLY_SOURCE_BUNDLE.tar.gz"
+    "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
+    "RELATION_ONLY_RUNTIME_BUILD_SELF_TEST.json",
+    "RELATION_ONLY_TARGET_SELF_TEST.json",
+    "RELATION_ONLY_PHYSICAL_ADJUDICATOR_SELF_TEST.json",
+    "RELATION_ONLY_PHYSICAL_THRESHOLD_CONTRACT.json",
+    "RELATION_ONLY_BUILD_READINESS.json"
   ],
   "schedule_json_parse": true,
-  "schema": "FAMILY10H_RELATION_ONLY_OFFLINE_VALIDATE_V1",
+  "schema": "FAMILY10H_RELATION_ONLY_OFFLINE_VALIDATE_V2",
   "self_test_json_parse": true,
   "zero_live_activity": true,
   "zero_target_contact": true
