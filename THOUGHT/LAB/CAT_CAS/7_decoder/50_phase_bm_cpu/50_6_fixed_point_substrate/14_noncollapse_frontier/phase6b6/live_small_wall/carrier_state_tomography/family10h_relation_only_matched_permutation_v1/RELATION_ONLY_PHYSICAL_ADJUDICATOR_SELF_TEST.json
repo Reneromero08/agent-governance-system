@@ -82,11 +82,14 @@
   "passed": true,
   "positive_result": {
     "R_match_abs_mean": 640.0,
+    "adversary_passed": true,
+    "bootstrap_sign_fraction": 1.0,
     "heldout_passed": true,
+    "label_scramble_q95_abs": 23.80952380952381,
     "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CONFIRMED_PROSPECTIVE"
   },
   "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_ADJUDICATOR_SELF_TEST_V1",
-  "self_test_sha256": "e64b2a159a347211cfff506f99e6902c20562ec8e3fda1e728b9f1a0b000c9e1",
+  "self_test_sha256": "76c419957c27b003062983cc3c3481c18f96a6e48f5efbcf3f1cb8bd3b7588a9",
   "threshold_contract": {
     "absolute_thresholds": {
       "control_null_abs_max": 128.0,

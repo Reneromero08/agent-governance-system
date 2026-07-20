@@ -1,0 +1,80 @@
+{
+  "approved_sensor_identity": {
+    "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "device_driver": "k10temp",
+    "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+    "device_subsystem": "pci",
+    "hwmon_name": "k10temp",
+    "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+    "input_st_dev": 22,
+    "input_st_ino": 30803,
+    "input_st_mode": 33060,
+    "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+    "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+    "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+    "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+    "resolved_subsystem_path": "/sys/bus/pci",
+    "sensor_input": "temp1_input",
+    "sensor_label_present": false,
+    "sensor_label_value": null,
+    "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+    "sensor_semantic_role": "Tctl"
+  },
+  "approved_sensor_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+  "approved_target_identity": {
+    "family": 16,
+    "model": 10,
+    "processor_count": 6,
+    "processors": [
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 0,
+        "vendor_id": "AuthenticAMD"
+      },
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 1,
+        "vendor_id": "AuthenticAMD"
+      },
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 2,
+        "vendor_id": "AuthenticAMD"
+      },
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 3,
+        "vendor_id": "AuthenticAMD"
+      },
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 4,
+        "vendor_id": "AuthenticAMD"
+      },
+      {
+        "cpu_family": 16,
+        "model": 10,
+        "processor": 5,
+        "vendor_id": "AuthenticAMD"
+      }
+    ],
+    "receiver_cpu": 5,
+    "runtime_abi": "linux_x86_64_perf_event_open",
+    "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+    "source_cpu": 4,
+    "vendor": "AuthenticAMD"
+  },
+  "approved_target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+  "passed": true,
+  "schema": "FAMILY10H_RELATION_ONLY_SENSOR_AUTHORITY_BINDING_V1",
+  "sensor_authority_binding_sha256": "df9c481e8d0333b5420e38fe26088954a9dcd8350f23c628341f98e76d4f88f3",
+  "source_authority_file": "family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_AUTHORITY.json",
+  "source_authority_file_sha256": "f11b996b8843a5636d769c5d0573c0dc771fe01af0c4178e55b444df6e724c57",
+  "temperature_sensor_authority_sha256": "72ab7571611259b1844aacb808ab39b8549369b1e3e1baa23b16b33d2e5a0a0f",
+  "unlabeled_legacy_temp1_input_approved": true
+}
