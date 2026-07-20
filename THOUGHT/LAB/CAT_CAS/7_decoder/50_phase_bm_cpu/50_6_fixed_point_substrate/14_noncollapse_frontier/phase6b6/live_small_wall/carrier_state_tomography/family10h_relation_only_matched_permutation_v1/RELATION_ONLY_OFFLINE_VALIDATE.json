@@ -1,10 +1,10 @@
 {
-  "build_ready": false,
+  "build_ready": true,
   "failures": [],
   "grammar_json_parse": true,
   "missing_artifacts": [],
-  "offline_validate_sha256": "c161881c7732078b45028bdedd77d1ed74f282559fed5650e0a1ebc46bfbb197",
-  "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READINESS_BLOCKED",
+  "offline_validate_sha256": "f67df105912d43920c7b47d1a5c529e0ca8785dad528767e5f74d4ca0c46f041",
+  "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READY_AWAITING_AUTHORIZATION",
   "passed": true,
   "required_artifacts": [
     "RELATION_ONLY_CONTRACT.md",
@@ -27,8 +27,11 @@
     "RELATION_ONLY_IMPLEMENTATION_MANIFEST.sha256",
     "RELATION_ONLY_SOURCE_HASHES.json",
     "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
+    "RELATION_ONLY_TOOLCHAIN_DISCOVERY.json",
     "RELATION_ONLY_RUNTIME_BUILD_SELF_TEST.json",
+    "RELATION_ONLY_SYNTHETIC_EXECUTOR_SELF_TEST.json",
     "RELATION_ONLY_TARGET_SELF_TEST.json",
+    "RELATION_ONLY_TARGET_PREFLIGHT_SELF_TEST.json",
     "RELATION_ONLY_PHYSICAL_ADJUDICATOR_SELF_TEST.json",
     "RELATION_ONLY_PHYSICAL_THRESHOLD_CONTRACT.json",
     "RELATION_ONLY_BUILD_READINESS.json"

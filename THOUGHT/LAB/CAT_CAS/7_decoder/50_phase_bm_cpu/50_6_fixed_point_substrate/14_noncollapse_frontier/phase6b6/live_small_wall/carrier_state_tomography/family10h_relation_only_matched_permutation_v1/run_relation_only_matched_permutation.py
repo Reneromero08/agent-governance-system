@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -40,6 +41,9 @@ TARGET_SELF_TEST_JSON = HERE / "RELATION_ONLY_TARGET_SELF_TEST.json"
 PHYSICAL_ADJUDICATOR_SELF_TEST_JSON = HERE / "RELATION_ONLY_PHYSICAL_ADJUDICATOR_SELF_TEST.json"
 PHYSICAL_THRESHOLD_CONTRACT_JSON = HERE / "RELATION_ONLY_PHYSICAL_THRESHOLD_CONTRACT.json"
 BUILD_READINESS_JSON = HERE / "RELATION_ONLY_BUILD_READINESS.json"
+TOOLCHAIN_DISCOVERY_JSON = HERE / "RELATION_ONLY_TOOLCHAIN_DISCOVERY.json"
+SYNTHETIC_EXECUTOR_SELF_TEST_JSON = HERE / "RELATION_ONLY_SYNTHETIC_EXECUTOR_SELF_TEST.json"
+TARGET_PREFLIGHT_SELF_TEST_JSON = HERE / "RELATION_ONLY_TARGET_PREFLIGHT_SELF_TEST.json"
 
 SOURCE_FILES = [
     HERE / "relation_only_public.py",
@@ -104,6 +108,50 @@ def validate_grammar_tsv(path: Path, grammar: dict[str, Any]) -> dict[str, Any]:
     return {"passed": not failures, "failures": failures, "row_count": len(rows)}
 
 
+def schedule_json_manifest(schedule: dict[str, Any], tsv_sha256: str) -> dict[str, Any]:
+    manifest = {
+        "schema": "FAMILY10H_RELATION_ONLY_PUBLIC_SCHEDULE_MANIFEST_V3",
+        "science_package_id": pub.SCIENCE_PACKAGE_ID,
+        "transaction_run_id": pub.TRANSACTION_RUN_ID,
+        "public_randomization_seed": pub.PUBLIC_RANDOMIZATION_SEED,
+        "canonical_expanded_schedule_artifact": "RELATION_ONLY_PUBLIC_SCHEDULE.tsv",
+        "canonical_schedule_sha256": schedule["schedule_sha256"],
+        "expanded_schedule_file_sha256": tsv_sha256,
+        "tuple_count": schedule["tuple_count"],
+        "base_condition_count": schedule["base_condition_count"],
+        "rows_per_base_condition": schedule["rows_per_base_condition"],
+        "schedule_columns": pub.SCHEDULE_COLUMNS,
+        "deterministic_generator": "relation_only_public.build_schedule",
+        "json_rows_omitted": True,
+        "storage_law": "TSV is the canonical expanded schedule consumed by the target runtime; JSON is a compact manifest binding the generator and TSV.",
+        "cyclic_origins": pub.CYCLIC_ORIGINS,
+        "physical_label_scramble_rows": 0,
+        "claim_boundary": schedule["claim_boundary"],
+    }
+    manifest["schedule_manifest_sha256"] = pub.digest({k: v for k, v in manifest.items() if k != "schedule_manifest_sha256"})
+    return manifest
+
+
+def validate_schedule_json_manifest(manifest: dict[str, Any], generated_schedule: dict[str, Any], tsv_sha256: str) -> dict[str, Any]:
+    failures: list[str] = []
+    if manifest.get("schema") != "FAMILY10H_RELATION_ONLY_PUBLIC_SCHEDULE_MANIFEST_V3":
+        failures.append("schedule JSON manifest schema mismatch")
+    expected = pub.digest({k: v for k, v in manifest.items() if k != "schedule_manifest_sha256"})
+    if manifest.get("schedule_manifest_sha256") != expected:
+        failures.append("schedule JSON manifest digest mismatch")
+    if manifest.get("canonical_schedule_sha256") != generated_schedule.get("schedule_sha256"):
+        failures.append("canonical schedule digest mismatch")
+    if manifest.get("expanded_schedule_file_sha256") != tsv_sha256:
+        failures.append("expanded schedule TSV file digest mismatch")
+    if manifest.get("tuple_count") != generated_schedule.get("tuple_count"):
+        failures.append("schedule tuple count mismatch")
+    if manifest.get("schedule_columns") != pub.SCHEDULE_COLUMNS:
+        failures.append("schedule columns mismatch")
+    if manifest.get("json_rows_omitted") is not True:
+        failures.append("schedule JSON rows were not omitted")
+    return {"passed": not failures, "failures": failures}
+
+
 def source_hashes(bundle: dict[str, Any], runtime_build: dict[str, Any]) -> dict[str, Any]:
     files = {}
     for path in SOURCE_FILES + [CONTRACT_FILE]:
@@ -118,94 +166,453 @@ def source_hashes(bundle: dict[str, Any], runtime_build: dict[str, Any]) -> dict
     }
 
 
-def find_c_compiler() -> dict[str, Any]:
-    candidates = [
-        {"name": "gcc", "kind": "gcc", "command": shutil.which("gcc")},
-        {"name": "clang", "kind": "gcc", "command": shutil.which("clang")},
-        {"name": "cc", "kind": "gcc", "command": shutil.which("cc")},
-        {"name": "cl", "kind": "msvc", "command": shutil.which("cl")},
+def run_command(command: list[str], *, timeout: int = 30, cwd: Path | None = None) -> dict[str, Any]:
+    try:
+        completed = subprocess.run(
+            command,
+            text=True,
+            capture_output=True,
+            check=False,
+            timeout=timeout,
+            cwd=cwd,
+            env={key: value for key, value in os.environ.items() if "RELATION_ONLY" not in key},
+        )
+        return {
+            "command": command,
+            "returncode": completed.returncode,
+            "stdout": completed.stdout,
+            "stderr": completed.stderr,
+            "timed_out": False,
+        }
+    except subprocess.TimeoutExpired as exc:
+        return {
+            "command": command,
+            "returncode": None,
+            "stdout": exc.stdout or "",
+            "stderr": exc.stderr or "",
+            "timed_out": True,
+        }
+    except OSError as exc:
+        return {
+            "command": command,
+            "returncode": None,
+            "stdout": "",
+            "stderr": str(exc),
+            "timed_out": False,
+        }
+
+
+def clean_wsl_lines(text: str) -> list[str]:
+    cleaned = text.replace("\x00", "")
+    return [line.strip() for line in cleaned.splitlines() if line.strip()]
+
+
+def parse_label_output(text: str) -> dict[str, str]:
+    lines = [line.strip() for line in text.replace("\x00", "").splitlines()]
+    labels = {
+        "machine",
+        "uname",
+        "gcc_path",
+        "gcc_version",
+        "gcc_triple",
+        "clang_path",
+        "clang_version",
+        "cc_path",
+        "cc_version",
+        "perf_event_header",
+        "sched_header",
+    }
+    result: dict[str, str] = {}
+    idx = 0
+    while idx < len(lines):
+        label = lines[idx]
+        value = ""
+        if label not in labels:
+            idx += 1
+            continue
+        if idx + 1 < len(lines) and lines[idx + 1] not in labels:
+            value = lines[idx + 1]
+            idx += 2
+        else:
+            idx += 1
+        result[label] = value
+    return result
+
+
+def discover_toolchains() -> dict[str, Any]:
+    windows_checks = {
+        "where_cl": run_command(["where.exe", "cl"]),
+        "where_clang": run_command(["where.exe", "clang"]),
+        "where_gcc": run_command(["where.exe", "gcc"]),
+    }
+    vswhere_candidates = [
+        Path(os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)")) / "Microsoft Visual Studio/Installer/vswhere.exe",
+        Path(os.environ.get("ProgramFiles", r"C:\Program Files")) / "Microsoft Visual Studio/Installer/vswhere.exe",
     ]
-    for item in candidates:
-        if item["command"]:
-            return item
-    return {"name": None, "kind": None, "command": None}
+    vswhere_checks = []
+    for candidate in vswhere_candidates:
+        if candidate.exists():
+            vswhere_checks.append({"path": str(candidate), "result": run_command([str(candidate), "-all", "-format", "json"])})
+        else:
+            vswhere_checks.append({"path": str(candidate), "exists": False})
+    wsl_exe = shutil.which("wsl.exe")
+    wsl_checks: list[dict[str, Any]] = []
+    target_compiler: dict[str, Any] = {
+        "available": False,
+        "suitability": "no_existing_target_compatible_linux_compiler_found",
+    }
+    if wsl_exe:
+        list_result = run_command([wsl_exe, "-l", "-q"], timeout=20)
+        distros = clean_wsl_lines(list_result["stdout"])
+        for distro in distros:
+            script = (
+                "echo machine; uname -m; "
+                "echo uname; uname -a; "
+                "echo gcc_path; command -v gcc || true; "
+                "echo gcc_version; gcc --version 2>/dev/null | head -n 1 || true; "
+                "echo gcc_triple; gcc -dumpmachine 2>/dev/null || true; "
+                "echo clang_path; command -v clang || true; "
+                "echo clang_version; clang --version 2>/dev/null | head -n 1 || true; "
+                "echo cc_path; command -v cc || true; "
+                "echo cc_version; cc --version 2>/dev/null | head -n 1 || true; "
+                "echo perf_event_header; test -e /usr/include/linux/perf_event.h && echo present || echo missing; "
+                "echo sched_header; test -e /usr/include/sched.h && echo present || echo missing"
+            )
+            probe = run_command([wsl_exe, "-d", distro, "--", "sh", "-c", script], timeout=30)
+            parsed = parse_label_output(probe["stdout"])
+            suitable = bool(parsed.get("gcc_path")) and parsed.get("perf_event_header") == "present" and parsed.get("sched_header") == "present"
+            entry = {
+                "distro": distro,
+                "probe": probe,
+                "parsed": parsed,
+                "suitability": "target_compatible_linux_gcc" if suitable else "not_target_compatible_for_this_package",
+            }
+            wsl_checks.append(entry)
+            if suitable and not target_compiler.get("available"):
+                target_compiler = {
+                    "available": True,
+                    "environment": "wsl",
+                    "distro": distro,
+                    "compiler": "gcc",
+                    "path": parsed["gcc_path"],
+                    "version": parsed.get("gcc_version"),
+                    "target_triple": parsed.get("gcc_triple"),
+                    "machine": parsed.get("machine"),
+                    "uname": parsed.get("uname"),
+                    "headers": {
+                        "linux_perf_event_h": parsed.get("perf_event_header"),
+                        "sched_h": parsed.get("sched_header"),
+                    },
+                    "suitability": "target_compatible_linux_binary_authority",
+                }
+    host_compilers = []
+    for key, result in windows_checks.items():
+        if result["returncode"] == 0 and result["stdout"].strip():
+            host_compilers.append({"check": key, "paths": clean_wsl_lines(result["stdout"]), "suitability": "host_semantic_only"})
+    other_environments = {
+        "msys2_roots": [str(path) for path in [Path(r"C:\msys64"), Path(r"C:\msys32")] if path.exists()],
+        "cygwin_roots": [str(path) for path in [Path(r"C:\cygwin64"), Path(r"C:\cygwin")] if path.exists()],
+        "llvm_roots": [str(path) for path in [Path(r"C:\Program Files\LLVM")] if path.exists()],
+        "cmake": run_command(["where.exe", "cmake"]),
+        "cmake_version": run_command(["cmake", "--version"]) if shutil.which("cmake") else {"skipped": True},
+        "cmake_classification": "generator_or_build_orchestrator_not_a_target_compiler",
+        "docker": run_command(["where.exe", "docker"]),
+        "docker_version": run_command(["docker", "--version"]) if shutil.which("docker") else {"skipped": True},
+        "podman": run_command(["where.exe", "podman"]),
+    }
+    result = {
+        "schema": "FAMILY10H_RELATION_ONLY_TOOLCHAIN_DISCOVERY_V1",
+        "windows_path_checks": windows_checks,
+        "visual_studio": vswhere_checks,
+        "wsl": {"wsl_exe": wsl_exe, "distributions": wsl_checks},
+        "other_existing_environments": other_environments,
+        "host_semantic_compilers": host_compilers,
+        "target_compatible_compiler": target_compiler,
+        "installation_performed": False,
+        "system_modified": False,
+    }
+    result["toolchain_discovery_sha256"] = pub.digest({k: v for k, v in result.items() if k != "toolchain_discovery_sha256"})
+    return result
 
 
-def compile_runtime() -> dict[str, Any]:
-    compiler = find_c_compiler()
-    binary = HERE / ("relation_only_runtime.exe" if compiler.get("kind") == "msvc" else "relation_only_runtime")
+def wsl_path(path: Path, distro: str | None = None) -> str:
+    command = ["wsl.exe"]
+    if distro:
+        command.extend(["-d", distro])
+    command.extend(["--", "wslpath", "-a", str(path)])
+    result = run_command(command, timeout=15)
+    if result["returncode"] != 0 or not result["stdout"].strip():
+        raise RuntimeError(f"wslpath failed for {path}: {result['stderr']}")
+    return result["stdout"].strip()
+
+
+def count_jsonl(path: Path) -> int:
+    with path.open("r", encoding="utf-8") as handle:
+        return sum(1 for line in handle if line.strip())
+
+
+def runtime_static_inspection() -> dict[str, Any]:
+    source = (HERE / "relation_only_runtime.c").read_text(encoding="utf-8")
+    target = (HERE / "relation_only_target.py").read_text(encoding="utf-8")
+    gates = {
+        "runtime_schedule_executor_implemented": "execute_schedule_common" in source and "--execute-schedule" in source,
+        "runtime_schedule_parser_implemented": "parse_schedule_row" in source and "RELATION_ONLY_SCHEDULE_COLUMNS" in source,
+        "fresh_carrier_per_tuple_implemented": "MAP_SHARED | MAP_ANONYMOUS" in source and "relation_only_prefault(state)" in source,
+        "source_process_boundary_implemented": "fork()" in source and "waitpid" in source,
+        "source_cpu_pinning_implemented": "pin_to_core(row.source_cpu_expected)" in source,
+        "receiver_cpu_pinning_implemented": "pin_to_core(row.receiver_cpu_expected)" in source,
+        "source_death_receipt_implemented": "source_death_receipts.jsonl" in source and "query_selected_after_waitpid" in source,
+        "delay_enforcement_implemented": "sleep_full_ns(row.delay_ns)" in source,
+        "pmu_group_open_implemented": "open_perf_group" in source and "perf_event_open_call" in source,
+        "pmu_group_read_implemented": "read(group.cycles_fd" in source and "readout_has_id" in source,
+        "dirty_probe_primary_endpoint_implemented": "dirty_probe_response" in source and "probe_responses_dirty" in pub.PMU_GROUP["events"],
+        "raw_record_output_implemented": "raw_records.jsonl" in source,
+        "feature_freeze_output_implemented": "feature_freeze.json" in source and "write_feature_freeze" in source,
+        "target_execution_receipt_implemented": "target_execution_receipt.json" in source,
+        "relation_sham_control_implemented": "RELATION_ONLY_CONTROL_RELATION_SHAM" in source,
+        "route_pressure_sham_control_implemented": "RELATION_ONLY_CONTROL_ROUTE_PRESSURE_SHAM" in source,
+        "independent_marginal_replay_control_implemented": "RELATION_ONLY_CONTROL_INDEPENDENT_MARGINAL_REPLAY" in source,
+        "distance_control_implemented": "RELATION_ONLY_CONTROL_DISTANCE" in source,
+        "source_order_control_implemented": "parse_source_order" in source and "A_then_B" in source and "B_then_A" in source,
+        "query_order_control_implemented": "parse_query_order" in source and "AB" in source and "BA" in source,
+        "all_physical_controls_implemented": all(
+            token in source
+            for token in [
+                "relation_sham",
+                "route_pressure_sham",
+                "independent_marginal_replay",
+                "distance_control",
+                "parse_source_order",
+                "parse_query_order",
+            ]
+        ),
+        "target_preflight_implemented": "TARGET_PREFLIGHT_CHECKS" in target and "--target-preflight" in target,
+        "target_authority_path_implemented": "--execute-authorized" in target and "runtime_command" in target,
+        "placeholder_reserved_executor_removed": "reserved for a separately authorized target transaction" not in source,
+        "synthetic_executor_implemented": "--synthetic-execute-schedule" in source
+        and "FAMILY10H_RELATION_ONLY_SYNTHETIC_EXECUTOR_PACKET_V1" in source,
+        "prefault_implemented": "relation_only_prefault" in source,
+        "hot_loop_relation_branch_free": "relation_only_map_index" in source and "control dispatch" not in source.lower(),
+    }
+    gates["all_static_gates_passed"] = all(gates.values())
+    return {
+        "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_STATIC_INSPECTION_V1",
+        "gates": gates,
+        "runtime_c_sha256": pub.sha256_file(HERE / "relation_only_runtime.c"),
+        "runtime_h_sha256": pub.sha256_file(HERE / "relation_only_runtime.h"),
+        "target_py_sha256": pub.sha256_file(HERE / "relation_only_target.py"),
+    }
+
+
+def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
+    static = runtime_static_inspection()
+    target_compiler = toolchain.get("target_compatible_compiler", {})
+    binary = HERE / "relation_only_runtime"
+    if binary.exists():
+        binary.unlink()
     receipt: dict[str, Any] = {
-        "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_BUILD_SELF_TEST_V1",
-        "compiler": compiler,
-        "compile_attempted": bool(compiler.get("command")),
+        "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_BUILD_SELF_TEST_V2",
+        "toolchain_discovery_sha256": toolchain.get("toolchain_discovery_sha256"),
+        "compiler": target_compiler,
+        "compile_attempted": bool(target_compiler.get("available")),
         "warnings_as_errors": True,
         "pmu_opened": False,
         "live_activity": False,
         "passed": False,
         "blockers": [],
+        "static_inspection": static,
     }
-    if not compiler.get("command"):
-        receipt["blockers"].append("no local C compiler found on PATH")
+    if not target_compiler.get("available"):
+        receipt["blockers"].append("no existing target-compatible Linux compiler found")
         receipt["runtime_binary_authority"] = {
             "present": False,
             "compiled_binary_sha256": None,
-            "compile_status": "not_compiled_no_compiler",
+            "compile_status": "not_compiled_no_target_compatible_compiler",
+        }
+        receipt["implementation_gates"] = {
+            **static["gates"],
+            "runtime_source_compiles_for_target_linux": False,
+            "runtime_self_test_passes": False,
+            "synthetic_executor_complete_schedule_passed": False,
+            "target_linux_binary_bound_to_source": False,
         }
         receipt["runtime_build_sha256"] = pub.digest({k: v for k, v in receipt.items() if k != "runtime_build_sha256"})
         return receipt
-    if compiler["kind"] == "msvc":
-        command = [
-            compiler["command"],
-            "/nologo",
-            "/W4",
-            "/WX",
-            "/O2",
-            str(HERE / "relation_only_runtime.c"),
-            f"/Fe:{binary}",
-        ]
-    else:
-        command = [
-            compiler["command"],
-            "-std=c11",
-            "-Wall",
-            "-Wextra",
-            "-Werror",
-            "-O2",
-            str(HERE / "relation_only_runtime.c"),
-            "-o",
-            str(binary),
-        ]
-    completed = subprocess.run(command, text=True, capture_output=True, check=False, timeout=60, cwd=HERE)
+    schedule_manifest = json.loads(SCHEDULE_JSON.read_text(encoding="utf-8")) if SCHEDULE_JSON.exists() else {}
+    expected_schedule_sha256 = schedule_manifest.get("canonical_schedule_sha256")
+    distro = target_compiler["distro"]
+    wsl_c = wsl_path(HERE / "relation_only_runtime.c", distro)
+    wsl_binary = wsl_path(binary, distro)
+    wsl_schedule = wsl_path(SCHEDULE_TSV, distro)
+    command = [
+        "wsl.exe",
+        "-d",
+        distro,
+        "--",
+        target_compiler["path"],
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        wsl_c,
+        "-o",
+        wsl_binary,
+    ]
+    completed = run_command(command, timeout=120, cwd=HERE)
     receipt["compile_command"] = command
-    receipt["compile_returncode"] = completed.returncode
-    receipt["compile_stdout"] = completed.stdout
-    receipt["compile_stderr"] = completed.stderr
-    if completed.returncode != 0 or not binary.exists():
-        receipt["blockers"].append("runtime compile failed")
+    receipt["compile_returncode"] = completed["returncode"]
+    receipt["compile_stdout"] = completed["stdout"]
+    receipt["compile_stderr"] = completed["stderr"]
+    if completed["returncode"] != 0 or not binary.exists():
+        receipt["blockers"].append("target Linux runtime compile failed")
         receipt["runtime_binary_authority"] = {
             "present": binary.exists(),
             "compiled_binary_sha256": pub.sha256_file(binary) if binary.exists() else None,
             "compile_status": "compile_failed",
         }
+        receipt["implementation_gates"] = {
+            **static["gates"],
+            "runtime_source_compiles_for_target_linux": False,
+            "runtime_self_test_passes": False,
+            "synthetic_executor_complete_schedule_passed": False,
+            "target_linux_binary_bound_to_source": False,
+        }
         receipt["runtime_build_sha256"] = pub.digest({k: v for k, v in receipt.items() if k != "runtime_build_sha256"})
         return receipt
-    runtime = subprocess.run([str(binary), "--self-test"], text=True, capture_output=True, check=False, timeout=30, cwd=HERE)
-    receipt["runtime_self_test_returncode"] = runtime.returncode
-    receipt["runtime_self_test_stdout"] = runtime.stdout
-    receipt["runtime_self_test_stderr"] = runtime.stderr
+    self_test_command = ["wsl.exe", "-d", distro, "--", wsl_binary, "--self-test"]
+    runtime = run_command(self_test_command, timeout=60, cwd=HERE)
+    missing_auth = run_command(
+        ["wsl.exe", "-d", distro, "--", wsl_binary, "--execute-schedule", wsl_schedule, wsl_path(HERE / "_relation_only_noauth_output", distro)],
+        timeout=30,
+        cwd=HERE,
+    )
+    synthetic_summary: dict[str, Any] = {
+        "passed": False,
+        "raw_record_count": 0,
+        "source_death_receipt_count": 0,
+        "feature_freeze_written": False,
+        "feature_freeze": None,
+        "execution_receipt": None,
+    }
+    output_root = HERE / "_relation_only_synthetic_executor_self_test_output"
+    if output_root.exists():
+        shutil.rmtree(output_root)
+    try:
+        synthetic_command = [
+            "wsl.exe",
+            "-d",
+            distro,
+            "--",
+            wsl_binary,
+            "--synthetic-execute-schedule",
+            wsl_schedule,
+            wsl_path(output_root, distro),
+        ]
+        synthetic = run_command(synthetic_command, timeout=240, cwd=HERE)
+        raw_path = output_root / "raw_records.jsonl"
+        death_path = output_root / "source_death_receipts.jsonl"
+        feature_path = output_root / "feature_freeze.json"
+        receipt_path = output_root / "target_execution_receipt.json"
+        parsed_feature_freeze = json.loads(feature_path.read_text(encoding="utf-8")) if feature_path.exists() else None
+        parsed_receipt = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path.exists() else None
+        synthetic_summary = {
+            "command": synthetic_command,
+            "returncode": synthetic["returncode"],
+            "stdout": synthetic["stdout"],
+            "stderr": synthetic["stderr"],
+            "raw_record_count": count_jsonl(raw_path) if raw_path.exists() else 0,
+            "source_death_receipt_count": count_jsonl(death_path) if death_path.exists() else 0,
+            "feature_freeze_written": feature_path.exists(),
+            "feature_freeze": parsed_feature_freeze,
+            "execution_receipt": parsed_receipt,
+            "passed": synthetic["returncode"] == 0
+            and raw_path.exists()
+            and death_path.exists()
+            and count_jsonl(raw_path) == count_jsonl(death_path)
+            and count_jsonl(raw_path) > 0
+            and feature_path.exists()
+            and parsed_feature_freeze is not None
+            and parsed_feature_freeze.get("schedule_sha256") == expected_schedule_sha256
+            and parsed_feature_freeze.get("physical_measurement") is False
+            and parsed_receipt is not None
+            and parsed_receipt.get("physical_measurement") is False,
+        }
+    finally:
+        if output_root.exists():
+            shutil.rmtree(output_root)
+    file_result = run_command(["wsl.exe", "-d", distro, "--", "file", wsl_binary], timeout=15)
+    receipt["runtime_self_test"] = runtime
+    receipt["missing_authority_refusal"] = {
+        "returncode": missing_auth["returncode"],
+        "stdout": missing_auth["stdout"],
+        "stderr": missing_auth["stderr"],
+        "passed": missing_auth["returncode"] not in {0, None},
+    }
+    receipt["synthetic_executor_self_test"] = synthetic_summary
     receipt["runtime_binary_authority"] = {
         "present": True,
         "path": binary.name,
         "compiled_binary_sha256": pub.sha256_file(binary),
         "size": binary.stat().st_size,
-        "compiler_identity": compiler,
-        "compiler_flags": command[1:-3] if compiler["kind"] != "msvc" else command[1:-1],
+        "compiler_identity": target_compiler,
+        "compiler_flags": [
+            "-std=c11",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+        ],
         "runtime_c_sha256": pub.sha256_file(HERE / "relation_only_runtime.c"),
         "runtime_h_sha256": pub.sha256_file(HERE / "relation_only_runtime.h"),
+        "binary_format": file_result["stdout"].strip(),
+        "compile_status": "compiled_target_compatible_linux_binary",
     }
-    receipt["passed"] = runtime.returncode == 0
-    if not receipt["passed"]:
+    implementation_gates = {
+        **static["gates"],
+        "runtime_source_compiles_for_target_linux": completed["returncode"] == 0 and binary.exists(),
+        "runtime_self_test_passes": runtime["returncode"] == 0,
+        "synthetic_executor_complete_schedule_passed": synthetic_summary["passed"],
+        "missing_authority_refusal_passed": receipt["missing_authority_refusal"]["passed"],
+        "target_linux_binary_bound_to_source": binary.exists() and pub.sha256_file(HERE / "relation_only_runtime.c") == receipt["runtime_binary_authority"]["runtime_c_sha256"],
+    }
+    receipt["implementation_gates"] = implementation_gates
+    receipt["passed"] = all(
+        implementation_gates[key]
+        for key in [
+            "runtime_source_compiles_for_target_linux",
+            "runtime_self_test_passes",
+            "runtime_schedule_executor_implemented",
+            "runtime_schedule_parser_implemented",
+            "fresh_carrier_per_tuple_implemented",
+            "source_process_boundary_implemented",
+            "source_cpu_pinning_implemented",
+            "receiver_cpu_pinning_implemented",
+            "source_death_receipt_implemented",
+            "delay_enforcement_implemented",
+            "pmu_group_open_implemented",
+            "pmu_group_read_implemented",
+            "dirty_probe_primary_endpoint_implemented",
+            "raw_record_output_implemented",
+            "feature_freeze_output_implemented",
+            "target_execution_receipt_implemented",
+            "all_physical_controls_implemented",
+            "target_preflight_implemented",
+            "target_authority_path_implemented",
+            "synthetic_executor_complete_schedule_passed",
+            "missing_authority_refusal_passed",
+            "target_linux_binary_bound_to_source",
+            "placeholder_reserved_executor_removed",
+        ]
+    )
+    if runtime["returncode"] != 0:
         receipt["blockers"].append("runtime self-test failed")
+    if not synthetic_summary["passed"]:
+        receipt["blockers"].append("synthetic executor self-test failed")
+    for gate, passed in implementation_gates.items():
+        if not passed and gate not in {"all_static_gates_passed"}:
+            receipt["blockers"].append(gate)
+    receipt["blockers"] = sorted(set(receipt["blockers"]))
     receipt["runtime_build_sha256"] = pub.digest({k: v for k, v in receipt.items() if k != "runtime_build_sha256"})
     return receipt
 
@@ -507,20 +914,40 @@ def build_readiness(
     self_test_result: dict[str, Any],
     validate: dict[str, Any],
 ) -> dict[str, Any]:
+    gates = runtime_build.get("implementation_gates", {})
+    preflight = target_self_test.get("target_preflight_refuses_without_authority", {})
     checks = {
-        "runtime_implemented": True,
-        "runtime_compiled_with_warnings_as_errors": runtime_build["passed"],
-        "runtime_self_tests_passed": runtime_build["passed"],
-        "target_implemented": True,
-        "target_refuses_without_authority": target_self_test.get("self_test_passed") is True,
+        "runtime_source_compiles_for_target_linux": gates.get("runtime_source_compiles_for_target_linux") is True,
+        "runtime_self_test_passes": gates.get("runtime_self_test_passes") is True,
+        "runtime_schedule_executor_implemented": gates.get("runtime_schedule_executor_implemented") is True,
+        "runtime_schedule_parser_implemented": gates.get("runtime_schedule_parser_implemented") is True,
+        "fresh_carrier_per_tuple_implemented": gates.get("fresh_carrier_per_tuple_implemented") is True,
+        "source_process_boundary_implemented": gates.get("source_process_boundary_implemented") is True,
+        "source_cpu_pinning_implemented": gates.get("source_cpu_pinning_implemented") is True,
+        "receiver_cpu_pinning_implemented": gates.get("receiver_cpu_pinning_implemented") is True,
+        "source_death_receipt_implemented": gates.get("source_death_receipt_implemented") is True,
+        "delay_enforcement_implemented": gates.get("delay_enforcement_implemented") is True,
+        "pmu_group_open_implemented": gates.get("pmu_group_open_implemented") is True,
+        "pmu_group_read_implemented": gates.get("pmu_group_read_implemented") is True,
+        "dirty_probe_primary_endpoint_implemented": gates.get("dirty_probe_primary_endpoint_implemented") is True,
+        "raw_record_output_implemented": gates.get("raw_record_output_implemented") is True,
+        "feature_freeze_output_implemented": gates.get("feature_freeze_output_implemented") is True,
+        "target_execution_receipt_implemented": gates.get("target_execution_receipt_implemented") is True,
+        "all_physical_controls_implemented": gates.get("all_physical_controls_implemented") is True,
+        "target_preflight_implemented": gates.get("target_preflight_implemented") is True and preflight.get("passed") is True,
         "physical_adjudicator_implemented": physical_self_test["passed"],
-        "controls_executable": True,
-        "physical_threshold_law_frozen": True,
+        "target_linux_binary_bound_to_source": gates.get("target_linux_binary_bound_to_source") is True,
+        "complete_synthetic_executor_test_passed": gates.get("synthetic_executor_complete_schedule_passed") is True,
+        "missing_authority_refusal_passed": gates.get("missing_authority_refusal_passed") is True,
+        "target_refuses_without_authority": target_self_test.get("self_test_passed") is True,
+        "physical_threshold_law_frozen": "threshold_contract" in physical_self_test,
         "true_heldout_simulations_passed": self_test_result["tests"]["true_heldout_transport_passed"],
         "implementation_derived_proofs_passed": proof["passed"],
         "negative_regressions_passed": self_test_result["tests"]["negative_regressions_passed"],
         "offline_validate_passed": validate["passed"],
-        "zero_live_activity": True,
+        "zero_live_activity": runtime_build.get("live_activity") is False
+        and target_self_test.get("live_invocation_count") == 0
+        and target_self_test.get("pmu_acquisition_count") == 0,
     }
     blockers = []
     for key, passed in checks.items():
@@ -622,8 +1049,11 @@ def validate_artifacts() -> dict[str, Any]:
         "RELATION_ONLY_IMPLEMENTATION_MANIFEST.sha256",
         "RELATION_ONLY_SOURCE_HASHES.json",
         "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
+        "RELATION_ONLY_TOOLCHAIN_DISCOVERY.json",
         "RELATION_ONLY_RUNTIME_BUILD_SELF_TEST.json",
+        "RELATION_ONLY_SYNTHETIC_EXECUTOR_SELF_TEST.json",
         "RELATION_ONLY_TARGET_SELF_TEST.json",
+        "RELATION_ONLY_TARGET_PREFLIGHT_SELF_TEST.json",
         "RELATION_ONLY_PHYSICAL_ADJUDICATOR_SELF_TEST.json",
         "RELATION_ONLY_PHYSICAL_THRESHOLD_CONTRACT.json",
         "RELATION_ONLY_BUILD_READINESS.json",
@@ -632,15 +1062,19 @@ def validate_artifacts() -> dict[str, Any]:
     if missing:
         failures.append(f"missing artifacts: {missing!r}")
     grammar = json.loads(GRAMMAR_JSON.read_text(encoding="utf-8"))
-    schedule = json.loads(SCHEDULE_JSON.read_text(encoding="utf-8"))
+    schedule_manifest = json.loads(SCHEDULE_JSON.read_text(encoding="utf-8"))
+    schedule = pub.build_schedule(grammar)
     self_test_result = json.loads(SELF_TEST_JSON.read_text(encoding="utf-8"))
     manifest = json.loads(MANIFEST_JSON.read_text(encoding="utf-8")) if MANIFEST_JSON.exists() else {}
     readiness = json.loads(BUILD_READINESS_JSON.read_text(encoding="utf-8")) if BUILD_READINESS_JSON.exists() else {}
     decision = readiness.get("package_decision", manifest.get("package_decision", pub.PACKAGE_DECISION_BLOCKED))
     if GRAMMAR_SHA.read_text(encoding="utf-8").strip() != pub.sha256_file(GRAMMAR_JSON):
         failures.append("grammar file sha mismatch")
-    if SCHEDULE_SHA.read_text(encoding="utf-8").strip() != pub.sha256_file(SCHEDULE_JSON):
-        failures.append("schedule file sha mismatch")
+    schedule_tsv_sha = pub.sha256_file(SCHEDULE_TSV)
+    if SCHEDULE_SHA.read_text(encoding="utf-8").strip() != schedule_tsv_sha:
+        failures.append("expanded schedule TSV sha mismatch")
+    if not validate_schedule_json_manifest(schedule_manifest, schedule, schedule_tsv_sha)["passed"]:
+        failures.append("schedule JSON manifest validation failed")
     if MANIFEST_SHA.exists() and MANIFEST_SHA.read_text(encoding="utf-8").strip() != pub.sha256_file(MANIFEST_JSON):
         failures.append("manifest file sha mismatch")
     if not pub.validate_grammar(grammar)["passed"]:
@@ -679,12 +1113,22 @@ def prepare() -> dict[str, Any]:
     pub.write_json(GRAMMAR_JSON, grammar)
     write_grammar_tsv(grammar)
     write_text(GRAMMAR_SHA, pub.sha256_file(GRAMMAR_JSON) + "\n")
-    pub.write_json(SCHEDULE_JSON, schedule)
     pub.write_schedule_tsv(schedule, SCHEDULE_TSV)
-    write_text(SCHEDULE_SHA, pub.sha256_file(SCHEDULE_JSON) + "\n")
+    schedule_tsv_sha = pub.sha256_file(SCHEDULE_TSV)
+    pub.write_compact_json(SCHEDULE_JSON, schedule_json_manifest(schedule, schedule_tsv_sha))
+    write_text(SCHEDULE_SHA, schedule_tsv_sha + "\n")
 
-    runtime_build = compile_runtime()
+    toolchain = discover_toolchains()
+    pub.write_json(TOOLCHAIN_DISCOVERY_JSON, toolchain)
+    runtime_build = compile_runtime(toolchain)
     pub.write_json(RUNTIME_BUILD_JSON, runtime_build)
+    pub.write_json(
+        SYNTHETIC_EXECUTOR_SELF_TEST_JSON,
+        {
+            "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_EXECUTOR_SELF_TEST_RECEIPT_V1",
+            **runtime_build.get("synthetic_executor_self_test", {}),
+        },
+    )
     source_bundle = pub.write_source_bundle(SOURCE_BUNDLE, SOURCE_FILES + [CONTRACT_FILE])
     source_hashes_result = source_hashes(source_bundle, runtime_build)
     pub.write_json(SOURCE_HASHES_JSON, source_hashes_result)
@@ -735,49 +1179,52 @@ def prepare() -> dict[str, Any]:
 
     target_self_test = run_target_self_test()
     pub.write_json(TARGET_SELF_TEST_JSON, target_self_test)
+    pub.write_json(
+        TARGET_PREFLIGHT_SELF_TEST_JSON,
+        target_self_test.get(
+            "target_preflight_refuses_without_authority",
+            {
+                "schema": "FAMILY10H_RELATION_ONLY_TARGET_PREFLIGHT_REFUSAL_V1",
+                "passed": False,
+                "reason": "target self-test did not emit preflight refusal",
+            },
+        ),
+    )
     self_test_result = self_test(grammar, schedule, proof, runtime_build, target_self_test, physical_self_test)
     pub.write_json(SELF_TEST_JSON, self_test_result)
-    initial_validate = validate_artifacts()
-    readiness = build_readiness(proof, runtime_build, target_self_test, physical_self_test, self_test_result, initial_validate)
-    pub.write_json(BUILD_READINESS_JSON, readiness)
-    manifest = implementation_manifest(
-        grammar,
-        proof,
-        schedule,
-        self_test_result,
-        adversary,
-        transport,
-        initial_validate,
-        source_hashes_result,
-        runtime_build,
-        target_self_test,
-        physical_self_test,
-        threshold_contract,
-        readiness,
-    )
-    pub.write_json(MANIFEST_JSON, manifest)
-    write_text(MANIFEST_SHA, pub.sha256_file(MANIFEST_JSON) + "\n")
     validate = validate_artifacts()
-    pub.write_json(VALIDATE_JSON, validate)
-    manifest = implementation_manifest(
-        grammar,
-        proof,
-        schedule,
-        self_test_result,
-        adversary,
-        transport,
-        validate,
-        source_hashes_result,
-        runtime_build,
-        target_self_test,
-        physical_self_test,
-        threshold_contract,
-        readiness,
-    )
-    pub.write_json(MANIFEST_JSON, manifest)
-    write_text(MANIFEST_SHA, pub.sha256_file(MANIFEST_JSON) + "\n")
-    validate = validate_artifacts()
-    pub.write_json(VALIDATE_JSON, validate)
+    readiness = provisional_readiness
+    manifest = json.loads(MANIFEST_JSON.read_text(encoding="utf-8"))
+    for _ in range(4):
+        readiness = build_readiness(proof, runtime_build, target_self_test, physical_self_test, self_test_result, validate)
+        pub.write_json(BUILD_READINESS_JSON, readiness)
+        manifest = implementation_manifest(
+            grammar,
+            proof,
+            schedule,
+            self_test_result,
+            adversary,
+            transport,
+            validate,
+            source_hashes_result,
+            runtime_build,
+            target_self_test,
+            physical_self_test,
+            threshold_contract,
+            readiness,
+        )
+        pub.write_json(MANIFEST_JSON, manifest)
+        write_text(MANIFEST_SHA, pub.sha256_file(MANIFEST_JSON) + "\n")
+        next_validate = validate_artifacts()
+        pub.write_json(VALIDATE_JSON, next_validate)
+        if (
+            next_validate["passed"] == validate.get("passed")
+            and next_validate["package_decision"] == readiness["package_decision"]
+            and manifest["package_decision"] == readiness["package_decision"]
+        ):
+            validate = next_validate
+            break
+        validate = next_validate
     return {
         "package_decision": readiness["package_decision"],
         "blockers": readiness["blockers"],
