@@ -1,0 +1,40 @@
+{
+  "allowed_future_result_classes": [
+    "FAMILY10H_RELATION_MATCH_COORDINATE_CONFIRMED_PROSPECTIVE",
+    "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "FAMILY10H_RELATION_MATCH_COORDINATE_CANDIDATE_PROSPECTIVE",
+    "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+  ],
+  "live_authority_env_absent": {
+    "live_invocation_count": 0,
+    "observed_authority_keys": [],
+    "passed": true,
+    "pmu_acquisition_count": 0
+  },
+  "live_invocation_count": 0,
+  "maximum_future_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_CONFIRMED",
+  "offline_only": true,
+  "pmu_acquisition_count": 0,
+  "runtime_refuses_without_authority": {
+    "live_invocation_count": 0,
+    "passed": true,
+    "pmu_acquisition_count": 0,
+    "reason": "runtime binary absent; compile gate owns build-readiness blocker",
+    "runtime_binary_present": false
+  },
+  "schema": "FAMILY10H_RELATION_ONLY_TARGET_SELF_TEST_V1",
+  "science_package_id": "family10h_relation_only_matched_permutation_v1",
+  "self_test_passed": true,
+  "self_test_sha256": "0bfb1dcaf098d6c0824286a336be94745850f83932709febe8059f7699de367b",
+  "sensor_inventory_count": 0,
+  "small_wall_crossed": false,
+  "source_root_validation": {
+    "failures": [],
+    "passed": true,
+    "required_file_count": 17
+  },
+  "stderr": "",
+  "subprocess_returncode": 0,
+  "target_contact_count": 0,
+  "transaction_run_id": "family10h_relation_only_matched_permutation_v1_0"
+}

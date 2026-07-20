@@ -1,0 +1,29 @@
+{
+  "blockers": [
+    "runtime_compiled_with_warnings_as_errors",
+    "runtime_self_tests_passed",
+    "implementation_derived_proofs_passed",
+    "no local C compiler found on PATH"
+  ],
+  "build_readiness_sha256": "19bb67dbafb27ea2cbd1186ec8d40ffb5b21e3353035c21d10ffde69eb220bbd",
+  "checks": {
+    "controls_executable": true,
+    "implementation_derived_proofs_passed": false,
+    "negative_regressions_passed": true,
+    "offline_validate_passed": true,
+    "physical_adjudicator_implemented": true,
+    "physical_threshold_law_frozen": true,
+    "runtime_compiled_with_warnings_as_errors": false,
+    "runtime_implemented": true,
+    "runtime_self_tests_passed": false,
+    "target_implemented": true,
+    "target_refuses_without_authority": true,
+    "true_heldout_simulations_passed": true,
+    "zero_live_activity": true
+  },
+  "live_authority": false,
+  "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READINESS_BLOCKED",
+  "schema": "FAMILY10H_RELATION_ONLY_BUILD_READINESS_V1",
+  "zero_live_activity": true,
+  "zero_target_contact": true
+}

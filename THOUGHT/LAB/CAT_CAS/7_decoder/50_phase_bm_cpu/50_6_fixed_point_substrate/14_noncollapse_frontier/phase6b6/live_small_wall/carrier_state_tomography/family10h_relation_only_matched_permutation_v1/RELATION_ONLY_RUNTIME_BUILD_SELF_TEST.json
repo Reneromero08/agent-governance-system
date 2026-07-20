@@ -1,0 +1,22 @@
+{
+  "blockers": [
+    "no local C compiler found on PATH"
+  ],
+  "compile_attempted": false,
+  "compiler": {
+    "command": null,
+    "kind": null,
+    "name": null
+  },
+  "live_activity": false,
+  "passed": false,
+  "pmu_opened": false,
+  "runtime_binary_authority": {
+    "compile_status": "not_compiled_no_compiler",
+    "compiled_binary_sha256": null,
+    "present": false
+  },
+  "runtime_build_sha256": "7da832f4ebea5d1b7dd16962cabb7824cdc63f43d72296cdb6384fa43c86b14f",
+  "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_BUILD_SELF_TEST_V1",
+  "warnings_as_errors": true
+}

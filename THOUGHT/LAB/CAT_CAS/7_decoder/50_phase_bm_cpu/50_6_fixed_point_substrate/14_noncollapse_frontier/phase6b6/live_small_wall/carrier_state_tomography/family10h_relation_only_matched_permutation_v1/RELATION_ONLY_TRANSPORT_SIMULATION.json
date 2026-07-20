@@ -1,102 +1,10 @@
 {
-  "all_required_strata_pass_on_planted_fixture": true,
-  "held_out_strata": {
-    "delay_label": {
-      "0ns": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "10ms": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "1ms": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      }
-    },
-    "mapping": {
-      "map0": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "map1": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      }
-    },
-    "q": {
-      "-1024": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "-1536": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "-512": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "0": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "1024": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "1536": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "512": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      }
-    },
-    "query_order": {
-      "AB": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "BA": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      }
-    },
-    "replicate": {
-      "0": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "1": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      }
-    },
-    "session": {
-      "session_0": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "session_1": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      }
-    },
-    "source_order": {
-      "A_then_B": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      },
-      "B_then_A": {
-        "R_match_abs_mean": 160.0,
-        "passed": true
-      }
-    }
-  },
   "passed": true,
-  "schema": "FAMILY10H_RELATION_ONLY_TRANSPORT_SIMULATION_V1",
-  "synthetic_positive_result": "SYNTHETIC_RELATION_MATCH_SIGNAL_DETECTED"
+  "schema": "FAMILY10H_RELATION_ONLY_TRANSPORT_SIMULATION_V2",
+  "synthetic_positive_result": "FAMILY10H_RELATION_MATCH_COORDINATE_CONFIRMED_PROSPECTIVE",
+  "true_heldout_transport": {
+    "positive_fixture_heldout_passed": true,
+    "stratum_specific_artifact_rejected": true,
+    "training_exclusion_law": "held-out factor level is absent from training; thresholds are fixed by contract"
+  }
 }
