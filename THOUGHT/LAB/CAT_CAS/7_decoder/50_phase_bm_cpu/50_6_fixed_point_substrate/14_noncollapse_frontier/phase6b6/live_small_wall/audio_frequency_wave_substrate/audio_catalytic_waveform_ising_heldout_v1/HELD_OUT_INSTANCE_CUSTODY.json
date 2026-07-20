@@ -1,0 +1,81 @@
+{
+  "freeze_order": {
+    "expected_optimum_observed_before_freeze": false,
+    "mechanism_parameter_tuned_after_instance_generation": false,
+    "native_evolution_run_before_freeze": false,
+    "oracle_consulted_before_freeze": false
+  },
+  "freezer_source_sha256": "f9a37ac60e1a9261fcbc316d9264377bb685de532c0ce683274abe94ed459422",
+  "held_out_instance": {
+    "coupling_matrix_J": [
+      [
+        0.0,
+        1.0,
+        1.0,
+        -2.0,
+        2.0
+      ],
+      [
+        1.0,
+        0.0,
+        -2.0,
+        2.0,
+        1.0
+      ],
+      [
+        1.0,
+        -2.0,
+        0.0,
+        -2.0,
+        1.0
+      ],
+      [
+        -2.0,
+        2.0,
+        -2.0,
+        0.0,
+        -1.0
+      ],
+      [
+        2.0,
+        1.0,
+        1.0,
+        -1.0,
+        0.0
+      ]
+    ],
+    "field_vector_h": [
+      -2.0,
+      -1.0,
+      0.5,
+      0.5,
+      -0.5
+    ],
+    "generation_rule": "For each upper-triangle edge and field coordinate, SHA-256 the public seed, coefficient label, and zero-based index; interpret the first eight digest bytes as an unsigned big-endian integer and reduce modulo the prospectively declared coefficient list. Mirror J exactly and set its diagonal to exact zero. No oracle or waveform result participates.",
+    "h_coefficient_values": [
+      -2.0,
+      -1.0,
+      -0.5,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "j_coefficient_values": [
+      -2.0,
+      -1.0,
+      1.0,
+      2.0
+    ],
+    "public_seed": "CATCAS_AUDIO_HELD_OUT_V1|UNCHANGED_MACHINE|62e8dab8c8631d112122a6e43cb9dcd7a4985bee",
+    "site_count": 5
+  },
+  "held_out_instance_sha256": "49db989fd525366867cf9c6866ebc7000b531b438b0227d7bb919e0ff3bf2704",
+  "predecessor_machine": {
+    "claim_ceiling": "BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY",
+    "decision": "CATALYTIC_WAVEFORM_ISING_COMPUTATION_VERIFIED",
+    "source_bytes": 46388,
+    "source_sha256": "50b6db77e2602e18356636ddb892f6d51aedb0573c6b2418afc8e5cc174991cc"
+  },
+  "schema": "catalytic_waveform_ising_heldout_custody_v1",
+  "starting_head": "62e8dab8c8631d112122a6e43cb9dcd7a4985bee"
+}
