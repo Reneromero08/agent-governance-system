@@ -1,7 +1,7 @@
 {
   "authority": "AUTHORIZE P0 BUILD-READINESS ONLY",
   "build_readiness_decision": "P0_BUILD_READINESS_PACKET_FROZEN",
-  "candidate_root": "a8328ef2e6e543530ba384861c16c41184c1140d563a959fa4562b83051d91f3",
+  "candidate_root": "a13e99fbaad26d92156779a3bc98851ba2e80a477dc0cbbbb44ad51ebf086e61",
   "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
   "contact_attestation": {
     "audio_playback_or_recording": 0,
@@ -24,9 +24,9 @@
       "sha256": "b9d3d007decc8e0ca70dda29c1e2eebb4c5048dda975697e3e4269d11defa6ba"
     },
     {
-      "bytes": 118695,
+      "bytes": 127548,
       "path": "P0_ANALYZER_REFERENCE_RESULTS.json",
-      "sha256": "42bee7972d7c0e07380e57422242310e75b3806f09db58a44dcf2eee277229f4"
+      "sha256": "8ab6a2fa4a21e9a6b16ca7f7290a8d09c6015e9745c4affe793d38baf5b5a22b"
     },
     {
       "bytes": 5807,
@@ -54,14 +54,19 @@
       "sha256": "618a1e0dd8fca93b904c312d8e0469a36dfeeaef05226ce370c75333b1099fde"
     },
     {
+      "bytes": 813,
+      "path": "P0_BUILD_READINESS_MUTATION_CONTINUITY.json",
+      "sha256": "4811b24a6bce31bbfc36594c7244da1710090e63e7ad72db65eb7aaa50a3b7d1"
+    },
+    {
       "bytes": 487,
       "path": "P0_BUILD_READINESS_MUTATION_RESULTS.json",
       "sha256": "95074bb88df37a84125144999c5106d9aaa83cf7dbde19b218c869f0412c54dc"
     },
     {
-      "bytes": 20660,
+      "bytes": 21284,
       "path": "P0_BUILD_READINESS_PACKET.md",
-      "sha256": "bb73a1b348c2ad00f6617139e35362ff74b47169d31e9d8b7661257d4e1bdb90"
+      "sha256": "6bf26e3ef94eab510b14bca11fde3b239ea541ce45fddaadf58006b8ff3aac04"
     },
     {
       "bytes": 1528,
@@ -74,9 +79,9 @@
       "sha256": "6dc4e81d6da5a2a8a77c901ea5ab7cb8b26bd74ab8cef7b944d5829de63689f8"
     },
     {
-      "bytes": 12662,
+      "bytes": 71076,
       "path": "P0_BUILD_READINESS_SCHEMAS.json",
-      "sha256": "06630409f42d21554e97f721887bff06764ca16dc2efb4794fac3a9fae92a7c5"
+      "sha256": "fa0d9fa56693ecca1004eebb2e656e381232be0859c2939adf05862ad42b23dd"
     },
     {
       "bytes": 14979,
@@ -109,9 +114,9 @@
       "sha256": "cdc93864d1b63dd459e08c59b557703637fb89f2b87c31ced0b5245384ec57cc"
     },
     {
-      "bytes": 6512,
+      "bytes": 7161,
       "path": "P0_FUTURE_PHYSICAL_EXECUTION_CONTRACT.md",
-      "sha256": "44bee551126df6d5acee6ca50f57eed46569ac00d31a2e0d50a5f3b2b91ada79"
+      "sha256": "15eee2ab009d3af41819d2c9e664aafe0bb45a3ea465f52a86547b2cd6e473bf"
     },
     {
       "bytes": 49527,
@@ -129,9 +134,9 @@
       "sha256": "c137482d45ebdc62c832cac612cfc365795014258e940907a23b0f5fa7204438"
     },
     {
-      "bytes": 3391,
+      "bytes": 4182,
       "path": "P0_POST_QUALIFICATION_AUDIT.md",
-      "sha256": "9f3ba0694e734be1794b20b3ac233584a86ff83d084543d51b5db910fbe81eef"
+      "sha256": "6d98df8d85800fc1237367da86baff1ad0e393a31cda59f91afce4aa3cc10256"
     },
     {
       "bytes": 809,
@@ -139,19 +144,19 @@
       "sha256": "08a66ea2f2f4862d38c61709776aaae5cd2ecbeb0c895face795d97a12b1a818"
     },
     {
-      "bytes": 6827,
+      "bytes": 8431,
       "path": "P0_RESONANCE_LOAD_LAW_REPAIR_CONTRACT.md",
-      "sha256": "0516b68aa2cf4a0c161757bd719a22664d373c31e6c6ed5f5d5fb49e0b96a97e"
+      "sha256": "7c61934dc92579e2e03d4cd0b0fa5c275b1a517e733e195c24a58ec0bbe664c2"
     },
     {
-      "bytes": 285,
+      "bytes": 282,
       "path": "P0_RESONANCE_LOAD_LAW_REVIEW.json",
-      "sha256": "51f2d6932ef5a09c66f4711aa2a910fcbbcde3dd96cdafc2af526ba9452925de"
+      "sha256": "85ae26ce08db222d04e70edd62de49a9841ffdc1e90b2c9e5806639bc6800baa"
     },
     {
-      "bytes": 2123,
+      "bytes": 2565,
       "path": "P0_RESONANCE_LOAD_LAW_REVIEW_REPORT.md",
-      "sha256": "c713475428eda4175c60ee378f1f238e1351b7d233cf28f78b4f866cf196faa9"
+      "sha256": "c46059f3a6b9831d463e309c6ee58bfcd70b99749ab47c49758a819652fb704d"
     },
     {
       "bytes": 4963,
@@ -164,9 +169,9 @@
       "sha256": "1324789a90c042641c255d404e18a1221c5da444fdbe80b4ce691f7fa1d29915"
     },
     {
-      "bytes": 20459,
+      "bytes": 22535,
       "path": "P0_SCIENTIFIC_FIXTURES.json",
-      "sha256": "39c431060e179171df91bbca338dd2ef20da7450acbd8660579483aeb68e4b54"
+      "sha256": "bb5ac74b2d2ec8792e8ec4925803c98d88963749e8b1143c5390f02b50ec016d"
     },
     {
       "bytes": 65794,
@@ -176,12 +181,12 @@
     {
       "bytes": 12001,
       "path": "P0_SIGNAL_PATH_MUTATION_RESULTS.json",
-      "sha256": "59c2ae829c447ad809198794214baf7cd3705b1508961b4f8fb6f76843720475"
+      "sha256": "e338bed1eac9b16f887580e92cb71a8cc208ffce4f2e8667921cb83d6c0fccbd"
     },
     {
       "bytes": 1620,
       "path": "P0_SIGNAL_PATH_ORDERING_PROOF.json",
-      "sha256": "8a981f2be3bc5d560debdde3b529088b4a8256f7e4dfeb29a5d542389e78001a"
+      "sha256": "573f0628d5db9a85aa8ba284ca744af03f3b01ab79b2bdde66b3de946fa4d39e"
     },
     {
       "bytes": 7629,
@@ -214,9 +219,9 @@
       "sha256": "1304eaeb26dd188523548e9d9fd68095461d70ac1075f6b49cbb0b3387096986"
     },
     {
-      "bytes": 111553,
+      "bytes": 115359,
       "path": "p0_build_readiness_validator.py",
-      "sha256": "b9cbf267db8e830c67c2c15d54f51b6cac3b2fb2dc467d238f2cb0c05f5db7b5"
+      "sha256": "03d38f9090a50c61a49534d05ff8eb2ed9d4db48cffdc1255c3700b19134c2ef"
     },
     {
       "bytes": 34399,
@@ -229,9 +234,9 @@
       "sha256": "b16bdf5681e2bde80972936cd3be9027c906d8fd1eb73d6b59671586b3141525"
     },
     {
-      "bytes": 243973,
+      "bytes": 263927,
       "path": "p0_scientific_analyzer.py",
-      "sha256": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7"
+      "sha256": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828"
     },
     {
       "bytes": 18009,
@@ -364,9 +369,9 @@
       "sha256": "448b2c566b7fafbe0e239f0472a1682133a2a334e325d5bd3b7717cb4edee628"
     },
     {
-      "bytes": 5796,
+      "bytes": 7704,
       "path": "test_p0_resonance_load_law.py",
-      "sha256": "2f75ba04c8ec0b8d711729889375c14c3a8df49cb43350d961d3c24e7cb0e4d9"
+      "sha256": "7e74a0cbc42d34abb38f2e5d52ee257150d5d9baddf1b1c55d40c14481ece367"
     }
   ],
   "next_authority_boundary": "USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD",

@@ -63,6 +63,12 @@ CALIBRATION_SAMPLES_PER_BLOCK = 4_096
 CALIBRATION_CHANNELS = ("CH0_SOURCE_MONITOR", "CH1_CARRIER_RESPONSE")
 CALIBRATION_BLOCK_COUNT = 143
 CALIBRATION_PAYLOAD_BYTES = CALIBRATION_BLOCK_COUNT * CALIBRATION_SAMPLES_PER_BLOCK * len(CALIBRATION_CHANNELS) * 2
+CALIBRATION_BLOCK_BYTES = CALIBRATION_SAMPLES_PER_BLOCK * len(CALIBRATION_CHANNELS) * 2
+CALIBRATION_MIN_SETTLING_NS = 5_000_000_000
+CALIBRATION_CAPTURE_DURATION_NS = CALIBRATION_SAMPLES_PER_BLOCK * 1_000_000_000 // CALIBRATION_SAMPLE_RATE_HZ
+CALIBRATION_INTER_BLOCK_GAP_NS = 1_000_000
+CALIBRATION_CHRONOLOGY_ORIGIN_UTC = "2037-07-15T23:47:50.000000Z"
+CALIBRATION_CHRONOLOGY_CLOCK = "CALIBRATION_CONTROLLER_MONOTONIC_NS"
 CALIBRATION_MIN_SOURCE_SNR = 50.0
 CALIBRATION_MIN_RESONANCE_SNR = 25.0
 CALIBRATION_MIN_RESONANCE_TO_BACKGROUND = 0.20
@@ -217,6 +223,27 @@ CALIBRATION_CUSTODY_NEGATIVES = {
     "calibration_witness_frequency_mismatch": "RESONANCE_CALIBRATION_CUSTODY",
     "calibration_after_primary_observation": "RESONANCE_CALIBRATION_CUSTODY",
     "calibration_after_assignment_targeted": "RESONANCE_CALIBRATION_CUSTODY",
+}
+CALIBRATION_SETTLING_POSITIVES = (
+    "settling_q60000_exact_5s",
+    "settling_mid_q_exact_5s",
+    "settling_q60000_longer",
+    "settling_complex_gain_background",
+    "settling_off_grid",
+    "settling_dynamic_32800_375_65600_75",
+)
+CALIBRATION_SETTLING_NEGATIVES = {
+    "settling_q60000_0p050s": "RESONANCE_CALIBRATION_SETTLING",
+    "settling_q60000_0p500s": "RESONANCE_CALIBRATION_SETTLING",
+    "settling_one_ns_short": "RESONANCE_CALIBRATION_SETTLING",
+    "settling_missing_chronology": "RESONANCE_CALIBRATION_CUSTODY",
+    "settling_duplicate_chronology": "RESONANCE_CALIBRATION_CUSTODY",
+    "settling_reordered_chronology": "RESONANCE_CALIBRATION_CUSTODY",
+    "settling_frequency_mismatch": "RESONANCE_CALIBRATION_FREQUENCY_GRID",
+    "settling_acquisition_before_command": "RESONANCE_CALIBRATION_CUSTODY",
+    "settling_nonmonotonic_timestamps": "RESONANCE_CALIBRATION_CUSTODY",
+    "settling_chronology_hash_mismatch": "RESONANCE_CALIBRATION_CUSTODY",
+    "settling_payload_order_mismatch": "RESONANCE_CALIBRATION_CUSTODY",
 }
 
 
@@ -460,10 +487,50 @@ def calibration_frequency_grid(
     return coarse + fine + [probe]
 
 
-def calibration_payload_spec(frequencies_hz: list[float]) -> dict[str, Any]:
+def calibration_block_chronology(
+    frequencies_hz: list[float],
+    settling_ns: int,
+    payload_block_sha256: list[str] | None = None,
+) -> list[dict[str, Any]]:
+    if isinstance(settling_ns, bool) or not isinstance(settling_ns, int) or settling_ns < 0:
+        raise ValueError("calibration settling ns")
     if len(frequencies_hz) != CALIBRATION_BLOCK_COUNT:
         raise ValueError("calibration frequency count")
+    block_hashes = payload_block_sha256 or [sha256_bytes(bytes(CALIBRATION_BLOCK_BYTES))] * CALIBRATION_BLOCK_COUNT
+    if len(block_hashes) != CALIBRATION_BLOCK_COUNT:
+        raise ValueError("calibration block hash count")
+    chronology: list[dict[str, Any]] = []
+    command_completed_ns = CALIBRATION_INTER_BLOCK_GAP_NS
+    for block_index, (frequency_hz, block_sha256) in enumerate(zip(frequencies_hz, block_hashes, strict=True)):
+        acquisition_started_ns = command_completed_ns + settling_ns
+        acquisition_completed_ns = acquisition_started_ns + CALIBRATION_CAPTURE_DURATION_NS
+        chronology.append({
+            "acquisition_completed_monotonic_ns": acquisition_completed_ns,
+            "acquisition_started_monotonic_ns": acquisition_started_ns,
+            "block_index": block_index,
+            "command_completed_monotonic_ns": command_completed_ns,
+            "commanded_frequency_hz": format(frequency_hz, ".17g"),
+            "payload_block_sha256": block_sha256,
+        })
+        command_completed_ns = acquisition_completed_ns + CALIBRATION_INTER_BLOCK_GAP_NS
+    return chronology
+
+
+def calibration_payload_spec(
+    frequencies_hz: list[float],
+    *,
+    settling_ns: int = CALIBRATION_MIN_SETTLING_NS,
+    payload_block_sha256: list[str] | None = None,
+) -> dict[str, Any]:
+    if len(frequencies_hz) != CALIBRATION_BLOCK_COUNT:
+        raise ValueError("calibration frequency count")
+    chronology = calibration_block_chronology(frequencies_hz, settling_ns, payload_block_sha256)
     return {
+        "block_chronology": chronology,
+        "block_chronology_clock": CALIBRATION_CHRONOLOGY_CLOCK,
+        "block_chronology_origin_monotonic_ns": 0,
+        "block_chronology_origin_utc": CALIBRATION_CHRONOLOGY_ORIGIN_UTC,
+        "block_chronology_sha256": sha256_bytes(canonical_bytes(chronology)),
         "channel_order": list(CALIBRATION_CHANNELS),
         "dtype": "int16",
         "endian": "little",
@@ -473,7 +540,7 @@ def calibration_payload_spec(frequencies_hz: list[float]) -> dict[str, Any]:
         "sample_rate_hz": CALIBRATION_SAMPLE_RATE_HZ,
         "samples_per_channel_per_frequency": CALIBRATION_SAMPLES_PER_BLOCK,
         "scale_per_code_v": ["0.000005", "0.000005"],
-        "settling_seconds_before_block": "0.05",
+        "settling_seconds_before_block": decimal_text(settling_ns / 1_000_000_000.0),
         "source_amplitude_vpp": "0.1",
         "source_offset_v": "0",
     }
@@ -494,22 +561,37 @@ def resonance_calibration_payload(
     structured_residual: float = 0.0,
     force_clipping: bool = False,
     frequencies_hz: list[float] | None = None,
+    stateful_settling: bool = False,
+    settling_ns: int = CALIBRATION_MIN_SETTLING_NS,
 ) -> tuple[bytes, dict[str, Any]]:
     frequencies = frequencies_hz or calibration_frequency_grid(f_carrier_hz, q_factor, background, gain)
-    spec = calibration_payload_spec(frequencies)
     samples = np.empty((len(frequencies), CALIBRATION_SAMPLES_PER_BLOCK, 2), dtype="<i2")
     n = np.arange(CALIBRATION_SAMPLES_PER_BLOCK, dtype=np.float64)
     rng = np.random.Generator(np.random.PCG64(0xA5A50000 + 0x101 * ROLE_ORDER.index(role)))
+    if isinstance(settling_ns, bool) or not isinstance(settling_ns, int) or settling_ns < 0:
+        raise ValueError("calibration settling ns")
+    if not isinstance(stateful_settling, bool):
+        raise ValueError("calibration stateful settling")
+    tau_seconds = q_factor / (math.pi * f_carrier_hz)
+    if not math.isfinite(tau_seconds) or tau_seconds <= 0.0:
+        raise ValueError("calibration time constant")
+    transient_state: complex | None = None
+    residual_fraction = math.exp(-(settling_ns / 1_000_000_000.0) / tau_seconds)
     for block, frequency in enumerate(frequencies):
         source_amplitude = source_amplitude_codes * (1.0 + source_amplitude_variation * math.sin(0.37 * (block + 1)))
         source_phase = source_phase_variation * math.sin(0.23 * (block + 1))
         z0 = source_amplitude * complex(math.cos(source_phase), math.sin(source_phase))
-        transfer = resonance_response(frequency, f_carrier_hz, q_factor, background, gain)
+        steady_state = resonance_response(frequency, f_carrier_hz, q_factor, background, gain)
         if second_resonance is not None:
             second_f0, second_q, second_gain = second_resonance
-            transfer += resonance_response(frequency, second_f0, second_q, 0.0j, second_gain)
+            steady_state += resonance_response(frequency, second_f0, second_q, 0.0j, second_gain)
         if structured_residual:
-            transfer += structured_residual * complex(math.cos(0.91 * block), math.sin(0.91 * block))
+            steady_state += structured_residual * complex(math.cos(0.91 * block), math.sin(0.91 * block))
+        if stateful_settling:
+            transient_state = steady_state if transient_state is None else steady_state + (transient_state - steady_state) * residual_fraction
+            transfer = transient_state
+        else:
+            transfer = steady_state
         z1 = z0 * transfer
         phase = 2.0 * math.pi * frequency * n / CALIBRATION_SAMPLE_RATE_HZ
         ch0 = z0.real * np.cos(phase) - z0.imag * np.sin(phase) + 100.0
@@ -521,17 +603,46 @@ def resonance_calibration_payload(
         samples[block, :, 1] = np.clip(np.rint(ch1), -32767, 32766).astype("<i2")
     if force_clipping:
         samples[0, 0, 1] = 32767
-    return samples.tobytes(order="C"), spec
+    data = samples.tobytes(order="C")
+    block_hashes = [
+        sha256_bytes(data[offset : offset + CALIBRATION_BLOCK_BYTES])
+        for offset in range(0, len(data), CALIBRATION_BLOCK_BYTES)
+    ]
+    spec = calibration_payload_spec(frequencies, settling_ns=settling_ns, payload_block_sha256=block_hashes)
+    return data, spec
 
 
 def resonance_calibration_raw_bytes(role: str, f_carrier_hz: float, q_factor: float) -> bytes:
     return resonance_calibration_payload(role, f_carrier_hz, q_factor)[0]
 
 
+def _rebind_calibration_payload_block_hashes(spec: dict[str, Any], data: bytes) -> dict[str, Any]:
+    rebound = copy.deepcopy(spec)
+    if len(data) != CALIBRATION_PAYLOAD_BYTES:
+        return rebound
+    chronology = rebound.get("block_chronology")
+    if not isinstance(chronology, list) or len(chronology) != CALIBRATION_BLOCK_COUNT:
+        return rebound
+    for block_index, entry in enumerate(chronology):
+        if not isinstance(entry, dict):
+            return rebound
+        offset = block_index * CALIBRATION_BLOCK_BYTES
+        entry["payload_block_sha256"] = sha256_bytes(data[offset : offset + CALIBRATION_BLOCK_BYTES])
+    rebound["block_chronology_sha256"] = sha256_bytes(canonical_bytes(chronology))
+    return rebound
+
+
 def _calibration_exact_spec(spec: dict[str, Any]) -> tuple[np.ndarray, list[float]]:
+    chronology_fields = {
+        "block_chronology", "block_chronology_clock", "block_chronology_origin_monotonic_ns",
+        "block_chronology_origin_utc", "block_chronology_sha256",
+    }
+    if not isinstance(spec, dict) or chronology_fields - set(spec):
+        raise Reject("RESONANCE_CALIBRATION_CUSTODY")
     exact_fields(
         spec,
         {
+            *chronology_fields,
             "channel_order", "dtype", "endian", "frequencies_hz", "layout", "offset_v",
             "sample_rate_hz", "samples_per_channel_per_frequency", "scale_per_code_v",
             "settling_seconds_before_block", "source_amplitude_vpp", "source_offset_v",
@@ -545,11 +656,15 @@ def _calibration_exact_spec(spec: dict[str, Any]) -> tuple[np.ndarray, list[floa
         or spec["layout"] != "frequency-major__sample-major__ch0-then-ch1-interleaved"
         or spec["sample_rate_hz"] != CALIBRATION_SAMPLE_RATE_HZ
         or spec["samples_per_channel_per_frequency"] != CALIBRATION_SAMPLES_PER_BLOCK
-        or decimal(spec["settling_seconds_before_block"], "calibration.settling") < 0.05
         or decimal(spec["source_amplitude_vpp"], "calibration.source_amplitude") != 0.1
         or decimal(spec["source_offset_v"], "calibration.source_offset") != 0.0
+        or spec["block_chronology_clock"] != CALIBRATION_CHRONOLOGY_CLOCK
+        or spec["block_chronology_origin_monotonic_ns"] != 0
     ):
         raise Reject("RESONANCE_CALIBRATION_SCHEMA")
+    if decimal(spec["settling_seconds_before_block"], "calibration.settling") < CALIBRATION_MIN_SETTLING_NS / 1_000_000_000.0:
+        raise Reject("RESONANCE_CALIBRATION_SETTLING")
+    canonical_utc(spec["block_chronology_origin_utc"], "RESONANCE_CALIBRATION_CUSTODY")
     if not isinstance(spec["frequencies_hz"], list) or len(spec["frequencies_hz"]) != CALIBRATION_BLOCK_COUNT:
         raise Reject("RESONANCE_CALIBRATION_FREQUENCY_GRID")
     frequencies = np.asarray([decimal(value, "calibration.frequency") for value in spec["frequencies_hz"]], dtype=np.float64)
@@ -566,10 +681,68 @@ def _calibration_exact_spec(spec: dict[str, Any]) -> tuple[np.ndarray, list[floa
     return frequencies, scales
 
 
+def _validate_calibration_block_chronology(data: bytes, spec: dict[str, Any], frequencies: np.ndarray) -> int:
+    chronology = spec["block_chronology"]
+    chronology_hash = spec["block_chronology_sha256"]
+    if (
+        not isinstance(chronology, list)
+        or len(chronology) != CALIBRATION_BLOCK_COUNT
+        or not isinstance(chronology_hash, str)
+        or len(chronology_hash) != 64
+        or any(character not in HEX64 for character in chronology_hash)
+        or chronology_hash != sha256_bytes(canonical_bytes(chronology))
+    ):
+        raise Reject("RESONANCE_CALIBRATION_CUSTODY")
+    declared_settling_ns = int(round(decimal(spec["settling_seconds_before_block"], "calibration.settling") * 1_000_000_000.0))
+    required_settling_ns = max(CALIBRATION_MIN_SETTLING_NS, declared_settling_ns)
+    entry_fields = {
+        "acquisition_completed_monotonic_ns", "acquisition_started_monotonic_ns", "block_index",
+        "command_completed_monotonic_ns", "commanded_frequency_hz", "payload_block_sha256",
+    }
+    previous_completed_ns: int | None = None
+    minimum_observed_settling_ns: int | None = None
+    for block_index, entry in enumerate(chronology):
+        if not isinstance(entry, dict) or set(entry) != entry_fields:
+            raise Reject("RESONANCE_CALIBRATION_CUSTODY")
+        if isinstance(entry["block_index"], bool) or entry["block_index"] != block_index:
+            raise Reject("RESONANCE_CALIBRATION_CUSTODY")
+        if entry["commanded_frequency_hz"] != spec["frequencies_hz"][block_index]:
+            raise Reject("RESONANCE_CALIBRATION_FREQUENCY_GRID")
+        if decimal(entry["commanded_frequency_hz"], "calibration.chronology.frequency") != float(frequencies[block_index]):
+            raise Reject("RESONANCE_CALIBRATION_FREQUENCY_GRID")
+        timestamps = [
+            entry["command_completed_monotonic_ns"],
+            entry["acquisition_started_monotonic_ns"],
+            entry["acquisition_completed_monotonic_ns"],
+        ]
+        if any(isinstance(value, bool) or not isinstance(value, int) or value < 0 for value in timestamps):
+            raise Reject("RESONANCE_CALIBRATION_CUSTODY")
+        command_completed_ns, acquisition_started_ns, acquisition_completed_ns = timestamps
+        if not command_completed_ns < acquisition_started_ns < acquisition_completed_ns:
+            raise Reject("RESONANCE_CALIBRATION_CUSTODY")
+        if previous_completed_ns is not None and command_completed_ns <= previous_completed_ns:
+            raise Reject("RESONANCE_CALIBRATION_CUSTODY")
+        observed_settling_ns = acquisition_started_ns - command_completed_ns
+        if observed_settling_ns < required_settling_ns:
+            raise Reject("RESONANCE_CALIBRATION_SETTLING")
+        block_sha256 = entry["payload_block_sha256"]
+        if not isinstance(block_sha256, str) or len(block_sha256) != 64 or any(character not in HEX64 for character in block_sha256):
+            raise Reject("RESONANCE_CALIBRATION_CUSTODY")
+        offset = block_index * CALIBRATION_BLOCK_BYTES
+        if block_sha256 != sha256_bytes(data[offset : offset + CALIBRATION_BLOCK_BYTES]):
+            raise Reject("RESONANCE_CALIBRATION_CUSTODY")
+        previous_completed_ns = acquisition_completed_ns
+        minimum_observed_settling_ns = observed_settling_ns if minimum_observed_settling_ns is None else min(minimum_observed_settling_ns, observed_settling_ns)
+    if minimum_observed_settling_ns is None:
+        raise Reject("RESONANCE_CALIBRATION_CUSTODY")
+    return minimum_observed_settling_ns
+
+
 def _extract_calibration_points(data: bytes, spec: dict[str, Any], *, verify_refinement: bool = True) -> tuple[np.ndarray, np.ndarray, np.ndarray, dict[str, float]]:
     frequencies, scales = _calibration_exact_spec(spec)
     if len(data) != CALIBRATION_PAYLOAD_BYTES:
         raise Reject("RESONANCE_CALIBRATION_PAYLOAD_SIZE")
+    minimum_observed_settling_ns = _validate_calibration_block_chronology(data, spec, frequencies)
     raw_flat = np.frombuffer(data, dtype="<i2")
     if np.any(raw_flat == -32768) or np.any(raw_flat == 32767):
         raise Reject("RESONANCE_CALIBRATION_CLIPPING")
@@ -610,7 +783,7 @@ def _extract_calibration_points(data: bytes, spec: dict[str, Any], *, verify_ref
     expected_fine = np.asarray([coarse_peak_hz + 0.025 * (index - 40.5) for index in range(81)], dtype=np.float64)
     if verify_refinement and not np.array_equal(frequencies[61:142], expected_fine):
         raise Reject("RESONANCE_CALIBRATION_FREQUENCY_GRID")
-    return frequencies, responses, variances, {"point_fit_condition_max": fit_condition_max, "source_snr_min": source_snr_min}
+    return frequencies, responses, variances, {"minimum_observed_settling_ns": minimum_observed_settling_ns, "point_fit_condition_max": fit_condition_max, "source_snr_min": source_snr_min}
 
 
 def _profile_calibration_fit(
@@ -756,6 +929,7 @@ def analyze_resonance_calibration_payload(data: bytes, spec: dict[str, Any]) -> 
     return {
         **fit,
         **extraction,
+        "block_chronology_sha256": spec["block_chronology_sha256"],
         "fitted_decay_seconds": fitted_q / (math.pi * fitted_f0),
         "frequency_grid_sha256": sha256_bytes(canonical_bytes(spec["frequencies_hz"])),
         "linewidth_hz": linewidth_hz,
@@ -873,6 +1047,137 @@ def run_calibration_realism_suite() -> list[dict[str, Any]]:
             if exc.code != expected:
                 raise AssertionError(f"{case}: {exc.code} != {expected}") from exc
             outcomes.append({"case": case, "class": "calibration_realism_negative", "outcome": "PASS", "rejected_by": exc.code})
+        else:
+            raise AssertionError(f"{case}: did not reject")
+    return outcomes
+
+
+def _calibration_settling_fixture(case: str) -> tuple[bytes, dict[str, Any], dict[str, float]]:
+    f0_hz = 32_768.75
+    q_factor = 60_000.0
+    settling_ns = CALIBRATION_MIN_SETTLING_NS
+    background = complex(0.06, -0.03)
+    gain = complex(0.52, 0.18)
+    if case == "settling_mid_q_exact_5s":
+        f0_hz = 32_800.0
+        q_factor = math.pi * f0_hz * 0.1
+    elif case == "settling_q60000_longer":
+        settling_ns = 6_000_000_000
+    elif case == "settling_complex_gain_background":
+        f0_hz = 32_800.0
+        q_factor = 24_000.0
+        background = complex(-0.05, 0.07)
+        gain = 0.48 * complex(math.cos(-0.63), math.sin(-0.63))
+    elif case == "settling_off_grid":
+        f0_hz = 32_800.375
+        q_factor = 24_000.0
+    elif case == "settling_dynamic_32800_375_65600_75":
+        f0_hz = 32_800.375
+        q_factor = 58_000.0
+    elif case == "settling_q60000_0p050s":
+        settling_ns = 50_000_000
+    elif case == "settling_q60000_0p500s":
+        settling_ns = 500_000_000
+    elif case == "settling_one_ns_short":
+        settling_ns = CALIBRATION_MIN_SETTLING_NS - 1
+    data, spec = resonance_calibration_payload(
+        "arm_0",
+        f0_hz,
+        q_factor,
+        background=background,
+        gain=gain,
+        noise_codes=2.0,
+        source_amplitude_variation=0.01,
+        source_phase_variation=0.01,
+        stateful_settling=True,
+        settling_ns=settling_ns,
+    )
+    if case == "settling_missing_chronology":
+        spec = copy.deepcopy(spec)
+        spec.pop("block_chronology")
+    elif case == "settling_duplicate_chronology":
+        spec = copy.deepcopy(spec)
+        spec["block_chronology"][62] = copy.deepcopy(spec["block_chronology"][61])
+        spec["block_chronology_sha256"] = sha256_bytes(canonical_bytes(spec["block_chronology"]))
+    elif case == "settling_reordered_chronology":
+        spec = copy.deepcopy(spec)
+        spec["block_chronology"][61], spec["block_chronology"][62] = spec["block_chronology"][62], spec["block_chronology"][61]
+        spec["block_chronology_sha256"] = sha256_bytes(canonical_bytes(spec["block_chronology"]))
+    elif case == "settling_frequency_mismatch":
+        spec = copy.deepcopy(spec)
+        spec["block_chronology"][61]["commanded_frequency_hz"] = "32760.125"
+        spec["block_chronology_sha256"] = sha256_bytes(canonical_bytes(spec["block_chronology"]))
+    elif case == "settling_acquisition_before_command":
+        spec = copy.deepcopy(spec)
+        entry = spec["block_chronology"][61]
+        entry["acquisition_started_monotonic_ns"] = entry["command_completed_monotonic_ns"] - 1
+        spec["block_chronology_sha256"] = sha256_bytes(canonical_bytes(spec["block_chronology"]))
+    elif case == "settling_nonmonotonic_timestamps":
+        spec = copy.deepcopy(spec)
+        previous = spec["block_chronology"][60]
+        entry = spec["block_chronology"][61]
+        entry["command_completed_monotonic_ns"] = previous["acquisition_completed_monotonic_ns"]
+        entry["acquisition_started_monotonic_ns"] = entry["command_completed_monotonic_ns"] + CALIBRATION_MIN_SETTLING_NS
+        entry["acquisition_completed_monotonic_ns"] = entry["acquisition_started_monotonic_ns"] + CALIBRATION_CAPTURE_DURATION_NS
+        spec["block_chronology_sha256"] = sha256_bytes(canonical_bytes(spec["block_chronology"]))
+    elif case == "settling_chronology_hash_mismatch":
+        spec = copy.deepcopy(spec)
+        spec["block_chronology_sha256"] = "0" * 64
+    elif case == "settling_payload_order_mismatch":
+        swapped = bytearray(data)
+        left = 61 * CALIBRATION_BLOCK_BYTES
+        right = 62 * CALIBRATION_BLOCK_BYTES
+        left_block = bytes(swapped[left : left + CALIBRATION_BLOCK_BYTES])
+        right_block = bytes(swapped[right : right + CALIBRATION_BLOCK_BYTES])
+        swapped[left : left + CALIBRATION_BLOCK_BYTES] = right_block
+        swapped[right : right + CALIBRATION_BLOCK_BYTES] = left_block
+        data = bytes(swapped)
+    tau_seconds = q_factor / (math.pi * f0_hz)
+    return data, spec, {
+        "expected_background_imag": background.imag,
+        "expected_background_real": background.real,
+        "expected_gain_imag": gain.imag,
+        "expected_gain_real": gain.real,
+        "expected_f_carrier_hz": f0_hz,
+        "expected_q_factor": q_factor,
+        "residual_state_fraction": math.exp(-(settling_ns / 1_000_000_000.0) / tau_seconds),
+        "settling_ns": settling_ns,
+        "tau_seconds": tau_seconds,
+    }
+
+
+def run_calibration_settling_suite() -> list[dict[str, Any]]:
+    outcomes: list[dict[str, Any]] = []
+    for case in CALIBRATION_SETTLING_POSITIVES:
+        data, spec, expected = _calibration_settling_fixture(case)
+        metrics = analyze_resonance_calibration_payload(data, spec)
+        outcomes.append({
+            "background_imag": metrics["background"].imag,
+            "background_real": metrics["background"].real,
+            "block_chronology_sha256": metrics["block_chronology_sha256"],
+            "case": case,
+            "class": "calibration_settling_positive",
+            "f_carrier_hz": metrics["fitted_f_carrier_hz"],
+            "f_carrier_u95_hz": metrics["fitted_u95_hz"],
+            "f_witness_hz": 2.0 * metrics["fitted_f_carrier_hz"],
+            "gain_imag": metrics["gain"].imag,
+            "gain_real": metrics["gain"].real,
+            "minimum_observed_settling_ns": metrics["minimum_observed_settling_ns"],
+            "outcome": "PASS",
+            "payload_sha256": sha256_bytes(data),
+            "q_factor": metrics["fitted_q_factor"],
+            "reduced_chi_square": metrics["reduced_chi_square"],
+            "residual_state_fraction": expected["residual_state_fraction"],
+            "tau_seconds": expected["tau_seconds"],
+        })
+    for case, expected_rejection in CALIBRATION_SETTLING_NEGATIVES.items():
+        data, spec, _ = _calibration_settling_fixture(case)
+        try:
+            analyze_resonance_calibration_payload(data, spec)
+        except Reject as exc:
+            if exc.code != expected_rejection:
+                raise AssertionError(f"{case}: {exc.code} != {expected_rejection}") from exc
+            outcomes.append({"case": case, "class": "calibration_settling_negative", "outcome": "PASS", "rejected_by": exc.code})
         else:
             raise AssertionError(f"{case}: did not reject")
     return outcomes
@@ -1366,6 +1671,14 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
     exact_fields(resonance_calibration_source, {"configuration", "schema"}, "resonance_calibration_source_queryback")
     calibration_completed = canonical_utc(resonance_calibration["completed_utc"], "RESONANCE_CALIBRATION_CUSTODY")
     calibration_started = canonical_utc(resonance_calibration["started_utc"], "RESONANCE_CALIBRATION_CUSTODY")
+    chronology_frequencies, _ = _calibration_exact_spec(resonance_calibration["canonical_payload"])
+    if len(resonance_calibration_raw) != CALIBRATION_PAYLOAD_BYTES:
+        raise Reject("RESONANCE_CALIBRATION_PAYLOAD_SIZE")
+    _validate_calibration_block_chronology(resonance_calibration_raw, resonance_calibration["canonical_payload"], chronology_frequencies)
+    block_chronology = resonance_calibration["canonical_payload"]["block_chronology"]
+    chronology_origin = canonical_utc(resonance_calibration["canonical_payload"]["block_chronology_origin_utc"], "RESONANCE_CALIBRATION_CUSTODY")
+    first_block_command_completed = chronology_origin + timedelta(microseconds=block_chronology[0]["command_completed_monotonic_ns"] / 1_000.0)
+    final_block_acquisition_completed = chronology_origin + timedelta(microseconds=block_chronology[-1]["acquisition_completed_monotonic_ns"] / 1_000.0)
     calibration_q_factor = decimal(resonance_calibration["q_factor"], "resonance_calibration.q_factor")
     calibration_decay_seconds = decimal(resonance_calibration["decay_seconds"], "resonance_calibration.decay_seconds")
     calibration_assembly = ASSEMBLY_FOR_ROLE["arm_0"]
@@ -1404,6 +1717,8 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
         or resonance_calibration_source["configuration"] != {"amplitude_vpp": "0.1", "coarse_maximum_hz": "32820", "coarse_minimum_hz": "32760", "coarse_step_hz": "1", "fine_half_span_hz": "1.0125", "fine_step_hz": "0.025", "load_mode": "HIGH_Z", "offset_v": "0", "output_mode": "CONTINUOUS_SINE", "physical_output_ohms": "50"}
         or resonance_calibration["primary_observed"] is not False
         or not calibration_started < calibration_completed
+        or not calibration_started <= chronology_origin < first_block_command_completed
+        or not final_block_acquisition_completed <= calibration_completed
         or not calibration_completed < assignment_created < acquisition_started
     ):
         raise Reject("RESONANCE_CALIBRATION_CUSTODY")
@@ -2518,7 +2833,7 @@ def base_metadata(
         "selection_law": "DETERMINISTIC_BOUNDED_VARIABLE_PROJECTION__REJECT_BOUNDARY_OR_NONCONVERGENCE",
         "solver_identity": "NUMPY_VARIABLE_PROJECTION_PATTERN_REFINEMENT_V1",
         "source_queryback_sha256": resonance_source_descriptor["sha256"],
-        "started_utc": "2037-07-15T23:59:48.000000Z",
+        "started_utc": "2037-07-15T23:47:49.000000Z",
         "weighted_residual_rms": decimal_text(calibration_metrics["weighted_residual_rms"]),
     }
     resonance_artifact_path.write_bytes(canonical_bytes(resonance_artifact))
@@ -3030,6 +3345,7 @@ def mutate_resonance_calibration_raw(directory: Path, bundle: dict[str, Any], ro
     artifact["canonical_payload_sha256"] = raw_descriptor["sha256"]
     artifact["native_input_bytes"] = raw_descriptor["bytes"]
     artifact["canonical_payload_bytes"] = raw_descriptor["bytes"]
+    artifact["canonical_payload"] = _rebind_calibration_payload_block_hashes(artifact["canonical_payload"], data)
     artifact_path.write_bytes(canonical_bytes(artifact))
     artifact_descriptor = bound_descriptor(artifact_path)
     receipts["resonance_calibration_raw"] = raw_descriptor
@@ -3201,6 +3517,8 @@ def execute_bundle_adversary(directory: Path, case: str, identity_directory: Pat
                 artifact_path = directory / meta["custody"]["byte_receipts"]["resonance_calibration_artifact"]["path"]
                 artifact = plain_json(artifact_path)
                 artifact["canonical_payload"]["frequencies_hz"][-1] = decimal_text(decimal(meta["frequency_binding"]["f_carrier_hz"], "frequency_binding.f_carrier_hz") + 1.0)
+                artifact["canonical_payload"]["block_chronology"][-1]["commanded_frequency_hz"] = artifact["canonical_payload"]["frequencies_hz"][-1]
+                artifact["canonical_payload"]["block_chronology_sha256"] = sha256_bytes(canonical_bytes(artifact["canonical_payload"]["block_chronology"]))
                 artifact["frequency_grid_sha256"] = sha256_bytes(canonical_bytes(artifact["canonical_payload"]["frequencies_hz"]))
                 artifact_path.write_bytes(canonical_bytes(artifact))
                 rebound = bound_descriptor(artifact_path)
@@ -3622,9 +3940,11 @@ def fixture_document() -> dict[str, Any]:
         "calibration_realism_positive": list(CALIBRATION_REALISM_POSITIVES),
         "calibration_realism_negative": [{"case": case, "expected_rejection": code} for case, code in CALIBRATION_REALISM_NEGATIVES.items()],
         "calibration_custody_negative": [{"case": case, "expected_rejection": code} for case, code in CALIBRATION_CUSTODY_NEGATIVES.items()],
-        "calibration_payload": {"bytes": CALIBRATION_PAYLOAD_BYTES, "channel_order": list(CALIBRATION_CHANNELS), "dtype": "signed-int16", "endian": "little", "frequency_blocks": CALIBRATION_BLOCK_COUNT, "layout": "frequency-major__sample-major__ch0-then-ch1-interleaved", "sample_rate_hz": CALIBRATION_SAMPLE_RATE_HZ, "samples_per_channel_per_frequency": CALIBRATION_SAMPLES_PER_BLOCK},
-        "calibration_acceptance": {"f_carrier_hz": [F_CARRIER_MIN_HZ, F_CARRIER_MAX_HZ], "optimizer_f0_hz": [CALIBRATION_FIT_F0_MIN_HZ, CALIBRATION_FIT_F0_MAX_HZ], "q": [4000, 60000], "optimizer_q": [CALIBRATION_FIT_Q_MIN, CALIBRATION_FIT_Q_MAX], "boundary_fit_rejected": True, "f_carrier_u95_hz_max": F_CARRIER_U95_MAX_HZ, "q_u95_fraction_max": CALIBRATION_MAX_Q_U95_FRACTION, "reduced_chi_square_max": CALIBRATION_MAX_REDUCED_CHI_SQUARE, "fit_condition_number_max": CALIBRATION_MAX_FIT_CONDITION, "source_snr_min": CALIBRATION_MIN_SOURCE_SNR, "resonance_snr_min": CALIBRATION_MIN_RESONANCE_SNR, "resonance_to_background_min": CALIBRATION_MIN_RESONANCE_TO_BACKGROUND, "off_resonance_ratio_plus_u95_max": CALIBRATION_MAX_OFF_RESONANCE_RATIO, "solver_frequency_tolerance_hz": CALIBRATION_SOLVER_FREQUENCY_TOLERANCE_HZ, "solver_log_q_tolerance": CALIBRATION_SOLVER_LOG_Q_TOLERANCE, "solver_max_iterations": CALIBRATION_SOLVER_MAX_ITERATIONS},
-        "scope_law": {"existing_fixture_count_preserved": 61, "existing_raw_controls_preserved": 58, "semantic_controls": "summary schema and decision-law conformance only", "calibration_realism_controls": "raw two-channel int16 extraction and deterministic complex single-pole fit", "signal_path_controls": "strict circuit-envelope and ordering decision law", "raw_adversaries": "actual canonical raw-bundle analyzer execution", "topology_only_cases": "per-event assembly-bound topology receipts and raw replay adversaries"},
+        "calibration_settling_positive": list(CALIBRATION_SETTLING_POSITIVES),
+        "calibration_settling_negative": [{"case": case, "expected_rejection": code} for case, code in CALIBRATION_SETTLING_NEGATIVES.items()],
+        "calibration_payload": {"block_chronology_clock": CALIBRATION_CHRONOLOGY_CLOCK, "block_chronology_entries": CALIBRATION_BLOCK_COUNT, "block_payload_hash_required": True, "bytes": CALIBRATION_PAYLOAD_BYTES, "capture_duration_ns": CALIBRATION_CAPTURE_DURATION_NS, "channel_order": list(CALIBRATION_CHANNELS), "dtype": "signed-int16", "endian": "little", "frequency_blocks": CALIBRATION_BLOCK_COUNT, "layout": "frequency-major__sample-major__ch0-then-ch1-interleaved", "minimum_settling_ns": CALIBRATION_MIN_SETTLING_NS, "sample_rate_hz": CALIBRATION_SAMPLE_RATE_HZ, "samples_per_channel_per_frequency": CALIBRATION_SAMPLES_PER_BLOCK},
+        "calibration_acceptance": {"f_carrier_hz": [F_CARRIER_MIN_HZ, F_CARRIER_MAX_HZ], "optimizer_f0_hz": [CALIBRATION_FIT_F0_MIN_HZ, CALIBRATION_FIT_F0_MAX_HZ], "q": [4000, 60000], "optimizer_q": [CALIBRATION_FIT_Q_MIN, CALIBRATION_FIT_Q_MAX], "boundary_fit_rejected": True, "f_carrier_u95_hz_max": F_CARRIER_U95_MAX_HZ, "q_u95_fraction_max": CALIBRATION_MAX_Q_U95_FRACTION, "reduced_chi_square_max": CALIBRATION_MAX_REDUCED_CHI_SQUARE, "fit_condition_number_max": CALIBRATION_MAX_FIT_CONDITION, "source_snr_min": CALIBRATION_MIN_SOURCE_SNR, "resonance_snr_min": CALIBRATION_MIN_RESONANCE_SNR, "resonance_to_background_min": CALIBRATION_MIN_RESONANCE_TO_BACKGROUND, "off_resonance_ratio_plus_u95_max": CALIBRATION_MAX_OFF_RESONANCE_RATIO, "solver_frequency_tolerance_hz": CALIBRATION_SOLVER_FREQUENCY_TOLERANCE_HZ, "solver_log_q_tolerance": CALIBRATION_SOLVER_LOG_Q_TOLERANCE, "solver_max_iterations": CALIBRATION_SOLVER_MAX_ITERATIONS, "stateful_fixture_law": "state_new=steady_new+(state_before-steady_new)*exp(-settling_seconds/tau)", "tau_law": "Q/(pi*f0)"},
+        "scope_law": {"existing_fixture_count_preserved": 61, "existing_raw_controls_preserved": 58, "semantic_controls": "summary schema and decision-law conformance only", "calibration_realism_controls": "raw two-channel int16 extraction and deterministic complex single-pole fit", "calibration_settling_controls": "stateful first-order transient fixtures and payload-bound per-block chronology", "signal_path_controls": "strict circuit-envelope and ordering decision law", "raw_adversaries": "actual canonical raw-bundle analyzer execution", "topology_only_cases": "per-event assembly-bound topology receipts and raw replay adversaries"},
         "claim_law": {"synthetic_physical_claim": False, "maximum_token": "SYNTHETIC_ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT"},
     }
 
@@ -3639,7 +3959,7 @@ def schema_document() -> dict[str, Any]:
             "p0.environment-record.v1": {"format": "strict-csv", "header": ENVIRONMENT_HEADER, "cadence_samples": 100000, "monotonic_cadence_ns": 100000000, "timestamp_cadence_microseconds": 100000, "timestamp_year": "four-digit-year-not-hard-coded", "sensor_identity": "lowercase-8-hex-bound-to-metadata", "measurement_command_hex": "fd", "crc8": {"polynomial": "0x31", "initial": "0xff", "word_order": "big-endian"}, "canonical_index": "base-10-no-leading-zero", "canonical_decimal": "no-plus-no-leading-zero-no-negative-zero", "temperature_conversion": "-45+175*ticks/65535", "humidity_conversion": "-6+125*ticks/65535", "temperature_c": [20.0, 30.0], "humidity_rh": [20.0, 60.0]},
             "p0.synthetic-control-evidence.v1": {"exact_fields": ["control_id", "controls", "environment", "epsilon", "evidence_class", "path", "payload", "physical_claim_requested", "schema", "source", "transients", "witness"], "decision_independent_of_control_id": True, "scientific_negative_execution": "summary_schema_and_decision_law_only__not_raw_analyzer_evidence"},
             "p0.signal-path-control.v1": {"exact_fields": ["case_id", "custody", "evidence_class", "metrics", "order", "payload", "physical_claim_requested", "schema", "topology"], "decision_independent_of_case_id": True, "threshold_source": "P0_SIGNAL_PATH_CIRCUIT_MODEL.json", "physical_claim_authorized": False},
-            "p0.resonance-calibration.v2": {"canonical_payload": calibration_payload_spec(calibration_frequency_grid(32_800.0, math.pi * 32_800.0 * 0.1)), "fit_model": "H(f)=B+C/(1+i*2Q*(f-f0)/f0)", "deterministic_solver": "NUMPY_VARIABLE_PROJECTION_PATTERN_REFINEMENT_V1", "native_format_support": "SDK_EXPORT_IMPLEMENTED__PROPRIETARY_CONTAINER_MUST_BE_PRESERVED_SEPARATELY_AND_IS_NOT_PARSED", "physical_claim_authorized": False},
+            "p0.resonance-calibration.v2": {"block_chronology_entry_exact_fields": ["acquisition_completed_monotonic_ns", "acquisition_started_monotonic_ns", "block_index", "command_completed_monotonic_ns", "commanded_frequency_hz", "payload_block_sha256"], "block_chronology_entries": CALIBRATION_BLOCK_COUNT, "block_chronology_hash_required": True, "block_chronology_origin_utc_law": "EVIDENCE_SPECIFIC_CANONICAL_UTC__SYNTHETIC_FIXTURE_DATE_NOT_OPERATIONAL", "canonical_payload": calibration_payload_spec(calibration_frequency_grid(32_800.0, math.pi * 32_800.0 * 0.1)), "canonical_payload_exact_fields": ["block_chronology", "block_chronology_clock", "block_chronology_origin_monotonic_ns", "block_chronology_origin_utc", "block_chronology_sha256", "channel_order", "dtype", "endian", "frequencies_hz", "layout", "offset_v", "sample_rate_hz", "samples_per_channel_per_frequency", "scale_per_code_v", "settling_seconds_before_block", "source_amplitude_vpp", "source_offset_v"], "fit_model": "H(f)=B+C/(1+i*2Q*(f-f0)/f0)", "minimum_settling_ns": CALIBRATION_MIN_SETTLING_NS, "payload_block_hash_required": True, "deterministic_solver": "NUMPY_VARIABLE_PROJECTION_PATTERN_REFINEMENT_V1", "native_format_support": "SDK_EXPORT_IMPLEMENTED__PROPRIETARY_CONTAINER_MUST_BE_PRESERVED_SEPARATELY_AND_IS_NOT_PARSED", "physical_claim_authorized": False},
             RESULT_SCHEMA: {"physical_claim_authorized": False, "required_custody": ["analyzer_sha256", "assignment_commitment_sha256", "bundle_sha256", "byte_receipt_sha256", "calibration_sha256", "dependency_sha256", "fixture_sha256", "metadata_sha256", "payload_sha256", "schema_sha256", "thresholds_sha256"], "drive_phase_uncertainty": {"joint_design_columns": ["cos(f_ref)", "-sin(f_ref)", "cos(2*f_ref)", "-sin(2*f_ref)", "constant"], "hac_lag": 7, "derived_error": "wrap(phi_C1-0.5*phi_C2-delta_command)", "fit_gradient": "g_C1-0.5*g_C2", "cross_covariance_included": True, "expanded_law": "1.96*sqrt(u_error_fit^2+u_skew^2+u_drive_cal^2)"}},
         },
         "identities": ["p0.build-readiness-contract.v1", "p0.component-identity.v1", "p0.document-identity.v1", "p0.netlist.v1", "p0.channel-map.v1", "p0.source-off-topology.v1", "p0.signal-path-circuit-model.v1", "p0.signal-path-control.v1", "p0.instrument-configuration.v1", "p0.native-export-adapter-receipt.v1", SCHEMA, "p0.calibration-packet.v1", "p0.arm-assignment-commitment.v1", "p0.environment-record.v1", RESULT_SCHEMA, "p0.control-outcome.v1", "p0.adjudication.v1", "p0.build-readiness-manifest.v1", "p0.contact-attestation.v1"],
@@ -3651,6 +3971,7 @@ def reference_document(identity_directory: Path) -> dict[str, Any]:
     semantic = run_semantic_suite()
     signal_path_controls = run_signal_path_control_suite(identity_directory)
     calibration_realism = run_calibration_realism_suite()
+    calibration_settling = run_calibration_settling_suite()
     with tempfile.TemporaryDirectory(prefix="p0-scientific-") as temp:
         temp_path = Path(temp)
         bundle = materialize_synthetic(temp_path)
@@ -3675,7 +3996,10 @@ def reference_document(identity_directory: Path) -> dict[str, Any]:
         "calibration_realism_positive_count": len(CALIBRATION_REALISM_POSITIVES),
         "calibration_realism_negative_count": len(CALIBRATION_REALISM_NEGATIVES),
         "calibration_custody_negative_count": len(CALIBRATION_CUSTODY_NEGATIVES),
+        "calibration_settling_positive_count": len(CALIBRATION_SETTLING_POSITIVES),
+        "calibration_settling_negative_count": len(CALIBRATION_SETTLING_NEGATIVES),
         "calibration_realism_outcomes": calibration_realism,
+        "calibration_settling_outcomes": calibration_settling,
         "calibration_custody_outcomes": calibration_custody,
         "signal_path_control_outcomes": signal_path_controls,
         "semantic_outcomes": semantic,
@@ -3703,6 +4027,7 @@ def self_test(full_raw: bool) -> dict[str, Any]:
     semantic = run_semantic_suite()
     signal_path_controls = run_signal_path_control_suite(Path(__file__).resolve().parent)
     calibration_realism = run_calibration_realism_suite()
+    calibration_settling = run_calibration_settling_suite()
     raw_result: dict[str, Any] | None = None
     dynamic_result: dict[str, Any] | None = None
     raw_adversaries: list[dict[str, Any]] = []
@@ -3717,7 +4042,7 @@ def self_test(full_raw: bool) -> dict[str, Any]:
             dynamic_path = temp_path / "dynamic-32800-375"
             dynamic_path.mkdir()
             dynamic_result = analyze_bundle(materialize_synthetic(dynamic_path, 32_800.375), Path(__file__).resolve().parent)
-    return {"self_test": "PASS", "positive": len(POSITIVE_CASES), "scientific_negative": len(SCIENTIFIC_NEGATIVES), "malformed_or_custody_negative": len(MALFORMED_NEGATIVES), "calibration_realism_positive": len(CALIBRATION_REALISM_POSITIVES), "calibration_realism_negative": len(CALIBRATION_REALISM_NEGATIVES), "calibration_custody_negative": len(CALIBRATION_CUSTODY_NEGATIVES), "calibration_realism_outcomes": calibration_realism, "calibration_custody_outcomes": calibration_custody, "signal_path_positive": len(SIGNAL_PATH_POSITIVES), "signal_path_scientific_negative": len(SIGNAL_PATH_NEGATIVES), "signal_path_custody_negative": len(SIGNAL_PATH_CUSTODY_NEGATIVES), "raw_adversary_count": len(raw_adversaries), "full_raw": full_raw, "raw_result": raw_result, "dynamic_frequency_result": dynamic_result, "raw_adversaries": raw_adversaries, "semantic_hash": sha256_bytes(canonical_bytes(semantic + signal_path_controls + calibration_realism + calibration_custody + malformed + raw_adversaries))}
+    return {"self_test": "PASS", "positive": len(POSITIVE_CASES), "scientific_negative": len(SCIENTIFIC_NEGATIVES), "malformed_or_custody_negative": len(MALFORMED_NEGATIVES), "calibration_realism_positive": len(CALIBRATION_REALISM_POSITIVES), "calibration_realism_negative": len(CALIBRATION_REALISM_NEGATIVES), "calibration_custody_negative": len(CALIBRATION_CUSTODY_NEGATIVES), "calibration_settling_positive": len(CALIBRATION_SETTLING_POSITIVES), "calibration_settling_negative": len(CALIBRATION_SETTLING_NEGATIVES), "calibration_realism_outcomes": calibration_realism, "calibration_settling_outcomes": calibration_settling, "calibration_custody_outcomes": calibration_custody, "signal_path_positive": len(SIGNAL_PATH_POSITIVES), "signal_path_scientific_negative": len(SIGNAL_PATH_NEGATIVES), "signal_path_custody_negative": len(SIGNAL_PATH_CUSTODY_NEGATIVES), "raw_adversary_count": len(raw_adversaries), "full_raw": full_raw, "raw_result": raw_result, "dynamic_frequency_result": dynamic_result, "raw_adversaries": raw_adversaries, "semantic_hash": sha256_bytes(canonical_bytes(semantic + signal_path_controls + calibration_realism + calibration_settling + calibration_custody + malformed + raw_adversaries))}
 
 
 def verify(directory: Path, full_raw: bool) -> dict[str, Any]:

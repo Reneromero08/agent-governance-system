@@ -1,6 +1,6 @@
 {
   "artifact_custody": {
-    "analyzer_sha256": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
+    "analyzer_sha256": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
     "dependency_identity": {
       "byteorder": "little",
       "machine": "AMD64",
@@ -108,8 +108,8 @@
       }
     },
     "dependency_sha256": "7ed5c6a0295ea2089369804cf45631335f13c5e745904783ea70f8e877dd2cfb",
-    "fixture_sha256": "39c431060e179171df91bbca338dd2ef20da7450acbd8660579483aeb68e4b54",
-    "schema_sha256": "06630409f42d21554e97f721887bff06764ca16dc2efb4794fac3a9fae92a7c5"
+    "fixture_sha256": "bb5ac74b2d2ec8792e8ec4925803c98d88963749e8b1143c5390f02b50ec016d",
+    "schema_sha256": "fa0d9fa56693ecca1004eebb2e656e381232be0859c2939adf05862ad42b23dd"
   },
   "calibration_custody_negative_count": 10,
   "calibration_custody_outcomes": [
@@ -420,6 +420,190 @@
     }
   ],
   "calibration_realism_positive_count": 13,
+  "calibration_settling_negative_count": 11,
+  "calibration_settling_outcomes": [
+    {
+      "background_imag": -0.030001747530067305,
+      "background_real": 0.060000614363531025,
+      "block_chronology_sha256": "6acb2a47fa44e5bc99ec878baef5f7d208a22f4eb98def5336e48c05b892b6ef",
+      "case": "settling_q60000_exact_5s",
+      "class": "calibration_settling_positive",
+      "f_carrier_hz": 32768.74999983087,
+      "f_carrier_u95_hz": 3.4927167476399528e-06,
+      "f_witness_hz": 65537.49999966174,
+      "gain_imag": 0.1800064401420578,
+      "gain_real": 0.5199925138538393,
+      "minimum_observed_settling_ns": 5000000000,
+      "outcome": "PASS",
+      "payload_sha256": "db757f691fcffe1660f07b34feb0a7fba235d40c37eba186cad34b01e60af5ff",
+      "q_factor": 59999.43174178314,
+      "reduced_chi_square": 3.130808472885755,
+      "residual_state_fraction": 0.00018804322733282332,
+      "tau_seconds": 0.582829469266525
+    },
+    {
+      "background_imag": -0.03000063338778885,
+      "background_real": 0.0600004674218687,
+      "block_chronology_sha256": "ab90554cabfe33122830a5d4052af23b1922f2dad5dfdc0e5a62bff59b0688c5",
+      "case": "settling_mid_q_exact_5s",
+      "class": "calibration_settling_positive",
+      "f_carrier_hz": 32799.99999923334,
+      "f_carrier_u95_hz": 1.0601341614652924e-05,
+      "f_witness_hz": 65599.99999846668,
+      "gain_imag": 0.18000025502723854,
+      "gain_real": 0.5200001939972773,
+      "minimum_observed_settling_ns": 5000000000,
+      "outcome": "PASS",
+      "payload_sha256": "601bc877f2014c1e7da4d37642bbcaf7951495819641fb78c79d38781faa0065",
+      "q_factor": 10304.449810508175,
+      "reduced_chi_square": 0.9948842721632662,
+      "residual_state_fraction": 1.9287498479639178e-22,
+      "tau_seconds": 0.1
+    },
+    {
+      "background_imag": -0.030000792062502054,
+      "background_real": 0.06000005210859331,
+      "block_chronology_sha256": "7e2eebeebd76b807bde94413d70e2d3bf8be7e59055351e20faa6bb8ae9da630",
+      "case": "settling_q60000_longer",
+      "class": "calibration_settling_positive",
+      "f_carrier_hz": 32768.74999854936,
+      "f_carrier_u95_hz": 2.0089911704648954e-06,
+      "f_witness_hz": 65537.49999709873,
+      "gain_imag": 0.18000273168932304,
+      "gain_real": 0.5199971746504886,
+      "minimum_observed_settling_ns": 6000000000,
+      "outcome": "PASS",
+      "payload_sha256": "b981225c822ddcb376f719506f9cf81e9d8b71da886dffdb2339f2934a4c684c",
+      "q_factor": 59999.51880105604,
+      "reduced_chi_square": 1.0358550552749561,
+      "residual_state_fraction": 3.381498783354504e-05,
+      "tau_seconds": 0.582829469266525
+    },
+    {
+      "background_imag": 0.06999934498149299,
+      "background_real": -0.04999999298648414,
+      "block_chronology_sha256": "23c1aa6c41a1ba7730889bf9373187ec0cd34416eb759184f3bf9bf4477462b8",
+      "case": "settling_complex_gain_background",
+      "class": "calibration_settling_positive",
+      "f_carrier_hz": 32799.99999945389,
+      "f_carrier_u95_hz": 4.498713343794931e-06,
+      "f_witness_hz": 65599.99999890778,
+      "gain_imag": -0.2827888418261391,
+      "gain_real": 0.38785366849374736,
+      "minimum_observed_settling_ns": 5000000000,
+      "outcome": "PASS",
+      "payload_sha256": "3543e940586b7c1489d12e73d24f9cec6af452341cf9e830b04ef1777d7f9e0b",
+      "q_factor": 23999.958089444124,
+      "reduced_chi_square": 0.9614423132021532,
+      "residual_state_fraction": 4.750743491908674e-10,
+      "tau_seconds": 0.23290967281740782
+    },
+    {
+      "background_imag": -0.03000049084360726,
+      "background_real": 0.06000038292226743,
+      "block_chronology_sha256": "1c8e1abfb37f448b4f9062dc0e95db6ba9c91895589ef9f73e4f1bb90fe4fbb6",
+      "case": "settling_off_grid",
+      "class": "calibration_settling_positive",
+      "f_carrier_hz": 32800.3749989465,
+      "f_carrier_u95_hz": 4.289470761330443e-06,
+      "f_witness_hz": 65600.749997893,
+      "gain_imag": 0.18000035424873262,
+      "gain_real": 0.5200006965604812,
+      "minimum_observed_settling_ns": 5000000000,
+      "outcome": "PASS",
+      "payload_sha256": "1236de32ce19c628d0a6e46cb17ecd188ad987dc5c5294c7aff8fc842d36f097",
+      "q_factor": 24000.054246662017,
+      "reduced_chi_square": 0.986397300486914,
+      "residual_state_fraction": 4.749577627108521e-10,
+      "tau_seconds": 0.2329070100086044
+    },
+    {
+      "background_imag": -0.03000064819599229,
+      "background_real": 0.060001249930875744,
+      "block_chronology_sha256": "495cefc340ec7eb32c580259a08e90667c32cd2e9747a20da3ecfabd377f73ff",
+      "case": "settling_dynamic_32800_375_65600_75",
+      "class": "calibration_settling_positive",
+      "f_carrier_hz": 32800.37500107885,
+      "f_carrier_u95_hz": 2.998834626697479e-06,
+      "f_witness_hz": 65600.7500021577,
+      "gain_imag": 0.18000350512313212,
+      "gain_real": 0.519999313267943,
+      "minimum_observed_settling_ns": 5000000000,
+      "outcome": "PASS",
+      "payload_sha256": "24fee1844507b2769514395297b4b568d8f8d8c624c7aa5648d345c241b0e9a1",
+      "q_factor": 58000.48996104276,
+      "reduced_chi_square": 2.1190919313798378,
+      "residual_state_fraction": 0.00013869606313378382,
+      "tau_seconds": 0.5628586075207939
+    },
+    {
+      "case": "settling_q60000_0p050s",
+      "class": "calibration_settling_negative",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_SETTLING"
+    },
+    {
+      "case": "settling_q60000_0p500s",
+      "class": "calibration_settling_negative",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_SETTLING"
+    },
+    {
+      "case": "settling_one_ns_short",
+      "class": "calibration_settling_negative",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_SETTLING"
+    },
+    {
+      "case": "settling_missing_chronology",
+      "class": "calibration_settling_negative",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_duplicate_chronology",
+      "class": "calibration_settling_negative",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_reordered_chronology",
+      "class": "calibration_settling_negative",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_frequency_mismatch",
+      "class": "calibration_settling_negative",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_FREQUENCY_GRID"
+    },
+    {
+      "case": "settling_acquisition_before_command",
+      "class": "calibration_settling_negative",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_nonmonotonic_timestamps",
+      "class": "calibration_settling_negative",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_chronology_hash_mismatch",
+      "class": "calibration_settling_negative",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_payload_order_mismatch",
+      "class": "calibration_settling_negative",
+      "outcome": "PASS",
+      "rejected_by": "RESONANCE_CALIBRATION_CUSTODY"
+    }
+  ],
+  "calibration_settling_positive_count": 6,
   "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
   "dynamic_frequency_reference": {
     "arms": {
@@ -501,7 +685,7 @@
     "f_ref_hz": 32800.37499826624,
     "f_witness_hz": 65600.74999653248,
     "implementation_custody": {
-      "analyzer_sha256": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
+      "analyzer_sha256": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
       "dependency_identity": {
         "byteorder": "little",
         "machine": "AMD64",
@@ -609,8 +793,8 @@
         }
       },
       "dependency_sha256": "7ed5c6a0295ea2089369804cf45631335f13c5e745904783ea70f8e877dd2cfb",
-      "fixture_sha256": "39c431060e179171df91bbca338dd2ef20da7450acbd8660579483aeb68e4b54",
-      "schema_sha256": "06630409f42d21554e97f721887bff06764ca16dc2efb4794fac3a9fae92a7c5",
+      "fixture_sha256": "bb5ac74b2d2ec8792e8ec4925803c98d88963749e8b1143c5390f02b50ec016d",
+      "schema_sha256": "fa0d9fa56693ecca1004eebb2e656e381232be0859c2939adf05862ad42b23dd",
       "signal_path_model_sha256": "31208cdcb39248a44bd90720459c97283e7135d6b0b9b0388c8e535ce46913be"
     },
     "input_custody": {
@@ -642,7 +826,7 @@
         }
       },
       "assignment_commitment_sha256": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
-      "bundle_sha256": "29ba7228f34bb04a5aab80a4460d4f3d37f02b6143aecb6f82780bff0937c304",
+      "bundle_sha256": "e1bb9006f5e90cb065f1c1d402f753dcca23d7c18e3d392392c66fac830550c9",
       "byte_receipt_sha256": {
         "arm_0": {
           "adapter_source": "0c430c72f837676868dd34a340984f683f732f6dbd7c8f42b7513c8298bf7c29",
@@ -654,8 +838,8 @@
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "c73a48876a44870c60b9ae87278e2533d2a503ba3213b5f1553ba87c1ee45694",
           "nonlinear_control": "c2866d0b789db6ef556a905085080a43d3a04c0b28d4ea348c815f7b00574027",
-          "resonance_calibration_analyzer": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-          "resonance_calibration_artifact": "74e83f26a4ee4099306b10f654f62cf353dcbaaa118ebb7c42fd602843cb39fa",
+          "resonance_calibration_analyzer": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+          "resonance_calibration_artifact": "8057d2de65d937adc3aa0d1a12fe4280f139a50b51169bb2d99844809c3a360a",
           "resonance_calibration_raw": "490d1a4b0e1521bf2555efb13df8f53a55e1a8585f004107989d7e86e9dc2c67",
           "resonance_calibration_source_queryback": "38a8ef4be65ed3dbb744f89c519ddee493d9be371d14edff8dc25c3914b32064",
           "source_queryback": "d4b2bbbecb27670914e68b5c6c49e0a1c72d311f3b405f0aa38436d6979e92e3",
@@ -672,8 +856,8 @@
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "77d20b8012e8542a34c48cd18fe18c05aea37194bc0cb3201679231a4b2f0330",
           "nonlinear_control": "b7704e7709cb1b301fffd42f2d09b967d6738e963cde5280d1e143067ae0d1a5",
-          "resonance_calibration_analyzer": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-          "resonance_calibration_artifact": "74e83f26a4ee4099306b10f654f62cf353dcbaaa118ebb7c42fd602843cb39fa",
+          "resonance_calibration_analyzer": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+          "resonance_calibration_artifact": "8057d2de65d937adc3aa0d1a12fe4280f139a50b51169bb2d99844809c3a360a",
           "resonance_calibration_raw": "490d1a4b0e1521bf2555efb13df8f53a55e1a8585f004107989d7e86e9dc2c67",
           "resonance_calibration_source_queryback": "38a8ef4be65ed3dbb744f89c519ddee493d9be371d14edff8dc25c3914b32064",
           "source_queryback": "b9ff72cc6a18f0119c12b5139897144d1f801cc496cbd0f740f742044e2d797f",
@@ -690,8 +874,8 @@
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "98be1e903f55b78c49eb1d25dcdf6585add4ff8c5c506ada12dc7c674ea9f7fb",
           "nonlinear_control": "9f213a92b0c15d87763885bb0f6f00c91eb49e988c38dc0f38f40bc4a8597567",
-          "resonance_calibration_analyzer": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-          "resonance_calibration_artifact": "74e83f26a4ee4099306b10f654f62cf353dcbaaa118ebb7c42fd602843cb39fa",
+          "resonance_calibration_analyzer": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+          "resonance_calibration_artifact": "8057d2de65d937adc3aa0d1a12fe4280f139a50b51169bb2d99844809c3a360a",
           "resonance_calibration_raw": "490d1a4b0e1521bf2555efb13df8f53a55e1a8585f004107989d7e86e9dc2c67",
           "resonance_calibration_source_queryback": "38a8ef4be65ed3dbb744f89c519ddee493d9be371d14edff8dc25c3914b32064",
           "source_queryback": "d4b2bbbecb27670914e68b5c6c49e0a1c72d311f3b405f0aa38436d6979e92e3",
@@ -708,8 +892,8 @@
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "84ad6c06e53f838925644ac5d17c4f26d1fec50b2dc10f7fffb8f66e4171cec3",
           "nonlinear_control": "9e12d449ee963da3452d5d5ff3e23418a52de49562a32011024b9fbd08dd2c40",
-          "resonance_calibration_analyzer": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-          "resonance_calibration_artifact": "74e83f26a4ee4099306b10f654f62cf353dcbaaa118ebb7c42fd602843cb39fa",
+          "resonance_calibration_analyzer": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+          "resonance_calibration_artifact": "8057d2de65d937adc3aa0d1a12fe4280f139a50b51169bb2d99844809c3a360a",
           "resonance_calibration_raw": "490d1a4b0e1521bf2555efb13df8f53a55e1a8585f004107989d7e86e9dc2c67",
           "resonance_calibration_source_queryback": "38a8ef4be65ed3dbb744f89c519ddee493d9be371d14edff8dc25c3914b32064",
           "source_queryback": "d4b2bbbecb27670914e68b5c6c49e0a1c72d311f3b405f0aa38436d6979e92e3",
@@ -726,8 +910,8 @@
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "2a313785037119bb60acdb6293556d67a978b4bc3daec18a4bd15bee1d30b7d9",
           "nonlinear_control": "b992eec9e69f6097a71269673f9030f1b0e9fc4e64bba1caf87665e7a56f67d7",
-          "resonance_calibration_analyzer": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-          "resonance_calibration_artifact": "74e83f26a4ee4099306b10f654f62cf353dcbaaa118ebb7c42fd602843cb39fa",
+          "resonance_calibration_analyzer": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+          "resonance_calibration_artifact": "8057d2de65d937adc3aa0d1a12fe4280f139a50b51169bb2d99844809c3a360a",
           "resonance_calibration_raw": "490d1a4b0e1521bf2555efb13df8f53a55e1a8585f004107989d7e86e9dc2c67",
           "resonance_calibration_source_queryback": "38a8ef4be65ed3dbb744f89c519ddee493d9be371d14edff8dc25c3914b32064",
           "source_queryback": "d4b2bbbecb27670914e68b5c6c49e0a1c72d311f3b405f0aa38436d6979e92e3",
@@ -737,11 +921,11 @@
       },
       "calibration_sha256": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
       "metadata_sha256": {
-        "arm_0": "0a7794906a9496fd2c085799802c39eafabb624c5edaa28a0db4f36c38aeccc8",
-        "arm_pi": "3b531a85971886ce2c6125dc8a8ed2e235c56d8e33266fba9d6a708e91090fe2",
-        "dummy_c0": "af071ac5b581e1b17b565c9e1e1e6bc2badefaec6ffc8dff1e5ce7bb33efda50",
-        "resonator_removed": "1f337e1b3db4952bdc21d1f0cbc71546c3e2d6ad6e0a2d9226ae9c5ac9a66f1d",
-        "zero_drive": "3cdde0005be08be7effd39f6021cdb7c55a93aea91af58862537bb76fc70ed84"
+        "arm_0": "8cab6c5932e622c4a54aee9f5f444e50872866dc19201228299b0f1091aaf72c",
+        "arm_pi": "1a890b604e2e5af2519b866d1ef0f7eea62d679fabf995470616d9c4cb052d39",
+        "dummy_c0": "d2546122bb8c8acb7ea3fd6e2ce343e984c9848cc34d9d2f658938df37a43635",
+        "resonator_removed": "611b09c0cc2a434ac1d26c8c677d851a7ae7fbeb960172183df780460550b64f",
+        "zero_drive": "8a0c91672ce749c89da7b6595865bfed6b21020d9328cef2bf05fe3369b5c0da"
       },
       "payload_sha256": {
         "arm_0": "3184041cc4d0f4ef73953f51425abc1574ea86341d2944fd2a10521e56e68e76",
@@ -752,8 +936,8 @@
       },
       "resonance_calibration_reference": {
         "assembly_id": "P0-DUT-A",
-        "calibration_analyzer_sha256": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-        "calibration_artifact_sha256": "74e83f26a4ee4099306b10f654f62cf353dcbaaa118ebb7c42fd602843cb39fa",
+        "calibration_analyzer_sha256": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+        "calibration_artifact_sha256": "8057d2de65d937adc3aa0d1a12fe4280f139a50b51169bb2d99844809c3a360a",
         "calibration_raw_sha256": "490d1a4b0e1521bf2555efb13df8f53a55e1a8585f004107989d7e86e9dc2c67",
         "calibration_role": "GLOBAL_DUT_A_PREASSIGNMENT_REFERENCE",
         "carrier_population": "EPSON_Q13FC1350000401"
@@ -773,6 +957,7 @@
           "imag": -0.030001745404846212,
           "real": 0.06000089981246119
         },
+        "block_chronology_sha256": "776e72bb085bb9d9b851e1a66ed9fb0028d9a48b150e43b3e06e8bdf4f4d9e22",
         "convergence_iterations": 45,
         "convergence_status": "CONVERGED_INTERIOR",
         "fit_condition_number": 7.832504992040214,
@@ -786,6 +971,7 @@
           "real": 0.5199998881269488
         },
         "linewidth_hz": 3.1830860859534837,
+        "minimum_observed_settling_ns": 5000000000,
         "point_fit_condition_max": 1.41506255876336,
         "probe_frequency_hz": 32864.036977236756,
         "probe_frequency_u95_hz": 0.0009282399468488877,
@@ -804,6 +990,7 @@
           "imag": -0.030001745404846212,
           "real": 0.06000089981246119
         },
+        "block_chronology_sha256": "776e72bb085bb9d9b851e1a66ed9fb0028d9a48b150e43b3e06e8bdf4f4d9e22",
         "convergence_iterations": 45,
         "convergence_status": "CONVERGED_INTERIOR",
         "fit_condition_number": 7.832504992040214,
@@ -817,6 +1004,7 @@
           "real": 0.5199998881269488
         },
         "linewidth_hz": 3.1830860859534837,
+        "minimum_observed_settling_ns": 5000000000,
         "point_fit_condition_max": 1.41506255876336,
         "probe_frequency_hz": 32864.036977236756,
         "probe_frequency_u95_hz": 0.0009282399468488877,
@@ -835,6 +1023,7 @@
           "imag": -0.030001745404846212,
           "real": 0.06000089981246119
         },
+        "block_chronology_sha256": "776e72bb085bb9d9b851e1a66ed9fb0028d9a48b150e43b3e06e8bdf4f4d9e22",
         "convergence_iterations": 45,
         "convergence_status": "CONVERGED_INTERIOR",
         "fit_condition_number": 7.832504992040214,
@@ -848,6 +1037,7 @@
           "real": 0.5199998881269488
         },
         "linewidth_hz": 3.1830860859534837,
+        "minimum_observed_settling_ns": 5000000000,
         "point_fit_condition_max": 1.41506255876336,
         "probe_frequency_hz": 32864.036977236756,
         "probe_frequency_u95_hz": 0.0009282399468488877,
@@ -866,6 +1056,7 @@
           "imag": -0.030001745404846212,
           "real": 0.06000089981246119
         },
+        "block_chronology_sha256": "776e72bb085bb9d9b851e1a66ed9fb0028d9a48b150e43b3e06e8bdf4f4d9e22",
         "convergence_iterations": 45,
         "convergence_status": "CONVERGED_INTERIOR",
         "fit_condition_number": 7.832504992040214,
@@ -879,6 +1070,7 @@
           "real": 0.5199998881269488
         },
         "linewidth_hz": 3.1830860859534837,
+        "minimum_observed_settling_ns": 5000000000,
         "point_fit_condition_max": 1.41506255876336,
         "probe_frequency_hz": 32864.036977236756,
         "probe_frequency_u95_hz": 0.0009282399468488877,
@@ -897,6 +1089,7 @@
           "imag": -0.030001745404846212,
           "real": 0.06000089981246119
         },
+        "block_chronology_sha256": "776e72bb085bb9d9b851e1a66ed9fb0028d9a48b150e43b3e06e8bdf4f4d9e22",
         "convergence_iterations": 45,
         "convergence_status": "CONVERGED_INTERIOR",
         "fit_condition_number": 7.832504992040214,
@@ -910,6 +1103,7 @@
           "real": 0.5199998881269488
         },
         "linewidth_hz": 3.1830860859534837,
+        "minimum_observed_settling_ns": 5000000000,
         "point_fit_condition_max": 1.41506255876336,
         "probe_frequency_hz": 32864.036977236756,
         "probe_frequency_u95_hz": 0.0009282399468488877,
@@ -1872,7 +2066,7 @@
     "f_ref_hz": 32799.99999825805,
     "f_witness_hz": 65599.9999965161,
     "implementation_custody": {
-      "analyzer_sha256": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
+      "analyzer_sha256": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
       "dependency_identity": {
         "byteorder": "little",
         "machine": "AMD64",
@@ -1980,8 +2174,8 @@
         }
       },
       "dependency_sha256": "7ed5c6a0295ea2089369804cf45631335f13c5e745904783ea70f8e877dd2cfb",
-      "fixture_sha256": "39c431060e179171df91bbca338dd2ef20da7450acbd8660579483aeb68e4b54",
-      "schema_sha256": "06630409f42d21554e97f721887bff06764ca16dc2efb4794fac3a9fae92a7c5",
+      "fixture_sha256": "bb5ac74b2d2ec8792e8ec4925803c98d88963749e8b1143c5390f02b50ec016d",
+      "schema_sha256": "fa0d9fa56693ecca1004eebb2e656e381232be0859c2939adf05862ad42b23dd",
       "signal_path_model_sha256": "31208cdcb39248a44bd90720459c97283e7135d6b0b9b0388c8e535ce46913be"
     },
     "input_custody": {
@@ -2013,7 +2207,7 @@
         }
       },
       "assignment_commitment_sha256": "d96d25d5a55521f95740350a281a69aeab5fa073cd07fab5cbe89f4f655a8bcf",
-      "bundle_sha256": "f13a924d357c4ed230192fa51cc46eb05afcc029267265fc9a6da139e4b89de3",
+      "bundle_sha256": "64db15c7c4b50dfb31a2699fe9f5b6cff02caa2bb08ac2f7967701676e38a939",
       "byte_receipt_sha256": {
         "arm_0": {
           "adapter_source": "0c430c72f837676868dd34a340984f683f732f6dbd7c8f42b7513c8298bf7c29",
@@ -2025,8 +2219,8 @@
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "fe1c8c8ae8c2c01d656cfcdfcb1d445500a6c6b332be444af76b2ca23b383265",
           "nonlinear_control": "a13ff204b2359791a635f190e494f9df0bcf87c083c79c403c2b473b1b7e80ef",
-          "resonance_calibration_analyzer": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-          "resonance_calibration_artifact": "8a32876a3931b4a16da10da19ad42d98246f89172eaf70b274462b90c56141a3",
+          "resonance_calibration_analyzer": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+          "resonance_calibration_artifact": "627012a99ec22f82d4a8ec8d83fbbe1a2f886e709701a1639b8d1b6ab8bad983",
           "resonance_calibration_raw": "52956bdd74fc25786dab5fec5005eec8d219b758fe19ce91c3823f352e484ac8",
           "resonance_calibration_source_queryback": "38a8ef4be65ed3dbb744f89c519ddee493d9be371d14edff8dc25c3914b32064",
           "source_queryback": "df76e5f39f70be8257848fe925e06009799c7725771bf68c68e36cb30efe3c14",
@@ -2043,8 +2237,8 @@
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "c7b30ad170708127f48615bbaa206b8fc365dee9c6551b7547952118deb74139",
           "nonlinear_control": "be73504c80ec4b4f6c0574bc7d758bf16272bcc1a2808aa88e4aefe9e115fe6c",
-          "resonance_calibration_analyzer": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-          "resonance_calibration_artifact": "8a32876a3931b4a16da10da19ad42d98246f89172eaf70b274462b90c56141a3",
+          "resonance_calibration_analyzer": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+          "resonance_calibration_artifact": "627012a99ec22f82d4a8ec8d83fbbe1a2f886e709701a1639b8d1b6ab8bad983",
           "resonance_calibration_raw": "52956bdd74fc25786dab5fec5005eec8d219b758fe19ce91c3823f352e484ac8",
           "resonance_calibration_source_queryback": "38a8ef4be65ed3dbb744f89c519ddee493d9be371d14edff8dc25c3914b32064",
           "source_queryback": "2addf52401bd567c4d6fb8a53b58c8c1a28c04c89656e79f8a3e29f09bccdf16",
@@ -2061,8 +2255,8 @@
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "02df60324765f7e129eebe9d9cdbf7a4d6b455e4600520a7ed339727c90d6faf",
           "nonlinear_control": "a9e1c40ff2df161043bb18540523f50cd2407d57a7761ff7e23877a7ca700c16",
-          "resonance_calibration_analyzer": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-          "resonance_calibration_artifact": "8a32876a3931b4a16da10da19ad42d98246f89172eaf70b274462b90c56141a3",
+          "resonance_calibration_analyzer": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+          "resonance_calibration_artifact": "627012a99ec22f82d4a8ec8d83fbbe1a2f886e709701a1639b8d1b6ab8bad983",
           "resonance_calibration_raw": "52956bdd74fc25786dab5fec5005eec8d219b758fe19ce91c3823f352e484ac8",
           "resonance_calibration_source_queryback": "38a8ef4be65ed3dbb744f89c519ddee493d9be371d14edff8dc25c3914b32064",
           "source_queryback": "df76e5f39f70be8257848fe925e06009799c7725771bf68c68e36cb30efe3c14",
@@ -2079,8 +2273,8 @@
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "93b252d419031c60455d0f747668fccfe1513cbf988127bc2a348df2e4109c1f",
           "nonlinear_control": "945c05746ac5150929eaadac7353bb925c26a969e5b26dde3d87edfe136108ee",
-          "resonance_calibration_analyzer": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-          "resonance_calibration_artifact": "8a32876a3931b4a16da10da19ad42d98246f89172eaf70b274462b90c56141a3",
+          "resonance_calibration_analyzer": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+          "resonance_calibration_artifact": "627012a99ec22f82d4a8ec8d83fbbe1a2f886e709701a1639b8d1b6ab8bad983",
           "resonance_calibration_raw": "52956bdd74fc25786dab5fec5005eec8d219b758fe19ce91c3823f352e484ac8",
           "resonance_calibration_source_queryback": "38a8ef4be65ed3dbb744f89c519ddee493d9be371d14edff8dc25c3914b32064",
           "source_queryback": "df76e5f39f70be8257848fe925e06009799c7725771bf68c68e36cb30efe3c14",
@@ -2097,8 +2291,8 @@
           "instrument_queryback": "e9e9b02e49f6e55e8db9a94e26c6bca3ee60c48e884c50efd439033da10543c0",
           "native_export_receipt": "d6ec3d006dfadc20e47f9e8888d2a348c24264a9b25b44d4681c9a099ad156f1",
           "nonlinear_control": "1355673d28cb64f59d68df0769dc0082cd8e6abd066d7c77ff78676fb1cccf86",
-          "resonance_calibration_analyzer": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-          "resonance_calibration_artifact": "8a32876a3931b4a16da10da19ad42d98246f89172eaf70b274462b90c56141a3",
+          "resonance_calibration_analyzer": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+          "resonance_calibration_artifact": "627012a99ec22f82d4a8ec8d83fbbe1a2f886e709701a1639b8d1b6ab8bad983",
           "resonance_calibration_raw": "52956bdd74fc25786dab5fec5005eec8d219b758fe19ce91c3823f352e484ac8",
           "resonance_calibration_source_queryback": "38a8ef4be65ed3dbb744f89c519ddee493d9be371d14edff8dc25c3914b32064",
           "source_queryback": "df76e5f39f70be8257848fe925e06009799c7725771bf68c68e36cb30efe3c14",
@@ -2108,11 +2302,11 @@
       },
       "calibration_sha256": "473ba7ee25cd2efb86f6bbe82362ce1a4dfd1f072ab1214d20bb8f9a3e5bb73b",
       "metadata_sha256": {
-        "arm_0": "33d66c6d5c117f84cf5b5cf6418cf45c9ad88155bbc74911fe3df8a02646a13e",
-        "arm_pi": "cf6753567ff91b2d7b19a7ecffed145daf73de7c143e9e65f36a6121197b02a9",
-        "dummy_c0": "56495e3cfe8f5f90859f686d333ccc106474b38fe734f99af30af6bc66244394",
-        "resonator_removed": "85e3ddc7bc7a0c4fab5bbc1430ef5471f5e2d3da8bbe448e282bb1368db52bb6",
-        "zero_drive": "d0470f11205f99f3377e80fa0f83113d7d0fe84150f5aa410edce5abbf38e132"
+        "arm_0": "a058df66cb8b32574e1e900e948f6f4dbfc40b51045d11bc16ec6eb9e05cc0de",
+        "arm_pi": "a3f311579343e7538e75d192fd935663452f190d2958e58f770042864f254e89",
+        "dummy_c0": "0dec028cbb19a3f5e757d8b963b666c8e4079fb5363c60d2023d8f53f3cfe0db",
+        "resonator_removed": "2c398958ba347591e06266f82544d1f748da1c428ef5d0509f4b08c27d148906",
+        "zero_drive": "9f8746924ac6d73d9f6b793f29a2867c0720198f1f571246b80d39d880aec9ff"
       },
       "payload_sha256": {
         "arm_0": "e7f02769735c3f39485556e4e637a905bed6714c3e86cf3f3198c1093491d0ed",
@@ -2123,8 +2317,8 @@
       },
       "resonance_calibration_reference": {
         "assembly_id": "P0-DUT-A",
-        "calibration_analyzer_sha256": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
-        "calibration_artifact_sha256": "8a32876a3931b4a16da10da19ad42d98246f89172eaf70b274462b90c56141a3",
+        "calibration_analyzer_sha256": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
+        "calibration_artifact_sha256": "627012a99ec22f82d4a8ec8d83fbbe1a2f886e709701a1639b8d1b6ab8bad983",
         "calibration_raw_sha256": "52956bdd74fc25786dab5fec5005eec8d219b758fe19ce91c3823f352e484ac8",
         "calibration_role": "GLOBAL_DUT_A_PREASSIGNMENT_REFERENCE",
         "carrier_population": "EPSON_Q13FC1350000401"
@@ -2144,6 +2338,7 @@
           "imag": -0.030001333015899898,
           "real": 0.06000093665703648
         },
+        "block_chronology_sha256": "eb2965eaba48af471f2f23853ebc44d48ad04a692d54a441db14f7e519cef17f",
         "convergence_iterations": 47,
         "convergence_status": "CONVERGED_INTERIOR",
         "fit_condition_number": 7.16203469694256,
@@ -2157,6 +2352,7 @@
           "real": 0.5200003340483446
         },
         "linewidth_hz": 3.183084153285686,
+        "minimum_observed_settling_ns": 5000000000,
         "point_fit_condition_max": 1.41506255876336,
         "probe_frequency_hz": 32863.661977236756,
         "probe_frequency_u95_hz": 0.0008665042599424268,
@@ -2175,6 +2371,7 @@
           "imag": -0.030001333015899898,
           "real": 0.06000093665703648
         },
+        "block_chronology_sha256": "eb2965eaba48af471f2f23853ebc44d48ad04a692d54a441db14f7e519cef17f",
         "convergence_iterations": 47,
         "convergence_status": "CONVERGED_INTERIOR",
         "fit_condition_number": 7.16203469694256,
@@ -2188,6 +2385,7 @@
           "real": 0.5200003340483446
         },
         "linewidth_hz": 3.183084153285686,
+        "minimum_observed_settling_ns": 5000000000,
         "point_fit_condition_max": 1.41506255876336,
         "probe_frequency_hz": 32863.661977236756,
         "probe_frequency_u95_hz": 0.0008665042599424268,
@@ -2206,6 +2404,7 @@
           "imag": -0.030001333015899898,
           "real": 0.06000093665703648
         },
+        "block_chronology_sha256": "eb2965eaba48af471f2f23853ebc44d48ad04a692d54a441db14f7e519cef17f",
         "convergence_iterations": 47,
         "convergence_status": "CONVERGED_INTERIOR",
         "fit_condition_number": 7.16203469694256,
@@ -2219,6 +2418,7 @@
           "real": 0.5200003340483446
         },
         "linewidth_hz": 3.183084153285686,
+        "minimum_observed_settling_ns": 5000000000,
         "point_fit_condition_max": 1.41506255876336,
         "probe_frequency_hz": 32863.661977236756,
         "probe_frequency_u95_hz": 0.0008665042599424268,
@@ -2237,6 +2437,7 @@
           "imag": -0.030001333015899898,
           "real": 0.06000093665703648
         },
+        "block_chronology_sha256": "eb2965eaba48af471f2f23853ebc44d48ad04a692d54a441db14f7e519cef17f",
         "convergence_iterations": 47,
         "convergence_status": "CONVERGED_INTERIOR",
         "fit_condition_number": 7.16203469694256,
@@ -2250,6 +2451,7 @@
           "real": 0.5200003340483446
         },
         "linewidth_hz": 3.183084153285686,
+        "minimum_observed_settling_ns": 5000000000,
         "point_fit_condition_max": 1.41506255876336,
         "probe_frequency_hz": 32863.661977236756,
         "probe_frequency_u95_hz": 0.0008665042599424268,
@@ -2268,6 +2470,7 @@
           "imag": -0.030001333015899898,
           "real": 0.06000093665703648
         },
+        "block_chronology_sha256": "eb2965eaba48af471f2f23853ebc44d48ad04a692d54a441db14f7e519cef17f",
         "convergence_iterations": 47,
         "convergence_status": "CONVERGED_INTERIOR",
         "fit_condition_number": 7.16203469694256,
@@ -2281,6 +2484,7 @@
           "real": 0.5200003340483446
         },
         "linewidth_hz": 3.183084153285686,
+        "minimum_observed_settling_ns": 5000000000,
         "point_fit_condition_max": 1.41506255876336,
         "probe_frequency_hz": 32863.661977236756,
         "probe_frequency_u95_hz": 0.0008665042599424268,

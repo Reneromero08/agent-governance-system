@@ -1,23 +1,26 @@
-# P0 Calibration-Realism Focused Final Review
+# P0 Calibration-Settling Focused Final Review
 
-reviewed root: `a8328ef2e6e543530ba384861c16c41184c1140d563a959fa4562b83051d91f3`
+reviewed root: `a13e99fbaad26d92156779a3bc98851ba2e80a477dc0cbbbb44ad51ebf086e61`
 
-reviewer: `/root/p0_final_calibration_review`
+reviewer: `/root/p0_settling_final_review`
 
 verdict: PASS
 
 normalized findings: P0 0; P1 0; P2 0; open 0
 
-The focused read-only review covered the SDK-export/native-to-canonical evidence path, independent CH0/CH1 complex extraction, the deterministic complex-background-plus-complex-gain single-pole fit, uncertainty and residual gates, calibration-first frequency custody, the measured off-resonance control, the preserved signal-path witness claim, and the non-executing claim ceiling.
+The focused read-only review covered the worst-case-Q dwell calculation, block-level chronology enforcement, the stateful complex transient fixture, payload-to-chronology byte ordering, preservation of the realistic complex-background-plus-complex-gain single-pole fit, and the non-executing claim ceiling.
 
-An earlier candidate incorrectly relabeled one DUT-like calibration as though each control assembly produced it. That candidate was not passed. The reviewed root closes the finding by binding one explicit global pre-assignment `P0-DUT-A`/FC135 calibration reference across all roles while retaining separate primary DUT-A, detector-only B, and dummy C assembly/population custody. The validator mechanically checks the shared calibration analyzer/artifact/raw hashes and the distinct primary assemblies.
+The reviewed root freezes a minimum 5,000,000,000 ns dwell for every one of 143 ordered frequency blocks. Each entry binds exact block index, commanded frequency, command completion, acquisition start/completion, and the corresponding raw payload-block SHA-256; chronology and byte order are checked before signal extraction or physical fitting. At the accepted worst case, `tau=0.582842809174 s` and the five-second residual fraction is `0.000188080153`.
 
-A later review found that a malformed upper-bound literal could classify the optimizer's 32820 Hz clamp as interior. That candidate was not passed. The reviewed root separates the 32760..32821 Hz optimizer domain from the accepted 32768..32820 Hz interval, checks both optimizer boundaries correctly, accepts 32820 Hz as interior, rejects 32820.5 Hz by the accepted-range gate, and rejects a 32822 Hz source by the optimizer-boundary gate. The regenerated realism suite passes 13 positives and 17 targeted negatives.
+An earlier settling candidate required the synthetic fixture's 2037 UTC origin for all evidence. That candidate was not passed. The reviewed root instead accepts an evidence-specific canonical UTC origin while retaining monotonic origin zero, strict nanosecond interval checks, chronology containment, and a deterministic synthetic fixture date. An alternate canonical 2041 origin passes; a noncanonical origin rejects with `RESONANCE_CALIBRATION_CUSTODY`.
 
-The reviewer confirmed candidate-root and pre-review PASS, `P0_RESONANCE_LOAD_LAW_TEST_PASS`, 44,664/44,664 current-root mutations rejected, 82/82 focused signal-path cases passed, no remaining findings, and no physical contact. This is one focused final review; it is not described as externally reproducible independence.
+The reviewer confirmed candidate-root and pre-review PASS, `P0_RESONANCE_LOAD_LAW_TEST_PASS`, six stateful settling positives, eleven targeted settling/custody negatives, the preserved 13/17 calibration-realism suite, ten calibration-custody controls, 61 legacy fixtures, 58 raw controls, no remaining findings, and no physical contact. This is one focused final review; it is not described as externally reproducible independence.
+
+The reviewer also confirmed that current-root mutation evidence is limited to the bounded 82-case signal-path suite with zero survivors. The preserved 44,664-case receipt remains explicitly prior-root evidence, while the current candidate records algorithm-continuity checks and zero current-root exhaustive mutations. The final continuity document can be built from the candidate-only snapshot, and final verification independently checks the historical receipt's exact bytes.
 
 Decision authorized by this review only under `NON_EXECUTING_P0_BUILD_READINESS_ONLY`:
 
 ```text
 P0_PHYSICAL_CALIBRATION_ANALYZER_REALISM_ESTABLISHED
+P0_CALIBRATION_SETTLING_LAW_ESTABLISHED
 ```

@@ -1,6 +1,8 @@
 # P0 resonance and load-law repair contract
 
 **Status:** `P0_RESONANCE_LOAD_LAW_REPAIR_ESTABLISHED`
+**Calibration realism:** `P0_PHYSICAL_CALIBRATION_ANALYZER_REALISM_ESTABLISHED`
+**Settling law:** `P0_CALIBRATION_SETTLING_LAW_ESTABLISHED`
 **Parent audit:** `P0_POST_QUALIFICATION_AUDIT.md`  
 **Preserved result:** `P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED`  
 **Restored decision:** `P0_BUILD_READINESS_PACKET_FROZEN`
@@ -19,6 +21,8 @@ coarse search: 32760..32820 Hz at 1 Hz
 fine search: 81 unique half-step-offset points spanning +/-1.0125 Hz at 0.025 Hz
 calibration excitation: 0.100 Vpp
 canonical capture: 143 frequency blocks, 4096 samples/channel/block, 1 MS/s, signed int16 little-endian CH0/CH1 interleaved
+minimum dwell: 5.000 s after each frequency-command completion and before that block's acquisition starts
+chronology: 143 ordered monotonic-nanosecond entries bound to block index, commanded frequency, acquisition interval, and payload-block SHA-256
 complex extraction: independent sine/cosine/DC fits for CH0 source monitor and CH1 carrier response; H=Z1/Z0 with propagated point uncertainty
 fit: H(f)=B+C/(1+i*2Q*(f-f0)/f0), with complex B and C
 solver: deterministic bounded NumPy variable projection and pattern refinement; no random initialization
@@ -56,13 +60,15 @@ source and instrument queryback SHA-256
 frequency-grid SHA-256
 ```
 
-The calibration artifact must also bind the exact calibration assembly and carrier population, frequency list, sample rate, block size, channel order, scales and offsets, source amplitude and offset, settling time, fitted complex background and gain, Q and U95, residual metrics, fit condition, start/completion UTC, and `primary_observed=false`. This is one global pre-assignment DUT-A/FC135 reference; all five later records bind that same calibration identity and frequency tuple while retaining their own separate primary assembly/population identities. Removed-resonator B and 1-pF-dummy C are not falsely represented as having produced a resonance calibration. The implemented native input is the frozen SDK-export int16 representation. No proprietary container parser is claimed; any original proprietary container must be preserved separately in a future authorized acquisition. Calibration must complete before the assignment commitment. The source-preparation receipt must begin at least 3.000 s before primary acquisition.
+The calibration artifact must also bind the exact calibration assembly and carrier population, frequency list, sample rate, block size, channel order, scales and offsets, source amplitude and offset, the ordered block chronology and its SHA-256, fitted complex background and gain, Q and U95, residual metrics, fit condition, start/completion UTC, and `primary_observed=false`. The monotonic origin is zero and maps to an evidence-specific canonical UTC value; the deterministic 2037 value belongs only to synthetic fixtures and is not an operational requirement. Every chronology entry binds its exact payload-block SHA-256, so metadata frequency order cannot diverge from byte order. Command completion must precede acquisition start by at least 5,000,000,000 ns; acquisition must complete before the next command. Missing, duplicated, reordered, nonmonotonic, frequency-mismatched, under-settled, or hash-mismatched chronology is rejected before the physical fit. This is one global pre-assignment DUT-A/FC135 reference; all five later records bind that same calibration identity and frequency tuple while retaining their own separate primary assembly/population identities. Removed-resonator B and 1-pF-dummy C are not falsely represented as having produced a resonance calibration. The implemented native input is the frozen SDK-export int16 representation. No proprietary container parser is claimed; any original proprietary container must be preserved separately in a future authorized acquisition. Calibration must complete before the assignment commitment. The source-preparation receipt must begin at least 3.000 s before primary acquisition.
 
 The analyzer propagates the bound tuple through the source queryback, drive/reference fit, C2 transfer, I/Q projection, reconstruction, cycle counting, off-resonance controls, and matched-arm comparison. Nominal-frequency constants are restricted to synthetic fixture generation; an AST regression test rejects their use by operational analysis functions.
 
 The calibration receipt alone is not sufficient. The analyzer must derive both complex channel points directly from the bound raw samples; it may not normalize inverse transfer, rotate or scale the response, or subtract a background before fitting. The complex background and gain are fitted parameters. The final raw block is a separately bound off-resonance response at `f_carrier + max(20 Hz, 20 calibrated linewidths)` and is excluded from the resonance fit. Its background-subtracted response ratio plus U95 must not exceed 0.030. The 0.030 gate replaces the contradictory 0.020 literal because an ideal single pole at exactly twenty linewidths has magnitude about 0.025. Self-consistently rehashed invalid bytes, a too-close probe, or an excessive measured response remain hard rejections.
 
 This calibration-realism disposition preserves the BVD circuit/load sanity model as a separate prospective architecture calculation. It replaces only the synthetic-perfect calibration parser; it does not reopen the carrier, sense topology, relays, netlist, BOM, fabrication design, or signal-path witness result.
+
+The targeted settling fixture alone carries complex resonator state between commanded frequencies using `state_after=steady_new+(state_before-steady_new)*exp(-settling_seconds/tau)` with `tau=Q/(pi*f0)`. It does not replace the steady-state fit model. At the accepted worst case (`Q=60000`, `f=32768 Hz`), `tau=0.582842809174 s`; a 5.000 s dwell leaves a residual fraction `0.000188080153159`, below 0.02 percent.
 
 ## Corrected claim laws
 
@@ -85,9 +91,11 @@ source-queryback frequency mismatch rejection
 witness 2:1 relation mismatch rejection
 hard-coded operational-frequency regression scan
 existing signal-path model, analyzer, controls, ordering proof, and validator
-12 raw physical-realism positive calibration fixtures
-15 raw model/measurement negative calibration fixtures
+13 raw physical-realism positive calibration fixtures
+17 raw model/measurement negative calibration fixtures
 10 calibration custody and chronology adversaries
+6 stateful settling positives
+11 insufficient-settling and chronology-order negatives
 two fresh-process byte-identical reproductions
 ```
 
@@ -95,6 +103,8 @@ two fresh-process byte-identical reproductions
 
 ```text
 P0_RESONANCE_LOAD_LAW_REPAIR_ESTABLISHED
+P0_PHYSICAL_CALIBRATION_ANALYZER_REALISM_ESTABLISHED
+P0_CALIBRATION_SETTLING_LAW_ESTABLISHED
 P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED
 P0_BUILD_READINESS_PACKET_FROZEN
 NON_EXECUTING_P0_BUILD_READINESS_ONLY

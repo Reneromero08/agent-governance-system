@@ -182,7 +182,1168 @@
       "topology_scan_hashes_unique_per_role": true
     },
     "p0.resonance-calibration.v2": {
+      "block_chronology_entries": 143,
+      "block_chronology_entry_exact_fields": [
+        "acquisition_completed_monotonic_ns",
+        "acquisition_started_monotonic_ns",
+        "block_index",
+        "command_completed_monotonic_ns",
+        "commanded_frequency_hz",
+        "payload_block_sha256"
+      ],
+      "block_chronology_hash_required": true,
+      "block_chronology_origin_utc_law": "EVIDENCE_SPECIFIC_CANONICAL_UTC__SYNTHETIC_FIXTURE_DATE_NOT_OPERATIONAL",
       "canonical_payload": {
+        "block_chronology": [
+          {
+            "acquisition_completed_monotonic_ns": 5005096000,
+            "acquisition_started_monotonic_ns": 5001000000,
+            "block_index": 0,
+            "command_completed_monotonic_ns": 1000000,
+            "commanded_frequency_hz": "32760",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 10010192000,
+            "acquisition_started_monotonic_ns": 10006096000,
+            "block_index": 1,
+            "command_completed_monotonic_ns": 5006096000,
+            "commanded_frequency_hz": "32761",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 15015288000,
+            "acquisition_started_monotonic_ns": 15011192000,
+            "block_index": 2,
+            "command_completed_monotonic_ns": 10011192000,
+            "commanded_frequency_hz": "32762",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 20020384000,
+            "acquisition_started_monotonic_ns": 20016288000,
+            "block_index": 3,
+            "command_completed_monotonic_ns": 15016288000,
+            "commanded_frequency_hz": "32763",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 25025480000,
+            "acquisition_started_monotonic_ns": 25021384000,
+            "block_index": 4,
+            "command_completed_monotonic_ns": 20021384000,
+            "commanded_frequency_hz": "32764",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 30030576000,
+            "acquisition_started_monotonic_ns": 30026480000,
+            "block_index": 5,
+            "command_completed_monotonic_ns": 25026480000,
+            "commanded_frequency_hz": "32765",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 35035672000,
+            "acquisition_started_monotonic_ns": 35031576000,
+            "block_index": 6,
+            "command_completed_monotonic_ns": 30031576000,
+            "commanded_frequency_hz": "32766",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 40040768000,
+            "acquisition_started_monotonic_ns": 40036672000,
+            "block_index": 7,
+            "command_completed_monotonic_ns": 35036672000,
+            "commanded_frequency_hz": "32767",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 45045864000,
+            "acquisition_started_monotonic_ns": 45041768000,
+            "block_index": 8,
+            "command_completed_monotonic_ns": 40041768000,
+            "commanded_frequency_hz": "32768",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 50050960000,
+            "acquisition_started_monotonic_ns": 50046864000,
+            "block_index": 9,
+            "command_completed_monotonic_ns": 45046864000,
+            "commanded_frequency_hz": "32769",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 55056056000,
+            "acquisition_started_monotonic_ns": 55051960000,
+            "block_index": 10,
+            "command_completed_monotonic_ns": 50051960000,
+            "commanded_frequency_hz": "32770",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 60061152000,
+            "acquisition_started_monotonic_ns": 60057056000,
+            "block_index": 11,
+            "command_completed_monotonic_ns": 55057056000,
+            "commanded_frequency_hz": "32771",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 65066248000,
+            "acquisition_started_monotonic_ns": 65062152000,
+            "block_index": 12,
+            "command_completed_monotonic_ns": 60062152000,
+            "commanded_frequency_hz": "32772",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 70071344000,
+            "acquisition_started_monotonic_ns": 70067248000,
+            "block_index": 13,
+            "command_completed_monotonic_ns": 65067248000,
+            "commanded_frequency_hz": "32773",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 75076440000,
+            "acquisition_started_monotonic_ns": 75072344000,
+            "block_index": 14,
+            "command_completed_monotonic_ns": 70072344000,
+            "commanded_frequency_hz": "32774",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 80081536000,
+            "acquisition_started_monotonic_ns": 80077440000,
+            "block_index": 15,
+            "command_completed_monotonic_ns": 75077440000,
+            "commanded_frequency_hz": "32775",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 85086632000,
+            "acquisition_started_monotonic_ns": 85082536000,
+            "block_index": 16,
+            "command_completed_monotonic_ns": 80082536000,
+            "commanded_frequency_hz": "32776",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 90091728000,
+            "acquisition_started_monotonic_ns": 90087632000,
+            "block_index": 17,
+            "command_completed_monotonic_ns": 85087632000,
+            "commanded_frequency_hz": "32777",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 95096824000,
+            "acquisition_started_monotonic_ns": 95092728000,
+            "block_index": 18,
+            "command_completed_monotonic_ns": 90092728000,
+            "commanded_frequency_hz": "32778",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 100101920000,
+            "acquisition_started_monotonic_ns": 100097824000,
+            "block_index": 19,
+            "command_completed_monotonic_ns": 95097824000,
+            "commanded_frequency_hz": "32779",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 105107016000,
+            "acquisition_started_monotonic_ns": 105102920000,
+            "block_index": 20,
+            "command_completed_monotonic_ns": 100102920000,
+            "commanded_frequency_hz": "32780",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 110112112000,
+            "acquisition_started_monotonic_ns": 110108016000,
+            "block_index": 21,
+            "command_completed_monotonic_ns": 105108016000,
+            "commanded_frequency_hz": "32781",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 115117208000,
+            "acquisition_started_monotonic_ns": 115113112000,
+            "block_index": 22,
+            "command_completed_monotonic_ns": 110113112000,
+            "commanded_frequency_hz": "32782",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 120122304000,
+            "acquisition_started_monotonic_ns": 120118208000,
+            "block_index": 23,
+            "command_completed_monotonic_ns": 115118208000,
+            "commanded_frequency_hz": "32783",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 125127400000,
+            "acquisition_started_monotonic_ns": 125123304000,
+            "block_index": 24,
+            "command_completed_monotonic_ns": 120123304000,
+            "commanded_frequency_hz": "32784",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 130132496000,
+            "acquisition_started_monotonic_ns": 130128400000,
+            "block_index": 25,
+            "command_completed_monotonic_ns": 125128400000,
+            "commanded_frequency_hz": "32785",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 135137592000,
+            "acquisition_started_monotonic_ns": 135133496000,
+            "block_index": 26,
+            "command_completed_monotonic_ns": 130133496000,
+            "commanded_frequency_hz": "32786",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 140142688000,
+            "acquisition_started_monotonic_ns": 140138592000,
+            "block_index": 27,
+            "command_completed_monotonic_ns": 135138592000,
+            "commanded_frequency_hz": "32787",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 145147784000,
+            "acquisition_started_monotonic_ns": 145143688000,
+            "block_index": 28,
+            "command_completed_monotonic_ns": 140143688000,
+            "commanded_frequency_hz": "32788",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 150152880000,
+            "acquisition_started_monotonic_ns": 150148784000,
+            "block_index": 29,
+            "command_completed_monotonic_ns": 145148784000,
+            "commanded_frequency_hz": "32789",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 155157976000,
+            "acquisition_started_monotonic_ns": 155153880000,
+            "block_index": 30,
+            "command_completed_monotonic_ns": 150153880000,
+            "commanded_frequency_hz": "32790",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 160163072000,
+            "acquisition_started_monotonic_ns": 160158976000,
+            "block_index": 31,
+            "command_completed_monotonic_ns": 155158976000,
+            "commanded_frequency_hz": "32791",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 165168168000,
+            "acquisition_started_monotonic_ns": 165164072000,
+            "block_index": 32,
+            "command_completed_monotonic_ns": 160164072000,
+            "commanded_frequency_hz": "32792",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 170173264000,
+            "acquisition_started_monotonic_ns": 170169168000,
+            "block_index": 33,
+            "command_completed_monotonic_ns": 165169168000,
+            "commanded_frequency_hz": "32793",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 175178360000,
+            "acquisition_started_monotonic_ns": 175174264000,
+            "block_index": 34,
+            "command_completed_monotonic_ns": 170174264000,
+            "commanded_frequency_hz": "32794",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 180183456000,
+            "acquisition_started_monotonic_ns": 180179360000,
+            "block_index": 35,
+            "command_completed_monotonic_ns": 175179360000,
+            "commanded_frequency_hz": "32795",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 185188552000,
+            "acquisition_started_monotonic_ns": 185184456000,
+            "block_index": 36,
+            "command_completed_monotonic_ns": 180184456000,
+            "commanded_frequency_hz": "32796",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 190193648000,
+            "acquisition_started_monotonic_ns": 190189552000,
+            "block_index": 37,
+            "command_completed_monotonic_ns": 185189552000,
+            "commanded_frequency_hz": "32797",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 195198744000,
+            "acquisition_started_monotonic_ns": 195194648000,
+            "block_index": 38,
+            "command_completed_monotonic_ns": 190194648000,
+            "commanded_frequency_hz": "32798",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 200203840000,
+            "acquisition_started_monotonic_ns": 200199744000,
+            "block_index": 39,
+            "command_completed_monotonic_ns": 195199744000,
+            "commanded_frequency_hz": "32799",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 205208936000,
+            "acquisition_started_monotonic_ns": 205204840000,
+            "block_index": 40,
+            "command_completed_monotonic_ns": 200204840000,
+            "commanded_frequency_hz": "32800",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 210214032000,
+            "acquisition_started_monotonic_ns": 210209936000,
+            "block_index": 41,
+            "command_completed_monotonic_ns": 205209936000,
+            "commanded_frequency_hz": "32801",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 215219128000,
+            "acquisition_started_monotonic_ns": 215215032000,
+            "block_index": 42,
+            "command_completed_monotonic_ns": 210215032000,
+            "commanded_frequency_hz": "32802",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 220224224000,
+            "acquisition_started_monotonic_ns": 220220128000,
+            "block_index": 43,
+            "command_completed_monotonic_ns": 215220128000,
+            "commanded_frequency_hz": "32803",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 225229320000,
+            "acquisition_started_monotonic_ns": 225225224000,
+            "block_index": 44,
+            "command_completed_monotonic_ns": 220225224000,
+            "commanded_frequency_hz": "32804",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 230234416000,
+            "acquisition_started_monotonic_ns": 230230320000,
+            "block_index": 45,
+            "command_completed_monotonic_ns": 225230320000,
+            "commanded_frequency_hz": "32805",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 235239512000,
+            "acquisition_started_monotonic_ns": 235235416000,
+            "block_index": 46,
+            "command_completed_monotonic_ns": 230235416000,
+            "commanded_frequency_hz": "32806",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 240244608000,
+            "acquisition_started_monotonic_ns": 240240512000,
+            "block_index": 47,
+            "command_completed_monotonic_ns": 235240512000,
+            "commanded_frequency_hz": "32807",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 245249704000,
+            "acquisition_started_monotonic_ns": 245245608000,
+            "block_index": 48,
+            "command_completed_monotonic_ns": 240245608000,
+            "commanded_frequency_hz": "32808",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 250254800000,
+            "acquisition_started_monotonic_ns": 250250704000,
+            "block_index": 49,
+            "command_completed_monotonic_ns": 245250704000,
+            "commanded_frequency_hz": "32809",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 255259896000,
+            "acquisition_started_monotonic_ns": 255255800000,
+            "block_index": 50,
+            "command_completed_monotonic_ns": 250255800000,
+            "commanded_frequency_hz": "32810",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 260264992000,
+            "acquisition_started_monotonic_ns": 260260896000,
+            "block_index": 51,
+            "command_completed_monotonic_ns": 255260896000,
+            "commanded_frequency_hz": "32811",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 265270088000,
+            "acquisition_started_monotonic_ns": 265265992000,
+            "block_index": 52,
+            "command_completed_monotonic_ns": 260265992000,
+            "commanded_frequency_hz": "32812",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 270275184000,
+            "acquisition_started_monotonic_ns": 270271088000,
+            "block_index": 53,
+            "command_completed_monotonic_ns": 265271088000,
+            "commanded_frequency_hz": "32813",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 275280280000,
+            "acquisition_started_monotonic_ns": 275276184000,
+            "block_index": 54,
+            "command_completed_monotonic_ns": 270276184000,
+            "commanded_frequency_hz": "32814",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 280285376000,
+            "acquisition_started_monotonic_ns": 280281280000,
+            "block_index": 55,
+            "command_completed_monotonic_ns": 275281280000,
+            "commanded_frequency_hz": "32815",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 285290472000,
+            "acquisition_started_monotonic_ns": 285286376000,
+            "block_index": 56,
+            "command_completed_monotonic_ns": 280286376000,
+            "commanded_frequency_hz": "32816",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 290295568000,
+            "acquisition_started_monotonic_ns": 290291472000,
+            "block_index": 57,
+            "command_completed_monotonic_ns": 285291472000,
+            "commanded_frequency_hz": "32817",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 295300664000,
+            "acquisition_started_monotonic_ns": 295296568000,
+            "block_index": 58,
+            "command_completed_monotonic_ns": 290296568000,
+            "commanded_frequency_hz": "32818",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 300305760000,
+            "acquisition_started_monotonic_ns": 300301664000,
+            "block_index": 59,
+            "command_completed_monotonic_ns": 295301664000,
+            "commanded_frequency_hz": "32819",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 305310856000,
+            "acquisition_started_monotonic_ns": 305306760000,
+            "block_index": 60,
+            "command_completed_monotonic_ns": 300306760000,
+            "commanded_frequency_hz": "32820",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 310315952000,
+            "acquisition_started_monotonic_ns": 310311856000,
+            "block_index": 61,
+            "command_completed_monotonic_ns": 305311856000,
+            "commanded_frequency_hz": "32798.987500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 315321048000,
+            "acquisition_started_monotonic_ns": 315316952000,
+            "block_index": 62,
+            "command_completed_monotonic_ns": 310316952000,
+            "commanded_frequency_hz": "32799.012499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 320326144000,
+            "acquisition_started_monotonic_ns": 320322048000,
+            "block_index": 63,
+            "command_completed_monotonic_ns": 315322048000,
+            "commanded_frequency_hz": "32799.037499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 325331240000,
+            "acquisition_started_monotonic_ns": 325327144000,
+            "block_index": 64,
+            "command_completed_monotonic_ns": 320327144000,
+            "commanded_frequency_hz": "32799.0625",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 330336336000,
+            "acquisition_started_monotonic_ns": 330332240000,
+            "block_index": 65,
+            "command_completed_monotonic_ns": 325332240000,
+            "commanded_frequency_hz": "32799.087500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 335341432000,
+            "acquisition_started_monotonic_ns": 335337336000,
+            "block_index": 66,
+            "command_completed_monotonic_ns": 330337336000,
+            "commanded_frequency_hz": "32799.112500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 340346528000,
+            "acquisition_started_monotonic_ns": 340342432000,
+            "block_index": 67,
+            "command_completed_monotonic_ns": 335342432000,
+            "commanded_frequency_hz": "32799.137499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 345351624000,
+            "acquisition_started_monotonic_ns": 345347528000,
+            "block_index": 68,
+            "command_completed_monotonic_ns": 340347528000,
+            "commanded_frequency_hz": "32799.162499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 350356720000,
+            "acquisition_started_monotonic_ns": 350352624000,
+            "block_index": 69,
+            "command_completed_monotonic_ns": 345352624000,
+            "commanded_frequency_hz": "32799.1875",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 355361816000,
+            "acquisition_started_monotonic_ns": 355357720000,
+            "block_index": 70,
+            "command_completed_monotonic_ns": 350357720000,
+            "commanded_frequency_hz": "32799.212500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 360366912000,
+            "acquisition_started_monotonic_ns": 360362816000,
+            "block_index": 71,
+            "command_completed_monotonic_ns": 355362816000,
+            "commanded_frequency_hz": "32799.237500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 365372008000,
+            "acquisition_started_monotonic_ns": 365367912000,
+            "block_index": 72,
+            "command_completed_monotonic_ns": 360367912000,
+            "commanded_frequency_hz": "32799.262499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 370377104000,
+            "acquisition_started_monotonic_ns": 370373008000,
+            "block_index": 73,
+            "command_completed_monotonic_ns": 365373008000,
+            "commanded_frequency_hz": "32799.287499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 375382200000,
+            "acquisition_started_monotonic_ns": 375378104000,
+            "block_index": 74,
+            "command_completed_monotonic_ns": 370378104000,
+            "commanded_frequency_hz": "32799.3125",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 380387296000,
+            "acquisition_started_monotonic_ns": 380383200000,
+            "block_index": 75,
+            "command_completed_monotonic_ns": 375383200000,
+            "commanded_frequency_hz": "32799.337500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 385392392000,
+            "acquisition_started_monotonic_ns": 385388296000,
+            "block_index": 76,
+            "command_completed_monotonic_ns": 380388296000,
+            "commanded_frequency_hz": "32799.362500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 390397488000,
+            "acquisition_started_monotonic_ns": 390393392000,
+            "block_index": 77,
+            "command_completed_monotonic_ns": 385393392000,
+            "commanded_frequency_hz": "32799.387499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 395402584000,
+            "acquisition_started_monotonic_ns": 395398488000,
+            "block_index": 78,
+            "command_completed_monotonic_ns": 390398488000,
+            "commanded_frequency_hz": "32799.412499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 400407680000,
+            "acquisition_started_monotonic_ns": 400403584000,
+            "block_index": 79,
+            "command_completed_monotonic_ns": 395403584000,
+            "commanded_frequency_hz": "32799.4375",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 405412776000,
+            "acquisition_started_monotonic_ns": 405408680000,
+            "block_index": 80,
+            "command_completed_monotonic_ns": 400408680000,
+            "commanded_frequency_hz": "32799.462500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 410417872000,
+            "acquisition_started_monotonic_ns": 410413776000,
+            "block_index": 81,
+            "command_completed_monotonic_ns": 405413776000,
+            "commanded_frequency_hz": "32799.487500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 415422968000,
+            "acquisition_started_monotonic_ns": 415418872000,
+            "block_index": 82,
+            "command_completed_monotonic_ns": 410418872000,
+            "commanded_frequency_hz": "32799.512499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 420428064000,
+            "acquisition_started_monotonic_ns": 420423968000,
+            "block_index": 83,
+            "command_completed_monotonic_ns": 415423968000,
+            "commanded_frequency_hz": "32799.537499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 425433160000,
+            "acquisition_started_monotonic_ns": 425429064000,
+            "block_index": 84,
+            "command_completed_monotonic_ns": 420429064000,
+            "commanded_frequency_hz": "32799.5625",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 430438256000,
+            "acquisition_started_monotonic_ns": 430434160000,
+            "block_index": 85,
+            "command_completed_monotonic_ns": 425434160000,
+            "commanded_frequency_hz": "32799.587500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 435443352000,
+            "acquisition_started_monotonic_ns": 435439256000,
+            "block_index": 86,
+            "command_completed_monotonic_ns": 430439256000,
+            "commanded_frequency_hz": "32799.612500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 440448448000,
+            "acquisition_started_monotonic_ns": 440444352000,
+            "block_index": 87,
+            "command_completed_monotonic_ns": 435444352000,
+            "commanded_frequency_hz": "32799.637499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 445453544000,
+            "acquisition_started_monotonic_ns": 445449448000,
+            "block_index": 88,
+            "command_completed_monotonic_ns": 440449448000,
+            "commanded_frequency_hz": "32799.662499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 450458640000,
+            "acquisition_started_monotonic_ns": 450454544000,
+            "block_index": 89,
+            "command_completed_monotonic_ns": 445454544000,
+            "commanded_frequency_hz": "32799.6875",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 455463736000,
+            "acquisition_started_monotonic_ns": 455459640000,
+            "block_index": 90,
+            "command_completed_monotonic_ns": 450459640000,
+            "commanded_frequency_hz": "32799.712500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 460468832000,
+            "acquisition_started_monotonic_ns": 460464736000,
+            "block_index": 91,
+            "command_completed_monotonic_ns": 455464736000,
+            "commanded_frequency_hz": "32799.737500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 465473928000,
+            "acquisition_started_monotonic_ns": 465469832000,
+            "block_index": 92,
+            "command_completed_monotonic_ns": 460469832000,
+            "commanded_frequency_hz": "32799.762499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 470479024000,
+            "acquisition_started_monotonic_ns": 470474928000,
+            "block_index": 93,
+            "command_completed_monotonic_ns": 465474928000,
+            "commanded_frequency_hz": "32799.787499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 475484120000,
+            "acquisition_started_monotonic_ns": 475480024000,
+            "block_index": 94,
+            "command_completed_monotonic_ns": 470480024000,
+            "commanded_frequency_hz": "32799.8125",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 480489216000,
+            "acquisition_started_monotonic_ns": 480485120000,
+            "block_index": 95,
+            "command_completed_monotonic_ns": 475485120000,
+            "commanded_frequency_hz": "32799.837500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 485494312000,
+            "acquisition_started_monotonic_ns": 485490216000,
+            "block_index": 96,
+            "command_completed_monotonic_ns": 480490216000,
+            "commanded_frequency_hz": "32799.862500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 490499408000,
+            "acquisition_started_monotonic_ns": 490495312000,
+            "block_index": 97,
+            "command_completed_monotonic_ns": 485495312000,
+            "commanded_frequency_hz": "32799.887499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 495504504000,
+            "acquisition_started_monotonic_ns": 495500408000,
+            "block_index": 98,
+            "command_completed_monotonic_ns": 490500408000,
+            "commanded_frequency_hz": "32799.912499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 500509600000,
+            "acquisition_started_monotonic_ns": 500505504000,
+            "block_index": 99,
+            "command_completed_monotonic_ns": 495505504000,
+            "commanded_frequency_hz": "32799.9375",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 505514696000,
+            "acquisition_started_monotonic_ns": 505510600000,
+            "block_index": 100,
+            "command_completed_monotonic_ns": 500510600000,
+            "commanded_frequency_hz": "32799.962500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 510519792000,
+            "acquisition_started_monotonic_ns": 510515696000,
+            "block_index": 101,
+            "command_completed_monotonic_ns": 505515696000,
+            "commanded_frequency_hz": "32799.987500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 515524888000,
+            "acquisition_started_monotonic_ns": 515520792000,
+            "block_index": 102,
+            "command_completed_monotonic_ns": 510520792000,
+            "commanded_frequency_hz": "32800.012499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 520529984000,
+            "acquisition_started_monotonic_ns": 520525888000,
+            "block_index": 103,
+            "command_completed_monotonic_ns": 515525888000,
+            "commanded_frequency_hz": "32800.037499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 525535080000,
+            "acquisition_started_monotonic_ns": 525530984000,
+            "block_index": 104,
+            "command_completed_monotonic_ns": 520530984000,
+            "commanded_frequency_hz": "32800.0625",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 530540176000,
+            "acquisition_started_monotonic_ns": 530536080000,
+            "block_index": 105,
+            "command_completed_monotonic_ns": 525536080000,
+            "commanded_frequency_hz": "32800.087500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 535545272000,
+            "acquisition_started_monotonic_ns": 535541176000,
+            "block_index": 106,
+            "command_completed_monotonic_ns": 530541176000,
+            "commanded_frequency_hz": "32800.112500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 540550368000,
+            "acquisition_started_monotonic_ns": 540546272000,
+            "block_index": 107,
+            "command_completed_monotonic_ns": 535546272000,
+            "commanded_frequency_hz": "32800.137499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 545555464000,
+            "acquisition_started_monotonic_ns": 545551368000,
+            "block_index": 108,
+            "command_completed_monotonic_ns": 540551368000,
+            "commanded_frequency_hz": "32800.162499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 550560560000,
+            "acquisition_started_monotonic_ns": 550556464000,
+            "block_index": 109,
+            "command_completed_monotonic_ns": 545556464000,
+            "commanded_frequency_hz": "32800.1875",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 555565656000,
+            "acquisition_started_monotonic_ns": 555561560000,
+            "block_index": 110,
+            "command_completed_monotonic_ns": 550561560000,
+            "commanded_frequency_hz": "32800.212500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 560570752000,
+            "acquisition_started_monotonic_ns": 560566656000,
+            "block_index": 111,
+            "command_completed_monotonic_ns": 555566656000,
+            "commanded_frequency_hz": "32800.237500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 565575848000,
+            "acquisition_started_monotonic_ns": 565571752000,
+            "block_index": 112,
+            "command_completed_monotonic_ns": 560571752000,
+            "commanded_frequency_hz": "32800.262499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 570580944000,
+            "acquisition_started_monotonic_ns": 570576848000,
+            "block_index": 113,
+            "command_completed_monotonic_ns": 565576848000,
+            "commanded_frequency_hz": "32800.287499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 575586040000,
+            "acquisition_started_monotonic_ns": 575581944000,
+            "block_index": 114,
+            "command_completed_monotonic_ns": 570581944000,
+            "commanded_frequency_hz": "32800.3125",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 580591136000,
+            "acquisition_started_monotonic_ns": 580587040000,
+            "block_index": 115,
+            "command_completed_monotonic_ns": 575587040000,
+            "commanded_frequency_hz": "32800.337500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 585596232000,
+            "acquisition_started_monotonic_ns": 585592136000,
+            "block_index": 116,
+            "command_completed_monotonic_ns": 580592136000,
+            "commanded_frequency_hz": "32800.362500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 590601328000,
+            "acquisition_started_monotonic_ns": 590597232000,
+            "block_index": 117,
+            "command_completed_monotonic_ns": 585597232000,
+            "commanded_frequency_hz": "32800.387499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 595606424000,
+            "acquisition_started_monotonic_ns": 595602328000,
+            "block_index": 118,
+            "command_completed_monotonic_ns": 590602328000,
+            "commanded_frequency_hz": "32800.412499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 600611520000,
+            "acquisition_started_monotonic_ns": 600607424000,
+            "block_index": 119,
+            "command_completed_monotonic_ns": 595607424000,
+            "commanded_frequency_hz": "32800.4375",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 605616616000,
+            "acquisition_started_monotonic_ns": 605612520000,
+            "block_index": 120,
+            "command_completed_monotonic_ns": 600612520000,
+            "commanded_frequency_hz": "32800.462500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 610621712000,
+            "acquisition_started_monotonic_ns": 610617616000,
+            "block_index": 121,
+            "command_completed_monotonic_ns": 605617616000,
+            "commanded_frequency_hz": "32800.487500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 615626808000,
+            "acquisition_started_monotonic_ns": 615622712000,
+            "block_index": 122,
+            "command_completed_monotonic_ns": 610622712000,
+            "commanded_frequency_hz": "32800.512499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 620631904000,
+            "acquisition_started_monotonic_ns": 620627808000,
+            "block_index": 123,
+            "command_completed_monotonic_ns": 615627808000,
+            "commanded_frequency_hz": "32800.537499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 625637000000,
+            "acquisition_started_monotonic_ns": 625632904000,
+            "block_index": 124,
+            "command_completed_monotonic_ns": 620632904000,
+            "commanded_frequency_hz": "32800.5625",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 630642096000,
+            "acquisition_started_monotonic_ns": 630638000000,
+            "block_index": 125,
+            "command_completed_monotonic_ns": 625638000000,
+            "commanded_frequency_hz": "32800.587500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 635647192000,
+            "acquisition_started_monotonic_ns": 635643096000,
+            "block_index": 126,
+            "command_completed_monotonic_ns": 630643096000,
+            "commanded_frequency_hz": "32800.612500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 640652288000,
+            "acquisition_started_monotonic_ns": 640648192000,
+            "block_index": 127,
+            "command_completed_monotonic_ns": 635648192000,
+            "commanded_frequency_hz": "32800.637499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 645657384000,
+            "acquisition_started_monotonic_ns": 645653288000,
+            "block_index": 128,
+            "command_completed_monotonic_ns": 640653288000,
+            "commanded_frequency_hz": "32800.662499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 650662480000,
+            "acquisition_started_monotonic_ns": 650658384000,
+            "block_index": 129,
+            "command_completed_monotonic_ns": 645658384000,
+            "commanded_frequency_hz": "32800.6875",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 655667576000,
+            "acquisition_started_monotonic_ns": 655663480000,
+            "block_index": 130,
+            "command_completed_monotonic_ns": 650663480000,
+            "commanded_frequency_hz": "32800.712500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 660672672000,
+            "acquisition_started_monotonic_ns": 660668576000,
+            "block_index": 131,
+            "command_completed_monotonic_ns": 655668576000,
+            "commanded_frequency_hz": "32800.737500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 665677768000,
+            "acquisition_started_monotonic_ns": 665673672000,
+            "block_index": 132,
+            "command_completed_monotonic_ns": 660673672000,
+            "commanded_frequency_hz": "32800.762499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 670682864000,
+            "acquisition_started_monotonic_ns": 670678768000,
+            "block_index": 133,
+            "command_completed_monotonic_ns": 665678768000,
+            "commanded_frequency_hz": "32800.787499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 675687960000,
+            "acquisition_started_monotonic_ns": 675683864000,
+            "block_index": 134,
+            "command_completed_monotonic_ns": 670683864000,
+            "commanded_frequency_hz": "32800.8125",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 680693056000,
+            "acquisition_started_monotonic_ns": 680688960000,
+            "block_index": 135,
+            "command_completed_monotonic_ns": 675688960000,
+            "commanded_frequency_hz": "32800.837500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 685698152000,
+            "acquisition_started_monotonic_ns": 685694056000,
+            "block_index": 136,
+            "command_completed_monotonic_ns": 680694056000,
+            "commanded_frequency_hz": "32800.862500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 690703248000,
+            "acquisition_started_monotonic_ns": 690699152000,
+            "block_index": 137,
+            "command_completed_monotonic_ns": 685699152000,
+            "commanded_frequency_hz": "32800.887499999997",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 695708344000,
+            "acquisition_started_monotonic_ns": 695704248000,
+            "block_index": 138,
+            "command_completed_monotonic_ns": 690704248000,
+            "commanded_frequency_hz": "32800.912499999999",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 700713440000,
+            "acquisition_started_monotonic_ns": 700709344000,
+            "block_index": 139,
+            "command_completed_monotonic_ns": 695709344000,
+            "commanded_frequency_hz": "32800.9375",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 705718536000,
+            "acquisition_started_monotonic_ns": 705714440000,
+            "block_index": 140,
+            "command_completed_monotonic_ns": 700714440000,
+            "commanded_frequency_hz": "32800.962500000001",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 710723632000,
+            "acquisition_started_monotonic_ns": 710719536000,
+            "block_index": 141,
+            "command_completed_monotonic_ns": 705719536000,
+            "commanded_frequency_hz": "32800.987500000003",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          },
+          {
+            "acquisition_completed_monotonic_ns": 715728728000,
+            "acquisition_started_monotonic_ns": 715724632000,
+            "block_index": 142,
+            "command_completed_monotonic_ns": 710724632000,
+            "commanded_frequency_hz": "32863.661977236756",
+            "payload_block_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+          }
+        ],
+        "block_chronology_clock": "CALIBRATION_CONTROLLER_MONOTONIC_NS",
+        "block_chronology_origin_monotonic_ns": 0,
+        "block_chronology_origin_utc": "2037-07-15T23:47:50.000000Z",
+        "block_chronology_sha256": "f34e67437c65db8e87f90e9094305cfd3981ab2d65e3e5684a0313977fe7427a",
         "channel_order": [
           "CH0_SOURCE_MONITOR",
           "CH1_CARRIER_RESPONSE"
@@ -345,13 +1506,34 @@
           "0.000005",
           "0.000005"
         ],
-        "settling_seconds_before_block": "0.05",
+        "settling_seconds_before_block": "5",
         "source_amplitude_vpp": "0.1",
         "source_offset_v": "0"
       },
+      "canonical_payload_exact_fields": [
+        "block_chronology",
+        "block_chronology_clock",
+        "block_chronology_origin_monotonic_ns",
+        "block_chronology_origin_utc",
+        "block_chronology_sha256",
+        "channel_order",
+        "dtype",
+        "endian",
+        "frequencies_hz",
+        "layout",
+        "offset_v",
+        "sample_rate_hz",
+        "samples_per_channel_per_frequency",
+        "scale_per_code_v",
+        "settling_seconds_before_block",
+        "source_amplitude_vpp",
+        "source_offset_v"
+      ],
       "deterministic_solver": "NUMPY_VARIABLE_PROJECTION_PATTERN_REFINEMENT_V1",
       "fit_model": "H(f)=B+C/(1+i*2Q*(f-f0)/f0)",
+      "minimum_settling_ns": 5000000000,
       "native_format_support": "SDK_EXPORT_IMPLEMENTED__PROPRIETARY_CONTAINER_MUST_BE_PRESERVED_SEPARATELY_AND_IS_NOT_PARSED",
+      "payload_block_hash_required": true,
       "physical_claim_authorized": false
     },
     "p0.scientific-result.v1": {

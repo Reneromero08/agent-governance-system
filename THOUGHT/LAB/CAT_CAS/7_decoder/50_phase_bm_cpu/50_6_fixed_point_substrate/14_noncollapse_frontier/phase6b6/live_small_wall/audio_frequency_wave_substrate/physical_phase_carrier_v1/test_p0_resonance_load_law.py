@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import ast
+import copy
 import math
 from pathlib import Path
 
@@ -114,10 +115,41 @@ def raw_calibration_recomputation_checks() -> None:
         raise AssertionError("artifact Q substituted for raw fitted Q")
 
 
+def settling_law_checks() -> None:
+    tau_max_seconds = 60_000.0 / (math.pi * analyzer.F_CARRIER_MIN_HZ)
+    residual_fraction = math.exp(-5.0 / tau_max_seconds)
+    assert math.isclose(tau_max_seconds, 0.582842809174, rel_tol=0.0, abs_tol=1e-12)
+    assert residual_fraction < 0.0002
+    outcomes = analyzer.run_calibration_settling_suite()
+    positives = [item for item in outcomes if item["class"] == "calibration_settling_positive"]
+    negatives = [item for item in outcomes if item["class"] == "calibration_settling_negative"]
+    assert len(positives) == 6
+    assert len(negatives) == 11
+    assert all(item["outcome"] == "PASS" for item in outcomes)
+    assert all(item["minimum_observed_settling_ns"] >= analyzer.CALIBRATION_MIN_SETTLING_NS for item in positives)
+    assert {item["case"]: item["rejected_by"] for item in negatives} == analyzer.CALIBRATION_SETTLING_NEGATIVES
+    dynamic = next(item for item in positives if item["case"] == "settling_dynamic_32800_375_65600_75")
+    assert abs(dynamic["f_carrier_hz"] - 32_800.375) <= dynamic["f_carrier_u95_hz"]
+    assert math.isclose(dynamic["f_witness_hz"], 65_600.75, rel_tol=0.0, abs_tol=2.0 * dynamic["f_carrier_u95_hz"])
+    data, spec, _ = analyzer._calibration_settling_fixture("settling_mid_q_exact_5s")
+    alternate_origin = copy.deepcopy(spec)
+    alternate_origin["block_chronology_origin_utc"] = "2041-03-02T04:05:06.123456Z"
+    analyzer.analyze_resonance_calibration_payload(data, alternate_origin)
+    malformed_origin = copy.deepcopy(spec)
+    malformed_origin["block_chronology_origin_utc"] = "2041-03-02T04:05:06Z"
+    try:
+        analyzer.analyze_resonance_calibration_payload(data, malformed_origin)
+    except analyzer.Reject as exc:
+        assert exc.code == "RESONANCE_CALIBRATION_CUSTODY"
+    else:
+        raise AssertionError("noncanonical chronology UTC origin survived")
+
+
 def main() -> int:
     hard_coded_frequency_regression()
     sanity_model_checks()
     raw_calibration_recomputation_checks()
+    settling_law_checks()
     print("P0_RESONANCE_LOAD_LAW_TEST_PASS")
     return 0
 

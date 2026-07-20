@@ -32,6 +32,8 @@ The calibration artifact now binds DUT-A/FC135 as one global pre-assignment cali
 
 This is a narrow calibration-realism correction. It preserves the carrier architecture, OPA810 topology, relay topology, C2 signal-path witness, netlist, BOM, fabrication design, complete binary-corner model, and all previous signal-path conclusions. The recalibrated 0.030 off-resonance gate is a direct consistency correction: a single pole at twenty linewidths has magnitude about 0.025, so the earlier 0.020 literal could not admit its own selected model.
 
+The subsequent narrow settling-law correction preserves that realistic fitter and freezes a 5.000 s minimum dwell per frequency block. A 143-entry monotonic chronology binds every command, acquisition interval, commanded frequency and payload-block hash before fitting. The targeted first-order complex-state fixtures establish that valid 5.000 s and longer dwell passes through the existing fit gates at the accepted Q ceiling, while 0.050 s, 0.500 s, one-nanosecond-short, missing, duplicated, reordered, nonmonotonic, frequency-mismatched, chronology-hash-mismatched and payload-order-mismatched controls reject for their intended mechanisms. This disposition is `P0_CALIBRATION_SETTLING_LAW_ESTABLISHED`; it changes no carrier, fitter, path witness, netlist, BOM or fabrication result.
+
 ## Boundary
 
 All evidence remains offline and synthetic. No hardware, target, vendor, cart, purchase, power, playback, recording, acquisition, or physical calibration was contacted or performed.
