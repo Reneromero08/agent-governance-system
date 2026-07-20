@@ -1,0 +1,109 @@
+{
+  "claim_ceiling": "BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY",
+  "coupling": [
+    [
+      0.0,
+      0.0,
+      1.0,
+      2.0,
+      -2.0
+    ],
+    [
+      0.0,
+      0.0,
+      2.0,
+      -1.0,
+      -1.0
+    ],
+    [
+      1.0,
+      2.0,
+      0.0,
+      2.0,
+      -1.0
+    ],
+    [
+      2.0,
+      -1.0,
+      2.0,
+      0.0,
+      -2.0
+    ],
+    [
+      -2.0,
+      -1.0,
+      -1.0,
+      -2.0,
+      0.0
+    ]
+  ],
+  "geometry_calibration": "carrier_weighted_mean_only_per_program_geometry",
+  "geometry_gate_depth": 1.8,
+  "global_coherence_coupling": 4.0,
+  "initial_phases_rad": [
+    0.31,
+    1.27,
+    -2.11,
+    2.53,
+    -0.83
+  ],
+  "mechanism": "pointwise_complex_recursive_geometry_interference",
+  "native_boundary": "after_complete_waveform_evolution_only",
+  "no_smuggle": {
+    "answer_fields": false,
+    "decoded_spin_feedback": false,
+    "energy_feedback": false,
+    "exact_oracle_feedback": false
+  },
+  "primary_field": [
+    -2.0,
+    1.0,
+    -2.0,
+    -2.0,
+    -2.0
+  ],
+  "reuse_field": [
+    1.0,
+    -1.0,
+    0.5,
+    0.5,
+    -1.0
+  ],
+  "sample_count": 256,
+  "sample_dtype": "little_endian_complex128",
+  "schema": "integrated_catalytic_computation_contract_v1",
+  "site_tree_sha256": [
+    "642e5c35e0dbcb282add1028c9f1f79355a0e42dc03fcee610d85a647d3d3036",
+    "98ee09fc4bcbcf514b4186b7ec5f9ba948aa7b3cebe350e808f4d344285a90ef",
+    "a9c94c3063300917192762e17c54628243271c463a6dc9b741fa2555a08f4fd1",
+    "d248c08d6db44d25fa8e2e86076393d2c68e2f6c632a24ee7e2fb0c0e3803c0c",
+    "ced03319528408b6e152aedb9b6e98e60d00dc7b6beaf887b0385e27e75f00ef"
+  ],
+  "spatial_coupling": 0.6,
+  "step_count": 1000,
+  "thresholds": {
+    "displacement_l2_min": 1.0,
+    "energy_abs_max": 1e-12,
+    "lock_residual_rad_max": 0.15,
+    "operator_history_change_l2_min": 0.001,
+    "query_coherence_min": 0.9,
+    "restoration_max_abs_error": 2e-12,
+    "samplewise_dynamics_min": 0.001,
+    "wrong_restoration_min_abs_error": 0.001
+  },
+  "time_step": 0.03,
+  "transport": {
+    "mask_first_amplitude": 0.19,
+    "mask_offsets": [
+      0.0,
+      0.73,
+      -0.41
+    ],
+    "mask_second_amplitude": 0.07,
+    "shift_bases": [
+      3,
+      -5,
+      7
+    ]
+  }
+}

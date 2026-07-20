@@ -1,0 +1,518 @@
+{
+  "ast_proof": {
+    "forbidden_hits": [],
+    "matrix_multiply_count": 0,
+    "native_function_count": 6,
+    "pass": true,
+    "reachable_functions": [
+      "evolve_native_waveforms",
+      "lock_strength",
+      "native_wave_step",
+      "native_wave_velocity",
+      "transport_shift",
+      "validate_problem"
+    ]
+  },
+  "claim_ceiling": "BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY",
+  "controls": {
+    "carrier_content_history_change_l2": 4.5067370631,
+    "geometry_replacement_calibration": "self_consistent_per_replacement",
+    "missing_phase_operator": {
+      "coherence": [
+        0.9662748425,
+        0.804462890986,
+        0.833577557566,
+        0.950417413757,
+        0.724641491112
+      ],
+      "energy": null,
+      "label": "missing_phase_operator",
+      "phases_rad": [
+        -3.09712223503,
+        -0.0102945965504,
+        3.13339882577,
+        3.01234685999,
+        3.14012687282
+      ],
+      "raw_spin_shadow": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "residual_rad": null,
+      "responses": [
+        {
+          "imag": -0.0429564848344,
+          "real": -0.965319538629
+        },
+        {
+          "imag": -0.00828147462399,
+          "real": 0.804420263389
+        },
+        {
+          "imag": 0.00683011455269,
+          "real": -0.833549575018
+        },
+        {
+          "imag": 0.122495749221,
+          "real": -0.94249034573
+        },
+        {
+          "imag": 0.00106216518056,
+          "real": -0.724640712661
+        }
+      ],
+      "schema": "integrated_catalytic_computation_latch_v1",
+      "spins": null,
+      "valid": false
+    },
+    "no_lock": {
+      "coherence": [
+        0.925191832875,
+        0.956989231587,
+        0.997954790297,
+        0.956570407987,
+        0.941755055254
+      ],
+      "energy": null,
+      "label": "no_lock",
+      "phases_rad": [
+        2.79093490794,
+        1.22794101834,
+        2.44241296501,
+        2.75532329773,
+        -1.1774086732
+      ],
+      "raw_spin_shadow": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "residual_rad": 1.22794101834,
+      "responses": [
+        {
+          "imag": 0.317817829022,
+          "real": -0.868891106626
+        },
+        {
+          "imag": 0.901291133138,
+          "real": 0.321718328199
+        },
+        {
+          "imag": 0.642273785139,
+          "real": -0.763805046068
+        },
+        {
+          "imag": 0.360373811781,
+          "real": -0.886091226239
+        },
+        {
+          "imag": -0.869819856724,
+          "real": 0.360993076034
+        }
+      ],
+      "schema": "integrated_catalytic_computation_latch_v1",
+      "spins": null,
+      "valid": false
+    },
+    "no_transform": {
+      "coherence": [
+        0.944330141636,
+        0.719090373638,
+        0.986552457266,
+        0.96577589851,
+        0.873099113149
+      ],
+      "energy": null,
+      "label": "no_transform",
+      "phases_rad": [
+        3.1368728301,
+        0.685041565423,
+        3.01549349113,
+        3.13023734554,
+        -0.218190402288
+      ],
+      "raw_spin_shadow": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "residual_rad": null,
+      "responses": [
+        {
+          "imag": 0.00445705504019,
+          "real": -0.94431962336
+        },
+        {
+          "imag": 0.454972218689,
+          "real": 0.556858371294
+        },
+        {
+          "imag": 0.124074010782,
+          "real": -0.978719260455
+        },
+        {
+          "imag": 0.0109664471583,
+          "real": -0.965713634148
+        },
+        {
+          "imag": -0.188993902112,
+          "real": 0.852398595932
+        }
+      ],
+      "schema": "integrated_catalytic_computation_latch_v1",
+      "spins": null,
+      "valid": false
+    },
+    "operator_history_change_l2": 15.2291217827,
+    "rank_one_operator_residual_max": 0.355170215528,
+    "recursive_geometry_replacement": {
+      "coherence": [
+        0.930107948793,
+        0.716727018877,
+        0.985475605185,
+        0.971535503564,
+        0.871823339231
+      ],
+      "energy": null,
+      "label": "flat_geometry",
+      "phases_rad": [
+        -3.10073005272,
+        0.770091238436,
+        2.95409426748,
+        3.11012899548,
+        -0.285527939199
+      ],
+      "raw_spin_shadow": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "residual_rad": null,
+      "responses": [
+        {
+          "imag": -0.0379960538156,
+          "real": -0.929331531963
+        },
+        {
+          "imag": 0.49898587861,
+          "real": 0.514500449501
+        },
+        {
+          "imag": 0.183694339113,
+          "real": -0.968203779269
+        },
+        {
+          "imag": 0.0305630176404,
+          "real": -0.971054651726
+        },
+        {
+          "imag": -0.245561297053,
+          "real": 0.836525901701
+        }
+      ],
+      "schema": "integrated_catalytic_computation_latch_v1",
+      "spins": null,
+      "valid": false
+    },
+    "scrambled_parent_child_geometry": {
+      "coherence": [
+        0.862865551262,
+        0.90644520336,
+        0.978756200317,
+        0.959596428983,
+        0.587466196608
+      ],
+      "energy": null,
+      "label": "scrambled_geometry",
+      "phases_rad": [
+        3.07647328926,
+        0.513036855121,
+        2.9015654463,
+        3.09182298331,
+        -0.386142790905
+      ],
+      "raw_spin_shadow": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "residual_rad": null,
+      "responses": [
+        {
+          "imag": 0.0561495525639,
+          "real": -0.861036693353
+        },
+        {
+          "imag": 0.444906320755,
+          "real": 0.789747600469
+        },
+        {
+          "imag": 0.232678785417,
+          "real": -0.950696735282
+        },
+        {
+          "imag": 0.0477390837313,
+          "real": -0.958408204473
+        },
+        {
+          "imag": -0.221250360543,
+          "real": 0.544210262782
+        }
+      ],
+      "schema": "integrated_catalytic_computation_latch_v1",
+      "spins": null,
+      "valid": false
+    },
+    "wrong_query": {
+      "coherence": [
+        0.961417046559,
+        0.909207655369,
+        0.856071256111,
+        0.739203384209,
+        0.770342532297
+      ],
+      "energy": null,
+      "label": "wrong_query",
+      "phases_rad": [
+        2.78847164562,
+        2.80405574608,
+        2.6945862248,
+        2.66545977502,
+        -0.472001807373
+      ],
+      "raw_spin_shadow": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "residual_rad": null,
+      "responses": [
+        {
+          "imag": 0.332484859758,
+          "real": -0.902095646506
+        },
+        {
+          "imag": 0.301096835757,
+          "real": -0.857903990013
+        },
+        {
+          "imag": 0.370052241116,
+          "real": -0.771958116988
+        },
+        {
+          "imag": 0.338810629118,
+          "real": -0.656984779749
+        },
+        {
+          "imag": -0.35025173526,
+          "real": 0.686113211514
+        }
+      ],
+      "schema": "integrated_catalytic_computation_latch_v1",
+      "spins": null,
+      "valid": false
+    }
+  },
+  "decision": "CATALYTIC_WAVEFORM_ISING_COMPUTATION_VERIFIED",
+  "failures": [],
+  "fixture_manifest_sha256": "dbcb27062f5e92b079a29edca8472a70b1fb728bdb06834d432c4b1215a700b2",
+  "measurements": {
+    "omitted_inverse_step_error": 1.79934549508,
+    "omitted_restoration_error": 1.77134422465,
+    "primary_displacement_l2": 42.0391253493,
+    "primary_restore_max_error": 1.17212686392e-14,
+    "reuse_displacement_l2": 45.3020641203,
+    "reuse_input_max_error_from_restored": 0.0,
+    "reuse_restore_max_error": 1.29393385716e-14,
+    "wrong_inverse_error": 0.589772264895
+  },
+  "parent_custody": {
+    "audio_catalytic_wave_loop_v1": {
+      "pass": true,
+      "source_bytes": 117873,
+      "source_sha256": "6c55861da950caf0738bb5ffb676f0c458a593a805ddd49419d6b2b427f6c33c"
+    },
+    "audio_recursive_catalytic_ising_v1": {
+      "pass": true,
+      "source_bytes": 146825,
+      "source_sha256": "076fa3f392a9a0f1307e222deeabef38d558bf93db10c317af481ee40bf17b48"
+    }
+  },
+  "primary_latch": {
+    "coherence": [
+      0.950844481428,
+      0.973964561983,
+      0.999355435996,
+      0.977630727537,
+      0.961986979761
+    ],
+    "energy": -15.0,
+    "label": "primary",
+    "phases_rad": [
+      -3.07440042665,
+      -3.04785189177,
+      3.13546232542,
+      3.07058480616,
+      -0.045688204324
+    ],
+    "raw_spin_shadow": [
+      -1,
+      -1,
+      -1,
+      -1,
+      1
+    ],
+    "residual_rad": 0.0937407618198,
+    "responses": [
+      {
+        "imag": -0.0638412944729,
+        "real": -0.948698854738
+      },
+      {
+        "imag": -0.0911665246213,
+        "real": -0.969688420466
+      },
+      {
+        "imag": 0.00612633841291,
+        "real": -0.999336657705
+      },
+      {
+        "imag": 0.0693611314405,
+        "real": -0.975167099973
+      },
+      {
+        "imag": -0.043936168484,
+        "real": 0.960983122811
+      }
+    ],
+    "schema": "integrated_catalytic_computation_latch_v1",
+    "spins": [
+      -1,
+      -1,
+      -1,
+      -1,
+      1
+    ],
+    "valid": true
+  },
+  "primary_oracle": {
+    "agrees": true,
+    "gap": 2.0,
+    "unique": true
+  },
+  "reuse_latch": {
+    "coherence": [
+      0.937118450077,
+      0.978558462118,
+      0.999169178647,
+      0.975362345028,
+      0.978991354837
+    ],
+    "energy": -14.0,
+    "label": "reuse",
+    "phases_rad": [
+      0.0803867491393,
+      0.0846321696061,
+      -0.00989443174757,
+      -0.0753166996046,
+      3.11340156507
+    ],
+    "raw_spin_shadow": [
+      1,
+      1,
+      1,
+      1,
+      -1
+    ],
+    "residual_rad": 0.0846321696061,
+    "responses": [
+      {
+        "imag": 0.0752507991381,
+        "real": 0.934092236721
+      },
+      {
+        "imag": 0.0827186962773,
+        "real": 0.975056039963
+      },
+      {
+        "imag": -0.00988604993353,
+        "real": 0.999120269825
+      },
+      {
+        "imag": -0.0733916398313,
+        "real": 0.972597229742
+      },
+      {
+        "imag": 0.0275951764501,
+        "real": -0.978602360044
+      }
+    ],
+    "schema": "integrated_catalytic_computation_latch_v1",
+    "spins": [
+      1,
+      1,
+      1,
+      1,
+      -1
+    ],
+    "valid": true
+  },
+  "reuse_oracle": {
+    "agrees": true,
+    "gap": 2.0,
+    "unique": true
+  },
+  "schema": "integrated_catalytic_computation_result_v1",
+  "source": {
+    "source_bytes": 46388,
+    "source_sha256": "50b6db77e2602e18356636ddb892f6d51aedb0573c6b2418afc8e5cc174991cc"
+  },
+  "test_count": 31,
+  "test_pass_count": 31,
+  "tests": {
+    "carrier_content_changes_native_history": true,
+    "input_contract_contains_no_answer_fields": true,
+    "jh_change_changes_extracted_result": true,
+    "native_ast_no_scalar_feedback": true,
+    "native_waveform_has_samplewise_dynamics": true,
+    "no_lock_destroys_result": true,
+    "omitted_inverse_step_fails": true,
+    "omitted_restoration_fails": true,
+    "oracle_is_after_boundary_only": true,
+    "parent_r2_source_custody": true,
+    "parent_r3_source_custody": true,
+    "primary_correct_inverse_restores": true,
+    "primary_nonzero_displacement": true,
+    "primary_oracle_agreement_after_boundary": true,
+    "primary_result_persists_outside_inverse": true,
+    "primary_unique_optimum": true,
+    "primary_waveform_result_valid": true,
+    "remove_one_phase_operator_changes_native_history": true,
+    "remove_waveform_transform_destroys_result": true,
+    "replace_recursive_geometry_destroys_result": true,
+    "result_latch_contains_no_reversed_history": true,
+    "reuse_correct_inverse_restores": true,
+    "reuse_oracle_agreement_after_boundary": true,
+    "reuse_result_differs_from_primary": true,
+    "reuse_uses_restored_carrier": true,
+    "reuse_waveform_result_valid": true,
+    "scalar_js_baseline_rejected": true,
+    "scramble_parent_child_geometry_destroys_result": true,
+    "wrong_inverse_fails": true,
+    "wrong_query_destroys_result": true,
+    "zero_carrier_rejected": true
+  }
+}
