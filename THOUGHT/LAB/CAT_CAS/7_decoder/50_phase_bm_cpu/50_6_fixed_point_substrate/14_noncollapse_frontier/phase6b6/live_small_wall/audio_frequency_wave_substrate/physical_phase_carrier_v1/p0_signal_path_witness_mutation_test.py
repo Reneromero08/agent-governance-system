@@ -108,7 +108,7 @@ RAW_BOUNDARY_CONTROLS = {
     "signal_path_scan_time_alternate_offset": "SIGNAL_PATH_SCAN_CHRONOLOGY",
     "signal_path_acquisition_time_truncated_precision": "CHRONOLOGY_CUSTODY",
     "signal_path_scan_time_lexical_deception": "SIGNAL_PATH_SCAN_CHRONOLOGY",
-    "resonance_calibration_raw_garbage": "RESONANCE_CALIBRATION_RAW",
+    "resonance_calibration_raw_garbage": "RESONANCE_CALIBRATION_PAYLOAD_SIZE",
     "resonance_calibration_q_claim_mismatch": "RESONANCE_CALIBRATION_RAW",
     "source_preparation_before_assignment": "CHRONOLOGY_CUSTODY",
     "off_resonance_raw_response": "OFF_RESONANCE_RESPONSE",

@@ -28,7 +28,9 @@ P0_ANALYZER_REFERENCE_RESULTS.json
 P0_SIGNAL_PATH_ORDERING_PROOF.json
 ```
 
-The calibration artifact binds assembly and carrier identity, raw and analyzer hashes, selected frequency and U95, Q/decay, source and instrument querybacks, completion time, and `primary_observed=false`. The analyzer rejects missing or changed frequency custody, late calibration, queryback mismatch, and a broken witness relation.
+The calibration artifact now binds DUT-A/FC135 as one global pre-assignment calibration identity; native SDK-export, canonical payload, adapter and analyzer hashes; the full raw CH0/CH1 sampling schema and frequency grid; fitted complex background and gain; selected frequency and U95; Q and U95; residual and conditioning metrics; source and instrument querybacks; start/completion times; and `primary_observed=false`. Every later role binds that same reference while separately binding its own primary assembly/population. The removed-resonator and dummy controls are never relabeled as resonance-producing calibrations. The raw-byte analyzer fits both channels itself and then fits `B+C/single-pole`; it no longer accepts a pre-normalized synthetic-perfect inverse response. The analyzer rejects missing or changed frequency custody, flat/background-only data, competing resonances, invalid Q/frequency, insufficient signal, excessive noise/background/residual, clipping, malformed grids, late calibration, queryback mismatch, and a broken witness relation.
+
+This is a narrow calibration-realism correction. It preserves the carrier architecture, OPA810 topology, relay topology, C2 signal-path witness, netlist, BOM, fabrication design, complete binary-corner model, and all previous signal-path conclusions. The recalibrated 0.030 off-resonance gate is a direct consistency correction: a single pole at twenty linewidths has magnitude about 0.025, so the earlier 0.020 literal could not admit its own selected model.
 
 ## Boundary
 

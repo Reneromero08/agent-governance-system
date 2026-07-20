@@ -49,11 +49,30 @@ WINDOW = 2_048
 HOP = 256
 NW_LAG = 7
 BLOCK = 8
-SYNTHETIC_F_CARRIER_HZ = 32_768.0
-SYNTHETIC_F_WITNESS_HZ = 65_536.0
+SYNTHETIC_F_CARRIER_HZ = 32_800.0
+SYNTHETIC_F_WITNESS_HZ = 65_600.0
 F_CARRIER_MIN_HZ = 32_768.0
 F_CARRIER_MAX_HZ = 32_820.0
 F_CARRIER_U95_MAX_HZ = 0.050
+CALIBRATION_FIT_F0_MIN_HZ = 32_760.0
+CALIBRATION_FIT_F0_MAX_HZ = 32_821.0
+CALIBRATION_FIT_Q_MIN = 1_000.0
+CALIBRATION_FIT_Q_MAX = 120_000.0
+CALIBRATION_SAMPLE_RATE_HZ = 1_000_000
+CALIBRATION_SAMPLES_PER_BLOCK = 4_096
+CALIBRATION_CHANNELS = ("CH0_SOURCE_MONITOR", "CH1_CARRIER_RESPONSE")
+CALIBRATION_BLOCK_COUNT = 143
+CALIBRATION_PAYLOAD_BYTES = CALIBRATION_BLOCK_COUNT * CALIBRATION_SAMPLES_PER_BLOCK * len(CALIBRATION_CHANNELS) * 2
+CALIBRATION_MIN_SOURCE_SNR = 50.0
+CALIBRATION_MIN_RESONANCE_SNR = 25.0
+CALIBRATION_MIN_RESONANCE_TO_BACKGROUND = 0.20
+CALIBRATION_MAX_FIT_CONDITION = 1.0e8
+CALIBRATION_MAX_REDUCED_CHI_SQUARE = 5.0
+CALIBRATION_MAX_Q_U95_FRACTION = 0.10
+CALIBRATION_MAX_OFF_RESONANCE_RATIO = 0.030
+CALIBRATION_SOLVER_FREQUENCY_TOLERANCE_HZ = 1.0e-7
+CALIBRATION_SOLVER_LOG_Q_TOLERANCE = 1.0e-9
+CALIBRATION_SOLVER_MAX_ITERATIONS = 64
 TOPOLOGY_SCAN_SAMPLES = 256
 NONLINEAR_CONTROL_SAMPLES = 4096
 TOPOLOGY_SCAN_STATES = ("closed_closed", "k1_open", "k2_open", "both_open")
@@ -152,6 +171,52 @@ MALFORMED_NEGATIVES = {
     "calibration_after_assignment": "RESONANCE_CALIBRATION_CUSTODY",
     "source_queryback_frequency_mismatch": "SOURCE_CONFIGURATION_MISMATCH",
     "witness_frequency_relation_mismatch": "WITNESS_FREQUENCY_RELATION",
+}
+CALIBRATION_REALISM_POSITIVES = (
+    "ideal_unit_gain_resonance",
+    "non_unit_amplitude_gain",
+    "fixed_complex_phase_rotation",
+    "nonzero_complex_background",
+    "combined_background_plus_phase_rotation",
+    "off_grid_resonance_frequency",
+    "low_accepted_q",
+    "high_accepted_q",
+    "realistic_white_measurement_noise",
+    "source_monitor_amplitude_variation",
+    "source_monitor_phase_variation",
+    "shifted_32_8_65_6_reference",
+    "upper_accepted_frequency",
+)
+CALIBRATION_REALISM_NEGATIVES = {
+    "flat_response": "RESONANCE_CALIBRATION_RESONANCE_SNR",
+    "background_only": "RESONANCE_CALIBRATION_RESONANCE_SNR",
+    "two_comparable_resonances": "RESONANCE_CALIBRATION_MODEL_RESIDUAL",
+    "resonance_outside_accepted_interval": "RESONANCE_CALIBRATION_RANGE",
+    "resonance_above_accepted_interval": "RESONANCE_CALIBRATION_RANGE",
+    "resonance_fit_upper_boundary_clamped": "RESONANCE_CALIBRATION_FIT_BOUNDARY",
+    "q_below_minimum": "RESONANCE_CALIBRATION_Q_RANGE",
+    "q_above_maximum": "RESONANCE_CALIBRATION_Q_RANGE",
+    "insufficient_resonance_amplitude": "RESONANCE_CALIBRATION_RESONANCE_SNR",
+    "excessive_complex_background": "RESONANCE_CALIBRATION_BACKGROUND",
+    "structured_one_pole_residual": "RESONANCE_CALIBRATION_MODEL_RESIDUAL",
+    "excessive_measurement_noise": "RESONANCE_CALIBRATION_SOURCE_SNR",
+    "clipped_calibration_sample": "RESONANCE_CALIBRATION_CLIPPING",
+    "missing_frequency_block": "RESONANCE_CALIBRATION_PAYLOAD_SIZE",
+    "duplicated_frequency_block": "RESONANCE_CALIBRATION_FREQUENCY_GRID",
+    "reordered_frequency_grid": "RESONANCE_CALIBRATION_FREQUENCY_GRID",
+    "missing_source_amplitude": "RESONANCE_CALIBRATION_SOURCE_SNR",
+}
+CALIBRATION_CUSTODY_NEGATIVES = {
+    "calibration_wrong_native_hash": "RESONANCE_CALIBRATION_CUSTODY",
+    "calibration_wrong_canonical_hash": "RESONANCE_CALIBRATION_CUSTODY",
+    "calibration_wrong_adapter_hash": "RESONANCE_CALIBRATION_CUSTODY",
+    "calibration_wrong_analyzer_hash": "RESONANCE_CALIBRATION_CUSTODY",
+    "calibration_wrong_assembly_identity": "RESONANCE_CALIBRATION_CUSTODY",
+    "calibration_wrong_instrument_queryback": "RESONANCE_CALIBRATION_CUSTODY",
+    "calibration_source_queryback_mismatch": "RESONANCE_CALIBRATION_CUSTODY",
+    "calibration_witness_frequency_mismatch": "RESONANCE_CALIBRATION_CUSTODY",
+    "calibration_after_primary_observation": "RESONANCE_CALIBRATION_CUSTODY",
+    "calibration_after_assignment_targeted": "RESONANCE_CALIBRATION_CUSTODY",
 }
 
 
@@ -296,6 +361,11 @@ def decimal(value: Any, where: str) -> float:
     return parsed
 
 
+def decimal_text(value: float) -> str:
+    text = format(float(value), ".17f").rstrip("0").rstrip(".")
+    return "0" if text in {"", "-0"} else text
+
+
 def model_number(value: Any, where: str) -> float:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise Reject("SIGNAL_PATH_MODEL_INVALID", where)
@@ -363,92 +433,496 @@ def load_bound_json(base: Path, descriptor: Any, where: str) -> tuple[Path, dict
     return path, value
 
 
-def resonance_response(frequency_hz: float, f_carrier_hz: float, q_factor: float) -> complex:
+def resonance_response(
+    frequency_hz: float,
+    f_carrier_hz: float,
+    q_factor: float,
+    background: complex = 0.0j,
+    gain: complex = 1.0 + 0.0j,
+) -> complex:
+    """Minimum physical calibration model: complex background plus one pole."""
     detuning = 2.0 * q_factor * (frequency_hz - f_carrier_hz) / f_carrier_hz
-    return 1.0 / complex(1.0, detuning)
+    return background + gain / complex(1.0, detuning)
+
+
+def calibration_frequency_grid(
+    f_carrier_hz: float,
+    q_factor: float,
+    background: complex = 0.0j,
+    gain: complex = 1.0 + 0.0j,
+) -> list[float]:
+    coarse = [32_760.0 + index for index in range(61)]
+    coarse_peak_hz = max(coarse, key=lambda frequency: abs(resonance_response(frequency, f_carrier_hz, q_factor, background, gain)))
+    # Half-step offset keeps all block frequencies unique while the fine grid
+    # still brackets the coarse maximum symmetrically.
+    fine = [coarse_peak_hz + 0.025 * (index - 40.5) for index in range(81)]
+    probe = f_carrier_hz + max(20.0, 20.0 * f_carrier_hz / q_factor)
+    return coarse + fine + [probe]
+
+
+def calibration_payload_spec(frequencies_hz: list[float]) -> dict[str, Any]:
+    if len(frequencies_hz) != CALIBRATION_BLOCK_COUNT:
+        raise ValueError("calibration frequency count")
+    return {
+        "channel_order": list(CALIBRATION_CHANNELS),
+        "dtype": "int16",
+        "endian": "little",
+        "frequencies_hz": [format(value, ".17g") for value in frequencies_hz],
+        "layout": "frequency-major__sample-major__ch0-then-ch1-interleaved",
+        "offset_v": ["0", "0"],
+        "sample_rate_hz": CALIBRATION_SAMPLE_RATE_HZ,
+        "samples_per_channel_per_frequency": CALIBRATION_SAMPLES_PER_BLOCK,
+        "scale_per_code_v": ["0.000005", "0.000005"],
+        "settling_seconds_before_block": "0.05",
+        "source_amplitude_vpp": "0.1",
+        "source_offset_v": "0",
+    }
+
+
+def resonance_calibration_payload(
+    role: str,
+    f_carrier_hz: float,
+    q_factor: float,
+    *,
+    background: complex = complex(0.06, -0.03),
+    gain: complex = complex(0.52, 0.18),
+    noise_codes: float = 4.0,
+    source_amplitude_variation: float = 0.01,
+    source_phase_variation: float = 0.01,
+    source_amplitude_codes: float = 10_000.0,
+    second_resonance: tuple[float, float, complex] | None = None,
+    structured_residual: float = 0.0,
+    force_clipping: bool = False,
+    frequencies_hz: list[float] | None = None,
+) -> tuple[bytes, dict[str, Any]]:
+    frequencies = frequencies_hz or calibration_frequency_grid(f_carrier_hz, q_factor, background, gain)
+    spec = calibration_payload_spec(frequencies)
+    samples = np.empty((len(frequencies), CALIBRATION_SAMPLES_PER_BLOCK, 2), dtype="<i2")
+    n = np.arange(CALIBRATION_SAMPLES_PER_BLOCK, dtype=np.float64)
+    rng = np.random.Generator(np.random.PCG64(0xA5A50000 + 0x101 * ROLE_ORDER.index(role)))
+    for block, frequency in enumerate(frequencies):
+        source_amplitude = source_amplitude_codes * (1.0 + source_amplitude_variation * math.sin(0.37 * (block + 1)))
+        source_phase = source_phase_variation * math.sin(0.23 * (block + 1))
+        z0 = source_amplitude * complex(math.cos(source_phase), math.sin(source_phase))
+        transfer = resonance_response(frequency, f_carrier_hz, q_factor, background, gain)
+        if second_resonance is not None:
+            second_f0, second_q, second_gain = second_resonance
+            transfer += resonance_response(frequency, second_f0, second_q, 0.0j, second_gain)
+        if structured_residual:
+            transfer += structured_residual * complex(math.cos(0.91 * block), math.sin(0.91 * block))
+        z1 = z0 * transfer
+        phase = 2.0 * math.pi * frequency * n / CALIBRATION_SAMPLE_RATE_HZ
+        ch0 = z0.real * np.cos(phase) - z0.imag * np.sin(phase) + 100.0
+        ch1 = z1.real * np.cos(phase) - z1.imag * np.sin(phase) - 80.0
+        if noise_codes:
+            ch0 += rng.normal(0.0, noise_codes, CALIBRATION_SAMPLES_PER_BLOCK)
+            ch1 += rng.normal(0.0, noise_codes, CALIBRATION_SAMPLES_PER_BLOCK)
+        samples[block, :, 0] = np.clip(np.rint(ch0), -32767, 32766).astype("<i2")
+        samples[block, :, 1] = np.clip(np.rint(ch1), -32767, 32766).astype("<i2")
+    if force_clipping:
+        samples[0, 0, 1] = 32767
+    return samples.tobytes(order="C"), spec
 
 
 def resonance_calibration_raw_bytes(role: str, f_carrier_hz: float, q_factor: float) -> bytes:
-    rows = ["sweep,role,frequency_hz,response_real,response_imag"]
-    coarse_rows: list[tuple[float, complex]] = []
-    for index in range(61):
-        frequency = 32_760.0 + index
-        response = resonance_response(frequency, f_carrier_hz, q_factor)
-        coarse_rows.append((frequency, response))
-        rows.append(f"coarse,{role},{frequency:.17g},{response.real:.17g},{response.imag:.17g}")
-    coarse_peak_hz = max(coarse_rows, key=lambda item: abs(item[1]))[0]
-    for index in range(81):
-        frequency = coarse_peak_hz - 1.0 + 0.025 * index
-        response = resonance_response(frequency, f_carrier_hz, q_factor)
-        rows.append(f"fine,{role},{frequency:.17g},{response.real:.17g},{response.imag:.17g}")
-    linewidth_hz = f_carrier_hz / q_factor
-    probe_frequency_hz = f_carrier_hz + max(20.0, 20.0 * linewidth_hz)
-    rows.append(f"off_resonance,{role},{probe_frequency_hz:.17g},0.019,0")
-    return ("\n".join(rows) + "\n").encode("ascii")
+    return resonance_calibration_payload(role, f_carrier_hz, q_factor)[0]
+
+
+def _calibration_exact_spec(spec: dict[str, Any]) -> tuple[np.ndarray, list[float]]:
+    exact_fields(
+        spec,
+        {
+            "channel_order", "dtype", "endian", "frequencies_hz", "layout", "offset_v",
+            "sample_rate_hz", "samples_per_channel_per_frequency", "scale_per_code_v",
+            "settling_seconds_before_block", "source_amplitude_vpp", "source_offset_v",
+        },
+        "resonance_calibration.canonical_payload",
+    )
+    if (
+        spec["channel_order"] != list(CALIBRATION_CHANNELS)
+        or spec["dtype"] != "int16"
+        or spec["endian"] != "little"
+        or spec["layout"] != "frequency-major__sample-major__ch0-then-ch1-interleaved"
+        or spec["sample_rate_hz"] != CALIBRATION_SAMPLE_RATE_HZ
+        or spec["samples_per_channel_per_frequency"] != CALIBRATION_SAMPLES_PER_BLOCK
+        or decimal(spec["settling_seconds_before_block"], "calibration.settling") < 0.05
+        or decimal(spec["source_amplitude_vpp"], "calibration.source_amplitude") != 0.1
+        or decimal(spec["source_offset_v"], "calibration.source_offset") != 0.0
+    ):
+        raise Reject("RESONANCE_CALIBRATION_SCHEMA")
+    if not isinstance(spec["frequencies_hz"], list) or len(spec["frequencies_hz"]) != CALIBRATION_BLOCK_COUNT:
+        raise Reject("RESONANCE_CALIBRATION_FREQUENCY_GRID")
+    frequencies = np.asarray([decimal(value, "calibration.frequency") for value in spec["frequencies_hz"]], dtype=np.float64)
+    if len(set(float(value) for value in frequencies)) != CALIBRATION_BLOCK_COUNT:
+        raise Reject("RESONANCE_CALIBRATION_FREQUENCY_GRID")
+    if not np.array_equal(frequencies[:61], np.asarray([32_760.0 + index for index in range(61)], dtype=np.float64)):
+        raise Reject("RESONANCE_CALIBRATION_FREQUENCY_GRID")
+    if not isinstance(spec["scale_per_code_v"], list) or len(spec["scale_per_code_v"]) != 2 or not isinstance(spec["offset_v"], list) or len(spec["offset_v"]) != 2:
+        raise Reject("RESONANCE_CALIBRATION_SCHEMA")
+    scales = [decimal(value, "calibration.scale") for value in spec["scale_per_code_v"]]
+    offsets = [decimal(value, "calibration.offset") for value in spec["offset_v"]]
+    if any(value <= 0.0 for value in scales) or any(value != 0.0 for value in offsets):
+        raise Reject("RESONANCE_CALIBRATION_SCHEMA")
+    return frequencies, scales
+
+
+def _extract_calibration_points(data: bytes, spec: dict[str, Any], *, verify_refinement: bool = True) -> tuple[np.ndarray, np.ndarray, np.ndarray, dict[str, float]]:
+    frequencies, scales = _calibration_exact_spec(spec)
+    if len(data) != CALIBRATION_PAYLOAD_BYTES:
+        raise Reject("RESONANCE_CALIBRATION_PAYLOAD_SIZE")
+    raw_flat = np.frombuffer(data, dtype="<i2")
+    if np.any(raw_flat == -32768) or np.any(raw_flat == 32767):
+        raise Reject("RESONANCE_CALIBRATION_CLIPPING")
+    raw = raw_flat.reshape(CALIBRATION_BLOCK_COUNT, CALIBRATION_SAMPLES_PER_BLOCK, 2)
+    responses = np.empty(CALIBRATION_BLOCK_COUNT, dtype=np.complex128)
+    variances = np.empty(CALIBRATION_BLOCK_COUNT, dtype=np.float64)
+    source_snr_min = math.inf
+    fit_condition_max = 0.0
+    n = np.arange(CALIBRATION_SAMPLES_PER_BLOCK, dtype=np.float64)
+    for block, frequency in enumerate(frequencies):
+        phase = 2.0 * math.pi * frequency * n / CALIBRATION_SAMPLE_RATE_HZ
+        design = np.column_stack((np.cos(phase), -np.sin(phase), np.ones(len(n))))
+        condition = float(np.linalg.cond(design, 2))
+        if int(np.linalg.matrix_rank(design)) != 3 or not math.isfinite(condition) or condition > CALIBRATION_MAX_FIT_CONDITION:
+            raise Reject("RESONANCE_CALIBRATION_POINT_FIT")
+        points: list[complex] = []
+        point_variances: list[float] = []
+        for channel in range(2):
+            observed = raw[block, :, channel].astype(np.float64) * scales[channel]
+            beta, _, rank, _ = np.linalg.lstsq(design, observed, rcond=None)
+            if rank != 3 or not np.all(np.isfinite(beta)):
+                raise Reject("RESONANCE_CALIBRATION_POINT_FIT")
+            residual = observed - design @ beta
+            variance = max(float(residual @ residual) / (len(n) - 3), scales[channel] ** 2 / 12.0)
+            covariance = variance * np.linalg.inv(design.T @ design)
+            points.append(complex(float(beta[0]), float(beta[1])))
+            point_variances.append(max(0.0, float(covariance[0, 0] + covariance[1, 1])))
+        z0, z1 = points
+        if abs(z0) <= 0.0:
+            raise Reject("RESONANCE_CALIBRATION_SOURCE_SNR")
+        source_snr_min = min(source_snr_min, abs(z0) / math.sqrt(max(point_variances[0], 1e-30)))
+        responses[block] = z1 / z0
+        variances[block] = point_variances[1] / abs(z0) ** 2 + abs(z1) ** 2 * point_variances[0] / abs(z0) ** 4
+        fit_condition_max = max(fit_condition_max, condition)
+    if source_snr_min < CALIBRATION_MIN_SOURCE_SNR or not np.all(np.isfinite(responses)) or np.any(~np.isfinite(variances)) or np.any(variances <= 0.0):
+        raise Reject("RESONANCE_CALIBRATION_SOURCE_SNR")
+    coarse_peak_hz = float(frequencies[int(np.argmax(np.abs(responses[:61])))])
+    expected_fine = np.asarray([coarse_peak_hz + 0.025 * (index - 40.5) for index in range(81)], dtype=np.float64)
+    if verify_refinement and not np.array_equal(frequencies[61:142], expected_fine):
+        raise Reject("RESONANCE_CALIBRATION_FREQUENCY_GRID")
+    return frequencies, responses, variances, {"point_fit_condition_max": fit_condition_max, "source_snr_min": source_snr_min}
+
+
+def _profile_calibration_fit(
+    frequencies: np.ndarray,
+    responses: np.ndarray,
+    variances: np.ndarray,
+    f0_hz: float,
+    q_factor: float,
+) -> tuple[float, complex, complex, np.ndarray, float]:
+    pole = 1.0 / (1.0 + 1j * 2.0 * q_factor * (frequencies - f0_hz) / f0_hz)
+    design = np.column_stack((np.ones(len(frequencies), dtype=np.complex128), pole))
+    weight = 1.0 / np.sqrt(variances)
+    weighted_design = design * weight[:, None]
+    condition = float(np.linalg.cond(weighted_design, 2))
+    if not math.isfinite(condition) or condition > CALIBRATION_MAX_FIT_CONDITION:
+        return math.inf, 0.0j, 0.0j, np.full_like(responses, complex(math.nan, math.nan)), condition
+    beta, _, rank, _ = np.linalg.lstsq(weighted_design, responses * weight, rcond=None)
+    if rank != 2 or not np.all(np.isfinite(beta)):
+        return math.inf, 0.0j, 0.0j, np.full_like(responses, complex(math.nan, math.nan)), condition
+    residual = responses - design @ beta
+    return float(np.sum(np.abs(residual) ** 2 / variances)), complex(beta[0]), complex(beta[1]), residual, condition
+
+
+def _fit_calibration_model(frequencies: np.ndarray, responses: np.ndarray, variances: np.ndarray) -> dict[str, Any]:
+    fit_frequencies = frequencies[:142]
+    fit_responses = responses[:142]
+    fit_variances = variances[:142]
+    edge_background = complex(np.mean(np.concatenate((fit_responses[:5], fit_responses[56:61]))))
+    raw_resonance_snr = float(np.max(np.abs(fit_responses[61:142] - edge_background))) / float(np.median(np.sqrt(fit_variances)))
+    if not math.isfinite(raw_resonance_snr) or raw_resonance_snr < CALIBRATION_MIN_RESONANCE_SNR:
+        raise Reject("RESONANCE_CALIBRATION_RESONANCE_SNR")
+    peak = float(fit_frequencies[61 + int(np.argmax(np.abs(fit_responses[61:142] - edge_background)))])
+    f_candidates = sorted(set(max(CALIBRATION_FIT_F0_MIN_HZ, min(CALIBRATION_FIT_F0_MAX_HZ, peak + delta)) for delta in (-0.10, -0.05, 0.0, 0.05, 0.10)))
+    choices: list[tuple[float, float, float, complex, complex, np.ndarray, float]] = []
+    for f0_hz in f_candidates:
+        for q_factor in np.geomspace(CALIBRATION_FIT_Q_MIN, CALIBRATION_FIT_Q_MAX, 13):
+            objective, background, gain, residual, condition = _profile_calibration_fit(fit_frequencies, fit_responses, fit_variances, f0_hz, float(q_factor))
+            choices.append((objective, f0_hz, math.log(float(q_factor)), background, gain, residual, condition))
+    best = min(choices, key=lambda item: (item[0], item[1], item[2]))
+    step_f = 0.10
+    step_log_q = 0.25
+    iterations = 0
+    while iterations < CALIBRATION_SOLVER_MAX_ITERATIONS and (step_f > CALIBRATION_SOLVER_FREQUENCY_TOLERANCE_HZ or step_log_q > CALIBRATION_SOLVER_LOG_Q_TOLERANCE):
+        iterations += 1
+        local: list[tuple[float, float, float, complex, complex, np.ndarray, float]] = []
+        for df in (-step_f, 0.0, step_f):
+            for dq in (-step_log_q, 0.0, step_log_q):
+                f0_hz = max(CALIBRATION_FIT_F0_MIN_HZ, min(CALIBRATION_FIT_F0_MAX_HZ, best[1] + df))
+                log_q = max(math.log(CALIBRATION_FIT_Q_MIN), min(math.log(CALIBRATION_FIT_Q_MAX), best[2] + dq))
+                objective, background, gain, residual, condition = _profile_calibration_fit(fit_frequencies, fit_responses, fit_variances, f0_hz, math.exp(log_q))
+                local.append((objective, f0_hz, log_q, background, gain, residual, condition))
+        candidate = min(local, key=lambda item: (item[0], item[1], item[2]))
+        if candidate[0] + 1e-12 < best[0]:
+            best = candidate
+        else:
+            step_f *= 0.5
+            step_log_q *= 0.5
+    if step_f > CALIBRATION_SOLVER_FREQUENCY_TOLERANCE_HZ or step_log_q > CALIBRATION_SOLVER_LOG_Q_TOLERANCE:
+        raise Reject("RESONANCE_CALIBRATION_NONCONVERGENCE")
+    objective, fitted_f0, fitted_log_q, background, gain, _, profile_condition = best
+    fitted_q = math.exp(fitted_log_q)
+    if fitted_f0 <= CALIBRATION_FIT_F0_MIN_HZ + 1.0e-6 or fitted_f0 >= CALIBRATION_FIT_F0_MAX_HZ - 1.0e-6 or fitted_q <= CALIBRATION_FIT_Q_MIN + 0.001 or fitted_q >= CALIBRATION_FIT_Q_MAX - 0.1:
+        raise Reject("RESONANCE_CALIBRATION_FIT_BOUNDARY")
+    if not F_CARRIER_MIN_HZ <= fitted_f0 <= F_CARRIER_MAX_HZ:
+        raise Reject("RESONANCE_CALIBRATION_RANGE")
+    if not 4_000.0 <= fitted_q <= 60_000.0:
+        raise Reject("RESONANCE_CALIBRATION_Q_RANGE")
+    pole = 1.0 / (1.0 + 1j * 2.0 * fitted_q * (fit_frequencies - fitted_f0) / fitted_f0)
+    eps_f = 1.0e-4
+    eps_lq = 1.0e-5
+    pole_f_plus = 1.0 / (1.0 + 1j * 2.0 * fitted_q * (fit_frequencies - (fitted_f0 + eps_f)) / (fitted_f0 + eps_f))
+    pole_f_minus = 1.0 / (1.0 + 1j * 2.0 * fitted_q * (fit_frequencies - (fitted_f0 - eps_f)) / (fitted_f0 - eps_f))
+    pole_q_plus = 1.0 / (1.0 + 1j * 2.0 * math.exp(fitted_log_q + eps_lq) * (fit_frequencies - fitted_f0) / fitted_f0)
+    pole_q_minus = 1.0 / (1.0 + 1j * 2.0 * math.exp(fitted_log_q - eps_lq) * (fit_frequencies - fitted_f0) / fitted_f0)
+    derivatives = (
+        np.ones(len(pole), dtype=np.complex128),
+        1j * np.ones(len(pole), dtype=np.complex128),
+        pole,
+        1j * pole,
+        gain * (pole_f_plus - pole_f_minus) / (2.0 * eps_f),
+        gain * (pole_q_plus - pole_q_minus) / (2.0 * eps_lq),
+    )
+    sigma_component = np.sqrt(fit_variances / 2.0)
+    jacobian = np.column_stack([np.concatenate((value.real / sigma_component, value.imag / sigma_component)) for value in derivatives])
+    information = jacobian.T @ jacobian
+    column_norms = np.linalg.norm(jacobian, axis=0)
+    if np.any(~np.isfinite(column_norms)) or np.any(column_norms <= 0.0):
+        raise Reject("RESONANCE_CALIBRATION_FIT_CONDITION")
+    fit_condition = max(profile_condition, float(np.linalg.cond(jacobian / column_norms, 2)))
+    if not math.isfinite(fit_condition) or fit_condition > CALIBRATION_MAX_FIT_CONDITION:
+        raise Reject("RESONANCE_CALIBRATION_FIT_CONDITION")
+    reduced_chi_square = 2.0 * objective / (2 * len(fit_frequencies) - 6)
+    covariance = np.linalg.inv(information) * max(1.0, reduced_chi_square)
+    f_u95 = 1.96 * math.sqrt(max(0.0, float(covariance[4, 4])))
+    q_u95 = 1.96 * fitted_q * math.sqrt(max(0.0, float(covariance[5, 5])))
+    weighted_residual_rms = math.sqrt(objective / len(fit_frequencies))
+    resonance_snr = abs(gain) / float(np.median(np.sqrt(fit_variances)))
+    resonance_to_background = abs(gain) / max(abs(background), float(np.median(np.sqrt(fit_variances))))
+    if not math.isfinite(reduced_chi_square) or reduced_chi_square > CALIBRATION_MAX_REDUCED_CHI_SQUARE:
+        raise Reject("RESONANCE_CALIBRATION_MODEL_RESIDUAL")
+    if f_u95 > F_CARRIER_U95_MAX_HZ or q_u95 / fitted_q > CALIBRATION_MAX_Q_U95_FRACTION:
+        raise Reject("RESONANCE_CALIBRATION_UNCERTAINTY")
+    if resonance_snr < CALIBRATION_MIN_RESONANCE_SNR:
+        raise Reject("RESONANCE_CALIBRATION_RESONANCE_SNR")
+    if resonance_to_background < CALIBRATION_MIN_RESONANCE_TO_BACKGROUND:
+        raise Reject("RESONANCE_CALIBRATION_BACKGROUND")
+    return {
+        "background": background,
+        "convergence_iterations": iterations,
+        "convergence_status": "CONVERGED_INTERIOR",
+        "fitted_f_carrier_hz": fitted_f0,
+        "fitted_q_factor": fitted_q,
+        "fitted_u95_hz": f_u95,
+        "fit_condition_number": fit_condition,
+        "gain": gain,
+        "q_u95": q_u95,
+        "reduced_chi_square": reduced_chi_square,
+        "resonance_snr": resonance_snr,
+        "resonance_to_background": resonance_to_background,
+        "weighted_residual_rms": weighted_residual_rms,
+    }
+
+
+def analyze_resonance_calibration_payload(data: bytes, spec: dict[str, Any]) -> dict[str, Any]:
+    frequencies, responses, variances, extraction = _extract_calibration_points(data, spec)
+    # The final block is a separately bound off-resonance control and is never
+    # allowed to influence the resonance fit that selected it.
+    fit = _fit_calibration_model(frequencies[:-1], responses[:-1], variances[:-1])
+    fitted_f0 = fit["fitted_f_carrier_hz"]
+    fitted_q = fit["fitted_q_factor"]
+    linewidth_hz = fitted_f0 / fitted_q
+    required_separation_hz = max(20.0, 20.0 * linewidth_hz)
+    probe_frequency_hz = float(frequencies[-1])
+    probe_frequency_u95_hz = fit["fitted_u95_hz"]
+    if 20.0 * linewidth_hz >= 20.0:
+        probe_frequency_u95_hz += 20.0 * fitted_f0 * fit["q_u95"] / (fitted_q * fitted_q)
+    if abs((probe_frequency_hz - fitted_f0) - required_separation_hz) > probe_frequency_u95_hz + 1.0e-6:
+        raise Reject("OFF_RESONANCE_PROBE_BINDING")
+    response_ratio = abs(responses[-1] - fit["background"]) / abs(fit["gain"])
+    response_u95 = 1.96 * math.sqrt(variances[-1]) / abs(fit["gain"])
+    if response_ratio + response_u95 > CALIBRATION_MAX_OFF_RESONANCE_RATIO:
+        raise Reject("OFF_RESONANCE_RESPONSE")
+    return {
+        **fit,
+        **extraction,
+        "fitted_decay_seconds": fitted_q / (math.pi * fitted_f0),
+        "frequency_grid_sha256": sha256_bytes(canonical_bytes(spec["frequencies_hz"])),
+        "linewidth_hz": linewidth_hz,
+        "probe_frequency_hz": probe_frequency_hz,
+        "probe_frequency_u95_hz": probe_frequency_u95_hz,
+        "required_separation_hz": required_separation_hz,
+        "response_ratio": response_ratio,
+        "response_u95": response_u95,
+    }
+
+
+def _calibration_fixture(case: str) -> tuple[bytes, dict[str, Any]]:
+    f0 = 32_800.0
+    q = math.pi * f0 * 0.1
+    kwargs: dict[str, Any] = {}
+    if case == "ideal_unit_gain_resonance":
+        kwargs.update(background=0.0j, gain=1.0 + 0.0j, noise_codes=2.0, source_amplitude_variation=0.0, source_phase_variation=0.0)
+    elif case == "non_unit_amplitude_gain":
+        kwargs.update(background=0.0j, gain=0.37 + 0.0j)
+    elif case == "fixed_complex_phase_rotation":
+        kwargs.update(background=0.0j, gain=0.45 * complex(math.cos(0.72), math.sin(0.72)))
+    elif case == "nonzero_complex_background":
+        kwargs.update(background=complex(0.08, -0.04), gain=0.55 + 0.0j)
+    elif case == "combined_background_plus_phase_rotation":
+        kwargs.update(background=complex(-0.05, 0.07), gain=0.48 * complex(math.cos(-0.63), math.sin(-0.63)))
+    elif case == "off_grid_resonance_frequency":
+        f0 = 32_800.375
+    elif case == "low_accepted_q":
+        q = 4_200.0
+    elif case == "high_accepted_q":
+        f0 = 32_800.25
+        q = 58_000.0
+    elif case == "realistic_white_measurement_noise":
+        kwargs.update(noise_codes=12.0)
+    elif case == "source_monitor_amplitude_variation":
+        kwargs.update(source_amplitude_variation=0.04)
+    elif case == "source_monitor_phase_variation":
+        kwargs.update(source_phase_variation=0.05)
+    elif case == "shifted_32_8_65_6_reference":
+        pass
+    elif case == "upper_accepted_frequency":
+        f0 = F_CARRIER_MAX_HZ
+    elif case == "flat_response":
+        kwargs.update(background=0.0j, gain=0.0j, noise_codes=0.0, source_amplitude_variation=0.0, source_phase_variation=0.0)
+    elif case == "background_only":
+        kwargs.update(background=complex(0.10, -0.03), gain=0.0j, noise_codes=0.0, source_amplitude_variation=0.0, source_phase_variation=0.0)
+    elif case == "two_comparable_resonances":
+        second = (32_805.0, q, complex(0.46, -0.08))
+        coarse = [32_760.0 + index for index in range(61)]
+        background = complex(0.06, -0.03)
+        gain = complex(0.52, 0.18)
+        peak = max(coarse, key=lambda frequency: abs(resonance_response(frequency, f0, q, background, gain) + resonance_response(frequency, second[0], second[1], 0.0j, second[2])))
+        kwargs.update(second_resonance=second, frequencies_hz=coarse + [peak + 0.025 * (index - 40.5) for index in range(81)] + [f0 + max(20.0, 20.0 * f0 / q)])
+    elif case == "resonance_outside_accepted_interval":
+        f0 = 32_765.0
+    elif case == "resonance_above_accepted_interval":
+        f0 = 32_820.5
+    elif case == "resonance_fit_upper_boundary_clamped":
+        f0 = 32_822.0
+    elif case == "q_below_minimum":
+        q = 3_200.0
+    elif case == "q_above_maximum":
+        f0 = 32_800.25
+        q = 72_000.0
+    elif case == "insufficient_resonance_amplitude":
+        kwargs.update(background=complex(0.05, 0.02), gain=complex(0.00005, 0.00002))
+    elif case == "excessive_complex_background":
+        kwargs.update(background=complex(0.28, -0.18), gain=complex(0.04, 0.01))
+    elif case == "structured_one_pole_residual":
+        kwargs.update(structured_residual=0.02)
+    elif case == "excessive_measurement_noise":
+        kwargs.update(noise_codes=15_000.0)
+    elif case == "clipped_calibration_sample":
+        kwargs.update(force_clipping=True)
+    elif case == "missing_source_amplitude":
+        kwargs.update(source_amplitude_codes=2.0, noise_codes=4.0, source_amplitude_variation=0.0)
+    data, spec = resonance_calibration_payload("arm_0", f0, q, **kwargs)
+    if case in {"flat_response", "background_only", "insufficient_resonance_amplitude"}:
+        frequencies, responses, _, _ = _extract_calibration_points(data, spec, verify_refinement=False)
+        peak = float(frequencies[int(np.argmax(np.abs(responses[:61])))])
+        rebound_grid = list(frequencies[:61]) + [peak + 0.025 * (index - 40.5) for index in range(81)] + [float(frequencies[-1])]
+        kwargs["frequencies_hz"] = rebound_grid
+        data, spec = resonance_calibration_payload("arm_0", f0, q, **kwargs)
+    if case == "missing_frequency_block":
+        return data[:-4 * CALIBRATION_SAMPLES_PER_BLOCK], spec
+    if case == "duplicated_frequency_block":
+        spec = json.loads(json.dumps(spec))
+        spec["frequencies_hz"][62] = spec["frequencies_hz"][61]
+    elif case == "reordered_frequency_grid":
+        spec = json.loads(json.dumps(spec))
+        spec["frequencies_hz"][61], spec["frequencies_hz"][62] = spec["frequencies_hz"][62], spec["frequencies_hz"][61]
+    return data, spec
+
+
+def run_calibration_realism_suite() -> list[dict[str, Any]]:
+    outcomes: list[dict[str, Any]] = []
+    for case in CALIBRATION_REALISM_POSITIVES:
+        data, spec = _calibration_fixture(case)
+        metrics = analyze_resonance_calibration_payload(data, spec)
+        outcomes.append({
+            "case": case,
+            "class": "calibration_realism_positive",
+            "outcome": "PASS",
+            "payload_sha256": sha256_bytes(data),
+            "f_carrier_hz": metrics["fitted_f_carrier_hz"],
+            "f_carrier_u95_hz": metrics["fitted_u95_hz"],
+            "q_factor": metrics["fitted_q_factor"],
+            "reduced_chi_square": metrics["reduced_chi_square"],
+        })
+    for case, expected in CALIBRATION_REALISM_NEGATIVES.items():
+        data, spec = _calibration_fixture(case)
+        try:
+            analyze_resonance_calibration_payload(data, spec)
+        except Reject as exc:
+            if exc.code != expected:
+                raise AssertionError(f"{case}: {exc.code} != {expected}") from exc
+            outcomes.append({"case": case, "class": "calibration_realism_negative", "outcome": "PASS", "rejected_by": exc.code})
+        else:
+            raise AssertionError(f"{case}: did not reject")
+    return outcomes
 
 
 def parse_resonance_calibration_raw(
     data: bytes,
     role: str,
-    f_carrier_hz: float,
-    f_carrier_u95_hz: float,
-    q_factor: float,
-    decay_seconds: float,
-) -> dict[str, float]:
-    try:
-        text = data.decode("ascii")
-    except UnicodeDecodeError as exc:
-        raise Reject("RESONANCE_CALIBRATION_RAW") from exc
-    if "\r" in text or not text.endswith("\n"):
+    artifact: dict[str, Any],
+) -> dict[str, Any]:
+    if role not in ROLE_ORDER:
         raise Reject("RESONANCE_CALIBRATION_RAW")
-    lines = text.splitlines()
-    if len(lines) != 144 or lines[0] != "sweep,role,frequency_hz,response_real,response_imag":
+    metrics = analyze_resonance_calibration_payload(data, artifact["canonical_payload"])
+    claims = {
+        "background_imag": metrics["background"].imag,
+        "background_real": metrics["background"].real,
+        "decay_seconds": metrics["fitted_decay_seconds"],
+        "f_carrier_hz": metrics["fitted_f_carrier_hz"],
+        "f_carrier_u95_hz": metrics["fitted_u95_hz"],
+        "fit_condition_number": metrics["fit_condition_number"],
+        "gain_imag": metrics["gain"].imag,
+        "gain_real": metrics["gain"].real,
+        "off_resonance_probe_hz": metrics["probe_frequency_hz"],
+        "off_resonance_response_ratio": metrics["response_ratio"],
+        "off_resonance_response_u95": metrics["response_u95"],
+        "q_factor": metrics["fitted_q_factor"],
+        "q_u95": metrics["q_u95"],
+        "reduced_chi_square": metrics["reduced_chi_square"],
+        "required_separation_hz": metrics["required_separation_hz"],
+        "weighted_residual_rms": metrics["weighted_residual_rms"],
+    }
+    for key, observed in claims.items():
+        expected = decimal(artifact[key], f"resonance_calibration.{key}")
+        if not math.isclose(expected, observed, rel_tol=1e-9, abs_tol=1e-12):
+            raise Reject("RESONANCE_CALIBRATION_RAW", key)
+    if (
+        decimal(artifact["f_witness_hz"], "resonance_calibration.f_witness_hz")
+        != 2.0 * decimal(artifact["f_carrier_hz"], "resonance_calibration.f_carrier_hz")
+        or artifact["frequency_grid_sha256"] != metrics["frequency_grid_sha256"]
+        or artifact["convergence_status"] != "CONVERGED_INTERIOR"
+    ):
         raise Reject("RESONANCE_CALIBRATION_RAW")
-    parsed: dict[str, list[tuple[float, complex]]] = {"coarse": [], "fine": [], "off_resonance": []}
-    for line in lines[1:]:
-        fields = line.split(",")
-        if len(fields) != 5 or fields[0] not in parsed or fields[1] != role:
-            raise Reject("RESONANCE_CALIBRATION_RAW")
-        frequency = decimal(fields[2], "resonance_raw.frequency_hz")
-        real = decimal(fields[3], "resonance_raw.response_real")
-        imag = decimal(fields[4], "resonance_raw.response_imag")
-        parsed[fields[0]].append((frequency, complex(real, imag)))
-    expected_coarse = [32_760.0 + index for index in range(61)]
-    coarse_peak_hz = max(parsed["coarse"], key=lambda item: abs(item[1]))[0]
-    expected_fine = [coarse_peak_hz - 1.0 + 0.025 * index for index in range(81)]
-    if [item[0] for item in parsed["coarse"]] != expected_coarse or [item[0] for item in parsed["fine"]] != expected_fine or len(parsed["off_resonance"]) != 1:
-        raise Reject("RESONANCE_CALIBRATION_RAW")
-    fit_rows = parsed["coarse"] + parsed["fine"]
-    fit_frequencies = np.asarray([item[0] for item in fit_rows], dtype=np.float64)
-    fit_responses = np.asarray([item[1] for item in fit_rows], dtype=np.complex128)
-    if np.any(np.abs(fit_responses) <= 0.0):
-        raise Reject("RESONANCE_CALIBRATION_RAW")
-    inverse_response = 1.0 / fit_responses
-    if float(np.max(np.abs(inverse_response.real - 1.0))) > 1e-10:
-        raise Reject("RESONANCE_CALIBRATION_RAW")
-    design = np.column_stack((fit_frequencies, np.ones(len(fit_frequencies), dtype=np.float64)))
-    slope, intercept = np.linalg.lstsq(design, inverse_response.imag, rcond=None)[0]
-    if not math.isfinite(float(slope)) or slope <= 0.0:
-        raise Reject("RESONANCE_CALIBRATION_RAW")
-    fitted_f_carrier_hz = float(-intercept / slope)
-    fitted_q_factor = float(0.5 * slope * fitted_f_carrier_hz)
-    fitted_decay_seconds = fitted_q_factor / (math.pi * fitted_f_carrier_hz)
-    fit_residual = inverse_response.imag - (slope * fit_frequencies + intercept)
-    if float(np.max(np.abs(fit_residual))) > 1e-9:
-        raise Reject("RESONANCE_CALIBRATION_RAW")
-    fine_peak = max(parsed["fine"], key=lambda item: abs(item[1]))[0]
-    fitted_u95_hz = parsed["fine"][1][0] - parsed["fine"][0][0]
-    if abs(fine_peak - fitted_f_carrier_hz) > 0.5 * fitted_u95_hz + 1e-9 or abs(f_carrier_hz - fitted_f_carrier_hz) > f_carrier_u95_hz or not math.isclose(f_carrier_u95_hz, fitted_u95_hz, rel_tol=1e-12, abs_tol=1e-9) or not math.isclose(q_factor, fitted_q_factor, rel_tol=1e-9, abs_tol=1e-9) or not math.isclose(decay_seconds, fitted_decay_seconds, rel_tol=1e-9, abs_tol=1e-12):
-        raise Reject("RESONANCE_CALIBRATION_RAW")
-    probe_frequency_hz, probe_response = parsed["off_resonance"][0]
-    linewidth_hz = fitted_f_carrier_hz / fitted_q_factor
-    required_separation_hz = max(20.0, 20.0 * linewidth_hz)
-    if not math.isclose(probe_frequency_hz - fitted_f_carrier_hz, required_separation_hz, rel_tol=1e-12, abs_tol=1e-9):
-        raise Reject("OFF_RESONANCE_PROBE_BINDING")
-    response_ratio = abs(probe_response)
-    if response_ratio > 0.020:
-        raise Reject("OFF_RESONANCE_RESPONSE")
-    return {"fitted_decay_seconds": fitted_decay_seconds, "fitted_f_carrier_hz": fitted_f_carrier_hz, "fitted_q_factor": fitted_q_factor, "fitted_u95_hz": fitted_u95_hz, "linewidth_hz": linewidth_hz, "probe_frequency_hz": probe_frequency_hz, "required_separation_hz": required_separation_hz, "response_ratio": response_ratio}
+    return {
+        key: value
+        for key, value in metrics.items()
+        if key not in {"background", "gain"}
+    } | {
+        "background": {"real": metrics["background"].real, "imag": metrics["background"].imag},
+        "gain": {"real": metrics["gain"].real, "imag": metrics["gain"].imag},
+    }
 
 
 def topology_scan_metrics(path: Path, model: dict[str, Any], f_witness_hz: float) -> dict[str, Any]:
@@ -870,19 +1344,45 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
     assignment_created = canonical_utc(assignment_commitment["created_utc"], "ASSIGNMENT_CUSTODY")
     if chronology_receipt["schema"] != "p0.chronology-receipt.v2" or chronology_receipt["native_file_sha256"] != payload["sha256"] or not acquisition_started < acquisition_completed or (acquisition_started - source_preparation_started).total_seconds() < 3.0:
         raise Reject("CHRONOLOGY_CUSTODY")
-    exact_fields(resonance_calibration, {"analyzer_sha256", "assembly_id", "calibration_excitation_vpp", "carrier_population", "coarse_search", "completed_utc", "decay_seconds", "f_carrier_hz", "f_carrier_u95_hz", "f_witness_hz", "fine_search", "fit_identity", "instrument_queryback_sha256", "primary_observed", "q_factor", "raw_data_sha256", "retry_law", "schema", "selection_law", "source_queryback_sha256"}, "resonance_calibration")
+    exact_fields(
+        resonance_calibration,
+        {
+            "analyzer_sha256", "assembly_id", "background_imag", "background_real",
+            "calibration_excitation_vpp", "calibration_role", "canonical_adapter_sha256", "canonical_payload",
+            "canonical_payload_bytes", "canonical_payload_sha256", "carrier_population",
+            "coarse_search", "completed_utc", "convergence_status", "decay_seconds",
+            "f_carrier_hz", "f_carrier_u95_hz", "f_witness_hz", "fine_search",
+            "fit_condition_number", "fit_identity", "frequency_grid_sha256", "gain_imag",
+            "gain_real", "instrument_queryback_sha256", "native_format_identity",
+            "native_format_support", "native_input_bytes", "native_input_sha256",
+            "off_resonance_probe_hz", "off_resonance_response_ratio",
+            "off_resonance_response_u95", "primary_observed", "q_factor", "q_u95",
+            "reduced_chi_square", "required_separation_hz", "retry_law", "schema",
+            "selection_law", "solver_identity", "source_queryback_sha256", "started_utc",
+            "weighted_residual_rms",
+        },
+        "resonance_calibration",
+    )
     exact_fields(resonance_calibration_source, {"configuration", "schema"}, "resonance_calibration_source_queryback")
     calibration_completed = canonical_utc(resonance_calibration["completed_utc"], "RESONANCE_CALIBRATION_CUSTODY")
+    calibration_started = canonical_utc(resonance_calibration["started_utc"], "RESONANCE_CALIBRATION_CUSTODY")
     calibration_q_factor = decimal(resonance_calibration["q_factor"], "resonance_calibration.q_factor")
     calibration_decay_seconds = decimal(resonance_calibration["decay_seconds"], "resonance_calibration.decay_seconds")
+    calibration_assembly = ASSEMBLY_FOR_ROLE["arm_0"]
+    calibration_population = CARRIER_POPULATION_FOR_ASSEMBLY[calibration_assembly]
     if (
         frequency_binding["calibration_artifact_sha256"] != receipts["resonance_calibration_artifact"]["sha256"]
         or frequency_binding["calibration_raw_sha256"] != receipts["resonance_calibration_raw"]["sha256"]
         or frequency_binding["calibration_analyzer_sha256"] != receipts["resonance_calibration_analyzer"]["sha256"]
-        or resonance_calibration["schema"] != "p0.resonance-calibration.v1"
-        or resonance_calibration["assembly_id"] != expected_assembly
-        or resonance_calibration["carrier_population"] != expected_population
-        or resonance_calibration["raw_data_sha256"] != receipts["resonance_calibration_raw"]["sha256"]
+        or resonance_calibration["schema"] != "p0.resonance-calibration.v2"
+        or resonance_calibration["assembly_id"] != calibration_assembly
+        or resonance_calibration["carrier_population"] != calibration_population
+        or resonance_calibration["calibration_role"] != "GLOBAL_DUT_A_PREASSIGNMENT_REFERENCE"
+        or resonance_calibration["native_input_sha256"] != receipts["resonance_calibration_raw"]["sha256"]
+        or resonance_calibration["canonical_payload_sha256"] != receipts["resonance_calibration_raw"]["sha256"]
+        or resonance_calibration["native_input_bytes"] != receipts["resonance_calibration_raw"]["bytes"]
+        or resonance_calibration["canonical_payload_bytes"] != receipts["resonance_calibration_raw"]["bytes"]
+        or resonance_calibration["canonical_adapter_sha256"] != receipts["adapter_source"]["sha256"]
         or resonance_calibration["analyzer_sha256"] != receipts["resonance_calibration_analyzer"]["sha256"]
         or decimal(resonance_calibration["f_carrier_hz"], "resonance_calibration.f_carrier_hz") != f_carrier_hz
         or nonnegative_decimal(resonance_calibration["f_carrier_u95_hz"], "resonance_calibration.f_carrier_u95_hz") != f_carrier_u95_hz
@@ -893,13 +1393,17 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
         or resonance_calibration["instrument_queryback_sha256"] != receipts["instrument_queryback"]["sha256"]
         or decimal(resonance_calibration["calibration_excitation_vpp"], "resonance_calibration.calibration_excitation_vpp") != 0.100
         or resonance_calibration["coarse_search"] != {"maximum_hz": "32820", "minimum_hz": "32760", "step_hz": "1"}
-        or resonance_calibration["fine_search"] != {"half_span_hz": "1", "step_hz": "0.025"}
-        or resonance_calibration["fit_identity"] != "BOUNDED_COMPLEX_BVD_MAGNITUDE_AND_PHASE_V1"
-        or resonance_calibration["selection_law"] != "MAXIMUM_FITTED_MOTIONAL_RESPONSE_IN_ACCEPTED_INTERVAL"
+        or resonance_calibration["fine_search"] != {"half_span_hz": "1.0125", "step_hz": "0.025"}
+        or resonance_calibration["fit_identity"] != "COMPLEX_BACKGROUND_PLUS_COMPLEX_GAIN_SINGLE_POLE_V1"
+        or resonance_calibration["solver_identity"] != "NUMPY_VARIABLE_PROJECTION_PATTERN_REFINEMENT_V1"
+        or resonance_calibration["selection_law"] != "DETERMINISTIC_BOUNDED_VARIABLE_PROJECTION__REJECT_BOUNDARY_OR_NONCONVERGENCE"
         or resonance_calibration["retry_law"] != "ONE_PASS__REJECT_ON_FAILURE"
+        or resonance_calibration["native_format_identity"] != "SDK_EXPORT_INT16_INTERLEAVED_V1"
+        or resonance_calibration["native_format_support"] != "SDK_EXPORT_IMPLEMENTED__PROPRIETARY_CONTAINER_MUST_BE_PRESERVED_SEPARATELY_AND_IS_NOT_PARSED"
         or resonance_calibration_source["schema"] != "p0.resonance-calibration-source-queryback.v1"
-        or resonance_calibration_source["configuration"] != {"amplitude_vpp": "0.1", "coarse_maximum_hz": "32820", "coarse_minimum_hz": "32760", "coarse_step_hz": "1", "fine_half_span_hz": "1", "fine_step_hz": "0.025", "load_mode": "HIGH_Z", "offset_v": "0", "output_mode": "CONTINUOUS_SINE", "physical_output_ohms": "50"}
+        or resonance_calibration_source["configuration"] != {"amplitude_vpp": "0.1", "coarse_maximum_hz": "32820", "coarse_minimum_hz": "32760", "coarse_step_hz": "1", "fine_half_span_hz": "1.0125", "fine_step_hz": "0.025", "load_mode": "HIGH_Z", "offset_v": "0", "output_mode": "CONTINUOUS_SINE", "physical_output_ohms": "50"}
         or resonance_calibration["primary_observed"] is not False
+        or not calibration_started < calibration_completed
         or not calibration_completed < assignment_created < acquisition_started
     ):
         raise Reject("RESONANCE_CALIBRATION_CUSTODY")
@@ -908,10 +1412,7 @@ def validate_metadata(meta: dict[str, Any], base: Path) -> tuple[Path, dict[str,
     meta["_off_resonance_control"] = parse_resonance_calibration_raw(
         resonance_calibration_raw,
         meta["role"],
-        f_carrier_hz,
-        f_carrier_u95_hz,
-        calibration_q_factor,
-        calibration_decay_seconds,
+        resonance_calibration,
     )
     exact_fields(assembly_manifest, {"assembly_id", "board_serials", "carrier_population", "coax_serials", "controller_serial", "enclosure_serials", "harness_serial", "schema"}, "assembly_manifest")
     exact_fields(assembly_manifest["board_serials"], {"carrier", "control", "sensor"}, "assembly_manifest.board_serials")
@@ -1604,6 +2105,7 @@ def analyze_bundle(bundle_path: Path, identity_directory: Path | None = None) ->
     first = records[ROLE_ORDER[0]]["meta"]
     common = {
         "calibration": first["custody"]["calibration_sha256"],
+        "resonance_calibration_binding": canonical_bytes({key: first["frequency_binding"][key] for key in ("calibration_analyzer_sha256", "calibration_artifact_sha256", "calibration_raw_sha256")}),
         "assignment": first["custody"]["assignment_commitment_sha256"],
         "evidence_class": first["evidence_class"],
         "f_ref": first["_f_ref"],
@@ -1624,6 +2126,8 @@ def analyze_bundle(bundle_path: Path, identity_directory: Path | None = None) ->
         meta = records[role]["meta"]
         if meta["custody"]["calibration_sha256"] != common["calibration"]:
             raise Reject("CALIBRATION_MISMATCH")
+        if canonical_bytes({key: meta["frequency_binding"][key] for key in ("calibration_analyzer_sha256", "calibration_artifact_sha256", "calibration_raw_sha256")}) != common["resonance_calibration_binding"]:
+            raise Reject("RESONANCE_CALIBRATION_CUSTODY")
         if meta["custody"]["assignment_commitment_sha256"] != common["assignment"]:
             raise Reject("ASSIGNMENT_MISMATCH")
         if meta["evidence_class"] != common["evidence_class"]:
@@ -1775,7 +2279,7 @@ def analyze_bundle(bundle_path: Path, identity_directory: Path | None = None) ->
         "physical_claim_authorized": False,
         "claim_token": "SYNTHETIC_ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT" if common["evidence_class"] == "SYNTHETIC" else "NO_CLAIM__EXECUTION_AUTHORITY_REQUIRED",
         "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
-        "input_custody": {"assembly": {role: records[role]["meta"]["assembly"] for role in ROLE_ORDER}, "bundle_sha256": sha256_file(bundle_path), "metadata_sha256": {role: records[role]["metadata_sha256"] for role in ROLE_ORDER}, "payload_sha256": {role: records[role]["meta"]["payload"]["sha256"] for role in ROLE_ORDER}, "byte_receipt_sha256": {role: {name: descriptor["sha256"] for name, descriptor in records[role]["meta"]["custody"]["byte_receipts"].items()} for role in ROLE_ORDER}, "assignment_commitment_sha256": common["assignment"], "calibration_sha256": common["calibration"], "thresholds_sha256": records["arm_0"]["meta"]["thresholds"]["sha256"]},
+        "input_custody": {"assembly": {role: records[role]["meta"]["assembly"] for role in ROLE_ORDER}, "bundle_sha256": sha256_file(bundle_path), "metadata_sha256": {role: records[role]["metadata_sha256"] for role in ROLE_ORDER}, "payload_sha256": {role: records[role]["meta"]["payload"]["sha256"] for role in ROLE_ORDER}, "byte_receipt_sha256": {role: {name: descriptor["sha256"] for name, descriptor in records[role]["meta"]["custody"]["byte_receipts"].items()} for role in ROLE_ORDER}, "assignment_commitment_sha256": common["assignment"], "calibration_sha256": common["calibration"], "resonance_calibration_reference": {"assembly_id": ASSEMBLY_FOR_ROLE["arm_0"], "carrier_population": CARRIER_POPULATION_FOR_ASSEMBLY[ASSEMBLY_FOR_ROLE["arm_0"]], "calibration_role": "GLOBAL_DUT_A_PREASSIGNMENT_REFERENCE", **{key: first["frequency_binding"][key] for key in ("calibration_analyzer_sha256", "calibration_artifact_sha256", "calibration_raw_sha256")}}, "thresholds_sha256": records["arm_0"]["meta"]["thresholds"]["sha256"]},
         "implementation_custody": {"analyzer_sha256": sha256_file(Path(__file__).resolve()), "schema_sha256": sha256_file(schema_path), "fixture_sha256": sha256_file(fixture_path), "signal_path_model_sha256": sha256_file(identity_root / SIGNAL_MODEL_NAME), "dependency_identity": dependency, "dependency_sha256": sha256_bytes(canonical_bytes(dependency))},
         "f_ref_hz": common["f_ref"],
         "f_witness_hz": common["f_witness"],
@@ -1912,7 +2416,19 @@ def synthetic_nonlinear_control_bytes(residue_ratio: float = 0.005, f_carrier_hz
     return data.tobytes(order="C")
 
 
-def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: str, environment_name: str, environment_hash: str, environment_bytes: int, f_carrier_hz: float = SYNTHETIC_F_CARRIER_HZ) -> dict[str, Any]:
+def base_metadata(
+    directory: Path,
+    role: str,
+    payload_name: str,
+    payload_hash: str,
+    environment_name: str,
+    environment_hash: str,
+    environment_bytes: int,
+    f_carrier_hz: float,
+    calibration_data: bytes,
+    calibration_spec: dict[str, Any],
+    calibration_metrics: dict[str, Any],
+) -> dict[str, Any]:
     phase = math.pi if role == "arm_pi" else 0.0
     frozen = {"neg": "0.020", "amplitude": "0.020", "frequency": "0.000001", "decay": "0.020", "phase": "0.020", "feedthrough": "0.020", "calibration_u95": {"neg": "0.001", "amplitude": "0.001", "frequency": "0.0000001", "decay": "0.001", "phase": "0.001", "feedthrough": "0.001"}}
     frozen_hash = sha256_bytes(canonical_bytes(frozen))
@@ -1929,7 +2445,7 @@ def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: s
     assembly_id = ASSEMBLY_FOR_ROLE[role]
     carrier_population = CARRIER_POPULATION_FOR_ASSEMBLY[assembly_id]
     common_files = {
-        "adapter_source": ("synthetic_adapter_source.txt", b"P0 SYNTHETIC LOSSLESS INT16 ADAPTER V1\n"),
+        "adapter_source": ("synthetic_adapter_source.txt", b"P0 SDK-EXPORT INT16 IDENTITY ADAPTER V2; LOSSLESS SELECTED CHANNELS\n"),
         "assignment_reveal": ("assignment_reveal.json", canonical_bytes({"assemblies": {item: ASSEMBLY_FOR_ROLE[item] for item in ROLE_ORDER}, "assignments": {item: ("PRIMARY_ARM" if item in ("arm_0", "arm_pi") else "CONTROL") for item in ROLE_ORDER}, "schema": "p0.assignment-reveal.v2"})),
         "calibration_receipt": ("calibration_receipt.json", canonical_bytes({"clock_identity": "SYNTHETIC-1MHZ-MASTER", "environment_cadence_hz": "10", "environment_sensor_serial_hex": "00000001", "environment_measurement_command_hex": "fd", "clock_mapping_sha256": clock_mapping_hash, "witness_calibration_sha256": witness_hash})),
         "instrument_queryback": ("instrument_queryback.json", canonical_bytes({"configuration": instrument, "schema": "p0.instrument-queryback.v1"})),
@@ -1946,20 +2462,66 @@ def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: s
     adapter_descriptor = bound_descriptor(directory / common_files["adapter_source"][0])
     instrument_descriptor = bound_descriptor(directory / common_files["instrument_queryback"][0])
     source_descriptor = bound_descriptor(source_queryback_path)
-    resonance_source_path = directory / f"{role}.resonance_calibration_source_queryback.json"
-    resonance_source_path.write_bytes(canonical_bytes({"configuration": {"amplitude_vpp": "0.1", "coarse_maximum_hz": "32820", "coarse_minimum_hz": "32760", "coarse_step_hz": "1", "fine_half_span_hz": "1", "fine_step_hz": "0.025", "load_mode": "HIGH_Z", "offset_v": "0", "output_mode": "CONTINUOUS_SINE", "physical_output_ohms": "50"}, "schema": "p0.resonance-calibration-source-queryback.v1"}))
+    resonance_source_path = directory / "dut_a.resonance_calibration_source_queryback.json"
+    resonance_source_path.write_bytes(canonical_bytes({"configuration": {"amplitude_vpp": "0.1", "coarse_maximum_hz": "32820", "coarse_minimum_hz": "32760", "coarse_step_hz": "1", "fine_half_span_hz": "1.0125", "fine_step_hz": "0.025", "load_mode": "HIGH_Z", "offset_v": "0", "output_mode": "CONTINUOUS_SINE", "physical_output_ohms": "50"}, "schema": "p0.resonance-calibration-source-queryback.v1"}))
     resonance_source_descriptor = bound_descriptor(resonance_source_path)
-    resonance_raw_path = directory / f"{role}.resonance_calibration.csv"
-    calibration_decay_seconds = 0.1
-    calibration_q_factor = math.pi * f_carrier_hz * calibration_decay_seconds
-    resonance_raw_path.write_bytes(resonance_calibration_raw_bytes(role, f_carrier_hz, calibration_q_factor))
+    resonance_raw_path = directory / "dut_a.resonance_calibration.i16le"
+    resonance_raw_path.write_bytes(calibration_data)
     resonance_analyzer_path = directory / "resonance_calibration_analyzer.py"
     if not resonance_analyzer_path.exists():
         resonance_analyzer_path.write_bytes(Path(__file__).resolve().read_bytes())
     resonance_raw_descriptor = bound_descriptor(resonance_raw_path)
     resonance_analyzer_descriptor = bound_descriptor(resonance_analyzer_path)
-    resonance_artifact_path = directory / f"{role}.resonance_calibration.json"
-    resonance_artifact_path.write_bytes(canonical_bytes({"analyzer_sha256": resonance_analyzer_descriptor["sha256"], "assembly_id": assembly_id, "calibration_excitation_vpp": "0.1", "carrier_population": carrier_population, "coarse_search": {"maximum_hz": "32820", "minimum_hz": "32760", "step_hz": "1"}, "completed_utc": "2037-07-15T23:59:50.000000Z", "decay_seconds": format(calibration_decay_seconds, ".17g"), "f_carrier_hz": f_text, "f_carrier_u95_hz": "0.025", "f_witness_hz": f_witness_text, "fine_search": {"half_span_hz": "1", "step_hz": "0.025"}, "fit_identity": "BOUNDED_COMPLEX_BVD_MAGNITUDE_AND_PHASE_V1", "instrument_queryback_sha256": instrument_descriptor["sha256"], "primary_observed": False, "q_factor": format(calibration_q_factor, ".17g"), "raw_data_sha256": resonance_raw_descriptor["sha256"], "retry_law": "ONE_PASS__REJECT_ON_FAILURE", "schema": "p0.resonance-calibration.v1", "selection_law": "MAXIMUM_FITTED_MOTIONAL_RESPONSE_IN_ACCEPTED_INTERVAL", "source_queryback_sha256": resonance_source_descriptor["sha256"]}))
+    resonance_artifact_path = directory / "dut_a.resonance_calibration.json"
+    calibration_assembly_id = ASSEMBLY_FOR_ROLE["arm_0"]
+    calibration_carrier_population = CARRIER_POPULATION_FOR_ASSEMBLY[calibration_assembly_id]
+    resonance_artifact = {
+        "analyzer_sha256": resonance_analyzer_descriptor["sha256"],
+        "assembly_id": calibration_assembly_id,
+        "background_imag": decimal_text(calibration_metrics["background"].imag),
+        "background_real": decimal_text(calibration_metrics["background"].real),
+        "calibration_excitation_vpp": "0.1",
+        "calibration_role": "GLOBAL_DUT_A_PREASSIGNMENT_REFERENCE",
+        "canonical_adapter_sha256": adapter_descriptor["sha256"],
+        "canonical_payload": calibration_spec,
+        "canonical_payload_bytes": len(calibration_data),
+        "canonical_payload_sha256": resonance_raw_descriptor["sha256"],
+        "carrier_population": calibration_carrier_population,
+        "coarse_search": {"maximum_hz": "32820", "minimum_hz": "32760", "step_hz": "1"},
+        "completed_utc": "2037-07-15T23:59:50.000000Z",
+        "convergence_status": calibration_metrics["convergence_status"],
+        "decay_seconds": decimal_text(calibration_metrics["fitted_decay_seconds"]),
+        "f_carrier_hz": f_text,
+        "f_carrier_u95_hz": decimal_text(calibration_metrics["fitted_u95_hz"]),
+        "f_witness_hz": f_witness_text,
+        "fine_search": {"half_span_hz": "1.0125", "step_hz": "0.025"},
+        "fit_condition_number": decimal_text(calibration_metrics["fit_condition_number"]),
+        "fit_identity": "COMPLEX_BACKGROUND_PLUS_COMPLEX_GAIN_SINGLE_POLE_V1",
+        "frequency_grid_sha256": calibration_metrics["frequency_grid_sha256"],
+        "gain_imag": decimal_text(calibration_metrics["gain"].imag),
+        "gain_real": decimal_text(calibration_metrics["gain"].real),
+        "instrument_queryback_sha256": instrument_descriptor["sha256"],
+        "native_format_identity": "SDK_EXPORT_INT16_INTERLEAVED_V1",
+        "native_format_support": "SDK_EXPORT_IMPLEMENTED__PROPRIETARY_CONTAINER_MUST_BE_PRESERVED_SEPARATELY_AND_IS_NOT_PARSED",
+        "native_input_bytes": len(calibration_data),
+        "native_input_sha256": resonance_raw_descriptor["sha256"],
+        "off_resonance_probe_hz": decimal_text(calibration_metrics["probe_frequency_hz"]),
+        "off_resonance_response_ratio": decimal_text(calibration_metrics["response_ratio"]),
+        "off_resonance_response_u95": decimal_text(calibration_metrics["response_u95"]),
+        "primary_observed": False,
+        "q_factor": decimal_text(calibration_metrics["fitted_q_factor"]),
+        "q_u95": decimal_text(calibration_metrics["q_u95"]),
+        "reduced_chi_square": decimal_text(calibration_metrics["reduced_chi_square"]),
+        "required_separation_hz": decimal_text(calibration_metrics["required_separation_hz"]),
+        "retry_law": "ONE_PASS__REJECT_ON_FAILURE",
+        "schema": "p0.resonance-calibration.v2",
+        "selection_law": "DETERMINISTIC_BOUNDED_VARIABLE_PROJECTION__REJECT_BOUNDARY_OR_NONCONVERGENCE",
+        "solver_identity": "NUMPY_VARIABLE_PROJECTION_PATTERN_REFINEMENT_V1",
+        "source_queryback_sha256": resonance_source_descriptor["sha256"],
+        "started_utc": "2037-07-15T23:59:48.000000Z",
+        "weighted_residual_rms": decimal_text(calibration_metrics["weighted_residual_rms"]),
+    }
+    resonance_artifact_path.write_bytes(canonical_bytes(resonance_artifact))
     resonance_artifact_descriptor = bound_descriptor(resonance_artifact_path)
     native_receipt_path = directory / f"{role}.native_export_receipt.json"
     native_receipt_path.write_bytes(canonical_bytes({"adapter_sha256": adapter_descriptor["sha256"], "native_file_bytes": PAYLOAD_BYTES, "native_file_sha256": payload_hash, "schema": "p0.native-export-receipt.v1"}))
@@ -2006,7 +2568,7 @@ def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: s
         "payload": {"path": payload_name, "sha256": payload_hash, "bytes": PAYLOAD_BYTES, "dtype": "int16", "endian": "little", "layout": "sample-major-interleaved", "channels": ["CH0_SOURCE", "CH1_CARRIER", "CH2_WITNESS", "CH3_VIBRATION"], "samples_per_channel": SAMPLES, "sample_rate_hz": FS, "scale_per_code": ["0.00001", "0.00001", "0.0001", "0.0001"], "offset": ["0", "0", "0", "0"]},
         "clock": {"identity": "SYNTHETIC-1MHZ-MASTER", "frequency_hz": f_text, "sample_rate_hz": "1000000", "channel_skew_seconds": "0", "record_start_mode": "SOFTWARE_PREARM_FREE_RUN", "external_trigger_connected": False, "phase_gauge": "CH0_SOURCE", "alignment": "CH2_WITNESS"},
         "source": {**source, "setup_queryback_sha256": receipts["source_queryback"]["sha256"]},
-        "frequency_binding": {"calibration_analyzer_sha256": receipts["resonance_calibration_analyzer"]["sha256"], "calibration_artifact_sha256": receipts["resonance_calibration_artifact"]["sha256"], "calibration_raw_sha256": receipts["resonance_calibration_raw"]["sha256"], "f_carrier_hz": f_text, "f_carrier_u95_hz": "0.025", "f_witness_hz": f_witness_text, "relation": "f_witness_hz == 2 * f_carrier_hz"},
+        "frequency_binding": {"calibration_analyzer_sha256": receipts["resonance_calibration_analyzer"]["sha256"], "calibration_artifact_sha256": receipts["resonance_calibration_artifact"]["sha256"], "calibration_raw_sha256": receipts["resonance_calibration_raw"]["sha256"], "f_carrier_hz": f_text, "f_carrier_u95_hz": decimal_text(calibration_metrics["fitted_u95_hz"]), "f_witness_hz": f_witness_text, "relation": "f_witness_hz == 2 * f_carrier_hz"},
         "signal_path": {"adg_state_during_windows": "OFF_D_TO_SA_50R", "c2_continuous": True, "circuit_model_sha256": model_hash, "digitizer_input_mode": "1_MOHM_PARALLEL_30_PF_TRUE_DIFFERENTIAL", "drive_shunt_node": "N_SRC", "drive_shunt_resistance_ohm": "100000", "injection_network": "TNPW_1M_INJECTION__TNPW_100K_N_SRC_SHUNT", "injection_node": "N_GATE_OUT", "injection_resistance_ohm": "1000000", "k3_state_during_open_window": "ENERGIZED_ELECTRICALLY_OPEN", "thresholds_sha256": model["thresholds_sha256"], "topology_receipt_sha256": receipts["topology_receipt"]["sha256"]},
         "witness": {**witness_body, "calibration_sha256": witness_hash},
         "environment": {"cadence_hz": "10", "temperature_c": temperature_text, "humidity_rh": humidity_text, "vibration_rms_m_s2": "0.003535533905932738", "vibration_peak_m_s2": "0.005", "sensor_serial_hex": "00000001", "measurement_command_hex": "fd", "clock_mapping_sha256": clock_mapping_hash, "calibration_sha256": calibration_hash, "record_path": environment_name, "record_sha256": environment_hash, "record_bytes": environment_bytes, "record_count": len(range(0, SAMPLES, 100_000))},
@@ -2016,15 +2578,34 @@ def base_metadata(directory: Path, role: str, payload_name: str, payload_hash: s
 
 
 def materialize_synthetic(directory: Path, f_carrier_hz: float = SYNTHETIC_F_CARRIER_HZ) -> Path:
+    calibration_data, calibration_spec = resonance_calibration_payload(
+        "arm_0",
+        f_carrier_hz,
+        math.pi * f_carrier_hz * 0.1,
+    )
+    calibration_metrics = analyze_resonance_calibration_payload(calibration_data, calibration_spec)
+    bound_f_carrier_hz = calibration_metrics["fitted_f_carrier_hz"]
     roles: dict[str, dict[str, str]] = {}
     for role in ROLE_ORDER:
         payload_name = f"{role}.raw"
         payload_path = directory / payload_name
-        synthetic_record(role, f_carrier_hz).tofile(payload_path)
+        synthetic_record(role, bound_f_carrier_hz).tofile(payload_path)
         environment_name = f"{role}.environment.csv"
         environment_path = directory / environment_name
         environment_path.write_bytes(synthetic_environment_bytes())
-        meta = base_metadata(directory, role, payload_name, sha256_file(payload_path), environment_name, sha256_file(environment_path), environment_path.stat().st_size, f_carrier_hz)
+        meta = base_metadata(
+            directory,
+            role,
+            payload_name,
+            sha256_file(payload_path),
+            environment_name,
+            sha256_file(environment_path),
+            environment_path.stat().st_size,
+            bound_f_carrier_hz,
+            calibration_data,
+            calibration_spec,
+            calibration_metrics,
+        )
         meta_name = f"{role}.json"
         meta_path = directory / meta_name
         meta_path.write_bytes(canonical_bytes(meta))
@@ -2306,7 +2887,7 @@ RAW_ADVERSARIES = {
     "signal_path_scan_time_alternate_offset": "SIGNAL_PATH_SCAN_CHRONOLOGY",
     "signal_path_acquisition_time_truncated_precision": "CHRONOLOGY_CUSTODY",
     "signal_path_scan_time_lexical_deception": "SIGNAL_PATH_SCAN_CHRONOLOGY",
-    "resonance_calibration_raw_garbage": "RESONANCE_CALIBRATION_RAW",
+    "resonance_calibration_raw_garbage": "RESONANCE_CALIBRATION_PAYLOAD_SIZE",
     "resonance_calibration_q_claim_mismatch": "RESONANCE_CALIBRATION_RAW",
     "source_preparation_before_assignment": "CHRONOLOGY_CUSTODY",
     "off_resonance_raw_response": "OFF_RESONANCE_RESPONSE",
@@ -2445,7 +3026,10 @@ def mutate_resonance_calibration_raw(directory: Path, bundle: dict[str, Any], ro
     raw_descriptor = bound_descriptor(raw_path)
     artifact_path = directory / receipts["resonance_calibration_artifact"]["path"]
     artifact = plain_json(artifact_path)
-    artifact["raw_data_sha256"] = raw_descriptor["sha256"]
+    artifact["native_input_sha256"] = raw_descriptor["sha256"]
+    artifact["canonical_payload_sha256"] = raw_descriptor["sha256"]
+    artifact["native_input_bytes"] = raw_descriptor["bytes"]
+    artifact["canonical_payload_bytes"] = raw_descriptor["bytes"]
     artifact_path.write_bytes(canonical_bytes(artifact))
     artifact_descriptor = bound_descriptor(artifact_path)
     receipts["resonance_calibration_raw"] = raw_descriptor
@@ -2491,9 +3075,9 @@ def execute_bundle_adversary(directory: Path, case: str, identity_directory: Pat
         *[directory / f"{role}.environment.csv" for role in ROLE_ORDER],
         *[directory / f"{role}.native_export_receipt.json" for role in ROLE_ORDER],
         *[directory / f"{role}.chronology_receipt.json" for role in ROLE_ORDER],
-        *[directory / f"{role}.resonance_calibration.csv" for role in ROLE_ORDER],
-        *[directory / f"{role}.resonance_calibration.json" for role in ROLE_ORDER],
-        *[directory / f"{role}.resonance_calibration_source_queryback.json" for role in ROLE_ORDER],
+        directory / "dut_a.resonance_calibration.i16le",
+        directory / "dut_a.resonance_calibration.json",
+        directory / "dut_a.resonance_calibration_source_queryback.json",
         *[directory / f"{role}.topology_scan.f64le" for role in ROLE_ORDER],
         *[directory / f"{role}.nonlinear_control.f64le" for role in ROLE_ORDER],
         *[directory / f"{role}.source_queryback.json" for role in ROLE_ORDER],
@@ -2558,6 +3142,40 @@ def execute_bundle_adversary(directory: Path, case: str, identity_directory: Pat
             write_mutated_metadata(directory, bundle, role, meta)
         elif case == "calibration_after_assignment":
             mutate_resonance_calibration(directory, bundle, role, "completed_utc", "2037-07-15T23:59:53.000000Z")
+        elif case == "calibration_wrong_native_hash":
+            mutate_resonance_calibration(directory, bundle, role, "native_input_sha256", "0" * 64)
+        elif case == "calibration_wrong_canonical_hash":
+            mutate_resonance_calibration(directory, bundle, role, "canonical_payload_sha256", "0" * 64)
+        elif case == "calibration_wrong_adapter_hash":
+            mutate_resonance_calibration(directory, bundle, role, "canonical_adapter_sha256", "0" * 64)
+        elif case == "calibration_wrong_analyzer_hash":
+            mutate_resonance_calibration(directory, bundle, role, "analyzer_sha256", "0" * 64)
+        elif case == "calibration_wrong_assembly_identity":
+            mutate_resonance_calibration(directory, bundle, role, "assembly_id", "P0-ASSEMBLY-WRONG")
+        elif case == "calibration_wrong_instrument_queryback":
+            mutate_resonance_calibration(directory, bundle, role, "instrument_queryback_sha256", "0" * 64)
+        elif case == "calibration_witness_frequency_mismatch":
+            mutate_resonance_calibration(directory, bundle, role, "f_witness_hz", decimal_text(decimal(meta["frequency_binding"]["f_witness_hz"], "frequency_binding.f_witness_hz") + 1.0))
+        elif case == "calibration_after_primary_observation":
+            mutate_resonance_calibration(directory, bundle, role, "primary_observed", True)
+        elif case == "calibration_after_assignment_targeted":
+            mutate_resonance_calibration(directory, bundle, role, "completed_utc", "2037-07-15T23:59:53.000000Z")
+        elif case == "calibration_source_queryback_mismatch":
+            source_receipt = meta["custody"]["byte_receipts"]["resonance_calibration_source_queryback"]
+            source_path = directory / source_receipt["path"]
+            calibration_source = plain_json(source_path)
+            calibration_source["configuration"]["amplitude_vpp"] = "0.2"
+            source_path.write_bytes(canonical_bytes(calibration_source))
+            rebound_source = bound_descriptor(source_path)
+            artifact_path = directory / meta["custody"]["byte_receipts"]["resonance_calibration_artifact"]["path"]
+            artifact = plain_json(artifact_path)
+            artifact["source_queryback_sha256"] = rebound_source["sha256"]
+            artifact_path.write_bytes(canonical_bytes(artifact))
+            rebound_artifact = bound_descriptor(artifact_path)
+            meta["custody"]["byte_receipts"]["resonance_calibration_source_queryback"] = rebound_source
+            meta["custody"]["byte_receipts"]["resonance_calibration_artifact"] = rebound_artifact
+            meta["frequency_binding"]["calibration_artifact_sha256"] = rebound_artifact["sha256"]
+            write_mutated_metadata(directory, bundle, role, meta)
         elif case == "source_queryback_frequency_mismatch":
             mutate_source_queryback_frequency(directory, bundle, role, "32769")
         elif case == "witness_frequency_relation_mismatch":
@@ -2572,14 +3190,23 @@ def execute_bundle_adversary(directory: Path, case: str, identity_directory: Pat
             mutate_source_preparation_time(directory, bundle, role, "2037-07-15T23:00:00.000000Z")
         elif case in ("off_resonance_raw_response", "off_resonance_probe_too_close"):
             raw_path = directory / meta["custody"]["byte_receipts"]["resonance_calibration_raw"]["path"]
-            lines = raw_path.read_text(encoding="ascii").splitlines()
-            fields = lines[-1].split(",")
             if case == "off_resonance_raw_response":
-                fields[3] = "0.021"
+                artifact = plain_json(directory / meta["custody"]["byte_receipts"]["resonance_calibration_artifact"]["path"])
+                frequency = decimal(artifact["canonical_payload"]["frequencies_hz"][-1], "probe.frequency")
+                values = np.frombuffer(raw_path.read_bytes(), dtype="<i2").copy().reshape(CALIBRATION_BLOCK_COUNT, CALIBRATION_SAMPLES_PER_BLOCK, 2)
+                phase = 2.0 * math.pi * frequency * np.arange(CALIBRATION_SAMPLES_PER_BLOCK, dtype=np.float64) / CALIBRATION_SAMPLE_RATE_HZ
+                values[-1, :, 1] = np.rint(values[-1, :, 1].astype(np.float64) + 1000.0 * np.cos(phase)).astype("<i2")
+                mutate_resonance_calibration_raw(directory, bundle, role, values.tobytes(order="C"))
             else:
-                fields[2] = format(decimal(meta["frequency_binding"]["f_carrier_hz"], "frequency_binding.f_carrier_hz") + 1.0, ".17g")
-            lines[-1] = ",".join(fields)
-            mutate_resonance_calibration_raw(directory, bundle, role, ("\n".join(lines) + "\n").encode("ascii"))
+                artifact_path = directory / meta["custody"]["byte_receipts"]["resonance_calibration_artifact"]["path"]
+                artifact = plain_json(artifact_path)
+                artifact["canonical_payload"]["frequencies_hz"][-1] = decimal_text(decimal(meta["frequency_binding"]["f_carrier_hz"], "frequency_binding.f_carrier_hz") + 1.0)
+                artifact["frequency_grid_sha256"] = sha256_bytes(canonical_bytes(artifact["canonical_payload"]["frequencies_hz"]))
+                artifact_path.write_bytes(canonical_bytes(artifact))
+                rebound = bound_descriptor(artifact_path)
+                meta["custody"]["byte_receipts"]["resonance_calibration_artifact"] = rebound
+                meta["frequency_binding"]["calibration_artifact_sha256"] = rebound["sha256"]
+                write_mutated_metadata(directory, bundle, role, meta)
         elif case == "negative_scale_transform":
             meta["payload"]["scale_per_code"][0] = "-0.00001"
             write_mutated_metadata(directory, bundle, role, meta)
@@ -2882,7 +3509,7 @@ def run_semantic_suite() -> list[dict[str, Any]]:
         "control_id": "",
         "evidence_class": "SYNTHETIC",
         "physical_claim_requested": False,
-        "source": {"f_carrier_hz": "32768", "f_carrier_u95_hz": "0.025", "f_witness_hz": "65536", "frequency_relation": "f_witness_hz == 2 * f_carrier_hz", "q_factor": format(semantic_q_factor, ".17g"), "stable_state_code": 8, "residual_drive_ratio": "0"},
+        "source": {"f_carrier_hz": "32800", "f_carrier_u95_hz": "0.025", "f_witness_hz": "65600", "frequency_relation": "f_witness_hz == 2 * f_carrier_hz", "q_factor": format(semantic_q_factor, ".17g"), "stable_state_code": 8, "residual_drive_ratio": "0"},
         "path": {"post_barrier_active_elements": 0, "termination_id": "50R0-TNPW0805"},
         "transients": {"settled_after_admit": True, "detector_memory_seconds": "0.000010", "bounce_end_sample": 1_100_000, "n_admit": 1_100_000, "timing_mismatch_samples": 0},
         "witness": {"sample_count": SAMPLES, "guard_samples": 10_000, "invalid_samples": 0, "ambiguous_samples": 0, "post_off_reentry_samples": 0},
@@ -2902,7 +3529,7 @@ def run_semantic_suite() -> list[dict[str, Any]]:
         "dummy_c0_feedthrough": (("controls", "dummy_c0_feedthrough_ratio"), "0.021"),
         "source_left_on": (("source", "stable_state_code"), 7),
         "off_resonance_response": (("controls", "off_resonance_response_ratio"), "0.021"),
-        "off_resonance_probe_binding": (("controls", "off_resonance_probe_hz"), "32769"),
+        "off_resonance_probe_binding": (("controls", "off_resonance_probe_hz"), "32801"),
         "detector_impulse_memory": (("transients", "detector_memory_seconds"), "0.000011"),
         "controller_buffer_replay": (("path", "post_barrier_active_elements"), 1),
         "analog_switch_charge_transient": (("transients", "settled_after_admit"), False),
@@ -2976,6 +3603,10 @@ def run_malformed_suite(directory: Path, identity_directory: Path) -> list[dict[
     return [{**execute_bundle_adversary(directory, case, identity_directory, expected), "class": "malformed_or_custody_negative"} for case, expected in MALFORMED_NEGATIVES.items()]
 
 
+def run_calibration_custody_suite(directory: Path, identity_directory: Path) -> list[dict[str, Any]]:
+    return [{**execute_bundle_adversary(directory, case, identity_directory, expected), "class": "calibration_custody_negative"} for case, expected in CALIBRATION_CUSTODY_NEGATIVES.items()]
+
+
 def fixture_document() -> dict[str, Any]:
     return {
         "schema": FIXTURE_SCHEMA,
@@ -2988,7 +3619,12 @@ def fixture_document() -> dict[str, Any]:
         "signal_path_scientific_negative": [{"case": case, "expected_rejection": code} for case, code in SIGNAL_PATH_NEGATIVES.items()],
         "signal_path_custody_negative": [{"case": case, "expected_rejection": code} for case, code in SIGNAL_PATH_CUSTODY_NEGATIVES.items()],
         "raw_adversary": [{"case": case, "expected_rejection": code} for case, code in RAW_ADVERSARIES.items()],
-        "scope_law": {"existing_fixture_count_preserved": 55, "semantic_controls": "summary schema and decision-law conformance only", "signal_path_controls": "strict circuit-envelope and ordering decision law", "raw_adversaries": "actual canonical raw-bundle analyzer execution", "topology_only_cases": "per-event assembly-bound topology receipts and raw replay adversaries"},
+        "calibration_realism_positive": list(CALIBRATION_REALISM_POSITIVES),
+        "calibration_realism_negative": [{"case": case, "expected_rejection": code} for case, code in CALIBRATION_REALISM_NEGATIVES.items()],
+        "calibration_custody_negative": [{"case": case, "expected_rejection": code} for case, code in CALIBRATION_CUSTODY_NEGATIVES.items()],
+        "calibration_payload": {"bytes": CALIBRATION_PAYLOAD_BYTES, "channel_order": list(CALIBRATION_CHANNELS), "dtype": "signed-int16", "endian": "little", "frequency_blocks": CALIBRATION_BLOCK_COUNT, "layout": "frequency-major__sample-major__ch0-then-ch1-interleaved", "sample_rate_hz": CALIBRATION_SAMPLE_RATE_HZ, "samples_per_channel_per_frequency": CALIBRATION_SAMPLES_PER_BLOCK},
+        "calibration_acceptance": {"f_carrier_hz": [F_CARRIER_MIN_HZ, F_CARRIER_MAX_HZ], "optimizer_f0_hz": [CALIBRATION_FIT_F0_MIN_HZ, CALIBRATION_FIT_F0_MAX_HZ], "q": [4000, 60000], "optimizer_q": [CALIBRATION_FIT_Q_MIN, CALIBRATION_FIT_Q_MAX], "boundary_fit_rejected": True, "f_carrier_u95_hz_max": F_CARRIER_U95_MAX_HZ, "q_u95_fraction_max": CALIBRATION_MAX_Q_U95_FRACTION, "reduced_chi_square_max": CALIBRATION_MAX_REDUCED_CHI_SQUARE, "fit_condition_number_max": CALIBRATION_MAX_FIT_CONDITION, "source_snr_min": CALIBRATION_MIN_SOURCE_SNR, "resonance_snr_min": CALIBRATION_MIN_RESONANCE_SNR, "resonance_to_background_min": CALIBRATION_MIN_RESONANCE_TO_BACKGROUND, "off_resonance_ratio_plus_u95_max": CALIBRATION_MAX_OFF_RESONANCE_RATIO, "solver_frequency_tolerance_hz": CALIBRATION_SOLVER_FREQUENCY_TOLERANCE_HZ, "solver_log_q_tolerance": CALIBRATION_SOLVER_LOG_Q_TOLERANCE, "solver_max_iterations": CALIBRATION_SOLVER_MAX_ITERATIONS},
+        "scope_law": {"existing_fixture_count_preserved": 61, "existing_raw_controls_preserved": 58, "semantic_controls": "summary schema and decision-law conformance only", "calibration_realism_controls": "raw two-channel int16 extraction and deterministic complex single-pole fit", "signal_path_controls": "strict circuit-envelope and ordering decision law", "raw_adversaries": "actual canonical raw-bundle analyzer execution", "topology_only_cases": "per-event assembly-bound topology receipts and raw replay adversaries"},
         "claim_law": {"synthetic_physical_claim": False, "maximum_token": "SYNTHETIC_ACTUAL_SOURCE_TO_CARRIER_SIGNAL_PATH_ISOLATED_DURING_THE_EVENT"},
     }
 
@@ -3003,6 +3639,7 @@ def schema_document() -> dict[str, Any]:
             "p0.environment-record.v1": {"format": "strict-csv", "header": ENVIRONMENT_HEADER, "cadence_samples": 100000, "monotonic_cadence_ns": 100000000, "timestamp_cadence_microseconds": 100000, "timestamp_year": "four-digit-year-not-hard-coded", "sensor_identity": "lowercase-8-hex-bound-to-metadata", "measurement_command_hex": "fd", "crc8": {"polynomial": "0x31", "initial": "0xff", "word_order": "big-endian"}, "canonical_index": "base-10-no-leading-zero", "canonical_decimal": "no-plus-no-leading-zero-no-negative-zero", "temperature_conversion": "-45+175*ticks/65535", "humidity_conversion": "-6+125*ticks/65535", "temperature_c": [20.0, 30.0], "humidity_rh": [20.0, 60.0]},
             "p0.synthetic-control-evidence.v1": {"exact_fields": ["control_id", "controls", "environment", "epsilon", "evidence_class", "path", "payload", "physical_claim_requested", "schema", "source", "transients", "witness"], "decision_independent_of_control_id": True, "scientific_negative_execution": "summary_schema_and_decision_law_only__not_raw_analyzer_evidence"},
             "p0.signal-path-control.v1": {"exact_fields": ["case_id", "custody", "evidence_class", "metrics", "order", "payload", "physical_claim_requested", "schema", "topology"], "decision_independent_of_case_id": True, "threshold_source": "P0_SIGNAL_PATH_CIRCUIT_MODEL.json", "physical_claim_authorized": False},
+            "p0.resonance-calibration.v2": {"canonical_payload": calibration_payload_spec(calibration_frequency_grid(32_800.0, math.pi * 32_800.0 * 0.1)), "fit_model": "H(f)=B+C/(1+i*2Q*(f-f0)/f0)", "deterministic_solver": "NUMPY_VARIABLE_PROJECTION_PATTERN_REFINEMENT_V1", "native_format_support": "SDK_EXPORT_IMPLEMENTED__PROPRIETARY_CONTAINER_MUST_BE_PRESERVED_SEPARATELY_AND_IS_NOT_PARSED", "physical_claim_authorized": False},
             RESULT_SCHEMA: {"physical_claim_authorized": False, "required_custody": ["analyzer_sha256", "assignment_commitment_sha256", "bundle_sha256", "byte_receipt_sha256", "calibration_sha256", "dependency_sha256", "fixture_sha256", "metadata_sha256", "payload_sha256", "schema_sha256", "thresholds_sha256"], "drive_phase_uncertainty": {"joint_design_columns": ["cos(f_ref)", "-sin(f_ref)", "cos(2*f_ref)", "-sin(2*f_ref)", "constant"], "hac_lag": 7, "derived_error": "wrap(phi_C1-0.5*phi_C2-delta_command)", "fit_gradient": "g_C1-0.5*g_C2", "cross_covariance_included": True, "expanded_law": "1.96*sqrt(u_error_fit^2+u_skew^2+u_drive_cal^2)"}},
         },
         "identities": ["p0.build-readiness-contract.v1", "p0.component-identity.v1", "p0.document-identity.v1", "p0.netlist.v1", "p0.channel-map.v1", "p0.source-off-topology.v1", "p0.signal-path-circuit-model.v1", "p0.signal-path-control.v1", "p0.instrument-configuration.v1", "p0.native-export-adapter-receipt.v1", SCHEMA, "p0.calibration-packet.v1", "p0.arm-assignment-commitment.v1", "p0.environment-record.v1", RESULT_SCHEMA, "p0.control-outcome.v1", "p0.adjudication.v1", "p0.build-readiness-manifest.v1", "p0.contact-attestation.v1"],
@@ -3013,15 +3650,17 @@ def schema_document() -> dict[str, Any]:
 def reference_document(identity_directory: Path) -> dict[str, Any]:
     semantic = run_semantic_suite()
     signal_path_controls = run_signal_path_control_suite(identity_directory)
+    calibration_realism = run_calibration_realism_suite()
     with tempfile.TemporaryDirectory(prefix="p0-scientific-") as temp:
         temp_path = Path(temp)
         bundle = materialize_synthetic(temp_path)
         raw_result = analyze_bundle(bundle, identity_directory)
         malformed = run_malformed_suite(temp_path, identity_directory)
+        calibration_custody = run_calibration_custody_suite(temp_path, identity_directory)
         raw_adversaries = run_raw_adversary_suite(temp_path, identity_directory)
-        dynamic_path = temp_path / "dynamic-32800"
+        dynamic_path = temp_path / "dynamic-32800-375"
         dynamic_path.mkdir()
-        dynamic_result = analyze_bundle(materialize_synthetic(dynamic_path, 32_800.0), identity_directory)
+        dynamic_result = analyze_bundle(materialize_synthetic(dynamic_path, 32_800.375), identity_directory)
     dependency = dependency_identity()
     return {
         "schema": "p0.analyzer-reference-results.v1",
@@ -3033,6 +3672,11 @@ def reference_document(identity_directory: Path) -> dict[str, Any]:
         "signal_path_positive_count": len(SIGNAL_PATH_POSITIVES),
         "signal_path_scientific_negative_count": len(SIGNAL_PATH_NEGATIVES),
         "signal_path_custody_negative_count": len(SIGNAL_PATH_CUSTODY_NEGATIVES),
+        "calibration_realism_positive_count": len(CALIBRATION_REALISM_POSITIVES),
+        "calibration_realism_negative_count": len(CALIBRATION_REALISM_NEGATIVES),
+        "calibration_custody_negative_count": len(CALIBRATION_CUSTODY_NEGATIVES),
+        "calibration_realism_outcomes": calibration_realism,
+        "calibration_custody_outcomes": calibration_custody,
         "signal_path_control_outcomes": signal_path_controls,
         "semantic_outcomes": semantic,
         "malformed_outcomes": malformed,
@@ -3058,6 +3702,7 @@ def build(output: Path) -> None:
 def self_test(full_raw: bool) -> dict[str, Any]:
     semantic = run_semantic_suite()
     signal_path_controls = run_signal_path_control_suite(Path(__file__).resolve().parent)
+    calibration_realism = run_calibration_realism_suite()
     raw_result: dict[str, Any] | None = None
     dynamic_result: dict[str, Any] | None = None
     raw_adversaries: list[dict[str, Any]] = []
@@ -3065,13 +3710,14 @@ def self_test(full_raw: bool) -> dict[str, Any]:
         temp_path = Path(temp)
         bundle = materialize_synthetic(temp_path)
         malformed = run_malformed_suite(temp_path, Path(__file__).resolve().parent)
+        calibration_custody = run_calibration_custody_suite(temp_path, Path(__file__).resolve().parent)
         if full_raw:
             raw_result = analyze_bundle(bundle, Path(__file__).resolve().parent)
             raw_adversaries = run_raw_adversary_suite(temp_path, Path(__file__).resolve().parent)
-            dynamic_path = temp_path / "dynamic-32800"
+            dynamic_path = temp_path / "dynamic-32800-375"
             dynamic_path.mkdir()
-            dynamic_result = analyze_bundle(materialize_synthetic(dynamic_path, 32_800.0), Path(__file__).resolve().parent)
-    return {"self_test": "PASS", "positive": len(POSITIVE_CASES), "scientific_negative": len(SCIENTIFIC_NEGATIVES), "malformed_or_custody_negative": len(MALFORMED_NEGATIVES), "signal_path_positive": len(SIGNAL_PATH_POSITIVES), "signal_path_scientific_negative": len(SIGNAL_PATH_NEGATIVES), "signal_path_custody_negative": len(SIGNAL_PATH_CUSTODY_NEGATIVES), "raw_adversary_count": len(raw_adversaries), "full_raw": full_raw, "raw_result": raw_result, "dynamic_frequency_result": dynamic_result, "raw_adversaries": raw_adversaries, "semantic_hash": sha256_bytes(canonical_bytes(semantic + signal_path_controls + malformed + raw_adversaries))}
+            dynamic_result = analyze_bundle(materialize_synthetic(dynamic_path, 32_800.375), Path(__file__).resolve().parent)
+    return {"self_test": "PASS", "positive": len(POSITIVE_CASES), "scientific_negative": len(SCIENTIFIC_NEGATIVES), "malformed_or_custody_negative": len(MALFORMED_NEGATIVES), "calibration_realism_positive": len(CALIBRATION_REALISM_POSITIVES), "calibration_realism_negative": len(CALIBRATION_REALISM_NEGATIVES), "calibration_custody_negative": len(CALIBRATION_CUSTODY_NEGATIVES), "calibration_realism_outcomes": calibration_realism, "calibration_custody_outcomes": calibration_custody, "signal_path_positive": len(SIGNAL_PATH_POSITIVES), "signal_path_scientific_negative": len(SIGNAL_PATH_NEGATIVES), "signal_path_custody_negative": len(SIGNAL_PATH_CUSTODY_NEGATIVES), "raw_adversary_count": len(raw_adversaries), "full_raw": full_raw, "raw_result": raw_result, "dynamic_frequency_result": dynamic_result, "raw_adversaries": raw_adversaries, "semantic_hash": sha256_bytes(canonical_bytes(semantic + signal_path_controls + calibration_realism + calibration_custody + malformed + raw_adversaries))}
 
 
 def verify(directory: Path, full_raw: bool) -> dict[str, Any]:
