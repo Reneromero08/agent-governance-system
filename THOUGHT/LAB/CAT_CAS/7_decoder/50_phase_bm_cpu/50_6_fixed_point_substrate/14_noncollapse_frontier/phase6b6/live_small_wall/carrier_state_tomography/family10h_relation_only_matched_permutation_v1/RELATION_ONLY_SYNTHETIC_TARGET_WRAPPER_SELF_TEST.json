@@ -26,7 +26,7 @@
         "passed": true
       },
       "canonical_manifest_digest": {
-        "detail": "88b7efc54008aa1fb8e706c85d5177663a91fb616659b5d74ac872d9cff6881c",
+        "detail": "04579711f43b245cf4684dec91c7ef49415984e7c220d70814d145ab76347967",
         "name": "canonical_manifest_digest",
         "passed": true
       },
@@ -110,8 +110,8 @@
       },
       "manifest_file_hash": {
         "detail": {
-          "env": "a24a5426f73f690c2bb4c20f0022a22f50883d8aa14a3ede1b3fbb473aef24d1",
-          "expected": "a24a5426f73f690c2bb4c20f0022a22f50883d8aa14a3ede1b3fbb473aef24d1",
+          "env": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
+          "expected": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
           "observed_backend": "fixture"
         },
         "name": "manifest_file_hash",
@@ -200,7 +200,7 @@
         "passed": false
       },
       "source_bundle_hash": {
-        "detail": "46cd68540f42b54885f595b75fe9ddf861bb902259151ca8e1c94a127ad6f482",
+        "detail": "6fd1b5b8046a958d11a90fd676dfcd283118d0ac4b638d392ab1ddd4a50f5e6d",
         "name": "source_bundle_hash",
         "passed": false
       },

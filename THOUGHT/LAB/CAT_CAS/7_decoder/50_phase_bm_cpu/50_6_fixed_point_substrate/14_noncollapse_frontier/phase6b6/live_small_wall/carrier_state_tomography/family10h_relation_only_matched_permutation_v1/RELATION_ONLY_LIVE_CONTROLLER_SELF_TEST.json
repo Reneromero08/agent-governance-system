@@ -23,7 +23,7 @@
         "passed": true
       },
       "canonical_manifest_digest": {
-        "detail": "88b7efc54008aa1fb8e706c85d5177663a91fb616659b5d74ac872d9cff6881c",
+        "detail": "04579711f43b245cf4684dec91c7ef49415984e7c220d70814d145ab76347967",
         "name": "canonical_manifest_digest",
         "passed": true
       },
@@ -57,11 +57,11 @@
       },
       "deployment_custody_binding": {
         "detail": {
-          "controller_deployment_root": "C:\\tmp\\relation_only_controller_f0ke6b36\\remote_relation_only_root",
+          "controller_deployment_root": "C:\\tmp\\relation_only_controller_7z6hxtrg\\remote_relation_only_root",
           "controller_verified_clean_worktree": true,
           "controller_verified_head_equals_origin": true,
           "fixture_backend_allowed": false,
-          "manifest_file_sha256": "a24a5426f73f690c2bb4c20f0022a22f50883d8aa14a3ede1b3fbb473aef24d1",
+          "manifest_file_sha256": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
           "one_attempt_ceiling": 1,
           "relation_manifest_freeze_commit": "ffffffffffffffffffffffffffffffffffffffff",
           "relation_source_authority_commit": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
@@ -123,8 +123,8 @@
       },
       "manifest_file_hash": {
         "detail": {
-          "env": "a24a5426f73f690c2bb4c20f0022a22f50883d8aa14a3ede1b3fbb473aef24d1",
-          "expected": "a24a5426f73f690c2bb4c20f0022a22f50883d8aa14a3ede1b3fbb473aef24d1",
+          "env": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
+          "expected": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
           "observed_backend": "physical_observed"
         },
         "name": "manifest_file_hash",
@@ -146,9 +146,9 @@
       },
       "output_root_absence": {
         "detail": {
-          "expected_parent": "C:\\tmp\\relation_only_controller_f0ke6b36\\remote_relation_only_root\\_relation_only_owned_outputs",
+          "expected_parent": "C:\\tmp\\relation_only_controller_7z6hxtrg\\remote_relation_only_root\\_relation_only_owned_outputs",
           "failures": [],
-          "output_root": "C:\\tmp\\relation_only_controller_f0ke6b36\\remote_relation_only_root\\_relation_only_owned_outputs\\attempt_1",
+          "output_root": "C:\\tmp\\relation_only_controller_7z6hxtrg\\remote_relation_only_root\\_relation_only_owned_outputs\\attempt_1",
           "passed": true
         },
         "name": "output_root_absence",
@@ -213,7 +213,7 @@
         "passed": false
       },
       "source_bundle_hash": {
-        "detail": "46cd68540f42b54885f595b75fe9ddf861bb902259151ca8e1c94a127ad6f482",
+        "detail": "6fd1b5b8046a958d11a90fd676dfcd283118d0ac4b638d392ab1ddd4a50f5e6d",
         "name": "source_bundle_hash",
         "passed": false
       },
@@ -277,7 +277,7 @@
       "source_file_hashes"
     ],
     "live_invocation_count": 0,
-    "output_root": "C:\\tmp\\relation_only_controller_f0ke6b36\\remote_relation_only_root\\_relation_only_owned_outputs\\attempt_1",
+    "output_root": "C:\\tmp\\relation_only_controller_7z6hxtrg\\remote_relation_only_root\\_relation_only_owned_outputs\\attempt_1",
     "passed": false,
     "physical_observation": {
       "attempt": {
@@ -298,14 +298,14 @@
       },
       "expected_artifacts": {
         "grammar_canonical_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
-        "manifest_canonical_sha256": "88b7efc54008aa1fb8e706c85d5177663a91fb616659b5d74ac872d9cff6881c",
-        "manifest_file_sha256": "a24a5426f73f690c2bb4c20f0022a22f50883d8aa14a3ede1b3fbb473aef24d1",
+        "manifest_canonical_sha256": "04579711f43b245cf4684dec91c7ef49415984e7c220d70814d145ab76347967",
+        "manifest_file_sha256": "673d6e82842edeb071863e926e1dac41623b29c61b59fd92dc7131ce3ed95912",
         "relation_freeze_authority_commit": "ffffffffffffffffffffffffffffffffffffffff",
         "relation_source_authority_commit": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
         "runtime_binary_sha256": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
         "schedule_canonical_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
         "schedule_tsv_sha256": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
-        "source_bundle_sha256": "46cd68540f42b54885f595b75fe9ddf861bb902259151ca8e1c94a127ad6f482"
+        "source_bundle_sha256": "6fd1b5b8046a958d11a90fd676dfcd283118d0ac4b638d392ab1ddd4a50f5e6d"
       },
       "frequency_policy": {
         "governor": "performance",
@@ -314,7 +314,7 @@
       },
       "output": {
         "parent_writable": true,
-        "root": "C:\\tmp\\relation_only_controller_f0ke6b36\\remote_relation_only_root\\_relation_only_owned_outputs\\attempt_1"
+        "root": "C:\\tmp\\relation_only_controller_7z6hxtrg\\remote_relation_only_root\\_relation_only_owned_outputs\\attempt_1"
       },
       "physical_geometry": {
         "claim_ceiling_lowered": true,
