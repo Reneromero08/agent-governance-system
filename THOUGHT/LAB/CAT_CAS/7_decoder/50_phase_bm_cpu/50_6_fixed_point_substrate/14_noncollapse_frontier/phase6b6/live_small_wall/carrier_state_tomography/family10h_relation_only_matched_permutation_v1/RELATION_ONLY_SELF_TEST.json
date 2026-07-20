@@ -132,8 +132,8 @@
   },
   "live_controller_summary": {
     "passed": false,
-    "physical_pmu_acquisition_count": null,
-    "target_contact_count": null
+    "physical_pmu_acquisition_count": 0,
+    "target_contact_count": 0
   },
   "marginal_equality_proof": {
     "checks": {
@@ -233,7 +233,7 @@
     },
     "passed": true,
     "proof_basis": "generated full permutation tables, generated origin-rotated A/B sequences, schedule rows, source hashes, and runtime build receipt",
-    "proof_sha256": "2df90f1b04df8f6c5d2351f34a62d169a609d42e64c553f55a4c2bb4fe40e693",
+    "proof_sha256": "8b9ba39a1537c16cf318e78e34bc0384dc421daebc07da4ac481d537a8cb7ce9",
     "relation_origin_counts_sha256": "6f57975f19183dc8a3f9bdadbd5076d529a6404812cb540ee73762016eb693ae",
     "relation_r0": {
       "actual_cache_index_status": "unresolved_until_authorized_target_preflight",
@@ -254,9 +254,9 @@
       "virtual_offset_histogram_sha256": "3bed852658892707a63af1833954e40112bf5aed7e438f889b05f27c7185139d"
     },
     "runtime_build_receipt_passed": true,
-    "runtime_build_receipt_sha256": "6b74873b405cf803dcdc1545093eb7a8ef5195e391cc4fe56b5c76cba5f5ee4d",
+    "runtime_build_receipt_sha256": "574859ba6fb39db076f2066f944ca9f5627e20fb9c498bfd0b167a684a02fcd5",
     "schema": "FAMILY10H_RELATION_MARGINAL_EQUALITY_PROOF_V2",
-    "source_hashes_sha256": "0a1d90d5977226c19ed0c4b6b9d5c7a89360274f936fe47837368b165755fd1c"
+    "source_hashes_sha256": "507e010e164fa7d89166612a372be63c7fc4ffe2dd36519a665c868aac5ca8b9"
   },
   "negative_regressions": {
     "passed": true,
@@ -558,7 +558,7 @@
     "tuple_count": 32256
   },
   "schema": "FAMILY10H_RELATION_ONLY_SELF_TEST_V2",
-  "self_test_sha256": "a0c6b9e45a689198ca682362260416d4da60b59ff61664ad022629dce9e1f50b",
+  "self_test_sha256": "1049f216d875981bfd56132a94df9ab7d250de42b2e259a2e11a32288ef2cb07",
   "target_self_test_summary": {
     "live_invocation_count": 0,
     "passed": false,

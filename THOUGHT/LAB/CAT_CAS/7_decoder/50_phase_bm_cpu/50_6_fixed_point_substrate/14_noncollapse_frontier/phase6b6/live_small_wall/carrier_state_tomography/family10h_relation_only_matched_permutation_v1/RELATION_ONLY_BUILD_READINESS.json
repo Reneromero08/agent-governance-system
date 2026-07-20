@@ -9,9 +9,9 @@
     "output_root_ownership_law_passed",
     "artifact_authority_binding_passed",
     "target_refuses_without_authority",
-    "zero_live_activity"
+    "offline_validate_passed"
   ],
-  "build_readiness_sha256": "6b8559c1ca83d24fcdec803fbd41256bf4ec63e471d4da0dcbd4ce8d28a2a20e",
+  "build_readiness_sha256": "b42ef49456bb7f22a4984fae50dd51344cbca4c5fd99b18a622a32616ff7e659",
   "checks": {
     "all_physical_controls_implemented": true,
     "artifact_authority_binding_passed": false,
@@ -27,7 +27,7 @@
     "implementation_derived_proofs_passed": true,
     "missing_authority_refusal_passed": true,
     "negative_regressions_passed": true,
-    "offline_validate_passed": true,
+    "offline_validate_passed": false,
     "output_root_ownership_law_passed": false,
     "physical_adjudicator_implemented": true,
     "physical_preflight_mock_suite_passed": false,
@@ -53,7 +53,7 @@
     "target_preflight_negative_fixtures_passed": false,
     "target_refuses_without_authority": false,
     "true_heldout_simulations_passed": true,
-    "zero_live_activity": false
+    "zero_live_activity": true
   },
   "live_authority": false,
   "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READINESS_BLOCKED",
