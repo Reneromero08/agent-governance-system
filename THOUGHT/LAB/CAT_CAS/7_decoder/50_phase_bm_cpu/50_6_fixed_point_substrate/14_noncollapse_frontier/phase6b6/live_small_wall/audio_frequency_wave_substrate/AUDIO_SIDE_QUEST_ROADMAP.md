@@ -1,8 +1,12 @@
 # CAT_CAS Audio-Frequency Wave Substrate Side Quest Roadmap
 
-**Status:** `ACTIVE_PARALLEL_LANE__P0_BUILD_READINESS_PACKET_FROZEN`<br>
-**Roadmap version:** `2.0`<br>
-**P0 authority:** `AUTHORIZE P0 BUILD-READINESS ONLY`<br>
+**Status:** `ACTIVE_PARALLEL_LANE__SOFTWARE_CATALYTIC_COMPUTATION_PRIMARY`<br>
+**Roadmap version:** `2.1`<br>
+**Overall lane priority:** `SOFTWARE_CATALYTIC_COMPUTATION_PRIMARY`<br>
+**Immediate objective:** `VERIFY_AND_EXTEND_SOFTWARE_CATALYTIC_COMPUTATION`<br>
+**Selected successor:** `R4S_INTEGRATED_SOFTWARE_CATALYTIC_COMPUTATION`<br>
+**P0 state:** `FROZEN_AND_PARKED`<br>
+**P0 reactivation:** `EXPLICIT_USER_REACTIVATION_REQUIRED`<br>
 **Branch:** `codex/audio-frequency-wave-substrate`<br>
 **Base main commit:** `32b5af119a03bc48bb00f279e6cc0014406147ad`<br>
 **Frozen offline foundation commit:** `f028dfd292d2dd0fd11380459417d5b60f936ee3`<br>
@@ -13,6 +17,9 @@
 **Recursive wave operator established:** `true`<br>
 **Software catalytic wave loop established:** `true`<br>
 **Recursive catalytic Ising emulator established:** `true`<br>
+**Integrated useful catalytic computation established:** `false`<br>
+**Result reuse at the next catalytic scale established:** `false`<br>
+**Computer acting as a catalytic substrate established:** `false`<br>
 **Physical carrier architecture frozen:** `true`<br>
 **P0 build-readiness packet frozen:** `true`<br>
 **Physical carrier characterized:** `false`<br>
@@ -22,6 +29,8 @@
 This file supersedes the uncommitted version-1.1 roadmap artifact. The stale
 `3329b2aca94491d7bc4dc17efa7ac14e671c1c8c` reference is not repository authority.
 The containing commit of this file is the first Git-bound roadmap identity.
+Unique software-first design constraints from that artifact are retained below without
+restoring its stale P0 priority, package status, or commit custody.
 
 ---
 
@@ -45,6 +54,28 @@ recursive phase object
 
 The first discrete application is an Ising projection. Ising is not the primitive
 architecture. A spin is the global `0/pi` orientation of a complete recursive phase beam.
+
+The current software evidence closes bounded reference mechanisms, not the overall
+mission. The honest state is:
+
+```text
+established:
+    A0 deterministic wave algebra
+    R0 recursive phase representation
+    R1 recursive wave evolution
+    R2S bounded ordinary-software catalytic reference
+    R3 bounded phase-native Ising emulator
+
+not established:
+    integrated useful catalytic computation
+    surviving-result reuse at the next catalytic scale
+    generalization beyond a frozen instance
+    the host computer acting as a catalytic substrate
+    physical catalytic computation
+```
+
+The software catalytic lane is primary. P0 is frozen, parked, optional, and not the
+selected successor.
 
 ---
 
@@ -118,6 +149,33 @@ catalytic recursion:
     becomes a phase-bearing input at the next scale
 ```
 
+### Preserved software-first design laws
+
+The superseded version-1.1 roadmap correctly identified constraints that remain useful
+for R4S:
+
+```text
+binary boundary states may be represented by antipodal 0/pi phase
+a general dense coupling matrix may not be disguised as ordinary linear convolution
+frequency or carrier identities are variables, not answer labels
+a simultaneous permutation of carrier identities, variables and coupling data
+must preserve the declared result
+```
+
+Every R4S result must account separately for work performed by:
+
+```text
+ordinary CPU control and bookkeeping
+the borrowed complex carrier or phase state
+coupling and interference
+nonlinear phase locking or bifurcation
+result extraction
+reverse traversal and restoration
+```
+
+Serialized WAV or trajectory recursion by itself is a noncatalytic replay baseline.
+The carrier must be causally necessary to the useful result.
+
 ---
 
 ## 4. Native Process Object
@@ -174,6 +232,13 @@ audio_recursive_catalytic_ising_v1/
     global Z2 Ising action on complete trees
     physical-translation contract
     exact-enumeration bounded oracle used only at adjudication
+
+audio_integrated_catalytic_computation_v1/  [R4S planned]
+    borrowed carrier causally performs a useful phase-native transformation
+    extracted result survives restoration
+    restored carrier is reused
+    surviving result enters the next catalytic cycle as phase-bearing state
+    no-smuggle, replay and noncatalytic controls
 ```
 
 Each package is separate. No successor may rewrite the frozen evidence of a predecessor.
@@ -292,6 +357,12 @@ under a frozen contract
 
 This is not physical R2 restoration.
 
+R2S is a bounded ordinary-software catalytic reference. It proves that the declared
+borrow, transform, latch, reverse and restoration mechanics close in the reference
+model. It does not prove that the host computer is itself operating as a catalytic
+substrate, that a useful problem has been integrated into the loop, or that a surviving
+result has been reused at the next catalytic scale.
+
 Current state: **established**.
 
 R2S receipt:
@@ -309,7 +380,7 @@ open material findings    0
 claim ceiling             SOFTWARE_CATALYTIC_WAVE_LOOP_REFERENCE_ONLY
 ```
 
-### R3: Recursive catalytic Ising emulator
+### R3: Bounded phase-native Ising emulator
 
 ```text
 AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED
@@ -319,11 +390,18 @@ Meaning:
 
 ```text
 global 0/pi orientation acts on complete recursive phase trees,
-the frozen coupling law evolves those trees without scalar feedback,
+the frozen continuous phase-difference law evolves global orientations without
+binary, energy or oracle feedback,
 and final boundary projections agree with independently generated bounded optima
 ```
 
 Current state: **established as a bounded offline numerical emulator**.
+
+R3 is not integrated catalytic computation. Its current causal recurrence is carried by
+the global phase orientations; preserving recursive tree bytes does not make the internal
+tree geometry causal to the Ising trajectory. R3 has no borrow-to-restoration lifecycle,
+establishes no computational advantage, and does not show the host computer acting as a
+catalytic substrate.
 
 R3 receipt:
 
@@ -341,6 +419,50 @@ qualification             106 PASS / 0 FAIL
 independent reviews       4 PASS / 0 FAIL
 open material findings    0
 claim ceiling             SOFTWARE_RECURSIVE_PHASE_ISING_EMULATOR_ONLY
+```
+
+### R4S: Integrated software catalytic computation
+
+```text
+R4S_INTEGRATED_SOFTWARE_CATALYTIC_COMPUTATION
+```
+
+Required lifecycle:
+
+```text
+borrow carrier
+-> perform a useful phase-native transformation in the borrowed state
+-> extract a useful invariant or result
+-> reverse the transformation
+-> restore the carrier to its frozen equivalence class
+-> reuse the restored carrier in a fresh cycle
+-> inject the surviving result as phase-bearing input to the next catalytic cycle
+```
+
+R4S must defeat, at minimum:
+
+```text
+ordinary hidden-solver or answer-cache smuggling
+waveform-decorative scalar computation
+finite trajectory and compressed recurrence replay
+carrier-identity and phase-label leakage
+no-transform, no-coupling and no-restoration controls
+wrong, omitted and reordered inverse controls
+replacement of the claimed causal phase geometry
+result reuse that is only file or interface-buffer persistence
+frozen-instance success without held-out or permutation evidence
+```
+
+The result may remain an ordinary-software reference, but the borrowed wave or phase
+state must be causally necessary to the useful computation. A CPU-computed answer later
+encoded into a waveform does not qualify.
+
+Current state: **not established**.
+
+Next overall objective:
+
+```text
+VERIFY_AND_EXTEND_SOFTWARE_CATALYTIC_COMPUTATION
 ```
 
 ### P1+: Physical carrier ladder
@@ -367,6 +489,8 @@ natural relaxation
 serialized trajectory replay
 compressed recurrence replay
 manifest and filename leakage scan
+carrier/variable/coupling permutation with invariant result
+held-out instance or relation tests beyond one frozen answer
 ```
 
 A decisive hierarchy test should compare states with matched duration, energy,
@@ -375,7 +499,7 @@ parent-child phase geometry.
 
 ---
 
-## 9. Ising Boundary
+## 9. Ising Boundary and R4S Integration Requirement
 
 The first Ising implementation must preserve:
 
@@ -399,9 +523,16 @@ resynthesize a new flat sine bank
 
 That construction is allowed only as a declared ordinary baseline.
 
+R3 remains the bounded phase-native emulator baseline. R4S must make the claimed carrier
+or wave relation causal to the useful result and must close restoration and reuse after
+that result is extracted.
+
 ---
 
-## 10. Physical Successor
+## 10. Parked Physical Successor
+
+Physical P0 is frozen and parked. It is not the selected successor, not the next overall
+project boundary, and may resume only through explicit user reactivation.
 
 The physical target requires a carrier whose dynamics perform both coupling and
 phase-bistable locking. Candidate order:
@@ -422,9 +553,12 @@ transducer operation, or physical restoration is authorized by this roadmap.
 
 ---
 
-## 11. Selected P0 architecture boundary
+## 11. Parked P0 Architecture Boundary
 
-The explicitly selected successor is:
+The completed non-executing P0 packet is preserved as an optional future physical-carrier
+experiment. It is not the selected successor and is not the next overall boundary.
+
+The parked packet identity is:
 
 ```text
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_AND_MEASUREMENT_PACKET
@@ -467,13 +601,14 @@ claim ceiling:
 It does not establish physical resonance, post-source persistence, a pi relation,
 physical computing, restoration, silicon operation, bit replacement, or a Wall crossing.
 
-The still-unreached next authority boundary is:
+The parked P0-specific authority boundary remains:
 
 ```text
 USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD
 ```
 
-The lane stops at that boundary. The repair establishes a prospective per-event
+If P0 is explicitly reactivated, the physical lane stops at that boundary. The preserved
+repair establishes a prospective per-event
 complete-path witness only. Each record is bound to its exact assembly manifest,
 role, carrier population, native payload, chronology, querybacks and unique
 pre-acquisition topology scan and nonlinear-control trace; all timestamps use
@@ -487,17 +622,26 @@ physical observation. No predecessor package, `main`, Family 10h evidence,
 ## 12. Current Decision
 
 ```text
+SOFTWARE_CATALYTIC_COMPUTATION_PRIMARY
+VERIFY_AND_EXTEND_SOFTWARE_CATALYTIC_COMPUTATION
 AUDIO_RECURSIVE_CATALYTIC_ARCHITECTURE_CORRECTED
 AUDIO_RECURSIVE_PHASE_FOUNDATION_STARTED
 AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED
 AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED
 AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED
 AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED
+R4S_INTEGRATED_SOFTWARE_CATALYTIC_COMPUTATION_NOT_ESTABLISHED
+RESULT_REUSE_AT_NEXT_CATALYTIC_SCALE_NOT_ESTABLISHED
+COMPUTER_AS_CATALYTIC_SUBSTRATE_NOT_ESTABLISHED
 PHYSICAL_AUDIO_COMPUTING_NOT_ESTABLISHED
 SMALL_WALL_CROSSED_NOT_PROMOTED
+P0_FROZEN_AND_PARKED
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_AND_MEASUREMENT_PACKET
 PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
 P0_SIGNAL_PATH_WITNESS_REPAIR_ESTABLISHED
 P0_BUILD_READINESS_PACKET_FROZEN
 USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD
 ```
+
+`USER_AUTHORITY_FOR_P0_PROCUREMENT_OR_UNPOWERED_BUILD` is retained only as the parked
+P0-specific boundary. It is not the next overall audio-lane objective.
