@@ -1,0 +1,445 @@
+{
+  "evidence_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
+  "report": {
+    "interaction_model_compared": "matched factorial J_AB and ordered J_order dirty-probe contrasts",
+    "ordinary_mechanism_explanation_remains_open": true,
+    "retrospective_nonseparability_candidate_passed": false,
+    "separable_null": "response = f(component_A) + g(component_B) + h(public nuisance factors)",
+    "separable_vs_interaction_model_comparison": {
+      "holdouts": {
+        "delay_label": {
+          "all_factor_levels_absent_from_training_for_own_holdout": true,
+          "levels": [
+            {
+              "held_out_level": "0ns",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.0427342503644964,
+                "rmse": 64.8213104229292
+              },
+              "rmse_improvement_from_interaction": 0.4315438060764336,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.043018750954376406,
+                "rmse": 65.25285422900564
+              },
+              "test_count": 896,
+              "training_count": 3584
+            },
+            {
+              "held_out_level": "100ms",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04640259226623238,
+                "rmse": 69.97546401798343
+              },
+              "rmse_improvement_from_interaction": 0.32813929424240484,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04662019016416624,
+                "rmse": 70.30360331222583
+              },
+              "test_count": 896,
+              "training_count": 3584
+            },
+            {
+              "held_out_level": "100us",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.0413487359188304,
+                "rmse": 62.73106384424105
+              },
+              "rmse_improvement_from_interaction": 0.23176526529564256,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04150150235004639,
+                "rmse": 62.96282910953669
+              },
+              "test_count": 896,
+              "training_count": 3584
+            },
+            {
+              "held_out_level": "10ms",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04323561203277042,
+                "rmse": 65.23042439182532
+              },
+              "rmse_improvement_from_interaction": 0.2343982878120272,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.043390974404355055,
+                "rmse": 65.46482267963735
+              },
+              "test_count": 896,
+              "training_count": 3584
+            },
+            {
+              "held_out_level": "1ms",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04170965775041041,
+                "rmse": 63.1482263926439
+              },
+              "rmse_improvement_from_interaction": 0.30520435921440736,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04191124645834361,
+                "rmse": 63.453430751858306
+              },
+              "test_count": 896,
+              "training_count": 3584
+            }
+          ],
+          "mean_rmse_improvement_from_interaction": 0.3062102025281831
+        },
+        "mapping": {
+          "all_factor_levels_absent_from_training_for_own_holdout": true,
+          "levels": [
+            {
+              "held_out_level": "map0",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.0501761787113643,
+                "rmse": 75.94243330017669
+              },
+              "rmse_improvement_from_interaction": 0.23587908951975578,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.050332027172306226,
+                "rmse": 76.17831238969644
+              },
+              "test_count": 2240,
+              "training_count": 2240
+            },
+            {
+              "held_out_level": "map1",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04999817391991894,
+                "rmse": 75.61602842163578
+              },
+              "rmse_improvement_from_interaction": 0.49683317141965233,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.05032668563671147,
+                "rmse": 76.11286159305543
+              },
+              "test_count": 2240,
+              "training_count": 2240
+            }
+          ],
+          "mean_rmse_improvement_from_interaction": 0.36635613046970406
+        },
+        "ordered_query": {
+          "all_factor_levels_absent_from_training_for_own_holdout": true,
+          "levels": [
+            {
+              "held_out_level": "query_A_then_B",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04271627075921421,
+                "rmse": 64.6415859559928
+              },
+              "rmse_improvement_from_interaction": 0.21945330875981028,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.042861289276587396,
+                "rmse": 64.8610392647526
+              },
+              "test_count": 2240,
+              "training_count": 2240
+            },
+            {
+              "held_out_level": "query_B_then_A",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04363052680106714,
+                "rmse": 65.99616864604094
+              },
+              "rmse_improvement_from_interaction": 0.07520963365153932,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04368024841376152,
+                "rmse": 66.07137827969248
+              },
+              "test_count": 2240,
+              "training_count": 2240
+            }
+          ],
+          "mean_rmse_improvement_from_interaction": 0.1473314712056748
+        },
+        "q": {
+          "all_factor_levels_absent_from_training_for_own_holdout": true,
+          "levels": [
+            {
+              "held_out_level": -1024,
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04467721468507232,
+                "rmse": 67.63392614938485
+              },
+              "rmse_improvement_from_interaction": -0.12361164285319148,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04459556004486811,
+                "rmse": 67.51031450653166
+              },
+              "test_count": 640,
+              "training_count": 3840
+            },
+            {
+              "held_out_level": -1536,
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04385075811002444,
+                "rmse": 73.92312918196886
+              },
+              "rmse_improvement_from_interaction": -0.005753158338123399,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04384734537090685,
+                "rmse": 73.91737602363074
+              },
+              "test_count": 640,
+              "training_count": 3840
+            },
+            {
+              "held_out_level": -512,
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04168341665489776,
+                "rmse": 58.09013985202449
+              },
+              "rmse_improvement_from_interaction": 0.3779876868517533,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04195464716461246,
+                "rmse": 58.468127538876246
+              },
+              "test_count": 640,
+              "training_count": 3840
+            },
+            {
+              "held_out_level": 0,
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.0438065695852332,
+                "rmse": 59.393537704343814
+              },
+              "rmse_improvement_from_interaction": 0.3319675601878984,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04405141709874219,
+                "rmse": 59.72550526453171
+              },
+              "test_count": 640,
+              "training_count": 3840
+            },
+            {
+              "held_out_level": 1024,
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04234365728063074,
+                "rmse": 64.16109568412122
+              },
+              "rmse_improvement_from_interaction": 0.05560763025520998,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.042380356006121764,
+                "rmse": 64.21670331437643
+              },
+              "test_count": 640,
+              "training_count": 3840
+            },
+            {
+              "held_out_level": 1536,
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04037615141502479,
+                "rmse": 68.35902046415332
+              },
+              "rmse_improvement_from_interaction": 0.6542512942393728,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04076258394639111,
+                "rmse": 69.01327175839269
+              },
+              "test_count": 640,
+              "training_count": 3840
+            },
+            {
+              "held_out_level": 512,
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04530049030259236,
+                "rmse": 63.20334917757209
+              },
+              "rmse_improvement_from_interaction": 0.6883473490052836,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04579385770818381,
+                "rmse": 63.89169652657738
+              },
+              "test_count": 640,
+              "training_count": 3840
+            }
+          ],
+          "mean_rmse_improvement_from_interaction": 0.28268524562117187
+        },
+        "replicate": {
+          "all_factor_levels_absent_from_training_for_own_holdout": true,
+          "levels": [
+            {
+              "held_out_level": 0,
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04234161148447854,
+                "rmse": 64.10606434644723
+              },
+              "rmse_improvement_from_interaction": 0.31812979251340323,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.042551734008978624,
+                "rmse": 64.42419413896063
+              },
+              "test_count": 2240,
+              "training_count": 2240
+            },
+            {
+              "held_out_level": 1,
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04408123331846535,
+                "rmse": 66.64509556150911
+              },
+              "rmse_improvement_from_interaction": 0.24268889719628817,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04424175564664233,
+                "rmse": 66.8877844587054
+              },
+              "test_count": 2240,
+              "training_count": 2240
+            }
+          ],
+          "mean_rmse_improvement_from_interaction": 0.2804093448548457
+        },
+        "session": {
+          "all_factor_levels_absent_from_training_for_own_holdout": true,
+          "levels": [
+            {
+              "held_out_level": "session_0",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.04283348158158691,
+                "rmse": 64.79439519233459
+              },
+              "rmse_improvement_from_interaction": 0.31032064842612783,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.04303862453784556,
+                "rmse": 65.10471584076072
+              },
+              "test_count": 2240,
+              "training_count": 2240
+            },
+            {
+              "held_out_level": "session_1",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.043483239337264105,
+                "rmse": 65.79832444414987
+              },
+              "rmse_improvement_from_interaction": 0.26964748918612713,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.043661437587873435,
+                "rmse": 66.067971933336
+              },
+              "test_count": 2240,
+              "training_count": 2240
+            }
+          ],
+          "mean_rmse_improvement_from_interaction": 0.2899840688061275
+        },
+        "source_order": {
+          "all_factor_levels_absent_from_training_for_own_holdout": true,
+          "levels": [
+            {
+              "held_out_level": "A_then_B",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.0592098083530199,
+                "rmse": 89.61079340387836
+              },
+              "rmse_improvement_from_interaction": 0.27455939319267486,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.059391221868456495,
+                "rmse": 89.88535279707104
+              },
+              "test_count": 2240,
+              "training_count": 2240
+            },
+            {
+              "held_out_level": "B_then_A",
+              "interaction": {
+                "relative_rmse_vs_test_std": 0.06019903161529654,
+                "rmse": 91.04762074918723
+              },
+              "rmse_improvement_from_interaction": -0.044311764569883394,
+              "separable": {
+                "relative_rmse_vs_test_std": 0.06016973348214026,
+                "rmse": 91.00330898461735
+              },
+              "test_count": 2240,
+              "training_count": 2240
+            }
+          ],
+          "mean_rmse_improvement_from_interaction": 0.11512381431139573
+        }
+      },
+      "interaction_generalizes_consistently": false,
+      "interpretation": "interaction terms do not supply a stable claim law; any improvement remains ordinary matched-factorial route/nonlinear residue until prospectively isolated",
+      "mean_rmse_improvement_from_interaction": 0.26855715414930065,
+      "rows": 4480
+    },
+    "targets": {
+      "J_order": {
+        "best_separable_scalar_adversary_failed": true,
+        "correlation_with_q": 0.03900157952408043,
+        "heldout_adversary_summary": {
+          "adversary_predicts_candidate_on_heldout_data": false,
+          "mean_relative_rmse_across_all_holdouts": 1.6438751801518527,
+          "worst_relative_rmse_across_all_holdouts": 4.578728345357419
+        },
+        "heldout_generalization_passed": false,
+        "matched_factorial_controls_present": true,
+        "query_label_or_execution_order_leakage_excluded": false,
+        "retrospective_candidate_passed": false,
+        "sign_or_transformation_law_preexisting_in_query_grammar": true,
+        "stable_nonzero_interaction_residual": false,
+        "summary": {
+          "count": 560,
+          "max": 509.0,
+          "mean": -2.8089285714285714,
+          "mean_abs": 106.11964285714286,
+          "median": -5.5,
+          "min": -615.0,
+          "std": 142.46217891173998
+        },
+        "survives_required_strata_without_aggregate_rescue": false
+      },
+      "J_query_A_then_B": {
+        "best_separable_scalar_adversary_failed": true,
+        "correlation_with_q": -0.07591302174606653,
+        "heldout_adversary_summary": {
+          "adversary_predicts_candidate_on_heldout_data": false,
+          "mean_relative_rmse_across_all_holdouts": 2.3201118272749826,
+          "worst_relative_rmse_across_all_holdouts": 5.591127619184779
+        },
+        "heldout_generalization_passed": false,
+        "matched_factorial_controls_present": true,
+        "query_label_or_execution_order_leakage_excluded": false,
+        "retrospective_candidate_passed": false,
+        "sign_or_transformation_law_preexisting_in_query_grammar": false,
+        "stable_nonzero_interaction_residual": false,
+        "summary": {
+          "count": 560,
+          "max": 292.0,
+          "mean": -25.098214285714285,
+          "mean_abs": 76.56607142857143,
+          "median": -29.0,
+          "min": -386.0,
+          "std": 98.0445379681227
+        },
+        "survives_required_strata_without_aggregate_rescue": false
+      },
+      "J_query_B_then_A": {
+        "best_separable_scalar_adversary_failed": true,
+        "correlation_with_q": -0.12866035487776364,
+        "heldout_adversary_summary": {
+          "adversary_predicts_candidate_on_heldout_data": false,
+          "mean_relative_rmse_across_all_holdouts": 1.6627997398458298,
+          "worst_relative_rmse_across_all_holdouts": 3.469507382420649
+        },
+        "heldout_generalization_passed": false,
+        "matched_factorial_controls_present": true,
+        "query_label_or_execution_order_leakage_excluded": false,
+        "retrospective_candidate_passed": false,
+        "sign_or_transformation_law_preexisting_in_query_grammar": false,
+        "stable_nonzero_interaction_residual": false,
+        "summary": {
+          "count": 560,
+          "max": 368.0,
+          "mean": -22.289285714285715,
+          "mean_abs": 77.96785714285714,
+          "median": -24.0,
+          "min": -425.0,
+          "std": 101.03428639853516
+        },
+        "survives_required_strata_without_aggregate_rescue": false
+      }
+    }
+  },
+  "schema": "FAMILY10H_OPERATOR_DIMENSION_FACTORIAL_NONSEPARABILITY_REPORT_V1"
+}

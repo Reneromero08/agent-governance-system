@@ -2710,6 +2710,18 @@ the absolute floor. The public transfer is therefore visible but not a calibrate
 transducer, and it does not authorize an OrbitState coupling candidate or
 `SMALL_WALL_CROSSED`.
 
+The Family 10h v1.1 paired dirty-probe lane now has a sealed prospective scalar
+q-readout confirmation:
+`FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE` with claim
+`PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED`. This establishes a scalar
+carrier baseline only. The offline operator-dimension audit of the retained attempt-1
+archive reproduced the scalar baseline but classified
+`FAMILY10H_SECOND_OPERATOR_DIMENSION_UNRESOLVED_RETROSPECTIVE`: no ordered-query or
+factorial coordinate survived the full scalar-replay, held-out, matched-null,
+nonseparability, and no-smuggle candidate law. Full tomography, scalar-replay
+exclusion, nonseparability, physical mechanism, R2 restoration, and
+`SMALL_WALL_CROSSED` remain unresolved/not established.
+
 ## State update rule
 
 Replace or compress this file when the active boundary changes. Do not append an
