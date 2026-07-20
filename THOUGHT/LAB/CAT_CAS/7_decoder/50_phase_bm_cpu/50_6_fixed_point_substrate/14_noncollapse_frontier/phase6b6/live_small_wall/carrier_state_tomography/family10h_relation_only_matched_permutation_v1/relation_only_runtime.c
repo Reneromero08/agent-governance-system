@@ -24,6 +24,12 @@
 #define RELATION_ONLY_LINE_BUFFER 16384
 #define RELATION_ONLY_CANONICAL_SCHEDULE_SHA256 "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471"
 
+#if defined(__GNUC__)
+#define RELATION_ONLY_NOINLINE __attribute__((noinline))
+#else
+#define RELATION_ONLY_NOINLINE
+#endif
+
 typedef struct {
     uint64_t value;
     uint64_t id;
@@ -87,6 +93,26 @@ typedef struct {
 } relation_only_schedule_row;
 
 static volatile uint64_t relation_only_sink = 0u;
+static uint32_t relation_only_r0_table[FAMILY10H_RELATION_ONLY_LINE_COUNT];
+static uint32_t relation_only_r1_table[FAMILY10H_RELATION_ONLY_LINE_COUNT];
+static int relation_only_tables_initialized = 0;
+
+static void relation_only_init_tables(void) {
+    uint32_t i = 0u;
+    if (relation_only_tables_initialized) {
+        return;
+    }
+    for (i = 0u; i < FAMILY10H_RELATION_ONLY_LINE_COUNT; ++i) {
+        relation_only_r0_table[i] = (i + 1u) % FAMILY10H_RELATION_ONLY_LINE_COUNT;
+        relation_only_r1_table[i] = (i + FAMILY10H_RELATION_ONLY_LINE_COUNT - 1u) % FAMILY10H_RELATION_ONLY_LINE_COUNT;
+    }
+    relation_only_tables_initialized = 1;
+}
+
+static const uint32_t *RELATION_ONLY_NOINLINE relation_only_table_for(relation_only_relation_id relation) {
+    relation_only_init_tables();
+    return relation == RELATION_ONLY_R0 ? relation_only_r0_table : relation_only_r1_table;
+}
 
 static long perf_event_open_call(struct perf_event_attr *attr, pid_t pid, int cpu, int group_fd, unsigned long flags) {
     return syscall(__NR_perf_event_open, attr, pid, cpu, group_fd, flags);
@@ -203,10 +229,7 @@ static int sleep_full_ns(uint64_t delay_ns) {
 
 uint32_t relation_only_map_index(relation_only_relation_id relation, uint32_t logical_a_index) {
     uint32_t index = logical_a_index % FAMILY10H_RELATION_ONLY_LINE_COUNT;
-    if (relation == RELATION_ONLY_R0) {
-        return (index + 1u) % FAMILY10H_RELATION_ONLY_LINE_COUNT;
-    }
-    return (index + FAMILY10H_RELATION_ONLY_LINE_COUNT - 1u) % FAMILY10H_RELATION_ONLY_LINE_COUNT;
+    return relation_only_table_for(relation)[index];
 }
 
 uint32_t relation_only_origin_index(uint32_t cyclic_origin, uint32_t step) {
@@ -276,8 +299,62 @@ static uint32_t control_b_index(relation_only_control_id control, uint32_t a_ind
     return relation_only_map_index(RELATION_ONLY_R0, a_index);
 }
 
-int relation_only_prepare(relation_only_preparation prep, relation_only_carrier_state *state) {
+static int RELATION_ONLY_NOINLINE relation_only_prepare_primary(
+    relation_only_preparation prep,
+    relation_only_carrier_state *state,
+    const uint32_t *relation_table
+) {
     uint32_t step = 0u;
+    for (step = 0u; step < FAMILY10H_RELATION_ONLY_TOTAL_WORK; ++step) {
+        uint32_t a_index = relation_only_origin_index(prep.cyclic_origin, step);
+        uint32_t b_index = relation_table[a_index];
+        prepare_pair_step(state, prep, step, a_index, b_index);
+    }
+    return 1;
+}
+
+static int RELATION_ONLY_NOINLINE relation_only_prepare_independent(
+    relation_only_preparation prep,
+    relation_only_carrier_state *state
+) {
+    uint32_t step = 0u;
+    for (step = 0u; step < FAMILY10H_RELATION_ONLY_TOTAL_WORK; ++step) {
+        uint32_t a_index = relation_only_origin_index(prep.cyclic_origin, step);
+        uint32_t independent_b = relation_only_origin_index(prep.cyclic_origin, step);
+        if (prep.source_order == RELATION_ONLY_ORDER_AB) {
+            if (step < prep.bank_a_work) {
+                write_line(state->lane_a, a_index, 0xA0u, step);
+            }
+            if (step < prep.bank_b_work) {
+                write_line(state->lane_b, independent_b, 0xB0u, step);
+            }
+        } else {
+            if (step < prep.bank_b_work) {
+                write_line(state->lane_b, independent_b, 0xB0u, step);
+            }
+            if (step < prep.bank_a_work) {
+                write_line(state->lane_a, a_index, 0xA0u, step);
+            }
+        }
+    }
+    return 1;
+}
+
+static int RELATION_ONLY_NOINLINE relation_only_prepare_control(
+    relation_only_preparation prep,
+    relation_only_carrier_state *state
+) {
+    uint32_t step = 0u;
+    for (step = 0u; step < FAMILY10H_RELATION_ONLY_TOTAL_WORK; ++step) {
+        uint32_t a_index = relation_only_origin_index(prep.cyclic_origin, step);
+        uint32_t b_index = control_b_index(prep.control, a_index, step);
+        prepare_pair_step(state, prep, step, a_index, b_index);
+    }
+    return 1;
+}
+
+int relation_only_prepare(relation_only_preparation prep, relation_only_carrier_state *state) {
+    const uint32_t *relation_table = NULL;
     if (state == NULL) {
         return 0;
     }
@@ -287,34 +364,14 @@ int relation_only_prepare(relation_only_preparation prep, relation_only_carrier_
     if (prep.cyclic_origin >= FAMILY10H_RELATION_ONLY_LINE_COUNT) {
         return 0;
     }
-    for (step = 0u; step < FAMILY10H_RELATION_ONLY_TOTAL_WORK; ++step) {
-        uint32_t a_index = relation_only_origin_index(prep.cyclic_origin, step);
-        uint32_t b_index = relation_only_map_index(prep.relation, a_index);
-        if (prep.control != RELATION_ONLY_CONTROL_NONE) {
-            b_index = control_b_index(prep.control, a_index, step);
-        }
-        if (prep.control == RELATION_ONLY_CONTROL_INDEPENDENT_MARGINAL_REPLAY) {
-            uint32_t independent_b = relation_only_origin_index(prep.cyclic_origin, step);
-            if (prep.source_order == RELATION_ONLY_ORDER_AB) {
-                if (step < prep.bank_a_work) {
-                    write_line(state->lane_a, a_index, 0xA0u, step);
-                }
-                if (step < prep.bank_b_work) {
-                    write_line(state->lane_b, independent_b, 0xB0u, step);
-                }
-            } else {
-                if (step < prep.bank_b_work) {
-                    write_line(state->lane_b, independent_b, 0xB0u, step);
-                }
-                if (step < prep.bank_a_work) {
-                    write_line(state->lane_a, a_index, 0xA0u, step);
-                }
-            }
-        } else {
-            prepare_pair_step(state, prep, step, a_index, b_index);
-        }
+    if (prep.control == RELATION_ONLY_CONTROL_NONE) {
+        relation_table = relation_only_table_for(prep.relation);
+        return relation_only_prepare_primary(prep, state, relation_table);
     }
-    return 1;
+    if (prep.control == RELATION_ONLY_CONTROL_INDEPENDENT_MARGINAL_REPLAY) {
+        return relation_only_prepare_independent(prep, state);
+    }
+    return relation_only_prepare_control(prep, state);
 }
 
 static uint64_t mix(uint64_t acc, uint8_t value, uint32_t line_index, uint32_t tag) {
@@ -349,23 +406,60 @@ static uint64_t query_line_pair(const relation_only_carrier_state *state, uint32
     return acc;
 }
 
-uint64_t relation_only_query(relation_only_query_spec query, const relation_only_carrier_state *state) {
+static uint64_t RELATION_ONLY_NOINLINE relation_only_query_primary(
+    relation_only_query_spec query,
+    const relation_only_carrier_state *state,
+    const uint32_t *relation_table
+) {
     uint64_t acc = UINT64_C(1469598103934665603);
     uint32_t step = 0u;
-    if (state == NULL || query.cyclic_origin >= FAMILY10H_RELATION_ONLY_LINE_COUNT) {
-        return 0u;
-    }
     for (step = 0u; step < FAMILY10H_RELATION_ONLY_TOTAL_WORK; ++step) {
         uint32_t a_index = relation_only_origin_index(query.cyclic_origin, step);
-        uint32_t b_index = relation_only_map_index(query.relation, a_index);
-        if (query.control != RELATION_ONLY_CONTROL_NONE) {
-            b_index = control_b_index(query.control, a_index, step);
-        }
+        uint32_t b_index = relation_table[a_index];
         acc ^= query_line_pair(state, a_index, b_index, query.query_order);
         acc *= UINT64_C(1099511628211);
     }
     relation_only_sink ^= acc;
     return acc;
+}
+
+static uint64_t RELATION_ONLY_NOINLINE relation_only_query_control(
+    relation_only_query_spec query,
+    const relation_only_carrier_state *state
+) {
+    uint64_t acc = UINT64_C(1469598103934665603);
+    uint32_t step = 0u;
+    for (step = 0u; step < FAMILY10H_RELATION_ONLY_TOTAL_WORK; ++step) {
+        uint32_t a_index = relation_only_origin_index(query.cyclic_origin, step);
+        uint32_t b_index = control_b_index(query.control, a_index, step);
+        acc ^= query_line_pair(state, a_index, b_index, query.query_order);
+        acc *= UINT64_C(1099511628211);
+    }
+    relation_only_sink ^= acc;
+    return acc;
+}
+
+uint64_t relation_only_query_with_table(
+    relation_only_query_spec query,
+    const relation_only_carrier_state *state,
+    const uint32_t *relation_table
+) {
+    if (state == NULL || relation_table == NULL || query.cyclic_origin >= FAMILY10H_RELATION_ONLY_LINE_COUNT) {
+        return 0u;
+    }
+    if (query.control == RELATION_ONLY_CONTROL_NONE) {
+        return relation_only_query_primary(query, state, relation_table);
+    }
+    return relation_only_query_control(query, state);
+}
+
+uint64_t relation_only_query(relation_only_query_spec query, const relation_only_carrier_state *state) {
+    const uint32_t *relation_table = NULL;
+    if (state == NULL || query.cyclic_origin >= FAMILY10H_RELATION_ONLY_LINE_COUNT) {
+        return 0u;
+    }
+    relation_table = relation_only_table_for(query.relation);
+    return relation_only_query_with_table(query, state, relation_table);
 }
 
 int relation_only_runtime_live_authority_present(void) {
@@ -634,7 +728,11 @@ static relation_only_preparation preparation_from_row(const relation_only_schedu
     return prep;
 }
 
-static uint64_t execute_query_for_row(const relation_only_schedule_row *row, const relation_only_carrier_state *state) {
+static uint64_t RELATION_ONLY_NOINLINE execute_query_for_row(
+    const relation_only_schedule_row *row,
+    const relation_only_carrier_state *state,
+    const uint32_t *query_relation_table
+) {
     if (strcmp(row->query, "query_A") == 0) {
         return query_scalar_lane(state->lane_a, 0xA0u, row->cyclic_origin);
     }
@@ -647,7 +745,7 @@ static uint64_t execute_query_for_row(const relation_only_schedule_row *row, con
         query.query_order = row->query_order;
         query.control = row->control;
         query.cyclic_origin = row->cyclic_origin;
-        return relation_only_query(query, state);
+        return relation_only_query_with_table(query, state, query_relation_table);
     }
 }
 
@@ -751,6 +849,7 @@ static int execute_schedule_common(const char *schedule_path, const char *output
         int receiver_cpu_after = -1;
         relation_only_perf_readout readout;
         ssize_t read_size = 0;
+        const uint32_t *query_relation_table = NULL;
         if (expected_ordinal == 0 && count > 0 && strcmp(fields[0], "tuple_id") == 0) {
             continue;
         }
@@ -766,6 +865,7 @@ static int execute_schedule_common(const char *schedule_path, const char *output
         state = &shared->state;
         relation_only_prefault(state);
         prep = preparation_from_row(&row);
+        query_relation_table = relation_only_table_for(row.r_query);
         if (synthetic) {
             source_cpu_before = row.source_cpu_expected;
             source_cpu_after = row.source_cpu_expected;
@@ -829,7 +929,7 @@ static int execute_schedule_common(const char *schedule_path, const char *output
             }
         }
         query_start_ns = synthetic ? query_select_ns : monotonic_ns();
-        query_hash = execute_query_for_row(&row, state);
+        query_hash = execute_query_for_row(&row, state, query_relation_table);
         query_end_ns = synthetic ? query_start_ns + synthetic_metric(&row, query_hash, "duration") : monotonic_ns();
         receiver_cpu_after = synthetic ? row.receiver_cpu_expected : current_cpu_checked();
         if (!synthetic) {

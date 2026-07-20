@@ -1,0 +1,39 @@
+{
+  "checks": {
+    "both_relations_enter_same_prepare_primary_loop": true,
+    "objdump_completed": true,
+    "pmu_enable_disable_in_executor": true,
+    "pmu_read_in_executor": true,
+    "prepare_primary_has_no_relation_map_call": true,
+    "prepare_primary_has_no_table_selection_call": true,
+    "prepare_primary_symbol_present": true,
+    "query_primary_has_no_relation_map_call": true,
+    "query_primary_has_no_table_selection_call": true,
+    "query_primary_symbol_present": true,
+    "query_uses_preselected_table_entrypoint": true,
+    "source_process_boundary_in_executor": true,
+    "table_selection_before_query_entrypoint": true
+  },
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu",
+    "--",
+    "objdump",
+    "-d",
+    "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime"
+  ],
+  "control_flow_audit_sha256": "0bfdfcc2967441a160f3d8fc586b23d69e4907e742a72f5a8cd5dd41948085b0",
+  "function_body_line_counts": {
+    "execute_query_for_row": 69,
+    "execute_schedule_common": 1275,
+    "relation_only_prepare": 34,
+    "relation_only_prepare_primary": 34,
+    "relation_only_query_primary": 37,
+    "relation_only_query_with_table": 26
+  },
+  "passed": true,
+  "returncode": 0,
+  "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_CONTROL_FLOW_AUDIT_V1",
+  "stderr": ""
+}

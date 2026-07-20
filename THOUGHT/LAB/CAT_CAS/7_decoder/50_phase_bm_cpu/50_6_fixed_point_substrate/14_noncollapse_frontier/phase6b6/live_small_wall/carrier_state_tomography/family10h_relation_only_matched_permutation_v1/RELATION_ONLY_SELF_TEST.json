@@ -228,7 +228,7 @@
     },
     "passed": true,
     "proof_basis": "generated full permutation tables, generated origin-rotated A/B sequences, schedule rows, source hashes, and runtime build receipt",
-    "proof_sha256": "9e1ef6556be0978c5aa64a1149c9ef04fa61aedd018aa06daf3a2073e1b5c3f9",
+    "proof_sha256": "712db3ab8b4b9dd3d5cb423cbc696e9d244ac115ec36c763611b8b9b0aaa56d6",
     "relation_origin_counts_sha256": "6f57975f19183dc8a3f9bdadbd5076d529a6404812cb540ee73762016eb693ae",
     "relation_r0": {
       "actual_cache_index_status": "unresolved_until_authorized_target_preflight",
@@ -249,9 +249,9 @@
       "virtual_offset_histogram_sha256": "3bed852658892707a63af1833954e40112bf5aed7e438f889b05f27c7185139d"
     },
     "runtime_build_receipt_passed": true,
-    "runtime_build_receipt_sha256": "6a68bc38064059ba7c4a431e80e6f0bd5da41bf211fcf38fd55f6f0b8256d121",
+    "runtime_build_receipt_sha256": "e96b791f0340bbfc7693b3111a593fa67c38bc72bf064719f4540a535451c21c",
     "schema": "FAMILY10H_RELATION_MARGINAL_EQUALITY_PROOF_V2",
-    "source_hashes_sha256": "08d9129bcad7f150ceba8f35b526d1bf782a2bab9aeb2aa2f0350a8bdf5ad639"
+    "source_hashes_sha256": "b5172a9c065ac2755ed4830ebc2f8e49e616853c874ddcd9051869eaeca51a35"
   },
   "negative_regressions": {
     "passed": true,
@@ -553,7 +553,7 @@
     "tuple_count": 32256
   },
   "schema": "FAMILY10H_RELATION_ONLY_SELF_TEST_V2",
-  "self_test_sha256": "c6f1ee0c9ce1b44677eeb026ac0c66c266defa092176ed75d30f719a90a89992",
+  "self_test_sha256": "2f1db01ec30c9d8d7814a613f49e90fc1cfd717174702b07f68218dec2d01ad3",
   "target_self_test_summary": {
     "live_invocation_count": 0,
     "passed": true,

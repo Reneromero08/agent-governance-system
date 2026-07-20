@@ -13,36 +13,37 @@
       "size": 26842
     },
     "relation_only_public.py": {
-      "sha256": "ce2ee69d5eacb33c9ba9becaf451392b52981a6e3763f7d8ea2c700f4e49bc38",
-      "size": 37511
+      "sha256": "f5fda2dfe3c56e8e0f63f246d264c884681e2aee95dac922e3d330996d68d953",
+      "size": 37892
     },
     "relation_only_runtime.c": {
-      "sha256": "68b0d4e46f1a43a597a0d4c5a174b04086780cbe6ed3026c98e4ef6d89c7640e",
-      "size": 38671
+      "sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
+      "size": 42224
     },
     "relation_only_runtime.h": {
       "sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
       "size": 2239
     },
     "relation_only_target.py": {
-      "sha256": "0250177c2aebebd816fea9d461afead867962001d772537671070cec6f936d1a",
-      "size": 15157
+      "sha256": "3045b7c2cc81724882777c0a3f2f69f503aa29698fee36d734976e1094a67078",
+      "size": 48024
     },
     "run_relation_only_matched_permutation.py": {
-      "sha256": "3b20a80c2252a16b88fe168d04e0c1be41c3af52868ed187a983533a0f6f1e3c",
-      "size": 60322
+      "sha256": "c0b0ba834fdcc9b723011254760a1d15c9a62efea84915e27cf9946114854661",
+      "size": 68707
     }
   },
   "runtime_binary_authority": {
-    "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=88260b4e0339ebc15811d3110f13fd58d888e442, for GNU/Linux 3.2.0, not stripped",
+    "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
     "compile_status": "compiled_target_compatible_linux_binary",
-    "compiled_binary_sha256": "856f447c75fbb625cdcb10087cf5e0dae240a8f4df9edae0ebcb2343c22205af",
+    "compiled_binary_sha256": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
     "compiler_flags": [
       "-std=c11",
       "-Wall",
       "-Wextra",
       "-Werror",
-      "-O2"
+      "-O2",
+      "-g"
     ],
     "compiler_identity": {
       "available": true,
@@ -62,11 +63,11 @@
     },
     "path": "relation_only_runtime",
     "present": true,
-    "runtime_c_sha256": "68b0d4e46f1a43a597a0d4c5a174b04086780cbe6ed3026c98e4ef6d89c7640e",
+    "runtime_c_sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
     "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
-    "size": 31224
+    "size": 111928
   },
-  "runtime_build_receipt_sha256": "6a68bc38064059ba7c4a431e80e6f0bd5da41bf211fcf38fd55f6f0b8256d121",
+  "runtime_build_receipt_sha256": "e96b791f0340bbfc7693b3111a593fa67c38bc72bf064719f4540a535451c21c",
   "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V2",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
   "source_bundle": {
@@ -81,6 +82,6 @@
       "run_relation_only_matched_permutation.py"
     ],
     "path": "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
-    "sha256": "9589295541f81c016b4e701e32d8cdf6b5e033a31843d9ed41c2f8696ae1f476"
+    "sha256": "48bf4133c1a9b8626e79a9a4c6dcde7fd14137c80f6f574c8d7698743bd2b6db"
   }
 }
