@@ -1,4 +1,174 @@
 {
+  "calibration_acceptance": {
+    "boundary_fit_rejected": true,
+    "f_carrier_hz": [
+      32768.0,
+      32820.0
+    ],
+    "f_carrier_u95_hz_max": 0.05,
+    "fit_condition_number_max": 100000000.0,
+    "off_resonance_ratio_plus_u95_max": 0.03,
+    "optimizer_f0_hz": [
+      32760.0,
+      32821.0
+    ],
+    "optimizer_q": [
+      1000.0,
+      120000.0
+    ],
+    "q": [
+      4000,
+      60000
+    ],
+    "q_u95_fraction_max": 0.1,
+    "reduced_chi_square_max": 5.0,
+    "resonance_snr_min": 25.0,
+    "resonance_to_background_min": 0.2,
+    "solver_frequency_tolerance_hz": 1e-07,
+    "solver_log_q_tolerance": 1e-09,
+    "solver_max_iterations": 64,
+    "source_snr_min": 50.0
+  },
+  "calibration_custody_negative": [
+    {
+      "case": "calibration_wrong_native_hash",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "calibration_wrong_canonical_hash",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "calibration_wrong_adapter_hash",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "calibration_wrong_analyzer_hash",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "calibration_wrong_assembly_identity",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "calibration_wrong_instrument_queryback",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "calibration_source_queryback_mismatch",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "calibration_witness_frequency_mismatch",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "calibration_after_primary_observation",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "calibration_after_assignment_targeted",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    }
+  ],
+  "calibration_payload": {
+    "bytes": 2342912,
+    "channel_order": [
+      "CH0_SOURCE_MONITOR",
+      "CH1_CARRIER_RESPONSE"
+    ],
+    "dtype": "signed-int16",
+    "endian": "little",
+    "frequency_blocks": 143,
+    "layout": "frequency-major__sample-major__ch0-then-ch1-interleaved",
+    "sample_rate_hz": 1000000,
+    "samples_per_channel_per_frequency": 4096
+  },
+  "calibration_realism_negative": [
+    {
+      "case": "flat_response",
+      "expected_rejection": "RESONANCE_CALIBRATION_RESONANCE_SNR"
+    },
+    {
+      "case": "background_only",
+      "expected_rejection": "RESONANCE_CALIBRATION_RESONANCE_SNR"
+    },
+    {
+      "case": "two_comparable_resonances",
+      "expected_rejection": "RESONANCE_CALIBRATION_MODEL_RESIDUAL"
+    },
+    {
+      "case": "resonance_outside_accepted_interval",
+      "expected_rejection": "RESONANCE_CALIBRATION_RANGE"
+    },
+    {
+      "case": "resonance_above_accepted_interval",
+      "expected_rejection": "RESONANCE_CALIBRATION_RANGE"
+    },
+    {
+      "case": "resonance_fit_upper_boundary_clamped",
+      "expected_rejection": "RESONANCE_CALIBRATION_FIT_BOUNDARY"
+    },
+    {
+      "case": "q_below_minimum",
+      "expected_rejection": "RESONANCE_CALIBRATION_Q_RANGE"
+    },
+    {
+      "case": "q_above_maximum",
+      "expected_rejection": "RESONANCE_CALIBRATION_Q_RANGE"
+    },
+    {
+      "case": "insufficient_resonance_amplitude",
+      "expected_rejection": "RESONANCE_CALIBRATION_RESONANCE_SNR"
+    },
+    {
+      "case": "excessive_complex_background",
+      "expected_rejection": "RESONANCE_CALIBRATION_BACKGROUND"
+    },
+    {
+      "case": "structured_one_pole_residual",
+      "expected_rejection": "RESONANCE_CALIBRATION_MODEL_RESIDUAL"
+    },
+    {
+      "case": "excessive_measurement_noise",
+      "expected_rejection": "RESONANCE_CALIBRATION_SOURCE_SNR"
+    },
+    {
+      "case": "clipped_calibration_sample",
+      "expected_rejection": "RESONANCE_CALIBRATION_CLIPPING"
+    },
+    {
+      "case": "missing_frequency_block",
+      "expected_rejection": "RESONANCE_CALIBRATION_PAYLOAD_SIZE"
+    },
+    {
+      "case": "duplicated_frequency_block",
+      "expected_rejection": "RESONANCE_CALIBRATION_FREQUENCY_GRID"
+    },
+    {
+      "case": "reordered_frequency_grid",
+      "expected_rejection": "RESONANCE_CALIBRATION_FREQUENCY_GRID"
+    },
+    {
+      "case": "missing_source_amplitude",
+      "expected_rejection": "RESONANCE_CALIBRATION_SOURCE_SNR"
+    }
+  ],
+  "calibration_realism_positive": [
+    "ideal_unit_gain_resonance",
+    "non_unit_amplitude_gain",
+    "fixed_complex_phase_rotation",
+    "nonzero_complex_background",
+    "combined_background_plus_phase_rotation",
+    "off_grid_resonance_frequency",
+    "low_accepted_q",
+    "high_accepted_q",
+    "realistic_white_measurement_noise",
+    "source_monitor_amplitude_variation",
+    "source_monitor_phase_variation",
+    "shifted_32_8_65_6_reference",
+    "upper_accepted_frequency"
+  ],
   "canonical_payload": {
     "bytes_per_payload": 24808000,
     "channels": 4,
@@ -321,7 +491,7 @@
     },
     {
       "case": "resonance_calibration_raw_garbage",
-      "expected_rejection": "RESONANCE_CALIBRATION_RAW"
+      "expected_rejection": "RESONANCE_CALIBRATION_PAYLOAD_SIZE"
     },
     {
       "case": "resonance_calibration_q_claim_mismatch",
@@ -476,7 +646,9 @@
     }
   ],
   "scope_law": {
-    "existing_fixture_count_preserved": 55,
+    "calibration_realism_controls": "raw two-channel int16 extraction and deterministic complex single-pole fit",
+    "existing_fixture_count_preserved": 61,
+    "existing_raw_controls_preserved": 58,
     "raw_adversaries": "actual canonical raw-bundle analyzer execution",
     "semantic_controls": "summary schema and decision-law conformance only",
     "signal_path_controls": "strict circuit-envelope and ordering decision law",

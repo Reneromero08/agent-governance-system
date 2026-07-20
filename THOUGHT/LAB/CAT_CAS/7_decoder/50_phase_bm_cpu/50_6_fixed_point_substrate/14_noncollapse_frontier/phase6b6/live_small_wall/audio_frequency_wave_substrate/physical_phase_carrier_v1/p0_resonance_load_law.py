@@ -16,7 +16,7 @@ SEARCH_MAX_HZ = 32_820.0
 ACCEPT_MIN_HZ = 32_768.0
 ACCEPT_MAX_HZ = 32_820.0
 COARSE_STEP_HZ = 1.0
-FINE_HALF_SPAN_HZ = 1.0
+FINE_HALF_SPAN_HZ = 1.0125
 FINE_STEP_HZ = 0.025
 CALIBRATION_DRIVE_VPP = 0.100
 MAX_U95_HZ = 0.050
@@ -97,11 +97,30 @@ def prospective_sanity_document() -> dict[str, Any]:
             "calibration_drive_vpp": CALIBRATION_DRIVE_VPP,
             "coarse_search_hz": [SEARCH_MIN_HZ, SEARCH_MAX_HZ, COARSE_STEP_HZ],
             "fine_search": {"half_span_hz": FINE_HALF_SPAN_HZ, "step_hz": FINE_STEP_HZ},
-            "fit": "bounded_complex_BVD_magnitude_and_phase",
+            "fit": "H(f)=B+C/(1+i*2Q*(f-f0)/f0)",
+            "fit_condition_number_maximum": 100_000_000.0,
             "maximum_f_carrier_u95_hz": MAX_U95_HZ,
+            "maximum_off_resonance_ratio_plus_u95": 0.030,
+            "maximum_q_u95_fraction": 0.10,
+            "maximum_reduced_chi_square": 5.0,
+            "minimum_resonance_snr": 25.0,
+            "minimum_resonance_to_background": 0.20,
+            "minimum_source_snr": 50.0,
             "q_factor": [MIN_Q, MAX_Q],
             "retry_law": "ONE_CALIBRATION_PASS__REJECT_ON_FAILURE",
-            "selection": "maximum_fitted_motional_response_within_accepted_interval",
+            "selection": "deterministic_bounded_variable_projection__reject_boundary_or_nonconvergence",
+        },
+        "canonical_calibration_payload": {
+            "channel_order": ["CH0_SOURCE_MONITOR", "CH1_CARRIER_RESPONSE"],
+            "dtype": "little-endian-signed-int16",
+            "frequency_blocks": 143,
+            "layout": "frequency-major__sample-major__ch0-then-ch1-interleaved",
+            "payload_bytes": 2_342_912,
+            "sample_rate_hz": 1_000_000,
+            "samples_per_channel_per_frequency": 4_096,
+            "settling_seconds_before_block": 0.05,
+            "source_amplitude_vpp": 0.1,
+            "source_offset_v": 0.0,
         },
         "frequency_binding": {
             "f_witness_relation": "f_witness_hz == 2 * f_carrier_hz",

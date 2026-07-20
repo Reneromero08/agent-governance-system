@@ -1,20 +1,20 @@
 {
-  "analyzer_sha256": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6",
+  "analyzer_sha256": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
   "assembly_custody_fragment_count": 14,
   "claim_ceiling": "NON_EXECUTING_P0_SIGNAL_PATH_WITNESS_REPAIR_ONLY",
   "def_use_assignment_count": 11,
   "function_ast_sha256": {
-    "analyze_bundle": "06fb904eccde031a07ffcaf60247f46fa54ba17b86c5209183f9d914ffcc9dae",
+    "analyze_bundle": "7087b4d6c17b43976c6fbf2702f939eacae5bf0a315bed02753a67e56d30d57a",
     "decode_guard_witness": "6af817ec9ebe3fef9947a03f2376237bc9238a6ea83a789947ae357d5a79555a",
     "decode_series_witness": "b37f1bbb6cce4c8728fbc95b8c90c74190f84b16e82d11e60d66940caaa86520",
     "signal_path_transfer": "dd3adafec5738c27f0908a0692a52b13a25bd9e6352e26f7a3559ee9e0d75044"
   },
   "ordered_call_lines": {
-    "decode_guard_witness": 1706,
-    "decode_series_witness": 1671,
-    "drive_fit": 1687,
-    "project": 1731,
-    "signal_path_transfer": 1695
+    "decode_guard_witness": 2210,
+    "decode_series_witness": 2175,
+    "drive_fit": 2191,
+    "project": 2235,
+    "signal_path_transfer": 2199
   },
   "physical_claim_authorized": false,
   "properties": {

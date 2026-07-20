@@ -69,20 +69,45 @@ def raw_calibration_recomputation_checks() -> None:
     f_carrier_hz = 32_800.0
     decay_seconds = 0.1
     q_factor = math.pi * f_carrier_hz * decay_seconds
-    data = analyzer.resonance_calibration_raw_bytes("arm_0", f_carrier_hz, q_factor)
-    metrics = analyzer.parse_resonance_calibration_raw(data, "arm_0", f_carrier_hz, 0.025, q_factor, decay_seconds)
-    assert metrics["response_ratio"] == 0.019
+    data, spec = analyzer.resonance_calibration_payload("arm_0", f_carrier_hz, q_factor)
+    fitted = analyzer.analyze_resonance_calibration_payload(data, spec)
+    artifact = {
+        "background_imag": analyzer.decimal_text(fitted["background"].imag),
+        "background_real": analyzer.decimal_text(fitted["background"].real),
+        "canonical_payload": spec,
+        "convergence_status": fitted["convergence_status"],
+        "decay_seconds": analyzer.decimal_text(fitted["fitted_decay_seconds"]),
+        "f_carrier_hz": analyzer.decimal_text(fitted["fitted_f_carrier_hz"]),
+        "f_carrier_u95_hz": analyzer.decimal_text(fitted["fitted_u95_hz"]),
+        "f_witness_hz": analyzer.decimal_text(2.0 * fitted["fitted_f_carrier_hz"]),
+        "fit_condition_number": analyzer.decimal_text(fitted["fit_condition_number"]),
+        "frequency_grid_sha256": fitted["frequency_grid_sha256"],
+        "gain_imag": analyzer.decimal_text(fitted["gain"].imag),
+        "gain_real": analyzer.decimal_text(fitted["gain"].real),
+        "off_resonance_probe_hz": analyzer.decimal_text(fitted["probe_frequency_hz"]),
+        "off_resonance_response_ratio": analyzer.decimal_text(fitted["response_ratio"]),
+        "off_resonance_response_u95": analyzer.decimal_text(fitted["response_u95"]),
+        "q_factor": analyzer.decimal_text(fitted["fitted_q_factor"]),
+        "q_u95": analyzer.decimal_text(fitted["q_u95"]),
+        "reduced_chi_square": analyzer.decimal_text(fitted["reduced_chi_square"]),
+        "required_separation_hz": analyzer.decimal_text(fitted["required_separation_hz"]),
+        "weighted_residual_rms": analyzer.decimal_text(fitted["weighted_residual_rms"]),
+    }
+    metrics = analyzer.parse_resonance_calibration_raw(data, "arm_0", artifact)
+    assert 0.024 <= metrics["response_ratio"] + metrics["response_u95"] <= 0.030
     assert metrics["required_separation_hz"] >= 20.0
-    assert math.isclose(metrics["fitted_q_factor"], q_factor, rel_tol=1e-9)
-    assert math.isclose(metrics["fitted_decay_seconds"], decay_seconds, rel_tol=1e-9)
+    assert abs(metrics["fitted_q_factor"] - q_factor) <= metrics["q_u95"]
+    assert math.isclose(metrics["fitted_decay_seconds"], decay_seconds, rel_tol=1e-5)
     try:
-        analyzer.parse_resonance_calibration_raw(b"not calibration data\n", "arm_0", f_carrier_hz, 0.025, q_factor, decay_seconds)
+        analyzer.parse_resonance_calibration_raw(b"not calibration data\n", "arm_0", artifact)
     except analyzer.Reject as exc:
-        assert exc.code == "RESONANCE_CALIBRATION_RAW"
+        assert exc.code == "RESONANCE_CALIBRATION_PAYLOAD_SIZE"
     else:
         raise AssertionError("self-consistently rebound invalid calibration bytes survived")
     try:
-        analyzer.parse_resonance_calibration_raw(data, "arm_0", f_carrier_hz, 0.025, 1.01 * q_factor, decay_seconds)
+        substituted = dict(artifact)
+        substituted["q_factor"] = analyzer.decimal_text(1.01 * fitted["fitted_q_factor"])
+        analyzer.parse_resonance_calibration_raw(data, "arm_0", substituted)
     except analyzer.Reject as exc:
         assert exc.code == "RESONANCE_CALIBRATION_RAW"
     else:

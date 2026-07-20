@@ -1,11 +1,11 @@
 {
   "authority": "AUTHORIZE P0 BUILD-READINESS ONLY",
   "build_readiness_decision": "P0_BUILD_READINESS_PACKET_FROZEN",
-  "candidate_root": "b153b3842c579d69005e3c34163a98aab1c7e04f896ea1c894c684921154daa2",
+  "candidate_root": "a8328ef2e6e543530ba384861c16c41184c1140d563a959fa4562b83051d91f3",
   "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
-  "manifest_sha256": "a63d3ceeead99a640c50622b43f9e0a310386c94b448367ad2179db02b09cf6f",
+  "manifest_sha256": "0572df0570420525f9f54aa1b1feb12ee049b4ffdac19d418472f323d64589fd",
   "mutation": {
-    "full_mutations_rejected": 42496,
+    "full_mutations_rejected": 44664,
     "signal_path_mutations_rejected": 82,
     "surviving_mutants": 0
   },
@@ -14,13 +14,16 @@
   "physical_observation": false,
   "qualification": {
     "analyzer": {
+      "calibration_custody_negative": 10,
+      "calibration_realism_negative": 17,
+      "calibration_realism_positive": 13,
       "fixture_count": 61,
-      "fixture_sha256": "44cf9b9d1f277cdb04692fd46ffe75f6cf439a2078b21680ba15f3ee0b113342",
+      "fixture_sha256": "39c431060e179171df91bbca338dd2ef20da7450acbd8660579483aeb68e4b54",
       "malformed_or_custody_negative": 20,
       "positive": 8,
       "raw_adversaries": 58,
-      "result_sha256": "36e670503c36a4ad9969d995aac57b4752f850e651d09951cd609d308040eaa0",
-      "schema_sha256": "d08b050dcd7615267439cf722598e49f4475bc217313ce14ed004aedb8eefc21",
+      "result_sha256": "42bee7972d7c0e07380e57422242310e75b3806f09db58a44dcf2eee277229f4",
+      "schema_sha256": "06630409f42d21554e97f721887bff06764ca16dc2efb4794fac3a9fae92a7c5",
       "scientific_negative": 33,
       "signal_path_custody_negative": 4,
       "signal_path_positive": 8,
@@ -31,7 +34,7 @@
       "line_count": 48,
       "sha256": "446641c58ea4b8671277347d8612837f9f604441f340820b7f9519fdde05e31d"
     },
-    "candidate_root": "b153b3842c579d69005e3c34163a98aab1c7e04f896ea1c894c684921154daa2",
+    "candidate_root": "a8328ef2e6e543530ba384861c16c41184c1140d563a959fa4562b83051d91f3",
     "claims": {
       "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
       "closed_findings": 17,
@@ -102,7 +105,7 @@
       "source_commit": "cb53976612cbe83bec82df826a9889418f7e0b89"
     },
     "resonance_load_law": {
-      "model_sha256": "a37b5abdb31f8e740c9cd97ed951efcffd73b8023638b462e3a0314789532812",
+      "model_sha256": "d056f193d80657618d9fe5a78de13bd1e03d98b3ebc016f2db673e4645443235",
       "predicted_envelope": {
         "decay_seconds": [
           0.22857142857142856,
@@ -132,16 +135,16 @@
         "sha256": "1304eaeb26dd188523548e9d9fd68095461d70ac1075f6b49cbb0b3387096986"
       },
       "p0_build_readiness_validator.py": {
-        "bytes": 109453,
+        "bytes": 111553,
         "forbidden_capability_imports": [],
-        "git_blob_sha1": "04536d116dbb1f7733987f0ce9d76b6b4a9f8003",
-        "sha256": "d07fc28d42041cb4923293f7c7087bbc7a515aa5f385b4088c3977fbc1a023d8"
+        "git_blob_sha1": "6b7cb7aedfd9b92aebb7c49db9f41705dbf4f056",
+        "sha256": "b9cbf267db8e830c67c2c15d54f51b6cac3b2fb2dc467d238f2cb0c05f5db7b5"
       },
       "p0_scientific_analyzer.py": {
-        "bytes": 205268,
+        "bytes": 243973,
         "forbidden_capability_imports": [],
-        "git_blob_sha1": "c61b5708acb9ed9974c85bc15679e9a1b43fa618",
-        "sha256": "44421a2f3c9d676b929591437b943eecb3fc11de4c0e4bdb8c61c39b163beac6"
+        "git_blob_sha1": "473008b0f6a4091a73d78e9ebe28f45f1aa48fac",
+        "sha256": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7"
       },
       "p0_signal_path_ordering_proof.py": {
         "bytes": 18009,
@@ -156,10 +159,10 @@
         "sha256": "170ef8060e60947be7b71caa8507f0308018ab2a05341082b4597bf6bfca5747"
       },
       "p0_signal_path_witness_mutation_test.py": {
-        "bytes": 15216,
+        "bytes": 15225,
         "forbidden_capability_imports": [],
-        "git_blob_sha1": "b8e5a68f40beae41a1ba5f5ee99736c7af0568a2",
-        "sha256": "a143f7d542e42e533ae5aa466c30737866c249bd371cc48aed268af9ac5b26de"
+        "git_blob_sha1": "cebef1a1f3171b669428fdf6b7129cdce984e6a5",
+        "sha256": "fc15e506dd7d05096f1fe8e1aba550b9127f3bb34678dbbda13023202bb34458"
       }
     },
     "signal_path": {
@@ -167,7 +170,7 @@
       "corner_count_per_candidate": 131072,
       "feasible_candidates": 23,
       "model_sha256": "31208cdcb39248a44bd90720459c97283e7135d6b0b9b0388c8e535ce46913be",
-      "ordering_proof_sha256": "4e2daca265a238e569c1691ccfdb1a3a48d7500f59d5e2b60a030f901d592505",
+      "ordering_proof_sha256": "8a981f2be3bc5d560debdde3b529088b4a8256f7e4dfeb29a5d542389e78001a",
       "selected_amplitude_vpp": 0.1,
       "selected_part": "Vishay TNPW08051M00BEEN",
       "selected_resistance_ohm": 1000000.0
@@ -183,7 +186,7 @@
     ],
     "count": 4,
     "description": "role-separated root-bound declarations; not externally reproducible independence",
-    "focused_repair_reviewer": "codex-p0-numerical-repro-review-20260719",
+    "focused_repair_reviewer": "/root/p0_final_calibration_review",
     "open_findings": 0,
     "verdict": "PASS"
   },
