@@ -1,10 +1,10 @@
 {
-  "build_ready": false,
+  "build_ready": true,
   "failures": [],
   "grammar_json_parse": true,
   "missing_artifacts": [],
-  "offline_validate_sha256": "5379f9253b2f328083e1c2559a641f6f4ed51fb40c598b3ce4924145f3914306",
-  "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READINESS_BLOCKED",
+  "offline_validate_sha256": "8eab27c986ba7d0b1e736a466cf263e41f0655dec58a52f8836f9780acea258c",
+  "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READY_AWAITING_AUTHORIZATION",
   "passed": true,
   "required_artifacts": [
     "RELATION_ONLY_CONTRACT.md",
