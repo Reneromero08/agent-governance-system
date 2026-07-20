@@ -1,12 +1,12 @@
 # Integrated Catalytic Waveform-Ising Computation
 
-**Status:** `REPAIRED_QUALIFICATION_PENDING_RENEWED_FOCUSED_REVIEW`
+**Status:** `CATALYTIC_WAVEFORM_ISING_COMPUTATION_VERIFIED`
 **Package:** `audio_integrated_catalytic_computation_v1`
 **Parents:** `audio_catalytic_wave_loop_v1`; `audio_recursive_catalytic_ising_v1`
 **Claim ceiling:** `BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY`
 **Physical authority:** none
 
-## Result under test
+## Established bounded result
 
 The bounded reference executes:
 
@@ -142,12 +142,16 @@ bytes.
 ## Review disposition and scientific boundary
 
 The first focused review rejected the earlier rank-one formulation because it reduced
-to five scalar phases and because geometry replacement was not self-calibrated. This
-revision replaces that mechanism with recorded samplewise dynamics and requires flat
-and scrambled geometries to fail after their own mean-only calibration. The repaired
-candidate must receive a new exact-root focused review before the decision is final.
+to five scalar phases and because geometry replacement was not self-calibrated. Those
+findings were accepted and repaired. The revised implementation records samplewise
+dynamics and requires flat and scrambled geometries to fail after their own mean-only
+calibration.
 
-Passing the renewed review establishes only a bounded software carrier-causal reference
-with restoration and reuse. It does not establish a general solver, computational
-advantage, physical catalysis, physical persistence or restoration, hardware bit
-replacement, or a Wall crossing.
+A renewed exact-root focused adversarial review passed with no P0, P1, or P2 findings and
+authorized `CATALYTIC_WAVEFORM_ISING_COMPUTATION_VERIFIED` for the reviewed mechanism
+under `BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY`.
+
+This establishes only a bounded software carrier-causal reference with restoration and
+reuse. It does not establish a general solver, computational advantage, physical
+catalysis, physical persistence or restoration, hardware bit replacement, or a Wall
+crossing.
