@@ -75,11 +75,22 @@
     "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
     "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
   },
-  "toolchain_discovery_sha256": "76427e09cb686ee3e87a43977f33cbfe7dbb5bcf461bae7189a21fc4f71c262b",
+  "toolchain_discovery_sha256": "e948f133c6982311dbccc9b14bb6fe4763daec29e3b1764646a5add3bd2dd6e0",
   "visual_studio": [
     {
-      "exists": false,
-      "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe"
+      "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe",
+      "result": {
+        "command": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe",
+          "-all",
+          "-format",
+          "json"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "[]\n",
+        "timed_out": false
+      }
     },
     {
       "exists": false,

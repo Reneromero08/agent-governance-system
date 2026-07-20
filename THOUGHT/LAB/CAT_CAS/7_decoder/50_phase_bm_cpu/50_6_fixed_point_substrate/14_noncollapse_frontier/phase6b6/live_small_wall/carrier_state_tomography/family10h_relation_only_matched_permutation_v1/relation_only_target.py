@@ -10,6 +10,7 @@ claim.
 from __future__ import annotations
 
 import argparse
+import ctypes
 import json
 import os
 import re
@@ -29,15 +30,21 @@ MANIFEST_ENV = "FAMILY10H_RELATION_ONLY_MANIFEST_SHA256"
 LEGACY_COMMIT_ENV = "FAMILY10H_RELATION_ONLY_COMMIT_BINDING"
 RUNTIME_AUTHORITY_ENV = "FAMILY10H_RELATION_ONLY_RUNTIME_AUTHORITY"
 PREFLIGHT_FIXTURE_ENV = "FAMILY10H_RELATION_ONLY_PREFLIGHT_FIXTURE"
+PREFLIGHT_SYSTEM_MOCK_ENV = "FAMILY10H_RELATION_ONLY_PREFLIGHT_SYSTEM_MOCK"
+DEPLOYMENT_CUSTODY_ENV = "FAMILY10H_RELATION_ONLY_DEPLOYMENT_CUSTODY"
 EXECUTION_MODE_ENV = "FAMILY10H_RELATION_ONLY_EXECUTION_MODE"
 EXECUTION_MODE_SYNTHETIC = "synthetic"
 AUTHORITY_VALUE = pub.TRANSACTION_RUN_ID
 RUNTIME_BINARY_NAMES = ["relation_only_runtime", "relation_only_runtime.exe"]
+HEX40_RE = re.compile(r"[0-9a-f]{40}")
 
 TARGET_PREFLIGHT_CHECKS = [
     "live_authority",
     "source_authority_commit_binding",
     "freeze_commit_binding",
+    "relation_source_authority_not_scalar",
+    "relation_freeze_authority_not_scalar",
+    "deployment_custody_binding",
     "manifest_file_hash",
     "canonical_manifest_digest",
     "package_decision",
@@ -172,14 +179,31 @@ def safe_remove_owned_output_parent(source_root: Path) -> None:
         shutil.rmtree(parent)
 
 
-def source_authority() -> dict[str, Any]:
-    return {
-        "source_authority_commit": pub.SOURCE_AUTHORITY_COMMIT,
-        "manifest_freeze_commit": pub.MANIFEST_FREEZE_COMMIT,
-        "postrun_seal_commit": pub.POSTRUN_SEAL_COMMIT,
-        "approved_sensor_identity_sha256": pub.APPROVED_SENSOR_IDENTITY_SHA256,
-        "attempt_ceiling": pub.ATTEMPT_CEILING,
-    }
+def scalar_evidence_provenance() -> dict[str, Any]:
+    return dict(pub.SCALAR_EVIDENCE_PROVENANCE)
+
+
+def relation_source_authority(manifest: dict[str, Any]) -> str | None:
+    value = manifest.get("authority_binding", {}).get("relation_source_authority_commit")
+    return value if isinstance(value, str) else None
+
+
+def relation_source_authority_is_valid(value: str | None) -> bool:
+    return bool(value and HEX40_RE.fullmatch(value) and value not in pub.SCALAR_EVIDENCE_COMMITS)
+
+
+def deployment_custody_path(source_root: Path) -> Path:
+    configured = os.environ.get(DEPLOYMENT_CUSTODY_ENV)
+    if configured:
+        return Path(configured)
+    return source_root / pub.DEPLOYMENT_CUSTODY_FILENAME
+
+
+def read_deployment_custody(source_root: Path) -> dict[str, Any]:
+    path = deployment_custody_path(source_root)
+    if not path.exists():
+        return {}
+    return read_json(path)
 
 
 def validate_source_root(source_root: Path) -> dict[str, Any]:
@@ -207,6 +231,7 @@ def validate_source_root(source_root: Path) -> dict[str, Any]:
         "relation_only_runtime.c",
         "relation_only_runtime.h",
         "relation_only_target.py",
+        "relation_only_live_controller.py",
         "run_relation_only_matched_permutation.py",
     ]
     missing = [name for name in required if not (source_root / name).exists()]
@@ -261,13 +286,20 @@ def validate_source_root(source_root: Path) -> dict[str, Any]:
         failures.append("manifest schedule binding mismatch")
 
     authority = manifest.get("authority_binding", {})
-    if authority != source_authority():
-        failures.append("manifest authority binding mismatch")
-    threshold_source = threshold.get("source_evidence", {})
-    if threshold_source.get("source_authority_commit") != pub.SOURCE_AUTHORITY_COMMIT:
-        failures.append("threshold source authority mismatch")
-    if threshold_source.get("manifest_freeze_commit") != pub.MANIFEST_FREEZE_COMMIT:
-        failures.append("threshold manifest freeze mismatch")
+    relation_source = authority.get("relation_source_authority_commit")
+    if authority.get("scalar_evidence_provenance") != scalar_evidence_provenance():
+        failures.append("manifest scalar evidence provenance mismatch")
+    if authority.get("relation_manifest_freeze_commit_policy") != pub.RELATION_FREEZE_AUTHORITY_POLICY:
+        failures.append("manifest relation freeze policy mismatch")
+    if relation_source in pub.SCALAR_EVIDENCE_COMMITS:
+        failures.append("relation source authority incorrectly uses scalar evidence commit")
+    if manifest.get("package_decision") == pub.PACKAGE_DECISION_BUILD_READY and not relation_source_authority_is_valid(relation_source):
+        failures.append("relation source authority missing or invalid for build-ready package")
+    threshold_source = threshold.get("scalar_evidence_provenance", {})
+    if threshold_source.get("source_authority_commit") != pub.SCALAR_EVIDENCE_SOURCE_AUTHORITY_COMMIT:
+        failures.append("threshold scalar source provenance mismatch")
+    if threshold_source.get("manifest_freeze_commit") != pub.SCALAR_EVIDENCE_MANIFEST_FREEZE_COMMIT:
+        failures.append("threshold scalar manifest freeze provenance mismatch")
 
     for name, expected in source_hashes.get("files", {}).items():
         path = source_root / name
@@ -323,6 +355,8 @@ def no_live_authority_env() -> dict[str, Any]:
             LEGACY_COMMIT_ENV,
             RUNTIME_AUTHORITY_ENV,
             PREFLIGHT_FIXTURE_ENV,
+            PREFLIGHT_SYSTEM_MOCK_ENV,
+            DEPLOYMENT_CUSTODY_ENV,
             EXECUTION_MODE_ENV,
         ]
         if os.environ.get(key) is not None
@@ -381,6 +415,8 @@ def load_fixture() -> dict[str, Any] | None:
 
 def base_preflight_fixture(source_root: Path, output_root: Path) -> dict[str, Any]:
     artifacts = artifact_identity(source_root)
+    manifest = read_json(source_root / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json")
+    relation_source = relation_source_authority(manifest)
     return {
         "schema": "FAMILY10H_RELATION_ONLY_PREFLIGHT_FIXTURE_V1",
         "cpu": {
@@ -401,8 +437,8 @@ def base_preflight_fixture(source_root: Path, output_root: Path) -> dict[str, An
             "schedule_canonical_sha256": artifacts["schedule_canonical_sha256"],
             "grammar_canonical_sha256": artifacts["grammar_canonical_sha256"],
             "source_bundle_sha256": artifacts["source_bundle_sha256"],
-            "source_authority_commit": pub.SOURCE_AUTHORITY_COMMIT,
-            "manifest_freeze_commit": pub.MANIFEST_FREEZE_COMMIT,
+            "relation_source_authority_commit": relation_source,
+            "relation_freeze_authority_commit": pub.SYNTHETIC_RELATION_FREEZE_COMMIT,
         },
         "runtime_binary_format_contains": ["ELF 64-bit", "x86-64"],
         "pmu": {
@@ -434,6 +470,196 @@ def base_preflight_fixture(source_root: Path, output_root: Path) -> dict[str, An
             "attempt_count_before": 0,
             "attempt_ceiling": pub.ATTEMPT_CEILING,
         },
+    }
+
+
+def parse_cpuinfo(text: str) -> dict[int, dict[str, Any]]:
+    cpus: dict[int, dict[str, Any]] = {}
+    current: dict[str, Any] = {}
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+        if not line:
+            if "processor" in current:
+                cpus[int(current["processor"])] = current
+            current = {}
+            continue
+        if ":" not in line:
+            continue
+        key, value = [part.strip() for part in line.split(":", 1)]
+        current[key] = value
+    if "processor" in current:
+        cpus[int(current["processor"])] = current
+    return cpus
+
+
+def cpu_observation_from_cpuinfo(text: str, source_cpu: int, receiver_cpu: int) -> dict[str, Any]:
+    cpus = parse_cpuinfo(text)
+    source = cpus.get(source_cpu, {})
+    receiver = cpus.get(receiver_cpu, {})
+    sample = source or next(iter(cpus.values()), {})
+    family = sample.get("cpu family") or sample.get("family")
+    model = sample.get("model")
+    return {
+        "vendor": sample.get("vendor_id") or sample.get("vendor"),
+        "family": int(family) if str(family).isdigit() else None,
+        "model": int(model) if str(model).isdigit() else None,
+        "source_cpu_present": source_cpu in cpus,
+        "receiver_cpu_present": receiver_cpu in cpus,
+        "source_cpu": source_cpu,
+        "receiver_cpu": receiver_cpu,
+        "operational_pinning": False,
+        "cpu_count_observed": len(cpus),
+    }
+
+
+def probe_affinity(source_cpu: int, receiver_cpu: int) -> dict[str, Any]:
+    if not hasattr(os, "sched_getaffinity") or not hasattr(os, "sched_setaffinity"):
+        return {"operational_pinning": False, "reason": "sched affinity APIs unavailable"}
+    original = os.sched_getaffinity(0)
+    try:
+        for cpu in [source_cpu, receiver_cpu]:
+            os.sched_setaffinity(0, {cpu})
+            if os.sched_getaffinity(0) != {cpu}:
+                return {"operational_pinning": False, "reason": f"affinity did not stick for CPU {cpu}"}
+        return {"operational_pinning": True}
+    except OSError as exc:
+        return {"operational_pinning": False, "reason": str(exc)}
+    finally:
+        try:
+            os.sched_setaffinity(0, original)
+        except OSError:
+            pass
+
+
+class PerfEventAttr(ctypes.Structure):
+    _fields_ = [
+        ("type", ctypes.c_uint32),
+        ("size", ctypes.c_uint32),
+        ("config", ctypes.c_uint64),
+        ("sample_period", ctypes.c_uint64),
+        ("sample_type", ctypes.c_uint64),
+        ("read_format", ctypes.c_uint64),
+        ("flags", ctypes.c_uint64),
+    ]
+
+
+def disabled_grouped_pmu_probe(cpu: int) -> dict[str, Any]:
+    if os.name != "posix":
+        return {"events": pub.PMU_GROUP["events"], "grouped_open_capability": False, "pmu_open_count": 0, "pmu_acquisition_count": 0, "reason": "non-posix host"}
+    libc = ctypes.CDLL(None, use_errno=True)
+    syscall = libc.syscall
+    syscall.restype = ctypes.c_long
+    perf_event_open = 298
+    perf_type_raw = 4
+    disabled_flag = 1
+    fds: list[int] = []
+    try:
+        group_fd = -1
+        for event in pub.PMU_GROUP["events"].values():
+            event_code = int(event["event"], 16)
+            umask = int(event["umask"], 16)
+            attr = PerfEventAttr()
+            attr.type = perf_type_raw
+            attr.size = ctypes.sizeof(PerfEventAttr)
+            attr.config = event_code | (umask << 8)
+            attr.flags = disabled_flag
+            fd = syscall(perf_event_open, ctypes.byref(attr), 0, cpu, group_fd, 0)
+            if fd < 0:
+                errno = ctypes.get_errno()
+                return {
+                    "events": pub.PMU_GROUP["events"],
+                    "grouped_open_capability": False,
+                    "pmu_open_count": len(fds),
+                    "pmu_acquisition_count": 0,
+                    "enabled_measurement_interval": False,
+                    "reason": os.strerror(errno),
+                }
+            fds.append(int(fd))
+            if group_fd == -1:
+                group_fd = int(fd)
+        return {
+            "events": pub.PMU_GROUP["events"],
+            "grouped_open_capability": True,
+            "pmu_open_count": len(fds),
+            "pmu_acquisition_count": 0,
+            "enabled_measurement_interval": False,
+            "scientific_data_collected": False,
+        }
+    finally:
+        for fd in fds:
+            try:
+                os.close(fd)
+            except OSError:
+                pass
+
+
+def discover_temperature_sensor(sysfs_root: Path = Path("/sys")) -> dict[str, Any]:
+    for name_file in sorted((sysfs_root / "class" / "hwmon").glob("hwmon*/name")):
+        try:
+            hwmon_name = name_file.read_text(encoding="utf-8").strip()
+        except OSError:
+            continue
+        if hwmon_name != "k10temp":
+            continue
+        hwmon_dir = name_file.parent
+        for label_file in sorted(hwmon_dir.glob("temp*_label")):
+            label = label_file.read_text(encoding="utf-8").strip()
+            if label not in {"Tctl", "Tdie"}:
+                continue
+            identity = {
+                "hwmon_name": hwmon_name,
+                "sensor_label": label,
+                "resolved_device_identity": str(hwmon_dir.resolve()),
+            }
+            identity["identity_sha256"] = pub.digest(identity)
+            identity["identity_stability"] = True
+            return identity
+    return {"identity_sha256": None, "hwmon_name": None, "sensor_label": None, "resolved_device_identity": None, "identity_stability": False}
+
+
+def cpu_frequency_policy(source_cpu: int, receiver_cpu: int, sysfs_root: Path = Path("/sys")) -> dict[str, Any]:
+    policies = []
+    for cpu in [source_cpu, receiver_cpu]:
+        governor_path = sysfs_root / "devices" / "system" / "cpu" / f"cpu{cpu}" / "cpufreq" / "scaling_governor"
+        try:
+            policies.append({"cpu": cpu, "governor": governor_path.read_text(encoding="utf-8").strip()})
+        except OSError:
+            policies.append({"cpu": cpu, "governor": None})
+    governors = {item["governor"] for item in policies}
+    return {
+        "governor": next(iter(governors)) if len(governors) == 1 else "mixed_or_unavailable",
+        "policies": policies,
+        "policy_locked": governors == {"performance"},
+        "identity_stability": all(item["governor"] for item in policies),
+    }
+
+
+def physical_preflight_observation(source_root: Path, output_root: Path) -> dict[str, Any]:
+    del output_root
+    mock_path = os.environ.get(PREFLIGHT_SYSTEM_MOCK_ENV)
+    if mock_path:
+        observed = read_json(Path(mock_path))
+        observed["backend"] = "mocked_physical_system_interface"
+        return observed
+    source_cpu = 4
+    receiver_cpu = 5
+    cpuinfo = Path("/proc/cpuinfo").read_text(encoding="utf-8")
+    cpu = cpu_observation_from_cpuinfo(cpuinfo, source_cpu, receiver_cpu)
+    affinity = probe_affinity(source_cpu, receiver_cpu)
+    cpu["operational_pinning"] = affinity.get("operational_pinning") is True
+    return {
+        "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_PREFLIGHT_OBSERVATION_V1",
+        "backend": "physical_system_interface",
+        "cpu": cpu,
+        "expected_artifacts": artifact_identity(source_root)
+        | {"relation_source_authority_commit": relation_source_authority(read_json(source_root / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json"))},
+        "runtime_binary_format_contains": ["ELF 64-bit", "x86-64"],
+        "pmu": disabled_grouped_pmu_probe(source_cpu),
+        "sensor": discover_temperature_sensor(),
+        "frequency_policy": cpu_frequency_policy(source_cpu, receiver_cpu),
+        "physical_geometry": {"status": "unresolved_contractually_lowered", "claim_ceiling_lowered": True},
+        "output": {"root": "", "parent_writable": True},
+        "attempt": {"owner_marker": pub.TRANSACTION_RUN_ID, "attempt_count_before": 0, "attempt_ceiling": pub.ATTEMPT_CEILING},
     }
 
 
@@ -470,23 +696,48 @@ def output_root_law(source_root: Path, output_root: Path, fixture: dict[str, Any
 
 def authority_checks(source_root: Path, manifest: dict[str, Any]) -> dict[str, dict[str, Any]]:
     manifest_file_sha = pub.sha256_file(source_root / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json")
+    relation_source = relation_source_authority(manifest)
+    deployment = read_deployment_custody(source_root)
+    observed_freeze = os.environ.get(FREEZE_COMMIT_ENV)
+    expected_freeze = deployment.get("relation_manifest_freeze_commit") or pub.SYNTHETIC_RELATION_FREEZE_COMMIT
     return {
         "live_authority": check("live_authority", os.environ.get(AUTHORITY_ENV) == AUTHORITY_VALUE, os.environ.get(AUTHORITY_ENV)),
         "source_authority_commit_binding": check(
             "source_authority_commit_binding",
-            os.environ.get(SOURCE_AUTHORITY_ENV) == manifest.get("authority_binding", {}).get("source_authority_commit"),
+            os.environ.get(SOURCE_AUTHORITY_ENV) == relation_source and relation_source_authority_is_valid(relation_source),
             {
                 "observed": os.environ.get(SOURCE_AUTHORITY_ENV),
-                "expected": manifest.get("authority_binding", {}).get("source_authority_commit"),
+                "expected": relation_source,
             },
         ),
         "freeze_commit_binding": check(
             "freeze_commit_binding",
-            os.environ.get(FREEZE_COMMIT_ENV) == manifest.get("authority_binding", {}).get("manifest_freeze_commit"),
+            observed_freeze == expected_freeze and bool(observed_freeze and HEX40_RE.fullmatch(observed_freeze)),
             {
-                "observed": os.environ.get(FREEZE_COMMIT_ENV),
-                "expected": manifest.get("authority_binding", {}).get("manifest_freeze_commit"),
+                "observed": observed_freeze,
+                "expected": expected_freeze,
             },
+        ),
+        "relation_source_authority_not_scalar": check(
+            "relation_source_authority_not_scalar",
+            relation_source not in pub.SCALAR_EVIDENCE_COMMITS,
+            relation_source,
+        ),
+        "relation_freeze_authority_not_scalar": check(
+            "relation_freeze_authority_not_scalar",
+            observed_freeze not in pub.SCALAR_EVIDENCE_COMMITS,
+            observed_freeze,
+        ),
+        "deployment_custody_binding": check(
+            "deployment_custody_binding",
+            not deployment
+            or (
+                deployment.get("relation_source_authority_commit") == relation_source
+                and deployment.get("relation_manifest_freeze_commit") == observed_freeze
+                and deployment.get("transaction_run_id") == pub.TRANSACTION_RUN_ID
+                and deployment.get("manifest_file_sha256") == manifest_file_sha
+            ),
+            deployment,
         ),
         "manifest_file_hash": check(
             "manifest_file_hash",
@@ -523,118 +774,125 @@ def target_preflight(source_root: Path, output_root: Path, fixture: dict[str, An
         manifest.get("transaction_run_id"),
     )
 
-    if fixture is None:
-        checks["fixture_backend_present"] = check("fixture_backend_present", False, "preflight fixture backend missing")
-    else:
-        expected = fixture.get("expected_artifacts", {})
-        checks["manifest_file_hash"].update(
-            check(
-                "manifest_file_hash",
-                checks["manifest_file_hash"]["passed"]
-                and expected.get("manifest_file_sha256") == artifacts.get("manifest_file_sha256"),
-                {"fixture": expected.get("manifest_file_sha256"), "env": os.environ.get(MANIFEST_ENV)},
-            )
+    backend = "fixture" if fixture is not None else "physical_observed"
+    observed = fixture if fixture is not None else physical_preflight_observation(source_root, output_root)
+    expected = observed.get("expected_artifacts", {})
+    expected_source = expected.get("relation_source_authority_commit")
+    expected_freeze = expected.get("relation_freeze_authority_commit")
+    checks["manifest_file_hash"].update(
+        check(
+            "manifest_file_hash",
+            checks["manifest_file_hash"]["passed"]
+            and expected.get("manifest_file_sha256") == artifacts.get("manifest_file_sha256"),
+            {"observed_backend": backend, "expected": expected.get("manifest_file_sha256"), "env": os.environ.get(MANIFEST_ENV)},
         )
-        checks["grammar_hash"] = check(
-            "grammar_hash",
-            expected.get("grammar_canonical_sha256") == artifacts.get("grammar_canonical_sha256") == manifest.get("grammar_sha256"),
-            expected.get("grammar_canonical_sha256"),
+    )
+    checks["grammar_hash"] = check(
+        "grammar_hash",
+        expected.get("grammar_canonical_sha256") == artifacts.get("grammar_canonical_sha256") == manifest.get("grammar_sha256"),
+        expected.get("grammar_canonical_sha256"),
+    )
+    checks["compact_schedule_manifest_binding"] = check(
+        "compact_schedule_manifest_binding",
+        expected.get("schedule_canonical_sha256") == artifacts.get("schedule_canonical_sha256") == manifest.get("schedule_sha256")
+        and schedule_manifest.get("schedule_manifest_sha256") == digest_without(schedule_manifest, "schedule_manifest_sha256"),
+        expected.get("schedule_canonical_sha256"),
+    )
+    checks["expanded_schedule_tsv_hash"] = check(
+        "expanded_schedule_tsv_hash",
+        expected.get("schedule_tsv_sha256") == artifacts.get("schedule_tsv_sha256") == schedule_manifest.get("expanded_schedule_file_sha256"),
+        expected.get("schedule_tsv_sha256"),
+    )
+    checks["runtime_binary_hash"] = check(
+        "runtime_binary_hash",
+        expected.get("runtime_binary_sha256") == artifacts.get("runtime_binary_sha256") == source_hashes.get("runtime_binary_authority", {}).get("compiled_binary_sha256"),
+        expected.get("runtime_binary_sha256"),
+    )
+    format_text = artifacts.get("runtime_binary_format", "")
+    expected_format = observed.get("runtime_binary_format_contains", [])
+    checks["runtime_binary_format_and_abi"] = check(
+        "runtime_binary_format_and_abi",
+        all(item in format_text for item in expected_format),
+        {"format": format_text, "required": expected_format},
+    )
+    checks["source_bundle_hash"] = check(
+        "source_bundle_hash",
+        expected.get("source_bundle_sha256") == artifacts.get("source_bundle_sha256"),
+        expected.get("source_bundle_sha256"),
+    )
+    checks["source_file_hashes"] = check(
+        "source_file_hashes",
+        source_validation["passed"] and bool(artifacts.get("source_file_hashes")),
+        artifacts.get("source_file_hashes"),
+    )
+    checks["source_authority_commit_binding"].update(
+        check(
+            "source_authority_commit_binding",
+            checks["source_authority_commit_binding"]["passed"]
+            and expected_source == relation_source_authority(manifest),
+            {"observed_backend": backend, "expected": expected_source, "env": os.environ.get(SOURCE_AUTHORITY_ENV)},
         )
-        checks["compact_schedule_manifest_binding"] = check(
-            "compact_schedule_manifest_binding",
-            expected.get("schedule_canonical_sha256") == artifacts.get("schedule_canonical_sha256") == manifest.get("schedule_sha256")
-            and schedule_manifest.get("schedule_manifest_sha256") == digest_without(schedule_manifest, "schedule_manifest_sha256"),
-            expected.get("schedule_canonical_sha256"),
+    )
+    checks["freeze_commit_binding"].update(
+        check(
+            "freeze_commit_binding",
+            checks["freeze_commit_binding"]["passed"]
+            and (expected_freeze is None or expected_freeze == os.environ.get(FREEZE_COMMIT_ENV)),
+            {"observed_backend": backend, "expected": expected_freeze, "env": os.environ.get(FREEZE_COMMIT_ENV)},
         )
-        checks["expanded_schedule_tsv_hash"] = check(
-            "expanded_schedule_tsv_hash",
-            expected.get("schedule_tsv_sha256") == artifacts.get("schedule_tsv_sha256") == schedule_manifest.get("expanded_schedule_file_sha256"),
-            expected.get("schedule_tsv_sha256"),
-        )
-        checks["runtime_binary_hash"] = check(
-            "runtime_binary_hash",
-            expected.get("runtime_binary_sha256") == artifacts.get("runtime_binary_sha256") == source_hashes.get("runtime_binary_authority", {}).get("compiled_binary_sha256"),
-            expected.get("runtime_binary_sha256"),
-        )
-        format_text = artifacts.get("runtime_binary_format", "")
-        expected_format = fixture.get("runtime_binary_format_contains", [])
-        checks["runtime_binary_format_and_abi"] = check(
-            "runtime_binary_format_and_abi",
-            all(item in format_text for item in expected_format),
-            {"format": format_text, "required": expected_format},
-        )
-        checks["source_bundle_hash"] = check(
-            "source_bundle_hash",
-            expected.get("source_bundle_sha256") == artifacts.get("source_bundle_sha256"),
-            expected.get("source_bundle_sha256"),
-        )
-        checks["source_file_hashes"] = check(
-            "source_file_hashes",
-            source_validation["passed"] and bool(artifacts.get("source_file_hashes")),
-            artifacts.get("source_file_hashes"),
-        )
-        checks["source_authority_commit_binding"].update(
-            check(
-                "source_authority_commit_binding",
-                checks["source_authority_commit_binding"]["passed"]
-                and expected.get("source_authority_commit") == pub.SOURCE_AUTHORITY_COMMIT,
-                {"fixture": expected.get("source_authority_commit"), "env": os.environ.get(SOURCE_AUTHORITY_ENV)},
-            )
-        )
-        checks["freeze_commit_binding"].update(
-            check(
-                "freeze_commit_binding",
-                checks["freeze_commit_binding"]["passed"]
-                and expected.get("manifest_freeze_commit") == pub.MANIFEST_FREEZE_COMMIT,
-                {"fixture": expected.get("manifest_freeze_commit"), "env": os.environ.get(FREEZE_COMMIT_ENV)},
-            )
-        )
-        cpu = fixture.get("cpu", {})
-        checks["cpu_vendor_family_model"] = check(
-            "cpu_vendor_family_model",
-            cpu.get("vendor") == "AuthenticAMD" and cpu.get("family") == 16 and isinstance(cpu.get("model"), int),
-            cpu,
-        )
-        checks["source_receiver_cpu_identity"] = check(
-            "source_receiver_cpu_identity",
-            cpu.get("source_cpu_present") is True and cpu.get("receiver_cpu_present") is True and cpu.get("source_cpu") != cpu.get("receiver_cpu"),
-            cpu,
-        )
-        checks["operational_pinning_capability"] = check("operational_pinning_capability", cpu.get("operational_pinning") is True, cpu)
-        pmu = fixture.get("pmu", {})
-        checks["pmu_event_identities"] = check("pmu_event_identities", pmu.get("events") == pub.PMU_GROUP["events"], pmu.get("events"))
-        checks["grouped_pmu_open_capability"] = check("grouped_pmu_open_capability", pmu.get("grouped_open_capability") is True, pmu)
-        sensor = fixture.get("sensor", {})
-        checks["temperature_sensor_authority"] = check(
-            "temperature_sensor_authority",
-            sensor.get("identity_sha256") == pub.APPROVED_SENSOR_IDENTITY_SHA256
-            and bool(sensor.get("hwmon_name"))
-            and bool(sensor.get("sensor_label"))
-            and sensor.get("identity_stability") is True,
-            sensor,
-        )
-        policy = fixture.get("frequency_policy", {})
-        checks["cpu_frequency_policy_custody"] = check(
-            "cpu_frequency_policy_custody",
-            policy.get("policy_locked") is True and policy.get("identity_stability") is True,
-            policy,
-        )
-        geometry = fixture.get("physical_geometry", {})
-        checks["actual_physical_geometry_status"] = check(
-            "actual_physical_geometry_status",
-            geometry.get("status") in {"verified", "unresolved_contractually_lowered"} and geometry.get("claim_ceiling_lowered") is True,
-            geometry,
-        )
-        output_law = output_root_law(source_root, output_root, fixture)
-        checks["output_root_absence"] = check("output_root_absence", output_law["passed"], output_law)
-        attempt = fixture.get("attempt", {})
-        checks["attempt_ownership_marker"] = check(
-            "attempt_ownership_marker",
-            attempt.get("owner_marker") == pub.TRANSACTION_RUN_ID
-            and attempt.get("attempt_count_before") == 0
-            and attempt.get("attempt_ceiling") == pub.ATTEMPT_CEILING,
-            attempt,
-        )
+    )
+    cpu = observed.get("cpu", {})
+    checks["cpu_vendor_family_model"] = check(
+        "cpu_vendor_family_model",
+        cpu.get("vendor") == "AuthenticAMD" and cpu.get("family") == 16 and isinstance(cpu.get("model"), int),
+        cpu,
+    )
+    checks["source_receiver_cpu_identity"] = check(
+        "source_receiver_cpu_identity",
+        cpu.get("source_cpu_present") is True and cpu.get("receiver_cpu_present") is True and cpu.get("source_cpu") != cpu.get("receiver_cpu"),
+        cpu,
+    )
+    checks["operational_pinning_capability"] = check("operational_pinning_capability", cpu.get("operational_pinning") is True, cpu)
+    pmu = observed.get("pmu", {})
+    checks["pmu_event_identities"] = check("pmu_event_identities", pmu.get("events") == pub.PMU_GROUP["events"], pmu.get("events"))
+    checks["grouped_pmu_open_capability"] = check(
+        "grouped_pmu_open_capability",
+        pmu.get("grouped_open_capability") is True
+        and pmu.get("pmu_acquisition_count", 0) == 0
+        and pmu.get("enabled_measurement_interval", False) is False,
+        pmu,
+    )
+    sensor = observed.get("sensor", {})
+    checks["temperature_sensor_authority"] = check(
+        "temperature_sensor_authority",
+        sensor.get("identity_sha256") == pub.APPROVED_SENSOR_IDENTITY_SHA256
+        and bool(sensor.get("hwmon_name"))
+        and bool(sensor.get("sensor_label"))
+        and sensor.get("identity_stability") is True,
+        sensor,
+    )
+    policy = observed.get("frequency_policy", {})
+    checks["cpu_frequency_policy_custody"] = check(
+        "cpu_frequency_policy_custody",
+        policy.get("policy_locked") is True and policy.get("identity_stability") is True,
+        policy,
+    )
+    geometry = observed.get("physical_geometry", {})
+    checks["actual_physical_geometry_status"] = check(
+        "actual_physical_geometry_status",
+        geometry.get("status") in {"verified", "unresolved_contractually_lowered"} and geometry.get("claim_ceiling_lowered") is True,
+        geometry,
+    )
+    output_law = output_root_law(source_root, output_root, observed)
+    checks["output_root_absence"] = check("output_root_absence", output_law["passed"], output_law)
+    attempt = observed.get("attempt", {})
+    checks["attempt_ownership_marker"] = check(
+        "attempt_ownership_marker",
+        attempt.get("owner_marker") == pub.TRANSACTION_RUN_ID
+        and attempt.get("attempt_count_before") == 0
+        and attempt.get("attempt_ceiling") == pub.ATTEMPT_CEILING,
+        attempt,
+    )
 
     failures = [name for name in TARGET_PREFLIGHT_CHECKS if not checks.get(name, {"passed": False})["passed"]]
     failures.extend(name for name, item in checks.items() if name not in TARGET_PREFLIGHT_CHECKS and not item["passed"])
@@ -644,11 +902,13 @@ def target_preflight(source_root: Path, output_root: Path, fixture: dict[str, An
         "passed": not failures,
         "failures": failures,
         "checks": checks,
+        "preflight_backend": backend,
+        "physical_observation": observed if fixture is None else None,
         "artifact_identity": artifacts,
         "output_root": str(output_root),
         "target_contact_count": 0,
-        "sensor_inventory_count": 0,
-        "pmu_open_count": 0,
+        "sensor_inventory_count": 0 if fixture is not None else 1,
+        "pmu_open_count": observed.get("pmu", {}).get("pmu_open_count", 0),
         "pmu_acquisition_count": 0,
         "live_invocation_count": 0,
         "small_wall_crossed": False,
@@ -656,7 +916,8 @@ def target_preflight(source_root: Path, output_root: Path, fixture: dict[str, An
 
 
 def target_preflight_refusal(source_root: Path, output_root: Path) -> dict[str, Any]:
-    result = target_preflight(source_root, output_root, None)
+    fixture = base_preflight_fixture(source_root, output_root)
+    result = target_preflight(source_root, output_root, fixture)
     result["schema"] = "FAMILY10H_RELATION_ONLY_TARGET_PREFLIGHT_REFUSAL_V2"
     result["status"] = "TARGET_PREFLIGHT_REFUSED"
     result["reason"] = "live authority missing" if os.environ.get(AUTHORITY_ENV) != AUTHORITY_VALUE else "preflight fixture backend missing"
@@ -686,12 +947,29 @@ def write_fixture(path: Path, fixture: dict[str, Any]) -> None:
     path.write_text(strict_json_dumps(fixture, indent=2) + "\n", encoding="utf-8")
 
 
+def deployment_custody(source_root: Path, freeze_commit: str) -> dict[str, Any]:
+    manifest = read_json(source_root / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json")
+    return {
+        "schema": "FAMILY10H_RELATION_ONLY_DEPLOYMENT_CUSTODY_V1",
+        "science_package_id": pub.SCIENCE_PACKAGE_ID,
+        "transaction_run_id": pub.TRANSACTION_RUN_ID,
+        "relation_source_authority_commit": relation_source_authority(manifest),
+        "relation_manifest_freeze_commit": freeze_commit,
+        "manifest_file_sha256": pub.sha256_file(source_root / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json"),
+        "controller_verified_head_equals_origin": True,
+        "controller_verified_clean_worktree": True,
+        "fixture_backend_allowed": False,
+        "one_attempt_ceiling": pub.ATTEMPT_CEILING,
+    }
+
+
 def target_authority_env(source_root: Path, fixture_path: Path | None, *, synthetic: bool = False) -> dict[str, str | None]:
     manifest_sha = pub.sha256_file(source_root / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json")
+    manifest = read_json(source_root / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json")
     return {
         AUTHORITY_ENV: AUTHORITY_VALUE,
-        SOURCE_AUTHORITY_ENV: pub.SOURCE_AUTHORITY_COMMIT,
-        FREEZE_COMMIT_ENV: pub.MANIFEST_FREEZE_COMMIT,
+        SOURCE_AUTHORITY_ENV: relation_source_authority(manifest),
+        FREEZE_COMMIT_ENV: pub.SYNTHETIC_RELATION_FREEZE_COMMIT,
         MANIFEST_ENV: manifest_sha,
         PREFLIGHT_FIXTURE_ENV: str(fixture_path) if fixture_path else None,
         EXECUTION_MODE_ENV: EXECUTION_MODE_SYNTHETIC if synthetic else None,
@@ -703,13 +981,15 @@ def execute_authorized(source_root: Path, output_root: Path) -> dict[str, Any]:
     source_root = source_root.resolve()
     output_root = output_root.resolve()
     fixture = load_fixture()
+    synthetic = os.environ.get(EXECUTION_MODE_ENV) == EXECUTION_MODE_SYNTHETIC
+    if fixture is not None and not synthetic:
+        raise TargetError("physical execution refuses fixture-backed preflight")
     preflight = target_preflight(source_root, output_root, fixture)
     if not preflight["passed"]:
         raise TargetError("target preflight failed: " + ",".join(preflight["failures"]))
     runtime = runtime_binary_path(source_root)
     if runtime is None:
         raise TargetError("runtime binary missing")
-    synthetic = os.environ.get(EXECUTION_MODE_ENV) == EXECUTION_MODE_SYNTHETIC
     env = os.environ.copy()
     if synthetic:
         env.pop(RUNTIME_AUTHORITY_ENV, None)
@@ -807,7 +1087,7 @@ def run_preflight_fixture_suite(source_root: Path, parent: Path) -> dict[str, An
         ),
         "wrong_source_authority_commit": (
             "source_authority_commit_binding",
-            {**base, "expected_artifacts": {**base["expected_artifacts"], "source_authority_commit": "0" * 40}},
+            {**base, "expected_artifacts": {**base["expected_artifacts"], "relation_source_authority_commit": "0" * 40}},
         ),
         "unavailable_pmu_event": ("pmu_event_identities", {**base, "pmu": {**base["pmu"], "events": {}}}),
         "grouped_pmu_failure": ("grouped_pmu_open_capability", {**base, "pmu": {**base["pmu"], "grouped_open_capability": False}}),
@@ -885,6 +1165,94 @@ def run_preflight_fixture_suite(source_root: Path, parent: Path) -> dict[str, An
     }
 
 
+def base_physical_mock(source_root: Path, output_root: Path) -> dict[str, Any]:
+    mock = base_preflight_fixture(source_root, output_root)
+    mock["schema"] = "FAMILY10H_RELATION_ONLY_PHYSICAL_PREFLIGHT_OBSERVATION_V1"
+    mock["backend"] = "mocked_physical_system_interface"
+    mock["pmu"]["pmu_open_count"] = len(pub.PMU_GROUP["events"])
+    mock["pmu"]["pmu_acquisition_count"] = 0
+    mock["pmu"]["enabled_measurement_interval"] = False
+    mock["pmu"]["scientific_data_collected"] = False
+    return mock
+
+
+def write_deployment_custody(path: Path, source_root: Path, freeze_commit: str = pub.SYNTHETIC_RELATION_FREEZE_COMMIT) -> None:
+    path.write_text(strict_json_dumps(deployment_custody(source_root, freeze_commit), indent=2) + "\n", encoding="utf-8")
+
+
+def run_physical_preflight_mock_suite(source_root: Path, parent: Path) -> dict[str, Any]:
+    output_root = parent / "physical_preflight_attempt"
+    base = base_physical_mock(source_root, output_root)
+    custody_path = parent / pub.DEPLOYMENT_CUSTODY_FILENAME
+    write_deployment_custody(custody_path, source_root)
+
+    def run_case(candidate_root: Path, observed: dict[str, Any], env_override: dict[str, str | None] | None = None) -> dict[str, Any]:
+        mock_path = parent / f"physical_mock_{len(results)}.json"
+        write_fixture(mock_path, observed)
+        env = {
+            **target_authority_env(source_root, None, synthetic=True),
+            PREFLIGHT_SYSTEM_MOCK_ENV: str(mock_path),
+            DEPLOYMENT_CUSTODY_ENV: str(custody_path),
+            **(env_override or {}),
+        }
+        with temporary_env(env):
+            return target_preflight(source_root, candidate_root, None)
+
+    cases: dict[str, tuple[str | None, dict[str, Any], dict[str, str | None] | None]] = {
+        "complete_physical_mock": (None, base, None),
+        "wrong_cpu_family": ("cpu_vendor_family_model", {**base, "cpu": {**base["cpu"], "family": 15}}, None),
+        "failed_cpu_pinning": ("operational_pinning_capability", {**base, "cpu": {**base["cpu"], "operational_pinning": False}}, None),
+        "pmu_event_mismatch": ("pmu_event_identities", {**base, "pmu": {**base["pmu"], "events": {}}}, None),
+        "grouped_pmu_failure": ("grouped_pmu_open_capability", {**base, "pmu": {**base["pmu"], "grouped_open_capability": False}}, None),
+        "sensor_mismatch": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "identity_sha256": "0" * 64}}, None),
+        "policy_mismatch": ("cpu_frequency_policy_custody", {**base, "frequency_policy": {**base["frequency_policy"], "policy_locked": False}}, None),
+        "invalid_owner_marker": ("attempt_ownership_marker", {**base, "attempt": {**base["attempt"], "owner_marker": "wrong-owner"}}, None),
+        "old_scalar_source_commit_rejected": ("source_authority_commit_binding", base, {SOURCE_AUTHORITY_ENV: pub.SCALAR_EVIDENCE_SOURCE_AUTHORITY_COMMIT}),
+        "old_scalar_freeze_commit_rejected": ("freeze_commit_binding", base, {FREEZE_COMMIT_ENV: pub.SCALAR_EVIDENCE_MANIFEST_FREEZE_COMMIT}),
+    }
+    results: dict[str, Any] = {}
+    for label, (expected_failure, observed, env_override) in cases.items():
+        result = run_case(output_root, observed, env_override)
+        if expected_failure is None:
+            passed = result["passed"] and result.get("preflight_backend") == "physical_observed"
+        else:
+            passed = not result["passed"] and expected_failure in result["failures"]
+        results[label] = {
+            "passed": passed,
+            "expected_failure": expected_failure,
+            "status": result["status"],
+            "failures": result["failures"],
+        }
+
+    preexisting = parent / "physical_preexisting_attempt"
+    preexisting.mkdir()
+    result = run_case(preexisting, {**base, "output": {**base["output"], "root": str(preexisting)}})
+    results["preexisting_output_root"] = {
+        "passed": not result["passed"] and "output_root_absence" in result["failures"],
+        "expected_failure": "output_root_absence",
+        "status": result["status"],
+        "failures": result["failures"],
+    }
+    escaped = source_root / "physical_escape_attempt"
+    result = run_case(escaped, {**base, "output": {**base["output"], "root": str(escaped)}})
+    results["output_path_escape"] = {
+        "passed": not result["passed"] and "output_root_absence" in result["failures"],
+        "expected_failure": "output_root_absence",
+        "status": result["status"],
+        "failures": result["failures"],
+    }
+    return {
+        "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_PREFLIGHT_MOCK_SUITE_V1",
+        "results": results,
+        "passed": all(item["passed"] for item in results.values()),
+        "pmu_preflight_behavior": {
+            "disabled_group_open_close_only": True,
+            "pmu_acquisition_count": 0,
+            "scientific_data_collected": False,
+        },
+    }
+
+
 def run_synthetic_target_wrapper_test(source_root: Path, parent: Path) -> dict[str, Any]:
     output_root = parent / "synthetic_target_wrapper_attempt"
     fixture = base_preflight_fixture(source_root, output_root)
@@ -937,6 +1305,8 @@ def run_authority_refusal_tests(source_root: Path, parent: Path) -> dict[str, An
         "source_authority_mismatch": {SOURCE_AUTHORITY_ENV: "0" * 40},
         "freeze_commit_mismatch": {FREEZE_COMMIT_ENV: "0" * 40},
         "manifest_hash_mismatch": {MANIFEST_ENV: "0" * 64},
+        "old_scalar_source_commit_substitution": {SOURCE_AUTHORITY_ENV: pub.SCALAR_EVIDENCE_SOURCE_AUTHORITY_COMMIT},
+        "old_scalar_freeze_commit_substitution": {FREEZE_COMMIT_ENV: pub.SCALAR_EVIDENCE_MANIFEST_FREEZE_COMMIT},
     }
     base_env = target_authority_env(source_root, fixture_path, synthetic=True)
     for label, override in cases.items():
@@ -948,6 +1318,17 @@ def run_authority_refusal_tests(source_root: Path, parent: Path) -> dict[str, An
                 tests[label] = {"passed": True, "reason": str(exc)}
             else:
                 tests[label] = {"passed": False, "reason": "unexpectedly accepted"}
+    physical_fixture_env = target_authority_env(source_root, fixture_path, synthetic=False)
+    with temporary_env(physical_fixture_env):
+        try:
+            execute_authorized(source_root, output_root)
+        except TargetError as exc:
+            tests["fixture_forbidden_on_physical_path"] = {
+                "passed": "refuses fixture-backed preflight" in str(exc),
+                "reason": str(exc),
+            }
+        else:
+            tests["fixture_forbidden_on_physical_path"] = {"passed": False, "reason": "fixture-backed physical execution unexpectedly accepted"}
     return {
         "schema": "FAMILY10H_RELATION_ONLY_AUTHORITY_REFUSAL_TESTS_V1",
         "tests": tests,
@@ -964,9 +1345,10 @@ def self_test(source_root: Path) -> dict[str, Any]:
     safe_remove_owned_output_parent(source_root)
     parent.mkdir()
     try:
-        with temporary_env({AUTHORITY_ENV: None, SOURCE_AUTHORITY_ENV: None, FREEZE_COMMIT_ENV: None, MANIFEST_ENV: None, PREFLIGHT_FIXTURE_ENV: None, EXECUTION_MODE_ENV: None}):
+        with temporary_env({AUTHORITY_ENV: None, SOURCE_AUTHORITY_ENV: None, FREEZE_COMMIT_ENV: None, MANIFEST_ENV: None, PREFLIGHT_FIXTURE_ENV: None, PREFLIGHT_SYSTEM_MOCK_ENV: None, DEPLOYMENT_CUSTODY_ENV: None, EXECUTION_MODE_ENV: None}):
             preflight_refusal = target_preflight_refusal(source_root, parent / "missing_authority_attempt")
         fixture_suite = run_preflight_fixture_suite(source_root, parent)
+        physical_preflight_suite = run_physical_preflight_mock_suite(source_root, parent)
         authority_refusals = run_authority_refusal_tests(source_root, parent)
         synthetic_wrapper = run_synthetic_target_wrapper_test(source_root, parent)
     finally:
@@ -985,6 +1367,7 @@ def self_test(source_root: Path) -> dict[str, Any]:
         "runtime_refuses_without_authority": refusal,
         "target_preflight_refuses_without_authority": preflight_refusal,
         "target_preflight_fixture_suite": fixture_suite,
+        "physical_preflight_mock_suite": physical_preflight_suite,
         "authority_refusal_tests": authority_refusals,
         "synthetic_target_wrapper_execution": synthetic_wrapper,
         "allowed_future_result_classes": pub.FUTURE_RESULT_CLASSES,
@@ -997,6 +1380,7 @@ def self_test(source_root: Path) -> dict[str, Any]:
         and refusal["passed"]
         and preflight_refusal["passed"]
         and fixture_suite["passed"]
+        and physical_preflight_suite["passed"]
         and authority_refusals["passed"]
         and synthetic_wrapper["passed"]
     )

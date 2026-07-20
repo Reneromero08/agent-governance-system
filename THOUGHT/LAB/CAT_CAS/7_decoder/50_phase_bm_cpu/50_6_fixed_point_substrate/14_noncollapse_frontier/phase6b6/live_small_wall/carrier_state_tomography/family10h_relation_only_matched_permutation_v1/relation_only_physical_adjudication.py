@@ -28,13 +28,12 @@ def physical_threshold_contract() -> dict[str, Any]:
     contract = {
         "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_THRESHOLD_CONTRACT_V1",
         "threshold_status": "prospective_physical_thresholds_frozen_before_relation_only_acquisition",
-        "source_evidence": {
+        "scalar_evidence_provenance": {
             "basis": "sealed_family10h_v1_1_scalar_q_readout_attempt_1_and_pre_run_logic",
-            "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda",
-            "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
-            "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
+            **pub.SCALAR_EVIDENCE_PROVENANCE,
             "archive_sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
             "relation_only_target_data_used": False,
+            "not_relation_source_authority": True,
         },
         "absolute_thresholds": {
             "r_match_abs_min": 512.0,

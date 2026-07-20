@@ -1,15 +1,20 @@
 {
-  "passed": true,
+  "passed": false,
   "results": {
     "complete_passing_fixture": {
       "expected_failure": null,
-      "failures": [],
-      "passed": true,
-      "status": "TARGET_PREFLIGHT_PASSED"
+      "failures": [
+        "source_authority_commit_binding",
+        "package_decision"
+      ],
+      "passed": false,
+      "status": "TARGET_PREFLIGHT_FAILED"
     },
     "failed_operational_pinning": {
       "expected_failure": "operational_pinning_capability",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "operational_pinning_capability"
       ],
       "passed": true,
@@ -18,6 +23,8 @@
     "grouped_pmu_failure": {
       "expected_failure": "grouped_pmu_open_capability",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "grouped_pmu_open_capability"
       ],
       "passed": true,
@@ -25,6 +32,8 @@
     },
     "malformed_output_path": {
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "output_root_absence"
       ],
       "passed": true,
@@ -32,6 +41,8 @@
     },
     "missing_parent": {
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "output_root_absence"
       ],
       "passed": true,
@@ -40,6 +51,8 @@
     "missing_receiver_cpu": {
       "expected_failure": "source_receiver_cpu_identity",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "source_receiver_cpu_identity"
       ],
       "passed": true,
@@ -48,6 +61,8 @@
     "missing_source_cpu": {
       "expected_failure": "source_receiver_cpu_identity",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "source_receiver_cpu_identity"
       ],
       "passed": true,
@@ -55,6 +70,8 @@
     },
     "output_path_escape": {
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "output_root_absence"
       ],
       "passed": true,
@@ -63,6 +80,8 @@
     "owner_marker_mismatch": {
       "expected_failure": "attempt_ownership_marker",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "attempt_ownership_marker"
       ],
       "passed": true,
@@ -70,6 +89,8 @@
     },
     "partial_output": {
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "output_root_absence"
       ],
       "passed": true,
@@ -78,6 +99,8 @@
     "permission_failure": {
       "expected_failure": "output_root_absence",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "output_root_absence"
       ],
       "passed": true,
@@ -86,6 +109,8 @@
     "policy_mismatch": {
       "expected_failure": "cpu_frequency_policy_custody",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "cpu_frequency_policy_custody"
       ],
       "passed": true,
@@ -93,6 +118,8 @@
     },
     "preexisting_output_root": {
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "output_root_absence"
       ],
       "passed": true,
@@ -101,6 +128,8 @@
     "sensor_identity_mismatch": {
       "expected_failure": "temperature_sensor_authority",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "temperature_sensor_authority"
       ],
       "passed": true,
@@ -109,6 +138,8 @@
     "unavailable_pmu_event": {
       "expected_failure": "pmu_event_identities",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "pmu_event_identities"
       ],
       "passed": true,
@@ -116,13 +147,18 @@
     },
     "unresolved_physical_geometry_lowered": {
       "expected_failure": null,
-      "failures": [],
-      "passed": true,
-      "status": "TARGET_PREFLIGHT_PASSED"
+      "failures": [
+        "source_authority_commit_binding",
+        "package_decision"
+      ],
+      "passed": false,
+      "status": "TARGET_PREFLIGHT_FAILED"
     },
     "wrong_binary_hash": {
       "expected_failure": "runtime_binary_hash",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "runtime_binary_hash"
       ],
       "passed": true,
@@ -131,6 +167,8 @@
     "wrong_cpu_family": {
       "expected_failure": "cpu_vendor_family_model",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "cpu_vendor_family_model"
       ],
       "passed": true,
@@ -139,7 +177,9 @@
     "wrong_manifest_hash": {
       "expected_failure": "manifest_file_hash",
       "failures": [
-        "manifest_file_hash"
+        "source_authority_commit_binding",
+        "manifest_file_hash",
+        "package_decision"
       ],
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"
@@ -147,6 +187,8 @@
     "wrong_schedule_hash": {
       "expected_failure": "expanded_schedule_tsv_hash",
       "failures": [
+        "source_authority_commit_binding",
+        "package_decision",
         "expanded_schedule_tsv_hash"
       ],
       "passed": true,
@@ -155,7 +197,8 @@
     "wrong_source_authority_commit": {
       "expected_failure": "source_authority_commit_binding",
       "failures": [
-        "source_authority_commit_binding"
+        "source_authority_commit_binding",
+        "package_decision"
       ],
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"

@@ -47,6 +47,7 @@ SYNTHETIC_EXECUTOR_SELF_TEST_JSON = HERE / "RELATION_ONLY_SYNTHETIC_EXECUTOR_SEL
 TARGET_PREFLIGHT_SELF_TEST_JSON = HERE / "RELATION_ONLY_TARGET_PREFLIGHT_SELF_TEST.json"
 RUNTIME_CONTROL_FLOW_AUDIT_JSON = HERE / "RELATION_ONLY_RUNTIME_CONTROL_FLOW_AUDIT.json"
 SYNTHETIC_TARGET_WRAPPER_SELF_TEST_JSON = HERE / "RELATION_ONLY_SYNTHETIC_TARGET_WRAPPER_SELF_TEST.json"
+LIVE_CONTROLLER_SELF_TEST_JSON = HERE / "RELATION_ONLY_LIVE_CONTROLLER_SELF_TEST.json"
 
 SOURCE_FILES = [
     HERE / "relation_only_public.py",
@@ -55,6 +56,7 @@ SOURCE_FILES = [
     HERE / "relation_only_runtime.c",
     HERE / "relation_only_runtime.h",
     HERE / "relation_only_target.py",
+    HERE / "relation_only_live_controller.py",
     HERE / "run_relation_only_matched_permutation.py",
 ]
 CONTRACT_FILE = HERE / "RELATION_ONLY_CONTRACT.md"
@@ -690,6 +692,36 @@ def run_target_self_test() -> dict[str, Any]:
     return payload
 
 
+def run_live_controller_self_test() -> dict[str, Any]:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(HERE / "relation_only_live_controller.py"),
+            "--self-test",
+            "--source-root",
+            str(HERE),
+            "--relation-freeze-commit",
+            pub.SYNTHETIC_RELATION_FREEZE_COMMIT,
+        ],
+        text=True,
+        capture_output=True,
+        check=False,
+        timeout=3600,
+        cwd=HERE,
+    )
+    try:
+        payload = json.loads(completed.stdout)
+    except json.JSONDecodeError:
+        payload = {
+            "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_LIVE_CONTROLLER_SELF_TEST_V1",
+            "passed": False,
+            "parse_failure": completed.stdout,
+        }
+    payload["subprocess_returncode"] = completed.returncode
+    payload["stderr"] = completed.stderr
+    return payload
+
+
 def refresh_grammar_digest(candidate: dict[str, Any]) -> dict[str, Any]:
     candidate["grammar_sha256"] = pub.digest({k: v for k, v in candidate.items() if k != "grammar_sha256"})
     return candidate
@@ -902,6 +934,7 @@ def self_test(
     proof: dict[str, Any],
     runtime_build: dict[str, Any],
     target_self_test: dict[str, Any],
+    live_controller_self_test: dict[str, Any],
     physical_self_test: dict[str, Any],
 ) -> dict[str, Any]:
     grammar_validation = pub.validate_grammar(grammar)
@@ -915,6 +948,9 @@ def self_test(
         "implementation_marginal_equality_proof_passed": proof["passed"],
         "runtime_compile_and_self_test_passed": runtime_build["passed"],
         "target_self_test_passed": target_self_test.get("self_test_passed") is True,
+        "physical_preflight_mock_suite_passed": target_self_test.get("physical_preflight_mock_suite", {}).get("passed") is True,
+        "fixture_forbidden_on_physical_path": target_self_test.get("authority_refusal_tests", {}).get("tests", {}).get("fixture_forbidden_on_physical_path", {}).get("passed") is True,
+        "synthetic_live_controller_passed": live_controller_self_test.get("passed") is True,
         "physical_adjudicator_self_test_passed": physical_self_test["passed"],
         "synthetic_positive_fixture_detected": adversary["tests"]["synthetic_positive_fixture_detected"],
         "scalar_replay_adversary_rejected": adversary["tests"]["scalar_replay_rejected"],
@@ -943,6 +979,11 @@ def self_test(
             "live_invocation_count": target_self_test.get("live_invocation_count"),
             "pmu_acquisition_count": target_self_test.get("pmu_acquisition_count"),
         },
+        "live_controller_summary": {
+            "passed": live_controller_self_test.get("passed") is True,
+            "target_contact_count": live_controller_self_test.get("target_contact_count"),
+            "physical_pmu_acquisition_count": live_controller_self_test.get("physical_pmu_acquisition_count"),
+        },
         "physical_adjudicator_summary": {
             "passed": physical_self_test["passed"],
             "positive_result": physical_self_test["positive_result"],
@@ -961,15 +1002,19 @@ def build_readiness(
     proof: dict[str, Any],
     runtime_build: dict[str, Any],
     target_self_test: dict[str, Any],
+    live_controller_self_test: dict[str, Any],
     physical_self_test: dict[str, Any],
     self_test_result: dict[str, Any],
     validate: dict[str, Any],
+    relation_source_authority: str,
 ) -> dict[str, Any]:
     gates = runtime_build.get("implementation_gates", {})
     preflight = target_self_test.get("target_preflight_refuses_without_authority", {})
     preflight_suite = target_self_test.get("target_preflight_fixture_suite", {})
+    physical_preflight_suite = target_self_test.get("physical_preflight_mock_suite", {})
     authority_refusals = target_self_test.get("authority_refusal_tests", {})
     synthetic_wrapper = target_self_test.get("synthetic_target_wrapper_execution", {})
+    relation_source_authority_valid = bool(re.fullmatch(r"[0-9a-f]{40}", relation_source_authority)) and relation_source_authority not in pub.SCALAR_EVIDENCE_COMMITS
     checks = {
         "runtime_source_compiles_for_target_linux": gates.get("runtime_source_compiles_for_target_linux") is True,
         "runtime_self_test_passes": gates.get("runtime_self_test_passes") is True,
@@ -990,8 +1035,13 @@ def build_readiness(
         "all_physical_controls_implemented": gates.get("all_physical_controls_implemented") is True,
         "target_preflight_implemented": preflight.get("passed") is True and preflight_suite.get("passed") is True,
         "target_preflight_negative_fixtures_passed": preflight_suite.get("passed") is True,
+        "physical_preflight_mock_suite_passed": physical_preflight_suite.get("passed") is True,
+        "fixture_forbidden_on_physical_path": authority_refusals.get("tests", {}).get("fixture_forbidden_on_physical_path", {}).get("passed") is True,
         "authority_refusal_regressions_passed": authority_refusals.get("passed") is True,
         "authorized_synthetic_target_wrapper_execution_passed": synthetic_wrapper.get("passed") is True,
+        "synthetic_live_controller_passed": live_controller_self_test.get("passed") is True,
+        "relation_source_authority_bound": relation_source_authority_valid,
+        "scalar_evidence_not_used_as_relation_custody": relation_source_authority not in pub.SCALAR_EVIDENCE_COMMITS,
         "output_root_ownership_law_passed": preflight_suite.get("results", {}).get("preexisting_output_root", {}).get("passed") is True
         and preflight_suite.get("results", {}).get("missing_parent", {}).get("passed") is True
         and preflight_suite.get("results", {}).get("permission_failure", {}).get("passed") is True
@@ -1015,6 +1065,8 @@ def build_readiness(
         "zero_live_activity": runtime_build.get("live_activity") is False
         and target_self_test.get("live_invocation_count") == 0
         and target_self_test.get("pmu_acquisition_count") == 0
+        and live_controller_self_test.get("target_contact_count") == 0
+        and live_controller_self_test.get("physical_pmu_acquisition_count") == 0
         and synthetic_wrapper.get("physical_measurement") is False
         and synthetic_wrapper.get("pmu_acquisition_count") == 0,
     }
@@ -1048,9 +1100,11 @@ def implementation_manifest(
     source_hashes_result: dict[str, Any],
     runtime_build: dict[str, Any],
     target_self_test: dict[str, Any],
+    live_controller_self_test: dict[str, Any],
     physical_self_test: dict[str, Any],
     threshold_contract: dict[str, Any],
     readiness: dict[str, Any],
+    relation_source_authority: str,
 ) -> dict[str, Any]:
     manifest = {
         "schema": "FAMILY10H_RELATION_ONLY_IMPLEMENTATION_MANIFEST_V2",
@@ -1059,9 +1113,10 @@ def implementation_manifest(
         "package_decision": readiness["package_decision"],
         "public_randomization_seed": pub.PUBLIC_RANDOMIZATION_SEED,
         "authority_binding": {
-            "source_authority_commit": pub.SOURCE_AUTHORITY_COMMIT,
-            "manifest_freeze_commit": pub.MANIFEST_FREEZE_COMMIT,
-            "postrun_seal_commit": pub.POSTRUN_SEAL_COMMIT,
+            "scalar_evidence_provenance": pub.SCALAR_EVIDENCE_PROVENANCE,
+            "relation_source_authority_commit": relation_source_authority,
+            "relation_manifest_freeze_commit_policy": pub.RELATION_FREEZE_AUTHORITY_POLICY,
+            "relation_manifest_freeze_commit_not_embedded": True,
             "approved_sensor_identity_sha256": pub.APPROVED_SENSOR_IDENTITY_SHA256,
             "attempt_ceiling": pub.ATTEMPT_CEILING,
         },
@@ -1081,6 +1136,8 @@ def implementation_manifest(
             "runtime_binary_authority": runtime_build.get("runtime_binary_authority"),
         },
         "target_self_test_passed": target_self_test.get("self_test_passed") is True,
+        "live_controller_self_test_passed": live_controller_self_test.get("passed") is True,
+        "live_controller_self_test_schema": live_controller_self_test.get("schema"),
         "physical_adjudicator_self_test_sha256": physical_self_test["self_test_sha256"],
         "threshold_contract_sha256": threshold_contract["threshold_contract_sha256"],
         "build_readiness_sha256": readiness["build_readiness_sha256"],
@@ -1113,6 +1170,7 @@ def validate_artifacts() -> dict[str, Any]:
         "relation_only_runtime.c",
         "relation_only_runtime.h",
         "relation_only_target.py",
+        "relation_only_live_controller.py",
         "run_relation_only_matched_permutation.py",
         "relation_only_adjudication.py",
         "relation_only_physical_adjudication.py",
@@ -1132,6 +1190,7 @@ def validate_artifacts() -> dict[str, Any]:
         "RELATION_ONLY_TARGET_SELF_TEST.json",
         "RELATION_ONLY_TARGET_PREFLIGHT_SELF_TEST.json",
         "RELATION_ONLY_SYNTHETIC_TARGET_WRAPPER_SELF_TEST.json",
+        "RELATION_ONLY_LIVE_CONTROLLER_SELF_TEST.json",
         "RELATION_ONLY_PHYSICAL_ADJUDICATOR_SELF_TEST.json",
         "RELATION_ONLY_PHYSICAL_THRESHOLD_CONTRACT.json",
         "RELATION_ONLY_BUILD_READINESS.json",
@@ -1167,15 +1226,15 @@ def validate_artifacts() -> dict[str, Any]:
         failures.append("self-test failed")
     if manifest and manifest.get("package_decision") != decision:
         failures.append("package decision mismatch")
-    expected_authority = {
-        "source_authority_commit": pub.SOURCE_AUTHORITY_COMMIT,
-        "manifest_freeze_commit": pub.MANIFEST_FREEZE_COMMIT,
-        "postrun_seal_commit": pub.POSTRUN_SEAL_COMMIT,
-        "approved_sensor_identity_sha256": pub.APPROVED_SENSOR_IDENTITY_SHA256,
-        "attempt_ceiling": pub.ATTEMPT_CEILING,
-    }
-    if manifest and manifest.get("authority_binding") != expected_authority:
-        failures.append("authority binding mismatch")
+    authority = manifest.get("authority_binding", {}) if manifest else {}
+    relation_source = authority.get("relation_source_authority_commit")
+    if manifest and authority.get("scalar_evidence_provenance") != pub.SCALAR_EVIDENCE_PROVENANCE:
+        failures.append("scalar evidence provenance mismatch")
+    if manifest and authority.get("relation_manifest_freeze_commit_policy") != pub.RELATION_FREEZE_AUTHORITY_POLICY:
+        failures.append("relation freeze authority policy mismatch")
+    if manifest and decision == pub.PACKAGE_DECISION_BUILD_READY:
+        if not (isinstance(relation_source, str) and re.fullmatch(r"[0-9a-f]{40}", relation_source) and relation_source not in pub.SCALAR_EVIDENCE_COMMITS):
+            failures.append("relation source authority invalid for build-ready package")
     validate = {
         "schema": "FAMILY10H_RELATION_ONLY_OFFLINE_VALIDATE_V2",
         "required_artifacts": required,
@@ -1194,7 +1253,12 @@ def validate_artifacts() -> dict[str, Any]:
     return validate
 
 
-def prepare() -> dict[str, Any]:
+def normalized_relation_source_authority(value: str | None) -> str:
+    return value or os.environ.get("FAMILY10H_RELATION_ONLY_RELATION_SOURCE_AUTHORITY") or pub.RELATION_SOURCE_AUTHORITY_UNSET
+
+
+def prepare(relation_source_authority: str | None = None) -> dict[str, Any]:
+    relation_source_authority = normalized_relation_source_authority(relation_source_authority)
     grammar = pub.relation_grammar(pub.PACKAGE_DECISION_BLOCKED)
     schedule = pub.build_schedule(grammar)
     pub.write_json(GRAMMAR_JSON, grammar)
@@ -1255,7 +1319,8 @@ def prepare() -> dict[str, Any]:
         {k: v for k, v in provisional_readiness.items() if k != "build_readiness_sha256"}
     )
     target_stub = {"self_test_passed": False, "provisional": True}
-    provisional_self = self_test(grammar, schedule, proof, runtime_build, target_stub, physical_self_test)
+    controller_stub = {"passed": False, "provisional": True}
+    provisional_self = self_test(grammar, schedule, proof, runtime_build, target_stub, controller_stub, physical_self_test)
     provisional_validate = {"schema": "FAMILY10H_RELATION_ONLY_OFFLINE_VALIDATE_V2", "passed": False}
     manifest = implementation_manifest(
         grammar,
@@ -1268,9 +1333,11 @@ def prepare() -> dict[str, Any]:
         source_hashes_result,
         runtime_build,
         target_stub,
+        controller_stub,
         physical_self_test,
         threshold_contract,
         provisional_readiness,
+        relation_source_authority,
     )
     pub.write_json(MANIFEST_JSON, manifest)
     write_text(MANIFEST_SHA, pub.sha256_file(MANIFEST_JSON) + "\n")
@@ -1300,9 +1367,11 @@ def prepare() -> dict[str, Any]:
         source_hashes_result,
         runtime_build,
         target_stub,
+        controller_stub,
         physical_self_test,
         threshold_contract,
         candidate_readiness,
+        relation_source_authority,
     )
     pub.write_json(MANIFEST_JSON, manifest)
     write_text(MANIFEST_SHA, pub.sha256_file(MANIFEST_JSON) + "\n")
@@ -1331,13 +1400,24 @@ def prepare() -> dict[str, Any]:
             },
         ),
     )
-    self_test_result = self_test(grammar, schedule, proof, runtime_build, target_self_test, physical_self_test)
+    live_controller_self_test = run_live_controller_self_test()
+    pub.write_json(LIVE_CONTROLLER_SELF_TEST_JSON, live_controller_self_test)
+    self_test_result = self_test(grammar, schedule, proof, runtime_build, target_self_test, live_controller_self_test, physical_self_test)
     pub.write_json(SELF_TEST_JSON, self_test_result)
     validate = validate_artifacts()
     readiness = provisional_readiness
     manifest = json.loads(MANIFEST_JSON.read_text(encoding="utf-8"))
     for _ in range(4):
-        readiness = build_readiness(proof, runtime_build, target_self_test, physical_self_test, self_test_result, validate)
+        readiness = build_readiness(
+            proof,
+            runtime_build,
+            target_self_test,
+            live_controller_self_test,
+            physical_self_test,
+            self_test_result,
+            validate,
+            relation_source_authority,
+        )
         pub.write_json(BUILD_READINESS_JSON, readiness)
         manifest = implementation_manifest(
             grammar,
@@ -1350,9 +1430,11 @@ def prepare() -> dict[str, Any]:
             source_hashes_result,
             runtime_build,
             target_self_test,
+            live_controller_self_test,
             physical_self_test,
             threshold_contract,
             readiness,
+            relation_source_authority,
         )
         pub.write_json(MANIFEST_JSON, manifest)
         write_text(MANIFEST_SHA, pub.sha256_file(MANIFEST_JSON) + "\n")
@@ -1380,7 +1462,9 @@ def prepare() -> dict[str, Any]:
                 },
             ),
         )
-        self_test_result = self_test(grammar, schedule, proof, runtime_build, target_self_test, physical_self_test)
+        live_controller_self_test = run_live_controller_self_test()
+        pub.write_json(LIVE_CONTROLLER_SELF_TEST_JSON, live_controller_self_test)
+        self_test_result = self_test(grammar, schedule, proof, runtime_build, target_self_test, live_controller_self_test, physical_self_test)
         pub.write_json(SELF_TEST_JSON, self_test_result)
         next_validate = validate_artifacts()
         pub.write_json(VALIDATE_JSON, next_validate)
@@ -1401,6 +1485,8 @@ def prepare() -> dict[str, Any]:
         "self_test_passed": self_test_result["passed"],
         "runtime_build_passed": runtime_build["passed"],
         "target_self_test_passed": target_self_test.get("self_test_passed") is True,
+        "live_controller_self_test_passed": live_controller_self_test.get("passed") is True,
+        "relation_source_authority_commit": relation_source_authority,
         "physical_adjudicator_passed": physical_self_test["passed"],
         "adversary_passed": adversary["passed"],
         "transport_passed": transport["passed"],
@@ -1413,9 +1499,10 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--prepare-only", action="store_true")
     parser.add_argument("--validate-only", action="store_true")
+    parser.add_argument("--relation-source-authority", default=None)
     args = parser.parse_args(argv)
     if args.prepare_only:
-        result = prepare()
+        result = prepare(args.relation_source_authority)
     elif args.validate_only:
         result = validate_artifacts()
     else:
