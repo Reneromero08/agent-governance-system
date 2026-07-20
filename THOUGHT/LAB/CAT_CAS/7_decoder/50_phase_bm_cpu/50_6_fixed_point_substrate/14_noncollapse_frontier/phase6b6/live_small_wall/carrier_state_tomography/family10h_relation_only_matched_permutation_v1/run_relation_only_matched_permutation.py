@@ -5,12 +5,14 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import os
 import re
 import shutil
 import subprocess
 import sys
+import tarfile
 from pathlib import Path
 from typing import Any, Callable
 
@@ -34,6 +36,9 @@ MANIFEST_JSON = HERE / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json"
 MANIFEST_SHA = HERE / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.sha256"
 SOURCE_HASHES_JSON = HERE / "RELATION_ONLY_SOURCE_HASHES.json"
 SOURCE_BUNDLE = HERE / "RELATION_ONLY_SOURCE_BUNDLE.tar.gz"
+SENSOR_AUTHORITY_JSON = HERE / pub.SENSOR_AUTHORITY_BINDING_FILENAME
+SENSOR_AUTHORITY_SOURCE = HERE.parent / "family10h_carrier_tomography_v1" / "CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_AUTHORITY.json"
+PMU_PREFLIGHT_BINARY = HERE / "relation_only_pmu_preflight"
 SCHEDULE_JSON = HERE / "RELATION_ONLY_PUBLIC_SCHEDULE.json"
 SCHEDULE_TSV = HERE / "RELATION_ONLY_PUBLIC_SCHEDULE.tsv"
 SCHEDULE_SHA = HERE / "RELATION_ONLY_PUBLIC_SCHEDULE.sha256"
@@ -55,6 +60,7 @@ SOURCE_FILES = [
     HERE / "relation_only_physical_adjudication.py",
     HERE / "relation_only_runtime.c",
     HERE / "relation_only_runtime.h",
+    HERE / "relation_only_pmu_preflight.c",
     HERE / "relation_only_target.py",
     HERE / "relation_only_live_controller.py",
     HERE / "run_relation_only_matched_permutation.py",
@@ -157,18 +163,220 @@ def validate_schedule_json_manifest(manifest: dict[str, Any], generated_schedule
     return {"passed": not failures, "failures": failures}
 
 
-def source_hashes(bundle: dict[str, Any], runtime_build: dict[str, Any]) -> dict[str, Any]:
+def git_text(args: list[str], *, cwd: Path | None = None) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(["git", *args], cwd=cwd or HERE, text=True, capture_output=True, check=False, timeout=60)
+
+
+def git_bytes(args: list[str], *, cwd: Path | None = None) -> subprocess.CompletedProcess[bytes]:
+    return subprocess.run(["git", *args], cwd=cwd or HERE, text=False, capture_output=True, check=False, timeout=60)
+
+
+def git_repo_root() -> Path | None:
+    result = git_text(["rev-parse", "--show-toplevel"])
+    if result.returncode != 0:
+        return None
+    return Path(result.stdout.strip())
+
+
+def sha256_bytes(payload: bytes) -> str:
+    return hashlib.sha256(payload).hexdigest()
+
+
+def source_authority_path_map(repo_root: Path) -> dict[str, str]:
+    paths = SOURCE_FILES + [CONTRACT_FILE]
+    return {path.name: path.resolve().relative_to(repo_root).as_posix() for path in paths}
+
+
+def source_bundle_member_hashes(bundle_path: Path) -> dict[str, dict[str, Any]]:
+    members: dict[str, dict[str, Any]] = {}
+    with tarfile.open(bundle_path, "r:gz") as handle:
+        for member in handle.getmembers():
+            if not member.isfile():
+                continue
+            extracted = handle.extractfile(member)
+            payload = extracted.read() if extracted else b""
+            members[Path(member.name).name] = {"sha256": sha256_bytes(payload), "size": len(payload)}
+    return members
+
+
+def source_authority_validation(
+    relation_source_authority: str,
+    files: dict[str, dict[str, Any]],
+    bundle: dict[str, Any],
+    *,
+    freeze_commit: str | None = None,
+) -> dict[str, Any]:
+    failures: list[str] = []
+    repo_root = git_repo_root()
+    current_head = git_text(["rev-parse", "HEAD"]).stdout.strip() if repo_root else None
+    freeze = freeze_commit or current_head
+    commit_exists = False
+    freeze_exists = False
+    ancestor = False
+    tree_hash_matches: dict[str, bool] = {}
+    worktree_source_matches_authority: dict[str, bool] = {}
+    bundle_matches_authority: dict[str, bool] = {}
+    path_map: dict[str, str] = {}
+    if not isinstance(relation_source_authority, str) or not re.fullmatch(r"[0-9a-f]{40}", relation_source_authority):
+        failures.append("relation source authority is not a full 40-character commit SHA")
+    if relation_source_authority in pub.SCALAR_EVIDENCE_COMMITS:
+        failures.append("relation source authority reuses scalar evidence provenance commit")
+    if repo_root is None:
+        failures.append("git repository root unavailable")
+    elif not failures or re.fullmatch(r"[0-9a-f]{40}", relation_source_authority or ""):
+        commit_type = git_text(["cat-file", "-t", relation_source_authority], cwd=repo_root)
+        commit_exists = commit_type.returncode == 0 and commit_type.stdout.strip() == "commit"
+        if not commit_exists:
+            failures.append("relation source authority commit does not resolve")
+        if freeze:
+            freeze_type = git_text(["cat-file", "-t", freeze], cwd=repo_root)
+            freeze_exists = freeze_type.returncode == 0 and freeze_type.stdout.strip() == "commit"
+            if not freeze_exists:
+                failures.append("relation manifest freeze commit does not resolve")
+        if commit_exists and freeze_exists:
+            ancestry = git_text(["merge-base", "--is-ancestor", relation_source_authority, freeze], cwd=repo_root)
+            ancestor = ancestry.returncode == 0
+            if not ancestor:
+                failures.append("relation source authority is not an ancestor of the manifest freeze commit")
+        if commit_exists:
+            path_map = source_authority_path_map(repo_root)
+            bundle_members = source_bundle_member_hashes(HERE / bundle.get("path", "")) if bundle.get("path") else {}
+            for name, rel_path in path_map.items():
+                blob = git_bytes(["show", f"{relation_source_authority}:{rel_path}"], cwd=repo_root)
+                if blob.returncode != 0:
+                    tree_hash_matches[name] = False
+                    worktree_source_matches_authority[name] = False
+                    bundle_matches_authority[name] = False
+                    failures.append(f"source authority tree missing {name}")
+                    continue
+                git_sha = sha256_bytes(blob.stdout)
+                expected_sha = files.get(name, {}).get("sha256")
+                tree_hash_matches[name] = git_sha == expected_sha
+                if not tree_hash_matches[name]:
+                    failures.append(f"source authority tree hash mismatch: {name}")
+                worktree_source_matches_authority[name] = pub.sha256_file(HERE / name) == git_sha
+                if not worktree_source_matches_authority[name]:
+                    failures.append(f"source file changed after source authority commit: {name}")
+                bundle_matches_authority[name] = bundle_members.get(name, {}).get("sha256") == git_sha
+                if not bundle_matches_authority[name]:
+                    failures.append(f"source bundle member mismatch: {name}")
+    checks = {
+        "source_authority_sha_syntax": isinstance(relation_source_authority, str) and re.fullmatch(r"[0-9a-f]{40}", relation_source_authority) is not None,
+        "source_authority_commit_exists": commit_exists,
+        "freeze_commit_exists": freeze_exists if freeze else False,
+        "source_authority_ancestor_of_freeze": ancestor,
+        "source_authority_not_scalar_evidence": relation_source_authority not in pub.SCALAR_EVIDENCE_COMMITS,
+        "source_tree_matches_bound_hashes": bool(tree_hash_matches) and all(tree_hash_matches.values()),
+        "worktree_source_matches_authority": bool(worktree_source_matches_authority) and all(worktree_source_matches_authority.values()),
+        "source_bundle_matches_authority": bool(bundle_matches_authority) and all(bundle_matches_authority.values()),
+    }
+    return {
+        "schema": "FAMILY10H_RELATION_ONLY_SOURCE_AUTHORITY_VALIDATION_V1",
+        "relation_source_authority_commit": relation_source_authority,
+        "manifest_freeze_commit_under_test": freeze,
+        "current_head": current_head,
+        "path_map": path_map,
+        "checks": checks,
+        "tree_hash_matches": tree_hash_matches,
+        "worktree_source_matches_authority": worktree_source_matches_authority,
+        "source_bundle_matches_authority": bundle_matches_authority,
+        "failures": failures,
+        "passed": not failures and all(checks.values()),
+    }
+
+
+def source_authority_regression_tests(
+    relation_source_authority: str,
+    files: dict[str, dict[str, Any]],
+    bundle: dict[str, Any],
+) -> dict[str, Any]:
+    repo_root = git_repo_root()
+    head = git_text(["rev-parse", "HEAD"]).stdout.strip() if repo_root else None
+    parent = git_text(["rev-parse", "HEAD~1"]).stdout.strip() if repo_root else None
+    typo = (relation_source_authority[:-1] + ("0" if relation_source_authority[-1] != "0" else "1")) if re.fullmatch(r"[0-9a-f]{40}", relation_source_authority or "") else "1094d3b3c613558dd31ec297ad95ef927a1e06db"
+    bad_files = dict(files)
+    if bad_files:
+        first = sorted(bad_files)[0]
+        bad_files[first] = {**bad_files[first], "sha256": "0" * 64}
+    cases = {
+        "nonexistent_syntactically_valid_sha": "1094d3b3c613558dd31ec297ad95ef927a1e06db",
+        "one_character_sha_typo": typo,
+        "real_but_wrong_source_tree_commit": parent or relation_source_authority,
+        "descendant_commit_used_as_source_authority": head or relation_source_authority,
+        "scalar_evidence_commit_used_as_relation_authority": pub.SCALAR_EVIDENCE_SOURCE_AUTHORITY_COMMIT,
+        "source_file_changed_after_source_authority_commit": parent or relation_source_authority,
+    }
+    results: dict[str, Any] = {}
+    for label, sha in cases.items():
+        freeze = parent if label == "descendant_commit_used_as_source_authority" and parent else head
+        report = source_authority_validation(sha, files, bundle, freeze_commit=freeze)
+        results[label] = {
+            "passed": report["passed"] is False,
+            "validation_passed": report["passed"],
+            "failures": report["failures"],
+            "checks": report["checks"],
+        }
+    mismatch = source_authority_validation(relation_source_authority, bad_files, bundle, freeze_commit=head)
+    results["source_bundle_not_matching_source_authority_tree"] = {
+        "passed": mismatch["passed"] is False,
+        "validation_passed": mismatch["passed"],
+        "failures": mismatch["failures"],
+        "checks": mismatch["checks"],
+    }
+    return {
+        "schema": "FAMILY10H_RELATION_ONLY_SOURCE_AUTHORITY_REGRESSION_TESTS_V1",
+        "results": results,
+        "passed": all(item["passed"] for item in results.values()),
+    }
+
+
+def write_sensor_authority_binding() -> dict[str, Any]:
+    source_payload = json.loads(SENSOR_AUTHORITY_SOURCE.read_text(encoding="utf-8"))
+    identity = source_payload.get("approved_sensor_identity", {})
+    result = {
+        "schema": "FAMILY10H_RELATION_ONLY_SENSOR_AUTHORITY_BINDING_V1",
+        "source_authority_file": str(SENSOR_AUTHORITY_SOURCE.relative_to(HERE.parent)),
+        "source_authority_file_sha256": pub.sha256_file(SENSOR_AUTHORITY_SOURCE),
+        "temperature_sensor_authority_sha256": source_payload.get("temperature_sensor_authority_sha256"),
+        "approved_sensor_identity": identity,
+        "approved_sensor_identity_sha256": identity.get("identity_sha256"),
+        "approved_target_identity": pub.APPROVED_TARGET_IDENTITY,
+        "approved_target_identity_sha256": pub.APPROVED_TARGET_IDENTITY_SHA256,
+        "unlabeled_legacy_temp1_input_approved": identity.get("sensor_label_present") is False and identity.get("sensor_input") == "temp1_input",
+        "passed": (
+            identity == pub.APPROVED_SENSOR_IDENTITY
+            and identity.get("identity_sha256") == pub.APPROVED_SENSOR_IDENTITY_SHA256
+            and source_payload.get("temperature_sensor_authority_sha256") == pub.APPROVED_SENSOR_AUTHORITY_SHA256
+        ),
+    }
+    result["sensor_authority_binding_sha256"] = pub.digest({k: v for k, v in result.items() if k != "sensor_authority_binding_sha256"})
+    pub.write_json(SENSOR_AUTHORITY_JSON, result)
+    return result
+
+
+def source_hashes(
+    bundle: dict[str, Any],
+    runtime_build: dict[str, Any],
+    relation_source_authority: str,
+    sensor_authority: dict[str, Any],
+) -> dict[str, Any]:
     files = {}
     for path in SOURCE_FILES + [CONTRACT_FILE]:
         files[path.name] = {"sha256": pub.sha256_file(path), "size": path.stat().st_size}
-    return {
-        "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V2",
+    result = {
+        "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V3",
         "science_package_id": pub.SCIENCE_PACKAGE_ID,
         "files": files,
         "source_bundle": bundle,
         "runtime_binary_authority": runtime_build.get("runtime_binary_authority"),
+        "pmu_preflight_helper_authority": runtime_build.get("pmu_preflight_helper", {}).get("helper_binary_authority"),
+        "sensor_authority_binding": sensor_authority,
         "runtime_build_receipt_sha256": pub.digest(runtime_build),
     }
+    validation = source_authority_validation(relation_source_authority, files, bundle)
+    result["relation_source_authority_validation"] = validation
+    result["source_authority_regression_tests"] = source_authority_regression_tests(relation_source_authority, files, bundle)
+    return result
 
 
 def run_command(command: list[str], *, timeout: int = 30, cwd: Path | None = None) -> dict[str, Any]:
@@ -363,6 +571,7 @@ def runtime_static_inspection() -> dict[str, Any]:
         "gate_policy": "readiness gates are derived from compile, execution, disassembly, fixtures, and exact hash comparisons",
         "runtime_c_sha256": pub.sha256_file(HERE / "relation_only_runtime.c"),
         "runtime_h_sha256": pub.sha256_file(HERE / "relation_only_runtime.h"),
+        "pmu_preflight_helper_c_sha256": pub.sha256_file(HERE / "relation_only_pmu_preflight.c"),
         "target_py_sha256": pub.sha256_file(HERE / "relation_only_target.py"),
     }
 
@@ -379,6 +588,106 @@ def extract_disassembly_function(disassembly: str, symbol: str) -> str:
         if collecting:
             body.append(line)
     return "\n".join(body)
+
+
+def compile_pmu_preflight_helper(target_compiler: dict[str, Any], distro: str) -> dict[str, Any]:
+    helper = PMU_PREFLIGHT_BINARY
+    if helper.exists():
+        helper.unlink()
+    source = HERE / "relation_only_pmu_preflight.c"
+    result: dict[str, Any] = {
+        "schema": "FAMILY10H_RELATION_ONLY_PMU_PREFLIGHT_HELPER_BUILD_V1",
+        "source": source.name,
+        "source_sha256": pub.sha256_file(source),
+        "compile_attempted": bool(target_compiler.get("available")),
+        "pmu_acquisition_count": 0,
+        "enabled_measurement_interval": False,
+        "scientific_data_collected": False,
+        "passed": False,
+        "blockers": [],
+    }
+    if not target_compiler.get("available"):
+        result["blockers"].append("no target-compatible compiler for PMU helper")
+        result["helper_binary_authority"] = {"present": False, "compiled_binary_sha256": None}
+        return result
+    wsl_source = wsl_path(source, distro)
+    wsl_helper = wsl_path(helper, distro)
+    command = [
+        "wsl.exe",
+        "-d",
+        distro,
+        "--",
+        target_compiler["path"],
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-g",
+        wsl_source,
+        "-o",
+        wsl_helper,
+    ]
+    completed = run_command(command, timeout=120, cwd=HERE)
+    result["compile_command"] = command
+    result["compile_returncode"] = completed["returncode"]
+    result["compile_stdout"] = completed["stdout"]
+    result["compile_stderr"] = completed["stderr"]
+    if completed["returncode"] != 0 or not helper.exists():
+        result["blockers"].append("PMU preflight helper compile failed")
+        result["helper_binary_authority"] = {
+            "present": helper.exists(),
+            "compiled_binary_sha256": pub.sha256_file(helper) if helper.exists() else None,
+            "compile_status": "compile_failed",
+        }
+        return result
+    self_test_command = ["wsl.exe", "-d", distro, "--", wsl_helper, "--self-test"]
+    self_test = run_command(self_test_command, timeout=30, cwd=HERE)
+    parsed_self_test: dict[str, Any] | None = None
+    try:
+        parsed_self_test = json.loads(self_test["stdout"])
+    except json.JSONDecodeError:
+        parsed_self_test = None
+    file_result = run_command(["wsl.exe", "-d", distro, "--", "file", wsl_helper], timeout=15)
+    result["self_test_command"] = self_test_command
+    result["self_test"] = self_test
+    result["parsed_self_test"] = parsed_self_test
+    result["helper_binary_authority"] = {
+        "present": True,
+        "path": helper.name,
+        "compiled_binary_sha256": pub.sha256_file(helper),
+        "size": helper.stat().st_size,
+        "compiler_identity": target_compiler,
+        "compiler_flags": ["-std=c11", "-Wall", "-Wextra", "-Werror", "-O2", "-g"],
+        "helper_c_sha256": pub.sha256_file(source),
+        "binary_format": file_result["stdout"].strip(),
+        "compile_status": "compiled_target_compatible_linux_binary",
+    }
+    regressions = (parsed_self_test or {}).get("negative_regressions", {})
+    result["regression_checks"] = {
+        "malformed_event_identity": regressions.get("malformed_event_identity") is True,
+        "partial_group_open": regressions.get("partial_group_open") is True,
+        "leaked_descriptor": regressions.get("leaked_descriptor") is True,
+        "enable_attempt": regressions.get("enable_attempt") is True,
+        "read_attempt": regressions.get("read_attempt") is True,
+        "incorrect_structure_size": regressions.get("incorrect_structure_size") is True,
+        "missing_event": regressions.get("missing_event") is True,
+    }
+    result["passed"] = (
+        self_test["returncode"] == 0
+        and parsed_self_test is not None
+        and parsed_self_test.get("passed") is True
+        and parsed_self_test.get("uses_system_perf_event_attr") is True
+        and parsed_self_test.get("pmu_open_count") == 0
+        and parsed_self_test.get("pmu_acquisition_count") == 0
+        and parsed_self_test.get("enabled_measurement_interval") is False
+        and parsed_self_test.get("scientific_data_collected") is False
+        and all(result["regression_checks"].values())
+    )
+    if not result["passed"]:
+        result["blockers"].append("PMU preflight helper self-test failed")
+    result["helper_build_sha256"] = pub.digest({k: v for k, v in result.items() if k != "helper_build_sha256"})
+    return result
 
 
 def disassembly_control_flow_audit(distro: str, wsl_binary: str) -> dict[str, Any]:
@@ -454,12 +763,23 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
             "compiled_binary_sha256": None,
             "compile_status": "not_compiled_no_target_compatible_compiler",
         }
+        receipt["pmu_preflight_helper"] = {
+            "schema": "FAMILY10H_RELATION_ONLY_PMU_PREFLIGHT_HELPER_BUILD_V1",
+            "passed": False,
+            "blockers": ["no target-compatible compiler for PMU helper"],
+            "pmu_acquisition_count": 0,
+            "enabled_measurement_interval": False,
+            "scientific_data_collected": False,
+        }
         receipt["implementation_gates"] = {
             **static["gates"],
             "runtime_source_compiles_for_target_linux": False,
             "runtime_self_test_passes": False,
             "synthetic_executor_complete_schedule_passed": False,
             "target_linux_binary_bound_to_source": False,
+            "pmu_preflight_helper_compiles": False,
+            "pmu_preflight_helper_self_test_passes": False,
+            "pmu_preflight_helper_no_acquisition": False,
         }
         receipt["runtime_build_sha256"] = pub.digest({k: v for k, v in receipt.items() if k != "runtime_build_sha256"})
         return receipt
@@ -497,12 +817,16 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
             "compiled_binary_sha256": pub.sha256_file(binary) if binary.exists() else None,
             "compile_status": "compile_failed",
         }
+        receipt["pmu_preflight_helper"] = compile_pmu_preflight_helper(target_compiler, distro)
         receipt["implementation_gates"] = {
             **static["gates"],
             "runtime_source_compiles_for_target_linux": False,
             "runtime_self_test_passes": False,
             "synthetic_executor_complete_schedule_passed": False,
             "target_linux_binary_bound_to_source": False,
+            "pmu_preflight_helper_compiles": receipt["pmu_preflight_helper"].get("compile_returncode") == 0,
+            "pmu_preflight_helper_self_test_passes": receipt["pmu_preflight_helper"].get("passed") is True,
+            "pmu_preflight_helper_no_acquisition": receipt["pmu_preflight_helper"].get("pmu_acquisition_count") == 0,
         }
         receipt["runtime_build_sha256"] = pub.digest({k: v for k, v in receipt.items() if k != "runtime_build_sha256"})
         return receipt
@@ -568,6 +892,8 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
         if output_root.exists():
             shutil.rmtree(output_root)
     file_result = run_command(["wsl.exe", "-d", distro, "--", "file", wsl_binary], timeout=15)
+    pmu_helper = compile_pmu_preflight_helper(target_compiler, distro)
+    receipt["pmu_preflight_helper"] = pmu_helper
     receipt["runtime_self_test"] = runtime
     receipt["missing_authority_refusal"] = {
         "returncode": missing_auth["returncode"],
@@ -592,6 +918,7 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
         ],
         "runtime_c_sha256": pub.sha256_file(HERE / "relation_only_runtime.c"),
         "runtime_h_sha256": pub.sha256_file(HERE / "relation_only_runtime.h"),
+        "pmu_preflight_helper_authority": pmu_helper.get("helper_binary_authority"),
         "binary_format": file_result["stdout"].strip(),
         "compile_status": "compiled_target_compatible_linux_binary",
     }
@@ -603,6 +930,9 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
         "synthetic_executor_complete_schedule_passed": synthetic_summary["passed"],
         "missing_authority_refusal_passed": receipt["missing_authority_refusal"]["passed"],
         "target_linux_binary_bound_to_source": binary.exists() and pub.sha256_file(HERE / "relation_only_runtime.c") == receipt["runtime_binary_authority"]["runtime_c_sha256"],
+        "pmu_preflight_helper_compiles": pmu_helper.get("compile_returncode") == 0 and pmu_helper.get("helper_binary_authority", {}).get("present") is True,
+        "pmu_preflight_helper_self_test_passes": pmu_helper.get("passed") is True,
+        "pmu_preflight_helper_no_acquisition": pmu_helper.get("pmu_acquisition_count") == 0 and pmu_helper.get("enabled_measurement_interval") is False and pmu_helper.get("scientific_data_collected") is False,
         "runtime_schedule_executor_implemented": synthetic_summary["passed"],
         "runtime_schedule_parser_implemented": synthetic_summary["passed"],
         "fresh_carrier_per_tuple_implemented": synthetic_summary["passed"],
@@ -635,6 +965,9 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
         for key in [
             "runtime_source_compiles_for_target_linux",
             "runtime_self_test_passes",
+            "pmu_preflight_helper_compiles",
+            "pmu_preflight_helper_self_test_passes",
+            "pmu_preflight_helper_no_acquisition",
             "runtime_schedule_executor_implemented",
             "runtime_schedule_parser_implemented",
             "fresh_carrier_per_tuple_implemented",
@@ -1006,6 +1339,7 @@ def build_readiness(
     physical_self_test: dict[str, Any],
     self_test_result: dict[str, Any],
     validate: dict[str, Any],
+    source_hashes_result: dict[str, Any],
     relation_source_authority: str,
 ) -> dict[str, Any]:
     gates = runtime_build.get("implementation_gates", {})
@@ -1014,6 +1348,8 @@ def build_readiness(
     physical_preflight_suite = target_self_test.get("physical_preflight_mock_suite", {})
     authority_refusals = target_self_test.get("authority_refusal_tests", {})
     synthetic_wrapper = target_self_test.get("synthetic_target_wrapper_execution", {})
+    source_authority_validation_report = source_hashes_result.get("relation_source_authority_validation", {})
+    source_authority_regressions = source_hashes_result.get("source_authority_regression_tests", {})
     relation_source_authority_valid = bool(re.fullmatch(r"[0-9a-f]{40}", relation_source_authority)) and relation_source_authority not in pub.SCALAR_EVIDENCE_COMMITS
     checks = {
         "runtime_source_compiles_for_target_linux": gates.get("runtime_source_compiles_for_target_linux") is True,
@@ -1028,6 +1364,9 @@ def build_readiness(
         "delay_enforcement_implemented": gates.get("delay_enforcement_implemented") is True,
         "pmu_group_open_implemented": gates.get("pmu_group_open_implemented") is True,
         "pmu_group_read_implemented": gates.get("pmu_group_read_implemented") is True,
+        "pmu_preflight_helper_compiles": gates.get("pmu_preflight_helper_compiles") is True,
+        "pmu_preflight_helper_self_test_passes": gates.get("pmu_preflight_helper_self_test_passes") is True,
+        "pmu_preflight_helper_no_acquisition": gates.get("pmu_preflight_helper_no_acquisition") is True,
         "dirty_probe_primary_endpoint_implemented": gates.get("dirty_probe_primary_endpoint_implemented") is True,
         "raw_record_output_implemented": gates.get("raw_record_output_implemented") is True,
         "feature_freeze_output_implemented": gates.get("feature_freeze_output_implemented") is True,
@@ -1041,6 +1380,8 @@ def build_readiness(
         "authorized_synthetic_target_wrapper_execution_passed": synthetic_wrapper.get("passed") is True,
         "synthetic_live_controller_passed": live_controller_self_test.get("passed") is True,
         "relation_source_authority_bound": relation_source_authority_valid,
+        "relation_source_authority_git_validation_passed": source_authority_validation_report.get("passed") is True,
+        "relation_source_authority_regressions_passed": source_authority_regressions.get("passed") is True,
         "scalar_evidence_not_used_as_relation_custody": relation_source_authority not in pub.SCALAR_EVIDENCE_COMMITS,
         "output_root_ownership_law_passed": preflight_suite.get("results", {}).get("preexisting_output_root", {}).get("passed") is True
         and preflight_suite.get("results", {}).get("missing_parent", {}).get("passed") is True
@@ -1169,6 +1510,8 @@ def validate_artifacts() -> dict[str, Any]:
         "relation_only_public.py",
         "relation_only_runtime.c",
         "relation_only_runtime.h",
+        "relation_only_pmu_preflight.c",
+        "relation_only_pmu_preflight",
         "relation_only_target.py",
         "relation_only_live_controller.py",
         "run_relation_only_matched_permutation.py",
@@ -1183,6 +1526,7 @@ def validate_artifacts() -> dict[str, Any]:
         "RELATION_ONLY_IMPLEMENTATION_MANIFEST.sha256",
         "RELATION_ONLY_SOURCE_HASHES.json",
         "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
+        "RELATION_ONLY_SENSOR_AUTHORITY_BINDING.json",
         "RELATION_ONLY_TOOLCHAIN_DISCOVERY.json",
         "RELATION_ONLY_RUNTIME_BUILD_SELF_TEST.json",
         "RELATION_ONLY_RUNTIME_CONTROL_FLOW_AUDIT.json",
@@ -1232,9 +1576,21 @@ def validate_artifacts() -> dict[str, Any]:
         failures.append("scalar evidence provenance mismatch")
     if manifest and authority.get("relation_manifest_freeze_commit_policy") != pub.RELATION_FREEZE_AUTHORITY_POLICY:
         failures.append("relation freeze authority policy mismatch")
+    source_hashes_result = json.loads(SOURCE_HASHES_JSON.read_text(encoding="utf-8")) if SOURCE_HASHES_JSON.exists() else {}
+    source_authority_dynamic = None
     if manifest and decision == pub.PACKAGE_DECISION_BUILD_READY:
         if not (isinstance(relation_source, str) and re.fullmatch(r"[0-9a-f]{40}", relation_source) and relation_source not in pub.SCALAR_EVIDENCE_COMMITS):
             failures.append("relation source authority invalid for build-ready package")
+        if source_hashes_result:
+            source_authority_dynamic = source_authority_validation(
+                relation_source,
+                source_hashes_result.get("files", {}),
+                source_hashes_result.get("source_bundle", {}),
+            )
+            if not source_authority_dynamic.get("passed"):
+                failures.append("relation source authority validation failed")
+            if not source_hashes_result.get("source_authority_regression_tests", {}).get("passed"):
+                failures.append("relation source authority regression tests failed")
     validate = {
         "schema": "FAMILY10H_RELATION_ONLY_OFFLINE_VALIDATE_V2",
         "required_artifacts": required,
@@ -1247,6 +1603,7 @@ def validate_artifacts() -> dict[str, Any]:
         "package_decision": decision,
         "zero_target_contact": True,
         "zero_live_activity": True,
+        "source_authority_dynamic_validation": source_authority_dynamic,
         "passed": not failures,
     }
     validate["offline_validate_sha256"] = pub.digest({k: v for k, v in validate.items() if k != "offline_validate_sha256"})
@@ -1291,8 +1648,9 @@ def prepare(relation_source_authority: str | None = None) -> dict[str, Any]:
             **runtime_build.get("synthetic_executor_self_test", {}),
         },
     )
+    sensor_authority = write_sensor_authority_binding()
     source_bundle = pub.write_source_bundle(SOURCE_BUNDLE, SOURCE_FILES + [CONTRACT_FILE])
-    source_hashes_result = source_hashes(source_bundle, runtime_build)
+    source_hashes_result = source_hashes(source_bundle, runtime_build, relation_source_authority, sensor_authority)
     pub.write_json(SOURCE_HASHES_JSON, source_hashes_result)
 
     proof = pub.relation_marginal_equality_proof(grammar, schedule, source_hashes_result, runtime_build)
@@ -1416,6 +1774,7 @@ def prepare(relation_source_authority: str | None = None) -> dict[str, Any]:
             physical_self_test,
             self_test_result,
             validate,
+            source_hashes_result,
             relation_source_authority,
         )
         pub.write_json(BUILD_READINESS_JSON, readiness)

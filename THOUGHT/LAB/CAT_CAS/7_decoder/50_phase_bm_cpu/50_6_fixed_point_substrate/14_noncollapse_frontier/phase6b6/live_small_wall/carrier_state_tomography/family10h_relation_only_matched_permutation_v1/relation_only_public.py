@@ -43,7 +43,48 @@ RELATION_SOURCE_AUTHORITY_UNSET = "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_
 RELATION_FREEZE_AUTHORITY_POLICY = "controller_verifies_local_head_and_origin_equal_freeze_commit_at_authorization_time"
 SYNTHETIC_RELATION_FREEZE_COMMIT = "f" * 40
 DEPLOYMENT_CUSTODY_FILENAME = "RELATION_ONLY_DEPLOYMENT_CUSTODY.json"
+SENSOR_AUTHORITY_BINDING_FILENAME = "RELATION_ONLY_SENSOR_AUTHORITY_BINDING.json"
 APPROVED_SENSOR_IDENTITY_SHA256 = "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137"
+APPROVED_SENSOR_AUTHORITY_SHA256 = "72ab7571611259b1844aacb808ab39b8549369b1e3e1baa23b16b33d2e5a0a0f"
+APPROVED_SENSOR_IDENTITY = {
+    "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "device_driver": "k10temp",
+    "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+    "device_subsystem": "pci",
+    "hwmon_name": "k10temp",
+    "identity_sha256": APPROVED_SENSOR_IDENTITY_SHA256,
+    "input_st_dev": 22,
+    "input_st_ino": 30803,
+    "input_st_mode": 33060,
+    "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+    "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+    "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+    "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+    "resolved_subsystem_path": "/sys/bus/pci",
+    "sensor_input": "temp1_input",
+    "sensor_label_present": False,
+    "sensor_label_value": None,
+    "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+    "sensor_semantic_role": "Tctl",
+}
+APPROVED_TARGET_IDENTITY = {
+    "vendor": "AuthenticAMD",
+    "family": 16,
+    "model": 10,
+    "processor_count": 6,
+    "source_cpu": 4,
+    "receiver_cpu": 5,
+    "processors": [
+        {"processor": 0, "vendor_id": "AuthenticAMD", "cpu_family": 16, "model": 10},
+        {"processor": 1, "vendor_id": "AuthenticAMD", "cpu_family": 16, "model": 10},
+        {"processor": 2, "vendor_id": "AuthenticAMD", "cpu_family": 16, "model": 10},
+        {"processor": 3, "vendor_id": "AuthenticAMD", "cpu_family": 16, "model": 10},
+        {"processor": 4, "vendor_id": "AuthenticAMD", "cpu_family": 16, "model": 10},
+        {"processor": 5, "vendor_id": "AuthenticAMD", "cpu_family": 16, "model": 10},
+    ],
+    "runtime_abi": "linux_x86_64_perf_event_open",
+    "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+}
 OWNED_OUTPUT_PARENT_NAME = "_relation_only_owned_outputs"
 ATTEMPT_CEILING = 1
 
@@ -205,6 +246,9 @@ def canonical_bytes(value: Any) -> bytes:
 
 def digest(value: Any) -> str:
     return hashlib.sha256(canonical_bytes(value)).hexdigest()
+
+
+APPROVED_TARGET_IDENTITY_SHA256 = digest(APPROVED_TARGET_IDENTITY)
 
 
 def sha256_file(path: Path) -> str:

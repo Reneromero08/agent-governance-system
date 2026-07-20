@@ -10,7 +10,6 @@ claim.
 from __future__ import annotations
 
 import argparse
-import ctypes
 import json
 import os
 import re
@@ -37,6 +36,8 @@ EXECUTION_MODE_ENV = "FAMILY10H_RELATION_ONLY_EXECUTION_MODE"
 EXECUTION_MODE_SYNTHETIC = "synthetic"
 AUTHORITY_VALUE = pub.TRANSACTION_RUN_ID
 RUNTIME_BINARY_NAMES = ["relation_only_runtime", "relation_only_runtime.exe"]
+PMU_PREFLIGHT_HELPER_NAMES = ["relation_only_pmu_preflight", "relation_only_pmu_preflight.exe"]
+INJECTED_PREFLIGHT_ENVS = [PREFLIGHT_FIXTURE_ENV, PREFLIGHT_SYSTEM_MOCK_ENV]
 HEX40_RE = re.compile(r"[0-9a-f]{40}")
 
 TARGET_PREFLIGHT_CHECKS = [
@@ -60,7 +61,9 @@ TARGET_PREFLIGHT_CHECKS = [
     "source_file_hashes",
     "cpu_vendor_family_model",
     "source_receiver_cpu_identity",
+    "approved_target_identity",
     "operational_pinning_capability",
+    "injected_preflight_backend_absent",
     "pmu_event_identities",
     "grouped_pmu_open_capability",
     "temperature_sensor_authority",
@@ -237,6 +240,7 @@ def validate_source_root(source_root: Path) -> dict[str, Any]:
         "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json",
         "RELATION_ONLY_IMPLEMENTATION_MANIFEST.sha256",
         "RELATION_ONLY_SOURCE_HASHES.json",
+        "RELATION_ONLY_SENSOR_AUTHORITY_BINDING.json",
         "RELATION_ONLY_TOOLCHAIN_DISCOVERY.json",
         "RELATION_ONLY_RUNTIME_BUILD_SELF_TEST.json",
         "RELATION_ONLY_SYNTHETIC_EXECUTOR_SELF_TEST.json",
@@ -247,6 +251,8 @@ def validate_source_root(source_root: Path) -> dict[str, Any]:
         "relation_only_physical_adjudication.py",
         "relation_only_runtime.c",
         "relation_only_runtime.h",
+        "relation_only_pmu_preflight.c",
+        "relation_only_pmu_preflight",
         "relation_only_target.py",
         "relation_only_live_controller.py",
         "run_relation_only_matched_permutation.py",
@@ -261,6 +267,7 @@ def validate_source_root(source_root: Path) -> dict[str, Any]:
     schedule = pub.build_schedule(grammar)
     manifest = read_json(source_root / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json")
     source_hashes = read_json(source_root / "RELATION_ONLY_SOURCE_HASHES.json")
+    sensor_binding = read_json(source_root / pub.SENSOR_AUTHORITY_BINDING_FILENAME)
     threshold = read_json(source_root / "RELATION_ONLY_PHYSICAL_THRESHOLD_CONTRACT.json")
     readiness = read_json(source_root / "RELATION_ONLY_BUILD_READINESS.json") if (source_root / "RELATION_ONLY_BUILD_READINESS.json").exists() else {}
 
@@ -308,10 +315,24 @@ def validate_source_root(source_root: Path) -> dict[str, Any]:
         failures.append("manifest scalar evidence provenance mismatch")
     if authority.get("relation_manifest_freeze_commit_policy") != pub.RELATION_FREEZE_AUTHORITY_POLICY:
         failures.append("manifest relation freeze policy mismatch")
+    source_authority_validation = source_hashes.get("relation_source_authority_validation", {})
+    source_authority_regressions = source_hashes.get("source_authority_regression_tests", {})
     if relation_source in pub.SCALAR_EVIDENCE_COMMITS:
         failures.append("relation source authority incorrectly uses scalar evidence commit")
     if manifest.get("package_decision") == pub.PACKAGE_DECISION_BUILD_READY and not relation_source_authority_is_valid(relation_source):
         failures.append("relation source authority missing or invalid for build-ready package")
+    if manifest.get("package_decision") == pub.PACKAGE_DECISION_BUILD_READY and source_authority_validation.get("passed") is not True:
+        failures.append("relation source authority git/tree validation failed")
+    if manifest.get("package_decision") == pub.PACKAGE_DECISION_BUILD_READY and source_authority_regressions.get("passed") is not True:
+        failures.append("relation source authority negative regressions failed")
+    if sensor_binding.get("approved_sensor_identity_sha256") != pub.APPROVED_SENSOR_IDENTITY_SHA256:
+        failures.append("approved sensor identity binding mismatch")
+    if sensor_binding.get("approved_sensor_identity") != pub.APPROVED_SENSOR_IDENTITY:
+        failures.append("approved sensor identity field mismatch")
+    if sensor_binding.get("unlabeled_legacy_temp1_input_approved") is not True:
+        failures.append("approved sensor unlabeled temp1 law missing")
+    if sensor_binding.get("approved_target_identity_sha256") != pub.APPROVED_TARGET_IDENTITY_SHA256:
+        failures.append("approved target identity binding mismatch")
     threshold_source = threshold.get("scalar_evidence_provenance", {})
     if threshold_source.get("source_authority_commit") != pub.SCALAR_EVIDENCE_SOURCE_AUTHORITY_COMMIT:
         failures.append("threshold scalar source provenance mismatch")
@@ -363,6 +384,9 @@ def artifact_identity(source_root: Path) -> dict[str, Any]:
         "manifest_canonical_sha256": manifest.get("manifest_sha256"),
         "runtime_binary_sha256": runtime_sha,
         "runtime_binary_format": runtime_format,
+        "pmu_preflight_helper_sha256": source_hashes.get("pmu_preflight_helper_authority", {}).get("compiled_binary_sha256"),
+        "approved_sensor_identity_sha256": pub.APPROVED_SENSOR_IDENTITY_SHA256,
+        "approved_target_identity_sha256": pub.APPROVED_TARGET_IDENTITY_SHA256,
         "source_bundle_sha256": source_hashes.get("source_bundle", {}).get("sha256"),
         "source_file_hashes": {name: item.get("sha256") for name, item in source_hashes.get("files", {}).items()},
     }
@@ -446,11 +470,16 @@ def base_preflight_fixture(source_root: Path, output_root: Path) -> dict[str, An
         "cpu": {
             "vendor": "AuthenticAMD",
             "family": 16,
-            "model": 6,
+            "model": pub.APPROVED_TARGET_IDENTITY["model"],
+            "processor_count": pub.APPROVED_TARGET_IDENTITY["processor_count"],
+            "processors": pub.APPROVED_TARGET_IDENTITY["processors"],
+            "target_identity_sha256": pub.APPROVED_TARGET_IDENTITY_SHA256,
+            "runtime_abi": pub.APPROVED_TARGET_IDENTITY["runtime_abi"],
+            "source": pub.APPROVED_TARGET_IDENTITY["source"],
             "source_cpu_present": True,
             "receiver_cpu_present": True,
-            "source_cpu": 4,
-            "receiver_cpu": 5,
+            "source_cpu": pub.APPROVED_TARGET_IDENTITY["source_cpu"],
+            "receiver_cpu": pub.APPROVED_TARGET_IDENTITY["receiver_cpu"],
             "operational_pinning": True,
         },
         "expected_artifacts": {
@@ -470,10 +499,7 @@ def base_preflight_fixture(source_root: Path, output_root: Path) -> dict[str, An
             "grouped_open_capability": True,
         },
         "sensor": {
-            "identity_sha256": pub.APPROVED_SENSOR_IDENTITY_SHA256,
-            "hwmon_name": "k10temp",
-            "sensor_label": "Tctl",
-            "resolved_device_identity": "fixture-family10h-k10temp",
+            **pub.APPROVED_SENSOR_IDENTITY,
             "identity_stability": True,
         },
         "frequency_policy": {
@@ -519,18 +545,37 @@ def parse_cpuinfo(text: str) -> dict[int, dict[str, Any]]:
 def cpu_observation_from_cpuinfo(text: str, source_cpu: int, receiver_cpu: int) -> dict[str, Any]:
     cpus = parse_cpuinfo(text)
     source = cpus.get(source_cpu, {})
-    receiver = cpus.get(receiver_cpu, {})
     sample = source or next(iter(cpus.values()), {})
     family = sample.get("cpu family") or sample.get("family")
     model = sample.get("model")
-    return {
+    processors = []
+    for cpu_id, row in sorted(cpus.items()):
+        cpu_family = row.get("cpu family") or row.get("family")
+        cpu_model = row.get("model")
+        processors.append(
+            {
+                "processor": cpu_id,
+                "vendor_id": row.get("vendor_id") or row.get("vendor"),
+                "cpu_family": int(cpu_family) if str(cpu_family).isdigit() else None,
+                "model": int(cpu_model) if str(cpu_model).isdigit() else None,
+            }
+        )
+    identity = {
         "vendor": sample.get("vendor_id") or sample.get("vendor"),
         "family": int(family) if str(family).isdigit() else None,
         "model": int(model) if str(model).isdigit() else None,
-        "source_cpu_present": source_cpu in cpus,
-        "receiver_cpu_present": receiver_cpu in cpus,
+        "processor_count": len(cpus),
         "source_cpu": source_cpu,
         "receiver_cpu": receiver_cpu,
+        "processors": processors,
+        "runtime_abi": pub.APPROVED_TARGET_IDENTITY["runtime_abi"],
+        "source": pub.APPROVED_TARGET_IDENTITY["source"],
+    }
+    return {
+        **identity,
+        "target_identity_sha256": pub.digest(identity),
+        "source_cpu_present": source_cpu in cpus,
+        "receiver_cpu_present": receiver_cpu in cpus,
         "operational_pinning": False,
         "cpu_count_observed": len(cpus),
     }
@@ -555,90 +600,119 @@ def probe_affinity(source_cpu: int, receiver_cpu: int) -> dict[str, Any]:
             pass
 
 
-class PerfEventAttr(ctypes.Structure):
-    _fields_ = [
-        ("type", ctypes.c_uint32),
-        ("size", ctypes.c_uint32),
-        ("config", ctypes.c_uint64),
-        ("sample_period", ctypes.c_uint64),
-        ("sample_type", ctypes.c_uint64),
-        ("read_format", ctypes.c_uint64),
-        ("flags", ctypes.c_uint64),
-    ]
+def pmu_preflight_helper_path(source_root: Path) -> Path | None:
+    for name in PMU_PREFLIGHT_HELPER_NAMES:
+        path = source_root / name
+        if path.exists():
+            return path
+    return None
 
 
-def disabled_grouped_pmu_probe(cpu: int) -> dict[str, Any]:
-    if os.name != "posix":
-        return {"events": pub.PMU_GROUP["events"], "grouped_open_capability": False, "pmu_open_count": 0, "pmu_acquisition_count": 0, "reason": "non-posix host"}
-    libc = ctypes.CDLL(None, use_errno=True)
-    syscall = libc.syscall
-    syscall.restype = ctypes.c_long
-    perf_event_open = 298
-    perf_type_raw = 4
-    disabled_flag = 1
-    fds: list[int] = []
-    try:
-        group_fd = -1
-        for event in pub.PMU_GROUP["events"].values():
-            event_code = int(event["event"], 16)
-            umask = int(event["umask"], 16)
-            attr = PerfEventAttr()
-            attr.type = perf_type_raw
-            attr.size = ctypes.sizeof(PerfEventAttr)
-            attr.config = event_code | (umask << 8)
-            attr.flags = disabled_flag
-            fd = syscall(perf_event_open, ctypes.byref(attr), 0, cpu, group_fd, 0)
-            if fd < 0:
-                errno = ctypes.get_errno()
-                return {
-                    "events": pub.PMU_GROUP["events"],
-                    "grouped_open_capability": False,
-                    "pmu_open_count": len(fds),
-                    "pmu_acquisition_count": 0,
-                    "enabled_measurement_interval": False,
-                    "reason": os.strerror(errno),
-                }
-            fds.append(int(fd))
-            if group_fd == -1:
-                group_fd = int(fd)
+def disabled_grouped_pmu_probe(source_root: Path, cpu: int) -> dict[str, Any]:
+    helper = pmu_preflight_helper_path(source_root)
+    if helper is None:
         return {
             "events": pub.PMU_GROUP["events"],
-            "grouped_open_capability": True,
-            "pmu_open_count": len(fds),
+            "grouped_open_capability": False,
+            "pmu_open_count": 0,
+            "pmu_close_count": 0,
             "pmu_acquisition_count": 0,
             "enabled_measurement_interval": False,
             "scientific_data_collected": False,
+            "reason": "compiled PMU preflight helper missing",
         }
-    finally:
-        for fd in fds:
-            try:
-                os.close(fd)
-            except OSError:
-                pass
+    command, launch_mode = runtime_command(source_root, helper, ["--disabled-group-preflight", str(cpu)])
+    completed = subprocess.run(command, text=True, capture_output=True, check=False, timeout=30)
+    try:
+        observed = json.loads(completed.stdout)
+    except json.JSONDecodeError:
+        observed = {
+            "schema": "FAMILY10H_RELATION_ONLY_DISABLED_PMU_PREFLIGHT_V1",
+            "passed": False,
+            "events": pub.PMU_GROUP["events"],
+            "grouped_open_capability": False,
+            "pmu_open_count": 0,
+            "pmu_close_count": 0,
+            "pmu_acquisition_count": 0,
+            "enabled_measurement_interval": False,
+            "scientific_data_collected": False,
+            "error_text": completed.stderr,
+        }
+    observed["command"] = command
+    observed["launch_mode"] = launch_mode
+    observed["returncode"] = completed.returncode
+    observed["helper_sha256"] = pub.sha256_file(helper)
+    observed["events"] = pub.PMU_GROUP["events"] if observed.get("events") == pub.PMU_GROUP["events"] else observed.get("events")
+    observed["pmu_acquisition_count"] = 0
+    observed["enabled_measurement_interval"] = False
+    observed["scientific_data_collected"] = False
+    return observed
+
+
+def sensor_identity_matches(observed: dict[str, Any]) -> bool:
+    return all(observed.get(key) == value for key, value in pub.APPROVED_SENSOR_IDENTITY.items()) and observed.get("identity_stability") is True
+
+
+def read_sysfs_text(path: Path) -> str | None:
+    try:
+        return path.read_text(encoding="utf-8").strip()
+    except OSError:
+        return None
+
+
+def sensor_identity_from_input(sysfs_root: Path, input_path: Path) -> dict[str, Any]:
+    hwmon_dir = input_path.parent
+    label_path = input_path.with_name(input_path.name.replace("_input", "_label"))
+    label_present = label_path.exists()
+    device_path = hwmon_dir / "device"
+    driver_path = device_path / "driver"
+    subsystem_path = device_path / "subsystem"
+    try:
+        stat = input_path.stat()
+    except OSError:
+        stat = None
+    identity = {
+        "class_path": "/" + input_path.relative_to(sysfs_root.parent).as_posix() if input_path.is_absolute() else str(input_path),
+        "device_driver": driver_path.resolve().name if driver_path.exists() else None,
+        "device_modalias": read_sysfs_text(device_path / "modalias"),
+        "device_subsystem": subsystem_path.resolve().name if subsystem_path.exists() else None,
+        "hwmon_name": read_sysfs_text(hwmon_dir / "name"),
+        "identity_sha256": None,
+        "input_st_dev": stat.st_dev if stat else None,
+        "input_st_ino": stat.st_ino if stat else None,
+        "input_st_mode": stat.st_mode if stat else None,
+        "resolved_device_path": str(device_path.resolve()) if device_path.exists() else None,
+        "resolved_driver_path": str(driver_path.resolve()) if driver_path.exists() else None,
+        "resolved_hwmon_path": str(hwmon_dir.resolve()),
+        "resolved_input_path": str(input_path.resolve()),
+        "resolved_subsystem_path": str(subsystem_path.resolve()) if subsystem_path.exists() else None,
+        "sensor_input": input_path.name,
+        "sensor_label_present": label_present,
+        "sensor_label_value": read_sysfs_text(label_path) if label_present else None,
+        "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+        "sensor_semantic_role": "Tctl",
+    }
+    identity["identity_sha256"] = pub.APPROVED_SENSOR_IDENTITY_SHA256 if all(
+        identity.get(key) == value for key, value in pub.APPROVED_SENSOR_IDENTITY.items() if key != "identity_sha256"
+    ) else pub.digest({key: value for key, value in identity.items() if key != "identity_sha256"})
+    return identity
 
 
 def discover_temperature_sensor(sysfs_root: Path = Path("/sys")) -> dict[str, Any]:
-    for name_file in sorted((sysfs_root / "class" / "hwmon").glob("hwmon*/name")):
-        try:
-            hwmon_name = name_file.read_text(encoding="utf-8").strip()
-        except OSError:
-            continue
-        if hwmon_name != "k10temp":
-            continue
-        hwmon_dir = name_file.parent
-        for label_file in sorted(hwmon_dir.glob("temp*_label")):
-            label = label_file.read_text(encoding="utf-8").strip()
-            if label not in {"Tctl", "Tdie"}:
-                continue
-            identity = {
-                "hwmon_name": hwmon_name,
-                "sensor_label": label,
-                "resolved_device_identity": str(hwmon_dir.resolve()),
-            }
-            identity["identity_sha256"] = pub.digest(identity)
-            identity["identity_stability"] = True
-            return identity
-    return {"identity_sha256": None, "hwmon_name": None, "sensor_label": None, "resolved_device_identity": None, "identity_stability": False}
+    candidates: list[dict[str, Any]] = []
+    for input_file in sorted((sysfs_root / "class" / "hwmon").glob("hwmon*/temp*_input")):
+        before = sensor_identity_from_input(sysfs_root, input_file)
+        after = sensor_identity_from_input(sysfs_root, input_file)
+        observed = {**before, "identity_stability": before == after}
+        candidates.append(observed)
+        if sensor_identity_matches(observed):
+            return observed
+    return {
+        **{key: None for key in pub.APPROVED_SENSOR_IDENTITY},
+        "identity_stability": False,
+        "candidate_count": len(candidates),
+        "observed_candidates": candidates,
+    }
 
 
 def cpu_frequency_policy(source_cpu: int, receiver_cpu: int, sysfs_root: Path = Path("/sys")) -> dict[str, Any]:
@@ -660,13 +734,26 @@ def cpu_frequency_policy(source_cpu: int, receiver_cpu: int, sysfs_root: Path = 
 
 def physical_preflight_observation(source_root: Path, output_root: Path) -> dict[str, Any]:
     del output_root
+    synthetic = os.environ.get(EXECUTION_MODE_ENV) == EXECUTION_MODE_SYNTHETIC
     mock_path = os.environ.get(PREFLIGHT_SYSTEM_MOCK_ENV)
-    if mock_path:
+    if mock_path and synthetic:
         observed = read_json(Path(mock_path))
         observed["backend"] = "mocked_physical_system_interface"
         return observed
-    source_cpu = 4
-    receiver_cpu = 5
+    if mock_path and not synthetic:
+        return {
+            "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_PREFLIGHT_OBSERVATION_V1",
+            "backend": "forbidden_mocked_physical_system_interface",
+            "forbidden_injected_env": PREFLIGHT_SYSTEM_MOCK_ENV,
+            "cpu": {},
+            "expected_artifacts": {},
+            "pmu": {"pmu_open_count": 0, "pmu_acquisition_count": 0, "enabled_measurement_interval": False, "scientific_data_collected": False},
+            "sensor": {},
+            "frequency_policy": {},
+            "attempt": {},
+        }
+    source_cpu = pub.APPROVED_TARGET_IDENTITY["source_cpu"]
+    receiver_cpu = pub.APPROVED_TARGET_IDENTITY["receiver_cpu"]
     cpuinfo = Path("/proc/cpuinfo").read_text(encoding="utf-8")
     cpu = cpu_observation_from_cpuinfo(cpuinfo, source_cpu, receiver_cpu)
     affinity = probe_affinity(source_cpu, receiver_cpu)
@@ -678,7 +765,7 @@ def physical_preflight_observation(source_root: Path, output_root: Path) -> dict
         "expected_artifacts": artifact_identity(source_root)
         | {"relation_source_authority_commit": relation_source_authority(read_json(source_root / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json"))},
         "runtime_binary_format_contains": ["ELF 64-bit", "x86-64"],
-        "pmu": disabled_grouped_pmu_probe(source_cpu),
+        "pmu": disabled_grouped_pmu_probe(source_root, source_cpu),
         "sensor": discover_temperature_sensor(),
         "frequency_policy": cpu_frequency_policy(source_cpu, receiver_cpu),
         "physical_geometry": {"status": "unresolved_contractually_lowered", "claim_ceiling_lowered": True},
@@ -779,6 +866,8 @@ def target_preflight(source_root: Path, output_root: Path, fixture: dict[str, An
     schedule_manifest = read_json(source_root / "RELATION_ONLY_PUBLIC_SCHEDULE.json") if (source_root / "RELATION_ONLY_PUBLIC_SCHEDULE.json").exists() else {}
     source_hashes = read_json(source_root / "RELATION_ONLY_SOURCE_HASHES.json") if (source_root / "RELATION_ONLY_SOURCE_HASHES.json").exists() else {}
     artifacts = artifact_identity(source_root) if source_validation["passed"] else {}
+    synthetic = os.environ.get(EXECUTION_MODE_ENV) == EXECUTION_MODE_SYNTHETIC
+    injected_envs = {key: os.environ.get(key) for key in INJECTED_PREFLIGHT_ENVS if os.environ.get(key)}
     checks: dict[str, dict[str, Any]] = {}
     checks.update(authority_checks(source_root, manifest))
     checks["source_root_identity"] = check("source_root_identity", source_validation["passed"], source_validation)
@@ -800,6 +889,12 @@ def target_preflight(source_root: Path, output_root: Path, fixture: dict[str, An
 
     backend = "fixture" if fixture is not None else "physical_observed"
     observed = fixture if fixture is not None else physical_preflight_observation(source_root, output_root)
+    injected_backend = fixture is not None or bool(injected_envs) or str(observed.get("backend", "")).startswith(("mocked", "forbidden", "fixture", "synthetic", "test"))
+    checks["injected_preflight_backend_absent"] = check(
+        "injected_preflight_backend_absent",
+        synthetic or not injected_backend,
+        {"synthetic_mode": synthetic, "fixture_argument": fixture is not None, "injected_envs": injected_envs, "backend": observed.get("backend")},
+    )
     expected = observed.get("expected_artifacts", {})
     expected_source = expected.get("relation_source_authority_commit")
     expected_freeze = expected.get("relation_freeze_authority_commit")
@@ -866,15 +961,29 @@ def target_preflight(source_root: Path, output_root: Path, fixture: dict[str, An
         )
     )
     cpu = observed.get("cpu", {})
+    approved_target_identity = {key: cpu.get(key) for key in pub.APPROVED_TARGET_IDENTITY}
     checks["cpu_vendor_family_model"] = check(
         "cpu_vendor_family_model",
-        cpu.get("vendor") == "AuthenticAMD" and cpu.get("family") == 16 and isinstance(cpu.get("model"), int),
+        cpu.get("vendor") == pub.APPROVED_TARGET_IDENTITY["vendor"]
+        and cpu.get("family") == pub.APPROVED_TARGET_IDENTITY["family"]
+        and cpu.get("model") == pub.APPROVED_TARGET_IDENTITY["model"],
         cpu,
     )
     checks["source_receiver_cpu_identity"] = check(
         "source_receiver_cpu_identity",
-        cpu.get("source_cpu_present") is True and cpu.get("receiver_cpu_present") is True and cpu.get("source_cpu") != cpu.get("receiver_cpu"),
+        cpu.get("source_cpu_present") is True
+        and cpu.get("receiver_cpu_present") is True
+        and cpu.get("source_cpu") == pub.APPROVED_TARGET_IDENTITY["source_cpu"]
+        and cpu.get("receiver_cpu") == pub.APPROVED_TARGET_IDENTITY["receiver_cpu"]
+        and cpu.get("source_cpu") != cpu.get("receiver_cpu")
+        and cpu.get("processors") == pub.APPROVED_TARGET_IDENTITY["processors"]
+        and cpu.get("processor_count") == pub.APPROVED_TARGET_IDENTITY["processor_count"],
         cpu,
+    )
+    checks["approved_target_identity"] = check(
+        "approved_target_identity",
+        approved_target_identity == pub.APPROVED_TARGET_IDENTITY and cpu.get("target_identity_sha256") == pub.APPROVED_TARGET_IDENTITY_SHA256,
+        {"observed_identity": approved_target_identity, "observed_sha256": cpu.get("target_identity_sha256"), "expected_sha256": pub.APPROVED_TARGET_IDENTITY_SHA256},
     )
     checks["operational_pinning_capability"] = check("operational_pinning_capability", cpu.get("operational_pinning") is True, cpu)
     pmu = observed.get("pmu", {})
@@ -883,16 +992,15 @@ def target_preflight(source_root: Path, output_root: Path, fixture: dict[str, An
         "grouped_pmu_open_capability",
         pmu.get("grouped_open_capability") is True
         and pmu.get("pmu_acquisition_count", 0) == 0
-        and pmu.get("enabled_measurement_interval", False) is False,
+        and pmu.get("enabled_measurement_interval", False) is False
+        and pmu.get("scientific_data_collected", False) is False
+        and pmu.get("pmu_open_count", 0) == pmu.get("pmu_close_count", pmu.get("pmu_open_count", 0)),
         pmu,
     )
     sensor = observed.get("sensor", {})
     checks["temperature_sensor_authority"] = check(
         "temperature_sensor_authority",
-        sensor.get("identity_sha256") == pub.APPROVED_SENSOR_IDENTITY_SHA256
-        and bool(sensor.get("hwmon_name"))
-        and bool(sensor.get("sensor_label"))
-        and sensor.get("identity_stability") is True,
+        sensor_identity_matches(sensor),
         sensor,
     )
     policy = observed.get("frequency_policy", {})
@@ -996,6 +1104,7 @@ def target_authority_env(source_root: Path, fixture_path: Path | None, *, synthe
         FREEZE_COMMIT_ENV: pub.SYNTHETIC_RELATION_FREEZE_COMMIT,
         MANIFEST_ENV: manifest_sha,
         PREFLIGHT_FIXTURE_ENV: str(fixture_path) if fixture_path else None,
+        PREFLIGHT_SYSTEM_MOCK_ENV: None,
         EXECUTION_MODE_ENV: EXECUTION_MODE_SYNTHETIC if synthetic else None,
         LEGACY_COMMIT_ENV: None,
     }
@@ -1004,10 +1113,13 @@ def target_authority_env(source_root: Path, fixture_path: Path | None, *, synthe
 def execute_authorized(source_root: Path, output_root: Path) -> dict[str, Any]:
     source_root = source_root.resolve()
     output_root = output_root.resolve()
-    fixture = load_fixture()
     synthetic = os.environ.get(EXECUTION_MODE_ENV) == EXECUTION_MODE_SYNTHETIC
-    if fixture is not None and not synthetic:
-        raise TargetError("physical execution refuses fixture-backed preflight")
+    if not synthetic:
+        if os.environ.get(PREFLIGHT_FIXTURE_ENV):
+            raise TargetError("physical execution refuses fixture-backed preflight")
+        if os.environ.get(PREFLIGHT_SYSTEM_MOCK_ENV):
+            raise TargetError("physical execution refuses system-mock preflight")
+    fixture = load_fixture()
     preflight = target_preflight(source_root, output_root, fixture)
     if not preflight["passed"]:
         raise TargetError("target preflight failed: " + ",".join(preflight["failures"]))
@@ -1094,6 +1206,9 @@ def run_preflight_fixture_suite(source_root: Path, parent: Path) -> dict[str, An
     cases: dict[str, tuple[str | None, dict[str, Any]]] = {
         "complete_passing_fixture": (None, base),
         "wrong_cpu_family": ("cpu_vendor_family_model", {**base, "cpu": {**base["cpu"], "family": 15}}),
+        "wrong_cpu_model": ("cpu_vendor_family_model", {**base, "cpu": {**base["cpu"], "model": 6}}),
+        "wrong_target_identity_sha": ("approved_target_identity", {**base, "cpu": {**base["cpu"], "target_identity_sha256": "0" * 64}}),
+        "incompatible_processor_topology": ("source_receiver_cpu_identity", {**base, "cpu": {**base["cpu"], "processor_count": 4, "processors": base["cpu"]["processors"][:4]}}),
         "missing_source_cpu": ("source_receiver_cpu_identity", {**base, "cpu": {**base["cpu"], "source_cpu_present": False}}),
         "missing_receiver_cpu": ("source_receiver_cpu_identity", {**base, "cpu": {**base["cpu"], "receiver_cpu_present": False}}),
         "failed_operational_pinning": ("operational_pinning_capability", {**base, "cpu": {**base["cpu"], "operational_pinning": False}}),
@@ -1119,6 +1234,13 @@ def run_preflight_fixture_suite(source_root: Path, parent: Path) -> dict[str, An
             "temperature_sensor_authority",
             {**base, "sensor": {**base["sensor"], "identity_sha256": "0" * 64}},
         ),
+        "sensor_wrong_driver": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "device_driver": "nouveau"}}),
+        "sensor_wrong_modalias": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "device_modalias": "pci:v000010DEd00001C81"}}),
+        "sensor_wrong_input_path": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "resolved_input_path": "/sys/devices/wrong/temp1_input"}}),
+        "sensor_wrong_inode_device_mode": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "input_st_ino": 1, "input_st_dev": 1, "input_st_mode": 0}}),
+        "sensor_wrong_semantic_profile": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "sensor_semantic_profile": "UNAPPROVED"}}),
+        "sensor_unexpected_label": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "sensor_label_present": True, "sensor_label_value": "Tctl"}}),
+        "sensor_unstable_identity": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "identity_stability": False}}),
         "policy_mismatch": ("cpu_frequency_policy_custody", {**base, "frequency_policy": {**base["frequency_policy"], "policy_locked": False}}),
         "permission_failure": ("output_root_absence", {**base, "output": {**base["output"], "parent_writable": False}}),
         "owner_marker_mismatch": ("attempt_ownership_marker", {**base, "attempt": {**base["attempt"], "owner_marker": "wrong-owner"}}),
@@ -1232,10 +1354,19 @@ def run_physical_preflight_mock_suite(source_root: Path, parent: Path) -> dict[s
         cases: dict[str, tuple[str | None, dict[str, Any], dict[str, str | None] | None]] = {
             "complete_physical_mock": (None, base, None),
             "wrong_cpu_family": ("cpu_vendor_family_model", {**base, "cpu": {**base["cpu"], "family": 15}}, None),
+            "wrong_cpu_model": ("cpu_vendor_family_model", {**base, "cpu": {**base["cpu"], "model": 6}}, None),
+            "wrong_target_identity_sha": ("approved_target_identity", {**base, "cpu": {**base["cpu"], "target_identity_sha256": "0" * 64}}, None),
             "failed_cpu_pinning": ("operational_pinning_capability", {**base, "cpu": {**base["cpu"], "operational_pinning": False}}, None),
             "pmu_event_mismatch": ("pmu_event_identities", {**base, "pmu": {**base["pmu"], "events": {}}}, None),
             "grouped_pmu_failure": ("grouped_pmu_open_capability", {**base, "pmu": {**base["pmu"], "grouped_open_capability": False}}, None),
             "sensor_mismatch": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "identity_sha256": "0" * 64}}, None),
+            "sensor_wrong_driver": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "device_driver": "nouveau"}}, None),
+            "sensor_wrong_modalias": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "device_modalias": "pci:v000010DEd00001C81"}}, None),
+            "sensor_wrong_input_path": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "resolved_input_path": "/sys/devices/wrong/temp1_input"}}, None),
+            "sensor_wrong_inode_device_mode": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "input_st_ino": 1, "input_st_dev": 1, "input_st_mode": 0}}, None),
+            "sensor_wrong_semantic_profile": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "sensor_semantic_profile": "UNAPPROVED"}}, None),
+            "sensor_unexpected_label": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "sensor_label_present": True, "sensor_label_value": "Tctl"}}, None),
+            "sensor_unstable_identity": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "identity_stability": False}}, None),
             "policy_mismatch": ("cpu_frequency_policy_custody", {**base, "frequency_policy": {**base["frequency_policy"], "policy_locked": False}}, None),
             "invalid_owner_marker": ("attempt_ownership_marker", {**base, "attempt": {**base["attempt"], "owner_marker": "wrong-owner"}}, None),
             "old_scalar_source_commit_rejected": ("source_authority_commit_binding", base, {SOURCE_AUTHORITY_ENV: pub.SCALAR_EVIDENCE_SOURCE_AUTHORITY_COMMIT}),
@@ -1360,6 +1491,19 @@ def run_authority_refusal_tests(source_root: Path, parent: Path) -> dict[str, An
             }
         else:
             tests["fixture_forbidden_on_physical_path"] = {"passed": False, "reason": "fixture-backed physical execution unexpectedly accepted"}
+    system_mock_path = parent / "authority_system_mock.json"
+    write_fixture(system_mock_path, base_physical_mock(source_root, output_root))
+    physical_system_mock_env = {**target_authority_env(source_root, None, synthetic=False), PREFLIGHT_SYSTEM_MOCK_ENV: str(system_mock_path)}
+    with temporary_env(physical_system_mock_env):
+        try:
+            execute_authorized(source_root, output_root)
+        except TargetError as exc:
+            tests["system_mock_forbidden_on_physical_path"] = {
+                "passed": "refuses system-mock preflight" in str(exc),
+                "reason": str(exc),
+            }
+        else:
+            tests["system_mock_forbidden_on_physical_path"] = {"passed": False, "reason": "system-mock physical execution unexpectedly accepted"}
     return {
         "schema": "FAMILY10H_RELATION_ONLY_AUTHORITY_REFUSAL_TESTS_V1",
         "tests": tests,
