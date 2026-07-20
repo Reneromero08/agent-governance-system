@@ -1,12 +1,7 @@
 {
   "adversary_tests_passed": true,
-  "blockers": [
-    "runtime_compiled_with_warnings_as_errors",
-    "runtime_self_tests_passed",
-    "implementation_derived_proofs_passed",
-    "no local C compiler found on PATH"
-  ],
-  "build_readiness_sha256": "19bb67dbafb27ea2cbd1186ec8d40ffb5b21e3353035c21d10ffde69eb220bbd",
+  "blockers": [],
+  "build_readiness_sha256": "a14b7c646140088865e8617e83ef3d45694103313ea24b2a7508eb50c0591811",
   "claim_boundary": {
     "catalytic_borrowing_established": false,
     "full_carrier_state_tomography_established": false,
@@ -24,10 +19,10 @@
     3072
   ],
   "grammar_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
-  "manifest_sha256": "1a72f0f8bffa41d2748ac04b3b5dcb53dcb93cba521f042f064de33341c73318",
-  "marginal_equality_proof_sha256": "4a0699764c0b68b2e7c0a68efc11e39534876bfeafb12a1b7a4a91776a33e7ad",
+  "manifest_sha256": "0c7b617bb6b63ba84587ebddfc9edf666543809c318ac61d5f10360263dc57bf",
+  "marginal_equality_proof_sha256": "9e1ef6556be0978c5aa64a1149c9ef04fa61aedd018aa06daf3a2073e1b5c3f9",
   "offline_validate_passed": true,
-  "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READINESS_BLOCKED",
+  "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READY_AWAITING_AUTHORIZATION",
   "physical_adjudicator_self_test_sha256": "69c50709be5f5ce923b754a4eaa98135f4fd349495a95298949e2514e41b49a6",
   "primary_R_match_law": {
     "formula": "0.5 * ((Y_r0_r0 + Y_r1_r1) - (Y_r0_r1 + Y_r1_r0))",
@@ -37,19 +32,47 @@
   },
   "public_randomization_seed": "family10h-relation-only-matched-permutation-v1-public-seed-1bf2c63e",
   "runtime_build": {
-    "passed": false,
+    "passed": true,
     "runtime_binary_authority": {
-      "compile_status": "not_compiled_no_compiler",
-      "compiled_binary_sha256": null,
-      "present": false
+      "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=88260b4e0339ebc15811d3110f13fd58d888e442, for GNU/Linux 3.2.0, not stripped",
+      "compile_status": "compiled_target_compatible_linux_binary",
+      "compiled_binary_sha256": "856f447c75fbb625cdcb10087cf5e0dae240a8f4df9edae0ebcb2343c22205af",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2"
+      ],
+      "compiler_identity": {
+        "available": true,
+        "compiler": "gcc",
+        "distro": "Ubuntu",
+        "environment": "wsl",
+        "headers": {
+          "linux_perf_event_h": "present",
+          "sched_h": "present"
+        },
+        "machine": "x86_64",
+        "path": "/usr/bin/gcc",
+        "suitability": "target_compatible_linux_binary_authority",
+        "target_triple": "x86_64-linux-gnu",
+        "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+        "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+      },
+      "path": "relation_only_runtime",
+      "present": true,
+      "runtime_c_sha256": "68b0d4e46f1a43a597a0d4c5a174b04086780cbe6ed3026c98e4ef6d89c7640e",
+      "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
+      "size": 31224
     },
-    "runtime_build_sha256": "7da832f4ebea5d1b7dd16962cabb7824cdc63f43d72296cdb6384fa43c86b14f"
+    "runtime_build_sha256": "07591813156b450f1ae8a4768d4c2383df3728d1e37cadf42ec0d647d5969d5d"
   },
   "schedule_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
   "schedule_tuple_count": 32256,
   "schema": "FAMILY10H_RELATION_ONLY_IMPLEMENTATION_MANIFEST_V2",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
-  "self_test_sha256": "c64ee5e2d0bb5e1054652f5fe9963f95a58eb26371c0c182f545812d98e6299c",
+  "self_test_sha256": "c6f1ee0c9ce1b44677eeb026ac0c66c266defa092176ed75d30f719a90a89992",
   "source_hashes": {
     "files": {
       "RELATION_ONLY_CONTRACT.md": {
@@ -65,32 +88,60 @@
         "size": 26842
       },
       "relation_only_public.py": {
-        "sha256": "7531472cbc527ed84e6e919ed8e2a789c18bb5744645ec95845edb9aa21253c7",
-        "size": 36335
+        "sha256": "ce2ee69d5eacb33c9ba9becaf451392b52981a6e3763f7d8ea2c700f4e49bc38",
+        "size": 37511
       },
       "relation_only_runtime.c": {
-        "sha256": "db7940a830935297722afe38ba793ab97785e38cff108dbe73b8f17cbdc3c2d8",
-        "size": 10481
+        "sha256": "68b0d4e46f1a43a597a0d4c5a174b04086780cbe6ed3026c98e4ef6d89c7640e",
+        "size": 38671
       },
       "relation_only_runtime.h": {
-        "sha256": "7ad185d98e064755cecbde13e680b920d4b7bcf7ed38dc67663338c1dbdfdec9",
-        "size": 2224
+        "sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
+        "size": 2239
       },
       "relation_only_target.py": {
-        "sha256": "0d6a0d75bc983746d0efcb40624d051f678134fcf35715c061b94e070dfa6aeb",
-        "size": 9735
+        "sha256": "0250177c2aebebd816fea9d461afead867962001d772537671070cec6f936d1a",
+        "size": 15157
       },
       "run_relation_only_matched_permutation.py": {
-        "sha256": "25eb406f7def808aefa673705f397eeb082b863a43e1f0d3adcb2be632ceede5",
-        "size": 36438
+        "sha256": "3b20a80c2252a16b88fe168d04e0c1be41c3af52868ed187a983533a0f6f1e3c",
+        "size": 60322
       }
     },
     "runtime_binary_authority": {
-      "compile_status": "not_compiled_no_compiler",
-      "compiled_binary_sha256": null,
-      "present": false
+      "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=88260b4e0339ebc15811d3110f13fd58d888e442, for GNU/Linux 3.2.0, not stripped",
+      "compile_status": "compiled_target_compatible_linux_binary",
+      "compiled_binary_sha256": "856f447c75fbb625cdcb10087cf5e0dae240a8f4df9edae0ebcb2343c22205af",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2"
+      ],
+      "compiler_identity": {
+        "available": true,
+        "compiler": "gcc",
+        "distro": "Ubuntu",
+        "environment": "wsl",
+        "headers": {
+          "linux_perf_event_h": "present",
+          "sched_h": "present"
+        },
+        "machine": "x86_64",
+        "path": "/usr/bin/gcc",
+        "suitability": "target_compatible_linux_binary_authority",
+        "target_triple": "x86_64-linux-gnu",
+        "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+        "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+      },
+      "path": "relation_only_runtime",
+      "present": true,
+      "runtime_c_sha256": "68b0d4e46f1a43a597a0d4c5a174b04086780cbe6ed3026c98e4ef6d89c7640e",
+      "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
+      "size": 31224
     },
-    "runtime_build_receipt_sha256": "0be94fd7b383a064fb3b5739b9f53571b5b065471bd5a6e36d3dc02cf31b13c2",
+    "runtime_build_receipt_sha256": "6a68bc38064059ba7c4a431e80e6f0bd5da41bf211fcf38fd55f6f0b8256d121",
     "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V2",
     "science_package_id": "family10h_relation_only_matched_permutation_v1",
     "source_bundle": {
@@ -105,7 +156,7 @@
         "run_relation_only_matched_permutation.py"
       ],
       "path": "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
-      "sha256": "6861faded99ff22bb93acd13c70d0a310dcf8b9653b5976f351fb249a7772959"
+      "sha256": "9589295541f81c016b4e701e32d8cdf6b5e033a31843d9ed41c2f8696ae1f476"
     }
   },
   "target_self_test_passed": true,

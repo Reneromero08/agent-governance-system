@@ -18,31 +18,33 @@
         "cyclic_origin_balance": true,
         "relation_cells_balanced_across_origins": true,
         "relations_distinct": true,
+        "runtime_schedule_executor_bound": false,
         "runtime_self_test_receipt_bound": false,
         "same_A_address_set": true,
         "same_A_work_count": true,
         "same_B_address_set": true,
         "same_B_work_count": true,
-        "same_allocation_order": true,
-        "same_branch_structure": true,
-        "same_delay_distribution": true,
+        "same_allocation_order": false,
+        "same_branch_structure": false,
+        "same_delay_distribution": false,
         "same_line_count": true,
         "same_logical_line_histogram": true,
         "same_page_count": true,
         "same_pair_distance_histogram": true,
         "same_permutation_cycle_structure_class": true,
-        "same_pmu_event_group": true,
-        "same_prefault_order": true,
+        "same_pmu_event_group": false,
+        "same_prefault_order": false,
         "same_read_count": true,
         "same_receiver_loop_length": true,
         "same_relation_table_lookup_count": true,
-        "same_source_and_receiver_cpu": true,
+        "same_source_and_receiver_cpu": false,
         "same_source_loop_length": true,
-        "same_source_order_and_query_order_counts": true,
+        "same_source_order_and_query_order_counts": false,
         "same_total_work": true,
         "same_virtual_offset_histogram": true,
         "same_write_count": true,
-        "source_hashes_bound": false
+        "source_hashes_bound": false,
+        "synthetic_executor_bound": false
       },
       "full_sequence_digests": {
         "relation_r0": {
@@ -102,7 +104,7 @@
       "origin_counts": {},
       "passed": false,
       "proof_basis": "generated full permutation tables, generated origin-rotated A/B sequences, schedule rows, source hashes, and runtime build receipt",
-      "proof_sha256": "01b2c2a542dd669e721ed90cc2d99acd10e94abc6ba3a13e5d597ef848674364",
+      "proof_sha256": "e61af390150e17869312eea9dcfa92cc2636050fd5406c28b078f835f9dee607",
       "relation_origin_counts_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
       "relation_r0": {
         "actual_cache_index_status": "unresolved_until_authorized_target_preflight",
@@ -131,10 +133,11 @@
   "marginal_equality_proof": {
     "checks": {
       "actual_cache_index_unresolved_not_claimed": true,
-      "compiled_binary_hash_bound": false,
+      "compiled_binary_hash_bound": true,
       "cyclic_origin_balance": true,
       "relation_cells_balanced_across_origins": true,
       "relations_distinct": true,
+      "runtime_schedule_executor_bound": true,
       "runtime_self_test_receipt_bound": true,
       "same_A_address_set": true,
       "same_A_work_count": true,
@@ -159,7 +162,8 @@
       "same_total_work": true,
       "same_virtual_offset_histogram": true,
       "same_write_count": true,
-      "source_hashes_bound": true
+      "source_hashes_bound": true,
+      "synthetic_executor_bound": true
     },
     "full_sequence_digests": {
       "relation_r0": {
@@ -222,9 +226,9 @@
       "2048": 8064,
       "3072": 8064
     },
-    "passed": false,
+    "passed": true,
     "proof_basis": "generated full permutation tables, generated origin-rotated A/B sequences, schedule rows, source hashes, and runtime build receipt",
-    "proof_sha256": "4a0699764c0b68b2e7c0a68efc11e39534876bfeafb12a1b7a4a91776a33e7ad",
+    "proof_sha256": "9e1ef6556be0978c5aa64a1149c9ef04fa61aedd018aa06daf3a2073e1b5c3f9",
     "relation_origin_counts_sha256": "6f57975f19183dc8a3f9bdadbd5076d529a6404812cb540ee73762016eb693ae",
     "relation_r0": {
       "actual_cache_index_status": "unresolved_until_authorized_target_preflight",
@@ -244,10 +248,10 @@
       "permutation_sha256": "f5a6835d06857e26c302655c80d7abd956b1742e6d799d71ec3e0d69cb1e47bf",
       "virtual_offset_histogram_sha256": "3bed852658892707a63af1833954e40112bf5aed7e438f889b05f27c7185139d"
     },
-    "runtime_build_receipt_passed": false,
-    "runtime_build_receipt_sha256": "0be94fd7b383a064fb3b5739b9f53571b5b065471bd5a6e36d3dc02cf31b13c2",
+    "runtime_build_receipt_passed": true,
+    "runtime_build_receipt_sha256": "6a68bc38064059ba7c4a431e80e6f0bd5da41bf211fcf38fd55f6f0b8256d121",
     "schema": "FAMILY10H_RELATION_MARGINAL_EQUALITY_PROOF_V2",
-    "source_hashes_sha256": "73c32cd45e54ce8a09ea626069c60debd7355a335ec7166f74a147f2c0b711c9"
+    "source_hashes_sha256": "08d9129bcad7f150ceba8f35b526d1bf782a2bab9aeb2aa2f0350a8bdf5ad639"
   },
   "negative_regressions": {
     "passed": true,
@@ -473,7 +477,7 @@
       }
     }
   },
-  "passed": false,
+  "passed": true,
   "physical_adjudicator_summary": {
     "negative_results": {
       "distance_only": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
@@ -491,15 +495,24 @@
     }
   },
   "runtime_build_summary": {
-    "blockers": [
-      "no local C compiler found on PATH"
-    ],
+    "blockers": [],
     "compiler": {
-      "command": null,
-      "kind": null,
-      "name": null
+      "available": true,
+      "compiler": "gcc",
+      "distro": "Ubuntu",
+      "environment": "wsl",
+      "headers": {
+        "linux_perf_event_h": "present",
+        "sched_h": "present"
+      },
+      "machine": "x86_64",
+      "path": "/usr/bin/gcc",
+      "suitability": "target_compatible_linux_binary_authority",
+      "target_triple": "x86_64-linux-gnu",
+      "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+      "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
     },
-    "passed": false
+    "passed": true
   },
   "schedule_validation": {
     "block_count": 2688,
@@ -540,7 +553,7 @@
     "tuple_count": 32256
   },
   "schema": "FAMILY10H_RELATION_ONLY_SELF_TEST_V2",
-  "self_test_sha256": "c64ee5e2d0bb5e1054652f5fe9963f95a58eb26371c0c182f545812d98e6299c",
+  "self_test_sha256": "c6f1ee0c9ce1b44677eeb026ac0c66c266defa092176ed75d30f719a90a89992",
   "target_self_test_summary": {
     "live_invocation_count": 0,
     "passed": true,
@@ -549,13 +562,13 @@
   "tests": {
     "distance_only_adversary_rejected": true,
     "grammar_validation_passed": true,
-    "implementation_marginal_equality_proof_passed": false,
+    "implementation_marginal_equality_proof_passed": true,
     "negative_regressions_passed": true,
     "no_offline_physical_claim": true,
     "origin_specific_artifact_rejected": true,
     "physical_adjudicator_self_test_passed": true,
     "route_pressure_adversary_rejected": true,
-    "runtime_compile_and_self_test_passed": false,
+    "runtime_compile_and_self_test_passed": true,
     "scalar_replay_adversary_rejected": true,
     "schedule_validation_passed": true,
     "separable_replay_adversary_rejected": true,

@@ -37,12 +37,12 @@ typedef struct relation_only_preparation {
     uint32_t cyclic_origin;
 } relation_only_preparation;
 
-typedef struct relation_only_query {
+typedef struct relation_only_query_spec {
     relation_only_relation_id relation;
     relation_only_order_id query_order;
     relation_only_control_id control;
     uint32_t cyclic_origin;
-} relation_only_query;
+} relation_only_query_spec;
 
 typedef struct relation_only_carrier_state {
     uint8_t lane_a[FAMILY10H_RELATION_ONLY_LANE_BYTES];
@@ -55,7 +55,7 @@ uint32_t relation_only_map_index(relation_only_relation_id relation, uint32_t lo
 uint32_t relation_only_origin_index(uint32_t cyclic_origin, uint32_t step);
 void relation_only_prefault(relation_only_carrier_state *state);
 int relation_only_prepare(relation_only_preparation prep, relation_only_carrier_state *state);
-uint64_t relation_only_query(relation_only_query query, const relation_only_carrier_state *state);
+uint64_t relation_only_query(relation_only_query_spec query, const relation_only_carrier_state *state);
 int relation_only_runtime_self_test(void);
 int relation_only_runtime_live_authority_present(void);
 

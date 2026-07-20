@@ -199,6 +199,11 @@ def write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, indent=2, sort_keys=True, ensure_ascii=True) + "\n", encoding="utf-8")
 
 
+def write_compact_json(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False) + "\n", encoding="utf-8")
+
+
 def stable_token(value: Any, n: int = 20) -> str:
     return hashlib.sha256((PUBLIC_RANDOMIZATION_SEED + ":" + digest(value)).encode("utf-8")).hexdigest()[:n]
 
@@ -368,6 +373,8 @@ def relation_marginal_equality_proof(
     expected_relation_origin_count = None
     if relation_origin_counts:
         expected_relation_origin_count = min(relation_origin_counts.values()) == max(relation_origin_counts.values())
+    runtime_gates = (runtime_receipt or {}).get("implementation_gates", {})
+    binary_authority = (runtime_receipt or {}).get("runtime_binary_authority", {})
     full_sequences = {
         relation_id: {
             str(origin): {
@@ -399,20 +406,25 @@ def relation_marginal_equality_proof(
         "same_permutation_cycle_structure_class": r0["cycle_structure_sha256"] == r1["cycle_structure_sha256"],
         "same_source_loop_length": TOTAL_WORK == LINE_COUNT,
         "same_receiver_loop_length": TOTAL_WORK == LINE_COUNT,
-        "same_branch_structure": True,
+        "same_branch_structure": runtime_gates.get("hot_loop_relation_branch_free", False),
         "same_relation_table_lookup_count": LINE_COUNT == LINE_COUNT,
-        "same_allocation_order": True,
-        "same_prefault_order": True,
-        "same_source_and_receiver_cpu": True,
-        "same_pmu_event_group": True,
-        "same_delay_distribution": True,
-        "same_source_order_and_query_order_counts": True,
+        "same_allocation_order": runtime_gates.get("fresh_carrier_per_tuple_implemented", False),
+        "same_prefault_order": runtime_gates.get("prefault_implemented", False),
+        "same_source_and_receiver_cpu": runtime_gates.get("source_cpu_pinning_implemented", False)
+        and runtime_gates.get("receiver_cpu_pinning_implemented", False),
+        "same_pmu_event_group": runtime_gates.get("pmu_group_open_implemented", False)
+        and runtime_gates.get("pmu_group_read_implemented", False),
+        "same_delay_distribution": runtime_gates.get("delay_enforcement_implemented", False),
+        "same_source_order_and_query_order_counts": runtime_gates.get("source_order_control_implemented", False)
+        and runtime_gates.get("query_order_control_implemented", False),
         "cyclic_origin_balance": bool(origin_counts) and sorted(origin_counts) == CYCLIC_ORIGINS and len(set(origin_counts.values())) == 1
         if schedule_rows
         else True,
         "relation_cells_balanced_across_origins": expected_relation_origin_count if expected_relation_origin_count is not None else True,
         "runtime_self_test_receipt_bound": runtime_receipt is not None,
-        "compiled_binary_hash_bound": runtime_receipt is not None and runtime_receipt.get("compiled_binary_sha256") is not None,
+        "runtime_schedule_executor_bound": runtime_gates.get("runtime_schedule_executor_implemented", False),
+        "synthetic_executor_bound": runtime_gates.get("synthetic_executor_complete_schedule_passed", False),
+        "compiled_binary_hash_bound": binary_authority.get("compiled_binary_sha256") is not None,
         "source_hashes_bound": source_hashes is not None,
     }
     proof = {

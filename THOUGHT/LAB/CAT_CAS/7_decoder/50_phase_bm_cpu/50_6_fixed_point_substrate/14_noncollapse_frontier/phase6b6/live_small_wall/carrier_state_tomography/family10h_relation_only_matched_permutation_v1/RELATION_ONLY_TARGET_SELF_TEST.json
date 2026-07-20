@@ -16,25 +16,59 @@
   "offline_only": true,
   "pmu_acquisition_count": 0,
   "runtime_refuses_without_authority": {
+    "launch_mode": "wsl_linux_binary",
     "live_invocation_count": 0,
     "passed": true,
     "pmu_acquisition_count": 0,
-    "reason": "runtime binary absent; compile gate owns build-readiness blocker",
-    "runtime_binary_present": false
+    "returncode": 13,
+    "runtime_binary_present": true,
+    "stderr": "",
+    "stdout": ""
   },
   "schema": "FAMILY10H_RELATION_ONLY_TARGET_SELF_TEST_V1",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
   "self_test_passed": true,
-  "self_test_sha256": "0bfb1dcaf098d6c0824286a336be94745850f83932709febe8059f7699de367b",
+  "self_test_sha256": "835e2b7b66fe1e6375f1d7e23d1333cf127ac9cccd2ab619c746ddcde9f756d5",
   "sensor_inventory_count": 0,
   "small_wall_crossed": false,
   "source_root_validation": {
     "failures": [],
     "passed": true,
-    "required_file_count": 17
+    "required_file_count": 20
   },
   "stderr": "",
   "subprocess_returncode": 0,
   "target_contact_count": 0,
+  "target_preflight_refuses_without_authority": {
+    "live_invocation_count": 0,
+    "manifest_present": true,
+    "passed": true,
+    "pmu_acquisition_count": 0,
+    "pmu_open_count": 0,
+    "reason": "live authority missing",
+    "required_checks": [
+      "cpu_vendor_family_model",
+      "source_receiver_cpu_identity",
+      "operational_pinning_capability",
+      "runtime_binary_sha256",
+      "manifest_sha256",
+      "schedule_sha256",
+      "compiler_abi_identity",
+      "pmu_event_availability",
+      "grouped_pmu_open_capability",
+      "temperature_sensor_authority",
+      "cpu_frequency_policy_custody",
+      "remote_source_output_root_absence",
+      "actual_physical_geometry_status",
+      "attempt_ownership_marker"
+    ],
+    "runtime_binary_present": true,
+    "schedule_present": true,
+    "schema": "FAMILY10H_RELATION_ONLY_TARGET_PREFLIGHT_REFUSAL_V1",
+    "sensor_inventory_count": 0,
+    "small_wall_crossed": false,
+    "status": "TARGET_PREFLIGHT_REFUSED",
+    "target_contact_count": 0
+  },
   "transaction_run_id": "family10h_relation_only_matched_permutation_v1_0"
 }

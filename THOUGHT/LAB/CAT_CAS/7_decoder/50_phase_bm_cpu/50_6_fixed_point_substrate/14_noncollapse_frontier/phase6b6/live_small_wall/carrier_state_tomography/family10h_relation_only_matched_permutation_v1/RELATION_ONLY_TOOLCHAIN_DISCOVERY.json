@@ -1,0 +1,158 @@
+{
+  "host_semantic_compilers": [],
+  "installation_performed": false,
+  "other_existing_environments": {
+    "cmake": {
+      "command": [
+        "where.exe",
+        "cmake"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "C:\\Program Files\\CMake\\bin\\cmake.exe\n",
+      "timed_out": false
+    },
+    "cmake_classification": "generator_or_build_orchestrator_not_a_target_compiler",
+    "cmake_version": {
+      "command": [
+        "cmake",
+        "--version"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "cmake version 4.3.2\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n",
+      "timed_out": false
+    },
+    "cygwin_roots": [],
+    "docker": {
+      "command": [
+        "where.exe",
+        "docker"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker\nC:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe\n",
+      "timed_out": false
+    },
+    "docker_version": {
+      "command": [
+        "docker",
+        "--version"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "Docker version 27.4.0, build bde2b89\n",
+      "timed_out": false
+    },
+    "llvm_roots": [],
+    "msys2_roots": [],
+    "podman": {
+      "command": [
+        "where.exe",
+        "podman"
+      ],
+      "returncode": 1,
+      "stderr": "INFO: Could not find files for the given pattern(s).\n",
+      "stdout": "",
+      "timed_out": false
+    }
+  },
+  "schema": "FAMILY10H_RELATION_ONLY_TOOLCHAIN_DISCOVERY_V1",
+  "system_modified": false,
+  "target_compatible_compiler": {
+    "available": true,
+    "compiler": "gcc",
+    "distro": "Ubuntu",
+    "environment": "wsl",
+    "headers": {
+      "linux_perf_event_h": "present",
+      "sched_h": "present"
+    },
+    "machine": "x86_64",
+    "path": "/usr/bin/gcc",
+    "suitability": "target_compatible_linux_binary_authority",
+    "target_triple": "x86_64-linux-gnu",
+    "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+    "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+  },
+  "toolchain_discovery_sha256": "76427e09cb686ee3e87a43977f33cbfe7dbb5bcf461bae7189a21fc4f71c262b",
+  "visual_studio": [
+    {
+      "exists": false,
+      "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe"
+    },
+    {
+      "exists": false,
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\Installer\\vswhere.exe"
+    }
+  ],
+  "windows_path_checks": {
+    "where_cl": {
+      "command": [
+        "where.exe",
+        "cl"
+      ],
+      "returncode": 1,
+      "stderr": "INFO: Could not find files for the given pattern(s).\n",
+      "stdout": "",
+      "timed_out": false
+    },
+    "where_clang": {
+      "command": [
+        "where.exe",
+        "clang"
+      ],
+      "returncode": 1,
+      "stderr": "INFO: Could not find files for the given pattern(s).\n",
+      "stdout": "",
+      "timed_out": false
+    },
+    "where_gcc": {
+      "command": [
+        "where.exe",
+        "gcc"
+      ],
+      "returncode": 1,
+      "stderr": "INFO: Could not find files for the given pattern(s).\n",
+      "stdout": "",
+      "timed_out": false
+    }
+  },
+  "wsl": {
+    "distributions": [
+      {
+        "distro": "Ubuntu",
+        "parsed": {
+          "cc_path": "/usr/bin/cc",
+          "cc_version": "cc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0",
+          "clang_path": "",
+          "clang_version": "",
+          "gcc_path": "/usr/bin/gcc",
+          "gcc_triple": "x86_64-linux-gnu",
+          "gcc_version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0",
+          "machine": "x86_64",
+          "perf_event_header": "present",
+          "sched_header": "present",
+          "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux"
+        },
+        "probe": {
+          "command": [
+            "C:\\Windows\\system32\\wsl.exe",
+            "-d",
+            "Ubuntu",
+            "--",
+            "sh",
+            "-c",
+            "echo machine; uname -m; echo uname; uname -a; echo gcc_path; command -v gcc || true; echo gcc_version; gcc --version 2>/dev/null | head -n 1 || true; echo gcc_triple; gcc -dumpmachine 2>/dev/null || true; echo clang_path; command -v clang || true; echo clang_version; clang --version 2>/dev/null | head -n 1 || true; echo cc_path; command -v cc || true; echo cc_version; cc --version 2>/dev/null | head -n 1 || true; echo perf_event_header; test -e /usr/include/linux/perf_event.h && echo present || echo missing; echo sched_header; test -e /usr/include/sched.h && echo present || echo missing"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "machine\nx86_64\nuname\nLinux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux\ngcc_path\n/usr/bin/gcc\ngcc_version\ngcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0\ngcc_triple\nx86_64-linux-gnu\nclang_path\nclang_version\ncc_path\n/usr/bin/cc\ncc_version\ncc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0\nperf_event_header\npresent\nsched_header\npresent\n",
+          "timed_out": false
+        },
+        "suitability": "target_compatible_linux_gcc"
+      }
+    ],
+    "wsl_exe": "C:\\Windows\\system32\\wsl.exe"
+  }
+}
