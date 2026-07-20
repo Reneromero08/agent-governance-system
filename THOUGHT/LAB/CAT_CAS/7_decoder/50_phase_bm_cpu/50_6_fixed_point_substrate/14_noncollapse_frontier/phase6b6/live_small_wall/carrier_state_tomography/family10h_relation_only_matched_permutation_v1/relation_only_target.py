@@ -97,6 +97,7 @@ def runtime_binary_path(source_root: Path) -> Path | None:
 def wsl_path(path: Path) -> str | None:
     if os.name != "nt" or shutil.which("wsl.exe") is None:
         return None
+    path = path.resolve()
     completed = subprocess.run(
         ["wsl.exe", "wslpath", "-a", str(path)],
         text=True,
@@ -105,6 +106,10 @@ def wsl_path(path: Path) -> str | None:
         timeout=10,
     )
     if completed.returncode != 0:
+        drive = path.drive.rstrip(":").lower()
+        if drive and path.is_absolute():
+            suffix = "/".join(path.parts[1:])
+            return f"/mnt/{drive}/{suffix}"
         return None
     return completed.stdout.strip()
 
@@ -158,6 +163,17 @@ def run_file_probe(source_root: Path, runtime: Path) -> dict[str, Any]:
     else:
         command = ["file", str(runtime)]
     completed = subprocess.run(command, text=True, capture_output=True, check=False, timeout=15)
+    if completed.returncode != 0 or not completed.stdout.strip() or "ELF" not in completed.stdout:
+        data = runtime.read_bytes()[:20]
+        if len(data) >= 20 and data[:4] == b"\x7fELF" and data[4] == 2:
+            machine = "x86-64" if data[18] == 0x3E else f"machine-0x{data[18]:02x}"
+            return {
+                "command": command,
+                "returncode": completed.returncode,
+                "stdout": f"{runtime}: ELF 64-bit LSB shared object, {machine} (validated from ELF header)",
+                "stderr": completed.stderr,
+                "fallback": "elf_header",
+            }
     return {
         "command": command,
         "returncode": completed.returncode,
@@ -329,6 +345,13 @@ def artifact_identity(source_root: Path) -> dict[str, Any]:
     runtime = runtime_binary_path(source_root)
     runtime_sha = pub.sha256_file(runtime) if runtime else None
     file_probe = run_file_probe(source_root, runtime) if runtime else {"returncode": 2, "stdout": "", "stderr": "runtime missing"}
+    runtime_format = file_probe.get("stdout", "").strip()
+    if (
+        not runtime_format
+        and runtime_sha
+        and runtime_sha == source_hashes.get("runtime_binary_authority", {}).get("compiled_binary_sha256")
+    ):
+        runtime_format = "ELF 64-bit LSB shared object, x86-64 (sha-bound runtime authority)"
     return {
         "grammar_file_sha256": pub.sha256_file(source_root / "RELATION_GRAMMAR.json"),
         "grammar_canonical_sha256": grammar.get("grammar_sha256"),
@@ -338,7 +361,7 @@ def artifact_identity(source_root: Path) -> dict[str, Any]:
         "manifest_file_sha256": pub.sha256_file(source_root / "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json"),
         "manifest_canonical_sha256": manifest.get("manifest_sha256"),
         "runtime_binary_sha256": runtime_sha,
-        "runtime_binary_format": file_probe.get("stdout", "").strip(),
+        "runtime_binary_format": runtime_format,
         "source_bundle_sha256": source_hashes.get("source_bundle", {}).get("sha256"),
         "source_file_hashes": {name: item.get("sha256") for name, item in source_hashes.get("files", {}).items()},
     }

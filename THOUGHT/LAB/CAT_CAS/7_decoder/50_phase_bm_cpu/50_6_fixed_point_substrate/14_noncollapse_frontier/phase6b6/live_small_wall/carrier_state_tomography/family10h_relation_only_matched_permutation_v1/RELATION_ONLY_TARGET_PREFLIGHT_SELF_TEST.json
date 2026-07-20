@@ -5,7 +5,15 @@
       "expected_failure": null,
       "failures": [
         "source_authority_commit_binding",
-        "package_decision"
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes"
       ],
       "passed": false,
       "status": "TARGET_PREFLIGHT_FAILED"
@@ -14,7 +22,15 @@
       "expected_failure": "operational_pinning_capability",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "operational_pinning_capability"
       ],
       "passed": true,
@@ -24,7 +40,15 @@
       "expected_failure": "grouped_pmu_open_capability",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "grouped_pmu_open_capability"
       ],
       "passed": true,
@@ -33,7 +57,15 @@
     "malformed_output_path": {
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "output_root_absence"
       ],
       "passed": true,
@@ -42,7 +74,15 @@
     "missing_parent": {
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "output_root_absence"
       ],
       "passed": true,
@@ -52,7 +92,15 @@
       "expected_failure": "source_receiver_cpu_identity",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "source_receiver_cpu_identity"
       ],
       "passed": true,
@@ -62,7 +110,15 @@
       "expected_failure": "source_receiver_cpu_identity",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "source_receiver_cpu_identity"
       ],
       "passed": true,
@@ -71,7 +127,15 @@
     "output_path_escape": {
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "output_root_absence"
       ],
       "passed": true,
@@ -81,7 +145,15 @@
       "expected_failure": "attempt_ownership_marker",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "attempt_ownership_marker"
       ],
       "passed": true,
@@ -90,7 +162,15 @@
     "partial_output": {
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "output_root_absence"
       ],
       "passed": true,
@@ -100,7 +180,15 @@
       "expected_failure": "output_root_absence",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "output_root_absence"
       ],
       "passed": true,
@@ -110,7 +198,15 @@
       "expected_failure": "cpu_frequency_policy_custody",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "cpu_frequency_policy_custody"
       ],
       "passed": true,
@@ -119,7 +215,15 @@
     "preexisting_output_root": {
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "output_root_absence"
       ],
       "passed": true,
@@ -129,7 +233,15 @@
       "expected_failure": "temperature_sensor_authority",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "temperature_sensor_authority"
       ],
       "passed": true,
@@ -139,7 +251,15 @@
       "expected_failure": "pmu_event_identities",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "pmu_event_identities"
       ],
       "passed": true,
@@ -149,7 +269,15 @@
       "expected_failure": null,
       "failures": [
         "source_authority_commit_binding",
-        "package_decision"
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes"
       ],
       "passed": false,
       "status": "TARGET_PREFLIGHT_FAILED"
@@ -158,8 +286,15 @@
       "expected_failure": "runtime_binary_hash",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
-        "runtime_binary_hash"
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes"
       ],
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"
@@ -168,7 +303,15 @@
       "expected_failure": "cpu_vendor_family_model",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes",
         "cpu_vendor_family_model"
       ],
       "passed": true,
@@ -179,7 +322,14 @@
       "failures": [
         "source_authority_commit_binding",
         "manifest_file_hash",
-        "package_decision"
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes"
       ],
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"
@@ -188,8 +338,15 @@
       "expected_failure": "expanded_schedule_tsv_hash",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision",
-        "expanded_schedule_tsv_hash"
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes"
       ],
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"
@@ -198,7 +355,15 @@
       "expected_failure": "source_authority_commit_binding",
       "failures": [
         "source_authority_commit_binding",
-        "package_decision"
+        "manifest_file_hash",
+        "source_root_identity",
+        "grammar_hash",
+        "compact_schedule_manifest_binding",
+        "expanded_schedule_tsv_hash",
+        "runtime_binary_hash",
+        "runtime_binary_format_and_abi",
+        "source_bundle_hash",
+        "source_file_hashes"
       ],
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"

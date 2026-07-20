@@ -141,7 +141,23 @@ def synthetic_transport_self_test(source_root: Path, relation_freeze_commit: str
             target.LEGACY_COMMIT_ENV: None,
         }
         with target.temporary_env(env):
-            execution = target.execute_authorized(deployment_root, output_root)
+            try:
+                execution = target.execute_authorized(deployment_root, output_root)
+            except target.TargetError as exc:
+                preflight = target.target_preflight(deployment_root, output_root, None)
+                return {
+                    "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_LIVE_CONTROLLER_SELF_TEST_V1",
+                    "passed": False,
+                    "status": "SYNTHETIC_CONTROLLER_EXECUTION_REFUSED",
+                    "reason": str(exc),
+                    "preflight": preflight,
+                    "target_contact_count": 0,
+                    "ssh_count": 0,
+                    "scp_count": 0,
+                    "physical_pmu_acquisition_count": 0,
+                    "sensor_discovery_count": 0,
+                    "live_runtime_execution_count": 0,
+                }
         archive_path = temp_root / "ATTEMPT_1_REMOTE_ROOT.tar.gz"
         archive = archive_tree(deployment_root, archive_path)
         copyback_path = temp_root / "copyback_ATTEMPT_1_REMOTE_ROOT.tar.gz"

@@ -1438,6 +1438,11 @@ def prepare(relation_source_authority: str | None = None) -> dict[str, Any]:
         )
         pub.write_json(MANIFEST_JSON, manifest)
         write_text(MANIFEST_SHA, pub.sha256_file(MANIFEST_JSON) + "\n")
+        if readiness["package_decision"] != pub.PACKAGE_DECISION_BUILD_READY:
+            next_validate = validate_artifacts()
+            pub.write_json(VALIDATE_JSON, next_validate)
+            validate = next_validate
+            break
         target_self_test = run_target_self_test()
         pub.write_json(TARGET_SELF_TEST_JSON, target_self_test)
         pub.write_json(

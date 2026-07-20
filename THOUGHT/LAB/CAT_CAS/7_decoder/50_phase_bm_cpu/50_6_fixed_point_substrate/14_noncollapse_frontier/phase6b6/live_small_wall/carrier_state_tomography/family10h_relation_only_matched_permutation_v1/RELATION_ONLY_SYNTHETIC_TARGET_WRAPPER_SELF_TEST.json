@@ -6,29 +6,7 @@
   "pmu_acquisition_count": 0,
   "positive_physical_claim": false,
   "preflight": {
-    "artifact_identity": {
-      "grammar_canonical_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
-      "grammar_file_sha256": "c0ef84e5d37670a0c6a3cbe48139aa4f46ac344dbb27f6649505ec859359eff2",
-      "manifest_canonical_sha256": "8a231acead971d8a8c966c525f29c2e6eceab7cc40b653fffe00ebc89f107ff9",
-      "manifest_file_sha256": "3a02fa86a6b057b2341b82a8a001d3a778cf69d8349ee1370466f36f3805bb80",
-      "runtime_binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
-      "runtime_binary_sha256": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
-      "schedule_canonical_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
-      "schedule_manifest_sha256": "a7f575bc5ac8ef6e8b4ca4080c01e4a5efd992fd651f70ab1dde8ddc42c57a83",
-      "schedule_tsv_sha256": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
-      "source_bundle_sha256": "373f6e89bec195b6459761db3b36ebc683bbeed9474cd040660c4cba8f4ae65b",
-      "source_file_hashes": {
-        "RELATION_ONLY_CONTRACT.md": "348b576cbc2bf38c1bc7c338609174c3aa02e95993098b535de10492bac0eb33",
-        "relation_only_adjudication.py": "c5c268adb4a4ed7666ebabc524be4de6ca34a86a977e86898eaa69dfc9012dd1",
-        "relation_only_live_controller.py": "baa9e57123e236e0d9000d31c12683ebe4cecd39ab6da8007b644dc57e991a83",
-        "relation_only_physical_adjudication.py": "e61c7e8acd89da2516a0aaf3f1c75f1f4632de1b8c7724cc40c4ceae0f19c959",
-        "relation_only_public.py": "5719a1076958643034d984ec3fae9eae96cd2c1aa35e364a4e4c964278fa8959",
-        "relation_only_runtime.c": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
-        "relation_only_runtime.h": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
-        "relation_only_target.py": "afe72bc3c13f8347c6f01c896e88f1f3424c9470dfd58afe3ebf6e6991e90d25",
-        "run_relation_only_matched_permutation.py": "5010e17678f55eaf64e78973fb3b04c1c6f0d9778126aa179c023cdb200b3c3e"
-      }
-    },
+    "artifact_identity": {},
     "checks": {
       "actual_physical_geometry_status": {
         "detail": {
@@ -48,14 +26,14 @@
         "passed": true
       },
       "canonical_manifest_digest": {
-        "detail": "8a231acead971d8a8c966c525f29c2e6eceab7cc40b653fffe00ebc89f107ff9",
+        "detail": "88b7efc54008aa1fb8e706c85d5177663a91fb616659b5d74ac872d9cff6881c",
         "name": "canonical_manifest_digest",
         "passed": true
       },
       "compact_schedule_manifest_binding": {
         "detail": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
         "name": "compact_schedule_manifest_binding",
-        "passed": true
+        "passed": false
       },
       "cpu_frequency_policy_custody": {
         "detail": {
@@ -88,7 +66,7 @@
       "expanded_schedule_tsv_hash": {
         "detail": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
         "name": "expanded_schedule_tsv_hash",
-        "passed": true
+        "passed": false
       },
       "freeze_commit_binding": {
         "detail": {
@@ -102,7 +80,7 @@
       "grammar_hash": {
         "detail": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
         "name": "grammar_hash",
-        "passed": true
+        "passed": false
       },
       "grouped_pmu_open_capability": {
         "detail": {
@@ -132,12 +110,12 @@
       },
       "manifest_file_hash": {
         "detail": {
-          "env": "3a02fa86a6b057b2341b82a8a001d3a778cf69d8349ee1370466f36f3805bb80",
-          "expected": "3a02fa86a6b057b2341b82a8a001d3a778cf69d8349ee1370466f36f3805bb80",
+          "env": "a24a5426f73f690c2bb4c20f0022a22f50883d8aa14a3ede1b3fbb473aef24d1",
+          "expected": "a24a5426f73f690c2bb4c20f0022a22f50883d8aa14a3ede1b3fbb473aef24d1",
           "observed_backend": "fixture"
         },
         "name": "manifest_file_hash",
-        "passed": true
+        "passed": false
       },
       "operational_pinning_capability": {
         "detail": {
@@ -164,9 +142,9 @@
         "passed": true
       },
       "package_decision": {
-        "detail": "FAMILY10H_RELATION_ONLY_BUILD_READINESS_BLOCKED",
+        "detail": "FAMILY10H_RELATION_ONLY_BUILD_READY_AWAITING_AUTHORIZATION",
         "name": "package_decision",
-        "passed": false
+        "passed": true
       },
       "pmu_event_identities": {
         "detail": {
@@ -198,19 +176,19 @@
       },
       "runtime_binary_format_and_abi": {
         "detail": {
-          "format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
+          "format": "",
           "required": [
             "ELF 64-bit",
             "x86-64"
           ]
         },
         "name": "runtime_binary_format_and_abi",
-        "passed": true
+        "passed": false
       },
       "runtime_binary_hash": {
         "detail": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
         "name": "runtime_binary_hash",
-        "passed": true
+        "passed": false
       },
       "source_authority_commit_binding": {
         "detail": {
@@ -222,24 +200,14 @@
         "passed": false
       },
       "source_bundle_hash": {
-        "detail": "373f6e89bec195b6459761db3b36ebc683bbeed9474cd040660c4cba8f4ae65b",
+        "detail": "46cd68540f42b54885f595b75fe9ddf861bb902259151ca8e1c94a127ad6f482",
         "name": "source_bundle_hash",
-        "passed": true
+        "passed": false
       },
       "source_file_hashes": {
-        "detail": {
-          "RELATION_ONLY_CONTRACT.md": "348b576cbc2bf38c1bc7c338609174c3aa02e95993098b535de10492bac0eb33",
-          "relation_only_adjudication.py": "c5c268adb4a4ed7666ebabc524be4de6ca34a86a977e86898eaa69dfc9012dd1",
-          "relation_only_live_controller.py": "baa9e57123e236e0d9000d31c12683ebe4cecd39ab6da8007b644dc57e991a83",
-          "relation_only_physical_adjudication.py": "e61c7e8acd89da2516a0aaf3f1c75f1f4632de1b8c7724cc40c4ceae0f19c959",
-          "relation_only_public.py": "5719a1076958643034d984ec3fae9eae96cd2c1aa35e364a4e4c964278fa8959",
-          "relation_only_runtime.c": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
-          "relation_only_runtime.h": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
-          "relation_only_target.py": "afe72bc3c13f8347c6f01c896e88f1f3424c9470dfd58afe3ebf6e6991e90d25",
-          "run_relation_only_matched_permutation.py": "5010e17678f55eaf64e78973fb3b04c1c6f0d9778126aa179c023cdb200b3c3e"
-        },
+        "detail": null,
         "name": "source_file_hashes",
-        "passed": true
+        "passed": false
       },
       "source_receiver_cpu_identity": {
         "detail": {
@@ -257,12 +225,14 @@
       },
       "source_root_identity": {
         "detail": {
-          "failures": [],
-          "passed": true,
+          "failures": [
+            "relation source authority missing or invalid for build-ready package"
+          ],
+          "passed": false,
           "required_file_count": 23
         },
         "name": "source_root_identity",
-        "passed": true
+        "passed": false
       },
       "temperature_sensor_authority": {
         "detail": {
@@ -283,7 +253,15 @@
     },
     "failures": [
       "source_authority_commit_binding",
-      "package_decision"
+      "manifest_file_hash",
+      "source_root_identity",
+      "grammar_hash",
+      "compact_schedule_manifest_binding",
+      "expanded_schedule_tsv_hash",
+      "runtime_binary_hash",
+      "runtime_binary_format_and_abi",
+      "source_bundle_hash",
+      "source_file_hashes"
     ],
     "live_invocation_count": 0,
     "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_only_matched_permutation_v1\\_relation_only_owned_outputs\\synthetic_target_wrapper_attempt",
@@ -298,7 +276,7 @@
     "status": "TARGET_PREFLIGHT_FAILED",
     "target_contact_count": 0
   },
-  "reason": "target preflight failed: source_authority_commit_binding,package_decision",
+  "reason": "target preflight failed: source_authority_commit_binding,manifest_file_hash,source_root_identity,grammar_hash,compact_schedule_manifest_binding,expanded_schedule_tsv_hash,runtime_binary_hash,runtime_binary_format_and_abi,source_bundle_hash,source_file_hashes",
   "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_TARGET_WRAPPER_EXECUTION_V1",
   "scientific_claim_emitted": false,
   "sensor_inventory_count": 0,
