@@ -1,0 +1,79 @@
+{
+  "adversary_tests_passed": true,
+  "claim_boundary": {
+    "catalytic_borrowing_established": false,
+    "full_carrier_state_tomography_established": false,
+    "live_authority": false,
+    "maximum_future_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_CONFIRMED",
+    "physical_relational_memory_established": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "grammar_sha256": "bac08aac11fe31efc6f69b65b481fbd5f8b482cd71d31a015a9cac4a53071bf7",
+  "manifest_sha256": "74df33767e681db76debd433d1d0922b3a3d61ba06e6ee6490134fa7880ed45d",
+  "marginal_equality_proof_sha256": "a14610d01c24ef7940e1857fce83fc8851844063be72bc1f00a3adec07c49663",
+  "offline_validate_passed": true,
+  "package_decision": "FAMILY10H_RELATION_ONLY_PACKAGE_FROZEN_AWAITING_AUTHORIZATION",
+  "primary_R_match_law": {
+    "formula": "0.5 * ((Y_r0_r0 + Y_r1_r1) - (Y_r0_r1 + Y_r1_r0))",
+    "name": "R_match",
+    "positive_or_negative_allowed": true,
+    "primary_endpoint": "dirty_probe_response"
+  },
+  "public_randomization_seed": "family10h-relation-only-matched-permutation-v1-public-seed-1bf2c63e",
+  "schedule_sha256": "df259e902500bb0ce628acf83186f99c611717cd517ea35145eba8d85a17b563",
+  "schedule_tuple_count": 8064,
+  "schema": "FAMILY10H_RELATION_ONLY_IMPLEMENTATION_MANIFEST_V1",
+  "science_package_id": "family10h_relation_only_matched_permutation_v1",
+  "self_test_sha256": "ee85476885ab99afbc6084545bdbd0a315b7154aa057b14808758fb16db19bcc",
+  "source_hashes": {
+    "files": {
+      "RELATION_ONLY_CONTRACT.md": {
+        "sha256": "90099c3213e5ebc212d769feaa46df5490d7d2bad829e18c580f4445b658880f",
+        "size": 4567
+      },
+      "relation_only_adjudication.py": {
+        "sha256": "31519bf6e221a4d78d70f882fc5979f1e1e882983aea07c37d613207d75b9464",
+        "size": 9569
+      },
+      "relation_only_public.py": {
+        "sha256": "4979463ffc371d33872dd7ea63f118c77ec113bc4cf0ba7995dc16ed1842f386",
+        "size": 25431
+      },
+      "relation_only_runtime.c": {
+        "sha256": "3886ca3f0d94ded0e56eb0168f12e225948d8c7d843405f2b0f53ecf3511213b",
+        "size": 486
+      },
+      "relation_only_runtime.h": {
+        "sha256": "142eb590f33fa35600dddfb071ef6432a70bea8569223900bcbc1fb1b151cd68",
+        "size": 711
+      },
+      "relation_only_target.py": {
+        "sha256": "b3595a4196804ea5a2317324fbfead6944db000c84805cc9a3c9d84f83a8ad5a",
+        "size": 494
+      },
+      "run_relation_only_matched_permutation.py": {
+        "sha256": "a74273f224f5b6f0a36513d342f1bf0e61ab70ac868be544929bceb98713ca40",
+        "size": 21684
+      }
+    },
+    "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V1",
+    "science_package_id": "family10h_relation_only_matched_permutation_v1",
+    "source_bundle": {
+      "members": [
+        "RELATION_ONLY_CONTRACT.md",
+        "relation_only_adjudication.py",
+        "relation_only_public.py",
+        "relation_only_runtime.c",
+        "relation_only_runtime.h",
+        "relation_only_target.py",
+        "run_relation_only_matched_permutation.py"
+      ],
+      "path": "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
+      "sha256": "b3ad7ad07bec77528b9477138ac8fa732124b588191069836e44c33b5b168fd5"
+    }
+  },
+  "transaction_run_id": "family10h_relation_only_matched_permutation_v1_0",
+  "transport_simulation_passed": true,
+  "zero_live_activity_by_package_generation": true
+}

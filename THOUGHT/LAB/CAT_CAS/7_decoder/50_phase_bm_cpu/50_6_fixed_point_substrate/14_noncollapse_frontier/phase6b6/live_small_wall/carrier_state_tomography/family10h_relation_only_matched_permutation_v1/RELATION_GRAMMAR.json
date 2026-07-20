@@ -1,0 +1,340 @@
+{
+  "claim_boundary": {
+    "forbidden_promotions": [
+      "FULL_CARRIER_STATE_TOMOGRAPHY_ESTABLISHED",
+      "PHYSICAL_RELATIONAL_MEMORY_ESTABLISHED",
+      "CATALYTIC_BORROWING_ESTABLISHED",
+      "R2_RESTORATION_ESTABLISHED",
+      "SMALL_WALL_CROSSED"
+    ],
+    "live_authority": false,
+    "maximum_future_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_CONFIRMED",
+    "offline_package_decision": "FAMILY10H_RELATION_ONLY_PACKAGE_FROZEN_AWAITING_AUTHORIZATION",
+    "small_wall_crossed": false
+  },
+  "grammar_sha256": "bac08aac11fe31efc6f69b65b481fbd5f8b482cd71d31a015a9cac4a53071bf7",
+  "physical_marginals": {
+    "A_address_set": "logical A line indices 0..4095",
+    "B_address_set": "logical B line indices 0..4095",
+    "allocation_and_prefault": "allocate all owned lanes before schedule, prefault every lane in identical order",
+    "branch_structure": "same static loops and branch topology for relation_r0 and relation_r1",
+    "cache_set_count": 64,
+    "line_count_per_lane": 4096,
+    "page_count_per_lane": 64,
+    "pmu_group": "family10h_public_relation_match_group",
+    "receiver_cpu_expected": 5,
+    "receiver_loop_count": 4096,
+    "source_cpu_expected": 4,
+    "source_loop_count": 4096
+  },
+  "primary_relation_law": {
+    "formula": "0.5 * ((Y_r0_r0 + Y_r1_r1) - (Y_r0_r1 + Y_r1_r0))",
+    "name": "R_match",
+    "positive_or_negative_allowed": true,
+    "primary_endpoint": "dirty_probe_response"
+  },
+  "public_randomization_seed": "family10h-relation-only-matched-permutation-v1-public-seed-1bf2c63e",
+  "relation_definitions": {
+    "relation_r0": {
+      "cache_set_histogram": {
+        "0": 128,
+        "1": 128,
+        "10": 128,
+        "11": 128,
+        "12": 128,
+        "13": 128,
+        "14": 128,
+        "15": 128,
+        "16": 128,
+        "17": 128,
+        "18": 128,
+        "19": 128,
+        "2": 128,
+        "20": 128,
+        "21": 128,
+        "22": 128,
+        "23": 128,
+        "24": 128,
+        "25": 128,
+        "26": 128,
+        "27": 128,
+        "28": 128,
+        "29": 128,
+        "3": 128,
+        "30": 128,
+        "31": 128,
+        "32": 128,
+        "33": 128,
+        "34": 128,
+        "35": 128,
+        "36": 128,
+        "37": 128,
+        "38": 128,
+        "39": 128,
+        "4": 128,
+        "40": 128,
+        "41": 128,
+        "42": 128,
+        "43": 128,
+        "44": 128,
+        "45": 128,
+        "46": 128,
+        "47": 128,
+        "48": 128,
+        "49": 128,
+        "5": 128,
+        "50": 128,
+        "51": 128,
+        "52": 128,
+        "53": 128,
+        "54": 128,
+        "55": 128,
+        "56": 128,
+        "57": 128,
+        "58": 128,
+        "59": 128,
+        "6": 128,
+        "60": 128,
+        "61": 128,
+        "62": 128,
+        "63": 128,
+        "7": 128,
+        "8": 128,
+        "9": 128
+      },
+      "cache_set_histogram_sha256": "106ccbc049129975331e8601251beb56aa4044708da85ec1b853924e63921413",
+      "cycle_structure": [
+        4096
+      ],
+      "cycle_structure_sha256": "ea525d40c2924208604b75acf78ccb35852bc1482f0887b04e8feafb7c002fb9",
+      "formula": "B_index = (A_index + 1) mod 4096",
+      "pair_distance_histogram": {
+        "1": 4096
+      },
+      "pair_distance_histogram_sha256": "a8fdd4718adf92b34415cf6eb34ddc8d178253e9ef5af9022178849a26e27469",
+      "permutation_sha256": "2a4aaf6b2a35b3afadf691ef96b7ec6098cd8da1d2cb1f9ac3b0575c2d842a0c",
+      "relation_id": "relation_r0",
+      "sample_pairs": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          15,
+          16
+        ]
+      ],
+      "shift": 1
+    },
+    "relation_r1": {
+      "cache_set_histogram": {
+        "0": 128,
+        "1": 128,
+        "10": 128,
+        "11": 128,
+        "12": 128,
+        "13": 128,
+        "14": 128,
+        "15": 128,
+        "16": 128,
+        "17": 128,
+        "18": 128,
+        "19": 128,
+        "2": 128,
+        "20": 128,
+        "21": 128,
+        "22": 128,
+        "23": 128,
+        "24": 128,
+        "25": 128,
+        "26": 128,
+        "27": 128,
+        "28": 128,
+        "29": 128,
+        "3": 128,
+        "30": 128,
+        "31": 128,
+        "32": 128,
+        "33": 128,
+        "34": 128,
+        "35": 128,
+        "36": 128,
+        "37": 128,
+        "38": 128,
+        "39": 128,
+        "4": 128,
+        "40": 128,
+        "41": 128,
+        "42": 128,
+        "43": 128,
+        "44": 128,
+        "45": 128,
+        "46": 128,
+        "47": 128,
+        "48": 128,
+        "49": 128,
+        "5": 128,
+        "50": 128,
+        "51": 128,
+        "52": 128,
+        "53": 128,
+        "54": 128,
+        "55": 128,
+        "56": 128,
+        "57": 128,
+        "58": 128,
+        "59": 128,
+        "6": 128,
+        "60": 128,
+        "61": 128,
+        "62": 128,
+        "63": 128,
+        "7": 128,
+        "8": 128,
+        "9": 128
+      },
+      "cache_set_histogram_sha256": "106ccbc049129975331e8601251beb56aa4044708da85ec1b853924e63921413",
+      "cycle_structure": [
+        4096
+      ],
+      "cycle_structure_sha256": "ea525d40c2924208604b75acf78ccb35852bc1482f0887b04e8feafb7c002fb9",
+      "formula": "B_index = (A_index - 1) mod 4096",
+      "pair_distance_histogram": {
+        "1": 4096
+      },
+      "pair_distance_histogram_sha256": "a8fdd4718adf92b34415cf6eb34ddc8d178253e9ef5af9022178849a26e27469",
+      "permutation_sha256": "f5a6835d06857e26c302655c80d7abd956b1742e6d799d71ec3e0d69cb1e47bf",
+      "relation_id": "relation_r1",
+      "sample_pairs": [
+        [
+          0,
+          4095
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          10,
+          9
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          13,
+          12
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          15,
+          14
+        ]
+      ],
+      "shift": -1
+    }
+  },
+  "relation_ids": [
+    "relation_r0",
+    "relation_r1"
+  ],
+  "schema": "FAMILY10H_RELATION_ONLY_GRAMMAR_V1",
+  "science_package_id": "family10h_relation_only_matched_permutation_v1",
+  "transaction_run_id": "family10h_relation_only_matched_permutation_v1_0"
+}
