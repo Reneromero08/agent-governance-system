@@ -1,0 +1,84 @@
+{
+  "event_count": 11,
+  "events": [
+    {
+      "event_sha256": "744cb42dfaa70edc484e628f3f167b5ded0eabd51036f04edba0f09061794a2b",
+      "name": "custody_verified",
+      "payload_sha256": "4d8e17efb3eabadc133e0f42f4ff15ce05dcb2b9b3f0286ae2b06f749bbe72e1",
+      "previous_event_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "sequence": 0
+    },
+    {
+      "event_sha256": "c9a30a72758dcc461d4890e118e3ad298deefb1210e4cffd583583142eb0dba7",
+      "name": "heldout_native_complete_and_raw_waveform_sealed",
+      "payload_sha256": "0b17802cba59c0dc081631afa2d24685b875ad45b7e5d7f936c201f09b8e390e",
+      "previous_event_sha256": "744cb42dfaa70edc484e628f3f167b5ded0eabd51036f04edba0f09061794a2b",
+      "sequence": 1
+    },
+    {
+      "event_sha256": "bfc9d643177dfee791accfbe2ec3844157edc3f0c4d40a337d5e3bdea6108bcb",
+      "name": "heldout_boundary_projected_and_latch_sealed",
+      "payload_sha256": "1f552ef69ce5ac56939adc6bd3b515a51293a7887d887529e1b4f8af3b83b242",
+      "previous_event_sha256": "c9a30a72758dcc461d4890e118e3ad298deefb1210e4cffd583583142eb0dba7",
+      "sequence": 2
+    },
+    {
+      "event_sha256": "ef15dbc108f42013240db25f4a7dbbaeba49be2a947c68b3c5882be01d60f0e0",
+      "name": "heldout_carrier_restored",
+      "payload_sha256": "c9f6ed8e5216fbcb74e9c5ac03162148f8276fae9599764e5870fcfdc8270f35",
+      "previous_event_sha256": "bfc9d643177dfee791accfbe2ec3844157edc3f0c4d40a337d5e3bdea6108bcb",
+      "sequence": 3
+    },
+    {
+      "event_sha256": "e1c992db67ce5873946f28e75f8337c2d4daf516333992871c033d1730bab19e",
+      "name": "reuse_native_complete_and_raw_waveform_sealed",
+      "payload_sha256": "16ab93aafc34dd434b2265d0abc2b26f8da416eb1a465755742068f8e9e091d2",
+      "previous_event_sha256": "ef15dbc108f42013240db25f4a7dbbaeba49be2a947c68b3c5882be01d60f0e0",
+      "sequence": 4
+    },
+    {
+      "event_sha256": "47d0ab9465fe0d531cd9baad7a0d580c9928ee5968702f183330da977063090d",
+      "name": "reuse_boundary_projected_and_latch_sealed",
+      "payload_sha256": "75a4510cf9c1cbb121552744f413e88a971e7dcde4fa60006956873e7ebb6542",
+      "previous_event_sha256": "e1c992db67ce5873946f28e75f8337c2d4daf516333992871c033d1730bab19e",
+      "sequence": 5
+    },
+    {
+      "event_sha256": "2e84692d935082cd066df5ee2c3e4e177938d8dbecd10bcb445863f25c010374",
+      "name": "reuse_carrier_restored",
+      "payload_sha256": "8bd3ad0b18efaca1b54f5f7abf83fdf579c53d2568fa5f6add4d715548e15646",
+      "previous_event_sha256": "47d0ab9465fe0d531cd9baad7a0d580c9928ee5968702f183330da977063090d",
+      "sequence": 6
+    },
+    {
+      "event_sha256": "2e94029fe7b91076862873a5d139f00a05b20055528e2806b073370e21987ed1",
+      "name": "negative_controls_sealed",
+      "payload_sha256": "9cbf3b9984dfb5a3cf3e2eb24e5b31e49b4ffd6c321bb43b1e7c5590624b680d",
+      "previous_event_sha256": "2e84692d935082cd066df5ee2c3e4e177938d8dbecd10bcb445863f25c010374",
+      "sequence": 7
+    },
+    {
+      "event_sha256": "d8019ea909d4672b476bab7feea500421354ad472781290511286aee401c96de",
+      "name": "exact_predecessor_adapter_equivalence_sealed",
+      "payload_sha256": "8403f3362779afc89e9006b2cea3bd87e5573dab3eb2c5c58878e2e8c5015539",
+      "previous_event_sha256": "2e94029fe7b91076862873a5d139f00a05b20055528e2806b073370e21987ed1",
+      "sequence": 8
+    },
+    {
+      "event_sha256": "bb1f62c2820bb23cf8daa2e2eeecd4fdaabd3aaa8f6c87da5da4ae6c3683a123",
+      "name": "oracle_opened_after_reuse_and_controls",
+      "payload_sha256": "922539c8b680aea8e4943f67b4ffb0bc7bca3f5780ba2213c55c3f6e20a37bf2",
+      "previous_event_sha256": "d8019ea909d4672b476bab7feea500421354ad472781290511286aee401c96de",
+      "sequence": 9
+    },
+    {
+      "event_sha256": "9d4954891ce7e7b7693c10efa91e5c25bdf5e88b0ba5f226136d4f5405c8bf3c",
+      "name": "oracle_adjudication_complete",
+      "payload_sha256": "87e66005c4abab8cdb42291c3063ae8dc6d51dddcf993c823003d72cb81ff9c1",
+      "previous_event_sha256": "bb1f62c2820bb23cf8daa2e2eeecd4fdaabd3aaa8f6c87da5da4ae6c3683a123",
+      "sequence": 10
+    }
+  ],
+  "final_event_sha256": "9d4954891ce7e7b7693c10efa91e5c25bdf5e88b0ba5f226136d4f5405c8bf3c",
+  "schema": "catalytic_waveform_ising_heldout_trace_v1"
+}

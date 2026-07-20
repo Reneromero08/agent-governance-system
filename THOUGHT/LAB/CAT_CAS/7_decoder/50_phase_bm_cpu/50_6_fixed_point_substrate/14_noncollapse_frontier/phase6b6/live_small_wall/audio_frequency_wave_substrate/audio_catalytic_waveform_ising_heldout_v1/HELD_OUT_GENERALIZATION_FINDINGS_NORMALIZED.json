@@ -1,0 +1,21 @@
+{
+  "authorized_decision": "CATALYTIC_WAVEFORM_ISING_HELD_OUT_GENERALIZATION_PARTIAL",
+  "claim_ceiling": "BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY",
+  "findings": [],
+  "normalized_counts": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0,
+    "open": 0
+  },
+  "prior_finding_disposition": {
+    "AUD-HOG-001": "closed_by_pre_oracle_raw_energy_seal"
+  },
+  "review_kind": "focused_independent_read_only_adversarial_review_with_repair_renewal",
+  "reviewed_candidate_bytes": 78953,
+  "reviewed_candidate_file_count": 11,
+  "reviewed_candidate_root_sha256": "f99e438c0414c952f756f330263457ffd28d7be0251ae44d577ee11d07cb7210",
+  "reviewer_agent_id": "/root/heldout_catalytic_generalization_review",
+  "schema": "catalytic_waveform_ising_heldout_findings_v1",
+  "verdict": "PASS"
+}

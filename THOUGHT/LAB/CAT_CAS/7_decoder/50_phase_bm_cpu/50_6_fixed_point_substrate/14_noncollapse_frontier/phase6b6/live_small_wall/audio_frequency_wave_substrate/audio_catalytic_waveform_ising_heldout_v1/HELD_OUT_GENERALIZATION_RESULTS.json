@@ -1,0 +1,703 @@
+{
+  "adapter_equivalence": {
+    "comparisons": {
+      "primary_displaced_max_delta": 0.0,
+      "primary_history_max_delta": 0.0,
+      "primary_query_max_delta": 0.0,
+      "reuse_displaced_max_delta": 0.0,
+      "reuse_history_max_delta": 0.0,
+      "reuse_query_max_delta": 0.0
+    },
+    "pass": true
+  },
+  "claim_ceiling": "BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY",
+  "controls": {
+    "all_pass": true,
+    "latches": {
+      "flat_geometry": {
+        "coherence": [
+          0.936807626753,
+          0.425094998835,
+          0.493806933344,
+          0.937498817858,
+          0.987922180359
+        ],
+        "energy": null,
+        "label": "flat",
+        "phases_rad": [
+          -3.09706366088,
+          0.280511927995,
+          -3.07307043558,
+          0.0494844497752,
+          -3.13467793024
+        ],
+        "raw_spin_shadow": [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": null,
+        "responses": [
+          {
+            "imag": -0.0417013156848,
+            "real": -0.935879014517
+          },
+          {
+            "imag": 0.117686531693,
+            "real": 0.408479666927
+          },
+          {
+            "imag": -0.0338102736425,
+            "real": -0.492648102417
+          },
+          {
+            "imag": 0.0463726822108,
+            "real": 0.936351220339
+          },
+          {
+            "imag": -0.00683115413613,
+            "real": -0.987898562494
+          }
+        ],
+        "schema": "integrated_catalytic_computation_latch_v1",
+        "spins": null,
+        "valid": false
+      },
+      "missing_phase_operator": {
+        "coherence": [
+          0.937902983749,
+          0.438698941486,
+          0.571090808522,
+          0.936697877943,
+          0.944486088326
+        ],
+        "energy": null,
+        "label": "missing_phase_operator",
+        "phases_rad": [
+          -3.11096406249,
+          0.434895889709,
+          -3.00784062717,
+          0.105123385851,
+          3.13612353127
+        ],
+        "raw_spin_shadow": [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": null,
+        "responses": [
+          {
+            "imag": -0.0287221557307,
+            "real": -0.937463089777
+          },
+          {
+            "imag": 0.184830876466,
+            "real": 0.397862172575
+          },
+          {
+            "imag": -0.0761570083001,
+            "real": -0.56599012506
+          },
+          {
+            "imag": 0.0982875906286,
+            "real": 0.931526952949
+          },
+          {
+            "imag": 0.00516548419513,
+            "real": -0.944471962959
+          }
+        ],
+        "schema": "integrated_catalytic_computation_latch_v1",
+        "spins": null,
+        "valid": false
+      },
+      "no_lock": {
+        "coherence": [
+          0.879019423782,
+          0.806606836157,
+          0.900361896372,
+          0.859802071653,
+          0.886509968802
+        ],
+        "energy": null,
+        "label": "no_lock",
+        "phases_rad": [
+          -2.68653230071,
+          1.55102237492,
+          -1.81917397305,
+          0.764623507754,
+          -2.74128718457
+        ],
+        "raw_spin_shadow": [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": null,
+        "responses": [
+          {
+            "imag": -0.386343563113,
+            "real": -0.789565575887
+          },
+          {
+            "imag": 0.80644914596,
+            "real": 0.0159487653575
+          },
+          {
+            "imag": -0.872732061539,
+            "real": -0.2213375097
+          },
+          {
+            "imag": 0.595211186039,
+            "real": 0.620470181743
+          },
+          {
+            "imag": -0.345472650926,
+            "real": -0.816424259957
+          }
+        ],
+        "schema": "integrated_catalytic_computation_latch_v1",
+        "spins": null,
+        "valid": false
+      },
+      "no_transform": {
+        "coherence": [
+          0.933020029828,
+          0.505222421939,
+          0.552111652723,
+          0.926073026169,
+          0.981398114402
+        ],
+        "energy": null,
+        "label": "no_transform",
+        "phases_rad": [
+          -3.1162778582,
+          0.448135771721,
+          -2.96224557256,
+          0.0872140454065,
+          -3.13177820416
+        ],
+        "raw_spin_shadow": [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": null,
+        "responses": [
+          {
+            "imag": -0.02361668855,
+            "real": -0.932721088044
+          },
+          {
+            "imag": 0.218905873197,
+            "real": 0.455334947385
+          },
+          {
+            "imag": -0.0984896325453,
+            "real": -0.543255988787
+          },
+          {
+            "imag": 0.0806642248922,
+            "real": 0.922553268174
+          },
+          {
+            "imag": -0.00963172753463,
+            "real": -0.981350848971
+          }
+        ],
+        "schema": "integrated_catalytic_computation_latch_v1",
+        "spins": null,
+        "valid": false
+      },
+      "scrambled_geometry": {
+        "coherence": [
+          0.860236681777,
+          0.721704826851,
+          0.985642817998,
+          0.904412495346,
+          0.938745906735
+        ],
+        "energy": null,
+        "label": "scrambled",
+        "phases_rad": [
+          -3.07952027879,
+          0.0592299909835,
+          3.12559212876,
+          0.03764286289,
+          3.07268412253
+        ],
+        "raw_spin_shadow": [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": null,
+        "responses": [
+          {
+            "imag": -0.0533626507865,
+            "real": -0.858579976575
+          },
+          {
+            "imag": 0.0427215809094,
+            "real": 0.720439257415
+          },
+          {
+            "imag": 0.01577012946,
+            "real": -0.985516650133
+          },
+          {
+            "imag": 0.0340366359948,
+            "real": 0.903771801479
+          },
+          {
+            "imag": 0.0646364200153,
+            "real": -0.936518024716
+          }
+        ],
+        "schema": "integrated_catalytic_computation_latch_v1",
+        "spins": null,
+        "valid": false
+      },
+      "uniform_carrier": {
+        "coherence": [
+          0.936562883429,
+          0.454934632981,
+          0.50097602708,
+          0.923856998749,
+          0.977518303107
+        ],
+        "energy": null,
+        "label": "uniform_carrier",
+        "phases_rad": [
+          3.13706572479,
+          0.356313034212,
+          -2.98979172273,
+          0.120009363045,
+          -3.08199427499
+        ],
+        "raw_spin_shadow": [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": null,
+        "responses": [
+          {
+            "imag": 0.00423973900519,
+            "real": -0.936553286914
+          },
+          {
+            "imag": 0.158690856958,
+            "real": 0.426359862327
+          },
+          {
+            "imag": -0.0757568922072,
+            "real": -0.495214976543
+          },
+          {
+            "imag": 0.110605548443,
+            "real": 0.917212171088
+          },
+          {
+            "imag": -0.0582240233293,
+            "real": -0.975782760667
+          }
+        ],
+        "schema": "integrated_catalytic_computation_latch_v1",
+        "spins": null,
+        "valid": false
+      },
+      "wrong_query": {
+        "coherence": [
+          0.971813784865,
+          0.251614716901,
+          0.462705146155,
+          0.742792755364,
+          0.778462581673
+        ],
+        "energy": null,
+        "label": "wrong_query",
+        "phases_rad": [
+          2.75665157206,
+          -0.0617587922897,
+          2.44846238749,
+          -0.320857448407,
+          2.70551329403
+        ],
+        "raw_spin_shadow": [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": null,
+        "responses": [
+          {
+            "imag": 0.364920479064,
+            "real": -0.900696994784
+          },
+          {
+            "imag": -0.0155295446454,
+            "real": 0.251135021461
+          },
+          {
+            "imag": 0.295644650326,
+            "real": -0.355935799004
+          },
+          {
+            "imag": -0.234262250511,
+            "real": 0.70488458304
+          },
+          {
+            "imag": 0.328814027167,
+            "real": -0.7056098969
+          }
+        ],
+        "schema": "integrated_catalytic_computation_latch_v1",
+        "spins": null,
+        "valid": false
+      }
+    },
+    "measurements": {
+      "carrier_content_history_change_l2": 5.96019693711,
+      "flat_geometry_history_change_l2": 6.0287624297,
+      "missing_phase_operator_history_change_l2": 13.0299736642,
+      "no_lock_history_change_l2": 4.94180981827,
+      "no_transform_history_change_l2": 19.2832384185,
+      "omitted_inverse_step_error": 1.79990720453,
+      "omitted_restoration_error": 1.77275824776,
+      "response_deltas_l2": {
+        "flat_geometry": 0.175621145272,
+        "missing_phase_operator": 0.105408517912,
+        "no_lock": 1.3516415361,
+        "no_transform": 0.0356151048861,
+        "scrambled_geometry": 0.575982748009,
+        "uniform_carrier": 0.129394283902,
+        "wrong_query": 0.903732097139
+      },
+      "samplewise_non_rank_one_residual": 0.28993381429,
+      "scrambled_geometry_history_change_l2": 7.75342273547,
+      "wrong_inverse_error": 0.589772264895
+    },
+    "outcomes": {
+      "carrier_content_causal": true,
+      "flat_geometry_changed_or_destroyed": true,
+      "missing_phase_operator_changed_or_destroyed": true,
+      "no_lock_changed_or_destroyed": true,
+      "no_transform_changed_or_destroyed": true,
+      "omitted_inverse_step_failed": true,
+      "omitted_restoration_failed": true,
+      "samplewise_non_rank_one": true,
+      "scrambled_geometry_changed_or_destroyed": true,
+      "wrong_inverse_failed": true,
+      "wrong_query_changed_or_destroyed": true
+    }
+  },
+  "decision": "CATALYTIC_WAVEFORM_ISING_HELD_OUT_GENERALIZATION_PARTIAL",
+  "execution_trace_sha256": "815ec45e3510bcf40e9972786c3ba1f46f7cc045afdf822b798b23e0b1474d12",
+  "failures": [
+    "heldout_projection_valid",
+    "heldout_projection_matches_unique_optimum"
+  ],
+  "fixture_manifest_sha256": "2d9948d328bff4bfd7c36e19744676db138c65d18721db32e0a6c78ed1f0bb5e",
+  "freeze_commit": "c5da993afd20649bbf0413dda23b22e8c9c7bb45",
+  "frozen_machine_sha256": "cf95d0cd364af38d47a2f2784aa489ab5a52dc8aea62131c1a8545ff4978203a",
+  "held_out_instance": {
+    "coupling_matrix_J": [
+      [
+        0.0,
+        1.0,
+        1.0,
+        -2.0,
+        2.0
+      ],
+      [
+        1.0,
+        0.0,
+        -2.0,
+        2.0,
+        1.0
+      ],
+      [
+        1.0,
+        -2.0,
+        0.0,
+        -2.0,
+        1.0
+      ],
+      [
+        -2.0,
+        2.0,
+        -2.0,
+        0.0,
+        -1.0
+      ],
+      [
+        2.0,
+        1.0,
+        1.0,
+        -1.0,
+        0.0
+      ]
+    ],
+    "field_vector_h": [
+      -2.0,
+      -1.0,
+      0.5,
+      0.5,
+      -0.5
+    ],
+    "sha256": "49db989fd525366867cf9c6866ebc7000b531b438b0227d7bb919e0ff3bf2704"
+  },
+  "heldout_latch": {
+    "coherence": [
+      0.932447656707,
+      0.515990928533,
+      0.565421929116,
+      0.925963660206,
+      0.981553990842
+    ],
+    "energy": null,
+    "label": "held_out",
+    "phases_rad": [
+      -3.11493803337,
+      0.472893214508,
+      -2.9123202235,
+      0.0935437574453,
+      -3.13294120273
+    ],
+    "raw_spin_shadow": [
+      -1,
+      1,
+      -1,
+      1,
+      -1
+    ],
+    "residual_rad": null,
+    "responses": [
+      {
+        "imag": -0.0248510952619,
+        "real": -0.932116438844
+      },
+      {
+        "imag": 0.235015232729,
+        "real": 0.459363122936
+      },
+      {
+        "imag": -0.128502906308,
+        "real": -0.550625971959
+      },
+      {
+        "imag": 0.0864918509265,
+        "real": 0.921915321353
+      },
+      {
+        "imag": -0.00849176018333,
+        "real": -0.98151725759
+      }
+    ],
+    "schema": "integrated_catalytic_computation_latch_v1",
+    "spins": null,
+    "valid": false
+  },
+  "heldout_native_seal": {
+    "displaced_bytes_sha256": "bb7004fe906e1d96aa6faa818ee9242048b48f2d9e2f31c84cacfc3885d82cf7",
+    "displaced_shape": [
+      5,
+      256
+    ],
+    "operator_history_bytes_sha256": "033b64942367fa8d8de4c2336781cd7e57595b9fecb9e1147f3554e432321a25",
+    "operator_history_shape": [
+      1000,
+      5,
+      256
+    ]
+  },
+  "heldout_oracle": {
+    "agrees": false,
+    "gap": 2.0,
+    "optimum_energy": -12.5,
+    "optimum_spins": [
+      -1,
+      1,
+      -1,
+      1,
+      -1
+    ],
+    "row_count": 32,
+    "unique": true
+  },
+  "measurements": {
+    "heldout_carrier_displacement_l2": 42.2835813308,
+    "heldout_restoration_max_error": 1.17416254896e-14,
+    "raw_spin_energy": -12.5,
+    "reuse_carrier_displacement_l2": 45.3020641203,
+    "reuse_input_max_error_from_restored": 0.0,
+    "reuse_restoration_max_error": 1.09468215425e-14
+  },
+  "native_call_path_proof": {
+    "actual_transitive_path": [
+      "adapter.execute_native_cycle_problem",
+      "r4.canonical_trees",
+      "r4.site_tree",
+      "r4.render_trees",
+      "r4.transport_mask_bank",
+      "r4.geometry_channel_bank",
+      "r4.geometry_calibration",
+      "r4.evolve_native_waveforms",
+      "r4.native_wave_step",
+      "r4.native_wave_velocity",
+      "r4.lock_strength",
+      "r4.transport_shift",
+      "r4.validate_problem"
+    ],
+    "dynamic_evaluation_calls": 0,
+    "findings": [],
+    "matrix_multiply_count": 0,
+    "native_runtime_inputs": [
+      "borrowed_complex_carrier",
+      "coupling_matrix_J",
+      "field_vector_h",
+      "recursive_geometry",
+      "frozen_machine_constants"
+    ],
+    "pass": true,
+    "source_hashes": {
+      "adapter.execute_native_cycle_problem": "37abdc7800635bfb23b242ab8037ec049c6eccced64650fa3889ccb49ef6319e",
+      "r4.canonical_trees": "6a18f2347b738e38a832724eeebfb8aa1ebd3b6bd2d90d8967e22632b20f6048",
+      "r4.evolve_native_waveforms": "d2afbe89b2ca7ced92b17641f2e969a89823c47195e63a0464595717d42097a7",
+      "r4.geometry_calibration": "e46986280383d2faa8469f8845f4dad4e08248937d3f2907430aef10b81e4229",
+      "r4.geometry_channel_bank": "c970e71b4deddd69717794064193fa6968d945ff55c5fe36d017ab2658dc6c52",
+      "r4.lock_strength": "d41a60538cfcad42be0c38459bc86786c1ee33790090564090c68fc8344b3f64",
+      "r4.native_wave_step": "16b07f58e0a5a8e2072cf119e652e294fdd13e6de74891a4dadf363549ee3592",
+      "r4.native_wave_velocity": "9850d3293ae7483a3cedc68b18b28458ddbe9b62832be23536229ceae1dba042",
+      "r4.render_trees": "577adf3c5a24421a2dfd39ebdb557e8036ac103f0fa386d5cf52ba3301d45261",
+      "r4.site_tree": "9360c761b267c4a3ffe3dfccc527405188802dd70e17497e5a409a2cddbe3fd2",
+      "r4.transport_mask_bank": "0c8a7243452e796309c4b810c1654d09a05a4ced4d3d1f57b778764927fd2e62",
+      "r4.transport_shift": "0d951833e4d30c5ed12da9ededab7ff489a582e4f849c6079733c3723dd77506",
+      "r4.validate_problem": "71b7484c496e78756ee97ec493b46b66564ee41bb2780b09a3a2b815550ece44"
+    }
+  },
+  "reuse_latch": {
+    "coherence": [
+      0.937118450077,
+      0.978558462118,
+      0.999169178647,
+      0.975362345028,
+      0.978991354837
+    ],
+    "energy": -14.0,
+    "label": "reuse",
+    "phases_rad": [
+      0.0803867491393,
+      0.0846321696061,
+      -0.00989443174757,
+      -0.0753166996046,
+      3.11340156507
+    ],
+    "raw_spin_shadow": [
+      1,
+      1,
+      1,
+      1,
+      -1
+    ],
+    "residual_rad": 0.0846321696061,
+    "responses": [
+      {
+        "imag": 0.0752507991381,
+        "real": 0.934092236721
+      },
+      {
+        "imag": 0.0827186962773,
+        "real": 0.975056039963
+      },
+      {
+        "imag": -0.00988604993353,
+        "real": 0.999120269825
+      },
+      {
+        "imag": -0.0733916398313,
+        "real": 0.972597229742
+      },
+      {
+        "imag": 0.0275951764501,
+        "real": -0.978602360044
+      }
+    ],
+    "schema": "integrated_catalytic_computation_latch_v1",
+    "spins": [
+      1,
+      1,
+      1,
+      1,
+      -1
+    ],
+    "valid": true
+  },
+  "reuse_native_seal": {
+    "displaced_bytes_sha256": "2b1a38c0dad83483ab51bec4790c900639f85b912712e60925f2cbee9f744a6a",
+    "displaced_shape": [
+      5,
+      256
+    ],
+    "operator_history_bytes_sha256": "28b485f758a7aa02b32751b23a94421796eb7def66156f66c399ab987654e2a1",
+    "operator_history_shape": [
+      1000,
+      5,
+      256
+    ]
+  },
+  "reuse_oracle": {
+    "agrees": true,
+    "gap": 2.0,
+    "optimum_energy": -14.0,
+    "optimum_spins": [
+      1,
+      1,
+      1,
+      1,
+      -1
+    ],
+    "row_count": 32,
+    "unique": true
+  },
+  "schema": "catalytic_waveform_ising_heldout_result_v1",
+  "source": {
+    "source_bytes": 36354,
+    "source_sha256": "9599683ed4e178fdc2e644110e143aa99f0cfbb43b3a644379943a1022e947b9"
+  },
+  "test_count": 15,
+  "test_pass_count": 13,
+  "tests": {
+    "custody_frozen_before_execution_and_oracle": true,
+    "frozen_machine_source_exact": true,
+    "heldout_carrier_displaced": true,
+    "heldout_carrier_restored": true,
+    "heldout_latch_persisted_outside_inverse": true,
+    "heldout_oracle_unique": true,
+    "heldout_projection_matches_unique_optimum": false,
+    "heldout_projection_valid": false,
+    "native_transitive_call_path_no_smuggle": true,
+    "oracle_order_after_reuse_and_controls": true,
+    "required_controls_pass": true,
+    "reuse_carrier_restored": true,
+    "reuse_consumed_actual_restored_carrier": true,
+    "reuse_result_valid": true,
+    "variable_J_adapter_exact_on_verified_instances": true
+  }
+}
