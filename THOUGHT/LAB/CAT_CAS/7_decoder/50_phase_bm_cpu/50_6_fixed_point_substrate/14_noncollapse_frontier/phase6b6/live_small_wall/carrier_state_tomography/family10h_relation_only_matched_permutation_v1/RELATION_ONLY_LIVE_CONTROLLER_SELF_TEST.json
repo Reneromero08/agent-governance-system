@@ -1,6 +1,6 @@
 {
   "archive": {
-    "member_count": 44,
+    "member_count": 47,
     "members": [
       "RELATION_GRAMMAR.json",
       "RELATION_GRAMMAR.sha256",
@@ -23,6 +23,7 @@
       "RELATION_ONLY_RUNTIME_BUILD_SELF_TEST.json",
       "RELATION_ONLY_RUNTIME_CONTROL_FLOW_AUDIT.json",
       "RELATION_ONLY_SELF_TEST.json",
+      "RELATION_ONLY_SENSOR_AUTHORITY_BINDING.json",
       "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
       "RELATION_ONLY_SOURCE_HASHES.json",
       "RELATION_ONLY_SYNTHETIC_EXECUTOR_SELF_TEST.json",
@@ -40,6 +41,8 @@
       "relation_only_adjudication.py",
       "relation_only_live_controller.py",
       "relation_only_physical_adjudication.py",
+      "relation_only_pmu_preflight",
+      "relation_only_pmu_preflight.c",
       "relation_only_public.py",
       "relation_only_runtime",
       "relation_only_runtime.c",
@@ -47,9 +50,9 @@
       "relation_only_target.py",
       "run_relation_only_matched_permutation.py"
     ],
-    "path": "C:\\tmp\\relation_only_controller_0yg265c1\\ATTEMPT_1_REMOTE_ROOT.tar.gz",
-    "sha256": "5865526d257c4e6767f5b25997e6f3b0319e2981b6006a337ef1565fd06b19de",
-    "size_bytes": 3873906
+    "path": "C:\\tmp\\relation_only_controller_kxorlzfp\\ATTEMPT_1_REMOTE_ROOT.tar.gz",
+    "sha256": "a033913e2e342c0637e8df922044a369360984ee36389743750f5c97d6cca755",
+    "size_bytes": 3917784
   },
   "automatic_physical_retry_refused": true,
   "cleanup": {
@@ -59,11 +62,11 @@
   },
   "copyback": {
     "matches_remote_archive": true,
-    "path": "C:\\tmp\\relation_only_controller_0yg265c1\\copyback_ATTEMPT_1_REMOTE_ROOT.tar.gz",
-    "sha256": "5865526d257c4e6767f5b25997e6f3b0319e2981b6006a337ef1565fd06b19de",
-    "size_bytes": 3873906
+    "path": "C:\\tmp\\relation_only_controller_kxorlzfp\\copyback_ATTEMPT_1_REMOTE_ROOT.tar.gz",
+    "sha256": "a033913e2e342c0637e8df922044a369360984ee36389743750f5c97d6cca755",
+    "size_bytes": 3917784
   },
-  "deployed_file_count": 36,
+  "deployed_file_count": 39,
   "execution": {
     "passed": true,
     "physical_measurement": false,
@@ -76,9 +79,9 @@
   "freeze_authority": {
     "clean_worktree": false,
     "expected_freeze_commit": "ffffffffffffffffffffffffffffffffffffffff",
-    "head": "1094d3b3e7de668561229809830cd157f503d9f8",
+    "head": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
     "head_origin_required_for_live": true,
-    "origin": "d54e755aa503e346091a0f6f7402548ae77dc1bf",
+    "origin": "631bbeba61b4096542c51d4a2ddeba7e06910b32",
     "passed": true,
     "schema": "FAMILY10H_RELATION_ONLY_CONTROLLER_FREEZE_AUTHORITY_V1",
     "synthetic": true
@@ -93,7 +96,7 @@
     "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
   },
   "relation_manifest_freeze_commit": "ffffffffffffffffffffffffffffffffffffffff",
-  "relation_source_authority_commit": "1094d3b3c613558dd31ec297ad95ef927a1e06db",
+  "relation_source_authority_commit": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
   "remote_canonical_path_absence_checked": true,
   "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_LIVE_CONTROLLER_SELF_TEST_V1",
   "scp_count": 0,

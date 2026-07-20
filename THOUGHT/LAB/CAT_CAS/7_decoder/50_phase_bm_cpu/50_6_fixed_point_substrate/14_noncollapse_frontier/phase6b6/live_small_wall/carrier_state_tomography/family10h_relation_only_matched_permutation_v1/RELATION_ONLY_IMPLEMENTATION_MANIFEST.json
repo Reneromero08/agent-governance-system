@@ -5,7 +5,7 @@
     "attempt_ceiling": 1,
     "relation_manifest_freeze_commit_not_embedded": true,
     "relation_manifest_freeze_commit_policy": "controller_verifies_local_head_and_origin_equal_freeze_commit_at_authorization_time",
-    "relation_source_authority_commit": "1094d3b3c613558dd31ec297ad95ef927a1e06db",
+    "relation_source_authority_commit": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
     "scalar_evidence_provenance": {
       "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
       "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
@@ -14,7 +14,7 @@
     }
   },
   "blockers": [],
-  "build_readiness_sha256": "53dd836a7ba0fa1e7ed2e52cf545b496346caa8cf61fbcc764082e0013551a71",
+  "build_readiness_sha256": "743d2fc08e84508710874434d60294f82a1ea836e7615c94f8ae6ccc6ab9393a",
   "claim_boundary": {
     "catalytic_borrowing_established": false,
     "full_carrier_state_tomography_established": false,
@@ -34,11 +34,11 @@
   "grammar_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
   "live_controller_self_test_passed": true,
   "live_controller_self_test_schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_LIVE_CONTROLLER_SELF_TEST_V1",
-  "manifest_sha256": "ebd28b330c99cd97845b472cbcafc3403f8d8020174f29e8fb257e767a8a55f9",
-  "marginal_equality_proof_sha256": "ab798b7403c9889bb546ac1878f684b6bd7cf955c0917bea957d54047552d107",
+  "manifest_sha256": "86b3335d8d8e5784e86ba16bc8cbc4d333e77ba6d16a22e6d33006d7248a0368",
+  "marginal_equality_proof_sha256": "4808b615ed888cec6abf09ca76438fd6569ed14693776080b151df2e9fa69737",
   "offline_validate_passed": true,
   "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READY_AWAITING_AUTHORIZATION",
-  "physical_adjudicator_self_test_sha256": "e64b2a159a347211cfff506f99e6902c20562ec8e3fda1e728b9f1a0b000c9e1",
+  "physical_adjudicator_self_test_sha256": "76c419957c27b003062983cc3c3481c18f96a6e48f5efbcf3f1cb8bd3b7588a9",
   "primary_R_match_law": {
     "formula": "0.5 * ((Y_r0_r0 + Y_r1_r1) - (Y_r0_r1 + Y_r1_r0))",
     "name": "R_match",
@@ -77,18 +77,51 @@
         "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
       },
       "path": "relation_only_runtime",
+      "pmu_preflight_helper_authority": {
+        "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=02c0c320802c47fa7a8cf40467315f935860f779, for GNU/Linux 3.2.0, with debug_info, not stripped",
+        "compile_status": "compiled_target_compatible_linux_binary",
+        "compiled_binary_sha256": "7377603c5e003f6137b0c80883a47efee3ab34551465f6f936a8d81085290728",
+        "compiler_flags": [
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-O2",
+          "-g"
+        ],
+        "compiler_identity": {
+          "available": true,
+          "compiler": "gcc",
+          "distro": "Ubuntu",
+          "environment": "wsl",
+          "headers": {
+            "linux_perf_event_h": "present",
+            "sched_h": "present"
+          },
+          "machine": "x86_64",
+          "path": "/usr/bin/gcc",
+          "suitability": "target_compatible_linux_binary_authority",
+          "target_triple": "x86_64-linux-gnu",
+          "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+          "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+        },
+        "helper_c_sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443",
+        "path": "relation_only_pmu_preflight",
+        "present": true,
+        "size": 42768
+      },
       "present": true,
       "runtime_c_sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
       "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
       "size": 111928
     },
-    "runtime_build_sha256": "43efe7a8520e86601645b4157b1acb0e9176638d01012075c222eafe0f115bb6"
+    "runtime_build_sha256": "12207123707525fa84aca02c93c475274aeaa9f74fcaa25ab66131d6b398d315"
   },
   "schedule_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
   "schedule_tuple_count": 32256,
   "schema": "FAMILY10H_RELATION_ONLY_IMPLEMENTATION_MANIFEST_V2",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
-  "self_test_sha256": "e2792c1866192f6c626020bb09e0aeccb61ba6bf494e802ccf58764b434ed1d0",
+  "self_test_sha256": "fce054a812d7b3bb51946a76c80f03af34d6867b0d5ed9714e52b76548397e01",
   "source_hashes": {
     "files": {
       "RELATION_ONLY_CONTRACT.md": {
@@ -104,12 +137,16 @@
         "size": 11317
       },
       "relation_only_physical_adjudication.py": {
-        "sha256": "e61c7e8acd89da2516a0aaf3f1c75f1f4632de1b8c7724cc40c4ceae0f19c959",
-        "size": 26706
+        "sha256": "6128d8a1454aa942d1cc4f92e66001a7b717765c26c5dc911e4802fa4e01134f",
+        "size": 33719
+      },
+      "relation_only_pmu_preflight.c": {
+        "sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443",
+        "size": 9370
       },
       "relation_only_public.py": {
-        "sha256": "5719a1076958643034d984ec3fae9eae96cd2c1aa35e364a4e4c964278fa8959",
-        "size": 38751
+        "sha256": "26b3737bb0538ab0a168b937e6887d071a4389c70eb66643dd73a5e6a1cf7b73",
+        "size": 40791
       },
       "relation_only_runtime.c": {
         "sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
@@ -120,12 +157,111 @@
         "size": 2239
       },
       "relation_only_target.py": {
-        "sha256": "0b874bb60e5ba4f842b8bf9c5d3c4d11c2ab0b7caa17010e94157470038e10b7",
-        "size": 67651
+        "sha256": "ff9d5960135fc5cb1d5b1d571e58f8fafbf60225cd0b398e6acb59ec0d784394",
+        "size": 78940
       },
       "run_relation_only_matched_permutation.py": {
-        "sha256": "81d238c023628b540c46df70320fa0e90586181769a0049d946aeb53fea165bd",
-        "size": 73952
+        "sha256": "2a62a183f75f8400c38c252fdae6b7f0229b1542103493294d31d09aab8b48e2",
+        "size": 93311
+      }
+    },
+    "pmu_preflight_helper_authority": {
+      "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=02c0c320802c47fa7a8cf40467315f935860f779, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "compile_status": "compiled_target_compatible_linux_binary",
+      "compiled_binary_sha256": "7377603c5e003f6137b0c80883a47efee3ab34551465f6f936a8d81085290728",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-g"
+      ],
+      "compiler_identity": {
+        "available": true,
+        "compiler": "gcc",
+        "distro": "Ubuntu",
+        "environment": "wsl",
+        "headers": {
+          "linux_perf_event_h": "present",
+          "sched_h": "present"
+        },
+        "machine": "x86_64",
+        "path": "/usr/bin/gcc",
+        "suitability": "target_compatible_linux_binary_authority",
+        "target_triple": "x86_64-linux-gnu",
+        "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+        "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+      },
+      "helper_c_sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443",
+      "path": "relation_only_pmu_preflight",
+      "present": true,
+      "size": 42768
+    },
+    "relation_source_authority_validation": {
+      "checks": {
+        "freeze_commit_exists": true,
+        "source_authority_ancestor_of_freeze": true,
+        "source_authority_commit_exists": true,
+        "source_authority_not_scalar_evidence": true,
+        "source_authority_sha_syntax": true,
+        "source_bundle_matches_authority": true,
+        "source_tree_matches_bound_hashes": true,
+        "worktree_source_matches_authority": true
+      },
+      "current_head": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
+      "failures": [],
+      "manifest_freeze_commit_under_test": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
+      "passed": true,
+      "path_map": {
+        "RELATION_ONLY_CONTRACT.md": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/RELATION_ONLY_CONTRACT.md",
+        "relation_only_adjudication.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_adjudication.py",
+        "relation_only_live_controller.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_live_controller.py",
+        "relation_only_physical_adjudication.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_physical_adjudication.py",
+        "relation_only_pmu_preflight.c": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight.c",
+        "relation_only_public.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_public.py",
+        "relation_only_runtime.c": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime.c",
+        "relation_only_runtime.h": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime.h",
+        "relation_only_target.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_target.py",
+        "run_relation_only_matched_permutation.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/run_relation_only_matched_permutation.py"
+      },
+      "relation_source_authority_commit": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
+      "schema": "FAMILY10H_RELATION_ONLY_SOURCE_AUTHORITY_VALIDATION_V1",
+      "source_bundle_matches_authority": {
+        "RELATION_ONLY_CONTRACT.md": true,
+        "relation_only_adjudication.py": true,
+        "relation_only_live_controller.py": true,
+        "relation_only_physical_adjudication.py": true,
+        "relation_only_pmu_preflight.c": true,
+        "relation_only_public.py": true,
+        "relation_only_runtime.c": true,
+        "relation_only_runtime.h": true,
+        "relation_only_target.py": true,
+        "run_relation_only_matched_permutation.py": true
+      },
+      "tree_hash_matches": {
+        "RELATION_ONLY_CONTRACT.md": true,
+        "relation_only_adjudication.py": true,
+        "relation_only_live_controller.py": true,
+        "relation_only_physical_adjudication.py": true,
+        "relation_only_pmu_preflight.c": true,
+        "relation_only_public.py": true,
+        "relation_only_runtime.c": true,
+        "relation_only_runtime.h": true,
+        "relation_only_target.py": true,
+        "run_relation_only_matched_permutation.py": true
+      },
+      "worktree_source_matches_authority": {
+        "RELATION_ONLY_CONTRACT.md": true,
+        "relation_only_adjudication.py": true,
+        "relation_only_live_controller.py": true,
+        "relation_only_physical_adjudication.py": true,
+        "relation_only_pmu_preflight.c": true,
+        "relation_only_public.py": true,
+        "relation_only_runtime.c": true,
+        "relation_only_runtime.h": true,
+        "relation_only_target.py": true,
+        "run_relation_only_matched_permutation.py": true
       }
     },
     "runtime_binary_authority": {
@@ -157,20 +293,293 @@
         "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
       },
       "path": "relation_only_runtime",
+      "pmu_preflight_helper_authority": {
+        "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=02c0c320802c47fa7a8cf40467315f935860f779, for GNU/Linux 3.2.0, with debug_info, not stripped",
+        "compile_status": "compiled_target_compatible_linux_binary",
+        "compiled_binary_sha256": "7377603c5e003f6137b0c80883a47efee3ab34551465f6f936a8d81085290728",
+        "compiler_flags": [
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-O2",
+          "-g"
+        ],
+        "compiler_identity": {
+          "available": true,
+          "compiler": "gcc",
+          "distro": "Ubuntu",
+          "environment": "wsl",
+          "headers": {
+            "linux_perf_event_h": "present",
+            "sched_h": "present"
+          },
+          "machine": "x86_64",
+          "path": "/usr/bin/gcc",
+          "suitability": "target_compatible_linux_binary_authority",
+          "target_triple": "x86_64-linux-gnu",
+          "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+          "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+        },
+        "helper_c_sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443",
+        "path": "relation_only_pmu_preflight",
+        "present": true,
+        "size": 42768
+      },
       "present": true,
       "runtime_c_sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
       "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
       "size": 111928
     },
-    "runtime_build_receipt_sha256": "9698a9efc967afcef1f5b7ffae61d524e223373aa8570861ffefe48801a1d08d",
-    "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V2",
+    "runtime_build_receipt_sha256": "2c306e15d4172ecae89b03edd88726209b0e3ad0986e1507c61a902920251c69",
+    "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V3",
     "science_package_id": "family10h_relation_only_matched_permutation_v1",
+    "sensor_authority_binding": {
+      "approved_sensor_identity": {
+        "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+        "device_driver": "k10temp",
+        "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+        "device_subsystem": "pci",
+        "hwmon_name": "k10temp",
+        "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+        "input_st_dev": 22,
+        "input_st_ino": 30803,
+        "input_st_mode": 33060,
+        "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+        "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+        "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+        "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+        "resolved_subsystem_path": "/sys/bus/pci",
+        "sensor_input": "temp1_input",
+        "sensor_label_present": false,
+        "sensor_label_value": null,
+        "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+        "sensor_semantic_role": "Tctl"
+      },
+      "approved_sensor_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+      "approved_target_identity": {
+        "family": 16,
+        "model": 10,
+        "processor_count": 6,
+        "processors": [
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 0,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 1,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 2,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 3,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 4,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 5,
+            "vendor_id": "AuthenticAMD"
+          }
+        ],
+        "receiver_cpu": 5,
+        "runtime_abi": "linux_x86_64_perf_event_open",
+        "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+        "source_cpu": 4,
+        "vendor": "AuthenticAMD"
+      },
+      "approved_target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+      "passed": true,
+      "schema": "FAMILY10H_RELATION_ONLY_SENSOR_AUTHORITY_BINDING_V1",
+      "sensor_authority_binding_sha256": "df9c481e8d0333b5420e38fe26088954a9dcd8350f23c628341f98e76d4f88f3",
+      "source_authority_file": "family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_AUTHORITY.json",
+      "source_authority_file_sha256": "f11b996b8843a5636d769c5d0573c0dc771fe01af0c4178e55b444df6e724c57",
+      "temperature_sensor_authority_sha256": "72ab7571611259b1844aacb808ab39b8549369b1e3e1baa23b16b33d2e5a0a0f",
+      "unlabeled_legacy_temp1_input_approved": true
+    },
+    "source_authority_regression_tests": {
+      "passed": true,
+      "results": {
+        "descendant_commit_used_as_source_authority": {
+          "checks": {
+            "freeze_commit_exists": true,
+            "source_authority_ancestor_of_freeze": false,
+            "source_authority_commit_exists": true,
+            "source_authority_not_scalar_evidence": true,
+            "source_authority_sha_syntax": true,
+            "source_bundle_matches_authority": true,
+            "source_tree_matches_bound_hashes": true,
+            "worktree_source_matches_authority": true
+          },
+          "failures": [
+            "relation source authority is not an ancestor of the manifest freeze commit"
+          ],
+          "passed": true,
+          "validation_passed": false
+        },
+        "nonexistent_syntactically_valid_sha": {
+          "checks": {
+            "freeze_commit_exists": true,
+            "source_authority_ancestor_of_freeze": false,
+            "source_authority_commit_exists": false,
+            "source_authority_not_scalar_evidence": true,
+            "source_authority_sha_syntax": true,
+            "source_bundle_matches_authority": false,
+            "source_tree_matches_bound_hashes": false,
+            "worktree_source_matches_authority": false
+          },
+          "failures": [
+            "relation source authority commit does not resolve"
+          ],
+          "passed": true,
+          "validation_passed": false
+        },
+        "one_character_sha_typo": {
+          "checks": {
+            "freeze_commit_exists": true,
+            "source_authority_ancestor_of_freeze": false,
+            "source_authority_commit_exists": false,
+            "source_authority_not_scalar_evidence": true,
+            "source_authority_sha_syntax": true,
+            "source_bundle_matches_authority": false,
+            "source_tree_matches_bound_hashes": false,
+            "worktree_source_matches_authority": false
+          },
+          "failures": [
+            "relation source authority commit does not resolve"
+          ],
+          "passed": true,
+          "validation_passed": false
+        },
+        "real_but_wrong_source_tree_commit": {
+          "checks": {
+            "freeze_commit_exists": true,
+            "source_authority_ancestor_of_freeze": true,
+            "source_authority_commit_exists": true,
+            "source_authority_not_scalar_evidence": true,
+            "source_authority_sha_syntax": true,
+            "source_bundle_matches_authority": false,
+            "source_tree_matches_bound_hashes": false,
+            "worktree_source_matches_authority": false
+          },
+          "failures": [
+            "source authority tree hash mismatch: relation_only_public.py",
+            "source file changed after source authority commit: relation_only_public.py",
+            "source bundle member mismatch: relation_only_public.py",
+            "source authority tree hash mismatch: relation_only_physical_adjudication.py",
+            "source file changed after source authority commit: relation_only_physical_adjudication.py",
+            "source bundle member mismatch: relation_only_physical_adjudication.py",
+            "source authority tree missing relation_only_pmu_preflight.c",
+            "source authority tree hash mismatch: relation_only_target.py",
+            "source file changed after source authority commit: relation_only_target.py",
+            "source bundle member mismatch: relation_only_target.py",
+            "source authority tree hash mismatch: run_relation_only_matched_permutation.py",
+            "source file changed after source authority commit: run_relation_only_matched_permutation.py",
+            "source bundle member mismatch: run_relation_only_matched_permutation.py"
+          ],
+          "passed": true,
+          "validation_passed": false
+        },
+        "scalar_evidence_commit_used_as_relation_authority": {
+          "checks": {
+            "freeze_commit_exists": true,
+            "source_authority_ancestor_of_freeze": true,
+            "source_authority_commit_exists": true,
+            "source_authority_not_scalar_evidence": false,
+            "source_authority_sha_syntax": true,
+            "source_bundle_matches_authority": false,
+            "source_tree_matches_bound_hashes": false,
+            "worktree_source_matches_authority": false
+          },
+          "failures": [
+            "relation source authority reuses scalar evidence provenance commit",
+            "source authority tree missing relation_only_public.py",
+            "source authority tree missing relation_only_adjudication.py",
+            "source authority tree missing relation_only_physical_adjudication.py",
+            "source authority tree missing relation_only_runtime.c",
+            "source authority tree missing relation_only_runtime.h",
+            "source authority tree missing relation_only_pmu_preflight.c",
+            "source authority tree missing relation_only_target.py",
+            "source authority tree missing relation_only_live_controller.py",
+            "source authority tree missing run_relation_only_matched_permutation.py",
+            "source authority tree missing RELATION_ONLY_CONTRACT.md"
+          ],
+          "passed": true,
+          "validation_passed": false
+        },
+        "source_bundle_not_matching_source_authority_tree": {
+          "checks": {
+            "freeze_commit_exists": true,
+            "source_authority_ancestor_of_freeze": true,
+            "source_authority_commit_exists": true,
+            "source_authority_not_scalar_evidence": true,
+            "source_authority_sha_syntax": true,
+            "source_bundle_matches_authority": true,
+            "source_tree_matches_bound_hashes": false,
+            "worktree_source_matches_authority": true
+          },
+          "failures": [
+            "source authority tree hash mismatch: RELATION_ONLY_CONTRACT.md"
+          ],
+          "passed": true,
+          "validation_passed": false
+        },
+        "source_file_changed_after_source_authority_commit": {
+          "checks": {
+            "freeze_commit_exists": true,
+            "source_authority_ancestor_of_freeze": true,
+            "source_authority_commit_exists": true,
+            "source_authority_not_scalar_evidence": true,
+            "source_authority_sha_syntax": true,
+            "source_bundle_matches_authority": false,
+            "source_tree_matches_bound_hashes": false,
+            "worktree_source_matches_authority": false
+          },
+          "failures": [
+            "source authority tree hash mismatch: relation_only_public.py",
+            "source file changed after source authority commit: relation_only_public.py",
+            "source bundle member mismatch: relation_only_public.py",
+            "source authority tree hash mismatch: relation_only_physical_adjudication.py",
+            "source file changed after source authority commit: relation_only_physical_adjudication.py",
+            "source bundle member mismatch: relation_only_physical_adjudication.py",
+            "source authority tree missing relation_only_pmu_preflight.c",
+            "source authority tree hash mismatch: relation_only_target.py",
+            "source file changed after source authority commit: relation_only_target.py",
+            "source bundle member mismatch: relation_only_target.py",
+            "source authority tree hash mismatch: run_relation_only_matched_permutation.py",
+            "source file changed after source authority commit: run_relation_only_matched_permutation.py",
+            "source bundle member mismatch: run_relation_only_matched_permutation.py"
+          ],
+          "passed": true,
+          "validation_passed": false
+        }
+      },
+      "schema": "FAMILY10H_RELATION_ONLY_SOURCE_AUTHORITY_REGRESSION_TESTS_V1"
+    },
     "source_bundle": {
       "members": [
         "RELATION_ONLY_CONTRACT.md",
         "relation_only_adjudication.py",
         "relation_only_live_controller.py",
         "relation_only_physical_adjudication.py",
+        "relation_only_pmu_preflight.c",
         "relation_only_public.py",
         "relation_only_runtime.c",
         "relation_only_runtime.h",
@@ -178,7 +587,7 @@
         "run_relation_only_matched_permutation.py"
       ],
       "path": "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
-      "sha256": "6fd1b5b8046a958d11a90fd676dfcd283118d0ac4b638d392ab1ddd4a50f5e6d"
+      "sha256": "fbe261265b8044113321612c763a14a16aae9832e05c4a57bda89c909ad53e68"
     }
   },
   "target_self_test_passed": true,

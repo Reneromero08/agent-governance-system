@@ -88,6 +88,9 @@
     "placeholder_reserved_executor_removed": true,
     "pmu_group_open_implemented": true,
     "pmu_group_read_implemented": true,
+    "pmu_preflight_helper_compiles": true,
+    "pmu_preflight_helper_no_acquisition": true,
+    "pmu_preflight_helper_self_test_passes": true,
     "prefault_implemented": true,
     "query_order_control_implemented": true,
     "raw_record_output_implemented": true,
@@ -116,6 +119,136 @@
   },
   "passed": true,
   "pmu_opened": false,
+  "pmu_preflight_helper": {
+    "blockers": [],
+    "compile_attempted": true,
+    "compile_command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/usr/bin/gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2",
+      "-g",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight.c",
+      "-o",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight"
+    ],
+    "compile_returncode": 0,
+    "compile_stderr": "",
+    "compile_stdout": "",
+    "enabled_measurement_interval": false,
+    "helper_binary_authority": {
+      "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=02c0c320802c47fa7a8cf40467315f935860f779, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "compile_status": "compiled_target_compatible_linux_binary",
+      "compiled_binary_sha256": "7377603c5e003f6137b0c80883a47efee3ab34551465f6f936a8d81085290728",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-g"
+      ],
+      "compiler_identity": {
+        "available": true,
+        "compiler": "gcc",
+        "distro": "Ubuntu",
+        "environment": "wsl",
+        "headers": {
+          "linux_perf_event_h": "present",
+          "sched_h": "present"
+        },
+        "machine": "x86_64",
+        "path": "/usr/bin/gcc",
+        "suitability": "target_compatible_linux_binary_authority",
+        "target_triple": "x86_64-linux-gnu",
+        "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+        "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+      },
+      "helper_c_sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443",
+      "path": "relation_only_pmu_preflight",
+      "present": true,
+      "size": 42768
+    },
+    "helper_build_sha256": "54e36544335cd599faa73ddbfc078847dab36008404b3151ab55a86bc91ad2f0",
+    "parsed_self_test": {
+      "enabled_measurement_interval": false,
+      "events": {
+        "cache_block_commands_change_to_dirty": {
+          "event": "0xea",
+          "umask": "0x20"
+        },
+        "cpu_cycles_not_halted": {
+          "event": "0x76",
+          "umask": "0x00"
+        },
+        "probe_responses_dirty": {
+          "event": "0xec",
+          "umask": "0x0c"
+        }
+      },
+      "live_activity": false,
+      "negative_regressions": {
+        "enable_attempt": true,
+        "incorrect_structure_size": true,
+        "leaked_descriptor": true,
+        "malformed_event_identity": true,
+        "missing_event": true,
+        "partial_group_open": true,
+        "read_attempt": true
+      },
+      "passed": true,
+      "perf_event_attr_size": 112,
+      "pmu_acquisition_count": 0,
+      "pmu_close_count": 0,
+      "pmu_open_count": 0,
+      "schema": "FAMILY10H_RELATION_ONLY_PMU_PREFLIGHT_HELPER_SELF_TEST_V1",
+      "scientific_data_collected": false,
+      "uses_system_perf_event_attr": true
+    },
+    "passed": true,
+    "pmu_acquisition_count": 0,
+    "regression_checks": {
+      "enable_attempt": true,
+      "incorrect_structure_size": true,
+      "leaked_descriptor": true,
+      "malformed_event_identity": true,
+      "missing_event": true,
+      "partial_group_open": true,
+      "read_attempt": true
+    },
+    "schema": "FAMILY10H_RELATION_ONLY_PMU_PREFLIGHT_HELPER_BUILD_V1",
+    "scientific_data_collected": false,
+    "self_test": {
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--",
+        "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight",
+        "--self-test"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"schema\":\"FAMILY10H_RELATION_ONLY_PMU_PREFLIGHT_HELPER_SELF_TEST_V1\",\"passed\":true,\"events\":{\"cpu_cycles_not_halted\":{\"event\":\"0x76\",\"umask\":\"0x00\"},\"cache_block_commands_change_to_dirty\":{\"event\":\"0xea\",\"umask\":\"0x20\"},\"probe_responses_dirty\":{\"event\":\"0xec\",\"umask\":\"0x0c\"}},\"perf_event_attr_size\":112,\"uses_system_perf_event_attr\":true,\"pmu_open_count\":0,\"pmu_close_count\":0,\"pmu_acquisition_count\":0,\"enabled_measurement_interval\":false,\"scientific_data_collected\":false,\"negative_regressions\":{\"malformed_event_identity\":true,\"partial_group_open\":true,\"leaked_descriptor\":true,\"enable_attempt\":true,\"read_attempt\":true,\"incorrect_structure_size\":true,\"missing_event\":true},\"live_activity\":false}\n",
+      "timed_out": false
+    },
+    "self_test_command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight",
+      "--self-test"
+    ],
+    "source": "relation_only_pmu_preflight.c",
+    "source_sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443"
+  },
   "runtime_binary_authority": {
     "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
     "compile_status": "compiled_target_compatible_linux_binary",
@@ -145,12 +278,45 @@
       "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
     },
     "path": "relation_only_runtime",
+    "pmu_preflight_helper_authority": {
+      "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=02c0c320802c47fa7a8cf40467315f935860f779, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "compile_status": "compiled_target_compatible_linux_binary",
+      "compiled_binary_sha256": "7377603c5e003f6137b0c80883a47efee3ab34551465f6f936a8d81085290728",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-g"
+      ],
+      "compiler_identity": {
+        "available": true,
+        "compiler": "gcc",
+        "distro": "Ubuntu",
+        "environment": "wsl",
+        "headers": {
+          "linux_perf_event_h": "present",
+          "sched_h": "present"
+        },
+        "machine": "x86_64",
+        "path": "/usr/bin/gcc",
+        "suitability": "target_compatible_linux_binary_authority",
+        "target_triple": "x86_64-linux-gnu",
+        "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+        "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+      },
+      "helper_c_sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443",
+      "path": "relation_only_pmu_preflight",
+      "present": true,
+      "size": 42768
+    },
     "present": true,
     "runtime_c_sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
     "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
     "size": 111928
   },
-  "runtime_build_sha256": "43efe7a8520e86601645b4157b1acb0e9176638d01012075c222eafe0f115bb6",
+  "runtime_build_sha256": "12207123707525fa84aca02c93c475274aeaa9f74fcaa25ab66131d6b398d315",
   "runtime_self_test": {
     "command": [
       "wsl.exe",
@@ -169,10 +335,11 @@
   "static_inspection": {
     "gate_policy": "readiness gates are derived from compile, execution, disassembly, fixtures, and exact hash comparisons",
     "gates": {},
+    "pmu_preflight_helper_c_sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443",
     "runtime_c_sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
     "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
     "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_SOURCE_INVENTORY_V1",
-    "target_py_sha256": "0b874bb60e5ba4f842b8bf9c5d3c4d11c2ab0b7caa17010e94157470038e10b7"
+    "target_py_sha256": "ff9d5960135fc5cb1d5b1d571e58f8fafbf60225cd0b398e6acb59ec0d784394"
   },
   "synthetic_executor_self_test": {
     "command": [

@@ -23,6 +23,15 @@
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"
     },
+    "incompatible_processor_topology": {
+      "expected_failure": "source_receiver_cpu_identity",
+      "failures": [
+        "source_receiver_cpu_identity",
+        "approved_target_identity"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
     "malformed_output_path": {
       "failures": [
         "output_root_absence"
@@ -106,6 +115,62 @@
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"
     },
+    "sensor_unexpected_label": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_unstable_identity": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_wrong_driver": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_wrong_inode_device_mode": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_wrong_input_path": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_wrong_modalias": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_wrong_semantic_profile": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
     "unavailable_pmu_event": {
       "expected_failure": "pmu_event_identities",
       "failures": [
@@ -131,7 +196,17 @@
     "wrong_cpu_family": {
       "expected_failure": "cpu_vendor_family_model",
       "failures": [
-        "cpu_vendor_family_model"
+        "cpu_vendor_family_model",
+        "approved_target_identity"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "wrong_cpu_model": {
+      "expected_failure": "cpu_vendor_family_model",
+      "failures": [
+        "cpu_vendor_family_model",
+        "approved_target_identity"
       ],
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"
@@ -156,6 +231,14 @@
       "expected_failure": "source_authority_commit_binding",
       "failures": [
         "source_authority_commit_binding"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "wrong_target_identity_sha": {
+      "expected_failure": "approved_target_identity",
+      "failures": [
+        "approved_target_identity"
       ],
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"

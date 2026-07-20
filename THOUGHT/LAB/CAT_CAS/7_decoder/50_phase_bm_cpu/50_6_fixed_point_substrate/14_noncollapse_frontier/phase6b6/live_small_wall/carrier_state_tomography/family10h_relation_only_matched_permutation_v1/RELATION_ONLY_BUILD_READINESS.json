@@ -1,6 +1,6 @@
 {
   "blockers": [],
-  "build_readiness_sha256": "53dd836a7ba0fa1e7ed2e52cf545b496346caa8cf61fbcc764082e0013551a71",
+  "build_readiness_sha256": "743d2fc08e84508710874434d60294f82a1ea836e7615c94f8ae6ccc6ab9393a",
   "checks": {
     "all_physical_controls_implemented": true,
     "artifact_authority_binding_passed": true,
@@ -23,9 +23,14 @@
     "physical_threshold_law_frozen": true,
     "pmu_group_open_implemented": true,
     "pmu_group_read_implemented": true,
+    "pmu_preflight_helper_compiles": true,
+    "pmu_preflight_helper_no_acquisition": true,
+    "pmu_preflight_helper_self_test_passes": true,
     "raw_record_output_implemented": true,
     "receiver_cpu_pinning_implemented": true,
     "relation_source_authority_bound": true,
+    "relation_source_authority_git_validation_passed": true,
+    "relation_source_authority_regressions_passed": true,
     "runtime_control_flow_audit_passed": true,
     "runtime_schedule_executor_implemented": true,
     "runtime_schedule_parser_implemented": true,
