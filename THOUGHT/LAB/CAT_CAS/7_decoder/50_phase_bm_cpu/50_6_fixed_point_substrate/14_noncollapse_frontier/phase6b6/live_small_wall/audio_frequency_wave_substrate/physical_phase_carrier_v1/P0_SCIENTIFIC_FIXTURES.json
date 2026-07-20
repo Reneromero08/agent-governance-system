@@ -27,7 +27,9 @@
     "solver_frequency_tolerance_hz": 1e-07,
     "solver_log_q_tolerance": 1e-09,
     "solver_max_iterations": 64,
-    "source_snr_min": 50.0
+    "source_snr_min": 50.0,
+    "stateful_fixture_law": "state_new=steady_new+(state_before-steady_new)*exp(-settling_seconds/tau)",
+    "tau_law": "Q/(pi*f0)"
   },
   "calibration_custody_negative": [
     {
@@ -72,7 +74,11 @@
     }
   ],
   "calibration_payload": {
+    "block_chronology_clock": "CALIBRATION_CONTROLLER_MONOTONIC_NS",
+    "block_chronology_entries": 143,
+    "block_payload_hash_required": true,
     "bytes": 2342912,
+    "capture_duration_ns": 4096000,
     "channel_order": [
       "CH0_SOURCE_MONITOR",
       "CH1_CARRIER_RESPONSE"
@@ -81,6 +87,7 @@
     "endian": "little",
     "frequency_blocks": 143,
     "layout": "frequency-major__sample-major__ch0-then-ch1-interleaved",
+    "minimum_settling_ns": 5000000000,
     "sample_rate_hz": 1000000,
     "samples_per_channel_per_frequency": 4096
   },
@@ -168,6 +175,60 @@
     "source_monitor_phase_variation",
     "shifted_32_8_65_6_reference",
     "upper_accepted_frequency"
+  ],
+  "calibration_settling_negative": [
+    {
+      "case": "settling_q60000_0p050s",
+      "expected_rejection": "RESONANCE_CALIBRATION_SETTLING"
+    },
+    {
+      "case": "settling_q60000_0p500s",
+      "expected_rejection": "RESONANCE_CALIBRATION_SETTLING"
+    },
+    {
+      "case": "settling_one_ns_short",
+      "expected_rejection": "RESONANCE_CALIBRATION_SETTLING"
+    },
+    {
+      "case": "settling_missing_chronology",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_duplicate_chronology",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_reordered_chronology",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_frequency_mismatch",
+      "expected_rejection": "RESONANCE_CALIBRATION_FREQUENCY_GRID"
+    },
+    {
+      "case": "settling_acquisition_before_command",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_nonmonotonic_timestamps",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_chronology_hash_mismatch",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    },
+    {
+      "case": "settling_payload_order_mismatch",
+      "expected_rejection": "RESONANCE_CALIBRATION_CUSTODY"
+    }
+  ],
+  "calibration_settling_positive": [
+    "settling_q60000_exact_5s",
+    "settling_mid_q_exact_5s",
+    "settling_q60000_longer",
+    "settling_complex_gain_background",
+    "settling_off_grid",
+    "settling_dynamic_32800_375_65600_75"
   ],
   "canonical_payload": {
     "bytes_per_payload": 24808000,
@@ -647,6 +708,7 @@
   ],
   "scope_law": {
     "calibration_realism_controls": "raw two-channel int16 extraction and deterministic complex single-pole fit",
+    "calibration_settling_controls": "stateful first-order transient fixtures and payload-bound per-block chronology",
     "existing_fixture_count_preserved": 61,
     "existing_raw_controls_preserved": 58,
     "raw_adversaries": "actual canonical raw-bundle analyzer execution",

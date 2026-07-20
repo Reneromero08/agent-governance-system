@@ -1,5 +1,5 @@
 {
-  "analyzer_sha256": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7",
+  "analyzer_sha256": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828",
   "assembly_custody_fragment_count": 14,
   "claim_ceiling": "NON_EXECUTING_P0_SIGNAL_PATH_WITNESS_REPAIR_ONLY",
   "def_use_assignment_count": 11,
@@ -10,11 +10,11 @@
     "signal_path_transfer": "dd3adafec5738c27f0908a0692a52b13a25bd9e6352e26f7a3559ee9e0d75044"
   },
   "ordered_call_lines": {
-    "decode_guard_witness": 2210,
-    "decode_series_witness": 2175,
-    "drive_fit": 2191,
-    "project": 2235,
-    "signal_path_transfer": 2199
+    "decode_guard_witness": 2525,
+    "decode_series_witness": 2490,
+    "drive_fit": 2506,
+    "project": 2550,
+    "signal_path_transfer": 2514
   },
   "physical_claim_authorized": false,
   "properties": {

@@ -1,0 +1,13 @@
+{
+  "broad_runner_sha256": "1304eaeb26dd188523548e9d9fd68095461d70ac1075f6b49cbb0b3387096986",
+  "current_candidate_root": "a13e99fbaad26d92156779a3bc98851ba2e80a477dc0cbbbb44ad51ebf086e61",
+  "current_root_exhaustive_mutations_executed": 0,
+  "evidence_class": "PRIOR_ROOT_EXHAUSTIVE_TAMPER_DETECTION_PLUS_CURRENT_ROOT_ALGORITHM_CONTINUITY__NOT_CURRENT_ROOT_EXHAUSTIVE_MUTATION",
+  "prior_candidate_root": "a8328ef2e6e543530ba384861c16c41184c1140d563a959fa4562b83051d91f3",
+  "prior_mutations_rejected": 44664,
+  "prior_mutations_total": 44664,
+  "prior_receipt_sha256": "95074bb88df37a84125144999c5106d9aaa83cf7dbde19b218c869f0412c54dc",
+  "root_guard_ast_sha256": "d2f4e09bb299cc9a5a464ac0aae7c08d2309b095f12123a7dd33742849c59081",
+  "schema": "p0.build-readiness-mutation-continuity.v1",
+  "status": "PASS"
+}

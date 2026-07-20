@@ -1,8 +1,8 @@
 {
-  "agent_id": "/root/p0_final_calibration_review",
+  "agent_id": "/root/p0_settling_final_review",
   "findings": [],
   "review_id": "P0-RESONANCE-LOAD-LAW-FOCUSED-FINAL",
-  "reviewed_root": "a8328ef2e6e543530ba384861c16c41184c1140d563a959fa4562b83051d91f3",
+  "reviewed_root": "a13e99fbaad26d92156779a3bc98851ba2e80a477dc0cbbbb44ad51ebf086e61",
   "scope": "RESONANCE_LOAD_LAW_REPAIR_DELTA_ONLY",
   "verdict": "PASS"
 }

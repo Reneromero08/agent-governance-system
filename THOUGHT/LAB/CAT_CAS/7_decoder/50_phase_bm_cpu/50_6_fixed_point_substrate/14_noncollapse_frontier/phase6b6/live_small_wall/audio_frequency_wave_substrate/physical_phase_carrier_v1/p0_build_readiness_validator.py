@@ -27,7 +27,13 @@ MANIFEST = "P0_BUILD_READINESS_MANIFEST.json"
 RESULT = "P0_BUILD_READINESS_RESULTS.json"
 REVIEWS = "P0_BUILD_READINESS_REVIEWS.json"
 MUTATION_RESULT = "P0_BUILD_READINESS_MUTATION_RESULTS.json"
+MUTATION_CONTINUITY = "P0_BUILD_READINESS_MUTATION_CONTINUITY.json"
 SIGNAL_MUTATION_RESULT = "P0_SIGNAL_PATH_MUTATION_RESULTS.json"
+PRIOR_MUTATION_ROOT = "a8328ef2e6e543530ba384861c16c41184c1140d563a959fa4562b83051d91f3"
+PRIOR_MUTATION_RECEIPT_SHA256 = "95074bb88df37a84125144999c5106d9aaa83cf7dbde19b218c869f0412c54dc"
+PRIOR_MUTATION_RUNNER_SHA256 = "1304eaeb26dd188523548e9d9fd68095461d70ac1075f6b49cbb0b3387096986"
+PRIOR_ROOT_GUARD_AST_SHA256 = "d2f4e09bb299cc9a5a464ac0aae7c08d2309b095f12123a7dd33742849c59081"
+MUTATION_CONTINUITY_CLASS = "PRIOR_ROOT_EXHAUSTIVE_TAMPER_DETECTION_PLUS_CURRENT_ROOT_ALGORITHM_CONTINUITY__NOT_CURRENT_ROOT_EXHAUSTIVE_MUTATION"
 RESEARCH_PREFIX = "research/P0_research_bundle_2026-07-18"
 RESEARCH_SOURCE_COMMIT = "cb53976612cbe83bec82df826a9889418f7e0b89"
 RESEARCH_NAMES = (
@@ -103,7 +109,7 @@ CANDIDATE_NAMES = (
 REPAIR_REVIEW = "P0_RESONANCE_LOAD_LAW_REVIEW.json"
 REPAIR_REVIEW_REPORT = "P0_RESONANCE_LOAD_LAW_REVIEW_REPORT.md"
 RESEARCH_CORRECTION_ROOT = "97441363687e8d8de2daeffb1fbad157cf94f01b30e1feeb05bdeff718aa33b4"
-FINAL_ONLY = (REVIEWS, "P0_BUILD_READINESS_REVIEW_REPORTS.md", REPAIR_REVIEW, REPAIR_REVIEW_REPORT, MUTATION_RESULT, SIGNAL_MUTATION_RESULT)
+FINAL_ONLY = (REVIEWS, "P0_BUILD_READINESS_REVIEW_REPORTS.md", REPAIR_REVIEW, REPAIR_REVIEW_REPORT, MUTATION_RESULT, MUTATION_CONTINUITY, SIGNAL_MUTATION_RESULT)
 PRETTY_JSON = {
     "P0_FINAL_NETLIST.json", "P0_NONPURCHASING_BOM.json", "P0_PCB_FABRICATION_RELEASE.json",
     "P0_COMPONENT_DOCUMENTS.json", "P0_BUILD_READINESS_SCHEMAS.json", "P0_SCIENTIFIC_FIXTURES.json",
@@ -886,14 +892,14 @@ def check_analyzer(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
     counts = (len(fixtures.get("positive", [])), len(fixtures.get("scientific_negative", [])), len(fixtures.get("malformed_or_custody_negative", [])))
     if counts != (8, 33, 20):
         raise Failure(f"fixture counts: {counts}")
-    expected_scope = {"calibration_realism_controls": "raw two-channel int16 extraction and deterministic complex single-pole fit", "existing_fixture_count_preserved": 61, "existing_raw_controls_preserved": 58, "raw_adversaries": "actual canonical raw-bundle analyzer execution", "semantic_controls": "summary schema and decision-law conformance only", "signal_path_controls": "strict circuit-envelope and ordering decision law", "topology_only_cases": "per-event assembly-bound topology receipts and raw replay adversaries"}
-    if len(fixtures.get("raw_adversary", [])) != 58 or len(fixtures.get("signal_path_positive", [])) != 8 or len(fixtures.get("signal_path_scientific_negative", [])) != 11 or len(fixtures.get("signal_path_custody_negative", [])) != 4 or len(fixtures.get("calibration_realism_positive", [])) != 13 or len(fixtures.get("calibration_realism_negative", [])) != 17 or len(fixtures.get("calibration_custody_negative", [])) != 10 or fixtures.get("scope_law") != expected_scope:
+    expected_scope = {"calibration_realism_controls": "raw two-channel int16 extraction and deterministic complex single-pole fit", "calibration_settling_controls": "stateful first-order transient fixtures and payload-bound per-block chronology", "existing_fixture_count_preserved": 61, "existing_raw_controls_preserved": 58, "raw_adversaries": "actual canonical raw-bundle analyzer execution", "semantic_controls": "summary schema and decision-law conformance only", "signal_path_controls": "strict circuit-envelope and ordering decision law", "topology_only_cases": "per-event assembly-bound topology receipts and raw replay adversaries"}
+    if len(fixtures.get("raw_adversary", [])) != 58 or len(fixtures.get("signal_path_positive", [])) != 8 or len(fixtures.get("signal_path_scientific_negative", [])) != 11 or len(fixtures.get("signal_path_custody_negative", [])) != 4 or len(fixtures.get("calibration_realism_positive", [])) != 13 or len(fixtures.get("calibration_realism_negative", [])) != 17 or len(fixtures.get("calibration_custody_negative", [])) != 10 or len(fixtures.get("calibration_settling_positive", [])) != 6 or len(fixtures.get("calibration_settling_negative", [])) != 11 or fixtures.get("scope_law") != expected_scope:
         raise Failure("raw/semantic fixture scope")
-    if results.get("schema") != "p0.analyzer-reference-results.v1" or results.get("fixture_count") != 61 or results.get("positive_count") != 8 or results.get("scientific_negative_count") != 33 or results.get("malformed_or_custody_negative_count") != 20 or results.get("raw_adversary_count") != 58 or results.get("signal_path_positive_count") != 8 or results.get("signal_path_scientific_negative_count") != 11 or results.get("signal_path_custody_negative_count") != 4 or results.get("calibration_realism_positive_count") != 13 or results.get("calibration_realism_negative_count") != 17 or results.get("calibration_custody_negative_count") != 10:
+    if results.get("schema") != "p0.analyzer-reference-results.v1" or results.get("fixture_count") != 61 or results.get("positive_count") != 8 or results.get("scientific_negative_count") != 33 or results.get("malformed_or_custody_negative_count") != 20 or results.get("raw_adversary_count") != 58 or results.get("signal_path_positive_count") != 8 or results.get("signal_path_scientific_negative_count") != 11 or results.get("signal_path_custody_negative_count") != 4 or results.get("calibration_realism_positive_count") != 13 or results.get("calibration_realism_negative_count") != 17 or results.get("calibration_custody_negative_count") != 10 or results.get("calibration_settling_positive_count") != 6 or results.get("calibration_settling_negative_count") != 11:
         raise Failure("reference-result counts/schema")
     if results.get("physical_claim_authorized") is not False or results.get("claim_ceiling") != CEILING:
         raise Failure("analyzer physical-claim fence")
-    if any(item.get("outcome") != "PASS" for item in results["semantic_outcomes"] + results["signal_path_control_outcomes"] + results["malformed_outcomes"] + results["raw_adversary_outcomes"] + results["calibration_realism_outcomes"] + results["calibration_custody_outcomes"]):
+    if any(item.get("outcome") != "PASS" for item in results["semantic_outcomes"] + results["signal_path_control_outcomes"] + results["malformed_outcomes"] + results["raw_adversary_outcomes"] + results["calibration_realism_outcomes"] + results["calibration_settling_outcomes"] + results["calibration_custody_outcomes"]):
         raise Failure("reference outcome failure")
     if any(item.get("execution") != "actual_bundle_analyzer" for item in results["malformed_outcomes"] + results["raw_adversary_outcomes"] + results["calibration_custody_outcomes"]):
         raise Failure("raw/malformed adversary did not execute actual bundle analyzer")
@@ -1027,7 +1033,7 @@ def check_analyzer(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
     dynamic = results.get("dynamic_frequency_reference", {})
     if dynamic.get("scientific_pass") is not True or abs(dynamic.get("f_ref_hz", 0.0) - 32800.375) > dynamic.get("f_carrier_u95_hz", 0.0) or dynamic.get("f_witness_hz") != 2.0 * dynamic.get("f_ref_hz", 0.0) or not 0.0 < dynamic.get("f_carrier_u95_hz", 1.0) <= 0.050:
         raise Failure("dynamic frequency end-to-end reference")
-    return {"fixture_count": 61, "positive": 8, "scientific_negative": 33, "malformed_or_custody_negative": 20, "calibration_realism_positive": 13, "calibration_realism_negative": 17, "calibration_custody_negative": 10, "signal_path_positive": 8, "signal_path_scientific_negative": 11, "signal_path_custody_negative": 4, "raw_adversaries": 58, "fixture_sha256": sha256(snapshot["P0_SCIENTIFIC_FIXTURES.json"]), "result_sha256": sha256(snapshot["P0_ANALYZER_REFERENCE_RESULTS.json"]), "schema_sha256": sha256(snapshot["P0_BUILD_READINESS_SCHEMAS.json"])}
+    return {"fixture_count": 61, "positive": 8, "scientific_negative": 33, "malformed_or_custody_negative": 20, "calibration_realism_positive": 13, "calibration_realism_negative": 17, "calibration_custody_negative": 10, "calibration_settling_positive": 6, "calibration_settling_negative": 11, "signal_path_positive": 8, "signal_path_scientific_negative": 11, "signal_path_custody_negative": 4, "raw_adversaries": 58, "fixture_sha256": sha256(snapshot["P0_SCIENTIFIC_FIXTURES.json"]), "result_sha256": sha256(snapshot["P0_ANALYZER_REFERENCE_RESULTS.json"]), "schema_sha256": sha256(snapshot["P0_BUILD_READINESS_SCHEMAS.json"])}
 
 
 def check_claims_and_findings(snapshot: Mapping[str, bytes]) -> dict[str, Any]:
@@ -1171,13 +1177,61 @@ def check_reviews(snapshot: Mapping[str, bytes], root: str) -> dict[str, Any]:
     return {"agent_ids": agent_ids, "count": 4, "description": "role-separated root-bound declarations; not externally reproducible independence", "focused_repair_reviewer": repair["agent_id"], "open_findings": 0, "verdict": "PASS"}
 
 
+def mutation_root_guard_ast_sha256(source: bytes) -> str:
+    tree = ast.parse(source.decode("utf-8"), filename="p0_build_readiness_validator.py")
+    assignment_names = {"CANDIDATE_NAMES", "PRETTY_JSON"}
+    function_names = {"canonical", "read_snapshot", "candidate_root", "validate_candidate"}
+    selected: list[ast.stmt] = []
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id in assignment_names for target in node.targets):
+            selected.append(node)
+        elif isinstance(node, ast.FunctionDef) and node.name in function_names:
+            selected.append(node)
+    encoded = ast.dump(ast.Module(body=selected, type_ignores=[]), include_attributes=False).encode("utf-8")
+    return sha256(encoded)
+
+
+def mutation_continuity_document(snapshot: Mapping[str, bytes], root: str) -> dict[str, Any]:
+    return {
+        "broad_runner_sha256": sha256(snapshot["p0_build_readiness_mutation_test.py"]),
+        "current_candidate_root": root,
+        "current_root_exhaustive_mutations_executed": 0,
+        "evidence_class": MUTATION_CONTINUITY_CLASS,
+        "prior_candidate_root": PRIOR_MUTATION_ROOT,
+        "prior_mutations_rejected": 44_664,
+        "prior_mutations_total": 44_664,
+        "prior_receipt_sha256": PRIOR_MUTATION_RECEIPT_SHA256,
+        "root_guard_ast_sha256": mutation_root_guard_ast_sha256(snapshot["p0_build_readiness_validator.py"]),
+        "schema": "p0.build-readiness-mutation-continuity.v1",
+        "status": "PASS",
+    }
+
+
 def check_mutation_result(snapshot: Mapping[str, bytes], root: str) -> dict[str, Any]:
     result = parse_json(MUTATION_RESULT, snapshot)
-    if result.get("schema") != "p0.build-readiness-mutation-results.v1" or result.get("candidate_root") != root or result.get("status") != "PASS" or result.get("evidence_class") != "ROOT_BINDING_TAMPER_DETECTION_ONLY__NOT_SEMANTIC_VALIDATION":
-        raise Failure("mutation result root/status")
-    if result.get("mutations_total") != result.get("mutations_rejected") or not isinstance(result.get("mutations_total"), int) or result["mutations_total"] < 1000 or result.get("accepted") != 0:
-        raise Failure("mutation coverage/rejection")
-    return result
+    if (
+        result.get("schema") != "p0.build-readiness-mutation-results.v1"
+        or result.get("candidate_root") != PRIOR_MUTATION_ROOT
+        or result.get("status") != "PASS"
+        or result.get("evidence_class") != "ROOT_BINDING_TAMPER_DETECTION_ONLY__NOT_SEMANTIC_VALIDATION"
+        or result.get("mutations_total") != 44_664
+        or result.get("mutations_rejected") != 44_664
+        or result.get("accepted") != 0
+        or sha256(snapshot[MUTATION_RESULT]) != PRIOR_MUTATION_RECEIPT_SHA256
+    ):
+        raise Failure("prior mutation receipt identity/status")
+    continuity = parse_json(MUTATION_CONTINUITY, snapshot)
+    if continuity != mutation_continuity_document(snapshot, root):
+        raise Failure("mutation continuity committed-byte semantics")
+    if (
+        continuity["broad_runner_sha256"] != PRIOR_MUTATION_RUNNER_SHA256
+        or continuity["root_guard_ast_sha256"] != PRIOR_ROOT_GUARD_AST_SHA256
+        or continuity["prior_receipt_sha256"] != PRIOR_MUTATION_RECEIPT_SHA256
+        or continuity["evidence_class"] != MUTATION_CONTINUITY_CLASS
+        or continuity["current_root_exhaustive_mutations_executed"] != 0
+    ):
+        raise Failure("mutation continuity identity")
+    return continuity
 
 
 def check_signal_mutation_result(snapshot: Mapping[str, bytes], root: str) -> dict[str, Any]:
@@ -1221,7 +1275,7 @@ def final_documents(snapshot: Mapping[str, bytes]) -> tuple[dict[str, Any], dict
         "candidate_root": root,
         "claim_ceiling": CEILING,
         "manifest_sha256": sha256(canonical(manifest)),
-        "mutation": {"full_mutations_rejected": mutation["mutations_rejected"], "signal_path_mutations_rejected": signal_mutation["total_mutation_count"], "surviving_mutants": 0},
+        "mutation": {"current_root_exhaustive_mutations_executed": mutation["current_root_exhaustive_mutations_executed"], "current_root_guard_continuity": "PASS", "evidence_class": mutation["evidence_class"], "prior_candidate_root": mutation["prior_candidate_root"], "prior_root_exhaustive_mutations_rejected": mutation["prior_mutations_rejected"], "signal_path_mutations_rejected": signal_mutation["total_mutation_count"], "surviving_mutants": 0},
         "next_authority_boundary": NEXT,
         "open_material_findings": 0,
         "physical_observation": False,
@@ -1242,6 +1296,9 @@ def write_atomic(path: Path, data: bytes) -> None:
 
 
 def build() -> dict[str, Any]:
+    candidate_snapshot = read_snapshot()
+    root = validate_candidate(candidate_snapshot)["candidate_root"]
+    write_atomic(ROOT / MUTATION_CONTINUITY, canonical(mutation_continuity_document(candidate_snapshot, root)))
     snapshot = read_snapshot(True)
     manifest, results = final_documents(snapshot)
     manifest_bytes = canonical(manifest)

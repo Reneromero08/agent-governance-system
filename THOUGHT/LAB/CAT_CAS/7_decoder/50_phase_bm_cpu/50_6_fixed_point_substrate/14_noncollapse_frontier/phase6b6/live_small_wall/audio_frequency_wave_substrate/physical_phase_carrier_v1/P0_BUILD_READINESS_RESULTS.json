@@ -1,11 +1,15 @@
 {
   "authority": "AUTHORIZE P0 BUILD-READINESS ONLY",
   "build_readiness_decision": "P0_BUILD_READINESS_PACKET_FROZEN",
-  "candidate_root": "a8328ef2e6e543530ba384861c16c41184c1140d563a959fa4562b83051d91f3",
+  "candidate_root": "a13e99fbaad26d92156779a3bc98851ba2e80a477dc0cbbbb44ad51ebf086e61",
   "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
-  "manifest_sha256": "0572df0570420525f9f54aa1b1feb12ee049b4ffdac19d418472f323d64589fd",
+  "manifest_sha256": "fa4ca11b0aba318668b643ac8860e7857c05b58962e6dade47fe401786ddfebd",
   "mutation": {
-    "full_mutations_rejected": 44664,
+    "current_root_exhaustive_mutations_executed": 0,
+    "current_root_guard_continuity": "PASS",
+    "evidence_class": "PRIOR_ROOT_EXHAUSTIVE_TAMPER_DETECTION_PLUS_CURRENT_ROOT_ALGORITHM_CONTINUITY__NOT_CURRENT_ROOT_EXHAUSTIVE_MUTATION",
+    "prior_candidate_root": "a8328ef2e6e543530ba384861c16c41184c1140d563a959fa4562b83051d91f3",
+    "prior_root_exhaustive_mutations_rejected": 44664,
     "signal_path_mutations_rejected": 82,
     "surviving_mutants": 0
   },
@@ -17,13 +21,15 @@
       "calibration_custody_negative": 10,
       "calibration_realism_negative": 17,
       "calibration_realism_positive": 13,
+      "calibration_settling_negative": 11,
+      "calibration_settling_positive": 6,
       "fixture_count": 61,
-      "fixture_sha256": "39c431060e179171df91bbca338dd2ef20da7450acbd8660579483aeb68e4b54",
+      "fixture_sha256": "bb5ac74b2d2ec8792e8ec4925803c98d88963749e8b1143c5390f02b50ec016d",
       "malformed_or_custody_negative": 20,
       "positive": 8,
       "raw_adversaries": 58,
-      "result_sha256": "42bee7972d7c0e07380e57422242310e75b3806f09db58a44dcf2eee277229f4",
-      "schema_sha256": "06630409f42d21554e97f721887bff06764ca16dc2efb4794fac3a9fae92a7c5",
+      "result_sha256": "8ab6a2fa4a21e9a6b16ca7f7290a8d09c6015e9745c4affe793d38baf5b5a22b",
+      "schema_sha256": "fa0d9fa56693ecca1004eebb2e656e381232be0859c2939adf05862ad42b23dd",
       "scientific_negative": 33,
       "signal_path_custody_negative": 4,
       "signal_path_positive": 8,
@@ -34,7 +40,7 @@
       "line_count": 48,
       "sha256": "446641c58ea4b8671277347d8612837f9f604441f340820b7f9519fdde05e31d"
     },
-    "candidate_root": "a8328ef2e6e543530ba384861c16c41184c1140d563a959fa4562b83051d91f3",
+    "candidate_root": "a13e99fbaad26d92156779a3bc98851ba2e80a477dc0cbbbb44ad51ebf086e61",
     "claims": {
       "claim_ceiling": "NON_EXECUTING_P0_BUILD_READINESS_ONLY",
       "closed_findings": 17,
@@ -135,16 +141,16 @@
         "sha256": "1304eaeb26dd188523548e9d9fd68095461d70ac1075f6b49cbb0b3387096986"
       },
       "p0_build_readiness_validator.py": {
-        "bytes": 111553,
+        "bytes": 115359,
         "forbidden_capability_imports": [],
-        "git_blob_sha1": "6b7cb7aedfd9b92aebb7c49db9f41705dbf4f056",
-        "sha256": "b9cbf267db8e830c67c2c15d54f51b6cac3b2fb2dc467d238f2cb0c05f5db7b5"
+        "git_blob_sha1": "663ea8ecdaaac7a3cd625381c25614b22a565ea5",
+        "sha256": "03d38f9090a50c61a49534d05ff8eb2ed9d4db48cffdc1255c3700b19134c2ef"
       },
       "p0_scientific_analyzer.py": {
-        "bytes": 243973,
+        "bytes": 263927,
         "forbidden_capability_imports": [],
-        "git_blob_sha1": "473008b0f6a4091a73d78e9ebe28f45f1aa48fac",
-        "sha256": "9152d11048e9a8641a2b1ae24225760e34251f7eefca16ae6ec38dafeb7113a7"
+        "git_blob_sha1": "9d4229302fd7014505d2333c75150e31df20f360",
+        "sha256": "a51f4f87689052df70364fddcbeb8604096b1f95ee1bb9a692d14810b02c5828"
       },
       "p0_signal_path_ordering_proof.py": {
         "bytes": 18009,
@@ -170,7 +176,7 @@
       "corner_count_per_candidate": 131072,
       "feasible_candidates": 23,
       "model_sha256": "31208cdcb39248a44bd90720459c97283e7135d6b0b9b0388c8e535ce46913be",
-      "ordering_proof_sha256": "8a981f2be3bc5d560debdde3b529088b4a8256f7e4dfeb29a5d542389e78001a",
+      "ordering_proof_sha256": "573f0628d5db9a85aa8ba284ca744af03f3b01ab79b2bdde66b3de946fa4d39e",
       "selected_amplitude_vpp": 0.1,
       "selected_part": "Vishay TNPW08051M00BEEN",
       "selected_resistance_ohm": 1000000.0
@@ -186,7 +192,7 @@
     ],
     "count": 4,
     "description": "role-separated root-bound declarations; not externally reproducible independence",
-    "focused_repair_reviewer": "/root/p0_final_calibration_review",
+    "focused_repair_reviewer": "/root/p0_settling_final_review",
     "open_findings": 0,
     "verdict": "PASS"
   },
