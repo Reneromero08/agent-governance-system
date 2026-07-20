@@ -1,0 +1,21 @@
+{
+  "authorized_decision": "CATALYTIC_WAVEFORM_ISING_COMPUTATION_VERIFIED",
+  "claim_ceiling": "BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY",
+  "findings": [],
+  "normalized_counts": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0,
+    "open": 0
+  },
+  "prior_findings_disposition": {
+    "calibration_confound": "repaired_and_did_not_reproduce_under_self_calibrated_replacements",
+    "rank_one_scalar_reduction": "repaired_and_did_not_reproduce_under_samplewise_replay_probes"
+  },
+  "review_kind": "renewed_focused_independent_read_only_adversarial_review",
+  "reviewed_candidate_file_count": 11,
+  "reviewed_candidate_root_sha256": "a015aee9b4677898476e8765a97cf36b50fde7f4a95e0baa89c6702ae0bdf7f5",
+  "reviewer_agent_id": "/root/integrated_catalytic_ising_review",
+  "schema": "integrated_catalytic_computation_findings_v1",
+  "verdict": "PASS"
+}

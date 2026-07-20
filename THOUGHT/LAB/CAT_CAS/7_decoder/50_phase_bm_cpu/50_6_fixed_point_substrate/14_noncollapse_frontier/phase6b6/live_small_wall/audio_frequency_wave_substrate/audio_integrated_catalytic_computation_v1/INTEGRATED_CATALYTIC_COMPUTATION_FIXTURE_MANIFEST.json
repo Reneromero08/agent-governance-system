@@ -1,0 +1,34 @@
+{
+  "fixture_count": 5,
+  "fixture_root_sha256": "191dec29841f3cde6328d08c895014c07d98053cf2fdfa2a74b352f60e534968",
+  "fixtures": [
+    {
+      "bytes": 2220,
+      "path": "INTEGRATED_CATALYTIC_COMPUTATION_CONTRACT.json",
+      "sha256": "2dc802ffc2320b9c6c9d747f6a8f73549632c4cf0276e77d9088ad43303b5703"
+    },
+    {
+      "bytes": 1417,
+      "path": "INTEGRATED_CATALYTIC_COMPUTATION_REFERENCE_TESTS.json",
+      "sha256": "20ca94094a48d4afa5ea2c976c8025e80e821f6d700310d95425236fca540ee5"
+    },
+    {
+      "bytes": 4096,
+      "path": "fixtures/borrowed_carrier.c128le",
+      "sha256": "f180a7bcc4dce02912b3ca3fcb2b258de0bd625988cdd9e2886ff5d21171fafb"
+    },
+    {
+      "bytes": 910,
+      "path": "fixtures/primary_latch.json",
+      "sha256": "cef7b2538802cb27ee53cbfe07ad75ba4c40b492a45d7485e5e4ee26f63df236"
+    },
+    {
+      "bytes": 906,
+      "path": "fixtures/reuse_latch.json",
+      "sha256": "75a4510cf9c1cbb121552744f413e88a971e7dcde4fa60006956873e7ebb6542"
+    }
+  ],
+  "generator": "integrated_catalytic_computation_reference_v1",
+  "schema": "integrated_catalytic_computation_manifest_v1",
+  "total_bytes": 9549
+}
