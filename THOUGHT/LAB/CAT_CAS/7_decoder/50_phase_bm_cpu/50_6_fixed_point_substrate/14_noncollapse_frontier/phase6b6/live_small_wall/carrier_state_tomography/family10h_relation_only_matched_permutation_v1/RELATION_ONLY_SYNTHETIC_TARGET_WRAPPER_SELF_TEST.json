@@ -1,0 +1,320 @@
+{
+  "duplicate_invocation_refusal": {
+    "passed": true,
+    "reason": "target preflight failed: output_root_absence"
+  },
+  "feature_freeze": {
+    "physical_measurement": false,
+    "post_observation_feature_selection": false,
+    "primary_endpoint": "dirty_probe_response",
+    "raw_record_count": 32256,
+    "schedule_path": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/RELATION_ONLY_PUBLIC_SCHEDULE.tsv",
+    "schedule_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
+    "schema": "FAMILY10H_RELATION_ONLY_FEATURE_FREEZE_V1",
+    "secondary_endpoints": [
+      "change_to_dirty",
+      "cpu_cycles",
+      "duration_ns"
+    ]
+  },
+  "launch_mode": "wsl_linux_binary",
+  "live_invocation_count": 0,
+  "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_only_matched_permutation_v1\\_relation_only_owned_outputs\\synthetic_target_wrapper_attempt",
+  "passed": true,
+  "physical_measurement": false,
+  "pmu_acquisition_count": 0,
+  "pmu_open_count": 0,
+  "positive_physical_claim": false,
+  "preflight": {
+    "artifact_identity": {
+      "grammar_canonical_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
+      "grammar_file_sha256": "c0ef84e5d37670a0c6a3cbe48139aa4f46ac344dbb27f6649505ec859359eff2",
+      "manifest_canonical_sha256": "b944926339e310602e9b8eb763fb9ff759075d853efd80700d69ca6e47510d3e",
+      "manifest_file_sha256": "1d234c740a1a101497611f89074cb0b4a09294b9c0b7ce5c9d63933ffc96def9",
+      "runtime_binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "runtime_binary_sha256": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
+      "schedule_canonical_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
+      "schedule_manifest_sha256": "a7f575bc5ac8ef6e8b4ca4080c01e4a5efd992fd651f70ab1dde8ddc42c57a83",
+      "schedule_tsv_sha256": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
+      "source_bundle_sha256": "48bf4133c1a9b8626e79a9a4c6dcde7fd14137c80f6f574c8d7698743bd2b6db",
+      "source_file_hashes": {
+        "RELATION_ONLY_CONTRACT.md": "348b576cbc2bf38c1bc7c338609174c3aa02e95993098b535de10492bac0eb33",
+        "relation_only_adjudication.py": "c5c268adb4a4ed7666ebabc524be4de6ca34a86a977e86898eaa69dfc9012dd1",
+        "relation_only_physical_adjudication.py": "4d6fd62840882542a1c6255f1e914a6b8bb8406de771bb15251b64e823565fe3",
+        "relation_only_public.py": "f5fda2dfe3c56e8e0f63f246d264c884681e2aee95dac922e3d330996d68d953",
+        "relation_only_runtime.c": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
+        "relation_only_runtime.h": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
+        "relation_only_target.py": "3045b7c2cc81724882777c0a3f2f69f503aa29698fee36d734976e1094a67078",
+        "run_relation_only_matched_permutation.py": "c0b0ba834fdcc9b723011254760a1d15c9a62efea84915e27cf9946114854661"
+      }
+    },
+    "checks": {
+      "actual_physical_geometry_status": {
+        "detail": {
+          "claim_ceiling_lowered": true,
+          "status": "unresolved_contractually_lowered"
+        },
+        "name": "actual_physical_geometry_status",
+        "passed": true
+      },
+      "attempt_ownership_marker": {
+        "detail": {
+          "attempt_ceiling": 1,
+          "attempt_count_before": 0,
+          "owner_marker": "family10h_relation_only_matched_permutation_v1_0"
+        },
+        "name": "attempt_ownership_marker",
+        "passed": true
+      },
+      "canonical_manifest_digest": {
+        "detail": "b944926339e310602e9b8eb763fb9ff759075d853efd80700d69ca6e47510d3e",
+        "name": "canonical_manifest_digest",
+        "passed": true
+      },
+      "compact_schedule_manifest_binding": {
+        "detail": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
+        "name": "compact_schedule_manifest_binding",
+        "passed": true
+      },
+      "cpu_frequency_policy_custody": {
+        "detail": {
+          "governor": "performance",
+          "identity_stability": true,
+          "policy_locked": true
+        },
+        "name": "cpu_frequency_policy_custody",
+        "passed": true
+      },
+      "cpu_vendor_family_model": {
+        "detail": {
+          "family": 16,
+          "model": 6,
+          "operational_pinning": true,
+          "receiver_cpu": 5,
+          "receiver_cpu_present": true,
+          "source_cpu": 4,
+          "source_cpu_present": true,
+          "vendor": "AuthenticAMD"
+        },
+        "name": "cpu_vendor_family_model",
+        "passed": true
+      },
+      "expanded_schedule_tsv_hash": {
+        "detail": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
+        "name": "expanded_schedule_tsv_hash",
+        "passed": true
+      },
+      "freeze_commit_binding": {
+        "detail": {
+          "env": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+          "fixture": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed"
+        },
+        "name": "freeze_commit_binding",
+        "passed": true
+      },
+      "grammar_hash": {
+        "detail": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
+        "name": "grammar_hash",
+        "passed": true
+      },
+      "grouped_pmu_open_capability": {
+        "detail": {
+          "events": {
+            "cache_block_commands_change_to_dirty": {
+              "event": "0xea",
+              "umask": "0x20"
+            },
+            "cpu_cycles_not_halted": {
+              "event": "0x76",
+              "umask": "0x00"
+            },
+            "probe_responses_dirty": {
+              "event": "0xec",
+              "umask": "0x0c"
+            }
+          },
+          "grouped_open_capability": true
+        },
+        "name": "grouped_pmu_open_capability",
+        "passed": true
+      },
+      "live_authority": {
+        "detail": "family10h_relation_only_matched_permutation_v1_0",
+        "name": "live_authority",
+        "passed": true
+      },
+      "manifest_file_hash": {
+        "detail": {
+          "env": "1d234c740a1a101497611f89074cb0b4a09294b9c0b7ce5c9d63933ffc96def9",
+          "fixture": "1d234c740a1a101497611f89074cb0b4a09294b9c0b7ce5c9d63933ffc96def9"
+        },
+        "name": "manifest_file_hash",
+        "passed": true
+      },
+      "operational_pinning_capability": {
+        "detail": {
+          "family": 16,
+          "model": 6,
+          "operational_pinning": true,
+          "receiver_cpu": 5,
+          "receiver_cpu_present": true,
+          "source_cpu": 4,
+          "source_cpu_present": true,
+          "vendor": "AuthenticAMD"
+        },
+        "name": "operational_pinning_capability",
+        "passed": true
+      },
+      "output_root_absence": {
+        "detail": {
+          "expected_parent": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_only_matched_permutation_v1\\_relation_only_owned_outputs",
+          "failures": [],
+          "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_only_matched_permutation_v1\\_relation_only_owned_outputs\\synthetic_target_wrapper_attempt",
+          "passed": true
+        },
+        "name": "output_root_absence",
+        "passed": true
+      },
+      "package_decision": {
+        "detail": "FAMILY10H_RELATION_ONLY_BUILD_READY_AWAITING_AUTHORIZATION",
+        "name": "package_decision",
+        "passed": true
+      },
+      "pmu_event_identities": {
+        "detail": {
+          "cache_block_commands_change_to_dirty": {
+            "event": "0xea",
+            "umask": "0x20"
+          },
+          "cpu_cycles_not_halted": {
+            "event": "0x76",
+            "umask": "0x00"
+          },
+          "probe_responses_dirty": {
+            "event": "0xec",
+            "umask": "0x0c"
+          }
+        },
+        "name": "pmu_event_identities",
+        "passed": true
+      },
+      "runtime_binary_format_and_abi": {
+        "detail": {
+          "format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
+          "required": [
+            "ELF 64-bit",
+            "x86-64"
+          ]
+        },
+        "name": "runtime_binary_format_and_abi",
+        "passed": true
+      },
+      "runtime_binary_hash": {
+        "detail": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
+        "name": "runtime_binary_hash",
+        "passed": true
+      },
+      "source_authority_commit_binding": {
+        "detail": {
+          "env": "cac5d33536768e00aa0de5f515e626fecccdeeda",
+          "fixture": "cac5d33536768e00aa0de5f515e626fecccdeeda"
+        },
+        "name": "source_authority_commit_binding",
+        "passed": true
+      },
+      "source_bundle_hash": {
+        "detail": "48bf4133c1a9b8626e79a9a4c6dcde7fd14137c80f6f574c8d7698743bd2b6db",
+        "name": "source_bundle_hash",
+        "passed": true
+      },
+      "source_file_hashes": {
+        "detail": {
+          "RELATION_ONLY_CONTRACT.md": "348b576cbc2bf38c1bc7c338609174c3aa02e95993098b535de10492bac0eb33",
+          "relation_only_adjudication.py": "c5c268adb4a4ed7666ebabc524be4de6ca34a86a977e86898eaa69dfc9012dd1",
+          "relation_only_physical_adjudication.py": "4d6fd62840882542a1c6255f1e914a6b8bb8406de771bb15251b64e823565fe3",
+          "relation_only_public.py": "f5fda2dfe3c56e8e0f63f246d264c884681e2aee95dac922e3d330996d68d953",
+          "relation_only_runtime.c": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
+          "relation_only_runtime.h": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
+          "relation_only_target.py": "3045b7c2cc81724882777c0a3f2f69f503aa29698fee36d734976e1094a67078",
+          "run_relation_only_matched_permutation.py": "c0b0ba834fdcc9b723011254760a1d15c9a62efea84915e27cf9946114854661"
+        },
+        "name": "source_file_hashes",
+        "passed": true
+      },
+      "source_receiver_cpu_identity": {
+        "detail": {
+          "family": 16,
+          "model": 6,
+          "operational_pinning": true,
+          "receiver_cpu": 5,
+          "receiver_cpu_present": true,
+          "source_cpu": 4,
+          "source_cpu_present": true,
+          "vendor": "AuthenticAMD"
+        },
+        "name": "source_receiver_cpu_identity",
+        "passed": true
+      },
+      "source_root_identity": {
+        "detail": {
+          "failures": [],
+          "passed": true,
+          "required_file_count": 22
+        },
+        "name": "source_root_identity",
+        "passed": true
+      },
+      "temperature_sensor_authority": {
+        "detail": {
+          "hwmon_name": "k10temp",
+          "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+          "identity_stability": true,
+          "resolved_device_identity": "fixture-family10h-k10temp",
+          "sensor_label": "Tctl"
+        },
+        "name": "temperature_sensor_authority",
+        "passed": true
+      },
+      "transaction_identity": {
+        "detail": "family10h_relation_only_matched_permutation_v1_0",
+        "name": "transaction_identity",
+        "passed": true
+      }
+    },
+    "failures": [],
+    "live_invocation_count": 0,
+    "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_only_matched_permutation_v1\\_relation_only_owned_outputs\\synthetic_target_wrapper_attempt",
+    "passed": true,
+    "pmu_acquisition_count": 0,
+    "pmu_open_count": 0,
+    "schema": "FAMILY10H_RELATION_ONLY_TARGET_PREFLIGHT_V2",
+    "sensor_inventory_count": 0,
+    "small_wall_crossed": false,
+    "status": "TARGET_PREFLIGHT_PASSED",
+    "target_contact_count": 0
+  },
+  "raw_record_count": 32256,
+  "returncode": 0,
+  "runtime_execution_receipt": {
+    "feature_freeze_written": true,
+    "live_activity": false,
+    "physical_measurement": false,
+    "pmu_opened": false,
+    "raw_record_count": 32256,
+    "returncode": 0,
+    "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_EXECUTOR_PACKET_V1",
+    "small_wall_crossed": false,
+    "source_death_receipt_count": 32256,
+    "status": "complete"
+  },
+  "runtime_mode": "--synthetic-execute-schedule",
+  "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_TARGET_WRAPPER_EXECUTION_V1",
+  "scientific_claim_emitted": false,
+  "sensor_inventory_count": 0,
+  "small_wall_crossed": false,
+  "source_death_receipt_count": 32256,
+  "status": "TARGET_WRAPPER_EXECUTION_COMPLETE",
+  "stderr": "",
+  "stdout": "",
+  "target_contact_count": 0
+}

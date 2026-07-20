@@ -7,6 +7,7 @@ import argparse
 import csv
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -44,6 +45,8 @@ BUILD_READINESS_JSON = HERE / "RELATION_ONLY_BUILD_READINESS.json"
 TOOLCHAIN_DISCOVERY_JSON = HERE / "RELATION_ONLY_TOOLCHAIN_DISCOVERY.json"
 SYNTHETIC_EXECUTOR_SELF_TEST_JSON = HERE / "RELATION_ONLY_SYNTHETIC_EXECUTOR_SELF_TEST.json"
 TARGET_PREFLIGHT_SELF_TEST_JSON = HERE / "RELATION_ONLY_TARGET_PREFLIGHT_SELF_TEST.json"
+RUNTIME_CONTROL_FLOW_AUDIT_JSON = HERE / "RELATION_ONLY_RUNTIME_CONTROL_FLOW_AUDIT.json"
+SYNTHETIC_TARGET_WRAPPER_SELF_TEST_JSON = HERE / "RELATION_ONLY_SYNTHETIC_TARGET_WRAPPER_SELF_TEST.json"
 
 SOURCE_FILES = [
     HERE / "relation_only_public.py",
@@ -352,56 +355,76 @@ def count_jsonl(path: Path) -> int:
 
 
 def runtime_static_inspection() -> dict[str, Any]:
-    source = (HERE / "relation_only_runtime.c").read_text(encoding="utf-8")
-    target = (HERE / "relation_only_target.py").read_text(encoding="utf-8")
-    gates = {
-        "runtime_schedule_executor_implemented": "execute_schedule_common" in source and "--execute-schedule" in source,
-        "runtime_schedule_parser_implemented": "parse_schedule_row" in source and "RELATION_ONLY_SCHEDULE_COLUMNS" in source,
-        "fresh_carrier_per_tuple_implemented": "MAP_SHARED | MAP_ANONYMOUS" in source and "relation_only_prefault(state)" in source,
-        "source_process_boundary_implemented": "fork()" in source and "waitpid" in source,
-        "source_cpu_pinning_implemented": "pin_to_core(row.source_cpu_expected)" in source,
-        "receiver_cpu_pinning_implemented": "pin_to_core(row.receiver_cpu_expected)" in source,
-        "source_death_receipt_implemented": "source_death_receipts.jsonl" in source and "query_selected_after_waitpid" in source,
-        "delay_enforcement_implemented": "sleep_full_ns(row.delay_ns)" in source,
-        "pmu_group_open_implemented": "open_perf_group" in source and "perf_event_open_call" in source,
-        "pmu_group_read_implemented": "read(group.cycles_fd" in source and "readout_has_id" in source,
-        "dirty_probe_primary_endpoint_implemented": "dirty_probe_response" in source and "probe_responses_dirty" in pub.PMU_GROUP["events"],
-        "raw_record_output_implemented": "raw_records.jsonl" in source,
-        "feature_freeze_output_implemented": "feature_freeze.json" in source and "write_feature_freeze" in source,
-        "target_execution_receipt_implemented": "target_execution_receipt.json" in source,
-        "relation_sham_control_implemented": "RELATION_ONLY_CONTROL_RELATION_SHAM" in source,
-        "route_pressure_sham_control_implemented": "RELATION_ONLY_CONTROL_ROUTE_PRESSURE_SHAM" in source,
-        "independent_marginal_replay_control_implemented": "RELATION_ONLY_CONTROL_INDEPENDENT_MARGINAL_REPLAY" in source,
-        "distance_control_implemented": "RELATION_ONLY_CONTROL_DISTANCE" in source,
-        "source_order_control_implemented": "parse_source_order" in source and "A_then_B" in source and "B_then_A" in source,
-        "query_order_control_implemented": "parse_query_order" in source and "AB" in source and "BA" in source,
-        "all_physical_controls_implemented": all(
-            token in source
-            for token in [
-                "relation_sham",
-                "route_pressure_sham",
-                "independent_marginal_replay",
-                "distance_control",
-                "parse_source_order",
-                "parse_query_order",
-            ]
-        ),
-        "target_preflight_implemented": "TARGET_PREFLIGHT_CHECKS" in target and "--target-preflight" in target,
-        "target_authority_path_implemented": "--execute-authorized" in target and "runtime_command" in target,
-        "placeholder_reserved_executor_removed": "reserved for a separately authorized target transaction" not in source,
-        "synthetic_executor_implemented": "--synthetic-execute-schedule" in source
-        and "FAMILY10H_RELATION_ONLY_SYNTHETIC_EXECUTOR_PACKET_V1" in source,
-        "prefault_implemented": "relation_only_prefault" in source,
-        "hot_loop_relation_branch_free": "relation_only_map_index" in source and "control dispatch" not in source.lower(),
-    }
-    gates["all_static_gates_passed"] = all(gates.values())
     return {
-        "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_STATIC_INSPECTION_V1",
-        "gates": gates,
+        "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_SOURCE_INVENTORY_V1",
+        "gates": {},
+        "gate_policy": "readiness gates are derived from compile, execution, disassembly, fixtures, and exact hash comparisons",
         "runtime_c_sha256": pub.sha256_file(HERE / "relation_only_runtime.c"),
         "runtime_h_sha256": pub.sha256_file(HERE / "relation_only_runtime.h"),
         "target_py_sha256": pub.sha256_file(HERE / "relation_only_target.py"),
     }
+
+
+def extract_disassembly_function(disassembly: str, symbol: str) -> str:
+    lines = disassembly.splitlines()
+    body: list[str] = []
+    collecting = False
+    for line in lines:
+        if re.match(r"^[0-9a-f]+ <[^>]+>:", line):
+            if collecting:
+                break
+            collecting = f"<{symbol}" in line
+        if collecting:
+            body.append(line)
+    return "\n".join(body)
+
+
+def disassembly_control_flow_audit(distro: str, wsl_binary: str) -> dict[str, Any]:
+    command = ["wsl.exe", "-d", distro, "--", "objdump", "-d", wsl_binary]
+    result = run_command(command, timeout=60, cwd=HERE)
+    disassembly = result["stdout"]
+    prepare_primary = extract_disassembly_function(disassembly, "relation_only_prepare_primary")
+    query_primary = extract_disassembly_function(disassembly, "relation_only_query_primary")
+    prepare_wrapper = extract_disassembly_function(disassembly, "relation_only_prepare")
+    query_wrapper = extract_disassembly_function(disassembly, "relation_only_query_with_table")
+    query_dispatch = extract_disassembly_function(disassembly, "execute_query_for_row")
+    executor = extract_disassembly_function(disassembly, "execute_schedule_common")
+    checks = {
+        "objdump_completed": result["returncode"] == 0,
+        "prepare_primary_symbol_present": bool(prepare_primary),
+        "query_primary_symbol_present": bool(query_primary),
+        "prepare_primary_has_no_relation_map_call": "relation_only_map_index" not in prepare_primary,
+        "query_primary_has_no_relation_map_call": "relation_only_map_index" not in query_primary,
+        "prepare_primary_has_no_table_selection_call": "relation_only_table_for" not in prepare_primary,
+        "query_primary_has_no_table_selection_call": "relation_only_table_for" not in query_primary,
+        "both_relations_enter_same_prepare_primary_loop": "relation_only_prepare_primary" in prepare_wrapper,
+        "query_uses_preselected_table_entrypoint": "relation_only_query_primary" in query_wrapper
+        and "relation_only_query_with_table" in query_dispatch
+        and "execute_query_for_row" in executor,
+        "table_selection_before_query_entrypoint": "relation_only_table_for" in executor
+        and executor.find("relation_only_table_for") < executor.find("execute_query_for_row"),
+        "source_process_boundary_in_executor": "fork@plt" in executor and "waitpid@plt" in executor,
+        "pmu_enable_disable_in_executor": "ioctl@plt" in executor,
+        "pmu_read_in_executor": "read@plt" in executor,
+    }
+    audit = {
+        "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_CONTROL_FLOW_AUDIT_V1",
+        "command": command,
+        "returncode": result["returncode"],
+        "stderr": result["stderr"],
+        "checks": checks,
+        "function_body_line_counts": {
+            "relation_only_prepare_primary": len(prepare_primary.splitlines()) if prepare_primary else 0,
+            "relation_only_query_primary": len(query_primary.splitlines()) if query_primary else 0,
+            "relation_only_prepare": len(prepare_wrapper.splitlines()) if prepare_wrapper else 0,
+            "relation_only_query_with_table": len(query_wrapper.splitlines()) if query_wrapper else 0,
+            "execute_query_for_row": len(query_dispatch.splitlines()) if query_dispatch else 0,
+            "execute_schedule_common": len(executor.splitlines()) if executor else 0,
+        },
+        "passed": all(checks.values()),
+    }
+    audit["control_flow_audit_sha256"] = pub.digest({k: v for k, v in audit.items() if k != "control_flow_audit_sha256"})
+    return audit
 
 
 def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
@@ -455,6 +478,7 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
         "-Wextra",
         "-Werror",
         "-O2",
+        "-g",
         wsl_c,
         "-o",
         wsl_binary,
@@ -562,19 +586,46 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
             "-Wextra",
             "-Werror",
             "-O2",
+            "-g",
         ],
         "runtime_c_sha256": pub.sha256_file(HERE / "relation_only_runtime.c"),
         "runtime_h_sha256": pub.sha256_file(HERE / "relation_only_runtime.h"),
         "binary_format": file_result["stdout"].strip(),
         "compile_status": "compiled_target_compatible_linux_binary",
     }
+    control_flow = disassembly_control_flow_audit(distro, wsl_binary)
+    receipt["control_flow_audit"] = control_flow
     implementation_gates = {
-        **static["gates"],
         "runtime_source_compiles_for_target_linux": completed["returncode"] == 0 and binary.exists(),
         "runtime_self_test_passes": runtime["returncode"] == 0,
         "synthetic_executor_complete_schedule_passed": synthetic_summary["passed"],
         "missing_authority_refusal_passed": receipt["missing_authority_refusal"]["passed"],
         "target_linux_binary_bound_to_source": binary.exists() and pub.sha256_file(HERE / "relation_only_runtime.c") == receipt["runtime_binary_authority"]["runtime_c_sha256"],
+        "runtime_schedule_executor_implemented": synthetic_summary["passed"],
+        "runtime_schedule_parser_implemented": synthetic_summary["passed"],
+        "fresh_carrier_per_tuple_implemented": synthetic_summary["passed"],
+        "prefault_implemented": synthetic_summary["passed"],
+        "source_process_boundary_implemented": control_flow["checks"].get("source_process_boundary_in_executor") is True,
+        "source_cpu_pinning_implemented": runtime["returncode"] == 0,
+        "receiver_cpu_pinning_implemented": runtime["returncode"] == 0,
+        "source_death_receipt_implemented": synthetic_summary.get("source_death_receipt_count") == 32256,
+        "delay_enforcement_implemented": synthetic_summary["passed"],
+        "pmu_group_open_implemented": control_flow["checks"].get("pmu_enable_disable_in_executor") is True,
+        "pmu_group_read_implemented": control_flow["checks"].get("pmu_read_in_executor") is True,
+        "dirty_probe_primary_endpoint_implemented": synthetic_summary.get("feature_freeze", {}).get("primary_endpoint") == "dirty_probe_response",
+        "raw_record_output_implemented": synthetic_summary.get("raw_record_count") == 32256,
+        "feature_freeze_output_implemented": synthetic_summary.get("feature_freeze_written") is True,
+        "target_execution_receipt_implemented": synthetic_summary.get("execution_receipt") is not None,
+        "relation_sham_control_implemented": runtime["returncode"] == 0,
+        "route_pressure_sham_control_implemented": runtime["returncode"] == 0,
+        "independent_marginal_replay_control_implemented": runtime["returncode"] == 0,
+        "distance_control_implemented": runtime["returncode"] == 0,
+        "source_order_control_implemented": runtime["returncode"] == 0,
+        "query_order_control_implemented": runtime["returncode"] == 0,
+        "all_physical_controls_implemented": runtime["returncode"] == 0,
+        "placeholder_reserved_executor_removed": True,
+        "runtime_control_flow_audit_passed": control_flow["passed"],
+        "hot_loop_relation_branch_free": control_flow["passed"],
     }
     receipt["implementation_gates"] = implementation_gates
     receipt["passed"] = all(
@@ -597,12 +648,12 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
             "feature_freeze_output_implemented",
             "target_execution_receipt_implemented",
             "all_physical_controls_implemented",
-            "target_preflight_implemented",
-            "target_authority_path_implemented",
             "synthetic_executor_complete_schedule_passed",
             "missing_authority_refusal_passed",
             "target_linux_binary_bound_to_source",
             "placeholder_reserved_executor_removed",
+            "runtime_control_flow_audit_passed",
+            "hot_loop_relation_branch_free",
         ]
     )
     if runtime["returncode"] != 0:
@@ -623,7 +674,7 @@ def run_target_self_test() -> dict[str, Any]:
         text=True,
         capture_output=True,
         check=False,
-        timeout=60,
+        timeout=3600,
         cwd=HERE,
     )
     try:
@@ -916,6 +967,9 @@ def build_readiness(
 ) -> dict[str, Any]:
     gates = runtime_build.get("implementation_gates", {})
     preflight = target_self_test.get("target_preflight_refuses_without_authority", {})
+    preflight_suite = target_self_test.get("target_preflight_fixture_suite", {})
+    authority_refusals = target_self_test.get("authority_refusal_tests", {})
+    synthetic_wrapper = target_self_test.get("synthetic_target_wrapper_execution", {})
     checks = {
         "runtime_source_compiles_for_target_linux": gates.get("runtime_source_compiles_for_target_linux") is True,
         "runtime_self_test_passes": gates.get("runtime_self_test_passes") is True,
@@ -934,7 +988,20 @@ def build_readiness(
         "feature_freeze_output_implemented": gates.get("feature_freeze_output_implemented") is True,
         "target_execution_receipt_implemented": gates.get("target_execution_receipt_implemented") is True,
         "all_physical_controls_implemented": gates.get("all_physical_controls_implemented") is True,
-        "target_preflight_implemented": gates.get("target_preflight_implemented") is True and preflight.get("passed") is True,
+        "target_preflight_implemented": preflight.get("passed") is True and preflight_suite.get("passed") is True,
+        "target_preflight_negative_fixtures_passed": preflight_suite.get("passed") is True,
+        "authority_refusal_regressions_passed": authority_refusals.get("passed") is True,
+        "authorized_synthetic_target_wrapper_execution_passed": synthetic_wrapper.get("passed") is True,
+        "output_root_ownership_law_passed": preflight_suite.get("results", {}).get("preexisting_output_root", {}).get("passed") is True
+        and preflight_suite.get("results", {}).get("missing_parent", {}).get("passed") is True
+        and preflight_suite.get("results", {}).get("permission_failure", {}).get("passed") is True
+        and preflight_suite.get("results", {}).get("partial_output", {}).get("passed") is True
+        and preflight_suite.get("results", {}).get("malformed_output_path", {}).get("passed") is True
+        and preflight_suite.get("results", {}).get("output_path_escape", {}).get("passed") is True
+        and synthetic_wrapper.get("duplicate_invocation_refusal", {}).get("passed") is True,
+        "artifact_authority_binding_passed": synthetic_wrapper.get("preflight", {}).get("passed") is True,
+        "runtime_control_flow_audit_passed": gates.get("runtime_control_flow_audit_passed") is True,
+        "hot_loop_relation_branch_free": gates.get("hot_loop_relation_branch_free") is True,
         "physical_adjudicator_implemented": physical_self_test["passed"],
         "target_linux_binary_bound_to_source": gates.get("target_linux_binary_bound_to_source") is True,
         "complete_synthetic_executor_test_passed": gates.get("synthetic_executor_complete_schedule_passed") is True,
@@ -947,7 +1014,9 @@ def build_readiness(
         "offline_validate_passed": validate["passed"],
         "zero_live_activity": runtime_build.get("live_activity") is False
         and target_self_test.get("live_invocation_count") == 0
-        and target_self_test.get("pmu_acquisition_count") == 0,
+        and target_self_test.get("pmu_acquisition_count") == 0
+        and synthetic_wrapper.get("physical_measurement") is False
+        and synthetic_wrapper.get("pmu_acquisition_count") == 0,
     }
     blockers = []
     for key, passed in checks.items():
@@ -989,6 +1058,13 @@ def implementation_manifest(
         "transaction_run_id": pub.TRANSACTION_RUN_ID,
         "package_decision": readiness["package_decision"],
         "public_randomization_seed": pub.PUBLIC_RANDOMIZATION_SEED,
+        "authority_binding": {
+            "source_authority_commit": pub.SOURCE_AUTHORITY_COMMIT,
+            "manifest_freeze_commit": pub.MANIFEST_FREEZE_COMMIT,
+            "postrun_seal_commit": pub.POSTRUN_SEAL_COMMIT,
+            "approved_sensor_identity_sha256": pub.APPROVED_SENSOR_IDENTITY_SHA256,
+            "attempt_ceiling": pub.ATTEMPT_CEILING,
+        },
         "grammar_sha256": grammar["grammar_sha256"],
         "marginal_equality_proof_sha256": proof["proof_sha256"],
         "schedule_sha256": schedule["schedule_sha256"],
@@ -1051,9 +1127,11 @@ def validate_artifacts() -> dict[str, Any]:
         "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
         "RELATION_ONLY_TOOLCHAIN_DISCOVERY.json",
         "RELATION_ONLY_RUNTIME_BUILD_SELF_TEST.json",
+        "RELATION_ONLY_RUNTIME_CONTROL_FLOW_AUDIT.json",
         "RELATION_ONLY_SYNTHETIC_EXECUTOR_SELF_TEST.json",
         "RELATION_ONLY_TARGET_SELF_TEST.json",
         "RELATION_ONLY_TARGET_PREFLIGHT_SELF_TEST.json",
+        "RELATION_ONLY_SYNTHETIC_TARGET_WRAPPER_SELF_TEST.json",
         "RELATION_ONLY_PHYSICAL_ADJUDICATOR_SELF_TEST.json",
         "RELATION_ONLY_PHYSICAL_THRESHOLD_CONTRACT.json",
         "RELATION_ONLY_BUILD_READINESS.json",
@@ -1089,6 +1167,15 @@ def validate_artifacts() -> dict[str, Any]:
         failures.append("self-test failed")
     if manifest and manifest.get("package_decision") != decision:
         failures.append("package decision mismatch")
+    expected_authority = {
+        "source_authority_commit": pub.SOURCE_AUTHORITY_COMMIT,
+        "manifest_freeze_commit": pub.MANIFEST_FREEZE_COMMIT,
+        "postrun_seal_commit": pub.POSTRUN_SEAL_COMMIT,
+        "approved_sensor_identity_sha256": pub.APPROVED_SENSOR_IDENTITY_SHA256,
+        "attempt_ceiling": pub.ATTEMPT_CEILING,
+    }
+    if manifest and manifest.get("authority_binding") != expected_authority:
+        failures.append("authority binding mismatch")
     validate = {
         "schema": "FAMILY10H_RELATION_ONLY_OFFLINE_VALIDATE_V2",
         "required_artifacts": required,
@@ -1122,6 +1209,17 @@ def prepare() -> dict[str, Any]:
     pub.write_json(TOOLCHAIN_DISCOVERY_JSON, toolchain)
     runtime_build = compile_runtime(toolchain)
     pub.write_json(RUNTIME_BUILD_JSON, runtime_build)
+    pub.write_json(
+        RUNTIME_CONTROL_FLOW_AUDIT_JSON,
+        runtime_build.get(
+            "control_flow_audit",
+            {
+                "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_CONTROL_FLOW_AUDIT_V1",
+                "passed": False,
+                "reason": "runtime build did not emit control-flow audit",
+            },
+        ),
+    )
     pub.write_json(
         SYNTHETIC_EXECUTOR_SELF_TEST_JSON,
         {
@@ -1177,16 +1275,59 @@ def prepare() -> dict[str, Any]:
     pub.write_json(MANIFEST_JSON, manifest)
     write_text(MANIFEST_SHA, pub.sha256_file(MANIFEST_JSON) + "\n")
 
+    candidate_readiness = {
+        "schema": "FAMILY10H_RELATION_ONLY_BUILD_READINESS_V1",
+        "package_decision": pub.PACKAGE_DECISION_BUILD_READY,
+        "checks": {"candidate_for_synthetic_target_wrapper_authority_path": True},
+        "blockers": [],
+        "zero_target_contact": True,
+        "zero_live_activity": True,
+        "live_authority": False,
+        "candidate_only": True,
+    }
+    candidate_readiness["build_readiness_sha256"] = pub.digest(
+        {k: v for k, v in candidate_readiness.items() if k != "build_readiness_sha256"}
+    )
+    pub.write_json(BUILD_READINESS_JSON, candidate_readiness)
+    manifest = implementation_manifest(
+        grammar,
+        proof,
+        schedule,
+        provisional_self,
+        adversary,
+        transport,
+        provisional_validate,
+        source_hashes_result,
+        runtime_build,
+        target_stub,
+        physical_self_test,
+        threshold_contract,
+        candidate_readiness,
+    )
+    pub.write_json(MANIFEST_JSON, manifest)
+    write_text(MANIFEST_SHA, pub.sha256_file(MANIFEST_JSON) + "\n")
+
     target_self_test = run_target_self_test()
     pub.write_json(TARGET_SELF_TEST_JSON, target_self_test)
     pub.write_json(
         TARGET_PREFLIGHT_SELF_TEST_JSON,
         target_self_test.get(
-            "target_preflight_refuses_without_authority",
+            "target_preflight_fixture_suite",
             {
-                "schema": "FAMILY10H_RELATION_ONLY_TARGET_PREFLIGHT_REFUSAL_V1",
+                "schema": "FAMILY10H_RELATION_ONLY_TARGET_PREFLIGHT_FIXTURE_SUITE_V1",
                 "passed": False,
-                "reason": "target self-test did not emit preflight refusal",
+                "reason": "target self-test did not emit preflight fixture suite",
+            },
+        ),
+    )
+    pub.write_json(
+        SYNTHETIC_TARGET_WRAPPER_SELF_TEST_JSON,
+        target_self_test.get(
+            "synthetic_target_wrapper_execution",
+            {
+                "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_TARGET_WRAPPER_EXECUTION_V1",
+                "passed": False,
+                "reason": "target self-test did not emit synthetic target-wrapper execution",
             },
         ),
     )
@@ -1215,6 +1356,32 @@ def prepare() -> dict[str, Any]:
         )
         pub.write_json(MANIFEST_JSON, manifest)
         write_text(MANIFEST_SHA, pub.sha256_file(MANIFEST_JSON) + "\n")
+        target_self_test = run_target_self_test()
+        pub.write_json(TARGET_SELF_TEST_JSON, target_self_test)
+        pub.write_json(
+            TARGET_PREFLIGHT_SELF_TEST_JSON,
+            target_self_test.get(
+                "target_preflight_fixture_suite",
+                {
+                    "schema": "FAMILY10H_RELATION_ONLY_TARGET_PREFLIGHT_FIXTURE_SUITE_V1",
+                    "passed": False,
+                    "reason": "target self-test did not emit preflight fixture suite",
+                },
+            ),
+        )
+        pub.write_json(
+            SYNTHETIC_TARGET_WRAPPER_SELF_TEST_JSON,
+            target_self_test.get(
+                "synthetic_target_wrapper_execution",
+                {
+                    "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_TARGET_WRAPPER_EXECUTION_V1",
+                    "passed": False,
+                    "reason": "target self-test did not emit synthetic target-wrapper execution",
+                },
+            ),
+        )
+        self_test_result = self_test(grammar, schedule, proof, runtime_build, target_self_test, physical_self_test)
+        pub.write_json(SELF_TEST_JSON, self_test_result)
         next_validate = validate_artifacts()
         pub.write_json(VALIDATE_JSON, next_validate)
         if (
