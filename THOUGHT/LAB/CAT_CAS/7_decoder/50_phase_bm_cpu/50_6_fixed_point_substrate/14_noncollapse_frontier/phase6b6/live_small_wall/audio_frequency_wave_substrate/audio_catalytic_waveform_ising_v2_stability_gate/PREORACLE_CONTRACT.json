@@ -1,0 +1,38 @@
+{
+  "batch_ordered_sha256": "9b70d445ab9742b70e355de8ee36afdb842e13d24be8fdddf5fe93725fb96a34",
+  "batch_size": 64,
+  "diagnostic_schedule": {
+    "acceptance_law": "PASS when min(late_max_phase_velocity/0.008, late_mean_response_drift/0.08) <= 1; otherwise REJECT",
+    "checkpoint_steps_zero_based_after_update": [
+      980,
+      985,
+      990,
+      995,
+      1000,
+      1001,
+      1002,
+      1003,
+      1004
+    ],
+    "diagnostic_restoration_max": 2e-12,
+    "max_late_mean_response_drift_l2": 0.08,
+    "max_late_phase_velocity_rad_per_step": 0.008,
+    "null_baseline": "disabling this reject-only gate reproduces the unchanged nominal V2 acceptance decision and raw result",
+    "raw_result_effect": "REJECT_ONLY_NEVER_ALTERS_OR_SELECTS_A_RESULT",
+    "replay_tolerance": 1e-12
+  },
+  "discriminator_fingerprint": "0a6592beea44b303cc33fbcf5e9cf68162369fd9992544e0bc225de6a78b0376",
+  "freeze_commit": "c7ca2059c5bd78b6791bf4fbc2b8d8a04d72c26e",
+  "freeze_sha256": "b28204f01e19e8f532a1620cfb1df53ee208ebd95fd0cccdf0023019572b5524",
+  "gate_no_smuggle_sha256": "8c627635503425753a9fb6e843d689d86cb7030437c04305a2149fbd05f09e81",
+  "machine_fingerprint": "c20f2cd4068ca32528bc52671793bca04d897456944e33ad8571083428c48930",
+  "native_no_smuggle_sha256": "4e464c75261cf94fc6743ef9f10f9a002068f22720bc75701cd1c0321fab3ec6",
+  "null_baseline": "stability gate disabled reproduces nominal V2 acceptance",
+  "oracle_and_energy_policy": "exact oracle, scalar energy, development labels, and V2 energy-bearing boundary projection are runtime-blocked for the complete execution",
+  "preoracle_source_absence": {
+    "forbidden_calls": [],
+    "pass": true,
+    "source_sha256": "d86819149ce30d974b1aa079ce7df290c27d9ba1e2ca6ea5e1c71f78ccdfbed3"
+  },
+  "schema": "catalytic_waveform_ising_v2_stability_preoracle_contract_v1"
+}
