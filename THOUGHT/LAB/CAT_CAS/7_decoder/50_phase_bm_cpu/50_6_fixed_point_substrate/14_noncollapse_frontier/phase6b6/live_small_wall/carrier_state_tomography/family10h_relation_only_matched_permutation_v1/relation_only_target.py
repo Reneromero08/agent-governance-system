@@ -734,8 +734,23 @@ def disabled_grouped_pmu_probe(source_root: Path, cpu: int) -> dict[str, Any]:
     return observed
 
 
+SENSOR_OBSERVATION_ONLY_FIELDS = {"identity_sha256", "identity_stability", "input_st_dev", "input_st_ino", "input_st_mode"}
+
+
+def sensor_stable_identity_fields(identity: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key: value
+        for key, value in identity.items()
+        if key not in SENSOR_OBSERVATION_ONLY_FIELDS
+    }
+
+
 def sensor_identity_matches(observed: dict[str, Any]) -> bool:
-    return all(observed.get(key) == value for key, value in pub.APPROVED_SENSOR_IDENTITY.items()) and observed.get("identity_stability") is True
+    return (
+        sensor_stable_identity_fields(observed) == sensor_stable_identity_fields(pub.APPROVED_SENSOR_IDENTITY)
+        and observed.get("identity_sha256") == pub.APPROVED_SENSOR_IDENTITY_SHA256
+        and observed.get("identity_stability") is True
+    )
 
 
 def read_sysfs_text(path: Path) -> str | None:
@@ -777,9 +792,12 @@ def sensor_identity_from_input(sysfs_root: Path, input_path: Path) -> dict[str, 
         "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
         "sensor_semantic_role": "Tctl",
     }
-    identity["identity_sha256"] = pub.APPROVED_SENSOR_IDENTITY_SHA256 if all(
-        identity.get(key) == value for key, value in pub.APPROVED_SENSOR_IDENTITY.items() if key != "identity_sha256"
-    ) else pub.digest({key: value for key, value in identity.items() if key != "identity_sha256"})
+    stable_identity = sensor_stable_identity_fields(identity)
+    identity["identity_sha256"] = (
+        pub.APPROVED_SENSOR_IDENTITY_SHA256
+        if stable_identity == sensor_stable_identity_fields(pub.APPROVED_SENSOR_IDENTITY)
+        else pub.digest(stable_identity)
+    )
     return identity
 
 
@@ -1406,7 +1424,7 @@ def run_preflight_fixture_suite(source_root: Path, parent: Path) -> dict[str, An
         "sensor_wrong_driver": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "device_driver": "nouveau"}}),
         "sensor_wrong_modalias": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "device_modalias": "pci:v000010DEd00001C81"}}),
         "sensor_wrong_input_path": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "resolved_input_path": "/sys/devices/wrong/temp1_input"}}),
-        "sensor_wrong_inode_device_mode": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "input_st_ino": 1, "input_st_dev": 1, "input_st_mode": 0}}),
+        "sensor_volatile_inode_device_mode_variation": (None, {**base, "sensor": {**base["sensor"], "input_st_ino": 1, "input_st_dev": 1, "input_st_mode": 0}}),
         "sensor_wrong_semantic_profile": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "sensor_semantic_profile": "UNAPPROVED"}}),
         "sensor_unexpected_label": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "sensor_label_present": True, "sensor_label_value": "Tctl"}}),
         "sensor_unstable_identity": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "identity_stability": False}}),
@@ -1584,7 +1602,7 @@ def run_physical_preflight_mock_suite(source_root: Path, parent: Path) -> dict[s
             "sensor_wrong_driver": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "device_driver": "nouveau"}}, None),
             "sensor_wrong_modalias": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "device_modalias": "pci:v000010DEd00001C81"}}, None),
             "sensor_wrong_input_path": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "resolved_input_path": "/sys/devices/wrong/temp1_input"}}, None),
-            "sensor_wrong_inode_device_mode": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "input_st_ino": 1, "input_st_dev": 1, "input_st_mode": 0}}, None),
+            "sensor_volatile_inode_device_mode_variation": (None, {**base, "sensor": {**base["sensor"], "input_st_ino": 1, "input_st_dev": 1, "input_st_mode": 0}}, None),
             "sensor_wrong_semantic_profile": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "sensor_semantic_profile": "UNAPPROVED"}}, None),
             "sensor_unexpected_label": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "sensor_label_present": True, "sensor_label_value": "Tctl"}}, None),
             "sensor_unstable_identity": ("temperature_sensor_authority", {**base, "sensor": {**base["sensor"], "identity_stability": False}}, None),
