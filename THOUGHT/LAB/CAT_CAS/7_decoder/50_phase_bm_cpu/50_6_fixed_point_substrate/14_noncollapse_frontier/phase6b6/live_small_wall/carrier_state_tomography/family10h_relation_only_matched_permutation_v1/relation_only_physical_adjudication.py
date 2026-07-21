@@ -8,10 +8,16 @@ closed with no positive scientific claim.
 
 from __future__ import annotations
 
+import base64
+import hashlib
+import io
+import json
 import math
 import random
 import re
+import tarfile
 from collections import Counter, defaultdict
+from pathlib import Path
 from typing import Any
 
 import relation_only_public as pub
@@ -24,6 +30,9 @@ RESULT_INVALID = "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
 
 POSITIVE_CLAIM = pub.MAXIMUM_FUTURE_CLAIM
 NEGATIVE_CLAIM = pub.NEGATIVE_FUTURE_CLAIM
+FIXTURE_SOURCE_SHA = "4" * 40
+FIXTURE_FREEZE_SHA = "5" * 40
+_FIXTURE_ARCHIVE_CACHE: dict[tuple[str, str], dict[str, Any]] = {}
 
 
 def physical_threshold_contract() -> dict[str, Any]:
@@ -132,7 +141,252 @@ def fail_closed_result(result_class: str, validation: dict[str, Any]) -> dict[st
     }
 
 
-def validate_physical_packet(packet: dict[str, Any], schedule: dict[str, Any]) -> dict[str, Any]:
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def strict_json_bytes(value: Any) -> bytes:
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False).encode("utf-8")
+
+
+def jsonl_bytes(rows: list[dict[str, Any]]) -> bytes:
+    return b"".join(strict_json_bytes(row) + b"\n" for row in rows)
+
+
+def parse_jsonl_bytes(data: bytes) -> list[Any]:
+    rows = []
+    for line in data.decode("utf-8").splitlines():
+        if not line:
+            raise ValueError("blank JSONL line")
+        rows.append(json.loads(line))
+    return rows
+
+
+def tar_member_bytes(archive_bytes: bytes) -> dict[str, bytes]:
+    members: dict[str, bytes] = {}
+    with tarfile.open(fileobj=io.BytesIO(archive_bytes), mode="r:*") as tf:
+        for member in tf.getmembers():
+            if not member.isfile():
+                continue
+            extracted = tf.extractfile(member)
+            if extracted is None:
+                continue
+            members[member.name] = extracted.read()
+    return members
+
+
+def find_member(members: dict[str, bytes], suffix: str) -> str | None:
+    matches = [name for name in sorted(members) if name == suffix or name.endswith("/" + suffix)]
+    return matches[0] if len(matches) == 1 else None
+
+
+def evidence_inventory_for_members(members: dict[str, bytes], member_map: dict[str, str]) -> dict[str, dict[str, Any]]:
+    inventory: dict[str, dict[str, Any]] = {}
+    for label, member in member_map.items():
+        data = members[member]
+        inventory[label] = {
+            "member": member,
+            "sha256": sha256_bytes(data),
+            "size_bytes": len(data),
+        }
+    return inventory
+
+
+def custody_envelope_from_archive_bytes(archive_bytes: bytes, *, archive_path: str | None = None, embed_archive_bytes: bool = False) -> dict[str, Any]:
+    members = tar_member_bytes(archive_bytes)
+    required_suffixes = {
+        "raw_records": "raw_records.jsonl",
+        "source_death_receipts": "source_death_receipts.jsonl",
+        "feature_freeze": "feature_freeze.json",
+        "target_execution_receipt": "target_execution_receipt.json",
+        "manifest": "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json",
+        "runtime_binary": "relation_only_runtime",
+        "deployment_custody": pub.DEPLOYMENT_CUSTODY_FILENAME,
+    }
+    member_map: dict[str, str] = {}
+    for label, suffix in required_suffixes.items():
+        member = find_member(members, suffix)
+        if member is None:
+            raise ValueError(f"required archive member missing or ambiguous: {suffix}")
+        member_map[label] = member
+    manifest = json.loads(members[member_map["manifest"]].decode("utf-8"))
+    deployment = json.loads(members[member_map["deployment_custody"]].decode("utf-8"))
+    envelope = {
+        "schema": "FAMILY10H_RELATION_ONLY_CRYPTOGRAPHIC_CUSTODY_ENVELOPE_V2",
+        "target_execution_receipt_sha256": sha256_bytes(members[member_map["target_execution_receipt"]]),
+        "runtime_sha256": sha256_bytes(members[member_map["runtime_binary"]]),
+        "manifest_sha256": sha256_bytes(members[member_map["manifest"]]),
+        "source_authority_sha": manifest.get("authority_binding", {}).get("relation_source_authority_commit"),
+        "freeze_sha": deployment.get("relation_manifest_freeze_commit"),
+        "copied_back_archive_sha256": sha256_bytes(archive_bytes),
+        "copied_back_archive_size": len(archive_bytes),
+        "evidence_inventory": evidence_inventory_for_members(members, member_map),
+    }
+    if archive_path is not None:
+        envelope["copied_back_archive_path"] = archive_path
+    if embed_archive_bytes:
+        envelope["copied_back_archive_bytes_b64"] = base64.b64encode(archive_bytes).decode("ascii")
+    return envelope
+
+
+def custody_envelope_from_archive_path(archive_path: str | Path) -> dict[str, Any]:
+    path = Path(archive_path)
+    return custody_envelope_from_archive_bytes(path.read_bytes(), archive_path=str(path), embed_archive_bytes=False)
+
+
+def fixture_archive_packet_material(packet: dict[str, Any], schedule: dict[str, Any], mode: str) -> dict[str, Any]:
+    cache_key = (schedule["schedule_sha256"], mode)
+    cached = _FIXTURE_ARCHIVE_CACHE.get(cache_key)
+    if cached is not None:
+        return json.loads(json.dumps(cached))
+    feature_freeze = packet["feature_freeze"]
+    target_receipt = packet["target_execution_receipt"]
+    manifest = {
+        "schema": "FAMILY10H_RELATION_ONLY_FIXTURE_MANIFEST_V1",
+        "authority_binding": {"relation_source_authority_commit": FIXTURE_SOURCE_SHA},
+        "schedule_sha256": schedule["schedule_sha256"],
+    }
+    deployment = {
+        "schema": "FAMILY10H_RELATION_ONLY_DEPLOYMENT_CUSTODY_V1",
+        "relation_source_authority_commit": FIXTURE_SOURCE_SHA,
+        "relation_manifest_freeze_commit": FIXTURE_FREEZE_SHA,
+        "manifest_file_sha256": sha256_bytes(strict_json_bytes(manifest)),
+        "transaction_run_id": pub.TRANSACTION_RUN_ID,
+    }
+    archive_members = {
+        "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json": strict_json_bytes(manifest),
+        pub.DEPLOYMENT_CUSTODY_FILENAME: strict_json_bytes(deployment),
+        "relation_only_runtime": b"fixture-runtime-binary",
+        f"{pub.OWNED_OUTPUT_PARENT_NAME}/attempt_1/raw_records.jsonl": jsonl_bytes(packet["raw_records"]),
+        f"{pub.OWNED_OUTPUT_PARENT_NAME}/attempt_1/source_death_receipts.jsonl": jsonl_bytes(packet["source_death_receipts"]),
+        f"{pub.OWNED_OUTPUT_PARENT_NAME}/attempt_1/feature_freeze.json": strict_json_bytes(feature_freeze),
+        f"{pub.OWNED_OUTPUT_PARENT_NAME}/attempt_1/target_execution_receipt.json": strict_json_bytes(target_receipt),
+    }
+    archive_io = io.BytesIO()
+    with tarfile.open(fileobj=archive_io, mode="w") as tf:
+        for name, data in sorted(archive_members.items()):
+            info = tarfile.TarInfo(name=name)
+            info.size = len(data)
+            info.mtime = 0
+            info.uid = 0
+            info.gid = 0
+            info.uname = ""
+            info.gname = ""
+            tf.addfile(info, io.BytesIO(data))
+    archive_bytes = archive_io.getvalue()
+    material = {
+        "custody_envelope": custody_envelope_from_archive_bytes(archive_bytes, embed_archive_bytes=True),
+        "target_execution_receipt": target_receipt,
+    }
+    _FIXTURE_ARCHIVE_CACHE[cache_key] = json.loads(json.dumps(material))
+    return material
+
+
+def archive_bytes_from_custody(custody: dict[str, Any]) -> tuple[bytes | None, str | None]:
+    path = custody.get("copied_back_archive_path")
+    if isinstance(path, str):
+        candidate = Path(path)
+        if candidate.exists():
+            return candidate.read_bytes(), None
+        return None, "copied-back archive path missing"
+    encoded = custody.get("copied_back_archive_bytes_b64")
+    if isinstance(encoded, str):
+        try:
+            return base64.b64decode(encoded.encode("ascii"), validate=True), None
+        except Exception:
+            return None, "copied-back archive bytes malformed"
+    return None, "copied-back archive bytes or path missing"
+
+
+def validate_custody_envelope(packet: dict[str, Any], custody: dict[str, Any], schedule: dict[str, Any]) -> list[str]:
+    failures: list[str] = []
+    archive_bytes, archive_error = archive_bytes_from_custody(custody)
+    if archive_error is not None or archive_bytes is None:
+        return [archive_error or "copied-back archive unavailable"]
+    archive_sha = sha256_bytes(archive_bytes)
+    archive_size = len(archive_bytes)
+    if custody.get("copied_back_archive_sha256") != archive_sha:
+        failures.append("copied-back archive sha mismatch")
+    if custody.get("copied_back_archive_size") != archive_size:
+        failures.append("copied-back archive size mismatch")
+    try:
+        members = tar_member_bytes(archive_bytes)
+    except Exception as exc:
+        return [f"copied-back archive unreadable: {exc}"]
+    required_suffixes = {
+        "raw_records": "raw_records.jsonl",
+        "source_death_receipts": "source_death_receipts.jsonl",
+        "feature_freeze": "feature_freeze.json",
+        "target_execution_receipt": "target_execution_receipt.json",
+        "manifest": "RELATION_ONLY_IMPLEMENTATION_MANIFEST.json",
+        "runtime_binary": "relation_only_runtime",
+        "deployment_custody": pub.DEPLOYMENT_CUSTODY_FILENAME,
+    }
+    inventory = custody.get("evidence_inventory")
+    if not isinstance(inventory, dict):
+        return failures + ["evidence inventory missing"]
+    member_map: dict[str, str] = {}
+    for label, suffix in required_suffixes.items():
+        entry = inventory.get(label)
+        member = entry.get("member") if isinstance(entry, dict) else None
+        if not isinstance(member, str):
+            member = find_member(members, suffix)
+        if member is None or member not in members:
+            failures.append(f"{label} archive member missing")
+            continue
+        member_map[label] = member
+        data = members[member]
+        if not isinstance(entry, dict):
+            failures.append(f"{label} inventory entry missing")
+            continue
+        if entry.get("sha256") != sha256_bytes(data):
+            failures.append(f"{label} inventory hash mismatch")
+        if entry.get("size_bytes") != len(data):
+            failures.append(f"{label} inventory size mismatch")
+    if len(member_map) != len(required_suffixes):
+        return failures
+    try:
+        archived_raw = parse_jsonl_bytes(members[member_map["raw_records"]])
+        archived_death = parse_jsonl_bytes(members[member_map["source_death_receipts"]])
+        archived_feature = json.loads(members[member_map["feature_freeze"]].decode("utf-8"))
+        archived_target = json.loads(members[member_map["target_execution_receipt"]].decode("utf-8"))
+        archived_manifest = json.loads(members[member_map["manifest"]].decode("utf-8"))
+        archived_deployment = json.loads(members[member_map["deployment_custody"]].decode("utf-8"))
+    except Exception as exc:
+        return failures + [f"archive member parse failure: {exc}"]
+    if archived_raw != packet.get("raw_records"):
+        failures.append("raw records archive member mismatch")
+    if archived_death != packet.get("source_death_receipts"):
+        failures.append("source-death archive member mismatch")
+    if archived_feature != packet.get("feature_freeze"):
+        failures.append("feature-freeze archive member mismatch")
+    if archived_target != packet.get("target_execution_receipt"):
+        failures.append("target receipt archive member mismatch")
+    if custody.get("target_execution_receipt_sha256") != sha256_bytes(members[member_map["target_execution_receipt"]]):
+        failures.append("target execution receipt sha mismatch")
+    if custody.get("runtime_sha256") != sha256_bytes(members[member_map["runtime_binary"]]):
+        failures.append("runtime binary sha mismatch")
+    if custody.get("manifest_sha256") != sha256_bytes(members[member_map["manifest"]]):
+        failures.append("manifest file sha mismatch")
+    source_sha = archived_manifest.get("authority_binding", {}).get("relation_source_authority_commit")
+    if custody.get("source_authority_sha") != source_sha:
+        failures.append("source authority sha mismatch")
+    if archived_deployment.get("relation_source_authority_commit") != source_sha:
+        failures.append("deployment source authority mismatch")
+    if custody.get("freeze_sha") != archived_deployment.get("relation_manifest_freeze_commit"):
+        failures.append("freeze sha mismatch")
+    if archived_manifest.get("schedule_sha256") not in {None, schedule.get("schedule_sha256")}:
+        failures.append("manifest schedule binding mismatch")
+    return failures
+
+
+def validate_physical_packet(
+    packet: dict[str, Any],
+    schedule: dict[str, Any],
+    *,
+    expected_physical_measurement: bool = True,
+    require_custody: bool = True,
+) -> dict[str, Any]:
     failures: list[str] = []
     raw_records = packet.get("raw_records")
     source_death = packet.get("source_death_receipts")
@@ -176,7 +430,7 @@ def validate_physical_packet(packet: dict[str, Any], schedule: dict[str, Any]) -
         for metric in ["dirty_probe_response", "change_to_dirty", "cpu_cycles", "duration_ns"]:
             if type(record.get(metric)) not in {int, float}:
                 failures.append(f"{metric} not numeric")
-        if record.get("physical_measurement") is not True:
+        if record.get("physical_measurement") is not expected_physical_measurement:
             failures.append("physical measurement flag mismatch")
         if record.get("process_custody") != "source_dead_before_query":
             failures.append("process custody mismatch")
@@ -233,14 +487,14 @@ def validate_physical_packet(packet: dict[str, Any], schedule: dict[str, Any]) -
             failures.append("post-observation selection")
         if receipt.get("source_cpu_before") != expected["source_cpu_expected"] or receipt.get("source_cpu_after") != expected["source_cpu_expected"]:
             failures.append("source-death CPU custody mismatch")
-        if receipt.get("physical_measurement") is not True:
+        if receipt.get("physical_measurement") is not expected_physical_measurement:
             failures.append("source-death physical measurement mismatch")
         if len(failures) > 48:
             break
     if not isinstance(feature_freeze, dict):
         failures.append("feature_freeze missing")
     else:
-        if feature_freeze.get("physical_measurement") is not True:
+        if feature_freeze.get("physical_measurement") is not expected_physical_measurement:
             failures.append("feature freeze physical measurement mismatch")
         if feature_freeze.get("raw_record_count") != len(schedule_rows):
             failures.append("feature freeze raw-record count mismatch")
@@ -252,16 +506,11 @@ def validate_physical_packet(packet: dict[str, Any], schedule: dict[str, Any]) -
             failures.append("feature freeze schedule binding mismatch")
         if feature_freeze.get("post_observation_feature_selection") is not False:
             failures.append("post-observation feature selection")
-    if not isinstance(custody, dict):
+    if not require_custody:
+        pass
+    elif not isinstance(custody, dict):
         failures.append("custody envelope missing")
     else:
-        inventory = custody.get("evidence_inventory")
-        required_inventory = [
-            "raw_records",
-            "source_death_receipts",
-            "feature_freeze",
-            "target_execution_receipt",
-        ]
         for field in [
             "target_execution_receipt_sha256",
             "runtime_sha256",
@@ -277,13 +526,14 @@ def validate_physical_packet(packet: dict[str, Any], schedule: dict[str, Any]) -
                 failures.append(f"{field} missing or malformed")
         if not isinstance(custody.get("copied_back_archive_size"), int) or custody.get("copied_back_archive_size") <= 0:
             failures.append("copied-back archive size missing")
-        if not isinstance(inventory, dict) or not all(inventory.get(item) is True for item in required_inventory):
-            failures.append("evidence inventory incomplete")
+        failures.extend(validate_custody_envelope(packet, custody, schedule))
     return {
         "passed": not failures,
         "failures": failures[:64],
         "raw_record_count": len(raw_records),
         "source_death_receipt_count": len(source_death),
+        "expected_physical_measurement": expected_physical_measurement,
+        "custody_required": require_custody,
     }
 
 
@@ -566,16 +816,114 @@ def scalar_block_baselines(rows: list[dict[str, Any]]) -> dict[str, dict[str, fl
     return baselines
 
 
-def scalar_replay_residual_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def solve_linear_system(matrix: list[list[float]], vector: list[float]) -> list[float]:
+    size = len(vector)
+    augmented = [row[:] + [vector[index]] for index, row in enumerate(matrix)]
+    for pivot in range(size):
+        best = max(range(pivot, size), key=lambda row: abs(augmented[row][pivot]))
+        if abs(augmented[best][pivot]) < 1e-9:
+            augmented[pivot][pivot] += 1e-6
+            best = pivot
+        if best != pivot:
+            augmented[pivot], augmented[best] = augmented[best], augmented[pivot]
+        scale = augmented[pivot][pivot]
+        if abs(scale) < 1e-12:
+            scale = 1e-12
+        for column in range(pivot, size + 1):
+            augmented[pivot][column] /= scale
+        for row in range(size):
+            if row == pivot:
+                continue
+            factor = augmented[row][pivot]
+            if factor == 0.0:
+                continue
+            for column in range(pivot, size + 1):
+                augmented[row][column] -= factor * augmented[pivot][column]
+    return [augmented[row][size] for row in range(size)]
+
+
+def fit_linear_model(feature_rows: list[list[float]], targets: list[float]) -> list[float]:
+    if not feature_rows:
+        return []
+    width = len(feature_rows[0])
+    normal = [[0.0 for _ in range(width)] for _ in range(width)]
+    rhs = [0.0 for _ in range(width)]
+    for features, target in zip(feature_rows, targets):
+        for i, left in enumerate(features):
+            rhs[i] += left * target
+            for j, right in enumerate(features):
+                normal[i][j] += left * right
+    for index in range(width):
+        normal[index][index] += 1e-6
+    return solve_linear_system(normal, rhs)
+
+
+def dot(left: list[float], right: list[float]) -> float:
+    return sum(a * b for a, b in zip(left, right))
+
+
+def category_levels(rows: list[dict[str, Any]], factors: list[str]) -> dict[str, list[Any]]:
+    return {factor: sorted({row.get(factor) for row in rows}, key=lambda value: repr(value)) for factor in factors}
+
+
+def scalar_feature_vector(
+    row: dict[str, Any],
+    baseline: dict[str, float],
+    levels: dict[str, list[Any]],
+    *,
+    nonlinear: bool,
+) -> list[float]:
+    q = float(row.get("q", 0.0))
+    ordinal = float(row.get("execution_ordinal", 0.0))
+    position = float(row.get("block_local_position", 0.0))
+    features = [
+        1.0,
+        q / 2048.0,
+        float(row.get("bank_A_work", 0.0)) / 4096.0,
+        float(row.get("bank_B_work", 0.0)) / 4096.0,
+        float(row.get("total_work", 0.0)) / 4096.0,
+        float(baseline.get("scalar_center", 0.0)) / 10000.0,
+        float(baseline.get("D_single", 0.0)) / 1000.0,
+        ordinal / 40000.0,
+    ]
+    if nonlinear:
+        features.extend(
+            [
+                (q / 2048.0) ** 2,
+                (position / 12.0) ** 2,
+                (q / 2048.0) * (position / 12.0),
+                math.sin((ordinal % 12.0) * math.pi / 6.0),
+                math.cos((ordinal % 12.0) * math.pi / 6.0),
+            ]
+        )
+    else:
+        features.append(position / 12.0)
+    for factor in ["session", "replicate", "mapping", "delay_label", "source_order", "query_order", "cyclic_origin"]:
+        for level in levels.get(factor, []):
+            features.append(1.0 if row.get(factor) == level else 0.0)
+    return features
+
+
+def linear_scalar_residual_rows(rows: list[dict[str, Any]], *, nonlinear: bool) -> list[dict[str, Any]]:
+    matrix_rows = [row for row in rows if row.get("row_role") == "relation_matrix"]
     baselines = scalar_block_baselines(rows)
-    residual_rows: list[dict[str, Any]] = []
-    for row in rows:
-        item = dict(row)
-        if item.get("row_role") == "relation_matrix":
-            baseline = baselines.get(item["block_id"], {})
-            item["dirty_probe_response"] = float(item["dirty_probe_response"]) - float(baseline.get("scalar_center", 0.0))
-        residual_rows.append(item)
+    levels = category_levels(matrix_rows, ["session", "replicate", "mapping", "delay_label", "source_order", "query_order", "cyclic_origin"])
+    features = [scalar_feature_vector(row, baselines.get(row["block_id"], {}), levels, nonlinear=nonlinear) for row in matrix_rows]
+    targets = [float(row["dirty_probe_response"]) for row in matrix_rows]
+    coefficients = fit_linear_model(features, targets)
+    residual_rows = [dict(row) for row in rows]
+    by_tuple = {row["tuple_id"]: row for row in residual_rows}
+    for row, feature in zip(matrix_rows, features):
+        by_tuple[row["tuple_id"]]["dirty_probe_response"] = float(row["dirty_probe_response"]) - dot(coefficients, feature)
     return residual_rows
+
+
+def scalar_replay_residual_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return linear_scalar_residual_rows(rows, nonlinear=False)
+
+
+def nonlinear_scalar_replay_residual_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return linear_scalar_residual_rows(rows, nonlinear=True)
 
 
 def additive_ab_residual_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -596,6 +944,25 @@ def additive_ab_residual_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]
         for row in matrix_rows:
             predicted = prep_means[row["r_prepare"]] + query_means[row["r_query"]] - grand
             output_by_tuple[row["tuple_id"]]["dirty_probe_response"] = float(row["dirty_probe_response"]) - predicted
+    return residual_rows
+
+
+def control_replay_residual_rows(rows: list[dict[str, Any]], control_name: str) -> list[dict[str, Any]]:
+    residual_rows = [dict(row) for row in rows]
+    output_by_tuple = {row["tuple_id"]: row for row in residual_rows}
+    controls: dict[str, float] = {}
+    for block_id, block_rows in rows_by_block(rows).items():
+        values = [
+            float(row["dirty_probe_response"])
+            for row in block_rows
+            if row.get("row_role") == "relation_control" and row.get("query") == control_name
+        ]
+        controls[block_id] = mean(values) if values else 0.0
+    for row in rows:
+        if row.get("row_role") != "relation_matrix":
+            continue
+        sign = 1.0 if row.get("relation_match") is True else -1.0
+        output_by_tuple[row["tuple_id"]]["dirty_probe_response"] = float(row["dirty_probe_response"]) - sign * controls.get(row["block_id"], 0.0)
     return residual_rows
 
 
@@ -643,7 +1010,10 @@ def matched_permutation_null(rows: list[dict[str, Any]], threshold_contract: dic
 
 def replay_adversary_report(rows: list[dict[str, Any]], threshold_contract: dict[str, Any]) -> dict[str, Any]:
     scalar_residual = effect_summary(scalar_replay_residual_rows(rows), threshold_contract)
+    nonlinear_residual = effect_summary(nonlinear_scalar_replay_residual_rows(rows), threshold_contract)
     additive_residual = effect_summary(additive_ab_residual_rows(rows), threshold_contract)
+    route_residual = effect_summary(control_replay_residual_rows(rows, "route_pressure_sham"), threshold_contract)
+    distance_residual = effect_summary(control_replay_residual_rows(rows, "distance_control"), threshold_contract)
     matched_null = matched_permutation_null(rows, threshold_contract)
     heldout = heldout_transport(rows, threshold_contract)
     diagnostic_neutralization = {
@@ -660,18 +1030,18 @@ def replay_adversary_report(rows: list[dict[str, Any]], threshold_contract: dict
     }
     adversaries = {
         "scalar_q_replay": {
-            "model": "relation cells predicted from preserved scalar-control block center and D_single only; no relation-cell labels",
+            "model": "least-squares prediction from scalar-control block center, D_single, q, work totals, execution position, and frozen nuisance factors; no relation-match or relation interaction feature",
             "residual_R_match_abs_of_mean": scalar_residual["R_match_abs_of_mean"],
             "residual_R_match_abs_mean": scalar_residual["R_match_abs_mean"],
             "relation_residual_survives": scalar_residual["passed"],
             "passed": scalar_residual["passed"],
         },
         "nonlinear_scalar_q_replay": {
-            "model": "same scalar-only residual law with q/nonlinear nuisance confined to block-level scalar marginals",
-            "residual_R_match_abs_of_mean": scalar_residual["R_match_abs_of_mean"],
-            "residual_R_match_abs_mean": scalar_residual["R_match_abs_mean"],
-            "relation_residual_survives": scalar_residual["passed"],
-            "passed": scalar_residual["passed"],
+            "model": "distinct frozen nonlinear scalar basis using q^2, execution-position harmonics, q x position, scalar center, D_single, and nuisance factors; no relation-match or relation interaction feature",
+            "residual_R_match_abs_of_mean": nonlinear_residual["R_match_abs_of_mean"],
+            "residual_R_match_abs_mean": nonlinear_residual["R_match_abs_mean"],
+            "relation_residual_survives": nonlinear_residual["passed"],
+            "passed": nonlinear_residual["passed"],
         },
         "separable_a_b_marginal_replay": {
             "model": "per-block additive prepare/query main effects without relation interaction",
@@ -681,15 +1051,24 @@ def replay_adversary_report(rows: list[dict[str, Any]], threshold_contract: dict
             "passed": additive_residual["passed"],
         },
         "route_pressure_replay": {
-            "model": "matched route-pressure and relation-control rows are block-level nuisance only",
-            "residual_R_match_abs_of_mean": scalar_residual["R_match_abs_of_mean"],
-            "matched_controls_available": bool(scalar_block_baselines(rows)),
-            "passed": scalar_residual["passed"],
+            "model": "block-level residualized contrast using physically scheduled route_pressure_sham observations",
+            "residual_R_match_abs_of_mean": route_residual["R_match_abs_of_mean"],
+            "residual_R_match_abs_mean": route_residual["R_match_abs_mean"],
+            "matched_controls_available": any(
+                row.get("row_role") == "relation_control" and row.get("query") == "route_pressure_sham" for row in rows
+            ),
+            "relation_residual_survives": route_residual["passed"],
+            "passed": route_residual["passed"],
         },
         "distance_only_replay": {
-            "model": "distance histogram is frozen equal across relation cells; no relation interaction term allowed",
-            "residual_R_match_abs_of_mean": additive_residual["R_match_abs_of_mean"],
-            "passed": additive_residual["passed"],
+            "model": "block-level residualized contrast using physically scheduled distance_control observations",
+            "residual_R_match_abs_of_mean": distance_residual["R_match_abs_of_mean"],
+            "residual_R_match_abs_mean": distance_residual["R_match_abs_mean"],
+            "matched_controls_available": any(
+                row.get("row_role") == "relation_control" and row.get("query") == "distance_control" for row in rows
+            ),
+            "relation_residual_survives": distance_residual["passed"],
+            "passed": distance_residual["passed"],
         },
         "matched_permutation_null": matched_null,
         "confounding_heldout": {
@@ -793,28 +1172,48 @@ def fixture_packet(schedule: dict[str, Any], mode: str) -> dict[str, Any]:
         base = 10_000.0 + 0.25 * q
         value = base
         if expected["row_role"] == "relation_matrix":
+            sign = 1.0 if expected["relation_match"] else -1.0
             if mode == "positive":
-                value += 320.0 if expected["relation_match"] else -320.0
+                value += 320.0 * sign
+            elif mode == "nonlinear_q_position":
+                value += sign * (320.0 + 0.0005 * q * q + 4.0 * float(expected["block_local_position"]))
+            elif mode == "additive_imbalance":
+                value += sign * 320.0
             elif mode == "origin_specific":
-                value += (320.0 if expected["relation_match"] else -320.0) if expected["cyclic_origin"] == 0 else 0.0
+                value += sign * 4096.0 if expected["cyclic_origin"] == 0 else 0.0
             elif mode == "mapping_specific":
-                value += (320.0 if expected["relation_match"] else -320.0) if expected["mapping"] == "map0" else 0.0
+                value += sign * 2048.0 if expected["mapping"] == "map0" else 0.0
             elif mode == "session_specific":
-                value += (320.0 if expected["relation_match"] else -320.0) if expected["session"] == "session_0" else 0.0
+                value += sign * 4096.0 if expected["session"] == "session_0" else 0.0
+            elif mode == "replicate_specific":
+                value += sign * 2048.0 if expected["replicate"] == 0 else 0.0
+            elif mode == "delay_specific":
+                value += sign * 4096.0 if expected["delay_label"] == "0ns" else 0.0
+            elif mode == "source_order_specific":
+                value += sign * 2048.0 if expected["source_order"] == "A_then_B" else 0.0
+            elif mode == "query_order_specific":
+                value += sign * 2048.0 if expected["query_order"] == "AB" else 0.0
             elif mode == "scalar_replay":
-                value += 0.5 * q
+                value += sign * (320.0 + 0.5 * q)
             elif mode == "separable_replay":
+                value += sign * 320.0
                 value += (80.0 if expected["r_prepare"] == "relation_r0" else -80.0)
                 value += (60.0 if expected["r_query"] == "relation_r0" else -60.0)
             elif mode == "route_pressure":
-                value += 64.0
+                value += sign * 320.0
             elif mode == "distance_only":
-                value += 64.0
+                value += sign * 320.0
         elif expected["row_role"] == "scalar_control":
             value += 60.0 if expected["query"] == "query_A" else -60.0
             value += 0.2 * q
+            if mode in {"scalar_replay", "nonlinear_q_position", "additive_imbalance", "separable_replay"} and expected["r_prepare"] == "relation_r0":
+                value += 512.0 if expected["query"] == "query_A" else -512.0
         elif expected["row_role"] == "relation_control":
             value = 0.0
+            if mode == "route_pressure" and expected["query"] == "route_pressure_sham":
+                value = 320.0
+            elif mode == "distance_only" and expected["query"] == "distance_control":
+                value = 320.0
         record = {
             **expected,
             "dirty_probe_response": value,
@@ -852,7 +1251,7 @@ def fixture_packet(schedule: dict[str, Any], mode: str) -> dict[str, Any]:
                 "physical_measurement": True,
             }
         )
-    return {
+    packet = {
         "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_FIXTURE_PACKET_V1",
         "mode": mode,
         "raw_records": raw_records,
@@ -866,23 +1265,21 @@ def fixture_packet(schedule: dict[str, Any], mode: str) -> dict[str, Any]:
             "physical_measurement": True,
             "post_observation_feature_selection": False,
         },
-        "custody_envelope": {
-            "schema": "FAMILY10H_RELATION_ONLY_FIXTURE_CUSTODY_ENVELOPE_V1",
-            "target_execution_receipt_sha256": "1" * 64,
-            "runtime_sha256": "2" * 64,
-            "manifest_sha256": "3" * 64,
-            "source_authority_sha": "4" * 40,
-            "freeze_sha": "5" * 40,
-            "copied_back_archive_sha256": "6" * 64,
-            "copied_back_archive_size": 1,
-            "evidence_inventory": {
-                "raw_records": True,
-                "source_death_receipts": True,
-                "feature_freeze": True,
-                "target_execution_receipt": True,
-            },
+        "target_execution_receipt": {
+            "schema": "FAMILY10H_RELATION_ONLY_TARGET_EXECUTION_RECEIPT_V1",
+            "status": "complete",
+            "returncode": 0,
+            "raw_record_count": len(raw_records),
+            "source_death_receipt_count": len(source_death),
+            "feature_freeze_written": True,
+            "physical_measurement": True,
+            "pmu_opened": True,
+            "live_activity": True,
+            "small_wall_crossed": False,
         },
     }
+    packet.update(fixture_archive_packet_material(packet, schedule, mode))
+    return packet
 
 
 def fail_closed_claim_state(report: dict[str, Any]) -> dict[str, Any]:
@@ -913,12 +1310,62 @@ def mutated_packet_regression(schedule: dict[str, Any], label: str, mutator: Any
     }
 
 
+def wrong_sha256(value: str) -> str:
+    return ("0" * 64) if value != ("0" * 64) else ("1" * 64)
+
+
+def wrong_sha1(value: str) -> str:
+    return ("0" * 40) if value != ("0" * 40) else ("1" * 40)
+
+
+def replace_archive_member(packet: dict[str, Any], label: str, replacement: bytes) -> None:
+    custody = packet["custody_envelope"]
+    archive_bytes, error = archive_bytes_from_custody(custody)
+    if error is not None or archive_bytes is None:
+        raise AssertionError(error or "archive missing")
+    members = tar_member_bytes(archive_bytes)
+    member = custody["evidence_inventory"][label]["member"]
+    members[member] = replacement
+    archive_io = io.BytesIO()
+    with tarfile.open(fileobj=archive_io, mode="w") as tf:
+        for name, data in sorted(members.items()):
+            info = tarfile.TarInfo(name=name)
+            info.size = len(data)
+            info.mtime = 0
+            info.uid = 0
+            info.gid = 0
+            info.uname = ""
+            info.gname = ""
+            tf.addfile(info, io.BytesIO(data))
+    packet["custody_envelope"] = custody_envelope_from_archive_bytes(archive_io.getvalue(), embed_archive_bytes=True)
+
+
 def packet_mutation_regressions(schedule: dict[str, Any]) -> dict[str, Any]:
     def raw0(packet: dict[str, Any]) -> dict[str, Any]:
         return packet["raw_records"][0]
 
     def death0(packet: dict[str, Any]) -> dict[str, Any]:
         return packet["source_death_receipts"][0]
+
+    def mutate_archived_raw(packet: dict[str, Any]) -> None:
+        rows = json.loads(json.dumps(packet["raw_records"]))
+        rows[0]["dirty_probe_response"] = float(rows[0]["dirty_probe_response"]) + 1.0
+        replace_archive_member(packet, "raw_records", jsonl_bytes(rows))
+
+    def mutate_archived_death(packet: dict[str, Any]) -> None:
+        rows = json.loads(json.dumps(packet["source_death_receipts"]))
+        rows[0]["waitpid_pid"] = int(rows[0]["waitpid_pid"]) + 1
+        replace_archive_member(packet, "source_death_receipts", jsonl_bytes(rows))
+
+    def mutate_archived_feature(packet: dict[str, Any]) -> None:
+        feature = dict(packet["feature_freeze"])
+        feature["raw_record_count"] = int(feature["raw_record_count"]) - 1
+        replace_archive_member(packet, "feature_freeze", strict_json_bytes(feature))
+
+    def mutate_archived_target(packet: dict[str, Any]) -> None:
+        receipt = dict(packet["target_execution_receipt"])
+        receipt["raw_record_count"] = int(receipt["raw_record_count"]) - 1
+        replace_archive_member(packet, "target_execution_receipt", strict_json_bytes(receipt))
 
     cases = {
         "altered_block_id": lambda packet: raw0(packet).__setitem__("block_id", "mutated_block"),
@@ -937,9 +1384,38 @@ def packet_mutation_regressions(schedule: dict[str, Any]) -> dict[str, Any]:
         "wrong_event_ids": lambda packet: raw0(packet).__setitem__("event_ids", {"bad": 1}),
         "physical_measurement_false": lambda packet: raw0(packet).__setitem__("physical_measurement", False),
         "altered_feature_freeze": lambda packet: packet["feature_freeze"].__setitem__("schedule_sha256", "0" * 64),
-        "mismatched_target_receipt": lambda packet: packet["custody_envelope"].__setitem__("target_execution_receipt_sha256", "bad"),
-        "mismatched_archive_hash": lambda packet: packet["custody_envelope"].__setitem__("copied_back_archive_sha256", "bad"),
         "source_death_pid_mismatch": lambda packet: death0(packet).__setitem__("waitpid_pid", -1),
+        "wrong_64_character_target_receipt_hash": lambda packet: packet["custody_envelope"].__setitem__(
+            "target_execution_receipt_sha256", wrong_sha256(packet["custody_envelope"]["target_execution_receipt_sha256"])
+        ),
+        "wrong_64_character_runtime_hash": lambda packet: packet["custody_envelope"].__setitem__(
+            "runtime_sha256", wrong_sha256(packet["custody_envelope"]["runtime_sha256"])
+        ),
+        "wrong_64_character_manifest_hash": lambda packet: packet["custody_envelope"].__setitem__(
+            "manifest_sha256", wrong_sha256(packet["custody_envelope"]["manifest_sha256"])
+        ),
+        "wrong_40_character_source_commit": lambda packet: packet["custody_envelope"].__setitem__(
+            "source_authority_sha", wrong_sha1(packet["custody_envelope"]["source_authority_sha"])
+        ),
+        "wrong_40_character_freeze_commit": lambda packet: packet["custody_envelope"].__setitem__(
+            "freeze_sha", wrong_sha1(packet["custody_envelope"]["freeze_sha"])
+        ),
+        "wrong_64_character_archive_hash": lambda packet: packet["custody_envelope"].__setitem__(
+            "copied_back_archive_sha256", wrong_sha256(packet["custody_envelope"]["copied_back_archive_sha256"])
+        ),
+        "correct_archive_hash_wrong_size": lambda packet: packet["custody_envelope"].__setitem__(
+            "copied_back_archive_size", int(packet["custody_envelope"]["copied_back_archive_size"]) + 1
+        ),
+        "altered_inventory_member_hash": lambda packet: packet["custody_envelope"]["evidence_inventory"]["raw_records"].__setitem__(
+            "sha256", wrong_sha256(packet["custody_envelope"]["evidence_inventory"]["raw_records"]["sha256"])
+        ),
+        "altered_inventory_member_size": lambda packet: packet["custody_envelope"]["evidence_inventory"]["raw_records"].__setitem__(
+            "size_bytes", int(packet["custody_envelope"]["evidence_inventory"]["raw_records"]["size_bytes"]) + 1
+        ),
+        "archive_containing_altered_raw_records": mutate_archived_raw,
+        "archive_containing_altered_source_death_receipts": mutate_archived_death,
+        "archive_containing_altered_feature_freeze": mutate_archived_feature,
+        "archive_containing_altered_target_receipt": mutate_archived_target,
     }
     results = {label: mutated_packet_regression(schedule, label, mutator) for label, mutator in cases.items()}
     return {
@@ -949,42 +1425,98 @@ def packet_mutation_regressions(schedule: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def false_positive_report(report: dict[str, Any]) -> dict[str, Any]:
+    adversaries = report.get("scalar_replay_adversary", {}).get("adversaries", {})
+    residuals = {
+        name: {
+            "residual_R_match_abs_of_mean": item.get("residual_R_match_abs_of_mean"),
+            "passed": item.get("passed"),
+        }
+        for name, item in adversaries.items()
+        if isinstance(item, dict) and "residual_R_match_abs_of_mean" in item
+    }
+    return {
+        "raw_R_match_abs_of_mean": report.get("R_match_global", {}).get("R_match_abs_of_mean"),
+        "raw_R_match_abs_mean": report.get("R_match_global", {}).get("R_match_abs_mean"),
+        "residual_models": residuals,
+        "heldout_passed": report.get("heldout_transport", {}).get("passed"),
+        "failed_gates": [key for key, value in report.get("gates", {}).items() if not value],
+        "final_result_class": report.get("result_class"),
+        "negative_claim_state": fail_closed_claim_state(report),
+    }
+
+
 def run_self_test(schedule: dict[str, Any]) -> dict[str, Any]:
     threshold = physical_threshold_contract()
     positive = adjudicate_physical_packet(fixture_packet(schedule, "positive"), schedule, threshold)
-    scalar = adjudicate_physical_packet(fixture_packet(schedule, "scalar_replay"), schedule, threshold)
-    separable = adjudicate_physical_packet(fixture_packet(schedule, "separable_replay"), schedule, threshold)
-    route = adjudicate_physical_packet(fixture_packet(schedule, "route_pressure"), schedule, threshold)
-    distance = adjudicate_physical_packet(fixture_packet(schedule, "distance_only"), schedule, threshold)
-    origin_specific = adjudicate_physical_packet(fixture_packet(schedule, "origin_specific"), schedule, threshold)
-    mapping_specific = adjudicate_physical_packet(fixture_packet(schedule, "mapping_specific"), schedule, threshold)
-    session_specific = adjudicate_physical_packet(fixture_packet(schedule, "session_specific"), schedule, threshold)
+    false_positive_modes = {
+        "nonlinear_q_artifact_coupled_to_execution_position": "nonlinear_q_position",
+        "additive_preparation_query_effects_plus_imbalance": "additive_imbalance",
+        "route_pressure_artifact": "route_pressure",
+        "distance_artifact": "distance_only",
+        "source_order_artifact": "source_order_specific",
+        "query_order_artifact": "query_order_specific",
+        "cyclic_origin_artifact": "origin_specific",
+        "mapping_specific_artifact": "mapping_specific",
+        "session_specific_artifact": "session_specific",
+        "replicate_specific_artifact": "replicate_specific",
+        "delay_specific_artifact": "delay_specific",
+        "scalar_replay_artifact": "scalar_replay",
+        "separable_replay_artifact": "separable_replay",
+    }
+    false_positive_results = {
+        label: adjudicate_physical_packet(fixture_packet(schedule, mode), schedule, threshold)
+        for label, mode in false_positive_modes.items()
+    }
     invalid_packet = fixture_packet(schedule, "positive")
     invalid_packet["source_death_receipts"] = invalid_packet["source_death_receipts"][:-1]
     invalid = adjudicate_physical_packet(invalid_packet, schedule, threshold)
     packet_mutations = packet_mutation_regressions(schedule)
+    false_positive_reports = {label: false_positive_report(report) for label, report in false_positive_results.items()}
     negative_claim_states = {
-        "scalar_replay": fail_closed_claim_state(scalar),
-        "separable_replay": fail_closed_claim_state(separable),
-        "route_pressure": fail_closed_claim_state(route),
-        "distance_only": fail_closed_claim_state(distance),
-        "origin_specific": fail_closed_claim_state(origin_specific),
-        "mapping_specific": fail_closed_claim_state(mapping_specific),
-        "session_specific": fail_closed_claim_state(session_specific),
+        **{label: fail_closed_claim_state(report) for label, report in false_positive_results.items()},
         "invalid": fail_closed_claim_state(invalid),
+    }
+    heldout_factor_failures = {
+        "cyclic_origin_artifact": false_positive_results["cyclic_origin_artifact"]["heldout_transport"]["factors"]["cyclic_origin"]["passed"] is False,
+        "mapping_specific_artifact": false_positive_results["mapping_specific_artifact"]["heldout_transport"]["factors"]["mapping"]["passed"] is False,
+        "session_specific_artifact": false_positive_results["session_specific_artifact"]["heldout_transport"]["factors"]["session"]["passed"] is False,
+        "replicate_specific_artifact": false_positive_results["replicate_specific_artifact"]["heldout_transport"]["factors"]["replicate"]["passed"] is False,
+        "delay_specific_artifact": false_positive_results["delay_specific_artifact"]["heldout_transport"]["factors"]["delay_label"]["passed"] is False,
+        "source_order_artifact": false_positive_results["source_order_artifact"]["heldout_transport"]["factors"]["source_order"]["passed"] is False,
+        "query_order_artifact": false_positive_results["query_order_artifact"]["heldout_transport"]["factors"]["query_order"]["passed"] is False,
     }
     checks = {
         "positive_fixture_confirmed": positive["result_class"] == RESULT_CONFIRMED and positive["scientific_claim"] == POSITIVE_CLAIM,
-        "scalar_replay_rejected": scalar["result_class"] == RESULT_NOT_CONFIRMED,
-        "separable_replay_rejected": separable["result_class"] == RESULT_NOT_CONFIRMED,
-        "route_pressure_rejected": route["result_class"] == RESULT_NOT_CONFIRMED,
-        "distance_only_rejected": distance["result_class"] == RESULT_NOT_CONFIRMED,
-        "stratum_specific_artifact_fails_true_heldout": origin_specific["result_class"] == RESULT_NOT_CONFIRMED
-        and origin_specific["heldout_transport"]["factors"]["cyclic_origin"]["passed"] is False
-        and mapping_specific["result_class"] == RESULT_NOT_CONFIRMED
-        and mapping_specific["heldout_transport"]["factors"]["mapping"]["passed"] is False
-        and session_specific["result_class"] == RESULT_NOT_CONFIRMED
-        and session_specific["heldout_transport"]["factors"]["session"]["passed"] is False,
+        "false_positive_raw_R_match_above_floor": all(
+            report["raw_R_match_abs_of_mean"] is not None
+            and report["raw_R_match_abs_of_mean"] >= threshold["absolute_thresholds"]["r_match_abs_min"]
+            for report in false_positive_reports.values()
+        ),
+        "measured_adversarial_models_reject_false_positive_interactions": all(
+            report["final_result_class"] == RESULT_NOT_CONFIRMED and report["negative_claim_state"]["passed"]
+            for report in false_positive_reports.values()
+        ),
+        "stratum_specific_artifact_fails_true_heldout": all(heldout_factor_failures.values()),
+        "custody_envelope_cryptographically_bound": packet_mutations["passed"]
+        and all(
+            packet_mutations["results"][key]["passed"]
+            for key in [
+                "wrong_64_character_target_receipt_hash",
+                "wrong_64_character_runtime_hash",
+                "wrong_64_character_manifest_hash",
+                "wrong_40_character_source_commit",
+                "wrong_40_character_freeze_commit",
+                "wrong_64_character_archive_hash",
+                "correct_archive_hash_wrong_size",
+                "altered_inventory_member_hash",
+                "altered_inventory_member_size",
+                "archive_containing_altered_raw_records",
+                "archive_containing_altered_source_death_receipts",
+                "archive_containing_altered_feature_freeze",
+                "archive_containing_altered_target_receipt",
+            ]
+        ),
         "invalid_packet_custody_invalid": invalid["result_class"] == RESULT_INVALID,
         "packet_mutation_regressions_passed": packet_mutations["passed"],
         "negative_and_invalid_fail_closed": all(item["passed"] for item in negative_claim_states.values()),
@@ -1002,39 +1534,20 @@ def run_self_test(schedule: dict[str, Any]) -> dict[str, Any]:
             "label_scramble_q95_abs": positive["label_scramble"]["null_distribution"]["q95_abs"],
         },
         "negative_results": {
-            "scalar_replay": scalar["result_class"],
-            "separable_replay": separable["result_class"],
-            "route_pressure": route["result_class"],
-            "distance_only": distance["result_class"],
-            "origin_specific": origin_specific["result_class"],
-            "mapping_specific": mapping_specific["result_class"],
-            "session_specific": session_specific["result_class"],
+            **{label: report["result_class"] for label, report in false_positive_results.items()},
             "invalid": invalid["result_class"],
         },
         "false_positive_fixture_results": {
             "block_id_relabeling": packet_mutations["results"]["altered_block_id"],
             "execution_order_drift": packet_mutations["results"]["swapped_execution_order"],
-            "q_dependent_nonlinear_scalar_artifact": {"result_class": scalar["result_class"], "adversary_passed": scalar["scalar_replay_adversary"]["passed"]},
-            "additive_preparation_query_effects": {"result_class": separable["result_class"], "adversary_passed": separable["scalar_replay_adversary"]["passed"]},
-            "route_pressure_artifact": {"result_class": route["result_class"], "adversary_passed": route["scalar_replay_adversary"]["passed"]},
-            "distance_artifact": {"result_class": distance["result_class"], "adversary_passed": distance["scalar_replay_adversary"]["passed"]},
-            "cyclic_origin_specific_artifact": {
-                "result_class": origin_specific["result_class"],
-                "heldout_cyclic_origin_passed": origin_specific["heldout_transport"]["factors"]["cyclic_origin"]["passed"],
-            },
-            "mapping_specific_artifact": {
-                "result_class": mapping_specific["result_class"],
-                "heldout_mapping_passed": mapping_specific["heldout_transport"]["factors"]["mapping"]["passed"],
-            },
-            "session_specific_artifact": {
-                "result_class": session_specific["result_class"],
-                "heldout_session_passed": session_specific["heldout_transport"]["factors"]["session"]["passed"],
-            },
+            **false_positive_reports,
             "genuine_relation_interaction": {
                 "result_class": positive["result_class"],
                 "adversary_passed": positive["scalar_replay_adversary"]["passed"],
+                "raw_R_match_abs_of_mean": positive["R_match_global"]["R_match_abs_of_mean"],
             },
         },
+        "heldout_factor_failure_results": heldout_factor_failures,
         "packet_mutation_regressions": packet_mutations,
         "negative_claim_states": negative_claim_states,
         "passed": all(checks.values()),

@@ -82,10 +82,29 @@ typedef struct {
     relation_only_order_id source_order;
     relation_only_order_id query_order;
     uint32_t cyclic_origin;
+    char route_pressure_class[96];
+    char distance_control_class[96];
+    char allocation_order_class[96];
+    char prefault_class[96];
     char operation_semantics_id[64];
     char control_semantics_id[64];
     int source_cpu_expected;
     int receiver_cpu_expected;
+    uint32_t source_loop_count;
+    uint32_t receiver_loop_count;
+    uint32_t read_count;
+    uint32_t write_count;
+    uint32_t page_count_a;
+    uint32_t page_count_b;
+    uint32_t line_count_a;
+    uint32_t line_count_b;
+    char logical_line_histogram_sha256[80];
+    char virtual_offset_histogram_sha256[80];
+    char actual_cache_index_status[96];
+    char pair_distance_histogram_sha256[80];
+    char permutation_cycle_structure_sha256[80];
+    char matched_twin_group[160];
+    char matched_twin_pair[160];
     char expected_pmu_group[80];
     int requires_pmu;
     int post_observation_scheduling;
@@ -663,6 +682,12 @@ static int parse_schedule_row(char **fields, int count, int expected_ordinal, re
     if (!(row->cyclic_origin == 0u || row->cyclic_origin == 1024u || row->cyclic_origin == 2048u || row->cyclic_origin == 3072u)) {
         return 0;
     }
+    if (!copy_field(row->route_pressure_class, sizeof(row->route_pressure_class), fields[22])
+        || !copy_field(row->distance_control_class, sizeof(row->distance_control_class), fields[23])
+        || !copy_field(row->allocation_order_class, sizeof(row->allocation_order_class), fields[24])
+        || !copy_field(row->prefault_class, sizeof(row->prefault_class), fields[25])) {
+        return 0;
+    }
     if (!copy_field(row->operation_semantics_id, sizeof(row->operation_semantics_id), fields[26])) {
         return 0;
     }
@@ -672,6 +697,25 @@ static int parse_schedule_row(char **fields, int count, int expected_ordinal, re
     if (!parse_i(fields[28], &row->source_cpu_expected) || !parse_i(fields[29], &row->receiver_cpu_expected)) {
         return 0;
     }
+    if (!parse_u32(fields[30], &row->source_loop_count)
+        || !parse_u32(fields[31], &row->receiver_loop_count)
+        || !parse_u32(fields[32], &row->read_count)
+        || !parse_u32(fields[33], &row->write_count)
+        || !parse_u32(fields[34], &row->page_count_a)
+        || !parse_u32(fields[35], &row->page_count_b)
+        || !parse_u32(fields[36], &row->line_count_a)
+        || !parse_u32(fields[37], &row->line_count_b)) {
+        return 0;
+    }
+    if (!copy_field(row->logical_line_histogram_sha256, sizeof(row->logical_line_histogram_sha256), fields[38])
+        || !copy_field(row->virtual_offset_histogram_sha256, sizeof(row->virtual_offset_histogram_sha256), fields[39])
+        || !copy_field(row->actual_cache_index_status, sizeof(row->actual_cache_index_status), fields[40])
+        || !copy_field(row->pair_distance_histogram_sha256, sizeof(row->pair_distance_histogram_sha256), fields[41])
+        || !copy_field(row->permutation_cycle_structure_sha256, sizeof(row->permutation_cycle_structure_sha256), fields[42])
+        || !copy_field(row->matched_twin_group, sizeof(row->matched_twin_group), fields[43])
+        || !copy_field(row->matched_twin_pair, sizeof(row->matched_twin_pair), fields[44])) {
+        return 0;
+    }
     if (!copy_field(row->expected_pmu_group, sizeof(row->expected_pmu_group), fields[45])) {
         return 0;
     }
@@ -679,6 +723,14 @@ static int parse_schedule_row(char **fields, int count, int expected_ordinal, re
         return 0;
     }
     if (row->bank_a_work + row->bank_b_work != FAMILY10H_RELATION_ONLY_TOTAL_WORK) {
+        return 0;
+    }
+    if (row->source_loop_count != FAMILY10H_RELATION_ONLY_TOTAL_WORK
+        || row->receiver_loop_count != FAMILY10H_RELATION_ONLY_TOTAL_WORK
+        || row->read_count != FAMILY10H_RELATION_ONLY_TOTAL_WORK
+        || row->write_count != FAMILY10H_RELATION_ONLY_TOTAL_WORK
+        || row->line_count_a != FAMILY10H_RELATION_ONLY_LINE_COUNT
+        || row->line_count_b != FAMILY10H_RELATION_ONLY_LINE_COUNT) {
         return 0;
     }
     if (strcmp(row->expected_pmu_group, "family10h_public_relation_match_group") != 0 || row->post_observation_scheduling != 0) {
@@ -780,6 +832,96 @@ static int write_feature_freeze(FILE *feature, int synthetic, int raw_count, con
     ) > 0;
 }
 
+static int write_raw_record(
+    FILE *raw,
+    const relation_only_schedule_row *row,
+    uint64_t change_to_dirty,
+    uint64_t dirty_probe_response,
+    uint64_t cpu_cycles,
+    uint64_t duration_ns,
+    uint64_t time_enabled,
+    uint64_t time_running,
+    uint64_t cycles_id,
+    uint64_t c2d_id,
+    uint64_t probe_id,
+    int source_cpu_before,
+    int source_cpu_after,
+    int receiver_cpu_before,
+    int receiver_cpu_after,
+    uint64_t query_hash,
+    int synthetic
+) {
+    const char *source_order_text = row->source_order == RELATION_ONLY_ORDER_AB ? "A_then_B" : "B_then_A";
+    const char *query_order_text = row->query_order == RELATION_ONLY_ORDER_AB ? "AB" : "BA";
+    return fprintf(
+        raw,
+        "{\"tuple_id\":\"%s\",\"execution_ordinal\":%d,\"block_id\":\"%s\",\"block_local_position\":%d,\"row_role\":\"%s\",\"q\":%" PRId32 ",\"bank_A_work\":%" PRIu32 ",\"bank_B_work\":%" PRIu32 ",\"total_work\":%" PRIu32 ",\"r_prepare\":\"%s\",\"r_query\":\"%s\",\"relation_match\":%s,\"query\":\"%s\",\"relation_cell\":\"%s\",\"session\":\"%s\",\"replicate\":%d,\"mapping\":\"%s\",\"delay_label\":\"%s\",\"delay_ns\":%" PRIu64 ",\"source_order\":\"%s\",\"query_order\":\"%s\",\"cyclic_origin\":%" PRIu32 ",\"route_pressure_class\":\"%s\",\"distance_control_class\":\"%s\",\"allocation_order_class\":\"%s\",\"prefault_class\":\"%s\",\"operation_semantics_id\":\"%s\",\"control_semantics_id\":\"%s\",\"source_cpu_expected\":%d,\"receiver_cpu_expected\":%d,\"source_loop_count\":%" PRIu32 ",\"receiver_loop_count\":%" PRIu32 ",\"read_count\":%" PRIu32 ",\"write_count\":%" PRIu32 ",\"page_count_A\":%" PRIu32 ",\"page_count_B\":%" PRIu32 ",\"line_count_A\":%" PRIu32 ",\"line_count_B\":%" PRIu32 ",\"logical_line_histogram_sha256\":\"%s\",\"virtual_offset_histogram_sha256\":\"%s\",\"actual_cache_index_status\":\"%s\",\"pair_distance_histogram_sha256\":\"%s\",\"permutation_cycle_structure_sha256\":\"%s\",\"matched_twin_group\":\"%s\",\"matched_twin_pair\":\"%s\",\"expected_pmu_group\":\"%s\",\"requires_pmu\":%s,\"post_observation_scheduling\":%s,\"pmu_event_group\":\"family10h_public_relation_match_group\",\"pmu_events\":{\"cpu_cycles_not_halted\":{\"event\":\"0x76\",\"umask\":\"0x00\"},\"cache_block_commands_change_to_dirty\":{\"event\":\"0xea\",\"umask\":\"0x20\"},\"probe_responses_dirty\":{\"event\":\"0xec\",\"umask\":\"0x0c\"}},\"event_ids\":{\"cpu_cycles_not_halted\":%" PRIu64 ",\"cache_block_commands_change_to_dirty\":%" PRIu64 ",\"probe_responses_dirty\":%" PRIu64 "},\"change_to_dirty\":%" PRIu64 ",\"dirty_probe_response\":%" PRIu64 ",\"cpu_cycles\":%" PRIu64 ",\"duration_ns\":%" PRIu64 ",\"time_enabled\":%" PRIu64 ",\"time_running\":%" PRIu64 ",\"source_cpu_before\":%d,\"source_cpu_after\":%d,\"receiver_cpu_before\":%d,\"receiver_cpu_after\":%d,\"process_custody\":\"source_dead_before_query\",\"query_hash\":%" PRIu64 ",\"physical_measurement\":%s,\"positive_physical_claim\":false}\n",
+        row->tuple_id,
+        row->execution_ordinal,
+        row->block_id,
+        row->block_local_position,
+        row->row_role,
+        row->q,
+        row->bank_a_work,
+        row->bank_b_work,
+        row->total_work,
+        row->r_prepare_text,
+        row->r_query_text,
+        row->relation_match ? "true" : "false",
+        row->query,
+        row->relation_cell,
+        row->session,
+        row->replicate,
+        row->mapping,
+        row->delay_label,
+        row->delay_ns,
+        source_order_text,
+        query_order_text,
+        row->cyclic_origin,
+        row->route_pressure_class,
+        row->distance_control_class,
+        row->allocation_order_class,
+        row->prefault_class,
+        row->operation_semantics_id,
+        row->control_semantics_id,
+        row->source_cpu_expected,
+        row->receiver_cpu_expected,
+        row->source_loop_count,
+        row->receiver_loop_count,
+        row->read_count,
+        row->write_count,
+        row->page_count_a,
+        row->page_count_b,
+        row->line_count_a,
+        row->line_count_b,
+        row->logical_line_histogram_sha256,
+        row->virtual_offset_histogram_sha256,
+        row->actual_cache_index_status,
+        row->pair_distance_histogram_sha256,
+        row->permutation_cycle_structure_sha256,
+        row->matched_twin_group,
+        row->matched_twin_pair,
+        row->expected_pmu_group,
+        row->requires_pmu ? "true" : "false",
+        row->post_observation_scheduling ? "true" : "false",
+        cycles_id,
+        c2d_id,
+        probe_id,
+        change_to_dirty,
+        dirty_probe_response,
+        cpu_cycles,
+        duration_ns,
+        time_enabled,
+        time_running,
+        source_cpu_before,
+        source_cpu_after,
+        receiver_cpu_before,
+        receiver_cpu_after,
+        query_hash,
+        synthetic ? "false" : "true"
+    ) > 0;
+}
+
 static int execute_schedule_common(const char *schedule_path, const char *output_root, int synthetic) {
     FILE *schedule = NULL;
     FILE *raw = NULL;
@@ -843,6 +985,15 @@ static int execute_schedule_common(const char *schedule_path, const char *output
         uint64_t query_start_ns = 0u;
         uint64_t query_end_ns = 0u;
         uint64_t query_hash = 0u;
+        uint64_t change_to_dirty_value = 0u;
+        uint64_t dirty_probe_value = 0u;
+        uint64_t cpu_cycles_value = 0u;
+        uint64_t duration_value = 0u;
+        uint64_t time_enabled_value = 0u;
+        uint64_t time_running_value = 0u;
+        uint64_t cycles_event_id = 0u;
+        uint64_t c2d_event_id = 0u;
+        uint64_t probe_event_id = 0u;
         int source_cpu_before = -1;
         int source_cpu_after = -1;
         int receiver_cpu_before = -1;
@@ -949,39 +1100,38 @@ static int execute_schedule_common(const char *schedule_path, const char *output
                 goto finish;
             }
         }
-        fprintf(
+        change_to_dirty_value = synthetic ? synthetic_metric(&row, query_hash, "c2d") : read_value_for_id(&readout, group.c2d_id);
+        dirty_probe_value = synthetic ? synthetic_metric(&row, query_hash, "dirty") : read_value_for_id(&readout, group.probe_id);
+        cpu_cycles_value = synthetic ? synthetic_metric(&row, query_hash, "cycles") : read_value_for_id(&readout, group.cycles_id);
+        duration_value = synthetic ? synthetic_metric(&row, query_hash, "duration") : query_end_ns - query_start_ns;
+        time_enabled_value = synthetic ? UINT64_C(100000) : readout.time_enabled;
+        time_running_value = synthetic ? UINT64_C(100000) : readout.time_running;
+        cycles_event_id = synthetic ? UINT64_C(101) : group.cycles_id;
+        c2d_event_id = synthetic ? UINT64_C(102) : group.c2d_id;
+        probe_event_id = synthetic ? UINT64_C(103) : group.probe_id;
+        if (!write_raw_record(
             raw,
-            "{\"tuple_id\":\"%s\",\"execution_ordinal\":%d,\"block_id\":\"%s\",\"row_role\":\"%s\",\"q\":%" PRId32 ",\"r_prepare\":\"%s\",\"r_query\":\"%s\",\"query\":\"%s\",\"relation_match\":%s,\"session\":\"%s\",\"replicate\":%d,\"mapping\":\"%s\",\"delay_label\":\"%s\",\"delay_ns\":%" PRIu64 ",\"source_order\":\"%s\",\"query_order\":\"%s\",\"cyclic_origin\":%" PRIu32 ",\"expected_pmu_group\":\"family10h_public_relation_match_group\",\"pmu_event_group\":\"family10h_public_relation_match_group\",\"change_to_dirty\":%" PRIu64 ",\"dirty_probe_response\":%" PRIu64 ",\"cpu_cycles\":%" PRIu64 ",\"duration_ns\":%" PRIu64 ",\"time_enabled\":%" PRIu64 ",\"time_running\":%" PRIu64 ",\"source_cpu_before\":%d,\"source_cpu_after\":%d,\"receiver_cpu_before\":%d,\"receiver_cpu_after\":%d,\"process_custody\":\"source_dead_before_query\",\"query_hash\":%" PRIu64 ",\"physical_measurement\":%s,\"positive_physical_claim\":false}\n",
-            row.tuple_id,
-            row.execution_ordinal,
-            row.block_id,
-            row.row_role,
-            row.q,
-            row.r_prepare_text,
-            row.r_query_text,
-            row.query,
-            row.relation_match ? "true" : "false",
-            row.session,
-            row.replicate,
-            row.mapping,
-            row.delay_label,
-            row.delay_ns,
-            row.source_order == RELATION_ONLY_ORDER_AB ? "A_then_B" : "B_then_A",
-            row.query_order == RELATION_ONLY_ORDER_AB ? "AB" : "BA",
-            row.cyclic_origin,
-            synthetic ? synthetic_metric(&row, query_hash, "c2d") : read_value_for_id(&readout, group.c2d_id),
-            synthetic ? synthetic_metric(&row, query_hash, "dirty") : read_value_for_id(&readout, group.probe_id),
-            synthetic ? synthetic_metric(&row, query_hash, "cycles") : read_value_for_id(&readout, group.cycles_id),
-            synthetic ? synthetic_metric(&row, query_hash, "duration") : query_end_ns - query_start_ns,
-            synthetic ? 100000u : readout.time_enabled,
-            synthetic ? 100000u : readout.time_running,
+            &row,
+            change_to_dirty_value,
+            dirty_probe_value,
+            cpu_cycles_value,
+            duration_value,
+            time_enabled_value,
+            time_running_value,
+            cycles_event_id,
+            c2d_event_id,
+            probe_event_id,
             source_cpu_before,
             source_cpu_after,
             receiver_cpu_before,
             receiver_cpu_after,
             query_hash,
-            synthetic ? "false" : "true"
-        );
+            synthetic
+        )) {
+            munmap(shared, sizeof(*shared));
+            status_code = 17;
+            goto finish;
+        }
         fprintf(
             deaths,
             "{\"tuple_id\":\"%s\",\"execution_ordinal\":%d,\"source_pid\":%d,\"waitpid_pid\":%d,\"waitpid_status\":\"exited_0\",\"source_exit_monotonic_ns\":%" PRIu64 ",\"query_select_monotonic_ns\":%" PRIu64 ",\"source_alive_during_query\":false,\"source_helper_survives\":false,\"open_source_ipc_after_waitpid\":0,\"query_selected_after_waitpid\":true,\"post_observation_query_or_window_selection\":false,\"source_cpu_before\":%d,\"source_cpu_after\":%d,\"physical_measurement\":%s}\n",
