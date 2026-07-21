@@ -1,0 +1,33 @@
+{
+  "authorized_claim_ceiling": "BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY",
+  "authorized_decision": "CATALYTIC_WAVEFORM_ISING_V2_BATCH_GENERALIZATION_PARTIAL",
+  "candidate": {
+    "freeze_commit": "9b9348064eaaffece01d5a1d7848d613a24857f5",
+    "machine_sha256": "c20f2cd4068ca32528bc52671793bca04d897456944e33ad8571083428c48930",
+    "preoracle_remote_commit": "f7249dd256d35ba2ff1e66928f6c04729138eaf9",
+    "results_sha256": "3b98112588a85f2c5dad7f47d01a5224f9829f2853bc8d2b79e969c9eed3bce5"
+  },
+  "findings": [],
+  "independent_recomputation": {
+    "accepted_correct": 25,
+    "accepted_correct_rate_among_unique": 0.925925925926,
+    "accepted_incorrect": 1,
+    "non_unique_optimum": 5,
+    "non_unique_raw_matches": 5,
+    "raw_correct_below_gate": 0,
+    "raw_incorrect": 1,
+    "strict_all_controls_pass_count": 32,
+    "strict_removed_transform_pass_count": 32,
+    "unique_optimum_count": 27,
+    "uninterpretable": 0
+  },
+  "normalized_counts": {
+    "open": 0,
+    "p0": 0,
+    "p1": 0,
+    "p2": 0
+  },
+  "reviewer_id": "CODEX-V2-BATCH-ADV-R1-C20F",
+  "schema": "catalytic_waveform_ising_v2_findings_normalized_v1",
+  "verdict": "PASS"
+}

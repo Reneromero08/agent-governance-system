@@ -1,0 +1,1317 @@
+{
+  "claim_ceiling": "BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY",
+  "decision": "CATALYTIC_WAVEFORM_ISING_V2_BATCH_GENERALIZATION_PARTIAL",
+  "freeze_commit": "9b9348064eaaffece01d5a1d7848d613a24857f5",
+  "machine_sha256": "c20f2cd4068ca32528bc52671793bca04d897456944e33ad8571083428c48930",
+  "oracle_order": {
+    "oracle_boundary_open_sequence": 2,
+    "preoracle_remote_commit": "f7249dd256d35ba2ff1e66928f6c04729138eaf9",
+    "preoracle_remote_commit_verified_sequence": 0,
+    "preoracle_roots_verified_sequence": 1
+  },
+  "ordered_batch_sha256": "4d973f7b6015fa6d9cf201dab249832610334f394ae262797516c3cf27357dbe",
+  "outcomes": [
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.993959254861,
+        0.998422386384,
+        0.999943058907,
+        0.99755703092,
+        0.995796486175
+      ],
+      "energy_reproduces": true,
+      "index": 0,
+      "lock_residual_rad": 0.0128588329958,
+      "optimum_energy": -17.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "2e2c7146539924352f15cbb7070166b2c5f935ce23b75d32b111c0122ad16623",
+      "raw_energy": -17.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.991947387897,
+        0.998493346657,
+        0.999954124289,
+        0.999367474485,
+        0.998013982868
+      ],
+      "energy_reproduces": true,
+      "index": 1,
+      "lock_residual_rad": 0.0158907654825,
+      "optimum_energy": -15.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "29c6f5f73782ed2d0fd0a24cbd59e995e543148a9770cf8a220a0b6672982445",
+      "raw_energy": -15.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_INCORRECT",
+      "coherence": [
+        0.998956101407,
+        0.969162376093,
+        0.949813190059,
+        0.994710796242,
+        0.993273248376
+      ],
+      "energy_reproduces": true,
+      "index": 2,
+      "lock_residual_rad": 0.04230709773,
+      "optimum_energy": -8.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "c8230ca1d88e4313dbc1f439171393cf499f5be2e6abc467d904bb23432ae482",
+      "raw_energy": -4.0,
+      "raw_matches_any_optimum": false,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.998561557045,
+        0.996750377636,
+        0.996001164036,
+        0.997180520231,
+        0.993393600082
+      ],
+      "energy_reproduces": true,
+      "index": 3,
+      "lock_residual_rad": 0.0557534075068,
+      "optimum_energy": -9.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "e14b0362a953d50a8e845eae93fdd5c67b9191936bad7443e77c860c81c44729",
+      "raw_energy": -9.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.997242363184,
+        0.997622770319,
+        0.97853425982,
+        0.983209714871,
+        0.998085253384
+      ],
+      "energy_reproduces": true,
+      "index": 4,
+      "lock_residual_rad": 0.0216753626069,
+      "optimum_energy": -15.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "f6d02f4d26165e957722e7d95449e6cc4e1fa44fa6c6337a9d2992b858afc205",
+      "raw_energy": -15.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.979120815139,
+        0.993757364776,
+        0.985222541172,
+        0.997768416307,
+        0.997562487664
+      ],
+      "energy_reproduces": true,
+      "index": 5,
+      "lock_residual_rad": 0.0876182328193,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "5950dd27f15ac52e092ee1c99249edcb45f853341b2f6d9df062622bf5969f95",
+      "raw_energy": -11.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.993230933106,
+        0.998470910848,
+        0.999433957242,
+        0.996852435755,
+        0.995050799079
+      ],
+      "energy_reproduces": true,
+      "index": 6,
+      "lock_residual_rad": 0.0114388886478,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "ee468a5408b0c0407e00437d38afdfab3326ab761534dcbf79c3b64c551d2731",
+      "raw_energy": -13.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.996893066091,
+        0.996709452671,
+        0.998330010589,
+        0.990411921187,
+        0.997234679568
+      ],
+      "energy_reproduces": true,
+      "index": 7,
+      "lock_residual_rad": 0.0220743725075,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "7157a757d39b57c97c87e87fe30a00dd4a178cd4f1227fc1420dd79ced966592",
+      "raw_energy": -14.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.995676377744,
+        0.997613792276,
+        0.999826731575,
+        0.998742994834,
+        0.999045013808
+      ],
+      "energy_reproduces": true,
+      "index": 8,
+      "lock_residual_rad": 0.009553907352,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "75311e25a1f2c240f9b93ca793c8f28ed7e8c8c79744df322c424a68b7fb8ec9",
+      "raw_energy": -14.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.986679302708,
+        0.993456044506,
+        0.999353165563,
+        0.995547619276,
+        0.994201474798
+      ],
+      "energy_reproduces": true,
+      "index": 9,
+      "lock_residual_rad": 0.0414575826619,
+      "optimum_energy": -8.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "323916529ddf3ba80e539713e199f3239d2d1386072eec8f8ca1509e607e9449",
+      "raw_energy": -8.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.992288918809,
+        0.996182072913,
+        0.927258632273,
+        0.985806305262,
+        0.99863092392
+      ],
+      "energy_reproduces": true,
+      "index": 10,
+      "lock_residual_rad": 0.116600836796,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "968ac435b2aaae09ce3825d5043d8e627d3808cb4f50329863d0524317bfdf9c",
+      "raw_energy": -13.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.992016004387,
+        0.999246318676,
+        0.978023542027,
+        0.994127038984,
+        0.998519539646
+      ],
+      "energy_reproduces": true,
+      "index": 11,
+      "lock_residual_rad": 0.0704931450752,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "017d66c512a014b05fef382f13438e13926ff77e3c0a50b85ccb9956c01f9374",
+      "raw_energy": -13.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.998858059537,
+        0.997508742343,
+        0.994904875744,
+        0.999526083526,
+        0.998385806812
+      ],
+      "energy_reproduces": true,
+      "index": 12,
+      "lock_residual_rad": 0.00635917689199,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "300504f3ee4212f88947c2fb5251bd7ef796fd7d2605f8efcb665fbf3f54e0c1",
+      "raw_energy": -11.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.995380289892,
+        0.997240824404,
+        0.999070800594,
+        0.997500639629,
+        0.997562301058
+      ],
+      "energy_reproduces": true,
+      "index": 13,
+      "lock_residual_rad": 0.0709849178895,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "695601ef474e4347d4cacf7863e4ab4c5f0330c369b9d6b02ab6e4849e9e4971",
+      "raw_energy": -10.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_OPTIMUM",
+      "coherence": [
+        0.996912693071,
+        0.997639639581,
+        0.998803355812,
+        0.995603420158,
+        0.990740157529
+      ],
+      "energy_reproduces": true,
+      "index": 14,
+      "lock_residual_rad": 0.848500628841,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 4,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ],
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "33086119c65afb5af57d07dea20d2e1c0f5ca9d6e58b4aa7c5919e1f6f4b8fc1",
+      "raw_energy": -9.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "unique_optimum": false
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.994196010237,
+        0.997896526904,
+        0.999934473634,
+        0.995743803647,
+        0.996395481128
+      ],
+      "energy_reproduces": true,
+      "index": 15,
+      "lock_residual_rad": 0.124319269075,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "7d7181397d20af42429932cc5423f6a595d133bfbfd5352d1b4c29d43f401a34",
+      "raw_energy": -10.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "NON_UNIQUE_OPTIMUM",
+      "coherence": [
+        0.992296520681,
+        0.992255293475,
+        0.998293163383,
+        0.999093446923,
+        0.981484858088
+      ],
+      "energy_reproduces": true,
+      "index": 16,
+      "lock_residual_rad": 0.107901177313,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "8f388115da84950092dd648dc638fa61dbc638c6326ca19fe4f700a1424a1536",
+      "raw_energy": -13.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "unique_optimum": false
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.997463399628,
+        0.996134903121,
+        0.999964010121,
+        0.997092446055,
+        0.996304223452
+      ],
+      "energy_reproduces": true,
+      "index": 17,
+      "lock_residual_rad": 0.0389594569628,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a0345e889ba53747cb3f225ab1dbe1d2613ffd494fc98af8b1661080be274a39",
+      "raw_energy": -13.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "NON_UNIQUE_OPTIMUM",
+      "coherence": [
+        0.998165151653,
+        0.993426488374,
+        0.990085362502,
+        0.986646529462,
+        0.997991565381
+      ],
+      "energy_reproduces": true,
+      "index": 18,
+      "lock_residual_rad": 0.0253728750237,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a8a280b24183b4b790b58a819a4446ed6d2579041150ec416b2fc992856a0814",
+      "raw_energy": -13.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "unique_optimum": false
+    },
+    {
+      "accepted": false,
+      "classification": "RAW_INCORRECT",
+      "coherence": [
+        0.986786760932,
+        0.990192032393,
+        0.99872218224,
+        0.997210128653,
+        0.998717347849
+      ],
+      "energy_reproduces": true,
+      "index": 19,
+      "lock_residual_rad": 0.899312693927,
+      "optimum_energy": -9.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a20a959c60798f6026109d4247f27c9241f7ccf6ac2c47bdb8648e3f3653fb39",
+      "raw_energy": -8.5,
+      "raw_matches_any_optimum": false,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.995764821135,
+        0.996390665165,
+        0.999789789737,
+        0.997536786521,
+        0.99852725981
+      ],
+      "energy_reproduces": true,
+      "index": 20,
+      "lock_residual_rad": 0.0321177205579,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "74669eac6edf145826fa632431ef24d92181c2f0803971546238389d2e9b7bea",
+      "raw_energy": -12.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.991520357735,
+        0.994906673925,
+        0.998957524167,
+        0.996993481154,
+        0.991001251392
+      ],
+      "energy_reproduces": true,
+      "index": 21,
+      "lock_residual_rad": 0.011064207934,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "593541d128702e2740ecf3f5d2ae50280d3e96b88fdc1613cb4a601d96e4bbb3",
+      "raw_energy": -9.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.994146768933,
+        0.998035921233,
+        0.99139985319,
+        0.994886846278,
+        0.998158247261
+      ],
+      "energy_reproduces": true,
+      "index": 22,
+      "lock_residual_rad": 0.0328381721235,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "15c95f50f41b252e37649669b67c30536cb571b6d6b0054df7b3f98c1dc6b3bf",
+      "raw_energy": -11.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "NON_UNIQUE_OPTIMUM",
+      "coherence": [
+        0.994490677734,
+        0.997087935295,
+        0.999364622874,
+        0.99887499072,
+        0.982523348585
+      ],
+      "energy_reproduces": true,
+      "index": 23,
+      "lock_residual_rad": 0.0245689320652,
+      "optimum_energy": -7.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "ab2b5358697155f85cc88624a9fc4d6d4a964e9b1d4805cd460293d2b43e89bb",
+      "raw_energy": -7.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "unique_optimum": false
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.993778800518,
+        0.998603514821,
+        0.999077196712,
+        0.996939122574,
+        0.99385239099
+      ],
+      "energy_reproduces": true,
+      "index": 24,
+      "lock_residual_rad": 0.0237840181793,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "5c15a71285780cfe35355489a7564f5379fef5a81392355a6b22097f0e2a15c4",
+      "raw_energy": -10.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.994642333346,
+        0.994914490842,
+        0.987347639688,
+        0.99857908665,
+        0.959379207182
+      ],
+      "energy_reproduces": true,
+      "index": 25,
+      "lock_residual_rad": 0.0760675192329,
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "dee2c613646ba5f1b5a9e1daacf0f9dd54d041e1a2562a14fbd42ef0f2b52b88",
+      "raw_energy": -15.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.999308151442,
+        0.971116846463,
+        0.994647300352,
+        0.998834034529,
+        0.998550126979
+      ],
+      "energy_reproduces": true,
+      "index": 26,
+      "lock_residual_rad": 0.0346334528831,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "8f487f1272f33d7304e3b6f89c6d731b4c3f7eb58a69880977b75e1ad13c03e9",
+      "raw_energy": -11.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_OPTIMUM",
+      "coherence": [
+        0.989379323591,
+        0.998050271846,
+        0.999912068598,
+        0.996009280831,
+        0.997312086089
+      ],
+      "energy_reproduces": true,
+      "index": 27,
+      "lock_residual_rad": 0.222104798901,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "dae7570038fb5938d01e636808664a9d1351d9553a7385e060748112771ab7ce",
+      "raw_energy": -13.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "unique_optimum": false
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.994471497226,
+        0.99868835675,
+        0.997318108832,
+        0.998566299457,
+        0.996862262685
+      ],
+      "energy_reproduces": true,
+      "index": 28,
+      "lock_residual_rad": 0.017801101185,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "4913d6b62112325109311f9e1e038fc747f93ac9e4295cfca226d94341509f8a",
+      "raw_energy": -12.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.996733788801,
+        0.999464798401,
+        0.99643065606,
+        0.994848270571,
+        0.977705002583
+      ],
+      "energy_reproduces": true,
+      "index": 29,
+      "lock_residual_rad": 0.0399771696163,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "afe317e4f713426630d0c176f491c9c6b6041559130765d6e893e46d92d47b34",
+      "raw_energy": -11.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.994547862167,
+        0.99713038916,
+        0.999967150265,
+        0.995660209116,
+        0.993719205121
+      ],
+      "energy_reproduces": true,
+      "index": 30,
+      "lock_residual_rad": 0.0237857090686,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "319ea58eefc8e4e4a25a3f708bdf893b9a79e1b42ee8f21ed5f8c20e63b14d66",
+      "raw_energy": -12.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "unique_optimum": true
+    },
+    {
+      "accepted": true,
+      "classification": "ACCEPTED_CORRECT",
+      "coherence": [
+        0.995860829193,
+        0.973522567446,
+        0.992235767219,
+        0.997977317229,
+        0.99871668998
+      ],
+      "energy_reproduces": true,
+      "index": 31,
+      "lock_residual_rad": 0.0327968732812,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "f56969c4535999799e41d2bf31950b1e5d46aca325dda8e2283b701788f6bd31",
+      "raw_energy": -13.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "unique_optimum": true
+    }
+  ],
+  "preoracle_evidence_sha256": "b698d5ca036242956a395bcdabff06d5b87f115e1fb4a23695be7be04f43353f",
+  "preoracle_trace_sha256": "9b8492b925536fafcad08a48207e4f749152d390d2122fa9936712b7ab9c74eb",
+  "promotion_criterion": {
+    "accepted_correct_count_min": 12,
+    "accepted_correct_rate_among_unique_min": 0.6,
+    "accepted_incorrect_count_max": 0,
+    "all_other_strict_controls_must_pass": true,
+    "batch_size_required": 32,
+    "native_no_smuggle_must_pass": true,
+    "restoration_success_all_instances": true,
+    "reuse_success_all_instances": true,
+    "strict_removed_transform_all_instances": true,
+    "uninterpretable_count_max": 0,
+    "unique_optimum_instance_count_min": 16
+  },
+  "schema": "catalytic_waveform_ising_v2_batch_result_v1",
+  "summary": {
+    "accepted_correct_rate_among_unique": 0.925925925926,
+    "batch_size": 32,
+    "classification_counts": {
+      "ACCEPTED_CORRECT": 25,
+      "ACCEPTED_INCORRECT": 1,
+      "NON_UNIQUE_OPTIMUM": 5,
+      "RAW_CORRECT_BELOW_GATE": 0,
+      "RAW_INCORRECT": 1,
+      "UNINTERPRETABLE": 0
+    },
+    "coherence_all_sites_distribution": {
+      "max": 0.999967150265,
+      "mean": 0.994021195976,
+      "median": 0.99685734922,
+      "min": 0.927258632273
+    },
+    "decision": "CATALYTIC_WAVEFORM_ISING_V2_BATCH_GENERALIZATION_PARTIAL",
+    "minimum_coherence_per_instance_distribution": {
+      "max": 0.996134903121,
+      "mean": 0.984315166448,
+      "median": 0.990576039358,
+      "min": 0.927258632273
+    },
+    "non_unique_raw_match_count": 5,
+    "non_unique_total": 5,
+    "promotion_checks": {
+      "accepted_correct_count_min": true,
+      "accepted_correct_rate_min": true,
+      "accepted_incorrect_max": false,
+      "all_other_strict_controls": true,
+      "batch_size": true,
+      "native_no_smuggle": true,
+      "restoration_all": true,
+      "reuse_all": true,
+      "strict_removed_transform_all": true,
+      "uninterpretable_max": true,
+      "unique_optimum_min": true
+    },
+    "promotion_pass": false,
+    "raw_optimum_agreement_unique": 25,
+    "residual_rad_distribution": {
+      "max": 0.899312693927,
+      "mean": 0.100030384473,
+      "median": 0.0337358125033,
+      "min": 0.00635917689199
+    },
+    "restoration_error_distribution": {
+      "max": 1.69071557321e-14,
+      "mean": 1.2321555471e-14,
+      "median": 1.19701291647e-14,
+      "min": 1.00345139071e-14
+    },
+    "reuse_response_delta_distribution": {
+      "max": 5.11333668161e-15,
+      "mean": 1.23467742638e-15,
+      "median": 7.28971484525e-16,
+      "min": 3.28868812981e-16
+    },
+    "reuse_restoration_error_distribution": {
+      "max": 1.60951708815e-14,
+      "mean": 1.20960173391e-14,
+      "median": 1.19161780131e-14,
+      "min": 9.88160862028e-15
+    },
+    "samplewise_non_rank_one_distribution": {
+      "max": 0.119984624431,
+      "mean": 0.0887365060233,
+      "median": 0.0911223556239,
+      "min": 0.0482143374664
+    },
+    "strict_removed_transform_history_delta_distribution": {
+      "max": 19.8841439215,
+      "mean": 15.7965137896,
+      "median": 15.3754957631,
+      "min": 12.4028906568
+    },
+    "strict_removed_transform_response_delta_distribution": {
+      "max": 2.7898486825,
+      "mean": 0.335290014782,
+      "median": 0.0446038140803,
+      "min": 0.0119151737615
+    },
+    "unique_optimum_total": 27
+  }
+}
