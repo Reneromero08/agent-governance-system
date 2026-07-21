@@ -1,0 +1,41 @@
+{
+  "claim_boundary": {
+    "catalytic_borrowing_established": false,
+    "full_carrier_state_tomography_established": false,
+    "maximum_future_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_CONFIRMED",
+    "physical_relational_memory_established": false,
+    "r2_restoration_established": false,
+    "reproducible_relation_match_coordinate_observed": false,
+    "small_wall_crossed": false
+  },
+  "evidence_context": {
+    "archive_sha256": "a1d4ce717a9b544e3476b3e4e62111f42bfdc89ada87b63fd525fc684b04fa98",
+    "archive_size": 1750461,
+    "attempt_consumed": false,
+    "preflight_failed_before_acquisition": true,
+    "preflight_failures": [
+      "temperature_sensor_authority",
+      "cpu_frequency_policy_custody"
+    ],
+    "raw_records_absent_because_acquisition_not_started": true,
+    "schema": "FAMILY10H_RELATION_ONLY_PREFLIGHT_FAILED_ADJUDICATION_CONTEXT_V1"
+  },
+  "passed": false,
+  "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+  "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_ADJUDICATION_V1",
+  "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED",
+  "validation": {
+    "custody_required": true,
+    "expected_physical_measurement": true,
+    "failures": [
+      "raw record count mismatch",
+      "source-death receipt count mismatch",
+      "source-death receipt missing",
+      "feature_freeze missing",
+      "custody envelope missing"
+    ],
+    "passed": false,
+    "raw_record_count": 0,
+    "source_death_receipt_count": 0
+  }
+}
