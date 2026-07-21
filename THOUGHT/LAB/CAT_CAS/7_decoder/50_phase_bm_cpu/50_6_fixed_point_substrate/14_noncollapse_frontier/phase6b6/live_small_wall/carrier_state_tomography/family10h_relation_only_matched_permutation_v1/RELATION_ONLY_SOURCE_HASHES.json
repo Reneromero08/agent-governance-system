@@ -9,12 +9,12 @@
       "size": 10646
     },
     "relation_only_live_controller.py": {
-      "sha256": "d3f90edcfbeeba18c40f2a96fe21b00618f936eec131d5c3fb7d138b3957a8fc",
-      "size": 11317
+      "sha256": "d71915a5bcbbd6bd78b35d45bff5b5f6b7ca54850ccfec458b8276d00b26fb8c",
+      "size": 11598
     },
     "relation_only_physical_adjudication.py": {
-      "sha256": "3e8416dbe2519b7872e4a2d37f84cdd89b844373213cdd6e93be94bbf7636668",
-      "size": 52837
+      "sha256": "76040c7b5291047bd09ee2ce27041b192e638d2138d7362ed7e03caf2be74d61",
+      "size": 77675
     },
     "relation_only_pmu_preflight.c": {
       "sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443",
@@ -25,8 +25,8 @@
       "size": 40791
     },
     "relation_only_runtime.c": {
-      "sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
-      "size": 42224
+      "sha256": "cf35aecdb7fc012c627678ace000befd8a6e6bd59d5e3fc177a9c0fb9aeb50ff",
+      "size": 49359
     },
     "relation_only_runtime.h": {
       "sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
@@ -37,8 +37,8 @@
       "size": 90457
     },
     "run_relation_only_matched_permutation.py": {
-      "sha256": "ee8db461372d9bc3d745a76aa7344e73e122e51d578abe2a321c992961767629",
-      "size": 95913
+      "sha256": "1d828517e50f8e5d887079053aff5b29250508d91ed64d8dc8b54550cd745d0d",
+      "size": 101693
     }
   },
   "pmu_preflight_helper_authority": {
@@ -85,9 +85,9 @@
       "source_tree_matches_bound_hashes": true,
       "worktree_source_matches_authority": true
     },
-    "current_head": "f14735b5c6c3f6c213997a3d6656d5f69df9b793",
+    "current_head": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
     "failures": [],
-    "manifest_freeze_commit_under_test": "f14735b5c6c3f6c213997a3d6656d5f69df9b793",
+    "manifest_freeze_commit_under_test": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
     "passed": true,
     "path_map": {
       "RELATION_ONLY_CONTRACT.md": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/RELATION_ONLY_CONTRACT.md",
@@ -101,7 +101,7 @@
       "relation_only_target.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_target.py",
       "run_relation_only_matched_permutation.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/run_relation_only_matched_permutation.py"
     },
-    "relation_source_authority_commit": "f14735b5c6c3f6c213997a3d6656d5f69df9b793",
+    "relation_source_authority_commit": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
     "schema": "FAMILY10H_RELATION_ONLY_SOURCE_AUTHORITY_VALIDATION_V1",
     "source_bundle_matches_authority": {
       "RELATION_ONLY_CONTRACT.md": true,
@@ -141,9 +141,9 @@
     }
   },
   "runtime_binary_authority": {
-    "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
+    "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=fba3d2b2c3db7eec0e1a58e58bc698d2a883992d, for GNU/Linux 3.2.0, with debug_info, not stripped",
     "compile_status": "compiled_target_compatible_linux_binary",
-    "compiled_binary_sha256": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
+    "compiled_binary_sha256": "b0a2472a18a9ece8f26f9065a5f36d826c4ba2c22162770b24193a104ea8c258",
     "compiler_flags": [
       "-std=c11",
       "-Wall",
@@ -203,11 +203,11 @@
       "size": 42768
     },
     "present": true,
-    "runtime_c_sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
+    "runtime_c_sha256": "cf35aecdb7fc012c627678ace000befd8a6e6bd59d5e3fc177a9c0fb9aeb50ff",
     "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
-    "size": 111928
+    "size": 121072
   },
-  "runtime_build_receipt_sha256": "04530964cc5a4661dda94ce1a39f9d9bbb2fdb47bbf480931be3053e7f9b3089",
+  "runtime_build_receipt_sha256": "bdeae1d770679a3ed0329edf6949a3797a14c995dbb63be3d9d162352ee83adb",
   "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V3",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
   "sensor_authority_binding": {
@@ -376,9 +376,12 @@
           "source authority tree hash mismatch: relation_only_physical_adjudication.py",
           "source file changed after source authority commit: relation_only_physical_adjudication.py",
           "source bundle member mismatch: relation_only_physical_adjudication.py",
-          "source authority tree hash mismatch: relation_only_target.py",
-          "source file changed after source authority commit: relation_only_target.py",
-          "source bundle member mismatch: relation_only_target.py",
+          "source authority tree hash mismatch: relation_only_runtime.c",
+          "source file changed after source authority commit: relation_only_runtime.c",
+          "source bundle member mismatch: relation_only_runtime.c",
+          "source authority tree hash mismatch: relation_only_live_controller.py",
+          "source file changed after source authority commit: relation_only_live_controller.py",
+          "source bundle member mismatch: relation_only_live_controller.py",
           "source authority tree hash mismatch: run_relation_only_matched_permutation.py",
           "source file changed after source authority commit: run_relation_only_matched_permutation.py",
           "source bundle member mismatch: run_relation_only_matched_permutation.py"
@@ -447,9 +450,12 @@
           "source authority tree hash mismatch: relation_only_physical_adjudication.py",
           "source file changed after source authority commit: relation_only_physical_adjudication.py",
           "source bundle member mismatch: relation_only_physical_adjudication.py",
-          "source authority tree hash mismatch: relation_only_target.py",
-          "source file changed after source authority commit: relation_only_target.py",
-          "source bundle member mismatch: relation_only_target.py",
+          "source authority tree hash mismatch: relation_only_runtime.c",
+          "source file changed after source authority commit: relation_only_runtime.c",
+          "source bundle member mismatch: relation_only_runtime.c",
+          "source authority tree hash mismatch: relation_only_live_controller.py",
+          "source file changed after source authority commit: relation_only_live_controller.py",
+          "source bundle member mismatch: relation_only_live_controller.py",
           "source authority tree hash mismatch: run_relation_only_matched_permutation.py",
           "source file changed after source authority commit: run_relation_only_matched_permutation.py",
           "source bundle member mismatch: run_relation_only_matched_permutation.py"
@@ -474,6 +480,6 @@
       "run_relation_only_matched_permutation.py"
     ],
     "path": "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
-    "sha256": "22509189aa21885cc0272114efa6decc408ccdc88a62e6c6c328f8a1354c3d0a"
+    "sha256": "7446400c2d9a3606375e019a7ddad292213aac53fcc5a62e62143bd8f5bdd74c"
   }
 }

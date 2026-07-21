@@ -23,10 +23,10 @@
     "-d",
     "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime"
   ],
-  "control_flow_audit_sha256": "0bfdfcc2967441a160f3d8fc586b23d69e4907e742a72f5a8cd5dd41948085b0",
+  "control_flow_audit_sha256": "af572a16b1874fb58ba7296e1fc18cc6bcaa4c4692906006c08193a42db50d94",
   "function_body_line_counts": {
     "execute_query_for_row": 69,
-    "execute_schedule_common": 1275,
+    "execute_schedule_common": 1562,
     "relation_only_prepare": 34,
     "relation_only_prepare_primary": 34,
     "relation_only_query_primary": 37,

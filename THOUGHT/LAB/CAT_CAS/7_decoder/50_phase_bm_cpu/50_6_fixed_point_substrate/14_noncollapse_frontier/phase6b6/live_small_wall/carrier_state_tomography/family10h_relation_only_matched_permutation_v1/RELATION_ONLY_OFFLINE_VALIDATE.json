@@ -1,10 +1,10 @@
 {
-  "build_ready": false,
+  "build_ready": true,
   "failures": [],
   "grammar_json_parse": true,
   "missing_artifacts": [],
-  "offline_validate_sha256": "fe7004eeb4369431414543ea2d6e0b61025250273278843a229493a9115afa24",
-  "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READINESS_BLOCKED",
+  "offline_validate_sha256": "fc2dfdd615a42f6b908d90d47f9a407feffdeeb3b6b1aa027ab87bbb59edd5ca",
+  "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READY_AWAITING_AUTHORIZATION",
   "passed": true,
   "required_artifacts": [
     "RELATION_ONLY_CONTRACT.md",
@@ -46,7 +46,72 @@
   "schedule_json_parse": true,
   "schema": "FAMILY10H_RELATION_ONLY_OFFLINE_VALIDATE_V2",
   "self_test_json_parse": true,
-  "source_authority_dynamic_validation": null,
+  "source_authority_dynamic_validation": {
+    "checks": {
+      "freeze_commit_exists": true,
+      "source_authority_ancestor_of_freeze": true,
+      "source_authority_commit_exists": true,
+      "source_authority_not_scalar_evidence": true,
+      "source_authority_sha_syntax": true,
+      "source_bundle_matches_authority": true,
+      "source_tree_matches_bound_hashes": true,
+      "worktree_source_matches_authority": true
+    },
+    "current_head": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+    "failures": [],
+    "manifest_freeze_commit_under_test": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+    "passed": true,
+    "path_map": {
+      "RELATION_ONLY_CONTRACT.md": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/RELATION_ONLY_CONTRACT.md",
+      "relation_only_adjudication.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_adjudication.py",
+      "relation_only_live_controller.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_live_controller.py",
+      "relation_only_physical_adjudication.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_physical_adjudication.py",
+      "relation_only_pmu_preflight.c": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight.c",
+      "relation_only_public.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_public.py",
+      "relation_only_runtime.c": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime.c",
+      "relation_only_runtime.h": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime.h",
+      "relation_only_target.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_target.py",
+      "run_relation_only_matched_permutation.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/run_relation_only_matched_permutation.py"
+    },
+    "relation_source_authority_commit": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+    "schema": "FAMILY10H_RELATION_ONLY_SOURCE_AUTHORITY_VALIDATION_V1",
+    "source_bundle_matches_authority": {
+      "RELATION_ONLY_CONTRACT.md": true,
+      "relation_only_adjudication.py": true,
+      "relation_only_live_controller.py": true,
+      "relation_only_physical_adjudication.py": true,
+      "relation_only_pmu_preflight.c": true,
+      "relation_only_public.py": true,
+      "relation_only_runtime.c": true,
+      "relation_only_runtime.h": true,
+      "relation_only_target.py": true,
+      "run_relation_only_matched_permutation.py": true
+    },
+    "tree_hash_matches": {
+      "RELATION_ONLY_CONTRACT.md": true,
+      "relation_only_adjudication.py": true,
+      "relation_only_live_controller.py": true,
+      "relation_only_physical_adjudication.py": true,
+      "relation_only_pmu_preflight.c": true,
+      "relation_only_public.py": true,
+      "relation_only_runtime.c": true,
+      "relation_only_runtime.h": true,
+      "relation_only_target.py": true,
+      "run_relation_only_matched_permutation.py": true
+    },
+    "worktree_source_matches_authority": {
+      "RELATION_ONLY_CONTRACT.md": true,
+      "relation_only_adjudication.py": true,
+      "relation_only_live_controller.py": true,
+      "relation_only_physical_adjudication.py": true,
+      "relation_only_pmu_preflight.c": true,
+      "relation_only_public.py": true,
+      "relation_only_runtime.c": true,
+      "relation_only_runtime.h": true,
+      "relation_only_target.py": true,
+      "run_relation_only_matched_permutation.py": true
+    }
+  },
   "zero_live_activity": true,
   "zero_target_contact": true
 }
