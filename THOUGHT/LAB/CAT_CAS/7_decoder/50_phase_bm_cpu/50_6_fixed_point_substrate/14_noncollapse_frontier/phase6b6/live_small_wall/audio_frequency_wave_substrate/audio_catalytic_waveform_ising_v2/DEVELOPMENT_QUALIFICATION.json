@@ -1,0 +1,3609 @@
+{
+  "claim_ceiling": "BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY",
+  "development_corpus_law": "all prior primary, reuse, held-out, and 16-batch instances are known development cases and cannot support a new generalization claim",
+  "improvement": {
+    "accepted_correct_unique_delta": 12,
+    "raw_optimum_agreement_unique_delta": 3,
+    "strict_all_controls_pass_count_delta": 9,
+    "strict_removed_transform_pass_count_delta": 9
+  },
+  "machine_law": {
+    "carrier_power_exponent": 0.9,
+    "coherence_final": 4.2,
+    "coherence_initial": 4.0,
+    "geometry_phase_scale": 0.5,
+    "interaction_floor": 0.0,
+    "lock_final": 1.3,
+    "lock_initial": 0.0,
+    "lock_schedule_power": 1.0,
+    "lock_solve": 1.2,
+    "solve_step_count": 1000,
+    "spatial_final": 0.65,
+    "spatial_initial": 0.6,
+    "step_count": 1005,
+    "time_step": 0.03,
+    "transform_channel_weight": 1.0
+  },
+  "pass": true,
+  "pass_conditions": {
+    "accepted_correct_improved": true,
+    "accepted_incorrect_zero": true,
+    "all_successor_strict_controls_pass": true,
+    "raw_optimum_behavior_not_regressed": true,
+    "restoration_within_frozen_tolerance": true,
+    "reuse_within_frozen_tolerance": true
+  },
+  "predecessor": {
+    "accepted_correct_unique": 2,
+    "accepted_incorrect_unique": 0,
+    "carrier_content_causality_pass_count": 19,
+    "flat_geometry_sensitivity_pass_count": 19,
+    "minimum_coherence_distribution": {
+      "max": 0.950844481428,
+      "mean": 0.687042932168,
+      "median": 0.737246921945,
+      "min": 0.357481815857
+    },
+    "raw_optimum_agreement_unique": 11,
+    "residual_rad_distribution": {
+      "max": 1.29295541008,
+      "mean": 0.407341549131,
+      "median": 0.269271238953,
+      "min": 0.0846321696061
+    },
+    "restoration_error_distribution": {
+      "max": 1.51434583348e-14,
+      "mean": 1.21215266047e-14,
+      "median": 1.17416254896e-14,
+      "min": 1.06773502445e-14
+    },
+    "reuse_input_error_distribution": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "min": 0.0
+    },
+    "reuse_restoration_error_distribution": {
+      "max": 1.34263562739e-14,
+      "mean": 1.14615525581e-14,
+      "median": 1.12441259109e-14,
+      "min": 1.04396390951e-14
+    },
+    "samplewise_non_rank_one_distribution": {
+      "max": 0.355170215528,
+      "mean": 0.276650557594,
+      "median": 0.286708739494,
+      "min": 0.209411294207
+    },
+    "scrambled_geometry_sensitivity_pass_count": 19,
+    "strict_all_controls_pass_count": 10,
+    "strict_removed_transform_pass_count": 10,
+    "strict_removed_transform_response_delta_distribution": {
+      "max": 3.63541204264,
+      "mean": 0.561308509757,
+      "median": 0.0136115176318,
+      "min": 4.46442739405e-15
+    },
+    "total_instance_count": 19,
+    "unique_instance_count": 14
+  },
+  "records": [
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          0.0,
+          1.0,
+          2.0,
+          -2.0
+        ],
+        [
+          0.0,
+          0.0,
+          2.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          2.0,
+          0.0,
+          2.0,
+          -1.0
+        ],
+        [
+          2.0,
+          -1.0,
+          2.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          -1.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        1.0,
+        -2.0,
+        -2.0,
+        -2.0
+      ],
+      "label": "verified_primary",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 42.0391253493,
+        "coherence": [
+          0.950844481428,
+          0.973964561983,
+          0.999355435996,
+          0.977630727537,
+          0.961986979761
+        ],
+        "minimum_coherence": 0.950844481428,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        "residual_rad": 0.0937407618198,
+        "restoration_max_abs_error": 1.17212686392e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.29393385716e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "carrier_content_history_change_l2": 4.5067370631,
+            "flat_geometry_history_change_l2": 5.010218482,
+            "missing_phase_operator_history_change_l2": 15.2291217827,
+            "no_lock_history_change_l2": 2.64143865392,
+            "no_transform_history_change_l2": 17.2522604036,
+            "omitted_inverse_step_error": 1.79934549508,
+            "omitted_restoration_error": 1.77134422465,
+            "response_deltas_l2": {
+              "flat_geometry": 1.62551643475,
+              "missing_phase_operator": 2.45555970214,
+              "no_lock": 2.09751998425,
+              "no_transform": 1.63828106862,
+              "scrambled_geometry": 1.91432803657,
+              "uniform_carrier": 1.55963392484,
+              "wrong_query": 0.923569900471
+            },
+            "samplewise_non_rank_one_residual": 0.355170215528,
+            "scrambled_geometry_history_change_l2": 9.78679467908,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": true,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 43.8090990478,
+        "coherence": [
+          0.996786547776,
+          0.99880879806,
+          0.999953489236,
+          0.999015856612,
+          0.997745169741
+        ],
+        "minimum_coherence": 0.996786547776,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        "residual_rad": 0.00690353818832,
+        "restoration_max_abs_error": 1.27388416562e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.18627732812e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.524909156433,
+              "missing_pair_operator": 13.6782747734,
+              "no_lock": 1.46025808128,
+              "no_transform": 16.4473808359,
+              "scrambled_geometry": 1.72023954373,
+              "uniform_carrier": 0.728362943744
+            },
+            "omitted_inverse_step_error": 1.71321060612,
+            "omitted_restoration_error": 1.77132053798,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00378574508334,
+              "missing_pair_operator": 0.092818537814,
+              "no_lock": 1.43946045588,
+              "no_transform": 0.0124482743609,
+              "scrambled_geometry": 0.00675347383395,
+              "uniform_carrier": 0.0019266709494,
+              "wrong_query": 0.950967835737
+            },
+            "samplewise_non_rank_one_residual": 0.12855471448,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          0.0,
+          1.0,
+          2.0,
+          -2.0
+        ],
+        [
+          0.0,
+          0.0,
+          2.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          2.0,
+          0.0,
+          2.0,
+          -1.0
+        ],
+        [
+          2.0,
+          -1.0,
+          2.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          -1.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        1.0,
+        -1.0,
+        0.5,
+        0.5,
+        -1.0
+      ],
+      "label": "verified_reuse",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 45.3020641203,
+        "coherence": [
+          0.937118450077,
+          0.978558462118,
+          0.999169178647,
+          0.975362345028,
+          0.978991354837
+        ],
+        "minimum_coherence": 0.937118450077,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          1,
+          1,
+          1,
+          -1
+        ],
+        "residual_rad": 0.0846321696061,
+        "restoration_max_abs_error": 1.11496258089e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.14158787105e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "carrier_content_history_change_l2": 4.92799897682,
+            "flat_geometry_history_change_l2": 5.53471705791,
+            "missing_phase_operator_history_change_l2": 13.8577889505,
+            "no_lock_history_change_l2": 3.19941159865,
+            "no_transform_history_change_l2": 16.2443983739,
+            "omitted_inverse_step_error": 1.79984236766,
+            "omitted_restoration_error": 1.77235658174,
+            "response_deltas_l2": {
+              "flat_geometry": 0.120116654234,
+              "missing_phase_operator": 0.0853864724965,
+              "no_lock": 1.13473485398,
+              "no_transform": 0.0136115176318,
+              "scrambled_geometry": 0.170030100846,
+              "uniform_carrier": 1.30222935009,
+              "wrong_query": 0.929469254905
+            },
+            "samplewise_non_rank_one_residual": 0.353194468678,
+            "scrambled_geometry_history_change_l2": 9.64271210965,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": true,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 43.5435733994,
+        "coherence": [
+          0.995994475638,
+          0.998777761743,
+          0.999953005136,
+          0.998932052148,
+          0.998739775964
+        ],
+        "minimum_coherence": 0.995994475638,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          1,
+          1,
+          1,
+          -1
+        ],
+        "residual_rad": 0.00714546606461,
+        "restoration_max_abs_error": 1.11963391208e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.08173617173e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.570681640355,
+              "missing_pair_operator": 12.8931457176,
+              "no_lock": 1.18213354517,
+              "no_transform": 15.9132028882,
+              "scrambled_geometry": 1.96698243362,
+              "uniform_carrier": 0.665627880293
+            },
+            "omitted_inverse_step_error": 1.71247529071,
+            "omitted_restoration_error": 1.77311155004,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00397290050576,
+              "missing_pair_operator": 0.0599399822769,
+              "no_lock": 0.67601083432,
+              "no_transform": 0.0128148540108,
+              "scrambled_geometry": 0.00698671339964,
+              "uniform_carrier": 0.00209341191734,
+              "wrong_query": 0.951602278995
+            },
+            "samplewise_non_rank_one_residual": 0.109799719951,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          1.0,
+          -2.0,
+          2.0
+        ],
+        [
+          1.0,
+          0.0,
+          -2.0,
+          2.0,
+          1.0
+        ],
+        [
+          1.0,
+          -2.0,
+          0.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          2.0,
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          2.0,
+          1.0,
+          1.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        -1.0,
+        0.5,
+        0.5,
+        -0.5
+      ],
+      "label": "first_heldout",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 42.2835813308,
+        "coherence": [
+          0.932447656707,
+          0.515990928533,
+          0.565421929116,
+          0.925963660206,
+          0.981553990842
+        ],
+        "minimum_coherence": 0.515990928533,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": 0.472893214508,
+        "restoration_max_abs_error": 1.17416254896e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.09468215425e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "carrier_content_history_change_l2": 5.96019693711,
+            "flat_geometry_history_change_l2": 6.0287624297,
+            "missing_phase_operator_history_change_l2": 13.0299736642,
+            "no_lock_history_change_l2": 4.94180981827,
+            "no_transform_history_change_l2": 19.2832384185,
+            "omitted_inverse_step_error": 1.79990720453,
+            "omitted_restoration_error": 1.77275824776,
+            "response_deltas_l2": {
+              "flat_geometry": 0.175621145272,
+              "missing_phase_operator": 0.105408517912,
+              "no_lock": 1.3516415361,
+              "no_transform": 0.0356151048861,
+              "scrambled_geometry": 0.575982748009,
+              "uniform_carrier": 0.129394283902,
+              "wrong_query": 0.903732097139
+            },
+            "samplewise_non_rank_one_residual": 0.28993381429,
+            "scrambled_geometry_history_change_l2": 7.75342273547,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": true,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 42.4816615065,
+        "coherence": [
+          0.994341595937,
+          0.994385876693,
+          0.999904133448,
+          0.996243096033,
+          0.999427392677
+        ],
+        "minimum_coherence": 0.994341595937,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": 0.0153027966534,
+        "restoration_max_abs_error": 1.14115442462e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.27907136694e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.46901823566,
+              "missing_pair_operator": 11.8959934675,
+              "no_lock": 2.09230112023,
+              "no_transform": 15.5478197548,
+              "scrambled_geometry": 1.24144821124,
+              "uniform_carrier": 0.542531436391
+            },
+            "omitted_inverse_step_error": 1.71258763818,
+            "omitted_restoration_error": 1.77125341743,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00805755488167,
+              "missing_pair_operator": 0.122725102239,
+              "no_lock": 2.13551303145,
+              "no_transform": 0.0214072855813,
+              "scrambled_geometry": 0.00856217835238,
+              "uniform_carrier": 0.00249761404093,
+              "wrong_query": 0.947737721266
+            },
+            "samplewise_non_rank_one_residual": 0.105152240164,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          -1.0,
+          2.0,
+          2.0
+        ],
+        [
+          2.0,
+          0.0,
+          -2.0,
+          1.0,
+          2.0
+        ],
+        [
+          -1.0,
+          -2.0,
+          0.0,
+          2.0,
+          -2.0
+        ],
+        [
+          2.0,
+          1.0,
+          2.0,
+          0.0,
+          1.0
+        ],
+        [
+          2.0,
+          2.0,
+          -2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        1.0,
+        -0.5,
+        2.0,
+        1.0
+      ],
+      "label": "batch_00",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 45.7508726698,
+        "coherence": [
+          0.927524105379,
+          0.928955475736,
+          0.764225565454,
+          0.864101997077,
+          0.958025062631
+        ],
+        "minimum_coherence": 0.764225565454,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        "residual_rad": 0.299606389615,
+        "restoration_max_abs_error": 1.27729035984e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.15958529865e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": false,
+          "measurements": {
+            "carrier_content_history_change_l2": 6.65235750914,
+            "flat_geometry_history_change_l2": 6.8992681263,
+            "missing_phase_operator_history_change_l2": 14.1225594792,
+            "no_lock_history_change_l2": 2.05715704785,
+            "no_transform_history_change_l2": 23.058793607,
+            "omitted_inverse_step_error": 1.79988705952,
+            "omitted_restoration_error": 1.77231887907,
+            "response_deltas_l2": {
+              "flat_geometry": 0.134576315779,
+              "missing_phase_operator": 0.110099068979,
+              "no_lock": 0.274612991739,
+              "no_transform": 1.54346655919e-11,
+              "scrambled_geometry": 0.196093739861,
+              "uniform_carrier": 0.0882541068203,
+              "wrong_query": 0.892785292551
+            },
+            "samplewise_non_rank_one_residual": 0.286708739494,
+            "scrambled_geometry_history_change_l2": 8.88349977546,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": false,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 44.9317173792,
+        "coherence": [
+          0.996555945698,
+          0.996862559503,
+          0.993187720732,
+          0.990145273421,
+          0.997321972227
+        ],
+        "minimum_coherence": 0.990145273421,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        "residual_rad": 0.0131465679494,
+        "restoration_max_abs_error": 1.23510752178e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.23679044265e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.451740917796,
+              "missing_pair_operator": 10.9335045397,
+              "no_lock": 0.494832695376,
+              "no_transform": 18.942387608,
+              "scrambled_geometry": 1.41347814276,
+              "uniform_carrier": 0.840950325835
+            },
+            "omitted_inverse_step_error": 1.71179137668,
+            "omitted_restoration_error": 1.77244276238,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00352729249933,
+              "missing_pair_operator": 0.0621959981087,
+              "no_lock": 0.0646248161324,
+              "no_transform": 0.0231079663365,
+              "scrambled_geometry": 0.00682207101114,
+              "uniform_carrier": 0.00433168937771,
+              "wrong_query": 0.946359556734
+            },
+            "samplewise_non_rank_one_residual": 0.0813670384927,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          2.0,
+          -1.0,
+          2.0
+        ],
+        [
+          2.0,
+          0.0,
+          2.0,
+          -1.0,
+          2.0
+        ],
+        [
+          2.0,
+          2.0,
+          0.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          2.0,
+          2.0,
+          -2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        0.5,
+        -1.0,
+        -0.5,
+        2.0,
+        0.5
+      ],
+      "label": "batch_01",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 42.1192683213,
+        "coherence": [
+          0.960642073758,
+          0.91897378342,
+          0.839034864526,
+          0.972863866027,
+          0.814920752891
+        ],
+        "minimum_coherence": 0.814920752891,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": 0.202354881198,
+        "restoration_max_abs_error": 1.15003243929e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.07914591754e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": false,
+          "measurements": {
+            "carrier_content_history_change_l2": 4.9400134589,
+            "flat_geometry_history_change_l2": 6.57186182954,
+            "missing_phase_operator_history_change_l2": 15.1346321937,
+            "no_lock_history_change_l2": 1.54631014469,
+            "no_transform_history_change_l2": 23.9047783906,
+            "omitted_inverse_step_error": 1.79945996723,
+            "omitted_restoration_error": 1.76809422682,
+            "response_deltas_l2": {
+              "flat_geometry": 0.0619039639331,
+              "missing_phase_operator": 0.389850121643,
+              "no_lock": 0.215523408557,
+              "no_transform": 1.22216381991e-11,
+              "scrambled_geometry": 0.160525484882,
+              "uniform_carrier": 0.0586677169959,
+              "wrong_query": 0.865343755412
+            },
+            "samplewise_non_rank_one_residual": 0.268507705798,
+            "scrambled_geometry_history_change_l2": 11.6771601253,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": false,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 40.9791323214,
+        "coherence": [
+          0.997448068379,
+          0.997368403818,
+          0.988721262626,
+          0.998795162213,
+          0.988503434605
+        ],
+        "minimum_coherence": 0.988503434605,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": 0.0373607730875,
+        "restoration_max_abs_error": 1.13682717679e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.19955474862e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.622132312951,
+              "missing_pair_operator": 12.0848275064,
+              "no_lock": 1.33227155278,
+              "no_transform": 18.826032037,
+              "scrambled_geometry": 1.53364212114,
+              "uniform_carrier": 0.836366709258
+            },
+            "omitted_inverse_step_error": 1.71640761492,
+            "omitted_restoration_error": 1.77177144692,
+            "response_deltas_l2": {
+              "flat_geometry": 0.006908158593,
+              "missing_pair_operator": 0.186175013958,
+              "no_lock": 0.0999686299906,
+              "no_transform": 0.0429781428141,
+              "scrambled_geometry": 0.0134560006591,
+              "uniform_carrier": 0.00331292510401,
+              "wrong_query": 0.952897881353
+            },
+            "samplewise_non_rank_one_residual": 0.0974175171533,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          1.0,
+          2.0,
+          -1.0
+        ],
+        [
+          1.0,
+          0.0,
+          -1.0,
+          1.0,
+          2.0
+        ],
+        [
+          1.0,
+          -1.0,
+          0.0,
+          1.0,
+          -2.0
+        ],
+        [
+          2.0,
+          1.0,
+          1.0,
+          0.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          2.0,
+          -2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        -0.5,
+        2.0,
+        2.0,
+        -1.0
+      ],
+      "label": "batch_02",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 42.9473630019,
+        "coherence": [
+          0.594765613499,
+          0.970652277318,
+          0.93740010403,
+          0.900494604327,
+          0.890078389162
+        ],
+        "minimum_coherence": 0.594765613499,
+        "raw_match": false,
+        "raw_spins": [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ],
+        "residual_rad": 0.491361087741,
+        "restoration_max_abs_error": 1.35572562974e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.30323585429e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": false,
+          "measurements": {
+            "carrier_content_history_change_l2": 7.79643156016,
+            "flat_geometry_history_change_l2": 10.4070891595,
+            "missing_phase_operator_history_change_l2": 11.9078418826,
+            "no_lock_history_change_l2": 2.79518480115,
+            "no_transform_history_change_l2": 18.8883595809,
+            "omitted_inverse_step_error": 1.79865147772,
+            "omitted_restoration_error": 1.77183223036,
+            "response_deltas_l2": {
+              "flat_geometry": 0.313830848256,
+              "missing_phase_operator": 0.254727889893,
+              "no_lock": 0.128796774491,
+              "no_transform": 3.08167577903e-09,
+              "scrambled_geometry": 0.196241737614,
+              "uniform_carrier": 0.0874091847275,
+              "wrong_query": 0.884260112636
+            },
+            "samplewise_non_rank_one_residual": 0.299436462159,
+            "scrambled_geometry_history_change_l2": 14.6768138837,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": false,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 42.0765352744,
+        "coherence": [
+          0.988250104457,
+          0.998741511702,
+          0.999758873406,
+          0.999047358093,
+          0.996061187483
+        ],
+        "minimum_coherence": 0.988250104457,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          -1,
+          1,
+          1,
+          -1
+        ],
+        "residual_rad": 0.0186440465766,
+        "restoration_max_abs_error": 1.23169725515e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.07864609143e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.516608102778,
+              "missing_pair_operator": 14.1291436814,
+              "no_lock": 2.15211715452,
+              "no_transform": 16.8421444941,
+              "scrambled_geometry": 2.03905021544,
+              "uniform_carrier": 0.835288658784
+            },
+            "omitted_inverse_step_error": 1.71192868512,
+            "omitted_restoration_error": 1.769429298,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00510250898136,
+              "missing_pair_operator": 0.0622526811406,
+              "no_lock": 1.33464139627,
+              "no_transform": 0.0230367743626,
+              "scrambled_geometry": 0.0117627427504,
+              "uniform_carrier": 0.00584206595269,
+              "wrong_query": 0.949591859119
+            },
+            "samplewise_non_rank_one_residual": 0.0877415670794,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          1.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          0.0,
+          2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          2.0,
+          2.0,
+          0.0,
+          1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        -1.0,
+        -1.0,
+        2.0,
+        -1.0
+      ],
+      "label": "batch_03",
+      "optimum_state_count": 2,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 44.0228905472,
+        "coherence": [
+          0.645517516519,
+          0.93624051728,
+          0.974705006628,
+          0.838202077332,
+          0.974030718758
+        ],
+        "minimum_coherence": 0.645517516519,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "residual_rad": 0.141057034943,
+        "restoration_max_abs_error": 1.25086530267e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.06696995921e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "carrier_content_history_change_l2": 4.66306665529,
+            "flat_geometry_history_change_l2": 7.46586316608,
+            "missing_phase_operator_history_change_l2": 15.9960447447,
+            "no_lock_history_change_l2": 2.18570777186,
+            "no_transform_history_change_l2": 16.438314223,
+            "omitted_inverse_step_error": 1.79990612164,
+            "omitted_restoration_error": 1.77123141568,
+            "response_deltas_l2": {
+              "flat_geometry": 0.183545163236,
+              "missing_phase_operator": 1.67902556911,
+              "no_lock": 2.03184094418,
+              "no_transform": 0.0309880435619,
+              "scrambled_geometry": 0.179049357738,
+              "uniform_carrier": 0.0695755287682,
+              "wrong_query": 0.838986737589
+            },
+            "samplewise_non_rank_one_residual": 0.270523766029,
+            "scrambled_geometry_history_change_l2": 13.1375505153,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": true,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 42.2545094386,
+        "coherence": [
+          0.981757951864,
+          0.996419451507,
+          0.997748718215,
+          0.99474049955,
+          0.998405271148
+        ],
+        "minimum_coherence": 0.981757951864,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "residual_rad": 0.0417109245012,
+        "restoration_max_abs_error": 1.09272488604e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.05173124146e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.632294909556,
+              "missing_pair_operator": 15.0297828809,
+              "no_lock": 2.68274215869,
+              "no_transform": 14.6496287026,
+              "scrambled_geometry": 1.55683423482,
+              "uniform_carrier": 0.688776339767
+            },
+            "omitted_inverse_step_error": 1.71129874402,
+            "omitted_restoration_error": 1.77124928799,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00496686128846,
+              "missing_pair_operator": 1.97229923159,
+              "no_lock": 3.03168638857,
+              "no_transform": 0.0460389973469,
+              "scrambled_geometry": 0.0225512904196,
+              "uniform_carrier": 0.00476240968802,
+              "wrong_query": 0.944885026515
+            },
+            "samplewise_non_rank_one_residual": 0.0995957266076,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          1.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          0.0,
+          -2.0,
+          -1.0,
+          1.0
+        ],
+        [
+          1.0,
+          -2.0,
+          0.0,
+          2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          1.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        -1.0,
+        -1.0,
+        -2.0,
+        2.0
+      ],
+      "label": "batch_04",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 43.7329239356,
+        "coherence": [
+          0.949710189471,
+          0.939359759796,
+          0.949011969861,
+          0.948095023883,
+          0.950623371057
+        ],
+        "minimum_coherence": 0.939359759796,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "residual_rad": 0.362853440396,
+        "restoration_max_abs_error": 1.12100918149e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.19104734361e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": false,
+          "measurements": {
+            "carrier_content_history_change_l2": 8.08407772829,
+            "flat_geometry_history_change_l2": 6.45557083792,
+            "missing_phase_operator_history_change_l2": 14.7699982187,
+            "no_lock_history_change_l2": 4.18522055008,
+            "no_transform_history_change_l2": 17.7652595265,
+            "omitted_inverse_step_error": 1.79877293805,
+            "omitted_restoration_error": 1.76962262315,
+            "response_deltas_l2": {
+              "flat_geometry": 0.0492520071479,
+              "missing_phase_operator": 0.839404185163,
+              "no_lock": 0.474347013657,
+              "no_transform": 1.8724875829e-11,
+              "scrambled_geometry": 0.403839389713,
+              "uniform_carrier": 0.0476707651073,
+              "wrong_query": 0.911927444792
+            },
+            "samplewise_non_rank_one_residual": 0.224225825194,
+            "scrambled_geometry_history_change_l2": 9.56966158794,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": false,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 44.9015746232,
+        "coherence": [
+          0.998320967123,
+          0.998632191014,
+          0.997522011108,
+          0.997842865336,
+          0.996746472631
+        ],
+        "minimum_coherence": 0.996746472631,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "residual_rad": 0.0277715009404,
+        "restoration_max_abs_error": 1.18169668772e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.08461459741e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.985017482117,
+              "missing_pair_operator": 15.2852248661,
+              "no_lock": 0.528506896024,
+              "no_transform": 15.1949603142,
+              "scrambled_geometry": 8.25787507886,
+              "uniform_carrier": 1.14637065282
+            },
+            "omitted_inverse_step_error": 1.72155918879,
+            "omitted_restoration_error": 1.77266021503,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00375468704655,
+              "missing_pair_operator": 0.356739088062,
+              "no_lock": 0.146060730671,
+              "no_transform": 0.033699538842,
+              "scrambled_geometry": 0.017682917202,
+              "uniform_carrier": 0.00162609803308,
+              "wrong_query": 0.949984397194
+            },
+            "samplewise_non_rank_one_residual": 0.107553240905,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          1.0,
+          2.0,
+          2.0
+        ],
+        [
+          2.0,
+          0.0,
+          -2.0,
+          -2.0,
+          2.0
+        ],
+        [
+          1.0,
+          -2.0,
+          0.0,
+          -2.0,
+          -1.0
+        ],
+        [
+          2.0,
+          -2.0,
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          2.0,
+          2.0,
+          -1.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        0.5,
+        0.5,
+        1.0,
+        -0.5
+      ],
+      "label": "batch_05",
+      "optimum_state_count": 2,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 42.7156141986,
+        "coherence": [
+          0.737246921945,
+          0.913360427,
+          0.762476545236,
+          0.749014492854,
+          0.935120232162
+        ],
+        "minimum_coherence": 0.737246921945,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ],
+        "residual_rad": 0.620594867855,
+        "restoration_max_abs_error": 1.07129690623e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.06744007014e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "carrier_content_history_change_l2": 5.68509269997,
+            "flat_geometry_history_change_l2": 4.64001966221,
+            "missing_phase_operator_history_change_l2": 15.4541688137,
+            "no_lock_history_change_l2": 2.01482874895,
+            "no_transform_history_change_l2": 20.9614556811,
+            "omitted_inverse_step_error": 1.79991170044,
+            "omitted_restoration_error": 1.77010509512,
+            "response_deltas_l2": {
+              "flat_geometry": 0.0774829252825,
+              "missing_phase_operator": 3.35218309615,
+              "no_lock": 0.379652433954,
+              "no_transform": 0.223451682078,
+              "scrambled_geometry": 0.417025271063,
+              "uniform_carrier": 0.503387635012,
+              "wrong_query": 0.811795579458
+            },
+            "samplewise_non_rank_one_residual": 0.274817557669,
+            "scrambled_geometry_history_change_l2": 15.0141532159,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": true,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 41.1055110049,
+        "coherence": [
+          0.990676821829,
+          0.995400471034,
+          0.972664150665,
+          0.991046096637,
+          0.996126344089
+        ],
+        "minimum_coherence": 0.972664150665,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ],
+        "residual_rad": 0.0701148888962,
+        "restoration_max_abs_error": 1.08496967556e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.18544580093e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.703495364194,
+              "missing_pair_operator": 13.3297747249,
+              "no_lock": 3.23538083396,
+              "no_transform": 14.618129391,
+              "scrambled_geometry": 2.08607321981,
+              "uniform_carrier": 0.805255306875
+            },
+            "omitted_inverse_step_error": 1.71937131379,
+            "omitted_restoration_error": 1.77201980958,
+            "response_deltas_l2": {
+              "flat_geometry": 0.0112560414576,
+              "missing_pair_operator": 3.9578035122,
+              "no_lock": 1.37678266036,
+              "no_transform": 0.211722214466,
+              "scrambled_geometry": 0.0340625052748,
+              "uniform_carrier": 0.00552038110034,
+              "wrong_query": 0.941165148712
+            },
+            "samplewise_non_rank_one_residual": 0.0930705761206,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          -2.0,
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          0.0,
+          1.0,
+          -1.0,
+          2.0
+        ],
+        [
+          -2.0,
+          1.0,
+          0.0,
+          -1.0,
+          2.0
+        ],
+        [
+          1.0,
+          -1.0,
+          -1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          1.0,
+          2.0,
+          2.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        2.0,
+        2.0,
+        -0.5,
+        2.0,
+        -1.0
+      ],
+      "label": "batch_06",
+      "optimum_state_count": 2,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 45.3366840823,
+        "coherence": [
+          0.956286207882,
+          0.569355810825,
+          0.357481815857,
+          0.986836958025,
+          0.963879566046
+        ],
+        "minimum_coherence": 0.357481815857,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": 1.29295541008,
+        "restoration_max_abs_error": 1.27874608894e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.09214575062e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "carrier_content_history_change_l2": 3.62153963909,
+            "flat_geometry_history_change_l2": 3.32804025178,
+            "missing_phase_operator_history_change_l2": 6.04240287643,
+            "no_lock_history_change_l2": 0.578742434997,
+            "no_transform_history_change_l2": 19.3600870098,
+            "omitted_inverse_step_error": 1.79923526256,
+            "omitted_restoration_error": 1.77278731114,
+            "response_deltas_l2": {
+              "flat_geometry": 0.13571746083,
+              "missing_phase_operator": 0.281076500631,
+              "no_lock": 0.867182002491,
+              "no_transform": 0.0380921663704,
+              "scrambled_geometry": 1.2043368395,
+              "uniform_carrier": 0.134219846397,
+              "wrong_query": 0.834487252197
+            },
+            "samplewise_non_rank_one_residual": 0.212907839724,
+            "scrambled_geometry_history_change_l2": 9.57490450342,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": true,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 41.8029083582,
+        "coherence": [
+          0.995224101256,
+          0.980083194179,
+          0.999963783786,
+          0.998926767129,
+          0.994993728181
+        ],
+        "minimum_coherence": 0.980083194179,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "residual_rad": 1.47257536123,
+        "restoration_max_abs_error": 1.12401514381e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.13335229334e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.742721555413,
+              "missing_pair_operator": 5.72257447484,
+              "no_lock": 1.09731955323,
+              "no_transform": 16.3332647114,
+              "scrambled_geometry": 1.33311598704,
+              "uniform_carrier": 0.561950868255
+            },
+            "omitted_inverse_step_error": 1.7165355651,
+            "omitted_restoration_error": 1.77176082827,
+            "response_deltas_l2": {
+              "flat_geometry": 0.364904313019,
+              "missing_pair_operator": 1.51834719118,
+              "no_lock": 0.820085860443,
+              "no_transform": 1.96540376173,
+              "scrambled_geometry": 0.528857518002,
+              "uniform_carrier": 0.0855292222634,
+              "wrong_query": 0.945552342624
+            },
+            "samplewise_non_rank_one_residual": 0.0722048715012,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          0.0,
+          -1.0,
+          -2.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          0.0,
+          1.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -2.0,
+          1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          -1.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        0.5,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "label": "batch_07",
+      "optimum_state_count": 2,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 42.8809389737,
+        "coherence": [
+          0.97460495228,
+          0.879063729654,
+          0.937148032896,
+          0.92094900733,
+          0.753964198493
+        ],
+        "minimum_coherence": 0.753964198493,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ],
+        "residual_rad": 0.185915811087,
+        "restoration_max_abs_error": 1.12601808138e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.13933172628e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": false,
+          "measurements": {
+            "carrier_content_history_change_l2": 1.96813820084,
+            "flat_geometry_history_change_l2": 3.0072360967,
+            "missing_phase_operator_history_change_l2": 7.84744428369,
+            "no_lock_history_change_l2": 1.96976819059,
+            "no_transform_history_change_l2": 18.6753798206,
+            "omitted_inverse_step_error": 1.79969510041,
+            "omitted_restoration_error": 1.76765872685,
+            "response_deltas_l2": {
+              "flat_geometry": 1.29526117639,
+              "missing_phase_operator": 1.68378391631,
+              "no_lock": 0.576227042457,
+              "no_transform": 2.10978062615e-05,
+              "scrambled_geometry": 1.45131996933,
+              "uniform_carrier": 0.04573915602,
+              "wrong_query": 0.864271051321
+            },
+            "samplewise_non_rank_one_residual": 0.21350894633,
+            "scrambled_geometry_history_change_l2": 4.75900226808,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": false,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 43.7187872362,
+        "coherence": [
+          0.998522290691,
+          0.995871017994,
+          0.99592096772,
+          0.995034852112,
+          0.988670941593
+        ],
+        "minimum_coherence": 0.988670941593,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ],
+        "residual_rad": 0.0169360655161,
+        "restoration_max_abs_error": 1.1548454303e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.27269529171e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.401749572352,
+              "missing_pair_operator": 8.10868248803,
+              "no_lock": 2.54529123401,
+              "no_transform": 15.0261524421,
+              "scrambled_geometry": 1.09647634703,
+              "uniform_carrier": 0.409848110242
+            },
+            "omitted_inverse_step_error": 1.71639668072,
+            "omitted_restoration_error": 1.76823669085,
+            "response_deltas_l2": {
+              "flat_geometry": 0.010926153221,
+              "missing_pair_operator": 1.98644779078,
+              "no_lock": 1.54348022419,
+              "no_transform": 0.0238855844608,
+              "scrambled_geometry": 0.021979343793,
+              "uniform_carrier": 0.00343484874544,
+              "wrong_query": 0.950631431498
+            },
+            "samplewise_non_rank_one_residual": 0.0806200519946,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          2.0,
+          -2.0,
+          1.0
+        ],
+        [
+          2.0,
+          0.0,
+          2.0,
+          1.0,
+          -2.0
+        ],
+        [
+          2.0,
+          2.0,
+          0.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          -2.0,
+          1.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        -0.5,
+        -1.0,
+        1.0,
+        2.0
+      ],
+      "label": "batch_08",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 42.3808079606,
+        "coherence": [
+          0.866914815196,
+          0.961231251934,
+          0.940230780673,
+          0.97195140763,
+          0.387217093983
+        ],
+        "minimum_coherence": 0.387217093983,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ],
+        "residual_rad": 0.681710735351,
+        "restoration_max_abs_error": 1.06773502445e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.2760322144e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "carrier_content_history_change_l2": 5.55584753083,
+            "flat_geometry_history_change_l2": 5.91137164609,
+            "missing_phase_operator_history_change_l2": 8.56393644241,
+            "no_lock_history_change_l2": 2.0015817257,
+            "no_transform_history_change_l2": 20.5691164373,
+            "omitted_inverse_step_error": 1.7997003284,
+            "omitted_restoration_error": 1.76817732352,
+            "response_deltas_l2": {
+              "flat_geometry": 0.537490177934,
+              "missing_phase_operator": 0.722720818551,
+              "no_lock": 1.641423242,
+              "no_transform": 0.0633011760143,
+              "scrambled_geometry": 0.436613197973,
+              "uniform_carrier": 0.107595266367,
+              "wrong_query": 0.81629463846
+            },
+            "samplewise_non_rank_one_residual": 0.244499679592,
+            "scrambled_geometry_history_change_l2": 7.98728908324,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": true,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 43.1047907393,
+        "coherence": [
+          0.995240680204,
+          0.998761324856,
+          0.996805244694,
+          0.998496742154,
+          0.997403008123
+        ],
+        "minimum_coherence": 0.995240680204,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ],
+        "residual_rad": 0.00734298509224,
+        "restoration_max_abs_error": 1.18273930014e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.27264686619e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.888449308952,
+              "missing_pair_operator": 13.8915989429,
+              "no_lock": 1.00274320212,
+              "no_transform": 16.0939717662,
+              "scrambled_geometry": 1.42801621437,
+              "uniform_carrier": 0.921540921888
+            },
+            "omitted_inverse_step_error": 1.71472738846,
+            "omitted_restoration_error": 1.77005893915,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00321280976553,
+              "missing_pair_operator": 0.0438465343339,
+              "no_lock": 1.08339089233,
+              "no_transform": 0.0136223432064,
+              "scrambled_geometry": 0.0122518160966,
+              "uniform_carrier": 0.00293145002305,
+              "wrong_query": 0.950024785839
+            },
+            "samplewise_non_rank_one_residual": 0.0766931969205,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          1.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -1.0,
+          0.0,
+          -2.0,
+          -2.0,
+          2.0
+        ],
+        [
+          1.0,
+          -2.0,
+          0.0,
+          -1.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          2.0,
+          2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        -2.0,
+        -0.5,
+        -1.0,
+        1.0
+      ],
+      "label": "batch_09",
+      "optimum_state_count": 2,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 45.1825356915,
+        "coherence": [
+          0.919729499535,
+          0.527981293931,
+          0.537191868084,
+          0.972169057964,
+          0.949307252133
+        ],
+        "minimum_coherence": 0.527981293931,
+        "raw_match": false,
+        "raw_spins": [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ],
+        "residual_rad": 0.269271238953,
+        "restoration_max_abs_error": 1.09917686482e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.06141037317e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "carrier_content_history_change_l2": 5.61489051677,
+            "flat_geometry_history_change_l2": 3.709589419,
+            "missing_phase_operator_history_change_l2": 7.56744408199,
+            "no_lock_history_change_l2": 0.972241813053,
+            "no_transform_history_change_l2": 20.3458478743,
+            "omitted_inverse_step_error": 1.79842097273,
+            "omitted_restoration_error": 1.77166664077,
+            "response_deltas_l2": {
+              "flat_geometry": 0.103332766099,
+              "missing_phase_operator": 1.17297472951,
+              "no_lock": 1.17316570307,
+              "no_transform": 3.63541204264,
+              "scrambled_geometry": 0.850592978602,
+              "uniform_carrier": 0.108192356284,
+              "wrong_query": 0.893228917696
+            },
+            "samplewise_non_rank_one_residual": 0.233172042652,
+            "scrambled_geometry_history_change_l2": 9.7732330944,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": true,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 44.7945089549,
+        "coherence": [
+          0.995469743849,
+          0.976276364607,
+          0.999652157949,
+          0.996210820368,
+          0.997432543202
+        ],
+        "minimum_coherence": 0.976276364607,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ],
+        "residual_rad": 0.0592567338579,
+        "restoration_max_abs_error": 1.31626994875e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.01492845999e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 1.11560057441,
+              "missing_pair_operator": 6.17271364575,
+              "no_lock": 3.43982649585,
+              "no_transform": 13.9351133017,
+              "scrambled_geometry": 1.66327511006,
+              "uniform_carrier": 1.27818078871
+            },
+            "omitted_inverse_step_error": 1.71639456675,
+            "omitted_restoration_error": 1.76985211125,
+            "response_deltas_l2": {
+              "flat_geometry": 0.0208805396087,
+              "missing_pair_operator": 0.0768652299587,
+              "no_lock": 2.66623149586,
+              "no_transform": 3.99458664149,
+              "scrambled_geometry": 0.0242252558786,
+              "uniform_carrier": 0.0180154588291,
+              "wrong_query": 0.949856515656
+            },
+            "samplewise_non_rank_one_residual": 0.0827791926913,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          -2.0,
+          1.0,
+          2.0
+        ],
+        [
+          -1.0,
+          0.0,
+          1.0,
+          2.0,
+          2.0
+        ],
+        [
+          -2.0,
+          1.0,
+          0.0,
+          -1.0,
+          1.0
+        ],
+        [
+          1.0,
+          2.0,
+          -1.0,
+          0.0,
+          2.0
+        ],
+        [
+          2.0,
+          2.0,
+          1.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        2.0,
+        2.0,
+        -0.5,
+        0.5
+      ],
+      "label": "batch_10",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 44.8003467927,
+        "coherence": [
+          0.559147136094,
+          0.945988246274,
+          0.879603422597,
+          0.730222536661,
+          0.921701124672
+        ],
+        "minimum_coherence": 0.559147136094,
+        "raw_match": false,
+        "raw_spins": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "residual_rad": 1.14390735942,
+        "restoration_max_abs_error": 1.4520411021e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.04810286966e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "carrier_content_history_change_l2": 5.48926853603,
+            "flat_geometry_history_change_l2": 3.75373868443,
+            "missing_phase_operator_history_change_l2": 15.1575168891,
+            "no_lock_history_change_l2": 0.321408480905,
+            "no_transform_history_change_l2": 20.1573999386,
+            "omitted_inverse_step_error": 1.79959373646,
+            "omitted_restoration_error": 1.76879825768,
+            "response_deltas_l2": {
+              "flat_geometry": 0.973212842132,
+              "missing_phase_operator": 1.3158821,
+              "no_lock": 0.350898322443,
+              "no_transform": 2.21295279073,
+              "scrambled_geometry": 2.3116757943,
+              "uniform_carrier": 0.105526073332,
+              "wrong_query": 0.799394101586
+            },
+            "samplewise_non_rank_one_residual": 0.30829266612,
+            "scrambled_geometry_history_change_l2": 13.349709899,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": true,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 44.6984174721,
+        "coherence": [
+          0.974690162725,
+          0.997205110129,
+          0.999797183835,
+          0.985166030804,
+          0.989696816623
+        ],
+        "minimum_coherence": 0.974690162725,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "residual_rad": 0.146325765372,
+        "restoration_max_abs_error": 1.24657777647e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.08018766773e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 1.31251976091,
+              "missing_pair_operator": 12.001621302,
+              "no_lock": 2.64571542124,
+              "no_transform": 19.1662770756,
+              "scrambled_geometry": 1.47282186822,
+              "uniform_carrier": 0.972624073063
+            },
+            "omitted_inverse_step_error": 1.71220407792,
+            "omitted_restoration_error": 1.77271344751,
+            "response_deltas_l2": {
+              "flat_geometry": 0.0485773218461,
+              "missing_pair_operator": 0.314906574782,
+              "no_lock": 2.15241932298,
+              "no_transform": 0.158951464188,
+              "scrambled_geometry": 0.0815353008802,
+              "uniform_carrier": 0.0138325422246,
+              "wrong_query": 0.935899349775
+            },
+            "samplewise_non_rank_one_residual": 0.0819646697884,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          -1.0,
+          2.0,
+          1.0
+        ],
+        [
+          2.0,
+          0.0,
+          -1.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          0.0,
+          -2.0,
+          -1.0
+        ],
+        [
+          2.0,
+          -2.0,
+          -2.0,
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          -2.0,
+          -1.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        1.0,
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "label": "batch_11",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 41.8336926434,
+        "coherence": [
+          0.922543634401,
+          0.818219656777,
+          0.969785083831,
+          0.935570726907,
+          0.948705323509
+        ],
+        "minimum_coherence": 0.818219656777,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ],
+        "residual_rad": 0.171214737004,
+        "restoration_max_abs_error": 1.26453379029e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.17459549735e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": false,
+          "measurements": {
+            "carrier_content_history_change_l2": 7.36779414072,
+            "flat_geometry_history_change_l2": 8.84022348611,
+            "missing_phase_operator_history_change_l2": 11.861901684,
+            "no_lock_history_change_l2": 3.06519386115,
+            "no_transform_history_change_l2": 18.1699613009,
+            "omitted_inverse_step_error": 1.79991140508,
+            "omitted_restoration_error": 1.76653273357,
+            "response_deltas_l2": {
+              "flat_geometry": 0.12391400958,
+              "missing_phase_operator": 0.0873947308202,
+              "no_lock": 0.250899277727,
+              "no_transform": 1.13417136959e-12,
+              "scrambled_geometry": 0.198454139813,
+              "uniform_carrier": 0.0388426319521,
+              "wrong_query": 0.894455202405
+            },
+            "samplewise_non_rank_one_residual": 0.299903683638,
+            "scrambled_geometry_history_change_l2": 13.2837612505,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": false,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 43.8873185079,
+        "coherence": [
+          0.994837348439,
+          0.992528284035,
+          0.998126429333,
+          0.996220898977,
+          0.997398835166
+        ],
+        "minimum_coherence": 0.992528284035,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ],
+        "residual_rad": 0.00951689896998,
+        "restoration_max_abs_error": 1.07783159281e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.11748511218e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.832325560808,
+              "missing_pair_operator": 8.9417633175,
+              "no_lock": 0.846737045548,
+              "no_transform": 15.2109552475,
+              "scrambled_geometry": 3.68024177039,
+              "uniform_carrier": 0.991949411809
+            },
+            "omitted_inverse_step_error": 1.71145806335,
+            "omitted_restoration_error": 1.77220508874,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00506123733424,
+              "missing_pair_operator": 0.064337866223,
+              "no_lock": 0.0220198285191,
+              "no_transform": 0.017316698915,
+              "scrambled_geometry": 0.00787158462359,
+              "uniform_carrier": 0.00494681912295,
+              "wrong_query": 0.946652289281
+            },
+            "samplewise_non_rank_one_residual": 0.0907915998251,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -2.0,
+          2.0,
+          2.0
+        ],
+        [
+          1.0,
+          0.0,
+          -2.0,
+          2.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          0.0,
+          -2.0,
+          2.0
+        ],
+        [
+          2.0,
+          2.0,
+          -2.0,
+          0.0,
+          1.0
+        ],
+        [
+          2.0,
+          2.0,
+          2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        0.5,
+        1.0,
+        -1.0,
+        -0.5,
+        1.0
+      ],
+      "label": "batch_12",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 46.5035370643,
+        "coherence": [
+          0.955405532731,
+          0.906264814394,
+          0.82193601742,
+          0.915350167828,
+          0.867605396101
+        ],
+        "minimum_coherence": 0.82193601742,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        "residual_rad": 0.197326275476,
+        "restoration_max_abs_error": 1.51434583348e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.07669097509e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": false,
+          "measurements": {
+            "carrier_content_history_change_l2": 7.26546196416,
+            "flat_geometry_history_change_l2": 10.8449903644,
+            "missing_phase_operator_history_change_l2": 16.6748602824,
+            "no_lock_history_change_l2": 0.307817418571,
+            "no_transform_history_change_l2": 17.6508346132,
+            "omitted_inverse_step_error": 1.79968283059,
+            "omitted_restoration_error": 1.76657768531,
+            "response_deltas_l2": {
+              "flat_geometry": 0.0672094409534,
+              "missing_phase_operator": 0.179286330468,
+              "no_lock": 0.102164338043,
+              "no_transform": 4.46442739405e-15,
+              "scrambled_geometry": 0.208595497404,
+              "uniform_carrier": 0.0665878275628,
+              "wrong_query": 0.869657275039
+            },
+            "samplewise_non_rank_one_residual": 0.305412627718,
+            "scrambled_geometry_history_change_l2": 11.4298708904,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": false,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 44.6814532628,
+        "coherence": [
+          0.996586992335,
+          0.996903101753,
+          0.989052510457,
+          0.995764939769,
+          0.991978874913
+        ],
+        "minimum_coherence": 0.989052510457,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        "residual_rad": 0.0247269995834,
+        "restoration_max_abs_error": 1.20079999925e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.09062107703e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.405492750477,
+              "missing_pair_operator": 11.3882181776,
+              "no_lock": 0.378748055673,
+              "no_transform": 17.1491277568,
+              "scrambled_geometry": 1.32522634776,
+              "uniform_carrier": 0.693262766044
+            },
+            "omitted_inverse_step_error": 1.71624112748,
+            "omitted_restoration_error": 1.77271819512,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00547746169496,
+              "missing_pair_operator": 0.109289951155,
+              "no_lock": 0.0424437549336,
+              "no_transform": 0.0320556871245,
+              "scrambled_geometry": 0.0107504070088,
+              "uniform_carrier": 0.00396547713359,
+              "wrong_query": 0.951443779033
+            },
+            "samplewise_non_rank_one_residual": 0.0694258880461,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -1.0,
+          2.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          1.0,
+          0.0,
+          1.0,
+          -2.0
+        ],
+        [
+          2.0,
+          2.0,
+          1.0,
+          0.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          -2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        -1.0,
+        -2.0,
+        2.0,
+        2.0
+      ],
+      "label": "batch_13",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 41.6828617109,
+        "coherence": [
+          0.878628816488,
+          0.962281994225,
+          0.925656750192,
+          0.769458316323,
+          0.951710811392
+        ],
+        "minimum_coherence": 0.769458316323,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        "residual_rad": 0.173322351223,
+        "restoration_max_abs_error": 1.21478135716e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.34263562739e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": false,
+          "measurements": {
+            "carrier_content_history_change_l2": 3.94976746748,
+            "flat_geometry_history_change_l2": 7.07288063632,
+            "missing_phase_operator_history_change_l2": 13.0840714856,
+            "no_lock_history_change_l2": 0.300133221472,
+            "no_transform_history_change_l2": 21.9262415188,
+            "omitted_inverse_step_error": 1.79987085957,
+            "omitted_restoration_error": 1.76856902783,
+            "response_deltas_l2": {
+              "flat_geometry": 0.102877392985,
+              "missing_phase_operator": 0.122022166464,
+              "no_lock": 0.135260848286,
+              "no_transform": 6.21691224529e-14,
+              "scrambled_geometry": 0.185498268308,
+              "uniform_carrier": 0.0643917973113,
+              "wrong_query": 0.854796503042
+            },
+            "samplewise_non_rank_one_residual": 0.288908759147,
+            "scrambled_geometry_history_change_l2": 6.90846474336,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": false,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 43.9074081747,
+        "coherence": [
+          0.994412779451,
+          0.997638203304,
+          0.995442237105,
+          0.99207784495,
+          0.99768196598
+        ],
+        "minimum_coherence": 0.99207784495,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        "residual_rad": 0.0160607868808,
+        "restoration_max_abs_error": 1.18133155598e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.21280986026e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.398400546303,
+              "missing_pair_operator": 11.3427804554,
+              "no_lock": 0.518763694398,
+              "no_transform": 16.3398181754,
+              "scrambled_geometry": 1.39679288692,
+              "uniform_carrier": 0.789242475033
+            },
+            "omitted_inverse_step_error": 1.71146495444,
+            "omitted_restoration_error": 1.76801164362,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00249844077884,
+              "missing_pair_operator": 0.0887691269281,
+              "no_lock": 0.0356239957225,
+              "no_transform": 0.0223202374366,
+              "scrambled_geometry": 0.0107234214748,
+              "uniform_carrier": 0.00490082817778,
+              "wrong_query": 0.945602314448
+            },
+            "samplewise_non_rank_one_residual": 0.11300731419,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -2.0,
+          -1.0,
+          1.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          0.0,
+          -1.0,
+          -1.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          0.0,
+          1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          -1.0,
+          1.0,
+          0.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          -1.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        -1.0,
+        -0.5,
+        -0.5,
+        -2.0
+      ],
+      "label": "batch_14",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 43.9928388794,
+        "coherence": [
+          0.937583570869,
+          0.658493383316,
+          0.896351549146,
+          0.927316418372,
+          0.801707757066
+        ],
+        "minimum_coherence": 0.658493383316,
+        "raw_match": false,
+        "raw_spins": [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "residual_rad": 0.224618096787,
+        "restoration_max_abs_error": 1.09124249749e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.12441259109e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "carrier_content_history_change_l2": 3.74282220643,
+            "flat_geometry_history_change_l2": 4.07076194688,
+            "missing_phase_operator_history_change_l2": 16.412249259,
+            "no_lock_history_change_l2": 1.67337582817,
+            "no_transform_history_change_l2": 18.4697290989,
+            "omitted_inverse_step_error": 1.79903292292,
+            "omitted_restoration_error": 1.77184289347,
+            "response_deltas_l2": {
+              "flat_geometry": 0.0808986101202,
+              "missing_phase_operator": 2.78822510627,
+              "no_lock": 0.17957689084,
+              "no_transform": 2.77313054132,
+              "scrambled_geometry": 1.13375166222,
+              "uniform_carrier": 0.104143843368,
+              "wrong_query": 0.793520780807
+            },
+            "samplewise_non_rank_one_residual": 0.209411294207,
+            "scrambled_geometry_history_change_l2": 7.79444702714,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": true,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 42.9763213761,
+        "coherence": [
+          0.996717460231,
+          0.995436930176,
+          0.999931848208,
+          0.998121066124,
+          0.998358322345
+        ],
+        "minimum_coherence": 0.995436930176,
+        "raw_match": true,
+        "raw_spins": [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        "residual_rad": 0.0497539270914,
+        "restoration_max_abs_error": 1.26959233477e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.13937229524e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.555126464375,
+              "missing_pair_operator": 12.7045063207,
+              "no_lock": 1.31044947307,
+              "no_transform": 14.2181787058,
+              "scrambled_geometry": 1.54035095323,
+              "uniform_carrier": 0.608507189473
+            },
+            "omitted_inverse_step_error": 1.72645998995,
+            "omitted_restoration_error": 1.7724084534,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00675345372549,
+              "missing_pair_operator": 0.123787115348,
+              "no_lock": 1.3110456862,
+              "no_transform": 0.0577305872082,
+              "scrambled_geometry": 0.0171059700406,
+              "uniform_carrier": 0.00377715514219,
+              "wrong_query": 0.950453165254
+            },
+            "samplewise_non_rank_one_residual": 0.0865405444258,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -2.0,
+          -2.0,
+          2.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          0.0,
+          -2.0,
+          2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          0.0,
+          2.0,
+          -2.0
+        ],
+        [
+          2.0,
+          2.0,
+          2.0,
+          0.0,
+          2.0
+        ],
+        [
+          -1.0,
+          1.0,
+          -2.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        1.0,
+        -0.5,
+        -0.5,
+        1.0,
+        2.0
+      ],
+      "label": "batch_15",
+      "optimum_state_count": 1,
+      "predecessor": {
+        "accepted": false,
+        "accepted_correct": false,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 44.5594052158,
+        "coherence": [
+          0.684005641108,
+          0.772775018693,
+          0.499926808847,
+          0.913672223709,
+          0.978812917572
+        ],
+        "minimum_coherence": 0.499926808847,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        "residual_rad": 0.630153570429,
+        "restoration_max_abs_error": 1.23480809572e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.04396390951e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": false,
+          "measurements": {
+            "carrier_content_history_change_l2": 7.07039743609,
+            "flat_geometry_history_change_l2": 10.9321731129,
+            "missing_phase_operator_history_change_l2": 11.0743654426,
+            "no_lock_history_change_l2": 0.975192927354,
+            "no_transform_history_change_l2": 22.2031635527,
+            "omitted_inverse_step_error": 1.79870435569,
+            "omitted_restoration_error": 1.77247499954,
+            "response_deltas_l2": {
+              "flat_geometry": 0.178996504678,
+              "missing_phase_operator": 0.207541878939,
+              "no_lock": 0.271703115588,
+              "no_transform": 4.45058592964e-06,
+              "scrambled_geometry": 0.713161671667,
+              "uniform_carrier": 0.121474290095,
+              "wrong_query": 0.794888361112
+            },
+            "samplewise_non_rank_one_residual": 0.317824500318,
+            "scrambled_geometry_history_change_l2": 11.2831944611,
+            "wrong_inverse_error": 0.589772264895
+          },
+          "outcomes": {
+            "carrier_content_causal": true,
+            "flat_geometry_changed_or_destroyed": true,
+            "missing_phase_operator_changed_or_destroyed": true,
+            "no_lock_changed_or_destroyed": true,
+            "no_transform_changed_or_destroyed": false,
+            "omitted_inverse_step_failed": true,
+            "omitted_restoration_failed": true,
+            "samplewise_non_rank_one": true,
+            "scrambled_geometry_changed_or_destroyed": true,
+            "wrong_inverse_failed": true,
+            "wrong_query_changed_or_destroyed": true
+          }
+        }
+      },
+      "successor": {
+        "accepted": true,
+        "accepted_correct": true,
+        "accepted_incorrect": false,
+        "carrier_displacement_l2": 44.8564861529,
+        "coherence": [
+          0.982849556811,
+          0.998351939668,
+          0.996109485801,
+          0.987223100669,
+          0.994848775233
+        ],
+        "minimum_coherence": 0.982849556811,
+        "raw_match": true,
+        "raw_spins": [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        "residual_rad": 0.0203614159841,
+        "restoration_max_abs_error": 1.12702675963e-14,
+        "reuse": {
+          "input_max_abs_error": 0.0,
+          "restoration_max_abs_error": 1.10651145122e-14,
+          "result_valid": true
+        },
+        "strict_controls": {
+          "all_pass": true,
+          "measurements": {
+            "history_deltas_l2": {
+              "flat_geometry": 0.543320743711,
+              "missing_pair_operator": 5.76317082517,
+              "no_lock": 0.38675089785,
+              "no_transform": 18.5805692764,
+              "scrambled_geometry": 1.51608935078,
+              "uniform_carrier": 0.783082617706
+            },
+            "omitted_inverse_step_error": 1.71778078006,
+            "omitted_restoration_error": 1.77248017155,
+            "response_deltas_l2": {
+              "flat_geometry": 0.00453865286634,
+              "missing_pair_operator": 0.0351824031108,
+              "no_lock": 0.0440722872015,
+              "no_transform": 0.0325790080423,
+              "scrambled_geometry": 0.00970045002505,
+              "uniform_carrier": 0.00493733843031,
+              "wrong_query": 0.940801222162
+            },
+            "samplewise_non_rank_one_residual": 0.0832220263162,
+            "wrong_inverse_error": 0.60948253745
+          },
+          "outcomes": {
+            "flat_geometry": true,
+            "no_lock": true,
+            "omitted_inverse_step": true,
+            "omitted_restoration": true,
+            "parent_child_geometry_scramble": true,
+            "removed_pair_operator": true,
+            "removed_waveform_transform": true,
+            "samplewise_non_rank_one": true,
+            "uniform_carrier_replacement": true,
+            "wrong_inverse": true,
+            "wrong_query": true
+          }
+        }
+      }
+    }
+  ],
+  "schema": "catalytic_waveform_ising_v2_development_qualification_v1",
+  "source_custody": {
+    "predecessor_adapter_sha256": "9599683ed4e178fdc2e644110e143aa99f0cfbb43b3a644379943a1022e947b9",
+    "successor_machine_sha256": "48f16ddf33e635b7f58881a0e31486dd0ec5deb181ab0fab8e0a2657a8fa5ce7"
+  },
+  "successor": {
+    "accepted_correct_unique": 14,
+    "accepted_incorrect_unique": 0,
+    "carrier_content_causality_pass_count": 19,
+    "flat_geometry_sensitivity_pass_count": 19,
+    "minimum_coherence_distribution": {
+      "max": 0.996786547776,
+      "mean": 0.988005077723,
+      "median": 0.989052510457,
+      "min": 0.972664150665
+    },
+    "raw_optimum_agreement_unique": 14,
+    "residual_rad_distribution": {
+      "max": 1.47257536123,
+      "mean": 0.108471444339,
+      "median": 0.0203614159841,
+      "min": 0.00690353818832
+    },
+    "restoration_error_distribution": {
+      "max": 1.31626994875e-14,
+      "mean": 1.17782766038e-14,
+      "median": 1.18133155598e-14,
+      "min": 1.07783159281e-14
+    },
+    "reuse_input_error_distribution": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "min": 0.0
+    },
+    "reuse_restoration_error_distribution": {
+      "max": 1.27907136694e-14,
+      "mean": 1.14865674548e-14,
+      "median": 1.13335229334e-14,
+      "min": 1.01492845999e-14
+    },
+    "samplewise_non_rank_one_distribution": {
+      "max": 0.12855471448,
+      "mean": 0.091973773508,
+      "median": 0.0877415670794,
+      "min": 0.0694258880461
+    },
+    "scrambled_geometry_sensitivity_pass_count": 19,
+    "strict_all_controls_pass_count": 19,
+    "strict_removed_transform_pass_count": 19,
+    "strict_removed_transform_response_delta_distribution": {
+      "max": 3.99458664149,
+      "mean": 0.355037161154,
+      "median": 0.0320556871245,
+      "min": 0.0124482743609
+    },
+    "total_instance_count": 19,
+    "unique_instance_count": 14
+  }
+}

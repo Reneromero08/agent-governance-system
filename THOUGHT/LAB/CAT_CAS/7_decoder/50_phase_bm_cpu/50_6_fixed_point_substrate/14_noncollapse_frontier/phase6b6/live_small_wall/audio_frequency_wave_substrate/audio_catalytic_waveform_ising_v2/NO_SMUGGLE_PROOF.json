@@ -1,0 +1,274 @@
+{
+  "actual_transitive_native_path": [
+    "execute_native_cycle",
+    "transform_channel_bank",
+    "channel_calibration",
+    "evolve_native_waveforms",
+    "native_wave_velocity",
+    "schedule",
+    "transport_shift",
+    "r4.render_trees",
+    "r4.geometry_channel_bank",
+    "r4.transport_mask_bank",
+    "r4.validate_problem"
+  ],
+  "function_records": [
+    {
+      "argument_names": [
+        "actual_beams",
+        "borrowed",
+        "coupling",
+        "field",
+        "law",
+        "lock_enabled",
+        "program_beams",
+        "relation_enabled"
+      ],
+      "closure_nonlocals": [],
+      "dynamic_evaluation_call_count": 0,
+      "forbidden_identifier_findings": [],
+      "global_reads": [
+        "DEFAULT_LAW",
+        "INITIAL_PHASES",
+        "MachineLaw",
+        "NativeExecution",
+        "SAMPLE_COUNT",
+        "SITE_COUNT",
+        "asdict",
+        "channel_calibration",
+        "evolve_native_waveforms",
+        "np",
+        "r4",
+        "transform_channel_bank",
+        "validate_problem"
+      ],
+      "label": "execute_native_cycle",
+      "matrix_multiply_count": 0,
+      "source_sha256": "b1d797c302442378ebca95cf933fde435b6204601c586727dccd78a03e876061"
+    },
+    {
+      "argument_names": [
+        "actual_beams",
+        "law",
+        "program_beams"
+      ],
+      "closure_nonlocals": [],
+      "dynamic_evaluation_call_count": 0,
+      "forbidden_identifier_findings": [],
+      "global_reads": [
+        "MachineLaw",
+        "np",
+        "r4"
+      ],
+      "label": "transform_channel_bank",
+      "matrix_multiply_count": 0,
+      "source_sha256": "55ef82b743e642fdbc3125dc06a72fb238a9eaa4f8484b5de0376b7f5d65cc36"
+    },
+    {
+      "argument_names": [
+        "borrowed",
+        "channels"
+      ],
+      "closure_nonlocals": [],
+      "dynamic_evaluation_call_count": 0,
+      "forbidden_identifier_findings": [],
+      "global_reads": [
+        "SITE_COUNT",
+        "np"
+      ],
+      "label": "channel_calibration",
+      "matrix_multiply_count": 0,
+      "source_sha256": "2c3de10bad124238adf35771f8f8b04c9bc8e16d13431bc946d3d12c02869378"
+    },
+    {
+      "argument_names": [
+        "calibration",
+        "coupling",
+        "field",
+        "frames",
+        "law",
+        "masks",
+        "relation_enabled",
+        "states",
+        "transform_channels"
+      ],
+      "closure_nonlocals": [],
+      "dynamic_evaluation_call_count": 0,
+      "forbidden_identifier_findings": [],
+      "global_reads": [
+        "MachineLaw",
+        "SAMPLE_COUNT",
+        "SITE_COUNT",
+        "native_wave_velocity",
+        "np",
+        "schedule",
+        "transport_shift"
+      ],
+      "label": "evolve_native_waveforms",
+      "matrix_multiply_count": 0,
+      "source_sha256": "1273f12d35fb8f0c132282cdf18388aa0a80dc7e971b112cb28ee2e5af3234cc"
+    },
+    {
+      "argument_names": [
+        "calibration",
+        "carrier_power_exponent",
+        "coherence_gain",
+        "coupling",
+        "field",
+        "frames",
+        "interaction_gain",
+        "lock_gain",
+        "relation_enabled",
+        "spatial_gain",
+        "states",
+        "transform_channels",
+        "weighted_coherence_fraction"
+      ],
+      "closure_nonlocals": [],
+      "dynamic_evaluation_call_count": 0,
+      "forbidden_identifier_findings": [],
+      "global_reads": [
+        "SAMPLE_COUNT",
+        "SITE_COUNT",
+        "np",
+        "validate_problem"
+      ],
+      "label": "native_wave_velocity",
+      "matrix_multiply_count": 0,
+      "source_sha256": "c9db93562f1e9bb505f97ff55867e54a73cd5477df2dfbfd4de2922c53ac85ea"
+    },
+    {
+      "argument_names": [
+        "law",
+        "step"
+      ],
+      "closure_nonlocals": [],
+      "dynamic_evaluation_call_count": 0,
+      "forbidden_identifier_findings": [],
+      "global_reads": [
+        "MachineLaw",
+        "smoothstep"
+      ],
+      "label": "schedule",
+      "matrix_multiply_count": 0,
+      "source_sha256": "a2c748b2bd2ef3b1595772de66c8bcb22ab73d50c9ddc3cb1d770402ce176318"
+    },
+    {
+      "argument_names": [
+        "site",
+        "step"
+      ],
+      "closure_nonlocals": [],
+      "dynamic_evaluation_call_count": 0,
+      "forbidden_identifier_findings": [],
+      "global_reads": [
+        "SITE_COUNT",
+        "r4"
+      ],
+      "label": "transport_shift",
+      "matrix_multiply_count": 0,
+      "source_sha256": "cce757a59f512c2443adebc60989f425718b548d11a19fb102359c34556779c8"
+    },
+    {
+      "argument_names": [
+        "trees"
+      ],
+      "closure_nonlocals": [],
+      "dynamic_evaluation_call_count": 0,
+      "forbidden_identifier_findings": [],
+      "global_reads": [
+        "Any",
+        "SAMPLE_COUNT",
+        "SITE_COUNT",
+        "Sequence",
+        "np",
+        "r0"
+      ],
+      "label": "r4.render_trees",
+      "matrix_multiply_count": 0,
+      "source_sha256": "577adf3c5a24421a2dfd39ebdb557e8036ac103f0fa386d5cf52ba3301d45261"
+    },
+    {
+      "argument_names": [
+        "program_beams"
+      ],
+      "closure_nonlocals": [],
+      "dynamic_evaluation_call_count": 0,
+      "forbidden_identifier_findings": [],
+      "global_reads": [
+        "GEOMETRY_GATE_DEPTH",
+        "SAMPLE_COUNT",
+        "SITE_COUNT",
+        "np"
+      ],
+      "label": "r4.geometry_channel_bank",
+      "matrix_multiply_count": 0,
+      "source_sha256": "c970e71b4deddd69717794064193fa6968d945ff55c5fe36d017ab2658dc6c52"
+    },
+    {
+      "argument_names": [
+        "program_beams"
+      ],
+      "closure_nonlocals": [],
+      "dynamic_evaluation_call_count": 0,
+      "forbidden_identifier_findings": [],
+      "global_reads": [
+        "SAMPLE_COUNT",
+        "SITE_COUNT",
+        "TRANSPORT_OFFSETS",
+        "TRANSPORT_PHASE_AMPLITUDE",
+        "TRANSPORT_SECOND_AMPLITUDE",
+        "np"
+      ],
+      "label": "r4.transport_mask_bank",
+      "matrix_multiply_count": 0,
+      "source_sha256": "0c8a7243452e796309c4b810c1654d09a05a4ced4d3d1f57b778764927fd2e62"
+    },
+    {
+      "argument_names": [
+        "coupling",
+        "field"
+      ],
+      "closure_nonlocals": [],
+      "dynamic_evaluation_call_count": 0,
+      "forbidden_identifier_findings": [],
+      "global_reads": [
+        "SITE_COUNT",
+        "np"
+      ],
+      "label": "r4.validate_problem",
+      "matrix_multiply_count": 0,
+      "source_sha256": "71b7484c496e78756ee97ec493b46b66564ee41bb2780b09a3a2b815550ece44"
+    }
+  ],
+  "mutable_answer_global_findings": [],
+  "pass": true,
+  "pass_conditions": {
+    "deterministic_repeat": true,
+    "dynamic_evaluation_absent": true,
+    "forbidden_identifiers_absent_from_native_path": true,
+    "matrix_multiply_absent": true,
+    "mutable_answer_globals_absent": true,
+    "scalar_boundaries_unreachable_during_guarded_runtime": true
+  },
+  "runtime_probe": {
+    "guarded_boundary_names": [
+      "development_instances",
+      "exact_oracle",
+      "ising_energy",
+      "project_boundary"
+    ],
+    "native_execution_completed_with_all_boundaries_guarded": true,
+    "repeat_displaced_max_delta": 0.0,
+    "repeat_history_max_delta": 0.0,
+    "runtime_inputs": [
+      "borrowed_complex_carrier",
+      "coupling_matrix_J",
+      "field_vector_h",
+      "recursive_complex_geometry",
+      "frozen_machine_law"
+    ]
+  },
+  "schema": "catalytic_waveform_ising_v2_no_smuggle_proof_v1",
+  "scope": "actual native call path, arguments, closures, global reads, guarded runtime, and deterministic repeated execution"
+}
