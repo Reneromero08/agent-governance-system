@@ -1,0 +1,2439 @@
+{
+  "claim_ceiling": "BOUNDED_SOFTWARE_REJECT_ONLY_WAVEFORM_STABILITY_REFERENCE_ONLY",
+  "custody": {
+    "freeze_commit": "c7ca2059c5bd78b6791bf4fbc2b8d8a04d72c26e",
+    "preoracle_commit": "62df1f8f27bedd9a13263f026160e125bc6467a3",
+    "preoracle_evidence_sha256": "c50007ede18c2c47d2c2a019dc774509d1c9d96e003dbb21f58eef32ee099224",
+    "preoracle_trace_sha256": "3a6f73bd48e2368c99154a4d40c06b2852e4338b1fd94d9ac3588260e078d0fa",
+    "remote_preoracle_required_before_this_source": true
+  },
+  "decision": "CATALYTIC_WAVEFORM_ISING_V2_STABILITY_BATCH_NOT_ESTABLISHED",
+  "discriminator_fingerprint": "0a6592beea44b303cc33fbcf5e9cf68162369fd9992544e0bc225de6a78b0376",
+  "machine_fingerprint": "c20f2cd4068ca32528bc52671793bca04d897456944e33ad8571083428c48930",
+  "outcomes": [
+    {
+      "index": 0,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "2ccb978c0a12b5094661751a21f19fb87f11d6cb12fb806584b18f076f46bb27",
+      "raw_energy": -12.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.078329630982,
+        "late_max_phase_velocity_rad_per_step": 0.000626637047856,
+        "late_mean_response_drift_l2": 0.0252374184327
+      }
+    },
+    {
+      "index": 1,
+      "nominal_accepted": true,
+      "nominal_classification": "NON_UNIQUE_OPTIMUM",
+      "optimum_energy": -9.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "800246cb05ab1a002d16510aa19b39b80ef81fe0d670a1d2d3d3f0c02cbc6755",
+      "raw_energy": -9.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "NON_UNIQUE_OPTIMUM",
+      "stability_metrics": {
+        "joint_instability_score": 0.617476823461,
+        "late_max_phase_velocity_rad_per_step": 0.00493981458769,
+        "late_mean_response_drift_l2": 0.0669581087917
+      }
+    },
+    {
+      "index": 2,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "e092fb1248723a62768c4ae2a962af68c80843cc87fe5362deffb7dbe2469865",
+      "raw_energy": -10.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.237963483503,
+        "late_max_phase_velocity_rad_per_step": 0.00345449177201,
+        "late_mean_response_drift_l2": 0.0190370786802
+      }
+    },
+    {
+      "index": 3,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "c8e1d624ce098c8ae52b9b9d4710a764762da68894c85965d905684213f21035",
+      "raw_energy": -13.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0314908715182,
+        "late_max_phase_velocity_rad_per_step": 0.000251926972146,
+        "late_mean_response_drift_l2": 0.0150095458125
+      }
+    },
+    {
+      "index": 4,
+      "nominal_accepted": true,
+      "nominal_classification": "NON_UNIQUE_OPTIMUM",
+      "optimum_energy": -12.5,
+      "optimum_state_count": 3,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ],
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "5df19dbffc9a2c308188022b84776d4853244b0b959e6108c7144aa2cc2cd659",
+      "raw_energy": -12.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "NON_UNIQUE_OPTIMUM",
+      "stability_metrics": {
+        "joint_instability_score": 0.426577068696,
+        "late_max_phase_velocity_rad_per_step": 0.00737354059879,
+        "late_mean_response_drift_l2": 0.0341261654957
+      }
+    },
+    {
+      "index": 5,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_INCORRECT",
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "6b111ed5b105407ccb07aea0a542cfc6be2210b5793611a0dbfd6b2dc271d937",
+      "raw_energy": -8.0,
+      "raw_matches_any_optimum": false,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_INCORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.585960622328,
+        "late_max_phase_velocity_rad_per_step": 0.0103603482163,
+        "late_mean_response_drift_l2": 0.0468768497863
+      }
+    },
+    {
+      "index": 6,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "1444ed575298d2f06a9367b55439934ba29f722eddca870a2f82dfbd52d70ec6",
+      "raw_energy": -12.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0870987338959,
+        "late_max_phase_velocity_rad_per_step": 0.00123783687119,
+        "late_mean_response_drift_l2": 0.00696789871167
+      }
+    },
+    {
+      "index": 7,
+      "nominal_accepted": true,
+      "nominal_classification": "NON_UNIQUE_OPTIMUM",
+      "optimum_energy": -10.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "5c88fcbe4e4f8f8c13a5f18cb7470732441bb5099dd9f077e7de3c4ef71eaa72",
+      "raw_energy": -10.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "NON_UNIQUE_OPTIMUM",
+      "stability_metrics": {
+        "joint_instability_score": 0.459208055943,
+        "late_max_phase_velocity_rad_per_step": 0.00367366444754,
+        "late_mean_response_drift_l2": 0.03889236166
+      }
+    },
+    {
+      "index": 8,
+      "nominal_accepted": false,
+      "nominal_classification": "NOMINAL_REJECTED_INCORRECT",
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "2235bb5453d591b425128a9164e61b01cb5a71ea002857cd5b3ad897f34743a1",
+      "raw_energy": -7.5,
+      "raw_matches_any_optimum": false,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "stability_accepted": false,
+      "stability_classification": "STABILITY_REJECTED_INCORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 1.88693217164,
+        "late_max_phase_velocity_rad_per_step": 0.0370868224475,
+        "late_mean_response_drift_l2": 0.150954573731
+      }
+    },
+    {
+      "index": 9,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "37d54789ab2be6985395d4c44a13e4f1fa290714793a50005ac61c03f32642b9",
+      "raw_energy": -14.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.025401035052,
+        "late_max_phase_velocity_rad_per_step": 0.000203208280416,
+        "late_mean_response_drift_l2": 0.0133561456957
+      }
+    },
+    {
+      "index": 10,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "5da701315ae73713c27d8f0980ae5bb19e7df09b3faa1054a72ef8902d499355",
+      "raw_energy": -15.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.144202522772,
+        "late_max_phase_velocity_rad_per_step": 0.00115362018218,
+        "late_mean_response_drift_l2": 0.0130276502446
+      }
+    },
+    {
+      "index": 11,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "195bbef0e27753dfad04af9cb780a7e7456a620a410868eb9a0cf7c7aca0a782",
+      "raw_energy": -10.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0602927032052,
+        "late_max_phase_velocity_rad_per_step": 0.000482341625642,
+        "late_mean_response_drift_l2": 0.0119022591039
+      }
+    },
+    {
+      "index": 12,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "e2d62c7c223eae9e7c3c35d6be9531d7d514d4d90eb20e9519ed157871bc0ead",
+      "raw_energy": -13.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.272893270347,
+        "late_max_phase_velocity_rad_per_step": 0.00218314616278,
+        "late_mean_response_drift_l2": 0.023133610915
+      }
+    },
+    {
+      "index": 13,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "3a11ec578fd848d39a6c0b4eb9119c6de54c2831e815efe2eadc374f8257f978",
+      "raw_energy": -12.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0350853119016,
+        "late_max_phase_velocity_rad_per_step": 0.000280682495212,
+        "late_mean_response_drift_l2": 0.0282346250662
+      }
+    },
+    {
+      "index": 14,
+      "nominal_accepted": false,
+      "nominal_classification": "NOMINAL_REJECTED_INCORRECT",
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "9d7d37d409db709a96d6d6bcc411533cad6519ebfca8d06d61867557b5acc854",
+      "raw_energy": -8.0,
+      "raw_matches_any_optimum": false,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "stability_accepted": false,
+      "stability_classification": "STABILITY_REJECTED_INCORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.786300771892,
+        "late_max_phase_velocity_rad_per_step": 0.0141818553107,
+        "late_mean_response_drift_l2": 0.0629040617514
+      }
+    },
+    {
+      "index": 15,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "35e7f81c933e7f0bf2b1ff8ed79dafb64bfd3ea070378eee94bb4d42f800c134",
+      "raw_energy": -10.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.57972935702,
+        "late_max_phase_velocity_rad_per_step": 0.00884158449265,
+        "late_mean_response_drift_l2": 0.0463783485616
+      }
+    },
+    {
+      "index": 16,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_INCORRECT",
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "575df8830cdf3fbaeab2e6d4c18eaaf01163d5c89137f0961947c6a5578918e4",
+      "raw_energy": -11.0,
+      "raw_matches_any_optimum": false,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_INCORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.348737815311,
+        "late_max_phase_velocity_rad_per_step": 0.00480978133777,
+        "late_mean_response_drift_l2": 0.0278990252249
+      }
+    },
+    {
+      "index": 17,
+      "nominal_accepted": false,
+      "nominal_classification": "NON_UNIQUE_OPTIMUM",
+      "optimum_energy": -9.0,
+      "optimum_state_count": 5,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "4a144576a129e30907457abc08613caa9f1d9650007728b9235e2e7293690c75",
+      "raw_energy": -9.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": false,
+      "stability_classification": "NON_UNIQUE_OPTIMUM",
+      "stability_metrics": {
+        "joint_instability_score": 1.13769663259,
+        "late_max_phase_velocity_rad_per_step": 0.0217018884623,
+        "late_mean_response_drift_l2": 0.0910157306069
+      }
+    },
+    {
+      "index": 18,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "c9406f99d8e5af195b0fc5155ef197076f746f663e09d02249580a6a5e602874",
+      "raw_energy": -11.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.030560160839,
+        "late_max_phase_velocity_rad_per_step": 0.000244481286712,
+        "late_mean_response_drift_l2": 0.0208633500075
+      }
+    },
+    {
+      "index": 19,
+      "nominal_accepted": true,
+      "nominal_classification": "NON_UNIQUE_OPTIMUM",
+      "optimum_energy": -11.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "09a479372a72a04cb5ee76824006efea88128d64a5274c5ed6562af0eda19700",
+      "raw_energy": -11.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "NON_UNIQUE_OPTIMUM",
+      "stability_metrics": {
+        "joint_instability_score": 0.72935805403,
+        "late_max_phase_velocity_rad_per_step": 0.011755124067,
+        "late_mean_response_drift_l2": 0.0583486443224
+      }
+    },
+    {
+      "index": 20,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_INCORRECT",
+      "optimum_energy": -8.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "1cdc296a135306a4b2f41c8ae25ab0e8c90e68f499cd435f2daadb0ef1bde0b3",
+      "raw_energy": -7.5,
+      "raw_matches_any_optimum": false,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_INCORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.399966512206,
+        "late_max_phase_velocity_rad_per_step": 0.00441412976592,
+        "late_mean_response_drift_l2": 0.0319973209765
+      }
+    },
+    {
+      "index": 21,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "b5772d70938416d498c89c1f50eae7a8dcd9df45b78b5b6ff53a07652c8eb75e",
+      "raw_energy": -14.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0472832629318,
+        "late_max_phase_velocity_rad_per_step": 0.000378266103454,
+        "late_mean_response_drift_l2": 0.0104327133907
+      }
+    },
+    {
+      "index": 22,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "1e8a153162773d6b00bbfdd75534d650821d32daa85ee9d130573101318c292a",
+      "raw_energy": -14.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0359066975251,
+        "late_max_phase_velocity_rad_per_step": 0.000287253580201,
+        "late_mean_response_drift_l2": 0.01063233798
+      }
+    },
+    {
+      "index": 23,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "d80f3d4b82839ab81bf93eede4896b6558336267f628c69fdf597344b2da6434",
+      "raw_energy": -11.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0911122039013,
+        "late_max_phase_velocity_rad_per_step": 0.000728897631211,
+        "late_mean_response_drift_l2": 0.0100809641991
+      }
+    },
+    {
+      "index": 24,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "425aa7aff72c1bc2594802e03a93dd3d241bdf5951ccfb3913cd715f56a75fe5",
+      "raw_energy": -12.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0339598780136,
+        "late_max_phase_velocity_rad_per_step": 0.000271679024109,
+        "late_mean_response_drift_l2": 0.0185181067281
+      }
+    },
+    {
+      "index": 25,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "879cc1e946f66c9e19ba7d8dfc88055ad4349d94b0a186a0dc6e3fa25325a663",
+      "raw_energy": -15.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.027949078038,
+        "late_max_phase_velocity_rad_per_step": 0.000223592624304,
+        "late_mean_response_drift_l2": 0.0138196203993
+      }
+    },
+    {
+      "index": 26,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "d18592cb4bf36a3b16034153f9d960220b28ce7a9b25a22c9e07b8b24d805a6f",
+      "raw_energy": -15.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0510649353661,
+        "late_max_phase_velocity_rad_per_step": 0.000408519482929,
+        "late_mean_response_drift_l2": 0.0223932737211
+      }
+    },
+    {
+      "index": 27,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "eb225f42bbde778c90b2dc519e602f1b881f9ec6b988b62749e6301cb5039abf",
+      "raw_energy": -15.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0270566314086,
+        "late_max_phase_velocity_rad_per_step": 0.000216453051268,
+        "late_mean_response_drift_l2": 0.0155343860144
+      }
+    },
+    {
+      "index": 28,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "af5a08af46941d3ff309ebc91d247ddfb6962adf9adfdb4377915cffe38f894f",
+      "raw_energy": -13.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.128859876352,
+        "late_max_phase_velocity_rad_per_step": 0.00103087901082,
+        "late_mean_response_drift_l2": 0.0110076496707
+      }
+    },
+    {
+      "index": 29,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "62e2a88542a7887b6a7c6b989aeda4669d2879f6d0ed09c1504731ace6a646ff",
+      "raw_energy": -10.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.335409748544,
+        "late_max_phase_velocity_rad_per_step": 0.00268327798835,
+        "late_mean_response_drift_l2": 0.0336743474203
+      }
+    },
+    {
+      "index": 30,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -19.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "1f2ed0914ce10bf6ff1426f51e840e77c4deb4478d22a870883c45b124f00ebb",
+      "raw_energy": -19.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.150410115424,
+        "late_max_phase_velocity_rad_per_step": 0.00120328092339,
+        "late_mean_response_drift_l2": 0.0195026609447
+      }
+    },
+    {
+      "index": 31,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "4041c5e0e8fe70418da0b0d44f56ff2e4dfb76e18585612880a1a8bd8e622caa",
+      "raw_energy": -12.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.253219968489,
+        "late_max_phase_velocity_rad_per_step": 0.00305622103712,
+        "late_mean_response_drift_l2": 0.0202575974791
+      }
+    },
+    {
+      "index": 32,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -15.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "1ae1b199044a99eed9dd6371dd327866d0fdcba50222f494284409ff099b0b24",
+      "raw_energy": -15.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.157842692991,
+        "late_max_phase_velocity_rad_per_step": 0.00214259252235,
+        "late_mean_response_drift_l2": 0.0126274154393
+      }
+    },
+    {
+      "index": 33,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "48ad75c10be4bdb1f1236103657d84560d0dbeb00c2f7aea61aa165a6cd54c6f",
+      "raw_energy": -14.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0739113129092,
+        "late_max_phase_velocity_rad_per_step": 0.000591290503273,
+        "late_mean_response_drift_l2": 0.0182445915276
+      }
+    },
+    {
+      "index": 34,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "6913e56beccc020b4a823a014f8f3c56e05902c59ed45680fe37b2de7cec6b3d",
+      "raw_energy": -12.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.442018808566,
+        "late_max_phase_velocity_rad_per_step": 0.00691880596305,
+        "late_mean_response_drift_l2": 0.0353615046853
+      }
+    },
+    {
+      "index": 35,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "889d973cd8a2431f1e18df8682128dbe5c4957fc380e31f75113bf9fd588d7f9",
+      "raw_energy": -14.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.272509985177,
+        "late_max_phase_velocity_rad_per_step": 0.00512631467665,
+        "late_mean_response_drift_l2": 0.0218007988141
+      }
+    },
+    {
+      "index": 36,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "b9ef832b292f09e8e1a1789544690eda33090f15890a8f10eb9145eb8b13fcd0",
+      "raw_energy": -13.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.110918813765,
+        "late_max_phase_velocity_rad_per_step": 0.000887350510123,
+        "late_mean_response_drift_l2": 0.0156282724797
+      }
+    },
+    {
+      "index": 37,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "6b2c9e1886f22df002315ee39187c9127331085b1b846a8f3572f0abe500151e",
+      "raw_energy": -13.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.298009975203,
+        "late_max_phase_velocity_rad_per_step": 0.00478163962646,
+        "late_mean_response_drift_l2": 0.0238407980162
+      }
+    },
+    {
+      "index": 38,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -15.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "a28cb853ac540ba10b58d83b0f1218661bf72d2230d9f687a2fdefd671f02175",
+      "raw_energy": -15.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.333264576082,
+        "late_max_phase_velocity_rad_per_step": 0.00266611660865,
+        "late_mean_response_drift_l2": 0.0336877934325
+      }
+    },
+    {
+      "index": 39,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_INCORRECT",
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a705704eb360c2ddd83ac1c8259a9fbfbcc4669eb275644618c87cd86fdd11ab",
+      "raw_energy": -12.5,
+      "raw_matches_any_optimum": false,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_INCORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.547303888942,
+        "late_max_phase_velocity_rad_per_step": 0.00529276160173,
+        "late_mean_response_drift_l2": 0.0437843111154
+      }
+    },
+    {
+      "index": 40,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "1ea5a8a8162f5bb58d55d321d747761160bbf43385d553d3bf841e6a15968bdb",
+      "raw_energy": -13.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.130999161115,
+        "late_max_phase_velocity_rad_per_step": 0.00104799328892,
+        "late_mean_response_drift_l2": 0.0155066667933
+      }
+    },
+    {
+      "index": 41,
+      "nominal_accepted": true,
+      "nominal_classification": "NON_UNIQUE_OPTIMUM",
+      "optimum_energy": -13.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "87e6dc8b407fac2f054bbcd5b1f723951f6201a11e6d5c1b3299c15f9bee3199",
+      "raw_energy": -13.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "NON_UNIQUE_OPTIMUM",
+      "stability_metrics": {
+        "joint_instability_score": 0.441253401106,
+        "late_max_phase_velocity_rad_per_step": 0.00518946133778,
+        "late_mean_response_drift_l2": 0.0353002720885
+      }
+    },
+    {
+      "index": 42,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "f81aaae1b0e50aa7071f27acee0a6f94a0cf041a59f552571eeb3c2500d042da",
+      "raw_energy": -14.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.173645913383,
+        "late_max_phase_velocity_rad_per_step": 0.00184692262114,
+        "late_mean_response_drift_l2": 0.0138916730707
+      }
+    },
+    {
+      "index": 43,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "e945d1046cef14ffec671976b96b0787a93f8313e872d957a4d482d91c07816a",
+      "raw_energy": -14.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.252150146922,
+        "late_max_phase_velocity_rad_per_step": 0.00283362953546,
+        "late_mean_response_drift_l2": 0.0201720117537
+      }
+    },
+    {
+      "index": 44,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a418b5a9530855bc70108a48abb37330630ae017f9028967729c1d2a827e475e",
+      "raw_energy": -12.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.124248028804,
+        "late_max_phase_velocity_rad_per_step": 0.00102364938946,
+        "late_mean_response_drift_l2": 0.00993984230434
+      }
+    },
+    {
+      "index": 45,
+      "nominal_accepted": true,
+      "nominal_classification": "NON_UNIQUE_OPTIMUM",
+      "optimum_energy": -9.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ],
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "f0f1fb693898df8e6277b39f9e9ec14ec73e96f5c2da0be4d8e827b3b5cfa8f5",
+      "raw_energy": -9.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "NON_UNIQUE_OPTIMUM",
+      "stability_metrics": {
+        "joint_instability_score": 0.276891394726,
+        "late_max_phase_velocity_rad_per_step": 0.00354100467895,
+        "late_mean_response_drift_l2": 0.0221513115781
+      }
+    },
+    {
+      "index": 46,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "e502d6bb2339fcc06af558ca707e67b1075e485780b9d4ffe9a5a4a316ee469a",
+      "raw_energy": -11.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.184546526217,
+        "late_max_phase_velocity_rad_per_step": 0.00147637220974,
+        "late_mean_response_drift_l2": 0.0232119553948
+      }
+    },
+    {
+      "index": 47,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "a2dc913af71dc92fd1dbbc0ac42bba58f7f02c816a50a173598ccd73c4c6085e",
+      "raw_energy": -10.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.435874699341,
+        "late_max_phase_velocity_rad_per_step": 0.00588561213488,
+        "late_mean_response_drift_l2": 0.0348699759473
+      }
+    },
+    {
+      "index": 48,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "1f19a772d15da6ce0dad862dc2855ff38cd182cbfa58bab6ade149341c10964f",
+      "raw_energy": -12.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.155794975695,
+        "late_max_phase_velocity_rad_per_step": 0.00225885435853,
+        "late_mean_response_drift_l2": 0.0124635980556
+      }
+    },
+    {
+      "index": 49,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "aa06b0c3e972a9eece74d6a459cf265742aa98639ef46d7a1c8c84a29e15eb75",
+      "raw_energy": -13.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.234569723856,
+        "late_max_phase_velocity_rad_per_step": 0.00187655779085,
+        "late_mean_response_drift_l2": 0.037098977964
+      }
+    },
+    {
+      "index": 50,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "8ff24164f0ebe2a98ba27a2f7c7bd62e87e5589924f14054f5a5dad8b964945a",
+      "raw_energy": -11.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.229520332368,
+        "late_max_phase_velocity_rad_per_step": 0.00242536041037,
+        "late_mean_response_drift_l2": 0.0183616265895
+      }
+    },
+    {
+      "index": 51,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "9b8a79f2447bd7d66106c854e53f01aceaa72e154d8eb70de273e7bebfb93aa8",
+      "raw_energy": -9.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0482403880465,
+        "late_max_phase_velocity_rad_per_step": 0.000385923104372,
+        "late_mean_response_drift_l2": 0.021281209984
+      }
+    },
+    {
+      "index": 52,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "2be0c9edd4e0fb45b44e1d7e43fbba3bb965f005d875289c1702638a169a8b16",
+      "raw_energy": -14.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0745324181981,
+        "late_max_phase_velocity_rad_per_step": 0.000596259345585,
+        "late_mean_response_drift_l2": 0.0282553676373
+      }
+    },
+    {
+      "index": 53,
+      "nominal_accepted": true,
+      "nominal_classification": "NON_UNIQUE_OPTIMUM",
+      "optimum_energy": -10.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "05c4523fd94cf799d36e47675544f3b6e29a71224f7bc59de1a2b649bc956119",
+      "raw_energy": -10.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "NON_UNIQUE_OPTIMUM",
+      "stability_metrics": {
+        "joint_instability_score": 0.559819482855,
+        "late_max_phase_velocity_rad_per_step": 0.00447855586284,
+        "late_mean_response_drift_l2": 0.0473892979419
+      }
+    },
+    {
+      "index": 54,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -9.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "2609fa12f932a2be7e8993cfebcf070a1ca1f9b1b9f3c84279070a72d4297db6",
+      "raw_energy": -9.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.0498957386806,
+        "late_max_phase_velocity_rad_per_step": 0.000399165909445,
+        "late_mean_response_drift_l2": 0.0237050616947
+      }
+    },
+    {
+      "index": 55,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "5ec28f01c41fca63eb9011c7c9490816555e58213104989d496299ae04a202c6",
+      "raw_energy": -9.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.363525187367,
+        "late_max_phase_velocity_rad_per_step": 0.00290820149893,
+        "late_mean_response_drift_l2": 0.0355320886397
+      }
+    },
+    {
+      "index": 56,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_INCORRECT",
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "24707cf470f84421bea9577e6a27f93477ca83d36721fb290807d364ac092220",
+      "raw_energy": -8.0,
+      "raw_matches_any_optimum": false,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_INCORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.845300199557,
+        "late_max_phase_velocity_rad_per_step": 0.00715633197655,
+        "late_mean_response_drift_l2": 0.0676240159645
+      }
+    },
+    {
+      "index": 57,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "383195396b36894e86acb7ba26a9bd51e689036a0f52c9637d2c63342c9f502e",
+      "raw_energy": -13.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.059519109933,
+        "late_max_phase_velocity_rad_per_step": 0.000476152879464,
+        "late_mean_response_drift_l2": 0.010999710187
+      }
+    },
+    {
+      "index": 58,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -9.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "ae11f488bf40dce97331dbb13778c37642b785a746457c2849261f81e033b8e7",
+      "raw_energy": -9.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.266681534401,
+        "late_max_phase_velocity_rad_per_step": 0.00360602579031,
+        "late_mean_response_drift_l2": 0.0213345227521
+      }
+    },
+    {
+      "index": 59,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "40e7ad40a99ea12ca422a34d6fc7938a795c99ea0d1a9650aaeeedcd5cc13c21",
+      "raw_energy": -10.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.104791925545,
+        "late_max_phase_velocity_rad_per_step": 0.000984405921882,
+        "late_mean_response_drift_l2": 0.00838335404359
+      }
+    },
+    {
+      "index": 60,
+      "nominal_accepted": false,
+      "nominal_classification": "NOMINAL_REJECTED_INCORRECT",
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "3a3eed2ac2267022c3bdd5483560c31726d640e74e5f80109b4ed4dcbaabbb50",
+      "raw_energy": -8.5,
+      "raw_matches_any_optimum": false,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stability_accepted": false,
+      "stability_classification": "STABILITY_REJECTED_INCORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 2.10615839672,
+        "late_max_phase_velocity_rad_per_step": 0.0376281317651,
+        "late_mean_response_drift_l2": 0.168492671738
+      }
+    },
+    {
+      "index": 61,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "6a1221787849ebc2e7d47c610f698e39e771b22bc325803324684e04f6746426",
+      "raw_energy": -12.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.299050721838,
+        "late_max_phase_velocity_rad_per_step": 0.00509167444831,
+        "late_mean_response_drift_l2": 0.023924057747
+      }
+    },
+    {
+      "index": 62,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "9e25d52023ae37f2c7b022f8ffd0d7a5d0a2ecf14c2467394d1b6a11ad52f210",
+      "raw_energy": -10.0,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.214706054663,
+        "late_max_phase_velocity_rad_per_step": 0.0017176484373,
+        "late_mean_response_drift_l2": 0.0245151026059
+      }
+    },
+    {
+      "index": 63,
+      "nominal_accepted": true,
+      "nominal_classification": "NOMINAL_ACCEPTED_CORRECT",
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "111164f55a5e209b105eb844b474f369cbb7c6ed7264c0afde2897eede974d22",
+      "raw_energy": -12.5,
+      "raw_matches_any_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "stability_accepted": true,
+      "stability_classification": "STABILITY_ACCEPTED_CORRECT",
+      "stability_metrics": {
+        "joint_instability_score": 0.346946629337,
+        "late_max_phase_velocity_rad_per_step": 0.00492919134907,
+        "late_mean_response_drift_l2": 0.0277557303469
+      }
+    }
+  ],
+  "preoracle_seal_sha256": "cf7703166e59363d837f69e1c4d4ed8106a303c83d44e0b3e43bc31bf7424ee4",
+  "promotion_criterion": {
+    "accepted_correct_count_min": 32,
+    "accepted_correct_rate_among_unique_min": 0.8,
+    "accepted_incorrect_count_max": 0,
+    "batch_size_required": 64,
+    "diagnostic_restoration_all_instances": true,
+    "native_no_smuggle_must_pass": true,
+    "nominal_restoration_all_instances": true,
+    "reuse_all_instances": true,
+    "stability_controls_all_instances": true,
+    "stability_gate_no_smuggle_must_pass": true,
+    "strict_v2_controls_all_instances": true,
+    "uninterpretable_count_max": 0,
+    "unique_optimum_instance_count_min": 32
+  },
+  "schema": "catalytic_waveform_ising_v2_stability_batch_results_v1",
+  "summary": {
+    "batch_size": 64,
+    "correct_result_retention_rate": 1.0,
+    "decision": "CATALYTIC_WAVEFORM_ISING_V2_STABILITY_BATCH_NOT_ESTABLISHED",
+    "false_accept_reduction_count": 0,
+    "false_accept_reduction_rate": 0.0,
+    "meaningful_false_accept_reduction": false,
+    "nominal_counts": {
+      "NOMINAL_ACCEPTED_CORRECT": 48,
+      "NOMINAL_ACCEPTED_INCORRECT": 5,
+      "NOMINAL_REJECTED_CORRECT": 0,
+      "NOMINAL_REJECTED_INCORRECT": 3
+    },
+    "non_unique_count": 8,
+    "non_unique_raw_optimum_match_count": 8,
+    "promotion_checks": {
+      "accepted_correct_count_min": true,
+      "accepted_correct_rate_among_unique_min": true,
+      "accepted_incorrect_count_max": false,
+      "batch_size": true,
+      "diagnostic_restoration_all_instances": true,
+      "native_no_smuggle": true,
+      "nominal_restoration_all_instances": true,
+      "raw_results_unchanged": true,
+      "reuse_all_instances": true,
+      "stability_controls_all_instances": true,
+      "stability_gate_no_smuggle": true,
+      "strict_v2_controls_all_instances": true,
+      "uninterpretable_count_max": true,
+      "unique_optimum_instance_count_min": true
+    },
+    "promotion_pass": false,
+    "stability_counts": {
+      "STABILITY_ACCEPTED_CORRECT": 48,
+      "STABILITY_ACCEPTED_INCORRECT": 5,
+      "STABILITY_REJECTED_CORRECT": 0,
+      "STABILITY_REJECTED_INCORRECT": 3
+    },
+    "stability_metric_distributions": {
+      "ALL_INTERPRETABLE": {
+        "count": 64,
+        "joint_instability_score": {
+          "max": 2.10615839672,
+          "mean": 0.318092752335,
+          "median": 0.232045028112,
+          "min": 0.025401035052
+        },
+        "late_max_phase_velocity_rad_per_step": {
+          "max": 0.0376281317651,
+          "mean": 0.00434242507727,
+          "median": 0.00222100026066,
+          "min": 0.000203208280416
+        },
+        "late_mean_response_drift_l2": {
+          "max": 0.168492671738,
+          "mean": 0.0308767190603,
+          "median": 0.022763442318,
+          "min": 0.00696789871167
+        }
+      },
+      "NOMINAL_ACCEPTED_CORRECT": {
+        "count": 48,
+        "joint_instability_score": {
+          "max": 0.57972935702,
+          "mean": 0.170895726197,
+          "median": 0.137600841944,
+          "min": 0.025401035052
+        },
+        "late_max_phase_velocity_rad_per_step": {
+          "max": 0.00884158449265,
+          "mean": 0.00196524976001,
+          "median": 0.00117845055279,
+          "min": 0.000203208280416
+        },
+        "late_mean_response_drift_l2": {
+          "max": 0.0463783485616,
+          "mean": 0.0204457353559,
+          "median": 0.0198373363492,
+          "min": 0.00696789871167
+        }
+      },
+      "NOMINAL_ACCEPTED_INCORRECT": {
+        "count": 5,
+        "joint_instability_score": {
+          "max": 0.845300199557,
+          "mean": 0.545453807669,
+          "median": 0.547303888942,
+          "min": 0.348737815311
+        },
+        "late_max_phase_velocity_rad_per_step": {
+          "max": 0.0103603482163,
+          "mean": 0.00640667057965,
+          "median": 0.00529276160173,
+          "min": 0.00441412976592
+        },
+        "late_mean_response_drift_l2": {
+          "max": 0.0676240159645,
+          "mean": 0.0436363046135,
+          "median": 0.0437843111154,
+          "min": 0.0278990252249
+        }
+      },
+      "NOMINAL_REJECTED_INCORRECT": {
+        "count": 3,
+        "joint_instability_score": {
+          "max": 2.10615839672,
+          "mean": 1.59313044675,
+          "median": 1.88693217164,
+          "min": 0.786300771892
+        },
+        "late_max_phase_velocity_rad_per_step": {
+          "max": 0.0376281317651,
+          "mean": 0.0296322698411,
+          "median": 0.0370868224475,
+          "min": 0.0141818553107
+        },
+        "late_mean_response_drift_l2": {
+          "max": 0.168492671738,
+          "mean": 0.12745043574,
+          "median": 0.150954573731,
+          "min": 0.0629040617514
+        }
+      },
+      "NON_UNIQUE_OPTIMUM": {
+        "count": 8,
+        "joint_instability_score": {
+          "max": 1.13769663259,
+          "mean": 0.581035114176,
+          "median": 0.509513769399,
+          "min": 0.276891394726
+        },
+        "late_max_phase_velocity_rad_per_step": {
+          "max": 0.0217018884623,
+          "mean": 0.00783163175536,
+          "median": 0.00506463796273,
+          "min": 0.00354100467895
+        },
+        "late_mean_response_drift_l2": {
+          "max": 0.0910157306069,
+          "mean": 0.0492727365606,
+          "median": 0.0431408298009,
+          "min": 0.0221513115781
+        }
+      },
+      "STABILITY_ACCEPTED_CORRECT": {
+        "count": 48,
+        "joint_instability_score": {
+          "max": 0.57972935702,
+          "mean": 0.170895726197,
+          "median": 0.137600841944,
+          "min": 0.025401035052
+        },
+        "late_max_phase_velocity_rad_per_step": {
+          "max": 0.00884158449265,
+          "mean": 0.00196524976001,
+          "median": 0.00117845055279,
+          "min": 0.000203208280416
+        },
+        "late_mean_response_drift_l2": {
+          "max": 0.0463783485616,
+          "mean": 0.0204457353559,
+          "median": 0.0198373363492,
+          "min": 0.00696789871167
+        }
+      },
+      "STABILITY_ACCEPTED_INCORRECT": {
+        "count": 5,
+        "joint_instability_score": {
+          "max": 0.845300199557,
+          "mean": 0.545453807669,
+          "median": 0.547303888942,
+          "min": 0.348737815311
+        },
+        "late_max_phase_velocity_rad_per_step": {
+          "max": 0.0103603482163,
+          "mean": 0.00640667057965,
+          "median": 0.00529276160173,
+          "min": 0.00441412976592
+        },
+        "late_mean_response_drift_l2": {
+          "max": 0.0676240159645,
+          "mean": 0.0436363046135,
+          "median": 0.0437843111154,
+          "min": 0.0278990252249
+        }
+      },
+      "STABILITY_REJECTED_INCORRECT": {
+        "count": 3,
+        "joint_instability_score": {
+          "max": 2.10615839672,
+          "mean": 1.59313044675,
+          "median": 1.88693217164,
+          "min": 0.786300771892
+        },
+        "late_max_phase_velocity_rad_per_step": {
+          "max": 0.0376281317651,
+          "mean": 0.0296322698411,
+          "median": 0.0370868224475,
+          "min": 0.0141818553107
+        },
+        "late_mean_response_drift_l2": {
+          "max": 0.168492671738,
+          "mean": 0.12745043574,
+          "median": 0.150954573731,
+          "min": 0.0629040617514
+        }
+      }
+    },
+    "uninterpretable_count": 0,
+    "unique_count": 56
+  }
+}
