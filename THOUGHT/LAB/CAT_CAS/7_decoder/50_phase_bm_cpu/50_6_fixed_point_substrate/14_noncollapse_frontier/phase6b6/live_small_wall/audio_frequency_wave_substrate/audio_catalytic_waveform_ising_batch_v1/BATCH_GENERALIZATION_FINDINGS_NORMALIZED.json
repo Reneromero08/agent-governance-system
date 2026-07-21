@@ -1,0 +1,15 @@
+{
+  "candidate_manifest_sha256": "718fc31d14391f3b35c5ba7432d82920430315d4cf087ae50f6aa0cc6d0da617",
+  "candidate_package_root_sha256": "3d746d1847e8d1419db10ad3d90de0f9b72b7ee81675f2b95c0ea965ec693336",
+  "decision_authorized": "CATALYTIC_WAVEFORM_ISING_BATCH_GENERALIZATION_PARTIAL",
+  "findings": [],
+  "normalized_counts": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 0,
+    "open": 0
+  },
+  "reviewer_id": "CODEX-BATCH-R1-718F",
+  "schema": "catalytic_waveform_ising_batch_review_findings_v1",
+  "verdict": "PASS"
+}

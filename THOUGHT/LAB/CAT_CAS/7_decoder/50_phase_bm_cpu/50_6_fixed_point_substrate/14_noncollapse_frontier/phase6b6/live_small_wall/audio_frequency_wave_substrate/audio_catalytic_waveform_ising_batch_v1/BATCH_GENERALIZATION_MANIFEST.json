@@ -1,0 +1,73 @@
+{
+  "file_count": 13,
+  "files": [
+    {
+      "bytes": 38,
+      "path": ".gitattributes",
+      "sha256": "66db8bd852a2baf6a3c444accf6ced409bdc87bc6f38d3ec0cf80c6b449b2060"
+    },
+    {
+      "bytes": 11011,
+      "path": "BATCH_EXPERIMENT_AUTHORITY.txt",
+      "sha256": "ed537759d47cc69f0844a913113a2736a6ac8345550c06339be1bb253d3aee35"
+    },
+    {
+      "bytes": 1328,
+      "path": "BATCH_INSTANCE_FREEZE.md",
+      "sha256": "b381e761ddebbc4562e37f521075e2113ca71163865e9388c45bd11eabcb4e32"
+    },
+    {
+      "bytes": 14274,
+      "path": "BATCH_INSTANCE_CUSTODY.json",
+      "sha256": "75ea38a6fa43a40ee422d5b4b54269b30a855e674197c3a4745be570298521a5"
+    },
+    {
+      "bytes": 7779,
+      "path": "batch_instance_freezer.py",
+      "sha256": "8eaaf26a2057415d063a0b0f2d36fc7e51df77b234a8cfa5728c845e03eef5c2"
+    },
+    {
+      "bytes": 4295,
+      "path": "BATCH_PREORACLE_CONTRACT.json",
+      "sha256": "ad03d15bfe76cb93125b95a365af9d8f0f38ca46cf6e4e5536f0fb871a092ab8"
+    },
+    {
+      "bytes": 123416,
+      "path": "BATCH_PREORACLE_EVIDENCE.json",
+      "sha256": "1d05b0ab68751d34dd7199e6fcb94b12a9a340c2c3e36deebeb685747145b236"
+    },
+    {
+      "bytes": 49326,
+      "path": "BATCH_PREORACLE_TRACE.json",
+      "sha256": "cfabefe4a2b5dba035ea75b92358d7741351b2f4b78694a57fc9f493f3b32cae"
+    },
+    {
+      "bytes": 600,
+      "path": "BATCH_PREORACLE_SEAL.json",
+      "sha256": "4009db1f74475a81a36dab548e64c79c235cd39767d1fd1866e58a6ea91eb750"
+    },
+    {
+      "bytes": 29658,
+      "path": "batch_oracle_adjudicator.py",
+      "sha256": "b94905aa92acf76bb8a85e0c75780773fbafba6f2aca0c7cba0e6524f5680a48"
+    },
+    {
+      "bytes": 141093,
+      "path": "BATCH_GENERALIZATION_RESULTS.json",
+      "sha256": "eb80b76ac180583346c439daa31de5b08397d7ccbd88e47247b117d2472ba2a9"
+    },
+    {
+      "bytes": 7477,
+      "path": "BATCH_GENERALIZATION_ORACLE_TRACE.json",
+      "sha256": "39e6f8d08b44860ebbff6cba4c75bfb7faf71b8f845e65d5403f8cc392e213a8"
+    },
+    {
+      "bytes": 3638,
+      "path": "BATCH_GENERALIZATION_REPORT.md",
+      "sha256": "162f339f17d37b4e3a7ca03b740c2f4caadabd4f9c813a21b6a694dc66a66519"
+    }
+  ],
+  "package_root_sha256": "3d746d1847e8d1419db10ad3d90de0f9b72b7ee81675f2b95c0ea965ec693336",
+  "schema": "catalytic_waveform_ising_batch_generalization_manifest_v1",
+  "total_bytes": 393933
+}
