@@ -1,0 +1,50 @@
+{
+  "batch_size": 32,
+  "claim_ceiling": "BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY",
+  "freeze_commit": "9b9348064eaaffece01d5a1d7848d613a24857f5",
+  "machine_sha256": "c20f2cd4068ca32528bc52671793bca04d897456944e33ad8571083428c48930",
+  "native_no_smuggle_proof_sha256": "4e464c75261cf94fc6743ef9f10f9a002068f22720bc75701cd1c0321fab3ec6",
+  "oracle_boundary": "after the exact full pre-oracle evidence and trace roots are committed and pushed remotely",
+  "ordered_batch_sha256": "4d973f7b6015fa6d9cf201dab249832610334f394ae262797516c3cf27357dbe",
+  "preoracle_source_absence_proof": {
+    "forbidden_oracle_call_findings": [],
+    "oracle_call_count": 0,
+    "pass": true,
+    "source_sha256": "ebfdb08a0ea04bb20439f5b30dfa508233216a72e164f5c0f7b10526144081a9"
+  },
+  "promotion_criterion": {
+    "accepted_correct_count_min": 12,
+    "accepted_correct_rate_among_unique_min": 0.6,
+    "accepted_incorrect_count_max": 0,
+    "all_other_strict_controls_must_pass": true,
+    "batch_size_required": 32,
+    "native_no_smuggle_must_pass": true,
+    "restoration_success_all_instances": true,
+    "reuse_success_all_instances": true,
+    "strict_removed_transform_all_instances": true,
+    "uninterpretable_count_max": 0,
+    "unique_optimum_instance_count_min": 16
+  },
+  "reuse_law": "rerun the same frozen J,h computation from the exact restored carrier, compare the complete boundary, and restore again",
+  "schema": "catalytic_waveform_ising_v2_preoracle_contract_v1",
+  "strict_control_law": "causal replacements pass only when both native operator-history L2 and final complex-response L2 are at least 1e-3; validity-flag changes alone never pass",
+  "thresholds": {
+    "coherence_min": 0.9,
+    "lock_residual_max_rad": 0.15,
+    "restoration_max_abs_error": 2e-12,
+    "wrong_restoration_min_abs_error": 0.001
+  },
+  "transitive_native_path": [
+    "execute_native_cycle",
+    "transform_channel_bank",
+    "channel_calibration",
+    "evolve_native_waveforms",
+    "native_wave_velocity",
+    "schedule",
+    "transport_shift",
+    "r4.render_trees",
+    "r4.geometry_channel_bank",
+    "r4.transport_mask_bank",
+    "r4.validate_problem"
+  ]
+}
