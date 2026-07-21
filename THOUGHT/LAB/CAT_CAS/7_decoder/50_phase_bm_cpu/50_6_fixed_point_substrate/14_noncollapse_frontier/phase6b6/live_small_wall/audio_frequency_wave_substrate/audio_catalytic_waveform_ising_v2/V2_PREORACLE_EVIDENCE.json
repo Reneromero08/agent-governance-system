@@ -1,0 +1,6567 @@
+{
+  "claim_ceiling": "BOUNDED_SOFTWARE_CARRIER_CAUSAL_CATALYTIC_ISING_REFERENCE_ONLY",
+  "freeze_commit": "9b9348064eaaffece01d5a1d7848d613a24857f5",
+  "instances": [
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0128588329958,
+        "latch": {
+          "coherence": [
+            0.993959254861,
+            0.998422386384,
+            0.999943058907,
+            0.99755703092,
+            0.995796486175
+          ],
+          "energy": -17.0,
+          "label": "v2_batch_00",
+          "phases_rad": [
+            0.0128588329958,
+            3.13433205529,
+            3.13857457516,
+            3.13716170072,
+            -0.00753290784167
+          ],
+          "raw_spin_shadow": [
+            1,
+            -1,
+            -1,
+            -1,
+            1
+          ],
+          "residual_rad": 0.0128588329958,
+          "responses": [
+            {
+              "imag": 0.0127808038393,
+              "real": 0.993877080618
+            },
+            {
+              "imag": 0.00724908018597,
+              "real": -0.998396069939
+            },
+            {
+              "imag": 0.00301790199483,
+              "real": -0.999938504771
+            },
+            {
+              "imag": 0.00442011372969,
+              "real": -0.997547238246
+            },
+            {
+              "imag": -0.00750117221698,
+              "real": 0.995768233222
+            }
+          ],
+          "spins": [
+            1,
+            -1,
+            -1,
+            -1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -17.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.384462081748,
+            "missing_pair_operator": 10.6874935232,
+            "no_lock": 0.383863449334,
+            "no_transform": 15.2673320323,
+            "scrambled_geometry": 0.987662153824,
+            "uniform_carrier": 0.647409861365
+          },
+          "omitted_inverse_step_error": 1.71192683239,
+          "omitted_restoration_error": 1.77132321469,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00199162138916,
+            "missing_pair_operator": 0.0508556060834,
+            "no_lock": 0.0926688835842,
+            "no_transform": 0.0190997706303,
+            "scrambled_geometry": 0.00647938058721,
+            "uniform_carrier": 0.00336013763132,
+            "wrong_query": 0.947079430967
+          },
+          "samplewise_non_rank_one_residual": 0.0887852093261,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          -2.0,
+          -2.0,
+          2.0
+        ],
+        [
+          2.0,
+          0.0,
+          2.0,
+          1.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          2.0,
+          0.0,
+          2.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          1.0,
+          2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          2.0,
+          -2.0,
+          -2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        2.0,
+        0.5,
+        -2.0,
+        1.0,
+        0.5
+      ],
+      "index": 0,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 44.2636046954,
+        "restoration_max_abs_error": 1.14223551929e-14,
+        "reuse_carrier_displacement_l2": 44.2636046954,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.12740947909e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "59738a3e7ccf2031005a697e6c47cd8663efe44a2ea3e6508f07565bf2b3c40a",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "5da7338fa3f8c9828ec0d738e04846dbda624f7b75c5101521b2c67156093a90",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "15f2f4415bddc45004c2981d562c7ac003d127b19d9c4da95ffbada8fdf31458",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "2e2c7146539924352f15cbb7070166b2c5f935ce23b75d32b111c0122ad16623",
+      "reuse": {
+        "boundary_response_delta_l2": 4.83022374346e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.12740947909e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0158907654825,
+        "latch": {
+          "coherence": [
+            0.991947387897,
+            0.998493346657,
+            0.999954124289,
+            0.999367474485,
+            0.998013982868
+          ],
+          "energy": -15.0,
+          "label": "v2_batch_01",
+          "phases_rad": [
+            -3.12570188811,
+            0.00175083636078,
+            3.14001404796,
+            -0.00319955258431,
+            -0.003481504125
+          ],
+          "raw_spin_shadow": [
+            -1,
+            1,
+            -1,
+            1,
+            1
+          ],
+          "residual_rad": 0.0158907654825,
+          "responses": [
+            {
+              "imag": -0.015762139926,
+              "real": -0.991822149027
+            },
+            {
+              "imag": 0.00174819756416,
+              "real": 0.998491816252
+            },
+            {
+              "imag": 0.00157853255435,
+              "real": -0.999952878349
+            },
+            {
+              "imag": -0.00319752333008,
+              "real": 0.999362359159
+            },
+            {
+              "imag": -0.00347458277899,
+              "real": 0.998007934475
+            }
+          ],
+          "spins": [
+            -1,
+            1,
+            -1,
+            1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -15.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 1.92622934903,
+            "missing_pair_operator": 13.3169497516,
+            "no_lock": 0.42568124715,
+            "no_transform": 18.1430425011,
+            "scrambled_geometry": 5.62671573169,
+            "uniform_carrier": 1.96173209265
+          },
+          "omitted_inverse_step_error": 1.71424565458,
+          "omitted_restoration_error": 1.77298844917,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00250680501606,
+            "missing_pair_operator": 0.0924973744089,
+            "no_lock": 0.0550333761866,
+            "no_transform": 0.0187034459882,
+            "scrambled_geometry": 0.0078555975541,
+            "uniform_carrier": 0.0035410307812,
+            "wrong_query": 0.950352607998
+          },
+          "samplewise_non_rank_one_residual": 0.103708372512,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          2.0,
+          -1.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          -1.0,
+          -1.0,
+          1.0
+        ],
+        [
+          2.0,
+          -1.0,
+          0.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          -2.0,
+          0.0,
+          1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          -2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        1.0,
+        2.0,
+        -1.0,
+        2.0,
+        1.0
+      ],
+      "index": 1,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 44.4977283345,
+        "restoration_max_abs_error": 1.20422099754e-14,
+        "reuse_carrier_displacement_l2": 44.4977283345,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.13856064152e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "d13de167ed36f4f64941c11372c9f100651551613d889a473b3c658dc9ec56b7",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "fa28e0eac59b2c03f9bd2f674d1732ed0e07f12092af6e499d1e061b74c36ab1",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "e3c79f511e01ed8a0bf5a8fefd89a2e52327a63a983a9d04d95a748d3168caf3",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "29c6f5f73782ed2d0fd0a24cbd59e995e543148a9770cf8a220a0b6672982445",
+      "reuse": {
+        "boundary_response_delta_l2": 6.50194442839e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.13856064152e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.04230709773,
+        "latch": {
+          "coherence": [
+            0.998956101407,
+            0.969162376093,
+            0.949813190059,
+            0.994710796242,
+            0.993273248376
+          ],
+          "energy": -4.0,
+          "label": "v2_batch_02",
+          "phases_rad": [
+            0.0212844839876,
+            -0.0305234161336,
+            -3.10162403535,
+            -3.14120370565,
+            -0.04230709773
+          ],
+          "raw_spin_shadow": [
+            1,
+            1,
+            -1,
+            -1,
+            1
+          ],
+          "residual_rad": 0.04230709773,
+          "responses": [
+            {
+              "imag": 0.0212606597764,
+              "real": 0.998729831779
+            },
+            {
+              "imag": -0.02957755321,
+              "real": 0.96871093706
+            },
+            {
+              "imag": -0.0379526140889,
+              "real": -0.949054632302
+            },
+            {
+              "imag": -0.000386890709619,
+              "real": -0.994710721002
+            },
+            {
+              "imag": -0.0420099735653,
+              "real": 0.992384455774
+            }
+          ],
+          "spins": [
+            1,
+            1,
+            -1,
+            -1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -4.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.430957000623,
+            "missing_pair_operator": 8.87248610793,
+            "no_lock": 1.01614414049,
+            "no_transform": 13.9458806925,
+            "scrambled_geometry": 6.2056760128,
+            "uniform_carrier": 0.547330597039
+          },
+          "omitted_inverse_step_error": 1.71612074466,
+          "omitted_restoration_error": 1.7714342908,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00899797699596,
+            "missing_pair_operator": 2.78244288894,
+            "no_lock": 1.00907562759,
+            "no_transform": 2.7898486825,
+            "scrambled_geometry": 2.78454153502,
+            "uniform_carrier": 0.0172429401388,
+            "wrong_query": 0.941370250989
+          },
+          "samplewise_non_rank_one_residual": 0.0925100967921,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -2.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          0.0,
+          2.0,
+          -1.0,
+          1.0
+        ],
+        [
+          -2.0,
+          2.0,
+          0.0,
+          2.0,
+          1.0
+        ],
+        [
+          1.0,
+          -1.0,
+          2.0,
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        1.0,
+        -1.0,
+        0.5,
+        -0.5,
+        1.0
+      ],
+      "index": 2,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 45.3488231611,
+        "restoration_max_abs_error": 1.08388987728e-14,
+        "reuse_carrier_displacement_l2": 45.3488231611,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.12441259109e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "3fac9d193b79b20581c22bf4c5b105059f65d52687e506998d193b540d2b2b4d",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "c652a1f130659ffb316209bfba16f2f51a6dbd3e514b309a36d35be074b928d1",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "b8b2dba219150474582c07b159cb5a2831d945abb27ffa0557be3f2cd6408bcd",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "c8230ca1d88e4313dbc1f439171393cf499f5be2e6abc467d904bb23432ae482",
+      "reuse": {
+        "boundary_response_delta_l2": 4.16024788347e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.12441259109e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0557534075068,
+        "latch": {
+          "coherence": [
+            0.998561557045,
+            0.996750377636,
+            0.996001164036,
+            0.997180520231,
+            0.993393600082
+          ],
+          "energy": -9.5,
+          "label": "v2_batch_03",
+          "phases_rad": [
+            0.0436433713578,
+            0.0210163673184,
+            -0.0116050111293,
+            3.13367176481,
+            3.08583924608
+          ],
+          "raw_spin_shadow": [
+            1,
+            1,
+            1,
+            -1,
+            -1
+          ],
+          "residual_rad": 0.0557534075068,
+          "responses": [
+            {
+              "imag": 0.0435667591974,
+              "real": 0.997610705988
+            },
+            {
+              "imag": 0.0209465300109,
+              "real": 0.996530259549
+            },
+            {
+              "imag": -0.0115583451502,
+              "real": 0.995934095921
+            },
+            {
+              "imag": 0.00789847340508,
+              "real": -0.997149238603
+            },
+            {
+              "imag": 0.0553563891047,
+              "real": -0.991850046564
+            }
+          ],
+          "spins": [
+            1,
+            1,
+            1,
+            -1,
+            -1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -9.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.528552049321,
+            "missing_pair_operator": 9.71444376653,
+            "no_lock": 0.971687447415,
+            "no_transform": 16.5635383156,
+            "scrambled_geometry": 1.27625442455,
+            "uniform_carrier": 0.557535489187
+          },
+          "omitted_inverse_step_error": 1.72774451373,
+          "omitted_restoration_error": 1.77104483266,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00474971402173,
+            "missing_pair_operator": 0.137374792079,
+            "no_lock": 1.10497876116,
+            "no_transform": 0.0755385577474,
+            "scrambled_geometry": 0.0392338747743,
+            "uniform_carrier": 0.0036116007594,
+            "wrong_query": 0.946295670173
+          },
+          "samplewise_non_rank_one_residual": 0.0761369633313,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -1.0,
+          -1.0,
+          1.0
+        ],
+        [
+          1.0,
+          0.0,
+          2.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -1.0,
+          2.0,
+          0.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -2.0,
+          -1.0,
+          0.0,
+          2.0
+        ],
+        [
+          1.0,
+          1.0,
+          -1.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        1.0,
+        -1.0,
+        1.0,
+        -2.0,
+        0.5
+      ],
+      "index": 3,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 44.4261189938,
+        "restoration_max_abs_error": 1.176405101e-14,
+        "reuse_carrier_displacement_l2": 44.4261189938,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.07209840538e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "1688d4b9698741367b095c058841edbec9025ea094512583ed4836e44b2291bb",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "ff90a397e8aebc36d125c255985f67c57e2d3103d261452b5b6538ed7e6014be",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "cb7a63de41611e25c01a13d61d9678e9da7a9f2a338ee98cfce6a358ae329cbd",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "e14b0362a953d50a8e845eae93fdd5c67b9191936bad7443e77c860c81c44729",
+      "reuse": {
+        "boundary_response_delta_l2": 6.71644965555e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.07209840538e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0216753626069,
+        "latch": {
+          "coherence": [
+            0.997242363184,
+            0.997622770319,
+            0.97853425982,
+            0.983209714871,
+            0.998085253384
+          ],
+          "energy": -15.0,
+          "label": "v2_batch_04",
+          "phases_rad": [
+            0.0216753626069,
+            -3.13530114313,
+            -0.017922271218,
+            0.00754149299616,
+            -0.0122675273928
+          ],
+          "raw_spin_shadow": [
+            1,
+            -1,
+            1,
+            1,
+            1
+          ],
+          "residual_rad": 0.0216753626069,
+          "responses": [
+            {
+              "imag": 0.0216138972911,
+              "real": 0.997008109482
+            },
+            {
+              "imag": -0.00627651268296,
+              "real": -0.997603025881
+            },
+            {
+              "imag": -0.017536617549,
+              "real": 0.978377107605
+            },
+            {
+              "imag": 0.00741479889297,
+              "real": 0.983181755412
+            },
+            {
+              "imag": -0.0122437310831,
+              "real": 0.998010152289
+            }
+          ],
+          "spins": [
+            1,
+            -1,
+            1,
+            1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -15.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.619131292964,
+            "missing_pair_operator": 6.10208203211,
+            "no_lock": 0.347860556775,
+            "no_transform": 17.1707203068,
+            "scrambled_geometry": 2.06718920621,
+            "uniform_carrier": 0.699536300377
+          },
+          "omitted_inverse_step_error": 1.71213090267,
+          "omitted_restoration_error": 1.76943189775,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00297258290705,
+            "missing_pair_operator": 0.0787268647539,
+            "no_lock": 0.151679078176,
+            "no_transform": 0.0422851691681,
+            "scrambled_geometry": 0.018119164108,
+            "uniform_carrier": 0.0044448912119,
+            "wrong_query": 0.943412602528
+          },
+          "samplewise_non_rank_one_residual": 0.0835846275305,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -2.0,
+          -1.0,
+          2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          0.0,
+          -2.0,
+          -2.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -2.0,
+          0.0,
+          -2.0,
+          2.0
+        ],
+        [
+          2.0,
+          -2.0,
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          -1.0,
+          2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        1.0,
+        -1.0,
+        2.0,
+        2.0,
+        1.0
+      ],
+      "index": 4,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 44.1221849908,
+        "restoration_max_abs_error": 1.69071557321e-14,
+        "reuse_carrier_displacement_l2": 44.1221849908,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.50573422137e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "9dfaf359179ad582d43b38a6848dd662fee135ff38f1bfdf9861e1f64a7d750a",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "c71d4a7c351852e7e80c3b2eb5fd065315ac6c2bb021a75ba78c1e4cac126b1e",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "1d93bdbadda3c98e8f1d14e2af1b614ddebd30896f67c697dce11aae99ada2fb",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "f6d02f4d26165e957722e7d95449e6cc4e1fa44fa6c6337a9d2992b858afc205",
+      "reuse": {
+        "boundary_response_delta_l2": 5.11333668161e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.50573422137e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0876182328193,
+        "latch": {
+          "coherence": [
+            0.979120815139,
+            0.993757364776,
+            0.985222541172,
+            0.997768416307,
+            0.997562487664
+          ],
+          "energy": -11.5,
+          "label": "v2_batch_05",
+          "phases_rad": [
+            0.0876182328193,
+            3.11474853,
+            3.08453719413,
+            -0.00484613718713,
+            3.13828301116
+          ],
+          "raw_spin_shadow": [
+            1,
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "residual_rad": 0.0876182328193,
+          "responses": [
+            {
+              "imag": 0.0856791114972,
+              "real": 0.97536488582
+            },
+            {
+              "imag": 0.0266733417491,
+              "real": -0.993399332035
+            },
+            {
+              "imag": 0.0561818314879,
+              "real": -0.983619366139
+            },
+            {
+              "imag": -0.00483530370014,
+              "real": 0.997756700011
+            },
+            {
+              "imag": 0.00330156911008,
+              "real": -0.997557024152
+            }
+          ],
+          "spins": [
+            1,
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -11.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.743102512921,
+            "missing_pair_operator": 12.9438272741,
+            "no_lock": 3.02609059018,
+            "no_transform": 18.2970824872,
+            "scrambled_geometry": 1.93833402365,
+            "uniform_carrier": 0.903240538018
+          },
+          "omitted_inverse_step_error": 1.71156802014,
+          "omitted_restoration_error": 1.77166925333,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00687612519082,
+            "missing_pair_operator": 3.98439763747,
+            "no_lock": 0.476104386507,
+            "no_transform": 0.110266429682,
+            "scrambled_geometry": 0.0485742328361,
+            "uniform_carrier": 0.00382392933522,
+            "wrong_query": 0.942207360338
+          },
+          "samplewise_non_rank_one_residual": 0.107569792045,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          2.0,
+          1.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          2.0,
+          -1.0,
+          2.0
+        ],
+        [
+          2.0,
+          2.0,
+          0.0,
+          -1.0,
+          1.0
+        ],
+        [
+          1.0,
+          -1.0,
+          -1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          2.0,
+          1.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        1.0,
+        0.5,
+        -0.5,
+        0.5,
+        -1.0
+      ],
+      "index": 5,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 41.6520721264,
+        "restoration_max_abs_error": 1.10046111607e-14,
+        "reuse_carrier_displacement_l2": 41.6520721264,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.20278715676e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "8db308bd00b8df9425dac4b3eaae9ea0c2f48ad8b19debae4e6b6887f8bc57be",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "e7a7029f6f7ce1bacb9b7f0fec76aba85a265b5eb76604c84be891786baafcbf",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "f422f9a2448090a26235c461c9e710949ef15305050168d7eb8208e52a5dfc2c",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "5950dd27f15ac52e092ee1c99249edcb45f853341b2f6d9df062622bf5969f95",
+      "reuse": {
+        "boundary_response_delta_l2": 6.49330192719e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.20278715676e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0114388886478,
+        "latch": {
+          "coherence": [
+            0.993230933106,
+            0.998470910848,
+            0.999433957242,
+            0.996852435755,
+            0.995050799079
+          ],
+          "energy": -13.5,
+          "label": "v2_batch_06",
+          "phases_rad": [
+            -3.13015376494,
+            0.00110283470444,
+            -0.00401387538112,
+            -0.00380821240924,
+            -0.0104213911664
+          ],
+          "raw_spin_shadow": [
+            -1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "residual_rad": 0.0114388886478,
+          "responses": [
+            {
+              "imag": -0.0113612102759,
+              "real": -0.993165952587
+            },
+            {
+              "imag": 0.00110114814865,
+              "real": 0.998470303656
+            },
+            {
+              "imag": -0.00401159258408,
+              "real": 0.999425906214
+            },
+            {
+              "imag": -0.00379621664025,
+              "real": 0.996845207347
+            },
+            {
+              "imag": -0.0103696259057,
+              "real": 0.994996765626
+            }
+          ],
+          "spins": [
+            -1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -13.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.639241156062,
+            "missing_pair_operator": 9.62612674771,
+            "no_lock": 5.62542695483,
+            "no_transform": 15.9616387484,
+            "scrambled_geometry": 1.30356538604,
+            "uniform_carrier": 0.983753146516
+          },
+          "omitted_inverse_step_error": 1.71975059081,
+          "omitted_restoration_error": 1.77261771549,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00131007311874,
+            "missing_pair_operator": 4.45831298659,
+            "no_lock": 0.0673520772497,
+            "no_transform": 0.0187798224951,
+            "scrambled_geometry": 0.00662329701148,
+            "uniform_carrier": 0.00413872549404,
+            "wrong_query": 0.945052923043
+          },
+          "samplewise_non_rank_one_residual": 0.0909964465272,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          -2.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          1.0,
+          0.0,
+          2.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        1.0,
+        0.5,
+        1.0,
+        -1.0
+      ],
+      "index": 6,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 45.1031244617,
+        "restoration_max_abs_error": 1.04009367355e-14,
+        "reuse_carrier_displacement_l2": 45.1031244617,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.1980638835e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "6ee501342db940f97d6ef848d737be43544a615b487d826c160bf99e07ca58da",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "a8e4c79a29fa7e9c44081bd8d505871018ad1808edfaa76a383ef399da9d2210",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "0aadaf016cf2b8bfc5ff6cf09b3035022c5559844d94286c1a2e83dd375a4fda",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "ee468a5408b0c0407e00437d38afdfab3326ab761534dcbf79c3b64c551d2731",
+      "reuse": {
+        "boundary_response_delta_l2": 4.21375421919e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.1980638835e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0220743725075,
+        "latch": {
+          "coherence": [
+            0.996893066091,
+            0.996709452671,
+            0.998330010589,
+            0.990411921187,
+            0.997234679568
+          ],
+          "energy": -14.0,
+          "label": "v2_batch_07",
+          "phases_rad": [
+            0.01319808245,
+            0.00420387076196,
+            0.0077771061083,
+            3.11951828108,
+            -0.00568107026361
+          ],
+          "raw_spin_shadow": [
+            1,
+            1,
+            1,
+            -1,
+            1
+          ],
+          "residual_rad": 0.0220743725075,
+          "responses": [
+            {
+              "imag": 0.013156694913,
+              "real": 0.996806243259
+            },
+            {
+              "imag": 0.00419002538484,
+              "real": 0.996700645496
+            },
+            {
+              "imag": 0.007764040157,
+              "real": 0.998299819555
+            },
+            {
+              "imag": 0.0218609461905,
+              "real": -0.990170628054
+            },
+            {
+              "imag": -0.00566532980948,
+              "real": 0.997218586956
+            }
+          ],
+          "spins": [
+            1,
+            1,
+            1,
+            -1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -14.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.509464464707,
+            "missing_pair_operator": 6.23643454221,
+            "no_lock": 0.238184392062,
+            "no_transform": 19.8841439215,
+            "scrambled_geometry": 1.35716782932,
+            "uniform_carrier": 0.954410296187
+          },
+          "omitted_inverse_step_error": 1.71194098445,
+          "omitted_restoration_error": 1.77271362504,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00283720861422,
+            "missing_pair_operator": 0.0769316496215,
+            "no_lock": 0.0752119904929,
+            "no_transform": 0.0298204867616,
+            "scrambled_geometry": 0.00792197427171,
+            "uniform_carrier": 0.00472107972465,
+            "wrong_query": 0.944525733686
+          },
+          "samplewise_non_rank_one_residual": 0.0997007992295,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          2.0,
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          0.0,
+          2.0,
+          -2.0,
+          2.0
+        ],
+        [
+          2.0,
+          2.0,
+          0.0,
+          2.0,
+          1.0
+        ],
+        [
+          1.0,
+          -2.0,
+          2.0,
+          0.0,
+          -2.0
+        ],
+        [
+          1.0,
+          2.0,
+          1.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        1.0,
+        2.0,
+        -1.0,
+        -0.5
+      ],
+      "index": 7,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 46.3070101618,
+        "restoration_max_abs_error": 1.12017046799e-14,
+        "reuse_carrier_displacement_l2": 46.3070101618,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.47657840315e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "7434bd24fa54b8942ee30ff1d51312c46f38e3edb543c4d1b43a89665efcc5b7",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "5fd263e349cc236129e7573d9ea9681cb7d08122b874c8664e0f18da006eb4d5",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "8090c075cfce6e20909fa56aa994ce371f145e63f008049884c595129cc674c4",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "7157a757d39b57c97c87e87fe30a00dd4a178cd4f1227fc1420dd79ced966592",
+      "reuse": {
+        "boundary_response_delta_l2": 1.51608058487e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.47657840315e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.009553907352,
+        "latch": {
+          "coherence": [
+            0.995676377744,
+            0.997613792276,
+            0.999826731575,
+            0.998742994834,
+            0.999045013808
+          ],
+          "energy": -14.5,
+          "label": "v2_batch_08",
+          "phases_rad": [
+            0.00453703646557,
+            -3.13205394639,
+            3.13982862783,
+            3.13961111479,
+            3.13203874624
+          ],
+          "raw_spin_shadow": [
+            1,
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "residual_rad": 0.009553907352,
+          "responses": [
+            {
+              "imag": 0.00451740453546,
+              "real": 0.995666129912
+            },
+            {
+              "imag": -0.00951580156168,
+              "real": -0.99756840771
+            },
+            {
+              "imag": 0.00176371919685,
+              "real": -0.999825175952
+            },
+            {
+              "imag": 0.00197904670125,
+              "real": -0.998741034055
+            },
+            {
+              "imag": 0.00954463829963,
+              "real": -0.998999419166
+            }
+          ],
+          "spins": [
+            1,
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -14.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.428770380583,
+            "missing_pair_operator": 12.0788900732,
+            "no_lock": 0.210641426966,
+            "no_transform": 14.8130613734,
+            "scrambled_geometry": 1.29846377205,
+            "uniform_carrier": 0.641746153436
+          },
+          "omitted_inverse_step_error": 1.71250077494,
+          "omitted_restoration_error": 1.77130334058,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00570065179468,
+            "missing_pair_operator": 0.203299457044,
+            "no_lock": 0.0462789527828,
+            "no_transform": 0.0153751964647,
+            "scrambled_geometry": 0.00723384642964,
+            "uniform_carrier": 0.00228087815932,
+            "wrong_query": 0.948824688584
+          },
+          "samplewise_non_rank_one_residual": 0.092874076259,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          -2.0,
+          -1.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          0.0,
+          2.0,
+          1.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          2.0,
+          0.0,
+          1.0,
+          2.0
+        ],
+        [
+          -1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        -1.0,
+        -1.0,
+        -2.0,
+        -0.5
+      ],
+      "index": 8,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 42.2615281633,
+        "restoration_max_abs_error": 1.10694302154e-14,
+        "reuse_carrier_displacement_l2": 42.2615281633,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.30437031564e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "bbd163353f588be1a7c492f9f34fee536544ad2e388fbfc136b31f7262096263",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "223fcf096a0d1881c21d6f09f42261af938cd159f499b033b1c361c386b4cf1f",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "dfb0c5b8cf3e200095a48b1b6057771c9636d59cd372a3aebf8f3f9d59cc96b8",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "75311e25a1f2c240f9b93ca793c8f28ed7e8c8c79744df322c424a68b7fb8ec9",
+      "reuse": {
+        "boundary_response_delta_l2": 4.068465149e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.30437031564e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0414575826619,
+        "latch": {
+          "coherence": [
+            0.986679302708,
+            0.993456044506,
+            0.999353165563,
+            0.995547619276,
+            0.994201474798
+          ],
+          "energy": -8.5,
+          "label": "v2_batch_09",
+          "phases_rad": [
+            0.0414575826619,
+            0.00670339905478,
+            -3.13865019012,
+            3.13598563748,
+            -0.0253106764583
+          ],
+          "raw_spin_shadow": [
+            1,
+            1,
+            -1,
+            -1,
+            1
+          ],
+          "residual_rad": 0.0414575826619,
+          "responses": [
+            {
+              "imag": 0.040893622213,
+              "real": 0.985831505915
+            },
+            {
+              "imag": 0.00665948243485,
+              "real": 0.993433723838
+            },
+            {
+              "imag": -0.00294055594403,
+              "real": -0.999348839321
+            },
+            {
+              "imag": 0.0055820222861,
+              "real": -0.995531969991
+            },
+            {
+              "imag": -0.0251612251548,
+              "real": 0.993883033983
+            }
+          ],
+          "spins": [
+            1,
+            1,
+            -1,
+            -1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -8.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.393760029861,
+            "missing_pair_operator": 10.7370108025,
+            "no_lock": 0.283430322609,
+            "no_transform": 13.1470391623,
+            "scrambled_geometry": 1.09608188797,
+            "uniform_carrier": 0.450850471203
+          },
+          "omitted_inverse_step_error": 1.72320229254,
+          "omitted_restoration_error": 1.77258717583,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00593746865446,
+            "missing_pair_operator": 0.101027213799,
+            "no_lock": 0.189292832932,
+            "no_transform": 0.0518767473949,
+            "scrambled_geometry": 0.0148175650679,
+            "uniform_carrier": 0.00562703490602,
+            "wrong_query": 0.941551356897
+          },
+          "samplewise_non_rank_one_residual": 0.0989165280518,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -2.0,
+          -1.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          1.0,
+          -1.0,
+          1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          0.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          -1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          1.0,
+          -1.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        0.5,
+        -0.5,
+        -1.0,
+        -0.5,
+        2.0
+      ],
+      "index": 9,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 45.6455470353,
+        "restoration_max_abs_error": 1.28133397637e-14,
+        "reuse_carrier_displacement_l2": 45.6455470353,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.15617881653e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "63a4021038cb0cfc04e992b9ba8bcd3e9f73bd42255004fc8bb4ce0ee8dc2210",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "f07c93df6035293852de4b241ce401168cda8f0fd578ffd28ed800d0cf57e42c",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "b5907c549c496d80295ae332eff1e6493fe3927af0b25c9e0e93f4d64752c87e",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "323916529ddf3ba80e539713e199f3239d2d1386072eec8f8ca1509e607e9449",
+      "reuse": {
+        "boundary_response_delta_l2": 1.71236720508e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.15617881653e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.116600836796,
+        "latch": {
+          "coherence": [
+            0.992288918809,
+            0.996182072913,
+            0.927258632273,
+            0.985806305262,
+            0.99863092392
+          ],
+          "energy": -13.0,
+          "label": "v2_batch_10",
+          "phases_rad": [
+            -3.0881672727,
+            3.1313703066,
+            -0.116600836796,
+            0.0196145280058,
+            -0.0198179545536
+          ],
+          "raw_spin_shadow": [
+            -1,
+            -1,
+            1,
+            1,
+            1
+          ],
+          "residual_rad": 0.116600836796,
+          "responses": [
+            {
+              "imag": -0.0529881979251,
+              "real": -0.99087312471
+            },
+            {
+              "imag": 0.0101831414626,
+              "real": -0.996130024657
+            },
+            {
+              "imag": -0.107874305397,
+              "real": 0.920962379991
+            },
+            {
+              "imag": 0.019334885543,
+              "real": 0.985616676855
+            },
+            {
+              "imag": -0.0197895268129,
+              "real": 0.99843482353
+            }
+          ],
+          "spins": [
+            -1,
+            -1,
+            1,
+            1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -13.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.910261617595,
+            "missing_pair_operator": 18.9693304002,
+            "no_lock": 1.16513375201,
+            "no_transform": 16.9754906603,
+            "scrambled_geometry": 4.29060178785,
+            "uniform_carrier": 2.17957735121
+          },
+          "omitted_inverse_step_error": 1.71354243521,
+          "omitted_restoration_error": 1.76456471079,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00708184476926,
+            "missing_pair_operator": 1.78773154823,
+            "no_lock": 0.376866097923,
+            "no_transform": 0.147546103157,
+            "scrambled_geometry": 0.0559501538862,
+            "uniform_carrier": 0.015994336687,
+            "wrong_query": 0.938053526014
+          },
+          "samplewise_non_rank_one_residual": 0.105502877556,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          2.0,
+          -1.0,
+          -2.0
+        ],
+        [
+          2.0,
+          0.0,
+          -2.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          2.0,
+          -2.0,
+          0.0,
+          -2.0,
+          2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          -2.0,
+          0.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          2.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        1.0,
+        0.5,
+        2.0,
+        0.5
+      ],
+      "index": 10,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 43.3536197969,
+        "restoration_max_abs_error": 1.32155091815e-14,
+        "reuse_carrier_displacement_l2": 43.3536197969,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.07115757112e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "dffc7bc5e7fb7bdab6fc2064c6ae87301c7c9bfa4033ea60de1c9e75893a5e1e",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "5c5c54951781dc93476abe6a0be9aed61f811d10ffae9c2b17329791015dd979",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "f49682e37e06f3637374fd521abf8738d5da17f99c783565f5d0f82c52557f03",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "968ac435b2aaae09ce3825d5043d8e627d3808cb4f50329863d0524317bfdf9c",
+      "reuse": {
+        "boundary_response_delta_l2": 1.34923241285e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.07115757112e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0704931450752,
+        "latch": {
+          "coherence": [
+            0.992016004387,
+            0.999246318676,
+            0.978023542027,
+            0.994127038984,
+            0.998519539646
+          ],
+          "energy": -13.5,
+          "label": "v2_batch_11",
+          "phases_rad": [
+            0.0704931450752,
+            3.12700899511,
+            -0.0566160898322,
+            -3.10762984313,
+            -0.0106222924344
+          ],
+          "raw_spin_shadow": [
+            1,
+            -1,
+            1,
+            -1,
+            1
+          ],
+          "residual_rad": 0.0704931450752,
+          "responses": [
+            {
+              "imag": 0.0698724252319,
+              "real": 0.989552220529
+            },
+            {
+              "imag": 0.0145721504983,
+              "real": -0.99914005916
+            },
+            {
+              "imag": -0.0553422921256,
+              "real": 0.976456491331
+            },
+            {
+              "imag": -0.033756857722,
+              "real": -0.993553744996
+            },
+            {
+              "imag": -0.0106063670908,
+              "real": 0.99846320715
+            }
+          ],
+          "spins": [
+            1,
+            -1,
+            1,
+            -1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -13.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.38624686835,
+            "missing_pair_operator": 5.88529740912,
+            "no_lock": 0.42627362459,
+            "no_transform": 15.3626885874,
+            "scrambled_geometry": 1.2505457709,
+            "uniform_carrier": 0.377951890888
+          },
+          "omitted_inverse_step_error": 1.71254764215,
+          "omitted_restoration_error": 1.77044193599,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00666451367444,
+            "missing_pair_operator": 0.0914428303654,
+            "no_lock": 0.343494896558,
+            "no_transform": 0.10058531811,
+            "scrambled_geometry": 0.0411159611798,
+            "uniform_carrier": 0.00679571108764,
+            "wrong_query": 0.946102558266
+          },
+          "samplewise_non_rank_one_residual": 0.0912482647205,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          -2.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -1.0,
+          0.0,
+          -2.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          0.0,
+          1.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          1.0,
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          -1.0,
+          2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        0.5,
+        -1.0,
+        2.0,
+        -2.0,
+        2.0
+      ],
+      "index": 11,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 44.9502776706,
+        "restoration_max_abs_error": 1.00345139071e-14,
+        "reuse_carrier_displacement_l2": 44.9502776706,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.04219466512e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "cafe059a8ae487e4f7b535846925bc97908740dbfee7243e954587c03961233b",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "79d92368b78e8ed15aed4938eb04c7e1394cbc14ec4f9b567872a3c1b577ef62",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "c7dfb678a227be1285b8ffa5d0c9b05b765850568552dae70d83b46a089ac35b",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "017d66c512a014b05fef382f13438e13926ff77e3c0a50b85ccb9956c01f9374",
+      "reuse": {
+        "boundary_response_delta_l2": 7.86671754066e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.04219466512e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.00635917689199,
+        "latch": {
+          "coherence": [
+            0.998858059537,
+            0.997508742343,
+            0.994904875744,
+            0.999526083526,
+            0.998385806812
+          ],
+          "energy": -11.5,
+          "label": "v2_batch_12",
+          "phases_rad": [
+            -3.13542952681,
+            0.00422040356859,
+            -3.13899439436,
+            3.13989750838,
+            3.1352334767
+          ],
+          "raw_spin_shadow": [
+            -1,
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "residual_rad": 0.00635917689199,
+          "responses": [
+            {
+              "imag": -0.00615604988586,
+              "real": -0.998839089219
+            },
+            {
+              "imag": 0.00420987695828,
+              "real": 0.99749985864
+            },
+            {
+              "imag": -0.00258501787089,
+              "real": -0.994901517469
+            },
+            {
+              "imag": 0.00169434104585,
+              "real": -0.999524647449
+            },
+            {
+              "imag": 0.00634886916131,
+              "real": -0.998365619953
+            }
+          ],
+          "spins": [
+            -1,
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -11.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.462890408766,
+            "missing_pair_operator": 6.3061381767,
+            "no_lock": 0.844445567162,
+            "no_transform": 18.1959810662,
+            "scrambled_geometry": 1.24504078409,
+            "uniform_carrier": 0.563655164611
+          },
+          "omitted_inverse_step_error": 1.71335109068,
+          "omitted_restoration_error": 1.77317498174,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00269362591506,
+            "missing_pair_operator": 0.0388429493287,
+            "no_lock": 0.14311830223,
+            "no_transform": 0.0119151737615,
+            "scrambled_geometry": 0.00568793538764,
+            "uniform_carrier": 0.00213290817349,
+            "wrong_query": 0.952476165932
+          },
+          "samplewise_non_rank_one_residual": 0.0684759983088,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -2.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          -2.0,
+          0.0,
+          -1.0,
+          1.0,
+          -2.0
+        ],
+        [
+          1.0,
+          -1.0,
+          0.0,
+          2.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0,
+          2.0,
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          -2.0,
+          -1.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        -0.5,
+        1.0,
+        -1.0,
+        -2.0
+      ],
+      "index": 12,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 42.9969984791,
+        "restoration_max_abs_error": 1.1235901309e-14,
+        "reuse_carrier_displacement_l2": 42.9969984791,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.18669287321e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "cf66e3e2b9ada51ebc1591a2b38c6e6a05eb693b45ed13c9195643e6bda88c1d",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "ec37e94aa8348d72272fd5d4f6619bda7df0147c6a32838c95afc28126b40e6d",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "80633872a1c7df5bf03084188c8188a29598534a57e299dd7d3ad311b0b6433c",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "300504f3ee4212f88947c2fb5251bd7ef796fd7d2605f8efcb665fbf3f54e0c1",
+      "reuse": {
+        "boundary_response_delta_l2": 7.81464165762e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.18669287321e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0709849178895,
+        "latch": {
+          "coherence": [
+            0.995380289892,
+            0.997240824404,
+            0.999070800594,
+            0.997500639629,
+            0.997562301058
+          ],
+          "energy": -10.5,
+          "label": "v2_batch_13",
+          "phases_rad": [
+            0.0709849178895,
+            -0.016463312783,
+            3.13978226172,
+            -0.0423394452264,
+            3.13255214958
+          ],
+          "raw_spin_shadow": [
+            1,
+            1,
+            -1,
+            1,
+            -1
+          ],
+          "residual_rad": 0.0709849178895,
+          "responses": [
+            {
+              "imag": 0.0705976646666,
+              "real": 0.992873552497
+            },
+            {
+              "imag": -0.0164171459697,
+              "real": 0.997105681047
+            },
+            {
+              "imag": 0.00180870866806,
+              "real": -0.999069163358
+            },
+            {
+              "imag": -0.0422210066253,
+              "real": 0.996606699084
+            },
+            {
+              "imag": 0.00901834313762,
+              "real": -0.997521535596
+            }
+          ],
+          "spins": [
+            1,
+            1,
+            -1,
+            1,
+            -1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -10.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.519851750013,
+            "missing_pair_operator": 7.15591269525,
+            "no_lock": 1.98309117295,
+            "no_transform": 13.4404987119,
+            "scrambled_geometry": 1.21113002823,
+            "uniform_carrier": 0.360120939176
+          },
+          "omitted_inverse_step_error": 1.72000776941,
+          "omitted_restoration_error": 1.77271992765,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00416811739185,
+            "missing_pair_operator": 1.9807892898,
+            "no_lock": 1.35260096068,
+            "no_transform": 0.08484428666,
+            "scrambled_geometry": 0.0534917871037,
+            "uniform_carrier": 0.00388769120322,
+            "wrong_query": 0.944245934347
+          },
+          "samplewise_non_rank_one_residual": 0.0962020128651,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          -2.0,
+          -2.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          0.0,
+          -1.0,
+          1.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          0.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          -2.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -2.0,
+          1.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        0.5,
+        1.0,
+        -0.5,
+        0.5,
+        1.0
+      ],
+      "index": 13,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 42.8860688035,
+        "restoration_max_abs_error": 1.22965657932e-14,
+        "reuse_carrier_displacement_l2": 42.8860688035,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.13530822397e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "45f80e76b276002633273e055403a9ea92007dc67d8d1b1d8a9e626fd134c569",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "7a4902b346b0eb44530b1918041de992aab1905f1798df28fedd7bac87b834a6",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "c75a544ca7e758cd3a94660ce306ea3bc020010db7b282d7c42e2093e1c987b4",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "695601ef474e4347d4cacf7863e4ab4c5f0330c369b9d6b02ab6e4849e9e4971",
+      "reuse": {
+        "boundary_response_delta_l2": 5.13534965632e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.13530822397e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.848500628841,
+        "latch": {
+          "coherence": [
+            0.996912693071,
+            0.997639639581,
+            0.998803355812,
+            0.995603420158,
+            0.990740157529
+          ],
+          "energy": null,
+          "label": "v2_batch_14",
+          "phases_rad": [
+            2.86434986353,
+            -2.98590076069,
+            -0.691997789148,
+            0.360401607849,
+            -2.29309202475
+          ],
+          "raw_spin_shadow": [
+            -1,
+            -1,
+            1,
+            1,
+            -1
+          ],
+          "residual_rad": 0.848500628841,
+          "responses": [
+            {
+              "imag": 0.272859759225,
+              "real": -0.958844340548
+            },
+            {
+              "imag": -0.154697654318,
+              "real": -0.985572669168
+            },
+            {
+              "imag": -0.637313147083,
+              "real": 0.769051426197
+            },
+            {
+              "imag": 0.351099614184,
+              "real": 0.931641149344
+            },
+            {
+              "imag": -0.743342434115,
+              "real": -0.654987087953
+            }
+          ],
+          "spins": null,
+          "valid": false
+        },
+        "raw_spin_energy": -9.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.527733848406,
+            "missing_pair_operator": 14.7657473088,
+            "no_lock": 1.67058933995,
+            "no_transform": 15.3883029388,
+            "scrambled_geometry": 1.82861483512,
+            "uniform_carrier": 0.59034044454
+          },
+          "omitted_inverse_step_error": 1.71127922898,
+          "omitted_restoration_error": 1.77293334815,
+          "response_deltas_l2": {
+            "flat_geometry": 0.0205483685386,
+            "missing_pair_operator": 1.03564295523,
+            "no_lock": 0.917933797334,
+            "no_transform": 2.19796801266,
+            "scrambled_geometry": 0.0600137079895,
+            "uniform_carrier": 0.00439793578512,
+            "wrong_query": 0.940864145294
+          },
+          "samplewise_non_rank_one_residual": 0.108241674463,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -1.0,
+          -1.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          -1.0,
+          -1.0,
+          2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          0.0,
+          -2.0,
+          2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          -2.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          2.0,
+          2.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        -0.5,
+        2.0,
+        2.0,
+        -0.5
+      ],
+      "index": 14,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 42.6520943354,
+        "restoration_max_abs_error": 1.392843259e-14,
+        "reuse_carrier_displacement_l2": 42.6520943354,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.3980684839e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "75bc530f8b256ee7c983a0195f29e0a24c56b4e2f6f7fc054ed0e878aaf0a1be",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "4d9bf9042a9018911f83a1e699a37961574591589856587d6153884f6e4131e4",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "6d10f41981fd93c862a283ce6a7d58f41aa9fb64c15101e113d4ac250cce8b8b",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "33086119c65afb5af57d07dea20d2e1c0f5ca9d6e58b4aa7c5919e1f6f4b8fc1",
+      "reuse": {
+        "boundary_response_delta_l2": 2.21349627931e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.3980684839e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.124319269075,
+        "latch": {
+          "coherence": [
+            0.994196010237,
+            0.997896526904,
+            0.999934473634,
+            0.995743803647,
+            0.996395481128
+          ],
+          "energy": -10.5,
+          "label": "v2_batch_15",
+          "phases_rad": [
+            0.124319269075,
+            -0.0777527658317,
+            0.00246668962237,
+            3.04685149082,
+            -0.0110294009483
+          ],
+          "raw_spin_shadow": [
+            1,
+            1,
+            1,
+            -1,
+            1
+          ],
+          "residual_rad": 0.124319269075,
+          "responses": [
+            {
+              "imag": 0.123279594334,
+              "real": 0.986523110926
+            },
+            {
+              "imag": -0.0775110611042,
+              "real": 0.994881658195
+            },
+            {
+              "imag": 0.00246652548787,
+              "real": 0.999931431556
+            },
+            {
+              "imag": 0.0941968613252,
+              "real": -0.991278302909
+            },
+            {
+              "imag": -0.010989422455,
+              "real": 0.996334877141
+            }
+          ],
+          "spins": [
+            1,
+            1,
+            1,
+            -1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -10.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.669511389237,
+            "missing_pair_operator": 8.97470174513,
+            "no_lock": 1.85051459207,
+            "no_transform": 18.595952237,
+            "scrambled_geometry": 1.83150445281,
+            "uniform_carrier": 0.802754113598
+          },
+          "omitted_inverse_step_error": 1.71429077411,
+          "omitted_restoration_error": 1.77120377167,
+          "response_deltas_l2": {
+            "flat_geometry": 0.0317358818898,
+            "missing_pair_operator": 0.614934872606,
+            "no_lock": 2.07205747248,
+            "no_transform": 0.0187025154055,
+            "scrambled_geometry": 0.100570376176,
+            "uniform_carrier": 0.0243460322393,
+            "wrong_query": 0.942195949274
+          },
+          "samplewise_non_rank_one_residual": 0.0769400865145,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -2.0,
+          2.0,
+          2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          0.0,
+          1.0,
+          -1.0,
+          1.0
+        ],
+        [
+          2.0,
+          1.0,
+          0.0,
+          -1.0,
+          2.0
+        ],
+        [
+          2.0,
+          -1.0,
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0,
+          2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        2.0,
+        0.5,
+        2.0,
+        -0.5,
+        -0.5
+      ],
+      "index": 15,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 46.4356523926,
+        "restoration_max_abs_error": 1.15779016068e-14,
+        "reuse_carrier_displacement_l2": 46.4356523926,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.31948500171e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "b70a0860ce4ed163d89c8f7830b415ecab1c12e00663748f1ec6a9bfbe26ddb6",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "38faf00d225d874ae5ce75a2111af9dd84c079168bf76925504ab520ae14f79a",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "c2cb9046826bb73e20c5cb81d24c6bb2388193cf2b78bcb86cf1ea691795bb8e",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "7d7181397d20af42429932cc5423f6a595d133bfbfd5352d1b4c29d43f401a34",
+      "reuse": {
+        "boundary_response_delta_l2": 4.02044386994e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.31948500171e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.107901177313,
+        "latch": {
+          "coherence": [
+            0.992296520681,
+            0.992255293475,
+            0.998293163383,
+            0.999093446923,
+            0.981484858088
+          ],
+          "energy": -13.0,
+          "label": "v2_batch_16",
+          "phases_rad": [
+            0.0330872210868,
+            0.0476315834908,
+            3.11890283602,
+            0.0165859614341,
+            -0.107901177313
+          ],
+          "raw_spin_shadow": [
+            1,
+            1,
+            -1,
+            1,
+            1
+          ],
+          "residual_rad": 0.107901177313,
+          "responses": [
+            {
+              "imag": 0.0328263440806,
+              "real": 0.991753404879
+            },
+            {
+              "imag": 0.0472448215378,
+              "real": 0.991129907866
+            },
+            {
+              "imag": 0.0226491462394,
+              "real": -0.99803619986
+            },
+            {
+              "imag": 0.0165701656295,
+              "real": 0.998956027709
+            },
+            {
+              "imag": -0.105697991735,
+              "real": 0.975776850104
+            }
+          ],
+          "spins": [
+            1,
+            1,
+            -1,
+            1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -13.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.487445866538,
+            "missing_pair_operator": 6.21282827823,
+            "no_lock": 1.39257649395,
+            "no_transform": 15.2534849999,
+            "scrambled_geometry": 3.81296443588,
+            "uniform_carrier": 0.745055930429
+          },
+          "omitted_inverse_step_error": 1.72371785717,
+          "omitted_restoration_error": 1.77245304944,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00837560434079,
+            "missing_pair_operator": 0.184386364974,
+            "no_lock": 1.41989118221,
+            "no_transform": 1.97913902056,
+            "scrambled_geometry": 1.9737174292,
+            "uniform_carrier": 0.00447930824482,
+            "wrong_query": 0.939227514425
+          },
+          "samplewise_non_rank_one_residual": 0.0740835133826,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          -2.0,
+          1.0,
+          -1.0
+        ],
+        [
+          2.0,
+          0.0,
+          1.0,
+          2.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          0.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          1.0,
+          2.0,
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          -2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        0.5,
+        2.0,
+        -0.5,
+        2.0,
+        1.0
+      ],
+      "index": 16,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 44.9754594078,
+        "restoration_max_abs_error": 1.08083491067e-14,
+        "reuse_carrier_displacement_l2": 44.9754594078,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.21423902491e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "9eddb38a7fac3c4a26ef23e9ba39caeffbeb036785adf28b508e313fa738a859",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "4e00c2683ac32d462f7cbceac1f78f6523170b89d7761e0210e6a6caa2da5d2c",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "10051848a50d1a878696d586fde1a0c88550375d26f6ff79bb533b84cd49187f",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "8f388115da84950092dd648dc638fa61dbc638c6326ca19fe4f700a1424a1536",
+      "reuse": {
+        "boundary_response_delta_l2": 4.5040049784e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.21423902491e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0389594569628,
+        "latch": {
+          "coherence": [
+            0.997463399628,
+            0.996134903121,
+            0.999964010121,
+            0.997092446055,
+            0.996304223452
+          ],
+          "energy": -13.5,
+          "label": "v2_batch_17",
+          "phases_rad": [
+            -3.10263319663,
+            0.00704716599375,
+            -3.13888211155,
+            3.11289806024,
+            -3.13912476615
+          ],
+          "raw_spin_shadow": [
+            -1,
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "residual_rad": 0.0389594569628,
+          "responses": [
+            {
+              "imag": -0.0388508024367,
+              "real": -0.996706500805
+            },
+            {
+              "imag": 0.00701986991002,
+              "real": 0.996110167925
+            },
+            {
+              "imag": -0.00271044117267,
+              "real": -0.999960336737
+            },
+            {
+              "imag": 0.0286072361223,
+              "real": -0.996681981387
+            },
+            {
+              "imag": -0.00245876418553,
+              "real": -0.996301189474
+            }
+          ],
+          "spins": [
+            -1,
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -13.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.404409775389,
+            "missing_pair_operator": 12.6022130638,
+            "no_lock": 0.893899556859,
+            "no_transform": 15.8159795289,
+            "scrambled_geometry": 1.24610815995,
+            "uniform_carrier": 0.592109620418
+          },
+          "omitted_inverse_step_error": 1.72057767374,
+          "omitted_restoration_error": 1.77265850397,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00505083110193,
+            "missing_pair_operator": 1.95635005386,
+            "no_lock": 0.834487354403,
+            "no_transform": 0.0494074826851,
+            "scrambled_geometry": 0.026122544,
+            "uniform_carrier": 0.00284584814779,
+            "wrong_query": 0.945498371482
+          },
+          "samplewise_non_rank_one_residual": 0.117073103433,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -2.0,
+          1.0,
+          -2.0,
+          2.0
+        ],
+        [
+          -2.0,
+          0.0,
+          -1.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          1.0,
+          -1.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        [
+          2.0,
+          -2.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        1.0,
+        2.0,
+        0.5,
+        -1.0,
+        -1.0
+      ],
+      "index": 17,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 42.9672944634,
+        "restoration_max_abs_error": 1.22090464296e-14,
+        "reuse_carrier_displacement_l2": 42.9672944634,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.04037138982e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "b7d1bc78c80c54b1e6babae87b3184dcefa40e7c3c1085e622767d2515c5fa0f",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "9066e5947604ce2847343a0d15d72bd03304071a9de879a08a0852a0c15ab548",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "739e36f57eff336fd300ba307b73ffe67a9b6120fca6a8e015876e7ba786c16a",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "a0345e889ba53747cb3f225ab1dbe1d2613ffd494fc98af8b1661080be274a39",
+      "reuse": {
+        "boundary_response_delta_l2": 6.60681739563e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.04037138982e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0253728750237,
+        "latch": {
+          "coherence": [
+            0.998165151653,
+            0.993426488374,
+            0.990085362502,
+            0.986646529462,
+            0.997991565381
+          ],
+          "energy": -13.0,
+          "label": "v2_batch_18",
+          "phases_rad": [
+            -3.1373599932,
+            -3.13316087546,
+            -3.11621977857,
+            -0.0149420293199,
+            -0.00239432670869
+          ],
+          "raw_spin_shadow": [
+            -1,
+            -1,
+            -1,
+            1,
+            1
+          ],
+          "residual_rad": 0.0253728750237,
+          "responses": [
+            {
+              "imag": -0.00422488148626,
+              "real": -0.998156210395
+            },
+            {
+              "imag": -0.00837625248363,
+              "real": -0.993391174814
+            },
+            {
+              "imag": -0.0251186168076,
+              "real": -0.989766679643
+            },
+            {
+              "imag": -0.0147419527989,
+              "real": 0.986536390068
+            },
+            {
+              "imag": -0.00238951557693,
+              "real": 0.997988704739
+            }
+          ],
+          "spins": [
+            -1,
+            -1,
+            -1,
+            1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -13.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.564018124549,
+            "missing_pair_operator": 12.07624299,
+            "no_lock": 3.43671657486,
+            "no_transform": 15.334327487,
+            "scrambled_geometry": 2.08193018304,
+            "uniform_carrier": 0.625497652222
+          },
+          "omitted_inverse_step_error": 1.71178199051,
+          "omitted_restoration_error": 1.77125516514,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00728864146629,
+            "missing_pair_operator": 0.0545819988188,
+            "no_lock": 3.09073158703,
+            "no_transform": 0.0357645373425,
+            "scrambled_geometry": 0.00613388885818,
+            "uniform_carrier": 0.00587264659196,
+            "wrong_query": 0.945284191542
+          },
+          "samplewise_non_rank_one_residual": 0.0574488981177,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          1.0,
+          -1.0,
+          -2.0
+        ],
+        [
+          2.0,
+          0.0,
+          1.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          1.0,
+          1.0,
+          0.0,
+          2.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -2.0,
+          2.0,
+          0.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          -2.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        2.0,
+        1.0,
+        0.5,
+        2.0
+      ],
+      "index": 18,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 43.1437856207,
+        "restoration_max_abs_error": 1.29996876319e-14,
+        "reuse_carrier_displacement_l2": 43.1437856207,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.25927141391e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "aa1c21f0013b842ef9853e791f6698b47dc00b07743e876b8d53682b27ca61a0",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "40b6f6b5b0f5f88b1c6ed9997eb33d4693a82d6171bfb93b3b5c33ac3c54b392",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "baedcac1895e2c79cffad2aaee1d15c991bb808d798d5804fd81148a41fc523c",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "a8a280b24183b4b790b58a819a4446ed6d2579041150ec416b2fc992856a0814",
+      "reuse": {
+        "boundary_response_delta_l2": 1.04765207679e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.25927141391e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.899312693927,
+        "latch": {
+          "coherence": [
+            0.986786760932,
+            0.990192032393,
+            0.99872218224,
+            0.997210128653,
+            0.998717347849
+          ],
+          "energy": null,
+          "label": "v2_batch_19",
+          "phases_rad": [
+            0.899312693927,
+            2.38500182553,
+            -2.91724730973,
+            -0.330044494711,
+            -2.7469338277
+          ],
+          "raw_spin_shadow": [
+            1,
+            -1,
+            -1,
+            1,
+            -1
+          ],
+          "residual_rad": 0.899312693927,
+          "responses": [
+            {
+              "imag": 0.772554850232,
+              "real": 0.613927613757
+            },
+            {
+              "imag": 0.679713712211,
+              "real": -0.720048283413
+            },
+            {
+              "imag": -0.222183885655,
+              "real": -0.973694160532
+            },
+            {
+              "imag": -0.323180966159,
+              "real": 0.943388628191
+            },
+            {
+              "imag": -0.384000092779,
+              "real": -0.921943745377
+            }
+          ],
+          "spins": null,
+          "valid": false
+        },
+        "raw_spin_energy": -8.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.414535551698,
+            "missing_pair_operator": 13.17206951,
+            "no_lock": 1.89882458825,
+            "no_transform": 14.3392156213,
+            "scrambled_geometry": 1.14115229524,
+            "uniform_carrier": 0.447832515547
+          },
+          "omitted_inverse_step_error": 1.71254828638,
+          "omitted_restoration_error": 1.77234684102,
+          "response_deltas_l2": {
+            "flat_geometry": 0.0799077803194,
+            "missing_pair_operator": 1.91434098094,
+            "no_lock": 1.15789537128,
+            "no_transform": 2.28639573778,
+            "scrambled_geometry": 0.349380254191,
+            "uniform_carrier": 0.0426775076054,
+            "wrong_query": 0.943147044114
+          },
+          "samplewise_non_rank_one_residual": 0.0979942571251,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -2.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          -1.0,
+          -2.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          0.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          1.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        -1.0,
+        -2.0,
+        0.5,
+        -0.5
+      ],
+      "index": 19,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 42.229413543,
+        "restoration_max_abs_error": 1.17798796093e-14,
+        "reuse_carrier_displacement_l2": 42.229413543,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.19508946606e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "4a7692d2db253067a04bc95cd529aa25badbf7f1c39120664c2d66ea0a5df0b5",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "190209336cacedd1ec991bc3af42f527b061121386866ac34fa51f0f8574f33f",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "d71a7a6060f2154cafc6ab90a6f08a073e860140a699e4c9d0bf3a30f269fe8e",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "a20a959c60798f6026109d4247f27c9241f7ccf6ac2c47bdb8648e3f3653fb39",
+      "reuse": {
+        "boundary_response_delta_l2": 6.06190921566e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.19508946606e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0321177205579,
+        "latch": {
+          "coherence": [
+            0.995764821135,
+            0.996390665165,
+            0.999789789737,
+            0.997536786521,
+            0.99852725981
+          ],
+          "energy": -12.0,
+          "label": "v2_batch_20",
+          "phases_rad": [
+            -3.10947493303,
+            0.00541593953175,
+            -0.0265331037827,
+            -0.00583511345028,
+            -3.1395576236
+          ],
+          "raw_spin_shadow": [
+            -1,
+            1,
+            1,
+            1,
+            -1
+          ],
+          "residual_rad": 0.0321177205579,
+          "responses": [
+            {
+              "imag": -0.0319761981079,
+              "real": -0.995251275691
+            },
+            {
+              "imag": 0.00539636521105,
+              "real": 0.996376051936
+            },
+            {
+              "imag": -0.0265244137737,
+              "real": 0.999437881579
+            },
+            {
+              "imag": -0.00582070728894,
+              "real": 0.99751980423
+            },
+            {
+              "imag": -0.00203203151561,
+              "real": -0.998525192187
+            }
+          ],
+          "spins": [
+            -1,
+            1,
+            1,
+            1,
+            -1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -12.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.497251596109,
+            "missing_pair_operator": 6.18405731319,
+            "no_lock": 1.21189954264,
+            "no_transform": 17.8728119822,
+            "scrambled_geometry": 1.29546933523,
+            "uniform_carrier": 0.766871542295
+          },
+          "omitted_inverse_step_error": 1.71771577653,
+          "omitted_restoration_error": 1.7726981679,
+          "response_deltas_l2": {
+            "flat_geometry": 0.0050208886027,
+            "missing_pair_operator": 0.0565422830555,
+            "no_lock": 0.766550823659,
+            "no_transform": 0.042865811608,
+            "scrambled_geometry": 0.034225680392,
+            "uniform_carrier": 0.00316850325515,
+            "wrong_query": 0.952896298705
+          },
+          "samplewise_non_rank_one_residual": 0.0888475697958,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -2.0,
+          2.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          0.0,
+          2.0,
+          2.0,
+          -2.0
+        ],
+        [
+          2.0,
+          2.0,
+          0.0,
+          2.0,
+          2.0
+        ],
+        [
+          -1.0,
+          2.0,
+          2.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -2.0,
+          2.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        0.5,
+        2.0,
+        -0.5,
+        -1.0
+      ],
+      "index": 20,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 42.9118311495,
+        "restoration_max_abs_error": 1.16874704916e-14,
+        "reuse_carrier_displacement_l2": 42.9118311495,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.03202978715e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "15ebb4b9f7f56ab95c6dfe57f7f23dda745e4dec07880d35238dde3d976edd6d",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "4d4ddff1fd6cca1f188599b7d6025b1d687d0b74e750df93b7a62ff709dab15a",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "f5fc89d8b40d5bcc06b98f6c016fef652589342b720bf6365f090c797b6ebc10",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "74669eac6edf145826fa632431ef24d92181c2f0803971546238389d2e9b7bea",
+      "reuse": {
+        "boundary_response_delta_l2": 3.28868812981e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.03202978715e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.011064207934,
+        "latch": {
+          "coherence": [
+            0.991520357735,
+            0.994906673925,
+            0.998957524167,
+            0.996993481154,
+            0.991001251392
+          ],
+          "energy": -9.0,
+          "label": "v2_batch_21",
+          "phases_rad": [
+            -3.13052844566,
+            -3.14059342248,
+            -0.00603223399208,
+            -0.00459744075595,
+            -0.00918813095151
+          ],
+          "raw_spin_shadow": [
+            -1,
+            -1,
+            1,
+            1,
+            1
+          ],
+          "residual_rad": 0.011064207934,
+          "responses": [
+            {
+              "imag": -0.0109701635837,
+              "real": -0.991459669031
+            },
+            {
+              "imag": -0.000994141531309,
+              "real": -0.994906177236
+            },
+            {
+              "imag": -0.00602590898879,
+              "real": 0.998939349265
+            },
+            {
+              "imag": -0.00458360231678,
+              "real": 0.996982944715
+            },
+            {
+              "imag": -0.00910532115511,
+              "real": 0.990959420657
+            }
+          ],
+          "spins": [
+            -1,
+            -1,
+            1,
+            1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -9.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.755867485061,
+            "missing_pair_operator": 7.09550909154,
+            "no_lock": 3.51873794568,
+            "no_transform": 14.0733264488,
+            "scrambled_geometry": 1.98655747531,
+            "uniform_carrier": 0.963196626185
+          },
+          "omitted_inverse_step_error": 1.72002012898,
+          "omitted_restoration_error": 1.76587516679,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00202852228017,
+            "missing_pair_operator": 0.0431853404944,
+            "no_lock": 2.6199874525,
+            "no_transform": 0.0212922554448,
+            "scrambled_geometry": 0.00841299538807,
+            "uniform_carrier": 0.0056040773608,
+            "wrong_query": 0.943144172468
+          },
+          "samplewise_non_rank_one_residual": 0.0908285509514,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          -2.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -1.0,
+          0.0,
+          1.0,
+          -1.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          -2.0,
+          2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        0.5,
+        -0.5,
+        -0.5,
+        0.5
+      ],
+      "index": 21,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 43.8912309462,
+        "restoration_max_abs_error": 1.25980964775e-14,
+        "reuse_carrier_displacement_l2": 43.8912309462,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.20114638572e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f18a34d7ee43b9dfb33dc9baa16334fe965218162e40597a8be0c0866f20fed2",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "9f54d919ea0524e7baa2a8ce9cd329d76f85b41eda089026049b5d45d11229ac",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "49d077412ddccecba1b381e98362d74f38dd7c608ab1d25fc9a9878359789956",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "593541d128702e2740ecf3f5d2ae50280d3e96b88fdc1613cb4a601d96e4bbb3",
+      "reuse": {
+        "boundary_response_delta_l2": 8.80540065862e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.20114638572e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0328381721235,
+        "latch": {
+          "coherence": [
+            0.994146768933,
+            0.998035921233,
+            0.99139985319,
+            0.994886846278,
+            0.998158247261
+          ],
+          "energy": -11.0,
+          "label": "v2_batch_22",
+          "phases_rad": [
+            0.0328381721235,
+            0.0028750680526,
+            3.11223024488,
+            3.13943850997,
+            3.13525463167
+          ],
+          "raw_spin_shadow": [
+            1,
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "residual_rad": 0.0328381721235,
+          "responses": [
+            {
+              "imag": 0.0326400957592,
+              "real": 0.993610800228
+            },
+            {
+              "imag": 0.00286941723937,
+              "real": 0.998031796346
+            },
+            {
+              "imag": 0.0291057050105,
+              "real": -0.990972515684
+            },
+            {
+              "imag": 0.00214312749288,
+              "real": -0.994884537975
+            },
+            {
+              "imag": 0.00632630649338,
+              "real": -0.998138199059
+            }
+          ],
+          "spins": [
+            1,
+            1,
+            -1,
+            -1,
+            -1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -11.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.305582757444,
+            "missing_pair_operator": 6.25719655901,
+            "no_lock": 0.852186442218,
+            "no_transform": 12.4028906568,
+            "scrambled_geometry": 0.887682107434,
+            "uniform_carrier": 0.567329105036
+          },
+          "omitted_inverse_step_error": 1.71159774972,
+          "omitted_restoration_error": 1.77267717789,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00646250278719,
+            "missing_pair_operator": 0.0606415023573,
+            "no_lock": 0.103116962048,
+            "no_transform": 0.0460564007151,
+            "scrambled_geometry": 0.0224297945839,
+            "uniform_carrier": 0.00399880497948,
+            "wrong_query": 0.946780599128
+          },
+          "samplewise_non_rank_one_residual": 0.0523215469627,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          2.0,
+          -2.0,
+          -1.0
+        ],
+        [
+          1.0,
+          0.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          2.0,
+          -1.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          1.0,
+          0.0,
+          2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          1.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        2.0,
+        -0.5,
+        -2.0,
+        0.5,
+        1.0
+      ],
+      "index": 22,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 43.7613524885,
+        "restoration_max_abs_error": 1.6091724337e-14,
+        "reuse_carrier_displacement_l2": 43.7613524885,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.60951708815e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "be4f0ca5c7f60a47035991a60d36a167cd59f4f32ebd2c58335c292dc1b2efe0",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "6233a5f537f16790d03a59a9d469c6fbfc250a70fdac982c5fc18eb3a1397e60",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "7e9721ff732ff89d82cd6f19940be0cf027a138ffcb9a67df41888f0668ae49a",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "15c95f50f41b252e37649669b67c30536cb571b6d6b0054df7b3f98c1dc6b3bf",
+      "reuse": {
+        "boundary_response_delta_l2": 4.55378129193e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.60951708815e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0245689320652,
+        "latch": {
+          "coherence": [
+            0.994490677734,
+            0.997087935295,
+            0.999364622874,
+            0.99887499072,
+            0.982523348585
+          ],
+          "energy": -7.5,
+          "label": "v2_batch_23",
+          "phases_rad": [
+            0.0163402828114,
+            -0.00697826569966,
+            -0.0015323950476,
+            -3.13321066846,
+            -0.0245689320652
+          ],
+          "raw_spin_shadow": [
+            1,
+            1,
+            1,
+            -1,
+            1
+          ],
+          "residual_rad": 0.0245689320652,
+          "responses": [
+            {
+              "imag": 0.0162495357875,
+              "real": 0.994357913775
+            },
+            {
+              "imag": -0.00695788806765,
+              "real": 0.9970636582
+            },
+            {
+              "imag": -0.00153142079948,
+              "real": 0.999363449503
+            },
+            {
+              "imag": -0.00837245728002,
+              "real": -0.998839901608
+            },
+            {
+              "imag": -0.0241371209081,
+              "real": 0.982226822026
+            }
+          ],
+          "spins": [
+            1,
+            1,
+            1,
+            -1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -7.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.425345688165,
+            "missing_pair_operator": 7.9055285619,
+            "no_lock": 0.676962798454,
+            "no_transform": 14.1229090522,
+            "scrambled_geometry": 1.24843254647,
+            "uniform_carrier": 0.596660474814
+          },
+          "omitted_inverse_step_error": 1.71153966239,
+          "omitted_restoration_error": 1.77272226391,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00280165589977,
+            "missing_pair_operator": 2.80802081994,
+            "no_lock": 0.387282561084,
+            "no_transform": 0.0364087302169,
+            "scrambled_geometry": 0.00806102724333,
+            "uniform_carrier": 0.00616032787285,
+            "wrong_query": 0.943445486479
+          },
+          "samplewise_non_rank_one_residual": 0.0827791926913,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          1.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -1.0,
+          0.0,
+          -1.0,
+          -1.0,
+          2.0
+        ],
+        [
+          1.0,
+          -1.0,
+          0.0,
+          -1.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          -1.0,
+          0.0,
+          2.0
+        ],
+        [
+          1.0,
+          2.0,
+          2.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        1.0,
+        1.0,
+        -1.0,
+        -1.0
+      ],
+      "index": 23,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 46.2122561277,
+        "restoration_max_abs_error": 1.31012858708e-14,
+        "reuse_carrier_displacement_l2": 46.2122561277,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.08699849338e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "9cbe3a8bbe2976c64362f13164623458c48f7ba5ff5a2b8acd6985d774870d04",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "3d323a744c3f17c62822b9578b6204905ebe46f52dd6cdaccdee3097b8904eea",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "7d81819e9663f614db9b2f9bb9dbc2a7885ec6b01c345a607dd69d8450b4fd40",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "ab2b5358697155f85cc88624a9fc4d6d4a964e9b1d4805cd460293d2b43e89bb",
+      "reuse": {
+        "boundary_response_delta_l2": 1.49718099437e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.08699849338e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0237840181793,
+        "latch": {
+          "coherence": [
+            0.993778800518,
+            0.998603514821,
+            0.999077196712,
+            0.996939122574,
+            0.99385239099
+          ],
+          "energy": -10.0,
+          "label": "v2_batch_24",
+          "phases_rad": [
+            -3.11780863541,
+            0.000660779641987,
+            -0.00418193225462,
+            -0.01544860766,
+            -0.0122915096637
+          ],
+          "raw_spin_shadow": [
+            -1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "residual_rad": 0.0237840181793,
+          "responses": [
+            {
+              "imag": -0.0236338247155,
+              "real": -0.99349773361
+            },
+            {
+              "imag": 0.000659856824991,
+              "real": 0.998603296811
+            },
+            {
+              "imag": -0.00417806097572,
+              "real": 0.999068460515
+            },
+            {
+              "imag": -0.015400708761,
+              "real": 0.996820160454
+            },
+            {
+              "imag": -0.0122156386705,
+              "real": 0.993777315725
+            }
+          ],
+          "spins": [
+            -1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -10.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.572473243036,
+            "missing_pair_operator": 9.2922312094,
+            "no_lock": 2.08744948885,
+            "no_transform": 14.7666611877,
+            "scrambled_geometry": 1.19929019642,
+            "uniform_carrier": 1.53604732073
+          },
+          "omitted_inverse_step_error": 1.71744470816,
+          "omitted_restoration_error": 1.77261506361,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00288867667921,
+            "missing_pair_operator": 0.0557922694645,
+            "no_lock": 0.107305624606,
+            "no_transform": 0.0325082162945,
+            "scrambled_geometry": 0.0175730203343,
+            "uniform_carrier": 0.00312537072206,
+            "wrong_query": 0.943323756844
+          },
+          "samplewise_non_rank_one_residual": 0.0482143374664,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          -2.0,
+          1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        2.0,
+        -2.0,
+        1.0,
+        2.0
+      ],
+      "index": 24,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 45.0525533664,
+        "restoration_max_abs_error": 1.38631251179e-14,
+        "reuse_carrier_displacement_l2": 45.0525533664,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.16192146188e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "92ba22dfa314f6749be1768e8d68701aa3d347dbc3b76d49f07b113ed162b909",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "db4425c400bd9e8bebb30e13b4df8808317576ea0863b485841a8fa506dea42d",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "e12258de57de38a7b2f387a9b8c633b67850d3987c350bc6846a2e71deeabdfd",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "5c15a71285780cfe35355489a7564f5379fef5a81392355a6b22097f0e2a15c4",
+      "reuse": {
+        "boundary_response_delta_l2": 6.19425035528e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.16192146188e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0760675192329,
+        "latch": {
+          "coherence": [
+            0.994642333346,
+            0.994914490842,
+            0.987347639688,
+            0.99857908665,
+            0.959379207182
+          ],
+          "energy": -15.5,
+          "label": "v2_batch_25",
+          "phases_rad": [
+            0.0055312555078,
+            0.0257548357417,
+            -3.11414342502,
+            -0.0102180900126,
+            3.06552513436
+          ],
+          "raw_spin_shadow": [
+            1,
+            1,
+            -1,
+            1,
+            -1
+          ],
+          "residual_rad": 0.0760675192329,
+          "responses": [
+            {
+              "imag": 0.00550159283116,
+              "real": 0.994627117949
+            },
+            {
+              "imag": 0.0256210266156,
+              "real": 0.994584539938
+            },
+            {
+              "imag": -0.0270985277981,
+              "real": -0.986975699493
+            },
+            {
+              "imag": -0.010203393435,
+              "real": 0.9985269566
+            },
+            {
+              "imag": 0.0729072386704,
+              "real": -0.956604932939
+            }
+          ],
+          "spins": [
+            1,
+            1,
+            -1,
+            1,
+            -1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -15.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.533423487225,
+            "missing_pair_operator": 12.9094051118,
+            "no_lock": 1.05132514368,
+            "no_transform": 16.0357394915,
+            "scrambled_geometry": 1.67781829204,
+            "uniform_carrier": 0.854902513056
+          },
+          "omitted_inverse_step_error": 1.71612614866,
+          "omitted_restoration_error": 1.77317158556,
+          "response_deltas_l2": {
+            "flat_geometry": 0.0132038425586,
+            "missing_pair_operator": 1.92946222235,
+            "no_lock": 0.201269774287,
+            "no_transform": 0.094474302027,
+            "scrambled_geometry": 0.012671623281,
+            "uniform_carrier": 0.0212663371554,
+            "wrong_query": 0.954708220663
+          },
+          "samplewise_non_rank_one_residual": 0.119984624431,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -2.0,
+          2.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          -2.0,
+          1.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          0.0,
+          -1.0,
+          -2.0
+        ],
+        [
+          2.0,
+          1.0,
+          -1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          2.0,
+          -2.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        0.5,
+        2.0,
+        -2.0,
+        1.0,
+        -1.0
+      ],
+      "index": 25,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 43.0164420675,
+        "restoration_max_abs_error": 1.39164806514e-14,
+        "reuse_carrier_displacement_l2": 43.0164420675,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.18606950097e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "8087657a910166e66a3ee71b1dde23a1f5d9c49a17969adcd51f215e02f5467f",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "4a778a47c5a58dbffe257c6738150ba655a41e178eff7fa619dd5913380a0a63",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "91c66515cf60755697e2b61bf90ebd16742cbc734aaa533db2aa85866e92a7f7",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "dee2c613646ba5f1b5a9e1daacf0f9dd54d041e1a2562a14fbd42ef0f2b52b88",
+      "reuse": {
+        "boundary_response_delta_l2": 2.03166133757e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.18606950097e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0346334528831,
+        "latch": {
+          "coherence": [
+            0.999308151442,
+            0.971116846463,
+            0.994647300352,
+            0.998834034529,
+            0.998550126979
+          ],
+          "energy": -11.5,
+          "label": "v2_batch_26",
+          "phases_rad": [
+            -3.12527522793,
+            0.0346334528831,
+            3.12378157213,
+            3.13888076828,
+            0.00297601921186
+          ],
+          "raw_spin_shadow": [
+            -1,
+            1,
+            -1,
+            -1,
+            1
+          ],
+          "residual_rad": 0.0346334528831,
+          "responses": [
+            {
+              "imag": -0.0163054128769,
+              "real": -0.999175117309
+            },
+            {
+              "imag": 0.0336264062602,
+              "real": 0.970534488973
+            },
+            {
+              "imag": 0.0177148074352,
+              "real": -0.994489536242
+            },
+            {
+              "imag": 0.00270872002387,
+              "real": -0.998830361658
+            },
+            {
+              "imag": 0.00297169997532,
+              "real": 0.998545705058
+            }
+          ],
+          "spins": [
+            -1,
+            1,
+            -1,
+            -1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -11.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 1.6290897555,
+            "missing_pair_operator": 13.0407761008,
+            "no_lock": 1.23665388542,
+            "no_transform": 15.9823536731,
+            "scrambled_geometry": 3.15014547708,
+            "uniform_carrier": 1.25488501467
+          },
+          "omitted_inverse_step_error": 1.71739641127,
+          "omitted_restoration_error": 1.77226179068,
+          "response_deltas_l2": {
+            "flat_geometry": 0.0115978694735,
+            "missing_pair_operator": 0.110185451125,
+            "no_lock": 0.12746736059,
+            "no_transform": 0.0512899491765,
+            "scrambled_geometry": 0.00722303654537,
+            "uniform_carrier": 0.00566483011669,
+            "wrong_query": 0.945280867097
+          },
+          "samplewise_non_rank_one_residual": 0.091276423202,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -2.0,
+          1.0,
+          -1.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          0.0,
+          2.0,
+          -2.0,
+          1.0
+        ],
+        [
+          1.0,
+          2.0,
+          0.0,
+          1.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -2.0,
+          1.0,
+          0.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          -1.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        -2.0,
+        -0.5,
+        -2.0,
+        2.0
+      ],
+      "index": 26,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 44.9315173789,
+        "restoration_max_abs_error": 1.31553523112e-14,
+        "reuse_carrier_displacement_l2": 44.9315173789,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.38248401869e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "62d70c7c652dbb07518c2db3f52d141a17908be9b259cb4a92fa27498712523f",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "3f2368e0f4e1278a0569fbac149bb49f501b3f28430469a06170268cd7e24d03",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "87f364fd1bc5bc4d118503d9196e6696718e3cc8a066c8a37e3d396d6a8cf0b7",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "8f487f1272f33d7304e3b6f89c6d731b4c3f7eb58a69880977b75e1ad13c03e9",
+      "reuse": {
+        "boundary_response_delta_l2": 2.00942575726e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.38248401869e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.222104798901,
+        "latch": {
+          "coherence": [
+            0.989379323591,
+            0.998050271846,
+            0.999912068598,
+            0.996009280831,
+            0.997312086089
+          ],
+          "energy": null,
+          "label": "v2_batch_27",
+          "phases_rad": [
+            -2.91948785469,
+            3.0752855789,
+            0.0172526892022,
+            -0.113462984642,
+            3.12683105967
+          ],
+          "raw_spin_shadow": [
+            -1,
+            -1,
+            1,
+            1,
+            -1
+          ],
+          "residual_rad": 0.222104798901,
+          "responses": [
+            {
+              "imag": -0.217943649396,
+              "real": -0.965076168827
+            },
+            {
+              "imag": 0.0661293113865,
+              "real": -0.995857047626
+            },
+            {
+              "imag": 0.0172503163447,
+              "real": 0.999763257734
+            },
+            {
+              "imag": -0.112767862426,
+              "real": 0.989604919504
+            },
+            {
+              "imag": 0.0147213813647,
+              "real": -0.997203428589
+            }
+          ],
+          "spins": null,
+          "valid": false
+        },
+        "raw_spin_energy": -13.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 1.42265462999,
+            "missing_pair_operator": 11.5860726697,
+            "no_lock": 2.0610764562,
+            "no_transform": 18.0997760085,
+            "scrambled_geometry": 4.37816836292,
+            "uniform_carrier": 1.03994981694
+          },
+          "omitted_inverse_step_error": 1.71308553983,
+          "omitted_restoration_error": 1.77047403246,
+          "response_deltas_l2": {
+            "flat_geometry": 0.0253163681205,
+            "missing_pair_operator": 1.97463536764,
+            "no_lock": 1.2962400224,
+            "no_transform": 0.174925833984,
+            "scrambled_geometry": 1.98953304194,
+            "uniform_carrier": 0.00371685044977,
+            "wrong_query": 0.941735785768
+          },
+          "samplewise_non_rank_one_residual": 0.0849078900856,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -2.0,
+          -2.0,
+          2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          0.0,
+          -2.0,
+          -1.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          0.0,
+          1.0,
+          -2.0
+        ],
+        [
+          2.0,
+          -1.0,
+          1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          1.0,
+          2.0,
+          -2.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        -2.0,
+        -1.0,
+        0.5,
+        -2.0
+      ],
+      "index": 27,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 41.3580747654,
+        "restoration_max_abs_error": 1.09114740956e-14,
+        "reuse_carrier_displacement_l2": 41.3580747654,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.22574102517e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "d7e5322f91973bd6f664b0a56c5beaf7280ec85eda09e59563c7399baa257c76",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "7a75ac0a0ec1dbfdab44ba4dee87a098c2a5251e7b802f663c7ed02307e77b3c",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "bf89026465875665a5adfc33a0cc1986336a7e84cdce80f2d4f40576099fa069",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "dae7570038fb5938d01e636808664a9d1351d9553a7385e060748112771ab7ce",
+      "reuse": {
+        "boundary_response_delta_l2": 4.24238321351e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.22574102517e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.017801101185,
+        "latch": {
+          "coherence": [
+            0.994471497226,
+            0.99868835675,
+            0.997318108832,
+            0.998566299457,
+            0.996862262685
+          ],
+          "energy": -12.5,
+          "label": "v2_batch_28",
+          "phases_rad": [
+            -3.1237915524,
+            -3.13742220801,
+            -0.00592643994284,
+            -0.00329486337392,
+            -0.00484352576883
+          ],
+          "raw_spin_shadow": [
+            -1,
+            -1,
+            1,
+            1,
+            1
+          ],
+          "residual_rad": 0.017801101185,
+          "responses": [
+            {
+              "imag": -0.0177017528269,
+              "real": -0.994313937719
+            },
+            {
+              "imag": -0.00416496337249,
+              "real": -0.998679671861
+            },
+            {
+              "imag": -0.00591051127691,
+              "real": 0.997300594636
+            },
+            {
+              "imag": -0.00329013357349,
+              "real": 0.998560879182
+            },
+            {
+              "imag": -0.00482830917876,
+              "real": 0.996850569642
+            }
+          ],
+          "spins": [
+            -1,
+            -1,
+            1,
+            1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -12.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.378260792613,
+            "missing_pair_operator": 12.8400832236,
+            "no_lock": 1.20256464965,
+            "no_transform": 14.2758636139,
+            "scrambled_geometry": 1.13970996851,
+            "uniform_carrier": 0.474429345307
+          },
+          "omitted_inverse_step_error": 1.71203329509,
+          "omitted_restoration_error": 1.76906731245,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00374542225128,
+            "missing_pair_operator": 0.101110110817,
+            "no_lock": 0.0830385032689,
+            "no_transform": 0.0212866626163,
+            "scrambled_geometry": 0.0116033322767,
+            "uniform_carrier": 0.00210897145949,
+            "wrong_query": 0.950209099964
+          },
+          "samplewise_non_rank_one_residual": 0.066948435767,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          1.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          -1.0,
+          1.0,
+          -2.0
+        ],
+        [
+          1.0,
+          -1.0,
+          0.0,
+          2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          2.0,
+          0.0,
+          1.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        0.5,
+        -2.0,
+        1.0,
+        -1.0,
+        1.0
+      ],
+      "index": 28,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 43.7412473583,
+        "restoration_max_abs_error": 1.39645580296e-14,
+        "reuse_carrier_displacement_l2": 43.7412473583,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.25017225552e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "936f13dc72f56819231b98eb45b8fce41cbbd472a9517feb22c06f2d317049bf",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "9c921fc717610f310886988d2c275a66b22cb5a8a42fa5393a8e95212956d47e",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "55a984df29910948ec64892d55cf8b0d35ef68dfa4d1ba259f95f3680d053316",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "4913d6b62112325109311f9e1e038fc747f93ac9e4295cfca226d94341509f8a",
+      "reuse": {
+        "boundary_response_delta_l2": 8.00049525663e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.25017225552e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0399771696163,
+        "latch": {
+          "coherence": [
+            0.996733788801,
+            0.999464798401,
+            0.99643065606,
+            0.994848270571,
+            0.977705002583
+          ],
+          "energy": -11.5,
+          "label": "v2_batch_29",
+          "phases_rad": [
+            0.00645217179043,
+            -0.00224564234381,
+            -0.00829990043253,
+            -3.13370359142,
+            3.10161548397
+          ],
+          "raw_spin_shadow": [
+            1,
+            1,
+            1,
+            -1,
+            -1
+          ],
+          "residual_rad": 0.0399771696163,
+          "responses": [
+            {
+              "imag": 0.0064310530131,
+              "real": 0.9967130416
+            },
+            {
+              "imag": -0.00224443858602,
+              "real": 0.999462278297
+            },
+            {
+              "imag": -0.00827018027927,
+              "real": 0.996396335026
+            },
+            {
+              "imag": -0.0078483384463,
+              "real": -0.994817312395
+            },
+            {
+              "imag": 0.0390754685484,
+              "real": -0.976923835226
+            }
+          ],
+          "spins": [
+            1,
+            1,
+            1,
+            -1,
+            -1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -11.5
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 2.28286475897,
+            "missing_pair_operator": 14.0673381232,
+            "no_lock": 2.20543519234,
+            "no_transform": 14.1508460411,
+            "scrambled_geometry": 3.76382836719,
+            "uniform_carrier": 7.05438563616
+          },
+          "omitted_inverse_step_error": 1.7131844113,
+          "omitted_restoration_error": 1.77244866981,
+          "response_deltas_l2": {
+            "flat_geometry": 0.0064875504949,
+            "missing_pair_operator": 1.94531028229,
+            "no_lock": 0.273343551932,
+            "no_transform": 0.0478562141541,
+            "scrambled_geometry": 0.0149348566447,
+            "uniform_carrier": 0.00632634391994,
+            "wrong_query": 0.944019558007
+          },
+          "samplewise_non_rank_one_residual": 0.0850762019031,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -1.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          2.0,
+          1.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          2.0,
+          0.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          1.0,
+          -2.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          -2.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        2.0,
+        2.0,
+        1.0,
+        -0.5,
+        2.0
+      ],
+      "index": 29,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 44.1211953363,
+        "restoration_max_abs_error": 1.21579559797e-14,
+        "reuse_carrier_displacement_l2": 44.1211953363,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.18814613655e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "963cbb34ef1928514e1c1929cc623ffd8b553ce86e4cbd0bafd45cfab2bcf407",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "27b6f43337a255f6407fc34c4fac8430d8b939020db7109ae7c0446fa7536f1f",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "5302368b5509286c8582cd8aaf994b3e789dcf87e1b4343b2a5d2541c8cde508",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "afe317e4f713426630d0c176f491c9c6b6041559130765d6e893e46d92d47b34",
+      "reuse": {
+        "boundary_response_delta_l2": 2.42540414129e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.18814613655e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0237857090686,
+        "latch": {
+          "coherence": [
+            0.994547862167,
+            0.99713038916,
+            0.999967150265,
+            0.995660209116,
+            0.993719205121
+          ],
+          "energy": -12.0,
+          "label": "v2_batch_30",
+          "phases_rad": [
+            -3.12131354102,
+            -3.13791892899,
+            -0.00166584490431,
+            -0.00505137126655,
+            -0.0237857090686
+          ],
+          "raw_spin_shadow": [
+            -1,
+            -1,
+            1,
+            1,
+            1
+          ],
+          "residual_rad": 0.0237857090686,
+          "responses": [
+            {
+              "imag": -0.020167165722,
+              "real": -0.994343369047
+            },
+            {
+              "imag": -0.00366317420066,
+              "real": -0.997123660406
+            },
+            {
+              "imag": -0.00166578941131,
+              "real": 0.999965762791
+            },
+            {
+              "imag": -0.00502942798273,
+              "real": 0.995647506335
+            },
+            {
+              "imag": -0.0236340872251,
+              "real": 0.993438115107
+            }
+          ],
+          "spins": [
+            -1,
+            -1,
+            1,
+            1,
+            1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -12.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.475523915953,
+            "missing_pair_operator": 10.8775963633,
+            "no_lock": 1.35722450961,
+            "no_transform": 14.0851234562,
+            "scrambled_geometry": 1.23805002942,
+            "uniform_carrier": 0.450402942632
+          },
+          "omitted_inverse_step_error": 1.72392437484,
+          "omitted_restoration_error": 1.76586922517,
+          "response_deltas_l2": {
+            "flat_geometry": 0.00322809580578,
+            "missing_pair_operator": 0.0736996564678,
+            "no_lock": 0.0954402032115,
+            "no_transform": 0.0333023724001,
+            "scrambled_geometry": 0.00884733394248,
+            "uniform_carrier": 0.00403613654407,
+            "wrong_query": 0.944431785778
+          },
+          "samplewise_non_rank_one_residual": 0.0982054379304,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          -1.0,
+          -2.0,
+          2.0
+        ],
+        [
+          2.0,
+          0.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          1.0,
+          0.0,
+          2.0
+        ],
+        [
+          2.0,
+          -1.0,
+          1.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        1.0,
+        1.0,
+        -1.0,
+        1.0
+      ],
+      "index": 30,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 43.7505665669,
+        "restoration_max_abs_error": 1.13937229524e-14,
+        "reuse_carrier_displacement_l2": 43.7505665669,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 1.22679644221e-14
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "58ad8dfa8d3ccbe80e4c6fd118f7086cd38b896009e2e6c2c1a87f75a364e9cf",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "fd58d416aba1dd3d3db41477e25ef6fe9fec4d2c9b8e3d264233d37cb103c861",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "0c7fd187c60bfff2c62314d81289b8a57084a812e9125aeab0d3c90388b26fe5",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "319ea58eefc8e4e4a25a3f708bdf893b9a79e1b42ee8f21ed5f8c20e63b14d66",
+      "reuse": {
+        "boundary_response_delta_l2": 6.76478803288e-16,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 1.22679644221e-14,
+        "validity_reproduced": true
+      }
+    },
+    {
+      "boundary": {
+        "computed_lock_residual_rad": 0.0327968732812,
+        "latch": {
+          "coherence": [
+            0.995860829193,
+            0.973522567446,
+            0.992235767219,
+            0.997977317229,
+            0.99871668998
+          ],
+          "energy": -13.0,
+          "label": "v2_batch_31",
+          "phases_rad": [
+            -3.1253944616,
+            -3.10879578031,
+            -0.0190717727394,
+            -0.00132770728656,
+            -3.13917319377
+          ],
+          "raw_spin_shadow": [
+            -1,
+            -1,
+            1,
+            1,
+            -1
+          ],
+          "residual_rad": 0.0327968732812,
+          "responses": [
+            {
+              "imag": -0.0161304395015,
+              "real": -0.995730184359
+            },
+            {
+              "imag": -0.0319227726879,
+              "real": -0.972999036952
+            },
+            {
+              "imag": -0.0189225478833,
+              "real": 0.992055318483
+            },
+            {
+              "imag": -0.00132502136661,
+              "real": 0.997976437609
+            },
+            {
+              "imag": -0.00241635254965,
+              "real": -0.998713766844
+            }
+          ],
+          "spins": [
+            -1,
+            -1,
+            1,
+            1,
+            -1
+          ],
+          "valid": true
+        },
+        "raw_spin_energy": -13.0
+      },
+      "controls": {
+        "all_pass": true,
+        "measurements": {
+          "history_deltas_l2": {
+            "flat_geometry": 0.529419175353,
+            "missing_pair_operator": 5.60074049544,
+            "no_lock": 2.54457622586,
+            "no_transform": 17.7247382752,
+            "scrambled_geometry": 1.31921499178,
+            "uniform_carrier": 0.731758224072
+          },
+          "omitted_inverse_step_error": 1.71307906957,
+          "omitted_restoration_error": 1.77008015854,
+          "response_deltas_l2": {
+            "flat_geometry": 0.0190232126935,
+            "missing_pair_operator": 0.037214453615,
+            "no_lock": 1.76120139147,
+            "no_transform": 0.0431512274456,
+            "scrambled_geometry": 0.0157846421523,
+            "uniform_carrier": 0.00640879506241,
+            "wrong_query": 0.9463654351
+          },
+          "samplewise_non_rank_one_residual": 0.102184383467,
+          "wrong_inverse_error": 0.60948253745
+        },
+        "outcomes": {
+          "flat_geometry": true,
+          "no_lock": true,
+          "omitted_inverse_step": true,
+          "omitted_restoration": true,
+          "parent_child_geometry_scramble": true,
+          "removed_pair_operator": true,
+          "removed_waveform_transform": true,
+          "samplewise_non_rank_one": true,
+          "uniform_carrier_replacement": true,
+          "wrong_inverse": true,
+          "wrong_query": true
+        }
+      },
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          1.0,
+          -2.0,
+          1.0
+        ],
+        [
+          2.0,
+          0.0,
+          2.0,
+          -2.0,
+          2.0
+        ],
+        [
+          1.0,
+          2.0,
+          0.0,
+          2.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          2.0,
+          0.0,
+          -2.0
+        ],
+        [
+          1.0,
+          2.0,
+          -1.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        2.0,
+        0.5,
+        2.0,
+        -0.5
+      ],
+      "index": 31,
+      "integrity": {
+        "all_strict_controls_pass": true,
+        "boundary_finite": true,
+        "carrier_displaced": true,
+        "carrier_restored": true,
+        "latch_persisted_outside_reversal": true,
+        "reuse_carrier_restored": true,
+        "reuse_consumed_exact_restored_carrier": true,
+        "reuse_raw_spins_reproduced": true,
+        "reuse_validity_reproduced": true
+      },
+      "interpretable_preoracle": true,
+      "measurements": {
+        "carrier_displacement_l2": 41.7544228541,
+        "restoration_max_abs_error": 1.18980483539e-14,
+        "reuse_carrier_displacement_l2": 41.7544228541,
+        "reuse_input_max_abs_error": 0.0,
+        "reuse_restoration_max_abs_error": 9.88160862028e-15
+      },
+      "native_seal": {
+        "displaced_waveform": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "1e1b82d081762f5f5c5f49dab389c8ad1f4956907cd90eab4caf73ae15d44338",
+          "shape": [
+            5,
+            256
+          ]
+        },
+        "native_root_sha256": "9afdc42d55e3e2b903123b5c757b52c23c392c38d8f8d00f9249df1f071737f1",
+        "operator_history": {
+          "bytes": 20582400,
+          "dtype": "little_endian_complex128",
+          "sha256": "fbdc02b9e02aaff0701c8a139c3d686ee04a2e724f43511bbf92b0f79316ac0a",
+          "shape": [
+            1005,
+            5,
+            256
+          ]
+        },
+        "query_frames": {
+          "bytes": 20480,
+          "dtype": "little_endian_complex128",
+          "sha256": "f6365e8ca750e888aa635eea11d2f604b609874a796552ee30cb3b987efac7e5",
+          "shape": [
+            5,
+            256
+          ]
+        }
+      },
+      "problem_sha256": "f56969c4535999799e41d2bf31950b1e5d46aca325dda8e2283b701788f6bd31",
+      "reuse": {
+        "boundary_response_delta_l2": 2.76521125216e-15,
+        "input_max_abs_error": 0.0,
+        "native_exactly_reproduced": false,
+        "raw_spins_reproduced": true,
+        "restoration_max_abs_error": 9.88160862028e-15,
+        "validity_reproduced": true
+      }
+    }
+  ],
+  "machine_sha256": "c20f2cd4068ca32528bc52671793bca04d897456944e33ad8571083428c48930",
+  "native_no_smuggle_proof_sha256": "4e464c75261cf94fc6743ef9f10f9a002068f22720bc75701cd1c0321fab3ec6",
+  "ordered_batch_sha256": "4d973f7b6015fa6d9cf201dab249832610334f394ae262797516c3cf27357dbe",
+  "preoracle_source_absence_proof": {
+    "forbidden_oracle_call_findings": [],
+    "oracle_call_count": 0,
+    "pass": true,
+    "source_sha256": "ebfdb08a0ea04bb20439f5b30dfa508233216a72e164f5c0f7b10526144081a9"
+  },
+  "schema": "catalytic_waveform_ising_v2_preoracle_evidence_v1",
+  "summary": {
+    "all_instances_interpretable_preoracle": true,
+    "batch_size": 32,
+    "oracle_call_count": 0,
+    "restoration_success_count": 32,
+    "reuse_success_count": 32,
+    "strict_all_controls_pass_count": 32,
+    "strict_removed_transform_pass_count": 32
+  }
+}
