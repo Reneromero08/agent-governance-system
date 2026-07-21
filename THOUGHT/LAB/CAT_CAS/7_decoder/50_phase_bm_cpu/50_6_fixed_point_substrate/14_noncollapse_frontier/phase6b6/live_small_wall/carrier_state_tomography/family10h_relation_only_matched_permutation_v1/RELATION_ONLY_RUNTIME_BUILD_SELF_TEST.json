@@ -316,7 +316,7 @@
     "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
     "size": 111928
   },
-  "runtime_build_sha256": "12207123707525fa84aca02c93c475274aeaa9f74fcaa25ab66131d6b398d315",
+  "runtime_build_sha256": "5a76601349df482c3c8ac6173a82583ebe585b3b3dec1924bc199b05ffd88cf3",
   "runtime_self_test": {
     "command": [
       "wsl.exe",
@@ -339,7 +339,7 @@
     "runtime_c_sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
     "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
     "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_SOURCE_INVENTORY_V1",
-    "target_py_sha256": "ff9d5960135fc5cb1d5b1d571e58f8fafbf60225cd0b398e6acb59ec0d784394"
+    "target_py_sha256": "95ba966ef215b42de42f2dceb96cadb173eea5f6646be440b964ec30dd499bc2"
   },
   "synthetic_executor_self_test": {
     "command": [

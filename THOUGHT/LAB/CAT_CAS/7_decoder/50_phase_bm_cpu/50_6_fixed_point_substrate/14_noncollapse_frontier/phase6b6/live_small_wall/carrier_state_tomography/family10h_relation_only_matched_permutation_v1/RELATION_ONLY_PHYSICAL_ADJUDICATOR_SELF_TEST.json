@@ -3,11 +3,81 @@
     "distance_only_rejected": true,
     "invalid_packet_custody_invalid": true,
     "negative_and_invalid_fail_closed": true,
+    "packet_mutation_regressions_passed": true,
     "positive_fixture_confirmed": true,
     "route_pressure_rejected": true,
     "scalar_replay_rejected": true,
     "separable_replay_rejected": true,
     "stratum_specific_artifact_fails_true_heldout": true
+  },
+  "false_positive_fixture_results": {
+    "additive_preparation_query_effects": {
+      "adversary_passed": false,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    },
+    "block_id_relabeling": {
+      "claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "failures": [
+        "block_id mismatch"
+      ],
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+    },
+    "cyclic_origin_specific_artifact": {
+      "heldout_cyclic_origin_passed": false,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    },
+    "distance_artifact": {
+      "adversary_passed": false,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    },
+    "execution_order_drift": {
+      "claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "failures": [
+        "raw record execution order mismatch",
+        "raw record execution order mismatch"
+      ],
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+    },
+    "genuine_relation_interaction": {
+      "adversary_passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CONFIRMED_PROSPECTIVE"
+    },
+    "mapping_specific_artifact": {
+      "heldout_mapping_passed": false,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    },
+    "q_dependent_nonlinear_scalar_artifact": {
+      "adversary_passed": false,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    },
+    "route_pressure_artifact": {
+      "adversary_passed": false,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    },
+    "session_specific_artifact": {
+      "heldout_session_passed": false,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    }
   },
   "negative_claim_states": {
     "distance_only": {
@@ -28,6 +98,16 @@
       },
       "passed": true,
       "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "mapping_specific": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
     },
     "origin_specific": {
@@ -69,15 +149,306 @@
       "passed": true,
       "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "session_specific": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
     }
   },
   "negative_results": {
     "distance_only": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
     "invalid": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+    "mapping_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
     "origin_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
     "route_pressure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
     "scalar_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-    "separable_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    "separable_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "session_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+  },
+  "packet_mutation_regressions": {
+    "passed": true,
+    "results": {
+      "altered_block_id": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "block_id mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "altered_cyclic_origin": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "cyclic_origin mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "altered_delay": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "delay_label mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "altered_feature_freeze": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "feature freeze schedule binding mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "altered_mapping": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "mapping mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "altered_q": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "q mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "altered_query_order": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "query_order mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "altered_session": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "session mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "altered_source_order": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "source_order mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "mismatched_archive_hash": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "copied_back_archive_sha256 missing or malformed"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "mismatched_target_receipt": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "target_execution_receipt_sha256 missing or malformed"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "physical_measurement_false": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "physical measurement flag mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "source_death_pid_mismatch": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "source PID/waitpid mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "swapped_execution_order": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "raw record execution order mismatch",
+          "raw record execution order mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "wrong_cpu": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "source CPU custody mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "wrong_event_ids": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "PMU event IDs missing"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      }
+    },
+    "schema": "FAMILY10H_RELATION_ONLY_PACKET_MUTATION_REGRESSIONS_V1"
   },
   "passed": true,
   "positive_result": {
@@ -89,7 +460,7 @@
     "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CONFIRMED_PROSPECTIVE"
   },
   "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_ADJUDICATOR_SELF_TEST_V1",
-  "self_test_sha256": "76c419957c27b003062983cc3c3481c18f96a6e48f5efbcf3f1cb8bd3b7588a9",
+  "self_test_sha256": "b497f1cbdd0ca09c5a2cb65566f9b16fb68139e25003730700785fc7747071a1",
   "threshold_contract": {
     "absolute_thresholds": {
       "control_null_abs_max": 128.0,

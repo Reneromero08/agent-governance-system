@@ -5,7 +5,7 @@
     "attempt_ceiling": 1,
     "relation_manifest_freeze_commit_not_embedded": true,
     "relation_manifest_freeze_commit_policy": "controller_verifies_local_head_and_origin_equal_freeze_commit_at_authorization_time",
-    "relation_source_authority_commit": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
+    "relation_source_authority_commit": "f14735b5c6c3f6c213997a3d6656d5f69df9b793",
     "scalar_evidence_provenance": {
       "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
       "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
@@ -34,11 +34,11 @@
   "grammar_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
   "live_controller_self_test_passed": true,
   "live_controller_self_test_schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_LIVE_CONTROLLER_SELF_TEST_V1",
-  "manifest_sha256": "86b3335d8d8e5784e86ba16bc8cbc4d333e77ba6d16a22e6d33006d7248a0368",
-  "marginal_equality_proof_sha256": "4808b615ed888cec6abf09ca76438fd6569ed14693776080b151df2e9fa69737",
+  "manifest_sha256": "c622be24eb3acb9a84927ea7d470c14c027b7d30e7433395d9d3cd723336ce65",
+  "marginal_equality_proof_sha256": "189699906671633a59424ca19085bd7781c7b8dbe223da4dd7f2d774c029a394",
   "offline_validate_passed": true,
   "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READY_AWAITING_AUTHORIZATION",
-  "physical_adjudicator_self_test_sha256": "76c419957c27b003062983cc3c3481c18f96a6e48f5efbcf3f1cb8bd3b7588a9",
+  "physical_adjudicator_self_test_sha256": "b497f1cbdd0ca09c5a2cb65566f9b16fb68139e25003730700785fc7747071a1",
   "primary_R_match_law": {
     "formula": "0.5 * ((Y_r0_r0 + Y_r1_r1) - (Y_r0_r1 + Y_r1_r0))",
     "name": "R_match",
@@ -115,13 +115,13 @@
       "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
       "size": 111928
     },
-    "runtime_build_sha256": "12207123707525fa84aca02c93c475274aeaa9f74fcaa25ab66131d6b398d315"
+    "runtime_build_sha256": "5a76601349df482c3c8ac6173a82583ebe585b3b3dec1924bc199b05ffd88cf3"
   },
   "schedule_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
   "schedule_tuple_count": 32256,
   "schema": "FAMILY10H_RELATION_ONLY_IMPLEMENTATION_MANIFEST_V2",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
-  "self_test_sha256": "fce054a812d7b3bb51946a76c80f03af34d6867b0d5ed9714e52b76548397e01",
+  "self_test_sha256": "10a88b939e29e8b0f737df0388203b671bd9ae1fbfb4d1229e302e1e12dae361",
   "source_hashes": {
     "files": {
       "RELATION_ONLY_CONTRACT.md": {
@@ -137,8 +137,8 @@
         "size": 11317
       },
       "relation_only_physical_adjudication.py": {
-        "sha256": "6128d8a1454aa942d1cc4f92e66001a7b717765c26c5dc911e4802fa4e01134f",
-        "size": 33719
+        "sha256": "3e8416dbe2519b7872e4a2d37f84cdd89b844373213cdd6e93be94bbf7636668",
+        "size": 52837
       },
       "relation_only_pmu_preflight.c": {
         "sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443",
@@ -157,12 +157,12 @@
         "size": 2239
       },
       "relation_only_target.py": {
-        "sha256": "ff9d5960135fc5cb1d5b1d571e58f8fafbf60225cd0b398e6acb59ec0d784394",
-        "size": 78940
+        "sha256": "95ba966ef215b42de42f2dceb96cadb173eea5f6646be440b964ec30dd499bc2",
+        "size": 90457
       },
       "run_relation_only_matched_permutation.py": {
-        "sha256": "2a62a183f75f8400c38c252fdae6b7f0229b1542103493294d31d09aab8b48e2",
-        "size": 93311
+        "sha256": "ee8db461372d9bc3d745a76aa7344e73e122e51d578abe2a321c992961767629",
+        "size": 95913
       }
     },
     "pmu_preflight_helper_authority": {
@@ -209,9 +209,9 @@
         "source_tree_matches_bound_hashes": true,
         "worktree_source_matches_authority": true
       },
-      "current_head": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
+      "current_head": "f14735b5c6c3f6c213997a3d6656d5f69df9b793",
       "failures": [],
-      "manifest_freeze_commit_under_test": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
+      "manifest_freeze_commit_under_test": "f14735b5c6c3f6c213997a3d6656d5f69df9b793",
       "passed": true,
       "path_map": {
         "RELATION_ONLY_CONTRACT.md": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/RELATION_ONLY_CONTRACT.md",
@@ -225,7 +225,7 @@
         "relation_only_target.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_target.py",
         "run_relation_only_matched_permutation.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/run_relation_only_matched_permutation.py"
       },
-      "relation_source_authority_commit": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
+      "relation_source_authority_commit": "f14735b5c6c3f6c213997a3d6656d5f69df9b793",
       "schema": "FAMILY10H_RELATION_ONLY_SOURCE_AUTHORITY_VALIDATION_V1",
       "source_bundle_matches_authority": {
         "RELATION_ONLY_CONTRACT.md": true,
@@ -331,7 +331,7 @@
       "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
       "size": 111928
     },
-    "runtime_build_receipt_sha256": "2c306e15d4172ecae89b03edd88726209b0e3ad0986e1507c61a902920251c69",
+    "runtime_build_receipt_sha256": "04530964cc5a4661dda94ce1a39f9d9bbb2fdb47bbf480931be3053e7f9b3089",
     "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V3",
     "science_package_id": "family10h_relation_only_matched_permutation_v1",
     "sensor_authority_binding": {
@@ -434,6 +434,23 @@
           "passed": true,
           "validation_passed": false
         },
+        "incorrect_expected_source_hashes": {
+          "checks": {
+            "freeze_commit_exists": true,
+            "source_authority_ancestor_of_freeze": true,
+            "source_authority_commit_exists": true,
+            "source_authority_not_scalar_evidence": true,
+            "source_authority_sha_syntax": true,
+            "source_bundle_matches_authority": true,
+            "source_tree_matches_bound_hashes": false,
+            "worktree_source_matches_authority": true
+          },
+          "failures": [
+            "source authority tree hash mismatch: RELATION_ONLY_CONTRACT.md"
+          ],
+          "passed": true,
+          "validation_passed": false
+        },
         "nonexistent_syntactically_valid_sha": {
           "checks": {
             "freeze_commit_exists": true,
@@ -480,13 +497,9 @@
             "worktree_source_matches_authority": false
           },
           "failures": [
-            "source authority tree hash mismatch: relation_only_public.py",
-            "source file changed after source authority commit: relation_only_public.py",
-            "source bundle member mismatch: relation_only_public.py",
             "source authority tree hash mismatch: relation_only_physical_adjudication.py",
             "source file changed after source authority commit: relation_only_physical_adjudication.py",
             "source bundle member mismatch: relation_only_physical_adjudication.py",
-            "source authority tree missing relation_only_pmu_preflight.c",
             "source authority tree hash mismatch: relation_only_target.py",
             "source file changed after source authority commit: relation_only_target.py",
             "source bundle member mismatch: relation_only_target.py",
@@ -531,13 +544,15 @@
             "source_authority_commit_exists": true,
             "source_authority_not_scalar_evidence": true,
             "source_authority_sha_syntax": true,
-            "source_bundle_matches_authority": true,
-            "source_tree_matches_bound_hashes": false,
+            "source_bundle_matches_authority": false,
+            "source_tree_matches_bound_hashes": true,
             "worktree_source_matches_authority": true
           },
+          "expected_member_mismatch": "source bundle member mismatch: RELATION_ONLY_CONTRACT.md",
           "failures": [
-            "source authority tree hash mismatch: RELATION_ONLY_CONTRACT.md"
+            "source bundle member mismatch: RELATION_ONLY_CONTRACT.md"
           ],
+          "mutated_member": "RELATION_ONLY_CONTRACT.md",
           "passed": true,
           "validation_passed": false
         },
@@ -553,13 +568,9 @@
             "worktree_source_matches_authority": false
           },
           "failures": [
-            "source authority tree hash mismatch: relation_only_public.py",
-            "source file changed after source authority commit: relation_only_public.py",
-            "source bundle member mismatch: relation_only_public.py",
             "source authority tree hash mismatch: relation_only_physical_adjudication.py",
             "source file changed after source authority commit: relation_only_physical_adjudication.py",
             "source bundle member mismatch: relation_only_physical_adjudication.py",
-            "source authority tree missing relation_only_pmu_preflight.c",
             "source authority tree hash mismatch: relation_only_target.py",
             "source file changed after source authority commit: relation_only_target.py",
             "source bundle member mismatch: relation_only_target.py",
@@ -587,7 +598,7 @@
         "run_relation_only_matched_permutation.py"
       ],
       "path": "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
-      "sha256": "fbe261265b8044113321612c763a14a16aae9832e05c4a57bda89c909ad53e68"
+      "sha256": "22509189aa21885cc0272114efa6decc408ccdc88a62e6c6c328f8a1354c3d0a"
     }
   },
   "target_self_test_passed": true,

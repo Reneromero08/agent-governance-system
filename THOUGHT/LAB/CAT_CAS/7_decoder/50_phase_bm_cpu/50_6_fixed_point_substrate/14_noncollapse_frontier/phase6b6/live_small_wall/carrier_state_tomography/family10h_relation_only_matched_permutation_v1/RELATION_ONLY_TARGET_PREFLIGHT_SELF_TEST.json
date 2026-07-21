@@ -15,7 +15,87 @@
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"
     },
+    "fake_helper_output_correct_schema": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
     "grouped_pmu_failure": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_missing_event": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_open_close_mismatch": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_partial_group_open": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_reported_enable_attempt": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_reported_leaked_descriptor": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_reported_read_attempt": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_reported_reset_attempt": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_returning_nonzero_with_plausible_json": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_wrong_structure_size": {
       "expected_failure": "grouped_pmu_open_capability",
       "failures": [
         "grouped_pmu_open_capability"
@@ -207,6 +287,14 @@
       "failures": [
         "cpu_vendor_family_model",
         "approved_target_identity"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "wrong_helper_binary_hash": {
+      "expected_failure": "pmu_helper_binary_hash",
+      "failures": [
+        "pmu_helper_binary_hash"
       ],
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"
