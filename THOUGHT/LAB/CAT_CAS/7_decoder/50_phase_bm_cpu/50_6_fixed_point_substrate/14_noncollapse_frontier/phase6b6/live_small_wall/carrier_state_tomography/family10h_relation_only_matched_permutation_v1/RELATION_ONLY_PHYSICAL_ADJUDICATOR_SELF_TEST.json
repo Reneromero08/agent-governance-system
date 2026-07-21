@@ -1,19 +1,55 @@
 {
   "checks": {
-    "distance_only_rejected": true,
+    "custody_envelope_cryptographically_bound": true,
+    "false_positive_raw_R_match_above_floor": true,
     "invalid_packet_custody_invalid": true,
+    "measured_adversarial_models_reject_false_positive_interactions": true,
     "negative_and_invalid_fail_closed": true,
     "packet_mutation_regressions_passed": true,
     "positive_fixture_confirmed": true,
-    "route_pressure_rejected": true,
-    "scalar_replay_rejected": true,
-    "separable_replay_rejected": true,
     "stratum_specific_artifact_fails_true_heldout": true
   },
   "false_positive_fixture_results": {
-    "additive_preparation_query_effects": {
-      "adversary_passed": false,
-      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    "additive_preparation_query_effects_plus_imbalance": {
+      "failed_gates": [
+        "scalar_q_equivalence"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": true,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 640.0,
+      "raw_R_match_abs_of_mean": 640.0,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 639.9251523572116
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0000000000001
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        }
+      }
     },
     "block_id_relabeling": {
       "claim_state": {
@@ -27,18 +63,143 @@
         "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
       },
       "failures": [
-        "block_id mismatch"
+        "block_id mismatch",
+        "raw records archive member mismatch"
       ],
       "passed": true,
       "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
     },
-    "cyclic_origin_specific_artifact": {
-      "heldout_cyclic_origin_passed": false,
-      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    "cyclic_origin_artifact": {
+      "failed_gates": [
+        "cyclic_origin_strata",
+        "label_scramble_collapses",
+        "heldout_transport",
+        "scalar_replay_adversary_rejected",
+        "no_aggregate_rescue"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": false,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 2048.0,
+      "raw_R_match_abs_of_mean": 2048.0,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2047.233560125251
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        }
+      }
+    },
+    "delay_specific_artifact": {
+      "failed_gates": [
+        "delay_strata",
+        "label_scramble_collapses",
+        "heldout_transport",
+        "scalar_replay_adversary_rejected",
+        "no_aggregate_rescue"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": false,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 2730.6666666666665,
+      "raw_R_match_abs_of_mean": 2730.6666666666665,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2730.6666666666665
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2729.752834508038
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2730.6666666666665
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2730.6666666666665
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2730.6666666666665
+        }
+      }
     },
     "distance_artifact": {
-      "adversary_passed": false,
-      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+      "failed_gates": [
+        "relation_controls_null",
+        "scalar_replay_adversary_rejected"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": true,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 640.0,
+      "raw_R_match_abs_of_mean": 640.0,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": false,
+          "residual_R_match_abs_of_mean": 0.0
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 639.925152357184
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        }
+      }
     },
     "execution_order_drift": {
       "claim_state": {
@@ -53,34 +214,449 @@
       },
       "failures": [
         "raw record execution order mismatch",
-        "raw record execution order mismatch"
+        "raw record execution order mismatch",
+        "raw records archive member mismatch"
       ],
       "passed": true,
       "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
     },
     "genuine_relation_interaction": {
       "adversary_passed": true,
+      "raw_R_match_abs_of_mean": 640.0,
       "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CONFIRMED_PROSPECTIVE"
     },
     "mapping_specific_artifact": {
-      "heldout_mapping_passed": false,
-      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+      "failed_gates": [
+        "mapping_strata",
+        "heldout_transport",
+        "scalar_replay_adversary_rejected",
+        "no_aggregate_rescue"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": false,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 2048.0,
+      "raw_R_match_abs_of_mean": 2048.0,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2047.5357143072051
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        }
+      }
     },
-    "q_dependent_nonlinear_scalar_artifact": {
-      "adversary_passed": false,
-      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    "nonlinear_q_artifact_coupled_to_execution_position": {
+      "failed_gates": [
+        "scalar_q_equivalence"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": true,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 1700.5760000000034,
+      "raw_R_match_abs_of_mean": 1700.5760000000034,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 1700.5760000000034
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 1700.3252974142417
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 1700.5760000000034
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 1700.5759999999916
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 1700.5760000000034
+        }
+      }
+    },
+    "query_order_artifact": {
+      "failed_gates": [
+        "query_order_strata",
+        "heldout_transport",
+        "scalar_replay_adversary_rejected",
+        "no_aggregate_rescue"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": false,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 2048.0,
+      "raw_R_match_abs_of_mean": 2048.0,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.4716553097
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        }
+      }
+    },
+    "replicate_specific_artifact": {
+      "failed_gates": [
+        "replicate_strata",
+        "heldout_transport",
+        "scalar_replay_adversary_rejected",
+        "no_aggregate_rescue"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": false,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 2048.0,
+      "raw_R_match_abs_of_mean": 2048.0,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2047.4178004800506
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        }
+      }
     },
     "route_pressure_artifact": {
-      "adversary_passed": false,
-      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+      "failed_gates": [
+        "relation_controls_null",
+        "scalar_replay_adversary_rejected"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": true,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 640.0,
+      "raw_R_match_abs_of_mean": 640.0,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 639.925152357184
+        },
+        "route_pressure_replay": {
+          "passed": false,
+          "residual_R_match_abs_of_mean": 0.0
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        }
+      }
+    },
+    "scalar_replay_artifact": {
+      "failed_gates": [
+        "q_strata",
+        "scalar_q_equivalence",
+        "heldout_transport",
+        "scalar_replay_adversary_rejected",
+        "no_aggregate_rescue"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": false,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 1005.7142857142857,
+      "raw_R_match_abs_of_mean": 640.0,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 639.9573944193183
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        }
+      }
+    },
+    "separable_replay_artifact": {
+      "failed_gates": [
+        "scalar_q_equivalence"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": true,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 640.0,
+      "raw_R_match_abs_of_mean": 640.0,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 639.9078078550571
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 640.0
+        }
+      }
     },
     "session_specific_artifact": {
-      "heldout_session_passed": false,
-      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+      "failed_gates": [
+        "session_strata",
+        "label_scramble_collapses",
+        "heldout_transport",
+        "scalar_replay_adversary_rejected",
+        "no_aggregate_rescue"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": false,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 4096.0,
+      "raw_R_match_abs_of_mean": 4096.0,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 4096.0
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 4094.732426360198
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 4096.0
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 4096.000000000001
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 4096.0
+        }
+      }
+    },
+    "source_order_artifact": {
+      "failed_gates": [
+        "source_order_strata",
+        "heldout_transport",
+        "scalar_replay_adversary_rejected",
+        "no_aggregate_rescue"
+      ],
+      "final_result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "heldout_passed": false,
+      "negative_claim_state": {
+        "checks": {
+          "positive_scientific_claim_absent": true,
+          "relation_coordinate_observed_false": true,
+          "result_class_not_confirmed": true
+        },
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+        "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+      },
+      "raw_R_match_abs_mean": 2048.0,
+      "raw_R_match_abs_of_mean": 2048.0,
+      "residual_models": {
+        "distance_only_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "nonlinear_scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2047.557823149801
+        },
+        "route_pressure_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "scalar_q_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        },
+        "separable_a_b_marginal_replay": {
+          "passed": true,
+          "residual_R_match_abs_of_mean": 2048.0
+        }
+      }
     }
   },
+  "heldout_factor_failure_results": {
+    "cyclic_origin_artifact": true,
+    "delay_specific_artifact": true,
+    "mapping_specific_artifact": true,
+    "query_order_artifact": true,
+    "replicate_specific_artifact": true,
+    "session_specific_artifact": true,
+    "source_order_artifact": true
+  },
   "negative_claim_states": {
-    "distance_only": {
+    "additive_preparation_query_effects_plus_imbalance": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "cyclic_origin_artifact": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "delay_specific_artifact": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "distance_artifact": {
       "checks": {
         "positive_scientific_claim_absent": true,
         "relation_coordinate_observed_false": true,
@@ -100,7 +676,7 @@
       "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
       "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
     },
-    "mapping_specific": {
+    "mapping_specific_artifact": {
       "checks": {
         "positive_scientific_claim_absent": true,
         "relation_coordinate_observed_false": true,
@@ -110,7 +686,7 @@
       "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
     },
-    "origin_specific": {
+    "nonlinear_q_artifact_coupled_to_execution_position": {
       "checks": {
         "positive_scientific_claim_absent": true,
         "relation_coordinate_observed_false": true,
@@ -120,7 +696,7 @@
       "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
     },
-    "route_pressure": {
+    "query_order_artifact": {
       "checks": {
         "positive_scientific_claim_absent": true,
         "relation_coordinate_observed_false": true,
@@ -130,7 +706,7 @@
       "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
     },
-    "scalar_replay": {
+    "replicate_specific_artifact": {
       "checks": {
         "positive_scientific_claim_absent": true,
         "relation_coordinate_observed_false": true,
@@ -140,7 +716,7 @@
       "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
     },
-    "separable_replay": {
+    "route_pressure_artifact": {
       "checks": {
         "positive_scientific_claim_absent": true,
         "relation_coordinate_observed_false": true,
@@ -150,7 +726,37 @@
       "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
     },
-    "session_specific": {
+    "scalar_replay_artifact": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "separable_replay_artifact": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "session_specific_artifact": {
+      "checks": {
+        "positive_scientific_claim_absent": true,
+        "relation_coordinate_observed_false": true,
+        "result_class_not_confirmed": true
+      },
+      "passed": true,
+      "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+    },
+    "source_order_artifact": {
       "checks": {
         "positive_scientific_claim_absent": true,
         "relation_coordinate_observed_false": true,
@@ -162,14 +768,20 @@
     }
   },
   "negative_results": {
-    "distance_only": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "additive_preparation_query_effects_plus_imbalance": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "cyclic_origin_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "delay_specific_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "distance_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
     "invalid": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
-    "mapping_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-    "origin_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-    "route_pressure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-    "scalar_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-    "separable_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-    "session_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+    "mapping_specific_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "nonlinear_q_artifact_coupled_to_execution_position": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "query_order_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "replicate_specific_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "route_pressure_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "scalar_replay_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "separable_replay_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "session_specific_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "source_order_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
   },
   "packet_mutation_regressions": {
     "passed": true,
@@ -186,7 +798,8 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "block_id mismatch"
+          "block_id mismatch",
+          "raw records archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -203,7 +816,8 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "cyclic_origin mismatch"
+          "cyclic_origin mismatch",
+          "raw records archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -220,7 +834,8 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "delay_label mismatch"
+          "delay_label mismatch",
+          "raw records archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -237,7 +852,42 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "feature freeze schedule binding mismatch"
+          "feature freeze schedule binding mismatch",
+          "feature-freeze archive member mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "altered_inventory_member_hash": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "raw_records inventory hash mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "altered_inventory_member_size": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "raw_records inventory size mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -254,7 +904,8 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "mapping mismatch"
+          "mapping mismatch",
+          "raw records archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -271,7 +922,8 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "q mismatch"
+          "q mismatch",
+          "raw records archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -288,7 +940,8 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "query_order mismatch"
+          "query_order mismatch",
+          "raw records archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -305,7 +958,8 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "session mismatch"
+          "session mismatch",
+          "raw records archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -322,12 +976,13 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "source_order mismatch"
+          "source_order mismatch",
+          "raw records archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
       },
-      "mismatched_archive_hash": {
+      "archive_containing_altered_feature_freeze": {
         "claim_state": {
           "checks": {
             "positive_scientific_claim_absent": true,
@@ -339,12 +994,12 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "copied_back_archive_sha256 missing or malformed"
+          "feature-freeze archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
       },
-      "mismatched_target_receipt": {
+      "archive_containing_altered_raw_records": {
         "claim_state": {
           "checks": {
             "positive_scientific_claim_absent": true,
@@ -356,7 +1011,58 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "target_execution_receipt_sha256 missing or malformed"
+          "raw records archive member mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "archive_containing_altered_source_death_receipts": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "source-death archive member mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "archive_containing_altered_target_receipt": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "target receipt archive member mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "correct_archive_hash_wrong_size": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "copied-back archive size mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -373,7 +1079,8 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "physical measurement flag mismatch"
+          "physical measurement flag mismatch",
+          "raw records archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -390,7 +1097,8 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "source PID/waitpid mismatch"
+          "source PID/waitpid mismatch",
+          "source-death archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -408,7 +1116,110 @@
         },
         "failures": [
           "raw record execution order mismatch",
-          "raw record execution order mismatch"
+          "raw record execution order mismatch",
+          "raw records archive member mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "wrong_40_character_freeze_commit": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "freeze sha mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "wrong_40_character_source_commit": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "source authority sha mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "wrong_64_character_archive_hash": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "copied-back archive sha mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "wrong_64_character_manifest_hash": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "manifest file sha mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "wrong_64_character_runtime_hash": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "runtime binary sha mismatch"
+        ],
+        "passed": true,
+        "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
+      },
+      "wrong_64_character_target_receipt_hash": {
+        "claim_state": {
+          "checks": {
+            "positive_scientific_claim_absent": true,
+            "relation_coordinate_observed_false": true,
+            "result_class_not_confirmed": true
+          },
+          "passed": true,
+          "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+          "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
+        },
+        "failures": [
+          "target execution receipt sha mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -425,7 +1236,8 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "source CPU custody mismatch"
+          "source CPU custody mismatch",
+          "raw records archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -442,7 +1254,8 @@
           "scientific_claim": "PUBLIC_POST_SOURCE_RELATION_MATCH_COORDINATE_NOT_ESTABLISHED"
         },
         "failures": [
-          "PMU event IDs missing"
+          "PMU event IDs missing",
+          "raw records archive member mismatch"
         ],
         "passed": true,
         "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
@@ -460,7 +1273,7 @@
     "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CONFIRMED_PROSPECTIVE"
   },
   "schema": "FAMILY10H_RELATION_ONLY_PHYSICAL_ADJUDICATOR_SELF_TEST_V1",
-  "self_test_sha256": "b497f1cbdd0ca09c5a2cb65566f9b16fb68139e25003730700785fc7747071a1",
+  "self_test_sha256": "c74a3d86406eb448a7379fc15ec616584d1ebeb54de6b6e87ac0d51e599ed3f3",
   "threshold_contract": {
     "absolute_thresholds": {
       "control_null_abs_max": 128.0,

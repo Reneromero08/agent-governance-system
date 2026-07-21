@@ -233,7 +233,7 @@
     },
     "passed": true,
     "proof_basis": "generated full permutation tables, generated origin-rotated A/B sequences, schedule rows, source hashes, and runtime build receipt",
-    "proof_sha256": "189699906671633a59424ca19085bd7781c7b8dbe223da4dd7f2d774c029a394",
+    "proof_sha256": "afd9dfc3449432048ae6290fad8b5d71c01aa324f7c2d1f2955f1ddfa3d248a5",
     "relation_origin_counts_sha256": "6f57975f19183dc8a3f9bdadbd5076d529a6404812cb540ee73762016eb693ae",
     "relation_r0": {
       "actual_cache_index_status": "unresolved_until_authorized_target_preflight",
@@ -254,9 +254,9 @@
       "virtual_offset_histogram_sha256": "3bed852658892707a63af1833954e40112bf5aed7e438f889b05f27c7185139d"
     },
     "runtime_build_receipt_passed": true,
-    "runtime_build_receipt_sha256": "04530964cc5a4661dda94ce1a39f9d9bbb2fdb47bbf480931be3053e7f9b3089",
+    "runtime_build_receipt_sha256": "bdeae1d770679a3ed0329edf6949a3797a14c995dbb63be3d9d162352ee83adb",
     "schema": "FAMILY10H_RELATION_MARGINAL_EQUALITY_PROOF_V2",
-    "source_hashes_sha256": "176a5fd585e7d17e9cf75cb07ea58266ef6abdf1108789f850f5a2425e087cda"
+    "source_hashes_sha256": "fb4cb0f97bb916c7c3877a52d11e77088bd27ba830a45e7f80941aee340936f7"
   },
   "negative_regressions": {
     "passed": true,
@@ -331,7 +331,7 @@
         "unrelated_digest_gate_failed_first": false
       },
       "distance_only_confounding": {
-        "exact_failed_gate": "complete_relation_matrix_global",
+        "exact_failed_gate": "relation_controls_null",
         "expected_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
         "mutation": "distance_only_confounding",
         "observed_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
@@ -419,7 +419,7 @@
         "unrelated_digest_gate_failed_first": false
       },
       "query_order_confounding": {
-        "exact_failed_gate": "complete_relation_matrix_global",
+        "exact_failed_gate": "relation_controls_null",
         "expected_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
         "mutation": "query_order_confounding",
         "observed_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
@@ -438,7 +438,7 @@
         "unrelated_digest_gate_failed_first": false
       },
       "route_pressure_confounding": {
-        "exact_failed_gate": "complete_relation_matrix_global",
+        "exact_failed_gate": "relation_controls_null",
         "expected_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
         "mutation": "route_pressure_confounding",
         "observed_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
@@ -446,7 +446,7 @@
         "unrelated_digest_gate_failed_first": false
       },
       "scalar_nonlinear_replay": {
-        "exact_failed_gate": "complete_relation_matrix_global",
+        "exact_failed_gate": "q_strata",
         "expected_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
         "mutation": "scalar_nonlinear_replay",
         "observed_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
@@ -454,7 +454,7 @@
         "unrelated_digest_gate_failed_first": false
       },
       "separable_two_component_replay": {
-        "exact_failed_gate": "complete_relation_matrix_global",
+        "exact_failed_gate": "scalar_q_equivalence",
         "expected_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
         "mutation": "separable_two_component_replay",
         "observed_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
@@ -462,7 +462,7 @@
         "unrelated_digest_gate_failed_first": false
       },
       "source_order_confounding": {
-        "exact_failed_gate": "complete_relation_matrix_global",
+        "exact_failed_gate": "relation_controls_null",
         "expected_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
         "mutation": "source_order_confounding",
         "observed_failure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
@@ -485,14 +485,20 @@
   "passed": true,
   "physical_adjudicator_summary": {
     "negative_results": {
-      "distance_only": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "additive_preparation_query_effects_plus_imbalance": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "cyclic_origin_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "delay_specific_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "distance_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "invalid": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
-      "mapping_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-      "origin_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-      "route_pressure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-      "scalar_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-      "separable_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-      "session_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+      "mapping_specific_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "nonlinear_q_artifact_coupled_to_execution_position": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "query_order_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "replicate_specific_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "route_pressure_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "scalar_replay_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "separable_replay_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "session_specific_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "source_order_artifact": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
     },
     "passed": true,
     "positive_result": {
@@ -563,7 +569,7 @@
     "tuple_count": 32256
   },
   "schema": "FAMILY10H_RELATION_ONLY_SELF_TEST_V2",
-  "self_test_sha256": "10a88b939e29e8b0f737df0388203b671bd9ae1fbfb4d1229e302e1e12dae361",
+  "self_test_sha256": "8bc28633c1677f390cf87d6dc75a6098c9ff97e5a153f116d72873ab54ef2607",
   "target_self_test_summary": {
     "live_invocation_count": 0,
     "passed": true,

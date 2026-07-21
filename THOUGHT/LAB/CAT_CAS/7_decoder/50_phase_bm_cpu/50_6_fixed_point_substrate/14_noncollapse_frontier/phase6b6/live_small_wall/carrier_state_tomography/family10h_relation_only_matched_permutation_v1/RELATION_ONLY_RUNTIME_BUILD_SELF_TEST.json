@@ -61,10 +61,10 @@
       "-d",
       "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime"
     ],
-    "control_flow_audit_sha256": "0bfdfcc2967441a160f3d8fc586b23d69e4907e742a72f5a8cd5dd41948085b0",
+    "control_flow_audit_sha256": "af572a16b1874fb58ba7296e1fc18cc6bcaa4c4692906006c08193a42db50d94",
     "function_body_line_counts": {
       "execute_query_for_row": 69,
-      "execute_schedule_common": 1275,
+      "execute_schedule_common": 1562,
       "relation_only_prepare": 34,
       "relation_only_prepare_primary": 34,
       "relation_only_query_primary": 37,
@@ -98,6 +98,7 @@
     "relation_sham_control_implemented": true,
     "route_pressure_sham_control_implemented": true,
     "runtime_control_flow_audit_passed": true,
+    "runtime_raw_schema_matches_physical_validator": true,
     "runtime_schedule_executor_implemented": true,
     "runtime_schedule_parser_implemented": true,
     "runtime_self_test_passes": true,
@@ -250,9 +251,9 @@
     "source_sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443"
   },
   "runtime_binary_authority": {
-    "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e95f612fed3b8092ba75c178b25a9fb9afb4006b, for GNU/Linux 3.2.0, with debug_info, not stripped",
+    "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=fba3d2b2c3db7eec0e1a58e58bc698d2a883992d, for GNU/Linux 3.2.0, with debug_info, not stripped",
     "compile_status": "compiled_target_compatible_linux_binary",
-    "compiled_binary_sha256": "8f6d0f48be8d6955a6f708850facb07ac8b1624dba5f2d08e60c1332f75e4e80",
+    "compiled_binary_sha256": "b0a2472a18a9ece8f26f9065a5f36d826c4ba2c22162770b24193a104ea8c258",
     "compiler_flags": [
       "-std=c11",
       "-Wall",
@@ -312,11 +313,11 @@
       "size": 42768
     },
     "present": true,
-    "runtime_c_sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
+    "runtime_c_sha256": "cf35aecdb7fc012c627678ace000befd8a6e6bd59d5e3fc177a9c0fb9aeb50ff",
     "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
-    "size": 111928
+    "size": 121072
   },
-  "runtime_build_sha256": "5a76601349df482c3c8ac6173a82583ebe585b3b3dec1924bc199b05ffd88cf3",
+  "runtime_build_sha256": "79ac830ab6a915e7bc6a0f53796d3abb6d3928998e0c9249259a89d96a851ac2",
   "runtime_self_test": {
     "command": [
       "wsl.exe",
@@ -336,7 +337,7 @@
     "gate_policy": "readiness gates are derived from compile, execution, disassembly, fixtures, and exact hash comparisons",
     "gates": {},
     "pmu_preflight_helper_c_sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443",
-    "runtime_c_sha256": "0f38b02c33e71c149dcd2e652e7180b8f52e503cb1c3826596fe6abc154e9bfd",
+    "runtime_c_sha256": "cf35aecdb7fc012c627678ace000befd8a6e6bd59d5e3fc177a9c0fb9aeb50ff",
     "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
     "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_SOURCE_INVENTORY_V1",
     "target_py_sha256": "95ba966ef215b42de42f2dceb96cadb173eea5f6646be440b964ec30dd499bc2"
@@ -381,6 +382,47 @@
     "feature_freeze_written": true,
     "passed": true,
     "raw_record_count": 32256,
+    "raw_schema_validation": {
+      "expected_row_count": 32256,
+      "first_missing_fields": [],
+      "first_schedule_mismatches": [],
+      "missing_field_count": 0,
+      "passed": true,
+      "raw_record_count": 32256,
+      "required_extra_fields": [
+        "pmu_event_group",
+        "pmu_events",
+        "event_ids",
+        "change_to_dirty",
+        "dirty_probe_response",
+        "cpu_cycles",
+        "duration_ns",
+        "time_enabled",
+        "time_running",
+        "source_cpu_before",
+        "source_cpu_after",
+        "receiver_cpu_before",
+        "receiver_cpu_after",
+        "process_custody",
+        "query_hash",
+        "physical_measurement",
+        "positive_physical_claim"
+      ],
+      "schedule_field_count": 48,
+      "schedule_mismatch_count": 0,
+      "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_RAW_SCHEMA_INTEGRATION_V1",
+      "schema_equivalent_validator": {
+        "custody_required": false,
+        "expected_physical_measurement": false,
+        "failures": [],
+        "passed": true,
+        "raw_record_count": 32256,
+        "source_death_receipt_count": 32256
+      },
+      "source_death_receipt_count": 32256,
+      "synthetic_positive_claim_absent": true,
+      "synthetic_records_marked_nonphysical": true
+    },
     "returncode": 0,
     "source_death_receipt_count": 32256,
     "stderr": "",
