@@ -1209,9 +1209,15 @@ def source_off_gate(rows: list[dict[str, Any]], threshold_contract: dict[str, An
     }
 
 
-def adjudicate_physical_packet(packet: dict[str, Any], schedule: dict[str, Any], threshold_contract: dict[str, Any] | None = None) -> dict[str, Any]:
+def adjudicate_physical_packet(
+    packet: dict[str, Any],
+    schedule: dict[str, Any],
+    threshold_contract: dict[str, Any] | None = None,
+    *,
+    require_custody: bool = True,
+) -> dict[str, Any]:
     threshold_contract = threshold_contract or physical_threshold_contract()
-    validation = validate_physical_packet(packet, schedule)
+    validation = validate_physical_packet(packet, schedule, require_custody=require_custody)
     if not validation["passed"]:
         return fail_closed_result(RESULT_INVALID, validation)
     rows = packet["raw_records"]
@@ -1621,12 +1627,12 @@ def run_self_test(schedule: dict[str, Any]) -> dict[str, Any]:
         "separable_replay_artifact": "separable_replay",
     }
     false_positive_results = {
-        label: adjudicate_physical_packet(fixture_packet(schedule, mode), schedule, threshold)
+        label: adjudicate_physical_packet(fixture_packet(schedule, mode), schedule, threshold, require_custody=False)
         for label, mode in false_positive_modes.items()
     }
     invalid_packet = fixture_packet(schedule, "positive")
     invalid_packet["source_death_receipts"] = invalid_packet["source_death_receipts"][:-1]
-    invalid = adjudicate_physical_packet(invalid_packet, schedule, threshold)
+    invalid = adjudicate_physical_packet(invalid_packet, schedule, threshold, require_custody=False)
     packet_mutations = packet_mutation_regressions(schedule)
     false_positive_reports = {label: false_positive_report(report) for label, report in false_positive_results.items()}
     negative_claim_states = {
