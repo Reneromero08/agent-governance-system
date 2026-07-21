@@ -1,0 +1,9 @@
+{
+  "copied_back_archive_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_relation_only_matched_permutation_v1_0\\attempt_1_845b3f0e\\ATTEMPT_1_REMOTE_ROOT.tar.gz",
+  "copyback_archive_sha256": "bea3f1ffcc8d15d4cc9cc8299a5dec1b6345727208d8aec0d49f52e1e85a4d96",
+  "copyback_archive_size_bytes": 6436509,
+  "matches_remote_archive": true,
+  "schema": "FAMILY10H_RELATION_ONLY_COPYBACK_VERIFICATION_V1",
+  "target_archive_sha256": "bea3f1ffcc8d15d4cc9cc8299a5dec1b6345727208d8aec0d49f52e1e85a4d96",
+  "target_archive_size_bytes": 6436509
+}
