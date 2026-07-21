@@ -211,15 +211,13 @@
       "passed": true,
       "status": "TARGET_PREFLIGHT_FAILED"
     },
-    "sensor_wrong_driver": {
-      "expected_failure": "temperature_sensor_authority",
-      "failures": [
-        "temperature_sensor_authority"
-      ],
+    "sensor_volatile_inode_device_mode_variation": {
+      "expected_failure": null,
+      "failures": [],
       "passed": true,
-      "status": "TARGET_PREFLIGHT_FAILED"
+      "status": "TARGET_PREFLIGHT_PASSED"
     },
-    "sensor_wrong_inode_device_mode": {
+    "sensor_wrong_driver": {
       "expected_failure": "temperature_sensor_authority",
       "failures": [
         "temperature_sensor_authority"
