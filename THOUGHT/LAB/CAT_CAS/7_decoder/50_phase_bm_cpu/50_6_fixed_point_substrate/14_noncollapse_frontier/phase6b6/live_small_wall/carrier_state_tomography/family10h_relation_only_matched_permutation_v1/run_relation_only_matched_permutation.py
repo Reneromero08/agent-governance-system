@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import io
 import json
 import os
 import re
@@ -182,6 +183,11 @@ def sha256_bytes(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
+def bundle_path_from_receipt(bundle: dict[str, Any]) -> Path:
+    path = Path(bundle.get("path", ""))
+    return path if path.is_absolute() else HERE / path
+
+
 def source_authority_path_map(repo_root: Path) -> dict[str, str]:
     paths = SOURCE_FILES + [CONTRACT_FILE]
     return {path.name: path.resolve().relative_to(repo_root).as_posix() for path in paths}
@@ -197,6 +203,33 @@ def source_bundle_member_hashes(bundle_path: Path) -> dict[str, dict[str, Any]]:
             payload = extracted.read() if extracted else b""
             members[Path(member.name).name] = {"sha256": sha256_bytes(payload), "size": len(payload)}
     return members
+
+
+def mutated_source_bundle_copy(bundle: dict[str, Any], member_name: str) -> dict[str, Any]:
+    source_path = bundle_path_from_receipt(bundle)
+    mutated_path = HERE / f"_mutated_{source_path.name}"
+    with tarfile.open(source_path, "r:gz") as reader, tarfile.open(mutated_path, "w:gz") as writer:
+        for member in reader.getmembers():
+            if not member.isfile():
+                continue
+            extracted = reader.extractfile(member)
+            payload = extracted.read() if extracted else b""
+            if Path(member.name).name == member_name:
+                payload = payload + b"\n# bundle-mutation-regression\n"
+            info = tarfile.TarInfo(member.name)
+            info.size = len(payload)
+            info.mode = member.mode
+            info.mtime = member.mtime
+            writer.addfile(info, io.BytesIO(payload))
+    return {
+        **bundle,
+        "path": str(mutated_path),
+        "sha256": sha256_bytes(mutated_path.read_bytes()),
+        "mutation": {
+            "member": member_name,
+            "expected_member_hashes_retained": True,
+        },
+    }
 
 
 def source_authority_validation(
@@ -240,7 +273,7 @@ def source_authority_validation(
                 failures.append("relation source authority is not an ancestor of the manifest freeze commit")
         if commit_exists:
             path_map = source_authority_path_map(repo_root)
-            bundle_members = source_bundle_member_hashes(HERE / bundle.get("path", "")) if bundle.get("path") else {}
+            bundle_members = source_bundle_member_hashes(bundle_path_from_receipt(bundle)) if bundle.get("path") else {}
             for name, rel_path in path_map.items():
                 blob = git_bytes(["show", f"{relation_source_authority}:{rel_path}"], cwd=repo_root)
                 if blob.returncode != 0:
@@ -316,13 +349,38 @@ def source_authority_regression_tests(
             "failures": report["failures"],
             "checks": report["checks"],
         }
-    mismatch = source_authority_validation(relation_source_authority, bad_files, bundle, freeze_commit=head)
-    results["source_bundle_not_matching_source_authority_tree"] = {
-        "passed": mismatch["passed"] is False,
-        "validation_passed": mismatch["passed"],
-        "failures": mismatch["failures"],
-        "checks": mismatch["checks"],
+    expected_hash_mismatch = source_authority_validation(relation_source_authority, bad_files, bundle, freeze_commit=head)
+    results["incorrect_expected_source_hashes"] = {
+        "passed": expected_hash_mismatch["passed"] is False,
+        "validation_passed": expected_hash_mismatch["passed"],
+        "failures": expected_hash_mismatch["failures"],
+        "checks": expected_hash_mismatch["checks"],
     }
+    mutated_member = sorted(files)[0] if files else None
+    if mutated_member:
+        mutated_bundle = mutated_source_bundle_copy(bundle, mutated_member)
+        try:
+            bundle_mismatch = source_authority_validation(relation_source_authority, files, mutated_bundle, freeze_commit=head)
+            exact_member_failure = f"source bundle member mismatch: {mutated_member}"
+            results["source_bundle_not_matching_source_authority_tree"] = {
+                "passed": bundle_mismatch["passed"] is False and exact_member_failure in bundle_mismatch["failures"],
+                "validation_passed": bundle_mismatch["passed"],
+                "mutated_member": mutated_member,
+                "expected_member_mismatch": exact_member_failure,
+                "failures": bundle_mismatch["failures"],
+                "checks": bundle_mismatch["checks"],
+            }
+        finally:
+            path = Path(mutated_bundle["path"])
+            if path.exists():
+                path.unlink()
+    else:
+        results["source_bundle_not_matching_source_authority_tree"] = {
+            "passed": False,
+            "validation_passed": True,
+            "failures": ["no source files available for bundle mutation"],
+            "checks": {},
+        }
     return {
         "schema": "FAMILY10H_RELATION_ONLY_SOURCE_AUTHORITY_REGRESSION_TESTS_V1",
         "results": results,

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import math
 import random
+import re
 from collections import Counter, defaultdict
 from typing import Any
 
@@ -136,6 +137,7 @@ def validate_physical_packet(packet: dict[str, Any], schedule: dict[str, Any]) -
     raw_records = packet.get("raw_records")
     source_death = packet.get("source_death_receipts")
     feature_freeze = packet.get("feature_freeze")
+    custody = packet.get("custody_envelope")
     if not isinstance(raw_records, list):
         return {"passed": False, "failures": ["raw_records missing"]}
     if not isinstance(source_death, list):
@@ -148,34 +150,57 @@ def validate_physical_packet(packet: dict[str, Any], schedule: dict[str, Any]) -
     schedule_by_id = {row["tuple_id"]: row for row in schedule_rows}
     if len(schedule_by_id) != len(schedule_rows):
         failures.append("schedule tuple_id duplicate")
+    trusted_schedule_fields = list(pub.SCHEDULE_COLUMNS)
     seen = set()
-    for record in raw_records:
+    for index, record in enumerate(raw_records):
+        if not isinstance(record, dict):
+            failures.append("raw record malformed")
+            break
+        if index >= len(schedule_rows):
+            failures.append("raw record count exceeds schedule")
+            break
+        ordered_expected = schedule_rows[index]
         tuple_id = record.get("tuple_id")
         expected = schedule_by_id.get(tuple_id)
         if expected is None:
             failures.append("unexpected tuple_id")
             continue
+        if tuple_id != ordered_expected["tuple_id"]:
+            failures.append("raw record execution order mismatch")
         if tuple_id in seen:
             failures.append("duplicate raw tuple_id")
         seen.add(tuple_id)
-        for field in [
-            "execution_ordinal",
-            "row_role",
-            "r_prepare",
-            "r_query",
-            "query",
-            "cyclic_origin",
-            "expected_pmu_group",
-        ]:
-            if record.get(field) != expected[field]:
+        for field in trusted_schedule_fields:
+            if record.get(field) != expected.get(field):
                 failures.append(f"{field} mismatch")
         for metric in ["dirty_probe_response", "change_to_dirty", "cpu_cycles", "duration_ns"]:
             if type(record.get(metric)) not in {int, float}:
                 failures.append(f"{metric} not numeric")
+        if record.get("physical_measurement") is not True:
+            failures.append("physical measurement flag mismatch")
         if record.get("process_custody") != "source_dead_before_query":
             failures.append("process custody mismatch")
+        if record.get("expected_pmu_group") != pub.PMU_GROUP["name"]:
+            failures.append("expected PMU event group mismatch")
         if record.get("pmu_event_group") != pub.PMU_GROUP["name"]:
             failures.append("PMU event group mismatch")
+        if record.get("pmu_events") != pub.PMU_GROUP["events"]:
+            failures.append("PMU event identity mismatch")
+        event_ids = record.get("event_ids")
+        if not isinstance(event_ids, dict) or set(event_ids) != set(pub.PMU_GROUP["events"]):
+            failures.append("PMU event IDs missing")
+        elif len(set(event_ids.values())) != len(event_ids) or not all(isinstance(value, int) and value > 0 for value in event_ids.values()):
+            failures.append("PMU event IDs invalid or non-distinct")
+        time_enabled = record.get("time_enabled")
+        time_running = record.get("time_running")
+        if type(time_enabled) not in {int, float} or time_enabled <= 0:
+            failures.append("time_enabled invalid")
+        if type(time_running) not in {int, float} or time_running <= 0 or (type(time_enabled) in {int, float} and time_running > time_enabled):
+            failures.append("time_running invalid")
+        if record.get("source_cpu_before") != expected["source_cpu_expected"] or record.get("source_cpu_after") != expected["source_cpu_expected"]:
+            failures.append("source CPU custody mismatch")
+        if record.get("receiver_cpu_before") != expected["receiver_cpu_expected"] or record.get("receiver_cpu_after") != expected["receiver_cpu_expected"]:
+            failures.append("receiver CPU custody mismatch")
         if record.get("positive_physical_claim") is True:
             failures.append("positive claim leakage in raw record")
         if len(failures) > 32:
@@ -183,27 +208,83 @@ def validate_physical_packet(packet: dict[str, Any], schedule: dict[str, Any]) -
     death_by_id = {row.get("tuple_id"): row for row in source_death if isinstance(row, dict)}
     if len(death_by_id) != len(source_death):
         failures.append("source-death receipt duplicate or malformed")
-    for tuple_id, expected in schedule_by_id.items():
-        receipt = death_by_id.get(tuple_id)
+    for index, expected in enumerate(schedule_rows):
+        receipt = source_death[index] if index < len(source_death) else None
         if not isinstance(receipt, dict):
             failures.append("source-death receipt missing")
             break
+        if receipt.get("tuple_id") != expected["tuple_id"]:
+            failures.append("source-death receipt execution order mismatch")
+        if receipt.get("tuple_id") != expected["tuple_id"] or receipt.get("execution_ordinal") != expected["execution_ordinal"]:
+            failures.append("source-death tuple identity mismatch")
+        if receipt.get("source_pid") != receipt.get("waitpid_pid"):
+            failures.append("source PID/waitpid mismatch")
+        if receipt.get("waitpid_status") != "exited_0":
+            failures.append("source wait status mismatch")
         if receipt.get("query_selected_after_waitpid") is not True:
             failures.append("query selected before source death")
         if receipt.get("source_alive_during_query") is not False:
             failures.append("source alive during query")
+        if receipt.get("source_helper_survives") is not False:
+            failures.append("source helper survived query")
+        if receipt.get("open_source_ipc_after_waitpid") != 0:
+            failures.append("open source IPC after waitpid")
         if receipt.get("post_observation_query_or_window_selection") is not False:
             failures.append("post-observation selection")
+        if receipt.get("source_cpu_before") != expected["source_cpu_expected"] or receipt.get("source_cpu_after") != expected["source_cpu_expected"]:
+            failures.append("source-death CPU custody mismatch")
+        if receipt.get("physical_measurement") is not True:
+            failures.append("source-death physical measurement mismatch")
+        if len(failures) > 48:
+            break
     if not isinstance(feature_freeze, dict):
         failures.append("feature_freeze missing")
     else:
+        if feature_freeze.get("physical_measurement") is not True:
+            failures.append("feature freeze physical measurement mismatch")
+        if feature_freeze.get("raw_record_count") != len(schedule_rows):
+            failures.append("feature freeze raw-record count mismatch")
         if feature_freeze.get("primary_endpoint") != "dirty_probe_response":
             failures.append("feature freeze primary endpoint mismatch")
+        if feature_freeze.get("secondary_endpoints") != ["change_to_dirty", "cpu_cycles", "duration_ns"]:
+            failures.append("feature freeze secondary endpoints mismatch")
         if feature_freeze.get("schedule_sha256") != schedule.get("schedule_sha256"):
             failures.append("feature freeze schedule binding mismatch")
         if feature_freeze.get("post_observation_feature_selection") is not False:
             failures.append("post-observation feature selection")
-    return {"passed": not failures, "failures": failures[:64], "raw_record_count": len(raw_records)}
+    if not isinstance(custody, dict):
+        failures.append("custody envelope missing")
+    else:
+        inventory = custody.get("evidence_inventory")
+        required_inventory = [
+            "raw_records",
+            "source_death_receipts",
+            "feature_freeze",
+            "target_execution_receipt",
+        ]
+        for field in [
+            "target_execution_receipt_sha256",
+            "runtime_sha256",
+            "manifest_sha256",
+            "copied_back_archive_sha256",
+        ]:
+            value = custody.get(field)
+            if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value):
+                failures.append(f"{field} missing or malformed")
+        for field in ["source_authority_sha", "freeze_sha"]:
+            value = custody.get(field)
+            if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{40}", value):
+                failures.append(f"{field} missing or malformed")
+        if not isinstance(custody.get("copied_back_archive_size"), int) or custody.get("copied_back_archive_size") <= 0:
+            failures.append("copied-back archive size missing")
+        if not isinstance(inventory, dict) or not all(inventory.get(item) is True for item in required_inventory):
+            failures.append("evidence inventory incomplete")
+    return {
+        "passed": not failures,
+        "failures": failures[:64],
+        "raw_record_count": len(raw_records),
+        "source_death_receipt_count": len(source_death),
+    }
 
 
 def relation_cells_by_block(rows: list[dict[str, Any]]) -> dict[str, dict[tuple[str, str], float]]:
@@ -439,6 +520,7 @@ def bootstrap_stability(rows: list[dict[str, Any]], threshold_contract: dict[str
 
 
 def neutralized_effect(rows: list[dict[str, Any]], threshold_contract: dict[str, Any], keys: list[str]) -> dict[str, Any]:
+    """Diagnostic-only replay summary; not used as an adjudication gate."""
     grouped: dict[tuple[Any, ...], list[float]] = defaultdict(list)
     for row in rows:
         if row.get("row_role") == "relation_matrix":
@@ -452,32 +534,174 @@ def neutralized_effect(rows: list[dict[str, Any]], threshold_contract: dict[str,
     return effect_summary(neutralized, threshold_contract)
 
 
-def replay_adversary_report(rows: list[dict[str, Any]], threshold_contract: dict[str, Any]) -> dict[str, Any]:
-    null_threshold = threshold_contract["resampling_thresholds"]["matched_permutation_null_abs_max"]
-    specs = {
-        "scalar_q_replay": ["q"],
-        "nonlinear_scalar_q_replay": ["q", "mapping", "delay_label", "source_order", "query_order", "cyclic_origin"],
-        "separable_a_b_marginal_replay": ["r_prepare", "q", "mapping", "delay_label", "source_order", "query_order", "cyclic_origin"],
-        "route_pressure_replay": ["query_order", "source_order", "delay_label", "cyclic_origin"],
-        "distance_only_replay": ["q", "cyclic_origin"],
-        "source_order_confounding_replay": ["source_order", "q", "mapping", "delay_label"],
-        "query_order_confounding_replay": ["query_order", "q", "mapping", "delay_label"],
-        "cyclic_origin_confounding_replay": ["cyclic_origin", "q", "mapping", "delay_label"],
-        "mapping_session_replicate_delay_transport_replay": ["mapping", "session", "replicate", "delay_label", "q"],
-    }
-    adversaries = {}
-    for name, keys in specs.items():
-        summary = neutralized_effect(rows, threshold_contract, keys)
-        adversaries[name] = {
-            "conditioning_keys": keys,
-            "R_match_abs_of_mean_after_replay": summary["R_match_abs_of_mean"],
-            "R_match_abs_mean_after_replay": summary["R_match_abs_mean"],
-            "passed": summary["R_match_abs_of_mean"] <= null_threshold,
+def rows_by_block(rows: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    by_block: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        by_block[row["block_id"]].append(row)
+    return dict(by_block)
+
+
+def relation_matrix_rows_by_block(rows: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        if row.get("row_role") == "relation_matrix":
+            grouped[row["block_id"]].append(row)
+    return dict(grouped)
+
+
+def scalar_block_baselines(rows: list[dict[str, Any]]) -> dict[str, dict[str, float]]:
+    baselines: dict[str, dict[str, float]] = {}
+    for block_id, block_rows in rows_by_block(rows).items():
+        scalar_rows = [row for row in block_rows if row.get("row_role") == "scalar_control"]
+        control_rows = [row for row in block_rows if row.get("row_role") == "relation_control"]
+        a_values = [float(row["dirty_probe_response"]) for row in scalar_rows if row.get("query") == "query_A"]
+        b_values = [float(row["dirty_probe_response"]) for row in scalar_rows if row.get("query") == "query_B"]
+        control_values = [float(row["dirty_probe_response"]) for row in control_rows]
+        scalar_center = mean([*a_values, *b_values]) if a_values or b_values else 0.0
+        baselines[block_id] = {
+            "scalar_center": scalar_center,
+            "D_single": (mean(a_values) - mean(b_values)) if a_values and b_values else 0.0,
+            "route_pressure_control": mean(control_values) if control_values else 0.0,
         }
+    return baselines
+
+
+def scalar_replay_residual_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    baselines = scalar_block_baselines(rows)
+    residual_rows: list[dict[str, Any]] = []
+    for row in rows:
+        item = dict(row)
+        if item.get("row_role") == "relation_matrix":
+            baseline = baselines.get(item["block_id"], {})
+            item["dirty_probe_response"] = float(item["dirty_probe_response"]) - float(baseline.get("scalar_center", 0.0))
+        residual_rows.append(item)
+    return residual_rows
+
+
+def additive_ab_residual_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    residual_rows = [dict(row) for row in rows]
+    output_by_tuple = {row["tuple_id"]: row for row in residual_rows}
+    for block_id, matrix_rows in relation_matrix_rows_by_block(rows).items():
+        if len(matrix_rows) != len(pub.RELATION_CELLS):
+            continue
+        grand = mean([float(row["dirty_probe_response"]) for row in matrix_rows])
+        prep_means = {
+            relation: mean([float(row["dirty_probe_response"]) for row in matrix_rows if row["r_prepare"] == relation])
+            for relation in pub.RELATIONS
+        }
+        query_means = {
+            relation: mean([float(row["dirty_probe_response"]) for row in matrix_rows if row["r_query"] == relation])
+            for relation in pub.RELATIONS
+        }
+        for row in matrix_rows:
+            predicted = prep_means[row["r_prepare"]] + query_means[row["r_query"]] - grand
+            output_by_tuple[row["tuple_id"]]["dirty_probe_response"] = float(row["dirty_probe_response"]) - predicted
+    return residual_rows
+
+
+def matched_permutation_null(rows: list[dict[str, Any]], threshold_contract: dict[str, Any]) -> dict[str, Any]:
+    observed = effect_summary(rows, threshold_contract)
+    null_values: list[float] = []
+    block_cells = []
+    for matrix_rows in relation_matrix_rows_by_block(rows).values():
+        if len(matrix_rows) != len(pub.RELATION_CELLS):
+            continue
+        block_cells.append(
+            {
+                (row["r_prepare"], row["r_query"]): float(row["dirty_probe_response"])
+                for row in matrix_rows
+            }
+        )
+    for seed in range(128):
+        rng = random.Random(0xA77A5EED + seed)
+        sample_r: list[float] = []
+        for cells in block_cells:
+            shuffled_values = [cells[cell] for cell in pub.RELATION_CELLS]
+            rng.shuffle(shuffled_values)
+            shuffled_cells = dict(zip(pub.RELATION_CELLS, shuffled_values))
+            sample_r.append(
+                0.5
+                * (
+                    (shuffled_cells[("relation_r0", "relation_r0")] + shuffled_cells[("relation_r1", "relation_r1")])
+                    - (shuffled_cells[("relation_r0", "relation_r1")] + shuffled_cells[("relation_r1", "relation_r0")])
+                )
+            )
+        null_values.append(abs(mean(sample_r)) if sample_r else 0.0)
+    distribution = signed_distribution(null_values)
+    threshold = threshold_contract["resampling_thresholds"]["matched_permutation_null_abs_max"]
+    return {
+        "passed": observed["R_match_abs_of_mean"] >= observed["threshold"]
+        and observed["R_match_abs_of_mean"] > distribution["q95_abs"]
+        and distribution["q95_abs"] <= threshold,
+        "seed": "0xA77A5EED",
+        "iterations": len(null_values),
+        "observed_R_match_abs_of_mean": observed["R_match_abs_of_mean"],
+        "null_distribution": distribution,
+        "null_threshold": threshold,
+    }
+
+
+def replay_adversary_report(rows: list[dict[str, Any]], threshold_contract: dict[str, Any]) -> dict[str, Any]:
+    scalar_residual = effect_summary(scalar_replay_residual_rows(rows), threshold_contract)
+    additive_residual = effect_summary(additive_ab_residual_rows(rows), threshold_contract)
+    matched_null = matched_permutation_null(rows, threshold_contract)
+    heldout = heldout_transport(rows, threshold_contract)
+    diagnostic_neutralization = {
+        "non_gating": True,
+        "reason": "group-mean neutralization can algebraically erase or preserve effects and is retained only for audit visibility",
+        "examples": {
+            "q_only": neutralized_effect(rows, threshold_contract, ["q"]),
+            "mapping_session_replicate_delay_q": neutralized_effect(
+                rows,
+                threshold_contract,
+                ["mapping", "session", "replicate", "delay_label", "q"],
+            ),
+        },
+    }
+    adversaries = {
+        "scalar_q_replay": {
+            "model": "relation cells predicted from preserved scalar-control block center and D_single only; no relation-cell labels",
+            "residual_R_match_abs_of_mean": scalar_residual["R_match_abs_of_mean"],
+            "residual_R_match_abs_mean": scalar_residual["R_match_abs_mean"],
+            "relation_residual_survives": scalar_residual["passed"],
+            "passed": scalar_residual["passed"],
+        },
+        "nonlinear_scalar_q_replay": {
+            "model": "same scalar-only residual law with q/nonlinear nuisance confined to block-level scalar marginals",
+            "residual_R_match_abs_of_mean": scalar_residual["R_match_abs_of_mean"],
+            "residual_R_match_abs_mean": scalar_residual["R_match_abs_mean"],
+            "relation_residual_survives": scalar_residual["passed"],
+            "passed": scalar_residual["passed"],
+        },
+        "separable_a_b_marginal_replay": {
+            "model": "per-block additive prepare/query main effects without relation interaction",
+            "residual_R_match_abs_of_mean": additive_residual["R_match_abs_of_mean"],
+            "residual_R_match_abs_mean": additive_residual["R_match_abs_mean"],
+            "relation_interaction_residual_survives": additive_residual["passed"],
+            "passed": additive_residual["passed"],
+        },
+        "route_pressure_replay": {
+            "model": "matched route-pressure and relation-control rows are block-level nuisance only",
+            "residual_R_match_abs_of_mean": scalar_residual["R_match_abs_of_mean"],
+            "matched_controls_available": bool(scalar_block_baselines(rows)),
+            "passed": scalar_residual["passed"],
+        },
+        "distance_only_replay": {
+            "model": "distance histogram is frozen equal across relation cells; no relation interaction term allowed",
+            "residual_R_match_abs_of_mean": additive_residual["R_match_abs_of_mean"],
+            "passed": additive_residual["passed"],
+        },
+        "matched_permutation_null": matched_null,
+        "confounding_heldout": {
+            "factors": {name: item["passed"] for name, item in heldout["factors"].items()},
+            "passed": heldout["passed"],
+        },
+    }
     return {
         "schema": "FAMILY10H_RELATION_ONLY_SCALAR_REPLAY_ADVERSARY_REPORT_V1",
-        "null_threshold": null_threshold,
+        "null_threshold": threshold_contract["resampling_thresholds"]["matched_permutation_null_abs_max"],
         "adversaries": adversaries,
+        "diagnostic_neutralized_effect": diagnostic_neutralization,
         "passed": all(item["passed"] for item in adversaries.values()),
     }
 
@@ -573,6 +797,10 @@ def fixture_packet(schedule: dict[str, Any], mode: str) -> dict[str, Any]:
                 value += 320.0 if expected["relation_match"] else -320.0
             elif mode == "origin_specific":
                 value += (320.0 if expected["relation_match"] else -320.0) if expected["cyclic_origin"] == 0 else 0.0
+            elif mode == "mapping_specific":
+                value += (320.0 if expected["relation_match"] else -320.0) if expected["mapping"] == "map0" else 0.0
+            elif mode == "session_specific":
+                value += (320.0 if expected["relation_match"] else -320.0) if expected["session"] == "session_0" else 0.0
             elif mode == "scalar_replay":
                 value += 0.5 * q
             elif mode == "separable_replay":
@@ -596,12 +824,14 @@ def fixture_packet(schedule: dict[str, Any], mode: str) -> dict[str, Any]:
             "time_enabled": 100_000.0,
             "time_running": 100_000.0,
             "pmu_event_group": pub.PMU_GROUP["name"],
+            "pmu_events": pub.PMU_GROUP["events"],
             "event_ids": {name: idx + 1 for idx, name in enumerate(pub.PMU_GROUP["events"])},
             "source_cpu_before": expected["source_cpu_expected"],
             "source_cpu_after": expected["source_cpu_expected"],
             "receiver_cpu_before": expected["receiver_cpu_expected"],
             "receiver_cpu_after": expected["receiver_cpu_expected"],
             "process_custody": "source_dead_before_query",
+            "physical_measurement": True,
             "positive_physical_claim": False,
         }
         raw_records.append(record)
@@ -619,6 +849,7 @@ def fixture_packet(schedule: dict[str, Any], mode: str) -> dict[str, Any]:
                 "post_observation_query_or_window_selection": False,
                 "source_cpu_before": expected["source_cpu_expected"],
                 "source_cpu_after": expected["source_cpu_expected"],
+                "physical_measurement": True,
             }
         )
     return {
@@ -631,7 +862,25 @@ def fixture_packet(schedule: dict[str, Any], mode: str) -> dict[str, Any]:
             "schedule_sha256": schedule["schedule_sha256"],
             "primary_endpoint": "dirty_probe_response",
             "secondary_endpoints": ["change_to_dirty", "cpu_cycles", "duration_ns"],
+            "raw_record_count": len(raw_records),
+            "physical_measurement": True,
             "post_observation_feature_selection": False,
+        },
+        "custody_envelope": {
+            "schema": "FAMILY10H_RELATION_ONLY_FIXTURE_CUSTODY_ENVELOPE_V1",
+            "target_execution_receipt_sha256": "1" * 64,
+            "runtime_sha256": "2" * 64,
+            "manifest_sha256": "3" * 64,
+            "source_authority_sha": "4" * 40,
+            "freeze_sha": "5" * 40,
+            "copied_back_archive_sha256": "6" * 64,
+            "copied_back_archive_size": 1,
+            "evidence_inventory": {
+                "raw_records": True,
+                "source_death_receipts": True,
+                "feature_freeze": True,
+                "target_execution_receipt": True,
+            },
         },
     }
 
@@ -651,6 +900,55 @@ def fail_closed_claim_state(report: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def mutated_packet_regression(schedule: dict[str, Any], label: str, mutator: Any) -> dict[str, Any]:
+    packet = fixture_packet(schedule, "positive")
+    mutator(packet)
+    result = adjudicate_physical_packet(packet, schedule)
+    claim = fail_closed_claim_state(result)
+    return {
+        "passed": result.get("result_class") == RESULT_INVALID and claim["passed"],
+        "result_class": result.get("result_class"),
+        "failures": result.get("validation", {}).get("failures", []),
+        "claim_state": claim,
+    }
+
+
+def packet_mutation_regressions(schedule: dict[str, Any]) -> dict[str, Any]:
+    def raw0(packet: dict[str, Any]) -> dict[str, Any]:
+        return packet["raw_records"][0]
+
+    def death0(packet: dict[str, Any]) -> dict[str, Any]:
+        return packet["source_death_receipts"][0]
+
+    cases = {
+        "altered_block_id": lambda packet: raw0(packet).__setitem__("block_id", "mutated_block"),
+        "altered_q": lambda packet: raw0(packet).__setitem__("q", int(raw0(packet)["q"]) + 1),
+        "altered_session": lambda packet: raw0(packet).__setitem__("session", "mutated_session"),
+        "altered_mapping": lambda packet: raw0(packet).__setitem__("mapping", "mutated_mapping"),
+        "altered_delay": lambda packet: raw0(packet).__setitem__("delay_label", "mutated_delay"),
+        "altered_source_order": lambda packet: raw0(packet).__setitem__("source_order", "mutated_source_order"),
+        "altered_query_order": lambda packet: raw0(packet).__setitem__("query_order", "mutated_query_order"),
+        "altered_cyclic_origin": lambda packet: raw0(packet).__setitem__("cyclic_origin", int(raw0(packet)["cyclic_origin"]) + 1),
+        "swapped_execution_order": lambda packet: packet["raw_records"].__setitem__(
+            slice(0, 2),
+            [packet["raw_records"][1], packet["raw_records"][0]],
+        ),
+        "wrong_cpu": lambda packet: raw0(packet).__setitem__("source_cpu_before", -1),
+        "wrong_event_ids": lambda packet: raw0(packet).__setitem__("event_ids", {"bad": 1}),
+        "physical_measurement_false": lambda packet: raw0(packet).__setitem__("physical_measurement", False),
+        "altered_feature_freeze": lambda packet: packet["feature_freeze"].__setitem__("schedule_sha256", "0" * 64),
+        "mismatched_target_receipt": lambda packet: packet["custody_envelope"].__setitem__("target_execution_receipt_sha256", "bad"),
+        "mismatched_archive_hash": lambda packet: packet["custody_envelope"].__setitem__("copied_back_archive_sha256", "bad"),
+        "source_death_pid_mismatch": lambda packet: death0(packet).__setitem__("waitpid_pid", -1),
+    }
+    results = {label: mutated_packet_regression(schedule, label, mutator) for label, mutator in cases.items()}
+    return {
+        "schema": "FAMILY10H_RELATION_ONLY_PACKET_MUTATION_REGRESSIONS_V1",
+        "results": results,
+        "passed": all(item["passed"] for item in results.values()),
+    }
+
+
 def run_self_test(schedule: dict[str, Any]) -> dict[str, Any]:
     threshold = physical_threshold_contract()
     positive = adjudicate_physical_packet(fixture_packet(schedule, "positive"), schedule, threshold)
@@ -659,15 +957,20 @@ def run_self_test(schedule: dict[str, Any]) -> dict[str, Any]:
     route = adjudicate_physical_packet(fixture_packet(schedule, "route_pressure"), schedule, threshold)
     distance = adjudicate_physical_packet(fixture_packet(schedule, "distance_only"), schedule, threshold)
     origin_specific = adjudicate_physical_packet(fixture_packet(schedule, "origin_specific"), schedule, threshold)
+    mapping_specific = adjudicate_physical_packet(fixture_packet(schedule, "mapping_specific"), schedule, threshold)
+    session_specific = adjudicate_physical_packet(fixture_packet(schedule, "session_specific"), schedule, threshold)
     invalid_packet = fixture_packet(schedule, "positive")
     invalid_packet["source_death_receipts"] = invalid_packet["source_death_receipts"][:-1]
     invalid = adjudicate_physical_packet(invalid_packet, schedule, threshold)
+    packet_mutations = packet_mutation_regressions(schedule)
     negative_claim_states = {
         "scalar_replay": fail_closed_claim_state(scalar),
         "separable_replay": fail_closed_claim_state(separable),
         "route_pressure": fail_closed_claim_state(route),
         "distance_only": fail_closed_claim_state(distance),
         "origin_specific": fail_closed_claim_state(origin_specific),
+        "mapping_specific": fail_closed_claim_state(mapping_specific),
+        "session_specific": fail_closed_claim_state(session_specific),
         "invalid": fail_closed_claim_state(invalid),
     }
     checks = {
@@ -677,8 +980,13 @@ def run_self_test(schedule: dict[str, Any]) -> dict[str, Any]:
         "route_pressure_rejected": route["result_class"] == RESULT_NOT_CONFIRMED,
         "distance_only_rejected": distance["result_class"] == RESULT_NOT_CONFIRMED,
         "stratum_specific_artifact_fails_true_heldout": origin_specific["result_class"] == RESULT_NOT_CONFIRMED
-        and origin_specific["heldout_transport"]["factors"]["cyclic_origin"]["passed"] is False,
+        and origin_specific["heldout_transport"]["factors"]["cyclic_origin"]["passed"] is False
+        and mapping_specific["result_class"] == RESULT_NOT_CONFIRMED
+        and mapping_specific["heldout_transport"]["factors"]["mapping"]["passed"] is False
+        and session_specific["result_class"] == RESULT_NOT_CONFIRMED
+        and session_specific["heldout_transport"]["factors"]["session"]["passed"] is False,
         "invalid_packet_custody_invalid": invalid["result_class"] == RESULT_INVALID,
+        "packet_mutation_regressions_passed": packet_mutations["passed"],
         "negative_and_invalid_fail_closed": all(item["passed"] for item in negative_claim_states.values()),
     }
     result = {
@@ -699,8 +1007,35 @@ def run_self_test(schedule: dict[str, Any]) -> dict[str, Any]:
             "route_pressure": route["result_class"],
             "distance_only": distance["result_class"],
             "origin_specific": origin_specific["result_class"],
+            "mapping_specific": mapping_specific["result_class"],
+            "session_specific": session_specific["result_class"],
             "invalid": invalid["result_class"],
         },
+        "false_positive_fixture_results": {
+            "block_id_relabeling": packet_mutations["results"]["altered_block_id"],
+            "execution_order_drift": packet_mutations["results"]["swapped_execution_order"],
+            "q_dependent_nonlinear_scalar_artifact": {"result_class": scalar["result_class"], "adversary_passed": scalar["scalar_replay_adversary"]["passed"]},
+            "additive_preparation_query_effects": {"result_class": separable["result_class"], "adversary_passed": separable["scalar_replay_adversary"]["passed"]},
+            "route_pressure_artifact": {"result_class": route["result_class"], "adversary_passed": route["scalar_replay_adversary"]["passed"]},
+            "distance_artifact": {"result_class": distance["result_class"], "adversary_passed": distance["scalar_replay_adversary"]["passed"]},
+            "cyclic_origin_specific_artifact": {
+                "result_class": origin_specific["result_class"],
+                "heldout_cyclic_origin_passed": origin_specific["heldout_transport"]["factors"]["cyclic_origin"]["passed"],
+            },
+            "mapping_specific_artifact": {
+                "result_class": mapping_specific["result_class"],
+                "heldout_mapping_passed": mapping_specific["heldout_transport"]["factors"]["mapping"]["passed"],
+            },
+            "session_specific_artifact": {
+                "result_class": session_specific["result_class"],
+                "heldout_session_passed": session_specific["heldout_transport"]["factors"]["session"]["passed"],
+            },
+            "genuine_relation_interaction": {
+                "result_class": positive["result_class"],
+                "adversary_passed": positive["scalar_replay_adversary"]["passed"],
+            },
+        },
+        "packet_mutation_regressions": packet_mutations,
         "negative_claim_states": negative_claim_states,
         "passed": all(checks.values()),
     }
