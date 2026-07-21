@@ -1,0 +1,11 @@
+{
+  "batch_size": 16,
+  "execution_source_sha256": "71185fce2ef6f2b9538e4376cc8f1399286b69d7c74334fac86426acdab4132e",
+  "freeze_commit": "b6b53493722aeca5cc8cc38bb41f9e9be66afb68",
+  "oracle_call_count": 0,
+  "ordered_batch_sha256": "4109d430789b8fb3912ad606b78311855e89e40b422fb3ecec9b84f5818c0c12",
+  "preoracle_evidence_bytes": 123416,
+  "preoracle_evidence_sha256": "1d05b0ab68751d34dd7199e6fcb94b12a9a340c2c3e36deebeb685747145b236",
+  "preoracle_trace_sha256": "cfabefe4a2b5dba035ea75b92358d7741351b2f4b78694a57fc9f493f3b32cae",
+  "schema": "catalytic_waveform_ising_batch_preoracle_seal_v1"
+}
