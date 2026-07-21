@@ -1,0 +1,432 @@
+MODEL: Terra
+EFFORT: High
+OPERATION: Execute frozen held-out batch generalization experiment
+
+/goal Measure whether the unchanged catalytic waveform-Ising machine generalizes across a prospectively frozen batch of unseen instances.
+
+## Starting authority
+
+Repository:
+
+```text
+Reneromero08/agent-governance-system
+```
+
+Branch:
+
+```text
+codex/audio-frequency-wave-substrate
+```
+
+Required starting head:
+
+```text
+eb1835b6304730f3b1bd0107f1f7c3fc9f9aa275
+```
+
+Verified machine package:
+
+```text
+THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/audio_integrated_catalytic_computation_v1
+```
+
+Established results to preserve:
+
+```text
+CATALYTIC_WAVEFORM_ISING_COMPUTATION_VERIFIED
+CATALYTIC_WAVEFORM_ISING_HELD_OUT_GENERALIZATION_PARTIAL
+```
+
+P0 remains parked and untouched.
+
+## Scientific objective
+
+Prospectively freeze a small batch of unseen five-site Ising instances, execute every instance through the unchanged catalytic waveform machine, and measure:
+
+```text
+raw unique-optimum agreement rate
+accepted-result rate
+coherence distribution
+lock-residual distribution
+restoration success rate
+reuse success rate
+control survival rate
+```
+
+The purpose is to determine whether the previous held-out result was:
+
+```text
+representative of a machine that often finds the correct raw basin but lacks coherence
+an isolated success
+or evidence of broader accepted-result generalization
+```
+
+Do not tune the machine against any batch result.
+
+## Prospective batch custody
+
+Before executing any batch instance or consulting any oracle:
+
+```text
+define the full deterministic generation rule
+define the public seed
+define coefficient sets
+define batch size
+generate every J and h
+freeze every instance in one custody commit
+hash each instance
+hash the ordered batch
+commit and push the freeze
+```
+
+Use a batch large enough to provide useful evidence while remaining computationally practical. Prefer 16 or 32 instances unless investigation identifies a concrete reason for another bounded size.
+
+Every instance must contain:
+
+```text
+a symmetric zero-diagonal J
+a five-element h
+no duplicate of predecessor primary, reuse, or prior held-out instances
+```
+
+Do not select instances based on their oracle optima, coherence, machine behavior, difficulty, or expected success.
+
+No instance may be replaced after execution begins.
+
+## Frozen-machine law
+
+The machine must remain unchanged across the entire batch.
+
+Only these may vary:
+
+```text
+J
+h
+```
+
+Preserve:
+
+```text
+source implementation
+recursive geometry
+carrier construction
+sample count
+site count
+initial phases
+native step count
+time step
+geometry-channel law
+geometry calibration law
+geometry gate depth
+transport masks
+transport shifts
+spatial coupling
+global coherence coupling
+locking schedule
+query
+coherence gate
+lock-residual gate
+restoration law
+restoration tolerance
+inverse traversal
+all other scientific thresholds
+```
+
+Bind the batch runner to the verified predecessor source and machine fingerprint.
+
+Confirm that the variable-`J` adapter still reproduces predecessor primary and reuse waveforms, histories, and queries exactly.
+
+Do not lower the `0.90` coherence threshold because of the previous held-out result.
+
+## Execution order
+
+Execute all instances before opening any oracle result.
+
+For each frozen instance:
+
+```text
+borrow the complex carrier
+execute the unchanged waveform recurrence
+seal the native waveform and operator history
+project the raw boundary result
+seal raw signs, responses, coherence, phases, residual, and raw energy
+restore the carrier
+measure restoration
+reuse the actual restored carrier
+measure reuse and second restoration
+run the required causal and inverse controls
+seal the complete per-instance evidence
+```
+
+Only after every instance has completed and the full pre-oracle batch root is sealed:
+
+```text
+open the exact bounded oracles
+adjudicate every instance
+compute aggregate statistics
+```
+
+The execution trace must make that ordering independently checkable.
+
+## Per-instance outcomes
+
+Classify each instance separately as:
+
+```text
+ACCEPTED_CORRECT
+ACCEPTED_INCORRECT
+RAW_CORRECT_BELOW_GATE
+RAW_INCORRECT
+UNINTERPRETABLE
+```
+
+Definitions:
+
+```text
+ACCEPTED_CORRECT
+    frozen gate accepts the result
+    projected result matches the unique optimum
+
+ACCEPTED_INCORRECT
+    frozen gate accepts the result
+    projected result does not match the optimum
+
+RAW_CORRECT_BELOW_GATE
+    raw sign shadow matches the unique optimum
+    frozen gate rejects the output
+
+RAW_INCORRECT
+    raw sign shadow does not match the unique optimum
+
+UNINTERPRETABLE
+    custody, causality, restoration, reuse, or evidence integrity fails
+```
+
+Handle non-unique oracle optima explicitly. Do not silently count them as unique successes or failures.
+
+## Required aggregate evidence
+
+Report:
+
+```text
+batch size
+ordered batch hash
+unique-optimum instance count
+accepted correct count and rate
+accepted incorrect count and rate
+raw-correct-below-gate count and rate
+raw incorrect count and rate
+uninterpretable count
+overall raw optimum agreement rate
+minimum, median, mean, and maximum coherence
+per-site coherence distributions
+lock-residual distribution where defined
+restoration error distribution
+reuse input-error distribution
+reuse restoration-error distribution
+samplewise non-rank-one residual distribution
+carrier-content causal-control pass rate
+geometry-control pass rate
+removed-transform pass rate
+removed-operator pass rate
+no-lock pass rate
+wrong-query pass rate
+wrong-inverse pass rate
+omitted-step pass rate
+omitted-restoration pass rate
+```
+
+Preserve per-instance records so aggregate numbers can be independently recomputed.
+
+## No-smuggle law
+
+Native evolution must not receive or derive feedback from:
+
+```text
+decoded spins
+raw sign shadows
+scalar J@s
+Ising energy
+oracle rows
+optimum spins
+expected answers
+scores
+winners
+cached results
+external latches
+prior batch outcomes
+```
+
+Inspect the actual transitive call path and runtime data flow.
+
+Do not rely only on keyword scanning.
+
+Oracle results must remain unavailable until all pre-oracle batch evidence is sealed.
+
+## Controls
+
+Use the existing controls without weakening them.
+
+Controls must demonstrate material history or complex-response changes, not merely invalid boundary status.
+
+At minimum preserve:
+
+```text
+uniform-carrier replacement
+flat geometry
+parent-child geometry scramble
+removed waveform transform
+removed pair operator
+no-lock
+wrong query
+wrong inverse
+omitted inverse step
+omitted restoration
+samplewise non-rank-one test
+```
+
+Reasonable batching or sampling of expensive controls is allowed only when the resulting evidence still supports an honest aggregate claim. Use engineering judgment and document the coverage law.
+
+## Autonomous engineering authority
+
+Continue autonomously while work directly advances the experiment.
+
+Investigate, repair, retry, and use reasonable alternatives for:
+
+```text
+offline implementation
+batch generation
+custody construction
+execution tooling
+performance bottlenecks
+test failures
+evidence generation
+reproducibility
+qualification logic
+focused review findings
+branch-local commits
+```
+
+Do not stop because of a token, time, retry, or iteration counter.
+
+Limit irrelevant expansion, not productive work.
+
+Do not build:
+
+```text
+new governance frameworks
+redundant review stacks
+large unrelated mutation systems
+P0 infrastructure
+physical hardware work
+general-purpose compiler infrastructure
+site-count scaling
+performance-advantage claims
+```
+
+Do not ask the user to resolve ordinary reversible engineering choices.
+
+Stop only at a genuine executive or external boundary.
+
+## Scientific interpretation
+
+Emit exactly one final decision:
+
+```text
+CATALYTIC_WAVEFORM_ISING_BATCH_GENERALIZATION_VERIFIED
+CATALYTIC_WAVEFORM_ISING_BATCH_GENERALIZATION_PARTIAL
+CATALYTIC_WAVEFORM_ISING_BATCH_GENERALIZATION_NOT_ESTABLISHED
+```
+
+### VERIFIED
+
+Requires credible batch evidence that the unchanged machine produces accepted correct results beyond the already verified instances, with no accepted incorrect results, while causality, restoration, reuse, custody, and controls remain valid.
+
+Do not define a success-rate threshold after seeing the batch.
+
+Freeze any required quantitative promotion criterion before execution or report descriptive generalization without overstating it.
+
+### PARTIAL
+
+Use when the unchanged machine remains catalytic, causal, restorable, reusable, and produces meaningful raw or accepted success across the batch, but does not meet the prospectively frozen promotion criterion.
+
+Examples include:
+
+```text
+multiple raw-correct-below-gate results
+mixed accepted success
+insufficient accepted-result rate
+coherence remaining the dominant limitation
+```
+
+### NOT_ESTABLISHED
+
+Use only when executed evidence shows that batch custody failed, the machine changed, no-smuggle failed, restoration or reuse failed materially, results were uninterpretable, or the batch produced no credible generalization evidence.
+
+Do not use `NOT_ESTABLISHED` because of resource consumption alone.
+
+## Review
+
+After the batch produces interpretable results, conduct one focused adversarial review covering:
+
+```text
+prospective batch custody
+instance independence
+machine immutability
+oracle ordering
+aggregate recomputation
+native waveform causality
+accepted versus raw-result classification
+restoration
+reuse
+control coverage
+claim boundaries
+```
+
+Repair concrete defects and rerun affected evidence as needed.
+
+Do not create an audit-of-audit loop.
+
+## Git custody and audit handoff
+
+Use a clean isolated worktree or branch-local environment.
+
+The freeze commit must be pushed before execution evidence is created.
+
+When the experiment is complete:
+
+```text
+commit all intended evidence
+push to codex/audio-frequency-wave-substrate
+do not merge
+do not open a PR
+confirm local and remote heads match
+confirm the worktree is clean
+report the exact freeze SHA
+report the exact final remote SHA
+```
+
+Do not leave any final result local-only.
+
+## Final report
+
+Return only:
+
+```text
+result
+freeze commit SHA
+final remote commit SHA
+batch size and ordered batch hash
+frozen-machine confirmation
+oracle-order confirmation
+outcome counts and rates
+coherence and residual distributions
+restoration and reuse distributions
+no-smuggle and control outcomes
+what is proved
+what is not proved
+concrete defects repaired
+smallest next catalytic step
+```
+
+The goal is to measure the unchanged catalytic machine across unseen problems, not to manufacture a stronger verdict.
