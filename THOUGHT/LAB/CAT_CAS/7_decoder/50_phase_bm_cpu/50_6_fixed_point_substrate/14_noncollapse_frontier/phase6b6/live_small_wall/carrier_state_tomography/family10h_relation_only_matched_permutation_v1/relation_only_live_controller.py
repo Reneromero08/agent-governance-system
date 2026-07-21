@@ -171,6 +171,9 @@ def synthetic_transport_self_test(source_root: Path, relation_freeze_commit: str
         packet = {
             "raw_records": [json.loads(line) for line in (output_root / "raw_records.jsonl").read_text(encoding="utf-8").splitlines()],
             "source_death_receipts": [json.loads(line) for line in (output_root / "source_death_receipts.jsonl").read_text(encoding="utf-8").splitlines()],
+            "feature_freeze": read_json(output_root / "feature_freeze.json"),
+            "target_execution_receipt": read_json(output_root / "target_execution_receipt.json"),
+            "custody_envelope": physical_adjudication.custody_envelope_from_archive_path(copyback_path),
         }
         schedule = pub.build_schedule(read_json(deployment_root / "RELATION_GRAMMAR.json"))
         adjudication = physical_adjudication.adjudicate_physical_packet(packet, schedule)

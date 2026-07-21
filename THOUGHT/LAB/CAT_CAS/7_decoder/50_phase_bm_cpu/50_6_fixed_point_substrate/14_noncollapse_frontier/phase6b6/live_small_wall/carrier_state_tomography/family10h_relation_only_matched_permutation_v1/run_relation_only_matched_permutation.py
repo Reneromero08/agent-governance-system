@@ -622,6 +622,110 @@ def count_jsonl(path: Path) -> int:
         return sum(1 for line in handle if line.strip())
 
 
+def read_jsonl(path: Path) -> list[dict[str, Any]]:
+    rows = []
+    with path.open("r", encoding="utf-8") as handle:
+        for line in handle:
+            if not line.strip():
+                raise ValueError(f"blank JSONL line in {path}")
+            rows.append(json.loads(line))
+    return rows
+
+
+def runtime_raw_schema_validation(
+    raw_path: Path,
+    death_path: Path,
+    feature_path: Path,
+    receipt_path: Path,
+    schedule: dict[str, Any],
+) -> dict[str, Any]:
+    raw_records = read_jsonl(raw_path) if raw_path.exists() else []
+    source_death = read_jsonl(death_path) if death_path.exists() else []
+    feature_freeze = json.loads(feature_path.read_text(encoding="utf-8")) if feature_path.exists() else None
+    target_receipt = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path.exists() else None
+    required_extra_fields = [
+        "pmu_event_group",
+        "pmu_events",
+        "event_ids",
+        "change_to_dirty",
+        "dirty_probe_response",
+        "cpu_cycles",
+        "duration_ns",
+        "time_enabled",
+        "time_running",
+        "source_cpu_before",
+        "source_cpu_after",
+        "receiver_cpu_before",
+        "receiver_cpu_after",
+        "process_custody",
+        "query_hash",
+        "physical_measurement",
+        "positive_physical_claim",
+    ]
+    missing_fields = 0
+    schedule_mismatches = 0
+    first_missing: list[dict[str, Any]] = []
+    first_mismatches: list[dict[str, Any]] = []
+    for index, (record, expected) in enumerate(zip(raw_records, schedule["rows"])):
+        for field in pub.SCHEDULE_COLUMNS:
+            if field not in record:
+                missing_fields += 1
+                if len(first_missing) < 8:
+                    first_missing.append({"index": index, "tuple_id": expected["tuple_id"], "field": field})
+            elif record.get(field) != expected.get(field):
+                schedule_mismatches += 1
+                if len(first_mismatches) < 8:
+                    first_mismatches.append(
+                        {
+                            "index": index,
+                            "tuple_id": expected["tuple_id"],
+                            "field": field,
+                            "observed": record.get(field),
+                            "expected": expected.get(field),
+                        }
+                    )
+        for field in required_extra_fields:
+            if field not in record:
+                missing_fields += 1
+                if len(first_missing) < 8:
+                    first_missing.append({"index": index, "tuple_id": expected["tuple_id"], "field": field})
+    packet = {
+        "raw_records": raw_records,
+        "source_death_receipts": source_death,
+        "feature_freeze": feature_freeze,
+        "target_execution_receipt": target_receipt,
+    }
+    validator = physical_adjudication.validate_physical_packet(
+        packet,
+        schedule,
+        expected_physical_measurement=False,
+        require_custody=False,
+    )
+    return {
+        "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_RAW_SCHEMA_INTEGRATION_V1",
+        "raw_record_count": len(raw_records),
+        "source_death_receipt_count": len(source_death),
+        "expected_row_count": len(schedule["rows"]),
+        "schedule_field_count": len(pub.SCHEDULE_COLUMNS),
+        "required_extra_fields": required_extra_fields,
+        "missing_field_count": missing_fields,
+        "schedule_mismatch_count": schedule_mismatches,
+        "first_missing_fields": first_missing,
+        "first_schedule_mismatches": first_mismatches,
+        "schema_equivalent_validator": validator,
+        "synthetic_records_marked_nonphysical": all(row.get("physical_measurement") is False for row in raw_records),
+        "synthetic_positive_claim_absent": all(row.get("positive_physical_claim") is not True for row in raw_records),
+        "passed": len(raw_records) == len(schedule["rows"])
+        and len(source_death) == len(schedule["rows"])
+        and missing_fields == 0
+        and schedule_mismatches == 0
+        and validator["passed"]
+        and target_receipt is not None
+        and target_receipt.get("physical_measurement") is False
+        and all(row.get("positive_physical_claim") is not True for row in raw_records),
+    }
+
+
 def runtime_static_inspection() -> dict[str, Any]:
     return {
         "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_SOURCE_INVENTORY_V1",
@@ -834,6 +938,7 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
             "runtime_source_compiles_for_target_linux": False,
             "runtime_self_test_passes": False,
             "synthetic_executor_complete_schedule_passed": False,
+            "runtime_raw_schema_matches_physical_validator": False,
             "target_linux_binary_bound_to_source": False,
             "pmu_preflight_helper_compiles": False,
             "pmu_preflight_helper_self_test_passes": False,
@@ -881,6 +986,7 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
             "runtime_source_compiles_for_target_linux": False,
             "runtime_self_test_passes": False,
             "synthetic_executor_complete_schedule_passed": False,
+            "runtime_raw_schema_matches_physical_validator": False,
             "target_linux_binary_bound_to_source": False,
             "pmu_preflight_helper_compiles": receipt["pmu_preflight_helper"].get("compile_returncode") == 0,
             "pmu_preflight_helper_self_test_passes": receipt["pmu_preflight_helper"].get("passed") is True,
@@ -924,6 +1030,21 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
         receipt_path = output_root / "target_execution_receipt.json"
         parsed_feature_freeze = json.loads(feature_path.read_text(encoding="utf-8")) if feature_path.exists() else None
         parsed_receipt = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path.exists() else None
+        raw_schema = (
+            runtime_raw_schema_validation(
+                raw_path,
+                death_path,
+                feature_path,
+                receipt_path,
+                pub.build_schedule(json.loads(GRAMMAR_JSON.read_text(encoding="utf-8"))),
+            )
+            if raw_path.exists() and death_path.exists() and feature_path.exists() and receipt_path.exists()
+            else {
+                "schema": "FAMILY10H_RELATION_ONLY_RUNTIME_RAW_SCHEMA_INTEGRATION_V1",
+                "passed": False,
+                "missing_artifact": True,
+            }
+        )
         synthetic_summary = {
             "command": synthetic_command,
             "returncode": synthetic["returncode"],
@@ -934,6 +1055,7 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
             "feature_freeze_written": feature_path.exists(),
             "feature_freeze": parsed_feature_freeze,
             "execution_receipt": parsed_receipt,
+            "raw_schema_validation": raw_schema,
             "passed": synthetic["returncode"] == 0
             and raw_path.exists()
             and death_path.exists()
@@ -944,7 +1066,8 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
             and parsed_feature_freeze.get("schedule_sha256") == expected_schedule_sha256
             and parsed_feature_freeze.get("physical_measurement") is False
             and parsed_receipt is not None
-            and parsed_receipt.get("physical_measurement") is False,
+            and parsed_receipt.get("physical_measurement") is False
+            and raw_schema["passed"],
         }
     finally:
         if output_root.exists():
@@ -986,6 +1109,7 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
         "runtime_source_compiles_for_target_linux": completed["returncode"] == 0 and binary.exists(),
         "runtime_self_test_passes": runtime["returncode"] == 0,
         "synthetic_executor_complete_schedule_passed": synthetic_summary["passed"],
+        "runtime_raw_schema_matches_physical_validator": synthetic_summary.get("raw_schema_validation", {}).get("passed") is True,
         "missing_authority_refusal_passed": receipt["missing_authority_refusal"]["passed"],
         "target_linux_binary_bound_to_source": binary.exists() and pub.sha256_file(HERE / "relation_only_runtime.c") == receipt["runtime_binary_authority"]["runtime_c_sha256"],
         "pmu_preflight_helper_compiles": pmu_helper.get("compile_returncode") == 0 and pmu_helper.get("helper_binary_authority", {}).get("present") is True,
@@ -1042,6 +1166,7 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
             "target_execution_receipt_implemented",
             "all_physical_controls_implemented",
             "synthetic_executor_complete_schedule_passed",
+            "runtime_raw_schema_matches_physical_validator",
             "missing_authority_refusal_passed",
             "target_linux_binary_bound_to_source",
             "placeholder_reserved_executor_removed",
@@ -1454,9 +1579,15 @@ def build_readiness(
         "physical_adjudicator_implemented": physical_self_test["passed"],
         "target_linux_binary_bound_to_source": gates.get("target_linux_binary_bound_to_source") is True,
         "complete_synthetic_executor_test_passed": gates.get("synthetic_executor_complete_schedule_passed") is True,
+        "runtime_raw_schema_matches_physical_validator": gates.get("runtime_raw_schema_matches_physical_validator") is True,
         "missing_authority_refusal_passed": gates.get("missing_authority_refusal_passed") is True,
         "target_refuses_without_authority": target_self_test.get("self_test_passed") is True,
         "physical_threshold_law_frozen": "threshold_contract" in physical_self_test,
+        "custody_envelope_cryptographically_bound": physical_self_test.get("checks", {}).get("custody_envelope_cryptographically_bound") is True,
+        "measured_adversarial_models_reject_false_positive_interactions": physical_self_test.get("checks", {}).get(
+            "measured_adversarial_models_reject_false_positive_interactions"
+        )
+        is True,
         "true_heldout_simulations_passed": self_test_result["tests"]["true_heldout_transport_passed"],
         "implementation_derived_proofs_passed": proof["passed"],
         "negative_regressions_passed": self_test_result["tests"]["negative_regressions_passed"],
