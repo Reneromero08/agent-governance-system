@@ -1,0 +1,136 @@
+{
+  "claim_ceiling": "BOUNDED_SOFTWARE_REJECT_ONLY_WAVEFORM_STABILITY_REFERENCE_ONLY",
+  "decision": "CATALYTIC_WAVEFORM_ISING_V2_STABILITY_BATCH_NOT_ESTABLISHED",
+  "file_count_excluding_manifest": 25,
+  "files": [
+    {
+      "bytes": 31,
+      "path": ".gitattributes",
+      "sha256": "87ff3953072a5394a190e672f00752d26aee2bd294978d683d4004bf77b2eb85"
+    },
+    {
+      "bytes": 2833,
+      "path": "ADVERSARIAL_REVIEW_REPORT.md",
+      "sha256": "af8d20c37b81ed5f376f20d94973ef6bf3bc2b0ab057199255e60297e132607e"
+    },
+    {
+      "bytes": 537,
+      "path": "BATCH_REPORT.md",
+      "sha256": "58d61f0daeed3ed8c0a95d3b4b964c5fea500ca83acbcefbd578258c56c77ae8"
+    },
+    {
+      "bytes": 64181,
+      "path": "BATCH_RESULTS.json",
+      "sha256": "324985e139e3264f2b8f51658905ebd557cc76f52818dc091c947ac562ba534e"
+    },
+    {
+      "bytes": 65616,
+      "path": "DEVELOPMENT_QUALIFICATION.json",
+      "sha256": "0cc66bf5ce0a1ddd7504071d3abfcd8af5cc4d4897fc4eec4942753092885c53"
+    },
+    {
+      "bytes": 673,
+      "path": "DEVELOPMENT_QUALIFICATION.md",
+      "sha256": "b2fb082794ba2cb835b17bb73143267aba41db273764a44414a31d7df03e9bf9"
+    },
+    {
+      "bytes": 14547,
+      "path": "EXPERIMENT_AUTHORITY.txt",
+      "sha256": "5fa4c5af4ab4820a47d6acdadbbf421b8c844f008c72d349db246278e25758cf"
+    },
+    {
+      "bytes": 2104,
+      "path": "FINDINGS_NORMALIZED.json",
+      "sha256": "3491b3c4047aa37d6b8e385533cae5968b22725a0abf9aa5c45442a7d19e60d5"
+    },
+    {
+      "bytes": 1251,
+      "path": "LANE_STATE.md",
+      "sha256": "be20bd8747ccafe0012123eeb461a174d5726d67f71946aaa2627f091b60b27e"
+    },
+    {
+      "bytes": 2330,
+      "path": "NO_SMUGGLE_PROOF.json",
+      "sha256": "8c627635503425753a9fb6e843d689d86cb7030437c04305a2149fbd05f09e81"
+    },
+    {
+      "bytes": 24356,
+      "path": "ORACLE_TRACE.json",
+      "sha256": "16e8478e735a45ff5bb591c7063156c2970d15bf17848195dcbaec2a221d9211"
+    },
+    {
+      "bytes": 1831,
+      "path": "PREORACLE_CONTRACT.json",
+      "sha256": "f324a77051fce3abf8a12365b26f3754f11664c5d966d945eff62bd11d2ce9e6"
+    },
+    {
+      "bytes": 732057,
+      "path": "PREORACLE_EVIDENCE.json",
+      "sha256": "c50007ede18c2c47d2c2a019dc774509d1c9d96e003dbb21f58eef32ee099224"
+    },
+    {
+      "bytes": 579,
+      "path": "PREORACLE_SEAL.json",
+      "sha256": "cf7703166e59363d837f69e1c4d4ed8106a303c83d44e0b3e43bc31bf7424ee4"
+    },
+    {
+      "bytes": 189642,
+      "path": "PREORACLE_TRACE.json",
+      "sha256": "3a6f73bd48e2368c99154a4d40c06b2852e4338b1fd94d9ac3588260e078d0fa"
+    },
+    {
+      "bytes": 90398,
+      "path": "STABILITY_BATCH_CUSTODY.json",
+      "sha256": "0fe248c2cfd986946a74bdeb94e5bdbf67ac427da642cf6445908af7bed02a63"
+    },
+    {
+      "bytes": 876,
+      "path": "SUCCESSOR_AND_BATCH_FREEZE.md",
+      "sha256": "ef694130c7d7578319f11babf321bb0cf2a9d47b62c72fc61dc06d766b6999ac"
+    },
+    {
+      "bytes": 3365,
+      "path": "SUCCESSOR_FREEZE.json",
+      "sha256": "b28204f01e19e8f532a1620cfb1df53ee208ebd95fd0cccdf0023019572b5524"
+    },
+    {
+      "bytes": 17079,
+      "path": "development_qualifier.py",
+      "sha256": "0cd936b2a2c857f669194f37266552eee18e59c3e5c130bdfc12ea91ff8aab08"
+    },
+    {
+      "bytes": 7160,
+      "path": "finalize_package.py",
+      "sha256": "ff3ebf1db1f1d5ad19f33b68a6aa808a65c17898a977e1f36efeab185c435e8a"
+    },
+    {
+      "bytes": 16638,
+      "path": "freeze_builder.py",
+      "sha256": "886750c34c25c1e41bf9c594d612979cc4e7b8ee71bd1b63c09423378d3d69a5"
+    },
+    {
+      "bytes": 7636,
+      "path": "no_smuggle_inspector.py",
+      "sha256": "e2d04a13a1af34442eca1972af50d08668e8000d51c72646bc23b52e850ba910"
+    },
+    {
+      "bytes": 20187,
+      "path": "oracle_adjudicator.py",
+      "sha256": "bfd8303fdf67531c7f7c97517013963eb343ec477374b9a3844ff0285aeb6260"
+    },
+    {
+      "bytes": 20076,
+      "path": "preoracle_runner.py",
+      "sha256": "d86819149ce30d974b1aa079ce7df290c27d9ba1e2ca6ea5e1c71f78ccdfbed3"
+    },
+    {
+      "bytes": 8580,
+      "path": "stability_gate.py",
+      "sha256": "98b0df43a3b923ca86fdbc492ca67ada2981178bec4cdd25fea990024899f579"
+    }
+  ],
+  "manifest_exclusion": "FINAL_MANIFEST.json",
+  "package_bytes_excluding_manifest": 1294563,
+  "package_root_sha256": "ba4ff7f9d555d32ea1ae87f5fbb6cef99b100d4ef30812699ba2c14b3006a8fc",
+  "schema": "catalytic_waveform_ising_v2_stability_final_manifest_v1"
+}

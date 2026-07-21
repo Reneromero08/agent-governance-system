@@ -1,0 +1,50 @@
+{
+  "authorized_claim_ceiling": "BOUNDED_SOFTWARE_REJECT_ONLY_WAVEFORM_STABILITY_REFERENCE_ONLY",
+  "authorized_decision": "CATALYTIC_WAVEFORM_ISING_V2_STABILITY_BATCH_NOT_ESTABLISHED",
+  "candidate": {
+    "discriminator_sha256": "0a6592beea44b303cc33fbcf5e9cf68162369fd9992544e0bc225de6a78b0376",
+    "freeze_commit": "c7ca2059c5bd78b6791bf4fbc2b8d8a04d72c26e",
+    "machine_sha256": "c20f2cd4068ca32528bc52671793bca04d897456944e33ad8571083428c48930",
+    "preoracle_remote_commit": "62df1f8f27bedd9a13263f026160e125bc6467a3",
+    "results_sha256": "324985e139e3264f2b8f51658905ebd557cc76f52818dc091c947ac562ba534e"
+  },
+  "findings": [],
+  "independent_recomputation": {
+    "all_state_energies_sha256": "b9ae60889712faf4cde28ecea791f13a7a796919b630b80880a48ce93857e646",
+    "diagnostic_replay_maximum_delta": 0.0,
+    "false_accept_reduction_count": 0,
+    "false_accept_reduction_rate": 0.0,
+    "independent_adjudication_sha256": "f4ca5e5d90264fcb6d3c55cd60e9ae84494228ab61e9e2f4bdf02af9ee96f2f6",
+    "nominal_accepted_correct": 48,
+    "nominal_accepted_incorrect": 5,
+    "nominal_rejected_correct": 0,
+    "nominal_rejected_incorrect": 3,
+    "non_unique_count": 8,
+    "non_unique_raw_optimum_matches": 8,
+    "raw_energy_vector_sha256": "5b31fb91168b1e220d8e7f3d31318a91f54dd692f08ce45f0ede9fe4dc0d6baa",
+    "stability_accepted_correct": 48,
+    "stability_accepted_incorrect": 5,
+    "stability_rejected_correct": 0,
+    "stability_rejected_incorrect": 3,
+    "strict_control_pass_count": 64,
+    "stability_control_pass_count": 64,
+    "unique_count": 56,
+    "uninterpretable_count": 0
+  },
+  "normalized_counts": {
+    "open": 0,
+    "p0": 0,
+    "p1": 0,
+    "p2": 0
+  },
+  "reviewer_id": "STABILITY-GATE-FINAL-REVIEW-01",
+  "schema": "catalytic_waveform_ising_v2_stability_findings_normalized_v1",
+  "verdict": "PASS",
+  "hardening_followup": {
+    "adjudicator_sha256": "bfd8303fdf67531c7f7c97517013963eb343ec477374b9a3844ff0285aeb6260",
+    "findings": [],
+    "negative_probes_fail_closed": 2,
+    "reviewer_id": "STABILITY-GATE-HARDENING-FOLLOWUP-01",
+    "verdict": "PASS"
+  }
+}
