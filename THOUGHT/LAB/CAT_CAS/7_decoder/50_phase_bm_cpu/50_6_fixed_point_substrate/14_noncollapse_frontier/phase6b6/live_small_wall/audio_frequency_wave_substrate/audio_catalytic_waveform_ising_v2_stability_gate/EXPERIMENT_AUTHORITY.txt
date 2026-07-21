@@ -1,0 +1,579 @@
+MODEL: Terra
+EFFORT: High
+OPERATION: Develop and prospectively test a waveform-native stability discriminator
+
+/goal Prevent confidently incorrect catalytic waveform-Ising outputs from being accepted by adding a waveform-native stability or uncertainty discriminator that can only reject results, never alter or choose them.
+
+## Starting authority
+
+Repository:
+
+```text
+Reneromero08/agent-governance-system
+```
+
+Canonical remote branch:
+
+```text
+codex/audio-frequency-wave-substrate
+```
+
+Required starting head:
+
+```text
+a186eea796dad433143b42c50fb3dbb6513a0572
+```
+
+Current frozen machine:
+
+```text
+audio_catalytic_waveform_ising_v2
+```
+
+Machine fingerprint:
+
+```text
+c20f2cd4068ca32528bc52671793bca04d897456944e33ad8571083428c48930
+```
+
+Preserve these results unchanged:
+
+```text
+CATALYTIC_WAVEFORM_ISING_COMPUTATION_VERIFIED
+CATALYTIC_WAVEFORM_ISING_HELD_OUT_GENERALIZATION_PARTIAL
+CATALYTIC_WAVEFORM_ISING_BATCH_GENERALIZATION_PARTIAL
+CATALYTIC_WAVEFORM_ISING_V2_BATCH_GENERALIZATION_PARTIAL
+```
+
+The entire V2 package is frozen historical evidence. Do not rewrite its outcomes, thresholds, source, review, or custody.
+
+P0 remains parked. No hardware, playback, recording, procurement, fabrication, or physical contact is authorized.
+
+## Current result
+
+The V2 machine produced:
+
+```text
+25 / 27 exact raw unique optima
+25 accepted-correct unique results
+1 accepted-incorrect unique result
+1 rejected raw-incorrect unique result
+5 / 5 non-unique raw optimum matches
+32 / 32 strict-control passes
+32 / 32 restoration and reuse passes
+```
+
+The accepted-incorrect case is frozen development case V2 batch index `02`:
+
+```text
+problem SHA-256      c8230ca1d88e4313dbc1f439171393cf499f5be2e6abc467d904bb23432ae482
+raw result           [+1,+1,-1,-1,+1]
+unique optimum       [+1,+1,+1,+1,+1]
+raw energy           -4
+optimum energy       -8
+minimum coherence    0.949813190059
+lock residual        0.04230709773
+```
+
+The current coherence and lock gates therefore cannot distinguish every confident correct basin from every confident incorrect basin.
+
+## Scientific objective
+
+Develop a global waveform-native stability discriminator that evaluates whether the nominal V2 result is trustworthy.
+
+The discriminator may:
+
+```text
+ACCEPT the unchanged nominal V2 output
+or
+REJECT the unchanged nominal V2 output
+```
+
+It must never:
+
+```text
+change a raw spin
+choose between candidate answers
+replace the nominal output
+majority-vote a different answer
+use energy to correct the answer
+rerun until a desired answer appears
+feed uncertainty back into native evolution
+```
+
+The underlying V2 machine and its raw output remain unchanged.
+
+## Development corpus
+
+All previously executed cases are now development data:
+
+```text
+19 original development cases
+32 completed V2 batch cases
+51 total known cases
+```
+
+These cases may be rerun and inspected with their oracle labels for discriminator development.
+
+They may never again be used as unseen evidence.
+
+Explicitly separate:
+
+```text
+accepted correct
+accepted incorrect
+raw incorrect
+non-unique
+```
+
+Analyze the accepted-incorrect case and the rejected raw-incorrect case in detail, but do not build instance-specific exceptions.
+
+## Stability observables
+
+Investigate waveform-native observables that could distinguish stable correct basins from confidently wrong basins.
+
+Candidate mechanisms include:
+
+```text
+late-trajectory complex-response drift
+late-trajectory phase velocity
+phase curvature across consolidation steps
+raw-sign persistence across frozen late checkpoints
+response-angle margin
+response-amplitude stability
+continuation stability under fixed extra reversible native steps
+stability under a fixed deterministic set of tiny carrier perturbations
+stability under a fixed deterministic set of tiny geometry-phase perturbations
+agreement of nominal and diagnostic complex-response trajectories
+reverse-forward closure of diagnostic trajectories
+```
+
+These are candidate directions, not a mandatory checklist. Follow the evidence and investigate alternatives when necessary.
+
+A diagnostic rerun must:
+
+```text
+use the same frozen J and h
+use a prospectively fixed perturbation or continuation schedule
+perform only complex waveform operations
+restore every borrowed carrier
+remain independent of oracle knowledge during future execution
+```
+
+The discriminator may use:
+
+```text
+complex waveform states
+operator histories
+query frames
+complex boundary responses
+coherence trajectories
+phase trajectories
+fixed diagnostic reruns
+```
+
+It may not directly inspect:
+
+```text
+problem index
+problem hash
+oracle rows
+optimum state
+Ising energy
+decoded correctness
+cached development labels
+exact J or h lookup tables
+prior-instance outcomes
+```
+
+Development labels may be used to select and validate a global rule, but they must not be embedded in the final rule.
+
+## Existing gates
+
+Keep the existing gates unchanged:
+
+```text
+minimum coherence       0.90
+maximum lock residual   0.15 rad
+restoration maximum     2e-12
+wrong restoration min   1e-3
+```
+
+The new stability gate is additional.
+
+A result is accepted only when:
+
+```text
+existing V2 boundary gate passes
+and
+new frozen stability gate passes
+```
+
+Do not lower or post hoc tighten the existing thresholds.
+
+## Anti-overfit requirements
+
+The discriminator must be a global mechanism, not a lookup table for index `02`.
+
+Require:
+
+```text
+no problem hashes or indices in discriminator source
+no exact development J or h constants in discriminator source
+no per-instance thresholds
+no result-specific branches
+no oracle calls in production qualification
+no energy calls in production qualification
+no scalar J@s path
+```
+
+Use source inspection and runtime guards.
+
+Evaluate candidate discriminators with source-group separation across:
+
+```text
+original primary and reuse cases
+first held-out case
+V1 batch cases
+V2 batch cases
+```
+
+Prefer a simple interpretable stability law.
+
+A learned discriminator is permitted only when:
+
+```text
+inputs are exclusively waveform-native observables
+training uses development cases only
+source-group validation is performed
+the frozen production model contains no instance identities
+the model only accepts or rejects the nominal output
+```
+
+Do not use an opaque model merely to memorize two incorrect cases.
+
+## Development qualification
+
+Before freezing the discriminator, report for the 51-case development corpus:
+
+```text
+nominal raw correctness
+nominal accepted correctness
+nominal accepted incorrect count
+stability-gated accepted correctness
+stability-gated accepted incorrect count
+correct-result retention rate
+false-accept rejection rate
+raw-incorrect rejection rate
+non-unique treatment
+stability metric distributions by outcome class
+restoration and diagnostic-restoration errors
+strict control outcomes
+no-smuggle outcome
+```
+
+A viable discriminator must:
+
+```text
+reject every known accepted-incorrect case
+not alter any raw output
+retain at least 90% of known accepted-correct cases
+preserve all strict controls
+preserve restoration and reuse
+```
+
+This is development qualification only. It does not establish unseen reliability.
+
+Continue autonomous investigation if the first candidate fails. Try reasonable alternative stability mechanisms rather than freezing the first convenient metric.
+
+Do not stop because of token, time, retry, or iteration counters.
+
+Do not manufacture a discriminator if no credible waveform-native separation is found.
+
+## Successor freeze
+
+After a viable discriminator exists, create:
+
+```text
+audio_catalytic_waveform_ising_v2_stability_gate
+```
+
+Freeze and push one dedicated commit containing:
+
+```text
+unchanged V2 machine source identity
+unchanged V2 machine fingerprint
+stability discriminator source
+exact stability observables
+fixed diagnostic schedule
+all stability thresholds
+existing acceptance thresholds
+diagnostic restoration law
+development qualification
+no-smuggle proof
+exact copy of this experiment authority
+authority byte count and SHA-256
+new public batch seed
+all new frozen J,h instances
+per-instance hashes
+ordered batch hash
+promotion criterion
+```
+
+The freeze must occur before any new-batch waveform execution or oracle use.
+
+## New unseen batch
+
+Freeze 64 new five-site instances.
+
+Exclude every complete `(J,h)` pair from all 51 development cases.
+
+Generate the entire batch through a deterministic public SHA-256 rule without:
+
+```text
+waveform execution
+oracle inspection
+uniqueness filtering
+difficulty filtering
+result-based replacement
+```
+
+Do not replace generated instances after execution begins.
+
+Non-unique instances must be retained and classified separately.
+
+## Prospective promotion criterion
+
+Freeze this criterion before execution:
+
+```text
+batch size required                          64
+minimum unique-optimum instances             32
+accepted incorrect maximum                    0
+accepted correct rate among unique instances at least 80%
+accepted correct count minimum               32
+uninterpretable maximum                       0
+all strict V2 controls                       PASS on every instance
+stability-discriminator controls             PASS on every instance
+restoration                                  PASS on every nominal and diagnostic run
+reuse                                        PASS on every instance
+native no-smuggle                            PASS
+stability-gate no-smuggle                    PASS
+```
+
+Do not revise the criterion after seeing the batch.
+
+Report nominal V2 performance and stability-gated performance separately.
+
+## Stability-discriminator controls
+
+At minimum require:
+
+```text
+zero perturbation reproduces the nominal trajectory
+diagnostic schedules are identical for every instance
+diagnostic probes are fixed before execution
+disabling the stability gate reproduces nominal V2 acceptance
+the discriminator never changes raw spins
+the discriminator never selects a different diagnostic answer
+all diagnostic carriers restore
+result and stability records remain outside inverse history
+source contains no instance identities or oracle data
+runtime blocks energy, oracle, development labels, and boundary correction
+```
+
+Add focused controls required by the mechanism actually selected.
+
+Do not build a broad unrelated verification framework.
+
+## Pre-oracle execution
+
+For each frozen instance:
+
+```text
+execute the unchanged nominal V2 machine
+seal the nominal native waveform, history, query, and boundary
+restore the nominal carrier
+reuse the exact restored carrier
+restore again
+run all strict V2 controls
+execute the exact frozen diagnostic schedule
+seal every diagnostic native trajectory and stability observable
+restore every diagnostic carrier
+apply the frozen stability gate
+seal nominal acceptance and stability-gated acceptance
+```
+
+Before any oracle opens:
+
+```text
+seal the complete 64-instance evidence root
+seal the complete event trace
+verify oracle-call count is zero
+verify energy is unreachable from the stability gate
+commit
+push to codex/audio-frequency-wave-substrate
+report the exact remote pre-oracle SHA
+```
+
+The pre-oracle commit must exist remotely before adjudication.
+
+## Oracle adjudication
+
+Only after the remote pre-oracle commit exists:
+
+```text
+open exact 32-state bounded oracles
+separate unique and non-unique optima
+recompute sealed raw energies
+classify nominal V2 outputs
+classify stability-gated outputs
+compute false-accept and correct-retention rates
+apply the frozen promotion criterion
+```
+
+Required classifications:
+
+```text
+NOMINAL_ACCEPTED_CORRECT
+NOMINAL_ACCEPTED_INCORRECT
+NOMINAL_REJECTED_CORRECT
+NOMINAL_REJECTED_INCORRECT
+STABILITY_ACCEPTED_CORRECT
+STABILITY_ACCEPTED_INCORRECT
+STABILITY_REJECTED_CORRECT
+STABILITY_REJECTED_INCORRECT
+NON_UNIQUE_OPTIMUM
+UNINTERPRETABLE
+```
+
+The stability gate may only change accepted versus rejected status. It must never change the nominal raw state.
+
+## Final decision
+
+Emit exactly one:
+
+```text
+CATALYTIC_WAVEFORM_ISING_V2_STABILITY_BATCH_VERIFIED
+CATALYTIC_WAVEFORM_ISING_V2_STABILITY_BATCH_PARTIAL
+CATALYTIC_WAVEFORM_ISING_V2_STABILITY_BATCH_NOT_ESTABLISHED
+```
+
+### VERIFIED
+
+Requires the complete prospectively frozen promotion criterion to pass.
+
+### PARTIAL
+
+Use when the discriminator remains waveform-native, causal, restorable, reusable, and provides meaningful unseen false-accept reduction, but one or more frozen promotion conditions fail.
+
+### NOT_ESTABLISHED
+
+Use only when executed evidence shows:
+
+```text
+custody failure
+machine or gate drift
+oracle-order failure
+no-smuggle failure
+restoration failure
+reuse failure
+discriminator correction of raw answers
+uninterpretable execution
+or no credible unseen uncertainty discrimination
+```
+
+Do not emit `NOT_ESTABLISHED` because of resource consumption alone.
+
+## Review
+
+After adjudication, conduct one focused independent adversarial review covering:
+
+```text
+development versus unseen separation
+anti-overfit evidence
+machine immutability
+discriminator immutability
+batch custody
+authority custody
+oracle ordering
+nominal versus gated classification
+false-accept analysis
+correct-result retention
+native no-smuggle
+gate no-smuggle
+diagnostic restoration
+reuse
+strict controls
+claim boundary
+```
+
+Repair concrete defects and reproduce affected evidence.
+
+Do not create an audit-of-audit loop.
+
+## Git custody and audit handoff
+
+Use a clean isolated worktree.
+
+Required remote stages:
+
+```text
+1. discriminator and 64-instance freeze commit
+2. complete pre-oracle evidence commit
+3. final adjudication and review commit
+```
+
+Push all stages to:
+
+```text
+codex/audio-frequency-wave-substrate
+```
+
+Do not merge and do not open a PR.
+
+At completion confirm:
+
+```text
+local and remote heads match
+worktree clean
+V2 frozen package unchanged
+all predecessor packages unchanged
+P0 untouched
+main untouched
+```
+
+## Final report
+
+Return only:
+
+```text
+result
+discriminator mechanism
+development qualification
+freeze commit SHA
+pre-oracle commit SHA
+final remote commit SHA
+machine fingerprint
+discriminator fingerprint
+new batch size and ordered hash
+oracle-order proof
+nominal outcome counts
+stability-gated outcome counts
+false-accept results
+correct-result retention
+stability metric distributions
+strict control outcomes
+diagnostic restoration outcomes
+carrier restoration and reuse outcomes
+native and gate no-smuggle results
+what is proved
+what is not proved
+concrete defects repaired
+smallest next catalytic step
+tokens and elapsed time
+```
+
+The goal is not to make the machine appear more accurate.
+
+The goal is to detect when a highly coherent waveform result is not actually a stable computational basin.

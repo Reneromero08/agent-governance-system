@@ -1,0 +1,65 @@
+{
+  "null_baseline": "gate disabled leaves the nominal V2 acceptance and raw result unchanged",
+  "pass": true,
+  "pass_conditions": {
+    "ast_no_forbidden_identity_or_scalar_path": true,
+    "deterministic_repeat": true,
+    "diagnostic_restoration": true,
+    "reject_only_output_surface": true,
+    "runtime_boundaries_blocked": true,
+    "zero_perturbation_replay": true
+  },
+  "runtime_probe": {
+    "deterministic_repeat": true,
+    "diagnostic_restoration_pass": true,
+    "gate_returns_only_reject_accept_and_observables": true,
+    "guarded_names": [
+      "development_instances",
+      "exact_oracle",
+      "ising_energy",
+      "project_boundary"
+    ],
+    "native_gate_execution_completed_with_all_boundaries_guarded": true,
+    "result": {
+      "checkpoint_response_sha256": "64069ee426a3893e519beaca2c4321ac2d602696a6eaf5d9d945c68053cf1128",
+      "diagnostic_replay_max_abs_delta": 0.0,
+      "diagnostic_restoration_max_abs_error": 1.27388416562e-14,
+      "gate_pass": true,
+      "joint_instability_score": 0.0920037034526,
+      "late_max_phase_velocity_rad_per_step": 0.000741258518109,
+      "late_mean_response_drift_l2": 0.00736029627621
+    },
+    "zero_perturbation_replay_pass": true
+  },
+  "schema": "catalytic_waveform_ising_v2_stability_no_smuggle_v1",
+  "source_inspection": {
+    "conditional_count": 10,
+    "forbidden_attributes": [],
+    "forbidden_calls": [],
+    "forbidden_names_present": [],
+    "gate_contract": {
+      "acceptance_law": "PASS when min(late_max_phase_velocity/0.008, late_mean_response_drift/0.08) <= 1; otherwise REJECT",
+      "checkpoint_steps_zero_based_after_update": [
+        980,
+        985,
+        990,
+        995,
+        1000,
+        1001,
+        1002,
+        1003,
+        1004
+      ],
+      "diagnostic_restoration_max": 2e-12,
+      "max_late_mean_response_drift_l2": 0.08,
+      "max_late_phase_velocity_rad_per_step": 0.008,
+      "null_baseline": "disabling this reject-only gate reproduces the unchanged nominal V2 acceptance decision and raw result",
+      "raw_result_effect": "REJECT_ONLY_NEVER_ALTERS_OR_SELECTS_A_RESULT",
+      "replay_tolerance": 1e-12
+    },
+    "long_hex_identity_literals": [],
+    "matmul_node_count": 0,
+    "pass": true,
+    "source_sha256": "98b0df43a3b923ca86fdbc492ca67ada2981178bec4cdd25fea990024899f579"
+  }
+}
