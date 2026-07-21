@@ -50,9 +50,9 @@
       "relation_only_target.py",
       "run_relation_only_matched_permutation.py"
     ],
-    "path": "C:\\tmp\\relation_only_controller_kxorlzfp\\ATTEMPT_1_REMOTE_ROOT.tar.gz",
-    "sha256": "a033913e2e342c0637e8df922044a369360984ee36389743750f5c97d6cca755",
-    "size_bytes": 3917784
+    "path": "C:\\tmp\\relation_only_controller__dpqa64t\\ATTEMPT_1_REMOTE_ROOT.tar.gz",
+    "sha256": "a7520d0476c237e60733e118ec991fd9bc0e9a1466a19db41cbdfc45413c781e",
+    "size_bytes": 3934927
   },
   "automatic_physical_retry_refused": true,
   "cleanup": {
@@ -62,9 +62,9 @@
   },
   "copyback": {
     "matches_remote_archive": true,
-    "path": "C:\\tmp\\relation_only_controller_kxorlzfp\\copyback_ATTEMPT_1_REMOTE_ROOT.tar.gz",
-    "sha256": "a033913e2e342c0637e8df922044a369360984ee36389743750f5c97d6cca755",
-    "size_bytes": 3917784
+    "path": "C:\\tmp\\relation_only_controller__dpqa64t\\copyback_ATTEMPT_1_REMOTE_ROOT.tar.gz",
+    "sha256": "a7520d0476c237e60733e118ec991fd9bc0e9a1466a19db41cbdfc45413c781e",
+    "size_bytes": 3934927
   },
   "deployed_file_count": 39,
   "execution": {
@@ -79,9 +79,9 @@
   "freeze_authority": {
     "clean_worktree": false,
     "expected_freeze_commit": "ffffffffffffffffffffffffffffffffffffffff",
-    "head": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
+    "head": "f14735b5c6c3f6c213997a3d6656d5f69df9b793",
     "head_origin_required_for_live": true,
-    "origin": "631bbeba61b4096542c51d4a2ddeba7e06910b32",
+    "origin": "26731e719a57a1a1ade9a2538faa6bf27066c1a3",
     "passed": true,
     "schema": "FAMILY10H_RELATION_ONLY_CONTROLLER_FREEZE_AUTHORITY_V1",
     "synthetic": true
@@ -96,7 +96,7 @@
     "result_class": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID"
   },
   "relation_manifest_freeze_commit": "ffffffffffffffffffffffffffffffffffffffff",
-  "relation_source_authority_commit": "d19a533494e8e6bc6c10fbad634bce838e5a02de",
+  "relation_source_authority_commit": "f14735b5c6c3f6c213997a3d6656d5f69df9b793",
   "remote_canonical_path_absence_checked": true,
   "schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_LIVE_CONTROLLER_SELF_TEST_V1",
   "scp_count": 0,

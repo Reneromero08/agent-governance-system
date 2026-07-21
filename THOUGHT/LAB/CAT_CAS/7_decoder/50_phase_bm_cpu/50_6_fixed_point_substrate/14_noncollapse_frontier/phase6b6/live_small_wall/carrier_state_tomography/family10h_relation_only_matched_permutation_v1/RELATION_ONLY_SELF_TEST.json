@@ -233,7 +233,7 @@
     },
     "passed": true,
     "proof_basis": "generated full permutation tables, generated origin-rotated A/B sequences, schedule rows, source hashes, and runtime build receipt",
-    "proof_sha256": "4808b615ed888cec6abf09ca76438fd6569ed14693776080b151df2e9fa69737",
+    "proof_sha256": "189699906671633a59424ca19085bd7781c7b8dbe223da4dd7f2d774c029a394",
     "relation_origin_counts_sha256": "6f57975f19183dc8a3f9bdadbd5076d529a6404812cb540ee73762016eb693ae",
     "relation_r0": {
       "actual_cache_index_status": "unresolved_until_authorized_target_preflight",
@@ -254,9 +254,9 @@
       "virtual_offset_histogram_sha256": "3bed852658892707a63af1833954e40112bf5aed7e438f889b05f27c7185139d"
     },
     "runtime_build_receipt_passed": true,
-    "runtime_build_receipt_sha256": "2c306e15d4172ecae89b03edd88726209b0e3ad0986e1507c61a902920251c69",
+    "runtime_build_receipt_sha256": "04530964cc5a4661dda94ce1a39f9d9bbb2fdb47bbf480931be3053e7f9b3089",
     "schema": "FAMILY10H_RELATION_MARGINAL_EQUALITY_PROOF_V2",
-    "source_hashes_sha256": "3c972ede16b2ff9b5b076209803371e59a5e508ceb820d2bbb2d6e4517797785"
+    "source_hashes_sha256": "176a5fd585e7d17e9cf75cb07ea58266ef6abdf1108789f850f5a2425e087cda"
   },
   "negative_regressions": {
     "passed": true,
@@ -487,10 +487,12 @@
     "negative_results": {
       "distance_only": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "invalid": "FAMILY10H_RELATION_MATCH_COORDINATE_CUSTODY_INVALID",
+      "mapping_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "origin_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "route_pressure": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
       "scalar_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
-      "separable_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
+      "separable_replay": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "session_specific": "FAMILY10H_RELATION_MATCH_COORDINATE_NOT_CONFIRMED_PROSPECTIVE"
     },
     "passed": true,
     "positive_result": {
@@ -561,7 +563,7 @@
     "tuple_count": 32256
   },
   "schema": "FAMILY10H_RELATION_ONLY_SELF_TEST_V2",
-  "self_test_sha256": "fce054a812d7b3bb51946a76c80f03af34d6867b0d5ed9714e52b76548397e01",
+  "self_test_sha256": "10a88b939e29e8b0f737df0388203b671bd9ae1fbfb4d1229e302e1e12dae361",
   "target_self_test_summary": {
     "live_invocation_count": 0,
     "passed": true,
