@@ -1,0 +1,823 @@
+{
+  "batch_generation": {
+    "batch_size": 16,
+    "generation_rule": "For each zero-based batch index, upper-triangle edge, and field coordinate, SHA-256 the public seed plus the domain-separated instance index, coefficient label, and coordinate. Interpret the first eight digest bytes as an unsigned big-endian integer and reduce modulo the prospectively declared coefficient list. Mirror J exactly and set its diagonal to exact zero. Abort rather than replace an instance if any complete (J,h) pair duplicates a predecessor or earlier batch pair. No oracle or waveform result participates.",
+    "h_coefficient_values": [
+      -2.0,
+      -1.0,
+      -0.5,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "j_coefficient_values": [
+      -2.0,
+      -1.0,
+      1.0,
+      2.0
+    ],
+    "public_seed": "CATCAS_AUDIO_HELD_OUT_BATCH_V1|UNCHANGED_MACHINE|eb1835b6304730f3b1bd0107f1f7c3fc9f9aa275|BATCH_16",
+    "site_count": 5
+  },
+  "freeze_order": {
+    "any_batch_native_evolution_run_before_freeze": false,
+    "any_oracle_consulted_before_freeze": false,
+    "any_result_based_instance_selection": false,
+    "machine_tuned_after_batch_generation": false
+  },
+  "freezer_source_sha256": "8eaaf26a2057415d063a0b0f2d36fc7e51df77b234a8cfa5728c845e03eef5c2",
+  "frozen_machine": {
+    "machine_sha256": "cf95d0cd364af38d47a2f2784aa489ab5a52dc8aea62131c1a8545ff4978203a",
+    "predecessor_source_sha256": "50b6db77e2602e18356636ddb892f6d51aedb0573c6b2418afc8e5cc174991cc",
+    "variables_allowed_to_change": [
+      "coupling_matrix_J",
+      "field_vector_h"
+    ]
+  },
+  "ordered_batch_sha256": "4109d430789b8fb3912ad606b78311855e89e40b422fb3ecec9b84f5818c0c12",
+  "ordered_instances": [
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          -1.0,
+          2.0,
+          2.0
+        ],
+        [
+          2.0,
+          0.0,
+          -2.0,
+          1.0,
+          2.0
+        ],
+        [
+          -1.0,
+          -2.0,
+          0.0,
+          2.0,
+          -2.0
+        ],
+        [
+          2.0,
+          1.0,
+          2.0,
+          0.0,
+          1.0
+        ],
+        [
+          2.0,
+          2.0,
+          -2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        1.0,
+        -0.5,
+        2.0,
+        1.0
+      ],
+      "index": 0,
+      "instance_sha256": "90766a62dac9b7482065cda601a2734b846126c28d63c59436fed21075a8c9e7"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          2.0,
+          -1.0,
+          2.0
+        ],
+        [
+          2.0,
+          0.0,
+          2.0,
+          -1.0,
+          2.0
+        ],
+        [
+          2.0,
+          2.0,
+          0.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          2.0,
+          2.0,
+          -2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        0.5,
+        -1.0,
+        -0.5,
+        2.0,
+        0.5
+      ],
+      "index": 1,
+      "instance_sha256": "eb347a5ccd8a25aa174a99677fe1d9b0331d11a411f2715ab64f0f39ad11a2f1"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          1.0,
+          2.0,
+          -1.0
+        ],
+        [
+          1.0,
+          0.0,
+          -1.0,
+          1.0,
+          2.0
+        ],
+        [
+          1.0,
+          -1.0,
+          0.0,
+          1.0,
+          -2.0
+        ],
+        [
+          2.0,
+          1.0,
+          1.0,
+          0.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          2.0,
+          -2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        -0.5,
+        2.0,
+        2.0,
+        -1.0
+      ],
+      "index": 2,
+      "instance_sha256": "c7ba13c0ec1141bac8a3ca2fe7c3e7184c65277306def4df14b11ee854795027"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          1.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          0.0,
+          2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          2.0,
+          2.0,
+          0.0,
+          1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        -1.0,
+        -1.0,
+        2.0,
+        -1.0
+      ],
+      "index": 3,
+      "instance_sha256": "03dbbc0b1dcb81092abe5762c064102a7bf3e9389f6441139a4d9ef11517e842"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          1.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          0.0,
+          -2.0,
+          -1.0,
+          1.0
+        ],
+        [
+          1.0,
+          -2.0,
+          0.0,
+          2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          1.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        -1.0,
+        -1.0,
+        -2.0,
+        2.0
+      ],
+      "index": 4,
+      "instance_sha256": "e2736f95b4cb8b7b52e31eda9b0179376b210d8979529b76a1b37e3292085c4a"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          1.0,
+          2.0,
+          2.0
+        ],
+        [
+          2.0,
+          0.0,
+          -2.0,
+          -2.0,
+          2.0
+        ],
+        [
+          1.0,
+          -2.0,
+          0.0,
+          -2.0,
+          -1.0
+        ],
+        [
+          2.0,
+          -2.0,
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          2.0,
+          2.0,
+          -1.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        0.5,
+        0.5,
+        1.0,
+        -0.5
+      ],
+      "index": 5,
+      "instance_sha256": "7671523f2b152c0b43e10ef3155f1ef6785d959170cf74971f59ca54d72a8bce"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          -2.0,
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          0.0,
+          1.0,
+          -1.0,
+          2.0
+        ],
+        [
+          -2.0,
+          1.0,
+          0.0,
+          -1.0,
+          2.0
+        ],
+        [
+          1.0,
+          -1.0,
+          -1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          1.0,
+          2.0,
+          2.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        2.0,
+        2.0,
+        -0.5,
+        2.0,
+        -1.0
+      ],
+      "index": 6,
+      "instance_sha256": "4752282a4428ff9ca8ecd075e5d9956df5bcc8e0f8382f852b57ccaf0acd851d"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          0.0,
+          -1.0,
+          -2.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          0.0,
+          1.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -2.0,
+          1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          -1.0,
+          -2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        0.5,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "index": 7,
+      "instance_sha256": "1b821f654f0ebbd7edb1bc2fbf91c5d59afba502b551436cc2ae057628a8bd48"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          2.0,
+          -2.0,
+          1.0
+        ],
+        [
+          2.0,
+          0.0,
+          2.0,
+          1.0,
+          -2.0
+        ],
+        [
+          2.0,
+          2.0,
+          0.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          1.0,
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          -2.0,
+          1.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -2.0,
+        -0.5,
+        -1.0,
+        1.0,
+        2.0
+      ],
+      "index": 8,
+      "instance_sha256": "8d229fc487bfe8cd6ff985bbc0bf0d9e75738a623be3b86aacc45dee4501a75b"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          1.0,
+          -2.0,
+          1.0
+        ],
+        [
+          -1.0,
+          0.0,
+          -2.0,
+          -2.0,
+          2.0
+        ],
+        [
+          1.0,
+          -2.0,
+          0.0,
+          -1.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          2.0,
+          2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        -2.0,
+        -0.5,
+        -1.0,
+        1.0
+      ],
+      "index": 9,
+      "instance_sha256": "d2a83773110f7d2ebceaa14de037601c08e75755a2614b802a3f65ede27d3f27"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -1.0,
+          -2.0,
+          1.0,
+          2.0
+        ],
+        [
+          -1.0,
+          0.0,
+          1.0,
+          2.0,
+          2.0
+        ],
+        [
+          -2.0,
+          1.0,
+          0.0,
+          -1.0,
+          1.0
+        ],
+        [
+          1.0,
+          2.0,
+          -1.0,
+          0.0,
+          2.0
+        ],
+        [
+          2.0,
+          2.0,
+          1.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -1.0,
+        2.0,
+        2.0,
+        -0.5,
+        0.5
+      ],
+      "index": 10,
+      "instance_sha256": "7816c34a26733c6a75bd9ac0ac00d3758d11a8e51988f5e0edc3569276817180"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          2.0,
+          -1.0,
+          2.0,
+          1.0
+        ],
+        [
+          2.0,
+          0.0,
+          -1.0,
+          -2.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          0.0,
+          -2.0,
+          -1.0
+        ],
+        [
+          2.0,
+          -2.0,
+          -2.0,
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          -2.0,
+          -1.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        1.0,
+        1.0,
+        1.0,
+        -1.0
+      ],
+      "index": 11,
+      "instance_sha256": "856093a4276d6e73e4c3ce5b8da1898e41a67aded7c69ba68cd1413213271dc8"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -2.0,
+          2.0,
+          2.0
+        ],
+        [
+          1.0,
+          0.0,
+          -2.0,
+          2.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          0.0,
+          -2.0,
+          2.0
+        ],
+        [
+          2.0,
+          2.0,
+          -2.0,
+          0.0,
+          1.0
+        ],
+        [
+          2.0,
+          2.0,
+          2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        0.5,
+        1.0,
+        -1.0,
+        -0.5,
+        1.0
+      ],
+      "index": 12,
+      "instance_sha256": "ea06fa1cf7784c6d115a159c3edefac598cf2febcb56d8295e6acdbe0cce2d89"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          1.0,
+          -1.0,
+          2.0,
+          -2.0
+        ],
+        [
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          1.0,
+          0.0,
+          1.0,
+          -2.0
+        ],
+        [
+          2.0,
+          2.0,
+          1.0,
+          0.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          -1.0,
+          -2.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        -1.0,
+        -2.0,
+        2.0,
+        2.0
+      ],
+      "index": 13,
+      "instance_sha256": "70ae0c5f14f1fc2ebd5e6949e6287eb1f3cb7142bbc705b234199b5963b96375"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -2.0,
+          -1.0,
+          1.0,
+          -2.0
+        ],
+        [
+          -2.0,
+          0.0,
+          -1.0,
+          -1.0,
+          -2.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          0.0,
+          1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          -1.0,
+          1.0,
+          0.0,
+          2.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          -1.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        -0.5,
+        -1.0,
+        -0.5,
+        -0.5,
+        -2.0
+      ],
+      "index": 14,
+      "instance_sha256": "75f45edea061fe4620fcdfe922b25a32bf41efcfd58fdff3b1c546ef92199c0a"
+    },
+    {
+      "coupling_matrix_J": [
+        [
+          0.0,
+          -2.0,
+          -2.0,
+          2.0,
+          -1.0
+        ],
+        [
+          -2.0,
+          0.0,
+          -2.0,
+          2.0,
+          1.0
+        ],
+        [
+          -2.0,
+          -2.0,
+          0.0,
+          2.0,
+          -2.0
+        ],
+        [
+          2.0,
+          2.0,
+          2.0,
+          0.0,
+          2.0
+        ],
+        [
+          -1.0,
+          1.0,
+          -2.0,
+          2.0,
+          0.0
+        ]
+      ],
+      "field_vector_h": [
+        1.0,
+        -0.5,
+        -0.5,
+        1.0,
+        2.0
+      ],
+      "index": 15,
+      "instance_sha256": "c061c21d123aa42986ade1eb99eee7336d6f6ce10bc8c1cf17686517058d6967"
+    }
+  ],
+  "predecessor_exclusions": {
+    "count": 3,
+    "prior_heldout_instance_sha256": "49db989fd525366867cf9c6866ebc7000b531b438b0227d7bb919e0ff3bf2704"
+  },
+  "promotion_criterion_frozen_before_execution": {
+    "accepted_correct_count_min": 8,
+    "accepted_correct_rate_among_unique_min": 0.5,
+    "accepted_incorrect_count_max": 0,
+    "all_causality_restoration_reuse_and_controls_must_pass": true,
+    "batch_size_required": 16,
+    "uninterpretable_count_max": 0,
+    "unique_optimum_instance_count_min": 12
+  },
+  "schema": "catalytic_waveform_ising_batch_custody_v1",
+  "starting_head": "eb1835b6304730f3b1bd0107f1f7c3fc9f9aa275"
+}
