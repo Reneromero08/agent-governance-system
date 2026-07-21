@@ -1,0 +1,68 @@
+{
+  "authority": {
+    "bytes": 14547,
+    "path": "EXPERIMENT_AUTHORITY.txt",
+    "sha256": "5fa4c5af4ab4820a47d6acdadbbf421b8c844f008c72d349db246278e25758cf"
+  },
+  "batch_ordered_sha256": "9b70d445ab9742b70e355de8ee36afdb842e13d24be8fdddf5fe93725fb96a34",
+  "batch_size": 64,
+  "claim_ceiling": "BOUNDED_SOFTWARE_REJECT_ONLY_WAVEFORM_STABILITY_REFERENCE_ONLY",
+  "discriminator": {
+    "acceptance_law": "PASS when min(late_max_phase_velocity/0.008, late_mean_response_drift/0.08) <= 1; otherwise REJECT",
+    "claim_ceiling": "BOUNDED_SOFTWARE_REJECT_ONLY_WAVEFORM_STABILITY_REFERENCE_ONLY",
+    "development_qualification_sha256": "0cc66bf5ce0a1ddd7504071d3abfcd8af5cc4d4897fc4eec4942753092885c53",
+    "diagnostic_restoration_law": "replay the exact recorded V2 complex phase operators, transport masks, and circular shifts; query only the nine frozen late checkpoints; then traverse the same inverse history and require max error <= 2e-12",
+    "discriminator_fingerprint": "0a6592beea44b303cc33fbcf5e9cf68162369fd9992544e0bc225de6a78b0376",
+    "fixed_diagnostic_schedule": [
+      980,
+      985,
+      990,
+      995,
+      1000,
+      1001,
+      1002,
+      1003,
+      1004
+    ],
+    "mechanism": "reject only when the same nominal V2 complex trajectory jointly exhibits peak late phase velocity above 0.008 rad/step and mean late complex-response drift above 0.08 L2",
+    "no_smuggle_proof_sha256": "8c627635503425753a9fb6e843d689d86cb7030437c04305a2149fbd05f09e81",
+    "null_baseline": "disable the stability gate and reproduce the unchanged nominal V2 acceptance decision and raw result",
+    "raw_result_effect": "REJECT_ONLY_NEVER_ALTERS_OR_SELECTS_A_RESULT",
+    "schema": "catalytic_waveform_ising_v2_stability_discriminator_v1",
+    "source_bytes": 8580,
+    "source_sha256": "98b0df43a3b923ca86fdbc492ca67ada2981178bec4cdd25fea990024899f579",
+    "thresholds": {
+      "diagnostic_restoration_max_abs_error": 2e-12,
+      "late_mean_response_drift_l2_max": 0.08,
+      "late_phase_velocity_rad_per_step_max": 0.008,
+      "replay_max_abs_delta": 1e-12
+    },
+    "v2_machine_fingerprint": "c20f2cd4068ca32528bc52671793bca04d897456944e33ad8571083428c48930"
+  },
+  "existing_v2_thresholds_unchanged": {
+    "coherence_min": 0.9,
+    "lock_residual_max_rad": 0.15,
+    "restoration_max_abs_error": 2e-12,
+    "wrong_restoration_min_abs_error": 0.001
+  },
+  "freeze_source_absence_proof": {
+    "forbidden_execution_or_adjudication_calls": [],
+    "pass": true,
+    "source_sha256": "886750c34c25c1e41bf9c594d612979cc4e7b8ee71bd1b63c09423378d3d69a5"
+  },
+  "machine": {
+    "machine_fingerprint": "c20f2cd4068ca32528bc52671793bca04d897456944e33ad8571083428c48930",
+    "source_bytes": 34512,
+    "source_path": "../audio_catalytic_waveform_ising_v2/successor_machine.py",
+    "source_sha256": "48f16ddf33e635b7f58881a0e31486dd0ec5deb181ab0fab8e0a2657a8fa5ce7"
+  },
+  "preserved_results": [
+    "CATALYTIC_WAVEFORM_ISING_COMPUTATION_VERIFIED",
+    "CATALYTIC_WAVEFORM_ISING_HELD_OUT_GENERALIZATION_PARTIAL",
+    "CATALYTIC_WAVEFORM_ISING_BATCH_GENERALIZATION_PARTIAL",
+    "CATALYTIC_WAVEFORM_ISING_V2_BATCH_GENERALIZATION_PARTIAL"
+  ],
+  "schema": "catalytic_waveform_ising_v2_stability_successor_freeze_v1",
+  "starting_head": "a186eea796dad433143b42c50fb3dbb6513a0572",
+  "status": "FROZEN_BEFORE_64_INSTANCE_WAVEFORM_EXECUTION_AND_ORACLE"
+}
