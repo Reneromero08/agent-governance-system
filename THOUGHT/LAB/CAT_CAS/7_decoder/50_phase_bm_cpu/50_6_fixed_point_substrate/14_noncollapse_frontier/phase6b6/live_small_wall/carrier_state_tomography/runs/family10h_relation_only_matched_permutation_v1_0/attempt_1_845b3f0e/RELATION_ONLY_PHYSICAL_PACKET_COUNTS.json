@@ -1,0 +1,8 @@
+{
+  "feature_freeze_present": true,
+  "raw_record_count": 32256,
+  "schema": "FAMILY10H_RELATION_ONLY_PACKET_COUNTS_V1",
+  "source_death_receipt_count": 32256,
+  "target_execution_receipt_present": true,
+  "wrapper_passed": true
+}
