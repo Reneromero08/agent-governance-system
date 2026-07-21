@@ -33,8 +33,8 @@
       "size": 2239
     },
     "relation_only_target.py": {
-      "sha256": "95ba966ef215b42de42f2dceb96cadb173eea5f6646be440b964ec30dd499bc2",
-      "size": 90457
+      "sha256": "dea120375dd84815ea66acf52d3fd98b5b19a764acc6ef8c162be7873c97e71b",
+      "size": 90879
     },
     "run_relation_only_matched_permutation.py": {
       "sha256": "1d828517e50f8e5d887079053aff5b29250508d91ed64d8dc8b54550cd745d0d",
@@ -85,9 +85,9 @@
       "source_tree_matches_bound_hashes": true,
       "worktree_source_matches_authority": true
     },
-    "current_head": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+    "current_head": "7f30f1a15f2ebcea27761fd9326934d84653ebbf",
     "failures": [],
-    "manifest_freeze_commit_under_test": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+    "manifest_freeze_commit_under_test": "7f30f1a15f2ebcea27761fd9326934d84653ebbf",
     "passed": true,
     "path_map": {
       "RELATION_ONLY_CONTRACT.md": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/RELATION_ONLY_CONTRACT.md",
@@ -101,7 +101,7 @@
       "relation_only_target.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_target.py",
       "run_relation_only_matched_permutation.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/run_relation_only_matched_permutation.py"
     },
-    "relation_source_authority_commit": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+    "relation_source_authority_commit": "7f30f1a15f2ebcea27761fd9326934d84653ebbf",
     "schema": "FAMILY10H_RELATION_ONLY_SOURCE_AUTHORITY_VALIDATION_V1",
     "source_bundle_matches_authority": {
       "RELATION_ONLY_CONTRACT.md": true,
@@ -207,7 +207,7 @@
     "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
     "size": 121072
   },
-  "runtime_build_receipt_sha256": "bdeae1d770679a3ed0329edf6949a3797a14c995dbb63be3d9d162352ee83adb",
+  "runtime_build_receipt_sha256": "ffbfdc863d6281a2ea5362c8a5af6f8725e60c04700cb661f2207590d43fece7",
   "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V3",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
   "sensor_authority_binding": {
@@ -373,18 +373,9 @@
           "worktree_source_matches_authority": false
         },
         "failures": [
-          "source authority tree hash mismatch: relation_only_physical_adjudication.py",
-          "source file changed after source authority commit: relation_only_physical_adjudication.py",
-          "source bundle member mismatch: relation_only_physical_adjudication.py",
-          "source authority tree hash mismatch: relation_only_runtime.c",
-          "source file changed after source authority commit: relation_only_runtime.c",
-          "source bundle member mismatch: relation_only_runtime.c",
-          "source authority tree hash mismatch: relation_only_live_controller.py",
-          "source file changed after source authority commit: relation_only_live_controller.py",
-          "source bundle member mismatch: relation_only_live_controller.py",
-          "source authority tree hash mismatch: run_relation_only_matched_permutation.py",
-          "source file changed after source authority commit: run_relation_only_matched_permutation.py",
-          "source bundle member mismatch: run_relation_only_matched_permutation.py"
+          "source authority tree hash mismatch: relation_only_target.py",
+          "source file changed after source authority commit: relation_only_target.py",
+          "source bundle member mismatch: relation_only_target.py"
         ],
         "passed": true,
         "validation_passed": false
@@ -447,18 +438,9 @@
           "worktree_source_matches_authority": false
         },
         "failures": [
-          "source authority tree hash mismatch: relation_only_physical_adjudication.py",
-          "source file changed after source authority commit: relation_only_physical_adjudication.py",
-          "source bundle member mismatch: relation_only_physical_adjudication.py",
-          "source authority tree hash mismatch: relation_only_runtime.c",
-          "source file changed after source authority commit: relation_only_runtime.c",
-          "source bundle member mismatch: relation_only_runtime.c",
-          "source authority tree hash mismatch: relation_only_live_controller.py",
-          "source file changed after source authority commit: relation_only_live_controller.py",
-          "source bundle member mismatch: relation_only_live_controller.py",
-          "source authority tree hash mismatch: run_relation_only_matched_permutation.py",
-          "source file changed after source authority commit: run_relation_only_matched_permutation.py",
-          "source bundle member mismatch: run_relation_only_matched_permutation.py"
+          "source authority tree hash mismatch: relation_only_target.py",
+          "source file changed after source authority commit: relation_only_target.py",
+          "source bundle member mismatch: relation_only_target.py"
         ],
         "passed": true,
         "validation_passed": false
@@ -480,6 +462,6 @@
       "run_relation_only_matched_permutation.py"
     ],
     "path": "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
-    "sha256": "7446400c2d9a3606375e019a7ddad292213aac53fcc5a62e62143bd8f5bdd74c"
+    "sha256": "1bc06e85bab2a5357629377f0fb350e21fbbcc0d4c553b82bb640aaf374f2a4f"
   }
 }

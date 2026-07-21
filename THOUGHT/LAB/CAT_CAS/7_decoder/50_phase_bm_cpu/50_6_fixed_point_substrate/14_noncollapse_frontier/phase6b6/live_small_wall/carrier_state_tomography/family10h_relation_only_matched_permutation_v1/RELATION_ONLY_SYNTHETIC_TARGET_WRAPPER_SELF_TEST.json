@@ -31,8 +31,8 @@
       "approved_target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
       "grammar_canonical_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
       "grammar_file_sha256": "c0ef84e5d37670a0c6a3cbe48139aa4f46ac344dbb27f6649505ec859359eff2",
-      "manifest_canonical_sha256": "a1e284fbf7ff794133398f810814e1663c67b4c7bbfc408e18352cb0db8d3e94",
-      "manifest_file_sha256": "7c1ff5656703b45ad373a593d50351ef15e95baabac0880d8ad40cb8a1e49788",
+      "manifest_canonical_sha256": "4d24dfd9c5f9eddaec844c32e73860ddac4ac507a6b767096853d29b17f23e45",
+      "manifest_file_sha256": "97898075181e6608e5c29c8e16b23a6734be2e7ceaf45f677b40b68d5e177733",
       "pmu_preflight_helper_actual_c_sha256": "6921c3b200d6bf47fdef1c8c995aee79d8dca49f18655f7588c4709200a7e443",
       "pmu_preflight_helper_actual_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=02c0c320802c47fa7a8cf40467315f935860f779, for GNU/Linux 3.2.0, with debug_info, not stripped",
       "pmu_preflight_helper_actual_sha256": "7377603c5e003f6137b0c80883a47efee3ab34551465f6f936a8d81085290728",
@@ -47,7 +47,7 @@
       "schedule_canonical_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
       "schedule_manifest_sha256": "a7f575bc5ac8ef6e8b4ca4080c01e4a5efd992fd651f70ab1dde8ddc42c57a83",
       "schedule_tsv_sha256": "815fdc63b26f57916afde5340e4e2d7ccec4d4cb6ebdfa236c479fbe2c40bca8",
-      "source_bundle_sha256": "7446400c2d9a3606375e019a7ddad292213aac53fcc5a62e62143bd8f5bdd74c",
+      "source_bundle_sha256": "1bc06e85bab2a5357629377f0fb350e21fbbcc0d4c553b82bb640aaf374f2a4f",
       "source_file_hashes": {
         "RELATION_ONLY_CONTRACT.md": "348b576cbc2bf38c1bc7c338609174c3aa02e95993098b535de10492bac0eb33",
         "relation_only_adjudication.py": "c5c268adb4a4ed7666ebabc524be4de6ca34a86a977e86898eaa69dfc9012dd1",
@@ -57,7 +57,7 @@
         "relation_only_public.py": "26b3737bb0538ab0a168b937e6887d071a4389c70eb66643dd73a5e6a1cf7b73",
         "relation_only_runtime.c": "cf35aecdb7fc012c627678ace000befd8a6e6bd59d5e3fc177a9c0fb9aeb50ff",
         "relation_only_runtime.h": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
-        "relation_only_target.py": "95ba966ef215b42de42f2dceb96cadb173eea5f6646be440b964ec30dd499bc2",
+        "relation_only_target.py": "dea120375dd84815ea66acf52d3fd98b5b19a764acc6ef8c162be7873c97e71b",
         "run_relation_only_matched_permutation.py": "1d828517e50f8e5d887079053aff5b29250508d91ed64d8dc8b54550cd745d0d"
       }
     },
@@ -136,7 +136,7 @@
         "passed": true
       },
       "canonical_manifest_digest": {
-        "detail": "a1e284fbf7ff794133398f810814e1663c67b4c7bbfc408e18352cb0db8d3e94",
+        "detail": "4d24dfd9c5f9eddaec844c32e73860ddac4ac507a6b767096853d29b17f23e45",
         "name": "canonical_manifest_digest",
         "passed": true
       },
@@ -295,8 +295,8 @@
       },
       "manifest_file_hash": {
         "detail": {
-          "env": "7c1ff5656703b45ad373a593d50351ef15e95baabac0880d8ad40cb8a1e49788",
-          "expected": "7c1ff5656703b45ad373a593d50351ef15e95baabac0880d8ad40cb8a1e49788",
+          "env": "97898075181e6608e5c29c8e16b23a6734be2e7ceaf45f677b40b68d5e177733",
+          "expected": "97898075181e6608e5c29c8e16b23a6734be2e7ceaf45f677b40b68d5e177733",
           "observed_backend": "fixture"
         },
         "name": "manifest_file_hash",
@@ -415,7 +415,7 @@
         "passed": true
       },
       "relation_source_authority_not_scalar": {
-        "detail": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+        "detail": "7f30f1a15f2ebcea27761fd9326934d84653ebbf",
         "name": "relation_source_authority_not_scalar",
         "passed": true
       },
@@ -437,15 +437,15 @@
       },
       "source_authority_commit_binding": {
         "detail": {
-          "env": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
-          "expected": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+          "env": "7f30f1a15f2ebcea27761fd9326934d84653ebbf",
+          "expected": "7f30f1a15f2ebcea27761fd9326934d84653ebbf",
           "observed_backend": "fixture"
         },
         "name": "source_authority_commit_binding",
         "passed": true
       },
       "source_bundle_hash": {
-        "detail": "7446400c2d9a3606375e019a7ddad292213aac53fcc5a62e62143bd8f5bdd74c",
+        "detail": "1bc06e85bab2a5357629377f0fb350e21fbbcc0d4c553b82bb640aaf374f2a4f",
         "name": "source_bundle_hash",
         "passed": true
       },
@@ -459,7 +459,7 @@
           "relation_only_public.py": "26b3737bb0538ab0a168b937e6887d071a4389c70eb66643dd73a5e6a1cf7b73",
           "relation_only_runtime.c": "cf35aecdb7fc012c627678ace000befd8a6e6bd59d5e3fc177a9c0fb9aeb50ff",
           "relation_only_runtime.h": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
-          "relation_only_target.py": "95ba966ef215b42de42f2dceb96cadb173eea5f6646be440b964ec30dd499bc2",
+          "relation_only_target.py": "dea120375dd84815ea66acf52d3fd98b5b19a764acc6ef8c162be7873c97e71b",
           "run_relation_only_matched_permutation.py": "1d828517e50f8e5d887079053aff5b29250508d91ed64d8dc8b54550cd745d0d"
         },
         "name": "source_file_hashes",

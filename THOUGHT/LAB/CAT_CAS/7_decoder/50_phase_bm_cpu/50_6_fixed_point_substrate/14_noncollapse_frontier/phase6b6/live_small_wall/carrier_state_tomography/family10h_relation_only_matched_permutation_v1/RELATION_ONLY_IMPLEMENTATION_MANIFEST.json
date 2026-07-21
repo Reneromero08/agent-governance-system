@@ -5,7 +5,7 @@
     "attempt_ceiling": 1,
     "relation_manifest_freeze_commit_not_embedded": true,
     "relation_manifest_freeze_commit_policy": "controller_verifies_local_head_and_origin_equal_freeze_commit_at_authorization_time",
-    "relation_source_authority_commit": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+    "relation_source_authority_commit": "7f30f1a15f2ebcea27761fd9326934d84653ebbf",
     "scalar_evidence_provenance": {
       "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
       "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
@@ -34,8 +34,8 @@
   "grammar_sha256": "be1e1f368f8b53c5e6506910e768de7d31b6627b1d99dbc1df72f95a3b856b12",
   "live_controller_self_test_passed": true,
   "live_controller_self_test_schema": "FAMILY10H_RELATION_ONLY_SYNTHETIC_LIVE_CONTROLLER_SELF_TEST_V1",
-  "manifest_sha256": "a1e284fbf7ff794133398f810814e1663c67b4c7bbfc408e18352cb0db8d3e94",
-  "marginal_equality_proof_sha256": "afd9dfc3449432048ae6290fad8b5d71c01aa324f7c2d1f2955f1ddfa3d248a5",
+  "manifest_sha256": "4d24dfd9c5f9eddaec844c32e73860ddac4ac507a6b767096853d29b17f23e45",
+  "marginal_equality_proof_sha256": "480ddd90bf3f04235c208c96569aa9d210a3da203549504383d6ed079a5eb09c",
   "offline_validate_passed": true,
   "package_decision": "FAMILY10H_RELATION_ONLY_BUILD_READY_AWAITING_AUTHORIZATION",
   "physical_adjudicator_self_test_sha256": "c74a3d86406eb448a7379fc15ec616584d1ebeb54de6b6e87ac0d51e599ed3f3",
@@ -115,13 +115,13 @@
       "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
       "size": 121072
     },
-    "runtime_build_sha256": "79ac830ab6a915e7bc6a0f53796d3abb6d3928998e0c9249259a89d96a851ac2"
+    "runtime_build_sha256": "8172c29e3a677f005dbf2b5e5d58cce4e0d134fb937966fa42459d382c708132"
   },
   "schedule_sha256": "a9d22bfa30a5bb10b0b72734b090c87e5b57abd72da8fa45943ea66683c7e471",
   "schedule_tuple_count": 32256,
   "schema": "FAMILY10H_RELATION_ONLY_IMPLEMENTATION_MANIFEST_V2",
   "science_package_id": "family10h_relation_only_matched_permutation_v1",
-  "self_test_sha256": "8bc28633c1677f390cf87d6dc75a6098c9ff97e5a153f116d72873ab54ef2607",
+  "self_test_sha256": "dade39e92219a03502c2108009ccc1a352546ce3652382ebebca9f5686397503",
   "source_hashes": {
     "files": {
       "RELATION_ONLY_CONTRACT.md": {
@@ -157,8 +157,8 @@
         "size": 2239
       },
       "relation_only_target.py": {
-        "sha256": "95ba966ef215b42de42f2dceb96cadb173eea5f6646be440b964ec30dd499bc2",
-        "size": 90457
+        "sha256": "dea120375dd84815ea66acf52d3fd98b5b19a764acc6ef8c162be7873c97e71b",
+        "size": 90879
       },
       "run_relation_only_matched_permutation.py": {
         "sha256": "1d828517e50f8e5d887079053aff5b29250508d91ed64d8dc8b54550cd745d0d",
@@ -209,9 +209,9 @@
         "source_tree_matches_bound_hashes": true,
         "worktree_source_matches_authority": true
       },
-      "current_head": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+      "current_head": "7f30f1a15f2ebcea27761fd9326934d84653ebbf",
       "failures": [],
-      "manifest_freeze_commit_under_test": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+      "manifest_freeze_commit_under_test": "7f30f1a15f2ebcea27761fd9326934d84653ebbf",
       "passed": true,
       "path_map": {
         "RELATION_ONLY_CONTRACT.md": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/RELATION_ONLY_CONTRACT.md",
@@ -225,7 +225,7 @@
         "relation_only_target.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/relation_only_target.py",
         "run_relation_only_matched_permutation.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_only_matched_permutation_v1/run_relation_only_matched_permutation.py"
       },
-      "relation_source_authority_commit": "6d51288bba6d2b596c6b8eaad1552ff33e848f9a",
+      "relation_source_authority_commit": "7f30f1a15f2ebcea27761fd9326934d84653ebbf",
       "schema": "FAMILY10H_RELATION_ONLY_SOURCE_AUTHORITY_VALIDATION_V1",
       "source_bundle_matches_authority": {
         "RELATION_ONLY_CONTRACT.md": true,
@@ -331,7 +331,7 @@
       "runtime_h_sha256": "9cfe1f94ea8881ee5209a9e10f18dfc651279b8c1c2d5fe7dbde1d46a46de8a4",
       "size": 121072
     },
-    "runtime_build_receipt_sha256": "bdeae1d770679a3ed0329edf6949a3797a14c995dbb63be3d9d162352ee83adb",
+    "runtime_build_receipt_sha256": "ffbfdc863d6281a2ea5362c8a5af6f8725e60c04700cb661f2207590d43fece7",
     "schema": "FAMILY10H_RELATION_ONLY_SOURCE_HASHES_V3",
     "science_package_id": "family10h_relation_only_matched_permutation_v1",
     "sensor_authority_binding": {
@@ -497,18 +497,9 @@
             "worktree_source_matches_authority": false
           },
           "failures": [
-            "source authority tree hash mismatch: relation_only_physical_adjudication.py",
-            "source file changed after source authority commit: relation_only_physical_adjudication.py",
-            "source bundle member mismatch: relation_only_physical_adjudication.py",
-            "source authority tree hash mismatch: relation_only_runtime.c",
-            "source file changed after source authority commit: relation_only_runtime.c",
-            "source bundle member mismatch: relation_only_runtime.c",
-            "source authority tree hash mismatch: relation_only_live_controller.py",
-            "source file changed after source authority commit: relation_only_live_controller.py",
-            "source bundle member mismatch: relation_only_live_controller.py",
-            "source authority tree hash mismatch: run_relation_only_matched_permutation.py",
-            "source file changed after source authority commit: run_relation_only_matched_permutation.py",
-            "source bundle member mismatch: run_relation_only_matched_permutation.py"
+            "source authority tree hash mismatch: relation_only_target.py",
+            "source file changed after source authority commit: relation_only_target.py",
+            "source bundle member mismatch: relation_only_target.py"
           ],
           "passed": true,
           "validation_passed": false
@@ -571,18 +562,9 @@
             "worktree_source_matches_authority": false
           },
           "failures": [
-            "source authority tree hash mismatch: relation_only_physical_adjudication.py",
-            "source file changed after source authority commit: relation_only_physical_adjudication.py",
-            "source bundle member mismatch: relation_only_physical_adjudication.py",
-            "source authority tree hash mismatch: relation_only_runtime.c",
-            "source file changed after source authority commit: relation_only_runtime.c",
-            "source bundle member mismatch: relation_only_runtime.c",
-            "source authority tree hash mismatch: relation_only_live_controller.py",
-            "source file changed after source authority commit: relation_only_live_controller.py",
-            "source bundle member mismatch: relation_only_live_controller.py",
-            "source authority tree hash mismatch: run_relation_only_matched_permutation.py",
-            "source file changed after source authority commit: run_relation_only_matched_permutation.py",
-            "source bundle member mismatch: run_relation_only_matched_permutation.py"
+            "source authority tree hash mismatch: relation_only_target.py",
+            "source file changed after source authority commit: relation_only_target.py",
+            "source bundle member mismatch: relation_only_target.py"
           ],
           "passed": true,
           "validation_passed": false
@@ -604,7 +586,7 @@
         "run_relation_only_matched_permutation.py"
       ],
       "path": "RELATION_ONLY_SOURCE_BUNDLE.tar.gz",
-      "sha256": "7446400c2d9a3606375e019a7ddad292213aac53fcc5a62e62143bd8f5bdd74c"
+      "sha256": "1bc06e85bab2a5357629377f0fb350e21fbbcc0d4c553b82bb640aaf374f2a4f"
     }
   },
   "target_self_test_passed": true,
