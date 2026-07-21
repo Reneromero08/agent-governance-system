@@ -39,6 +39,7 @@ RUNTIME_BINARY_NAMES = ["relation_only_runtime", "relation_only_runtime.exe"]
 PMU_PREFLIGHT_HELPER_NAMES = ["relation_only_pmu_preflight", "relation_only_pmu_preflight.exe"]
 INJECTED_PREFLIGHT_ENVS = [PREFLIGHT_FIXTURE_ENV, PREFLIGHT_SYSTEM_MOCK_ENV]
 HEX40_RE = re.compile(r"[0-9a-f]{40}")
+EXPECTED_PERF_EVENT_ATTR_SIZE = 112
 
 TARGET_PREFLIGHT_CHECKS = [
     "live_authority",
@@ -65,6 +66,8 @@ TARGET_PREFLIGHT_CHECKS = [
     "operational_pinning_capability",
     "injected_preflight_backend_absent",
     "pmu_event_identities",
+    "pmu_helper_binary_hash",
+    "pmu_helper_binary_format_and_abi",
     "grouped_pmu_open_capability",
     "temperature_sensor_authority",
     "cpu_frequency_policy_custody",
@@ -352,10 +355,24 @@ def validate_source_root(source_root: Path) -> dict[str, Any]:
         failures.append("runtime binary missing")
     elif runtime_authority.get("compiled_binary_sha256") != pub.sha256_file(runtime):
         failures.append("runtime binary hash mismatch")
+    helper_identity = pmu_preflight_helper_identity(source_root, source_hashes)
+    if not helper_identity["present"]:
+        failures.append("PMU preflight helper binary missing")
+    if not helper_identity["helper_sha256_matches_authority"]:
+        failures.append("PMU preflight helper binary hash mismatch")
+    if not helper_identity["helper_c_sha256_matches_authority"]:
+        failures.append("PMU preflight helper C source hash mismatch")
+    if not helper_identity["helper_binary_format_valid"]:
+        failures.append("PMU preflight helper binary format or ABI mismatch")
     if manifest.get("claim_boundary", {}).get("small_wall_crossed") is not False:
         failures.append("manifest small wall boundary mismatch")
 
-    return {"passed": not failures, "failures": failures, "required_file_count": len(required)}
+    return {
+        "passed": not failures,
+        "failures": failures,
+        "required_file_count": len(required),
+        "pmu_preflight_helper_identity": helper_identity,
+    }
 
 
 def artifact_identity(source_root: Path) -> dict[str, Any]:
@@ -368,6 +385,7 @@ def artifact_identity(source_root: Path) -> dict[str, Any]:
     runtime_sha = pub.sha256_file(runtime) if runtime else None
     file_probe = run_file_probe(source_root, runtime) if runtime else {"returncode": 2, "stdout": "", "stderr": "runtime missing"}
     runtime_format = file_probe.get("stdout", "").strip()
+    helper_identity = pmu_preflight_helper_identity(source_root, source_hashes)
     if (
         not runtime_format
         and runtime_sha
@@ -384,7 +402,15 @@ def artifact_identity(source_root: Path) -> dict[str, Any]:
         "manifest_canonical_sha256": manifest.get("manifest_sha256"),
         "runtime_binary_sha256": runtime_sha,
         "runtime_binary_format": runtime_format,
-        "pmu_preflight_helper_sha256": source_hashes.get("pmu_preflight_helper_authority", {}).get("compiled_binary_sha256"),
+        "pmu_preflight_helper_sha256": helper_identity["actual_helper_sha256"],
+        "pmu_preflight_helper_actual_sha256": helper_identity["actual_helper_sha256"],
+        "pmu_preflight_helper_expected_sha256": helper_identity["expected_helper_sha256"],
+        "pmu_preflight_helper_sha256_matches_authority": helper_identity["helper_sha256_matches_authority"],
+        "pmu_preflight_helper_actual_format": helper_identity["actual_helper_binary_format"],
+        "pmu_preflight_helper_format_valid": helper_identity["helper_binary_format_valid"],
+        "pmu_preflight_helper_actual_c_sha256": helper_identity["actual_helper_c_sha256"],
+        "pmu_preflight_helper_expected_c_sha256": helper_identity["expected_helper_c_sha256"],
+        "pmu_preflight_helper_c_sha256_matches_authority": helper_identity["helper_c_sha256_matches_authority"],
         "approved_sensor_identity_sha256": pub.APPROVED_SENSOR_IDENTITY_SHA256,
         "approved_target_identity_sha256": pub.APPROVED_TARGET_IDENTITY_SHA256,
         "source_bundle_sha256": source_hashes.get("source_bundle", {}).get("sha256"),
@@ -490,13 +516,39 @@ def base_preflight_fixture(source_root: Path, output_root: Path) -> dict[str, An
             "schedule_canonical_sha256": artifacts["schedule_canonical_sha256"],
             "grammar_canonical_sha256": artifacts["grammar_canonical_sha256"],
             "source_bundle_sha256": artifacts["source_bundle_sha256"],
+            "pmu_preflight_helper_actual_sha256": artifacts["pmu_preflight_helper_actual_sha256"],
+            "pmu_preflight_helper_expected_sha256": artifacts["pmu_preflight_helper_expected_sha256"],
+            "pmu_preflight_helper_sha256_matches_authority": artifacts["pmu_preflight_helper_sha256_matches_authority"],
+            "pmu_preflight_helper_actual_format": artifacts["pmu_preflight_helper_actual_format"],
+            "pmu_preflight_helper_format_valid": artifacts["pmu_preflight_helper_format_valid"],
             "relation_source_authority_commit": relation_source,
             "relation_freeze_authority_commit": pub.SYNTHETIC_RELATION_FREEZE_COMMIT,
         },
         "runtime_binary_format_contains": ["ELF 64-bit", "x86-64"],
         "pmu": {
+            "schema": "FAMILY10H_RELATION_ONLY_DISABLED_PMU_PREFLIGHT_V1",
+            "passed": True,
+            "returncode": 0,
             "events": pub.PMU_GROUP["events"],
             "grouped_open_capability": True,
+            "helper_sha256": artifacts["pmu_preflight_helper_actual_sha256"],
+            "expected_helper_sha256": artifacts["pmu_preflight_helper_expected_sha256"],
+            "helper_sha256_matches_authority": True,
+            "uses_system_perf_event_attr": True,
+            "perf_event_attr_size": EXPECTED_PERF_EVENT_ATTR_SIZE,
+            "pmu_open_count": len(pub.PMU_GROUP["events"]),
+            "pmu_close_count": len(pub.PMU_GROUP["events"]),
+            "pmu_fd_leak_count": 0,
+            "pmu_acquisition_count": 0,
+            "enabled_measurement_interval": False,
+            "scientific_data_collected": False,
+            "enable_attempted": False,
+            "reset_attempted": False,
+            "read_attempted": False,
+            "malformed_event_identity": False,
+            "partial_group_open": False,
+            "incorrect_structure_size": False,
+            "missing_event": False,
         },
         "sensor": {
             **pub.APPROVED_SENSOR_IDENTITY,
@@ -608,6 +660,39 @@ def pmu_preflight_helper_path(source_root: Path) -> Path | None:
     return None
 
 
+def helper_format_valid(format_text: str) -> bool:
+    return "ELF 64-bit" in format_text and "x86-64" in format_text
+
+
+def pmu_preflight_helper_identity(source_root: Path, source_hashes: dict[str, Any] | None = None) -> dict[str, Any]:
+    if source_hashes is None:
+        hashes_path = source_root / "RELATION_ONLY_SOURCE_HASHES.json"
+        source_hashes = read_json(hashes_path) if hashes_path.exists() else {}
+    helper = pmu_preflight_helper_path(source_root)
+    authority = source_hashes.get("pmu_preflight_helper_authority", {})
+    c_source = source_root / "relation_only_pmu_preflight.c"
+    expected_binary_sha = authority.get("compiled_binary_sha256")
+    expected_c_sha = authority.get("helper_c_sha256") or source_hashes.get("files", {}).get("relation_only_pmu_preflight.c", {}).get("sha256")
+    actual_binary_sha = pub.sha256_file(helper) if helper else None
+    actual_c_sha = pub.sha256_file(c_source) if c_source.exists() else None
+    file_probe = run_file_probe(source_root, helper) if helper else {"returncode": 2, "stdout": "", "stderr": "helper missing"}
+    binary_format = file_probe.get("stdout", "").strip()
+    return {
+        "present": helper is not None,
+        "path": helper.name if helper else None,
+        "actual_helper_sha256": actual_binary_sha,
+        "expected_helper_sha256": expected_binary_sha,
+        "helper_sha256_matches_authority": actual_binary_sha == expected_binary_sha and actual_binary_sha is not None,
+        "actual_helper_c_sha256": actual_c_sha,
+        "expected_helper_c_sha256": expected_c_sha,
+        "helper_c_sha256_matches_authority": actual_c_sha == expected_c_sha and actual_c_sha is not None,
+        "actual_helper_binary_format": binary_format,
+        "helper_binary_format_probe": file_probe,
+        "helper_binary_format_valid": helper_format_valid(binary_format),
+        "expected_runtime_abi": pub.APPROVED_TARGET_IDENTITY["runtime_abi"],
+    }
+
+
 def disabled_grouped_pmu_probe(source_root: Path, cpu: int) -> dict[str, Any]:
     helper = pmu_preflight_helper_path(source_root)
     if helper is None:
@@ -641,11 +726,11 @@ def disabled_grouped_pmu_probe(source_root: Path, cpu: int) -> dict[str, Any]:
     observed["command"] = command
     observed["launch_mode"] = launch_mode
     observed["returncode"] = completed.returncode
-    observed["helper_sha256"] = pub.sha256_file(helper)
-    observed["events"] = pub.PMU_GROUP["events"] if observed.get("events") == pub.PMU_GROUP["events"] else observed.get("events")
-    observed["pmu_acquisition_count"] = 0
-    observed["enabled_measurement_interval"] = False
-    observed["scientific_data_collected"] = False
+    helper_identity = pmu_preflight_helper_identity(source_root)
+    observed["helper_identity"] = helper_identity
+    observed["helper_sha256"] = helper_identity.get("actual_helper_sha256")
+    observed["expected_helper_sha256"] = helper_identity.get("expected_helper_sha256")
+    observed["helper_sha256_matches_authority"] = helper_identity.get("helper_sha256_matches_authority")
     return observed
 
 
@@ -934,6 +1019,29 @@ def target_preflight(source_root: Path, output_root: Path, fixture: dict[str, An
         all(item in format_text for item in expected_format),
         {"format": format_text, "required": expected_format},
     )
+    checks["pmu_helper_binary_hash"] = check(
+        "pmu_helper_binary_hash",
+        expected.get("pmu_preflight_helper_actual_sha256") == artifacts.get("pmu_preflight_helper_actual_sha256")
+        and expected.get("pmu_preflight_helper_expected_sha256") == artifacts.get("pmu_preflight_helper_expected_sha256")
+        and artifacts.get("pmu_preflight_helper_sha256_matches_authority") is True
+        and expected.get("pmu_preflight_helper_sha256_matches_authority") is True,
+        {
+            "expected_actual": expected.get("pmu_preflight_helper_actual_sha256"),
+            "observed_actual": artifacts.get("pmu_preflight_helper_actual_sha256"),
+            "expected_authority": artifacts.get("pmu_preflight_helper_expected_sha256"),
+            "equality": artifacts.get("pmu_preflight_helper_sha256_matches_authority"),
+        },
+    )
+    checks["pmu_helper_binary_format_and_abi"] = check(
+        "pmu_helper_binary_format_and_abi",
+        expected.get("pmu_preflight_helper_format_valid") is True
+        and artifacts.get("pmu_preflight_helper_format_valid") is True
+        and helper_format_valid(str(artifacts.get("pmu_preflight_helper_actual_format", ""))),
+        {
+            "format": artifacts.get("pmu_preflight_helper_actual_format"),
+            "expected_abi": pub.APPROVED_TARGET_IDENTITY["runtime_abi"],
+        },
+    )
     checks["source_bundle_hash"] = check(
         "source_bundle_hash",
         expected.get("source_bundle_sha256") == artifacts.get("source_bundle_sha256"),
@@ -988,13 +1096,30 @@ def target_preflight(source_root: Path, output_root: Path, fixture: dict[str, An
     checks["operational_pinning_capability"] = check("operational_pinning_capability", cpu.get("operational_pinning") is True, cpu)
     pmu = observed.get("pmu", {})
     checks["pmu_event_identities"] = check("pmu_event_identities", pmu.get("events") == pub.PMU_GROUP["events"], pmu.get("events"))
+    pmu_strict = (
+        pmu.get("returncode") == 0
+        and pmu.get("passed") is True
+        and pmu.get("helper_sha256") == artifacts.get("pmu_preflight_helper_expected_sha256")
+        and pmu.get("helper_sha256_matches_authority") is True
+        and pmu.get("uses_system_perf_event_attr") is True
+        and pmu.get("perf_event_attr_size") == EXPECTED_PERF_EVENT_ATTR_SIZE
+        and pmu.get("pmu_open_count") == len(pub.PMU_GROUP["events"])
+        and pmu.get("pmu_close_count") == len(pub.PMU_GROUP["events"])
+        and pmu.get("pmu_fd_leak_count") == 0
+        and pmu.get("pmu_acquisition_count") == 0
+        and pmu.get("enabled_measurement_interval") is False
+        and pmu.get("scientific_data_collected") is False
+        and pmu.get("enable_attempted") is False
+        and pmu.get("reset_attempted") is False
+        and pmu.get("read_attempted") is False
+        and pmu.get("malformed_event_identity") is False
+        and pmu.get("partial_group_open") is False
+        and pmu.get("incorrect_structure_size") is False
+        and pmu.get("missing_event") is False
+    )
     checks["grouped_pmu_open_capability"] = check(
         "grouped_pmu_open_capability",
-        pmu.get("grouped_open_capability") is True
-        and pmu.get("pmu_acquisition_count", 0) == 0
-        and pmu.get("enabled_measurement_interval", False) is False
-        and pmu.get("scientific_data_collected", False) is False
-        and pmu.get("pmu_open_count", 0) == pmu.get("pmu_close_count", pmu.get("pmu_open_count", 0)),
+        pmu.get("grouped_open_capability") is True and pmu_strict,
         pmu,
     )
     sensor = observed.get("sensor", {})
@@ -1216,6 +1341,50 @@ def run_preflight_fixture_suite(source_root: Path, parent: Path) -> dict[str, An
             "runtime_binary_hash",
             {**base, "expected_artifacts": {**base["expected_artifacts"], "runtime_binary_sha256": "0" * 64}},
         ),
+        "wrong_helper_binary_hash": (
+            "pmu_helper_binary_hash",
+            {**base, "expected_artifacts": {**base["expected_artifacts"], "pmu_preflight_helper_actual_sha256": "0" * 64}},
+        ),
+        "fake_helper_output_correct_schema": (
+            "grouped_pmu_open_capability",
+            {**base, "pmu": {**base["pmu"], "helper_sha256_matches_authority": False}},
+        ),
+        "helper_returning_nonzero_with_plausible_json": (
+            "grouped_pmu_open_capability",
+            {**base, "pmu": {**base["pmu"], "returncode": 1, "passed": True}},
+        ),
+        "helper_reported_enable_attempt": (
+            "grouped_pmu_open_capability",
+            {**base, "pmu": {**base["pmu"], "enable_attempted": True}},
+        ),
+        "helper_reported_read_attempt": (
+            "grouped_pmu_open_capability",
+            {**base, "pmu": {**base["pmu"], "read_attempted": True}},
+        ),
+        "helper_reported_reset_attempt": (
+            "grouped_pmu_open_capability",
+            {**base, "pmu": {**base["pmu"], "reset_attempted": True}},
+        ),
+        "helper_reported_leaked_descriptor": (
+            "grouped_pmu_open_capability",
+            {**base, "pmu": {**base["pmu"], "pmu_fd_leak_count": 1}},
+        ),
+        "helper_open_close_mismatch": (
+            "grouped_pmu_open_capability",
+            {**base, "pmu": {**base["pmu"], "pmu_close_count": len(pub.PMU_GROUP["events"]) - 1}},
+        ),
+        "helper_wrong_structure_size": (
+            "grouped_pmu_open_capability",
+            {**base, "pmu": {**base["pmu"], "perf_event_attr_size": EXPECTED_PERF_EVENT_ATTR_SIZE + 8}},
+        ),
+        "helper_partial_group_open": (
+            "grouped_pmu_open_capability",
+            {**base, "pmu": {**base["pmu"], "partial_group_open": True}},
+        ),
+        "helper_missing_event": (
+            "grouped_pmu_open_capability",
+            {**base, "pmu": {**base["pmu"], "missing_event": True}},
+        ),
         "wrong_manifest_hash": (
             "manifest_file_hash",
             {**base, "expected_artifacts": {**base["expected_artifacts"], "manifest_file_sha256": "0" * 64}},
@@ -1306,6 +1475,58 @@ def run_preflight_fixture_suite(source_root: Path, parent: Path) -> dict[str, An
     parent.mkdir()
     return {
         "schema": "FAMILY10H_RELATION_ONLY_TARGET_PREFLIGHT_FIXTURE_SUITE_V1",
+        "results": results,
+        "passed": all(item["passed"] for item in results.values()),
+    }
+
+
+def run_helper_authority_negative_suite(source_root: Path, parent: Path) -> dict[str, Any]:
+    def copied_root(label: str) -> Path:
+        destination = parent / f"helper_authority_{label}"
+        shutil.copytree(
+            source_root,
+            destination,
+            ignore=shutil.ignore_patterns("__pycache__", pub.OWNED_OUTPUT_PARENT_NAME),
+        )
+        return destination
+
+    def run_case(label: str, expected_failure: str, mutator: Any) -> dict[str, Any]:
+        candidate = copied_root(label)
+        mutator(candidate)
+        report = validate_source_root(candidate)
+        return {
+            "passed": report["passed"] is False and expected_failure in report.get("failures", []),
+            "expected_failure": expected_failure,
+            "failures": report.get("failures", []),
+        }
+
+    def mutate_helper_binary(candidate: Path) -> None:
+        helper = pmu_preflight_helper_path(candidate)
+        if helper is None:
+            return
+        with helper.open("ab") as handle:
+            handle.write(b"\nmutated-helper-byte\n")
+
+    def mutate_helper_authority(candidate: Path) -> None:
+        path = candidate / "RELATION_ONLY_SOURCE_HASHES.json"
+        data = read_json(path)
+        data["pmu_preflight_helper_authority"]["compiled_binary_sha256"] = "0" * 64
+        path.write_text(strict_json_dumps(data, indent=2) + "\n", encoding="utf-8")
+
+    results = {
+        "modified_helper_binary": run_case(
+            "modified_helper_binary",
+            "PMU preflight helper binary hash mismatch",
+            mutate_helper_binary,
+        ),
+        "wrong_helper_hash_in_authority": run_case(
+            "wrong_helper_hash_in_authority",
+            "PMU preflight helper binary hash mismatch",
+            mutate_helper_authority,
+        ),
+    }
+    return {
+        "schema": "FAMILY10H_RELATION_ONLY_HELPER_AUTHORITY_NEGATIVE_SUITE_V1",
         "results": results,
         "passed": all(item["passed"] for item in results.values()),
     }
@@ -1523,6 +1744,7 @@ def self_test(source_root: Path) -> dict[str, Any]:
         with temporary_env({AUTHORITY_ENV: None, SOURCE_AUTHORITY_ENV: None, FREEZE_COMMIT_ENV: None, MANIFEST_ENV: None, PREFLIGHT_FIXTURE_ENV: None, PREFLIGHT_SYSTEM_MOCK_ENV: None, DEPLOYMENT_CUSTODY_ENV: None, EXECUTION_MODE_ENV: None}):
             preflight_refusal = target_preflight_refusal(source_root, parent / "missing_authority_attempt")
         fixture_suite = run_preflight_fixture_suite(source_root, parent)
+        helper_authority_suite = run_helper_authority_negative_suite(source_root, parent)
         physical_preflight_suite = run_physical_preflight_mock_suite(source_root, parent)
         authority_refusals = run_authority_refusal_tests(source_root, parent)
         synthetic_wrapper = run_synthetic_target_wrapper_test(source_root, parent)
@@ -1542,6 +1764,7 @@ def self_test(source_root: Path) -> dict[str, Any]:
         "runtime_refuses_without_authority": refusal,
         "target_preflight_refuses_without_authority": preflight_refusal,
         "target_preflight_fixture_suite": fixture_suite,
+        "helper_authority_negative_suite": helper_authority_suite,
         "physical_preflight_mock_suite": physical_preflight_suite,
         "authority_refusal_tests": authority_refusals,
         "synthetic_target_wrapper_execution": synthetic_wrapper,
@@ -1555,6 +1778,7 @@ def self_test(source_root: Path) -> dict[str, Any]:
         and refusal["passed"]
         and preflight_refusal["passed"]
         and fixture_suite["passed"]
+        and helper_authority_suite["passed"]
         and physical_preflight_suite["passed"]
         and authority_refusals["passed"]
         and synthetic_wrapper["passed"]
