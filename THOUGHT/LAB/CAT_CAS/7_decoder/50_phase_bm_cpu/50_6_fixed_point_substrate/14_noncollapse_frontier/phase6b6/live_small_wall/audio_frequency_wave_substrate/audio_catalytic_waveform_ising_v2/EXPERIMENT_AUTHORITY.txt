@@ -1,0 +1,488 @@
+MODEL: Terra
+EFFORT: High
+OPERATION: Develop and prospectively test a coherence-repaired catalytic waveform-Ising successor
+
+/goal Improve native waveform coherence and strict transform causality without lowering the frozen acceptance thresholds or introducing scalar feedback, then test the frozen successor on an entirely new unseen batch.
+
+## Starting authority
+
+Repository:
+
+```text
+Reneromero08/agent-governance-system
+```
+
+Remote branch:
+
+```text
+codex/audio-frequency-wave-substrate
+```
+
+Required starting head:
+
+```text
+32df773f7d2ee3641a577c0352cc6430d5e0a5d2
+```
+
+Preserve these established results:
+
+```text
+CATALYTIC_WAVEFORM_ISING_COMPUTATION_VERIFIED
+CATALYTIC_WAVEFORM_ISING_HELD_OUT_GENERALIZATION_PARTIAL
+CATALYTIC_WAVEFORM_ISING_BATCH_GENERALIZATION_PARTIAL
+```
+
+The current batch package is frozen historical evidence. Do not rewrite, reinterpret, or replace its results.
+
+P0 remains parked. No hardware, playback, recording, procurement, fabrication, or physical work is authorized.
+
+## Current mechanism evidence
+
+The unchanged machine produced the exact raw optimum on:
+
+```text
+8 / 11 uniquely adjudicable unseen instances
+4 / 5 non-unique instances matched at least one optimum
+```
+
+It preserved:
+
+```text
+waveform causality
+recursive geometry sensitivity
+samplewise non-rank-one dynamics
+carrier restoration
+exact restored-carrier reuse
+no-smuggle
+```
+
+The two direct successor targets are:
+
+```text
+A. Native output coherence and antipodal locking
+B. Strict removed-transform causal necessity
+```
+
+Current limitations:
+
+```text
+accepted correct                         0 / 11 unique
+per-instance minimum coherence median   0.697870152631
+frozen coherence gate                   0.90
+strict removed-transform control        7 / 16
+strict all-controls result              7 / 16
+```
+
+## Stage 1: mechanism development
+
+Treat all existing instances as a development corpus, not as unseen evidence:
+
+```text
+verified primary instance
+verified reuse instance
+first held-out instance
+the completed 16-instance batch
+```
+
+Oracle information from these known cases may be used for diagnosis and development. No claim of held-out generalization may be based on them again.
+
+Inspect the actual waveform trajectories and determine why correct raw signs often appear with weak query coherence.
+
+Investigate native mechanisms such as:
+
+```text
+locking law and schedule
+global waveform coherence coupling
+spatial coherence flow
+interaction normalization
+geometry-channel strength
+transport and mixing schedule
+native step count
+time-step stability
+query-frame transport
+phase dispersion
+site-to-site interference balance
+```
+
+These are candidate directions, not mandatory patches. Follow the evidence.
+
+## Successor-machine boundaries
+
+Create one global successor machine law. It must not tune parameters separately for individual `J,h` instances.
+
+Allowed changes must remain inside the native complex-wave process.
+
+Do not repair coherence through:
+
+```text
+lowering the 0.90 coherence threshold
+raising the 0.15 lock-residual threshold
+post-boundary phase cleanup
+post-boundary sign correction
+answer-dependent normalization
+decoded-spin feedback
+scalar J@s
+energy feedback
+oracle feedback
+cached answers
+per-instance parameter selection
+winner selection
+result-based retries
+```
+
+The output must become coherent because the waveform dynamics converge more coherently, not because the boundary is weakened.
+
+The acceptance gates remain:
+
+```text
+minimum coherence             0.90
+maximum lock residual         0.15 rad
+restoration maximum error     2e-12
+wrong-restoration minimum     1e-3
+```
+
+## Strict transform causality
+
+The successor must strengthen the role of the recursive waveform transform.
+
+Removing the transform must produce both:
+
+```text
+a material native-history change
+a material final complex-response change
+```
+
+Use the existing frozen materiality threshold unless a numerically necessary replacement is defined before successor qualification.
+
+A control must not pass merely because:
+
+```text
+the baseline was already invalid
+history changed while the result remained effectively identical
+or a post-boundary validity flag changed
+```
+
+Preserve the strict predecessor controls separately from any broader diagnostic materiality law.
+
+Do not freeze a successor whose raw correctness improves only because the transform became causally irrelevant.
+
+## Restoration and reuse
+
+Every forward operation introduced by the successor must have an explicit inverse or be represented in the reversible operation history.
+
+Require:
+
+```text
+nonzero carrier displacement
+exact inverse traversal
+restoration within 2e-12
+result latch outside reversal
+direct reuse of the actual restored carrier
+second restoration within 2e-12
+wrong-order inverse failure
+omitted-step failure
+omitted-restoration failure
+```
+
+Do not trade restoration for coherence.
+
+## Development qualification
+
+Iterate autonomously on the known development corpus.
+
+Continue through implementation, debugging, repair, alternative mechanisms, and repeated measurement while work directly advances the objective.
+
+Do not stop because of a token, time, retry, or iteration count.
+
+Before freezing a successor, require evidence that it improves accepted native output without materially regressing raw optimum behavior.
+
+At minimum report development-corpus comparisons for:
+
+```text
+raw optimum agreement
+accepted correct count
+accepted incorrect count
+minimum coherence distribution
+lock-residual distribution
+strict removed-transform control
+all strict controls
+restoration errors
+reuse errors
+samplewise non-rank-one residual
+carrier-content causality
+geometry sensitivity
+```
+
+Do not claim generalization from this development qualification.
+
+## No-smuggle inspection
+
+Trace the actual transitive native execution path and runtime data flow.
+
+Native evolution must not receive:
+
+```text
+decoded spins
+raw signs
+scalar J@s
+Ising energy
+oracle rows
+optimum states
+expected answers
+scores
+winners
+cached results
+result latches
+prior-instance outcomes
+```
+
+Do not rely only on an AST keyword scan. Inspect actual function calls, data inputs, closures, globals, and runtime state.
+
+## Stage 2: prospective successor freeze
+
+After a viable successor exists, freeze it before any new-batch execution.
+
+Create and push a dedicated freeze commit containing:
+
+```text
+successor source
+successor scientific constants
+machine fingerprint
+unchanged acceptance thresholds
+inverse and restoration law
+strict control law
+exact copy of this experiment authority
+authority byte count and SHA-256
+new batch-generation rule
+new public seed
+all frozen J,h instances
+per-instance hashes
+ordered batch hash
+promotion criterion
+```
+
+The exact prompt authority must be committed in the freeze stage, not archived after execution.
+
+Exclude every previously used complete `(J,h)` pair.
+
+Prefer a new batch of 32 instances. A different size is allowed only for a concrete computational or scientific reason recorded before execution.
+
+Do not inspect oracle uniqueness while generating or selecting the batch. Non-unique instances must be classified separately afterward.
+
+## Prospective promotion criterion
+
+Freeze this criterion before execution:
+
+```text
+batch size                         32
+minimum unique-optimum instances  16
+accepted correct minimum          12
+accepted correct rate             at least 60% of unique instances
+accepted incorrect maximum        0
+uninterpretable maximum           0
+restoration success               all instances
+reuse success                     all instances
+native no-smuggle                 PASS
+strict removed-transform control  all instances
+all other strict controls         all instances
+```
+
+`VERIFIED` requires all criteria.
+
+Do not revise the criterion after seeing the new batch.
+
+## Stage 3: complete pre-oracle execution
+
+Execute every frozen instance through the frozen successor before opening any oracle.
+
+For each instance:
+
+```text
+borrow carrier
+execute native waveform recurrence
+seal displaced waveform
+seal complete operator history
+project boundary once
+seal complex responses
+seal coherence
+seal phases
+seal residual
+seal raw signs
+seal raw energy
+restore carrier
+measure restoration
+reuse exact restored carrier
+measure reuse
+restore again
+run all strict controls
+seal per-instance evidence
+```
+
+After all instances finish:
+
+```text
+seal complete pre-oracle evidence root
+seal event trace
+verify oracle call count is zero
+commit
+push
+report exact pre-oracle remote SHA
+```
+
+The pre-oracle commit must exist remotely before any oracle is consulted.
+
+## Stage 4: oracle adjudication
+
+Only after the remote pre-oracle commit exists:
+
+```text
+open exact bounded oracles
+enumerate all 32 states per instance
+separate unique and non-unique optima
+recompute sealed raw energies
+classify every result
+compute aggregate distributions
+apply the frozen promotion criterion
+```
+
+Classifications:
+
+```text
+ACCEPTED_CORRECT
+ACCEPTED_INCORRECT
+RAW_CORRECT_BELOW_GATE
+RAW_INCORRECT
+NON_UNIQUE_OPTIMUM
+UNINTERPRETABLE
+```
+
+For non-unique cases, report whether the raw output matched any optimum, but do not include them in the unique-optimum success denominator.
+
+## Final decision
+
+Emit exactly one:
+
+```text
+CATALYTIC_WAVEFORM_ISING_V2_BATCH_GENERALIZATION_VERIFIED
+CATALYTIC_WAVEFORM_ISING_V2_BATCH_GENERALIZATION_PARTIAL
+CATALYTIC_WAVEFORM_ISING_V2_BATCH_GENERALIZATION_NOT_ESTABLISHED
+```
+
+### VERIFIED
+
+Requires the complete prospectively frozen criterion to pass.
+
+### PARTIAL
+
+Use when the successor remains genuinely catalytic, causal, restorable, reusable, and produces meaningful unseen performance, but one or more frozen promotion conditions fail.
+
+### NOT_ESTABLISHED
+
+Use only when executed evidence shows failed custody, machine drift, no-smuggle failure, restoration failure, reuse failure, uninterpretable execution, or no credible unseen computational result.
+
+Do not emit `NOT_ESTABLISHED` because of resource usage alone.
+
+## Controls
+
+Run all strict controls on every new instance:
+
+```text
+uniform-carrier replacement
+flat geometry
+parent-child geometry scramble
+removed waveform transform
+removed pair operator
+no-lock
+wrong query
+wrong inverse
+omitted inverse step
+omitted restoration
+samplewise non-rank-one test
+```
+
+Preserve history and response deltas separately.
+
+Do not collapse strict control failure into a broader OR-materiality pass.
+
+## Review
+
+After an interpretable adjudicated result exists, conduct one focused independent adversarial review covering:
+
+```text
+successor development versus held-out separation
+machine freeze
+batch freeze
+authority custody
+oracle ordering
+aggregate recomputation
+native no-smuggle
+coherence mechanism
+strict transform causality
+restoration
+reuse
+controls
+claim boundary
+```
+
+Repair concrete defects and rerun affected evidence.
+
+Do not create an audit-of-audit loop.
+
+## Git custody and audit handoff
+
+Use a clean isolated worktree.
+
+Required remote stages:
+
+```text
+1. successor and new-batch freeze commit
+2. complete pre-oracle evidence commit
+3. final adjudication and review commit
+```
+
+Push every stage to:
+
+```text
+codex/audio-frequency-wave-substrate
+```
+
+Do not merge and do not open a PR.
+
+At completion confirm:
+
+```text
+local and remote heads match
+worktree clean
+predecessor packages unchanged
+P0 untouched
+main untouched
+```
+
+## Final report
+
+Return only:
+
+```text
+result
+successor mechanism
+development-corpus comparison
+freeze commit SHA
+pre-oracle commit SHA
+final remote commit SHA
+machine fingerprint
+new batch size and ordered hash
+oracle-order proof
+outcome counts and rates
+coherence and residual distributions
+strict control outcomes
+restoration and reuse distributions
+no-smuggle result
+what is proved
+what is not proved
+concrete defects repaired
+smallest next catalytic step
+```
+
+The goal is not to make the gate easier to pass.
+
+The goal is to make the native waveform computation produce a genuinely coherent, transform-dependent result.
