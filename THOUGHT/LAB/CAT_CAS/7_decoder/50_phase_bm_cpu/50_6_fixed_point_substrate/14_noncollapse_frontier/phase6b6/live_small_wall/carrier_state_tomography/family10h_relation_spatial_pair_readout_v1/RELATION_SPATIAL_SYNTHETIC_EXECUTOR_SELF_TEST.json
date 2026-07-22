@@ -1,0 +1,7 @@
+{
+  "pair_observation_count": 1048576,
+  "passed": true,
+  "raw_record_count": 4096,
+  "schema": "FAMILY10H_RELATION_SPATIAL_SYNTHETIC_EXECUTOR_SELF_TEST_V1",
+  "source_death_receipt_count": 4096
+}
