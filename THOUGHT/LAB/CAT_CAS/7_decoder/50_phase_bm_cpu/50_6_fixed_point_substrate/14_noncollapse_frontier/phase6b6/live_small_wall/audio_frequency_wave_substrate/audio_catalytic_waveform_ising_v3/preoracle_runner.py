@@ -64,10 +64,17 @@ def problem_sha256(coupling: np.ndarray, field: np.ndarray) -> str:
     )
 
 
+def repository_root() -> Path:
+    for candidate in PACKAGE_DIR.parents:
+        if (candidate / ".git").exists():
+            return candidate
+    raise RuntimeError("cannot locate linked worktree root")
+
+
 def current_head() -> str:
     completed = subprocess.run(
         ["git", "rev-parse", "HEAD"],
-        cwd=PACKAGE_DIR,
+        cwd=repository_root(),
         capture_output=True,
         check=True,
         text=True,
