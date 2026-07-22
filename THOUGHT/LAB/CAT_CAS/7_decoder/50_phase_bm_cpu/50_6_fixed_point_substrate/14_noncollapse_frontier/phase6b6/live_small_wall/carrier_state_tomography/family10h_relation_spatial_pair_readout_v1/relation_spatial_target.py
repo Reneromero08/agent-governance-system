@@ -336,11 +336,13 @@ def validate_source_root(source_root: Path) -> dict[str, Any]:
         failures.append("approved sensor unlabeled temp1 law missing")
     if sensor_binding.get("approved_target_identity_sha256") != pub.APPROVED_TARGET_IDENTITY_SHA256:
         failures.append("approved target identity binding mismatch")
-    threshold_source = threshold.get("scalar_evidence_provenance", {})
-    if threshold_source.get("source_authority_commit") != pub.SCALAR_EVIDENCE_SOURCE_AUTHORITY_COMMIT:
-        failures.append("threshold scalar source provenance mismatch")
-    if threshold_source.get("manifest_freeze_commit") != pub.SCALAR_EVIDENCE_MANIFEST_FREEZE_COMMIT:
-        failures.append("threshold scalar manifest freeze provenance mismatch")
+    threshold_basis = threshold.get("basis", {})
+    if threshold_basis.get("relation_only_attempt") != pub.RELATION_ONLY_EVIDENCE_COMMIT:
+        failures.append("threshold relation-only provenance mismatch")
+    if threshold_basis.get("relation_lifetime_attempt") != pub.RELATION_LIFETIME_EVIDENCE_COMMIT:
+        failures.append("threshold relation-lifetime provenance mismatch")
+    if threshold_basis.get("spatial_target_data_used") is not False:
+        failures.append("threshold uses spatial target data")
 
     for name, expected in source_hashes.get("files", {}).items():
         path = source_root / name
@@ -1860,4 +1862,5 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
 
