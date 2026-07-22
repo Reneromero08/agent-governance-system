@@ -1,0 +1,29 @@
+{
+  "adjudication_file_sha256": "ec0bb524a83bd09fa2c4b1528290daa8bbd52e5c834d06aaad4fa0e55891a34d",
+  "adjudication_sha256": "233f66bab3d557cc0182e61d0466b34552c11f0c225340296a5e6543a1ae472a",
+  "archive_sha256": "97ea86fd43025a6eed0cffc483ff9eb705e72d195e23b7e9fe67f9305a2e29ff",
+  "archive_size": 55147825,
+  "candidate": true,
+  "copy_back_receipt_sha256": "c7724ab62f68462c450c2b68c843d17eec8c115241c4a020b330d05762d363dd",
+  "gates": {
+    "R_shaped_control_segments_inside_own_null": false,
+    "complete_relation_matrix_global": true,
+    "control_segments_complete": true,
+    "primary_control_separation_4x": false,
+    "primary_factor_sign_stability": true,
+    "primary_matched_permutation_q99_exceeded": true,
+    "primary_not_explained_by_A_or_B_marginal_latency_alone": true,
+    "primary_segment_complete": true,
+    "validation": true
+  },
+  "max_control_abs_mean_R_spatial": 0.017211270478678223,
+  "pair_observation_count": 2621440,
+  "passed": false,
+  "primary_abs_mean_R_spatial": 0.062287265550905406,
+  "primary_query": "query_relation_pair",
+  "primary_to_max_control_ratio": 3.618981273234217,
+  "raw_record_count": 10240,
+  "result_class": "FAMILY10H_SPATIAL_RELATION_READOUT_CANDIDATE_PROSPECTIVE",
+  "scientific_claim": "PUBLIC_POST_SOURCE_SPATIALLY_RESOLVED_FAMILY10H_RELATION_PAIR_READOUT_NOT_ESTABLISHED",
+  "source_death_receipt_count": 10240
+}

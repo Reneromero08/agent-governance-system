@@ -1,0 +1,20 @@
+{
+  "archive_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_relation_spatial_pair_readout_v1_1_segmented_0\\attempt_1\\ATTEMPT_1_TARGET_ROOT.tar.gz",
+  "archive_sha256_equal": true,
+  "archive_size_equal": true,
+  "copied_sidecar_archive_sha256": "97ea86fd43025a6eed0cffc483ff9eb705e72d195e23b7e9fe67f9305a2e29ff",
+  "copied_sidecar_archive_size": 55147825,
+  "local_archive_sha256": "97ea86fd43025a6eed0cffc483ff9eb705e72d195e23b7e9fe67f9305a2e29ff",
+  "local_archive_size": 55147825,
+  "pair_observation_count": 2621440,
+  "passed": true,
+  "pmu_acquisition_count": null,
+  "raw_record_count": 10240,
+  "receipt_sha256": "c7724ab62f68462c450c2b68c843d17eec8c115241c4a020b330d05762d363dd",
+  "runtime_status": "PHYSICAL_EXECUTION_COMPLETE",
+  "schema": "FAMILY10H_RELATION_SPATIAL_ATTEMPT_1_COPY_BACK_VERIFICATION_V1",
+  "source_death_receipt_count": 10240,
+  "target_wrapper_returncode": 0,
+  "wrapper_passed": true,
+  "wrapper_status": "TARGET_WRAPPER_EXECUTION_COMPLETE"
+}
