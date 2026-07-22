@@ -15,6 +15,7 @@ import numpy as np
 
 
 PACKAGE_DIR = Path(__file__).resolve().parent
+SUBSTRATE_DIR = PACKAGE_DIR.parent
 MACHINE_SOURCE = PACKAGE_DIR / "v3_machine.py"
 CONTROL_SOURCE = PACKAGE_DIR / "control_qualifier.py"
 FREEZE_FILE = PACKAGE_DIR / "V3_FREEZE.json"
@@ -105,6 +106,7 @@ def static_integrity() -> dict[str, Any]:
     tree = ast.parse(MACHINE_SOURCE.read_text(encoding="utf-8"))
     native_names = {
         "as_carrier_bank",
+        "borrowed_carrier",
         "canonical_geometry",
         "common_merit_phase",
         "execute_native_cycle",
@@ -121,6 +123,50 @@ def static_integrity() -> dict[str, Any]:
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
     }
     missing = sorted((native_names | boundary_names) - functions.keys())
+    allowed_import_roots = {
+        "__future__",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "math",
+        "numpy",
+        "pathlib",
+        "platform",
+        "typing",
+    }
+    imported_roots: set[str] = set()
+    dynamic_import_lines: list[int] = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            imported_roots.update(alias.name.split(".")[0] for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            imported_roots.add(node.module.split(".")[0])
+        elif isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name) and node.func.id in {
+                "__import__",
+                "compile",
+                "eval",
+                "exec",
+            }:
+                dynamic_import_lines.append(node.lineno)
+            elif isinstance(node.func, ast.Attribute) and node.func.attr in {
+                "exec_module",
+                "import_module",
+                "spec_from_file_location",
+            }:
+                dynamic_import_lines.append(node.lineno)
+    closure: set[str] = set()
+    pending = ["borrowed_carrier", "execute_native_cycle", "project_boundary", "restore_carrier"]
+    while pending:
+        name = pending.pop()
+        if name in closure or name not in functions:
+            continue
+        closure.add(name)
+        for node in ast.walk(functions[name]):
+            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+                if node.func.id in functions and node.func.id not in closure:
+                    pending.append(node.func.id)
+    uncovered_native = sorted(native_names - closure)
     native_forbidden = {
         "argmax",
         "argmin",
@@ -177,16 +223,23 @@ def static_integrity() -> dict[str, Any]:
         not missing
         and not native_hits
         and not boundary_hits
+        and imported_roots <= allowed_import_roots
+        and not dynamic_import_lines
+        and not uncovered_native
         and not matrix_product_lines
         and raw_forwarding
     )
     return {
         "boundary_forbidden_names": sorted(boundary_hits),
         "boundary_raw_result_forwarding": raw_forwarding,
+        "dynamic_import_lines": dynamic_import_lines,
+        "imported_roots": sorted(imported_roots),
         "matrix_product_lines_in_native": matrix_product_lines,
         "missing_functions": missing,
         "native_forbidden_names": sorted(native_hits),
         "pass": passed,
+        "reachable_local_function_names": sorted(closure),
+        "uncovered_native_function_names": uncovered_native,
     }
 
 
@@ -330,6 +383,9 @@ def verify_custody(
     for name, expected_sha in freeze["execution_source_sha256"].items():
         if sha256_file(PACKAGE_DIR / name) != expected_sha:
             mismatches.append(f"execution_source_{name}")
+    for name, expected_sha in freeze["transitive_dependency_sha256"].items():
+        if sha256_file(SUBSTRATE_DIR / name) != expected_sha:
+            mismatches.append(f"transitive_dependency_{name}")
     return mismatches
 
 
@@ -343,7 +399,7 @@ def build_document() -> dict[str, Any]:
     static = static_integrity()
     if not static["pass"]:
         mismatches.append("static_integrity")
-    borrowed = machine.v2.r4.borrowed_carrier()
+    borrowed = machine.borrowed_carrier()
     classification_counts = {
         name: 0
         for name in (
@@ -437,7 +493,7 @@ def build_document() -> dict[str, Any]:
         )
     development_probe = next(
         record
-        for record in controls.development.development_corpus()
+        for record in controls.development_corpus()
         if record["label"] == "verified_primary"
     )
     nominal = machine.execute_native_cycle(

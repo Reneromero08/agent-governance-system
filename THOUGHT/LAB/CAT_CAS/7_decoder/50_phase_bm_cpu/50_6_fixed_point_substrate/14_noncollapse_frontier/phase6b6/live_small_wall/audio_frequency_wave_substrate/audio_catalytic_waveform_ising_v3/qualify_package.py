@@ -25,6 +25,13 @@ VERIFIERS = (
 )
 
 
+def repository_root() -> Path:
+    for candidate in (PACKAGE_DIR, *PACKAGE_DIR.parents):
+        if (candidate / ".git").exists():
+            return candidate
+    raise RuntimeError("repository root not found")
+
+
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -69,7 +76,7 @@ def verify_fresh_processes() -> list[dict[str, Any]]:
         path = PACKAGE_DIR / name
         completed = subprocess.run(
             [sys.executable, str(path), "verify"],
-            cwd=PACKAGE_DIR,
+            cwd=repository_root(),
             env=environment,
             capture_output=True,
             check=False,

@@ -40,3 +40,26 @@ The repaired reuse law requires repeated validity, stable accepted results,
 bounded response drift, and carrier restoration. It does not assign semantic
 meaning to the raw spin shadow of a rejected boundary. The entire retired batch
 is excluded from the next prospective batch.
+
+The accepted-result-reuse batch
+`45fa0401c4574a2b42e4d6233e9e046dc45840db3ffe35d2042c79546eeceddb`
+then passed its complete prospective criterion: 216/216 unique cases were correct,
+40/40 non-unique cases were rejected, all 256 restoration/reuse and strict-control
+paths passed, and zero pre-seal oracle or energy calls occurred. Its pre-oracle
+evidence SHA-256 is
+`de6656c6dbed5f23186cc9a8b037a7001f44e610bfedf8cff1972f9f87725a7c`.
+
+Independent Sol/xhigh review found no numerical, causal, restoration, batch-custody,
+or adjudication drift, but correctly rejected promotion because the freeze and AST
+gate did not mechanically bind or traverse predecessor sources imported by V3 and
+its development helper. The exact third-batch custody, pre-oracle evidence, oracle
+results, traces, and independent verification are preserved under
+`V3_RETIRED_TRANSITIVE_CUSTODY_*`. No threshold or result was revised.
+
+The transitive repair removes all predecessor imports from the prospective machine,
+reproduces the borrowed carrier and recursive geometry exactly inside V3, closes the
+local native/boundary call graph, rejects dynamic imports, binds all V3 sources and
+development-only predecessor source dependencies, and requires a clean exact Git
+tree before prospective execution. The entire third batch is excluded from a fourth
+prospective batch. Only that newly frozen, remotely sealed, independently adjudicated
+batch can authorize the final V3 decision.
