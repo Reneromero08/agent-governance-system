@@ -1,0 +1,16 @@
+{
+  "claim_boundary": {
+    "small_wall_crossed": false
+  },
+  "passed": true,
+  "schema": "FAMILY10H_RELATION_SPATIAL_SELF_TEST_V1",
+  "self_test_sha256": "66d021d9d5a66d2df1f223ae73e6e8b11b49cca8aed0f09d63047e0953f0f068",
+  "tests": {
+    "exact_pair_coverage_validation_passed": true,
+    "grammar_validation_passed": true,
+    "physical_adjudicator_self_test_passed": true,
+    "runtime_compile_and_self_test_passed": true,
+    "schedule_validation_passed": true,
+    "synthetic_adversary_cases_recorded": true
+  }
+}

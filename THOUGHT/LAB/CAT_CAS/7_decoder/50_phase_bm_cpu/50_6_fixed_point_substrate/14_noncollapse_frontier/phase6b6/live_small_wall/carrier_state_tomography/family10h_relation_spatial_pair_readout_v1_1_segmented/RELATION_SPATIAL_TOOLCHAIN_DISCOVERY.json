@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "compiler": "/usr/bin/gcc",
+      "launcher": "wsl.exe --",
+      "probe": {
+        "command": [
+          "wsl.exe",
+          "--",
+          "bash",
+          "-lc",
+          "command -v gcc || command -v cc"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "/usr/bin/gcc\n"
+      }
+    }
+  ],
+  "passed": true,
+  "schema": "FAMILY10H_RELATION_SPATIAL_TOOLCHAIN_DISCOVERY_V1",
+  "target_compatible_compiler": {
+    "abi": "linux_x86_64",
+    "available": true,
+    "launcher": [
+      "wsl.exe",
+      "--"
+    ],
+    "path": "/usr/bin/gcc"
+  }
+}

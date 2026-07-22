@@ -1,0 +1,80 @@
+{
+  "checks": {
+    "malformed_pair_inventory_invalid": true,
+    "matched_permutation_threshold_applied": true,
+    "negative_fixtures_fail_closed": true,
+    "positive_fixture_calibrated": true,
+    "source_lifecycle_failure_invalid": true
+  },
+  "malformed_pair_inventory_result": "FAMILY10H_SPATIAL_RELATION_READOUT_CUSTODY_INVALID",
+  "negative_results": {
+    "A_marginal_only_effect": "FAMILY10H_SPATIAL_RELATION_READOUT_CANDIDATE_PROSPECTIVE",
+    "B_marginal_only_effect": "FAMILY10H_SPATIAL_RELATION_READOUT_CANDIDATE_PROSPECTIVE",
+    "common_mode_latency_increase_no_pair_coupling": "FAMILY10H_SPATIAL_RELATION_READOUT_NOT_OBSERVED_PROSPECTIVE",
+    "cyclic_origin_only_artifact": "FAMILY10H_SPATIAL_RELATION_READOUT_NOT_OBSERVED_PROSPECTIVE",
+    "equal_A_B_marginals_no_pair_coupling": "FAMILY10H_SPATIAL_RELATION_READOUT_NOT_OBSERVED_PROSPECTIVE",
+    "mapping_only_artifact": "FAMILY10H_SPATIAL_RELATION_READOUT_NOT_OBSERVED_PROSPECTIVE",
+    "measurement_order_artifact": "FAMILY10H_SPATIAL_RELATION_READOUT_NOT_OBSERVED_PROSPECTIVE",
+    "scrambled_pair_artifact": "FAMILY10H_SPATIAL_RELATION_READOUT_NOT_OBSERVED_PROSPECTIVE"
+  },
+  "passed": true,
+  "positive_result": {
+    "R_spatial_abs_of_mean": 1.3362115146812292,
+    "matched_permutation_q99": 0.028561265790898186,
+    "primary_control_separation": {
+      "control_abs_mean_R_spatial": {
+        "distance_matched_control": 0.023460410557184754,
+        "relation_sham": 0.023460410557184754,
+        "route_pressure_control": 0.023460410557184754,
+        "scrambled_pair_control": 0.023460410557184754
+      },
+      "max_control_abs_mean_R_spatial": 0.023460410557184754,
+      "primary_abs_mean_R_spatial": 1.3362115146812292,
+      "primary_to_max_control_ratio": 56.95601581328739,
+      "required_min_ratio": 4.0
+    },
+    "result_class": "FAMILY10H_SPATIAL_RELATION_READOUT_CALIBRATED_PROSPECTIVE",
+    "scientific_claim": "PUBLIC_POST_SOURCE_SPATIALLY_RESOLVED_FAMILY10H_RELATION_PAIR_READOUT_CALIBRATED"
+  },
+  "schema": "FAMILY10H_RELATION_SPATIAL_PHYSICAL_ADJUDICATOR_SELF_TEST_V1",
+  "self_test_sha256": "0216c8442766d1beb50c7feafba6c6234353b8a98c63e4a8ceff868744deb907",
+  "source_dies_result": "FAMILY10H_SPATIAL_RELATION_READOUT_CUSTODY_INVALID",
+  "threshold_contract": {
+    "basis": {
+      "relation_lifetime_attempt": "e3b77a56a919fd1afb090a7c9907daa1772d56dc",
+      "relation_only_attempt": "aaec66edfe536995a2d56498d72b6219a6084466",
+      "spatial_target_data_used": false
+    },
+    "calibrated_requirements": {
+      "A_first_and_B_first_primary_strata_survive": true,
+      "R_shaped_control_segments_inside_own_null": true,
+      "complete_custody_required": true,
+      "not_explained_by_A_or_B_marginal_latency_alone": true,
+      "observed_abs_mean_R_spatial_exceeds_matched_permutation_q99": true,
+      "primary_control_separation_4x": true,
+      "sign_stable_across_sessions_mappings_source_orders_query_orders_and_cyclic_origins": true
+    },
+    "claim_boundary": {
+      "full_tomography_established": false,
+      "maximum_claim": "PUBLIC_POST_SOURCE_SPATIALLY_RESOLVED_FAMILY10H_RELATION_PAIR_READOUT_CALIBRATED",
+      "small_wall_crossed": false
+    },
+    "matched_permutation_null": {
+      "permutation_count": 15,
+      "preserves": [
+        "A latency vector",
+        "B latency vector",
+        "measurement-order counts",
+        "cyclic-origin coverage",
+        "line-distance bucket within relation rows",
+        "scalar marginals"
+      ],
+      "quantile": 0.99,
+      "seed": "family10h-spatial-pair-matched-null-seed-b6d4c002",
+      "self_test_reduced_permutation_count": true
+    },
+    "schema": "FAMILY10H_RELATION_SPATIAL_PHYSICAL_THRESHOLD_CONTRACT_V1",
+    "threshold_contract_sha256": "21c53dba42e675790efeabee21cf54c48f360c11500e231b101fe3c8aac0ca3a",
+    "threshold_status": "prospective_spatial_pair_threshold_law_frozen_before_physical_acquisition"
+  }
+}

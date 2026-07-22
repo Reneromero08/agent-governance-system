@@ -1,0 +1,20 @@
+{
+  "claim_boundary": {
+    "physical_measurement": false,
+    "small_wall_crossed": false
+  },
+  "passed": true,
+  "schedule_tuple_count": 10240,
+  "schema": "FAMILY10H_RELATION_SPATIAL_SYNTHETIC_ADVERSARY_TEST_V1",
+  "tested_cases": [
+    "planted_matched_pair_latency_correlation",
+    "equal_A_B_marginals_no_pair_coupling",
+    "common_mode_latency_increase_no_pair_coupling",
+    "A_marginal_only_effect",
+    "B_marginal_only_effect",
+    "measurement_order_artifact",
+    "cyclic_origin_only_artifact",
+    "mapping_only_artifact",
+    "scrambled_pair_artifact"
+  ]
+}
