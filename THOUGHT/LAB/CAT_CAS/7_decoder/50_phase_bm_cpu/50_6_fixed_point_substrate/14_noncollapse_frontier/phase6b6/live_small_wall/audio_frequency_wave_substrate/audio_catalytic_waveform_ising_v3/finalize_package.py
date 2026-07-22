@@ -126,6 +126,13 @@ physical waveform computation, hardware persistence, or bit replacement.
 
 
 def manifest_document() -> dict[str, Any]:
+    nested = sorted(
+        path.relative_to(PACKAGE_DIR).as_posix()
+        for path in PACKAGE_DIR.rglob("*")
+        if path.is_file() and path.parent != PACKAGE_DIR
+    )
+    if nested:
+        raise ValueError("final package contains unsealed nested inputs: " + ", ".join(nested))
     names = sorted(
         path.name
         for path in PACKAGE_DIR.iterdir()

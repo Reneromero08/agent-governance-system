@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import ast
 import hashlib
-import importlib.util
+import types
 import itertools
 import json
 import os
@@ -12,6 +12,9 @@ from pathlib import Path
 from typing import Any, Sequence
 
 import numpy as np
+
+
+sys.dont_write_bytecode = True
 
 
 PACKAGE_DIR = Path(__file__).resolve().parent
@@ -32,12 +35,13 @@ REVIEWER_ID = "V3-INDEPENDENT-REEXECUTION-VERIFIER-02"
 
 
 def load_module(path: Path, name: str) -> Any:
-    specification = importlib.util.spec_from_file_location(name, path)
-    if specification is None or specification.loader is None:
-        raise ImportError(f"cannot load {path}")
-    module = importlib.util.module_from_spec(specification)
+    source = path.read_bytes()
+    code = compile(source, str(path), "exec", dont_inherit=True, optimize=0)
+    module = types.ModuleType(name)
+    module.__file__ = str(path)
+    module.__package__ = ""
     sys.modules[name] = module
-    specification.loader.exec_module(module)
+    exec(code, module.__dict__)
     return module
 
 
@@ -102,9 +106,69 @@ def first_nonzero_relation(coupling: np.ndarray) -> tuple[int, int]:
     raise ValueError("control requires a nonzero relation")
 
 
-def static_integrity() -> dict[str, Any]:
-    tree = ast.parse(MACHINE_SOURCE.read_text(encoding="utf-8"))
-    native_names = {
+def independent_local_executable_closure(
+    tree: ast.Module, roots: set[str]
+) -> tuple[set[str], dict[str, ast.AST]]:
+    functions = {
+        node.name: node
+        for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+    methods: dict[str, ast.AST] = {}
+    methods_by_attribute: dict[str, set[str]] = {}
+    for parent in tree.body:
+        if not isinstance(parent, ast.ClassDef):
+            continue
+        for node in parent.body:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                qualified = f"{parent.name}.{node.name}"
+                methods[qualified] = node
+                methods_by_attribute.setdefault(node.name, set()).add(qualified)
+    initializers: dict[str, ast.AST] = {}
+    for node in tree.body:
+        if isinstance(node, ast.Assign):
+            for target in node.targets:
+                if isinstance(target, ast.Name):
+                    initializers[f"@module:{target.id}"] = node.value
+        elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
+            if node.value is not None:
+                initializers[f"@module:{node.target.id}"] = node.value
+    nodes = {**functions, **methods, **initializers}
+    initializer_by_name = {
+        name.removeprefix("@module:"): name for name in initializers
+    }
+    closure: set[str] = set()
+    pending = list(sorted(roots))
+    while pending:
+        name = pending.pop()
+        if name in closure:
+            continue
+        if name not in nodes:
+            raise RuntimeError(f"independent local executable is missing: {name}")
+        closure.add(name)
+        for child in ast.walk(nodes[name]):
+            if isinstance(child, ast.Name) and isinstance(child.ctx, ast.Load):
+                initializer = initializer_by_name.get(child.id)
+                if initializer is not None and initializer not in closure:
+                    pending.append(initializer)
+            if not isinstance(child, ast.Call):
+                continue
+            if isinstance(child.func, ast.Name) and child.func.id in functions:
+                if child.func.id not in closure:
+                    pending.append(child.func.id)
+            elif isinstance(child.func, ast.Attribute):
+                for qualified in methods_by_attribute.get(child.func.attr, set()):
+                    if qualified not in closure:
+                        pending.append(qualified)
+    return closure, nodes
+
+
+def independent_integrity_analysis(source: str) -> dict[str, Any]:
+    tree = ast.parse(source, filename=str(MACHINE_SOURCE))
+    required_native_executables = {
+        "@module:DEFAULT_LAW",
+        "@module:PHASE_MODES",
+        "SpectralPhaseLaw.validate",
         "as_carrier_bank",
         "borrowed_carrier",
         "canonical_geometry",
@@ -112,17 +176,18 @@ def static_integrity() -> dict[str, Any]:
         "execute_native_cycle",
         "geometry_anchors",
         "normalized_active",
+        "recursive_antipodal_phase_modes",
         "relational_phase_operator",
         "seed_recursive_spectral_tree",
         "validate_problem",
     }
-    boundary_names = {"project_boundary"}
-    functions = {
-        node.name: node
-        for node in tree.body
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
-    }
-    missing = sorted((native_names | boundary_names) - functions.keys())
+    native_closure, nodes = independent_local_executable_closure(
+        tree, {"borrowed_carrier", "execute_native_cycle", "restore_carrier"}
+    )
+    boundary_closure, _ = independent_local_executable_closure(
+        tree, {"project_boundary"}
+    )
+    uncovered_native = sorted(required_native_executables - native_closure)
     allowed_import_roots = {
         "__future__",
         "dataclasses",
@@ -155,18 +220,6 @@ def static_integrity() -> dict[str, Any]:
                 "spec_from_file_location",
             }:
                 dynamic_import_lines.append(node.lineno)
-    closure: set[str] = set()
-    pending = ["borrowed_carrier", "execute_native_cycle", "project_boundary", "restore_carrier"]
-    while pending:
-        name = pending.pop()
-        if name in closure or name not in functions:
-            continue
-        closure.add(name)
-        for node in ast.walk(functions[name]):
-            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
-                if node.func.id in functions and node.func.id not in closure:
-                    pending.append(node.func.id)
-    uncovered_native = sorted(native_names - closure)
     native_forbidden = {
         "argmax",
         "argmin",
@@ -190,15 +243,15 @@ def static_integrity() -> dict[str, Any]:
     native_hits: set[str] = set()
     boundary_hits: set[str] = set()
     matrix_product_lines: list[int] = []
-    for name in native_names:
-        for node in ast.walk(functions[name]):
+    for name in sorted(native_closure):
+        for node in ast.walk(nodes[name]):
             if isinstance(node, ast.Name) and node.id in native_forbidden:
                 native_hits.add(node.id)
             if isinstance(node, ast.Attribute) and node.attr in native_forbidden:
                 native_hits.add(node.attr)
             if isinstance(node, ast.BinOp) and isinstance(node.op, ast.MatMult):
                 matrix_product_lines.append(node.lineno)
-    boundary = functions["project_boundary"]
+    boundary = nodes["project_boundary"]
     raw_forwarding = False
     for node in ast.walk(boundary):
         if isinstance(node, ast.Name) and node.id in boundary_forbidden:
@@ -220,8 +273,7 @@ def static_integrity() -> dict[str, Any]:
                         and value.orelse.value is None
                     )
     passed = bool(
-        not missing
-        and not native_hits
+        not native_hits
         and not boundary_hits
         and imported_roots <= allowed_import_roots
         and not dynamic_import_lines
@@ -235,13 +287,49 @@ def static_integrity() -> dict[str, Any]:
         "dynamic_import_lines": dynamic_import_lines,
         "imported_roots": sorted(imported_roots),
         "matrix_product_lines_in_native": matrix_product_lines,
-        "missing_functions": missing,
+        "native_class_method_names": sorted(
+            name for name in native_closure if "." in name
+        ),
         "native_forbidden_names": sorted(native_hits),
+        "native_module_initializer_names": sorted(
+            name.removeprefix("@module:")
+            for name in native_closure
+            if name.startswith("@module:")
+        ),
+        "native_executable_names": sorted(native_closure),
         "pass": passed,
-        "reachable_local_function_names": sorted(closure),
+        "reachable_boundary_executable_names": sorted(boundary_closure),
+        "reachable_local_function_names": sorted(
+            name
+            for name in native_closure | boundary_closure
+            if not name.startswith("@module:") and "." not in name
+        ),
         "uncovered_native_function_names": uncovered_native,
     }
 
+
+def static_integrity() -> dict[str, Any]:
+    source = MACHINE_SOURCE.read_text(encoding="utf-8")
+    result = independent_integrity_analysis(source)
+    needle = "    modes = np.ones((site_count, 1), dtype=np.complex128)"
+    if source.count(needle) != 1:
+        raise RuntimeError("independent initializer negative-fixture anchor drift")
+    mutated = source.replace(
+        needle,
+        "    np.argsort(np.asarray([1.0, 0.0], dtype=np.float64))\n" + needle,
+        1,
+    )
+    mutated_result = independent_integrity_analysis(mutated)
+    negative_rejected = bool(
+        not mutated_result["pass"]
+        and "argsort" in mutated_result["native_forbidden_names"]
+        and "recursive_antipodal_phase_modes"
+        in mutated_result["native_executable_names"]
+        and "PHASE_MODES" in mutated_result["native_module_initializer_names"]
+    )
+    result["initializer_selection_negative_fixture_rejected"] = negative_rejected
+    result["pass"] = bool(result["pass"] and negative_rejected)
+    return result
 
 def independent_energy(
     state: Sequence[int], coupling: np.ndarray, field: np.ndarray

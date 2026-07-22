@@ -12,6 +12,9 @@ from typing import Any
 import numpy as np
 
 
+sys.dont_write_bytecode = True
+
+
 PACKAGE_DIR = Path(__file__).resolve().parent
 VERIFIERS = (
     "development_qualifier.py",
@@ -57,7 +60,7 @@ def compile_sources() -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
     for path in sorted(PACKAGE_DIR.glob("*.py")):
         source = path.read_bytes()
-        compile(source, str(path), "exec")
+        compile(source, str(path), "exec", dont_inherit=True, optimize=0)
         records.append(
             {
                 "bytes": len(source),
@@ -96,7 +99,18 @@ def verify_fresh_processes() -> list[dict[str, Any]]:
     return records
 
 
+def assert_closed_package_tree() -> None:
+    nested = sorted(
+        path.relative_to(PACKAGE_DIR).as_posix()
+        for path in PACKAGE_DIR.rglob("*")
+        if path.is_file() and path.parent != PACKAGE_DIR
+    )
+    if nested:
+        raise RuntimeError("nested package inputs are forbidden: " + ", ".join(nested))
+
+
 def main() -> int:
+    assert_closed_package_tree()
     execution_environment = verify_execution_environment()
     source_records = compile_sources()
     verifier_records = verify_fresh_processes()

@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import importlib.util
+import tempfile
+import types
 import json
 import os
 import subprocess
@@ -14,6 +15,9 @@ from typing import Any, Sequence
 import numpy as np
 
 
+sys.dont_write_bytecode = True
+
+
 PACKAGE_DIR = Path(__file__).resolve().parent
 SUBSTRATE_DIR = PACKAGE_DIR.parent
 MACHINE_SOURCE = PACKAGE_DIR / "v3_machine.py"
@@ -23,14 +27,23 @@ BATCH_FILE = PACKAGE_DIR / "V3_BATCH_CUSTODY.json"
 EVIDENCE_FILE = PACKAGE_DIR / "V3_PREORACLE_EVIDENCE.json"
 TRACE_FILE = PACKAGE_DIR / "V3_PREORACLE_TRACE.json"
 SEAL_FILE = PACKAGE_DIR / "V3_PREORACLE_SEAL.json"
+SOURCE_EXECUTION_CONTRACT = {
+    "bytecode_cache_inputs_forbidden_under_package": True,
+    "bytecode_cache_writes_disabled": True,
+    "compile_dont_inherit": True,
+    "compile_optimization": 0,
+    "local_module_loader": "compile_exact_source_bytes",
+}
+EXECUTABLE_CACHE_SUFFIXES = {".pyc", ".pyo", ".pyd", ".so", ".dll"}
 
 def load_module(path: Path, name: str) -> Any:
-    specification = importlib.util.spec_from_file_location(name, path)
-    if specification is None or specification.loader is None:
-        raise ImportError(f"cannot load {path}")
-    module = importlib.util.module_from_spec(specification)
+    source = path.read_bytes()
+    code = compile(source, str(path), "exec", dont_inherit=True, optimize=0)
+    module = types.ModuleType(name)
+    module.__file__ = str(path)
+    module.__package__ = ""
     sys.modules[name] = module
-    specification.loader.exec_module(module)
+    exec(code, module.__dict__)
     return module
 
 
@@ -83,6 +96,41 @@ def current_head() -> str:
     return completed.stdout.strip()
 
 
+def unexpected_package_executable_inputs(root: Path = PACKAGE_DIR) -> list[str]:
+    unexpected: set[str] = set()
+    for path in root.rglob("*"):
+        relative = path.relative_to(root).as_posix()
+        if path.is_dir() and path.name == "__pycache__":
+            unexpected.add(relative + "/")
+        elif path.is_file() and path.suffix.lower() in EXECUTABLE_CACHE_SUFFIXES:
+            unexpected.add(relative)
+    return sorted(unexpected)
+
+
+def bytecode_rejection_self_test() -> dict[str, Any]:
+    with tempfile.TemporaryDirectory(prefix="catcas_v3_bytecode_gate_") as temporary:
+        root = Path(temporary)
+        cache = root / "__pycache__"
+        cache.mkdir()
+        probe = cache / "unsealed_probe.cpython-311.pyc"
+        probe.write_bytes(b"not executable fixture bytes")
+        found = unexpected_package_executable_inputs(root)
+    expected = ["__pycache__/", "__pycache__/unsealed_probe.cpython-311.pyc"]
+    return {
+        "detected_paths": found,
+        "expected_paths": expected,
+        "pass": found == expected,
+    }
+
+def source_execution_environment() -> dict[str, Any]:
+    return {
+        **SOURCE_EXECUTION_CONTRACT,
+        "observed_dont_write_bytecode": bool(sys.dont_write_bytecode),
+        "observed_optimization": int(sys.flags.optimize),
+        "unexpected_package_executable_inputs": unexpected_package_executable_inputs(),
+    }
+
+
 def assert_clean_exact_tree() -> None:
     completed = subprocess.run(
         ["git", "status", "--porcelain", "--untracked-files=all"],
@@ -96,7 +144,16 @@ def assert_clean_exact_tree() -> None:
         raise RuntimeError(
             "prospective execution requires a clean exact source tree: " + dirty
         )
-
+    environment = source_execution_environment()
+    if not environment["observed_dont_write_bytecode"]:
+        raise RuntimeError("prospective execution requires bytecode writes disabled")
+    if environment["observed_optimization"] != 0:
+        raise RuntimeError("prospective execution requires optimization level zero")
+    if environment["unexpected_package_executable_inputs"]:
+        raise RuntimeError(
+            "prospective execution rejects unsealed executable cache inputs: "
+            + ", ".join(environment["unexpected_package_executable_inputs"])
+        )
 
 def metric(value: float) -> float:
     return float(f"{float(value):.12g}")
@@ -145,6 +202,8 @@ def load_frozen() -> tuple[dict[str, Any], dict[str, Any]]:
         raise RuntimeError("batch custody hash mismatch")
     if len(batch["ordered_instances"]) != 256:
         raise RuntimeError("prospective batch is incomplete")
+    if freeze["source_execution_contract"] != SOURCE_EXECUTION_CONTRACT:
+        raise RuntimeError("source-only execution contract differs from freeze")
     identities: list[str] = []
     for expected_index, record in enumerate(batch["ordered_instances"]):
         if int(record["index"]) != expected_index:
@@ -285,6 +344,10 @@ def build_documents(
             "machine_fingerprint": expected_machine_fingerprint,
         },
     )
+    execution_environment = source_execution_environment()
+    if execution_environment["unexpected_package_executable_inputs"]:
+        raise RuntimeError("unsealed executable cache appeared during execution")
+    ledger.add("source_execution_environment_sealed", execution_environment)
     ledger.add("null_model_baseline_sealed", null_model)
     instances = [
         execute_instance(record, borrowed, ledger)
@@ -316,6 +379,7 @@ def build_documents(
                 for record in instances
             )
         ),
+        "ignored_executable_negative_fixture_pass": bytecode_negative_control["pass"],
         "null_model_baseline_pass": null_model["pass"],
         "oracle_call_count": calls["oracle"],
         "energy_call_count": calls["energy"],
@@ -334,7 +398,8 @@ def build_documents(
         "instances": instances,
         "machine_fingerprint": expected_machine_fingerprint,
         "oracle_opened": False,
-        "schema": "catalytic_waveform_ising_v3_preoracle_evidence_v1",
+        "schema": "catalytic_waveform_ising_v3_preoracle_evidence_v2",
+        "source_execution_environment": execution_environment,
         "summary": summary,
     }
     ledger.add("complete_preoracle_evidence_sealed", summary)
@@ -348,7 +413,10 @@ def build_documents(
         "freeze_commit": freeze_commit,
         "machine_fingerprint": expected_machine_fingerprint,
         "oracle_call_count": calls["oracle"],
-        "schema": "catalytic_waveform_ising_v3_preoracle_seal_v1",
+        "schema": "catalytic_waveform_ising_v3_preoracle_seal_v2",
+        "source_execution_environment_sha256": sha256_bytes(
+            canonical_bytes(execution_environment)
+        ),
         "trace_sha256": sha256_bytes(trace_bytes),
     }
     return evidence, trace, seal

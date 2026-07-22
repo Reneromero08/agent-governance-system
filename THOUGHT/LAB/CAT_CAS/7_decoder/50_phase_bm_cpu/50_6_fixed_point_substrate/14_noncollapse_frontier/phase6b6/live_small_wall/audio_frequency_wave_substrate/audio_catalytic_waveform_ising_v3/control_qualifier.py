@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import ast
 import hashlib
-import importlib.util
+import types
 import json
 import os
 import sys
@@ -11,6 +11,9 @@ from pathlib import Path
 from typing import Any, Sequence
 
 import numpy as np
+
+
+sys.dont_write_bytecode = True
 
 
 PACKAGE_DIR = Path(__file__).resolve().parent
@@ -21,12 +24,13 @@ REPORT_FILE = PACKAGE_DIR / "CONTROL_REPORT.md"
 
 
 def load_module(path: Path, name: str) -> Any:
-    specification = importlib.util.spec_from_file_location(name, path)
-    if specification is None or specification.loader is None:
-        raise ImportError(f"cannot load {path}")
-    module = importlib.util.module_from_spec(specification)
+    source = path.read_bytes()
+    code = compile(source, str(path), "exec", dont_inherit=True, optimize=0)
+    module = types.ModuleType(name)
+    module.__file__ = str(path)
+    module.__package__ = ""
     sys.modules[name] = module
-    specification.loader.exec_module(module)
+    exec(code, module.__dict__)
     return module
 
 
@@ -79,16 +83,65 @@ def development_corpus() -> list[dict[str, Any]]:
     return records
 
 
-def function_source_nodes(tree: ast.Module, names: set[str]) -> list[ast.AST]:
-    return [
-        node
+def local_executable_closure(
+    tree: ast.Module, roots: set[str]
+) -> tuple[set[str], dict[str, ast.AST]]:
+    top_functions = {
+        node.name: node
         for node in tree.body
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name in names
-    ]
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+    class_methods: dict[str, ast.AST] = {}
+    methods_by_attribute: dict[str, set[str]] = {}
+    for parent in tree.body:
+        if not isinstance(parent, ast.ClassDef):
+            continue
+        for node in parent.body:
+            if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                continue
+            qualified = f"{parent.name}.{node.name}"
+            class_methods[qualified] = node
+            methods_by_attribute.setdefault(node.name, set()).add(qualified)
+    initializers: dict[str, ast.AST] = {}
+    for node in tree.body:
+        if isinstance(node, ast.Assign):
+            for target in node.targets:
+                if isinstance(target, ast.Name):
+                    initializers[f"@module:{target.id}"] = node.value
+        elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
+            if node.value is not None:
+                initializers[f"@module:{node.target.id}"] = node.value
+    nodes = {**top_functions, **class_methods, **initializers}
+    initializer_by_name = {
+        name.removeprefix("@module:"): name for name in initializers
+    }
+    closure: set[str] = set()
+    pending = list(sorted(roots))
+    while pending:
+        name = pending.pop()
+        if name in closure:
+            continue
+        if name not in nodes:
+            raise RuntimeError(f"local executable is missing: {name}")
+        closure.add(name)
+        for child in ast.walk(nodes[name]):
+            if isinstance(child, ast.Name) and isinstance(child.ctx, ast.Load):
+                initializer = initializer_by_name.get(child.id)
+                if initializer is not None and initializer not in closure:
+                    pending.append(initializer)
+            if not isinstance(child, ast.Call):
+                continue
+            if isinstance(child.func, ast.Name) and child.func.id in top_functions:
+                if child.func.id not in closure:
+                    pending.append(child.func.id)
+            elif isinstance(child.func, ast.Attribute):
+                for qualified in methods_by_attribute.get(child.func.attr, set()):
+                    if qualified not in closure:
+                        pending.append(qualified)
+    return closure, nodes
 
 
-def static_no_smuggle() -> dict[str, Any]:
-    source = MACHINE_SOURCE.read_text(encoding="utf-8")
+def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
     tree = ast.parse(source, filename=str(MACHINE_SOURCE))
     allowed_import_roots = {
         "__future__",
@@ -122,42 +175,29 @@ def static_no_smuggle() -> dict[str, Any]:
                 "spec_from_file_location",
             }:
                 dynamic_import_lines.append(node.lineno)
-    native_names = {
+    required_native_executables = {
+        "@module:DEFAULT_LAW",
+        "@module:PHASE_MODES",
+        "SpectralPhaseLaw.validate",
         "as_carrier_bank",
         "borrowed_carrier",
         "canonical_geometry",
         "common_merit_phase",
         "geometry_anchors",
         "normalized_active",
+        "recursive_antipodal_phase_modes",
         "seed_recursive_spectral_tree",
         "relational_phase_operator",
         "execute_native_cycle",
         "validate_problem",
     }
-    native_nodes = function_source_nodes(tree, native_names)
-    if {node.name for node in native_nodes} != native_names:
-        raise RuntimeError("native function set is incomplete")
-    local_functions = {
-        node.name: node
-        for node in tree.body
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
-    }
-    closure: set[str] = set()
-    pending = ["borrowed_carrier", "execute_native_cycle", "project_boundary", "restore_carrier"]
-    while pending:
-        name = pending.pop()
-        if name in closure or name not in local_functions:
-            continue
-        closure.add(name)
-        for node in ast.walk(local_functions[name]):
-            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
-                if node.func.id in local_functions and node.func.id not in closure:
-                    pending.append(node.func.id)
-    uncovered_native = sorted(native_names - closure)
-    boundary_names = {"project_boundary"}
-    boundary_nodes = function_source_nodes(tree, boundary_names)
-    if {node.name for node in boundary_nodes} != boundary_names:
-        raise RuntimeError("boundary function set is incomplete")
+    native_closure, executable_nodes = local_executable_closure(
+        tree, {"borrowed_carrier", "execute_native_cycle", "restore_carrier"}
+    )
+    boundary_closure, _ = local_executable_closure(tree, {"project_boundary"})
+    uncovered_native = sorted(required_native_executables - native_closure)
+    native_nodes = [executable_nodes[name] for name in sorted(native_closure)]
+    boundary = executable_nodes["project_boundary"]
     forbidden_names = {
         "exact_oracle",
         "ising_energy",
@@ -194,33 +234,28 @@ def static_no_smuggle() -> dict[str, Any]:
     }
     boundary_found: set[str] = set()
     raw_forwarding = False
-    for root in boundary_nodes:
-        for node in ast.walk(root):
-            if isinstance(node, ast.Name) and node.id in boundary_forbidden:
-                boundary_found.add(node.id)
-            if isinstance(node, ast.Attribute) and node.attr in boundary_forbidden:
-                boundary_found.add(node.attr)
-            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
-                if node.func.id == "BoundaryProjection":
-                    spins_keywords = [
-                        keyword
-                        for keyword in node.keywords
-                        if keyword.arg == "spins"
-                    ]
-                    if len(spins_keywords) == 1:
-                        value = spins_keywords[0].value
-                        raw_forwarding = bool(
-                            isinstance(value, ast.IfExp)
-                            and isinstance(value.test, ast.Name)
-                            and value.test.id == "valid"
-                            and isinstance(value.body, ast.Name)
-                            and value.body.id == "raw_spins"
-                            and isinstance(value.orelse, ast.Constant)
-                            and value.orelse.value is None
-                        )
-    relational = next(
-        node for node in native_nodes if node.name == "relational_phase_operator"
-    )
+    for node in ast.walk(boundary):
+        if isinstance(node, ast.Name) and node.id in boundary_forbidden:
+            boundary_found.add(node.id)
+        if isinstance(node, ast.Attribute) and node.attr in boundary_forbidden:
+            boundary_found.add(node.attr)
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+            if node.func.id == "BoundaryProjection":
+                spins_keywords = [
+                    keyword for keyword in node.keywords if keyword.arg == "spins"
+                ]
+                if len(spins_keywords) == 1:
+                    value = spins_keywords[0].value
+                    raw_forwarding = bool(
+                        isinstance(value, ast.IfExp)
+                        and isinstance(value.test, ast.Name)
+                        and value.test.id == "valid"
+                        and isinstance(value.body, ast.Name)
+                        and value.body.id == "raw_spins"
+                        and isinstance(value.orelse, ast.Constant)
+                        and value.orelse.value is None
+                    )
+    relational = executable_nodes["relational_phase_operator"]
     relational_names = {
         node.id for node in ast.walk(relational) if isinstance(node, ast.Name)
     }
@@ -236,11 +271,24 @@ def static_no_smuggle() -> dict[str, Any]:
         "forbidden_native_names": sorted(found_names),
         "imported_roots": sorted(imported_roots),
         "matrix_product_lines": matrix_products,
-        "native_function_names": sorted(native_names),
-        "reachable_local_function_names": sorted(closure),
+        "native_class_method_names": sorted(
+            name for name in native_closure if "." in name
+        ),
+        "native_module_initializer_names": sorted(
+            name.removeprefix("@module:")
+            for name in native_closure
+            if name.startswith("@module:")
+        ),
+        "native_executable_names": sorted(native_closure),
+        "reachable_boundary_executable_names": sorted(boundary_closure),
+        "reachable_local_function_names": sorted(
+            name
+            for name in native_closure | boundary_closure
+            if not name.startswith("@module:") and "." not in name
+        ),
         "uncovered_native_function_names": uncovered_native,
         "pass": False,
-        "source_sha256": hashlib.sha256(MACHINE_SOURCE.read_bytes()).hexdigest(),
+        "source_sha256": hashlib.sha256(source.encode("utf-8")).hexdigest(),
     }
     result["pass"] = bool(
         not boundary_found
@@ -255,6 +303,30 @@ def static_no_smuggle() -> dict[str, Any]:
     )
     return result
 
+
+def static_no_smuggle() -> dict[str, Any]:
+    source = MACHINE_SOURCE.read_text(encoding="utf-8")
+    result = analyze_no_smuggle_source(source)
+    needle = "    modes = np.ones((site_count, 1), dtype=np.complex128)"
+    if source.count(needle) != 1:
+        raise RuntimeError("recursive initializer negative-fixture anchor drift")
+    mutated = source.replace(
+        needle,
+        "    np.argsort(np.asarray([1.0, 0.0], dtype=np.float64))\n" + needle,
+        1,
+    )
+    mutated_result = analyze_no_smuggle_source(mutated)
+    negative_rejected = bool(
+        not mutated_result["pass"]
+        and "argsort" in mutated_result["boundary_selection_inside_native"]
+        and "recursive_antipodal_phase_modes"
+        in mutated_result["native_executable_names"]
+        and "PHASE_MODES" in mutated_result["native_module_initializer_names"]
+    )
+    result["initializer_selection_negative_fixture_rejected"] = negative_rejected
+    result["pass"] = bool(result["pass"] and negative_rejected)
+    result["source_sha256"] = hashlib.sha256(MACHINE_SOURCE.read_bytes()).hexdigest()
+    return result
 
 def runtime_no_smuggle(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, Any]:
     forbidden_exports = sorted(

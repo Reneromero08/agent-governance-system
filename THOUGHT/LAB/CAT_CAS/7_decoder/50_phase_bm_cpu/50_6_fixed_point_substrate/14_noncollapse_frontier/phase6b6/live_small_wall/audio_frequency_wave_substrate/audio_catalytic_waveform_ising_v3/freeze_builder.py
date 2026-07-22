@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import importlib.util
+import types
 import json
 import os
 import sys
@@ -10,6 +10,9 @@ from pathlib import Path
 from typing import Any, Sequence
 
 import numpy as np
+
+
+sys.dont_write_bytecode = True
 
 
 PACKAGE_DIR = Path(__file__).resolve().parent
@@ -56,22 +59,32 @@ RETIRED_REUSE_BATCH_FILE = PACKAGE_DIR / "V3_RETIRED_REUSE_REPAIR_BATCH_CUSTODY.
 RETIRED_REUSE_BATCH_ORDERED_SHA256 = "75f78c2b16734a3224c012d092318f339ee8594acb2d64a8a57a3956467e5ea9"
 RETIRED_TRANSITIVE_BATCH_FILE = PACKAGE_DIR / "V3_RETIRED_TRANSITIVE_CUSTODY_BATCH_CUSTODY.json"
 RETIRED_TRANSITIVE_BATCH_ORDERED_SHA256 = "45fa0401c4574a2b42e4d6233e9e046dc45840db3ffe35d2042c79546eeceddb"
+RETIRED_LOCAL_CLOSURE_BATCH_FILE = PACKAGE_DIR / "V3_RETIRED_LOCAL_CLOSURE_BATCH_CUSTODY.json"
+RETIRED_LOCAL_CLOSURE_BATCH_ORDERED_SHA256 = "ea1c25fbe665c137aaacd693e20cc0ed6dad58dacbbdb9761503a303b6c1f80e"
+SOURCE_EXECUTION_CONTRACT = {
+    "bytecode_cache_inputs_forbidden_under_package": True,
+    "bytecode_cache_writes_disabled": True,
+    "compile_dont_inherit": True,
+    "compile_optimization": 0,
+    "local_module_loader": "compile_exact_source_bytes",
+}
 
 STARTING_REMOTE_HEAD = "8c44761ba48736e20786256ca3441ea99c36004b"
 REPAIR_PARENT_PREORACLE_COMMIT = "8050fb44ef36f0d1f4997f4c536cf880f9c947b7"
-PUBLIC_BATCH_SEED = "CATCAS-V3-TRANSITIVE-SOURCE-CUSTODY-REPAIR-BATCH-2026-07-22"
+PUBLIC_BATCH_SEED = "CATCAS-V3-LOCAL-CLOSURE-BYTECODE-CUSTODY-REPAIR-BATCH-2026-07-22"
 BATCH_SIZE = 256
 COUPLING_VALUES = (-2.0, -1.0, 1.0, 2.0)
 FIELD_VALUES = (-2.0, -1.0, -0.5, 0.5, 1.0, 2.0)
 
 
 def load_module(path: Path, name: str) -> Any:
-    specification = importlib.util.spec_from_file_location(name, path)
-    if specification is None or specification.loader is None:
-        raise ImportError(f"cannot load {path}")
-    module = importlib.util.module_from_spec(specification)
+    source = path.read_bytes()
+    code = compile(source, str(path), "exec", dont_inherit=True, optimize=0)
+    module = types.ModuleType(name)
+    module.__file__ = str(path)
+    module.__package__ = ""
     sys.modules[name] = module
-    specification.loader.exec_module(module)
+    exec(code, module.__dict__)
     return module
 
 
@@ -180,6 +193,23 @@ def excluded_development_identities() -> set[str]:
     identities.update(retired_transitive_identities)
     if len(identities) != 1395:
         raise RuntimeError("complete 1395-case exclusion set required")
+    retired_local_closure = json.loads(
+        RETIRED_LOCAL_CLOSURE_BATCH_FILE.read_text(encoding="utf-8")
+    )
+    if (
+        retired_local_closure["ordered_batch_sha256"]
+        != RETIRED_LOCAL_CLOSURE_BATCH_ORDERED_SHA256
+    ):
+        raise RuntimeError("retired local-closure batch identity drift")
+    retired_local_closure_identities = {
+        record["problem_sha256"]
+        for record in retired_local_closure["ordered_instances"]
+    }
+    if len(retired_local_closure_identities) != 256:
+        raise RuntimeError("complete retired local-closure batch required")
+    identities.update(retired_local_closure_identities)
+    if len(identities) != 1651:
+        raise RuntimeError("complete 1651-case exclusion set required")
     return identities
 
 
@@ -209,7 +239,7 @@ def batch_document() -> dict[str, Any]:
         "batch_size": BATCH_SIZE,
         "coupling_values": list(COUPLING_VALUES),
         "development_identity_count_excluded": 627,
-        "total_identity_count_excluded": 1395,
+        "total_identity_count_excluded": 1651,
         "field_values": list(FIELD_VALUES),
         "generation_rule": (
             "SHA256(public_seed|generator_index|coordinate), modulo frozen value list; "
@@ -286,8 +316,10 @@ def freeze_document(batch: dict[str, Any]) -> dict[str, Any]:
         "retired_batch_ordered_sha256": RETIRED_BATCH_ORDERED_SHA256,
         "retired_reuse_batch_ordered_sha256": RETIRED_REUSE_BATCH_ORDERED_SHA256,
         "retired_transitive_custody_batch_ordered_sha256": RETIRED_TRANSITIVE_BATCH_ORDERED_SHA256,
+        "retired_local_closure_batch_ordered_sha256": RETIRED_LOCAL_CLOSURE_BATCH_ORDERED_SHA256,
+        "source_execution_contract": SOURCE_EXECUTION_CONTRACT,
         "promotion_criterion": frozen_promotion_criterion(),
-        "schema": "catalytic_waveform_ising_v3_repaired_freeze_v3",
+        "schema": "catalytic_waveform_ising_v3_repaired_freeze_v4",
         "stress_results_sha256": sha256_file(STRESS_RESULTS),
         "stress_summary": stress_result["summary"],
         "transitive_dependency_sha256": {
