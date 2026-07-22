@@ -1,0 +1,1017 @@
+{
+  "all_state_energies_sha256": "2a4b00ebd600ea77c9a039567679f728318a77c73f9a36e1d048e163d1597622",
+  "authorized_claim_ceiling": "BOUNDED_SOFTWARE_RECURSIVE_SPECTRAL_PHASE_REFERENCE_ONLY",
+  "authorized_decision": "CATALYTIC_WAVEFORM_ISING_V3_VERIFIED",
+  "classification_counts": {
+    "NON_UNIQUE_ACCEPTED": 0,
+    "NON_UNIQUE_REJECTED": 44,
+    "UNIQUE_ACCEPTED_CORRECT": 212,
+    "UNIQUE_ACCEPTED_INCORRECT": 0,
+    "UNIQUE_REJECTED_CORRECT": 0,
+    "UNIQUE_REJECTED_INCORRECT": 0
+  },
+  "consistent_geometry_result_probe": {
+    "flat": true,
+    "scrambled": true
+  },
+  "findings": [],
+  "machine_fingerprint": "1bb3d9c8677c9f9677e5c4d650d27db690c26490f7001401d758217207ba2025",
+  "maximum_restoration_error": 1.24126707662e-15,
+  "maximum_reuse_response_delta_l2": 2.131375939e-13,
+  "maximum_reuse_restoration_error": 1.89150735068e-15,
+  "mismatches": [],
+  "reviewer_id": "V3-INDEPENDENT-REEXECUTION-VERIFIER-02",
+  "schema": "catalytic_waveform_ising_v3_independent_reexecution_v2",
+  "state_count_enumerated": 8192,
+  "static_integrity": {
+    "boundary_forbidden_names": [],
+    "boundary_raw_result_forwarding": true,
+    "compiled_executable_region_count": 43,
+    "compiled_executable_region_manifest": [
+      {
+        "bytecode_bytes": 804,
+        "code_path": "<module>",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 1,
+        "instruction_count": 289,
+        "names": [
+          "ACTIVE_BINS",
+          "Any",
+          "BoundaryProjection",
+          "CLAIM_CEILING",
+          "DEFAULT_LAW",
+          "DISPLACEMENT_MIN",
+          "GEOMETRY_SAMPLES",
+          "MATERIALITY_MIN",
+          "MODE_COUNT",
+          "NativeExecution",
+          "PHASE_MODES",
+          "Path",
+          "RESTORATION_MAX",
+          "REUSE_RESPONSE_MAX",
+          "SAMPLE_COUNT",
+          "SAMPLE_RATE_HZ",
+          "SITE_COUNT",
+          "Sequence",
+          "SpectralPhaseLaw",
+          "WRONG_RESTORATION_MIN",
+          "__future__",
+          "annotations",
+          "as_carrier_bank",
+          "asarray",
+          "asdict",
+          "assert_no_native_smuggle",
+          "borrowed_carrier",
+          "canonical_bytes",
+          "canonical_geometry",
+          "common_merit_phase",
+          "dataclass",
+          "dataclasses",
+          "execute_native_cycle",
+          "execution_environment",
+          "geometry_anchors",
+          "hashlib",
+          "int64",
+          "json",
+          "machine_contract",
+          "machine_fingerprint",
+          "math",
+          "maximum_abs_error",
+          "metric",
+          "normalized_active",
+          "np",
+          "numpy",
+          "pathlib",
+          "platform",
+          "problem_identity_sha256",
+          "project_boundary",
+          "range",
+          "recursive_antipodal_phase_modes",
+          "relational_phase_operator",
+          "restore_carrier",
+          "seed_recursive_spectral_tree",
+          "sha256_bytes",
+          "source_forbidden_patterns",
+          "tuple",
+          "typing",
+          "validate_problem"
+        ]
+      },
+      {
+        "bytecode_bytes": 54,
+        "code_path": "<module>.<genexpr>",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 20,
+        "instruction_count": 19,
+        "names": [
+          "SAMPLE_COUNT"
+        ]
+      },
+      {
+        "bytecode_bytes": 138,
+        "code_path": "<module>.SpectralPhaseLaw",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 31,
+        "instruction_count": 57,
+        "names": [
+          "__annotations__",
+          "__module__",
+          "__name__",
+          "__qualname__",
+          "geometry_coherence_min",
+          "math",
+          "maximum_abs_coupling",
+          "maximum_abs_field",
+          "pi",
+          "relation_phase_scale",
+          "response_coherence_min",
+          "softmax_beta",
+          "unique_gap_min",
+          "validate"
+        ]
+      },
+      {
+        "bytecode_bytes": 706,
+        "code_path": "<module>.SpectralPhaseLaw.validate",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 41,
+        "instruction_count": 134,
+        "names": [
+          "SITE_COUNT",
+          "ValueError",
+          "all",
+          "asdict",
+          "geometry_coherence_min",
+          "math",
+          "maximum_abs_coupling",
+          "maximum_abs_field",
+          "min",
+          "pi",
+          "relation_phase_scale",
+          "response_coherence_min",
+          "softmax_beta",
+          "unique_gap_min",
+          "values"
+        ]
+      },
+      {
+        "bytecode_bytes": 88,
+        "code_path": "<module>.SpectralPhaseLaw.validate.<genexpr>",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 43,
+        "instruction_count": 20,
+        "names": [
+          "float",
+          "isfinite",
+          "math"
+        ]
+      },
+      {
+        "bytecode_bytes": 94,
+        "code_path": "<module>.canonical_bytes",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 68,
+        "instruction_count": 17,
+        "names": [
+          "dumps",
+          "encode",
+          "json"
+        ]
+      },
+      {
+        "bytecode_bytes": 78,
+        "code_path": "<module>.sha256_bytes",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 74,
+        "instruction_count": 10,
+        "names": [
+          "hashlib",
+          "hexdigest",
+          "sha256"
+        ]
+      },
+      {
+        "bytecode_bytes": 62,
+        "code_path": "<module>.metric",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 78,
+        "instruction_count": 11,
+        "names": [
+          "float"
+        ]
+      },
+      {
+        "bytecode_bytes": 642,
+        "code_path": "<module>.borrowed_carrier",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 82,
+        "instruction_count": 102,
+        "names": [
+          "SAMPLE_COUNT",
+          "SAMPLE_RATE_HZ",
+          "ValueError",
+          "abs",
+          "arange",
+          "asarray",
+          "complex128",
+          "cos",
+          "exp",
+          "float",
+          "float64",
+          "math",
+          "min",
+          "np",
+          "pi",
+          "shape",
+          "sin"
+        ]
+      },
+      {
+        "bytecode_bytes": 256,
+        "code_path": "<module>.problem_identity_sha256",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 95,
+        "instruction_count": 32,
+        "names": [
+          "asarray",
+          "canonical_bytes",
+          "float64",
+          "np",
+          "sha256_bytes",
+          "tolist"
+        ]
+      },
+      {
+        "bytecode_bytes": 358,
+        "code_path": "<module>.recursive_antipodal_phase_modes",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 106,
+        "instruction_count": 71,
+        "names": [
+          "RuntimeError",
+          "array",
+          "complex128",
+          "concatenate",
+          "exp",
+          "math",
+          "np",
+          "ones",
+          "pi",
+          "range",
+          "shape"
+        ]
+      },
+      {
+        "bytecode_bytes": 1052,
+        "code_path": "<module>.validate_problem",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 121,
+        "instruction_count": 160,
+        "names": [
+          "SITE_COUNT",
+          "T",
+          "ValueError",
+          "abs",
+          "all",
+          "allclose",
+          "array",
+          "asarray",
+          "diag",
+          "float",
+          "float64",
+          "isfinite",
+          "max",
+          "maximum_abs_coupling",
+          "maximum_abs_field",
+          "np",
+          "shape",
+          "validate"
+        ]
+      },
+      {
+        "bytecode_bytes": 714,
+        "code_path": "<module>.canonical_geometry",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 142,
+        "instruction_count": 142,
+        "names": [
+          "SAMPLE_COUNT",
+          "SAMPLE_RATE_HZ",
+          "SITE_COUNT",
+          "ValueError",
+          "append",
+          "arange",
+          "asarray",
+          "complex128",
+          "exp",
+          "float64",
+          "math",
+          "np",
+          "pi",
+          "range",
+          "shape",
+          "sin"
+        ]
+      },
+      {
+        "bytecode_bytes": 330,
+        "code_path": "<module>.geometry_anchors",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 168,
+        "instruction_count": 56,
+        "names": [
+          "GEOMETRY_SAMPLES",
+          "SAMPLE_COUNT",
+          "SITE_COUNT",
+          "ValueError",
+          "abs",
+          "asarray",
+          "complex128",
+          "float",
+          "min",
+          "np",
+          "shape"
+        ]
+      },
+      {
+        "bytecode_bytes": 532,
+        "code_path": "<module>.as_carrier_bank",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 179,
+        "instruction_count": 82,
+        "names": [
+          "SAMPLE_COUNT",
+          "SITE_COUNT",
+          "ValueError",
+          "abs",
+          "all",
+          "array",
+          "asarray",
+          "complex128",
+          "float",
+          "isfinite",
+          "min",
+          "newaxis",
+          "np",
+          "repeat",
+          "shape"
+        ]
+      },
+      {
+        "bytecode_bytes": 250,
+        "code_path": "<module>.normalized_active",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 190,
+        "instruction_count": 42,
+        "names": [
+          "ACTIVE_BINS",
+          "ValueError",
+          "abs",
+          "asarray",
+          "complex128",
+          "float",
+          "min",
+          "np"
+        ]
+      },
+      {
+        "bytecode_bytes": 264,
+        "code_path": "<module>.common_merit_phase",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 198,
+        "instruction_count": 50,
+        "names": [
+          "PHASE_MODES",
+          "ValueError",
+          "abs",
+          "float",
+          "mean",
+          "min",
+          "normalized_active",
+          "np"
+        ]
+      },
+      {
+        "bytecode_bytes": 126,
+        "code_path": "<module>.NativeExecution",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 211,
+        "instruction_count": 52,
+        "names": [
+          "__annotations__",
+          "__module__",
+          "__name__",
+          "__qualname__"
+        ]
+      },
+      {
+        "bytecode_bytes": 134,
+        "code_path": "<module>.BoundaryProjection",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 226,
+        "instruction_count": 56,
+        "names": [
+          "__annotations__",
+          "__module__",
+          "__name__",
+          "__qualname__",
+          "document"
+        ]
+      },
+      {
+        "bytecode_bytes": 348,
+        "code_path": "<module>.BoundaryProjection.document",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 240,
+        "instruction_count": 61,
+        "names": [
+          "best_mode_concentration",
+          "best_mode_index",
+          "coherence",
+          "label",
+          "list",
+          "metric",
+          "minimum_geometry_coherence",
+          "mode_penalties",
+          "raw_spins",
+          "responses",
+          "second_mode_gap",
+          "spins",
+          "valid"
+        ]
+      },
+      {
+        "bytecode_bytes": 44,
+        "code_path": "<module>.BoundaryProjection.document.<listcomp>",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 244,
+        "instruction_count": 12,
+        "names": [
+          "metric"
+        ]
+      },
+      {
+        "bytecode_bytes": 44,
+        "code_path": "<module>.BoundaryProjection.document.<listcomp>#1",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 247,
+        "instruction_count": 12,
+        "names": [
+          "metric"
+        ]
+      },
+      {
+        "bytecode_bytes": 96,
+        "code_path": "<module>.BoundaryProjection.document.<listcomp>#2",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 249,
+        "instruction_count": 20,
+        "names": [
+          "imag",
+          "metric",
+          "real"
+        ]
+      },
+      {
+        "bytecode_bytes": 516,
+        "code_path": "<module>.seed_recursive_spectral_tree",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 259,
+        "instruction_count": 94,
+        "names": [
+          "ACTIVE_BINS",
+          "PHASE_MODES",
+          "ValueError",
+          "abs",
+          "array",
+          "complex128",
+          "float",
+          "mean",
+          "min",
+          "np",
+          "ones_like",
+          "sqrt"
+        ]
+      },
+      {
+        "bytecode_bytes": 1880,
+        "code_path": "<module>.relational_phase_operator",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 279,
+        "instruction_count": 344,
+        "names": [
+          "ACTIVE_BINS",
+          "SITE_COUNT",
+          "ValueError",
+          "abs",
+          "append",
+          "array",
+          "asarray",
+          "bool_",
+          "canonical_geometry",
+          "common_merit_phase",
+          "complex128",
+          "conjugate",
+          "exp",
+          "float",
+          "geometry_anchors",
+          "newaxis",
+          "normalized_active",
+          "np",
+          "ones_like",
+          "range",
+          "real",
+          "relation_phase_scale",
+          "shape",
+          "stack",
+          "tuple"
+        ]
+      },
+      {
+        "bytecode_bytes": 1066,
+        "code_path": "<module>.execute_native_cycle",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 340,
+        "instruction_count": 189,
+        "names": [
+          "NativeExecution",
+          "SITE_COUNT",
+          "ValueError",
+          "array",
+          "as_carrier_bank",
+          "asarray",
+          "bool_",
+          "canonical_geometry",
+          "complex128",
+          "fft",
+          "fill_diagonal",
+          "float",
+          "geometry_anchors",
+          "ifft",
+          "linalg",
+          "norm",
+          "np",
+          "ones",
+          "relational_phase_operator",
+          "seed_recursive_spectral_tree",
+          "shape",
+          "validate_problem"
+        ]
+      },
+      {
+        "bytecode_bytes": 1424,
+        "code_path": "<module>.project_boundary",
+        "disposition": "project_boundary_body_carveout",
+        "first_line": 391,
+        "instruction_count": 258,
+        "names": [
+          "BoundaryProjection",
+          "PHASE_MODES",
+          "abs",
+          "angle",
+          "argsort",
+          "asarray",
+          "bool",
+          "complex128",
+          "displaced",
+          "exp",
+          "fft",
+          "float",
+          "geometry_anchors",
+          "geometry_coherence_min",
+          "int",
+          "law",
+          "maximum",
+          "mean",
+          "min",
+          "newaxis",
+          "normalized_active",
+          "np",
+          "program_beams",
+          "relation_phase_scale",
+          "response_coherence_min",
+          "softmax_beta",
+          "sum",
+          "tuple",
+          "unique_gap_min"
+        ]
+      },
+      {
+        "bytecode_bytes": 52,
+        "code_path": "<module>.project_boundary.<genexpr>",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 417,
+        "instruction_count": 16,
+        "names": [
+          "complex"
+        ]
+      },
+      {
+        "bytecode_bytes": 78,
+        "code_path": "<module>.project_boundary.<genexpr>#1",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 418,
+        "instruction_count": 19,
+        "names": [
+          "abs",
+          "float"
+        ]
+      },
+      {
+        "bytecode_bytes": 52,
+        "code_path": "<module>.project_boundary.<genexpr>#2",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 419,
+        "instruction_count": 20,
+        "names": [
+          "real"
+        ]
+      },
+      {
+        "bytecode_bytes": 52,
+        "code_path": "<module>.project_boundary.<genexpr>#3",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 431,
+        "instruction_count": 16,
+        "names": [
+          "float"
+        ]
+      },
+      {
+        "bytecode_bytes": 722,
+        "code_path": "<module>.restore_carrier",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 440,
+        "instruction_count": 151,
+        "names": [
+          "ACTIVE_BINS",
+          "ValueError",
+          "array",
+          "conjugate",
+          "displaced",
+          "fft",
+          "ifft",
+          "np",
+          "relation_history",
+          "roll",
+          "seed_operator"
+        ]
+      },
+      {
+        "bytecode_bytes": 182,
+        "code_path": "<module>.maximum_abs_error",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 464,
+        "instruction_count": 24,
+        "names": [
+          "abs",
+          "asarray",
+          "float",
+          "max",
+          "np"
+        ]
+      },
+      {
+        "bytecode_bytes": 102,
+        "code_path": "<module>.execution_environment",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 468,
+        "instruction_count": 14,
+        "names": [
+          "__version__",
+          "np",
+          "platform",
+          "python_implementation",
+          "python_version"
+        ]
+      },
+      {
+        "bytecode_bytes": 212,
+        "code_path": "<module>.machine_contract",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 476,
+        "instruction_count": 36,
+        "names": [
+          "ACTIVE_BINS",
+          "CLAIM_CEILING",
+          "MODE_COUNT",
+          "SAMPLE_COUNT",
+          "SITE_COUNT",
+          "asdict",
+          "execution_environment",
+          "items"
+        ]
+      },
+      {
+        "bytecode_bytes": 44,
+        "code_path": "<module>.machine_contract.<listcomp>",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 478,
+        "instruction_count": 12,
+        "names": [
+          "int"
+        ]
+      },
+      {
+        "bytecode_bytes": 52,
+        "code_path": "<module>.machine_contract.<dictcomp>",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 487,
+        "instruction_count": 15,
+        "names": [
+          "metric"
+        ]
+      },
+      {
+        "bytecode_bytes": 270,
+        "code_path": "<module>.machine_fingerprint",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 501,
+        "instruction_count": 36,
+        "names": [
+          "PHASE_MODES",
+          "Path",
+          "__file__",
+          "canonical_bytes",
+          "hashlib",
+          "hexdigest",
+          "machine_contract",
+          "read_bytes",
+          "sha256",
+          "sha256_bytes"
+        ]
+      },
+      {
+        "bytecode_bytes": 38,
+        "code_path": "<module>.machine_fingerprint.<listcomp>",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 507,
+        "instruction_count": 14,
+        "names": []
+      },
+      {
+        "bytecode_bytes": 96,
+        "code_path": "<module>.machine_fingerprint.<listcomp>.<listcomp>",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 508,
+        "instruction_count": 20,
+        "names": [
+          "imag",
+          "metric",
+          "real"
+        ]
+      },
+      {
+        "bytecode_bytes": 6,
+        "code_path": "<module>.source_forbidden_patterns",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 520,
+        "instruction_count": 3,
+        "names": []
+      },
+      {
+        "bytecode_bytes": 276,
+        "code_path": "<module>.assert_no_native_smuggle",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 532,
+        "instruction_count": 49,
+        "names": [
+          "Path",
+          "RuntimeError",
+          "__file__",
+          "index",
+          "read_text",
+          "source_forbidden_patterns"
+        ]
+      },
+      {
+        "bytecode_bytes": 28,
+        "code_path": "<module>.assert_no_native_smuggle.<listcomp>",
+        "disposition": "whole_module_compiled_policy",
+        "first_line": 535,
+        "instruction_count": 14,
+        "names": []
+      }
+    ],
+    "dynamic_import_lines": [],
+    "harmless_elementwise_positive_fixture_accepted": true,
+    "imported_roots": [
+      "__future__",
+      "dataclasses",
+      "hashlib",
+      "json",
+      "math",
+      "numpy",
+      "pathlib",
+      "platform",
+      "typing"
+    ],
+    "initializer_selection_negative_fixture_rejected": true,
+    "matrix_product_lines_in_native": [],
+    "mutation_fixture_results": [
+      {
+        "expected_code": "bytecode_builtin_reduction_selection",
+        "name": "lexicographic_builtin_min_selection",
+        "observed_codes": [
+          "bytecode_builtin_reduction_selection"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_data_dependent_subscript",
+        "name": "boolean_mask_mode_selection",
+        "observed_codes": [
+          "bytecode_data_dependent_subscript"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_scalar_aggregation_capability",
+        "name": "scalar_energy_aggregation",
+        "observed_codes": [
+          "bytecode_scalar_aggregation_capability"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_conditional_assignment",
+        "name": "neutral_conditional_assignment",
+        "observed_codes": [
+          "bytecode_conditional_assignment"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_selection_outside_boundary",
+        "name": "class_decorator_selection",
+        "observed_codes": [
+          "bytecode_selection_outside_boundary"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_selection_outside_boundary",
+        "name": "recursive_initializer_selection",
+        "observed_codes": [
+          "bytecode_selection_outside_boundary"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_selection_outside_boundary",
+        "name": "class_field_selection",
+        "observed_codes": [
+          "bytecode_selection_outside_boundary"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_selection_outside_boundary",
+        "name": "post_init_selection",
+        "observed_codes": [
+          "bytecode_selection_outside_boundary"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_module_side_effect",
+        "name": "module_subscript_side_effect",
+        "observed_codes": [
+          "bytecode_module_side_effect",
+          "bytecode_selection_outside_boundary"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_selection_outside_boundary",
+        "name": "module_expression_selection",
+        "observed_codes": [
+          "bytecode_selection_outside_boundary"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_selection_outside_boundary",
+        "name": "keyed_sorted_selection",
+        "observed_codes": [
+          "bytecode_selection_outside_boundary"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_manual_selection",
+        "name": "manual_winner_loop",
+        "observed_codes": [
+          "bytecode_conditional_assignment",
+          "bytecode_manual_selection"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_selection_outside_boundary",
+        "name": "take_along_axis_selection",
+        "observed_codes": [
+          "bytecode_selection_outside_boundary"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_dynamic_capability",
+        "name": "indirect_getattr_selection",
+        "observed_codes": [
+          "bytecode_dynamic_capability"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "bytecode_selection_outside_boundary",
+        "name": "helper_selection_called_from_boundary",
+        "observed_codes": [
+          "bytecode_selection_outside_boundary"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "boundary_forbidden_identifier",
+        "name": "boundary_problem_access",
+        "observed_codes": [
+          "boundary_forbidden_identifier"
+        ],
+        "pass": true
+      }
+    ],
+    "native_class_method_names": [
+      "SpectralPhaseLaw.validate"
+    ],
+    "native_executable_names": [
+      "@module:ACTIVE_BINS",
+      "@module:DEFAULT_LAW",
+      "@module:GEOMETRY_SAMPLES",
+      "@module:MODE_COUNT",
+      "@module:PHASE_MODES",
+      "@module:SAMPLE_COUNT",
+      "@module:SAMPLE_RATE_HZ",
+      "@module:SITE_COUNT",
+      "SpectralPhaseLaw.validate",
+      "as_carrier_bank",
+      "borrowed_carrier",
+      "canonical_geometry",
+      "common_merit_phase",
+      "execute_native_cycle",
+      "geometry_anchors",
+      "normalized_active",
+      "recursive_antipodal_phase_modes",
+      "relational_phase_operator",
+      "restore_carrier",
+      "seed_recursive_spectral_tree",
+      "validate_problem"
+    ],
+    "native_forbidden_names": [],
+    "native_module_initializer_names": [
+      "ACTIVE_BINS",
+      "DEFAULT_LAW",
+      "GEOMETRY_SAMPLES",
+      "MODE_COUNT",
+      "PHASE_MODES",
+      "SAMPLE_COUNT",
+      "SAMPLE_RATE_HZ",
+      "SITE_COUNT"
+    ],
+    "pass": true,
+    "reachable_boundary_executable_names": [
+      "@module:ACTIVE_BINS",
+      "@module:GEOMETRY_SAMPLES",
+      "@module:MODE_COUNT",
+      "@module:PHASE_MODES",
+      "@module:SAMPLE_COUNT",
+      "@module:SITE_COUNT",
+      "geometry_anchors",
+      "normalized_active",
+      "project_boundary",
+      "recursive_antipodal_phase_modes"
+    ],
+    "reachable_local_function_names": [
+      "as_carrier_bank",
+      "borrowed_carrier",
+      "canonical_geometry",
+      "common_merit_phase",
+      "execute_native_cycle",
+      "geometry_anchors",
+      "normalized_active",
+      "project_boundary",
+      "recursive_antipodal_phase_modes",
+      "relational_phase_operator",
+      "restore_carrier",
+      "seed_recursive_spectral_tree",
+      "validate_problem"
+    ],
+    "selection_capable_regions": [
+      "<module>.project_boundary"
+    ],
+    "unclassified_compiled_regions": [],
+    "uncovered_native_function_names": [],
+    "violations": []
+  },
+  "strict_control_pass_count": 256,
+  "verdict": "PASS"
+}
