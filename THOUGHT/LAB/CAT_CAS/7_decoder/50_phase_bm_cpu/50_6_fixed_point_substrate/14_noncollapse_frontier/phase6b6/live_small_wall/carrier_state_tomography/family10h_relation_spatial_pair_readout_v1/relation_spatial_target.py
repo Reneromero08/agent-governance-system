@@ -1282,20 +1282,28 @@ def execute_authorized(source_root: Path, output_root: Path) -> dict[str, Any]:
         [runtime_mode, source_root / "RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv", output_root],
     )
     completed = subprocess.run(command, text=True, capture_output=True, check=False, timeout=3600, env=env)
+    schedule = pub.build_schedule(read_json(source_root / "RELATION_GRAMMAR.json"))
+    expected_raw_count = schedule["tuple_count"]
+    expected_pair_count = schedule["expected_pair_observation_count"]
     raw_path = output_root / "raw_records.jsonl"
+    pair_path = output_root / "pair_observations.jsonl"
     death_path = output_root / "source_death_receipts.jsonl"
     feature_path = output_root / "feature_freeze.json"
     runtime_receipt_path = output_root / "target_execution_receipt.json"
     raw_count = count_jsonl(raw_path) if raw_path.exists() else 0
+    pair_count = count_jsonl(pair_path) if pair_path.exists() else 0
     death_count = count_jsonl(death_path) if death_path.exists() else 0
     feature = read_json(feature_path) if feature_path.exists() else None
     runtime_receipt = read_json(runtime_receipt_path) if runtime_receipt_path.exists() else None
     passed = (
         completed.returncode == 0
-        and raw_count == 21504
-        and death_count == 21504
+        and raw_count == expected_raw_count
+        and pair_count == expected_pair_count
+        and death_count == expected_raw_count
         and feature is not None
         and runtime_receipt is not None
+        and feature.get("pair_observation_count") == pair_count
+        and runtime_receipt.get("pair_observation_count") == pair_count
         and feature.get("physical_measurement") is (not synthetic)
         and runtime_receipt.get("physical_measurement") is (not synthetic)
     )
@@ -1313,7 +1321,10 @@ def execute_authorized(source_root: Path, output_root: Path) -> dict[str, Any]:
         "preflight": preflight,
         "output_root": str(output_root),
         "raw_record_count": raw_count,
+        "pair_observation_count": pair_count,
         "source_death_receipt_count": death_count,
+        "expected_raw_record_count": expected_raw_count,
+        "expected_pair_observation_count": expected_pair_count,
         "feature_freeze": feature,
         "runtime_execution_receipt": runtime_receipt,
         "physical_measurement": not synthetic,
@@ -1849,3 +1860,4 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
