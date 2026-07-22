@@ -1,0 +1,88 @@
+{
+  "archive_parse": {
+    "archive_sha256": "efd3a6fbbc1eebbc4f90646a7799b1f5fe2165772390d7306131fbe33c0de7aa",
+    "archive_size": 22245114,
+    "counts_passed": true,
+    "expected_pair_observation_count": 1048576,
+    "expected_raw_record_count": 4096,
+    "expected_source_death_receipt_count": 4096,
+    "member_count": 43,
+    "pair_observation_count": 1048576,
+    "passed": true,
+    "raw_record_count": 4096,
+    "source_death_receipt_count": 4096
+  },
+  "attempt_consumed": true,
+  "frozen_package_modified_after_freeze": false,
+  "json_parse": {
+    "files": {
+      "ATTEMPT_1_SUMMARY.json": {
+        "passed": true,
+        "size_bytes": 1838
+      },
+      "COPYBACK_VERIFICATION.json": {
+        "passed": true,
+        "size_bytes": 3563
+      },
+      "CPU_FREQUENCY_CUSTODY_REPAIR_RECEIPT.json": {
+        "passed": true,
+        "size_bytes": 718
+      },
+      "FEATURE_FREEZE.json": {
+        "passed": true,
+        "size_bytes": 696
+      },
+      "RELATION_SPATIAL_ADJUDICATION_ACCELERATION_AUDIT.json": {
+        "passed": true,
+        "size_bytes": 3948
+      },
+      "RELATION_SPATIAL_DEPLOYMENT_CUSTODY.json": {
+        "passed": true,
+        "size_bytes": 626
+      },
+      "RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+        "passed": true,
+        "size_bytes": 2242
+      },
+      "RELATION_SPATIAL_PHYSICAL_ADJUDICATION.json": {
+        "passed": true,
+        "size_bytes": 14563
+      },
+      "RELATION_SPATIAL_PHYSICAL_PREFLIGHT_RECEIPT.json": {
+        "passed": true,
+        "size_bytes": 36327
+      },
+      "RELATION_SPATIAL_PHYSICAL_THRESHOLD_CONTRACT.json": {
+        "passed": true,
+        "size_bytes": 1508
+      },
+      "RELATION_SPATIAL_SOURCE_HASHES.json": {
+        "passed": true,
+        "size_bytes": 3120
+      },
+      "RELATION_SPATIAL_TARGET_WRAPPER_EXECUTION.json": {
+        "passed": true,
+        "size_bytes": 40202
+      },
+      "REMOTE_CLEANUP_RECEIPT.json": {
+        "passed": true,
+        "size_bytes": 559
+      },
+      "TARGET_ARCHIVE_INVENTORY.json": {
+        "passed": true,
+        "size_bytes": 8776
+      },
+      "TARGET_EXECUTION_RECEIPT.json": {
+        "passed": true,
+        "size_bytes": 379
+      }
+    },
+    "passed": true
+  },
+  "no_live_retry": true,
+  "passed": true,
+  "result_class": "FAMILY10H_SPATIAL_RELATION_READOUT_CANDIDATE_PROSPECTIVE",
+  "schema": "FAMILY10H_RELATION_SPATIAL_EVIDENCE_VALIDATION_V1",
+  "scientific_claim": "PUBLIC_POST_SOURCE_SPATIALLY_RESOLVED_FAMILY10H_RELATION_PAIR_READOUT_NOT_ESTABLISHED",
+  "small_wall_crossed": false
+}

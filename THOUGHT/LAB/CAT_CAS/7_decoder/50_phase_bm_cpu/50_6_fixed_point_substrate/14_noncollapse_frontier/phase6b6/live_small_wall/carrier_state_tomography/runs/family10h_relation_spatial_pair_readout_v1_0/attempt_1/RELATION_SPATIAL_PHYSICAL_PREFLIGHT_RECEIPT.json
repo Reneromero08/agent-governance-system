@@ -1,0 +1,836 @@
+{
+  "artifact_identity": {
+    "approved_sensor_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+    "approved_target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+    "grammar_canonical_sha256": "fe18e418acdba8bce6a7a1ccddae25ab4929ff65c14acfbf1e776ebfdba1c768",
+    "grammar_file_sha256": "247e8a8946859badac58b5d9d83141fcfb81735b1ef1ad5a0829e2b318193d14",
+    "manifest_canonical_sha256": "5b55d4d45472a598e30bfa119a46e4c1e307699759a309abd94ed41e8d034840",
+    "manifest_file_sha256": "166061fb9e4791be120fa77815ec45c340f9ffcdb51c1bdd685f9afb31f53e44",
+    "pmu_preflight_helper_actual_c_sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+    "pmu_preflight_helper_actual_format": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2eaebcc0cbe42cb8d2c06323434f4bd5cb5ef4c0, for GNU/Linux 3.2.0, with debug_info, not stripped",
+    "pmu_preflight_helper_actual_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+    "pmu_preflight_helper_c_sha256_matches_authority": true,
+    "pmu_preflight_helper_expected_c_sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+    "pmu_preflight_helper_expected_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+    "pmu_preflight_helper_format_valid": true,
+    "pmu_preflight_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+    "pmu_preflight_helper_sha256_matches_authority": true,
+    "runtime_binary_format": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_runtime: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=32bc6329f80d384fceec601830dd8e4153a5174d, for GNU/Linux 3.2.0, with debug_info, not stripped",
+    "runtime_binary_sha256": "c0468dfc0c496d2efbf007cd2b939beba43500fb40b25224a9ae2eff46948c30",
+    "schedule_canonical_sha256": "5378ae183daec17a2ad5c6b9cecb954c1d7de4bf834dfa8e02d5188da5b159cf",
+    "schedule_manifest_sha256": "79e6dbf2cd5fc4d74cbe760159397e0dc54fd1faa591b7b4090331b6fc736b8b",
+    "schedule_tsv_sha256": "82e8c1723d44c81a761394aafbbfd30f33994b7f0dcc2b8c30d681a31c7ea21a",
+    "source_bundle_sha256": "4bc0f1943a454d9c4913a736364539c064903f2442becc53e2f6a5d39c299055",
+    "source_file_hashes": {
+      "relation_spatial_adjudication.py": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "relation_spatial_live_controller.py": "cdad3d5f92ec0f1ac19ae1cab9e5aeab5fd5ad4c257174255a64a27ae226f01b",
+      "relation_spatial_physical_adjudication.py": "0b77d78337439802874060241f0bd8d0459f0a1c5f010fdcbf0cf82f2583fbaf",
+      "relation_spatial_pmu_preflight.c": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "relation_spatial_public.py": "dca89773a5c89809a548eace13da65ab7dbe6e809bb433243420a15801d9cb6d",
+      "relation_spatial_runtime.c": "4b746556e55e45cd77294b8faadd14d9ab4c477d62afe8bb9fc623829207da37",
+      "relation_spatial_runtime.h": "665d98df19a2dce07b782869247cfc58ffcb9612869e45c481e4340f2664b491",
+      "relation_spatial_target.py": "21f01e6cbde5243bb46767e2e915092c1eb90e51288ebbfee6ced2961904cd10",
+      "run_relation_spatial_pair_readout.py": "0ad4b4d6ff94a20b7c0e119966de5efbda649f5b5af09e87d87c332db64f8dce"
+    }
+  },
+  "checks": {
+    "actual_physical_geometry_status": {
+      "detail": {
+        "claim_ceiling_lowered": true,
+        "status": "unresolved_contractually_lowered"
+      },
+      "name": "actual_physical_geometry_status",
+      "passed": true
+    },
+    "approved_target_identity": {
+      "detail": {
+        "expected_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+        "observed_identity": {
+          "family": 16,
+          "model": 10,
+          "processor_count": 6,
+          "processors": [
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 0,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 1,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 2,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 3,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 4,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 5,
+              "vendor_id": "AuthenticAMD"
+            }
+          ],
+          "receiver_cpu": 5,
+          "runtime_abi": "linux_x86_64_perf_event_open",
+          "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+          "source_cpu": 4,
+          "vendor": "AuthenticAMD"
+        },
+        "observed_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b"
+      },
+      "name": "approved_target_identity",
+      "passed": true
+    },
+    "attempt_ownership_marker": {
+      "detail": {
+        "attempt_ceiling": 1,
+        "attempt_count_before": 0,
+        "owner_marker": "family10h_relation_spatial_pair_readout_v1_0"
+      },
+      "name": "attempt_ownership_marker",
+      "passed": true
+    },
+    "canonical_manifest_digest": {
+      "detail": "5b55d4d45472a598e30bfa119a46e4c1e307699759a309abd94ed41e8d034840",
+      "name": "canonical_manifest_digest",
+      "passed": true
+    },
+    "compact_schedule_manifest_binding": {
+      "detail": "5378ae183daec17a2ad5c6b9cecb954c1d7de4bf834dfa8e02d5188da5b159cf",
+      "name": "compact_schedule_manifest_binding",
+      "passed": true
+    },
+    "cpu_frequency_policy_custody": {
+      "detail": {
+        "governor": "performance",
+        "identity_stability": true,
+        "policies": [
+          {
+            "cpu": 4,
+            "governor": "performance"
+          },
+          {
+            "cpu": 5,
+            "governor": "performance"
+          }
+        ],
+        "policy_locked": true
+      },
+      "name": "cpu_frequency_policy_custody",
+      "passed": true
+    },
+    "cpu_vendor_family_model": {
+      "detail": {
+        "cpu_count_observed": 6,
+        "family": 16,
+        "model": 10,
+        "operational_pinning": true,
+        "processor_count": 6,
+        "processors": [
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 0,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 1,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 2,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 3,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 4,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 5,
+            "vendor_id": "AuthenticAMD"
+          }
+        ],
+        "receiver_cpu": 5,
+        "receiver_cpu_present": true,
+        "runtime_abi": "linux_x86_64_perf_event_open",
+        "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+        "source_cpu": 4,
+        "source_cpu_present": true,
+        "target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+        "vendor": "AuthenticAMD"
+      },
+      "name": "cpu_vendor_family_model",
+      "passed": true
+    },
+    "deployment_custody_binding": {
+      "detail": {
+        "controller_verified_clean_worktree": true,
+        "controller_verified_head_equals_origin": true,
+        "fixture_backend_allowed": false,
+        "manifest_file_sha256": "166061fb9e4791be120fa77815ec45c340f9ffcdb51c1bdd685f9afb31f53e44",
+        "one_attempt_ceiling": 1,
+        "relation_manifest_freeze_commit": "130589ddc9ccd54afb1498bfb75673281821aafe",
+        "relation_source_authority_commit": "b0b8bd0803a5bb70c42d33d716830c329e892142",
+        "schema": "FAMILY10H_RELATION_SPATIAL_DEPLOYMENT_CUSTODY_V1",
+        "science_package_id": "family10h_relation_spatial_pair_readout_v1",
+        "transaction_run_id": "family10h_relation_spatial_pair_readout_v1_0"
+      },
+      "name": "deployment_custody_binding",
+      "passed": true
+    },
+    "expanded_schedule_tsv_hash": {
+      "detail": "82e8c1723d44c81a761394aafbbfd30f33994b7f0dcc2b8c30d681a31c7ea21a",
+      "name": "expanded_schedule_tsv_hash",
+      "passed": true
+    },
+    "freeze_commit_binding": {
+      "detail": {
+        "env": "130589ddc9ccd54afb1498bfb75673281821aafe",
+        "expected": null,
+        "observed_backend": "physical_observed"
+      },
+      "name": "freeze_commit_binding",
+      "passed": true
+    },
+    "grammar_hash": {
+      "detail": "fe18e418acdba8bce6a7a1ccddae25ab4929ff65c14acfbf1e776ebfdba1c768",
+      "name": "grammar_hash",
+      "passed": true
+    },
+    "grouped_pmu_open_capability": {
+      "detail": {
+        "command": [
+          "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight",
+          "--disabled-group-preflight",
+          "4"
+        ],
+        "cpu": 4,
+        "enable_attempted": false,
+        "enabled_measurement_interval": false,
+        "error_text": "",
+        "events": {
+          "cache_block_commands_change_to_dirty": {
+            "event": "0xea",
+            "umask": "0x20"
+          },
+          "cpu_cycles_not_halted": {
+            "event": "0x76",
+            "umask": "0x00"
+          },
+          "probe_responses_dirty": {
+            "event": "0xec",
+            "umask": "0x0c"
+          }
+        },
+        "expected_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+        "grouped_open_capability": true,
+        "helper_identity": {
+          "actual_helper_binary_format": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2eaebcc0cbe42cb8d2c06323434f4bd5cb5ef4c0, for GNU/Linux 3.2.0, with debug_info, not stripped",
+          "actual_helper_c_sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+          "actual_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+          "expected_helper_c_sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+          "expected_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+          "expected_runtime_abi": "linux_x86_64_perf_event_open",
+          "helper_binary_format_probe": {
+            "command": [
+              "file",
+              "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight"
+            ],
+            "returncode": 0,
+            "stderr": "",
+            "stdout": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2eaebcc0cbe42cb8d2c06323434f4bd5cb5ef4c0, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+          },
+          "helper_binary_format_valid": true,
+          "helper_c_sha256_matches_authority": true,
+          "helper_sha256_matches_authority": true,
+          "path": "relation_spatial_pmu_preflight",
+          "present": true
+        },
+        "helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+        "helper_sha256_matches_authority": true,
+        "incorrect_structure_size": false,
+        "launch_mode": "native",
+        "malformed_event_identity": false,
+        "missing_event": false,
+        "partial_group_open": false,
+        "passed": true,
+        "perf_event_attr_size": 112,
+        "pmu_acquisition_count": 0,
+        "pmu_close_count": 3,
+        "pmu_fd_leak_count": 0,
+        "pmu_open_count": 3,
+        "read_attempted": false,
+        "reset_attempted": false,
+        "returncode": 0,
+        "schema": "FAMILY10H_RELATION_SPATIAL_DISABLED_PMU_PREFLIGHT_V1",
+        "scientific_data_collected": false,
+        "uses_system_perf_event_attr": true
+      },
+      "name": "grouped_pmu_open_capability",
+      "passed": true
+    },
+    "injected_preflight_backend_absent": {
+      "detail": {
+        "backend": "physical_system_interface",
+        "fixture_argument": false,
+        "injected_envs": {},
+        "synthetic_mode": false
+      },
+      "name": "injected_preflight_backend_absent",
+      "passed": true
+    },
+    "live_authority": {
+      "detail": "family10h_relation_spatial_pair_readout_v1_0",
+      "name": "live_authority",
+      "passed": true
+    },
+    "manifest_file_hash": {
+      "detail": {
+        "env": "166061fb9e4791be120fa77815ec45c340f9ffcdb51c1bdd685f9afb31f53e44",
+        "expected": "166061fb9e4791be120fa77815ec45c340f9ffcdb51c1bdd685f9afb31f53e44",
+        "observed_backend": "physical_observed"
+      },
+      "name": "manifest_file_hash",
+      "passed": true
+    },
+    "operational_pinning_capability": {
+      "detail": {
+        "cpu_count_observed": 6,
+        "family": 16,
+        "model": 10,
+        "operational_pinning": true,
+        "processor_count": 6,
+        "processors": [
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 0,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 1,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 2,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 3,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 4,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 5,
+            "vendor_id": "AuthenticAMD"
+          }
+        ],
+        "receiver_cpu": 5,
+        "receiver_cpu_present": true,
+        "runtime_abi": "linux_x86_64_perf_event_open",
+        "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+        "source_cpu": 4,
+        "source_cpu_present": true,
+        "target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+        "vendor": "AuthenticAMD"
+      },
+      "name": "operational_pinning_capability",
+      "passed": true
+    },
+    "output_root_absence": {
+      "detail": {
+        "expected_parent": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/_relation_spatial_owned_outputs",
+        "failures": [],
+        "output_root": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/_relation_spatial_owned_outputs/attempt_1",
+        "passed": true
+      },
+      "name": "output_root_absence",
+      "passed": true
+    },
+    "package_decision": {
+      "detail": "FAMILY10H_SPATIAL_RELATION_READOUT_BUILD_READY_AWAITING_AUTHORIZATION",
+      "name": "package_decision",
+      "passed": true
+    },
+    "pmu_event_identities": {
+      "detail": {
+        "cache_block_commands_change_to_dirty": {
+          "event": "0xea",
+          "umask": "0x20"
+        },
+        "cpu_cycles_not_halted": {
+          "event": "0x76",
+          "umask": "0x00"
+        },
+        "probe_responses_dirty": {
+          "event": "0xec",
+          "umask": "0x0c"
+        }
+      },
+      "name": "pmu_event_identities",
+      "passed": true
+    },
+    "pmu_helper_binary_format_and_abi": {
+      "detail": {
+        "expected_abi": "linux_x86_64_perf_event_open",
+        "format": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2eaebcc0cbe42cb8d2c06323434f4bd5cb5ef4c0, for GNU/Linux 3.2.0, with debug_info, not stripped"
+      },
+      "name": "pmu_helper_binary_format_and_abi",
+      "passed": true
+    },
+    "pmu_helper_binary_hash": {
+      "detail": {
+        "equality": true,
+        "expected_actual": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+        "expected_authority": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+        "observed_actual": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a"
+      },
+      "name": "pmu_helper_binary_hash",
+      "passed": true
+    },
+    "relation_freeze_authority_not_scalar": {
+      "detail": "130589ddc9ccd54afb1498bfb75673281821aafe",
+      "name": "relation_freeze_authority_not_scalar",
+      "passed": true
+    },
+    "relation_source_authority_not_scalar": {
+      "detail": "b0b8bd0803a5bb70c42d33d716830c329e892142",
+      "name": "relation_source_authority_not_scalar",
+      "passed": true
+    },
+    "runtime_binary_format_and_abi": {
+      "detail": {
+        "format": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_runtime: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=32bc6329f80d384fceec601830dd8e4153a5174d, for GNU/Linux 3.2.0, with debug_info, not stripped",
+        "required": [
+          "ELF 64-bit",
+          "x86-64"
+        ]
+      },
+      "name": "runtime_binary_format_and_abi",
+      "passed": true
+    },
+    "runtime_binary_hash": {
+      "detail": "c0468dfc0c496d2efbf007cd2b939beba43500fb40b25224a9ae2eff46948c30",
+      "name": "runtime_binary_hash",
+      "passed": true
+    },
+    "source_authority_commit_binding": {
+      "detail": {
+        "env": "b0b8bd0803a5bb70c42d33d716830c329e892142",
+        "expected": "b0b8bd0803a5bb70c42d33d716830c329e892142",
+        "observed_backend": "physical_observed"
+      },
+      "name": "source_authority_commit_binding",
+      "passed": true
+    },
+    "source_bundle_hash": {
+      "detail": "4bc0f1943a454d9c4913a736364539c064903f2442becc53e2f6a5d39c299055",
+      "name": "source_bundle_hash",
+      "passed": true
+    },
+    "source_file_hashes": {
+      "detail": {
+        "relation_spatial_adjudication.py": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+        "relation_spatial_live_controller.py": "cdad3d5f92ec0f1ac19ae1cab9e5aeab5fd5ad4c257174255a64a27ae226f01b",
+        "relation_spatial_physical_adjudication.py": "0b77d78337439802874060241f0bd8d0459f0a1c5f010fdcbf0cf82f2583fbaf",
+        "relation_spatial_pmu_preflight.c": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+        "relation_spatial_public.py": "dca89773a5c89809a548eace13da65ab7dbe6e809bb433243420a15801d9cb6d",
+        "relation_spatial_runtime.c": "4b746556e55e45cd77294b8faadd14d9ab4c477d62afe8bb9fc623829207da37",
+        "relation_spatial_runtime.h": "665d98df19a2dce07b782869247cfc58ffcb9612869e45c481e4340f2664b491",
+        "relation_spatial_target.py": "21f01e6cbde5243bb46767e2e915092c1eb90e51288ebbfee6ced2961904cd10",
+        "run_relation_spatial_pair_readout.py": "0ad4b4d6ff94a20b7c0e119966de5efbda649f5b5af09e87d87c332db64f8dce"
+      },
+      "name": "source_file_hashes",
+      "passed": true
+    },
+    "source_receiver_cpu_identity": {
+      "detail": {
+        "cpu_count_observed": 6,
+        "family": 16,
+        "model": 10,
+        "operational_pinning": true,
+        "processor_count": 6,
+        "processors": [
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 0,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 1,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 2,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 3,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 4,
+            "vendor_id": "AuthenticAMD"
+          },
+          {
+            "cpu_family": 16,
+            "model": 10,
+            "processor": 5,
+            "vendor_id": "AuthenticAMD"
+          }
+        ],
+        "receiver_cpu": 5,
+        "receiver_cpu_present": true,
+        "runtime_abi": "linux_x86_64_perf_event_open",
+        "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+        "source_cpu": 4,
+        "source_cpu_present": true,
+        "target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+        "vendor": "AuthenticAMD"
+      },
+      "name": "source_receiver_cpu_identity",
+      "passed": true
+    },
+    "source_root_identity": {
+      "detail": {
+        "failures": [],
+        "passed": true,
+        "pmu_preflight_helper_identity": {
+          "actual_helper_binary_format": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2eaebcc0cbe42cb8d2c06323434f4bd5cb5ef4c0, for GNU/Linux 3.2.0, with debug_info, not stripped",
+          "actual_helper_c_sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+          "actual_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+          "expected_helper_c_sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+          "expected_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+          "expected_runtime_abi": "linux_x86_64_perf_event_open",
+          "helper_binary_format_probe": {
+            "command": [
+              "file",
+              "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight"
+            ],
+            "returncode": 0,
+            "stderr": "",
+            "stdout": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2eaebcc0cbe42cb8d2c06323434f4bd5cb5ef4c0, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+          },
+          "helper_binary_format_valid": true,
+          "helper_c_sha256_matches_authority": true,
+          "helper_sha256_matches_authority": true,
+          "path": "relation_spatial_pmu_preflight",
+          "present": true
+        },
+        "required_file_count": 26
+      },
+      "name": "source_root_identity",
+      "passed": true
+    },
+    "temperature_sensor_authority": {
+      "detail": {
+        "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+        "device_driver": "k10temp",
+        "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+        "device_subsystem": "pci",
+        "hwmon_name": "k10temp",
+        "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+        "identity_stability": true,
+        "input_st_dev": 22,
+        "input_st_ino": 30725,
+        "input_st_mode": 33060,
+        "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+        "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+        "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+        "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+        "resolved_subsystem_path": "/sys/bus/pci",
+        "sensor_input": "temp1_input",
+        "sensor_label_present": false,
+        "sensor_label_value": null,
+        "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+        "sensor_semantic_role": "Tctl"
+      },
+      "name": "temperature_sensor_authority",
+      "passed": true
+    },
+    "transaction_identity": {
+      "detail": "family10h_relation_spatial_pair_readout_v1_0",
+      "name": "transaction_identity",
+      "passed": true
+    }
+  },
+  "failures": [],
+  "live_invocation_count": 0,
+  "output_root": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/_relation_spatial_owned_outputs/attempt_1",
+  "passed": true,
+  "physical_observation": {
+    "attempt": {
+      "attempt_ceiling": 1,
+      "attempt_count_before": 0,
+      "owner_marker": "family10h_relation_spatial_pair_readout_v1_0"
+    },
+    "backend": "physical_system_interface",
+    "cpu": {
+      "cpu_count_observed": 6,
+      "family": 16,
+      "model": 10,
+      "operational_pinning": true,
+      "processor_count": 6,
+      "processors": [
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 0,
+          "vendor_id": "AuthenticAMD"
+        },
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 1,
+          "vendor_id": "AuthenticAMD"
+        },
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 2,
+          "vendor_id": "AuthenticAMD"
+        },
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 3,
+          "vendor_id": "AuthenticAMD"
+        },
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 4,
+          "vendor_id": "AuthenticAMD"
+        },
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 5,
+          "vendor_id": "AuthenticAMD"
+        }
+      ],
+      "receiver_cpu": 5,
+      "receiver_cpu_present": true,
+      "runtime_abi": "linux_x86_64_perf_event_open",
+      "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+      "source_cpu": 4,
+      "source_cpu_present": true,
+      "target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+      "vendor": "AuthenticAMD"
+    },
+    "expected_artifacts": {
+      "approved_sensor_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+      "approved_target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+      "grammar_canonical_sha256": "fe18e418acdba8bce6a7a1ccddae25ab4929ff65c14acfbf1e776ebfdba1c768",
+      "grammar_file_sha256": "247e8a8946859badac58b5d9d83141fcfb81735b1ef1ad5a0829e2b318193d14",
+      "manifest_canonical_sha256": "5b55d4d45472a598e30bfa119a46e4c1e307699759a309abd94ed41e8d034840",
+      "manifest_file_sha256": "166061fb9e4791be120fa77815ec45c340f9ffcdb51c1bdd685f9afb31f53e44",
+      "pmu_preflight_helper_actual_c_sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "pmu_preflight_helper_actual_format": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2eaebcc0cbe42cb8d2c06323434f4bd5cb5ef4c0, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "pmu_preflight_helper_actual_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+      "pmu_preflight_helper_c_sha256_matches_authority": true,
+      "pmu_preflight_helper_expected_c_sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "pmu_preflight_helper_expected_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+      "pmu_preflight_helper_format_valid": true,
+      "pmu_preflight_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+      "pmu_preflight_helper_sha256_matches_authority": true,
+      "relation_source_authority_commit": "b0b8bd0803a5bb70c42d33d716830c329e892142",
+      "runtime_binary_format": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_runtime: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=32bc6329f80d384fceec601830dd8e4153a5174d, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "runtime_binary_sha256": "c0468dfc0c496d2efbf007cd2b939beba43500fb40b25224a9ae2eff46948c30",
+      "schedule_canonical_sha256": "5378ae183daec17a2ad5c6b9cecb954c1d7de4bf834dfa8e02d5188da5b159cf",
+      "schedule_manifest_sha256": "79e6dbf2cd5fc4d74cbe760159397e0dc54fd1faa591b7b4090331b6fc736b8b",
+      "schedule_tsv_sha256": "82e8c1723d44c81a761394aafbbfd30f33994b7f0dcc2b8c30d681a31c7ea21a",
+      "source_bundle_sha256": "4bc0f1943a454d9c4913a736364539c064903f2442becc53e2f6a5d39c299055",
+      "source_file_hashes": {
+        "relation_spatial_adjudication.py": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+        "relation_spatial_live_controller.py": "cdad3d5f92ec0f1ac19ae1cab9e5aeab5fd5ad4c257174255a64a27ae226f01b",
+        "relation_spatial_physical_adjudication.py": "0b77d78337439802874060241f0bd8d0459f0a1c5f010fdcbf0cf82f2583fbaf",
+        "relation_spatial_pmu_preflight.c": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+        "relation_spatial_public.py": "dca89773a5c89809a548eace13da65ab7dbe6e809bb433243420a15801d9cb6d",
+        "relation_spatial_runtime.c": "4b746556e55e45cd77294b8faadd14d9ab4c477d62afe8bb9fc623829207da37",
+        "relation_spatial_runtime.h": "665d98df19a2dce07b782869247cfc58ffcb9612869e45c481e4340f2664b491",
+        "relation_spatial_target.py": "21f01e6cbde5243bb46767e2e915092c1eb90e51288ebbfee6ced2961904cd10",
+        "run_relation_spatial_pair_readout.py": "0ad4b4d6ff94a20b7c0e119966de5efbda649f5b5af09e87d87c332db64f8dce"
+      }
+    },
+    "frequency_policy": {
+      "governor": "performance",
+      "identity_stability": true,
+      "policies": [
+        {
+          "cpu": 4,
+          "governor": "performance"
+        },
+        {
+          "cpu": 5,
+          "governor": "performance"
+        }
+      ],
+      "policy_locked": true
+    },
+    "output": {
+      "parent_writable": true,
+      "root": ""
+    },
+    "physical_geometry": {
+      "claim_ceiling_lowered": true,
+      "status": "unresolved_contractually_lowered"
+    },
+    "pmu": {
+      "command": [
+        "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight",
+        "--disabled-group-preflight",
+        "4"
+      ],
+      "cpu": 4,
+      "enable_attempted": false,
+      "enabled_measurement_interval": false,
+      "error_text": "",
+      "events": {
+        "cache_block_commands_change_to_dirty": {
+          "event": "0xea",
+          "umask": "0x20"
+        },
+        "cpu_cycles_not_halted": {
+          "event": "0x76",
+          "umask": "0x00"
+        },
+        "probe_responses_dirty": {
+          "event": "0xec",
+          "umask": "0x0c"
+        }
+      },
+      "expected_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+      "grouped_open_capability": true,
+      "helper_identity": {
+        "actual_helper_binary_format": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2eaebcc0cbe42cb8d2c06323434f4bd5cb5ef4c0, for GNU/Linux 3.2.0, with debug_info, not stripped",
+        "actual_helper_c_sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+        "actual_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+        "expected_helper_c_sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+        "expected_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+        "expected_runtime_abi": "linux_x86_64_perf_event_open",
+        "helper_binary_format_probe": {
+          "command": [
+            "file",
+            "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight"
+          ],
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2/remote_spatial_root/relation_spatial_pmu_preflight: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2eaebcc0cbe42cb8d2c06323434f4bd5cb5ef4c0, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+        },
+        "helper_binary_format_valid": true,
+        "helper_c_sha256_matches_authority": true,
+        "helper_sha256_matches_authority": true,
+        "path": "relation_spatial_pmu_preflight",
+        "present": true
+      },
+      "helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+      "helper_sha256_matches_authority": true,
+      "incorrect_structure_size": false,
+      "launch_mode": "native",
+      "malformed_event_identity": false,
+      "missing_event": false,
+      "partial_group_open": false,
+      "passed": true,
+      "perf_event_attr_size": 112,
+      "pmu_acquisition_count": 0,
+      "pmu_close_count": 3,
+      "pmu_fd_leak_count": 0,
+      "pmu_open_count": 3,
+      "read_attempted": false,
+      "reset_attempted": false,
+      "returncode": 0,
+      "schema": "FAMILY10H_RELATION_SPATIAL_DISABLED_PMU_PREFLIGHT_V1",
+      "scientific_data_collected": false,
+      "uses_system_perf_event_attr": true
+    },
+    "runtime_binary_format_contains": [
+      "ELF 64-bit",
+      "x86-64"
+    ],
+    "schema": "FAMILY10H_RELATION_SPATIAL_PHYSICAL_PREFLIGHT_OBSERVATION_V1",
+    "sensor": {
+      "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "device_driver": "k10temp",
+      "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+      "device_subsystem": "pci",
+      "hwmon_name": "k10temp",
+      "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+      "identity_stability": true,
+      "input_st_dev": 22,
+      "input_st_ino": 30725,
+      "input_st_mode": 33060,
+      "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+      "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+      "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+      "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+      "resolved_subsystem_path": "/sys/bus/pci",
+      "sensor_input": "temp1_input",
+      "sensor_label_present": false,
+      "sensor_label_value": null,
+      "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+      "sensor_semantic_role": "Tctl"
+    }
+  },
+  "pmu_acquisition_count": 0,
+  "pmu_open_count": 3,
+  "preflight_backend": "physical_observed",
+  "schema": "FAMILY10H_RELATION_SPATIAL_TARGET_PREFLIGHT_V2",
+  "sensor_inventory_count": 1,
+  "small_wall_crossed": false,
+  "status": "TARGET_PREFLIGHT_PASSED",
+  "target_contact_count": 0
+}

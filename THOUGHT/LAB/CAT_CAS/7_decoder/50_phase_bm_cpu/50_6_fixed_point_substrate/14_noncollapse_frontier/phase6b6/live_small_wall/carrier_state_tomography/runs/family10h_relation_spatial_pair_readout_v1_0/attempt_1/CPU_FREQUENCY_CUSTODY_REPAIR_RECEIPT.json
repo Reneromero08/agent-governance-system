@@ -1,0 +1,27 @@
+{
+  "after": {
+    "cpu4": "performance",
+    "cpu5": "performance"
+  },
+  "attempt_consumed_before_repair": false,
+  "available_governors": {
+    "cpu4": [
+      "performance",
+      "schedutil"
+    ],
+    "cpu5": [
+      "performance",
+      "schedutil"
+    ]
+  },
+  "before": {
+    "cpu4": "schedutil",
+    "cpu5": "schedutil"
+  },
+  "performed_before_acquisition": true,
+  "reason": "post-boot target preflight observed CPU 4/5 schedutil; frozen package required performance policy custody",
+  "schema": "FAMILY10H_RELATION_SPATIAL_CPU_FREQUENCY_CUSTODY_REPAIR_RECEIPT_V1",
+  "scientific_thresholds_changed": false,
+  "small_wall_crossed": false,
+  "source_or_schedule_changed": false
+}

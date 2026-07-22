@@ -1,0 +1,12 @@
+{
+  "controller_verified_clean_worktree": true,
+  "controller_verified_head_equals_origin": true,
+  "fixture_backend_allowed": false,
+  "manifest_file_sha256": "166061fb9e4791be120fa77815ec45c340f9ffcdb51c1bdd685f9afb31f53e44",
+  "one_attempt_ceiling": 1,
+  "relation_manifest_freeze_commit": "130589ddc9ccd54afb1498bfb75673281821aafe",
+  "relation_source_authority_commit": "b0b8bd0803a5bb70c42d33d716830c329e892142",
+  "schema": "FAMILY10H_RELATION_SPATIAL_DEPLOYMENT_CUSTODY_V1",
+  "science_package_id": "family10h_relation_spatial_pair_readout_v1",
+  "transaction_run_id": "family10h_relation_spatial_pair_readout_v1_0"
+}
