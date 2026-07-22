@@ -1,0 +1,334 @@
+{
+  "passed": true,
+  "results": {
+    "complete_passing_fixture": {
+      "expected_failure": null,
+      "failures": [],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_PASSED"
+    },
+    "failed_operational_pinning": {
+      "expected_failure": "operational_pinning_capability",
+      "failures": [
+        "operational_pinning_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "fake_helper_output_correct_schema": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "grouped_pmu_failure": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_missing_event": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_open_close_mismatch": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_partial_group_open": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_reported_enable_attempt": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_reported_leaked_descriptor": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_reported_read_attempt": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_reported_reset_attempt": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_returning_nonzero_with_plausible_json": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "helper_wrong_structure_size": {
+      "expected_failure": "grouped_pmu_open_capability",
+      "failures": [
+        "grouped_pmu_open_capability"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "incompatible_processor_topology": {
+      "expected_failure": "source_receiver_cpu_identity",
+      "failures": [
+        "source_receiver_cpu_identity",
+        "approved_target_identity"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "malformed_output_path": {
+      "failures": [
+        "output_root_absence"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "missing_parent": {
+      "failures": [
+        "output_root_absence"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "missing_receiver_cpu": {
+      "expected_failure": "source_receiver_cpu_identity",
+      "failures": [
+        "source_receiver_cpu_identity"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "missing_source_cpu": {
+      "expected_failure": "source_receiver_cpu_identity",
+      "failures": [
+        "source_receiver_cpu_identity"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "output_path_escape": {
+      "failures": [
+        "output_root_absence"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "owner_marker_mismatch": {
+      "expected_failure": "attempt_ownership_marker",
+      "failures": [
+        "attempt_ownership_marker"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "partial_output": {
+      "failures": [
+        "output_root_absence"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "permission_failure": {
+      "expected_failure": "output_root_absence",
+      "failures": [
+        "output_root_absence"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "policy_mismatch": {
+      "expected_failure": "cpu_frequency_policy_custody",
+      "failures": [
+        "cpu_frequency_policy_custody"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "preexisting_output_root": {
+      "failures": [
+        "output_root_absence"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_identity_mismatch": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_unexpected_label": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_unstable_identity": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_volatile_inode_device_mode_variation": {
+      "expected_failure": null,
+      "failures": [],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_PASSED"
+    },
+    "sensor_wrong_driver": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_wrong_input_path": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_wrong_modalias": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "sensor_wrong_semantic_profile": {
+      "expected_failure": "temperature_sensor_authority",
+      "failures": [
+        "temperature_sensor_authority"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "unavailable_pmu_event": {
+      "expected_failure": "pmu_event_identities",
+      "failures": [
+        "pmu_event_identities"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "unresolved_physical_geometry_lowered": {
+      "expected_failure": null,
+      "failures": [],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_PASSED"
+    },
+    "wrong_binary_hash": {
+      "expected_failure": "runtime_binary_hash",
+      "failures": [
+        "runtime_binary_hash"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "wrong_cpu_family": {
+      "expected_failure": "cpu_vendor_family_model",
+      "failures": [
+        "cpu_vendor_family_model",
+        "approved_target_identity"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "wrong_cpu_model": {
+      "expected_failure": "cpu_vendor_family_model",
+      "failures": [
+        "cpu_vendor_family_model",
+        "approved_target_identity"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "wrong_helper_binary_hash": {
+      "expected_failure": "pmu_helper_binary_hash",
+      "failures": [
+        "pmu_helper_binary_hash"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "wrong_manifest_hash": {
+      "expected_failure": "manifest_file_hash",
+      "failures": [
+        "manifest_file_hash"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "wrong_schedule_hash": {
+      "expected_failure": "expanded_schedule_tsv_hash",
+      "failures": [
+        "expanded_schedule_tsv_hash"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "wrong_source_authority_commit": {
+      "expected_failure": "source_authority_commit_binding",
+      "failures": [
+        "source_authority_commit_binding"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    },
+    "wrong_target_identity_sha": {
+      "expected_failure": "approved_target_identity",
+      "failures": [
+        "approved_target_identity"
+      ],
+      "passed": true,
+      "status": "TARGET_PREFLIGHT_FAILED"
+    }
+  },
+  "schema": "FAMILY10H_RELATION_LIFETIME_TARGET_PREFLIGHT_FIXTURE_SUITE_V1"
+}

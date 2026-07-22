@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "schema": "FAMILY10H_RELATION_LIFETIME_TRANSPORT_SIMULATION_V2",
+  "synthetic_positive_result": "FAMILY10H_RELATION_LIFETIME_COORDINATE_CONFIRMED_PROSPECTIVE",
+  "true_heldout_transport": {
+    "positive_fixture_heldout_passed": true,
+    "stratum_specific_artifact_rejected": true,
+    "training_exclusion_law": "held-out factor level is absent from training; thresholds are fixed by contract"
+  }
+}

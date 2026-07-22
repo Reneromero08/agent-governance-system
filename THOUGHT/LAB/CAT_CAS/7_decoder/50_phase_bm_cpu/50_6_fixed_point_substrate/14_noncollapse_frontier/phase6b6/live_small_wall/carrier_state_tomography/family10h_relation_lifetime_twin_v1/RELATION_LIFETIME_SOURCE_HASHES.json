@@ -1,0 +1,467 @@
+{
+  "files": {
+    "RELATION_LIFETIME_CONTRACT.md": {
+      "sha256": "b916198cebed13c1f0b96d322160ce0f1222e12ee6c7ee38e62aa87022a6e46b",
+      "size": 5057
+    },
+    "relation_lifetime_adjudication.py": {
+      "sha256": "56e3fc6b0f744f68c84dd955fcefb333956872b5c07d3286b787bbc6f26f0fb0",
+      "size": 10666
+    },
+    "relation_lifetime_live_controller.py": {
+      "sha256": "343feaf6aa5e76a363b627400c62855e50a50c785268503367b40ac026bda494",
+      "size": 11654
+    },
+    "relation_lifetime_physical_adjudication.py": {
+      "sha256": "43c9424e01e2ba62de3e26e5fd7e925d474254ab29d07cf7151aab696607487c",
+      "size": 87073
+    },
+    "relation_lifetime_pmu_preflight.c": {
+      "sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+      "size": 9378
+    },
+    "relation_lifetime_public.py": {
+      "sha256": "95b9c379e2c2d5f15d511a075fdf0011e3dca00ff43d43bf18234e9d71a82023",
+      "size": 45392
+    },
+    "relation_lifetime_runtime.c": {
+      "sha256": "8452f547eba460b4e167b35227c04d24ebd5315f1f03e10099af28c1aa3a28c9",
+      "size": 58361
+    },
+    "relation_lifetime_runtime.h": {
+      "sha256": "007a054aa2405e91dcc2f9621806eb99efd6dd79a8aeaba47a85934d62c63e93",
+      "size": 2443
+    },
+    "relation_lifetime_target.py": {
+      "sha256": "297d2d5d7c6d4d9da6055cbdb27a709939af3c09d19f58b2f00d1a59ce197cf4",
+      "size": 91240
+    },
+    "run_relation_lifetime_twin.py": {
+      "sha256": "b08c73cbe4eb28abc767dac23454563c9e5e8e8ea7dcb55e45cd17871386a24a",
+      "size": 102398
+    }
+  },
+  "pmu_preflight_helper_authority": {
+    "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped",
+    "compile_status": "compiled_target_compatible_linux_binary",
+    "compiled_binary_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+    "compiler_flags": [
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2",
+      "-g"
+    ],
+    "compiler_identity": {
+      "available": true,
+      "compiler": "gcc",
+      "distro": "Ubuntu",
+      "environment": "wsl",
+      "headers": {
+        "linux_perf_event_h": "present",
+        "sched_h": "present"
+      },
+      "machine": "x86_64",
+      "path": "/usr/bin/gcc",
+      "suitability": "target_compatible_linux_binary_authority",
+      "target_triple": "x86_64-linux-gnu",
+      "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+      "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+    },
+    "helper_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+    "path": "relation_lifetime_pmu_preflight",
+    "present": true,
+    "size": 42744
+  },
+  "relation_source_authority_validation": {
+    "checks": {
+      "freeze_commit_exists": true,
+      "source_authority_ancestor_of_freeze": true,
+      "source_authority_commit_exists": true,
+      "source_authority_not_scalar_evidence": true,
+      "source_authority_sha_syntax": true,
+      "source_bundle_matches_authority": true,
+      "source_tree_matches_bound_hashes": true,
+      "worktree_source_matches_authority": true
+    },
+    "current_head": "17644366a3609ef93bb0a14abc088f059a18b982",
+    "failures": [],
+    "manifest_freeze_commit_under_test": "17644366a3609ef93bb0a14abc088f059a18b982",
+    "passed": true,
+    "path_map": {
+      "RELATION_LIFETIME_CONTRACT.md": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/RELATION_LIFETIME_CONTRACT.md",
+      "relation_lifetime_adjudication.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_adjudication.py",
+      "relation_lifetime_live_controller.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_live_controller.py",
+      "relation_lifetime_physical_adjudication.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_physical_adjudication.py",
+      "relation_lifetime_pmu_preflight.c": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight.c",
+      "relation_lifetime_public.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_public.py",
+      "relation_lifetime_runtime.c": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime.c",
+      "relation_lifetime_runtime.h": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime.h",
+      "relation_lifetime_target.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_target.py",
+      "run_relation_lifetime_twin.py": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/run_relation_lifetime_twin.py"
+    },
+    "relation_source_authority_commit": "17644366a3609ef93bb0a14abc088f059a18b982",
+    "schema": "FAMILY10H_RELATION_LIFETIME_SOURCE_AUTHORITY_VALIDATION_V1",
+    "source_bundle_matches_authority": {
+      "RELATION_LIFETIME_CONTRACT.md": true,
+      "relation_lifetime_adjudication.py": true,
+      "relation_lifetime_live_controller.py": true,
+      "relation_lifetime_physical_adjudication.py": true,
+      "relation_lifetime_pmu_preflight.c": true,
+      "relation_lifetime_public.py": true,
+      "relation_lifetime_runtime.c": true,
+      "relation_lifetime_runtime.h": true,
+      "relation_lifetime_target.py": true,
+      "run_relation_lifetime_twin.py": true
+    },
+    "tree_hash_matches": {
+      "RELATION_LIFETIME_CONTRACT.md": true,
+      "relation_lifetime_adjudication.py": true,
+      "relation_lifetime_live_controller.py": true,
+      "relation_lifetime_physical_adjudication.py": true,
+      "relation_lifetime_pmu_preflight.c": true,
+      "relation_lifetime_public.py": true,
+      "relation_lifetime_runtime.c": true,
+      "relation_lifetime_runtime.h": true,
+      "relation_lifetime_target.py": true,
+      "run_relation_lifetime_twin.py": true
+    },
+    "worktree_source_matches_authority": {
+      "RELATION_LIFETIME_CONTRACT.md": true,
+      "relation_lifetime_adjudication.py": true,
+      "relation_lifetime_live_controller.py": true,
+      "relation_lifetime_physical_adjudication.py": true,
+      "relation_lifetime_pmu_preflight.c": true,
+      "relation_lifetime_public.py": true,
+      "relation_lifetime_runtime.c": true,
+      "relation_lifetime_runtime.h": true,
+      "relation_lifetime_target.py": true,
+      "run_relation_lifetime_twin.py": true
+    }
+  },
+  "runtime_binary_authority": {
+    "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e9bd4f4c67ff39d6eb85a3503407cbb912851044, for GNU/Linux 3.2.0, with debug_info, not stripped",
+    "compile_status": "compiled_target_compatible_linux_binary",
+    "compiled_binary_sha256": "10db6d521c29f7253b0e5a34d040a73bab5df75eb08d310205ecb9df8e9c62ef",
+    "compiler_flags": [
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2",
+      "-g"
+    ],
+    "compiler_identity": {
+      "available": true,
+      "compiler": "gcc",
+      "distro": "Ubuntu",
+      "environment": "wsl",
+      "headers": {
+        "linux_perf_event_h": "present",
+        "sched_h": "present"
+      },
+      "machine": "x86_64",
+      "path": "/usr/bin/gcc",
+      "suitability": "target_compatible_linux_binary_authority",
+      "target_triple": "x86_64-linux-gnu",
+      "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+      "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+    },
+    "path": "relation_lifetime_runtime",
+    "pmu_preflight_helper_authority": {
+      "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "compile_status": "compiled_target_compatible_linux_binary",
+      "compiled_binary_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-g"
+      ],
+      "compiler_identity": {
+        "available": true,
+        "compiler": "gcc",
+        "distro": "Ubuntu",
+        "environment": "wsl",
+        "headers": {
+          "linux_perf_event_h": "present",
+          "sched_h": "present"
+        },
+        "machine": "x86_64",
+        "path": "/usr/bin/gcc",
+        "suitability": "target_compatible_linux_binary_authority",
+        "target_triple": "x86_64-linux-gnu",
+        "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+        "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+      },
+      "helper_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+      "path": "relation_lifetime_pmu_preflight",
+      "present": true,
+      "size": 42744
+    },
+    "present": true,
+    "runtime_c_sha256": "8452f547eba460b4e167b35227c04d24ebd5315f1f03e10099af28c1aa3a28c9",
+    "runtime_h_sha256": "007a054aa2405e91dcc2f9621806eb99efd6dd79a8aeaba47a85934d62c63e93",
+    "size": 132680
+  },
+  "runtime_build_receipt_sha256": "c984362e54bb1cbab0e50560187bcc413a3b77b27c12b4f36fbd7db38abe7ac0",
+  "schema": "FAMILY10H_RELATION_LIFETIME_SOURCE_HASHES_V3",
+  "science_package_id": "family10h_relation_lifetime_twin_v1",
+  "sensor_authority_binding": {
+    "approved_sensor_identity": {
+      "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+      "device_driver": "k10temp",
+      "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+      "device_subsystem": "pci",
+      "hwmon_name": "k10temp",
+      "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+      "input_st_dev": 22,
+      "input_st_ino": 30803,
+      "input_st_mode": 33060,
+      "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+      "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+      "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+      "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+      "resolved_subsystem_path": "/sys/bus/pci",
+      "sensor_input": "temp1_input",
+      "sensor_label_present": false,
+      "sensor_label_value": null,
+      "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+      "sensor_semantic_role": "Tctl"
+    },
+    "approved_sensor_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+    "approved_target_identity": {
+      "family": 16,
+      "model": 10,
+      "processor_count": 6,
+      "processors": [
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 0,
+          "vendor_id": "AuthenticAMD"
+        },
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 1,
+          "vendor_id": "AuthenticAMD"
+        },
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 2,
+          "vendor_id": "AuthenticAMD"
+        },
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 3,
+          "vendor_id": "AuthenticAMD"
+        },
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 4,
+          "vendor_id": "AuthenticAMD"
+        },
+        {
+          "cpu_family": 16,
+          "model": 10,
+          "processor": 5,
+          "vendor_id": "AuthenticAMD"
+        }
+      ],
+      "receiver_cpu": 5,
+      "runtime_abi": "linux_x86_64_perf_event_open",
+      "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+      "source_cpu": 4,
+      "vendor": "AuthenticAMD"
+    },
+    "approved_target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+    "passed": true,
+    "schema": "FAMILY10H_RELATION_LIFETIME_SENSOR_AUTHORITY_BINDING_V1",
+    "sensor_authority_binding_sha256": "eb7b71d19a0c2e8d384d43bb6d84a30bd3a7a7c50d0c77322da9482e75547cb8",
+    "source_authority_file": "family10h_carrier_tomography_v1\\CARRIER_TOMOGRAPHY_TEMPERATURE_SENSOR_AUTHORITY.json",
+    "source_authority_file_sha256": "f11b996b8843a5636d769c5d0573c0dc771fe01af0c4178e55b444df6e724c57",
+    "temperature_sensor_authority_sha256": "72ab7571611259b1844aacb808ab39b8549369b1e3e1baa23b16b33d2e5a0a0f",
+    "unlabeled_legacy_temp1_input_approved": true
+  },
+  "source_authority_regression_tests": {
+    "passed": true,
+    "results": {
+      "descendant_commit_used_as_source_authority": {
+        "checks": {
+          "freeze_commit_exists": true,
+          "source_authority_ancestor_of_freeze": false,
+          "source_authority_commit_exists": true,
+          "source_authority_not_scalar_evidence": true,
+          "source_authority_sha_syntax": true,
+          "source_bundle_matches_authority": true,
+          "source_tree_matches_bound_hashes": true,
+          "worktree_source_matches_authority": true
+        },
+        "failures": [
+          "relation source authority is not an ancestor of the manifest freeze commit"
+        ],
+        "passed": true,
+        "validation_passed": false
+      },
+      "incorrect_expected_source_hashes": {
+        "checks": {
+          "freeze_commit_exists": true,
+          "source_authority_ancestor_of_freeze": true,
+          "source_authority_commit_exists": true,
+          "source_authority_not_scalar_evidence": true,
+          "source_authority_sha_syntax": true,
+          "source_bundle_matches_authority": true,
+          "source_tree_matches_bound_hashes": false,
+          "worktree_source_matches_authority": true
+        },
+        "failures": [
+          "source authority tree hash mismatch: RELATION_LIFETIME_CONTRACT.md"
+        ],
+        "passed": true,
+        "validation_passed": false
+      },
+      "nonexistent_syntactically_valid_sha": {
+        "checks": {
+          "freeze_commit_exists": true,
+          "source_authority_ancestor_of_freeze": false,
+          "source_authority_commit_exists": false,
+          "source_authority_not_scalar_evidence": true,
+          "source_authority_sha_syntax": true,
+          "source_bundle_matches_authority": false,
+          "source_tree_matches_bound_hashes": false,
+          "worktree_source_matches_authority": false
+        },
+        "failures": [
+          "relation source authority commit does not resolve"
+        ],
+        "passed": true,
+        "validation_passed": false
+      },
+      "one_character_sha_typo": {
+        "checks": {
+          "freeze_commit_exists": true,
+          "source_authority_ancestor_of_freeze": false,
+          "source_authority_commit_exists": false,
+          "source_authority_not_scalar_evidence": true,
+          "source_authority_sha_syntax": true,
+          "source_bundle_matches_authority": false,
+          "source_tree_matches_bound_hashes": false,
+          "worktree_source_matches_authority": false
+        },
+        "failures": [
+          "relation source authority commit does not resolve"
+        ],
+        "passed": true,
+        "validation_passed": false
+      },
+      "real_but_wrong_source_tree_commit": {
+        "checks": {
+          "freeze_commit_exists": true,
+          "source_authority_ancestor_of_freeze": true,
+          "source_authority_commit_exists": true,
+          "source_authority_not_scalar_evidence": true,
+          "source_authority_sha_syntax": true,
+          "source_bundle_matches_authority": false,
+          "source_tree_matches_bound_hashes": false,
+          "worktree_source_matches_authority": false
+        },
+        "failures": [
+          "source authority tree hash mismatch: run_relation_lifetime_twin.py",
+          "source file changed after source authority commit: run_relation_lifetime_twin.py",
+          "source bundle member mismatch: run_relation_lifetime_twin.py"
+        ],
+        "passed": true,
+        "validation_passed": false
+      },
+      "scalar_evidence_commit_used_as_relation_authority": {
+        "checks": {
+          "freeze_commit_exists": true,
+          "source_authority_ancestor_of_freeze": true,
+          "source_authority_commit_exists": true,
+          "source_authority_not_scalar_evidence": false,
+          "source_authority_sha_syntax": true,
+          "source_bundle_matches_authority": false,
+          "source_tree_matches_bound_hashes": false,
+          "worktree_source_matches_authority": false
+        },
+        "failures": [
+          "relation source authority reuses scalar evidence provenance commit",
+          "source authority tree missing relation_lifetime_public.py",
+          "source authority tree missing relation_lifetime_adjudication.py",
+          "source authority tree missing relation_lifetime_physical_adjudication.py",
+          "source authority tree missing relation_lifetime_runtime.c",
+          "source authority tree missing relation_lifetime_runtime.h",
+          "source authority tree missing relation_lifetime_pmu_preflight.c",
+          "source authority tree missing relation_lifetime_target.py",
+          "source authority tree missing relation_lifetime_live_controller.py",
+          "source authority tree missing run_relation_lifetime_twin.py",
+          "source authority tree missing RELATION_LIFETIME_CONTRACT.md"
+        ],
+        "passed": true,
+        "validation_passed": false
+      },
+      "source_bundle_not_matching_source_authority_tree": {
+        "checks": {
+          "freeze_commit_exists": true,
+          "source_authority_ancestor_of_freeze": true,
+          "source_authority_commit_exists": true,
+          "source_authority_not_scalar_evidence": true,
+          "source_authority_sha_syntax": true,
+          "source_bundle_matches_authority": false,
+          "source_tree_matches_bound_hashes": true,
+          "worktree_source_matches_authority": true
+        },
+        "expected_member_mismatch": "source bundle member mismatch: RELATION_LIFETIME_CONTRACT.md",
+        "failures": [
+          "source bundle member mismatch: RELATION_LIFETIME_CONTRACT.md"
+        ],
+        "mutated_member": "RELATION_LIFETIME_CONTRACT.md",
+        "passed": true,
+        "validation_passed": false
+      },
+      "source_file_changed_after_source_authority_commit": {
+        "checks": {
+          "freeze_commit_exists": true,
+          "source_authority_ancestor_of_freeze": true,
+          "source_authority_commit_exists": true,
+          "source_authority_not_scalar_evidence": true,
+          "source_authority_sha_syntax": true,
+          "source_bundle_matches_authority": false,
+          "source_tree_matches_bound_hashes": false,
+          "worktree_source_matches_authority": false
+        },
+        "failures": [
+          "source authority tree hash mismatch: run_relation_lifetime_twin.py",
+          "source file changed after source authority commit: run_relation_lifetime_twin.py",
+          "source bundle member mismatch: run_relation_lifetime_twin.py"
+        ],
+        "passed": true,
+        "validation_passed": false
+      }
+    },
+    "schema": "FAMILY10H_RELATION_LIFETIME_SOURCE_AUTHORITY_REGRESSION_TESTS_V1"
+  },
+  "source_bundle": {
+    "members": [
+      "RELATION_LIFETIME_CONTRACT.md",
+      "relation_lifetime_adjudication.py",
+      "relation_lifetime_live_controller.py",
+      "relation_lifetime_physical_adjudication.py",
+      "relation_lifetime_pmu_preflight.c",
+      "relation_lifetime_public.py",
+      "relation_lifetime_runtime.c",
+      "relation_lifetime_runtime.h",
+      "relation_lifetime_target.py",
+      "run_relation_lifetime_twin.py"
+    ],
+    "path": "RELATION_LIFETIME_SOURCE_BUNDLE.tar.gz",
+    "sha256": "363eb07e368d3bdcbfacd3c34acc093fed8aeb8151eaa4782819640b4aecd04b"
+  }
+}

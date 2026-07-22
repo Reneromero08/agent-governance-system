@@ -1,0 +1,434 @@
+{
+  "blockers": [],
+  "compile_attempted": true,
+  "compile_command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu",
+    "--",
+    "/usr/bin/gcc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-O2",
+    "-g",
+    "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime.c",
+    "-o",
+    "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime"
+  ],
+  "compile_returncode": 0,
+  "compile_stderr": "",
+  "compile_stdout": "",
+  "compiler": {
+    "available": true,
+    "compiler": "gcc",
+    "distro": "Ubuntu",
+    "environment": "wsl",
+    "headers": {
+      "linux_perf_event_h": "present",
+      "sched_h": "present"
+    },
+    "machine": "x86_64",
+    "path": "/usr/bin/gcc",
+    "suitability": "target_compatible_linux_binary_authority",
+    "target_triple": "x86_64-linux-gnu",
+    "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+    "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+  },
+  "control_flow_audit": {
+    "checks": {
+      "both_relations_enter_same_prepare_primary_loop": true,
+      "objdump_completed": true,
+      "pmu_enable_disable_in_executor": true,
+      "pmu_read_in_executor": true,
+      "prepare_primary_has_no_relation_map_call": true,
+      "prepare_primary_has_no_table_selection_call": true,
+      "prepare_primary_symbol_present": true,
+      "query_primary_has_no_relation_map_call": true,
+      "query_primary_has_no_table_selection_call": true,
+      "query_primary_symbol_present": true,
+      "query_uses_preselected_table_entrypoint": true,
+      "source_process_boundary_in_executor": true,
+      "table_selection_before_query_entrypoint": true
+    },
+    "command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu",
+      "--",
+      "objdump",
+      "-d",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime"
+    ],
+    "control_flow_audit_sha256": "c1c48f4c0aad370692c99699a943ee4ca353627075f6d841f74d5ec366bb29f1",
+    "function_body_line_counts": {
+      "execute_query_for_row": 69,
+      "execute_schedule_common": 1946,
+      "relation_lifetime_prepare": 34,
+      "relation_lifetime_prepare_primary": 34,
+      "relation_lifetime_query_primary": 37,
+      "relation_lifetime_query_with_table": 26
+    },
+    "passed": true,
+    "returncode": 0,
+    "schema": "FAMILY10H_RELATION_LIFETIME_RUNTIME_CONTROL_FLOW_AUDIT_V1",
+    "stderr": ""
+  },
+  "implementation_gates": {
+    "all_physical_controls_implemented": true,
+    "delay_enforcement_implemented": true,
+    "dirty_probe_primary_endpoint_implemented": true,
+    "distance_control_implemented": true,
+    "feature_freeze_output_implemented": true,
+    "fresh_carrier_per_tuple_implemented": true,
+    "hot_loop_relation_branch_free": true,
+    "independent_marginal_replay_control_implemented": true,
+    "missing_authority_refusal_passed": true,
+    "placeholder_reserved_executor_removed": true,
+    "pmu_group_open_implemented": true,
+    "pmu_group_read_implemented": true,
+    "pmu_preflight_helper_compiles": true,
+    "pmu_preflight_helper_no_acquisition": true,
+    "pmu_preflight_helper_self_test_passes": true,
+    "prefault_implemented": true,
+    "query_order_control_implemented": true,
+    "raw_record_output_implemented": true,
+    "receiver_cpu_pinning_implemented": true,
+    "relation_sham_control_implemented": true,
+    "route_pressure_sham_control_implemented": true,
+    "runtime_control_flow_audit_passed": true,
+    "runtime_raw_schema_matches_physical_validator": true,
+    "runtime_schedule_executor_implemented": true,
+    "runtime_schedule_parser_implemented": true,
+    "runtime_self_test_passes": true,
+    "runtime_source_compiles_for_target_linux": true,
+    "source_cpu_pinning_implemented": true,
+    "source_death_receipt_implemented": true,
+    "source_lifetime_factor_implemented": true,
+    "source_order_control_implemented": true,
+    "source_process_boundary_implemented": true,
+    "synthetic_executor_complete_schedule_passed": true,
+    "target_execution_receipt_implemented": true,
+    "target_linux_binary_bound_to_source": true
+  },
+  "live_activity": false,
+  "missing_authority_refusal": {
+    "passed": true,
+    "returncode": 13,
+    "stderr": "",
+    "stdout": ""
+  },
+  "passed": true,
+  "pmu_opened": false,
+  "pmu_preflight_helper": {
+    "blockers": [],
+    "compile_attempted": true,
+    "compile_command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/usr/bin/gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2",
+      "-g",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight.c",
+      "-o",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight"
+    ],
+    "compile_returncode": 0,
+    "compile_stderr": "",
+    "compile_stdout": "",
+    "enabled_measurement_interval": false,
+    "helper_binary_authority": {
+      "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "compile_status": "compiled_target_compatible_linux_binary",
+      "compiled_binary_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-g"
+      ],
+      "compiler_identity": {
+        "available": true,
+        "compiler": "gcc",
+        "distro": "Ubuntu",
+        "environment": "wsl",
+        "headers": {
+          "linux_perf_event_h": "present",
+          "sched_h": "present"
+        },
+        "machine": "x86_64",
+        "path": "/usr/bin/gcc",
+        "suitability": "target_compatible_linux_binary_authority",
+        "target_triple": "x86_64-linux-gnu",
+        "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+        "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+      },
+      "helper_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+      "path": "relation_lifetime_pmu_preflight",
+      "present": true,
+      "size": 42744
+    },
+    "helper_build_sha256": "08cb74c45299f5a8b6616948cc34c6ffe49fd8d12e2a746ea448203d41bccbf8",
+    "parsed_self_test": {
+      "enabled_measurement_interval": false,
+      "events": {
+        "cache_block_commands_change_to_dirty": {
+          "event": "0xea",
+          "umask": "0x20"
+        },
+        "cpu_cycles_not_halted": {
+          "event": "0x76",
+          "umask": "0x00"
+        },
+        "probe_responses_dirty": {
+          "event": "0xec",
+          "umask": "0x0c"
+        }
+      },
+      "live_activity": false,
+      "negative_regressions": {
+        "enable_attempt": true,
+        "incorrect_structure_size": true,
+        "leaked_descriptor": true,
+        "malformed_event_identity": true,
+        "missing_event": true,
+        "partial_group_open": true,
+        "read_attempt": true
+      },
+      "passed": true,
+      "perf_event_attr_size": 112,
+      "pmu_acquisition_count": 0,
+      "pmu_close_count": 0,
+      "pmu_open_count": 0,
+      "schema": "FAMILY10H_RELATION_LIFETIME_PMU_PREFLIGHT_HELPER_SELF_TEST_V1",
+      "scientific_data_collected": false,
+      "uses_system_perf_event_attr": true
+    },
+    "passed": true,
+    "pmu_acquisition_count": 0,
+    "regression_checks": {
+      "enable_attempt": true,
+      "incorrect_structure_size": true,
+      "leaked_descriptor": true,
+      "malformed_event_identity": true,
+      "missing_event": true,
+      "partial_group_open": true,
+      "read_attempt": true
+    },
+    "schema": "FAMILY10H_RELATION_LIFETIME_PMU_PREFLIGHT_HELPER_BUILD_V1",
+    "scientific_data_collected": false,
+    "self_test": {
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--",
+        "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight",
+        "--self-test"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"schema\":\"FAMILY10H_RELATION_LIFETIME_PMU_PREFLIGHT_HELPER_SELF_TEST_V1\",\"passed\":true,\"events\":{\"cpu_cycles_not_halted\":{\"event\":\"0x76\",\"umask\":\"0x00\"},\"cache_block_commands_change_to_dirty\":{\"event\":\"0xea\",\"umask\":\"0x20\"},\"probe_responses_dirty\":{\"event\":\"0xec\",\"umask\":\"0x0c\"}},\"perf_event_attr_size\":112,\"uses_system_perf_event_attr\":true,\"pmu_open_count\":0,\"pmu_close_count\":0,\"pmu_acquisition_count\":0,\"enabled_measurement_interval\":false,\"scientific_data_collected\":false,\"negative_regressions\":{\"malformed_event_identity\":true,\"partial_group_open\":true,\"leaked_descriptor\":true,\"enable_attempt\":true,\"read_attempt\":true,\"incorrect_structure_size\":true,\"missing_event\":true},\"live_activity\":false}\n",
+      "timed_out": false
+    },
+    "self_test_command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight",
+      "--self-test"
+    ],
+    "source": "relation_lifetime_pmu_preflight.c",
+    "source_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef"
+  },
+  "runtime_binary_authority": {
+    "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e9bd4f4c67ff39d6eb85a3503407cbb912851044, for GNU/Linux 3.2.0, with debug_info, not stripped",
+    "compile_status": "compiled_target_compatible_linux_binary",
+    "compiled_binary_sha256": "10db6d521c29f7253b0e5a34d040a73bab5df75eb08d310205ecb9df8e9c62ef",
+    "compiler_flags": [
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2",
+      "-g"
+    ],
+    "compiler_identity": {
+      "available": true,
+      "compiler": "gcc",
+      "distro": "Ubuntu",
+      "environment": "wsl",
+      "headers": {
+        "linux_perf_event_h": "present",
+        "sched_h": "present"
+      },
+      "machine": "x86_64",
+      "path": "/usr/bin/gcc",
+      "suitability": "target_compatible_linux_binary_authority",
+      "target_triple": "x86_64-linux-gnu",
+      "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+      "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+    },
+    "path": "relation_lifetime_runtime",
+    "pmu_preflight_helper_authority": {
+      "binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "compile_status": "compiled_target_compatible_linux_binary",
+      "compiled_binary_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+      "compiler_flags": [
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-g"
+      ],
+      "compiler_identity": {
+        "available": true,
+        "compiler": "gcc",
+        "distro": "Ubuntu",
+        "environment": "wsl",
+        "headers": {
+          "linux_perf_event_h": "present",
+          "sched_h": "present"
+        },
+        "machine": "x86_64",
+        "path": "/usr/bin/gcc",
+        "suitability": "target_compatible_linux_binary_authority",
+        "target_triple": "x86_64-linux-gnu",
+        "uname": "Linux ASSFACE3000 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+        "version": "gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0"
+      },
+      "helper_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+      "path": "relation_lifetime_pmu_preflight",
+      "present": true,
+      "size": 42744
+    },
+    "present": true,
+    "runtime_c_sha256": "8452f547eba460b4e167b35227c04d24ebd5315f1f03e10099af28c1aa3a28c9",
+    "runtime_h_sha256": "007a054aa2405e91dcc2f9621806eb99efd6dd79a8aeaba47a85934d62c63e93",
+    "size": 132680
+  },
+  "runtime_build_sha256": "3665cba6780a83883bf720209f77dd1c61222b3f6257c8874c3436f9fc56a1bc",
+  "runtime_self_test": {
+    "command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime",
+      "--self-test"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"schema\":\"FAMILY10H_RELATION_LIFETIME_RUNTIME_SELF_TEST_V2\",\"passed\":true,\"pmu_opened\":false,\"live_activity\":false,\"physical_measurement\":false}\n",
+    "timed_out": false
+  },
+  "schema": "FAMILY10H_RELATION_LIFETIME_RUNTIME_BUILD_SELF_TEST_V2",
+  "static_inspection": {
+    "gate_policy": "readiness gates are derived from compile, execution, disassembly, fixtures, and exact hash comparisons",
+    "gates": {},
+    "pmu_preflight_helper_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+    "runtime_c_sha256": "8452f547eba460b4e167b35227c04d24ebd5315f1f03e10099af28c1aa3a28c9",
+    "runtime_h_sha256": "007a054aa2405e91dcc2f9621806eb99efd6dd79a8aeaba47a85934d62c63e93",
+    "schema": "FAMILY10H_RELATION_LIFETIME_RUNTIME_SOURCE_INVENTORY_V1",
+    "target_py_sha256": "297d2d5d7c6d4d9da6055cbdb27a709939af3c09d19f58b2f00d1a59ce197cf4"
+  },
+  "synthetic_executor_self_test": {
+    "command": [
+      "wsl.exe",
+      "-d",
+      "Ubuntu",
+      "--",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime",
+      "--synthetic-execute-schedule",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/RELATION_LIFETIME_PUBLIC_SCHEDULE.tsv",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/_relation_lifetime_synthetic_executor_self_test_output"
+    ],
+    "execution_receipt": {
+      "feature_freeze_written": true,
+      "live_activity": false,
+      "physical_measurement": false,
+      "pmu_opened": false,
+      "raw_record_count": 21504,
+      "returncode": 0,
+      "schema": "FAMILY10H_RELATION_LIFETIME_SYNTHETIC_EXECUTOR_PACKET_V1",
+      "small_wall_crossed": false,
+      "source_death_receipt_count": 21504,
+      "status": "complete"
+    },
+    "feature_freeze": {
+      "physical_measurement": false,
+      "post_observation_feature_selection": false,
+      "primary_endpoint": "dirty_probe_response",
+      "raw_record_count": 21504,
+      "schedule_path": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/RELATION_LIFETIME_PUBLIC_SCHEDULE.tsv",
+      "schedule_sha256": "377450bb1f7a735ee326ed64b9bd691b8a4c7fe87a46214a4cb1ae3ee400a405",
+      "schema": "FAMILY10H_RELATION_LIFETIME_FEATURE_FREEZE_V1",
+      "secondary_endpoints": [
+        "change_to_dirty",
+        "cpu_cycles",
+        "duration_ns"
+      ]
+    },
+    "feature_freeze_written": true,
+    "passed": true,
+    "raw_record_count": 21504,
+    "raw_schema_validation": {
+      "expected_row_count": 21504,
+      "first_missing_fields": [],
+      "first_schedule_mismatches": [],
+      "missing_field_count": 0,
+      "passed": true,
+      "raw_record_count": 21504,
+      "required_extra_fields": [
+        "pmu_event_group",
+        "pmu_events",
+        "event_ids",
+        "change_to_dirty",
+        "dirty_probe_response",
+        "cpu_cycles",
+        "duration_ns",
+        "time_enabled",
+        "time_running",
+        "source_cpu_before",
+        "source_cpu_after",
+        "receiver_cpu_before",
+        "receiver_cpu_after",
+        "process_custody",
+        "query_hash",
+        "physical_measurement",
+        "positive_physical_claim"
+      ],
+      "schedule_field_count": 52,
+      "schedule_mismatch_count": 0,
+      "schema": "FAMILY10H_RELATION_LIFETIME_RUNTIME_RAW_SCHEMA_INTEGRATION_V1",
+      "schema_equivalent_validator": {
+        "custody_required": false,
+        "expected_physical_measurement": false,
+        "failures": [],
+        "passed": true,
+        "raw_record_count": 21504,
+        "source_death_receipt_count": 21504
+      },
+      "source_death_receipt_count": 21504,
+      "synthetic_positive_claim_absent": true,
+      "synthetic_records_marked_nonphysical": true
+    },
+    "returncode": 0,
+    "source_death_receipt_count": 21504,
+    "stderr": "",
+    "stdout": ""
+  },
+  "toolchain_discovery_sha256": "8a047b0bee6b5d6d79f274f92c46d0f7defc4966a70b46555bc57a7d57286880",
+  "warnings_as_errors": true
+}

@@ -1,0 +1,87 @@
+{
+  "command": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu",
+    "--",
+    "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime",
+    "--synthetic-execute-schedule",
+    "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/RELATION_LIFETIME_PUBLIC_SCHEDULE.tsv",
+    "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/_relation_lifetime_synthetic_executor_self_test_output"
+  ],
+  "execution_receipt": {
+    "feature_freeze_written": true,
+    "live_activity": false,
+    "physical_measurement": false,
+    "pmu_opened": false,
+    "raw_record_count": 21504,
+    "returncode": 0,
+    "schema": "FAMILY10H_RELATION_LIFETIME_SYNTHETIC_EXECUTOR_PACKET_V1",
+    "small_wall_crossed": false,
+    "source_death_receipt_count": 21504,
+    "status": "complete"
+  },
+  "feature_freeze": {
+    "physical_measurement": false,
+    "post_observation_feature_selection": false,
+    "primary_endpoint": "dirty_probe_response",
+    "raw_record_count": 21504,
+    "schedule_path": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/RELATION_LIFETIME_PUBLIC_SCHEDULE.tsv",
+    "schedule_sha256": "377450bb1f7a735ee326ed64b9bd691b8a4c7fe87a46214a4cb1ae3ee400a405",
+    "schema": "FAMILY10H_RELATION_LIFETIME_FEATURE_FREEZE_V1",
+    "secondary_endpoints": [
+      "change_to_dirty",
+      "cpu_cycles",
+      "duration_ns"
+    ]
+  },
+  "feature_freeze_written": true,
+  "passed": true,
+  "raw_record_count": 21504,
+  "raw_schema_validation": {
+    "expected_row_count": 21504,
+    "first_missing_fields": [],
+    "first_schedule_mismatches": [],
+    "missing_field_count": 0,
+    "passed": true,
+    "raw_record_count": 21504,
+    "required_extra_fields": [
+      "pmu_event_group",
+      "pmu_events",
+      "event_ids",
+      "change_to_dirty",
+      "dirty_probe_response",
+      "cpu_cycles",
+      "duration_ns",
+      "time_enabled",
+      "time_running",
+      "source_cpu_before",
+      "source_cpu_after",
+      "receiver_cpu_before",
+      "receiver_cpu_after",
+      "process_custody",
+      "query_hash",
+      "physical_measurement",
+      "positive_physical_claim"
+    ],
+    "schedule_field_count": 52,
+    "schedule_mismatch_count": 0,
+    "schema": "FAMILY10H_RELATION_LIFETIME_RUNTIME_RAW_SCHEMA_INTEGRATION_V1",
+    "schema_equivalent_validator": {
+      "custody_required": false,
+      "expected_physical_measurement": false,
+      "failures": [],
+      "passed": true,
+      "raw_record_count": 21504,
+      "source_death_receipt_count": 21504
+    },
+    "source_death_receipt_count": 21504,
+    "synthetic_positive_claim_absent": true,
+    "synthetic_records_marked_nonphysical": true
+  },
+  "returncode": 0,
+  "schema": "FAMILY10H_RELATION_LIFETIME_SYNTHETIC_EXECUTOR_SELF_TEST_RECEIPT_V1",
+  "source_death_receipt_count": 21504,
+  "stderr": "",
+  "stdout": ""
+}
