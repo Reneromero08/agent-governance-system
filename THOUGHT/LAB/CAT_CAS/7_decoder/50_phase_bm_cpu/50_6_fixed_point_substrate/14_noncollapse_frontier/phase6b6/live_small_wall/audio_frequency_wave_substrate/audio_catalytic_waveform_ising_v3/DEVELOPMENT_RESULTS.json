@@ -100,6 +100,11 @@
       "antipodal sign extraction"
     ],
     "claim_ceiling": "BOUNDED_SOFTWARE_RECURSIVE_SPECTRAL_PHASE_REFERENCE_ONLY",
+    "execution_environment": {
+      "numpy_version": "1.26.4",
+      "python_implementation": "CPython",
+      "python_version": "3.11.6"
+    },
     "law": {
       "geometry_coherence_min": 0.999999999,
       "maximum_abs_coupling": 2.0,
@@ -119,7 +124,7 @@
     "sample_count": 256,
     "site_count": 5
   },
-  "machine_fingerprint": "f5945cc9e984da0e18a56002e8a4b664291d48d98adf1719e8038c9538c4a87f",
+  "machine_fingerprint": "650a4bed41d19f860aac8e577f92a21ea761bf9255a803e23d18058b205faa97",
   "records": [
     {
       "accepted": true,
@@ -4555,6 +4560,7 @@
     "known_failure_count_before_v3": 10,
     "known_failures_remaining": 0,
     "maximum_restoration_error": 1.05107638369e-15,
+    "maximum_reuse_response_delta_l2": 7.79592343115e-14,
     "maximum_reuse_restoration_error": 1.66708279878e-15,
     "minimum_unique_mode_gap": 1.0,
     "minimum_unique_response_coherence": 0.980352618836,

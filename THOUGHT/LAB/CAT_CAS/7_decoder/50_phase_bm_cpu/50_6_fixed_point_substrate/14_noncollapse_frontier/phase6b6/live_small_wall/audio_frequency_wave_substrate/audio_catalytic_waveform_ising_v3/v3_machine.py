@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import json
 import math
+import platform
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -39,6 +40,7 @@ GEOMETRY_SAMPLES = np.asarray(
     dtype=np.int64,
 )
 RESTORATION_MAX = 2.0e-12
+REUSE_RESPONSE_MAX = 1.0e-12
 WRONG_RESTORATION_MIN = 1.0e-3
 DISPLACEMENT_MIN = 1.0
 MATERIALITY_MIN = 1.0e-3
@@ -264,6 +266,7 @@ def relational_phase_operator(
     enabled = np.asarray(relation_enabled, dtype=np.bool_)
     if enabled.shape != (SITE_COUNT, SITE_COUNT):
         raise ValueError("relation enable map has the wrong shape")
+    reference_anchors = geometry_anchors(canonical_geometry())
     active = normalized_active(current)
     for left in range(SITE_COUNT):
         for right in range(left + 1, SITE_COUNT):
@@ -272,8 +275,8 @@ def relational_phase_operator(
             relation = (
                 active[left]
                 * np.conjugate(active[right])
-                * np.conjugate(anchors[left])
-                * anchors[right]
+                * np.conjugate(reference_anchors[left])
+                * reference_anchors[right]
             )
             alignment = np.real(relation)
             strength = float(coupling[left, right])
@@ -288,9 +291,13 @@ def relational_phase_operator(
     for site in range(SITE_COUNT):
         if field[site] == 0.0:
             continue
-        merit, _ = common_merit_phase(current, anchors)
+        merit, _ = common_merit_phase(current, reference_anchors)
         active = normalized_active(current)
-        local_orientation = active[site] * np.conjugate(anchors[site]) * np.conjugate(merit)
+        local_orientation = (
+            active[site]
+            * np.conjugate(reference_anchors[site])
+            * np.conjugate(merit)
+        )
         alignment = np.real(local_orientation)
         strength = float(field[site])
         penalty = abs(strength) - strength * alignment
@@ -434,6 +441,14 @@ def maximum_abs_error(left: np.ndarray, right: np.ndarray) -> float:
     return float(np.max(np.abs(np.asarray(left) - np.asarray(right))))
 
 
+def execution_environment() -> dict[str, str]:
+    return {
+        "numpy_version": np.__version__,
+        "python_implementation": platform.python_implementation(),
+        "python_version": platform.python_version(),
+    }
+
+
 def machine_contract(law: SpectralPhaseLaw = DEFAULT_LAW) -> dict[str, Any]:
     return {
         "active_frequency_bins": [int(value) for value in ACTIVE_BINS],
@@ -444,6 +459,7 @@ def machine_contract(law: SpectralPhaseLaw = DEFAULT_LAW) -> dict[str, Any]:
             "antipodal sign extraction",
         ],
         "claim_ceiling": CLAIM_CEILING,
+        "execution_environment": execution_environment(),
         "law": {key: metric(value) for key, value in asdict(law).items()},
         "mode_count": MODE_COUNT,
         "native_relations": [

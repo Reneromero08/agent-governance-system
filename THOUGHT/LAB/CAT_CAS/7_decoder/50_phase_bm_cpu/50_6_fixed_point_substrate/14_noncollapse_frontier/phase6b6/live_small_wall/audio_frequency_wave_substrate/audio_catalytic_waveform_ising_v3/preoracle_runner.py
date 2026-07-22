@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -21,15 +22,6 @@ BATCH_FILE = PACKAGE_DIR / "V3_BATCH_CUSTODY.json"
 EVIDENCE_FILE = PACKAGE_DIR / "V3_PREORACLE_EVIDENCE.json"
 TRACE_FILE = PACKAGE_DIR / "V3_PREORACLE_TRACE.json"
 SEAL_FILE = PACKAGE_DIR / "V3_PREORACLE_SEAL.json"
-
-FREEZE_COMMIT = "854c39c9c7a8321b4ff2ff0556f3a17111536f94"
-EXPECTED_MACHINE_FINGERPRINT = (
-    "f5945cc9e984da0e18a56002e8a4b664291d48d98adf1719e8038c9538c4a87f"
-)
-EXPECTED_BATCH_SHA256 = (
-    "0e6ee2935dd5472acb94d0fa27b283bb439cc6e002f64059dc5d79c372c11bf7"
-)
-
 
 def load_module(path: Path, name: str) -> Any:
     specification = importlib.util.spec_from_file_location(name, path)
@@ -57,6 +49,30 @@ def sha256_bytes(payload: bytes) -> str:
 
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def problem_sha256(coupling: np.ndarray, field: np.ndarray) -> str:
+    return sha256_bytes(
+        canonical_bytes(
+            {
+                "coupling_matrix_J": np.asarray(
+                    coupling, dtype=np.float64
+                ).tolist(),
+                "field_vector_h": np.asarray(field, dtype=np.float64).tolist(),
+            }
+        )
+    )
+
+
+def current_head() -> str:
+    completed = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=PACKAGE_DIR,
+        capture_output=True,
+        check=True,
+        text=True,
+    )
+    return completed.stdout.strip()
 
 
 def metric(value: float) -> float:
@@ -96,18 +112,33 @@ class EventLedger:
 def load_frozen() -> tuple[dict[str, Any], dict[str, Any]]:
     freeze = json.loads(FREEZE_FILE.read_text(encoding="utf-8"))
     batch = json.loads(BATCH_FILE.read_text(encoding="utf-8"))
-    if freeze["machine_fingerprint"] != EXPECTED_MACHINE_FINGERPRINT:
-        raise RuntimeError("frozen machine fingerprint mismatch")
-    if machine.machine_fingerprint() != EXPECTED_MACHINE_FINGERPRINT:
+    if machine.machine_fingerprint() != freeze["machine_fingerprint"]:
         raise RuntimeError("executing machine differs from freeze")
     if freeze["machine_source_sha256"] != sha256_file(MACHINE_SOURCE):
         raise RuntimeError("machine source differs from freeze")
-    if freeze["batch_ordered_sha256"] != EXPECTED_BATCH_SHA256:
-        raise RuntimeError("freeze binds a different batch")
-    if batch["ordered_batch_sha256"] != EXPECTED_BATCH_SHA256:
+    if freeze["batch_file_sha256"] != sha256_file(BATCH_FILE):
+        raise RuntimeError("batch file bytes differ from freeze")
+    if batch["ordered_batch_sha256"] != freeze["batch_ordered_sha256"]:
         raise RuntimeError("batch custody hash mismatch")
     if len(batch["ordered_instances"]) != 256:
         raise RuntimeError("prospective batch is incomplete")
+    identities: list[str] = []
+    for expected_index, record in enumerate(batch["ordered_instances"]):
+        if int(record["index"]) != expected_index:
+            raise RuntimeError("prospective batch index mismatch")
+        identity = problem_sha256(
+            np.asarray(record["coupling_matrix_J"], dtype=np.float64),
+            np.asarray(record["field_vector_h"], dtype=np.float64),
+        )
+        if identity != record["problem_sha256"]:
+            raise RuntimeError("prospective problem identity mismatch")
+        identities.append(identity)
+    ordered = sha256_bytes(canonical_bytes(identities))
+    if ordered != freeze["batch_ordered_sha256"]:
+        raise RuntimeError("prospective ordered identity hash mismatch")
+    for name, expected_sha in freeze["execution_source_sha256"].items():
+        if sha256_file(PACKAGE_DIR / name) != expected_sha:
+            raise RuntimeError(f"frozen execution source drift: {name}")
     return freeze, batch
 
 
@@ -176,8 +207,12 @@ def execute_instance(
     }
 
 
-def build_documents() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+def build_documents(
+    freeze_commit: str,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     freeze, batch = load_frozen()
+    expected_machine_fingerprint = freeze["machine_fingerprint"]
+    expected_batch_sha256 = freeze["batch_ordered_sha256"]
     calls = {"energy": 0, "oracle": 0}
     original_energy = machine.v2.ising_energy
     original_oracle = machine.v2.exact_oracle
@@ -199,9 +234,9 @@ def build_documents() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     ledger.add(
         "remote_freeze_custody",
         {
-            "batch_ordered_sha256": EXPECTED_BATCH_SHA256,
-            "freeze_commit": FREEZE_COMMIT,
-            "machine_fingerprint": EXPECTED_MACHINE_FINGERPRINT,
+            "batch_ordered_sha256": expected_batch_sha256,
+            "freeze_commit": freeze_commit,
+            "machine_fingerprint": expected_machine_fingerprint,
         },
     )
     try:
@@ -251,10 +286,10 @@ def build_documents() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
         "uninterpretable_count": sum(record["uninterpretable"] for record in instances),
     }
     evidence = {
-        "batch_ordered_sha256": EXPECTED_BATCH_SHA256,
-        "freeze_commit": FREEZE_COMMIT,
+        "batch_ordered_sha256": expected_batch_sha256,
+        "freeze_commit": freeze_commit,
         "instances": instances,
-        "machine_fingerprint": EXPECTED_MACHINE_FINGERPRINT,
+        "machine_fingerprint": expected_machine_fingerprint,
         "oracle_opened": False,
         "schema": "catalytic_waveform_ising_v3_preoracle_evidence_v1",
         "summary": summary,
@@ -264,11 +299,11 @@ def build_documents() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     evidence_bytes = canonical_bytes(evidence)
     trace_bytes = canonical_bytes(trace)
     seal = {
-        "batch_ordered_sha256": EXPECTED_BATCH_SHA256,
+        "batch_ordered_sha256": expected_batch_sha256,
         "energy_call_count": calls["energy"],
         "evidence_sha256": sha256_bytes(evidence_bytes),
-        "freeze_commit": FREEZE_COMMIT,
-        "machine_fingerprint": EXPECTED_MACHINE_FINGERPRINT,
+        "freeze_commit": freeze_commit,
+        "machine_fingerprint": expected_machine_fingerprint,
         "oracle_call_count": calls["oracle"],
         "schema": "catalytic_waveform_ising_v3_preoracle_seal_v1",
         "trace_sha256": sha256_bytes(trace_bytes),
@@ -283,7 +318,7 @@ def write_atomic(path: Path, payload: bytes) -> None:
 
 
 def build() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
-    evidence, trace, seal = build_documents()
+    evidence, trace, seal = build_documents(current_head())
     write_atomic(EVIDENCE_FILE, canonical_bytes(evidence))
     write_atomic(TRACE_FILE, canonical_bytes(trace))
     write_atomic(SEAL_FILE, canonical_bytes(seal))
@@ -291,7 +326,8 @@ def build() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
 
 
 def verify() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
-    evidence, trace, seal = build_documents()
+    committed_seal = json.loads(SEAL_FILE.read_text(encoding="utf-8"))
+    evidence, trace, seal = build_documents(committed_seal["freeze_commit"])
     if EVIDENCE_FILE.read_bytes() != canonical_bytes(evidence):
         raise ValueError("V3 pre-oracle evidence does not reproduce")
     if TRACE_FILE.read_bytes() != canonical_bytes(trace):

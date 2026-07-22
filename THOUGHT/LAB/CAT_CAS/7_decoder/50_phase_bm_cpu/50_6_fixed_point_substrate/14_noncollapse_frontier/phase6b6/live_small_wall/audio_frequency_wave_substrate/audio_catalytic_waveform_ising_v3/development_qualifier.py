@@ -225,6 +225,8 @@ def build_document() -> dict[str, Any]:
             ),
             "all_reuse_pass": all(
                 record["valid_reproduced_on_reuse"]
+                and record["response_reuse_delta_l2"]
+                <= machine.REUSE_RESPONSE_MAX
                 and record["reuse_restoration_max_abs_error"] <= machine.RESTORATION_MAX
                 for record in records
             ),
@@ -239,6 +241,9 @@ def build_document() -> dict[str, Any]:
             ),
             "maximum_reuse_restoration_error": metric(
                 max(record["reuse_restoration_max_abs_error"] for record in records)
+            ),
+            "maximum_reuse_response_delta_l2": metric(
+                max(record["response_reuse_delta_l2"] for record in records)
             ),
             "minimum_unique_mode_gap": metric(
                 min(

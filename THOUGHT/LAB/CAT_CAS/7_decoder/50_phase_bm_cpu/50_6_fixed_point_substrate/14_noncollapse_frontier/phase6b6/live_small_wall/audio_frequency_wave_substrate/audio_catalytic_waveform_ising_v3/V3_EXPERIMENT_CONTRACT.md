@@ -58,3 +58,21 @@ oracle calls before pre-oracle seal         0
 
 If these conditions pass, the bounded V3 result may be verified. Failure does not
 alter V2 or any predecessor result.
+
+## Repaired geometry and reproduction law
+
+The live spectral modes are compared against the frozen recursive reference
+geometry during every pair and field rotation. The reference geometry must not
+cancel algebraically. Consistent flat and scrambled replacements must materially
+change every tested phase-penalty vector, and both must change or destroy the
+frozen primary discriminator's extracted result.
+
+The repaired prospective batch excludes all 627 development/stress identities
+and all 256 identities from the retired first V3 prospective batch. The freeze
+binds the canonical batch bytes, every execution/adjudication source, the machine
+fingerprint, and the Python/NumPy environment.
+
+Independent verification must recompute all batch identities, rerun all 256 native
+waveform executions, restoration/reuse paths and strict counterfactuals, enumerate
+all 8,192 oracle states without importing the adjudicator, and reproduce every
+published classification. Summary counters alone cannot authorize the result.
