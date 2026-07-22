@@ -1,0 +1,11 @@
+{
+  "batch_ordered_sha256": "d855b31ccd419dca41a847edb2a301e8f4ff59a89f86fbb49c4720c765032d26",
+  "energy_call_count": 0,
+  "evidence_sha256": "b2e34a24e8f7a661198268382cfbe82e693604b19e088a235587d975c2ebff21",
+  "freeze_commit": "2d785e898ac21c97bb043b8133ab98bad6bae9b9",
+  "machine_fingerprint": "1bb3d9c8677c9f9677e5c4d650d27db690c26490f7001401d758217207ba2025",
+  "oracle_call_count": 0,
+  "schema": "catalytic_waveform_ising_v3_preoracle_seal_v2",
+  "source_execution_environment_sha256": "bf951d9bcf9bf257e2f9fbdbf231aa0a07a74395fc5979d5f27b59953013822f",
+  "trace_sha256": "bd567d970d09298a85b05623afd3e1cb6ce2705a236a02678f6367d2aefbc018"
+}
