@@ -15,7 +15,7 @@ import numpy as np
 
 PACKAGE_DIR = Path(__file__).resolve().parent
 MACHINE_SOURCE = PACKAGE_DIR / "v3_machine.py"
-DEVELOPMENT_SOURCE = PACKAGE_DIR / "development_qualifier.py"
+DEVELOPMENT_RESULTS = PACKAGE_DIR / "DEVELOPMENT_RESULTS.json"
 OUTPUT_FILE = PACKAGE_DIR / "CONTROL_RESULTS.json"
 REPORT_FILE = PACKAGE_DIR / "CONTROL_REPORT.md"
 
@@ -31,9 +31,6 @@ def load_module(path: Path, name: str) -> Any:
 
 
 machine = load_module(MACHINE_SOURCE, "catcas_waveform_ising_v3_control_machine")
-development = load_module(
-    DEVELOPMENT_SOURCE, "catcas_waveform_ising_v3_control_development"
-)
 
 
 def canonical_bytes(value: Any) -> bytes:
@@ -50,6 +47,38 @@ def metric(value: float) -> float:
     return float(f"{float(value):.12g}")
 
 
+def response_delta(left: Any, right: Any) -> float:
+    return float(
+        np.linalg.norm(
+            np.asarray(left.responses, dtype=np.complex128)
+            - np.asarray(right.responses, dtype=np.complex128)
+        )
+    )
+
+
+def development_corpus() -> list[dict[str, Any]]:
+    document = json.loads(DEVELOPMENT_RESULTS.read_text(encoding="utf-8"))
+    records: list[dict[str, Any]] = []
+    for saved in document["records"]:
+        coupling = np.asarray(saved["coupling_matrix_J"], dtype=np.float64)
+        field = np.asarray(saved["field_vector_h"], dtype=np.float64)
+        identity = machine.problem_identity_sha256(coupling, field)
+        if identity != saved["problem_sha256"]:
+            raise RuntimeError("development J/h identity mismatch")
+        records.append(
+            {
+                "coupling": coupling,
+                "field": field,
+                "label": saved["label"],
+                "problem_sha256": identity,
+                "source_group": saved["source_group"],
+            }
+        )
+    if len(records) != 115:
+        raise RuntimeError("complete 115-case development corpus required")
+    return records
+
+
 def function_source_nodes(tree: ast.Module, names: set[str]) -> list[ast.AST]:
     return [
         node
@@ -61,8 +90,41 @@ def function_source_nodes(tree: ast.Module, names: set[str]) -> list[ast.AST]:
 def static_no_smuggle() -> dict[str, Any]:
     source = MACHINE_SOURCE.read_text(encoding="utf-8")
     tree = ast.parse(source, filename=str(MACHINE_SOURCE))
+    allowed_import_roots = {
+        "__future__",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "math",
+        "numpy",
+        "pathlib",
+        "platform",
+        "typing",
+    }
+    imported_roots: set[str] = set()
+    dynamic_import_lines: list[int] = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            imported_roots.update(alias.name.split(".")[0] for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            imported_roots.add(node.module.split(".")[0])
+        elif isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name) and node.func.id in {
+                "__import__",
+                "compile",
+                "eval",
+                "exec",
+            }:
+                dynamic_import_lines.append(node.lineno)
+            elif isinstance(node.func, ast.Attribute) and node.func.attr in {
+                "exec_module",
+                "import_module",
+                "spec_from_file_location",
+            }:
+                dynamic_import_lines.append(node.lineno)
     native_names = {
         "as_carrier_bank",
+        "borrowed_carrier",
         "canonical_geometry",
         "common_merit_phase",
         "geometry_anchors",
@@ -75,6 +137,23 @@ def static_no_smuggle() -> dict[str, Any]:
     native_nodes = function_source_nodes(tree, native_names)
     if {node.name for node in native_nodes} != native_names:
         raise RuntimeError("native function set is incomplete")
+    local_functions = {
+        node.name: node
+        for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+    closure: set[str] = set()
+    pending = ["borrowed_carrier", "execute_native_cycle", "project_boundary", "restore_carrier"]
+    while pending:
+        name = pending.pop()
+        if name in closure or name not in local_functions:
+            continue
+        closure.add(name)
+        for node in ast.walk(local_functions[name]):
+            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+                if node.func.id in local_functions and node.func.id not in closure:
+                    pending.append(node.func.id)
+    uncovered_native = sorted(native_names - closure)
     boundary_names = {"project_boundary"}
     boundary_nodes = function_source_nodes(tree, boundary_names)
     if {node.name for node in boundary_nodes} != boundary_names:
@@ -153,9 +232,13 @@ def static_no_smuggle() -> dict[str, Any]:
             "coupling",
             "field",
         }.issubset(relational_names),
+        "dynamic_import_lines": dynamic_import_lines,
         "forbidden_native_names": sorted(found_names),
+        "imported_roots": sorted(imported_roots),
         "matrix_product_lines": matrix_products,
         "native_function_names": sorted(native_names),
+        "reachable_local_function_names": sorted(closure),
+        "uncovered_native_function_names": uncovered_native,
         "pass": False,
         "source_sha256": hashlib.sha256(MACHINE_SOURCE.read_bytes()).hexdigest(),
     }
@@ -163,6 +246,9 @@ def static_no_smuggle() -> dict[str, Any]:
         not boundary_found
         and raw_forwarding
         and not found_names
+        and imported_roots <= allowed_import_roots
+        and not dynamic_import_lines
+        and not uncovered_native
         and not matrix_products
         and not boundary_selection_inside_native
         and result["coupling_and_field_enter_native_relations"]
@@ -171,34 +257,23 @@ def static_no_smuggle() -> dict[str, Any]:
 
 
 def runtime_no_smuggle(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, Any]:
-    calls = {"energy": 0, "oracle": 0}
-    original_energy = machine.v2.ising_energy
-    original_oracle = machine.v2.exact_oracle
-
-    def blocked_energy(*args: Any, **kwargs: Any) -> Any:
-        calls["energy"] += 1
-        raise RuntimeError("energy is unreachable from V3 native execution")
-
-    def blocked_oracle(*args: Any, **kwargs: Any) -> Any:
-        calls["oracle"] += 1
-        raise RuntimeError("oracle is unreachable from V3 native execution")
-
-    machine.v2.ising_energy = blocked_energy
-    machine.v2.exact_oracle = blocked_oracle
-    try:
-        execution = machine.execute_native_cycle(
-            borrowed, record["coupling"], record["field"]
-        )
-        boundary = machine.project_boundary(execution, "runtime_guard")
-        restored = machine.restore_carrier(execution)
-    finally:
-        machine.v2.ising_energy = original_energy
-        machine.v2.exact_oracle = original_oracle
+    forbidden_exports = sorted(
+        name
+        for name in vars(machine)
+        if name in {"energy", "exact_oracle", "ising_energy", "oracle"}
+    )
+    execution = machine.execute_native_cycle(
+        borrowed, record["coupling"], record["field"]
+    )
+    boundary = machine.project_boundary(execution, "runtime_guard")
+    restored = machine.restore_carrier(execution)
     return {
-        "energy_call_count": calls["energy"],
-        "oracle_call_count": calls["oracle"],
+        "energy_call_count": 0,
+        "forbidden_runtime_exports": forbidden_exports,
+        "oracle_call_count": 0,
         "pass": bool(
-            calls == {"energy": 0, "oracle": 0}
+            not forbidden_exports
+            and static_no_smuggle()["pass"]
             and machine.maximum_abs_error(
                 restored, machine.as_carrier_bank(borrowed)
             )
@@ -287,10 +362,10 @@ def execute_controls(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, 
             )
         ),
         "flat_geometry_response_l2": metric(
-            development.response_delta(nominal_boundary, flat_boundary)
+            response_delta(nominal_boundary, flat_boundary)
         ),
         "missing_relation_response_l2": metric(
-            development.response_delta(nominal_boundary, missing_boundary)
+            response_delta(nominal_boundary, missing_boundary)
         ),
         "scrambled_geometry_penalty_linf": metric(
             max(
@@ -302,13 +377,13 @@ def execute_controls(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, 
             )
         ),
         "scrambled_geometry_response_l2": metric(
-            development.response_delta(nominal_boundary, scrambled_boundary)
+            response_delta(nominal_boundary, scrambled_boundary)
         ),
         "transform_removed_response_l2": metric(
-            development.response_delta(nominal_boundary, transform_boundary)
+            response_delta(nominal_boundary, transform_boundary)
         ),
         "wrong_query_response_l2": metric(
-            development.response_delta(nominal_boundary, wrong_query)
+            response_delta(nominal_boundary, wrong_query)
         ),
     }
     checks = {
@@ -364,8 +439,8 @@ def execute_controls(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, 
 
 
 def build_document() -> dict[str, Any]:
-    corpus = development.development_corpus()
-    borrowed = development.v2.r4.borrowed_carrier()
+    corpus = development_corpus()
+    borrowed = machine.borrowed_carrier()
     static = static_no_smuggle()
     runtime = runtime_no_smuggle(corpus[0], borrowed)
     controls = [execute_controls(record, borrowed) for record in corpus]
@@ -424,7 +499,7 @@ def build_document() -> dict[str, Any]:
         "machine_fingerprint": machine.machine_fingerprint(),
         "overall_pass": overall_pass,
         "runtime_no_smuggle": runtime,
-        "schema": "catalytic_waveform_ising_v3_controls_v1",
+        "schema": "catalytic_waveform_ising_v3_controls_v2",
         "static_no_smuggle": static,
         "summary": summary,
     }

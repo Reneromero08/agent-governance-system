@@ -1,10 +1,10 @@
 {
-  "batch_file_sha256": "b85db3b5f6e44bd4906b3e324cec916587be300904daa17071f2a2d4c5afd18d",
-  "batch_ordered_sha256": "45fa0401c4574a2b42e4d6233e9e046dc45840db3ffe35d2042c79546eeceddb",
+  "batch_file_sha256": "64fc985265bfbc8ef266b3fb986df145511cfd49491ac757384cb5fbfc2320cb",
+  "batch_ordered_sha256": "ea1c25fbe665c137aaacd693e20cc0ed6dad58dacbbdb9761503a303b6c1f80e",
   "batch_size": 256,
   "claim_ceiling": "BOUNDED_SOFTWARE_RECURSIVE_SPECTRAL_PHASE_REFERENCE_ONLY",
-  "control_results_sha256": "f7a4d43aad0821a5db1a2583afab1cb8b0ce67075084175e546566be2cb639a0",
-  "development_results_sha256": "6c5c2ae2ffdbd2823d3c4c80439a567fdec7764dad62cb6361c839b0dd3fba5c",
+  "control_results_sha256": "79187b5a29c4c40156b0df64280d6c75a074e2096e08a04c13fa946be5b7235c",
+  "development_results_sha256": "3d6939660c76d634bedc35ecd70c8f424f544cfd1bdc7d686d105ec7727ec655",
   "development_summary": {
     "accepted_correct": 97,
     "accepted_incorrect": 0,
@@ -26,14 +26,19 @@
     "unique_raw_correct": 97
   },
   "execution_source_sha256": {
-    "control_qualifier.py": "34a43bd8cb746ade83424062710871b0c781511ded36074a4dc2c5df5bd214a8",
-    "independent_verifier_v2.py": "008f25672addaed011ada94c88c55910e66c7f16b7fe90f821f6f35ffd745d7f",
+    "control_qualifier.py": "934fc981baabf45f8f8dae19cbf6ac6c32bd19e1c57653ce941cac187a62c973",
+    "development_qualifier.py": "7a00710bf0d2ca4d8b5abea00815d31d74b308562a00eb51dfaab5589d2372db",
+    "finalize_package.py": "8c130014e662483f58049de2610adcaeb0d8c344d4d00b593087aa64f23afe59",
+    "freeze_builder.py": "d87cceb715f99502c2fce29b16b70a85629d379d7ecbdb83911624644acbb4f0",
+    "independent_verifier_v2.py": "5f811138e125b60dd3588ada8860c76fde402d7b7c95268be1f59e45802326cc",
     "oracle_adjudicator.py": "0eb2ee1bc28a4ed5c14a48aa8ba4f0e5f1978dc1c0f4367c8da1752635db5ab5",
-    "preoracle_runner.py": "cdd0725c4b2666022d5d3a52fd2fdc8af66ffc413a1e42845d33f8d11d0ad32f",
-    "v3_machine.py": "6dafad9bcd4f4f36898a21c8aad6b4817215177a663ac5ea3390223fb3844afd"
+    "preoracle_runner.py": "50b8d8c8404512d4ed2eb3b90568ca542db8c4b9c0bc1da8d3ef5c0d4bdfd23f",
+    "qualify_package.py": "34f5bfdb67c0febb7f361e474ab3c94edc2860ac4b887fce3f05a0b90b3c24ad",
+    "stress_qualifier.py": "5eb1b48cf75f158f80bba51204c0a23d0398eebc97717063e826fda239079202",
+    "v3_machine.py": "fb12a0a7c54f4b1fac26b10a2041bfe7205c26d8136b2395c75a6b1d7c99694a"
   },
-  "experiment_contract_bytes": 3797,
-  "experiment_contract_sha256": "bea5396a63b11b84db01bb0065aa0d52bc8bc1507754185034c3da279366e850",
+  "experiment_contract_bytes": 4356,
+  "experiment_contract_sha256": "592f3f1e93412e2c8447be923b7186b99b86ad0a2455719521e724f89a9c7cbb",
   "freeze_before_waveform_execution_or_oracle": true,
   "machine_contract": {
     "active_frequency_bins": [
@@ -99,11 +104,12 @@
       "reversible spectral phase rotation"
     ],
     "sample_count": 256,
-    "site_count": 5
+    "site_count": 5,
+    "source_closure": "self-contained v3 source plus frozen CPython/NumPy environment"
   },
-  "machine_fingerprint": "650a4bed41d19f860aac8e577f92a21ea761bf9255a803e23d18058b205faa97",
-  "machine_source_bytes": 19305,
-  "machine_source_sha256": "6dafad9bcd4f4f36898a21c8aad6b4817215177a663ac5ea3390223fb3844afd",
+  "machine_fingerprint": "1bb3d9c8677c9f9677e5c4d650d27db690c26490f7001401d758217207ba2025",
+  "machine_source_bytes": 20360,
+  "machine_source_sha256": "fb12a0a7c54f4b1fac26b10a2041bfe7205c26d8136b2395c75a6b1d7c99694a",
   "predecessor_starting_remote_head": "8c44761ba48736e20786256ca3441ea99c36004b",
   "promotion_criterion": {
     "accepted_incorrect_maximum": 0,
@@ -122,8 +128,9 @@
   "repair_parent_preoracle_commit": "8050fb44ef36f0d1f4997f4c536cf880f9c947b7",
   "retired_batch_ordered_sha256": "0e6ee2935dd5472acb94d0fa27b283bb439cc6e002f64059dc5d79c372c11bf7",
   "retired_reuse_batch_ordered_sha256": "75f78c2b16734a3224c012d092318f339ee8594acb2d64a8a57a3956467e5ea9",
-  "schema": "catalytic_waveform_ising_v3_repaired_freeze_v2",
-  "stress_results_sha256": "8105612a7b68882e30241f8be16b835d8f6973f487f7804f78c686b52ebf9d35",
+  "retired_transitive_custody_batch_ordered_sha256": "45fa0401c4574a2b42e4d6233e9e046dc45840db3ffe35d2042c79546eeceddb",
+  "schema": "catalytic_waveform_ising_v3_repaired_freeze_v3",
+  "stress_results_sha256": "e1f53fc064cc0f8db11b546f710179ee86e19d5adaa2228792fa2d7dc236cc83",
   "stress_summary": {
     "accepted_correct": 434,
     "accepted_incorrect": 0,
@@ -137,5 +144,12 @@
     "rejected_incorrect": 0,
     "unique_count": 434,
     "unique_raw_correct": 434
+  },
+  "transitive_dependency_sha256": {
+    "audio_catalytic_waveform_ising_v2/successor_machine.py": "48f16ddf33e635b7f58881a0e31486dd0ec5deb181ab0fab8e0a2657a8fa5ce7",
+    "audio_catalytic_waveform_ising_v2_stability_gate/development_qualifier.py": "0cd936b2a2c857f669194f37266552eee18e59c3e5c130bdfc12ea91ff8aab08",
+    "audio_catalytic_waveform_ising_v2_stability_gate/stability_gate.py": "98b0df43a3b923ca86fdbc492ca67ada2981178bec4cdd25fea990024899f579",
+    "audio_integrated_catalytic_computation_v1/integrated_catalytic_computation_reference.py": "50b6db77e2602e18356636ddb892f6d51aedb0573c6b2418afc8e5cc174991cc",
+    "audio_recursive_phase_tree_v1/recursive_phase_tree_reference.py": "e5911cb868f244ac69f3f8f8c4cfa83440385347be2d4526d5f25376de736887"
   }
 }

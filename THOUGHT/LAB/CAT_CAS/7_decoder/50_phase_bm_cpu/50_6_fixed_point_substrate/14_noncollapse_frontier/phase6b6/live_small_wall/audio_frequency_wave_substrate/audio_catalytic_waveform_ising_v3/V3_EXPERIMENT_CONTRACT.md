@@ -68,9 +68,17 @@ change every tested phase-penalty vector, and both must change or destroy the
 frozen primary discriminator's extracted result.
 
 The repaired prospective batch excludes all 627 development/stress identities
-and all 256 identities from the retired first V3 prospective batch. The freeze
-binds the canonical batch bytes, every execution/adjudication source, the machine
-fingerprint, and the Python/NumPy environment.
+and all 768 identities from the three retired V3 prospective batches. The freeze
+binds the canonical batch bytes, all ten V3 sources, all five source dependencies
+used by development-only predecessor replay, the machine fingerprint, and the
+Python/NumPy environment.
+
+The prospective machine is self-contained: it imports no predecessor package at
+runtime. Its borrowed carrier and recursive phase geometry reproduce the predecessor
+bytes exactly from local formulas. The no-smuggle proof must close the local call
+graph, reject dynamic imports, allow only the frozen standard-library/NumPy import
+roots, and pass before execution. Prospective execution requires a clean exact Git
+tree; source drift or an untracked file fails closed before an evidence byte is made.
 
 Independent verification must recompute all batch identities, rerun all 256 native
 waveform executions, restoration/reuse paths and strict counterfactuals, enumerate

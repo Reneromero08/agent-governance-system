@@ -15,6 +15,7 @@ import numpy as np
 
 
 PACKAGE_DIR = Path(__file__).resolve().parent
+SUBSTRATE_DIR = PACKAGE_DIR.parent
 MACHINE_SOURCE = PACKAGE_DIR / "v3_machine.py"
 CONTROL_SOURCE = PACKAGE_DIR / "control_qualifier.py"
 FREEZE_FILE = PACKAGE_DIR / "V3_FREEZE.json"
@@ -82,6 +83,21 @@ def current_head() -> str:
     return completed.stdout.strip()
 
 
+def assert_clean_exact_tree() -> None:
+    completed = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=all"],
+        cwd=repository_root(),
+        capture_output=True,
+        check=True,
+        text=True,
+    )
+    dirty = completed.stdout.strip()
+    if dirty:
+        raise RuntimeError(
+            "prospective execution requires a clean exact source tree: " + dirty
+        )
+
+
 def metric(value: float) -> float:
     return float(f"{float(value):.12g}")
 
@@ -146,6 +162,9 @@ def load_frozen() -> tuple[dict[str, Any], dict[str, Any]]:
     for name, expected_sha in freeze["execution_source_sha256"].items():
         if sha256_file(PACKAGE_DIR / name) != expected_sha:
             raise RuntimeError(f"frozen execution source drift: {name}")
+    for name, expected_sha in freeze["transitive_dependency_sha256"].items():
+        if sha256_file(SUBSTRATE_DIR / name) != expected_sha:
+            raise RuntimeError(f"frozen transitive dependency drift: {name}")
     return freeze, batch
 
 
@@ -185,7 +204,7 @@ def execute_instance(
         ),
         "raw_spins_reproduced": reuse_boundary.raw_spins == boundary.raw_spins,
         "response_delta_l2": metric(
-            controls.development.response_delta(boundary, reuse_boundary)
+            controls.response_delta(boundary, reuse_boundary)
         ),
         "restoration_max_abs_error": metric(restoration_error),
         "reuse_restoration_max_abs_error": metric(reuse_restoration_error),
@@ -225,23 +244,39 @@ def build_documents(
     expected_machine_fingerprint = freeze["machine_fingerprint"]
     expected_batch_sha256 = freeze["batch_ordered_sha256"]
     calls = {"energy": 0, "oracle": 0}
-    original_energy = machine.v2.ising_energy
-    original_oracle = machine.v2.exact_oracle
-
-    def blocked_energy(*args: Any, **kwargs: Any) -> Any:
-        calls["energy"] += 1
-        raise RuntimeError("energy is forbidden before the pre-oracle seal")
-
-    def blocked_oracle(*args: Any, **kwargs: Any) -> Any:
-        calls["oracle"] += 1
-        raise RuntimeError("oracle is forbidden before the pre-oracle seal")
-
-    machine.v2.ising_energy = blocked_energy
-    machine.v2.exact_oracle = blocked_oracle
-    controls.machine.v2.ising_energy = blocked_energy
-    controls.machine.v2.exact_oracle = blocked_oracle
-    borrowed = machine.v2.r4.borrowed_carrier()
+    static_gate = controls.static_no_smuggle()
+    if not static_gate["pass"]:
+        raise RuntimeError("transitive no-smuggle source-closure gate failed")
+    borrowed = machine.borrowed_carrier()
+    runtime_gate = controls.runtime_no_smuggle(
+        controls.development_corpus()[0], borrowed
+    )
+    if not runtime_gate["pass"]:
+        raise RuntimeError("runtime no-smuggle gate failed")
     ledger = EventLedger([])
+    null_coupling = np.zeros((machine.SITE_COUNT, machine.SITE_COUNT), dtype=np.float64)
+    null_field = np.zeros(machine.SITE_COUNT, dtype=np.float64)
+    null_execution = machine.execute_native_cycle(
+        borrowed, null_coupling, null_field
+    )
+    null_boundary = machine.project_boundary(null_execution, "null_model_baseline")
+    null_restored = machine.restore_carrier(null_execution)
+    null_model = {
+        "restoration_max_abs_error": metric(
+            machine.maximum_abs_error(
+                null_restored, machine.as_carrier_bank(borrowed)
+            )
+        ),
+        "second_mode_gap": metric(null_boundary.second_mode_gap),
+        "valid": null_boundary.valid,
+    }
+    null_model["pass"] = bool(
+        not null_boundary.valid
+        and null_boundary.second_mode_gap < machine.DEFAULT_LAW.unique_gap_min
+        and null_model["restoration_max_abs_error"] <= machine.RESTORATION_MAX
+    )
+    if not null_model["pass"]:
+        raise RuntimeError("zero-J/zero-h null model baseline failed")
     ledger.add(
         "remote_freeze_custody",
         {
@@ -250,16 +285,11 @@ def build_documents(
             "machine_fingerprint": expected_machine_fingerprint,
         },
     )
-    try:
-        instances = [
-            execute_instance(record, borrowed, ledger)
-            for record in batch["ordered_instances"]
-        ]
-    finally:
-        machine.v2.ising_energy = original_energy
-        machine.v2.exact_oracle = original_oracle
-        controls.machine.v2.ising_energy = original_energy
-        controls.machine.v2.exact_oracle = original_oracle
+    ledger.add("null_model_baseline_sealed", null_model)
+    instances = [
+        execute_instance(record, borrowed, ledger)
+        for record in batch["ordered_instances"]
+    ]
     if calls != {"energy": 0, "oracle": 0}:
         raise RuntimeError("forbidden pre-oracle call was attempted")
     summary = {
@@ -286,11 +316,13 @@ def build_documents(
                 for record in instances
             )
         ),
+        "null_model_baseline_pass": null_model["pass"],
         "oracle_call_count": calls["oracle"],
         "energy_call_count": calls["energy"],
         "restoration_reuse_pass_count": sum(
             record["restoration_and_reuse"]["pass"] for record in instances
         ),
+        "source_closure_no_smuggle_pass": static_gate["pass"] and runtime_gate["pass"],
         "strict_control_pass_count": sum(
             record["strict_controls"]["all_pass"] for record in instances
         ),
@@ -329,6 +361,7 @@ def write_atomic(path: Path, payload: bytes) -> None:
 
 
 def build() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    assert_clean_exact_tree()
     evidence, trace, seal = build_documents(current_head())
     write_atomic(EVIDENCE_FILE, canonical_bytes(evidence))
     write_atomic(TRACE_FILE, canonical_bytes(trace))

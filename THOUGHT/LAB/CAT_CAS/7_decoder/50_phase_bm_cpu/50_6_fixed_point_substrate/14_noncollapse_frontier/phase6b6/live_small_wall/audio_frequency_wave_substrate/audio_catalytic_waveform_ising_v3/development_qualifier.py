@@ -166,6 +166,8 @@ def execute_record(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, An
         "accepted": boundary.valid,
         "best_mode_concentration": metric(boundary.best_mode_concentration),
         "best_mode_index": boundary.best_mode_index,
+        "coupling_matrix_J": np.asarray(coupling, dtype=np.float64).tolist(),
+        "field_vector_h": np.asarray(field, dtype=np.float64).tolist(),
         "displacement_l2": metric(execution.displacement_l2),
         "energy_gap": oracle["energy_gap"],
         "label": record["label"],
@@ -211,7 +213,7 @@ def group_summary(records: Sequence[dict[str, Any]]) -> dict[str, Any]:
 
 def build_document() -> dict[str, Any]:
     corpus = development_corpus()
-    borrowed = v2.r4.borrowed_carrier()
+    borrowed = machine.borrowed_carrier()
     records = [execute_record(record, borrowed) for record in corpus]
     groups = {
         group: group_summary(

@@ -1,11 +1,9 @@
 from __future__ import annotations
 
 import hashlib
-import importlib.util
 import json
 import math
 import platform
-import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Sequence
@@ -13,26 +11,9 @@ from typing import Any, Sequence
 import numpy as np
 
 
-PACKAGE_DIR = Path(__file__).resolve().parent
-SUBSTRATE_DIR = PACKAGE_DIR.parent
-V2_SOURCE = SUBSTRATE_DIR / "audio_catalytic_waveform_ising_v2" / "successor_machine.py"
-
-
-def load_module(path: Path, name: str) -> Any:
-    specification = importlib.util.spec_from_file_location(name, path)
-    if specification is None or specification.loader is None:
-        raise ImportError(f"cannot load {path}")
-    module = importlib.util.module_from_spec(specification)
-    sys.modules[name] = module
-    specification.loader.exec_module(module)
-    return module
-
-
-v2 = load_module(V2_SOURCE, "catcas_waveform_ising_v3_v2_reference")
-r4 = v2.r4
-
 SITE_COUNT = 5
-SAMPLE_COUNT = int(v2.SAMPLE_COUNT)
+SAMPLE_RATE_HZ = 48_000
+SAMPLE_COUNT = 256
 MODE_COUNT = 1 << SITE_COUNT
 ACTIVE_BINS = np.asarray(tuple(range(8, 8 + MODE_COUNT)), dtype=np.int64)
 GEOMETRY_SAMPLES = np.asarray(
@@ -98,6 +79,30 @@ def metric(value: float) -> float:
     return float(f"{float(value):.12g}")
 
 
+def borrowed_carrier() -> np.ndarray:
+    times = np.arange(SAMPLE_COUNT, dtype=np.float64) / SAMPLE_RATE_HZ
+    sample_index = np.arange(SAMPLE_COUNT, dtype=np.float64)
+    phase = 0.173 * sample_index + 0.23 * np.sin(
+        2.0 * math.pi * 41.0 * times
+    )
+    amplitude = 0.65 + 0.25 * np.cos(2.0 * math.pi * 29.0 * times)
+    carrier = np.asarray(amplitude * np.exp(1j * phase), dtype=np.complex128)
+    if carrier.shape != (SAMPLE_COUNT,) or float(np.min(np.abs(carrier))) <= 0.0:
+        raise ValueError("borrowed carrier is outside the frozen envelope")
+    return carrier
+
+
+def problem_identity_sha256(coupling: np.ndarray, field: np.ndarray) -> str:
+    return sha256_bytes(
+        canonical_bytes(
+            {
+                "coupling_matrix_J": np.asarray(coupling, dtype=np.float64).tolist(),
+                "field_vector_h": np.asarray(field, dtype=np.float64).tolist(),
+            }
+        )
+    )
+
+
 def recursive_antipodal_phase_modes(site_count: int = SITE_COUNT) -> np.ndarray:
     """Construct the complete recursive S1 phase tree without decoded spin state."""
     modes = np.ones((site_count, 1), dtype=np.complex128)
@@ -135,7 +140,26 @@ def validate_problem(
 
 
 def canonical_geometry() -> np.ndarray:
-    geometry = np.asarray(r4.render_trees(r4.canonical_trees()), dtype=np.complex128)
+    times = np.arange(SAMPLE_COUNT, dtype=np.float64) / SAMPLE_RATE_HZ
+    beams: list[np.ndarray] = []
+    for site in range(SITE_COUNT):
+        leaf_phase = (
+            2.0 * math.pi * (47.0 + 5.0 * site) * times
+        ) + (0.31 + 0.07 * site)
+        middle_phase = (
+            2.0 * math.pi * (233.0 + 13.0 * site) * times
+        ) + (-0.22 + 0.05 * site)
+        middle_phase = middle_phase + (0.31 + 0.035 * site) * np.sin(
+            leaf_phase
+        )
+        root_phase = (
+            2.0 * math.pi * (1237.0 + 71.0 * site) * times
+        ) + (0.17 - 0.04 * site)
+        root_phase = root_phase + (0.62 + 0.045 * site) * np.sin(
+            middle_phase
+        )
+        beams.append(np.exp(1j * root_phase))
+    geometry = np.asarray(beams, dtype=np.complex128)
     if geometry.shape != (SITE_COUNT, SAMPLE_COUNT):
         raise ValueError("canonical recursive geometry has the wrong shape")
     return geometry
@@ -469,6 +493,7 @@ def machine_contract(law: SpectralPhaseLaw = DEFAULT_LAW) -> dict[str, Any]:
             "reversible spectral phase rotation",
         ],
         "sample_count": SAMPLE_COUNT,
+        "source_closure": "self-contained v3 source plus frozen CPython/NumPy environment",
         "site_count": SITE_COUNT,
     }
 

@@ -3106,23 +3106,37 @@
       "source_group": "stability_batch"
     }
   ],
-  "machine_fingerprint": "650a4bed41d19f860aac8e577f92a21ea761bf9255a803e23d18058b205faa97",
+  "machine_fingerprint": "1bb3d9c8677c9f9677e5c4d650d27db690c26490f7001401d758217207ba2025",
   "overall_pass": true,
   "runtime_no_smuggle": {
     "energy_call_count": 0,
+    "forbidden_runtime_exports": [],
     "oracle_call_count": 0,
     "pass": true
   },
-  "schema": "catalytic_waveform_ising_v3_controls_v1",
+  "schema": "catalytic_waveform_ising_v3_controls_v2",
   "static_no_smuggle": {
     "boundary_forbidden_names": [],
     "boundary_raw_result_forwarding": true,
     "boundary_selection_inside_native": [],
     "coupling_and_field_enter_native_relations": true,
+    "dynamic_import_lines": [],
     "forbidden_native_names": [],
+    "imported_roots": [
+      "__future__",
+      "dataclasses",
+      "hashlib",
+      "json",
+      "math",
+      "numpy",
+      "pathlib",
+      "platform",
+      "typing"
+    ],
     "matrix_product_lines": [],
     "native_function_names": [
       "as_carrier_bank",
+      "borrowed_carrier",
       "canonical_geometry",
       "common_merit_phase",
       "execute_native_cycle",
@@ -3133,7 +3147,22 @@
       "validate_problem"
     ],
     "pass": true,
-    "source_sha256": "6dafad9bcd4f4f36898a21c8aad6b4817215177a663ac5ea3390223fb3844afd"
+    "reachable_local_function_names": [
+      "as_carrier_bank",
+      "borrowed_carrier",
+      "canonical_geometry",
+      "common_merit_phase",
+      "execute_native_cycle",
+      "geometry_anchors",
+      "normalized_active",
+      "project_boundary",
+      "relational_phase_operator",
+      "restore_carrier",
+      "seed_recursive_spectral_tree",
+      "validate_problem"
+    ],
+    "source_sha256": "fb12a0a7c54f4b1fac26b10a2041bfe7205c26d8136b2395c75a6b1d7c99694a",
+    "uncovered_native_function_names": []
   },
   "summary": {
     "case_count": 115,

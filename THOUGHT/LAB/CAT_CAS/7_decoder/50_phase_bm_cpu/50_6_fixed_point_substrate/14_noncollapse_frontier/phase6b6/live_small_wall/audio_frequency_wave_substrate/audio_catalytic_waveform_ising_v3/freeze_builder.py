@@ -13,9 +13,8 @@ import numpy as np
 
 
 PACKAGE_DIR = Path(__file__).resolve().parent
+SUBSTRATE_DIR = PACKAGE_DIR.parent
 MACHINE_SOURCE = PACKAGE_DIR / "v3_machine.py"
-DEVELOPMENT_SOURCE = PACKAGE_DIR / "development_qualifier.py"
-STRESS_SOURCE = PACKAGE_DIR / "stress_qualifier.py"
 CONTROL_RESULTS = PACKAGE_DIR / "CONTROL_RESULTS.json"
 DEVELOPMENT_RESULTS = PACKAGE_DIR / "DEVELOPMENT_RESULTS.json"
 STRESS_RESULTS = PACKAGE_DIR / "STRESS_RESULTS.json"
@@ -23,20 +22,44 @@ CONTRACT_FILE = PACKAGE_DIR / "V3_EXPERIMENT_CONTRACT.md"
 FREEZE_FILE = PACKAGE_DIR / "V3_FREEZE.json"
 EXECUTION_SOURCE_NAMES = (
     "control_qualifier.py",
+    "development_qualifier.py",
+    "finalize_package.py",
+    "freeze_builder.py",
     "independent_verifier_v2.py",
     "oracle_adjudicator.py",
     "preoracle_runner.py",
+    "qualify_package.py",
+    "stress_qualifier.py",
     "v3_machine.py",
 )
+TRANSITIVE_DEPENDENCY_PATHS = {
+    "audio_catalytic_waveform_ising_v2/successor_machine.py": (
+        SUBSTRATE_DIR / "audio_catalytic_waveform_ising_v2" / "successor_machine.py"
+    ),
+    "audio_catalytic_waveform_ising_v2_stability_gate/development_qualifier.py": (
+        SUBSTRATE_DIR / "audio_catalytic_waveform_ising_v2_stability_gate" / "development_qualifier.py"
+    ),
+    "audio_catalytic_waveform_ising_v2_stability_gate/stability_gate.py": (
+        SUBSTRATE_DIR / "audio_catalytic_waveform_ising_v2_stability_gate" / "stability_gate.py"
+    ),
+    "audio_integrated_catalytic_computation_v1/integrated_catalytic_computation_reference.py": (
+        SUBSTRATE_DIR / "audio_integrated_catalytic_computation_v1" / "integrated_catalytic_computation_reference.py"
+    ),
+    "audio_recursive_phase_tree_v1/recursive_phase_tree_reference.py": (
+        SUBSTRATE_DIR / "audio_recursive_phase_tree_v1" / "recursive_phase_tree_reference.py"
+    ),
+}
 BATCH_FILE = PACKAGE_DIR / "V3_BATCH_CUSTODY.json"
 RETIRED_BATCH_FILE = PACKAGE_DIR / "V3_RETIRED_BATCH_CUSTODY.json"
 RETIRED_BATCH_ORDERED_SHA256 = "0e6ee2935dd5472acb94d0fa27b283bb439cc6e002f64059dc5d79c372c11bf7"
 RETIRED_REUSE_BATCH_FILE = PACKAGE_DIR / "V3_RETIRED_REUSE_REPAIR_BATCH_CUSTODY.json"
 RETIRED_REUSE_BATCH_ORDERED_SHA256 = "75f78c2b16734a3224c012d092318f339ee8594acb2d64a8a57a3956467e5ea9"
+RETIRED_TRANSITIVE_BATCH_FILE = PACKAGE_DIR / "V3_RETIRED_TRANSITIVE_CUSTODY_BATCH_CUSTODY.json"
+RETIRED_TRANSITIVE_BATCH_ORDERED_SHA256 = "45fa0401c4574a2b42e4d6233e9e046dc45840db3ffe35d2042c79546eeceddb"
 
 STARTING_REMOTE_HEAD = "8c44761ba48736e20786256ca3441ea99c36004b"
 REPAIR_PARENT_PREORACLE_COMMIT = "8050fb44ef36f0d1f4997f4c536cf880f9c947b7"
-PUBLIC_BATCH_SEED = "CATCAS-V3-REJECTED-SHADOW-REUSE-REPAIR-BATCH-2026-07-22"
+PUBLIC_BATCH_SEED = "CATCAS-V3-TRANSITIVE-SOURCE-CUSTODY-REPAIR-BATCH-2026-07-22"
 BATCH_SIZE = 256
 COUPLING_VALUES = (-2.0, -1.0, 1.0, 2.0)
 FIELD_VALUES = (-2.0, -1.0, -0.5, 0.5, 1.0, 2.0)
@@ -53,10 +76,6 @@ def load_module(path: Path, name: str) -> Any:
 
 
 machine = load_module(MACHINE_SOURCE, "catcas_waveform_ising_v3_freeze_machine")
-development = load_module(
-    DEVELOPMENT_SOURCE, "catcas_waveform_ising_v3_freeze_development"
-)
-stress = load_module(STRESS_SOURCE, "catcas_waveform_ising_v3_freeze_stress")
 
 
 def canonical_bytes(value: Any) -> bytes:
@@ -102,11 +121,25 @@ def generated_problem(index: int) -> tuple[np.ndarray, np.ndarray]:
     return coupling, field
 
 
+def result_identities(path: Path, expected_count: int) -> set[str]:
+    document = json.loads(path.read_text(encoding="utf-8"))
+    identities: set[str] = set()
+    for record in document["records"]:
+        coupling = np.asarray(record["coupling_matrix_J"], dtype=np.float64)
+        field = np.asarray(record["field_vector_h"], dtype=np.float64)
+        machine.validate_problem(coupling, field, machine.DEFAULT_LAW)
+        identity = machine.problem_identity_sha256(coupling, field)
+        if identity != record["problem_sha256"]:
+            raise RuntimeError(f"result J/h identity mismatch: {path.name}")
+        identities.add(identity)
+    if len(identities) != expected_count:
+        raise RuntimeError(f"complete {expected_count}-case identity set required: {path.name}")
+    return identities
+
+
 def excluded_development_identities() -> set[str]:
-    identities = {
-        record["problem_sha256"] for record in development.development_corpus()
-    }
-    identities.update(record["problem_sha256"] for record in stress.stress_corpus())
+    identities = result_identities(DEVELOPMENT_RESULTS, 115)
+    identities.update(result_identities(STRESS_RESULTS, 512))
     if len(identities) != 627:
         raise RuntimeError("complete 627-case development identity set required")
     retired = json.loads(RETIRED_BATCH_FILE.read_text(encoding="utf-8"))
@@ -130,6 +163,23 @@ def excluded_development_identities() -> set[str]:
     identities.update(retired_reuse_identities)
     if len(identities) != 1139:
         raise RuntimeError("complete 1139-case exclusion set required")
+    retired_transitive = json.loads(
+        RETIRED_TRANSITIVE_BATCH_FILE.read_text(encoding="utf-8")
+    )
+    if (
+        retired_transitive["ordered_batch_sha256"]
+        != RETIRED_TRANSITIVE_BATCH_ORDERED_SHA256
+    ):
+        raise RuntimeError("retired transitive-custody batch identity drift")
+    retired_transitive_identities = {
+        record["problem_sha256"]
+        for record in retired_transitive["ordered_instances"]
+    }
+    if len(retired_transitive_identities) != 256:
+        raise RuntimeError("complete retired transitive-custody batch required")
+    identities.update(retired_transitive_identities)
+    if len(identities) != 1395:
+        raise RuntimeError("complete 1395-case exclusion set required")
     return identities
 
 
@@ -139,7 +189,7 @@ def batch_document() -> dict[str, Any]:
     generator_index = 0
     while len(records) < BATCH_SIZE:
         coupling, field = generated_problem(generator_index)
-        identity = development.problem_sha256(coupling, field)
+        identity = machine.problem_identity_sha256(coupling, field)
         if identity not in excluded:
             excluded.add(identity)
             records.append(
@@ -159,7 +209,7 @@ def batch_document() -> dict[str, Any]:
         "batch_size": BATCH_SIZE,
         "coupling_values": list(COUPLING_VALUES),
         "development_identity_count_excluded": 627,
-        "total_identity_count_excluded": 1139,
+        "total_identity_count_excluded": 1395,
         "field_values": list(FIELD_VALUES),
         "generation_rule": (
             "SHA256(public_seed|generator_index|coordinate), modulo frozen value list; "
@@ -235,10 +285,15 @@ def freeze_document(batch: dict[str, Any]) -> dict[str, Any]:
         "repair_parent_preoracle_commit": REPAIR_PARENT_PREORACLE_COMMIT,
         "retired_batch_ordered_sha256": RETIRED_BATCH_ORDERED_SHA256,
         "retired_reuse_batch_ordered_sha256": RETIRED_REUSE_BATCH_ORDERED_SHA256,
+        "retired_transitive_custody_batch_ordered_sha256": RETIRED_TRANSITIVE_BATCH_ORDERED_SHA256,
         "promotion_criterion": frozen_promotion_criterion(),
-        "schema": "catalytic_waveform_ising_v3_repaired_freeze_v2",
+        "schema": "catalytic_waveform_ising_v3_repaired_freeze_v3",
         "stress_results_sha256": sha256_file(STRESS_RESULTS),
         "stress_summary": stress_result["summary"],
+        "transitive_dependency_sha256": {
+            name: sha256_file(path)
+            for name, path in sorted(TRANSITIVE_DEPENDENCY_PATHS.items())
+        },
     }
 
 

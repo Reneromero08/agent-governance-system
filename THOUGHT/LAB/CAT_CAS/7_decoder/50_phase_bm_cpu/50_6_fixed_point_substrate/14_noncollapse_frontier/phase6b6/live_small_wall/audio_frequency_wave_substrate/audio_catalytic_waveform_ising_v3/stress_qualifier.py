@@ -107,12 +107,12 @@ def stress_corpus() -> list[dict[str, Any]]:
 
 
 def execute_record(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, Any]:
-    execution = machine.execute_native_cycle(
-        borrowed, record["coupling"], record["field"]
-    )
+    coupling = np.asarray(record["coupling"], dtype=np.float64)
+    field = np.asarray(record["field"], dtype=np.float64)
+    execution = machine.execute_native_cycle(borrowed, coupling, field)
     boundary = machine.project_boundary(execution, record["label"])
     oracle = development.exact_classification(
-        record["coupling"], record["field"], boundary.raw_spins, boundary.valid
+        coupling, field, boundary.raw_spins, boundary.valid
     )
     restored = machine.restore_carrier(execution)
     restoration_error = machine.maximum_abs_error(
@@ -121,6 +121,8 @@ def execute_record(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, An
     return {
         "accepted": boundary.valid,
         "best_mode_concentration": metric(boundary.best_mode_concentration),
+        "coupling_matrix_J": np.asarray(coupling, dtype=np.float64).tolist(),
+        "field_vector_h": np.asarray(field, dtype=np.float64).tolist(),
         "energy_gap": oracle["energy_gap"],
         "generator_index": record["generator_index"],
         "label": record["label"],
@@ -138,7 +140,7 @@ def execute_record(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, An
 
 def build_document() -> dict[str, Any]:
     corpus = stress_corpus()
-    borrowed = development.v2.r4.borrowed_carrier()
+    borrowed = machine.borrowed_carrier()
     records = [execute_record(record, borrowed) for record in corpus]
     unique = [record for record in records if record["optimum_count"] == 1]
     non_unique = [record for record in records if record["optimum_count"] != 1]
