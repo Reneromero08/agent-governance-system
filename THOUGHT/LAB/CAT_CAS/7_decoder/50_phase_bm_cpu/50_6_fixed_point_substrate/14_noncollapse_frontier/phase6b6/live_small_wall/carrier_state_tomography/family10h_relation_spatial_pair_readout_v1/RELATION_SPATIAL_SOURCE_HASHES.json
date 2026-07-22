@@ -29,8 +29,8 @@
       "size_bytes": 2055
     },
     "relation_spatial_target.py": {
-      "sha256": "cae4c2671a1bcee2390bf3a37af684bbb0879b0a0ef357ff1abd96636695d866",
-      "size_bytes": 91154
+      "sha256": "21f01e6cbde5243bb46767e2e915092c1eb90e51288ebbfee6ced2961904cd10",
+      "size_bytes": 91949
     },
     "run_relation_spatial_pair_readout.py": {
       "sha256": "0ad4b4d6ff94a20b7c0e119966de5efbda649f5b5af09e87d87c332db64f8dce",
@@ -45,7 +45,7 @@
   "relation_source_authority_validation": {
     "failures": [],
     "passed": true,
-    "relation_source_authority_commit": "091276e4c45d02bae9c34bd1597db3a139e10ddf"
+    "relation_source_authority_commit": "b0b8bd0803a5bb70c42d33d716830c329e892142"
   },
   "runtime_binary_authority": {
     "compiled_binary_sha256": "c0468dfc0c496d2efbf007cd2b939beba43500fb40b25224a9ae2eff46948c30",
@@ -80,6 +80,6 @@
       "run_relation_spatial_pair_readout.py"
     ],
     "path": "RELATION_SPATIAL_SOURCE_BUNDLE.tar.gz",
-    "sha256": "f7e0fcdd4b8b4c9214f7023afd49837ed4d0d569cbf28ff62d31a6cfa54192db"
+    "sha256": "4bc0f1943a454d9c4913a736364539c064903f2442becc53e2f6a5d39c299055"
   }
 }
