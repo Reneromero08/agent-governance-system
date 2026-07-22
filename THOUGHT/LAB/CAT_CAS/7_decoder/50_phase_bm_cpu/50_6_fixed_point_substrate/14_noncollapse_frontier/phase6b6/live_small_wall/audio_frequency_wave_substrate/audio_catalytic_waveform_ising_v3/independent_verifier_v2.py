@@ -400,7 +400,10 @@ def build_document() -> dict[str, Any]:
             and reuse_error <= machine.RESTORATION_MAX
             and reuse_delta <= machine.REUSE_RESPONSE_MAX
             and boundary.valid == reuse_boundary.valid
-            and boundary.raw_spins == reuse_boundary.raw_spins
+            and (
+                not boundary.valid
+                or boundary.raw_spins == reuse_boundary.raw_spins
+            )
         ):
             mismatches.append(f"restoration_reuse_{index:03d}")
         local = local_controls(borrowed, coupling, field)

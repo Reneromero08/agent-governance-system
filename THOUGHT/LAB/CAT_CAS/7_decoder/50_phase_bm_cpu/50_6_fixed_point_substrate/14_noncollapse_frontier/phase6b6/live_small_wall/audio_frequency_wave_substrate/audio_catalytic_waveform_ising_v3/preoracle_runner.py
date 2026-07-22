@@ -179,6 +179,10 @@ def execute_instance(
     reuse_restored = machine.restore_carrier(reuse)
     reuse_restoration_error = machine.maximum_abs_error(reuse_restored, expected)
     reuse_record = {
+        "accepted_result_reproduced": bool(
+            not boundary.valid
+            or reuse_boundary.raw_spins == boundary.raw_spins
+        ),
         "raw_spins_reproduced": reuse_boundary.raw_spins == boundary.raw_spins,
         "response_delta_l2": metric(
             controls.development.response_delta(boundary, reuse_boundary)
@@ -188,7 +192,7 @@ def execute_instance(
         "valid_reproduced": reuse_boundary.valid == boundary.valid,
     }
     reuse_record["pass"] = bool(
-        reuse_record["raw_spins_reproduced"]
+        reuse_record["accepted_result_reproduced"]
         and reuse_record["valid_reproduced"]
         and reuse_record["response_delta_l2"] <= 1.0e-12
         and restoration_error <= machine.RESTORATION_MAX

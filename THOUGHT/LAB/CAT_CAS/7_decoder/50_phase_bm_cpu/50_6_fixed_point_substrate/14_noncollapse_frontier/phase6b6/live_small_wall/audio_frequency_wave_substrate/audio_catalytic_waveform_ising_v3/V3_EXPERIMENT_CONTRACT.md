@@ -76,3 +76,10 @@ Independent verification must recompute all batch identities, rerun all 256 nati
 waveform executions, restoration/reuse paths and strict counterfactuals, enumerate
 all 8,192 oracle states without importing the adjudicator, and reproduce every
 published classification. Summary counters alone cannot authorize the result.
+
+Carrier reuse requires the validity decision to reproduce, every accepted raw
+result to reproduce, the response to remain within the frozen reuse tolerance,
+and both inverse traversals to restore the carrier. A rejected boundary has no
+accepted result: its diagnostic raw spin shadow may vary inside a numerical tie
+without constituting result drift, but the repeated boundary must remain
+rejected.

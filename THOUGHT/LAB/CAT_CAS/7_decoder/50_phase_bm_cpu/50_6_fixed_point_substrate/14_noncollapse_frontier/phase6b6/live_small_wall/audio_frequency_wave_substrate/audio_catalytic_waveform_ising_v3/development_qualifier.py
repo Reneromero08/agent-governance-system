@@ -183,9 +183,12 @@ def execute_record(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, An
         "reuse_restoration_max_abs_error": metric(reuse_restoration_error),
         "second_mode_gap": metric(boundary.second_mode_gap),
         "source_group": record["source_group"],
-        "valid_reproduced_on_reuse": bool(
+        "accepted_result_reproduced_on_reuse": bool(
             boundary.valid == reuse_boundary.valid
-            and boundary.raw_spins == reuse_boundary.raw_spins
+            and (
+                not boundary.valid
+                or boundary.raw_spins == reuse_boundary.raw_spins
+            )
         ),
     }
 
@@ -224,7 +227,7 @@ def build_document() -> dict[str, Any]:
                 for record in records
             ),
             "all_reuse_pass": all(
-                record["valid_reproduced_on_reuse"]
+                record["accepted_result_reproduced_on_reuse"]
                 and record["response_reuse_delta_l2"]
                 <= machine.REUSE_RESPONSE_MAX
                 and record["reuse_restoration_max_abs_error"] <= machine.RESTORATION_MAX

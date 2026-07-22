@@ -31,10 +31,12 @@ EXECUTION_SOURCE_NAMES = (
 BATCH_FILE = PACKAGE_DIR / "V3_BATCH_CUSTODY.json"
 RETIRED_BATCH_FILE = PACKAGE_DIR / "V3_RETIRED_BATCH_CUSTODY.json"
 RETIRED_BATCH_ORDERED_SHA256 = "0e6ee2935dd5472acb94d0fa27b283bb439cc6e002f64059dc5d79c372c11bf7"
+RETIRED_REUSE_BATCH_FILE = PACKAGE_DIR / "V3_RETIRED_REUSE_REPAIR_BATCH_CUSTODY.json"
+RETIRED_REUSE_BATCH_ORDERED_SHA256 = "75f78c2b16734a3224c012d092318f339ee8594acb2d64a8a57a3956467e5ea9"
 
 STARTING_REMOTE_HEAD = "8c44761ba48736e20786256ca3441ea99c36004b"
 REPAIR_PARENT_PREORACLE_COMMIT = "8050fb44ef36f0d1f4997f4c536cf880f9c947b7"
-PUBLIC_BATCH_SEED = "CATCAS-V3-GEOMETRY-REPAIR-PROSPECTIVE-BATCH-2026-07-22"
+PUBLIC_BATCH_SEED = "CATCAS-V3-REJECTED-SHADOW-REUSE-REPAIR-BATCH-2026-07-22"
 BATCH_SIZE = 256
 COUPLING_VALUES = (-2.0, -1.0, 1.0, 2.0)
 FIELD_VALUES = (-2.0, -1.0, -0.5, 0.5, 1.0, 2.0)
@@ -116,8 +118,18 @@ def excluded_development_identities() -> set[str]:
     if len(retired_identities) != 256:
         raise RuntimeError("complete retired 256-case batch required")
     identities.update(retired_identities)
-    if len(identities) != 883:
-        raise RuntimeError("complete 883-case exclusion set required")
+    retired_reuse = json.loads(RETIRED_REUSE_BATCH_FILE.read_text(encoding="utf-8"))
+    if retired_reuse["ordered_batch_sha256"] != RETIRED_REUSE_BATCH_ORDERED_SHA256:
+        raise RuntimeError("retired reuse-repair batch identity drift")
+    retired_reuse_identities = {
+        record["problem_sha256"]
+        for record in retired_reuse["ordered_instances"]
+    }
+    if len(retired_reuse_identities) != 256:
+        raise RuntimeError("complete retired reuse-repair batch required")
+    identities.update(retired_reuse_identities)
+    if len(identities) != 1139:
+        raise RuntimeError("complete 1139-case exclusion set required")
     return identities
 
 
@@ -147,7 +159,7 @@ def batch_document() -> dict[str, Any]:
         "batch_size": BATCH_SIZE,
         "coupling_values": list(COUPLING_VALUES),
         "development_identity_count_excluded": 627,
-        "total_identity_count_excluded": 883,
+        "total_identity_count_excluded": 1139,
         "field_values": list(FIELD_VALUES),
         "generation_rule": (
             "SHA256(public_seed|generator_index|coordinate), modulo frozen value list; "
@@ -222,6 +234,7 @@ def freeze_document(batch: dict[str, Any]) -> dict[str, Any]:
         "predecessor_starting_remote_head": STARTING_REMOTE_HEAD,
         "repair_parent_preoracle_commit": REPAIR_PARENT_PREORACLE_COMMIT,
         "retired_batch_ordered_sha256": RETIRED_BATCH_ORDERED_SHA256,
+        "retired_reuse_batch_ordered_sha256": RETIRED_REUSE_BATCH_ORDERED_SHA256,
         "promotion_criterion": frozen_promotion_criterion(),
         "schema": "catalytic_waveform_ising_v3_repaired_freeze_v2",
         "stress_results_sha256": sha256_file(STRESS_RESULTS),
