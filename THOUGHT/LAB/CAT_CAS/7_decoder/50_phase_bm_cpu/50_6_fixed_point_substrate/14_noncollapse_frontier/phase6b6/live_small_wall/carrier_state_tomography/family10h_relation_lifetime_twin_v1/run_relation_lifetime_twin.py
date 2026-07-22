@@ -1123,6 +1123,8 @@ def compile_runtime(toolchain: dict[str, Any]) -> dict[str, Any]:
         "source_cpu_pinning_implemented": runtime["returncode"] == 0,
         "receiver_cpu_pinning_implemented": runtime["returncode"] == 0,
         "source_death_receipt_implemented": synthetic_summary.get("source_death_receipt_count") == 21504,
+        "source_lifetime_factor_implemented": synthetic_summary["passed"]
+        and synthetic_summary.get("raw_schema_validation", {}).get("schema_equivalent_validator", {}).get("passed") is True,
         "delay_enforcement_implemented": synthetic_summary["passed"],
         "pmu_group_open_implemented": control_flow["checks"].get("pmu_enable_disable_in_executor") is True,
         "pmu_group_read_implemented": control_flow["checks"].get("pmu_read_in_executor") is True,
