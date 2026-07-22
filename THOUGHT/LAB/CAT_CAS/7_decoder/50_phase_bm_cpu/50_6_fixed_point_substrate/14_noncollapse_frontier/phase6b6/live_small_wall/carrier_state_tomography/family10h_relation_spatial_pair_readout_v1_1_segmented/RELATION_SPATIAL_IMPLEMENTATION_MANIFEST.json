@@ -2,7 +2,7 @@
   "authority_binding": {
     "relation_manifest_freeze_commit_not_embedded": true,
     "relation_manifest_freeze_commit_policy": "controller_verifies_local_head_and_origin_equal_freeze_commit_at_authorization_time",
-    "relation_source_authority_commit": "f7bd13465fbe629bc3df41ff58d42847a2fd0516",
+    "relation_source_authority_commit": "2cdec9704452669d3651a063b6fb5805913647e3",
     "scalar_evidence_provenance": {
       "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
       "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
@@ -24,7 +24,7 @@
   },
   "expected_pair_observation_count": 2621440,
   "grammar_sha256": "4a8d7e02c8c0c73cd61210b00b094114cdf938f76d74b9f32e24021c93077e3c",
-  "manifest_sha256": "b19db229e8b3dc586351943dbeb6d58bef09cdb6bce83ec946af381c039f41b6",
+  "manifest_sha256": "81f8aba22bb6b1d296dc1ea44a4bb76421fdcb6864a11d2c04bbb8748f46e901",
   "offline_validate_sha256": null,
   "package_decision": "FAMILY10H_SEGMENTED_SPATIAL_RELATION_READOUT_BUILD_READY_AWAITING_AUTHORIZATION",
   "pair_measurements_per_row": 256,
@@ -35,6 +35,6 @@
   "schema": "FAMILY10H_RELATION_SPATIAL_IMPLEMENTATION_MANIFEST_V1",
   "science_package_id": "family10h_relation_spatial_pair_readout_v1_1_segmented",
   "self_test_sha256": "66d021d9d5a66d2df1f223ae73e6e8b11b49cca8aed0f09d63047e0953f0f068",
-  "source_bundle_sha256": "44cd41fa1e18ee154a32a4d7565ecd1866de7aeb8bfcd79254e8207bb244c7a3",
+  "source_bundle_sha256": "7d3bf289bfd716e86eaa8123e0aaa871dc12d94fd0f566cad6231ba4987c6954",
   "transaction_run_id": "family10h_relation_spatial_pair_readout_v1_1_segmented_0"
 }
