@@ -62,13 +62,23 @@ def static_no_smuggle() -> dict[str, Any]:
     source = MACHINE_SOURCE.read_text(encoding="utf-8")
     tree = ast.parse(source, filename=str(MACHINE_SOURCE))
     native_names = {
+        "as_carrier_bank",
+        "canonical_geometry",
+        "common_merit_phase",
+        "geometry_anchors",
+        "normalized_active",
         "seed_recursive_spectral_tree",
         "relational_phase_operator",
         "execute_native_cycle",
+        "validate_problem",
     }
     native_nodes = function_source_nodes(tree, native_names)
     if {node.name for node in native_nodes} != native_names:
         raise RuntimeError("native function set is incomplete")
+    boundary_names = {"project_boundary"}
+    boundary_nodes = function_source_nodes(tree, boundary_names)
+    if {node.name for node in boundary_nodes} != boundary_names:
+        raise RuntimeError("boundary function set is incomplete")
     forbidden_names = {
         "exact_oracle",
         "ising_energy",
@@ -94,6 +104,41 @@ def static_no_smuggle() -> dict[str, Any]:
                 "argmax",
             }:
                 boundary_selection_inside_native.append(node.attr)
+    boundary_forbidden = {
+        "coupling",
+        "exact_oracle",
+        "expected_result",
+        "field",
+        "ising_energy",
+        "optimum_states",
+        "problem_sha256",
+    }
+    boundary_found: set[str] = set()
+    raw_forwarding = False
+    for root in boundary_nodes:
+        for node in ast.walk(root):
+            if isinstance(node, ast.Name) and node.id in boundary_forbidden:
+                boundary_found.add(node.id)
+            if isinstance(node, ast.Attribute) and node.attr in boundary_forbidden:
+                boundary_found.add(node.attr)
+            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+                if node.func.id == "BoundaryProjection":
+                    spins_keywords = [
+                        keyword
+                        for keyword in node.keywords
+                        if keyword.arg == "spins"
+                    ]
+                    if len(spins_keywords) == 1:
+                        value = spins_keywords[0].value
+                        raw_forwarding = bool(
+                            isinstance(value, ast.IfExp)
+                            and isinstance(value.test, ast.Name)
+                            and value.test.id == "valid"
+                            and isinstance(value.body, ast.Name)
+                            and value.body.id == "raw_spins"
+                            and isinstance(value.orelse, ast.Constant)
+                            and value.orelse.value is None
+                        )
     relational = next(
         node for node in native_nodes if node.name == "relational_phase_operator"
     )
@@ -101,6 +146,8 @@ def static_no_smuggle() -> dict[str, Any]:
         node.id for node in ast.walk(relational) if isinstance(node, ast.Name)
     }
     result = {
+        "boundary_forbidden_names": sorted(boundary_found),
+        "boundary_raw_result_forwarding": raw_forwarding,
         "boundary_selection_inside_native": sorted(boundary_selection_inside_native),
         "coupling_and_field_enter_native_relations": {
             "coupling",
@@ -113,7 +160,9 @@ def static_no_smuggle() -> dict[str, Any]:
         "source_sha256": hashlib.sha256(MACHINE_SOURCE.read_bytes()).hexdigest(),
     }
     result["pass"] = bool(
-        not found_names
+        not boundary_found
+        and raw_forwarding
+        and not found_names
         and not matrix_products
         and not boundary_selection_inside_native
         and result["coupling_and_field_enter_native_relations"]
@@ -188,20 +237,22 @@ def execute_controls(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, 
     transform_boundary = machine.project_boundary(
         transform_removed, record["label"] + "_transform_removed"
     )
+    flat_geometry = altered_geometry("flat")
     flat = machine.execute_native_cycle(
         borrowed,
         coupling,
         field,
-        program_beams=canonical,
-        actual_beams=altered_geometry("flat"),
+        program_beams=flat_geometry,
+        actual_beams=flat_geometry,
     )
     flat_boundary = machine.project_boundary(flat, record["label"] + "_flat")
+    scrambled_geometry = altered_geometry("scrambled")
     scrambled = machine.execute_native_cycle(
         borrowed,
         coupling,
         field,
-        program_beams=canonical,
-        actual_beams=altered_geometry("scrambled"),
+        program_beams=scrambled_geometry,
+        actual_beams=scrambled_geometry,
     )
     scrambled_boundary = machine.project_boundary(
         scrambled, record["label"] + "_scrambled"
@@ -227,11 +278,28 @@ def execute_controls(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, 
     omitted_restore = machine.restore_carrier(nominal, mode="omitted")
     expected = machine.as_carrier_bank(borrowed)
     deltas = {
+        "flat_geometry_penalty_linf": metric(
+            max(
+                abs(left - right)
+                for left, right in zip(
+                    nominal_boundary.mode_penalties, flat_boundary.mode_penalties
+                )
+            )
+        ),
         "flat_geometry_response_l2": metric(
             development.response_delta(nominal_boundary, flat_boundary)
         ),
         "missing_relation_response_l2": metric(
             development.response_delta(nominal_boundary, missing_boundary)
+        ),
+        "scrambled_geometry_penalty_linf": metric(
+            max(
+                abs(left - right)
+                for left, right in zip(
+                    nominal_boundary.mode_penalties,
+                    scrambled_boundary.mode_penalties,
+                )
+            )
         ),
         "scrambled_geometry_response_l2": metric(
             development.response_delta(nominal_boundary, scrambled_boundary)
@@ -248,7 +316,13 @@ def execute_controls(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, 
             correct_restore, expected
         )
         <= machine.RESTORATION_MAX,
-        "flat_geometry_rejected": not flat_boundary.valid,
+        "flat_geometry_changes_or_destroys_result": bool(
+            not flat_boundary.valid
+            or flat_boundary.raw_spins != nominal_boundary.raw_spins
+        ),
+        "flat_geometry_is_computationally_material": bool(
+            deltas["flat_geometry_penalty_linf"] >= machine.MATERIALITY_MIN
+        ),
         "missing_relation_changes_native_state": float(
             np.linalg.norm(nominal.displaced - missing_relation.displaced)
         )
@@ -257,9 +331,13 @@ def execute_controls(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, 
             omitted_restore, expected
         )
         >= machine.WRONG_RESTORATION_MIN,
-        "raw_result_not_corrected": nominal_boundary.spins
-        in (None, nominal_boundary.raw_spins),
-        "scrambled_geometry_rejected": not scrambled_boundary.valid,
+        "scrambled_geometry_changes_or_destroys_result": bool(
+            not scrambled_boundary.valid
+            or scrambled_boundary.raw_spins != nominal_boundary.raw_spins
+        ),
+        "scrambled_geometry_is_computationally_material": bool(
+            deltas["scrambled_geometry_penalty_linf"] >= machine.MATERIALITY_MIN
+        ),
         "transform_removal_is_material": deltas["transform_removed_response_l2"]
         >= machine.MATERIALITY_MIN,
         "wrong_inverse_fails": machine.maximum_abs_error(
@@ -268,8 +346,15 @@ def execute_controls(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, 
         >= machine.WRONG_RESTORATION_MIN,
         "wrong_query_rejected": not wrong_query.valid,
     }
+    diagnostic_only = {
+        "flat_geometry_changes_or_destroys_result",
+        "scrambled_geometry_changes_or_destroys_result",
+    }
+    required_checks = {
+        name: value for name, value in checks.items() if name not in diagnostic_only
+    }
     return {
-        "all_pass": all(checks.values()),
+        "all_pass": all(required_checks.values()),
         "checks": checks,
         "deltas": deltas,
         "label": record["label"],
@@ -284,9 +369,22 @@ def build_document() -> dict[str, Any]:
     static = static_no_smuggle()
     runtime = runtime_no_smuggle(corpus[0], borrowed)
     controls = [execute_controls(record, borrowed) for record in corpus]
+    geometry_probe = next(
+        record for record in controls if record["label"] == "verified_primary"
+    )
     summary = {
         "case_count": len(controls),
         "control_pass_count": sum(record["all_pass"] for record in controls),
+        "consistent_geometry_result_probe_pass": bool(
+            geometry_probe["checks"]["flat_geometry_changes_or_destroys_result"]
+            and geometry_probe["checks"][
+                "scrambled_geometry_changes_or_destroys_result"
+            ]
+        ),
+        "flat_geometry_result_change_or_rejection_count": sum(
+            record["checks"]["flat_geometry_changes_or_destroys_result"]
+            for record in controls
+        ),
         "minimum_flat_geometry_response_delta": metric(
             min(record["deltas"]["flat_geometry_response_l2"] for record in controls)
         ),
@@ -309,10 +407,15 @@ def build_document() -> dict[str, Any]:
             min(record["deltas"]["wrong_query_response_l2"] for record in controls)
         ),
         "runtime_no_smuggle_pass": runtime["pass"],
+        "scrambled_geometry_result_change_or_rejection_count": sum(
+            record["checks"]["scrambled_geometry_changes_or_destroys_result"]
+            for record in controls
+        ),
         "static_no_smuggle_pass": static["pass"],
     }
     overall_pass = bool(
         summary["control_pass_count"] == summary["case_count"]
+        and summary["consistent_geometry_result_probe_pass"]
         and static["pass"]
         and runtime["pass"]
     )
