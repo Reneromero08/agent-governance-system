@@ -26,3 +26,17 @@ batch. Its exact custody is preserved as `V3_RETIRED_BATCH_CUSTODY.json`.
 No prior result is rewritten. A repaired decision is authorized only by a new
 freeze commit, a new remotely sealed pre-oracle commit, a new oracle
 adjudication, and a passing independent re-execution review.
+
+The geometry-repair batch
+`75f78c2b16734a3224c012d092318f339ee8594acb2d64a8a57a3956467e5ea9`
+was executed only under the zero-oracle pre-oracle guard. Its exact evidence
+hash is `2d6a0c5cade56d8c821e62761e71a6d7881389bd97faca9947d5771ab4b31c5c`;
+both oracle and energy call counts are zero. It is retired without oracle
+adjudication because one rejected numerical tie changed only its diagnostic raw
+spin shadow after carrier reuse. Restoration, validity, response tolerance, and
+all strict controls passed for that record.
+
+The repaired reuse law requires repeated validity, stable accepted results,
+bounded response drift, and carrier restoration. It does not assign semantic
+meaning to the raw spin shadow of a rejected boundary. The entire retired batch
+is excluded from the next prospective batch.
