@@ -36,6 +36,8 @@ SOURCE_EXECUTION_CONTRACT = {
     "whole_module_ast_policy_required": True,
     "independent_compiled_bytecode_policy_required": True,
     "sole_selection_capable_region": "project_boundary:body",
+    "selection_semantics_policy_required": True,
+    "semantic_mutation_fixture_count": 16,
 }
 EXECUTABLE_CACHE_SUFFIXES = {".pyc", ".pyo", ".pyd", ".so", ".dll"}
 
