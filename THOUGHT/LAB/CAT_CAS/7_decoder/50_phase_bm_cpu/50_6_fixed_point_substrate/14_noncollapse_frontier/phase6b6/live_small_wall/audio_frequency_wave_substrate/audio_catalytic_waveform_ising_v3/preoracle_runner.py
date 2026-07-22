@@ -33,6 +33,9 @@ SOURCE_EXECUTION_CONTRACT = {
     "compile_dont_inherit": True,
     "compile_optimization": 0,
     "local_module_loader": "compile_exact_source_bytes",
+    "whole_module_ast_policy_required": True,
+    "independent_compiled_bytecode_policy_required": True,
+    "sole_selection_capable_region": "project_boundary:body",
 }
 EXECUTABLE_CACHE_SUFFIXES = {".pyc", ".pyo", ".pyd", ".so", ".dll"}
 
