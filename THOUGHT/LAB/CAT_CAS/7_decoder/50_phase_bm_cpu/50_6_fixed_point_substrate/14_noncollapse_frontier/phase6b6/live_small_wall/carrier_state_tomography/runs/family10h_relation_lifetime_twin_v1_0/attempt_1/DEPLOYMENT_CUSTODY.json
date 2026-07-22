@@ -1,0 +1,12 @@
+{
+  "controller_verified_clean_worktree": true,
+  "controller_verified_head_equals_origin": true,
+  "fixture_backend_allowed": false,
+  "manifest_file_sha256": "e8c3c3775e17fc717cd0b2bb6e78e74d4198f1f0bce38ee0c21dd72e827aa7ef",
+  "one_attempt_ceiling": 1,
+  "relation_manifest_freeze_commit": "71ac2fafcfa13c83a8abfa007eb69a608746b600",
+  "relation_source_authority_commit": "17644366a3609ef93bb0a14abc088f059a18b982",
+  "schema": "FAMILY10H_RELATION_LIFETIME_DEPLOYMENT_CUSTODY_V1",
+  "science_package_id": "family10h_relation_lifetime_twin_v1",
+  "transaction_run_id": "family10h_relation_lifetime_twin_v1_0"
+}

@@ -1,0 +1,262 @@
+{
+  "file_count": 51,
+  "files": [
+    {
+      "path": "PREFLIGHT_RECEIPT.json",
+      "sha256": "d3a91ece7207ca7b4170ce9d692b80e7af5be60ab2d80b1bbddeb20619a0edc3",
+      "size_bytes": 36674
+    },
+    {
+      "path": "TARGET_EXECUTION_WRAPPER_RECEIPT.json",
+      "sha256": "52884c72fb2242ed1fa113e69766693662b3d916eb69912508e919060de7337a",
+      "size_bytes": 40098
+    },
+    {
+      "path": "family10h_relation_lifetime_twin_v1_0_package_contents_71ac2faf.tar.gz",
+      "sha256": "e98b863a56f408e07a5cb4b3b436a716dd68841cf746983b6dac89570f310948",
+      "size_bytes": 1327579
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_GRAMMAR.json",
+      "sha256": "fff83f4c5eff90ef5d17c45f512aa569954bbc94a05afb0551832fa057501c88",
+      "size_bytes": 295775
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_GRAMMAR.sha256",
+      "sha256": "395850ee7e0219804f142b19224de3ae2a0e367d0b09b7749f3890fbb3e69d77",
+      "size_bytes": 66
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_GRAMMAR.tsv",
+      "sha256": "a72ca21e94325c85dab5f78c9db660b497bb26139d4591bf531f396eb83afdca",
+      "size_bytes": 1022
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_ADVERSARY_TEST.json",
+      "sha256": "07968c7249015474f1fc8bec9a5caf890b9ac262e74ccd114d001ff43a31692e",
+      "size_bytes": 9289
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_BUILD_READINESS.json",
+      "sha256": "6e664131beedd8582150f5c726e50475444c12d36c3bb62603992f0892f92016",
+      "size_bytes": 2805
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_CONTRACT.md",
+      "sha256": "b916198cebed13c1f0b96d322160ce0f1222e12ee6c7ee38e62aa87022a6e46b",
+      "size_bytes": 5057
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_DEPLOYMENT_CUSTODY.json",
+      "sha256": "73ef353c6b42be76e0b03a4ad9d8f5c1518f696c83822375f001644f9fb67422",
+      "size_bytes": 625
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_IMPLEMENTATION_MANIFEST.json",
+      "sha256": "e8c3c3775e17fc717cd0b2bb6e78e74d4198f1f0bce38ee0c21dd72e827aa7ef",
+      "size_bytes": 30606
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_IMPLEMENTATION_MANIFEST.sha256",
+      "sha256": "8ee2f390522d945d92f37a6b8e68e09e25b1e445b41f18bbddf9aebaa44c3e5f",
+      "size_bytes": 66
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_LIVE_CONTROLLER_SELF_TEST.json",
+      "sha256": "df012caf48b98df857f1aa63d42dbf9f63cc1ceb7630a11b08540672206222a9",
+      "size_bytes": 4764
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_OFFLINE_VALIDATE.json",
+      "sha256": "cef0e907592319bf741dc0ffad73a19c9b070e7cdef147ee41f41f49797c75b4",
+      "size_bytes": 7191
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_PHYSICAL_ADJUDICATOR_SELF_TEST.json",
+      "sha256": "1f5180e8bce8ab8375986f126b3b43623ce172b92600ad4687a418cccec8622c",
+      "size_bytes": 53096
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_PHYSICAL_THRESHOLD_CONTRACT.json",
+      "sha256": "b317b0a5881471101f44d7359370f5d4ca59f3b17ed1ede4ff377b9ce482bc1c",
+      "size_bytes": 1950
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_PUBLIC_SCHEDULE.json",
+      "sha256": "2e3ebfc9dcd1a33bac47cf5345653622eb60cd87f0de4dab0a5fddf2839f7124",
+      "size_bytes": 2115
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_PUBLIC_SCHEDULE.sha256",
+      "sha256": "f1770fd03456ebab61ad6892c04e49257661251b20deea0ffb213d11c8edbace",
+      "size_bytes": 66
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_PUBLIC_SCHEDULE.tsv",
+      "sha256": "9e39575ac3189633db112c3cfba4c3420db72e7745d59fca6dfd8b1ac27668ea",
+      "size_bytes": 21583907
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_RUNTIME_BUILD_SELF_TEST.json",
+      "sha256": "4b459ad19e43bf578a5b8d23b94b1d838a98ab40f9f8042c63069f9ae9cbe6f2",
+      "size_bytes": 19956
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_RUNTIME_CONTROL_FLOW_AUDIT.json",
+      "sha256": "f5099305eb8929b1bf1123af8709af234939dbd4945b3d29bc207fa4ceb28918",
+      "size_bytes": 1552
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_SELF_TEST.json",
+      "sha256": "62cea0f136bfafc1f55a03de4f007575c4a386709816a19a55d77bc1b62cad49",
+      "size_bytes": 28479
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_SENSOR_AUTHORITY_BINDING.json",
+      "sha256": "70378593911da84b1e46db394048e7c433526aaa8c03b8b8a5db7c23aa7f034e",
+      "size_bytes": 2922
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_SOURCE_BUNDLE.tar.gz",
+      "sha256": "363eb07e368d3bdcbfacd3c34acc093fed8aeb8151eaa4782819640b4aecd04b",
+      "size_bytes": 81571
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_SOURCE_HASHES.json",
+      "sha256": "8ba6cf665f3aa999f4395618d4ec081a1abb48cfbdeae2cafa9e87135790dbbd",
+      "size_bytes": 22525
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_SYNTHETIC_EXECUTOR_SELF_TEST.json",
+      "sha256": "951276e663ad1f876058ec4ec10d85a77c9e1530757d019494c3f54d266d0066",
+      "size_bytes": 3611
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_SYNTHETIC_TARGET_WRAPPER_SELF_TEST.json",
+      "sha256": "ba78b04035707627d5a283e9038913a7881ad258d3899a587acc6769163c9bb2",
+      "size_bytes": 29112
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_TARGET_PREFLIGHT_SELF_TEST.json",
+      "sha256": "a9382bdd87f2c3b2cf2000c2a7d52d348f56f75f80e8463668826b57d57b7abb",
+      "size_bytes": 9570
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_TARGET_SELF_TEST.json",
+      "sha256": "2ad4e942372cbc217e631cf4928d5e4c99486505c1aeebaf628091e1d4b0a913",
+      "size_bytes": 78636
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_TOOLCHAIN_DISCOVERY.json",
+      "sha256": "349996de0ee4c5a65283ee5f25a22011bffb60fe3699cb370ed5edc8f0ae4615",
+      "size_bytes": 5835
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_LIFETIME_TRANSPORT_SIMULATION.json",
+      "sha256": "a5e9790f1e8cb2f48ba4e2f4d3d1dbc70cc28301b857a71ed67f3a7fd53a8a44",
+      "size_bytes": 433
+    },
+    {
+      "path": "remote_relation_lifetime_root/RELATION_MARGINAL_EQUALITY_PROOF.json",
+      "sha256": "149e445e61e1d2d98611295a3a14bb85a65eabc4f32423326890e7b1f9c3d559",
+      "size_bytes": 6193
+    },
+    {
+      "path": "remote_relation_lifetime_root/__pycache__/relation_lifetime_adjudication.cpython-311.pyc",
+      "sha256": "b7cbd54df6c1d95df79ed45668ad3f85e7a598adb7cd87c6070bb9da8ba49f32",
+      "size_bytes": 13364
+    },
+    {
+      "path": "remote_relation_lifetime_root/__pycache__/relation_lifetime_physical_adjudication.cpython-311.pyc",
+      "sha256": "748788784684a73d8433e4b76faccf18b5c60b72fc9948cbd7624823839683fa",
+      "size_bytes": 126829
+    },
+    {
+      "path": "remote_relation_lifetime_root/__pycache__/relation_lifetime_public.cpython-311.pyc",
+      "sha256": "83f746740cae740fd8fba4eb115f41a6165b28f15141dfb5fdc89eb44e78d8a6",
+      "size_bytes": 62563
+    },
+    {
+      "path": "remote_relation_lifetime_root/__pycache__/relation_lifetime_public.cpython-313.pyc",
+      "sha256": "728ddbfbbe4eb8f34cc12920be3fdd24864a5fae505f46e9d1093010a060f7d8",
+      "size_bytes": 52305
+    },
+    {
+      "path": "remote_relation_lifetime_root/_relation_lifetime_owned_outputs/attempt_1/feature_freeze.json",
+      "sha256": "b139081f62f4483a3005bf5eb798460e91fe00379fdb8a64d6bea2e9939b4344",
+      "size_bytes": 493
+    },
+    {
+      "path": "remote_relation_lifetime_root/_relation_lifetime_owned_outputs/attempt_1/raw_records.jsonl",
+      "sha256": "eeef7f92fc0ce2c9ba457a70aa1310694cf0328f08e29b906e7e8e43bd7286df",
+      "size_bytes": 66496587
+    },
+    {
+      "path": "remote_relation_lifetime_root/_relation_lifetime_owned_outputs/attempt_1/source_death_receipts.jsonl",
+      "sha256": "f6b44033583e709288cc318129efcb984227210942a745c62cd355dfa5ab714f",
+      "size_bytes": 18643922
+    },
+    {
+      "path": "remote_relation_lifetime_root/_relation_lifetime_owned_outputs/attempt_1/target_execution_receipt.json",
+      "sha256": "ae83fe58ca6c2af47e6e6ab617f45c963a047db4c5a088a9f0d5087174ea4ad1",
+      "size_bytes": 288
+    },
+    {
+      "path": "remote_relation_lifetime_root/relation_lifetime_adjudication.py",
+      "sha256": "56e3fc6b0f744f68c84dd955fcefb333956872b5c07d3286b787bbc6f26f0fb0",
+      "size_bytes": 10666
+    },
+    {
+      "path": "remote_relation_lifetime_root/relation_lifetime_live_controller.py",
+      "sha256": "343feaf6aa5e76a363b627400c62855e50a50c785268503367b40ac026bda494",
+      "size_bytes": 11654
+    },
+    {
+      "path": "remote_relation_lifetime_root/relation_lifetime_physical_adjudication.py",
+      "sha256": "43c9424e01e2ba62de3e26e5fd7e925d474254ab29d07cf7151aab696607487c",
+      "size_bytes": 87073
+    },
+    {
+      "path": "remote_relation_lifetime_root/relation_lifetime_pmu_preflight",
+      "sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+      "size_bytes": 42744
+    },
+    {
+      "path": "remote_relation_lifetime_root/relation_lifetime_pmu_preflight.c",
+      "sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+      "size_bytes": 9378
+    },
+    {
+      "path": "remote_relation_lifetime_root/relation_lifetime_public.py",
+      "sha256": "95b9c379e2c2d5f15d511a075fdf0011e3dca00ff43d43bf18234e9d71a82023",
+      "size_bytes": 45392
+    },
+    {
+      "path": "remote_relation_lifetime_root/relation_lifetime_runtime",
+      "sha256": "10db6d521c29f7253b0e5a34d040a73bab5df75eb08d310205ecb9df8e9c62ef",
+      "size_bytes": 132680
+    },
+    {
+      "path": "remote_relation_lifetime_root/relation_lifetime_runtime.c",
+      "sha256": "8452f547eba460b4e167b35227c04d24ebd5315f1f03e10099af28c1aa3a28c9",
+      "size_bytes": 58361
+    },
+    {
+      "path": "remote_relation_lifetime_root/relation_lifetime_runtime.h",
+      "sha256": "007a054aa2405e91dcc2f9621806eb99efd6dd79a8aeaba47a85934d62c63e93",
+      "size_bytes": 2443
+    },
+    {
+      "path": "remote_relation_lifetime_root/relation_lifetime_target.py",
+      "sha256": "297d2d5d7c6d4d9da6055cbdb27a709939af3c09d19f58b2f00d1a59ce197cf4",
+      "size_bytes": 91240
+    },
+    {
+      "path": "remote_relation_lifetime_root/run_relation_lifetime_twin.py",
+      "sha256": "b08c73cbe4eb28abc767dac23454563c9e5e8e8ea7dcb55e45cd17871386a24a",
+      "size_bytes": 102398
+    }
+  ],
+  "root": "/root/family10h_relation_lifetime_twin_v1_0_71ac2faf_tx",
+  "schema": "FAMILY10H_RELATION_LIFETIME_REMOTE_PRESEAL_INVENTORY_V1"
+}

@@ -1,0 +1,17 @@
+{
+    "cleanup_scope": "transaction_owned_paths_only",
+    "passed": true,
+    "removed": [
+        {
+            "existed_before": true,
+            "exists_after": false,
+            "path": "/root/family10h_relation_lifetime_twin_v1_0_71ac2faf_tx"
+        },
+        {
+            "existed_before": true,
+            "exists_after": false,
+            "path": "/root/family10h_relation_lifetime_twin_v1_0_71ac2faf_ATTEMPT_1_REMOTE_ROOT.tar.gz"
+        }
+    ],
+    "schema": "FAMILY10H_RELATION_LIFETIME_REMOTE_CLEANUP_RECEIPT_V1"
+}
