@@ -3133,8 +3133,21 @@
       "platform",
       "typing"
     ],
+    "initializer_selection_negative_fixture_rejected": true,
     "matrix_product_lines": [],
-    "native_function_names": [
+    "native_class_method_names": [
+      "SpectralPhaseLaw.validate"
+    ],
+    "native_executable_names": [
+      "@module:ACTIVE_BINS",
+      "@module:DEFAULT_LAW",
+      "@module:GEOMETRY_SAMPLES",
+      "@module:MODE_COUNT",
+      "@module:PHASE_MODES",
+      "@module:SAMPLE_COUNT",
+      "@module:SAMPLE_RATE_HZ",
+      "@module:SITE_COUNT",
+      "SpectralPhaseLaw.validate",
       "as_carrier_bank",
       "borrowed_carrier",
       "canonical_geometry",
@@ -3142,11 +3155,35 @@
       "execute_native_cycle",
       "geometry_anchors",
       "normalized_active",
+      "recursive_antipodal_phase_modes",
       "relational_phase_operator",
+      "restore_carrier",
       "seed_recursive_spectral_tree",
       "validate_problem"
     ],
+    "native_module_initializer_names": [
+      "ACTIVE_BINS",
+      "DEFAULT_LAW",
+      "GEOMETRY_SAMPLES",
+      "MODE_COUNT",
+      "PHASE_MODES",
+      "SAMPLE_COUNT",
+      "SAMPLE_RATE_HZ",
+      "SITE_COUNT"
+    ],
     "pass": true,
+    "reachable_boundary_executable_names": [
+      "@module:ACTIVE_BINS",
+      "@module:GEOMETRY_SAMPLES",
+      "@module:MODE_COUNT",
+      "@module:PHASE_MODES",
+      "@module:SAMPLE_COUNT",
+      "@module:SITE_COUNT",
+      "geometry_anchors",
+      "normalized_active",
+      "project_boundary",
+      "recursive_antipodal_phase_modes"
+    ],
     "reachable_local_function_names": [
       "as_carrier_bank",
       "borrowed_carrier",
@@ -3156,6 +3193,7 @@
       "geometry_anchors",
       "normalized_active",
       "project_boundary",
+      "recursive_antipodal_phase_modes",
       "relational_phase_operator",
       "restore_carrier",
       "seed_recursive_spectral_tree",

@@ -63,3 +63,25 @@ development-only predecessor source dependencies, and requires a clean exact Git
 tree before prospective execution. The entire third batch is excluded from a fourth
 prospective batch. Only that newly frozen, remotely sealed, independently adjudicated
 batch can authorize the final V3 decision.
+The fourth ordered batch
+ea1c25fbe665c137aaacd693e20cc0ed6dad58dacbbdb9761503a303b6c1f80e
+produced 213/213 accepted unique optima and rejected all 43 non-unique cases.
+Every strict control and restoration/reuse path passed. Its exact batch, pre-oracle,
+oracle, trace, and independent-verification bytes are preserved under
+V3_RETIRED_LOCAL_CLOSURE_*.
+
+Final adversarial review found no observed numerical or mechanism drift, but found
+two prospective assurance defects. The local AST traversal omitted the
+PHASE_MODES module initializer and SpectralPhaseLaw.validate, and ignored
+__pycache__ files could exist outside the clean-Git and source-hash gates.
+The cached code objects matched the frozen sources, but post-oracle equivalence
+cannot repair prospective custody. The fourth batch is therefore retired and
+excluded without promoting its result.
+
+The fifth repair traverses native module initializers and class methods in two
+independent analyzers, proves fail-closed behavior by injecting forbidden
+pre-boundary selection into the recursive initializer in memory, compiles local
+modules directly from exact source bytes, disables bytecode writes, rejects
+executable caches under the package, and seals the source-execution environment
+and a real temporary cache-rejection control. Only a new fifth freeze, remote
+pre-oracle seal, oracle adjudication, and passing final review may authorize V3.

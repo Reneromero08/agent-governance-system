@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import importlib.util
+import types
 import itertools
 import json
 import os
@@ -13,6 +13,9 @@ from pathlib import Path
 from typing import Any, Sequence
 
 import numpy as np
+
+
+sys.dont_write_bytecode = True
 
 
 PACKAGE_DIR = Path(__file__).resolve().parent
@@ -33,12 +36,13 @@ NOT_ESTABLISHED = "CATALYTIC_WAVEFORM_ISING_V3_NOT_ESTABLISHED"
 
 
 def load_module(path: Path, name: str) -> Any:
-    specification = importlib.util.spec_from_file_location(name, path)
-    if specification is None or specification.loader is None:
-        raise ImportError(f"cannot load {path}")
-    module = importlib.util.module_from_spec(specification)
+    source = path.read_bytes()
+    code = compile(source, str(path), "exec", dont_inherit=True, optimize=0)
+    module = types.ModuleType(name)
+    module.__file__ = str(path)
+    module.__package__ = ""
     sys.modules[name] = module
-    specification.loader.exec_module(module)
+    exec(code, module.__dict__)
     return module
 
 

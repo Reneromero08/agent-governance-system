@@ -1,0 +1,63 @@
+{
+  "all_state_energies_sha256": "fab0e2185066287230fd00027ec54688359242a22b40397caa91489338c3b573",
+  "authorized_claim_ceiling": "BOUNDED_SOFTWARE_RECURSIVE_SPECTRAL_PHASE_REFERENCE_ONLY",
+  "authorized_decision": "CATALYTIC_WAVEFORM_ISING_V3_VERIFIED",
+  "classification_counts": {
+    "NON_UNIQUE_ACCEPTED": 0,
+    "NON_UNIQUE_REJECTED": 43,
+    "UNIQUE_ACCEPTED_CORRECT": 213,
+    "UNIQUE_ACCEPTED_INCORRECT": 0,
+    "UNIQUE_REJECTED_CORRECT": 0,
+    "UNIQUE_REJECTED_INCORRECT": 0
+  },
+  "consistent_geometry_result_probe": {
+    "flat": true,
+    "scrambled": true
+  },
+  "findings": [],
+  "machine_fingerprint": "1bb3d9c8677c9f9677e5c4d650d27db690c26490f7001401d758217207ba2025",
+  "maximum_restoration_error": 1.1322097734e-15,
+  "maximum_reuse_response_delta_l2": 5.93833217285e-14,
+  "maximum_reuse_restoration_error": 1.69934914213e-15,
+  "mismatches": [],
+  "reviewer_id": "V3-INDEPENDENT-REEXECUTION-VERIFIER-02",
+  "schema": "catalytic_waveform_ising_v3_independent_reexecution_v2",
+  "state_count_enumerated": 8192,
+  "static_integrity": {
+    "boundary_forbidden_names": [],
+    "boundary_raw_result_forwarding": true,
+    "dynamic_import_lines": [],
+    "imported_roots": [
+      "__future__",
+      "dataclasses",
+      "hashlib",
+      "json",
+      "math",
+      "numpy",
+      "pathlib",
+      "platform",
+      "typing"
+    ],
+    "matrix_product_lines_in_native": [],
+    "missing_functions": [],
+    "native_forbidden_names": [],
+    "pass": true,
+    "reachable_local_function_names": [
+      "as_carrier_bank",
+      "borrowed_carrier",
+      "canonical_geometry",
+      "common_merit_phase",
+      "execute_native_cycle",
+      "geometry_anchors",
+      "normalized_active",
+      "project_boundary",
+      "relational_phase_operator",
+      "restore_carrier",
+      "seed_recursive_spectral_tree",
+      "validate_problem"
+    ],
+    "uncovered_native_function_names": []
+  },
+  "strict_control_pass_count": 256,
+  "verdict": "PASS"
+}

@@ -1,9 +1,9 @@
 {
-  "batch_file_sha256": "64fc985265bfbc8ef266b3fb986df145511cfd49491ac757384cb5fbfc2320cb",
-  "batch_ordered_sha256": "ea1c25fbe665c137aaacd693e20cc0ed6dad58dacbbdb9761503a303b6c1f80e",
+  "batch_file_sha256": "cdb7c70cc233ddc515131ce1b8fbb3a21068dd76831c1cac10fb023b45b3d826",
+  "batch_ordered_sha256": "f7890f3ca8a8e455ea86a53a2bb98d323047b939a80326e8188430a52d21aac6",
   "batch_size": 256,
   "claim_ceiling": "BOUNDED_SOFTWARE_RECURSIVE_SPECTRAL_PHASE_REFERENCE_ONLY",
-  "control_results_sha256": "79187b5a29c4c40156b0df64280d6c75a074e2096e08a04c13fa946be5b7235c",
+  "control_results_sha256": "78b4b42802df95ac6ca2a4c3881ce76479f604baf7e790763e49e2d90716a915",
   "development_results_sha256": "3d6939660c76d634bedc35ecd70c8f424f544cfd1bdc7d686d105ec7727ec655",
   "development_summary": {
     "accepted_correct": 97,
@@ -26,19 +26,19 @@
     "unique_raw_correct": 97
   },
   "execution_source_sha256": {
-    "control_qualifier.py": "934fc981baabf45f8f8dae19cbf6ac6c32bd19e1c57653ce941cac187a62c973",
-    "development_qualifier.py": "7a00710bf0d2ca4d8b5abea00815d31d74b308562a00eb51dfaab5589d2372db",
-    "finalize_package.py": "8c130014e662483f58049de2610adcaeb0d8c344d4d00b593087aa64f23afe59",
-    "freeze_builder.py": "d87cceb715f99502c2fce29b16b70a85629d379d7ecbdb83911624644acbb4f0",
-    "independent_verifier_v2.py": "5f811138e125b60dd3588ada8860c76fde402d7b7c95268be1f59e45802326cc",
-    "oracle_adjudicator.py": "0eb2ee1bc28a4ed5c14a48aa8ba4f0e5f1978dc1c0f4367c8da1752635db5ab5",
-    "preoracle_runner.py": "50b8d8c8404512d4ed2eb3b90568ca542db8c4b9c0bc1da8d3ef5c0d4bdfd23f",
-    "qualify_package.py": "34f5bfdb67c0febb7f361e474ab3c94edc2860ac4b887fce3f05a0b90b3c24ad",
-    "stress_qualifier.py": "5eb1b48cf75f158f80bba51204c0a23d0398eebc97717063e826fda239079202",
+    "control_qualifier.py": "cc125548ffc694478281a3215e5fb3f20f1d8817e098b810050dfab0b83a8858",
+    "development_qualifier.py": "909cc96206c6b9500711cf3e0c99eb211e5fecbc63971d0a41fc59bc143082fd",
+    "finalize_package.py": "76c10379163d51c28f18bf2f5b74088c653df8048764978b0051be1b2b532f6c",
+    "freeze_builder.py": "b2e33a11c0cb73cc3189b6802c2d1ef05c0aa41b4e87297cac4fcf13089db847",
+    "independent_verifier_v2.py": "1c7f57878e98da37c4557a533a74c454c3ef0c9a398b929524fb1615c2f3010b",
+    "oracle_adjudicator.py": "5d438bd4c97cb7ca5e6d75b0ff2e66798809d0a86bd9ca306706a56525f3b5cd",
+    "preoracle_runner.py": "2cb9b35f2b2673320733d1dd340b39a69f2b0320d84422893e30b2417de1c551",
+    "qualify_package.py": "8d0094ad0fa8063f913b5f7fd726122176102cee66e028ec2d08f72263f61756",
+    "stress_qualifier.py": "88d438bd6be056ae5487262d9b271de15ede2af6ded102e54582f588881e7a36",
     "v3_machine.py": "fb12a0a7c54f4b1fac26b10a2041bfe7205c26d8136b2395c75a6b1d7c99694a"
   },
-  "experiment_contract_bytes": 4356,
-  "experiment_contract_sha256": "592f3f1e93412e2c8447be923b7186b99b86ad0a2455719521e724f89a9c7cbb",
+  "experiment_contract_bytes": 4620,
+  "experiment_contract_sha256": "c5bedd7b8d92fd8628068029258149f2d424258ca17a4b6c1cb849c0672be504",
   "freeze_before_waveform_execution_or_oracle": true,
   "machine_contract": {
     "active_frequency_bins": [
@@ -127,9 +127,17 @@
   },
   "repair_parent_preoracle_commit": "8050fb44ef36f0d1f4997f4c536cf880f9c947b7",
   "retired_batch_ordered_sha256": "0e6ee2935dd5472acb94d0fa27b283bb439cc6e002f64059dc5d79c372c11bf7",
+  "retired_local_closure_batch_ordered_sha256": "ea1c25fbe665c137aaacd693e20cc0ed6dad58dacbbdb9761503a303b6c1f80e",
   "retired_reuse_batch_ordered_sha256": "75f78c2b16734a3224c012d092318f339ee8594acb2d64a8a57a3956467e5ea9",
   "retired_transitive_custody_batch_ordered_sha256": "45fa0401c4574a2b42e4d6233e9e046dc45840db3ffe35d2042c79546eeceddb",
-  "schema": "catalytic_waveform_ising_v3_repaired_freeze_v3",
+  "schema": "catalytic_waveform_ising_v3_repaired_freeze_v4",
+  "source_execution_contract": {
+    "bytecode_cache_inputs_forbidden_under_package": true,
+    "bytecode_cache_writes_disabled": true,
+    "compile_dont_inherit": true,
+    "compile_optimization": 0,
+    "local_module_loader": "compile_exact_source_bytes"
+  },
   "stress_results_sha256": "e1f53fc064cc0f8db11b546f710179ee86e19d5adaa2228792fa2d7dc236cc83",
   "stress_summary": {
     "accepted_correct": 434,
