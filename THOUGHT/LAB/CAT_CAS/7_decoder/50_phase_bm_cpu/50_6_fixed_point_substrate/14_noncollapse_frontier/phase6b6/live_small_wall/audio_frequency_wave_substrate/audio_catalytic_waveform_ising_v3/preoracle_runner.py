@@ -347,7 +347,11 @@ def build_documents(
     execution_environment = source_execution_environment()
     if execution_environment["unexpected_package_executable_inputs"]:
         raise RuntimeError("unsealed executable cache appeared during execution")
+    bytecode_negative_control = bytecode_rejection_self_test()
+    if not bytecode_negative_control["pass"]:
+        raise RuntimeError("ignored executable negative control failed")
     ledger.add("source_execution_environment_sealed", execution_environment)
+    ledger.add("ignored_executable_negative_control_sealed", bytecode_negative_control)
     ledger.add("null_model_baseline_sealed", null_model)
     instances = [
         execute_instance(record, borrowed, ledger)
@@ -400,6 +404,7 @@ def build_documents(
         "oracle_opened": False,
         "schema": "catalytic_waveform_ising_v3_preoracle_evidence_v2",
         "source_execution_environment": execution_environment,
+        "source_execution_negative_control": bytecode_negative_control,
         "summary": summary,
     }
     ledger.add("complete_preoracle_evidence_sealed", summary)
