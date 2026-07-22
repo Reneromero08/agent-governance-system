@@ -1,0 +1,26 @@
+{
+  "coordinate_discovery_commit": "932f4ef4dc5f5e6021265976563875d6d946beef",
+  "live_attempt_authority": false,
+  "package_id": "family10h_primary_minus_sham_differential_v1",
+  "package_manifest_sha256": "b6437c28b50c9f69e2a7c2b9b2d5573b9d5b5ccb2e9c21ecedf9b61bed59b3ef",
+  "post_observation_feature_selection_allowed": false,
+  "post_observation_threshold_revision_allowed": false,
+  "runtime_source_hashes": {
+    "RELATION_GRAMMAR.json": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+    "RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": "8691d4e47ea987ab0ca25391179b7a94409ce589b23cea2a0f0b0f12d80b3f7c",
+    "RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+    "relation_spatial_pmu_preflight": "caa5fd52a46ab77a6327d6fccfa8eb836e53f3035b192f0632bb314a56c7f74f",
+    "relation_spatial_pmu_preflight.c": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+    "relation_spatial_runtime": "eacb3a5b97268614eaec0c2ab32383e8e4b2e967fbf6955fcea7af0e22a66e7f",
+    "relation_spatial_runtime.c": "699db0d3b04374c4f2d92e7cfe6c08b81ba79f814015637138626a9f075c8c3e",
+    "relation_spatial_runtime.h": "665d98df19a2dce07b782869247cfc58ffcb9612869e45c481e4340f2664b491"
+  },
+  "schedule_manifest_sha256": "b44ecc446da1610ff075d5e763cb11324181bbdbe609cd2f9feeaba745753734",
+  "schema": "FAMILY10H_PRIMARY_MINUS_SHAM_DIFFERENTIAL_PACKAGE_MANIFEST_V1",
+  "small_wall_crossed": false,
+  "source_authority_commit": "2cdec9704452669d3651a063b6fb5805913647e3",
+  "source_freeze_commit": "8720dd543947f26cbd2af18a6a3dd4870c9adf85",
+  "source_schedule_package": "family10h_relation_spatial_pair_readout_v1_1_segmented",
+  "threshold_contract_sha256": "385221e33b50da1d6567b48f7b28c9507f8ff95b49173d5f9ee0ef607b45ff49",
+  "transaction_run_id": "family10h_primary_minus_sham_differential_v1_0"
+}

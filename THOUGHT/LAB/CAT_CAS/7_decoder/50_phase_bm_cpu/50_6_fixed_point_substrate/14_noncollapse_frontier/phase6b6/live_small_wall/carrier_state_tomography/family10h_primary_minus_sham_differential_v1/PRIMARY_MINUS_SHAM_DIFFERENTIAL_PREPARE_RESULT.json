@@ -1,0 +1,7 @@
+{
+  "package_manifest_sha256": "b6437c28b50c9f69e2a7c2b9b2d5573b9d5b5ccb2e9c21ecedf9b61bed59b3ef",
+  "passed": true,
+  "schedule_manifest_sha256": "b44ecc446da1610ff075d5e763cb11324181bbdbe609cd2f9feeaba745753734",
+  "schema": "FAMILY10H_PRIMARY_MINUS_SHAM_DIFFERENTIAL_PREPARE_RESULT_V1",
+  "threshold_contract_sha256": "385221e33b50da1d6567b48f7b28c9507f8ff95b49173d5f9ee0ef607b45ff49"
+}
