@@ -141,6 +141,74 @@ def local_executable_closure(
     return closure, nodes
 
 
+SELECTION_CAPABILITIES = {
+    "argmax",
+    "argmin",
+    "argpartition",
+    "argsort",
+    "heapify",
+    "heappop",
+    "heappush",
+    "lexsort",
+    "nlargest",
+    "nsmallest",
+    "partition",
+    "searchsorted",
+    "sort",
+    "sorted",
+    "take_along_axis",
+    "where",
+}
+DYNAMIC_CAPABILITIES = {
+    "__import__",
+    "compile",
+    "eval",
+    "exec",
+    "exec_module",
+    "getattr",
+    "globals",
+    "import_module",
+    "locals",
+    "setattr",
+    "spec_from_file_location",
+}
+
+
+def _call_leaf(node: ast.Call) -> str | None:
+    if isinstance(node.func, ast.Name):
+        return node.func.id
+    if isinstance(node.func, ast.Attribute):
+        return node.func.attr
+    return None
+
+
+def _boundary_body_nodes(boundary: ast.FunctionDef) -> set[ast.AST]:
+    allowed: set[ast.AST] = set()
+
+    def visit(node: ast.AST) -> None:
+        if isinstance(
+            node,
+            (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Lambda),
+        ):
+            return
+        allowed.add(node)
+        for child in ast.iter_child_nodes(node):
+            visit(child)
+
+    for statement in boundary.body:
+        visit(statement)
+    return allowed
+
+
+def _violation(code: str, node: ast.AST, detail: str) -> dict[str, Any]:
+    return {
+        "code": code,
+        "column": int(getattr(node, "col_offset", -1)),
+        "detail": detail,
+        "line": int(getattr(node, "lineno", -1)),
+    }
+
+
 def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
     tree = ast.parse(source, filename=str(MACHINE_SOURCE))
     allowed_import_roots = {
@@ -155,26 +223,11 @@ def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
         "typing",
     }
     imported_roots: set[str] = set()
-    dynamic_import_lines: list[int] = []
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             imported_roots.update(alias.name.split(".")[0] for alias in node.names)
         elif isinstance(node, ast.ImportFrom) and node.module:
             imported_roots.add(node.module.split(".")[0])
-        elif isinstance(node, ast.Call):
-            if isinstance(node.func, ast.Name) and node.func.id in {
-                "__import__",
-                "compile",
-                "eval",
-                "exec",
-            }:
-                dynamic_import_lines.append(node.lineno)
-            elif isinstance(node.func, ast.Attribute) and node.func.attr in {
-                "exec_module",
-                "import_module",
-                "spec_from_file_location",
-            }:
-                dynamic_import_lines.append(node.lineno)
     required_native_executables = {
         "@module:DEFAULT_LAW",
         "@module:PHASE_MODES",
@@ -196,33 +249,16 @@ def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
     )
     boundary_closure, _ = local_executable_closure(tree, {"project_boundary"})
     uncovered_native = sorted(required_native_executables - native_closure)
-    native_nodes = [executable_nodes[name] for name in sorted(native_closure)]
     boundary = executable_nodes["project_boundary"]
-    forbidden_names = {
+    if not isinstance(boundary, ast.FunctionDef):
+        raise RuntimeError("project_boundary must be one top-level function")
+    boundary_nodes = _boundary_body_nodes(boundary)
+    whole_module_forbidden = {
         "exact_oracle",
+        "expected_result",
         "ising_energy",
         "optimum_states",
-        "problem_sha256",
-        "raw_spins",
-        "spins",
     }
-    found_names: set[str] = set()
-    matrix_products: list[int] = []
-    boundary_selection_inside_native: list[str] = []
-    for root in native_nodes:
-        for node in ast.walk(root):
-            if isinstance(node, ast.Name) and node.id in forbidden_names:
-                found_names.add(node.id)
-            if isinstance(node, ast.Attribute) and node.attr in forbidden_names:
-                found_names.add(node.attr)
-            if isinstance(node, ast.BinOp) and isinstance(node.op, ast.MatMult):
-                matrix_products.append(node.lineno)
-            if isinstance(node, ast.Attribute) and node.attr in {
-                "argsort",
-                "argmin",
-                "argmax",
-            }:
-                boundary_selection_inside_native.append(node.attr)
     boundary_forbidden = {
         "coupling",
         "exact_oracle",
@@ -233,12 +269,129 @@ def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
         "problem_sha256",
     }
     boundary_found: set[str] = set()
+    violations: list[dict[str, Any]] = []
+    selection_hits: list[str] = []
+    dynamic_lines: list[int] = []
+    matrix_products: list[int] = []
+    executable_manifest: list[dict[str, Any]] = []
+    executable_types = (ast.stmt, ast.expr, ast.comprehension, ast.keyword)
+    for node in ast.walk(tree):
+        inside_boundary = node in boundary_nodes
+        if isinstance(node, executable_types):
+            executable_manifest.append(
+                {
+                    "column": int(getattr(node, "col_offset", -1)),
+                    "disposition": (
+                        "project_boundary_body_carveout"
+                        if inside_boundary
+                        else "whole_module_native_policy"
+                    ),
+                    "end_line": int(
+                        getattr(node, "end_lineno", getattr(node, "lineno", -1))
+                    ),
+                    "line": int(getattr(node, "lineno", -1)),
+                    "node_type": type(node).__name__,
+                }
+            )
+        if inside_boundary:
+            if isinstance(node, ast.Name) and node.id in boundary_forbidden:
+                boundary_found.add(node.id)
+                violations.append(
+                    _violation("boundary_forbidden_identifier", node, node.id)
+                )
+            elif isinstance(node, ast.Attribute) and node.attr in boundary_forbidden:
+                boundary_found.add(node.attr)
+                violations.append(
+                    _violation("boundary_forbidden_identifier", node, node.attr)
+                )
+            continue
+        if isinstance(node, ast.Call):
+            leaf = _call_leaf(node)
+            if leaf in SELECTION_CAPABILITIES or (
+                leaf in {"min", "max"}
+                and any(keyword.arg == "key" for keyword in node.keywords)
+            ):
+                selection_hits.append(str(leaf))
+                violations.append(
+                    _violation(
+                        "selection_capability_outside_boundary", node, str(leaf)
+                    )
+                )
+            if leaf in DYNAMIC_CAPABILITIES:
+                dynamic_lines.append(node.lineno)
+                violations.append(_violation("dynamic_capability", node, str(leaf)))
+            if leaf == "project_boundary":
+                violations.append(
+                    _violation("native_to_boundary_call", node, str(leaf))
+                )
+        if isinstance(node, ast.Attribute) and node.attr in SELECTION_CAPABILITIES:
+            selection_hits.append(node.attr)
+            violations.append(
+                _violation("selection_reference_outside_boundary", node, node.attr)
+            )
+        if isinstance(node, ast.Name) and node.id in whole_module_forbidden:
+            violations.append(
+                _violation("forbidden_whole_module_identifier", node, node.id)
+            )
+        if isinstance(node, ast.Attribute) and node.attr in whole_module_forbidden:
+            violations.append(
+                _violation("forbidden_whole_module_identifier", node, node.attr)
+            )
+        if isinstance(node, ast.BinOp) and isinstance(node.op, ast.MatMult):
+            matrix_products.append(node.lineno)
+            violations.append(
+                _violation("matrix_product_outside_boundary", node, "MatMult")
+            )
+        if isinstance(node, ast.Lambda):
+            violations.append(_violation("lambda_outside_boundary", node, "Lambda"))
+        if isinstance(node, (ast.For, ast.While)):
+            assigned = {
+                child.id.lower()
+                for child in ast.walk(node)
+                if isinstance(child, ast.Name) and isinstance(child.ctx, ast.Store)
+            }
+            has_comparison = any(
+                isinstance(child, ast.Compare) for child in ast.walk(node)
+            )
+            selection_names = {
+                name
+                for name in assigned
+                if any(
+                    token in name
+                    for token in (
+                        "best",
+                        "choice",
+                        "order",
+                        "rank",
+                        "selected",
+                        "winner",
+                    )
+                )
+            }
+            if has_comparison and selection_names:
+                violations.append(
+                    _violation(
+                        "manual_selection_loop",
+                        node,
+                        ",".join(sorted(selection_names)),
+                    )
+                )
+    for statement in tree.body:
+        targets: list[ast.AST] = []
+        if isinstance(statement, ast.Assign):
+            targets.extend(statement.targets)
+        elif isinstance(statement, (ast.AnnAssign, ast.AugAssign)):
+            targets.append(statement.target)
+        if any(
+            isinstance(target, (ast.Attribute, ast.Subscript)) for target in targets
+        ):
+            violations.append(
+                _violation(
+                    "module_side_effect_target", statement, type(statement).__name__
+                )
+            )
     raw_forwarding = False
     for node in ast.walk(boundary):
-        if isinstance(node, ast.Name) and node.id in boundary_forbidden:
-            boundary_found.add(node.id)
-        if isinstance(node, ast.Attribute) and node.attr in boundary_forbidden:
-            boundary_found.add(node.attr)
         if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
             if node.func.id == "BoundaryProjection":
                 spins_keywords = [
@@ -262,13 +415,24 @@ def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
     result = {
         "boundary_forbidden_names": sorted(boundary_found),
         "boundary_raw_result_forwarding": raw_forwarding,
-        "boundary_selection_inside_native": sorted(boundary_selection_inside_native),
+        "boundary_selection_inside_native": sorted(set(selection_hits)),
         "coupling_and_field_enter_native_relations": {
             "coupling",
             "field",
         }.issubset(relational_names),
-        "dynamic_import_lines": dynamic_import_lines,
-        "forbidden_native_names": sorted(found_names),
+        "dynamic_import_lines": sorted(set(dynamic_lines)),
+        "executable_region_count": len(executable_manifest),
+        "executable_region_manifest": sorted(
+            executable_manifest,
+            key=lambda item: (item["line"], item["column"], item["node_type"]),
+        ),
+        "forbidden_native_names": sorted(
+            {
+                item["detail"]
+                for item in violations
+                if item["code"] == "forbidden_whole_module_identifier"
+            }
+        ),
         "imported_roots": sorted(imported_roots),
         "matrix_product_lines": matrix_products,
         "native_class_method_names": sorted(
@@ -286,19 +450,27 @@ def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
             for name in native_closure | boundary_closure
             if not name.startswith("@module:") and "." not in name
         ),
+        "selection_capable_regions": ["project_boundary:body"],
+        "unclassified_executable_nodes": [],
         "uncovered_native_function_names": uncovered_native,
+        "violations": sorted(
+            violations,
+            key=lambda item: (
+                item["line"],
+                item["column"],
+                item["code"],
+                item["detail"],
+            ),
+        ),
         "pass": False,
         "source_sha256": hashlib.sha256(source.encode("utf-8")).hexdigest(),
     }
     result["pass"] = bool(
         not boundary_found
         and raw_forwarding
-        and not found_names
         and imported_roots <= allowed_import_roots
-        and not dynamic_import_lines
         and not uncovered_native
-        and not matrix_products
-        and not boundary_selection_inside_native
+        and not violations
         and result["coupling_and_field_enter_native_relations"]
     )
     return result
@@ -307,26 +479,186 @@ def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
 def static_no_smuggle() -> dict[str, Any]:
     source = MACHINE_SOURCE.read_text(encoding="utf-8")
     result = analyze_no_smuggle_source(source)
-    needle = "    modes = np.ones((site_count, 1), dtype=np.complex128)"
-    if source.count(needle) != 1:
-        raise RuntimeError("recursive initializer negative-fixture anchor drift")
-    mutated = source.replace(
-        needle,
-        "    np.argsort(np.asarray([1.0, 0.0], dtype=np.float64))\n" + needle,
+    anchors = {
+        "class": "class SpectralPhaseLaw:\n",
+        "initializer": "    modes = np.ones((site_count, 1), dtype=np.complex128)\n",
+        "module": "PHASE_MODES = recursive_antipodal_phase_modes()\n",
+        "post_init": "    def validate(self) -> None:\n",
+        "relational": "    history: list[np.ndarray] = []\n",
+        "boundary": "def project_boundary(\n",
+        "decorator": "@dataclass(frozen=True)\nclass SpectralPhaseLaw:\n",
+    }
+    for label, anchor in anchors.items():
+        if source.count(anchor) != 1:
+            raise RuntimeError(f"whole-module mutation anchor drift: {label}")
+    mutations = [
+        (
+            "class_decorator_selection",
+            source.replace(
+                anchors["decorator"],
+                "@np.argsort(np.asarray([1.0, 0.0]))\n"
+                + anchors["decorator"],
+                1,
+            ),
+            "selection_capability_outside_boundary",
+        ),
+        (
+            "recursive_initializer_selection",
+            source.replace(
+                anchors["initializer"],
+                "    np.argsort(np.asarray([1.0, 0.0]))\n"
+                + anchors["initializer"],
+                1,
+            ),
+            "selection_capability_outside_boundary",
+        ),
+        (
+            "class_field_selection",
+            source.replace(
+                anchors["class"],
+                anchors["class"]
+                + "    injected_order: object = np.argsort(np.asarray([1.0, 0.0]))\n",
+                1,
+            ),
+            "selection_capability_outside_boundary",
+        ),
+        (
+            "post_init_selection",
+            source.replace(
+                anchors["post_init"],
+                "    def __post_init__(self) -> None:\n"
+                "        np.argsort(np.asarray([1.0, 0.0]))\n\n"
+                + anchors["post_init"],
+                1,
+            ),
+            "selection_capability_outside_boundary",
+        ),
+        (
+            "module_subscript_side_effect",
+            source.replace(
+                anchors["module"],
+                anchors["module"]
+                + "PHASE_MODES[0, 0] = PHASE_MODES[0, np.argsort(np.real(PHASE_MODES[0]))[0]]\n",
+                1,
+            ),
+            "module_side_effect_target",
+        ),
+        (
+            "module_expression_selection",
+            source.replace(
+                anchors["module"],
+                anchors["module"] + "np.argsort(np.real(PHASE_MODES[0]))\n",
+                1,
+            ),
+            "selection_capability_outside_boundary",
+        ),
+        (
+            "keyed_sorted_selection",
+            source.replace(
+                anchors["relational"],
+                "    sorted(\n"
+                "        range(MODE_COUNT),\n"
+                "        key=lambda mode: float(np.real(current[0, mode])),\n"
+                "    )\n"
+                + anchors["relational"],
+                1,
+            ),
+            "selection_capability_outside_boundary",
+        ),
+        (
+            "manual_winner_loop",
+            source.replace(
+                anchors["relational"],
+                "    winner = 0\n"
+                "    for candidate in range(2):\n"
+                "        if candidate > winner:\n"
+                "            winner = candidate\n"
+                + anchors["relational"],
+                1,
+            ),
+            "manual_selection_loop",
+        ),
+        (
+            "take_along_axis_selection",
+            source.replace(
+                anchors["relational"],
+                "    np.take_along_axis(\n"
+                "        current,\n"
+                "        np.zeros_like(current, dtype=np.int64),\n"
+                "        axis=1,\n"
+                "    )\n"
+                + anchors["relational"],
+                1,
+            ),
+            "selection_capability_outside_boundary",
+        ),
+        (
+            "indirect_getattr_selection",
+            source.replace(
+                anchors["relational"],
+                "    getattr(np, 'argsort')(np.real(current[0]))\n"
+                + anchors["relational"],
+                1,
+            ),
+            "dynamic_capability",
+        ),
+        (
+            "helper_selection_called_from_boundary",
+            source.replace(
+                anchors["boundary"],
+                "def injected_boundary_helper(values: np.ndarray) -> np.ndarray:\n"
+                "    return np.argsort(values)\n\n\n"
+                + anchors["boundary"],
+                1,
+            ),
+            "selection_capability_outside_boundary",
+        ),
+        (
+            "boundary_problem_access",
+            source.replace(
+                "    query = execution.program_beams",
+                "    execution.coupling\n    query = execution.program_beams",
+                1,
+            ),
+            "boundary_forbidden_identifier",
+        ),
+    ]
+    mutation_results: list[dict[str, Any]] = []
+    for name, mutated_source, expected_code in mutations:
+        mutated = analyze_no_smuggle_source(mutated_source)
+        codes = sorted({item["code"] for item in mutated["violations"]})
+        mutation_results.append(
+            {
+                "expected_code": expected_code,
+                "name": name,
+                "observed_codes": codes,
+                "pass": bool(not mutated["pass"] and expected_code in codes),
+            }
+        )
+    harmless = source.replace(
+        anchors["relational"],
+        "    current *= np.exp(1j * np.zeros_like(np.real(current)))\n"
+        + anchors["relational"],
         1,
     )
-    mutated_result = analyze_no_smuggle_source(mutated)
-    negative_rejected = bool(
-        not mutated_result["pass"]
-        and "argsort" in mutated_result["boundary_selection_inside_native"]
-        and "recursive_antipodal_phase_modes"
-        in mutated_result["native_executable_names"]
-        and "PHASE_MODES" in mutated_result["native_module_initializer_names"]
+    harmless_result = analyze_no_smuggle_source(harmless)
+    result["initializer_selection_negative_fixture_rejected"] = next(
+        item["pass"]
+        for item in mutation_results
+        if item["name"] == "recursive_initializer_selection"
     )
-    result["initializer_selection_negative_fixture_rejected"] = negative_rejected
-    result["pass"] = bool(result["pass"] and negative_rejected)
+    result["mutation_fixture_results"] = mutation_results
+    result["harmless_elementwise_positive_fixture_accepted"] = bool(
+        harmless_result["pass"]
+    )
+    result["pass"] = bool(
+        result["pass"]
+        and all(item["pass"] for item in mutation_results)
+        and result["harmless_elementwise_positive_fixture_accepted"]
+    )
     result["source_sha256"] = hashlib.sha256(MACHINE_SOURCE.read_bytes()).hexdigest()
     return result
+
 
 def runtime_no_smuggle(record: dict[str, Any], borrowed: np.ndarray) -> dict[str, Any]:
     forbidden_exports = sorted(
