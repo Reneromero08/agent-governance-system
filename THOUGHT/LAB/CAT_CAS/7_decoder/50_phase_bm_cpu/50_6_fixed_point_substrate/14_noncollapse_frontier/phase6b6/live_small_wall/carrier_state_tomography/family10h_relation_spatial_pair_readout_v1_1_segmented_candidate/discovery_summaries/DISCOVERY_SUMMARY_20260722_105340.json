@@ -1,0 +1,2005 @@
+{
+  "best_by_observed_to_q99_ratio": "alternating_relation_only_repeat2",
+  "discovery_only_no_claim": true,
+  "local_root": "C:\\tmp\\family10h_spatial_discovery_20260722_105340",
+  "remote_parent": "/root/family10h_spatial_discovery_20260722_105340",
+  "schema": "FAMILY10H_RELATION_SPATIAL_DISCOVERY_SUMMARY_V1",
+  "stamp": "20260722_105340",
+  "target": "root@192.168.137.100",
+  "target_wait": {
+    "attempt_count": 1,
+    "last": {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "root@192.168.137.100",
+        "true"
+      ],
+      "elapsed_seconds": 0.4823794364929199,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "passed": true
+  },
+  "variants": [
+    {
+      "compile": {
+        "compile": {
+          "command": [
+            "wsl.exe",
+            "--",
+            "gcc",
+            "-std=c11",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-g",
+            "-o",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_relation_only_repeat2/source/relation_spatial_runtime",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_relation_only_repeat2/source/relation_spatial_runtime.c",
+            "-lm"
+          ],
+          "elapsed_seconds": 1.227419137954712,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "file_probe": {
+          "command": [
+            "wsl.exe",
+            "--",
+            "file",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_relation_only_repeat2/source/relation_spatial_runtime"
+          ],
+          "elapsed_seconds": 0.10168242454528809,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_relation_only_repeat2/source/relation_spatial_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=60fad0586a274cff76abfaf815695627d449f84c, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+        },
+        "passed": true,
+        "runtime_sha256": "9c2f8937fe96c2a1e4008aecff5918a7522a5bc8db4ec72f56d670ad63d8c7b0"
+      },
+      "execution": {
+        "archive_remote": "/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2.tar.gz",
+        "execute": {
+          "command": [
+            "ssh",
+            "-o",
+            "BatchMode=yes",
+            "root@192.168.137.100",
+            "set -eu\ncd '/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2/source'\nchmod +x relation_spatial_runtime relation_spatial_pmu_preflight || true\nmkdir -p _relation_spatial_owned_outputs\nfor c in 4 5; do\n  g=/sys/devices/system/cpu/cpu${c}/cpufreq/scaling_governor\n  if [ -f \"$g\" ]; then echo performance > \"$g\" || true; cat \"$g\"; fi\ndone > DISCOVERY_CPU_GOVERNORS.txt\n/usr/bin/taskset -c 4 true\n/usr/bin/taskset -c 5 true\n./relation_spatial_pmu_preflight --disabled-group-preflight 4 > DISCOVERY_PMU_PREFLIGHT.json\nif [ -e '/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2/source/_relation_spatial_owned_outputs/alternating_relation_only_repeat2' ]; then echo preexisting_output_root >&2; exit 12; fi\nFAMILY10H_RELATION_SPATIAL_RUNTIME_AUTHORITY='family10h_relation_spatial_pair_readout_v1_0' ./relation_spatial_runtime --execute-schedule RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv '/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2/source/_relation_spatial_owned_outputs/alternating_relation_only_repeat2' > DISCOVERY_RUNTIME.stdout 2> DISCOVERY_RUNTIME.stderr\npython3 - <<'PY'\nfrom pathlib import Path\nimport json\nroot=Path('/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2/source/_relation_spatial_owned_outputs/alternating_relation_only_repeat2')\ndef count(p):\n    return sum(1 for line in p.open('rb') if line.strip()) if p.exists() else 0\nreceipt={\n  'schema':'FAMILY10H_RELATION_SPATIAL_DISCOVERY_EXECUTION_RECEIPT_V1',\n  'discovery_only_no_claim': True,\n  'variant':'alternating_relation_only_repeat2',\n  'runtime_mode':'alternating',\n  'schedule_kind':'relation_matrix_only',\n  'raw_record_count':count(root/'raw_records.jsonl'),\n  'pair_observation_count':count(root/'pair_observations.jsonl'),\n  'source_death_receipt_count':count(root/'source_death_receipts.jsonl'),\n  'small_wall_crossed': False,\n  'positive_scientific_claim': False,\n}\n(root/'DISCOVERY_EXECUTION_RECEIPT.json').write_text(json.dumps(receipt, indent=2, sort_keys=True)+chr(10))\nPY\ncd /root\ntar -czf '/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2.tar.gz' \"$(basename '/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2')\"\nsha256sum '/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2.tar.gz' > '/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2.tar.gz.sha256'\nstat -c '%s' '/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2.tar.gz' > '/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2.tar.gz.size'"
+          ],
+          "elapsed_seconds": 12.711623668670654,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "local_archive": "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_relation_only_repeat2_REMOTE_ROOT.tar.gz",
+        "local_archive_sha256": "69f79c896e1fac649439ccc38c185e42726df213fe58d4b63df4e138920ef7af",
+        "local_archive_size": 11172311,
+        "output_root": "/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2/source/_relation_spatial_owned_outputs/alternating_relation_only_repeat2",
+        "passed": true,
+        "remote_archive_identity_text": "69f79c896e1fac649439ccc38c185e42726df213fe58d4b63df4e138920ef7af  /root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2.tar.gz\n11172311\n",
+        "remote_root": "/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2",
+        "scp_back": {
+          "command": [
+            "scp",
+            "-O",
+            "-o",
+            "BatchMode=yes",
+            "root@192.168.137.100:/root/family10h_spatial_discovery_20260722_105340_alternating_relation_only_repeat2.tar.gz",
+            "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_relation_only_repeat2_REMOTE_ROOT.tar.gz"
+          ],
+          "elapsed_seconds": 0.31928491592407227,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "stage": "execute"
+      },
+      "passed": true,
+      "schedule_info": {
+        "expected_pair_observation_count": 524288,
+        "schedule_kind": "relation_matrix_only",
+        "tsv_sha256": "56e41029899a1ccdb7fdc6c7acb377267e1e2600ec3ec46706d8abb2617adce8",
+        "tuple_count": 2048
+      },
+      "score": {
+        "R_spatial_global": {
+          "abs_mean": 0.10025175063785507,
+          "abs_of_mean": 0.07825814989321725,
+          "count": 512,
+          "max_abs": 0.45327141855790165,
+          "mean": 0.07825814989321725,
+          "q50_abs": 0.042206457518237345,
+          "q95_abs": 0.3487143002887988,
+          "q99_abs": 0.3909286811711723,
+          "sign_counts": {
+            "-1": 166,
+            "0": 0,
+            "1": 346
+          }
+        },
+        "archive_path": "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_relation_only_repeat2_REMOTE_ROOT.tar.gz",
+        "archive_sha256": "69f79c896e1fac649439ccc38c185e42726df213fe58d4b63df4e138920ef7af",
+        "archive_size": 11172311,
+        "control_C_pair_distributions": {},
+        "discovery_only_no_claim": true,
+        "factor_stability": {
+          "factors": {
+            "cyclic_origin": {
+              "levels": {
+                "0": {
+                  "abs_mean": 0.1071470495755975,
+                  "abs_of_mean": 0.08508970815205259,
+                  "count": 128,
+                  "max_abs": 0.40968490773381805,
+                  "mean": 0.08508970815205259,
+                  "q50_abs": 0.046914105416901,
+                  "q95_abs": 0.3526892605451967,
+                  "q99_abs": 0.3825562307605706,
+                  "sign_counts": {
+                    "-1": 42,
+                    "0": 0,
+                    "1": 86
+                  }
+                },
+                "1024": {
+                  "abs_mean": 0.07596708608110059,
+                  "abs_of_mean": 0.0522158361266921,
+                  "count": 128,
+                  "max_abs": 0.39824979833320984,
+                  "mean": 0.0522158361266921,
+                  "q50_abs": 0.03447584335434625,
+                  "q95_abs": 0.3132356517981777,
+                  "q99_abs": 0.3727686298059263,
+                  "sign_counts": {
+                    "-1": 47,
+                    "0": 0,
+                    "1": 81
+                  }
+                },
+                "2048": {
+                  "abs_mean": 0.10350289256587346,
+                  "abs_of_mean": 0.07930691361317405,
+                  "count": 128,
+                  "max_abs": 0.45327141855790165,
+                  "mean": 0.07930691361317405,
+                  "q50_abs": 0.04377770788467414,
+                  "q95_abs": 0.3486044884214739,
+                  "q99_abs": 0.3852024872176547,
+                  "sign_counts": {
+                    "-1": 40,
+                    "0": 0,
+                    "1": 88
+                  }
+                },
+                "3072": {
+                  "abs_mean": 0.11438997432884826,
+                  "abs_of_mean": 0.09642014168095003,
+                  "count": 128,
+                  "max_abs": 0.4456925020483168,
+                  "mean": 0.09642014168095003,
+                  "q50_abs": 0.04930064343171213,
+                  "q95_abs": 0.3501866580755638,
+                  "q99_abs": 0.3939569693509682,
+                  "sign_counts": {
+                    "-1": 37,
+                    "0": 0,
+                    "1": 91
+                  }
+                }
+              },
+              "passed": true
+            },
+            "mapping": {
+              "levels": {
+                "map0": {
+                  "abs_mean": 0.10017205071467412,
+                  "abs_of_mean": 0.07801365970702796,
+                  "count": 256,
+                  "max_abs": 0.4456925020483168,
+                  "mean": 0.07801365970702796,
+                  "q50_abs": 0.04155926030689877,
+                  "q95_abs": 0.34698446598014815,
+                  "q99_abs": 0.3825906830460479,
+                  "sign_counts": {
+                    "-1": 81,
+                    "0": 0,
+                    "1": 175
+                  }
+                },
+                "map1": {
+                  "abs_mean": 0.10033145056103573,
+                  "abs_of_mean": 0.07850264007940636,
+                  "count": 256,
+                  "max_abs": 0.45327141855790165,
+                  "mean": 0.07850264007940636,
+                  "q50_abs": 0.0430121441469256,
+                  "q95_abs": 0.3500153106523186,
+                  "q99_abs": 0.3941275982976803,
+                  "sign_counts": {
+                    "-1": 85,
+                    "0": 0,
+                    "1": 171
+                  }
+                }
+              },
+              "passed": true
+            },
+            "query_order": {
+              "levels": {
+                "AB": {
+                  "abs_mean": 0.10289336576047506,
+                  "abs_of_mean": 0.08071918945970763,
+                  "count": 256,
+                  "max_abs": 0.45327141855790165,
+                  "mean": 0.08071918945970763,
+                  "q50_abs": 0.043590862053946605,
+                  "q95_abs": 0.3427350729100175,
+                  "q99_abs": 0.40280661392677664,
+                  "sign_counts": {
+                    "-1": 86,
+                    "0": 0,
+                    "1": 170
+                  }
+                },
+                "BA": {
+                  "abs_mean": 0.09761013551523481,
+                  "abs_of_mean": 0.07579711032672667,
+                  "count": 256,
+                  "max_abs": 0.39824979833320984,
+                  "mean": 0.07579711032672667,
+                  "q50_abs": 0.0416821301187546,
+                  "q95_abs": 0.34862653037996816,
+                  "q99_abs": 0.38396257366883174,
+                  "sign_counts": {
+                    "-1": 80,
+                    "0": 0,
+                    "1": 176
+                  }
+                }
+              },
+              "passed": true
+            },
+            "session": {
+              "levels": {
+                "session_0": {
+                  "abs_mean": 0.09105695649645475,
+                  "abs_of_mean": 0.06745012979939771,
+                  "count": 256,
+                  "max_abs": 0.39824979833320984,
+                  "mean": 0.06745012979939771,
+                  "q50_abs": 0.039979062563822915,
+                  "q95_abs": 0.33760675060270406,
+                  "q99_abs": 0.3574471878473287,
+                  "sign_counts": {
+                    "-1": 87,
+                    "0": 0,
+                    "1": 169
+                  }
+                },
+                "session_1": {
+                  "abs_mean": 0.10944654477925514,
+                  "abs_of_mean": 0.0890661699870367,
+                  "count": 256,
+                  "max_abs": 0.45327141855790165,
+                  "mean": 0.0890661699870367,
+                  "q50_abs": 0.04450076550708659,
+                  "q95_abs": 0.36063517553221125,
+                  "q99_abs": 0.40280661392677664,
+                  "sign_counts": {
+                    "-1": 79,
+                    "0": 0,
+                    "1": 177
+                  }
+                }
+              },
+              "passed": true
+            },
+            "source_order": {
+              "levels": {
+                "A_then_B": {
+                  "abs_mean": 0.09601123465780123,
+                  "abs_of_mean": 0.07267764649180206,
+                  "count": 256,
+                  "max_abs": 0.45327141855790165,
+                  "mean": 0.07267764649180206,
+                  "q50_abs": 0.041614273913108596,
+                  "q95_abs": 0.3475348111404176,
+                  "q99_abs": 0.3941275982976803,
+                  "sign_counts": {
+                    "-1": 85,
+                    "0": 0,
+                    "1": 171
+                  }
+                },
+                "B_then_A": {
+                  "abs_mean": 0.10449226661790866,
+                  "abs_of_mean": 0.08383865329463233,
+                  "count": 256,
+                  "max_abs": 0.40968490773381805,
+                  "mean": 0.08383865329463233,
+                  "q50_abs": 0.043506532696995254,
+                  "q95_abs": 0.3490999882789993,
+                  "q99_abs": 0.38420142461886814,
+                  "sign_counts": {
+                    "-1": 81,
+                    "0": 0,
+                    "1": 175
+                  }
+                }
+              },
+              "passed": true
+            }
+          },
+          "global_sign": 1,
+          "passed": true
+        },
+        "matched_permutation_null_discovery": {
+          "null_distribution": {
+            "abs_mean": 0.00262649967497569,
+            "abs_of_mean": 0.00262649967497569,
+            "count": 63,
+            "max_abs": 0.007484491507959261,
+            "mean": 0.00262649967497569,
+            "q50_abs": 0.002404637599103386,
+            "q95_abs": 0.006241681339623552,
+            "q99_abs": 0.007357200719277433,
+            "sign_counts": {
+              "-1": 0,
+              "0": 0,
+              "1": 63
+            }
+          },
+          "permutation_count": 63,
+          "q95_abs_mean_R_spatial": 0.006241681339623552,
+          "q99_abs_mean_R_spatial": 0.007357200719277433
+        },
+        "measurement_order_scores": {
+          "A_first": {
+            "R_spatial_distribution": {
+              "abs_mean": 0.09330294841759541,
+              "abs_of_mean": 0.05531110339067573,
+              "count": 512,
+              "max_abs": 0.4773306902294392,
+              "mean": 0.05531110339067573,
+              "q50_abs": 0.06061748809359964,
+              "q95_abs": 0.30579822444753635,
+              "q99_abs": 0.3662431623582289,
+              "sign_counts": {
+                "-1": 175,
+                "0": 0,
+                "1": 337
+              }
+            },
+            "failures": 0
+          },
+          "B_first": {
+            "R_spatial_distribution": {
+              "abs_mean": 0.0844826164531176,
+              "abs_of_mean": 0.03718223665128584,
+              "count": 512,
+              "max_abs": 0.5074873335993876,
+              "mean": 0.03718223665128584,
+              "q50_abs": 0.060633542471736246,
+              "q95_abs": 0.27959876226482855,
+              "q99_abs": 0.38445683766938027,
+              "sign_counts": {
+                "-1": 204,
+                "0": 0,
+                "1": 308
+              }
+            },
+            "failures": 0
+          }
+        },
+        "observed_exceeds_discovery_q99": true,
+        "observed_to_q99_ratio": 10.636946425583337,
+        "pair_observation_count": 524288,
+        "positive_scientific_claim": false,
+        "r_block_count": 512,
+        "raw_record_count": 2048,
+        "relation_block_failures": [],
+        "schema": "FAMILY10H_RELATION_SPATIAL_DISCOVERY_SCORE_V1",
+        "small_wall_crossed": false,
+        "source_death_receipt_count": 2048,
+        "variant": {
+          "name": "alternating_relation_only_repeat2",
+          "runtime_mode": "alternating",
+          "schedule": "relation_matrix_only"
+        }
+      },
+      "variant": {
+        "name": "alternating_relation_only_repeat2",
+        "runtime_mode": "alternating",
+        "schedule": "relation_matrix_only"
+      }
+    },
+    {
+      "compile": {
+        "compile": {
+          "command": [
+            "wsl.exe",
+            "--",
+            "gcc",
+            "-std=c11",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-g",
+            "-o",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_sham_relation_matrix/source/relation_spatial_runtime",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_sham_relation_matrix/source/relation_spatial_runtime.c",
+            "-lm"
+          ],
+          "elapsed_seconds": 1.1190428733825684,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "file_probe": {
+          "command": [
+            "wsl.exe",
+            "--",
+            "file",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_sham_relation_matrix/source/relation_spatial_runtime"
+          ],
+          "elapsed_seconds": 0.09899377822875977,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_sham_relation_matrix/source/relation_spatial_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=3982c1007a344ec1b52db52d217b3a759f5dc335, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+        },
+        "passed": true,
+        "runtime_sha256": "02ef6a0c416fd4ddbe2369ff0c2c939a5bd4371fa222cdf3c8146d01c3e057eb"
+      },
+      "execution": {
+        "archive_remote": "/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix.tar.gz",
+        "execute": {
+          "command": [
+            "ssh",
+            "-o",
+            "BatchMode=yes",
+            "root@192.168.137.100",
+            "set -eu\ncd '/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix/source'\nchmod +x relation_spatial_runtime relation_spatial_pmu_preflight || true\nmkdir -p _relation_spatial_owned_outputs\nfor c in 4 5; do\n  g=/sys/devices/system/cpu/cpu${c}/cpufreq/scaling_governor\n  if [ -f \"$g\" ]; then echo performance > \"$g\" || true; cat \"$g\"; fi\ndone > DISCOVERY_CPU_GOVERNORS.txt\n/usr/bin/taskset -c 4 true\n/usr/bin/taskset -c 5 true\n./relation_spatial_pmu_preflight --disabled-group-preflight 4 > DISCOVERY_PMU_PREFLIGHT.json\nif [ -e '/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix/source/_relation_spatial_owned_outputs/alternating_sham_relation_matrix' ]; then echo preexisting_output_root >&2; exit 12; fi\nFAMILY10H_RELATION_SPATIAL_RUNTIME_AUTHORITY='family10h_relation_spatial_pair_readout_v1_0' ./relation_spatial_runtime --execute-schedule RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv '/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix/source/_relation_spatial_owned_outputs/alternating_sham_relation_matrix' > DISCOVERY_RUNTIME.stdout 2> DISCOVERY_RUNTIME.stderr\npython3 - <<'PY'\nfrom pathlib import Path\nimport json\nroot=Path('/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix/source/_relation_spatial_owned_outputs/alternating_sham_relation_matrix')\ndef count(p):\n    return sum(1 for line in p.open('rb') if line.strip()) if p.exists() else 0\nreceipt={\n  'schema':'FAMILY10H_RELATION_SPATIAL_DISCOVERY_EXECUTION_RECEIPT_V1',\n  'discovery_only_no_claim': True,\n  'variant':'alternating_sham_relation_matrix',\n  'runtime_mode':'alternating',\n  'schedule_kind':'relation_matrix_control_relation_sham',\n  'raw_record_count':count(root/'raw_records.jsonl'),\n  'pair_observation_count':count(root/'pair_observations.jsonl'),\n  'source_death_receipt_count':count(root/'source_death_receipts.jsonl'),\n  'small_wall_crossed': False,\n  'positive_scientific_claim': False,\n}\n(root/'DISCOVERY_EXECUTION_RECEIPT.json').write_text(json.dumps(receipt, indent=2, sort_keys=True)+chr(10))\nPY\ncd /root\ntar -czf '/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix.tar.gz' \"$(basename '/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix')\"\nsha256sum '/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix.tar.gz' > '/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix.tar.gz.sha256'\nstat -c '%s' '/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix.tar.gz' > '/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix.tar.gz.size'"
+          ],
+          "elapsed_seconds": 12.545579671859741,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "local_archive": "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_sham_relation_matrix_REMOTE_ROOT.tar.gz",
+        "local_archive_sha256": "1915fa3c8faa3247a8138d9ffb2d67f6274bcb5ce02836936b505acc0b50d0ee",
+        "local_archive_size": 10867705,
+        "output_root": "/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix/source/_relation_spatial_owned_outputs/alternating_sham_relation_matrix",
+        "passed": true,
+        "remote_archive_identity_text": "1915fa3c8faa3247a8138d9ffb2d67f6274bcb5ce02836936b505acc0b50d0ee  /root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix.tar.gz\n10867705\n",
+        "remote_root": "/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix",
+        "scp_back": {
+          "command": [
+            "scp",
+            "-O",
+            "-o",
+            "BatchMode=yes",
+            "root@192.168.137.100:/root/family10h_spatial_discovery_20260722_105340_alternating_sham_relation_matrix.tar.gz",
+            "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_sham_relation_matrix_REMOTE_ROOT.tar.gz"
+          ],
+          "elapsed_seconds": 0.28885674476623535,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "stage": "execute"
+      },
+      "passed": true,
+      "schedule_info": {
+        "expected_pair_observation_count": 524288,
+        "schedule_kind": "relation_matrix_control_relation_sham",
+        "tsv_sha256": "358e9b0a63de178d2df8af6f194afe8d23df9a45d294efa4e0f5ea5af05fb1dd",
+        "tuple_count": 2048
+      },
+      "score": {
+        "R_spatial_global": {
+          "abs_mean": 0.05754241208637972,
+          "abs_of_mean": 0.007147681541097017,
+          "count": 512,
+          "max_abs": 0.2157705336128205,
+          "mean": 0.007147681541097017,
+          "q50_abs": 0.047732916843391454,
+          "q95_abs": 0.14754188102340618,
+          "q99_abs": 0.19072337720568305,
+          "sign_counts": {
+            "-1": 242,
+            "0": 0,
+            "1": 270
+          }
+        },
+        "archive_path": "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_sham_relation_matrix_REMOTE_ROOT.tar.gz",
+        "archive_sha256": "1915fa3c8faa3247a8138d9ffb2d67f6274bcb5ce02836936b505acc0b50d0ee",
+        "archive_size": 10867705,
+        "control_C_pair_distributions": {},
+        "discovery_only_no_claim": true,
+        "factor_stability": {
+          "factors": {
+            "cyclic_origin": {
+              "levels": {
+                "0": {
+                  "abs_mean": 0.05617665223560303,
+                  "abs_of_mean": 0.0036775437802738253,
+                  "count": 128,
+                  "max_abs": 0.1922044060467994,
+                  "mean": 0.0036775437802738253,
+                  "q50_abs": 0.04658037837616075,
+                  "q95_abs": 0.13303157226592366,
+                  "q99_abs": 0.1720269269602822,
+                  "sign_counts": {
+                    "-1": 67,
+                    "0": 0,
+                    "1": 61
+                  }
+                },
+                "1024": {
+                  "abs_mean": 0.06137953586851771,
+                  "abs_of_mean": 0.016777451189914524,
+                  "count": 128,
+                  "max_abs": 0.20109612697151133,
+                  "mean": 0.016777451189914524,
+                  "q50_abs": 0.05135367418813435,
+                  "q95_abs": 0.16608353044561827,
+                  "q99_abs": 0.18945558388349767,
+                  "sign_counts": {
+                    "-1": 53,
+                    "0": 0,
+                    "1": 75
+                  }
+                },
+                "2048": {
+                  "abs_mean": 0.05552245073744301,
+                  "abs_of_mean": 0.009356826735017105,
+                  "count": 128,
+                  "max_abs": 0.21011906880477874,
+                  "mean": 0.009356826735017105,
+                  "q50_abs": 0.04590821837710592,
+                  "q95_abs": 0.14551505330997322,
+                  "q99_abs": 0.19439265615878332,
+                  "sign_counts": {
+                    "-1": 61,
+                    "0": 0,
+                    "1": 67
+                  }
+                },
+                "3072": {
+                  "abs_mean": 0.05709100950395502,
+                  "abs_of_mean": 0.0012210955408174077,
+                  "count": 128,
+                  "max_abs": 0.2157705336128205,
+                  "mean": -0.0012210955408174077,
+                  "q50_abs": 0.05048739778287593,
+                  "q95_abs": 0.131691998608151,
+                  "q99_abs": 0.17891467612946846,
+                  "sign_counts": {
+                    "-1": 61,
+                    "0": 0,
+                    "1": 67
+                  }
+                }
+              },
+              "passed": false
+            },
+            "mapping": {
+              "levels": {
+                "map0": {
+                  "abs_mean": 0.05979824987084191,
+                  "abs_of_mean": 0.006773530066791815,
+                  "count": 256,
+                  "max_abs": 0.2157705336128205,
+                  "mean": 0.006773530066791815,
+                  "q50_abs": 0.05022509052854493,
+                  "q95_abs": 0.1449327404494239,
+                  "q99_abs": 0.1753497438504908,
+                  "sign_counts": {
+                    "-1": 116,
+                    "0": 0,
+                    "1": 140
+                  }
+                },
+                "map1": {
+                  "abs_mean": 0.05528657430191752,
+                  "abs_of_mean": 0.0075218330154022016,
+                  "count": 256,
+                  "max_abs": 0.21011906880477874,
+                  "mean": 0.0075218330154022016,
+                  "q50_abs": 0.04652195819592976,
+                  "q95_abs": 0.15757252785742953,
+                  "q99_abs": 0.19186922453413685,
+                  "sign_counts": {
+                    "-1": 126,
+                    "0": 0,
+                    "1": 130
+                  }
+                }
+              },
+              "passed": true
+            },
+            "query_order": {
+              "levels": {
+                "AB": {
+                  "abs_mean": 0.05759737272681333,
+                  "abs_of_mean": 0.016566289765780708,
+                  "count": 256,
+                  "max_abs": 0.21011906880477874,
+                  "mean": 0.016566289765780708,
+                  "q50_abs": 0.04852016716296612,
+                  "q95_abs": 0.15827774634344974,
+                  "q99_abs": 0.18723694556967294,
+                  "sign_counts": {
+                    "-1": 115,
+                    "0": 0,
+                    "1": 141
+                  }
+                },
+                "BA": {
+                  "abs_mean": 0.057487451445946074,
+                  "abs_of_mean": 0.0022709266835866737,
+                  "count": 256,
+                  "max_abs": 0.2157705336128205,
+                  "mean": -0.0022709266835866737,
+                  "q50_abs": 0.047350826400651296,
+                  "q95_abs": 0.13486850226291833,
+                  "q99_abs": 0.1857166043615557,
+                  "sign_counts": {
+                    "-1": 127,
+                    "0": 0,
+                    "1": 129
+                  }
+                }
+              },
+              "passed": false
+            },
+            "session": {
+              "levels": {
+                "session_0": {
+                  "abs_mean": 0.05484725766315269,
+                  "abs_of_mean": 0.006952526424467943,
+                  "count": 256,
+                  "max_abs": 0.1915949851146857,
+                  "mean": 0.006952526424467943,
+                  "q50_abs": 0.04649216482215804,
+                  "q95_abs": 0.14587630449520855,
+                  "q99_abs": 0.17006614692843317,
+                  "sign_counts": {
+                    "-1": 121,
+                    "0": 0,
+                    "1": 135
+                  }
+                },
+                "session_1": {
+                  "abs_mean": 0.06023756650960673,
+                  "abs_of_mean": 0.007342836657726073,
+                  "count": 256,
+                  "max_abs": 0.2157705336128205,
+                  "mean": 0.007342836657726073,
+                  "q50_abs": 0.050756248980725616,
+                  "q95_abs": 0.1577138032872376,
+                  "q99_abs": 0.20118252284986735,
+                  "sign_counts": {
+                    "-1": 121,
+                    "0": 0,
+                    "1": 135
+                  }
+                }
+              },
+              "passed": true
+            },
+            "source_order": {
+              "levels": {
+                "A_then_B": {
+                  "abs_mean": 0.05708278028243961,
+                  "abs_of_mean": 0.00549742719030074,
+                  "count": 256,
+                  "max_abs": 0.2157705336128205,
+                  "mean": 0.00549742719030074,
+                  "q50_abs": 0.04619785550903617,
+                  "q95_abs": 0.1483948662994241,
+                  "q99_abs": 0.17891460150711522,
+                  "sign_counts": {
+                    "-1": 119,
+                    "0": 0,
+                    "1": 137
+                  }
+                },
+                "B_then_A": {
+                  "abs_mean": 0.0580020438903198,
+                  "abs_of_mean": 0.008797935891893274,
+                  "count": 256,
+                  "max_abs": 0.21011906880477874,
+                  "mean": 0.008797935891893274,
+                  "q50_abs": 0.05049394172639462,
+                  "q95_abs": 0.14665385635471057,
+                  "q99_abs": 0.19186922453413685,
+                  "sign_counts": {
+                    "-1": 123,
+                    "0": 0,
+                    "1": 133
+                  }
+                }
+              },
+              "passed": true
+            }
+          },
+          "global_sign": 1,
+          "passed": false
+        },
+        "matched_permutation_null_discovery": {
+          "null_distribution": {
+            "abs_mean": 0.0019565863503412076,
+            "abs_of_mean": 0.0019565863503412076,
+            "count": 63,
+            "max_abs": 0.004671860578404493,
+            "mean": 0.0019565863503412076,
+            "q50_abs": 0.002093558484957914,
+            "q95_abs": 0.004103912608324281,
+            "q99_abs": 0.004562526272475296,
+            "sign_counts": {
+              "-1": 0,
+              "0": 0,
+              "1": 63
+            }
+          },
+          "permutation_count": 63,
+          "q95_abs_mean_R_spatial": 0.004103912608324281,
+          "q99_abs_mean_R_spatial": 0.004562526272475296
+        },
+        "measurement_order_scores": {
+          "A_first": {
+            "R_spatial_distribution": {
+              "abs_mean": 0.06857265708724918,
+              "abs_of_mean": 0.0009041847979764722,
+              "count": 512,
+              "max_abs": 0.3057618371127671,
+              "mean": 0.0009041847979764722,
+              "q50_abs": 0.05591474254813396,
+              "q95_abs": 0.17138095115512983,
+              "q99_abs": 0.22411478137731738,
+              "sign_counts": {
+                "-1": 249,
+                "0": 0,
+                "1": 263
+              }
+            },
+            "failures": 0
+          },
+          "B_first": {
+            "R_spatial_distribution": {
+              "abs_mean": 0.07678784375175537,
+              "abs_of_mean": 0.0011700601186214793,
+              "count": 512,
+              "max_abs": 0.3101909977158578,
+              "mean": 0.0011700601186214793,
+              "q50_abs": 0.06386759330495528,
+              "q95_abs": 0.18963808440188218,
+              "q99_abs": 0.2544769780595482,
+              "sign_counts": {
+                "-1": 245,
+                "0": 0,
+                "1": 267
+              }
+            },
+            "failures": 0
+          }
+        },
+        "observed_exceeds_discovery_q99": true,
+        "observed_to_q99_ratio": 1.5666061112277616,
+        "pair_observation_count": 524288,
+        "positive_scientific_claim": false,
+        "r_block_count": 512,
+        "raw_record_count": 2048,
+        "relation_block_failures": [],
+        "schema": "FAMILY10H_RELATION_SPATIAL_DISCOVERY_SCORE_V1",
+        "small_wall_crossed": false,
+        "source_death_receipt_count": 2048,
+        "variant": {
+          "name": "alternating_sham_relation_matrix",
+          "runtime_mode": "alternating",
+          "schedule": "relation_matrix_control_relation_sham"
+        }
+      },
+      "variant": {
+        "name": "alternating_sham_relation_matrix",
+        "runtime_mode": "alternating",
+        "schedule": "relation_matrix_control_relation_sham"
+      }
+    },
+    {
+      "compile": {
+        "compile": {
+          "command": [
+            "wsl.exe",
+            "--",
+            "gcc",
+            "-std=c11",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-g",
+            "-o",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_scrambled_relation_matrix/source/relation_spatial_runtime",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_scrambled_relation_matrix/source/relation_spatial_runtime.c",
+            "-lm"
+          ],
+          "elapsed_seconds": 1.064436912536621,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "file_probe": {
+          "command": [
+            "wsl.exe",
+            "--",
+            "file",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_scrambled_relation_matrix/source/relation_spatial_runtime"
+          ],
+          "elapsed_seconds": 0.09700274467468262,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_scrambled_relation_matrix/source/relation_spatial_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=1ca29a6064eaa848f3edc297219d83cceb5b52a8, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+        },
+        "passed": true,
+        "runtime_sha256": "f73dbcab1c7603047a79feaae717f318978e3c3ede39e3c2c0c983a2435dcb22"
+      },
+      "execution": {
+        "archive_remote": "/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix.tar.gz",
+        "execute": {
+          "command": [
+            "ssh",
+            "-o",
+            "BatchMode=yes",
+            "root@192.168.137.100",
+            "set -eu\ncd '/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix/source'\nchmod +x relation_spatial_runtime relation_spatial_pmu_preflight || true\nmkdir -p _relation_spatial_owned_outputs\nfor c in 4 5; do\n  g=/sys/devices/system/cpu/cpu${c}/cpufreq/scaling_governor\n  if [ -f \"$g\" ]; then echo performance > \"$g\" || true; cat \"$g\"; fi\ndone > DISCOVERY_CPU_GOVERNORS.txt\n/usr/bin/taskset -c 4 true\n/usr/bin/taskset -c 5 true\n./relation_spatial_pmu_preflight --disabled-group-preflight 4 > DISCOVERY_PMU_PREFLIGHT.json\nif [ -e '/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix/source/_relation_spatial_owned_outputs/alternating_scrambled_relation_matrix' ]; then echo preexisting_output_root >&2; exit 12; fi\nFAMILY10H_RELATION_SPATIAL_RUNTIME_AUTHORITY='family10h_relation_spatial_pair_readout_v1_0' ./relation_spatial_runtime --execute-schedule RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv '/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix/source/_relation_spatial_owned_outputs/alternating_scrambled_relation_matrix' > DISCOVERY_RUNTIME.stdout 2> DISCOVERY_RUNTIME.stderr\npython3 - <<'PY'\nfrom pathlib import Path\nimport json\nroot=Path('/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix/source/_relation_spatial_owned_outputs/alternating_scrambled_relation_matrix')\ndef count(p):\n    return sum(1 for line in p.open('rb') if line.strip()) if p.exists() else 0\nreceipt={\n  'schema':'FAMILY10H_RELATION_SPATIAL_DISCOVERY_EXECUTION_RECEIPT_V1',\n  'discovery_only_no_claim': True,\n  'variant':'alternating_scrambled_relation_matrix',\n  'runtime_mode':'alternating',\n  'schedule_kind':'relation_matrix_control_scrambled_pair_control',\n  'raw_record_count':count(root/'raw_records.jsonl'),\n  'pair_observation_count':count(root/'pair_observations.jsonl'),\n  'source_death_receipt_count':count(root/'source_death_receipts.jsonl'),\n  'small_wall_crossed': False,\n  'positive_scientific_claim': False,\n}\n(root/'DISCOVERY_EXECUTION_RECEIPT.json').write_text(json.dumps(receipt, indent=2, sort_keys=True)+chr(10))\nPY\ncd /root\ntar -czf '/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix.tar.gz' \"$(basename '/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix')\"\nsha256sum '/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix.tar.gz' > '/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix.tar.gz.sha256'\nstat -c '%s' '/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix.tar.gz' > '/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix.tar.gz.size'"
+          ],
+          "elapsed_seconds": 12.62599802017212,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "local_archive": "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_scrambled_relation_matrix_REMOTE_ROOT.tar.gz",
+        "local_archive_sha256": "6c3614df8e0f8ce3523fabff35a4d35ae3a5c837e511576dc481a109f66f8513",
+        "local_archive_size": 11478219,
+        "output_root": "/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix/source/_relation_spatial_owned_outputs/alternating_scrambled_relation_matrix",
+        "passed": true,
+        "remote_archive_identity_text": "6c3614df8e0f8ce3523fabff35a4d35ae3a5c837e511576dc481a109f66f8513  /root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix.tar.gz\n11478219\n",
+        "remote_root": "/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix",
+        "scp_back": {
+          "command": [
+            "scp",
+            "-O",
+            "-o",
+            "BatchMode=yes",
+            "root@192.168.137.100:/root/family10h_spatial_discovery_20260722_105340_alternating_scrambled_relation_matrix.tar.gz",
+            "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_scrambled_relation_matrix_REMOTE_ROOT.tar.gz"
+          ],
+          "elapsed_seconds": 0.29329800605773926,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "stage": "execute"
+      },
+      "passed": true,
+      "schedule_info": {
+        "expected_pair_observation_count": 524288,
+        "schedule_kind": "relation_matrix_control_scrambled_pair_control",
+        "tsv_sha256": "14e31b1184320462eb10ebd396a0dc6917e2342d5b0dabf5d93178633169c85b",
+        "tuple_count": 2048
+      },
+      "score": {
+        "R_spatial_global": {
+          "abs_mean": 0.06008443743141769,
+          "abs_of_mean": 0.0035672342258374124,
+          "count": 512,
+          "max_abs": 0.23314452867105592,
+          "mean": -0.0035672342258374124,
+          "q50_abs": 0.05007040679586902,
+          "q95_abs": 0.14877563839878136,
+          "q99_abs": 0.19270423573017018,
+          "sign_counts": {
+            "-1": 262,
+            "0": 0,
+            "1": 250
+          }
+        },
+        "archive_path": "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_scrambled_relation_matrix_REMOTE_ROOT.tar.gz",
+        "archive_sha256": "6c3614df8e0f8ce3523fabff35a4d35ae3a5c837e511576dc481a109f66f8513",
+        "archive_size": 11478219,
+        "control_C_pair_distributions": {},
+        "discovery_only_no_claim": true,
+        "factor_stability": {
+          "factors": {
+            "cyclic_origin": {
+              "levels": {
+                "0": {
+                  "abs_mean": 0.05829467456362071,
+                  "abs_of_mean": 0.005368778726982547,
+                  "count": 128,
+                  "max_abs": 0.20065533566931648,
+                  "mean": -0.005368778726982547,
+                  "q50_abs": 0.04581615188350273,
+                  "q95_abs": 0.14513626617000336,
+                  "q99_abs": 0.19363355869228274,
+                  "sign_counts": {
+                    "-1": 68,
+                    "0": 0,
+                    "1": 60
+                  }
+                },
+                "1024": {
+                  "abs_mean": 0.06390212783377677,
+                  "abs_of_mean": 0.006001578064197465,
+                  "count": 128,
+                  "max_abs": 0.19921326775703188,
+                  "mean": -0.006001578064197465,
+                  "q50_abs": 0.054662101469333965,
+                  "q95_abs": 0.15100838236328845,
+                  "q99_abs": 0.18162600249616334,
+                  "sign_counts": {
+                    "-1": 67,
+                    "0": 0,
+                    "1": 61
+                  }
+                },
+                "2048": {
+                  "abs_mean": 0.05380567312875574,
+                  "abs_of_mean": 0.0033238901706778737,
+                  "count": 128,
+                  "max_abs": 0.2034690802666942,
+                  "mean": 0.0033238901706778737,
+                  "q50_abs": 0.04356145025924161,
+                  "q95_abs": 0.13922946407155298,
+                  "q99_abs": 0.16406624288842642,
+                  "sign_counts": {
+                    "-1": 57,
+                    "0": 0,
+                    "1": 71
+                  }
+                },
+                "3072": {
+                  "abs_mean": 0.06433527419951754,
+                  "abs_of_mean": 0.006222470282847515,
+                  "count": 128,
+                  "max_abs": 0.23314452867105592,
+                  "mean": -0.006222470282847515,
+                  "q50_abs": 0.054582986736416275,
+                  "q95_abs": 0.15098658084068198,
+                  "q99_abs": 0.1926971616991021,
+                  "sign_counts": {
+                    "-1": 70,
+                    "0": 0,
+                    "1": 58
+                  }
+                }
+              },
+              "passed": false
+            },
+            "mapping": {
+              "levels": {
+                "map0": {
+                  "abs_mean": 0.05986084171364199,
+                  "abs_of_mean": 0.009176253714235033,
+                  "count": 256,
+                  "max_abs": 0.2034690802666942,
+                  "mean": -0.009176253714235033,
+                  "q50_abs": 0.049287170795426424,
+                  "q95_abs": 0.15383706038865935,
+                  "q99_abs": 0.19268478214473292,
+                  "sign_counts": {
+                    "-1": 142,
+                    "0": 0,
+                    "1": 114
+                  }
+                },
+                "map1": {
+                  "abs_mean": 0.06030803314919343,
+                  "abs_of_mean": 0.0020417852625602244,
+                  "count": 256,
+                  "max_abs": 0.23314452867105592,
+                  "mean": 0.0020417852625602244,
+                  "q50_abs": 0.0508544588041165,
+                  "q95_abs": 0.13563124068970808,
+                  "q99_abs": 0.1910744917513741,
+                  "sign_counts": {
+                    "-1": 120,
+                    "0": 0,
+                    "1": 136
+                  }
+                }
+              },
+              "passed": false
+            },
+            "query_order": {
+              "levels": {
+                "AB": {
+                  "abs_mean": 0.06045951095346565,
+                  "abs_of_mean": 0.00444088073597638,
+                  "count": 256,
+                  "max_abs": 0.23314452867105592,
+                  "mean": -0.00444088073597638,
+                  "q50_abs": 0.04800860462865107,
+                  "q95_abs": 0.15413278095665772,
+                  "q99_abs": 0.1975016472025802,
+                  "sign_counts": {
+                    "-1": 135,
+                    "0": 0,
+                    "1": 121
+                  }
+                },
+                "BA": {
+                  "abs_mean": 0.05970936390936976,
+                  "abs_of_mean": 0.002693587715698445,
+                  "count": 256,
+                  "max_abs": 0.2034690802666942,
+                  "mean": -0.002693587715698445,
+                  "q50_abs": 0.05249824179461636,
+                  "q95_abs": 0.14392191127081738,
+                  "q99_abs": 0.17772513355585218,
+                  "sign_counts": {
+                    "-1": 127,
+                    "0": 0,
+                    "1": 129
+                  }
+                }
+              },
+              "passed": true
+            },
+            "session": {
+              "levels": {
+                "session_0": {
+                  "abs_mean": 0.06284428405078978,
+                  "abs_of_mean": 0.0006875503507569864,
+                  "count": 256,
+                  "max_abs": 0.2034690802666942,
+                  "mean": -0.0006875503507569864,
+                  "q50_abs": 0.053161852127575286,
+                  "q95_abs": 0.15998816171006677,
+                  "q99_abs": 0.1975016472025802,
+                  "sign_counts": {
+                    "-1": 117,
+                    "0": 0,
+                    "1": 139
+                  }
+                },
+                "session_1": {
+                  "abs_mean": 0.057324590812045634,
+                  "abs_of_mean": 0.006446918100917844,
+                  "count": 256,
+                  "max_abs": 0.23314452867105592,
+                  "mean": -0.006446918100917844,
+                  "q50_abs": 0.047880911399175635,
+                  "q95_abs": 0.1374013138125002,
+                  "q99_abs": 0.16757458645907677,
+                  "sign_counts": {
+                    "-1": 145,
+                    "0": 0,
+                    "1": 111
+                  }
+                }
+              },
+              "passed": true
+            },
+            "source_order": {
+              "levels": {
+                "A_then_B": {
+                  "abs_mean": 0.06325738500246227,
+                  "abs_of_mean": 0.0029043495602891767,
+                  "count": 256,
+                  "max_abs": 0.23314452867105592,
+                  "mean": -0.0029043495602891767,
+                  "q50_abs": 0.05491079620370206,
+                  "q95_abs": 0.16112938116398415,
+                  "q99_abs": 0.1942355581929769,
+                  "sign_counts": {
+                    "-1": 134,
+                    "0": 0,
+                    "1": 122
+                  }
+                },
+                "B_then_A": {
+                  "abs_mean": 0.05691148986037315,
+                  "abs_of_mean": 0.004230118891385651,
+                  "count": 256,
+                  "max_abs": 0.2034690802666942,
+                  "mean": -0.004230118891385651,
+                  "q50_abs": 0.046377905800770426,
+                  "q95_abs": 0.14254136398418044,
+                  "q99_abs": 0.18792050305441652,
+                  "sign_counts": {
+                    "-1": 128,
+                    "0": 0,
+                    "1": 128
+                  }
+                }
+              },
+              "passed": true
+            }
+          },
+          "global_sign": -1,
+          "passed": false
+        },
+        "matched_permutation_null_discovery": {
+          "null_distribution": {
+            "abs_mean": 0.0016554888796980847,
+            "abs_of_mean": 0.0016554888796980847,
+            "count": 63,
+            "max_abs": 0.004883726942665731,
+            "mean": 0.0016554888796980847,
+            "q50_abs": 0.0013531663973777451,
+            "q95_abs": 0.004765734563500135,
+            "q99_abs": 0.0048747464787801745,
+            "sign_counts": {
+              "-1": 0,
+              "0": 0,
+              "1": 63
+            }
+          },
+          "permutation_count": 63,
+          "q95_abs_mean_R_spatial": 0.004765734563500135,
+          "q99_abs_mean_R_spatial": 0.0048747464787801745
+        },
+        "measurement_order_scores": {
+          "A_first": {
+            "R_spatial_distribution": {
+              "abs_mean": 0.07968420529946016,
+              "abs_of_mean": 0.000676632870398663,
+              "count": 512,
+              "max_abs": 0.35942977610299737,
+              "mean": 0.000676632870398663,
+              "q50_abs": 0.06926729933510167,
+              "q95_abs": 0.20585604521197065,
+              "q99_abs": 0.2609383179305378,
+              "sign_counts": {
+                "-1": 251,
+                "0": 0,
+                "1": 261
+              }
+            },
+            "failures": 0
+          },
+          "B_first": {
+            "R_spatial_distribution": {
+              "abs_mean": 0.08476544834819376,
+              "abs_of_mean": 0.006434709798295106,
+              "count": 512,
+              "max_abs": 0.3657381626801852,
+              "mean": -0.006434709798295106,
+              "q50_abs": 0.07210246853821634,
+              "q95_abs": 0.2009582703583572,
+              "q99_abs": 0.2617477299804235,
+              "sign_counts": {
+                "-1": 267,
+                "0": 0,
+                "1": 245
+              }
+            },
+            "failures": 0
+          }
+        },
+        "observed_exceeds_discovery_q99": false,
+        "observed_to_q99_ratio": 0.731778409680508,
+        "pair_observation_count": 524288,
+        "positive_scientific_claim": false,
+        "r_block_count": 512,
+        "raw_record_count": 2048,
+        "relation_block_failures": [],
+        "schema": "FAMILY10H_RELATION_SPATIAL_DISCOVERY_SCORE_V1",
+        "small_wall_crossed": false,
+        "source_death_receipt_count": 2048,
+        "variant": {
+          "name": "alternating_scrambled_relation_matrix",
+          "runtime_mode": "alternating",
+          "schedule": "relation_matrix_control_scrambled_pair_control"
+        }
+      },
+      "variant": {
+        "name": "alternating_scrambled_relation_matrix",
+        "runtime_mode": "alternating",
+        "schedule": "relation_matrix_control_scrambled_pair_control"
+      }
+    },
+    {
+      "compile": {
+        "compile": {
+          "command": [
+            "wsl.exe",
+            "--",
+            "gcc",
+            "-std=c11",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-g",
+            "-o",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_distance_relation_matrix/source/relation_spatial_runtime",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_distance_relation_matrix/source/relation_spatial_runtime.c",
+            "-lm"
+          ],
+          "elapsed_seconds": 1.0867881774902344,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "file_probe": {
+          "command": [
+            "wsl.exe",
+            "--",
+            "file",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_distance_relation_matrix/source/relation_spatial_runtime"
+          ],
+          "elapsed_seconds": 0.09910440444946289,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_distance_relation_matrix/source/relation_spatial_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2d13705707f2564b9bc70566e17faa9d0b9a0400, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+        },
+        "passed": true,
+        "runtime_sha256": "6487aa0217b87484aea8995145f5ccd000eb3b18933caea33f45344748993157"
+      },
+      "execution": {
+        "archive_remote": "/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix.tar.gz",
+        "execute": {
+          "command": [
+            "ssh",
+            "-o",
+            "BatchMode=yes",
+            "root@192.168.137.100",
+            "set -eu\ncd '/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix/source'\nchmod +x relation_spatial_runtime relation_spatial_pmu_preflight || true\nmkdir -p _relation_spatial_owned_outputs\nfor c in 4 5; do\n  g=/sys/devices/system/cpu/cpu${c}/cpufreq/scaling_governor\n  if [ -f \"$g\" ]; then echo performance > \"$g\" || true; cat \"$g\"; fi\ndone > DISCOVERY_CPU_GOVERNORS.txt\n/usr/bin/taskset -c 4 true\n/usr/bin/taskset -c 5 true\n./relation_spatial_pmu_preflight --disabled-group-preflight 4 > DISCOVERY_PMU_PREFLIGHT.json\nif [ -e '/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix/source/_relation_spatial_owned_outputs/alternating_distance_relation_matrix' ]; then echo preexisting_output_root >&2; exit 12; fi\nFAMILY10H_RELATION_SPATIAL_RUNTIME_AUTHORITY='family10h_relation_spatial_pair_readout_v1_0' ./relation_spatial_runtime --execute-schedule RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv '/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix/source/_relation_spatial_owned_outputs/alternating_distance_relation_matrix' > DISCOVERY_RUNTIME.stdout 2> DISCOVERY_RUNTIME.stderr\npython3 - <<'PY'\nfrom pathlib import Path\nimport json\nroot=Path('/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix/source/_relation_spatial_owned_outputs/alternating_distance_relation_matrix')\ndef count(p):\n    return sum(1 for line in p.open('rb') if line.strip()) if p.exists() else 0\nreceipt={\n  'schema':'FAMILY10H_RELATION_SPATIAL_DISCOVERY_EXECUTION_RECEIPT_V1',\n  'discovery_only_no_claim': True,\n  'variant':'alternating_distance_relation_matrix',\n  'runtime_mode':'alternating',\n  'schedule_kind':'relation_matrix_control_distance_matched_control',\n  'raw_record_count':count(root/'raw_records.jsonl'),\n  'pair_observation_count':count(root/'pair_observations.jsonl'),\n  'source_death_receipt_count':count(root/'source_death_receipts.jsonl'),\n  'small_wall_crossed': False,\n  'positive_scientific_claim': False,\n}\n(root/'DISCOVERY_EXECUTION_RECEIPT.json').write_text(json.dumps(receipt, indent=2, sort_keys=True)+chr(10))\nPY\ncd /root\ntar -czf '/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix.tar.gz' \"$(basename '/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix')\"\nsha256sum '/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix.tar.gz' > '/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix.tar.gz.sha256'\nstat -c '%s' '/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix.tar.gz' > '/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix.tar.gz.size'"
+          ],
+          "elapsed_seconds": 12.652279376983643,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "local_archive": "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_distance_relation_matrix_REMOTE_ROOT.tar.gz",
+        "local_archive_sha256": "eb04511a82375c0963b8ddd70f41a242960e6257142700884a7960c529b7740d",
+        "local_archive_size": 10879465,
+        "output_root": "/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix/source/_relation_spatial_owned_outputs/alternating_distance_relation_matrix",
+        "passed": true,
+        "remote_archive_identity_text": "eb04511a82375c0963b8ddd70f41a242960e6257142700884a7960c529b7740d  /root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix.tar.gz\n10879465\n",
+        "remote_root": "/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix",
+        "scp_back": {
+          "command": [
+            "scp",
+            "-O",
+            "-o",
+            "BatchMode=yes",
+            "root@192.168.137.100:/root/family10h_spatial_discovery_20260722_105340_alternating_distance_relation_matrix.tar.gz",
+            "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_distance_relation_matrix_REMOTE_ROOT.tar.gz"
+          ],
+          "elapsed_seconds": 0.29288578033447266,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "stage": "execute"
+      },
+      "passed": true,
+      "schedule_info": {
+        "expected_pair_observation_count": 524288,
+        "schedule_kind": "relation_matrix_control_distance_matched_control",
+        "tsv_sha256": "2a626636b12a3376d4f5d81626568753c516ab73bf42ce93738ebc1566feb68b",
+        "tuple_count": 2048
+      },
+      "score": {
+        "R_spatial_global": {
+          "abs_mean": 0.0806360874797093,
+          "abs_of_mean": 0.009948217131847023,
+          "count": 512,
+          "max_abs": 0.4531156442733476,
+          "mean": 0.009948217131847023,
+          "q50_abs": 0.042459316776323475,
+          "q95_abs": 0.3389343801531021,
+          "q99_abs": 0.39636346248341453,
+          "sign_counts": {
+            "-1": 264,
+            "0": 0,
+            "1": 248
+          }
+        },
+        "archive_path": "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_distance_relation_matrix_REMOTE_ROOT.tar.gz",
+        "archive_sha256": "eb04511a82375c0963b8ddd70f41a242960e6257142700884a7960c529b7740d",
+        "archive_size": 10879465,
+        "control_C_pair_distributions": {},
+        "discovery_only_no_claim": true,
+        "factor_stability": {
+          "factors": {
+            "cyclic_origin": {
+              "levels": {
+                "0": {
+                  "abs_mean": 0.07632649103588,
+                  "abs_of_mean": 0.012357205168074677,
+                  "count": 128,
+                  "max_abs": 0.39733575796959064,
+                  "mean": 0.012357205168074677,
+                  "q50_abs": 0.04287313968614892,
+                  "q95_abs": 0.35278268265617446,
+                  "q99_abs": 0.3800602174002742,
+                  "sign_counts": {
+                    "-1": 66,
+                    "0": 0,
+                    "1": 62
+                  }
+                },
+                "1024": {
+                  "abs_mean": 0.08530161903162593,
+                  "abs_of_mean": 0.01055013245047762,
+                  "count": 128,
+                  "max_abs": 0.3836647410950224,
+                  "mean": -0.01055013245047762,
+                  "q50_abs": 0.04727950855988884,
+                  "q95_abs": 0.3139737102809565,
+                  "q99_abs": 0.3610316678651942,
+                  "sign_counts": {
+                    "-1": 69,
+                    "0": 0,
+                    "1": 59
+                  }
+                },
+                "2048": {
+                  "abs_mean": 0.07875622983143332,
+                  "abs_of_mean": 0.012777964593725025,
+                  "count": 128,
+                  "max_abs": 0.4531156442733476,
+                  "mean": 0.012777964593725025,
+                  "q50_abs": 0.04242746874449636,
+                  "q95_abs": 0.3288508818201967,
+                  "q99_abs": 0.39703689467914194,
+                  "sign_counts": {
+                    "-1": 66,
+                    "0": 0,
+                    "1": 62
+                  }
+                },
+                "3072": {
+                  "abs_mean": 0.08216001001989796,
+                  "abs_of_mean": 0.025207831216066057,
+                  "count": 128,
+                  "max_abs": 0.4290939133366961,
+                  "mean": 0.025207831216066057,
+                  "q50_abs": 0.040254546387268095,
+                  "q95_abs": 0.3528563711881862,
+                  "q99_abs": 0.41906673762754715,
+                  "sign_counts": {
+                    "-1": 63,
+                    "0": 0,
+                    "1": 65
+                  }
+                }
+              },
+              "passed": false
+            },
+            "mapping": {
+              "levels": {
+                "map0": {
+                  "abs_mean": 0.07802398403468747,
+                  "abs_of_mean": 0.01068514513193819,
+                  "count": 256,
+                  "max_abs": 0.4141142963139417,
+                  "mean": 0.01068514513193819,
+                  "q50_abs": 0.044138183791562334,
+                  "q95_abs": 0.3244271560169672,
+                  "q99_abs": 0.382930487470274,
+                  "sign_counts": {
+                    "-1": 123,
+                    "0": 0,
+                    "1": 133
+                  }
+                },
+                "map1": {
+                  "abs_mean": 0.08324819092473118,
+                  "abs_of_mean": 0.009211289131755883,
+                  "count": 256,
+                  "max_abs": 0.4531156442733476,
+                  "mean": 0.009211289131755883,
+                  "q50_abs": 0.04045548344059377,
+                  "q95_abs": 0.3431472828859886,
+                  "q99_abs": 0.41076639921897456,
+                  "sign_counts": {
+                    "-1": 141,
+                    "0": 0,
+                    "1": 115
+                  }
+                }
+              },
+              "passed": true
+            },
+            "query_order": {
+              "levels": {
+                "AB": {
+                  "abs_mean": 0.07241705832437197,
+                  "abs_of_mean": 0.014114603011854472,
+                  "count": 256,
+                  "max_abs": 0.3813746149623079,
+                  "mean": -0.014114603011854472,
+                  "q50_abs": 0.040630577529645315,
+                  "q95_abs": 0.2798733708804476,
+                  "q99_abs": 0.332836867405501,
+                  "sign_counts": {
+                    "-1": 123,
+                    "0": 0,
+                    "1": 133
+                  }
+                },
+                "BA": {
+                  "abs_mean": 0.08885511663504665,
+                  "abs_of_mean": 0.03401103727554854,
+                  "count": 256,
+                  "max_abs": 0.4531156442733476,
+                  "mean": 0.03401103727554854,
+                  "q50_abs": 0.045118396405621444,
+                  "q95_abs": 0.37086062606212455,
+                  "q99_abs": 0.41716717109630114,
+                  "sign_counts": {
+                    "-1": 141,
+                    "0": 0,
+                    "1": 115
+                  }
+                }
+              },
+              "passed": false
+            },
+            "session": {
+              "levels": {
+                "session_0": {
+                  "abs_mean": 0.08119568267475738,
+                  "abs_of_mean": 0.008322562811210653,
+                  "count": 256,
+                  "max_abs": 0.4290939133366961,
+                  "mean": 0.008322562811210653,
+                  "q50_abs": 0.04052232510718505,
+                  "q95_abs": 0.33830684988273646,
+                  "q99_abs": 0.4048861002245484,
+                  "sign_counts": {
+                    "-1": 129,
+                    "0": 0,
+                    "1": 127
+                  }
+                },
+                "session_1": {
+                  "abs_mean": 0.08007649228466125,
+                  "abs_of_mean": 0.011573871452483422,
+                  "count": 256,
+                  "max_abs": 0.4531156442733476,
+                  "mean": 0.011573871452483422,
+                  "q50_abs": 0.04473646123761023,
+                  "q95_abs": 0.3389493354821862,
+                  "q99_abs": 0.38510487262038234,
+                  "sign_counts": {
+                    "-1": 135,
+                    "0": 0,
+                    "1": 121
+                  }
+                }
+              },
+              "passed": true
+            },
+            "source_order": {
+              "levels": {
+                "A_then_B": {
+                  "abs_mean": 0.07381410494720288,
+                  "abs_of_mean": 0.02004287492820143,
+                  "count": 256,
+                  "max_abs": 0.4531156442733476,
+                  "mean": 0.02004287492820143,
+                  "q50_abs": 0.039318658368638786,
+                  "q95_abs": 0.3505153130532913,
+                  "q99_abs": 0.4077135244366151,
+                  "sign_counts": {
+                    "-1": 124,
+                    "0": 0,
+                    "1": 132
+                  }
+                },
+                "B_then_A": {
+                  "abs_mean": 0.08745807001221576,
+                  "abs_of_mean": 0.0001464406645073713,
+                  "count": 256,
+                  "max_abs": 0.4290939133366961,
+                  "mean": -0.0001464406645073713,
+                  "q50_abs": 0.047529956406788795,
+                  "q95_abs": 0.328987922919784,
+                  "q99_abs": 0.3845795568721378,
+                  "sign_counts": {
+                    "-1": 140,
+                    "0": 0,
+                    "1": 116
+                  }
+                }
+              },
+              "passed": false
+            }
+          },
+          "global_sign": 1,
+          "passed": false
+        },
+        "matched_permutation_null_discovery": {
+          "null_distribution": {
+            "abs_mean": 0.001973626063283982,
+            "abs_of_mean": 0.001973626063283982,
+            "count": 63,
+            "max_abs": 0.006738458190134027,
+            "mean": 0.001973626063283982,
+            "q50_abs": 0.0017136727378418623,
+            "q95_abs": 0.003937504847194194,
+            "q99_abs": 0.005273701786653276,
+            "sign_counts": {
+              "-1": 0,
+              "0": 0,
+              "1": 63
+            }
+          },
+          "permutation_count": 63,
+          "q95_abs_mean_R_spatial": 0.003937504847194194,
+          "q99_abs_mean_R_spatial": 0.005273701786653276
+        },
+        "measurement_order_scores": {
+          "A_first": {
+            "R_spatial_distribution": {
+              "abs_mean": 0.102856013583882,
+              "abs_of_mean": 0.011723146336091025,
+              "count": 512,
+              "max_abs": 0.5895180947557845,
+              "mean": -0.011723146336091025,
+              "q50_abs": 0.07988661431927571,
+              "q95_abs": 0.282723137059203,
+              "q99_abs": 0.42472027240606836,
+              "sign_counts": {
+                "-1": 287,
+                "0": 0,
+                "1": 225
+              }
+            },
+            "failures": 0
+          },
+          "B_first": {
+            "R_spatial_distribution": {
+              "abs_mean": 0.09340598342673932,
+              "abs_of_mean": 0.0011866804651103698,
+              "count": 512,
+              "max_abs": 0.5238197153894613,
+              "mean": 0.0011866804651103698,
+              "q50_abs": 0.06876856706327626,
+              "q95_abs": 0.26070193570514144,
+              "q99_abs": 0.4178136764324602,
+              "sign_counts": {
+                "-1": 258,
+                "0": 0,
+                "1": 254
+              }
+            },
+            "failures": 0
+          }
+        },
+        "observed_exceeds_discovery_q99": true,
+        "observed_to_q99_ratio": 1.88638219116296,
+        "pair_observation_count": 524288,
+        "positive_scientific_claim": false,
+        "r_block_count": 512,
+        "raw_record_count": 2048,
+        "relation_block_failures": [],
+        "schema": "FAMILY10H_RELATION_SPATIAL_DISCOVERY_SCORE_V1",
+        "small_wall_crossed": false,
+        "source_death_receipt_count": 2048,
+        "variant": {
+          "name": "alternating_distance_relation_matrix",
+          "runtime_mode": "alternating",
+          "schedule": "relation_matrix_control_distance_matched_control"
+        }
+      },
+      "variant": {
+        "name": "alternating_distance_relation_matrix",
+        "runtime_mode": "alternating",
+        "schedule": "relation_matrix_control_distance_matched_control"
+      }
+    },
+    {
+      "compile": {
+        "compile": {
+          "command": [
+            "wsl.exe",
+            "--",
+            "gcc",
+            "-std=c11",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "-g",
+            "-o",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_route_relation_matrix/source/relation_spatial_runtime",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_route_relation_matrix/source/relation_spatial_runtime.c",
+            "-lm"
+          ],
+          "elapsed_seconds": 1.1103999614715576,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "file_probe": {
+          "command": [
+            "wsl.exe",
+            "--",
+            "file",
+            "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_route_relation_matrix/source/relation_spatial_runtime"
+          ],
+          "elapsed_seconds": 0.09700775146484375,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": "/mnt/c/tmp/family10h_spatial_discovery_20260722_105340/alternating_route_relation_matrix/source/relation_spatial_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=5598cab657e5af7ad6312c200a5c90ba7d453dfd, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+        },
+        "passed": true,
+        "runtime_sha256": "3b7752c92e5919f882c100000f93e33a477b05f25a37c22c86e816a4d9827ef3"
+      },
+      "execution": {
+        "archive_remote": "/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix.tar.gz",
+        "execute": {
+          "command": [
+            "ssh",
+            "-o",
+            "BatchMode=yes",
+            "root@192.168.137.100",
+            "set -eu\ncd '/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix/source'\nchmod +x relation_spatial_runtime relation_spatial_pmu_preflight || true\nmkdir -p _relation_spatial_owned_outputs\nfor c in 4 5; do\n  g=/sys/devices/system/cpu/cpu${c}/cpufreq/scaling_governor\n  if [ -f \"$g\" ]; then echo performance > \"$g\" || true; cat \"$g\"; fi\ndone > DISCOVERY_CPU_GOVERNORS.txt\n/usr/bin/taskset -c 4 true\n/usr/bin/taskset -c 5 true\n./relation_spatial_pmu_preflight --disabled-group-preflight 4 > DISCOVERY_PMU_PREFLIGHT.json\nif [ -e '/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix/source/_relation_spatial_owned_outputs/alternating_route_relation_matrix' ]; then echo preexisting_output_root >&2; exit 12; fi\nFAMILY10H_RELATION_SPATIAL_RUNTIME_AUTHORITY='family10h_relation_spatial_pair_readout_v1_0' ./relation_spatial_runtime --execute-schedule RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv '/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix/source/_relation_spatial_owned_outputs/alternating_route_relation_matrix' > DISCOVERY_RUNTIME.stdout 2> DISCOVERY_RUNTIME.stderr\npython3 - <<'PY'\nfrom pathlib import Path\nimport json\nroot=Path('/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix/source/_relation_spatial_owned_outputs/alternating_route_relation_matrix')\ndef count(p):\n    return sum(1 for line in p.open('rb') if line.strip()) if p.exists() else 0\nreceipt={\n  'schema':'FAMILY10H_RELATION_SPATIAL_DISCOVERY_EXECUTION_RECEIPT_V1',\n  'discovery_only_no_claim': True,\n  'variant':'alternating_route_relation_matrix',\n  'runtime_mode':'alternating',\n  'schedule_kind':'relation_matrix_control_route_pressure_control',\n  'raw_record_count':count(root/'raw_records.jsonl'),\n  'pair_observation_count':count(root/'pair_observations.jsonl'),\n  'source_death_receipt_count':count(root/'source_death_receipts.jsonl'),\n  'small_wall_crossed': False,\n  'positive_scientific_claim': False,\n}\n(root/'DISCOVERY_EXECUTION_RECEIPT.json').write_text(json.dumps(receipt, indent=2, sort_keys=True)+chr(10))\nPY\ncd /root\ntar -czf '/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix.tar.gz' \"$(basename '/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix')\"\nsha256sum '/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix.tar.gz' > '/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix.tar.gz.sha256'\nstat -c '%s' '/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix.tar.gz' > '/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix.tar.gz.size'"
+          ],
+          "elapsed_seconds": 12.79540753364563,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "local_archive": "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_route_relation_matrix_REMOTE_ROOT.tar.gz",
+        "local_archive_sha256": "c290538092f92eaf45713134a00703e078e7c8888416048098adc04dc7ef5cc2",
+        "local_archive_size": 11171990,
+        "output_root": "/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix/source/_relation_spatial_owned_outputs/alternating_route_relation_matrix",
+        "passed": true,
+        "remote_archive_identity_text": "c290538092f92eaf45713134a00703e078e7c8888416048098adc04dc7ef5cc2  /root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix.tar.gz\n11171990\n",
+        "remote_root": "/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix",
+        "scp_back": {
+          "command": [
+            "scp",
+            "-O",
+            "-o",
+            "BatchMode=yes",
+            "root@192.168.137.100:/root/family10h_spatial_discovery_20260722_105340_alternating_route_relation_matrix.tar.gz",
+            "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_route_relation_matrix_REMOTE_ROOT.tar.gz"
+          ],
+          "elapsed_seconds": 0.28300952911376953,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "stage": "execute"
+      },
+      "passed": true,
+      "schedule_info": {
+        "expected_pair_observation_count": 524288,
+        "schedule_kind": "relation_matrix_control_route_pressure_control",
+        "tsv_sha256": "bc94042346bc7cd386ee5425b57502301f4e2c51c6a91827734f2d5193420be5",
+        "tuple_count": 2048
+      },
+      "score": {
+        "R_spatial_global": {
+          "abs_mean": 0.04792870147496981,
+          "abs_of_mean": 0.001961615180998588,
+          "count": 512,
+          "max_abs": 0.1931289614558309,
+          "mean": -0.001961615180998588,
+          "q50_abs": 0.040063924783009255,
+          "q95_abs": 0.11778517082655948,
+          "q99_abs": 0.16232162593638313,
+          "sign_counts": {
+            "-1": 265,
+            "0": 0,
+            "1": 247
+          }
+        },
+        "archive_path": "C:\\tmp\\family10h_spatial_discovery_20260722_105340\\alternating_route_relation_matrix_REMOTE_ROOT.tar.gz",
+        "archive_sha256": "c290538092f92eaf45713134a00703e078e7c8888416048098adc04dc7ef5cc2",
+        "archive_size": 11171990,
+        "control_C_pair_distributions": {},
+        "discovery_only_no_claim": true,
+        "factor_stability": {
+          "factors": {
+            "cyclic_origin": {
+              "levels": {
+                "0": {
+                  "abs_mean": 0.04965690679416392,
+                  "abs_of_mean": 0.0003366084035461218,
+                  "count": 128,
+                  "max_abs": 0.1714501586576062,
+                  "mean": -0.0003366084035461218,
+                  "q50_abs": 0.04307239569782048,
+                  "q95_abs": 0.11836959433657251,
+                  "q99_abs": 0.16300382383629322,
+                  "sign_counts": {
+                    "-1": 62,
+                    "0": 0,
+                    "1": 66
+                  }
+                },
+                "1024": {
+                  "abs_mean": 0.050051025591197285,
+                  "abs_of_mean": 0.0040574824222611135,
+                  "count": 128,
+                  "max_abs": 0.1837448404086263,
+                  "mean": -0.0040574824222611135,
+                  "q50_abs": 0.03434755507029583,
+                  "q95_abs": 0.12802732334029623,
+                  "q99_abs": 0.16394155833591442,
+                  "sign_counts": {
+                    "-1": 67,
+                    "0": 0,
+                    "1": 61
+                  }
+                },
+                "2048": {
+                  "abs_mean": 0.04445424502883952,
+                  "abs_of_mean": 0.002164823851218606,
+                  "count": 128,
+                  "max_abs": 0.14832635468212063,
+                  "mean": -0.002164823851218606,
+                  "q50_abs": 0.0375110118966294,
+                  "q95_abs": 0.11013709006004507,
+                  "q99_abs": 0.1269407203854767,
+                  "sign_counts": {
+                    "-1": 72,
+                    "0": 0,
+                    "1": 56
+                  }
+                },
+                "3072": {
+                  "abs_mean": 0.04755262848567868,
+                  "abs_of_mean": 0.001287546046968505,
+                  "count": 128,
+                  "max_abs": 0.1931289614558309,
+                  "mean": -0.001287546046968505,
+                  "q50_abs": 0.043545971100059144,
+                  "q95_abs": 0.10928778941976666,
+                  "q99_abs": 0.14510469738030846,
+                  "sign_counts": {
+                    "-1": 64,
+                    "0": 0,
+                    "1": 64
+                  }
+                }
+              },
+              "passed": true
+            },
+            "mapping": {
+              "levels": {
+                "map0": {
+                  "abs_mean": 0.050314756782123764,
+                  "abs_of_mean": 0.003590394051507429,
+                  "count": 256,
+                  "max_abs": 0.1837448404086263,
+                  "mean": -0.003590394051507429,
+                  "q50_abs": 0.04357452959197399,
+                  "q95_abs": 0.11504193891991435,
+                  "q99_abs": 0.14561147506888403,
+                  "sign_counts": {
+                    "-1": 127,
+                    "0": 0,
+                    "1": 129
+                  }
+                },
+                "map1": {
+                  "abs_mean": 0.045542646167815906,
+                  "abs_of_mean": 0.00033283631048974756,
+                  "count": 256,
+                  "max_abs": 0.1931289614558309,
+                  "mean": -0.00033283631048974756,
+                  "q50_abs": 0.0342057233728587,
+                  "q95_abs": 0.11916209582105833,
+                  "q99_abs": 0.16436988097751357,
+                  "sign_counts": {
+                    "-1": 138,
+                    "0": 0,
+                    "1": 118
+                  }
+                }
+              },
+              "passed": true
+            },
+            "query_order": {
+              "levels": {
+                "AB": {
+                  "abs_mean": 0.05148267478403713,
+                  "abs_of_mean": 0.0035782417403367197,
+                  "count": 256,
+                  "max_abs": 0.1931289614558309,
+                  "mean": -0.0035782417403367197,
+                  "q50_abs": 0.04336711427773615,
+                  "q95_abs": 0.12382677141106789,
+                  "q99_abs": 0.16342889581391634,
+                  "sign_counts": {
+                    "-1": 138,
+                    "0": 0,
+                    "1": 118
+                  }
+                },
+                "BA": {
+                  "abs_mean": 0.044374728165902516,
+                  "abs_of_mean": 0.0003449886216604533,
+                  "count": 256,
+                  "max_abs": 0.1837448404086263,
+                  "mean": -0.0003449886216604533,
+                  "q50_abs": 0.0347639213845803,
+                  "q95_abs": 0.11418622598461073,
+                  "q99_abs": 0.1501422216033092,
+                  "sign_counts": {
+                    "-1": 127,
+                    "0": 0,
+                    "1": 129
+                  }
+                }
+              },
+              "passed": true
+            },
+            "session": {
+              "levels": {
+                "session_0": {
+                  "abs_mean": 0.04669175525869885,
+                  "abs_of_mean": 0.0006093331070085622,
+                  "count": 256,
+                  "max_abs": 0.1931289614558309,
+                  "mean": 0.0006093331070085622,
+                  "q50_abs": 0.03888988202687201,
+                  "q95_abs": 0.10663717130417316,
+                  "q99_abs": 0.15873206647108887,
+                  "sign_counts": {
+                    "-1": 132,
+                    "0": 0,
+                    "1": 124
+                  }
+                },
+                "session_1": {
+                  "abs_mean": 0.049165647691240835,
+                  "abs_of_mean": 0.0045325634690057326,
+                  "count": 256,
+                  "max_abs": 0.16440679095105418,
+                  "mean": -0.0045325634690057326,
+                  "q50_abs": 0.04137446308271221,
+                  "q95_abs": 0.12246978510057915,
+                  "q99_abs": 0.1608733009168068,
+                  "sign_counts": {
+                    "-1": 133,
+                    "0": 0,
+                    "1": 123
+                  }
+                }
+              },
+              "passed": false
+            },
+            "source_order": {
+              "levels": {
+                "A_then_B": {
+                  "abs_mean": 0.04522172745742642,
+                  "abs_of_mean": 0.0003470197440068462,
+                  "count": 256,
+                  "max_abs": 0.1714501586576062,
+                  "mean": -0.0003470197440068462,
+                  "q50_abs": 0.0397978457314646,
+                  "q95_abs": 0.10928592967538169,
+                  "q99_abs": 0.15110785725289158,
+                  "sign_counts": {
+                    "-1": 129,
+                    "0": 0,
+                    "1": 127
+                  }
+                },
+                "B_then_A": {
+                  "abs_mean": 0.05063567549251325,
+                  "abs_of_mean": 0.003576210617990325,
+                  "count": 256,
+                  "max_abs": 0.1931289614558309,
+                  "mean": -0.003576210617990325,
+                  "q50_abs": 0.04157314988744246,
+                  "q95_abs": 0.12177903910227617,
+                  "q99_abs": 0.16436988097751357,
+                  "sign_counts": {
+                    "-1": 136,
+                    "0": 0,
+                    "1": 120
+                  }
+                }
+              },
+              "passed": true
+            }
+          },
+          "global_sign": -1,
+          "passed": false
+        },
+        "matched_permutation_null_discovery": {
+          "null_distribution": {
+            "abs_mean": 0.00236898287969196,
+            "abs_of_mean": 0.00236898287969196,
+            "count": 63,
+            "max_abs": 0.006072099735439874,
+            "mean": 0.00236898287969196,
+            "q50_abs": 0.0023308744068502823,
+            "q95_abs": 0.004794256888325958,
+            "q99_abs": 0.006037897627548315,
+            "sign_counts": {
+              "-1": 0,
+              "0": 0,
+              "1": 63
+            }
+          },
+          "permutation_count": 63,
+          "q95_abs_mean_R_spatial": 0.004794256888325958,
+          "q99_abs_mean_R_spatial": 0.006037897627548315
+        },
+        "measurement_order_scores": {
+          "A_first": {
+            "R_spatial_distribution": {
+              "abs_mean": 0.07630867952979707,
+              "abs_of_mean": 0.006223911144651049,
+              "count": 512,
+              "max_abs": 0.3217069924734516,
+              "mean": -0.006223911144651049,
+              "q50_abs": 0.06801853174876701,
+              "q95_abs": 0.1849913900140383,
+              "q99_abs": 0.2258294100172717,
+              "sign_counts": {
+                "-1": 275,
+                "0": 0,
+                "1": 237
+              }
+            },
+            "failures": 0
+          },
+          "B_first": {
+            "R_spatial_distribution": {
+              "abs_mean": 0.07195697808888156,
+              "abs_of_mean": 0.0016895065210282404,
+              "count": 512,
+              "max_abs": 0.29220409521737,
+              "mean": 0.0016895065210282404,
+              "q50_abs": 0.05984770347036887,
+              "q95_abs": 0.1852986812946529,
+              "q99_abs": 0.22696191042858738,
+              "sign_counts": {
+                "-1": 249,
+                "0": 0,
+                "1": 263
+              }
+            },
+            "failures": 0
+          }
+        },
+        "observed_exceeds_discovery_q99": false,
+        "observed_to_q99_ratio": 0.3248838092332978,
+        "pair_observation_count": 524288,
+        "positive_scientific_claim": false,
+        "r_block_count": 512,
+        "raw_record_count": 2048,
+        "relation_block_failures": [],
+        "schema": "FAMILY10H_RELATION_SPATIAL_DISCOVERY_SCORE_V1",
+        "small_wall_crossed": false,
+        "source_death_receipt_count": 2048,
+        "variant": {
+          "name": "alternating_route_relation_matrix",
+          "runtime_mode": "alternating",
+          "schedule": "relation_matrix_control_route_pressure_control"
+        }
+      },
+      "variant": {
+        "name": "alternating_route_relation_matrix",
+        "runtime_mode": "alternating",
+        "schedule": "relation_matrix_control_route_pressure_control"
+      }
+    }
+  ]
+}

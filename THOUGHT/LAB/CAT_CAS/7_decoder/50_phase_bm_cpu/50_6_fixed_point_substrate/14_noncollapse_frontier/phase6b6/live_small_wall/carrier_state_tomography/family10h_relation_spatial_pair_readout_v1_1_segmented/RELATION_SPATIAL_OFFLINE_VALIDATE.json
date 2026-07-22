@@ -1,0 +1,8 @@
+{
+  "build_ready": true,
+  "failures": [],
+  "package_decision": "FAMILY10H_SEGMENTED_SPATIAL_RELATION_READOUT_BUILD_READY_AWAITING_AUTHORIZATION",
+  "passed": true,
+  "schema": "FAMILY10H_RELATION_SPATIAL_OFFLINE_VALIDATE_V1",
+  "self_test_passed": true
+}

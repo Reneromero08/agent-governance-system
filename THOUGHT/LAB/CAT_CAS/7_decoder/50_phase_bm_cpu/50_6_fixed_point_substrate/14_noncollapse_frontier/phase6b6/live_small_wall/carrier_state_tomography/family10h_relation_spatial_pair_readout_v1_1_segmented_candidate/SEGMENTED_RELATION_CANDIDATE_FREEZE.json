@@ -1,0 +1,92 @@
+{
+  "candidate_law": {
+    "blocks_per_segment": 512,
+    "combined_pair_observations": 2621440,
+    "combined_rows": 10240,
+    "control_queries": [
+      "relation_sham",
+      "scrambled_pair_control",
+      "distance_matched_control",
+      "route_pressure_control"
+    ],
+    "pair_measurements_per_row": 256,
+    "primary_coordinate": "R_spatial = 0.5*(r0/r0 + r1/r1 - r0/r1 - r1/r0) over C_pair Spearman",
+    "primary_query": "query_relation_pair",
+    "prospective_success_gates_recommended": {
+      "all_custody_and_no_claim_boundaries_pass": true,
+      "each_R_shaped_control_at_or_below_its_own_matched_permutation_q99": true,
+      "primary_abs_mean_at_least_4x_max_control_abs_mean": true,
+      "primary_exceeds_matched_permutation_q99": true,
+      "primary_factor_stability_across_session_mapping_source_order_query_order_cyclic_origin": true
+    },
+    "rows_per_segment": 2048,
+    "runtime_measurement_order": "alternating A_first/B_first; order isolation not required by discovery repeats",
+    "schedule_shape": "primary relation matrix first; R-shaped controls after; no interleaved controls inside primary segment"
+  },
+  "claim_boundary": {
+    "catalytic_borrowing_established": false,
+    "full_tomography_established": false,
+    "physical_relational_memory_established": false,
+    "prospective_claim_not_yet_established": true,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false,
+    "spatial_relation_coordinate_candidate_found": true
+  },
+  "combined_archive_identity": {
+    "local_archive": "C:\\tmp\\family10h_spatial_discovery_20260722_110953\\combined_relation_then_r_controls_REMOTE_ROOT.tar.gz",
+    "remote_identity_text": "b0dd71c158208a16714e4aff99812bdda0a22aa2c639dc250251b2d736affda1  /root/family10h_spatial_discovery_20260722_110953_combined_relation_then_r_controls.tar.gz\n55074765\n",
+    "sha256": "b0dd71c158208a16714e4aff99812bdda0a22aa2c639dc250251b2d736affda1",
+    "size": 55074765
+  },
+  "discovery_only_no_claim": true,
+  "discovery_results": {
+    "afirst_relation_only_ratio": 11.579733897585596,
+    "alternating_relation_only_ratio": 11.677046866175822,
+    "combined_control_abs_means": {
+      "distance_matched_control": 0.0022322958540613707,
+      "relation_sham": 0.0033483196558060876,
+      "route_pressure_control": 0.003411534450357056,
+      "scrambled_pair_control": 0.0023161351172488825
+    },
+    "combined_control_ratios": {
+      "distance_matched_control": 0.3183860162887086,
+      "relation_sham": 0.6520237874798739,
+      "route_pressure_control": 0.5236913756564813,
+      "scrambled_pair_control": 0.3785023850387291
+    },
+    "combined_controls_factor_stable": {
+      "distance_matched_control": false,
+      "relation_sham": false,
+      "route_pressure_control": false,
+      "scrambled_pair_control": false
+    },
+    "combined_primary_abs_mean": 0.08152526867402468,
+    "combined_primary_factor_stable": true,
+    "combined_primary_q99": 0.006812423430760067,
+    "combined_primary_ratio": 11.96714642045215,
+    "initial_bfirst_relation_only_ratio": 12.697472767800658,
+    "repeat_bfirst_relation_only_ratio": 11.496085787470037
+  },
+  "freeze_sha256": "6366dbb67f7b1ff09252d0451a7dd91e8e776904c2884c643936ecbe80f01aa9",
+  "schema": "FAMILY10H_RELATION_SPATIAL_SEGMENTED_CANDIDATE_FREEZE_V1",
+  "small_wall_crossed": false,
+  "status": "DISCOVERY_CANDIDATE_READY_FOR_PROSPECTIVE_PACKAGE_VALIDATION",
+  "summary_files": {
+    "DISCOVERY_SUMMARY_20260722_104322.json": {
+      "sha256": "2bbd220a2b99e329d674eb680ef6575b88388941388b8b49227eaefe4334e6e5",
+      "size": 75009
+    },
+    "DISCOVERY_SUMMARY_20260722_104917.json": {
+      "sha256": "641dbbc74fb35c1529b072b5460979b5954cd58ff01ec8ee638e0fe95d0e00f9",
+      "size": 53472
+    },
+    "DISCOVERY_SUMMARY_20260722_105340.json": {
+      "sha256": "0dc547115801dbb6c1c7482e2ddda8e6d825865d4084a8e67f94bcd29e7ea514",
+      "size": 91136
+    },
+    "DISCOVERY_SUMMARY_20260722_110953.json": {
+      "sha256": "c179e79b4bdd9aba272ee7f721af212ab466c0537b92eaede37754550d07b3d2",
+      "size": 69778
+    }
+  }
+}
