@@ -1276,7 +1276,7 @@ def execute_authorized(source_root: Path, output_root: Path) -> dict[str, Any]:
         env.pop(RUNTIME_AUTHORITY_ENV, None)
         runtime_mode = "--synthetic-execute-schedule"
     else:
-        env[RUNTIME_AUTHORITY_ENV] = AUTHORITY_VALUE
+        env[RUNTIME_AUTHORITY_ENV] = "family10h_relation_spatial_pair_readout_v1_0"
         runtime_mode = "--execute-schedule"
     command, launch_mode = runtime_command(
         source_root,
