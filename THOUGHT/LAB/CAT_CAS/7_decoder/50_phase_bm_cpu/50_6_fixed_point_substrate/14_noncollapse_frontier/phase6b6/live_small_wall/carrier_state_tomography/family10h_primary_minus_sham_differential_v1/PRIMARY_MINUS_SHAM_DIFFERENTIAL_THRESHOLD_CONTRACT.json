@@ -1,0 +1,41 @@
+{
+  "claim_boundary": {
+    "catalytic_borrowing_established": false,
+    "full_carrier_state_tomography_established": false,
+    "physical_relational_memory_established": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "coordinate": {
+    "D_primary_minus_sham": "R_primary - R_anti",
+    "R_anti": "mean R_spatial(relation_sham)",
+    "R_primary": "mean R_spatial(query_relation_pair)"
+  },
+  "diagnostics_not_gates": {
+    "generic_matched_permutation_q99": "reported diagnostic",
+    "relation_sham_in_null_control_set": false
+  },
+  "factor_stratum_law": {
+    "D_primary_minus_sham_gt_0": true,
+    "R_anti_lt_0": true,
+    "R_primary_gt_0": true,
+    "factors": [
+      "session",
+      "replicate",
+      "mapping",
+      "source_order",
+      "query_order",
+      "cyclic_origin"
+    ]
+  },
+  "package_id": "family10h_primary_minus_sham_differential_v1",
+  "round_law": {
+    "D_primary_minus_sham_gt_0": true,
+    "R_anti_lt_0": true,
+    "R_primary_gt_0": true,
+    "generic_control_envelope": "max(abs(R_scrambled), abs(R_distance), abs(R_route)) <= 0.25 * D_primary_minus_sham",
+    "generic_control_envelope_fraction": 0.25
+  },
+  "schema": "FAMILY10H_PRIMARY_MINUS_SHAM_DIFFERENTIAL_THRESHOLD_CONTRACT_V1",
+  "threshold_contract_sha256": "385221e33b50da1d6567b48f7b28c9507f8ff95b49173d5f9ee0ef607b45ff49"
+}
