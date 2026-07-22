@@ -1,0 +1,269 @@
+{
+  "distance_only": {
+    "R_match": {
+      "R_match_abs_mean": 0.0,
+      "R_match_max": 0.0,
+      "R_match_mean": 0.0,
+      "R_match_min": 0.0,
+      "block_count": 1792,
+      "failures": [],
+      "passed": true
+    },
+    "future_physical_result_classes_predeclared": [
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CANDIDATE_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CUSTODY_INVALID"
+    ],
+    "label_scramble": {
+      "passed": true,
+      "scrambled_R_match_abs_mean": 0.0
+    },
+    "maximum_future_claim": "PUBLIC_POST_SOURCE_LIFETIME_DEPENDENT_RELATION_MATCH_COORDINATE_CONFIRMED",
+    "positive_physical_claim": null,
+    "reproducible_relation_match_coordinate_observed": false,
+    "result_class": "SYNTHETIC_RELATION_MATCH_SIGNAL_NOT_DETECTED",
+    "scalar_equivalence": {
+      "passed": true,
+      "relation_D_single": {
+        "relation_r0": 80.0,
+        "relation_r1": 80.0
+      },
+      "relation_D_single_drift": 0.0,
+      "tolerance": 5.0
+    },
+    "small_wall_crossed": false,
+    "synthetic_thresholds": {
+      "R_match_abs_threshold": 50.0,
+      "physical_threshold_status": "not_a_physical_threshold",
+      "scalar_equivalence_tolerance": 5.0
+    }
+  },
+  "invalid_packet": {
+    "positive_physical_claim": null,
+    "reproducible_relation_match_coordinate_observed": false,
+    "result_class": "SYNTHETIC_RELATION_MATCH_CUSTODY_INVALID",
+    "validation": {
+      "failures": [
+        "raw record count mismatch"
+      ],
+      "passed": false
+    }
+  },
+  "origin_specific": {
+    "R_match": {
+      "R_match_abs_mean": 40.0,
+      "R_match_max": 160.0,
+      "R_match_mean": 40.0,
+      "R_match_min": 0.0,
+      "block_count": 1792,
+      "failures": [],
+      "passed": true
+    },
+    "future_physical_result_classes_predeclared": [
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CANDIDATE_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CUSTODY_INVALID"
+    ],
+    "label_scramble": {
+      "passed": true,
+      "scrambled_R_match_abs_mean": 1.25
+    },
+    "maximum_future_claim": "PUBLIC_POST_SOURCE_LIFETIME_DEPENDENT_RELATION_MATCH_COORDINATE_CONFIRMED",
+    "positive_physical_claim": null,
+    "reproducible_relation_match_coordinate_observed": false,
+    "result_class": "SYNTHETIC_RELATION_MATCH_SIGNAL_NOT_DETECTED",
+    "scalar_equivalence": {
+      "passed": true,
+      "relation_D_single": {
+        "relation_r0": 80.0,
+        "relation_r1": 80.0
+      },
+      "relation_D_single_drift": 0.0,
+      "tolerance": 5.0
+    },
+    "small_wall_crossed": false,
+    "synthetic_thresholds": {
+      "R_match_abs_threshold": 50.0,
+      "physical_threshold_status": "not_a_physical_threshold",
+      "scalar_equivalence_tolerance": 5.0
+    }
+  },
+  "passed": true,
+  "positive": {
+    "R_match": {
+      "R_match_abs_mean": 160.0,
+      "R_match_max": 160.0,
+      "R_match_mean": 160.0,
+      "R_match_min": 160.0,
+      "block_count": 1792,
+      "failures": [],
+      "passed": true
+    },
+    "future_physical_result_classes_predeclared": [
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CANDIDATE_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CUSTODY_INVALID"
+    ],
+    "label_scramble": {
+      "passed": true,
+      "scrambled_R_match_abs_mean": 0.0
+    },
+    "maximum_future_claim": "PUBLIC_POST_SOURCE_LIFETIME_DEPENDENT_RELATION_MATCH_COORDINATE_CONFIRMED",
+    "positive_physical_claim": null,
+    "reproducible_relation_match_coordinate_observed": true,
+    "result_class": "SYNTHETIC_RELATION_MATCH_SIGNAL_DETECTED",
+    "scalar_equivalence": {
+      "passed": true,
+      "relation_D_single": {
+        "relation_r0": 80.0,
+        "relation_r1": 80.0
+      },
+      "relation_D_single_drift": 0.0,
+      "tolerance": 5.0
+    },
+    "small_wall_crossed": false,
+    "synthetic_thresholds": {
+      "R_match_abs_threshold": 50.0,
+      "physical_threshold_status": "not_a_physical_threshold",
+      "scalar_equivalence_tolerance": 5.0
+    }
+  },
+  "route_pressure": {
+    "R_match": {
+      "R_match_abs_mean": 0.0,
+      "R_match_max": 0.0,
+      "R_match_mean": 0.0,
+      "R_match_min": 0.0,
+      "block_count": 1792,
+      "failures": [],
+      "passed": true
+    },
+    "future_physical_result_classes_predeclared": [
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CANDIDATE_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CUSTODY_INVALID"
+    ],
+    "label_scramble": {
+      "passed": true,
+      "scrambled_R_match_abs_mean": 0.0
+    },
+    "maximum_future_claim": "PUBLIC_POST_SOURCE_LIFETIME_DEPENDENT_RELATION_MATCH_COORDINATE_CONFIRMED",
+    "positive_physical_claim": null,
+    "reproducible_relation_match_coordinate_observed": false,
+    "result_class": "SYNTHETIC_RELATION_MATCH_SIGNAL_NOT_DETECTED",
+    "scalar_equivalence": {
+      "passed": true,
+      "relation_D_single": {
+        "relation_r0": 80.0,
+        "relation_r1": 80.0
+      },
+      "relation_D_single_drift": 0.0,
+      "tolerance": 5.0
+    },
+    "small_wall_crossed": false,
+    "synthetic_thresholds": {
+      "R_match_abs_threshold": 50.0,
+      "physical_threshold_status": "not_a_physical_threshold",
+      "scalar_equivalence_tolerance": 5.0
+    }
+  },
+  "scalar_replay": {
+    "R_match": {
+      "R_match_abs_mean": 0.0,
+      "R_match_max": 0.0,
+      "R_match_mean": 0.0,
+      "R_match_min": 0.0,
+      "block_count": 1792,
+      "failures": [],
+      "passed": true
+    },
+    "future_physical_result_classes_predeclared": [
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CANDIDATE_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CUSTODY_INVALID"
+    ],
+    "label_scramble": {
+      "passed": true,
+      "scrambled_R_match_abs_mean": 0.0
+    },
+    "maximum_future_claim": "PUBLIC_POST_SOURCE_LIFETIME_DEPENDENT_RELATION_MATCH_COORDINATE_CONFIRMED",
+    "positive_physical_claim": null,
+    "reproducible_relation_match_coordinate_observed": false,
+    "result_class": "SYNTHETIC_RELATION_MATCH_SIGNAL_NOT_DETECTED",
+    "scalar_equivalence": {
+      "passed": true,
+      "relation_D_single": {
+        "relation_r0": 80.0,
+        "relation_r1": 80.0
+      },
+      "relation_D_single_drift": 0.0,
+      "tolerance": 5.0
+    },
+    "small_wall_crossed": false,
+    "synthetic_thresholds": {
+      "R_match_abs_threshold": 50.0,
+      "physical_threshold_status": "not_a_physical_threshold",
+      "scalar_equivalence_tolerance": 5.0
+    }
+  },
+  "schema": "FAMILY10H_RELATION_LIFETIME_ADVERSARY_TEST_V2",
+  "separable_replay": {
+    "R_match": {
+      "R_match_abs_mean": 0.0,
+      "R_match_max": 0.0,
+      "R_match_mean": 0.0,
+      "R_match_min": 0.0,
+      "block_count": 1792,
+      "failures": [],
+      "passed": true
+    },
+    "future_physical_result_classes_predeclared": [
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CANDIDATE_PROSPECTIVE",
+      "FAMILY10H_RELATION_LIFETIME_COORDINATE_CUSTODY_INVALID"
+    ],
+    "label_scramble": {
+      "passed": true,
+      "scrambled_R_match_abs_mean": 0.0
+    },
+    "maximum_future_claim": "PUBLIC_POST_SOURCE_LIFETIME_DEPENDENT_RELATION_MATCH_COORDINATE_CONFIRMED",
+    "positive_physical_claim": null,
+    "reproducible_relation_match_coordinate_observed": false,
+    "result_class": "SYNTHETIC_RELATION_MATCH_SIGNAL_NOT_DETECTED",
+    "scalar_equivalence": {
+      "passed": true,
+      "relation_D_single": {
+        "relation_r0": 80.0,
+        "relation_r1": 80.0
+      },
+      "relation_D_single_drift": 0.0,
+      "tolerance": 5.0
+    },
+    "small_wall_crossed": false,
+    "synthetic_thresholds": {
+      "R_match_abs_threshold": 50.0,
+      "physical_threshold_status": "not_a_physical_threshold",
+      "scalar_equivalence_tolerance": 5.0
+    }
+  },
+  "tests": {
+    "distance_only_replay_rejected": true,
+    "invalid_packet_no_positive_claim": true,
+    "origin_specific_artifact_not_sufficient": true,
+    "route_pressure_replay_rejected": true,
+    "scalar_replay_rejected": true,
+    "separable_replay_rejected": true,
+    "synthetic_positive_fixture_detected": true
+  },
+  "thresholds": {
+    "physical_threshold_status": "synthetic_only",
+    "synthetic_R_match_abs_threshold": 50.0,
+    "synthetic_scalar_equivalence_tolerance": 5.0
+  }
+}

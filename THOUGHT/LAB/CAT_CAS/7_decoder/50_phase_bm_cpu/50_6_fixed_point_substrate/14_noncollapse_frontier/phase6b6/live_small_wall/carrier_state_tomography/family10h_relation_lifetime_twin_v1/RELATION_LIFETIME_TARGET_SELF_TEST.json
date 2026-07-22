@@ -1,0 +1,1853 @@
+{
+  "allowed_future_result_classes": [
+    "FAMILY10H_RELATION_LIFETIME_COORDINATE_CONFIRMED_PROSPECTIVE",
+    "FAMILY10H_RELATION_LIFETIME_COORDINATE_NOT_CONFIRMED_PROSPECTIVE",
+    "FAMILY10H_RELATION_LIFETIME_COORDINATE_CANDIDATE_PROSPECTIVE",
+    "FAMILY10H_RELATION_LIFETIME_COORDINATE_CUSTODY_INVALID"
+  ],
+  "authority_refusal_tests": {
+    "passed": true,
+    "schema": "FAMILY10H_RELATION_LIFETIME_AUTHORITY_REFUSAL_TESTS_V1",
+    "tests": {
+      "fixture_forbidden_on_physical_path": {
+        "passed": true,
+        "reason": "physical execution refuses fixture-backed preflight"
+      },
+      "freeze_commit_mismatch": {
+        "passed": true,
+        "reason": "target preflight failed: freeze_commit_binding"
+      },
+      "manifest_hash_mismatch": {
+        "passed": true,
+        "reason": "target preflight failed: manifest_file_hash"
+      },
+      "old_scalar_freeze_commit_substitution": {
+        "passed": true,
+        "reason": "target preflight failed: freeze_commit_binding,relation_freeze_authority_not_scalar"
+      },
+      "old_scalar_source_commit_substitution": {
+        "passed": true,
+        "reason": "target preflight failed: source_authority_commit_binding"
+      },
+      "source_authority_mismatch": {
+        "passed": true,
+        "reason": "target preflight failed: source_authority_commit_binding"
+      },
+      "system_mock_forbidden_on_physical_path": {
+        "passed": true,
+        "reason": "physical execution refuses system-mock preflight"
+      },
+      "wrong_authority": {
+        "passed": true,
+        "reason": "target preflight failed: live_authority"
+      }
+    }
+  },
+  "helper_authority_negative_suite": {
+    "passed": true,
+    "results": {
+      "modified_helper_binary": {
+        "expected_failure": "PMU preflight helper binary hash mismatch",
+        "failures": [
+          "PMU preflight helper binary hash mismatch"
+        ],
+        "passed": true
+      },
+      "wrong_helper_hash_in_authority": {
+        "expected_failure": "PMU preflight helper binary hash mismatch",
+        "failures": [
+          "PMU preflight helper binary hash mismatch"
+        ],
+        "passed": true
+      }
+    },
+    "schema": "FAMILY10H_RELATION_LIFETIME_HELPER_AUTHORITY_NEGATIVE_SUITE_V1"
+  },
+  "live_authority_env_absent": {
+    "live_invocation_count": 0,
+    "observed_authority_keys": [],
+    "passed": true,
+    "pmu_acquisition_count": 0,
+    "sensor_inventory_count": 0,
+    "target_contact_count": 0
+  },
+  "live_invocation_count": 0,
+  "maximum_future_claim": "PUBLIC_POST_SOURCE_LIFETIME_DEPENDENT_RELATION_MATCH_COORDINATE_CONFIRMED",
+  "offline_only": true,
+  "physical_preflight_mock_suite": {
+    "passed": true,
+    "pmu_preflight_behavior": {
+      "disabled_group_open_close_only": true,
+      "pmu_acquisition_count": 0,
+      "scientific_data_collected": false
+    },
+    "results": {
+      "complete_physical_mock": {
+        "expected_failure": null,
+        "failures": [],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_PASSED"
+      },
+      "failed_cpu_pinning": {
+        "expected_failure": "operational_pinning_capability",
+        "failures": [
+          "operational_pinning_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "grouped_pmu_failure": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "invalid_owner_marker": {
+        "expected_failure": "attempt_ownership_marker",
+        "failures": [
+          "attempt_ownership_marker"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "old_scalar_freeze_commit_rejected": {
+        "expected_failure": "freeze_commit_binding",
+        "failures": [
+          "freeze_commit_binding",
+          "relation_freeze_authority_not_scalar",
+          "deployment_custody_binding"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "old_scalar_source_commit_rejected": {
+        "expected_failure": "source_authority_commit_binding",
+        "failures": [
+          "source_authority_commit_binding"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "output_path_escape": {
+        "expected_failure": "output_root_absence",
+        "failures": [
+          "output_root_absence"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "pmu_event_mismatch": {
+        "expected_failure": "pmu_event_identities",
+        "failures": [
+          "pmu_event_identities"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "policy_mismatch": {
+        "expected_failure": "cpu_frequency_policy_custody",
+        "failures": [
+          "cpu_frequency_policy_custody"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "preexisting_output_root": {
+        "expected_failure": "output_root_absence",
+        "failures": [
+          "output_root_absence"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_mismatch": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_unexpected_label": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_unstable_identity": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_volatile_inode_device_mode_variation": {
+        "expected_failure": null,
+        "failures": [],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_PASSED"
+      },
+      "sensor_wrong_driver": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_wrong_input_path": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_wrong_modalias": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_wrong_semantic_profile": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "wrong_cpu_family": {
+        "expected_failure": "cpu_vendor_family_model",
+        "failures": [
+          "cpu_vendor_family_model",
+          "approved_target_identity"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "wrong_cpu_model": {
+        "expected_failure": "cpu_vendor_family_model",
+        "failures": [
+          "cpu_vendor_family_model",
+          "approved_target_identity"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "wrong_target_identity_sha": {
+        "expected_failure": "approved_target_identity",
+        "failures": [
+          "approved_target_identity"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      }
+    },
+    "schema": "FAMILY10H_RELATION_LIFETIME_PHYSICAL_PREFLIGHT_MOCK_SUITE_V1"
+  },
+  "pmu_acquisition_count": 0,
+  "runtime_refuses_without_authority": {
+    "launch_mode": "wsl_linux_binary",
+    "live_invocation_count": 0,
+    "passed": true,
+    "pmu_acquisition_count": 0,
+    "returncode": 13,
+    "runtime_binary_present": true,
+    "stderr": "",
+    "stdout": ""
+  },
+  "schema": "FAMILY10H_RELATION_LIFETIME_TARGET_SELF_TEST_V2",
+  "science_package_id": "family10h_relation_lifetime_twin_v1",
+  "self_test_passed": true,
+  "self_test_sha256": "5cbe3ee2aae1aaae9924ad976428979dc6d621eefd65012e530403eeb52ac504",
+  "sensor_inventory_count": 0,
+  "small_wall_crossed": false,
+  "source_root_validation": {
+    "failures": [],
+    "passed": true,
+    "pmu_preflight_helper_identity": {
+      "actual_helper_binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "actual_helper_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+      "actual_helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+      "expected_helper_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+      "expected_helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+      "expected_runtime_abi": "linux_x86_64_perf_event_open",
+      "helper_binary_format_probe": {
+        "command": [
+          "wsl.exe",
+          "-d",
+          "Ubuntu",
+          "--",
+          "file",
+          "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+      },
+      "helper_binary_format_valid": true,
+      "helper_c_sha256_matches_authority": true,
+      "helper_sha256_matches_authority": true,
+      "path": "relation_lifetime_pmu_preflight",
+      "present": true
+    },
+    "required_file_count": 26
+  },
+  "stderr": "",
+  "subprocess_returncode": 0,
+  "synthetic_target_wrapper_execution": {
+    "duplicate_invocation_refusal": {
+      "passed": true,
+      "reason": "target preflight failed: output_root_absence"
+    },
+    "feature_freeze": {
+      "physical_measurement": false,
+      "post_observation_feature_selection": false,
+      "primary_endpoint": "dirty_probe_response",
+      "raw_record_count": 21504,
+      "schedule_path": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/RELATION_LIFETIME_PUBLIC_SCHEDULE.tsv",
+      "schedule_sha256": "377450bb1f7a735ee326ed64b9bd691b8a4c7fe87a46214a4cb1ae3ee400a405",
+      "schema": "FAMILY10H_RELATION_LIFETIME_FEATURE_FREEZE_V1",
+      "secondary_endpoints": [
+        "change_to_dirty",
+        "cpu_cycles",
+        "duration_ns"
+      ]
+    },
+    "launch_mode": "wsl_linux_binary",
+    "live_invocation_count": 0,
+    "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_lifetime_twin_v1\\_relation_lifetime_owned_outputs\\synthetic_target_wrapper_attempt",
+    "passed": true,
+    "physical_measurement": false,
+    "pmu_acquisition_count": 0,
+    "pmu_open_count": 0,
+    "positive_physical_claim": false,
+    "preflight": {
+      "artifact_identity": {
+        "approved_sensor_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+        "approved_target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+        "grammar_canonical_sha256": "51dccda8b3b59f1a0c67aa178dec9e9bc527857b8d52754dfdfc709ee3f5985c",
+        "grammar_file_sha256": "fff83f4c5eff90ef5d17c45f512aa569954bbc94a05afb0551832fa057501c88",
+        "manifest_canonical_sha256": "9bbe0b97c656591756307f5e7e6537bf26296bf32cfe6bc39ddcf58938633032",
+        "manifest_file_sha256": "e8c3c3775e17fc717cd0b2bb6e78e74d4198f1f0bce38ee0c21dd72e827aa7ef",
+        "pmu_preflight_helper_actual_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+        "pmu_preflight_helper_actual_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped",
+        "pmu_preflight_helper_actual_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+        "pmu_preflight_helper_c_sha256_matches_authority": true,
+        "pmu_preflight_helper_expected_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+        "pmu_preflight_helper_expected_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+        "pmu_preflight_helper_format_valid": true,
+        "pmu_preflight_helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+        "pmu_preflight_helper_sha256_matches_authority": true,
+        "runtime_binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e9bd4f4c67ff39d6eb85a3503407cbb912851044, for GNU/Linux 3.2.0, with debug_info, not stripped",
+        "runtime_binary_sha256": "10db6d521c29f7253b0e5a34d040a73bab5df75eb08d310205ecb9df8e9c62ef",
+        "schedule_canonical_sha256": "377450bb1f7a735ee326ed64b9bd691b8a4c7fe87a46214a4cb1ae3ee400a405",
+        "schedule_manifest_sha256": "1c6df115e0b80f5a4c01e5263b94bda0976b19959cdfabcd4d742354dd0209c2",
+        "schedule_tsv_sha256": "9e39575ac3189633db112c3cfba4c3420db72e7745d59fca6dfd8b1ac27668ea",
+        "source_bundle_sha256": "363eb07e368d3bdcbfacd3c34acc093fed8aeb8151eaa4782819640b4aecd04b",
+        "source_file_hashes": {
+          "RELATION_LIFETIME_CONTRACT.md": "b916198cebed13c1f0b96d322160ce0f1222e12ee6c7ee38e62aa87022a6e46b",
+          "relation_lifetime_adjudication.py": "56e3fc6b0f744f68c84dd955fcefb333956872b5c07d3286b787bbc6f26f0fb0",
+          "relation_lifetime_live_controller.py": "343feaf6aa5e76a363b627400c62855e50a50c785268503367b40ac026bda494",
+          "relation_lifetime_physical_adjudication.py": "43c9424e01e2ba62de3e26e5fd7e925d474254ab29d07cf7151aab696607487c",
+          "relation_lifetime_pmu_preflight.c": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+          "relation_lifetime_public.py": "95b9c379e2c2d5f15d511a075fdf0011e3dca00ff43d43bf18234e9d71a82023",
+          "relation_lifetime_runtime.c": "8452f547eba460b4e167b35227c04d24ebd5315f1f03e10099af28c1aa3a28c9",
+          "relation_lifetime_runtime.h": "007a054aa2405e91dcc2f9621806eb99efd6dd79a8aeaba47a85934d62c63e93",
+          "relation_lifetime_target.py": "297d2d5d7c6d4d9da6055cbdb27a709939af3c09d19f58b2f00d1a59ce197cf4",
+          "run_relation_lifetime_twin.py": "b08c73cbe4eb28abc767dac23454563c9e5e8e8ea7dcb55e45cd17871386a24a"
+        }
+      },
+      "checks": {
+        "actual_physical_geometry_status": {
+          "detail": {
+            "claim_ceiling_lowered": true,
+            "status": "unresolved_contractually_lowered"
+          },
+          "name": "actual_physical_geometry_status",
+          "passed": true
+        },
+        "approved_target_identity": {
+          "detail": {
+            "expected_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+            "observed_identity": {
+              "family": 16,
+              "model": 10,
+              "processor_count": 6,
+              "processors": [
+                {
+                  "cpu_family": 16,
+                  "model": 10,
+                  "processor": 0,
+                  "vendor_id": "AuthenticAMD"
+                },
+                {
+                  "cpu_family": 16,
+                  "model": 10,
+                  "processor": 1,
+                  "vendor_id": "AuthenticAMD"
+                },
+                {
+                  "cpu_family": 16,
+                  "model": 10,
+                  "processor": 2,
+                  "vendor_id": "AuthenticAMD"
+                },
+                {
+                  "cpu_family": 16,
+                  "model": 10,
+                  "processor": 3,
+                  "vendor_id": "AuthenticAMD"
+                },
+                {
+                  "cpu_family": 16,
+                  "model": 10,
+                  "processor": 4,
+                  "vendor_id": "AuthenticAMD"
+                },
+                {
+                  "cpu_family": 16,
+                  "model": 10,
+                  "processor": 5,
+                  "vendor_id": "AuthenticAMD"
+                }
+              ],
+              "receiver_cpu": 5,
+              "runtime_abi": "linux_x86_64_perf_event_open",
+              "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+              "source_cpu": 4,
+              "vendor": "AuthenticAMD"
+            },
+            "observed_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b"
+          },
+          "name": "approved_target_identity",
+          "passed": true
+        },
+        "attempt_ownership_marker": {
+          "detail": {
+            "attempt_ceiling": 1,
+            "attempt_count_before": 0,
+            "owner_marker": "family10h_relation_lifetime_twin_v1_0"
+          },
+          "name": "attempt_ownership_marker",
+          "passed": true
+        },
+        "canonical_manifest_digest": {
+          "detail": "9bbe0b97c656591756307f5e7e6537bf26296bf32cfe6bc39ddcf58938633032",
+          "name": "canonical_manifest_digest",
+          "passed": true
+        },
+        "compact_schedule_manifest_binding": {
+          "detail": "377450bb1f7a735ee326ed64b9bd691b8a4c7fe87a46214a4cb1ae3ee400a405",
+          "name": "compact_schedule_manifest_binding",
+          "passed": true
+        },
+        "cpu_frequency_policy_custody": {
+          "detail": {
+            "governor": "performance",
+            "identity_stability": true,
+            "policy_locked": true
+          },
+          "name": "cpu_frequency_policy_custody",
+          "passed": true
+        },
+        "cpu_vendor_family_model": {
+          "detail": {
+            "family": 16,
+            "model": 10,
+            "operational_pinning": true,
+            "processor_count": 6,
+            "processors": [
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 0,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 1,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 2,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 3,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 4,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 5,
+                "vendor_id": "AuthenticAMD"
+              }
+            ],
+            "receiver_cpu": 5,
+            "receiver_cpu_present": true,
+            "runtime_abi": "linux_x86_64_perf_event_open",
+            "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+            "source_cpu": 4,
+            "source_cpu_present": true,
+            "target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+            "vendor": "AuthenticAMD"
+          },
+          "name": "cpu_vendor_family_model",
+          "passed": true
+        },
+        "deployment_custody_binding": {
+          "detail": {},
+          "name": "deployment_custody_binding",
+          "passed": true
+        },
+        "expanded_schedule_tsv_hash": {
+          "detail": "9e39575ac3189633db112c3cfba4c3420db72e7745d59fca6dfd8b1ac27668ea",
+          "name": "expanded_schedule_tsv_hash",
+          "passed": true
+        },
+        "freeze_commit_binding": {
+          "detail": {
+            "env": "ffffffffffffffffffffffffffffffffffffffff",
+            "expected": "ffffffffffffffffffffffffffffffffffffffff",
+            "observed_backend": "fixture"
+          },
+          "name": "freeze_commit_binding",
+          "passed": true
+        },
+        "grammar_hash": {
+          "detail": "51dccda8b3b59f1a0c67aa178dec9e9bc527857b8d52754dfdfc709ee3f5985c",
+          "name": "grammar_hash",
+          "passed": true
+        },
+        "grouped_pmu_open_capability": {
+          "detail": {
+            "enable_attempted": false,
+            "enabled_measurement_interval": false,
+            "events": {
+              "cache_block_commands_change_to_dirty": {
+                "event": "0xea",
+                "umask": "0x20"
+              },
+              "cpu_cycles_not_halted": {
+                "event": "0x76",
+                "umask": "0x00"
+              },
+              "probe_responses_dirty": {
+                "event": "0xec",
+                "umask": "0x0c"
+              }
+            },
+            "expected_helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+            "grouped_open_capability": true,
+            "helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+            "helper_sha256_matches_authority": true,
+            "incorrect_structure_size": false,
+            "malformed_event_identity": false,
+            "missing_event": false,
+            "partial_group_open": false,
+            "passed": true,
+            "perf_event_attr_size": 112,
+            "pmu_acquisition_count": 0,
+            "pmu_close_count": 3,
+            "pmu_fd_leak_count": 0,
+            "pmu_open_count": 3,
+            "read_attempted": false,
+            "reset_attempted": false,
+            "returncode": 0,
+            "schema": "FAMILY10H_RELATION_LIFETIME_DISABLED_PMU_PREFLIGHT_V1",
+            "scientific_data_collected": false,
+            "uses_system_perf_event_attr": true
+          },
+          "name": "grouped_pmu_open_capability",
+          "passed": true
+        },
+        "injected_preflight_backend_absent": {
+          "detail": {
+            "backend": null,
+            "fixture_argument": true,
+            "injected_envs": {
+              "FAMILY10H_RELATION_LIFETIME_PREFLIGHT_FIXTURE": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_lifetime_twin_v1\\_relation_lifetime_owned_outputs\\preflight_fixture.json"
+            },
+            "synthetic_mode": true
+          },
+          "name": "injected_preflight_backend_absent",
+          "passed": true
+        },
+        "live_authority": {
+          "detail": "family10h_relation_lifetime_twin_v1_0",
+          "name": "live_authority",
+          "passed": true
+        },
+        "manifest_file_hash": {
+          "detail": {
+            "env": "e8c3c3775e17fc717cd0b2bb6e78e74d4198f1f0bce38ee0c21dd72e827aa7ef",
+            "expected": "e8c3c3775e17fc717cd0b2bb6e78e74d4198f1f0bce38ee0c21dd72e827aa7ef",
+            "observed_backend": "fixture"
+          },
+          "name": "manifest_file_hash",
+          "passed": true
+        },
+        "operational_pinning_capability": {
+          "detail": {
+            "family": 16,
+            "model": 10,
+            "operational_pinning": true,
+            "processor_count": 6,
+            "processors": [
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 0,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 1,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 2,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 3,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 4,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 5,
+                "vendor_id": "AuthenticAMD"
+              }
+            ],
+            "receiver_cpu": 5,
+            "receiver_cpu_present": true,
+            "runtime_abi": "linux_x86_64_perf_event_open",
+            "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+            "source_cpu": 4,
+            "source_cpu_present": true,
+            "target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+            "vendor": "AuthenticAMD"
+          },
+          "name": "operational_pinning_capability",
+          "passed": true
+        },
+        "output_root_absence": {
+          "detail": {
+            "expected_parent": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_lifetime_twin_v1\\_relation_lifetime_owned_outputs",
+            "failures": [],
+            "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_lifetime_twin_v1\\_relation_lifetime_owned_outputs\\synthetic_target_wrapper_attempt",
+            "passed": true
+          },
+          "name": "output_root_absence",
+          "passed": true
+        },
+        "package_decision": {
+          "detail": "FAMILY10H_RELATION_LIFETIME_BUILD_READY_AWAITING_AUTHORIZATION",
+          "name": "package_decision",
+          "passed": true
+        },
+        "pmu_event_identities": {
+          "detail": {
+            "cache_block_commands_change_to_dirty": {
+              "event": "0xea",
+              "umask": "0x20"
+            },
+            "cpu_cycles_not_halted": {
+              "event": "0x76",
+              "umask": "0x00"
+            },
+            "probe_responses_dirty": {
+              "event": "0xec",
+              "umask": "0x0c"
+            }
+          },
+          "name": "pmu_event_identities",
+          "passed": true
+        },
+        "pmu_helper_binary_format_and_abi": {
+          "detail": {
+            "expected_abi": "linux_x86_64_perf_event_open",
+            "format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped"
+          },
+          "name": "pmu_helper_binary_format_and_abi",
+          "passed": true
+        },
+        "pmu_helper_binary_hash": {
+          "detail": {
+            "equality": true,
+            "expected_actual": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+            "expected_authority": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+            "observed_actual": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6"
+          },
+          "name": "pmu_helper_binary_hash",
+          "passed": true
+        },
+        "relation_freeze_authority_not_scalar": {
+          "detail": "ffffffffffffffffffffffffffffffffffffffff",
+          "name": "relation_freeze_authority_not_scalar",
+          "passed": true
+        },
+        "relation_source_authority_not_scalar": {
+          "detail": "17644366a3609ef93bb0a14abc088f059a18b982",
+          "name": "relation_source_authority_not_scalar",
+          "passed": true
+        },
+        "runtime_binary_format_and_abi": {
+          "detail": {
+            "format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e9bd4f4c67ff39d6eb85a3503407cbb912851044, for GNU/Linux 3.2.0, with debug_info, not stripped",
+            "required": [
+              "ELF 64-bit",
+              "x86-64"
+            ]
+          },
+          "name": "runtime_binary_format_and_abi",
+          "passed": true
+        },
+        "runtime_binary_hash": {
+          "detail": "10db6d521c29f7253b0e5a34d040a73bab5df75eb08d310205ecb9df8e9c62ef",
+          "name": "runtime_binary_hash",
+          "passed": true
+        },
+        "source_authority_commit_binding": {
+          "detail": {
+            "env": "17644366a3609ef93bb0a14abc088f059a18b982",
+            "expected": "17644366a3609ef93bb0a14abc088f059a18b982",
+            "observed_backend": "fixture"
+          },
+          "name": "source_authority_commit_binding",
+          "passed": true
+        },
+        "source_bundle_hash": {
+          "detail": "363eb07e368d3bdcbfacd3c34acc093fed8aeb8151eaa4782819640b4aecd04b",
+          "name": "source_bundle_hash",
+          "passed": true
+        },
+        "source_file_hashes": {
+          "detail": {
+            "RELATION_LIFETIME_CONTRACT.md": "b916198cebed13c1f0b96d322160ce0f1222e12ee6c7ee38e62aa87022a6e46b",
+            "relation_lifetime_adjudication.py": "56e3fc6b0f744f68c84dd955fcefb333956872b5c07d3286b787bbc6f26f0fb0",
+            "relation_lifetime_live_controller.py": "343feaf6aa5e76a363b627400c62855e50a50c785268503367b40ac026bda494",
+            "relation_lifetime_physical_adjudication.py": "43c9424e01e2ba62de3e26e5fd7e925d474254ab29d07cf7151aab696607487c",
+            "relation_lifetime_pmu_preflight.c": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+            "relation_lifetime_public.py": "95b9c379e2c2d5f15d511a075fdf0011e3dca00ff43d43bf18234e9d71a82023",
+            "relation_lifetime_runtime.c": "8452f547eba460b4e167b35227c04d24ebd5315f1f03e10099af28c1aa3a28c9",
+            "relation_lifetime_runtime.h": "007a054aa2405e91dcc2f9621806eb99efd6dd79a8aeaba47a85934d62c63e93",
+            "relation_lifetime_target.py": "297d2d5d7c6d4d9da6055cbdb27a709939af3c09d19f58b2f00d1a59ce197cf4",
+            "run_relation_lifetime_twin.py": "b08c73cbe4eb28abc767dac23454563c9e5e8e8ea7dcb55e45cd17871386a24a"
+          },
+          "name": "source_file_hashes",
+          "passed": true
+        },
+        "source_receiver_cpu_identity": {
+          "detail": {
+            "family": 16,
+            "model": 10,
+            "operational_pinning": true,
+            "processor_count": 6,
+            "processors": [
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 0,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 1,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 2,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 3,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 4,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 5,
+                "vendor_id": "AuthenticAMD"
+              }
+            ],
+            "receiver_cpu": 5,
+            "receiver_cpu_present": true,
+            "runtime_abi": "linux_x86_64_perf_event_open",
+            "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+            "source_cpu": 4,
+            "source_cpu_present": true,
+            "target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+            "vendor": "AuthenticAMD"
+          },
+          "name": "source_receiver_cpu_identity",
+          "passed": true
+        },
+        "source_root_identity": {
+          "detail": {
+            "failures": [],
+            "passed": true,
+            "pmu_preflight_helper_identity": {
+              "actual_helper_binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped",
+              "actual_helper_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+              "actual_helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+              "expected_helper_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+              "expected_helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+              "expected_runtime_abi": "linux_x86_64_perf_event_open",
+              "helper_binary_format_probe": {
+                "command": [
+                  "wsl.exe",
+                  "-d",
+                  "Ubuntu",
+                  "--",
+                  "file",
+                  "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight"
+                ],
+                "returncode": 0,
+                "stderr": "",
+                "stdout": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+              },
+              "helper_binary_format_valid": true,
+              "helper_c_sha256_matches_authority": true,
+              "helper_sha256_matches_authority": true,
+              "path": "relation_lifetime_pmu_preflight",
+              "present": true
+            },
+            "required_file_count": 26
+          },
+          "name": "source_root_identity",
+          "passed": true
+        },
+        "temperature_sensor_authority": {
+          "detail": {
+            "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+            "device_driver": "k10temp",
+            "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+            "device_subsystem": "pci",
+            "hwmon_name": "k10temp",
+            "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+            "identity_stability": true,
+            "input_st_dev": 22,
+            "input_st_ino": 30803,
+            "input_st_mode": 33060,
+            "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+            "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+            "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+            "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+            "resolved_subsystem_path": "/sys/bus/pci",
+            "sensor_input": "temp1_input",
+            "sensor_label_present": false,
+            "sensor_label_value": null,
+            "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+            "sensor_semantic_role": "Tctl"
+          },
+          "name": "temperature_sensor_authority",
+          "passed": true
+        },
+        "transaction_identity": {
+          "detail": "family10h_relation_lifetime_twin_v1_0",
+          "name": "transaction_identity",
+          "passed": true
+        }
+      },
+      "failures": [],
+      "live_invocation_count": 0,
+      "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_lifetime_twin_v1\\_relation_lifetime_owned_outputs\\synthetic_target_wrapper_attempt",
+      "passed": true,
+      "physical_observation": null,
+      "pmu_acquisition_count": 0,
+      "pmu_open_count": 3,
+      "preflight_backend": "fixture",
+      "schema": "FAMILY10H_RELATION_LIFETIME_TARGET_PREFLIGHT_V2",
+      "sensor_inventory_count": 0,
+      "small_wall_crossed": false,
+      "status": "TARGET_PREFLIGHT_PASSED",
+      "target_contact_count": 0
+    },
+    "raw_record_count": 21504,
+    "returncode": 0,
+    "runtime_execution_receipt": {
+      "feature_freeze_written": true,
+      "live_activity": false,
+      "physical_measurement": false,
+      "pmu_opened": false,
+      "raw_record_count": 21504,
+      "returncode": 0,
+      "schema": "FAMILY10H_RELATION_LIFETIME_SYNTHETIC_EXECUTOR_PACKET_V1",
+      "small_wall_crossed": false,
+      "source_death_receipt_count": 21504,
+      "status": "complete"
+    },
+    "runtime_mode": "--synthetic-execute-schedule",
+    "schema": "FAMILY10H_RELATION_LIFETIME_SYNTHETIC_TARGET_WRAPPER_EXECUTION_V1",
+    "scientific_claim_emitted": false,
+    "sensor_inventory_count": 0,
+    "small_wall_crossed": false,
+    "source_death_receipt_count": 21504,
+    "status": "TARGET_WRAPPER_EXECUTION_COMPLETE",
+    "stderr": "",
+    "stdout": "",
+    "target_contact_count": 0
+  },
+  "target_contact_count": 0,
+  "target_preflight_fixture_suite": {
+    "passed": true,
+    "results": {
+      "complete_passing_fixture": {
+        "expected_failure": null,
+        "failures": [],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_PASSED"
+      },
+      "failed_operational_pinning": {
+        "expected_failure": "operational_pinning_capability",
+        "failures": [
+          "operational_pinning_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "fake_helper_output_correct_schema": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "grouped_pmu_failure": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "helper_missing_event": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "helper_open_close_mismatch": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "helper_partial_group_open": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "helper_reported_enable_attempt": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "helper_reported_leaked_descriptor": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "helper_reported_read_attempt": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "helper_reported_reset_attempt": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "helper_returning_nonzero_with_plausible_json": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "helper_wrong_structure_size": {
+        "expected_failure": "grouped_pmu_open_capability",
+        "failures": [
+          "grouped_pmu_open_capability"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "incompatible_processor_topology": {
+        "expected_failure": "source_receiver_cpu_identity",
+        "failures": [
+          "source_receiver_cpu_identity",
+          "approved_target_identity"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "malformed_output_path": {
+        "failures": [
+          "output_root_absence"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "missing_parent": {
+        "failures": [
+          "output_root_absence"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "missing_receiver_cpu": {
+        "expected_failure": "source_receiver_cpu_identity",
+        "failures": [
+          "source_receiver_cpu_identity"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "missing_source_cpu": {
+        "expected_failure": "source_receiver_cpu_identity",
+        "failures": [
+          "source_receiver_cpu_identity"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "output_path_escape": {
+        "failures": [
+          "output_root_absence"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "owner_marker_mismatch": {
+        "expected_failure": "attempt_ownership_marker",
+        "failures": [
+          "attempt_ownership_marker"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "partial_output": {
+        "failures": [
+          "output_root_absence"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "permission_failure": {
+        "expected_failure": "output_root_absence",
+        "failures": [
+          "output_root_absence"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "policy_mismatch": {
+        "expected_failure": "cpu_frequency_policy_custody",
+        "failures": [
+          "cpu_frequency_policy_custody"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "preexisting_output_root": {
+        "failures": [
+          "output_root_absence"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_identity_mismatch": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_unexpected_label": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_unstable_identity": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_volatile_inode_device_mode_variation": {
+        "expected_failure": null,
+        "failures": [],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_PASSED"
+      },
+      "sensor_wrong_driver": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_wrong_input_path": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_wrong_modalias": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "sensor_wrong_semantic_profile": {
+        "expected_failure": "temperature_sensor_authority",
+        "failures": [
+          "temperature_sensor_authority"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "unavailable_pmu_event": {
+        "expected_failure": "pmu_event_identities",
+        "failures": [
+          "pmu_event_identities"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "unresolved_physical_geometry_lowered": {
+        "expected_failure": null,
+        "failures": [],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_PASSED"
+      },
+      "wrong_binary_hash": {
+        "expected_failure": "runtime_binary_hash",
+        "failures": [
+          "runtime_binary_hash"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "wrong_cpu_family": {
+        "expected_failure": "cpu_vendor_family_model",
+        "failures": [
+          "cpu_vendor_family_model",
+          "approved_target_identity"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "wrong_cpu_model": {
+        "expected_failure": "cpu_vendor_family_model",
+        "failures": [
+          "cpu_vendor_family_model",
+          "approved_target_identity"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "wrong_helper_binary_hash": {
+        "expected_failure": "pmu_helper_binary_hash",
+        "failures": [
+          "pmu_helper_binary_hash"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "wrong_manifest_hash": {
+        "expected_failure": "manifest_file_hash",
+        "failures": [
+          "manifest_file_hash"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "wrong_schedule_hash": {
+        "expected_failure": "expanded_schedule_tsv_hash",
+        "failures": [
+          "expanded_schedule_tsv_hash"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "wrong_source_authority_commit": {
+        "expected_failure": "source_authority_commit_binding",
+        "failures": [
+          "source_authority_commit_binding"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      },
+      "wrong_target_identity_sha": {
+        "expected_failure": "approved_target_identity",
+        "failures": [
+          "approved_target_identity"
+        ],
+        "passed": true,
+        "status": "TARGET_PREFLIGHT_FAILED"
+      }
+    },
+    "schema": "FAMILY10H_RELATION_LIFETIME_TARGET_PREFLIGHT_FIXTURE_SUITE_V1"
+  },
+  "target_preflight_refuses_without_authority": {
+    "artifact_identity": {
+      "approved_sensor_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+      "approved_target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+      "grammar_canonical_sha256": "51dccda8b3b59f1a0c67aa178dec9e9bc527857b8d52754dfdfc709ee3f5985c",
+      "grammar_file_sha256": "fff83f4c5eff90ef5d17c45f512aa569954bbc94a05afb0551832fa057501c88",
+      "manifest_canonical_sha256": "9bbe0b97c656591756307f5e7e6537bf26296bf32cfe6bc39ddcf58938633032",
+      "manifest_file_sha256": "e8c3c3775e17fc717cd0b2bb6e78e74d4198f1f0bce38ee0c21dd72e827aa7ef",
+      "pmu_preflight_helper_actual_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+      "pmu_preflight_helper_actual_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "pmu_preflight_helper_actual_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+      "pmu_preflight_helper_c_sha256_matches_authority": true,
+      "pmu_preflight_helper_expected_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+      "pmu_preflight_helper_expected_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+      "pmu_preflight_helper_format_valid": true,
+      "pmu_preflight_helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+      "pmu_preflight_helper_sha256_matches_authority": true,
+      "runtime_binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e9bd4f4c67ff39d6eb85a3503407cbb912851044, for GNU/Linux 3.2.0, with debug_info, not stripped",
+      "runtime_binary_sha256": "10db6d521c29f7253b0e5a34d040a73bab5df75eb08d310205ecb9df8e9c62ef",
+      "schedule_canonical_sha256": "377450bb1f7a735ee326ed64b9bd691b8a4c7fe87a46214a4cb1ae3ee400a405",
+      "schedule_manifest_sha256": "1c6df115e0b80f5a4c01e5263b94bda0976b19959cdfabcd4d742354dd0209c2",
+      "schedule_tsv_sha256": "9e39575ac3189633db112c3cfba4c3420db72e7745d59fca6dfd8b1ac27668ea",
+      "source_bundle_sha256": "363eb07e368d3bdcbfacd3c34acc093fed8aeb8151eaa4782819640b4aecd04b",
+      "source_file_hashes": {
+        "RELATION_LIFETIME_CONTRACT.md": "b916198cebed13c1f0b96d322160ce0f1222e12ee6c7ee38e62aa87022a6e46b",
+        "relation_lifetime_adjudication.py": "56e3fc6b0f744f68c84dd955fcefb333956872b5c07d3286b787bbc6f26f0fb0",
+        "relation_lifetime_live_controller.py": "343feaf6aa5e76a363b627400c62855e50a50c785268503367b40ac026bda494",
+        "relation_lifetime_physical_adjudication.py": "43c9424e01e2ba62de3e26e5fd7e925d474254ab29d07cf7151aab696607487c",
+        "relation_lifetime_pmu_preflight.c": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+        "relation_lifetime_public.py": "95b9c379e2c2d5f15d511a075fdf0011e3dca00ff43d43bf18234e9d71a82023",
+        "relation_lifetime_runtime.c": "8452f547eba460b4e167b35227c04d24ebd5315f1f03e10099af28c1aa3a28c9",
+        "relation_lifetime_runtime.h": "007a054aa2405e91dcc2f9621806eb99efd6dd79a8aeaba47a85934d62c63e93",
+        "relation_lifetime_target.py": "297d2d5d7c6d4d9da6055cbdb27a709939af3c09d19f58b2f00d1a59ce197cf4",
+        "run_relation_lifetime_twin.py": "b08c73cbe4eb28abc767dac23454563c9e5e8e8ea7dcb55e45cd17871386a24a"
+      }
+    },
+    "checks": {
+      "actual_physical_geometry_status": {
+        "detail": {
+          "claim_ceiling_lowered": true,
+          "status": "unresolved_contractually_lowered"
+        },
+        "name": "actual_physical_geometry_status",
+        "passed": true
+      },
+      "approved_target_identity": {
+        "detail": {
+          "expected_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+          "observed_identity": {
+            "family": 16,
+            "model": 10,
+            "processor_count": 6,
+            "processors": [
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 0,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 1,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 2,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 3,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 4,
+                "vendor_id": "AuthenticAMD"
+              },
+              {
+                "cpu_family": 16,
+                "model": 10,
+                "processor": 5,
+                "vendor_id": "AuthenticAMD"
+              }
+            ],
+            "receiver_cpu": 5,
+            "runtime_abi": "linux_x86_64_perf_event_open",
+            "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+            "source_cpu": 4,
+            "vendor": "AuthenticAMD"
+          },
+          "observed_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b"
+        },
+        "name": "approved_target_identity",
+        "passed": true
+      },
+      "attempt_ownership_marker": {
+        "detail": {
+          "attempt_ceiling": 1,
+          "attempt_count_before": 0,
+          "owner_marker": "family10h_relation_lifetime_twin_v1_0"
+        },
+        "name": "attempt_ownership_marker",
+        "passed": true
+      },
+      "canonical_manifest_digest": {
+        "detail": "9bbe0b97c656591756307f5e7e6537bf26296bf32cfe6bc39ddcf58938633032",
+        "name": "canonical_manifest_digest",
+        "passed": true
+      },
+      "compact_schedule_manifest_binding": {
+        "detail": "377450bb1f7a735ee326ed64b9bd691b8a4c7fe87a46214a4cb1ae3ee400a405",
+        "name": "compact_schedule_manifest_binding",
+        "passed": true
+      },
+      "cpu_frequency_policy_custody": {
+        "detail": {
+          "governor": "performance",
+          "identity_stability": true,
+          "policy_locked": true
+        },
+        "name": "cpu_frequency_policy_custody",
+        "passed": true
+      },
+      "cpu_vendor_family_model": {
+        "detail": {
+          "family": 16,
+          "model": 10,
+          "operational_pinning": true,
+          "processor_count": 6,
+          "processors": [
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 0,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 1,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 2,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 3,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 4,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 5,
+              "vendor_id": "AuthenticAMD"
+            }
+          ],
+          "receiver_cpu": 5,
+          "receiver_cpu_present": true,
+          "runtime_abi": "linux_x86_64_perf_event_open",
+          "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+          "source_cpu": 4,
+          "source_cpu_present": true,
+          "target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+          "vendor": "AuthenticAMD"
+        },
+        "name": "cpu_vendor_family_model",
+        "passed": true
+      },
+      "deployment_custody_binding": {
+        "detail": {},
+        "name": "deployment_custody_binding",
+        "passed": true
+      },
+      "expanded_schedule_tsv_hash": {
+        "detail": "9e39575ac3189633db112c3cfba4c3420db72e7745d59fca6dfd8b1ac27668ea",
+        "name": "expanded_schedule_tsv_hash",
+        "passed": true
+      },
+      "freeze_commit_binding": {
+        "detail": {
+          "env": null,
+          "expected": "ffffffffffffffffffffffffffffffffffffffff",
+          "observed_backend": "fixture"
+        },
+        "name": "freeze_commit_binding",
+        "passed": false
+      },
+      "grammar_hash": {
+        "detail": "51dccda8b3b59f1a0c67aa178dec9e9bc527857b8d52754dfdfc709ee3f5985c",
+        "name": "grammar_hash",
+        "passed": true
+      },
+      "grouped_pmu_open_capability": {
+        "detail": {
+          "enable_attempted": false,
+          "enabled_measurement_interval": false,
+          "events": {
+            "cache_block_commands_change_to_dirty": {
+              "event": "0xea",
+              "umask": "0x20"
+            },
+            "cpu_cycles_not_halted": {
+              "event": "0x76",
+              "umask": "0x00"
+            },
+            "probe_responses_dirty": {
+              "event": "0xec",
+              "umask": "0x0c"
+            }
+          },
+          "expected_helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+          "grouped_open_capability": true,
+          "helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+          "helper_sha256_matches_authority": true,
+          "incorrect_structure_size": false,
+          "malformed_event_identity": false,
+          "missing_event": false,
+          "partial_group_open": false,
+          "passed": true,
+          "perf_event_attr_size": 112,
+          "pmu_acquisition_count": 0,
+          "pmu_close_count": 3,
+          "pmu_fd_leak_count": 0,
+          "pmu_open_count": 3,
+          "read_attempted": false,
+          "reset_attempted": false,
+          "returncode": 0,
+          "schema": "FAMILY10H_RELATION_LIFETIME_DISABLED_PMU_PREFLIGHT_V1",
+          "scientific_data_collected": false,
+          "uses_system_perf_event_attr": true
+        },
+        "name": "grouped_pmu_open_capability",
+        "passed": true
+      },
+      "injected_preflight_backend_absent": {
+        "detail": {
+          "backend": null,
+          "fixture_argument": true,
+          "injected_envs": {},
+          "synthetic_mode": false
+        },
+        "name": "injected_preflight_backend_absent",
+        "passed": false
+      },
+      "live_authority": {
+        "detail": null,
+        "name": "live_authority",
+        "passed": false
+      },
+      "manifest_file_hash": {
+        "detail": {
+          "env": null,
+          "expected": "e8c3c3775e17fc717cd0b2bb6e78e74d4198f1f0bce38ee0c21dd72e827aa7ef",
+          "observed_backend": "fixture"
+        },
+        "name": "manifest_file_hash",
+        "passed": false
+      },
+      "operational_pinning_capability": {
+        "detail": {
+          "family": 16,
+          "model": 10,
+          "operational_pinning": true,
+          "processor_count": 6,
+          "processors": [
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 0,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 1,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 2,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 3,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 4,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 5,
+              "vendor_id": "AuthenticAMD"
+            }
+          ],
+          "receiver_cpu": 5,
+          "receiver_cpu_present": true,
+          "runtime_abi": "linux_x86_64_perf_event_open",
+          "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+          "source_cpu": 4,
+          "source_cpu_present": true,
+          "target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+          "vendor": "AuthenticAMD"
+        },
+        "name": "operational_pinning_capability",
+        "passed": true
+      },
+      "output_root_absence": {
+        "detail": {
+          "expected_parent": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_lifetime_twin_v1\\_relation_lifetime_owned_outputs",
+          "failures": [],
+          "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_lifetime_twin_v1\\_relation_lifetime_owned_outputs\\missing_authority_attempt",
+          "passed": true
+        },
+        "name": "output_root_absence",
+        "passed": true
+      },
+      "package_decision": {
+        "detail": "FAMILY10H_RELATION_LIFETIME_BUILD_READY_AWAITING_AUTHORIZATION",
+        "name": "package_decision",
+        "passed": true
+      },
+      "pmu_event_identities": {
+        "detail": {
+          "cache_block_commands_change_to_dirty": {
+            "event": "0xea",
+            "umask": "0x20"
+          },
+          "cpu_cycles_not_halted": {
+            "event": "0x76",
+            "umask": "0x00"
+          },
+          "probe_responses_dirty": {
+            "event": "0xec",
+            "umask": "0x0c"
+          }
+        },
+        "name": "pmu_event_identities",
+        "passed": true
+      },
+      "pmu_helper_binary_format_and_abi": {
+        "detail": {
+          "expected_abi": "linux_x86_64_perf_event_open",
+          "format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped"
+        },
+        "name": "pmu_helper_binary_format_and_abi",
+        "passed": true
+      },
+      "pmu_helper_binary_hash": {
+        "detail": {
+          "equality": true,
+          "expected_actual": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+          "expected_authority": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+          "observed_actual": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6"
+        },
+        "name": "pmu_helper_binary_hash",
+        "passed": true
+      },
+      "relation_freeze_authority_not_scalar": {
+        "detail": null,
+        "name": "relation_freeze_authority_not_scalar",
+        "passed": true
+      },
+      "relation_source_authority_not_scalar": {
+        "detail": "17644366a3609ef93bb0a14abc088f059a18b982",
+        "name": "relation_source_authority_not_scalar",
+        "passed": true
+      },
+      "runtime_binary_format_and_abi": {
+        "detail": {
+          "format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e9bd4f4c67ff39d6eb85a3503407cbb912851044, for GNU/Linux 3.2.0, with debug_info, not stripped",
+          "required": [
+            "ELF 64-bit",
+            "x86-64"
+          ]
+        },
+        "name": "runtime_binary_format_and_abi",
+        "passed": true
+      },
+      "runtime_binary_hash": {
+        "detail": "10db6d521c29f7253b0e5a34d040a73bab5df75eb08d310205ecb9df8e9c62ef",
+        "name": "runtime_binary_hash",
+        "passed": true
+      },
+      "source_authority_commit_binding": {
+        "detail": {
+          "env": null,
+          "expected": "17644366a3609ef93bb0a14abc088f059a18b982",
+          "observed_backend": "fixture"
+        },
+        "name": "source_authority_commit_binding",
+        "passed": false
+      },
+      "source_bundle_hash": {
+        "detail": "363eb07e368d3bdcbfacd3c34acc093fed8aeb8151eaa4782819640b4aecd04b",
+        "name": "source_bundle_hash",
+        "passed": true
+      },
+      "source_file_hashes": {
+        "detail": {
+          "RELATION_LIFETIME_CONTRACT.md": "b916198cebed13c1f0b96d322160ce0f1222e12ee6c7ee38e62aa87022a6e46b",
+          "relation_lifetime_adjudication.py": "56e3fc6b0f744f68c84dd955fcefb333956872b5c07d3286b787bbc6f26f0fb0",
+          "relation_lifetime_live_controller.py": "343feaf6aa5e76a363b627400c62855e50a50c785268503367b40ac026bda494",
+          "relation_lifetime_physical_adjudication.py": "43c9424e01e2ba62de3e26e5fd7e925d474254ab29d07cf7151aab696607487c",
+          "relation_lifetime_pmu_preflight.c": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+          "relation_lifetime_public.py": "95b9c379e2c2d5f15d511a075fdf0011e3dca00ff43d43bf18234e9d71a82023",
+          "relation_lifetime_runtime.c": "8452f547eba460b4e167b35227c04d24ebd5315f1f03e10099af28c1aa3a28c9",
+          "relation_lifetime_runtime.h": "007a054aa2405e91dcc2f9621806eb99efd6dd79a8aeaba47a85934d62c63e93",
+          "relation_lifetime_target.py": "297d2d5d7c6d4d9da6055cbdb27a709939af3c09d19f58b2f00d1a59ce197cf4",
+          "run_relation_lifetime_twin.py": "b08c73cbe4eb28abc767dac23454563c9e5e8e8ea7dcb55e45cd17871386a24a"
+        },
+        "name": "source_file_hashes",
+        "passed": true
+      },
+      "source_receiver_cpu_identity": {
+        "detail": {
+          "family": 16,
+          "model": 10,
+          "operational_pinning": true,
+          "processor_count": 6,
+          "processors": [
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 0,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 1,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 2,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 3,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 4,
+              "vendor_id": "AuthenticAMD"
+            },
+            {
+              "cpu_family": 16,
+              "model": 10,
+              "processor": 5,
+              "vendor_id": "AuthenticAMD"
+            }
+          ],
+          "receiver_cpu": 5,
+          "receiver_cpu_present": true,
+          "runtime_abi": "linux_x86_64_perf_event_open",
+          "source": "sealed_family10h_temperature_sensor_authority_target_platform",
+          "source_cpu": 4,
+          "source_cpu_present": true,
+          "target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+          "vendor": "AuthenticAMD"
+        },
+        "name": "source_receiver_cpu_identity",
+        "passed": true
+      },
+      "source_root_identity": {
+        "detail": {
+          "failures": [],
+          "passed": true,
+          "pmu_preflight_helper_identity": {
+            "actual_helper_binary_format": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped",
+            "actual_helper_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+            "actual_helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+            "expected_helper_c_sha256": "ddd45638c98568f251a5a4c5a95a13957939823e3fefcef1bbd4bb7f321732ef",
+            "expected_helper_sha256": "cbe5912be04a7c8492a7556915ccca53e2e9ab408feedfaef31c88307c5fbfa6",
+            "expected_runtime_abi": "linux_x86_64_perf_event_open",
+            "helper_binary_format_probe": {
+              "command": [
+                "wsl.exe",
+                "-d",
+                "Ubuntu",
+                "--",
+                "file",
+                "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight"
+              ],
+              "returncode": 0,
+              "stderr": "",
+              "stdout": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_lifetime_twin_v1/relation_lifetime_pmu_preflight: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=292c4363df43eab55a4fd7aff457fff89be5e3ed, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+            },
+            "helper_binary_format_valid": true,
+            "helper_c_sha256_matches_authority": true,
+            "helper_sha256_matches_authority": true,
+            "path": "relation_lifetime_pmu_preflight",
+            "present": true
+          },
+          "required_file_count": 26
+        },
+        "name": "source_root_identity",
+        "passed": true
+      },
+      "temperature_sensor_authority": {
+        "detail": {
+          "class_path": "/sys/class/hwmon/hwmon0/temp1_input",
+          "device_driver": "k10temp",
+          "device_modalias": "pci:v00001022d00001203sv00000000sd00000000bc06sc00i00",
+          "device_subsystem": "pci",
+          "hwmon_name": "k10temp",
+          "identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+          "identity_stability": true,
+          "input_st_dev": 22,
+          "input_st_ino": 30803,
+          "input_st_mode": 33060,
+          "resolved_device_path": "/sys/devices/pci0000:00/0000:00:18.3",
+          "resolved_driver_path": "/sys/bus/pci/drivers/k10temp",
+          "resolved_hwmon_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0",
+          "resolved_input_path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input",
+          "resolved_subsystem_path": "/sys/bus/pci",
+          "sensor_input": "temp1_input",
+          "sensor_label_present": false,
+          "sensor_label_value": null,
+          "sensor_semantic_profile": "LEGACY_FAMILY10H_K10TEMP_TEMP1_V1",
+          "sensor_semantic_role": "Tctl"
+        },
+        "name": "temperature_sensor_authority",
+        "passed": true
+      },
+      "transaction_identity": {
+        "detail": "family10h_relation_lifetime_twin_v1_0",
+        "name": "transaction_identity",
+        "passed": true
+      }
+    },
+    "failures": [
+      "live_authority",
+      "source_authority_commit_binding",
+      "freeze_commit_binding",
+      "manifest_file_hash",
+      "injected_preflight_backend_absent"
+    ],
+    "live_invocation_count": 0,
+    "output_root": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_relation_lifetime_twin_v1\\_relation_lifetime_owned_outputs\\missing_authority_attempt",
+    "passed": true,
+    "physical_observation": null,
+    "pmu_acquisition_count": 0,
+    "pmu_open_count": 3,
+    "preflight_backend": "fixture",
+    "reason": "live authority missing",
+    "schema": "FAMILY10H_RELATION_LIFETIME_TARGET_PREFLIGHT_REFUSAL_V2",
+    "sensor_inventory_count": 0,
+    "small_wall_crossed": false,
+    "status": "TARGET_PREFLIGHT_REFUSED",
+    "target_contact_count": 0
+  },
+  "transaction_run_id": "family10h_relation_lifetime_twin_v1_0"
+}

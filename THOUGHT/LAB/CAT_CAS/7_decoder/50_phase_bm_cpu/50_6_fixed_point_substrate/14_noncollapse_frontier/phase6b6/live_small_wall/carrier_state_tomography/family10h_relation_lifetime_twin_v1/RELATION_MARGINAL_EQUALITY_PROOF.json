@@ -1,0 +1,130 @@
+{
+  "checks": {
+    "actual_cache_index_unresolved_not_claimed": true,
+    "compiled_binary_hash_bound": true,
+    "cyclic_origin_balance": true,
+    "relation_cells_balanced_across_origins": true,
+    "relations_distinct": true,
+    "runtime_schedule_executor_bound": true,
+    "runtime_self_test_receipt_bound": true,
+    "same_A_address_set": true,
+    "same_A_work_count": true,
+    "same_B_address_set": true,
+    "same_B_work_count": true,
+    "same_allocation_order": true,
+    "same_branch_structure": true,
+    "same_delay_distribution": true,
+    "same_line_count": true,
+    "same_logical_line_histogram": true,
+    "same_page_count": true,
+    "same_pair_distance_histogram": true,
+    "same_permutation_cycle_structure_class": true,
+    "same_pmu_event_group": true,
+    "same_prefault_order": true,
+    "same_read_count": true,
+    "same_receiver_loop_length": true,
+    "same_relation_table_lookup_count": true,
+    "same_source_and_receiver_cpu": true,
+    "same_source_loop_length": true,
+    "same_source_order_and_query_order_counts": true,
+    "same_total_work": true,
+    "same_virtual_offset_histogram": true,
+    "same_window_only": true,
+    "same_write_count": true,
+    "source_hashes_bound": true,
+    "source_lifetime_factor_balanced": true,
+    "source_lifetime_runtime_bound": true,
+    "synthetic_executor_bound": true
+  },
+  "full_sequence_digests": {
+    "relation_r0": {
+      "0": {
+        "A_sequence_sha256": "cb2249fa75b0f55c6f8922ce37038f8596d44b3ecf325f1ddc6d9d8a301d7e66",
+        "B_sequence_sha256": "2a4aaf6b2a35b3afadf691ef96b7ec6098cd8da1d2cb1f9ac3b0575c2d842a0c",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "1024": {
+        "A_sequence_sha256": "2e6c92de8214672196daad4371f3d6b5089b91f1842700edc2dbd8f4253b890c",
+        "B_sequence_sha256": "923e08be695bba7319f6f2f57bf94596575b45165991a6a5cc58e9960f75eebd",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "2048": {
+        "A_sequence_sha256": "161625401844900749da18daf2b8388994fea350d9c058028ba40f49179daaa2",
+        "B_sequence_sha256": "ec326a22c4851b8995494e70735a580755ba3139f39a9abddd5ef89b9ae041b3",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "3072": {
+        "A_sequence_sha256": "df2eb5ef8fb89ac570def7ea3a351457cc88b1cd4745b0b3a098486bfe94e08b",
+        "B_sequence_sha256": "13d8d4c23f481fcd57a39ee16c6d42482701c04c06ca6d406cd2598f4998b8f6",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      }
+    },
+    "relation_r1": {
+      "0": {
+        "A_sequence_sha256": "cb2249fa75b0f55c6f8922ce37038f8596d44b3ecf325f1ddc6d9d8a301d7e66",
+        "B_sequence_sha256": "f5a6835d06857e26c302655c80d7abd956b1742e6d799d71ec3e0d69cb1e47bf",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "1024": {
+        "A_sequence_sha256": "2e6c92de8214672196daad4371f3d6b5089b91f1842700edc2dbd8f4253b890c",
+        "B_sequence_sha256": "8dc9a850dd20f09bbd7b904f894df14ee923f2aba7112c277d8d05cc9d10ac74",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "2048": {
+        "A_sequence_sha256": "161625401844900749da18daf2b8388994fea350d9c058028ba40f49179daaa2",
+        "B_sequence_sha256": "32eaf243982249ddab6bbfaa07436397c4a2edec82cde67978e20dc1e8a7d78c",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      },
+      "3072": {
+        "A_sequence_sha256": "df2eb5ef8fb89ac570def7ea3a351457cc88b1cd4745b0b3a098486bfe94e08b",
+        "B_sequence_sha256": "035e37eff97f20c717469e563540bd07658c90bf29eab9fa4c0a559b71edd304",
+        "read_sequence_length": 4096,
+        "write_sequence_length": 4096
+      }
+    }
+  },
+  "grammar_sha256": "51dccda8b3b59f1a0c67aa178dec9e9bc527857b8d52754dfdfc709ee3f5985c",
+  "origin_counts": {
+    "0": 5376,
+    "1024": 5376,
+    "2048": 5376,
+    "3072": 5376
+  },
+  "passed": true,
+  "proof_basis": "generated full permutation tables, generated origin-rotated A/B sequences, schedule rows, source hashes, and runtime build receipt",
+  "proof_sha256": "c6776fc4b625ee7273288aa72f311f5c1af614f6ee950c08835a772a56b3fa65",
+  "relation_origin_counts_sha256": "defddc81610716e84262687e81caaa6a36ebbd9e7988a5e4a29f2d09b300adb6",
+  "relation_r0": {
+    "actual_cache_index_status": "unresolved_until_authorized_target_preflight",
+    "cycle_structure_sha256": "ea525d40c2924208604b75acf78ccb35852bc1482f0887b04e8feafb7c002fb9",
+    "formula": "B_index = (A_index + 1) mod 4096",
+    "logical_line_histogram_sha256": "cff9412b536b4b163928c652db0827a5541092dd88e0f60adcc3a0877ee779be",
+    "pair_distance_histogram_sha256": "a8fdd4718adf92b34415cf6eb34ddc8d178253e9ef5af9022178849a26e27469",
+    "permutation_sha256": "2a4aaf6b2a35b3afadf691ef96b7ec6098cd8da1d2cb1f9ac3b0575c2d842a0c",
+    "virtual_offset_histogram_sha256": "3bed852658892707a63af1833954e40112bf5aed7e438f889b05f27c7185139d"
+  },
+  "relation_r1": {
+    "actual_cache_index_status": "unresolved_until_authorized_target_preflight",
+    "cycle_structure_sha256": "ea525d40c2924208604b75acf78ccb35852bc1482f0887b04e8feafb7c002fb9",
+    "formula": "B_index = (A_index - 1) mod 4096",
+    "logical_line_histogram_sha256": "cff9412b536b4b163928c652db0827a5541092dd88e0f60adcc3a0877ee779be",
+    "pair_distance_histogram_sha256": "a8fdd4718adf92b34415cf6eb34ddc8d178253e9ef5af9022178849a26e27469",
+    "permutation_sha256": "f5a6835d06857e26c302655c80d7abd956b1742e6d799d71ec3e0d69cb1e47bf",
+    "virtual_offset_histogram_sha256": "3bed852658892707a63af1833954e40112bf5aed7e438f889b05f27c7185139d"
+  },
+  "runtime_build_receipt_passed": true,
+  "runtime_build_receipt_sha256": "c984362e54bb1cbab0e50560187bcc413a3b77b27c12b4f36fbd7db38abe7ac0",
+  "schema": "FAMILY10H_RELATION_MARGINAL_EQUALITY_PROOF_V2",
+  "source_hashes_sha256": "c581698454799295c7def17a6d43d566a4c6d102ae0fba319f48989010cccc24",
+  "source_lifetime_counts": {
+    "alive_during_query": 10752,
+    "dead_before_query": 10752
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "absolute_thresholds": {
+    "alive_R_match_abs_min": 512.0,
+    "control_null_abs_max": 128.0,
+    "dead_R_match_abs_max": 128.0,
+    "delta_R_lifetime_abs_min": 512.0,
+    "r_match_abs_min": 512.0,
+    "scalar_D_single_drift_abs_max": 128.0,
+    "scalar_D_single_lifetime_delta_abs_max": 128.0,
+    "source_off_abs_max": 128.0
+  },
+  "provenance_law": {
+    "control_null_abs_max": "sealed v1.1 source-off absolute null ceiling",
+    "no_post_run_revision": true,
+    "r_match_abs_min": "four times the sealed v1.1 source-off absolute null ceiling",
+    "scalar_D_single_drift_abs_max": "one sealed v1.1 source-off absolute null ceiling",
+    "synthetic_thresholds_are_not_physical_thresholds": true
+  },
+  "relative_thresholds": {
+    "heldout_relative_error_max": 0.25,
+    "q_intercept_abs_max": 128.0,
+    "q_slope_relative_disagreement_max": 0.25
+  },
+  "resampling_thresholds": {
+    "bootstrap_sign_fraction_min": 0.95,
+    "label_scramble_abs_max": 128.0,
+    "matched_permutation_null_abs_max": 128.0
+  },
+  "scalar_evidence_provenance": {
+    "archive_sha256": "0f92bcd4c00ee78b7e78e84c86bf375ee1caf4ca8c52ae49166ea809f16ff041",
+    "basis": "sealed_family10h_v1_1_scalar_q_readout_attempt_1_and_pre_run_logic",
+    "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+    "not_relation_source_authority": true,
+    "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
+    "relation_lifetime_target_data_used": false,
+    "role": "sealed scalar q-readout evidence provenance for threshold derivation only",
+    "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda"
+  },
+  "schema": "FAMILY10H_RELATION_LIFETIME_PHYSICAL_THRESHOLD_CONTRACT_V1",
+  "threshold_contract_sha256": "850927c4f026739c26787515656960a04399e74058ad4b4528e37333291d5c70",
+  "threshold_status": "prospective_physical_thresholds_frozen_before_relation_lifetime_acquisition"
+}
