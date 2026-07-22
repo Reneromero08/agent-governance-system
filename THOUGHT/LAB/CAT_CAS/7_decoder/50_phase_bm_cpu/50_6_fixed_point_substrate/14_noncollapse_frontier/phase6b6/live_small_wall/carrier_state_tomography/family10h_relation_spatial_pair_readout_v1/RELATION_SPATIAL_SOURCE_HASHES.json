@@ -43,11 +43,9 @@
     "present": true
   },
   "relation_source_authority_validation": {
-    "failures": [
-      "relation source authority is not a 40-char git SHA"
-    ],
-    "passed": false,
-    "relation_source_authority_commit": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT"
+    "failures": [],
+    "passed": true,
+    "relation_source_authority_commit": "091276e4c45d02bae9c34bd1597db3a139e10ddf"
   },
   "runtime_binary_authority": {
     "compiled_binary_sha256": "c0468dfc0c496d2efbf007cd2b939beba43500fb40b25224a9ae2eff46948c30",
@@ -64,9 +62,9 @@
   },
   "schema": "FAMILY10H_RELATION_SPATIAL_SOURCE_HASHES_V1",
   "source_authority_regression_tests": {
-    "passed": false,
+    "passed": true,
     "rejects_scalar_evidence_commits": true,
-    "rejects_unset_source_authority": false,
+    "rejects_unset_source_authority": true,
     "schema": "FAMILY10H_RELATION_SPATIAL_SOURCE_AUTHORITY_REGRESSION_V1"
   },
   "source_bundle": {

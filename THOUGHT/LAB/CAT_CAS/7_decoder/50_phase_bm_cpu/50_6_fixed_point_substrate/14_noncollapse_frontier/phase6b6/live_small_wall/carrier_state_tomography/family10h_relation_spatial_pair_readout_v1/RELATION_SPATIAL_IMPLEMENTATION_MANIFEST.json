@@ -2,7 +2,7 @@
   "authority_binding": {
     "relation_manifest_freeze_commit_not_embedded": true,
     "relation_manifest_freeze_commit_policy": "controller_verifies_local_head_and_origin_equal_freeze_commit_at_authorization_time",
-    "relation_source_authority_commit": "RELATION_SOURCE_AUTHORITY_UNSET_UNTIL_SOURCE_COMMIT",
+    "relation_source_authority_commit": "091276e4c45d02bae9c34bd1597db3a139e10ddf",
     "scalar_evidence_provenance": {
       "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
       "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
@@ -10,9 +10,7 @@
       "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda"
     }
   },
-  "blockers": [
-    "relation source authority not bound until source commit"
-  ],
+  "blockers": [],
   "claim_boundary": {
     "forbidden_promotions": [
       "FULL_CARRIER_STATE_TOMOGRAPHY_ESTABLISHED",
@@ -26,9 +24,9 @@
   },
   "expected_pair_observation_count": 1048576,
   "grammar_sha256": "fe18e418acdba8bce6a7a1ccddae25ab4929ff65c14acfbf1e776ebfdba1c768",
-  "manifest_sha256": "c00a0e89d1d0442daf29ae0ee8ff8bf6749562fc2a3022a3ae64688b31b20f7d",
+  "manifest_sha256": "a5a44e990327e711cd3cd2d1b9e1603e1f38c75183208457eec36caf58e238c4",
   "offline_validate_sha256": null,
-  "package_decision": "FAMILY10H_SPATIAL_RELATION_READOUT_BUILD_READINESS_BLOCKED",
+  "package_decision": "FAMILY10H_SPATIAL_RELATION_READOUT_BUILD_READY_AWAITING_AUTHORIZATION",
   "pair_measurements_per_row": 256,
   "pmu_preflight_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
   "runtime_binary_sha256": "c0468dfc0c496d2efbf007cd2b939beba43500fb40b25224a9ae2eff46948c30",

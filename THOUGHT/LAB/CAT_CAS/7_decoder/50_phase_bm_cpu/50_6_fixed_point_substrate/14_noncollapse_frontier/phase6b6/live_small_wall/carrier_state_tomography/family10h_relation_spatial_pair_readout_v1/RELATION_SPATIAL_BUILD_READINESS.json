@@ -1,7 +1,5 @@
 {
-  "blockers": [
-    "relation source authority not bound until source commit"
-  ],
+  "blockers": [],
   "expected_pair_observation_count": 1048576,
   "line_coverage_proof": {
     "checks": {
@@ -16711,10 +16709,10 @@
     "schema": "FAMILY10H_RELATION_SPATIAL_MARGINAL_EQUALITY_PROOF_V1"
   },
   "offline_validate_passed": true,
-  "package_decision": "FAMILY10H_SPATIAL_RELATION_READOUT_BUILD_READINESS_BLOCKED",
+  "package_decision": "FAMILY10H_SPATIAL_RELATION_READOUT_BUILD_READY_AWAITING_AUTHORIZATION",
   "pair_measurements_per_row": 256,
   "pmu_acquisition_count": 0,
-  "readiness_sha256": "d05f7fdff271ea75996ed98e6d0c6229b7a84365e78c7ac06bbb1e4d1b4f8ad8",
+  "readiness_sha256": "4621cfe4362e4f83e1151c9c49dd95fdfc7f3b55ae6531e4245e7ce3da094bb8",
   "runtime_build_passed": true,
   "schedule_row_count": 4096,
   "schema": "FAMILY10H_RELATION_SPATIAL_BUILD_READINESS_V1",
