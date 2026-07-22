@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import dis
 import hashlib
 import types
 import itertools
@@ -163,6 +164,36 @@ def independent_local_executable_closure(
     return closure, nodes
 
 
+def _compiled_regions(code: types.CodeType) -> list[tuple[str, types.CodeType]]:
+    regions: list[tuple[str, types.CodeType]] = []
+
+    def visit(current: types.CodeType, path: str) -> None:
+        regions.append((path, current))
+        child_counts: dict[str, int] = {}
+        for constant in current.co_consts:
+            if not isinstance(constant, types.CodeType):
+                continue
+            count = child_counts.get(constant.co_name, 0)
+            child_counts[constant.co_name] = count + 1
+            suffix = "" if count == 0 else f"#{count}"
+            visit(constant, f"{path}.{constant.co_name}{suffix}")
+
+    visit(code, "<module>")
+    return regions
+
+
+def _instruction_violation(
+    code: str, path: str, item: Any, detail: str
+) -> dict[str, Any]:
+    return {
+        "code": code,
+        "code_path": path,
+        "detail": detail,
+        "line": int(item.starts_line if item.starts_line is not None else -1),
+        "offset": int(item.offset),
+    }
+
+
 def independent_integrity_analysis(source: str) -> dict[str, Any]:
     tree = ast.parse(source, filename=str(MACHINE_SOURCE))
     required_native_executables = {
@@ -200,36 +231,47 @@ def independent_integrity_analysis(source: str) -> dict[str, Any]:
         "typing",
     }
     imported_roots: set[str] = set()
-    dynamic_import_lines: list[int] = []
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             imported_roots.update(alias.name.split(".")[0] for alias in node.names)
         elif isinstance(node, ast.ImportFrom) and node.module:
             imported_roots.add(node.module.split(".")[0])
-        elif isinstance(node, ast.Call):
-            if isinstance(node.func, ast.Name) and node.func.id in {
-                "__import__",
-                "compile",
-                "eval",
-                "exec",
-            }:
-                dynamic_import_lines.append(node.lineno)
-            elif isinstance(node.func, ast.Attribute) and node.func.attr in {
-                "exec_module",
-                "import_module",
-                "spec_from_file_location",
-            }:
-                dynamic_import_lines.append(node.lineno)
-    native_forbidden = {
+    selection_names = {
         "argmax",
         "argmin",
+        "argpartition",
         "argsort",
+        "heapify",
+        "heappop",
+        "heappush",
+        "lexsort",
+        "nlargest",
+        "nsmallest",
+        "partition",
+        "searchsorted",
+        "sort",
+        "sorted",
+        "take_along_axis",
+        "where",
+    }
+    dynamic_names = {
+        "__import__",
+        "compile",
+        "eval",
+        "exec",
+        "exec_module",
+        "getattr",
+        "globals",
+        "import_module",
+        "locals",
+        "setattr",
+        "spec_from_file_location",
+    }
+    whole_module_forbidden = {
         "exact_oracle",
+        "expected_result",
         "ising_energy",
         "optimum_states",
-        "problem_sha256",
-        "raw_spins",
-        "spins",
     }
     boundary_forbidden = {
         "coupling",
@@ -240,24 +282,151 @@ def independent_integrity_analysis(source: str) -> dict[str, Any]:
         "optimum_states",
         "problem_sha256",
     }
-    native_hits: set[str] = set()
+    compiled = compile(
+        source.encode("utf-8"),
+        str(MACHINE_SOURCE),
+        "exec",
+        dont_inherit=True,
+        optimize=0,
+    )
+    regions = _compiled_regions(compiled)
+    exact_boundary_paths = [
+        path
+        for path, code in regions
+        if code.co_name == "project_boundary" and path == "<module>.project_boundary"
+    ]
+    violations: list[dict[str, Any]] = []
+    manifest: list[dict[str, Any]] = []
     boundary_hits: set[str] = set()
-    matrix_product_lines: list[int] = []
-    for name in sorted(native_closure):
-        for node in ast.walk(nodes[name]):
-            if isinstance(node, ast.Name) and node.id in native_forbidden:
-                native_hits.add(node.id)
-            if isinstance(node, ast.Attribute) and node.attr in native_forbidden:
-                native_hits.add(node.attr)
-            if isinstance(node, ast.BinOp) and isinstance(node.op, ast.MatMult):
-                matrix_product_lines.append(node.lineno)
+    native_hits: set[str] = set()
+    matrix_lines: list[int] = []
+    for path, code in regions:
+        exact_boundary = path == "<module>.project_boundary"
+        instructions = list(dis.get_instructions(code))
+        manifest.append(
+            {
+                "bytecode_bytes": len(code.co_code),
+                "code_path": path,
+                "disposition": (
+                    "project_boundary_body_carveout"
+                    if exact_boundary
+                    else "whole_module_compiled_policy"
+                ),
+                "first_line": code.co_firstlineno,
+                "instruction_count": len(instructions),
+                "names": sorted(code.co_names),
+            }
+        )
+        if exact_boundary:
+            for name in sorted(set(code.co_names) & boundary_forbidden):
+                boundary_hits.add(name)
+                anchor = next(
+                    (
+                        item
+                        for item in instructions
+                        if item.argval == name
+                    ),
+                    instructions[0],
+                )
+                violations.append(
+                    _instruction_violation(
+                        "boundary_forbidden_identifier", path, anchor, name
+                    )
+                )
+            continue
+        for name in sorted(set(code.co_names) & selection_names):
+            native_hits.add(name)
+            anchor = next(
+                (item for item in instructions if item.argval == name),
+                instructions[0],
+            )
+            violations.append(
+                _instruction_violation(
+                    "bytecode_selection_outside_boundary", path, anchor, name
+                )
+            )
+        for name in sorted(set(code.co_names) & dynamic_names):
+            native_hits.add(name)
+            anchor = next(
+                (item for item in instructions if item.argval == name),
+                instructions[0],
+            )
+            violations.append(
+                _instruction_violation("bytecode_dynamic_capability", path, anchor, name)
+            )
+        for name in sorted(set(code.co_names) & whole_module_forbidden):
+            native_hits.add(name)
+            anchor = next(
+                (item for item in instructions if item.argval == name),
+                instructions[0],
+            )
+            violations.append(
+                _instruction_violation(
+                    "bytecode_forbidden_identifier", path, anchor, name
+                )
+            )
+        for item in instructions:
+            if item.opname == "BINARY_OP" and item.argrepr == "@":
+                matrix_lines.append(
+                    item.starts_line if item.starts_line is not None else code.co_firstlineno
+                )
+                violations.append(
+                    _instruction_violation(
+                        "bytecode_matrix_product_outside_boundary", path, item, "@"
+                    )
+                )
+            if path == "<module>" and item.opname in {
+                "DELETE_ATTR",
+                "DELETE_SUBSCR",
+                "STORE_ATTR",
+                "STORE_SUBSCR",
+            }:
+                violations.append(
+                    _instruction_violation(
+                        "bytecode_module_side_effect", path, item, item.opname
+                    )
+                )
+            if item.argval == "project_boundary" and item.opname.startswith("LOAD_"):
+                violations.append(
+                    _instruction_violation(
+                        "bytecode_native_to_boundary_call", path, item, item.opname
+                    )
+                )
+        stores = {
+            str(item.argval).lower()
+            for item in instructions
+            if item.opname.startswith("STORE_")
+        }
+        if any(item.opname == "COMPARE_OP" for item in instructions):
+            selection_stores = {
+                name
+                for name in stores
+                if any(
+                    token in name
+                    for token in (
+                        "best",
+                        "choice",
+                        "order",
+                        "rank",
+                        "winner",
+                    )
+                )
+            }
+            if selection_stores:
+                anchor = next(
+                    item for item in instructions if item.opname == "COMPARE_OP"
+                )
+                violations.append(
+                    _instruction_violation(
+                        "bytecode_manual_selection",
+                        path,
+                        anchor,
+                        ",".join(sorted(selection_stores)),
+                    )
+                )
     boundary = nodes["project_boundary"]
     raw_forwarding = False
     for node in ast.walk(boundary):
-        if isinstance(node, ast.Name) and node.id in boundary_forbidden:
-            boundary_hits.add(node.id)
-        if isinstance(node, ast.Attribute) and node.attr in boundary_forbidden:
-            boundary_hits.add(node.attr)
         if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
             if node.func.id == "BoundaryProjection":
                 keywords = [item for item in node.keywords if item.arg == "spins"]
@@ -273,20 +442,27 @@ def independent_integrity_analysis(source: str) -> dict[str, Any]:
                         and value.orelse.value is None
                     )
     passed = bool(
-        not native_hits
+        len(exact_boundary_paths) == 1
         and not boundary_hits
         and imported_roots <= allowed_import_roots
-        and not dynamic_import_lines
         and not uncovered_native
-        and not matrix_product_lines
+        and not violations
         and raw_forwarding
     )
     return {
         "boundary_forbidden_names": sorted(boundary_hits),
         "boundary_raw_result_forwarding": raw_forwarding,
-        "dynamic_import_lines": dynamic_import_lines,
+        "compiled_executable_region_count": len(manifest),
+        "compiled_executable_region_manifest": manifest,
+        "dynamic_import_lines": sorted(
+            {
+                item["line"]
+                for item in violations
+                if item["code"] == "bytecode_dynamic_capability"
+            }
+        ),
         "imported_roots": sorted(imported_roots),
-        "matrix_product_lines_in_native": matrix_product_lines,
+        "matrix_product_lines_in_native": sorted(matrix_lines),
         "native_class_method_names": sorted(
             name for name in native_closure if "." in name
         ),
@@ -304,32 +480,203 @@ def independent_integrity_analysis(source: str) -> dict[str, Any]:
             for name in native_closure | boundary_closure
             if not name.startswith("@module:") and "." not in name
         ),
+        "selection_capable_regions": exact_boundary_paths,
+        "unclassified_compiled_regions": [],
         "uncovered_native_function_names": uncovered_native,
+        "violations": sorted(
+            violations,
+            key=lambda item: (
+                item["code_path"],
+                item["offset"],
+                item["code"],
+                item["detail"],
+            ),
+        ),
     }
 
 
 def static_integrity() -> dict[str, Any]:
     source = MACHINE_SOURCE.read_text(encoding="utf-8")
     result = independent_integrity_analysis(source)
-    needle = "    modes = np.ones((site_count, 1), dtype=np.complex128)"
-    if source.count(needle) != 1:
-        raise RuntimeError("independent initializer negative-fixture anchor drift")
-    mutated = source.replace(
-        needle,
-        "    np.argsort(np.asarray([1.0, 0.0], dtype=np.float64))\n" + needle,
+    anchors = {
+        "class": "class SpectralPhaseLaw:\n",
+        "initializer": "    modes = np.ones((site_count, 1), dtype=np.complex128)\n",
+        "module": "PHASE_MODES = recursive_antipodal_phase_modes()\n",
+        "post_init": "    def validate(self) -> None:\n",
+        "relational": "    history: list[np.ndarray] = []\n",
+        "boundary": "def project_boundary(\n",
+        "decorator": "@dataclass(frozen=True)\nclass SpectralPhaseLaw:\n",
+    }
+    for label, anchor in anchors.items():
+        if source.count(anchor) != 1:
+            raise RuntimeError(f"independent whole-module anchor drift: {label}")
+    mutations = [
+        (
+            "class_decorator_selection",
+            source.replace(
+                anchors["decorator"],
+                "@np.argsort(np.asarray([1.0, 0.0]))\n"
+                + anchors["decorator"],
+                1,
+            ),
+            "bytecode_selection_outside_boundary",
+        ),
+        (
+            "recursive_initializer_selection",
+            source.replace(
+                anchors["initializer"],
+                "    np.argsort(np.asarray([1.0, 0.0]))\n"
+                + anchors["initializer"],
+                1,
+            ),
+            "bytecode_selection_outside_boundary",
+        ),
+        (
+            "class_field_selection",
+            source.replace(
+                anchors["class"],
+                anchors["class"]
+                + "    injected_order: object = np.argsort(np.asarray([1.0, 0.0]))\n",
+                1,
+            ),
+            "bytecode_selection_outside_boundary",
+        ),
+        (
+            "post_init_selection",
+            source.replace(
+                anchors["post_init"],
+                "    def __post_init__(self) -> None:\n"
+                "        np.argsort(np.asarray([1.0, 0.0]))\n\n"
+                + anchors["post_init"],
+                1,
+            ),
+            "bytecode_selection_outside_boundary",
+        ),
+        (
+            "module_subscript_side_effect",
+            source.replace(
+                anchors["module"],
+                anchors["module"]
+                + "PHASE_MODES[0, 0] = PHASE_MODES[0, np.argsort(np.real(PHASE_MODES[0]))[0]]\n",
+                1,
+            ),
+            "bytecode_module_side_effect",
+        ),
+        (
+            "module_expression_selection",
+            source.replace(
+                anchors["module"],
+                anchors["module"] + "np.argsort(np.real(PHASE_MODES[0]))\n",
+                1,
+            ),
+            "bytecode_selection_outside_boundary",
+        ),
+        (
+            "keyed_sorted_selection",
+            source.replace(
+                anchors["relational"],
+                "    sorted(\n"
+                "        range(MODE_COUNT),\n"
+                "        key=lambda mode: float(np.real(current[0, mode])),\n"
+                "    )\n"
+                + anchors["relational"],
+                1,
+            ),
+            "bytecode_selection_outside_boundary",
+        ),
+        (
+            "manual_winner_loop",
+            source.replace(
+                anchors["relational"],
+                "    winner = 0\n"
+                "    for candidate in range(2):\n"
+                "        if candidate > winner:\n"
+                "            winner = candidate\n"
+                + anchors["relational"],
+                1,
+            ),
+            "bytecode_manual_selection",
+        ),
+        (
+            "take_along_axis_selection",
+            source.replace(
+                anchors["relational"],
+                "    np.take_along_axis(\n"
+                "        current,\n"
+                "        np.zeros_like(current, dtype=np.int64),\n"
+                "        axis=1,\n"
+                "    )\n"
+                + anchors["relational"],
+                1,
+            ),
+            "bytecode_selection_outside_boundary",
+        ),
+        (
+            "indirect_getattr_selection",
+            source.replace(
+                anchors["relational"],
+                "    getattr(np, 'argsort')(np.real(current[0]))\n"
+                + anchors["relational"],
+                1,
+            ),
+            "bytecode_dynamic_capability",
+        ),
+        (
+            "helper_selection_called_from_boundary",
+            source.replace(
+                anchors["boundary"],
+                "def injected_boundary_helper(values: np.ndarray) -> np.ndarray:\n"
+                "    return np.argsort(values)\n\n\n"
+                + anchors["boundary"],
+                1,
+            ),
+            "bytecode_selection_outside_boundary",
+        ),
+        (
+            "boundary_problem_access",
+            source.replace(
+                "    query = execution.program_beams",
+                "    execution.coupling\n    query = execution.program_beams",
+                1,
+            ),
+            "boundary_forbidden_identifier",
+        ),
+    ]
+    mutation_results: list[dict[str, Any]] = []
+    for name, mutated_source, expected_code in mutations:
+        mutated = independent_integrity_analysis(mutated_source)
+        codes = sorted({item["code"] for item in mutated["violations"]})
+        mutation_results.append(
+            {
+                "expected_code": expected_code,
+                "name": name,
+                "observed_codes": codes,
+                "pass": bool(not mutated["pass"] and expected_code in codes),
+            }
+        )
+    harmless = source.replace(
+        anchors["relational"],
+        "    current *= np.exp(1j * np.zeros_like(np.real(current)))\n"
+        + anchors["relational"],
         1,
     )
-    mutated_result = independent_integrity_analysis(mutated)
-    negative_rejected = bool(
-        not mutated_result["pass"]
-        and "argsort" in mutated_result["native_forbidden_names"]
-        and "recursive_antipodal_phase_modes"
-        in mutated_result["native_executable_names"]
-        and "PHASE_MODES" in mutated_result["native_module_initializer_names"]
+    harmless_result = independent_integrity_analysis(harmless)
+    result["initializer_selection_negative_fixture_rejected"] = next(
+        item["pass"]
+        for item in mutation_results
+        if item["name"] == "recursive_initializer_selection"
     )
-    result["initializer_selection_negative_fixture_rejected"] = negative_rejected
-    result["pass"] = bool(result["pass"] and negative_rejected)
+    result["mutation_fixture_results"] = mutation_results
+    result["harmless_elementwise_positive_fixture_accepted"] = bool(
+        harmless_result["pass"]
+    )
+    result["pass"] = bool(
+        result["pass"]
+        and all(item["pass"] for item in mutation_results)
+        and result["harmless_elementwise_positive_fixture_accepted"]
+    )
     return result
+
 
 def independent_energy(
     state: Sequence[int], coupling: np.ndarray, field: np.ndarray

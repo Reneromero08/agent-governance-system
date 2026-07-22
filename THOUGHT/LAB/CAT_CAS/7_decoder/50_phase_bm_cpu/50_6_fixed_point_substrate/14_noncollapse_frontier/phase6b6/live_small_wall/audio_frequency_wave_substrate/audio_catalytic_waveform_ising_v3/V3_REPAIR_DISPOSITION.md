@@ -85,3 +85,30 @@ modules directly from exact source bytes, disables bytecode writes, rejects
 executable caches under the package, and seals the source-execution environment
 and a real temporary cache-rejection control. Only a new fifth freeze, remote
 pre-oracle seal, oracle adjudication, and passing final review may authorize V3.
+The fifth ordered batch
+`f7890f3ca8a8e455ea86a53a2bb98d323047b939a80326e8188430a52d21aac6`
+produced 214/214 accepted unique optima and rejected all 42 non-unique cases.
+Every strict control and restoration/reuse path passed, all 8,192 oracle states
+were independently enumerated, and zero pre-seal oracle or energy calls occurred.
+Its exact batch, pre-oracle, oracle, trace, and independent-verification bytes are
+preserved under `V3_RETIRED_WHOLE_MODULE_POLICY_*`.
+
+Final mechanism review found no numerical or waveform-mechanism defect. It found a
+prospective assurance defect: the local-call AST gates did not classify executable
+class-field expressions, injected implicit class hooks, arbitrary module-level side
+effects, or selection implemented through a different ordering API. Those omissions
+could authorize altered source even though the committed machine was benign. A
+post-oracle analyzer repair cannot retroactively qualify the fifth batch, so it is
+retired without result promotion and all 256 identities are excluded from the next
+batch.
+
+The sixth repair applies a whole-module executable-region policy with exactly one
+selection carveout, the body of `project_boundary`. It covers module initialization,
+class construction, all methods, functions, nested code and lambdas; rejects dynamic
+execution, module side effects, non-boundary ordering/index selection, manual winner
+loops, boundary problem access and hidden boundary helpers; and records every region.
+A separately implemented compiled-bytecode audit covers every emitted code object.
+Both analyzers must pass twelve negative mutations and one harmless elementwise
+positive mutation. The V3 machine source, numerical law, thresholds and claim ceiling
+remain unchanged. Only a new sixth freeze, remote pre-oracle seal, oracle adjudication,
+and passing final review may authorize V3.

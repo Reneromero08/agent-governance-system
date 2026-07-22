@@ -1,0 +1,7620 @@
+{
+  "batch_ordered_sha256": "f7890f3ca8a8e455ea86a53a2bb98d323047b939a80326e8188430a52d21aac6",
+  "claim_ceiling": "BOUNDED_SOFTWARE_RECURSIVE_SPECTRAL_PHASE_REFERENCE_ONLY",
+  "decision": "CATALYTIC_WAVEFORM_ISING_V3_VERIFIED",
+  "freeze_commit": "2bf28e40bbaf6deca61c6babb7927ea4d7ff7f87",
+  "machine_fingerprint": "1bb3d9c8677c9f9677e5c4d650d27db690c26490f7001401d758217207ba2025",
+  "outcomes": [
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 0,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "5f880b8d202724b6fe6ba743f278fdebb56d08ed3943f8ea23d688dd90502f74",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 1,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "f39ab22ef0a6bbe20b465f1a26dd3a59f8548a6a7c0ce9d71d79aaf7b1d61bd1",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 2,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "123eeb2521fb4713d1593c7dcc9fe9bb15ad98aec8ac22a85e4f1c54035827b3",
+      "raw_energy": -9.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 3,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "3c6574dff5b883dbfcb46ce6e4306dee728441f938fa13cc6860a4f6cd7dae9e",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 4,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ],
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "c5c3b5511ec11f733e4bc4559b2f523c78cf48a801f0fd08d2a37a0aeee0ea6d",
+      "raw_energy": 4.5,
+      "raw_matches_optimum": false,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 5,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "045b6bdd08798f937d3831f288c81572681f683d0e67e403d2ad0017c5ab998b",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 6,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "6a661d25c3b5feb4051623f0c6b37962ae9ea187d2286a50ceaa559dd64c0043",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 7,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "f04964251f00fc0ffff10e093c39f675974afa48141d2370b4575defc444a699",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 8,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "baae7389cc75cb92de4a96dbac79e726f2e42cb617ba41ca61f74c4bc0c66c37",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 9,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "f811380572f144180deff45c823f5d2a9430d5db4c04312bc1210315dd21e690",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 10,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "13c21d026c9b57a9a0efd8e74b7676f8504831203bed9e1b10c886efe3996587",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 11,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "185b636c9379f69a696b1b958919b644729e480fc7ded0f47bbbecd1fb45b59d",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 12,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "18050d2e34e814bb96bd1c6e507153a1ebc25d975a585128a8e4ad24fd4e2dca",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 13,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "828c62f9b12a986182f2f0724b74905325ac6bdec750093bf436bd06a467c230",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 14,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "8666cd2ec3afb91557249e04fab37a8e5a36309168f4ba9d8201c2a26edb23f2",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 15,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "7f06258f141b3d4f77f6b06ec0150ddf17270a2d677c325f968e5b6c52b20efc",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 16,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "27d56a92e85110fb00bd514c01c66823702f28c045ec95bd41e6e132ab9985b0",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 17,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "5e0c6501032a5bc42af3cff7369a4143fd8e292fa48b091477e65c6353369a25",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": false,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 18,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "b6acfe6fb76b35e2f8477490fd1c4467ec7dc04516cf2eea491a45140ad183b5",
+      "raw_energy": -15.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 19,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "2be23aa407b1b94c9bd99489380e7f1efcfc455dac21c20a1232ae2afc05f639",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 20,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -17.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "bcb00808287292476d54b14b84072f260ed4b44eed4e79ca08726ec585280a7e",
+      "raw_energy": -17.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 21,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "26ab2017c3927e2469080692a3e78bdc13cb2522dde5c91d129b28b6cb9e4811",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 22,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "57f6b6a7b662a65812a0139ecf34ddd456218b06e604c5ee0a0a82742551a7af",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 23,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "4f38f34a83c22346d3c16e4642868ea6c02c0b20bd49032149e43b4926ee4c67",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 24,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "ed506fa6b56c9683c1b5226506aa33862e7ac4aa08d8b47825f75ecc4be70c26",
+      "raw_energy": -15.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 25,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "f8849003638bd1d725caa5f6cf2b1500c7cdc3ff85f0f70ba6080a014a8291ea",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 26,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "85ae27bbdcde4d9ef77281247e85c8277e5f7c96c0a85c94b93215d4b865133f",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 27,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -7.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "ab8ffc5cfda95fd46097d460b342fcef4c2d24f53561c6d23b9fec9f62546d38",
+      "raw_energy": -7.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 28,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "d9edc384e717f4a35c68f9702e83f1573626a494c969b981ab604e3afddc6db2",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 29,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "75c4406c7b58ea64764c8b11d8a9004f18c4b2f883642b9010df376f6553e81c",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 30,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "b49e190ea01426069ac8b223bdf0f926ff9d2145ebe3b10980a045159b63fb92",
+      "raw_energy": -13.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 31,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -7.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "4761b9ac50b802f998d0664b81e17fcc75aa6e14b20058121898e2a6e8baa08d",
+      "raw_energy": -7.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 32,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "f818c9254b26d6cdc7ce8b1c4f103e36e9fc1c153d59fd14ddc2f8cd91dd4e6c",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 33,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "d50669bc89e367a47134f403ae9592074794bca73353a2b89309bf92f9f19ddc",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 34,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "f5e3f3ab429e7a6341656a6ea547837db32efb7556d3aeca982fb620da8ee932",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 35,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "3cfb126875d65d4a5efc847e706cbb637de0685a099fe4e21f36946ba849c78f",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": false,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 36,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "0a1c5850ac08e0d4b4fcc8be84e67a351dfcedfcf7a2638aa0d7078065a6ee75",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 37,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "30e163e3e483b2238302c26d822b2979a704353b0f91937b05d315ae543dc8c6",
+      "raw_energy": -8.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 38,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "5614315eea8f2da4e2869e972feddedf7c3b58402a6ac55156ca18b936dfc7b9",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 39,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "ce12636cfe7b6f7ac6ffe4cf275fed67c33343a6dffa803449c2cd6ed9a77bb2",
+      "raw_energy": -16.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 40,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a3b81e42bf314aba3020e5e19af2ab68e52d1e390b716dd65cf7a01eef910b46",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 41,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "5a577f9082b902a645407d2c4255c322c16eb7795cea8dfb3ab3cf4f099fc37f",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 42,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "a31f292c98bb576e64932484878064877e07c0f68a6c23c87addc85f204a5f42",
+      "raw_energy": -15.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 43,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "0ae07935babe27151d6f09571c5a255d0fbcb77bc776114f085de3c8b5af08ba",
+      "raw_energy": -16.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 44,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "e394ad49faeb8da487a9e3bc0b731ee20ae8f22fc0cbfff159e4f9c1cabf81d6",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 45,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "835fc8b52314e6c7043491d0e06d3fb75792418bd32d7c22e6d58371c4c4b990",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 46,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "abaed0e088ed4251e40fc6f199809a3f3440f16a5d9534d6782a430a548adc1e",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 47,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -21.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "55090ec54bd3d598b387a38dae95bdf7b939d17c91c622b3b74b163a5c16223c",
+      "raw_energy": -21.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 48,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "b8c60b7fdf7dff88367ebad97990f0e269052f115f0fcfb25b66c843f60f5229",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 49,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "e4a410d61d2206c691a70c071aabf0a4ae105ea482ec9d91c2c56e597d510e4c",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 50,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "e7136d28022440766572d38395b5acc535eff392e0c89230168b16def533fef9",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 51,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -7.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "70cb4954064419430bf017df2f2f3656d6eca0d511c9b9f331fecda0d2e82cbd",
+      "raw_energy": -7.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 52,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "9d60004cbea80d78321a3d04614bdd82ff514686d6400a8adeac5eee9db05bf5",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 53,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "c146fb610d52598a3d908becb2be771837c4d1cd4b7720e871caaeea27d1cfbd",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 54,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "23c4c479b88d33b8a6c36de584100a733af58bac92950a54f02dfd825b1409fd",
+      "raw_energy": -16.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 55,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "12fd3f3464bc0eadde6306c81d6ce47bbc3be067d7dd99e8f7187e95f42092e8",
+      "raw_energy": -9.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 56,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -7.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "570538824d4566c3af01e4ba1b8c41289f178197ac8e6b2deeafb71514ea6c77",
+      "raw_energy": -7.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 57,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "ba4766cc0050f35a488d2e12d8eb783656f7a2561a5be3ce51ec622add89646c",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 58,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "8f4fda013a40644bec4af3779395c8b892ba0226a3c488cfbfde24705684ce0c",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 59,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "f9861aac820a4c635c3a0d8f4b209b2be097f424ca1bad846fb6b1b8c0c474f7",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 60,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "88b6be60a6e4eac70fba31e4f031a16d294e751b17b16ed960ae324ac83f6a7a",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 61,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "4dd6037080e3336af04f6e710ce25aa8cf2a4d55200927a86b48b2c3741f51d2",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 62,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "1f378f5c8de450b3bd0ba2bbf5a551f71db86e48c3b065bdd6be3abb2a1de318",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 63,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "1c7b130b0dfb3933c9195404ca4ee927fb88d00e659636e547e2d31f0d315480",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 64,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 3,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "d84ebd1e33eacd018c705857660d480dddc12490ba00d706de010565493be750",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 65,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "6029c21d389c29fc9b60afa0a1006cb8bd78dff53910b639fdc288055baf776c",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 66,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "0ecf2c90c755af63a91a54cdd40576f9edf664dfc31b96f65cef9efb3ecf7ecf",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 67,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "6c93d9b3255282ccb524d54bca4c05d4ba32c943bde7750591ac23f8f71799b4",
+      "raw_energy": -13.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 68,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "e066cb99e91c7fb1d0c8e20e78965e1967bce2a66212a86f2081010664a4218d",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 69,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "b1a6ee3917dc882843be6a133e57d46552ba21de29384e8382013cf325584577",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 70,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "b2b7e1e83186128c4c72cd4a7bde16cc11c3b9035139be94fda7ad831e51e954",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 71,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 3,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ],
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "4a0dfb6dd9441a47dcefe85bb7aaef6f299a31913bed92d32f997a2418b425c3",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 72,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "ed65da4ee9fdbb407c95aaefa80ac8c1a942069c4cafdff1a4437bc2df283966",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 73,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "c0344d22139dac076aae9f2a3fe5912fcefdeb760f8c8a79920d3e40eb04c5bf",
+      "raw_energy": -8.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 74,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "ef2c04af65e21f305ae36bf3b394f1e88a48e02841144acb207805498c5a5671",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 75,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "f1f7adb5d14f8dc1eb3ec1875047ba2c74cf1b674a16907722651eff5e1366d0",
+      "raw_energy": -8.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 76,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "348c5879b6f44e70832d74120325c7099e73ef46351fddffe8c0653d990ed24f",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 77,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "e31771a02877d337e816ebf2f71af4795880e909c8de8e7ba8865e5045c3191a",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 78,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "19111bc5eecc9eb58fdf6aae04113a42fe8fbbbf7cbbd616e3c1e8918a4813a8",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 79,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -17.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "0bf7c5391ee0b6df7414392f1447490484f22442809b7dae9b548d71ae4cb26c",
+      "raw_energy": -17.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 80,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "0f9e351e6d8fbf790656d6b9d6d722ea3eb39791cb3298c01b1dcaa73f6f0cf7",
+      "raw_energy": -16.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 81,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "0bd8bf3626dda3498c03532f6fff4705ac943c10a4eae3478a63af94e06cbd45",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 82,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "b4015a94561733180f3ffb9f4cbedf424bd252192a0d756b852382f12ad4fc28",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 83,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "bec01aee1f6d8a40807c681863d6d94ca9e4e40ac28553ee151e5b2ae7c9f82a",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 84,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 3,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ],
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "66810f44c13d886e70c80c65446fe338c3192c68af77414614f67ee53f2d3fcb",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 85,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "a7ab8e9eb1140ef6ebac96d01d7ce56a4d5ebb74eb352bb7915ae72c8756ff24",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 86,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "4f26a3706c46afab73948e900ce095b92a7b0bb021d63acf0a2bdab9c7887e6c",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 87,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -7.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "2a17437ec10ad18a1b118f3dcdba2b7edd34e571cf545fea0aa6d34d7e2e1eb3",
+      "raw_energy": -7.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 88,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a6960674a308e2a18f84290f8f943933eadc9f175e79b8b0f1608263a9cbb0bf",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 89,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "628c7b046fc4d5df9aa0ee643ca886ffe8f45bc9e76226a7a877e2163ee1d87d",
+      "raw_energy": -13.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 90,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "8c30ad9a7c6639e399936134dd15e2fe2c77d229a1e1b0ae3125500a7e7dab27",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 91,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "df294788a7f7f766a1ff73e328791bca18020f7a9fa1cafed76b9f6a974ef622",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 92,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "55efce71d973f956b0d28217ba92afe9dc44c1a37c63a17f03d12924d719f348",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 93,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "e247398d0123883417334f28733af54f597a29b790dbdfed2c3748cc1a691393",
+      "raw_energy": -8.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 94,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "e32068a15528ba79410aa9da0b8b789e4d41a02eb8a2f251b5a4921f50a6ad49",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 95,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "c31e8eee4164c068effe9c4ed12de1e2bdfdf5681167de2279a261a050eeef20",
+      "raw_energy": -7.0,
+      "raw_matches_optimum": false,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 96,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 3,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "ad599f74acf98d6b9c3068d5343d3171c60141b15f47535bf5c437619e2632a6",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 97,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -18.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "71e0e885c2610064da7d5e00155cf559c72eb83efa4d27018498abf7e3119f70",
+      "raw_energy": -18.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 98,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "4b321ead455cd68f1c4dc2c4ed5c2eb30d7af89bd5239f6b4772c3d61c421b25",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 99,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "7fe71a6c6807bc37c34b7b589b47a6c7548797b0be6c6124efb9a42444a9cb63",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 100,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "706ece9d2bde2f1ea892c54dd9c257701c6941a30f775941f1263615b463168d",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 101,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "39c0bea4c54028ccf55e7d306343c61a50519e14a19ae18fd0bd257ed3488fd5",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 102,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "278ed7e28a39b4147480fdc6a653f18dd644ce033f1e633c6131a1f230427f5b",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 103,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "bcf916f42ae59be8ba59b907cc02efdfd27e7a0788efbc92937c2d1e23740d57",
+      "raw_energy": -13.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 104,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 3,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "9ead511f5b0fbd7c52861243d35dd515b277dd68b1df03f2e6bb0461d0cca934",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 105,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "298b5188bb28db43bb1bf081159ed8e36c762ef938d95c8b1e02e8232118f2fd",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 106,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "e14f861442864e96d2362aea88459999a54a58bcb562dfaa9da620e89864caf9",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 107,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "745249b9e2847b7ab00be65073a2e22d873c84f54a9b1ff80d9ce1c8831920c7",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 108,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "0dce038ce0c71f7b3fd04d14b7a196cf512a0d3953418d6d8f55cdffe7828b5e",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 109,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -7.0,
+      "optimum_state_count": 4,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ],
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ],
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "f69d072b314bb43d4cd66af243edb2e64818806fb66cecadfc41ca006e4890f1",
+      "raw_energy": -7.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 110,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "c811618ccb482bdbcfbc25c0af5ce6169a8456ec38cf0e063ed71c4c8aa9f1a7",
+      "raw_energy": -8.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 111,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "83a2b0eb1498fdfdc2e7ef8b7254239286e1af4f284ed6b1fe28cf7b2be02846",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 112,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "08c9e1f3d95cfac268937dea294e33f7d51538efcb4683b2403632def0e83229",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 113,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "5257de33a2caf286fd3e82f56822aeb78f2cd0e5494e98cc59655cf821e290d6",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 114,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "9249c364d379387218d522433cfd0f41d2278773b9bffc7f6f5aba73e78cdf0e",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 115,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "6dc091bd3118c1dc7970ddacba64a8fb4f8728441e04b3460ae4f195dcf5ae0e",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 116,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "61c545a9f8cc611667a82ed71f3b0278aa7ddecb32f7fb7e5abb771d711841b6",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 117,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "11c474dfd80aedccee3f1546159693ee593154addc2df16854c43602e6cf8f52",
+      "raw_energy": -15.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 118,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "dff6a8df45f17d42b1be41c7e2b65c222c226aadc791c8ab7093ae9b55b88d48",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 119,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "a703fc5f5146093e1bd43724aeeb230385fd9ba149536b50d6c8923bf9c12d18",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 120,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "0c484bcb3565aef42d1e12a4e351a332096a254e48392b28dcbfeb5fe02616bc",
+      "raw_energy": -15.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 121,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "d0b14eef5ed3d35299fb5dac8b37b1b4814e83cd4f706b4adc76fa4a6af42a96",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 122,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "52cb05b6b69cd81d239f0b888dbb4e2fca912148de6e6033681ad8d312efe3f7",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 123,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "78f233d96f7e78688c496ead1268504432cfcb6aa5ff10fa0fcfa14c573a46aa",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 124,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "72df3622b6974dbaa53c408d747609dea295faeccbbd7523e188151ed5308155",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 125,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "78eb8d484c327479ed96e4e3f192509748c46cc48dc2a2e9a2ae648dae68ca6b",
+      "raw_energy": -8.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 126,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "cb772b51ea1cf7a84af1cefc27309553c0790e89d814da60149da17e5ea90cb2",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 127,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "4669075544f757926b030d9dbd687e2e7e95d972821cef2291f9227ab949b797",
+      "raw_energy": -15.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 128,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "1915148ff1f4ce0d9a89a1402dfd187f9d57147de09b418ec9acfa8bbaa85471",
+      "raw_energy": -13.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 129,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "25d8a3c83bb9700c7779b909d59e39c2b3e240d95659a914bc0db51cecfbff1b",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 130,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "7c8f49c7dc5b5d5e585d584d21df6a2c96fdb001a2242cda0fcbf12fc9bcd719",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 131,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "69bf95decb26471cba65001bba5d565deb9cf6b6ce43ff6e39844345d47c9069",
+      "raw_energy": -16.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 132,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "e5660a3c3a48c62147291623aa91d9760fd21a320565c2a76974888036b7bd3e",
+      "raw_energy": -15.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 133,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ],
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "217de15b716fc4e9e0454868dbebfb7d8d158f08d7f6816d1b7ce89011837190",
+      "raw_energy": -8.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 134,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "5f30c58c1bcc59feefdb0b3f2ede0217d6a80711f0f8cc37f73cf10de891335f",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 135,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "c0c3b085ebd236ec167170080296a46ac42f146b244300ec731000c290a0ffe0",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 136,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "125e462f96649acbd3d7897e9508ee9c0e6abb8bca60d47ef3a0d67478b3b46a",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 137,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a478a94331b49734095c58c44d1cebe1f32e4323ddbeac78a9fcae3927a2e4be",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 138,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "631d1c8c57822db631f83529f9f6a47e7b293a90c69911ad2dc53ec757b76609",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 139,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "cb53b496c86d1f2d2c80f39e5d62c774393194d4bd5b1130611ea44b9df41dca",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 140,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "916055492ca3f08eb1e76959bcf15b416ba22a3d8804e0d430e6826c2ec4c68d",
+      "raw_energy": -16.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 141,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "2dd6373a103d7aa662d275801fb9e15b450bbd635d8fc1486f86a178f0c28bef",
+      "raw_energy": -9.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 142,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -17.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "243c2b4b6dd54232a368eca352758c1a3cbc385f66d2dc81d6fa24cd3e84cc11",
+      "raw_energy": -17.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 143,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "47eb4f886841cbd2d673e1d7d56dce9b58ecbfc001613f9fe2fb42bd5ed80b2a",
+      "raw_energy": -16.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 144,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "5c3376e203cb4d55dd48498f0adfdf42c8aacbea2562b3dfe6a1aa4030a17364",
+      "raw_energy": -9.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 145,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "f0c7932bb25be84a3ec2255ce87ffc85cf00ec9d6831b74e780a290065c29241",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 146,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "30854a983e68ac79b583022cd105d9c899b3e20a15c0dda8f604f9f6cb82fc67",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 147,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "4807a337d996728165746065b4249f6902492c8d083cf42e14931b5c8be7dfe2",
+      "raw_energy": -13.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 148,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "886a197ebc8bf643c6f998bbec34cbb83d6a37605856c22a139c91ef368e8b96",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 149,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "2e8fa57196f62f4271f74bd40454724b9672aab543aaaedcd28ed9994b5a8ca7",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 150,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.0,
+      "optimum_state_count": 4,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1,
+          1,
+          -1
+        ],
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ],
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "b9342d8a212f6e9de46ef54d88e44cd92cddc5c1673a8931a01a1451bdebc14d",
+      "raw_energy": -6.0,
+      "raw_matches_optimum": false,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 151,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "ca9fd5a59c840ed40217a04d42b589fb34ce836b3e3adb38990b31e89019b93b",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 152,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        [
+          1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "6ef14a86464f5e68ff159d8e882f96ac444fe2dbba4c74d4b3d10d442cdf1a84",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": false,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 153,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "7bca7b9d458d764b14644e7a46b755471d0d315ef6d8be1bed102bf5a4ead8ac",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 154,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "2b6cde494832fcb34661cd4b8ff113f3b9bbffedd093f7f0273c38272affc2c1",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 155,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "56757a7f3c813ba14faac592b893394d9c682dff00ef98a5073d9cb2fbc8def7",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 156,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "d3bf1f3b7d53d44c470d2cd983dc2ec8dd38c815f1e305d35db58586aa511fd6",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 157,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 3,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "96791744d6776d2f380dc344b60ab1e638eba1320aa6aff2847c914f2d4865e3",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 158,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "7ea3266a840e4dc701308f262fea4eb24212b5f86ccde5f5ba4f9dd3e0c51b85",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 159,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 3,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "3f9e95760118a36d5c0e54fa496059168d628fed29193aa914aac7ab1f2d2569",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 160,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "54c1168504bde909d33fe7061e3fc05148708f6a00152f4df25bff4526773ff7",
+      "raw_energy": -15.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 161,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "cd3d7b2d6046f98bfa1ba2d4aa03b084404242772f0ff6093b6fbc58833e1afb",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 162,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "0a9dd64e3c0016c4503f3b5a5a7bf172e7ba9faf444e9d141633004c39ac0409",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 163,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "c8dfb97f36c7fa1dcd607e582c3d04cb5c96b8897e4dfddaf1ed264a52d82690",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 164,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "08e0181c1325322bd4516079d2b5457325804df1c9ef356cd2c41106acaaa58c",
+      "raw_energy": -9.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 165,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "337a499112e68358357eef6d5e7b1511df0eebfe38b6f25ef98ec013d39f10f8",
+      "raw_energy": -8.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 166,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "7e79df6f5eec11be419952578322a5be5f9fd3e19d802865edf192c2ceac24d2",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 167,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "b1fb85fb0272d363290d6fa52df96fb2d07d4eea301caa9365735b6995d66583",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 168,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "5af630f9479dbaf0a3eff7939ddb5897ea6815f736f742a6c66956b195a3c389",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 169,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -17.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a26f5223736dca7fdccbe4afea5b2826034f1c7748dddafc1874feecf9d37372",
+      "raw_energy": -17.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 170,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "09d030a7bbdc303a06ae80f516eeb694b2ea1c2a350621d81004c107dd11be76",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 171,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "7ec1d33fcd2b5c2637ff14af9fcdd7988a6467740228755a62402116f4107136",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 172,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "a664cb8f68fc00fcde2e404df09a7ae8c34e1f0c7ceddbd27fb6abf820517516",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 173,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "734e6ed36c2b52d68d53a817283670365f3c1d337fb63dba0e447c7d010dbdd6",
+      "raw_energy": -16.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 174,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "756d694425c7382d2f7865430aa5f97a368d04cebf061ae433debaf4be78da8b",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 175,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "70776628b6894dfe59bbae82cc5df21df8fa4da5c57543f207b5cc98a222e308",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 176,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "c4a870e87a479ab40512389aa2284d8a7cccd16f196b2103343909239adce54f",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 177,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "9ac3499608906cc865e9f2d815e8f398af380b403de91697741e5fc50a936222",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 178,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "561315c0db870e8b907028a6a7eedfca79aa4fa5056f33f8a1bf00006cb17b0f",
+      "raw_energy": -16.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 179,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "e3c9f724bce4f02623adfb98086962414c1fed9254ea76284c4588fbcc9a0559",
+      "raw_energy": -16.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 180,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "6d338c3d00b951d0a3cc2c6643626305beacd503913b04ff5140f25752750606",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 181,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "391bc76507a6c727403a7dcc6f83aa91d8a964d2a74ac533b62215e5baf24373",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 182,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "4d2a7e03275ee33618115e7eaafb95a5632c747eb4bfa2c4bf8c0e81d3159a4b",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 183,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "62b0b187cb7a8059a71bb2f623182c3d7bac52d01840a4ef9ec07ce782157cfd",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 184,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "ce6ee5299386599d9dda09e0c1fe8a0b1bbde81bf11e2b3bdf428ff57838e742",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 185,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "8e56948b8f27e5545557ddcb3971062e3db47982b63bd4f3c5a65c13d4a16042",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 186,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "ffc846b816684bc3af44f78486be33224b32bd1ce73545566952cf6a5c634271",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 187,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "53d2e5775ba6828c3f35d63c55b80e3b61ec1eca676dabf358a4a0a3d3238673",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 188,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "2f9dc62f6875e8539e7d36d1d38547bd39f403fce97d4f3277b71ad935dad565",
+      "raw_energy": -15.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 189,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "1b169ec18e2089866238738ecfd301d53df9201dfef2203c17cd010c649b3697",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 190,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "de6f0ca4611238f8d62149982ef3e8bf946ff16fed2bcebe6a0acbd8de85dbdb",
+      "raw_energy": -15.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 191,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "cfb98faf2df1a76f44c1fef90a04a3daa31a1aca8fd03720367a2e43ae41a7bb",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 192,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -17.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "2649644bcc4618a027f3b6acf49f6feceeca7dd239fc4b33dd19767d3f0fc6b3",
+      "raw_energy": -17.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 193,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "c3d83a74297d6a9000513e25de200cafbf94f110d485b00a190222ae1acf8fd2",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 194,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -17.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "eb85a7ffaf53e14bc6640ae195079bb94b3f7c7ddedf54cae0b630f01c3212ac",
+      "raw_energy": -17.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 195,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 3,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a76ea00f2def4dfb951b19f9d2ab74a53defa320c2a7326914f04a8a9adf2d67",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 196,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "4af53d0ce284972681d95307a28036da6fb3a7b1698122636f055c42c731d206",
+      "raw_energy": -8.0,
+      "raw_matches_optimum": false,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 197,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "187a080b589cfd0b70484a7cd2af75a13fd825d46e7f77d0203d1856bbde6500",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": false,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 198,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "336534b9837ada87403152b48e1efb99a782e21145681cab057326ee545a530d",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 199,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 3,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ],
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "5698dd8672e1d96527644fd7c780dd1fa40a1ea3dc721ab713f1675e24b80c36",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 200,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "e922b158359a8921cc4ec3c321763bdcf65fc9455b16cd0ea22d37331b43d49c",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 201,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "388954a58779137d4e8be19ca7f62cd32171253f15da48c21a7796926ac67033",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 202,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -17.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a76f2a21dbba1d52f967e0245737f821d8cda6996f027a2bb1ba7b5e5f6738a3",
+      "raw_energy": -17.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 203,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "e8b9950c18738be68523877c13db0a042abcb1f43715450ec830934003cc0472",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 204,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "fd6b34ef9ea59a3cd6bbde0e182c65cfde81ce38deae1e2084a11956d14e560c",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 205,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -6.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "dfbd4ee411659fd5c7b4fa3a6d045e73ac74de8835fe7cb6c999c304d720ae44",
+      "raw_energy": -6.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 206,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -7.0,
+      "optimum_state_count": 3,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          -1,
+          1,
+          1,
+          1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "420bca5b77dcbc8f8c6798e9369bdb02d9881d15b77a1d8ea5505ff04a5efd46",
+      "raw_energy": -7.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 207,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "1bac6777884ae4e5290823fdca4a2ba4ce3b56980ec536d1fe0a2a7ad89b0874",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 208,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "6f764fe398062536fc32e42dcd0776e1574bf66ced1c417a2fe9b621fc7a9aec",
+      "raw_energy": -9.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 209,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "714708ba207892e373cc310e4ce430d2efbd2c726e503fa051f679b45b2f8356",
+      "raw_energy": -15.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 210,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "0ce664d5dee903a5501a18fa4e8666914097e4e6701f7e9e683ba3196c627a24",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 211,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "0e5cca9f0f75386fd0ed85c542d4ad9ac6c0c31c31e93ea040e0826e7ddec961",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 212,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "ee95e4b84ca174d85bd3c8cc55f8668dfc7fc319b5eee3e4abd3e7a89984cbda",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 213,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "2f5db1abe785097e9f69262b47a32fdd50fcd276d891faee0db0e640bf66bd95",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 214,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "b26a836a2f2c23c46e1a902b66cd70b8239f9420a702387bc40b6dcdfc2cc512",
+      "raw_energy": -13.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 215,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "41da3ed46f037aa9783aee7b3145ff8cbf61eb29bc2bc102bf9f6a961ed8bb46",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 216,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ],
+        [
+          -1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "fbb75ec10623392e5a1e360da374942c0be5d75ba2e78ab27082642189a2fd67",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 217,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -18.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "4e234a2dd5cb3bd24094c4dc3689bfc6af60f3c30c9f2af36aade8cac7b4bec4",
+      "raw_energy": -18.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 218,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "bf3a2b71d48e6235799d47f7542a7c05019ffa9dfe7ca8ace897ccc96b16fad0",
+      "raw_energy": -16.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 219,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "dd0405a9939a8c4fa98d3526b5cc6ad93d3a34fed8a2ce8ea7a7ccb47e8ec1cf",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 220,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "1fadbd6039f1f7a30410e45bd0087496e115b16a58530c2a0f977f32969a3a3a",
+      "raw_energy": -16.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 221,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          -1
+        ],
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "aa421f37bc548147b6584db81f14b3f9461e8f714414d68151e77657c2b89f67",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 222,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -16.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "cc0d58bce8dab17822123d9ddde0f9449d289e9592ec414729626761f1f1ed49",
+      "raw_energy": -16.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 223,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -17.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "d8839087b407cc9f4715309bdf7020ee96e106fb22dc256da45406ef47839935",
+      "raw_energy": -17.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 224,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "25fef4663a5cb313b7a9eed4d591e60e6e37ef4441da1c20194c430d5e519139",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 225,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -7.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "4614db289a567a1a1729d9873ee6103420eaa7d3a89fa774d2b8105139fb0e96",
+      "raw_energy": -7.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 226,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "6d4ef3c106a9c32446e6d0c662c13024352c1dc57f106e5655ae4575207e89d5",
+      "raw_energy": -12.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 227,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "f2d1fcd90a734468a0f73f525d3e9b1daa2aaaece09fba78eadb5ac1d4b2a690",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 228,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "8a87a64774a7eedffd37ec24b4797d8f85fca1d27a262dcd23cfadcf87e372fd",
+      "raw_energy": -13.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 229,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "13c793fe3e77ba3e62fa86bc821c2e5e79632e5e34a086d2487b3447ff4d738b",
+      "raw_energy": -7.0,
+      "raw_matches_optimum": false,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 230,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "7accc1f8d0774e7e3a8deb2f4f1c6761308020c0a3229baf1e3c42ec53bfc860",
+      "raw_energy": -9.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 231,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          -1,
+          1
+        ],
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "a694c11a4a3c6a24585f36e788ee25c526bda7c60475494bb8c8be336a948214",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 232,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "ac2c36e6b792b34aadec6b65bb7584d371a25cbc4339280474081a3f5d9a1e10",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 233,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "4c885013df4efcad15d676afd6a2f8038308dcc4575700e17d6d9270c788c46d",
+      "raw_energy": -11.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 234,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "79aadf4feaf89f62354b1e21ac151b419b66a83cf0248ebbaa9139aaac48bde9",
+      "raw_energy": -10.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 235,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -10.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "ed3e5c87c64971029995ce27488177e07c218c7aff21cf4b83484474c5225a23",
+      "raw_energy": -10.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 236,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "2f7725c2277a4eec1836191c5ca8641b0dc324f286a1f13d60be62cac9fa55dd",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 237,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "374b04986798a1886e601cc6c0fc11d89766855f1bfaa335ca5903b6ae8e0a55",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 238,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "4ae0648a04cbf34675eedf93d35f66b2735f0538759b696838fb9b3ba78aad67",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 239,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "7e973b91899eccbc30e9510b25c3a3154a4f266424643d7147c6bf7e268d389b",
+      "raw_energy": -13.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 240,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -11.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "541bf3ab4ffbcf5bc09c09869c9c6b8524529543c5bf07fc2b69f771ff59aed4",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 241,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          1,
+          1
+        ],
+        [
+          -1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "267acdbf978b92bc6e9fc7aafb086602c3dcc5495e61c3eff1a26503cec08a17",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 242,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "a1a4d937191c22be35caf994b40f71508ec6c9dc686c90e69778c3f370b1095c",
+      "raw_energy": -8.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 243,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "dbd7c7cfd1dc226f0ef8d42db40ad798ae67fd758bc7f3e184cc283b9563134c",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 244,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "f664daf40a1c18c0e24de5a00995d1c314199f1b3c83a9dee638f1e16a82e819",
+      "raw_energy": -15.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 245,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -15.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "929921dab54f0c06ece8cd7445206b3e58626628143398375057e2c835418b12",
+      "raw_energy": -15.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 246,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "5d8e8a100e2c42523b85bb9b09e99bd3363c13f84d706b333ce7c247c11dd591",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 247,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          -1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "d01972345384d215e1e15b697319dba658305bb75179655457394171af7cbb7f",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 248,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "fbf9188358407718744e5e9617d42598648037e2e98d1c7145dcd73bd0f750af",
+      "raw_energy": -13.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 249,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          1,
+          -1,
+          1
+        ]
+      ],
+      "problem_sha256": "a1e3a13aabae8f6056a146458d8ab43c2414f47f88c74aedef86f188abd75ef3",
+      "raw_energy": -14.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": false,
+      "classification": "NON_UNIQUE_REJECTED",
+      "index": 250,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -13.0,
+      "optimum_state_count": 2,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "d031fda91915d2a38e4d30707d39c23d23a73c9f293623fe3ce460f19853f682",
+      "raw_energy": -11.0,
+      "raw_matches_optimum": false,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 251,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "1fa9f693a7dae50780f34ca7e54c25d3220753ab76831fe93c66fcd1bd341192",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 252,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -12.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          -1
+        ]
+      ],
+      "problem_sha256": "9f6b672c22364a1b2d54fa30e943f3a5c7e4232abb8b8af0a6c542acfb417e91",
+      "raw_energy": -12.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 253,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -9.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "37e0b1b914fcd278e23128c91a8666d7e7c072612d999cd863765c5b69c190ad",
+      "raw_energy": -9.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 254,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -8.0,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          -1,
+          -1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "problem_sha256": "eceb6dbfa4ecb8246804ab9d875c4ddc971b29d160698dd075a180cbfb9892e0",
+      "raw_energy": -8.0,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "state_count_enumerated": 32
+    },
+    {
+      "accepted": true,
+      "classification": "UNIQUE_ACCEPTED_CORRECT",
+      "index": 255,
+      "mode_penalty_max_abs_delta": 0.0,
+      "optimum_energy": -14.5,
+      "optimum_state_count": 1,
+      "optimum_states": [
+        [
+          1,
+          -1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "problem_sha256": "930e2cbfa61693bb3eb6aca5a9758154dec541974d5bb48da2ddab1a56677b58",
+      "raw_energy": -14.5,
+      "raw_matches_optimum": true,
+      "raw_spins": [
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "state_count_enumerated": 32
+    }
+  ],
+  "preoracle_commit": "68aefc93216a6683dcc9ef42b1b304e2ae943433",
+  "preoracle_evidence_sha256": "e83af7481b1534e0808425c65ed0ccf06ed07cc7c026e924645fa9af507baa3b",
+  "promotion_criterion": {
+    "accepted_incorrect_maximum": 0,
+    "batch_size_required": 256,
+    "minimum_unique_optimum_cases": 160,
+    "native_no_smuggle_must_pass": true,
+    "non_unique_accepted_maximum": 0,
+    "oracle_calls_before_preoracle_seal": 0,
+    "rejected_unique_correct_maximum": 0,
+    "restoration_all_cases": true,
+    "reuse_all_cases": true,
+    "strict_controls_all_cases": true,
+    "uninterpretable_maximum": 0,
+    "unique_raw_correct_rate_minimum": 1.0
+  },
+  "schema": "catalytic_waveform_ising_v3_batch_results_v1",
+  "summary": {
+    "batch_size": 256,
+    "classification_counts": {
+      "NON_UNIQUE_ACCEPTED": 0,
+      "NON_UNIQUE_REJECTED": 42,
+      "UNIQUE_ACCEPTED_CORRECT": 214,
+      "UNIQUE_ACCEPTED_INCORRECT": 0,
+      "UNIQUE_REJECTED_CORRECT": 0,
+      "UNIQUE_REJECTED_INCORRECT": 0
+    },
+    "decision": "CATALYTIC_WAVEFORM_ISING_V3_VERIFIED",
+    "maximum_mode_penalty_delta": 0.0,
+    "non_unique_count": 42,
+    "non_unique_raw_optimum_matches": 32,
+    "promotion_checks": {
+      "accepted_incorrect_maximum": true,
+      "batch_size_required": true,
+      "minimum_unique_optimum_cases": true,
+      "native_no_smuggle_must_pass": true,
+      "non_unique_accepted_maximum": true,
+      "oracle_calls_before_preoracle_seal": true,
+      "rejected_unique_correct_maximum": true,
+      "restoration_all_cases": true,
+      "reuse_all_cases": true,
+      "strict_controls_all_cases": true,
+      "uninterpretable_maximum": true,
+      "unique_raw_correct_rate_minimum": true
+    },
+    "promotion_pass": true,
+    "state_count_enumerated": 8192,
+    "unique_count": 214,
+    "unique_raw_correct": 214,
+    "unique_raw_correct_rate": 1.0
+  }
+}
