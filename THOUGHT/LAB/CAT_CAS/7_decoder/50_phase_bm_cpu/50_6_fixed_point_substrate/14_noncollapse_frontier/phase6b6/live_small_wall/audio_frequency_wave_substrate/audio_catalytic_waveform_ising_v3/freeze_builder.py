@@ -63,6 +63,8 @@ RETIRED_LOCAL_CLOSURE_BATCH_FILE = PACKAGE_DIR / "V3_RETIRED_LOCAL_CLOSURE_BATCH
 RETIRED_LOCAL_CLOSURE_BATCH_ORDERED_SHA256 = "ea1c25fbe665c137aaacd693e20cc0ed6dad58dacbbdb9761503a303b6c1f80e"
 RETIRED_WHOLE_MODULE_POLICY_BATCH_FILE = PACKAGE_DIR / "V3_RETIRED_WHOLE_MODULE_POLICY_BATCH_CUSTODY.json"
 RETIRED_WHOLE_MODULE_POLICY_BATCH_ORDERED_SHA256 = "f7890f3ca8a8e455ea86a53a2bb98d323047b939a80326e8188430a52d21aac6"
+RETIRED_SELECTION_SEMANTICS_BATCH_FILE = PACKAGE_DIR / "V3_RETIRED_SELECTION_SEMANTICS_BATCH_CUSTODY.json"
+RETIRED_SELECTION_SEMANTICS_BATCH_ORDERED_SHA256 = "554db68ff639ba6f2fb1a652f5ed27b919f8f7c5918c83d412781a873f5fc2a0"
 SOURCE_EXECUTION_CONTRACT = {
     "bytecode_cache_inputs_forbidden_under_package": True,
     "bytecode_cache_writes_disabled": True,
@@ -72,11 +74,13 @@ SOURCE_EXECUTION_CONTRACT = {
     "whole_module_ast_policy_required": True,
     "independent_compiled_bytecode_policy_required": True,
     "sole_selection_capable_region": "project_boundary:body",
+    "selection_semantics_policy_required": True,
+    "semantic_mutation_fixture_count": 16,
 }
 
 STARTING_REMOTE_HEAD = "8c44761ba48736e20786256ca3441ea99c36004b"
-REPAIR_PARENT_PREORACLE_COMMIT = "68aefc93216a6683dcc9ef42b1b304e2ae943433"
-PUBLIC_BATCH_SEED = "CATCAS-V3-WHOLE-MODULE-NATIVE-POLICY-REPAIR-BATCH-2026-07-22"
+REPAIR_PARENT_PREORACLE_COMMIT = "040015443fd4c7f667ff5e91d728d450324ad8ba"
+PUBLIC_BATCH_SEED = "CATCAS-V3-SELECTION-SEMANTICS-REPAIR-BATCH-2026-07-22"
 BATCH_SIZE = 256
 COUPLING_VALUES = (-2.0, -1.0, 1.0, 2.0)
 FIELD_VALUES = (-2.0, -1.0, -0.5, 0.5, 1.0, 2.0)
@@ -232,6 +236,23 @@ def excluded_development_identities() -> set[str]:
     identities.update(retired_whole_module_policy_identities)
     if len(identities) != 1907:
         raise RuntimeError("complete 1907-case exclusion set required")
+    retired_selection_semantics = json.loads(
+        RETIRED_SELECTION_SEMANTICS_BATCH_FILE.read_text(encoding="utf-8")
+    )
+    if (
+        retired_selection_semantics["ordered_batch_sha256"]
+        != RETIRED_SELECTION_SEMANTICS_BATCH_ORDERED_SHA256
+    ):
+        raise RuntimeError("retired selection-semantics batch identity drift")
+    retired_selection_semantics_identities = {
+        record["problem_sha256"]
+        for record in retired_selection_semantics["ordered_instances"]
+    }
+    if len(retired_selection_semantics_identities) != 256:
+        raise RuntimeError("complete retired selection-semantics batch required")
+    identities.update(retired_selection_semantics_identities)
+    if len(identities) != 2163:
+        raise RuntimeError("complete 2163-case exclusion set required")
     return identities
 
 
@@ -261,7 +282,7 @@ def batch_document() -> dict[str, Any]:
         "batch_size": BATCH_SIZE,
         "coupling_values": list(COUPLING_VALUES),
         "development_identity_count_excluded": 627,
-        "total_identity_count_excluded": 1907,
+        "total_identity_count_excluded": 2163,
         "field_values": list(FIELD_VALUES),
         "generation_rule": (
             "SHA256(public_seed|generator_index|coordinate), modulo frozen value list; "
@@ -340,9 +361,10 @@ def freeze_document(batch: dict[str, Any]) -> dict[str, Any]:
         "retired_transitive_custody_batch_ordered_sha256": RETIRED_TRANSITIVE_BATCH_ORDERED_SHA256,
         "retired_local_closure_batch_ordered_sha256": RETIRED_LOCAL_CLOSURE_BATCH_ORDERED_SHA256,
         "retired_whole_module_policy_batch_ordered_sha256": RETIRED_WHOLE_MODULE_POLICY_BATCH_ORDERED_SHA256,
+        "retired_selection_semantics_batch_ordered_sha256": RETIRED_SELECTION_SEMANTICS_BATCH_ORDERED_SHA256,
         "source_execution_contract": SOURCE_EXECUTION_CONTRACT,
         "promotion_criterion": frozen_promotion_criterion(),
-        "schema": "catalytic_waveform_ising_v3_repaired_freeze_v5",
+        "schema": "catalytic_waveform_ising_v3_repaired_freeze_v6",
         "stress_results_sha256": sha256_file(STRESS_RESULTS),
         "stress_summary": stress_result["summary"],
         "transitive_dependency_sha256": {

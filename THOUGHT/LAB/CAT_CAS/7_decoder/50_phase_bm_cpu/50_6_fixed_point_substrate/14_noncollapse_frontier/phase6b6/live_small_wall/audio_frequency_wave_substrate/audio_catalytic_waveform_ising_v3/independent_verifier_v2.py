@@ -194,6 +194,40 @@ def _instruction_violation(
     }
 
 
+def _conditional_store_after_comparison(
+    instructions: Sequence[Any],
+) -> list[tuple[Any, tuple[str, ...]]]:
+    findings: list[tuple[Any, tuple[str, ...]]] = []
+    for index, item in enumerate(instructions):
+        if item.opname != "COMPARE_OP":
+            continue
+        jump = next(
+            (
+                candidate
+                for candidate in instructions[index + 1 : index + 6]
+                if "JUMP" in candidate.opname
+                and isinstance(candidate.argval, int)
+                and candidate.argval > candidate.offset
+            ),
+            None,
+        )
+        if jump is None:
+            continue
+        stores = tuple(
+            sorted(
+                {
+                    str(candidate.argval)
+                    for candidate in instructions
+                    if jump.offset < candidate.offset < int(jump.argval)
+                    and candidate.opname.startswith("STORE_")
+                }
+            )
+        )
+        if stores:
+            findings.append((item, stores))
+    return findings
+
+
 def independent_integrity_analysis(source: str) -> dict[str, Any]:
     tree = ast.parse(source, filename=str(MACHINE_SOURCE))
     required_native_executables = {
@@ -253,6 +287,15 @@ def independent_integrity_analysis(source: str) -> dict[str, Any]:
         "sorted",
         "take_along_axis",
         "where",
+    }
+    aggregation_names = {
+        "dot",
+        "einsum",
+        "inner",
+        "prod",
+        "sum",
+        "tensordot",
+        "vdot",
     }
     dynamic_names = {
         "__import__",
@@ -334,6 +377,69 @@ def independent_integrity_analysis(source: str) -> dict[str, Any]:
                     )
                 )
             continue
+        for index, item in enumerate(instructions):
+            if item.opname != "COMPARE_OP":
+                continue
+            for candidate in instructions[index + 1 : index + 12]:
+                if "JUMP" in candidate.opname:
+                    break
+                if candidate.opname == "BINARY_SUBSCR":
+                    violations.append(
+                        _instruction_violation(
+                            "bytecode_data_dependent_subscript",
+                            path,
+                            item,
+                            item.argrepr,
+                        )
+                    )
+                    break
+
+        builtin_minmax = [
+            item
+            for item in instructions
+            if item.opname in {"LOAD_GLOBAL", "LOAD_NAME"}
+            and item.argval in {"min", "max"}
+        ]
+        safe_scalar_minimum = bool(
+            path == "<module>.SpectralPhaseLaw.validate"
+            and len(builtin_minmax) == 1
+            and builtin_minmax[0].argval == "min"
+        )
+        if builtin_minmax and not safe_scalar_minimum:
+            for item in builtin_minmax:
+                violations.append(
+                    _instruction_violation(
+                        "bytecode_builtin_reduction_selection",
+                        path,
+                        item,
+                        str(item.argval),
+                    )
+                )
+        for name in sorted(set(code.co_names) & aggregation_names):
+            native_hits.add(name)
+            anchor = next(
+                (item for item in instructions if item.argval == name),
+                instructions[0],
+            )
+            violations.append(
+                _instruction_violation(
+                    "bytecode_scalar_aggregation_capability", path, anchor, name
+                )
+            )
+        if path not in {
+            "<module>.as_carrier_bank",
+            "<module>.restore_carrier",
+        }:
+            for anchor, stores in _conditional_store_after_comparison(instructions):
+                violations.append(
+                    _instruction_violation(
+                        "bytecode_conditional_assignment",
+                        path,
+                        anchor,
+                        ",".join(stores),
+                    )
+                )
+
         for name in sorted(set(code.co_names) & selection_names):
             native_hits.add(name)
             anchor = next(
@@ -511,6 +617,51 @@ def static_integrity() -> dict[str, Any]:
         if source.count(anchor) != 1:
             raise RuntimeError(f"independent whole-module anchor drift: {label}")
     mutations = [
+        (
+            "lexicographic_builtin_min_selection",
+            source.replace(
+                anchors["relational"],
+                "    candidates = [(1.0, 0), (0.0, 1)]\n"
+                "    chosen = min(candidates)[1]\n"
+                + anchors["relational"],
+                1,
+            ),
+            "bytecode_builtin_reduction_selection",
+        ),
+        (
+            "boolean_mask_mode_selection",
+            source.replace(
+                anchors["relational"],
+                "    PHASE_MODES[:, np.real(PHASE_MODES[0]) > 0.0]\n"
+                + anchors["relational"],
+                1,
+            ),
+            "bytecode_data_dependent_subscript",
+        ),
+        (
+            "scalar_energy_aggregation",
+            source.replace(
+                anchors["relational"],
+                "    np.sum(np.real(PHASE_MODES), axis=0)\n"
+                + anchors["relational"],
+                1,
+            ),
+            "bytecode_scalar_aggregation_capability",
+        ),
+        (
+            "neutral_conditional_assignment",
+            source.replace(
+                anchors["relational"],
+                "    slot = 0\n"
+                "    for candidate in range(2):\n"
+                "        if candidate > slot:\n"
+                "            slot = candidate\n"
+                + anchors["relational"],
+                1,
+            ),
+            "bytecode_conditional_assignment",
+        ),
+
         (
             "class_decorator_selection",
             source.replace(

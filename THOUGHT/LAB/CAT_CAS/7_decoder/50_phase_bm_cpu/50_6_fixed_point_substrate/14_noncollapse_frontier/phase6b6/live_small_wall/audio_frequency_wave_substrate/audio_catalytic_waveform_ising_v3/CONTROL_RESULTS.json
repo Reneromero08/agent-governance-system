@@ -20656,6 +20656,38 @@
     "mutation_fixture_results": [
       {
         "expected_code": "selection_capability_outside_boundary",
+        "name": "lexicographic_builtin_min_selection",
+        "observed_codes": [
+          "selection_capability_outside_boundary"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "native_scalar_aggregation_capability",
+        "name": "scalar_energy_aggregation",
+        "observed_codes": [
+          "native_scalar_aggregation_capability"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "data_dependent_subscript_outside_boundary",
+        "name": "boolean_mask_mode_selection",
+        "observed_codes": [
+          "data_dependent_subscript_outside_boundary"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "data_dependent_conditional_assignment",
+        "name": "neutral_conditional_assignment",
+        "observed_codes": [
+          "data_dependent_conditional_assignment"
+        ],
+        "pass": true
+      },
+      {
+        "expected_code": "selection_capability_outside_boundary",
         "name": "class_decorator_selection",
         "observed_codes": [
           "selection_capability_outside_boundary",
@@ -20694,6 +20726,7 @@
         "expected_code": "module_side_effect_target",
         "name": "module_subscript_side_effect",
         "observed_codes": [
+          "data_dependent_subscript_outside_boundary",
           "module_side_effect_target",
           "selection_capability_outside_boundary",
           "selection_reference_outside_boundary"
@@ -20722,6 +20755,7 @@
         "expected_code": "manual_selection_loop",
         "name": "manual_winner_loop",
         "observed_codes": [
+          "data_dependent_conditional_assignment",
           "manual_selection_loop"
         ],
         "pass": true

@@ -112,3 +112,30 @@ Both analyzers must pass twelve negative mutations and one harmless elementwise
 positive mutation. The V3 machine source, numerical law, thresholds and claim ceiling
 remain unchanged. Only a new sixth freeze, remote pre-oracle seal, oracle adjudication,
 and passing final review may authorize V3.
+
+The sixth ordered batch
+`554db68ff639ba6f2fb1a652f5ed27b919f8f7c5918c83d412781a873f5fc2a0`
+produced 221/221 accepted unique optima and rejected all 35 non-unique cases.
+Every numerical criterion, strict control and restoration/reuse path passed. Independent
+numerical reviewer `V3-SIXTH-BATCH-INDEPENDENT-NUMERICAL-ADJUDICATOR-03` and custody
+reviewer `CODEX-V3-SIXTH-CUSTODY-REVIEW-2026-07-22-A` returned PASS with no findings.
+The exact batch, freeze, pre-oracle evidence, oracle results, traces, independent
+verification, lane state and final manifest are preserved under
+`V3_RETIRED_SELECTION_SEMANTICS_*`.
+
+Independent mechanism review nevertheless demonstrated a high-severity assurance
+defect. An in-memory source variant could compute scalar candidate energies, choose a
+mode with lexicographic built-in `min(...)`, apply that choice as a reversible complex
+operator, and still pass both analyzers. The committed V3 machine contained no such
+path and its numerical evidence remains valid, but the claimed fail-closed assurance
+was false. Post-oracle repair cannot qualify the sixth batch, so it is retired without
+promotion and all 256 identities are excluded from the next batch.
+
+The seventh repair rejects non-boundary built-in reductions except the frozen scalar
+law validation, scalar energy aggregation capabilities, comparison-derived subscripts,
+and conditional assignments. The primary AST and independent compiled-code policies
+must each pass an expanded 16-case semantic mutation matrix, including the demonstrated
+lexicographic selection route, while still accepting harmless elementwise waveform
+arithmetic. The V3 machine source, numerical law, thresholds and claim ceiling remain
+unchanged. Only a new seventh freeze, remote pre-oracle seal, oracle adjudication and
+passing final review may authorize V3.

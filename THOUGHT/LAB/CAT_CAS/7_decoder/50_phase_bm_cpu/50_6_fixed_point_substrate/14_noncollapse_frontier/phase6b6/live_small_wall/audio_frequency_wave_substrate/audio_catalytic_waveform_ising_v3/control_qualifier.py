@@ -174,6 +174,70 @@ DYNAMIC_CAPABILITIES = {
 }
 
 
+FORBIDDEN_AGGREGATION_CAPABILITIES = {
+    "dot",
+    "einsum",
+    "inner",
+    "prod",
+    "sum",
+    "tensordot",
+    "vdot",
+}
+
+
+def _self_scalar_attribute(node: ast.AST) -> bool:
+    return bool(
+        isinstance(node, ast.Attribute)
+        and isinstance(node.value, ast.Name)
+        and node.value.id == "self"
+    )
+
+
+def _safe_builtin_minmax(node: ast.Call, region: str) -> bool:
+    return bool(
+        region == "SpectralPhaseLaw.validate"
+        and isinstance(node.func, ast.Name)
+        and node.func.id in {"min", "max"}
+        and len(node.args) == 2
+        and not node.keywords
+        and all(_self_scalar_attribute(argument) for argument in node.args)
+    )
+
+
+def _region_name(node: ast.AST, parents: dict[ast.AST, ast.AST]) -> str:
+    function_name: str | None = None
+    class_name: str | None = None
+    current = node
+    while current in parents:
+        current = parents[current]
+        if function_name is None and isinstance(
+            current, (ast.FunctionDef, ast.AsyncFunctionDef)
+        ):
+            function_name = current.name
+        elif class_name is None and isinstance(current, ast.ClassDef):
+            class_name = current.name
+    if function_name is not None and class_name is not None:
+        return f"{class_name}.{function_name}"
+    if function_name is not None:
+        return function_name
+    if class_name is not None:
+        return class_name
+    return "<module>"
+
+
+def _data_dependent_slice(node: ast.Subscript) -> bool:
+    for child in ast.walk(node.slice):
+        if isinstance(child, (ast.BoolOp, ast.Compare, ast.IfExp)):
+            return True
+        if isinstance(child, ast.Call):
+            leaf = _call_leaf(child)
+            if leaf in SELECTION_CAPABILITIES:
+                return True
+            if isinstance(child.func, ast.Name) and leaf in {"min", "max"}:
+                return True
+    return False
+
+
 def _call_leaf(node: ast.Call) -> str | None:
     if isinstance(node.func, ast.Name):
         return node.func.id
@@ -211,6 +275,11 @@ def _violation(code: str, node: ast.AST, detail: str) -> dict[str, Any]:
 
 def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
     tree = ast.parse(source, filename=str(MACHINE_SOURCE))
+    parents = {
+        child: parent
+        for parent in ast.walk(tree)
+        for child in ast.iter_child_nodes(parent)
+    }
     allowed_import_roots = {
         "__future__",
         "dataclasses",
@@ -277,6 +346,7 @@ def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
     executable_types = (ast.stmt, ast.expr, ast.comprehension, ast.keyword)
     for node in ast.walk(tree):
         inside_boundary = node in boundary_nodes
+        region = _region_name(node, parents)
         if isinstance(node, executable_types):
             executable_manifest.append(
                 {
@@ -307,14 +377,23 @@ def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
             continue
         if isinstance(node, ast.Call):
             leaf = _call_leaf(node)
-            if leaf in SELECTION_CAPABILITIES or (
-                leaf in {"min", "max"}
-                and any(keyword.arg == "key" for keyword in node.keywords)
+            builtin_minmax = bool(
+                isinstance(node.func, ast.Name) and leaf in {"min", "max"}
+            )
+            if (
+                leaf in SELECTION_CAPABILITIES
+                or (builtin_minmax and not _safe_builtin_minmax(node, region))
             ):
                 selection_hits.append(str(leaf))
                 violations.append(
                     _violation(
                         "selection_capability_outside_boundary", node, str(leaf)
+                    )
+                )
+            if leaf in FORBIDDEN_AGGREGATION_CAPABILITIES:
+                violations.append(
+                    _violation(
+                        "native_scalar_aggregation_capability", node, str(leaf)
                     )
                 )
             if leaf in DYNAMIC_CAPABILITIES:
@@ -324,6 +403,7 @@ def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
                 violations.append(
                     _violation("native_to_boundary_call", node, str(leaf))
                 )
+
         if isinstance(node, ast.Attribute) and node.attr in SELECTION_CAPABILITIES:
             selection_hits.append(node.attr)
             violations.append(
@@ -342,6 +422,33 @@ def analyze_no_smuggle_source(source: str) -> dict[str, Any]:
             violations.append(
                 _violation("matrix_product_outside_boundary", node, "MatMult")
             )
+        if isinstance(node, ast.Subscript) and _data_dependent_slice(node):
+            violations.append(
+                _violation(
+                    "data_dependent_subscript_outside_boundary",
+                    node,
+                    ast.unparse(node.slice),
+                )
+            )
+        if isinstance(node, ast.If) and region not in {
+            "as_carrier_bank",
+            "restore_carrier",
+        }:
+            conditional_assignments = [
+                child
+                for statement in node.body
+                for child in ast.walk(statement)
+                if isinstance(child, (ast.Assign, ast.AnnAssign, ast.AugAssign))
+            ]
+            if conditional_assignments:
+                violations.append(
+                    _violation(
+                        "data_dependent_conditional_assignment",
+                        node,
+                        region,
+                    )
+                )
+
         if isinstance(node, ast.Lambda):
             violations.append(_violation("lambda_outside_boundary", node, "Lambda"))
         if isinstance(node, (ast.For, ast.While)):
@@ -492,6 +599,51 @@ def static_no_smuggle() -> dict[str, Any]:
         if source.count(anchor) != 1:
             raise RuntimeError(f"whole-module mutation anchor drift: {label}")
     mutations = [
+        (
+            "lexicographic_builtin_min_selection",
+            source.replace(
+                anchors["relational"],
+                "    candidates = [(1.0, 0), (0.0, 1)]\n"
+                "    chosen = min(candidates)[1]\n"
+                + anchors["relational"],
+                1,
+            ),
+            "selection_capability_outside_boundary",
+        ),
+        (
+            "scalar_energy_aggregation",
+            source.replace(
+                anchors["relational"],
+                "    np.sum(np.real(PHASE_MODES), axis=0)\n"
+                + anchors["relational"],
+                1,
+            ),
+            "native_scalar_aggregation_capability",
+        ),
+        (
+            "boolean_mask_mode_selection",
+            source.replace(
+                anchors["relational"],
+                "    PHASE_MODES[:, np.real(PHASE_MODES[0]) > 0.0]\n"
+                + anchors["relational"],
+                1,
+            ),
+            "data_dependent_subscript_outside_boundary",
+        ),
+        (
+            "neutral_conditional_assignment",
+            source.replace(
+                anchors["relational"],
+                "    slot = 0\n"
+                "    for candidate in range(2):\n"
+                "        if candidate > slot:\n"
+                "            slot = candidate\n"
+                + anchors["relational"],
+                1,
+            ),
+            "data_dependent_conditional_assignment",
+        ),
+
         (
             "class_decorator_selection",
             source.replace(

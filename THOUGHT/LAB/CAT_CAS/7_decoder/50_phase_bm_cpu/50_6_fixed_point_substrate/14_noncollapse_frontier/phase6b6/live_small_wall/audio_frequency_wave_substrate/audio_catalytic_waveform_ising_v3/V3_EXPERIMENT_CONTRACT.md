@@ -68,7 +68,7 @@ change every tested phase-penalty vector, and both must change or destroy the
 frozen primary discriminator's extracted result.
 
 The repaired prospective batch excludes all 627 development/stress identities
-and all 1,280 identities from the five retired V3 prospective batches. The freeze
+and all 1,536 identities from the six retired V3 prospective batches. The freeze
 binds the canonical batch bytes, all ten V3 sources, all five source dependencies
 used by development-only predecessor replay, the machine fingerprint, and the
 Python/NumPy environment.
@@ -82,8 +82,11 @@ bodies, nested code, comprehensions, and lambdas. Only the exact body of
 `project_boundary` may use mode-selection capabilities. A separately implemented
 compiled-bytecode audit must cover module and class initialization plus every code
 object. Both gates must reject the frozen whole-module adversarial mutation matrix and
-accept harmless elementwise waveform arithmetic. Dynamic execution and unclassified
-executable regions fail closed. Prospective execution compiles exact
+accept harmless elementwise waveform arithmetic. The policy also rejects built-in
+lexicographic reductions, scalar energy aggregations, comparison-derived subscripts,
+and conditional assignments that could select a mode without using a named ordering
+function. Dynamic execution and unclassified executable regions fail closed. Both
+analyzers must pass the frozen 16-case semantic mutation matrix. Prospective execution compiles exact
 bound source bytes with optimization zero and bytecode writes disabled. It rejects
 any executable cache under the package, including ignored __pycache__ input. A dirty
 Git tree, source drift, or executable cache fails closed before an evidence byte is
