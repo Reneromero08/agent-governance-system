@@ -1,0 +1,62 @@
+{
+  "archive_equality": true,
+  "archive_inventory": {
+    "deployment_custody": {
+      "member": "remote_spatial_root/RELATION_SPATIAL_DEPLOYMENT_CUSTODY.json",
+      "sha256": "65f80dfb62234e1dd02f03dd885884922599380a3552ddd5e79b72ea04cf1399",
+      "size_bytes": 626
+    },
+    "feature_freeze": {
+      "member": "remote_spatial_root/_relation_spatial_owned_outputs/attempt_1/feature_freeze.json",
+      "sha256": "1d6e2ebc5db4722689279504f345f745b18a5379a99557759a551caa67b4a67e",
+      "size_bytes": 696
+    },
+    "manifest": {
+      "member": "remote_spatial_root/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json",
+      "sha256": "166061fb9e4791be120fa77815ec45c340f9ffcdb51c1bdd685f9afb31f53e44",
+      "size_bytes": 2242
+    },
+    "pair_observations": {
+      "member": "remote_spatial_root/_relation_spatial_owned_outputs/attempt_1/pair_observations.jsonl",
+      "sha256": "b529cb95f476f6113e879d9c6c17ad133e6ce869b637df18f8d8e2ceab2d749b",
+      "size_bytes": 687175631
+    },
+    "raw_records": {
+      "member": "remote_spatial_root/_relation_spatial_owned_outputs/attempt_1/raw_records.jsonl",
+      "sha256": "82abe7559d1fa555b805a8086ef07401f8f5c38617b4e6c1745cb725382ae403",
+      "size_bytes": 4797640
+    },
+    "runtime_binary": {
+      "member": "remote_spatial_root/relation_spatial_runtime",
+      "sha256": "c0468dfc0c496d2efbf007cd2b939beba43500fb40b25224a9ae2eff46948c30",
+      "size_bytes": 99000
+    },
+    "source_death_receipts": {
+      "member": "remote_spatial_root/_relation_spatial_owned_outputs/attempt_1/source_death_receipts.jsonl",
+      "sha256": "52a5fce2753b0dd2edf48c1ea2c63e8da7224f76c048edc7f9e870894f96d78c",
+      "size_bytes": 2403242
+    },
+    "target_execution_receipt": {
+      "member": "remote_spatial_root/_relation_spatial_owned_outputs/attempt_1/target_execution_receipt.json",
+      "sha256": "62c2079971bed45c8a7954114f9764cbb1eb00fe56610a227127f6b29d5378f8",
+      "size_bytes": 379
+    }
+  },
+  "archive_member_map": {
+    "deployment_custody": "remote_spatial_root/RELATION_SPATIAL_DEPLOYMENT_CUSTODY.json",
+    "feature_freeze": "remote_spatial_root/_relation_spatial_owned_outputs/attempt_1/feature_freeze.json",
+    "manifest": "remote_spatial_root/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json",
+    "pair_observations": "remote_spatial_root/_relation_spatial_owned_outputs/attempt_1/pair_observations.jsonl",
+    "raw_records": "remote_spatial_root/_relation_spatial_owned_outputs/attempt_1/raw_records.jsonl",
+    "runtime_binary": "remote_spatial_root/relation_spatial_runtime",
+    "source_death_receipts": "remote_spatial_root/_relation_spatial_owned_outputs/attempt_1/source_death_receipts.jsonl",
+    "target_execution_receipt": "remote_spatial_root/_relation_spatial_owned_outputs/attempt_1/target_execution_receipt.json"
+  },
+  "copied_back_archive_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_relation_spatial_pair_readout_v1_0\\attempt_1\\ATTEMPT_1_REMOTE_ROOT.tar.gz",
+  "copyback_archive_sha256": "efd3a6fbbc1eebbc4f90646a7799b1f5fe2165772390d7306131fbe33c0de7aa",
+  "copyback_archive_size": 22245114,
+  "schema": "FAMILY10H_RELATION_SPATIAL_COPYBACK_VERIFICATION_V1",
+  "small_wall_crossed": false,
+  "target_archive_sha256": "efd3a6fbbc1eebbc4f90646a7799b1f5fe2165772390d7306131fbe33c0de7aa",
+  "target_archive_size": 22245114
+}

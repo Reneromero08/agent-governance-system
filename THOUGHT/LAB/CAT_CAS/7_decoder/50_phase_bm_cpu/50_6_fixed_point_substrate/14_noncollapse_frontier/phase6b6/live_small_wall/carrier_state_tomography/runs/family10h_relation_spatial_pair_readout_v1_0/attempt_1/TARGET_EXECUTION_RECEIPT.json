@@ -1,0 +1,1 @@
+{"schema":"FAMILY10H_RELATION_SPATIAL_TARGET_EXECUTION_RECEIPT_V1","status":"PHYSICAL_EXECUTION_COMPLETE","returncode":0,"raw_record_count":4096,"pair_observation_count":1048576,"source_death_receipt_count":4096,"feature_freeze_written":true,"physical_measurement":true,"pmu_opened":true,"timer_method":"rdtscp_lfence_serialized","live_activity":true,"small_wall_crossed":false}

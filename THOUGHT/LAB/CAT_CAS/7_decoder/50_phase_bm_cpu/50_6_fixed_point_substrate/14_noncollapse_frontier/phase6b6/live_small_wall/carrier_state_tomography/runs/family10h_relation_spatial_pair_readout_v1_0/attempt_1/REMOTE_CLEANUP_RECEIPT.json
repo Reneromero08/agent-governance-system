@@ -1,0 +1,13 @@
+{
+  "cleanup_status": "cleanup_complete",
+  "removed_after_adjudication": true,
+  "removed_after_verified_copyback": true,
+  "removed_transaction_owned_paths": [
+    "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx",
+    "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_tx2",
+    "/root/family10h_relation_spatial_pair_readout_v1_0_130589dd_ATTEMPT_1_REMOTE_ROOT.tar.gz"
+  ],
+  "schema": "FAMILY10H_RELATION_SPATIAL_REMOTE_CLEANUP_RECEIPT_V1",
+  "small_wall_crossed": false,
+  "unrelated_remote_paths_touched": false
+}

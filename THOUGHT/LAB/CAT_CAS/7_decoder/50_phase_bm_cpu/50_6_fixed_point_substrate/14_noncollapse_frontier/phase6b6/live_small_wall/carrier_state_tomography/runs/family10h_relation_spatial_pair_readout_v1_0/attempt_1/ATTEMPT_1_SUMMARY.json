@@ -1,0 +1,46 @@
+{
+  "R_spatial_distribution": {
+    "abs_mean": 0.039694048014505504,
+    "abs_of_mean": 0.006146111883543527,
+    "count": 512,
+    "max_abs": 0.17398967877516325,
+    "mean": -0.006146111883543527,
+    "q50_abs": 0.0316295747459259,
+    "q95_abs": 0.09943330287106472,
+    "q99_abs": 0.13451834762498188,
+    "sign_counts": {
+      "-1": 280,
+      "0": 0,
+      "1": 232
+    }
+  },
+  "all_frozen_gates_passed": false,
+  "archive_equality": true,
+  "claim_ceiling": "PUBLIC_POST_SOURCE_SPATIALLY_RESOLVED_FAMILY10H_RELATION_PAIR_READOUT_CALIBRATED",
+  "copyback_archive_sha256": "efd3a6fbbc1eebbc4f90646a7799b1f5fe2165772390d7306131fbe33c0de7aa",
+  "copyback_archive_size": 22245114,
+  "freeze_commit": "130589ddc9ccd54afb1498bfb75673281821aafe",
+  "gates": {
+    "complete_relation_matrix_global": true,
+    "factor_sign_stability": true,
+    "matched_permutation_q99_exceeded": false,
+    "measurement_order_strata": false,
+    "not_explained_by_A_or_B_marginal_latency_alone": true,
+    "relation_controls_null": false,
+    "validation": true
+  },
+  "pair_observation_count": 1048576,
+  "physical_measurement": true,
+  "pmu_acquisition_count": 1,
+  "primary_R_match": 0.006146111883543527,
+  "primary_null_q99": 0.006296493318637473,
+  "raw_record_count": 4096,
+  "result_class": "FAMILY10H_SPATIAL_RELATION_READOUT_CANDIDATE_PROSPECTIVE",
+  "schema": "FAMILY10H_RELATION_SPATIAL_ATTEMPT_1_SUMMARY_V1",
+  "scientific_claim": "PUBLIC_POST_SOURCE_SPATIALLY_RESOLVED_FAMILY10H_RELATION_PAIR_READOUT_NOT_ESTABLISHED",
+  "small_wall_crossed": false,
+  "source_authority_commit": "b0b8bd0803a5bb70c42d33d716830c329e892142",
+  "source_death_receipt_count": 4096,
+  "target_archive_sha256": "efd3a6fbbc1eebbc4f90646a7799b1f5fe2165772390d7306131fbe33c0de7aa",
+  "target_archive_size": 22245114
+}

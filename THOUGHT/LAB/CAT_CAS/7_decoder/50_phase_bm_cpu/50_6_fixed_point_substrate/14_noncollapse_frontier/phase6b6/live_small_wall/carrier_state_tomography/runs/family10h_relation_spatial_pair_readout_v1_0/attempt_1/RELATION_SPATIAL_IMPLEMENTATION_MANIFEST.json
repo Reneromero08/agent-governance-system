@@ -1,0 +1,40 @@
+{
+  "authority_binding": {
+    "relation_manifest_freeze_commit_not_embedded": true,
+    "relation_manifest_freeze_commit_policy": "controller_verifies_local_head_and_origin_equal_freeze_commit_at_authorization_time",
+    "relation_source_authority_commit": "b0b8bd0803a5bb70c42d33d716830c329e892142",
+    "scalar_evidence_provenance": {
+      "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
+      "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
+      "role": "sealed scalar q-readout baseline only; not used as relation-spatial target data",
+      "source_authority_commit": "cac5d33536768e00aa0de5f515e626fecccdeeda"
+    }
+  },
+  "blockers": [],
+  "claim_boundary": {
+    "forbidden_promotions": [
+      "FULL_CARRIER_STATE_TOMOGRAPHY_ESTABLISHED",
+      "PHYSICAL_RELATIONAL_MEMORY_ESTABLISHED",
+      "CATALYTIC_BORROWING_ESTABLISHED",
+      "R2_RESTORATION_ESTABLISHED",
+      "SMALL_WALL_CROSSED"
+    ],
+    "maximum_future_claim": "PUBLIC_POST_SOURCE_SPATIALLY_RESOLVED_FAMILY10H_RELATION_PAIR_READOUT_CALIBRATED",
+    "small_wall_crossed": false
+  },
+  "expected_pair_observation_count": 1048576,
+  "grammar_sha256": "fe18e418acdba8bce6a7a1ccddae25ab4929ff65c14acfbf1e776ebfdba1c768",
+  "manifest_sha256": "5b55d4d45472a598e30bfa119a46e4c1e307699759a309abd94ed41e8d034840",
+  "offline_validate_sha256": null,
+  "package_decision": "FAMILY10H_SPATIAL_RELATION_READOUT_BUILD_READY_AWAITING_AUTHORIZATION",
+  "pair_measurements_per_row": 256,
+  "pmu_preflight_helper_sha256": "652f131fd1dffa5e0d064531a75b65543b50e047b356e8fc36835ebcec1ce55a",
+  "runtime_binary_sha256": "c0468dfc0c496d2efbf007cd2b939beba43500fb40b25224a9ae2eff46948c30",
+  "schedule_sha256": "5378ae183daec17a2ad5c6b9cecb954c1d7de4bf834dfa8e02d5188da5b159cf",
+  "schedule_tuple_count": 4096,
+  "schema": "FAMILY10H_RELATION_SPATIAL_IMPLEMENTATION_MANIFEST_V1",
+  "science_package_id": "family10h_relation_spatial_pair_readout_v1",
+  "self_test_sha256": "66d021d9d5a66d2df1f223ae73e6e8b11b49cca8aed0f09d63047e0953f0f068",
+  "source_bundle_sha256": "4bc0f1943a454d9c4913a736364539c064903f2442becc53e2f6a5d39c299055",
+  "transaction_run_id": "family10h_relation_spatial_pair_readout_v1_0"
+}
