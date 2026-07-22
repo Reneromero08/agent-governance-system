@@ -1,0 +1,124 @@
+{
+  "analysis_sha256": "5a613977264935d04fa5382ebb4856c1590320774e543c82e4fcffd5fcb4f63d",
+  "archive_sha256": "54ca4dcd53b300d4fe2857e4f9366a754b4316b1f951daa735a5de3bb4f16e89",
+  "archive_size": 110187151,
+  "coordinate_freeze_status": "FAMILY10H_PRIMARY_MINUS_SHAM_DIFFERENTIAL_COORDINATE_FROZEN_FOR_PROSPECTIVE_PACKAGE",
+  "copy_back_passed": true,
+  "diagnostic_disposition": "PRIMARY_MINUS_SHAM_DIFFERENTIAL_REPRODUCED_WITH_GENERIC_CONTROL_Q99_WARNINGS",
+  "differential_by_round": {
+    "0": {
+      "D_primary_minus_sham": 0.07944714854294907,
+      "R_primary_mean": 0.05876485327694902,
+      "R_sham_mean": -0.02068229526600006,
+      "differential_to_max_generic_abs_ratio": 9.717790434710903,
+      "generic_control_means": {
+        "distance_matched_control": -0.005919383142823921,
+        "route_pressure_control": -0.00817543340502306,
+        "scrambled_pair_control": 0.0057598867986406715
+      },
+      "generic_controls_inside_own_q99": false,
+      "generic_controls_within_0_25_of_differential": true,
+      "max_abs_generic_control_mean": 0.00817543340502306,
+      "max_generic_abs_to_differential_ratio": 0.10290405074265725,
+      "primary_positive": true,
+      "sham_negative": true
+    },
+    "1": {
+      "D_primary_minus_sham": 0.07849354803417628,
+      "R_primary_mean": 0.06888864139804013,
+      "R_sham_mean": -0.00960490663613615,
+      "differential_to_max_generic_abs_ratio": 8.849847539908295,
+      "generic_control_means": {
+        "distance_matched_control": 0.0015223989700350255,
+        "route_pressure_control": 0.0014047040947827135,
+        "scrambled_pair_control": 0.008869480257169455
+      },
+      "generic_controls_inside_own_q99": false,
+      "generic_controls_within_0_25_of_differential": true,
+      "max_abs_generic_control_mean": 0.008869480257169455,
+      "max_generic_abs_to_differential_ratio": 0.11299629688426954,
+      "primary_positive": true,
+      "sham_negative": true
+    }
+  },
+  "exploratory_reproduction_gates": {
+    "all_factor_strata_primary_positive_sham_negative_differential_positive": true,
+    "all_rounds_generic_controls_within_0_25_of_differential": true,
+    "all_rounds_primary_positive_sham_negative_differential_positive": true,
+    "copy_back_passed": true,
+    "factor_stratum_gate_count": 28,
+    "factor_stratum_gate_pass_count": 28,
+    "generic_control_q99_warning_count": 2,
+    "generic_controls_inside_own_q99_all_rounds": false,
+    "round_gate_count": 2,
+    "round_relative_gate_pass_count": 2
+  },
+  "generic_control_summary": {
+    "distance_matched_control": {
+      "inside_own_q99_each_round": [
+        true,
+        true
+      ],
+      "near_zero_all_rounds": true,
+      "q99_warning_rounds": [],
+      "round_abs_means": [
+        0.005919383142823921,
+        0.0015223989700350255
+      ],
+      "round_means": [
+        -0.005919383142823921,
+        0.0015223989700350255
+      ],
+      "round_q99": [
+        0.0065308581959761195,
+        0.006700747066652241
+      ]
+    },
+    "route_pressure_control": {
+      "inside_own_q99_each_round": [
+        false,
+        true
+      ],
+      "near_zero_all_rounds": false,
+      "q99_warning_rounds": [
+        0
+      ],
+      "round_abs_means": [
+        0.00817543340502306,
+        0.0014047040947827135
+      ],
+      "round_means": [
+        -0.00817543340502306,
+        0.0014047040947827135
+      ],
+      "round_q99": [
+        0.006828173435608472,
+        0.00706213139620215
+      ]
+    },
+    "scrambled_pair_control": {
+      "inside_own_q99_each_round": [
+        true,
+        false
+      ],
+      "near_zero_all_rounds": false,
+      "q99_warning_rounds": [
+        1
+      ],
+      "round_abs_means": [
+        0.0057598867986406715,
+        0.008869480257169455
+      ],
+      "round_means": [
+        0.0057598867986406715,
+        0.008869480257169455
+      ],
+      "round_q99": [
+        0.006549076223359914,
+        0.007542405597665977
+      ]
+    }
+  },
+  "schema": "FAMILY10H_PRIMARY_MINUS_SHAM_DIFFERENTIAL_SUMMARY_V1",
+  "summary_sha256": "9586ba6b963704c1f8a978c199e3a795b2a5bbb8f7069f08a58a6a9c9a1f6eb0"
+}
