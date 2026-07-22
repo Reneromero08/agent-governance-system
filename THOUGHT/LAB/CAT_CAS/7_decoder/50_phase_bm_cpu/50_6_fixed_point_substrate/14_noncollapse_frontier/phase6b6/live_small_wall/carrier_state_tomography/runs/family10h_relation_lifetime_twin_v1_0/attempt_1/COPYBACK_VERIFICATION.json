@@ -1,0 +1,10 @@
+{
+  "archive_equality": true,
+  "copyback_archive_path": "THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_relation_lifetime_twin_v1_0\\attempt_1\\ATTEMPT_1_REMOTE_ROOT.tar.gz",
+  "copyback_archive_sha256": "d31bb5ca79354f1ad946d19e478521b9deadae4f18c596edf3c91cb8663b8d15",
+  "copyback_archive_size": 7190117,
+  "schema": "FAMILY10H_RELATION_LIFETIME_COPYBACK_VERIFICATION_V1",
+  "target_archive_path": "/root/family10h_relation_lifetime_twin_v1_0_71ac2faf_ATTEMPT_1_REMOTE_ROOT.tar.gz",
+  "target_archive_sha256": "d31bb5ca79354f1ad946d19e478521b9deadae4f18c596edf3c91cb8663b8d15",
+  "target_archive_size": 7190117
+}
