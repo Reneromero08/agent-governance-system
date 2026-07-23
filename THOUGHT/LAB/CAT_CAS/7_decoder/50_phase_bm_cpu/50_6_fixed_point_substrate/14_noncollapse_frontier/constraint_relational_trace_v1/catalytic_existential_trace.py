@@ -42,7 +42,7 @@ class ReversibleDilationAudit:
     basis_states_audited: int
     accepted_basis_states: int
     all_basis_states_restored: bool
-    output_flag_is_idempotent: bool
+    existential_boundary_idempotence_required: bool
     provenance_retained: bool
     native_existential_trace_established: bool
     status: str
@@ -185,7 +185,7 @@ def audit_reversible_dilation(
         basis_states_audited=audited,
         accepted_basis_states=accepted,
         all_basis_states_restored=restored,
-        output_flag_is_idempotent=True,
+        existential_boundary_idempotence_required=True,
         provenance_retained=True,
         native_existential_trace_established=False,
         status="REVERSIBLE_EVALUATION_DILATION_ESTABLISHED__EXISTENTIAL_QUOTIENT_UNRESOLVED",
