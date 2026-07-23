@@ -1,0 +1,2177 @@
+{
+  "analysis_sha256": "931be822322a7664c78116d59b9605a338b8cd37642335b7c0db868bb6740f8d",
+  "archive_sha256": "f3500f3dc1907eae5a1e0ea2eadb722b4dec7a9ec5d2d54f1fbfa374c7b61d0f",
+  "archive_size": 46219014,
+  "claim_boundary": {
+    "full_tomography_established": false,
+    "positive_scientific_claim": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "controller_passed": true,
+  "coordinates": {
+    "D_by_shift": [
+      {
+        "D_primary_minus_sham": 0.06360219570369195,
+        "shift": 1
+      },
+      {
+        "D_primary_minus_sham": 0.04602163502527638,
+        "shift": 2
+      },
+      {
+        "D_primary_minus_sham": 0.002684946124413872,
+        "shift": 4
+      },
+      {
+        "D_primary_minus_sham": 0.030001534286291338,
+        "shift": 8
+      },
+      {
+        "D_primary_minus_sham": 0.0011298208434196337,
+        "shift": 16
+      },
+      {
+        "D_primary_minus_sham": 0.06695868809236012,
+        "shift": 32
+      },
+      {
+        "D_primary_minus_sham": 0.005543145920342969,
+        "shift": 64
+      },
+      {
+        "D_primary_minus_sham": 0.007805393608675871,
+        "shift": 128
+      }
+    ],
+    "D_max": 0.06695868809236012,
+    "D_min": 0.0011298208434196337,
+    "D_range": 0.06582886724894049,
+    "baseline_D_primary_minus_sham": 0.06360219570369195,
+    "baseline_shift_lines": 1,
+    "best_abs_D_primary_minus_sham": 0.06695868809236012,
+    "best_abs_D_shift": 32,
+    "best_diag_skew_axis_shift": 1,
+    "best_prep_query_axis_shift": 1,
+    "log2_shift_spearman_D": -0.2619047619047619,
+    "log2_shift_spearman_abs_D": -0.2619047619047619,
+    "negative_D_shifts": [],
+    "positive_D_shifts": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128
+    ]
+  },
+  "created_at": "2026-07-23T23:50:06.582141+00:00",
+  "interpretation": {
+    "D_sign_changes_across_shifts": false,
+    "all_shift_D_negative": false,
+    "all_shift_D_positive": true,
+    "any_shift_with_all_one_factor_strata_D_negative": false,
+    "any_shift_with_all_one_factor_strata_D_positive": true,
+    "candidate_oriented_shift_selectivity": false,
+    "exploratory_only": true,
+    "small_wall_crossed": false
+  },
+  "method_reports": {
+    "shift_0001": {
+      "D_abs_to_shift_0001_D_abs": 1.0,
+      "D_positive": true,
+      "D_primary_minus_sham": 0.06360219570369195,
+      "axis_primary_minus_sham": {
+        "common_axis": 0.17725622574906014,
+        "diag_R_axis": 0.06360219570369197,
+        "offdiag_skew_axis": 0.0647239011461423,
+        "prep_axis": 0.06075090272405092,
+        "query_axis": -0.06869689956823367
+      },
+      "diag_skew_magnitude": 0.09074371977115735,
+      "diag_skew_magnitude_abs_to_shift_0001": 1.0,
+      "diag_skew_phase_radians": 0.7941389955659512,
+      "prep_query_magnitude": 0.09170570425047224,
+      "prep_query_magnitude_abs_to_shift_0001": 1.0,
+      "prep_query_phase_radians": -0.8467050308286885,
+      "primary_R": 0.054762984249061,
+      "primary_positive": true,
+      "primary_variant": "shift_0001_primary",
+      "relation_shift_lines": 1,
+      "sham_R": -0.008839211454630956,
+      "sham_abs_to_primary_abs": 0.16140850568753506,
+      "sham_positive": false,
+      "sham_variant": "shift_0001_sham"
+    },
+    "shift_0002": {
+      "D_abs_to_shift_0001_D_abs": 0.7235856327929405,
+      "D_positive": true,
+      "D_primary_minus_sham": 0.04602163502527638,
+      "axis_primary_minus_sham": {
+        "common_axis": 0.34715843674783103,
+        "diag_R_axis": 0.04602163502527633,
+        "offdiag_skew_axis": -0.009390888507226653,
+        "prep_axis": -0.03206626559974829,
+        "query_axis": -0.013284488585295021
+      },
+      "diag_skew_magnitude": 0.046969986984827905,
+      "diag_skew_magnitude_abs_to_shift_0001": 0.5176114347447898,
+      "diag_skew_phase_radians": -0.20129036753701912,
+      "prep_query_magnitude": 0.034709120220576525,
+      "prep_query_magnitude_abs_to_shift_0001": 0.37848376504232334,
+      "prep_query_phase_radians": -2.748834840324846,
+      "primary_R": 0.0710075670172734,
+      "primary_positive": true,
+      "primary_variant": "shift_0002_primary",
+      "relation_shift_lines": 2,
+      "sham_R": 0.02498593199199702,
+      "sham_abs_to_primary_abs": 0.3518770328508637,
+      "sham_positive": true,
+      "sham_variant": "shift_0002_sham"
+    },
+    "shift_0004": {
+      "D_abs_to_shift_0001_D_abs": 0.04221467662724131,
+      "D_positive": true,
+      "D_primary_minus_sham": 0.002684946124413872,
+      "axis_primary_minus_sham": {
+        "common_axis": 0.3194776573073395,
+        "diag_R_axis": 0.0026849461244139866,
+        "offdiag_skew_axis": 0.0117687272166665,
+        "prep_axis": 0.023590239776513436,
+        "query_axis": 5.278534318046285e-05
+      },
+      "diag_skew_magnitude": 0.012071117429273585,
+      "diag_skew_magnitude_abs_to_shift_0001": 0.13302427385294777,
+      "diag_skew_phase_radians": 1.3464928867516843,
+      "prep_query_magnitude": 0.023590298832483054,
+      "prep_query_magnitude_abs_to_shift_0001": 0.2572391654945671,
+      "prep_query_phase_radians": 0.00223758874794092,
+      "primary_R": -0.0008312276890264402,
+      "primary_positive": false,
+      "primary_variant": "shift_0004_primary",
+      "relation_shift_lines": 4,
+      "sham_R": -0.0035161738134403125,
+      "sham_abs_to_primary_abs": 4.230097071908859,
+      "sham_positive": false,
+      "sham_variant": "shift_0004_sham"
+    },
+    "shift_0008": {
+      "D_abs_to_shift_0001_D_abs": 0.47170595219796513,
+      "D_positive": true,
+      "D_primary_minus_sham": 0.030001534286291338,
+      "axis_primary_minus_sham": {
+        "common_axis": 0.15757820802651895,
+        "diag_R_axis": 0.030001534286291237,
+        "offdiag_skew_axis": 0.013805807024303202,
+        "prep_axis": 0.033765658128819875,
+        "query_axis": 0.006154044080213485
+      },
+      "diag_skew_magnitude": 0.03302563197160364,
+      "diag_skew_magnitude_abs_to_shift_0001": 0.3639439958477517,
+      "diag_skew_phase_radians": 0.4312790692766546,
+      "prep_query_magnitude": 0.03432188700251707,
+      "prep_query_magnitude_abs_to_shift_0001": 0.37426120090387216,
+      "prep_query_phase_radians": 0.18027871667826512,
+      "primary_R": 0.02703313477192367,
+      "primary_positive": true,
+      "primary_variant": "shift_0008_primary",
+      "relation_shift_lines": 8,
+      "sham_R": -0.002968399514367666,
+      "sham_abs_to_primary_abs": 0.10980596735864367,
+      "sham_positive": false,
+      "sham_variant": "shift_0008_sham"
+    },
+    "shift_0016": {
+      "D_abs_to_shift_0001_D_abs": 0.017763865396773566,
+      "D_positive": true,
+      "D_primary_minus_sham": 0.0011298208434196337,
+      "axis_primary_minus_sham": {
+        "common_axis": -0.06994084876094894,
+        "diag_R_axis": 0.0011298208434196207,
+        "offdiag_skew_axis": -0.012584247360511431,
+        "prep_axis": -0.0022360303736912203,
+        "query_axis": 0.022932464347331646
+      },
+      "diag_skew_magnitude": 0.01263486354373344,
+      "diag_skew_magnitude_abs_to_shift_0001": 0.13923678217728735,
+      "diag_skew_phase_radians": -1.4812558283065822,
+      "prep_query_magnitude": 0.023041218563125233,
+      "prep_query_magnitude_abs_to_shift_0001": 0.2512517487482964,
+      "prep_query_phase_radians": 1.6679940957957144,
+      "primary_R": 0.002983199170186935,
+      "primary_positive": true,
+      "primary_variant": "shift_0016_primary",
+      "relation_shift_lines": 16,
+      "sham_R": 0.0018533783267673013,
+      "sham_abs_to_primary_abs": 0.6212720710334482,
+      "sham_positive": true,
+      "sham_variant": "shift_0016_sham"
+    },
+    "shift_0032": {
+      "D_abs_to_shift_0001_D_abs": 1.0527732156340215,
+      "D_positive": true,
+      "D_primary_minus_sham": 0.06695868809236012,
+      "axis_primary_minus_sham": {
+        "common_axis": 0.002602950113017116,
+        "diag_R_axis": 0.06695868809236014,
+        "offdiag_skew_axis": 0.04934280289604415,
+        "prep_axis": 0.06893867686234295,
+        "query_axis": -0.029746928929745342
+      },
+      "diag_skew_magnitude": 0.08317558601349216,
+      "diag_skew_magnitude_abs_to_shift_0001": 0.9165988150281812,
+      "diag_skew_phase_radians": 0.6350734093911414,
+      "prep_query_magnitude": 0.07508276065970043,
+      "prep_query_magnitude_abs_to_shift_0001": 0.8187359911072685,
+      "prep_query_phase_radians": -0.4073619516927907,
+      "primary_R": 0.06812357533330539,
+      "primary_positive": true,
+      "primary_variant": "shift_0032_primary",
+      "relation_shift_lines": 32,
+      "sham_R": 0.0011648872409452716,
+      "sham_abs_to_primary_abs": 0.017099619848868416,
+      "sham_positive": true,
+      "sham_variant": "shift_0032_sham"
+    },
+    "shift_0064": {
+      "D_abs_to_shift_0001_D_abs": 0.08715337354337914,
+      "D_positive": true,
+      "D_primary_minus_sham": 0.005543145920342969,
+      "axis_primary_minus_sham": {
+        "common_axis": 0.46513502796061723,
+        "diag_R_axis": 0.00554314592034286,
+        "offdiag_skew_axis": -0.01712367807676816,
+        "prep_axis": -0.01788012258271757,
+        "query_axis": 0.01636723357081875
+      },
+      "diag_skew_magnitude": 0.017998522649678897,
+      "diag_skew_magnitude_abs_to_shift_0001": 0.19834455425751327,
+      "diag_skew_phase_radians": -1.2577295115166176,
+      "prep_query_magnitude": 0.024240155080666112,
+      "prep_query_magnitude_abs_to_shift_0001": 0.26432548857004484,
+      "prep_query_phase_radians": 2.4003411402518795,
+      "primary_R": -0.0034010035288763616,
+      "primary_positive": false,
+      "primary_variant": "shift_0064_primary",
+      "relation_shift_lines": 64,
+      "sham_R": -0.00894414944921933,
+      "sham_abs_to_primary_abs": 2.6298559743554097,
+      "sham_positive": false,
+      "sham_variant": "shift_0064_sham"
+    },
+    "shift_0128": {
+      "D_abs_to_shift_0001_D_abs": 0.12272207778862557,
+      "D_positive": true,
+      "D_primary_minus_sham": 0.007805393608675871,
+      "axis_primary_minus_sham": {
+        "common_axis": 0.4686382894658168,
+        "diag_R_axis": 0.007805393608675916,
+        "offdiag_skew_axis": 0.01120257539290282,
+        "prep_axis": -0.006282855535612052,
+        "query_axis": -0.02868800632141763
+      },
+      "diag_skew_magnitude": 0.013653639251863608,
+      "diag_skew_magnitude_abs_to_shift_0001": 0.1504637377252787,
+      "diag_skew_phase_radians": 0.9622549502985656,
+      "prep_query_magnitude": 0.029367941371146,
+      "prep_query_magnitude_abs_to_shift_0001": 0.3202411628717716,
+      "prep_query_phase_radians": -1.7863986562397802,
+      "primary_R": 0.007098277855660333,
+      "primary_positive": true,
+      "primary_variant": "shift_0128_primary",
+      "relation_shift_lines": 128,
+      "sham_R": -0.0007071157530155382,
+      "sham_abs_to_primary_abs": 0.09961793091146293,
+      "sham_positive": false,
+      "sham_variant": "shift_0128_sham"
+    }
+  },
+  "run_id": "family10h_relation_rspatial_shift_sweep_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_SHIFT_SWEEP_DISCOVERY_ANALYSIS_V1",
+  "stratum_reports": {
+    "shift_0001": {
+      "all_one_factor_strata_D_negative": false,
+      "all_one_factor_strata_D_positive": true,
+      "factors": {
+        "cyclic_origin": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.0605280088069298,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.0605280088069298
+            },
+            "1024": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.026412894710342163,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.026412894710342163
+            },
+            "2048": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.09261884433655837,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.09261884433655837
+            },
+            "3072": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.07998860079395455,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.07998860079395455
+            }
+          }
+        },
+        "mapping": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "map0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.05787095595207804,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.05787095595207804
+            },
+            "map1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.0693334354553059,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.0693334354553059
+            }
+          }
+        },
+        "query_order": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "AB": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.050313049952605673,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.050313049952605673
+            },
+            "BA": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.08181324728851391,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.08181324728851391
+            }
+          }
+        },
+        "replicate": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.042854619156019555,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.042854619156019555
+            },
+            "1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.08309234336968725,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.08309234336968725
+            }
+          }
+        },
+        "session": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "session_0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.05085472030784405,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.05085472030784405
+            },
+            "session_1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.07557709683312484,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.07557709683312484
+            }
+          }
+        },
+        "source_order": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "A_then_B": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.09032110478552441,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.09032110478552441
+            },
+            "B_then_A": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.036035067285928334,
+              "abs_to_shift_0001_matched_abs": 1.0,
+              "shift_0001_matched_D": 0.036035067285928334
+            }
+          }
+        }
+      },
+      "max_D_primary_minus_sham_stratum": 0.09261884433655837,
+      "max_abs_to_shift_0001_matched_abs": 1.0,
+      "min_D_primary_minus_sham_stratum": 0.026412894710342163
+    },
+    "shift_0002": {
+      "all_one_factor_strata_D_negative": false,
+      "all_one_factor_strata_D_positive": true,
+      "factors": {
+        "cyclic_origin": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.0038239803920171664,
+              "abs_to_shift_0001_matched_abs": 0.0631770393143903,
+              "shift_0001_matched_D": 0.0605280088069298
+            },
+            "1024": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.03440769973030213,
+              "abs_to_shift_0001_matched_abs": 1.3026856809007588,
+              "shift_0001_matched_D": 0.026412894710342163
+            },
+            "2048": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.07868707012728365,
+              "abs_to_shift_0001_matched_abs": 0.8495794855888135,
+              "shift_0001_matched_D": 0.09261884433655837
+            },
+            "3072": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.06416101521513165,
+              "abs_to_shift_0001_matched_abs": 0.8021269853238997,
+              "shift_0001_matched_D": 0.07998860079395455
+            }
+          }
+        },
+        "mapping": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "map0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.04677237911149928,
+              "abs_to_shift_0001_matched_abs": 0.8082185328030643,
+              "shift_0001_matched_D": 0.05787095595207804
+            },
+            "map1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.04527089093905342,
+              "abs_to_shift_0001_matched_abs": 0.6529445806595894,
+              "shift_0001_matched_D": 0.0693334354553059
+            }
+          }
+        },
+        "query_order": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "AB": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.03947808122304493,
+              "abs_to_shift_0001_matched_abs": 0.7846489382025704,
+              "shift_0001_matched_D": 0.050313049952605673
+            },
+            "BA": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.05498872727277868,
+              "abs_to_shift_0001_matched_abs": 0.6721249809197926,
+              "shift_0001_matched_D": 0.08181324728851391
+            }
+          }
+        },
+        "replicate": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.033031914162128584,
+              "abs_to_shift_0001_matched_abs": 0.7707900528031824,
+              "shift_0001_matched_D": 0.042854619156019555
+            },
+            "1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.058224100078536414,
+              "abs_to_shift_0001_matched_abs": 0.7007155860256677,
+              "shift_0001_matched_D": 0.08309234336968725
+            }
+          }
+        },
+        "session": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "session_0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.04729547883519972,
+              "abs_to_shift_0001_matched_abs": 0.9300115810076466,
+              "shift_0001_matched_D": 0.05085472030784405
+            },
+            "session_1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.04482499387049983,
+              "abs_to_shift_0001_matched_abs": 0.5931028810153156,
+              "shift_0001_matched_D": 0.07557709683312484
+            }
+          }
+        },
+        "source_order": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "A_then_B": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.036196556487841376,
+              "abs_to_shift_0001_matched_abs": 0.4007541379591554,
+              "shift_0001_matched_D": 0.09032110478552441
+            },
+            "B_then_A": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.056158620817868,
+              "abs_to_shift_0001_matched_abs": 1.558443623048205,
+              "shift_0001_matched_D": 0.036035067285928334
+            }
+          }
+        }
+      },
+      "max_D_primary_minus_sham_stratum": 0.07868707012728365,
+      "max_abs_to_shift_0001_matched_abs": 1.558443623048205,
+      "min_D_primary_minus_sham_stratum": 0.0038239803920171664
+    },
+    "shift_0004": {
+      "all_one_factor_strata_D_negative": false,
+      "all_one_factor_strata_D_positive": false,
+      "factors": {
+        "cyclic_origin": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.00549488704043026,
+              "abs_to_shift_0001_matched_abs": 0.09078255090065271,
+              "shift_0001_matched_D": 0.0605280088069298
+            },
+            "1024": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.008633585489342486,
+              "abs_to_shift_0001_matched_abs": 0.3268700982615867,
+              "shift_0001_matched_D": 0.026412894710342163
+            },
+            "2048": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.01064425426882233,
+              "abs_to_shift_0001_matched_abs": 0.1149253625983848,
+              "shift_0001_matched_D": 0.09261884433655837
+            },
+            "3072": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.00862682001774679,
+              "abs_to_shift_0001_matched_abs": 0.10785061786452448,
+              "shift_0001_matched_D": 0.07998860079395455
+            }
+          }
+        },
+        "mapping": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "map0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.01271398425564809,
+              "abs_to_shift_0001_matched_abs": 0.21969542487212973,
+              "shift_0001_matched_D": 0.05787095595207804
+            },
+            "map1": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.007344092006820349,
+              "abs_to_shift_0001_matched_abs": 0.1059242479273155,
+              "shift_0001_matched_D": 0.0693334354553059
+            }
+          }
+        },
+        "query_order": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "AB": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.0011593155945685994,
+              "abs_to_shift_0001_matched_abs": 0.023042045665302772,
+              "shift_0001_matched_D": 0.050313049952605673
+            },
+            "BA": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.00795300848005651,
+              "abs_to_shift_0001_matched_abs": 0.09720929976059102,
+              "shift_0001_matched_D": 0.08181324728851391
+            }
+          }
+        },
+        "replicate": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.005356486498868629,
+              "abs_to_shift_0001_matched_abs": 0.124992045300121,
+              "shift_0001_matched_D": 0.042854619156019555
+            },
+            "1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.00017531728780484541,
+              "abs_to_shift_0001_matched_abs": 0.0021099090565401307,
+              "shift_0001_matched_D": 0.08309234336968725
+            }
+          }
+        },
+        "session": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "session_0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.001658334007619962,
+              "abs_to_shift_0001_matched_abs": 0.03260924448274222,
+              "shift_0001_matched_D": 0.05085472030784405
+            },
+            "session_1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.003649339325038442,
+              "abs_to_shift_0001_matched_abs": 0.0482863126258505,
+              "shift_0001_matched_D": 0.07557709683312484
+            }
+          }
+        },
+        "source_order": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "A_then_B": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.010672672698894967,
+              "abs_to_shift_0001_matched_abs": 0.11816366423150147,
+              "shift_0001_matched_D": 0.09032110478552441
+            },
+            "B_then_A": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.016466616338938863,
+              "abs_to_shift_0001_matched_abs": 0.45696088780078575,
+              "shift_0001_matched_D": 0.036035067285928334
+            }
+          }
+        }
+      },
+      "max_D_primary_minus_sham_stratum": 0.016466616338938863,
+      "max_abs_to_shift_0001_matched_abs": 0.45696088780078575,
+      "min_D_primary_minus_sham_stratum": -0.010672672698894967
+    },
+    "shift_0008": {
+      "all_one_factor_strata_D_negative": false,
+      "all_one_factor_strata_D_positive": false,
+      "factors": {
+        "cyclic_origin": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.020786742843298935,
+              "abs_to_shift_0001_matched_abs": 0.3434235365251116,
+              "shift_0001_matched_D": 0.0605280088069298
+            },
+            "1024": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.0040711111172094605,
+              "abs_to_shift_0001_matched_abs": 0.15413347010448603,
+              "shift_0001_matched_D": 0.026412894710342163
+            },
+            "2048": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.04659531823129691,
+              "abs_to_shift_0001_matched_abs": 0.503086802313996,
+              "shift_0001_matched_D": 0.09261884433655837
+            },
+            "3072": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.05483703770065297,
+              "abs_to_shift_0001_matched_abs": 0.685560656847963,
+              "shift_0001_matched_D": 0.07998860079395455
+            }
+          }
+        },
+        "mapping": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "map0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.021678474566833552,
+              "abs_to_shift_0001_matched_abs": 0.3746002499904292,
+              "shift_0001_matched_D": 0.05787095595207804
+            },
+            "map1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.038324594005749106,
+              "abs_to_shift_0001_matched_abs": 0.5527577532264951,
+              "shift_0001_matched_D": 0.0693334354553059
+            }
+          }
+        },
+        "query_order": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "AB": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.02420678424129234,
+              "abs_to_shift_0001_matched_abs": 0.48112337185073967,
+              "shift_0001_matched_D": 0.050313049952605673
+            },
+            "BA": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.03794248805166032,
+              "abs_to_shift_0001_matched_abs": 0.4637694909952219,
+              "shift_0001_matched_D": 0.08181324728851391
+            }
+          }
+        },
+        "replicate": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.018363467863684382,
+              "abs_to_shift_0001_matched_abs": 0.42850614998651704,
+              "shift_0001_matched_D": 0.042854619156019555
+            },
+            "1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.040934263349952406,
+              "abs_to_shift_0001_matched_abs": 0.4926358036122682,
+              "shift_0001_matched_D": 0.08309234336968725
+            }
+          }
+        },
+        "session": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "session_0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.030685649271811652,
+              "abs_to_shift_0001_matched_abs": 0.6033982506650138,
+              "shift_0001_matched_D": 0.05085472030784405
+            },
+            "session_1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.029358880815044976,
+              "abs_to_shift_0001_matched_abs": 0.38846266984652433,
+              "shift_0001_matched_D": 0.07557709683312484
+            }
+          }
+        },
+        "source_order": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "A_then_B": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.03241418993428592,
+              "abs_to_shift_0001_matched_abs": 0.3588772525674518,
+              "shift_0001_matched_D": 0.09032110478552441
+            },
+            "B_then_A": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.027512286395503252,
+              "abs_to_shift_0001_matched_abs": 0.7634864721411739,
+              "shift_0001_matched_D": 0.036035067285928334
+            }
+          }
+        }
+      },
+      "max_D_primary_minus_sham_stratum": 0.05483703770065297,
+      "max_abs_to_shift_0001_matched_abs": 0.7634864721411739,
+      "min_D_primary_minus_sham_stratum": -0.0040711111172094605
+    },
+    "shift_0016": {
+      "all_one_factor_strata_D_negative": false,
+      "all_one_factor_strata_D_positive": false,
+      "factors": {
+        "cyclic_origin": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.016281100469011097,
+              "abs_to_shift_0001_matched_abs": 0.26898457077853,
+              "shift_0001_matched_D": 0.0605280088069298
+            },
+            "1024": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.0008751129011857605,
+              "abs_to_shift_0001_matched_abs": 0.03313203307637098,
+              "shift_0001_matched_D": 0.026412894710342163
+            },
+            "2048": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.008775968258884399,
+              "abs_to_shift_0001_matched_abs": 0.094753592767734,
+              "shift_0001_matched_D": 0.09261884433655837
+            },
+            "3072": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.002737579953187199,
+              "abs_to_shift_0001_matched_abs": 0.034224626084397046,
+              "shift_0001_matched_D": 0.07998860079395455
+            }
+          }
+        },
+        "mapping": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "map0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.010481389050652077,
+              "abs_to_shift_0001_matched_abs": 0.1811165701035168,
+              "shift_0001_matched_D": 0.05787095595207804
+            },
+            "map1": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.008221747363812808,
+              "abs_to_shift_0001_matched_abs": 0.11858272000833935,
+              "shift_0001_matched_D": 0.0693334354553059
+            }
+          }
+        },
+        "query_order": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "AB": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.0019135485507594642,
+              "abs_to_shift_0001_matched_abs": 0.0380328473937081,
+              "shift_0001_matched_D": 0.050313049952605673
+            },
+            "BA": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.005300364087294698,
+              "abs_to_shift_0001_matched_abs": 0.06478613504489067,
+              "shift_0001_matched_D": 0.08181324728851391
+            }
+          }
+        },
+        "replicate": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "0": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.00103024645538043,
+              "abs_to_shift_0001_matched_abs": 0.02404049961638072,
+              "shift_0001_matched_D": 0.042854619156019555
+            },
+            "1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.003158974972595453,
+              "abs_to_shift_0001_matched_abs": 0.038017642113435356,
+              "shift_0001_matched_D": 0.08309234336968725
+            }
+          }
+        },
+        "session": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "session_0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.009835693082467975,
+              "abs_to_shift_0001_matched_abs": 0.19340767234444656,
+              "shift_0001_matched_D": 0.05085472030784405
+            },
+            "session_1": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.007048422775080325,
+              "abs_to_shift_0001_matched_abs": 0.09326135920043778,
+              "shift_0001_matched_D": 0.07557709683312484
+            }
+          }
+        },
+        "source_order": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "A_then_B": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.002359603821474301,
+              "abs_to_shift_0001_matched_abs": 0.026124612039206036,
+              "shift_0001_matched_D": 0.09032110478552441
+            },
+            "B_then_A": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.00013900286409709427,
+              "abs_to_shift_0001_matched_abs": 0.003857433177358733,
+              "shift_0001_matched_D": 0.036035067285928334
+            }
+          }
+        }
+      },
+      "max_D_primary_minus_sham_stratum": 0.016281100469011097,
+      "max_abs_to_shift_0001_matched_abs": 0.26898457077853,
+      "min_D_primary_minus_sham_stratum": -0.008775968258884399
+    },
+    "shift_0032": {
+      "all_one_factor_strata_D_negative": false,
+      "all_one_factor_strata_D_positive": true,
+      "factors": {
+        "cyclic_origin": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.055887089118434305,
+              "abs_to_shift_0001_matched_abs": 0.9233260802730362,
+              "shift_0001_matched_D": 0.0605280088069298
+            },
+            "1024": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.05605843893354383,
+              "abs_to_shift_0001_matched_abs": 2.1223890659585196,
+              "shift_0001_matched_D": 0.026412894710342163
+            },
+            "2048": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.07330694269057238,
+              "abs_to_shift_0001_matched_abs": 0.7914905785715658,
+              "shift_0001_matched_D": 0.09261884433655837
+            },
+            "3072": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.07953211148515715,
+              "abs_to_shift_0001_matched_abs": 0.994293070459211,
+              "shift_0001_matched_D": 0.07998860079395455
+            }
+          }
+        },
+        "mapping": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "map0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.0718856049779536,
+              "abs_to_shift_0001_matched_abs": 1.2421706846778346,
+              "shift_0001_matched_D": 0.05787095595207804
+            },
+            "map1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.0620317712067667,
+              "abs_to_shift_0001_matched_abs": 0.8946876899927159,
+              "shift_0001_matched_D": 0.0693334354553059
+            }
+          }
+        },
+        "query_order": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "AB": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.0723510941101004,
+              "abs_to_shift_0001_matched_abs": 1.4380184500493276,
+              "shift_0001_matched_D": 0.050313049952605673
+            },
+            "BA": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.05956909466064204,
+              "abs_to_shift_0001_matched_abs": 0.7281106255393089,
+              "shift_0001_matched_D": 0.08181324728851391
+            }
+          }
+        },
+        "replicate": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.08465000864452503,
+              "abs_to_shift_0001_matched_abs": 1.975283185608119,
+              "shift_0001_matched_D": 0.042854619156019555
+            },
+            "1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.050339568785781004,
+              "abs_to_shift_0001_matched_abs": 0.6058268035818241,
+              "shift_0001_matched_D": 0.08309234336968725
+            }
+          }
+        },
+        "session": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "session_0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.06883221185927849,
+              "abs_to_shift_0001_matched_abs": 1.3535068415008373,
+              "shift_0001_matched_D": 0.05085472030784405
+            },
+            "session_1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.06519871122040656,
+              "abs_to_shift_0001_matched_abs": 0.8626781651108684,
+              "shift_0001_matched_D": 0.07557709683312484
+            }
+          }
+        },
+        "source_order": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "A_then_B": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.04247795488456414,
+              "abs_to_shift_0001_matched_abs": 0.47029932799683827,
+              "shift_0001_matched_D": 0.09032110478552441
+            },
+            "B_then_A": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.09221658743373695,
+              "abs_to_shift_0001_matched_abs": 2.5590790965373738,
+              "shift_0001_matched_D": 0.036035067285928334
+            }
+          }
+        }
+      },
+      "max_D_primary_minus_sham_stratum": 0.09221658743373695,
+      "max_abs_to_shift_0001_matched_abs": 2.5590790965373738,
+      "min_D_primary_minus_sham_stratum": 0.04247795488456414
+    },
+    "shift_0064": {
+      "all_one_factor_strata_D_negative": false,
+      "all_one_factor_strata_D_positive": false,
+      "factors": {
+        "cyclic_origin": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.010080287076530858,
+              "abs_to_shift_0001_matched_abs": 0.1665392150712345,
+              "shift_0001_matched_D": 0.0605280088069298
+            },
+            "1024": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.005130102633449835,
+              "abs_to_shift_0001_matched_abs": 0.19422720189169973,
+              "shift_0001_matched_D": 0.026412894710342163
+            },
+            "2048": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.02638124710006534,
+              "abs_to_shift_0001_matched_abs": 0.2848367121079719,
+              "shift_0001_matched_D": 0.09261884433655837
+            },
+            "3072": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.0003867002736489839,
+              "abs_to_shift_0001_matched_abs": 0.0048344422806582,
+              "shift_0001_matched_D": 0.07998860079395455
+            }
+          }
+        },
+        "mapping": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "map0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.0024622507113608774,
+              "abs_to_shift_0001_matched_abs": 0.042547261762875065,
+              "shift_0001_matched_D": 0.05787095595207804
+            },
+            "map1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.008624041129325055,
+              "abs_to_shift_0001_matched_abs": 0.12438502538770535,
+              "shift_0001_matched_D": 0.0693334354553059
+            }
+          }
+        },
+        "query_order": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "AB": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.003387122363474786,
+              "abs_to_shift_0001_matched_abs": 0.06732095085997404,
+              "shift_0001_matched_D": 0.050313049952605673
+            },
+            "BA": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.008497696720495657,
+              "abs_to_shift_0001_matched_abs": 0.10386700200920496,
+              "shift_0001_matched_D": 0.08181324728851391
+            }
+          }
+        },
+        "replicate": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.001902356499029494,
+              "abs_to_shift_0001_matched_abs": 0.04439093233108992,
+              "shift_0001_matched_D": 0.042854619156019555
+            },
+            "1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.008963281437334407,
+              "abs_to_shift_0001_matched_abs": 0.10787132813736823,
+              "shift_0001_matched_D": 0.08309234336968725
+            }
+          }
+        },
+        "session": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "session_0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.004335567486561223,
+              "abs_to_shift_0001_matched_abs": 0.08525398351060219,
+              "shift_0001_matched_D": 0.05085472030784405
+            },
+            "session_1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.006677537782380358,
+              "abs_to_shift_0001_matched_abs": 0.08835398635547544,
+              "shift_0001_matched_D": 0.07557709683312484
+            }
+          }
+        },
+        "source_order": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "A_then_B": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.0002561599649009156,
+              "abs_to_shift_0001_matched_abs": 0.002836103095828937,
+              "shift_0001_matched_D": 0.09032110478552441
+            },
+            "B_then_A": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.011526556754324752,
+              "abs_to_shift_0001_matched_abs": 0.3198705489534597,
+              "shift_0001_matched_D": 0.036035067285928334
+            }
+          }
+        }
+      },
+      "max_D_primary_minus_sham_stratum": 0.02638124710006534,
+      "max_abs_to_shift_0001_matched_abs": 0.3198705489534597,
+      "min_D_primary_minus_sham_stratum": -0.005130102633449835
+    },
+    "shift_0128": {
+      "all_one_factor_strata_D_negative": false,
+      "all_one_factor_strata_D_positive": false,
+      "factors": {
+        "cyclic_origin": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.0007215161898202534,
+              "abs_to_shift_0001_matched_abs": 0.011920368834892973,
+              "shift_0001_matched_D": 0.0605280088069298
+            },
+            "1024": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.007757462695443592,
+              "abs_to_shift_0001_matched_abs": 0.2936998303486252,
+              "shift_0001_matched_D": 0.026412894710342163
+            },
+            "2048": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.006780627585366664,
+              "abs_to_shift_0001_matched_abs": 0.07321002150196583,
+              "shift_0001_matched_D": 0.09261884433655837
+            },
+            "3072": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.012984837818953304,
+              "abs_to_shift_0001_matched_abs": 0.1623336036643697,
+              "shift_0001_matched_D": 0.07998860079395455
+            }
+          }
+        },
+        "mapping": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "map0": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.0017737216931401072,
+              "abs_to_shift_0001_matched_abs": 0.03064960071869032,
+              "shift_0001_matched_D": 0.05787095595207804
+            },
+            "map1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.017384508910491845,
+              "abs_to_shift_0001_matched_abs": 0.25073773997104676,
+              "shift_0001_matched_D": 0.0693334354553059
+            }
+          }
+        },
+        "query_order": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "AB": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.00046639750017916405,
+              "abs_to_shift_0001_matched_abs": 0.009269911098979395,
+              "shift_0001_matched_D": 0.050313049952605673
+            },
+            "BA": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.019140811054143878,
+              "abs_to_shift_0001_matched_abs": 0.2339573564002896,
+              "shift_0001_matched_D": 0.08181324728851391
+            }
+          }
+        },
+        "replicate": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.009801050520576442,
+              "abs_to_shift_0001_matched_abs": 0.2287046463974874,
+              "shift_0001_matched_D": 0.042854619156019555
+            },
+            "1": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.0059306856005268485,
+              "abs_to_shift_0001_matched_abs": 0.07137463405190723,
+              "shift_0001_matched_D": 0.08309234336968725
+            }
+          }
+        },
+        "session": {
+          "all_D_negative": false,
+          "all_D_positive": false,
+          "levels": {
+            "session_0": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.022352520337288156,
+              "abs_to_shift_0001_matched_abs": 0.4395367863981824,
+              "shift_0001_matched_D": 0.05085472030784405
+            },
+            "session_1": {
+              "D_negative": true,
+              "D_positive": false,
+              "D_primary_minus_sham": -0.005860089075778101,
+              "abs_to_shift_0001_matched_abs": 0.0775378960205001,
+              "shift_0001_matched_D": 0.07557709683312484
+            }
+          }
+        },
+        "source_order": {
+          "all_D_negative": false,
+          "all_D_positive": true,
+          "levels": {
+            "A_then_B": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.0020726158939835615,
+              "abs_to_shift_0001_matched_abs": 0.022947193780514248,
+              "shift_0001_matched_D": 0.09032110478552441
+            },
+            "B_then_A": {
+              "D_negative": false,
+              "D_positive": true,
+              "D_primary_minus_sham": 0.013720164266691749,
+              "abs_to_shift_0001_matched_abs": 0.3807447938927385,
+              "shift_0001_matched_D": 0.036035067285928334
+            }
+          }
+        }
+      },
+      "max_D_primary_minus_sham_stratum": 0.022352520337288156,
+      "max_abs_to_shift_0001_matched_abs": 0.4395367863981824,
+      "min_D_primary_minus_sham_stratum": -0.005860089075778101
+    }
+  },
+  "variant_reports": {
+    "shift_0001_primary": {
+      "R_spatial": {
+        "abs_mean": 0.08793984060029623,
+        "abs_of_mean": 0.054762984249061,
+        "count": 128,
+        "max_abs": 0.4140808919372747,
+        "mean": 0.054762984249061,
+        "q50_abs": 0.05057159559135706,
+        "q95_abs": 0.315130986832978,
+        "q99_abs": 0.34428752153085695,
+        "sign_counts": {
+          "-1": 49,
+          "0": 0,
+          "1": 79
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.27591196957435016,
+        "cell_prepare_r0_query_r1": 0.2761758352627304,
+        "cell_prepare_r1_query_r0": 0.17182007556171836,
+        "cell_prepare_r1_query_r1": 0.28160990974822053,
+        "common_axis": 0.25137944753675484,
+        "diag_R_axis": 0.05476298424906098,
+        "offdiag_skew_axis": 0.05217787985050601,
+        "prep_axis": 0.04932890976357082,
+        "query_axis": -0.0550268499374412
+      },
+      "relation_shift_lines": 1,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0001_sham": {
+      "R_spatial": {
+        "abs_mean": 0.045505027803485684,
+        "abs_of_mean": 0.008839211454630956,
+        "count": 128,
+        "max_abs": 0.1610253205990641,
+        "mean": -0.008839211454630956,
+        "q50_abs": 0.04122289369416304,
+        "q95_abs": 0.10255396251785899,
+        "q99_abs": 0.14808720013241125,
+        "sign_counts": {
+          "-1": 71,
+          "0": 0,
+          "1": 57
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.0708276443955354,
+        "cell_prepare_r0_query_r1": 0.06599680621937391,
+        "cell_prepare_r1_query_r0": 0.0910888488106465,
+        "cell_prepare_r1_query_r1": 0.06857958772522303,
+        "common_axis": 0.07412322178769472,
+        "diag_R_axis": -0.008839211454630978,
+        "offdiag_skew_axis": -0.01254602129563629,
+        "prep_axis": -0.011421992960480097,
+        "query_axis": 0.013670049630792477
+      },
+      "relation_shift_lines": 1,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0002_primary": {
+      "R_spatial": {
+        "abs_mean": 0.09327152921977533,
+        "abs_of_mean": 0.0710075670172734,
+        "count": 128,
+        "max_abs": 0.32396803157775034,
+        "mean": 0.0710075670172734,
+        "q50_abs": 0.07845290062493997,
+        "q95_abs": 0.24347881170082117,
+        "q99_abs": 0.30578119782229624,
+        "sign_counts": {
+          "-1": 35,
+          "0": 0,
+          "1": 93
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.3936949625638005,
+        "cell_prepare_r0_query_r1": 0.32912339938145163,
+        "cell_prepare_r1_query_r0": 0.32811535563016725,
+        "cell_prepare_r1_query_r1": 0.40555892648236513,
+        "common_axis": 0.36412316101444614,
+        "diag_R_axis": 0.07100756701727334,
+        "offdiag_skew_axis": 0.000504021875642191,
+        "prep_axis": -0.005427960083640104,
+        "query_axis": -0.006436003834924514
+      },
+      "relation_shift_lines": 2,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0002_sham": {
+      "R_spatial": {
+        "abs_mean": 0.051783882654080376,
+        "abs_of_mean": 0.02498593199199702,
+        "count": 128,
+        "max_abs": 0.1918153496806258,
+        "mean": 0.02498593199199702,
+        "q50_abs": 0.037628073815696675,
+        "q95_abs": 0.12913515251140179,
+        "q99_abs": 0.15879860817210573,
+        "sign_counts": {
+          "-1": 41,
+          "0": 0,
+          "1": 87
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.04620108539585298,
+        "cell_prepare_r0_query_r1": 0.014366668653485461,
+        "cell_prepare_r1_query_r0": -0.005423152112252225,
+        "cell_prepare_r1_query_r1": 0.01271429512937428,
+        "common_axis": 0.016964724266615123,
+        "diag_R_axis": 0.024985931991997015,
+        "offdiag_skew_axis": 0.009894910382868844,
+        "prep_axis": 0.02663830551610819,
+        "query_axis": 0.006848484750370506
+      },
+      "relation_shift_lines": 2,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0004_primary": {
+      "R_spatial": {
+        "abs_mean": 0.049174782004241815,
+        "abs_of_mean": 0.0008312276890264402,
+        "count": 128,
+        "max_abs": 0.1807868335207302,
+        "mean": -0.0008312276890264402,
+        "q50_abs": 0.03955742077651017,
+        "q95_abs": 0.1224865357579665,
+        "q99_abs": 0.16957899494969997,
+        "sign_counts": {
+          "-1": 59,
+          "0": 0,
+          "1": 69
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.34714556941224317,
+        "cell_prepare_r0_query_r1": 0.3544215306623533,
+        "cell_prepare_r1_query_r0": 0.3409632031734748,
+        "cell_prepare_r1_query_r1": 0.3465767090455323,
+        "common_axis": 0.3472767530734009,
+        "diag_R_axis": -0.0008312276890263259,
+        "offdiag_skew_axis": 0.0067291637444392705,
+        "prep_axis": 0.007013593927794687,
+        "query_axis": -0.006444733561083826
+      },
+      "relation_shift_lines": 4,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0004_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05222813112975025,
+        "abs_of_mean": 0.0035161738134403125,
+        "count": 128,
+        "max_abs": 0.19859463571584132,
+        "mean": -0.0035161738134403125,
+        "q50_abs": 0.050435302283569385,
+        "q95_abs": 0.11894870901658519,
+        "q99_abs": 0.16766058142399495,
+        "sign_counts": {
+          "-1": 60,
+          "0": 0,
+          "1": 68
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.014503926482849726,
+        "cell_prepare_r0_query_r1": 0.024517619200554328,
+        "cell_prepare_r1_query_r0": 0.03459674614500879,
+        "cell_prepare_r1_query_r1": 0.037578091235832764,
+        "common_axis": 0.0277990957660614,
+        "diag_R_axis": -0.0035161738134403125,
+        "offdiag_skew_axis": -0.00503956347222723,
+        "prep_axis": -0.01657664584871875,
+        "query_axis": -0.006497518904264289
+      },
+      "relation_shift_lines": 4,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0008_primary": {
+      "R_spatial": {
+        "abs_mean": 0.05459144400050627,
+        "abs_of_mean": 0.02703313477192367,
+        "count": 128,
+        "max_abs": 0.17377128484293672,
+        "mean": 0.02703313477192367,
+        "q50_abs": 0.04580178807407945,
+        "q95_abs": 0.13387988375184828,
+        "q99_abs": 0.1687047809469052,
+        "sign_counts": {
+          "-1": 42,
+          "0": 0,
+          "1": 86
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.19448656130925746,
+        "cell_prepare_r0_query_r1": 0.15724010971898553,
+        "cell_prepare_r1_query_r0": 0.14518714500218657,
+        "cell_prepare_r1_query_r1": 0.16200696295576175,
+        "common_axis": 0.16473019474654782,
+        "diag_R_axis": 0.027033134771923567,
+        "offdiag_skew_axis": 0.0060264823583994764,
+        "prep_axis": 0.022266281535147314,
+        "query_axis": 0.010213316818348375
+      },
+      "relation_shift_lines": 8,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0008_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05592864335168987,
+        "abs_of_mean": 0.002968399514367666,
+        "count": 128,
+        "max_abs": 0.17935284257016884,
+        "mean": -0.002968399514367666,
+        "q50_abs": 0.04649409236902663,
+        "q95_abs": 0.15357130928069584,
+        "q99_abs": 0.1751993457968606,
+        "sign_counts": {
+          "-1": 63,
+          "0": 0,
+          "1": 65
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.0019477350350762055,
+        "cell_prepare_r0_query_r1": 0.0008568618113089833,
+        "cell_prepare_r1_query_r0": 0.016415511143116436,
+        "cell_prepare_r1_query_r1": 0.009387838890613879,
+        "common_axis": 0.007151986720028876,
+        "diag_R_axis": -0.0029683995143676683,
+        "offdiag_skew_axis": -0.007779324665903726,
+        "prep_axis": -0.011499376593672563,
+        "query_axis": 0.00405927273813489
+      },
+      "relation_shift_lines": 8,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0016_primary": {
+      "R_spatial": {
+        "abs_mean": 0.04312404138383414,
+        "abs_of_mean": 0.002983199170186935,
+        "count": 128,
+        "max_abs": 0.16791774997729192,
+        "mean": 0.002983199170186935,
+        "q50_abs": 0.04040775775454618,
+        "q95_abs": 0.10109977821283736,
+        "q99_abs": 0.1358873082691864,
+        "sign_counts": {
+          "-1": 58,
+          "0": 0,
+          "1": 70
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": -0.008941284782695154,
+        "cell_prepare_r0_query_r1": -0.027388656449024693,
+        "cell_prepare_r1_query_r0": -0.020146895857246043,
+        "cell_prepare_r1_query_r1": -0.03262786918320171,
+        "common_axis": -0.0222761765680419,
+        "diag_R_axis": 0.002983199170186938,
+        "offdiag_skew_axis": -0.003620880295889325,
+        "prep_axis": 0.00822241190436395,
+        "query_axis": 0.015464172496142601
+      },
+      "relation_shift_lines": 16,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0016_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05303630437606991,
+        "abs_of_mean": 0.0018533783267673013,
+        "count": 128,
+        "max_abs": 0.1701462716592641,
+        "mean": 0.0018533783267673013,
+        "q50_abs": 0.04998618364502072,
+        "q95_abs": 0.1259616199008794,
+        "q99_abs": 0.16076298105909098,
+        "sign_counts": {
+          "-1": 66,
+          "0": 0,
+          "1": 62
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.05008643656972376,
+        "cell_prepare_r0_query_r1": 0.05570135009414549,
+        "cell_prepare_r1_query_r0": 0.037774615964901274,
+        "cell_prepare_r1_query_r1": 0.04709628614285764,
+        "common_axis": 0.047664672192907036,
+        "diag_R_axis": 0.0018533783267673173,
+        "offdiag_skew_axis": 0.008963367064622106,
+        "prep_axis": 0.010458442278055171,
+        "query_axis": -0.007468291851189045
+      },
+      "relation_shift_lines": 16,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0032_primary": {
+      "R_spatial": {
+        "abs_mean": 0.09608548697443244,
+        "abs_of_mean": 0.06812357533330539,
+        "count": 128,
+        "max_abs": 0.348579245743345,
+        "mean": 0.06812357533330539,
+        "q50_abs": 0.053091684002276776,
+        "q95_abs": 0.28221207562212836,
+        "q99_abs": 0.3051626854958228,
+        "sign_counts": {
+          "-1": 45,
+          "0": 0,
+          "1": 83
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.0055721129753580146,
+        "cell_prepare_r0_query_r1": -0.02719014469331681,
+        "cell_prepare_r1_query_r0": -0.1337682854807943,
+        "cell_prepare_r1_query_r1": -0.03028339248285831,
+        "common_axis": -0.04641742742040285,
+        "diag_R_axis": 0.0681235753333054,
+        "offdiag_skew_axis": 0.05328907039373875,
+        "prep_axis": 0.07121682312284691,
+        "query_axis": -0.03536131766463058
+      },
+      "relation_shift_lines": 32,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0032_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05124963661495081,
+        "abs_of_mean": 0.0011648872409452716,
+        "count": 128,
+        "max_abs": 0.22654340664499242,
+        "mean": 0.0011648872409452716,
+        "q50_abs": 0.041688158157224195,
+        "q95_abs": 0.11293232312446622,
+        "q99_abs": 0.19823894462536804,
+        "sign_counts": {
+          "-1": 62,
+          "0": 0,
+          "1": 66
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": -0.05010605515013797,
+        "cell_prepare_r0_query_r1": -0.045656553656198,
+        "cell_prepare_r1_query_r0": -0.05354908865158721,
+        "cell_prepare_r1_query_r1": -0.046769812675756695,
+        "common_axis": -0.049020377533419965,
+        "diag_R_axis": 0.001164887240945274,
+        "offdiag_skew_axis": 0.003946267497694604,
+        "prep_axis": 0.0022781462605039673,
+        "query_axis": -0.005614388734885241
+      },
+      "relation_shift_lines": 32,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0064_primary": {
+      "R_spatial": {
+        "abs_mean": 0.03951087979924385,
+        "abs_of_mean": 0.0034010035288763616,
+        "count": 128,
+        "max_abs": 0.16111231454365166,
+        "mean": -0.0034010035288763616,
+        "q50_abs": 0.0349408299025423,
+        "q95_abs": 0.09609114856212742,
+        "q99_abs": 0.11519357447591994,
+        "sign_counts": {
+          "-1": 69,
+          "0": 0,
+          "1": 59
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.5147384951792019,
+        "cell_prepare_r0_query_r1": 0.5089822887537155,
+        "cell_prepare_r1_query_r0": 0.5372966858184018,
+        "cell_prepare_r1_query_r1": 0.5247384723351626,
+        "common_axis": 0.5214389855216205,
+        "diag_R_axis": -0.003401003528876456,
+        "offdiag_skew_axis": -0.014157198532343152,
+        "prep_axis": -0.019157187110323493,
+        "query_axis": 0.00915720995436281
+      },
+      "relation_shift_lines": 64,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0064_sham": {
+      "R_spatial": {
+        "abs_mean": 0.04974017516351864,
+        "abs_of_mean": 0.00894414944921933,
+        "count": 128,
+        "max_abs": 0.16344675113924056,
+        "mean": -0.00894414944921933,
+        "q50_abs": 0.047350189737459455,
+        "q95_abs": 0.11390715550382709,
+        "q99_abs": 0.14638463940610424,
+        "sign_counts": {
+          "-1": 70,
+          "0": 0,
+          "1": 58
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.04758833876436267,
+        "cell_prepare_r0_query_r1": 0.06374251183003793,
+        "cell_prepare_r1_query_r0": 0.05780955274118791,
+        "cell_prepare_r1_query_r1": 0.05607542690842453,
+        "common_axis": 0.05630395756100326,
+        "diag_R_axis": -0.008944149449219316,
+        "offdiag_skew_axis": 0.0029664795444250096,
+        "prep_axis": -0.0012770645276059221,
+        "query_axis": -0.007210023616455938
+      },
+      "relation_shift_lines": 64,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0128_primary": {
+      "R_spatial": {
+        "abs_mean": 0.044971670826225565,
+        "abs_of_mean": 0.007098277855660333,
+        "count": 128,
+        "max_abs": 0.15852542010167475,
+        "mean": 0.007098277855660333,
+        "q50_abs": 0.04039392551889741,
+        "q95_abs": 0.10870760469915462,
+        "q99_abs": 0.14561327385746398,
+        "sign_counts": {
+          "-1": 59,
+          "0": 0,
+          "1": 69
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.5255057789224448,
+        "cell_prepare_r0_query_r1": 0.5469539883949244,
+        "cell_prepare_r1_query_r0": 0.5204405770308859,
+        "cell_prepare_r1_query_r1": 0.5560853422146861,
+        "common_axis": 0.5372464216407353,
+        "diag_R_axis": 0.007098277855660362,
+        "offdiag_skew_axis": 0.013256705682019254,
+        "prep_axis": -0.0020330759641014606,
+        "query_axis": -0.028546487328139913
+      },
+      "relation_shift_lines": 128,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "shift_0128_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05241838461890147,
+        "abs_of_mean": 0.0007071157530155382,
+        "count": 128,
+        "max_abs": 0.21304681381099683,
+        "mean": -0.0007071157530155382,
+        "q50_abs": 0.041346334700518614,
+        "q95_abs": 0.12909567634810507,
+        "q99_abs": 0.1894018849435586,
+        "sign_counts": {
+          "-1": 65,
+          "0": 0,
+          "1": 63
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.07045022358080487,
+        "cell_prepare_r0_query_r1": 0.07101582034054271,
+        "cell_prepare_r1_query_r0": 0.06690755976230985,
+        "cell_prepare_r1_query_r1": 0.06605892501601657,
+        "common_axis": 0.0686081321749185,
+        "diag_R_axis": -0.0007071157530155539,
+        "offdiag_skew_axis": 0.0020541302891164334,
+        "prep_axis": 0.004249779571510591,
+        "query_axis": 0.00014151899327771722
+      },
+      "relation_shift_lines": 128,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    }
+  }
+}

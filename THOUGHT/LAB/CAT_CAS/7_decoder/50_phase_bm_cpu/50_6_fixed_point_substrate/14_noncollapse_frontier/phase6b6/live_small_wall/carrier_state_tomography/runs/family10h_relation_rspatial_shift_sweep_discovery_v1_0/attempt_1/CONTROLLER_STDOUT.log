@@ -1,0 +1,85 @@
+{
+  "prepare": {
+    "created_at": "2026-07-23T23:48:38.526362+00:00",
+    "passed": true,
+    "pmu_helper_sha256": "a30adcd470aa970a9f1be618bfba3ff9cb139288baba54184a3d8e39ab244d8d",
+    "run_id": "family10h_relation_rspatial_shift_sweep_discovery_v1_0",
+    "runtime_sha256": "8a3921fd6e617aa520ab12b97b9e911e6494eea25c0e315b2c3175c297f060b5",
+    "schedule_manifest_sha256": "dcc05c59de673eb1ea12bf577320b1533cb60909800532a79860241467be3f6e",
+    "schema": "FAMILY10H_RELATION_RSPATIAL_SHIFT_SWEEP_PREPARE_V1",
+    "small_wall_crossed": false
+  }
+}
+{
+  "analysis_sha256": "931be822322a7664c78116d59b9605a338b8cd37642335b7c0db868bb6740f8d",
+  "archive_sha256": "f3500f3dc1907eae5a1e0ea2eadb722b4dec7a9ec5d2d54f1fbfa374c7b61d0f",
+  "controller_passed": true,
+  "coordinates": {
+    "D_by_shift": [
+      {
+        "D_primary_minus_sham": 0.06360219570369195,
+        "shift": 1
+      },
+      {
+        "D_primary_minus_sham": 0.04602163502527638,
+        "shift": 2
+      },
+      {
+        "D_primary_minus_sham": 0.002684946124413872,
+        "shift": 4
+      },
+      {
+        "D_primary_minus_sham": 0.030001534286291338,
+        "shift": 8
+      },
+      {
+        "D_primary_minus_sham": 0.0011298208434196337,
+        "shift": 16
+      },
+      {
+        "D_primary_minus_sham": 0.06695868809236012,
+        "shift": 32
+      },
+      {
+        "D_primary_minus_sham": 0.005543145920342969,
+        "shift": 64
+      },
+      {
+        "D_primary_minus_sham": 0.007805393608675871,
+        "shift": 128
+      }
+    ],
+    "D_max": 0.06695868809236012,
+    "D_min": 0.0011298208434196337,
+    "D_range": 0.06582886724894049,
+    "baseline_D_primary_minus_sham": 0.06360219570369195,
+    "baseline_shift_lines": 1,
+    "best_abs_D_primary_minus_sham": 0.06695868809236012,
+    "best_abs_D_shift": 32,
+    "best_diag_skew_axis_shift": 1,
+    "best_prep_query_axis_shift": 1,
+    "log2_shift_spearman_D": -0.2619047619047619,
+    "log2_shift_spearman_abs_D": -0.2619047619047619,
+    "negative_D_shifts": [],
+    "positive_D_shifts": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128
+    ]
+  },
+  "interpretation": {
+    "D_sign_changes_across_shifts": false,
+    "all_shift_D_negative": false,
+    "all_shift_D_positive": true,
+    "any_shift_with_all_one_factor_strata_D_negative": false,
+    "any_shift_with_all_one_factor_strata_D_positive": true,
+    "candidate_oriented_shift_selectivity": false,
+    "exploratory_only": true,
+    "small_wall_crossed": false
+  }
+}

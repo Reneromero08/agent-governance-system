@@ -1,0 +1,297 @@
+{
+  "absence": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_source_package.tar.gz"
+    ],
+    "elapsed_seconds": 0.469,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "archive_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_relation_rspatial_shift_sweep_discovery_v1_0\\attempt_1\\DISCOVERY_TARGET_ROOT.tar.gz",
+  "archive_sha256": "f3500f3dc1907eae5a1e0ea2eadb722b4dec7a9ec5d2d54f1fbfa374c7b61d0f",
+  "archive_size": 46219014,
+  "cleanup": {
+    "cleanup": {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "root@192.168.137.100",
+        "set -eu; test -f /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0/.family10h_relation_rspatial_shift_sweep_discovery_v1_0_owner; grep -qx 'family10h_relation_rspatial_shift_sweep_discovery_v1_0' /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0/.family10h_relation_rspatial_shift_sweep_discovery_v1_0_owner; rm -rf /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0 /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_remote_root.tar.gz /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_source_package.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_source_package.tar.gz"
+      ],
+      "elapsed_seconds": 0.547,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "passed": true,
+    "schema": "FAMILY10H_RELATION_RSPATIAL_SHIFT_SWEEP_REMOTE_CLEANUP_V1"
+  },
+  "copyback": {
+    "copy": {
+      "command": [
+        "scp",
+        "-O",
+        "-o",
+        "BatchMode=yes",
+        "root@192.168.137.100:/root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_remote_root.tar.gz",
+        "C:\\tmp\\family10h_relation_rspatial_shift_sweep_discovery_v1_0_remote_root.tar.gz"
+      ],
+      "elapsed_seconds": 0.641,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "created_at": "2026-07-23T23:49:31.547395+00:00",
+    "local_sha256": "f3500f3dc1907eae5a1e0ea2eadb722b4dec7a9ec5d2d54f1fbfa374c7b61d0f",
+    "local_size": 46219014,
+    "make_archive": {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "root@192.168.137.100",
+        "set -eu; rm -f /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_remote_root.tar.gz; tar -czf /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_remote_root.tar.gz -C /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0 source; sha256sum /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_remote_root.tar.gz; stat -c%s /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_remote_root.tar.gz"
+      ],
+      "elapsed_seconds": 15.828,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "f3500f3dc1907eae5a1e0ea2eadb722b4dec7a9ec5d2d54f1fbfa374c7b61d0f  /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_remote_root.tar.gz\n46219014\n"
+    },
+    "passed": true,
+    "remote_sha256": "f3500f3dc1907eae5a1e0ea2eadb722b4dec7a9ec5d2d54f1fbfa374c7b61d0f",
+    "remote_size": 46219014,
+    "schema": "FAMILY10H_RELATION_RSPATIAL_SHIFT_SWEEP_COPYBACK_V1"
+  },
+  "create": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; mkdir -p /root/catcas_live_small_wall; mkdir -m 0700 /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0; printf '%s\\n' 'family10h_relation_rspatial_shift_sweep_discovery_v1_0' > /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0/.family10h_relation_rspatial_shift_sweep_discovery_v1_0_owner"
+    ],
+    "elapsed_seconds": 0.172,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "created_at": "2026-07-23T23:49:32.093853+00:00",
+  "extract": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; tar -xzf /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_source_package.tar.gz -C /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0; chmod +x /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0/source/relation_spatial_runtime /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0/source/relation_spatial_pmu_preflight /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0/source/RUN_RSPATIAL_SHIFT_SWEEP_DISCOVERY.sh"
+    ],
+    "elapsed_seconds": 0.235,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "live": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set +e; cd /root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0/source; ./RUN_RSPATIAL_SHIFT_SWEEP_DISCOVERY.sh"
+    ],
+    "elapsed_seconds": 34.937,
+    "returncode": 0
+  },
+  "package": {
+    "created_at": "2026-07-23T23:48:38.978292+00:00",
+    "files": {
+      "source/RELATION_GRAMMAR.json": {
+        "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+        "size_bytes": 292071
+      },
+      "source/RELATION_GRAMMAR.sha256": {
+        "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+        "size_bytes": 66
+      },
+      "source/RELATION_GRAMMAR.tsv": {
+        "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+        "size_bytes": 360
+      },
+      "source/RELATION_RSPATIAL_SHIFT_SWEEP_SCHEDULE_MANIFEST.json": {
+        "sha256": "667f10e6730743d09b64b4bbf6f2a376f3346a2669973a3ec96e5a57ecb52381",
+        "size_bytes": 7042
+      },
+      "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+        "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+        "size_bytes": 2277
+      },
+      "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+        "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+        "size_bytes": 66
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+        "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+        "size_bytes": 1866
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+        "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+        "size_bytes": 66
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+        "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+        "size_bytes": 11263467
+      },
+      "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+        "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+        "size_bytes": 2635
+      },
+      "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+        "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+        "size_bytes": 3120
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0001_primary.tsv": {
+        "sha256": "916930ffa68576f60edba9a273bc6fd38b79b7db93d1e2d1eac6918ded49d57d",
+        "size_bytes": 570527
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0001_sham.tsv": {
+        "sha256": "e960c75ed40c1fb486ddff0941490cf86ca99a716be01b8942a356a86bfedd75",
+        "size_bytes": 559775
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0002_primary.tsv": {
+        "sha256": "4b4e1a5a5d7fe8439ee7eebed8b58e80d8ee4037402af728cfa7503e6280a239",
+        "size_bytes": 570527
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0002_sham.tsv": {
+        "sha256": "1f2556a9ff243f3037048ebf6525197fb7149e38fb9315005c38a04bbba8e96f",
+        "size_bytes": 559775
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0004_primary.tsv": {
+        "sha256": "8d4559684a6f6b55e429acb52ba61b36f40c34403ee5db59419b2eb4c524edc6",
+        "size_bytes": 570527
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0004_sham.tsv": {
+        "sha256": "e253319625c72f93c90cc9070c34445f736177004eaec6600b6b35aa1daaa528",
+        "size_bytes": 559775
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0008_primary.tsv": {
+        "sha256": "7d7d4c8ae4ea035e33d0d9d57806eacf3f84b07394c4cb2dffeb4626ca59ab74",
+        "size_bytes": 570527
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0008_sham.tsv": {
+        "sha256": "722ac5e7cc8dafaef98b7735711a6920bb06596d43aafda4a54e7555c329f7e8",
+        "size_bytes": 559775
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0016_primary.tsv": {
+        "sha256": "dd864fca1223141257301c32b25bd9b603415aa4628233657f7ef18a090e9d37",
+        "size_bytes": 571039
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0016_sham.tsv": {
+        "sha256": "c9676c681b189df3c89c454bd74858ea37df74729181a13efe06b18234322ffa",
+        "size_bytes": 560287
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0032_primary.tsv": {
+        "sha256": "8ef04a8a376653974e38ffd0f20856e60db082a7ac7e971be33aa5e422ba64a3",
+        "size_bytes": 571039
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0032_sham.tsv": {
+        "sha256": "4ece6147396fd637d8511cb96cfa4cb9ab693147597e866a419b9b5d23b42486",
+        "size_bytes": 560287
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0064_primary.tsv": {
+        "sha256": "43c061473c24de6be6c0d07bf0973dc9b478f45ffe2915c0609dddd52a7bc795",
+        "size_bytes": 571039
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0064_sham.tsv": {
+        "sha256": "6f3adf0979b4e9d6a03ec3850af77ee6a75fbbf31d3f6f6ccd69855645978908",
+        "size_bytes": 560287
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0128_primary.tsv": {
+        "sha256": "394fad2313bfced7100653448df958b78ce81da9da931bfdb85a6b5528ca9baf",
+        "size_bytes": 571551
+      },
+      "source/RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0128_sham.tsv": {
+        "sha256": "26719e8c40a48d2cb5a119ac3189b3a53a9a2fb68cca1c14f29af913e337d795",
+        "size_bytes": 560799
+      },
+      "source/RUN_RSPATIAL_SHIFT_SWEEP_DISCOVERY.sh": {
+        "sha256": "aeeda7e92ebdefbee060734d733e64d498f876e6abb15dff732b626de0733775",
+        "size_bytes": 8874
+      },
+      "source/relation_spatial_adjudication.py": {
+        "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+        "size_bytes": 864
+      },
+      "source/relation_spatial_physical_adjudication.py": {
+        "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+        "size_bytes": 42533
+      },
+      "source/relation_spatial_pmu_preflight": {
+        "sha256": "a30adcd470aa970a9f1be618bfba3ff9cb139288baba54184a3d8e39ab244d8d",
+        "size_bytes": 42632
+      },
+      "source/relation_spatial_pmu_preflight.c": {
+        "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+        "size_bytes": 9376
+      },
+      "source/relation_spatial_public.py": {
+        "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+        "size_bytes": 32161
+      },
+      "source/relation_spatial_runtime": {
+        "sha256": "8a3921fd6e617aa520ab12b97b9e911e6494eea25c0e315b2c3175c297f060b5",
+        "size_bytes": 116568
+      },
+      "source/relation_spatial_runtime.c": {
+        "sha256": "3f638e0d57f5b54e906b469bdc892628c6df22188856321023b1ab604314bec2",
+        "size_bytes": 53245
+      },
+      "source/relation_spatial_runtime.h": {
+        "sha256": "411ca1879404f668d59e4534220438a22fdd91d681d1cb9568bd452abf328bb1",
+        "size_bytes": 2843
+      },
+      "source/relation_spatial_target.py": {
+        "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+        "size_bytes": 91980
+      }
+    },
+    "path": "C:\\tmp\\family10h_relation_rspatial_shift_sweep_discovery_v1_0_source_package.tar.gz",
+    "run_id": "family10h_relation_rspatial_shift_sweep_discovery_v1_0",
+    "schema": "FAMILY10H_RELATION_RSPATIAL_SHIFT_SWEEP_SOURCE_PACKAGE_V1",
+    "sha256": "f92d46a8e10e5cb250e0bd34e6ce4606a7a46469baa49f16a338e37c1ddbd3ac",
+    "size_bytes": 827889
+  },
+  "passed": true,
+  "run_id": "family10h_relation_rspatial_shift_sweep_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_SHIFT_SWEEP_LIVE_CONTROLLER_V1",
+  "small_wall_crossed": false,
+  "upload": {
+    "command": [
+      "scp",
+      "-O",
+      "-o",
+      "BatchMode=yes",
+      "C:\\tmp\\family10h_relation_rspatial_shift_sweep_discovery_v1_0_source_package.tar.gz",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_relation_rspatial_shift_sweep_discovery_v1_0_source_package.tar.gz"
+    ],
+    "elapsed_seconds": 0.187,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  }
+}
