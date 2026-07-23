@@ -1,0 +1,257 @@
+{
+  "absence": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_source_package.tar.gz"
+    ],
+    "elapsed_seconds": 0.469,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "archive_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_relation_rspatial_lifetime_reset_discovery_v1_0\\attempt_1\\DISCOVERY_TARGET_ROOT.tar.gz",
+  "archive_sha256": "752ed25289fc9e59dc0bcd9eb1bc5028dc2a2fe2beb4503149ed7430d85d3f9b",
+  "archive_size": 17414634,
+  "cleanup": {
+    "cleanup": {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "root@192.168.137.100",
+        "set -eu; test -f /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0/.family10h_relation_rspatial_lifetime_reset_discovery_v1_0_owner; grep -qx 'family10h_relation_rspatial_lifetime_reset_discovery_v1_0' /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0/.family10h_relation_rspatial_lifetime_reset_discovery_v1_0_owner; rm -rf /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0 /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_remote_root.tar.gz /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_source_package.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_source_package.tar.gz"
+      ],
+      "elapsed_seconds": 0.297,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "passed": true,
+    "schema": "FAMILY10H_RELATION_RSPATIAL_LIFETIME_RESET_REMOTE_CLEANUP_V1"
+  },
+  "copyback": {
+    "copy": {
+      "command": [
+        "scp",
+        "-O",
+        "-o",
+        "BatchMode=yes",
+        "root@192.168.137.100:/root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_remote_root.tar.gz",
+        "C:\\tmp\\family10h_relation_rspatial_lifetime_reset_discovery_v1_0_remote_root.tar.gz"
+      ],
+      "elapsed_seconds": 0.344,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "created_at": "2026-07-23T22:29:59.486804+00:00",
+    "local_sha256": "752ed25289fc9e59dc0bcd9eb1bc5028dc2a2fe2beb4503149ed7430d85d3f9b",
+    "local_size": 17414634,
+    "make_archive": {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "root@192.168.137.100",
+        "set -eu; rm -f /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_remote_root.tar.gz; tar -czf /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_remote_root.tar.gz -C /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0 source; sha256sum /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_remote_root.tar.gz; stat -c%s /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_remote_root.tar.gz"
+      ],
+      "elapsed_seconds": 6.093,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "752ed25289fc9e59dc0bcd9eb1bc5028dc2a2fe2beb4503149ed7430d85d3f9b  /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_remote_root.tar.gz\n17414634\n"
+    },
+    "passed": true,
+    "remote_sha256": "752ed25289fc9e59dc0bcd9eb1bc5028dc2a2fe2beb4503149ed7430d85d3f9b",
+    "remote_size": 17414634,
+    "schema": "FAMILY10H_RELATION_RSPATIAL_LIFETIME_RESET_COPYBACK_V1"
+  },
+  "create": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; mkdir -p /root/catcas_live_small_wall; mkdir -m 0700 /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0; printf '%s\\n' 'family10h_relation_rspatial_lifetime_reset_discovery_v1_0' > /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0/.family10h_relation_rspatial_lifetime_reset_discovery_v1_0_owner"
+    ],
+    "elapsed_seconds": 0.172,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "created_at": "2026-07-23T22:29:59.774696+00:00",
+  "extract": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; tar -xzf /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_source_package.tar.gz -C /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0; chmod +x /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0/source/relation_spatial_runtime /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0/source/relation_spatial_pmu_preflight /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0/source/RUN_RSPATIAL_LIFETIME_RESET_DISCOVERY.sh"
+    ],
+    "elapsed_seconds": 0.281,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "live": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set +e; cd /root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0/source; ./RUN_RSPATIAL_LIFETIME_RESET_DISCOVERY.sh"
+    ],
+    "elapsed_seconds": 13.344,
+    "returncode": 0
+  },
+  "package": {
+    "created_at": "2026-07-23T22:29:38.546646+00:00",
+    "files": {
+      "source/RELATION_GRAMMAR.json": {
+        "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+        "size_bytes": 292071
+      },
+      "source/RELATION_GRAMMAR.sha256": {
+        "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+        "size_bytes": 66
+      },
+      "source/RELATION_GRAMMAR.tsv": {
+        "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+        "size_bytes": 360
+      },
+      "source/RELATION_RSPATIAL_LIFETIME_RESET_SCHEDULE_MANIFEST.json": {
+        "sha256": "14facb0fb2e628e77aa2c8fe087435b124c16537f6f0fc31bb78a03d5e427731",
+        "size_bytes": 3107
+      },
+      "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+        "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+        "size_bytes": 2277
+      },
+      "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+        "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+        "size_bytes": 66
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+        "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+        "size_bytes": 1866
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+        "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+        "size_bytes": 66
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+        "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+        "size_bytes": 11263467
+      },
+      "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+        "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+        "size_bytes": 2635
+      },
+      "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+        "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+        "size_bytes": 3120
+      },
+      "source/RSPATIAL_LIFETIME_RESET_SCHEDULES/alive_primary.tsv": {
+        "sha256": "cf81d4c65f5480ebec4e1ea597ca42ea7e4ed70e915f965362ec554b89bd8dfa",
+        "size_bytes": 558239
+      },
+      "source/RSPATIAL_LIFETIME_RESET_SCHEDULES/alive_sham.tsv": {
+        "sha256": "d436d50eea3a076305ac9e26f9c4928af9a77ff7a44581a81aa0cfbae3ca9f53",
+        "size_bytes": 547487
+      },
+      "source/RSPATIAL_LIFETIME_RESET_SCHEDULES/dead_primary.tsv": {
+        "sha256": "06db5a74a4b2bf07e4a1d8b3ada2fbabb5e07bb93bbb6b052c2e6ab484345281",
+        "size_bytes": 582815
+      },
+      "source/RSPATIAL_LIFETIME_RESET_SCHEDULES/dead_sham.tsv": {
+        "sha256": "29878660339e4664eba5d9f43ec4418c0643470b08ed0eb61e22971678eaf1de",
+        "size_bytes": 564383
+      },
+      "source/RSPATIAL_LIFETIME_RESET_SCHEDULES/reset_primary.tsv": {
+        "sha256": "3d4962b27a6d2356e261ed59ab5c0cd943fb3ad8289f392faffd08c3f06e3d55",
+        "size_bytes": 587423
+      },
+      "source/RSPATIAL_LIFETIME_RESET_SCHEDULES/reset_sham.tsv": {
+        "sha256": "ac330a316ec35ca7301197e841ad3cb66c2ec17deff10237805e8433f8b064d8",
+        "size_bytes": 568991
+      },
+      "source/RUN_RSPATIAL_LIFETIME_RESET_DISCOVERY.sh": {
+        "sha256": "8c1354e2cf5a59b61e2ff4461343eccf8133144f96107e4725ebb3f9c035af5e",
+        "size_bytes": 8451
+      },
+      "source/relation_spatial_adjudication.py": {
+        "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+        "size_bytes": 864
+      },
+      "source/relation_spatial_physical_adjudication.py": {
+        "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+        "size_bytes": 42533
+      },
+      "source/relation_spatial_pmu_preflight": {
+        "sha256": "0c71e52bfb57b3cdaedbe2d8126700e0da305ea1fcfda6fe3aa2c42bcac29aae",
+        "size_bytes": 42632
+      },
+      "source/relation_spatial_pmu_preflight.c": {
+        "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+        "size_bytes": 9376
+      },
+      "source/relation_spatial_public.py": {
+        "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+        "size_bytes": 32161
+      },
+      "source/relation_spatial_runtime": {
+        "sha256": "fe1cb820f95a044e26caf5b5fca31d2092df67da86f4d5a39bf74721fdeb5b31",
+        "size_bytes": 110736
+      },
+      "source/relation_spatial_runtime.c": {
+        "sha256": "31510a76316cdbab26048ffe330bc355cbf0c819552ecbe372067e79836d1488",
+        "size_bytes": 45415
+      },
+      "source/relation_spatial_runtime.h": {
+        "sha256": "f3e1887e0422942dcc9cd64e55e5899c8c85b2bf9c574c73a9ce4e4b9614d05a",
+        "size_bytes": 2239
+      },
+      "source/relation_spatial_target.py": {
+        "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+        "size_bytes": 91980
+      }
+    },
+    "path": "C:\\tmp\\family10h_relation_rspatial_lifetime_reset_discovery_v1_0_source_package.tar.gz",
+    "run_id": "family10h_relation_rspatial_lifetime_reset_discovery_v1_0",
+    "schema": "FAMILY10H_RELATION_RSPATIAL_LIFETIME_RESET_SOURCE_PACKAGE_V1",
+    "sha256": "8772ff16dd2036e064558b40fa2f1c26e33a38629b651c11262266b344eed583",
+    "size_bytes": 644758
+  },
+  "passed": true,
+  "run_id": "family10h_relation_rspatial_lifetime_reset_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_LIFETIME_RESET_LIVE_CONTROLLER_V1",
+  "small_wall_crossed": false,
+  "upload": {
+    "command": [
+      "scp",
+      "-O",
+      "-o",
+      "BatchMode=yes",
+      "C:\\tmp\\family10h_relation_rspatial_lifetime_reset_discovery_v1_0_source_package.tar.gz",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_relation_rspatial_lifetime_reset_discovery_v1_0_source_package.tar.gz"
+    ],
+    "elapsed_seconds": 0.188,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  }
+}

@@ -1,0 +1,290 @@
+{
+  "analysis_sha256": "dc6329a237b60607724225f4c0e3e87075dcb6670a2274563646166449c9aa56",
+  "archive_sha256": "752ed25289fc9e59dc0bcd9eb1bc5028dc2a2fe2beb4503149ed7430d85d3f9b",
+  "archive_size": 17414634,
+  "claim_boundary": {
+    "full_tomography_established": false,
+    "positive_scientific_claim": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "controller_passed": true,
+  "coordinates": {
+    "D_alive_primary_minus_sham": 0.07247202275757234,
+    "D_dead_primary_minus_sham": 0.027252070518151372,
+    "D_reset_primary_minus_sham": 0.011984708844938699,
+    "R_alive_primary": 0.07185571829316881,
+    "R_alive_sham": -0.0006163044644035339,
+    "R_dead_primary": 0.028481942324742222,
+    "R_dead_sham": 0.0012298718065908486,
+    "R_reset_primary": 0.007192910252301424,
+    "R_reset_sham": -0.004791798592637275,
+    "dead_D_abs_to_alive_D_abs": 0.37603573739500606,
+    "dead_primary_abs_to_alive_primary_abs": 0.3963768368237152,
+    "reset_D_abs_to_alive_D_abs": 0.16537014407654932,
+    "reset_primary_abs_to_alive_primary_abs": 0.10010212719542518
+  },
+  "created_at": "2026-07-23T22:30:09.710433+00:00",
+  "interpretation": {
+    "alive_D_positive": true,
+    "candidate_persistent_source_written_state": true,
+    "candidate_receiver_static_geometry": false,
+    "dead_D_positive": true,
+    "dead_preserves_at_least_25pct_alive_D": true,
+    "dead_primary_same_sign_as_alive_primary": true,
+    "exploratory_only": true,
+    "reset_D_positive": true,
+    "reset_kills_below_25pct_alive_D": true,
+    "reset_preserves_at_least_25pct_alive_D": false,
+    "reset_primary_same_sign_as_alive_primary": true,
+    "reset_reduces_dead_D_abs": true,
+    "small_wall_crossed": false,
+    "source_death_kills_below_25pct_alive_D": false
+  },
+  "lifecycle_reports": {
+    "alive": {
+      "D_abs_to_alive_D_abs": 1.0,
+      "D_positive": true,
+      "D_primary_minus_sham": 0.07247202275757234,
+      "primary_R": 0.07185571829316881,
+      "primary_positive": true,
+      "primary_variant": "alive_primary",
+      "sham_R": -0.0006163044644035339,
+      "sham_abs_to_primary_abs": 0.008576971729501517,
+      "sham_positive": false,
+      "sham_variant": "alive_sham"
+    },
+    "dead": {
+      "D_abs_to_alive_D_abs": 0.37603573739500606,
+      "D_positive": true,
+      "D_primary_minus_sham": 0.027252070518151372,
+      "primary_R": 0.028481942324742222,
+      "primary_positive": true,
+      "primary_variant": "dead_primary",
+      "sham_R": 0.0012298718065908486,
+      "sham_abs_to_primary_abs": 0.043180756163615316,
+      "sham_positive": true,
+      "sham_variant": "dead_sham"
+    },
+    "reset": {
+      "D_abs_to_alive_D_abs": 0.16537014407654932,
+      "D_positive": true,
+      "D_primary_minus_sham": 0.011984708844938699,
+      "primary_R": 0.007192910252301424,
+      "primary_positive": true,
+      "primary_variant": "reset_primary",
+      "sham_R": -0.004791798592637275,
+      "sham_abs_to_primary_abs": 0.666183564726684,
+      "sham_positive": false,
+      "sham_variant": "reset_sham"
+    }
+  },
+  "run_id": "family10h_relation_rspatial_lifetime_reset_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_LIFETIME_RESET_DISCOVERY_ANALYSIS_V1",
+  "variant_reports": {
+    "alive_primary": {
+      "R_spatial": {
+        "abs_mean": 0.11630944712389249,
+        "abs_of_mean": 0.07185571829316881,
+        "count": 128,
+        "max_abs": 0.39991249628490255,
+        "mean": 0.07185571829316881,
+        "q50_abs": 0.06271378498252853,
+        "q95_abs": 0.34717494701487017,
+        "q99_abs": 0.38786203966902244,
+        "sign_counts": {
+          "-1": 51,
+          "0": 0,
+          "1": 77
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "alive_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05661331075950753,
+        "abs_of_mean": 0.0006163044644035339,
+        "count": 128,
+        "max_abs": 0.18971909798871445,
+        "mean": -0.0006163044644035339,
+        "q50_abs": 0.04714679603063257,
+        "q95_abs": 0.14266767967039487,
+        "q99_abs": 0.16535286684627198,
+        "sign_counts": {
+          "-1": 65,
+          "0": 0,
+          "1": 63
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 512
+      },
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "source_alive_at_pair_measurement_counts": {
+        "True": 512
+      },
+      "source_alive_during_query_counts": {
+        "True": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "alive_during_query": 512
+      }
+    },
+    "dead_primary": {
+      "R_spatial": {
+        "abs_mean": 0.05601217865689296,
+        "abs_of_mean": 0.028481942324742222,
+        "count": 128,
+        "max_abs": 0.1788575030354846,
+        "mean": 0.028481942324742222,
+        "q50_abs": 0.04029701722249511,
+        "q95_abs": 0.14810592537612532,
+        "q99_abs": 0.17243309112536542,
+        "sign_counts": {
+          "-1": 43,
+          "0": 0,
+          "1": 85
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_dead_before_spatial_pair_probe": 512
+      },
+      "query": "dead_query_relation_pair_control",
+      "raw_record_count": 512,
+      "source_alive_at_pair_measurement_counts": {
+        "False": 512
+      },
+      "source_alive_during_query_counts": {
+        "False": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "dead_before_query": 512
+      }
+    },
+    "dead_sham": {
+      "R_spatial": {
+        "abs_mean": 0.04585669179806483,
+        "abs_of_mean": 0.0012298718065908486,
+        "count": 128,
+        "max_abs": 0.2086045819833278,
+        "mean": 0.0012298718065908486,
+        "q50_abs": 0.03480992038482125,
+        "q95_abs": 0.12204138973714945,
+        "q99_abs": 0.16758503666455585,
+        "sign_counts": {
+          "-1": 62,
+          "0": 0,
+          "1": 66
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_dead_before_spatial_pair_probe": 512
+      },
+      "query": "dead_relation_sham_control",
+      "raw_record_count": 512,
+      "source_alive_at_pair_measurement_counts": {
+        "False": 512
+      },
+      "source_alive_during_query_counts": {
+        "False": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "dead_before_query": 512
+      }
+    },
+    "reset_primary": {
+      "R_spatial": {
+        "abs_mean": 0.0466559580845408,
+        "abs_of_mean": 0.007192910252301424,
+        "count": 128,
+        "max_abs": 0.14973608673555422,
+        "mean": 0.007192910252301424,
+        "q50_abs": 0.03808189368799097,
+        "q95_abs": 0.1152860296657641,
+        "q99_abs": 0.13482109665208802,
+        "sign_counts": {
+          "-1": 57,
+          "0": 0,
+          "1": 71
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_dead_then_cache_flush_before_spatial_pair_probe": 512
+      },
+      "query": "reset_query_relation_pair_control",
+      "raw_record_count": 512,
+      "source_alive_at_pair_measurement_counts": {
+        "False": 512
+      },
+      "source_alive_during_query_counts": {
+        "False": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "dead_before_query": 512
+      }
+    },
+    "reset_sham": {
+      "R_spatial": {
+        "abs_mean": 0.0660644219598181,
+        "abs_of_mean": 0.004791798592637275,
+        "count": 128,
+        "max_abs": 0.2575319232354891,
+        "mean": -0.004791798592637275,
+        "q50_abs": 0.048075096966707406,
+        "q95_abs": 0.17066964011764343,
+        "q99_abs": 0.24538452909058597,
+        "sign_counts": {
+          "-1": 68,
+          "0": 0,
+          "1": 60
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "process_custody_counts": {
+        "source_dead_then_cache_flush_before_spatial_pair_probe": 512
+      },
+      "query": "reset_relation_sham_control",
+      "raw_record_count": 512,
+      "source_alive_at_pair_measurement_counts": {
+        "False": 512
+      },
+      "source_alive_during_query_counts": {
+        "False": 512
+      },
+      "source_death_receipt_count": 512,
+      "source_lifetime_counts": {
+        "dead_before_query": 512
+      }
+    }
+  }
+}
