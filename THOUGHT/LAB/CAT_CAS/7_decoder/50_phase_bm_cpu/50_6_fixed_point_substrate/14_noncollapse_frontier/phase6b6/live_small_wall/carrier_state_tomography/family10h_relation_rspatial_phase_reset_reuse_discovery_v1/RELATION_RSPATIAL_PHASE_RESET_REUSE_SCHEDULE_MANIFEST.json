@@ -1,0 +1,97 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Which active reset method most consistently kills the source-dead R-spatial primary-minus-sham relation coordinate across matched strata?",
+  "pair_sample_count": 256,
+  "rows_per_variant": 1024,
+  "run_id": "family10h_relation_rspatial_phase_reset_reuse_discovery_v1_0",
+  "schedule_manifest_sha256": "f37fb498df822a046e2f1a07a5f39d2cf4f175ee68d004eec3e5880527b1c2a7",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_PHASE_RESET_REUSE_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "alive_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_PHASE_RESET_REUSE_SCHEDULES/alive_primary.tsv",
+      "query": "query_relation_pair",
+      "row_count": 1024,
+      "sha256": "7be93aa00d186187a548bed5742f9dc9e82db8c11ff7724639a4ab7e6e9ba3e0",
+      "size_bytes": 1118751
+    },
+    "alive_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_PHASE_RESET_REUSE_SCHEDULES/alive_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 1024,
+      "sha256": "1be4273fb78521109c4e34c21f73ac76bffdbefb51061f31361b1f43f6240ab5",
+      "size_bytes": 1097247
+    },
+    "dead_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_PHASE_RESET_REUSE_SCHEDULES/dead_primary.tsv",
+      "query": "dead_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "777a8ffdc58fca61773a9c5c12ed16668e98452d6477b4c61aa7312b7ffb2e9c",
+      "size_bytes": 1167903
+    },
+    "dead_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_PHASE_RESET_REUSE_SCHEDULES/dead_sham.tsv",
+      "query": "dead_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "ebfcca488acbe62882eb3bd4dded91449918f35c9449c92db0dba39bb691037d",
+      "size_bytes": 1131039
+    },
+    "reset_double_flush_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_PHASE_RESET_REUSE_SCHEDULES/reset_double_flush_primary.tsv",
+      "query": "reset_double_flush_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "2c256cdde0c109ee1ada620bc4c463594ae6186b3c95e6a69c1d8b1936912afe",
+      "size_bytes": 1296927
+    },
+    "reset_double_flush_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_PHASE_RESET_REUSE_SCHEDULES/reset_double_flush_sham.tsv",
+      "query": "reset_double_flush_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "87d5d12e83c51912f3fd180227be2cbe1fd55c2e7f98d6a3a2bb96a1686c6c43",
+      "size_bytes": 1260063
+    },
+    "restore_opposite_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_PHASE_RESET_REUSE_SCHEDULES/restore_opposite_primary.tsv",
+      "query": "restore_opposite_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "94de3c4999791e37e0e7d4adbbc99b58520515654658be98cb2e08badd4ac093",
+      "size_bytes": 1278495
+    },
+    "restore_opposite_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_PHASE_RESET_REUSE_SCHEDULES/restore_opposite_sham.tsv",
+      "query": "restore_opposite_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "f4a474d3a25b241925bc66bec29316492911bbc1f2edc5b760b44198d92a7871",
+      "size_bytes": 1241631
+    },
+    "restore_same_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_PHASE_RESET_REUSE_SCHEDULES/restore_same_primary.tsv",
+      "query": "restore_same_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "9e5d819d06b0878591686e019501adf23f213a212b7cf15b0583d6ecaa932baf",
+      "size_bytes": 1241631
+    },
+    "restore_same_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_PHASE_RESET_REUSE_SCHEDULES/restore_same_sham.tsv",
+      "query": "restore_same_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "83a49248dcfe879d33dbad3d5432f46a09ef387e0314fdbe14c781219ac267bf",
+      "size_bytes": 1204767
+    }
+  }
+}
