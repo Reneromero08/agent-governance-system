@@ -1,10 +1,10 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T14:04:30.0000000-07:00",
+  "updated_at": "2026-07-23T14:28:05.7987595-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
-  "checkpoint_head": "c79c85bbd86f39bd42105cf421b02e7bbcd9dc74",
-  "origin_head": "c79c85bbd86f39bd42105cf421b02e7bbcd9dc74",
+  "checkpoint_head": "218cdb4f8f2e3d8e43211d7bcb88282b947f4493",
+  "origin_head": "218cdb4f8f2e3d8e43211d7bcb88282b947f4493",
   "autonomous_mode": {
     "active": true,
     "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
@@ -115,7 +115,8 @@
     "prior_primary_minus_sham_official_attempts": 1,
     "prior_relation_sham_position_exploration_attempts": 1,
     "affinity_deadlock_discovery_attempts": 4,
-    "patched_full_local_paired_discovery_sweeps": 1
+    "patched_full_local_paired_discovery_sweeps": 1,
+    "relation_transform_kill_discovery_attempts": 1
   },
   "latest_retained_evidence": {
     "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
@@ -138,6 +139,29 @@
     "local_paired_v1_1_raw_record_count": 20480,
     "local_paired_v1_1_pair_observation_count": 5242880,
     "local_paired_v1_1_source_death_receipt_count": 20480,
+    "relation_transform_kill_discovery_result": "EXPLORATORY_ONLY_RELATION_QUERY_INVERSION_REVERSED_PRIMARY_BUT_CARRIER_OFF_DID_NOT_KILL",
+    "relation_transform_kill_discovery_archive_sha256": "ea0c98f1928a2453a2c915d481c8fcb6ccb844179b342f20b5d22bb46df04e55",
+    "relation_transform_kill_discovery_archive_size": 11617952,
+    "relation_transform_kill_discovery_analysis_sha256": "b574cf415348e856aaf0a7455696125a6bcf3006eb5600ac3657b7b43e4d2d4d",
+    "relation_transform_kill_discovery_raw_record_count": 2048,
+    "relation_transform_kill_discovery_pair_observation_count": 524288,
+    "relation_transform_kill_discovery_source_death_receipt_count": 2048,
+    "relation_transform_kill_discovery_coordinates": {
+      "R_primary": 0.08019454325349624,
+      "R_query_inversion": -0.07500211198511479,
+      "R_relation_sham": 0.0053880508745956296,
+      "R_carrier_off": 0.0662245353536203,
+      "D_primary_minus_sham": 0.07480649237890062,
+      "query_inversion_sum_primary_plus_inverted": 0.005192431268381453,
+      "sham_abs_to_primary_abs": 0.06718725060337227,
+      "carrier_off_abs_to_primary_abs": 0.8257985227783327
+    },
+    "relation_transform_kill_discovery_interpretation": {
+      "query_inversion_reverses_primary": true,
+      "relation_sham_below_25pct_primary": true,
+      "carrier_off_kills_primary_to_below_25pct": false,
+      "small_wall_crossed": false
+    },
     "prior_scalar_q_readout_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
     "prior_scalar_q_readout_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
     "prior_second_operator_dimension_class": "FAMILY10H_SECOND_OPERATOR_DIMENSION_UNRESOLVED_RETROSPECTIVE"
@@ -154,8 +178,10 @@
       "full tomography without scalar-replay exclusion",
       "R2 restoration by byte/hash restoration alone"
     ],
-    "current_next_experiment": "use the confirmed local paired differential as the carrier-access baseline, then probe the missing canonical Small Wall controls: relation mutation/non-null, carrier-off and geometry-null kills, route/session survival, and R2 restoration",
-    "current_blockers": []
+    "current_next_experiment": "exploit the strong query-inversion reversal while removing the carrier-off/source-alive confound; the next package should compare relation transform against carrier-off within the same local differential instead of relying on absolute carrier-off kill",
+    "current_blockers": [
+      "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run"
+    ]
   },
   "claim_state": {
     "scalar_q_readout_confirmed_prospectively": true,

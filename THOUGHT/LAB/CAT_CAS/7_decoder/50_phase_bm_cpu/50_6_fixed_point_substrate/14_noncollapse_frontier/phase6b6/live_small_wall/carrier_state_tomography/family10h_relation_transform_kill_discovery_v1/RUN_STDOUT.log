@@ -1,0 +1,34 @@
+{
+  "prepare": {
+    "created_at": "2026-07-23T21:26:22.168383+00:00",
+    "passed": true,
+    "pmu_helper_sha256": "153aa449c014fc1276947b64df65048e20ef146b7a0c38752b3618b460c4d9b0",
+    "run_id": "family10h_relation_transform_kill_discovery_v1_0",
+    "runtime_sha256": "171dd5f822ab9388fa497e608159b18e84b62b1c94c92a40c0d9bac4784e256d",
+    "schedule_manifest_sha256": "7b5e202db3bdf9e691d7ce9e2dec5a9a76d730bbc016359423880929bc818750",
+    "schema": "FAMILY10H_RELATION_TRANSFORM_KILL_PREPARE_V1",
+    "small_wall_crossed": false
+  }
+}
+{
+  "analysis_sha256": "b574cf415348e856aaf0a7455696125a6bcf3006eb5600ac3657b7b43e4d2d4d",
+  "archive_sha256": "ea0c98f1928a2453a2c915d481c8fcb6ccb844179b342f20b5d22bb46df04e55",
+  "controller_passed": true,
+  "coordinates": {
+    "D_primary_minus_sham": 0.07480649237890062,
+    "R_carrier_off": 0.0662245353536203,
+    "R_primary": 0.08019454325349624,
+    "R_query_inversion": -0.07500211198511479,
+    "R_relation_sham": 0.0053880508745956296,
+    "carrier_off_abs_to_primary_abs": 0.8257985227783327,
+    "query_inversion_sum_primary_plus_inverted": 0.005192431268381453,
+    "sham_abs_to_primary_abs": 0.06718725060337227
+  },
+  "interpretation": {
+    "carrier_off_kills_primary_to_below_25pct": false,
+    "exploratory_only": true,
+    "query_inversion_reverses_primary": true,
+    "relation_sham_below_25pct_primary": true,
+    "small_wall_crossed": false
+  }
+}
