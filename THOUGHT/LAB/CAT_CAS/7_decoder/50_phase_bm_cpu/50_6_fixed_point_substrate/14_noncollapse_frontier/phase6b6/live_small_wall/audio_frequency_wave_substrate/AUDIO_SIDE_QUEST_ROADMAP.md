@@ -104,6 +104,9 @@ compact repeated public program       8,000,000 gates from 8 instructions
 scalable phase memory                 65,536 registers / 131,072 complex cells
 phase-native conditional routing      CSWAP 27/27 F3 cases exact
 phase-resident stored program         fixed schedule changes result from program phases
+spatial phase layers                  640,000 gates in logical depth 32
+parallel runtime                      persistent pthread pool, TSan clean
+spatial carrier restoration           below 1e-12 with reuse and cross-program reuse
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -233,8 +236,14 @@ finite multi-slot Fredkin fabrics now pass exact-byte development
 qualification. The compiler's avoidable one-hot slot scan has been removed:
 the fused phase `PCSWAP` relation lowers `N` Fredkin gates to `N` native gates
 instead of `O(N^2)` scanned gates. The live gap is no longer syntax,
-compilation, or quadratic interpreter overhead: it is removing the
-conventional host's remaining linear payment for every native gate.
+compilation, quadratic interpreter overhead, or an untested threading
+assumption. A spatial pthread fabric now executes `640,000` phase gates in
+logical depth `32`, matches a separate scalar reference, restores and reuses
+the carrier, and passes ThreadSanitizer. Its two-thread median did not beat
+its one-thread median, and its best matched one-thread phase median remained
+`9.248x` slower than the compact scalar reference. The live gap is removing
+the conventional host's remaining linear complex-polynomial payment for every
+native gate.
 
 ### B. Attack a flagship without an equivalent compact classical recurrence
 

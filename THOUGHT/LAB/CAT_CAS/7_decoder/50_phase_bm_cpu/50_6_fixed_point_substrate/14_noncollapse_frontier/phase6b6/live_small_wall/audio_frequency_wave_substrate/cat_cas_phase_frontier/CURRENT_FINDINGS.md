@@ -266,13 +266,68 @@ This is a compact compiler for finite Fredkin networks, not a claim of C5
 advantage, infinite storage, physical parallelism, or completed phase
 computing.
 
+## Spatial pthread phase fabric
+
+`spatial_phase_fredkin.c` removes the sequential gate-stream schedule from
+the next experiment. A layer contains `width` disjoint complex-phase
+`PCSWAP` interactions over a shifted partition of `3*width` data relations.
+The partition shifts by one relation between layers, so information propagates
+through the spatial carrier. A persistent pthread pool executes each layer
+with explicit synchronization that is visible to ThreadSanitizer.
+
+The native kernel still operates on twin complex rails. It does not decode
+the program, control, or data while evolving. Its `F3` product polynomial now
+uses the unit-circle identity `z^2 = conjugate(z)`, reducing each product
+polynomial from six complex multiplications to three without converting the
+phase relation to a scalar symbol.
+
+Six parameter sets matched the independently compiled scalar reference,
+including identical boundaries at one and six threads and a case with more
+threads than gates. The largest current probe had:
+
+```text
+spatial width                       20,000 gates
+layers / logical depth             32
+total phase gates                   640,000
+program phase registers             640,000
+data phase registers                60,000
+resident complex cells              1,400,000
+full boundary digest                9453c5a6d7c6f665
+data boundary digest                9bc8f4d1201e5665
+program-variant data digest         c65025a0431ff9e5
+nominal restoration                 5.00138098873e-13
+actual-restored reuse restoration   9.792812436e-13
+cross-program reuse restoration     9.89511047202e-13
+wrong inverse                       1.73205080757
+omitted inverse                     1.73205080757
+```
+
+ASan, UBSan, leak detection, and ThreadSanitizer pass for both executables.
+Strict decimal parsing also rejects negative, signed, overflowing, zero, and
+trailing-garbage parameters before execution. The program-sensitivity control
+reports rather than rejects legitimate identity computations: even repetition
+of a self-inverse layer can correctly erase the distinction between two
+programs. A nondegenerate canonical case must and does change its data result.
+Focused reviewer `SOL-XHIGH-SPATIAL-PTHREAD-FREDKIN-01` independently extended
+the checks to all 81 `F3` PCSWAP cases, 25,957 layer partitions, a 771-layer
+ThreadSanitizer stress, and a 1,088,000-gate recurrence. Verdict: `PASS`, with
+no remaining findings.
+
+On the target process's available CPUs `0-1`, seven descriptive matched runs
+gave a one-thread phase median of `114,396,958 ns` and a compact scalar median
+of `12,369,630 ns`, a `9.248x` phase penalty. The two-thread phase median was
+slower, not faster. DVFS was unchanged and uncontrolled. The construction
+therefore establishes finite spatial logical parallelism and a race-clean C
+runtime, not software speed advantage, physical parallelism, or C5.
+
 ## Next active work
 
-The next move must change the resource law rather than continue tuning an
-equivalent digital recurrence:
+The next move must stop paying one conventional complex-polynomial evaluation
+per spatial gate. Interpreter removal and CPU threading are now measured, and
+neither changes that underlying resource law:
 
-1. replace the remaining linear host payment for every Fredkin gate with a
-   genuinely parallel or global phase interaction native to the carrier;
+1. construct a genuinely global phase interaction whose carrier performs a
+   whole layer without a host loop over gates;
 2. transfer the fixed twin-rail construction to a flagship global operator
    without an equivalent compact classical recurrence;
 3. identify a physical phase operation whose parallel work is not paid again by

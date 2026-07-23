@@ -1,0 +1,198 @@
+{
+  "schema": "cat_cas_mutable_spatial_phase_fabric_v1",
+  "status": "MUTABLE_DEVELOPMENT_PASS",
+  "generated_utc": "2026-07-23T23:29:59Z",
+  "claim_boundary": "FINITE_SOFTWARE_SPATIAL_PHASE_FABRIC_NO_C5_OR_PHYSICAL_PHASE_CLAIM",
+  "target": {
+    "hostname": "catcas",
+    "cpu": "AMD Phenom II X6 1090T",
+    "process_cpu_allowed_list": "0-1",
+    "compiler": "gcc 14.2.0",
+    "qualification_flags": "-O3 -march=native -std=c11 -Wall -Wextra -Werror -pedantic -pthread",
+    "contact_scope": "raw source transfer to /tmp, userspace compilation, sanitizer execution, and CPU execution only"
+  },
+  "sources": {
+    "native": {
+      "path": "spatial_phase_fredkin.c",
+      "bytes": 27461,
+      "sha256": "4d797b80f442355a423ab4c7b779c8a5db139af4cc1bde1afa5134c274b1abee"
+    },
+    "independent_scalar_reference": {
+      "path": "spatial_fredkin_reference.c",
+      "bytes": 14380,
+      "sha256": "1013ce67d3f8b2d9f2bccada4c665d6f6fa34d98ad359101b2d287d0bf8082b5",
+      "linked_into_native": false
+    },
+    "raw_transfer_hashes_match": true
+  },
+  "mechanism": {
+    "carrier": "relative phase of twin complex rails",
+    "radix": 3,
+    "program_phase_registers": "width * depth",
+    "data_phase_registers": "3 * width",
+    "layer_partition": "start=(3*gate + layer%3) mod (3*width)",
+    "gates_per_layer": "width disjoint PCSWAP interactions",
+    "logical_depth": "depth * cycles",
+    "total_native_gates": "width * depth * cycles",
+    "parallel_runtime": "persistent pthread worker pool with mutex and condition-variable job custody",
+    "f3_unit_circle_identity": "z^2 = conjugate(z)",
+    "complex_multiplies_per_product_factor": 3,
+    "decoded_values_feed_native_evolution": false,
+    "boundary_latch_feeds_native_evolution": false,
+    "inverse": "same self-inverse PCSWAP gates in reverse layer and cycle order",
+    "retained_inverse_history": false
+  },
+  "exact_grid": {
+    "native_reference_cases_exact": 6,
+    "native_reference_cases_total": 6,
+    "thread_count_exceeds_width_case": "PASS",
+    "thread_1_thread_6_boundary_equivalence": "PASS",
+    "cases": [
+      {
+        "parameters": [1, 1, 1, 1, 1],
+        "full_fnv1a64": "b5d444774c80545c",
+        "data_fnv1a64": "d0a39818672732bf"
+      },
+      {
+        "parameters": [2, 2, 3, 1, 2],
+        "full_fnv1a64": "8584b266d0760e5d",
+        "data_fnv1a64": "680635e962c83bff"
+      },
+      {
+        "parameters": [17, 7, 2, 1, 11],
+        "full_fnv1a64": "9fc4b1c37196bd2b",
+        "data_fnv1a64": "fafa087310f93745"
+      },
+      {
+        "parameters": [17, 7, 2, 6, 11],
+        "full_fnv1a64": "9fc4b1c37196bd2b",
+        "data_fnv1a64": "fafa087310f93745"
+      },
+      {
+        "parameters": [1000, 9, 1, 6, 5],
+        "full_fnv1a64": "c71c1bc38f6702ed",
+        "data_fnv1a64": "55de11de1fe492dd"
+      },
+      {
+        "parameters": [2, 5, 2, 6, 7],
+        "full_fnv1a64": "8d84a14a65d61ac8",
+        "data_fnv1a64": "929fcacf8cf96a9d"
+      }
+    ]
+  },
+  "large_probe": {
+    "width": 20000,
+    "depth": 32,
+    "cycles": 1,
+    "threads": 2,
+    "program_seed": 5,
+    "logical_depth": 32,
+    "total_gates": 640000,
+    "program_phase_registers": 640000,
+    "data_phase_registers": 60000,
+    "registers": 700000,
+    "resident_complex_cells": 1400000,
+    "full_boundary_fnv1a64": "9453c5a6d7c6f665",
+    "data_boundary_fnv1a64": "9bc8f4d1201e5665",
+    "program_variant_data_fnv1a64": "c65025a0431ff9e5",
+    "native_reference_match": true,
+    "program_variant_changes_data": true,
+    "displacement_l2": 1039.23048454,
+    "nominal_restoration_max_abs": 5.00138098873e-13,
+    "actual_restored_reuse_max_abs": 9.792812436e-13,
+    "cross_program_reuse_max_abs": 9.89511047202e-13,
+    "wrong_inverse_max_abs": 1.73205080757,
+    "omitted_inverse_max_abs": 1.73205080757
+  },
+  "timing": {
+    "law": "descriptive matched runs with DVFS unchanged and uncontrolled",
+    "native_thread_1_ns": [
+      114287977,
+      114543461,
+      117710954,
+      114304394,
+      114325255,
+      114396958,
+      114486113
+    ],
+    "native_thread_2_ns": [
+      135811997,
+      75884870,
+      131873640,
+      131887459,
+      92146486,
+      92492571,
+      133171915
+    ],
+    "reference_thread_1_ns": [
+      12389753,
+      12382766,
+      12366169,
+      12355962,
+      12364510,
+      12371518,
+      12369630
+    ],
+    "reference_thread_2_ns": [
+      6591346,
+      12175142,
+      16402854,
+      22959566,
+      24055061,
+      12677308,
+      12671578
+    ],
+    "native_thread_1_median_ns": 114396958,
+    "native_thread_2_median_ns": 131873640,
+    "reference_thread_1_median_ns": 12369630,
+    "reference_thread_2_median_ns": 12677308,
+    "native_two_thread_speedup": 0.867474,
+    "phase_thread_1_over_scalar_thread_1": 9.248212,
+    "phase_thread_2_over_strong_scalar_thread_1": 10.661082,
+    "parallel_speed_advantage": false,
+    "c5_advantage": false
+  },
+  "controls": {
+    "canonical_program_variant_changes_data": "PASS",
+    "degenerate_identity_program_variant_is_valid": "PASS",
+    "process_success_requires_every_program_to_change_data": false,
+    "wrong_inverse_fails": true,
+    "omitted_inverse_fails": true,
+    "actual_restored_reuse": "PASS",
+    "cross_program_reuse": "PASS",
+    "strict_unsigned_decimal_negatives": "PASS_12_OF_12",
+    "negative_and_overflow_values_reject_before_execution": true
+  },
+  "sanitizers": {
+    "address_and_undefined_native": "PASS",
+    "address_and_undefined_reference": "PASS",
+    "thread_native": "PASS",
+    "thread_reference": "PASS",
+    "leak_detection": "PASS"
+  },
+  "review": {
+    "reviewer_id": "SOL-XHIGH-SPATIAL-PTHREAD-FREDKIN-01",
+    "verdict": "PASS",
+    "normalized_findings": [],
+    "repaired_findings": [
+      "program sensitivity is reported rather than required for valid identity computations",
+      "strict decimal parsing rejects negative and ERANGE values before execution"
+    ],
+    "pcswap_total_f3_cases": "PASS_81_OF_81",
+    "layer_partition_cases": "PASS_25957",
+    "scheduling_determinism_cases": "PASS_20_OF_20",
+    "thread_sanitizer_771_layer_stress": "PASS",
+    "long_recurrence_native_gates": 1088000,
+    "long_recurrence_native_reference_match": true
+  },
+  "adjudication": {
+    "finite_spatial_phase_fabric": "DEVELOPMENT_PASS",
+    "phase_native_program_causality": "DEVELOPMENT_PASS_ON_NONDEGENERATE_CANONICAL_CASE",
+    "carrier_restoration_and_reuse": "DEVELOPMENT_PASS",
+    "thread_safe_parallel_runtime": "DEVELOPMENT_PASS",
+    "parallel_speed_advantage": "NOT_ESTABLISHED",
+    "c5_advantage": "NOT_ESTABLISHED",
+    "physical_phase_computation": "NOT_ESTABLISHED",
+    "terminal": false
+  }
+}
