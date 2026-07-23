@@ -1,0 +1,126 @@
+{
+  "analysis_sha256": "b574cf415348e856aaf0a7455696125a6bcf3006eb5600ac3657b7b43e4d2d4d",
+  "archive_sha256": "ea0c98f1928a2453a2c915d481c8fcb6ccb844179b342f20b5d22bb46df04e55",
+  "archive_size": 11617952,
+  "claim_boundary": {
+    "full_tomography_established": false,
+    "positive_scientific_claim": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "controller_passed": true,
+  "coordinates": {
+    "D_primary_minus_sham": 0.07480649237890062,
+    "R_carrier_off": 0.0662245353536203,
+    "R_primary": 0.08019454325349624,
+    "R_query_inversion": -0.07500211198511479,
+    "R_relation_sham": 0.0053880508745956296,
+    "carrier_off_abs_to_primary_abs": 0.8257985227783327,
+    "query_inversion_sum_primary_plus_inverted": 0.005192431268381453,
+    "sham_abs_to_primary_abs": 0.06718725060337227
+  },
+  "created_at": "2026-07-23T21:26:44.274715+00:00",
+  "interpretation": {
+    "carrier_off_kills_primary_to_below_25pct": false,
+    "exploratory_only": true,
+    "query_inversion_reverses_primary": true,
+    "relation_sham_below_25pct_primary": true,
+    "small_wall_crossed": false
+  },
+  "run_id": "family10h_relation_transform_kill_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_TRANSFORM_KILL_DISCOVERY_ANALYSIS_V1",
+  "variant_reports": {
+    "carrier_off_control": {
+      "R_spatial": {
+        "abs_mean": 0.10245717098544303,
+        "abs_of_mean": 0.0662245353536203,
+        "count": 128,
+        "max_abs": 0.4552605932386727,
+        "mean": 0.0662245353536203,
+        "q50_abs": 0.05248902932419208,
+        "q95_abs": 0.3400606081053014,
+        "q99_abs": 0.37783810218296393,
+        "sign_counts": {
+          "-1": 53,
+          "0": 0,
+          "1": 75
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "carrier_off_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "primary_relation_pair": {
+      "R_spatial": {
+        "abs_mean": 0.11661204146466984,
+        "abs_of_mean": 0.08019454325349624,
+        "count": 128,
+        "max_abs": 0.5036825916984473,
+        "mean": 0.08019454325349624,
+        "q50_abs": 0.041780897094892244,
+        "q95_abs": 0.40245897688985977,
+        "q99_abs": 0.4341820329932176,
+        "sign_counts": {
+          "-1": 58,
+          "0": 0,
+          "1": 70
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "query_inversion_control": {
+      "R_spatial": {
+        "abs_mean": 0.10401258406840842,
+        "abs_of_mean": 0.07500211198511479,
+        "count": 128,
+        "max_abs": 0.4176606994925515,
+        "mean": -0.07500211198511479,
+        "q50_abs": 0.05500781968306387,
+        "q95_abs": 0.3411439475647367,
+        "q99_abs": 0.3821958631710708,
+        "sign_counts": {
+          "-1": 88,
+          "0": 0,
+          "1": 40
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "query_inversion_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "relation_sham": {
+      "R_spatial": {
+        "abs_mean": 0.048441650381437495,
+        "abs_of_mean": 0.0053880508745956296,
+        "count": 128,
+        "max_abs": 0.24881725479026956,
+        "mean": 0.0053880508745956296,
+        "q50_abs": 0.035491561863685565,
+        "q95_abs": 0.12273074187774297,
+        "q99_abs": 0.17486791334347912,
+        "sign_counts": {
+          "-1": 65,
+          "0": 0,
+          "1": 63
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    }
+  }
+}
