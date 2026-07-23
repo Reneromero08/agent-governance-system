@@ -1,0 +1,230 @@
+{
+  "base_variants": [
+    "primary_relation_pair",
+    "query_inversion_control",
+    "carrier_off_control",
+    "carrier_off_inversion_control",
+    "relation_sham"
+  ],
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Is the relation-minus-carrier-off orientation residual stable across cyclic origin/route scope?",
+  "origins": [
+    "0",
+    "1024",
+    "2048",
+    "3072"
+  ],
+  "pair_sample_count": 256,
+  "rows_per_origin_variant": 512,
+  "run_id": "family10h_relation_origin_scope_discovery_v1_0",
+  "schedule_manifest_sha256": "b80cd9c95410ba0a6c2beb335aa455d244210681849222cf35cc3ef0a146396d",
+  "schema": "FAMILY10H_RELATION_ORIGIN_SCOPE_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "origin_0_carrier_off_control": {
+      "base_variant": "carrier_off_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "0",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_0_carrier_off_control.tsv",
+      "query": "carrier_off_control",
+      "row_count": 512,
+      "sha256": "e2416d2852792a248f164207050d295552af23b99d76f99c46027b9a834a80db",
+      "size_bytes": 605155
+    },
+    "origin_0_carrier_off_inversion_control": {
+      "base_variant": "carrier_off_inversion_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "0",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_0_carrier_off_inversion_control.tsv",
+      "query": "carrier_off_inversion_control",
+      "row_count": 512,
+      "sha256": "e571adbc69f3c12c01c960899ba13fe77b5f050b87ed67676c93cdabb9164754",
+      "size_bytes": 651235
+    },
+    "origin_0_primary_relation_pair": {
+      "base_variant": "primary_relation_pair",
+      "expected_pair_observation_count": 131072,
+      "origin": "0",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_0_primary_relation_pair.tsv",
+      "query": "query_relation_pair",
+      "row_count": 512,
+      "sha256": "95762b1d943b04dae7e323b7bd77b348dc417e2f8a7d6df0408ff0420c635254",
+      "size_bytes": 603619
+    },
+    "origin_0_query_inversion_control": {
+      "base_variant": "query_inversion_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "0",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_0_query_inversion_control.tsv",
+      "query": "query_inversion_control",
+      "row_count": 512,
+      "sha256": "dd0a5cf4a581cc04f5a12fdc3042257ace6869e4b5ef46e271f31e6cc4e9305a",
+      "size_bytes": 623587
+    },
+    "origin_0_relation_sham": {
+      "base_variant": "relation_sham",
+      "expected_pair_observation_count": 131072,
+      "origin": "0",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_0_relation_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 512,
+      "sha256": "212418e09e46a9affc9c2f4c6cf335901be554abb0ef884c64ab8408dfbcc6ba",
+      "size_bytes": 577507
+    },
+    "origin_1024_carrier_off_control": {
+      "base_variant": "carrier_off_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "1024",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_1024_carrier_off_control.tsv",
+      "query": "carrier_off_control",
+      "row_count": 512,
+      "sha256": "96ac356d5135aebf47c4812a95dd3f571c9e206061a61d432603bacaa334088c",
+      "size_bytes": 615907
+    },
+    "origin_1024_carrier_off_inversion_control": {
+      "base_variant": "carrier_off_inversion_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "1024",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_1024_carrier_off_inversion_control.tsv",
+      "query": "carrier_off_inversion_control",
+      "row_count": 512,
+      "sha256": "dbb1b246ce4ea171f103c9c83ce96aaf03378b13c88d9d97b600f985c72ae255",
+      "size_bytes": 661987
+    },
+    "origin_1024_primary_relation_pair": {
+      "base_variant": "primary_relation_pair",
+      "expected_pair_observation_count": 131072,
+      "origin": "1024",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_1024_primary_relation_pair.tsv",
+      "query": "query_relation_pair",
+      "row_count": 512,
+      "sha256": "ba84cd45e3517f39cd60122f3a9e71ad2c80e09012e5e95d6010887f84f35337",
+      "size_bytes": 614371
+    },
+    "origin_1024_query_inversion_control": {
+      "base_variant": "query_inversion_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "1024",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_1024_query_inversion_control.tsv",
+      "query": "query_inversion_control",
+      "row_count": 512,
+      "sha256": "413e96759778c01f240c345bd20000105d0c57eb10a90d08f2529d63c5339a61",
+      "size_bytes": 634339
+    },
+    "origin_1024_relation_sham": {
+      "base_variant": "relation_sham",
+      "expected_pair_observation_count": 131072,
+      "origin": "1024",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_1024_relation_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 512,
+      "sha256": "611b8ab13ee1c77a6b1f90a6c424ced7609df4f2b78a668c29aaa3e1b38413be",
+      "size_bytes": 588259
+    },
+    "origin_2048_carrier_off_control": {
+      "base_variant": "carrier_off_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "2048",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_2048_carrier_off_control.tsv",
+      "query": "carrier_off_control",
+      "row_count": 512,
+      "sha256": "54d740d32e6d5f9ac9076960205c8f266699c0b3d7c57167aacfbf6ca2dbac5e",
+      "size_bytes": 615907
+    },
+    "origin_2048_carrier_off_inversion_control": {
+      "base_variant": "carrier_off_inversion_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "2048",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_2048_carrier_off_inversion_control.tsv",
+      "query": "carrier_off_inversion_control",
+      "row_count": 512,
+      "sha256": "23d000fd5161fe5353127412acf6bd37c5be6e0db1a024dbea5279e2d7de17e4",
+      "size_bytes": 661987
+    },
+    "origin_2048_primary_relation_pair": {
+      "base_variant": "primary_relation_pair",
+      "expected_pair_observation_count": 131072,
+      "origin": "2048",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_2048_primary_relation_pair.tsv",
+      "query": "query_relation_pair",
+      "row_count": 512,
+      "sha256": "dda1b6da2293462f41120a5176920e52679e6febf02d607cabf397800be95918",
+      "size_bytes": 614371
+    },
+    "origin_2048_query_inversion_control": {
+      "base_variant": "query_inversion_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "2048",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_2048_query_inversion_control.tsv",
+      "query": "query_inversion_control",
+      "row_count": 512,
+      "sha256": "39f51d9a7144c89d02ee8c06687bb6dc94c502fa44fe093bd2fcaa6164eefc2e",
+      "size_bytes": 634339
+    },
+    "origin_2048_relation_sham": {
+      "base_variant": "relation_sham",
+      "expected_pair_observation_count": 131072,
+      "origin": "2048",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_2048_relation_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 512,
+      "sha256": "9d2781d2f6f861168688c978a81fe9ffd9642dfe59776a52af36905924173f88",
+      "size_bytes": 588259
+    },
+    "origin_3072_carrier_off_control": {
+      "base_variant": "carrier_off_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "3072",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_3072_carrier_off_control.tsv",
+      "query": "carrier_off_control",
+      "row_count": 512,
+      "sha256": "367e305402dbccebfce741809ad8c3dc58980325f6ac2e0380c8b26aac3bd83e",
+      "size_bytes": 615907
+    },
+    "origin_3072_carrier_off_inversion_control": {
+      "base_variant": "carrier_off_inversion_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "3072",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_3072_carrier_off_inversion_control.tsv",
+      "query": "carrier_off_inversion_control",
+      "row_count": 512,
+      "sha256": "aac91daa8fd0a0ef9e98f3c252524f234f68b0708aec3ff937f42cb5eda8e570",
+      "size_bytes": 661987
+    },
+    "origin_3072_primary_relation_pair": {
+      "base_variant": "primary_relation_pair",
+      "expected_pair_observation_count": 131072,
+      "origin": "3072",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_3072_primary_relation_pair.tsv",
+      "query": "query_relation_pair",
+      "row_count": 512,
+      "sha256": "efc7b14692838faaf61c18cf58533e341e117256dfe45eee13bbda1614953179",
+      "size_bytes": 614371
+    },
+    "origin_3072_query_inversion_control": {
+      "base_variant": "query_inversion_control",
+      "expected_pair_observation_count": 131072,
+      "origin": "3072",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_3072_query_inversion_control.tsv",
+      "query": "query_inversion_control",
+      "row_count": 512,
+      "sha256": "ab1460ce40a29be90c56140a94befeb7cfa826cdc63e683164a7ae93c891b647",
+      "size_bytes": 634339
+    },
+    "origin_3072_relation_sham": {
+      "base_variant": "relation_sham",
+      "expected_pair_observation_count": 131072,
+      "origin": "3072",
+      "path": "ORIGIN_SCOPE_SCHEDULES/origin_3072_relation_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 512,
+      "sha256": "bbeeb6d2f1b68391eb54fd04bd7b6295e7b634b68be34ab744cdec7284eb9dee",
+      "size_bytes": 588259
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-23T21:42:58.111250+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "5d73d84636fb756313ec4d52448b3db8e937d7882fa349224fd38ba272f99e42",
+  "run_id": "family10h_relation_origin_scope_discovery_v1_0",
+  "runtime_sha256": "13e13ba6fa29185638606e49475a61f73756e694e713cfe5dbccdc6727fe13e3",
+  "schedule_manifest_sha256": "b80cd9c95410ba0a6c2beb335aa455d244210681849222cf35cc3ef0a146396d",
+  "schema": "FAMILY10H_RELATION_ORIGIN_SCOPE_PREPARE_V1",
+  "small_wall_crossed": false
+}

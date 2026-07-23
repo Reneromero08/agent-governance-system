@@ -1,6 +1,6 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T14:38:05.3185609-07:00",
+  "updated_at": "2026-07-23T14:45:34.1759483-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
   "checkpoint_head": "218cdb4f8f2e3d8e43211d7bcb88282b947f4493",
@@ -117,7 +117,8 @@
     "affinity_deadlock_discovery_attempts": 4,
     "patched_full_local_paired_discovery_sweeps": 1,
     "relation_transform_kill_discovery_attempts": 1,
-    "relation_orientation_balance_discovery_attempts": 1
+    "relation_orientation_balance_discovery_attempts": 1,
+    "relation_origin_scope_discovery_attempts": 1
   },
   "latest_retained_evidence": {
     "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
@@ -195,6 +196,33 @@
       "net_by_query_order_positive": true,
       "weak_origin": "cyclic_origin=0"
     },
+    "relation_origin_scope_discovery_result": "EXPLORATORY_ONLY_ORIGIN_BALANCING_COLLAPSED_RELATION_MINUS_CARRIER_OFF_ORIENTATION",
+    "relation_origin_scope_archive_sha256": "41ef4e0984dc1c7a240958757872a00f8e3ba468d1e4499e3271beb034570f25",
+    "relation_origin_scope_archive_size": 56341907,
+    "relation_origin_scope_analysis_sha256": "fd28bf9bead3eddd0b53c6f584c6991e52913604c00832333ac369a9e038df88",
+    "relation_origin_scope_raw_record_count": 10240,
+    "relation_origin_scope_pair_observation_count": 2621440,
+    "relation_origin_scope_source_death_receipt_count": 10240,
+    "relation_origin_scope_aggregate_coordinates": {
+      "mean_relation_orientation_half_difference": 0.0036686711917917328,
+      "mean_carrier_off_orientation_half_difference": 0.0023334064915603854,
+      "mean_net_relation_minus_carrier_off_orientation": 0.0013352647002313472,
+      "net_positive_origins": [
+        "0",
+        "1024"
+      ],
+      "net_nonpositive_origins": [
+        "2048",
+        "3072"
+      ]
+    },
+    "relation_origin_scope_interpretation": {
+      "all_origins_query_inversion_reverse_primary": false,
+      "all_origins_net_orientation_positive": false,
+      "nonzero_origins_net_orientation_positive": false,
+      "all_origins_relation_sham_below_25pct_primary": false,
+      "small_wall_crossed": false
+    },
     "prior_scalar_q_readout_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
     "prior_scalar_q_readout_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
     "prior_second_operator_dimension_class": "FAMILY10H_SECOND_OPERATOR_DIMENSION_UNRESOLVED_RETROSPECTIVE"
@@ -209,13 +237,15 @@
       "sparse complete crossed cells as gates",
       "single two-replicate run as Small Wall promotion",
       "full tomography without scalar-replay exclusion",
-      "R2 restoration by byte/hash restoration alone"
+      "R2 restoration by byte/hash restoration alone",
+      "origin-balanced relation-minus-carrier-off orientation residual"
     ],
-    "current_next_experiment": "probe whether the small relation-minus-carrier-off orientation residual is a real route-scoped carrier-prep effect by repeating the orientation-balance coordinate across cyclic origins and focusing on the predeclared route/origin split rather than absolute carrier-off sign",
+    "current_next_experiment": "return to the stronger local paired differential family and search for a manipulation that destroys relation preparation while preserving receiver query geometry; origin-balanced orientation residual is too small and sign-unstable",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
-      "net relation-minus-carrier-off orientation is positive but small at 18.7% of raw relation orientation"
+      "net relation-minus-carrier-off orientation is positive but small at 18.7% of raw relation orientation",
+      "origin-balanced relation-minus-carrier-off orientation collapsed to mean 0.001335 and split sign by origin"
     ]
   },
   "claim_state": {
