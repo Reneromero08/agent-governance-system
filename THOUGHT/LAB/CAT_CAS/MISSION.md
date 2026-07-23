@@ -164,6 +164,27 @@ Before editing or proposing an experiment, an agent must be able to state:
 If those cannot be stated, the agent is not phase-locked and must not begin
 implementation.
 
+## Persistent Goal Law
+
+The lane remains active until the user determines that unlimited catalytic
+computation with phase has been achieved or explicitly closes the lane.
+
+```text
+bounded result              -> preserve and continue
+failed mechanism            -> repair or replace and continue
+scientific limit on a route -> select another route and continue
+external authority boundary -> avoid the prohibited action and continue all
+                               remaining authorized work
+runtime interruption        -> preserve the exact continuation and resume
+```
+
+No agent may reinterpret an external boundary, a local scientific blocker, a
+verification result, a commit, or a package milestone as completion or
+termination of the standing goal.
+
+The active lane roadmap and its local agent authority define current evidence,
+autonomous operating law, and legitimate stop boundaries.
+
 ## Final compression
 
 ```text

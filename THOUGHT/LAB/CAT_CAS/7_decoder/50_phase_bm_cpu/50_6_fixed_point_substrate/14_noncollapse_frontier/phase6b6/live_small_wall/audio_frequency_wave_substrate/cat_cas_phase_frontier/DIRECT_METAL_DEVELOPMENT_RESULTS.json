@@ -1,0 +1,146 @@
+{
+  "schema": "cat_cas.phase_frontier.direct_metal_development.v0",
+  "status": "MUTABLE_DEVELOPMENT_EVIDENCE_NOT_FROZEN",
+  "target": {
+    "hostname": "catcas",
+    "kernel": "Linux 6.12.86+deb13-amd64 x86_64",
+    "compiler": "gcc 14.2.0",
+    "execution_core": 3,
+    "core_isolated": true,
+    "voltage_or_msr_action": false,
+    "firmware_action": false,
+    "audio_action": false
+  },
+  "sources": {
+    "fixed_resident_torus_c_sha256": "8ee6823ea5032c631b269ef4e7dc7cc6646ac3fa5dc37a788219a3e236a78c01",
+    "streaming_phase_vm_c_sha256": "9994e195c1406f8264e03712c7ad31e7d4a5af25022780e4032e56c902e7fcd9",
+    "streaming_phase_vm_reference_c_sha256": "7e5a44a540457c5e22a6beeaae43184367119a748f6492b83dbf922e3790f900"
+  },
+  "fixed_resident_torus": {
+    "resident_complex_cells": 310,
+    "maximum_direct_metal_steps_executed": 1048576,
+    "million_step_phase_count": 12899,
+    "million_step_independent_count": 12899,
+    "million_step_exact": true,
+    "million_step_restoration_max_abs": 1.77722398948e-16,
+    "current_source_65536_step_phase_count": 6526,
+    "current_source_65536_step_restoration_max_abs": 1.77722398948e-16,
+    "carrier_specific_seed_backup": false,
+    "hardcoded_engine_step_limit": false
+  },
+  "streaming_phase_vm": {
+    "radix": 3,
+    "native_ops": [
+      "ROT",
+      "ADD",
+      "MULADD",
+      "SWAP"
+    ],
+    "resident_complex_cells": 48,
+    "registers": 24,
+    "history_factor_count": 0,
+    "nominal_steps": 10000000,
+    "reuse_steps": 10000017,
+    "nominal_boundary_symbols": [
+      1,
+      1,
+      2,
+      1,
+      2,
+      0,
+      1,
+      2,
+      0,
+      0,
+      2,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      1,
+      0,
+      2
+    ],
+    "reuse_boundary_symbols": [
+      2,
+      2,
+      0,
+      0,
+      2,
+      0,
+      1,
+      2,
+      2,
+      0,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "independent_reference_exact": true,
+    "o3": {
+      "nominal_forward_ns": 581699956,
+      "nominal_inverse_ns": 663782625,
+      "reuse_forward_ns": 589238854,
+      "reuse_inverse_ns": 665759259,
+      "maximum_restoration_error": 8.52841676469e-13,
+      "maximum_root_distance": 2.58641936433e-13,
+      "forward_over_compact_ratios": [
+        1.9981896132797583,
+        2.015074216664194
+      ],
+      "full_lifecycle_over_compact_ratios": [
+        4.27834028729936,
+        4.291832288894712
+      ]
+    },
+    "ofast_development_probe": {
+      "nominal_forward_ns": 484402984,
+      "nominal_inverse_ns": 487898563,
+      "reuse_forward_ns": 494468081,
+      "reuse_inverse_ns": 491095383,
+      "maximum_restoration_error": 5.27751743359e-13,
+      "maximum_root_distance": 2.46565762012e-13,
+      "forward_over_compact_ratios": [
+        1.663966107074144,
+        1.6909779017839892
+      ],
+      "full_lifecycle_over_compact_ratios": [
+        3.3399398300646266,
+        3.3704218785149047
+      ]
+    },
+    "compact_reference_medians_ns": [
+      291113492,
+      292415460
+    ],
+    "wrong_program_inverse_error": 1.73205080757,
+    "omitted_inverse_error": 1.85405371962,
+    "actual_restored_carrier_reused": true,
+    "result_latch_survived_inverse": true
+  },
+  "current_adjudication": {
+    "fixed_residency_bottleneck_removed": true,
+    "arbitrary_finite_program_length_supported": true,
+    "programmable_nonlinear_phase_gate_stream_demonstrated": true,
+    "advantage_over_best_matched_compact_classical_method": false,
+    "c5_status": "OPEN",
+    "terminal": false
+  }
+}

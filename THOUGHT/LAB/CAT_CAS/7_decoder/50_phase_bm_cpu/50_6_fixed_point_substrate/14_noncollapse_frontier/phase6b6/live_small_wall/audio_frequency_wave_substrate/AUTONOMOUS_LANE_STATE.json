@@ -30,6 +30,32 @@
     "official_external_acceptance": false,
     "terminal": false
   },
+  "active_mutable_frontier": {
+    "directory": "cat_cas_phase_frontier",
+    "status": "DEVELOPMENT_NOT_FROZEN",
+    "fixed_resident_carrier_complex_cells": 310,
+    "fixed_resident_maximum_steps_executed": 1048576,
+    "fixed_resident_restoration_max_abs_at_maximum": 1.77722398948e-16,
+    "carrier_specific_seed_backup": false,
+    "streaming_phase_vm_radix": 3,
+    "streaming_phase_vm_ops": [
+      "ROT",
+      "ADD",
+      "MULADD",
+      "SWAP"
+    ],
+    "streaming_phase_vm_maximum_instructions_executed": 10000017,
+    "streaming_phase_vm_resident_complex_cells": 48,
+    "streaming_phase_vm_retained_history_factors": 0,
+    "streaming_phase_vm_maximum_restoration_error": 8.52841676469e-13,
+    "streaming_phase_vm_boundaries_exact": true,
+    "direct_metal_target": "catcas",
+    "best_matched_compact_baseline": "SEPARATE_C_UINT8_TERNARY_GATE_STREAM",
+    "best_phase_forward_over_compact_ratio": "1.66_TO_1.69_TIMES_SLOWER",
+    "best_phase_full_lifecycle_over_compact_ratio": "3.34_TO_3.37_TIMES_SLOWER",
+    "c5_advantage": false,
+    "terminal": false
+  },
   "established_results": [
     "AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED",
     "AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED",
@@ -43,7 +69,7 @@
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
-    "C1_BOUNDED_RESIDENCY": "PARTIAL",
+    "C1_BOUNDED_RESIDENCY": "STRONG_DEVELOPMENT_FIXED_RESIDENT_NOT_PROMOTED",
     "C2_REUSE_AND_MULTIPLEX": "ESTABLISHED_BOUNDED_SOFTWARE",
     "C3_NONCOLLAPSE_REPRESENTATION": "ESTABLISHED_BOUNDED_SOFTWARE",
     "C4_NATIVE_GLOBAL_OPERATOR": "ESTABLISHED_BOUNDED_TORUS_PATH_SHEAR",
@@ -53,10 +79,11 @@
     "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
   },
   "active_frontier_candidates": [
-    "REVERSIBLE_HISTORY_AND_CARRIER_STATE_COMPRESSION_BELOW_O_NM",
-    "FIXED_RESIDENT_OR_ROLLING_TORUS_SUBSTRATE",
+    "ARBITRARY_PUBLIC_PROGRAM_INTERFACE_ON_FIXED_TWIN_RAIL_SUBSTRATE",
+    "SCALABLE_PHASE_MEMORY_AND_CONTROL_FLOW",
     "FLAGSHIP_WITHOUT_EQUIVALENT_COMPACT_CLASSICAL_DP",
     "C5_LEVERAGE_AGAINST_BEST_MATCHED_COMPACT_BASELINE",
+    "PHYSICAL_NATIVE_GLOBAL_PHASE_OPERATOR_WITH_DISTINCT_RESOURCE_LAW",
     "OFFICIAL_EXTERNAL_ACCEPTANCE",
     "CROSS_DOMAIN_TRANSFER"
   ],
@@ -112,10 +139,14 @@
     "restoration_reverses_actual_forward_process": true,
     "reuse_consumes_actual_restored_carrier": true
   },
-  "operational_stop_conditions": [
-    "EXTERNAL_AUTHORITY_BOUNDARY",
-    "EVIDENCED_SCIENTIFIC_BLOCKER_NOT_REPAIRABLE_REPLACEABLE_OR_BYPASSABLE_IN_AVAILABLE_SOFTWARE_ENVIRONMENT"
-  ],
+  "goal_terminal_condition": "USER_DETERMINES_UNLIMITED_CATALYTIC_PHASE_COMPUTATION_ACHIEVED_OR_EXPLICITLY_CLOSES_LANE",
+  "operational_stop_conditions": [],
+  "route_boundary_policy": {
+    "external_authority_boundary": "DO_NOT_CROSS_PROHIBITED_ACTION_CONTINUE_OTHER_AUTHORIZED_WORK",
+    "scientific_blocker": "RETIRE_OR_REPLACE_ROUTE_CONTINUE_MISSION",
+    "failed_mechanism": "REPAIR_REPLACE_OR_DISCARD_FRICTION_CONTINUE",
+    "may_end_or_block_goal": false
+  },
   "explicitly_not_stop_conditions": [
     "MISSION_RESULT",
     "BOUNDED_MISSION_RESULT",
@@ -128,16 +159,25 @@
     "CONTEXT_LARGE",
     "WORK_EXPENSIVE",
     "RUNTIME_LIMIT_REACHED",
-    "FIRST_MECHANISM_FAILED"
+    "FIRST_MECHANISM_FAILED",
+    "EXTERNAL_AUTHORITY_BOUNDARY",
+    "EVIDENCED_SCIENTIFIC_BLOCKER"
   ],
   "forced_runtime_exit_policy": {
     "status": "AUTONOMOUS_CONTINUATION_REQUIRED",
     "must_record_exact_next_action": true,
-    "may_claim_complete": false
+    "may_claim_complete": false,
+    "may_claim_blocked": false
   },
   "physical_authority": {
     "p0_state": "FROZEN_AND_PARKED",
-    "hardware_contact_authorized": false,
+    "ssh_direct_metal_compute_authorized": true,
+    "ssh_authority_date": "2026-07-23",
+    "ordinary_source_transfer_compile_and_isolated_core_execution_authorized": true,
+    "read_only_host_inspection_authorized": true,
+    "voltage_or_msr_write_authorized": false,
+    "firmware_change_authorized": false,
+    "hardware_contact_authorized": true,
     "playback_or_recording_authorized": false,
     "procurement_authorized": false,
     "fabrication_authorized": false,
