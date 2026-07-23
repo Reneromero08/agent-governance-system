@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-23T22:14:19.791834+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "3f772c2f39440c01e0561ac28634ada26106edcaf8ae1f1cd906e05de77babb7",
+  "run_id": "family10h_relation_offset8_residue_discovery_v1_0",
+  "runtime_sha256": "fa4086c1c4c63a2ab796c0ffd77c47676cffb5fe7a4dfd6158c55220d1587338",
+  "schedule_manifest_sha256": "1cfce17e18e00d665aacd12d8786cc8b91c113256cea5d8159f54dbcb113a86e",
+  "schema": "FAMILY10H_RELATION_OFFSET8_RESIDUE_PREPARE_V1",
+  "small_wall_crossed": false
+}

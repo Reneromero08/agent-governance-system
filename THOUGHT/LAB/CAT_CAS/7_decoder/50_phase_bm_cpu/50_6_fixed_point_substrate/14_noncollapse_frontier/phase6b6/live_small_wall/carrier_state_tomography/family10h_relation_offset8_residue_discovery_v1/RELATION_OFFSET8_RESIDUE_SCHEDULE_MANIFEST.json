@@ -1,0 +1,130 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Does any source-dependent relation residue remain after measuring the matched source-off receiver pair-geometry baseline at the same signed A/B offsets?",
+  "offsets": [
+    4,
+    8,
+    16
+  ],
+  "pair_sample_count": 256,
+  "rounds": [
+    0,
+    1
+  ],
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_offset8_residue_discovery_v1_0",
+  "schedule_manifest_sha256": "1cfce17e18e00d665aacd12d8786cc8b91c113256cea5d8159f54dbcb113a86e",
+  "schema": "FAMILY10H_RELATION_OFFSET8_RESIDUE_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedules": {
+    "round0": {
+      "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+      "sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c"
+    },
+    "round1": {
+      "path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round1_query_relation_pair.tsv",
+      "sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c"
+    }
+  },
+  "variants": {
+    "round0_source_off_offset_16": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round0_source_off_offset_16.tsv",
+      "query": "source_off_offset_16_control",
+      "row_count": 512,
+      "sha256": "af49a062b5bc586cc350cc5fecf4507a628ba4f8ddbdbfaa0b87b9674f5bcbc2",
+      "size_bytes": 618655
+    },
+    "round0_source_off_offset_4": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round0_source_off_offset_4.tsv",
+      "query": "source_off_offset_4_control",
+      "row_count": 512,
+      "sha256": "30f26b2aea574e94e112c7992b08e743e9efefba09e12a65e68a7ad73526c5c9",
+      "size_bytes": 614047
+    },
+    "round0_source_off_offset_8": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round0_source_off_offset_8.tsv",
+      "query": "source_off_offset_8_control",
+      "row_count": 512,
+      "sha256": "4879b6dfc1bc132d32a2f5df463c9e22c739c15c9c9f55018d06bad6651ce12a",
+      "size_bytes": 614047
+    },
+    "round0_source_on_offset_16": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round0_source_on_offset_16.tsv",
+      "query": "source_on_offset_16_control",
+      "row_count": 512,
+      "sha256": "c025813e604aa8de7f085a13321bc8403bc550c363f6f0b950dfd837298b550e",
+      "size_bytes": 614047
+    },
+    "round0_source_on_offset_4": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round0_source_on_offset_4.tsv",
+      "query": "source_on_offset_4_control",
+      "row_count": 512,
+      "sha256": "21a1fe0b89acb22da1f428c891b041b4a56bbaf13887cc5825b9a8613ef96201",
+      "size_bytes": 609439
+    },
+    "round0_source_on_offset_8": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round0_source_on_offset_8.tsv",
+      "query": "source_on_offset_8_control",
+      "row_count": 512,
+      "sha256": "a77ffae942a8f957ef5f986c99918dfcb728c774bff8b621a434c70d0a77072b",
+      "size_bytes": 609439
+    },
+    "round1_source_off_offset_16": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round1_source_off_offset_16.tsv",
+      "query": "source_off_offset_16_control",
+      "row_count": 512,
+      "sha256": "dc475e08a2d831cc64decb30523aa913f12d544fb88beec4bff6f48a679fbb10",
+      "size_bytes": 618655
+    },
+    "round1_source_off_offset_4": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round1_source_off_offset_4.tsv",
+      "query": "source_off_offset_4_control",
+      "row_count": 512,
+      "sha256": "d3efa9d6bd40aea77c64862db767cd7454c613fff1edeb910fc5c02d977ccdbc",
+      "size_bytes": 614047
+    },
+    "round1_source_off_offset_8": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round1_source_off_offset_8.tsv",
+      "query": "source_off_offset_8_control",
+      "row_count": 512,
+      "sha256": "976b4605b972cc2d2295dcc2def5b170683b3ceeb2fd1d742578d1fa821038f4",
+      "size_bytes": 614047
+    },
+    "round1_source_on_offset_16": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round1_source_on_offset_16.tsv",
+      "query": "source_on_offset_16_control",
+      "row_count": 512,
+      "sha256": "131d1d987aaf3c25096544d791d0c89b95a9be06978c351e79597b00dee1a331",
+      "size_bytes": 614047
+    },
+    "round1_source_on_offset_4": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round1_source_on_offset_4.tsv",
+      "query": "source_on_offset_4_control",
+      "row_count": 512,
+      "sha256": "e037c5ad36acac7b26caa90c3837fc29748a9bef93661b832df29da508c1bfeb",
+      "size_bytes": 609439
+    },
+    "round1_source_on_offset_8": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET8_RESIDUE_SCHEDULES/round1_source_on_offset_8.tsv",
+      "query": "source_on_offset_8_control",
+      "row_count": 512,
+      "sha256": "69b06ae472d365d9e66f8b46c528a54bbda7254d110e216fa7f2aeb30315c56c",
+      "size_bytes": 609439
+    }
+  }
+}
