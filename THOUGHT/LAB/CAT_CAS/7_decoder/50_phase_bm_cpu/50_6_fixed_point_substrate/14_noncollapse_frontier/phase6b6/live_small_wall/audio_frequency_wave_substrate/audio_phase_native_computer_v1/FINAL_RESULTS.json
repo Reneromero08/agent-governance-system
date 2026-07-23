@@ -1,0 +1,9335 @@
+{
+  "case_count": 472,
+  "claim_ceiling": "BOUNDED_SOFTWARE_PHASE_NATIVE_COMPUTER_REFERENCE_ONLY",
+  "classifications": [
+    {
+      "classification": "EXACT",
+      "expected": [
+        4
+      ],
+      "input_identity": "ad4f30ed85bcd9c7af8ad1f35fc829f4f632aa303f9ea9a981f2315aab876078",
+      "observed": [
+        4
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6
+      ],
+      "input_identity": "c57da45009d1600710974b56b6c31eb5db09960c816011f44f29ac1a63bc8933",
+      "observed": [
+        6
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1
+      ],
+      "input_identity": "ab02f8c3629dd877330b8df514808989fffe42a66bd8d3b48e2e9d81a10bc0f7",
+      "observed": [
+        1
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3
+      ],
+      "input_identity": "7e7da3e4829fd5fe4b8abc022800c84de9161a3c02860a9ae63e1f5ad648bf20",
+      "observed": [
+        3
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5
+      ],
+      "input_identity": "8e8fcd46835135001ef9451ad20e2018dba239f4990438aafe4a2fd50239c3ec",
+      "observed": [
+        5
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0
+      ],
+      "input_identity": "03bf362ab6b0ce34a1d4cce6ace4a984d18a27d038965f0667aca137321f46bd",
+      "observed": [
+        0
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2
+      ],
+      "input_identity": "ebaa746f6af47168d52d46a13911620937352a0f72b1339d5c228b2d584a9b80",
+      "observed": [
+        2
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0
+      ],
+      "input_identity": "201f9fd2030bd1e8e21a6875f2cd42dc45c4aa15aea169227bab8d56fe0b1e3a",
+      "observed": [
+        0
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2
+      ],
+      "input_identity": "ce280dc133d82ee29b05555b4d63387fd271c2c308e9c62a1243fe585d11aedb",
+      "observed": [
+        2
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4
+      ],
+      "input_identity": "717639ed6162df18072f18c3983151943f209754376dadcf65c4509157ef0767",
+      "observed": [
+        4
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6
+      ],
+      "input_identity": "6e035469d5b908935869fa6730e6b211b50bc58aabae0d91f05c7e50da334844",
+      "observed": [
+        6
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1
+      ],
+      "input_identity": "9617f8e6842d43255821ad0f6206cd522974eaa047e2acc164d39bf5654e1586",
+      "observed": [
+        1
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3
+      ],
+      "input_identity": "c3c8c43da4377fc3b76926649c18816021f1e274f4aa95db1ca43c8d3ca0d869",
+      "observed": [
+        3
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5
+      ],
+      "input_identity": "09b5fd1930c918121650ce27594f80607fc3440bea553af92ac37912a4894758",
+      "observed": [
+        5
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3
+      ],
+      "input_identity": "9ff4988530fad0a68935ae9deb8c3e46d71ba4618b507a4e6e321a621b0d6627",
+      "observed": [
+        3
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5
+      ],
+      "input_identity": "bc9494e0843b305b8b2224ac47c0aeb25c918f7dfdec56346a4b8f43531b8986",
+      "observed": [
+        5
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0
+      ],
+      "input_identity": "3ba352972491128eb4575787946e92b863f6dd927a874b691d25305b5958b45c",
+      "observed": [
+        0
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2
+      ],
+      "input_identity": "3a47113ee36a5e88e01603f6a204628e6ce9d8ed12c1d2a3be9010fde77cb1fb",
+      "observed": [
+        2
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4
+      ],
+      "input_identity": "fa0125519544e6fc061ef43230b65623adfe8502a293cef8e8d844117cd2af3a",
+      "observed": [
+        4
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6
+      ],
+      "input_identity": "7da35caaa22402b3a0bef4b6fca8fd9ccb2793c5489b200008abe29aeeb9a2be",
+      "observed": [
+        6
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1
+      ],
+      "input_identity": "ed8f9dc0de70c0c51cd37d1e9c8589ce4f248361445a13096fc8e1b2541e4c40",
+      "observed": [
+        1
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6
+      ],
+      "input_identity": "5d21c6b9eb6b119edd1e69916483dee8a927624eabd05d5a5964ba03ea402dd4",
+      "observed": [
+        6
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1
+      ],
+      "input_identity": "77ce363eae712bd6e32f8b9a43778e1f9f4e793b021c97fe7e654ebd96b16f04",
+      "observed": [
+        1
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3
+      ],
+      "input_identity": "51511eb5848aaa234720d5c716a59f21ac19ede70b3d7991cb56590973f2c915",
+      "observed": [
+        3
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5
+      ],
+      "input_identity": "ae37a5cd1a645e465b1b4feca8ce1c94b67baae62473332934f2fb067f2e83e5",
+      "observed": [
+        5
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0
+      ],
+      "input_identity": "e5d8542287d6c4b8ab48686bcc0f882e851f0110e6d6a8d226b53a26ee1df783",
+      "observed": [
+        0
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2
+      ],
+      "input_identity": "03509850cbcabd8ac36cefcb559d4e1ba748e5981fdadbd25d66d8fb4d4603a3",
+      "observed": [
+        2
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4
+      ],
+      "input_identity": "347280cf004a6e2aad9a94e56d27b53cb024d7963b18c5f976c7944d0e6dad9f",
+      "observed": [
+        4
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2
+      ],
+      "input_identity": "a740c4936cfe6852fa64ff150a96f58a7a73eb12af96eae244309b911d982690",
+      "observed": [
+        2
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4
+      ],
+      "input_identity": "faa76b56c57c3262866a1c3d786f346274e720e80fa5eb1b8fbafb0b5745ebba",
+      "observed": [
+        4
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6
+      ],
+      "input_identity": "c6c3fd2ff07d6642a91da294c2869174e9b39b2d8fa3772adcf3670638cf4235",
+      "observed": [
+        6
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1
+      ],
+      "input_identity": "722f05f59914086066647feee1bb1143a06e92b7f5e43bdcbfa151b65467187b",
+      "observed": [
+        1
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3
+      ],
+      "input_identity": "4f3f8bcb9cabfa0003ab385f5387f9b1cc45e21bb51ede9fe523b36219453707",
+      "observed": [
+        3
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5
+      ],
+      "input_identity": "8b15dd4f2ea1eea41e56fbbac7aba31826519d592b80aa7851609b81e79f2e3e",
+      "observed": [
+        5
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0
+      ],
+      "input_identity": "8d85885d39d9daf257da8b9f84b8633d8e6a360cac10abed274303aac20bc048",
+      "observed": [
+        0
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5
+      ],
+      "input_identity": "7701bac43ac1d3c8711b6908c8bd6c0787b4940f246e0ca3d7c896b56424c25d",
+      "observed": [
+        5
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0
+      ],
+      "input_identity": "4d39cbf5703c29e4355bf5dc0e09231b651311546f1ace9ba404df6d5faef51d",
+      "observed": [
+        0
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2
+      ],
+      "input_identity": "30ec9e0ebb5ad245aeb2329d26c371e87690e116a5a1cdb62a8c395951eff820",
+      "observed": [
+        2
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4
+      ],
+      "input_identity": "828a020ab39d8458651a07262736fce41c56fc23f7a91a08838dddd4bf29bd13",
+      "observed": [
+        4
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6
+      ],
+      "input_identity": "e7d319fc6128ed8de4bc2a8f2139b868c882ea410925301b8e17a26fba860cbb",
+      "observed": [
+        6
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1
+      ],
+      "input_identity": "3524e5869e85c381168d6a1ccaf40a93e85d4267eda53b33f00acbad30e2b1e9",
+      "observed": [
+        1
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3
+      ],
+      "input_identity": "4055fd1848a643efdab1f5d9532310a9fd85379a6032fc14b1df9cd4440a4d29",
+      "observed": [
+        3
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1
+      ],
+      "input_identity": "9ecabd5438f1a22ff4c5625fa681462a469575d050af1c54922cff31ab223251",
+      "observed": [
+        1
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3
+      ],
+      "input_identity": "979a5b75c48a48c11d50447ba82fd8018bd25a477ca5ac163ff45969f058c043",
+      "observed": [
+        3
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5
+      ],
+      "input_identity": "ddc353a136cec75eaf2b6451f2f120f27a38964515c0ec4d78fe57f40442a8b3",
+      "observed": [
+        5
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0
+      ],
+      "input_identity": "94b07d7bb81b9ffd2be3990451adeb15c7826f6a969a698c287e3133b81e86a8",
+      "observed": [
+        0
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2
+      ],
+      "input_identity": "c9ab84ad7140578fc2e14c7b1c9e74f8ec397243681b1300f97055a598cce16d",
+      "observed": [
+        2
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4
+      ],
+      "input_identity": "4d73ac7eb4f6a482bafa5db174eae862cb784e17c11987d4c4aa21f033321742",
+      "observed": [
+        4
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6
+      ],
+      "input_identity": "d7b7c191662939f7c7154caf0299130e28c042d4280f4db9b11ee782b8060e1d",
+      "observed": [
+        6
+      ],
+      "program": "prospective_affine_mod7",
+      "reuse_observed": [
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "input_identity": "78fe9d478b95229d4c393b5e4911c1ed4b69debd313ba6e59b73b2cd633b69f4",
+      "observed": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "input_identity": "ea9115b7cf985b50324e79de6e1545d5c305af7343312b2ab7d75ba47a483966",
+      "observed": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "input_identity": "7624ddb3148cee121315f1efbbf43a9167c4ab97fbf8d0e5110e395846d89e78",
+      "observed": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "cf6503cb049b9f8cf4fc2af3ecf7b1478465e909a84e129298a528e91c5465eb",
+      "observed": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "input_identity": "d757e73fb546094baa7e273010612b3d0e9f0aeb78a3f2e26cf586c902940a9d",
+      "observed": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "input_identity": "bef34a4d6929b00b379868d643fef158e5a6d092ddce68602386c1f9d0288b3a",
+      "observed": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "input_identity": "0f3ce35db6f1774c084160798bc8735105101b5d2690484687f9e3d2e9409ae7",
+      "observed": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "68b75a4e2d42d0ccf2d6c20d920d31d06f8839269a1084126471b9bb7d9ecde5",
+      "observed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "input_identity": "384e5ab037b0b988cdb4712b14ca2d70420d3127ebb4846d558208bd262fb179",
+      "observed": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "89db0a96f05b837bad157ce4a26c5cb8fdaf6e916b31a3af10216d4e121195a7",
+      "observed": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "4e9afa1b3f2e9e83bca603742860ab3f19db5d8c5da3268bdd96c149fbb1e0d0",
+      "observed": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "input_identity": "3b502674fbe7ba7e72b52ae6ebf19703edaf15ba7d912717d76c98e7bcaefd85",
+      "observed": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "input_identity": "28ee637263366923477052b0185ec7f7b19be45b3bb820f37579944f14e2b69d",
+      "observed": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "94bb6e2d5ca6892d8af1d48dab1fc16b60b4e8d2f7bb2d0ec6e7750d3e902ecc",
+      "observed": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "3fe61d84e6fbc9d0a70a806dbff207133ea1c1fa6655de47eb7a4f394e86e34c",
+      "observed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "input_identity": "45e25f8efc6516539abb20ae0d1e3034c984a0784fcdde1b31a8e3724eda2b5d",
+      "observed": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "input_identity": "ff558c646d0ea5c0837da2425e34d0bcba4607f63d1830affb69f6f66b6b35e3",
+      "observed": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "b808ebfdfd3119174b0ea8331aa869d90bb4a0c2e37ff500130d7e4ec5466f78",
+      "observed": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "input_identity": "c8fe4c049f96f8ed49ed1325e986a3877bc8ab60d273e2eac6bb482dd3474873",
+      "observed": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "217eb256005788e048444ac244f264c4409c99ea7e398abb30d4b872d2b1900d",
+      "observed": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "input_identity": "43f9c42b3de76e33f084fa17eafd7344102b23f1c0d9f1f6f9b8b5945aa95209",
+      "observed": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "d92011669af1f9a674948e7094d02899078936aad5b495b731ecc8f9e91e351f",
+      "observed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "input_identity": "49b5bdf871cd6edc104e3c5f6e423c81ea70afa6d7e826a7cf62806a2c812d0a",
+      "observed": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "3253651f251160bca5554141e5cca724b4b618bfbb79eb3e848de016b97fee9c",
+      "observed": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "45dbadd5d395bb7c6a8f03803ab4887ec4a9394330f4ce26974d6b6260cce19e",
+      "observed": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "input_identity": "69897003cc5925ef8204e7c6da0adf3b1a4b2d1d035b79d7a9a88adf02328c93",
+      "observed": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "614dc6475f5fad86ace6b68f42456537818d006e0aab8db74ba0f1c3a83b02fe",
+      "observed": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "input_identity": "8ba8b8e406f8e1a7ac8bae84b686394e69027dc9b936418540462004054fe36b",
+      "observed": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "08fb0da38281f96d61e0e2c9f7bc50e0752486076255489ba9cb35096dd3c931",
+      "observed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "input_identity": "b9e1733ac3ce9de9af77979940aaa649eb1f5f5bcfbe7d984d826354bb08019a",
+      "observed": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "bd955395d507fd0c3836e100a6f0a9ee69cf3e3b3fcaf9a83b3953f07e150c6a",
+      "observed": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "input_identity": "66c807e765572911e46fbe7c642e73c9183c291c2762f8b59273f4381e0daa08",
+      "observed": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "input_identity": "0b08d3573dee9bd4d92a1084a3e709fea773f9b8d4eaf343f998a017daec4ff1",
+      "observed": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "input_identity": "3f02c18887f3df0d8b43baf04a8611604ea4196a548d4f6b8b8e8ff179c17d51",
+      "observed": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "input_identity": "fe08dcbe1c5aca84ede7273331a4b68e30925d7b083df8e8c3a4f5bf52999adc",
+      "observed": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "f47667924888651e8fd20257e649f826c21457b6594ce4ce2e029656bce2d9be",
+      "observed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "input_identity": "f0e7bf24a9dd5b02c35ca5fcce74d3651ab5f2229f68db0ea5e4dd16ac2dd3c9",
+      "observed": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "60882c20875ac8addaf48a874973843dbe0c6ecd3f3ed2c2fd2c173fde47777b",
+      "observed": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "input_identity": "293e3a908b0152d16272f5672d2391157a26b209b48fcbb13fc9afab6cc2f0ae",
+      "observed": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "c9399cba7aceb782e23c646184c7055afe2e5fe7c434c8e0dad671b7492d8fb8",
+      "observed": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "input_identity": "c59e8b4b41d2a1ea12c2f02b892268a332827cf8ecaee19fe4bc12d16035788e",
+      "observed": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "d42dba74d144bfb0601a4d06d860aed8b5ec4f542ce41645e0e7a93c2cb27e69",
+      "observed": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "0d0156fda872eb14526fb6469a625eccebbdb5823389b7af3f014989ded114bd",
+      "observed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "input_identity": "44ff1a9dcff2808afa3d254489f9b18f53209afe59c3349ab7eefc7b019da453",
+      "observed": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "795d17a3a5a4bffafe2321360984f4a6dd539f634fc91d29599f3e948ebd1dcf",
+      "observed": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "input_identity": "c71f76679ae284c602e599dfbca3c72e23d931d835530d54b02920f8533db3e5",
+      "observed": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "c5835105e26c569c42a40ab9dbb2c7e4a7df71cfd8bf634538ce0d0438fd4e68",
+      "observed": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "input_identity": "9c37f191284f8c871aaef765faebb8c901d6194a359393306722f695a8729368",
+      "observed": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "input_identity": "fb4e08dae21689f006ed34727beda80e0eee0894e479f9c0163e86892a67dd6e",
+      "observed": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "5dfde31d179aac2ea52b24fc4931c6220541eabc893c8d06e7d6328ec89c45d5",
+      "observed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "input_identity": "7a7ed9b87e90e71a7c21d8628560470ec74b31892f2b72970ecb067f3eb03b83",
+      "observed": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "283984164aab9a5d49edb133476ebdcbee1724616660ea62bb11f3263fed07f8",
+      "observed": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "input_identity": "09c03a40bb7ac4920b700bd51b2809139c37163a736acc9199b8568fbce829a1",
+      "observed": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "63812ecf70bc0aa85bff1c8220d19c905ec1bea6ae924a6c0a8a60e522e9f92f",
+      "observed": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "a1e2f77f0cfe650ecf9cc0c4d4cd04398c5081213e2b386c41c542aa0d273994",
+      "observed": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "input_identity": "e6ab4b55f1701bd5a80cfa4a5f54352f112546a3539618a2352984fc2e6aab78",
+      "observed": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "input_identity": "403171b996610e44fb46088b26b9dacb584555187c171f67ec9be56c3775dbdb",
+      "observed": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "input_identity": "11bc90d007eef7d3280dd3381739866b2c1ff3baff47f5a2e79d3137541ce424",
+      "observed": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "6bfe9f85dbe0487ef0a43669e66ccb890ea4967ed124828c7c29a953e03c45dc",
+      "observed": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "input_identity": "2721929ac2e6d8f8a27a47caec04f9116e1d4cbdfdc04dbe3844bc6b84ab4eb1",
+      "observed": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "input_identity": "4ca9227abc5e7224631df06b3afd6ba1275b3154d6f458318ac659a55bc31e6b",
+      "observed": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "input_identity": "cbeed5d6fec3d80b4dd7b4b9567405e9bf7b4078cddf0742097a987ee8de2743",
+      "observed": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "input_identity": "54f3613af4c8a617b6fcb78c5e0799c0e335d4e2e4755337d5b09935a573c80c",
+      "observed": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "input_identity": "246e48d6d15ffc260ae27db49c29c77667da22622dafe1f1fd3ce3a863516099",
+      "observed": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "program": "prospective_binary_add3",
+      "reuse_observed": [
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0
+      ],
+      "input_identity": "bce1e8d7e0b2b19a2c0abb805a46ba398aeea0edadb3741c93dcbc7ed062f374",
+      "observed": [
+        0,
+        0
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1
+      ],
+      "input_identity": "1cb7c3afc30a6a938888c7d3a67d301fbd69687fc59c4ad1d197f3b1c1c53583",
+      "observed": [
+        0,
+        1
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0
+      ],
+      "input_identity": "8d55e127d2a95de24eae5eef77a1714d6d9feabba9ec4274daacdb058343701c",
+      "observed": [
+        0,
+        0
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1
+      ],
+      "input_identity": "07ec3e3897e3816cc21386362b4d814ad94f3042a924f432629e895d30be9b72",
+      "observed": [
+        0,
+        1
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1
+      ],
+      "input_identity": "9887a7ab2d044b369452e8e4126e139e302e4f25399ea90655d08d89fe437953",
+      "observed": [
+        1,
+        1
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0
+      ],
+      "input_identity": "64b4ffe931d13440d7f50bbfb7f787b70e1c2c7926988ad558b460f1ac7b316e",
+      "observed": [
+        1,
+        0
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1
+      ],
+      "input_identity": "ebcdc81a42504366079fa926b4d265465b5b7178914d133c713deeda97c53870",
+      "observed": [
+        1,
+        1
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0
+      ],
+      "input_identity": "80c63ac78e2be7a4eacd4567589c55b23a6a7b0c949e30c4abe472bed3ca10e2",
+      "observed": [
+        1,
+        0
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0
+      ],
+      "input_identity": "2fb5f440bd6e48a426594414480b6a6dfedb347cb439c4fefb018b01bb776d99",
+      "observed": [
+        0,
+        0
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1
+      ],
+      "input_identity": "cc059ba60156b2172144db1ad712ee24504542fe4e9aa460f16df5a45df81fb1",
+      "observed": [
+        0,
+        1
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1
+      ],
+      "input_identity": "4d489a584d3b102ed6e00cdb3d0e43a04e7fed578e7c00770d27787d155ca8a0",
+      "observed": [
+        1,
+        1
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0
+      ],
+      "input_identity": "f38ec1ca5f9fc97505a3d3d3973fededb6e538c59e1fa1094bf7d4d17ac9cd51",
+      "observed": [
+        1,
+        0
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0
+      ],
+      "input_identity": "d655b6c6a33ff5f51f3d67a5439dabb8a31cd18dbaa623e47cc2a35d27c2f711",
+      "observed": [
+        0,
+        0
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1
+      ],
+      "input_identity": "74d38674678cce6327732c465d25ad6b1236050336af8f123227b2332f6298f0",
+      "observed": [
+        0,
+        1
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1
+      ],
+      "input_identity": "27173b917f4c144e2c20181f0d4da7a0c79ba002d009df48b817451791847240",
+      "observed": [
+        1,
+        1
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0
+      ],
+      "input_identity": "b5b77d9d810ac0f1d2bdec161792f53291be084e3ef923b01121c7807d961e12",
+      "observed": [
+        1,
+        0
+      ],
+      "program": "prospective_mux_xor_pipeline",
+      "reuse_observed": [
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        0,
+        0
+      ],
+      "input_identity": "ce50eddba0dc9406032512bdc36bd6901f8f2c721f12e92273a4af48793bc839",
+      "observed": [
+        2,
+        0,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        0,
+        0
+      ],
+      "input_identity": "82e75bb419ff504b9b02378f3a2eb632adc65004a81d29c53fed156c7f262829",
+      "observed": [
+        3,
+        0,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        0,
+        0
+      ],
+      "input_identity": "94aceb6ad77a379a1d0193fb5e1f0be8849dbc2579ecf0ce31a1af44b61fa832",
+      "observed": [
+        4,
+        0,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        0,
+        0
+      ],
+      "input_identity": "196a7d52749cae556da842b3138f03550925e29996b6eb686aaf672767784555",
+      "observed": [
+        5,
+        0,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        0,
+        0
+      ],
+      "input_identity": "2250c78149943e898c8b1ffd0fe2b4117209f03f089701d05817aa218746e7c7",
+      "observed": [
+        6,
+        0,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "input_identity": "588ab018a1ff832fce69c1c8300620f0b8b179ac19eec1fb4fd7e0827a691685",
+      "observed": [
+        0,
+        0,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "input_identity": "4e80f8128bec2fbd5566772483d0c3d5529a777bd251cb0acaa6a1e28c806ea9",
+      "observed": [
+        1,
+        0,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        1,
+        1
+      ],
+      "input_identity": "c5bfe901cf88861972c99d9c742de3273514070146905bc2447cd5a33df0fe69",
+      "observed": [
+        2,
+        1,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        1,
+        1
+      ],
+      "input_identity": "515670a8747ff8c3ba55b9cc1ddfd791d94ac5fe6a0af7553cc8a2639d3c7787",
+      "observed": [
+        3,
+        1,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        1,
+        1
+      ],
+      "input_identity": "121126dde0455305a7d6d6ceae186e975cffb2559a3e305968f30c3e807e137c",
+      "observed": [
+        4,
+        1,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        1,
+        1
+      ],
+      "input_identity": "22b9c7625b1d11f40a19bd263a39e8d47449b3efddeba3db1741504b06da6e58",
+      "observed": [
+        5,
+        1,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        1,
+        1
+      ],
+      "input_identity": "43461dff1fed13b3cc33e8cbd46b37d7b89a0ae342c0b8fd435499d1f92a27c2",
+      "observed": [
+        6,
+        1,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        1
+      ],
+      "input_identity": "064417aada4ad686559d5358e066a29efe91402eccaf0f6fac733fa3677a1656",
+      "observed": [
+        0,
+        1,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        1
+      ],
+      "input_identity": "0c12114b43177621be56477bb245b850843ba873b23aa16ada8d0a04293e6ec1",
+      "observed": [
+        1,
+        1,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        2,
+        2
+      ],
+      "input_identity": "f1e74a2c975347a86d5056562354ad95093d2772bcf73bfc3be0532b3fd0ea49",
+      "observed": [
+        2,
+        2,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        2,
+        2
+      ],
+      "input_identity": "302bf73d6ce29026e6474c853bd20ed09cecaff082ec9b4b698cfa919675d85c",
+      "observed": [
+        3,
+        2,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        2,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        2,
+        2
+      ],
+      "input_identity": "823feff45f280561a4f8744051b08ea2d1f8a8c5e918158b7e3900eaba6a86c4",
+      "observed": [
+        4,
+        2,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        2,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        2,
+        2
+      ],
+      "input_identity": "4ea6a06b6895bcb611ef568cc9f0bfa39c794169b90bb829a78412a2343cde16",
+      "observed": [
+        5,
+        2,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        2,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        2,
+        2
+      ],
+      "input_identity": "e41ac705a57ce27837f5c94db67e212d866a60c15056bb7cfa1a1fd61580ded5",
+      "observed": [
+        6,
+        2,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        2,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        2,
+        2
+      ],
+      "input_identity": "19cc451e7986af81212a9e87f79ab89d3d5b61a4a1586abdccea3979f7196e6d",
+      "observed": [
+        0,
+        2,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        2,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        2,
+        2
+      ],
+      "input_identity": "aea3ed858d8109f1d8da8fcaee85e210606fbf140d96b4d2f5d7c04528d55442",
+      "observed": [
+        1,
+        2,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        3,
+        3
+      ],
+      "input_identity": "bce4b53f55976ed3ea01f101056328a7db844c180bcf8a83aa6585d0ec9e73a7",
+      "observed": [
+        2,
+        3,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        3,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        3,
+        3
+      ],
+      "input_identity": "1424a380f2deb12c459f19d47b56a40296b3e0c8011cf6b3128cd106951d4d0b",
+      "observed": [
+        3,
+        3,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        3,
+        3
+      ],
+      "input_identity": "9fe6c0f2304937e0155c568f31fd852c8f8d8e355a2ccd7d7664a53ba5521007",
+      "observed": [
+        4,
+        3,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        3,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        3,
+        3
+      ],
+      "input_identity": "3a565e35f120c3f8efc7a3292e4790d7ab082d5d0b83111ebb8f35cacfab38d6",
+      "observed": [
+        5,
+        3,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        3,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        3,
+        3
+      ],
+      "input_identity": "7a6360e9613cae7755f92faf7d2c2232874b9c0542d814b0c6f891bb594a0517",
+      "observed": [
+        6,
+        3,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        3,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        3,
+        3
+      ],
+      "input_identity": "a35c4bb3f72881c2280761c44b41569c96623a182017cc92084dfa1c0a44ed67",
+      "observed": [
+        0,
+        3,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        3,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        3,
+        3
+      ],
+      "input_identity": "cbc317710fd90404f9c9d94cab7e83e7a9b4a4e758279675a64173934ac6a22c",
+      "observed": [
+        1,
+        3,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        3,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        4,
+        4
+      ],
+      "input_identity": "59672279405f4982901c8454ce110735ce20201ece1a4160328b40e914350d02",
+      "observed": [
+        2,
+        4,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        4,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        4,
+        4
+      ],
+      "input_identity": "82c314c07f001d14588ab0e4c4199f6e75b212bae4c7f2f953ee40812a68a067",
+      "observed": [
+        3,
+        4,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        4,
+        4
+      ],
+      "input_identity": "0817bc03d38a9ef6358a5f75ea061a98038ebf3fd80b0317742f409780ae7bb2",
+      "observed": [
+        4,
+        4,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        4,
+        4
+      ],
+      "input_identity": "ff5b2ba03da7e8850d36b1d142fe80609b11e4ad398f3beb9f2d9d9acdd85116",
+      "observed": [
+        5,
+        4,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        4,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        4,
+        4
+      ],
+      "input_identity": "79582b0626f97d0909b46507649a32b7a34721ba6a5ec659d10894942e2e3c4d",
+      "observed": [
+        6,
+        4,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        4,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        4,
+        4
+      ],
+      "input_identity": "683cd1c2d35e477f208f3c93815759ff313b6af7c18f76f1846278ca07d55736",
+      "observed": [
+        0,
+        4,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        4,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        4,
+        4
+      ],
+      "input_identity": "d0dd67c3e4ee23fad3c30501d2af8f46404449ae642cfcd98e13523133c99b84",
+      "observed": [
+        1,
+        4,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        4,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        5,
+        5
+      ],
+      "input_identity": "d0845a592cc3bbbb1da2003773d9728ec498bea214ad1c44f69a56e435abd7bb",
+      "observed": [
+        2,
+        5,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        5,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        5,
+        5
+      ],
+      "input_identity": "88928569c71b7c06c6505a1dd885a3c781eb006f68bb6f934beb4f708ee3a19c",
+      "observed": [
+        3,
+        5,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        5,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        5,
+        5
+      ],
+      "input_identity": "4500b061863b5fcedcd36bba581739caae9036b88cfb91036f8eebc6ba8bf1f4",
+      "observed": [
+        4,
+        5,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        5,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        5,
+        5
+      ],
+      "input_identity": "0c4f38c45ca2c0fa760f5552454b3d39bc577ebbd9fd1a837a5fae280f53dc27",
+      "observed": [
+        5,
+        5,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        5,
+        5
+      ],
+      "input_identity": "183e37215ab5199bfa4f053035b941877a9ec6993f4d49c82ace1c73ee11dbf6",
+      "observed": [
+        6,
+        5,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        5,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        5,
+        5
+      ],
+      "input_identity": "89e2540f65f4ff3d67dc62422f1750f3f58918489915e3e4247ea71670526aba",
+      "observed": [
+        0,
+        5,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        5,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        5,
+        5
+      ],
+      "input_identity": "d9c14861bd496448499a776b41c0864a4752bf702e613f3f5f026a7bb712cc4b",
+      "observed": [
+        1,
+        5,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        5,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        6,
+        6
+      ],
+      "input_identity": "9165d250d1a9b4b8665cd8a569ee5dc2b12a9488d3e0a18d4f5a38c5ecdd2228",
+      "observed": [
+        2,
+        6,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        6,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        6,
+        6
+      ],
+      "input_identity": "d98e6889b96ecd29a38bf5d6d0338e20880ced37a24537e5925ff418054a4d52",
+      "observed": [
+        3,
+        6,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        6,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        6,
+        6
+      ],
+      "input_identity": "ae08806ff63f5acb862c0979fd2ec3f8e1b0d53e754623263a17c38677ae3b35",
+      "observed": [
+        4,
+        6,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        6,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        6,
+        6
+      ],
+      "input_identity": "6e3295eae3adedfe48b56d3d22b85aab8fec400372e6186138a21f64980e0e8f",
+      "observed": [
+        5,
+        6,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        6,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        6,
+        6
+      ],
+      "input_identity": "987e711e20c3c1c6977d06dbd05cee4c87d8e45f5cc2505459270ee70d223740",
+      "observed": [
+        6,
+        6,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        6,
+        6
+      ],
+      "input_identity": "ab2d9f0c387a910d5e0c6d33f6166375a17e6bf77caf783680294a5be63137b2",
+      "observed": [
+        0,
+        6,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        6,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        6,
+        6
+      ],
+      "input_identity": "2745431f76c4dc5590441e9a0677dca4787afb40067495d0052077db39134c64",
+      "observed": [
+        1,
+        6,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        6,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        0,
+        1
+      ],
+      "input_identity": "ba61778802c9632e5fe5aae6c9fe195e618cf14b232839207f7afbb8f138f5d4",
+      "observed": [
+        2,
+        0,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        0,
+        1
+      ],
+      "input_identity": "2c6b94506496d5c222b948f3a3353e2d15ad712994b94dd4959f3be131d7e114",
+      "observed": [
+        3,
+        0,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        0,
+        1
+      ],
+      "input_identity": "a0840547ce672814d4d40aa5f47eca5eb759b0df5b392c440d62885993b9eaa1",
+      "observed": [
+        4,
+        0,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        0,
+        1
+      ],
+      "input_identity": "626a63e0f2d2d8620832b09c3b2710c9f7608768f4bbd6c3082b7faaa43fd026",
+      "observed": [
+        5,
+        0,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        0,
+        1
+      ],
+      "input_identity": "7b6ec29a9f762e5acea6250af76ab6f00ae53c56d1fb8569a4f6c528928597c5",
+      "observed": [
+        6,
+        0,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        1
+      ],
+      "input_identity": "a4c14f638982a1a3d90c22939c1fb6c396b27ecb309dedb38138e117a8a40342",
+      "observed": [
+        0,
+        0,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        1
+      ],
+      "input_identity": "9d3cc67b55463b00733bcd7b1818a47b0f7c37c4a15afb7a1cc82ba3a4b9be5e",
+      "observed": [
+        1,
+        0,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        1,
+        2
+      ],
+      "input_identity": "ac632cb25260aab0606c4acb83e526d2a7d76e131a230b8814da7a5e2c494cf8",
+      "observed": [
+        2,
+        1,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        1,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        1,
+        2
+      ],
+      "input_identity": "400efe36512dd00a22b2bf47cfea6450b661505779bc7e1860ed40096311c912",
+      "observed": [
+        3,
+        1,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        1,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        1,
+        2
+      ],
+      "input_identity": "8d7a77c6ad77f97cd1811465f4f85abc56e306029d40386377ce523e9918b779",
+      "observed": [
+        4,
+        1,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        1,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        1,
+        2
+      ],
+      "input_identity": "097d1df6bab84cc9e1ae21766821548380076ea250116778930824f4b132225b",
+      "observed": [
+        5,
+        1,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        1,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        1,
+        2
+      ],
+      "input_identity": "10c3da8543dcc998dce4d30fe7ff290a0101aa9f09fce0cd4924b47b0d9f4502",
+      "observed": [
+        6,
+        1,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        1,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "input_identity": "46cf240b1baaf4a88e5ffa71fc1cf91366716b22e329e6c0f45048a1056348b3",
+      "observed": [
+        0,
+        1,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        2
+      ],
+      "input_identity": "a39ebe2fd1c2e64ebe21c53958b0ced8c65344619a4c5385917d25d8b08f342c",
+      "observed": [
+        1,
+        1,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        2,
+        3
+      ],
+      "input_identity": "e88b6314eaf379c5fd3cfa15ddacebde6d29280d15eb7119e8a0e4334641b5b3",
+      "observed": [
+        2,
+        2,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        2,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        2,
+        3
+      ],
+      "input_identity": "378920c849111a07ebffa3427dd2338674541a8b235edeb1a59bae4a1d03675a",
+      "observed": [
+        3,
+        2,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        2,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        2,
+        3
+      ],
+      "input_identity": "d8c0303e518289bea7716b11d67b2dff229d0772b65660157e3faba87b06e337",
+      "observed": [
+        4,
+        2,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        2,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        2,
+        3
+      ],
+      "input_identity": "661db62670d0e37fd52dc009cdb7138bae8c44e308c1aca24f7ee18b83daa2c5",
+      "observed": [
+        5,
+        2,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        2,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        2,
+        3
+      ],
+      "input_identity": "69fcf4fb4dd86c51cbc02ca1b170cf6725b7a271c4147f4f24a347f189a65506",
+      "observed": [
+        6,
+        2,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        2,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        2,
+        3
+      ],
+      "input_identity": "889f1bb18b17cab6bef3d63363be3b22cd37fa7efb8609a23bdea5ace9d6c177",
+      "observed": [
+        0,
+        2,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        2,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "input_identity": "2abebd1c528fa4228d5439302a085e8a3cf777a9f78cff41429ade5b558a7bd4",
+      "observed": [
+        1,
+        2,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        3,
+        4
+      ],
+      "input_identity": "aefa875b23cc11c515a2f9b26dd89a68049d053983c5dedc56a008a63da0b099",
+      "observed": [
+        2,
+        3,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        3,
+        4
+      ],
+      "input_identity": "a890fdeb3f6ff9b8171b36836ab006e79e89546f3a6623d9cd4740980d472f94",
+      "observed": [
+        3,
+        3,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        3,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        3,
+        4
+      ],
+      "input_identity": "18d257e146ad28f6322b5916a062dc69fc3e2cd01b3749becb38d72d4b9b713b",
+      "observed": [
+        4,
+        3,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        3,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        3,
+        4
+      ],
+      "input_identity": "3959c809348f7231d5990c47b2aa01b508231bbff719f54da9bf284785bb53be",
+      "observed": [
+        5,
+        3,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        3,
+        4
+      ],
+      "input_identity": "c6e3b9fa329e46806231ca6acab72290fa6e57bb95a2d0fe48b58de4e86c5600",
+      "observed": [
+        6,
+        3,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        3,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        3,
+        4
+      ],
+      "input_identity": "dd38f522461c005b5a89796a9fa6f72e144be10b67bc27b06e7822651dc80dfb",
+      "observed": [
+        0,
+        3,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        3,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        3,
+        4
+      ],
+      "input_identity": "2f4d74f4e236ea27e69b2ec6fc9f761a78f0d16a1b24b245495d55c1ea3da962",
+      "observed": [
+        1,
+        3,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        4,
+        5
+      ],
+      "input_identity": "34e120bc0f850d11b4d99597958ea03df480b65004c0ccb84db2c9b7cf65e08b",
+      "observed": [
+        2,
+        4,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        4,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        4,
+        5
+      ],
+      "input_identity": "9f6b9803d6af9e2e3aa7be563287acb29e250989382f6e95cec823b4e808e4a4",
+      "observed": [
+        3,
+        4,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        4,
+        5
+      ],
+      "input_identity": "7c3e79515889f1fd5e06569b2cb5d3abe590f262785d85608ab229a240dec95b",
+      "observed": [
+        4,
+        4,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        4,
+        5
+      ],
+      "input_identity": "c968498cd3e855b5e4b60f1bc31e55c628f43582dd7cbd712f909b593eff55ff",
+      "observed": [
+        5,
+        4,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        4,
+        5
+      ],
+      "input_identity": "54bd74f0ce760d8baa2ed16e09031ff8ba2ead35963968ae4d0edbf786d8f3e1",
+      "observed": [
+        6,
+        4,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        4,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        4,
+        5
+      ],
+      "input_identity": "bfdecb54d295bf6be6680e8e3db9cc543e7bc5c12993f90e2a61f96941f6112d",
+      "observed": [
+        0,
+        4,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        4,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        4,
+        5
+      ],
+      "input_identity": "f9fa1a3820804098c512d08cff405a59ab46f86c948299d0baa1dba4a5e4149d",
+      "observed": [
+        1,
+        4,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        4,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        5,
+        6
+      ],
+      "input_identity": "8dba0947152511a2d5047d407a76ecdf7ec7f641d7a127c366a1ecf517c3be5a",
+      "observed": [
+        2,
+        5,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        5,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        5,
+        6
+      ],
+      "input_identity": "5710bb8a87678d9eba89b57d722cfe6a58ccaf8a2ef56003b12312101399999f",
+      "observed": [
+        3,
+        5,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        5,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        5,
+        6
+      ],
+      "input_identity": "e444a1c89a0243e11641f16e6a1e212bfe22c75cadca6a179a272bd51290a289",
+      "observed": [
+        4,
+        5,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        5,
+        6
+      ],
+      "input_identity": "03a06f3ec44f94bdeab03fc877292aab30973952e19ad0d736546ab4f9c824f8",
+      "observed": [
+        5,
+        5,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        5,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        5,
+        6
+      ],
+      "input_identity": "0a51d46a79148c8756f1a58669a9b03ddfddcbd2814eec1cc58ee82361fb2148",
+      "observed": [
+        6,
+        5,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        5,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        5,
+        6
+      ],
+      "input_identity": "38c176a71b1135a27828590956d8cfc37885eb78765ceef08ac87af7442ab501",
+      "observed": [
+        0,
+        5,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        5,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        5,
+        6
+      ],
+      "input_identity": "69725041575c0e30990274d62d77c60d4e595fa5e0ebec3ab615ad367bd5d7dc",
+      "observed": [
+        1,
+        5,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        5,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        6,
+        0
+      ],
+      "input_identity": "49ad6f26d156335207dce5b0a956fcd6202486c7e096f36bf64a58f33680c619",
+      "observed": [
+        2,
+        6,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        6,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        6,
+        0
+      ],
+      "input_identity": "2e8c7c700863b945e8b2134ae61c8db70715c4690fd9f410579b6885e9ea9465",
+      "observed": [
+        3,
+        6,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        6,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        6,
+        0
+      ],
+      "input_identity": "565b1135d9c4fcd18b150dada809a0acf216b8080301de7ae6f3508b5eb7cc95",
+      "observed": [
+        4,
+        6,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        6,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        6,
+        0
+      ],
+      "input_identity": "571089c17629031583a74ed3d987c4d90fd32ed15ee923defe8b980504ced52a",
+      "observed": [
+        5,
+        6,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        6,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        6,
+        0
+      ],
+      "input_identity": "bf98ee8acd96d0e20a7070209921406c2392259954e35aa7504bd9d5ff77dae7",
+      "observed": [
+        6,
+        6,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        6,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        6,
+        0
+      ],
+      "input_identity": "0f2bc992a6fbfa1ce173a5e16ccf7167d78b955cb2e2cbd7284615a1c49aadc9",
+      "observed": [
+        0,
+        6,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        6,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        6,
+        0
+      ],
+      "input_identity": "7fcb8c810ed2b2aa241dd1c5eed3b921f9a4dfe734c742f63da998a7bf796ee2",
+      "observed": [
+        1,
+        6,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        6,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        0,
+        2
+      ],
+      "input_identity": "d0b743b91a45f19f013988ec836de6f2b126422b733aa545f0057fa693254086",
+      "observed": [
+        2,
+        0,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        0,
+        2
+      ],
+      "input_identity": "b2f96b3935916fbffa6c7a0d547656a3bc5277c437b0d79390fea46dc599dae3",
+      "observed": [
+        3,
+        0,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        0,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        0,
+        2
+      ],
+      "input_identity": "e80fb56d14c43477d92994c74b19df1659c0e6770ce0ba16daf9acca9b42dcd6",
+      "observed": [
+        4,
+        0,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        0,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        0,
+        2
+      ],
+      "input_identity": "02969c6296412a334b4a805f349765a1ffbd1c83832d0e026bd0e4ad1b793fea",
+      "observed": [
+        5,
+        0,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        0,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        0,
+        2
+      ],
+      "input_identity": "65aadfde31c2069f97e656ff2fb3e7d2b673e34f52892ab577313dd9aa2aa00d",
+      "observed": [
+        6,
+        0,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        0,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        2
+      ],
+      "input_identity": "8a0863c6f727be2b7d569716140bd26ffef4068248dd55ebe84f9c1c26b63da6",
+      "observed": [
+        0,
+        0,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        2
+      ],
+      "input_identity": "6e41a0fc53761a154baddd473ca1a28c1e9f17db5d6e08c143e6a23faaae3057",
+      "observed": [
+        1,
+        0,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        0,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        1,
+        3
+      ],
+      "input_identity": "e3d74e8a3abe40a6433bfa50a1c86fc7ba5c45e7c3aa33dc802556af63911112",
+      "observed": [
+        2,
+        1,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        1,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        1,
+        3
+      ],
+      "input_identity": "eeb28bf69260265a5969e790263edda213ce3c8089cf1b90289ad3f1d530390d",
+      "observed": [
+        3,
+        1,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        1,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        1,
+        3
+      ],
+      "input_identity": "1a3956a52ff1b071e303c32792fa3362150b40e4b31bdb29c37d290b96062d8b",
+      "observed": [
+        4,
+        1,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        1,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        1,
+        3
+      ],
+      "input_identity": "1cc666ada0429dc4cbaddefc3b8952c343ecd92ca44aa7966f2d1ccf33f636de",
+      "observed": [
+        5,
+        1,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        1,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        1,
+        3
+      ],
+      "input_identity": "8578e2634dd52e6069596a5d98452484e47857fb754eca0b59bf8b3a5764c055",
+      "observed": [
+        6,
+        1,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        1,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        3
+      ],
+      "input_identity": "1cc56ce4176bb9a6becc5e19249f9d940e8d484afcd651c984f9d788fe375bb6",
+      "observed": [
+        0,
+        1,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        3
+      ],
+      "input_identity": "b3a14f8d6d66bd2bf434805c6983f47df6da453cb652dd07fd63a75911cd3d04",
+      "observed": [
+        1,
+        1,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        1,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        2,
+        4
+      ],
+      "input_identity": "b793fcc3e1c5aeb14b5b422bb97f860dcf20cef4f1c193fd5b0b2e470faa35ec",
+      "observed": [
+        2,
+        2,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        2,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        2,
+        4
+      ],
+      "input_identity": "6937deffc809587c68a31b39326fe6e7c956005945c40e4c561e16b5299edd97",
+      "observed": [
+        3,
+        2,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        2,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        2,
+        4
+      ],
+      "input_identity": "4eb7d1e90fd0bf74f010c53adf76832c5ac4ce4af88d7f94c6c0f70f8fc7b9a3",
+      "observed": [
+        4,
+        2,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        2,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        2,
+        4
+      ],
+      "input_identity": "e5511b92d7477c68c2f11f0cfa1f1165eb6d2f431ae0270773c4fea372385105",
+      "observed": [
+        5,
+        2,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        2,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        2,
+        4
+      ],
+      "input_identity": "a5578f7097d9c12da95ecea8d0a059c0659644c43747d77ad2dfcf9c42100e74",
+      "observed": [
+        6,
+        2,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        2,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        2,
+        4
+      ],
+      "input_identity": "af7893d116d518496cf8a0fab0e934029882724c164eaeaa754150ed5062dadf",
+      "observed": [
+        0,
+        2,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        2,
+        4
+      ],
+      "input_identity": "cb4ddf8cae215e1aac477f802fae383b0cdbfb2febe802e1e9a817b0660c2d62",
+      "observed": [
+        1,
+        2,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        2,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        3,
+        5
+      ],
+      "input_identity": "cf0d0b496573b4fd2023e5e10af98ce1eef9e7f1d5b1520b9c6477faeacc4836",
+      "observed": [
+        2,
+        3,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        3,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        3,
+        5
+      ],
+      "input_identity": "3712a99972f6d51a01f82815ee4e639a815d931536af5c4ddd0daf0befcc59a7",
+      "observed": [
+        3,
+        3,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        3,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        3,
+        5
+      ],
+      "input_identity": "c163f3d8fd40ccb104a0d1106d2739e6c18186d9a6ac2f5026ec0dec19eb4656",
+      "observed": [
+        4,
+        3,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        3,
+        5
+      ],
+      "input_identity": "0db81ee141f7fa6bbc5632138bb62578576cff8ccaa5d129f60dbf8a330d69e4",
+      "observed": [
+        5,
+        3,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        3,
+        5
+      ],
+      "input_identity": "2850398524094915a27d2d42f72e32e6d2dadd6689726a6f403557180affd9c0",
+      "observed": [
+        6,
+        3,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        3,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        3,
+        5
+      ],
+      "input_identity": "0e579ef252daaebd056bef4bca295ed39c9edeaa5ba41afc418f4c8d665e2a10",
+      "observed": [
+        0,
+        3,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        3,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        3,
+        5
+      ],
+      "input_identity": "45d5baac16a8f77280d09408817ace8a674445a922e650231eedbee5f8eb7e6a",
+      "observed": [
+        1,
+        3,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        3,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        4,
+        6
+      ],
+      "input_identity": "bfffc309e2d2bbea058583709a4de42b369525f5c5fc3233b2261075bad8cb55",
+      "observed": [
+        2,
+        4,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        4,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        4,
+        6
+      ],
+      "input_identity": "fc6966d4372317a6e4a8591c6de85f51b0c1a0db4ae69b3dca4f811a3ac1a325",
+      "observed": [
+        3,
+        4,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        4,
+        6
+      ],
+      "input_identity": "226b315241b5bcd99b99382fa823df6398c1168e01a2a3c6500740556a279dec",
+      "observed": [
+        4,
+        4,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        4,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        4,
+        6
+      ],
+      "input_identity": "92918c2b2f2b66a31b718f36585ddb34bada5e6a13df65f45be7bb6cc8998b44",
+      "observed": [
+        5,
+        4,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        4,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        4,
+        6
+      ],
+      "input_identity": "75daa22531df210fac6f42ab7182e7c1d134e840c4b141e9e9b78f7dc36eb4e1",
+      "observed": [
+        6,
+        4,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        4,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        4,
+        6
+      ],
+      "input_identity": "85e9c3915684039db435b6e102f4879ce5272fcdfc8529df1d858a7a18b33c34",
+      "observed": [
+        0,
+        4,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        4,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        4,
+        6
+      ],
+      "input_identity": "b20af411f281c2a1a9707f0cdf3da4caea8c77d79fad15d8611b5a1742c69b43",
+      "observed": [
+        1,
+        4,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        4,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        5,
+        0
+      ],
+      "input_identity": "2d24d3fa77c709e849d1cd15960899cd72d70e9fa0eac899ecf5aab33525c906",
+      "observed": [
+        2,
+        5,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        5,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        5,
+        0
+      ],
+      "input_identity": "4128a07eca5b044d5282fb3c189262eb0c0d9b918208269f3a1878d57751ccc1",
+      "observed": [
+        3,
+        5,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        5,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        5,
+        0
+      ],
+      "input_identity": "d40aa2f8251905cfef951c576c8f0e7bfcf518bdf0cfcfcfdf8efb936b35d152",
+      "observed": [
+        4,
+        5,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        5,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        5,
+        0
+      ],
+      "input_identity": "2c84662a5171db983dcebb9025fa64a5d518ac6b48d5d1760154af00ada5e71c",
+      "observed": [
+        5,
+        5,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        5,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        5,
+        0
+      ],
+      "input_identity": "801f34b70c4491201b92971129ed00fb2639f2c9fed5dd462a1fabb3ca9f0492",
+      "observed": [
+        6,
+        5,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        5,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        5,
+        0
+      ],
+      "input_identity": "ceefad13f9a4005bea5d68999d4ed1deb335e136859a2b78cf98e8674f00fa0f",
+      "observed": [
+        0,
+        5,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        5,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        5,
+        0
+      ],
+      "input_identity": "41cbd0eeab6e888b9918c6366b55fa829d62b578c7ede73d8e6abf5e74e6aa3d",
+      "observed": [
+        1,
+        5,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        5,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        6,
+        1
+      ],
+      "input_identity": "cf8daafc34f77db447f01f3fa5c3c5e0cccb65e79d41a2c5a152b16c43ff4e56",
+      "observed": [
+        2,
+        6,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        6,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        6,
+        1
+      ],
+      "input_identity": "09151c72a139d4a71be1414e380c7444a55bd3a093cfbbe7570739db198a1998",
+      "observed": [
+        3,
+        6,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        6,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        6,
+        1
+      ],
+      "input_identity": "9cb82dc9d0f8b882a135394dc25ac63356b5d5a7ca351480a83424972fb18e65",
+      "observed": [
+        4,
+        6,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        6,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        6,
+        1
+      ],
+      "input_identity": "018faf909f4b732498dd7a1df407c196f624dead683f4e22907122c5c14f2fa5",
+      "observed": [
+        5,
+        6,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        6,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        6,
+        1
+      ],
+      "input_identity": "3980e8ea52a53d67ce5bac9f0dfdeee96dd9d15442e4132095579bee6fb8746d",
+      "observed": [
+        6,
+        6,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        6,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        6,
+        1
+      ],
+      "input_identity": "0e76cc920d5f54ca2cc44c8be39f915ff266ec01079b7f9d82c76a70ee73cb25",
+      "observed": [
+        0,
+        6,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        6,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        6,
+        1
+      ],
+      "input_identity": "f4d80da1d34a6a8545edccefc7e0f6ca9f4098c07d3b358155c43a27cd833a8a",
+      "observed": [
+        1,
+        6,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        6,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        0,
+        3
+      ],
+      "input_identity": "53862c9bc6794c124bed9c4fe1d9556acc2c2240aab4abb7d0b2638681b7f820",
+      "observed": [
+        2,
+        0,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        0,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        0,
+        3
+      ],
+      "input_identity": "2619c4b9ccc1db9766a1772036f43ec4514a1b0ca10ddeb573f4f5a5dd0f730d",
+      "observed": [
+        3,
+        0,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        0,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        0,
+        3
+      ],
+      "input_identity": "8d0c7845fd419c02df90f39f838329938c2c65c72be0bf99d88458bf9b381689",
+      "observed": [
+        4,
+        0,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        0,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        0,
+        3
+      ],
+      "input_identity": "aec69efa562a6df1b2ab401f4e86edccf87d811da2bf18ca0a809ce880e67019",
+      "observed": [
+        5,
+        0,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        0,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        0,
+        3
+      ],
+      "input_identity": "f5043517ef15ddc0c2c6b6cf655f72074dbb4348011c88cdb177cd91d0735514",
+      "observed": [
+        6,
+        0,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        0,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        3
+      ],
+      "input_identity": "4f84b23fc213a0278940a282b16ee1e722691b2ebd46278e0e7c44a31ae15c19",
+      "observed": [
+        0,
+        0,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        0,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        3
+      ],
+      "input_identity": "47b1181af0bb78b82659925c5cf6cb55e6d8bdcb761df48d913e4776abf569ac",
+      "observed": [
+        1,
+        0,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        0,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        1,
+        4
+      ],
+      "input_identity": "49cafd1e3b12b4dbbdb066432ee35c17186a4487d4aa647e5432ef662c7026b8",
+      "observed": [
+        2,
+        1,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        1,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        1,
+        4
+      ],
+      "input_identity": "879f240ccae89323717a2f3cf0d4eaf443de45e9b92136432ac1e33e0051283b",
+      "observed": [
+        3,
+        1,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        1,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        1,
+        4
+      ],
+      "input_identity": "dba1ca8335b89e2f3512b006319dc8f407e252346e37af927e19d9af0df7c01e",
+      "observed": [
+        4,
+        1,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        1,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        1,
+        4
+      ],
+      "input_identity": "a8092895fc7d5104c374c3845ce1bb3975c2bb38293335fbee0932a86f6c9f4f",
+      "observed": [
+        5,
+        1,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        1,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        1,
+        4
+      ],
+      "input_identity": "78ff6f73451c5e2c98e4d048e7da29e4f8ea82299ea8d0a3db294cb8f00faec3",
+      "observed": [
+        6,
+        1,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        1,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        4
+      ],
+      "input_identity": "7124eaa9ad062802d93fd0fc1b142d714ca605d33db0aa293d940c54a860de17",
+      "observed": [
+        0,
+        1,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        1,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        4
+      ],
+      "input_identity": "86a0f1a958cc524b9cf8a424f9198eb45c90a0fecf12af4535d0dd75abf7f8b5",
+      "observed": [
+        1,
+        1,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        1,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        2,
+        5
+      ],
+      "input_identity": "ba60b2f7b10fbe8ba578ab8fbfa9e8cb49ebdef90ea839d2d6fcb2aa2129156a",
+      "observed": [
+        2,
+        2,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        2,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        2,
+        5
+      ],
+      "input_identity": "7df0363ef9cb9da7b3a4a8458f4c157d5c6feca3b6b89f948bee671d05c77ebd",
+      "observed": [
+        3,
+        2,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        2,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        2,
+        5
+      ],
+      "input_identity": "a48fd2136f158496b9b6f9392259d1c427225a5465cd092061f04b0cae00d475",
+      "observed": [
+        4,
+        2,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        2,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        2,
+        5
+      ],
+      "input_identity": "9dde587d50c2cde5a595674167573980b0dc82aa578cfecfa8b20b8a005dd4dd",
+      "observed": [
+        5,
+        2,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        2,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        2,
+        5
+      ],
+      "input_identity": "b1f7f53eea8b88626126c94d46c00fe95c5b392aa49ef0de05881676eab780fc",
+      "observed": [
+        6,
+        2,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        2,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        2,
+        5
+      ],
+      "input_identity": "328c718dee76f3591609a14e54771a4cf42531b3be06110ab1ee14f03234522c",
+      "observed": [
+        0,
+        2,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        2,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        2,
+        5
+      ],
+      "input_identity": "e8b98a916c5c702cbee147152ad5a5abba0657a71c6a31c708d0f89708f310e4",
+      "observed": [
+        1,
+        2,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        2,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        3,
+        6
+      ],
+      "input_identity": "09df2b2ed9be0281102a6d9c82b3053dcbe5b1728a8627d4f957dfe0d7caab33",
+      "observed": [
+        2,
+        3,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        3,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        3,
+        6
+      ],
+      "input_identity": "9c45b31c3b7eb27b70ab673f8f903244460ee652d749892e38e6eb918a206934",
+      "observed": [
+        3,
+        3,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        3,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        3,
+        6
+      ],
+      "input_identity": "b40927a8d4857f605df6245861033e2340cb1df2f8eae2d5d1c9ac4cd9ec4e9f",
+      "observed": [
+        4,
+        3,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        3,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        3,
+        6
+      ],
+      "input_identity": "e2721839d37976809c6ef3c73ebc78147cf7e85a537a0d4014b6b39dbfe9486e",
+      "observed": [
+        5,
+        3,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        3,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        3,
+        6
+      ],
+      "input_identity": "fa875ad8db8eb635b42eae668d57e9acc5f13280f00031f8dd44b227da049f63",
+      "observed": [
+        6,
+        3,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        3,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        3,
+        6
+      ],
+      "input_identity": "85fb20aad4c1b95765c706ec12203e3790d2315b80e5fb7eb8b993152a5b5da8",
+      "observed": [
+        0,
+        3,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        3,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        3,
+        6
+      ],
+      "input_identity": "e125aa325c17915539dde180ac9280a6c046cf2d18396ace1a6a7404e453ae88",
+      "observed": [
+        1,
+        3,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        3,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        4,
+        0
+      ],
+      "input_identity": "c69b18b854d21193d5dde1f6fca83f4eb3f09ff63fdd8172970c28e348cd8b7b",
+      "observed": [
+        2,
+        4,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        4,
+        0
+      ],
+      "input_identity": "f1249fb2692b735253ac052d73bb5f14e1f5e91a62d707eabb50b6fd1598af14",
+      "observed": [
+        3,
+        4,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        4,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        4,
+        0
+      ],
+      "input_identity": "dc49a8a4ea5133d390726919408e1a18228339cac92768b8300e3e003f386e3a",
+      "observed": [
+        4,
+        4,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        4,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        4,
+        0
+      ],
+      "input_identity": "fa4b4d94b5c169594bca9e5d2028ebd84e3d5a7165333f6cb643969bb460fcdb",
+      "observed": [
+        5,
+        4,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        4,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        4,
+        0
+      ],
+      "input_identity": "ef6b0f26adefccb4633330e10d3fafea7a210b38ac9e9d1ecd1ac242a354c714",
+      "observed": [
+        6,
+        4,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        4,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        4,
+        0
+      ],
+      "input_identity": "61e1b9dcb78af5f53215ae4dabf533847550dd008ce2078f5a77daca3a4b4bd0",
+      "observed": [
+        0,
+        4,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        4,
+        0
+      ],
+      "input_identity": "baaf758b3627963e809aa9b30bb55efd48cf63300063f08ef7f290143865fb34",
+      "observed": [
+        1,
+        4,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        4,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        5,
+        1
+      ],
+      "input_identity": "976b48759f6387a3831164ab7ed943690605617001e2ec7b3002505dbd2cd643",
+      "observed": [
+        2,
+        5,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        5,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        5,
+        1
+      ],
+      "input_identity": "8e57100fb721addf33d32accc86ca3a193a1a4bcbe7a6fdeb1a9cfb864352107",
+      "observed": [
+        3,
+        5,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        5,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        5,
+        1
+      ],
+      "input_identity": "3aa0f829888720f226edda51710aafea3e1c19b844e21ad0d52a24ad2806437d",
+      "observed": [
+        4,
+        5,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        5,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        5,
+        1
+      ],
+      "input_identity": "4b9af601dba1557c8de7874c3ec9e0c15f61747f99093744c6dddb137f51b3a0",
+      "observed": [
+        5,
+        5,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        5,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        5,
+        1
+      ],
+      "input_identity": "9830be4bcc7f4dd56c5df610c7c311c75c8e412baba756a1d0d6c1bd12bb9be3",
+      "observed": [
+        6,
+        5,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        5,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        5,
+        1
+      ],
+      "input_identity": "ab3e70839fb0dc0bd9157f17057bcc63b46b13b80f2124667cb7dc714de07c68",
+      "observed": [
+        0,
+        5,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        5,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        5,
+        1
+      ],
+      "input_identity": "c0e025945afa7e86a6984891846e1b06d1050a4d1e2c94dc2049f3addf739a67",
+      "observed": [
+        1,
+        5,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        5,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        6,
+        2
+      ],
+      "input_identity": "f79a447ab0d548d5de1db8ea62a77b7ae113e3c920a13316af7c1c263ce621b0",
+      "observed": [
+        2,
+        6,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        6,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        6,
+        2
+      ],
+      "input_identity": "8a4266ed4f0b4c83305fe4553abba2a4cee13c581ea1a7d95f3ae9b1614f7cf6",
+      "observed": [
+        3,
+        6,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        6,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        6,
+        2
+      ],
+      "input_identity": "3d1e59ee482e7cba8a3a4c46e10444d7bd90e1fb9bab0ecb7d558b7f2d2cb8c5",
+      "observed": [
+        4,
+        6,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        6,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        6,
+        2
+      ],
+      "input_identity": "5594093bde0866ad91f463b46e599b212add81c347b31808cebbfe4f307159ca",
+      "observed": [
+        5,
+        6,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        6,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        6,
+        2
+      ],
+      "input_identity": "c55151cbecd041348ff749cb7df5d67b67f223d0a77bc306c0f1a6bdcedf7c16",
+      "observed": [
+        6,
+        6,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        6,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        6,
+        2
+      ],
+      "input_identity": "8badb26a0afb661924d4b9cb4d658dedb5ba930bb577ab6dbd16bf0fa36f3c90",
+      "observed": [
+        0,
+        6,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        6,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        6,
+        2
+      ],
+      "input_identity": "3dac63312ddaeb140dfc96ab14f2dbaf7f11599cff7f613bde481b09a51e2309",
+      "observed": [
+        1,
+        6,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        6,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        0,
+        4
+      ],
+      "input_identity": "0b0ca3086cc448027c763ac80efd112d40c876d2d06b72c57b403cded8fdda7f",
+      "observed": [
+        2,
+        0,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        0,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        0,
+        4
+      ],
+      "input_identity": "bd485b2c7d52a3cb21947a3c00ba4f18dd96748bcc5172e159edc83e4186cb05",
+      "observed": [
+        3,
+        0,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        0,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        0,
+        4
+      ],
+      "input_identity": "6908417a203e14c5053ab61d160ac298c84ee614996b16819b3228831ee3e5fe",
+      "observed": [
+        4,
+        0,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        0,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        0,
+        4
+      ],
+      "input_identity": "827791973ee356b3fc7fab39b1c34fffaaf391ce8d763dffc3dbbc44547727a6",
+      "observed": [
+        5,
+        0,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        0,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        0,
+        4
+      ],
+      "input_identity": "30a073d7083287ee7896a9666592c7334c6b1dc0e451982657657c6418866b7b",
+      "observed": [
+        6,
+        0,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        0,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        4
+      ],
+      "input_identity": "6e4ea857c8ebf5485466aa4f7c640bc71d25918b386a364b12bcb460d6aed155",
+      "observed": [
+        0,
+        0,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        0,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        4
+      ],
+      "input_identity": "cd5d36e4e4770a38f13735a20113615a0770f63ee9485cceef28668f11bff175",
+      "observed": [
+        1,
+        0,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        0,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        1,
+        5
+      ],
+      "input_identity": "6e0b3d44f915f6d91f3cca6ed0d71572dfb52554376a5eeed100ace4f91e7907",
+      "observed": [
+        2,
+        1,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        1,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        1,
+        5
+      ],
+      "input_identity": "c15708d9e355191707c0a313c3dd115c706d5e6899b3c30dde132b306fea5e64",
+      "observed": [
+        3,
+        1,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        1,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        1,
+        5
+      ],
+      "input_identity": "8edd090106a3afea7f5f3caa6caaaacb9194604876fb1020fa089f98f517eac1",
+      "observed": [
+        4,
+        1,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        1,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        1,
+        5
+      ],
+      "input_identity": "cb3c4cdd249e524f97a2cd1d23f359cf0905316f900c99669c28f0a5b03d6638",
+      "observed": [
+        5,
+        1,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        1,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        1,
+        5
+      ],
+      "input_identity": "541fdd7a21e5a0e16e7df6274d932f6d8412f48eac61f01151784aa7568e399c",
+      "observed": [
+        6,
+        1,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        1,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        5
+      ],
+      "input_identity": "349bc67501584cf56108b0e06e78e760e878896128fe8cc399e8fae3ed5753aa",
+      "observed": [
+        0,
+        1,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        1,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        5
+      ],
+      "input_identity": "a05a15aa9387fd1cada9f70285078501140053e43adbe92af346e9dc322941e3",
+      "observed": [
+        1,
+        1,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        1,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        2,
+        6
+      ],
+      "input_identity": "9c3a4cd33179ca50ae89fcac48ff2f3d78bfd4b302e06db24e12c0fb52dc00cd",
+      "observed": [
+        2,
+        2,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        2,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        2,
+        6
+      ],
+      "input_identity": "9237f7f787b9b86e482d95ebad265ee17d3d40790c25396f324c59ab23365141",
+      "observed": [
+        3,
+        2,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        2,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        2,
+        6
+      ],
+      "input_identity": "4ba734911e8091becf519f0a2f8c7de179646abbc0f895149ac776129bd2faeb",
+      "observed": [
+        4,
+        2,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        2,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        2,
+        6
+      ],
+      "input_identity": "45e342cd48290a438e6f48604b7d3dba5b6c7275b8c5657a283cdbfdde1f96d6",
+      "observed": [
+        5,
+        2,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        2,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        2,
+        6
+      ],
+      "input_identity": "b5d1b3a6ea9d2b827396c74a6cc0685631860d28737f71896a0ba4cdf382d764",
+      "observed": [
+        6,
+        2,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        2,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        2,
+        6
+      ],
+      "input_identity": "ad8828e0505b951c9af7e9becb3df5f9f2876c16ee18762d6c8e7d650b06fb29",
+      "observed": [
+        0,
+        2,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        2,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        2,
+        6
+      ],
+      "input_identity": "1e3a7a5ddbc152861bca1c7be5618df0f0e270cc57b0c7d120b3a21fee559aea",
+      "observed": [
+        1,
+        2,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        2,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        3,
+        0
+      ],
+      "input_identity": "dd6fd9dc8a944c4a50c1676eb23f9bda6ba4c0f38c35f92f7c47fdbbdaf142ad",
+      "observed": [
+        2,
+        3,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        3,
+        0
+      ],
+      "input_identity": "409f7dbeb225f53cf3ef824aee8dfaef71a4fc195afe1308adc52e3c7e690598",
+      "observed": [
+        3,
+        3,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        3,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        3,
+        0
+      ],
+      "input_identity": "baa336e57fe4d489ca9e4519f21686c1b0aa05186855879d351cc390a1124d53",
+      "observed": [
+        4,
+        3,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        3,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        3,
+        0
+      ],
+      "input_identity": "898edf279349732805132b02a9e63526052055e17c1abfc91de49b09adc66033",
+      "observed": [
+        5,
+        3,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        3,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        3,
+        0
+      ],
+      "input_identity": "7b1a044b3f0c2bdd4a74f9a322367afbb06a882f8a3d8ff3b77da30ccff5259c",
+      "observed": [
+        6,
+        3,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        3,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        3,
+        0
+      ],
+      "input_identity": "37917db0e203e3ff77bc617341159c1108c066bbb2140a1dd2ee193abc6f2251",
+      "observed": [
+        0,
+        3,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        3,
+        0
+      ],
+      "input_identity": "4b635a3648cd87a919e9bba7fe4d112d678df86ba391e64900567a0c8ffee7e6",
+      "observed": [
+        1,
+        3,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        3,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        4,
+        1
+      ],
+      "input_identity": "0530c947cf74137089013f9410e2adbc66438297836b6f5e424cb0842629df42",
+      "observed": [
+        2,
+        4,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        4,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        4,
+        1
+      ],
+      "input_identity": "3c4fc989385491104b3a9d3eadbcc7ea94b8d5fa2a45b8f498a330a187082d83",
+      "observed": [
+        3,
+        4,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        4,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        4,
+        1
+      ],
+      "input_identity": "5086643c9303a95b84b9b66a8fc4a782b4af7db02f8639031e1fc99f55000650",
+      "observed": [
+        4,
+        4,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        4,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        4,
+        1
+      ],
+      "input_identity": "0383030c58b106e5facae66ec79b6fe1bd4a4de3a0cd81dd344fc849220720fc",
+      "observed": [
+        5,
+        4,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        4,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        4,
+        1
+      ],
+      "input_identity": "650a96c7bd74ed8769ef212d0d80cb5f532d839e45f511132a4f95f181076723",
+      "observed": [
+        6,
+        4,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        4,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        4,
+        1
+      ],
+      "input_identity": "5bfaf1a5df5340bf6d860381804de369d65fbf841dd48ec033f400ae8af91508",
+      "observed": [
+        0,
+        4,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        4,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        4,
+        1
+      ],
+      "input_identity": "62f7f4e1ec30c36e921918078cb8eeb0f991029274fee1749eab8a57d30be50e",
+      "observed": [
+        1,
+        4,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        4,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        5,
+        2
+      ],
+      "input_identity": "ce73e5c3cc62c3e108be58c46fdba0717d0ec47440135a2d0f219e0aa5a976ea",
+      "observed": [
+        2,
+        5,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        5,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        5,
+        2
+      ],
+      "input_identity": "3b2e4bdab375726d14b9f3c665b03d85122b88db1a7f103a582a331187e3ad8d",
+      "observed": [
+        3,
+        5,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        5,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        5,
+        2
+      ],
+      "input_identity": "e527379e3db601107e1d3e99b03fa99780b8fcf2e919ba4371edc84957d128c3",
+      "observed": [
+        4,
+        5,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        5,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        5,
+        2
+      ],
+      "input_identity": "cb5627c3c8fda5f998d8f663ca0ed2b45ad9be80d81e413802c90bdbef7f089f",
+      "observed": [
+        5,
+        5,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        5,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        5,
+        2
+      ],
+      "input_identity": "441ccda7b09569854f038381b84e9af101ac1f645ff97462d9f2140a85462f18",
+      "observed": [
+        6,
+        5,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        5,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        5,
+        2
+      ],
+      "input_identity": "eaa77af2cb82b2b88710c01fa0565e0cead12b822a6a995c56981c2019c676b6",
+      "observed": [
+        0,
+        5,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        5,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        5,
+        2
+      ],
+      "input_identity": "5812ac437982f021fe48ee73c3c65adba017c3960a989407df6da579535ef8a1",
+      "observed": [
+        1,
+        5,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        5,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        6,
+        3
+      ],
+      "input_identity": "a9b0c6f3cd33c80616453527fb7e3e30a09108a2e221e8e4e9861097b27e356f",
+      "observed": [
+        2,
+        6,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        6,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        6,
+        3
+      ],
+      "input_identity": "c5d24eb4900341ea6d5185b96c4be072618e94f44670507688d36d16b27b2c61",
+      "observed": [
+        3,
+        6,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        6,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        6,
+        3
+      ],
+      "input_identity": "3877abc9283ec600299aed7227fef572ad1bcf30dedbe219a2f2baa50ed49f0f",
+      "observed": [
+        4,
+        6,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        6,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        6,
+        3
+      ],
+      "input_identity": "ace9ae00b8a62d9a4b3fc377d164d84d535be12babe067839da426b6bb9269c2",
+      "observed": [
+        5,
+        6,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        6,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        6,
+        3
+      ],
+      "input_identity": "6bec9d8db5c27a703694dba6e7f30ff3d5c103a8a83a384c9af0371db298ccca",
+      "observed": [
+        6,
+        6,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        6,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        6,
+        3
+      ],
+      "input_identity": "6310ed0eed662d4031174ea69ec7901c3d2c9175dcc20d209ca3d0b9ac07fd99",
+      "observed": [
+        0,
+        6,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        6,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        6,
+        3
+      ],
+      "input_identity": "a5b485c32fd130daca8e980bb9b287d755514b47bc94fc784acc0eece66e6d74",
+      "observed": [
+        1,
+        6,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        6,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        0,
+        5
+      ],
+      "input_identity": "296fe0525143f43b3675ae97441737c468cd6e869d0b12e7e36977ee8ec21850",
+      "observed": [
+        2,
+        0,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        0,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        0,
+        5
+      ],
+      "input_identity": "5594679be8d00af822b5e2ce58f4ea1b767158700e4709336138fad54c712c48",
+      "observed": [
+        3,
+        0,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        0,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        0,
+        5
+      ],
+      "input_identity": "60c5ca2bc2dcfad0d00b2a4a635a2521b11cc8529562f52f93cfe6280cb8231c",
+      "observed": [
+        4,
+        0,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        0,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        0,
+        5
+      ],
+      "input_identity": "0161496207807beae25e57ea0953559e41e253354026b6a060826bea71a333c4",
+      "observed": [
+        5,
+        0,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        0,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        0,
+        5
+      ],
+      "input_identity": "276e8749d6c59490498645ae9f7d0600636f148675292196bc14ab11176ee4bd",
+      "observed": [
+        6,
+        0,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        0,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        5
+      ],
+      "input_identity": "aa630fd6d7b6d3a4e2122b7907f9ac16c2b6192f4182a7265d95424d36f41229",
+      "observed": [
+        0,
+        0,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        0,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        5
+      ],
+      "input_identity": "9779c3b9261fa12c57f1922d05b5d936efca168c6a1bc95735608486f047fdfc",
+      "observed": [
+        1,
+        0,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        0,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        1,
+        6
+      ],
+      "input_identity": "8e3d93c904308ecea7c2bedb9217d20053363f31d42235e9e59ca7a4c4da5f84",
+      "observed": [
+        2,
+        1,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        1,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        1,
+        6
+      ],
+      "input_identity": "38ed2bd5c664a1a1cc3aabf6144c68d017b44762768e6e357f54e709093efa41",
+      "observed": [
+        3,
+        1,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        1,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        1,
+        6
+      ],
+      "input_identity": "a0dfecea39d681e0424063e7400e565a234088b9301719bedfdfa6d084283c7c",
+      "observed": [
+        4,
+        1,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        1,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        1,
+        6
+      ],
+      "input_identity": "9352e50337d5171b6f3c195165ccf5548ed9eabfa3ae8b7427844b037afdab45",
+      "observed": [
+        5,
+        1,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        1,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        1,
+        6
+      ],
+      "input_identity": "2b67b5698b112745a9e67a380af4776189065ccc73b86166800f374d9f4799a1",
+      "observed": [
+        6,
+        1,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        1,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        6
+      ],
+      "input_identity": "dda68d04323baa0597fe21f22b8122a7fb4d43e9c463f3fa7b8b7d8be5e92a22",
+      "observed": [
+        0,
+        1,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        1,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        6
+      ],
+      "input_identity": "e2f566480aa5b29c843c38c5c6c9f8da1b5b9ee8328723d79a3545e1c84edfb2",
+      "observed": [
+        1,
+        1,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        1,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        2,
+        0
+      ],
+      "input_identity": "0b1eae87d0225c7b5be503961c25cb99c8960f05f8aab630daef5101c9d6e457",
+      "observed": [
+        2,
+        2,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        2,
+        0
+      ],
+      "input_identity": "3f89968828209115919efdbfb815a04f047cbd279340005f446e637fb825a1a9",
+      "observed": [
+        3,
+        2,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        2,
+        0
+      ],
+      "input_identity": "3947eba841220d1848ea4aa9ffc8317b496c4feabd72aa098026b2d2882ab6ff",
+      "observed": [
+        4,
+        2,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        2,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        2,
+        0
+      ],
+      "input_identity": "81d6f780b3053ceacb9c59ca717aa112cbea030785cd5d67288e083a3167b49e",
+      "observed": [
+        5,
+        2,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        2,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        2,
+        0
+      ],
+      "input_identity": "50cc36827790c7e25ad43afbbef976161adb1a51040f4f95ae042c7b8ff90a7c",
+      "observed": [
+        6,
+        2,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        2,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        2,
+        0
+      ],
+      "input_identity": "d6ef4d65900b5bb75be5320de84c9644e78d6e2c284b93a15a29035106526874",
+      "observed": [
+        0,
+        2,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        2,
+        0
+      ],
+      "input_identity": "c3c4fef77e410831fefb1de4a4751c94efe0886a71cfb0bb439ef2a79ed4867a",
+      "observed": [
+        1,
+        2,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        3,
+        1
+      ],
+      "input_identity": "98e5bd8c0f541a5569dabd85366a9ed0539199b64b8d195e27fbed72e60dd98d",
+      "observed": [
+        2,
+        3,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        3,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        3,
+        1
+      ],
+      "input_identity": "6356bfd4185da0b088473bfe841e18262157434c3daa4659a706823fcc4963a3",
+      "observed": [
+        3,
+        3,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        3,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        3,
+        1
+      ],
+      "input_identity": "ab1f1c01dc2ad1e600933b71c27ac2bbe71a5a2e4a7d0a84135dbf9d2ff38cd2",
+      "observed": [
+        4,
+        3,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        3,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        3,
+        1
+      ],
+      "input_identity": "46d9bed35904aeeac205c128e1e0c5e9536b1486c9b0f7248607ae9e6c42778b",
+      "observed": [
+        5,
+        3,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        3,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        3,
+        1
+      ],
+      "input_identity": "a2db826b99b7e6e49745abdd7dd7259ffc541adec04bf4588d0e72a9516a7b41",
+      "observed": [
+        6,
+        3,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        3,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        3,
+        1
+      ],
+      "input_identity": "605e5422519e0c5a88201f2edfbfc740b332e9bcfef8022832314e288d5cd6df",
+      "observed": [
+        0,
+        3,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        3,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        3,
+        1
+      ],
+      "input_identity": "4232a7aa5958bd63e6997bf9c44b25d2214f3fc2e282a3f3a085e7196f827702",
+      "observed": [
+        1,
+        3,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        3,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        4,
+        2
+      ],
+      "input_identity": "38d947e360b7d1eacf048d76798f37c80a765a587f029f9f68a952ce1eca78c6",
+      "observed": [
+        2,
+        4,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        4,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        4,
+        2
+      ],
+      "input_identity": "1c773f8a30dfee13661fb89e62923d6195e14fa421001f1c1e637ac2f50a60b0",
+      "observed": [
+        3,
+        4,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        4,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        4,
+        2
+      ],
+      "input_identity": "c89077352c19b9d2598545e74ce2b34a3ad3e880c7dcfde3b48201576dd59b56",
+      "observed": [
+        4,
+        4,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        4,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        4,
+        2
+      ],
+      "input_identity": "7d77fcdecd625065eccbad296121fb14ed750a91a64fe01890403fc391865659",
+      "observed": [
+        5,
+        4,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        4,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        4,
+        2
+      ],
+      "input_identity": "dc98b016ae074a59af219acaee7ab522ae090ae087cf887989d7ba05a19aae3c",
+      "observed": [
+        6,
+        4,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        4,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        4,
+        2
+      ],
+      "input_identity": "443bf8ee790eb6086934bb3ac26dde9dcf5ea43c695fb9f8495963bddf377198",
+      "observed": [
+        0,
+        4,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        4,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        4,
+        2
+      ],
+      "input_identity": "3d729f862a650b8aa785836ac93b1ee5aea0aaa492293ee83baac5e0723c1092",
+      "observed": [
+        1,
+        4,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        4,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        5,
+        3
+      ],
+      "input_identity": "52395a0aae84b04a7691b0899ab43ef18430efe19d2fc9a5815b4bb9d6fd9608",
+      "observed": [
+        2,
+        5,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        5,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        5,
+        3
+      ],
+      "input_identity": "8bba5388a70920cd610999622d98b907ab99c7fbe1abbaf9751d2b4bd4ec5ddd",
+      "observed": [
+        3,
+        5,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        5,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        5,
+        3
+      ],
+      "input_identity": "c4f2be700cf4b3e17e48c174f554f97afa9d10fe203e88f843ce50e00af41ba1",
+      "observed": [
+        4,
+        5,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        5,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        5,
+        3
+      ],
+      "input_identity": "749c49c83df39991993a33c9841d8eead7be19af60ad5761731c505d29c7f660",
+      "observed": [
+        5,
+        5,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        5,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        5,
+        3
+      ],
+      "input_identity": "e40ce19f9e735bb58fc486aa25bff083ef62b1dc152b95ea19702b10affc8edf",
+      "observed": [
+        6,
+        5,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        5,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        5,
+        3
+      ],
+      "input_identity": "c7bb5e522af78a9dfc965333ef2e8e29849efd9a5ff361b8f6207a3e1a0dc25d",
+      "observed": [
+        0,
+        5,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        5,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        5,
+        3
+      ],
+      "input_identity": "8cebbe3f581d2b6709e77472e8e0f061224e6f12705f90d27d68b97a5a30b505",
+      "observed": [
+        1,
+        5,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        5,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        6,
+        4
+      ],
+      "input_identity": "7c4379d6a0bbc7553f81499eed0513c2322ff65438f25eab2e6b0a222e6feba7",
+      "observed": [
+        2,
+        6,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        6,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        6,
+        4
+      ],
+      "input_identity": "c3c855d482cf023e4bd13d69851d95f9ba8fd92bd80ec31ed360bd0c5bc33622",
+      "observed": [
+        3,
+        6,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        6,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        6,
+        4
+      ],
+      "input_identity": "ead8f6e9c32cb9ccef864ae54b45aeb40e0ff6fe4dcca084d9836c343c66823d",
+      "observed": [
+        4,
+        6,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        6,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        6,
+        4
+      ],
+      "input_identity": "71f75ed4ffa39536e07e9750666556a737490406c446c099091a2b2e18cb9948",
+      "observed": [
+        5,
+        6,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        6,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        6,
+        4
+      ],
+      "input_identity": "c1cba6101dbe77803a827f2687e7d8f54b38b88f7a037d4dfab25517eb1ac8fe",
+      "observed": [
+        6,
+        6,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        6,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        6,
+        4
+      ],
+      "input_identity": "161a5ad31a274ec0cf854542412dff0f1639bf9329edb45b25f70ee4288354cc",
+      "observed": [
+        0,
+        6,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        6,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        6,
+        4
+      ],
+      "input_identity": "e243b9e3dab05e53100e88a9b6eb9af19fdf416a3bfe7488e547d39f0375d601",
+      "observed": [
+        1,
+        6,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        6,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        0,
+        6
+      ],
+      "input_identity": "7d9130bf49408d97ad3c2474b66612f8ccdf189a706ce799e8a4145717fcc6ef",
+      "observed": [
+        2,
+        0,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        0,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        0,
+        6
+      ],
+      "input_identity": "a51d57859c819577b486c71d207a84c7bd0694310280c192817969005a134d65",
+      "observed": [
+        3,
+        0,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        0,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        0,
+        6
+      ],
+      "input_identity": "93acd04126e2bedfafed3f258daf01cd104fea909fc52102641f61215bc51f03",
+      "observed": [
+        4,
+        0,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        0,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        0,
+        6
+      ],
+      "input_identity": "78cc20d7f01e35c9b43173226dadcd2e9eb2d0512774e4aa21d910d06e7d1f61",
+      "observed": [
+        5,
+        0,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        0,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        0,
+        6
+      ],
+      "input_identity": "3d1f133679f8403e2ed23351aa06a3b8f7f2aaaa759dbda261b0a9aa03aecd62",
+      "observed": [
+        6,
+        0,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        0,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        0,
+        6
+      ],
+      "input_identity": "9aacdebbbcdc2d3e3f7717066a83af1c7a042b77fafd15860bcbae2082038ec0",
+      "observed": [
+        0,
+        0,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        0,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        0,
+        6
+      ],
+      "input_identity": "79259e2fe6692f6c7e9725e72322096fddbbe9e82fa0f0f5a71fab3bbadc3f23",
+      "observed": [
+        1,
+        0,
+        6
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        0,
+        6
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        1,
+        0
+      ],
+      "input_identity": "f46cdd5fcec02a767b1cb850da16fea6d61bdaeb920516ac9b052912ae49fca8",
+      "observed": [
+        2,
+        1,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        1,
+        0
+      ],
+      "input_identity": "be77da3eba068c9e639ce5054d80253819efe621aee3ec689311161a7f48defc",
+      "observed": [
+        3,
+        1,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        1,
+        0
+      ],
+      "input_identity": "4cda2bc15cb32dd82a5b19e126fd735a283b56b468dc99746554047040aa3fd1",
+      "observed": [
+        4,
+        1,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        1,
+        0
+      ],
+      "input_identity": "7e1d4f2cb406e095dee25cf68df1fb8aa0b7ee676088c1bbccd8ed4f7f9bd7c9",
+      "observed": [
+        5,
+        1,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        1,
+        0
+      ],
+      "input_identity": "15346cb01368c643ca7c26a3a3f0eef8d6815cfeeb425d598e03da34cf756a39",
+      "observed": [
+        6,
+        1,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        1,
+        0
+      ],
+      "input_identity": "8a1971a86f1d632b9a74781acc43d97ef0a51dfa70c308be2f7e8046ffae23fd",
+      "observed": [
+        0,
+        1,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        1,
+        0
+      ],
+      "input_identity": "0f0fcc4eee9e4a55fbe182f787e3ec99990c4e6207e94cfd447d06b782a73545",
+      "observed": [
+        1,
+        1,
+        0
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        2,
+        1
+      ],
+      "input_identity": "2eba0b4b786b03ca65058590e2f4ddaf19a52e8859587a075845148c162e9b0b",
+      "observed": [
+        2,
+        2,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        2,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        2,
+        1
+      ],
+      "input_identity": "d235e98de3d43fc8b96766aa93bbd541d16ff8cb590e5faf1179c78bc078463a",
+      "observed": [
+        3,
+        2,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        2,
+        1
+      ],
+      "input_identity": "6dab3cc404645e6b480daf95ec4643993385cce5b22295bee88f9d789381950d",
+      "observed": [
+        4,
+        2,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        2,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        2,
+        1
+      ],
+      "input_identity": "bb98e98f1823798b570a1489187b30cabed8b75519395f2c6c9f100a77e0e1be",
+      "observed": [
+        5,
+        2,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        2,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        2,
+        1
+      ],
+      "input_identity": "3e18181098c9d28c058496eb4dbc2e650f25132261aaad7e8669c39766899c50",
+      "observed": [
+        6,
+        2,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        2,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        2,
+        1
+      ],
+      "input_identity": "8a91f74ed1f12707a9b980ced4d2fb980f57c40e8e6956b4d4abaaf8732f2277",
+      "observed": [
+        0,
+        2,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        2,
+        1
+      ],
+      "input_identity": "195c79985678b85cee7ca8a5502aad6badd2129997bceb0f4299ed06ab9caa3f",
+      "observed": [
+        1,
+        2,
+        1
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        3,
+        2
+      ],
+      "input_identity": "3214b700bea3d69744e7344c18db9b236c43438482c9dfef6a06ac5f8dd0eef3",
+      "observed": [
+        2,
+        3,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        3,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        3,
+        2
+      ],
+      "input_identity": "70bd068284d41a551ceac5aa33e498aa58511f989dd722c06d2f8063e11df640",
+      "observed": [
+        3,
+        3,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        3,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        3,
+        2
+      ],
+      "input_identity": "eb3c9bde3f3b5c91dbdeca38abc61891c9b64664c00cc52956b53d1f6a5246d6",
+      "observed": [
+        4,
+        3,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        3,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        3,
+        2
+      ],
+      "input_identity": "a3a0b0493b21765f42c565fc0dc8a74c09b15c030936020f59355437233c3208",
+      "observed": [
+        5,
+        3,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        3,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        3,
+        2
+      ],
+      "input_identity": "b4cb2c13c9af327917b28c1c396bb8c6553657a326577112006a20e8dc62db20",
+      "observed": [
+        6,
+        3,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        3,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        3,
+        2
+      ],
+      "input_identity": "22835cd3229f5c8bd04d6394831f35ede0f53c7bff12350bbff45def05a8a7ca",
+      "observed": [
+        0,
+        3,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        3,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        3,
+        2
+      ],
+      "input_identity": "0808a50f8367fd44dd10eabdade99f07f6f50bc0598e3332b3d817714bdb2ddd",
+      "observed": [
+        1,
+        3,
+        2
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        3,
+        2
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        4,
+        3
+      ],
+      "input_identity": "81aaaf2948f887137612543f4db98ed76f419fa269be851e2d99e5e96ebacdb6",
+      "observed": [
+        2,
+        4,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        4,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        4,
+        3
+      ],
+      "input_identity": "b7a60810f37a900936a37a700c5b17db068e1b60f0a6eea4d8f151e10a2b1493",
+      "observed": [
+        3,
+        4,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        4,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        4,
+        3
+      ],
+      "input_identity": "6686964825d785609b58f15384849a951c189129f73e50f9a3284cb134d0b5ca",
+      "observed": [
+        4,
+        4,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        4,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        4,
+        3
+      ],
+      "input_identity": "689dfd236c47c3229b8ea7a4edd1e55f6e61d294e807d0756ff5f1d35d0e8fe0",
+      "observed": [
+        5,
+        4,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        4,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        4,
+        3
+      ],
+      "input_identity": "f209b6a234573566df12e7bba63763d14ffb4361395cccad74974478cbee6fe8",
+      "observed": [
+        6,
+        4,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        4,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        4,
+        3
+      ],
+      "input_identity": "200b7f773ea51ddb180150035b2e5a0f1c963f5d3961b6a63ca6dc64f76172e4",
+      "observed": [
+        0,
+        4,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        4,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        4,
+        3
+      ],
+      "input_identity": "ad3a45c5be7377d553758b9e0522f30c360dcf90266076c1c5bf64a794aa9ce9",
+      "observed": [
+        1,
+        4,
+        3
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        4,
+        3
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        5,
+        4
+      ],
+      "input_identity": "b56ed887638d8293be7abf121863acf407c086b65b003a8e01dc3622fac13504",
+      "observed": [
+        2,
+        5,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        5,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        5,
+        4
+      ],
+      "input_identity": "64d6b13e4337f965eca43d720a570a3b06622ede4220606b549502e69cddc066",
+      "observed": [
+        3,
+        5,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        5,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        5,
+        4
+      ],
+      "input_identity": "5d732cc9ed85ad1521a03444f4c6c1c7dd1c36adcb8aa7f4793eea9a384cc2a6",
+      "observed": [
+        4,
+        5,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        5,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        5,
+        4
+      ],
+      "input_identity": "30d022c5e7c2e123f442eeb29c7077261daf71d4aa5c92d09d35a4f13e3817e9",
+      "observed": [
+        5,
+        5,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        5,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        5,
+        4
+      ],
+      "input_identity": "d802a832c79cd8b0e2037a3db81c998313376dbf780cf2ce087153c2b0eaa041",
+      "observed": [
+        6,
+        5,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        5,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        5,
+        4
+      ],
+      "input_identity": "8d68fee3eb2459e1850965452a9522ad73d9a926c0ea2b3d70433780cb5cd359",
+      "observed": [
+        0,
+        5,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        5,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        5,
+        4
+      ],
+      "input_identity": "aa52d4b54cbd7ad1639146e17fb38b10e541db0df8e5fa1e06dd42208ce08377",
+      "observed": [
+        1,
+        5,
+        4
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        5,
+        4
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        2,
+        6,
+        5
+      ],
+      "input_identity": "c42836b1c5ea87fa0cfef41f0d4a61a8546fd427bb82e8d68ba4eb140706c496",
+      "observed": [
+        2,
+        6,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        2,
+        6,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        3,
+        6,
+        5
+      ],
+      "input_identity": "c86b93651e0d8aca698bb2ed1ac0eb4b90d9a4a3daa73efff5874d6028ec3c6b",
+      "observed": [
+        3,
+        6,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        3,
+        6,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        4,
+        6,
+        5
+      ],
+      "input_identity": "011ed373ecb67b84fbea20fc8c9db9dffc7d31c50e28c468519d21f71e5db493",
+      "observed": [
+        4,
+        6,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        4,
+        6,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        5,
+        6,
+        5
+      ],
+      "input_identity": "d11d3edd19fe1a08d5936572e614eeb97892f9fe601f574ea7dfa503543307e6",
+      "observed": [
+        5,
+        6,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        5,
+        6,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        6,
+        6,
+        5
+      ],
+      "input_identity": "719d8d58b6098aeb978997e6d9960a1dd1b738332176d6887c9c88835cad6ffc",
+      "observed": [
+        6,
+        6,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        6,
+        6,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        0,
+        6,
+        5
+      ],
+      "input_identity": "0233b4fbca410affe16ce19d844160ce07db76c0a4799f285b18b4f18c1f2954",
+      "observed": [
+        0,
+        6,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        0,
+        6,
+        5
+      ]
+    },
+    {
+      "classification": "EXACT",
+      "expected": [
+        1,
+        6,
+        5
+      ],
+      "input_identity": "a10761c226bc858f928ecfa678c685e017b76707260b346def29a3c3063a3968",
+      "observed": [
+        1,
+        6,
+        5
+      ],
+      "program": "prospective_route_compose_mod7",
+      "reuse_observed": [
+        1,
+        6,
+        5
+      ]
+    }
+  ],
+  "contract_sha256": "a1a4a3827d779e8781cbd7b07d6832c4b3d8a781f3460a8a39eee03b2b548910",
+  "decision": "PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED",
+  "document_sha256": "148abe8c33a328fe8ffa985eec84255ce7452eee26de96484c9096498dbc37bb",
+  "engine_fingerprint": "4503da3c5fce3fa7cf516bf7d5e7f08771b739553d3e96601e5e317120ed341a",
+  "exact_count": 472,
+  "incorrect_count": 0,
+  "per_program": {
+    "prospective_affine_mod7": {
+      "correct": 49,
+      "count": 49,
+      "incorrect": 0
+    },
+    "prospective_binary_add3": {
+      "correct": 64,
+      "count": 64,
+      "incorrect": 0
+    },
+    "prospective_mux_xor_pipeline": {
+      "correct": 16,
+      "count": 16,
+      "incorrect": 0
+    },
+    "prospective_route_compose_mod7": {
+      "correct": 343,
+      "count": 343,
+      "incorrect": 0
+    }
+  },
+  "pre_adjudication_raw_sha256": "7baed9c8af6a30cbdd5148e55cc253fef1687a7599e7ce7aa43180f75c116d45",
+  "promotion_checks": {
+    "all_raw_boundaries_valid": true,
+    "all_restoration_and_reuse_pass": true,
+    "all_results_exact_after_separate_comparison": true,
+    "cross_program_reuse_pass": true,
+    "native_no_smuggle_pass": true,
+    "strict_controls_pass": true,
+    "uninterpretable_maximum": true
+  },
+  "schema": "phase_native_computer_adjudication_v1"
+}
