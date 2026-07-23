@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0.0",
+  "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
+  "state_date": "2026-07-23",
+  "reconciled_through_milestone_commit": "ca9c90490c169692690bb29c5713f84bcba08ed4",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "standing_mission": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
+  "prime_directive": "REPLACE_THE_BIT_WITH_PI",
+  "current_highest_milestone": "PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED",
+  "current_claim_ceiling": "BOUNDED_SOFTWARE_PHASE_NATIVE_COMPUTER_REFERENCE_ONLY",
+  "current_engine": {
+    "package": "audio_phase_native_computer_v1",
+    "fingerprint": "4503da3c5fce3fa7cf516bf7d5e7f08771b739553d3e96601e5e317120ed341a",
+    "instruction_set": [
+      "ROT",
+      "ADD",
+      "CCX",
+      "SWAP"
+    ],
+    "prospective_cases_exact": 472,
+    "prospective_cases_total": 472,
+    "factorized_logical_state": true,
+    "complete_configuration_modes": 0,
+    "restoration_verified": true,
+    "cross_program_reuse_verified": true
+  },
+  "established_results": [
+    "AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED",
+    "AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED",
+    "AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED",
+    "AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED",
+    "AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED",
+    "CATALYTIC_WAVEFORM_ISING_V3_VERIFIED",
+    "CATALYTIC_WAVEFORM_ISING_V3_SIX_SITE_VERIFIED",
+    "PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED"
+  ],
+  "capability_position": {
+    "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
+    "C1_BOUNDED_RESIDENCY": "PARTIAL_FACTORIZED_STATE",
+    "C2_REUSE_AND_MULTIPLEX": "ESTABLISHED_BOUNDED_SOFTWARE",
+    "C3_NONCOLLAPSE_REPRESENTATION": "ESTABLISHED_PHASE_PROGRAM_STATE",
+    "C4_NATIVE_GLOBAL_OPERATOR": "PARTIAL_COMPOSABLE_PHASE_INSTRUCTIONS",
+    "C5_FIXED_POINT_ADVANTAGE": "NOT_ESTABLISHED",
+    "C6_EXTERNAL_ACCEPTANCE": "NOT_ESTABLISHED",
+    "C7_CROSS_DOMAIN_TRANSFER": "NOT_ESTABLISHED",
+    "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
+  },
+  "active_frontier_candidates": [
+    "PHASE_RESIDENT_CONTROL_FLOW_AND_MEMORY",
+    "PROGRAM_DERIVED_INVERSE_EXECUTION",
+    "COMPACT_HOLO_PROCESS_OBJECT",
+    "NO_SMUGGLE_COMPILER",
+    "NATIVE_GLOBAL_PHASE_OPERATOR",
+    "FIXED_POINT_OR_INVARIANT_COMPUTE_LEVERAGE",
+    "EXTERNAL_OFFICIAL_ACCEPTANCE",
+    "CROSS_DOMAIN_TRANSFER"
+  ],
+  "nonterminal_milestones": [
+    "NEW_INSTRUCTION",
+    "NEW_PROGRAM_CLASS",
+    "PROGRAM_COUNTER",
+    "BRANCHES_OR_LOOPS",
+    "MEMORY",
+    "SUBROUTINES",
+    "PROGRAM_DERIVED_INVERSE",
+    "HOLO_IR",
+    "COMPILER_PROTOTYPE",
+    "GLOBAL_OPERATOR",
+    "SCALING_RESULT",
+    "PROSPECTIVE_BATCH",
+    "VERIFIED_PACKAGE",
+    "INDEPENDENT_REVIEW",
+    "COMMIT_PUSHED"
+  ],
+  "agent_policy": {
+    "continue_without_new_user_prompt": true,
+    "ordinary_reversible_choices_are_autonomous": true,
+    "may_replace_architecture": true,
+    "may_select_next_experiment": true,
+    "verification_follows_substantive_result": true,
+    "audit_of_audit_loops_forbidden": true,
+    "roadmap_must_track_evidence": true
+  },
+  "native_no_smuggle": {
+    "compiler_may_not_solve_target": true,
+    "oracle_feedback_forbidden": true,
+    "decoded_feedback_forbidden": true,
+    "cached_answer_forbidden": true,
+    "hidden_candidate_enumeration_forbidden": true,
+    "hidden_classical_path_materialization_forbidden": true,
+    "boundary_only_decode": true
+  },
+  "catalytic_law": {
+    "borrowed_carrier_causally_required": true,
+    "result_survives_outside_inverse_history": true,
+    "restoration_reverses_actual_forward_process": true,
+    "reuse_consumes_actual_restored_carrier": true
+  },
+  "legitimate_stop_conditions": [
+    "MISSION_RESULT_WITH_COMPACT_UNRESOLVED_COMPUTE_LEVERAGE_EXTERNAL_ACCEPTANCE_RESTORATION_AND_REUSE",
+    "EXTERNAL_AUTHORITY_BOUNDARY",
+    "EVIDENCED_SCIENTIFIC_BLOCKER_NOT_REPAIRABLE_OR_BYPASSABLE_IN_AVAILABLE_SOFTWARE_ENVIRONMENT"
+  ],
+  "not_stop_conditions": [
+    "MILESTONE_COMPLETE",
+    "PACKAGE_VERIFIED",
+    "BENCHMARK_PASSED",
+    "REVIEW_PASSED",
+    "COMMIT_PUSHED",
+    "ROADMAP_PHASE_COMPLETE",
+    "CONTEXT_LARGE",
+    "WORK_EXPENSIVE",
+    "FIRST_MECHANISM_FAILED"
+  ],
+  "physical_authority": {
+    "p0_state": "FROZEN_AND_PARKED",
+    "hardware_contact_authorized": false,
+    "playback_or_recording_authorized": false,
+    "procurement_authorized": false,
+    "fabrication_authorized": false,
+    "powered_circuit_action_authorized": false
+  }
+}
