@@ -1,0 +1,132 @@
+{
+  "analysis_sha256": "ca6f6bd2ff1f91e1f50e8a96fca6ddfaca052102419a22b5a008ae98af3599cb",
+  "archive_sha256": "ee356cb7e86a339a5c937e1d1b8d2bf58367e19f3473932b4b5441a9a19fa36f",
+  "archive_size": 11672073,
+  "claim_boundary": {
+    "full_tomography_established": false,
+    "positive_scientific_claim": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "controller_passed": true,
+  "coordinates": {
+    "D_primary_minus_sham": 0.05796371393289891,
+    "R_carrier_off": 0.07427655441676566,
+    "R_prep_ablation": 0.061000787674075144,
+    "R_primary": 0.06067188915039692,
+    "R_relation_sham": 0.002708175217498004,
+    "carrier_off_abs_to_primary_abs": 1.2242334210600354,
+    "prep_ablation_abs_to_primary_abs": 1.0054209375756034,
+    "prep_ablation_distance_to_sham_abs": 0.05829261245657714,
+    "prep_ablation_distance_to_sham_to_D": 1.0056742141136603,
+    "prep_ablation_half_difference": -0.00016444926183911343,
+    "prep_ablation_primary_minus_ablation": -0.00032889852367822686,
+    "sham_abs_to_primary_abs": 0.04463640831728226
+  },
+  "created_at": "2026-07-23T21:58:17.783985+00:00",
+  "interpretation": {
+    "carrier_off_kills_primary_to_below_25pct": false,
+    "exploratory_only": true,
+    "prep_ablation_approaches_sham_within_25pct_D": false,
+    "prep_ablation_delta_above_25pct_primary": false,
+    "prep_ablation_reduces_primary": false,
+    "relation_sham_below_25pct_primary": true,
+    "small_wall_crossed": false
+  },
+  "run_id": "family10h_relation_prep_ablation_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_PREP_ABLATION_DISCOVERY_ANALYSIS_V1",
+  "variant_reports": {
+    "carrier_off_control": {
+      "R_spatial": {
+        "abs_mean": 0.09934308824989062,
+        "abs_of_mean": 0.07427655441676566,
+        "count": 128,
+        "max_abs": 0.3609861063555714,
+        "mean": 0.07427655441676566,
+        "q50_abs": 0.051769358327110174,
+        "q95_abs": 0.2974737955506769,
+        "q99_abs": 0.3468419379621414,
+        "sign_counts": {
+          "-1": 37,
+          "0": 0,
+          "1": 91
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "carrier_off_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "prep_ablation_control": {
+      "R_spatial": {
+        "abs_mean": 0.10453902827525426,
+        "abs_of_mean": 0.061000787674075144,
+        "count": 128,
+        "max_abs": 0.4121720760248162,
+        "mean": 0.061000787674075144,
+        "q50_abs": 0.0681502725459059,
+        "q95_abs": 0.3178084603925917,
+        "q99_abs": 0.3809472244061225,
+        "sign_counts": {
+          "-1": 49,
+          "0": 0,
+          "1": 79
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "prep_ablation_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "primary_relation_pair": {
+      "R_spatial": {
+        "abs_mean": 0.09252040923317872,
+        "abs_of_mean": 0.06067188915039692,
+        "count": 128,
+        "max_abs": 0.44206956905986405,
+        "mean": 0.06067188915039692,
+        "q50_abs": 0.04303057228560832,
+        "q95_abs": 0.3783024507215764,
+        "q99_abs": 0.4229405584277572,
+        "sign_counts": {
+          "-1": 50,
+          "0": 0,
+          "1": 78
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "relation_sham": {
+      "R_spatial": {
+        "abs_mean": 0.08037748027694369,
+        "abs_of_mean": 0.002708175217498004,
+        "count": 128,
+        "max_abs": 0.2770995330833984,
+        "mean": 0.002708175217498004,
+        "q50_abs": 0.0630336506613661,
+        "q95_abs": 0.2092447145172992,
+        "q99_abs": 0.2510491302434949,
+        "sign_counts": {
+          "-1": 63,
+          "0": 0,
+          "1": 65
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    }
+  }
+}
