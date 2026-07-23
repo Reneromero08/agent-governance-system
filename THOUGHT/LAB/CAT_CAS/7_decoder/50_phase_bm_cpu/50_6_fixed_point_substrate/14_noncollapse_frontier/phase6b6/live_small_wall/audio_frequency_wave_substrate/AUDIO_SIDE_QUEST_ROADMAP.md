@@ -98,13 +98,24 @@ direct-metal fixed-torus run         1,048,576 steps exact
 streaming nonlinear phase VM         10,000,000 + 10,000,017 instructions exact
 program-derived inverse history      0 retained factors
 actual restored-carrier reuse        passed
+arbitrary public `.holo` programs     exact against separate C reference
+public Boolean relation set           NOT/AND/XOR/OR/NAND exact
+compact repeated public program       8,000,000 gates from 8 instructions
+scalable phase memory                 65,536 registers / 131,072 complex cells
+phase-native conditional routing      CSWAP 27/27 F3 cases exact
+phase-resident stored program         fixed schedule changes result from program phases
 ```
 
-The streaming C VM runs `ROT`, `ADD`, `MULADD`, and `SWAP` over relative
-ternary phase. Its fixed roots-of-unity `MULADD` polynomial supplies field
-multiplication without decoding controls. Together with phase rotation and
-addition, it gives a functionally complete algebra for scalable finite ternary
-circuits.
+The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
+relative ternary phase. Its fixed roots-of-unity `MULADD` polynomial supplies
+field multiplication without decoding controls. Together with phase rotation
+and addition, it gives a functionally complete algebra for scalable finite
+ternary circuits. The public `PASSES` law repeats a finite program without
+expanding it or retaining inverse factors. Boolean circuits embed as the `0/1`
+boundary subset, including a phase-polynomial NAND construction.
+`CSWAP` adds a phase-controlled Fredkin operation with a total `F3` control
+law. A two-slot fixed fabric demonstrates phase-resident program bits and a
+one-hot program counter without decoded host branching.
 
 This is mutable development evidence, not a new frozen milestone. The best
 direct-metal `-Ofast` phase forward timing remains `1.66-1.69x` slower than the
@@ -214,10 +225,13 @@ The following are frontier candidates, not a mandatory sequence:
 
 Investigate reversible-history and carrier-state constructions below the current `O(nM)` footprint, including rolling, factorized, lazy, closed-form, or fixed-resident toroidal processes. Preserve exact restoration and no-smuggle.
 
-Current development has reached fixed `O(kM)` carrier residency and zero
-retained per-step inverse factors. The next residency work is a public
-arbitrary-program interface and scalable phase memory, not another time-layer
-stack.
+Current development has reached fixed `O(kM)` carrier residency, zero retained
+per-step inverse factors, arbitrary public programs, compact repeated
+execution, and scalable phase-register memory. Data-dependent Fredkin routing,
+a phase-resident stored-program construction, and a compact C compiler for
+finite multi-slot Fredkin fabrics now pass exact-byte development
+qualification. The live gap is no longer syntax or compilation: it is removing
+the conventional host's sequential payment for every native slot.
 
 ### B. Attack a flagship without an equivalent compact classical recurrence
 
@@ -237,7 +251,10 @@ Apply the same compact native mechanism to a materially different problem family
 
 ### F. Continue the phase computer architecture
 
-Add control flow, memory, calls, or other programmable mechanisms only when they directly enable the stronger compute mission.
+Add data-dependent control, evolving phase memory, calls, or other
+programmable mechanisms only when they directly enable the stronger compute
+mission. Public fixed repetition and compiled phase-resident Fredkin
+predication are present; decoded branch feedback is not.
 
 ### G. Physical realization
 

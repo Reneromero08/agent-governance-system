@@ -1,0 +1,22 @@
+CATCAS_PHASE_PROGRAM 1
+REGISTERS 9
+
+# Three control symbols exercise the complete F3 indicator.
+SET 1 1
+SET 2 2
+
+SET 3 1
+SET 4 1
+SET 5 2
+
+SET 6 2
+SET 7 1
+SET 8 2
+
+PASSES 1000000
+
+# c=0: identity; c=1: swap; c=2: identity.
+CSWAP 0 1 2
+CSWAP 3 4 5
+CSWAP 6 7 8
+END

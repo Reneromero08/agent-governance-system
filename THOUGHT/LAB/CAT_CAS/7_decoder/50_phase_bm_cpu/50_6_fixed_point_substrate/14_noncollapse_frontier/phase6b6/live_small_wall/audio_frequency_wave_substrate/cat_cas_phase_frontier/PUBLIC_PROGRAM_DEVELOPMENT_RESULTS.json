@@ -1,0 +1,279 @@
+{
+  "schema": "cat_cas_mutable_phase_program_development_v2",
+  "status": "MUTABLE_DEVELOPMENT_PASS",
+  "generated_utc": "2026-07-23T22:19:41Z",
+  "claim_boundary": "SCALABLE_FINITE_SOFTWARE_PHASE_PROGRAMS_NO_COMPUTE_ADVANTAGE",
+  "target": {
+    "hostname": "catcas",
+    "execution_core": 3,
+    "compiler": "gcc 14.2.0",
+    "compile_flags": "-O3 -std=c11 -Wall -Wextra -Werror -march=native",
+    "contact_scope": "source transfer to /tmp, compilation, and isolated-core userspace execution only"
+  },
+  "sources": {
+    "native_engine": {
+      "path": "streaming_phase_vm.c",
+      "sha256": "f3f23d25ae2e0940cc2a48fa30f70753cc3ca78d74c270eaed1e06910709543c"
+    },
+    "independent_scalar_reference": {
+      "path": "phase_program_reference.c",
+      "sha256": "898481825c58774389f28072aaa6eaf258f901f9f8117e92533c540569c5cc87",
+      "linked_into_native_engine": false
+    },
+    "fredkin_phase_compiler": {
+      "path": "fredkin_phase_compiler.c",
+      "sha256": "05e6e9ae34de859e46aaff837c0de59e24ace11c2e15458f7ac478cd58e60e7a",
+      "executes_target_circuit": false
+    },
+    "format": {
+      "path": "PHASE_PROGRAM_FORMAT.md",
+      "sha256": "3f5230e1c45dac94e8d61f3e8f14c829ab9918f6b6ea9f1eb0ed1298da4ed1bf"
+    }
+  },
+  "exact_byte_custody": {
+    "transfer_adapter": "local raw File.ReadAllBytes to ssh StandardInput.BaseStream to remote cat",
+    "text_normalization": false,
+    "target_source_hashes_match_local": true,
+    "public_program_suite_exact": 9,
+    "public_program_suite_total": 9,
+    "compiler_output_reproduces_committed_bytes": true,
+    "embedded_nul_rejected_by_native": true,
+    "embedded_nul_rejected_by_reference": true,
+    "embedded_nul_rejected_by_compiler": true
+  },
+  "native_law": {
+    "radix": 3,
+    "state": "relative phase of twin complex rails",
+    "operators": [
+      "ROT",
+      "ADD",
+      "MULADD",
+      "SWAP",
+      "CSWAP"
+    ],
+    "boundary_decode_after_forward_evolution": true,
+    "inverse_source": "reverse traversal of the exact public program",
+    "inverse_history_factor_count": 0,
+    "passes_expand_public_program": false,
+    "carrier_cells": "2 * registers"
+  },
+  "programs": [
+    {
+      "path": "programs/ternary_half_adder.holo",
+      "sha256": "5530faa41776fa4ee2471a3aad56766151405144151ae43a50e0295bae50c74b",
+      "fnv1a64_on_target": "3305b30702f0cf48",
+      "registers": 8,
+      "steps": 7,
+      "boundary_symbols": [2, 1, 0, 2, 2, 0, 1, 0],
+      "native_reference_match": true,
+      "nominal_restoration_max_abs": 1.39110546262e-15,
+      "reuse_restoration_max_abs": 8.68886953637e-16,
+      "wrong_inverse_restoration_max_abs": 1.73205080757,
+      "omitted_inverse_restoration_max_abs": 1.73205080757
+    },
+    {
+      "path": "programs/polynomial_chain.holo",
+      "sha256": "2abcbabaa4d173f7069f7bc49f4c55b26abb2120d56c16edf6c7799a3b17996a",
+      "fnv1a64_on_target": "c6387e2acce65cda",
+      "registers": 8,
+      "steps": 8,
+      "boundary_symbols": [1, 2, 2, 0, 1, 0, 2, 1],
+      "native_reference_match": true,
+      "nominal_restoration_max_abs": 8.95090418262e-16,
+      "reuse_restoration_max_abs": 8.68886953637e-16,
+      "wrong_inverse_restoration_max_abs": 1.73205080757,
+      "omitted_inverse_restoration_max_abs": 1.75145342439
+    },
+    {
+      "path": "programs/scalable_memory.holo",
+      "sha256": "a9b42e05c4be6475d17badcfec8ed786d6c35aec7276ab857d9f59aac355ac25",
+      "fnv1a64_on_target": "d98f0eb3f8e7b827",
+      "registers": 65536,
+      "resident_complex_cells": 131072,
+      "steps": 8,
+      "boundary_fnv1a64": "ff20b5e203681fbe",
+      "boundary_nonzero": 4,
+      "native_reference_match": true,
+      "nominal_restoration_max_abs": 9.30536459789e-16,
+      "reuse_restoration_max_abs": 2.51766173919e-15,
+      "wrong_inverse_restoration_max_abs": 1.73205080757,
+      "omitted_inverse_restoration_max_abs": 1.85410701706
+    },
+    {
+      "path": "programs/repeated_phase_kernel.holo",
+      "sha256": "8ccde52bfdfd2f76bb61dc8dc500fa7a1d2bf5f313fcd64a59a1343558852625",
+      "fnv1a64_on_target": "b144fd6a0d5a2ff7",
+      "registers": 24,
+      "stored_instructions": 8,
+      "passes": 1000000,
+      "steps": 8000000,
+      "resident_complex_cells": 48,
+      "boundary_fnv1a64": "b27877b1b3b048cb",
+      "boundary_symbols": [1, 2, 0, 0, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1],
+      "native_reference_match": true,
+      "nominal_restoration_max_abs": 3.7412603876e-13,
+      "reuse_restoration_max_abs": 8.66678137878e-13,
+      "wrong_inverse_restoration_max_abs": 1.73205080757,
+      "omitted_inverse_restoration_max_abs": 1.77145811692,
+      "warm_native_forward_ns": 375655338,
+      "warm_native_inverse_ns": 469727173,
+      "compact_reference_forward_ns": 70792298,
+      "warm_native_to_compact_forward_ratio": 5.306,
+      "warm_full_lifecycle_to_compact_forward_ratio": 11.943
+    },
+    {
+      "path": "programs/add_only.holo",
+      "sha256": "4bf27f81d23d87e04f6e231aaa46c587e7903e339fde75395620d0e64063116a",
+      "fnv1a64_on_target": "f33a175ac4770ec9",
+      "steps": 1,
+      "boundary_symbols": [1, 1, 0],
+      "nominal_restoration_max_abs": 2.22044604925e-16,
+      "wrong_inverse_restoration_max_abs": 1.73205080757,
+      "purpose": "proves wrong-inverse corruption is independent of opcode mix"
+    },
+    {
+      "path": "programs/conditional_routing.holo",
+      "sha256": "3cf6dd6b6e881f57660f9d0ba449406f5309db033e492d23effd11971377533f",
+      "fnv1a64_on_target": "c881a33240ffe4f0",
+      "registers": 9,
+      "stored_instructions": 3,
+      "passes": 1000000,
+      "steps": 3000000,
+      "boundary_fnv1a64": "ddad4b1444030081",
+      "boundary_symbols": [0, 1, 2, 1, 1, 2, 2, 1, 2],
+      "native_reference_match": true,
+      "nominal_restoration_max_abs": 2.03555236134e-13,
+      "reuse_restoration_max_abs": 2.15739188326e-13,
+      "wrong_inverse_restoration_max_abs": 1.73205080757,
+      "omitted_inverse_restoration_max_abs": 1.73205080757,
+      "cswap_truth_table_cases_exact": 27,
+      "cswap_truth_table_cases_total": 27
+    },
+    {
+      "path": "programs/stored_program_fredkin.holo",
+      "sha256": "43d0585cdb007ff54c85747c90e787c2aedfaf4e9bc83ddbd148de5ed4835891",
+      "fnv1a64_on_target": "27eb43a6070a52c5",
+      "registers": 8,
+      "stored_instructions": 9,
+      "passes": 2,
+      "steps": 18,
+      "boundary_symbols": [1, 0, 1, 0, 0, 0, 2, 1],
+      "native_reference_match": true,
+      "nominal_restoration_max_abs": 6.73263994671e-14,
+      "reuse_restoration_max_abs": 6.73263994671e-14,
+      "wrong_inverse_restoration_max_abs": 1.73205080757,
+      "omitted_inverse_restoration_max_abs": 1.73205080757,
+      "program_bit_variant_boundary_symbols": [1, 0, 1, 1, 0, 0, 1, 2],
+      "program_bit_changes_result": true,
+      "host_schedule_changes_between_program_bits": false
+    },
+    {
+      "path": "programs/compiled_routed_network.holo",
+      "sha256": "091fcb8ff1ca9114d4792cdc12acb7894f80eaaad87f90de48ddb2935ec68580",
+      "fnv1a64_on_target": "ea8593962b91a934",
+      "source_circuit": "circuits/routed_network.phasec",
+      "source_circuit_sha256": "889bea40b773e9275fccf46412c0bfc06a6721a3abccf9d53cf28c7f779eadf6",
+      "compiler_output_byte_reproduction": true,
+      "registers": 13,
+      "resident_complex_cells": 26,
+      "fredkin_slots": 3,
+      "stored_instructions": 23,
+      "passes": 3,
+      "steps": 69,
+      "boundary_fnv1a64": "242ce3b1e9012190",
+      "boundary_symbols": [1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 2, 1],
+      "native_reference_match": true,
+      "nominal_restoration_max_abs": 1.87452535775e-13,
+      "reuse_restoration_max_abs": 9.89551939845e-14,
+      "wrong_inverse_restoration_max_abs": 1.73205080757,
+      "omitted_inverse_restoration_max_abs": 1.73205080757
+    }
+  ],
+  "boolean_relations": {
+    "program_path": "programs/boolean_relations.holo",
+    "sha256": "32af0f982e4694ac9cd8476b39d98829d23642ce241b0a35529addcdc0f5e77f",
+    "fnv1a64_on_target": "3ef246c2d1c4f8e8",
+    "identities": {
+      "not": "1 + 2a",
+      "and": "a*b",
+      "xor": "a + b + a*b",
+      "or": "a + b + 2*a*b",
+      "nand": "1 + 2*a*b"
+    },
+    "truth_table": [
+      {
+        "input": [0, 0],
+        "boundary_symbols": [0, 0, 1, 0, 0, 0, 1, 1],
+        "native_reference_match": true,
+        "restoration_max_abs": 2.28878339926e-16
+      },
+      {
+        "input": [0, 1],
+        "boundary_symbols": [0, 1, 1, 0, 1, 1, 1, 1],
+        "native_reference_match": true,
+        "restoration_max_abs": 4.57756679852e-16
+      },
+      {
+        "input": [1, 0],
+        "boundary_symbols": [1, 0, 0, 0, 1, 1, 1, 1],
+        "native_reference_match": true,
+        "restoration_max_abs": 2.48253415325e-16
+      },
+      {
+        "input": [1, 1],
+        "boundary_symbols": [1, 1, 0, 1, 0, 1, 0, 0],
+        "native_reference_match": true,
+        "restoration_max_abs": 9.30536459789e-16
+      }
+    ],
+    "nand_universal_boolean_subset": true,
+    "decoded_symbols_feed_native_evolution": false
+  },
+  "strict_parser_negatives": [
+    {
+      "case": "ADD source aliases target",
+      "rejected": true
+    },
+    {
+      "case": "register out of range",
+      "rejected": true
+    },
+    {
+      "case": "missing END",
+      "rejected": true
+    },
+    {
+      "case": "content after END",
+      "rejected": true
+    },
+    {
+      "case": "embedded NUL in public program",
+      "native_rejected": true,
+      "reference_rejected": true
+    },
+    {
+      "case": "embedded NUL in Fredkin circuit",
+      "compiler_rejected": true
+    }
+  ],
+  "sanitizers": {
+    "flags": "-O1 -g -std=c11 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-omit-frame-pointer",
+    "native_engine": "PASS",
+    "independent_reference": "PASS",
+    "fredkin_phase_compiler": "PASS",
+    "leak_detection": "PASS"
+  },
+  "adjudication": {
+    "arbitrary_public_programs": "DEVELOPMENT_PASS",
+    "fixed_program_memory_repetition": "DEVELOPMENT_PASS",
+    "scalable_phase_register_memory": "DEVELOPMENT_PASS",
+    "boolean_universal_boundary_subset": "DEVELOPMENT_PASS",
+    "phase_native_conditional_routing": "DEVELOPMENT_PASS",
+    "phase_resident_stored_program_predication": "DEVELOPMENT_PASS",
+    "compiled_multi_slot_fredkin_fabric": "DEVELOPMENT_PASS",
+    "carrier_restoration_and_reuse": "DEVELOPMENT_PASS",
+    "wrong_and_omitted_inverse_controls": "DEVELOPMENT_PASS",
+    "speed_or_asymptotic_advantage": "NOT_ESTABLISHED",
+    "physical_phase_computation": "NOT_ESTABLISHED"
+  }
+}
