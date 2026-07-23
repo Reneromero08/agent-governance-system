@@ -55,7 +55,7 @@
     "passed": true
   },
   "runtime_binary_authority": {
-    "compiled_binary_sha256": "eacb3a5b97268614eaec0c2ab32383e8e4b2e967fbf6955fcea7af0e22a66e7f",
+    "compiled_binary_sha256": "559c0d35e2cf533694bff2e1d1bfbb4644704218753f5e36ac063fcdb813933f",
     "compiler_identity": {
       "abi": "linux_x86_64",
       "available": true,
@@ -104,7 +104,7 @@
       "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_spatial_pair_readout_v1_1_segmented/relation_spatial_runtime.c",
       "-lm"
     ],
-    "compiled_binary_sha256": "eacb3a5b97268614eaec0c2ab32383e8e4b2e967fbf6955fcea7af0e22a66e7f",
+    "compiled_binary_sha256": "559c0d35e2cf533694bff2e1d1bfbb4644704218753f5e36ac063fcdb813933f",
     "file_probe": {
       "command": [
         "wsl.exe",
@@ -114,7 +114,7 @@
       ],
       "returncode": 0,
       "stderr": "",
-      "stdout": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_spatial_pair_readout_v1_1_segmented/relation_spatial_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=0b7ea6e0a77b2fb2050a39b8968e87229c816ed8, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
+      "stdout": "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_spatial_pair_readout_v1_1_segmented/relation_spatial_runtime: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=5b4560c37b097fc2867704e135de700973db0ce6, for GNU/Linux 3.2.0, with debug_info, not stripped\n"
     },
     "passed": true
   },

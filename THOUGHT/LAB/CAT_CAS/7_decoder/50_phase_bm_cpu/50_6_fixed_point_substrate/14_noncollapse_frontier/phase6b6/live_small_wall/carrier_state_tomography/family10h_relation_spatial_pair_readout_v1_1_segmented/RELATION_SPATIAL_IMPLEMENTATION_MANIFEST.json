@@ -2,7 +2,7 @@
   "authority_binding": {
     "relation_manifest_freeze_commit_not_embedded": true,
     "relation_manifest_freeze_commit_policy": "controller_verifies_local_head_and_origin_equal_freeze_commit_at_authorization_time",
-    "relation_source_authority_commit": "2cdec9704452669d3651a063b6fb5805913647e3",
+    "relation_source_authority_commit": "ed6abfd8003cf63fd5ea57379f4d907aff97a5a0",
     "scalar_evidence_provenance": {
       "manifest_freeze_commit": "354ca8ab2d62458fca41481d74ff98c1b39ab6ed",
       "postrun_seal_commit": "c126700b8d46e6501ff39cfa360bf32a9fbdb2ac",
@@ -24,17 +24,17 @@
   },
   "expected_pair_observation_count": 2621440,
   "grammar_sha256": "4a8d7e02c8c0c73cd61210b00b094114cdf938f76d74b9f32e24021c93077e3c",
-  "manifest_sha256": "81f8aba22bb6b1d296dc1ea44a4bb76421fdcb6864a11d2c04bbb8748f46e901",
+  "manifest_sha256": "3e1b772ef0ed0f9cb610c3445603ce66f4b822bb3eacc1846f1c566ab3dc4a96",
   "offline_validate_sha256": null,
   "package_decision": "FAMILY10H_SEGMENTED_SPATIAL_RELATION_READOUT_BUILD_READY_AWAITING_AUTHORIZATION",
   "pair_measurements_per_row": 256,
   "pmu_preflight_helper_sha256": "caa5fd52a46ab77a6327d6fccfa8eb836e53f3035b192f0632bb314a56c7f74f",
-  "runtime_binary_sha256": "eacb3a5b97268614eaec0c2ab32383e8e4b2e967fbf6955fcea7af0e22a66e7f",
+  "runtime_binary_sha256": "559c0d35e2cf533694bff2e1d1bfbb4644704218753f5e36ac063fcdb813933f",
   "schedule_sha256": "e969010b48a40857c3bb9081e6ce8691124277d441201851a12e71e01893a0cb",
   "schedule_tuple_count": 10240,
   "schema": "FAMILY10H_RELATION_SPATIAL_IMPLEMENTATION_MANIFEST_V1",
   "science_package_id": "family10h_relation_spatial_pair_readout_v1_1_segmented",
   "self_test_sha256": "66d021d9d5a66d2df1f223ae73e6e8b11b49cca8aed0f09d63047e0953f0f068",
-  "source_bundle_sha256": "7d3bf289bfd716e86eaa8123e0aaa871dc12d94fd0f566cad6231ba4987c6954",
+  "source_bundle_sha256": "c554dd242e3b968d75c8bef0e358c99071b1c8c261705efd8d21a4d84634781f",
   "transaction_run_id": "family10h_relation_spatial_pair_readout_v1_1_segmented_0"
 }
