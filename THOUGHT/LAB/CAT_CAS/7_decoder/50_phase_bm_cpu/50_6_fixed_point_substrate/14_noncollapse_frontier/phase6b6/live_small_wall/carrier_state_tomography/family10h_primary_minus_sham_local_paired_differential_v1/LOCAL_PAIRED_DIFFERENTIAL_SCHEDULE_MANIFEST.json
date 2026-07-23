@@ -29,13 +29,13 @@
     "route_pressure_control"
   ],
   "round_count": 2,
-  "schedule_manifest_sha256": "7aefda426239e1f23fbacd09eed552cdac4f946e14993b268b364b1c019a6fc9",
+  "schedule_manifest_sha256": "09d33ec4835df0b1327388d219ef2c5356d98fce54393ceb23503792c6962807",
   "schema": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_SCHEDULE_MANIFEST_V1",
   "sham_query": "relation_sham",
-  "source_authority_commit": "2cdec9704452669d3651a063b6fb5805913647e3",
-  "source_freeze_commit": "8720dd543947f26cbd2af18a6a3dd4870c9adf85",
+  "source_authority_commit": "ed6abfd8003cf63fd5ea57379f4d907aff97a5a0",
+  "source_freeze_commit": "f7cd27e7831a7b14a59b77f696fcea9609f01484",
   "source_schedule_package": "family10h_relation_spatial_pair_readout_v1_1_segmented",
-  "transaction_run_id": "family10h_primary_minus_sham_local_paired_differential_v1_0",
+  "transaction_run_id": "family10h_primary_minus_sham_local_paired_differential_v1_1",
   "variants": {
     "round0_distance_matched_control": {
       "pair_observation_count": 524288,

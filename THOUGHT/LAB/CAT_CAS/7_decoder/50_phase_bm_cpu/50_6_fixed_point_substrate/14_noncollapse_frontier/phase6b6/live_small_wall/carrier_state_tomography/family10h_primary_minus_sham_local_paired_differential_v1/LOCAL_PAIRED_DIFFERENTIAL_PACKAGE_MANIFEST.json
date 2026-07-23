@@ -4,7 +4,7 @@
   "local_paired_audit_sha256": "2826e10317dd96d7f73c8471e0e6365b466a003fa59dde8c88ec200a0d1b3cf9",
   "package_decision": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_PACKAGE_READY_AWAITING_AUTHORIZATION",
   "package_id": "family10h_primary_minus_sham_local_paired_differential_v1",
-  "package_manifest_sha256": "b27425fc2ab552cce1b0cdde8ed98d1c9beef353d493bed68dce11c71277ca98",
+  "package_manifest_sha256": "506dfb89e83a794c225228e80a5d337a758b7a97bed0a46c834e9a1394aeb195",
   "post_observation_feature_selection_allowed": false,
   "post_observation_threshold_revision_allowed": false,
   "prior_official_evidence_commit": "dde3ac15953669f056b5f8974601b3bd1aa62f2d",
@@ -12,21 +12,21 @@
   "restore_sham_sign_gate_allowed": false,
   "runtime_source_hashes": {
     "RELATION_GRAMMAR.json": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
-    "RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": "8691d4e47ea987ab0ca25391179b7a94409ce589b23cea2a0f0b0f12d80b3f7c",
+    "RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
     "RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
     "relation_spatial_pmu_preflight": "caa5fd52a46ab77a6327d6fccfa8eb836e53f3035b192f0632bb314a56c7f74f",
     "relation_spatial_pmu_preflight.c": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
-    "relation_spatial_runtime": "eacb3a5b97268614eaec0c2ab32383e8e4b2e967fbf6955fcea7af0e22a66e7f",
-    "relation_spatial_runtime.c": "699db0d3b04374c4f2d92e7cfe6c08b81ba79f814015637138626a9f075c8c3e",
+    "relation_spatial_runtime": "559c0d35e2cf533694bff2e1d1bfbb4644704218753f5e36ac063fcdb813933f",
+    "relation_spatial_runtime.c": "1edd1f03f7e1cfb53089cb90c58a6c7ff5870c370cc75ecddb9c24c8d015ec26",
     "relation_spatial_runtime.h": "665d98df19a2dce07b782869247cfc58ffcb9612869e45c481e4340f2664b491"
   },
-  "schedule_manifest_sha256": "7aefda426239e1f23fbacd09eed552cdac4f946e14993b268b364b1c019a6fc9",
+  "schedule_manifest_sha256": "09d33ec4835df0b1327388d219ef2c5356d98fce54393ceb23503792c6962807",
   "schema": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_PACKAGE_MANIFEST_V1",
   "small_wall_crossed": false,
-  "source_authority_commit": "2cdec9704452669d3651a063b6fb5805913647e3",
-  "source_freeze_commit": "8720dd543947f26cbd2af18a6a3dd4870c9adf85",
+  "source_authority_commit": "ed6abfd8003cf63fd5ea57379f4d907aff97a5a0",
+  "source_freeze_commit": "f7cd27e7831a7b14a59b77f696fcea9609f01484",
   "source_schedule_package": "family10h_relation_spatial_pair_readout_v1_1_segmented",
   "sparse_crossed_cells_as_gates_allowed": false,
   "threshold_contract_sha256": "de6960c59ff7c5631e8a1a45a8db29e94f270672955585e489f6f04725893707",
-  "transaction_run_id": "family10h_primary_minus_sham_local_paired_differential_v1_0"
+  "transaction_run_id": "family10h_primary_minus_sham_local_paired_differential_v1_1"
 }

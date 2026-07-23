@@ -8,11 +8,11 @@ from typing import Any
 
 
 PACKAGE_ID = "family10h_primary_minus_sham_local_paired_differential_v1"
-TRANSACTION_RUN_ID = "family10h_primary_minus_sham_local_paired_differential_v1_0"
+TRANSACTION_RUN_ID = "family10h_primary_minus_sham_local_paired_differential_v1_1"
 
 SEGMENTED_PACKAGE_ID = "family10h_relation_spatial_pair_readout_v1_1_segmented"
-SEGMENTED_SOURCE_AUTHORITY_COMMIT = "2cdec9704452669d3651a063b6fb5805913647e3"
-SEGMENTED_FREEZE_COMMIT = "8720dd543947f26cbd2af18a6a3dd4870c9adf85"
+SEGMENTED_SOURCE_AUTHORITY_COMMIT = "ed6abfd8003cf63fd5ea57379f4d907aff97a5a0"
+SEGMENTED_FREEZE_COMMIT = "f7cd27e7831a7b14a59b77f696fcea9609f01484"
 LOCAL_PAIRED_AUDIT_FREEZE_COMMIT = "526a509bf6034fc7e20159541d270cb52ef04db3"
 LOCAL_PAIRED_AUDIT_SHA256 = "2826e10317dd96d7f73c8471e0e6365b466a003fa59dde8c88ec200a0d1b3cf9"
 PRIOR_PRIMARY_MINUS_SHAM_PACKAGE_COMMIT = "054cc36f6c4d67de69cdd1a1dc12f455edc580dd"
