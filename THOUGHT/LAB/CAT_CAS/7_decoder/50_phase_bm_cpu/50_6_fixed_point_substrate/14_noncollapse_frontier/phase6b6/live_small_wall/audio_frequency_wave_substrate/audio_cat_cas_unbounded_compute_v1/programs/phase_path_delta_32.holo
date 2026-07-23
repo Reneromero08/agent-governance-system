@@ -1,0 +1,1 @@
+{"collapse_boundary":{"output":"target_path_count_mod_crt","target_residue":10},"geometry":{"phase_moduli":[3,5,7,11,13],"residue_modulus":31},"max_steps":32,"name":"phase_path_delta_32","process":{"binary_choice_weights":[7,18,3,19,20,7,13,22,1,12,19,25,1,6,24,6,25,25,13,6,25,12,4,8,21,22,18,8,6,22,10,19],"native_operator":"TORUS_PATH_SHEAR"},"schema":"cat_cas.holo.path_sum.v1"}
