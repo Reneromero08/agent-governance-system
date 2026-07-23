@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-23T21:35:06.413330+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "31387e474508fe02afdf753701f3f3810ceb4b75b79d6da5f321ee453f06cfb5",
+  "run_id": "family10h_relation_orientation_balance_discovery_v1_0",
+  "runtime_sha256": "63a947c29081b53f593d02f5fe2165ab9f866dadffa24088c394e975655a7557",
+  "schedule_manifest_sha256": "64f8c8acc989f473bd81577671cac14d9e947df0a243e44f86e19a739ae3f9d5",
+  "schema": "FAMILY10H_RELATION_ORIENTATION_BALANCE_PREPARE_V1",
+  "small_wall_crossed": false
+}
