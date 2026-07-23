@@ -1,0 +1,174 @@
+{
+  "created_at": "2026-07-23T21:42:58.564995+00:00",
+  "files": {
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_0_carrier_off_control.tsv": {
+      "sha256": "e2416d2852792a248f164207050d295552af23b99d76f99c46027b9a834a80db",
+      "size_bytes": 605155
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_0_carrier_off_inversion_control.tsv": {
+      "sha256": "e571adbc69f3c12c01c960899ba13fe77b5f050b87ed67676c93cdabb9164754",
+      "size_bytes": 651235
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_0_primary_relation_pair.tsv": {
+      "sha256": "95762b1d943b04dae7e323b7bd77b348dc417e2f8a7d6df0408ff0420c635254",
+      "size_bytes": 603619
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_0_query_inversion_control.tsv": {
+      "sha256": "dd0a5cf4a581cc04f5a12fdc3042257ace6869e4b5ef46e271f31e6cc4e9305a",
+      "size_bytes": 623587
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_0_relation_sham.tsv": {
+      "sha256": "212418e09e46a9affc9c2f4c6cf335901be554abb0ef884c64ab8408dfbcc6ba",
+      "size_bytes": 577507
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_1024_carrier_off_control.tsv": {
+      "sha256": "96ac356d5135aebf47c4812a95dd3f571c9e206061a61d432603bacaa334088c",
+      "size_bytes": 615907
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_1024_carrier_off_inversion_control.tsv": {
+      "sha256": "dbb1b246ce4ea171f103c9c83ce96aaf03378b13c88d9d97b600f985c72ae255",
+      "size_bytes": 661987
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_1024_primary_relation_pair.tsv": {
+      "sha256": "ba84cd45e3517f39cd60122f3a9e71ad2c80e09012e5e95d6010887f84f35337",
+      "size_bytes": 614371
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_1024_query_inversion_control.tsv": {
+      "sha256": "413e96759778c01f240c345bd20000105d0c57eb10a90d08f2529d63c5339a61",
+      "size_bytes": 634339
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_1024_relation_sham.tsv": {
+      "sha256": "611b8ab13ee1c77a6b1f90a6c424ced7609df4f2b78a668c29aaa3e1b38413be",
+      "size_bytes": 588259
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_2048_carrier_off_control.tsv": {
+      "sha256": "54d740d32e6d5f9ac9076960205c8f266699c0b3d7c57167aacfbf6ca2dbac5e",
+      "size_bytes": 615907
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_2048_carrier_off_inversion_control.tsv": {
+      "sha256": "23d000fd5161fe5353127412acf6bd37c5be6e0db1a024dbea5279e2d7de17e4",
+      "size_bytes": 661987
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_2048_primary_relation_pair.tsv": {
+      "sha256": "dda1b6da2293462f41120a5176920e52679e6febf02d607cabf397800be95918",
+      "size_bytes": 614371
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_2048_query_inversion_control.tsv": {
+      "sha256": "39f51d9a7144c89d02ee8c06687bb6dc94c502fa44fe093bd2fcaa6164eefc2e",
+      "size_bytes": 634339
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_2048_relation_sham.tsv": {
+      "sha256": "9d2781d2f6f861168688c978a81fe9ffd9642dfe59776a52af36905924173f88",
+      "size_bytes": 588259
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_3072_carrier_off_control.tsv": {
+      "sha256": "367e305402dbccebfce741809ad8c3dc58980325f6ac2e0380c8b26aac3bd83e",
+      "size_bytes": 615907
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_3072_carrier_off_inversion_control.tsv": {
+      "sha256": "aac91daa8fd0a0ef9e98f3c252524f234f68b0708aec3ff937f42cb5eda8e570",
+      "size_bytes": 661987
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_3072_primary_relation_pair.tsv": {
+      "sha256": "efc7b14692838faaf61c18cf58533e341e117256dfe45eee13bbda1614953179",
+      "size_bytes": 614371
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_3072_query_inversion_control.tsv": {
+      "sha256": "ab1460ce40a29be90c56140a94befeb7cfa826cdc63e683164a7ae93c891b647",
+      "size_bytes": 634339
+    },
+    "source/ORIGIN_SCOPE_SCHEDULES/origin_3072_relation_sham.tsv": {
+      "sha256": "bbeeb6d2f1b68391eb54fd04bd7b6295e7b634b68be34ab744cdec7284eb9dee",
+      "size_bytes": 588259
+    },
+    "source/RELATION_GRAMMAR.json": {
+      "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+      "size_bytes": 292071
+    },
+    "source/RELATION_GRAMMAR.sha256": {
+      "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+      "size_bytes": 66
+    },
+    "source/RELATION_GRAMMAR.tsv": {
+      "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+      "size_bytes": 360
+    },
+    "source/RELATION_ORIGIN_SCOPE_SCHEDULE_MANIFEST.json": {
+      "sha256": "d3b9d461b1c4dcfb71169b565ad57e5742ef48df90758b09677a75009f4102d0",
+      "size_bytes": 9902
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+      "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+      "size_bytes": 2277
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+      "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+      "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+      "size_bytes": 1866
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+      "size_bytes": 11263467
+    },
+    "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+      "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+      "size_bytes": 2635
+    },
+    "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+      "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+      "size_bytes": 3120
+    },
+    "source/RUN_ORIGIN_SCOPE_DISCOVERY.sh": {
+      "sha256": "9a849303400795c09fcfe25f1b556c6d68969cebe985f858bff2d44cdc5a8b3e",
+      "size_bytes": 9600
+    },
+    "source/relation_spatial_adjudication.py": {
+      "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "size_bytes": 864
+    },
+    "source/relation_spatial_physical_adjudication.py": {
+      "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+      "size_bytes": 42533
+    },
+    "source/relation_spatial_pmu_preflight": {
+      "sha256": "5d73d84636fb756313ec4d52448b3db8e937d7882fa349224fd38ba272f99e42",
+      "size_bytes": 42616
+    },
+    "source/relation_spatial_pmu_preflight.c": {
+      "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "size_bytes": 9376
+    },
+    "source/relation_spatial_public.py": {
+      "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+      "size_bytes": 32161
+    },
+    "source/relation_spatial_runtime": {
+      "sha256": "13e13ba6fa29185638606e49475a61f73756e694e713cfe5dbccdc6727fe13e3",
+      "size_bytes": 102304
+    },
+    "source/relation_spatial_runtime.c": {
+      "sha256": "2c43c52561e888be8ed5fa7569b7cf605b6ebffd75f3b2a2f835f58cb2675104",
+      "size_bytes": 43724
+    },
+    "source/relation_spatial_runtime.h": {
+      "sha256": "8f90b03282331b101dc7bbeb018f578c48c90cbd066cdd1321866abc050ec70b",
+      "size_bytes": 2213
+    },
+    "source/relation_spatial_target.py": {
+      "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+      "size_bytes": 91980
+    }
+  },
+  "path": "C:\\tmp\\family10h_relation_origin_scope_discovery_v1_0_source_package.tar.gz",
+  "run_id": "family10h_relation_origin_scope_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_ORIGIN_SCOPE_SOURCE_PACKAGE_V1",
+  "sha256": "2f14047822051e47f73dc0b2dbb7ee9dac1434b9ff361cb943563d07192fb45d",
+  "size_bytes": 902005
+}
