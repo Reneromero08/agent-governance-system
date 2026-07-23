@@ -1,0 +1,134 @@
+{
+  "created_at": "2026-07-23T23:26:22.423743+00:00",
+  "files": {
+    "source/RELATION_GRAMMAR.json": {
+      "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+      "size_bytes": 292071
+    },
+    "source/RELATION_GRAMMAR.sha256": {
+      "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+      "size_bytes": 66
+    },
+    "source/RELATION_GRAMMAR.tsv": {
+      "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+      "size_bytes": 360
+    },
+    "source/RELATION_RSPATIAL_PHASE_SOURCE_RESTORE_SCHEDULE_MANIFEST.json": {
+      "sha256": "1c702619bba81f05815b24b89fd92920f5c19ab474567619d6f3eff0cbd39ffb",
+      "size_bytes": 4720
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+      "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+      "size_bytes": 2277
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+      "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+      "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+      "size_bytes": 1866
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+      "size_bytes": 11263467
+    },
+    "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+      "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+      "size_bytes": 2635
+    },
+    "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+      "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+      "size_bytes": 3120
+    },
+    "source/RSPATIAL_PHASE_SOURCE_RESTORE_SCHEDULES/alive_primary.tsv": {
+      "sha256": "6f179fce494abc0045e6703d3125e2ee9c1a45ef856e24432d607cd7aa6cb2a9",
+      "size_bytes": 1121823
+    },
+    "source/RSPATIAL_PHASE_SOURCE_RESTORE_SCHEDULES/alive_sham.tsv": {
+      "sha256": "f25fc694f5ff3a3ec92ef82720963ead6d675975ff44b3fc98c4876ac394bb3a",
+      "size_bytes": 1100319
+    },
+    "source/RSPATIAL_PHASE_SOURCE_RESTORE_SCHEDULES/dead_primary.tsv": {
+      "sha256": "e60850119b8fb1dac00e3ad93597858996f764d7d7ce3dff5b51052957758650",
+      "size_bytes": 1170975
+    },
+    "source/RSPATIAL_PHASE_SOURCE_RESTORE_SCHEDULES/dead_sham.tsv": {
+      "sha256": "802119a1782cdaa6dd5dc8d476118391b01be0a6ea34fa9b332b4e9416d54344",
+      "size_bytes": 1134111
+    },
+    "source/RSPATIAL_PHASE_SOURCE_RESTORE_SCHEDULES/reset_double_flush_primary.tsv": {
+      "sha256": "a7339c26a5d6acfc8d79dfecf74959d8205185be41f81e1f9661bcd849709391",
+      "size_bytes": 1299999
+    },
+    "source/RSPATIAL_PHASE_SOURCE_RESTORE_SCHEDULES/reset_double_flush_sham.tsv": {
+      "sha256": "71ae49c4430446082b98130860e7f1a49622bf835925a5b0efe277c73249e68b",
+      "size_bytes": 1263135
+    },
+    "source/RSPATIAL_PHASE_SOURCE_RESTORE_SCHEDULES/restore_opposite_primary.tsv": {
+      "sha256": "a480760261229012a0ab9165502aca43d7e0df551145943ce07cebc7b3de9c64",
+      "size_bytes": 1281567
+    },
+    "source/RSPATIAL_PHASE_SOURCE_RESTORE_SCHEDULES/restore_opposite_sham.tsv": {
+      "sha256": "9432013b76bf193a20d3d90fbe1a22f963cc932a2d83fcd2d22d8123081dcc44",
+      "size_bytes": 1244703
+    },
+    "source/RSPATIAL_PHASE_SOURCE_RESTORE_SCHEDULES/restore_same_primary.tsv": {
+      "sha256": "c773313b77b3b68b978e2c2f47a57b5c16e90ed1172883d4e7f559eacfd23367",
+      "size_bytes": 1244703
+    },
+    "source/RSPATIAL_PHASE_SOURCE_RESTORE_SCHEDULES/restore_same_sham.tsv": {
+      "sha256": "7e52c5914b7e23eb0afafc6cb7b4c031c8a745b627e377ea9860bd8f4f1f64dc",
+      "size_bytes": 1207839
+    },
+    "source/RUN_RSPATIAL_PHASE_SOURCE_RESTORE_DISCOVERY.sh": {
+      "sha256": "2e8ef6905a366dd5a392300fa9fc6f9dade6451197b3246d396b392de9ec3de4",
+      "size_bytes": 8729
+    },
+    "source/relation_spatial_adjudication.py": {
+      "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "size_bytes": 864
+    },
+    "source/relation_spatial_physical_adjudication.py": {
+      "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+      "size_bytes": 42533
+    },
+    "source/relation_spatial_pmu_preflight": {
+      "sha256": "88c1ed7bb59e95175acf90ce8dd22ae02e8986be2994d28633ec7176ed723462",
+      "size_bytes": 42648
+    },
+    "source/relation_spatial_pmu_preflight.c": {
+      "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "size_bytes": 9376
+    },
+    "source/relation_spatial_public.py": {
+      "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+      "size_bytes": 32161
+    },
+    "source/relation_spatial_runtime": {
+      "sha256": "1e876a1d9a6925ec168fb65338119d528f052134617de180102fa5a72a116492",
+      "size_bytes": 116048
+    },
+    "source/relation_spatial_runtime.c": {
+      "sha256": "46fa2bb10e6ffd2d40c0293c74ae6388ef774ca1fd9a6448805b088e0c56e9c0",
+      "size_bytes": 53419
+    },
+    "source/relation_spatial_runtime.h": {
+      "sha256": "411ca1879404f668d59e4534220438a22fdd91d681d1cb9568bd452abf328bb1",
+      "size_bytes": 2843
+    },
+    "source/relation_spatial_target.py": {
+      "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+      "size_bytes": 91980
+    }
+  },
+  "path": "C:\\tmp\\family10h_relation_rspatial_phase_source_restore_discovery_v1_0_source_package.tar.gz",
+  "run_id": "family10h_relation_rspatial_phase_source_restore_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_PHASE_SOURCE_RESTORE_SOURCE_PACKAGE_V1",
+  "sha256": "ca20303dc740d4dc1d0ec8d68a67f6665e0c67c777086259bf919a62f24f57e4",
+  "size_bytes": 898769
+}

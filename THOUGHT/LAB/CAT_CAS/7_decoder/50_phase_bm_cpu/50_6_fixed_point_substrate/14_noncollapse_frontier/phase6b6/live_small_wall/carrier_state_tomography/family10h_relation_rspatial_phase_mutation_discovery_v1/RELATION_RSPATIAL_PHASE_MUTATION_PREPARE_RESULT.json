@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-23T23:30:47.551370+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "ba7ee42557c7a68d8ddce50182c2e601d6f7adcd5dbc63431dcfa232cc84e1ee",
+  "run_id": "family10h_relation_rspatial_phase_mutation_discovery_v1_0",
+  "runtime_sha256": "3a1457f67a9fd80f3f4250fa1aef123446c8626ff7bd14150b02869637fc1383",
+  "schedule_manifest_sha256": "b67fd3ea1fce93e2e2677b0b4cb67d7e5d91c17ba1a6bebc7ebbc7f9bf45c43e",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_PHASE_MUTATION_PREPARE_V1",
+  "small_wall_crossed": false
+}
