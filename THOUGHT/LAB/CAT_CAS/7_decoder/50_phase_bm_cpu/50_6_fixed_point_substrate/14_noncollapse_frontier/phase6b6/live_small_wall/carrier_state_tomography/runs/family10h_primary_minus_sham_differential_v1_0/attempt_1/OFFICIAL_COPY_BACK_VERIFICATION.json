@@ -1,0 +1,12 @@
+{
+  "archive_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_primary_minus_sham_differential_v1_0\\attempt_1\\OFFICIAL_TARGET_ROOT.tar.gz",
+  "archive_sha256_equal": true,
+  "archive_size_equal": true,
+  "copy_back_sha256": "274fbb3dddfa5801482f089a37a387459814d0732b50a6227d54cd80484e0465",
+  "local_archive_sha256": "a2ceb2a11f7fbd002694f287c11a3e4446776fd5cb04c6b4ef03dc5d250780ff",
+  "local_archive_size": 110462171,
+  "passed": true,
+  "schema": "FAMILY10H_PRIMARY_MINUS_SHAM_DIFFERENTIAL_OFFICIAL_COPY_BACK_V1",
+  "target_archive_sha256": "a2ceb2a11f7fbd002694f287c11a3e4446776fd5cb04c6b4ef03dc5d250780ff",
+  "target_archive_size": 110462171
+}

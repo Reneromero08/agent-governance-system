@@ -1,0 +1,30 @@
+{
+  "original_archive_name": "OFFICIAL_TARGET_ROOT.tar.gz",
+  "original_archive_sha256": "a2ceb2a11f7fbd002694f287c11a3e4446776fd5cb04c6b4ef03dc5d250780ff",
+  "original_archive_size": 110462171,
+  "part_count": 3,
+  "part_size_limit": 45000000,
+  "parts": [
+    {
+      "name": "OFFICIAL_TARGET_ROOT.tar.gz.part001",
+      "ordinal": 1,
+      "sha256": "5788fdabee3764cc3fb340897d78533c1729c455d8e5ba0a336af4bf782481a6",
+      "size_bytes": 45000000
+    },
+    {
+      "name": "OFFICIAL_TARGET_ROOT.tar.gz.part002",
+      "ordinal": 2,
+      "sha256": "be370127da00535c222253fc9d182b5ca96537c043084c8ce4a51d55d7180ce9",
+      "size_bytes": 45000000
+    },
+    {
+      "name": "OFFICIAL_TARGET_ROOT.tar.gz.part003",
+      "ordinal": 3,
+      "sha256": "1e4298da716cd2588f7415482d28b4570467142b3ea68004fc687588fea4676c",
+      "size_bytes": 20462171
+    }
+  ],
+  "parts_manifest_sha256": "b92ab9b46b4a34cff3c4a5b1a1fb3c3ef1c09562241d6cf96393fb5b3292cd18",
+  "reconstruction": "concatenate parts in ordinal order to reconstruct OFFICIAL_TARGET_ROOT.tar.gz",
+  "schema": "FAMILY10H_PRIMARY_MINUS_SHAM_DIFFERENTIAL_ARCHIVE_PARTS_V1"
+}
