@@ -1,0 +1,24 @@
+{
+  "chunk_count": 2,
+  "chunk_size_bytes": 62914560,
+  "chunks": [
+    {
+      "index": 1,
+      "path": "OFFICIAL_TARGET_ROOT.tar.gz.part001",
+      "sha256": "def9a4e7851b27d8e4dcdab8f4e8f01661cae2e50bfc620e22348404fb01c4bf",
+      "size_bytes": 62914560
+    },
+    {
+      "index": 2,
+      "path": "OFFICIAL_TARGET_ROOT.tar.gz.part002",
+      "sha256": "a8f3044b814f18495f224d92ac4d63dde4bf3b43fbf64665b9d680fa9e58ded2",
+      "size_bytes": 48211062
+    }
+  ],
+  "original_archive_path": "OFFICIAL_TARGET_ROOT.tar.gz",
+  "original_archive_sha256": "b2137e3107d15f42659e304213768763047eb42ffca6e838230a2862f9cc4017",
+  "original_archive_size_bytes": 111125622,
+  "reason": "GitHub rejects individual files over 100 MB; chunks preserve the exact archive byte stream in Git.",
+  "reconstruct_powershell": "Get-Content -Encoding Byte OFFICIAL_TARGET_ROOT.tar.gz.part* | Set-Content -Encoding Byte OFFICIAL_TARGET_ROOT.tar.gz",
+  "schema": "FAMILY10H_SPLIT_ARCHIVE_MANIFEST_V1"
+}

@@ -285,13 +285,16 @@ def adjudicate_archive(archive_path: Path) -> dict[str, Any]:
         "relation_sham_not_in_generic_null_set": law.SHAM_QUERY not in law.GENERIC_CONTROL_QUERIES,
         "absolute_sham_sign_is_diagnostic_only": True,
         "sparse_crossed_cells_are_diagnostic_only": True,
-        "post_observation_threshold_revision": False,
+        "post_observation_threshold_revision_absent": True,
+    }
+    non_gate_invariants = {
         "small_wall_crossed": False,
     }
     passed = all(gates.values())
     report.update(
         {
             "gates": gates,
+            "non_gate_invariants": non_gate_invariants,
             "passed": passed,
             "result_class": law.RESULT_CONFIRMED if passed else law.RESULT_NOT_CONFIRMED,
             "scientific_claim": law.POSITIVE_CLAIM if passed else law.NEGATIVE_CLAIM,

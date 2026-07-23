@@ -1,0 +1,43 @@
+{
+  "archive_sha256_equal": true,
+  "archive_size_equal": true,
+  "created_at": "2026-07-23T20:47:33.482266+00:00",
+  "local_archive": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_primary_minus_sham_local_paired_differential_v1_1\\attempt_1\\OFFICIAL_TARGET_ROOT.tar.gz",
+  "local_archive_sha256": "b2137e3107d15f42659e304213768763047eb42ffca6e838230a2862f9cc4017",
+  "local_archive_size": 111125622,
+  "make_archive": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; test -d /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_1/source; rm -f /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_1_attempt1_remote_root.tar.gz; tar -czf /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_1_attempt1_remote_root.tar.gz -C /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_1 source; sha256sum /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_1_attempt1_remote_root.tar.gz; stat -c%s /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_1_attempt1_remote_root.tar.gz"
+    ],
+    "elapsed_seconds": 38.282,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "b2137e3107d15f42659e304213768763047eb42ffca6e838230a2862f9cc4017  /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_1_attempt1_remote_root.tar.gz\n111125622\n"
+  },
+  "passed": true,
+  "remote_archive": "/root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_1_attempt1_remote_root.tar.gz",
+  "remote_archive_sha256": "b2137e3107d15f42659e304213768763047eb42ffca6e838230a2862f9cc4017",
+  "remote_archive_size": 111125622,
+  "schema": "FAMILY10H_LOCAL_PAIRED_COPY_BACK_VERIFICATION_V1",
+  "scp_archive": {
+    "command": [
+      "scp",
+      "-O",
+      "-o",
+      "BatchMode=yes",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_1_attempt1_remote_root.tar.gz",
+      "C:\\tmp\\family10h_primary_minus_sham_local_paired_differential_v1_1_remote_root.tar.gz"
+    ],
+    "elapsed_seconds": 1.218,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "small_wall_crossed": false
+}
