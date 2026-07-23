@@ -1,0 +1,381 @@
+{
+  "analysis_sha256": "e769868fda9e0b3b406f3d2973798cfa74e77d23e1e0d4228614c034f6487ada",
+  "archive_sha256": "177df6c6acf5cda1984a7b0d03f6870109dfad098fa01d887d3d25bb9c52f423",
+  "archive_size": 33838073,
+  "claim_boundary": {
+    "full_tomography_established": false,
+    "positive_scientific_claim": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "controller_passed": true,
+  "coordinates": {
+    "D_source_on_minus_source_off_offset_1": 0.005076425897305545,
+    "R_source_off_offset_1": 0.07008070448480697,
+    "R_source_on_offset_1": 0.07515713038211251,
+    "offset_1_delta_abs_to_source_on_abs": 0.06754416875013819,
+    "offset_1_source_off_abs_to_source_on_abs": 0.9324558312498619,
+    "strongest_delta": 0.01603178386587798,
+    "strongest_delta_abs_to_source_on_abs": 1.7964036168942559,
+    "strongest_delta_offset": 8
+  },
+  "created_at": "2026-07-23T22:08:09.911096+00:00",
+  "interpretation": {
+    "any_offset_source_dependent_delta_above_25pct_source_on": true,
+    "exploratory_only": true,
+    "offset_1_source_dependent_delta_above_25pct_source_on": false,
+    "offset_1_source_dependent_delta_positive": true,
+    "offset_1_source_off_baseline_below_25pct_source_on": false,
+    "small_wall_crossed": false,
+    "strongest_delta_offset": 8,
+    "strongest_delta_positive": true
+  },
+  "offset_reports": {
+    "1": {
+      "delta_abs_to_source_on_abs": 0.06754416875013819,
+      "source_dependent_delta_above_25pct_source_on": false,
+      "source_dependent_delta_positive": true,
+      "source_off_R": 0.07008070448480697,
+      "source_off_abs_to_source_on_abs": 0.9324558312498619,
+      "source_off_variant": "source_off_offset_1",
+      "source_on_R": 0.07515713038211251,
+      "source_on_minus_source_off": 0.005076425897305545,
+      "source_on_variant": "source_on_offset_1"
+    },
+    "1024": {
+      "delta_abs_to_source_on_abs": 0.4248559563842196,
+      "source_dependent_delta_above_25pct_source_on": true,
+      "source_dependent_delta_positive": false,
+      "source_off_R": -0.013504326504064707,
+      "source_off_abs_to_source_on_abs": 0.5751440436157804,
+      "source_off_variant": "source_off_offset_1024",
+      "source_on_R": -0.023479903258958455,
+      "source_on_minus_source_off": -0.009975576754893748,
+      "source_on_variant": "source_on_offset_1024"
+    },
+    "16": {
+      "delta_abs_to_source_on_abs": 0.03965005721268815,
+      "source_dependent_delta_above_25pct_source_on": false,
+      "source_dependent_delta_positive": true,
+      "source_off_R": 0.01247502019879523,
+      "source_off_abs_to_source_on_abs": 0.9603499427873119,
+      "source_off_variant": "source_off_offset_16",
+      "source_on_R": 0.012990077515481318,
+      "source_on_minus_source_off": 0.0005150573166860881,
+      "source_on_variant": "source_on_offset_16"
+    },
+    "2": {
+      "delta_abs_to_source_on_abs": 0.03883643897941296,
+      "source_dependent_delta_above_25pct_source_on": false,
+      "source_dependent_delta_positive": false,
+      "source_off_R": 0.13006809004023076,
+      "source_off_abs_to_source_on_abs": 1.038836438979413,
+      "source_off_variant": "source_off_offset_2",
+      "source_on_R": 0.12520555225037536,
+      "source_on_minus_source_off": -0.004862537789855403,
+      "source_on_variant": "source_on_offset_2"
+    },
+    "4": {
+      "delta_abs_to_source_on_abs": 2.9836640425451595,
+      "source_dependent_delta_above_25pct_source_on": true,
+      "source_dependent_delta_positive": true,
+      "source_off_R": -0.006783566930469118,
+      "source_off_abs_to_source_on_abs": 1.9836640425451597,
+      "source_off_variant": "source_off_offset_4",
+      "source_on_R": 0.003419715629752201,
+      "source_on_minus_source_off": 0.010203282560221318,
+      "source_on_variant": "source_on_offset_4"
+    },
+    "8": {
+      "delta_abs_to_source_on_abs": 1.7964036168942559,
+      "source_dependent_delta_above_25pct_source_on": true,
+      "source_dependent_delta_positive": true,
+      "source_off_R": -0.007107406451410952,
+      "source_off_abs_to_source_on_abs": 0.796403616894256,
+      "source_off_variant": "source_off_offset_8",
+      "source_on_R": 0.00892437741446703,
+      "source_on_minus_source_off": 0.01603178386587798,
+      "source_on_variant": "source_on_offset_8"
+    }
+  },
+  "run_id": "family10h_relation_receiver_offset_sweep_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_RECEIVER_OFFSET_SWEEP_DISCOVERY_ANALYSIS_V1",
+  "variant_reports": {
+    "source_off_offset_1": {
+      "R_spatial": {
+        "abs_mean": 0.09690316672038005,
+        "abs_of_mean": 0.07008070448480697,
+        "count": 128,
+        "max_abs": 0.4519058312772606,
+        "mean": 0.07008070448480697,
+        "q50_abs": 0.04302146664896364,
+        "q95_abs": 0.37937497625734334,
+        "q99_abs": 0.4257828977343021,
+        "sign_counts": {
+          "-1": 43,
+          "0": 0,
+          "1": 85
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "source_off_offset_1_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "source_off_offset_1024": {
+      "R_spatial": {
+        "abs_mean": 0.053131436397328174,
+        "abs_of_mean": 0.013504326504064707,
+        "count": 128,
+        "max_abs": 0.28421089618642836,
+        "mean": -0.013504326504064707,
+        "q50_abs": 0.04118075971162835,
+        "q95_abs": 0.12742613674533562,
+        "q99_abs": 0.14687130238892718,
+        "sign_counts": {
+          "-1": 72,
+          "0": 0,
+          "1": 56
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "source_off_offset_1024_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "source_off_offset_16": {
+      "R_spatial": {
+        "abs_mean": 0.04113519901223358,
+        "abs_of_mean": 0.01247502019879523,
+        "count": 128,
+        "max_abs": 0.18154890218336128,
+        "mean": 0.01247502019879523,
+        "q50_abs": 0.029952324645771466,
+        "q95_abs": 0.10589650142087229,
+        "q99_abs": 0.12552655449488814,
+        "sign_counts": {
+          "-1": 54,
+          "0": 0,
+          "1": 74
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "source_off_offset_16_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "source_off_offset_2": {
+      "R_spatial": {
+        "abs_mean": 0.16793362645243015,
+        "abs_of_mean": 0.13006809004023076,
+        "count": 128,
+        "max_abs": 0.4414994864342042,
+        "mean": 0.13006809004023076,
+        "q50_abs": 0.14038340648026643,
+        "q95_abs": 0.3771718561675507,
+        "q99_abs": 0.4051361675550824,
+        "sign_counts": {
+          "-1": 42,
+          "0": 0,
+          "1": 86
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "source_off_offset_2_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "source_off_offset_4": {
+      "R_spatial": {
+        "abs_mean": 0.03964096776299869,
+        "abs_of_mean": 0.006783566930469118,
+        "count": 128,
+        "max_abs": 0.13347916395181586,
+        "mean": -0.006783566930469118,
+        "q50_abs": 0.03736498047747733,
+        "q95_abs": 0.09124245814080852,
+        "q99_abs": 0.1252964078094968,
+        "sign_counts": {
+          "-1": 69,
+          "0": 0,
+          "1": 59
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "source_off_offset_4_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "source_off_offset_8": {
+      "R_spatial": {
+        "abs_mean": 0.04532183098484955,
+        "abs_of_mean": 0.007107406451410952,
+        "count": 128,
+        "max_abs": 0.1613122652097374,
+        "mean": -0.007107406451410952,
+        "q50_abs": 0.0324756672743057,
+        "q95_abs": 0.12056218578882735,
+        "q99_abs": 0.1548967297589706,
+        "sign_counts": {
+          "-1": 74,
+          "0": 0,
+          "1": 54
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "source_off_offset_8_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "source_on_offset_1": {
+      "R_spatial": {
+        "abs_mean": 0.09977393082362533,
+        "abs_of_mean": 0.07515713038211251,
+        "count": 128,
+        "max_abs": 0.39449769227662335,
+        "mean": 0.07515713038211251,
+        "q50_abs": 0.04745804937489778,
+        "q95_abs": 0.3492288885857919,
+        "q99_abs": 0.3871250332194851,
+        "sign_counts": {
+          "-1": 49,
+          "0": 0,
+          "1": 79
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "source_on_offset_1024": {
+      "R_spatial": {
+        "abs_mean": 0.04260116050082911,
+        "abs_of_mean": 0.023479903258958455,
+        "count": 128,
+        "max_abs": 0.16232501437488506,
+        "mean": -0.023479903258958455,
+        "q50_abs": 0.03723779144484579,
+        "q95_abs": 0.1027024630074053,
+        "q99_abs": 0.1436929388674091,
+        "sign_counts": {
+          "-1": 91,
+          "0": 0,
+          "1": 37
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "source_on_offset_1024_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "source_on_offset_16": {
+      "R_spatial": {
+        "abs_mean": 0.04943409740031334,
+        "abs_of_mean": 0.012990077515481318,
+        "count": 128,
+        "max_abs": 0.1870847368907185,
+        "mean": 0.012990077515481318,
+        "q50_abs": 0.04264882011868784,
+        "q95_abs": 0.13015758761050383,
+        "q99_abs": 0.1525114601175858,
+        "sign_counts": {
+          "-1": 51,
+          "0": 0,
+          "1": 77
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "source_on_offset_16_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "source_on_offset_2": {
+      "R_spatial": {
+        "abs_mean": 0.15028820575699517,
+        "abs_of_mean": 0.12520555225037536,
+        "count": 128,
+        "max_abs": 0.4020770860692424,
+        "mean": 0.12520555225037536,
+        "q50_abs": 0.12359967210523716,
+        "q95_abs": 0.3272432798796839,
+        "q99_abs": 0.3911308552318801,
+        "sign_counts": {
+          "-1": 35,
+          "0": 0,
+          "1": 93
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "source_on_offset_2_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "source_on_offset_4": {
+      "R_spatial": {
+        "abs_mean": 0.04609683306994039,
+        "abs_of_mean": 0.003419715629752201,
+        "count": 128,
+        "max_abs": 0.3077778025488622,
+        "mean": 0.003419715629752201,
+        "q50_abs": 0.04190548714959513,
+        "q95_abs": 0.10342319655349605,
+        "q99_abs": 0.13544656809781075,
+        "sign_counts": {
+          "-1": 60,
+          "0": 0,
+          "1": 68
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "source_on_offset_4_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "source_on_offset_8": {
+      "R_spatial": {
+        "abs_mean": 0.051408745143918085,
+        "abs_of_mean": 0.00892437741446703,
+        "count": 128,
+        "max_abs": 0.19592007496060815,
+        "mean": 0.00892437741446703,
+        "q50_abs": 0.04610095440034037,
+        "q95_abs": 0.13308365497678254,
+        "q99_abs": 0.16641729978759964,
+        "sign_counts": {
+          "-1": 56,
+          "0": 0,
+          "1": 72
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "source_on_offset_8_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    }
+  }
+}
