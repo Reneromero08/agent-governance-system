@@ -1,0 +1,471 @@
+{
+  "case_count": 472,
+  "claim_target": "PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED",
+  "contract_sha256": "4280eaa12b81b594f99a6f73bd26944cb78947be9fbcd1cb4aa64f79f811f9e4",
+  "engine_fingerprint": "496f181ba4e86a6bd396c14a35f65d8235294b2f1df1f503268e0bc10fa5a5a6",
+  "engine_sha256": "0ad4a97eb737c6b199f85d3a9179f5b6562c20e79d1ef6a7fc006b93dceeacf7",
+  "execution_order": [
+    "commit engine, program declarations, and complete input identities",
+    "execute native phase programs without post-execution comparison code",
+    "seal raw outputs, carrier restoration, reuse, and controls",
+    "commit and push raw seal",
+    "load separate comparison functions and adjudicate"
+  ],
+  "input_set_sha256": "89120d2dda3ba985c4a7d7a12007d4539ecde9d45158be5563045db1e1ae4858",
+  "programs": [
+    {
+      "compiled": [
+        {
+          "args": [
+            0,
+            2
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            0,
+            2
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            0,
+            2
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            1,
+            2
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            1,
+            2
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            2,
+            4
+          ],
+          "op": "ROT"
+        }
+      ],
+      "input_count": 49,
+      "program_identity": "63fefeb78eb34556a876446a138bc88e64630fc072a5af7d6fdb817a8925a888",
+      "source": {
+        "computational_class": "modular arithmetic",
+        "input_registers": [
+          0,
+          1
+        ],
+        "name": "prospective_affine_mod7",
+        "output_registers": [
+          2
+        ],
+        "radix": 7,
+        "register_count": 3,
+        "statements": [
+          {
+            "call": "DOUBLE_ADD",
+            "registers": [
+              0,
+              2
+            ]
+          },
+          {
+            "args": [
+              0,
+              2
+            ],
+            "op": "ADD"
+          },
+          {
+            "call": "DOUBLE_ADD",
+            "registers": [
+              1,
+              2
+            ]
+          },
+          {
+            "args": [
+              2,
+              4
+            ],
+            "op": "ROT"
+          }
+        ]
+      }
+    },
+    {
+      "compiled": [
+        {
+          "args": [
+            0,
+            6
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            3,
+            6
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            0,
+            3,
+            7
+          ],
+          "op": "CCX"
+        },
+        {
+          "args": [
+            1,
+            8
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            4,
+            8
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            7,
+            8
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            1,
+            4,
+            9
+          ],
+          "op": "CCX"
+        },
+        {
+          "args": [
+            1,
+            7,
+            9
+          ],
+          "op": "CCX"
+        },
+        {
+          "args": [
+            4,
+            7,
+            9
+          ],
+          "op": "CCX"
+        },
+        {
+          "args": [
+            2,
+            10
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            5,
+            10
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            9,
+            10
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            2,
+            5,
+            11
+          ],
+          "op": "CCX"
+        },
+        {
+          "args": [
+            2,
+            9,
+            11
+          ],
+          "op": "CCX"
+        },
+        {
+          "args": [
+            5,
+            9,
+            11
+          ],
+          "op": "CCX"
+        }
+      ],
+      "input_count": 64,
+      "program_identity": "f6806b80f6d33ad0e5debca9d5a73845a50180ef7c09835c4f2f74f3d3f0142e",
+      "source": {
+        "computational_class": "multi-stage binary arithmetic",
+        "input_registers": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "name": "prospective_binary_add3",
+        "output_registers": [
+          6,
+          8,
+          10,
+          11
+        ],
+        "radix": 2,
+        "register_count": 12,
+        "statements": [
+          {
+            "call": "XOR2_INTO",
+            "registers": [
+              0,
+              3,
+              6
+            ]
+          },
+          {
+            "call": "AND_INTO",
+            "registers": [
+              0,
+              3,
+              7
+            ]
+          },
+          {
+            "call": "XOR3_INTO",
+            "registers": [
+              1,
+              4,
+              7,
+              8
+            ]
+          },
+          {
+            "call": "MAJORITY3_INTO",
+            "registers": [
+              1,
+              4,
+              7,
+              9
+            ]
+          },
+          {
+            "call": "XOR3_INTO",
+            "registers": [
+              2,
+              5,
+              9,
+              10
+            ]
+          },
+          {
+            "call": "MAJORITY3_INTO",
+            "registers": [
+              2,
+              5,
+              9,
+              11
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "compiled": [
+        {
+          "args": [
+            0,
+            1
+          ],
+          "op": "ROT"
+        },
+        {
+          "args": [
+            0,
+            1,
+            4
+          ],
+          "op": "CCX"
+        },
+        {
+          "args": [
+            0,
+            1
+          ],
+          "op": "ROT"
+        },
+        {
+          "args": [
+            0,
+            2,
+            4
+          ],
+          "op": "CCX"
+        },
+        {
+          "args": [
+            4,
+            5
+          ],
+          "op": "ADD"
+        },
+        {
+          "args": [
+            3,
+            5
+          ],
+          "op": "ADD"
+        }
+      ],
+      "input_count": 16,
+      "program_identity": "cc51aa949c9d812254615665e43e85a02b2d5f262e674d74bbd3266ecb9c64d8",
+      "source": {
+        "computational_class": "conditional pipeline",
+        "input_registers": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "name": "prospective_mux_xor_pipeline",
+        "output_registers": [
+          4,
+          5
+        ],
+        "radix": 2,
+        "register_count": 6,
+        "statements": [
+          {
+            "call": "MUX_INTO",
+            "registers": [
+              0,
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "args": [
+              4,
+              5
+            ],
+            "op": "ADD"
+          },
+          {
+            "args": [
+              3,
+              5
+            ],
+            "op": "ADD"
+          }
+        ]
+      }
+    },
+    {
+      "compiled": [
+        {
+          "args": [
+            0,
+            2
+          ],
+          "op": "SWAP"
+        },
+        {
+          "args": [
+            0,
+            2
+          ],
+          "op": "ROT"
+        },
+        {
+          "args": [
+            1,
+            2
+          ],
+          "op": "ADD"
+        }
+      ],
+      "input_count": 343,
+      "program_identity": "2464ecbbc5f1cf8cc13caa72d6ad2e2049dae4281cd36b2d3da66122acf6a52c",
+      "source": {
+        "computational_class": "sequence routing and relational composition",
+        "input_registers": [
+          0,
+          1,
+          2
+        ],
+        "name": "prospective_route_compose_mod7",
+        "output_registers": [
+          0,
+          1,
+          2
+        ],
+        "radix": 7,
+        "register_count": 3,
+        "statements": [
+          {
+            "call": "REVERSE3",
+            "registers": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "args": [
+              0,
+              2
+            ],
+            "op": "ROT"
+          },
+          {
+            "args": [
+              1,
+              2
+            ],
+            "op": "ADD"
+          }
+        ]
+      }
+    }
+  ],
+  "promotion_criterion": {
+    "all_raw_boundaries_valid": true,
+    "all_restoration_and_reuse_pass": true,
+    "all_results_exact_after_separate_comparison": true,
+    "cross_program_reuse_pass": true,
+    "maximum_restoration_error": 2e-12,
+    "maximum_reuse_response_delta": 2e-12,
+    "native_no_smuggle_pass": true,
+    "strict_controls_pass": true,
+    "uninterpretable_maximum": 0
+  },
+  "schema": "phase_native_computer_prospective_contract_v1",
+  "suite_sha256": "5c833fe7cc442ad62cdd2f874f8b80563ad0f0ef293d23f4481b721fc573c022"
+}
