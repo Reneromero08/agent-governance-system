@@ -1,0 +1,73 @@
+{
+  "checks": {
+    "adjudication_decision": true,
+    "changed_path_scope": true,
+    "engine_fingerprint": true,
+    "pre_adjudication_order": true,
+    "reexecution": true,
+    "static_no_smuggle": true
+  },
+  "document_sha256": "856b2dd8749e559495c596e52e03a5c1d53273102eac11d3128ecee15f8e05d3",
+  "engine_fingerprint": "4503da3c5fce3fa7cf516bf7d5e7f08771b739553d3e96601e5e317120ed341a",
+  "finding_count": 0,
+  "order_proof": {
+    "adjudicator_absent": true,
+    "passed": true,
+    "pre_adjudication_commit": "6e9112f78ef5b18dfa4ed8c646b80202a68a2d4b",
+    "raw_present": true
+  },
+  "reexecution": {
+    "boundary_byte_exact": 472,
+    "case_count": 472,
+    "exact": 472,
+    "max_restoration_error": 1.04685351726e-15,
+    "max_reuse_response_delta": 7.28550816809e-16,
+    "max_reuse_restoration_error": 8.95090418262e-16,
+    "passed": true,
+    "per_program": {
+      "prospective_affine_mod7": {
+        "correct": 49,
+        "count": 49
+      },
+      "prospective_binary_add3": {
+        "correct": 64,
+        "count": 64
+      },
+      "prospective_mux_xor_pipeline": {
+        "correct": 16,
+        "count": 16
+      },
+      "prospective_route_compose_mod7": {
+        "correct": 343,
+        "count": 343
+      }
+    },
+    "restoration_passed": 472,
+    "reuse_passed": 472
+  },
+  "reviewer_id": "PHASE-COMPUTER-INDEPENDENT-REEXECUTION-01",
+  "schema": "phase_native_computer_independent_verification_v1",
+  "scope": {
+    "changed_path_count": 24,
+    "outside_package": [],
+    "passed": true,
+    "start_commit": "3ea54416dd42b6dec3cc4d43af52fc774c91fd1e"
+  },
+  "static_no_smuggle": {
+    "engine_source_guard": {
+      "forbidden_answer_words": [],
+      "forbidden_native_selection": [],
+      "native_receives_only": [
+        "phase program",
+        "phase input symbols",
+        "borrowed complex carrier"
+      ],
+      "passed": true
+    },
+    "forbidden_calls": [],
+    "forbidden_imports": [],
+    "forbidden_names": [],
+    "passed": true
+  },
+  "verdict": "PASS"
+}

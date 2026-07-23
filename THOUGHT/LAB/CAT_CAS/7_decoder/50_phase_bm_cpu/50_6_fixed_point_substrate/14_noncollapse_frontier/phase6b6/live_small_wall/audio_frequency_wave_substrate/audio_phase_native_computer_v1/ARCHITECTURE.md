@@ -42,6 +42,11 @@ The same engine executes:
 The conventional reference functions live only in the development qualifier.
 They never enter the native engine.
 
+The computational state is factorized: logical phase state is \(O(R)\) for
+\(R\) registers, the waveform carrier is \(O(RS)\) for fixed sample count
+\(S\), and retained inverse history is \(O(RI)\) for \(I\) instructions. No
+\(q^R\) configuration bank is created.
+
 ## Catalytic lifecycle
 
 The engine borrows a deterministic complex waveform bank, seeds the two

@@ -1,0 +1,289 @@
+{
+  "benchmark_repetitions": 41,
+  "document_sha256": "8d6375d555f0f91bc156891a7a6d4d5c35045f26e6f8206c41d82e4353dbedaf",
+  "engine_fingerprint": "4503da3c5fce3fa7cf516bf7d5e7f08771b739553d3e96601e5e317120ed341a",
+  "honesty": {
+    "complete_mode_materialization": false,
+    "computational_advantage_claimed": false,
+    "timing_is_environment_specific": true
+  },
+  "program_benchmarks": {
+    "prospective_affine_mod7": {
+      "comparison": {
+        "maximum_ns": 1100,
+        "median_ns": 600,
+        "minimum_ns": 500
+      },
+      "compiled_instruction_count": 6,
+      "compiler": {
+        "maximum_ns": 12800,
+        "median_ns": 8800,
+        "minimum_ns": 8300
+      },
+      "execution_arrays": {
+        "borrowed_carrier": 12288,
+        "displaced_carrier": 12288,
+        "history_phase_factors": 336,
+        "phase_trace": 384,
+        "seed_operator": 12288,
+        "total_instantiated_execution_arrays": 37584
+      },
+      "phase_execution_and_boundary": {
+        "maximum_ns": 854700,
+        "median_ns": 650100,
+        "minimum_ns": 628800
+      },
+      "phase_to_conventional_median_ratio": 1083.5,
+      "program_identity": "63fefeb78eb34556a876446a138bc88e64630fc072a5af7d6fdb817a8925a888",
+      "program_ir_bytes": 1140,
+      "restoration": {
+        "maximum_ns": 288400,
+        "median_ns": 194500,
+        "minimum_ns": 187900
+      }
+    },
+    "prospective_binary_add3": {
+      "comparison": {
+        "maximum_ns": 3800,
+        "median_ns": 2400,
+        "minimum_ns": 2200
+      },
+      "compiled_instruction_count": 15,
+      "compiler": {
+        "maximum_ns": 20800,
+        "median_ns": 19400,
+        "minimum_ns": 17900
+      },
+      "execution_arrays": {
+        "borrowed_carrier": 49152,
+        "displaced_carrier": 49152,
+        "history_phase_factors": 3072,
+        "phase_trace": 3264,
+        "seed_operator": 49152,
+        "total_instantiated_execution_arrays": 153792
+      },
+      "phase_execution_and_boundary": {
+        "maximum_ns": 1547800,
+        "median_ns": 1285300,
+        "minimum_ns": 1258500
+      },
+      "phase_to_conventional_median_ratio": 535.541666667,
+      "program_identity": "f6806b80f6d33ad0e5debca9d5a73845a50180ef7c09835c4f2f74f3d3f0142e",
+      "program_ir_bytes": 2366,
+      "restoration": {
+        "maximum_ns": 586000,
+        "median_ns": 415200,
+        "minimum_ns": 399200
+      }
+    },
+    "prospective_mux_xor_pipeline": {
+      "comparison": {
+        "maximum_ns": 900,
+        "median_ns": 500,
+        "minimum_ns": 400
+      },
+      "compiled_instruction_count": 6,
+      "compiler": {
+        "maximum_ns": 14900,
+        "median_ns": 8900,
+        "minimum_ns": 7600
+      },
+      "execution_arrays": {
+        "borrowed_carrier": 24576,
+        "displaced_carrier": 24576,
+        "history_phase_factors": 672,
+        "phase_trace": 768,
+        "seed_operator": 24576,
+        "total_instantiated_execution_arrays": 75168
+      },
+      "phase_execution_and_boundary": {
+        "maximum_ns": 734000,
+        "median_ns": 672600,
+        "minimum_ns": 656300
+      },
+      "phase_to_conventional_median_ratio": 1345.2,
+      "program_identity": "cc51aa949c9d812254615665e43e85a02b2d5f262e674d74bbd3266ecb9c64d8",
+      "program_ir_bytes": 1115,
+      "restoration": {
+        "maximum_ns": 232300,
+        "median_ns": 203900,
+        "minimum_ns": 197400
+      }
+    },
+    "prospective_route_compose_mod7": {
+      "comparison": {
+        "maximum_ns": 900,
+        "median_ns": 600,
+        "minimum_ns": 500
+      },
+      "compiled_instruction_count": 3,
+      "compiler": {
+        "maximum_ns": 6700,
+        "median_ns": 5400,
+        "minimum_ns": 4800
+      },
+      "execution_arrays": {
+        "borrowed_carrier": 12288,
+        "displaced_carrier": 12288,
+        "history_phase_factors": 144,
+        "phase_trace": 240,
+        "seed_operator": 12288,
+        "total_instantiated_execution_arrays": 37248
+      },
+      "phase_execution_and_boundary": {
+        "maximum_ns": 523400,
+        "median_ns": 458300,
+        "minimum_ns": 448300
+      },
+      "phase_to_conventional_median_ratio": 763.833333333,
+      "program_identity": "2464ecbbc5f1cf8cc13caa72d6ad2e2049dae4281cd36b2d3da66122acf6a52c",
+      "program_ir_bytes": 875,
+      "restoration": {
+        "maximum_ns": 147900,
+        "median_ns": 118900,
+        "minimum_ns": 114700
+      }
+    }
+  },
+  "scaling": [
+    {
+      "active_phase_components": 4,
+      "complete_configuration_modes": 0,
+      "execution_arrays": {
+        "borrowed_carrier": 8192,
+        "displaced_carrier": 8192,
+        "history_phase_factors": 96,
+        "phase_trace": 128,
+        "seed_operator": 8192,
+        "total_instantiated_execution_arrays": 24800
+      },
+      "instruction_count": 2,
+      "logical_phase_state_bytes": 32,
+      "phase_execution_and_boundary": {
+        "maximum_ns": 430700,
+        "median_ns": 375400,
+        "minimum_ns": 368200
+      },
+      "register_count": 2,
+      "restoration": {
+        "maximum_ns": 134100,
+        "median_ns": 102200,
+        "minimum_ns": 99500
+      }
+    },
+    {
+      "active_phase_components": 8,
+      "complete_configuration_modes": 0,
+      "execution_arrays": {
+        "borrowed_carrier": 16384,
+        "displaced_carrier": 16384,
+        "history_phase_factors": 320,
+        "phase_trace": 384,
+        "seed_operator": 16384,
+        "total_instantiated_execution_arrays": 49856
+      },
+      "instruction_count": 4,
+      "logical_phase_state_bytes": 64,
+      "phase_execution_and_boundary": {
+        "maximum_ns": 581700,
+        "median_ns": 527100,
+        "minimum_ns": 511700
+      },
+      "register_count": 4,
+      "restoration": {
+        "maximum_ns": 224100,
+        "median_ns": 154400,
+        "minimum_ns": 150700
+      }
+    },
+    {
+      "active_phase_components": 16,
+      "complete_configuration_modes": 0,
+      "execution_arrays": {
+        "borrowed_carrier": 32768,
+        "displaced_carrier": 32768,
+        "history_phase_factors": 1152,
+        "phase_trace": 1280,
+        "seed_operator": 32768,
+        "total_instantiated_execution_arrays": 100736
+      },
+      "instruction_count": 8,
+      "logical_phase_state_bytes": 128,
+      "phase_execution_and_boundary": {
+        "maximum_ns": 926100,
+        "median_ns": 814700,
+        "minimum_ns": 781000
+      },
+      "register_count": 8,
+      "restoration": {
+        "maximum_ns": 272300,
+        "median_ns": 253600,
+        "minimum_ns": 244000
+      }
+    },
+    {
+      "active_phase_components": 24,
+      "complete_configuration_modes": 0,
+      "execution_arrays": {
+        "borrowed_carrier": 49152,
+        "displaced_carrier": 49152,
+        "history_phase_factors": 2496,
+        "phase_trace": 2688,
+        "seed_operator": 49152,
+        "total_instantiated_execution_arrays": 152640
+      },
+      "instruction_count": 12,
+      "logical_phase_state_bytes": 192,
+      "phase_execution_and_boundary": {
+        "maximum_ns": 1225600,
+        "median_ns": 1093600,
+        "minimum_ns": 1064800
+      },
+      "register_count": 12,
+      "restoration": {
+        "maximum_ns": 431900,
+        "median_ns": 348500,
+        "minimum_ns": 337900
+      }
+    },
+    {
+      "active_phase_components": 32,
+      "complete_configuration_modes": 0,
+      "execution_arrays": {
+        "borrowed_carrier": 65536,
+        "displaced_carrier": 65536,
+        "history_phase_factors": 4352,
+        "phase_trace": 4608,
+        "seed_operator": 65536,
+        "total_instantiated_execution_arrays": 205568
+      },
+      "instruction_count": 16,
+      "logical_phase_state_bytes": 256,
+      "phase_execution_and_boundary": {
+        "maximum_ns": 1588900,
+        "median_ns": 1439300,
+        "minimum_ns": 1366800
+      },
+      "register_count": 16,
+      "restoration": {
+        "maximum_ns": 613300,
+        "median_ns": 473100,
+        "minimum_ns": 450200
+      }
+    }
+  ],
+  "scaling_law": {
+    "carrier": "O(register_count * sample_count)",
+    "complete_configuration_modes": 0,
+    "logical_phase_state": "O(register_count)",
+    "reversible_history": "O(register_count * instruction_count)",
+    "time": "O(register_count * sample_count * log(sample_count) + register_count * instruction_count + swap_instruction_count * sample_count)"
+  },
+  "scaling_repetitions": 21,
+  "schema": "phase_native_computer_resource_profile_v1",
+  "v3_six_site_reference": {
+    "active_complete_modes": 64,
+    "native_carrier_bytes": 49152,
+    "site_count": 6
+  }
+}
