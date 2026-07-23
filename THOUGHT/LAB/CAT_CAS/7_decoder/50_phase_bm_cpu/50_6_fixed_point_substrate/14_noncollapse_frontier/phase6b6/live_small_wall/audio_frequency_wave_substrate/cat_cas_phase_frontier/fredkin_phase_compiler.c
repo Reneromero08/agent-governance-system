@@ -2,8 +2,9 @@
  * Mutable CAT_CAS compiler: Fredkin circuit -> public phase program.
  *
  * This compiler emits topology only. It never executes or adjudicates the
- * circuit. Program counter, program enables, workspaces, and data become
- * phase-resident registers consumed by streaming_phase_vm.c.
+ * circuit. Program enables and data become phase-resident registers consumed
+ * by streaming_phase_vm.c. The emitted PCSWAP schedule visits each public gate
+ * exactly once per cycle; it does not scan a one-hot program counter.
  */
 
 #define _GNU_SOURCE
@@ -285,25 +286,15 @@ static struct circuit read_circuit(const char *path) {
 
 static void emit_program(const struct circuit *circuit) {
     if (
-        circuit->gate_count > (SIZE_MAX - 2U) / 2U
-        || circuit->gate_count > UINT64_MAX
+        circuit->gate_count > SIZE_MAX - circuit->wires
         || circuit->cycles > UINT64_MAX / (uint64_t)circuit->gate_count
     ) {
         fprintf(stderr, "compiled phase dimensions overflow\n");
         exit(2);
     }
-    const size_t pc_base = 0;
-    const size_t program_base = circuit->gate_count;
-    const size_t enable = 2U * circuit->gate_count;
-    const size_t routed_enable = enable + 1U;
-    const size_t data_base = routed_enable + 1U;
-    if (circuit->wires > SIZE_MAX - data_base) {
-        fprintf(stderr, "compiled register count overflows\n");
-        exit(2);
-    }
+    const size_t program_base = 0;
+    const size_t data_base = circuit->gate_count;
     const size_t registers = data_base + circuit->wires;
-    const uint64_t passes =
-        (uint64_t)circuit->gate_count * circuit->cycles;
 
     printf("CATCAS_PHASE_PROGRAM 1\n");
     printf("REGISTERS %zu\n", registers);
@@ -311,8 +302,7 @@ static void emit_program(const struct circuit *circuit) {
         "# compiled_from_fnv1a64 %016llx\n",
         (unsigned long long)circuit->fnv1a64
     );
-    printf("# phase-resident PC, program bits, workspaces, and data\n");
-    printf("SET %zu 1\n", pc_base);
+    printf("# phase-resident program enables and data\n");
     for (size_t index = 0; index < circuit->gate_count; ++index) {
         if (circuit->gates[index].enabled) {
             printf("SET %zu 1\n", program_base + index);
@@ -327,46 +317,22 @@ static void emit_program(const struct circuit *circuit) {
             );
         }
     }
-    printf("PASSES %llu\n", (unsigned long long)passes);
+    printf("PASSES %llu\n", (unsigned long long)circuit->cycles);
 
     for (size_t index = 0; index < circuit->gate_count; ++index) {
         const struct gate *gate = &circuit->gates[index];
-        const size_t pc = pc_base + index;
         const size_t program = program_base + index;
         const size_t control = data_base + gate->control;
         const size_t left = data_base + gate->left;
         const size_t right = data_base + gate->right;
         printf("# slot %zu\n", index);
-        printf("MULADD %zu %zu %zu\n", pc, program, enable);
         printf(
-            "MULADD %zu %zu %zu\n",
-            enable,
+            "PCSWAP %zu %zu %zu %zu\n",
+            program,
             control,
-            routed_enable
-        );
-        printf(
-            "CSWAP %zu %zu %zu\n",
-            routed_enable,
             left,
             right
         );
-        printf(
-            "MULADD %zu %zu %zu\n",
-            enable,
-            control,
-            routed_enable
-        );
-        printf(
-            "MULADD %zu %zu %zu\n",
-            enable,
-            control,
-            routed_enable
-        );
-        printf("MULADD %zu %zu %zu\n", pc, program, enable);
-        printf("MULADD %zu %zu %zu\n", pc, program, enable);
-    }
-    for (size_t index = circuit->gate_count; index-- > 1U;) {
-        printf("SWAP %zu %zu\n", pc_base + index, pc_base + index - 1U);
     }
     printf("END\n");
 }

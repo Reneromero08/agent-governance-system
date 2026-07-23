@@ -230,8 +230,11 @@ per-step inverse factors, arbitrary public programs, compact repeated
 execution, and scalable phase-register memory. Data-dependent Fredkin routing,
 a phase-resident stored-program construction, and a compact C compiler for
 finite multi-slot Fredkin fabrics now pass exact-byte development
-qualification. The live gap is no longer syntax or compilation: it is removing
-the conventional host's sequential payment for every native slot.
+qualification. The compiler's avoidable one-hot slot scan has been removed:
+the fused phase `PCSWAP` relation lowers `N` Fredkin gates to `N` native gates
+instead of `O(N^2)` scanned gates. The live gap is no longer syntax,
+compilation, or quadratic interpreter overhead: it is removing the
+conventional host's remaining linear payment for every native gate.
 
 ### B. Attack a flagship without an equivalent compact classical recurrence
 

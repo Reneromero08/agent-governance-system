@@ -14,6 +14,7 @@ ADD <source> <target>
 MULADD <left> <right> <target>
 SWAP <left> <right>
 CSWAP <control> <left> <right>
+PCSWAP <program-enable> <control> <left> <right>
 END
 ```
 
@@ -32,6 +33,7 @@ ADD(s,t):       z[t] <- z[t] * z[s]
 MULADD(a,b,t):  z[t] <- z[t] * F(z[a],z[b])
 SWAP(a,b):      exchange both rails
 CSWAP(c,a,b):   exchange a,b only when c carries phase symbol 1
+PCSWAP(p,c,a,b): exchange a,b only when p*c carries phase symbol 1
 ```
 
 `F` is the fixed roots-of-unity interpolation polynomial satisfying
@@ -50,6 +52,12 @@ which is `omega` only for phase symbol `1` and unity for symbols `0` and `2`.
 It then applies `g(c)*(b-a)` and its negative simultaneously to the two target
 relations using `F`. Thus `CSWAP` is a self-inverse Fredkin operation over the
 Boolean control subset with a total, identity action for control symbol `2`.
+
+`PCSWAP` first constructs `F(p,c) = omega^(p*c)` and feeds that phase relation
+to the same indicator. Over the Boolean subset, it swaps only when both the
+phase-resident program enable and the data control are `1`. Over all of `F3`,
+it is a total self-inverse operation that swaps exactly when `p*c = 1`. No
+program or data phase is decoded.
 
 The format is plain text because program representation is not yet the
 scientific bottleneck. It can be replaced without changing the native phase
@@ -112,11 +120,11 @@ END
 ```
 
 The compiler does not execute the circuit. For `N` declared gates it emits
-`N` one-hot phase-counter registers, `N` phase-resident enable symbols, two
-workspace registers, the data wires, and one fixed native schedule. Each slot
-computes `enable = pc * program`, computes the routed control relation,
-performs `CSWAP`, uncomputes both workspaces, and advances the one-hot phase
-counter. `PASSES = N * CYCLES` applies the same local fabric repeatedly.
+`N` phase-resident enable symbols, the data wires, and one `PCSWAP` per gate.
+`PASSES = CYCLES` repeats the public circuit. The compiler therefore emits and
+executes `O(N * CYCLES)` native gates instead of scanning every slot for every
+one-hot program-counter position. Program enables and data remain phase
+relations; only avoidable idle scans and workspaces were removed.
 
 The committed routed-network circuit compiles byte-for-byte to
 `programs/compiled_routed_network.holo`. The circuit source and generated
