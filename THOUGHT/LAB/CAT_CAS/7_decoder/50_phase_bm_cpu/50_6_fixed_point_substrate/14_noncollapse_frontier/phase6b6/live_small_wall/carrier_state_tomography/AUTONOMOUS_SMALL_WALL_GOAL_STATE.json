@@ -1,0 +1,151 @@
+{
+  "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
+  "updated_at": "2026-07-23T11:41:58.5340426-07:00",
+  "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
+  "branch": "codex/family10h-tomography-repair",
+  "checkpoint_head": "29fd8297510bc236419749f3b3f535e31cf7feb6",
+  "origin_head": "29fd8297510bc236419749f3b3f535e31cf7feb6",
+  "autonomous_mode": {
+    "active": true,
+    "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
+    "live_lab_contact_authorized": true,
+    "hardware_destructive_actions_authorized": false,
+    "forbidden_actions": [
+      "voltage modification",
+      "BIOS or firmware modification",
+      "bootloader modification",
+      "kernel modification",
+      "destructive cleanup outside transaction-owned paths",
+      "scientific claim promotion beyond frozen law"
+    ]
+  },
+  "canonical_small_wall_authority": {
+    "live_small_wall_agents_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/AGENTS.md",
+    "live_small_wall_agents_sha256": "1b3af89de6076e8ced2ef3def834ac90104eb0cf8b76f112e230655ba95150af",
+    "small_wall_state_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/SMALL_WALL_STATE.md",
+    "small_wall_state_sha256": "6fb37e6eb46603fc38b0c1feada533a22423ae4da29ab2b563ad498ccbb761f8",
+    "claim_and_promotion_law_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/orbit_coupling/orbitstate_query_separated_successor/CLAIM_AND_PROMOTION_LAW.md",
+    "claim_and_promotion_law_sha256": "a42ab3d51e18efb9c845884dc43c6f482da71161534511e8433efc5a17f6b524",
+    "crossing_law": [
+      "old boundary excludes target distinction",
+      "new access model exposes predeclared fold-odd invariant",
+      "evolution precedes measurement",
+      "both fold branches remain one process-object",
+      "no hidden orientation controls preparation",
+      "label swap is null",
+      "relation mutation is predicted and non-null",
+      "carrier-off and geometry-null controls kill the effect",
+      "restoration passes at declared R2+ tier",
+      "result survives seeds",
+      "result survives sessions",
+      "result survives routes or has justified route scope",
+      "result scales in predeclared direction",
+      "independent implementation or machine reproduces",
+      "no-smuggle controls pass"
+    ],
+    "one_two_replicate_run_can_promote_small_wall_crossed": false,
+    "authoritative_classification_requires": [
+      "target custody passes",
+      "copy-back verifies",
+      "executed source reconstructs",
+      "required evidence set verifies",
+      "remote cleanup or retention state verifies",
+      "post-run audit passes"
+    ]
+  },
+  "current_package": {
+    "package_id": "family10h_primary_minus_sham_local_paired_differential_v1",
+    "transaction_run_id": "family10h_primary_minus_sham_local_paired_differential_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_primary_minus_sham_local_paired_differential_v1",
+    "package_decision": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_PACKAGE_READY_AWAITING_AUTHORIZATION",
+    "package_manifest_sha256": "b27425fc2ab552cce1b0cdde8ed98d1c9beef353d493bed68dce11c71277ca98",
+    "schedule_manifest_sha256": "7aefda426239e1f23fbacd09eed552cdac4f946e14993b268b364b1c019a6fc9",
+    "threshold_contract_sha256": "de6960c59ff7c5631e8a1a45a8db29e94f270672955585e489f6f04725893707",
+    "source_schedule_package": "family10h_relation_spatial_pair_readout_v1_1_segmented",
+    "source_authority_commit": "2cdec9704452669d3651a063b6fb5805913647e3",
+    "source_freeze_commit": "8720dd543947f26cbd2af18a6a3dd4870c9adf85",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_primary_minus_sham_local_paired_differential_v1_0/attempt_1",
+    "attempt_output_path_fresh": true
+  },
+  "current_observable": {
+    "name": "local primary-minus-sham paired differential",
+    "R_primary": "mean R_spatial(query_relation_pair)",
+    "R_sham": "mean R_spatial(relation_sham)",
+    "D_local": "R_primary - R_sham",
+    "success_gates": [
+      "every round has R_primary > 0",
+      "every round has D_local > 0",
+      "every one-factor matched stratum for session, replicate, mapping, source_order, query_order, and cyclic_origin has R_primary > 0 and D_local > 0",
+      "generic controls pass when max(abs(R_scrambled), abs(R_distance), abs(R_route)) <= 0.25 * D_local in every round"
+    ],
+    "diagnostics_not_gates": [
+      "absolute relation_sham sign",
+      "generic matched-permutation q99 warnings",
+      "complete six-factor crossed cells"
+    ],
+    "claim_ceiling": "PUBLIC_POST_SOURCE_LOCAL_PRIMARY_MINUS_SHAM_DIFFERENTIAL_CONFIRMED",
+    "small_wall_crossed_by_this_package": false
+  },
+  "target_and_sensor_authority": {
+    "target_identity_sha256": "24c0d25494f25223e3eed4e9d02025e6bc6b017462e68beb51e56ac371d44b4b",
+    "target_vendor": "AuthenticAMD",
+    "target_family": 16,
+    "target_model": 10,
+    "source_cpu": 4,
+    "receiver_cpu": 5,
+    "sensor_identity_sha256": "a993bb09ee6c38819f75f3be133cee859acc18ec8f62aa4ed8a57ee484fe1137",
+    "sensor_authority_sha256": "72ab7571611259b1844aacb808ab39b8549369b1e3e1baa23b16b33d2e5a0a0f",
+    "sensor_hwmon_name": "k10temp",
+    "sensor_input": "temp1_input",
+    "sensor_semantic_role": "Tctl"
+  },
+  "runtime_authority": {
+    "RELATION_GRAMMAR.json": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+    "RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": "8691d4e47ea987ab0ca25391179b7a94409ce589b23cea2a0f0b0f12d80b3f7c",
+    "RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+    "relation_spatial_runtime": "eacb3a5b97268614eaec0c2ab32383e8e4b2e967fbf6955fcea7af0e22a66e7f",
+    "relation_spatial_pmu_preflight": "caa5fd52a46ab77a6327d6fccfa8eb836e53f3035b192f0632bb314a56c7f74f",
+    "relation_spatial_runtime.c": "699db0d3b04374c4f2d92e7cfe6c08b81ba79f814015637138626a9f075c8c3e",
+    "relation_spatial_runtime.h": "665d98df19a2dce07b782869247cfc58ffcb9612869e45c481e4340f2664b491",
+    "relation_spatial_pmu_preflight.c": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948"
+  },
+  "attempt_counts": {
+    "new_local_paired_differential_official_attempts": 0,
+    "new_local_paired_differential_attempt_1_path_exists": false,
+    "prior_primary_minus_sham_official_attempts": 1,
+    "prior_relation_sham_position_exploration_attempts": 1
+  },
+  "latest_retained_evidence": {
+    "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
+    "prior_official_archive_sha256": "a2ceb2a11f7fbd002694f287c11a3e4446776fd5cb04c6b4ef03dc5d250780ff",
+    "prior_official_archive_size": 110462171,
+    "prior_official_copy_back_passed": true,
+    "prior_scalar_q_readout_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
+    "prior_scalar_q_readout_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
+    "prior_second_operator_dimension_class": "FAMILY10H_SECOND_OPERATOR_DIMENSION_UNRESOLVED_RETROSPECTIVE"
+  },
+  "hypothesis_frontier": {
+    "active_wall": "carrier/access-model selection below full Small Wall crossing",
+    "leading_mechanism": "local paired relation coordinate in which primary-minus-sham ordering persists even when absolute sham sign is unstable",
+    "strongest_candidate_coordinate": "D_local = R_primary - R_sham over fresh segmented relation-spatial schedules",
+    "rejected_or_insufficient_mechanisms": [
+      "scalar q-readout alone",
+      "absolute relation_sham sign",
+      "sparse complete crossed cells as gates",
+      "single two-replicate run as Small Wall promotion",
+      "full tomography without scalar-replay exclusion",
+      "R2 restoration by byte/hash restoration alone"
+    ],
+    "current_next_experiment": "execute one official physical local paired differential attempt using the ten frozen local schedules and frozen adjudicator",
+    "current_blockers": []
+  },
+  "claim_state": {
+    "scalar_q_readout_confirmed_prospectively": true,
+    "local_paired_differential_confirmed_prospectively": false,
+    "full_carrier_state_tomography_established": false,
+    "physical_relational_memory_established": false,
+    "catalytic_borrowing_established": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  }
+}
