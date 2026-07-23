@@ -1,0 +1,31 @@
+CATCAS_PHASE_PROGRAM 1
+REGISTERS 8
+
+# One-hot program counter.
+SET 0 1
+
+# Two stored program-enable phase relations: execute slot 0, skip slot 1.
+SET 2 1
+
+# Data routed by the stored program.
+SET 6 1
+SET 7 2
+
+# Two microcycles return the one-hot PC to its starting position.
+PASSES 2
+
+# Slot 0: enable = pc0 * program0, then conditionally route and uncompute.
+MULADD 0 2 4
+CSWAP 4 6 7
+MULADD 0 2 4
+MULADD 0 2 4
+
+# Slot 1 uses the same fixed Fredkin fabric with independent program state.
+MULADD 1 3 5
+CSWAP 5 6 7
+MULADD 1 3 5
+MULADD 1 3 5
+
+# Advance the phase-resident one-hot program counter.
+SWAP 0 1
+END

@@ -11,12 +11,14 @@
  */
 
 #define _GNU_SOURCE
+#include <ctype.h>
 #include <complex.h>
 #include <math.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 #include <time.h>
 
 #define Q 3
@@ -28,7 +30,8 @@ enum opcode {
     OP_ROT = 1,
     OP_ADD = 2,
     OP_MULADD = 3,
-    OP_SWAP = 4
+    OP_SWAP = 4,
+    OP_CSWAP = 5
 };
 
 struct instruction {
@@ -37,6 +40,26 @@ struct instruction {
     size_t b;
     size_t target;
     int amount;
+};
+
+struct public_program {
+    size_t registers;
+    int *input_symbols;
+    struct instruction *instructions;
+    uint64_t instruction_count;
+    uint64_t passes;
+    size_t instruction_capacity;
+    uint64_t fnv1a64;
+};
+
+struct instruction_source {
+    uint64_t steps;
+    int family;
+    size_t registers;
+    const int *input_symbols;
+    const struct instruction *instructions;
+    uint64_t instruction_period;
+    uint64_t public_program_fnv1a64;
 };
 
 struct carrier {
@@ -55,6 +78,7 @@ struct execution {
     double restoration_max_abs;
     uint64_t forward_ns;
     uint64_t inverse_ns;
+    uint64_t public_program_fnv1a64;
 };
 
 static inline uint64_t monotonic_ns(void) {
@@ -158,6 +182,15 @@ static double complex product_factor(
     return factor;
 }
 
+static double complex boolean_one_indicator(double complex control) {
+    const double complex squared_value = control * control;
+    const double complex squared_symbol =
+        product_factor(control, control);
+    return phase_lock(
+        squared_value * squared_symbol * squared_symbol
+    );
+}
+
 static struct instruction instruction_at(
     uint64_t index, int family, size_t registers
 ) {
@@ -224,6 +257,377 @@ static struct instruction instruction_at(
     return instruction;
 }
 
+static inline uint64_t fnv1a_update(
+    uint64_t hash, const unsigned char *bytes, size_t length
+) {
+    for (size_t index = 0; index < length; ++index) {
+        hash ^= (uint64_t)bytes[index];
+        hash *= UINT64_C(1099511628211);
+    }
+    return hash;
+}
+
+static char *trim_line(char *line) {
+    while (isspace((unsigned char)*line)) {
+        ++line;
+    }
+    char *end = line + strlen(line);
+    while (end > line && isspace((unsigned char)end[-1])) {
+        --end;
+    }
+    *end = '\0';
+    return line;
+}
+
+static void append_instruction(
+    struct public_program *program, struct instruction instruction
+) {
+    if (program->instruction_count == program->instruction_capacity) {
+        size_t next_capacity =
+            program->instruction_capacity == 0
+                ? 64U
+                : program->instruction_capacity * 2U;
+        if (
+            next_capacity < program->instruction_capacity
+            || next_capacity > SIZE_MAX / sizeof(struct instruction)
+        ) {
+            fprintf(stderr, "public program is too large\n");
+            exit(2);
+        }
+        struct instruction *next = realloc(
+            program->instructions,
+            next_capacity * sizeof(struct instruction)
+        );
+        if (next == NULL) {
+            fprintf(stderr, "public program allocation failed\n");
+            exit(2);
+        }
+        program->instructions = next;
+        program->instruction_capacity = next_capacity;
+    }
+    program->instructions[program->instruction_count++] = instruction;
+}
+
+static void require_register(
+    size_t index, size_t registers, size_t line_number
+) {
+    if (index >= registers) {
+        fprintf(
+            stderr,
+            "register %zu is out of range on line %zu\n",
+            index,
+            line_number
+        );
+        exit(2);
+    }
+}
+
+static struct public_program read_public_program(const char *path) {
+    FILE *stream = fopen(path, "rb");
+    if (stream == NULL) {
+        perror(path);
+        exit(2);
+    }
+    struct public_program program = {
+        .registers = 0,
+        .input_symbols = NULL,
+        .instructions = NULL,
+        .instruction_count = 0,
+        .passes = 1,
+        .instruction_capacity = 0,
+        .fnv1a64 = UINT64_C(14695981039346656037)
+    };
+    char *buffer = NULL;
+    size_t buffer_capacity = 0;
+    ssize_t read_length = 0;
+    size_t line_number = 0;
+    int header_seen = 0;
+    int registers_seen = 0;
+    int passes_seen = 0;
+    int instruction_seen = 0;
+    int end_seen = 0;
+    while (
+        (read_length = getline(&buffer, &buffer_capacity, stream)) >= 0
+    ) {
+        ++line_number;
+        const size_t raw_length = (size_t)read_length;
+        if (memchr(buffer, '\0', raw_length) != NULL) {
+            fprintf(stderr, "embedded NUL on line %zu\n", line_number);
+            exit(2);
+        }
+        program.fnv1a64 = fnv1a_update(
+            program.fnv1a64,
+            (const unsigned char *)buffer,
+            raw_length
+        );
+        if (
+            raw_length > 4095U
+        ) {
+            fprintf(stderr, "line %zu exceeds 4095 bytes\n", line_number);
+            exit(2);
+        }
+        char *line = trim_line(buffer);
+        if (*line == '\0' || *line == '#') {
+            continue;
+        }
+        if (end_seen) {
+            fprintf(stderr, "content follows END on line %zu\n", line_number);
+            exit(2);
+        }
+        char extra = '\0';
+        if (!header_seen) {
+            int version = 0;
+            if (
+                sscanf(
+                    line,
+                    "CATCAS_PHASE_PROGRAM %d %c",
+                    &version,
+                    &extra
+                ) != 1
+                || version != 1
+            ) {
+                fprintf(stderr, "invalid program header on line %zu\n", line_number);
+                exit(2);
+            }
+            header_seen = 1;
+            continue;
+        }
+        if (strcmp(line, "END") == 0) {
+            if (!registers_seen || !instruction_seen) {
+                fprintf(stderr, "END precedes a complete program\n");
+                exit(2);
+            }
+            end_seen = 1;
+            continue;
+        }
+        if (strncmp(line, "REGISTERS", 9U) == 0) {
+            size_t registers = 0;
+            if (
+                registers_seen
+                || instruction_seen
+                || sscanf(line, "REGISTERS %zu %c", &registers, &extra) != 1
+                || registers < 3U
+                || registers > SIZE_MAX / sizeof(int)
+            ) {
+                fprintf(stderr, "invalid REGISTERS on line %zu\n", line_number);
+                exit(2);
+            }
+            program.registers = registers;
+            program.input_symbols = calloc(registers, sizeof(int));
+            if (program.input_symbols == NULL) {
+                fprintf(stderr, "input allocation failed\n");
+                exit(2);
+            }
+            registers_seen = 1;
+            continue;
+        }
+        if (strncmp(line, "SET", 3U) == 0) {
+            size_t target = 0;
+            int symbol = 0;
+            if (
+                !registers_seen
+                || instruction_seen
+                || sscanf(line, "SET %zu %d %c", &target, &symbol, &extra) != 2
+            ) {
+                fprintf(stderr, "invalid SET on line %zu\n", line_number);
+                exit(2);
+            }
+            require_register(target, program.registers, line_number);
+            if (symbol < 0 || symbol >= Q) {
+                fprintf(stderr, "SET symbol is out of range on line %zu\n", line_number);
+                exit(2);
+            }
+            program.input_symbols[target] = symbol;
+            continue;
+        }
+        if (strncmp(line, "PASSES", 6U) == 0) {
+            unsigned long long passes = 0;
+            if (
+                !registers_seen
+                || passes_seen
+                || instruction_seen
+                || sscanf(line, "PASSES %llu %c", &passes, &extra) != 1
+                || passes == 0
+            ) {
+                fprintf(stderr, "invalid PASSES on line %zu\n", line_number);
+                exit(2);
+            }
+            program.passes = (uint64_t)passes;
+            passes_seen = 1;
+            continue;
+        }
+        if (!registers_seen) {
+            fprintf(stderr, "instruction precedes REGISTERS on line %zu\n", line_number);
+            exit(2);
+        }
+        struct instruction instruction = {
+            .op = OP_ROT,
+            .a = 0,
+            .b = 0,
+            .target = 0,
+            .amount = 0
+        };
+        if (strncmp(line, "ROT", 3U) == 0) {
+            if (
+                sscanf(
+                    line,
+                    "ROT %zu %d %c",
+                    &instruction.target,
+                    &instruction.amount,
+                    &extra
+                ) != 2
+            ) {
+                fprintf(stderr, "invalid ROT on line %zu\n", line_number);
+                exit(2);
+            }
+            instruction.op = OP_ROT;
+            require_register(
+                instruction.target, program.registers, line_number
+            );
+        } else if (strncmp(line, "ADD", 3U) == 0) {
+            if (
+                sscanf(
+                    line,
+                    "ADD %zu %zu %c",
+                    &instruction.a,
+                    &instruction.target,
+                    &extra
+                ) != 2
+            ) {
+                fprintf(stderr, "invalid ADD on line %zu\n", line_number);
+                exit(2);
+            }
+            instruction.op = OP_ADD;
+            require_register(instruction.a, program.registers, line_number);
+            require_register(
+                instruction.target, program.registers, line_number
+            );
+            if (instruction.a == instruction.target) {
+                fprintf(stderr, "ADD source aliases target on line %zu\n", line_number);
+                exit(2);
+            }
+        } else if (strncmp(line, "MULADD", 6U) == 0) {
+            if (
+                sscanf(
+                    line,
+                    "MULADD %zu %zu %zu %c",
+                    &instruction.a,
+                    &instruction.b,
+                    &instruction.target,
+                    &extra
+                ) != 3
+            ) {
+                fprintf(stderr, "invalid MULADD on line %zu\n", line_number);
+                exit(2);
+            }
+            instruction.op = OP_MULADD;
+            require_register(instruction.a, program.registers, line_number);
+            require_register(instruction.b, program.registers, line_number);
+            require_register(
+                instruction.target, program.registers, line_number
+            );
+            if (
+                instruction.a == instruction.target
+                || instruction.b == instruction.target
+            ) {
+                fprintf(
+                    stderr,
+                    "MULADD input aliases target on line %zu\n",
+                    line_number
+                );
+                exit(2);
+            }
+        } else if (strncmp(line, "SWAP", 4U) == 0) {
+            if (
+                sscanf(
+                    line,
+                    "SWAP %zu %zu %c",
+                    &instruction.a,
+                    &instruction.b,
+                    &extra
+                ) != 2
+            ) {
+                fprintf(stderr, "invalid SWAP on line %zu\n", line_number);
+                exit(2);
+            }
+            instruction.op = OP_SWAP;
+            require_register(instruction.a, program.registers, line_number);
+            require_register(instruction.b, program.registers, line_number);
+            if (instruction.a == instruction.b) {
+                fprintf(stderr, "SWAP aliases itself on line %zu\n", line_number);
+                exit(2);
+            }
+        } else if (strncmp(line, "CSWAP", 5U) == 0) {
+            if (
+                sscanf(
+                    line,
+                    "CSWAP %zu %zu %zu %c",
+                    &instruction.target,
+                    &instruction.a,
+                    &instruction.b,
+                    &extra
+                ) != 3
+            ) {
+                fprintf(stderr, "invalid CSWAP on line %zu\n", line_number);
+                exit(2);
+            }
+            instruction.op = OP_CSWAP;
+            require_register(
+                instruction.target, program.registers, line_number
+            );
+            require_register(instruction.a, program.registers, line_number);
+            require_register(instruction.b, program.registers, line_number);
+            if (
+                instruction.a == instruction.b
+                || instruction.target == instruction.a
+                || instruction.target == instruction.b
+            ) {
+                fprintf(stderr, "CSWAP registers alias on line %zu\n", line_number);
+                exit(2);
+            }
+        } else {
+            fprintf(stderr, "unknown instruction on line %zu\n", line_number);
+            exit(2);
+        }
+        append_instruction(&program, instruction);
+        instruction_seen = 1;
+    }
+    if (ferror(stream)) {
+        perror(path);
+        exit(2);
+    }
+    free(buffer);
+    if (fclose(stream) != 0) {
+        perror(path);
+        exit(2);
+    }
+    if (!header_seen || !registers_seen || !instruction_seen || !end_seen) {
+        fprintf(stderr, "public program is incomplete\n");
+        exit(2);
+    }
+    return program;
+}
+
+static void free_public_program(struct public_program *program) {
+    free(program->input_symbols);
+    free(program->instructions);
+    program->input_symbols = NULL;
+    program->instructions = NULL;
+    program->registers = 0;
+    program->instruction_count = 0;
+    program->passes = 0;
+    program->instruction_capacity = 0;
+}
+
+static struct instruction source_instruction_at(
+    const struct instruction_source *source, uint64_t index
+) {
+    if (source->instructions != NULL) {
+        return source->instructions[index % source->instruction_period];
+    }
+    return instruction_at(index, source->family, source->registers);
+}
+
 static void apply_forward(
     struct carrier *carrier, const struct instruction *instruction
 ) {
@@ -270,6 +674,28 @@ static void apply_forward(
         carrier->working[instruction->b] = working;
         return;
     }
+    if (instruction->op == OP_CSWAP) {
+        const double complex control = boolean_one_indicator(
+            relation(carrier, instruction->target)
+        );
+        const double complex left = relation(carrier, instruction->a);
+        const double complex right = relation(carrier, instruction->b);
+        const double complex control_left =
+            product_factor(control, left);
+        const double complex control_right =
+            product_factor(control, right);
+        write_relation(
+            carrier,
+            instruction->a,
+            left * control_right * conj(control_left)
+        );
+        write_relation(
+            carrier,
+            instruction->b,
+            right * control_left * conj(control_right)
+        );
+        return;
+    }
     fprintf(stderr, "unknown phase instruction\n");
     exit(2);
 }
@@ -280,9 +706,6 @@ static void apply_inverse(
     int wrong_program
 ) {
     struct instruction inverse = *instruction;
-    if (wrong_program && inverse.op == OP_ROT) {
-        inverse.amount += 1;
-    }
     if (inverse.op == OP_ROT) {
         write_relation_unlocked(
             carrier,
@@ -290,18 +713,14 @@ static void apply_inverse(
             relation(carrier, inverse.target)
                 * conj(root_of_unity(inverse.amount))
         );
-        return;
-    }
-    if (inverse.op == OP_ADD) {
+    } else if (inverse.op == OP_ADD) {
         write_relation(
             carrier,
             inverse.target,
             relation(carrier, inverse.target)
                 * conj(relation(carrier, inverse.a))
         );
-        return;
-    }
-    if (inverse.op == OP_MULADD) {
+    } else if (inverse.op == OP_MULADD) {
         const double complex factor = product_factor(
             relation(carrier, inverse.a),
             relation(carrier, inverse.b)
@@ -311,14 +730,26 @@ static void apply_inverse(
             inverse.target,
             relation(carrier, inverse.target) * conj(factor)
         );
-        return;
-    }
-    if (inverse.op == OP_SWAP) {
+    } else if (inverse.op == OP_SWAP) {
         apply_forward(carrier, &inverse);
-        return;
+    } else if (inverse.op == OP_CSWAP) {
+        apply_forward(carrier, &inverse);
+    } else {
+        fprintf(stderr, "unknown inverse phase instruction\n");
+        exit(2);
     }
-    fprintf(stderr, "unknown inverse phase instruction\n");
-    exit(2);
+    if (wrong_program) {
+        const size_t target = (
+            inverse.op == OP_SWAP || inverse.op == OP_CSWAP
+        )
+            ? inverse.a
+            : inverse.target;
+        write_relation_unlocked(
+            carrier,
+            target,
+            relation(carrier, target) * root_of_unity(1)
+        );
+    }
 }
 
 static struct carrier make_carrier(size_t registers, int identity) {
@@ -378,17 +809,30 @@ static int input_value(size_t register_index, int family) {
     );
 }
 
-static void load_input(struct carrier *carrier, int family) {
+static int source_input_value(
+    const struct instruction_source *source, size_t register_index
+) {
+    if (source->input_symbols != NULL) {
+        return source->input_symbols[register_index];
+    }
+    return input_value(register_index, source->family);
+}
+
+static void load_input(
+    struct carrier *carrier, const struct instruction_source *source
+) {
     for (size_t index = 0; index < carrier->registers; ++index) {
         carrier->working[index] *=
-            root_of_unity(input_value(index, family));
+            root_of_unity(source_input_value(source, index));
     }
 }
 
-static void unload_input(struct carrier *carrier, int family) {
+static void unload_input(
+    struct carrier *carrier, const struct instruction_source *source
+) {
     for (size_t index = 0; index < carrier->registers; ++index) {
         carrier->working[index] *=
-            conj(root_of_unity(input_value(index, family)));
+            conj(root_of_unity(source_input_value(source, index)));
     }
 }
 
@@ -448,8 +892,7 @@ static int decode_relation(
 
 static struct execution execute(
     struct carrier *borrowed,
-    uint64_t steps,
-    int family,
+    const struct instruction_source *source,
     int inverse_mode
 ) {
     struct carrier working = clone_carrier(borrowed);
@@ -462,11 +905,11 @@ static struct execution execute(
         exit(2);
     }
 
-    load_input(&working, family);
+    load_input(&working, source);
     const uint64_t forward_start = monotonic_ns();
-    for (uint64_t index = 0; index < steps; ++index) {
+    for (uint64_t index = 0; index < source->steps; ++index) {
         const struct instruction instruction =
-            instruction_at(index, family, working.registers);
+            source_instruction_at(source, index);
         apply_forward(&working, &instruction);
     }
     const uint64_t forward_ns = monotonic_ns() - forward_start;
@@ -478,16 +921,16 @@ static struct execution execute(
 
     const uint64_t inverse_start = monotonic_ns();
     if (inverse_mode != 2) {
-        for (uint64_t index = steps; index-- > 0;) {
+        for (uint64_t index = source->steps; index-- > 0;) {
             const struct instruction instruction =
-                instruction_at(index, family, working.registers);
+                source_instruction_at(source, index);
             apply_inverse(
                 &working,
                 &instruction,
-                inverse_mode == 1
+                inverse_mode == 1 && index == source->steps - 1U
             );
         }
-        unload_input(&working, family);
+        unload_input(&working, source);
     }
     const uint64_t inverse_ns = monotonic_ns() - inverse_start;
 
@@ -515,15 +958,16 @@ static struct execution execute(
     free(latch);
     free_carrier(&working);
     return (struct execution){
-        .steps = steps,
-        .family = family,
+        .steps = source->steps,
+        .family = source->family,
         .registers = borrowed->registers,
         .boundary_symbols = symbols,
         .maximum_root_distance = maximum_root_distance,
         .displacement_l2 = displacement,
         .restoration_max_abs = restoration,
         .forward_ns = forward_ns,
-        .inverse_ns = inverse_ns
+        .inverse_ns = inverse_ns,
+        .public_program_fnv1a64 = source->public_program_fnv1a64
     };
 }
 
@@ -536,25 +980,47 @@ static void print_execution(
     const struct execution *execution,
     const char *mode
 ) {
+    uint64_t boundary_hash = UINT64_C(14695981039346656037);
+    size_t boundary_nonzero = 0;
+    for (size_t index = 0; index < execution->registers; ++index) {
+        const unsigned char symbol =
+            (unsigned char)execution->boundary_symbols[index];
+        boundary_hash = fnv1a_update(boundary_hash, &symbol, 1U);
+        if (symbol != 0U) {
+            ++boundary_nonzero;
+        }
+    }
     printf(
         "{\"mode\":\"%s\",\"steps\":%llu,\"family\":%d,"
         "\"registers\":%zu,\"resident_complex_cells\":%zu,"
-        "\"history_factor_count\":0,\"boundary_symbols\":[",
+        "\"history_factor_count\":0,"
+        "\"public_program_fnv1a64\":\"%016llx\","
+        "\"boundary_fnv1a64\":\"%016llx\","
+        "\"boundary_nonzero\":%zu,\"boundary_symbols\":",
         mode,
         (unsigned long long)execution->steps,
         execution->family,
         execution->registers,
-        2U * execution->registers
+        2U * execution->registers,
+        (unsigned long long)execution->public_program_fnv1a64,
+        (unsigned long long)boundary_hash,
+        boundary_nonzero
     );
-    for (size_t index = 0; index < execution->registers; ++index) {
-        printf(
-            "%s%d",
-            index == 0 ? "" : ",",
-            execution->boundary_symbols[index]
-        );
+    if (execution->registers <= 256U) {
+        putchar('[');
+        for (size_t index = 0; index < execution->registers; ++index) {
+            printf(
+                "%s%d",
+                index == 0 ? "" : ",",
+                execution->boundary_symbols[index]
+            );
+        }
+        putchar(']');
+    } else {
+        fputs("null", stdout);
     }
     printf(
-        "],\"root_distance_max\":%.12g,\"displacement_l2\":%.12g,"
+        ",\"root_distance_max\":%.12g,\"displacement_l2\":%.12g,"
         "\"restoration_max_abs\":%.12g,\"restoration_pass\":%s,"
         "\"forward_ns\":%llu,\"inverse_ns\":%llu}\n",
         execution->maximum_root_distance,
@@ -566,7 +1032,54 @@ static void print_execution(
     );
 }
 
+static int run_public_program(const char *path) {
+    struct public_program program = read_public_program(path);
+    if (
+        program.instruction_count > 0
+        && program.passes > UINT64_MAX / program.instruction_count
+    ) {
+        fprintf(stderr, "public program step count overflows uint64\n");
+        free_public_program(&program);
+        return 2;
+    }
+    const struct instruction_source source = {
+        .steps = program.instruction_count * program.passes,
+        .family = -1,
+        .registers = program.registers,
+        .input_symbols = program.input_symbols,
+        .instructions = program.instructions,
+        .instruction_period = program.instruction_count,
+        .public_program_fnv1a64 = program.fnv1a64
+    };
+    struct carrier carrier = make_carrier(program.registers, 89);
+    struct execution first = execute(&carrier, &source, 0);
+    print_execution(&first, "public-program");
+    struct execution second = execute(&carrier, &source, 0);
+    print_execution(&second, "actual-restored-program-reuse");
+    struct execution wrong = execute(&carrier, &source, 1);
+    print_execution(&wrong, "wrong-program-inverse");
+    struct execution omitted = execute(&carrier, &source, 2);
+    print_execution(&omitted, "omitted-inverse");
+
+    const int result = (
+        first.restoration_max_abs <= RESTORATION_MAX
+        && second.restoration_max_abs <= RESTORATION_MAX
+        && wrong.restoration_max_abs > RESTORATION_MAX
+        && omitted.restoration_max_abs > RESTORATION_MAX
+    ) ? 0 : 1;
+    free_execution(&first);
+    free_execution(&second);
+    free_execution(&wrong);
+    free_execution(&omitted);
+    free_carrier(&carrier);
+    free_public_program(&program);
+    return result;
+}
+
 int main(int argc, char **argv) {
+    if (argc == 3 && strcmp(argv[1], "--program") == 0) {
+        return run_public_program(argv[2]);
+    }
     uint64_t steps = UINT64_C(100000);
     size_t registers = 12;
     if (argc > 1) {
@@ -587,15 +1100,42 @@ int main(int argc, char **argv) {
     }
 
     struct carrier carrier = make_carrier(registers, 71);
-    struct execution first = execute(&carrier, steps, 0, 0);
+    const struct instruction_source first_source = {
+        .steps = steps,
+        .family = 0,
+        .registers = registers,
+        .input_symbols = NULL,
+        .instructions = NULL,
+        .instruction_period = 0,
+        .public_program_fnv1a64 = 0
+    };
+    const struct instruction_source second_source = {
+        .steps = steps + 17U,
+        .family = 1,
+        .registers = registers,
+        .input_symbols = NULL,
+        .instructions = NULL,
+        .instruction_period = 0,
+        .public_program_fnv1a64 = 0
+    };
+    struct execution first = execute(&carrier, &first_source, 0);
     print_execution(&first, "nominal-family-0");
-    struct execution second = execute(&carrier, steps + 17U, 1, 0);
+    struct execution second = execute(&carrier, &second_source, 0);
     print_execution(&second, "actual-restored-reuse-family-1");
 
     const uint64_t control_steps = steps < 4096U ? steps : 4096U;
-    struct execution wrong = execute(&carrier, control_steps, 0, 1);
+    const struct instruction_source control_source = {
+        .steps = control_steps,
+        .family = 0,
+        .registers = registers,
+        .input_symbols = NULL,
+        .instructions = NULL,
+        .instruction_period = 0,
+        .public_program_fnv1a64 = 0
+    };
+    struct execution wrong = execute(&carrier, &control_source, 1);
     print_execution(&wrong, "wrong-program-inverse");
-    struct execution omitted = execute(&carrier, control_steps, 0, 2);
+    struct execution omitted = execute(&carrier, &control_source, 2);
     print_execution(&omitted, "omitted-inverse");
 
     free_execution(&first);

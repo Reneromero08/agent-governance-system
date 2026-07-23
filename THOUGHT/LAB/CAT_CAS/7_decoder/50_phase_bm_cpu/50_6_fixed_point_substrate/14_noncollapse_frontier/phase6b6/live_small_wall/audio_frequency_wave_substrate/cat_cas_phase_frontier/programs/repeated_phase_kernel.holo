@@ -1,0 +1,23 @@
+CATCAS_PHASE_PROGRAM 1
+REGISTERS 24
+
+SET 0 1
+SET 1 2
+SET 4 1
+SET 7 2
+SET 11 1
+SET 17 2
+SET 23 1
+
+# Eight million native gates from eight stored public instructions.
+PASSES 1000000
+
+ROT 2 1
+ADD 0 2
+MULADD 0 1 2
+SWAP 0 1
+ROT 1 2
+ADD 2 1
+MULADD 1 2 0
+SWAP 2 0
+END

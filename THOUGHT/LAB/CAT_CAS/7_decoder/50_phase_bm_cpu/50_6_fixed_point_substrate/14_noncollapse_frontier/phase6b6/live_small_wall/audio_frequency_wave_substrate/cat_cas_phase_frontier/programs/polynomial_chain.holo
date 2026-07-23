@@ -1,0 +1,20 @@
+CATCAS_PHASE_PROGRAM 1
+REGISTERS 8
+
+SET 0 1
+SET 1 2
+SET 2 2
+SET 3 1
+
+# Two independent products accumulate into register 4.
+MULADD 0 1 4
+MULADD 2 3 4
+
+# Route the result and form a second polynomial response.
+ADD 4 5
+ROT 5 1
+SWAP 5 6
+ADD 1 7
+MULADD 0 2 7
+ROT 3 2
+END
