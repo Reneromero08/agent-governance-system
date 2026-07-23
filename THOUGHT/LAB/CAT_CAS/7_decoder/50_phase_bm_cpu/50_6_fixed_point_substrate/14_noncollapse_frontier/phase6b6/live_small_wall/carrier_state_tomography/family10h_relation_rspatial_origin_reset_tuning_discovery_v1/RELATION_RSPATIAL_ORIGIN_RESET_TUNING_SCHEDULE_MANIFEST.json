@@ -1,0 +1,149 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Can stronger reset recipes kill the source-dead R-spatial primary-minus-sham coordinate at the previously leaking cyclic origins 0 and 1024?",
+  "origin_filter": [
+    "0",
+    "1024"
+  ],
+  "pair_sample_count": 256,
+  "rows_per_variant": 1024,
+  "run_id": "family10h_relation_rspatial_origin_reset_tuning_discovery_v1_0",
+  "schedule_manifest_sha256": "07327d6d5c05d2c1f01cae38e90ee98060c2002915548339532f01cfe3d0143b",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_ORIGIN_RESET_TUNING_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "alive_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/alive_primary.tsv",
+      "query": "query_relation_pair",
+      "row_count": 1024,
+      "sha256": "9981f6e2c1d6f675585953061312cdf5edb9275ed2cfab9f29877183586db2cb",
+      "size_bytes": 1119995
+    },
+    "alive_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/alive_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 1024,
+      "sha256": "77a534e7f3dc474fbba79acc9ba28e9c4f483e69bff4c2de4a05702455452bc4",
+      "size_bytes": 1098491
+    },
+    "dead_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/dead_primary.tsv",
+      "query": "dead_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "c96c66745ebbeece929e9619753b43b7fa262577e7f2f2c6f4c9ae22f7f4a204",
+      "size_bytes": 1169147
+    },
+    "dead_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/dead_sham.tsv",
+      "query": "dead_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "8970b6da58632689cddcdb91871822e7827b815c4c589973aa0f54d86c03df35",
+      "size_bytes": 1132283
+    },
+    "reset_double_flush_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_double_flush_primary.tsv",
+      "query": "reset_double_flush_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "318efe5a60ab3c3bb4c9a0da2301b44d3b18a70cadcfd4b6be431ed8a13b2772",
+      "size_bytes": 1298171
+    },
+    "reset_double_flush_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_double_flush_sham.tsv",
+      "query": "reset_double_flush_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "41b52835ca032d27c43b6470ffc578570bbd1d2ff908f9d536262ff7ce7ba1e5",
+      "size_bytes": 1261307
+    },
+    "reset_flush_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_flush_primary.tsv",
+      "query": "reset_flush_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "5e8afec3c07e942260de14957fd5c35eefb08344c1548e8366fafd6d81a7eb54",
+      "size_bytes": 1233659
+    },
+    "reset_flush_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_flush_sham.tsv",
+      "query": "reset_flush_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "0764dbcb1f1d378e81e0f50640cbd4c42703530f381bcd7eda4dd597e7e7361b",
+      "size_bytes": 1196795
+    },
+    "reset_lane_a_flush_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_lane_a_flush_primary.tsv",
+      "query": "reset_lane_a_flush_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "ee85742b4513a5a7c475ae74604166e3f77c0004b786aa54312460e0ae71116f",
+      "size_bytes": 1298171
+    },
+    "reset_lane_a_flush_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_lane_a_flush_sham.tsv",
+      "query": "reset_lane_a_flush_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "7e92f31e2716c9a5ed7850627af5e3b4539be35d5277b4e9eb104f6b92fc5eeb",
+      "size_bytes": 1261307
+    },
+    "reset_prefault_double_flush_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_prefault_double_flush_primary.tsv",
+      "query": "reset_prefault_double_flush_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "be826ff862923620c5496a50dd4cc2d8ceea5c39014fc663b13aadb78caf542d",
+      "size_bytes": 1381115
+    },
+    "reset_prefault_double_flush_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_prefault_double_flush_sham.tsv",
+      "query": "reset_prefault_double_flush_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "375e28947aa864465de024e04310204935dec0db77cb615b4115b5ec455e5052",
+      "size_bytes": 1344251
+    },
+    "reset_prefault_flush_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_prefault_flush_primary.tsv",
+      "query": "reset_prefault_flush_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "32b0070a8f7b13c4612b0aaed960a587809196967d13966649886a372cbcc686",
+      "size_bytes": 1316603
+    },
+    "reset_prefault_flush_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_prefault_flush_sham.tsv",
+      "query": "reset_prefault_flush_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "b428c49cc92bc7d9a059b0459e0a8786c48b8f0a69b4284bd03dffe64278caf3",
+      "size_bytes": 1279739
+    },
+    "reset_prefault_triple_flush_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_prefault_triple_flush_primary.tsv",
+      "query": "reset_prefault_triple_flush_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "acb1103c88d0f3b63eaf88fe5914f6ac08688cbac674814e561f3c6f46a603f8",
+      "size_bytes": 1381115
+    },
+    "reset_prefault_triple_flush_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "RSPATIAL_ORIGIN_RESET_TUNING_SCHEDULES/reset_prefault_triple_flush_sham.tsv",
+      "query": "reset_prefault_triple_flush_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "8369c1f6abf1789c59dd349b66f786fc34697dabbaf56c1694c70d3746b444eb",
+      "size_bytes": 1344251
+    }
+  }
+}

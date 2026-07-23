@@ -1,10 +1,10 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T15:50:00-07:00",
+  "updated_at": "2026-07-23T15:59:00-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
-  "checkpoint_head": "cdab85a0459998e02de7204f096dc940f0a1ec81",
-  "origin_head": "cdab85a0459998e02de7204f096dc940f0a1ec81",
+  "checkpoint_head": "350664eb224b12dc8f167ad32629a0e2c5ff5d50",
+  "origin_head": "350664eb224b12dc8f167ad32629a0e2c5ff5d50",
   "autonomous_mode": {
     "active": true,
     "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
@@ -54,17 +54,17 @@
     ]
   },
   "current_package": {
-    "package_id": "family10h_relation_rspatial_reset_method_sweep_discovery_v1",
-    "transaction_run_id": "family10h_relation_rspatial_reset_method_sweep_discovery_v1_0",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_rspatial_reset_method_sweep_discovery_v1",
+    "package_id": "family10h_relation_rspatial_origin_reset_tuning_discovery_v1",
+    "transaction_run_id": "family10h_relation_rspatial_origin_reset_tuning_discovery_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_rspatial_origin_reset_tuning_discovery_v1",
     "package_decision": "EXPLORATORY_DISCOVERY_COMPLETE_NO_SCIENTIFIC_CLAIM",
     "package_manifest_sha256": null,
-    "schedule_manifest_sha256": "dbe90850c9658baa934a1e4b6a08fcd1118a21c1d2620df7121a0a7f9f592030",
+    "schedule_manifest_sha256": "07327d6d5c05d2c1f01cae38e90ee98060c2002915548339532f01cfe3d0143b",
     "threshold_contract_sha256": null,
     "source_schedule_package": "family10h_relation_spatial_pair_readout_v1_1_segmented",
-    "source_authority_commit": "cdab85a0459998e02de7204f096dc940f0a1ec81",
+    "source_authority_commit": "350664eb224b12dc8f167ad32629a0e2c5ff5d50",
     "source_freeze_commit": null,
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_rspatial_reset_method_sweep_discovery_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_rspatial_origin_reset_tuning_discovery_v1_0/attempt_1",
     "attempt_output_path_fresh": true
   },
   "current_observable": {
@@ -124,7 +124,8 @@
     "relation_receiver_offset_sweep_discovery_attempts": 1,
     "relation_offset8_residue_discovery_attempts": 1,
     "relation_rspatial_lifetime_reset_discovery_attempts": 1,
-    "relation_rspatial_reset_method_sweep_discovery_attempts": 1
+    "relation_rspatial_reset_method_sweep_discovery_attempts": 1,
+    "relation_rspatial_origin_reset_tuning_discovery_attempts": 1
   },
   "latest_retained_evidence": {
     "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
@@ -406,13 +407,49 @@
       ],
       "small_wall_crossed": false
     },
+    "relation_rspatial_origin_reset_tuning_result": "EXPLORATORY_ONLY_ORIGIN_0_1024_SLICE_COLLAPSED_ALIVE_D_AND_IS_NOT_A_FREEZEABLE_COORDINATE",
+    "relation_rspatial_origin_reset_tuning_archive_sha256": "eb06cf068cf930d07d86771b02b93623bfdfea73bfeb7343b088b76a6a82d058",
+    "relation_rspatial_origin_reset_tuning_archive_size": 90956243,
+    "relation_rspatial_origin_reset_tuning_analysis_sha256": "17f086450b216cd5ba0a3f417f8c3a06c62ee7d6cac1da49369bc0c5c9a2d948",
+    "relation_rspatial_origin_reset_tuning_raw_record_count": 16384,
+    "relation_rspatial_origin_reset_tuning_pair_observation_count": 4194304,
+    "relation_rspatial_origin_reset_tuning_source_death_receipt_count": 16384,
+    "relation_rspatial_origin_reset_tuning_coordinates": {
+      "origin_filter": [
+        "0",
+        "1024"
+      ],
+      "R_alive_primary": 0.0007039248295998585,
+      "R_alive_sham": -0.0013093596805370446,
+      "D_alive_primary_minus_sham": 0.002013284510136903,
+      "R_dead_primary": 0.0018477869771485742,
+      "R_dead_sham": 0.007394256455537641,
+      "D_dead_primary_minus_sham": -0.005546469478389066,
+      "dead_D_abs_to_alive_D_abs": 2.75493575322442,
+      "best_reset_method": "reset_double_flush",
+      "best_reset_D_primary_minus_sham": -0.002310430992148762,
+      "best_reset_D_abs_to_alive_D_abs": 1.1475928913751257,
+      "best_reset_max_stratum_abs_to_alive_matched_abs": 0.8166384648077244
+    },
+    "relation_rspatial_origin_reset_tuning_interpretation": {
+      "alive_D_positive": true,
+      "alive_D_collapsed_relative_to_prior_full_mixed_slice": true,
+      "alive_D_split_by_origin_source_order_mapping": true,
+      "dead_D_positive": false,
+      "dead_all_one_factor_strata_D_positive": false,
+      "best_reset_kills_aggregate_below_25pct_alive_D": false,
+      "best_reset_kills_all_one_factor_strata_below_25pct_alive_D": false,
+      "do_not_freeze_origin_0_1024_law": true,
+      "next_step": "verify full-schedule alive/dead/reset robustness before any reset or R2 prospective law",
+      "small_wall_crossed": false
+    },
     "prior_scalar_q_readout_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
     "prior_scalar_q_readout_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
     "prior_second_operator_dimension_class": "FAMILY10H_SECOND_OPERATOR_DIMENSION_UNRESOLVED_RETROSPECTIVE"
   },
   "hypothesis_frontier": {
     "active_wall": "carrier/access-model selection below full Small Wall crossing",
-    "leading_mechanism": "source-written R-spatial relation residue that survives source death and is partially resettable, with reset leakage concentrated by cyclic origin",
+    "leading_mechanism": "source-written R-spatial relation residue that survives source death in mixed schedules, with reset effects that are not yet stable enough for restoration law",
     "strongest_candidate_coordinate": "D_lifetime = R_spatial(primary) - R_spatial(sham), compared across alive, dead-before-query, and reset-method lifecycles",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
@@ -434,9 +471,10 @@
       "offset-1 source-dependent residue after same-geometry source-off subtraction",
       "offset-8 source-dependent residue after same-geometry source-off subtraction",
       "static receiver geometry as the dominant explanation for the source-dead R-spatial lifetime/reset coordinate",
-      "generic all-origin reset restoration using single full clflush, double clflush, prefault+flush, or lane-A-only flush"
+      "generic all-origin reset restoration using single full clflush, double clflush, prefault+flush, or lane-A-only flush",
+      "origin-0/1024-only reset law after the alive coordinate collapsed and split by source order, mapping, and origin"
     ],
-    "current_next_experiment": "target the reset leak directly: run an origin-scoped or origin-balanced reset/reuse discovery that compares reset_double_flush and reset_prefault_flush at cyclic_origin 0 and 1024 before freezing any R2/restoration law",
+    "current_next_experiment": "verify whether source-dead D survives a full round0 2048-row schedule with all origins before any reset/reuse or R2 law is frozen",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
@@ -449,7 +487,8 @@
       "the lifetime/reset discovery remains exploratory and does not establish R2 restoration, relation mutation generalization, no-smuggle restoration reuse, or Small Wall crossing",
       "reset D remained positive at 16.5% of alive D, so the next law must test reset equivalence and reuse prospectively rather than treating this single reset as restoration",
       "reset-method sweep found no all-strata reset kill: best worst-stratum reset was double flush with max matched-stratum ratio 0.468; prefault+flush had aggregate ratio 0.017 but max stratum ratio 0.577",
-      "reset leakage is dominated by cyclic origins 1024 and 0, so an all-origin R2 package would likely fail if frozen now"
+      "reset leakage is dominated by cyclic origins 1024 and 0, so an all-origin R2 package would likely fail if frozen now",
+      "the origin-0/1024-only tuning run collapsed alive D to 0.002013 and reversed dead D, so slice-local origin tuning is not a stable crossing route"
     ]
   },
   "claim_state": {
