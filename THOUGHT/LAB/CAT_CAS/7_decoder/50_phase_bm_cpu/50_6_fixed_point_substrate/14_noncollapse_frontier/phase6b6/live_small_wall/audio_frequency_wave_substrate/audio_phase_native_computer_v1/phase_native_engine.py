@@ -20,7 +20,7 @@ REUSE_RESPONSE_MAX = 2.0e-12
 WRONG_RESTORATION_MIN = 1.0e-3
 DISPLACEMENT_MIN = 1.0
 ROOT_DISTANCE_MAX = 2.0e-10
-ROOT_MARGIN_MIN = 0.5
+ROOT_MARGIN_FRACTION_MIN = 0.75
 MAX_REGISTERS = 16
 MAX_INSTRUCTIONS = 256
 MAX_RADIX = 17
@@ -55,6 +55,11 @@ def unit_roots(radix: int) -> np.ndarray:
     if not 2 <= int(radix) <= MAX_RADIX:
         raise ValueError("radix outside supported phase alphabet")
     return np.exp(2j * math.pi * np.arange(radix, dtype=np.float64) / radix)
+
+
+def ideal_root_margin(radix: int) -> float:
+    unit_roots(radix)
+    return float(1.0 - math.cos(2.0 * math.pi / radix))
 
 
 @dataclass(frozen=True)
@@ -515,7 +520,8 @@ def extract_boundary(execution: NativeExecution) -> BoundaryResult:
         margins.append(float(ranked[-1] - ranked[-2]))
     valid = bool(
         max(distances, default=math.inf) <= ROOT_DISTANCE_MAX
-        and min(margins, default=-math.inf) >= ROOT_MARGIN_MIN
+        and min(margins, default=-math.inf)
+        >= ROOT_MARGIN_FRACTION_MIN * ideal_root_margin(execution.program.radix)
     )
     output = tuple(symbols) if valid else None
     return BoundaryResult(
@@ -633,6 +639,13 @@ def engine_contract() -> dict[str, Any]:
             "sample_count": SAMPLE_COUNT,
         },
         "instruction_set": sorted(PRIMITIVE_OPS),
+        "root_acceptance": {
+            "distance_maximum": ROOT_DISTANCE_MAX,
+            "ideal_neighbor_margin_fraction_minimum": ROOT_MARGIN_FRACTION_MIN,
+            "margin_law": (
+                "fraction * (1 - cos(2*pi/radix)); derived before output decoding"
+            ),
+        },
         "native_state": (
             "relative S1 phase between reference and signal spectral components"
         ),
