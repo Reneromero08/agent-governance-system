@@ -1,6 +1,6 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T14:45:34.1759483-07:00",
+  "updated_at": "2026-07-23T14:50:16.8957830-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
   "checkpoint_head": "218cdb4f8f2e3d8e43211d7bcb88282b947f4493",
@@ -118,7 +118,8 @@
     "patched_full_local_paired_discovery_sweeps": 1,
     "relation_transform_kill_discovery_attempts": 1,
     "relation_orientation_balance_discovery_attempts": 1,
-    "relation_origin_scope_discovery_attempts": 1
+    "relation_origin_scope_discovery_attempts": 1,
+    "relation_prep_mutation_discovery_attempts": 1
   },
   "latest_retained_evidence": {
     "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
@@ -223,6 +224,32 @@
       "all_origins_relation_sham_below_25pct_primary": false,
       "small_wall_crossed": false
     },
+    "relation_prep_mutation_discovery_result": "EXPLORATORY_ONLY_PREP_INVERSION_DID_NOT_REVERSE_PRIMARY_AND_CARRIER_OFF_REMAINED_LARGE",
+    "relation_prep_mutation_archive_sha256": "6a69effcf487636fb09028cdbf612c2dc991d04191a8534b2a518bc7ad47b6d6",
+    "relation_prep_mutation_archive_size": 11624491,
+    "relation_prep_mutation_analysis_sha256": "2f754ab652cfd8b2b728c5cb169e11406d6328f5143627ea1fa2bf99b8dd5235",
+    "relation_prep_mutation_raw_record_count": 2048,
+    "relation_prep_mutation_pair_observation_count": 524288,
+    "relation_prep_mutation_source_death_receipt_count": 2048,
+    "relation_prep_mutation_coordinates": {
+      "R_primary": 0.06969033390154358,
+      "R_prep_inversion": 0.09444868362561852,
+      "R_carrier_off": 0.07291575678716601,
+      "R_relation_sham": 0.01997110086039827,
+      "D_primary_minus_sham": 0.04971923304114531,
+      "prep_mutation_primary_minus_prep_inversion": -0.024758349724074938,
+      "prep_mutation_half_difference": -0.012379174862037469,
+      "prep_inversion_abs_to_primary_abs": 1.3552623202961374,
+      "carrier_off_abs_to_primary_abs": 1.046282213114077,
+      "sham_abs_to_primary_abs": 0.28656916594219284
+    },
+    "relation_prep_mutation_interpretation": {
+      "prep_inversion_reverses_primary": false,
+      "prep_mutation_nonzero_above_25pct_primary": true,
+      "carrier_off_kills_primary_to_below_25pct": false,
+      "relation_sham_below_25pct_primary": false,
+      "small_wall_crossed": false
+    },
     "prior_scalar_q_readout_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
     "prior_scalar_q_readout_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
     "prior_second_operator_dimension_class": "FAMILY10H_SECOND_OPERATOR_DIMENSION_UNRESOLVED_RETROSPECTIVE"
@@ -238,14 +265,16 @@
       "single two-replicate run as Small Wall promotion",
       "full tomography without scalar-replay exclusion",
       "R2 restoration by byte/hash restoration alone",
-      "origin-balanced relation-minus-carrier-off orientation residual"
+      "origin-balanced relation-minus-carrier-off orientation residual",
+      "prep-inversion sign law under fixed receiver query geometry"
     ],
-    "current_next_experiment": "return to the stronger local paired differential family and search for a manipulation that destroys relation preparation while preserving receiver query geometry; origin-balanced orientation residual is too small and sign-unstable",
+    "current_next_experiment": "switch from sign-transform laws to differential amplification/isolation: the cleanest surviving primitive is still local primary-minus-sham, while prep inversion and origin-balanced orientation do not supply the required relation mutation law",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
       "net relation-minus-carrier-off orientation is positive but small at 18.7% of raw relation orientation",
-      "origin-balanced relation-minus-carrier-off orientation collapsed to mean 0.001335 and split sign by origin"
+      "origin-balanced relation-minus-carrier-off orientation collapsed to mean 0.001335 and split sign by origin",
+      "prep inversion with fixed receiver query did not reverse primary and carrier-off remained 104.6% of primary"
     ]
   },
   "claim_state": {
