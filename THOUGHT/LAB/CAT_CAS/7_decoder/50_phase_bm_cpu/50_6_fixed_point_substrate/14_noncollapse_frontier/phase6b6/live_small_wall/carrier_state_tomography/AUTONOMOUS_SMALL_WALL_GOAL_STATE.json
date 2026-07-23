@@ -1,10 +1,10 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T11:41:58.5340426-07:00",
+  "updated_at": "2026-07-23T13:23:09.1706381-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
-  "checkpoint_head": "29fd8297510bc236419749f3b3f535e31cf7feb6",
-  "origin_head": "29fd8297510bc236419749f3b3f535e31cf7feb6",
+  "checkpoint_head": "06f9fe4dc305cc83ebe86fc5a22e77aa0507bc64",
+  "origin_head": "06f9fe4dc305cc83ebe86fc5a22e77aa0507bc64",
   "autonomous_mode": {
     "active": true,
     "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
@@ -110,16 +110,26 @@
     "relation_spatial_pmu_preflight.c": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948"
   },
   "attempt_counts": {
-    "new_local_paired_differential_official_attempts": 0,
-    "new_local_paired_differential_attempt_1_path_exists": false,
+    "new_local_paired_differential_official_attempts": 1,
+    "new_local_paired_differential_attempt_1_path_exists": true,
     "prior_primary_minus_sham_official_attempts": 1,
-    "prior_relation_sham_position_exploration_attempts": 1
+    "prior_relation_sham_position_exploration_attempts": 1,
+    "affinity_deadlock_discovery_attempts": 4,
+    "patched_full_local_paired_discovery_sweeps": 1
   },
   "latest_retained_evidence": {
     "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
     "prior_official_archive_sha256": "a2ceb2a11f7fbd002694f287c11a3e4446776fd5cb04c6b4ef03dc5d250780ff",
     "prior_official_archive_size": 110462171,
     "prior_official_copy_back_passed": true,
+    "local_paired_attempt_1_result_class": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_CUSTODY_INVALID",
+    "local_paired_attempt_1_archive_sha256": "61cd5c7994ca28e9e954bcf50559b9a7b6122bee6e34e2bd3b6600be90412519",
+    "local_paired_attempt_1_adjudication_sha256": "f8bd832ed585cf4d5a47cd725592f93d5d9981d4564ca0c2bca3bbb8293bb2e1",
+    "local_paired_attempt_1_failure_root_cause": "runtime_affinity_scheduler_deadlock",
+    "affinity_fix_local_paired_discovery_archive_sha256": "703818e1db1733b5e2b89717c5e92b09eae00b187db730de598b4a45543de762",
+    "affinity_fix_local_paired_discovery_compact_sha256": "0f2cbd116d21c97bbfdbed25f44152f56fc9a012de541538c3c51c7a65d44aea",
+    "affinity_fix_discovery_rounds_pass": true,
+    "affinity_fix_discovery_one_factor_strata_pass": true,
     "prior_scalar_q_readout_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
     "prior_scalar_q_readout_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
     "prior_second_operator_dimension_class": "FAMILY10H_SECOND_OPERATOR_DIMENSION_UNRESOLVED_RETROSPECTIVE"
@@ -136,7 +146,7 @@
       "full tomography without scalar-replay exclusion",
       "R2 restoration by byte/hash restoration alone"
     ],
-    "current_next_experiment": "execute one official physical local paired differential attempt using the ten frozen local schedules and frozen adjudicator",
+    "current_next_experiment": "regenerate and freeze the segmented runtime/package from the affinity repair commit, then continue the local paired differential confirmation path without restoring the absolute sham-sign gate",
     "current_blockers": []
   },
   "claim_state": {
