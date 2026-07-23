@@ -1,0 +1,49 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Does changing only source preparation relation move the local coordinate while preserving receiver query geometry?",
+  "pair_sample_count": 256,
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_prep_mutation_discovery_v1_0",
+  "schedule_manifest_sha256": "f0e3e103b60d0b261cac3218229accf13c1e5ecfe2af36c90656171210e39d8e",
+  "schema": "FAMILY10H_RELATION_PREP_MUTATION_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "carrier_off_control": {
+      "expected_pair_observation_count": 131072,
+      "path": "PREP_MUTATION_SCHEDULES/carrier_off_control.tsv",
+      "query": "carrier_off_control",
+      "row_count": 512,
+      "sha256": "5e775b64c814039ac962dcdee88f213c666cf699174c4909c1afc5340e5ce510",
+      "size_bytes": 579231
+    },
+    "prep_inversion_control": {
+      "expected_pair_observation_count": 131072,
+      "path": "PREP_MUTATION_SCHEDULES/prep_inversion_control.tsv",
+      "query": "prep_inversion_control",
+      "row_count": 512,
+      "sha256": "54a0745dae55592571b7a9216f294ee71a58b2650d97d1eca7949865ce9c02e0",
+      "size_bytes": 593055
+    },
+    "primary_relation_pair": {
+      "expected_pair_observation_count": 131072,
+      "path": "PREP_MUTATION_SCHEDULES/primary_relation_pair.tsv",
+      "query": "query_relation_pair",
+      "row_count": 512,
+      "sha256": "ee741ef111929ce46e7fde76bad2de0106eb93232982b6e4729c1683df542091",
+      "size_bytes": 577695
+    },
+    "relation_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "PREP_MUTATION_SCHEDULES/relation_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 512,
+      "sha256": "b28b918cb03aa4fb1d22c020949ae7c2a340d6dbbfd1eb68f792cf78fecdaf07",
+      "size_bytes": 551583
+    }
+  }
+}

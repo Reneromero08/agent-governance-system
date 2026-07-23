@@ -1,0 +1,129 @@
+{
+  "analysis_sha256": "2f754ab652cfd8b2b728c5cb169e11406d6328f5143627ea1fa2bf99b8dd5235",
+  "archive_sha256": "6a69effcf487636fb09028cdbf612c2dc991d04191a8534b2a518bc7ad47b6d6",
+  "archive_size": 11624491,
+  "claim_boundary": {
+    "full_tomography_established": false,
+    "positive_scientific_claim": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "controller_passed": true,
+  "coordinates": {
+    "D_primary_minus_sham": 0.04971923304114531,
+    "R_carrier_off": 0.07291575678716601,
+    "R_prep_inversion": 0.09444868362561852,
+    "R_primary": 0.06969033390154358,
+    "R_relation_sham": 0.01997110086039827,
+    "carrier_off_abs_to_primary_abs": 1.046282213114077,
+    "prep_inversion_abs_to_primary_abs": 1.3552623202961374,
+    "prep_mutation_half_difference": -0.012379174862037469,
+    "prep_mutation_primary_minus_prep_inversion": -0.024758349724074938,
+    "sham_abs_to_primary_abs": 0.28656916594219284
+  },
+  "created_at": "2026-07-23T21:49:33.435527+00:00",
+  "interpretation": {
+    "carrier_off_kills_primary_to_below_25pct": false,
+    "exploratory_only": true,
+    "prep_inversion_reverses_primary": false,
+    "prep_mutation_nonzero_above_25pct_primary": true,
+    "relation_sham_below_25pct_primary": false,
+    "small_wall_crossed": false
+  },
+  "run_id": "family10h_relation_prep_mutation_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_PREP_MUTATION_DISCOVERY_ANALYSIS_V1",
+  "variant_reports": {
+    "carrier_off_control": {
+      "R_spatial": {
+        "abs_mean": 0.10071856890993454,
+        "abs_of_mean": 0.07291575678716601,
+        "count": 128,
+        "max_abs": 0.3756518342873772,
+        "mean": 0.07291575678716601,
+        "q50_abs": 0.049240089660765624,
+        "q95_abs": 0.3359584329542413,
+        "q99_abs": 0.37067638103639206,
+        "sign_counts": {
+          "-1": 49,
+          "0": 0,
+          "1": 79
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "carrier_off_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "prep_inversion_control": {
+      "R_spatial": {
+        "abs_mean": 0.12450135288567,
+        "abs_of_mean": 0.09444868362561852,
+        "count": 128,
+        "max_abs": 0.4383067847341263,
+        "mean": 0.09444868362561852,
+        "q50_abs": 0.05675695246678762,
+        "q95_abs": 0.4166323767114775,
+        "q99_abs": 0.4358808719584988,
+        "sign_counts": {
+          "-1": 42,
+          "0": 0,
+          "1": 86
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "prep_inversion_control",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "primary_relation_pair": {
+      "R_spatial": {
+        "abs_mean": 0.10124942624078503,
+        "abs_of_mean": 0.06969033390154358,
+        "count": 128,
+        "max_abs": 0.4367791346518254,
+        "mean": 0.06969033390154358,
+        "q50_abs": 0.049949291438171645,
+        "q95_abs": 0.3323432929951768,
+        "q99_abs": 0.36223084907391134,
+        "sign_counts": {
+          "-1": 45,
+          "0": 0,
+          "1": 83
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "query_relation_pair",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    },
+    "relation_sham": {
+      "R_spatial": {
+        "abs_mean": 0.09557172416456575,
+        "abs_of_mean": 0.01997110086039827,
+        "count": 128,
+        "max_abs": 0.34987230262132607,
+        "mean": 0.01997110086039827,
+        "q50_abs": 0.08011828193836426,
+        "q95_abs": 0.2301982367185415,
+        "q99_abs": 0.28161939031860206,
+        "sign_counts": {
+          "-1": 64,
+          "0": 0,
+          "1": 64
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "query": "relation_sham",
+      "raw_record_count": 512,
+      "source_alive_valid": true,
+      "source_death_receipt_count": 512
+    }
+  }
+}
