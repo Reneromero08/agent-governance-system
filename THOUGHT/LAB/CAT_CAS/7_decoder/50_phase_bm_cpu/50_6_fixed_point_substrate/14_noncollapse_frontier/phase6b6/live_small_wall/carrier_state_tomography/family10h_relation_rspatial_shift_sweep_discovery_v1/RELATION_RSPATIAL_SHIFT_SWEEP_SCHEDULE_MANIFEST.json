@@ -1,0 +1,171 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Whether varying the relation-spatial A-to-B shift exposes an oriented phase/selectivity coordinate after local primary-minus-sham subtraction.",
+  "pair_sample_count": 256,
+  "relation_shift_values": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_rspatial_shift_sweep_discovery_v1_0",
+  "schedule_manifest_sha256": "dcc05c59de673eb1ea12bf577320b1533cb60909800532a79860241467be3f6e",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_SHIFT_SWEEP_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "shift_0001_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0001_primary.tsv",
+      "query": "query_relation_pair",
+      "relation_shift_lines": 1,
+      "row_count": 512,
+      "sha256": "916930ffa68576f60edba9a273bc6fd38b79b7db93d1e2d1eac6918ded49d57d",
+      "size_bytes": 570527
+    },
+    "shift_0001_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0001_sham.tsv",
+      "query": "relation_sham",
+      "relation_shift_lines": 1,
+      "row_count": 512,
+      "sha256": "e960c75ed40c1fb486ddff0941490cf86ca99a716be01b8942a356a86bfedd75",
+      "size_bytes": 559775
+    },
+    "shift_0002_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0002_primary.tsv",
+      "query": "query_relation_pair",
+      "relation_shift_lines": 2,
+      "row_count": 512,
+      "sha256": "4b4e1a5a5d7fe8439ee7eebed8b58e80d8ee4037402af728cfa7503e6280a239",
+      "size_bytes": 570527
+    },
+    "shift_0002_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0002_sham.tsv",
+      "query": "relation_sham",
+      "relation_shift_lines": 2,
+      "row_count": 512,
+      "sha256": "1f2556a9ff243f3037048ebf6525197fb7149e38fb9315005c38a04bbba8e96f",
+      "size_bytes": 559775
+    },
+    "shift_0004_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0004_primary.tsv",
+      "query": "query_relation_pair",
+      "relation_shift_lines": 4,
+      "row_count": 512,
+      "sha256": "8d4559684a6f6b55e429acb52ba61b36f40c34403ee5db59419b2eb4c524edc6",
+      "size_bytes": 570527
+    },
+    "shift_0004_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0004_sham.tsv",
+      "query": "relation_sham",
+      "relation_shift_lines": 4,
+      "row_count": 512,
+      "sha256": "e253319625c72f93c90cc9070c34445f736177004eaec6600b6b35aa1daaa528",
+      "size_bytes": 559775
+    },
+    "shift_0008_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0008_primary.tsv",
+      "query": "query_relation_pair",
+      "relation_shift_lines": 8,
+      "row_count": 512,
+      "sha256": "7d7d4c8ae4ea035e33d0d9d57806eacf3f84b07394c4cb2dffeb4626ca59ab74",
+      "size_bytes": 570527
+    },
+    "shift_0008_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0008_sham.tsv",
+      "query": "relation_sham",
+      "relation_shift_lines": 8,
+      "row_count": 512,
+      "sha256": "722ac5e7cc8dafaef98b7735711a6920bb06596d43aafda4a54e7555c329f7e8",
+      "size_bytes": 559775
+    },
+    "shift_0016_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0016_primary.tsv",
+      "query": "query_relation_pair",
+      "relation_shift_lines": 16,
+      "row_count": 512,
+      "sha256": "dd864fca1223141257301c32b25bd9b603415aa4628233657f7ef18a090e9d37",
+      "size_bytes": 571039
+    },
+    "shift_0016_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0016_sham.tsv",
+      "query": "relation_sham",
+      "relation_shift_lines": 16,
+      "row_count": 512,
+      "sha256": "c9676c681b189df3c89c454bd74858ea37df74729181a13efe06b18234322ffa",
+      "size_bytes": 560287
+    },
+    "shift_0032_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0032_primary.tsv",
+      "query": "query_relation_pair",
+      "relation_shift_lines": 32,
+      "row_count": 512,
+      "sha256": "8ef04a8a376653974e38ffd0f20856e60db082a7ac7e971be33aa5e422ba64a3",
+      "size_bytes": 571039
+    },
+    "shift_0032_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0032_sham.tsv",
+      "query": "relation_sham",
+      "relation_shift_lines": 32,
+      "row_count": 512,
+      "sha256": "4ece6147396fd637d8511cb96cfa4cb9ab693147597e866a419b9b5d23b42486",
+      "size_bytes": 560287
+    },
+    "shift_0064_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0064_primary.tsv",
+      "query": "query_relation_pair",
+      "relation_shift_lines": 64,
+      "row_count": 512,
+      "sha256": "43c061473c24de6be6c0d07bf0973dc9b478f45ffe2915c0609dddd52a7bc795",
+      "size_bytes": 571039
+    },
+    "shift_0064_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0064_sham.tsv",
+      "query": "relation_sham",
+      "relation_shift_lines": 64,
+      "row_count": 512,
+      "sha256": "6f3adf0979b4e9d6a03ec3850af77ee6a75fbbf31d3f6f6ccd69855645978908",
+      "size_bytes": 560287
+    },
+    "shift_0128_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0128_primary.tsv",
+      "query": "query_relation_pair",
+      "relation_shift_lines": 128,
+      "row_count": 512,
+      "sha256": "394fad2313bfced7100653448df958b78ce81da9da931bfdb85a6b5528ca9baf",
+      "size_bytes": 571551
+    },
+    "shift_0128_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_SHIFT_SWEEP_SCHEDULES/shift_0128_sham.tsv",
+      "query": "relation_sham",
+      "relation_shift_lines": 128,
+      "row_count": 512,
+      "sha256": "26719e8c40a48d2cb5a119ac3189b3a53a9a2fb68cca1c14f29af913e337d795",
+      "size_bytes": 560799
+    }
+  }
+}

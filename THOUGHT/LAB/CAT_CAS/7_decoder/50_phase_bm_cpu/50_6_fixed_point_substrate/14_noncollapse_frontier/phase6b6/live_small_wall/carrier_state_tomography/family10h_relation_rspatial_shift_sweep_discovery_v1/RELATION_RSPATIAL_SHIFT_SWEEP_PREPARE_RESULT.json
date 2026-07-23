@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-23T23:48:38.526362+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "a30adcd470aa970a9f1be618bfba3ff9cb139288baba54184a3d8e39ab244d8d",
+  "run_id": "family10h_relation_rspatial_shift_sweep_discovery_v1_0",
+  "runtime_sha256": "8a3921fd6e617aa520ab12b97b9e911e6494eea25c0e315b2c3175c297f060b5",
+  "schedule_manifest_sha256": "dcc05c59de673eb1ea12bf577320b1533cb60909800532a79860241467be3f6e",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_SHIFT_SWEEP_PREPARE_V1",
+  "small_wall_crossed": false
+}

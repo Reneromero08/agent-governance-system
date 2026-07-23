@@ -1,10 +1,10 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T16:35:00-07:00",
+  "updated_at": "2026-07-23T16:50:00-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
-  "checkpoint_head": "4f0a1489f30db6c5dc95f273f4381d27a5f29872",
-  "origin_head": "4f0a1489f30db6c5dc95f273f4381d27a5f29872",
+  "checkpoint_head": "9a6a1ec915da2455fda034c3a031593dce3c9bec",
+  "origin_head": "9a6a1ec915da2455fda034c3a031593dce3c9bec",
   "autonomous_mode": {
     "active": true,
     "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
@@ -54,17 +54,17 @@
     ]
   },
   "current_package": {
-    "package_id": "family10h_relation_rspatial_phase_mutation_discovery_v1",
-    "transaction_run_id": "family10h_relation_rspatial_phase_mutation_discovery_v1_0",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_rspatial_phase_mutation_discovery_v1",
+    "package_id": "family10h_relation_rspatial_shift_sweep_discovery_v1",
+    "transaction_run_id": "family10h_relation_rspatial_shift_sweep_discovery_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_rspatial_shift_sweep_discovery_v1",
     "package_decision": "EXPLORATORY_DISCOVERY_COMPLETE_NO_SCIENTIFIC_CLAIM",
     "package_manifest_sha256": null,
-    "schedule_manifest_sha256": "b67fd3ea1fce93e2e2677b0b4cb67d7e5d91c17ba1a6bebc7ebbc7f9bf45c43e",
+    "schedule_manifest_sha256": "dcc05c59de673eb1ea12bf577320b1533cb60909800532a79860241467be3f6e",
     "threshold_contract_sha256": null,
     "source_schedule_package": "family10h_primary_minus_sham_local_paired_differential_v1",
-    "source_authority_commit": "4f0a1489f30db6c5dc95f273f4381d27a5f29872",
+    "source_authority_commit": "9a6a1ec915da2455fda034c3a031593dce3c9bec",
     "source_freeze_commit": null,
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_rspatial_phase_mutation_discovery_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_rspatial_shift_sweep_discovery_v1_0/attempt_1",
     "attempt_output_path_fresh": true
   },
   "current_observable": {
@@ -129,7 +129,8 @@
     "relation_rspatial_full_schedule_lifetime_reset_discovery_attempts": 1,
     "relation_rspatial_phase_reset_reuse_discovery_attempts": 1,
     "relation_rspatial_phase_source_restore_discovery_attempts": 1,
-    "relation_rspatial_phase_mutation_discovery_attempts": 1
+    "relation_rspatial_phase_mutation_discovery_attempts": 1,
+    "relation_rspatial_shift_sweep_discovery_attempts": 1
   },
   "latest_retained_evidence": {
     "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
@@ -525,12 +526,84 @@
       "mutate_same_rebuilds_positive_D": true,
       "mutate_opposite_flips_D_negative": false,
       "phase_mutation_candidate": false
+    },
+    "relation_rspatial_shift_sweep_result": "EXPLORATORY_ONLY_SPATIAL_SHIFT_SWEEP_D_REMAINED_POSITIVE_WITHOUT_ORIENTED_SIGN_SELECTIVITY",
+    "relation_rspatial_shift_sweep_archive_sha256": "f3500f3dc1907eae5a1e0ea2eadb722b4dec7a9ec5d2d54f1fbfa374c7b61d0f",
+    "relation_rspatial_shift_sweep_archive_size": 46219014,
+    "relation_rspatial_shift_sweep_analysis_sha256": "931be822322a7664c78116d59b9605a338b8cd37642335b7c0db868bb6740f8d",
+    "relation_rspatial_shift_sweep_coordinates": {
+      "D_by_shift": [
+        {
+          "D_primary_minus_sham": 0.06360219570369195,
+          "shift": 1
+        },
+        {
+          "D_primary_minus_sham": 0.04602163502527638,
+          "shift": 2
+        },
+        {
+          "D_primary_minus_sham": 0.002684946124413872,
+          "shift": 4
+        },
+        {
+          "D_primary_minus_sham": 0.030001534286291338,
+          "shift": 8
+        },
+        {
+          "D_primary_minus_sham": 0.0011298208434196337,
+          "shift": 16
+        },
+        {
+          "D_primary_minus_sham": 0.06695868809236012,
+          "shift": 32
+        },
+        {
+          "D_primary_minus_sham": 0.005543145920342969,
+          "shift": 64
+        },
+        {
+          "D_primary_minus_sham": 0.007805393608675871,
+          "shift": 128
+        }
+      ],
+      "D_max": 0.06695868809236012,
+      "D_min": 0.0011298208434196337,
+      "D_range": 0.06582886724894049,
+      "baseline_D_primary_minus_sham": 0.06360219570369195,
+      "baseline_shift_lines": 1,
+      "best_abs_D_primary_minus_sham": 0.06695868809236012,
+      "best_abs_D_shift": 32,
+      "best_diag_skew_axis_shift": 1,
+      "best_prep_query_axis_shift": 1,
+      "log2_shift_spearman_D": -0.2619047619047619,
+      "log2_shift_spearman_abs_D": -0.2619047619047619,
+      "negative_D_shifts": [],
+      "positive_D_shifts": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ]
+    },
+    "relation_rspatial_shift_sweep_interpretation": {
+      "D_sign_changes_across_shifts": false,
+      "all_shift_D_negative": false,
+      "all_shift_D_positive": true,
+      "any_shift_with_all_one_factor_strata_D_negative": false,
+      "any_shift_with_all_one_factor_strata_D_positive": true,
+      "candidate_oriented_shift_selectivity": false,
+      "exploratory_only": true,
+      "small_wall_crossed": false
     }
   },
   "hypothesis_frontier": {
     "active_wall": "carrier/access-model selection below full Small Wall crossing",
-    "leading_mechanism": "current relation-spatial source writes refresh a durable carrier amplitude but do not yet encode an oriented r0/r1 phase that flips under opposite relation mutation",
-    "strongest_candidate_coordinate": "source-dead local primary-minus-sham amplitude D persists, but oriented phase mutation is not established under the current +/-1 relation geometry",
+    "leading_mechanism": "current relation-spatial source writes refresh a durable carrier amplitude; spatial r0/r1 shift changes amplitude by offset but does not encode a sign-changing oriented relation phase",
+    "strongest_candidate_coordinate": "source-dead local primary-minus-sham amplitude D persists under the R-spatial family, but relation orientation remains unresolved because same/opposite mutation and spatial-shift sweeps keep D positive",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
       "branch": "codex/audio-frequency-wave-substrate",
@@ -556,9 +629,10 @@
       "freezing an origin-scoped reset law instead of the full-schedule coordinate",
       "double-flush active restore as a phase reuse law under the current +/-1 relation geometry",
       "source-CPU restore after double-flush as a strong same/opposite phase law under the current +/-1 relation geometry",
-      "source-dead same/opposite mutation as an oriented phase-flip law under the current +/-1 relation geometry"
+      "source-dead same/opposite mutation as an oriented phase-flip law under the current +/-1 relation geometry",
+      "relation-spatial shift variation as a clean oriented phase law; all tested shifts kept D positive and did not yield sign-changing selectivity"
     ],
-    "current_next_experiment": "run a relation-shift phase sweep that changes the actual r0/r1 spatial shift while preserving marginal A/B coverage, then keep only shifts that show oriented phase selectivity before any freeze",
+    "current_next_experiment": "probe a temporal/order-coded relation that preserves identical spatial marginals and line coverage while making r0/r1 differ by AB-versus-BA ordering; look for a diagonal/off-diagonal phase axis before any freeze",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
@@ -575,7 +649,8 @@
       "the origin-0/1024-only tuning run collapsed alive D to 0.002013 and reversed dead D, so slice-local origin tuning is not a stable crossing route",
       "the full-schedule discovery is still exploratory and does not itself establish R2 restoration, relation reuse, physical relational memory, catalytic borrowing, or Small Wall crossing",
       "opposite relation mutation refreshed D instead of flipping it, indicating the current +/-1 source operation stores amplitude more strongly than oriented relation phase",
-      "double-flush reset behavior is not stable enough across 1024-row phase probes to freeze a reset law yet"
+      "double-flush reset behavior is not stable enough across 1024-row phase probes to freeze a reset law yet",
+      "relation shift sweep kept D positive for shifts 1, 2, 4, 8, 16, 32, 64, and 128; best shift 32 only amplified D and did not create oriented sign selectivity"
     ]
   },
   "claim_state": {
