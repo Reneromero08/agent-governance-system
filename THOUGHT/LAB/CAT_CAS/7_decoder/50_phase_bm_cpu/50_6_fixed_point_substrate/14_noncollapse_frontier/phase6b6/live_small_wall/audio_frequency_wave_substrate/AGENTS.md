@@ -202,21 +202,23 @@ hardware bit replacement
 Small Wall crossing
 ```
 
-## 10. Operational Stop Conditions
+## 10. Persistent Goal and Route Boundaries
 
-The agent may return to the user only at one of these boundaries:
+The standing goal does not terminate until the user determines that unlimited
+catalytic phase computation has been achieved or explicitly closes the lane.
 
-### External authority boundary
+An external authority boundary constrains only the prohibited action. Continue
+all remaining authorized mathematical, software, architectural, and synthetic
+work. A scientific blocker falsifies or limits one route; repair it, replace
+the mechanism, change the representation, or select another frontier. Neither
+condition authorizes completion, blocking, or lane closure.
 
-Further progress requires user-controlled hardware action, physical contact, procurement, credentials, destructive change, merge, release, paid commitment, or external submission.
+The agent may report progress while continuing, but it must not use a report as
+a substitute for the operating loop.
 
-### Concrete scientific blocker
-
-Serious direct investigation has established a specific blocker that cannot be repaired, replaced, or bypassed in the available software environment. Report the evidence, attempted alternatives, and smallest action needed to cross it.
-
-There is no self-declared mission-result stop condition.
-
-If the runtime forcibly ends, preserve an `AUTONOMOUS_CONTINUATION_REQUIRED` checkpoint with the exact next action. Do not label the lane or mission complete.
+If the runtime forcibly ends, preserve an `AUTONOMOUS_CONTINUATION_REQUIRED`
+checkpoint with the exact next action. Do not label the lane or mission
+complete or blocked.
 
 ## 11. Roadmap Maintenance
 
@@ -239,7 +241,14 @@ codex/audio-frequency-wave-substrate
 
 Commit and push meaningful progress. Do not merge or open a PR without user authority. Do not rewrite frozen predecessor evidence.
 
-P0 remains parked. No hardware, playback, recording, powered circuit, procurement, fabrication, or target contact is authorized.
+P0 remains parked. Its audio/hardware execution path is not reactivated.
+
+The user authorized SSH direct-to-metal compute experiments on `2026-07-23`.
+That authority permits ordinary source transfer, compilation, isolated-core
+execution, and read-only host inspection on the existing `catcas` lab target.
+It does not authorize voltage or MSR writes, firmware changes, playback,
+recording, attached instruments, procurement, fabrication, or destructive
+target changes.
 
 ## 13. Standing Instruction
 
@@ -249,4 +258,6 @@ The user owns lane closure.
 Preserve every milestone, then continue.
 
 Do not return merely because the latest package looks like the mission.
+
+Do not end the goal at an external boundary or a failed scientific route.
 ```

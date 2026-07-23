@@ -1,7 +1,7 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `3.2`  
+**Roadmap version:** `3.3`
 **Standing mission:** `CAT_CAS_UNBOUNDED_COMPUTE_V1`  
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through milestone:** `CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED`  
@@ -85,11 +85,37 @@ The largest sealed case represents `2^256` explicit paths without materializing 
 
 This result is a major nonterminal milestone. The equivalent compact classical dynamic program remains about 38 to 45 times faster and asymptotically equivalent. Therefore the result does not establish advantage over the best matched compact classical method, C5 fixed-point advantage, official external acceptance, cross-domain transfer, or physical phase computation.
 
+### Active mutable frontier result
+
+The post-milestone frontier has removed two architectural limitations without
+freezing a successor package:
+
+```text
+fixed twin-rail torus carrier        O(k*M), independent of program length
+carrier-specific seed backup         removed
+hardcoded program-step bound         removed
+direct-metal fixed-torus run         1,048,576 steps exact
+streaming nonlinear phase VM         10,000,000 + 10,000,017 instructions exact
+program-derived inverse history      0 retained factors
+actual restored-carrier reuse        passed
+```
+
+The streaming C VM runs `ROT`, `ADD`, `MULADD`, and `SWAP` over relative
+ternary phase. Its fixed roots-of-unity `MULADD` polynomial supplies field
+multiplication without decoding controls. Together with phase rotation and
+addition, it gives a functionally complete algebra for scalable finite ternary
+circuits.
+
+This is mutable development evidence, not a new frozen milestone. The best
+direct-metal `-Ofast` phase forward timing remains `1.66-1.69x` slower than the
+separate compact ternary evaluator; full forward-plus-restoration is
+`3.34-3.37x`. C5 therefore remains open.
+
 ## 3. Capability Position
 
 ```text
 C0 catalytic closure             ESTABLISHED_BOUNDED_SOFTWARE
-C1 bounded residency             PARTIAL
+C1 bounded residency             STRONG_DEVELOPMENT_FIXED_RESIDENT_NOT_PROMOTED
 C2 reuse and multiplex           ESTABLISHED_BOUNDED_SOFTWARE
 C3 noncollapse representation    ESTABLISHED_BOUNDED_SOFTWARE
 C4 native global operator        ESTABLISHED_BOUNDED_TORUS_PATH_SHEAR
@@ -188,6 +214,11 @@ The following are frontier candidates, not a mandatory sequence:
 
 Investigate reversible-history and carrier-state constructions below the current `O(nM)` footprint, including rolling, factorized, lazy, closed-form, or fixed-resident toroidal processes. Preserve exact restoration and no-smuggle.
 
+Current development has reached fixed `O(kM)` carrier residency and zero
+retained per-step inverse factors. The next residency work is a public
+arbitrary-program interface and scalable phase memory, not another time-layer
+stack.
+
 ### B. Attack a flagship without an equivalent compact classical recurrence
 
 Select a problem where the classical explosion is not already removed by an asymptotically equivalent compact dynamic program. The compiler must not solve it, and the native representation must not hide equivalent enumeration.
@@ -264,23 +295,30 @@ Small Wall crossing
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
 
-## 9. Legitimate Operational Stop Conditions
+## 9. Persistent Goal Law
 
-The agent may stop and return to the user only at one of these operational boundaries:
+The lane remains active until the user determines that unlimited catalytic
+computation with phase has been achieved or explicitly closes the lane.
 
-### External authority boundary
+There is no autonomous operational stop condition.
 
-Further progress requires user-controlled hardware action, physical contact, procurement, credentials, destructive change, merge, release, paid commitment, or external submission.
+```text
+external authority boundary -> do not cross it; continue every authorized route
+scientific blocker           -> treat it as evidence against one route; replace it
+failed prototype             -> discard its friction; retain only useful evidence
+verified milestone           -> preserve it; select the next bottleneck
+runtime interruption         -> write the exact continuation and resume
+```
 
-### Concrete scientific blocker
+An external boundary can pause hardware, procurement, credentials, destructive
+change, merge, release, payment, or submission without ending the compute
+goal. A demonstrated mathematical limit can retire one construction without
+blocking the mission.
 
-Serious direct investigation has established a specific blocker that cannot be repaired, replaced, or bypassed in the available software environment. The report must include the evidence, attempted alternatives, and the smallest action needed to cross it.
-
-There is no self-declared mission-result stop condition.
-
-Even a result satisfying the current written mission lifecycle remains a milestone. The agent must continue to the next C-rung or frontier until the user explicitly closes the lane or an operational stop boundary is reached.
-
-Hard runtime or context exhaustion is not scientific completion. If the execution environment forcibly ends, preserve a continuation checkpoint with the exact next action and mark it `AUTONOMOUS_CONTINUATION_REQUIRED`, never `COMPLETE`.
+Hard runtime or context exhaustion is not scientific completion. If the
+execution environment forcibly ends, preserve a continuation checkpoint with
+the exact next action and mark it `AUTONOMOUS_CONTINUATION_REQUIRED`, never
+`COMPLETE` or `BLOCKED`.
 
 ## 10. Roadmap Maintenance
 
@@ -308,7 +346,15 @@ codex/audio-frequency-wave-substrate
 
 Commit and push meaningful progress. Do not merge or open a PR without user authority. Do not rewrite frozen predecessor evidence.
 
-P0 remains frozen and parked. No hardware, playback, recording, powered circuit, procurement, fabrication, or target contact is authorized.
+P0 remains frozen and parked. Its audio/hardware execution path is not
+reactivated.
+
+The user authorized ordinary SSH direct-to-metal compute experiments on the
+existing `catcas` target on `2026-07-23`. Source transfer, compilation,
+isolated-core execution, and read-only host inspection are permitted. Voltage
+or MSR writes, firmware changes, audio playback or recording, attached
+instrument action, procurement, fabrication, and destructive target changes
+remain unauthorized.
 
 ## 12. Standing Directive
 
