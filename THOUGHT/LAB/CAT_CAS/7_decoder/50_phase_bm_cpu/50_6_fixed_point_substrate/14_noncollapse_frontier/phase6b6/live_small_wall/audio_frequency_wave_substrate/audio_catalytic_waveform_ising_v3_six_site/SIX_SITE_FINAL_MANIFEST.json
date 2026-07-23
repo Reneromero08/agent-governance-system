@@ -1,0 +1,169 @@
+{
+  "claim_ceiling": "BOUNDED_SOFTWARE_RECURSIVE_SPECTRAL_PHASE_REFERENCE_ONLY",
+  "decision": "CATALYTIC_WAVEFORM_ISING_V3_SIX_SITE_VERIFIED",
+  "file_count_excluding_manifest": 32,
+  "files": [
+    {
+      "bytes": 53,
+      "path": ".gitattributes",
+      "sha256": "341779f00b9979e29a872ebf25a9bf797bf440b11e23adf07bad375c01fd9f2c"
+    },
+    {
+      "bytes": 440,
+      "path": "CONTROL_REPORT.md",
+      "sha256": "98b0e1f0fafac717afcfd84e4132887cec12940c7572bf3da146c7fdd7a3b5c6"
+    },
+    {
+      "bytes": 585356,
+      "path": "CONTROL_RESULTS.json",
+      "sha256": "dbf27aaccc17acf11aab47b2c03603d576919bbc366124b243f2274dbad1d2de"
+    },
+    {
+      "bytes": 667,
+      "path": "DEVELOPMENT_REPORT.md",
+      "sha256": "83a8e97bbb1fdb049879449c9e1c3ae0309af805a1e7676ad418ac653d44f8e2"
+    },
+    {
+      "bytes": 861291,
+      "path": "DEVELOPMENT_RESULTS.json",
+      "sha256": "da1a60bcab7365a0a09cb6150894e6f81abcefc0fa9d441d10da47f1dca30bc9"
+    },
+    {
+      "bytes": 251580,
+      "path": "SIX_SITE_BATCH_CUSTODY.json",
+      "sha256": "3c0aff3a1fb567f8d7457c2b5884bd58b4b6e092478bd7aede24f272ef5725b3"
+    },
+    {
+      "bytes": 545,
+      "path": "SIX_SITE_BATCH_REPORT.md",
+      "sha256": "29330552265af212cc2ffc0edd6388c814ee5dd095cc48e7ce97c5bc2f0826e8"
+    },
+    {
+      "bytes": 170567,
+      "path": "SIX_SITE_BATCH_RESULTS.json",
+      "sha256": "0bef96c1235cace25217972570cc51f01f238811737afd0d49d99b5c0013237f"
+    },
+    {
+      "bytes": 2667,
+      "path": "SIX_SITE_EXPERIMENT_CONTRACT.md",
+      "sha256": "cb2c5bfed2d0069d567ab1ea418e7681b5029ce07e8a877d6fbe228e647309be"
+    },
+    {
+      "bytes": 2006,
+      "path": "SIX_SITE_FOCUSED_REVIEW.md",
+      "sha256": "c35bcf3f804dcf723c911f1e60a5ec0acd912c591b301557f854804d851efe37"
+    },
+    {
+      "bytes": 7428,
+      "path": "SIX_SITE_FREEZE.json",
+      "sha256": "12271419c620350919c89439411ffad130b7ea28d5febf11497b4c4f4a11c6c1"
+    },
+    {
+      "bytes": 745,
+      "path": "SIX_SITE_INDEPENDENT_REVIEW.md",
+      "sha256": "989762dc5c15e952f2af7324d523a71ecc06f90d435caf426e887134598149a1"
+    },
+    {
+      "bytes": 28422,
+      "path": "SIX_SITE_INDEPENDENT_VERIFICATION.json",
+      "sha256": "e1553fb696f2267ef75a3383638e493258ebee20efbd0a25dabe80661c5124f0"
+    },
+    {
+      "bytes": 1399,
+      "path": "SIX_SITE_LANE_STATE.md",
+      "sha256": "00260216b721e5b6352e105acd18666185be372ab830cf6712fcdb4d552d4f35"
+    },
+    {
+      "bytes": 95036,
+      "path": "SIX_SITE_ORACLE_TRACE.json",
+      "sha256": "182f0209086ecfbff9b9ba4497d00a0bbf5278935738e9b65e0dad5a8ee5afa8"
+    },
+    {
+      "bytes": 871968,
+      "path": "SIX_SITE_PREORACLE_EVIDENCE.json",
+      "sha256": "0605ab493f6aa16e41443e6e2e98aed6d4a280c83e1e89230c24fb27867e72d2"
+    },
+    {
+      "bytes": 659,
+      "path": "SIX_SITE_PREORACLE_SEAL.json",
+      "sha256": "6e6995ea90ddfe1e130391dbb791f07200ebfd0ca0f9b9b7d95c3e3251e9d9eb"
+    },
+    {
+      "bytes": 288147,
+      "path": "SIX_SITE_PREORACLE_TRACE.json",
+      "sha256": "c6a16b8f893882a5bec56d13175cfd139ea367cec343f5c98c603e6af0d4b283"
+    },
+    {
+      "bytes": 2930,
+      "path": "SIX_SITE_RESOURCE_ACCOUNTING.json",
+      "sha256": "c6986f709b78298fe06564f852b90b757206d63b486dda447d6182c6c6a2294a"
+    },
+    {
+      "bytes": 1303,
+      "path": "SIX_SITE_RESOURCE_ACCOUNTING_DISPOSITION.md",
+      "sha256": "bd68ef3196025f047668d89deda0ed76705dde913aec4f5fda1b9c62115eb6a3"
+    },
+    {
+      "bytes": 40232,
+      "path": "control_qualifier.py",
+      "sha256": "f6f9cf4b5ac9e893bb432d52705415350653b99983bef96545ea15b639959526"
+    },
+    {
+      "bytes": 15894,
+      "path": "development_qualifier.py",
+      "sha256": "ae366a8c395d6a87b848f3f80ff0dacecdac98e463fee6429b5c5fac83b02c18"
+    },
+    {
+      "bytes": 21651,
+      "path": "dimension_general_machine.py",
+      "sha256": "1e5263d4cb2e9ca7a92691cb43b563bd357a7d9a99dfbbaa9cf8db7e54c8fbf2"
+    },
+    {
+      "bytes": 7281,
+      "path": "finalize_package.py",
+      "sha256": "7f9799c5f8ea7d6dbfca13936ceca49c2d5bc1c516aef0badcd572dbe5e8d69e"
+    },
+    {
+      "bytes": 12711,
+      "path": "freeze_builder.py",
+      "sha256": "cef5a60c6abbb3e4bd1054e90b60922eebcb7de5492c2e70b3d6c195c228a0b6"
+    },
+    {
+      "bytes": 44718,
+      "path": "independent_verifier.py",
+      "sha256": "9f377429e4018667aeff320791b45994c825f96c1a14300befe69f304a1468de"
+    },
+    {
+      "bytes": 18335,
+      "path": "oracle_adjudicator.py",
+      "sha256": "adfde4fada37cbf2f09922160def3fefe47fda3e0f9cedcee88512282484e278"
+    },
+    {
+      "bytes": 19491,
+      "path": "preoracle_runner.py",
+      "sha256": "5f4ab48fce022231635c5a63f27fe4ee5059847354581dac11d5f049098b19d3"
+    },
+    {
+      "bytes": 3876,
+      "path": "qualify_package.py",
+      "sha256": "ca2f82addb70a4b42143bf8c113343654fc4b0ae329ae97ce6e8225e5a6eda76"
+    },
+    {
+      "bytes": 3882,
+      "path": "qualify_package_final.py",
+      "sha256": "a1041e05c6da3980f8b25e3819b4ee0eb75417a554fda10e0089fdeeef3aef15"
+    },
+    {
+      "bytes": 9640,
+      "path": "resource_accounting.py",
+      "sha256": "4fafe5aea8cdc923b41fbeaee97c68820b9416043b118b6ad3096b52ba11f91c"
+    },
+    {
+      "bytes": 15795,
+      "path": "resource_accounting_final.py",
+      "sha256": "e171f48bdecebcb7e0d696faa7f0b79e566cb89456dce3ff276cdeb837164ca2"
+    }
+  ],
+  "package_bytes_excluding_manifest": 3386715,
+  "schema": "catalytic_waveform_ising_v3_six_site_final_manifest_v1"
+}

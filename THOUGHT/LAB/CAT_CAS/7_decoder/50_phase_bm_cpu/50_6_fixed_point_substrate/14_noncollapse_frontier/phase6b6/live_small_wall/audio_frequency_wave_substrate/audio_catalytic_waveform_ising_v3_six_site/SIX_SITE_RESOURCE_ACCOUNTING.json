@@ -1,0 +1,69 @@
+{
+  "control_cost": {
+    "control_count_per_instance": 8,
+    "median_six_site_control_runtime_ns": 14513550,
+    "sample_case_count": 32
+  },
+  "evidence_disposition": {
+    "accounting_only": true,
+    "frozen_machine_or_preoracle_source_changed": false,
+    "supersedes": "uncommitted resource-accounting v1 output"
+  },
+  "five_site": {
+    "active_spectral_bins": 32,
+    "derived_dense_mode_sample_bytes": 131072,
+    "derived_dense_mode_sample_definition": "mode_count * sample_count * sizeof(complex128); not an instantiated NativeExecution carrier array",
+    "executed_native_arrays_total_bytes": 389360,
+    "median_native_boundary_runtime_ns": 1445150,
+    "median_restoration_runtime_ns": 56050,
+    "mode_count": 32,
+    "native_carrier_state_bytes": 20480,
+    "native_carrier_state_definition": "NativeExecution.displaced site-by-sample complex128 array",
+    "peak_python_tracemalloc_bytes": 756070,
+    "sample_count": 256,
+    "site_count": 5
+  },
+  "measurement_law": {
+    "clock": "time.perf_counter_ns",
+    "exact_array_bytes": "NumPy ndarray.nbytes; native carrier is NativeExecution.displaced",
+    "peak_memory": "Python tracemalloc peak only",
+    "sample_case_count": 32,
+    "timing_reproduction": "timings are observed measurements; verify checks schema, identities, structural values, and positivity rather than byte equality",
+    "warmup_count": 4
+  },
+  "package_bytes_at_measurement": {
+    "five_site": 10521050,
+    "six_site_excluding_resource_output": 3380380
+  },
+  "ratios_six_over_five": {
+    "active_spectral_bins": 2.0,
+    "derived_dense_mode_sample_bytes": 4.0,
+    "executed_native_arrays_total_bytes": 3.28304910623,
+    "median_native_boundary_runtime": 1.9856416289,
+    "median_restoration_runtime": 2.23907225691,
+    "mode_count": 2.0,
+    "native_carrier_state_bytes": 2.4,
+    "peak_python_tracemalloc": 3.29688917693,
+    "sample_count": 2.0
+  },
+  "schema": "catalytic_waveform_ising_v3_six_site_resource_accounting_v2",
+  "six_site": {
+    "active_spectral_bins": 64,
+    "derived_dense_mode_sample_bytes": 524288,
+    "derived_dense_mode_sample_definition": "mode_count * sample_count * sizeof(complex128); not an instantiated NativeExecution carrier array",
+    "executed_native_arrays_total_bytes": 1278288,
+    "median_native_boundary_runtime_ns": 2869550,
+    "median_restoration_runtime_ns": 125500,
+    "mode_count": 64,
+    "native_carrier_state_bytes": 49152,
+    "native_carrier_state_definition": "NativeExecution.displaced site-by-sample complex128 array",
+    "peak_python_tracemalloc_bytes": 2492679,
+    "sample_count": 512,
+    "site_count": 6
+  },
+  "source_sha256": {
+    "control_qualifier": "f6f9cf4b5ac9e893bb432d52705415350653b99983bef96545ea15b639959526",
+    "five_site_machine": "fb12a0a7c54f4b1fac26b10a2041bfe7205c26d8136b2395c75a6b1d7c99694a",
+    "six_site_machine": "1e5263d4cb2e9ca7a92691cb43b563bd357a7d9a99dfbbaa9cf8db7e54c8fbf2"
+  }
+}
