@@ -1,9 +1,9 @@
 {
   "case_count": 472,
   "claim_target": "PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED",
-  "contract_sha256": "4280eaa12b81b594f99a6f73bd26944cb78947be9fbcd1cb4aa64f79f811f9e4",
-  "engine_fingerprint": "496f181ba4e86a6bd396c14a35f65d8235294b2f1df1f503268e0bc10fa5a5a6",
-  "engine_sha256": "0ad4a97eb737c6b199f85d3a9179f5b6562c20e79d1ef6a7fc006b93dceeacf7",
+  "contract_sha256": "a1a4a3827d779e8781cbd7b07d6832c4b3d8a781f3460a8a39eee03b2b548910",
+  "engine_fingerprint": "4503da3c5fce3fa7cf516bf7d5e7f08771b739553d3e96601e5e317120ed341a",
+  "engine_sha256": "74a791fc08f3968b541bc88b012c86b2ca71312b668aca54107c618a02651742",
   "execution_order": [
     "commit engine, program declarations, and complete input identities",
     "execute native phase programs without post-execution comparison code",

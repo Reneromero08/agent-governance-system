@@ -122,7 +122,7 @@
       "result_sha256": "cfad463f5ac718cc3c52818422964b5f74841553fb35ee0150260b09ffa99696"
     }
   },
-  "document_sha256": "711c718eccce1eb3b687c8eca0f4d03a4015ba4399ae0fa1f3e5948f5543daec",
+  "document_sha256": "8ef7f2031381ea28dfb7f85e1213154d6fac3956ad09b24395211946e1582c3e",
   "engine_contract": {
     "claim_ceiling": "BOUNDED_SOFTWARE_PHASE_NATIVE_COMPUTER_REFERENCE_ONLY",
     "execution_environment": {
@@ -144,6 +144,11 @@
     ],
     "native_state": "relative S1 phase between reference and signal spectral components",
     "restoration": "reverse instruction history, reverse input phase load, divide seed operator",
+    "root_acceptance": {
+      "distance_maximum": 2e-10,
+      "ideal_neighbor_margin_fraction_minimum": 0.75,
+      "margin_law": "fraction * (1 - cos(2*pi/radix)); derived before output decoding"
+    },
     "subroutines": [
       "ACCUMULATE3",
       "AND_INTO",
@@ -155,7 +160,7 @@
       "XOR3_INTO"
     ]
   },
-  "engine_fingerprint": "496f181ba4e86a6bd396c14a35f65d8235294b2f1df1f503268e0bc10fa5a5a6",
+  "engine_fingerprint": "4503da3c5fce3fa7cf516bf7d5e7f08771b739553d3e96601e5e317120ed341a",
   "phase_state_bytes_by_register_count": {
     "3": 12288,
     "4": 16384,
