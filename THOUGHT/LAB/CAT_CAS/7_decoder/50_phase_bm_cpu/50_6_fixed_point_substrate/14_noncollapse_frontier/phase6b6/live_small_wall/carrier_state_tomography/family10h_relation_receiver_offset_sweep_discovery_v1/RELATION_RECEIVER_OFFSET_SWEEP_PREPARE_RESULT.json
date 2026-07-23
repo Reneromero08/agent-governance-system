@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-23T22:07:05.993833+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "4bcf487ecabe16fdd4d874a829302d5617dfbe6750bf1e5843aebbe04b2f82b4",
+  "run_id": "family10h_relation_receiver_offset_sweep_discovery_v1_0",
+  "runtime_sha256": "7fa9520a228bfd0714c2232195e200220c05f4edb1ec17e6c14963564bfd8987",
+  "schedule_manifest_sha256": "5beb98b2d2a950fe85b4184b9c2c19ef7f19d39849d69230065a037cc025b968",
+  "schema": "FAMILY10H_RELATION_RECEIVER_OFFSET_SWEEP_PREPARE_V1",
+  "small_wall_crossed": false
+}

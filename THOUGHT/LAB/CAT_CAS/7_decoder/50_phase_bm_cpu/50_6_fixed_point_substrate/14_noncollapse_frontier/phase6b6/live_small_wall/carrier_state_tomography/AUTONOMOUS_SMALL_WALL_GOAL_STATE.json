@@ -1,10 +1,10 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T14:59:20.2133626-07:00",
+  "updated_at": "2026-07-23T15:08:43.1872689-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
-  "checkpoint_head": "fd357723bbfb228f43074980874430ce92747f96",
-  "origin_head": "fd357723bbfb228f43074980874430ce92747f96",
+  "checkpoint_head": "76b8f8387b1323d4169cb14c28feb9ba6e5c8ac8",
+  "origin_head": "76b8f8387b1323d4169cb14c28feb9ba6e5c8ac8",
   "autonomous_mode": {
     "active": true,
     "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
@@ -120,7 +120,8 @@
     "relation_orientation_balance_discovery_attempts": 1,
     "relation_origin_scope_discovery_attempts": 1,
     "relation_prep_mutation_discovery_attempts": 1,
-    "relation_prep_ablation_discovery_attempts": 1
+    "relation_prep_ablation_discovery_attempts": 1,
+    "relation_receiver_offset_sweep_discovery_attempts": 1
   },
   "latest_retained_evidence": {
     "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
@@ -279,6 +280,35 @@
       "relation_sham_below_25pct_primary": true,
       "small_wall_crossed": false
     },
+    "relation_receiver_offset_sweep_discovery_result": "EXPLORATORY_ONLY_OFFSET_1_SOURCE_DEPENDENT_RESIDUE_NOT_ESTABLISHED_WITH_WEAK_OFFSET_8_CANDIDATE",
+    "relation_receiver_offset_sweep_archive_sha256": "177df6c6acf5cda1984a7b0d03f6870109dfad098fa01d887d3d25bb9c52f423",
+    "relation_receiver_offset_sweep_archive_size": 33838073,
+    "relation_receiver_offset_sweep_analysis_sha256": "e769868fda9e0b3b406f3d2973798cfa74e77d23e1e0d4228614c034f6487ada",
+    "relation_receiver_offset_sweep_raw_record_count": 6144,
+    "relation_receiver_offset_sweep_pair_observation_count": 1572864,
+    "relation_receiver_offset_sweep_source_death_receipt_count": 6144,
+    "relation_receiver_offset_sweep_coordinates": {
+      "R_source_on_offset_1": 0.07515713038211251,
+      "R_source_off_offset_1": 0.07008070448480697,
+      "D_source_on_minus_source_off_offset_1": 0.005076425897305545,
+      "offset_1_delta_abs_to_source_on_abs": 0.06754416875013819,
+      "offset_1_source_off_abs_to_source_on_abs": 0.9324558312498619,
+      "R_source_on_offset_8": 0.00892437741446703,
+      "R_source_off_offset_8": -0.007107406451410952,
+      "D_source_on_minus_source_off_offset_8": 0.01603178386587798,
+      "offset_8_delta_abs_to_source_on_abs": 1.7964036168942559,
+      "strongest_delta_offset": 8,
+      "strongest_delta": 0.01603178386587798
+    },
+    "relation_receiver_offset_sweep_interpretation": {
+      "offset_1_source_dependent_delta_positive": true,
+      "offset_1_source_dependent_delta_above_25pct_source_on": false,
+      "offset_1_source_off_baseline_below_25pct_source_on": false,
+      "any_offset_source_dependent_delta_above_25pct_source_on": true,
+      "strongest_delta_offset": 8,
+      "offset_8_absolute_signal_is_small": true,
+      "small_wall_crossed": false
+    },
     "prior_scalar_q_readout_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
     "prior_scalar_q_readout_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
     "prior_second_operator_dimension_class": "FAMILY10H_SECOND_OPERATOR_DIMENSION_UNRESOLVED_RETROSPECTIVE"
@@ -296,16 +326,18 @@
       "R2 restoration by byte/hash restoration alone",
       "origin-balanced relation-minus-carrier-off orientation residual",
       "prep-inversion sign law under fixed receiver query geometry",
-      "preparation-only relation ablation under fixed receiver query geometry"
+      "preparation-only relation ablation under fixed receiver query geometry",
+      "offset-1 source-dependent residue after same-geometry source-off subtraction"
     ],
-    "current_next_experiment": "probe receiver-side and timing-local differential amplification/isolation rather than preparation-only mutation: prep ablation left R_primary unchanged while relation_sham stayed near zero",
+    "current_next_experiment": "run a focused offset-8 source-on/source-off repeat with matched nuisance strata to test whether the weak offset-8 residue survives or collapses as denominator noise",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
       "net relation-minus-carrier-off orientation is positive but small at 18.7% of raw relation orientation",
       "origin-balanced relation-minus-carrier-off orientation collapsed to mean 0.001335 and split sign by origin",
       "prep inversion with fixed receiver query did not reverse primary and carrier-off remained 104.6% of primary",
-      "prep ablation with fixed receiver query did not reduce primary and carrier-off remained 122.4% of primary"
+      "prep ablation with fixed receiver query did not reduce primary and carrier-off remained 122.4% of primary",
+      "receiver offset 1 source-off baseline remained 93.2% of source-on, leaving only a 6.8% source-dependent delta"
     ]
   },
   "claim_state": {
