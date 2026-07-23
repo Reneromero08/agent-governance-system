@@ -1,0 +1,8 @@
+{
+  "case_count": 472,
+  "contract_sha256": "a1a4a3827d779e8781cbd7b07d6832c4b3d8a781f3460a8a39eee03b2b548910",
+  "engine_fingerprint": "4503da3c5fce3fa7cf516bf7d5e7f08771b739553d3e96601e5e317120ed341a",
+  "raw_bytes": 1209733,
+  "raw_sha256": "7baed9c8af6a30cbdd5148e55cc253fef1687a7599e7ce7aa43180f75c116d45",
+  "schema": "phase_native_computer_raw_seal_v1"
+}
