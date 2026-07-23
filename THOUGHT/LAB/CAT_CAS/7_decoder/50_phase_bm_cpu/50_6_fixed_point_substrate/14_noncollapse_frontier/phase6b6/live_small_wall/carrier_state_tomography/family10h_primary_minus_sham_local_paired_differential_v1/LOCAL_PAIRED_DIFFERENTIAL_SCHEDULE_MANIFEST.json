@@ -1,0 +1,131 @@
+{
+  "factor_strata": [
+    "session",
+    "replicate",
+    "mapping",
+    "source_order",
+    "query_order",
+    "cyclic_origin"
+  ],
+  "fresh_process_per_variant": true,
+  "generic_control_queries": [
+    "scrambled_pair_control",
+    "distance_matched_control",
+    "route_pressure_control"
+  ],
+  "interleaved_raw_control_rows": false,
+  "local_paired_audit_freeze_commit": "526a509bf6034fc7e20159541d270cb52ef04db3",
+  "local_paired_audit_sha256": "2826e10317dd96d7f73c8471e0e6365b466a003fa59dde8c88ec200a0d1b3cf9",
+  "package_id": "family10h_primary_minus_sham_local_paired_differential_v1",
+  "pair_sample_count_per_row": 256,
+  "primary_query": "query_relation_pair",
+  "prior_official_evidence_commit": "dde3ac15953669f056b5f8974601b3bd1aa62f2d",
+  "prior_primary_minus_sham_package_commit": "054cc36f6c4d67de69cdd1a1dc12f455edc580dd",
+  "queries": [
+    "query_relation_pair",
+    "relation_sham",
+    "scrambled_pair_control",
+    "distance_matched_control",
+    "route_pressure_control"
+  ],
+  "round_count": 2,
+  "schedule_manifest_sha256": "7aefda426239e1f23fbacd09eed552cdac4f946e14993b268b364b1c019a6fc9",
+  "schema": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_SCHEDULE_MANIFEST_V1",
+  "sham_query": "relation_sham",
+  "source_authority_commit": "2cdec9704452669d3651a063b6fb5805913647e3",
+  "source_freeze_commit": "8720dd543947f26cbd2af18a6a3dd4870c9adf85",
+  "source_schedule_package": "family10h_relation_spatial_pair_readout_v1_1_segmented",
+  "transaction_run_id": "family10h_primary_minus_sham_local_paired_differential_v1_0",
+  "variants": {
+    "round0_distance_matched_control": {
+      "pair_observation_count": 524288,
+      "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round0_distance_matched_control.tsv",
+      "query": "distance_matched_control",
+      "round": 0,
+      "row_count": 2048,
+      "sha256": "354ca919fe9099e32b26c882906759e3bdcd51006a215b81b64427f97a9d1ab1",
+      "size_bytes": 2333947
+    },
+    "round0_query_relation_pair": {
+      "pair_observation_count": 524288,
+      "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round0_query_relation_pair.tsv",
+      "query": "query_relation_pair",
+      "round": 0,
+      "row_count": 2048,
+      "sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+      "size_bytes": 2090235
+    },
+    "round0_relation_sham": {
+      "pair_observation_count": 524288,
+      "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round0_relation_sham.tsv",
+      "query": "relation_sham",
+      "round": 0,
+      "row_count": 2048,
+      "sha256": "4323cbc5e614b25b1edb4754f4e007f69fd2fd70402ace41b36b547e94b5f97f",
+      "size_bytes": 2235643
+    },
+    "round0_route_pressure_control": {
+      "pair_observation_count": 524288,
+      "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round0_route_pressure_control.tsv",
+      "query": "route_pressure_control",
+      "round": 0,
+      "row_count": 2048,
+      "sha256": "6a5fdeb6c739800e5ec544fc32b8d5add94a124d99cdc0ecaece47a4bb73214a",
+      "size_bytes": 2301179
+    },
+    "round0_scrambled_pair_control": {
+      "pair_observation_count": 524288,
+      "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round0_scrambled_pair_control.tsv",
+      "query": "scrambled_pair_control",
+      "round": 0,
+      "row_count": 2048,
+      "sha256": "ca6bf8955688e3d8dda421bb66dda3a050b9c40b3e86991b476fde0df03feb20",
+      "size_bytes": 2301179
+    },
+    "round1_distance_matched_control": {
+      "pair_observation_count": 524288,
+      "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round1_distance_matched_control.tsv",
+      "query": "distance_matched_control",
+      "round": 1,
+      "row_count": 2048,
+      "sha256": "354ca919fe9099e32b26c882906759e3bdcd51006a215b81b64427f97a9d1ab1",
+      "size_bytes": 2333947
+    },
+    "round1_query_relation_pair": {
+      "pair_observation_count": 524288,
+      "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round1_query_relation_pair.tsv",
+      "query": "query_relation_pair",
+      "round": 1,
+      "row_count": 2048,
+      "sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+      "size_bytes": 2090235
+    },
+    "round1_relation_sham": {
+      "pair_observation_count": 524288,
+      "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round1_relation_sham.tsv",
+      "query": "relation_sham",
+      "round": 1,
+      "row_count": 2048,
+      "sha256": "4323cbc5e614b25b1edb4754f4e007f69fd2fd70402ace41b36b547e94b5f97f",
+      "size_bytes": 2235643
+    },
+    "round1_route_pressure_control": {
+      "pair_observation_count": 524288,
+      "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round1_route_pressure_control.tsv",
+      "query": "route_pressure_control",
+      "round": 1,
+      "row_count": 2048,
+      "sha256": "6a5fdeb6c739800e5ec544fc32b8d5add94a124d99cdc0ecaece47a4bb73214a",
+      "size_bytes": 2301179
+    },
+    "round1_scrambled_pair_control": {
+      "pair_observation_count": 524288,
+      "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round1_scrambled_pair_control.tsv",
+      "query": "scrambled_pair_control",
+      "round": 1,
+      "row_count": 2048,
+      "sha256": "ca6bf8955688e3d8dda421bb66dda3a050b9c40b3e86991b476fde0df03feb20",
+      "size_bytes": 2301179
+    }
+  }
+}

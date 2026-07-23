@@ -1,0 +1,51 @@
+{
+  "claim_boundary": {
+    "catalytic_borrowing_established": false,
+    "full_carrier_state_tomography_established": false,
+    "physical_relational_memory_established": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "coordinate": {
+    "D_local": "R_primary - R_sham",
+    "R_primary": "mean R_spatial(query_relation_pair)",
+    "R_sham": "mean R_spatial(relation_sham)"
+  },
+  "diagnostics_not_gates": {
+    "absolute_relation_sham_sign": "reported diagnostic_not_gate",
+    "generic_matched_permutation_q99": "reported diagnostic",
+    "relation_sham_in_null_control_set": false,
+    "six_factor_crossed_cells": "reported diagnostic_only_sparse_four_blocks_per_cell"
+  },
+  "factor_stratum_law": {
+    "D_local_gt_0": true,
+    "R_primary_gt_0": true,
+    "R_sham_lt_0": "not_a_gate",
+    "factors": [
+      "session",
+      "replicate",
+      "mapping",
+      "source_order",
+      "query_order",
+      "cyclic_origin"
+    ],
+    "stratum_scope": "one_factor_matched_strata"
+  },
+  "forbidden_post_freeze_changes": {
+    "post_observation_feature_selection": true,
+    "post_observation_threshold_revision": true,
+    "promote_sparse_crossed_cells_to_gates": true,
+    "restore_sham_sign_gate": true,
+    "small_wall_promotion": true
+  },
+  "package_id": "family10h_primary_minus_sham_local_paired_differential_v1",
+  "round_law": {
+    "D_local_gt_0": true,
+    "R_primary_gt_0": true,
+    "R_sham_lt_0": "not_a_gate",
+    "generic_control_envelope": "max(abs(R_scrambled), abs(R_distance), abs(R_route)) <= 0.25 * D_local",
+    "generic_control_envelope_fraction": 0.25
+  },
+  "schema": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_THRESHOLD_CONTRACT_V1",
+  "threshold_contract_sha256": "de6960c59ff7c5631e8a1a45a8db29e94f270672955585e489f6f04725893707"
+}
