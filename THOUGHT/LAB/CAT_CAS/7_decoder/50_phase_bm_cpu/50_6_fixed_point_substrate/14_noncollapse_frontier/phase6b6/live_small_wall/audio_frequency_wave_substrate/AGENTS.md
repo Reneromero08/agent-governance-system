@@ -1,270 +1,372 @@
-# CAT_CAS Audio Lane: Phase-Native Prime Directive
+# CAT_CAS Audio Lane Agent Authority
 
-This file is the local operating primer for every agent working anywhere under
-`audio_frequency_wave_substrate/`.
+This file governs every agent working under `audio_frequency_wave_substrate/`.
 
-## 1. Root Goal
+Read in this order:
+
+```text
+THOUGHT/LAB/CAT_CAS/MISSION.md
+AUDIO_SIDE_QUEST_ROADMAP.md
+AUTONOMOUS_LANE_STATE.json
+this file
+package-local contracts and reports
+```
+
+The mission and roadmap outrank package-local completion language. Frozen evidence and claim ceilings remain authoritative for what has actually been proved.
+
+---
+
+## 1. Prime Directive
 
 ```text
 REPLACE THE BIT WITH PI.
 ```
 
-This slogan has one exact technical meaning:
+The technical meaning is:
 
 ```text
-replace the bit as the primitive computational state
-with phase on the circle S^1;
-use pi as the antipodal half-turn that produces the binary shadow.
+phase on S^1 is the primitive computational coordinate;
+0/pi is one permitted binary boundary shadow;
+relative phase, interference, topology, and geometry carry native state;
+discrete output is rendered only at a declared boundary.
 ```
 
-The native single-state space is:
+The lane is not an audio Ising project. Ising was one early operating sector.
+
+The standing objective is the CAT_CAS mission:
 
 ```text
-theta in S^1 = R / 2*pi*Z
+finite reusable substrate
+-> compact unresolved relational geometry
+-> native phase / catalytic / toroidal evolution
+-> invariant or fixed point
+-> one classical witness
+-> independent acceptance
+-> restoration
+-> reuse
 ```
 
-For N coupled phase objects:
+---
+
+## 2. Current Verified Milestone
+
+Current highest bounded software milestone:
 
 ```text
-Theta = (theta_1, ..., theta_N) in T^N = (S^1)^N
+PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED
 ```
 
-The pi operation is the involution:
+Current shared engine capabilities:
 
 ```text
-P_pi(theta) = theta + pi  mod 2*pi
+phase-resident factorized registers
+ROT
+ADD
+CCX
+SWAP
+intermediate phase carries
+conditional phase control
+complete waveform routing
+multiple program classes on one engine
+boundary-only decoding
+true inverse restoration
+same-program reuse
+cross-program restored-carrier reuse
 ```
 
-The conventional bit is therefore not the primitive. It is the restricted or projected
-`Z2` sector:
+Current claim ceiling:
 
 ```text
-0   <-> +1
-pi  <-> -1
-
-{0, pi} subset S^1
+BOUNDED_SOFTWARE_PHASE_NATIVE_COMPUTER_REFERENCE_ONLY
 ```
 
-Pi is the bridge between continuous topology and discrete information. The full phase
-circle is the object; the bit is one antipodal boundary readout.
+This is a major milestone. It is not completion of the lane or the CAT_CAS mission.
 
-## 2. What This Lane Is Building
+---
 
-The lane is not merely building an audio Ising solver. It is building the first bounded
-layers of a phase-topological computer in which:
+## 3. Nonterminal Milestones
+
+An agent must not stop merely because it has completed any of the following:
 
 ```text
-information   = phase geometry and relative phase
-memory        = attractor, holonomy, winding, or protected relational sector
-operation     = rotation, coupling, interference, modulation, and flow
-composition   = phase objects embedded into and acting on other phase objects
-recursion     = complete phase geometry carried into later complete phase geometry
-observation   = an explicit projection at a declared boundary
-catalysis     = invariant extraction followed by restoration of the borrowed carrier
-bit           = optional 0/pi projection
-Ising         = one Z2 operating sector, not the architecture
+an implementation
+an experiment
+an instruction
+program-counter support
+branches or loops
+memory
+another program class
+another scaling result
+a compiler prototype
+.holo IR
+a global operator
+a prospective batch
+a verified package
+a review
+a commit
+a pushed branch
 ```
 
-The target stack is:
+Preserve the result, update the roadmap state when necessary, identify the next highest-leverage blocker, and continue.
+
+Package-local phrases such as `final`, `verified`, `complete`, or `next step` do not override this rule.
+
+---
+
+## 4. Autonomous Authority
+
+The agent may autonomously:
 
 ```text
-phase-native state space
--> recursive phase representation
--> complete-tree temporal evolution
--> phase-native composition and memory
--> invariant latch
--> reverse traversal and carrier restoration
--> emergent discrete/topological readout
--> recursive catalytic Ising as one boundary application
--> physical oscillator or acoustic realization
--> phase-relational language and intermediate representation
+inspect the full lane and related CAT_CAS packages
+derive new mathematics
+extend or replace the current architecture
+build phase control flow and memory
+design .holo process objects and compilers
+prototype global phase operators
+select development problems
+run experiments and benchmarks
+repair failures
+replace failed mechanisms
+measure scaling and compute leverage
+commit meaningful milestones
+push to the canonical branch
+update the roadmap and lane state
 ```
 
-## 3. Current Architecture
+Do not ask the user to decide ordinary reversible software, mathematical, experimental, or architectural choices that can be investigated directly.
 
-The current native object is a recursive phase tree:
+Use judgment. Do not convert autonomy into random breadth. Choose the work that most directly removes the blocker between current evidence and the mission.
+
+---
+
+## 5. Operating Loop
 
 ```text
-Phi_v(t) =
-    2*pi*f_v*t + theta_v
-    + sum_(c in children(v)) beta_vc * sin(Phi_c(t))
+explore
+-> implement
+-> execute
+-> inspect evidence
+-> repair or replace
+-> compress what was learned
+-> preserve meaningful progress
+-> continue
 ```
 
-with complete beam:
+Do not stop at the first failure.
+
+Do not freeze the first working mechanism if a known defect remains.
+
+Do not let token, context, retry, iteration, or elapsed-time counters become scientific stop conditions.
+
+Verification follows a substantive result. It must not consume the project before a result exists.
+
+One focused independent review is normally enough for one meaningful claim. Do not create audit-of-audit loops.
+
+---
+
+## 6. Frontier Choice
+
+The roadmap lists candidate frontiers, not a mandatory sequence.
+
+The agent must select the highest-value next move based on evidence. Candidate bottlenecks include:
 
 ```text
-B_T(t) = exp(i * Phi_root(t))
+phase-resident control flow
+loops, branches, calls, and memory
+program-derived inverse execution
+compact .holo representation
+no-smuggle compilation
+native global operators
+fixed points and invariants
+matched classical explosion
+compute-leverage scaling
+external official acceptance
+cross-domain transfer
 ```
 
-Temporal recurrence must carry the complete prior tree into the next tree. It must not
-carry only a decoded value, coefficient vector, FFT magnitude, matched score, or spin.
+Another site-count increase, instruction, benchmark, or batch is justified only when it answers a necessary architectural question.
 
-A global binary orientation acts on the whole beam:
+---
+
+## 7. Native Semantic Laws
+
+Native state may live on:
 
 ```text
-Psi_T(t) = exp(i * theta_spin) * B_T(t)
-theta_spin in {0, pi}
+S^1
+T^m = U(1)^m
+recursive phase geometry
+relational polytopes
+spectral phase structures
+another explicitly declared noncollapsed process-object
 ```
 
-A pi rotation must preserve all internal relative phase geometry. It changes the global
-orientation of the complete object; it does not erase the object into a Boolean.
-
-## 4. Three Required Recursions
+Native operations may include:
 
 ```text
-depth recursion:
-    signal inside phase inside phase
-
-temporal recursion:
-    complete phase object at k becomes part of the complete object at k+1
-
-catalytic recursion:
-    lower-order carriers are restored while a surviving invariant becomes
-    a phase-bearing input at the next scale
+rotation
+relational composition
+interference
+coupling
+routing
+flow
+closure
+winding
+topological transition
+resonance
+fixed-point evolution
 ```
 
-A design that implements only repeated scalar updates is not the target.
+These are not a required instruction list. Follow the strongest mechanism.
 
-## 5. Bootstrap Versus Target
+Conventional code may orchestrate, compile, package, seal, and verify. It may not silently perform the target computation and encode the answer into phase.
 
-Python, C, Rust, IEEE float samples, files, and hashes are allowed as the bootstrap,
-control, custody, and reference plane.
+---
 
-They do not define the target semantics.
+## 8. No-Smuggle Laws
+
+The native machine must not receive:
 
 ```text
-ordinary code may implement the simulator or compiler;
-ordinary code may not silently redefine the phase-native machine as a bit machine.
+oracle answers
+expected outputs
+cached program results
+decoded correctness
+winner identities
+conventional solver outputs
+answer-dependent retries
+hardcoded problem identities
+per-instance repair constants
+hidden candidate enumeration
+hidden classical path materialization
 ```
 
-A float32 WAV demonstrates a serialized reference representation. It is not evidence of
-a bitless physical machine. A future physical claim requires the declared oscillator or
-wave carrier to perform the phase-native operation.
+The compiler must not solve the public instance.
 
-## 6. Native Semantic Vocabulary
+Do not claim factorization, compactness, lazy execution, or a global operator while equivalent enumeration occurs elsewhere.
 
-A future phase-relational language or IR should be organized around:
+Discrete decoding occurs only at a declared boundary.
+
+---
+
+## 9. Catalytic Laws
+
+Preserve the strongest available form of:
 
 ```text
-Phase       state on S^1
-Torus<N>    composite state on (S^1)^N
-Relation    constraint or invariant between phases
-Coupling    operator that physically or mathematically changes a relation
-Flow        continuous or recurrent evolution
-Gauge       transformation that preserves encoded information
-Attractor   persistent dynamical class
-Winding     integer topological class
-Observable  explicitly authorized projection
-Boundary    operation that turns relational state into a readable shadow
-Restore     return of the borrowed carrier or accepted equivalence class
+borrow
+-> transform
+-> compute
+-> extract
+-> reverse
+-> restore
+-> reuse
 ```
 
-C-style variable assignment, branching, and program-counter order are not presumed to be
-fundamental. They may be compilation artifacts or collapsed control-plane operations.
+The carrier must be causally involved.
 
-## 7. Standing Non-Collapse Guardrails
+The result must survive outside the history being reversed.
 
-Do not make any of these the native machine:
+Restoration must reverse the actual forward process, not substitute a fresh carrier.
 
-```text
-decode to +/-1 at every step
-J @ s as the hidden recurrence
-argmin or argmax feedback
-energy or matched-score feedback
-FFT-magnitude feedback
-flat coefficient-bank replacement
-winner selection
-candidate enumeration
-AUC-first scoring
-ordinary verifier loops
-```
+Reuse must consume the actual restored carrier.
 
-They may appear only as declared baselines or boundary projections.
+When an irreversible boundary is necessary, isolate and declare it explicitly.
 
-Do not confuse:
+---
+
+## 10. Success and Claim Discipline
+
+Current established software architecture does not establish:
 
 ```text
-phase serialized by a bit computer
-with
-phase as the physical computational primitive
-```
-
-Do not confuse:
-
-```text
-exact ancestry recovery
-with
-catalytic closure
-```
-
-Catalytic closure additionally requires a surviving result outside the history being
-reversed, nonzero carrier displacement, reverse traversal, restoration, and controls that
-kill wrong or reordered restoration.
-
-## 8. Ising Placement
-
-Ising is the first useful discrete test of the phase-native machine because the antipodal
-sector naturally implements:
-
-```text
-s_i = +1  <-> theta_i = 0
-s_i = -1  <-> theta_i = pi
-```
-
-But the Ising spin is only the global orientation of a complete recursive beam. Internal
-phase relations remain available before the final boundary.
-
-A successful Ising package must not destroy the complete phase object between updates.
-The final spin vector and Ising energy are explicit boundary shadows.
-
-## 9. Success Criterion for Bit Replacement
-
-The bit has been demoted only when the machine supplies phase-native forms of:
-
-```text
-persistent memory
-state transformation
-composition and fan-out
-conditional or bifurcation behavior
-error correction and noise tolerance
-communication and coupling
-programmability
-readout
-scaling
-catalytic restoration
-```
-
-The endpoint is not the elimination of every discrete observable. The endpoint is that
-discrete observables emerge from phase topology rather than defining the machine's atom.
-
-## 10. Current Claim Boundary
-
-Established:
-
-```text
-AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED
-AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED
-AUDIO_RECURSIVE_WAVE_OPERATOR_ESTABLISHED
-AUDIO_SOFTWARE_CATALYTIC_WAVE_LOOP_ESTABLISHED
-AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED
-```
-
-Frozen non-executing architecture:
-
-```text
-PHYSICAL_PHASE_CARRIER_P0_ARCHITECTURE_PACKET_FROZEN
-```
-
-Not established:
-
-```text
-physical carrier characterization
-post-source physical phase persistence
-physical antipodal pi relation
-physical phase-native computing
+universal computation
+compute advantage
+energy advantage
+unbounded effective computation
+external official acceptance
+cross-domain transfer
+physical phase computation
 physical restoration
-bit replacement in hardware
+hardware bit replacement
 Small Wall crossing
 ```
 
-Every agent must preserve this distinction while continuing to build toward the root goal.
+The strong mission target is increasing compute leverage:
+
+```text
+Gamma(n) = classical path-work
+           / (compile + native + readout + restore)
+```
+
+Only evidence that directly addresses this scaling may promote the C5 mission rung.
+
+Useful infrastructure remains valuable. Do not narrate it as a Wall crossing.
+
+---
+
+## 11. Legitimate Stop Conditions
+
+The agent may stop and return only when:
+
+### Mission result
+
+A bounded but meaningful CAT_CAS mission result has been achieved, including compact unresolved representation, native global computation, classical witness extraction, independent acceptance, restoration, reuse, and credible compute leverage.
+
+### External authority boundary
+
+Further progress requires hardware action, physical contact, procurement, credentials, destructive change, merge, release, external submission, or another irreversible owner decision.
+
+### Concrete scientific blocker
+
+Serious direct work has established a specific blocker that cannot be repaired or bypassed in the available software environment. Report the evidence, attempted alternatives, and smallest crossing action.
+
+Do not stop because a package or milestone is complete.
+
+---
+
+## 12. Roadmap Maintenance
+
+When a meaningful capability changes, update:
+
+```text
+AUDIO_SIDE_QUEST_ROADMAP.md
+AUTONOMOUS_LANE_STATE.json
+```
+
+Record the new capability, claim ceiling, capability rung, remaining blocker, and why work continues or legitimately stops.
+
+The roadmap must not remain behind the evidence.
+
+---
+
+## 13. Git and Physical Boundaries
+
+Canonical branch:
+
+```text
+codex/audio-frequency-wave-substrate
+```
+
+Commit and push meaningful progress.
+
+Do not merge or open a PR without user authorization.
+
+Do not rewrite frozen predecessor evidence.
+
+P0 remains parked.
+
+No hardware, playback, recording, powered circuit, procurement, fabrication, or target contact is authorized by this file.
+
+---
+
+## 14. Standing Instruction
+
+```text
+Build toward unbounded effective computation with phase.
+
+Treat every intermediate verification as a rung, not a finish line.
+
+Continue until the mission is demonstrated or a real authority boundary or evidenced scientific blocker is reached.
+```
