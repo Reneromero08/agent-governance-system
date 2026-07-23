@@ -1,17 +1,24 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `3.0`  
+**Roadmap version:** `3.1`<br>
 **Standing mission:** `CAT_CAS_UNBOUNDED_COMPUTE_V1`  
 **Branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through milestone commit:** `ca9c90490c169692690bb29c5713f84bcba08ed4`  
-**Current highest milestone:** `PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED`  
+**Reconciled through milestone:** `CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED`<br>
+**Current highest milestone:** `CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED`<br>
+**Current claim ceiling:** `BOUNDED_SOFTWARE_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_ONLY`<br>
 **Physical work:** `NOT_AUTHORIZED`  
 **P0:** `FROZEN_AND_PARKED`
 
 This roadmap supersedes version 2.1 as the active planning authority for this lane. Historical details remain preserved in Git history and in the frozen evidence packages.
 
 The current phase-native computer is a major architectural milestone. It is not the end of the roadmap and it is not permission for an agent to stop.
+
+The compact toroidal path-sum successor has now directly demonstrated the
+mission lifecycle under a bounded software claim. It is the first result in
+this lane with measured Gamma growth against explicit matched path-work. It
+does not establish advantage over the equivalent compact classical dynamic
+program.
 
 ---
 
@@ -65,6 +72,7 @@ AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED
 CATALYTIC_WAVEFORM_ISING_V3_VERIFIED
 CATALYTIC_WAVEFORM_ISING_V3_SIX_SITE_VERIFIED
 PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED
+CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED
 ```
 
 The current shared phase engine provides:
@@ -88,6 +96,33 @@ One frozen engine has prospectively executed modular arithmetic, carried binary 
 
 This establishes a bounded reusable software phase-computer reference. It does not establish the full CAT_CAS mission.
 
+The successor `audio_cat_cas_unbounded_compute_v1` additionally establishes:
+
+```text
+canonical compact .holo programs
+no-smuggle compilation from public cyclic weights
+binary choice-path counts carried as relative phases
+one global triangular torus shear per public weight
+p-fold phase-lock stabilization without residue selection
+zero complete path modes
+one surviving target phase latch
+program-derived inverse with zero retained step factors
+actual carrier restoration and cross-program reuse
+one classical modular path-count result at CollapseBoundary
+independent post-seal acceptance
+Gamma growth from n=16 through n=256
+```
+
+The sealed corpus contains 20 programs in four families. All 20 independently
+match compact integer recurrence; four 2^16 cases also match literal path
+expansion. The largest run represents 2^256 include/exclude paths with 952,953
+declared phase work units and Gamma approximately 2.43e71.
+
+This is compact unresolved path aggregation, not a hidden speed claim. The
+ordinary compact dynamic program remains asymptotically equivalent and was
+about 38 to 45 times faster than the NumPy phase reference on the measured
+machine.
+
 ---
 
 ## 3. Current Capability Position
@@ -99,14 +134,18 @@ C0 catalytic closure                established in bounded software
 C1 bounded residency                partially established by factorized state
 C2 reuse and multiplex              established in bounded software
 C3 noncollapse representation       established for phase-resident program state
-C4 native global operator           partially established for composable phase instructions
-C5 fixed-point or compute advantage not established
-C6 external acceptance              not established
+C4 native global operator           established for bounded torus path shears
+C5 fixed-point or compute advantage path-work leverage established only
+C6 external acceptance              local independent boundary established; official external not established
 C7 cross-domain transfer            not established
 physical phase computation          not established
 ```
 
-The phase-native computer milestone proves programmability and composition. It does not yet prove that a compact `.holo` process-object resolves a classically exploding problem with growing compute leverage.
+The toroidal path-sum result proves that a compact `.holo` process-object
+resolves an exponentially growing explicit path set with growing Gamma. It
+does not prove superiority over the best compact classical algorithm,
+fixed-size unbounded information, universal computation, or physical
+execution.
 
 ---
 
@@ -281,17 +320,17 @@ The borrowed carrier must be causally involved. Restoration must reverse the act
 Current highest claim:
 
 ```text
-BOUNDED_SOFTWARE_PHASE_NATIVE_COMPUTER_REFERENCE_ONLY
+BOUNDED_SOFTWARE_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_ONLY
 ```
 
 Not established:
 
 ```text
 universal computation
-compute advantage
+advantage over compact classical dynamic programming
 energy advantage
 fixed-point scaling advantage
-unbounded effective computation
+fixed-size unbounded information
 external official acceptance
 cross-domain transfer
 physical phase computation
@@ -301,6 +340,25 @@ Small Wall crossing
 ```
 
 Agents must preserve the distinction between mission target and current evidence while continuing toward the target.
+
+The bounded mission stop condition has been reached for compact unresolved
+path-work aggregation:
+
+```text
+compact unresolved representation       established
+native global phase computation          established
+one classical boundary result            established
+independent post-seal acceptance          established
+actual substrate restoration             established
+actual restored-substrate reuse          established
+Gamma growth against matched path-work   established
+```
+
+This permits the current autonomous goal to return. It does not close the
+broader research lane. The next highest-leverage scientific question is
+whether reversible phase history can be compressed below O(n*M), followed by
+an official external problem whose best known compact classical baseline is
+not already equivalent.
 
 ---
 
