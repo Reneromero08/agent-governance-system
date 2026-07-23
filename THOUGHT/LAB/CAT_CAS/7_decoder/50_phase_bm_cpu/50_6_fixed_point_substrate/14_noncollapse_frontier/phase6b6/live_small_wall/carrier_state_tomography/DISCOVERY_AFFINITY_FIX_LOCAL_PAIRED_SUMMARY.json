@@ -1,0 +1,110 @@
+{
+  "schema": "FAMILY10H_AFFINITY_FIX_LOCAL_PAIRED_DISCOVERY_SUMMARY_V1",
+  "created_at": "2026-07-23T13:23:09.1706381-07:00",
+  "branch": "codex/family10h-tomography-repair",
+  "base_head_before_repair_commit": "06f9fe4dc305cc83ebe86fc5a22e77aa0507bc64",
+  "claim_emitted": false,
+  "small_wall_crossed": false,
+  "official_attempt_context": {
+    "run_id": "family10h_primary_minus_sham_local_paired_differential_v1_0",
+    "attempt": 1,
+    "result_class": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_CUSTODY_INVALID",
+    "archive_sha256": "61cd5c7994ca28e9e954bcf50559b9a7b6122bee6e34e2bd3b6600be90412519",
+    "archive_size_bytes": 1557031,
+    "adjudication_sha256": "f8bd832ed585cf4d5a47cd725592f93d5d9981d4564ca0c2bca3bbb8293bb2e1",
+    "raw_record_count": 0,
+    "pair_observation_count": 251,
+    "source_death_receipt_count": 0
+  },
+  "failure_root_cause": {
+    "classification": "runtime_affinity_scheduler_deadlock",
+    "mechanism": "after row 0 the parent receiver process remained pinned to CPU 5; the next source child inherited CPU 5 affinity and equal SCHED_FIFO priority; the parent busy-waited for source_ready without yielding, so the child could not run and pin itself to CPU 4",
+    "not_a_scientific_negative": true
+  },
+  "repair": {
+    "source_file": "family10h_relation_spatial_pair_readout_v1_1_segmented/relation_spatial_runtime.c",
+    "source_sha256_after_patch": "1edd1f03f7e1cfb53089cb90c58a6c7ff5870c370cc75ecddb9c24c8d015ec26",
+    "changes": [
+      "pin parent to the source/receiver CPU pair before forking each physical row",
+      "yield while waiting for child source_ready progress",
+      "pause in the child release wait loop"
+    ]
+  },
+  "discovery_runs": {
+    "one_row_original_runtime": {
+      "remote_root": "/root/catcas_live_small_wall/discovery_runtime_stall_diag_20260723_130420",
+      "archive_sha256": "60aba8de42137cb3309dd5a62366a2217137f149c196a60072a5e38da4498c7a",
+      "archive_size_bytes": 62373,
+      "raw_record_count": 1,
+      "pair_observation_count": 256,
+      "source_death_receipt_count": 1,
+      "return_code": 0
+    },
+    "sixty_four_row_original_runtime": {
+      "remote_root": "/root/catcas_live_small_wall/discovery_runtime_scale_64_20260723_130637",
+      "return_code": 124,
+      "raw_record_count": 0,
+      "pair_observation_count": 250,
+      "source_death_receipt_count": 0,
+      "observed_parent_cpu": 5,
+      "observed_child_cpu": 5,
+      "observed_child_affinity_inherited_from_parent": true
+    },
+    "sixty_four_row_patched_runtime": {
+      "remote_root": "/root/catcas_live_small_wall/discovery_affinity_fix_scale_64_20260723_130935",
+      "return_code": 0,
+      "raw_record_count": 64,
+      "pair_observation_count": 16384,
+      "source_death_receipt_count": 64
+    },
+    "full_primary_patched_runtime": {
+      "remote_root": "/root/catcas_live_small_wall/discovery_affinity_fix_full_primary_20260723_131047",
+      "archive_sha256": "a938ae1842b1321a1eebd7a65cbef898eb4599d5fcf490233e44933f9009e8c4",
+      "archive_size_bytes": 10962585,
+      "return_code": 0,
+      "raw_record_count": 2048,
+      "pair_observation_count": 524288,
+      "source_death_receipt_count": 2048
+    },
+    "full_local_paired_sweep_patched_runtime": {
+      "remote_root": "/root/catcas_live_small_wall/discovery_affinity_fix_local_paired_sweep_20260723_131247",
+      "archive_sha256": "703818e1db1733b5e2b89717c5e92b09eae00b187db730de598b4a45543de762",
+      "archive_size_bytes": 109930316,
+      "overall_return_code": 0,
+      "variant_count": 10,
+      "raw_record_count": 20480,
+      "pair_observation_count": 5242880,
+      "source_death_receipt_count": 20480,
+      "recomputed_analysis_sha256": "aa20cc557b2cabe7d6b299aa1e9faada6ca5d0b14b7cf8114a59bbf057f1ec82",
+      "recomputed_compact_sha256": "0f2cbd116d21c97bbfdbed25f44152f56fc9a012de541538c3c51c7a65d44aea"
+    }
+  },
+  "local_paired_recomputed_result": {
+    "rounds": {
+      "0": {
+        "R_primary": 0.06642166194704319,
+        "R_sham": 0.0014210011699119507,
+        "D_local": 0.06500066077713124,
+        "max_abs_generic": 0.006068271746737386,
+        "generic_to_D": 0.09335707782331264,
+        "generic_envelope_0p25_pass": true
+      },
+      "1": {
+        "R_primary": 0.06654767749486046,
+        "R_sham": -0.006516615135940624,
+        "D_local": 0.07306429263080108,
+        "max_abs_generic": 0.012692203654615958,
+        "generic_to_D": 0.1737128109725299,
+        "generic_envelope_0p25_pass": true
+      }
+    },
+    "round_gates_pass": true,
+    "one_factor_strata_pass": true,
+    "stratum_count": 28,
+    "negative_D_strata": [],
+    "negative_primary_strata": [],
+    "variant_failures": [],
+    "absolute_relation_sham_sign_is_not_stable": true
+  },
+  "next_action": "regenerate and freeze the segmented runtime/package from the affinity repair commit, then continue with the local paired differential confirmation path without restoring the absolute sham-sign gate"
+}

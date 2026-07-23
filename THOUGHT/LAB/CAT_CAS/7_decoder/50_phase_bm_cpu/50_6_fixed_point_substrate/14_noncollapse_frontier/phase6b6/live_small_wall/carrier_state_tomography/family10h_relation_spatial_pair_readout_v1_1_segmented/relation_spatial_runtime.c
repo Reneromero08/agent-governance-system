@@ -158,6 +158,26 @@ static int pin_to_core(int core) {
     return current_cpu_checked() == core;
 }
 
+static int pin_to_core_pair(int first_core, int second_core) {
+    int current = -1;
+    cpu_set_t set;
+    CPU_ZERO(&set);
+    CPU_SET(first_core, &set);
+    CPU_SET(second_core, &set);
+    if (sched_setaffinity(0, sizeof(set), &set) != 0) {
+        return 0;
+    }
+    current = current_cpu_checked();
+    return current == first_core || current == second_core;
+}
+
+static void wait_for_peer_progress(void) {
+#if defined(__x86_64__) || defined(__i386__)
+    _mm_pause();
+#endif
+    sched_yield();
+}
+
 static long perf_event_open_call(struct perf_event_attr *attr, pid_t pid, int cpu, int group_fd, unsigned long flags) {
     return syscall(__NR_perf_event_open, attr, pid, cpu, group_fd, flags);
 }
@@ -814,6 +834,10 @@ static int execute_schedule_common(const char *schedule_path, const char *output
             source_ready_ns = UINT64_C(1000000000) + (uint64_t)row.execution_ordinal;
             query_start_ns = source_ready_ns + row.delay_ns + 1u;
         } else {
+            if (!pin_to_core_pair(row.source_cpu_expected, row.receiver_cpu_expected)) {
+                fprintf(stderr, "source/receiver CPU pair pin failed\n");
+                goto cleanup;
+            }
             if (!open_perf_group(&group)) {
                 fprintf(stderr, "PMU group open failed\n");
                 goto cleanup;
@@ -844,6 +868,9 @@ static int execute_schedule_common(const char *schedule_path, const char *output
                 shared->source_ready_ns = monotonic_ns();
                 shared->source_ready = 1;
                 while (!shared->release_source) {
+#if defined(__x86_64__) || defined(__i386__)
+                    _mm_pause();
+#endif
                     relation_spatial_sink ^= 1u;
                 }
                 _exit((shared->source_cpu_before == row.source_cpu_expected && shared->source_cpu_after == row.source_cpu_expected && shared->preparation_ok) ? 0 : 12);
@@ -853,6 +880,7 @@ static int execute_schedule_common(const char *schedule_path, const char *output
                     fprintf(stderr, "source exited before ready\n");
                     goto cleanup;
                 }
+                wait_for_peer_progress();
             }
             source_ready_ns = shared->source_ready_ns;
             source_cpu_before = shared->source_cpu_before;
