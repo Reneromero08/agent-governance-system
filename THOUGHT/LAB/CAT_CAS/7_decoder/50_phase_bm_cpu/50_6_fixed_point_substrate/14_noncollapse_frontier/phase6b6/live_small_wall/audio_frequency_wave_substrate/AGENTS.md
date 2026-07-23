@@ -12,9 +12,7 @@ this file
 package-local contracts and reports
 ```
 
-The mission and roadmap outrank package-local completion language. Frozen evidence and claim ceilings remain authoritative for what has actually been proved.
-
----
+Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 ## 1. Prime Directive
 
@@ -22,18 +20,9 @@ The mission and roadmap outrank package-local completion language. Frozen eviden
 REPLACE THE BIT WITH PI.
 ```
 
-The technical meaning is:
+Phase on `S^1` is the primitive coordinate. Relative phase, interference, topology, and geometry carry native state. A discrete result is rendered only at a declared boundary.
 
-```text
-phase on S^1 is the primitive computational coordinate;
-0/pi is one permitted binary boundary shadow;
-relative phase, interference, topology, and geometry carry native state;
-discrete output is rendered only at a declared boundary.
-```
-
-The lane is not an audio Ising project. Ising was one early operating sector.
-
-The standing objective is the CAT_CAS mission:
+The standing lane objective is:
 
 ```text
 finite reusable substrate
@@ -41,104 +30,80 @@ finite reusable substrate
 -> native phase / catalytic / toroidal evolution
 -> invariant or fixed point
 -> one classical witness
--> independent acceptance
+-> official external acceptance
 -> restoration
 -> reuse
+-> increasing leverage against the best matched compact classical method
 ```
 
----
-
-## 2. Current Verified Milestone
-
-Current highest bounded software milestone:
+## 2. Current Highest Milestone
 
 ```text
-PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED
+CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED
 ```
 
-Current shared engine capabilities:
+Claim ceiling:
 
 ```text
-phase-resident factorized registers
-ROT
-ADD
-CCX
-SWAP
-intermediate phase carries
-conditional phase control
-complete waveform routing
-multiple program classes on one engine
-boundary-only decoding
-true inverse restoration
-same-program reuse
-cross-program restored-carrier reuse
+BOUNDED_SOFTWARE_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_ONLY
 ```
 
-Current claim ceiling:
+The result establishes compact `.holo` path aggregation, a bounded native torus operator, program-derived inverse execution, restoration, reuse, and leverage over explicit path expansion.
+
+It does not establish advantage over the equivalent compact classical dynamic program, official external acceptance, cross-domain transfer, fixed-size unbounded information, or physical phase computation.
+
+It is nonterminal.
+
+## 3. Owner-Only Closure
+
+Only the user may declare this lane complete or close it.
+
+The agent must not stop because it achieved:
 
 ```text
-BOUNDED_SOFTWARE_PHASE_NATIVE_COMPUTER_REFERENCE_ONLY
-```
-
-This is a major milestone. It is not completion of the lane or the CAT_CAS mission.
-
----
-
-## 3. Nonterminal Milestones
-
-An agent must not stop merely because it has completed any of the following:
-
-```text
-an implementation
-an experiment
-an instruction
-program-counter support
-branches or loops
-memory
-another program class
-another scaling result
-a compiler prototype
-.holo IR
-a global operator
-a prospective batch
+a bounded mission result
+a complete mission lifecycle
+growing Gamma against explicit enumeration
 a verified package
-a review
-a commit
-a pushed branch
+a new instruction or program
+a compiler or .holo object
+a global operator
+a fixed point
+a scaling result
+a prospective batch
+an independent review
+a final report
+a pushed commit
+a completed roadmap phase
 ```
 
-Preserve the result, update the roadmap state when necessary, identify the next highest-leverage blocker, and continue.
+Words such as `final`, `verified`, `complete`, `mission result`, and `highest-value successor` are package-level descriptions. They never authorize stopping.
 
-Package-local phrases such as `final`, `verified`, `complete`, or `next step` do not override this rule.
-
----
+After preserving any result, update lane state, select the next highest-leverage unresolved blocker, and continue without waiting for a new user prompt.
 
 ## 4. Autonomous Authority
 
 The agent may autonomously:
 
 ```text
-inspect the full lane and related CAT_CAS packages
+inspect the complete lane and related CAT_CAS work
 derive new mathematics
 extend or replace the current architecture
-build phase control flow and memory
-design .holo process objects and compilers
-prototype global phase operators
-select development problems
-run experiments and benchmarks
-repair failures
-replace failed mechanisms
-measure scaling and compute leverage
+prototype competing substrates and process objects
+implement control flow, memory, compilers, global operators, or fixed points
+select development and flagship problems
+run experiments and matched benchmarks
+repair or discard failed mechanisms
+measure scaling and resource laws
 commit meaningful milestones
-push to the canonical branch
-update the roadmap and lane state
+push to codex/audio-frequency-wave-substrate
+update roadmap authority files
+select the next experiment from accumulated evidence
 ```
 
-Do not ask the user to decide ordinary reversible software, mathematical, experimental, or architectural choices that can be investigated directly.
+Do not ask the user to decide ordinary reversible software, mathematical, architectural, or experimental choices that can be investigated directly.
 
-Use judgment. Do not convert autonomy into random breadth. Choose the work that most directly removes the blocker between current evidence and the mission.
-
----
+Use judgment. Choose work that most directly removes the blocker between current evidence and the next C-rung.
 
 ## 5. Operating Loop
 
@@ -146,95 +111,45 @@ Use judgment. Do not convert autonomy into random breadth. Choose the work that 
 explore
 -> implement
 -> execute
--> inspect evidence
+-> inspect
 -> repair or replace
--> compress what was learned
--> preserve meaningful progress
+-> preserve meaningful evidence
+-> update roadmap state
+-> choose the next blocker
 -> continue
 ```
 
-Do not stop at the first failure.
+Do not stop at the first failure. Do not freeze the first working mechanism while a known defect remains. Token, context, retry, iteration, and elapsed-time counters are not scientific stop conditions.
 
-Do not freeze the first working mechanism if a known defect remains.
+Verification follows a substantive result. One focused independent review is normally enough for one claim. Do not create audit-of-audit loops.
 
-Do not let token, context, retry, iteration, or elapsed-time counters become scientific stop conditions.
+## 6. Current Frontier
 
-Verification follows a substantive result. It must not consume the project before a result exists.
-
-One focused independent review is normally enough for one meaningful claim. Do not create audit-of-audit loops.
-
----
-
-## 6. Frontier Choice
-
-The roadmap lists candidate frontiers, not a mandatory sequence.
-
-The agent must select the highest-value next move based on evidence. Candidate bottlenecks include:
+Current candidate frontiers include:
 
 ```text
-phase-resident control flow
-loops, branches, calls, and memory
-program-derived inverse execution
-compact .holo representation
-no-smuggle compilation
-native global operators
-fixed points and invariants
-matched classical explosion
-compute-leverage scaling
-external official acceptance
+reversible history and carrier-state compression below O(nM)
+fixed-resident or rolling toroidal substrate
+flagship problems without equivalent compact classical DP
+C5 leverage against the best matched compact baseline
+official external acceptance
 cross-domain transfer
+phase control flow and memory where they enable stronger compute
 ```
 
-Another site-count increase, instruction, benchmark, or batch is justified only when it answers a necessary architectural question.
+These are not a mandatory sequence. The agent must select or replace them based on evidence.
 
----
+## 7. Native No-Smuggle Law
 
-## 7. Native Semantic Laws
-
-Native state may live on:
-
-```text
-S^1
-T^m = U(1)^m
-recursive phase geometry
-relational polytopes
-spectral phase structures
-another explicitly declared noncollapsed process-object
-```
-
-Native operations may include:
-
-```text
-rotation
-relational composition
-interference
-coupling
-routing
-flow
-closure
-winding
-topological transition
-resonance
-fixed-point evolution
-```
-
-These are not a required instruction list. Follow the strongest mechanism.
-
-Conventional code may orchestrate, compile, package, seal, and verify. It may not silently perform the target computation and encode the answer into phase.
-
----
-
-## 8. No-Smuggle Laws
-
-The native machine must not receive:
+Native execution must not receive:
 
 ```text
 oracle answers
 expected outputs
-cached program results
+cached results
 decoded correctness
 winner identities
-conventional solver outputs
+conventional solver output
 answer-dependent retries
 hardcoded problem identities
 per-instance repair constants
@@ -242,15 +157,15 @@ hidden candidate enumeration
 hidden classical path materialization
 ```
 
-The compiler must not solve the public instance.
+The compiler must not solve the target problem.
 
-Do not claim factorization, compactness, lazy execution, or a global operator while equivalent enumeration occurs elsewhere.
+Do not claim factorized, compact, lazy, global, or fixed-size computation while performing equivalent enumeration elsewhere.
+
+Conventional software may parse, orchestrate, seal, and verify. It may not secretly become the native machine.
 
 Discrete decoding occurs only at a declared boundary.
 
----
-
-## 9. Catalytic Laws
+## 8. Catalytic Law
 
 Preserve the strongest available form of:
 
@@ -264,27 +179,21 @@ borrow
 -> reuse
 ```
 
-The carrier must be causally involved.
+The carrier must be causally involved. The result must survive outside the history being reversed. Restoration must reverse the actual forward process. Reuse must consume the actual restored carrier.
 
-The result must survive outside the history being reversed.
+## 9. Claim Discipline
 
-Restoration must reverse the actual forward process, not substitute a fresh carrier.
+C5 is not established until the mechanism demonstrates growing leverage or another defensible separation against the strongest matched compact conventional method, not merely against explicit expansion.
 
-Reuse must consume the actual restored carrier.
+C6 is not established by a verifier controlled inside this lane. It requires an official external boundary.
 
-When an irreversible boundary is necessary, isolate and declare it explicitly.
-
----
-
-## 10. Success and Claim Discipline
-
-Current established software architecture does not establish:
+Current unproved claims include:
 
 ```text
+advantage over the best compact classical algorithm
+fixed-point scaling advantage
+fixed-size unbounded information
 universal computation
-compute advantage
-energy advantage
-unbounded effective computation
 external official acceptance
 cross-domain transfer
 physical phase computation
@@ -293,55 +202,34 @@ hardware bit replacement
 Small Wall crossing
 ```
 
-The strong mission target is increasing compute leverage:
+## 10. Operational Stop Conditions
 
-```text
-Gamma(n) = classical path-work
-           / (compile + native + readout + restore)
-```
-
-Only evidence that directly addresses this scaling may promote the C5 mission rung.
-
-Useful infrastructure remains valuable. Do not narrate it as a Wall crossing.
-
----
-
-## 11. Legitimate Stop Conditions
-
-The agent may stop and return only when:
-
-### Mission result
-
-A bounded but meaningful CAT_CAS mission result has been achieved, including compact unresolved representation, native global computation, classical witness extraction, independent acceptance, restoration, reuse, and credible compute leverage.
+The agent may return to the user only at one of these boundaries:
 
 ### External authority boundary
 
-Further progress requires hardware action, physical contact, procurement, credentials, destructive change, merge, release, external submission, or another irreversible owner decision.
+Further progress requires user-controlled hardware action, physical contact, procurement, credentials, destructive change, merge, release, paid commitment, or external submission.
 
 ### Concrete scientific blocker
 
-Serious direct work has established a specific blocker that cannot be repaired or bypassed in the available software environment. Report the evidence, attempted alternatives, and smallest crossing action.
+Serious direct investigation has established a specific blocker that cannot be repaired, replaced, or bypassed in the available software environment. Report the evidence, attempted alternatives, and smallest action needed to cross it.
 
-Do not stop because a package or milestone is complete.
+There is no self-declared mission-result stop condition.
 
----
+If the runtime forcibly ends, preserve an `AUTONOMOUS_CONTINUATION_REQUIRED` checkpoint with the exact next action. Do not label the lane or mission complete.
 
-## 12. Roadmap Maintenance
+## 11. Roadmap Maintenance
 
-When a meaningful capability changes, update:
+When capability changes, update:
 
 ```text
 AUDIO_SIDE_QUEST_ROADMAP.md
 AUTONOMOUS_LANE_STATE.json
 ```
 
-Record the new capability, claim ceiling, capability rung, remaining blocker, and why work continues or legitimately stops.
+Record the result, claim ceiling, C-rung position, best compact baseline, highest-leverage blocker, selected next work, and `terminal: false`.
 
-The roadmap must not remain behind the evidence.
-
----
-
-## 13. Git and Physical Boundaries
+## 12. Git and Physical Boundaries
 
 Canonical branch:
 
@@ -349,24 +237,16 @@ Canonical branch:
 codex/audio-frequency-wave-substrate
 ```
 
-Commit and push meaningful progress.
+Commit and push meaningful progress. Do not merge or open a PR without user authority. Do not rewrite frozen predecessor evidence.
 
-Do not merge or open a PR without user authorization.
+P0 remains parked. No hardware, playback, recording, powered circuit, procurement, fabrication, or target contact is authorized.
 
-Do not rewrite frozen predecessor evidence.
-
-P0 remains parked.
-
-No hardware, playback, recording, powered circuit, procurement, fabrication, or target contact is authorized by this file.
-
----
-
-## 14. Standing Instruction
+## 13. Standing Instruction
 
 ```text
-Build toward unbounded effective computation with phase.
+The user owns lane closure.
 
-Treat every intermediate verification as a rung, not a finish line.
+Preserve every milestone, then continue.
 
-Continue until the mission is demonstrated or a real authority boundary or evidenced scientific blocker is reached.
+Do not return merely because the latest package looks like the mission.
 ```
