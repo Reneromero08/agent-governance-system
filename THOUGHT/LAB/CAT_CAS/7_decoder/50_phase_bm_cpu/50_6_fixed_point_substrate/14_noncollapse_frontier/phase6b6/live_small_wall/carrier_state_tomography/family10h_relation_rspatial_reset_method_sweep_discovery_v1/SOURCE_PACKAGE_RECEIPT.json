@@ -1,0 +1,142 @@
+{
+  "created_at": "2026-07-23T22:44:14.668795+00:00",
+  "files": {
+    "source/RELATION_GRAMMAR.json": {
+      "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+      "size_bytes": 292071
+    },
+    "source/RELATION_GRAMMAR.sha256": {
+      "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+      "size_bytes": 66
+    },
+    "source/RELATION_GRAMMAR.tsv": {
+      "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+      "size_bytes": 360
+    },
+    "source/RELATION_RSPATIAL_RESET_METHOD_SWEEP_SCHEDULE_MANIFEST.json": {
+      "sha256": "01483fc8a04fc967ac0ba56aa5ef65475befcb67e1937b6743dcc008c55fafb8",
+      "size_bytes": 5453
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+      "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+      "size_bytes": 2277
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+      "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+      "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+      "size_bytes": 1866
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+      "size_bytes": 11263467
+    },
+    "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+      "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+      "size_bytes": 2635
+    },
+    "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+      "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+      "size_bytes": 3120
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/alive_primary.tsv": {
+      "sha256": "2c6484dde9224ff85e7bb4c5a849a871eda38d23c9949d1d3043160d1e84c4da",
+      "size_bytes": 560287
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/alive_sham.tsv": {
+      "sha256": "d17d9ca9e3261bdccaeac2b0efdf84ecbb663eae783f33252dd247bd13b661b1",
+      "size_bytes": 549535
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/dead_primary.tsv": {
+      "sha256": "f1c5328d4ba532067d9721411e033596e58a217025018bced3f01d07077eacc6",
+      "size_bytes": 584863
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/dead_sham.tsv": {
+      "sha256": "c9cde3956760b42c4665800e3ca9b0c1276d306fd2deb83d07ca045916c187e5",
+      "size_bytes": 566431
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_double_flush_primary.tsv": {
+      "sha256": "4c1464f2f69c6aebb1eac5d3c1750d597593c8c3c45c21029854ecc40cc02168",
+      "size_bytes": 649375
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_double_flush_sham.tsv": {
+      "sha256": "fe7e92b14518f8002854d2ac16b786d8967a61cf74daa46e8e2e28215bfbeba3",
+      "size_bytes": 630943
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_flush_primary.tsv": {
+      "sha256": "14a987e257f2fc92259f5ab085b4a4790c1d071c12515a48253735d967c6113b",
+      "size_bytes": 617119
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_flush_sham.tsv": {
+      "sha256": "d3c763c233eccb06f5d3a880171819e73dc748bff5230eb28b0fe4f07d0b2e83",
+      "size_bytes": 598687
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_lane_a_flush_primary.tsv": {
+      "sha256": "db221391f908d708b6ddd5d6351cfc52cfc357f44a12e857a0dabafc1ded7669",
+      "size_bytes": 649375
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_lane_a_flush_sham.tsv": {
+      "sha256": "9ed3991db021d52fd64cc63605ede4f2a4ffa2c415d7002e5af9c19226006b07",
+      "size_bytes": 630943
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_prefault_flush_primary.tsv": {
+      "sha256": "8a6860373501641909c0c2fa654057a4f28e9d597b0b9d0995d7ebc595f1eb89",
+      "size_bytes": 658591
+    },
+    "source/RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_prefault_flush_sham.tsv": {
+      "sha256": "34fa0bc0f07bdd28b2cf30e5570810236745842f2b6c3da5e055eaef37ce4fa2",
+      "size_bytes": 640159
+    },
+    "source/RUN_RSPATIAL_RESET_METHOD_SWEEP_DISCOVERY.sh": {
+      "sha256": "d973eaec4f64e62dcf9ab8df9c3f03d5c6903bff5489057f5f5d9d4f14f8d564",
+      "size_bytes": 8835
+    },
+    "source/relation_spatial_adjudication.py": {
+      "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "size_bytes": 864
+    },
+    "source/relation_spatial_physical_adjudication.py": {
+      "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+      "size_bytes": 42533
+    },
+    "source/relation_spatial_pmu_preflight": {
+      "sha256": "ca965dbaddf89fc8c53277313da1501ed001c951c888dab3f2dfd869e86b493c",
+      "size_bytes": 42640
+    },
+    "source/relation_spatial_pmu_preflight.c": {
+      "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "size_bytes": 9376
+    },
+    "source/relation_spatial_public.py": {
+      "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+      "size_bytes": 32161
+    },
+    "source/relation_spatial_runtime": {
+      "sha256": "9dd8ce9967d522729f79b4c53fefa02bba593ba3aedc90b8e35989409c8db68f",
+      "size_bytes": 113088
+    },
+    "source/relation_spatial_runtime.c": {
+      "sha256": "08c83e48d6122616b3b7317c085387a2dc5aefa118ea605e7401b5fa8dad6f4c",
+      "size_bytes": 49821
+    },
+    "source/relation_spatial_runtime.h": {
+      "sha256": "f9eae7fa3373034ea34c78e2bdcc97beb1d65df595b0838d8d9a2bd55b63c479",
+      "size_bytes": 2617
+    },
+    "source/relation_spatial_target.py": {
+      "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+      "size_bytes": 91980
+    }
+  },
+  "path": "C:\\tmp\\family10h_relation_rspatial_reset_method_sweep_discovery_v1_0_source_package.tar.gz",
+  "run_id": "family10h_relation_rspatial_reset_method_sweep_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_RESET_METHOD_SWEEP_SOURCE_PACKAGE_V1",
+  "sha256": "285f58ca2937bd0ea36a070c5a2d6f5bd587f8a266ea344fd333cb82737f1895",
+  "size_bytes": 759892
+}
