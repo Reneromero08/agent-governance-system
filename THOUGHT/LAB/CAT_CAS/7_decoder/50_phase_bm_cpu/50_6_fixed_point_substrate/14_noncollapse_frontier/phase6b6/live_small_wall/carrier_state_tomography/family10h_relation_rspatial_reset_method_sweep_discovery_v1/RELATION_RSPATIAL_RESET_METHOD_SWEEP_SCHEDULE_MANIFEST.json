@@ -1,0 +1,113 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Which active reset method most consistently kills the source-dead R-spatial primary-minus-sham relation coordinate across matched strata?",
+  "pair_sample_count": 256,
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_rspatial_reset_method_sweep_discovery_v1_0",
+  "schedule_manifest_sha256": "dbe90850c9658baa934a1e4b6a08fcd1118a21c1d2620df7121a0a7f9f592030",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_RESET_METHOD_SWEEP_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "alive_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/alive_primary.tsv",
+      "query": "query_relation_pair",
+      "row_count": 512,
+      "sha256": "2c6484dde9224ff85e7bb4c5a849a871eda38d23c9949d1d3043160d1e84c4da",
+      "size_bytes": 560287
+    },
+    "alive_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/alive_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 512,
+      "sha256": "d17d9ca9e3261bdccaeac2b0efdf84ecbb663eae783f33252dd247bd13b661b1",
+      "size_bytes": 549535
+    },
+    "dead_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/dead_primary.tsv",
+      "query": "dead_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "f1c5328d4ba532067d9721411e033596e58a217025018bced3f01d07077eacc6",
+      "size_bytes": 584863
+    },
+    "dead_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/dead_sham.tsv",
+      "query": "dead_relation_sham_control",
+      "row_count": 512,
+      "sha256": "c9cde3956760b42c4665800e3ca9b0c1276d306fd2deb83d07ca045916c187e5",
+      "size_bytes": 566431
+    },
+    "reset_double_flush_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_double_flush_primary.tsv",
+      "query": "reset_double_flush_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "4c1464f2f69c6aebb1eac5d3c1750d597593c8c3c45c21029854ecc40cc02168",
+      "size_bytes": 649375
+    },
+    "reset_double_flush_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_double_flush_sham.tsv",
+      "query": "reset_double_flush_relation_sham_control",
+      "row_count": 512,
+      "sha256": "fe7e92b14518f8002854d2ac16b786d8967a61cf74daa46e8e2e28215bfbeba3",
+      "size_bytes": 630943
+    },
+    "reset_flush_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_flush_primary.tsv",
+      "query": "reset_flush_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "14a987e257f2fc92259f5ab085b4a4790c1d071c12515a48253735d967c6113b",
+      "size_bytes": 617119
+    },
+    "reset_flush_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_flush_sham.tsv",
+      "query": "reset_flush_relation_sham_control",
+      "row_count": 512,
+      "sha256": "d3c763c233eccb06f5d3a880171819e73dc748bff5230eb28b0fe4f07d0b2e83",
+      "size_bytes": 598687
+    },
+    "reset_lane_a_flush_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_lane_a_flush_primary.tsv",
+      "query": "reset_lane_a_flush_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "db221391f908d708b6ddd5d6351cfc52cfc357f44a12e857a0dabafc1ded7669",
+      "size_bytes": 649375
+    },
+    "reset_lane_a_flush_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_lane_a_flush_sham.tsv",
+      "query": "reset_lane_a_flush_relation_sham_control",
+      "row_count": 512,
+      "sha256": "9ed3991db021d52fd64cc63605ede4f2a4ffa2c415d7002e5af9c19226006b07",
+      "size_bytes": 630943
+    },
+    "reset_prefault_flush_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_prefault_flush_primary.tsv",
+      "query": "reset_prefault_flush_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "8a6860373501641909c0c2fa654057a4f28e9d597b0b9d0995d7ebc595f1eb89",
+      "size_bytes": 658591
+    },
+    "reset_prefault_flush_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RSPATIAL_RESET_METHOD_SWEEP_SCHEDULES/reset_prefault_flush_sham.tsv",
+      "query": "reset_prefault_flush_relation_sham_control",
+      "row_count": 512,
+      "sha256": "34fa0bc0f07bdd28b2cf30e5570810236745842f2b6c3da5e055eaef37ce4fa2",
+      "size_bytes": 640159
+    }
+  }
+}
