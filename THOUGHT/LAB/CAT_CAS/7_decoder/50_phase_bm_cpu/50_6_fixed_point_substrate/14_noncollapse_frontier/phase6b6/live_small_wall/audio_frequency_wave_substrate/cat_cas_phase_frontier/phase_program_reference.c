@@ -21,13 +21,15 @@ enum opcode {
     OP_ADD = 2,
     OP_MULADD = 3,
     OP_SWAP = 4,
-    OP_CSWAP = 5
+    OP_CSWAP = 5,
+    OP_PCSWAP = 6
 };
 
 struct instruction {
     enum opcode op;
     size_t a;
     size_t b;
+    size_t c;
     size_t target;
     int amount;
 };
@@ -256,6 +258,7 @@ static struct program read_program(const char *path) {
             .op = OP_ROT,
             .a = 0,
             .b = 0,
+            .c = 0,
             .target = 0,
             .amount = 0
         };
@@ -373,6 +376,39 @@ static struct program read_program(const char *path) {
                 fprintf(stderr, "reference CSWAP registers alias\n");
                 exit(2);
             }
+        } else if (strncmp(line, "PCSWAP", 6U) == 0) {
+            if (
+                sscanf(
+                    line,
+                    "PCSWAP %zu %zu %zu %zu %c",
+                    &instruction.target,
+                    &instruction.a,
+                    &instruction.b,
+                    &instruction.c,
+                    &extra
+                ) != 4
+            ) {
+                fprintf(stderr, "reference PCSWAP is invalid\n");
+                exit(2);
+            }
+            instruction.op = OP_PCSWAP;
+            require_register(
+                instruction.target, program.registers, line_number
+            );
+            require_register(instruction.a, program.registers, line_number);
+            require_register(instruction.b, program.registers, line_number);
+            require_register(instruction.c, program.registers, line_number);
+            if (
+                instruction.target == instruction.a
+                || instruction.target == instruction.b
+                || instruction.target == instruction.c
+                || instruction.a == instruction.b
+                || instruction.a == instruction.c
+                || instruction.b == instruction.c
+            ) {
+                fprintf(stderr, "reference PCSWAP registers alias\n");
+                exit(2);
+            }
         } else {
             fprintf(stderr, "reference instruction is unknown\n");
             exit(2);
@@ -443,6 +479,17 @@ static void run_program(const struct program *program) {
                 const uint8_t temporary = state[instruction->a];
                 state[instruction->a] = state[instruction->b];
                 state[instruction->b] = temporary;
+            }
+        } else if (instruction->op == OP_PCSWAP) {
+            if (
+                (
+                    state[instruction->target]
+                    * state[instruction->a]
+                ) % Q == 1U
+            ) {
+                const uint8_t temporary = state[instruction->b];
+                state[instruction->b] = state[instruction->c];
+                state[instruction->c] = temporary;
             }
         } else {
             abort();

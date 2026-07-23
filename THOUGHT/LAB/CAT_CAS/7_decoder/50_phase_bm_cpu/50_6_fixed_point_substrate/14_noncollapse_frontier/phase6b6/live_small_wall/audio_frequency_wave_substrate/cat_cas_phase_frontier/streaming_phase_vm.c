@@ -3,8 +3,9 @@
  *
  * The native state is the relative phase of twin complex rails. The VM uses a
  * ternary root alphabet only at its public load and collapse boundaries.
- * During execution ROT, ADD, MULADD, and SWAP operate on complex relations.
- * MULADD is a fixed roots-of-unity interpolation network, not a decoded branch.
+ * During execution ROT, ADD, MULADD, SWAP, CSWAP, and PCSWAP operate on
+ * complex relations. MULADD and PCSWAP are fixed roots-of-unity interpolation
+ * networks, not decoded branches.
  *
  * This source contains no conventional evaluator. A separate verifier may
  * adjudicate the emitted boundary after execution.
@@ -31,13 +32,15 @@ enum opcode {
     OP_ADD = 2,
     OP_MULADD = 3,
     OP_SWAP = 4,
-    OP_CSWAP = 5
+    OP_CSWAP = 5,
+    OP_PCSWAP = 6
 };
 
 struct instruction {
     enum opcode op;
     size_t a;
     size_t b;
+    size_t c;
     size_t target;
     int amount;
 };
@@ -464,6 +467,7 @@ static struct public_program read_public_program(const char *path) {
             .op = OP_ROT,
             .a = 0,
             .b = 0,
+            .c = 0,
             .target = 0,
             .amount = 0
         };
@@ -585,6 +589,43 @@ static struct public_program read_public_program(const char *path) {
                 fprintf(stderr, "CSWAP registers alias on line %zu\n", line_number);
                 exit(2);
             }
+        } else if (strncmp(line, "PCSWAP", 6U) == 0) {
+            if (
+                sscanf(
+                    line,
+                    "PCSWAP %zu %zu %zu %zu %c",
+                    &instruction.target,
+                    &instruction.a,
+                    &instruction.b,
+                    &instruction.c,
+                    &extra
+                ) != 4
+            ) {
+                fprintf(stderr, "invalid PCSWAP on line %zu\n", line_number);
+                exit(2);
+            }
+            instruction.op = OP_PCSWAP;
+            require_register(
+                instruction.target, program.registers, line_number
+            );
+            require_register(instruction.a, program.registers, line_number);
+            require_register(instruction.b, program.registers, line_number);
+            require_register(instruction.c, program.registers, line_number);
+            if (
+                instruction.target == instruction.a
+                || instruction.target == instruction.b
+                || instruction.target == instruction.c
+                || instruction.a == instruction.b
+                || instruction.a == instruction.c
+                || instruction.b == instruction.c
+            ) {
+                fprintf(
+                    stderr,
+                    "PCSWAP registers alias on line %zu\n",
+                    line_number
+                );
+                exit(2);
+            }
         } else {
             fprintf(stderr, "unknown instruction on line %zu\n", line_number);
             exit(2);
@@ -696,6 +737,31 @@ static void apply_forward(
         );
         return;
     }
+    if (instruction->op == OP_PCSWAP) {
+        const double complex routed_control = product_factor(
+            relation(carrier, instruction->target),
+            relation(carrier, instruction->a)
+        );
+        const double complex control =
+            boolean_one_indicator(routed_control);
+        const double complex left = relation(carrier, instruction->b);
+        const double complex right = relation(carrier, instruction->c);
+        const double complex control_left =
+            product_factor(control, left);
+        const double complex control_right =
+            product_factor(control, right);
+        write_relation(
+            carrier,
+            instruction->b,
+            left * control_right * conj(control_left)
+        );
+        write_relation(
+            carrier,
+            instruction->c,
+            right * control_left * conj(control_right)
+        );
+        return;
+    }
     fprintf(stderr, "unknown phase instruction\n");
     exit(2);
 }
@@ -732,7 +798,10 @@ static void apply_inverse(
         );
     } else if (inverse.op == OP_SWAP) {
         apply_forward(carrier, &inverse);
-    } else if (inverse.op == OP_CSWAP) {
+    } else if (
+        inverse.op == OP_CSWAP
+        || inverse.op == OP_PCSWAP
+    ) {
         apply_forward(carrier, &inverse);
     } else {
         fprintf(stderr, "unknown inverse phase instruction\n");
@@ -741,8 +810,13 @@ static void apply_inverse(
     if (wrong_program) {
         const size_t target = (
             inverse.op == OP_SWAP || inverse.op == OP_CSWAP
+                || inverse.op == OP_PCSWAP
         )
-            ? inverse.a
+            ? (
+                inverse.op == OP_PCSWAP
+                    ? inverse.b
+                    : inverse.a
+            )
             : inverse.target;
         write_relation_unlocked(
             carrier,

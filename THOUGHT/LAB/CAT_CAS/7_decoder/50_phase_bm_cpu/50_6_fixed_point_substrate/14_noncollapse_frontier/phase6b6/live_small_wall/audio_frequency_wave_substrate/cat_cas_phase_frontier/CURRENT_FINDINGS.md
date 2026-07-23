@@ -112,7 +112,7 @@ the same conventional processor that runs the compact evaluator.
 
 `streaming_phase_vm.c` now accepts a strict public `.holo` program. The native
 engine reads only boundary loads and the public `ROT`, `ADD`, `MULADD`,
-`SWAP`, and `CSWAP` stream. It does not contain or link the scalar
+`SWAP`, `CSWAP`, and `PCSWAP` stream. It does not contain or link the scalar
 adjudicator.
 
 An optional `PASSES n` field repeats the complete instruction body without
@@ -202,28 +202,59 @@ unbounded stored-program fabric or a physical parallel Fredkin array.
 
 ## Compact Fredkin compiler and exact-byte custody
 
-`fredkin_phase_compiler.c` now lowers a public multi-gate Fredkin network to
-the same phase-resident fabric mechanically. The compiler emits one-hot
-phase-counter state, phase program enables, two reusable workspaces, and a
-fixed local schedule; it never evaluates the circuit or chooses its result.
+`fredkin_phase_compiler.c` lowers a public multi-gate Fredkin network to a
+phase-resident fabric mechanically. Its first construction used a one-hot
+program counter and scanned all slots for every counter position. That was
+correct but paid `O(N^2)` native gates for `N` public Fredkin slots.
 
-The three-gate routed-network fixture compiled to 23 stored native
-instructions and executed 69 native gates over three phase-resident slots:
+The current compiler replaces that avoidable scan with the native
+`PCSWAP(program, control, left, right)` relation. `PCSWAP` composes the
+roots-of-unity product polynomial and the Fredkin selector without decoding
+either phase. The compiler now emits one phase program enable per gate, the
+data relations, and exactly one native instruction per public gate per cycle.
+It never evaluates the circuit or chooses its result.
+
+The fused instruction is not counted as free: its C kernel evaluates three
+product polynomials directly, and the phase selector evaluates one additional
+product polynomial internally, for four total plus two relation writes. That
+is constant work per gate, so the repaired law is linear rather than a hidden
+quadratic scan.
+
+The same three-gate routed-network fixture now compiles to three native
+instructions and executes three native gates:
 
 ```text
 circuit wires                       5
 Fredkin slots                       3
-compiled registers                  13
-compiled public instructions        23
-native gates                        69
-boundary symbols                    [1,0,0,1,1,1,0,0,1,1,0,2,1]
-boundary digest                     242ce3b1e9012190
-nominal restoration                 1.87452535775e-13
-actual-restored reuse restoration   9.89551939845e-14
+compiled registers                  8
+compiled public instructions        3
+native gates                        3
+boundary symbols                    [1,1,1,1,1,0,2,1]
+boundary digest                     df444ca2a82c721d
+nominal restoration                 1.01391585001e-13
+actual-restored reuse restoration   1.03720799810e-13
 wrong inverse restoration           1.73205080757
 omitted inverse restoration         1.73205080757
 compiler byte reproduction          exact
 ```
+
+The fused operator matched the separate scalar reference on all 81 total
+`F3` combinations of program enable, control, left, and right. A deterministic
+100,000-gate circuit then compiled to exactly 100,000 native steps and
+100,003 phase registers. Its boundary matched the reference and restoration
+remained `1.89494289067e-13`. The previous scan would have required
+`79,999,900,000` native instructions for the same gate count; the new resource
+law removes that quadratic artifact.
+
+On the same isolated CPU core, one observed matched median for the
+complex-phase forward kernel was `15.976x` slower than the compact byte-valued
+C reference at 100,000 gates; an independent replay measured `15.602x`.
+The target's DVFS was left unchanged and produced other slower runs, so these
+ratios are descriptive rather than fastest-case or clock-normalized
+benchmarks. Every observation remains far from C5 advantage. The result is an
+architecture and resource-law improvement; the next necessary change is
+parallel or physical phase coupling, not another interpreter constant-factor
+pass.
 
 The compiler, native engine, and separate reference now parse length-aware
 raw bytes and reject embedded NUL bytes. The complete nine-program suite was
@@ -240,8 +271,8 @@ computing.
 The next move must change the resource law rather than continue tuning an
 equivalent digital recurrence:
 
-1. replace host sequential payment for every Fredkin slot with a genuinely
-   parallel or global phase interaction whose work is native to the carrier;
+1. replace the remaining linear host payment for every Fredkin gate with a
+   genuinely parallel or global phase interaction native to the carrier;
 2. transfer the fixed twin-rail construction to a flagship global operator
    without an equivalent compact classical recurrence;
 3. identify a physical phase operation whose parallel work is not paid again by
