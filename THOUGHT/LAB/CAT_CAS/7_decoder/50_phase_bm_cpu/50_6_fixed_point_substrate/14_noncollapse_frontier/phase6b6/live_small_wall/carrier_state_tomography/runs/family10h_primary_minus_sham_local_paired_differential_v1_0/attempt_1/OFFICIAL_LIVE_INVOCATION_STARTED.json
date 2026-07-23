@@ -1,0 +1,17 @@
+{
+  "authorized_physical_attempt_count": 1,
+  "command": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=8",
+    "root@192.168.137.100",
+    "set +e; cd /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0/source; ./OFFICIAL_TARGET_EXECUTE_LOCAL_PAIRED.sh"
+  ],
+  "remote_root": "/root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0",
+  "schema": "FAMILY10H_LOCAL_PAIRED_LIVE_INVOCATION_STARTED_V1",
+  "small_wall_crossed": false,
+  "started_at": "2026-07-23T18:55:28.513708+00:00",
+  "target_host": "root@192.168.137.100"
+}
