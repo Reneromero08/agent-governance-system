@@ -2,12 +2,12 @@
   "schema_version": "1.0.0",
   "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
   "state_date": "2026-07-23",
-  "reconciled_through_milestone_commit": "ca9c90490c169692690bb29c5713f84bcba08ed4",
+  "reconciled_through_milestone_commit": "containing_commit",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
   "standing_mission": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
   "prime_directive": "REPLACE_THE_BIT_WITH_PI",
-  "current_highest_milestone": "PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED",
-  "current_claim_ceiling": "BOUNDED_SOFTWARE_PHASE_NATIVE_COMPUTER_REFERENCE_ONLY",
+  "current_highest_milestone": "CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED",
+  "current_claim_ceiling": "BOUNDED_SOFTWARE_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_ONLY",
   "current_engine": {
     "package": "audio_phase_native_computer_v1",
     "fingerprint": "4503da3c5fce3fa7cf516bf7d5e7f08771b739553d3e96601e5e317120ed341a",
@@ -24,6 +24,29 @@
     "restoration_verified": true,
     "cross_program_reuse_verified": true
   },
+  "current_compact_path_machine": {
+    "package": "audio_cat_cas_unbounded_compute_v1",
+    "engine_fingerprint": "0c58685335c49c4ae93f5ae486431bf31bccd3de344afdb15653ef1ca728c751",
+    "native_operator": "TORUS_PATH_SHEAR",
+    "phase_moduli": [
+      3,
+      5,
+      7,
+      11,
+      13
+    ],
+    "cyclic_residue_modulus": 31,
+    "prospective_cases_exact": 20,
+    "prospective_cases_total": 20,
+    "maximum_steps_tested": 256,
+    "complete_path_modes": 0,
+    "history_factor_count": 0,
+    "gamma_grows_with_size": true,
+    "advantage_over_compact_classical_dp": false,
+    "restoration_verified": true,
+    "cross_program_reuse_verified": true,
+    "independent_post_seal_acceptance": true
+  },
   "established_results": [
     "AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED",
     "AUDIO_RECURSIVE_PHASE_TREE_REFERENCE_ESTABLISHED",
@@ -32,29 +55,40 @@
     "AUDIO_RECURSIVE_CATALYTIC_ISING_EMULATOR_ESTABLISHED",
     "CATALYTIC_WAVEFORM_ISING_V3_VERIFIED",
     "CATALYTIC_WAVEFORM_ISING_V3_SIX_SITE_VERIFIED",
-    "PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED"
+    "PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED",
+    "CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED"
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
     "C1_BOUNDED_RESIDENCY": "PARTIAL_FACTORIZED_STATE",
     "C2_REUSE_AND_MULTIPLEX": "ESTABLISHED_BOUNDED_SOFTWARE",
     "C3_NONCOLLAPSE_REPRESENTATION": "ESTABLISHED_PHASE_PROGRAM_STATE",
-    "C4_NATIVE_GLOBAL_OPERATOR": "PARTIAL_COMPOSABLE_PHASE_INSTRUCTIONS",
-    "C5_FIXED_POINT_ADVANTAGE": "NOT_ESTABLISHED",
-    "C6_EXTERNAL_ACCEPTANCE": "NOT_ESTABLISHED",
+    "C4_NATIVE_GLOBAL_OPERATOR": "ESTABLISHED_BOUNDED_TORUS_PATH_SHEAR",
+    "C5_FIXED_POINT_ADVANTAGE": "PATH_WORK_LEVERAGE_ESTABLISHED_BEST_CLASSICAL_ADVANTAGE_NOT_ESTABLISHED",
+    "C6_EXTERNAL_ACCEPTANCE": "LOCAL_INDEPENDENT_POST_SEAL_BOUNDARY_ONLY",
     "C7_CROSS_DOMAIN_TRANSFER": "NOT_ESTABLISHED",
     "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
   },
   "active_frontier_candidates": [
-    "PHASE_RESIDENT_CONTROL_FLOW_AND_MEMORY",
-    "PROGRAM_DERIVED_INVERSE_EXECUTION",
-    "COMPACT_HOLO_PROCESS_OBJECT",
-    "NO_SMUGGLE_COMPILER",
-    "NATIVE_GLOBAL_PHASE_OPERATOR",
-    "FIXED_POINT_OR_INVARIANT_COMPUTE_LEVERAGE",
+    "REVERSIBLE_PHASE_HISTORY_COMPRESSION",
+    "FIXED_SIZE_ROLLING_TORUS_SUBSTRATE",
+    "BEST_CLASSICAL_BASELINE_SEPARATION",
     "EXTERNAL_OFFICIAL_ACCEPTANCE",
     "CROSS_DOMAIN_TRANSFER"
   ],
+  "bounded_mission_result": {
+    "reached": true,
+    "compact_unresolved_representation": true,
+    "native_global_computation": true,
+    "classical_boundary_result": true,
+    "independent_acceptance": true,
+    "substrate_restoration": true,
+    "substrate_reuse": true,
+    "credible_path_work_leverage": true,
+    "fixed_size_unbounded_information": false,
+    "universal_computation": false,
+    "physical_computation": false
+  },
   "nonterminal_milestones": [
     "NEW_INSTRUCTION",
     "NEW_PROGRAM_CLASS",
