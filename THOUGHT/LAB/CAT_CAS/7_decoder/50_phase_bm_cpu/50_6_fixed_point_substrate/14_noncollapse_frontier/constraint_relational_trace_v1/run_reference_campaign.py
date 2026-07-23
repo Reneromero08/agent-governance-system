@@ -3,15 +3,32 @@ from __future__ import annotations
 from dataclasses import asdict
 import json
 from pathlib import Path
+import sys
 
-from .catalytic_existential_trace import (
-    CLAIM_CEILING,
-    FactorizedProjectorCandidate,
-    audit_reversible_dilation,
-    reference_existential_trace,
-)
-from .constraint_holo import ClauseRelation, ConstraintHolo, Literal
-from .parity_holonomy import ParityConstraint, ParityInstance, calibrate_parity_holonomy
+if __package__ in (None, ""):
+    package_parent = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(package_parent))
+    from constraint_relational_trace_v1.catalytic_existential_trace import (
+        CLAIM_CEILING,
+        FactorizedProjectorCandidate,
+        audit_reversible_dilation,
+        reference_existential_trace,
+    )
+    from constraint_relational_trace_v1.constraint_holo import ClauseRelation, ConstraintHolo, Literal
+    from constraint_relational_trace_v1.parity_holonomy import (
+        ParityConstraint,
+        ParityInstance,
+        calibrate_parity_holonomy,
+    )
+else:
+    from .catalytic_existential_trace import (
+        CLAIM_CEILING,
+        FactorizedProjectorCandidate,
+        audit_reversible_dilation,
+        reference_existential_trace,
+    )
+    from .constraint_holo import ClauseRelation, ConstraintHolo, Literal
+    from .parity_holonomy import ParityConstraint, ParityInstance, calibrate_parity_holonomy
 
 
 def _literal(name: str, positive: bool = True) -> Literal:
