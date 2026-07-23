@@ -1,0 +1,15 @@
+{
+  "attempt_consumed_if_target_preflight_passed": true,
+  "elapsed_seconds": 3250.671,
+  "ended_at": "2026-07-23T19:49:39.186146+00:00",
+  "returncode": 4294967295,
+  "schema": "FAMILY10H_LOCAL_PAIRED_LIVE_INVOCATION_COMPLETED_V1",
+  "small_wall_crossed": false,
+  "started_at": "2026-07-23T18:55:28.513708+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_size": 0,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_size": 0,
+  "target_stderr_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_primary_minus_sham_local_paired_differential_v1_0\\attempt_1\\OFFICIAL_TARGET_STDERR.txt",
+  "target_stdout_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_primary_minus_sham_local_paired_differential_v1_0\\attempt_1\\OFFICIAL_TARGET_STDOUT.txt"
+}

@@ -1,0 +1,14 @@
+{
+  "archive_sha256": "0922a3983272fcbda7a00df2e014c85e3b1267043f2c1b2108f14f5fbb60bf1d",
+  "archive_size": 1543553,
+  "cleanup_passed": true,
+  "created_at": "2026-07-23T18:53:13.415543+00:00",
+  "live_returncode": 23,
+  "pair_observation_count_total": 0,
+  "passed": false,
+  "raw_record_count_total": 0,
+  "schema": "FAMILY10H_LOCAL_PAIRED_LIVE_CONTROLLER_RESULT_V1",
+  "small_wall_crossed": false,
+  "source_death_receipt_count_total": 0,
+  "target_summary_passed": false
+}

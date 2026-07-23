@@ -1,0 +1,23 @@
+{
+  "cleanup": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; test -f /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0/.family10h_primary_minus_sham_local_paired_differential_v1_0_owner; grep -qx 'family10h_primary_minus_sham_local_paired_differential_v1_0' /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0/.family10h_primary_minus_sham_local_paired_differential_v1_0_owner; rm -rf /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0 /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0_attempt1_remote_root.tar.gz /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0_source_package.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0; test ! -e /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0_attempt1_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0_source_package.tar.gz"
+    ],
+    "elapsed_seconds": 0.187,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "created_at": "2026-07-23T19:49:40.232511+00:00",
+  "passed": true,
+  "remote_archive": "/root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0_attempt1_remote_root.tar.gz",
+  "remote_package": "/root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0_source_package.tar.gz",
+  "remote_root": "/root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0",
+  "schema": "FAMILY10H_LOCAL_PAIRED_REMOTE_CLEANUP_RECEIPT_V1"
+}

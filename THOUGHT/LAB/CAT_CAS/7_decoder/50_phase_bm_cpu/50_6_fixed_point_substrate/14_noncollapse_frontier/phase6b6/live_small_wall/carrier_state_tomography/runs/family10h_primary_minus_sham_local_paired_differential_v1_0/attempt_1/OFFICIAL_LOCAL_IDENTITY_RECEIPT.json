@@ -1,0 +1,22 @@
+{
+  "branch": "codex/family10h-tomography-repair",
+  "created_at": "2026-07-23T18:55:26.826454+00:00",
+  "head": "11a2fd0815c5a5f846c51de05fe7a70f546852d6",
+  "head_equals_origin": true,
+  "local_archive": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_primary_minus_sham_local_paired_differential_v1_0\\attempt_1\\OFFICIAL_TARGET_ROOT.tar.gz",
+  "origin_head": "11a2fd0815c5a5f846c51de05fe7a70f546852d6",
+  "package_decision": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_PACKAGE_READY_AWAITING_AUTHORIZATION",
+  "package_manifest_canonical_sha256": "b27425fc2ab552cce1b0cdde8ed98d1c9beef353d493bed68dce11c71277ca98",
+  "package_manifest_sha256": "f604397cd2ccbdb2d82443575da2ff2415916d01995e3c26d2682dd2f5f889ad",
+  "remote_archive": "/root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0_attempt1_remote_root.tar.gz",
+  "remote_package": "/root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0_source_package.tar.gz",
+  "remote_root": "/root/catcas_live_small_wall/family10h_primary_minus_sham_local_paired_differential_v1_0",
+  "schedule_manifest_sha256": "7aefda426239e1f23fbacd09eed552cdac4f946e14993b268b364b1c019a6fc9",
+  "schema": "FAMILY10H_LOCAL_PAIRED_CONTROLLER_LOCAL_IDENTITY_V1",
+  "segmented_freeze_commit": "8720dd543947f26cbd2af18a6a3dd4870c9adf85",
+  "segmented_source_authority_commit": "2cdec9704452669d3651a063b6fb5805913647e3",
+  "source_package_path": "C:\\tmp\\family10h_primary_minus_sham_local_paired_differential_v1_0_source_package.tar.gz",
+  "status_short": "",
+  "threshold_contract_sha256": "de6960c59ff7c5631e8a1a45a8db29e94f270672955585e489f6f04725893707",
+  "transaction_run_id": "family10h_primary_minus_sham_local_paired_differential_v1_0"
+}

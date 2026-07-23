@@ -1,0 +1,243 @@
+{
+  "absolute_sham_sign_diagnostics": {},
+  "adjudication_sha256": "f8bd832ed585cf4d5a47cd725592f93d5d9981d4564ca0c2bca3bbb8293bb2e1",
+  "archive_output_prefix": "source/official_outputs",
+  "archive_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_primary_minus_sham_local_paired_differential_v1_0\\attempt_1\\OFFICIAL_TARGET_ROOT.tar.gz",
+  "archive_sha256": "61cd5c7994ca28e9e954bcf50559b9a7b6122bee6e34e2bd3b6600be90412519",
+  "archive_size": 1557031,
+  "claim_boundary": {
+    "catalytic_borrowing_established": false,
+    "full_carrier_state_tomography_established": false,
+    "local_primary_minus_sham_differential_confirmed": false,
+    "maximum_scientific_claim": "PUBLIC_POST_SOURCE_LOCAL_PRIMARY_MINUS_SHAM_DIFFERENTIAL_CONFIRMED",
+    "physical_relational_memory_established": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "crossed_cell_diagnostics_by_round": {},
+  "custody_failure": "Unterminated string starting at: line 1 column 543 (char 542)",
+  "differential_by_factor_stratum": {},
+  "differential_by_round": {},
+  "generic_q99_warnings": [],
+  "package_id": "family10h_primary_minus_sham_local_paired_differential_v1",
+  "package_manifest": {
+    "live_attempt_authority": false,
+    "local_paired_audit_freeze_commit": "526a509bf6034fc7e20159541d270cb52ef04db3",
+    "local_paired_audit_sha256": "2826e10317dd96d7f73c8471e0e6365b466a003fa59dde8c88ec200a0d1b3cf9",
+    "package_decision": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_PACKAGE_READY_AWAITING_AUTHORIZATION",
+    "package_id": "family10h_primary_minus_sham_local_paired_differential_v1",
+    "package_manifest_sha256": "b27425fc2ab552cce1b0cdde8ed98d1c9beef353d493bed68dce11c71277ca98",
+    "post_observation_feature_selection_allowed": false,
+    "post_observation_threshold_revision_allowed": false,
+    "prior_official_evidence_commit": "dde3ac15953669f056b5f8974601b3bd1aa62f2d",
+    "prior_primary_minus_sham_package_commit": "054cc36f6c4d67de69cdd1a1dc12f455edc580dd",
+    "restore_sham_sign_gate_allowed": false,
+    "runtime_source_hashes": {
+      "RELATION_GRAMMAR.json": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+      "RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": "8691d4e47ea987ab0ca25391179b7a94409ce589b23cea2a0f0b0f12d80b3f7c",
+      "RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+      "relation_spatial_pmu_preflight": "caa5fd52a46ab77a6327d6fccfa8eb836e53f3035b192f0632bb314a56c7f74f",
+      "relation_spatial_pmu_preflight.c": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "relation_spatial_runtime": "eacb3a5b97268614eaec0c2ab32383e8e4b2e967fbf6955fcea7af0e22a66e7f",
+      "relation_spatial_runtime.c": "699db0d3b04374c4f2d92e7cfe6c08b81ba79f814015637138626a9f075c8c3e",
+      "relation_spatial_runtime.h": "665d98df19a2dce07b782869247cfc58ffcb9612869e45c481e4340f2664b491"
+    },
+    "schedule_manifest_sha256": "7aefda426239e1f23fbacd09eed552cdac4f946e14993b268b364b1c019a6fc9",
+    "schema": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_PACKAGE_MANIFEST_V1",
+    "small_wall_crossed": false,
+    "source_authority_commit": "2cdec9704452669d3651a063b6fb5805913647e3",
+    "source_freeze_commit": "8720dd543947f26cbd2af18a6a3dd4870c9adf85",
+    "source_schedule_package": "family10h_relation_spatial_pair_readout_v1_1_segmented",
+    "sparse_crossed_cells_as_gates_allowed": false,
+    "threshold_contract_sha256": "de6960c59ff7c5631e8a1a45a8db29e94f270672955585e489f6f04725893707",
+    "transaction_run_id": "family10h_primary_minus_sham_local_paired_differential_v1_0"
+  },
+  "passed": false,
+  "result_class": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_CUSTODY_INVALID",
+  "schedule_manifest": {
+    "factor_strata": [
+      "session",
+      "replicate",
+      "mapping",
+      "source_order",
+      "query_order",
+      "cyclic_origin"
+    ],
+    "fresh_process_per_variant": true,
+    "generic_control_queries": [
+      "scrambled_pair_control",
+      "distance_matched_control",
+      "route_pressure_control"
+    ],
+    "interleaved_raw_control_rows": false,
+    "local_paired_audit_freeze_commit": "526a509bf6034fc7e20159541d270cb52ef04db3",
+    "local_paired_audit_sha256": "2826e10317dd96d7f73c8471e0e6365b466a003fa59dde8c88ec200a0d1b3cf9",
+    "package_id": "family10h_primary_minus_sham_local_paired_differential_v1",
+    "pair_sample_count_per_row": 256,
+    "primary_query": "query_relation_pair",
+    "prior_official_evidence_commit": "dde3ac15953669f056b5f8974601b3bd1aa62f2d",
+    "prior_primary_minus_sham_package_commit": "054cc36f6c4d67de69cdd1a1dc12f455edc580dd",
+    "queries": [
+      "query_relation_pair",
+      "relation_sham",
+      "scrambled_pair_control",
+      "distance_matched_control",
+      "route_pressure_control"
+    ],
+    "round_count": 2,
+    "schedule_manifest_sha256": "7aefda426239e1f23fbacd09eed552cdac4f946e14993b268b364b1c019a6fc9",
+    "schema": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_SCHEDULE_MANIFEST_V1",
+    "sham_query": "relation_sham",
+    "source_authority_commit": "2cdec9704452669d3651a063b6fb5805913647e3",
+    "source_freeze_commit": "8720dd543947f26cbd2af18a6a3dd4870c9adf85",
+    "source_schedule_package": "family10h_relation_spatial_pair_readout_v1_1_segmented",
+    "transaction_run_id": "family10h_primary_minus_sham_local_paired_differential_v1_0",
+    "variants": {
+      "round0_distance_matched_control": {
+        "pair_observation_count": 524288,
+        "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round0_distance_matched_control.tsv",
+        "query": "distance_matched_control",
+        "round": 0,
+        "row_count": 2048,
+        "sha256": "354ca919fe9099e32b26c882906759e3bdcd51006a215b81b64427f97a9d1ab1",
+        "size_bytes": 2333947
+      },
+      "round0_query_relation_pair": {
+        "pair_observation_count": 524288,
+        "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round0_query_relation_pair.tsv",
+        "query": "query_relation_pair",
+        "round": 0,
+        "row_count": 2048,
+        "sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+        "size_bytes": 2090235
+      },
+      "round0_relation_sham": {
+        "pair_observation_count": 524288,
+        "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round0_relation_sham.tsv",
+        "query": "relation_sham",
+        "round": 0,
+        "row_count": 2048,
+        "sha256": "4323cbc5e614b25b1edb4754f4e007f69fd2fd70402ace41b36b547e94b5f97f",
+        "size_bytes": 2235643
+      },
+      "round0_route_pressure_control": {
+        "pair_observation_count": 524288,
+        "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round0_route_pressure_control.tsv",
+        "query": "route_pressure_control",
+        "round": 0,
+        "row_count": 2048,
+        "sha256": "6a5fdeb6c739800e5ec544fc32b8d5add94a124d99cdc0ecaece47a4bb73214a",
+        "size_bytes": 2301179
+      },
+      "round0_scrambled_pair_control": {
+        "pair_observation_count": 524288,
+        "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round0_scrambled_pair_control.tsv",
+        "query": "scrambled_pair_control",
+        "round": 0,
+        "row_count": 2048,
+        "sha256": "ca6bf8955688e3d8dda421bb66dda3a050b9c40b3e86991b476fde0df03feb20",
+        "size_bytes": 2301179
+      },
+      "round1_distance_matched_control": {
+        "pair_observation_count": 524288,
+        "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round1_distance_matched_control.tsv",
+        "query": "distance_matched_control",
+        "round": 1,
+        "row_count": 2048,
+        "sha256": "354ca919fe9099e32b26c882906759e3bdcd51006a215b81b64427f97a9d1ab1",
+        "size_bytes": 2333947
+      },
+      "round1_query_relation_pair": {
+        "pair_observation_count": 524288,
+        "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round1_query_relation_pair.tsv",
+        "query": "query_relation_pair",
+        "round": 1,
+        "row_count": 2048,
+        "sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+        "size_bytes": 2090235
+      },
+      "round1_relation_sham": {
+        "pair_observation_count": 524288,
+        "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round1_relation_sham.tsv",
+        "query": "relation_sham",
+        "round": 1,
+        "row_count": 2048,
+        "sha256": "4323cbc5e614b25b1edb4754f4e007f69fd2fd70402ace41b36b547e94b5f97f",
+        "size_bytes": 2235643
+      },
+      "round1_route_pressure_control": {
+        "pair_observation_count": 524288,
+        "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round1_route_pressure_control.tsv",
+        "query": "route_pressure_control",
+        "round": 1,
+        "row_count": 2048,
+        "sha256": "6a5fdeb6c739800e5ec544fc32b8d5add94a124d99cdc0ecaece47a4bb73214a",
+        "size_bytes": 2301179
+      },
+      "round1_scrambled_pair_control": {
+        "pair_observation_count": 524288,
+        "path": "LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES/round1_scrambled_pair_control.tsv",
+        "query": "scrambled_pair_control",
+        "round": 1,
+        "row_count": 2048,
+        "sha256": "ca6bf8955688e3d8dda421bb66dda3a050b9c40b3e86991b476fde0df03feb20",
+        "size_bytes": 2301179
+      }
+    }
+  },
+  "schema": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_ADJUDICATION_V1",
+  "scientific_claim": "PUBLIC_POST_SOURCE_LOCAL_PRIMARY_MINUS_SHAM_DIFFERENTIAL_NOT_ESTABLISHED",
+  "threshold_contract": {
+    "claim_boundary": {
+      "catalytic_borrowing_established": false,
+      "full_carrier_state_tomography_established": false,
+      "physical_relational_memory_established": false,
+      "r2_restoration_established": false,
+      "small_wall_crossed": false
+    },
+    "coordinate": {
+      "D_local": "R_primary - R_sham",
+      "R_primary": "mean R_spatial(query_relation_pair)",
+      "R_sham": "mean R_spatial(relation_sham)"
+    },
+    "diagnostics_not_gates": {
+      "absolute_relation_sham_sign": "reported diagnostic_not_gate",
+      "generic_matched_permutation_q99": "reported diagnostic",
+      "relation_sham_in_null_control_set": false,
+      "six_factor_crossed_cells": "reported diagnostic_only_sparse_four_blocks_per_cell"
+    },
+    "factor_stratum_law": {
+      "D_local_gt_0": true,
+      "R_primary_gt_0": true,
+      "R_sham_lt_0": "not_a_gate",
+      "factors": [
+        "session",
+        "replicate",
+        "mapping",
+        "source_order",
+        "query_order",
+        "cyclic_origin"
+      ],
+      "stratum_scope": "one_factor_matched_strata"
+    },
+    "forbidden_post_freeze_changes": {
+      "post_observation_feature_selection": true,
+      "post_observation_threshold_revision": true,
+      "promote_sparse_crossed_cells_to_gates": true,
+      "restore_sham_sign_gate": true,
+      "small_wall_promotion": true
+    },
+    "package_id": "family10h_primary_minus_sham_local_paired_differential_v1",
+    "round_law": {
+      "D_local_gt_0": true,
+      "R_primary_gt_0": true,
+      "R_sham_lt_0": "not_a_gate",
+      "generic_control_envelope": "max(abs(R_scrambled), abs(R_distance), abs(R_route)) <= 0.25 * D_local",
+      "generic_control_envelope_fraction": 0.25
+    },
+    "schema": "FAMILY10H_LOCAL_PAIRED_DIFFERENTIAL_THRESHOLD_CONTRACT_V1",
+    "threshold_contract_sha256": "de6960c59ff7c5631e8a1a45a8db29e94f270672955585e489f6f04725893707"
+  },
+  "transaction_run_id": "family10h_primary_minus_sham_local_paired_differential_v1_0",
+  "variant_reports": {}
+}
