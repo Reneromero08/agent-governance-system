@@ -1,51 +1,34 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
   "state_date": "2026-07-23",
-  "reconciled_through_milestone_commit": "containing_commit",
+  "reconciled_through_milestone_commit": "1265412567a773a1ab200c64538ef080f4530631",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
   "standing_mission": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
   "prime_directive": "REPLACE_THE_BIT_WITH_PI",
+  "lane_closure_authority": "USER_ONLY",
+  "terminal": false,
   "current_highest_milestone": "CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED",
   "current_claim_ceiling": "BOUNDED_SOFTWARE_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_ONLY",
-  "current_engine": {
-    "package": "audio_phase_native_computer_v1",
-    "fingerprint": "4503da3c5fce3fa7cf516bf7d5e7f08771b739553d3e96601e5e317120ed341a",
-    "instruction_set": [
-      "ROT",
-      "ADD",
-      "CCX",
-      "SWAP"
-    ],
-    "prospective_cases_exact": 472,
-    "prospective_cases_total": 472,
-    "factorized_logical_state": true,
-    "complete_configuration_modes": 0,
-    "restoration_verified": true,
-    "cross_program_reuse_verified": true
-  },
   "current_compact_path_machine": {
     "package": "audio_cat_cas_unbounded_compute_v1",
     "engine_fingerprint": "0c58685335c49c4ae93f5ae486431bf31bccd3de344afdb15653ef1ca728c751",
     "native_operator": "TORUS_PATH_SHEAR",
-    "phase_moduli": [
-      3,
-      5,
-      7,
-      11,
-      13
-    ],
+    "phase_moduli": [3, 5, 7, 11, 13],
     "cyclic_residue_modulus": 31,
     "prospective_cases_exact": 20,
     "prospective_cases_total": 20,
     "maximum_steps_tested": 256,
     "complete_path_modes": 0,
     "history_factor_count": 0,
-    "gamma_grows_with_size": true,
-    "advantage_over_compact_classical_dp": false,
+    "gamma_grows_against_explicit_path_expansion": true,
+    "advantage_over_best_compact_classical_method": false,
+    "best_compact_classical_speed_ratio": "CLASSICAL_DP_APPROX_38_TO_45_TIMES_FASTER",
     "restoration_verified": true,
     "cross_program_reuse_verified": true,
-    "independent_post_seal_acceptance": true
+    "local_independent_post_seal_acceptance": true,
+    "official_external_acceptance": false,
+    "terminal": false
   },
   "established_results": [
     "AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED",
@@ -60,51 +43,22 @@
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
-    "C1_BOUNDED_RESIDENCY": "PARTIAL_FACTORIZED_STATE",
+    "C1_BOUNDED_RESIDENCY": "PARTIAL",
     "C2_REUSE_AND_MULTIPLEX": "ESTABLISHED_BOUNDED_SOFTWARE",
-    "C3_NONCOLLAPSE_REPRESENTATION": "ESTABLISHED_PHASE_PROGRAM_STATE",
+    "C3_NONCOLLAPSE_REPRESENTATION": "ESTABLISHED_BOUNDED_SOFTWARE",
     "C4_NATIVE_GLOBAL_OPERATOR": "ESTABLISHED_BOUNDED_TORUS_PATH_SHEAR",
-    "C5_FIXED_POINT_ADVANTAGE": "PATH_WORK_LEVERAGE_ESTABLISHED_BEST_CLASSICAL_ADVANTAGE_NOT_ESTABLISHED",
-    "C6_EXTERNAL_ACCEPTANCE": "LOCAL_INDEPENDENT_POST_SEAL_BOUNDARY_ONLY",
+    "C5_FIXED_POINT_ADVANTAGE": "NOT_ESTABLISHED_AGAINST_BEST_MATCHED_COMPACT_CLASSICAL_METHOD",
+    "C6_EXTERNAL_ACCEPTANCE": "NOT_ESTABLISHED_OFFICIAL_EXTERNAL_BOUNDARY_REQUIRED",
     "C7_CROSS_DOMAIN_TRANSFER": "NOT_ESTABLISHED",
     "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
   },
   "active_frontier_candidates": [
-    "REVERSIBLE_PHASE_HISTORY_COMPRESSION",
-    "FIXED_SIZE_ROLLING_TORUS_SUBSTRATE",
-    "BEST_CLASSICAL_BASELINE_SEPARATION",
-    "EXTERNAL_OFFICIAL_ACCEPTANCE",
+    "REVERSIBLE_HISTORY_AND_CARRIER_STATE_COMPRESSION_BELOW_O_NM",
+    "FIXED_RESIDENT_OR_ROLLING_TORUS_SUBSTRATE",
+    "FLAGSHIP_WITHOUT_EQUIVALENT_COMPACT_CLASSICAL_DP",
+    "C5_LEVERAGE_AGAINST_BEST_MATCHED_COMPACT_BASELINE",
+    "OFFICIAL_EXTERNAL_ACCEPTANCE",
     "CROSS_DOMAIN_TRANSFER"
-  ],
-  "bounded_mission_result": {
-    "reached": true,
-    "compact_unresolved_representation": true,
-    "native_global_computation": true,
-    "classical_boundary_result": true,
-    "independent_acceptance": true,
-    "substrate_restoration": true,
-    "substrate_reuse": true,
-    "credible_path_work_leverage": true,
-    "fixed_size_unbounded_information": false,
-    "universal_computation": false,
-    "physical_computation": false
-  },
-  "nonterminal_milestones": [
-    "NEW_INSTRUCTION",
-    "NEW_PROGRAM_CLASS",
-    "PROGRAM_COUNTER",
-    "BRANCHES_OR_LOOPS",
-    "MEMORY",
-    "SUBROUTINES",
-    "PROGRAM_DERIVED_INVERSE",
-    "HOLO_IR",
-    "COMPILER_PROTOTYPE",
-    "GLOBAL_OPERATOR",
-    "SCALING_RESULT",
-    "PROSPECTIVE_BATCH",
-    "VERIFIED_PACKAGE",
-    "INDEPENDENT_REVIEW",
-    "COMMIT_PUSHED"
   ],
   "agent_policy": {
     "continue_without_new_user_prompt": true,
@@ -113,8 +67,35 @@
     "may_select_next_experiment": true,
     "verification_follows_substantive_result": true,
     "audit_of_audit_loops_forbidden": true,
-    "roadmap_must_track_evidence": true
+    "roadmap_must_track_evidence": true,
+    "owner_only_lane_closure": true,
+    "self_declared_mission_completion_forbidden": true,
+    "package_completion_never_terminal": true,
+    "runtime_exhaustion_requires_continuation_checkpoint": true
   },
+  "nonterminal_milestones": [
+    "BOUNDED_MISSION_RESULT",
+    "MISSION_LIFECYCLE_DEMONSTRATED",
+    "GAMMA_GROWTH_AGAINST_EXPLICIT_ENUMERATION",
+    "NEW_INSTRUCTION",
+    "NEW_PROGRAM_CLASS",
+    "PROGRAM_COUNTER",
+    "BRANCHES_OR_LOOPS",
+    "MEMORY",
+    "SUBROUTINES",
+    "PROGRAM_DERIVED_INVERSE",
+    "HOLO_IR",
+    "COMPILER",
+    "GLOBAL_OPERATOR",
+    "FIXED_POINT",
+    "SCALING_RESULT",
+    "PROSPECTIVE_BATCH",
+    "VERIFIED_PACKAGE",
+    "INDEPENDENT_REVIEW",
+    "FINAL_REPORT",
+    "COMMIT_PUSHED",
+    "ROADMAP_PHASE_COMPLETE"
+  ],
   "native_no_smuggle": {
     "compiler_may_not_solve_target": true,
     "oracle_feedback_forbidden": true,
@@ -122,6 +103,7 @@
     "cached_answer_forbidden": true,
     "hidden_candidate_enumeration_forbidden": true,
     "hidden_classical_path_materialization_forbidden": true,
+    "equivalent_enumeration_elsewhere_forbidden": true,
     "boundary_only_decode": true
   },
   "catalytic_law": {
@@ -130,12 +112,13 @@
     "restoration_reverses_actual_forward_process": true,
     "reuse_consumes_actual_restored_carrier": true
   },
-  "legitimate_stop_conditions": [
-    "MISSION_RESULT_WITH_COMPACT_UNRESOLVED_COMPUTE_LEVERAGE_EXTERNAL_ACCEPTANCE_RESTORATION_AND_REUSE",
+  "operational_stop_conditions": [
     "EXTERNAL_AUTHORITY_BOUNDARY",
-    "EVIDENCED_SCIENTIFIC_BLOCKER_NOT_REPAIRABLE_OR_BYPASSABLE_IN_AVAILABLE_SOFTWARE_ENVIRONMENT"
+    "EVIDENCED_SCIENTIFIC_BLOCKER_NOT_REPAIRABLE_REPLACEABLE_OR_BYPASSABLE_IN_AVAILABLE_SOFTWARE_ENVIRONMENT"
   ],
-  "not_stop_conditions": [
+  "explicitly_not_stop_conditions": [
+    "MISSION_RESULT",
+    "BOUNDED_MISSION_RESULT",
     "MILESTONE_COMPLETE",
     "PACKAGE_VERIFIED",
     "BENCHMARK_PASSED",
@@ -144,8 +127,14 @@
     "ROADMAP_PHASE_COMPLETE",
     "CONTEXT_LARGE",
     "WORK_EXPENSIVE",
+    "RUNTIME_LIMIT_REACHED",
     "FIRST_MECHANISM_FAILED"
   ],
+  "forced_runtime_exit_policy": {
+    "status": "AUTONOMOUS_CONTINUATION_REQUIRED",
+    "must_record_exact_next_action": true,
+    "may_claim_complete": false
+  },
   "physical_authority": {
     "p0_state": "FROZEN_AND_PARKED",
     "hardware_contact_authorized": false,
