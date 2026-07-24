@@ -38,11 +38,14 @@ jobs:
       - name: Install qualification dependencies
         run: python -m pip install pytest jsonschema
 
-      - name: Run exact relational reference tests
+      - name: Run exact relational and mechanism tests
         run: python -m pytest THOUGHT/LAB/CAT_CAS/tests/constraint_relational_trace -q
 
       - name: Execute reference campaign
         run: python THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/constraint_relational_trace_v1/run_reference_campaign.py
+
+      - name: Execute mechanism campaign
+        run: python THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/constraint_relational_trace_v1/run_mechanism_campaign.py
 
       - name: Run CAT_CAS governance critic
         shell: bash
