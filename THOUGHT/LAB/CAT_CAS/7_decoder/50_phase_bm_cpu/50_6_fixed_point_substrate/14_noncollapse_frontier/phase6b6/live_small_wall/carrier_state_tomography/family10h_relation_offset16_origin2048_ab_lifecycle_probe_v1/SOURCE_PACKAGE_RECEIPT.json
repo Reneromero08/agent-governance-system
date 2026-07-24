@@ -1,0 +1,110 @@
+{
+  "created_at": "2026-07-24T04:53:52.862183+00:00",
+  "files": {
+    "source/OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_SCHEDULES/alive_offset16_signed.tsv": {
+      "sha256": "0ce6c71398d31b1f4ed6c33bffeadf94444bf0473bf5cd0acc15ed69ca9f3296",
+      "size_bytes": 494899
+    },
+    "source/OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_SCHEDULES/dead_offset16_signed.tsv": {
+      "sha256": "20e3f6a50bee622fed993f46172517b1a7e32c99a7da5d2a88f41b3f7365e0a2",
+      "size_bytes": 496819
+    },
+    "source/OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_SCHEDULES/reset_double_flush_offset16_signed.tsv": {
+      "sha256": "75fd3dcefbf2a53fa8bcb70b244b7c37abbe2b443ce5af376988a3d84c836ea5",
+      "size_bytes": 543859
+    },
+    "source/OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_SCHEDULES/source_off_offset16_signed.tsv": {
+      "sha256": "062d1a21176de1176f225299b03b3a5e10e26933e27530c67585125484d98f24",
+      "size_bytes": 516979
+    },
+    "source/RELATION_GRAMMAR.json": {
+      "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+      "size_bytes": 292071
+    },
+    "source/RELATION_GRAMMAR.sha256": {
+      "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+      "size_bytes": 66
+    },
+    "source/RELATION_GRAMMAR.tsv": {
+      "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+      "size_bytes": 360
+    },
+    "source/RELATION_OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_SCHEDULE_MANIFEST.json": {
+      "sha256": "3f8091fd08883599aeae32746be51f200f7a71f19e77a1667ba238d1aaa59a26",
+      "size_bytes": 3460
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+      "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+      "size_bytes": 2277
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+      "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+      "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+      "size_bytes": 1866
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+      "size_bytes": 11263467
+    },
+    "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+      "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+      "size_bytes": 2635
+    },
+    "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+      "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+      "size_bytes": 3120
+    },
+    "source/RUN_OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE.sh": {
+      "sha256": "f8633fd708fae52ce2ec45a197171bba72599a41fff7eac867d7a704b32b6be6",
+      "size_bytes": 8604
+    },
+    "source/relation_spatial_adjudication.py": {
+      "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "size_bytes": 864
+    },
+    "source/relation_spatial_physical_adjudication.py": {
+      "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+      "size_bytes": 42533
+    },
+    "source/relation_spatial_pmu_preflight": {
+      "sha256": "0ceb8921c965854a1107bd216609ee3c168ac8315a4eebcd1e883fd75ca8afab",
+      "size_bytes": 42648
+    },
+    "source/relation_spatial_pmu_preflight.c": {
+      "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "size_bytes": 9376
+    },
+    "source/relation_spatial_public.py": {
+      "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+      "size_bytes": 32161
+    },
+    "source/relation_spatial_runtime": {
+      "sha256": "3125b7c81a70d69aee058d8faab2b839f7c28e0e27667b4a13426fc7eb4ee507",
+      "size_bytes": 115816
+    },
+    "source/relation_spatial_runtime.c": {
+      "sha256": "51aad532821ab390c9070480b3174a6595ccd21f23935cd8c0335f146d95dc0e",
+      "size_bytes": 49916
+    },
+    "source/relation_spatial_runtime.h": {
+      "sha256": "b21b543dbb01f609cb2e17a7286e78bcde9e11f5eeb8715a9454faf5912d81b4",
+      "size_bytes": 2884
+    },
+    "source/relation_spatial_target.py": {
+      "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+      "size_bytes": 91980
+    }
+  },
+  "path": "C:\\tmp\\family10h_relation_offset16_origin2048_ab_lifecycle_probe_v1_0_source_package.tar.gz",
+  "run_id": "family10h_relation_offset16_origin2048_ab_lifecycle_probe_v1_0",
+  "schema": "FAMILY10H_RELATION_OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_SOURCE_PACKAGE_V1",
+  "sha256": "09646906214d509a0eb35fb651531bfa648f39eaa36e9db8c6c9e2d756356c1e",
+  "size_bytes": 606959
+}

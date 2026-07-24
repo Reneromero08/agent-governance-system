@@ -1,0 +1,118 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Does the signed offset receiver projection preserve a source-written relation-matrix contrast while source-off collapses the same projection before reset/reuse claims?",
+  "pair_sample_count": 256,
+  "receiver_projection": "matrix contrast of mean(B_first_touch_cycles - A_first_touch_cycles) at signed offset sweep",
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_offset_signed_source_off_sweep_discovery_v1_0",
+  "schedule_manifest_sha256": "156f7f54c04f8cb2f1cfdd2c5fc486fcf8cc3abc6a1f86f622a1cf1a4113e432",
+  "schema": "FAMILY10H_RELATION_OFFSET_SIGNED_SOURCE_OFF_SWEEP_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "alive_offset1024_signed": {
+      "expected_pair_observation_count": 131072,
+      "lifecycle": "alive",
+      "offset": 1024,
+      "path": "OFFSET_SIGNED_SOURCE_OFF_SWEEP_SCHEDULES/alive_offset1024_signed.tsv",
+      "query": "source_on_offset_1024_control",
+      "row_count": 512,
+      "sha256": "da151bec02b66ef0ba320633d20fa1450a56cef13c52aaa4c7b61f84477a6a01",
+      "size_bytes": 579231
+    },
+    "alive_offset16_signed": {
+      "expected_pair_observation_count": 131072,
+      "lifecycle": "alive",
+      "offset": 16,
+      "path": "OFFSET_SIGNED_SOURCE_OFF_SWEEP_SCHEDULES/alive_offset16_signed.tsv",
+      "query": "source_on_offset_16_control",
+      "row_count": 512,
+      "sha256": "3f750ae8ea594c635a0515d01fbd596b45463a859b563c02a62c260424e544f1",
+      "size_bytes": 571039
+    },
+    "alive_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "lifecycle": "alive",
+      "offset": 2,
+      "path": "OFFSET_SIGNED_SOURCE_OFF_SWEEP_SCHEDULES/alive_offset2_signed.tsv",
+      "query": "source_on_offset_2_control",
+      "row_count": 512,
+      "sha256": "e9c162d54c8deb3cc7a8248a54bd30d2a5d43cc83b8e320e68aea2ad8ffce4c2",
+      "size_bytes": 566943
+    },
+    "alive_offset4_signed": {
+      "expected_pair_observation_count": 131072,
+      "lifecycle": "alive",
+      "offset": 4,
+      "path": "OFFSET_SIGNED_SOURCE_OFF_SWEEP_SCHEDULES/alive_offset4_signed.tsv",
+      "query": "source_on_offset_4_control",
+      "row_count": 512,
+      "sha256": "ddc4312040131ccb06515c356ab17cff8ca3d42b517f49698fe89b0b4fcf6a65",
+      "size_bytes": 566943
+    },
+    "alive_offset8_signed": {
+      "expected_pair_observation_count": 131072,
+      "lifecycle": "alive",
+      "offset": 8,
+      "path": "OFFSET_SIGNED_SOURCE_OFF_SWEEP_SCHEDULES/alive_offset8_signed.tsv",
+      "query": "source_on_offset_8_control",
+      "row_count": 512,
+      "sha256": "5d1f263f2b99e2ffd9588c39ac8c8580233ac88e79c815409ea7b315552f573b",
+      "size_bytes": 566943
+    },
+    "source_off_offset1024_signed": {
+      "expected_pair_observation_count": 131072,
+      "lifecycle": "source_off",
+      "offset": 1024,
+      "path": "OFFSET_SIGNED_SOURCE_OFF_SWEEP_SCHEDULES/source_off_offset1024_signed.tsv",
+      "query": "source_off_offset_1024_control",
+      "row_count": 512,
+      "sha256": "73eab57da182a3f5385482d1604eaa818ab578a72804af9ca8260435580c19cb",
+      "size_bytes": 608927
+    },
+    "source_off_offset16_signed": {
+      "expected_pair_observation_count": 131072,
+      "lifecycle": "source_off",
+      "offset": 16,
+      "path": "OFFSET_SIGNED_SOURCE_OFF_SWEEP_SCHEDULES/source_off_offset16_signed.tsv",
+      "query": "source_off_offset_16_control",
+      "row_count": 512,
+      "sha256": "1f80733351ce820b17f63a896552a20a7281116882bf6c57f9a5df651a967e87",
+      "size_bytes": 599711
+    },
+    "source_off_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "lifecycle": "source_off",
+      "offset": 2,
+      "path": "OFFSET_SIGNED_SOURCE_OFF_SWEEP_SCHEDULES/source_off_offset2_signed.tsv",
+      "query": "source_off_offset_2_control",
+      "row_count": 512,
+      "sha256": "66e6c1e400e67b75ee97cf4440185e83c6eecaaddd9906b85b9fb0d4a979f46e",
+      "size_bytes": 595103
+    },
+    "source_off_offset4_signed": {
+      "expected_pair_observation_count": 131072,
+      "lifecycle": "source_off",
+      "offset": 4,
+      "path": "OFFSET_SIGNED_SOURCE_OFF_SWEEP_SCHEDULES/source_off_offset4_signed.tsv",
+      "query": "source_off_offset_4_control",
+      "row_count": 512,
+      "sha256": "a713ea7107d5057af705e9a1426ef36f134b15eb1f292899ad9fd81a94bfa2d1",
+      "size_bytes": 595103
+    },
+    "source_off_offset8_signed": {
+      "expected_pair_observation_count": 131072,
+      "lifecycle": "source_off",
+      "offset": 8,
+      "path": "OFFSET_SIGNED_SOURCE_OFF_SWEEP_SCHEDULES/source_off_offset8_signed.tsv",
+      "query": "source_off_offset_8_control",
+      "row_count": 512,
+      "sha256": "583f3784e1d16581d254bf81636ae889a2dbd852557fc5d94ea39c42739fa0ec",
+      "size_bytes": 595103
+    }
+  }
+}
