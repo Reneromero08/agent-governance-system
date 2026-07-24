@@ -24,6 +24,9 @@ if __package__ in (None, ""):
         ParityInstance,
         calibrate_parity_holonomy,
     )
+    from constraint_relational_trace_v1.topological_rank_latch import (
+        audit_topological_rank_latch,
+    )
 else:
     from .catalytic_existential_trace import (
         CLAIM_CEILING,
@@ -37,6 +40,7 @@ else:
     )
     from .constraint_holo import ClauseRelation, ConstraintHolo, Literal
     from .parity_holonomy import ParityConstraint, ParityInstance, calibrate_parity_holonomy
+    from .topological_rank_latch import audit_topological_rank_latch
 
 
 def _literal(name: str, positive: bool = True) -> Literal:
@@ -87,6 +91,8 @@ def build_campaign_record() -> dict[str, object]:
 
     projector = FactorizedProjectorCandidate(unique)
     dilation = audit_reversible_dilation(unique)
+    topological_latch = audit_topological_rank_latch(unique)
+    topological_unsat = audit_topological_rank_latch(impossible)
 
     gates = {
         "exact_open_relation": unique_boundary.witness_count == 1,
@@ -99,9 +105,20 @@ def build_campaign_record() -> dict[str, object]:
         "pairwise_false_closure_exposed": (
             parity_result.pairwise_locally_compatible and not parity_result.consistent
         ),
+        "native_z2_cycle_obstruction": parity_result.cycle_holonomies == (-1,),
         "program_derived_restoration": parity_result.restored,
         "reversible_evaluation_dilation": dilation.all_basis_states_restored,
         "conditional_witness_boundary": witness_boundary.witness_verified,
+        "topological_rank_latch_complete_reference": (
+            topological_latch.determinant_winding == 1
+            and topological_latch.presence_index == 1
+            and topological_unsat.determinant_winding == 0
+            and topological_unsat.presence_index == 0
+        ),
+        "topological_latch_restoration": (
+            topological_latch.restoration_verified
+            and topological_unsat.restoration_verified
+        ),
         "native_cet_not_smuggled": not dilation.native_existential_trace_established,
     }
 
@@ -122,13 +139,17 @@ def build_campaign_record() -> dict[str, object]:
         "parity_holonomy": asdict(parity_result),
         "reversible_dilation": asdict(dilation),
         "factorized_projector": projector.public_contract(),
+        "topological_rank_latch_unique": asdict(topological_latch),
+        "topological_rank_latch_unsat": asdict(topological_unsat),
         "proof_state": {
             "semantic_object": "ESTABLISHED_REFERENCE",
-            "parity_holonomy": "ESTABLISHED_CALIBRATION",
+            "parity_holonomy": "ESTABLISHED_NATIVE_Z2_CALIBRATION",
             "false_closure_control": "ESTABLISHED_CALIBRATION",
             "conditional_cet_implies_3sat_in_p": "ESTABLISHED_THEOREM",
             "conditional_witness_self_reduction": "ESTABLISHED_REFERENCE",
-            "native_relation_valued_transport": "NOT_ESTABLISHED",
+            "topological_determinant_winding": "ESTABLISHED_COMPLETE_REFERENCE_INVARIANT",
+            "polynomial_native_determinant_line_sensor": "NOT_ESTABLISHED",
+            "native_relation_valued_transport": "NOT_ESTABLISHED_FOR_GENERAL_CLAUSES",
             "catalytic_existential_trace": "NOT_ESTABLISHED",
             "polynomial_resource_theorem": "NOT_ESTABLISHED",
             "standard_model_transfer": "NOT_ESTABLISHED",
