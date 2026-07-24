@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "pmu_compile": {
+    "command": [
+      "wsl.exe",
+      "--",
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2",
+      "-g",
+      "-o",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_prep_axis_composition_screen_v1/generated_source/relation_spatial_pmu_preflight",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_prep_axis_composition_screen_v1/generated_source/relation_spatial_pmu_preflight.c"
+    ],
+    "elapsed_seconds": 0.531,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "pmu_helper_sha256": "be692f1bb8eb0c2b50ec00fa32e02a57b5ba7028cfb48d9e05ae7fb98dec9f36",
+  "runtime_compile": {
+    "command": [
+      "wsl.exe",
+      "--",
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2",
+      "-g",
+      "-o",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_prep_axis_composition_screen_v1/generated_source/relation_spatial_runtime",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_prep_axis_composition_screen_v1/generated_source/relation_spatial_runtime.c",
+      "-lm"
+    ],
+    "elapsed_seconds": 1.5,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "runtime_self_test": {
+    "command": [
+      "wsl.exe",
+      "--",
+      "/mnt/d/CCC 2.0/AI/agent-governance-system-family10h/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_prep_axis_composition_screen_v1/generated_source/relation_spatial_runtime",
+      "--self-test"
+    ],
+    "elapsed_seconds": 0.094,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"schema\":\"FAMILY10H_RELATION_SPATIAL_RUNTIME_SELF_TEST_V1\",\"passed\":true,\"timer_method\":\"rdtscp_lfence_serialized\",\"live_authority_present\":false,\"pmu_acquisition_count\":0,\"small_wall_crossed\":false}\n"
+  },
+  "runtime_sha256": "ef313fce286b05a4fa254aac92ab867c80ba399df977e3239ff2eb6d1386a89a",
+  "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_RUNTIME_BUILD_V1"
+}
