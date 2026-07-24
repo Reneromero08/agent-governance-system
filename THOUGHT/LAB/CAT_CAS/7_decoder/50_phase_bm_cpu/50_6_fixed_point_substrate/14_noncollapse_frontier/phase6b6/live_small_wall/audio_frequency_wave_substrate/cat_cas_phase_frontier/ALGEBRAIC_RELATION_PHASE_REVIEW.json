@@ -1,0 +1,54 @@
+{
+  "schema": "cat_cas_algebraic_relation_phase_focused_review_v1",
+  "reviewer_id": "SOL-XHIGH-ALGEBRAIC-RELATION-PHASE-01",
+  "verdict": "PASS",
+  "reviewed_candidate": {
+    "native": {
+      "bytes": 30652,
+      "sha256": "44c63cdf46a2a47d54612fe1068a387bead800b973da429bcedcb400cd02da68"
+    },
+    "bounded_reference": {
+      "bytes": 15614,
+      "sha256": "eedf4678839f6e7c30d23d92fae761353b21377cd6be118f207f062f8c7fb0d4"
+    },
+    "exhaustive_survey": {
+      "bytes": 5799,
+      "sha256": "17428aa3cb1b3745e33b4e544668cb9eca5892afcc8858cb996ea9a5f4d7e504"
+    },
+    "format": {
+      "bytes": 3586,
+      "sha256": "edd1e8474ecb2e4561f6c3c0c246310b3a9fb4fab05945f61cbc522e670d7618"
+    },
+    "results_before_receipt_update": {
+      "bytes": 8436,
+      "sha256": "7575130baef61767b15f18661b226423ce486fa79b8d614f8ce7caaf6bfb07a6"
+    }
+  },
+  "normalized_findings": [
+    {
+      "id": "REFERENCE_IDENTIFIER_UNIQUENESS_DRIFT",
+      "disposition": "REPAIRED"
+    },
+    {
+      "id": "REJECTED_DEGENERATE_RESULT_MISLABELED_AS_NATIVE_OUTPUT",
+      "disposition": "REPAIRED"
+    }
+  ],
+  "independent_checks": {
+    "raw_resultant_exactness": "PASS_3217_OF_6561",
+    "prospective_total_fiber_class": "PASS_625_OF_625",
+    "native_reference_admitted_pair_execution": "PASS_625_OF_625",
+    "nominal_restoration_and_reuse": "PASS_625_OF_625",
+    "applicability_gated_inverse_controls": "PASS_1875_OF_1875",
+    "applicable_inverse_failures": 1336,
+    "honest_inverse_nonapplicabilities": 539,
+    "directional_and_reversed_admission_classification": "PASS_81_OF_81_EACH_LANE",
+    "cross_process_restored_reuse": "PASS_64_OF_64",
+    "worst_cross_process_restoration_max_abs": 1.66533453694e-16,
+    "strict_gcc_fanalyzer_sanitizers_determinism": "PASS",
+    "parser_adversaries": "PASS",
+    "no_smuggle_and_oracle_non_linkage": "PASS",
+    "claim_ceiling": "PASS"
+  },
+  "remaining_findings": []
+}

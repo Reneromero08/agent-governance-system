@@ -1,0 +1,215 @@
+{
+  "schema": "cat_cas_mutable_algebraic_relation_phase_v1",
+  "status": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS",
+  "generated_utc": "2026-07-24T01:44:57Z",
+  "claim_boundary": "BOUNDED_SOFTWARE_TOTAL_TO_INTERNAL_BOOLEAN_FIBER_SINGLE_VARIABLE_ALGEBRAIC_RELATION_CALIBRATION_ONLY",
+  "mechanism": {
+    "port_type": "BOOLEAN_SUBSET_OF_F3",
+    "local_relation": "ZERO_SET_OF_BIVARIATE_MULTIAFFINE_F3_POLYNOMIAL",
+    "coefficient_order": ["c00", "c10", "c01", "c11"],
+    "internal_closure": "LINEAR_RESULTANT_BC_MINUS_AD",
+    "prospective_admission": "LEFT_TOTAL_TOWARD_SECOND_AND_RIGHT_TOTAL_TOWARD_FIRST_BOOLEAN_INTERNAL_PORT",
+    "native_operator": "FOUR_FIXED_ROOTS_OF_UNITY_PRODUCT_DIFFERENCES",
+    "native_carrier_complex_cells": 12,
+    "tuple_slots": 0,
+    "witness_slots": 0,
+    "retained_inverse_factors": 0,
+    "boundary_decode_after_native_elimination": true,
+    "result_record_outside_inverse_history": true
+  },
+  "sources": {
+    "native": {
+      "path": "algebraic_relation_phase.c",
+      "bytes": 30652,
+      "sha256": "44c63cdf46a2a47d54612fe1068a387bead800b973da429bcedcb400cd02da68"
+    },
+    "bounded_boolean_oracle": {
+      "path": "algebraic_relation_reference.c",
+      "bytes": 15614,
+      "sha256": "eedf4678839f6e7c30d23d92fae761353b21377cd6be118f207f062f8c7fb0d4",
+      "linked_into_native": false
+    },
+    "format": {
+      "path": "ALGEBRAIC_RELATION_PHASE_FORMAT.md",
+      "bytes": 3586,
+      "sha256": "edd1e8474ecb2e4561f6c3c0c246310b3a9fb4fab05945f61cbc522e670d7618"
+    },
+    "exhaustive_totality_survey": {
+      "path": "algebraic_relation_totality_survey.c",
+      "bytes": 5799,
+      "sha256": "17428aa3cb1b3745e33b4e544668cb9eca5892afcc8858cb996ea9a5f4d7e504",
+      "linked_into_native": false
+    },
+    "raw_transfer_hashes_match": true
+  },
+  "primary_calibration": {
+    "fixture": "algebraic_leq_leq.arel",
+    "fixture_sha256": "d7500138ab1ad62c522cdcfa4879e2ef5c016d35991a3f17ab1372ea4edc8397",
+    "process_fnv1a64": "f4a403a55a44a692",
+    "left_relation": "LEQ_XY_X_TIMES_ONE_MINUS_Y",
+    "right_relation": "LEQ_YZ_Y_TIMES_ONE_MINUS_Z",
+    "native_boundary_coefficients": [0, 1, 0, 2],
+    "boundary_relation": "LEQ_XZ_X_TIMES_ONE_MINUS_Z",
+    "boundary_pair_mask": 11,
+    "boundary_pairs": 3,
+    "extensional_derivations": 4,
+    "resultant_exact_on_boolean_domain": true,
+    "native_displacement_l2": 4.24264068712,
+    "nominal_restoration_max_abs": 1.66533453694e-16,
+    "actual_restored_reuse_max_abs": 1.57009245868e-16,
+    "wrong_inverse_max_abs": 1.73205080757,
+    "reordered_inverse_max_abs": 1.73205080757,
+    "omitted_inverse_max_abs": 1.73205080757,
+    "maximum_boundary_root_error": 2.22044604925e-16
+  },
+  "positive_fixtures": [
+    {
+      "fixture": "algebraic_leq_leq.arel",
+      "sha256": "d7500138ab1ad62c522cdcfa4879e2ef5c016d35991a3f17ab1372ea4edc8397",
+      "boundary_coefficients": [0, 1, 0, 2],
+      "boundary_pair_mask": 11
+    },
+    {
+      "fixture": "algebraic_eq_eq.arel",
+      "sha256": "4ce11b7311250194d337387b122d5d08974d6ab5ccc1e212a22c37f739b6a2e6",
+      "boundary_coefficients": [0, 1, 2, 0],
+      "boundary_pair_mask": 9
+    },
+    {
+      "fixture": "algebraic_neq_neq.arel",
+      "sha256": "1b0a7991f8d06d262151b6ad9e8e2ad575b967e56672fdfee3388db2da5fad1d",
+      "boundary_coefficients": [0, 1, 2, 0],
+      "boundary_pair_mask": 9
+    },
+    {
+      "fixture": "algebraic_leq_eq.arel",
+      "sha256": "e0f182e0bf452578594a2512dcabac44300c2f95ef9492bbcc630c1b925ffa47",
+      "boundary_coefficients": [0, 1, 0, 2],
+      "boundary_pair_mask": 11
+    },
+    {
+      "fixture": "algebraic_eq_leq.arel",
+      "sha256": "b91358324a11bacfe88834d153164c4af5f7cdaba7d6eed9abd473a5081cd916",
+      "boundary_coefficients": [0, 1, 0, 2],
+      "boundary_pair_mask": 11
+    },
+    {
+      "fixture": "algebraic_geq_geq.arel",
+      "sha256": "678781d82b264098a8203d8daa5bfecea8e2013543b14901bdefabf4b9f85621",
+      "boundary_coefficients": [0, 0, 2, 1],
+      "boundary_pair_mask": 13
+    },
+    {
+      "fixture": "algebraic_neq_eq.arel",
+      "sha256": "05e71ab9e46ec2d2f37ca5879370e8eb2fc66e8be51e313750f1b5410150afe3",
+      "boundary_coefficients": [2, 1, 1, 0],
+      "boundary_pair_mask": 6
+    },
+    {
+      "fixture": "algebraic_permuted_reversed.arel",
+      "sha256": "bc917f60eff8a9e92239b08c62d8459ed4359b0da7ef98b5f586ceaf835e2aeb",
+      "boundary_coefficients": [0, 1, 0, 2],
+      "boundary_pair_mask": 11,
+      "presentation_and_endpoint_orientation": "PASS"
+    }
+  ],
+  "decisive_boundaries": {
+    "cut_fixture": {
+      "path": "algebraic_cut.arel",
+      "sha256": "ade8979ec05297250e2409bfca3abd08f30ed1bf8b9d53e1d61a1e739d7bb3ac",
+      "native": "REJECT",
+      "reference": "REJECT"
+    },
+    "degenerate_resultant_fixture": {
+      "path": "algebraic_inexact_degenerate.arel",
+      "sha256": "d3e5fd6990f170b6a143e45f7e0d6097ae2c8a496acff2f7c4af11fc8aa957b1",
+      "left_boolean_relation": "EMPTY",
+      "right_boolean_relation": "ANY",
+      "counterfactual_unadmitted_raw_resultant_coefficients": [0, 0, 0, 0],
+      "counterfactual_source": "INDEPENDENT_SCALAR_SURVEY_AND_RESULTANT_FORMULA_NOT_NATIVE_EXECUTION",
+      "bounded_existential_boundary_pair_mask": 0,
+      "resultant_exact_on_boolean_domain": false,
+      "native": "REJECT_NON_TOTAL_LEFT_INTERNAL_FIBER",
+      "reference": "REJECT_NON_TOTAL_LEFT_INTERNAL_FIBER",
+      "disposition": "PROSPECTIVE_ADMISSION_BLOCKS_GENERAL_BOOLEAN_RELATION_ELIMINATION_OVERCLAIM"
+    },
+    "identifier_uniqueness": {
+      "duplicate_relation_fixture": {
+        "path": "algebraic_duplicate_relation.arel",
+        "sha256": "1b2a0a63cb76c52d2995e8d63ac1da0896c895c37738907e558ee7b11fe58c58",
+        "native": "REJECT",
+        "reference": "REJECT"
+      },
+      "duplicate_port_fixture": {
+        "path": "algebraic_duplicate_port.arel",
+        "sha256": "ef72eecd96b1bcebbe18ec0e3dc4bc97bc5bf3ec9b3927baf01842924adae33c",
+        "native": "REJECT",
+        "reference": "REJECT"
+      }
+    }
+  },
+  "qualification": {
+    "strict_gcc_14_2_builds": "PASS_NATIVE_AND_REFERENCE",
+    "gcc_fanalyzer": "PASS_NATIVE_AND_REFERENCE",
+    "asan_ubsan_leak_detection": "PASS_NATIVE_AND_REFERENCE_8_OF_8",
+    "native_reference_exact_positive_fixtures": "PASS_8_OF_8",
+    "cross_process_actual_restored_carrier_reuse": "PASS_LEQ_TO_NEQ_COMPOSITION",
+    "deterministic_fresh_replays": "PASS_20_OF_20",
+    "cut_geometry_control": "PASS",
+    "degenerate_exactness_control": "PASS",
+    "unique_port_and_relation_identifier_controls": "PASS_NATIVE_AND_REFERENCE_2_OF_2",
+    "raw_signature_pair_survey": {
+      "pairs": 6561,
+      "exact": 3217,
+      "inexact": 3344
+    },
+    "prospectively_admitted_signature_pair_survey": {
+      "left_signatures": 25,
+      "right_signatures": 25,
+      "pairs": 625,
+      "exact": 625,
+      "inexact": 0
+    },
+    "native_resultant_assignment_loops": 0,
+    "native_reference_linkage": false
+  },
+  "no_smuggle": {
+    "native_relation_tuple_table": false,
+    "native_boolean_assignment_enumeration": false,
+    "native_internal_witness_enumeration": false,
+    "native_expected_boundary": false,
+    "native_extensional_oracle": false,
+    "native_scalar_resultant": false,
+    "admission_computes_boundary_result": false,
+    "admission_uses_oracle_or_expected_boundary": false,
+    "decoded_coefficient_feedback": false,
+    "boundary_decode_only": true
+  },
+  "review": {
+    "status": "PASS",
+    "reviewer_id": "SOL-XHIGH-ALGEBRAIC-RELATION-PHASE-01",
+    "receipt": "ALGEBRAIC_RELATION_PHASE_REVIEW.json",
+    "candidate_results_sha256_before_receipt_update": "7575130baef61767b15f18661b226423ce486fa79b8d614f8ce7caaf6bfb07a6",
+    "repaired_findings": [
+      "REFERENCE_IDENTIFIER_UNIQUENESS_DRIFT",
+      "REJECTED_DEGENERATE_RESULT_MISLABELED_AS_NATIVE_OUTPUT"
+    ],
+    "remaining_findings": [],
+    "verdict": "PASS"
+  },
+  "adjudication": {
+    "algebraic_relation_signature": "DEVELOPMENT_PASS",
+    "phase_native_internal_variable_elimination": "DEVELOPMENT_PASS_FOR_LINEAR_RESULTANT",
+    "leq_nonfunctional_idempotent_composition": "DEVELOPMENT_PASS",
+    "actual_inverse_restoration_and_reuse": "DEVELOPMENT_PASS",
+    "all_prospectively_admitted_total_fiber_relation_pairs": "DEVELOPMENT_PASS_625_OF_625",
+    "all_boolean_relations": "NOT_ESTABLISHED_NON_TOTAL_FIBERS_REJECTED",
+    "multiple_internal_variables": "NOT_ESTABLISHED",
+    "arbitrary_typed_arity": "NOT_ESTABLISHED",
+    "general_holographic_relational_computer": "NOT_ESTABLISHED",
+    "compute_advantage": "NOT_ESTABLISHED_COMPACT_CLASSICAL_RESULTANT_EXISTS",
+    "physical_phase_computation": "NOT_ESTABLISHED",
+    "terminal": false
+  },
+  "selected_next_correction": "REPEATABLE_MULTI_INTERNAL_COMPOSITION_WITH_AN_ALGEBRAIC_CLASS_CLOSED_UNDER_BOUNDARY_OUTPUT_THEN_BRANCHING_TRACE"
+}
