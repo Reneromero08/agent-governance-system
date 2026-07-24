@@ -1,0 +1,81 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Does the full-schedule R-spatial primary-minus-sham coordinate require a source-authored relation preparation, and does reset_double_flush still kill the retained source-dead coordinate?",
+  "pair_sample_count": 256,
+  "rows_per_variant": 2048,
+  "run_id": "family10h_relation_rspatial_full_schedule_source_off_reset_crosscheck_discovery_v1_0",
+  "schedule_manifest_sha256": "3f3dfee1b9eca8d3514d56ebb907463dd76046381df5f1b1ad87cf3eaf95db59",
+  "schema": "FAMILY10H_RELATION_RSPATIAL_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "alive_primary": {
+      "expected_pair_observation_count": 524288,
+      "path": "RSPATIAL_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_SCHEDULES/alive_primary.tsv",
+      "query": "query_relation_pair",
+      "row_count": 2048,
+      "sha256": "baea0ed21fef71b3403c1c479865c4e1ee56b55822c211e016919175e1692ec1",
+      "size_bytes": 2286843
+    },
+    "alive_sham": {
+      "expected_pair_observation_count": 524288,
+      "path": "RSPATIAL_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_SCHEDULES/alive_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 2048,
+      "sha256": "2c3c7b332c5bffe5a9eb98de3902b90212ef728f23088ea2d8cf6381277b9877",
+      "size_bytes": 2243835
+    },
+    "dead_primary": {
+      "expected_pair_observation_count": 524288,
+      "path": "RSPATIAL_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_SCHEDULES/dead_primary.tsv",
+      "query": "dead_query_relation_pair_control",
+      "row_count": 2048,
+      "sha256": "6a3c07ecc29a2d7861133999527b28c666f63c53d8e0e069da05ed5c52afe87e",
+      "size_bytes": 2385147
+    },
+    "dead_sham": {
+      "expected_pair_observation_count": 524288,
+      "path": "RSPATIAL_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_SCHEDULES/dead_sham.tsv",
+      "query": "dead_relation_sham_control",
+      "row_count": 2048,
+      "sha256": "41a6232bb3e9a101071940ccff6e155b705e1824c822c1f3ab684b156cb1f6e2",
+      "size_bytes": 2311419
+    },
+    "reset_double_flush_primary": {
+      "expected_pair_observation_count": 524288,
+      "path": "RSPATIAL_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_SCHEDULES/reset_double_flush_primary.tsv",
+      "query": "reset_double_flush_query_relation_pair_control",
+      "row_count": 2048,
+      "sha256": "bd52e4e5bd4cac80cf82aa54c1f777aafaaa32448f0ba8d4c80efe7c10c6e603",
+      "size_bytes": 2643195
+    },
+    "reset_double_flush_sham": {
+      "expected_pair_observation_count": 524288,
+      "path": "RSPATIAL_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_SCHEDULES/reset_double_flush_sham.tsv",
+      "query": "reset_double_flush_relation_sham_control",
+      "row_count": 2048,
+      "sha256": "036ece3a07521081fc63e9a4402f434ea9c69f3d79b6fe4095d767f7b71fabf0",
+      "size_bytes": 2569467
+    },
+    "source_off_primary": {
+      "expected_pair_observation_count": 524288,
+      "path": "RSPATIAL_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_SCHEDULES/source_off_primary.tsv",
+      "query": "source_off_query_relation_pair_control",
+      "row_count": 2048,
+      "sha256": "8c22be3c84d4264d5a1caa23536b8316e990ba3d58d9ac646b73d8314dcebb4d",
+      "size_bytes": 2495739
+    },
+    "source_off_sham": {
+      "expected_pair_observation_count": 524288,
+      "path": "RSPATIAL_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_SCHEDULES/source_off_sham.tsv",
+      "query": "source_off_relation_sham_control",
+      "row_count": 2048,
+      "sha256": "4f93b2939e382cd93c9cd1a2668fef5581004a9a12a5353ba77950f617e9aa67",
+      "size_bytes": 2422011
+    }
+  }
+}

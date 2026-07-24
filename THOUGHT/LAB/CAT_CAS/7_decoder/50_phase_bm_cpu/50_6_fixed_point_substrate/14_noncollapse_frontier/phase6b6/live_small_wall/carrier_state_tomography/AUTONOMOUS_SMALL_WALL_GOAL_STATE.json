@@ -1,6 +1,6 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T18:24:14-07:00",
+  "updated_at": "2026-07-23T18:38:42-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
   "checkpoint_head": "adb7f75a97050954e24555c7a9fd328df247f80d",
@@ -54,17 +54,17 @@
     ]
   },
   "current_package": {
-    "package_id": "family10h_relation_composition_phase_correction_discovery_v1",
-    "transaction_run_id": "family10h_relation_composition_phase_correction_discovery_v1_0",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_phase_correction_discovery_v1",
-    "package_decision": "EXPLORATORY_PHASE_CORRECTED_COMPOSITION_REJECTED_NO_SCIENTIFIC_CLAIM",
-    "package_manifest_sha256": null,
-    "schedule_manifest_sha256": "05c18da179bf2d8a02f13a9d6eede0d79a06a9a2730b6627a3a8d6a448b2706c",
+    "package_id": "family10h_relation_rspatial_full_schedule_source_off_reset_crosscheck_discovery_v1",
+    "transaction_run_id": "family10h_relation_rspatial_full_schedule_source_off_reset_crosscheck_discovery_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_rspatial_full_schedule_source_off_reset_crosscheck_discovery_v1",
+    "package_decision": "EXPLORATORY_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "package_manifest_sha256": "5eca25b5e890b162b10881676ee562f0506b393ef58212b8fa8e645486a22df1",
+    "schedule_manifest_sha256": "3f3dfee1b9eca8d3514d56ebb907463dd76046381df5f1b1ad87cf3eaf95db59",
     "threshold_contract_sha256": null,
-    "source_schedule_package": "family10h_relation_composition_replay_exclusion_discovery_v1",
-    "source_authority_commit": "adb7f75a97050954e24555c7a9fd328df247f80d",
+    "source_schedule_package": "family10h_primary_minus_sham_local_paired_differential_v1",
+    "source_authority_commit": "3d426d31fefea659922133eacd8929f1ea39f14b",
     "source_freeze_commit": null,
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_composition_phase_correction_discovery_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_rspatial_full_schedule_source_off_reset_crosscheck_discovery_v1_0/attempt_1",
     "attempt_output_path_fresh": true
   },
   "current_observable": {
@@ -154,6 +154,13 @@
       "raw_records": 12288,
       "pair_observations": 3145728,
       "source_death_receipts": 12288
+    },
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_discovery_attempts": 1,
+    "family10h_relation_rspatial_full_schedule_source_off_reset_crosscheck_discovery_v1_0": {
+      "physical_transactions": 1,
+      "raw_records": 16384,
+      "pair_observations": 4194304,
+      "source_death_receipts": 16384
     }
   },
   "latest_retained_evidence": {
@@ -918,6 +925,63 @@
       "phase_corrected_psi_nonzero": true,
       "small_wall_crossed": false,
       "source_off_collapses_below_25pct_alive_psi": false
+    },
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_result": "EXPLORATORY_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_archive_sha256": "bd83588936568d4b7068fa52e62fd35be18ccb904ad9373ff30124e66e5b2d84",
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_archive_size": 90284083,
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_analysis_sha256": "35a3f25e4b32bd7b3b9b10dde85b912ddcfd68b88f1c347f54f84ec166013cbe",
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_raw_record_count": 16384,
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_pair_observation_count": 4194304,
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_source_death_receipt_count": 16384,
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_runtime_sha256": "ad04998e510d7c532ab77daf1617d27e467fe12a83b6aef33d7aeae53c48167f",
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_pmu_helper_sha256": "57912ac3e3efe03b9b3621f6bdda40730faf28260fc0328bb892f46fc7746d14",
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_schedule_manifest_sha256": "3f3dfee1b9eca8d3514d56ebb907463dd76046381df5f1b1ad87cf3eaf95db59",
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_source_package_sha256": "5eca25b5e890b162b10881676ee562f0506b393ef58212b8fa8e645486a22df1",
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_copyback_passed": true,
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_cleanup_passed": true,
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_coordinates": {
+      "D_alive_primary_minus_sham": 0.06744933436995737,
+      "D_dead_primary_minus_sham": 0.03804386776900461,
+      "D_source_off_primary_minus_sham": 0.11000768508560255,
+      "R_alive_primary": 0.06549668696674002,
+      "R_alive_sham": -0.001952647403217346,
+      "R_dead_primary": 0.03594327812722406,
+      "R_dead_sham": -0.00210058964178055,
+      "R_source_off_primary": 0.11008066351763302,
+      "R_source_off_sham": 7.297843203047511e-05,
+      "best_reset_D_abs_to_alive_D_abs": 0.19370298740894612,
+      "best_reset_D_primary_minus_sham": 0.01306513756620565,
+      "best_reset_max_stratum_abs_to_alive_matched_abs": 0.5051223597997309,
+      "best_reset_method": "reset_double_flush",
+      "dead_D_abs_to_alive_D_abs": 0.5640362225123714,
+      "dead_primary_abs_to_alive_primary_abs": 0.54878009547989,
+      "reset_methods_by_stratum_ratio": [
+        {
+          "D_abs_to_alive_D_abs": 0.19370298740894612,
+          "D_primary_minus_sham": 0.01306513756620565,
+          "max_stratum_abs_to_alive_matched_abs": 0.5051223597997309,
+          "method": "reset_double_flush"
+        }
+      ],
+      "source_off_D_abs_to_alive_D_abs": 1.6309676902401147,
+      "source_off_max_stratum_abs_to_alive_matched_abs": 2.019502024158733
+    },
+    "relation_rspatial_full_schedule_source_off_reset_crosscheck_interpretation": {
+      "alive_D_positive": true,
+      "best_reset_kills_aggregate_below_25pct_alive_D": true,
+      "best_reset_kills_all_one_factor_strata_below_25pct_alive_D": false,
+      "best_reset_method": "reset_double_flush",
+      "best_reset_reduces_dead_D_abs": true,
+      "candidate_persistent_source_written_state_with_reset_method": false,
+      "dead_D_positive": true,
+      "dead_all_one_factor_strata_D_positive": true,
+      "dead_preserves_at_least_25pct_alive_D": true,
+      "dead_primary_same_sign_as_alive_primary": true,
+      "exploratory_only": true,
+      "small_wall_crossed": false,
+      "source_death_kills_below_25pct_alive_D": false,
+      "source_off_kills_aggregate_below_25pct_alive_D": false,
+      "source_off_kills_all_one_factor_strata_below_25pct_alive_D": false
     }
   },
   "hypothesis_frontier": {
@@ -988,7 +1052,7 @@
       "higher compatibility or obstruction surface"
     ],
     "leading_mechanism": "amplitude-dominant spatial carrier response: source action can write a persistent carrier amplitude/state, spatial boundary readout exposes it, and explicit reset can suppress it in some full-schedule experiments",
-    "strongest_candidate_coordinate": "none currently clean beyond the confirmed scalar/local differential baseline; corrected live-composition prep rejected the composition-loop lead",
+    "strongest_candidate_coordinate": "none currently clean beyond the confirmed scalar/local differential baseline; corrected composition failed, and full-schedule source-off/reset crosscheck failed because source-off amplified D",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
       "branch": "codex/audio-frequency-wave-substrate",
@@ -1020,9 +1084,10 @@
       "temporal/order-coded relation as source-written carrier; no-source-preparation D was 3.80x alive D",
       "fixed-marginal AB-versus-BA source operation order as a clean source-authored holographic candidate; alive D_order was nonzero but source-off preserved 56.9% of it and neutral/random controls were 5.77x/3.96x larger than the order contrast",
       "plain fixed-marginal AB-versus-BA order remains insufficient; composition-loop R0->R1 versus R1->R0 is now the leading exploratory candidate but neutral/random D amplitudes still require replay-exclusion hardening before promotion",
-      "uniform adjacent R0_then_R1 versus R1_then_R0 composition after fixing live source prep; corrected phase package collapsed alive Psi to 0.004215 and source-off/gapped controls were larger than alive"
+      "uniform adjacent R0_then_R1 versus R1_then_R0 composition after fixing live source prep; corrected phase package collapsed alive Psi to 0.004215 and source-off/gapped controls were larger than alive",
+      "full-schedule source-off/reset crosscheck as a source-authored persistent boundary invariant; source-off D was 1.631x alive D and reset_double_flush failed all-strata kill with max matched-stratum ratio 0.505"
     ],
-    "current_next_experiment": "move away from uniform adjacent R0/R1 composition; search for a relation code that is genuinely source-authored under the live prep helper, preferably a noncommutative or holonomy-style code with carrier-off kill and matched gapped/source-off controls",
+    "current_next_experiment": "search for a relation code whose no-source-prep baseline is killed before worrying about reset/reuse: prioritize source-off-first carrier-off screens for noncommutative/holonomy-style codes with identical receiver schedule and matched scalar marginals",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
@@ -1049,9 +1114,10 @@
       "composition-loop discovery is promising but exploratory: Omega_alive = 0.025081683677790033, source-off ratio = 0.06326050530086345, dead ratio = 0.2979268569177624, one-factor strata same sign true; neutral/random primary-minus-sham amplitudes are 3.268x/3.249x alive Omega, so replay-exclusion and prospective confirmation remain required",
       "composition replay-exclusion discovery attempt_2: adjacent Omega nonzero, source-off collapsed to 0.134x, dead preserved 0.382x, gapped collapsed to 0.029x, but balanced-alt replay remained 0.379x, so the strict replay-exclusion candidate failed and Small Wall was not crossed",
       "replay-exclusion runner defect found: copied composition prep selector had only affected the synthetic/default path; the live child was still using base relation_spatial_prepare for non-source-off controls before the phase-correction package fixed it",
-      "phase-correction discovery with live composition prep rejected the composition-loop route: adjacent Omega = -0.006573912488253036, balanced Omega = -0.01078925326143014, Psi_alive = 0.004215340773177104, source-off Psi ratio = 4.791530059904371, gapped Psi ratio = 2.3982813595647414, corrected strata same-sign false"
+      "phase-correction discovery with live composition prep rejected the composition-loop route: adjacent Omega = -0.006573912488253036, balanced Omega = -0.01078925326143014, Psi_alive = 0.004215340773177104, source-off Psi ratio = 4.791530059904371, gapped Psi ratio = 2.3982813595647414, corrected strata same-sign false",
+      "full-schedule source-off/reset crosscheck: alive D = 0.06744933436995737, dead D = 0.03804386776900461, source-off D = 0.11000768508560255 (1.631x alive), reset_double_flush D = 0.01306513756620565 (0.194x aggregate but 0.505 max stratum); candidate false"
     ],
-    "active_frontier": "post-correction relation encoding search: the source-written amplitude primitive remains real, but actual live adjacent composition did not survive as a carrier-off-killed invariant"
+    "active_frontier": "source-off-first relation-code search: source-written amplitude primitive remains real, but the current full-schedule R-spatial D is not source-authored under no-prep control"
   },
   "claim_state": {
     "scalar_q_readout_confirmed_prospectively": true,
@@ -1061,6 +1127,6 @@
     "catalytic_borrowing_established": false,
     "r2_restoration_established": false,
     "small_wall_crossed": false,
-    "current_ceiling": "exploratory phase-corrected composition reject; no new positive scientific claim beyond prior scalar/local differential results"
+    "current_ceiling": "exploratory source-off/reset crosscheck reject; no new positive scientific claim beyond prior scalar/local differential results"
   }
 }
