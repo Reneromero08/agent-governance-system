@@ -37,23 +37,27 @@ def unique_solution() -> ConstraintHolo:
     )
 
 
-def unsat() -> ConstraintHolo:
+def unsat_two_variables() -> ConstraintHolo:
     return ConstraintHolo.build(
-        ("x",),
+        ("x1", "x2"),
         (
-            clause(Literal("x"), Literal("x"), Literal("x")),
-            clause(Literal("x", False), Literal("x", False), Literal("x", False)),
+            clause(Literal("x1"), Literal("x1"), Literal("x1")),
+            clause(Literal("x1", False), Literal("x1", False), Literal("x1", False)),
         ),
     )
 
 
-def test_full_reversible_oracle_winding_is_formula_independent() -> None:
+def test_full_reversible_oracle_winding_is_formula_independent_at_equal_dimension() -> None:
     sat_result = audit_oracle_determinant_compensation(unique_solution(), ancillary_qubits=2)
-    unsat_result = audit_oracle_determinant_compensation(unsat(), ancillary_qubits=2)
-    assert sat_result.full_winding == 8
-    assert unsat_result.full_winding == 4
+    unsat_result = audit_oracle_determinant_compensation(
+        unsat_two_variables(), ancillary_qubits=2
+    )
+    assert sat_result.total_dimension == unsat_result.total_dimension == 16
+    assert sat_result.full_winding == unsat_result.full_winding == 8
     assert sat_result.full_winding == sat_result.total_dimension // 2
     assert unsat_result.full_winding == unsat_result.total_dimension // 2
+    assert sat_result.clean_winding == 1
+    assert unsat_result.clean_winding == 0
     assert sat_result.full_winding_formula_independent
     assert unsat_result.full_winding_formula_independent
 
@@ -69,8 +73,10 @@ def test_clean_sector_keeps_sat_index_and_dirty_sector_compensates() -> None:
 
 
 def test_unsat_clean_sector_has_zero_index_but_full_oracle_still_winds() -> None:
-    result = audit_oracle_determinant_compensation(unsat(), ancillary_qubits=1)
+    result = audit_oracle_determinant_compensation(
+        unsat_two_variables(), ancillary_qubits=1
+    )
     assert result.clean_winding == 0
-    assert result.full_winding == 2
-    assert result.complementary_winding == 2
+    assert result.full_winding == 4
+    assert result.complementary_winding == 4
     assert result.restricted_sensor_required
