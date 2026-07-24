@@ -386,3 +386,78 @@ open typed many-to-many phase relations
 
 Any useful successor must keep the relation unresolved rather than enumerate
 tuples, internal assignments, witnesses, or one ordinary circuit per case.
+
+## Typed open quotient-relation calibration
+
+`open_relation_phase.c` is the first relational lift that does not lower the
+full `Z_N` relation into a gate stream or tuple table. A
+`CYCLIC_PARITY(N)` port is represented by its quotient geometry, not by `N`
+values. Each local open relation is the complete two-slot characteristic
+vector of a Boolean-lattice subset of the two parity-difference cosets:
+
+```text
+EMPTY
+SAME
+OPPOSITE
+BOTH
+```
+
+Two relations sharing one typed internal port close through idempotent Boolean
+convolution over `Z2`. `AND` and `OR` are roots-of-unity phase polynomials.
+The native composition function contains no loop over `N`, boundary pairs,
+internal assignments, or witnesses.
+
+At `N=64`, the strongest calibration is:
+
+```text
+left relation                       BOTH
+right relation                      BOTH
+boundary relation                   BOTH
+boundary pairs                      4,096
+derivations                         262,144
+witnesses per valid boundary pair   64
+native complex carrier cells        8
+native witness slots                0
+retained inverse factors            0
+nominal restoration                 1.11022302463e-16
+actual-restored reuse restoration   1.57009245868e-16
+wrong inverse                       1.73205080757
+reordered inverse                   1.73205080757
+omitted inverse                     1.73205080757
+```
+
+The independent bounded extensional oracle agrees on all eight calibrations,
+including the neutral `EMPTY o EMPTY` edge.
+Duplicate presentation and witness multiplicity do not change the lawful
+boundary. Port/relation presentation permutation preserves it. Empty relation
+has an intact carrier and differs mechanically from an injected carrier
+failure. A cut shared port is rejected, so no local cached answer survives a
+disconnected diagram. The same restored carrier executes a different second
+process successfully.
+
+The native carrier remains eight complex cells from `N=4` through a
+non-enumerated `N=1,000,000,000` run. Bounded exhaustive references at
+`N=4, 8, 16, 32, 64, 128` all agree with the phase boundary. This is exact for
+the declared quotient algebra; it is not evidence that an arbitrary
+billion-state relation was exhaustively computed.
+
+The mechanism is a genuine structured open relation and is non-enumerative
+over `Z_N`, but it is quotient-extensional: the fixed `Z2` relation is fully
+stored in two characteristic slots and composed by a fixed four-AND/two-OR
+Boolean-convolution circuit. It is not yet a general holographic relational
+computer. It cannot represent arbitrary relations such as Boolean `LEQ`,
+arbitrary arity, branching diagrams, or general relational trace. A compact
+classical Boolean-convolution equivalent exists. The next frontier is a richer
+typed relation signature with native algebraic composition and elimination,
+without full-domain truth-table or internal-assignment expansion.
+
+Focused reviewer `SOL-XHIGH-OPEN-RELATION-PHASE-01` independently found and
+closed four bounded defects: neutral `EMPTY o EMPTY` rejection, fixed-`Z2`
+intensional overclaim, unenforced canonical decimal syntax plus imprecise
+inverse-source wording, and the `NONE` sentinel/name ambiguity. The exact
+repaired candidate passed strict GCC and static analysis, sanitizers, all
+eight fixtures, all 16 quotient-relation pairs, duplicate and permutation
+controls, scale and max-domain controls, 24 inverse controls, 64
+cross-process restored-carrier reuse trials, deterministic replay, 17 parser
+adversaries, no-smuggle inspection, and oracle non-linkage. Verdict: `PASS`;
+remaining findings: none.

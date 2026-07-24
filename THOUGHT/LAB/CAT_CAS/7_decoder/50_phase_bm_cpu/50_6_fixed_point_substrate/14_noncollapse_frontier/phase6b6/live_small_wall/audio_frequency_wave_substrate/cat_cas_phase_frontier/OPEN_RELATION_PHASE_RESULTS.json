@@ -1,0 +1,222 @@
+{
+  "schema": "cat_cas_mutable_open_relation_phase_v1",
+  "status": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS",
+  "generated_utc": "2026-07-24T01:09:16Z",
+  "claim_boundary": "BOUNDED_SOFTWARE_OPEN_QUOTIENT_RELATION_COMPOSITION_CALIBRATION_ONLY",
+  "mechanism": {
+    "port_type": "CYCLIC_PARITY_EVEN_N",
+    "local_relation": "BOOLEAN_LATTICE_SUBSET_OF_Z2_DIFFERENCE_COSETS",
+    "representation_scope": "NON_ENUMERATIVE_OVER_ZN_QUOTIENT_EXTENSIONAL_OVER_FIXED_Z2",
+    "quotient_characteristic_slots": 2,
+    "relation_values": [
+      "EMPTY",
+      "SAME",
+      "OPPOSITE",
+      "BOTH"
+    ],
+    "composition": "IDEMPOTENT_BOOLEAN_CONVOLUTION_OVER_Z2_ON_COMPLEX_PHASE_SYMBOLS",
+    "internal_port": "CLOSED_BY_TYPED_TWO_LINK_GEOMETRY",
+    "native_carrier_complex_cells": 8,
+    "witness_slots": 0,
+    "tuple_slots": 0,
+    "retained_inverse_factors": 0,
+    "carrier_size_depends_on_domain_modulus": false,
+    "boundary_decode_after_native_composition": true,
+    "result_record_outside_inverse_history": true
+  },
+  "sources": {
+    "native": {
+      "path": "open_relation_phase.c",
+      "bytes": 29979,
+      "sha256": "c676fd3a31a366e7966fb0c404ced80efdf196cca4d030ca9e72e5fed206d373"
+    },
+    "bounded_extensional_oracle": {
+      "path": "open_relation_reference.c",
+      "bytes": 11901,
+      "sha256": "62755e6c5b07f3867d09f864541613c6a44f858f425bb266a5b1c68067597705",
+      "linked_into_native": false
+    },
+    "format": {
+      "path": "OPEN_RELATION_PHASE_FORMAT.md",
+      "bytes": 3974,
+      "sha256": "2e7f9281757e2b35e47dc7049b35a0e6367beba1e630aa316da3cc4613174ec8"
+    },
+    "canonical_decimal_negative_fixture": {
+      "path": "relation_leading_zero.hrel",
+      "bytes": 191,
+      "sha256": "3003d2585944dc3a6e7a9e5af57bcfa08b236689a57e295865cf5ac0bd15d19f"
+    },
+    "reserved_none_negative_fixture": {
+      "path": "relation_reserved_none.hrel",
+      "bytes": 190,
+      "sha256": "df40e0f5ac45c22a92c2c73cd45d18f2df80262a5b73aa84a82c27dfe93c9f3d"
+    },
+    "raw_transfer_hashes_match": true
+  },
+  "target": {
+    "hostname": "catcas",
+    "cpu": "AMD Phenom II X6 1090T",
+    "compiler": "gcc 14.2.0",
+    "native_flags": "-std=c17 -O3 -Wall -Wextra -Werror -Wpedantic -ffp-contract=off",
+    "sanitizer_flags": "-std=c17 -O1 -g -Wall -Wextra -Werror -Wpedantic -ffp-contract=off -fsanitize=address,undefined -fno-omit-frame-pointer",
+    "contact_scope": "raw source transfer to /tmp, userspace compilation, sanitizers, and CPU execution only",
+    "system_configuration_changed": false
+  },
+  "calibrations": [
+    {
+      "fixture": "relation_same_same.hrel",
+      "sha256": "afe6c7a98217bdd4d463973bf3974cf707d415a322b47332dc443d6724844511",
+      "process_fnv1a64": "e09ecd4cf4058d90",
+      "boundary": [1, 0],
+      "boundary_pairs": 2048,
+      "derivations": 65536,
+      "witnesses_per_valid_pair": 32,
+      "oracle_match": true
+    },
+    {
+      "fixture": "relation_same_opposite.hrel",
+      "sha256": "1874b3f06ee2bf9732ed34063c9419e490e6b867630e3d20c6afdf974b741089",
+      "process_fnv1a64": "6b4fb533e4c21a29",
+      "boundary": [0, 1],
+      "boundary_pairs": 2048,
+      "derivations": 65536,
+      "witnesses_per_valid_pair": 32,
+      "oracle_match": true
+    },
+    {
+      "fixture": "relation_duplicate_left.hrel",
+      "sha256": "1a0c76e3faeac4b46252caa803136aeffc59c9f894d6514d9d1344f43ebab94e",
+      "process_fnv1a64": "a7ee2023177de548",
+      "boundary": [0, 1],
+      "matches_unduplicated_boundary": true,
+      "duplicate_relation_idempotence": "PASS"
+    },
+    {
+      "fixture": "relation_permuted.hrel",
+      "sha256": "581fd33fb30a62ed86671c8d4c199aabef5435ee0f302228b1a5f5e70b443ed8",
+      "process_fnv1a64": "a3c7972c9bc822e8",
+      "boundary": [0, 1],
+      "presentation_and_wiring_permutation": "PASS"
+    },
+    {
+      "fixture": "relation_empty.hrel",
+      "sha256": "edadbf17eb3a950376d3041f4eb5bae9479de66c9d32f11ea25859bbb237b3f4",
+      "process_fnv1a64": "e6ef397f951bb898",
+      "boundary": [0, 0],
+      "boundary_pairs": 0,
+      "carrier_integrity_error": 1.11022302463e-16,
+      "empty_relation_distinct_from_carrier_failure": "PASS"
+    },
+    {
+      "fixture": "relation_empty_empty.hrel",
+      "sha256": "392548fd2770e943e2cb1ec230b95c3194a66c109dbe474aad3221ecf89abcc9",
+      "process_fnv1a64": "f26115061e957afc",
+      "boundary": [0, 0],
+      "boundary_pairs": 0,
+      "derivations": 0,
+      "native_displacement_l2": 0,
+      "nominal_restoration_max_abs": 0,
+      "actual_restored_reuse_max_abs": 0,
+      "wrong_inverse_control_applicable": false,
+      "reordered_inverse_control_applicable": false,
+      "omitted_inverse_control_applicable": false,
+      "neutral_forward_process_accepted": "PASS"
+    },
+    {
+      "fixture": "relation_both_same.hrel",
+      "sha256": "61f17ccce9f4a9820e0fb150dd22cfce504d48fc6465a251bccd4133feae88b6",
+      "process_fnv1a64": "425cfe6bc94b630b",
+      "boundary": [1, 1],
+      "boundary_pairs": 4096,
+      "derivations": 131072,
+      "witnesses_per_valid_pair": 32,
+      "heterogeneous_relation_union_representation": "PASS"
+    },
+    {
+      "fixture": "relation_both_both.hrel",
+      "sha256": "a3c67afbbe47511786fd507192fb339e6382749ba6b367bd4cf6e825b00d6da7",
+      "process_fnv1a64": "418c13df6e776610",
+      "boundary": [1, 1],
+      "boundary_pairs": 4096,
+      "derivations": 262144,
+      "witnesses_per_valid_pair": 64,
+      "ordered_boundary_fnv1a64": "13411b19e5157325",
+      "native_displacement_l2": 4.24264068712,
+      "nominal_restoration_max_abs": 1.11022302463e-16,
+      "actual_restored_reuse_max_abs": 1.57009245868e-16,
+      "wrong_inverse_max_abs": 1.73205080757,
+      "reordered_inverse_max_abs": 1.73205080757,
+      "omitted_inverse_max_abs": 1.73205080757
+    }
+  ],
+  "scaling": {
+    "bounded_extensional_oracle_moduli": [4, 8, 16, 32, 64, 128],
+    "native_oracle_matches": "PASS_6_OF_6",
+    "witnesses_per_valid_pair": [4, 8, 16, 32, 64, 128],
+    "note": "same/opposite pilot used 2 through 64 witnesses; final both/both controls include 4 through 128 domain sizes",
+    "maximum_non_enumerated_modulus_executed": 1000000000,
+    "maximum_native_carrier_complex_cells": 8,
+    "maximum_native_witness_slots": 0,
+    "extensional_oracle_opened_at_maximum_non_enumerated_modulus": false,
+    "claim": "exact constant-size quotient compression and quotient-extensional phase evaluation; no Z_N tuple enumeration"
+  },
+  "qualification": {
+    "native_oracle_calibrations": "PASS_8_OF_8",
+    "complete_fixed_z2_relation_pair_algebra": "PASS_16_OF_16",
+    "wrong_reordered_omitted_control_records": "PASS_24_OF_24_WITH_EXPLICIT_APPLICABILITY",
+    "cross_process_actual_restored_carrier_reuse": "PASS",
+    "deterministic_fresh_replays": "PASS_20_OF_20",
+    "strict_negative_controls": "PASS_12_OF_12",
+    "canonical_unsigned_decimal_enforced_native_and_reference": true,
+    "none_relation_identifier_reserved_native_and_reference": true,
+    "cut_geometry_rejected": true,
+    "tuple_record_rejected": true,
+    "mismatched_port_type_rejected": true,
+    "embedded_nul_rejected": true,
+    "asan_ubsan_leak_detection": "PASS_NATIVE_AND_REFERENCE",
+    "native_source_modulus_loops": 0,
+    "native_reference_linkage": false,
+    "carrier_failure_control_integrity_error": 0.5
+  },
+  "no_smuggle": {
+    "native_relation_tuple_table": false,
+    "native_complete_fixed_z2_characteristic_vector": true,
+    "native_fixed_four_and_two_or_convolution_circuit": true,
+    "native_internal_assignment_loop": false,
+    "native_witness_selection": false,
+    "native_candidate_branching": false,
+    "native_expected_boundary": false,
+    "native_extensional_oracle": false,
+    "compiler_solves_relation": false,
+    "modulus_used_by_native_operator": false,
+    "boundary_decode_only": true
+  },
+  "review": {
+    "status": "PASS",
+    "reviewer_id": "SOL-XHIGH-OPEN-RELATION-PHASE-01",
+    "receipt": "OPEN_RELATION_PHASE_REVIEW.json",
+    "candidate_results_sha256_before_receipt_update": "aa0438e870950d9a279c0f04c9f3cd571a6dfe01b328d3bce7c93a093fc86522",
+    "remaining_findings": [],
+    "repaired_findings": [
+      "NEUTRAL_EMPTY_EMPTY_PROCESS_NO_LONGER_REQUIRES_NONZERO_DISPLACEMENT",
+      "CLAIMS_QUALIFIED_AS_NON_ENUMERATIVE_OVER_ZN_AND_QUOTIENT_EXTENSIONAL_OVER_FIXED_Z2",
+      "CANONICAL_UNSIGNED_DECIMAL_AND_INVERSE_SOURCE_WORDING_ALIGNED_WITH_IMPLEMENTATION",
+      "NONE_SENTINEL_RESERVED_TO_REMOVE_RELATION_IDENTIFIER_AMBIGUITY"
+    ],
+    "verdict": "PASS"
+  },
+  "adjudication": {
+    "open_many_to_many_relation": "DEVELOPMENT_PASS_FOR_NON_ENUMERATED_CYCLIC_PARITY_ZN_CLASS",
+    "native_relational_composition": "DEVELOPMENT_PASS_FOR_QUOTIENT_EXTENSIONAL_BOOLEAN_CONVOLUTION_OVER_FIXED_Z2",
+    "internal_port_closure": "DEVELOPMENT_PASS_FOR_TYPED_TWO_LINK_CHAIN",
+    "idempotent_duplicate_relation_boundary": "DEVELOPMENT_PASS",
+    "actual_inverse_restoration_and_reuse": "DEVELOPMENT_PASS",
+    "arbitrary_open_relation": "NOT_ESTABLISHED",
+    "arbitrary_typed_arity": "NOT_ESTABLISHED",
+    "general_holographic_relational_computer": "NOT_ESTABLISHED",
+    "compute_advantage": "NOT_ESTABLISHED_COMPACT_CLASSICAL_QUOTIENT_ALGEBRA_EXISTS",
+    "physical_phase_computation": "NOT_ESTABLISHED",
+    "terminal": false
+  },
+  "selected_next_correction": "GENERALIZE_FROM_COMPLETE_FIXED_Z2_CHARACTERISTIC_VECTORS_TO_NATIVE_ALGEBRAIC_TYPED_RELATIONS_WITHOUT_FULL_DOMAIN_TRUTH_TABLE_OR_ASSIGNMENT_EXPANSION"
+}

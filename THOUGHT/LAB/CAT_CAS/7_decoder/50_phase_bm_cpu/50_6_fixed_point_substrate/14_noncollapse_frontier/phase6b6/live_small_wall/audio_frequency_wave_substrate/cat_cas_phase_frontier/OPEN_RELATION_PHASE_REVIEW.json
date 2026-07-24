@@ -1,0 +1,60 @@
+{
+  "schema": "cat_cas_open_relation_phase_focused_review_v1",
+  "reviewer_id": "SOL-XHIGH-OPEN-RELATION-PHASE-01",
+  "verdict": "PASS",
+  "reviewed_candidate": {
+    "native": {
+      "bytes": 29979,
+      "sha256": "c676fd3a31a366e7966fb0c404ced80efdf196cca4d030ca9e72e5fed206d373"
+    },
+    "bounded_reference": {
+      "bytes": 11901,
+      "sha256": "62755e6c5b07f3867d09f864541613c6a44f858f425bb266a5b1c68067597705"
+    },
+    "format": {
+      "bytes": 3974,
+      "sha256": "2e7f9281757e2b35e47dc7049b35a0e6367beba1e630aa316da3cc4613174ec8"
+    },
+    "results_before_receipt_update": {
+      "bytes": 9207,
+      "sha256": "aa0438e870950d9a279c0f04c9f3cd571a6dfe01b328d3bce7c93a093fc86522"
+    }
+  },
+  "normalized_findings": [
+    {
+      "id": "VALID_NEUTRAL_EMPTY_EMPTY_FALSE_REJECTION",
+      "disposition": "REPAIRED"
+    },
+    {
+      "id": "INTENSIONAL_RELATION_OVERCLAIM",
+      "disposition": "REPAIRED"
+    },
+    {
+      "id": "CANONICAL_DECIMAL_UNENFORCED_AND_INVERSE_SOURCE_WORDING",
+      "disposition": "REPAIRED"
+    },
+    {
+      "id": "NONE_SENTINEL_IDENTIFIER_AMBIGUITY",
+      "disposition": "REPAIRED"
+    }
+  ],
+  "independent_checks": {
+    "strict_gcc_and_fanalyzer": "PASS",
+    "asan_ubsan_leaks": "PASS_10_OF_10",
+    "positive_fixtures": "PASS_8_OF_8",
+    "complete_fixed_z2_pair_algebra": "PASS_16_OF_16",
+    "duplicate_idempotence": "PASS_16_OF_16",
+    "presentation_wiring_name_permutations": "PASS_5_OF_5",
+    "bounded_scales": "PASS_6_OF_6",
+    "maximum_non_enumerated_domains": "PASS_N_1000000000_AND_MAX_EVEN_UINT64",
+    "inverse_controls_with_applicability": "PASS_24_OF_24",
+    "restored_cross_process_reuse": "PASS_64_OF_64",
+    "deterministic_fresh_output": "PASS_20_OF_20_EACH",
+    "strict_parser_adversaries": "PASS_17_OF_17",
+    "native_binary_oracle_non_linkage": "PASS",
+    "native_operator_no_domain_tuple_witness_assignment_loop": "PASS",
+    "boundary_only_decode_no_feedback": "PASS",
+    "claim_ceiling": "PASS"
+  },
+  "remaining_findings": []
+}

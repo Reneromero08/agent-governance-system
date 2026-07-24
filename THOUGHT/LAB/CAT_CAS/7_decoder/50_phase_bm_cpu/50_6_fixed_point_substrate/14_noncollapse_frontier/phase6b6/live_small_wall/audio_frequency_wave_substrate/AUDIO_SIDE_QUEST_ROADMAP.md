@@ -94,14 +94,16 @@ The largest sealed case represents `2^256` explicit paths without materializing 
 
 This result is a major nonterminal milestone. The equivalent compact classical dynamic program remains about 38 to 45 times faster and asymptotically equivalent. Therefore the result does not establish advantage over the best matched compact classical method, C5 fixed-point advantage, official external acceptance, cross-domain transfer, or physical phase computation.
 
-The current phase-circuit substrate establishes phase values, relative-phase
-registers, and deterministic phase functions. It does not establish:
+The frozen phase-circuit substrate establishes phase values, relative-phase
+registers, and deterministic phase functions. The mutable relational frontier
+now adds a structured quotient-relation calibration, but it does not
+establish:
 
 ```text
-open many-to-many phase relations as first-class native objects
-composition of unresolved relations through typed shared ports
-internal-port closure or relational trace
-an idempotent existential relational boundary
+arbitrary open many-to-many phase relations as first-class native objects
+general composition of unresolved relations through typed shared ports
+general internal-port closure or relational trace
+a general idempotent existential relational boundary
 holographic relational computation
 ```
 
@@ -130,6 +132,13 @@ spatial carrier restoration           below 1e-12 with reuse and cross-program r
 arbitrary `.holo` dependency layers   exact across 9 committed and 20 mixed programs
 wide public phase program             1,040,384 gates in logical depth 127
 six-core phase wall-time reduction    1.786x, still 17.741x behind scalar
+typed open relation carrier           cyclic-parity quotient class
+native relation composition           Boolean convolution over Z2 phases
+closed internal port                  typed two-link chain
+idempotent duplicate relation         exact
+unresolved witnesses at N=64          64 per pair, zero witness slots
+open-relation carrier state           8 complex cells
+open-relation restoration/reuse       below 2e-16, cross-process reuse passes
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -255,11 +264,15 @@ OPEN_MANY_TO_MANY_PHASE_RELATION
 -> RESTORATION_AND_REUSE
 ```
 
-The first calibration must represent one local many-to-many relation and a
-second compatible relation as unresolved native objects, connect them through
-one typed internal port, close that port, expose the exact remaining boundary
-relation, reverse the actual forward process, and reuse the restored carrier.
-It must not execute relation tuples as separate cases and merge their answers.
+The first calibration now passes for the structured `CYCLIC_PARITY(N)`
+quotient class. Two non-functional relations remain non-enumerated over
+`Z_N`, compose through one typed internal port by Boolean convolution over
+`Z2`, expose the exact quotient boundary, reverse the actual forward process,
+and reuse the restored carrier. They are quotient-extensional rather than
+generally intensional: each relation is the complete two-slot characteristic
+vector of fixed `Z2`. At `N=64`, `BOTH o BOTH` closes 64 witnesses per
+boundary pair while retaining zero witness slots in eight complex carrier
+cells.
 
 The architecture must explicitly distinguish:
 
@@ -285,6 +298,13 @@ category-valued transport, lattice-valued relations, topological sectors,
 idempotent nonlinear phase dynamics, or reversible dilation. Follow the
 strongest implemented mechanism. Retire mechanisms that reduce to ordinary
 case enumeration or relation-specific circuit expansion.
+
+The current lattice-enriched quotient-group mechanism is a real but limited
+subcase. It represents `EMPTY`, `SAME`, `OPPOSITE`, and `BOTH` without a
+`Z_N` tuple table, while explicitly storing the complete characteristic
+vector of the fixed `Z2` quotient. The next correction is to move beyond that
+fixed quotient to composable typed relation signatures and branching process
+geometry without reintroducing full-domain tuple or assignment expansion.
 
 The following are supporting frontier candidates, not a mandatory sequence:
 
