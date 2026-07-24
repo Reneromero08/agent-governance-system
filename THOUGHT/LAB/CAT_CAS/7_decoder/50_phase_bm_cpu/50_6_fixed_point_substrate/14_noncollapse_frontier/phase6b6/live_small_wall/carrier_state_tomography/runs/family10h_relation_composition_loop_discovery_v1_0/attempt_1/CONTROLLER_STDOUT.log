@@ -1,0 +1,42 @@
+{
+  "prepare": {
+    "created_at": "2026-07-24T00:46:00.400451+00:00",
+    "passed": true,
+    "pmu_helper_sha256": "393b3b04975bdcc2d8e9655e7af150e8a161a5133aa3b87974fc07b4f3e900cd",
+    "run_id": "family10h_relation_composition_loop_discovery_v1_0",
+    "runtime_sha256": "48db5bf0224f1ad551c6cd4217bb3126243833262f0f1c4e3a915c31090aba1e",
+    "schedule_manifest_sha256": "83a1bdeab55851a29d8c2dce322c0a364e960a1881e78f47582439707f9a2524",
+    "schema": "FAMILY10H_RELATION_COMPOSITION_LOOP_PREPARE_V1",
+    "small_wall_crossed": false
+  }
+}
+{
+  "analysis_sha256": "0f17b1d691427cd43684d2ad463591f81e7652c329d625cad3862e1f8b7d2df5",
+  "archive_sha256": "e842faf701cb3c8837a1777ace991bda145155f65436e77d8df83968988ca494",
+  "controller_passed": true,
+  "coordinates": {
+    "D_neutral_primary_minus_sham": 0.08197628880151657,
+    "D_r0r1_primary_minus_sham": 0.06521385251149177,
+    "D_r1r0_primary_minus_sham": 0.040132168833701735,
+    "D_random_primary_minus_sham": 0.08147810217859952,
+    "Omega_alive_composition_r0r1_minus_r1r0": 0.025081683677790033,
+    "Omega_dead_composition_r0r1_minus_r1r0": 0.007472507184329527,
+    "Omega_source_off_composition_r0r1_minus_r1r0": 0.0015866799832534167,
+    "R_alive_primary_composition_r0r1_minus_r1r0": 0.017600158427893954,
+    "R_r0r1_primary": 0.07060632383828232,
+    "R_r1r0_primary": 0.05300616541038836,
+    "dead_composition_abs_to_alive_composition_abs": 0.2979268569177624,
+    "neutral_abs_to_alive_composition_abs": 3.268372644142188,
+    "random_abs_to_alive_composition_abs": 3.2485100771264737,
+    "source_off_composition_abs_to_alive_composition_abs": 0.06326050530086345
+  },
+  "interpretation": {
+    "alive_composition_order_nonzero": true,
+    "composition_contrast_all_one_factor_strata_same_sign": true,
+    "composition_loop_candidate": true,
+    "dead_preserves_at_least_25pct_alive_composition_order": true,
+    "exploratory_only": true,
+    "small_wall_crossed": false,
+    "source_off_collapses_below_25pct_alive_composition_order": true
+  }
+}

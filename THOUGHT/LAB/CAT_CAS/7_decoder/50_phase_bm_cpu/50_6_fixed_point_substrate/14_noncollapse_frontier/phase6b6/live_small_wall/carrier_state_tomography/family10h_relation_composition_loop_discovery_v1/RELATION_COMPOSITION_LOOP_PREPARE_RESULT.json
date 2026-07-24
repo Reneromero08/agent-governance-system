@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-24T00:46:00.400451+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "393b3b04975bdcc2d8e9655e7af150e8a161a5133aa3b87974fc07b4f3e900cd",
+  "run_id": "family10h_relation_composition_loop_discovery_v1_0",
+  "runtime_sha256": "48db5bf0224f1ad551c6cd4217bb3126243833262f0f1c4e3a915c31090aba1e",
+  "schedule_manifest_sha256": "83a1bdeab55851a29d8c2dce322c0a364e960a1881e78f47582439707f9a2524",
+  "schema": "FAMILY10H_RELATION_COMPOSITION_LOOP_PREPARE_V1",
+  "small_wall_crossed": false
+}

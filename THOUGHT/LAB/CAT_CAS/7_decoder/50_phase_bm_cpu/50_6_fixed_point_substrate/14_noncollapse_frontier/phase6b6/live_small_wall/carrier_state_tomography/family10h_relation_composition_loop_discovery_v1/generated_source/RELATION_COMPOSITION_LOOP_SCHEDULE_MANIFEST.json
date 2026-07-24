@@ -1,0 +1,220 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "created_at": "2026-07-24T00:45:55.591395+00:00",
+  "matched_marginal_law": {
+    "composition_sequence_excluded_from_marginal_digest": true,
+    "query_string_excluded_from_marginal_digest": true,
+    "receiver_query": "same four-cell held-out boundary projection in every source-order variant",
+    "spatial_addresses": "native R0 +1 and R1 -1 maps preserved; each composition variant uses the same A/B marginal line coverage",
+    "tested_relation": "relation composition sequence only: R0_then_R1 versus R1_then_R0",
+    "work_counts": "copied unchanged from the same base rows for every variant; composition prep halves loop steps and touches two relation pairs per step"
+  },
+  "pair_sample_count": 256,
+  "predeclared_patterns": {
+    "H1_composition_sensitive_relational_carrier": [
+      "R0_then_R1 and R1_then_R0 differ in held-out boundary coordinate after primary-minus-sham subtraction",
+      "source-off composition difference collapses",
+      "neutral and randomized composition controls do not replay the directed composition difference",
+      "dead composition difference preserves a nontrivial fraction of alive composition difference"
+    ],
+    "H2_amplitude_or_occupancy_only": [
+      "R0_then_R1 and R1_then_R0 are equivalent or both replay the same local differential",
+      "source-off geometry is comparable"
+    ],
+    "H3_receiver_or_query_artifact": [
+      "composition separation appears in source-off rows or tracks receiver query_order strata"
+    ],
+    "H4_timing_artifact": [
+      "composition separation follows execution ordinal, duration, or delay rather than source composition"
+    ]
+  },
+  "receiver_schedule_frozen_before_source_relation": true,
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_composition_loop_discovery_v1_0",
+  "schedule_manifest_sha256": "83a1bdeab55851a29d8c2dce322c0a364e960a1881e78f47582439707f9a2524",
+  "schema": "FAMILY10H_RELATION_COMPOSITION_LOOP_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "dead_r0r1_primary": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/dead_r0r1_primary.tsv",
+      "query": "dead_compose_r0_then_r1_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "85acbe70f957067e776dc5ddc95ae4e68aed835ef42238dae386c9ca0de1a294",
+      "size_bytes": 621215,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_r0r1_sham": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/dead_r0r1_sham.tsv",
+      "query": "dead_compose_r0_then_r1_relation_sham_control",
+      "row_count": 512,
+      "sha256": "bcdae354c4574b9d29b7431ff72779e8292d0e465eafed324a7a3045e5cd2310",
+      "size_bytes": 604319,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_r1r0_primary": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/dead_r1r0_primary.tsv",
+      "query": "dead_compose_r1_then_r0_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "de007e40e98040b355386b425dcbfc4797aadd6664b43d239b05459d4b04ed42",
+      "size_bytes": 621215,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_r1r0_sham": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/dead_r1r0_sham.tsv",
+      "query": "dead_compose_r1_then_r0_relation_sham_control",
+      "row_count": 512,
+      "sha256": "143b24438fcb3c18cb5e9e67c3ed79497a2a690701b20a384af63e332347f96d",
+      "size_bytes": 604319,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "neutral_primary": {
+      "composition_sequence": "neutral_alternating",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/neutral_primary.tsv",
+      "query": "neutral_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "4d236ca9901c95447f45771a86ab75e5fc6e631ff7243da3dce98d821b411b41",
+      "size_bytes": 610463,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "neutral_sham": {
+      "composition_sequence": "neutral_alternating",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/neutral_sham.tsv",
+      "query": "neutral_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "29af3f693f1850d251c9e3d0f5578ca96922a8e2a9f6bec563296ad2683f341a",
+      "size_bytes": 593567,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "r0r1_primary": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/r0r1_primary.tsv",
+      "query": "compose_r0_then_r1_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "876732ff4c94ba6d6838d9277e1e72e03e9519aa59cad8dd6131192f6631ee74",
+      "size_bytes": 598175,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "r0r1_sham": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/r0r1_sham.tsv",
+      "query": "compose_r0_then_r1_relation_sham_control",
+      "row_count": 512,
+      "sha256": "a9ee2b5727fd1122305204cd72e75b1759448c3b65cd902737274b4fe42d2532",
+      "size_bytes": 581279,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "r1r0_primary": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/r1r0_primary.tsv",
+      "query": "compose_r1_then_r0_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "037bce2ae86af4a2ae77baf2caa455d9726ba29a89b90c85aa793f3fc631bd32",
+      "size_bytes": 598175,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "r1r0_sham": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/r1r0_sham.tsv",
+      "query": "compose_r1_then_r0_relation_sham_control",
+      "row_count": 512,
+      "sha256": "7691b568873253be957f02d7218ddd322e65e153eddf3941ea45122b7387dbf6",
+      "size_bytes": 581279,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "random_primary": {
+      "composition_sequence": "deterministic_randomized",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/random_primary.tsv",
+      "query": "random_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "edab7cd7ed23fd812b7ce51eaa080e3a8d87720f3faf1fc14fa6d08b415407a9",
+      "size_bytes": 608415,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "random_sham": {
+      "composition_sequence": "deterministic_randomized",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/random_sham.tsv",
+      "query": "random_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "a1d736db1f1f5811272db48109fc9426c04c3cbd9754ae95045bd2ce71aa53a7",
+      "size_bytes": 591519,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_r0r1_primary": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/source_off_r0r1_primary.tsv",
+      "query": "source_off_compose_r0_then_r1_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "80f96a2514c60c181cf45c505dc4f55db38f816351271a8c213641192834d521",
+      "size_bytes": 648863,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_r0r1_sham": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/source_off_r0r1_sham.tsv",
+      "query": "source_off_compose_r0_then_r1_relation_sham_control",
+      "row_count": 512,
+      "sha256": "da2c519bae61c51925eea1861e1205a53470b635978abc182cb4a0ed950cce31",
+      "size_bytes": 631967,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_r1r0_primary": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/source_off_r1r0_primary.tsv",
+      "query": "source_off_compose_r1_then_r0_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "5c88c4b2d2dae18f37872e505ddbbbd38f88b3c203150c9f31ec42b2dfe777f5",
+      "size_bytes": 648863,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_r1r0_sham": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_SCHEDULES/source_off_r1r0_sham.tsv",
+      "query": "source_off_compose_r1_then_r0_relation_sham_control",
+      "row_count": 512,
+      "sha256": "7d34aacd6637ca0ca11358ce25279d73693014da71c8db50ef440e0e87e4f523",
+      "size_bytes": 631967,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    }
+  }
+}

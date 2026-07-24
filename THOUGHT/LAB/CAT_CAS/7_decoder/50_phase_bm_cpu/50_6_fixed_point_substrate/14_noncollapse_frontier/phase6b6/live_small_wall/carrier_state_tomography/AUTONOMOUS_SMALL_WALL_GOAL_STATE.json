@@ -1,10 +1,10 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T17:32:15-07:00",
+  "updated_at": "2026-07-23T17:48:00-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
-  "checkpoint_head": "373d0d77f32dd00d18d255dde37a31c9efca1bfc",
-  "origin_head": "373d0d77f32dd00d18d255dde37a31c9efca1bfc",
+  "checkpoint_head": "8b890d85eb9d5c3ada254ad4f43e26e8b2e859b0",
+  "origin_head": "8b890d85eb9d5c3ada254ad4f43e26e8b2e859b0",
   "autonomous_mode": {
     "active": true,
     "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
@@ -54,17 +54,17 @@
     ]
   },
   "current_package": {
-    "package_id": "family10h_relation_fixed_marginal_order_discovery_v1",
-    "transaction_run_id": "family10h_relation_fixed_marginal_order_discovery_v1_0",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_fixed_marginal_order_discovery_v1",
-    "package_decision": "EXPLORATORY_DISCOVERY_COMPLETE_NO_SCIENTIFIC_CLAIM",
+    "package_id": "family10h_relation_composition_loop_discovery_v1",
+    "transaction_run_id": "family10h_relation_composition_loop_discovery_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_loop_discovery_v1",
+    "package_decision": "EXPLORATORY_DISCOVERY_COMPLETE_COMPOSITION_LOOP_CANDIDATE_NO_SCIENTIFIC_CLAIM",
     "package_manifest_sha256": null,
-    "schedule_manifest_sha256": "458c2a8936cc3c2808b1f972edac2d23f9f7c792ce14900a59db2dd0d9a8c221",
+    "schedule_manifest_sha256": "83a1bdeab55851a29d8c2dce322c0a364e960a1881e78f47582439707f9a2524",
     "threshold_contract_sha256": null,
     "source_schedule_package": "family10h_primary_minus_sham_local_paired_differential_v1",
-    "source_authority_commit": "373d0d77f32dd00d18d255dde37a31c9efca1bfc",
+    "source_authority_commit": "8b890d85eb9d5c3ada254ad4f43e26e8b2e859b0",
     "source_freeze_commit": null,
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_fixed_marginal_order_discovery_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_composition_loop_discovery_v1_0/attempt_1",
     "attempt_output_path_fresh": true
   },
   "current_observable": {
@@ -134,7 +134,13 @@
     "relation_temporal_order_discovery_attempts": 1,
     "relation_temporal_lifetime_mutation_discovery_attempts": 1,
     "relation_temporal_source_off_discovery_attempts": 1,
-    "relation_fixed_marginal_order_discovery_attempts": 1
+    "relation_fixed_marginal_order_discovery_attempts": 1,
+    "family10h_relation_composition_loop_discovery_v1_0": {
+      "physical_transactions": 1,
+      "raw_records": 8192,
+      "pair_observations": 2097152,
+      "source_death_receipts": 8192
+    }
   },
   "latest_retained_evidence": {
     "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
@@ -772,6 +778,38 @@
       "order_contrast_all_one_factor_strata_same_sign": true,
       "small_wall_crossed": false,
       "source_off_collapses_below_25pct_alive_order": false
+    },
+    "relation_composition_loop_result": "EXPLORATORY_COMPOSITION_LOOP_CANDIDATE_NO_SCIENTIFIC_CLAIM",
+    "relation_composition_loop_archive_sha256": "e842faf701cb3c8837a1777ace991bda145155f65436e77d8df83968988ca494",
+    "relation_composition_loop_archive_size": 45149056,
+    "relation_composition_loop_analysis_sha256": "0f17b1d691427cd43684d2ad463591f81e7652c329d625cad3862e1f8b7d2df5",
+    "relation_composition_loop_raw_record_count": 8192,
+    "relation_composition_loop_pair_observation_count": 2097152,
+    "relation_composition_loop_source_death_receipt_count": 8192,
+    "relation_composition_loop_coordinates": {
+      "D_neutral_primary_minus_sham": 0.08197628880151657,
+      "D_r0r1_primary_minus_sham": 0.06521385251149177,
+      "D_r1r0_primary_minus_sham": 0.040132168833701735,
+      "D_random_primary_minus_sham": 0.08147810217859952,
+      "Omega_alive_composition_r0r1_minus_r1r0": 0.025081683677790033,
+      "Omega_dead_composition_r0r1_minus_r1r0": 0.007472507184329527,
+      "Omega_source_off_composition_r0r1_minus_r1r0": 0.0015866799832534167,
+      "R_alive_primary_composition_r0r1_minus_r1r0": 0.017600158427893954,
+      "R_r0r1_primary": 0.07060632383828232,
+      "R_r1r0_primary": 0.05300616541038836,
+      "dead_composition_abs_to_alive_composition_abs": 0.2979268569177624,
+      "neutral_abs_to_alive_composition_abs": 3.268372644142188,
+      "random_abs_to_alive_composition_abs": 3.2485100771264737,
+      "source_off_composition_abs_to_alive_composition_abs": 0.06326050530086345
+    },
+    "relation_composition_loop_interpretation": {
+      "alive_composition_order_nonzero": true,
+      "composition_contrast_all_one_factor_strata_same_sign": true,
+      "composition_loop_candidate": true,
+      "dead_preserves_at_least_25pct_alive_composition_order": true,
+      "exploratory_only": true,
+      "small_wall_crossed": false,
+      "source_off_collapses_below_25pct_alive_composition_order": true
     }
   },
   "hypothesis_frontier": {
@@ -842,7 +880,7 @@
       "higher compatibility or obstruction surface"
     ],
     "leading_mechanism": "amplitude-dominant spatial carrier response: source action can write a persistent carrier amplitude/state, spatial boundary readout exposes it, and explicit reset can suppress it in some full-schedule experiments",
-    "strongest_candidate_coordinate": "confirmed local paired differential plus R-spatial source-dead/reset amplitude calibration; useful as boundary readout and reset handle, not yet as holographic relation orientation",
+    "strongest_candidate_coordinate": "composition-loop Omega = D(R0_then_R1 primary-minus-sham) - D(R1_then_R0 primary-minus-sham); exploratory result source-off collapsed to 0.063x alive and dead preserved 0.298x alive with one-factor strata same sign",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
       "branch": "codex/audio-frequency-wave-substrate",
@@ -872,9 +910,10 @@
       "relation-spatial shift variation as a clean oriented phase law; all tested shifts kept D positive and did not yield sign-changing selectivity",
       "current +/- spatial shift as a signed oriented relational phase; later controls indicate amplitude-dominant carrier response rather than stable source-authored orientation",
       "temporal/order-coded relation as source-written carrier; no-source-preparation D was 3.80x alive D",
-      "fixed-marginal AB-versus-BA source operation order as a clean source-authored holographic candidate; alive D_order was nonzero but source-off preserved 56.9% of it and neutral/random controls were 5.77x/3.96x larger than the order contrast"
+      "fixed-marginal AB-versus-BA source operation order as a clean source-authored holographic candidate; alive D_order was nonzero but source-off preserved 56.9% of it and neutral/random controls were 5.77x/3.96x larger than the order contrast",
+      "plain fixed-marginal AB-versus-BA order remains insufficient; composition-loop R0->R1 versus R1->R0 is now the leading exploratory candidate but neutral/random D amplitudes still require replay-exclusion hardening before promotion"
     ],
-    "current_next_experiment": "move up the search ladder to a closed-loop or holonomy-style composition probe: fixed marginals, ABBA or ABA^-1B^-1 style source composition where possible, source-off and order-neutral collapse controls, wrong-loop control, and source-dead readout",
+    "current_next_experiment": "prospectively harden the composition-loop candidate with a minimal repeat focused on neutral/random replay exclusion, wrong-loop controls, source-dead persistence, and source-off collapse; do not promote Small Wall without a frozen confirmation law",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
@@ -897,8 +936,10 @@
       "temporal lifetime/mutation run: dead D = 1.245x alive D, reset D = -0.896x alive D, mutate_opposite D = +2.331x alive D; no reset kill or opposite flip",
       "temporal source-off control: D_source_off = 0.12242533531019292, 3.800x alive D, so the previous temporal receiver-order coordinate cannot be promoted as source-written relation evidence",
       "a new fixed-marginal temporal source-operation package must prevent AB versus BA from being encoded through different addresses, counts, durations, spatial offsets, or receiver schedule identity",
-      "fixed-marginal AB/BA order run: D_alive_order = 0.010436, source-off ratio = 0.569, neutral ratio = 5.772, random ratio = 3.960; not enough source-off collapse or composition specificity"
-    ]
+      "fixed-marginal AB/BA order run: D_alive_order = 0.010436, source-off ratio = 0.569, neutral ratio = 5.772, random ratio = 3.960; not enough source-off collapse or composition specificity",
+      "composition-loop discovery is promising but exploratory: Omega_alive = 0.025081683677790033, source-off ratio = 0.06326050530086345, dead ratio = 0.2979268569177624, one-factor strata same sign true; neutral/random primary-minus-sham amplitudes are 3.268x/3.249x alive Omega, so replay-exclusion and prospective confirmation remain required"
+    ],
+    "active_frontier": "composition-sensitive closed-loop/holonomy-style relation probe: source R0_then_R1 versus R1_then_R0 with identical receiver boundary projection and source-off/dead/neutral/random controls"
   },
   "claim_state": {
     "scalar_q_readout_confirmed_prospectively": true,
@@ -907,6 +948,7 @@
     "physical_relational_memory_established": false,
     "catalytic_borrowing_established": false,
     "r2_restoration_established": false,
-    "small_wall_crossed": false
+    "small_wall_crossed": false,
+    "current_ceiling": "exploratory composition-loop candidate only; no positive scientific claim beyond prior scalar/local differential results"
   }
 }
