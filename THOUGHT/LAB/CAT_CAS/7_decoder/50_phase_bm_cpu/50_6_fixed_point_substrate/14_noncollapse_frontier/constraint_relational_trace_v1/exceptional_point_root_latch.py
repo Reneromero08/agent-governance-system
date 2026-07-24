@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import inf
 
 from .catalytic_existential_trace import (
     CLAIM_CEILING,
@@ -103,7 +102,7 @@ def audit_exceptional_point_root_latch(
         ),
         deterministic_noiseless_gain_status="NOT_ESTABLISHED",
         clean_projection_status=(
-            "POLYNOMIAL_CIRCUIT_DESCRIPTION__UNIQUE_PORT_INTENSITY_4^-N_VARIABLES"
+            "POLYNOMIAL_CIRCUIT_DESCRIPTION__UNIQUE_PORT_INTENSITY_4^-n"
         ),
         reversible_dilation_status=(
             "LOSS_AND_GAIN_ENVIRONMENT_MUST_BE_RETAINED_AND_RESTORED"
