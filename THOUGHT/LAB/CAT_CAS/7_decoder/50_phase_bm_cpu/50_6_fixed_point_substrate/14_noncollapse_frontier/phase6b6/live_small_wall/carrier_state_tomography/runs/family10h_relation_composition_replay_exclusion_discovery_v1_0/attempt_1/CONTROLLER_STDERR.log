@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system-family10h\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\phase6b6\live_small_wall\carrier_state_tomography\family10h_relation_composition_replay_exclusion_discovery_v1\run_relation_composition_replay_exclusion_discovery.py", line 1008, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system-family10h\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\phase6b6\live_small_wall\carrier_state_tomography\family10h_relation_composition_replay_exclusion_discovery_v1\run_relation_composition_replay_exclusion_discovery.py", line 990, in main
+    analysis = analyze_archive(controller)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system-family10h\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\phase6b6\live_small_wall\carrier_state_tomography\family10h_relation_composition_replay_exclusion_discovery_v1\run_relation_composition_replay_exclusion_discovery.py", line 764, in analyze_archive
+    require(len(raw) == ROWS_PER_VARIANT, f"{variant} raw count mismatch: {len(raw)}")
+  File "D:\CCC 2.0\AI\agent-governance-system-family10h\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\phase6b6\live_small_wall\carrier_state_tomography\family10h_relation_composition_replay_exclusion_discovery_v1\run_relation_composition_replay_exclusion_discovery.py", line 162, in require
+    base.require(condition, message)
+  File "D:\CCC 2.0\AI\agent-governance-system-family10h\THOUGHT\LAB\CAT_CAS\7_decoder\50_phase_bm_cpu\50_6_fixed_point_substrate\14_noncollapse_frontier\phase6b6\live_small_wall\carrier_state_tomography\family10h_relation_temporal_source_off_discovery_v1\run_relation_temporal_source_off_discovery.py", line 127, in require
+    raise RuntimeError(message)
+RuntimeError: adjacent_r0r1_primary raw count mismatch: 0

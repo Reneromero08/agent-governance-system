@@ -1,0 +1,48 @@
+{
+  "prepare": {
+    "created_at": "2026-07-24T01:04:31.384236+00:00",
+    "passed": true,
+    "pmu_helper_sha256": "393566bfc64c3dc2cefcd854475b5f66cf90efd7b9c3329eaeb339fdf1fd49ac",
+    "run_id": "family10h_relation_composition_replay_exclusion_discovery_v1_0",
+    "runtime_sha256": "88ea64bf7c62781b562c9197fb6645c64d7735daf3851a2f750b09b3298bdd8a",
+    "schedule_manifest_sha256": "9b2647814e2fdde6c3cfb8a92aefbcef9cc944b9fd7f22e4115b5bd84c10cb3f",
+    "schema": "FAMILY10H_RELATION_COMPOSITION_REPLAY_EXCLUSION_PREPARE_V1",
+    "small_wall_crossed": false
+  }
+}
+{
+  "analysis_sha256": "8a47c60aed8d5b8627307acee02b589f0fe6c7b670b600896892baa2bd8db281",
+  "archive_sha256": "12c4c59e32acb11a2bea3555680bb174e599604dccd5b3964bc2f88ff257d7f5",
+  "controller_passed": true,
+  "coordinates": {
+    "D_adjacent_r0r1_primary_minus_sham": 0.0402175957875036,
+    "D_adjacent_r1r0_primary_minus_sham": 0.08707442175513135,
+    "D_balanced_alt_a_primary_minus_sham": 0.0729842562637726,
+    "D_balanced_alt_b_primary_minus_sham": 0.05524554426795055,
+    "D_gapped_r0r1_primary_minus_sham": 0.07194656522544673,
+    "D_gapped_r1r0_primary_minus_sham": 0.07331339552617211,
+    "Omega_adjacent_composition_r0r1_minus_r1r0": -0.04685682596762775,
+    "Omega_balanced_alt_composition_phase_a_minus_phase_b": 0.017738711995822047,
+    "Omega_dead_composition_r0r1_minus_r1r0": -0.017905266222167704,
+    "Omega_gapped_composition_r0r1_minus_r1r0": -0.0013668303007253746,
+    "Omega_source_off_composition_r0r1_minus_r1r0": 0.006275002158737164,
+    "R_adjacent_primary_composition_r0r1_minus_r1r0": -0.026140516405129897,
+    "R_adjacent_r0r1_primary": 0.05181043882602105,
+    "R_adjacent_r1r0_primary": 0.07795095523115095,
+    "balanced_alt_abs_to_adjacent_composition_abs": 0.3785726333251274,
+    "dead_composition_abs_to_alive_composition_abs": 0.38212716829215065,
+    "gapped_composition_abs_to_adjacent_composition_abs": 0.02917035613273688,
+    "source_off_composition_abs_to_alive_composition_abs": 0.13391863467389814
+  },
+  "interpretation": {
+    "adjacent_composition_order_nonzero": true,
+    "balanced_alt_replay_collapses_below_25pct_adjacent": false,
+    "composition_contrast_all_one_factor_strata_same_sign": true,
+    "composition_replay_exclusion_candidate": false,
+    "dead_preserves_at_least_25pct_alive_composition_order": true,
+    "exploratory_only": true,
+    "gapped_replay_collapses_below_25pct_adjacent": true,
+    "small_wall_crossed": false,
+    "source_off_collapses_below_25pct_alive_composition_order": true
+  }
+}
