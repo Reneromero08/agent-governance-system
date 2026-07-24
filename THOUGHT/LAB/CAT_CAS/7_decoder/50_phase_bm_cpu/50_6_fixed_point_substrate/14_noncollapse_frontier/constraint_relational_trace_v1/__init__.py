@@ -14,6 +14,10 @@ from .conditional_p_equals_np import (
     extract_witness_by_boundary_self_reduction,
     restrict_public_relation,
 )
+from .oracle_determinant_compensation import (
+    OracleDeterminantCompensationResult,
+    audit_oracle_determinant_compensation,
+)
 from .parity_holonomy import (
     ParityConstraint,
     ParityInstance,
@@ -37,6 +41,7 @@ __all__ = [
     "FactorizedProjectorCandidate",
     "Literal",
     "MaterializedPhaseOracleCarrier",
+    "OracleDeterminantCompensationResult",
     "ParityConstraint",
     "ParityInstance",
     "ReferenceBoundaryResult",
@@ -45,6 +50,7 @@ __all__ = [
     "WitnessExtractionResult",
     "Z2PhaseCarrier",
     "Z2TransportProgram",
+    "audit_oracle_determinant_compensation",
     "audit_topological_rank_latch",
     "calibrate_parity_holonomy",
     "compile_z2_transport",
