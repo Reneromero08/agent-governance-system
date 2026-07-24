@@ -1,0 +1,204 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "created_at": "2026-07-24T00:27:56.040808+00:00",
+  "matched_marginal_law": {
+    "query_string_excluded_from_marginal_digest": true,
+    "receiver_query": "same four-cell held-out boundary projection in every source-order variant",
+    "source_order_excluded_from_marginal_digest": true,
+    "spatial_addresses": "held fixed by relation_spatial_map_index relation erasure to +1-line mapping",
+    "tested_relation": "source operation order only: A_then_B versus B_then_A",
+    "work_counts": "copied unchanged from the same base rows for every variant"
+  },
+  "pair_sample_count": 256,
+  "predeclared_patterns": {
+    "H1_order_sensitive_relational_carrier": [
+      "AB and BA differ in held-out boundary coordinate",
+      "source-off AB/BA difference collapses",
+      "order-neutral and randomized controls do not replay the AB/BA difference",
+      "dead AB/BA difference preserves a nontrivial fraction of alive AB/BA difference"
+    ],
+    "H2_amplitude_or_occupancy_only": [
+      "AB and BA are equivalent or both replay the same local differential",
+      "source-off geometry is comparable"
+    ],
+    "H3_receiver_order_artifact": [
+      "AB/BA separation appears in source-off rows or tracks receiver query_order strata"
+    ],
+    "H4_timing_artifact": [
+      "AB/BA separation follows execution ordinal, duration, or delay rather than source order"
+    ]
+  },
+  "receiver_schedule_frozen_before_source_relation": true,
+  "rows_per_variant": 1024,
+  "run_id": "family10h_relation_fixed_marginal_order_discovery_v1_0",
+  "schedule_manifest_sha256": "458c2a8936cc3c2808b1f972edac2d23f9f7c792ce14900a59db2dd0d9a8c221",
+  "schema": "FAMILY10H_RELATION_FIXED_MARGINAL_ORDER_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "ab_primary": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/ab_primary.tsv",
+      "query": "query_relation_pair",
+      "row_count": 1024,
+      "sha256": "7373331b48c619942f2a93b11b7938dc86979fc93a699852799db71031be5fba",
+      "size_bytes": 1111583,
+      "source_order": "A_then_B"
+    },
+    "ab_sham": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/ab_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 1024,
+      "sha256": "902310c0994e58134899bb0c5d6bdc8f4bf6969111b4f176390a08e30a62f03a",
+      "size_bytes": 1083935,
+      "source_order": "A_then_B"
+    },
+    "ba_primary": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/ba_primary.tsv",
+      "query": "query_relation_pair",
+      "row_count": 1024,
+      "sha256": "3c615a1f16e641e11e4e482c47999c3a233790221c573b676eb392e339ae0c2d",
+      "size_bytes": 1111583,
+      "source_order": "B_then_A"
+    },
+    "ba_sham": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/ba_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 1024,
+      "sha256": "761c4eba833aba49a698dd0bd2021f71fbce71f7609f98c557d2c5f34743742e",
+      "size_bytes": 1083935,
+      "source_order": "B_then_A"
+    },
+    "dead_ab_primary": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/dead_ab_primary.tsv",
+      "query": "dead_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "993df4856652d71054574cd006636fc62b12a896ef7c03dfec1a457f16ce01f4",
+      "size_bytes": 1189407,
+      "source_order": "A_then_B"
+    },
+    "dead_ab_sham": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/dead_ab_sham.tsv",
+      "query": "dead_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "9d5f27965ab76e521b69b860d63144b00fe6a76b09c5099c71b6945d0d79e462",
+      "size_bytes": 1155615,
+      "source_order": "A_then_B"
+    },
+    "dead_ba_primary": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/dead_ba_primary.tsv",
+      "query": "dead_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "a5f48a0421269aa829ebc84666d1f5892e265439cf052f9a8d3d2d8b405a526b",
+      "size_bytes": 1189407,
+      "source_order": "B_then_A"
+    },
+    "dead_ba_sham": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/dead_ba_sham.tsv",
+      "query": "dead_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "80fb0b1129f2ac8162228bbd892611cd027bed3507897cb214d345bbef1fd715",
+      "size_bytes": 1155615,
+      "source_order": "B_then_A"
+    },
+    "neutral_primary": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/neutral_primary.tsv",
+      "query": "neutral_order_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "3ad57b9e796ed8847ead8fc68735194e967ab4486a32c7fd6dacb5fe9662e7ed",
+      "size_bytes": 1207839,
+      "source_order": "A_then_B"
+    },
+    "neutral_sham": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/neutral_sham.tsv",
+      "query": "neutral_order_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "6cc5b31f70b177cc0bbd287d42e2148ce1e481ef6a39cc5f64bc65dadba4ada5",
+      "size_bytes": 1174047,
+      "source_order": "A_then_B"
+    },
+    "random_primary": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/random_primary.tsv",
+      "query": "random_order_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "22a4f185207ab247df7a78c151f8f0247a3fc1b8d5285b572292ec6289f63087",
+      "size_bytes": 1198623,
+      "source_order": "A_then_B"
+    },
+    "random_sham": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/random_sham.tsv",
+      "query": "random_order_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "79beb302248be6c4de6a999ba550d8422e9253809277dcc4f4220634a533d0d0",
+      "size_bytes": 1164831,
+      "source_order": "A_then_B"
+    },
+    "source_off_ab_primary": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/source_off_ab_primary.tsv",
+      "query": "source_off_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "ffd6f3beba545c5714bb3dc8d92b5aa4900c49f7a570cfbb8d1cdc1d7c325a94",
+      "size_bytes": 1244703,
+      "source_order": "A_then_B"
+    },
+    "source_off_ab_sham": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/source_off_ab_sham.tsv",
+      "query": "source_off_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "be80d9b61b873bd4cf9bcc1388f18a3123d382cae8262af293f5d26f30a6f25d",
+      "size_bytes": 1210911,
+      "source_order": "A_then_B"
+    },
+    "source_off_ba_primary": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/source_off_ba_primary.tsv",
+      "query": "source_off_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "d31f1561f9710a3c51100de43120c7412f8768a8660c8e67279bfb6e5312e3aa",
+      "size_bytes": 1244703,
+      "source_order": "B_then_A"
+    },
+    "source_off_ba_sham": {
+      "expected_pair_observation_count": 262144,
+      "marginal_digest_excluding_source_order_and_query": "866cb0dae6c9248872bd639d9b4c5e99d7a584d9795a9deb4787a8b633b9b91c",
+      "path": "FIXED_MARGINAL_ORDER_SCHEDULES/source_off_ba_sham.tsv",
+      "query": "source_off_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "f87913aac601e00c43754494c4f456095fc98520c607be1d0a8514d282f84f02",
+      "size_bytes": 1210911,
+      "source_order": "B_then_A"
+    }
+  }
+}
