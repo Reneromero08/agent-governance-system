@@ -1,0 +1,214 @@
+{
+  "schema": "cat_cas_algebraic_two_hub_results_v1",
+  "result": "ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED",
+  "starting_head": "de638c2dd960614e0709e6fb5f0389666744a245",
+  "claim_ceiling": "SOFTWARE_TWO_HUB_RELATION_VALUED_PHASE_MEMORY_REFERENCE_ONLY",
+  "scope": {
+    "type": "BOOLEAN_F3",
+    "public_geometry": "fixed five-edge tree with two connected internal hubs and four open boundary ports",
+    "public_relation_count": 5,
+    "closed_hub_count": 2,
+    "phase_resident_relation_messages": 2,
+    "boundary_factor_count": 6,
+    "carrier_cells": 52,
+    "tuple_slots": 0,
+    "witness_slots": 0,
+    "truth_table_slots": 0,
+    "decoded_intermediate_coefficients": 0,
+    "retained_inverse_factors": 0
+  },
+  "causal_mechanism": {
+    "first_stage": "close U between each left leaf relation and the transposed U-V bridge",
+    "resident_state": "two unresolved four-phase binary relations from A or B to V",
+    "second_stage": "consume the resident relation phases directly with the C-V and D-V relation phases",
+    "boundary_decode": "only after both native closure stages complete",
+    "bridge_causality": "bypassing the resident message changes boundary 762241e0138b94e8 to 1634d56063838ddd",
+    "scalar_feedback_between_stages": false
+  },
+  "source_identity": {
+    "algebraic_two_hub_phase.c": {
+      "bytes": 35303,
+      "sha256": "0e25f46412a3c2bb85bf1f6ae871d30a5bf61856d6973abe02b51f651952c084"
+    },
+    "algebraic_two_hub_reference.c": {
+      "bytes": 14848,
+      "sha256": "68d4377c94d1fd91537a054434bc3eda7ad8976538bb89187c7f5c00a1ccf123"
+    },
+    "algebraic_two_hub_closure_survey.c": {
+      "bytes": 9477,
+      "sha256": "66afa7b622b5ac0934e63dce21da928208819c871b94a5f2ff4a726a3703b34f"
+    },
+    "ALGEBRAIC_TWO_HUB_FORMAT.md": {
+      "bytes": 5992,
+      "sha256": "9f01927d24db81afe73d2c928c6b3024f177cf6ce50b37a28fd9ccc8cacb610e"
+    }
+  },
+  "fixture_identity": {
+    "two_hub_heterogeneous.aret": {
+      "bytes": 203,
+      "sha256": "5b08a7afdeda04f81ad26987067d7066ca7163ca51e3032c1af4ab1b16df05e9"
+    },
+    "two_hub_reuse.aret": {
+      "bytes": 203,
+      "sha256": "83c85c6fcdacd8c7d6d986b790545b4d80440af3ab1e80b76bc51597e035cd9d"
+    },
+    "two_hub_permuted_reversed.aret": {
+      "bytes": 203,
+      "sha256": "07c66b0487566f2081881753b5a23381aa356a0ecff976f49316e175668466a5"
+    },
+    "two_hub_all_any.aret": {
+      "bytes": 203,
+      "sha256": "d0e259cc7c21b713e602015600cbcb3fef9bdd6b2a38500b2230c4566842f837"
+    },
+    "two_hub_duplicate_role.aret": {
+      "bytes": 231,
+      "sha256": "f93e9920a0cd9dcb0c4a2c2d9dbaa380725ce8f081ed2449617df94b75a41415"
+    },
+    "two_hub_wrong_bridge.aret": {
+      "bytes": 203,
+      "sha256": "e554a29d6bd279381d5e3473a7310b2e801c6d3f752654ef28c6f8af45883352"
+    },
+    "two_hub_non_bitotal.aret": {
+      "bytes": 203,
+      "sha256": "4c12a85a58bea485600fcd7c29090b0104ca4e6abd4c4ff7ae4c62782bd3cf26"
+    },
+    "two_hub_missing_relation.aret": {
+      "bytes": 174,
+      "sha256": "5b680cafb96fd11cb18d0b46bc8ffb2bf03dbea6a23314b9762b8ad0fa04085b"
+    },
+    "two_hub_swapped_metadata.aret": {
+      "bytes": 203,
+      "sha256": "cfaf8e4f6c3a46bb0c2c41a1e7bc3ea7edbf8ecaef8dd5f4c67e32844a1bea1e"
+    }
+  },
+  "frozen_numerical_law": {
+    "coefficient_root_maximum_error": 2e-10,
+    "correct_restoration_maximum_error": 2e-12,
+    "carrier_unit_magnitude_maximum_error": 2e-12,
+    "applicable_inverse_control_minimum_error": 0.001
+  },
+  "complete_scalar_closure_survey": {
+    "bi_total_coefficient_signatures": 17,
+    "extensional_relations": 7,
+    "first_stage_message_pairs": 289,
+    "first_stage_message_outputs_bi_total": 289,
+    "five_relation_signature_tuples": 1419857,
+    "boundary_assignment_rows": 22717712,
+    "factorized_exact_rows": 22717712,
+    "multi_witness_rows": 938000,
+    "failures": 0,
+    "status": "PASS"
+  },
+  "direct_userspace_c_execution": {
+    "kernel": "Linux 6.12.86+deb13-amd64 x86_64",
+    "compiler": "cc (Debian 14.2.0-19) 14.2.0",
+    "processor": "AMD Phenom II X6 1090T",
+    "primary_process_fnv1a64": "4523203a6eaf1d66",
+    "reuse_process_fnv1a64": "069e0834128a936e",
+    "primary_boundary_fnv1a64": "762241e0138b94e8",
+    "reuse_boundary_fnv1a64": "b981be2d7776c0e2",
+    "maximum_root_error": 5.90091631821e-16,
+    "maximum_correct_restoration_error": 1.66533453694e-16,
+    "maximum_carrier_integrity_error": 1.11022302463e-16,
+    "maximum_borrowed_carrier_displacement_l2": 9.48683298051,
+    "wrong_boundary_inverse_restoration_error": 1.73205080757,
+    "geometry_scrambled_inverse_restoration_error": 1.73205080757,
+    "omitted_relation_message_inverse_error": 1.73205080757,
+    "bypassed_message_boundary_fnv1a64": "1634d56063838ddd",
+    "bypassed_message_restoration_error": 1.57009245868e-16,
+    "actual_restored_cross_process_reuse": "PASS",
+    "native_and_reference_boundary_agreement": "PASS"
+  },
+  "determinism": {
+    "two_fresh_native_processes_byte_identical": true,
+    "native_output_sha256": "a9e552d31246cd52a588ad4fac2e3e90ddc3541bdf96e208fb6144a9b18219c6",
+    "primary_reference_output_sha256": "4166bbffe81657e93a1e6a113bfb104b8cbc48288dd5408a8b4cc3c0191b3525",
+    "reuse_reference_output_sha256": "7a2216d39b6b7f53d28f8c479f3b660df22c9c8ed98ce87b7a8a5cd7cb0aa2eb"
+  },
+  "positive_qualification": {
+    "heterogeneous_two_hub_tree": "PASS",
+    "different_process_actual_restored_reuse": "PASS",
+    "permuted_records_and_reversed_endpoints_boundary_invariant": "PASS",
+    "all_any_four_witness_per_assignment_case": "PASS_WITH_CONTROLS_HONESTLY_INAPPLICABLE",
+    "native_primary_boundary_equal_to_reference": "PASS",
+    "native_reuse_boundary_equal_to_reference": "PASS",
+    "all_1419857_signature_tuples_scalar_exact": "PASS",
+    "all_289_first_stage_messages_remain_admitted": "PASS"
+  },
+  "negative_qualification": {
+    "duplicate_relation_role_rejected": "PASS",
+    "wrong_bridge_endpoint_rejected": "PASS",
+    "non_bi_total_relation_rejected": "PASS",
+    "missing_relation_role_rejected": "PASS",
+    "swapped_type_and_hubs_metadata_rejected": "PASS"
+  },
+  "control_qualification": {
+    "wrong_boundary_inverse": "PASS_APPLICABLE",
+    "geometry_scrambled_boundary_inverse": "PASS_APPLICABLE",
+    "omitted_relation_message_inverse": "PASS_APPLICABLE",
+    "bypassed_relation_message_forward": "PASS_APPLICABLE_BOUNDARY_CHANGED",
+    "all_any_wrong_controls": "PASS_HONESTLY_INAPPLICABLE"
+  },
+  "build_and_runtime_qualification": {
+    "strict_c11_warnings_as_errors": "PASS",
+    "gcc_fanalyzer_native": "PASS",
+    "gcc_fanalyzer_reference": "PASS",
+    "gcc_fanalyzer_closure_survey": "PASS",
+    "address_sanitizer": "PASS",
+    "undefined_behavior_sanitizer": "PASS",
+    "leak_detection": "PASS",
+    "sanitized_full_22717712_row_survey": "PASS"
+  },
+  "no_smuggle": {
+    "decoded_boolean_assignment_feedback": false,
+    "decoded_intermediate_relation_coefficients": false,
+    "native_tuple_enumeration": false,
+    "native_witness_selection": false,
+    "native_truth_table_construction": false,
+    "oracle_or_reference_linkage": false,
+    "stored_boundary_answer_in_recurrence": false,
+    "boundary_decode_before_both_native_stages_complete": false,
+    "scalar_resultant_in_native_recurrence": false,
+    "per_relation_circuit_execution": false,
+    "public_scalar_coefficients_used_for": [
+      "strict parsing",
+      "prospective bi-total admission",
+      "phase encoding"
+    ]
+  },
+  "restoration_law": {
+    "forward_history": "five public relation encodings, two resident relation messages, six boundary factors",
+    "inverse": "remove actual boundary factors, remove actual relation messages, reverse public encodings",
+    "latched_boundary_outside_inverse_history": true,
+    "actual_restored_carrier_reused_by_different_process": true,
+    "wrong_scrambled_and_omitted_inverse_fail": true
+  },
+  "contact_attestation": {
+    "authorized_userspace_cpu_execution": true,
+    "ssh_source_transfer_and_process_execution": true,
+    "device_or_msr_access": false,
+    "voltage_or_firmware_action": false,
+    "audio_playback_or_recording": false,
+    "p0_carrier_contact": false,
+    "procurement_or_fabrication": false
+  },
+  "proved": [
+    "A first phase-native relation closure can remain resident as an unresolved binary relation and causally feed a second phase-native closure.",
+    "The complete admitted five-relation coefficient class has an exact six-factor boundary for the fixed two-hub Boolean tree.",
+    "Bypassing the resident relation message changes the result while the correct path restores and reuses the actual carrier.",
+    "The two native stages require no intermediate decode, tuple, witness, truth-table, or retained inverse-factor storage."
+  ],
+  "not_proved": [
+    "arbitrary-size or arbitrary-topology internal-hub trees",
+    "cyclic relational traces",
+    "unbounded recursive relational memory",
+    "computational advantage over ordinary software",
+    "physical waveform computation",
+    "unlimited catalytic phase computation"
+  ],
+  "focused_review": {
+    "required": true,
+    "candidate_state": "QUALIFIED_FOR_EXACT_READ_ONLY_REVIEW"
+  },
+  "next_frontier": "generalize relation-valued phase messages across an arbitrary finite internal-hub tree"
+}

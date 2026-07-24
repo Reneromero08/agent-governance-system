@@ -679,3 +679,70 @@ computational advantage, physical phase computation, or unlimited catalytic
 phase computation. The next correction is composable relation-valued phase
 memory across multiple internal hubs so a boundary relation can feed another
 native closure without host expansion.
+
+## Two-hub relation-valued phase memory
+
+The next bounded process connects two internal hubs:
+
+```text
+A -- U -- V -- C
+B --'    '-- D
+```
+
+The native engine first closes `U` between each left relation and the `U--V`
+bridge. Each result remains in four carrier-relative complex phases as an
+unresolved binary relation from `A` or `B` to `V`. Those phase cells feed the
+second closure with the `C--V` and `D--V` relations directly. No intermediate
+coefficient is decoded.
+
+The final boundary is a six-factor relation over all external-port pairs.
+Independent exhaustive adjudication records:
+
+```text
+bi-total coefficient signatures            17
+distinct extensional relations               7
+first-stage relation-message pairs         289
+messages remaining bi-total            289 / 289
+five-relation coefficient tuples     1,419,857
+boundary assignment rows            22,717,712
+factorized exact rows                22,717,712
+multi-witness rows                      938,000
+```
+
+The primary direct userspace C execution records:
+
+```text
+public relations                              5
+internal hubs                                 2
+phase-resident relation messages              2
+final boundary factors                        6
+complex carrier cells                        52
+tuple / witness / truth-table slots      0 / 0 / 0
+decoded intermediate coefficients             0
+retained inverse factors                      0
+borrowed-carrier displacement     9.16515138991
+correct restoration              1.66533453694e-16
+wrong boundary inverse error         1.73205080757
+geometry-scrambled inverse error      1.73205080757
+omitted message inverse error         1.73205080757
+```
+
+The correct primary boundary hash is `762241e0138b94e8`. Forward bypass of the
+resident relation message, which treats `U` and `V` as though they were one
+hub, produces `1634d56063838ddd`. The bypass path reverses and restores
+cleanly, so this is a causal result discriminator rather than generic
+corruption. A different two-hub process then consumes the same actual
+restored carrier and produces boundary `b981be2d7776c0e2`.
+
+Strict C11 compilation, GCC static analysis, ASan, UBSan, leak detection,
+fresh-process byte determinism, presentation invariance, all-ANY
+multi-witness behavior, exact independent reference comparison, and committed
+parser/geometry negatives pass.
+
+This establishes the first finite relation-valued phase memory in the lane:
+one native closure result remains unresolved in phase and is consumed by a
+second closure. It does not establish an arbitrary hub tree, cycle, unbounded
+recursive memory, advantage, physical phase computation, or unlimited
+catalytic phase computation. The next correction is a streaming public tree
+whose same four-phase relation message can propagate across arbitrary finite
+internal depth without host decoding.

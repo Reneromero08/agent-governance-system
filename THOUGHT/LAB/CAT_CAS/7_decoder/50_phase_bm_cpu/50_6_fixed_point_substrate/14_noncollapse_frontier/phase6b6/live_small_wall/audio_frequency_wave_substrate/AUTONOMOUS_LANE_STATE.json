@@ -9,17 +9,17 @@
   "prime_directive": "REPLACE_THE_BIT_WITH_PI",
   "lane_closure_authority": "USER_ONLY",
   "terminal": false,
-  "current_highest_milestone": "ALGEBRAIC_RELATION_STAR_PHASE_ESTABLISHED",
-  "current_claim_ceiling": "SOFTWARE_SINGLE_HUB_BI_TOTAL_RELATION_STAR_REFERENCE_ONLY",
+  "current_highest_milestone": "ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED",
+  "current_claim_ceiling": "SOFTWARE_TWO_HUB_RELATION_VALUED_PHASE_MEMORY_REFERENCE_ONLY",
   "architectural_alignment": {
     "current_phase_circuit_substrate": "ESTABLISHED_DEVELOPMENT_FOUNDATION",
     "holographic_relational_computer": "NOT_ESTABLISHED",
     "open_many_to_many_phase_relation": "DEVELOPMENT_PASS_CYCLIC_PARITY_QUOTIENT_CLASS_GENERAL_RELATION_OPEN",
-    "native_relational_composition": "DEVELOPMENT_PASS_SINGLE_HUB_BI_TOTAL_F3_STAR_MULTI_HUB_OPEN",
-    "internal_port_closure_or_relational_trace": "DEVELOPMENT_PASS_BRANCHING_SINGLE_HUB_STAR_GENERAL_TRACE_OPEN",
+    "native_relational_composition": "DEVELOPMENT_PASS_TWO_HUB_RELATION_MESSAGE_GENERAL_TREE_OPEN",
+    "internal_port_closure_or_relational_trace": "DEVELOPMENT_PASS_TWO_CONNECTED_HUBS_GENERAL_TRACE_OPEN",
     "idempotent_relational_boundary": "DEVELOPMENT_PASS_DUPLICATE_AND_WITNESS_MULTIPLICITY_GENERAL_LAW_OPEN",
     "phase_circuit_scaling_alone": "NONTERMINAL_SUPPORT_WORK",
-    "selected_next_experiment": "MULTI_HUB_RELATION_VALUED_PHASE_MEMORY_AND_RECURSIVE_COMPOSITION"
+    "selected_next_experiment": "ARBITRARY_FINITE_INTERNAL_HUB_TREE_WITH_STREAMING_RELATION_MESSAGES"
   },
   "current_compact_path_machine": {
     "package": "audio_cat_cas_unbounded_compute_v1",
@@ -197,6 +197,29 @@
     "algebraic_relation_star_cross_process_reuse": "PASS",
     "algebraic_relation_star_fixed_branch_count_cap": false,
     "branching_relational_trace": "ESTABLISHED_SINGLE_HUB_STAR_GENERAL_MULTI_HUB_TRACE_OPEN",
+    "algebraic_two_hub_relation_memory": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS",
+    "algebraic_two_hub_reviewer_id": "SOL-XHIGH-ALGEBRAIC-TWO-HUB-01-R2",
+    "algebraic_two_hub_repaired_findings": [
+      "TWO-HUB-R1-001_CLOSED",
+      "TWO-HUB-R1-002_CLOSED"
+    ],
+    "algebraic_two_hub_remaining_review_findings": 0,
+    "algebraic_two_hub_port_type": "BI_TOTAL_BOOLEAN_SUBSET_OF_F3",
+    "algebraic_two_hub_public_relations": 5,
+    "algebraic_two_hub_internal_hubs": 2,
+    "algebraic_two_hub_phase_resident_messages": 2,
+    "algebraic_two_hub_boundary_factors": 6,
+    "algebraic_two_hub_carrier_complex_cells": 52,
+    "algebraic_two_hub_tuple_slots": 0,
+    "algebraic_two_hub_witness_slots": 0,
+    "algebraic_two_hub_truth_table_slots": 0,
+    "algebraic_two_hub_decoded_intermediate_coefficients": 0,
+    "algebraic_two_hub_signature_tuples_exact": "PASS_1419857_OF_1419857",
+    "algebraic_two_hub_assignment_rows_exact": "PASS_22717712_OF_22717712",
+    "algebraic_two_hub_message_class_closure": "PASS_289_OF_289",
+    "algebraic_two_hub_restoration_max_abs": 1.66533453694e-16,
+    "algebraic_two_hub_message_bypass_changes_boundary": true,
+    "algebraic_two_hub_cross_process_reuse": "PASS",
     "general_boolean_relation_elimination": false,
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
     "decoded_branch_feedback": false,
@@ -218,7 +241,8 @@
     "PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED",
     "CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED",
     "ALGEBRAIC_RELATION_CHAIN_PHASE_ESTABLISHED",
-    "ALGEBRAIC_RELATION_STAR_PHASE_ESTABLISHED"
+    "ALGEBRAIC_RELATION_STAR_PHASE_ESTABLISHED",
+    "ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED"
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
@@ -232,7 +256,8 @@
     "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
   },
   "active_frontier_candidates": [
-    "MULTI_HUB_RELATION_VALUED_PHASE_MEMORY",
+    "ARBITRARY_FINITE_INTERNAL_HUB_TREE",
+    "STREAMING_RELATION_MESSAGE_PROPAGATION_WITHOUT_HOST_DECODE",
     "RECURSIVE_RELATIONAL_COMPOSITION_WITHOUT_HOST_EXPANSION",
     "GENERAL_TYPED_RELATION_SIGNATURE_WITHOUT_TRUTH_TABLE_EXPANSION",
     "GENERAL_INTERNAL_PORT_CLOSURE_OR_RELATIONAL_TRACE",
