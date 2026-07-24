@@ -3,19 +3,19 @@
 ## Current Result
 
 ```text
-REFERENCE_FOUNDATION_IMPLEMENTED__CET_NATIVE_OPERATOR_NOT_ESTABLISHED
+REFERENCE_AND_MECHANISM_CAMPAIGN_IMPLEMENTED__CET_NATIVE_OPERATOR_NOT_ESTABLISHED
 ```
 
-The package now contains an exact public open-relation compiler for three-clause normal
-form, a small materialized correctness boundary, a factorized local-projector
-hypothesis, a reversible evaluation dilation, a Z2 holonomy calibration, a
-program-derived inverse phase-carrier calibration, and adversarial controls for
-idempotence, presentation gauge, and pairwise false closure.
+This package is a constructive `P = NP` proof attempt inside the CAT_CAS non-collapse
+ontology. It now contains exact relational semantics, native parity holonomy,
+program-derived inverse carrier actions, a complete topological SAT index, a constant
+energy-margin Hamiltonian, an exceptional-point root-amplifier candidate, and explicit
+resource audits for every tested shortcut.
 
-The implementation does not contain the native operation that would close an arbitrary
-open relation without expansion. It therefore does not prove `P = NP`.
+The package does not yet implement a polynomial-resource native existential trace. It
+does not prove `P = NP`.
 
-## What Was Established
+## Established Foundation
 
 ### Open relational semantics
 
@@ -26,87 +26,181 @@ boundary variables
 constant-size local clause relations
 allowed local rows
 equality junctions
-explicit unresolved native-operator status
-explicit unresolved restoration status
+explicit unresolved native operator
+explicit unresolved restoration law
 ```
 
-The public record rejects answer-bearing fields. Clause order, literal order, and
-duplicate clauses are normalized for semantic controls. Explicit bijective variable
-renaming is available as a presentation-gauge test.
+The public record rejects answer-bearing fields. Clause order, literal order, duplicate
+clauses, and bijective variable renaming are controlled. The DIMACS compiler is strict
+and cannot accept clause data before the public problem declaration.
 
 ### Total reference boundary
 
-For at most twenty variables, the reference backend returns:
+For at most twenty variables, the exact reference backend returns:
 
 ```text
-valid carrier
-satisfiable or unsatisfiable
-one conventional witness when satisfiable
-witness count
-explicit materialized-state and provenance ledger
+VALID_SAT with one independently verified witness
+VALID_UNSAT
+INVALID_CARRIER
 ```
 
-The cap is intentional. This backend is an exact oracle and test instrument, not a
-native mechanism.
+It also reports witness count and the complete materialized provenance ledger. Unknown
+or truthy malformed boundary values fail closed as `INVALID_CARRIER`. This backend is a
+correctness instrument, not the native proof mechanism.
 
-### Parity holonomy calibration
+### Native parity holonomy
 
-The Z2 calibration identifies a three-edge constraint cycle where every one-edge and
-two-edge subobject is compatible while the complete object has nontrivial cycle charge.
-This is the first executable false-closure control for the campaign.
-
-The incidence-only compiler selects a deterministic spanning forest without evaluating
-constraint consistency. The borrowed carrier then propagates actual `+1/-1` phase
-transport along the forest. Every non-tree edge closes a cycle product on the carrier:
+The incidence-only compiler selects a spanning forest without evaluating parity.
+Borrowed vertex phase lanes execute actual `+1/-1` transport. Every non-tree edge closes
+one cycle product:
 
 ```text
-holonomy(u, v) = phase[u] * edge_transport(u, v) * phase[v]
+holonomy(u, v) = phase[u] * edge_transport(u, v) * phase[v].
 ```
 
-A value of `-1` is the surviving global obstruction. The original union-find draft was
-removed because it computed the obstruction conventionally and only decorated the
-result with an unrelated phase tape. The current obstruction is produced by carrier
-transport itself.
-
-The carrier is restored by executing the exact public tree transports in reverse order.
-No stored pre-state transcript is used. A wrong-order replay is a hard negative control
-and does not restore a transport chain.
-
-### Reversible evaluation dilation
-
-A public assignment register and one output flag support a self-inverse evaluation
-oracle. Applying the same public operation twice restores the flag exactly.
-
-This establishes reversible evaluation while preserving provenance. It does not merge
-assignments, decide relation nonemptiness, or implement existential closure.
+A locally compatible but globally inconsistent triangle produces holonomy `-1`. Reverse
+execution of the exact tree transports restores the carrier. The original union-find
+shadow was removed.
 
 ### Conditional complexity theorem
 
-The package proves the conditional implication:
+The package proves:
 
 ```text
 uniform exact polynomial CET decision
 + deterministic polynomial standard-model simulation
 -> 3-SAT in P
--> P = NP
+-> P = NP.
 ```
 
-It also implements the lawful classical boundary self-reduction that renders and
-independently verifies one witness using at most `1 + 2n` exact decision calls. The
-conditional theorem is established. Its native premise is not.
+A classical post-boundary self-reduction renders a conventional witness with at most
+`1 + 2n` exact decision calls.
+
+## Complete Invariants Found
+
+### Topological determinant winding
+
+For the exact solution projector `Q_F`:
+
+```text
+U_F(theta) = I + (exp(i theta)-1) Q_F.
+```
+
+The clean-sector determinant winding is:
+
+```text
+W_F = rank Q_F = #SAT(F).
+```
+
+Therefore `W_F != 0` is a complete SAT invariant. The materialized reference carrier
+uses exact rational phase turns and has algebraically exact inverse restoration.
+
+### Clause-Hamiltonian zero mode
+
+The local commuting Hamiltonian:
+
+```text
+H_F = sum_j violation_projector(C_j)
+```
+
+has ground energy zero exactly for SAT and integer ground energy at least one for UNSAT.
+This removes an exponential energy-precision gap at the mathematical level. The
+remaining problem is detecting or populating a possibly unique zero mode.
+
+## Exact Compensation and Width Results
+
+### Reversible-oracle determinant compensation
+
+The determinant of the complete compute-phase-uncompute circuit is formula-independent.
+The clean sector carries `#SAT`; dirty ancillary sectors carry the exact compensating
+winding. A valid sensor must isolate the clean determinant line.
+
+### Historical MPO audit
+
+The old MPO bond index `(control state, current symbol)` omits head position and complete
+tape contents. Its winding belongs to a finite projected transition graph, not an exact
+configuration carrier.
+
+### Residual-relation width
+
+Exact residual relations can require exponential bond width under one presentation and
+constant width under another. Compact MPO or OBDD claims must therefore pass variable
+order and presentation-gauge controls. No universal polynomial bond dimension is
+established.
+
+### Fermionic interaction wall
+
+A genuine three-variable clause contributes a cubic occupation interaction. Generic
+clause geometry therefore leaves free-fermion Gaussian determinant closure. Exact
+non-Gaussian evolution or a no-smuggle auxiliary-field transformation is required.
+
+## Sensor Candidates and Their Current Boundaries
+
+### Normalized trace
+
+A unique witness changes normalized trace by `2^(1-n)`. Constant-additive trace
+estimation cannot see it.
+
+### Filled determinant line
+
+Known antisymmetric determinant constructions use resources polynomial in assignment
+space dimension `N = 2^n`, which is exponential in public variables.
+
+### Rank-one resolvent
+
+A normalized uniform probe has zero-pole residue `#SAT/2^n`. An unnormalized probe gives
+constant unique-witness residue only with norm squared `2^n`.
+
+### Ideal zero-mode gain
+
+Exponential gain can make settling time linear in `n`, but it transfers the exponent to
+relative gain, pump, mode count, noise floor, or restoration unless a stronger physical
+law is established.
+
+### Exceptional-point root latch
+
+An order-`n` companion with gain two per transport has cycle product:
+
+```text
+2^n * (#SAT/2^n) = #SAT.
+```
+
+UNSAT remains at an order-`n` exceptional point. SAT has spectral radius
+`#SAT^(1/n) >= 1`, including a unique witness. The symbolic sensor uses `n` modes and
+has a constant mathematical margin.
+
+This is the strongest active mechanism candidate. Its unresolved obligations are:
+
+```text
+clean port intensity is 4^-n for a unique witness
+deterministic noiseless gain is not established
+gain/loss environment is not restored
+noise below the pre-gain signal is not established
+standard-model polynomial simulation is not established
+```
+
+A formula-blind deterministic CPTP amplifier cannot solve this, because trace distance
+cannot increase. Formula-native nonlinear or nonstandard CAT_CAS dynamics remain open.
 
 ## Exact Missing Boundary
 
-The compact factorized satisfaction projector has a public description linear in the
-formula. Acting on one basis assignment is exact. The unresolved operation is:
+The remaining constructive target is now narrower than “find an invariant.” The
+invariants are complete.
 
 ```text
-EXACT_NONZERO_NORMALIZATION_WITHOUT_PROVENANCE_EXPANSION
+prepare or access the clean relational sector
+-> enact exact determinant winding or zero-mode presence
+-> amplify a unique witness without postselection or hidden exponential resources
+-> totalized SAT/UNSAT/INVALID boundary
+-> native inverse restoration of the complete environment
+-> polynomial standard-model transfer
 ```
 
-A future native carrier must distinguish an empty satisfying subspace from a nonempty
-one without assignment enumeration, answer-conditioned preparation, exponential
-precision, exponential settling, or an explicit provenance register for every path.
+Equivalent compact statement:
+
+```text
+POLYNOMIAL_CLEAN_SECTOR_PRESENCE_LATCH_WITH_REVERSIBLE_ENVIRONMENT
+```
 
 ## Current Claim Ceiling
 
@@ -116,7 +210,6 @@ CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED
 
 ## Environment Limitation
 
-The requested DevSpace connector rejected this conversation before opening a worktree,
-so local execution and Codex CLI support were unavailable. The branch was constructed
-through the GitHub connector. GitHub CI is the executable qualification surface for
-this package.
+DevSpace rejected this conversation before workspace creation, so local worktree and
+Codex CLI execution were unavailable. The branch was constructed and qualified through
+GitHub. The dedicated hosted workflow is the executable qualification surface.
