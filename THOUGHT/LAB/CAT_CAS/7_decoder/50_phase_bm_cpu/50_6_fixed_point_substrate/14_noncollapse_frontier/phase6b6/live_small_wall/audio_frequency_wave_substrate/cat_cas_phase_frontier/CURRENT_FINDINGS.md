@@ -746,3 +746,64 @@ recursive memory, advantage, physical phase computation, or unlimited
 catalytic phase computation. The next correction is a streaming public tree
 whose same four-phase relation message can propagate across arbitrary finite
 internal depth without host decoding.
+
+## Topology-generic bounded relation-tree phase closure
+
+The fixed-depth limitation is now removed for public typed trees. The generic
+C engine validates a tree with up to 64 nodes and 32 external leaves, finds
+every unique external path, and recursively composes each path through
+four-phase resident relation messages. No intermediate coefficient is
+decoded; only the final external-pair factors cross the boundary.
+
+The three-hub/five-leaf discriminator uses seven public relations, ten
+external-pair paths, twelve resident message relations, and 116 complex
+carrier cells. It produces boundary `e6bb33ad7c0cbbe0`, restores within
+`1.57009245868e-16`, and then reuses the same actual carrier for a different
+process producing `da5a04939bd2d482`. A four-hub/six-leaf process grows
+without source specialization to 25 resident messages and 196 carrier cells,
+matches exact scalar closure, and restores within `2.00148302124e-16` on
+reuse.
+
+The strengthened causal controls discriminate both result and reversal:
+
+```text
+wrong boundary inverse                 restoration error 1.73205080757
+scrambled final-edge geometry          boundary 17bfcd6650455e2a, clean inverse
+omitted resident-message inverse       restoration error 1.73205080757
+interior-message bypass                boundary 76ce9cefd10b119e, clean inverse
+```
+
+The complete extensional survey ranges all seven bi-total Boolean relations
+over all seven edges of the three-hub topology:
+
+```text
+relation tuples                         823,543
+external assignment rows             26,353,376
+exactly extendable rows               13,486,304
+multi-witness rows                     4,538,592
+mismatches                                     0
+```
+
+Strict C11 compilation, `-Werror -pedantic`, GCC `-fanalyzer`, ASan, UBSan,
+leak detection, fresh-process byte determinism, scalar-reference separation,
+all-`ANY` witness multiplicity, and committed tree/parser negatives pass.
+
+Two independent Sol/xhigh reviews pass with zero remaining findings:
+
+```text
+SOL-XHIGH-ALGEBRAIC-RELATION-TREE-01-R2
+SOL-XHIGH-ALGEBRAIC-RELATION-TREE-MECHANISM-02-R2
+```
+
+Review repaired a blank-record safety defect in the separate reference parser
+and separated its 20-internal-node exhaustive-enumeration limit from the
+native engine's 64-node topology capacity. A reported missing post-`END` gate
+was retracted after exact-source inspection showed that gate already existed;
+a committed negative now binds it.
+
+This establishes topology-generic bounded tree closure and recursive
+relation-valued phase memory. It does not establish cyclic relational trace,
+unrestricted domains, advantage over compact classical tree algorithms,
+physical phase computation, or unlimited catalytic phase computation. The
+next mechanism is a phase-native cycle invariant that detects and closes loop
+consistency without enumerating internal assignments.

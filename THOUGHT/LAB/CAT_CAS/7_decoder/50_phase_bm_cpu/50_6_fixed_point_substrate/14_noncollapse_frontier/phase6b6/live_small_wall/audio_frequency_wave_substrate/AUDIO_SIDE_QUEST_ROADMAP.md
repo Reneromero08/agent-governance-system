@@ -1,11 +1,11 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `4.1`
+**Roadmap version:** `4.2`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through milestone:** `ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED`
-**Current claim ceiling:** `SOFTWARE_TWO_HUB_RELATION_VALUED_PHASE_MEMORY_REFERENCE_ONLY`
+**Reconciled through milestone:** `ALGEBRAIC_RELATION_TREE_PHASE_ESTABLISHED`
+**Current claim ceiling:** `SOFTWARE_GENERIC_BOUNDED_RELATION_TREE_PHASE_CLOSURE_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -74,6 +74,7 @@ CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED
 ALGEBRAIC_RELATION_CHAIN_PHASE_ESTABLISHED
 ALGEBRAIC_RELATION_STAR_PHASE_ESTABLISHED
 ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED
+ALGEBRAIC_RELATION_TREE_PHASE_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -99,14 +100,14 @@ This result is a major nonterminal milestone. The equivalent compact classical d
 
 The frozen phase-circuit substrate establishes phase values, relative-phase
 registers, and deterministic phase functions. The mutable relational frontier
-now adds a structured quotient-relation calibration, but it does not
-establish:
+now adds open algebraic binary relations and topology-generic bounded tree
+closure, but it does not establish:
 
 ```text
-arbitrary open many-to-many phase relations as first-class native objects
-general composition of unresolved relations through typed shared ports
-general internal-port closure or relational trace
-a general idempotent existential relational boundary
+unrestricted relation domains or signatures
+cyclic composition through typed shared ports
+cyclic internal-port closure or relational trace
+a general graph-level idempotent existential relational boundary
 holographic relational computation
 ```
 
@@ -159,6 +160,11 @@ two-hub exhaustive boundary law          22,717,712 / 22,717,712 rows exact
 two-hub carrier                           52 complex cells, zero tuple/witness slots
 message-bypass discriminator             changes exact factorized boundary
 two-hub restoration/reuse                 below 1.7e-16, different process reuses carrier
+topology-generic relation tree             public typed tree through four internal hubs
+recursive phase relation messages          25 resident messages at four-hub depth
+three-hub complete extensional survey      26,353,376 / 26,353,376 rows exact
+generic tree carrier                        O(E + sum pair path length), zero assignment slots
+generic tree restoration/reuse              below 2.5e-16, different process reuses carrier
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -274,12 +280,13 @@ Verification follows a substantive result. One focused review is normally suffic
 
 ## 6. Current Frontier
 
-The primary active frontier is:
+The generic bounded-tree portion of the relational lift now passes. The
+primary active frontier is:
 
 ```text
-OPEN_MANY_TO_MANY_PHASE_RELATION
--> NATIVE_RELATIONAL_COMPOSITION
--> INTERNAL_PORT_CLOSURE_OR_RELATIONAL_TRACE
+CYCLIC_OPEN_PHASE_RELATIONS
+-> NATIVE_LOOP_COMPOSITION
+-> CYCLE_CONSISTENCY_OR_RELATIONAL_TRACE
 -> IDEMPOTENT_RELATIONAL_BOUNDARY
 -> RESTORATION_AND_REUSE
 ```
@@ -352,12 +359,16 @@ scan was removed; native evolution and carrier history are linear in relation
 count.
 
 The repeatable linear-chain problem, the first single-hub branching problem,
-and the first two-hub relation-memory problem are therefore removed. The
-two-hub mechanism leaves a first-stage resultant resident in four complex
-phases and consumes it in a second resultant before boundary decode. The
-active mechanism must now propagate the same relation-valued phase message
-through an arbitrary finite internal-hub tree without host decoding,
-per-relation circuit expansion, or fixed depth.
+the first two-hub relation-memory problem, and the topology-generic bounded
+tree problem are therefore removed. The generic engine parses public trees,
+constructs every unique external path, leaves each intermediate resultant in
+four complex phases, consumes those phases recursively without boundary
+decode, and restores and reuses the actual carrier. A complete `7^7`
+extensional survey of the three-hub discriminator covers `26,353,376`
+external assignment rows with no mismatch. The active mechanism must now
+close cyclic relational geometry, where unique-path factorization no longer
+applies and a genuine loop invariant must survive without host assignment
+expansion.
 
 The following are supporting frontier candidates, not a mandatory sequence:
 
@@ -451,7 +462,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-SOFTWARE_TWO_HUB_RELATION_VALUED_PHASE_MEMORY_REFERENCE_ONLY
+SOFTWARE_GENERIC_BOUNDED_RELATION_TREE_PHASE_CLOSURE_REFERENCE_ONLY
 ```
 
 Not established:
@@ -468,8 +479,8 @@ physical restoration
 hardware bit replacement
 Small Wall crossing
 holographic relational computation
-general branching open-relation composition
-general relational trace
+cyclic relational trace
+unrestricted typed relation graphs
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.

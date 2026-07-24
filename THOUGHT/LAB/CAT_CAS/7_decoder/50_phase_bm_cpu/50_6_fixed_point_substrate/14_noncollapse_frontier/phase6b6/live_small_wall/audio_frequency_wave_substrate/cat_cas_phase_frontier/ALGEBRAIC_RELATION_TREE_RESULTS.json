@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0.0",
+  "decision": "ALGEBRAIC_RELATION_TREE_PHASE_ESTABLISHED",
+  "claim_ceiling": "SOFTWARE_GENERIC_BOUNDED_RELATION_TREE_PHASE_CLOSURE_REFERENCE_ONLY",
+  "native_mechanism": {
+    "port_type": "BI_TOTAL_BOOLEAN_SUBSET_OF_F3",
+    "topology": "PUBLIC_TYPED_FINITE_TREE",
+    "operator": "REPEATED_FOUR_PHASE_LINEAR_RESULTANT",
+    "boundary": "ALL_UNORDERED_EXTERNAL_LEAF_PAIR_PATH_RELATIONS",
+    "decode_boundary_only": true,
+    "decoded_intermediate_coefficients": 0,
+    "tuple_slots": 0,
+    "witness_slots": 0,
+    "truth_table_slots": 0,
+    "retained_inverse_factors": 0,
+    "resource_law": "O(E+SUM_PAIR_PATH_LENGTH)"
+  },
+  "primary_execution": {
+    "process_fnv1a64": "6d8ca0958043094d",
+    "nodes": 8,
+    "closed_internal_nodes": 3,
+    "external_nodes": 5,
+    "input_relations": 7,
+    "external_pair_paths": 10,
+    "phase_resident_relation_messages": 12,
+    "maximum_path_edges": 4,
+    "carrier_complex_cells": 116,
+    "boundary_factor_fnv1a64": "e6bb33ad7c0cbbe0",
+    "maximum_root_error": 4.57756679852e-16,
+    "borrowed_carrier_displacement_l2": 12.7279220614,
+    "restoration_max_abs": 1.57009245868e-16
+  },
+  "cross_process_reuse": {
+    "process_fnv1a64": "eb70f7440afdf791",
+    "boundary_factor_fnv1a64": "da5a04939bd2d482",
+    "maximum_root_error": 5.97873396028e-16,
+    "borrowed_carrier_displacement_l2": 14.3874945699,
+    "restoration_max_abs": 2.48253415325e-16,
+    "actual_restored_carrier_reused": true
+  },
+  "four_hub_execution": {
+    "process_fnv1a64": "eee6003c9d5f060e",
+    "nodes": 10,
+    "closed_internal_nodes": 4,
+    "external_nodes": 6,
+    "input_relations": 9,
+    "external_pair_paths": 15,
+    "phase_resident_relation_messages": 25,
+    "maximum_path_edges": 5,
+    "carrier_complex_cells": 196,
+    "boundary_factor_fnv1a64": "8ede467f28be8e33",
+    "projected_assignments": 9,
+    "exact_assignments": 9,
+    "reference_mismatches": 0,
+    "restoration_max_abs": 1.66533453694e-16
+  },
+  "controls": {
+    "wrong_boundary_inverse": {
+      "applicable": true,
+      "restoration_max_abs": 1.73205080757,
+      "pass": true
+    },
+    "scrambled_path_geometry_forward": {
+      "applicable": true,
+      "nominal_boundary": "e6bb33ad7c0cbbe0",
+      "perturbed_boundary": "17bfcd6650455e2a",
+      "restoration_max_abs": 1.57009245868e-16,
+      "pass": true
+    },
+    "omitted_phase_message_inverse": {
+      "applicable": true,
+      "restoration_max_abs": 1.73205080757,
+      "pass": true
+    },
+    "bypassed_path_memory_forward": {
+      "applicable": true,
+      "nominal_boundary": "e6bb33ad7c0cbbe0",
+      "bypass_boundary": "76ce9cefd10b119e",
+      "restoration_max_abs": 1.66533453694e-16,
+      "pass": true
+    }
+  },
+  "independent_reference": {
+    "explicit_internal_enumeration_limit": 20,
+    "native_capacity_affected_by_reference_limit": false,
+    "primary": {
+      "external_assignments": 32,
+      "internal_assignments_per_boundary": 8,
+      "projected_assignments": 6,
+      "exact_assignments": 6,
+      "mismatches": 0
+    },
+    "reuse": {
+      "external_assignments": 32,
+      "internal_assignments_per_boundary": 8,
+      "projected_assignments": 7,
+      "exact_assignments": 7,
+      "mismatches": 0
+    },
+    "all_any": {
+      "external_assignments": 32,
+      "internal_assignments_per_boundary": 8,
+      "projected_assignments": 32,
+      "exact_assignments": 32,
+      "multi_witness_assignments": 32,
+      "mismatches": 0
+    }
+  },
+  "complete_extensional_survey": {
+    "bi_total_relations": 7,
+    "relation_tuples": 823543,
+    "boundary_assignment_rows": 26353376,
+    "exact_rows": 13486304,
+    "multi_witness_rows": 4538592,
+    "mismatch_rows": 0
+  },
+  "negative_fixtures": {
+    "cycle": "REJECT_RC_2_RELATIONS_MUST_FORM_A_FINITE_TREE",
+    "disconnected": "REJECT_RC_2_RELATIONS_MUST_FORM_A_FINITE_TREE",
+    "bad_external_degree": "REJECT_RC_2_EXTERNAL_NODE_MUST_HAVE_DEGREE_ONE",
+    "non_bitotal_relation": "REJECT_RC_2_RELATION_IS_NOT_BI_TOTAL",
+    "blank_record_native_and_reference": "REJECT_RC_2_BLANK_RECORDS_ARE_FORBIDDEN",
+    "trailing_record_native_and_reference": "REJECT_RC_2_RECORD_AFTER_END"
+  },
+  "qualification": {
+    "strict_c11_werror_pedantic": "PASS",
+    "gcc_fanalyzer": "PASS",
+    "asan": "PASS",
+    "ubsan": "PASS",
+    "leak_detection": "PASS",
+    "fresh_process_byte_determinism": "PASS",
+    "native_output_sha256": "ca9632b38d49407a15f8616d8d20926b9068d5932349bd803957fe11d466e8cc",
+    "primary_reference_output_sha256": "3008dc224daa9c31553a0d9be29dd480e8004f3f926b080f3801739fde8f787d",
+    "reuse_reference_output_sha256": "57571f212d25aef808d4caafe8e7ad76ee29c1564859a84e6f3565fa34726a56",
+    "all_any_reference_output_sha256": "579a11e9225142f8715043593cc44e551f80dfb6a35428a6b24d090bff28f8f1",
+    "four_hub_reference_output_sha256": "cb2d53deff3db7a634ae4cc36482450a95da28820af0832438bb2cbf3088774b",
+    "survey_output_sha256": "df41aeeb657b6650b89f5f3220c8ce0b69cbe21bfaf64b135b8b17d2f0f27db7"
+  },
+  "source_sha256": {
+    "algebraic_relation_tree_phase.c": "0dad766f318f113b9cb03e7543851064ae25b2c9512ca4c763539189a45bdff2",
+    "algebraic_relation_tree_reference.c": "07644ab40c66a141326f2727edab9f4dc3b74f446b0e5287d970b34a4367f9c1",
+    "algebraic_relation_tree_survey.c": "cd2bf283ecf3ebbb69f1fae19912ed4bb64e6f2c735192cf4417608e0e1af7eb"
+  },
+  "no_smuggle": {
+    "native_internal_assignment_enumeration": false,
+    "native_scalar_resultant_recurrence": false,
+    "decoded_feedback": false,
+    "oracle_feedback": false,
+    "boundary_correction": false,
+    "reference_linked_into_native": false,
+    "parser_only_scalar_relation_evaluation": true,
+    "pass": true
+  },
+  "review": {
+    "status": "PASS",
+    "reviewer_ids": [
+      "SOL-XHIGH-ALGEBRAIC-RELATION-TREE-01-R2",
+      "SOL-XHIGH-ALGEBRAIC-RELATION-TREE-MECHANISM-02-R2"
+    ],
+    "repaired_findings": [
+      "TREE-R1-001_CLOSED",
+      "TREE-R1-002_CLOSED"
+    ],
+    "retracted_findings": [
+      "TREE-R1-003_RETRACTED_REVIEWER_OBSERVATION_ERROR"
+    ],
+    "remaining_findings": 0
+  },
+  "zero_physical_phase_contact": true
+}
