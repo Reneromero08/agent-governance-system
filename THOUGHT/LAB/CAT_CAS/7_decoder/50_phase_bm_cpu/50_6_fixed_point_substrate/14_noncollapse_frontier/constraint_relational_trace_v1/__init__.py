@@ -8,7 +8,19 @@ from .catalytic_existential_trace import (
     ReversibleDilationAudit,
     reference_existential_trace,
 )
-from .parity_holonomy import ParityConstraint, ParityInstance, calibrate_parity_holonomy
+from .conditional_p_equals_np import (
+    WitnessExtractionResult,
+    extract_witness_by_boundary_self_reduction,
+    restrict_public_relation,
+)
+from .parity_holonomy import (
+    ParityConstraint,
+    ParityInstance,
+    Z2PhaseCarrier,
+    Z2TransportProgram,
+    calibrate_parity_holonomy,
+    compile_z2_transport,
+)
 
 __all__ = [
     "CLAIM_CEILING",
@@ -20,6 +32,12 @@ __all__ = [
     "ParityInstance",
     "ReferenceBoundaryResult",
     "ReversibleDilationAudit",
+    "WitnessExtractionResult",
+    "Z2PhaseCarrier",
+    "Z2TransportProgram",
     "calibrate_parity_holonomy",
+    "compile_z2_transport",
+    "extract_witness_by_boundary_self_reduction",
     "reference_existential_trace",
+    "restrict_public_relation",
 ]
