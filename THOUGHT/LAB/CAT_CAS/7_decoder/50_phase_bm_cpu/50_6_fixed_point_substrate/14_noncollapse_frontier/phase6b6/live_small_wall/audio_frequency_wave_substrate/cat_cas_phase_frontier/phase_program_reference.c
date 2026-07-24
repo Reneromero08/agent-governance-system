@@ -7,6 +7,8 @@
 
 #define _GNU_SOURCE
 #include <ctype.h>
+#include <errno.h>
+#include <limits.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,6 +45,159 @@ struct program {
     uint64_t passes;
     uint64_t fnv1a64;
 };
+
+static uint64_t parse_positive_decimal(
+    const char *text, const char *name
+) {
+    char *end = NULL;
+    if (text[0] < '0' || text[0] > '9') {
+        fprintf(stderr, "%s must be a positive decimal integer\n", name);
+        exit(2);
+    }
+    errno = 0;
+    const unsigned long long value = strtoull(text, &end, 10);
+    if (
+        end == text
+        || *end != '\0'
+        || errno == ERANGE
+        || value == 0
+    ) {
+        fprintf(stderr, "%s must be a positive decimal integer\n", name);
+        exit(2);
+    }
+    return (uint64_t)value;
+}
+
+static uint64_t parse_positive_record(
+    const char *line, const char *keyword
+) {
+    const size_t keyword_length = strlen(keyword);
+    if (
+        strncmp(line, keyword, keyword_length) != 0
+        || !isspace((unsigned char)line[keyword_length])
+    ) {
+        fprintf(stderr, "reference %s is invalid\n", keyword);
+        exit(2);
+    }
+    const char *value = line + keyword_length;
+    while (isspace((unsigned char)*value)) {
+        ++value;
+    }
+    return parse_positive_decimal(value, keyword);
+}
+
+static const char *record_values(
+    const char *line, const char *keyword
+) {
+    const size_t length = strlen(keyword);
+    if (
+        strncmp(line, keyword, length) != 0
+        || !isspace((unsigned char)line[length])
+    ) {
+        fprintf(stderr, "reference %s is invalid\n", keyword);
+        exit(2);
+    }
+    const char *cursor = line + length;
+    while (isspace((unsigned char)*cursor)) {
+        ++cursor;
+    }
+    return cursor;
+}
+
+static uint64_t parse_unsigned_token(
+    const char **cursor, const char *keyword
+) {
+    if (**cursor < '0' || **cursor > '9') {
+        fprintf(
+            stderr,
+            "reference unsigned %s field is invalid\n",
+            keyword
+        );
+        exit(2);
+    }
+    char *end = NULL;
+    errno = 0;
+    const unsigned long long value =
+        strtoull(*cursor, &end, 10);
+    if (
+        end == *cursor
+        || errno == ERANGE
+        || (*end != '\0' && !isspace((unsigned char)*end))
+    ) {
+        fprintf(
+            stderr,
+            "reference unsigned %s field is invalid\n",
+            keyword
+        );
+        exit(2);
+    }
+    *cursor = end;
+    while (isspace((unsigned char)**cursor)) {
+        ++*cursor;
+    }
+    return (uint64_t)value;
+}
+
+static int parse_signed_int_token(
+    const char **cursor, const char *keyword
+) {
+    const char *start = *cursor;
+    if (*start == '-') {
+        ++start;
+    }
+    if (*start < '0' || *start > '9') {
+        fprintf(
+            stderr,
+            "reference signed %s field is invalid\n",
+            keyword
+        );
+        exit(2);
+    }
+    char *end = NULL;
+    errno = 0;
+    const long value = strtol(*cursor, &end, 10);
+    if (
+        end == *cursor
+        || errno == ERANGE
+        || value < INT_MIN
+        || value > INT_MAX
+        || (*end != '\0' && !isspace((unsigned char)*end))
+    ) {
+        fprintf(
+            stderr,
+            "reference signed %s field is invalid\n",
+            keyword
+        );
+        exit(2);
+    }
+    *cursor = end;
+    while (isspace((unsigned char)**cursor)) {
+        ++*cursor;
+    }
+    return (int)value;
+}
+
+static void require_record_end(
+    const char *cursor, const char *keyword
+) {
+    if (*cursor != '\0') {
+        fprintf(stderr, "reference %s has extra fields\n", keyword);
+        exit(2);
+    }
+}
+
+static void parse_unsigned_record(
+    const char *line,
+    const char *keyword,
+    uint64_t *values,
+    size_t count
+) {
+    const char *cursor = record_values(line, keyword);
+    for (size_t index = 0; index < count; ++index) {
+        values[index] = parse_unsigned_token(&cursor, keyword);
+    }
+    require_record_end(cursor, keyword);
+}
 
 static inline uint64_t monotonic_ns(void) {
     struct timespec value;
@@ -170,18 +325,12 @@ static struct program read_program(const char *path) {
             fprintf(stderr, "reference content follows END\n");
             exit(2);
         }
-        char extra = '\0';
         if (!header_seen) {
-            int version = 0;
-            if (
-                sscanf(
-                    line,
-                    "CATCAS_PHASE_PROGRAM %d %c",
-                    &version,
-                    &extra
-                ) != 1
-                || version != 1
-            ) {
+            uint64_t fields[1] = {0};
+            parse_unsigned_record(
+                line, "CATCAS_PHASE_PROGRAM", fields, 1
+            );
+            if (fields[0] != 1U) {
                 fprintf(stderr, "reference header is invalid\n");
                 exit(2);
             }
@@ -197,17 +346,21 @@ static struct program read_program(const char *path) {
             continue;
         }
         if (strncmp(line, "REGISTERS", 9U) == 0) {
-            size_t registers = 0;
+            uint64_t fields[1] = {0};
+            parse_unsigned_record(
+                line, "REGISTERS", fields, 1
+            );
             if (
                 registers_seen
                 || instruction_seen
-                || sscanf(line, "REGISTERS %zu %c", &registers, &extra) != 1
-                || registers < 3U
-                || registers > SIZE_MAX / sizeof(uint8_t)
+                || fields[0] > SIZE_MAX
+                || fields[0] < 3U
+                || (size_t)fields[0] > SIZE_MAX / sizeof(uint8_t)
             ) {
                 fprintf(stderr, "reference REGISTERS is invalid\n");
                 exit(2);
             }
+            const size_t registers = (size_t)fields[0];
             program.registers = registers;
             program.input = calloc(registers, sizeof(uint8_t));
             if (program.input == NULL) {
@@ -218,35 +371,33 @@ static struct program read_program(const char *path) {
             continue;
         }
         if (strncmp(line, "SET", 3U) == 0) {
-            size_t target = 0;
-            int symbol = 0;
+            uint64_t fields[2] = {0, 0};
+            parse_unsigned_record(line, "SET", fields, 2);
             if (
                 !registers_seen
                 || instruction_seen
-                || sscanf(line, "SET %zu %d %c", &target, &symbol, &extra) != 2
-                || symbol < 0
-                || symbol >= Q
+                || fields[0] > SIZE_MAX
+                || fields[1] >= Q
             ) {
                 fprintf(stderr, "reference SET is invalid\n");
                 exit(2);
             }
+            const size_t target = (size_t)fields[0];
+            const int symbol = (int)fields[1];
             require_register(target, program.registers, line_number);
             program.input[target] = (uint8_t)symbol;
             continue;
         }
         if (strncmp(line, "PASSES", 6U) == 0) {
-            unsigned long long passes = 0;
             if (
                 !registers_seen
                 || passes_seen
                 || instruction_seen
-                || sscanf(line, "PASSES %llu %c", &passes, &extra) != 1
-                || passes == 0
             ) {
                 fprintf(stderr, "reference PASSES is invalid\n");
                 exit(2);
             }
-            program.passes = (uint64_t)passes;
+            program.passes = parse_positive_record(line, "PASSES");
             passes_seen = 1;
             continue;
         }
@@ -263,35 +414,30 @@ static struct program read_program(const char *path) {
             .amount = 0
         };
         if (strncmp(line, "ROT", 3U) == 0) {
-            if (
-                sscanf(
-                    line,
-                    "ROT %zu %d %c",
-                    &instruction.target,
-                    &instruction.amount,
-                    &extra
-                ) != 2
-            ) {
+            const char *cursor = record_values(line, "ROT");
+            const uint64_t target =
+                parse_unsigned_token(&cursor, "ROT");
+            instruction.amount =
+                parse_signed_int_token(&cursor, "ROT");
+            require_record_end(cursor, "ROT");
+            if (target > SIZE_MAX) {
                 fprintf(stderr, "reference ROT is invalid\n");
                 exit(2);
             }
+            instruction.target = (size_t)target;
             instruction.op = OP_ROT;
             require_register(
                 instruction.target, program.registers, line_number
             );
         } else if (strncmp(line, "ADD", 3U) == 0) {
-            if (
-                sscanf(
-                    line,
-                    "ADD %zu %zu %c",
-                    &instruction.a,
-                    &instruction.target,
-                    &extra
-                ) != 2
-            ) {
+            uint64_t fields[2] = {0, 0};
+            parse_unsigned_record(line, "ADD", fields, 2);
+            if (fields[0] > SIZE_MAX || fields[1] > SIZE_MAX) {
                 fprintf(stderr, "reference ADD is invalid\n");
                 exit(2);
             }
+            instruction.a = (size_t)fields[0];
+            instruction.target = (size_t)fields[1];
             instruction.op = OP_ADD;
             require_register(instruction.a, program.registers, line_number);
             require_register(
@@ -302,19 +448,19 @@ static struct program read_program(const char *path) {
                 exit(2);
             }
         } else if (strncmp(line, "MULADD", 6U) == 0) {
+            uint64_t fields[3] = {0, 0, 0};
+            parse_unsigned_record(line, "MULADD", fields, 3);
             if (
-                sscanf(
-                    line,
-                    "MULADD %zu %zu %zu %c",
-                    &instruction.a,
-                    &instruction.b,
-                    &instruction.target,
-                    &extra
-                ) != 3
+                fields[0] > SIZE_MAX
+                || fields[1] > SIZE_MAX
+                || fields[2] > SIZE_MAX
             ) {
                 fprintf(stderr, "reference MULADD is invalid\n");
                 exit(2);
             }
+            instruction.a = (size_t)fields[0];
+            instruction.b = (size_t)fields[1];
+            instruction.target = (size_t)fields[2];
             instruction.op = OP_MULADD;
             require_register(instruction.a, program.registers, line_number);
             require_register(instruction.b, program.registers, line_number);
@@ -329,18 +475,14 @@ static struct program read_program(const char *path) {
                 exit(2);
             }
         } else if (strncmp(line, "SWAP", 4U) == 0) {
-            if (
-                sscanf(
-                    line,
-                    "SWAP %zu %zu %c",
-                    &instruction.a,
-                    &instruction.b,
-                    &extra
-                ) != 2
-            ) {
+            uint64_t fields[2] = {0, 0};
+            parse_unsigned_record(line, "SWAP", fields, 2);
+            if (fields[0] > SIZE_MAX || fields[1] > SIZE_MAX) {
                 fprintf(stderr, "reference SWAP is invalid\n");
                 exit(2);
             }
+            instruction.a = (size_t)fields[0];
+            instruction.b = (size_t)fields[1];
             instruction.op = OP_SWAP;
             require_register(instruction.a, program.registers, line_number);
             require_register(instruction.b, program.registers, line_number);
@@ -349,19 +491,19 @@ static struct program read_program(const char *path) {
                 exit(2);
             }
         } else if (strncmp(line, "CSWAP", 5U) == 0) {
+            uint64_t fields[3] = {0, 0, 0};
+            parse_unsigned_record(line, "CSWAP", fields, 3);
             if (
-                sscanf(
-                    line,
-                    "CSWAP %zu %zu %zu %c",
-                    &instruction.target,
-                    &instruction.a,
-                    &instruction.b,
-                    &extra
-                ) != 3
+                fields[0] > SIZE_MAX
+                || fields[1] > SIZE_MAX
+                || fields[2] > SIZE_MAX
             ) {
                 fprintf(stderr, "reference CSWAP is invalid\n");
                 exit(2);
             }
+            instruction.target = (size_t)fields[0];
+            instruction.a = (size_t)fields[1];
+            instruction.b = (size_t)fields[2];
             instruction.op = OP_CSWAP;
             require_register(
                 instruction.target, program.registers, line_number
@@ -377,20 +519,21 @@ static struct program read_program(const char *path) {
                 exit(2);
             }
         } else if (strncmp(line, "PCSWAP", 6U) == 0) {
+            uint64_t fields[4] = {0, 0, 0, 0};
+            parse_unsigned_record(line, "PCSWAP", fields, 4);
             if (
-                sscanf(
-                    line,
-                    "PCSWAP %zu %zu %zu %zu %c",
-                    &instruction.target,
-                    &instruction.a,
-                    &instruction.b,
-                    &instruction.c,
-                    &extra
-                ) != 4
+                fields[0] > SIZE_MAX
+                || fields[1] > SIZE_MAX
+                || fields[2] > SIZE_MAX
+                || fields[3] > SIZE_MAX
             ) {
                 fprintf(stderr, "reference PCSWAP is invalid\n");
                 exit(2);
             }
+            instruction.target = (size_t)fields[0];
+            instruction.a = (size_t)fields[1];
+            instruction.b = (size_t)fields[2];
+            instruction.c = (size_t)fields[3];
             instruction.op = OP_PCSWAP;
             require_register(
                 instruction.target, program.registers, line_number

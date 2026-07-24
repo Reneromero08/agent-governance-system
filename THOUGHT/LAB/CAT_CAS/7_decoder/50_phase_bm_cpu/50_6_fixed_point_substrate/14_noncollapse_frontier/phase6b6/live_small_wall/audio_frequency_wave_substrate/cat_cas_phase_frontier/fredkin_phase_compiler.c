@@ -9,6 +9,7 @@
 
 #define _GNU_SOURCE
 #include <ctype.h>
+#include <errno.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,6 +32,152 @@ struct circuit {
     uint64_t cycles;
     uint64_t fnv1a64;
 };
+
+static uint64_t parse_positive_decimal(
+    const char *text, const char *name
+) {
+    char *end = NULL;
+    if (text[0] < '0' || text[0] > '9') {
+        fprintf(stderr, "%s must be a positive decimal integer\n", name);
+        exit(2);
+    }
+    errno = 0;
+    const unsigned long long value = strtoull(text, &end, 10);
+    if (
+        end == text
+        || *end != '\0'
+        || errno == ERANGE
+        || value == 0
+    ) {
+        fprintf(stderr, "%s must be a positive decimal integer\n", name);
+        exit(2);
+    }
+    return (uint64_t)value;
+}
+
+static uint64_t parse_positive_record(
+    const char *line,
+    const char *keyword,
+    size_t line_number
+) {
+    const size_t keyword_length = strlen(keyword);
+    if (
+        strncmp(line, keyword, keyword_length) != 0
+        || !isspace((unsigned char)line[keyword_length])
+    ) {
+        fprintf(
+            stderr,
+            "invalid %s on line %zu\n",
+            keyword,
+            line_number
+        );
+        exit(2);
+    }
+    const char *value = line + keyword_length;
+    while (isspace((unsigned char)*value)) {
+        ++value;
+    }
+    return parse_positive_decimal(value, keyword);
+}
+
+static const char *record_values(
+    const char *line,
+    const char *keyword,
+    size_t line_number
+) {
+    const size_t keyword_length = strlen(keyword);
+    if (
+        strncmp(line, keyword, keyword_length) != 0
+        || !isspace((unsigned char)line[keyword_length])
+    ) {
+        fprintf(
+            stderr,
+            "invalid %s on line %zu\n",
+            keyword,
+            line_number
+        );
+        exit(2);
+    }
+    const char *cursor = line + keyword_length;
+    while (isspace((unsigned char)*cursor)) {
+        ++cursor;
+    }
+    return cursor;
+}
+
+static uint64_t parse_unsigned_token(
+    const char **cursor,
+    const char *keyword,
+    size_t line_number
+) {
+    while (isspace((unsigned char)**cursor)) {
+        ++*cursor;
+    }
+    if (**cursor < '0' || **cursor > '9') {
+        fprintf(
+            stderr,
+            "invalid %s on line %zu\n",
+            keyword,
+            line_number
+        );
+        exit(2);
+    }
+    char *end = NULL;
+    errno = 0;
+    const unsigned long long value = strtoull(*cursor, &end, 10);
+    if (
+        end == *cursor
+        || errno == ERANGE
+        || (*end != '\0' && !isspace((unsigned char)*end))
+    ) {
+        fprintf(
+            stderr,
+            "invalid %s on line %zu\n",
+            keyword,
+            line_number
+        );
+        exit(2);
+    }
+    *cursor = end;
+    return (uint64_t)value;
+}
+
+static void require_record_end(
+    const char *cursor,
+    const char *keyword,
+    size_t line_number
+) {
+    while (isspace((unsigned char)*cursor)) {
+        ++cursor;
+    }
+    if (*cursor != '\0') {
+        fprintf(
+            stderr,
+            "invalid %s on line %zu\n",
+            keyword,
+            line_number
+        );
+        exit(2);
+    }
+}
+
+static void parse_unsigned_record(
+    const char *line,
+    const char *keyword,
+    uint64_t *values,
+    size_t value_count,
+    size_t line_number
+) {
+    const char *cursor = record_values(line, keyword, line_number);
+    for (size_t index = 0; index < value_count; ++index) {
+        values[index] = parse_unsigned_token(
+            &cursor,
+            keyword,
+            line_number
+        );
+    }
+    require_record_end(cursor, keyword, line_number);
+}
 
 static inline uint64_t fnv1a_update(
     uint64_t hash, const unsigned char *bytes, size_t length
@@ -145,18 +292,16 @@ static struct circuit read_circuit(const char *path) {
             fprintf(stderr, "content follows END on line %zu\n", line_number);
             exit(2);
         }
-        char extra = '\0';
         if (!header_seen) {
-            int version = 0;
-            if (
-                sscanf(
-                    line,
-                    "CATCAS_FREDKIN_CIRCUIT %d %c",
-                    &version,
-                    &extra
-                ) != 1
-                || version != 1
-            ) {
+            uint64_t fields[1] = {0};
+            parse_unsigned_record(
+                line,
+                "CATCAS_FREDKIN_CIRCUIT",
+                fields,
+                1,
+                line_number
+            );
+            if (fields[0] != UINT64_C(1)) {
                 fprintf(stderr, "invalid circuit header\n");
                 exit(2);
             }
@@ -172,17 +317,24 @@ static struct circuit read_circuit(const char *path) {
             continue;
         }
         if (strncmp(line, "WIRES", 5U) == 0) {
-            size_t wires = 0;
+            uint64_t fields[1] = {0};
+            parse_unsigned_record(
+                line,
+                "WIRES",
+                fields,
+                1,
+                line_number
+            );
             if (
                 wires_seen
                 || gate_seen
-                || sscanf(line, "WIRES %zu %c", &wires, &extra) != 1
-                || wires < 3U
-                || wires > SIZE_MAX / sizeof(int)
+                || fields[0] < UINT64_C(3)
+                || fields[0] > (uint64_t)(SIZE_MAX / sizeof(int))
             ) {
                 fprintf(stderr, "invalid WIRES on line %zu\n", line_number);
                 exit(2);
             }
+            const size_t wires = (size_t)fields[0];
             circuit.wires = wires;
             circuit.input = calloc(wires, sizeof(int));
             if (circuit.input == NULL) {
@@ -193,57 +345,67 @@ static struct circuit read_circuit(const char *path) {
             continue;
         }
         if (strncmp(line, "SET", 3U) == 0) {
-            size_t wire = 0;
-            int symbol = 0;
+            uint64_t fields[2] = {0, 0};
+            parse_unsigned_record(
+                line,
+                "SET",
+                fields,
+                2,
+                line_number
+            );
             if (
                 !wires_seen
                 || gate_seen
-                || sscanf(line, "SET %zu %d %c", &wire, &symbol, &extra) != 2
-                || symbol < 0
-                || symbol > 2
+                || fields[0] > (uint64_t)SIZE_MAX
+                || fields[1] > UINT64_C(2)
             ) {
                 fprintf(stderr, "invalid SET on line %zu\n", line_number);
                 exit(2);
             }
+            const size_t wire = (size_t)fields[0];
+            const int symbol = (int)fields[1];
             require_wire(wire, circuit.wires, line_number);
             circuit.input[wire] = symbol;
             continue;
         }
         if (strncmp(line, "CYCLES", 6U) == 0) {
-            unsigned long long cycles = 0;
             if (
                 !wires_seen
                 || cycles_seen
                 || gate_seen
-                || sscanf(line, "CYCLES %llu %c", &cycles, &extra) != 1
-                || cycles == 0
             ) {
                 fprintf(stderr, "invalid CYCLES on line %zu\n", line_number);
                 exit(2);
             }
-            circuit.cycles = (uint64_t)cycles;
+            circuit.cycles = parse_positive_record(
+                line,
+                "CYCLES",
+                line_number
+            );
             cycles_seen = 1;
             continue;
         }
         if (strncmp(line, "FREDKIN", 7U) == 0) {
+            uint64_t fields[4] = {0, 0, 0, 0};
+            parse_unsigned_record(
+                line,
+                "FREDKIN",
+                fields,
+                4,
+                line_number
+            );
             struct gate gate = {
-                .control = 0,
-                .left = 0,
-                .right = 0,
-                .enabled = 0
+                .control = (size_t)fields[0],
+                .left = (size_t)fields[1],
+                .right = (size_t)fields[2],
+                .enabled = (int)fields[3]
             };
             if (
                 !wires_seen
-                || sscanf(
-                    line,
-                    "FREDKIN %zu %zu %zu %d %c",
-                    &gate.control,
-                    &gate.left,
-                    &gate.right,
-                    &gate.enabled,
-                    &extra
-                ) != 4
-                || (gate.enabled != 0 && gate.enabled != 1)
+                || fields[0] > (uint64_t)SIZE_MAX
+                || fields[1] > (uint64_t)SIZE_MAX
+                || fields[2] > (uint64_t)SIZE_MAX
+                || fields[3] > UINT64_C(1)
             ) {
                 fprintf(stderr, "invalid FREDKIN on line %zu\n", line_number);
                 exit(2);

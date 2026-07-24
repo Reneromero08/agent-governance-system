@@ -25,16 +25,21 @@ Phase on `S^1` is the primitive coordinate. Relative phase, interference, topolo
 The standing lane objective is:
 
 ```text
-finite reusable substrate
--> compact unresolved relational geometry
--> native phase / catalytic / toroidal evolution
--> invariant or fixed point
--> one classical witness
--> official external acceptance
--> restoration
--> reuse
--> increasing leverage against the best matched compact classical method
+open typed relations
+-> holographic relational geometry
+-> composition through shared interfaces
+-> unresolved internal ports
+-> native relational closure
+-> surviving boundary relation or invariant
+-> actual inverse restoration
+-> actual restored-substrate reuse
+-> unbounded catalytic phase computation
 ```
+
+The phase VM, Fredkin compiler, stored-program phase state, fixed-resident
+torus, and spatial phase fabric are development foundations. They are not the
+final computational architecture. Phase-circuit scaling is support work only
+when it enables the relational lift.
 
 ## 2. Current Highest Milestone
 
@@ -128,16 +133,25 @@ Verification follows a substantive result. One focused independent review is nor
 Current candidate frontiers include:
 
 ```text
-reversible history and carrier-state compression below O(nM)
-fixed-resident or rolling toroidal substrate
-flagship problems without equivalent compact classical DP
-C5 leverage against the best matched compact baseline
-official external acceptance
-cross-domain transfer
-phase control flow and memory where they enable stronger compute
+open many-to-many phase relations as first-class native objects
+native composition through typed shared interfaces
+unresolved internal ports and relational trace
+idempotent existential boundary projection
+reversible relational closure with restoration and reuse
 ```
 
-These are not a mandatory sequence. The agent must select or replace them based on evidence.
+The first calibration should compose two compatible non-functional local
+relations through one shared internal port, close it, expose the exact
+remaining boundary relation, reverse the real forward process, and reuse the
+restored carrier. It must preserve the relation as one unresolved process
+object rather than execute tuples or internal assignments separately.
+
+Candidate mathematical languages are evidence prompts, not mandates:
+relation algebra, Boolean-enriched composition, typed process diagrams,
+Holant signatures, holographic basis changes, relation-valued phase
+transport, groupoid/category transport, lattice-valued relations,
+topological sectors, idempotent nonlinear phase dynamics, and reversible
+dilation.
 
 ## 7. Native No-Smuggle Law
 
@@ -155,9 +169,16 @@ hardcoded problem identities
 per-instance repair constants
 hidden candidate enumeration
 hidden classical path materialization
+host loops over candidate assignments
+selected witnesses or successful branches
+completed relation truth tables
+exponential provenance objects
 ```
 
-The compiler must not solve the target problem.
+The compiler must not solve the target problem. It may describe public
+relational geometry and constant-size local primitives. It may not expand
+every internal assignment, emit one ordinary circuit per relation tuple, or
+conventionally evaluate the completed relation.
 
 Do not claim factorized, compact, lazy, global, or fixed-size computation while performing equivalent enumeration elsewhere.
 
@@ -180,6 +201,24 @@ borrow
 ```
 
 The carrier must be causally involved. The result must survive outside the history being reversed. Restoration must reverse the actual forward process. Reuse must consume the actual restored carrier.
+
+For the relational architecture this becomes:
+
+```text
+borrow
+-> encode public relational geometry
+-> compose and close natively
+-> extract a boundary relation or invariant
+-> reverse the actual forward process
+-> restore
+-> reuse the actual restored substrate
+```
+
+Existential relational truth is idempotent: duplicate relations or duplicate
+valid derivations must not change the lawful boundary. Internal reversible
+state may preserve multiplicity, but ordinary amplitude growth is not by
+itself relational OR. Empty relation and carrier failure must remain
+distinguishable.
 
 ## 9. Claim Discipline
 
