@@ -1,0 +1,61 @@
+{
+  "prepare": {
+    "created_at": "2026-07-24T01:20:22.744322+00:00",
+    "passed": true,
+    "pmu_helper_sha256": "ef63151e50ea9cb992a73b677cc1acfdf614b8bfd61c40941ffec8c3ce8a026d",
+    "run_id": "family10h_relation_composition_phase_correction_discovery_v1_0",
+    "runtime_sha256": "f9e5e8e4abff8696669c9d5d09e42e4db226a226f08cca1fb5d877101156a368",
+    "schedule_manifest_sha256": "05c18da179bf2d8a02f13a9d6eede0d79a06a9a2730b6627a3a8d6a448b2706c",
+    "schema": "FAMILY10H_RELATION_COMPOSITION_PHASE_CORRECTION_PREPARE_V1",
+    "small_wall_crossed": false
+  }
+}
+{
+  "analysis_sha256": "27cf7a31788487262f8866f3ccebe64e8461c1dcc29feed12b84435306a74c28",
+  "archive_sha256": "39f5a85d55cf154f6c7199d9c1452bd9700a74c5a3cf7ce311d6d00f47625ecc",
+  "controller_passed": true,
+  "coordinates": {
+    "D_adjacent_r0r1_primary_minus_sham": 0.0776719320632061,
+    "D_adjacent_r1r0_primary_minus_sham": 0.08424584455145914,
+    "D_balanced_alt_a_primary_minus_sham": 0.07335878616614461,
+    "D_balanced_alt_b_primary_minus_sham": 0.08414803942757475,
+    "D_gapped_r0r1_primary_minus_sham": 0.0679111933458404,
+    "D_gapped_r1r0_primary_minus_sham": 0.0659807555918463,
+    "Omega_adjacent_composition_r0r1_minus_r1r0": -0.006573912488253036,
+    "Omega_balanced_alt_composition_phase_a_minus_phase_b": -0.01078925326143014,
+    "Omega_dead_balanced_alt_phase_a_minus_phase_b": -0.007885581757716961,
+    "Omega_dead_composition_r0r1_minus_r1r0": 0.009243243833587073,
+    "Omega_gapped_balanced_alt_phase_a_minus_phase_b": -0.008179135446529762,
+    "Omega_gapped_composition_r0r1_minus_r1r0": 0.0019304377539941103,
+    "Omega_source_off_balanced_alt_phase_a_minus_phase_b": -0.013093192972774267,
+    "Omega_source_off_composition_r0r1_minus_r1r0": 0.007104739054644357,
+    "Psi_alive_adjacent_minus_balanced": 0.004215340773177104,
+    "Psi_dead_adjacent_minus_balanced": 0.017128825591304034,
+    "Psi_gapped_adjacent_minus_balanced": 0.010109573200523872,
+    "Psi_source_off_adjacent_minus_balanced": 0.020197932027418625,
+    "R_adjacent_primary_composition_r0r1_minus_r1r0": -0.02118065029342886,
+    "R_adjacent_r0r1_primary": 0.06345435097322706,
+    "R_adjacent_r1r0_primary": 0.08463500126665592,
+    "balanced_alt_abs_to_adjacent_composition_abs": 1.6412225262671996,
+    "dead_composition_abs_to_alive_composition_abs": 1.4060491146031957,
+    "dead_psi_abs_to_alive_psi_abs": 4.063449792789595,
+    "gapped_composition_abs_to_adjacent_composition_abs": 0.2936512704487048,
+    "gapped_psi_abs_to_alive_psi_abs": 2.3982813595647414,
+    "source_off_composition_abs_to_alive_composition_abs": 1.0807474342470877,
+    "source_off_psi_abs_to_alive_psi_abs": 4.791530059904371
+  },
+  "interpretation": {
+    "adjacent_composition_order_nonzero": true,
+    "composition_phase_correction_candidate": false,
+    "dead_preserves_at_least_25pct_alive_psi": true,
+    "diagnostic_adjacent_gapped_collapses_below_25pct": false,
+    "diagnostic_adjacent_source_off_collapses_below_25pct": false,
+    "diagnostic_balanced_alt_replay_below_25pct_adjacent": false,
+    "exploratory_only": true,
+    "gapped_collapses_below_25pct_alive_psi": false,
+    "phase_corrected_all_one_factor_strata_same_sign": false,
+    "phase_corrected_psi_nonzero": true,
+    "small_wall_crossed": false,
+    "source_off_collapses_below_25pct_alive_psi": false
+  }
+}

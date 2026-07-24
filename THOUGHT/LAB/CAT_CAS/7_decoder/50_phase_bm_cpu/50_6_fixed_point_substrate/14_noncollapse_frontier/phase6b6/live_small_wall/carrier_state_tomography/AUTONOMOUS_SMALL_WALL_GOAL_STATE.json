@@ -1,10 +1,10 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T18:08:19-07:00",
+  "updated_at": "2026-07-23T18:24:14-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
-  "checkpoint_head": "b2fc5f5b0dc5588029876951046ff794cb696160",
-  "origin_head": "b2fc5f5b0dc5588029876951046ff794cb696160",
+  "checkpoint_head": "adb7f75a97050954e24555c7a9fd328df247f80d",
+  "origin_head": "adb7f75a97050954e24555c7a9fd328df247f80d",
   "autonomous_mode": {
     "active": true,
     "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
@@ -54,17 +54,17 @@
     ]
   },
   "current_package": {
-    "package_id": "family10h_relation_composition_replay_exclusion_discovery_v1",
-    "transaction_run_id": "family10h_relation_composition_replay_exclusion_discovery_v1_0",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_replay_exclusion_discovery_v1",
-    "package_decision": "EXPLORATORY_COMPOSITION_REPLAY_EXCLUSION_REJECTED_BALANCED_ALT_REPLAY_NO_SCIENTIFIC_CLAIM",
+    "package_id": "family10h_relation_composition_phase_correction_discovery_v1",
+    "transaction_run_id": "family10h_relation_composition_phase_correction_discovery_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_phase_correction_discovery_v1",
+    "package_decision": "EXPLORATORY_PHASE_CORRECTED_COMPOSITION_REJECTED_NO_SCIENTIFIC_CLAIM",
     "package_manifest_sha256": null,
-    "schedule_manifest_sha256": "9b2647814e2fdde6c3cfb8a92aefbcef9cc944b9fd7f22e4115b5bd84c10cb3f",
+    "schedule_manifest_sha256": "05c18da179bf2d8a02f13a9d6eede0d79a06a9a2730b6627a3a8d6a448b2706c",
     "threshold_contract_sha256": null,
-    "source_schedule_package": "family10h_relation_composition_loop_discovery_v1",
-    "source_authority_commit": "b2fc5f5b0dc5588029876951046ff794cb696160",
+    "source_schedule_package": "family10h_relation_composition_replay_exclusion_discovery_v1",
+    "source_authority_commit": "adb7f75a97050954e24555c7a9fd328df247f80d",
     "source_freeze_commit": null,
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_composition_replay_exclusion_discovery_v1_0/attempt_2",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_composition_phase_correction_discovery_v1_0/attempt_1",
     "attempt_output_path_fresh": true
   },
   "current_observable": {
@@ -148,6 +148,12 @@
       "raw_records": 10240,
       "pair_observations": 2621440,
       "source_death_receipts": 10240
+    },
+    "family10h_relation_composition_phase_correction_discovery_v1_0": {
+      "physical_transactions": 1,
+      "raw_records": 12288,
+      "pair_observations": 3145728,
+      "source_death_receipts": 12288
     }
   },
   "latest_retained_evidence": {
@@ -859,6 +865,59 @@
       "gapped_replay_collapses_below_25pct_adjacent": true,
       "small_wall_crossed": false,
       "source_off_collapses_below_25pct_alive_composition_order": true
+    },
+    "relation_composition_phase_correction_result": "EXPLORATORY_PHASE_CORRECTED_COMPOSITION_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "relation_composition_phase_correction_archive_sha256": "39f5a85d55cf154f6c7199d9c1452bd9700a74c5a3cf7ce311d6d00f47625ecc",
+    "relation_composition_phase_correction_archive_size": 68450365,
+    "relation_composition_phase_correction_analysis_sha256": "27cf7a31788487262f8866f3ccebe64e8461c1dcc29feed12b84435306a74c28",
+    "relation_composition_phase_correction_raw_record_count": 12288,
+    "relation_composition_phase_correction_pair_observation_count": 3145728,
+    "relation_composition_phase_correction_source_death_receipt_count": 12288,
+    "relation_composition_phase_correction_runtime_sha256": "f9e5e8e4abff8696669c9d5d09e42e4db226a226f08cca1fb5d877101156a368",
+    "relation_composition_phase_correction_schedule_manifest_sha256": "05c18da179bf2d8a02f13a9d6eede0d79a06a9a2730b6627a3a8d6a448b2706c",
+    "relation_composition_phase_correction_coordinates": {
+      "D_adjacent_r0r1_primary_minus_sham": 0.0776719320632061,
+      "D_adjacent_r1r0_primary_minus_sham": 0.08424584455145914,
+      "D_balanced_alt_a_primary_minus_sham": 0.07335878616614461,
+      "D_balanced_alt_b_primary_minus_sham": 0.08414803942757475,
+      "D_gapped_r0r1_primary_minus_sham": 0.0679111933458404,
+      "D_gapped_r1r0_primary_minus_sham": 0.0659807555918463,
+      "Omega_adjacent_composition_r0r1_minus_r1r0": -0.006573912488253036,
+      "Omega_balanced_alt_composition_phase_a_minus_phase_b": -0.01078925326143014,
+      "Omega_dead_balanced_alt_phase_a_minus_phase_b": -0.007885581757716961,
+      "Omega_dead_composition_r0r1_minus_r1r0": 0.009243243833587073,
+      "Omega_gapped_balanced_alt_phase_a_minus_phase_b": -0.008179135446529762,
+      "Omega_gapped_composition_r0r1_minus_r1r0": 0.0019304377539941103,
+      "Omega_source_off_balanced_alt_phase_a_minus_phase_b": -0.013093192972774267,
+      "Omega_source_off_composition_r0r1_minus_r1r0": 0.007104739054644357,
+      "Psi_alive_adjacent_minus_balanced": 0.004215340773177104,
+      "Psi_dead_adjacent_minus_balanced": 0.017128825591304034,
+      "Psi_gapped_adjacent_minus_balanced": 0.010109573200523872,
+      "Psi_source_off_adjacent_minus_balanced": 0.020197932027418625,
+      "R_adjacent_primary_composition_r0r1_minus_r1r0": -0.02118065029342886,
+      "R_adjacent_r0r1_primary": 0.06345435097322706,
+      "R_adjacent_r1r0_primary": 0.08463500126665592,
+      "balanced_alt_abs_to_adjacent_composition_abs": 1.6412225262671996,
+      "dead_composition_abs_to_alive_composition_abs": 1.4060491146031957,
+      "dead_psi_abs_to_alive_psi_abs": 4.063449792789595,
+      "gapped_composition_abs_to_adjacent_composition_abs": 0.2936512704487048,
+      "gapped_psi_abs_to_alive_psi_abs": 2.3982813595647414,
+      "source_off_composition_abs_to_alive_composition_abs": 1.0807474342470877,
+      "source_off_psi_abs_to_alive_psi_abs": 4.791530059904371
+    },
+    "relation_composition_phase_correction_interpretation": {
+      "adjacent_composition_order_nonzero": true,
+      "composition_phase_correction_candidate": false,
+      "dead_preserves_at_least_25pct_alive_psi": true,
+      "diagnostic_adjacent_gapped_collapses_below_25pct": false,
+      "diagnostic_adjacent_source_off_collapses_below_25pct": false,
+      "diagnostic_balanced_alt_replay_below_25pct_adjacent": false,
+      "exploratory_only": true,
+      "gapped_collapses_below_25pct_alive_psi": false,
+      "phase_corrected_all_one_factor_strata_same_sign": false,
+      "phase_corrected_psi_nonzero": true,
+      "small_wall_crossed": false,
+      "source_off_collapses_below_25pct_alive_psi": false
     }
   },
   "hypothesis_frontier": {
@@ -929,7 +988,7 @@
       "higher compatibility or obstruction surface"
     ],
     "leading_mechanism": "amplitude-dominant spatial carrier response: source action can write a persistent carrier amplitude/state, spatial boundary readout exposes it, and explicit reset can suppress it in some full-schedule experiments",
-    "strongest_candidate_coordinate": "composition-loop Omega remains the best lead, but replay-exclusion is not clean: attempt_2 adjacent Omega = -0.04685682596762775, source-off ratio = 0.13391863467389814, dead ratio = 0.38212716829215065, gapped ratio = 0.02917035613273688, balanced-alt ratio = 0.3785726333251274; balanced-alt failed the 0.25 replay-collapse envelope.",
+    "strongest_candidate_coordinate": "none currently clean beyond the confirmed scalar/local differential baseline; corrected live-composition prep rejected the composition-loop lead",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
       "branch": "codex/audio-frequency-wave-substrate",
@@ -960,9 +1019,10 @@
       "current +/- spatial shift as a signed oriented relational phase; later controls indicate amplitude-dominant carrier response rather than stable source-authored orientation",
       "temporal/order-coded relation as source-written carrier; no-source-preparation D was 3.80x alive D",
       "fixed-marginal AB-versus-BA source operation order as a clean source-authored holographic candidate; alive D_order was nonzero but source-off preserved 56.9% of it and neutral/random controls were 5.77x/3.96x larger than the order contrast",
-      "plain fixed-marginal AB-versus-BA order remains insufficient; composition-loop R0->R1 versus R1->R0 is now the leading exploratory candidate but neutral/random D amplitudes still require replay-exclusion hardening before promotion"
+      "plain fixed-marginal AB-versus-BA order remains insufficient; composition-loop R0->R1 versus R1->R0 is now the leading exploratory candidate but neutral/random D amplitudes still require replay-exclusion hardening before promotion",
+      "uniform adjacent R0_then_R1 versus R1_then_R0 composition after fixing live source prep; corrected phase package collapsed alive Psi to 0.004215 and source-off/gapped controls were larger than alive"
     ],
-    "current_next_experiment": "do not freeze the current composition replay-exclusion law; isolate why balanced alternating preserves 37.9% of adjacent Omega, then look for a source-authored composition invariant whose gapped, balanced, and source-off controls all collapse under matched marginals",
+    "current_next_experiment": "move away from uniform adjacent R0/R1 composition; search for a relation code that is genuinely source-authored under the live prep helper, preferably a noncommutative or holonomy-style code with carrier-off kill and matched gapped/source-off controls",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
@@ -987,9 +1047,11 @@
       "a new fixed-marginal temporal source-operation package must prevent AB versus BA from being encoded through different addresses, counts, durations, spatial offsets, or receiver schedule identity",
       "fixed-marginal AB/BA order run: D_alive_order = 0.010436, source-off ratio = 0.569, neutral ratio = 5.772, random ratio = 3.960; not enough source-off collapse or composition specificity",
       "composition-loop discovery is promising but exploratory: Omega_alive = 0.025081683677790033, source-off ratio = 0.06326050530086345, dead ratio = 0.2979268569177624, one-factor strata same sign true; neutral/random primary-minus-sham amplitudes are 3.268x/3.249x alive Omega, so replay-exclusion and prospective confirmation remain required",
-      "composition replay-exclusion discovery attempt_2: adjacent Omega nonzero, source-off collapsed to 0.134x, dead preserved 0.382x, gapped collapsed to 0.029x, but balanced-alt replay remained 0.379x, so the strict replay-exclusion candidate failed and Small Wall was not crossed"
+      "composition replay-exclusion discovery attempt_2: adjacent Omega nonzero, source-off collapsed to 0.134x, dead preserved 0.382x, gapped collapsed to 0.029x, but balanced-alt replay remained 0.379x, so the strict replay-exclusion candidate failed and Small Wall was not crossed",
+      "replay-exclusion runner defect found: copied composition prep selector had only affected the synthetic/default path; the live child was still using base relation_spatial_prepare for non-source-off controls before the phase-correction package fixed it",
+      "phase-correction discovery with live composition prep rejected the composition-loop route: adjacent Omega = -0.006573912488253036, balanced Omega = -0.01078925326143014, Psi_alive = 0.004215340773177104, source-off Psi ratio = 4.791530059904371, gapped Psi ratio = 2.3982813595647414, corrected strata same-sign false"
     ],
-    "active_frontier": "composition-sensitive relation probe after replay-exclusion: keep source-off/gapped wins, repair or replace balanced-alt replay control before freezing a prospective law"
+    "active_frontier": "post-correction relation encoding search: the source-written amplitude primitive remains real, but actual live adjacent composition did not survive as a carrier-off-killed invariant"
   },
   "claim_state": {
     "scalar_q_readout_confirmed_prospectively": true,
@@ -999,6 +1061,6 @@
     "catalytic_borrowing_established": false,
     "r2_restoration_established": false,
     "small_wall_crossed": false,
-    "current_ceiling": "exploratory composition replay-exclusion result only; balanced-alt replay failed, no new positive scientific claim beyond prior scalar/local differential results"
+    "current_ceiling": "exploratory phase-corrected composition reject; no new positive scientific claim beyond prior scalar/local differential results"
   }
 }
