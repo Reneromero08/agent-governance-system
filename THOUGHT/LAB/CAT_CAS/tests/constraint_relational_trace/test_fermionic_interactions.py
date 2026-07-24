@@ -69,7 +69,7 @@ def test_padded_two_variable_relation_remains_quadratic_or_lower() -> None:
     assert audit.quadratic_gaussian_closed
 
 
-def test_combined_hamiltonian_polynomial_is_public_and_exact() -> None:
+def test_aggregate_cubic_cancellation_does_not_remove_local_interactions() -> None:
     holo = ConstraintHolo.build(
         ("a", "b", "c"),
         (
@@ -79,7 +79,10 @@ def test_combined_hamiltonian_polynomial_is_public_and_exact() -> None:
     )
     polynomial = clause_hamiltonian_polynomial(holo)
     assert polynomial[frozenset()] == 1
-    assert polynomial[frozenset(("a", "b", "c"))] == 0 if False else True
+    assert frozenset(("a", "b", "c")) not in polynomial
+    assert max(map(len, polynomial)) == 2
     audit = audit_fermionic_interactions(holo)
     assert audit.local_max_degree == 3
-    assert audit.combined_term_count > 0
+    assert audit.combined_max_degree == 2
+    assert not audit.quadratic_gaussian_closed
+    assert audit.auxiliary_field_status == "EXACT_AUXILIARY_FIELD_SUM_OR_NON_GAUSSIAN_NATIVE_OPERATOR_REQUIRED"
