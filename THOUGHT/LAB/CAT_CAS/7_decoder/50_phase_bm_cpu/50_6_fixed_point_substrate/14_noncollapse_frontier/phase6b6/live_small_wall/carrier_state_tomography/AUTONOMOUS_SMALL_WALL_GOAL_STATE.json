@@ -45,6 +45,14 @@
       "raw_records": 16384,
       "source_death_receipts": 16384
     },
+    "family10h_relation_true_composition_replay_screen_v1_0": {
+      "failed_zero_row_packaging_attempt": "attempt_1",
+      "interpretable_attempt": "attempt_2",
+      "pair_observations": 2621440,
+      "physical_transactions": 2,
+      "raw_records": 10240,
+      "source_death_receipts": 10240
+    },
     "new_local_paired_differential_attempt_1_path_exists": true,
     "new_local_paired_differential_official_attempts": 1,
     "patched_full_local_paired_discovery_sweeps": 1,
@@ -72,7 +80,8 @@
     "relation_temporal_lifetime_mutation_discovery_attempts": 1,
     "relation_temporal_order_discovery_attempts": 1,
     "relation_temporal_source_off_discovery_attempts": 1,
-    "relation_transform_kill_discovery_attempts": 1
+    "relation_transform_kill_discovery_attempts": 1,
+    "relation_true_composition_replay_screen_attempts": 2
   },
   "autonomous_mode": {
     "active": true,
@@ -123,13 +132,13 @@
     "small_wall_state_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/SMALL_WALL_STATE.md",
     "small_wall_state_sha256": "6fb37e6eb46603fc38b0c1feada533a22423ae4da29ab2b563ad498ccbb761f8"
   },
-  "checkpoint_head": "ef08512e92d7f806261771ea8f5a77399c1ad456",
+  "checkpoint_head": "46e345055b606c314e8f3584bff62a5c73ec2027",
   "claim_state": {
     "catalytic_borrowing_established": false,
-    "current_ceiling": "exploratory offset-2 signed projection source-off screen reject; no new positive scientific claim beyond prior scalar/local differential results",
+    "current_ceiling": "exploratory true-composition replay screen rejected; no new positive scientific claim beyond prior scalar/local differential results",
     "full_carrier_state_tomography_established": false,
     "full_tomography_established": false,
-    "latest_exploratory_result": "EXPLORATORY_OFFSET2_HANDOFF_DECAY_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "latest_exploratory_result": "EXPLORATORY_TRUE_COMPOSITION_REPLAY_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
     "latest_positive_claim_ceiling": "PUBLIC_POST_SOURCE_LOCAL_PRIMARY_MINUS_SHAM_DIFFERENTIAL_CONFIRMED",
     "local_paired_differential_confirmed_prospectively": true,
     "physical_relational_memory_established": false,
@@ -157,22 +166,22 @@
     ]
   },
   "current_package": {
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_offset2_handoff_decay_discovery_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_true_composition_replay_screen_v1_0/attempt_2",
     "attempt_output_path_fresh": true,
-    "package_decision": "EXPLORATORY_OFFSET2_HANDOFF_DECAY_REJECTED_NO_SCIENTIFIC_CLAIM",
-    "package_id": "family10h_relation_offset2_handoff_decay_discovery_v1",
-    "package_manifest_sha256": "faeabacdc8fe1a6d78bbb1efa5eba8a61bcd1845e18759f7784a02fcbbe80b98",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_offset2_handoff_decay_discovery_v1",
-    "schedule_manifest_sha256": "7fbadc1161ac0b241c982b83871d2d7a5be974251fc5a52ddbd656c29f2cf448",
-    "source_authority_commit": "ef08512e92d7f806261771ea8f5a77399c1ad456",
+    "package_decision": "EXPLORATORY_TRUE_COMPOSITION_REPLAY_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "package_id": "family10h_relation_true_composition_replay_screen_v1",
+    "package_manifest_sha256": "c68436adadecb4dcadd5873eeb7c5b753c4a550b4687c802e36b539e647f412c",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_true_composition_replay_screen_v1",
+    "schedule_manifest_sha256": "d8b970aa56916fd7c5b48dca5b53da6141274eea20bce252c24380551f852cbd",
+    "source_authority_commit": "46e345055b606c314e8f3584bff62a5c73ec2027",
     "source_freeze_commit": null,
-    "source_schedule_package": "family10h_primary_minus_sham_local_paired_differential_v1",
+    "source_schedule_package": "family10h_relation_true_composition_replay_screen_v1",
     "threshold_contract_sha256": null,
-    "transaction_run_id": "family10h_relation_offset2_handoff_decay_discovery_v1_0"
+    "transaction_run_id": "family10h_relation_true_composition_replay_screen_v1_0"
   },
   "hypothesis_frontier": {
-    "active_frontier": "composition/order-coded replay-exclusion after offset-2 signed projection failed true source-off and alive-stratum stability",
-    "active_wall": "carrier/access-model selection below full Small Wall crossing",
+    "active_frontier": "true source-written composition remains source-off-killed and source-dead-preserved, but gapped and balanced-alt replay controls still replay too much to establish an independent boundary invariant",
+    "active_wall": "fixed-marginal temporal/composition carrier selection below full Small Wall crossing",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
       "branch": "codex/audio-frequency-wave-substrate",
@@ -180,7 +189,10 @@
       "smallest_cpu_pattern": "encode relation as AB versus BA under identical marginals, read a held-out paired q-vector after source closure, run exact reset, then reuse the actually restored carrier with opposite relation plus no-reset/wrong-reset/geometry-null controls",
       "transferable_idea": "fixed-marginal operation-relation mutation plus active inverse restoration/reuse, not audio evidence or thresholds"
     },
+    "current_best_negative_result": "EXPLORATORY_TRUE_COMPOSITION_REPLAY_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
     "current_blockers": [
+      "true source-written composition fixed the prior live-prep bug and source-off collapsed to 15.6% of adjacent magnitude, but gapped replay preserved 87.2% and balanced-alt preserved 137.8% of adjacent magnitude",
+      "the current true-composition order coordinate is source-authored and alive/dead preserved, but still replayable by adjacent/gapped/balanced composition structure rather than a clean carrier-off-killed boundary invariant",
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
       "net relation-minus-carrier-off orientation is positive but small at 18.7% of raw relation orientation",
@@ -212,7 +224,7 @@
       "offset-2 signed receiver projection source-off screen: aggregate source-off collapsed to 0.201x alive, but source-dead also collapsed to 0.176x alive, reset double-flush amplified to 2.265x alive, and source-off one-factor strata failed the 0.25x screen; candidate false",
       "offset-2 handoff/decay run rejected the static signed receiver projection: no-prep source-off amplified to 4.650x alive and all post-source-exit variants failed one-factor same-sign stability"
     ],
-    "current_next_experiment": "return to fixed-marginal composition/order-coded probes and attack replay mechanisms: require source-authored relation mutation, true carrier-off/source-off kill, neutral/random matched-marginal suppression, and stable one-factor strata before freezing any prospective law",
+    "current_next_experiment": "keep the source-authored composition writer, then attack route-length and balanced-alt replay directly: construct a minimal fixed-marginal composition mutation where adjacent and gapped share route segmentation but only the intended order/phase relation changes; do not freeze promotion gates until source-off kills and gapped/balanced controls collapse together",
     "goal_realignment": {
       "active_frontier": "fixed-marginal temporal/order-coded relation: source AB versus BA with identical spatial, work, timing, and histogram marginals",
       "confirmed_calibration": "local primary-minus-sham paired differential is prospectively confirmed at its existing claim ceiling",
@@ -1246,9 +1258,48 @@
     "relation_transform_kill_discovery_pair_observation_count": 524288,
     "relation_transform_kill_discovery_raw_record_count": 2048,
     "relation_transform_kill_discovery_result": "EXPLORATORY_ONLY_RELATION_QUERY_INVERSION_REVERSED_PRIMARY_BUT_CARRIER_OFF_DID_NOT_KILL",
-    "relation_transform_kill_discovery_source_death_receipt_count": 2048
+    "relation_transform_kill_discovery_source_death_receipt_count": 2048,
+    "relation_true_composition_replay_screen_analysis_sha256": "f0a0295074f48a0d5f5fcfae57c87ea2a2475db18eea0577463c3fe5dfd57734",
+    "relation_true_composition_replay_screen_archive_sha256": "78c97be57e38ccc470453229690f5237803a212c22871cd60a65730a20d067e7",
+    "relation_true_composition_replay_screen_archive_size": 57091464,
+    "relation_true_composition_replay_screen_attempt_1_archive_sha256": "cfecf19d496b7a6d73049e82436c30d4f9c200982a96b71c0363960525b758a2",
+    "relation_true_composition_replay_screen_attempt_1_archive_size": 963911,
+    "relation_true_composition_replay_screen_attempt_1_result": "PACKAGING_FAILURE_ZERO_ROW_SCHEDULE_PATH_MISMATCH_PRESERVED_NO_SCIENTIFIC_CLAIM",
+    "relation_true_composition_replay_screen_cleanup_passed": true,
+    "relation_true_composition_replay_screen_coordinates": {
+      "Omega_adjacent_composition_r0r1_minus_r1r0": -0.015805518372740662,
+      "Omega_balanced_alt_composition_phase_a_minus_phase_b": -0.02177938529822057,
+      "Omega_dead_composition_r0r1_minus_r1r0": -0.005567211199137542,
+      "Omega_gapped_composition_r0r1_minus_r1r0": -0.013787346773476095,
+      "Omega_source_off_composition_r0r1_minus_r1r0": -0.0024602926194284974,
+      "balanced_alt_abs_to_adjacent_composition_abs": 1.3779608352347918,
+      "dead_composition_abs_to_alive_composition_abs": 0.3522321171534087,
+      "gapped_composition_abs_to_adjacent_composition_abs": 0.8723122170579832,
+      "source_off_composition_abs_to_alive_composition_abs": 0.15566035617482155
+    },
+    "relation_true_composition_replay_screen_copyback_passed": true,
+    "relation_true_composition_replay_screen_interpretation": {
+      "adjacent_composition_order_nonzero": true,
+      "balanced_alt_replay_collapses_below_25pct_adjacent": false,
+      "composition_contrast_all_one_factor_strata_same_sign": true,
+      "composition_replay_exclusion_candidate": false,
+      "dead_preserves_at_least_25pct_alive_composition_order": true,
+      "exploratory_only": true,
+      "gapped_replay_collapses_below_25pct_adjacent": false,
+      "small_wall_crossed": false,
+      "source_off_collapses_below_25pct_alive_composition_order": true
+    },
+    "relation_true_composition_replay_screen_pair_observation_count": 2621440,
+    "relation_true_composition_replay_screen_physical_source_composition_prep_repaired": true,
+    "relation_true_composition_replay_screen_pmu_helper_sha256": "ba2fa74cb4f0554a9ac0cf0bf3192082fc05a106958356f587d1efae62b6f71d",
+    "relation_true_composition_replay_screen_raw_record_count": 10240,
+    "relation_true_composition_replay_screen_result": "EXPLORATORY_TRUE_COMPOSITION_REPLAY_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "relation_true_composition_replay_screen_runtime_sha256": "0f59474acee530a69c728eb268094f35567a49ae6d4499bea73dfaa0153680ff",
+    "relation_true_composition_replay_screen_schedule_manifest_sha256": "d8b970aa56916fd7c5b48dca5b53da6141274eea20bce252c24380551f852cbd",
+    "relation_true_composition_replay_screen_source_death_receipt_count": 10240,
+    "relation_true_composition_replay_screen_source_package_sha256": "c68436adadecb4dcadd5873eeb7c5b753c4a550b4687c802e36b539e647f412c"
   },
-  "origin_head": "ef08512e92d7f806261771ea8f5a77399c1ad456",
+  "origin_head": "46e345055b606c314e8f3584bff62a5c73ec2027",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "runtime_authority": {
     "RELATION_GRAMMAR.json": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
@@ -1274,5 +1325,5 @@
     "target_model": 10,
     "target_vendor": "AuthenticAMD"
   },
-  "updated_at": "2026-07-24T02:34:01.831397+00:00"
+  "updated_at": "2026-07-24T02:54:05.706524+00:00"
 }
