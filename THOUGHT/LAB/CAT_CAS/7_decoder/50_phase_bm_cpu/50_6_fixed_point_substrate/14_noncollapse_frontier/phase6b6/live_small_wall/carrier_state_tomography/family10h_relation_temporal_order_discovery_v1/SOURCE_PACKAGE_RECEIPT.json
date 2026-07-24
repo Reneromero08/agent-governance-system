@@ -1,0 +1,102 @@
+{
+  "created_at": "2026-07-23T23:58:58.860514+00:00",
+  "files": {
+    "source/RELATION_GRAMMAR.json": {
+      "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+      "size_bytes": 292071
+    },
+    "source/RELATION_GRAMMAR.sha256": {
+      "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+      "size_bytes": 66
+    },
+    "source/RELATION_GRAMMAR.tsv": {
+      "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+      "size_bytes": 360
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+      "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+      "size_bytes": 2277
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+      "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+      "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+      "size_bytes": 1866
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+      "size_bytes": 11263467
+    },
+    "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+      "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+      "size_bytes": 2635
+    },
+    "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+      "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+      "size_bytes": 3120
+    },
+    "source/RELATION_TEMPORAL_ORDER_SCHEDULE_MANIFEST.json": {
+      "sha256": "77284b369fd017c721eb67d05428f0c10bfda5e59879389a765ff95e3ffc2a93",
+      "size_bytes": 1909
+    },
+    "source/RUN_TEMPORAL_ORDER_DISCOVERY.sh": {
+      "sha256": "553715329262ad029627f6bdf48a6192e66bdea0aa4a8f5a5745beca0cba12b6",
+      "size_bytes": 8292
+    },
+    "source/TEMPORAL_ORDER_SCHEDULES/temporal_primary.tsv": {
+      "sha256": "35abf4541a6c7886f72bbeb0034aec591af71f8ed4bb48b00b06c80f864723be",
+      "size_bytes": 2249979
+    },
+    "source/TEMPORAL_ORDER_SCHEDULES/temporal_sham.tsv": {
+      "sha256": "35ed8f4dc307baff438bfb73bd95d8d89175b9f1c986fedfeb9573cb1f72ba02",
+      "size_bytes": 2206971
+    },
+    "source/relation_spatial_adjudication.py": {
+      "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "size_bytes": 864
+    },
+    "source/relation_spatial_physical_adjudication.py": {
+      "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+      "size_bytes": 42533
+    },
+    "source/relation_spatial_pmu_preflight": {
+      "sha256": "b747628a6f904a0e3436981b8f4793817b0c0650ef447a038732a4b2cae4b737",
+      "size_bytes": 42616
+    },
+    "source/relation_spatial_pmu_preflight.c": {
+      "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "size_bytes": 9376
+    },
+    "source/relation_spatial_public.py": {
+      "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+      "size_bytes": 32161
+    },
+    "source/relation_spatial_runtime": {
+      "sha256": "c40c5ee0e023647925a82aad2110fda483e2f9cc4efa1750f26aaca0f68ed4b2",
+      "size_bytes": 115096
+    },
+    "source/relation_spatial_runtime.c": {
+      "sha256": "bf28d52a4c262002b26b6146434cf773fa7aa7d2b4542b7dba45329d82265cc6",
+      "size_bytes": 53002
+    },
+    "source/relation_spatial_runtime.h": {
+      "sha256": "411ca1879404f668d59e4534220438a22fdd91d681d1cb9568bd452abf328bb1",
+      "size_bytes": 2843
+    },
+    "source/relation_spatial_target.py": {
+      "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+      "size_bytes": 91980
+    }
+  },
+  "path": "C:\\tmp\\family10h_relation_temporal_order_discovery_v1_0_source_package.tar.gz",
+  "run_id": "family10h_relation_temporal_order_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_TEMPORAL_ORDER_SOURCE_PACKAGE_V1",
+  "sha256": "1e5f3eee7ed0fd3133747e96f5c21b6e516d5dc80f0ed5d167ec45a5291e6a2b",
+  "size_bytes": 677916
+}

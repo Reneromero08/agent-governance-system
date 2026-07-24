@@ -1,0 +1,35 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Whether encoding r0/r1 as AB-versus-BA temporal order under identical spatial marginals exposes an oriented relation phase after local primary-minus-sham subtraction.",
+  "pair_sample_count": 256,
+  "rows_per_variant": 2048,
+  "run_id": "family10h_relation_temporal_order_discovery_v1_0",
+  "schedule_manifest_sha256": "d8bf1ea1ed4edeaae0963759e3e64a9758c8c42597c17c06dc013bbb812b8b72",
+  "schema": "FAMILY10H_RELATION_TEMPORAL_ORDER_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "temporal_primary": {
+      "expected_pair_observation_count": 524288,
+      "path": "TEMPORAL_ORDER_SCHEDULES/temporal_primary.tsv",
+      "query": "query_relation_pair",
+      "row_count": 2048,
+      "sha256": "35abf4541a6c7886f72bbeb0034aec591af71f8ed4bb48b00b06c80f864723be",
+      "size_bytes": 2249979,
+      "temporal_relation_coding": "r1_inverts_order_r0_preserves_order"
+    },
+    "temporal_sham": {
+      "expected_pair_observation_count": 524288,
+      "path": "TEMPORAL_ORDER_SCHEDULES/temporal_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 2048,
+      "sha256": "35ed8f4dc307baff438bfb73bd95d8d89175b9f1c986fedfeb9573cb1f72ba02",
+      "size_bytes": 2206971,
+      "temporal_relation_coding": "r1_inverts_order_r0_preserves_order"
+    }
+  }
+}
