@@ -1,6 +1,6 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T18:38:42-07:00",
+  "updated_at": "2026-07-23T18:53:37-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
   "checkpoint_head": "adb7f75a97050954e24555c7a9fd328df247f80d",
@@ -54,17 +54,17 @@
     ]
   },
   "current_package": {
-    "package_id": "family10h_relation_rspatial_full_schedule_source_off_reset_crosscheck_discovery_v1",
-    "transaction_run_id": "family10h_relation_rspatial_full_schedule_source_off_reset_crosscheck_discovery_v1_0",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_rspatial_full_schedule_source_off_reset_crosscheck_discovery_v1",
-    "package_decision": "EXPLORATORY_FULL_SCHEDULE_SOURCE_OFF_RESET_CROSSCHECK_REJECTED_NO_SCIENTIFIC_CLAIM",
-    "package_manifest_sha256": "5eca25b5e890b162b10881676ee562f0506b393ef58212b8fa8e645486a22df1",
-    "schedule_manifest_sha256": "3f3dfee1b9eca8d3514d56ebb907463dd76046381df5f1b1ad87cf3eaf95db59",
+    "package_id": "family10h_relation_loop_transport_source_off_screen_discovery_v1",
+    "transaction_run_id": "family10h_relation_loop_transport_source_off_screen_discovery_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_loop_transport_source_off_screen_discovery_v1",
+    "package_decision": "EXPLORATORY_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "package_manifest_sha256": "32fb9f9582e62cdcd3866bf4dc1f6b36b5e678648deb28776390960c6ad53c09",
+    "schedule_manifest_sha256": "95ce1ca8022ce52b75bbde6cb72d63fa7be885757ee19c0dec3b2366b5268f3c",
     "threshold_contract_sha256": null,
     "source_schedule_package": "family10h_primary_minus_sham_local_paired_differential_v1",
-    "source_authority_commit": "3d426d31fefea659922133eacd8929f1ea39f14b",
+    "source_authority_commit": "458dec5660496033c2884c86d727a708a4b01ed9",
     "source_freeze_commit": null,
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_rspatial_full_schedule_source_off_reset_crosscheck_discovery_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_loop_transport_source_off_screen_discovery_v1_0/attempt_1",
     "attempt_output_path_fresh": true
   },
   "current_observable": {
@@ -161,6 +161,13 @@
       "raw_records": 16384,
       "pair_observations": 4194304,
       "source_death_receipts": 16384
+    },
+    "relation_loop_transport_source_off_screen_discovery_attempts": 1,
+    "family10h_relation_loop_transport_source_off_screen_discovery_v1_0": {
+      "physical_transactions": 1,
+      "raw_records": 8192,
+      "pair_observations": 2097152,
+      "source_death_receipts": 8192
     }
   },
   "latest_retained_evidence": {
@@ -982,6 +989,48 @@
       "source_death_kills_below_25pct_alive_D": false,
       "source_off_kills_aggregate_below_25pct_alive_D": false,
       "source_off_kills_all_one_factor_strata_below_25pct_alive_D": false
+    },
+    "relation_loop_transport_source_off_screen_result": "EXPLORATORY_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "relation_loop_transport_source_off_screen_archive_sha256": "018b61c8a9b19063fcba17ef33ceb33e2b61deaeb015aa58e7ee03b9d278a6eb",
+    "relation_loop_transport_source_off_screen_archive_size": 45529982,
+    "relation_loop_transport_source_off_screen_analysis_sha256": "8dc8454408e98ac4b7bd123d9ab348885cd037b8167d137917ac2d5445316331",
+    "relation_loop_transport_source_off_screen_raw_record_count": 8192,
+    "relation_loop_transport_source_off_screen_pair_observation_count": 2097152,
+    "relation_loop_transport_source_off_screen_source_death_receipt_count": 8192,
+    "relation_loop_transport_source_off_screen_runtime_sha256": "c56014b1480ad770ae5f5150caf042471f586b1b1dfa9608491b17427fca5a6a",
+    "relation_loop_transport_source_off_screen_pmu_helper_sha256": "bb8592803d342c605e9266a35c7e3f3ce49ef69b549ddd636d7c1abccb91c539",
+    "relation_loop_transport_source_off_screen_schedule_manifest_sha256": "95ce1ca8022ce52b75bbde6cb72d63fa7be885757ee19c0dec3b2366b5268f3c",
+    "relation_loop_transport_source_off_screen_source_package_sha256": "32fb9f9582e62cdcd3866bf4dc1f6b36b5e678648deb28776390960c6ad53c09",
+    "relation_loop_transport_source_off_screen_copyback_passed": true,
+    "relation_loop_transport_source_off_screen_cleanup_passed": true,
+    "relation_loop_transport_source_off_screen_coordinates": {
+      "D_dead_loop_r0r1_primary_minus_sham": 0.08305012316139107,
+      "D_dead_loop_r1r0_primary_minus_sham": 0.07224152672544432,
+      "D_gapped_loop_r0r1_primary_minus_sham": 0.07636573887405483,
+      "D_gapped_loop_r1r0_primary_minus_sham": 0.09768184162500446,
+      "D_loop_r0r1_primary_minus_sham": 0.09290547142014784,
+      "D_loop_r1r0_primary_minus_sham": 0.09600610061832852,
+      "D_source_off_loop_r0r1_primary_minus_sham": 0.11963249775886071,
+      "D_source_off_loop_r1r0_primary_minus_sham": 0.1120317332350828,
+      "Omega_alive_loop_r0r1_minus_r1r0": -0.0031006291981806877,
+      "Omega_dead_loop_r0r1_minus_r1r0": 0.010808596435946755,
+      "Omega_gapped_loop_r0r1_minus_r1r0": -0.021316102750949625,
+      "Omega_source_off_loop_r0r1_minus_r1r0": 0.00760076452377792,
+      "dead_omega_abs_to_alive_omega_abs": 3.48593648098546,
+      "gapped_omega_abs_to_alive_omega_abs": 6.874766825861336,
+      "source_off_omega_abs_to_alive_omega_abs": 2.4513619778326645
+    },
+    "relation_loop_transport_source_off_screen_interpretation": {
+      "alive_all_one_factor_strata_same_sign": false,
+      "alive_loop_omega_nonzero": true,
+      "dead_preserves_at_least_25pct_alive_omega": true,
+      "exploratory_only": true,
+      "gapped_all_one_factor_strata_below_25pct": false,
+      "gapped_collapses_below_25pct_alive_omega": false,
+      "loop_transport_source_off_screen_candidate": false,
+      "small_wall_crossed": false,
+      "source_off_all_one_factor_strata_below_25pct": false,
+      "source_off_collapses_below_25pct_alive_omega": false
     }
   },
   "hypothesis_frontier": {
@@ -1052,7 +1101,7 @@
       "higher compatibility or obstruction surface"
     ],
     "leading_mechanism": "amplitude-dominant spatial carrier response: source action can write a persistent carrier amplitude/state, spatial boundary readout exposes it, and explicit reset can suppress it in some full-schedule experiments",
-    "strongest_candidate_coordinate": "none currently clean beyond the confirmed scalar/local differential baseline; corrected composition failed, and full-schedule source-off/reset crosscheck failed because source-off amplified D",
+    "strongest_candidate_coordinate": "none currently clean beyond the confirmed scalar/local differential baseline; loop-transport orientation also failed the source-off-first screen",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
       "branch": "codex/audio-frequency-wave-substrate",
@@ -1085,9 +1134,10 @@
       "fixed-marginal AB-versus-BA source operation order as a clean source-authored holographic candidate; alive D_order was nonzero but source-off preserved 56.9% of it and neutral/random controls were 5.77x/3.96x larger than the order contrast",
       "plain fixed-marginal AB-versus-BA order remains insufficient; composition-loop R0->R1 versus R1->R0 is now the leading exploratory candidate but neutral/random D amplitudes still require replay-exclusion hardening before promotion",
       "uniform adjacent R0_then_R1 versus R1_then_R0 composition after fixing live source prep; corrected phase package collapsed alive Psi to 0.004215 and source-off/gapped controls were larger than alive",
-      "full-schedule source-off/reset crosscheck as a source-authored persistent boundary invariant; source-off D was 1.631x alive D and reset_double_flush failed all-strata kill with max matched-stratum ratio 0.505"
+      "full-schedule source-off/reset crosscheck as a source-authored persistent boundary invariant; source-off D was 1.631x alive D and reset_double_flush failed all-strata kill with max matched-stratum ratio 0.505",
+      "loop-transport R0->R1 versus R1->R0 as a source-authored relation-code screen; alive Omega was -0.00310, source-off Omega was 2.451x alive, gapped Omega was 6.875x alive, and alive strata did not keep one sign"
     ],
-    "current_next_experiment": "search for a relation code whose no-source-prep baseline is killed before worrying about reset/reuse: prioritize source-off-first carrier-off screens for noncommutative/holonomy-style codes with identical receiver schedule and matched scalar marginals",
+    "current_next_experiment": "stop using orientation differences whose alive Omega is small relative to source-off/gapped; next screen should change the receiver projection or introduce an explicit source-authored carrier-off differential, not another same-projection orientation label",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
@@ -1115,9 +1165,10 @@
       "composition replay-exclusion discovery attempt_2: adjacent Omega nonzero, source-off collapsed to 0.134x, dead preserved 0.382x, gapped collapsed to 0.029x, but balanced-alt replay remained 0.379x, so the strict replay-exclusion candidate failed and Small Wall was not crossed",
       "replay-exclusion runner defect found: copied composition prep selector had only affected the synthetic/default path; the live child was still using base relation_spatial_prepare for non-source-off controls before the phase-correction package fixed it",
       "phase-correction discovery with live composition prep rejected the composition-loop route: adjacent Omega = -0.006573912488253036, balanced Omega = -0.01078925326143014, Psi_alive = 0.004215340773177104, source-off Psi ratio = 4.791530059904371, gapped Psi ratio = 2.3982813595647414, corrected strata same-sign false",
-      "full-schedule source-off/reset crosscheck: alive D = 0.06744933436995737, dead D = 0.03804386776900461, source-off D = 0.11000768508560255 (1.631x alive), reset_double_flush D = 0.01306513756620565 (0.194x aggregate but 0.505 max stratum); candidate false"
+      "full-schedule source-off/reset crosscheck: alive D = 0.06744933436995737, dead D = 0.03804386776900461, source-off D = 0.11000768508560255 (1.631x alive), reset_double_flush D = 0.01306513756620565 (0.194x aggregate but 0.505 max stratum); candidate false",
+      "loop-transport source-off screen: Omega_alive = -0.0031006291981806877, Omega_source_off = 0.00760076452377792 (2.451x alive), Omega_gapped = -0.021316102750949625 (6.875x alive), alive one-factor strata same-sign false; candidate false"
     ],
-    "active_frontier": "source-off-first relation-code search: source-written amplitude primitive remains real, but the current full-schedule R-spatial D is not source-authored under no-prep control"
+    "active_frontier": "receiver-projection redesign search: existing same-projection spatial/loop orientation labels are dominated by no-prep and gapped geometry, while the scalar/local differential primitive remains confirmed"
   },
   "claim_state": {
     "scalar_q_readout_confirmed_prospectively": true,
@@ -1127,6 +1178,6 @@
     "catalytic_borrowing_established": false,
     "r2_restoration_established": false,
     "small_wall_crossed": false,
-    "current_ceiling": "exploratory source-off/reset crosscheck reject; no new positive scientific claim beyond prior scalar/local differential results"
+    "current_ceiling": "exploratory loop-transport source-off screen reject; no new positive scientific claim beyond prior scalar/local differential results"
   }
 }
