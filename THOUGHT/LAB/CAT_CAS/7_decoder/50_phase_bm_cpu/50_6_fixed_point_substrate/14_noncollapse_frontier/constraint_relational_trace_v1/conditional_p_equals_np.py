@@ -1,12 +1,20 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from enum import Enum
 from typing import Callable, Mapping
 
 from .catalytic_existential_trace import reference_existential_trace
 from .constraint_holo import ClauseRelation, ConstraintHolo, ConstraintHoloError, Literal
 
-DecisionBoundary = Callable[[ConstraintHolo], bool]
+
+class BoundaryDecision(str, Enum):
+    VALID_SAT = "VALID_SAT"
+    VALID_UNSAT = "VALID_UNSAT"
+    INVALID_CARRIER = "INVALID_CARRIER"
+
+
+DecisionBoundary = Callable[[ConstraintHolo], BoundaryDecision]
 
 
 @dataclass(frozen=True)
@@ -17,10 +25,12 @@ class RestrictedConstraintHolo:
 
 @dataclass(frozen=True)
 class WitnessExtractionResult:
-    satisfiable: bool
+    valid: bool
+    satisfiable: bool | None
     witness: Mapping[str, bool] | None
     decision_calls: int
     witness_verified: bool
+    boundary_status: BoundaryDecision
     extraction_scope: str
     conditional_theorem: str
 
@@ -60,8 +70,34 @@ def restrict_public_relation(
     )
 
 
-def reference_decision_boundary(holo: ConstraintHolo) -> bool:
-    return reference_existential_trace(holo).satisfiable
+def reference_decision_boundary(holo: ConstraintHolo) -> BoundaryDecision:
+    result = reference_existential_trace(holo)
+    if not result.valid:
+        return BoundaryDecision.INVALID_CARRIER
+    return BoundaryDecision.VALID_SAT if result.satisfiable else BoundaryDecision.VALID_UNSAT
+
+
+def _read_boundary(
+    holo: ConstraintHolo,
+    decision_boundary: DecisionBoundary,
+) -> BoundaryDecision:
+    decision = decision_boundary(holo)
+    if not isinstance(decision, BoundaryDecision):
+        return BoundaryDecision.INVALID_CARRIER
+    return decision
+
+
+def _invalid_result(calls: int) -> WitnessExtractionResult:
+    return WitnessExtractionResult(
+        valid=False,
+        satisfiable=None,
+        witness=None,
+        decision_calls=calls,
+        witness_verified=False,
+        boundary_status=BoundaryDecision.INVALID_CARRIER,
+        extraction_scope="classical_post_boundary_self_reduction",
+        conditional_theorem="UNIFORM_POLYNOMIAL_CET_DECISION_IMPLIES_3SAT_IN_P",
+    )
 
 
 def extract_witness_by_boundary_self_reduction(
@@ -70,17 +106,22 @@ def extract_witness_by_boundary_self_reduction(
 ) -> WitnessExtractionResult:
     """Render a conventional witness using only polynomially many exact decisions.
 
-    This routine belongs outside the native core. It proves that an exact polynomial
-    decision boundary is sufficient for the conventional witness required by the Wall.
+    The boundary is total. Any invalid or unrecognized result terminates extraction and
+    can never be interpreted as SAT or UNSAT.
     """
 
     calls = 1
-    if not decision_boundary(holo):
+    initial_decision = _read_boundary(holo, decision_boundary)
+    if initial_decision is BoundaryDecision.INVALID_CARRIER:
+        return _invalid_result(calls)
+    if initial_decision is BoundaryDecision.VALID_UNSAT:
         return WitnessExtractionResult(
+            valid=True,
             satisfiable=False,
             witness=None,
             decision_calls=calls,
             witness_verified=False,
+            boundary_status=BoundaryDecision.VALID_UNSAT,
             extraction_scope="classical_post_boundary_self_reduction",
             conditional_theorem="UNIFORM_POLYNOMIAL_CET_DECISION_IMPLIES_3SAT_IN_P",
         )
@@ -88,12 +129,14 @@ def extract_witness_by_boundary_self_reduction(
     fixed: dict[str, bool] = {}
     for variable in holo.variables:
         false_restriction = restrict_public_relation(holo, {**fixed, variable: False})
-        false_branch_satisfiable = False
+        false_decision = BoundaryDecision.VALID_UNSAT
         if not false_restriction.contradiction:
             assert false_restriction.holo is not None
             calls += 1
-            false_branch_satisfiable = decision_boundary(false_restriction.holo)
-        if false_branch_satisfiable:
+            false_decision = _read_boundary(false_restriction.holo, decision_boundary)
+            if false_decision is BoundaryDecision.INVALID_CARRIER:
+                return _invalid_result(calls)
+        if false_decision is BoundaryDecision.VALID_SAT:
             fixed[variable] = False
             continue
 
@@ -102,7 +145,10 @@ def extract_witness_by_boundary_self_reduction(
             raise ConstraintHoloError("exact decision boundary produced an inconsistent self-reduction")
         assert true_restriction.holo is not None
         calls += 1
-        if not decision_boundary(true_restriction.holo):
+        true_decision = _read_boundary(true_restriction.holo, decision_boundary)
+        if true_decision is BoundaryDecision.INVALID_CARRIER:
+            return _invalid_result(calls)
+        if true_decision is not BoundaryDecision.VALID_SAT:
             raise ConstraintHoloError("exact decision boundary failed both restriction branches")
         fixed[variable] = True
 
@@ -110,10 +156,12 @@ def extract_witness_by_boundary_self_reduction(
     if not verified:
         raise ConstraintHoloError("rendered witness failed the public relation")
     return WitnessExtractionResult(
+        valid=True,
         satisfiable=True,
         witness=fixed,
         decision_calls=calls,
         witness_verified=True,
+        boundary_status=BoundaryDecision.VALID_SAT,
         extraction_scope="classical_post_boundary_self_reduction",
         conditional_theorem="UNIFORM_POLYNOMIAL_CET_DECISION_IMPLIES_3SAT_IN_P",
     )
