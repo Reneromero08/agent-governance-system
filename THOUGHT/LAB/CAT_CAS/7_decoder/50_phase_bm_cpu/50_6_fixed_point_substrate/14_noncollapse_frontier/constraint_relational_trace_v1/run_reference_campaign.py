@@ -19,6 +19,9 @@ if __package__ in (None, ""):
         reference_decision_boundary,
     )
     from constraint_relational_trace_v1.constraint_holo import ClauseRelation, ConstraintHolo, Literal
+    from constraint_relational_trace_v1.mpo_configuration_audit import (
+        audit_control_symbol_mpo_projection,
+    )
     from constraint_relational_trace_v1.oracle_determinant_compensation import (
         audit_oracle_determinant_compensation,
     )
@@ -26,6 +29,10 @@ if __package__ in (None, ""):
         ParityConstraint,
         ParityInstance,
         calibrate_parity_holonomy,
+    )
+    from constraint_relational_trace_v1.relational_width_audit import (
+        audit_residual_relation_width,
+        equality_relation_holo,
     )
     from constraint_relational_trace_v1.topological_rank_latch import (
         audit_topological_rank_latch,
@@ -42,8 +49,10 @@ else:
         reference_decision_boundary,
     )
     from .constraint_holo import ClauseRelation, ConstraintHolo, Literal
+    from .mpo_configuration_audit import audit_control_symbol_mpo_projection
     from .oracle_determinant_compensation import audit_oracle_determinant_compensation
     from .parity_holonomy import ParityConstraint, ParityInstance, calibrate_parity_holonomy
+    from .relational_width_audit import audit_residual_relation_width, equality_relation_holo
     from .topological_rank_latch import audit_topological_rank_latch
 
 
@@ -111,6 +120,24 @@ def build_campaign_record() -> dict[str, object]:
         impossible_equal_dimension, ancillary_qubits=2
     )
 
+    mpo_projection = audit_control_symbol_mpo_projection(
+        control_states=4,
+        alphabet_symbols=2,
+        bounded_tape_cells=8,
+    )
+    equality_pairs = 5
+    equality_holo = equality_relation_holo(equality_pairs)
+    grouped_order = tuple(f"x{index}" for index in range(1, equality_pairs + 1)) + tuple(
+        f"y{index}" for index in range(1, equality_pairs + 1)
+    )
+    interleaved_order = tuple(
+        variable
+        for index in range(1, equality_pairs + 1)
+        for variable in (f"x{index}", f"y{index}")
+    )
+    grouped_width = audit_residual_relation_width(equality_holo, grouped_order)
+    interleaved_width = audit_residual_relation_width(equality_holo, interleaved_order)
+
     gates = {
         "exact_open_relation": unique_boundary.witness_count == 1,
         "unsat_reference": not impossible_boundary.satisfiable,
@@ -148,6 +175,15 @@ def build_campaign_record() -> dict[str, object]:
             and determinant_compensation_sat.compensation_identity_verified
             and determinant_compensation_unsat.compensation_identity_verified
         ),
+        "historical_mpo_projection_rejected": (
+            not mpo_projection.exact_configuration_injective
+            and mpo_projection.invariant_scope
+            == "finite_control_symbol_transition_graph_only"
+        ),
+        "residual_relation_width_exposes_order_dependence": (
+            grouped_width.maximum_width == 2**equality_pairs
+            and interleaved_width.maximum_width <= 3
+        ),
         "native_cet_not_smuggled": not dilation.native_existential_trace_established,
     }
 
@@ -172,6 +208,9 @@ def build_campaign_record() -> dict[str, object]:
         "topological_rank_latch_unsat": asdict(topological_unsat),
         "oracle_determinant_compensation_sat": asdict(determinant_compensation_sat),
         "oracle_determinant_compensation_unsat": asdict(determinant_compensation_unsat),
+        "historical_mpo_projection_audit": asdict(mpo_projection),
+        "grouped_residual_width": asdict(grouped_width),
+        "interleaved_residual_width": asdict(interleaved_width),
         "proof_state": {
             "semantic_object": "ESTABLISHED_REFERENCE",
             "parity_holonomy": "ESTABLISHED_NATIVE_Z2_CALIBRATION",
@@ -181,8 +220,11 @@ def build_campaign_record() -> dict[str, object]:
             "topological_determinant_winding": "ESTABLISHED_COMPLETE_REFERENCE_INVARIANT",
             "full_reversible_oracle_determinant": "ESTABLISHED_FORMULA_INDEPENDENT_NULL",
             "clean_subspace_determinant": "ESTABLISHED_RETAINS_SAT_INDEX",
+            "historical_mpo_control_symbol_projection": "REJECTED_AS_CONFIGURATION_CARRIER",
+            "residual_relation_width": "ESTABLISHED_PRESENTATION_SENSITIVE_CONTROL",
             "polynomial_restricted_determinant_sensor": "NOT_ESTABLISHED",
             "polynomial_native_determinant_line_sensor": "NOT_ESTABLISHED",
+            "universal_polynomial_bond_dimension": "NOT_ESTABLISHED",
             "native_relation_valued_transport": "NOT_ESTABLISHED_FOR_GENERAL_CLAUSES",
             "catalytic_existential_trace": "NOT_ESTABLISHED",
             "polynomial_resource_theorem": "NOT_ESTABLISHED",
