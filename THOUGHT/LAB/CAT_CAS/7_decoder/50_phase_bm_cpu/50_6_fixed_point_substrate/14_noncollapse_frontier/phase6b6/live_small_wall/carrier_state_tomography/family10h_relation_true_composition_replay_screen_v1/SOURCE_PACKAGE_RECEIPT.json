@@ -1,0 +1,174 @@
+{
+  "created_at": "2026-07-24T02:45:40.316317+00:00",
+  "files": {
+    "source/RELATION_COMPOSITION_REPLAY_EXCLUSION_SCHEDULE_MANIFEST.json": {
+      "sha256": "96d7c2fa1c2a68152f0d5185c63742715b794a7ea4c6c9c43fe0dcc9f6f8de7c",
+      "size_bytes": 15218
+    },
+    "source/RELATION_GRAMMAR.json": {
+      "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+      "size_bytes": 292071
+    },
+    "source/RELATION_GRAMMAR.sha256": {
+      "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+      "size_bytes": 66
+    },
+    "source/RELATION_GRAMMAR.tsv": {
+      "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+      "size_bytes": 360
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+      "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+      "size_bytes": 2277
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+      "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+      "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+      "size_bytes": 1866
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+      "size_bytes": 11263467
+    },
+    "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+      "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+      "size_bytes": 2635
+    },
+    "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+      "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+      "size_bytes": 3120
+    },
+    "source/RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh": {
+      "sha256": "5e3cba732fc74a88d1d7bb93c8affee6f2364125994db9c4be07536a793bf4d1",
+      "size_bytes": 9326
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/adjacent_r0r1_primary.tsv": {
+      "sha256": "e33a0d7b8d44589ae383539ac1ef4adc8755dd930079a15e899bdf3eacdcc2b5",
+      "size_bytes": 649375
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/adjacent_r0r1_sham.tsv": {
+      "sha256": "10edfb855cc1b8ff4e3e6e5c4aad925da9515c0b06d53ce174480954ad0d5243",
+      "size_bytes": 632479
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/adjacent_r1r0_primary.tsv": {
+      "sha256": "c0e4d116ec6c86030b7b25042d8c3f55b310a511f2dcc9648b3b9a76e72bfd69",
+      "size_bytes": 649375
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/adjacent_r1r0_sham.tsv": {
+      "sha256": "d337653cde3100c79d4c1d169f91a8fc1ac46c2d4eac51fd9aaecb2686e24aa1",
+      "size_bytes": 632479
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/balanced_alt_a_primary.tsv": {
+      "sha256": "5741bf374210ecc7e12d0b0f212b4ef9b994a894c3d3d76a6cab430a0315a52e",
+      "size_bytes": 661663
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/balanced_alt_a_sham.tsv": {
+      "sha256": "6d20b3b5d092db112f6e79a80f882aa9c91af31c03caf36a10a3811669817676",
+      "size_bytes": 644767
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/balanced_alt_b_primary.tsv": {
+      "sha256": "d004c175813d819e4f0964fd5493d65c185695c249b820ba2f8486eb67eba8f2",
+      "size_bytes": 661663
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/balanced_alt_b_sham.tsv": {
+      "sha256": "8863215b0e413bc2e784c9eee667020c9f82b54ee86e2db835af00a9ae956f17",
+      "size_bytes": 644767
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/dead_adjacent_r0r1_primary.tsv": {
+      "sha256": "602f53ae2fdd8f23badd23a1fabf043e443659baca8e518c4e9ce8b07a5cbe31",
+      "size_bytes": 672415
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/dead_adjacent_r0r1_sham.tsv": {
+      "sha256": "1d39132da952afb7c48a10c6854e5b720f32f287573807fe1348a0abe5a6dd94",
+      "size_bytes": 655519
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/dead_adjacent_r1r0_primary.tsv": {
+      "sha256": "4beb454d58f528721ab7ab307c10ba84e9f4b4656bb56c6b62888fa5ebc75fbe",
+      "size_bytes": 672415
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/dead_adjacent_r1r0_sham.tsv": {
+      "sha256": "eee5f57690efa575a2adba512f01d04c07b784e4e46dd0a1f96e7b9ffbb8e44f",
+      "size_bytes": 655519
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/gapped_r0r1_primary.tsv": {
+      "sha256": "08d97960cbad910a3c1cccbc8947ce6f1901306152231e194a50391304800ce0",
+      "size_bytes": 648351
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/gapped_r0r1_sham.tsv": {
+      "sha256": "e2dfdb2c4fbf99bd090f0f84e2d2fa11b7371481c1b723cfdc35715b03db889e",
+      "size_bytes": 631455
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/gapped_r1r0_primary.tsv": {
+      "sha256": "041f901013129f5a4d5f0025258704a24ee0b7421c965fab43553f3ad7bd4a80",
+      "size_bytes": 648351
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/gapped_r1r0_sham.tsv": {
+      "sha256": "bd47b2812622ab38459df5a3cec39f4aec14f637040b5e3455e537b49636a7a5",
+      "size_bytes": 631455
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/source_off_adjacent_r0r1_primary.tsv": {
+      "sha256": "215de8209ae767c5e3d5fda5b13a216c81ff46a2ab1b8ad75936447894b51ad4",
+      "size_bytes": 700063
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/source_off_adjacent_r0r1_sham.tsv": {
+      "sha256": "e2392e8aa22d027bffaddc976dc276c2bb96fcafa074909c7d52ca0f013922cb",
+      "size_bytes": 683167
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/source_off_adjacent_r1r0_primary.tsv": {
+      "sha256": "a428f2f971ab687446eb0b19f708b74ae7692dc744f15fcaae27267fecee4719",
+      "size_bytes": 700063
+    },
+    "source/TRUE_COMPOSITION_REPLAY_SCREEN_SCHEDULES/source_off_adjacent_r1r0_sham.tsv": {
+      "sha256": "d0c5985704b46eb3b281c1abbe3ac945c22cf912659aea961d6440f6df876cbc",
+      "size_bytes": 683167
+    },
+    "source/relation_spatial_adjudication.py": {
+      "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "size_bytes": 864
+    },
+    "source/relation_spatial_physical_adjudication.py": {
+      "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+      "size_bytes": 42533
+    },
+    "source/relation_spatial_pmu_preflight": {
+      "sha256": "ba2fa74cb4f0554a9ac0cf0bf3192082fc05a106958356f587d1efae62b6f71d",
+      "size_bytes": 42632
+    },
+    "source/relation_spatial_pmu_preflight.c": {
+      "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "size_bytes": 9376
+    },
+    "source/relation_spatial_public.py": {
+      "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+      "size_bytes": 32161
+    },
+    "source/relation_spatial_runtime": {
+      "sha256": "0f59474acee530a69c728eb268094f35567a49ae6d4499bea73dfaa0153680ff",
+      "size_bytes": 160792
+    },
+    "source/relation_spatial_runtime.c": {
+      "sha256": "9dc9a51575fc178cf349b2b0d11e648c9fd3b59370cc95ceecba780c8ba72877",
+      "size_bytes": 70437
+    },
+    "source/relation_spatial_runtime.h": {
+      "sha256": "725b74bf0041d3e6e4e9c628341340be7662d95968b1297c66d170fe41a74603",
+      "size_bytes": 4382
+    },
+    "source/relation_spatial_target.py": {
+      "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+      "size_bytes": 91980
+    }
+  },
+  "path": "C:\\tmp\\family10h_relation_true_composition_replay_screen_v1_0_source_package.tar.gz",
+  "run_id": "family10h_relation_true_composition_replay_screen_v1_0",
+  "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_SOURCE_PACKAGE_V1",
+  "sha256": "c68436adadecb4dcadd5873eeb7c5b753c4a550b4687c802e36b539e647f412c",
+  "size_bytes": 928094
+}
