@@ -1,0 +1,70 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Does the signed offset receiver projection preserve a source-written relation-matrix contrast while source-off collapses the same projection before reset/reuse claims?",
+  "pair_sample_count": 256,
+  "receiver_projection": "matrix contrast of mean(B_first_touch_cycles - A_first_touch_cycles) at signed offset sweep",
+  "rows_per_variant": 480,
+  "run_id": "family10h_relation_offset16_origin2048_ab_lifecycle_probe_v1_0",
+  "schedule_manifest_sha256": "173dd04a50120dbd985f3154a6c48e6b1a02e58d8ee0031c6eb5906a0d573693",
+  "schema": "FAMILY10H_RELATION_OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "alive_offset16_signed": {
+      "expected_pair_observation_count": 122880,
+      "focus_cyclic_origin": "2048",
+      "focus_query_order": "AB",
+      "lifecycle": "alive",
+      "offset": 16,
+      "path": "OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_SCHEDULES/alive_offset16_signed.tsv",
+      "query": "source_on_offset_16_control",
+      "row_count": 480,
+      "sha256": "0ce6c71398d31b1f4ed6c33bffeadf94444bf0473bf5cd0acc15ed69ca9f3296",
+      "size_bytes": 494899,
+      "source_complete_block_count": 64
+    },
+    "dead_offset16_signed": {
+      "expected_pair_observation_count": 122880,
+      "focus_cyclic_origin": "2048",
+      "focus_query_order": "AB",
+      "lifecycle": "dead",
+      "offset": 16,
+      "path": "OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_SCHEDULES/dead_offset16_signed.tsv",
+      "query": "dead_offset_16_control",
+      "row_count": 480,
+      "sha256": "20e3f6a50bee622fed993f46172517b1a7e32c99a7da5d2a88f41b3f7365e0a2",
+      "size_bytes": 496819,
+      "source_complete_block_count": 64
+    },
+    "reset_double_flush_offset16_signed": {
+      "expected_pair_observation_count": 122880,
+      "focus_cyclic_origin": "2048",
+      "focus_query_order": "AB",
+      "lifecycle": "reset_double_flush",
+      "offset": 16,
+      "path": "OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_SCHEDULES/reset_double_flush_offset16_signed.tsv",
+      "query": "reset_double_flush_offset_16_control",
+      "row_count": 480,
+      "sha256": "75fd3dcefbf2a53fa8bcb70b244b7c37abbe2b443ce5af376988a3d84c836ea5",
+      "size_bytes": 543859,
+      "source_complete_block_count": 64
+    },
+    "source_off_offset16_signed": {
+      "expected_pair_observation_count": 122880,
+      "focus_cyclic_origin": "2048",
+      "focus_query_order": "AB",
+      "lifecycle": "source_off",
+      "offset": 16,
+      "path": "OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_SCHEDULES/source_off_offset16_signed.tsv",
+      "query": "source_off_offset_16_control",
+      "row_count": 480,
+      "sha256": "062d1a21176de1176f225299b03b3a5e10e26933e27530c67585125484d98f24",
+      "size_bytes": 516979,
+      "source_complete_block_count": 64
+    }
+  }
+}
