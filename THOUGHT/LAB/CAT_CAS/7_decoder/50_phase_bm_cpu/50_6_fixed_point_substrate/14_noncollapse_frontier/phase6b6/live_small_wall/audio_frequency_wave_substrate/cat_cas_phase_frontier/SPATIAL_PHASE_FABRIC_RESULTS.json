@@ -7,6 +7,9 @@
     "hostname": "catcas",
     "cpu": "AMD Phenom II X6 1090T",
     "process_cpu_allowed_list": "0-1",
+    "cgroup_effective_cpu_list": "0-5",
+    "all_core_benchmark_process_affinity": "0-5",
+    "system_configuration_changed": false,
     "compiler": "gcc 14.2.0",
     "qualification_flags": "-O3 -march=native -std=c11 -Wall -Wextra -Werror -pedantic -pthread",
     "contact_scope": "raw source transfer to /tmp, userspace compilation, sanitizer execution, and CPU execution only"
@@ -150,6 +153,42 @@
     "phase_thread_1_over_scalar_thread_1": 9.248212,
     "phase_thread_2_over_strong_scalar_thread_1": 10.661082,
     "parallel_speed_advantage": false,
+    "c5_advantage": false
+  },
+  "all_core_timing_correction": {
+    "native_thread_1_ns": [
+      114506420,
+      114427905,
+      114374527,
+      114495454,
+      114398793,
+      114525896,
+      114397979
+    ],
+    "native_thread_6_ns": [
+      66593768,
+      68447496,
+      71359502,
+      63241894,
+      63467508,
+      61792107,
+      77028334
+    ],
+    "reference_thread_1_ns": [
+      12396854,
+      12372273,
+      12410478,
+      12364389,
+      12340990,
+      12398015,
+      12355507
+    ],
+    "native_thread_1_median_ns": 114427905,
+    "native_thread_6_median_ns": 66593768,
+    "reference_thread_1_median_ns": 12372273,
+    "native_six_core_speedup": 1.718297,
+    "native_thread_6_over_strong_scalar_thread_1": 5.382501,
+    "parallel_wall_time_reduction": true,
     "c5_advantage": false
   },
   "controls": {

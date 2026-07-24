@@ -313,24 +313,76 @@ the checks to all 81 `F3` PCSWAP cases, 25,957 layer partitions, a 771-layer
 ThreadSanitizer stress, and a 1,088,000-gate recurrence. Verdict: `PASS`, with
 no remaining findings.
 
-On the target process's available CPUs `0-1`, seven descriptive matched runs
-gave a one-thread phase median of `114,396,958 ns` and a compact scalar median
-of `12,369,630 ns`, a `9.248x` phase penalty. The two-thread phase median was
-slower, not faster. DVFS was unchanged and uncontrolled. The construction
-therefore establishes finite spatial logical parallelism and a race-clean C
-runtime, not software speed advantage, physical parallelism, or C5.
+The SSH daemon had inherited affinity `0-1`, but its cgroup permits all six
+online physical cores. Applying `taskset -c 0-5` only to each experiment
+process produced a six-core phase median of `66,593,768 ns` versus
+`114,427,905 ns` on one core: a real `1.718x` spatial wall-time reduction.
+The strongest one-core compact scalar median remained `12,372,273 ns`, so the
+six-core phase execution was still `5.383x` slower. DVFS was unchanged and
+uncontrolled. No system configuration changed. The construction therefore
+establishes finite spatial logical parallelism and a race-clean C runtime, not
+C5 or physical phase computation.
+
+## Dependency-layered public phase VM
+
+`parallel_phase_vm.c` now connects the existing `.holo` language and Fredkin
+compiler directly to the pthread phase runtime. The scheduler assigns each
+instruction to the maximum ready layer over every register it accesses. It
+never reads phase data, boundary data, or expected results. Instructions share
+a layer only when their complete accessed-register sets are disjoint, so they
+commute. A mechanical verifier rejects any lost instruction or within-layer
+register collision.
+
+Narrow layers execute directly; layers with at least 256 independent
+instructions use the persistent pthread pool. Forward execution traverses
+passes and layers; restoration reverses both. The exact public instruction
+stream remains the source of the inverse, with no stored inverse history.
+
+A deterministic C generator emitted an 8,192-wide program repeated for 127
+passes:
+
+```text
+public program bytes                527,301
+public program SHA-256              50137707408e1d0a529baed6f9820f0e09fc9b20d765552ff2259f8d43f88d04
+stored instructions                 8,192
+total phase gates                   1,040,384
+dependency layers per pass          1
+logical depth                       127
+phase registers                     32,768
+resident complex cells              65,536
+boundary digest                     3b39182758a1e325
+nominal restoration                 4.99022921114e-13
+actual-restored reuse restoration   5.23070005001e-13
+wrong inverse                       1.73205080757
+omitted inverse                     1.73205080757
+```
+
+The parallel, sequential phase, and independent scalar executables produced
+the same boundary. Nine committed programs and 20 deterministic mixed-opcode
+programs also matched across one-thread parallel, six-thread parallel,
+sequential phase, and scalar execution. ASan, UBSan, leak detection, and
+ThreadSanitizer pass.
+
+On the wide public program, the six-core phase median was `90,459,486 ns`,
+`1.786x` faster than the one-core layered phase median and `1.980x` faster
+than the sequential phase VM. The compact scalar evaluator remained
+`17.741x` faster than the six-core phase VM. This is a real reduction in
+phase-program wall time and logical depth, not an asymptotic or C5 advantage.
 
 ## Next active work
 
-The next move must stop paying one conventional complex-polynomial evaluation
-per spatial gate. Interpreter removal and CPU threading are now measured, and
-neither changes that underlying resource law:
+The phase VM and spatial scheduler are now support substrate. The primary
+frontier is no longer further instruction-stream scaling. It is the
+relational lift:
 
-1. construct a genuinely global phase interaction whose carrier performs a
-   whole layer without a host loop over gates;
-2. transfer the fixed twin-rail construction to a flagship global operator
-   without an equivalent compact classical recurrence;
-3. identify a physical phase operation whose parallel work is not paid again by
-   the conventional host;
-4. continue direct-metal probes only when they test a genuinely different
-   physical coupling mechanism, not another software-renamed solver.
+```text
+open typed many-to-many phase relations
+-> composition through shared interfaces
+-> unresolved internal-port closure
+-> idempotent relational boundary
+-> inverse restoration
+-> restored-carrier reuse
+```
+
+Any useful successor must keep the relation unresolved rather than enumerate
+tuples, internal assignments, witnesses, or one ordinary circuit per case.

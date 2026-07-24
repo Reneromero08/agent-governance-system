@@ -1,8 +1,8 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `3.3`
-**Standing mission:** `CAT_CAS_UNBOUNDED_COMPUTE_V1`  
+**Roadmap version:** `4.0`
+**Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through milestone:** `CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED`  
 **Current claim ceiling:** `BOUNDED_SOFTWARE_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_ONLY`  
@@ -28,18 +28,27 @@ THOUGHT/LAB/CAT_CAS/MISSION.md
 The standing objective is:
 
 ```text
-finite reusable substrate
--> compact unresolved relational geometry
--> native phase / catalytic / toroidal evolution
--> invariant or fixed point
--> one classical witness at the CollapseBoundary
--> independent official acceptance
--> substrate restoration
--> substrate reuse
--> increasing compute leverage against the best matched compact classical method
+open typed relations
+-> holographic relational geometry
+-> composition through shared interfaces
+-> unresolved internal ports
+-> native relational closure
+-> surviving boundary relation or invariant
+-> actual inverse restoration
+-> actual restored-substrate reuse
+-> increasingly rich relational geometry
+-> unbounded catalytic phase computation
 ```
 
-The strong compute target is:
+The phase VM, Fredkin compiler, stored-program phase state, fixed-resident
+torus, and spatial phase fabric are established development foundations. They
+are support mechanisms, not the target architecture. The primary frontier is
+no longer larger phase circuits or removal of interpreter overhead. It is the
+transition from deterministic phase functions to first-class open many-to-many
+relations whose geometry composes and closes without host enumeration.
+
+Performance against the best matched compact classical method remains an
+important secondary measure:
 
 ```text
 Gamma_best(n) = cost of the best matched compact classical method
@@ -85,6 +94,17 @@ The largest sealed case represents `2^256` explicit paths without materializing 
 
 This result is a major nonterminal milestone. The equivalent compact classical dynamic program remains about 38 to 45 times faster and asymptotically equivalent. Therefore the result does not establish advantage over the best matched compact classical method, C5 fixed-point advantage, official external acceptance, cross-domain transfer, or physical phase computation.
 
+The current phase-circuit substrate establishes phase values, relative-phase
+registers, and deterministic phase functions. It does not establish:
+
+```text
+open many-to-many phase relations as first-class native objects
+composition of unresolved relations through typed shared ports
+internal-port closure or relational trace
+an idempotent existential relational boundary
+holographic relational computation
+```
+
 ### Active mutable frontier result
 
 The post-milestone frontier has removed two architectural limitations without
@@ -107,6 +127,9 @@ phase-resident stored program         fixed schedule changes result from program
 spatial phase layers                  640,000 gates in logical depth 32
 parallel runtime                      persistent pthread pool, TSan clean
 spatial carrier restoration           below 1e-12 with reuse and cross-program reuse
+arbitrary `.holo` dependency layers   exact across 9 committed and 20 mixed programs
+wide public phase program             1,040,384 gates in logical depth 127
+six-core phase wall-time reduction    1.786x, still 17.741x behind scalar
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -222,7 +245,48 @@ Verification follows a substantive result. One focused review is normally suffic
 
 ## 6. Current Frontier
 
-The following are frontier candidates, not a mandatory sequence:
+The primary active frontier is:
+
+```text
+OPEN_MANY_TO_MANY_PHASE_RELATION
+-> NATIVE_RELATIONAL_COMPOSITION
+-> INTERNAL_PORT_CLOSURE_OR_RELATIONAL_TRACE
+-> IDEMPOTENT_RELATIONAL_BOUNDARY
+-> RESTORATION_AND_REUSE
+```
+
+The first calibration must represent one local many-to-many relation and a
+second compatible relation as unresolved native objects, connect them through
+one typed internal port, close that port, expose the exact remaining boundary
+relation, reverse the actual forward process, and reuse the restored carrier.
+It must not execute relation tuples as separate cases and merge their answers.
+
+The architecture must explicitly distinguish:
+
+```text
+duplicate relations
+duplicate derivations
+multiple witnesses
+relation union
+empty relation
+carrier failure
+```
+
+Existential boundary projection must be idempotent even if reversible internal
+state preserves witness multiplicity or provenance. Ordinary complex addition
+and amplitude growth are not assumed to implement relational OR.
+
+### H. Build and test the relational lift
+
+Investigate algebraic carriers for exact open-relation composition and closure:
+Boolean-enriched relations, typed process diagrams, Holant-style signatures,
+holographic basis changes, relation-valued phase transport, groupoid or
+category-valued transport, lattice-valued relations, topological sectors,
+idempotent nonlinear phase dynamics, or reversible dilation. Follow the
+strongest implemented mechanism. Retire mechanisms that reduce to ordinary
+case enumeration or relation-specific circuit expansion.
+
+The following are supporting frontier candidates, not a mandatory sequence:
 
 ### A. Remove the current resource bottleneck
 
@@ -239,11 +303,14 @@ instead of `O(N^2)` scanned gates. The live gap is no longer syntax,
 compilation, quadratic interpreter overhead, or an untested threading
 assumption. A spatial pthread fabric now executes `640,000` phase gates in
 logical depth `32`, matches a separate scalar reference, restores and reuses
-the carrier, and passes ThreadSanitizer. Its two-thread median did not beat
-its one-thread median, and its best matched one-thread phase median remained
-`9.248x` slower than the compact scalar reference. The live gap is removing
-the conventional host's remaining linear complex-polynomial payment for every
-native gate.
+the carrier, and passes ThreadSanitizer. Widening only the experiment process
+to all six physical cores produces a `1.718x` phase wall-time reduction.
+The same scheduler now consumes arbitrary public `.holo` programs and reduces
+an 8,192-wide, 1,040,384-gate program to logical depth `127`; six-core phase
+execution is `1.786x` faster than one-core layered execution and `1.980x`
+faster than the sequential phase VM. The compact scalar evaluator remains
+`17.741x` faster. The live gap is removing the conventional host's remaining
+linear complex-polynomial payment for every native instruction.
 
 ### B. Attack a flagship without an equivalent compact classical recurrence
 
@@ -289,9 +356,16 @@ answer-dependent retries
 per-instance repair constants
 hidden candidate enumeration
 hidden classical path materialization
+host-side loops over possible internal assignments
+selected witnesses or successful branches
+completed relation truth tables
+exponential provenance objects
 ```
 
-Compilation must not perform the target computation and encode its answer.
+Compilation must not perform the target computation and encode its answer. It
+may describe public typed relational geometry and constant-size local relation
+primitives, but it may not expand the completed network into all candidate
+assignments or ordinary circuits generated per tuple.
 
 Do not claim compact, factorized, lazy, global, or fixed-size computation while performing equivalent enumeration elsewhere.
 
@@ -320,6 +394,9 @@ physical phase computation
 physical restoration
 hardware bit replacement
 Small Wall crossing
+holographic relational computation
+native open-relation composition
+idempotent relational closure
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -393,4 +470,10 @@ The user owns lane closure.
 Do not stop because a bounded mission-shaped result was verified.
 
 Preserve it, remove the next bottleneck, and continue toward stronger compute leverage, official external acceptance, cross-domain transfer, and eventually physical phase computation when authorized.
+
+Use the existing phase computer as substrate for a holographic relational
+computer. Move from phase functions to open phase relations, from instruction
+execution to composition by geometry, from explicit internal state to
+unresolved internal ports, and from final register values to lawful relational
+closure and boundary projection. Restore the carrier and continue.
 ```

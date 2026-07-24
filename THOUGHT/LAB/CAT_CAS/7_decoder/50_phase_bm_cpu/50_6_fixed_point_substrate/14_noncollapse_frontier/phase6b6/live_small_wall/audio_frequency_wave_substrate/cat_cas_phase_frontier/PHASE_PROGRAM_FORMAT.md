@@ -130,3 +130,30 @@ The committed routed-network circuit compiles byte-for-byte to
 `programs/compiled_routed_network.holo`. The circuit source and generated
 program remain public inputs; neither compiler nor generated schedule contains
 an answer oracle or decoded data-dependent branch.
+
+## Dependency-layered execution
+
+`parallel_phase_vm.c` consumes the same public format without adding scheduling
+syntax. It assigns an instruction to the earliest layer after every register
+that instruction accesses. Complete register sets are used, including control,
+program, source, and target relations. Two instructions enter the same layer
+only when those sets are disjoint.
+
+This scheduling operation is topological. It does not inspect input symbols,
+phase values, boundary values, or expected answers. Same-layer operations
+commute because they access disjoint carrier relations. The inverse traverses
+passes and layers in reverse. Small layers run directly, while sufficiently
+wide layers use a persistent pthread pool.
+
+The language therefore remains independent of the execution width:
+
+```text
+one public .holo program
+-> sequential streaming phase VM
+or
+-> dependency-layered parallel phase VM
+```
+
+Both paths must produce the same sealed boundary and restore the borrowed
+carrier. Parallel scheduling changes wall time and logical depth, not the
+program's phase semantics.

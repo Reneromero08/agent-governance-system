@@ -1,0 +1,201 @@
+{
+  "schema": "cat_cas_mutable_parallel_phase_vm_v1",
+  "status": "MUTABLE_DEVELOPMENT_PASS_INDEPENDENT_REVIEW_PASS",
+  "generated_utc": "2026-07-24T00:26:32Z",
+  "claim_boundary": "FINITE_SOFTWARE_DEPENDENCY_LAYERED_PHASE_PROGRAMS_NO_C5_OR_PHYSICAL_PHASE_CLAIM",
+  "target": {
+    "hostname": "catcas",
+    "cpu": "AMD Phenom II X6 1090T",
+    "online_cpus": "0-5",
+    "ssh_daemon_inherited_affinity": "0-1",
+    "benchmark_process_affinity": "0-5",
+    "affinity_method": "taskset applied only to each experiment process",
+    "system_configuration_changed": false,
+    "compiler": "gcc 14.2.0",
+    "flags": "-O3 -march=native -std=c11 -Wall -Wextra -Werror -pedantic -pthread",
+    "contact_scope": "raw source transfer to /tmp, userspace compilation, sanitizers, and CPU execution only"
+  },
+  "sources": {
+    "parallel_phase_vm": {
+      "path": "parallel_phase_vm.c",
+      "bytes": 22816,
+      "sha256": "4f499226a00beafa6ec29697e297d44c2ee3b4cfbc46f67c4272184e2b81ed72"
+    },
+    "included_phase_kernel": {
+      "path": "streaming_phase_vm.c",
+      "bytes": 44586,
+      "sha256": "f1f01c3e2fb42229a3291693e58a3307f5d671bf3d0531b2103795dacee73887"
+    },
+    "independent_scalar_reference": {
+      "path": "phase_program_reference.c",
+      "bytes": 22006,
+      "sha256": "640fbf75dbd65acd9985f35c9742a96fb11f234b64ca6c16c906b94adec10729",
+      "linked_into_native": false
+    },
+    "fredkin_compiler": {
+      "path": "fredkin_phase_compiler.c",
+      "bytes": 14120,
+      "sha256": "a73cbd78a43e6a7889490d3135ad28c91025511c602adf8904e25f9a1c2c6ee1",
+      "executes_target": false
+    },
+    "parallel_bank_generator": {
+      "path": "parallel_bank_generator.c",
+      "bytes": 2068,
+      "sha256": "aac83736ad3857b921d99d26def169c78dc6197f93e5500663308091a4d6f9de",
+      "executes_target": false
+    },
+    "raw_transfer_hashes_match": true
+  },
+  "scheduler": {
+    "input": "existing CATCAS_PHASE_PROGRAM_V1 public instruction stream",
+    "law": "assign each instruction to max ready layer over every register it reads or writes",
+    "same_layer_condition": "complete accessed-register sets are disjoint",
+    "data_or_boundary_inspection": false,
+    "instruction_reordering": "only across disjoint accessed-register sets",
+    "schedule_verification": "every instruction retained and every layer collision-free",
+    "parallel_minimum_layer_width": 256,
+    "narrow_layer_execution": "direct caller execution without pthread dispatch",
+    "wide_layer_execution": "persistent pthread pool",
+    "inverse": "passes and layers reversed; per-layer order immaterial because registers are disjoint",
+    "retained_inverse_history": false,
+    "decoded_values_feed_evolution": false
+  },
+  "wide_public_program": {
+    "generator_command": "parallel_bank_generator 8192 127",
+    "canonical_bytes": 527301,
+    "canonical_lines": 32772,
+    "canonical_sha256": "50137707408e1d0a529baed6f9820f0e09fc9b20d765552ff2259f8d43f88d04",
+    "public_program_fnv1a64": "82b75e5f9173b238",
+    "stored_instructions": 8192,
+    "passes": 127,
+    "total_steps": 1040384,
+    "layers_per_pass": 1,
+    "logical_depth": 127,
+    "maximum_layer_width": 8192,
+    "parallel_eligible_layers_per_pass": 1,
+    "registers": 32768,
+    "resident_complex_cells": 65536,
+    "boundary_fnv1a64": "3b39182758a1e325",
+    "boundary_nonzero": 24576,
+    "parallel_streaming_reference_match": true,
+    "displacement_l2": 271.529003976,
+    "nominal_restoration_max_abs": 4.99022921114e-13,
+    "actual_restored_reuse_max_abs": 5.23070005001e-13,
+    "wrong_inverse_max_abs": 1.73205080757,
+    "omitted_inverse_max_abs": 1.73205080757
+  },
+  "timing": {
+    "law": "seven matched medians, process affinities fixed per run, DVFS unchanged and uncontrolled",
+    "parallel_thread_1_ns": [
+      161729297,
+      161562878,
+      161647605,
+      161655229,
+      161567838,
+      161586841,
+      161585603
+    ],
+    "parallel_thread_6_ns": [
+      91490183,
+      90253557,
+      90326688,
+      90459486,
+      100754254,
+      111919140,
+      86581303
+    ],
+    "streaming_thread_1_ns": [
+      179005257,
+      178629357,
+      179083734,
+      179097501,
+      178729190,
+      179197496,
+      179219770
+    ],
+    "scalar_reference_ns": [
+      4873140,
+      5103122,
+      5098841,
+      5046575,
+      5419845,
+      4900958,
+      5195991
+    ],
+    "parallel_thread_1_median_ns": 161586841,
+    "parallel_thread_6_median_ns": 90459486,
+    "streaming_thread_1_median_ns": 179083734,
+    "scalar_reference_median_ns": 5098841,
+    "parallel_six_core_speedup": 1.786290,
+    "parallel_thread_6_over_streaming_thread_1": 0.505124,
+    "streaming_thread_1_over_parallel_thread_6": 1.979712,
+    "parallel_thread_6_over_scalar_reference": 17.741186,
+    "streaming_thread_1_over_scalar_reference": 35.122439,
+    "parallel_reduces_phase_wall_time": true,
+    "c5_advantage": false
+  },
+  "qualification": {
+    "committed_program_regression": "PASS_9_OF_9",
+    "deterministic_mixed_opcode_programs": "PASS_20_OF_20",
+    "mixed_thread_1_thread_6_streaming_reference_match": true,
+    "muladd_repeated_operand_scheduler_edge": "PASS",
+    "compiler_exact_byte_reproduction": "PASS",
+    "generator_exact_byte_reproduction": "PASS",
+    "passes_numeric_negatives": "PASS_12_OF_12",
+    "cycles_numeric_negatives": "PASS_4_OF_4",
+    "thread_numeric_negatives": "PASS_4_OF_4",
+    "streaming_main_numeric_negatives": "PASS_9_OF_9",
+    "canonical_public_field_plus_sign_negatives": "PASS_36_OF_36_ACROSS_NATIVE_PARALLEL_AND_REFERENCE",
+    "canonical_circuit_field_plus_sign_negatives": "PASS_9_OF_9",
+    "identity_public_program_semantics": "PASS_NATIVE_PARALLEL_REFERENCE_EXIT_ZERO",
+    "identity_inverse_control_applicability": "NOT_APPLICABLE_FORWARD_WAS_IDENTITY",
+    "nonidentity_wrong_and_omitted_inverse_controls": "PASS_STRICT",
+    "muladd_f3_boundaries": "PASS_27_OF_27",
+    "cswap_f3_boundaries": "PASS_27_OF_27",
+    "pcswap_f3_boundaries": "PASS_81_OF_81",
+    "wide_parallel_reuse_boundary_checks": "PASS_30_OF_30",
+    "scheduler_collision_negative": "PASS",
+    "address_and_undefined_parallel_small_and_bank": "PASS",
+    "address_and_undefined_streaming_reference_compiler": "PASS",
+    "thread_sanitizer_parallel_bank": "PASS",
+    "leak_detection": "PASS"
+  },
+  "repairs": {
+    "unit_circle_f3_square": "z^2 replaced by conjugate(z) in complex product polynomial",
+    "complex_multiplies_per_product_factor_before": 6,
+    "complex_multiplies_per_product_factor_after": 3,
+    "strict_unsigned_decimal_parser": "every public and circuit numeric field now rejects leading signs, trailing data, and ERANGE before execution",
+    "repeated_operand_dependency": "per-instruction accessed registers are deduplicated before same-layer collision checks, so legal MULADD a a target schedules correctly",
+    "identity_inverse_control": "wrong and omitted inverse failure is enforced only when the forward process displaced the carrier; identity programs expose applicable=false and remain valid programs"
+  },
+  "review": {
+    "reviewer_id": "SOL-XHIGH-PARALLEL-PUBLIC-VM-01",
+    "status": "PASS",
+    "receipt_sha256": "1f6dc7b3a67d808241cc48ae01d132f533b4a2ee9497bad22adc2759d1b9f761",
+    "normalized_findings": [
+      {
+        "finding": "repeated MULADD input falsely collided with itself in scheduler construction",
+        "disposition": "REPAIRED_AND_REPLAYED"
+      },
+      {
+        "finding": "unsigned public and circuit numeric fields accepted noncanonical leading plus signs",
+        "disposition": "REPAIRED_AND_REPLAYED"
+      },
+      {
+        "finding": "legitimate identity programs failed because omitted inverse was unconditionally required to disturb the carrier",
+        "disposition": "REPAIRED_WITH_EXPLICIT_CONTROL_APPLICABILITY_AND_REPLAYED"
+      }
+    ],
+    "remaining_findings": []
+  },
+  "adjudication": {
+    "arbitrary_public_program_layering": "DEVELOPMENT_PASS",
+    "parallel_phase_wall_time_reduction": "DEVELOPMENT_PASS",
+    "carrier_restoration_and_reuse": "DEVELOPMENT_PASS",
+    "no_smuggle": "DEVELOPMENT_PASS",
+    "parallel_speed_advantage_over_scalar_reference": "NOT_ESTABLISHED",
+    "c5_advantage": "NOT_ESTABLISHED",
+    "physical_phase_computation": "NOT_ESTABLISHED",
+    "terminal": false
+  }
+}

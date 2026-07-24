@@ -1,8 +1,17 @@
 {
   "schema": "cat_cas_mutable_phase_program_development_v3",
-  "status": "MUTABLE_DEVELOPMENT_PASS",
+  "status": "MUTABLE_DEVELOPMENT_PASS_HISTORICAL_SOURCE_SNAPSHOT",
   "generated_utc": "2026-07-23T22:40:35Z",
   "claim_boundary": "SCALABLE_FINITE_SOFTWARE_PHASE_PROGRAMS_NO_COMPUTE_ADVANTAGE",
+  "source_binding_law": "The sources object below permanently binds the measurements in this historical snapshot. Current optimized successor sources and their new measurements are bound separately in PARALLEL_PHASE_VM_RESULTS.json.",
+  "current_successor_regression": {
+    "results_path": "PARALLEL_PHASE_VM_RESULTS.json",
+    "streaming_phase_vm_sha256": "f1f01c3e2fb42229a3291693e58a3307f5d671bf3d0531b2103795dacee73887",
+    "phase_program_reference_sha256": "640fbf75dbd65acd9985f35c9742a96fb11f234b64ca6c16c906b94adec10729",
+    "fredkin_phase_compiler_sha256": "a73cbd78a43e6a7889490d3135ad28c91025511c602adf8904e25f9a1c2c6ee1",
+    "committed_program_boundaries": "PASS_9_OF_9",
+    "historical_measurements_mechanically_rebound": false
+  },
   "target": {
     "hostname": "catcas",
     "execution_core": 3,
