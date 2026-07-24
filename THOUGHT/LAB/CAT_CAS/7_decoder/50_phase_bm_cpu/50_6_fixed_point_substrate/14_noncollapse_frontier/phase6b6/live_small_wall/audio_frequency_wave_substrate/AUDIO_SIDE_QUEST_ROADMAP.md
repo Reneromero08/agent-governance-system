@@ -4,8 +4,8 @@
 **Roadmap version:** `4.1`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through milestone:** `ALGEBRAIC_RELATION_CHAIN_PHASE_ESTABLISHED`
-**Current claim ceiling:** `SOFTWARE_LINEAR_BI_TOTAL_RELATION_CHAIN_REFERENCE_ONLY`
+**Reconciled through milestone:** `ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED`
+**Current claim ceiling:** `SOFTWARE_TWO_HUB_RELATION_VALUED_PHASE_MEMORY_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -72,6 +72,8 @@ CATALYTIC_WAVEFORM_ISING_V3_SIX_SITE_VERIFIED
 PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED
 CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED
 ALGEBRAIC_RELATION_CHAIN_PHASE_ESTABLISHED
+ALGEBRAIC_RELATION_STAR_PHASE_ESTABLISHED
+ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -151,6 +153,12 @@ native branching closure               pairwise phase resultants, 4,913/4,913 ex
 branching relation carrier              2,002,000 complex cells
 star tuple/witness/truth-table slots    0 / 0 / 0
 star restoration/reuse                  below 3.6e-16, actual-carrier reuse passes
+two connected internal hubs             exact fixed five-relation tree
+relation-valued phase memory             first resultant feeds second without decode
+two-hub exhaustive boundary law          22,717,712 / 22,717,712 rows exact
+two-hub carrier                           52 complex cells, zero tuple/witness slots
+message-bypass discriminator             changes exact factorized boundary
+two-hub restoration/reuse                 below 1.7e-16, different process reuses carrier
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -343,13 +351,13 @@ and actual-restored cross-process reuse. The parser's initial quadratic graph
 scan was removed; native evolution and carrier history are linear in relation
 count.
 
-The repeatable linear-chain problem and the first single-hub branching problem
-are therefore removed. The star mechanism closes one hub shared by arbitrary
-finite branch count, yields `d*(d-1)/2` explicit boundary factors, and scales
-to 1,000 branches with no host assignment expansion or exponential
-provenance. The active mechanism must now connect multiple internal hubs so
-one relation-valued phase boundary can become another native closure input
-without host decoding or per-relation circuit expansion.
+The repeatable linear-chain problem, the first single-hub branching problem,
+and the first two-hub relation-memory problem are therefore removed. The
+two-hub mechanism leaves a first-stage resultant resident in four complex
+phases and consumes it in a second resultant before boundary decode. The
+active mechanism must now propagate the same relation-valued phase message
+through an arbitrary finite internal-hub tree without host decoding,
+per-relation circuit expansion, or fixed depth.
 
 The following are supporting frontier candidates, not a mandatory sequence:
 
@@ -443,7 +451,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-SOFTWARE_LINEAR_BI_TOTAL_RELATION_CHAIN_REFERENCE_ONLY
+SOFTWARE_TWO_HUB_RELATION_VALUED_PHASE_MEMORY_REFERENCE_ONLY
 ```
 
 Not established:
