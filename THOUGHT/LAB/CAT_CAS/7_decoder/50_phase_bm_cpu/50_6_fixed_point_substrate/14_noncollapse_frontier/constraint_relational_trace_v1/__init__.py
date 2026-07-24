@@ -9,6 +9,7 @@ from .catalytic_existential_trace import (
     reference_existential_trace,
 )
 from .conditional_p_equals_np import (
+    BoundaryDecision,
     WitnessExtractionResult,
     extract_witness_by_boundary_self_reduction,
     restrict_public_relation,
@@ -29,6 +30,7 @@ from .topological_rank_latch import (
 )
 
 __all__ = [
+    "BoundaryDecision",
     "CLAIM_CEILING",
     "ClauseRelation",
     "ConstraintHolo",
