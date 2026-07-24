@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import deque
 from dataclasses import dataclass
 from hashlib import sha256
 from typing import Iterable
@@ -21,6 +22,15 @@ class ParityConstraint:
         if self.parity not in (0, 1):
             raise ParityHolonomyError("parity must be 0 or 1")
 
+    def canonicalized(self) -> "ParityConstraint":
+        if self.left <= self.right:
+            return self
+        return ParityConstraint(self.right, self.left, self.parity)
+
+    @property
+    def transport(self) -> int:
+        return -1 if self.parity else 1
+
 
 @dataclass(frozen=True)
 class ParityInstance:
@@ -34,7 +44,9 @@ class ParityInstance:
         constraints: Iterable[ParityConstraint],
     ) -> "ParityInstance":
         normalized_vertices = tuple(sorted(set(vertices)))
-        normalized_constraints = tuple(constraints)
+        normalized_constraints = tuple(
+            sorted(constraint.canonicalized() for constraint in constraints)
+        )
         declared = set(normalized_vertices)
         for constraint in normalized_constraints:
             if constraint.left not in declared or constraint.right not in declared:
@@ -42,128 +54,174 @@ class ParityInstance:
         return cls(normalized_vertices, normalized_constraints)
 
     def pairwise_locally_compatible(self) -> bool:
-        for left_index in range(len(self.constraints)):
-            if not _consistent(self.vertices, (self.constraints[left_index],)):
+        seen: dict[tuple[str, str], int] = {}
+        for constraint in self.constraints:
+            key = (constraint.left, constraint.right)
+            previous = seen.get(key)
+            if previous is not None and previous != constraint.parity:
                 return False
-            for right_index in range(left_index + 1, len(self.constraints)):
-                if not _consistent(
-                    self.vertices,
-                    (self.constraints[left_index], self.constraints[right_index]),
-                ):
-                    return False
+            seen[key] = constraint.parity
         return True
 
 
-class _ParityUnionFind:
-    def __init__(self, vertices: tuple[str, ...]) -> None:
-        self.parent = {vertex: vertex for vertex in vertices}
-        self.rank = {vertex: 0 for vertex in vertices}
-        self.xor_to_parent = {vertex: 0 for vertex in vertices}
-
-    def find(self, vertex: str) -> tuple[str, int]:
-        parent = self.parent[vertex]
-        if parent == vertex:
-            return vertex, 0
-        root, parent_xor = self.find(parent)
-        total_xor = self.xor_to_parent[vertex] ^ parent_xor
-        self.parent[vertex] = root
-        self.xor_to_parent[vertex] = total_xor
-        return root, total_xor
-
-    def add(self, constraint: ParityConstraint) -> int | None:
-        left_root, left_xor = self.find(constraint.left)
-        right_root, right_xor = self.find(constraint.right)
-        if left_root == right_root:
-            return left_xor ^ right_xor ^ constraint.parity
-
-        relation = left_xor ^ right_xor ^ constraint.parity
-        if self.rank[left_root] < self.rank[right_root]:
-            self.parent[left_root] = right_root
-            self.xor_to_parent[left_root] = relation
-        else:
-            self.parent[right_root] = left_root
-            self.xor_to_parent[right_root] = relation
-            if self.rank[left_root] == self.rank[right_root]:
-                self.rank[left_root] += 1
-        return None
+@dataclass(frozen=True)
+class TreeTransport:
+    parent: str
+    child: str
+    constraint_index: int
 
 
-def _consistent(
-    vertices: tuple[str, ...], constraints: tuple[ParityConstraint, ...]
-) -> bool:
-    union_find = _ParityUnionFind(vertices)
-    return all(union_find.add(constraint) in (None, 0) for constraint in constraints)
+@dataclass(frozen=True)
+class Z2TransportProgram:
+    roots: tuple[str, ...]
+    tree_transports: tuple[TreeTransport, ...]
+    cycle_constraint_indices: tuple[int, ...]
+
+
+def compile_z2_transport(instance: ParityInstance) -> Z2TransportProgram:
+    """Compile only graph incidence into a deterministic spanning forest.
+
+    The compiler does not evaluate parity consistency. Constraint parity enters only
+    when the borrowed phase carrier executes the transport program.
+    """
+
+    adjacency: dict[str, list[tuple[str, int]]] = {
+        vertex: [] for vertex in instance.vertices
+    }
+    for index, constraint in enumerate(instance.constraints):
+        adjacency[constraint.left].append((constraint.right, index))
+        adjacency[constraint.right].append((constraint.left, index))
+    for neighbors in adjacency.values():
+        neighbors.sort()
+
+    visited: set[str] = set()
+    tree_indices: set[int] = set()
+    roots: list[str] = []
+    tree_transports: list[TreeTransport] = []
+
+    for root in instance.vertices:
+        if root in visited:
+            continue
+        roots.append(root)
+        visited.add(root)
+        queue: deque[str] = deque((root,))
+        while queue:
+            parent = queue.popleft()
+            for child, constraint_index in adjacency[parent]:
+                if child in visited:
+                    continue
+                visited.add(child)
+                queue.append(child)
+                tree_indices.add(constraint_index)
+                tree_transports.append(
+                    TreeTransport(parent, child, constraint_index)
+                )
+
+    cycle_indices = tuple(
+        index for index in range(len(instance.constraints)) if index not in tree_indices
+    )
+    return Z2TransportProgram(
+        roots=tuple(roots),
+        tree_transports=tuple(tree_transports),
+        cycle_constraint_indices=cycle_indices,
+    )
 
 
 @dataclass(frozen=True)
 class ParityHolonomyResult:
     consistent: bool
     cycle_residues: tuple[int, ...]
+    cycle_holonomies: tuple[int, ...]
     pairwise_locally_compatible: bool
+    tree_transport_count: int
+    cycle_count: int
     initial_carrier_digest: str
     terminal_carrier_digest: str
     restored_carrier_digest: str
     restored: bool
     restoration_scope: str
+    obstruction_scope: str
     claim_ceiling: str
 
 
 class Z2PhaseCarrier:
-    """Borrowed phase lanes with program-derived self-inverse operations."""
+    """Vertex phase lanes carrying actual Z2 parallel transport."""
 
-    def __init__(self, lane_count: int) -> None:
-        if lane_count < 1:
-            raise ParityHolonomyError("carrier must have at least one phase lane")
-        self._phases = [1 for _ in range(lane_count)]
+    def __init__(self, vertices: tuple[str, ...]) -> None:
+        if not vertices:
+            raise ParityHolonomyError("carrier must have at least one vertex phase lane")
+        self._vertices = vertices
+        self._phases = {vertex: 1 for vertex in vertices}
 
     @property
-    def phases(self) -> tuple[int, ...]:
-        return tuple(self._phases)
+    def phases(self) -> tuple[tuple[str, int], ...]:
+        return tuple((vertex, self._phases[vertex]) for vertex in self._vertices)
 
     def digest(self) -> str:
-        payload = ",".join(str(phase) for phase in self._phases)
+        payload = ",".join(
+            f"{vertex}:{self._phases[vertex]}" for vertex in self._vertices
+        )
         return sha256(payload.encode("ascii")).hexdigest()
 
-    def apply(self, lane: int, parity: int) -> None:
-        if lane < 0 or lane >= len(self._phases):
-            raise ParityHolonomyError("carrier lane out of range")
-        if parity not in (0, 1):
-            raise ParityHolonomyError("parity must be 0 or 1")
-        if parity:
-            self._phases[lane] *= -1
+    def transport(self, parent: str, child: str, edge_transport: int) -> None:
+        if parent not in self._phases or child not in self._phases:
+            raise ParityHolonomyError("transport references an unknown carrier lane")
+        if edge_transport not in (-1, 1):
+            raise ParityHolonomyError("Z2 edge transport must be -1 or +1")
+        self._phases[child] *= self._phases[parent] * edge_transport
 
-    def execute(self, program: tuple[ParityConstraint, ...]) -> None:
-        for lane, constraint in enumerate(program):
-            self.apply(lane, constraint.parity)
+    def cycle_holonomy(self, constraint: ParityConstraint) -> int:
+        return (
+            self._phases[constraint.left]
+            * constraint.transport
+            * self._phases[constraint.right]
+        )
 
-    def restore(self, program: tuple[ParityConstraint, ...]) -> None:
-        for lane in range(len(program) - 1, -1, -1):
-            self.apply(lane, program[lane].parity)
+    def execute(
+        self,
+        instance: ParityInstance,
+        program: Z2TransportProgram,
+    ) -> tuple[int, ...]:
+        for operation in program.tree_transports:
+            constraint = instance.constraints[operation.constraint_index]
+            self.transport(operation.parent, operation.child, constraint.transport)
+        return tuple(
+            self.cycle_holonomy(instance.constraints[index])
+            for index in program.cycle_constraint_indices
+        )
+
+    def restore(
+        self,
+        instance: ParityInstance,
+        program: Z2TransportProgram,
+    ) -> None:
+        for operation in reversed(program.tree_transports):
+            constraint = instance.constraints[operation.constraint_index]
+            self.transport(operation.parent, operation.child, constraint.transport)
 
 
 def calibrate_parity_holonomy(instance: ParityInstance) -> ParityHolonomyResult:
-    union_find = _ParityUnionFind(instance.vertices)
-    residues: list[int] = []
-    for constraint in instance.constraints:
-        residue = union_find.add(constraint)
-        if residue is not None:
-            residues.append(residue)
-
-    carrier = Z2PhaseCarrier(max(1, len(instance.constraints)))
+    program = compile_z2_transport(instance)
+    carrier = Z2PhaseCarrier(instance.vertices)
     initial_digest = carrier.digest()
-    carrier.execute(instance.constraints)
+    cycle_holonomies = carrier.execute(instance, program)
     terminal_digest = carrier.digest()
-    carrier.restore(instance.constraints)
+    carrier.restore(instance, program)
     restored_digest = carrier.digest()
+    residues = tuple(0 if holonomy == 1 else 1 for holonomy in cycle_holonomies)
 
     return ParityHolonomyResult(
-        consistent=all(residue == 0 for residue in residues),
-        cycle_residues=tuple(residues),
+        consistent=all(holonomy == 1 for holonomy in cycle_holonomies),
+        cycle_residues=residues,
+        cycle_holonomies=cycle_holonomies,
         pairwise_locally_compatible=instance.pairwise_locally_compatible(),
+        tree_transport_count=len(program.tree_transports),
+        cycle_count=len(program.cycle_constraint_indices),
         initial_carrier_digest=initial_digest,
         terminal_carrier_digest=terminal_digest,
         restored_carrier_digest=restored_digest,
         restored=initial_digest == restored_digest,
-        restoration_scope="program_derived_inverse_on_borrowed_z2_phase_lanes",
+        restoration_scope="program_derived_inverse_of_executed_z2_tree_transport",
+        obstruction_scope="native_cycle_product_on_borrowed_vertex_phase_lanes",
         claim_ceiling="PARITY_HOLONOMY_CALIBRATION_ONLY",
     )
