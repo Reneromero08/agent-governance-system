@@ -1,0 +1,35 @@
+{
+  "prepare": {
+    "created_at": "2026-07-24T00:12:49.048214+00:00",
+    "passed": true,
+    "pmu_helper_sha256": "0134dea60c7a28caf536768835d921a628de934380b6fc3f8c24b257535d219f",
+    "run_id": "family10h_relation_temporal_source_off_discovery_v1_0",
+    "runtime_sha256": "97b90b5110b7fe853e3248e5b42b04b92e9b92d8903badc514f03ffa3f165de1",
+    "schedule_manifest_sha256": "8b3c0ed81cf02d4949f93b522f9ead24b43efa171b66e2067be85e81d7235d73",
+    "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_PREPARE_V1",
+    "small_wall_crossed": false
+  }
+}
+{
+  "analysis_sha256": "d185efbe95d8ca54ce4b01fa6ef87f6695131f8a34388cbe5b747a92e72942cd",
+  "archive_sha256": "13224a796dd2cf4539b6db37eb2a88cb6bde2ede9b3ebed38172ddf5aef91405",
+  "controller_passed": true,
+  "coordinates": {
+    "D_alive_primary_minus_sham": 0.03221333354889946,
+    "D_source_off_primary_minus_sham": 0.12242533531019292,
+    "R_alive_primary": 0.030529443348561565,
+    "R_alive_sham": -0.0016838902003378903,
+    "R_source_off_primary": 0.11839742407180202,
+    "R_source_off_sham": -0.004027911238390904,
+    "source_off_D_abs_to_alive_D_abs": 3.800455333948991
+  },
+  "interpretation": {
+    "alive_D_positive": true,
+    "exploratory_only": true,
+    "small_wall_crossed": false,
+    "source_off_D_positive": true,
+    "source_off_all_one_factor_strata_below_25pct_alive_D": false,
+    "source_off_kills_below_25pct_alive_D": false,
+    "source_written_temporal_candidate": false
+  }
+}

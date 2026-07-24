@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-24T00:12:49.048214+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "0134dea60c7a28caf536768835d921a628de934380b6fc3f8c24b257535d219f",
+  "run_id": "family10h_relation_temporal_source_off_discovery_v1_0",
+  "runtime_sha256": "97b90b5110b7fe853e3248e5b42b04b92e9b92d8903badc514f03ffa3f165de1",
+  "schedule_manifest_sha256": "8b3c0ed81cf02d4949f93b522f9ead24b43efa171b66e2067be85e81d7235d73",
+  "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_PREPARE_V1",
+  "small_wall_crossed": false
+}
