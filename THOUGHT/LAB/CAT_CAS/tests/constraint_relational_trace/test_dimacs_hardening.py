@@ -41,3 +41,39 @@ def test_dimacs_clause_count_must_match_declaration() -> None:
             1 1 1 0
             """
         )
+
+
+def test_dimacs_rejects_clause_data_before_problem_line() -> None:
+    with pytest.raises(ConstraintHoloError, match="before the problem line"):
+        ConstraintHolo.from_dimacs(
+            """
+            1 1 1 0
+            p cnf 1 1
+            """
+        )
+
+
+def test_dimacs_rejects_second_problem_line_after_clause_data() -> None:
+    with pytest.raises(ConstraintHoloError, match="after clause data"):
+        ConstraintHolo.from_dimacs(
+            """
+            p cnf 1 1
+            1 1 1 0
+            p cnf 1 1
+            """
+        )
+
+
+def test_dimacs_wraps_malformed_problem_counts() -> None:
+    with pytest.raises(ConstraintHoloError, match="malformed DIMACS problem counts"):
+        ConstraintHolo.from_dimacs("p cnf two 1")
+
+
+def test_dimacs_wraps_malformed_literal_token() -> None:
+    with pytest.raises(ConstraintHoloError, match="malformed DIMACS literal"):
+        ConstraintHolo.from_dimacs(
+            """
+            p cnf 1 1
+            1 nope 1 0
+            """
+        )
