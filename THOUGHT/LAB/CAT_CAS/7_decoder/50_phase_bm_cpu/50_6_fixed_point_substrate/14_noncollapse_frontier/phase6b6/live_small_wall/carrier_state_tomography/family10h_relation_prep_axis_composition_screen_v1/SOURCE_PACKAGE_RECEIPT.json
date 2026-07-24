@@ -1,0 +1,174 @@
+{
+  "created_at": "2026-07-24T03:07:01.366886+00:00",
+  "files": {
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/adjacent_r0r1_primary.tsv": {
+      "sha256": "f93393a63d3d76db3aed4df47ef5c5da19fd4dc5e7842a99239df7c8b7cee865",
+      "size_bytes": 648351
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/adjacent_r0r1_sham.tsv": {
+      "sha256": "2ef54eb43dc6be2286af0cc5e6b8c7a27d90135e5c4452d8146c1b9ab1cd5a74",
+      "size_bytes": 631455
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/adjacent_r1r0_primary.tsv": {
+      "sha256": "56a874da2d0cbaec85b851fc0a2b54f4c605d8ac94c512aaa14b0c9b953c5280",
+      "size_bytes": 648351
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/adjacent_r1r0_sham.tsv": {
+      "sha256": "d39b1889ad5351f74bac516015486aca1261872bca11a6918dd91042ea4b768e",
+      "size_bytes": 631455
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/balanced_alt_a_primary.tsv": {
+      "sha256": "cbf47759bba37a511c72d4c943f019c6e11a2e7326de4f600e1d9788ff4b5bf0",
+      "size_bytes": 660639
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/balanced_alt_a_sham.tsv": {
+      "sha256": "326d61d23f047c83f39c722bed17866339dc4a238eabeee59b7c32b8428b30d1",
+      "size_bytes": 643743
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/balanced_alt_b_primary.tsv": {
+      "sha256": "96a607f4767430c715552c6966445a654f852cf4feaeb15d1098e71d1dee4f5d",
+      "size_bytes": 660639
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/balanced_alt_b_sham.tsv": {
+      "sha256": "2224e6fed96d3e0b2083135968bb53788f4fd7dac995d47ce13faee7dca7b240",
+      "size_bytes": 643743
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/dead_adjacent_r0r1_primary.tsv": {
+      "sha256": "34a78a7ff28fc86e8556e88ced32ea9cf3b7f7e61f5a7b1dfd60ca7e7cd60af5",
+      "size_bytes": 671391
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/dead_adjacent_r0r1_sham.tsv": {
+      "sha256": "95ecc606b5fd580d669c6ad7df3eafdccd3ff43244ea58162750333c3e495838",
+      "size_bytes": 654495
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/dead_adjacent_r1r0_primary.tsv": {
+      "sha256": "91395f406aa168f5530232ac0cc30c4faca4265568e9050f1929752622a713b2",
+      "size_bytes": 671391
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/dead_adjacent_r1r0_sham.tsv": {
+      "sha256": "d48949850bb50c583afe0da125c0b3175390aaae318b8992aa2a976e2235cc32",
+      "size_bytes": 654495
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/gapped_r0r1_primary.tsv": {
+      "sha256": "2a3d6bd80cb9209d3164508845661c584a8aded8eb74187f80f94b42e453c2a2",
+      "size_bytes": 647327
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/gapped_r0r1_sham.tsv": {
+      "sha256": "0906749e319ffa9273ea3baf2926d3c9dd31ce58f6ce436a8ad6d713c7c167d7",
+      "size_bytes": 630431
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/gapped_r1r0_primary.tsv": {
+      "sha256": "ad9a6d344eabc3eb03ed794ebe811fc07b203441e1c836971d3f142ed64722d0",
+      "size_bytes": 647327
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/gapped_r1r0_sham.tsv": {
+      "sha256": "c888658036b7e9b119be71bc97344977d7d0841083e48ebc53fc1beea9d00d82",
+      "size_bytes": 630431
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/source_off_adjacent_r0r1_primary.tsv": {
+      "sha256": "3de83e049fbdb22f89bdfd0a2dc3d73609dbdafe449bd3106b3d666de4ef0e2e",
+      "size_bytes": 699039
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/source_off_adjacent_r0r1_sham.tsv": {
+      "sha256": "2162b6d59f6d6edaaeda81da63a1baf09ef59e4d82a12bea4a3e80023b11de23",
+      "size_bytes": 682143
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/source_off_adjacent_r1r0_primary.tsv": {
+      "sha256": "65b68072ed5ad0b88dfe89d827e3e32a7136be2b9e53cbb37c5c78b626672a35",
+      "size_bytes": 699039
+    },
+    "source/PREP_AXIS_COMPOSITION_SCREEN_SCHEDULES/source_off_adjacent_r1r0_sham.tsv": {
+      "sha256": "240cb2c85ade4f90c3f8f51edcef6e8f858906d0f33d06a75cd9662bbea560cd",
+      "size_bytes": 682143
+    },
+    "source/RELATION_COMPOSITION_REPLAY_EXCLUSION_SCHEDULE_MANIFEST.json": {
+      "sha256": "8359eb7dda7a32f343627e8f7acbcde1c4ff3fa36c9c7fc46a46aa56a153f9bc",
+      "size_bytes": 15216
+    },
+    "source/RELATION_GRAMMAR.json": {
+      "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+      "size_bytes": 292071
+    },
+    "source/RELATION_GRAMMAR.sha256": {
+      "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+      "size_bytes": 66
+    },
+    "source/RELATION_GRAMMAR.tsv": {
+      "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+      "size_bytes": 360
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+      "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+      "size_bytes": 2277
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+      "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+      "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+      "size_bytes": 1866
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+      "size_bytes": 11263467
+    },
+    "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+      "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+      "size_bytes": 2635
+    },
+    "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+      "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+      "size_bytes": 3120
+    },
+    "source/RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh": {
+      "sha256": "dc6733b61f8d52f7bc07a3295238c73c2b8dfa11d6d91aecd505e1c4c0c11c41",
+      "size_bytes": 9312
+    },
+    "source/relation_spatial_adjudication.py": {
+      "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "size_bytes": 864
+    },
+    "source/relation_spatial_physical_adjudication.py": {
+      "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+      "size_bytes": 42533
+    },
+    "source/relation_spatial_pmu_preflight": {
+      "sha256": "be692f1bb8eb0c2b50ec00fa32e02a57b5ba7028cfb48d9e05ae7fb98dec9f36",
+      "size_bytes": 42624
+    },
+    "source/relation_spatial_pmu_preflight.c": {
+      "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "size_bytes": 9376
+    },
+    "source/relation_spatial_public.py": {
+      "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+      "size_bytes": 32161
+    },
+    "source/relation_spatial_runtime": {
+      "sha256": "ef313fce286b05a4fa254aac92ab867c80ba399df977e3239ff2eb6d1386a89a",
+      "size_bytes": 160784
+    },
+    "source/relation_spatial_runtime.c": {
+      "sha256": "9dc9a51575fc178cf349b2b0d11e648c9fd3b59370cc95ceecba780c8ba72877",
+      "size_bytes": 70437
+    },
+    "source/relation_spatial_runtime.h": {
+      "sha256": "725b74bf0041d3e6e4e9c628341340be7662d95968b1297c66d170fe41a74603",
+      "size_bytes": 4382
+    },
+    "source/relation_spatial_target.py": {
+      "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+      "size_bytes": 91980
+    }
+  },
+  "path": "C:\\tmp\\family10h_relation_prep_axis_composition_screen_v1_0_source_package.tar.gz",
+  "run_id": "family10h_relation_prep_axis_composition_screen_v1_0",
+  "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_SOURCE_PACKAGE_V1",
+  "sha256": "8b7fbf23ed1d0470edfbeab2aa072d8b28b086c25977d36cce51c54b0f23a69b",
+  "size_bytes": 925406
+}
