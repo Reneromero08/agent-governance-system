@@ -1,10 +1,10 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T17:17:53-07:00",
+  "updated_at": "2026-07-23T17:32:15-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
-  "checkpoint_head": "0d728d040e12254844e9a013ce57751531095efb",
-  "origin_head": "0d728d040e12254844e9a013ce57751531095efb",
+  "checkpoint_head": "373d0d77f32dd00d18d255dde37a31c9efca1bfc",
+  "origin_head": "373d0d77f32dd00d18d255dde37a31c9efca1bfc",
   "autonomous_mode": {
     "active": true,
     "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
@@ -54,17 +54,17 @@
     ]
   },
   "current_package": {
-    "package_id": "family10h_relation_temporal_source_off_discovery_v1",
-    "transaction_run_id": "family10h_relation_temporal_source_off_discovery_v1_0",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_temporal_source_off_discovery_v1",
+    "package_id": "family10h_relation_fixed_marginal_order_discovery_v1",
+    "transaction_run_id": "family10h_relation_fixed_marginal_order_discovery_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_fixed_marginal_order_discovery_v1",
     "package_decision": "EXPLORATORY_DISCOVERY_COMPLETE_NO_SCIENTIFIC_CLAIM",
     "package_manifest_sha256": null,
-    "schedule_manifest_sha256": "8b3c0ed81cf02d4949f93b522f9ead24b43efa171b66e2067be85e81d7235d73",
+    "schedule_manifest_sha256": "458c2a8936cc3c2808b1f972edac2d23f9f7c792ce14900a59db2dd0d9a8c221",
     "threshold_contract_sha256": null,
     "source_schedule_package": "family10h_primary_minus_sham_local_paired_differential_v1",
-    "source_authority_commit": "a1ef3e5ec65fbb0a541aeca28eaea873dfa0b36e",
+    "source_authority_commit": "373d0d77f32dd00d18d255dde37a31c9efca1bfc",
     "source_freeze_commit": null,
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_temporal_source_off_discovery_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_fixed_marginal_order_discovery_v1_0/attempt_1",
     "attempt_output_path_fresh": true
   },
   "current_observable": {
@@ -133,7 +133,8 @@
     "relation_rspatial_shift_sweep_discovery_attempts": 1,
     "relation_temporal_order_discovery_attempts": 1,
     "relation_temporal_lifetime_mutation_discovery_attempts": 1,
-    "relation_temporal_source_off_discovery_attempts": 1
+    "relation_temporal_source_off_discovery_attempts": 1,
+    "relation_fixed_marginal_order_discovery_attempts": 1
   },
   "latest_retained_evidence": {
     "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
@@ -739,6 +740,38 @@
       "source_off_all_one_factor_strata_below_25pct_alive_D": false,
       "source_off_kills_below_25pct_alive_D": false,
       "source_written_temporal_candidate": false
+    },
+    "relation_fixed_marginal_order_result": "EXPLORATORY_ONLY_FIXED_MARGINAL_AB_BA_ORDER_NOT_SOURCE_AUTHORED_ENOUGH_FOR_HOLOGRAPHIC_CANDIDATE",
+    "relation_fixed_marginal_order_archive_sha256": "7a3a208de21b377b2f3b0c9202b19c6e75b510e29d95b7e3e7a2ded21dd91963",
+    "relation_fixed_marginal_order_archive_size": 88725672,
+    "relation_fixed_marginal_order_analysis_sha256": "47bdf5e9fa48ffe28da904a782c128d379aaa78c016b1a7a499385b60d098276",
+    "relation_fixed_marginal_order_raw_record_count": 16384,
+    "relation_fixed_marginal_order_pair_observation_count": 4194304,
+    "relation_fixed_marginal_order_source_death_receipt_count": 16384,
+    "relation_fixed_marginal_order_coordinates": {
+      "D_ab_primary_minus_sham": 0.07247484824245574,
+      "D_alive_order_ab_minus_ba": 0.010436073909989484,
+      "D_ba_primary_minus_sham": 0.06203877433246626,
+      "D_dead_order_ab_minus_ba": -0.013182466571342626,
+      "D_neutral_primary_minus_sham": 0.06023269822110439,
+      "D_random_primary_minus_sham": 0.041322362314715005,
+      "D_source_off_order_ab_minus_ba": 0.005942711335411507,
+      "R_ab_primary": 0.06870493497711036,
+      "R_alive_primary_order_ab_minus_ba": 0.012715084528268111,
+      "R_ba_primary": 0.05598985044884225,
+      "dead_order_abs_to_alive_order_abs": 1.2631633969863203,
+      "neutral_abs_to_alive_order_abs": 5.771586014109121,
+      "random_abs_to_alive_order_abs": 3.9595697262320986,
+      "source_off_order_abs_to_alive_order_abs": 0.5694393683550959
+    },
+    "relation_fixed_marginal_order_interpretation": {
+      "alive_order_nonzero": true,
+      "dead_preserves_at_least_25pct_alive_order": true,
+      "exploratory_only": true,
+      "fixed_marginal_order_candidate": false,
+      "order_contrast_all_one_factor_strata_same_sign": true,
+      "small_wall_crossed": false,
+      "source_off_collapses_below_25pct_alive_order": false
     }
   },
   "hypothesis_frontier": {
@@ -838,9 +871,10 @@
       "source-dead same/opposite mutation as an oriented phase-flip law under the current +/-1 relation geometry",
       "relation-spatial shift variation as a clean oriented phase law; all tested shifts kept D positive and did not yield sign-changing selectivity",
       "current +/- spatial shift as a signed oriented relational phase; later controls indicate amplitude-dominant carrier response rather than stable source-authored orientation",
-      "temporal/order-coded relation as source-written carrier; no-source-preparation D was 3.80x alive D"
+      "temporal/order-coded relation as source-written carrier; no-source-preparation D was 3.80x alive D",
+      "fixed-marginal AB-versus-BA source operation order as a clean source-authored holographic candidate; alive D_order was nonzero but source-off preserved 56.9% of it and neutral/random controls were 5.77x/3.96x larger than the order contrast"
     ],
-    "current_next_experiment": "build and run the smallest fixed-marginal temporal/order-coded AB-versus-BA exploratory package: AB preparation, BA preparation, source-off AB/BA geometry, order-neutral/interleaved control, relation-sham comparator, wrong/randomized-order control, and source-dead query lane",
+    "current_next_experiment": "move up the search ladder to a closed-loop or holonomy-style composition probe: fixed marginals, ABBA or ABA^-1B^-1 style source composition where possible, source-off and order-neutral collapse controls, wrong-loop control, and source-dead readout",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
@@ -862,7 +896,8 @@
       "temporal-order candidate is exploratory only; source-death persistence, reset kill, restore-same, restore-opposite flip, and carrier-off/geometry-null controls are not yet established for this coordinate",
       "temporal lifetime/mutation run: dead D = 1.245x alive D, reset D = -0.896x alive D, mutate_opposite D = +2.331x alive D; no reset kill or opposite flip",
       "temporal source-off control: D_source_off = 0.12242533531019292, 3.800x alive D, so the previous temporal receiver-order coordinate cannot be promoted as source-written relation evidence",
-      "a new fixed-marginal temporal source-operation package must prevent AB versus BA from being encoded through different addresses, counts, durations, spatial offsets, or receiver schedule identity"
+      "a new fixed-marginal temporal source-operation package must prevent AB versus BA from being encoded through different addresses, counts, durations, spatial offsets, or receiver schedule identity",
+      "fixed-marginal AB/BA order run: D_alive_order = 0.010436, source-off ratio = 0.569, neutral ratio = 5.772, random ratio = 3.960; not enough source-off collapse or composition specificity"
     ]
   },
   "claim_state": {
