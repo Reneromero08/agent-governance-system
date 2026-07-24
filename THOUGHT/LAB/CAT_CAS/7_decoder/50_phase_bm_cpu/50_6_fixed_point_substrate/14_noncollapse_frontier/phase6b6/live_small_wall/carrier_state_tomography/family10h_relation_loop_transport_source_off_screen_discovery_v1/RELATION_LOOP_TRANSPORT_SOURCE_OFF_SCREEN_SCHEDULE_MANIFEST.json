@@ -1,0 +1,145 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Does a loop-transport R0->R1 versus R1->R0 source preparation produce a primary-minus-sham orientation residue that source-off and gapped controls kill before any reset/reuse claim?",
+  "pair_sample_count": 256,
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_loop_transport_source_off_screen_discovery_v1_0",
+  "schedule_manifest_sha256": "95ce1ca8022ce52b75bbde6cb72d63fa7be885757ee19c0dec3b2366b5268f3c",
+  "schema": "FAMILY10H_RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "dead_loop_r0r1_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/dead_loop_r0r1_primary.tsv",
+      "query": "dead_loop_r0_then_r1_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "21ab7477ce1e55214a75ba794c21ae6e58016bf1cf74c9a2e377230a5c30c330",
+      "size_bytes": 642719
+    },
+    "dead_loop_r0r1_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/dead_loop_r0r1_sham.tsv",
+      "query": "dead_loop_r0_then_r1_relation_sham_control",
+      "row_count": 512,
+      "sha256": "804778141549a4d763a62182add87b9b04a8373cb63374c6f653a1087796e4fc",
+      "size_bytes": 624287
+    },
+    "dead_loop_r1r0_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/dead_loop_r1r0_primary.tsv",
+      "query": "dead_loop_r1_then_r0_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "11d8cff37c5c8120e8ce1767a119f15584ee695ed963b6e743557d6c1f025608",
+      "size_bytes": 642719
+    },
+    "dead_loop_r1r0_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/dead_loop_r1r0_sham.tsv",
+      "query": "dead_loop_r1_then_r0_relation_sham_control",
+      "row_count": 512,
+      "sha256": "d40ab4c532283ffef6fcca7b1dd135489710583a615bd9d7fec5cf0340d914cf",
+      "size_bytes": 624287
+    },
+    "gapped_loop_r0r1_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/gapped_loop_r0r1_primary.tsv",
+      "query": "gapped_loop_r0_then_r1_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "7074f5faea52f2ab44d2b54cbc23e5601e2c00e4b303c726b15092eb59c1ac1b",
+      "size_bytes": 651935
+    },
+    "gapped_loop_r0r1_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/gapped_loop_r0r1_sham.tsv",
+      "query": "gapped_loop_r0_then_r1_relation_sham_control",
+      "row_count": 512,
+      "sha256": "bd643e55a53e59bdbacae2cf65a2ebfb58ffb86a966b4c96ca0ca259df2d8922",
+      "size_bytes": 633503
+    },
+    "gapped_loop_r1r0_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/gapped_loop_r1r0_primary.tsv",
+      "query": "gapped_loop_r1_then_r0_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "c88dc39ecc1ddf83cbb091e9047c41d14e9ac1f9fd0d1f5d784fa7ee17b62721",
+      "size_bytes": 651935
+    },
+    "gapped_loop_r1r0_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/gapped_loop_r1r0_sham.tsv",
+      "query": "gapped_loop_r1_then_r0_relation_sham_control",
+      "row_count": 512,
+      "sha256": "23a8aa10d6b2d1e99cecedb0d85bce1c63427e69e0e8f81620c88d23cc48f758",
+      "size_bytes": 633503
+    },
+    "loop_r0r1_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/loop_r0r1_primary.tsv",
+      "query": "loop_r0_then_r1_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "2e0ff0c382150d10e6fe91a850492ef1db08911630b6e4f962b17bd22453c00c",
+      "size_bytes": 599711
+    },
+    "loop_r0r1_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/loop_r0r1_sham.tsv",
+      "query": "loop_r0_then_r1_relation_sham_control",
+      "row_count": 512,
+      "sha256": "e58dd7a789bf6695f48939b63f252df41e478cb9a6cddd22dd84c3694809da6c",
+      "size_bytes": 601247
+    },
+    "loop_r1r0_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/loop_r1r0_primary.tsv",
+      "query": "loop_r1_then_r0_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "7696ae5ce52cfa23ccea10a74c2d01c1c7003b326955a499c5df45eddff6d852",
+      "size_bytes": 619679
+    },
+    "loop_r1r0_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/loop_r1r0_sham.tsv",
+      "query": "loop_r1_then_r0_relation_sham_control",
+      "row_count": 512,
+      "sha256": "e2df14cf5162362fa43b71700d3112bbe7fbed2e43a4ec1cdcbffef36928bfcb",
+      "size_bytes": 601247
+    },
+    "source_off_loop_r0r1_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/source_off_loop_r0r1_primary.tsv",
+      "query": "source_off_loop_r0_then_r1_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "751c31890b047800be985b335a3c60a8e1f98a14421e690f3d478407babc0bbd",
+      "size_bytes": 670367
+    },
+    "source_off_loop_r0r1_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/source_off_loop_r0r1_sham.tsv",
+      "query": "source_off_loop_r0_then_r1_relation_sham_control",
+      "row_count": 512,
+      "sha256": "37e962566c722f26f40eda63c4a33268bac3c323aac33a80be24377ebc3945ec",
+      "size_bytes": 651935
+    },
+    "source_off_loop_r1r0_primary": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/source_off_loop_r1r0_primary.tsv",
+      "query": "source_off_loop_r1_then_r0_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "923fa41c722a9e6b492fb95b7ea71307708b072f27f2edb4f47f0f5a97599d47",
+      "size_bytes": 670367
+    },
+    "source_off_loop_r1r0_sham": {
+      "expected_pair_observation_count": 131072,
+      "path": "RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/source_off_loop_r1r0_sham.tsv",
+      "query": "source_off_loop_r1_then_r0_relation_sham_control",
+      "row_count": 512,
+      "sha256": "c8c9cdfcfac6b88aea62459d5814e24c5d07e34ec7fb3406662e934ffe42e5c8",
+      "size_bytes": 651935
+    }
+  }
+}

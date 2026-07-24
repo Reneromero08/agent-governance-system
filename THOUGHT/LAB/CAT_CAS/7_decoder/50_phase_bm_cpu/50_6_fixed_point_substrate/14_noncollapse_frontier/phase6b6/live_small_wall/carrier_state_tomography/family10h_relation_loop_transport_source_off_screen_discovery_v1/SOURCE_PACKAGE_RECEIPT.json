@@ -1,0 +1,158 @@
+{
+  "created_at": "2026-07-24T01:51:11.565938+00:00",
+  "files": {
+    "source/RELATION_GRAMMAR.json": {
+      "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+      "size_bytes": 292071
+    },
+    "source/RELATION_GRAMMAR.sha256": {
+      "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+      "size_bytes": 66
+    },
+    "source/RELATION_GRAMMAR.tsv": {
+      "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+      "size_bytes": 360
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/dead_loop_r0r1_primary.tsv": {
+      "sha256": "21ab7477ce1e55214a75ba794c21ae6e58016bf1cf74c9a2e377230a5c30c330",
+      "size_bytes": 642719
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/dead_loop_r0r1_sham.tsv": {
+      "sha256": "804778141549a4d763a62182add87b9b04a8373cb63374c6f653a1087796e4fc",
+      "size_bytes": 624287
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/dead_loop_r1r0_primary.tsv": {
+      "sha256": "11d8cff37c5c8120e8ce1767a119f15584ee695ed963b6e743557d6c1f025608",
+      "size_bytes": 642719
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/dead_loop_r1r0_sham.tsv": {
+      "sha256": "d40ab4c532283ffef6fcca7b1dd135489710583a615bd9d7fec5cf0340d914cf",
+      "size_bytes": 624287
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/gapped_loop_r0r1_primary.tsv": {
+      "sha256": "7074f5faea52f2ab44d2b54cbc23e5601e2c00e4b303c726b15092eb59c1ac1b",
+      "size_bytes": 651935
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/gapped_loop_r0r1_sham.tsv": {
+      "sha256": "bd643e55a53e59bdbacae2cf65a2ebfb58ffb86a966b4c96ca0ca259df2d8922",
+      "size_bytes": 633503
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/gapped_loop_r1r0_primary.tsv": {
+      "sha256": "c88dc39ecc1ddf83cbb091e9047c41d14e9ac1f9fd0d1f5d784fa7ee17b62721",
+      "size_bytes": 651935
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/gapped_loop_r1r0_sham.tsv": {
+      "sha256": "23a8aa10d6b2d1e99cecedb0d85bce1c63427e69e0e8f81620c88d23cc48f758",
+      "size_bytes": 633503
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/loop_r0r1_primary.tsv": {
+      "sha256": "2e0ff0c382150d10e6fe91a850492ef1db08911630b6e4f962b17bd22453c00c",
+      "size_bytes": 599711
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/loop_r0r1_sham.tsv": {
+      "sha256": "e58dd7a789bf6695f48939b63f252df41e478cb9a6cddd22dd84c3694809da6c",
+      "size_bytes": 601247
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/loop_r1r0_primary.tsv": {
+      "sha256": "7696ae5ce52cfa23ccea10a74c2d01c1c7003b326955a499c5df45eddff6d852",
+      "size_bytes": 619679
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/loop_r1r0_sham.tsv": {
+      "sha256": "e2df14cf5162362fa43b71700d3112bbe7fbed2e43a4ec1cdcbffef36928bfcb",
+      "size_bytes": 601247
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/source_off_loop_r0r1_primary.tsv": {
+      "sha256": "751c31890b047800be985b335a3c60a8e1f98a14421e690f3d478407babc0bbd",
+      "size_bytes": 670367
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/source_off_loop_r0r1_sham.tsv": {
+      "sha256": "37e962566c722f26f40eda63c4a33268bac3c323aac33a80be24377ebc3945ec",
+      "size_bytes": 651935
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/source_off_loop_r1r0_primary.tsv": {
+      "sha256": "923fa41c722a9e6b492fb95b7ea71307708b072f27f2edb4f47f0f5a97599d47",
+      "size_bytes": 670367
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULES/source_off_loop_r1r0_sham.tsv": {
+      "sha256": "c8c9cdfcfac6b88aea62459d5814e24c5d07e34ec7fb3406662e934ffe42e5c8",
+      "size_bytes": 651935
+    },
+    "source/RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SCHEDULE_MANIFEST.json": {
+      "sha256": "a53c5e627e9a06e1177851ca38ff1daf0b8ec8c0e1f222dbf58775b27f83b5f2",
+      "size_bytes": 7411
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+      "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+      "size_bytes": 2277
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+      "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+      "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+      "size_bytes": 1866
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+      "size_bytes": 11263467
+    },
+    "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+      "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+      "size_bytes": 2635
+    },
+    "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+      "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+      "size_bytes": 3120
+    },
+    "source/RUN_RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_DISCOVERY.sh": {
+      "sha256": "f0bdee7efc40a08aa37036c52172fecfdbf6066c6946fe0c977151760ea6cd31",
+      "size_bytes": 9119
+    },
+    "source/relation_spatial_adjudication.py": {
+      "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "size_bytes": 864
+    },
+    "source/relation_spatial_physical_adjudication.py": {
+      "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+      "size_bytes": 42533
+    },
+    "source/relation_spatial_pmu_preflight": {
+      "sha256": "bb8592803d342c605e9266a35c7e3f3ce49ef69b549ddd636d7c1abccb91c539",
+      "size_bytes": 42656
+    },
+    "source/relation_spatial_pmu_preflight.c": {
+      "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "size_bytes": 9376
+    },
+    "source/relation_spatial_public.py": {
+      "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+      "size_bytes": 32161
+    },
+    "source/relation_spatial_runtime": {
+      "sha256": "c56014b1480ad770ae5f5150caf042471f586b1b1dfa9608491b17427fca5a6a",
+      "size_bytes": 134856
+    },
+    "source/relation_spatial_runtime.c": {
+      "sha256": "aee5cc95008d33d7c34140aa969abe3a255742318d447f10721c40ddc02ec6b9",
+      "size_bytes": 59904
+    },
+    "source/relation_spatial_runtime.h": {
+      "sha256": "8749628e7b9e34a9d13a480c46fdc6f125153212086d24f248a273f008a31bbd",
+      "size_bytes": 3654
+    },
+    "source/relation_spatial_target.py": {
+      "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+      "size_bytes": 91980
+    }
+  },
+  "path": "C:\\tmp\\family10h_relation_loop_transport_source_off_screen_discovery_v1_0_source_package.tar.gz",
+  "run_id": "family10h_relation_loop_transport_source_off_screen_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_SOURCE_PACKAGE_V1",
+  "sha256": "32fb9f9582e62cdcd3866bf4dc1f6b36b5e678648deb28776390960c6ad53c09",
+  "size_bytes": 841449
+}
