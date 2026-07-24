@@ -2,6 +2,21 @@
 
 # Changelog
 
+## 2026-07-23: CAT_CAS constraint relational trace proof campaign
+
+- Extend the public 3-CNF proof campaign with terminal-agnostic clause dynamics,
+  a constant-population thermal zero-mode boundary, conditional flow-to-`P = NP`
+  and polynomial-length transfer theorems, basin and instanton deadline audits,
+  reversible cotangent compensation, and structured parity, pigeonhole, and
+  graph-coloring controls.
+
+- Add a public rational polynomial selector dilation with `n + 11m` carrier
+  coordinates, independent clause and pair selector simplexes, a complete
+  three-variable formula census, smooth adaptive integration, and an explicit
+  parity-32 memory/work scaling transition. Keep the claim ceiling at
+  `CET_NATIVE_OPERATOR_NOT_ESTABLISHED` and add NumPy and SciPy to the dedicated
+  hosted qualification workflow.
+
 ## 2026-07-17: CAT_CAS phase-lock control plane
 
 - Add an executable CAT_CAS mission and capability control plane that binds
