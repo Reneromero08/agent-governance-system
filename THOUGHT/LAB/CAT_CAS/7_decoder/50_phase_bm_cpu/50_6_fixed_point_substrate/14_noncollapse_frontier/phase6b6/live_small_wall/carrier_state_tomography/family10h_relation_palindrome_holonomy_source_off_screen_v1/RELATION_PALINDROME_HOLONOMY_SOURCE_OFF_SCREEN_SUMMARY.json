@@ -1,0 +1,1537 @@
+{
+  "analysis_sha256": "9a59898dd161fe315ffac680c450f1204f393ad137198bebf910c50d810413a2",
+  "archive_sha256": "dce06ebbfa1f55dfd7f37224b6c3b3612699b60a530f9a4fe5375a6dd8bfc22d",
+  "archive_size": 45862122,
+  "claim_boundary": {
+    "full_tomography_established": false,
+    "holographic_relational_invariant_established": false,
+    "positive_scientific_claim": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "condition_reports": {
+    "alive": {
+      "coordinate_left_minus_right": -0.03216019514267185,
+      "field": "R_spatial",
+      "left_primary": 0.07305302689850901,
+      "left_primary_minus_sham": 0.08415919859485232,
+      "left_sham": -0.011106171696343314,
+      "left_variant": "palindrome_a",
+      "right_primary": 0.08742023707948174,
+      "right_primary_minus_sham": 0.11631939373752417,
+      "right_sham": -0.028899156658042435,
+      "right_variant": "palindrome_b"
+    },
+    "block_replay": {
+      "coordinate_left_minus_right": 0.05529120994760948,
+      "field": "R_spatial",
+      "left_primary": 0.07956154415669342,
+      "left_primary_minus_sham": 0.08862045797756672,
+      "left_sham": -0.009058913820873302,
+      "left_variant": "block_replay_a",
+      "right_primary": 0.06862556586917508,
+      "right_primary_minus_sham": 0.033329248029957244,
+      "right_sham": 0.035296317839217835,
+      "right_variant": "block_replay_b"
+    },
+    "dead": {
+      "coordinate_left_minus_right": 0.02267214041511513,
+      "field": "R_spatial",
+      "left_primary": 0.08191015686023816,
+      "left_primary_minus_sham": 0.10223795532831685,
+      "left_sham": -0.020327798468078695,
+      "left_variant": "dead_palindrome_a",
+      "right_primary": 0.08744984544055485,
+      "right_primary_minus_sham": 0.07956581491320172,
+      "right_sham": 0.00788403052735314,
+      "right_variant": "dead_palindrome_b"
+    },
+    "source_off": {
+      "coordinate_left_minus_right": -0.008700997640887567,
+      "field": "R_spatial",
+      "left_primary": 0.09848601661147768,
+      "left_primary_minus_sham": 0.10139332352623216,
+      "left_sham": -0.0029073069147544815,
+      "left_variant": "source_off_palindrome_a",
+      "right_primary": 0.09765214806750537,
+      "right_primary_minus_sham": 0.11009432116711973,
+      "right_sham": -0.012442173099614364,
+      "right_variant": "source_off_palindrome_b"
+    }
+  },
+  "controller_passed": true,
+  "coordinates": {
+    "K_prep_axis_block_replay_a_minus_b": -0.02185826257563761,
+    "K_prep_axis_palindrome_alive_a_minus_b": -0.05509027359899035,
+    "K_prep_axis_palindrome_dead_a_minus_b": -0.013366317220270145,
+    "K_prep_axis_palindrome_source_off_a_minus_b": -0.0007688135615066816,
+    "Omega_block_replay_a_minus_b": 0.05529120994760948,
+    "Omega_palindrome_holonomy_alive_a_minus_b": -0.03216019514267185,
+    "Omega_palindrome_holonomy_dead_a_minus_b": 0.02267214041511513,
+    "Omega_palindrome_holonomy_source_off_a_minus_b": -0.008700997640887567,
+    "block_replay_abs_to_alive_abs": 1.719243608514246,
+    "dead_abs_to_alive_abs": 0.704975212822404,
+    "source_off_abs_to_alive_abs": 0.27055176755885485
+  },
+  "created_at": "2026-07-24T03:42:22.112045+00:00",
+  "interpretation": {
+    "aggregate_block_replay_below_25pct": false,
+    "aggregate_dead_preserves_at_least_25pct": true,
+    "aggregate_source_off_collapses_below_25pct": false,
+    "all_one_factor_alive_strata_same_sign": true,
+    "all_one_factor_block_replay_below_25pct": false,
+    "all_one_factor_dead_preserves_25pct": false,
+    "all_one_factor_source_off_below_25pct": false,
+    "exploratory_only": true,
+    "max_one_factor_block_replay_ratio": 3.628162838201432,
+    "max_one_factor_source_off_ratio": 0.6970193906790277,
+    "min_one_factor_dead_ratio": 0.10077070321929008,
+    "palindrome_holonomy_coordinate_nonzero": true,
+    "palindrome_holonomy_source_off_dead_candidate": false,
+    "small_wall_crossed": false
+  },
+  "prep_axis_condition_reports": {
+    "alive": {
+      "coordinate_left_minus_right": -0.05509027359899035,
+      "field": "prep_axis",
+      "left_primary": 0.0644899995358228,
+      "left_primary_minus_sham": 0.06371979597834794,
+      "left_sham": 0.0007702035574748544,
+      "left_variant": "palindrome_a",
+      "right_primary": 0.0976997243982337,
+      "right_primary_minus_sham": 0.11881006957733829,
+      "right_sham": -0.021110345179104595,
+      "right_variant": "palindrome_b"
+    },
+    "block_replay": {
+      "coordinate_left_minus_right": -0.02185826257563761,
+      "field": "prep_axis",
+      "left_primary": 0.08099618316904661,
+      "left_primary_minus_sham": 0.08538216625378653,
+      "left_sham": -0.0043859830847399126,
+      "left_variant": "block_replay_a",
+      "right_primary": 0.09291691782741389,
+      "right_primary_minus_sham": 0.10724042882942414,
+      "right_sham": -0.014323511002010252,
+      "right_variant": "block_replay_b"
+    },
+    "dead": {
+      "coordinate_left_minus_right": -0.013366317220270145,
+      "field": "prep_axis",
+      "left_primary": 0.05275832631182204,
+      "left_primary_minus_sham": 0.05516207527498305,
+      "left_sham": -0.0024037489631610082,
+      "left_variant": "dead_palindrome_a",
+      "right_primary": 0.07533300561260914,
+      "right_primary_minus_sham": 0.0685283924952532,
+      "right_sham": 0.00680461311735595,
+      "right_variant": "dead_palindrome_b"
+    },
+    "source_off": {
+      "coordinate_left_minus_right": -0.0007688135615066816,
+      "field": "prep_axis",
+      "left_primary": 0.08591273176948594,
+      "left_primary_minus_sham": 0.08795759329780717,
+      "left_sham": -0.002044861528321227,
+      "left_variant": "source_off_palindrome_a",
+      "right_primary": 0.09059183045922475,
+      "right_primary_minus_sham": 0.08872640685931385,
+      "right_sham": 0.001865423599910903,
+      "right_variant": "source_off_palindrome_b"
+    }
+  },
+  "run_id": "family10h_relation_palindrome_holonomy_source_off_screen_v1_0",
+  "schema": "FAMILY10H_RELATION_PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_ANALYSIS_V1",
+  "stratum_reports": {
+    "cyclic_origin": {
+      "all_alive_same_sign_as_aggregate": true,
+      "levels": [
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.03399164647719942,
+            "block_replay": 0.06478345576558225,
+            "dead": 0.02144674769298692,
+            "source_off": -0.01199955448319158
+          },
+          "level": 0,
+          "ratios_to_alive_abs": {
+            "block_replay": 1.9058640130608873,
+            "dead": 0.630941714087688,
+            "source_off": 0.35301480589475187
+          }
+        },
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.04420772326736705,
+            "block_replay": 0.035686057249610756,
+            "dead": 0.05675101028398162,
+            "source_off": -0.014996915113825143
+          },
+          "level": 1024,
+          "ratios_to_alive_abs": {
+            "block_replay": 0.8072358088604225,
+            "dead": 1.283735195788146,
+            "source_off": 0.3392374455278827
+          }
+        },
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.03195893551956673,
+            "block_replay": 0.08287505210358106,
+            "dead": 0.04345312100292635,
+            "source_off": -0.02227599776259874
+          },
+          "level": 2048,
+          "ratios_to_alive_abs": {
+            "block_replay": 2.593173106558607,
+            "dead": 1.3596548288137553,
+            "source_off": 0.6970193906790277
+          }
+        },
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.02105823229881343,
+            "block_replay": 0.04976448365240409,
+            "dead": -0.01681401139489283,
+            "source_off": 0.006423244007114609
+          },
+          "level": 3072,
+          "ratios_to_alive_abs": {
+            "block_replay": 2.36318428566334,
+            "dead": 0.7984531254240297,
+            "source_off": 0.3050229438050477
+          }
+        }
+      ],
+      "max_block_replay_ratio": 2.593173106558607,
+      "max_source_off_ratio": 0.6970193906790277,
+      "min_dead_ratio": 0.630941714087688
+    },
+    "mapping": {
+      "all_alive_same_sign_as_aggregate": true,
+      "levels": [
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.025386054161446847,
+            "block_replay": 0.07021606586563149,
+            "dead": 0.04142084039964897,
+            "source_off": -0.01135887250762592
+          },
+          "level": "map0",
+          "ratios_to_alive_abs": {
+            "block_replay": 2.765930672765476,
+            "dead": 1.631637596620027,
+            "source_off": 0.4474453743534649
+          }
+        },
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.03893433612389684,
+            "block_replay": 0.04036635402958748,
+            "dead": 0.003923440430581293,
+            "source_off": -0.006043122774149243
+          },
+          "level": "map1",
+          "ratios_to_alive_abs": {
+            "block_replay": 1.0367803344876274,
+            "dead": 0.10077070321929008,
+            "source_off": 0.15521319677620335
+          }
+        }
+      ],
+      "max_block_replay_ratio": 2.765930672765476,
+      "max_source_off_ratio": 0.4474453743534649,
+      "min_dead_ratio": 0.10077070321929008
+    },
+    "query_order": {
+      "all_alive_same_sign_as_aggregate": true,
+      "levels": [
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.03768416809647622,
+            "block_replay": 0.052642834109108805,
+            "dead": 0.045144033394516773,
+            "source_off": -0.012231751247634537
+          },
+          "level": "AB",
+          "ratios_to_alive_abs": {
+            "block_replay": 1.3969482880539252,
+            "dead": 1.1979575422480433,
+            "source_off": 0.3245859432618948
+          }
+        },
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.024590306280051058,
+            "block_replay": 0.0589204657262956,
+            "dead": -0.008122675889990813,
+            "source_off": -0.003862557513123213
+          },
+          "level": "BA",
+          "ratios_to_alive_abs": {
+            "block_replay": 2.396085069265484,
+            "dead": 0.3303202407275566,
+            "source_off": 0.157076429595215
+          }
+        }
+      ],
+      "max_block_replay_ratio": 2.396085069265484,
+      "max_source_off_ratio": 0.3245859432618948,
+      "min_dead_ratio": 0.3303202407275566
+    },
+    "replicate": {
+      "all_alive_same_sign_as_aggregate": true,
+      "levels": [
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.019006429704496258,
+            "block_replay": 0.06895842194074114,
+            "dead": 0.008587950794422275,
+            "source_off": -0.003310358797487617
+          },
+          "level": 0,
+          "ratios_to_alive_abs": {
+            "block_replay": 3.628162838201432,
+            "dead": 0.45184450356768824,
+            "source_off": 0.17417047014908338
+          }
+        },
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.044516762675503474,
+            "block_replay": 0.04245231383284946,
+            "dead": 0.03590274278606902,
+            "source_off": -0.013764931099839034
+          },
+          "level": 1,
+          "ratios_to_alive_abs": {
+            "block_replay": 0.9536253600087136,
+            "dead": 0.8064994089479344,
+            "source_off": 0.30920781908998857
+          }
+        }
+      ],
+      "max_block_replay_ratio": 3.628162838201432,
+      "max_source_off_ratio": 0.30920781908998857,
+      "min_dead_ratio": 0.45184450356768824
+    },
+    "session": {
+      "all_alive_same_sign_as_aggregate": true,
+      "levels": [
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.030629047621282213,
+            "block_replay": 0.038688741919978044,
+            "dead": 0.03884636506364311,
+            "source_off": -0.00400732590452646
+          },
+          "level": "session_0",
+          "ratios_to_alive_abs": {
+            "block_replay": 1.263138913045917,
+            "dead": 1.2682851110476971,
+            "source_off": 0.13083416611824453
+          }
+        },
+        {
+          "alive_same_sign_as_aggregate": true,
+          "coordinates": {
+            "alive": -0.03359854584458334,
+            "block_replay": 0.0708874677917481,
+            "dead": 0.007478171805891859,
+            "source_off": -0.013110204423529837
+          },
+          "level": "session_1",
+          "ratios_to_alive_abs": {
+            "block_replay": 2.109837375690364,
+            "dead": 0.2225742697461851,
+            "source_off": 0.390201542774311
+          }
+        }
+      ],
+      "max_block_replay_ratio": 2.109837375690364,
+      "max_source_off_ratio": 0.390201542774311,
+      "min_dead_ratio": 0.2225742697461851
+    }
+  },
+  "variant_reports": {
+    "block_replay_a_primary": {
+      "R_spatial": {
+        "abs_mean": 0.1051877963724981,
+        "abs_of_mean": 0.07956154415669342,
+        "count": 128,
+        "max": 0.36608256606278733,
+        "mean": 0.07956154415669342,
+        "min": -0.132574589914848,
+        "sign_counts": {
+          "-1": 45,
+          "0": 0,
+          "1": 83
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.555561858027765,
+          "abs_of_mean": 0.555561858027765,
+          "count": 128,
+          "max": 0.6699411728928015,
+          "mean": 0.555561858027765,
+          "min": 0.39196494563556505,
+          "sign_counts": {
+            "-1": 0,
+            "0": 0,
+            "1": 128
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.10372946915947794,
+          "abs_of_mean": 0.07590967817586992,
+          "count": 128,
+          "max": 0.39451880645761894,
+          "mean": 0.07590967817586992,
+          "min": -0.1615743780013617,
+          "sign_counts": {
+            "-1": 49,
+            "0": 0,
+            "1": 79
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.11043001718732227,
+          "abs_of_mean": 0.08099618316904661,
+          "count": 128,
+          "max": 0.4027180148995604,
+          "mean": 0.08099618316904661,
+          "min": -0.13455284530394657,
+          "sign_counts": {
+            "-1": 48,
+            "0": 0,
+            "1": 80
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.11270872182911806,
+          "abs_of_mean": 0.07082317318269322,
+          "count": 128,
+          "max": 0.18859591069877685,
+          "mean": -0.07082317318269322,
+          "min": -0.43251104071393776,
+          "sign_counts": {
+            "-1": 70,
+            "0": 0,
+            "1": 58
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "block_replay_a_sham": {
+      "R_spatial": {
+        "abs_mean": 0.033338784154519685,
+        "abs_of_mean": 0.009058913820873302,
+        "count": 128,
+        "max": 0.10660142243691484,
+        "mean": -0.009058913820873302,
+        "min": -0.12945889978856642,
+        "sign_counts": {
+          "-1": 75,
+          "0": 0,
+          "1": 53
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.2113398555268935,
+          "abs_of_mean": 0.07148390323225727,
+          "count": 128,
+          "max": 0.6338581718306333,
+          "mean": 0.07148390323225727,
+          "min": -0.21422041087887234,
+          "sign_counts": {
+            "-1": 87,
+            "0": 0,
+            "1": 41
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.02963764513177655,
+          "abs_of_mean": 0.005302259190097406,
+          "count": 128,
+          "max": 0.10508337244364718,
+          "mean": -0.005302259190097406,
+          "min": -0.08508610299826797,
+          "sign_counts": {
+            "-1": 79,
+            "0": 0,
+            "1": 49
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.03579331905512145,
+          "abs_of_mean": 0.0043859830847399126,
+          "count": 128,
+          "max": 0.13943276514416014,
+          "mean": -0.0043859830847399126,
+          "min": -0.11391603741960188,
+          "sign_counts": {
+            "-1": 73,
+            "0": 0,
+            "1": 55
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.041035510799615926,
+          "abs_of_mean": 0.006218535295454897,
+          "count": 128,
+          "max": 0.14376035517667052,
+          "mean": 0.006218535295454897,
+          "min": -0.11416470466922701,
+          "sign_counts": {
+            "-1": 57,
+            "0": 0,
+            "1": 71
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "block_replay_b_primary": {
+      "R_spatial": {
+        "abs_mean": 0.10779846912297937,
+        "abs_of_mean": 0.06862556586917508,
+        "count": 128,
+        "max": 0.4202585816231206,
+        "mean": 0.06862556586917508,
+        "min": -0.3031973960224168,
+        "sign_counts": {
+          "-1": 61,
+          "0": 0,
+          "1": 67
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.6122645255404274,
+          "abs_of_mean": 0.6122645255404274,
+          "count": 128,
+          "max": 0.719325510537203,
+          "mean": 0.6122645255404274,
+          "min": 0.3490862622458175,
+          "sign_counts": {
+            "-1": 0,
+            "0": 0,
+            "1": 128
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.10041020829606799,
+          "abs_of_mean": 0.08989739336808883,
+          "count": 128,
+          "max": 0.41348992459466716,
+          "mean": 0.08989739336808883,
+          "min": -0.05613360423913538,
+          "sign_counts": {
+            "-1": 35,
+            "0": 0,
+            "1": 93
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.12138512521245957,
+          "abs_of_mean": 0.09291691782741389,
+          "count": 128,
+          "max": 0.4283475571128428,
+          "mean": 0.09291691782741389,
+          "min": -0.15522834740556102,
+          "sign_counts": {
+            "-1": 38,
+            "0": 0,
+            "1": 90
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.11209553567232891,
+          "abs_of_mean": 0.08687786890876378,
+          "count": 128,
+          "max": 0.22786970898481823,
+          "mean": -0.08687786890876378,
+          "min": -0.4392207423750644,
+          "sign_counts": {
+            "-1": 82,
+            "0": 0,
+            "1": 46
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "block_replay_b_sham": {
+      "R_spatial": {
+        "abs_mean": 0.06690328486785942,
+        "abs_of_mean": 0.035296317839217835,
+        "count": 128,
+        "max": 0.30935116400792745,
+        "mean": 0.035296317839217835,
+        "min": -0.1212476752446034,
+        "sign_counts": {
+          "-1": 51,
+          "0": 0,
+          "1": 77
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.22131984052539705,
+          "abs_of_mean": 0.05802597510507043,
+          "count": 128,
+          "max": 0.5882724057950011,
+          "mean": 0.05802597510507043,
+          "min": -0.28845673124701765,
+          "sign_counts": {
+            "-1": 74,
+            "0": 0,
+            "1": 54
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.05318885727793065,
+          "abs_of_mean": 0.030916828437561585,
+          "count": 128,
+          "max": 0.15927015067642775,
+          "mean": -0.030916828437561585,
+          "min": -0.29553295308885813,
+          "sign_counts": {
+            "-1": 81,
+            "0": 0,
+            "1": 47
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.0755476273813015,
+          "abs_of_mean": 0.014323511002010252,
+          "count": 128,
+          "max": 0.25958100960300584,
+          "mean": -0.014323511002010252,
+          "min": -0.2961845838061634,
+          "sign_counts": {
+            "-1": 66,
+            "0": 0,
+            "1": 62
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.07906350061010728,
+          "abs_of_mean": 0.047510145873112926,
+          "count": 128,
+          "max": 0.3236217463082645,
+          "mean": 0.047510145873112926,
+          "min": -0.2150392785434097,
+          "sign_counts": {
+            "-1": 50,
+            "0": 0,
+            "1": 78
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "dead_palindrome_a_primary": {
+      "R_spatial": {
+        "abs_mean": 0.11507726746529208,
+        "abs_of_mean": 0.08191015686023816,
+        "count": 128,
+        "max": 0.45631509735582093,
+        "mean": 0.08191015686023816,
+        "min": -0.1992150374288418,
+        "sign_counts": {
+          "-1": 47,
+          "0": 0,
+          "1": 81
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.2537545135246191,
+          "abs_of_mean": 0.253163914209487,
+          "count": 128,
+          "max": 0.3713854911704343,
+          "mean": 0.253163914209487,
+          "min": -0.03779835616845581,
+          "sign_counts": {
+            "-1": 1,
+            "0": 0,
+            "1": 127
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.09615277544339887,
+          "abs_of_mean": 0.06852303798897234,
+          "count": 128,
+          "max": 0.460622156566605,
+          "mean": 0.06852303798897234,
+          "min": -0.15159204958560993,
+          "sign_counts": {
+            "-1": 42,
+            "0": 0,
+            "1": 86
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.11060674759972823,
+          "abs_of_mean": 0.05275832631182204,
+          "count": 128,
+          "max": 0.46689162615177465,
+          "mean": 0.05275832631182204,
+          "min": -0.1800797629650202,
+          "sign_counts": {
+            "-1": 59,
+            "0": 0,
+            "1": 69
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.11485010001251195,
+          "abs_of_mean": 0.08428774966612265,
+          "count": 128,
+          "max": 0.17440552399255746,
+          "mean": -0.08428774966612265,
+          "min": -0.48037845959300196,
+          "sign_counts": {
+            "-1": 90,
+            "0": 0,
+            "1": 38
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "dead_palindrome_a_sham": {
+      "R_spatial": {
+        "abs_mean": 0.049190979984605636,
+        "abs_of_mean": 0.020327798468078695,
+        "count": 128,
+        "max": 0.12554877137332845,
+        "mean": -0.020327798468078695,
+        "min": -0.17713485090083125,
+        "sign_counts": {
+          "-1": 78,
+          "0": 0,
+          "1": 50
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.20688886585580163,
+          "abs_of_mean": 0.04913664333202333,
+          "count": 128,
+          "max": 0.5483250055109614,
+          "mean": 0.04913664333202333,
+          "min": -0.2483065361287361,
+          "sign_counts": {
+            "-1": 83,
+            "0": 0,
+            "1": 45
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.054728021542672894,
+          "abs_of_mean": 0.022574425492935795,
+          "count": 128,
+          "max": 0.09056193935873019,
+          "mean": -0.022574425492935795,
+          "min": -0.30469264425467213,
+          "sign_counts": {
+            "-1": 61,
+            "0": 0,
+            "1": 67
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.0690382325850642,
+          "abs_of_mean": 0.0024037489631610082,
+          "count": 128,
+          "max": 0.21875640258053197,
+          "mean": -0.0024037489631610082,
+          "min": -0.27461464409458003,
+          "sign_counts": {
+            "-1": 59,
+            "0": 0,
+            "1": 69
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.07482877621228161,
+          "abs_of_mean": 0.042745102022710584,
+          "count": 128,
+          "max": 0.3781149219153407,
+          "mean": 0.042745102022710584,
+          "min": -0.13722713395716513,
+          "sign_counts": {
+            "-1": 46,
+            "0": 0,
+            "1": 82
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "dead_palindrome_b_primary": {
+      "R_spatial": {
+        "abs_mean": 0.11050799277711697,
+        "abs_of_mean": 0.08744984544055485,
+        "count": 128,
+        "max": 0.48759517768199273,
+        "mean": 0.08744984544055485,
+        "min": -0.12182514351690882,
+        "sign_counts": {
+          "-1": 43,
+          "0": 0,
+          "1": 85
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.5262800636508677,
+          "abs_of_mean": 0.5262800636508677,
+          "count": 128,
+          "max": 0.6236243755740096,
+          "mean": 0.5262800636508677,
+          "min": 0.35062431622554646,
+          "sign_counts": {
+            "-1": 0,
+            "0": 0,
+            "1": 128
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.09715348560964086,
+          "abs_of_mean": 0.07150639450271148,
+          "count": 128,
+          "max": 0.37773833619121466,
+          "mean": 0.07150639450271148,
+          "min": -0.13601942714435444,
+          "sign_counts": {
+            "-1": 51,
+            "0": 0,
+            "1": 77
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.10625817333338959,
+          "abs_of_mean": 0.07533300561260914,
+          "count": 128,
+          "max": 0.39946443523555936,
+          "mean": 0.07533300561260914,
+          "min": -0.15822778506738355,
+          "sign_counts": {
+            "-1": 44,
+            "0": 0,
+            "1": 84
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.10484262318838186,
+          "abs_of_mean": 0.06767978339281384,
+          "count": 128,
+          "max": 0.22111099012508775,
+          "mean": -0.06767978339281384,
+          "min": -0.40749009007465853,
+          "sign_counts": {
+            "-1": 74,
+            "0": 0,
+            "1": 54
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "dead_palindrome_b_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05573838320094076,
+        "abs_of_mean": 0.00788403052735314,
+        "count": 128,
+        "max": 0.21319911230551916,
+        "mean": 0.00788403052735314,
+        "min": -0.13825335654971815,
+        "sign_counts": {
+          "-1": 63,
+          "0": 0,
+          "1": 65
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.19329608269558618,
+          "abs_of_mean": 0.060154452491753815,
+          "count": 128,
+          "max": 0.5842838774792675,
+          "mean": 0.060154452491753815,
+          "min": -0.21933852412011337,
+          "sign_counts": {
+            "-1": 88,
+            "0": 0,
+            "1": 40
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.033277585451729826,
+          "abs_of_mean": 0.0012461526805366877,
+          "count": 128,
+          "max": 0.1133514190828562,
+          "mean": -0.0012461526805366877,
+          "min": -0.1481365714770372,
+          "sign_counts": {
+            "-1": 67,
+            "0": 0,
+            "1": 61
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.060327566266629294,
+          "abs_of_mean": 0.00680461311735595,
+          "count": 128,
+          "max": 0.23600485503447616,
+          "mean": 0.00680461311735595,
+          "min": -0.139097602667203,
+          "sign_counts": {
+            "-1": 60,
+            "0": 0,
+            "1": 68
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.06107723603901889,
+          "abs_of_mean": 0.009296918478429325,
+          "count": 128,
+          "max": 0.1930207605967359,
+          "mean": 0.009296918478429325,
+          "min": -0.1773910661076097,
+          "sign_counts": {
+            "-1": 62,
+            "0": 0,
+            "1": 66
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "palindrome_a_primary": {
+      "R_spatial": {
+        "abs_mean": 0.10517671890346661,
+        "abs_of_mean": 0.07305302689850901,
+        "count": 128,
+        "max": 0.3939415318023073,
+        "mean": 0.07305302689850901,
+        "min": -0.12072520055297864,
+        "sign_counts": {
+          "-1": 54,
+          "0": 0,
+          "1": 74
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.5618560292214119,
+          "abs_of_mean": 0.5618560292214119,
+          "count": 128,
+          "max": 0.6683274354366083,
+          "mean": 0.5618560292214119,
+          "min": 0.40618153006734614,
+          "sign_counts": {
+            "-1": 0,
+            "0": 0,
+            "1": 128
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.09707012859636771,
+          "abs_of_mean": 0.06508369312429858,
+          "count": 128,
+          "max": 0.3939508546194475,
+          "mean": 0.06508369312429858,
+          "min": -0.09593592755856667,
+          "sign_counts": {
+            "-1": 63,
+            "0": 0,
+            "1": 65
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.10476881855664982,
+          "abs_of_mean": 0.0644899995358228,
+          "count": 128,
+          "max": 0.3806828684910854,
+          "mean": 0.0644899995358228,
+          "min": -0.12730558896308208,
+          "sign_counts": {
+            "-1": 51,
+            "0": 0,
+            "1": 77
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.10402426886302743,
+          "abs_of_mean": 0.06567738671277436,
+          "count": 128,
+          "max": 0.09521886793090795,
+          "mean": -0.06567738671277436,
+          "min": -0.414012546996969,
+          "sign_counts": {
+            "-1": 63,
+            "0": 0,
+            "1": 65
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "palindrome_a_sham": {
+      "R_spatial": {
+        "abs_mean": 0.04528983360238166,
+        "abs_of_mean": 0.011106171696343314,
+        "count": 128,
+        "max": 0.12964390452119212,
+        "mean": -0.011106171696343314,
+        "min": -0.2087325991137332,
+        "sign_counts": {
+          "-1": 72,
+          "0": 0,
+          "1": 56
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.2779891123911149,
+          "abs_of_mean": 0.11563088336744888,
+          "count": 128,
+          "max": 0.3385502939456081,
+          "mean": -0.11563088336744888,
+          "min": -0.6879440130134418,
+          "sign_counts": {
+            "-1": 74,
+            "0": 0,
+            "1": 54
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.032721386754647454,
+          "abs_of_mean": 0.002551042286952579,
+          "count": 128,
+          "max": 0.13068471447627522,
+          "mean": -0.002551042286952579,
+          "min": -0.16995470986121258,
+          "sign_counts": {
+            "-1": 56,
+            "0": 0,
+            "1": 72
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.04432043880038503,
+          "abs_of_mean": 0.0007702035574748544,
+          "count": 128,
+          "max": 0.1606287353076705,
+          "mean": 0.0007702035574748544,
+          "min": -0.14696060646170828,
+          "sign_counts": {
+            "-1": 70,
+            "0": 0,
+            "1": 58
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.047885902991855175,
+          "abs_of_mean": 0.005872288131380012,
+          "count": 128,
+          "max": 0.21515811563332377,
+          "mean": 0.005872288131380012,
+          "min": -0.12881617294648404,
+          "sign_counts": {
+            "-1": 66,
+            "0": 0,
+            "1": 62
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "palindrome_b_primary": {
+      "R_spatial": {
+        "abs_mean": 0.11487142486583665,
+        "abs_of_mean": 0.08742023707948174,
+        "count": 128,
+        "max": 0.40074253502558876,
+        "mean": 0.08742023707948174,
+        "min": -0.1342542060516041,
+        "sign_counts": {
+          "-1": 44,
+          "0": 0,
+          "1": 84
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.5465215456200503,
+          "abs_of_mean": 0.5465215456200503,
+          "count": 128,
+          "max": 0.666988240683206,
+          "mean": 0.5465215456200503,
+          "min": 0.36464831278969245,
+          "sign_counts": {
+            "-1": 0,
+            "0": 0,
+            "1": 128
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.10097851179613593,
+          "abs_of_mean": 0.0901079216580372,
+          "count": 128,
+          "max": 0.40689994130202134,
+          "mean": 0.0901079216580372,
+          "min": -0.06983035933694842,
+          "sign_counts": {
+            "-1": 37,
+            "0": 0,
+            "1": 91
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.10958896885484185,
+          "abs_of_mean": 0.0976997243982337,
+          "count": 128,
+          "max": 0.4170292651299822,
+          "mean": 0.0976997243982337,
+          "min": -0.09648316837256049,
+          "sign_counts": {
+            "-1": 31,
+            "0": 0,
+            "1": 97
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.10477768717529794,
+          "abs_of_mean": 0.08251611891784072,
+          "count": 128,
+          "max": 0.17387277948262386,
+          "mean": -0.08251611891784072,
+          "min": -0.4472526717992943,
+          "sign_counts": {
+            "-1": 91,
+            "0": 0,
+            "1": 37
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "palindrome_b_sham": {
+      "R_spatial": {
+        "abs_mean": 0.09085375762770874,
+        "abs_of_mean": 0.028899156658042435,
+        "count": 128,
+        "max": 0.22501619192655004,
+        "mean": -0.028899156658042435,
+        "min": -0.3408838258153981,
+        "sign_counts": {
+          "-1": 65,
+          "0": 0,
+          "1": 63
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.2237698585316276,
+          "abs_of_mean": 0.05059317194794027,
+          "count": 128,
+          "max": 0.6264044962068188,
+          "mean": 0.05059317194794027,
+          "min": -0.3043155418876934,
+          "sign_counts": {
+            "-1": 90,
+            "0": 0,
+            "1": 38
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.053279005892267965,
+          "abs_of_mean": 0.010588108138367061,
+          "count": 128,
+          "max": 0.16690919443782182,
+          "mean": -0.010588108138367061,
+          "min": -0.24294873887025265,
+          "sign_counts": {
+            "-1": 67,
+            "0": 0,
+            "1": 61
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.09445900756844307,
+          "abs_of_mean": 0.021110345179104595,
+          "count": 128,
+          "max": 0.2749743534105221,
+          "mean": -0.021110345179104595,
+          "min": -0.31058217656558,
+          "sign_counts": {
+            "-1": 61,
+            "0": 0,
+            "1": 67
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.09423265109491397,
+          "abs_of_mean": 6.587109762953074e-05,
+          "count": 128,
+          "max": 0.2820835581328377,
+          "mean": 6.587109762953074e-05,
+          "min": -0.3726437173036769,
+          "sign_counts": {
+            "-1": 65,
+            "0": 0,
+            "1": 63
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "source_off_palindrome_a_primary": {
+      "R_spatial": {
+        "abs_mean": 0.11517786130567652,
+        "abs_of_mean": 0.09848601661147768,
+        "count": 128,
+        "max": 0.6152350705548076,
+        "mean": 0.09848601661147768,
+        "min": -0.11001652109532845,
+        "sign_counts": {
+          "-1": 44,
+          "0": 0,
+          "1": 84
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.6377975007786901,
+          "abs_of_mean": 0.6377975007786901,
+          "count": 128,
+          "max": 0.7721831831064204,
+          "mean": 0.6377975007786901,
+          "min": 0.3845070706833027,
+          "sign_counts": {
+            "-1": 0,
+            "0": 0,
+            "1": 128
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.10740124581424798,
+          "abs_of_mean": 0.08920505027820143,
+          "count": 128,
+          "max": 0.533081302906765,
+          "mean": 0.08920505027820143,
+          "min": -0.06303790792765676,
+          "sign_counts": {
+            "-1": 60,
+            "0": 0,
+            "1": 68
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.11471673500999448,
+          "abs_of_mean": 0.08591273176948594,
+          "count": 128,
+          "max": 0.5188306748300466,
+          "mean": 0.08591273176948594,
+          "min": -0.2635638204881535,
+          "sign_counts": {
+            "-1": 61,
+            "0": 0,
+            "1": 67
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.1134706869579764,
+          "abs_of_mean": 0.09249736878691692,
+          "count": 128,
+          "max": 0.07085459024482521,
+          "mean": -0.09249736878691692,
+          "min": -0.5473319309834833,
+          "sign_counts": {
+            "-1": 73,
+            "0": 0,
+            "1": 55
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "source_off_palindrome_a_sham": {
+      "R_spatial": {
+        "abs_mean": 0.037144483426655356,
+        "abs_of_mean": 0.0029073069147544815,
+        "count": 128,
+        "max": 0.10296749807784325,
+        "mean": -0.0029073069147544815,
+        "min": -0.13112859652503248,
+        "sign_counts": {
+          "-1": 69,
+          "0": 0,
+          "1": 59
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.28451042100635854,
+          "abs_of_mean": 0.10825389480837878,
+          "count": 128,
+          "max": 0.8637954724430356,
+          "mean": 0.10825389480837878,
+          "min": -0.23635365396683708,
+          "sign_counts": {
+            "-1": 70,
+            "0": 0,
+            "1": 58
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.03692338961025908,
+          "abs_of_mean": 0.0008356768195998602,
+          "count": 128,
+          "max": 0.09548863060648302,
+          "mean": -0.0008356768195998602,
+          "min": -0.14894551005248619,
+          "sign_counts": {
+            "-1": 62,
+            "0": 0,
+            "1": 66
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.04173791683738713,
+          "abs_of_mean": 0.002044861528321227,
+          "count": 128,
+          "max": 0.13498775653499212,
+          "mean": -0.002044861528321227,
+          "min": -0.17417092410431542,
+          "sign_counts": {
+            "-1": 58,
+            "0": 0,
+            "1": 70
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.04470030608078456,
+          "abs_of_mean": 0.0003735078891215052,
+          "count": 128,
+          "max": 0.16755743907264645,
+          "mean": -0.0003735078891215052,
+          "min": -0.17988553559123174,
+          "sign_counts": {
+            "-1": 62,
+            "0": 0,
+            "1": 66
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "source_off_palindrome_b_primary": {
+      "R_spatial": {
+        "abs_mean": 0.11325390571800135,
+        "abs_of_mean": 0.09765214806750537,
+        "count": 128,
+        "max": 0.504632032762941,
+        "mean": 0.09765214806750537,
+        "min": -0.10235917906941516,
+        "sign_counts": {
+          "-1": 40,
+          "0": 0,
+          "1": 88
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.6327080324720549,
+          "abs_of_mean": 0.6327080324720549,
+          "count": 128,
+          "max": 0.7403045748541255,
+          "mean": 0.6327080324720549,
+          "min": 0.3979206890427007,
+          "sign_counts": {
+            "-1": 0,
+            "0": 0,
+            "1": 128
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.10942529866458059,
+          "abs_of_mean": 0.09564966115168674,
+          "count": 128,
+          "max": 0.4882858047918437,
+          "mean": 0.09564966115168674,
+          "min": -0.052122885316989054,
+          "sign_counts": {
+            "-1": 49,
+            "0": 0,
+            "1": 79
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.11357517826088341,
+          "abs_of_mean": 0.09059183045922475,
+          "count": 128,
+          "max": 0.48439076913468176,
+          "mean": 0.09059183045922475,
+          "min": -0.0783595276794446,
+          "sign_counts": {
+            "-1": 55,
+            "0": 0,
+            "1": 73
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.11418848489026186,
+          "abs_of_mean": 0.10070749184414872,
+          "count": 128,
+          "max": 0.06393413410076748,
+          "mean": -0.10070749184414872,
+          "min": -0.5051391207710757,
+          "sign_counts": {
+            "-1": 88,
+            "0": 0,
+            "1": 40
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    },
+    "source_off_palindrome_b_sham": {
+      "R_spatial": {
+        "abs_mean": 0.04387385872048087,
+        "abs_of_mean": 0.012442173099614364,
+        "count": 128,
+        "max": 0.1383703186537809,
+        "mean": -0.012442173099614364,
+        "min": -0.1678415021263251,
+        "sign_counts": {
+          "-1": 75,
+          "0": 0,
+          "1": 53
+        }
+      },
+      "axes": {
+        "common_axis": {
+          "abs_mean": 0.2668029963717339,
+          "abs_of_mean": 0.111485790332901,
+          "count": 128,
+          "max": 0.7587544532845445,
+          "mean": 0.111485790332901,
+          "min": -0.3772979951642641,
+          "sign_counts": {
+            "-1": 81,
+            "0": 0,
+            "1": 47
+          }
+        },
+        "offdiag_skew_axis": {
+          "abs_mean": 0.027523681558188077,
+          "abs_of_mean": 0.007688156015169571,
+          "count": 128,
+          "max": 0.11860697326006159,
+          "mean": -0.007688156015169571,
+          "min": -0.10107390881061099,
+          "sign_counts": {
+            "-1": 72,
+            "0": 0,
+            "1": 56
+          }
+        },
+        "prep_axis": {
+          "abs_mean": 0.042272338344299616,
+          "abs_of_mean": 0.001865423599910903,
+          "count": 128,
+          "max": 0.17570683103891618,
+          "mean": 0.001865423599910903,
+          "min": -0.14049891188380298,
+          "sign_counts": {
+            "-1": 60,
+            "0": 0,
+            "1": 68
+          }
+        },
+        "query_axis": {
+          "abs_mean": 0.041831880481636836,
+          "abs_of_mean": 0.01724173563025004,
+          "count": 128,
+          "max": 0.16096956078837174,
+          "mean": 0.01724173563025004,
+          "min": -0.12149565729640123,
+          "sign_counts": {
+            "-1": 45,
+            "0": 0,
+            "1": 83
+          }
+        }
+      },
+      "block_count": 128,
+      "pair_observation_count": 131072,
+      "raw_record_count": 512,
+      "source_death_receipt_count": 512
+    }
+  }
+}

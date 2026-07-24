@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-24T03:40:59.332212+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "43dcf66d3ab20e66a22c6a34f560da6a30feadc3bbc73683f3a4fe1fece53244",
+  "run_id": "family10h_relation_palindrome_holonomy_source_off_screen_v1_0",
+  "runtime_sha256": "bebd831dc5f3ed3ba946698ceb8f6969a849c3fd0c44b4636d9098264efe21c7",
+  "schedule_manifest_sha256": "6f2fe022ef7992a7d4d5204a12682b83aa33658ec8ce8c07eee7003ff3717111",
+  "schema": "FAMILY10H_RELATION_PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_PREPARE_V1",
+  "small_wall_crossed": false
+}
