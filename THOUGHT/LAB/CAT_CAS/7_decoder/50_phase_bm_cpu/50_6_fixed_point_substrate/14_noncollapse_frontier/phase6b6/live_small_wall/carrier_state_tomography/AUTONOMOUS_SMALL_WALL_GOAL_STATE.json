@@ -1,10 +1,10 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T17:00:00-07:00",
+  "updated_at": "2026-07-23T17:07:00-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
-  "checkpoint_head": "203485c4b55be928d6553e3892f56a97d50202a2",
-  "origin_head": "203485c4b55be928d6553e3892f56a97d50202a2",
+  "checkpoint_head": "0fc2ab49d3ae537d106bfb64e7033350a9187bc6",
+  "origin_head": "0fc2ab49d3ae537d106bfb64e7033350a9187bc6",
   "autonomous_mode": {
     "active": true,
     "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
@@ -54,17 +54,17 @@
     ]
   },
   "current_package": {
-    "package_id": "family10h_relation_temporal_order_discovery_v1",
-    "transaction_run_id": "family10h_relation_temporal_order_discovery_v1_0",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_temporal_order_discovery_v1",
+    "package_id": "family10h_relation_temporal_lifetime_mutation_discovery_v1",
+    "transaction_run_id": "family10h_relation_temporal_lifetime_mutation_discovery_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_temporal_lifetime_mutation_discovery_v1",
     "package_decision": "EXPLORATORY_DISCOVERY_COMPLETE_NO_SCIENTIFIC_CLAIM",
     "package_manifest_sha256": null,
-    "schedule_manifest_sha256": "d8bf1ea1ed4edeaae0963759e3e64a9758c8c42597c17c06dc013bbb812b8b72",
+    "schedule_manifest_sha256": "f9101309f97420d3581fe89db362ad65076439889d986221029a38d2e7c88f8a",
     "threshold_contract_sha256": null,
     "source_schedule_package": "family10h_primary_minus_sham_local_paired_differential_v1",
-    "source_authority_commit": "203485c4b55be928d6553e3892f56a97d50202a2",
+    "source_authority_commit": "0fc2ab49d3ae537d106bfb64e7033350a9187bc6",
     "source_freeze_commit": null,
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_temporal_order_discovery_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_temporal_lifetime_mutation_discovery_v1_0/attempt_1",
     "attempt_output_path_fresh": true
   },
   "current_observable": {
@@ -131,7 +131,8 @@
     "relation_rspatial_phase_source_restore_discovery_attempts": 1,
     "relation_rspatial_phase_mutation_discovery_attempts": 1,
     "relation_rspatial_shift_sweep_discovery_attempts": 1,
-    "relation_temporal_order_discovery_attempts": 1
+    "relation_temporal_order_discovery_attempts": 1,
+    "relation_temporal_lifetime_mutation_discovery_attempts": 1
   },
   "latest_retained_evidence": {
     "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
@@ -649,12 +650,78 @@
       "temporal_all_one_factor_strata_D_positive": true,
       "temporal_order_axis_nonzero": true,
       "temporal_order_candidate_for_followup": true
+    },
+    "relation_temporal_lifetime_mutation_result": "EXPLORATORY_ONLY_TEMPORAL_ORDER_PERSISTS_AFTER_SOURCE_DEATH_BUT_RESET_AND_OPPOSITE_MUTATION_DO_NOT_CLEANLY_VALIDATE",
+    "relation_temporal_lifetime_mutation_archive_sha256": "60b60f697b4fc6f6a346b1d9d77a54fd8f77376a1a9f527fb504f2a2496775f0",
+    "relation_temporal_lifetime_mutation_archive_size": 57015466,
+    "relation_temporal_lifetime_mutation_analysis_sha256": "ddca8768d52e64ce97cdee54117fb3751696cbf57ed7dc5761413fc021131288",
+    "relation_temporal_lifetime_mutation_coordinates": {
+      "D_alive_primary_minus_sham": 0.03999121201773931,
+      "D_dead_primary_minus_sham": 0.04978017015689081,
+      "R_alive_primary": 0.031519235950574556,
+      "R_alive_sham": -0.008471976067164754,
+      "R_dead_primary": 0.04291558146186915,
+      "R_dead_sham": -0.0068645886950216605,
+      "best_reset_D_abs_to_alive_D_abs": 0.895792543400106,
+      "best_reset_D_primary_minus_sham": -0.03582382952702358,
+      "best_reset_max_stratum_abs_to_alive_matched_abs": 8.77779191887903,
+      "best_reset_method": "reset_double_flush",
+      "dead_D_abs_to_alive_D_abs": 1.244777731037742,
+      "dead_primary_abs_to_alive_primary_abs": 1.3615679494631547,
+      "mutate_opposite_D_abs_to_alive_D_abs": 2.3310577139818385,
+      "mutate_opposite_D_primary_minus_sham": 0.09322182326543442,
+      "mutate_same_D_abs_to_alive_D_abs": 1.778393201795853,
+      "mutate_same_D_primary_minus_sham": 0.0711200995839242,
+      "reset_methods_by_stratum_ratio": [
+        {
+          "D_abs_to_alive_D_abs": 0.895792543400106,
+          "D_primary_minus_sham": -0.03582382952702358,
+          "max_stratum_abs_to_alive_matched_abs": 8.77779191887903,
+          "method": "reset_double_flush"
+        }
+      ],
+      "reuse_methods": [
+        {
+          "D_abs_to_alive_D_abs": 1.778393201795853,
+          "D_primary_minus_sham": 0.0711200995839242,
+          "all_one_factor_strata_D_positive": true,
+          "max_stratum_abs_to_alive_matched_abs": 4.215706195888456,
+          "method": "mutate_same"
+        },
+        {
+          "D_abs_to_alive_D_abs": 2.3310577139818385,
+          "D_primary_minus_sham": 0.09322182326543442,
+          "all_one_factor_strata_D_positive": true,
+          "max_stratum_abs_to_alive_matched_abs": 8.475406972414943,
+          "method": "mutate_opposite"
+        }
+      ]
+    },
+    "relation_temporal_lifetime_mutation_interpretation": {
+      "alive_D_positive": true,
+      "best_reset_kills_aggregate_below_25pct_alive_D": false,
+      "best_reset_kills_all_one_factor_strata_below_25pct_alive_D": false,
+      "best_reset_method": "reset_double_flush",
+      "best_reset_reduces_dead_D_abs": true,
+      "candidate_persistent_source_written_state_with_reset_method": false,
+      "dead_D_positive": true,
+      "dead_all_one_factor_strata_D_positive": true,
+      "dead_preserves_at_least_25pct_alive_D": true,
+      "dead_primary_same_sign_as_alive_primary": true,
+      "exploratory_only": true,
+      "mutate_opposite_flips_D_negative": false,
+      "mutate_opposite_magnitude_at_least_50pct_alive_D": true,
+      "mutate_same_rebuilds_at_least_50pct_alive_D": true,
+      "mutate_same_rebuilds_positive_D": true,
+      "phase_mutation_candidate": false,
+      "small_wall_crossed": false,
+      "source_death_kills_below_25pct_alive_D": false
     }
   },
   "hypothesis_frontier": {
     "active_wall": "carrier/access-model selection below full Small Wall crossing",
-    "leading_mechanism": "temporal/order-coded relation under identical spatial marginals produced a strong local primary-minus-sham relation axis; spatial shift remains an amplitude-only family",
-    "strongest_candidate_coordinate": "temporal order coded relation: D_temporal_primary_minus_sham = 0.07657611477051497, sham = -0.014717118043974504, all one-factor strata D positive",
+    "leading_mechanism": "temporal/order-coded relation is a strong receiver-visible coordinate, but it may include source-independent query/order structure because source-dead persists and reset/opposite mutation do not cleanly kill or flip it",
+    "strongest_candidate_coordinate": "temporal order local primary-minus-sham D, pending source-off/no-prepare isolation",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
       "branch": "codex/audio-frequency-wave-substrate",
@@ -683,7 +750,7 @@
       "source-dead same/opposite mutation as an oriented phase-flip law under the current +/-1 relation geometry",
       "relation-spatial shift variation as a clean oriented phase law; all tested shifts kept D positive and did not yield sign-changing selectivity"
     ],
-    "current_next_experiment": "run a temporal-order lifetime/reset/mutation probe: alive, source-dead, reset, restore-same, restore-opposite, and source-off/geometry-null controls using the same temporal relation coding",
+    "current_next_experiment": "run temporal source-off/no-prepare controls: alive primary/sham versus no-source-preparation primary/sham under the same temporal query grammar",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
@@ -702,7 +769,8 @@
       "opposite relation mutation refreshed D instead of flipping it, indicating the current +/-1 source operation stores amplitude more strongly than oriented relation phase",
       "double-flush reset behavior is not stable enough across 1024-row phase probes to freeze a reset law yet",
       "relation shift sweep kept D positive for shifts 1, 2, 4, 8, 16, 32, 64, and 128; best shift 32 only amplified D and did not create oriented sign selectivity",
-      "temporal-order candidate is exploratory only; source-death persistence, reset kill, restore-same, restore-opposite flip, and carrier-off/geometry-null controls are not yet established for this coordinate"
+      "temporal-order candidate is exploratory only; source-death persistence, reset kill, restore-same, restore-opposite flip, and carrier-off/geometry-null controls are not yet established for this coordinate",
+      "temporal lifetime/mutation run: dead D = 1.245x alive D, reset D = -0.896x alive D, mutate_opposite D = +2.331x alive D; no reset kill or opposite flip"
     ]
   },
   "claim_state": {
