@@ -124,24 +124,41 @@ class ConstraintHolo:
         declared_clause_count: int | None = None
         raw_clause: list[int] = []
         clauses: list[ClauseRelation] = []
+        saw_clause_data = False
 
-        for raw_line in text.splitlines():
+        for line_number, raw_line in enumerate(text.splitlines(), start=1):
             line = raw_line.strip()
             if not line or line.startswith("c"):
                 continue
             if line.startswith("p"):
+                if declared_count is not None:
+                    if saw_clause_data or raw_clause or clauses:
+                        raise ConstraintHoloError("DIMACS problem line appears after clause data")
+                    raise ConstraintHoloError("duplicate DIMACS problem line")
                 fields = line.split()
                 if len(fields) != 4 or fields[1] != "cnf":
                     raise ConstraintHoloError("expected 'p cnf <variables> <clauses>'")
-                if declared_count is not None:
-                    raise ConstraintHoloError("duplicate DIMACS problem line")
-                declared_count = int(fields[2])
-                declared_clause_count = int(fields[3])
+                try:
+                    declared_count = int(fields[2])
+                    declared_clause_count = int(fields[3])
+                except ValueError as exc:
+                    raise ConstraintHoloError(
+                        f"malformed DIMACS problem counts on line {line_number}"
+                    ) from exc
                 if declared_count < 0 or declared_clause_count < 0:
                     raise ConstraintHoloError("DIMACS counts must be nonnegative")
                 continue
+
+            if declared_count is None or declared_clause_count is None:
+                raise ConstraintHoloError("DIMACS clause data appears before the problem line")
+            saw_clause_data = True
             for token in line.split():
-                value = int(token)
+                try:
+                    value = int(token)
+                except ValueError as exc:
+                    raise ConstraintHoloError(
+                        f"malformed DIMACS literal {token!r} on line {line_number}"
+                    ) from exc
                 if value == 0:
                     if len(raw_clause) != 3:
                         raise ConstraintHoloError("only exact 3-CNF clauses are accepted")
