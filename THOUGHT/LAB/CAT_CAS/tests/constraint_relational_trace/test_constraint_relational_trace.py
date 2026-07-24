@@ -31,7 +31,9 @@ from constraint_relational_trace_v1.constraint_holo import (  # noqa: E402
 from constraint_relational_trace_v1.parity_holonomy import (  # noqa: E402
     ParityConstraint,
     ParityInstance,
+    Z2PhaseCarrier,
     calibrate_parity_holonomy,
+    compile_z2_transport,
 )
 from constraint_relational_trace_v1.run_reference_campaign import (  # noqa: E402
     build_campaign_record,
@@ -132,7 +134,9 @@ def test_pairwise_local_consistency_does_not_fake_global_closure() -> None:
     result = calibrate_parity_holonomy(instance)
     assert result.pairwise_locally_compatible
     assert not result.consistent
-    assert 1 in result.cycle_residues
+    assert result.cycle_residues == (1,)
+    assert result.cycle_holonomies == (-1,)
+    assert result.obstruction_scope == "native_cycle_product_on_borrowed_vertex_phase_lanes"
     assert result.restored
 
 
@@ -148,8 +152,51 @@ def test_consistent_parity_cycle_has_trivial_holonomy() -> None:
     result = calibrate_parity_holonomy(instance)
     assert result.consistent
     assert result.cycle_residues == (0,)
+    assert result.cycle_holonomies == (1,)
     assert result.initial_carrier_digest == result.restored_carrier_digest
     assert result.terminal_carrier_digest != result.initial_carrier_digest
+
+
+def test_parity_presentation_order_does_not_change_native_holonomy() -> None:
+    left = ParityInstance.build(
+        ("a", "b", "c"),
+        (
+            ParityConstraint("a", "b", 0),
+            ParityConstraint("b", "c", 0),
+            ParityConstraint("a", "c", 1),
+        ),
+    )
+    right = ParityInstance.build(
+        ("c", "a", "b"),
+        (
+            ParityConstraint("c", "a", 1),
+            ParityConstraint("c", "b", 0),
+            ParityConstraint("b", "a", 0),
+        ),
+    )
+    left_result = calibrate_parity_holonomy(left)
+    right_result = calibrate_parity_holonomy(right)
+    assert left == right
+    assert left_result.cycle_holonomies == right_result.cycle_holonomies == (-1,)
+    assert left_result.terminal_carrier_digest == right_result.terminal_carrier_digest
+
+
+def test_wrong_inverse_order_does_not_restore_transport_chain() -> None:
+    instance = ParityInstance.build(
+        ("a", "b", "c"),
+        (
+            ParityConstraint("a", "b", 1),
+            ParityConstraint("b", "c", 1),
+        ),
+    )
+    program = compile_z2_transport(instance)
+    carrier = Z2PhaseCarrier(instance.vertices)
+    initial_digest = carrier.digest()
+    carrier.execute(instance, program)
+    for operation in program.tree_transports:
+        constraint = instance.constraints[operation.constraint_index]
+        carrier.transport(operation.parent, operation.child, constraint.transport)
+    assert carrier.digest() != initial_digest
 
 
 def test_reversible_dilation_restores_but_does_not_claim_existential_trace() -> None:
