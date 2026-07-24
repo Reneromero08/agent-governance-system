@@ -1,0 +1,50 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Does the signed offset-2 receiver projection preserve a source-written relation-matrix contrast while source-off collapses the same projection before reset/reuse claims?",
+  "pair_sample_count": 256,
+  "receiver_projection": "matrix contrast of mean(B_first_touch_cycles - A_first_touch_cycles) at signed offset 2",
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_offset2_signed_projection_source_off_screen_discovery_v1_0",
+  "schedule_manifest_sha256": "7a0faa10643d7a4a97b988193033c447a709ca67cfa08ce1d3bd26d41ccb7dc7",
+  "schema": "FAMILY10H_RELATION_OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "alive_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_SCHEDULES/alive_offset2_signed.tsv",
+      "query": "source_on_offset_2_control",
+      "row_count": 512,
+      "sha256": "f37542ab509055eb01541dd926be750460a974f0f7363edc09e826d081d52ab6",
+      "size_bytes": 597151
+    },
+    "dead_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_SCHEDULES/dead_offset2_signed.tsv",
+      "query": "dead_offset_2_control",
+      "row_count": 512,
+      "sha256": "fb8342825cba77ed57d77777cff5b3e91c23cceabf5f7ddd25bbc449b96cd2c1",
+      "size_bytes": 597663
+    },
+    "reset_double_flush_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_SCHEDULES/reset_double_flush_offset2_signed.tsv",
+      "query": "reset_double_flush_offset_2_control",
+      "row_count": 512,
+      "sha256": "477f05289f134200062f425087e1b49d81f40d18cf5a4d158df92e22894644ee",
+      "size_bytes": 662175
+    },
+    "source_off_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_SCHEDULES/source_off_offset2_signed.tsv",
+      "query": "source_off_offset_2_control",
+      "row_count": 512,
+      "sha256": "ee066fc266dd8b8d84a7d259e24882019a74fbc590416acc8d1bd3f093fc7007",
+      "size_bytes": 625311
+    }
+  }
+}
