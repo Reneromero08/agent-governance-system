@@ -6,7 +6,7 @@
 
 **Mode:** `engineering`
 
-**Status:** `REFERENCE_FOUNDATION_IMPLEMENTED__CET_NATIVE_OPERATOR_NOT_ESTABLISHED`
+**Status:** `REFERENCE_AND_MECHANISM_CAMPAIGN_IMPLEMENTED__CET_NATIVE_OPERATOR_NOT_ESTABLISHED`
 
 **Claim ceiling:**
 
@@ -14,9 +14,9 @@
 CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED
 ```
 
-This package begins a constructive attempt at a `P = NP` proof inside the CAT_CAS
-ontology. It does not claim the proof, a native existential trace, a physical carrier,
-compute advantage, or a Small Wall crossing.
+This package is a constructive attempt at a `P = NP` proof inside the CAT_CAS ontology.
+It does not claim the proof, a native existential trace, a physical carrier, compute
+advantage, or a Small Wall crossing.
 
 ## Mission Lock
 
@@ -43,40 +43,53 @@ through equality junctions. The resulting open relation denotes:
 Sol(F) = { assignment | assignment satisfies every local relation }
 ```
 
-The compiler may parse, type, normalize literal order, and build equality junctions. It
-may not simplify the formula through solving, generate assignments, call a conventional
-solver, include a witness, include an expected result, or encode a branch orientation.
+The compiler may parse, type, normalize presentation, and build equality junctions. It
+may not simplify through solving, generate assignments, call a conventional solver,
+include a witness, include an expected result, or encode branch orientation.
 
 ## Catalytic Existential Trace Target
 
 For a relation `R subset X x U x Y`, the desired native primitive is:
 
 ```text
-CET_U(R)(x, y) = exists u in U such that R(x, u, y)
+CET_U(R)(x, y) = exists u in U such that R(x, u, y).
 ```
 
 The native operation must close `U` as unresolved relational geometry. It must not
 materialize the joint state space, iterate possible values, retain an explicit
 provenance monomial for each derivation, or move equivalent expansion into preparation,
-precision, time, bandwidth, or restoration.
+precision, time, gain, bandwidth, environment, or restoration.
 
-The current package implements only:
+## Implemented Foundation and Candidate Search
 
 ```text
 exact public relation compiler
+strict tri-state boundary
 small materialized reference boundary
 factorized clause-projector hypothesis
 self-inverse evaluation dilation with provenance retained
-Z2 parity holonomy calibration
+native Z2 parity holonomy calibration
 pairwise-local false-closure control
 program-derived inverse carrier calibration
+conditional CET-implies-P=NP theorem
+post-boundary witness self-reduction
+complete clean-sector determinant-winding SAT index
+commuting local clause-Hamiltonian zero-mode index
+full reversible-oracle determinant compensation null
+historical MPO configuration-loss audit
+exact residual-relation width audit
+fermionic Gaussian interaction audit
+rank-one resolvent resource audit
+ideal zero-mode gain resource audit
+order-n exceptional-point root-latch candidate
+deterministic quantum data-processing killer control
 ```
 
 The existential quotient remains unresolved.
 
 ## Required Proof Gates
 
-A future proof promotion requires all gates below.
+A proof promotion requires every gate below.
 
 1. **Semantic exactness**
    `ConstraintHolo(F)` denotes exactly `Sol(F)` for every public formula.
@@ -90,15 +103,16 @@ A future proof promotion requires all gates below.
 5. **False-closure resistance**
    Locally compatible but globally inconsistent objects produce a nontrivial obstruction.
 6. **Total boundary**
-   `SAT`, `UNSAT`, and `INVALID CARRIER` remain distinguishable.
+   `VALID_SAT`, `VALID_UNSAT`, and `INVALID_CARRIER` remain distinguishable.
 7. **Witness boundary**
    A satisfiable result yields a conventional witness accepted by an independent checker.
 8. **Native inverse restoration**
-   Restoration reverses the actual carrier evolution without copying a stored state
-   transcript backward.
+   Restoration reverses the actual carrier evolution and complete environment without
+   copying a stored state transcript backward.
 9. **Polynomial resource theorem**
-   Compiler, carrier, evolution, settling, precision, energy, bandwidth, readout,
-   witness extraction, and restoration are polynomial in public input length.
+   Compiler, carrier, evolution, settling, precision, energy, gain, noise floor,
+   bandwidth, readout, witness extraction, environment, and restoration are polynomial
+   in public input length.
 10. **Standard-model transfer**
     Native operations admit deterministic polynomial-overhead simulation before the
     result is promoted as ordinary `P = NP`.
@@ -113,10 +127,17 @@ witness-multiplicity sweep
 pairwise-local but globally inconsistent parity triangle
 consistent parity-cycle null
 correct inverse versus wrong-order inverse
-UNSAT versus carrier-off totality
+VALID_UNSAT versus INVALID_CARRIER totality
 materialized-reference variable cap
 forbidden answer-bearing field audit
 provenance growth ledger
+clean-sector versus full-oracle determinant compensation
+historical MPO configuration-injectivity audit
+residual-relation width and variable-order audit
+fermionic local-interaction degree audit
+normalized versus unnormalized rank-one probe audit
+unique zero-mode gain and mode-resource audit
+one-shot deterministic CPTP contractivity audit
 ```
 
 ## Reference Boundary
@@ -125,18 +146,39 @@ The reference backend is capped at twenty public variables. It may enumerate onl
 establish exact semantics and adversarial controls. Exceeding the cap is a hard error.
 No scaling result from this backend is admissible as native compute evidence.
 
-## Current Constructive Hypothesis
+## Current Constructive Hypotheses
 
-The compact symbolic operator is the product of commuting local satisfaction
-projectors. It has public description size linear in variables and literal occurrences.
-Its unresolved operation is exact nonzero normalization at the boundary without
-expanding provenance or paying an equivalent hidden resource.
+### Topological rank latch
 
 ```text
-factorized local projectors
--> open satisfying subspace
--> exact nonempty relation boundary  [NOT ESTABLISHED]
+U_F(theta) = I + (exp(i theta)-1) Q_F
+determinant winding = rank(Q_F) = #SAT(F).
 ```
+
+The invariant is complete. A polynomial clean-sector determinant-line sensor is not
+established.
+
+### Clause-Hamiltonian zero mode
+
+```text
+H_F = sum of local clause-violation projectors.
+ground energy = 0 iff SAT; ground energy >= 1 iff UNSAT.
+```
+
+The energy margin is constant. A polynomial zero-mode presence or population sensor is
+not established.
+
+### Exceptional-point root latch
+
+```text
+epsilon_F = #SAT(F)/2^n
+order-n companion cycle gain = 2^n
+spectral radius = #SAT(F)^(1/n).
+```
+
+The mathematical SAT margin is constant with `n` explicit sensor modes. Deterministic
+noiseless gain, unique pre-gain noise floor, complete gain/loss environment restoration,
+and standard-model transfer are not established.
 
 ## Result Tokens
 
@@ -148,6 +190,10 @@ PARITY_HOLONOMY_CALIBRATION_ESTABLISHED
 PAIRWISE_FALSE_CLOSURE_CONTROL_ESTABLISHED
 PROGRAM_DERIVED_Z2_CARRIER_RESTORATION_ESTABLISHED
 REVERSIBLE_EVALUATION_DILATION_ESTABLISHED
+CONDITIONAL_CET_IMPLIES_P_EQUALS_NP_THEOREM_ESTABLISHED
+TOPOLOGICAL_DETERMINANT_WINDING_COMPLETE_REFERENCE_INVARIANT
+COMMUTING_LOCAL_CLAUSE_HAMILTONIAN_EXACT
+ORDER_N_EP_ROOT_LATCH_ESTABLISHED_REFERENCE_CANDIDATE
 CET_NATIVE_OPERATOR_NOT_ESTABLISHED
 P_EQUALS_NP_NOT_PROVEN
 ```
@@ -157,6 +203,7 @@ Forbidden tokens:
 ```text
 CATALYTIC_EXISTENTIAL_TRACE_ESTABLISHED
 POLYNOMIAL_RESOURCE_CLOSURE_ESTABLISHED
+POLYNOMIAL_EP_SENSOR_ESTABLISHED
 P_EQUALS_NP_PROVEN
 SMALL_WALL_CROSSED
 ```
