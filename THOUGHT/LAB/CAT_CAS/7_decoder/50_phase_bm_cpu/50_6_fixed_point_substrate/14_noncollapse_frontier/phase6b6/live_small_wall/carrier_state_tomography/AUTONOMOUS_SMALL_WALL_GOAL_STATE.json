@@ -155,7 +155,14 @@
     "relation_temporal_order_discovery_attempts": 1,
     "relation_temporal_source_off_discovery_attempts": 1,
     "relation_transform_kill_discovery_attempts": 1,
-    "relation_true_composition_replay_screen_attempts": 2
+    "relation_true_composition_replay_screen_attempts": 2,
+    "family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0": {
+      "physical_transactions": 1,
+      "interpretable_attempt": "attempt_1",
+      "raw_records": 12288,
+      "pair_observations": 3145728,
+      "source_death_receipts": 12288
+    }
   },
   "autonomous_mode": {
     "active": true,
@@ -206,13 +213,13 @@
     "small_wall_state_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/SMALL_WALL_STATE.md",
     "small_wall_state_sha256": "6fb37e6eb46603fc38b0c1feada533a22423ae4da29ab2b563ad498ccbb761f8"
   },
-  "checkpoint_head": "97e3132a9c49bae360f09aa90477bf57f98caa10",
+  "checkpoint_head": "53361496d9e98e407e2e5829b58e1a4a0cc0c196",
   "claim_state": {
     "catalytic_borrowing_established": false,
-    "current_ceiling": "exploratory offset16 origin3072 BA lifecycle probe rejected; no new positive scientific claim beyond prior scalar/local differential results",
+    "current_ceiling": "exploratory source-map-odd composition lifecycle probe rejected; no new positive scientific claim beyond prior scalar/local differential results",
     "full_carrier_state_tomography_established": false,
     "full_tomography_established": false,
-    "latest_exploratory_result": "EXPLORATORY_OFFSET16_ORIGIN3072_BA_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "latest_exploratory_result": "EXPLORATORY_SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
     "latest_positive_claim_ceiling": "PUBLIC_POST_SOURCE_LOCAL_PRIMARY_MINUS_SHAM_DIFFERENTIAL_CONFIRMED",
     "local_paired_differential_confirmed_prospectively": true,
     "physical_relational_memory_established": false,
@@ -240,21 +247,23 @@
     ]
   },
   "current_package": {
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_offset16_origin3072_ba_lifecycle_probe_v1_0/attempt_1",
+    "package_id": "family10h_relation_source_map_odd_composition_lifecycle_probe_v1",
+    "transaction_run_id": "family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_source_map_odd_composition_lifecycle_probe_v1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0/attempt_1",
     "attempt_output_path_fresh": true,
-    "package_decision": "EXPLORATORY_OFFSET16_ORIGIN3072_BA_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
-    "package_id": "family10h_relation_offset16_origin3072_ba_lifecycle_probe_v1",
-    "package_manifest_sha256": "e10f2238f8413b9324e1199cf3b3f5e58545a5ad4ee5cc19827a5c8d99f89c70",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_offset16_origin3072_ba_lifecycle_probe_v1",
-    "schedule_manifest_sha256": "eb60632d374021d79e041897b0e8543342ad212c8f538d4df61f154e9792121c",
-    "source_authority_commit": "97e3132a9c49bae360f09aa90477bf57f98caa10",
+    "package_decision": "EXPLORATORY_SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "source_authority_commit": "53361496d9e98e407e2e5829b58e1a4a0cc0c196",
     "source_freeze_commit": null,
-    "source_schedule_package": "focused offset16 origin3072 BA lifecycle probe from local paired relation-matrix source blocks",
-    "threshold_contract_sha256": null,
-    "transaction_run_id": "family10h_relation_offset16_origin3072_ba_lifecycle_probe_v1_0"
+    "source_schedule_package": "fixed-marginal native/swapped source-map-odd composition lifecycle probe",
+    "schedule_manifest_sha256": "2ae671d3999b64354a0ad86fb3f1b203d0e80bd6654548cb1c25862720625a6f",
+    "source_package_sha256": "53994790ccaab9c0fca84c878ae5e733cf01704bf6c55aa4c9d4577976c12f94",
+    "runtime_sha256": "0dc81c3f84d767ec087e234c85bb5389d2064b822b2dc24fd0b6368464f714b3",
+    "pmu_helper_sha256": "6035b840a3984c3583352bf29b04851b5832b2c2c2fcd07f5ee373a09ad5da37",
+    "threshold_contract_sha256": null
   },
   "hypothesis_frontier": {
-    "active_frontier": "origin3072 BA offset16 lifecycle probe rejected: offline source-off-null slice did not reproduce as a stable physical lifecycle coordinate; alive collapsed to -0.569, source-off expanded to 4.415x alive, dead expanded to 3.542x, and reset expanded to 9.918x. Next probes should avoid post-hoc sparse slice selection and prefer engineered fixed-marginal temporal/composition transforms with built-in aggregate controls.",
+    "active_frontier": "source-map-odd composition lifecycle probe rejected: Gamma_alive = -0.00554563859852, Gamma_source_off = -0.00424912428122 (0.766x alive), Gamma_dead = 0.00347127142921 (0.626x alive), native/swapped reversal failed, even-mode exceeded Gamma, and one-factor strata failed. Do not continue mining source-map orientation or offset sign; pivot to fixed-marginal temporal/compositional transforms that explicitly suppress common-mode occupancy.",
     "active_wall": "source-authored composition-sensitive boundary invariant below full Small Wall crossing",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
@@ -263,8 +272,9 @@
       "smallest_cpu_pattern": "encode relation as AB versus BA under identical marginals, read a held-out paired q-vector after source closure, run exact reset, then reuse the actually restored carrier with opposite relation plus no-reset/wrong-reset/geometry-null controls",
       "transferable_idea": "fixed-marginal operation-relation mutation plus active inverse restoration/reuse, not audio evidence or thresholds"
     },
-    "current_best_negative_result": "EXPLORATORY_OFFSET16_ORIGIN3072_BA_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "current_best_negative_result": "EXPLORATORY_SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
     "current_blockers": [
+      "source-map-odd composition lifecycle probe rejected: Gamma_alive = -0.00554563859852, Gamma_source_off = -0.00424912428122 (0.766x alive), Gamma_dead = 0.00347127142921 (0.626x alive but opposite sign relative to alive), native/swapped reversal = False, source-off collapse = False, strata gates all failed; no positive scientific claim emitted.",
       "offset16 origin3072 BA lifecycle probe rejected: C_alive = -0.56910807292, C_source_off = -2.5126953125 (4.415x alive), C_dead = 2.01555989583 (3.542x alive and opposite sign), C_reset_double_flush = -5.64427083333 (9.918x alive), alive one-factor strata were not same-sign, and no positive scientific claim was emitted.",
       "offset signed source-off sweep rejected as a general screen: best aggregate source-off null was offset 1024 at 0.0119x alive, but no offset passed all one-factor strata; offset 16 had aggregate source-off ratio 0.198 yet weak/mismatched strata, motivating only a post-hoc local lifecycle probe.",
       "offset16 origin2048 AB lifecycle probe rejected: C_alive = -2.74697265625, C_source_off = -0.49576822917 (0.180x alive aggregate), C_dead = 1.72721354167 (0.629x alive but opposite sign), C_reset_double_flush = -11.85367838542 (4.315x alive), source-off one-factor strata did not all collapse, reset did not collapse, and no positive scientific claim was emitted.",
@@ -404,7 +414,61 @@
       "relation-valued transport",
       "higher compatibility or obstruction surface"
     ],
-    "strongest_candidate_coordinate": "none currently clean beyond confirmed scalar/local differential; palindrome-minus-block gives a stable alive coordinate but fails source-death persistence"
+    "strongest_candidate_coordinate": "none currently clean beyond confirmed scalar/local differential; palindrome-minus-block gives a stable alive coordinate but fails source-death persistence",
+    "relation_source_map_odd_composition_lifecycle_probe_result": "EXPLORATORY_SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "relation_source_map_odd_composition_lifecycle_probe_archive_sha256": "334f4857a54cd522d80087d31372e61e7003b9d45e9e8f38ad4f49dcd8ff9d4a",
+    "relation_source_map_odd_composition_lifecycle_probe_archive_size": 67318277,
+    "relation_source_map_odd_composition_lifecycle_probe_analysis_sha256": "f9304a998e9caeb622e949c97e72231c8f65f2923524c71925dd7560b5eb2b6a",
+    "relation_source_map_odd_composition_lifecycle_probe_raw_record_count": 12288,
+    "relation_source_map_odd_composition_lifecycle_probe_pair_observation_count": 3145728,
+    "relation_source_map_odd_composition_lifecycle_probe_source_death_receipt_count": 12288,
+    "relation_source_map_odd_composition_lifecycle_probe_schedule_manifest_sha256": "2ae671d3999b64354a0ad86fb3f1b203d0e80bd6654548cb1c25862720625a6f",
+    "relation_source_map_odd_composition_lifecycle_probe_source_package_sha256": "53994790ccaab9c0fca84c878ae5e733cf01704bf6c55aa4c9d4577976c12f94",
+    "relation_source_map_odd_composition_lifecycle_probe_runtime_sha256": "0dc81c3f84d767ec087e234c85bb5389d2064b822b2dc24fd0b6368464f714b3",
+    "relation_source_map_odd_composition_lifecycle_probe_pmu_helper_sha256": "6035b840a3984c3583352bf29b04851b5832b2c2c2fcd07f5ee373a09ad5da37",
+    "relation_source_map_odd_composition_lifecycle_probe_cleanup_passed": null,
+    "relation_source_map_odd_composition_lifecycle_probe_copyback_passed": null,
+    "relation_source_map_odd_composition_lifecycle_probe_coordinates": {
+      "Gamma_alive": -0.0055456385985181225,
+      "Gamma_dead": 0.0034712714292050514,
+      "Gamma_source_off": -0.004249124281215565,
+      "alive_even_mode_abs_to_gamma_abs": 1.3836555347980315,
+      "dead_gamma_abs_to_alive_gamma_abs": 0.6259462039471211,
+      "even_mode_by_lifecycle": {
+        "alive": 0.007673253540829199,
+        "dead": 0.01594081568068615,
+        "source_off": 0.007501070326860378
+      },
+      "gamma_by_lifecycle": {
+        "alive": -0.0055456385985181225,
+        "dead": 0.0034712714292050514,
+        "source_off": -0.004249124281215565
+      },
+      "omega_by_presentation_lifecycle": {
+        "native_alive": 0.0021276149423110763,
+        "native_dead": 0.019412087109891202,
+        "native_source_off": 0.003251946045644813,
+        "swapped_alive": 0.013218892139347321,
+        "swapped_dead": 0.012469544251481099,
+        "swapped_source_off": 0.011750194608075942
+      },
+      "source_off_gamma_abs_to_alive_gamma_abs": 0.766210095686905
+    },
+    "relation_source_map_odd_composition_lifecycle_probe_interpretation": {
+      "aggregate_alive_even_mode_below_25pct_gamma": false,
+      "aggregate_dead_gamma_preserves_same_sign_and_at_least_25pct_alive_gamma": false,
+      "aggregate_native_swapped_reversal": false,
+      "aggregate_source_off_gamma_collapses_below_25pct_alive_gamma": false,
+      "alive_gamma_nonzero": true,
+      "exploratory_only": true,
+      "small_wall_crossed": false,
+      "source_map_odd_composition_lifecycle_candidate": false,
+      "strata_alive_even_mode_below_25pct_gamma_all_levels": false,
+      "strata_alive_gamma_all_same_sign_as_aggregate": false,
+      "strata_dead_gamma_preserves_same_sign_and_at_least_25pct_matched_alive_gamma": false,
+      "strata_native_swapped_reversal_all_levels": false,
+      "strata_source_off_gamma_collapses_below_25pct_matched_alive_gamma": false
+    }
   },
   "latest_retained_evidence": {
     "affinity_fix_discovery_one_factor_strata_pass": true,
@@ -1701,7 +1765,7 @@
     "relation_true_composition_replay_screen_source_death_receipt_count": 10240,
     "relation_true_composition_replay_screen_source_package_sha256": "c68436adadecb4dcadd5873eeb7c5b753c4a550b4687c802e36b539e647f412c"
   },
-  "origin_head": "97e3132a9c49bae360f09aa90477bf57f98caa10",
+  "origin_head": "53361496d9e98e407e2e5829b58e1a4a0cc0c196",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "runtime_authority": {
     "RELATION_GRAMMAR.json": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
@@ -1727,5 +1791,5 @@
     "target_model": 10,
     "target_vendor": "AuthenticAMD"
   },
-  "updated_at": "2026-07-24T05:03:40.732570+00:00"
+  "updated_at": "2026-07-24T05:28:50.794729+00:00"
 }
