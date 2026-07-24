@@ -1,0 +1,79 @@
+{
+  "prepare": {
+    "created_at": "2026-07-24T00:03:53.670628+00:00",
+    "passed": true,
+    "pmu_helper_sha256": "dec8756a20b29b3d1b9fb26de6f888dc8af37e374f9c83f191e775dfa37183ee",
+    "run_id": "family10h_relation_temporal_lifetime_mutation_discovery_v1_0",
+    "runtime_sha256": "e18561eeaa705b218ecc7c94bb6ddffb2834057bcd8877b47baef327cbc10886",
+    "schedule_manifest_sha256": "f9101309f97420d3581fe89db362ad65076439889d986221029a38d2e7c88f8a",
+    "schema": "FAMILY10H_RELATION_TEMPORAL_LIFETIME_MUTATION_PREPARE_V1",
+    "small_wall_crossed": false
+  }
+}
+{
+  "analysis_sha256": "ddca8768d52e64ce97cdee54117fb3751696cbf57ed7dc5761413fc021131288",
+  "archive_sha256": "60b60f697b4fc6f6a346b1d9d77a54fd8f77376a1a9f527fb504f2a2496775f0",
+  "controller_passed": true,
+  "coordinates": {
+    "D_alive_primary_minus_sham": 0.03999121201773931,
+    "D_dead_primary_minus_sham": 0.04978017015689081,
+    "R_alive_primary": 0.031519235950574556,
+    "R_alive_sham": -0.008471976067164754,
+    "R_dead_primary": 0.04291558146186915,
+    "R_dead_sham": -0.0068645886950216605,
+    "best_reset_D_abs_to_alive_D_abs": 0.895792543400106,
+    "best_reset_D_primary_minus_sham": -0.03582382952702358,
+    "best_reset_max_stratum_abs_to_alive_matched_abs": 8.77779191887903,
+    "best_reset_method": "reset_double_flush",
+    "dead_D_abs_to_alive_D_abs": 1.244777731037742,
+    "dead_primary_abs_to_alive_primary_abs": 1.3615679494631547,
+    "mutate_opposite_D_abs_to_alive_D_abs": 2.3310577139818385,
+    "mutate_opposite_D_primary_minus_sham": 0.09322182326543442,
+    "mutate_same_D_abs_to_alive_D_abs": 1.778393201795853,
+    "mutate_same_D_primary_minus_sham": 0.0711200995839242,
+    "reset_methods_by_stratum_ratio": [
+      {
+        "D_abs_to_alive_D_abs": 0.895792543400106,
+        "D_primary_minus_sham": -0.03582382952702358,
+        "max_stratum_abs_to_alive_matched_abs": 8.77779191887903,
+        "method": "reset_double_flush"
+      }
+    ],
+    "reuse_methods": [
+      {
+        "D_abs_to_alive_D_abs": 1.778393201795853,
+        "D_primary_minus_sham": 0.0711200995839242,
+        "all_one_factor_strata_D_positive": true,
+        "max_stratum_abs_to_alive_matched_abs": 4.215706195888456,
+        "method": "mutate_same"
+      },
+      {
+        "D_abs_to_alive_D_abs": 2.3310577139818385,
+        "D_primary_minus_sham": 0.09322182326543442,
+        "all_one_factor_strata_D_positive": true,
+        "max_stratum_abs_to_alive_matched_abs": 8.475406972414943,
+        "method": "mutate_opposite"
+      }
+    ]
+  },
+  "interpretation": {
+    "alive_D_positive": true,
+    "best_reset_kills_aggregate_below_25pct_alive_D": false,
+    "best_reset_kills_all_one_factor_strata_below_25pct_alive_D": false,
+    "best_reset_method": "reset_double_flush",
+    "best_reset_reduces_dead_D_abs": true,
+    "candidate_persistent_source_written_state_with_reset_method": false,
+    "dead_D_positive": true,
+    "dead_all_one_factor_strata_D_positive": true,
+    "dead_preserves_at_least_25pct_alive_D": true,
+    "dead_primary_same_sign_as_alive_primary": true,
+    "exploratory_only": true,
+    "mutate_opposite_flips_D_negative": false,
+    "mutate_opposite_magnitude_at_least_50pct_alive_D": true,
+    "mutate_same_rebuilds_at_least_50pct_alive_D": true,
+    "mutate_same_rebuilds_positive_D": true,
+    "phase_mutation_candidate": false,
+    "small_wall_crossed": false,
+    "source_death_kills_below_25pct_alive_D": false
+  }
+}

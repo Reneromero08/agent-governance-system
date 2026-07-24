@@ -1,0 +1,97 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Whether the temporal-order relation coordinate survives source death, is killed by reset, and can be rebuilt or flipped by source-CPU same/opposite relation mutation.",
+  "pair_sample_count": 256,
+  "rows_per_variant": 1024,
+  "run_id": "family10h_relation_temporal_lifetime_mutation_discovery_v1_0",
+  "schedule_manifest_sha256": "f9101309f97420d3581fe89db362ad65076439889d986221029a38d2e7c88f8a",
+  "schema": "FAMILY10H_RELATION_TEMPORAL_LIFETIME_MUTATION_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "alive_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "TEMPORAL_LIFETIME_MUTATION_SCHEDULES/alive_primary.tsv",
+      "query": "query_relation_pair",
+      "row_count": 1024,
+      "sha256": "e4dc14cf456501ab963f591fdfd9440ce51d4159132a90ed05606e73ab767de1",
+      "size_bytes": 1118751
+    },
+    "alive_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "TEMPORAL_LIFETIME_MUTATION_SCHEDULES/alive_sham.tsv",
+      "query": "relation_sham",
+      "row_count": 1024,
+      "sha256": "055780a1c3276cd632c4eaa875e039b092a46303fbca3b83807e6a61b63bb999",
+      "size_bytes": 1097247
+    },
+    "dead_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "TEMPORAL_LIFETIME_MUTATION_SCHEDULES/dead_primary.tsv",
+      "query": "dead_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "c044521f75f2a64b7408d16c991cd57652ad0db97eb04ea9c822d17286755691",
+      "size_bytes": 1167903
+    },
+    "dead_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "TEMPORAL_LIFETIME_MUTATION_SCHEDULES/dead_sham.tsv",
+      "query": "dead_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "976952a13b8f8b2fa2d2269e79b2fb62366d213c2523908a1d35ea20e7a16eae",
+      "size_bytes": 1131039
+    },
+    "mutate_opposite_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "TEMPORAL_LIFETIME_MUTATION_SCHEDULES/mutate_opposite_primary.tsv",
+      "query": "mutate_opposite_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "5a9419bfc34d9580af3e5ca74d353386578d4d8286fd80fc4b0267916fff98c8",
+      "size_bytes": 1269279
+    },
+    "mutate_opposite_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "TEMPORAL_LIFETIME_MUTATION_SCHEDULES/mutate_opposite_sham.tsv",
+      "query": "mutate_opposite_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "963b17505dd099f10235d95f9f7674c0dc4b8ed66a24da8bdc169a8cb154e8f9",
+      "size_bytes": 1232415
+    },
+    "mutate_same_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "TEMPORAL_LIFETIME_MUTATION_SCHEDULES/mutate_same_primary.tsv",
+      "query": "mutate_same_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "dff772bbdad157d0383f899200be7809d46394d4dacfe3aa7fcebeea6816eb6b",
+      "size_bytes": 1232415
+    },
+    "mutate_same_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "TEMPORAL_LIFETIME_MUTATION_SCHEDULES/mutate_same_sham.tsv",
+      "query": "mutate_same_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "67cbd9c34cbb279906cf8c19735ac08582f5235490031566da3210161d930070",
+      "size_bytes": 1195551
+    },
+    "reset_double_flush_primary": {
+      "expected_pair_observation_count": 262144,
+      "path": "TEMPORAL_LIFETIME_MUTATION_SCHEDULES/reset_double_flush_primary.tsv",
+      "query": "reset_double_flush_query_relation_pair_control",
+      "row_count": 1024,
+      "sha256": "59e334e7e1df70e77edc70f96f382625b37d0fe77ec9eb1becc16f3044ff4e75",
+      "size_bytes": 1296927
+    },
+    "reset_double_flush_sham": {
+      "expected_pair_observation_count": 262144,
+      "path": "TEMPORAL_LIFETIME_MUTATION_SCHEDULES/reset_double_flush_sham.tsv",
+      "query": "reset_double_flush_relation_sham_control",
+      "row_count": 1024,
+      "sha256": "baee5c7bf81401ae1bd520fb664be60beeeb62b0ca7ace2c8f5dd0187ca10d74",
+      "size_bytes": 1260063
+    }
+  }
+}
