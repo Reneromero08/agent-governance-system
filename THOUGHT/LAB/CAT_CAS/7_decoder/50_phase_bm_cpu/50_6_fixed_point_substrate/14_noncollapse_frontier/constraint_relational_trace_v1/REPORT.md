@@ -55,8 +55,22 @@ The Z2 calibration identifies a three-edge constraint cycle where every one-edge
 two-edge subobject is compatible while the complete object has nontrivial cycle charge.
 This is the first executable false-closure control for the campaign.
 
-The borrowed Z2 phase lanes are restored by replaying the public operations in reverse.
-No stored pre-state transcript is used for this calibration.
+The incidence-only compiler selects a deterministic spanning forest without evaluating
+constraint consistency. The borrowed carrier then propagates actual `+1/-1` phase
+transport along the forest. Every non-tree edge closes a cycle product on the carrier:
+
+```text
+holonomy(u, v) = phase[u] * edge_transport(u, v) * phase[v]
+```
+
+A value of `-1` is the surviving global obstruction. The original union-find draft was
+removed because it computed the obstruction conventionally and only decorated the
+result with an unrelated phase tape. The current obstruction is produced by carrier
+transport itself.
+
+The carrier is restored by executing the exact public tree transports in reverse order.
+No stored pre-state transcript is used. A wrong-order replay is a hard negative control
+and does not restore a transport chain.
 
 ### Reversible evaluation dilation
 
@@ -65,6 +79,21 @@ oracle. Applying the same public operation twice restores the flag exactly.
 
 This establishes reversible evaluation while preserving provenance. It does not merge
 assignments, decide relation nonemptiness, or implement existential closure.
+
+### Conditional complexity theorem
+
+The package proves the conditional implication:
+
+```text
+uniform exact polynomial CET decision
++ deterministic polynomial standard-model simulation
+-> 3-SAT in P
+-> P = NP
+```
+
+It also implements the lawful classical boundary self-reduction that renders and
+independently verifies one witness using at most `1 + 2n` exact decision calls. The
+conditional theorem is established. Its native premise is not.
 
 ## Exact Missing Boundary
 
@@ -89,5 +118,5 @@ CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED
 
 The requested DevSpace connector rejected this conversation before opening a worktree,
 so local execution and Codex CLI support were unavailable. The branch was constructed
-through the GitHub connector. GitHub CI is the first executable qualification surface
-for this package.
+through the GitHub connector. GitHub CI is the executable qualification surface for
+this package.
