@@ -1,11 +1,11 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `4.2`
+**Roadmap version:** `4.3`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through milestone:** `ALGEBRAIC_RELATION_TREE_PHASE_ESTABLISHED`
-**Current claim ceiling:** `SOFTWARE_GENERIC_BOUNDED_RELATION_TREE_PHASE_CLOSURE_REFERENCE_ONLY`
+**Reconciled through milestone:** `ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED`
+**Current claim ceiling:** `SOFTWARE_FIXED_CYCLE_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -75,6 +75,7 @@ ALGEBRAIC_RELATION_CHAIN_PHASE_ESTABLISHED
 ALGEBRAIC_RELATION_STAR_PHASE_ESTABLISHED
 ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED
 ALGEBRAIC_RELATION_TREE_PHASE_ESTABLISHED
+ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -165,6 +166,11 @@ recursive phase relation messages          25 resident messages at four-hub dept
 three-hub complete extensional survey      26,353,376 / 26,353,376 rows exact
 generic tree carrier                        O(E + sum pair path length), zero assignment slots
 generic tree restoration/reuse              below 2.5e-16, different process reuses carrier
+exact cyclic relation closure               fixed U-W-V-Z diamond, no witness slots
+exact arbitrary binary composition          26,244 / 26,244 operand rows exact
+exact relation intersection                 26,244 / 26,244 operand rows exact
+cycle operator controls                      exact {00}, bypass {00,01}, sum {00,11}
+cycle restoration/reuse                      below 1.6e-16, different process reuses carrier
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -280,13 +286,13 @@ Verification follows a substantive result. One focused review is normally suffic
 
 ## 6. Current Frontier
 
-The generic bounded-tree portion of the relational lift now passes. The
+The generic bounded-tree portion and first fixed cyclic closure now pass. The
 primary active frontier is:
 
 ```text
-CYCLIC_OPEN_PHASE_RELATIONS
--> NATIVE_LOOP_COMPOSITION
--> CYCLE_CONSISTENCY_OR_RELATIONAL_TRACE
+GENERIC_CYCLIC_PROCESS_GRAPH
+-> NATIVE_ELIMINATION_ORDER
+-> COMPACT_LOOP_CONSISTENCY_OR_RELATIONAL_TRACE
 -> IDEMPOTENT_RELATIONAL_BOUNDARY
 -> RESTORATION_AND_REUSE
 ```
@@ -462,7 +468,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-SOFTWARE_GENERIC_BOUNDED_RELATION_TREE_PHASE_CLOSURE_REFERENCE_ONLY
+SOFTWARE_FIXED_CYCLE_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY
 ```
 
 Not established:
@@ -479,8 +485,8 @@ physical restoration
 hardware bit replacement
 Small Wall crossing
 holographic relational computation
-cyclic relational trace
-unrestricted typed relation graphs
+generic cyclic relational trace
+unrestricted typed relation graphs and arity
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.

@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0.0",
+  "decision": "ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED",
+  "claim_ceiling": "SOFTWARE_FIXED_CYCLE_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY",
+  "native_mechanism": {
+    "topology": "DIAMOND_U_W_Z_V",
+    "coefficient_field": "F3",
+    "boolean_quotient_ring": "F3_X_Y_MOD_X2_MINUS_X_Y2_MINUS_Y",
+    "exact_intersection": "F_SQUARED_PLUS_G_SQUARED",
+    "exact_existential_composition": "PRODUCT_OVER_U_IN_0_1_OF_F_X_U_SQUARED_PLUS_G_U_Y_SQUARED",
+    "input_relations": 6,
+    "closed_internal_nodes": 4,
+    "phase_resident_relation_messages": 4,
+    "carrier_complex_cells": 44,
+    "tuple_slots": 0,
+    "witness_slots": 0,
+    "truth_table_slots": 0,
+    "decoded_intermediate_coefficients": 0,
+    "retained_inverse_factors": 0
+  },
+  "primary": {
+    "process_fnv1a64": "9d2e5bcc03815d94",
+    "boundary_factor_fnv1a64": "359c4708c9efed85",
+    "boundary_coefficients": [0, 2, 1, 2],
+    "boundary_zero_mask": 1,
+    "accepted_boundary_states": ["00"],
+    "maximum_root_error": 3.83036999732e-14,
+    "borrowed_carrier_displacement_l2": 7.74596669241,
+    "restoration_max_abs": 1.57009245868e-16
+  },
+  "actual_restored_cross_process_reuse": {
+    "process_fnv1a64": "94910f06e452e188",
+    "boundary_factor_fnv1a64": "2cebff08c50226d5",
+    "boundary_coefficients": [0, 1, 1, 1],
+    "boundary_zero_mask": 9,
+    "accepted_boundary_states": ["00", "11"],
+    "restoration_max_abs": 1.57009245868e-16,
+    "pass": true
+  },
+  "controls": {
+    "wrong_boundary_inverse": {
+      "applicable": true,
+      "restoration_max_abs": 1.73205080757,
+      "pass": true
+    },
+    "omitted_cycle_intersection_inverse": {
+      "applicable": true,
+      "restoration_max_abs": 1.73205080757,
+      "pass": true
+    },
+    "bypassed_lower_cycle_path": {
+      "applicable": true,
+      "boundary_factor_fnv1a64": "3598df08c9ed06f6",
+      "boundary_coefficients": [0, 2, 0, 0],
+      "boundary_zero_mask": 3,
+      "restoration_max_abs": 1.11022302463e-16,
+      "pass": true
+    },
+    "ordinary_sum_instead_of_intersection": {
+      "applicable": true,
+      "boundary_factor_fnv1a64": "2cebff08c50226d5",
+      "boundary_coefficients": [0, 1, 1, 1],
+      "boundary_zero_mask": 9,
+      "restoration_max_abs": 1.11022302463e-16,
+      "pass": true
+    }
+  },
+  "complete_operator_survey": {
+    "polynomials": 81,
+    "ordered_pairs": 6561,
+    "composition_rows": 26244,
+    "composition_mismatches": 0,
+    "intersection_rows": 26244,
+    "intersection_mismatches": 0
+  },
+  "scalar_reference": {
+    "primary_complete_assignment_rows": 64,
+    "primary_projected_zero_mask": 1,
+    "primary_exact_zero_mask": 1,
+    "primary_mismatches": 0,
+    "reuse_complete_assignment_rows": 64,
+    "reuse_projected_zero_mask": 9,
+    "reuse_exact_zero_mask": 9,
+    "reuse_mismatches": 0
+  },
+  "negative_fixtures": {
+    "missing_relation": "REJECT_RC_2",
+    "wrong_topology": "REJECT_RC_2",
+    "duplicate_role": "REJECT_RC_2",
+    "noncanonical_coefficient": "REJECT_RC_2",
+    "native_and_reference": "PASS"
+  },
+  "qualification": {
+    "strict_c11_werror_pedantic": "PASS",
+    "gcc_fanalyzer": "PASS",
+    "asan": "PASS",
+    "ubsan": "PASS",
+    "leak_detection": "PASS",
+    "fresh_process_byte_determinism": "PASS",
+    "native_output_sha256": "9c574c2c7de29269c8e013b0e6ba17a89da829035a353088cc2e7610a545695d",
+    "primary_reference_output_sha256": "3aa75ed93105c1615637b3e36af4a8c27745c5feb7c5875e077352dd10c7081f",
+    "reuse_reference_output_sha256": "337fe6729704d52b631daab133e0042d9421f5aefc32828f6e652d7eb84ab004",
+    "operator_survey_output_sha256": "1d19dce153453a6678c0df21e99a73ef9a8dd8717cd2165173214094c3095524"
+  },
+  "source_sha256": {
+    "algebraic_cycle_phase.c": "001cc918762984a2e16dd714210ba11b2103d8df7f306e3bacf8532fc35fa942",
+    "algebraic_cycle_reference.c": "a45116eba5d3531a6ddc32424e2461916be1680f8f864bda8f70cc9a0522c709",
+    "algebraic_exact_operator_survey.c": "5b09745b2c4ba7ca5ea31f06f13cec986f14d089a7b7aa012da9321e3b845bc7"
+  },
+  "no_smuggle": {
+    "native_internal_assignment_enumeration": false,
+    "native_scalar_polynomial_recurrence": false,
+    "decoded_feedback": false,
+    "oracle_feedback": false,
+    "boundary_correction": false,
+    "scalar_reference_linked_into_native": false,
+    "pass": true
+  },
+  "review": {
+    "status": "PASS",
+    "reviewer_ids": [
+      "SOL-XHIGH-ALGEBRAIC-CYCLE-01",
+      "SOL-XHIGH-ALGEBRAIC-CYCLE-MECHANISM-02"
+    ],
+    "remaining_findings": 0
+  },
+  "contact_attestation": {
+    "authorized_ssh_userspace_cpu_execution": true,
+    "audio_device_contact": false,
+    "playback_or_recording": false,
+    "device_or_firmware_access": false,
+    "p0_contact": false
+  }
+}
