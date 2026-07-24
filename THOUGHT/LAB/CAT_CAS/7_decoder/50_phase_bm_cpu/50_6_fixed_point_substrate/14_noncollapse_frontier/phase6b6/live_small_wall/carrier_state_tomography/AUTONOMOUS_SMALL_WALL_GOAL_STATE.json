@@ -62,6 +62,13 @@
       "raw_records": 1920,
       "source_death_receipts": 1920
     },
+    "family10h_relation_offset16_origin3072_ba_lifecycle_probe_v1_0": {
+      "interpretable_attempt": "attempt_1",
+      "pair_observations": 491520,
+      "physical_transactions": 1,
+      "raw_records": 1920,
+      "source_death_receipts": 1920
+    },
     "family10h_relation_offset2_handoff_decay_discovery_v1_0": {
       "pair_observations": 917504,
       "physical_transactions": 1,
@@ -202,10 +209,10 @@
   "checkpoint_head": "97e3132a9c49bae360f09aa90477bf57f98caa10",
   "claim_state": {
     "catalytic_borrowing_established": false,
-    "current_ceiling": "exploratory offset16 lifecycle probe rejected; no new positive scientific claim beyond prior scalar/local differential results",
+    "current_ceiling": "exploratory offset16 origin3072 BA lifecycle probe rejected; no new positive scientific claim beyond prior scalar/local differential results",
     "full_carrier_state_tomography_established": false,
     "full_tomography_established": false,
-    "latest_exploratory_result": "EXPLORATORY_OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "latest_exploratory_result": "EXPLORATORY_OFFSET16_ORIGIN3072_BA_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
     "latest_positive_claim_ceiling": "PUBLIC_POST_SOURCE_LOCAL_PRIMARY_MINUS_SHAM_DIFFERENTIAL_CONFIRMED",
     "local_paired_differential_confirmed_prospectively": true,
     "physical_relational_memory_established": false,
@@ -233,21 +240,21 @@
     ]
   },
   "current_package": {
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_offset16_origin2048_ab_lifecycle_probe_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_offset16_origin3072_ba_lifecycle_probe_v1_0/attempt_1",
     "attempt_output_path_fresh": true,
-    "package_decision": "EXPLORATORY_OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
-    "package_id": "family10h_relation_offset16_origin2048_ab_lifecycle_probe_v1",
-    "package_manifest_sha256": "09646906214d509a0eb35fb651531bfa648f39eaa36e9db8c6c9e2d756356c1e",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_offset16_origin2048_ab_lifecycle_probe_v1",
-    "schedule_manifest_sha256": "173dd04a50120dbd985f3154a6c48e6b1a02e58d8ee0031c6eb5906a0d573693",
+    "package_decision": "EXPLORATORY_OFFSET16_ORIGIN3072_BA_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "package_id": "family10h_relation_offset16_origin3072_ba_lifecycle_probe_v1",
+    "package_manifest_sha256": "e10f2238f8413b9324e1199cf3b3f5e58545a5ad4ee5cc19827a5c8d99f89c70",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_offset16_origin3072_ba_lifecycle_probe_v1",
+    "schedule_manifest_sha256": "eb60632d374021d79e041897b0e8543342ad212c8f538d4df61f154e9792121c",
     "source_authority_commit": "97e3132a9c49bae360f09aa90477bf57f98caa10",
     "source_freeze_commit": null,
-    "source_schedule_package": "focused offset16 origin2048 AB lifecycle probe from local paired relation-matrix source blocks",
+    "source_schedule_package": "focused offset16 origin3072 BA lifecycle probe from local paired relation-matrix source blocks",
     "threshold_contract_sha256": null,
-    "transaction_run_id": "family10h_relation_offset16_origin2048_ab_lifecycle_probe_v1_0"
+    "transaction_run_id": "family10h_relation_offset16_origin3072_ba_lifecycle_probe_v1_0"
   },
   "hypothesis_frontier": {
-    "active_frontier": "offset16 origin2048 AB lifecycle probe rejected: aggregate source-off collapsed to 0.180x alive, but source-off one-factor strata did not all collapse, dead flipped sign while preserving 0.629x magnitude, and reset double-flush amplified to 4.315x alive; the receiver offset source-off null is real only as a local aggregate, not as a reset-clean persistent relation coordinate.",
+    "active_frontier": "origin3072 BA offset16 lifecycle probe rejected: offline source-off-null slice did not reproduce as a stable physical lifecycle coordinate; alive collapsed to -0.569, source-off expanded to 4.415x alive, dead expanded to 3.542x, and reset expanded to 9.918x. Next probes should avoid post-hoc sparse slice selection and prefer engineered fixed-marginal temporal/composition transforms with built-in aggregate controls.",
     "active_wall": "source-authored composition-sensitive boundary invariant below full Small Wall crossing",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
@@ -256,8 +263,9 @@
       "smallest_cpu_pattern": "encode relation as AB versus BA under identical marginals, read a held-out paired q-vector after source closure, run exact reset, then reuse the actually restored carrier with opposite relation plus no-reset/wrong-reset/geometry-null controls",
       "transferable_idea": "fixed-marginal operation-relation mutation plus active inverse restoration/reuse, not audio evidence or thresholds"
     },
-    "current_best_negative_result": "EXPLORATORY_OFFSET16_ORIGIN2048_AB_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "current_best_negative_result": "EXPLORATORY_OFFSET16_ORIGIN3072_BA_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
     "current_blockers": [
+      "offset16 origin3072 BA lifecycle probe rejected: C_alive = -0.56910807292, C_source_off = -2.5126953125 (4.415x alive), C_dead = 2.01555989583 (3.542x alive and opposite sign), C_reset_double_flush = -5.64427083333 (9.918x alive), alive one-factor strata were not same-sign, and no positive scientific claim was emitted.",
       "offset signed source-off sweep rejected as a general screen: best aggregate source-off null was offset 1024 at 0.0119x alive, but no offset passed all one-factor strata; offset 16 had aggregate source-off ratio 0.198 yet weak/mismatched strata, motivating only a post-hoc local lifecycle probe.",
       "offset16 origin2048 AB lifecycle probe rejected: C_alive = -2.74697265625, C_source_off = -0.49576822917 (0.180x alive aggregate), C_dead = 1.72721354167 (0.629x alive but opposite sign), C_reset_double_flush = -11.85367838542 (4.315x alive), source-off one-factor strata did not all collapse, reset did not collapse, and no positive scientific claim was emitted.",
       "composition-loop reset screen v1_2 rejected: Omega_alive = 0.0199996155, Omega_source_off = 0.0164513705 (0.823x alive), Omega_reset_double_flush = -0.0133397779 (0.667x alive), Omega_dead = -0.00871880344 (0.436x alive), and one-factor composition strata were not same-sign; v1_0/v1_1 parse-failure attempts were packaging metadata overflow only and are preserved separately.",
@@ -747,6 +755,44 @@
     "relation_offset16_origin2048_ab_lifecycle_probe_source_death_receipt_count": 1920,
     "relation_offset16_origin2048_ab_lifecycle_probe_source_package_sha256": "09646906214d509a0eb35fb651531bfa648f39eaa36e9db8c6c9e2d756356c1e",
     "relation_offset16_origin2048_ab_lifecycle_probe_source_package_size": 606959,
+    "relation_offset16_origin3072_ba_lifecycle_probe_analysis_sha256": "40427fe3c05d36207a21d7bfd1f7d20efa00d4dd28d80fd0366f93809fa25046",
+    "relation_offset16_origin3072_ba_lifecycle_probe_archive_sha256": "f4a56d40bef4f59e84d96338b35a1f3a01e87204cb3a89cde838ece2ca262c65",
+    "relation_offset16_origin3072_ba_lifecycle_probe_archive_size": 11257560,
+    "relation_offset16_origin3072_ba_lifecycle_probe_cleanup_passed": true,
+    "relation_offset16_origin3072_ba_lifecycle_probe_coordinates": {
+      "C_alive_offset16_signed": -0.5691080729166667,
+      "C_dead_offset16_signed": 2.0155598958333334,
+      "C_reset_double_flush_offset16_signed": -5.644270833333334,
+      "C_source_off_offset16_signed": -2.5126953125,
+      "dead_abs_to_alive_abs": 3.5416118515128985,
+      "reset_double_flush_abs_to_alive_abs": 9.917748670136705,
+      "source_off_abs_to_alive_abs": 4.415146141966482
+    },
+    "relation_offset16_origin3072_ba_lifecycle_probe_copyback_passed": true,
+    "relation_offset16_origin3072_ba_lifecycle_probe_interpretation": {
+      "alive_all_one_factor_strata_same_sign": false,
+      "alive_nonzero": true,
+      "dead_all_one_factor_strata_preserve_same_sign": false,
+      "dead_preserves_above_25pct_alive_same_sign": false,
+      "exploratory_only": true,
+      "offset16_origin3072_ba_lifecycle_candidate": false,
+      "prospective_confirmation_needed": false,
+      "reset_double_flush_all_one_factor_strata_below_25pct_alive": false,
+      "reset_double_flush_collapses_below_25pct_alive": false,
+      "small_wall_crossed": false,
+      "source_off_all_one_factor_strata_below_25pct_alive": false,
+      "source_off_collapses_below_25pct_alive": false
+    },
+    "relation_offset16_origin3072_ba_lifecycle_probe_pair_observation_count": 491520,
+    "relation_offset16_origin3072_ba_lifecycle_probe_pmu_helper_sha256": "4a27edfa01dd6749dbb1057c8fe928bf9274fddbdab7cda6b1598ca30e1f697d",
+    "relation_offset16_origin3072_ba_lifecycle_probe_raw_record_count": 1920,
+    "relation_offset16_origin3072_ba_lifecycle_probe_result": "EXPLORATORY_OFFSET16_ORIGIN3072_BA_LIFECYCLE_PROBE_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "relation_offset16_origin3072_ba_lifecycle_probe_run_id": "family10h_relation_offset16_origin3072_ba_lifecycle_probe_v1_0",
+    "relation_offset16_origin3072_ba_lifecycle_probe_runtime_sha256": "492b603d5c384e27f3af45897d5880e7fb0f046d45fb5e7712bc2a4f0069a154",
+    "relation_offset16_origin3072_ba_lifecycle_probe_schedule_manifest_sha256": "eb60632d374021d79e041897b0e8543342ad212c8f538d4df61f154e9792121c",
+    "relation_offset16_origin3072_ba_lifecycle_probe_source_death_receipt_count": 1920,
+    "relation_offset16_origin3072_ba_lifecycle_probe_source_package_sha256": "e10f2238f8413b9324e1199cf3b3f5e58545a5ad4ee5cc19827a5c8d99f89c70",
+    "relation_offset16_origin3072_ba_lifecycle_probe_source_package_size": 607166,
     "relation_offset2_handoff_decay_analysis_sha256": "12908e58b7668be85eeb2d78c759667b2c0d30f9f954d22d642d1f5ffd8003f7",
     "relation_offset2_handoff_decay_archive_sha256": "362f33fa01341eb1c8beadc98815a22d5d56063371f167f0dfd547f86ed7aad2",
     "relation_offset2_handoff_decay_archive_size": 20545214,
@@ -1681,5 +1727,5 @@
     "target_model": 10,
     "target_vendor": "AuthenticAMD"
   },
-  "updated_at": "2026-07-24T04:56:54.050800+00:00"
+  "updated_at": "2026-07-24T05:03:40.732570+00:00"
 }
