@@ -1,0 +1,308 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "created_at": "2026-07-24T03:52:23.496480+00:00",
+  "matched_marginal_law": {
+    "composition_sequence_excluded_from_marginal_digest": true,
+    "query_string_excluded_from_marginal_digest": true,
+    "receiver_query": "same four-cell held-out boundary projection in every source-order variant",
+    "spatial_addresses": "native R0 +1 and R1 -1 maps preserved; each composition variant uses the same A/B marginal line coverage",
+    "tested_relation": "adjacent relation composition sequence R0_then_R1 versus R1_then_R0, with gapped and balanced-alternating replay controls",
+    "work_counts": "copied unchanged from the same base rows for every variant; composition prep halves loop steps and touches two relation pairs per step"
+  },
+  "pair_sample_count": 256,
+  "predeclared_patterns": {
+    "H1_adjacent_composition_sensitive_relational_carrier": [
+      "R0_then_R1 and R1_then_R0 differ in held-out boundary coordinate after primary-minus-sham subtraction",
+      "source-off composition difference collapses",
+      "gapped and balanced-alternating composition controls do not replay the directed adjacent-composition difference",
+      "dead composition difference preserves a nontrivial fraction of alive composition difference"
+    ],
+    "H2_amplitude_or_occupancy_only": [
+      "R0_then_R1 and R1_then_R0 are equivalent or both replay the same local differential",
+      "source-off geometry is comparable"
+    ],
+    "H3_receiver_or_query_artifact": [
+      "composition separation appears in source-off rows or tracks receiver query_order strata"
+    ],
+    "H4_timing_artifact": [
+      "composition separation follows execution ordinal, duration, or delay rather than source composition"
+    ]
+  },
+  "receiver_schedule_frozen_before_source_relation": true,
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_palindrome_minus_block_source_off_screen_v1_0",
+  "schedule_manifest_sha256": "baed0fc9616e04c02632accb74bd61e48d0e91bdb6b8fd2c725042ac4fd945ca",
+  "schema": "FAMILY10H_RELATION_COMPOSITION_REPLAY_EXCLUSION_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "block_replay_a_primary": {
+      "composition_sequence": "block_replay_r0_r0_r1_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/block_replay_a_primary.tsv",
+      "query": "block_replay_a_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "c8a120dafd2603b7eff6baac9a5df29ca2c8a68bd0445568069bb3ec45c0ec73",
+      "size_bytes": 664735,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "block_replay_a_sham": {
+      "composition_sequence": "block_replay_r0_r0_r1_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/block_replay_a_sham.tsv",
+      "query": "block_replay_a_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "bd009dabd59dd5f89920b0cb8b79b4d76e7c8df27fec8da3d6cef71d1787d6e6",
+      "size_bytes": 647839,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "block_replay_b_primary": {
+      "composition_sequence": "block_replay_r1_r1_r0_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/block_replay_b_primary.tsv",
+      "query": "block_replay_b_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "1acead0a946aff980e210f08b75fa1e27a4d2af46d7134b55d0bf682d5394390",
+      "size_bytes": 664735,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "block_replay_b_sham": {
+      "composition_sequence": "block_replay_r1_r1_r0_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/block_replay_b_sham.tsv",
+      "query": "block_replay_b_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "99d49f22e9e184cadc8f897f9291910426e5fd70795c5fef5a0b9a95bbea0203",
+      "size_bytes": 647839,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_block_replay_a_primary": {
+      "composition_sequence": "dead_block_replay_r0_r0_r1_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_block_replay_a_primary.tsv",
+      "query": "dead_block_replay_a_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "90663edaff256b8e7bb02df49870b261325a617e4a3d348dfd134e746febff98",
+      "size_bytes": 690335,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_block_replay_a_sham": {
+      "composition_sequence": "dead_block_replay_r0_r0_r1_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_block_replay_a_sham.tsv",
+      "query": "dead_block_replay_a_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "6f49c2deb53c836143c88e1402584082c940deafa18e2a1b8e8daf24238d7ec5",
+      "size_bytes": 673439,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_block_replay_b_primary": {
+      "composition_sequence": "dead_block_replay_r1_r1_r0_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_block_replay_b_primary.tsv",
+      "query": "dead_block_replay_b_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "6efded63682d9c12f4afb122e67c6328591e2ddd874e08f7232d533f992157c2",
+      "size_bytes": 690335,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_block_replay_b_sham": {
+      "composition_sequence": "dead_block_replay_r1_r1_r0_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_block_replay_b_sham.tsv",
+      "query": "dead_block_replay_b_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "f1a0c43e243ebd3e961adabc0d8c995702d9df6854a517efebe8f75b9e694cea",
+      "size_bytes": 673439,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_palindrome_a_primary": {
+      "composition_sequence": "dead_palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_palindrome_a_primary.tsv",
+      "query": "dead_palindrome_a_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "557d12d2ba044eac8f574daf4732adda80d94ffa02848ec7bb367ce365d1096e",
+      "size_bytes": 684703,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_palindrome_a_sham": {
+      "composition_sequence": "dead_palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_palindrome_a_sham.tsv",
+      "query": "dead_palindrome_a_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "487ee0eb4e28eae0f91496a3fc2eb93350ad647c79257f3c132ab15e36d67bc0",
+      "size_bytes": 667807,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_palindrome_b_primary": {
+      "composition_sequence": "dead_palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_palindrome_b_primary.tsv",
+      "query": "dead_palindrome_b_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "9d79ac2cf57d1954e015988663d7ee4530263bbcb62e6da4c9ebe48f03cf2af5",
+      "size_bytes": 684703,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_palindrome_b_sham": {
+      "composition_sequence": "dead_palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_palindrome_b_sham.tsv",
+      "query": "dead_palindrome_b_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "0f70a5d902e6a00dc54e79f9fa300c6c8f7dbafcfdf15d8162aacb993961c289",
+      "size_bytes": 667807,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "palindrome_a_primary": {
+      "composition_sequence": "palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/palindrome_a_primary.tsv",
+      "query": "palindrome_a_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "4c6a98cc430711f1e39b6305f560597876a3bb31042a5c79c692031dad58463c",
+      "size_bytes": 659103,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "palindrome_a_sham": {
+      "composition_sequence": "palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/palindrome_a_sham.tsv",
+      "query": "palindrome_a_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "7f872f61e6a497380caec7cd2a4ec06c9b7561b738dbf61a368f56d58640aeb7",
+      "size_bytes": 642207,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "palindrome_b_primary": {
+      "composition_sequence": "palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/palindrome_b_primary.tsv",
+      "query": "palindrome_b_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "6e89833918c0644813875ffd4e53f3e86eb3e144283f18d237aa146b872b1cdd",
+      "size_bytes": 659103,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "palindrome_b_sham": {
+      "composition_sequence": "palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/palindrome_b_sham.tsv",
+      "query": "palindrome_b_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "7478220af631057321a2cb815b7f637aacfd6f6cbdd1dbd8cec0fefb581a772c",
+      "size_bytes": 642207,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_block_replay_a_primary": {
+      "composition_sequence": "source_off_block_replay_r0_r0_r1_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_block_replay_a_primary.tsv",
+      "query": "source_off_block_replay_a_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "46bb1af713f6805f5e615b67a61f0c6476ac8d6e86e1bab1e7a22fe97e7759ce",
+      "size_bytes": 721055,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_block_replay_a_sham": {
+      "composition_sequence": "source_off_block_replay_r0_r0_r1_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_block_replay_a_sham.tsv",
+      "query": "source_off_block_replay_a_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "f83e6e131f089a87f847a6c4daeb65369ab92f0d4671c52450b3d6d8ef756816",
+      "size_bytes": 704159,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_block_replay_b_primary": {
+      "composition_sequence": "source_off_block_replay_r1_r1_r0_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_block_replay_b_primary.tsv",
+      "query": "source_off_block_replay_b_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "b4db21d0c710cbf60c86b72944af66f4cec530966d7d9d101b4a4e452e4f5ffa",
+      "size_bytes": 721055,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_block_replay_b_sham": {
+      "composition_sequence": "source_off_block_replay_r1_r1_r0_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_block_replay_b_sham.tsv",
+      "query": "source_off_block_replay_b_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "16056ed4e6b7fb37272810185d9b6cc6971c5dfc6aa58a24092ea87d3e21e33d",
+      "size_bytes": 704159,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_palindrome_a_primary": {
+      "composition_sequence": "source_off_palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_palindrome_a_primary.tsv",
+      "query": "source_off_palindrome_a_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "d46984b378e27d07b4c1d9a572d1ee23f9fbedba2211b35b906c61efb74d99b3",
+      "size_bytes": 715423,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_palindrome_a_sham": {
+      "composition_sequence": "source_off_palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_palindrome_a_sham.tsv",
+      "query": "source_off_palindrome_a_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "516fd23c050a780bfab1ff23190a0de8cddc0397fa96c90d709a137fff22776b",
+      "size_bytes": 698527,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_palindrome_b_primary": {
+      "composition_sequence": "source_off_palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_palindrome_b_primary.tsv",
+      "query": "source_off_palindrome_b_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "e4db2c29abba69650b1084f8c1b0f7cbf8406896e03b35f3444f8e6ecdab49fb",
+      "size_bytes": 715423,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_palindrome_b_sham": {
+      "composition_sequence": "source_off_palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_palindrome_b_sham.tsv",
+      "query": "source_off_palindrome_b_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "c4f44d3fa0b3d6d9602dc41fbc2b2362bce40654c859ba6c43c35df4bb00775c",
+      "size_bytes": 698527,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    }
+  }
+}

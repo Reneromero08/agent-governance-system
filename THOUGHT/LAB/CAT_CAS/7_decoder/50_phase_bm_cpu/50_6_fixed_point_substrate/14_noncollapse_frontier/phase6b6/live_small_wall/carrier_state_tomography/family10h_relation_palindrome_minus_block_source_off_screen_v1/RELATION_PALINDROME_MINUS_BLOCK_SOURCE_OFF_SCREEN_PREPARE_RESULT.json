@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-24T03:52:28.761454+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "38a40fdfd018e563215be3462f63ace9bfdf927e567d0156ce801c1a0c675124",
+  "run_id": "family10h_relation_palindrome_minus_block_source_off_screen_v1_0",
+  "runtime_sha256": "81c4e1e9d158eeaf4edccce921e348b3920bd9da3e38c7f1a3e98e7b41900989",
+  "schedule_manifest_sha256": "baed0fc9616e04c02632accb74bd61e48d0e91bdb6b8fd2c725042ac4fd945ca",
+  "schema": "FAMILY10H_RELATION_PALINDROME_MINUS_BLOCK_SOURCE_OFF_SCREEN_PREPARE_V1",
+  "small_wall_crossed": false
+}
