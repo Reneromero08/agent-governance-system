@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "candidate": "ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED",
+  "review_mode": "TWO_INDEPENDENT_READ_ONLY_SOL_XHIGH_REVIEWS",
+  "verdict": "PASS",
+  "reviewers": [
+    {
+      "reviewer_id": "SOL-XHIGH-ALGEBRAIC-SERIES-PARALLEL-01",
+      "focus": "F3_ALGEBRA_PARSER_COMPILER_REFERENCE_ENUMERATION_SURVEY_CLAIMS",
+      "initial_finding": "UBSAN_WAS_RECOVERABLE_AND_DID_NOT_HARD_GATE_QUALIFICATION",
+      "disposition": "REPAIRED_WITH_FNO_SANITIZE_RECOVER_AND_FAIL_FAST_UBSAN_OPTIONS",
+      "verdict": "PASS",
+      "remaining_findings": []
+    },
+    {
+      "reviewer_id": "SOL-XHIGH-SERIES-PARALLEL-MECHANISM-03",
+      "focus": "CARRIER_CAUSALITY_PHASE_LOCK_NO_SMUGGLE_INVERSE_REUSE_CONTROLS_SCALE",
+      "verdict": "PASS",
+      "remaining_findings": []
+    }
+  ],
+  "remaining_findings": [],
+  "reviewed_sha256": {
+    "algebraic_series_parallel_phase.c": "11ef5938e413108e7f94cea1f77bedb295fcf97f5501dae58ec046176f2d0316",
+    "algebraic_series_parallel_reference.c": "504a0f6acbb5e3c5c491024b62911d98cfcc966a53091ff86ceab6c8a4870e6a",
+    "generate_series_parallel_capacity_fixture.c": "0aa0ead6f83c5e30d29f904f3b04a23ccdf1d9b98c80fd8eca6072aef439c191",
+    "qualify_algebraic_series_parallel_phase.sh": "2330969264f96a89dd212127b309b0f1049c26a8d4b17f1d43c1bb98bcf18bec",
+    "nested_two_cycle_discriminator.aspr": "edce555c35316f22493396aab1c16ef3c0413b53872b87d3dd63aa3ed1772854",
+    "nested_two_cycle_reuse.aspr": "fa230dced56115be262dd351b2729d0b32d52edba1ca6b78391c2e004d01b53b",
+    "ALGEBRAIC_SERIES_PARALLEL_FORMAT.md": "9b797d9f4f15f7b5f43837248999a833b02cb319ff5fcb2604c0306a8b492da4",
+    "ALGEBRAIC_SERIES_PARALLEL_RESULTS.json_pre_review_receipt": "e3188864e7c2b0f917fb3a7ff02107323ae337591244bb6a82040fea478d1920"
+  },
+  "evidence_confirmed": {
+    "strict_compilation_and_fanalyzer": "PASS",
+    "fail_fast_asan_ubsan_and_leaks": "PASS_3_OF_3",
+    "arbitrary_coefficient_enumerated_graphs": "PASS_120_OF_120",
+    "capacity_graphs": "PASS_15_OF_15",
+    "maximum_nodes": 46,
+    "maximum_input_relations": 60,
+    "maximum_native_operations": 59,
+    "maximum_carrier_complex_cells": 480,
+    "paired_structural_negatives": "PASS_6_OF_6",
+    "primary_boundary_zero_mask": 1,
+    "bypass_boundary_zero_mask": 3,
+    "ordinary_addition_boundary_zero_mask": 9,
+    "maximum_correct_restoration": 1.66533453694e-16,
+    "wrong_and_omitted_inverse_error": 1.73205080757,
+    "cross_process_reuse": "PASS",
+    "topology_coefficient_independence": "PASS",
+    "native_no_intermediate_decode": "PASS",
+    "no_smuggle": "PASS"
+  },
+  "claim_ceiling_supported": "SOFTWARE_PUBLIC_SERIES_PARALLEL_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY",
+  "next_mechanism": "RECURSIVE_TYPED_RELATIONAL_PROGRAMS_OVER_PUBLIC_GRAPH_MODULE_INTERFACES",
+  "terminal": false
+}

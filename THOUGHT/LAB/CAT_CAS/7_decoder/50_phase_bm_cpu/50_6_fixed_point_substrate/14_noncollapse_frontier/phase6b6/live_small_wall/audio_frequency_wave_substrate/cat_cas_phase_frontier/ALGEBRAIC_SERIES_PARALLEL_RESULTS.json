@@ -1,0 +1,188 @@
+{
+  "schema_version": "1.0.0",
+  "decision": "ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED",
+  "claim_ceiling": "SOFTWARE_PUBLIC_SERIES_PARALLEL_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY",
+  "native_mechanism": {
+    "topology_language": "PUBLIC_TWO_TERMINAL_SERIES_PARALLEL",
+    "coefficient_field": "F3",
+    "boolean_quotient_ring": "F3_X_Y_MOD_X2_MINUS_X_Y2_MINUS_Y",
+    "exact_intersection": "F_SQUARED_PLUS_G_SQUARED",
+    "exact_existential_composition": "PRODUCT_OVER_U_IN_0_1_OF_F_X_U_SQUARED_PLUS_G_U_Y_SQUARED",
+    "topology_compiler_reads_relation_coefficients": false,
+    "phase_lock": "THREE_PASSES_OF_UNIT_2Z_PLUS_CONJ_Z_SQUARED",
+    "phase_lock_decodes_label": false,
+    "tuple_slots": 0,
+    "witness_slots": 0,
+    "truth_table_slots": 0,
+    "decoded_intermediate_coefficients": 0,
+    "retained_inverse_factors": 0
+  },
+  "primary": {
+    "process_fnv1a64": "32406072c3b1798d",
+    "node_count": 9,
+    "input_relations": 10,
+    "closed_internal_nodes": 7,
+    "native_compositions": 7,
+    "native_intersections": 2,
+    "phase_resident_relation_messages": 9,
+    "carrier_complex_cells": 80,
+    "boundary_factor_fnv1a64": "359c4708c9efed85",
+    "boundary_coefficients": [0, 2, 1, 2],
+    "boundary_zero_mask": 1,
+    "accepted_boundary_states": ["00"],
+    "maximum_root_error": 2.28878339926e-16,
+    "borrowed_carrier_displacement_l2": 11.3578166916,
+    "restoration_max_abs": 1.57009245868e-16
+  },
+  "actual_restored_cross_process_reuse": {
+    "process_fnv1a64": "439a591532018e09",
+    "boundary_factor_fnv1a64": "2cebff08c50226d5",
+    "boundary_coefficients": [0, 1, 1, 1],
+    "boundary_zero_mask": 9,
+    "accepted_boundary_states": ["00", "11"],
+    "maximum_root_error": 3.14018491737e-16,
+    "borrowed_carrier_displacement_l2": 12.2474487139,
+    "restoration_max_abs": 1.57009245868e-16,
+    "pass": true
+  },
+  "controls": {
+    "wrong_boundary_inverse": {
+      "applicable": true,
+      "restoration_max_abs": 1.73205080757,
+      "pass": true
+    },
+    "omitted_resident_message_inverse": {
+      "applicable": true,
+      "restoration_max_abs": 1.73205080757,
+      "pass": true
+    },
+    "bypassed_first_parallel_intersection": {
+      "applicable": true,
+      "boundary_factor_fnv1a64": "24494f08c01fecc9",
+      "boundary_coefficients": [0, 0, 1, 0],
+      "boundary_zero_mask": 3,
+      "accepted_boundary_states": ["00", "10"],
+      "restoration_max_abs": 1.57009245868e-16,
+      "pass": true
+    },
+    "ordinary_addition_at_first_parallel_intersection": {
+      "applicable": true,
+      "boundary_factor_fnv1a64": "2cebff08c50226d5",
+      "boundary_coefficients": [0, 1, 1, 1],
+      "boundary_zero_mask": 9,
+      "accepted_boundary_states": ["00", "11"],
+      "restoration_max_abs": 1.57009245868e-16,
+      "pass": true
+    }
+  },
+  "independent_scalar_reference": {
+    "primary_complete_assignments_checked": 512,
+    "primary_projected_zero_mask": 1,
+    "primary_enumerated_zero_mask": 1,
+    "reuse_complete_assignments_checked": 512,
+    "reuse_projected_zero_mask": 9,
+    "reuse_enumerated_zero_mask": 9,
+    "arbitrary_coefficient_graphs": 120,
+    "all_graphs_complete_assignment_enumerated": true,
+    "native_scalar_boundary_mismatches": 0,
+    "projection_enumeration_mismatches": 0
+  },
+  "capacity": {
+    "serial_diamonds": 15,
+    "generated_fixture_sha256": "30e3876ec57d96b9e5b6233a607da96e1d3ec577d9b54816ccb295e986c47416",
+    "node_count": 46,
+    "input_relations": 60,
+    "closed_internal_nodes": 44,
+    "native_compositions": 44,
+    "native_intersections": 15,
+    "native_operations": 59,
+    "carrier_complex_cells": 480,
+    "boundary_coefficients": [0, 2, 1, 2],
+    "boundary_zero_mask": 1,
+    "maximum_root_error": 1.57009245868e-16,
+    "borrowed_carrier_displacement_l2": 29.6479341607,
+    "restoration_max_abs": 1.66533453694e-16,
+    "wrong_boundary_inverse_error": 1.73205080757,
+    "omitted_message_inverse_error": 1.73205080757
+  },
+  "defect_repaired": {
+    "defect": "UNLOCKED_FLOATING_PHASE_ERROR_AMPLIFIED_ACROSS_DEEP_NATIVE_ALGEBRA",
+    "observed_maximum_root_error_before_repair": 0.0740742833362,
+    "prospective_root_tolerance": 4e-10,
+    "repair": "CONTINUOUS_THREE_WELL_PHASE_LOCK_WITHOUT_LABEL_DECODE",
+    "maximum_root_error_after_repair": 1.57009245868e-16,
+    "primary_and_reference_semantics_unchanged": true
+  },
+  "structural_negatives": {
+    "degree_three_elimination": "REJECT_RC_2_ACTIVE_DEGREE",
+    "duplicate_elimination": "REJECT_RC_2_DUPLICATE",
+    "duplicate_relation_identifier": "REJECT_RC_2_NATIVE_AND_REFERENCE",
+    "missing_elimination": "REJECT_RC_2_MISSING",
+    "tree_without_shared_interface": "REJECT_RC_2_NO_PARALLEL_MERGE",
+    "wrong_elimination_order": "REJECT_RC_2_ACTIVE_DEGREE",
+    "pass": true
+  },
+  "qualification": {
+    "target": "catcas",
+    "target_cpu": "AMD_PHENOM_II_X6_1090T",
+    "target_kernel": "LINUX_6_12_86_DEB13_AMD64",
+    "compiler": "GCC_14_2_0",
+    "strict_c11_werror_pedantic": "PASS",
+    "gcc_fanalyzer": "PASS",
+    "asan": "PASS",
+    "ubsan": "PASS",
+    "leak_detection": "PASS",
+    "fresh_process_byte_determinism": "PASS",
+    "arbitrary_coefficient_survey_cases": 120,
+    "capacity_scale_cases": 15,
+    "structural_negative_cases": 6,
+    "topology_coefficient_independence": "PASS",
+    "native_no_intermediate_decode": "PASS",
+    "qualification_summary_sha256": "d7ace48433033c1608a51e62fd407b51dc92c65130bf717527c2537410d3275d",
+    "native_output_sha256": "09b5824627b7ade26d58377ba523a77fe92f103b236ea988dddc27d1725ba339",
+    "primary_reference_output_sha256": "56b758a51bb2009d2382101915dc120b826a1a2b44adb82d2f0d78ee9ff7f831",
+    "reuse_reference_output_sha256": "1cda4f6905fb05f5a2b045f24a29d746abe3d5c13c685a76bbe60ddadf72d7a2",
+    "capacity_native_output_sha256": "2c65715d9917bca9e443cdf2662473698c0854aef9a05f0352a91c8f975f5406",
+    "capacity_scalar_output_sha256": "c3d372eb2ddb5bb63997ce81191b1d7fc73835cd2fd2497ec8236c8908411e64"
+  },
+  "source_sha256": {
+    "algebraic_series_parallel_phase.c": "11ef5938e413108e7f94cea1f77bedb295fcf97f5501dae58ec046176f2d0316",
+    "algebraic_series_parallel_reference.c": "504a0f6acbb5e3c5c491024b62911d98cfcc966a53091ff86ceab6c8a4870e6a",
+    "generate_series_parallel_capacity_fixture.c": "0aa0ead6f83c5e30d29f904f3b04a23ccdf1d9b98c80fd8eca6072aef439c191",
+    "qualify_algebraic_series_parallel_phase.sh": "2330969264f96a89dd212127b309b0f1049c26a8d4b17f1d43c1bb98bcf18bec",
+    "nested_two_cycle_discriminator.aspr": "edce555c35316f22493396aab1c16ef3c0413b53872b87d3dd63aa3ed1772854",
+    "nested_two_cycle_reuse.aspr": "fa230dced56115be262dd351b2729d0b32d52edba1ca6b78391c2e004d01b53b"
+  },
+  "no_smuggle": {
+    "native_internal_assignment_enumeration": false,
+    "native_scalar_relation_evaluation": false,
+    "compiler_relation_coefficient_reads": false,
+    "decoded_feedback": false,
+    "oracle_feedback": false,
+    "boundary_correction": false,
+    "scalar_reference_linked_into_native": false,
+    "phase_lock_label_decode": false,
+    "pass": true
+  },
+  "review": {
+    "status": "PASS",
+    "reviewer_ids": [
+      "SOL-XHIGH-ALGEBRAIC-SERIES-PARALLEL-01",
+      "SOL-XHIGH-SERIES-PARALLEL-MECHANISM-03"
+    ],
+    "repaired_findings": [
+      "UBSAN_FAIL_OPEN_QUALIFICATION_GATE_REPAIRED_AND_REPRODUCED"
+    ],
+    "remaining_findings": []
+  },
+  "contact_attestation": {
+    "authorized_ssh_userspace_cpu_execution": true,
+    "source_transfer_and_compilation": true,
+    "audio_device_contact": false,
+    "playback_or_recording": false,
+    "device_or_firmware_access": false,
+    "p0_contact": false
+  },
+  "terminal": false,
+  "next_mechanism": "RECURSIVE_TYPED_RELATIONAL_PROGRAMS_OVER_PUBLIC_GRAPH_MODULE_INTERFACES"
+}
