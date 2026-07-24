@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-24T02:31:18.994027+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "3303dc37d8a94d0644bc2aa9077754ee6868b9b915c5fd35bfe885ee0491959f",
+  "run_id": "family10h_relation_offset2_handoff_decay_discovery_v1_0",
+  "runtime_sha256": "e94bee45ed4add4d04f05a360723fbb97a54c7f2d46fe7cac987e3c98078ef62",
+  "schedule_manifest_sha256": "7fbadc1161ac0b241c982b83871d2d7a5be974251fc5a52ddbd656c29f2cf448",
+  "schema": "FAMILY10H_RELATION_OFFSET2_HANDOFF_DECAY_PREPARE_V1",
+  "small_wall_crossed": false
+}

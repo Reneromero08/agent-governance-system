@@ -1,0 +1,88 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "mechanism_question": "Does the signed offset-2 source-written projection survive for a short post-source-exit handoff interval, while a true no-preparation source-off baseline remains killed?",
+  "pair_sample_count": 256,
+  "receiver_projection": "matrix contrast of mean(B_first_touch_cycles - A_first_touch_cycles) at signed offset 2",
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_offset2_handoff_decay_discovery_v1_0",
+  "schedule_manifest_sha256": "7fbadc1161ac0b241c982b83871d2d7a5be974251fc5a52ddbd656c29f2cf448",
+  "schema": "FAMILY10H_RELATION_OFFSET2_HANDOFF_DECAY_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "alive_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET2_HANDOFF_DECAY_SCHEDULES/alive_offset2_signed.tsv",
+      "post_source_exit_delay_ns": 0,
+      "query": "source_on_offset_2_control",
+      "row_count": 512,
+      "sha256": "d8cf03898225aa0a13ffd08be974eb55d18af1d1e2b660ac4c21c68575cef2d0",
+      "size_bytes": 585887,
+      "source_lifetime": "alive_during_query"
+    },
+    "dead_after_exit_0ns_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET2_HANDOFF_DECAY_SCHEDULES/dead_after_exit_0ns_offset2_signed.tsv",
+      "post_source_exit_delay_ns": 0,
+      "query": "dead_offset_2_control",
+      "row_count": 512,
+      "sha256": "e38c188c0268f579ccdd68972f4d90ee1699d76cb1feef1f4b7812964408bed5",
+      "size_bytes": 632479,
+      "source_lifetime": "prepared_source_exited_before_query_delay_0ns"
+    },
+    "dead_after_exit_100us_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET2_HANDOFF_DECAY_SCHEDULES/dead_after_exit_100us_offset2_signed.tsv",
+      "post_source_exit_delay_ns": 100000,
+      "query": "dead_offset_2_control",
+      "row_count": 512,
+      "sha256": "88d4b16644056e040f2d9f120836ce3665bd83ca7cd5d61e2c3174e38176b9af",
+      "size_bytes": 641183,
+      "source_lifetime": "prepared_source_exited_before_query_delay_100000ns"
+    },
+    "dead_after_exit_10ms_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET2_HANDOFF_DECAY_SCHEDULES/dead_after_exit_10ms_offset2_signed.tsv",
+      "post_source_exit_delay_ns": 10000000,
+      "query": "dead_offset_2_control",
+      "row_count": 512,
+      "sha256": "75d28871e0b61f88ce09d32853971f382b7b28d16f2797f4dd9a714d198a0eac",
+      "size_bytes": 639135,
+      "source_lifetime": "prepared_source_exited_before_query_delay_10000000ns"
+    },
+    "dead_after_exit_10us_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET2_HANDOFF_DECAY_SCHEDULES/dead_after_exit_10us_offset2_signed.tsv",
+      "post_source_exit_delay_ns": 10000,
+      "query": "dead_offset_2_control",
+      "row_count": 512,
+      "sha256": "c643802c1cb3ceeaa1c896cea72fdc50b3926de1bb73471911a0942a26d44b4a",
+      "size_bytes": 637599,
+      "source_lifetime": "prepared_source_exited_before_query_delay_10000ns"
+    },
+    "dead_after_exit_1ms_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET2_HANDOFF_DECAY_SCHEDULES/dead_after_exit_1ms_offset2_signed.tsv",
+      "post_source_exit_delay_ns": 1000000,
+      "query": "dead_offset_2_control",
+      "row_count": 512,
+      "sha256": "5d4d11df98584bd8bcce33d2684865360984fb217b5f8104a1cbf97476dee104",
+      "size_bytes": 635551,
+      "source_lifetime": "prepared_source_exited_before_query_delay_1000000ns"
+    },
+    "source_off_no_prep_offset2_signed": {
+      "expected_pair_observation_count": 131072,
+      "path": "OFFSET2_HANDOFF_DECAY_SCHEDULES/source_off_no_prep_offset2_signed.tsv",
+      "post_source_exit_delay_ns": 0,
+      "query": "source_off_offset_2_control",
+      "row_count": 512,
+      "sha256": "89ca1b4c6b08d77026571da97e1ee73740c6b3793be5567978929f7140de6124",
+      "size_bytes": 638623,
+      "source_lifetime": "source_off_no_preparation"
+    }
+  }
+}
