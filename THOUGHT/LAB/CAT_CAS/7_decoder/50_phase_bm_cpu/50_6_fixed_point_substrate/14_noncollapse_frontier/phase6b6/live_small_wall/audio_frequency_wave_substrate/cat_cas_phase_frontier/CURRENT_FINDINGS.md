@@ -807,3 +807,63 @@ unrestricted domains, advantage over compact classical tree algorithms,
 physical phase computation, or unlimited catalytic phase computation. The
 next mechanism is a phase-native cycle invariant that detects and closes loop
 consistency without enumerating internal assignments.
+
+## Exact cyclic relational phase closure
+
+The first relational cycle now closes without forcing the earlier bi-total
+tree law into a loop. Four-phase polynomial algebra in
+`F3[x,y]/(x^2-x,y^2-y)` supplies two exact native operators:
+
+```text
+intersection(f,g) = f^2 + g^2
+compose(f,g)      = product over u in {0,1}
+                    of (f(x,u)^2 + g(u,y)^2)
+```
+
+The native implementation executes these as fixed roots-of-unity phase
+polynomials. The `u` values are algebraic factors in the operator definition;
+there is no runtime witness loop, coefficient decode, or scalar feedback.
+
+The fixed public diamond `U-W-V-Z-U` holds four phase-resident relation
+messages in a 44-cell carrier. Its primary exact boundary accepts only
+`{00}`. Bypassing one cycle path accepts `{00,01}`; replacing intersection
+with ordinary coefficient addition accepts `{00,11}`. Both altered forward
+paths reverse their actual histories and restore cleanly, proving that the
+loop operator changes the result rather than merely damaging the carrier.
+
+Wrong boundary inversion and omission of the cycle-intersection inverse each
+leave error `1.73205080757`. Correct primary restoration and actual-restored
+cross-process reuse are both `1.57009245868e-16`.
+
+The separate complete survey covers all 6,561 ordered pairs of all 81
+multiaffine F3 polynomials:
+
+```text
+exact composition rows       26,244 / 26,244
+exact intersection rows      26,244 / 26,244
+```
+
+The separate scalar cycle reference enumerates all 64 assignments of the six
+public/internal Boolean variables and matches both committed processes.
+Strict compilation, `-fanalyzer`, ASan, UBSan, leaks, deterministic outputs,
+and committed parser negatives pass.
+
+Two independent Sol/xhigh reviews pass with zero findings:
+
+```text
+SOL-XHIGH-ALGEBRAIC-CYCLE-01
+SOL-XHIGH-ALGEBRAIC-CYCLE-MECHANISM-02
+```
+
+The mechanism review additionally swept the actual native phase operators
+over all 6,561 composition pairs and all 6,561 intersection pairs. All
+13,122 outputs were exact and all inverse traversals restored, with maximum
+root error `2.24803028762e-15` and restoration error
+`2.48253415325e-16`.
+
+This establishes one fixed cyclic relational phase closure and removes the
+bi-total restriction from the exact binary operators. It does not establish
+a generic cyclic graph language, compact bounded-treewidth elimination,
+advantage, physical phase computation, or unlimited catalytic phase
+computation. The next mechanism is generic graph parsing plus a public,
+phase-native elimination order whose carrier/provenance growth is explicit.
