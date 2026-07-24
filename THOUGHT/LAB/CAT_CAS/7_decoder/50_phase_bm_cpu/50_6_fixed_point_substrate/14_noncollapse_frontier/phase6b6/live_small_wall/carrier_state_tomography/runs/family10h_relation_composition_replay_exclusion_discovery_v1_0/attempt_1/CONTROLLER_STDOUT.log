@@ -1,0 +1,12 @@
+{
+  "prepare": {
+    "created_at": "2026-07-24T01:01:06.363755+00:00",
+    "passed": true,
+    "pmu_helper_sha256": "393566bfc64c3dc2cefcd854475b5f66cf90efd7b9c3329eaeb339fdf1fd49ac",
+    "run_id": "family10h_relation_composition_replay_exclusion_discovery_v1_0",
+    "runtime_sha256": "0693e8c3d75c240720f24f0da98e9c3b30c408aec06a8949b496ffb58f8402f2",
+    "schedule_manifest_sha256": "c621c75444a2b6c029db6487f6c216502de6f8a4b9137206f43375c458976610",
+    "schema": "FAMILY10H_RELATION_COMPOSITION_REPLAY_EXCLUSION_PREPARE_V1",
+    "small_wall_crossed": false
+  }
+}
