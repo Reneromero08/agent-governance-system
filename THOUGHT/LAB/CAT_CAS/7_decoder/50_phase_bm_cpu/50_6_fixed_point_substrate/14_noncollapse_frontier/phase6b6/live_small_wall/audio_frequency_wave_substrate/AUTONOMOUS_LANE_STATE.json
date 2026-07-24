@@ -9,17 +9,17 @@
   "prime_directive": "REPLACE_THE_BIT_WITH_PI",
   "lane_closure_authority": "USER_ONLY",
   "terminal": false,
-  "current_highest_milestone": "ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED",
-  "current_claim_ceiling": "SOFTWARE_FIXED_CYCLE_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY",
+  "current_highest_milestone": "ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED",
+  "current_claim_ceiling": "SOFTWARE_PUBLIC_SERIES_PARALLEL_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY",
   "architectural_alignment": {
     "current_phase_circuit_substrate": "ESTABLISHED_DEVELOPMENT_FOUNDATION",
-    "holographic_relational_computer": "NOT_ESTABLISHED",
-    "open_many_to_many_phase_relation": "DEVELOPMENT_PASS_CYCLIC_PARITY_QUOTIENT_CLASS_GENERAL_RELATION_OPEN",
-    "native_relational_composition": "DEVELOPMENT_PASS_EXACT_BINARY_COMPOSITION_AND_FIXED_CYCLE",
-    "internal_port_closure_or_relational_trace": "DEVELOPMENT_PASS_FIXED_CYCLE_GENERIC_CYCLIC_TRACE_OPEN",
+    "holographic_relational_computer": "BOUNDED_PUBLIC_SERIES_PARALLEL_RELATIONAL_SUBSTRATE_ESTABLISHED_FULL_SYSTEM_OPEN",
+    "open_many_to_many_phase_relation": "DEVELOPMENT_PASS_PUBLIC_BOOLEAN_F3_EDGE_RELATIONS",
+    "native_relational_composition": "ESTABLISHED_EXACT_BINARY_COMPOSITION_AND_INTERSECTION",
+    "internal_port_closure_or_relational_trace": "ESTABLISHED_BOUNDED_PUBLIC_SERIES_PARALLEL_GRAPH_CLASS",
     "idempotent_relational_boundary": "DEVELOPMENT_PASS_DUPLICATE_AND_WITNESS_MULTIPLICITY_GENERAL_LAW_OPEN",
     "phase_circuit_scaling_alone": "NONTERMINAL_SUPPORT_WORK",
-    "selected_next_experiment": "GENERIC_CYCLIC_PROCESS_GRAPH_WITH_COMPACT_PHASE_NATIVE_ELIMINATION"
+    "selected_next_experiment": "RECURSIVE_TYPED_RELATIONAL_PROGRAMS_OVER_PUBLIC_GRAPH_MODULE_INTERFACES"
   },
   "current_compact_path_machine": {
     "package": "audio_cat_cas_unbounded_compute_v1",
@@ -277,6 +277,33 @@
     "algebraic_cycle_restoration_max_abs": 1.57009245868e-16,
     "algebraic_cycle_cross_process_reuse": "PASS",
     "algebraic_cycle_review": "PASS",
+    "algebraic_series_parallel_relational_phase": "MUTABLE_DEVELOPMENT_PASS_TWO_INDEPENDENT_REVIEWS_PASS",
+    "algebraic_series_parallel_reviewer_ids": [
+      "SOL-XHIGH-ALGEBRAIC-SERIES-PARALLEL-01",
+      "SOL-XHIGH-SERIES-PARALLEL-MECHANISM-03"
+    ],
+    "algebraic_series_parallel_remaining_review_findings": 0,
+    "algebraic_series_parallel_repaired_findings": [
+      "DEEP_FLOATING_PHASE_DRIFT",
+      "PAIRED_REFERENCE_DUPLICATE_RELATION_IDENTITY",
+      "UBSAN_FAIL_OPEN_QUALIFICATION_GATE"
+    ],
+    "algebraic_series_parallel_topology": "PUBLIC_TWO_TERMINAL_SERIES_PARALLEL",
+    "algebraic_series_parallel_maximum_nodes_executed": 46,
+    "algebraic_series_parallel_maximum_input_relations": 60,
+    "algebraic_series_parallel_maximum_native_operations": 59,
+    "algebraic_series_parallel_maximum_carrier_complex_cells": 480,
+    "algebraic_series_parallel_arbitrary_coefficient_enumerated_graphs": "PASS_120_OF_120",
+    "algebraic_series_parallel_capacity_graphs": "PASS_15_OF_15",
+    "algebraic_series_parallel_structural_negatives": "PASS_6_OF_6_PAIRED",
+    "algebraic_series_parallel_primary_boundary_zero_mask": 1,
+    "algebraic_series_parallel_bypass_boundary_zero_mask": 3,
+    "algebraic_series_parallel_ordinary_sum_boundary_zero_mask": 9,
+    "algebraic_series_parallel_phase_lock": "THREE_PASSES_UNIT_2Z_PLUS_CONJ_Z_SQUARED",
+    "algebraic_series_parallel_maximum_root_error": 3.14018491737e-16,
+    "algebraic_series_parallel_capacity_restoration_max_abs": 1.66533453694e-16,
+    "algebraic_series_parallel_cross_process_reuse": "PASS",
+    "algebraic_series_parallel_review": "PASS",
     "general_boolean_relation_elimination": false,
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
     "decoded_branch_feedback": false,
@@ -301,7 +328,8 @@
     "ALGEBRAIC_RELATION_STAR_PHASE_ESTABLISHED",
     "ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED",
     "ALGEBRAIC_RELATION_TREE_PHASE_ESTABLISHED",
-    "ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED"
+    "ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED",
+    "ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED"
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
@@ -315,9 +343,10 @@
     "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
   },
   "active_frontier_candidates": [
-    "GENERIC_CYCLIC_RELATION_GRAPH_NATIVE_CLOSURE",
-    "COMPACT_PHASE_NATIVE_ELIMINATION_ORDER",
     "RECURSIVE_RELATIONAL_COMPOSITION_WITHOUT_HOST_EXPANSION",
+    "RECURSIVE_TYPED_RELATIONAL_PROGRAM_MODULE_INTERFACES",
+    "GRAPH_SEPARATORS_WIDER_THAN_TWO_BOOLEAN_PORTS",
+    "COMPACT_PHASE_NATIVE_ELIMINATION_ORDER_DISCOVERY",
     "GENERAL_TYPED_RELATION_SIGNATURE_WITHOUT_TRUTH_TABLE_EXPANSION",
     "GENERAL_INTERNAL_PORT_CLOSURE_OR_RELATIONAL_TRACE",
     "HETEROGENEOUS_NATIVE_RELATION_UNION_NODE",

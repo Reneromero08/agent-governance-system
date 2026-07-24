@@ -867,3 +867,48 @@ a generic cyclic graph language, compact bounded-treewidth elimination,
 advantage, physical phase computation, or unlimited catalytic phase
 computation. The next mechanism is generic graph parsing plus a public,
 phase-native elimination order whose carrier/provenance growth is explicit.
+
+## Public series/parallel relational phase closure
+
+The fixed-cycle limitation is now removed for public two-terminal
+series/parallel graphs. A strict source declares arbitrary Boolean/F3 edge
+relations and a public internal-node elimination order. Compilation reads
+topology and message addresses only. Degree-two internal interfaces close by
+exact phase-native composition; parallel paths merge by exact phase-native
+intersection. Every intermediate relation remains in four carrier-relative
+complex phases until the final two-port boundary.
+
+The nested two-cycle discriminator compiles 10 public relations into seven
+compositions and two intersections on an 80-cell carrier. Exact closure
+accepts `{00}`. Bypassing the first parallel merge admits `{00,10}`, while
+ordinary coefficient addition admits `{00,11}`. Both wrong forward paths
+reverse their actual histories and restore cleanly. Rotating the boundary
+inverse or omitting one resident-message inverse leaves error
+`1.73205080757`; correct restoration and cross-process reuse are
+`1.57009245868e-16`.
+
+The independent scalar executable checks every complete assignment for 120
+deterministic arbitrary-coefficient graphs. Native reduction, scalar
+reduction, and existential projection agree in all 120 cases. Fifteen scale
+graphs reach 46 nodes, 60 relations, 59 native operations, and 480 carrier
+cells. The 15-diamond carrier restores within `1.66533453694e-16`.
+
+That capacity probe exposed and repaired amplifying floating phase drift. A
+continuous three-well phase lock, `unit(2z + conj(z)^2)`, reduces maximum
+root error from `0.0740742833362` to `1.57009245868e-16` without phase-label
+decode. Independent review then found the UBSan wrapper was fail-open; the
+qualifier now uses nonrecovering undefined-behavior sanitization and fail-fast
+runtime options. The complete suite and two independent Sol/xhigh reviews
+pass with no remaining findings:
+
+```text
+SOL-XHIGH-ALGEBRAIC-SERIES-PARALLEL-01
+SOL-XHIGH-SERIES-PARALLEL-MECHANISM-03
+```
+
+This establishes bounded public series/parallel relational phase closure,
+not arbitrary treewidth, automatic ordering, broader arity/domain,
+computational advantage, physical phase computation, or unlimited catalytic
+phase computation. The next mechanism is recursive typed relational programs
+whose module boundaries remain open phase relations and compose without host
+expansion.

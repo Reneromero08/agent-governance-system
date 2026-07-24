@@ -371,10 +371,23 @@ constructs every unique external path, leaves each intermediate resultant in
 four complex phases, consumes those phases recursively without boundary
 decode, and restores and reuses the actual carrier. A complete `7^7`
 extensional survey of the three-hub discriminator covers `26,353,376`
-external assignment rows with no mismatch. The active mechanism must now
-close cyclic relational geometry, where unique-path factorization no longer
-applies and a genuine loop invariant must survive without host assignment
-expansion.
+external assignment rows with no mismatch.
+
+Exact Boolean/F3 intersection and existential composition then closed a fixed
+diamond without the earlier bi-total restriction. That operator has now been
+lifted into a strict public two-terminal series/parallel graph language. A
+coefficient-blind topology compiler executes a supplied degree-two
+elimination order, leaves every intermediate relation in four complex phases,
+merges parallel paths natively, reverses the actual graph reduction, restores,
+and reuses the carrier.
+
+Independent complete-assignment adjudication passes 120 arbitrary-coefficient
+graphs. Capacity execution reaches 46 nodes, 60 input relations, 59 native
+operations, and 480 carrier cells. Two independent Sol/xhigh reviews pass
+after repairing both deep floating phase drift and a fail-open UBSan wrapper.
+The next lift is recursive typed relational programs over open module
+interfaces, followed by graph classes whose separators exceed two Boolean
+ports without expanding them into host truth tables.
 
 The following are supporting frontier candidates, not a mandatory sequence:
 
@@ -468,7 +481,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-SOFTWARE_FIXED_CYCLE_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY
+SOFTWARE_PUBLIC_SERIES_PARALLEL_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY
 ```
 
 Not established:
@@ -485,7 +498,8 @@ physical restoration
 hardware bit replacement
 Small Wall crossing
 holographic relational computation
-generic cyclic relational trace
+arbitrary-treewidth relational trace
+automatic elimination-order discovery
 unrestricted typed relation graphs and arity
 ```
 
