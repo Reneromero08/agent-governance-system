@@ -1,0 +1,313 @@
+{
+  "absence": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_source_package.tar.gz"
+    ],
+    "elapsed_seconds": 0.515,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "archive_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_relation_composition_loop_reset_screen_v1_0\\attempt_1\\DISCOVERY_TARGET_ROOT.tar.gz",
+  "archive_sha256": "6a5d765a316e72128c621a41b543164a7686c6547bdeb7433b95b9687fdd64fe",
+  "archive_size": 50716172,
+  "cleanup": {
+    "cleanup": {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "root@192.168.137.100",
+        "set -eu; test -f /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0/.family10h_relation_composition_loop_reset_screen_v1_0_owner; grep -qx 'family10h_relation_composition_loop_reset_screen_v1_0' /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0/.family10h_relation_composition_loop_reset_screen_v1_0_owner; rm -rf /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0 /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_remote_root.tar.gz /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_source_package.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_source_package.tar.gz"
+      ],
+      "elapsed_seconds": 0.531,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "passed": true,
+    "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_REMOTE_CLEANUP_V1"
+  },
+  "copyback": {
+    "copy": {
+      "command": [
+        "scp",
+        "-O",
+        "-o",
+        "BatchMode=yes",
+        "root@192.168.137.100:/root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_remote_root.tar.gz",
+        "C:\\tmp\\family10h_relation_composition_loop_reset_screen_v1_0_remote_root.tar.gz"
+      ],
+      "elapsed_seconds": 0.687,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "created_at": "2026-07-24T04:12:57.406807+00:00",
+    "local_sha256": "6a5d765a316e72128c621a41b543164a7686c6547bdeb7433b95b9687fdd64fe",
+    "local_size": 50716172,
+    "make_archive": {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "root@192.168.137.100",
+        "set -eu; rm -f /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_remote_root.tar.gz; tar -czf /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_remote_root.tar.gz -C /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0 source; sha256sum /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_remote_root.tar.gz; stat -c%s /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_remote_root.tar.gz"
+      ],
+      "elapsed_seconds": 17.86,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "6a5d765a316e72128c621a41b543164a7686c6547bdeb7433b95b9687fdd64fe  /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_remote_root.tar.gz\n50716172\n"
+    },
+    "passed": true,
+    "remote_sha256": "6a5d765a316e72128c621a41b543164a7686c6547bdeb7433b95b9687fdd64fe",
+    "remote_size": 50716172,
+    "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_COPYBACK_V1"
+  },
+  "create": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; mkdir -p /root/catcas_live_small_wall; mkdir -m 0700 /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0; printf '%s\\n' 'family10h_relation_composition_loop_reset_screen_v1_0' > /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0/.family10h_relation_composition_loop_reset_screen_v1_0_owner"
+    ],
+    "elapsed_seconds": 0.172,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "created_at": "2026-07-24T04:12:57.940027+00:00",
+  "extract": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; tar -xzf /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_source_package.tar.gz -C /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0; chmod +x /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0/source/relation_spatial_runtime /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0/source/relation_spatial_pmu_preflight /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0/source/RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh"
+    ],
+    "elapsed_seconds": 0.234,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "live": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set +e; cd /root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0/source; ./RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh"
+    ],
+    "elapsed_seconds": 37.453,
+    "returncode": 1
+  },
+  "package": {
+    "created_at": "2026-07-24T04:11:56.812467+00:00",
+    "files": {
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/dead_r0r1_primary.tsv": {
+        "sha256": "2a901996fdcf13fd363fad9d9398c6fe32eec83e2ab9d3f6615b3b741537d24e",
+        "size_bytes": 622751
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/dead_r0r1_sham.tsv": {
+        "sha256": "88dad6f5fc19fef7806d6ce0917ee4e4649e512919d0ebff91c310e6df33e822",
+        "size_bytes": 605855
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/dead_r1r0_primary.tsv": {
+        "sha256": "7973e048b1bdae91a3ad8b6fd7ba41e3dbbd9fbe5d6a835d496e2c1730d6c3a1",
+        "size_bytes": 622751
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/dead_r1r0_sham.tsv": {
+        "sha256": "3bb0f680f717acc72be74c45e1ca4bee4fa04028550d8b8d846368a004d42aad",
+        "size_bytes": 605855
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/neutral_primary.tsv": {
+        "sha256": "b393ebcc728d5b0b5b6729a5fe2858eab1724c1a09f0fcb6f6956ab3040cce04",
+        "size_bytes": 611999
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/neutral_sham.tsv": {
+        "sha256": "3943c28f091d61a5550fcad9896d8065d8844ad835c833fb7d3665dccb30b6be",
+        "size_bytes": 595103
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/r0r1_primary.tsv": {
+        "sha256": "5af04b74458e691e1cd7436403b749f4ca25171280ad4ed9c286ac537cb09e30",
+        "size_bytes": 599711
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/r0r1_sham.tsv": {
+        "sha256": "c1088be365434e7edf54638aeec2b56a6dccd1c810323d8753b9d34065146482",
+        "size_bytes": 582815
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/r1r0_primary.tsv": {
+        "sha256": "8e42eeb236b7dca2e6be63f4f797ce061c85cb9cbdeeb55e0649037a88afd4da",
+        "size_bytes": 599711
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/r1r0_sham.tsv": {
+        "sha256": "628da39d6ac03385d0ee3130977ec280a13f6b20f1726aed3b7ddaf7cc0af1ba",
+        "size_bytes": 582815
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/random_primary.tsv": {
+        "sha256": "c1233dbb56f970211feb812174101fc552c99fe82bd65ca9af1c9d6cd11c4f9b",
+        "size_bytes": 609951
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/random_sham.tsv": {
+        "sha256": "3d628d9595f01fab0993271f309cd991f66132b0e4eb9be4c5d941c850794dec",
+        "size_bytes": 593055
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/reset_r0r1_primary.tsv": {
+        "sha256": "2ce568945df60428a7274182078f039a15a81b1dfb63f141eb670ff50ff2c502",
+        "size_bytes": 650399
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/reset_r0r1_sham.tsv": {
+        "sha256": "ad2a331c113e555f112c124bb8783d3124ded77787a49642e4af0ff9b09ce921",
+        "size_bytes": 633503
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/reset_r1r0_primary.tsv": {
+        "sha256": "12b64f1d8778e656b04821f165d8bef5943b86b9afdb73a00dc723305b11ad60",
+        "size_bytes": 650399
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/reset_r1r0_sham.tsv": {
+        "sha256": "ecab2108bb040b5a807c36f584deee8df2d66c0e44f08a1a052da7e6eecbe5da",
+        "size_bytes": 633503
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/source_off_r0r1_primary.tsv": {
+        "sha256": "2c75790f4fcc9e44a51223520567c8a93068933f7c3456ca367e3da3b037e6cf",
+        "size_bytes": 650399
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/source_off_r0r1_sham.tsv": {
+        "sha256": "12c357d6babb65499412031862e9b359757ce4153dc37910c83c0e5c75e9a161",
+        "size_bytes": 633503
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/source_off_r1r0_primary.tsv": {
+        "sha256": "6ab62f8d4c432e95deecb002dc7205982472460dbad6d4bc3c558b7424c3bd4a",
+        "size_bytes": 650399
+      },
+      "source/COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/source_off_r1r0_sham.tsv": {
+        "sha256": "9c62638aac26b28ed1ddc998b992a3dfc985021e9c7ae14dac4c1dca31d07c1d",
+        "size_bytes": 633503
+      },
+      "source/RELATION_COMPOSITION_LOOP_RESET_SCREEN_SCHEDULE_MANIFEST.json": {
+        "sha256": "c2572c6de194f071b63726269bb8bf9e6a67b4500810ca4995cdd556e413521f",
+        "size_bytes": 14838
+      },
+      "source/RELATION_GRAMMAR.json": {
+        "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+        "size_bytes": 292071
+      },
+      "source/RELATION_GRAMMAR.sha256": {
+        "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+        "size_bytes": 66
+      },
+      "source/RELATION_GRAMMAR.tsv": {
+        "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+        "size_bytes": 360
+      },
+      "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+        "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+        "size_bytes": 2277
+      },
+      "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+        "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+        "size_bytes": 66
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+        "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+        "size_bytes": 1866
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+        "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+        "size_bytes": 66
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+        "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+        "size_bytes": 11263467
+      },
+      "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+        "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+        "size_bytes": 2635
+      },
+      "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+        "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+        "size_bytes": 3120
+      },
+      "source/RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh": {
+        "sha256": "c3351b85ad7e17b4bc172ffa44fd726c2274db5ab0574a020df29d5b7c1104a0",
+        "size_bytes": 9035
+      },
+      "source/relation_spatial_adjudication.py": {
+        "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+        "size_bytes": 864
+      },
+      "source/relation_spatial_physical_adjudication.py": {
+        "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+        "size_bytes": 42533
+      },
+      "source/relation_spatial_pmu_preflight": {
+        "sha256": "13ea70f7d5fc9337996e7fc22ed37943157387da934525bed36a635633f5702c",
+        "size_bytes": 42624
+      },
+      "source/relation_spatial_pmu_preflight.c": {
+        "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+        "size_bytes": 9376
+      },
+      "source/relation_spatial_public.py": {
+        "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+        "size_bytes": 32161
+      },
+      "source/relation_spatial_runtime": {
+        "sha256": "9ec9a4820f15336d1385a129a74d13ab0612568bcd889cb81d40c421257b8df9",
+        "size_bytes": 143152
+      },
+      "source/relation_spatial_runtime.c": {
+        "sha256": "1f4bd3dd895d8d56d2ccb6231af049b693c61f3f4d6c75a28e53a590e77e787d",
+        "size_bytes": 65594
+      },
+      "source/relation_spatial_runtime.h": {
+        "sha256": "21027f34cc85e4c177183bf5eac7e67a9b866324583a2aa2bdf8a4c1d7433677",
+        "size_bytes": 4152
+      },
+      "source/relation_spatial_target.py": {
+        "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+        "size_bytes": 91980
+      }
+    },
+    "path": "C:\\tmp\\family10h_relation_composition_loop_reset_screen_v1_0_source_package.tar.gz",
+    "run_id": "family10h_relation_composition_loop_reset_screen_v1_0",
+    "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_SOURCE_PACKAGE_V1",
+    "sha256": "a2b41a23d288c0b5685c93ef69d25c00a46ca082d8262634d497d822f4db10b7",
+    "size_bytes": 916539
+  },
+  "passed": false,
+  "run_id": "family10h_relation_composition_loop_reset_screen_v1_0",
+  "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_LIVE_CONTROLLER_V1",
+  "small_wall_crossed": false,
+  "upload": {
+    "command": [
+      "scp",
+      "-O",
+      "-o",
+      "BatchMode=yes",
+      "C:\\tmp\\family10h_relation_composition_loop_reset_screen_v1_0_source_package.tar.gz",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_relation_composition_loop_reset_screen_v1_0_source_package.tar.gz"
+    ],
+    "elapsed_seconds": 0.219,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  }
+}
