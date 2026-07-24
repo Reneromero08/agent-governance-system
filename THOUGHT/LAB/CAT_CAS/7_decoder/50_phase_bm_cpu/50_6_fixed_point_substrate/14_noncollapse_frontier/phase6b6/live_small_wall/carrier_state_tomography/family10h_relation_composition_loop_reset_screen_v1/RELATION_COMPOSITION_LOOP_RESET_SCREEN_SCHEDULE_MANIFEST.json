@@ -1,0 +1,264 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "created_at": "2026-07-24T04:21:39.738339+00:00",
+  "matched_marginal_law": {
+    "composition_sequence_excluded_from_marginal_digest": true,
+    "query_string_excluded_from_marginal_digest": true,
+    "receiver_query": "same four-cell held-out boundary projection in every source-order variant",
+    "spatial_addresses": "native R0 +1 and R1 -1 maps preserved; each composition variant uses the same A/B marginal line coverage",
+    "tested_relation": "relation composition sequence only: R0_then_R1 versus R1_then_R0, with double-flush carrier-off reset variants",
+    "work_counts": "copied unchanged from the same base rows for every variant; composition prep halves loop steps and touches two relation pairs per step"
+  },
+  "pair_sample_count": 256,
+  "predeclared_patterns": {
+    "H1_composition_sensitive_relational_carrier": [
+      "R0_then_R1 and R1_then_R0 differ in held-out boundary coordinate after primary-minus-sham subtraction",
+      "source-off composition difference collapses",
+      "neutral and randomized composition controls do not replay the directed composition difference",
+      "dead composition difference preserves a nontrivial fraction of alive composition difference"
+    ],
+    "H2_amplitude_or_occupancy_only": [
+      "R0_then_R1 and R1_then_R0 are equivalent or both replay the same local differential",
+      "source-off geometry is comparable"
+    ],
+    "H3_receiver_or_query_artifact": [
+      "composition separation appears in source-off rows or tracks receiver query_order strata"
+    ],
+    "H4_timing_artifact": [
+      "composition separation follows execution ordinal, duration, or delay rather than source composition"
+    ]
+  },
+  "receiver_schedule_frozen_before_source_relation": true,
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_composition_loop_reset_screen_v1_2",
+  "schedule_manifest_sha256": "214225e461182466309954a892895400f83e67da03cfe70e3ce22e1723382953",
+  "schema": "FAMILY10H_RELATION_COMPOSITION_LOOP_RESET_SCREEN_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "dead_r0r1_primary": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/dead_r0r1_primary.tsv",
+      "query": "dead_compose_r0_then_r1_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "3ee7cc83fd4fbc2e52bf19cf7476955da5b324e27da9b7675674152ce8ea9b4c",
+      "size_bytes": 602783,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_r0r1_sham": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/dead_r0r1_sham.tsv",
+      "query": "dead_compose_r0_then_r1_relation_sham_control",
+      "row_count": 512,
+      "sha256": "a429d09e65b4c79f79f5bb43b65a76a63b959a2ce6d293379cd1dfb5d1046c62",
+      "size_bytes": 585887,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_r1r0_primary": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/dead_r1r0_primary.tsv",
+      "query": "dead_compose_r1_then_r0_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "81aa045305324e36d9ef94d2e147d5f5baf2385f00c773621c941670c718537b",
+      "size_bytes": 602783,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_r1r0_sham": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/dead_r1r0_sham.tsv",
+      "query": "dead_compose_r1_then_r0_relation_sham_control",
+      "row_count": 512,
+      "sha256": "5135687a137bc7ad9b4e9b6c3dcbe4e71a75cca7217cadd98a02c7e3dccb3c36",
+      "size_bytes": 585887,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "neutral_primary": {
+      "composition_sequence": "neutral_alternating",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/neutral_primary.tsv",
+      "query": "neutral_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "6fa516c0a7db5f337079901cba8c62f1351de6169b645b7a28bffa1388387d1f",
+      "size_bytes": 588959,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "neutral_sham": {
+      "composition_sequence": "neutral_alternating",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/neutral_sham.tsv",
+      "query": "neutral_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "5d516032d44de4085ea9b53fc732b1b159c7af0242f01e45ca47d2dc99f82092",
+      "size_bytes": 572063,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "r0r1_primary": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/r0r1_primary.tsv",
+      "query": "compose_r0_then_r1_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "0f8dc705e5e110a7af52c14388a4df2b21333c164b84edb1e58a735ba2364269",
+      "size_bytes": 579743,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "r0r1_sham": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/r0r1_sham.tsv",
+      "query": "compose_r0_then_r1_relation_sham_control",
+      "row_count": 512,
+      "sha256": "066d0bcc29c6e31074377ee2ab8bb7ca0a6dc4fc0ef187f7f9c0e5b6716335af",
+      "size_bytes": 562847,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "r1r0_primary": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/r1r0_primary.tsv",
+      "query": "compose_r1_then_r0_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "e5787119b71e911000b2aae140c6f98f07b84aea82e091dd33dd353096c66426",
+      "size_bytes": 579743,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "r1r0_sham": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/r1r0_sham.tsv",
+      "query": "compose_r1_then_r0_relation_sham_control",
+      "row_count": 512,
+      "sha256": "d6661314f15ad381b21b68a106236fa4e9db8c5b3a3aeaba8bfbadb254e04c62",
+      "size_bytes": 562847,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "random_primary": {
+      "composition_sequence": "deterministic_randomized",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/random_primary.tsv",
+      "query": "random_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "ea1b6efb76a25c14f4ee3bac14fa6cf6b235966b7a75a36b6d78420cfba8be27",
+      "size_bytes": 583839,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "random_sham": {
+      "composition_sequence": "deterministic_randomized",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/random_sham.tsv",
+      "query": "random_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "5f8f700b817840c3c451f6f83b0604eea8f932ca28597591bc4e24b3ec2c221c",
+      "size_bytes": 566943,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "reset_r0r1_primary": {
+      "composition_sequence": "r0_then_r1_after_double_flush",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/reset_r0r1_primary.tsv",
+      "query": "reset_c_r0r1_primary_control",
+      "row_count": 512,
+      "sha256": "8b4f754598a2988cdcf9ef6be1e1b03f5f607f1d2d86dda876eccb8f5424ce44",
+      "size_bytes": 585887,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "reset_r0r1_sham": {
+      "composition_sequence": "r0_then_r1_after_double_flush",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/reset_r0r1_sham.tsv",
+      "query": "reset_c_r0r1_sham_control",
+      "row_count": 512,
+      "sha256": "394235db3bca1a7ee1a764173ef04ef2ab034a1e00df7ea15e6e57a4ba0353db",
+      "size_bytes": 572063,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "reset_r1r0_primary": {
+      "composition_sequence": "r1_then_r0_after_double_flush",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/reset_r1r0_primary.tsv",
+      "query": "reset_c_r1r0_primary_control",
+      "row_count": 512,
+      "sha256": "d178582bebec8d1c0f5b08cc7929cd346b973d63e0c37a1295ec1e820e9932fb",
+      "size_bytes": 585887,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "reset_r1r0_sham": {
+      "composition_sequence": "r1_then_r0_after_double_flush",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/reset_r1r0_sham.tsv",
+      "query": "reset_c_r1r0_sham_control",
+      "row_count": 512,
+      "sha256": "ab7a7a7b5104c20c53f4afd5dabb5745b132b5079aa594a2f0df4c1a5d7790f8",
+      "size_bytes": 572063,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_r0r1_primary": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/source_off_r0r1_primary.tsv",
+      "query": "source_off_compose_r0_then_r1_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "4ff968d089c26f44bfba2fa0e3bd2380a5b51092f9a831bd9cf63b2d3f121a09",
+      "size_bytes": 636063,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_r0r1_sham": {
+      "composition_sequence": "r0_then_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/source_off_r0r1_sham.tsv",
+      "query": "source_off_compose_r0_then_r1_relation_sham_control",
+      "row_count": 512,
+      "sha256": "8df7b35a297e85b21904396ca6d6593bd827d868a8673372a5dce2257e750e4c",
+      "size_bytes": 619167,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_r1r0_primary": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/source_off_r1r0_primary.tsv",
+      "query": "source_off_compose_r1_then_r0_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "f93b3ec5addd68dd4ae8b2cd8de0c65361e885213e32f069f08ae554e93560d8",
+      "size_bytes": 636063,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_r1r0_sham": {
+      "composition_sequence": "r1_then_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_LOOP_RESET_SCREEN_SCHEDULES/source_off_r1r0_sham.tsv",
+      "query": "source_off_compose_r1_then_r0_relation_sham_control",
+      "row_count": 512,
+      "sha256": "a664e8758d94d0423425759dc3406da59a0acf85de91c4944c6f835316026e7d",
+      "size_bytes": 619167,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    }
+  }
+}
