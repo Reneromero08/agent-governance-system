@@ -14,6 +14,7 @@ PACKAGE_PARENT = (
 sys.path.insert(0, str(PACKAGE_PARENT))
 
 from constraint_relational_trace_v1.conditional_p_equals_np import (  # noqa: E402
+    BoundaryDecision,
     extract_witness_by_boundary_self_reduction,
     reference_decision_boundary,
     restrict_public_relation,
@@ -29,6 +30,17 @@ def clause(*literals: Literal) -> ClauseRelation:
     return ClauseRelation(tuple(literals))  # type: ignore[arg-type]
 
 
+def satisfiable_holo() -> ConstraintHolo:
+    return ConstraintHolo.build(
+        ("x1", "x2", "x3"),
+        (
+            clause(Literal("x1"), Literal("x1"), Literal("x1")),
+            clause(Literal("x2", False), Literal("x2", False), Literal("x2", False)),
+            clause(Literal("x3"), Literal("x3", False), Literal("x1")),
+        ),
+    )
+
+
 def test_restriction_preserves_exact_three_literal_relation_shape() -> None:
     holo = ConstraintHolo.build(
         ("a", "b", "c"),
@@ -39,20 +51,15 @@ def test_restriction_preserves_exact_three_literal_relation_shape() -> None:
     assert restricted.holo is not None
     assert restricted.holo.variables == ("b", "c")
     assert len(restricted.holo.clauses[0].literals) == 3
-    assert reference_decision_boundary(restricted.holo)
+    assert reference_decision_boundary(restricted.holo) is BoundaryDecision.VALID_SAT
 
 
 def test_boundary_self_reduction_renders_verified_witness() -> None:
-    holo = ConstraintHolo.build(
-        ("x1", "x2", "x3"),
-        (
-            clause(Literal("x1"), Literal("x1"), Literal("x1")),
-            clause(Literal("x2", False), Literal("x2", False), Literal("x2", False)),
-            clause(Literal("x3"), Literal("x3", False), Literal("x1")),
-        ),
-    )
+    holo = satisfiable_holo()
     result = extract_witness_by_boundary_self_reduction(holo, reference_decision_boundary)
-    assert result.satisfiable
+    assert result.valid
+    assert result.satisfiable is True
+    assert result.boundary_status is BoundaryDecision.VALID_SAT
     assert result.witness_verified
     assert result.witness is not None
     assert holo.accepts(result.witness)
@@ -69,7 +76,37 @@ def test_boundary_self_reduction_reports_unsat_without_witness() -> None:
         ),
     )
     result = extract_witness_by_boundary_self_reduction(holo, reference_decision_boundary)
-    assert not result.satisfiable
+    assert result.valid
+    assert result.satisfiable is False
+    assert result.boundary_status is BoundaryDecision.VALID_UNSAT
     assert result.witness is None
     assert not result.witness_verified
     assert result.decision_calls == 1
+
+
+def test_invalid_carrier_never_becomes_sat_or_unsat() -> None:
+    def invalid_boundary(_: ConstraintHolo) -> BoundaryDecision:
+        return BoundaryDecision.INVALID_CARRIER
+
+    result = extract_witness_by_boundary_self_reduction(
+        satisfiable_holo(), invalid_boundary
+    )
+    assert not result.valid
+    assert result.satisfiable is None
+    assert result.boundary_status is BoundaryDecision.INVALID_CARRIER
+    assert result.witness is None
+    assert not result.witness_verified
+    assert result.decision_calls == 1
+
+
+def test_unrecognized_truthy_boundary_value_fails_closed() -> None:
+    def malformed_boundary(_: ConstraintHolo) -> BoundaryDecision:
+        return "INVALID_CARRIER"  # type: ignore[return-value]
+
+    result = extract_witness_by_boundary_self_reduction(
+        satisfiable_holo(), malformed_boundary
+    )
+    assert not result.valid
+    assert result.satisfiable is None
+    assert result.boundary_status is BoundaryDecision.INVALID_CARRIER
+    assert result.witness is None
