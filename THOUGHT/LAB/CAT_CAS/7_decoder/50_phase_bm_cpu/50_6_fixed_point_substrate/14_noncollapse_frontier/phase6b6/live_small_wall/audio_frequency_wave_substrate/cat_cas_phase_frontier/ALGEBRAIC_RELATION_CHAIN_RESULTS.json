@@ -1,0 +1,196 @@
+{
+  "schema": "cat_cas_algebraic_relation_chain_results_v1",
+  "result": "ALGEBRAIC_RELATION_CHAIN_PHASE_ESTABLISHED",
+  "starting_head": "33c581968461a2ea8cb0e2631cb8ab227e997b18",
+  "claim_ceiling": "SOFTWARE_LINEAR_BI_TOTAL_RELATION_CHAIN_REFERENCE_ONLY",
+  "scope": {
+    "type": "BOOLEAN_F3",
+    "relation_form": "c00+c10*x+c01*y+c11*x*y=0",
+    "admission": "bi-total toward both Boolean ports",
+    "native_internal_closure": "resultant B*C-A*D",
+    "boundary_decode_count": 1,
+    "tuple_slots": 0,
+    "witness_slots": 0,
+    "retained_inverse_factors": 0,
+    "carrier_cells": "8*n-4",
+    "derived_history_cells": "4*(n-1)",
+    "native_evolution_complexity": "O(n)",
+    "carrier_complexity": "O(n)",
+    "input_parsing": "streaming bytes plus O(n log n) canonical graph normalization",
+    "fixed_relation_count_cap": null
+  },
+  "source_identity": {
+    "algebraic_relation_chain_phase.c": {
+      "bytes": 34526,
+      "sha256": "9fda1a70f7be1fdce655d2f49a6794b6af2e5d3bc4d0ecc680dc0a7daf7df999"
+    },
+    "algebraic_relation_chain_reference.c": {
+      "bytes": 19833,
+      "sha256": "e63b698d4f47551329cf6c8ffe94ed599926a06acf6deae1d734b72aedd6c61b"
+    },
+    "algebraic_relation_chain_generator.c": {
+      "bytes": 5949,
+      "sha256": "59e42a49a8ab4c0f3fbd6cc968af07ba131df17a96d37d5887e269fa55811405"
+    },
+    "algebraic_relation_chain_closure_survey.c": {
+      "bytes": 6909,
+      "sha256": "cbf39f65e80327d4cff035d1525f0e936335c00a4554534e1bf5bbeb9a582959"
+    },
+    "ALGEBRAIC_RELATION_CHAIN_FORMAT.md": {
+      "bytes": 6013,
+      "sha256": "cbf0423c968c5b3c8491adecbdc0ba25b71a2fc0965e7c20142c340f4c719332"
+    }
+  },
+  "frozen_numerical_law": {
+    "coefficient_root_maximum_error": 2e-10,
+    "correct_restoration_maximum_error": 2e-12,
+    "carrier_unit_magnitude_maximum_error": 2e-12,
+    "applicable_inverse_control_minimum_error": 0.001
+  },
+  "closure_survey": {
+    "all_f3_coefficient_signatures_examined": 81,
+    "bi_total_signatures": 17,
+    "bi_total_extensional_relations": 7,
+    "ordered_pairs": 289,
+    "pair_resultant_exact": 289,
+    "pair_outputs_bi_total": 289,
+    "ordered_triples": 4913,
+    "left_chain_exact": 4913,
+    "grouping_extensional": 4913,
+    "status": "PASS"
+  },
+  "direct_userspace_c_execution": {
+    "kernel": "Linux 6.12.86+deb13-amd64 x86_64",
+    "compiler": "cc (Debian 14.2.0-19) 14.2.0",
+    "word_bits": 64,
+    "processor": "AMD Phenom II X6 1090T",
+    "online_processors": 6,
+    "relation_count": 100000,
+    "internal_port_count": 99999,
+    "carrier_cells": 799996,
+    "input_a_bytes": 4566792,
+    "input_b_bytes": 4566792,
+    "input_a_sha256": "50043fafbb26033e2f68d81d2e3c909e47b5b611e504618a3df729b82276debf",
+    "input_b_sha256": "ba92d283f1cf0482c06ab068c860d61168296e382bf92ef25f3895b7bf74cbdc",
+    "input_a_fnv1a64": "cd3ab349f2c05398",
+    "input_b_fnv1a64": "5c3f9b67b2385eb2",
+    "input_a_boundary_coefficients": [0, 1, 0, 2],
+    "input_a_boundary_pair_mask": 11,
+    "input_b_boundary_coefficients": [0, 0, 2, 1],
+    "input_b_boundary_pair_mask": 13,
+    "maximum_root_error": 5.70825378262e-12,
+    "maximum_correct_restoration_error": 3.51083346858e-16,
+    "maximum_carrier_integrity_error": 2.22044604925e-16,
+    "borrowed_carrier_displacement_l2": 1095.44237639,
+    "wrong_inverse_restoration_error": 1.73205080757,
+    "forward_order_inverse_restoration_error": 1.73205080757,
+    "omitted_inverse_restoration_error": 1.73205080757,
+    "cross_process_actual_restored_reuse": "PASS",
+    "native_and_reference_exact": "PASS",
+    "informational_elapsed_ms": 1894
+  },
+  "determinism": {
+    "public_generator_two_fresh_processes_byte_identical": true,
+    "native_100000_cross_process_two_fresh_processes_byte_identical": true,
+    "native_100000_output_sha256": "982454a892ec41b22790bb01425d8ac902acc8ee15368756c5306bf325511e63",
+    "reference_100000_two_fresh_processes_byte_identical": true,
+    "reference_input_a_sha256": "b96952f27c55327a294e67ff76292fdf5d0f3bcbb8718de45884f8c776e9a895",
+    "reference_input_b_sha256": "0e54dea6e5086047fb829bb7be53f065a0d07f1728744da879fc0f805575b85e"
+  },
+  "positive_qualification": {
+    "minimum_two_relation_fixture": "PASS",
+    "all_289_ordered_bi_total_minimum_chains": "PASS",
+    "four_minimum_size_public_generator_variants": "PASS",
+    "minimum_chain_reordered_inverse_honestly_inapplicable": "PASS",
+    "canonical_heterogeneous_chain": "PASS",
+    "permuted_and_reversed_presentation_invariant": "PASS",
+    "four_257_relation_public_variants": "PASS",
+    "1000_relation_asan_ubsan_chain": "PASS",
+    "100000_relation_cross_process_reuse": "PASS",
+    "every_native_boundary_equal_to_independent_reference": "PASS",
+    "all_applicable_wrong_inverse_controls": "PASS"
+  },
+  "negative_qualification": {
+    "branching_geometry_rejected": "PASS",
+    "disconnected_geometry_rejected": "PASS",
+    "non_bi_total_relation_rejected": "PASS",
+    "duplicate_relation_name_rejected": "PASS",
+    "missing_end_rejected": "PASS",
+    "noncanonical_coefficient_rejected": "PASS",
+    "crlf_rejected": "PASS",
+    "reuse_shape_mismatch_rejected": "PASS"
+  },
+  "build_and_runtime_qualification": {
+    "strict_c11_warnings_as_errors": "PASS",
+    "gcc_fanalyzer_native": "PASS",
+    "gcc_fanalyzer_reference": "PASS",
+    "address_sanitizer": "PASS",
+    "undefined_behavior_sanitizer": "PASS",
+    "leak_detection": "PASS",
+    "sanitized_relation_count": 1000,
+    "generator_sanitized": "PASS",
+    "closure_survey_sanitized": "PASS"
+  },
+  "focused_review_repair": {
+    "initial_reviewer_id": "SOL-XHIGH-ALGEBRAIC-RELATION-CHAIN-01",
+    "initial_verdict": "FAIL",
+    "finding": "ARC-R1-001",
+    "severity": "P1",
+    "observed_defect": "A two-relation chain has one closure, so forward-order inverse equals correct inverse, but the engine labeled the order control applicable and falsely failed the valid minimum domain.",
+    "repair": "Set reordered control inapplicable exactly when relation_count is two; retain the dependency probe for relation_count at least three.",
+    "exhaustive_repair_qualification": {
+      "two_relation_ordered_bi_total_pairs": 289,
+      "native_pass": 289,
+      "reference_pass": 289,
+      "boundary_matches": 289,
+      "false_reordered_applicability": 0
+    },
+    "larger_chain_control_regression": "PASS",
+    "renewal_required_on_exact_repaired_bytes": true
+  },
+  "no_smuggle": {
+    "decoded_spin_or_boolean_assignment_feedback": false,
+    "native_tuple_enumeration": false,
+    "native_witness_selection": false,
+    "native_pair_mask_construction": false,
+    "oracle_or_reference_linkage": false,
+    "stored_boundary_answer_in_recurrence": false,
+    "boundary_decode_before_native_evolution_complete": false,
+    "scalar_resultant_in_native_recurrence": false,
+    "public_scalar_coefficients_used_for": [
+      "strict parsing",
+      "prospective bi-total admission",
+      "phase encoding"
+    ]
+  },
+  "restoration_law": {
+    "forward_history": "one four-phase derived relation per closure",
+    "inverse": "actual resultants traversed in reverse order, followed by reverse public encoding",
+    "latched_result_outside_inverse_history": true,
+    "actual_restored_carrier_reused": true,
+    "wrong_omitted_and_forward_order_inverse_fail": true
+  },
+  "contact_attestation": {
+    "authorized_userspace_cpu_execution": true,
+    "ssh_source_transfer_and_process_execution": true,
+    "device_or_msr_access": false,
+    "voltage_or_firmware_action": false,
+    "audio_playback_or_recording": false,
+    "p0_carrier_contact": false,
+    "procurement_or_fabrication": false
+  },
+  "proved": [
+    "The complete bi-total Boolean_F3 coefficient class is closed under the native resultant on the Boolean extensional domain.",
+    "The phase-native closure can be repeated over 99999 internal ports without decoded recurrence, tuple slots, witness slots, or exponential provenance.",
+    "The final boundary relation depends on the complex carrier trajectory and agrees with independent existential composition.",
+    "The actual forward carrier history reverses, restores, and supports a different same-shape process."
+  ],
+  "not_proved": [
+    "branching or cyclic typed relational traces",
+    "higher-arity or unrestricted relation classes",
+    "computational advantage over ordinary software",
+    "physical waveform computation",
+    "unlimited catalytic phase computation"
+  ],
+  "next_frontier": "branching typed relational trace with native multi-interface closure"
+}

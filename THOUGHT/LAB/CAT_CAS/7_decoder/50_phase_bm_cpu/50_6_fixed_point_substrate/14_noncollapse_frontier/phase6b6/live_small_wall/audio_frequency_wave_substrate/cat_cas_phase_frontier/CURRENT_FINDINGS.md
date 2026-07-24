@@ -531,3 +531,79 @@ passed 625/625; 1,875 applicability-gated inverse controls passed; cross-
 process reuse passed 64/64; and strict compilation, static analysis,
 sanitizers, determinism, parser adversaries, no-smuggle inspection, and oracle
 non-linkage passed. Verdict: `PASS`; remaining findings: none.
+
+## Repeatable algebraic relation chain
+
+The stronger bi-total `BOOLEAN_F3` subclass closes the single-port mechanism
+under its own outputs. Exhaustive independent adjudication found:
+
+```text
+bi-total coefficient signatures       17
+distinct extensional relations         7
+ordered admitted pairs               289 / 289 exact
+resultant outputs remaining bi-total 289 / 289
+ordered admitted triples           4,913 / 4,913 exact
+left/right grouping extensional     4,913 / 4,913
+```
+
+`algebraic_relation_chain_phase.c` therefore applies the same phase-native
+resultant repeatedly, one unresolved internal port at a time. It retains one
+four-phase derived relation per layer, not assignments, witnesses, or
+branch histories:
+
+```text
+public relation cells        4*n
+derived history cells        4*(n-1)
+complete carrier cells       8*n-4
+native evolution             O(n)
+tuple / witness slots        0 / 0
+retained inverse factors     0
+```
+
+The parser initially hid an `O(n^2)` graph-normalization defect. That was
+repaired with streaming byte custody and indexed endpoint normalization. No
+fixed relation-count cap remains in the format; address space and available
+memory are the practical bounds.
+
+On the authorized userspace C target, two different deterministic
+100,000-relation processes executed against the same actual restored carrier:
+
+```text
+internal ports closed                    99,999
+carrier cells                           799,996
+input bytes per process               4,566,792
+native cross-process lifecycle time       1.888 s
+maximum phase-root error             5.70825378262e-12
+maximum correct restoration          3.51083346858e-16
+carrier displacement                 1095.44237639
+wrong inverse restoration error      1.73205080757
+forward-order inverse error          1.73205080757
+omitted inverse error                1.73205080757
+native/reference boundary agreement  exact
+```
+
+Strict C11 compilation, GCC static analysis, ASan, UBSan, leak detection,
+fresh-process determinism, presentation invariance, four generated relation
+families, committed parser adversaries, and closure surveys pass.
+
+The first focused review found one qualification defect at the exact minimum
+size. A two-relation chain has only one resultant, so forward-order inverse
+and reverse-order inverse are identical. The engine incorrectly called that
+control applicable and falsely failed otherwise exact minimum chains. The
+control is now honestly inapplicable only for that one-closure geometry.
+All 289 ordered bi-total two-relation pairs now pass native/reference
+agreement and restoration with zero false order applicability; the existing
+dependency-sensitive order control remains effective for larger chains.
+Renewed focused reviewer
+`SOL-XHIGH-ALGEBRAIC-RELATION-CHAIN-01-R2` independently reproduced all
+289 minimum pairs, all 4,913 triples, all 83,521 four-relation order-control
+cases, the 100,000-relation execution, strict/static/sanitized builds,
+determinism, parser adversaries, no-smuggle separation, restoration, and
+reuse. Verdict: `PASS`; remaining findings: none.
+
+This establishes repeatable native internal closure for a finite linear
+bi-total relation chain with linear carrier history, actual inverse traversal,
+restoration, and reuse. It does not establish branching geometry, arbitrary
+relation classes, advantage, physical execution, or unlimited computation.
+The active correction is now a branching typed relational trace whose public
+geometry materially determines the boundary without host tuple expansion.

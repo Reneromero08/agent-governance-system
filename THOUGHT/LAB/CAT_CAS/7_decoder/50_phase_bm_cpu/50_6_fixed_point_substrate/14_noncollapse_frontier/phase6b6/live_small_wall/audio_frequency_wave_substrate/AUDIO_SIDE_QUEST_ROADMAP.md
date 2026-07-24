@@ -1,14 +1,14 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `4.0`
+**Roadmap version:** `4.1`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through milestone:** `CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED`  
-**Current claim ceiling:** `BOUNDED_SOFTWARE_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_ONLY`  
+**Reconciled through milestone:** `ALGEBRAIC_RELATION_CHAIN_PHASE_ESTABLISHED`
+**Current claim ceiling:** `SOFTWARE_LINEAR_BI_TOTAL_RELATION_CHAIN_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
-**Physical work:** `NOT_AUTHORIZED`  
+**Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
@@ -71,6 +71,7 @@ CATALYTIC_WAVEFORM_ISING_V3_VERIFIED
 CATALYTIC_WAVEFORM_ISING_V3_SIX_SITE_VERIFIED
 PHASE_NATIVE_COMPUTER_REFERENCE_VERIFIED
 CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED
+ALGEBRAIC_RELATION_CHAIN_PHASE_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -139,6 +140,11 @@ idempotent duplicate relation         exact
 unresolved witnesses at N=64          64 per pair, zero witness slots
 open-relation carrier state           8 complex cells
 open-relation restoration/reuse       below 2e-16, cross-process reuse passes
+algebraic relation carrier            multiaffine BOOLEAN_F3 zero sets
+repeatable native internal closure    99,999 ports in one userspace C run
+algebraic chain carrier               799,996 complex cells for 100,000 relations
+algebraic chain history               linear 4*(n-1), zero tuple/witness slots
+algebraic chain restoration/reuse      below 3.6e-16, cross-process reuse passes
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -264,7 +270,7 @@ OPEN_MANY_TO_MANY_PHASE_RELATION
 -> RESTORATION_AND_REUSE
 ```
 
-The first calibration now passes for the structured `CYCLIC_PARITY(N)`
+The first calibration passes for the structured `CYCLIC_PARITY(N)`
 quotient class. Two non-functional relations remain non-enumerated over
 `Z_N`, compose through one typed internal port by Boolean convolution over
 `Z2`, expose the exact quotient boundary, reverse the actual forward process,
@@ -318,10 +324,23 @@ the restricted Boolean existential boundary. Both executables now reject
 that case prospectively through the total-to-internal-fiber law.
 
 The independent exhaustive survey records `3,217 / 6,561` exact unrestricted
-signature pairs but `625 / 625` exact prospectively admitted pairs. The next
-active mechanism must make that exact class repeatable under its own boundary
-outputs, close multiple internal ports without assignment expansion, and
-then support branching relational trace.
+signature pairs but `625 / 625` exact prospectively admitted pairs.
+
+The stronger bi-total subclass is now closed under its own boundary outputs:
+all `289 / 289` admitted ordered pairs remain bi-total and all `4,913 / 4,913`
+ordered triples are extensionally exact under either grouping. The phase
+engine repeatedly applies the same native resultant over a streaming public
+chain. A 100,000-relation userspace C execution closed 99,999 internal ports
+with 799,996 carrier cells, no tuples, no witnesses, no retained inverse
+factors, exact independent-reference agreement, restoration below `3.6e-16`,
+and actual-restored cross-process reuse. The parser's initial quadratic graph
+scan was removed; native evolution and carrier history are linear in relation
+count.
+
+The repeatable linear-chain problem is therefore removed. The active mechanism
+must now support a branching typed relational trace whose geometry materially
+changes the lawful boundary, without host assignment expansion or exponential
+provenance.
 
 The following are supporting frontier candidates, not a mandatory sequence:
 
@@ -415,7 +434,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_SOFTWARE_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_ONLY
+SOFTWARE_LINEAR_BI_TOTAL_RELATION_CHAIN_REFERENCE_ONLY
 ```
 
 Not established:
@@ -432,8 +451,8 @@ physical restoration
 hardware bit replacement
 Small Wall crossing
 holographic relational computation
-native open-relation composition
-idempotent relational closure
+general branching open-relation composition
+general relational trace
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.

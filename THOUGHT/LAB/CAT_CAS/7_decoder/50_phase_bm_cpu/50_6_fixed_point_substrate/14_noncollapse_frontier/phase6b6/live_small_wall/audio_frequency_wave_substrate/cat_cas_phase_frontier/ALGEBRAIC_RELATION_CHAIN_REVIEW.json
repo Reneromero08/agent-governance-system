@@ -1,0 +1,112 @@
+{
+  "schema": "cat_cas_algebraic_relation_chain_review_v1",
+  "reviewer_id": "SOL-XHIGH-ALGEBRAIC-RELATION-CHAIN-01-R2",
+  "model": "GPT-5.6 Sol",
+  "effort": "xhigh",
+  "review_mode": "independent_read_only_adversarial",
+  "verdict": "PASS",
+  "initial_review": {
+    "reviewer_id": "SOL-XHIGH-ALGEBRAIC-RELATION-CHAIN-01",
+    "verdict": "FAIL",
+    "finding_count": 1,
+    "finding_id": "ARC-R1-001",
+    "severity": "P1",
+    "finding": "The valid two-relation minimum has only one resultant, so forward-order inverse equals correct inverse, but the engine falsely labeled the order control applicable and rejected 224 of 289 admitted minimum pairs."
+  },
+  "repair_disposition": {
+    "ARC-R1-001": "CLOSED",
+    "repair": "Set reordered inverse inapplicable exactly for relation_count=2 and retain the dependency-sensitive probe for relation_count>=3.",
+    "all_ordered_bi_total_pairs": 289,
+    "native_success": 289,
+    "reference_success": 289,
+    "boundary_agreement": 289,
+    "reordered_inapplicable": 289,
+    "false_reordered_applicability": 0,
+    "missed_reordered_failure": 0,
+    "wrong_applicable": 224,
+    "wrong_nonapplicable": 65,
+    "omitted_applicable": 224,
+    "omitted_nonapplicable": 65
+  },
+  "exact_reviewed_identity": {
+    "algebraic_relation_chain_phase.c": {
+      "bytes": 34526,
+      "sha256": "9fda1a70f7be1fdce655d2f49a6794b6af2e5d3bc4d0ecc680dc0a7daf7df999"
+    },
+    "algebraic_relation_chain_reference.c": {
+      "bytes": 19833,
+      "sha256": "e63b698d4f47551329cf6c8ffe94ed599926a06acf6deae1d734b72aedd6c61b"
+    },
+    "algebraic_relation_chain_generator.c": {
+      "bytes": 5949,
+      "sha256": "59e42a49a8ab4c0f3fbd6cc968af07ba131df17a96d37d5887e269fa55811405"
+    },
+    "algebraic_relation_chain_closure_survey.c": {
+      "bytes": 6909,
+      "sha256": "cbf39f65e80327d4cff035d1525f0e936335c00a4554534e1bf5bbeb9a582959"
+    },
+    "ALGEBRAIC_RELATION_CHAIN_FORMAT.md": {
+      "bytes": 6013,
+      "sha256": "cbf0423c968c5b3c8491adecbdc0ba25b71a2fc0965e7c20142c340f4c719332"
+    },
+    "ALGEBRAIC_RELATION_CHAIN_RESULTS.json": {
+      "bytes": 8507,
+      "sha256": "9566a062227fd5ca13ad0045eb2440852b65b23a07ff00538d2238b88b7e6099"
+    },
+    "algebraic_chain_minimum.arelc": {
+      "bytes": 137,
+      "sha256": "2d13957d0a002902ba493cef2f7c26cc57191cb3986d26e0acd04251f0ed16d9"
+    }
+  },
+  "independent_closure_adjudication": {
+    "bi_total_signatures": 17,
+    "extensional_relations": 7,
+    "pairs_exact_and_closed": "289/289",
+    "triples_exact": "4913/4913",
+    "grouping_extensional": "4913/4913"
+  },
+  "larger_chain_applicability": {
+    "n3_exhaustive": 4913,
+    "n3_false_applicable": 0,
+    "n3_missed_failure": 0,
+    "n4_exhaustive": 83521,
+    "n4_false_applicable": 0,
+    "n4_missed_failure": 0
+  },
+  "scale_reproduction": {
+    "relation_count": 100000,
+    "internal_port_count": 99999,
+    "carrier_cells": 799996,
+    "input_a_sha256": "50043fafbb26033e2f68d81d2e3c909e47b5b611e504618a3df729b82276debf",
+    "input_b_sha256": "ba92d283f1cf0482c06ab068c860d61168296e382bf92ef25f3895b7bf74cbdc",
+    "native_output_sha256": "982454a892ec41b22790bb01425d8ac902acc8ee15368756c5306bf325511e63",
+    "reference_a_sha256": "b96952f27c55327a294e67ff76292fdf5d0f3bcbb8718de45884f8c776e9a895",
+    "reference_b_sha256": "0e54dea6e5086047fb829bb7be53f065a0d07f1728744da879fc0f805575b85e",
+    "maximum_restoration_error": 3.51083346858e-16,
+    "status": "PASS"
+  },
+  "qualification": {
+    "strict_c11_warnings_as_errors": "PASS",
+    "gcc_fanalyzer_native_reference_generator": "PASS",
+    "asan_ubsan_leaks": "PASS",
+    "sanitized_1000_relation_and_pair_modes": "PASS",
+    "fresh_process_determinism": "PASS",
+    "orientation_and_record_order_invariance": "PASS",
+    "parser_and_geometry_adversaries": "PASS",
+    "native_reference_non_linkage": "PASS",
+    "boundary_only_decode": "PASS",
+    "native_no_smuggle": "PASS",
+    "actual_reverse_restoration_and_reuse": "PASS",
+    "roadmap_state_and_claim_consistency": "PASS"
+  },
+  "new_findings": [],
+  "remaining_findings": [],
+  "execution_boundary": {
+    "authorized_userspace_c_only": true,
+    "repository_mutation_by_reviewer": false,
+    "device_or_msr_access": false,
+    "firmware_action": false,
+    "audio_action": false,
+    "physical_carrier_contact": false
+  }
+}
