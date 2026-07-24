@@ -1,0 +1,361 @@
+{
+  "absence": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_source_package.tar.gz"
+    ],
+    "elapsed_seconds": 0.485,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "archive_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_relation_composition_phase_correction_discovery_v1_0\\attempt_1\\DISCOVERY_TARGET_ROOT.tar.gz",
+  "archive_sha256": "39f5a85d55cf154f6c7199d9c1452bd9700a74c5a3cf7ce311d6d00f47625ecc",
+  "archive_size": 68450365,
+  "cleanup": {
+    "cleanup": {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "root@192.168.137.100",
+        "set -eu; test -f /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0/.family10h_relation_composition_phase_correction_discovery_v1_0_owner; grep -qx 'family10h_relation_composition_phase_correction_discovery_v1_0' /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0/.family10h_relation_composition_phase_correction_discovery_v1_0_owner; rm -rf /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0 /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_remote_root.tar.gz /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_source_package.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_source_package.tar.gz"
+      ],
+      "elapsed_seconds": 0.625,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "passed": true,
+    "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_REMOTE_CLEANUP_V1"
+  },
+  "copyback": {
+    "copy": {
+      "command": [
+        "scp",
+        "-O",
+        "-o",
+        "BatchMode=yes",
+        "root@192.168.137.100:/root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_remote_root.tar.gz",
+        "C:\\tmp\\family10h_relation_composition_phase_correction_discovery_v1_0_remote_root.tar.gz"
+      ],
+      "elapsed_seconds": 0.781,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "created_at": "2026-07-24T01:21:39.717452+00:00",
+    "local_sha256": "39f5a85d55cf154f6c7199d9c1452bd9700a74c5a3cf7ce311d6d00f47625ecc",
+    "local_size": 68450365,
+    "make_archive": {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "root@192.168.137.100",
+        "set -eu; rm -f /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_remote_root.tar.gz; tar -czf /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_remote_root.tar.gz -C /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0 source; sha256sum /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_remote_root.tar.gz; stat -c%s /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_remote_root.tar.gz"
+      ],
+      "elapsed_seconds": 24.016,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "39f5a85d55cf154f6c7199d9c1452bd9700a74c5a3cf7ce311d6d00f47625ecc  /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_remote_root.tar.gz\n68450365\n"
+    },
+    "passed": true,
+    "remote_sha256": "39f5a85d55cf154f6c7199d9c1452bd9700a74c5a3cf7ce311d6d00f47625ecc",
+    "remote_size": 68450365,
+    "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_COPYBACK_V1"
+  },
+  "create": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; mkdir -p /root/catcas_live_small_wall; mkdir -m 0700 /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0; printf '%s\\n' 'family10h_relation_composition_phase_correction_discovery_v1_0' > /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0/.family10h_relation_composition_phase_correction_discovery_v1_0_owner"
+    ],
+    "elapsed_seconds": 0.171,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "created_at": "2026-07-24T01:21:40.341579+00:00",
+  "extract": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; tar -xzf /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_source_package.tar.gz -C /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0; chmod +x /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0/source/relation_spatial_runtime /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0/source/relation_spatial_pmu_preflight /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0/source/RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh"
+    ],
+    "elapsed_seconds": 0.25,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "live": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set +e; cd /root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0/source; ./RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh"
+    ],
+    "elapsed_seconds": 50.406,
+    "returncode": 0
+  },
+  "package": {
+    "created_at": "2026-07-24T01:20:23.262120+00:00",
+    "files": {
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/adjacent_r0r1_primary.tsv": {
+        "sha256": "802f4dcde1f9532dc451078507122b142d49789a29b662730229fd573e8a978d",
+        "size_bytes": 490279
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/adjacent_r0r1_sham.tsv": {
+        "sha256": "c607c667b03d8e1f93e53bc6624049b445e05116a407b925e4c3533977f03a11",
+        "size_bytes": 477607
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/adjacent_r1r0_primary.tsv": {
+        "sha256": "1bfd0e6eab185e20814810f09ad2cc0a477929a824006af0dddc2a06eaef08d0",
+        "size_bytes": 490279
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/adjacent_r1r0_sham.tsv": {
+        "sha256": "835cf768af260bc8337ccfaff269c70925686bbadee84871db2496b200704adc",
+        "size_bytes": 477607
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/balanced_alt_a_primary.tsv": {
+        "sha256": "e38e82d3540b11e9dd839f5b58a4c13702b3949ef14b63d9b58ea5024a9029db",
+        "size_bytes": 499495
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/balanced_alt_a_sham.tsv": {
+        "sha256": "7ffdfeb720ca9d04313ffcc0ba4d71843bc18e1dd73b9b32ea9af2ae97d64bf4",
+        "size_bytes": 486823
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/balanced_alt_b_primary.tsv": {
+        "sha256": "0ff946a12bc594e5dc5efd523395eb40480b302e5b69743ae0f1d3a0ac1b70af",
+        "size_bytes": 499495
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/balanced_alt_b_sham.tsv": {
+        "sha256": "cc61e2de7f275b831832fcb2c107cb42ba6c766a8fb32a62388358a124d9f3fd",
+        "size_bytes": 486823
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/dead_adjacent_r0r1_primary.tsv": {
+        "sha256": "cedf62f6f26059abb2fb74e1a867a8b9ebd65a3f2bc421cef66da5ad0cce0443",
+        "size_bytes": 507559
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/dead_adjacent_r0r1_sham.tsv": {
+        "sha256": "3debab1262463a69e9c8a36e42938c8d0260867fcad80191669fe279c8fbb106",
+        "size_bytes": 494887
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/dead_adjacent_r1r0_primary.tsv": {
+        "sha256": "b1654c788f9a9fbe4fc251f79af5033ca9cc9d4c9dc591156d12d2bfa7e81f05",
+        "size_bytes": 507559
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/dead_adjacent_r1r0_sham.tsv": {
+        "sha256": "7d1f622160870c4729baf0360df1a449bf576e8e90789149fd1e4c6a538fd955",
+        "size_bytes": 494887
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/dead_balanced_alt_a_primary.tsv": {
+        "sha256": "0f4b1787f62076a8cc5847dd7f4a6899516250d4068c1ff78fc65923f4379b37",
+        "size_bytes": 516775
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/dead_balanced_alt_a_sham.tsv": {
+        "sha256": "518b691d15f9ec019f421e04fe7dff327c083cf4b6ab451bf347d586b606efe0",
+        "size_bytes": 504103
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/dead_balanced_alt_b_primary.tsv": {
+        "sha256": "aa20cc442a642a383281f294d5130ab87684775a039517dfb32c00f3c7926486",
+        "size_bytes": 516775
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/dead_balanced_alt_b_sham.tsv": {
+        "sha256": "6fc7e8bf3ae911502ace61c650f2f74e8113b111364360d507c79563a828ccef",
+        "size_bytes": 504103
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/gapped_balanced_alt_a_primary.tsv": {
+        "sha256": "2ca3692a1ebbd8f0df8b350c729d9c3d2320783f57ca28f7a526baa7eb5ef85d",
+        "size_bytes": 526375
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/gapped_balanced_alt_a_sham.tsv": {
+        "sha256": "2ec30394aee462b2658b6135c58b5a05fe4b720cc8727a744a9b4e215ebbf62a",
+        "size_bytes": 513703
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/gapped_balanced_alt_b_primary.tsv": {
+        "sha256": "fe39808ee5654b75678c3b8ef6be5cce5f00186b8bec3f6ce5e06a808ac160e1",
+        "size_bytes": 526375
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/gapped_balanced_alt_b_sham.tsv": {
+        "sha256": "e7450271618a0502576b9b1ddbf88d4ad979b6f3be22d27cfd6d3f334202204b",
+        "size_bytes": 513703
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/gapped_r0r1_primary.tsv": {
+        "sha256": "b0cd3e17def2f9b90d277c6f59caf3db0b543f1bea2fa6c0ef4e1ebf84a019dc",
+        "size_bytes": 489511
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/gapped_r0r1_sham.tsv": {
+        "sha256": "79252b0dd28aee48432618fe1752852e7aba1b1771dd3ebd85788bd66c2dee02",
+        "size_bytes": 476839
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/gapped_r1r0_primary.tsv": {
+        "sha256": "a21df2889a79c9b04f832052539e48834cc024dd3febd3cf4f1789c5e91f01ea",
+        "size_bytes": 489511
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/gapped_r1r0_sham.tsv": {
+        "sha256": "dc3bb0716283678d8f99a4e8a5178c7c33fda6d6400d0d4d9a85ed298d6c1146",
+        "size_bytes": 476839
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/source_off_adjacent_r0r1_primary.tsv": {
+        "sha256": "bfb3afa8b92ef568814dd9bd587612eb06c5243554b29374464d0f7d16c3d722",
+        "size_bytes": 528295
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/source_off_adjacent_r0r1_sham.tsv": {
+        "sha256": "0b48ab5a7e30a387fa88504fa5fb296554d1c155ae578c68f7b61feb205c5f8f",
+        "size_bytes": 515623
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/source_off_adjacent_r1r0_primary.tsv": {
+        "sha256": "5a3d80f10baa9d51db531b1c6bccd56e464fdb838269f9df95f3c4898bc73f5d",
+        "size_bytes": 528295
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/source_off_adjacent_r1r0_sham.tsv": {
+        "sha256": "f68532a8714b97cb097730b4abd1c563af5c5571eb48bbb02b855f7b6068ca01",
+        "size_bytes": 515623
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/source_off_balanced_alt_a_primary.tsv": {
+        "sha256": "0180ab0bbbafa8606b15131b67bc2ab903966cb26a29c6be86910f4db2209770",
+        "size_bytes": 537511
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/source_off_balanced_alt_a_sham.tsv": {
+        "sha256": "e1db1852a3bc4e33f447ba334703b82ff1998b6b635db3288687687960ec0fe7",
+        "size_bytes": 524839
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/source_off_balanced_alt_b_primary.tsv": {
+        "sha256": "9b660f5824e5a170f9b09ceeefcc25e67b5679d1bd4198d2bf95b4cb8b22961e",
+        "size_bytes": 537511
+      },
+      "source/COMPOSITION_PHASE_CORRECTION_SCHEDULES/source_off_balanced_alt_b_sham.tsv": {
+        "sha256": "c8dfe6eb300fd8bbc79bd0c08176eba84666530a1547829b1a7c5a016d8c1169",
+        "size_bytes": 524839
+      },
+      "source/RELATION_COMPOSITION_PHASE_CORRECTION_SCHEDULE_MANIFEST.json": {
+        "sha256": "0ae2f3633b8c8e3495bd8f18a7c3317101e7b2e2754a2dd312b32202881bc148",
+        "size_bytes": 22927
+      },
+      "source/RELATION_GRAMMAR.json": {
+        "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+        "size_bytes": 292071
+      },
+      "source/RELATION_GRAMMAR.sha256": {
+        "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+        "size_bytes": 66
+      },
+      "source/RELATION_GRAMMAR.tsv": {
+        "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+        "size_bytes": 360
+      },
+      "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+        "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+        "size_bytes": 2277
+      },
+      "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+        "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+        "size_bytes": 66
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+        "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+        "size_bytes": 1866
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+        "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+        "size_bytes": 66
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+        "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+        "size_bytes": 11263467
+      },
+      "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+        "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+        "size_bytes": 2635
+      },
+      "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+        "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+        "size_bytes": 3120
+      },
+      "source/RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh": {
+        "sha256": "c59b55e50f050961580a70a301c090106cd52b02baba959279fcb37bd7adea86",
+        "size_bytes": 10058
+      },
+      "source/relation_spatial_adjudication.py": {
+        "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+        "size_bytes": 864
+      },
+      "source/relation_spatial_physical_adjudication.py": {
+        "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+        "size_bytes": 42533
+      },
+      "source/relation_spatial_pmu_preflight": {
+        "sha256": "ef63151e50ea9cb992a73b677cc1acfdf614b8bfd61c40941ffec8c3ce8a026d",
+        "size_bytes": 42648
+      },
+      "source/relation_spatial_pmu_preflight.c": {
+        "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+        "size_bytes": 9376
+      },
+      "source/relation_spatial_public.py": {
+        "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+        "size_bytes": 32161
+      },
+      "source/relation_spatial_runtime": {
+        "sha256": "f9e5e8e4abff8696669c9d5d09e42e4db226a226f08cca1fb5d877101156a368",
+        "size_bytes": 167160
+      },
+      "source/relation_spatial_runtime.c": {
+        "sha256": "4e31587d64ffcb554278263931b9146770d164c75c6dbecc470a0363ccbb2541",
+        "size_bytes": 74627
+      },
+      "source/relation_spatial_runtime.h": {
+        "sha256": "890ea73126b778c7537a57a492d44a49a59b068d5ff3816a12b86265ed68b4ee",
+        "size_bytes": 5152
+      },
+      "source/relation_spatial_target.py": {
+        "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+        "size_bytes": 91980
+      }
+    },
+    "path": "C:\\tmp\\family10h_relation_composition_phase_correction_discovery_v1_0_source_package.tar.gz",
+    "run_id": "family10h_relation_composition_phase_correction_discovery_v1_0",
+    "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_SOURCE_PACKAGE_V1",
+    "sha256": "69fe522747a66e37b4db94eabd4ca0b99d9f6f0dc651e55c9eb184f4ee8b76ba",
+    "size_bytes": 1009779
+  },
+  "passed": true,
+  "run_id": "family10h_relation_composition_phase_correction_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_LIVE_CONTROLLER_V1",
+  "small_wall_crossed": false,
+  "upload": {
+    "command": [
+      "scp",
+      "-O",
+      "-o",
+      "BatchMode=yes",
+      "C:\\tmp\\family10h_relation_composition_phase_correction_discovery_v1_0_source_package.tar.gz",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_relation_composition_phase_correction_discovery_v1_0_source_package.tar.gz"
+    ],
+    "elapsed_seconds": 0.219,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  }
+}

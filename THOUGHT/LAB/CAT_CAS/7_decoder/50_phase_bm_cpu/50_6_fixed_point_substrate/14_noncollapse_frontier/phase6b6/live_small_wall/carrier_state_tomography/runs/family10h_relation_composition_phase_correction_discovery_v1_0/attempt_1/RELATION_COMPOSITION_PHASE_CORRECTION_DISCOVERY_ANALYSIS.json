@@ -1,0 +1,1886 @@
+{
+  "analysis_sha256": "27cf7a31788487262f8866f3ccebe64e8461c1dcc29feed12b84435306a74c28",
+  "archive_sha256": "39f5a85d55cf154f6c7199d9c1452bd9700a74c5a3cf7ce311d6d00f47625ecc",
+  "archive_size": 68450365,
+  "claim_boundary": {
+    "full_tomography_established": false,
+    "holographic_relational_invariant_established": false,
+    "positive_scientific_claim": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false
+  },
+  "controller_passed": true,
+  "coordinates": {
+    "D_adjacent_r0r1_primary_minus_sham": 0.0776719320632061,
+    "D_adjacent_r1r0_primary_minus_sham": 0.08424584455145914,
+    "D_balanced_alt_a_primary_minus_sham": 0.07335878616614461,
+    "D_balanced_alt_b_primary_minus_sham": 0.08414803942757475,
+    "D_gapped_r0r1_primary_minus_sham": 0.0679111933458404,
+    "D_gapped_r1r0_primary_minus_sham": 0.0659807555918463,
+    "Omega_adjacent_composition_r0r1_minus_r1r0": -0.006573912488253036,
+    "Omega_balanced_alt_composition_phase_a_minus_phase_b": -0.01078925326143014,
+    "Omega_dead_balanced_alt_phase_a_minus_phase_b": -0.007885581757716961,
+    "Omega_dead_composition_r0r1_minus_r1r0": 0.009243243833587073,
+    "Omega_gapped_balanced_alt_phase_a_minus_phase_b": -0.008179135446529762,
+    "Omega_gapped_composition_r0r1_minus_r1r0": 0.0019304377539941103,
+    "Omega_source_off_balanced_alt_phase_a_minus_phase_b": -0.013093192972774267,
+    "Omega_source_off_composition_r0r1_minus_r1r0": 0.007104739054644357,
+    "Psi_alive_adjacent_minus_balanced": 0.004215340773177104,
+    "Psi_dead_adjacent_minus_balanced": 0.017128825591304034,
+    "Psi_gapped_adjacent_minus_balanced": 0.010109573200523872,
+    "Psi_source_off_adjacent_minus_balanced": 0.020197932027418625,
+    "R_adjacent_primary_composition_r0r1_minus_r1r0": -0.02118065029342886,
+    "R_adjacent_r0r1_primary": 0.06345435097322706,
+    "R_adjacent_r1r0_primary": 0.08463500126665592,
+    "balanced_alt_abs_to_adjacent_composition_abs": 1.6412225262671996,
+    "dead_composition_abs_to_alive_composition_abs": 1.4060491146031957,
+    "dead_psi_abs_to_alive_psi_abs": 4.063449792789595,
+    "gapped_composition_abs_to_adjacent_composition_abs": 0.2936512704487048,
+    "gapped_psi_abs_to_alive_psi_abs": 2.3982813595647414,
+    "source_off_composition_abs_to_alive_composition_abs": 1.0807474342470877,
+    "source_off_psi_abs_to_alive_psi_abs": 4.791530059904371
+  },
+  "corrected_phase_strata": {
+    "cyclic_origin": {
+      "all_same_sign_as_aggregate": false,
+      "levels": {
+        "0": {
+          "omega_adjacent": -0.011918927398935193,
+          "omega_balanced": 0.006805850822330997,
+          "psi_adjacent_minus_balanced": -0.01872477822126619
+        },
+        "1024": {
+          "omega_adjacent": 0.010401518628746359,
+          "omega_balanced": -0.0309152944391699,
+          "psi_adjacent_minus_balanced": 0.041316813067916264
+        },
+        "2048": {
+          "omega_adjacent": -0.018913923316209225,
+          "omega_balanced": 0.014792663139033546,
+          "psi_adjacent_minus_balanced": -0.03370658645524277
+        },
+        "3072": {
+          "omega_adjacent": -0.014615009151961914,
+          "omega_balanced": -0.014247144556614785,
+          "psi_adjacent_minus_balanced": -0.00036786459534712823
+        }
+      }
+    },
+    "mapping": {
+      "all_same_sign_as_aggregate": false,
+      "levels": {
+        "map0": {
+          "omega_adjacent": 0.024995428553292634,
+          "omega_balanced": -0.020098034037451376,
+          "psi_adjacent_minus_balanced": 0.04509346259074401
+        },
+        "map1": {
+          "omega_adjacent": -0.03442921340726389,
+          "omega_balanced": -0.002575623164940824,
+          "psi_adjacent_minus_balanced": -0.031853590242323065
+        }
+      }
+    },
+    "query_order": {
+      "all_same_sign_as_aggregate": true,
+      "levels": {
+        "AB": {
+          "omega_adjacent": 0.013675559080842184,
+          "omega_balanced": 0.011843823594228767,
+          "psi_adjacent_minus_balanced": 0.0018317354866134172
+        },
+        "BA": {
+          "omega_adjacent": -0.029523313599894213,
+          "omega_balanced": -0.03644007369784358,
+          "psi_adjacent_minus_balanced": 0.006916760097949365
+        }
+      }
+    },
+    "replicate": {
+      "all_same_sign_as_aggregate": false,
+      "levels": {
+        "0": {
+          "omega_adjacent": -0.013025799411989482,
+          "omega_balanced": -0.002154751114509204,
+          "psi_adjacent_minus_balanced": -0.010871048297480278
+        },
+        "1": {
+          "omega_adjacent": -0.0006381765184154259,
+          "omega_balanced": -0.018732995236597355,
+          "psi_adjacent_minus_balanced": 0.01809481871818193
+        }
+      }
+    },
+    "session": {
+      "all_same_sign_as_aggregate": false,
+      "levels": {
+        "session_0": {
+          "omega_adjacent": -0.0016809369678345218,
+          "omega_balanced": -0.018543213676753156,
+          "psi_adjacent_minus_balanced": 0.016862276708918635
+        },
+        "session_1": {
+          "omega_adjacent": -0.011466888008671475,
+          "omega_balanced": -0.003035292846107124,
+          "psi_adjacent_minus_balanced": -0.008431595162564351
+        }
+      }
+    }
+  },
+  "created_at": "2026-07-24T01:22:48.380422+00:00",
+  "interpretation": {
+    "adjacent_composition_order_nonzero": true,
+    "composition_phase_correction_candidate": false,
+    "dead_preserves_at_least_25pct_alive_psi": true,
+    "diagnostic_adjacent_gapped_collapses_below_25pct": false,
+    "diagnostic_adjacent_source_off_collapses_below_25pct": false,
+    "diagnostic_balanced_alt_replay_below_25pct_adjacent": false,
+    "exploratory_only": true,
+    "gapped_collapses_below_25pct_alive_psi": false,
+    "phase_corrected_all_one_factor_strata_same_sign": false,
+    "phase_corrected_psi_nonzero": true,
+    "small_wall_crossed": false,
+    "source_off_collapses_below_25pct_alive_psi": false
+  },
+  "pair_reports": {
+    "adjacent_r0r1": {
+      "D_primary_minus_sham": 0.0776719320632061,
+      "primary_R": 0.06345435097322706,
+      "primary_positive": true,
+      "primary_variant": "adjacent_r0r1_primary",
+      "sham_R": -0.014217581089979043,
+      "sham_positive": false,
+      "sham_variant": "adjacent_r0r1_sham"
+    },
+    "adjacent_r1r0": {
+      "D_primary_minus_sham": 0.08424584455145914,
+      "primary_R": 0.08463500126665592,
+      "primary_positive": true,
+      "primary_variant": "adjacent_r1r0_primary",
+      "sham_R": 0.00038915671519677294,
+      "sham_positive": true,
+      "sham_variant": "adjacent_r1r0_sham"
+    },
+    "balanced_alt_a": {
+      "D_primary_minus_sham": 0.07335878616614461,
+      "primary_R": 0.08599622660465038,
+      "primary_positive": true,
+      "primary_variant": "balanced_alt_a_primary",
+      "sham_R": 0.012637440438505768,
+      "sham_positive": true,
+      "sham_variant": "balanced_alt_a_sham"
+    },
+    "balanced_alt_b": {
+      "D_primary_minus_sham": 0.08414803942757475,
+      "primary_R": 0.09548786995122725,
+      "primary_positive": true,
+      "primary_variant": "balanced_alt_b_primary",
+      "sham_R": 0.011339830523652505,
+      "sham_positive": true,
+      "sham_variant": "balanced_alt_b_sham"
+    },
+    "dead_adjacent_r0r1": {
+      "D_primary_minus_sham": 0.06577890029885296,
+      "primary_R": 0.06738718305451903,
+      "primary_positive": true,
+      "primary_variant": "dead_adjacent_r0r1_primary",
+      "sham_R": 0.001608282755666071,
+      "sham_positive": true,
+      "sham_variant": "dead_adjacent_r0r1_sham"
+    },
+    "dead_adjacent_r1r0": {
+      "D_primary_minus_sham": 0.056535656465265885,
+      "primary_R": 0.06547619473414219,
+      "primary_positive": true,
+      "primary_variant": "dead_adjacent_r1r0_primary",
+      "sham_R": 0.008940538268876308,
+      "sham_positive": true,
+      "sham_variant": "dead_adjacent_r1r0_sham"
+    },
+    "dead_balanced_alt_a": {
+      "D_primary_minus_sham": 0.08474106619387965,
+      "primary_R": 0.06715200742333315,
+      "primary_positive": true,
+      "primary_variant": "dead_balanced_alt_a_primary",
+      "sham_R": -0.017589058770546506,
+      "sham_positive": false,
+      "sham_variant": "dead_balanced_alt_a_sham"
+    },
+    "dead_balanced_alt_b": {
+      "D_primary_minus_sham": 0.09262664795159661,
+      "primary_R": 0.08746506230361238,
+      "primary_positive": true,
+      "primary_variant": "dead_balanced_alt_b_primary",
+      "sham_R": -0.005161585647984236,
+      "sham_positive": false,
+      "sham_variant": "dead_balanced_alt_b_sham"
+    },
+    "gapped_balanced_alt_a": {
+      "D_primary_minus_sham": 0.08382182636014489,
+      "primary_R": 0.07944588754087618,
+      "primary_positive": true,
+      "primary_variant": "gapped_balanced_alt_a_primary",
+      "sham_R": -0.004375938819268707,
+      "sham_positive": false,
+      "sham_variant": "gapped_balanced_alt_a_sham"
+    },
+    "gapped_balanced_alt_b": {
+      "D_primary_minus_sham": 0.09200096180667465,
+      "primary_R": 0.09683894568129552,
+      "primary_positive": true,
+      "primary_variant": "gapped_balanced_alt_b_primary",
+      "sham_R": 0.004837983874620867,
+      "sham_positive": true,
+      "sham_variant": "gapped_balanced_alt_b_sham"
+    },
+    "gapped_r0r1": {
+      "D_primary_minus_sham": 0.0679111933458404,
+      "primary_R": 0.05279027181565971,
+      "primary_positive": true,
+      "primary_variant": "gapped_r0r1_primary",
+      "sham_R": -0.015120921530180692,
+      "sham_positive": false,
+      "sham_variant": "gapped_r0r1_sham"
+    },
+    "gapped_r1r0": {
+      "D_primary_minus_sham": 0.0659807555918463,
+      "primary_R": 0.06349246494930717,
+      "primary_positive": true,
+      "primary_variant": "gapped_r1r0_primary",
+      "sham_R": -0.0024882906425391167,
+      "sham_positive": false,
+      "sham_variant": "gapped_r1r0_sham"
+    },
+    "source_off_adjacent_r0r1": {
+      "D_primary_minus_sham": 0.09669075876727097,
+      "primary_R": 0.09740192002517854,
+      "primary_positive": true,
+      "primary_variant": "source_off_adjacent_r0r1_primary",
+      "sham_R": 0.0007111612579075708,
+      "sham_positive": true,
+      "sham_variant": "source_off_adjacent_r0r1_sham"
+    },
+    "source_off_adjacent_r1r0": {
+      "D_primary_minus_sham": 0.08958601971262661,
+      "primary_R": 0.09767800399464593,
+      "primary_positive": true,
+      "primary_variant": "source_off_adjacent_r1r0_primary",
+      "sham_R": 0.008091984282019328,
+      "sham_positive": true,
+      "sham_variant": "source_off_adjacent_r1r0_sham"
+    },
+    "source_off_balanced_alt_a": {
+      "D_primary_minus_sham": 0.08958388140902634,
+      "primary_R": 0.09420220876050482,
+      "primary_positive": true,
+      "primary_variant": "source_off_balanced_alt_a_primary",
+      "sham_R": 0.004618327351478479,
+      "sham_positive": true,
+      "sham_variant": "source_off_balanced_alt_a_sham"
+    },
+    "source_off_balanced_alt_b": {
+      "D_primary_minus_sham": 0.10267707438180061,
+      "primary_R": 0.09898152877681808,
+      "primary_positive": true,
+      "primary_variant": "source_off_balanced_alt_b_primary",
+      "sham_R": -0.0036955456049825304,
+      "sham_positive": false,
+      "sham_variant": "source_off_balanced_alt_b_sham"
+    }
+  },
+  "run_id": "family10h_relation_composition_phase_correction_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_COMPOSITION_PHASE_CORRECTION_DISCOVERY_ANALYSIS_V1",
+  "stratum_composition_contrasts": {
+    "cyclic_origin": {
+      "all_same_sign_as_aggregate": true,
+      "levels": {
+        "0": {
+          "left_R": 0.03205949384584301,
+          "left_minus_right": -0.011436295468682793,
+          "right_R": 0.0434957893145258
+        },
+        "1024": {
+          "left_R": 0.026662708942814847,
+          "left_minus_right": -0.017001791270438354,
+          "right_R": 0.0436645002132532
+        },
+        "2048": {
+          "left_R": 0.12054796013776312,
+          "left_minus_right": -0.04849025614057767,
+          "right_R": 0.16903821627834079
+        },
+        "3072": {
+          "left_R": 0.09680509678370512,
+          "left_minus_right": -0.019575370265838388,
+          "right_R": 0.11638046704954351
+        }
+      }
+    },
+    "mapping": {
+      "all_same_sign_as_aggregate": true,
+      "levels": {
+        "map0": {
+          "left_R": 0.06627209078561658,
+          "left_minus_right": -0.012055880373338879,
+          "right_R": 0.07832797115895546
+        },
+        "map1": {
+          "left_R": 0.06096810996229519,
+          "left_minus_right": -0.0292319178699788,
+          "right_R": 0.09020002783227399
+        }
+      }
+    },
+    "query_order": {
+      "all_same_sign_as_aggregate": true,
+      "levels": {
+        "AB": {
+          "left_R": 0.06089087356005827,
+          "left_minus_right": -0.020947864869809797,
+          "right_R": 0.08183873842986807
+        },
+        "BA": {
+          "left_R": 0.06635962537481842,
+          "left_minus_right": -0.021444473773530356,
+          "right_R": 0.08780409914834877
+        }
+      }
+    },
+    "replicate": {
+      "all_same_sign_as_aggregate": true,
+      "levels": {
+        "0": {
+          "left_R": 0.04756848365719583,
+          "left_minus_right": -0.014951558227443061,
+          "right_R": 0.06252004188463889
+        },
+        "1": {
+          "left_R": 0.07806934890397585,
+          "left_minus_right": -0.0269114149941357,
+          "right_R": 0.10498076389811155
+        }
+      }
+    },
+    "session": {
+      "all_same_sign_as_aggregate": true,
+      "levels": {
+        "session_0": {
+          "left_R": 0.05418270448036874,
+          "left_minus_right": -0.01030592528047837,
+          "right_R": 0.06448862976084711
+        },
+        "session_1": {
+          "left_R": 0.07272599746608545,
+          "left_minus_right": -0.03205537530637925,
+          "right_R": 0.1047813727724647
+        }
+      }
+    }
+  },
+  "variant_reports": {
+    "adjacent_r0r1_primary": {
+      "R_spatial": {
+        "abs_mean": 0.08546696384807208,
+        "abs_of_mean": 0.06345435097322706,
+        "count": 96,
+        "max_abs": 0.39488672492677296,
+        "mean": 0.06345435097322706,
+        "q50_abs": 0.02621017959565064,
+        "q95_abs": 0.3197313766476579,
+        "q99_abs": 0.36220127501195426,
+        "sign_counts": {
+          "-1": 41,
+          "0": 0,
+          "1": 55
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r0_then_r1",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "compose_r0_then_r1_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.692304602054609,
+        "cell_prepare_r0_query_r1": 0.6777269977013205,
+        "cell_prepare_r1_query_r0": 0.5387955951697987,
+        "cell_prepare_r1_query_r1": 0.6511266927629642,
+        "common_axis": 0.6399884719221731,
+        "diag_R_axis": 0.06345435097322705,
+        "offdiag_skew_axis": 0.0694657012657609,
+        "prep_axis": 0.09005465591158324,
+        "query_axis": -0.048876746619938516
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "adjacent_r0r1_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05341435351892335,
+        "abs_of_mean": 0.014217581089979043,
+        "count": 96,
+        "max_abs": 0.20433282982295098,
+        "mean": -0.014217581089979043,
+        "q50_abs": 0.0402178098577885,
+        "q95_abs": 0.15650035904259632,
+        "q99_abs": 0.18907803547162283,
+        "sign_counts": {
+          "-1": 58,
+          "0": 0,
+          "1": 38
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r0_then_r1",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "compose_r0_then_r1_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.08932140517247524,
+        "cell_prepare_r0_query_r1": 0.10085860136750506,
+        "cell_prepare_r1_query_r0": 0.11671284733625965,
+        "cell_prepare_r1_query_r1": 0.09981488135133144,
+        "common_axis": 0.10167693380689284,
+        "diag_R_axis": -0.014217581089979017,
+        "offdiag_skew_axis": -0.007927122984377297,
+        "prep_axis": -0.013173861073805401,
+        "query_axis": 0.002680384894949192
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "adjacent_r1r0_primary": {
+      "R_spatial": {
+        "abs_mean": 0.10573714680481293,
+        "abs_of_mean": 0.08463500126665592,
+        "count": 96,
+        "max_abs": 0.43627797464160034,
+        "mean": 0.08463500126665592,
+        "q50_abs": 0.036554960588914914,
+        "q95_abs": 0.40022181692369163,
+        "q99_abs": 0.42391214561321455,
+        "sign_counts": {
+          "-1": 30,
+          "0": 0,
+          "1": 66
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r1_then_r0",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "compose_r1_then_r0_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.6192164165921816,
+        "cell_prepare_r0_query_r1": 0.6104225495889036,
+        "cell_prepare_r1_query_r0": 0.47300657713631583,
+        "cell_prepare_r1_query_r1": 0.6334827126663498,
+        "common_axis": 0.5840320639959378,
+        "diag_R_axis": 0.08463500126665599,
+        "offdiag_skew_axis": 0.0687079862262939,
+        "prep_axis": 0.061574838189209835,
+        "query_axis": -0.07584113426337799
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "adjacent_r1r0_sham": {
+      "R_spatial": {
+        "abs_mean": 0.03747823463186884,
+        "abs_of_mean": 0.00038915671519677294,
+        "count": 96,
+        "max_abs": 0.09823561315172497,
+        "mean": 0.00038915671519677294,
+        "q50_abs": 0.035392547004316835,
+        "q95_abs": 0.08414516347597112,
+        "q99_abs": 0.09503473466519868,
+        "sign_counts": {
+          "-1": 46,
+          "0": 0,
+          "1": 50
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r1_then_r0",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "compose_r1_then_r0_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.128041038041352,
+        "cell_prepare_r0_query_r1": 0.1253387158344983,
+        "cell_prepare_r1_query_r0": 0.1271226673336103,
+        "cell_prepare_r1_query_r1": 0.12519865855715018,
+        "common_axis": 0.1264252699416527,
+        "diag_R_axis": 0.00038915671519680617,
+        "offdiag_skew_axis": -0.0008919757495560038,
+        "prep_axis": 0.0005292139925449219,
+        "query_axis": 0.0023131654916569155
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "balanced_alt_a_primary": {
+      "R_spatial": {
+        "abs_mean": 0.10187069818568749,
+        "abs_of_mean": 0.08599622660465038,
+        "count": 96,
+        "max_abs": 0.49142598168268425,
+        "mean": 0.08599622660465038,
+        "q50_abs": 0.028898214137408437,
+        "q95_abs": 0.4294881190818021,
+        "q99_abs": 0.48912925878223756,
+        "sign_counts": {
+          "-1": 32,
+          "0": 0,
+          "1": 64
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_a",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "balanced_alt_a_compose_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.3040630973382093,
+        "cell_prepare_r0_query_r1": 0.30855799448414917,
+        "cell_prepare_r1_query_r0": 0.12528303357447973,
+        "cell_prepare_r1_query_r1": 0.3017703839297206,
+        "common_axis": 0.2599186273316397,
+        "diag_R_axis": 0.0859962266046505,
+        "offdiag_skew_axis": 0.09163748045483472,
+        "prep_axis": 0.09278383715907906,
+        "query_axis": -0.09049112375059037
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "balanced_alt_a_sham": {
+      "R_spatial": {
+        "abs_mean": 0.04479700234051276,
+        "abs_of_mean": 0.012637440438505768,
+        "count": 96,
+        "max_abs": 0.24523404409083058,
+        "mean": 0.012637440438505768,
+        "q50_abs": 0.035672875162209766,
+        "q95_abs": 0.13113690699838373,
+        "q99_abs": 0.1924002739253882,
+        "sign_counts": {
+          "-1": 43,
+          "0": 0,
+          "1": 53
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_a",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "balanced_alt_a_compose_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.07387300093955958,
+        "cell_prepare_r0_query_r1": 0.05164799986834609,
+        "cell_prepare_r1_query_r0": 0.07805694569501097,
+        "cell_prepare_r1_query_r1": 0.08110682550080899,
+        "common_axis": 0.07117119300093142,
+        "diag_R_axis": 0.012637440438505752,
+        "offdiag_skew_axis": -0.01320447291333244,
+        "prep_axis": -0.016821385193957136,
+        "query_axis": 0.009587560632707735
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "balanced_alt_b_primary": {
+      "R_spatial": {
+        "abs_mean": 0.11454148735832209,
+        "abs_of_mean": 0.09548786995122725,
+        "count": 96,
+        "max_abs": 0.4556978999436565,
+        "mean": 0.09548786995122725,
+        "q50_abs": 0.04742526539051284,
+        "q95_abs": 0.3920121643872196,
+        "q99_abs": 0.42259713572868657,
+        "sign_counts": {
+          "-1": 29,
+          "0": 0,
+          "1": 67
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_b",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "balanced_alt_b_compose_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.6369009509285403,
+        "cell_prepare_r0_query_r1": 0.6355960120970434,
+        "cell_prepare_r1_query_r0": 0.4615477700657615,
+        "cell_prepare_r1_query_r1": 0.651218571136719,
+        "common_axis": 0.596315826057016,
+        "diag_R_axis": 0.09548786995122718,
+        "offdiag_skew_axis": 0.08702412101564097,
+        "prep_axis": 0.07986531091155152,
+        "query_axis": -0.09418293111973033
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "balanced_alt_b_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05833334410262362,
+        "abs_of_mean": 0.011339830523652505,
+        "count": 96,
+        "max_abs": 0.21797211287841628,
+        "mean": 0.011339830523652505,
+        "q50_abs": 0.05111606868187514,
+        "q95_abs": 0.1505634290248501,
+        "q99_abs": 0.20959037191183,
+        "sign_counts": {
+          "-1": 38,
+          "0": 0,
+          "1": 58
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_b",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "balanced_alt_b_compose_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.0926244155841765,
+        "cell_prepare_r0_query_r1": 0.06418738166779223,
+        "cell_prepare_r1_query_r0": 0.07506514620482303,
+        "cell_prepare_r1_query_r1": 0.06930777333574373,
+        "common_axis": 0.07529617919813388,
+        "diag_R_axis": 0.011339830523652485,
+        "offdiag_skew_axis": -0.005438882268515403,
+        "prep_axis": 0.006219438855700983,
+        "query_axis": 0.01709720339273179
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_adjacent_r0r1_primary": {
+      "R_spatial": {
+        "abs_mean": 0.10660053167212752,
+        "abs_of_mean": 0.06738718305451903,
+        "count": 96,
+        "max_abs": 0.40401003439312877,
+        "mean": 0.06738718305451903,
+        "q50_abs": 0.05808565432628672,
+        "q95_abs": 0.31261406544776116,
+        "q99_abs": 0.37290796869104265,
+        "sign_counts": {
+          "-1": 36,
+          "0": 0,
+          "1": 60
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r0_then_r1",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_dead_before_spatial_pair_probe": 384
+      },
+      "query": "dead_compose_r0_then_r1_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.49602219913960227,
+        "cell_prepare_r0_query_r1": 0.5151082548488485,
+        "cell_prepare_r1_query_r0": 0.35892802508994176,
+        "cell_prepare_r1_query_r1": 0.5127884469082256,
+        "common_axis": 0.4707117314966545,
+        "diag_R_axis": 0.06738718305451882,
+        "offdiag_skew_axis": 0.07809011487945336,
+        "prep_axis": 0.06970699099514166,
+        "query_axis": -0.086473238763765
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_adjacent_r0r1_sham": {
+      "R_spatial": {
+        "abs_mean": 0.0559568432041655,
+        "abs_of_mean": 0.001608282755666071,
+        "count": 96,
+        "max_abs": 0.18890486242016363,
+        "mean": 0.001608282755666071,
+        "q50_abs": 0.048342862808184534,
+        "q95_abs": 0.1328221002669787,
+        "q99_abs": 0.1733986385535855,
+        "sign_counts": {
+          "-1": 46,
+          "0": 0,
+          "1": 50
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r0_then_r1",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_dead_before_spatial_pair_probe": 384
+      },
+      "query": "dead_compose_r0_then_r1_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.048215399152078835,
+        "cell_prepare_r0_query_r1": 0.031175704042924194,
+        "cell_prepare_r1_query_r0": 0.049625766714294535,
+        "cell_prepare_r1_query_r1": 0.03580263711647206,
+        "common_axis": 0.0412048767564424,
+        "diag_R_axis": 0.0016082827556660843,
+        "offdiag_skew_axis": -0.00922503133568517,
+        "prep_axis": -0.003018650317881781,
+        "query_axis": 0.01543141235348856
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_adjacent_r1r0_primary": {
+      "R_spatial": {
+        "abs_mean": 0.0924310651608466,
+        "abs_of_mean": 0.06547619473414219,
+        "count": 96,
+        "max_abs": 0.3590265355077584,
+        "mean": 0.06547619473414219,
+        "q50_abs": 0.05311192818688959,
+        "q95_abs": 0.29145476768087025,
+        "q99_abs": 0.3287489294601197,
+        "sign_counts": {
+          "-1": 31,
+          "0": 0,
+          "1": 65
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r1_then_r0",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_dead_before_spatial_pair_probe": 384
+      },
+      "query": "dead_compose_r1_then_r0_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.504526171461212,
+        "cell_prepare_r0_query_r1": 0.47639229173392234,
+        "cell_prepare_r1_query_r0": 0.37715698859188634,
+        "cell_prepare_r1_query_r1": 0.479975498332881,
+        "common_axis": 0.45951273752997546,
+        "diag_R_axis": 0.06547619473414215,
+        "offdiag_skew_axis": 0.049617651571017996,
+        "prep_axis": 0.06189298813518351,
+        "query_axis": -0.03734231500685248
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_adjacent_r1r0_sham": {
+      "R_spatial": {
+        "abs_mean": 0.04761490338944269,
+        "abs_of_mean": 0.008940538268876308,
+        "count": 96,
+        "max_abs": 0.17786960211405783,
+        "mean": 0.008940538268876308,
+        "q50_abs": 0.04202903473974792,
+        "q95_abs": 0.1116963297228259,
+        "q99_abs": 0.1583583760470318,
+        "sign_counts": {
+          "-1": 47,
+          "0": 0,
+          "1": 49
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r1_then_r0",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_dead_before_spatial_pair_probe": 384
+      },
+      "query": "dead_compose_r1_then_r0_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.0829991147946358,
+        "cell_prepare_r0_query_r1": 0.08517118503991915,
+        "cell_prepare_r1_query_r0": 0.07471439749689492,
+        "cell_prepare_r1_query_r1": 0.0947675442799309,
+        "common_axis": 0.08441306040284519,
+        "diag_R_axis": 0.008940538268876308,
+        "offdiag_skew_axis": 0.005228393771512116,
+        "prep_axis": -0.0006558209711354304,
+        "query_axis": -0.011112608514159662
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_balanced_alt_a_primary": {
+      "R_spatial": {
+        "abs_mean": 0.1058597215369851,
+        "abs_of_mean": 0.06715200742333315,
+        "count": 96,
+        "max_abs": 0.3873160992818192,
+        "mean": 0.06715200742333315,
+        "q50_abs": 0.04968753075826063,
+        "q95_abs": 0.3518788198540917,
+        "q99_abs": 0.3831636922295276,
+        "sign_counts": {
+          "-1": 40,
+          "0": 0,
+          "1": 56
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_a",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_dead_before_spatial_pair_probe": 384
+      },
+      "query": "dead_balanced_alt_a_compose_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.5604237011474014,
+        "cell_prepare_r0_query_r1": 0.5466408782727291,
+        "cell_prepare_r1_query_r0": 0.4050321575649774,
+        "cell_prepare_r1_query_r1": 0.5255533495369716,
+        "common_axis": 0.5094125216305199,
+        "diag_R_axis": 0.06715200742333319,
+        "offdiag_skew_axis": 0.07080436035387586,
+        "prep_axis": 0.08823953615909069,
+        "query_axis": -0.05336918454866099
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_balanced_alt_a_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05248404019413802,
+        "abs_of_mean": 0.017589058770546506,
+        "count": 96,
+        "max_abs": 0.23091585745568663,
+        "mean": -0.017589058770546506,
+        "q50_abs": 0.041394129929181615,
+        "q95_abs": 0.1263669568937996,
+        "q99_abs": 0.1789591551819881,
+        "sign_counts": {
+          "-1": 55,
+          "0": 0,
+          "1": 41
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_a",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_dead_before_spatial_pair_probe": 384
+      },
+      "query": "dead_balanced_alt_a_compose_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.02919389359520712,
+        "cell_prepare_r0_query_r1": 0.04878763865238429,
+        "cell_prepare_r1_query_r0": 0.06643248527848161,
+        "cell_prepare_r1_query_r1": 0.05084811279456578,
+        "common_axis": 0.0488155325801597,
+        "diag_R_axis": -0.017589058770546496,
+        "offdiag_skew_axis": -0.008822423313048663,
+        "prep_axis": -0.01964953291272799,
+        "query_axis": -0.0020046862866306657
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_balanced_alt_b_primary": {
+      "R_spatial": {
+        "abs_mean": 0.10638688224700237,
+        "abs_of_mean": 0.08746506230361238,
+        "count": 96,
+        "max_abs": 0.3956778134304571,
+        "mean": 0.08746506230361238,
+        "q50_abs": 0.05228806641851996,
+        "q95_abs": 0.33692031100595543,
+        "q99_abs": 0.3798215063971469,
+        "sign_counts": {
+          "-1": 28,
+          "0": 0,
+          "1": 68
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_b",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_dead_before_spatial_pair_probe": 384
+      },
+      "query": "dead_balanced_alt_b_compose_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.5709595615518555,
+        "cell_prepare_r0_query_r1": 0.5520575251150804,
+        "cell_prepare_r1_query_r0": 0.4146732829620774,
+        "cell_prepare_r1_query_r1": 0.5707013711325272,
+        "common_axis": 0.5270979351903851,
+        "diag_R_axis": 0.08746506230361234,
+        "offdiag_skew_axis": 0.06869212107650152,
+        "prep_axis": 0.06882121628616561,
+        "query_axis": -0.06856302586683738
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_balanced_alt_b_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05684537050547989,
+        "abs_of_mean": 0.005161585647984236,
+        "count": 96,
+        "max_abs": 0.21244583194291525,
+        "mean": -0.005161585647984236,
+        "q50_abs": 0.04823651699749826,
+        "q95_abs": 0.1425502370612311,
+        "q99_abs": 0.18265145180370865,
+        "sign_counts": {
+          "-1": 47,
+          "0": 0,
+          "1": 49
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_b",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_dead_before_spatial_pair_probe": 384
+      },
+      "query": "dead_balanced_alt_b_compose_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.029624239274954594,
+        "cell_prepare_r0_query_r1": 0.031100667747567354,
+        "cell_prepare_r1_query_r0": 0.029557765288494246,
+        "cell_prepare_r1_query_r1": 0.020711022465138534,
+        "common_axis": 0.027748423694038682,
+        "diag_R_axis": -0.005161585647984234,
+        "offdiag_skew_axis": 0.0007714512295365541,
+        "prep_axis": 0.005228059634444586,
+        "query_axis": 0.0036851571753714757
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "gapped_balanced_alt_a_primary": {
+      "R_spatial": {
+        "abs_mean": 0.10594947544258419,
+        "abs_of_mean": 0.07944588754087618,
+        "count": 96,
+        "max_abs": 0.4205342979569509,
+        "mean": 0.07944588754087618,
+        "q50_abs": 0.038106553849197505,
+        "q95_abs": 0.3814753164446842,
+        "q99_abs": 0.41371527917217943,
+        "sign_counts": {
+          "-1": 38,
+          "0": 0,
+          "1": 58
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "gapped_balanced_alternating_phase_a",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "gapped_balanced_alt_a_compose_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.6663140869029452,
+        "cell_prepare_r0_query_r1": 0.6723705685683424,
+        "cell_prepare_r1_query_r0": 0.49783051060484534,
+        "cell_prepare_r1_query_r1": 0.6627787673519953,
+        "common_axis": 0.6248234833570321,
+        "diag_R_axis": 0.07944588754087636,
+        "offdiag_skew_axis": 0.08727002898174854,
+        "prep_axis": 0.08903768875722357,
+        "query_axis": -0.08550236920627355
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "gapped_balanced_alt_a_sham": {
+      "R_spatial": {
+        "abs_mean": 0.07787849641030567,
+        "abs_of_mean": 0.004375938819268707,
+        "count": 96,
+        "max_abs": 0.21365067570396468,
+        "mean": -0.004375938819268707,
+        "q50_abs": 0.06768407353587286,
+        "q95_abs": 0.17169019486438755,
+        "q99_abs": 0.18842505545461494,
+        "sign_counts": {
+          "-1": 44,
+          "0": 0,
+          "1": 52
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "gapped_balanced_alternating_phase_a",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "gapped_balanced_alt_a_compose_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.068096476625169,
+        "cell_prepare_r0_query_r1": 0.025657216137059017,
+        "cell_prepare_r1_query_r0": 0.07592408338525043,
+        "cell_prepare_r1_query_r1": 0.02473294525860298,
+        "common_axis": 0.04860268035152036,
+        "diag_R_axis": -0.004375938819268732,
+        "offdiag_skew_axis": -0.02513343362409571,
+        "prep_axis": -0.003451667940812697,
+        "query_axis": 0.04681519930737872
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "gapped_balanced_alt_b_primary": {
+      "R_spatial": {
+        "abs_mean": 0.11518442770041519,
+        "abs_of_mean": 0.09683894568129552,
+        "count": 96,
+        "max_abs": 0.48375117897561315,
+        "mean": 0.09683894568129552,
+        "q50_abs": 0.05198698594079337,
+        "q95_abs": 0.4086176634388837,
+        "q99_abs": 0.4554381643745794,
+        "sign_counts": {
+          "-1": 29,
+          "0": 0,
+          "1": 67
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "gapped_balanced_alternating_phase_b",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "gapped_balanced_alt_b_compose_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.6313823755317957,
+        "cell_prepare_r0_query_r1": 0.6200666210970932,
+        "cell_prepare_r1_query_r0": 0.46912068217519415,
+        "cell_prepare_r1_query_r1": 0.6514828191030829,
+        "common_axis": 0.5930131244767914,
+        "diag_R_axis": 0.09683894568129561,
+        "offdiag_skew_axis": 0.07547296946094953,
+        "prep_axis": 0.06542274767530593,
+        "query_axis": -0.08552319124659316
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "gapped_balanced_alt_b_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05656203354258756,
+        "abs_of_mean": 0.004837983874620867,
+        "count": 96,
+        "max_abs": 0.23623626024201588,
+        "mean": 0.004837983874620867,
+        "q50_abs": 0.043729065401487105,
+        "q95_abs": 0.16183139079915998,
+        "q99_abs": 0.208831921501586,
+        "sign_counts": {
+          "-1": 53,
+          "0": 0,
+          "1": 43
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "gapped_balanced_alternating_phase_b",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "gapped_balanced_alt_b_compose_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.09345029487041245,
+        "cell_prepare_r0_query_r1": 0.07193081983776549,
+        "cell_prepare_r1_query_r0": 0.0766064217562847,
+        "cell_prepare_r1_query_r1": 0.06476291447287946,
+        "common_axis": 0.07668761273433553,
+        "diag_R_axis": 0.004837983874620866,
+        "offdiag_skew_axis": -0.0023378009592596033,
+        "prep_axis": 0.0120058892395069,
+        "query_axis": 0.0166814911580261
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "gapped_r0r1_primary": {
+      "R_spatial": {
+        "abs_mean": 0.08360674465503888,
+        "abs_of_mean": 0.05279027181565971,
+        "count": 96,
+        "max_abs": 0.47997345719219975,
+        "mean": 0.05279027181565971,
+        "q50_abs": 0.045091381025144345,
+        "q95_abs": 0.2593048783425515,
+        "q99_abs": 0.3187070692195338,
+        "sign_counts": {
+          "-1": 37,
+          "0": 0,
+          "1": 59
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "gapped_r0_then_r1",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "gapped_compose_r0_then_r1_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.6119919741326282,
+        "cell_prepare_r0_query_r1": 0.6193995453873238,
+        "cell_prepare_r1_query_r0": 0.5279182382189657,
+        "cell_prepare_r1_query_r1": 0.6409063531049809,
+        "common_axis": 0.6000540277109746,
+        "diag_R_axis": 0.05279027181565982,
+        "offdiag_skew_axis": 0.04574065358417906,
+        "prep_axis": 0.031283464098002645,
+        "query_axis": -0.06019784307035542
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "gapped_r0r1_sham": {
+      "R_spatial": {
+        "abs_mean": 0.043288560169612016,
+        "abs_of_mean": 0.015120921530180692,
+        "count": 96,
+        "max_abs": 0.17279240824468386,
+        "mean": -0.015120921530180692,
+        "q50_abs": 0.03508349139327721,
+        "q95_abs": 0.11193620668586843,
+        "q99_abs": 0.130822372857335,
+        "sign_counts": {
+          "-1": 57,
+          "0": 0,
+          "1": 39
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "gapped_r0_then_r1",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "gapped_compose_r0_then_r1_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.06293330879434612,
+        "cell_prepare_r0_query_r1": 0.05877966847429233,
+        "cell_prepare_r1_query_r0": 0.06262245242242846,
+        "cell_prepare_r1_query_r1": 0.02822696904201322,
+        "common_axis": 0.053140599683270034,
+        "diag_R_axis": -0.015120921530180725,
+        "offdiag_skew_axis": -0.0019213919740680672,
+        "prep_axis": 0.015431777902098381,
+        "query_axis": 0.019274561850234517
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "gapped_r1r0_primary": {
+      "R_spatial": {
+        "abs_mean": 0.10495068296515724,
+        "abs_of_mean": 0.06349246494930717,
+        "count": 96,
+        "max_abs": 0.3806212210895582,
+        "mean": 0.06349246494930717,
+        "q50_abs": 0.04802193095306989,
+        "q95_abs": 0.3524444315395179,
+        "q99_abs": 0.36515348621086485,
+        "sign_counts": {
+          "-1": 47,
+          "0": 0,
+          "1": 49
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "gapped_r1_then_r0",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "gapped_compose_r1_then_r0_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.6715512509516636,
+        "cell_prepare_r0_query_r1": 0.7001177462096307,
+        "cell_prepare_r1_query_r0": 0.5301229489454512,
+        "cell_prepare_r1_query_r1": 0.6856743741020327,
+        "common_axis": 0.6468665800521946,
+        "diag_R_axis": 0.06349246494930716,
+        "offdiag_skew_axis": 0.08499739863208977,
+        "prep_axis": 0.07793583705690521,
+        "query_axis": -0.09205896020727433
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "gapped_r1r0_sham": {
+      "R_spatial": {
+        "abs_mean": 0.057356825935818694,
+        "abs_of_mean": 0.0024882906425391167,
+        "count": 96,
+        "max_abs": 0.2855169017709673,
+        "mean": -0.0024882906425391167,
+        "q50_abs": 0.052170859750759406,
+        "q95_abs": 0.12874334483122346,
+        "q99_abs": 0.1918275426204572,
+        "sign_counts": {
+          "-1": 53,
+          "0": 0,
+          "1": 43
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "gapped_r1_then_r0",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_alive_during_spatial_pair_probe": 384
+      },
+      "query": "gapped_compose_r1_then_r0_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.07858634049123953,
+        "cell_prepare_r0_query_r1": 0.08446532329569546,
+        "cell_prepare_r1_query_r0": 0.08289275355355677,
+        "cell_prepare_r1_query_r1": 0.08379515507293449,
+        "common_axis": 0.08243489310335655,
+        "diag_R_axis": -0.0024882906425391024,
+        "offdiag_skew_axis": 0.0007862848710693468,
+        "prep_axis": -0.0018181224197781412,
+        "query_axis": -0.003390692161916828
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "True": 384
+      },
+      "source_alive_during_query_counts": {
+        "True": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "alive_during_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_adjacent_r0r1_primary": {
+      "R_spatial": {
+        "abs_mean": 0.10945193614763145,
+        "abs_of_mean": 0.09740192002517854,
+        "count": 96,
+        "max_abs": 0.5357948142810194,
+        "mean": 0.09740192002517854,
+        "q50_abs": 0.02626553901768311,
+        "q95_abs": 0.43847230330068343,
+        "q99_abs": 0.5312738950686889,
+        "sign_counts": {
+          "-1": 32,
+          "0": 0,
+          "1": 64
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r0_then_r1",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_off_no_prepare_before_spatial_pair_probe": 384
+      },
+      "query": "source_off_compose_r0_then_r1_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.6861978119479922,
+        "cell_prepare_r0_query_r1": 0.6828553701295451,
+        "cell_prepare_r1_query_r0": 0.49389927856349164,
+        "cell_prepare_r1_query_r1": 0.6853606767954022,
+        "common_axis": 0.6370782843591078,
+        "diag_R_axis": 0.09740192002517886,
+        "offdiag_skew_axis": 0.09447804578302674,
+        "prep_axis": 0.0948966133593217,
+        "query_axis": -0.09405947820673174
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_adjacent_r0r1_sham": {
+      "R_spatial": {
+        "abs_mean": 0.05226596761702033,
+        "abs_of_mean": 0.0007111612579075708,
+        "count": 96,
+        "max_abs": 0.22477523262706145,
+        "mean": 0.0007111612579075708,
+        "q50_abs": 0.04670125346437929,
+        "q95_abs": 0.11267196584122541,
+        "q99_abs": 0.16137802429077291,
+        "sign_counts": {
+          "-1": 49,
+          "0": 0,
+          "1": 47
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r0_then_r1",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_off_no_prepare_before_spatial_pair_probe": 384
+      },
+      "query": "source_off_compose_r0_then_r1_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.08942674445235797,
+        "cell_prepare_r0_query_r1": 0.08643821891359672,
+        "cell_prepare_r1_query_r0": 0.09318603822787608,
+        "cell_prepare_r1_query_r1": 0.09161983520493007,
+        "common_axis": 0.09016770919969021,
+        "diag_R_axis": 0.0007111612579076207,
+        "offdiag_skew_axis": -0.0033739096571396773,
+        "prep_axis": -0.004470455033425726,
+        "query_axis": 0.002277364280853629
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_adjacent_r1r0_primary": {
+      "R_spatial": {
+        "abs_mean": 0.11707679532152093,
+        "abs_of_mean": 0.09767800399464593,
+        "count": 96,
+        "max_abs": 0.4998774347208565,
+        "mean": 0.09767800399464593,
+        "q50_abs": 0.039147571833058115,
+        "q95_abs": 0.45372568156242543,
+        "q99_abs": 0.4928155032894948,
+        "sign_counts": {
+          "-1": 28,
+          "0": 0,
+          "1": 68
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r1_then_r0",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_off_no_prepare_before_spatial_pair_probe": 384
+      },
+      "query": "source_off_compose_r1_then_r0_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.5935760357418016,
+        "cell_prepare_r0_query_r1": 0.5918102301571749,
+        "cell_prepare_r1_query_r0": 0.4051855742485024,
+        "cell_prepare_r1_query_r1": 0.5987757766531676,
+        "common_axis": 0.5473369042001617,
+        "diag_R_axis": 0.09767800399464596,
+        "offdiag_skew_axis": 0.09331232795433628,
+        "prep_axis": 0.0907124574986532,
+        "query_axis": -0.09591219841001927
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_adjacent_r1r0_sham": {
+      "R_spatial": {
+        "abs_mean": 0.04239568419735607,
+        "abs_of_mean": 0.008091984282019328,
+        "count": 96,
+        "max_abs": 0.12852760535082494,
+        "mean": 0.008091984282019328,
+        "q50_abs": 0.03616485938328644,
+        "q95_abs": 0.09738986830287036,
+        "q99_abs": 0.11853867351323077,
+        "sign_counts": {
+          "-1": 42,
+          "0": 0,
+          "1": 54
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "adjacent_r1_then_r0",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_off_no_prepare_before_spatial_pair_probe": 384
+      },
+      "query": "source_off_compose_r1_then_r0_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.10910243211882033,
+        "cell_prepare_r0_query_r1": 0.10366794638871502,
+        "cell_prepare_r1_query_r0": 0.09509112470878796,
+        "cell_prepare_r1_query_r1": 0.10584060754272136,
+        "common_axis": 0.10342552768976115,
+        "diag_R_axis": 0.008091984282019356,
+        "offdiag_skew_axis": 0.004288410839963529,
+        "prep_axis": 0.005919323128013007,
+        "query_axis": -0.0026574985519140434
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_balanced_alt_a_primary": {
+      "R_spatial": {
+        "abs_mean": 0.11201728530686628,
+        "abs_of_mean": 0.09420220876050482,
+        "count": 96,
+        "max_abs": 0.5169259191198738,
+        "mean": 0.09420220876050482,
+        "q50_abs": 0.028769015807633025,
+        "q95_abs": 0.44581602632973116,
+        "q99_abs": 0.500168375450625,
+        "sign_counts": {
+          "-1": 36,
+          "0": 0,
+          "1": 60
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_a",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_off_no_prepare_before_spatial_pair_probe": 384
+      },
+      "query": "source_off_balanced_alt_a_compose_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.6777271740283367,
+        "cell_prepare_r0_query_r1": 0.6775417234622186,
+        "cell_prepare_r1_query_r0": 0.49549570378216473,
+        "cell_prepare_r1_query_r1": 0.6837146707370559,
+        "common_axis": 0.633619818002444,
+        "diag_R_axis": 0.09420220876050464,
+        "offdiag_skew_axis": 0.09102300984002695,
+        "prep_axis": 0.08802926148566731,
+        "query_axis": -0.09401675819438657
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_balanced_alt_a_sham": {
+      "R_spatial": {
+        "abs_mean": 0.03993482717217751,
+        "abs_of_mean": 0.004618327351478479,
+        "count": 96,
+        "max_abs": 0.20463474291850892,
+        "mean": 0.004618327351478479,
+        "q50_abs": 0.02971946239392232,
+        "q95_abs": 0.10918554751515322,
+        "q99_abs": 0.13906256860549096,
+        "sign_counts": {
+          "-1": 45,
+          "0": 0,
+          "1": 51
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_a",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_off_no_prepare_before_spatial_pair_probe": 384
+      },
+      "query": "source_off_balanced_alt_a_compose_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.09617489857090045,
+        "cell_prepare_r0_query_r1": 0.08947813498642,
+        "cell_prepare_r1_query_r0": 0.0974632431697856,
+        "cell_prepare_r1_query_r1": 0.100003134288262,
+        "common_axis": 0.09577985275384202,
+        "diag_R_axis": 0.004618327351478435,
+        "offdiag_skew_axis": -0.003992554091682796,
+        "prep_axis": -0.005906671950363582,
+        "query_axis": 0.0020784362330020165
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_balanced_alt_b_primary": {
+      "R_spatial": {
+        "abs_mean": 0.1132346812319987,
+        "abs_of_mean": 0.09898152877681808,
+        "count": 96,
+        "max_abs": 0.45893206355476546,
+        "mean": 0.09898152877681808,
+        "q50_abs": 0.0261651915073568,
+        "q95_abs": 0.43302503425703726,
+        "q99_abs": 0.4487617569883832,
+        "sign_counts": {
+          "-1": 37,
+          "0": 0,
+          "1": 59
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_b",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_off_no_prepare_before_spatial_pair_probe": 384
+      },
+      "query": "source_off_balanced_alt_b_compose_query_relation_pair_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.690475230803013,
+        "cell_prepare_r0_query_r1": 0.6968256304436826,
+        "cell_prepare_r1_query_r0": 0.5016807806055695,
+        "cell_prepare_r1_query_r1": 0.7059942377998757,
+        "common_axis": 0.6487439699130352,
+        "diag_R_axis": 0.09898152877681826,
+        "offdiag_skew_axis": 0.09757242491905654,
+        "prep_axis": 0.08981292142062514,
+        "query_axis": -0.1053319284174879
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_balanced_alt_b_sham": {
+      "R_spatial": {
+        "abs_mean": 0.03259325640749911,
+        "abs_of_mean": 0.0036955456049825304,
+        "count": 96,
+        "max_abs": 0.12285025956626079,
+        "mean": -0.0036955456049825304,
+        "q50_abs": 0.025909990762060117,
+        "q95_abs": 0.07911513335266417,
+        "q99_abs": 0.11274164599278108,
+        "sign_counts": {
+          "-1": 51,
+          "0": 0,
+          "1": 45
+        }
+      },
+      "block_count": 96,
+      "composition_sequence": "balanced_alternating_phase_b",
+      "pair_observation_count": 98304,
+      "process_custody_counts": {
+        "source_off_no_prepare_before_spatial_pair_probe": 384
+      },
+      "query": "source_off_balanced_alt_b_compose_relation_sham_control",
+      "raw_record_count": 384,
+      "relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.06831760351857555,
+        "cell_prepare_r0_query_r1": 0.06498607437886357,
+        "cell_prepare_r1_query_r0": 0.07802957584874361,
+        "cell_prepare_r1_query_r1": 0.06730695549906662,
+        "common_axis": 0.06966005231131234,
+        "diag_R_axis": -0.003695545604982503,
+        "offdiag_skew_axis": -0.006521750734940018,
+        "prep_axis": -0.006016426725185549,
+        "query_axis": 0.007027074744694481
+      },
+      "source_alive_at_pair_measurement_counts": {
+        "False": 384
+      },
+      "source_alive_during_query_counts": {
+        "False": 384
+      },
+      "source_death_receipt_count": 384,
+      "source_lifetime_counts": {
+        "dead_before_query": 384
+      },
+      "source_order_inside_each_relation_pair": "A_then_B"
+    }
+  }
+}
