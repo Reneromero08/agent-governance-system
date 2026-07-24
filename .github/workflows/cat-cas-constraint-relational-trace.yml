@@ -36,7 +36,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install qualification dependencies
-        run: python -m pip install pytest jsonschema
+        run: python -m pip install pytest jsonschema numpy scipy
 
       - name: Run exact relational and mechanism tests
         run: python -m pytest THOUGHT/LAB/CAT_CAS/tests/constraint_relational_trace -q

@@ -18,18 +18,25 @@ from constraint_relational_trace_v1.run_mechanism_campaign import (  # noqa: E40
 )
 
 
-def test_mechanism_campaign_selects_ep_candidate_without_promoting_proof() -> None:
+def test_mechanism_campaign_selects_polynomial_selector_flow_without_promoting_proof() -> None:
     record = build_mechanism_record(variable_count=8)
     assert record["status"] == (
-        "MECHANISM_CAMPAIGN_PASS__EP_ROOT_LATCH_REFERENCE_CANDIDATE__"
+        "MECHANISM_CAMPAIGN_PASS__POLYNOMIAL_SELECTOR_DILATION_THERMAL_LATCH_CANDIDATE__"
         "CET_NOT_ESTABLISHED"
     )
     assert all(record["gates"].values())
     decision = record["decision"]
-    assert decision["strongest_candidate"] == "ORDER_N_EXCEPTIONAL_POINT_ROOT_LATCH"
-    assert decision["mathematical_sat_margin"] == "CONSTANT"
-    assert decision["native_clean_port"] == "NOT_ESTABLISHED"
-    assert decision["deterministic_noiseless_gain"] == "NOT_ESTABLISHED"
-    assert decision["complete_environment_restoration"] == "NOT_ESTABLISHED"
+    assert decision["strongest_candidate"] == (
+        "POLYNOMIAL_SELECTOR_DILATION_OF_TERMINAL_AGNOSTIC_CLAUSE_FLOW_"
+        "WITH_THERMAL_ZERO_MODE_LATCH"
+    )
+    assert decision["mathematical_sat_margin"] == "CONSTANT_NORMALIZED_ZERO_MODE_POPULATION"
+    assert decision["native_clean_port"] == "DIRECT_PUBLIC_CLAUSE_HAMILTONIAN"
+    assert decision["deterministic_noiseless_gain"] == "NOT_REQUIRED_BY_THERMAL_CANDIDATE"
+    assert decision["worst_case_native_preparation"] == (
+        "UNIFORM_POLYNOMIAL_TRAJECTORY_BOUND_NOT_ESTABLISHED"
+    )
+    assert decision["deterministic_exact_boundary"] == "NOT_ESTABLISHED"
+    assert decision["complete_environment_restoration"] == "SMOOTH_REGION_ONLY__GLOBAL_NOT_ESTABLISHED"
     assert decision["polynomial_total_resources"] == "NOT_ESTABLISHED"
     assert decision["p_equals_np"] == "NOT_PROVEN"

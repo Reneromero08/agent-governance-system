@@ -83,6 +83,14 @@ rank-one resolvent resource audit
 ideal zero-mode gain resource audit
 order-n exceptional-point root-latch candidate
 deterministic quantum data-processing killer control
+public terminal-agnostic clause-flow candidate
+constant-population thermal zero-mode latch
+smooth-region reversible cotangent flow lift
+public polynomial selector dilation with n + 11m coordinates
+complete three-variable selector-flow census
+structured parity, pigeonhole, and coloring selector controls
+adaptive selector-mass preservation audit
+parity-32 memory and numerical-work scaling transition
 ```
 
 The existential quotient remains unresolved.
@@ -138,6 +146,15 @@ fermionic local-interaction degree audit
 normalized versus unnormalized rank-one probe audit
 unique zero-mode gain and mode-resource audit
 one-shot deterministic CPTP contractivity audit
+neutral-symmetry and public perturbation control
+SAT-only Boolean equilibrium audit
+low-temperature Gibbs population bound
+primal-contraction versus cotangent-expansion audit
+clause-selector and three pair-selector mass preservation
+complete 256-formula selector-flow census
+smooth adaptive selector chart without projection
+structured selector SAT and UNSAT controls
+parity-family selector scaling transition
 ```
 
 ## Reference Boundary
@@ -180,6 +197,50 @@ The mathematical SAT margin is constant with `n` explicit sensor modes. Determin
 noiseless gain, unique pre-gain noise floor, complete gain/loss environment restoration,
 and standard-model transfer are not established.
 
+### Polynomial selector dilation
+
+```text
+public clauses -> n + 11m polynomial carrier coordinates
+three-way clause selectors approximate each public clause minimum
+three two-way selectors approximate the pair minima used by the gradient
+native vector field degree <= 6
+no min, max, division, Heaviside, or hard projection in the native field
+```
+
+The carrier preserves each selector simplex algebraically and starts from a public
+rational state. It passed the complete 256-formula three-variable census and structured
+parity, pigeonhole, and coloring controls. The adaptive smooth chart reaches verified
+solutions through parity-24 while preserving selector mass near machine precision.
+Parity-32 exposed a sharp memory and numerical-work transition. A uniform polynomial
+trajectory-length bound remains unestablished.
+
+### Clause-local thermal zero-mode latch
+
+```text
+H_F = sum of public clause-violation projectors
+beta = (n + 2) ln 2
+SAT  -> normalized zero-energy population >= 4/5
+UNSAT -> normalized zero-energy population = 0
+```
+
+The boundary begins directly from public clause geometry and avoids an exponentially
+small normalized population. Polynomial worst-case Gibbs preparation, deterministic
+exact presence readout, and complete bath restoration are not established.
+
+### Self-organizing preparation with cotangent lift
+
+```text
+public clauses -> terminal-agnostic voltage and memory flow
+state coordinates = n + 2m
+smooth reversible lift H(q,p) = p dot f_F(q)
+lifted coordinates = 2(n + 2m)
+```
+
+All satisfying Boolean corners are stationary and no nonsatisfying Boolean corner is
+stationary in the reference flow. Small answer-blind runs converge after a declared
+public perturbation. Global convergence, total UNSAT termination, switching-surface
+reversal, and polynomial cotangent dynamic range are not established.
+
 ## Result Tokens
 
 Allowed current tokens:
@@ -194,6 +255,14 @@ CONDITIONAL_CET_IMPLIES_P_EQUALS_NP_THEOREM_ESTABLISHED
 TOPOLOGICAL_DETERMINANT_WINDING_COMPLETE_REFERENCE_INVARIANT
 COMMUTING_LOCAL_CLAUSE_HAMILTONIAN_EXACT
 ORDER_N_EP_ROOT_LATCH_ESTABLISHED_REFERENCE_CANDIDATE
+CLAUSE_LOCAL_THERMAL_ZERO_MODE_LATCH_ESTABLISHED_REFERENCE_CANDIDATE
+TERMINAL_AGNOSTIC_CLAUSE_FLOW_ESTABLISHED_REFERENCE_CANDIDATE
+SMOOTH_REGION_COTANGENT_LIFT_ESTABLISHED
+POLYNOMIAL_SELECTOR_DILATION_ESTABLISHED_REFERENCE_CANDIDATE
+EXHAUSTIVE_THREE_VARIABLE_SELECTOR_CENSUS_PASS
+STRUCTURED_SELECTOR_RELATIONAL_CONTROLS_PASS
+PARITY_32_SELECTOR_SCALING_TRANSITION_EXPOSED
+UNIFORM_POLYNOMIAL_TRAJECTORY_BOUND_NOT_ESTABLISHED
 CET_NATIVE_OPERATOR_NOT_ESTABLISHED
 P_EQUALS_NP_NOT_PROVEN
 ```

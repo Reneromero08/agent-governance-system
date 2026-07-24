@@ -9,8 +9,10 @@ REFERENCE_AND_MECHANISM_CAMPAIGN_IMPLEMENTED__CET_NATIVE_OPERATOR_NOT_ESTABLISHE
 This package is a constructive `P = NP` proof attempt inside the CAT_CAS non-collapse
 ontology. It now contains exact relational semantics, native parity holonomy,
 program-derived inverse carrier actions, a complete topological SAT index, a constant
-energy-margin Hamiltonian, an exceptional-point root-amplifier candidate, and explicit
-resource audits for every tested shortcut.
+energy-margin Hamiltonian, an exceptional-point root-amplifier candidate, a direct
+clause-local thermal boundary, a terminal-agnostic preparation flow, a public
+polynomial-selector dilation of that flow, and explicit resource audits for every
+tested shortcut.
 
 The package does not yet implement a polynomial-resource native existential trace. It
 does not prove `P = NP`.
@@ -157,6 +159,86 @@ Exponential gain can make settling time linear in `n`, but it transfers the expo
 relative gain, pump, mode count, noise floor, or restoration unless a stronger physical
 law is established.
 
+### Polynomial selector dilation
+
+The original terminal-agnostic flow uses local minimum operations. The new dilation
+replaces each three-way clause minimum and each pairwise gradient minimum with conserved
+replicator selectors. The native state has:
+
+```text
+n + 11m coordinates
+polynomial degree <= 6
+public rational coefficients and initial state
+no native min, max, division, Heaviside, or hard projection
+```
+
+The Euler reference chart initially normalized all six pair-selector coordinates as one
+simplex. That instrumentation bug was fixed. The native carrier and reference chart now
+preserve three independent two-state pair simplexes per clause.
+
+The selector carrier passed:
+
+```text
+all 256 three-variable formulae
+all 255 satisfiable formulae with verified witnesses
+the sole UNSAT formula with no false witness
+distinct-terminal parity SAT and UNSAT controls
+distinct-terminal pigeonhole SAT and UNSAT controls
+distinct-terminal graph-coloring SAT and UNSAT controls
+smooth adaptive parity integration with selector-mass drift near machine precision
+```
+
+Comparable adaptive parity observations were:
+
+| core parity variables | public variables | clauses | result by t=5 | function evaluations | maximum long memory |
+|---:|---:|---:|---|---:|---:|
+| 8 | 24 | 32 | verified at 0.91155 | 536 | 16.46 |
+| 16 | 48 | 64 | verified at 1.04221 | 548 | 18.54 |
+| 24 | 72 | 96 | verified at 2.03552 | 12,680 | 724.37 |
+| 32 | 96 | 128 | no solution by 5.0 | 198,140 | 79,841.87 |
+
+The parity-32 carrier preserved selector masses to about `1e-13`, so the transition is
+not a simplex-normalization failure. It exposes unresolved memory growth, stiffness, or
+instanton/dwell time. No asymptotic claim follows from this finite series.
+
+The exact unresolved theorem is a formula-uniform polynomial trajectory-length bound
+from the declared public seed.
+
+### Clause-local thermal zero-mode latch
+
+For inverse temperature
+
+```text
+beta = (n + 2) ln 2,
+```
+
+the normalized Gibbs population of the zero-energy sector is at least `4/5` for every
+satisfiable instance, including a unique witness. It is exactly zero for UNSAT. The
+candidate compiles directly from the public clause Hamiltonian and does not assume a
+precomputed `#SAT/2^n` coupling.
+
+The exact missing step is polynomial worst-case preparation of that normalized Gibbs
+state, followed by a deterministic total boundary and complete system-plus-bath
+restoration.
+
+### Terminal-agnostic self-organizing flow
+
+The public flow uses one voltage per variable and two memory coordinates per clause.
+Every term is compiled from one literal occurrence. Satisfying Boolean corners are
+projected equilibria, nonsatisfying Boolean corners are not, and an answer-blind public
+perturbation reaches small satisfying sections in the reference dynamics.
+
+The smooth interior flow has a canonical cotangent Hamiltonian lift:
+
+```text
+H(q,p) = p dot f_F(q).
+```
+
+This gives a program-derived negative-time inverse. It also exposes that attractor
+contraction in the visible relation can reappear as cotangent expansion, precision, or
+environment energy. Global convergence, UNSAT totality, switching-surface reversal, and
+polynomial cotangent range remain unresolved.
+
 ### Exceptional-point root latch
 
 An order-`n` companion with gain two per transport has cycle product:
@@ -169,7 +251,7 @@ UNSAT remains at an order-`n` exceptional point. SAT has spectral radius
 `#SAT^(1/n) >= 1`, including a unique witness. The symbolic sensor uses `n` modes and
 has a constant mathematical margin.
 
-This is the strongest active mechanism candidate. Its unresolved obligations are:
+This remains a secondary active mechanism candidate. Its unresolved obligations are:
 
 ```text
 clean port intensity is 4^-n for a unique witness
@@ -185,13 +267,14 @@ cannot increase. Formula-native nonlinear or nonstandard CAT_CAS dynamics remain
 ## Exact Missing Boundary
 
 The remaining constructive target is now narrower than “find an invariant.” The
-invariants are complete.
+invariants and a constant-population normalized boundary are available.
 
 ```text
-prepare or access the clean relational sector
--> enact exact determinant winding or zero-mode presence
--> amplify a unique witness without postselection or hidden exponential resources
--> totalized SAT/UNSAT/INVALID boundary
+public clause geometry
+-> polynomial selector dilation or another exact native preparation
+-> uniform polynomial trajectory-length or equilibration theorem
+-> deterministic zero-mode presence boundary
+-> totalized SAT/UNSAT/INVALID result
 -> native inverse restoration of the complete environment
 -> polynomial standard-model transfer
 ```
@@ -199,7 +282,7 @@ prepare or access the clean relational sector
 Equivalent compact statement:
 
 ```text
-POLYNOMIAL_CLEAN_SECTOR_PRESENCE_LATCH_WITH_REVERSIBLE_ENVIRONMENT
+POLYNOMIAL_SELECTOR_CLAUSE_FLOW_WITH_UNIFORM_DEADLINE_AND_REVERSIBLE_ENVIRONMENT
 ```
 
 ## Current Claim Ceiling
@@ -208,8 +291,8 @@ POLYNOMIAL_CLEAN_SECTOR_PRESENCE_LATCH_WITH_REVERSIBLE_ENVIRONMENT
 CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED
 ```
 
-## Environment Limitation
+## Current Engineering Surface
 
-DevSpace rejected this conversation before workspace creation, so local worktree and
-Codex CLI execution were unavailable. The branch was constructed and qualified through
-GitHub. The dedicated hosted workflow is the executable qualification surface.
+DevSpace is available in an isolated worktree at the published PR head. Local focused
+experiments and tests are now the primary engineering loop; GitHub remains the intended
+publication and review surface.
