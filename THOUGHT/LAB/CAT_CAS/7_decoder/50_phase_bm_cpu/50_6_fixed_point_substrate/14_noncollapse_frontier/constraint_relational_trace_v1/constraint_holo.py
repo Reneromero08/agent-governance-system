@@ -121,6 +121,7 @@ class ConstraintHolo:
     @classmethod
     def from_dimacs(cls, text: str) -> "ConstraintHolo":
         declared_count: int | None = None
+        declared_clause_count: int | None = None
         raw_clause: list[int] = []
         clauses: list[ClauseRelation] = []
 
@@ -132,7 +133,12 @@ class ConstraintHolo:
                 fields = line.split()
                 if len(fields) != 4 or fields[1] != "cnf":
                     raise ConstraintHoloError("expected 'p cnf <variables> <clauses>'")
+                if declared_count is not None:
+                    raise ConstraintHoloError("duplicate DIMACS problem line")
                 declared_count = int(fields[2])
+                declared_clause_count = int(fields[3])
+                if declared_count < 0 or declared_clause_count < 0:
+                    raise ConstraintHoloError("DIMACS counts must be nonnegative")
                 continue
             for token in line.split():
                 value = int(token)
@@ -149,12 +155,14 @@ class ConstraintHolo:
 
         if raw_clause:
             raise ConstraintHoloError("unterminated DIMACS clause")
-        if declared_count is None:
+        if declared_count is None or declared_clause_count is None:
             raise ConstraintHoloError("missing DIMACS problem line")
+        if len(clauses) != declared_clause_count:
+            raise ConstraintHoloError("parsed clause count does not match DIMACS declaration")
         if any(abs(int(literal.variable[1:])) > declared_count for clause in clauses for literal in clause.literals):
             raise ConstraintHoloError("literal index exceeds declared variable count")
-        variables = tuple(f"x{index}" for index in range(1, declared_count + 1))
-        return cls(variables, tuple(clauses))
+        variables = (f"x{index}" for index in range(1, declared_count + 1))
+        return cls.build(variables, clauses)
 
     def accepts(self, assignment: Mapping[str, bool]) -> bool:
         if set(assignment) != set(self.variables):
