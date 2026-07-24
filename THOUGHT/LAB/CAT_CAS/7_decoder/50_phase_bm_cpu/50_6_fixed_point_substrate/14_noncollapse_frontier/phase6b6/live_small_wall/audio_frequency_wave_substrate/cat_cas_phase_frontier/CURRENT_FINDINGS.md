@@ -461,3 +461,73 @@ controls, scale and max-domain controls, 24 inverse controls, 64
 cross-process restored-carrier reuse trials, deterministic replay, 17 parser
 adversaries, no-smuggle inspection, and oracle non-linkage. Verdict: `PASS`;
 remaining findings: none.
+
+## Algebraic relation lift
+
+`algebraic_relation_phase.c` moves beyond the fixed two-slot `Z2`
+characteristic vector. A typed `BOOLEAN_F3` binary relation is now the zero set
+of a public multiaffine polynomial:
+
+```text
+c00 + c10*x + c01*y + c11*x*y = 0 mod 3
+```
+
+The four coefficients live as relative complex phases. Given
+`f(x,y)=A(x)y+B(x)` and `g(y,z)=C(z)y+D(z)`, the shared internal port closes
+through the phase-native linear resultant
+
+```text
+R(x,z) = B(x)C(z) - A(x)D(z).
+```
+
+The primary calibration is the non-functional order relation
+`LEQ(x,y)=x(1-y)=0`. Direct metal execution produced:
+
+```text
+LEQ o LEQ boundary coefficients    [0,1,0,2]
+lawful boundary pairs              3
+extensional derivations            4
+native carrier cells               12
+tuple / witness slots              0 / 0
+retained inverse factors           0
+native displacement                4.24264068712
+nominal restoration                1.66533453694e-16
+actual-restored reuse              1.57009245868e-16
+wrong / reordered / omitted        1.73205080757 each
+```
+
+Eight heterogeneous or presentation-varied fixtures match the independent
+bounded Boolean oracle. Strict GCC, `-fanalyzer`, ASan, UBSan, leak detection,
+20 deterministic replays, cross-process restored reuse, cut-geometry
+rejection, and native/oracle source separation all pass.
+
+An exhaustive independent C survey found the raw resultant exact on only
+`3,217 / 6,561` coefficient-signature pairs. The result is therefore not
+promoted to unrestricted Boolean elimination.
+
+The implemented repair is a prospective algebraic admission law: the left
+relation must be total toward its second/internal port for each first-port
+value, and the right relation must be total toward its first/internal port for
+each second-port value. Each affine internal fiber is then `{0}`, `{1}`, or
+`{0,1}`. The determinant is zero exactly when the two nonempty Boolean root
+sets intersect. There are 25 admissible coefficient signatures on each side;
+all `625 / 625` admitted pairs match exact Boolean existential composition.
+
+The retained `EMPTY o ANY` counterexample is now rejected by both native and
+reference parsers before phase evolution because its left internal fiber is
+empty. This admission test uses only public input coefficients and never
+computes or chooses a boundary.
+
+The next correction is repeatable multi-internal composition using an
+algebraic class closed under its own boundary outputs, then branching
+relational trace.
+
+Focused reviewer `SOL-XHIGH-ALGEBRAIC-RELATION-PHASE-01` found and closed two
+bounded defects: reference/native identifier-uniqueness drift and a
+counterfactual degenerate resultant mislabeled as native execution. On the
+exact repaired bytes, the reviewer independently executed all 625 admitted
+signature pairs: native/reference boundaries, nominal restoration, and reuse
+passed 625/625; 1,875 applicability-gated inverse controls passed; cross-
+process reuse passed 64/64; and strict compilation, static analysis,
+sanitizers, determinism, parser adversaries, no-smuggle inspection, and oracle
+non-linkage passed. Verdict: `PASS`; remaining findings: none.

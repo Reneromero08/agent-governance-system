@@ -306,6 +306,23 @@ vector of the fixed `Z2` quotient. The next correction is to move beyond that
 fixed quotient to composable typed relation signatures and branching process
 geometry without reintroducing full-domain tuple or assignment expansion.
 
+The first algebraic lift now represents a binary relation as the zero set of
+a multiaffine `F3` polynomial rather than a quotient characteristic vector.
+Two such relations close one internal Boolean port through a phase-native
+linear resultant. `LEQ o LEQ = LEQ` and seven heterogeneous or presentation
+controls match the bounded oracle with exact restoration and reuse.
+
+This still is not general Boolean quantifier elimination. The retained
+degenerate `EMPTY o ANY` case proves that a zero resultant can overapproximate
+the restricted Boolean existential boundary. Both executables now reject
+that case prospectively through the total-to-internal-fiber law.
+
+The independent exhaustive survey records `3,217 / 6,561` exact unrestricted
+signature pairs but `625 / 625` exact prospectively admitted pairs. The next
+active mechanism must make that exact class repeatable under its own boundary
+outputs, close multiple internal ports without assignment expansion, and
+then support branching relational trace.
+
 The following are supporting frontier candidates, not a mandatory sequence:
 
 ### A. Remove the current resource bottleneck
