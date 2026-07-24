@@ -19,6 +19,9 @@ if __package__ in (None, ""):
         reference_decision_boundary,
     )
     from constraint_relational_trace_v1.constraint_holo import ClauseRelation, ConstraintHolo, Literal
+    from constraint_relational_trace_v1.oracle_determinant_compensation import (
+        audit_oracle_determinant_compensation,
+    )
     from constraint_relational_trace_v1.parity_holonomy import (
         ParityConstraint,
         ParityInstance,
@@ -39,6 +42,7 @@ else:
         reference_decision_boundary,
     )
     from .constraint_holo import ClauseRelation, ConstraintHolo, Literal
+    from .oracle_determinant_compensation import audit_oracle_determinant_compensation
     from .parity_holonomy import ParityConstraint, ParityInstance, calibrate_parity_holonomy
     from .topological_rank_latch import audit_topological_rank_latch
 
@@ -63,6 +67,13 @@ def build_campaign_record() -> dict[str, object]:
     )
     impossible = ConstraintHolo.build(
         ("x1",),
+        (
+            _clause(_literal("x1"), _literal("x1"), _literal("x1")),
+            _clause(_literal("x1", False), _literal("x1", False), _literal("x1", False)),
+        ),
+    )
+    impossible_equal_dimension = ConstraintHolo.build(
+        ("x1", "x2"),
         (
             _clause(_literal("x1"), _literal("x1"), _literal("x1")),
             _clause(_literal("x1", False), _literal("x1", False), _literal("x1", False)),
@@ -93,6 +104,12 @@ def build_campaign_record() -> dict[str, object]:
     dilation = audit_reversible_dilation(unique)
     topological_latch = audit_topological_rank_latch(unique)
     topological_unsat = audit_topological_rank_latch(impossible)
+    determinant_compensation_sat = audit_oracle_determinant_compensation(
+        unique, ancillary_qubits=2
+    )
+    determinant_compensation_unsat = audit_oracle_determinant_compensation(
+        impossible_equal_dimension, ancillary_qubits=2
+    )
 
     gates = {
         "exact_open_relation": unique_boundary.witness_count == 1,
@@ -108,7 +125,9 @@ def build_campaign_record() -> dict[str, object]:
         "native_z2_cycle_obstruction": parity_result.cycle_holonomies == (-1,),
         "program_derived_restoration": parity_result.restored,
         "reversible_evaluation_dilation": dilation.all_basis_states_restored,
-        "conditional_witness_boundary": witness_boundary.witness_verified,
+        "conditional_witness_boundary": (
+            witness_boundary.valid and witness_boundary.witness_verified
+        ),
         "topological_rank_latch_complete_reference": (
             topological_latch.determinant_winding == 1
             and topological_latch.presence_index == 1
@@ -118,6 +137,16 @@ def build_campaign_record() -> dict[str, object]:
         "topological_latch_restoration": (
             topological_latch.restoration_verified
             and topological_unsat.restoration_verified
+        ),
+        "full_oracle_determinant_compensation": (
+            determinant_compensation_sat.total_dimension
+            == determinant_compensation_unsat.total_dimension
+            and determinant_compensation_sat.full_winding
+            == determinant_compensation_unsat.full_winding
+            and determinant_compensation_sat.clean_winding == 1
+            and determinant_compensation_unsat.clean_winding == 0
+            and determinant_compensation_sat.compensation_identity_verified
+            and determinant_compensation_unsat.compensation_identity_verified
         ),
         "native_cet_not_smuggled": not dilation.native_existential_trace_established,
     }
@@ -141,6 +170,8 @@ def build_campaign_record() -> dict[str, object]:
         "factorized_projector": projector.public_contract(),
         "topological_rank_latch_unique": asdict(topological_latch),
         "topological_rank_latch_unsat": asdict(topological_unsat),
+        "oracle_determinant_compensation_sat": asdict(determinant_compensation_sat),
+        "oracle_determinant_compensation_unsat": asdict(determinant_compensation_unsat),
         "proof_state": {
             "semantic_object": "ESTABLISHED_REFERENCE",
             "parity_holonomy": "ESTABLISHED_NATIVE_Z2_CALIBRATION",
@@ -148,6 +179,9 @@ def build_campaign_record() -> dict[str, object]:
             "conditional_cet_implies_3sat_in_p": "ESTABLISHED_THEOREM",
             "conditional_witness_self_reduction": "ESTABLISHED_REFERENCE",
             "topological_determinant_winding": "ESTABLISHED_COMPLETE_REFERENCE_INVARIANT",
+            "full_reversible_oracle_determinant": "ESTABLISHED_FORMULA_INDEPENDENT_NULL",
+            "clean_subspace_determinant": "ESTABLISHED_RETAINS_SAT_INDEX",
+            "polynomial_restricted_determinant_sensor": "NOT_ESTABLISHED",
             "polynomial_native_determinant_line_sensor": "NOT_ESTABLISHED",
             "native_relation_valued_transport": "NOT_ESTABLISHED_FOR_GENERAL_CLAUSES",
             "catalytic_existential_trace": "NOT_ESTABLISHED",
