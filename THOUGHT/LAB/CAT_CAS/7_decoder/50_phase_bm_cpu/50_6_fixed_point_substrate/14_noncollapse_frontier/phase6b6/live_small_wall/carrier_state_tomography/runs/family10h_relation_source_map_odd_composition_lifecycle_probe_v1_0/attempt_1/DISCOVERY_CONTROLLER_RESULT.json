@@ -1,0 +1,329 @@
+{
+  "absence": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; test ! -e /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0; test ! -e /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_source_package.tar.gz"
+    ],
+    "elapsed_seconds": 0.454,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "archive_path": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\runs\\family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0\\attempt_1\\DISCOVERY_TARGET_ROOT.tar.gz",
+  "archive_sha256": "334f4857a54cd522d80087d31372e61e7003b9d45e9e8f38ad4f49dcd8ff9d4a",
+  "archive_size": 67318277,
+  "cleanup": {
+    "cleanup": {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "root@192.168.137.100",
+        "set -eu; test -f /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0/.family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_owner; grep -qx 'family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0' /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0/.family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_owner; rm -rf /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0 /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_remote_root.tar.gz /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_source_package.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0; test ! -e /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_remote_root.tar.gz; test ! -e /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_source_package.tar.gz"
+      ],
+      "elapsed_seconds": 0.579,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "passed": true,
+    "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_REMOTE_CLEANUP_V1"
+  },
+  "copyback": {
+    "copy": {
+      "command": [
+        "scp",
+        "-O",
+        "-o",
+        "BatchMode=yes",
+        "root@192.168.137.100:/root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_remote_root.tar.gz",
+        "C:\\tmp\\family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_remote_root.tar.gz"
+      ],
+      "elapsed_seconds": 0.828,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "created_at": "2026-07-24T05:25:16.310096+00:00",
+    "local_sha256": "334f4857a54cd522d80087d31372e61e7003b9d45e9e8f38ad4f49dcd8ff9d4a",
+    "local_size": 67318277,
+    "make_archive": {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=8",
+        "root@192.168.137.100",
+        "set -eu; rm -f /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_remote_root.tar.gz; tar -czf /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_remote_root.tar.gz -C /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0 source; sha256sum /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_remote_root.tar.gz; stat -c%s /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_remote_root.tar.gz"
+      ],
+      "elapsed_seconds": 23.781,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "334f4857a54cd522d80087d31372e61e7003b9d45e9e8f38ad4f49dcd8ff9d4a  /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_remote_root.tar.gz\n67318277\n"
+    },
+    "passed": true,
+    "remote_sha256": "334f4857a54cd522d80087d31372e61e7003b9d45e9e8f38ad4f49dcd8ff9d4a",
+    "remote_size": 67318277,
+    "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_COPYBACK_V1"
+  },
+  "create": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; mkdir -p /root/catcas_live_small_wall; mkdir -m 0700 /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0; printf '%s\\n' 'family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0' > /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0/.family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_owner"
+    ],
+    "elapsed_seconds": 0.187,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "created_at": "2026-07-24T05:25:16.888993+00:00",
+  "extract": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set -eu; tar -xzf /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_source_package.tar.gz -C /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0; chmod +x /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0/source/relation_spatial_runtime /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0/source/relation_spatial_pmu_preflight /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0/source/RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh"
+    ],
+    "elapsed_seconds": 0.25,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  "live": {
+    "command": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=8",
+      "root@192.168.137.100",
+      "set +e; cd /root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0/source; ./RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh"
+    ],
+    "elapsed_seconds": 47.563,
+    "returncode": 0
+  },
+  "package": {
+    "created_at": "2026-07-24T05:24:02.927919+00:00",
+    "files": {
+      "source/RELATION_GRAMMAR.json": {
+        "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+        "size_bytes": 292071
+      },
+      "source/RELATION_GRAMMAR.sha256": {
+        "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+        "size_bytes": 66
+      },
+      "source/RELATION_GRAMMAR.tsv": {
+        "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+        "size_bytes": 360
+      },
+      "source/RELATION_SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULE_MANIFEST.json": {
+        "sha256": "e2961903ea69afb8374a00224629e41f4d8f14dd2388031c6a4d5b2cc115fc5d",
+        "size_bytes": 20813
+      },
+      "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+        "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+        "size_bytes": 2277
+      },
+      "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+        "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+        "size_bytes": 66
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+        "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+        "size_bytes": 1866
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+        "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+        "size_bytes": 66
+      },
+      "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+        "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+        "size_bytes": 11263467
+      },
+      "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+        "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+        "size_bytes": 2635
+      },
+      "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+        "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+        "size_bytes": 3120
+      },
+      "source/RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh": {
+        "sha256": "746bb236c2336af5bfb7f41dc5114a4780af917ad4e45c8a8a6c90b3e4337b13",
+        "size_bytes": 9746
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_alive_r0r1_primary.tsv": {
+        "sha256": "f6cff95bc9ce5d1ea050629ee0321128c1b1c0a90e2cad5df483a1c492a7046e",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_alive_r0r1_sham.tsv": {
+        "sha256": "7364deeef9fe2d3ed11fd30109d9946663a2eb3468552aec5b44d171c077bfc2",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_alive_r1r0_primary.tsv": {
+        "sha256": "44a9fde22f8faffe7858361fc744e5d4e32eb7a53768e403e203dcadb1788845",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_alive_r1r0_sham.tsv": {
+        "sha256": "00bb38e9641b5482dc0d74232c69b4fb659ac703735d79af26e9b40edb98f89b",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_dead_r0r1_primary.tsv": {
+        "sha256": "8173dac6814343f8be8faf8b2c70f0a9f513459e0c17ebbf8c50aeb17aeef57c",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_dead_r0r1_sham.tsv": {
+        "sha256": "75bad82e69a3149b6c03a83141e5c467c398a1d7f364c40102c88deccae9d389",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_dead_r1r0_primary.tsv": {
+        "sha256": "151e15b3d4a742baa711430c504842c2092fc5e1e2ef7faf58964cd54171a4ea",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_dead_r1r0_sham.tsv": {
+        "sha256": "282e4ac15f9a05c882b1fcb3cbd64a3fbf96f0fd29465ddd91613eeff21b724c",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_source_off_r0r1_primary.tsv": {
+        "sha256": "df006520d258155dc688edf05663a6568332780c32d475a94e5c232017cf739b",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_source_off_r0r1_sham.tsv": {
+        "sha256": "4d553d5f4b776c40ad41e0e934c5e7d2d8f0480d8cb01539f5e1969e3333ee74",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_source_off_r1r0_primary.tsv": {
+        "sha256": "f14e7a5c29ecf06e930eebe583bbaaab6b909e3c1943a2711c7df87a8a23a981",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/native_source_off_r1r0_sham.tsv": {
+        "sha256": "4e570df02bbc851a80d2d09db196d379c8bd6dbbeaee68ac4660742b2984941e",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_alive_r0r1_primary.tsv": {
+        "sha256": "636f54a10c5e048f3bba44de983c9cf1ecb029e692a8d78a59059047523b2bfe",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_alive_r0r1_sham.tsv": {
+        "sha256": "b6eaccfcd079bfdbcba110241adad1c1ab866b6eed4418742b4a62b716da59a1",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_alive_r1r0_primary.tsv": {
+        "sha256": "399e67b2de675b66806f98854e9da993e1ca2f833532e3d07577e860e3fe2e7f",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_alive_r1r0_sham.tsv": {
+        "sha256": "91fa9e46a78078323c3e16ef72c8d2dbb3983811b932fe42f3473e227a23f130",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_dead_r0r1_primary.tsv": {
+        "sha256": "b3400419b230c3a0da670790d0f456b550f445ef69469dd8cdaf6fcf8aa77160",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_dead_r0r1_sham.tsv": {
+        "sha256": "2cbf1251ead81a031a415649ad234904bb0dcf19f94a038b665537009bca5edb",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_dead_r1r0_primary.tsv": {
+        "sha256": "52ad0dbd2c1e88ad25effe8c1434e8cce6827e3c9c26c1b84028cd057d4e1e02",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_dead_r1r0_sham.tsv": {
+        "sha256": "69534fc89469f57847b02c447c4871feb0db12f1895b1bf7a43d8959c9cc265e",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_source_off_r0r1_primary.tsv": {
+        "sha256": "8fea0839a54f2644e68c17fcd7da9f3530249c23ce06ad26c7fc48eb8acf4c97",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_source_off_r0r1_sham.tsv": {
+        "sha256": "7fa2aa7617d919020fb75e41a2a988371aabaf84b1595441eb89d73c05c6efca",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_source_off_r1r0_primary.tsv": {
+        "sha256": "e9648f807e74b6b0c43e8d32d107f29b00d2b7d6cb32904bcb6b479af5c98a1d",
+        "size_bytes": 524959
+      },
+      "source/SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_SCHEDULES/swapped_source_off_r1r0_sham.tsv": {
+        "sha256": "4071883fb3000ceb7c96223944d885db560572e04a4b4cbfca6d93d0e9d8e33d",
+        "size_bytes": 524959
+      },
+      "source/relation_spatial_adjudication.py": {
+        "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+        "size_bytes": 864
+      },
+      "source/relation_spatial_physical_adjudication.py": {
+        "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+        "size_bytes": 42533
+      },
+      "source/relation_spatial_pmu_preflight": {
+        "sha256": "6035b840a3984c3583352bf29b04851b5832b2c2c2fcd07f5ee373a09ad5da37",
+        "size_bytes": 42656
+      },
+      "source/relation_spatial_pmu_preflight.c": {
+        "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+        "size_bytes": 9376
+      },
+      "source/relation_spatial_public.py": {
+        "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+        "size_bytes": 32161
+      },
+      "source/relation_spatial_runtime": {
+        "sha256": "0dc81c3f84d767ec087e234c85bb5389d2064b822b2dc24fd0b6368464f714b3",
+        "size_bytes": 153584
+      },
+      "source/relation_spatial_runtime.c": {
+        "sha256": "7cb59c6adbe4d83bf8458871829270ecb27493c58c2ca6663d6ab92d74fc56e2",
+        "size_bytes": 76978
+      },
+      "source/relation_spatial_runtime.h": {
+        "sha256": "59f35888f00ce4778134f6b14acc407bf033c17b9594ea7a411f5ae912656e8c",
+        "size_bytes": 5792
+      },
+      "source/relation_spatial_target.py": {
+        "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+        "size_bytes": 91980
+      }
+    },
+    "path": "C:\\tmp\\family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_source_package.tar.gz",
+    "run_id": "family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0",
+    "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_SOURCE_PACKAGE_V1",
+    "sha256": "53994790ccaab9c0fca84c878ae5e733cf01704bf6c55aa4c9d4577976c12f94",
+    "size_bytes": 1008059
+  },
+  "passed": true,
+  "run_id": "family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0",
+  "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_LIVE_CONTROLLER_V1",
+  "small_wall_crossed": false,
+  "upload": {
+    "command": [
+      "scp",
+      "-O",
+      "-o",
+      "BatchMode=yes",
+      "C:\\tmp\\family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_source_package.tar.gz",
+      "root@192.168.137.100:/root/catcas_live_small_wall/family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0_source_package.tar.gz"
+    ],
+    "elapsed_seconds": 0.203,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  }
+}

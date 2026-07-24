@@ -1,0 +1,58 @@
+{
+  "prepare": {
+    "created_at": "2026-07-24T05:24:02.393346+00:00",
+    "passed": true,
+    "pmu_helper_sha256": "6035b840a3984c3583352bf29b04851b5832b2c2c2fcd07f5ee373a09ad5da37",
+    "run_id": "family10h_relation_source_map_odd_composition_lifecycle_probe_v1_0",
+    "runtime_sha256": "0dc81c3f84d767ec087e234c85bb5389d2064b822b2dc24fd0b6368464f714b3",
+    "schedule_manifest_sha256": "2ae671d3999b64354a0ad86fb3f1b203d0e80bd6654548cb1c25862720625a6f",
+    "schema": "FAMILY10H_RELATION_SOURCE_MAP_ODD_COMPOSITION_LIFECYCLE_PROBE_PREPARE_V1",
+    "small_wall_crossed": false
+  }
+}
+{
+  "analysis_sha256": "f9304a998e9caeb622e949c97e72231c8f65f2923524c71925dd7560b5eb2b6a",
+  "archive_sha256": "334f4857a54cd522d80087d31372e61e7003b9d45e9e8f38ad4f49dcd8ff9d4a",
+  "controller_passed": true,
+  "coordinates": {
+    "Gamma_alive": -0.0055456385985181225,
+    "Gamma_dead": 0.0034712714292050514,
+    "Gamma_source_off": -0.004249124281215565,
+    "alive_even_mode_abs_to_gamma_abs": 1.3836555347980315,
+    "dead_gamma_abs_to_alive_gamma_abs": 0.6259462039471211,
+    "even_mode_by_lifecycle": {
+      "alive": 0.007673253540829199,
+      "dead": 0.01594081568068615,
+      "source_off": 0.007501070326860378
+    },
+    "gamma_by_lifecycle": {
+      "alive": -0.0055456385985181225,
+      "dead": 0.0034712714292050514,
+      "source_off": -0.004249124281215565
+    },
+    "omega_by_presentation_lifecycle": {
+      "native_alive": 0.0021276149423110763,
+      "native_dead": 0.019412087109891202,
+      "native_source_off": 0.003251946045644813,
+      "swapped_alive": 0.013218892139347321,
+      "swapped_dead": 0.012469544251481099,
+      "swapped_source_off": 0.011750194608075942
+    },
+    "source_off_gamma_abs_to_alive_gamma_abs": 0.766210095686905
+  },
+  "interpretation": {
+    "aggregate_alive_even_mode_below_25pct_gamma": false,
+    "aggregate_dead_gamma_preserves_same_sign_and_at_least_25pct_alive_gamma": false,
+    "aggregate_native_swapped_reversal": false,
+    "aggregate_source_off_gamma_collapses_below_25pct_alive_gamma": false,
+    "alive_gamma_nonzero": true,
+    "exploratory_only": true,
+    "small_wall_crossed": false,
+    "source_map_odd_composition_lifecycle_candidate": false,
+    "strata_alive_even_mode_below_25pct_gamma_all_levels": false,
+    "strata_alive_gamma_all_same_sign_as_aggregate": false,
+    "strata_dead_gamma_preserves_same_sign_and_at_least_25pct_matched_alive_gamma": false,
+    "strata_native_swapped_reversal_all_levels": false,
+    "strata_source_off_gamma_collapses_below_25pct_matched_alive_gamma": false
+  }
+}

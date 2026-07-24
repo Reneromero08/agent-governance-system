@@ -1,0 +1,85 @@
+{
+  "files": {
+    "relation_spatial_adjudication.py": {
+      "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "size_bytes": 864
+    },
+    "relation_spatial_live_controller.py": {
+      "sha256": "cdad3d5f92ec0f1ac19ae1cab9e5aeab5fd5ad4c257174255a64a27ae226f01b",
+      "size_bytes": 847
+    },
+    "relation_spatial_physical_adjudication.py": {
+      "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+      "size_bytes": 42533
+    },
+    "relation_spatial_pmu_preflight.c": {
+      "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "size_bytes": 9376
+    },
+    "relation_spatial_public.py": {
+      "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+      "size_bytes": 32161
+    },
+    "relation_spatial_runtime.c": {
+      "sha256": "1edd1f03f7e1cfb53089cb90c58a6c7ff5870c370cc75ecddb9c24c8d015ec26",
+      "size_bytes": 42604
+    },
+    "relation_spatial_runtime.h": {
+      "sha256": "665d98df19a2dce07b782869247cfc58ffcb9612869e45c481e4340f2664b491",
+      "size_bytes": 2055
+    },
+    "relation_spatial_target.py": {
+      "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+      "size_bytes": 91980
+    },
+    "run_relation_spatial_pair_readout.py": {
+      "sha256": "6c4cab45c4be441f54b50800f746e2fff5f21574947b86348ba0625169dceee8",
+      "size_bytes": 25474
+    }
+  },
+  "pmu_preflight_helper_authority": {
+    "compiled_binary_sha256": "caa5fd52a46ab77a6327d6fccfa8eb836e53f3035b192f0632bb314a56c7f74f",
+    "helper_c_sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+    "present": true
+  },
+  "relation_source_authority_validation": {
+    "failures": [],
+    "passed": true,
+    "relation_source_authority_commit": "ed6abfd8003cf63fd5ea57379f4d907aff97a5a0"
+  },
+  "runtime_binary_authority": {
+    "compiled_binary_sha256": "559c0d35e2cf533694bff2e1d1bfbb4644704218753f5e36ac063fcdb813933f",
+    "compiler_identity": {
+      "abi": "linux_x86_64",
+      "available": true,
+      "launcher": [
+        "wsl.exe",
+        "--"
+      ],
+      "path": "/usr/bin/gcc"
+    },
+    "present": true
+  },
+  "schema": "FAMILY10H_RELATION_SPATIAL_SOURCE_HASHES_V1",
+  "source_authority_regression_tests": {
+    "passed": true,
+    "rejects_scalar_evidence_commits": true,
+    "rejects_unset_source_authority": true,
+    "schema": "FAMILY10H_RELATION_SPATIAL_SOURCE_AUTHORITY_REGRESSION_V1"
+  },
+  "source_bundle": {
+    "members": [
+      "relation_spatial_adjudication.py",
+      "relation_spatial_live_controller.py",
+      "relation_spatial_physical_adjudication.py",
+      "relation_spatial_pmu_preflight.c",
+      "relation_spatial_public.py",
+      "relation_spatial_runtime.c",
+      "relation_spatial_runtime.h",
+      "relation_spatial_target.py",
+      "run_relation_spatial_pair_readout.py"
+    ],
+    "path": "RELATION_SPATIAL_SOURCE_BUNDLE.tar.gz",
+    "sha256": "c554dd242e3b968d75c8bef0e358c99071b1c8c261705efd8d21a4d84634781f"
+  }
+}
