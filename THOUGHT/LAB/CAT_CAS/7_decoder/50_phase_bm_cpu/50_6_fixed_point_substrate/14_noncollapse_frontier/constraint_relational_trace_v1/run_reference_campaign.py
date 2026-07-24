@@ -14,6 +14,10 @@ if __package__ in (None, ""):
         audit_reversible_dilation,
         reference_existential_trace,
     )
+    from constraint_relational_trace_v1.conditional_p_equals_np import (
+        extract_witness_by_boundary_self_reduction,
+        reference_decision_boundary,
+    )
     from constraint_relational_trace_v1.constraint_holo import ClauseRelation, ConstraintHolo, Literal
     from constraint_relational_trace_v1.parity_holonomy import (
         ParityConstraint,
@@ -26,6 +30,10 @@ else:
         FactorizedProjectorCandidate,
         audit_reversible_dilation,
         reference_existential_trace,
+    )
+    from .conditional_p_equals_np import (
+        extract_witness_by_boundary_self_reduction,
+        reference_decision_boundary,
     )
     from .constraint_holo import ClauseRelation, ConstraintHolo, Literal
     from .parity_holonomy import ParityConstraint, ParityInstance, calibrate_parity_holonomy
@@ -63,6 +71,9 @@ def build_campaign_record() -> dict[str, object]:
     renamed_boundary = reference_existential_trace(
         unique.renamed({"x1": "renamed_b", "x2": "renamed_a"})
     )
+    witness_boundary = extract_witness_by_boundary_self_reduction(
+        unique, reference_decision_boundary
+    )
 
     parity_false_closure = ParityInstance.build(
         ("a", "b", "c"),
@@ -90,6 +101,7 @@ def build_campaign_record() -> dict[str, object]:
         ),
         "program_derived_restoration": parity_result.restored,
         "reversible_evaluation_dilation": dilation.all_basis_states_restored,
+        "conditional_witness_boundary": witness_boundary.witness_verified,
         "native_cet_not_smuggled": not dilation.native_existential_trace_established,
     }
 
@@ -106,6 +118,7 @@ def build_campaign_record() -> dict[str, object]:
         "unsat_boundary": asdict(impossible_boundary),
         "duplicate_boundary": asdict(duplicate_boundary),
         "renamed_boundary": asdict(renamed_boundary),
+        "conditional_witness_boundary": asdict(witness_boundary),
         "parity_holonomy": asdict(parity_result),
         "reversible_dilation": asdict(dilation),
         "factorized_projector": projector.public_contract(),
@@ -113,6 +126,8 @@ def build_campaign_record() -> dict[str, object]:
             "semantic_object": "ESTABLISHED_REFERENCE",
             "parity_holonomy": "ESTABLISHED_CALIBRATION",
             "false_closure_control": "ESTABLISHED_CALIBRATION",
+            "conditional_cet_implies_3sat_in_p": "ESTABLISHED_THEOREM",
+            "conditional_witness_self_reduction": "ESTABLISHED_REFERENCE",
             "native_relation_valued_transport": "NOT_ESTABLISHED",
             "catalytic_existential_trace": "NOT_ESTABLISHED",
             "polynomial_resource_theorem": "NOT_ESTABLISHED",
