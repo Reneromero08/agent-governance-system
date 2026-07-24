@@ -1,11 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `4.3`
+**Roadmap version:** `4.4`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through milestone:** `ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED`
-**Current claim ceiling:** `SOFTWARE_FIXED_CYCLE_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY`
+**Reconciled through milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
+**Current highest milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
+**Current claim ceiling:** `SOFTWARE_PUBLIC_SERIES_PARALLEL_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -76,6 +77,7 @@ ALGEBRAIC_RELATION_STAR_PHASE_ESTABLISHED
 ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED
 ALGEBRAIC_RELATION_TREE_PHASE_ESTABLISHED
 ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED
+ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -99,17 +101,69 @@ The largest sealed case represents `2^256` explicit paths without materializing 
 
 This result is a major nonterminal milestone. The equivalent compact classical dynamic program remains about 38 to 45 times faster and asymptotically equivalent. Therefore the result does not establish advantage over the best matched compact classical method, C5 fixed-point advantage, official external acceptance, cross-domain transfer, or physical phase computation.
 
-The frozen phase-circuit substrate establishes phase values, relative-phase
-registers, and deterministic phase functions. The mutable relational frontier
-now adds open algebraic binary relations and topology-generic bounded tree
-closure, but it does not establish:
+The phase-circuit substrate is an established development foundation. The
+bounded relational substrate now establishes:
+
+```text
+open binary Boolean/F3 relations
+phase-resident relation messages
+exact native existential composition
+exact native relation intersection
+multi-hub relation-valued phase memory
+recursive tree composition
+cyclic relational closure
+public two-terminal series-parallel graph closure
+topology-only schedule compilation
+no intermediate coefficient decoding
+zero tuple, witness, and truth-table slots
+actual inverse restoration
+actual restored-carrier reuse
+```
+
+Its strongest bounded architecture is:
+
+```text
+public typed series-parallel relational geometry
+-> topology-only compilation
+-> native phase composition and intersection
+-> unresolved resident relation messages
+-> internal-port closure
+-> surviving two-port boundary relation
+-> actual reversal
+-> restoration
+-> reuse
+```
+
+Current architectural interpretation:
+
+```text
+phase-circuit substrate
+    ESTABLISHED_DEVELOPMENT_FOUNDATION
+bounded holographic relational substrate
+    ESTABLISHED_FOR_PUBLIC_TWO_TERMINAL_SERIES_PARALLEL_GRAPHS
+general holographic relational computer
+    NOT_ESTABLISHED
+native relational composition
+    EXACT_BINARY_COMPOSITION_AND_INTERSECTION_ESTABLISHED
+internal-port closure
+    ESTABLISHED_FOR_BOUNDED_PUBLIC_SERIES_PARALLEL_GRAPH_CLASS
+idempotent relational boundary
+    PARTIAL_RESTRICTED_CLASS_ESTABLISHED_GENERAL_LAW_OPEN
+C5 advantage
+    NOT_ESTABLISHED
+```
+
+This is a bounded holographic relational substrate for public two-terminal
+series-parallel graphs. It does not establish:
 
 ```text
 unrestricted relation domains or signatures
-cyclic composition through typed shared ports
-cyclic internal-port closure or relational trace
-a general graph-level idempotent existential relational boundary
-holographic relational computation
+general holographic relational computation
+arbitrary graph closure or arbitrary separator width
+general graph-level idempotent existential relational boundary
+C5 advantage
+physical phase computation
+unlimited catalytic phase computation
 ```
 
 ### Active mutable frontier result
@@ -171,6 +225,13 @@ exact arbitrary binary composition          26,244 / 26,244 operand rows exact
 exact relation intersection                 26,244 / 26,244 operand rows exact
 cycle operator controls                      exact {00}, bypass {00,01}, sum {00,11}
 cycle restoration/reuse                      below 1.6e-16, different process reuses carrier
+public typed series-parallel geometry         topology-only compiled elimination
+series-parallel native operations             exact composition and intersection
+series-parallel arbitrary-coefficient cases   120 / 120 exact with full enumeration
+series-parallel capacity                       46 nodes / 60 relations / 59 operations
+series-parallel carrier                        480 complex cells, zero tuple/witness/truth slots
+series-parallel restoration/reuse              below 1.7e-16, cross-process reuse passes
+series-parallel repaired defects               phase drift / duplicate identity / UBSan fail-open
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -286,26 +347,49 @@ Verification follows a substantive result. One focused review is normally suffic
 
 ## 6. Current Frontier
 
-The generic bounded-tree portion and first fixed cyclic closure now pass. The
-primary active frontier is:
+The selected frontier is:
 
 ```text
-GENERIC_CYCLIC_PROCESS_GRAPH
--> NATIVE_ELIMINATION_ORDER
--> COMPACT_LOOP_CONSISTENCY_OR_RELATIONAL_TRACE
--> IDEMPOTENT_RELATIONAL_BOUNDARY
--> RESTORATION_AND_REUSE
+RECURSIVE_TYPED_RELATIONAL_PROGRAMS_OVER_PUBLIC_GRAPH_MODULE_INTERFACES
 ```
 
-The first calibration passes for the structured `CYCLIC_PARITY(N)`
-quotient class. Two non-functional relations remain non-enumerated over
-`Z_N`, compose through one typed internal port by Boolean convolution over
-`Z2`, expose the exact quotient boundary, reverse the actual forward process,
-and reuse the restored carrier. They are quotient-extensional rather than
-generally intensional: each relation is the complete two-slot characteristic
-vector of fixed `Z2`. At `N=64`, `BOTH o BOTH` closes 64 witnesses per
-boundary pair while retaining zero witness slots in eight complex carrier
-cells.
+The next crossing is not:
+
+```text
+series-parallel
+-> another narrowly named topology
+-> another milestone
+```
+
+It is:
+
+```text
+bounded relational graph engine
+-> reusable typed relational modules
+-> recursive holographic composition
+-> wider unresolved interfaces
+-> compact general relational geometry
+```
+
+The major scientific questions are:
+
+```text
+reusable relational modules with typed open interfaces
+module outputs remaining phase-resident inputs to larger modules
+recursive composition without host expansion or decode
+interfaces wider than two Boolean ports
+compact representation across wider graph separators
+elimination-order discovery without compiler-side solving
+general relation signatures without truth-table materialization
+resource growth versus separator width, message arity, and topology
+```
+
+These questions are not a rigid sequence. Merely supporting another
+handcrafted graph family is insufficient if intermediate relation width,
+carrier state, or provenance grows exponentially.
+
+The earlier `CYCLIC_PARITY(N)` quotient calibration remains preserved
+historical evidence. It is not the current frontier.
 
 The architecture must explicitly distinguish:
 
