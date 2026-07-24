@@ -1,0 +1,63 @@
+{
+  "prepare": {
+    "created_at": "2026-07-23T23:58:58.503743+00:00",
+    "passed": true,
+    "pmu_helper_sha256": "b747628a6f904a0e3436981b8f4793817b0c0650ef447a038732a4b2cae4b737",
+    "run_id": "family10h_relation_temporal_order_discovery_v1_0",
+    "runtime_sha256": "c40c5ee0e023647925a82aad2110fda483e2f9cc4efa1750f26aaca0f68ed4b2",
+    "schedule_manifest_sha256": "d8bf1ea1ed4edeaae0963759e3e64a9758c8c42597c17c06dc013bbb812b8b72",
+    "schema": "FAMILY10H_RELATION_TEMPORAL_ORDER_PREPARE_V1",
+    "small_wall_crossed": false
+  }
+}
+{
+  "analysis_sha256": "393c979cc9b436e968ba7dbdd4b99f96e9aa0927b7309aab437ac58ce16b6a66",
+  "archive_sha256": "4ed87a981e85ff9bbc6f1fa20f5104d969bd8f6bf7efbf90d3e249bd0140048c",
+  "controller_passed": true,
+  "coordinates": {
+    "D_temporal_primary_minus_sham": 0.07657611477051497,
+    "R_temporal_primary": 0.06185899672654047,
+    "R_temporal_sham": -0.014717118043974504,
+    "axis_primary_minus_sham": {
+      "common_axis": 0.43569841285648775,
+      "diag_R_axis": 0.07657611477051529,
+      "offdiag_skew_axis": 0.0762031219078617,
+      "prep_axis": 0.07395597151337788,
+      "query_axis": -0.07845027230234544
+    },
+    "diag_skew_magnitude": 0.10803155623173982,
+    "diag_skew_phase_radians": 0.7829567837328516,
+    "prep_query_magnitude": 0.10781433553475024,
+    "prep_query_phase_radians": -0.814878574502192,
+    "primary_relation_cell_axes": {
+      "cell_prepare_r0_query_r0": 0.5472739285191012,
+      "cell_prepare_r0_query_r1": 0.5654139199903516,
+      "cell_prepare_r1_query_r0": 0.414291467983177,
+      "cell_prepare_r1_query_r1": 0.5561494529075088,
+      "common_axis": 0.5207821923500346,
+      "diag_R_axis": 0.061858996726540744,
+      "offdiag_skew_axis": 0.0755612260035873,
+      "prep_axis": 0.07112346380938339,
+      "query_axis": -0.07999898819779114
+    },
+    "sham_relation_cell_axes": {
+      "cell_prepare_r0_query_r0": 0.07553460867183955,
+      "cell_prepare_r0_query_r1": 0.09180044261125979,
+      "cell_prepare_r1_query_r0": 0.09308423441980858,
+      "cell_prepare_r1_query_r1": 0.07991583227127971,
+      "common_axis": 0.0850837794935469,
+      "diag_R_axis": -0.014717118043974547,
+      "offdiag_skew_axis": -0.0006418959042743949,
+      "prep_axis": -0.0028325077039944788,
+      "query_axis": -0.001548715895445689
+    }
+  },
+  "interpretation": {
+    "exploratory_only": true,
+    "small_wall_crossed": false,
+    "temporal_D_positive": true,
+    "temporal_all_one_factor_strata_D_positive": true,
+    "temporal_order_axis_nonzero": true,
+    "temporal_order_candidate_for_followup": true
+  }
+}

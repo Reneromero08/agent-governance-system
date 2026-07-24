@@ -1,10 +1,10 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T16:50:00-07:00",
+  "updated_at": "2026-07-23T17:00:00-07:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
-  "checkpoint_head": "9a6a1ec915da2455fda034c3a031593dce3c9bec",
-  "origin_head": "9a6a1ec915da2455fda034c3a031593dce3c9bec",
+  "checkpoint_head": "203485c4b55be928d6553e3892f56a97d50202a2",
+  "origin_head": "203485c4b55be928d6553e3892f56a97d50202a2",
   "autonomous_mode": {
     "active": true,
     "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
@@ -54,17 +54,17 @@
     ]
   },
   "current_package": {
-    "package_id": "family10h_relation_rspatial_shift_sweep_discovery_v1",
-    "transaction_run_id": "family10h_relation_rspatial_shift_sweep_discovery_v1_0",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_rspatial_shift_sweep_discovery_v1",
+    "package_id": "family10h_relation_temporal_order_discovery_v1",
+    "transaction_run_id": "family10h_relation_temporal_order_discovery_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_temporal_order_discovery_v1",
     "package_decision": "EXPLORATORY_DISCOVERY_COMPLETE_NO_SCIENTIFIC_CLAIM",
     "package_manifest_sha256": null,
-    "schedule_manifest_sha256": "dcc05c59de673eb1ea12bf577320b1533cb60909800532a79860241467be3f6e",
+    "schedule_manifest_sha256": "d8bf1ea1ed4edeaae0963759e3e64a9758c8c42597c17c06dc013bbb812b8b72",
     "threshold_contract_sha256": null,
     "source_schedule_package": "family10h_primary_minus_sham_local_paired_differential_v1",
-    "source_authority_commit": "9a6a1ec915da2455fda034c3a031593dce3c9bec",
+    "source_authority_commit": "203485c4b55be928d6553e3892f56a97d50202a2",
     "source_freeze_commit": null,
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_rspatial_shift_sweep_discovery_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_temporal_order_discovery_v1_0/attempt_1",
     "attempt_output_path_fresh": true
   },
   "current_observable": {
@@ -130,7 +130,8 @@
     "relation_rspatial_phase_reset_reuse_discovery_attempts": 1,
     "relation_rspatial_phase_source_restore_discovery_attempts": 1,
     "relation_rspatial_phase_mutation_discovery_attempts": 1,
-    "relation_rspatial_shift_sweep_discovery_attempts": 1
+    "relation_rspatial_shift_sweep_discovery_attempts": 1,
+    "relation_temporal_order_discovery_attempts": 1
   },
   "latest_retained_evidence": {
     "prior_official_run": "family10h_primary_minus_sham_differential_v1_0/attempt_1",
@@ -598,12 +599,62 @@
       "candidate_oriented_shift_selectivity": false,
       "exploratory_only": true,
       "small_wall_crossed": false
+    },
+    "relation_temporal_order_result": "EXPLORATORY_ONLY_TEMPORAL_ORDER_CODED_RELATION_CANDIDATE_SURVIVED_ONE_FACTOR_STRATA",
+    "relation_temporal_order_archive_sha256": "4ed87a981e85ff9bbc6f1fa20f5104d969bd8f6bf7efbf90d3e249bd0140048c",
+    "relation_temporal_order_archive_size": 22725378,
+    "relation_temporal_order_analysis_sha256": "393c979cc9b436e968ba7dbdd4b99f96e9aa0927b7309aab437ac58ce16b6a66",
+    "relation_temporal_order_coordinates": {
+      "D_temporal_primary_minus_sham": 0.07657611477051497,
+      "R_temporal_primary": 0.06185899672654047,
+      "R_temporal_sham": -0.014717118043974504,
+      "axis_primary_minus_sham": {
+        "common_axis": 0.43569841285648775,
+        "diag_R_axis": 0.07657611477051529,
+        "offdiag_skew_axis": 0.0762031219078617,
+        "prep_axis": 0.07395597151337788,
+        "query_axis": -0.07845027230234544
+      },
+      "diag_skew_magnitude": 0.10803155623173982,
+      "diag_skew_phase_radians": 0.7829567837328516,
+      "prep_query_magnitude": 0.10781433553475024,
+      "prep_query_phase_radians": -0.814878574502192,
+      "primary_relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.5472739285191012,
+        "cell_prepare_r0_query_r1": 0.5654139199903516,
+        "cell_prepare_r1_query_r0": 0.414291467983177,
+        "cell_prepare_r1_query_r1": 0.5561494529075088,
+        "common_axis": 0.5207821923500346,
+        "diag_R_axis": 0.061858996726540744,
+        "offdiag_skew_axis": 0.0755612260035873,
+        "prep_axis": 0.07112346380938339,
+        "query_axis": -0.07999898819779114
+      },
+      "sham_relation_cell_axes": {
+        "cell_prepare_r0_query_r0": 0.07553460867183955,
+        "cell_prepare_r0_query_r1": 0.09180044261125979,
+        "cell_prepare_r1_query_r0": 0.09308423441980858,
+        "cell_prepare_r1_query_r1": 0.07991583227127971,
+        "common_axis": 0.0850837794935469,
+        "diag_R_axis": -0.014717118043974547,
+        "offdiag_skew_axis": -0.0006418959042743949,
+        "prep_axis": -0.0028325077039944788,
+        "query_axis": -0.001548715895445689
+      }
+    },
+    "relation_temporal_order_interpretation": {
+      "exploratory_only": true,
+      "small_wall_crossed": false,
+      "temporal_D_positive": true,
+      "temporal_all_one_factor_strata_D_positive": true,
+      "temporal_order_axis_nonzero": true,
+      "temporal_order_candidate_for_followup": true
     }
   },
   "hypothesis_frontier": {
     "active_wall": "carrier/access-model selection below full Small Wall crossing",
-    "leading_mechanism": "current relation-spatial source writes refresh a durable carrier amplitude; spatial r0/r1 shift changes amplitude by offset but does not encode a sign-changing oriented relation phase",
-    "strongest_candidate_coordinate": "source-dead local primary-minus-sham amplitude D persists under the R-spatial family, but relation orientation remains unresolved because same/opposite mutation and spatial-shift sweeps keep D positive",
+    "leading_mechanism": "temporal/order-coded relation under identical spatial marginals produced a strong local primary-minus-sham relation axis; spatial shift remains an amplitude-only family",
+    "strongest_candidate_coordinate": "temporal order coded relation: D_temporal_primary_minus_sham = 0.07657611477051497, sham = -0.014717118043974504, all one-factor strata D positive",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
       "branch": "codex/audio-frequency-wave-substrate",
@@ -632,7 +683,7 @@
       "source-dead same/opposite mutation as an oriented phase-flip law under the current +/-1 relation geometry",
       "relation-spatial shift variation as a clean oriented phase law; all tested shifts kept D positive and did not yield sign-changing selectivity"
     ],
-    "current_next_experiment": "probe a temporal/order-coded relation that preserves identical spatial marginals and line coverage while making r0/r1 differ by AB-versus-BA ordering; look for a diagonal/off-diagonal phase axis before any freeze",
+    "current_next_experiment": "run a temporal-order lifetime/reset/mutation probe: alive, source-dead, reset, restore-same, restore-opposite, and source-off/geometry-null controls using the same temporal relation coding",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
@@ -650,7 +701,8 @@
       "the full-schedule discovery is still exploratory and does not itself establish R2 restoration, relation reuse, physical relational memory, catalytic borrowing, or Small Wall crossing",
       "opposite relation mutation refreshed D instead of flipping it, indicating the current +/-1 source operation stores amplitude more strongly than oriented relation phase",
       "double-flush reset behavior is not stable enough across 1024-row phase probes to freeze a reset law yet",
-      "relation shift sweep kept D positive for shifts 1, 2, 4, 8, 16, 32, 64, and 128; best shift 32 only amplified D and did not create oriented sign selectivity"
+      "relation shift sweep kept D positive for shifts 1, 2, 4, 8, 16, 32, 64, and 128; best shift 32 only amplified D and did not create oriented sign selectivity",
+      "temporal-order candidate is exploratory only; source-death persistence, reset kill, restore-same, restore-opposite flip, and carrier-off/geometry-null controls are not yet established for this coordinate"
     ]
   },
   "claim_state": {
