@@ -1,0 +1,158 @@
+{
+  "created_at": "2026-07-24T03:40:59.729298+00:00",
+  "files": {
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/block_replay_a_primary.tsv": {
+      "sha256": "4de36a5bf15e85aa1bc1f71b1350bc708c08df9f42a24dab99569f640bff8be8",
+      "size_bytes": 663199
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/block_replay_a_sham.tsv": {
+      "sha256": "cf4c60588b6be1d55a57d8fba1f6c564881bd20e9ebdcc3204877a6cd5d1a4ea",
+      "size_bytes": 646303
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/block_replay_b_primary.tsv": {
+      "sha256": "2876149c6fd790f5949c0dc4f5a0f4d122773ae355e1fa4de2bebf6e86ee351c",
+      "size_bytes": 663199
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/block_replay_b_sham.tsv": {
+      "sha256": "6e09d9cdf6c8d40d9c3b2f228dab50fdb159a04159779c740f95137e2343b704",
+      "size_bytes": 646303
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/dead_palindrome_a_primary.tsv": {
+      "sha256": "4a684c44d3b1272fc34b369865553906a5d2a156fc6a108b24c9a54ff1bb28da",
+      "size_bytes": 683167
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/dead_palindrome_a_sham.tsv": {
+      "sha256": "9fccf2e1d735d4f63e65c38e0b3cdd4a970c0d9cdc5c3d213493a8d4f9187229",
+      "size_bytes": 666271
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/dead_palindrome_b_primary.tsv": {
+      "sha256": "8fe62dfb309229de7a5786d3b4f280b6aa752c954ec399cc65bcf11e1d435547",
+      "size_bytes": 683167
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/dead_palindrome_b_sham.tsv": {
+      "sha256": "3c03019817b9d40466f18eeb4169440abd40b12dc44b0d87a76fc136069ac6a9",
+      "size_bytes": 666271
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/palindrome_a_primary.tsv": {
+      "sha256": "f03e9be61f563e777df33a7fa4604d6a9d95176b94308fd6cb212dc3a2f82bd6",
+      "size_bytes": 657567
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/palindrome_a_sham.tsv": {
+      "sha256": "9e3743b618228cfeeb8d685ad4d281cc6b40ad9ce6bbf04bfa330b0e3f3183a0",
+      "size_bytes": 640671
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/palindrome_b_primary.tsv": {
+      "sha256": "dbb6876a2d870a6473880d5c51e6a3bd9b70f66f00d816cf0ec3e80d43792d69",
+      "size_bytes": 657567
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/palindrome_b_sham.tsv": {
+      "sha256": "8f689e6297c9d83df24c47363cef6f4904e4224d8fcb00ca991f862e5d9110c6",
+      "size_bytes": 640671
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/source_off_palindrome_a_primary.tsv": {
+      "sha256": "e09c63a98652cad0edd162abcf1051aff0be82252760d5230bc47b1867aca912",
+      "size_bytes": 713887
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/source_off_palindrome_a_sham.tsv": {
+      "sha256": "f1a181e81d71bdb46a8e44e56dc93316e0acb732870732589bb7e1ac0854d601",
+      "size_bytes": 696991
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/source_off_palindrome_b_primary.tsv": {
+      "sha256": "21228e8debc68b5875de929c63f4f476629cd83f7a23c6db3a387e672a5e7aa1",
+      "size_bytes": 713887
+    },
+    "source/PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_SCHEDULES/source_off_palindrome_b_sham.tsv": {
+      "sha256": "001aec696f38da891eeea315051888a1af68e69716c3428c68330cacb93632ff",
+      "size_bytes": 696991
+    },
+    "source/RELATION_COMPOSITION_REPLAY_EXCLUSION_SCHEDULE_MANIFEST.json": {
+      "sha256": "92cdbd59181ffd4db69f7b55369bef3cca0c97743747fa4f859b6fe92f26fd86",
+      "size_bytes": 12965
+    },
+    "source/RELATION_GRAMMAR.json": {
+      "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+      "size_bytes": 292071
+    },
+    "source/RELATION_GRAMMAR.sha256": {
+      "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+      "size_bytes": 66
+    },
+    "source/RELATION_GRAMMAR.tsv": {
+      "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+      "size_bytes": 360
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+      "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+      "size_bytes": 2277
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+      "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+      "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+      "size_bytes": 1866
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+      "size_bytes": 11263467
+    },
+    "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+      "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+      "size_bytes": 2635
+    },
+    "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+      "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+      "size_bytes": 3120
+    },
+    "source/RUN_TEMPORAL_SOURCE_OFF_DISCOVERY.sh": {
+      "sha256": "c7a0a2f36b7b446fe000bba198e9ce25ecec5747c9f274e1cf83a08b356e7297",
+      "size_bytes": 9191
+    },
+    "source/relation_spatial_adjudication.py": {
+      "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "size_bytes": 864
+    },
+    "source/relation_spatial_physical_adjudication.py": {
+      "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+      "size_bytes": 42533
+    },
+    "source/relation_spatial_pmu_preflight": {
+      "sha256": "43dcf66d3ab20e66a22c6a34f560da6a30feadc3bbc73683f3a4fe1fece53244",
+      "size_bytes": 42640
+    },
+    "source/relation_spatial_pmu_preflight.c": {
+      "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "size_bytes": 9376
+    },
+    "source/relation_spatial_public.py": {
+      "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+      "size_bytes": 32161
+    },
+    "source/relation_spatial_runtime": {
+      "sha256": "bebd831dc5f3ed3ba946698ceb8f6969a849c3fd0c44b4636d9098264efe21c7",
+      "size_bytes": 175352
+    },
+    "source/relation_spatial_runtime.c": {
+      "sha256": "9845598b5595f934c54d793946c44e23dee165b9928999b1d6a609bb9fa42a3b",
+      "size_bytes": 79102
+    },
+    "source/relation_spatial_runtime.h": {
+      "sha256": "19b2da4fc7144ae7c5c6f23b320a5b625bb9046bd6dea847efd4d435ca29a32e",
+      "size_bytes": 5326
+    },
+    "source/relation_spatial_target.py": {
+      "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+      "size_bytes": 91980
+    }
+  },
+  "path": "C:\\tmp\\family10h_relation_palindrome_holonomy_source_off_screen_v1_0_source_package.tar.gz",
+  "run_id": "family10h_relation_palindrome_holonomy_source_off_screen_v1_0",
+  "schema": "FAMILY10H_RELATION_TEMPORAL_SOURCE_OFF_SOURCE_PACKAGE_V1",
+  "sha256": "34a88c01ba1e20ff9f1fe4fd09a437deec21b69c23b8075c270ad8394e5d05d0",
+  "size_bytes": 854895
+}

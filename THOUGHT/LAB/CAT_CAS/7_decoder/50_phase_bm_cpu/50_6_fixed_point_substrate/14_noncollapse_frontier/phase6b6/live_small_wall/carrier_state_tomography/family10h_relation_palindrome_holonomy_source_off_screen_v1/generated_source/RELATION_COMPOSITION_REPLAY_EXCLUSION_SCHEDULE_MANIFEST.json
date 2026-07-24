@@ -1,0 +1,220 @@
+{
+  "claim_boundary": {
+    "exploratory_only": true,
+    "positive_scientific_claim": false,
+    "small_wall_crossed": false
+  },
+  "created_at": "2026-07-24T03:40:54.554951+00:00",
+  "matched_marginal_law": {
+    "composition_sequence_excluded_from_marginal_digest": true,
+    "query_string_excluded_from_marginal_digest": true,
+    "receiver_query": "same four-cell held-out boundary projection in every source-order variant",
+    "spatial_addresses": "native R0 +1 and R1 -1 maps preserved; each composition variant uses the same A/B marginal line coverage",
+    "tested_relation": "adjacent relation composition sequence R0_then_R1 versus R1_then_R0, with gapped and balanced-alternating replay controls",
+    "work_counts": "copied unchanged from the same base rows for every variant; composition prep halves loop steps and touches two relation pairs per step"
+  },
+  "pair_sample_count": 256,
+  "predeclared_patterns": {
+    "H1_adjacent_composition_sensitive_relational_carrier": [
+      "R0_then_R1 and R1_then_R0 differ in held-out boundary coordinate after primary-minus-sham subtraction",
+      "source-off composition difference collapses",
+      "gapped and balanced-alternating composition controls do not replay the directed adjacent-composition difference",
+      "dead composition difference preserves a nontrivial fraction of alive composition difference"
+    ],
+    "H2_amplitude_or_occupancy_only": [
+      "R0_then_R1 and R1_then_R0 are equivalent or both replay the same local differential",
+      "source-off geometry is comparable"
+    ],
+    "H3_receiver_or_query_artifact": [
+      "composition separation appears in source-off rows or tracks receiver query_order strata"
+    ],
+    "H4_timing_artifact": [
+      "composition separation follows execution ordinal, duration, or delay rather than source composition"
+    ]
+  },
+  "receiver_schedule_frozen_before_source_relation": true,
+  "rows_per_variant": 512,
+  "run_id": "family10h_relation_palindrome_holonomy_source_off_screen_v1_0",
+  "schedule_manifest_sha256": "6f2fe022ef7992a7d4d5204a12682b83aa33658ec8ce8c07eee7003ff3717111",
+  "schema": "FAMILY10H_RELATION_COMPOSITION_REPLAY_EXCLUSION_DISCOVERY_SCHEDULE_MANIFEST_V1",
+  "source_schedule": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h\\THOUGHT\\LAB\\CAT_CAS\\7_decoder\\50_phase_bm_cpu\\50_6_fixed_point_substrate\\14_noncollapse_frontier\\phase6b6\\live_small_wall\\carrier_state_tomography\\family10h_primary_minus_sham_local_paired_differential_v1\\LOCAL_PAIRED_DIFFERENTIAL_SCHEDULES\\round0_query_relation_pair.tsv",
+  "source_schedule_sha256": "87e02f2c4e7e1377e96df2d76493e975667d02ee61358d54266748bcd4489c8c",
+  "variants": {
+    "block_replay_a_primary": {
+      "composition_sequence": "block_replay_r0_r0_r1_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/block_replay_a_primary.tsv",
+      "query": "block_replay_a_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "4de36a5bf15e85aa1bc1f71b1350bc708c08df9f42a24dab99569f640bff8be8",
+      "size_bytes": 663199,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "block_replay_a_sham": {
+      "composition_sequence": "block_replay_r0_r0_r1_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/block_replay_a_sham.tsv",
+      "query": "block_replay_a_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "cf4c60588b6be1d55a57d8fba1f6c564881bd20e9ebdcc3204877a6cd5d1a4ea",
+      "size_bytes": 646303,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "block_replay_b_primary": {
+      "composition_sequence": "block_replay_r1_r1_r0_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/block_replay_b_primary.tsv",
+      "query": "block_replay_b_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "2876149c6fd790f5949c0dc4f5a0f4d122773ae355e1fa4de2bebf6e86ee351c",
+      "size_bytes": 663199,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "block_replay_b_sham": {
+      "composition_sequence": "block_replay_r1_r1_r0_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/block_replay_b_sham.tsv",
+      "query": "block_replay_b_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "6e09d9cdf6c8d40d9c3b2f228dab50fdb159a04159779c740f95137e2343b704",
+      "size_bytes": 646303,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_palindrome_a_primary": {
+      "composition_sequence": "dead_palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_palindrome_a_primary.tsv",
+      "query": "dead_palindrome_a_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "4a684c44d3b1272fc34b369865553906a5d2a156fc6a108b24c9a54ff1bb28da",
+      "size_bytes": 683167,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_palindrome_a_sham": {
+      "composition_sequence": "dead_palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_palindrome_a_sham.tsv",
+      "query": "dead_palindrome_a_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "9fccf2e1d735d4f63e65c38e0b3cdd4a970c0d9cdc5c3d213493a8d4f9187229",
+      "size_bytes": 666271,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_palindrome_b_primary": {
+      "composition_sequence": "dead_palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_palindrome_b_primary.tsv",
+      "query": "dead_palindrome_b_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "8fe62dfb309229de7a5786d3b4f280b6aa752c954ec399cc65bcf11e1d435547",
+      "size_bytes": 683167,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "dead_palindrome_b_sham": {
+      "composition_sequence": "dead_palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/dead_palindrome_b_sham.tsv",
+      "query": "dead_palindrome_b_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "3c03019817b9d40466f18eeb4169440abd40b12dc44b0d87a76fc136069ac6a9",
+      "size_bytes": 666271,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "palindrome_a_primary": {
+      "composition_sequence": "palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/palindrome_a_primary.tsv",
+      "query": "palindrome_a_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "f03e9be61f563e777df33a7fa4604d6a9d95176b94308fd6cb212dc3a2f82bd6",
+      "size_bytes": 657567,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "palindrome_a_sham": {
+      "composition_sequence": "palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/palindrome_a_sham.tsv",
+      "query": "palindrome_a_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "9e3743b618228cfeeb8d685ad4d281cc6b40ad9ce6bbf04bfa330b0e3f3183a0",
+      "size_bytes": 640671,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "palindrome_b_primary": {
+      "composition_sequence": "palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/palindrome_b_primary.tsv",
+      "query": "palindrome_b_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "dbb6876a2d870a6473880d5c51e6a3bd9b70f66f00d816cf0ec3e80d43792d69",
+      "size_bytes": 657567,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "palindrome_b_sham": {
+      "composition_sequence": "palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/palindrome_b_sham.tsv",
+      "query": "palindrome_b_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "8f689e6297c9d83df24c47363cef6f4904e4224d8fcb00ca991f862e5d9110c6",
+      "size_bytes": 640671,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_palindrome_a_primary": {
+      "composition_sequence": "source_off_palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_palindrome_a_primary.tsv",
+      "query": "source_off_palindrome_a_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "e09c63a98652cad0edd162abcf1051aff0be82252760d5230bc47b1867aca912",
+      "size_bytes": 713887,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_palindrome_a_sham": {
+      "composition_sequence": "source_off_palindrome_holonomy_r0_r1_r1_r0",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_palindrome_a_sham.tsv",
+      "query": "source_off_palindrome_a_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "f1a181e81d71bdb46a8e44e56dc93316e0acb732870732589bb7e1ac0854d601",
+      "size_bytes": 696991,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_palindrome_b_primary": {
+      "composition_sequence": "source_off_palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_palindrome_b_primary.tsv",
+      "query": "source_off_palindrome_b_compose_query_relation_pair_control",
+      "row_count": 512,
+      "sha256": "21228e8debc68b5875de929c63f4f476629cd83f7a23c6db3a387e672a5e7aa1",
+      "size_bytes": 713887,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    },
+    "source_off_palindrome_b_sham": {
+      "composition_sequence": "source_off_palindrome_holonomy_r1_r0_r0_r1",
+      "expected_pair_observation_count": 131072,
+      "marginal_digest_excluding_composition_and_query": "88ecb7c4f9b2de3e55f29b9b7c22d4865bda87f57dd7ecc755ede64c789a485c",
+      "path": "COMPOSITION_REPLAY_EXCLUSION_SCHEDULES/source_off_palindrome_b_sham.tsv",
+      "query": "source_off_palindrome_b_compose_relation_sham_control",
+      "row_count": 512,
+      "sha256": "001aec696f38da891eeea315051888a1af68e69716c3428c68330cacb93632ff",
+      "size_bytes": 696991,
+      "source_order_inside_each_relation_pair": "A_then_B"
+    }
+  }
+}

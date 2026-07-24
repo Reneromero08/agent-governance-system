@@ -46,6 +46,13 @@
       "raw_records": 2048,
       "source_death_receipts": 2048
     },
+    "family10h_relation_palindrome_holonomy_source_off_screen_v1_0": {
+      "interpretable_attempt": "attempt_1",
+      "pair_observations": 2097152,
+      "physical_transactions": 1,
+      "raw_records": 8192,
+      "source_death_receipts": 8192
+    },
     "family10h_relation_prep_axis_composition_screen_v1_0": {
       "interpretable_attempt": "attempt_1",
       "pair_observations": 2621440,
@@ -80,6 +87,7 @@
     "relation_offset8_residue_discovery_attempts": 1,
     "relation_orientation_balance_discovery_attempts": 1,
     "relation_origin_scope_discovery_attempts": 1,
+    "relation_palindrome_holonomy_source_off_screen_attempts": 1,
     "relation_prep_ablation_discovery_attempts": 1,
     "relation_prep_axis_composition_screen_attempts": 1,
     "relation_prep_mutation_discovery_attempts": 1,
@@ -148,13 +156,13 @@
     "small_wall_state_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/SMALL_WALL_STATE.md",
     "small_wall_state_sha256": "6fb37e6eb46603fc38b0c1feada533a22423ae4da29ab2b563ad498ccbb761f8"
   },
-  "checkpoint_head": "e7854d166e008cda6bdb1f6343ef722e05032cc0",
+  "checkpoint_head": "753ca94d4dea9457b92ea6b2019cd3c544bf90ff",
   "claim_state": {
     "catalytic_borrowing_established": false,
-    "current_ceiling": "exploratory balanced-phase source-off screen rejected; no new positive scientific claim beyond prior scalar/local differential results",
+    "current_ceiling": "exploratory palindrome-holonomy source-off screen rejected; no new positive scientific claim beyond prior scalar/local differential results",
     "full_carrier_state_tomography_established": false,
     "full_tomography_established": false,
-    "latest_exploratory_result": "EXPLORATORY_BALANCED_PHASE_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "latest_exploratory_result": "EXPLORATORY_PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
     "latest_positive_claim_ceiling": "PUBLIC_POST_SOURCE_LOCAL_PRIMARY_MINUS_SHAM_DIFFERENTIAL_CONFIRMED",
     "local_paired_differential_confirmed_prospectively": true,
     "physical_relational_memory_established": false,
@@ -182,21 +190,21 @@
     ]
   },
   "current_package": {
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_balanced_phase_source_off_screen_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_palindrome_holonomy_source_off_screen_v1_0/attempt_1",
     "attempt_output_path_fresh": true,
-    "package_decision": "EXPLORATORY_BALANCED_PHASE_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
-    "package_id": "family10h_relation_balanced_phase_source_off_screen_v1",
-    "package_manifest_sha256": "1708674590c5796e663bf0f758cc359b916a413c5be1fb3d1758d1edbc67dc40",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_balanced_phase_source_off_screen_v1",
-    "schedule_manifest_sha256": "f9cf4a662f58701058bd3dc72c73f90ca55eb40d0fd320917d108b2050725c8d",
-    "source_authority_commit": "e7854d166e008cda6bdb1f6343ef722e05032cc0",
+    "package_decision": "EXPLORATORY_PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "package_id": "family10h_relation_palindrome_holonomy_source_off_screen_v1",
+    "package_manifest_sha256": "34a88c01ba1e20ff9f1fe4fd09a437deec21b69c23b8075c270ad8394e5d05d0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_palindrome_holonomy_source_off_screen_v1",
+    "schedule_manifest_sha256": "6f2fe022ef7992a7d4d5204a12682b83aa33658ec8ce8c07eee7003ff3717111",
+    "source_authority_commit": "753ca94d4dea9457b92ea6b2019cd3c544bf90ff",
     "source_freeze_commit": null,
     "source_schedule_package": "family10h_relation_true_composition_replay_screen_v1",
     "threshold_contract_sha256": null,
-    "transaction_run_id": "family10h_relation_balanced_phase_source_off_screen_v1_0"
+    "transaction_run_id": "family10h_relation_palindrome_holonomy_source_off_screen_v1_0"
   },
   "hypothesis_frontier": {
-    "active_frontier": "balanced-alt phase is not a clean source-off-killed boundary invariant; continue with fixed-marginal composition/holonomy probes that preserve scalar marginals while eliminating balanced-phase replay artifacts",
+    "active_frontier": "closed-order palindrome holonomy gives stable same-sign alive strata and near source-off collapse, but grouped block replay is larger than the candidate; continue by separating holonomy from grouped-order replay under source-off/dead controls",
     "active_wall": "source-authored composition-sensitive boundary invariant below full Small Wall crossing",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
@@ -205,8 +213,9 @@
       "smallest_cpu_pattern": "encode relation as AB versus BA under identical marginals, read a held-out paired q-vector after source closure, run exact reset, then reuse the actually restored carrier with opposite relation plus no-reset/wrong-reset/geometry-null controls",
       "transferable_idea": "fixed-marginal operation-relation mutation plus active inverse restoration/reuse, not audio evidence or thresholds"
     },
-    "current_best_negative_result": "EXPLORATORY_BALANCED_PHASE_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "current_best_negative_result": "EXPLORATORY_PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
     "current_blockers": [
+      "palindrome holonomy screen rejected: Omega_alive = -0.0321601951, source-off = -0.0087009976 (0.271x alive, just above 0.25), dead = 0.0226721404 (0.705x alive), but block replay = 0.0552912099 (1.719x alive) and one-factor source-off/dead/block gates failed; closed-order signal is real but not separated from grouped-order replay.",
       "balanced-phase source-off screen rejected: Omega_alive = 0.0118403493, Omega_source_off = -0.0116575811 (0.985x alive), Omega_dead = -0.0314318648 (2.655x alive); alive one-factor strata split sign and source-off one-factor ratios reached 3.861x, so balanced phase is not source-off killed.",
       "prep-axis composition screen did not replicate the prior aggregate: source-off remained 56.0% of adjacent, gapped 32.6%, balanced 108.4%, and adjacent one-factor strata were not all same-sign",
       "balanced-alt phase remained the dominant replay/control response in both true-composition and prep-axis screens, so the next test must ask whether balanced phase itself is source-off killed and dead-source preserved",
@@ -243,7 +252,7 @@
       "offset-2 signed receiver projection source-off screen: aggregate source-off collapsed to 0.201x alive, but source-dead also collapsed to 0.176x alive, reset double-flush amplified to 2.265x alive, and source-off one-factor strata failed the 0.25x screen; candidate false",
       "offset-2 handoff/decay run rejected the static signed receiver projection: no-prep source-off amplified to 4.650x alive and all post-source-exit variants failed one-factor same-sign stability"
     ],
-    "current_next_experiment": "probe a tighter fixed-marginal compositional/holonomy coordinate with balanced-alt retained as an exclusion diagnostic, and require source-off collapse plus dead-source persistence before freezing any prospective law",
+    "current_next_experiment": "screen a palindrome-minus-block differential with source-off and dead-source variants for both palindrome and grouped block replay, requiring the differential rather than raw palindrome to be carrier-off killed and source-dead preserved",
     "goal_realignment": {
       "active_frontier": "fixed-marginal temporal/order-coded relation: source AB versus BA with identical spatial, work, timing, and histogram marginals",
       "confirmed_calibration": "local primary-minus-sham paired differential is prospectively confirmed at its existing claim ceiling",
@@ -340,7 +349,7 @@
       "relation-valued transport",
       "higher compatibility or obstruction surface"
     ],
-    "strongest_candidate_coordinate": "none currently clean beyond confirmed scalar/local differential; adjacent composition/source-off collapse remains a lead, but replay-exclusion and balanced-phase source-off screens rejected promotion"
+    "strongest_candidate_coordinate": "closed-order palindrome holonomy is the strongest current lead below confirmation: alive strata were same-sign and source-off was near-collapse, but grouped block replay must be removed or killed first"
   },
   "latest_retained_evidence": {
     "affinity_fix_discovery_one_factor_strata_pass": true,
@@ -763,6 +772,49 @@
     "relation_origin_scope_pair_observation_count": 2621440,
     "relation_origin_scope_raw_record_count": 10240,
     "relation_origin_scope_source_death_receipt_count": 10240,
+    "relation_palindrome_holonomy_source_off_screen_analysis_sha256": "9a59898dd161fe315ffac680c450f1204f393ad137198bebf910c50d810413a2",
+    "relation_palindrome_holonomy_source_off_screen_archive_sha256": "dce06ebbfa1f55dfd7f37224b6c3b3612699b60a530f9a4fe5375a6dd8bfc22d",
+    "relation_palindrome_holonomy_source_off_screen_archive_size": 45862122,
+    "relation_palindrome_holonomy_source_off_screen_cleanup_passed": true,
+    "relation_palindrome_holonomy_source_off_screen_coordinates": {
+      "K_prep_axis_block_replay_a_minus_b": -0.02185826257563761,
+      "K_prep_axis_palindrome_alive_a_minus_b": -0.05509027359899035,
+      "K_prep_axis_palindrome_dead_a_minus_b": -0.013366317220270145,
+      "K_prep_axis_palindrome_source_off_a_minus_b": -0.0007688135615066816,
+      "Omega_block_replay_a_minus_b": 0.05529120994760948,
+      "Omega_palindrome_holonomy_alive_a_minus_b": -0.03216019514267185,
+      "Omega_palindrome_holonomy_dead_a_minus_b": 0.02267214041511513,
+      "Omega_palindrome_holonomy_source_off_a_minus_b": -0.008700997640887567,
+      "block_replay_abs_to_alive_abs": 1.719243608514246,
+      "dead_abs_to_alive_abs": 0.704975212822404,
+      "source_off_abs_to_alive_abs": 0.27055176755885485
+    },
+    "relation_palindrome_holonomy_source_off_screen_copyback_passed": true,
+    "relation_palindrome_holonomy_source_off_screen_interpretation": {
+      "aggregate_block_replay_below_25pct": false,
+      "aggregate_dead_preserves_at_least_25pct": true,
+      "aggregate_source_off_collapses_below_25pct": false,
+      "all_one_factor_alive_strata_same_sign": true,
+      "all_one_factor_block_replay_below_25pct": false,
+      "all_one_factor_dead_preserves_25pct": false,
+      "all_one_factor_source_off_below_25pct": false,
+      "exploratory_only": true,
+      "max_one_factor_block_replay_ratio": 3.628162838201432,
+      "max_one_factor_source_off_ratio": 0.6970193906790277,
+      "min_one_factor_dead_ratio": 0.10077070321929008,
+      "palindrome_holonomy_coordinate_nonzero": true,
+      "palindrome_holonomy_source_off_dead_candidate": false,
+      "small_wall_crossed": false
+    },
+    "relation_palindrome_holonomy_source_off_screen_pair_observation_count": 2097152,
+    "relation_palindrome_holonomy_source_off_screen_pmu_helper_sha256": "43dcf66d3ab20e66a22c6a34f560da6a30feadc3bbc73683f3a4fe1fece53244",
+    "relation_palindrome_holonomy_source_off_screen_raw_record_count": 8192,
+    "relation_palindrome_holonomy_source_off_screen_result": "EXPLORATORY_PALINDROME_HOLONOMY_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "relation_palindrome_holonomy_source_off_screen_runtime_sha256": "bebd831dc5f3ed3ba946698ceb8f6969a849c3fd0c44b4636d9098264efe21c7",
+    "relation_palindrome_holonomy_source_off_screen_schedule_manifest_sha256": "6f2fe022ef7992a7d4d5204a12682b83aa33658ec8ce8c07eee7003ff3717111",
+    "relation_palindrome_holonomy_source_off_screen_source_death_receipt_count": 8192,
+    "relation_palindrome_holonomy_source_off_screen_source_package_sha256": "34a88c01ba1e20ff9f1fe4fd09a437deec21b69c23b8075c270ad8394e5d05d0",
+    "relation_palindrome_holonomy_source_off_screen_source_package_size": 854895,
     "relation_prep_ablation_analysis_sha256": "ca6f6bd2ff1f91e1f50e8a96fca6ddfaca052102419a22b5a008ae98af3599cb",
     "relation_prep_ablation_archive_sha256": "ee356cb7e86a339a5c937e1d1b8d2bf58367e19f3473932b4b5441a9a19fa36f",
     "relation_prep_ablation_archive_size": 11672073,
@@ -1396,7 +1448,7 @@
     "relation_true_composition_replay_screen_source_death_receipt_count": 10240,
     "relation_true_composition_replay_screen_source_package_sha256": "c68436adadecb4dcadd5873eeb7c5b753c4a550b4687c802e36b539e647f412c"
   },
-  "origin_head": "e7854d166e008cda6bdb1f6343ef722e05032cc0",
+  "origin_head": "753ca94d4dea9457b92ea6b2019cd3c544bf90ff",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "runtime_authority": {
     "RELATION_GRAMMAR.json": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
@@ -1422,5 +1474,5 @@
     "target_model": 10,
     "target_vendor": "AuthenticAMD"
   },
-  "updated_at": "2026-07-24T03:29:47.880137+00:00"
+  "updated_at": "2026-07-24T03:44:10.811501+00:00"
 }
