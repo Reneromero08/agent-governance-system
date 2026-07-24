@@ -145,6 +145,12 @@ repeatable native internal closure    99,999 ports in one userspace C run
 algebraic chain carrier               799,996 complex cells for 100,000 relations
 algebraic chain history               linear 4*(n-1), zero tuple/witness slots
 algebraic chain restoration/reuse      below 3.6e-16, cross-process reuse passes
+branching typed relation star          one shared Boolean_F3 internal hub
+native branching closure               pairwise phase resultants, 4,913/4,913 exact
+1,000-branch star boundary              499,500 factor relations
+branching relation carrier              2,002,000 complex cells
+star tuple/witness/truth-table slots    0 / 0 / 0
+star restoration/reuse                  below 3.6e-16, actual-carrier reuse passes
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -337,10 +343,13 @@ and actual-restored cross-process reuse. The parser's initial quadratic graph
 scan was removed; native evolution and carrier history are linear in relation
 count.
 
-The repeatable linear-chain problem is therefore removed. The active mechanism
-must now support a branching typed relational trace whose geometry materially
-changes the lawful boundary, without host assignment expansion or exponential
-provenance.
+The repeatable linear-chain problem and the first single-hub branching problem
+are therefore removed. The star mechanism closes one hub shared by arbitrary
+finite branch count, yields `d*(d-1)/2` explicit boundary factors, and scales
+to 1,000 branches with no host assignment expansion or exponential
+provenance. The active mechanism must now connect multiple internal hubs so
+one relation-valued phase boundary can become another native closure input
+without host decoding or per-relation circuit expansion.
 
 The following are supporting frontier candidates, not a mandatory sequence:
 

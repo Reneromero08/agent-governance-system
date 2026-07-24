@@ -1,0 +1,124 @@
+{
+  "schema": "cat_cas_algebraic_relation_star_review_v1",
+  "reviewer_id": "SOL-XHIGH-ALGEBRAIC-RELATION-STAR-01-R2",
+  "model": "GPT-5.6 Sol",
+  "effort": "xhigh",
+  "review_mode": "independent_read_only_adversarial",
+  "verdict": "PASS",
+  "initial_review": {
+    "reviewer_id": "SOL-XHIGH-ALGEBRAIC-RELATION-STAR-01",
+    "verdict": "FAIL",
+    "finding_count": 1,
+    "finding_id": "STAR-R1-001",
+    "severity": "P2",
+    "finding": "RESULTS and CURRENT_FINDINGS renamed the branch decomposition as A+B*h while retaining FORMAT's resultant convention for A*h+B, making the written exact coefficient-phase representative the negative of the native representative."
+  },
+  "repair_disposition": {
+    "STAR-R1-001": "CLOSED",
+    "repair": "State the branch decomposition consistently as A_i(x_i)*h+B_i(x_i) while preserving the existing resultant B_i*A_j-A_i*B_j.",
+    "c_source_changed": false,
+    "fixture_changed": false,
+    "numerical_law_changed": false,
+    "scientific_result_changed": false
+  },
+  "exact_reviewed_identity": {
+    "algebraic_relation_star_phase.c": {
+      "bytes": 36444,
+      "sha256": "8a02a0d55f130a208d7cbe57e5126c2d1c5d4ad8b2ae6cae6f223ecb9da55065"
+    },
+    "algebraic_relation_star_reference.c": {
+      "bytes": 19849,
+      "sha256": "9a4920af7874363043d38a2d3ee7af7bfe2a1cc08653e1078f88d41aa234b4e2"
+    },
+    "algebraic_relation_star_generator.c": {
+      "bytes": 5731,
+      "sha256": "f30a65d5865f2b5be806bbc7887a9133184e62fa182ad1a15e4849e181364708"
+    },
+    "algebraic_relation_star_closure_survey.c": {
+      "bytes": 7253,
+      "sha256": "a21aa27f91ed3077b09018a5bfb981353b786e63fe62bf6ec2760d7e5d842989"
+    },
+    "ALGEBRAIC_RELATION_STAR_FORMAT.md": {
+      "bytes": 6174,
+      "sha256": "d9146e2ffb4b05a6566930c48f8b650b8e22f8990d1aeb22e8de2709bc5c7f92"
+    },
+    "ALGEBRAIC_RELATION_STAR_RESULTS.json": {
+      "bytes": 11230,
+      "sha256": "d017568db9524079b96fca254664b41805634d30412fd5c9e23b314756ddba5c"
+    },
+    "CURRENT_FINDINGS.md": {
+      "bytes": 30090,
+      "sha256": "85a6f06926ef6fdce32f5c34fdd4390794d8898786fb6a17bd04f7e218c3ea54"
+    }
+  },
+  "independent_adjudication": {
+    "bi_total_signatures": 17,
+    "pair_factor_rows_exact": "1156/1156",
+    "degree3_assignment_rows_exact": "39304/39304",
+    "degree3_two_witness_rows": 1000,
+    "degree4_assignment_rows_exact": "1336336/1336336",
+    "degree4_two_witness_rows": 10000,
+    "complete_native_triples": 4913,
+    "native_success": 4913,
+    "reference_success": 4913,
+    "boundary_hash_agreement": 4913,
+    "false_or_missed_control_applicability": 0
+  },
+  "control_applicability": {
+    "wrong_applicable": 4640,
+    "wrong_nonapplicable": 273,
+    "geometry_scrambled_applicable": 4616,
+    "geometry_scrambled_nonapplicable": 297,
+    "omitted_applicable": 3808,
+    "omitted_nonapplicable": 1105,
+    "every_applicable_control_minimum_error": 0.001,
+    "every_nonapplicable_control_restored_below_error": 0.001
+  },
+  "repaired_counterexample": {
+    "signature_triple": "1:0:1",
+    "boundary_fnv1a64": "8ae85a39985e65ea",
+    "omitted_applicable": false,
+    "omitted_restoration_error": 1.11022302463e-16,
+    "native_reference_exact": true
+  },
+  "scale_reproduction": {
+    "branch_count": 1000,
+    "boundary_factor_count": 499500,
+    "boundary_coefficient_count": 1998000,
+    "carrier_cells": 2002000,
+    "native_v0_output_sha256": "40dd8d6094ea0a09d78aa8cfac16584ddef8bb24a935041216c5b62d0601e584",
+    "native_v2_output_sha256": "777c8702bd87da7c7b14cf37b62ec2f0c5ea152730c7857384d2984c46d9b10c",
+    "reference_v0_output_sha256": "ad70cee0f26b08c317fdb673be491d05e9eab2f6a7f6325444e6f54e93c2aae2",
+    "reference_v2_output_sha256": "1c7b9949e03d37bfd04b4c4a7342b3f2e35b5292778cad86d3ddc3ec37e5a7e6",
+    "maximum_restoration_error": 3.51083346858e-16,
+    "maximum_root_error": 9.93013661299e-16,
+    "wrong_geometry_scrambled_and_omitted_error": 1.73205080757,
+    "fresh_process_determinism": "PASS",
+    "actual_restored_cross_process_reuse": "PASS"
+  },
+  "qualification": {
+    "strict_c11_warnings_as_errors": "PASS",
+    "gcc_fanalyzer_all_four_c_sources": "PASS",
+    "asan_ubsan_leaks": "PASS",
+    "positive_fixtures_and_public_generator": "PASS",
+    "parser_and_geometry_adversaries": "PASS",
+    "boundary_only_decode": "PASS",
+    "native_no_smuggle": "PASS",
+    "actual_reverse_restoration_and_reuse": "PASS",
+    "resource_law_o_d_squared_disclosed": "PASS",
+    "roadmap_state_and_claim_consistency": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "claim_ceiling": "SOFTWARE_SINGLE_HUB_BI_TOTAL_RELATION_STAR_REFERENCE_ONLY",
+  "new_findings": [],
+  "remaining_findings": [],
+  "next_mechanism_correction": "two connected internal hubs with relation-valued phase memory and no host decode or truth-table expansion",
+  "execution_boundary": {
+    "authorized_userspace_c_only": true,
+    "repository_mutation_by_reviewer": false,
+    "device_or_msr_access": false,
+    "firmware_action": false,
+    "audio_action": false,
+    "p0_or_physical_carrier_contact": false
+  }
+}

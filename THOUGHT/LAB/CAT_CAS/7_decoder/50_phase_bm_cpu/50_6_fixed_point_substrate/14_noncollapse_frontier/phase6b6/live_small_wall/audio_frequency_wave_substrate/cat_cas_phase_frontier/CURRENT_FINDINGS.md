@@ -607,3 +607,75 @@ restoration, and reuse. It does not establish branching geometry, arbitrary
 relation classes, advantage, physical execution, or unlimited computation.
 The active correction is now a branching typed relational trace whose public
 geometry materially determines the boundary without host tuple expansion.
+
+## Branching algebraic relation star
+
+The first branching trace closes one typed Boolean hub shared by three or
+more public binary relations. After canonical orientation, branch `i` has the
+form
+
+```text
+f_i(x_i,h) = A_i(x_i)*h + B_i(x_i) = 0
+```
+
+and every external-port pair receives the native resultant
+
+```text
+R_ij(x_i,x_j) = B_i(x_i)*A_j(x_j) - A_i(x_i)*B_j(x_j).
+```
+
+Because every admitted hub fiber is a nonempty subset of the two-point
+Boolean domain, all fibers have a common hub value exactly when every pair
+intersects. The pairwise resultant boundary is therefore an exact
+factorization of the existential star projection for this admitted class.
+The native engine constructs those factors through products of complex
+cube-root phases and conjugate phase subtraction. It does not enumerate
+external assignments, select a hub witness, or materialize a truth table.
+
+Independent scalar adjudication covers all `1,375,640` assignment rows across
+all 4,913 admitted three-branch signature tuples and all 83,521 four-branch
+tuples. The complete native three-branch sweep then executed all 4,913
+ordered signature triples. Native and independent-reference boundary hashes,
+nominal restoration, reuse, and applicability-gated controls passed
+`4,913 / 4,913`.
+
+The first exhaustive native sweep exposed one real control-accounting defect.
+For signature triple `1:0:1`, an earlier pair factor was nontrivial but the
+canonical final pair factor was zero. The engine marked omitted-inverse
+applicability from any nontrivial pair even though the control omits only the
+final pair. Applicability is now derived exclusively from the exact omitted
+factor. The counterexample correctly restores to `1.11022302463e-16` with
+that control marked inapplicable; the renewed 4,913-case sweep has zero
+false or missed failures.
+
+The authorized userspace C scale execution records:
+
+```text
+public branches                         1,000
+closed internal hubs                        1
+boundary relation factors             499,500
+boundary coefficient phases         1,998,000
+complete carrier cells              2,002,000
+tuple / witness / truth-table slots    0 / 0 / 0
+retained inverse factors                    0
+maximum correct restoration      3.51083346858e-16
+maximum phase-root error          9.93013661299e-16
+wrong inverse error                  1.73205080757
+geometry-scrambled inverse error     1.73205080757
+omitted inverse error                1.73205080757
+fresh-process native output          byte-identical
+```
+
+Two different 1,000-branch stars produced different factorized boundaries
+and reused the same actual restored carrier. Strict C11 compilation, GCC
+static analysis, ASan, UBSan, leak detection, deterministic generation,
+presentation invariance, committed geometry/parser adversaries, and source
+no-smuggle inspection pass.
+
+This removes the single-linear-chain limitation and establishes one finite
+branching typed relational trace. It does not yet establish multiple
+connected internal hubs, cycles, arbitrary typed process graphs,
+computational advantage, physical phase computation, or unlimited catalytic
+phase computation. The next correction is composable relation-valued phase
+memory across multiple internal hubs so a boundary relation can feed another
+native closure without host expansion.

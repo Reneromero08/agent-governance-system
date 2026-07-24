@@ -1,0 +1,253 @@
+{
+  "schema": "cat_cas_algebraic_relation_star_results_v1",
+  "result": "ALGEBRAIC_RELATION_STAR_PHASE_ESTABLISHED",
+  "starting_head": "307a12a86b4003c855a301aa011e0d66b22730cf",
+  "claim_ceiling": "SOFTWARE_SINGLE_HUB_BI_TOTAL_RELATION_STAR_REFERENCE_ONLY",
+  "scope": {
+    "type": "BOOLEAN_F3",
+    "public_geometry": "one typed internal hub shared by at least three binary relations",
+    "relation_form": "c00+c10*x+c01*h+c11*x*h=0",
+    "admission": "bi-total toward both Boolean ports",
+    "native_internal_closure": "all pairwise resultants B_i*A_j-A_i*B_j",
+    "boundary_decode_timing": "after all native pair closures",
+    "tuple_slots": 0,
+    "witness_slots": 0,
+    "truth_table_slots": 0,
+    "retained_inverse_factors": 0,
+    "boundary_factors": "d*(d-1)/2",
+    "carrier_cells": "2*d*(d+1)",
+    "native_evolution_complexity": "O(d^2)",
+    "carrier_complexity": "O(d^2)",
+    "fixed_branch_count_cap": null
+  },
+  "mechanism": {
+    "branch_orientation": "external port first and shared hub second",
+    "branch_decomposition": "A_i(x_i)*h+B_i(x_i)",
+    "boundary_law": "R_ij(x_i,x_j)=B_i(x_i)*A_j(x_j)-A_i(x_i)*B_j(x_j)=0",
+    "finite_exactness_law": "nonempty subsets of the two-point hub have a common intersection exactly when every pair intersects",
+    "phase_encoding": "each F3 coefficient is one cube root of unity",
+    "native_arithmetic": "ordinary phase addition for products and conjugate phase subtraction for F3 differences",
+    "geometry_binding": "the shared hub determines which public relations enter every pairwise closure",
+    "presentation_canonicalization": "external names sorted; relation record order and endpoint direction do not affect the boundary"
+  },
+  "source_identity": {
+    "algebraic_relation_star_phase.c": {
+      "bytes": 36444,
+      "sha256": "8a02a0d55f130a208d7cbe57e5126c2d1c5d4ad8b2ae6cae6f223ecb9da55065"
+    },
+    "algebraic_relation_star_reference.c": {
+      "bytes": 19849,
+      "sha256": "9a4920af7874363043d38a2d3ee7af7bfe2a1cc08653e1078f88d41aa234b4e2"
+    },
+    "algebraic_relation_star_generator.c": {
+      "bytes": 5731,
+      "sha256": "f30a65d5865f2b5be806bbc7887a9133184e62fa182ad1a15e4849e181364708"
+    },
+    "algebraic_relation_star_closure_survey.c": {
+      "bytes": 7253,
+      "sha256": "a21aa27f91ed3077b09018a5bfb981353b786e63fe62bf6ec2760d7e5d842989"
+    },
+    "ALGEBRAIC_RELATION_STAR_FORMAT.md": {
+      "bytes": 6174,
+      "sha256": "d9146e2ffb4b05a6566930c48f8b650b8e22f8990d1aeb22e8de2709bc5c7f92"
+    }
+  },
+  "fixture_identity": {
+    "algebraic_star_heterogeneous.arels": {
+      "bytes": 187,
+      "sha256": "589da4f84d995a3a0a0981ad17ed805b842f779b8e9a58f68bb1ec32a1bd97ef"
+    },
+    "algebraic_star_permuted_reversed.arels": {
+      "bytes": 187,
+      "sha256": "e20cc1741ba35412ea10bf53cb15b9f556e9e4b28bdfd60e484fbce86c99a84b"
+    },
+    "algebraic_star_all_any.arels": {
+      "bytes": 155,
+      "sha256": "536f2ab55d83690bff5573ff9c8c274d408f59d61e07732bd8a15ec9b2633618"
+    },
+    "algebraic_star_chain_geometry.arels": {
+      "bytes": 155,
+      "sha256": "b611435ca42d30b76f67842277ba4a291eb17921dd5531ce8ff54476c46230f0"
+    },
+    "algebraic_star_duplicate_external.arels": {
+      "bytes": 155,
+      "sha256": "deb8c49bbd9e7b349fab080e78e56fbd73cd380ff5593c1fa22617cfc5d3622b"
+    },
+    "algebraic_star_non_bitotal.arels": {
+      "bytes": 155,
+      "sha256": "b7203ed04f194041b00dfbb87e834e6cdb7b432eda4c45705edefb12fe926a2d"
+    },
+    "algebraic_star_duplicate_name.arels": {
+      "bytes": 157,
+      "sha256": "d719a6f306a7b626809992bf6f8dc06e930394295adff30accef2608eae1873b"
+    },
+    "algebraic_star_too_few.arels": {
+      "bytes": 123,
+      "sha256": "b3a3f05fecf6be24b74d074753d50efbed5faf7062b7f35c029a8fff67f7d52a"
+    }
+  },
+  "frozen_numerical_law": {
+    "coefficient_root_maximum_error": 2e-10,
+    "correct_restoration_maximum_error": 2e-12,
+    "carrier_unit_magnitude_maximum_error": 2e-12,
+    "applicable_inverse_control_minimum_error": 0.001
+  },
+  "independent_scalar_closure_survey": {
+    "bi_total_signatures": 17,
+    "degree3_signature_tuples": 4913,
+    "degree3_assignment_rows": 39304,
+    "degree3_exact_rows": 39304,
+    "degree3_two_witness_rows": 1000,
+    "degree4_signature_tuples": 83521,
+    "degree4_assignment_rows": 1336336,
+    "degree4_exact_rows": 1336336,
+    "degree4_two_witness_rows": 10000,
+    "total_exact_assignment_rows": 1375640,
+    "status": "PASS"
+  },
+  "complete_native_triple_sweep": {
+    "ordered_signature_triples": 4913,
+    "native_success": 4913,
+    "reference_success": 4913,
+    "boundary_hash_agreement": 4913,
+    "control_applicability_success": 4913,
+    "failures": 0,
+    "log_sha256": "a199214ca0338f3aeabaa68a4ef251b733cb93a1cd3457996b4f3106918def0a",
+    "status": "PASS"
+  },
+  "direct_userspace_c_execution": {
+    "kernel": "Linux 6.12.86+deb13-amd64 x86_64",
+    "compiler": "cc (Debian 14.2.0-19) 14.2.0",
+    "word_bits": 64,
+    "processor": "AMD Phenom II X6 1090T",
+    "online_processors": 6,
+    "branch_count": 1000,
+    "internal_hub_count": 1,
+    "boundary_factor_count": 499500,
+    "boundary_coefficient_count": 1998000,
+    "carrier_cells": 2002000,
+    "input_v0_bytes": 36877,
+    "input_v0_sha256": "8299f83def334874c3ac41ac6ab0d9ed7198ad7480e2d29af1b6ec07eb59715d",
+    "input_v2_bytes": 36877,
+    "input_v2_sha256": "4f4deae8ccadf5fd847c46c4807dca6e44901318590af1e2c0a32bd5fb4631c6",
+    "v0_boundary_fnv1a64": "af3e10a22d953741",
+    "v2_boundary_fnv1a64": "6322e2c65d21ddba",
+    "maximum_root_error": 9.93013661299e-16,
+    "maximum_correct_restoration_error": 3.51083346858e-16,
+    "maximum_carrier_integrity_error": 2.22044604925e-16,
+    "maximum_borrowed_carrier_displacement_l2": 1726.04924611,
+    "wrong_inverse_restoration_error": 1.73205080757,
+    "geometry_scrambled_inverse_restoration_error": 1.73205080757,
+    "omitted_inverse_restoration_error": 1.73205080757,
+    "actual_restored_reuse": "PASS",
+    "native_and_reference_boundary_agreement": "PASS",
+    "informational_v0_elapsed_ms": 8003,
+    "informational_v2_elapsed_ms": 7970
+  },
+  "determinism": {
+    "public_generator_deterministic": true,
+    "native_1000_fresh_processes_byte_identical": true,
+    "native_v0_output_sha256": "40dd8d6094ea0a09d78aa8cfac16584ddef8bb24a935041216c5b62d0601e584",
+    "native_v2_output_sha256": "777c8702bd87da7c7b14cf37b62ec2f0c5ea152730c7857384d2984c46d9b10c",
+    "reference_v0_output_sha256": "ad70cee0f26b08c317fdb673be491d05e9eab2f6a7f6325444e6f54e93c2aae2",
+    "reference_v2_output_sha256": "1c7b9949e03d37bfd04b4c4a7342b3f2e35b5292778cad86d3ddc3ec37e5a7e6"
+  },
+  "positive_qualification": {
+    "heterogeneous_four_branch_fixture": "PASS",
+    "permuted_record_and_reversed_endpoint_boundary_invariance": "PASS",
+    "all_any_zero_displacement_fixture": "PASS_WITH_CONTROLS_HONESTLY_INAPPLICABLE",
+    "all_4913_ordered_bi_total_triples": "PASS",
+    "four_seven_branch_public_generator_variants": {
+      "variant0_boundary_fnv1a64": "7a83e91fb76a0407",
+      "variant1_boundary_fnv1a64": "2bd7757ceb9f19ef",
+      "variant2_boundary_fnv1a64": "5e427a0daeda69bc",
+      "variant3_boundary_fnv1a64": "2a6ea724d811df1a"
+    },
+    "1000_branch_variant0": "PASS",
+    "1000_branch_variant2": "PASS",
+    "every_native_boundary_equal_to_independent_reference": "PASS",
+    "all_applicable_wrong_inverse_controls": "PASS",
+    "geometry_change_materially_changes_boundary": "PASS"
+  },
+  "negative_qualification": {
+    "non_star_chain_geometry_rejected": "PASS",
+    "duplicate_external_port_rejected": "PASS",
+    "non_bi_total_relation_rejected": "PASS",
+    "duplicate_relation_name_rejected": "PASS",
+    "fewer_than_three_branches_rejected": "PASS"
+  },
+  "build_and_runtime_qualification": {
+    "strict_c11_warnings_as_errors": "PASS",
+    "gcc_fanalyzer_native": "PASS",
+    "gcc_fanalyzer_reference": "PASS",
+    "gcc_fanalyzer_generator": "PASS",
+    "gcc_fanalyzer_closure_survey": "PASS",
+    "address_sanitizer": "PASS",
+    "undefined_behavior_sanitizer": "PASS",
+    "leak_detection": "PASS",
+    "sanitized_branch_count": 50
+  },
+  "control_accounting_repair": {
+    "observed_counterexample": "signature triple 1:0:1",
+    "defect": "omitted applicability was true when any pair factor was nontrivial although the inverse omits only the canonical final factor",
+    "repair": "derive omitted applicability exclusively from the exact canonical final factor that the control omits",
+    "counterexample_boundary_fnv1a64": "8ae85a39985e65ea",
+    "counterexample_omitted_applicable_after_repair": false,
+    "counterexample_omitted_restoration_error": 1.11022302463e-16,
+    "complete_triple_regression": "PASS_4913_OF_4913"
+  },
+  "no_smuggle": {
+    "decoded_boolean_assignment_feedback": false,
+    "native_tuple_enumeration": false,
+    "native_witness_selection": false,
+    "native_truth_table_construction": false,
+    "oracle_or_reference_linkage": false,
+    "stored_boundary_answer_in_recurrence": false,
+    "boundary_decode_before_native_evolution_complete": false,
+    "scalar_resultant_in_native_recurrence": false,
+    "per_relation_circuit_execution": false,
+    "exponential_provenance": false,
+    "public_scalar_coefficients_used_for": [
+      "strict parsing",
+      "prospective bi-total admission",
+      "phase encoding"
+    ]
+  },
+  "restoration_law": {
+    "forward_history": "one four-phase derived factor per external-port pair",
+    "correct_inverse": "remove the actual pair factors, then reverse public branch encoding",
+    "pair_factor_removal_order": "commutative because pair-factor carrier blocks are disjoint",
+    "latched_boundary_outside_inverse_history": true,
+    "actual_restored_carrier_reused": true,
+    "wrong_geometry_scrambled_and_omitted_inverse_fail_when_applicable": true
+  },
+  "contact_attestation": {
+    "authorized_userspace_cpu_execution": true,
+    "ssh_source_transfer_and_process_execution": true,
+    "device_or_msr_access": false,
+    "voltage_or_firmware_action": false,
+    "audio_playback_or_recording": false,
+    "p0_carrier_contact": false,
+    "procurement_or_fabrication": false
+  },
+  "proved": [
+    "One finite branching typed relation star can close a shared Boolean_F3 hub through phase-native pairwise resultants.",
+    "The factorized boundary is exactly the bounded existential projection for every ordered triple of the complete admitted signature class.",
+    "Public star geometry and branch coefficients materially determine the boundary without tuple, witness, or truth-table storage.",
+    "The actual forward carrier history reverses, restores, and supports a different same-degree star."
+  ],
+  "not_proved": [
+    "multiple connected internal hubs or arbitrary process graphs",
+    "cyclic relational traces",
+    "higher-arity or unrestricted relation classes",
+    "subquadratic explicit boundary materialization",
+    "computational advantage over ordinary software",
+    "physical waveform computation",
+    "unlimited catalytic phase computation"
+  ],
+  "focused_review": {
+    "required": true,
+    "candidate_state": "QUALIFIED_FOR_EXACT_READ_ONLY_REVIEW"
+  },
+  "next_frontier": "multiple connected internal hubs with composable relation-valued phase memory"
+}
