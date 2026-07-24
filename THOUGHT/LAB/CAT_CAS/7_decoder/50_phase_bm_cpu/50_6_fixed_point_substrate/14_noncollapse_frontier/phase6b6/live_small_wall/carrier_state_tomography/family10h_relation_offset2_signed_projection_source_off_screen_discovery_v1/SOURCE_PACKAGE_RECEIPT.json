@@ -1,0 +1,110 @@
+{
+  "created_at": "2026-07-24T02:17:58.682507+00:00",
+  "files": {
+    "source/OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_SCHEDULES/alive_offset2_signed.tsv": {
+      "sha256": "f37542ab509055eb01541dd926be750460a974f0f7363edc09e826d081d52ab6",
+      "size_bytes": 597151
+    },
+    "source/OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_SCHEDULES/dead_offset2_signed.tsv": {
+      "sha256": "fb8342825cba77ed57d77777cff5b3e91c23cceabf5f7ddd25bbc449b96cd2c1",
+      "size_bytes": 597663
+    },
+    "source/OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_SCHEDULES/reset_double_flush_offset2_signed.tsv": {
+      "sha256": "477f05289f134200062f425087e1b49d81f40d18cf5a4d158df92e22894644ee",
+      "size_bytes": 662175
+    },
+    "source/OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_SCHEDULES/source_off_offset2_signed.tsv": {
+      "sha256": "ee066fc266dd8b8d84a7d259e24882019a74fbc590416acc8d1bd3f093fc7007",
+      "size_bytes": 625311
+    },
+    "source/RELATION_GRAMMAR.json": {
+      "sha256": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
+      "size_bytes": 292071
+    },
+    "source/RELATION_GRAMMAR.sha256": {
+      "sha256": "d9bfff2148c3d13b0b621f8c3899ae49aaddd50d553f29f908738951683cfa65",
+      "size_bytes": 66
+    },
+    "source/RELATION_GRAMMAR.tsv": {
+      "sha256": "2b76a6f4b3b371d6cf4d157309cbdd6fd828437148bd95c9d2d827413ee827cb",
+      "size_bytes": 360
+    },
+    "source/RELATION_OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_SCHEDULE_MANIFEST.json": {
+      "sha256": "ff6de4cc8a42f7c901262decfb3028be62841d3fa89187e652e010de0117b5db",
+      "size_bytes": 2813
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.json": {
+      "sha256": "568e7bf6bd15fac31fbc64cfb897b74d86f4d9123688fe66108d60e635baa2ad",
+      "size_bytes": 2277
+    },
+    "source/RELATION_SPATIAL_IMPLEMENTATION_MANIFEST.sha256": {
+      "sha256": "ae2742bda2d58ba825a6cfb7201dd797ef0217f430e962d7a6c7f734ff0a61ed",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.json": {
+      "sha256": "3d8e05e10826a2c9371e288feaa3fd9e25bedfe6cfee25a75c5d9ebd6c817577",
+      "size_bytes": 1866
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.sha256": {
+      "sha256": "e9a96a97053c0d8317dd4742ce0fa7d96e2647e395efc455231df64bc2ba6dcb",
+      "size_bytes": 66
+    },
+    "source/RELATION_SPATIAL_PUBLIC_SCHEDULE.tsv": {
+      "sha256": "9045fa318d63d915f7afcac54d2b6cb1cec55adebd429988e06ce2ba4b18313f",
+      "size_bytes": 11263467
+    },
+    "source/RELATION_SPATIAL_SENSOR_AUTHORITY_BINDING.json": {
+      "sha256": "fbb4ca30620f650e4ddc4c3194846d0a41a741250abe7a39b17bfd704d7ef168",
+      "size_bytes": 2635
+    },
+    "source/RELATION_SPATIAL_SOURCE_HASHES.json": {
+      "sha256": "71160778cbadd9f85269614ea8bc6b30f666e78baee33ccb7ab8a7cb473cce62",
+      "size_bytes": 3120
+    },
+    "source/RUN_OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_DISCOVERY.sh": {
+      "sha256": "a4aba9da7bc3119146849fbca909e0154c49f818b7e26f4f6dde2e51e4a6bd06",
+      "size_bytes": 8641
+    },
+    "source/relation_spatial_adjudication.py": {
+      "sha256": "864e270bf693cc633c0c56fe4c7d84604dbcd98d498a4857e22ecc11c95f77c4",
+      "size_bytes": 864
+    },
+    "source/relation_spatial_physical_adjudication.py": {
+      "sha256": "14a3540587d52a3a6917c794bbea38e54ca9a83e742f5554cef919a413afa722",
+      "size_bytes": 42533
+    },
+    "source/relation_spatial_pmu_preflight": {
+      "sha256": "cb11389e60f485f63dcb490cf1fc9af176eb0adb74114932f67dbde95bcefe28",
+      "size_bytes": 42672
+    },
+    "source/relation_spatial_pmu_preflight.c": {
+      "sha256": "f40b7b9ca7afc62f84467a0a79db7ebf0a917571933c06bec2075f76b5565948",
+      "size_bytes": 9376
+    },
+    "source/relation_spatial_public.py": {
+      "sha256": "d868540e474cd368e45a4d21799058b35d2967a5da5b3279f9ef91da826765ee",
+      "size_bytes": 32161
+    },
+    "source/relation_spatial_runtime": {
+      "sha256": "174f2e84e7f512237d5d6c0e921dcf03422ca20d2137cc7cc91b53ac05e610c8",
+      "size_bytes": 116216
+    },
+    "source/relation_spatial_runtime.c": {
+      "sha256": "dabede426618c9461a7686d624a9c87eac7cefe42f353ddb69778a5bb754cf14",
+      "size_bytes": 49246
+    },
+    "source/relation_spatial_runtime.h": {
+      "sha256": "62a433135c1683d75732b33174347a49d52db42d85564f534bd9716a3272c80b",
+      "size_bytes": 2770
+    },
+    "source/relation_spatial_target.py": {
+      "sha256": "47d48308507716f87ad15713ccd0883d92c2b2d3560d927b0f973bb5a19644b4",
+      "size_bytes": 91980
+    }
+  },
+  "path": "C:\\tmp\\family10h_relation_offset2_signed_projection_source_off_screen_discovery_v1_0_source_package.tar.gz",
+  "run_id": "family10h_relation_offset2_signed_projection_source_off_screen_discovery_v1_0",
+  "schema": "FAMILY10H_RELATION_OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_SOURCE_PACKAGE_V1",
+  "sha256": "014ccfb35a58dc0a67e9ebb1fcfb6cd2d8d9cabd673ff6a2aa5ceb4338896181",
+  "size_bytes": 610001
+}

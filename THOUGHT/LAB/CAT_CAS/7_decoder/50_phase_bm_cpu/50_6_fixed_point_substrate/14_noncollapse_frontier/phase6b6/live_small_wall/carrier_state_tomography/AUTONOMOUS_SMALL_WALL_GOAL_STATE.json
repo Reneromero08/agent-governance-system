@@ -1,10 +1,10 @@
 {
   "schema": "AUTONOMOUS_SMALL_WALL_GOAL_STATE_V1",
-  "updated_at": "2026-07-23T18:53:37-07:00",
+  "updated_at": "2026-07-24T02:20:57.606109+00:00",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "branch": "codex/family10h-tomography-repair",
-  "checkpoint_head": "adb7f75a97050954e24555c7a9fd328df247f80d",
-  "origin_head": "adb7f75a97050954e24555c7a9fd328df247f80d",
+  "checkpoint_head": "ac0f970d58f2579695481a7dc6483e2f75c58f3e",
+  "origin_head": "ac0f970d58f2579695481a7dc6483e2f75c58f3e",
   "autonomous_mode": {
     "active": true,
     "basis": "current Small Wall autonomous goal plus explicit lab-device access authorization",
@@ -54,17 +54,17 @@
     ]
   },
   "current_package": {
-    "package_id": "family10h_relation_loop_transport_source_off_screen_discovery_v1",
-    "transaction_run_id": "family10h_relation_loop_transport_source_off_screen_discovery_v1_0",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_loop_transport_source_off_screen_discovery_v1",
-    "package_decision": "EXPLORATORY_LOOP_TRANSPORT_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
-    "package_manifest_sha256": "32fb9f9582e62cdcd3866bf4dc1f6b36b5e678648deb28776390960c6ad53c09",
-    "schedule_manifest_sha256": "95ce1ca8022ce52b75bbde6cb72d63fa7be885757ee19c0dec3b2366b5268f3c",
+    "package_id": "family10h_relation_offset2_signed_projection_source_off_screen_discovery_v1",
+    "transaction_run_id": "family10h_relation_offset2_signed_projection_source_off_screen_discovery_v1_0",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_offset2_signed_projection_source_off_screen_discovery_v1",
+    "package_decision": "EXPLORATORY_OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "package_manifest_sha256": "014ccfb35a58dc0a67e9ebb1fcfb6cd2d8d9cabd673ff6a2aa5ceb4338896181",
+    "schedule_manifest_sha256": "7a0faa10643d7a4a97b988193033c447a709ca67cfa08ce1d3bd26d41ccb7dc7",
     "threshold_contract_sha256": null,
     "source_schedule_package": "family10h_primary_minus_sham_local_paired_differential_v1",
-    "source_authority_commit": "458dec5660496033c2884c86d727a708a4b01ed9",
+    "source_authority_commit": "ac0f970d58f2579695481a7dc6483e2f75c58f3e",
     "source_freeze_commit": null,
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_loop_transport_source_off_screen_discovery_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_offset2_signed_projection_source_off_screen_discovery_v1_0/attempt_1",
     "attempt_output_path_fresh": true
   },
   "current_observable": {
@@ -168,6 +168,13 @@
       "raw_records": 8192,
       "pair_observations": 2097152,
       "source_death_receipts": 8192
+    },
+    "relation_offset2_signed_projection_source_off_screen_discovery_attempts": 1,
+    "family10h_relation_offset2_signed_projection_source_off_screen_discovery_v1_0": {
+      "physical_transactions": 1,
+      "raw_records": 2048,
+      "pair_observations": 524288,
+      "source_death_receipts": 2048
     }
   },
   "latest_retained_evidence": {
@@ -1031,6 +1038,42 @@
       "small_wall_crossed": false,
       "source_off_all_one_factor_strata_below_25pct": false,
       "source_off_collapses_below_25pct_alive_omega": false
+    },
+    "relation_offset2_signed_projection_source_off_screen_result": "EXPLORATORY_OFFSET2_SIGNED_PROJECTION_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "relation_offset2_signed_projection_source_off_screen_archive_sha256": "a95ba0ea8f4f6e0b25c52b4baa769e6c0e60f41f1b3b2c987cc7a4cf1275687e",
+    "relation_offset2_signed_projection_source_off_screen_archive_size": 11972879,
+    "relation_offset2_signed_projection_source_off_screen_analysis_sha256": "c1ed9f13aea38aa2d1ab00fbb5097a20fda4bf125b75a7df392e15f441a3779d",
+    "relation_offset2_signed_projection_source_off_screen_raw_record_count": 2048,
+    "relation_offset2_signed_projection_source_off_screen_pair_observation_count": 524288,
+    "relation_offset2_signed_projection_source_off_screen_source_death_receipt_count": 2048,
+    "relation_offset2_signed_projection_source_off_screen_runtime_sha256": "174f2e84e7f512237d5d6c0e921dcf03422ca20d2137cc7cc91b53ac05e610c8",
+    "relation_offset2_signed_projection_source_off_screen_pmu_helper_sha256": "cb11389e60f485f63dcb490cf1fc9af176eb0adb74114932f67dbde95bcefe28",
+    "relation_offset2_signed_projection_source_off_screen_schedule_manifest_sha256": "7a0faa10643d7a4a97b988193033c447a709ca67cfa08ce1d3bd26d41ccb7dc7",
+    "relation_offset2_signed_projection_source_off_screen_source_package_sha256": "014ccfb35a58dc0a67e9ebb1fcfb6cd2d8d9cabd673ff6a2aa5ceb4338896181",
+    "relation_offset2_signed_projection_source_off_screen_copyback_passed": true,
+    "relation_offset2_signed_projection_source_off_screen_cleanup_passed": true,
+    "relation_offset2_signed_projection_source_off_screen_coordinates": {
+      "C_alive_offset2_signed": -2.759185791015625,
+      "C_dead_offset2_signed": -0.48431396484375,
+      "C_reset_double_flush_offset2_signed": 6.24835205078125,
+      "C_source_off_offset2_signed": -0.553924560546875,
+      "alive_minus_source_off": -2.20526123046875,
+      "dead_abs_to_alive_abs": 0.17552785550750447,
+      "dead_minus_source_off": 0.069610595703125,
+      "reset_double_flush_abs_to_alive_abs": 2.264563724243195,
+      "reset_minus_source_off": 6.802276611328125,
+      "source_off_abs_to_alive_abs": 0.20075652837534425
+    },
+    "relation_offset2_signed_projection_source_off_screen_interpretation": {
+      "alive_all_one_factor_strata_same_sign": true,
+      "alive_offset2_signed_nonzero": true,
+      "dead_preserves_at_least_25pct_alive": false,
+      "exploratory_only": true,
+      "offset2_signed_projection_source_off_screen_candidate": false,
+      "reset_double_flush_collapses_below_25pct_alive": false,
+      "small_wall_crossed": false,
+      "source_off_all_one_factor_strata_below_25pct_alive": false,
+      "source_off_collapses_below_25pct_alive": true
     }
   },
   "hypothesis_frontier": {
@@ -1101,7 +1144,7 @@
       "higher compatibility or obstruction surface"
     ],
     "leading_mechanism": "amplitude-dominant spatial carrier response: source action can write a persistent carrier amplitude/state, spatial boundary readout exposes it, and explicit reset can suppress it in some full-schedule experiments",
-    "strongest_candidate_coordinate": "none currently clean beyond the confirmed scalar/local differential baseline; loop-transport orientation also failed the source-off-first screen",
+    "strongest_candidate_coordinate": "none currently clean beyond confirmed scalar/local differential; offset-2 signed projection is source-off suppressed only while the source remains effectively alive/present",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
       "branch": "codex/audio-frequency-wave-substrate",
@@ -1135,9 +1178,10 @@
       "plain fixed-marginal AB-versus-BA order remains insufficient; composition-loop R0->R1 versus R1->R0 is now the leading exploratory candidate but neutral/random D amplitudes still require replay-exclusion hardening before promotion",
       "uniform adjacent R0_then_R1 versus R1_then_R0 composition after fixing live source prep; corrected phase package collapsed alive Psi to 0.004215 and source-off/gapped controls were larger than alive",
       "full-schedule source-off/reset crosscheck as a source-authored persistent boundary invariant; source-off D was 1.631x alive D and reset_double_flush failed all-strata kill with max matched-stratum ratio 0.505",
-      "loop-transport R0->R1 versus R1->R0 as a source-authored relation-code screen; alive Omega was -0.00310, source-off Omega was 2.451x alive, gapped Omega was 6.875x alive, and alive strata did not keep one sign"
+      "loop-transport R0->R1 versus R1->R0 as a source-authored relation-code screen; alive Omega was -0.00310, source-off Omega was 2.451x alive, gapped Omega was 6.875x alive, and alive strata did not keep one sign",
+      "signed offset-2 receiver projection as a persistent source-written boundary invariant; it is source-off suppressed in aggregate but dies with source death and is reset-amplified, indicating live source-presence coupling rather than durable carrier state"
     ],
-    "current_next_experiment": "stop using orientation differences whose alive Omega is small relative to source-off/gapped; next screen should change the receiver projection or introduce an explicit source-authored carrier-off differential, not another same-projection orientation label",
+    "current_next_experiment": "test whether the offset-2 signed projection can be converted from live source-presence coupling into durable carrier state by source-closure-preserving handoff/reuse or by reading immediately before and after controlled source death within matched strata; do not freeze as Small Wall evidence unless dead preservation returns while source-off remains killed",
     "current_blockers": [
       "carrier-off control remained 82.6% of primary magnitude in the exploratory transform-kill run",
       "carrier-off orientation explains 81.3% of raw relation orientation in the orientation-balance run",
@@ -1166,9 +1210,10 @@
       "replay-exclusion runner defect found: copied composition prep selector had only affected the synthetic/default path; the live child was still using base relation_spatial_prepare for non-source-off controls before the phase-correction package fixed it",
       "phase-correction discovery with live composition prep rejected the composition-loop route: adjacent Omega = -0.006573912488253036, balanced Omega = -0.01078925326143014, Psi_alive = 0.004215340773177104, source-off Psi ratio = 4.791530059904371, gapped Psi ratio = 2.3982813595647414, corrected strata same-sign false",
       "full-schedule source-off/reset crosscheck: alive D = 0.06744933436995737, dead D = 0.03804386776900461, source-off D = 0.11000768508560255 (1.631x alive), reset_double_flush D = 0.01306513756620565 (0.194x aggregate but 0.505 max stratum); candidate false",
-      "loop-transport source-off screen: Omega_alive = -0.0031006291981806877, Omega_source_off = 0.00760076452377792 (2.451x alive), Omega_gapped = -0.021316102750949625 (6.875x alive), alive one-factor strata same-sign false; candidate false"
+      "loop-transport source-off screen: Omega_alive = -0.0031006291981806877, Omega_source_off = 0.00760076452377792 (2.451x alive), Omega_gapped = -0.021316102750949625 (6.875x alive), alive one-factor strata same-sign false; candidate false",
+      "offset-2 signed receiver projection source-off screen: aggregate source-off collapsed to 0.201x alive, but source-dead also collapsed to 0.176x alive, reset double-flush amplified to 2.265x alive, and source-off one-factor strata failed the 0.25x screen; candidate false"
     ],
-    "active_frontier": "receiver-projection redesign search: existing same-projection spatial/loop orientation labels are dominated by no-prep and gapped geometry, while the scalar/local differential primitive remains confirmed"
+    "active_frontier": "live-source-coupling versus durable-carrier separation: signed receiver projection can make source-off collapse, but dead collapse shows it is not yet persistent storage"
   },
   "claim_state": {
     "scalar_q_readout_confirmed_prospectively": true,
@@ -1178,6 +1223,6 @@
     "catalytic_borrowing_established": false,
     "r2_restoration_established": false,
     "small_wall_crossed": false,
-    "current_ceiling": "exploratory loop-transport source-off screen reject; no new positive scientific claim beyond prior scalar/local differential results"
+    "current_ceiling": "exploratory offset-2 signed projection source-off screen reject; no new positive scientific claim beyond prior scalar/local differential results"
   }
 }
