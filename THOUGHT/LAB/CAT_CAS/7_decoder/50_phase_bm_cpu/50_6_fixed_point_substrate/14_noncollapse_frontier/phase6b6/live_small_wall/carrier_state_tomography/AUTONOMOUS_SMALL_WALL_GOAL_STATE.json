@@ -1,6 +1,13 @@
 {
   "attempt_counts": {
     "affinity_deadlock_discovery_attempts": 4,
+    "family10h_relation_balanced_phase_source_off_screen_v1_0": {
+      "interpretable_attempt": "attempt_1",
+      "pair_observations": 1572864,
+      "physical_transactions": 1,
+      "raw_records": 6144,
+      "source_death_receipts": 6144
+    },
     "family10h_relation_composition_loop_discovery_v1_0": {
       "pair_observations": 2097152,
       "physical_transactions": 1,
@@ -65,6 +72,7 @@
     "patched_full_local_paired_discovery_sweeps": 1,
     "prior_primary_minus_sham_official_attempts": 1,
     "prior_relation_sham_position_exploration_attempts": 1,
+    "relation_balanced_phase_source_off_screen_attempts": 1,
     "relation_fixed_marginal_order_discovery_attempts": 1,
     "relation_loop_transport_source_off_screen_discovery_attempts": 1,
     "relation_offset2_handoff_decay_discovery_attempts": 1,
@@ -140,13 +148,13 @@
     "small_wall_state_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/SMALL_WALL_STATE.md",
     "small_wall_state_sha256": "6fb37e6eb46603fc38b0c1feada533a22423ae4da29ab2b563ad498ccbb761f8"
   },
-  "checkpoint_head": "b1a6e0ef987bb06cef42da59ec1e39ab5e221379",
+  "checkpoint_head": "e7854d166e008cda6bdb1f6343ef722e05032cc0",
   "claim_state": {
     "catalytic_borrowing_established": false,
-    "current_ceiling": "exploratory prep-axis composition screen rejected; no new positive scientific claim beyond prior scalar/local differential results",
+    "current_ceiling": "exploratory balanced-phase source-off screen rejected; no new positive scientific claim beyond prior scalar/local differential results",
     "full_carrier_state_tomography_established": false,
     "full_tomography_established": false,
-    "latest_exploratory_result": "EXPLORATORY_PREP_AXIS_COMPOSITION_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "latest_exploratory_result": "EXPLORATORY_BALANCED_PHASE_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
     "latest_positive_claim_ceiling": "PUBLIC_POST_SOURCE_LOCAL_PRIMARY_MINUS_SHAM_DIFFERENTIAL_CONFIRMED",
     "local_paired_differential_confirmed_prospectively": true,
     "physical_relational_memory_established": false,
@@ -174,22 +182,22 @@
     ]
   },
   "current_package": {
-    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_prep_axis_composition_screen_v1_0/attempt_1",
+    "attempt_output_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/runs/family10h_relation_balanced_phase_source_off_screen_v1_0/attempt_1",
     "attempt_output_path_fresh": true,
-    "package_decision": "EXPLORATORY_PREP_AXIS_COMPOSITION_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
-    "package_id": "family10h_relation_prep_axis_composition_screen_v1",
-    "package_manifest_sha256": "8b7fbf23ed1d0470edfbeab2aa072d8b28b086c25977d36cce51c54b0f23a69b",
-    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_prep_axis_composition_screen_v1",
-    "schedule_manifest_sha256": "d9fa9ddad37221bc4ce7877ac9423b5fce4ee1de777de5ad1f0de3a9b19319c3",
-    "source_authority_commit": "b1a6e0ef987bb06cef42da59ec1e39ab5e221379",
+    "package_decision": "EXPLORATORY_BALANCED_PHASE_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "package_id": "family10h_relation_balanced_phase_source_off_screen_v1",
+    "package_manifest_sha256": "1708674590c5796e663bf0f758cc359b916a413c5be1fb3d1758d1edbc67dc40",
+    "package_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_balanced_phase_source_off_screen_v1",
+    "schedule_manifest_sha256": "f9cf4a662f58701058bd3dc72c73f90ca55eb40d0fd320917d108b2050725c8d",
+    "source_authority_commit": "e7854d166e008cda6bdb1f6343ef722e05032cc0",
     "source_freeze_commit": null,
     "source_schedule_package": "family10h_relation_true_composition_replay_screen_v1",
     "threshold_contract_sha256": null,
-    "transaction_run_id": "family10h_relation_prep_axis_composition_screen_v1_0"
+    "transaction_run_id": "family10h_relation_balanced_phase_source_off_screen_v1_0"
   },
   "hypothesis_frontier": {
-    "active_frontier": "balanced-alt phase A versus B is now the strongest repeated composition-sensitive response; it must be tested directly with source-off and dead-source variants instead of treated only as a collapse control",
-    "active_wall": "balanced phase source-authority test below full Small Wall crossing",
+    "active_frontier": "balanced-alt phase is not a clean source-off-killed boundary invariant; continue with fixed-marginal composition/holonomy probes that preserve scalar marginals while eliminating balanced-phase replay artifacts",
+    "active_wall": "source-authored composition-sensitive boundary invariant below full Small Wall crossing",
     "audio_branch_sidecar_scout": {
       "agent": "Harvey",
       "branch": "codex/audio-frequency-wave-substrate",
@@ -197,8 +205,9 @@
       "smallest_cpu_pattern": "encode relation as AB versus BA under identical marginals, read a held-out paired q-vector after source closure, run exact reset, then reuse the actually restored carrier with opposite relation plus no-reset/wrong-reset/geometry-null controls",
       "transferable_idea": "fixed-marginal operation-relation mutation plus active inverse restoration/reuse, not audio evidence or thresholds"
     },
-    "current_best_negative_result": "EXPLORATORY_PREP_AXIS_COMPOSITION_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "current_best_negative_result": "EXPLORATORY_BALANCED_PHASE_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
     "current_blockers": [
+      "balanced-phase source-off screen rejected: Omega_alive = 0.0118403493, Omega_source_off = -0.0116575811 (0.985x alive), Omega_dead = -0.0314318648 (2.655x alive); alive one-factor strata split sign and source-off one-factor ratios reached 3.861x, so balanced phase is not source-off killed.",
       "prep-axis composition screen did not replicate the prior aggregate: source-off remained 56.0% of adjacent, gapped 32.6%, balanced 108.4%, and adjacent one-factor strata were not all same-sign",
       "balanced-alt phase remained the dominant replay/control response in both true-composition and prep-axis screens, so the next test must ask whether balanced phase itself is source-off killed and dead-source preserved",
       "true source-written composition fixed the prior live-prep bug and source-off collapsed to 15.6% of adjacent magnitude, but gapped replay preserved 87.2% and balanced-alt preserved 137.8% of adjacent magnitude",
@@ -234,7 +243,7 @@
       "offset-2 signed receiver projection source-off screen: aggregate source-off collapsed to 0.201x alive, but source-dead also collapsed to 0.176x alive, reset double-flush amplified to 2.265x alive, and source-off one-factor strata failed the 0.25x screen; candidate false",
       "offset-2 handoff/decay run rejected the static signed receiver projection: no-prep source-off amplified to 4.650x alive and all post-source-exit variants failed one-factor same-sign stability"
     ],
-    "current_next_experiment": "build a balanced-alt phase source-off/dead screen with phase-A and phase-B primary/sham variants, plus source-off phase-A/B and dead phase-A/B variants, then adjudicate whether the balanced phase coordinate is source-off killed and source-dead preserved under the same fixed marginals",
+    "current_next_experiment": "probe a tighter fixed-marginal compositional/holonomy coordinate with balanced-alt retained as an exclusion diagnostic, and require source-off collapse plus dead-source persistence before freezing any prospective law",
     "goal_realignment": {
       "active_frontier": "fixed-marginal temporal/order-coded relation: source AB versus BA with identical spatial, work, timing, and histogram marginals",
       "confirmed_calibration": "local primary-minus-sham paired differential is prospectively confirmed at its existing claim ceiling",
@@ -331,7 +340,7 @@
       "relation-valued transport",
       "higher compatibility or obstruction surface"
     ],
-    "strongest_candidate_coordinate": "none currently clean beyond confirmed scalar/local differential; composition-loop remains the best exploratory lead, while offset-2 signed projection is rejected because true no-prep source-off was 4.65x alive and alive strata split sign"
+    "strongest_candidate_coordinate": "none currently clean beyond confirmed scalar/local differential; adjacent composition/source-off collapse remains a lead, but replay-exclusion and balanced-phase source-off screens rejected promotion"
   },
   "latest_retained_evidence": {
     "affinity_fix_discovery_one_factor_strata_pass": true,
@@ -357,6 +366,43 @@
     "prior_scalar_q_readout_claim": "PUBLIC_POST_SOURCE_SCALAR_CARRIER_Q_READOUT_CONFIRMED",
     "prior_scalar_q_readout_class": "FAMILY10H_PAIRED_DIRTY_PROBE_Q_READOUT_CONFIRMED_PROSPECTIVE",
     "prior_second_operator_dimension_class": "FAMILY10H_SECOND_OPERATOR_DIMENSION_UNRESOLVED_RETROSPECTIVE",
+    "relation_balanced_phase_source_off_screen_analysis_sha256": "8a087f4f8247eec697589db4d0632b9826d417b77df1b8753c5a45403a85e35b",
+    "relation_balanced_phase_source_off_screen_archive_sha256": "7b63330ef4cfb63fc1590bfe9e010c041c64ea25cb5112898bab8ce79777d777",
+    "relation_balanced_phase_source_off_screen_archive_size": 34225734,
+    "relation_balanced_phase_source_off_screen_cleanup_passed": true,
+    "relation_balanced_phase_source_off_screen_coordinates": {
+      "K_prep_axis_balanced_phase_alive_a_minus_b": 0.005530608925061964,
+      "K_prep_axis_balanced_phase_dead_a_minus_b": 0.009529438985697719,
+      "K_prep_axis_balanced_phase_source_off_a_minus_b": -0.0037382188470209687,
+      "Omega_balanced_phase_alive_a_minus_b": 0.011840349311973433,
+      "Omega_balanced_phase_dead_a_minus_b": -0.0314318647531458,
+      "Omega_balanced_phase_source_off_a_minus_b": -0.01165758113957141,
+      "dead_abs_to_alive_abs": 2.654639987805144,
+      "source_off_abs_to_alive_abs": 0.9845639543575627
+    },
+    "relation_balanced_phase_source_off_screen_copyback_passed": true,
+    "relation_balanced_phase_source_off_screen_interpretation": {
+      "aggregate_dead_preserves_at_least_25pct": true,
+      "aggregate_source_off_collapses_below_25pct": false,
+      "all_one_factor_alive_strata_same_sign": false,
+      "all_one_factor_dead_preserves_25pct": true,
+      "all_one_factor_source_off_below_25pct": false,
+      "balanced_phase_coordinate_nonzero": true,
+      "balanced_phase_source_off_dead_candidate": false,
+      "exploratory_only": true,
+      "max_one_factor_source_off_ratio": 3.8605111619751975,
+      "min_one_factor_dead_ratio": 0.605143685581922,
+      "small_wall_crossed": false
+    },
+    "relation_balanced_phase_source_off_screen_pair_observation_count": 1572864,
+    "relation_balanced_phase_source_off_screen_pmu_helper_sha256": "6ca8b36b21170603b1dc1841b631f4495264a889fba1180482a69ae3252a7ece",
+    "relation_balanced_phase_source_off_screen_raw_record_count": 6144,
+    "relation_balanced_phase_source_off_screen_result": "EXPLORATORY_BALANCED_PHASE_SOURCE_OFF_SCREEN_REJECTED_NO_SCIENTIFIC_CLAIM",
+    "relation_balanced_phase_source_off_screen_runtime_sha256": "b8eb0e1df1dd4af73214e21c3d36be322f723b884dada426d4d392db76ac84b1",
+    "relation_balanced_phase_source_off_screen_schedule_manifest_sha256": "f9cf4a662f58701058bd3dc72c73f90ca55eb40d0fd320917d108b2050725c8d",
+    "relation_balanced_phase_source_off_screen_source_death_receipt_count": 6144,
+    "relation_balanced_phase_source_off_screen_source_package_sha256": "1708674590c5796e663bf0f758cc359b916a413c5be1fb3d1758d1edbc67dc40",
+    "relation_balanced_phase_source_off_screen_source_package_size": 778479,
     "relation_composition_loop_analysis_sha256": "0f17b1d691427cd43684d2ad463591f81e7652c329d625cad3862e1f8b7d2df5",
     "relation_composition_loop_archive_sha256": "e842faf701cb3c8837a1777ace991bda145155f65436e77d8df83968988ca494",
     "relation_composition_loop_archive_size": 45149056,
@@ -1350,7 +1396,7 @@
     "relation_true_composition_replay_screen_source_death_receipt_count": 10240,
     "relation_true_composition_replay_screen_source_package_sha256": "c68436adadecb4dcadd5873eeb7c5b753c4a550b4687c802e36b539e647f412c"
   },
-  "origin_head": "b1a6e0ef987bb06cef42da59ec1e39ab5e221379",
+  "origin_head": "e7854d166e008cda6bdb1f6343ef722e05032cc0",
   "repository": "D:\\CCC 2.0\\AI\\agent-governance-system-family10h",
   "runtime_authority": {
     "RELATION_GRAMMAR.json": "b07f83ef3026098d70b24a1407ed8c311efeef75c7e7eb36797a78af4fb3464f",
@@ -1376,5 +1422,5 @@
     "target_model": 10,
     "target_vendor": "AuthenticAMD"
   },
-  "updated_at": "2026-07-24T03:13:00.798104+00:00"
+  "updated_at": "2026-07-24T03:29:47.880137+00:00"
 }

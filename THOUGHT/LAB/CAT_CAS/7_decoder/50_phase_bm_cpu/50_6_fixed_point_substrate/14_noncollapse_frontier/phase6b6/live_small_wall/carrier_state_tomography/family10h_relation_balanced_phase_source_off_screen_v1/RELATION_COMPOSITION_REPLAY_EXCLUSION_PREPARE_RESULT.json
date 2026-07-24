@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-07-24T03:25:36.825068+00:00",
+  "passed": true,
+  "pmu_helper_sha256": "6ca8b36b21170603b1dc1841b631f4495264a889fba1180482a69ae3252a7ece",
+  "run_id": "family10h_relation_balanced_phase_source_off_screen_v1_0",
+  "runtime_sha256": "b8eb0e1df1dd4af73214e21c3d36be322f723b884dada426d4d392db76ac84b1",
+  "schedule_manifest_sha256": "f9cf4a662f58701058bd3dc72c73f90ca55eb40d0fd320917d108b2050725c8d",
+  "schema": "FAMILY10H_RELATION_COMPOSITION_REPLAY_EXCLUSION_PREPARE_V1",
+  "small_wall_crossed": false
+}
