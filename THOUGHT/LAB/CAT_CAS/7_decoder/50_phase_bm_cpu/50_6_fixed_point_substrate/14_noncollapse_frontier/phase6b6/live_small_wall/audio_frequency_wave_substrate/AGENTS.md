@@ -44,18 +44,39 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED
+ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED
 ```
 
 Claim ceiling:
 
 ```text
-BOUNDED_SOFTWARE_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_ONLY
+SOFTWARE_PUBLIC_SERIES_PARALLEL_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY
 ```
 
-The result establishes compact `.holo` path aggregation, a bounded native torus operator, program-derived inverse execution, restoration, reuse, and leverage over explicit path expansion.
+The strongest current bounded architecture is:
 
-It does not establish advantage over the equivalent compact classical dynamic program, official external acceptance, cross-domain transfer, fixed-size unbounded information, or physical phase computation.
+```text
+public typed series-parallel relational geometry
+-> topology-only compilation
+-> native phase composition and intersection
+-> unresolved resident relation messages
+-> internal-port closure
+-> surviving two-port boundary relation
+-> actual reversal
+-> restoration
+-> reuse
+```
+
+The phase-circuit substrate is an established development foundation. A
+bounded holographic relational substrate is established for public
+two-terminal series-parallel graphs. Exact binary relation composition and
+intersection, bounded internal-port closure, actual restoration, and
+restored-carrier reuse are established without intermediate coefficient
+decode or tuple, witness, and truth-table slots.
+
+A general holographic relational computer, arbitrary graph closure, C5
+advantage, physical phase computation, and unlimited catalytic phase
+computation are not established.
 
 It is nonterminal.
 
@@ -130,28 +151,37 @@ Verification follows a substantive result. One focused independent review is nor
 
 ## 6. Current Frontier
 
-Current candidate frontiers include:
+Selected frontier:
 
 ```text
-open many-to-many phase relations as first-class native objects
-native composition through typed shared interfaces
-unresolved internal ports and relational trace
-idempotent existential boundary projection
-reversible relational closure with restoration and reuse
+RECURSIVE_TYPED_RELATIONAL_PROGRAMS_OVER_PUBLIC_GRAPH_MODULE_INTERFACES
 ```
 
-The first calibration should compose two compatible non-functional local
-relations through one shared internal port, close it, expose the exact
-remaining boundary relation, reverse the real forward process, and reuse the
-restored carrier. It must preserve the relation as one unresolved process
-object rather than execute tuples or internal assignments separately.
+The next crossing is:
 
-Candidate mathematical languages are evidence prompts, not mandates:
-relation algebra, Boolean-enriched composition, typed process diagrams,
-Holant signatures, holographic basis changes, relation-valued phase
-transport, groupoid/category transport, lattice-valued relations,
-topological sectors, idempotent nonlinear phase dynamics, and reversible
-dilation.
+```text
+bounded relational graph engine
+-> reusable typed relational modules
+-> recursive holographic composition
+-> wider unresolved interfaces
+-> compact general relational geometry
+```
+
+Investigate, without imposing a rigid sequence:
+
+```text
+reusable relational modules with typed open interfaces
+module outputs remaining phase-resident inputs to larger modules
+recursive composition without host expansion or decode
+interfaces wider than two Boolean ports
+compact representation across wider graph separators
+elimination-order discovery without compiler-side solving
+general relation signatures without truth-table materialization
+resource growth versus separator width, message arity, and topology
+```
+
+Another handcrafted graph family is not meaningful progress if intermediate
+relation width, carrier state, or provenance grows exponentially.
 
 ## 7. Native No-Smuggle Law
 
@@ -266,6 +296,7 @@ When capability changes, update:
 ```text
 AUDIO_SIDE_QUEST_ROADMAP.md
 AUTONOMOUS_LANE_STATE.json
+AGENTS.md when current milestone or frontier authority changes
 ```
 
 Record the result, claim ceiling, C-rung position, best compact baseline, highest-leverage blocker, selected next work, and `terminal: false`.
