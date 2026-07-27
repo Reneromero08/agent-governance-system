@@ -1,18 +1,35 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `8.4`
+**Roadmap version:** `8.5`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through parent commit:** `eac39da1`
-**Current highest milestone:** `BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE`
-**Current claim ceiling:** `BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS2_3_4_5_8_NEIGHBOR_AND_OR_FAMILY_SCOPED_QUOTIENT_REFERENCE_ONLY`
+**Current highest milestone:** `TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING_REDUCES_RETAINED_PHASE_HISTORY`
+**Current claim ceiling:** `BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS4_5_8_HOMOGENEOUS_NEIGHBOR_AND_OR_PHASE_PEBBLING_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
+
+The hierarchy is:
+
+```text
+PRIMARY
+    REPLACE_THE_BIT_WITH_PI
+    genuinely phase-native computation
+
+INTEGRATED MACHINE LAYER
+    CATVM custody, isolation, restoration, and reuse
+
+INTEGRATED DIAGNOSTIC
+    matched Small Wall and best compact-classical comparisons
+```
+
+CATVM and Small Wall work are retained only when they strengthen or diagnose
+the phase computer. They do not replace the phase-native mission.
 
 **Durable main-goal reminder:** The affine GF(2) lane is a tractable
 machine-law calibration, not the scientific destination. Finish the current
@@ -133,6 +150,8 @@ FIXED_SCHEMA_QANF_COMPACT_BASELINE_OBSTRUCTION_CONFIRMED_UNDER_MATCHED_CATVM_BOU
 BOUNDED_WIDTH_PARAMETRIC_BOOLEAN_TT_MANY_TO_MANY_RELATION_COMPOSITION_WITH_PRODUCT_RANK_NATIVE_PHASE_CLOSURE_AND_RESIDENT_INTERMEDIATE
 CATVM_ENFORCED_WIDTH_PARAMETRIC_BOOLEAN_TT_RESIDENT_H_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
 BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE
+GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD_CONFIRMS_COMPACT_RECURRENCE_AND_RETAINED_HISTORY_OBSTRUCTION
+TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING_REDUCES_RETAINED_PHASE_HISTORY
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -502,7 +521,11 @@ GENERAL_RETAIN_ALL_AFFINE_DAG_CUSTODY_COMPILATION     ESTABLISHED_EXACT_15_NODE
 -> CATVM_RANK2_SHARED_DAG_CUSTODY                     ESTABLISHED
 -> FIXED_SCHEMA_QUADRATIC_ANF_COMPOSITION             ESTABLISHED
 -> CATVM_QUADRATIC_ANF_HIDDEN_INTERMEDIATE_CUSTODY    ESTABLISHED
--> MATCHED_FIXED_SCHEMA_SMALL_WALL_OBSTRUCTION_TRIAD  SELECTED
+-> MATCHED_FIXED_SCHEMA_SMALL_WALL_OBSTRUCTION_TRIAD  ESTABLISHED
+-> BOOLEAN_TT_SUFFIX_QUOTIENT                         ESTABLISHED
+-> GROWING_BOOLEAN_TT_SMALL_WALL_TRIAD                ESTABLISHED_OBSTRUCTION
+-> REVERSIBLE_QUOTIENT_STAGE_PEBBLING                 ESTABLISHED_HISTORY_REPAIR
+-> NON_BOOLEAN_PHASE_RELATION_SIGNATURE               SELECTED
 ```
 
 The next crossing is not:
@@ -829,12 +852,21 @@ materializes raw product cores, while the strongest fixture-specialized
 baseline directly emits quotient cores in `O(final cells)`. The accepted
 phase transaction also retains all quotient stages for actual inversion.
 
-The selected successor is therefore the matched growing-instance compact
-baseline, snapshot-sham, and in-place CATVM Small Wall triad. It must expose
-the direct-generation and inverse-history resource laws using the same public
-instances, final-boundary receipt, restoration, and reuse semantics. After
-that result, remove the demonstrated obstruction or change the problem
-family; do not continue by adding quotient depths.
+The matched growing-instance compact baseline, snapshot sham, and in-place
+CATVM triad now confirms that the public threshold generator is the primary
+route obstruction and retained phase history is a secondary machine defect.
+Topology-derived reversible quotient-stage pebbling repairs the latter:
+width-sixteen/depth-eight carrier allocation falls from 17,288 to 12,152
+phase cells while counted phase updates rise from 34,576 to 46,896.
+
+The homogeneous Boolean suffix family is therefore exhausted as an advantage
+route. The selected successor is the smallest exact non-Boolean phase
+relation signature whose composition preserves unresolved interference
+information not immediately homomorphic to the public Boolean recurrence or
+the established GF(2) affine calibration. It must preserve boundary-only
+projection, actual inverse restoration, restored-carrier reuse, and
+comparison against the best matched compact classical signature. Do not add
+more homogeneous quotient depths or benchmark variants.
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
 per-instance native-operation records are established. Native contraction

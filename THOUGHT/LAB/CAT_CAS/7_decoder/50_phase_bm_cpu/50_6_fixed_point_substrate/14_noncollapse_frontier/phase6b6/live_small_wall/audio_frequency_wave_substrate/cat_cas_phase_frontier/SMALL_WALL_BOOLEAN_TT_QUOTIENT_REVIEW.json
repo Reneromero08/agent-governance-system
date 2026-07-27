@@ -1,0 +1,25 @@
+{
+  "review_id": "CAT_CAS_BOOLEAN_TT_QUOTIENT_TRIAD_PEBBLE_FOCUSED_REVIEW_2026_07_27",
+  "review_scope": "GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD",
+  "result": "PASS",
+  "evidence_directory": "/tmp/boolean-tt-small-wall.TNqwzG/evidence",
+  "claim": "GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD_CONFIRMS_COMPACT_RECURRENCE_AND_RETAINED_HISTORY_OBSTRUCTION",
+  "claim_ceiling": "BOUNDED_LINUX_WARM_WIDTHS4_5_8_12_16_DEPTHS4_5_8_HOMOGENEOUS_NEIGHBOR_AND_OR_REFERENCE_ONLY",
+  "findings_closed": [
+    "CARRIER_SEAL_CPU_NOW_EXPOSED_SEPARATELY_FROM_WARM_TRANSACTION_CPU"
+  ],
+  "verified": {
+    "direct_baseline_is_compact_public_threshold_quotient_generator": true,
+    "matched_receipts_and_protocol_traffic": true,
+    "independent_raw_product_reference_parity": true,
+    "catvm_boundary_and_no_smuggle": true,
+    "actual_inverse_restoration_and_reuse": true,
+    "carrier_seal_cpu_positive_in_all_30_measured_records": true,
+    "source_hashes_match_fresh_evidence": true
+  },
+  "adjudication": "COMPACT_PUBLIC_RECURRENCE_IS_PRIMARY_RESOURCE_OBSTRUCTION_RETAINED_HISTORY_IS_SECONDARY_PHASE_MACHINE_DEFECT",
+  "remaining_findings": [],
+  "computational_advantage": false,
+  "small_wall_crossed": false,
+  "terminal": false
+}

@@ -2,12 +2,26 @@
   "schema_version": "1.1.0",
   "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
   "state_date": "2026-07-27",
-  "reconciled_through_milestone_commit": "eac39da1",
+  "reconciled_through_milestone_commit": "46dda91f",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
   "standing_mission": "CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1",
   "supporting_mission": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
   "prime_directive": "REPLACE_THE_BIT_WITH_PI",
   "durable_main_goal_reminder": {
+    "primary": [
+      "REPLACE_THE_BIT_WITH_PI",
+      "GENUINELY_PHASE_NATIVE_COMPUTATION"
+    ],
+    "integrated_machine_layer": [
+      "CATVM_CUSTODY",
+      "CATVM_ISOLATION",
+      "ACTUAL_INVERSE_RESTORATION",
+      "ACTUAL_RESTORED_CARRIER_REUSE"
+    ],
+    "integrated_diagnostic": [
+      "MATCHED_SMALL_WALL_EXPERIMENTS",
+      "BEST_COMPACT_CLASSICAL_COMPARISONS"
+    ],
     "affine_lane_role": "TRACTABLE_MACHINE_LAW_CALIBRATION_NOT_FINAL_DESTINATION",
     "primary_mission": [
       "COMPACT_UNRESOLVED_RELATIONAL_STATE",
@@ -34,8 +48,8 @@
   },
   "lane_closure_authority": "USER_ONLY",
   "terminal": false,
-  "current_highest_milestone": "BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE",
-  "current_claim_ceiling": "BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS2_3_4_5_8_NEIGHBOR_AND_OR_FAMILY_SCOPED_QUOTIENT_REFERENCE_ONLY",
+  "current_highest_milestone": "TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING_REDUCES_RETAINED_PHASE_HISTORY",
+  "current_claim_ceiling": "BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS4_5_8_HOMOGENEOUS_NEIGHBOR_AND_OR_PHASE_PEBBLING_REFERENCE_ONLY",
   "architectural_alignment": {
     "current_phase_circuit_substrate": "ESTABLISHED_DEVELOPMENT_FOUNDATION",
     "bounded_holographic_relational_substrate": "ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_EXACT_15_NODE_FOUR_OWNER_AFFINE_DAG",
@@ -71,8 +85,10 @@
     "width_parametric_boolean_tt_non_affine_composition": "ESTABLISHED_WIDTHS4_5_8_12_16_RANK2_TO_RANK4_TO_RANK8",
     "catvm_width_parametric_boolean_tt_enforcement": "ESTABLISHED_ONE_SERVICE_ONE_CARRIER_PER_WIDTH_34_ATOMIC_TRANSACTIONS",
     "boolean_tt_suffix_bisimulation_quotient": "ESTABLISHED_HOMOGENEOUS_NEIGHBOR_AND_OR_DEPTHS2_3_4_5_8_LINEAR_RANK",
+    "boolean_tt_suffix_quotient_small_wall_triad": "ESTABLISHED_COMPACT_PUBLIC_RECURRENCE_PRIMARY_OBSTRUCTION_RETAINED_HISTORY_SECONDARY_DEFECT",
+    "boolean_tt_suffix_quotient_reversible_pebbling": "ESTABLISHED_WIDTH16_DEPTH8_17288_TO_12152_CELLS_AT_1_356_PHASE_UPDATE_MULTIPLIER",
     "boolean_tt_quotient_fixed_rank_unbounded_depth_closure": false,
-    "selected_next_experiment": "GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD"
+    "selected_next_experiment": "NON_BOOLEAN_INTERFERENCE_BEARING_PHASE_RELATION_SIGNATURE"
   },
   "strongest_bounded_architecture": [
     "PUBLIC_TYPED_SERIES_PARALLEL_RELATIONAL_GEOMETRY",
@@ -1323,6 +1339,23 @@
     "boolean_tt_suffix_quotient_arbitrary_mixed_layers": false,
     "boolean_tt_suffix_quotient_computational_advantage": false,
     "boolean_tt_suffix_quotient_small_wall_crossing": false,
+    "boolean_tt_suffix_quotient_small_wall_triad_phase": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS_STRICT_CEILING",
+    "boolean_tt_suffix_quotient_small_wall_triad_claim": "GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD_CONFIRMS_COMPACT_RECURRENCE_AND_RETAINED_HISTORY_OBSTRUCTION",
+    "boolean_tt_suffix_quotient_small_wall_triad_adjudication": "COMPACT_PUBLIC_RECURRENCE_IS_PRIMARY_RESOURCE_OBSTRUCTION_RETAINED_HISTORY_IS_SECONDARY_PHASE_MACHINE_DEFECT",
+    "boolean_tt_suffix_quotient_small_wall_triad_carrier_seal_cpu_exposed": true,
+    "boolean_tt_suffix_quotient_pebbled_phase": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS_STRICT_CEILING",
+    "boolean_tt_suffix_quotient_pebbled_claim": "TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING_REDUCES_RETAINED_PHASE_HISTORY",
+    "boolean_tt_suffix_quotient_pebbled_width16_depth8_slots": 3,
+    "boolean_tt_suffix_quotient_pebbled_width16_depth8_forward_moves": 13,
+    "boolean_tt_suffix_quotient_pebbled_width16_depth8_carrier_cells": 12152,
+    "boolean_tt_suffix_quotient_pebbled_width16_depth8_reduction_percent": 29.7084683017,
+    "boolean_tt_suffix_quotient_pebbled_width16_depth8_phase_update_multiplier": 1.35631652013,
+    "boolean_tt_suffix_quotient_pebbled_wrong_missing_reordered_inverse_controls": "PASS",
+    "boolean_tt_suffix_quotient_pebbled_dirty_slot_generation_and_schedule_tamper_controls": "PASS",
+    "boolean_tt_suffix_quotient_pebbled_actual_inverse_restoration": true,
+    "boolean_tt_suffix_quotient_pebbled_actual_restored_carrier_reuse": true,
+    "boolean_tt_suffix_quotient_pebbled_fixed_rank_unbounded_depth_closure": false,
+    "boolean_tt_suffix_quotient_pebbled_distinct_phase_resource": false,
     "boolean_tt_computational_advantage": false,
     "boolean_tt_small_wall_crossing": false,
     "algebraic_general_affine_equation_elimination": true,
@@ -1330,7 +1363,7 @@
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
     "decoded_branch_feedback": false,
     "direct_metal_target": "catcas",
-    "best_matched_compact_baseline": "DIRECT_PUBLIC_NEIGHBOR_AND_CUBED_RANK8_CORE_GENERATOR_O_N8",
+    "best_matched_compact_baseline": "DIRECT_PUBLIC_SUFFIX_THRESHOLD_QUOTIENT_GENERATOR_O_FINAL_CELLS",
     "best_phase_forward_over_compact_ratio": "1.66_TO_1.69_TIMES_SLOWER",
     "best_phase_full_lifecycle_over_compact_ratio": "3.34_TO_3.37_TIMES_SLOWER",
     "c5_advantage": false,
@@ -1376,7 +1409,9 @@
     "FIXED_SCHEMA_QANF_COMPACT_BASELINE_OBSTRUCTION_CONFIRMED_UNDER_MATCHED_CATVM_BOUNDARY",
     "BOUNDED_WIDTH_PARAMETRIC_BOOLEAN_TT_MANY_TO_MANY_RELATION_COMPOSITION_WITH_PRODUCT_RANK_NATIVE_PHASE_CLOSURE_AND_RESIDENT_INTERMEDIATE",
     "CATVM_ENFORCED_WIDTH_PARAMETRIC_BOOLEAN_TT_RESIDENT_H_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
-    "BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE"
+    "BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE",
+    "GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD_CONFIRMS_COMPACT_RECURRENCE_AND_RETAINED_HISTORY_OBSTRUCTION",
+    "TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING_REDUCES_RETAINED_PHASE_HISTORY"
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
@@ -1390,9 +1425,9 @@
     "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
   },
   "active_frontier_candidates": [
-    "GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD",
-    "AUTOMATIC_REVERSIBLE_REMATERIALIZATION_FOR_QUOTIENT_CHAINS_IF_HISTORY_IS_CONFIRMED_BLOCKER",
-    "NON_FAMILY_SPECIFIC_BOOLEAN_TT_QUOTIENT_OR_SIGNATURE_IF_DIRECT_GENERATION_IS_CONFIRMED_BLOCKER",
+    "NON_BOOLEAN_INTERFERENCE_BEARING_PHASE_RELATION_SIGNATURE",
+    "BROADER_NON_AFFINE_PHASE_COMPOSITION_ALGEBRA",
+    "FIXED_RANK_OR_COMPACT_CLOSURE_WITHOUT_BOOLEAN_RECURRENCE",
     "COMPACT_REPRESENTATION_ACROSS_WIDER_GRAPH_SEPARATORS",
     "NATIVE_CONTRACTION_WITHOUT_2_TO_2W_MESSAGE_MATERIALIZATION",
     "FACTOR_STRUCTURE_PRESERVING_CLOSURE",
@@ -1431,7 +1466,10 @@
     "FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_PHASE_COMPOSITION",
     "CATVM_ENFORCED_QUADRATIC_ANF_HIDDEN_INTERMEDIATE_COMPOSITION",
     "MATCHED_FIXED_SCHEMA_SMALL_WALL_OBSTRUCTION_TRIAD",
-    "COMPACT_GENERAL_RELATIONAL_GEOMETRY"
+    "COMPACT_GENERAL_RELATIONAL_GEOMETRY",
+    "GROWING_BOOLEAN_TT_SUFFIX_QUOTIENT_TRIAD_OBSTRUCTION_ESTABLISHED",
+    "TOPOLOGY_DERIVED_REVERSIBLE_QUOTIENT_STAGE_PEBBLING_ESTABLISHED",
+    "NON_BOOLEAN_INTERFERENCE_BEARING_PHASE_RELATION_SIGNATURE"
   ],
   "frontier_warning": "ANOTHER_HANDCRAFTED_GRAPH_FAMILY_IS_INSUFFICIENT_IF_INTERMEDIATE_RELATION_WIDTH_CARRIER_STATE_OR_PROVENANCE_GROWS_EXPONENTIALLY",
   "agent_policy": {

@@ -846,6 +846,10 @@ static uint64_t qtt_rank_plan_hash(
     return hash;
 }
 
+#ifdef QTT_EMBEDDED_MAIN
+#define main QTT_EMBEDDED_MAIN
+#endif
+
 int main(int argc, char **argv) {
     if (argc == 4 && strcmp(argv[1], "--project-intermediate") == 0) {
         (void)qtt_parse_canonical(
@@ -1047,3 +1051,7 @@ int main(int argc, char **argv) {
     qtt_free_projection(&snapshot.projection);
     return 0;
 }
+
+#ifdef QTT_EMBEDDED_MAIN
+#undef main
+#endif

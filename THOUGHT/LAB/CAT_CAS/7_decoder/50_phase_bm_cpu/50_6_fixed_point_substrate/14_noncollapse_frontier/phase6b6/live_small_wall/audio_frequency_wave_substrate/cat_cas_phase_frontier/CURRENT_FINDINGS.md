@@ -3326,3 +3326,131 @@ follows. The selected successor is the matched growing-instance compact
 baseline, snapshot-sham, and in-place CATVM triad. Its purpose is to expose
 whether direct quotient generation and retained inverse history are the next
 machine-law obstruction, not to enlarge the same family with more depths.
+
+## Growing matched triad identifies the compact recurrence obstruction
+
+The selected triad is now complete for `(4,4)`, `(5,5)`, `(8,8)`,
+`(12,8)`, and `(16,8)`. Three separately linked persistent services receive
+the same public width, depth, homogeneous AND/OR schedule, final receipt, and
+protocol traffic:
+
+```text
+direct baseline   public threshold-quotient generator, O(final cells)
+snapshot sham     actual phase forward path, then working-state reload
+in-place CATVM    actual phase forward path, actual inverse, restored reuse
+```
+
+The direct service contains no phase engine, carrier, cache, answer table, or
+raw product. The phase services contain no direct-generator fallback, and the
+controller contains neither computation engine nor expected receipt. The
+independent verifier still materializes raw product TT cores, but only outside
+the timed arms.
+
+At width sixteen/depth eight, every arm returns the same AND receipt
+`4da4cbe210c58b26` and OR receipt `1582e559b5414ed6` after projecting all
+3,548 final quotient cells. The retain-all phase carrier contains 17,288
+logical cells: 13,740 retained stages, including 10,192 predecessor-history
+cells, plus the 3,548-cell boundary. Live carrier, sealed verification state,
+and per-transaction comparison snapshot each occupy 553,216 bytes. Snapshot
+reload copies 276,608 working bytes per transaction.
+
+Across two observations per arm after 32 warm transactions, the bounded
+width-sixteen service-CPU means were:
+
+```text
+direct baseline                      3,788,813 ns
+snapshot phase                     506,511,099 ns   133.686x baseline
+in-place phase                     962,470,024 ns   254.029x baseline
+```
+
+These warm Linux software timings are descriptive, not a general performance
+law. The stronger adjudication is structural: homogeneous neighbor-AND/OR
+quotient cores have a public threshold recurrence that emits each final cell
+directly. The current Boolean root-locking law therefore has no useful phase
+resource distinct from the best matched compact classical representation.
+Avoidance of the exponentially large raw-product verifier is not a Small
+Wall crossing.
+
+Projection denial, null-carrier request rejection, byte-identical arm
+traffic, snapshot generation zero, actual in-place restoration/reuse,
+analyzers, ASan/UBSan, and post-custody no-smuggle tracing pass. Carrier
+creation CPU is exposed separately from warm transaction CPU; at width
+sixteen the sampled baseline, snapshot, and in-place seal costs were 2,484,
+936,436, and 898,906 ns. Evidence
+`/tmp/boolean-tt-small-wall.TNqwzG/evidence` establishes:
+
+```text
+GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD_CONFIRMS_COMPACT_RECURRENCE_AND_RETAINED_HISTORY_OBSTRUCTION
+```
+
+within:
+
+```text
+BOUNDED_LINUX_WARM_WIDTHS4_5_8_12_16_DEPTHS4_5_8_HOMOGENEOUS_NEIGHBOR_AND_OR_REFERENCE_ONLY
+```
+
+The compact recurrence is the primary route obstruction. Retained inverse
+history is a separate phase-machine defect because `sum(H1..Hd)` adds a depth
+factor to carrier storage. The selected immediate repair is public-topology
+reversible pebbling with actual slot reuse; further benchmark variants or
+larger homogeneous fixtures are not selected.
+
+## Reversible quotient-stage pebbling reduces the actual phase carrier
+
+The phase-owned repair now compiles a reversible path-pebble tape for
+`H1 -> ... -> Hd` directly from public depth. A stage toggle is legal only
+while the actual predecessor and permanent H1 leaf are resident. Every move
+binds exact node, clean slot, activation generation, and predecessor
+generation into the schedule hash. An inverse toggle must restore the
+complete phase region below `2e-12` before the region can be rebound.
+
+At width sixteen/depth eight, a 13-move forward tape reaches H8 with three
+slots of 3,548, 2,968, and 1,848 cells. H5, H7, and H8 are resident at the
+final projection. Only H8 is copied and decoded; the boundary copy is removed
+and the exact slot-tagged tape is then reversed before H1 is removed.
+
+```text
+retain-all carrier                    17,288 cells / 553,216 bytes
+pebbled carrier                       12,152 cells / 388,864 bytes
+actual carrier reduction               5,136 cells / 29.708%
+
+retain-all phase updates              34,576
+pebbled phase updates                 46,896
+recomputation multiplier               1.356x
+weighted stage-move cells             39,320
+reconstruction additions / cells       6 / 6,160
+```
+
+The comparison snapshot also falls to 388,864 bytes, but remains verification
+state rather than the restoration path. Exact final hashes and one-counts
+match the retain-all phase machine and independent raw-product verifier in all
+five cases. Wrong boundary inverse, missing inverse move, and applicable
+noncommuting reordered inverse controls fail restoration; dirty-slot
+injection, live predecessor-generation tampering, and schedule-hash tampering
+are rejected by custody. Snapshot reload is separate, and 18 transactions
+reuse each actual restored allocation. Maximum observed repeated restoration
+is `4.99600361081e-16`.
+
+Evidence `/tmp/boolean-tt-pebble.gKMVMI/evidence` establishes:
+
+```text
+TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING_REDUCES_RETAINED_PHASE_HISTORY
+```
+
+within:
+
+```text
+BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS4_5_8_HOMOGENEOUS_NEIGHBOR_AND_OR_PHASE_PEBBLING_REFERENCE_ONLY
+```
+
+This changes the phase machine rather than its wrapper: actual phase regions
+are restored early and rebound. It does not change the family-specific
+Boolean recurrence, improve compute cost against that recurrence, establish
+fixed-rank unbounded-depth closure, or cross the Small Wall.
+
+The homogeneous suffix family is now exhausted as an advantage route. The
+next selected work is the smallest exact non-Boolean phase relation signature
+whose composition preserves unresolved interference information that is not
+immediately homomorphic to Boolean threshold or GF(2) affine recurrence. It
+must retain boundary-only projection, actual inverse restoration, restored
+carrier reuse, and a matched compact classical signature.

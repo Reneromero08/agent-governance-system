@@ -1,0 +1,34 @@
+{
+  "review_id": "CAT_CAS_BOOLEAN_TT_QUOTIENT_TRIAD_PEBBLE_FOCUSED_REVIEW_2026_07_27",
+  "review_scope": "TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING",
+  "result": "PASS",
+  "evidence_directory": "/tmp/boolean-tt-pebble.gKMVMI/evidence",
+  "claim": "TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING_REDUCES_RETAINED_PHASE_HISTORY",
+  "claim_ceiling": "BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS4_5_8_HOMOGENEOUS_NEIGHBOR_AND_OR_PHASE_PEBBLING_REFERENCE_ONLY",
+  "findings_closed": [
+    "WRONG_BOUNDARY_INVERSE_CONTROL_ADDED",
+    "DIRTY_SLOT_INJECTION_CONTROL_ADDED",
+    "LIVE_PREDECESSOR_GENERATION_TAMPER_CONTROL_ADDED"
+  ],
+  "verified": {
+    "schedule_derived_from_public_depth": true,
+    "predecessor_live_reversible_moves": true,
+    "exact_slot_and_generation_custody": true,
+    "actual_conjugate_removal_and_slot_cleanliness": true,
+    "actual_inverse_restoration_and_same_carrier_reuse": true,
+    "all_five_cases_exercise_new_controls": true,
+    "summary_controls_derived_from_case_evidence": true,
+    "analyzer_and_asan_ubsan": "PASS",
+    "source_hashes_match_fresh_evidence": true
+  },
+  "width16_depth8": {
+    "retain_all_carrier_cells": 17288,
+    "pebbled_carrier_cells": 12152,
+    "carrier_reduction_percent": 29.7084683017,
+    "phase_update_multiplier": 1.35631652013
+  },
+  "remaining_findings": [],
+  "computational_advantage": false,
+  "small_wall_crossed": false,
+  "terminal": false
+}

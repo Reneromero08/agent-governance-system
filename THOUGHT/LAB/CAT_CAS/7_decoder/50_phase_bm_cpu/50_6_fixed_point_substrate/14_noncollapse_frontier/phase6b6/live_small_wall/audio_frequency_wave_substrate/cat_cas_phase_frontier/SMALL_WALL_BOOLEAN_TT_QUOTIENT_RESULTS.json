@@ -1,0 +1,84 @@
+{
+  "evidence_parent_commit": "46dda91f",
+  "result": "PASS",
+  "claim": "GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD_CONFIRMS_COMPACT_RECURRENCE_AND_RETAINED_HISTORY_OBSTRUCTION",
+  "claim_ceiling": "BOUNDED_LINUX_WARM_WIDTHS4_5_8_12_16_DEPTHS4_5_8_HOMOGENEOUS_NEIGHBOR_AND_OR_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/boolean-tt-small-wall.TNqwzG/evidence",
+  "adjudication": "COMPACT_PUBLIC_RECURRENCE_IS_PRIMARY_RESOURCE_OBSTRUCTION_RETAINED_HISTORY_IS_SECONDARY_PHASE_MACHINE_DEFECT",
+  "cases": [
+    {
+      "width": 4,
+      "depth": 4,
+      "final_cells": 140,
+      "carrier_cells": 528,
+      "predecessor_inverse_history_cells": 248,
+      "snapshot_over_baseline_service_cpu_ratio": 22.4741302685,
+      "in_place_over_baseline_service_cpu_ratio": 42.0677660872
+    },
+    {
+      "width": 5,
+      "depth": 5,
+      "final_cells": 264,
+      "carrier_cells": 1132,
+      "predecessor_inverse_history_cells": 604,
+      "snapshot_over_baseline_service_cpu_ratio": 35.6003663072,
+      "in_place_over_baseline_service_cpu_ratio": 68.3375869785
+    },
+    {
+      "width": 8,
+      "depth": 8,
+      "final_cells": 956,
+      "carrier_cells": 5608,
+      "predecessor_inverse_history_cells": 3696,
+      "snapshot_over_baseline_service_cpu_ratio": 121.218997546,
+      "in_place_over_baseline_service_cpu_ratio": 235.079997122
+    },
+    {
+      "width": 12,
+      "depth": 8,
+      "final_cells": 2252,
+      "carrier_cells": 11448,
+      "predecessor_inverse_history_cells": 6944,
+      "snapshot_over_baseline_service_cpu_ratio": 161.004799047,
+      "in_place_over_baseline_service_cpu_ratio": 301.076012252
+    },
+    {
+      "width": 16,
+      "depth": 8,
+      "final_cells": 3548,
+      "carrier_cells": 17288,
+      "predecessor_inverse_history_cells": 10192,
+      "live_carrier_bytes": 553216,
+      "sealed_verification_state_bytes": 553216,
+      "comparison_snapshot_bytes_per_transaction": 553216,
+      "snapshot_reload_bytes_per_transaction": 276608,
+      "baseline_carrier_seal_cpu_ns": 2484,
+      "snapshot_carrier_seal_cpu_ns": 936436,
+      "in_place_carrier_seal_cpu_ns": 898906,
+      "snapshot_over_baseline_service_cpu_ratio": 133.685958901,
+      "in_place_over_baseline_service_cpu_ratio": 254.029434417
+    }
+  ],
+  "matched_boundary_receipts": true,
+  "matched_protocol_traffic": true,
+  "direct_baseline_final_core_work": "O_FINAL_QUOTIENT_CELLS",
+  "raw_product_verifier_excluded_from_timed_arms": true,
+  "actual_inverse_restoration": true,
+  "actual_restored_carrier_reuse": true,
+  "no_intermediate_projection": true,
+  "no_post_custody_smuggle_channel_under_trace": true,
+  "carrier_seal_cpu_exposed": true,
+  "selected_phase_owned_repair": "TOPOLOGY_DERIVED_REVERSIBLE_QUOTIENT_STAGE_PEBBLING_WITH_ACTUAL_SLOT_REUSE",
+  "sha256": {
+    "service_source": "922309b2f1b7c7e638a9b3df95f4dc2ca9481beceba04722e396c324fd82c17b",
+    "controller_source": "10be02d2d40f0e742a48e5821b755605f807d107070dd0140da565be8fb51f13",
+    "probe_source": "958f1b31da6445485344f1bb77445af4e7a33f20e470f751cfe353c0d91a03ca",
+    "qualifier": "31df8002a0d00320d6bf23408d54ea5c1c60e53d9d0d0e8eed1870f229454e77",
+    "summary": "7191e0d9b7a12b1f907dd3eb6ead2acf23222558083dff573c49a647b3455e60"
+  },
+  "computational_advantage": false,
+  "small_wall_crossed": false,
+  "physical_execution": false,
+  "unlimited_catalytic_computation": false,
+  "terminal": false
+}
