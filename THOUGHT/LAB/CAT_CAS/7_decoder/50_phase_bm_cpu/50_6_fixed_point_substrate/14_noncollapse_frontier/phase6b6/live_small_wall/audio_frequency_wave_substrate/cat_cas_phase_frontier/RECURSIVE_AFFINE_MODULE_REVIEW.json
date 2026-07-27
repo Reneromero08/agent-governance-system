@@ -1,0 +1,60 @@
+{
+  "review": "PASS",
+  "reviewer_id": "BOUNDED-RECURSIVE-AFFINE-TREE-COMPILER-01",
+  "claim": "BOUNDED_PUBLIC_RECURSIVE_AFFINE_SERIES_INTERSECTION_TREE_COMPILATION",
+  "claim_ceiling": "BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_TREE_COMPILER_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/recursive-affine-final3.Ygvsg2",
+  "initial_findings": [
+    {
+      "id": "RECURSIVE-AFFINE-R1-001",
+      "severity": "EVIDENCE_COVERAGE",
+      "finding": "The initial no-smuggle trace covered selected output syscalls but not the complete file and network syscall classes.",
+      "repair": "Expanded mandatory tracing to trace=%file,%network,write,writev,pwrite64,pwritev,pwritev2 and made any write-capable file open, non-stdout write, positioned write, socket, connect, or send a hard failure.",
+      "closed": true
+    }
+  ],
+  "closure_checks": {
+    "public_manifest_parser_and_tree_validation": "PASS_FIXED_BOUND_15_NODES_8_UNIQUELY_OWNED_LEAVES",
+    "cycle_unknown_child_fanout_disconnected_duplicate_and_multiple_root_controls": "PASS",
+    "nominal_signatures_derived_before_address_assignment": true,
+    "actual_relation_leases_bound_to_serial_owner_signature_and_address": true,
+    "actual_resident_child_to_parent_consumption": true,
+    "reversible_pebbling_slots": "PASS_7_WORKING_VERSUS_15_RETAIN_ALL",
+    "accepted_native_calls": 42,
+    "accepted_forward_operations": 21,
+    "accepted_inverse_operations": 21,
+    "lease_allocations": 85,
+    "lease_releases": 85,
+    "outstanding_leases": 0,
+    "decoded_intermediate_coefficients": 0,
+    "serialized_intermediate_coefficients": 0,
+    "pre_inverse_carrier_aggregate_outputs": 0,
+    "sole_decode_is_copied_final_ROOT": true,
+    "wrong_missing_inverse_controls": "PASS_1.73205080757_ERROR",
+    "dependency_reordered_inverse_control": "PASS_STALE_OR_MISSING_LEASE_REJECTION",
+    "snapshot_separate_reload_only": true,
+    "retain_all_boundary_and_restoration": "PASS",
+    "same_carrier_transactions": 17,
+    "maximum_reuse_restoration_error": 8.32667268469e-16,
+    "strict_build": "PASS",
+    "analyzer": "PASS",
+    "asan_ubsan_leak": "PASS",
+    "deterministic_replay": "PASS",
+    "expanded_file_network_no_smuggle_strace": "PASS",
+    "default_phase_reference_matches": "PASS_5_OF_5_COMPLETE_BOUNDARIES",
+    "scaled_phase_reference_matches": "PASS_10_OF_10_COMPLETE_BOUNDARIES"
+  },
+  "sha256": {
+    "phase_source": "425842f6e0263b9a357f74bf090446ccb1c08099d32e9943ed735c1bfb16e5aa",
+    "reference_source": "b03c39323eb6c1bdafe200e6fe1c15add44f942decd33a7d76ce936628a97104",
+    "public_manifest": "aa8861b91a831aed269211f04741f510635ee405d5b208fde6bfb675fe95286f",
+    "qualifier_source": "36965d57143b3c5a1f6eaa2ff4ca2e2c56ca321eee62583123e1b0f1f40de2e0",
+    "result": "0c3602a8510433b7de57295bb4b6b8911a8131143c993fd54ca304fe381cee33",
+    "reference": "fef5aedb456803cd1115f85d41e2ff94ce8a5d46bf0b5f7a90540cc590f80818",
+    "scaling": "5e0b4f0fe2185b8a87207a81fe4bd1e24ca76941cd946f298a519147a67347fa",
+    "no_smuggle_trace": "414ce4478823716d434883edc1056f60ef1af35340d3d5ec8d264f3440764be8",
+    "qualifier_summary": "f1f2a4105b92f646d6dca04580ed0251daaed3ac81a17522f3f0b2e7c6e144ae"
+  },
+  "remaining_findings": [],
+  "terminal": false
+}

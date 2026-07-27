@@ -1,0 +1,20 @@
+# Public bounded affine series/intersection tree.
+#
+# Node order is deliberately not dependency order.  The compiler resolves
+# stable public IDs, checks the whole tree, and emits its own postorder.
+root 115
+compose 115 111 114
+intersect 111 109 110
+leaf 104 B C 3
+compose 113 107 108
+leaf 101 A B 0
+intersect 114 112 113
+leaf 108 D E 7
+compose 109 101 102
+leaf 106 D E 5
+leaf 102 B C 1
+compose 112 105 106
+leaf 107 C D 6
+leaf 103 A B 2
+compose 110 103 104
+leaf 105 C D 4

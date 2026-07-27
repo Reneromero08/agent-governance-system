@@ -35,6 +35,9 @@
 #ifndef AM_REUSE_CYCLES
 #define AM_REUSE_CYCLES 48U
 #endif
+#ifndef AM_PUBLIC_MAIN
+#define AM_PUBLIC_MAIN main
+#endif
 
 _Static_assert(
     AM_BOUNDARY_START == 5U * GA_BLOCK_CELLS,
@@ -738,7 +741,7 @@ static void am_print_execution(
     );
 }
 
-int main(int argc, char **argv) {
+int AM_PUBLIC_MAIN(int argc, char **argv) {
     if (argc == 2 && strcmp(argv[1], "--project-intermediate") == 0) {
         fail("affine module intermediate projection denied");
     }

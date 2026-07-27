@@ -1865,3 +1865,105 @@ bounded public series/intersection trees to resident canonical message
 blocks, validate nominal signatures against addresses, schedule dependency-
 ordered forward execution and exact reverse-dependency restoration, and
 measure carrier growth against live separator count.
+
+## Recursive width-parametric affine tree compiler
+
+The accepted compiler removes the hardcoded mixed-module topology for a
+bounded public tree language:
+
+```text
+root ID
+leaf ID DOMAIN CODOMAIN LEAF_BODY_ID
+compose ID LEFT RIGHT
+intersect ID LEFT RIGHT
+```
+
+The qualified scrambled manifest contains fifteen nodes, eight uniquely owned
+leaf bodies, five composition nodes, two intersection nodes, fourteen edges,
+and depth three. The compiler validates unique identities, child resolution,
+acyclicity, exactly one parent per non-root node, reachability, mixed
+operators, and bottom-up nominal signatures before assigning any carrier
+address.
+
+Runtime custody is carried by live relation leases bound to slot, owner,
+generation serial, nominal signature, and reserved address. An output cannot
+alias either operand. The forward evaluator computes the actual two children,
+produces the parent, then applies the actual inverse operations needed to
+uncompute both children. Restoration reconstructs the actual child
+dependencies, inverses the actual parent, and recursively clears those
+reconstructions. All 85 allocated relation blocks are released only after
+their complete `B(w)` cells restore, and the accepted transaction ends with
+zero outstanding leases.
+
+The reversible pebble schedule needs seven working relation slots plus one
+dedicated final boundary slot. A retain-all comparison needs fifteen working
+slots plus the same boundary. Their carrier laws are:
+
+```text
+B(w)                 = 4w^2 + 4w + 1
+W(w)                 = 36w^2 + 11w + 2
+pebbled carrier       = W(w) + 8B(w)  = 68w^2 + 43w + 10
+retain-all carrier    = W(w) + 16B(w) = 100w^2 + 75w + 18
+```
+
+At width sixteen, the accepted path uses 18,106 phase cells and 579,392 live
+carrier bytes versus 26,818 cells and 858,176 bytes for retain-all. It
+executes 21 forward and 21 inverse native operations, including dependency
+recomputation, with 25,979,184 phase ANDs, 50,549,184 phase XORs, and
+52,667,985 logical carrier-cell inspections. The conservative current-ABI
+accounting, including carrier verification copy, topology, programs,
+boundary, stack, and manifest, is 1,287,096 bytes.
+
+Five default semantic boundaries and scaled primary/reuse boundaries at
+widths `3,4,8,12,16` match a separately compiled coefficient-aware compact
+GF2 reference exactly. The width-three primary boundary is:
+
+```text
+x0 = 1
+x1 + e1 = 0
+x2 + e1 = 0
+e0 + e1 = 1
+e2 = 0
+```
+
+Only `ROOT` is copied and decoded. No intermediate coefficient, rank, pivot,
+hash, commitment, witness, tuple, or assignment expansion is exported. The
+expanded no-smuggle gate traces all file and network syscalls plus ordinary
+and positioned writes; it permits only loader/manifest reads and stdout
+writes.
+
+Wrong and missing root inverses each leave `1.73205080757` error. A
+producer-before-consumer inverse reorder rejects through the stale-or-missing
+lease law. Snapshot reload is a separately labelled weaker path. Seventeen
+same-carrier transactions, including an unrelated identity reuse program,
+restore below `8.7e-16`. Strict compilation, analyzer, sanitizers,
+deterministic replay, malformed-manifest controls, and retain-all comparison
+pass.
+
+Focused review found one evidence gap in the initial no-smuggle trace. The
+expanded file/network trace closes it, and closure review found no remaining
+finding.
+
+This establishes:
+
+```text
+BOUNDED_PUBLIC_RECURSIVE_AFFINE_SERIES_INTERSECTION_TREE_COMPILATION
+```
+
+with ceiling:
+
+```text
+BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_TREE_COMPILER_REFERENCE_ONLY
+```
+
+It does not establish arbitrary DAG fanout, arbitrary graph topology or
+treewidth, runtime-unbounded width or topology, nonlinear Boolean closure,
+CATVM custody for this compiler, computational advantage, physical
+execution, Small Wall crossing, or unlimited catalytic computation.
+
+The selected next experiment is
+`BOUNDED_AFFINE_DAG_FANOUT_WITH_SHARED_RESIDENT_MESSAGES`: extend the public
+compiler with one shared affine producer consumed by multiple typed parents
+while keeping one actual resident message, reversible shared custody,
+boundary-only projection, actual inverse restoration, and carrier accounting
+against duplicate-tree expansion.

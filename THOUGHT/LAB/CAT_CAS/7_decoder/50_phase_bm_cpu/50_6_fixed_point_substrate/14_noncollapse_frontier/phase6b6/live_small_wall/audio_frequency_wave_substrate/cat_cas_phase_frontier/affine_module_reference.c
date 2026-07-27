@@ -13,6 +13,9 @@
 #undef REF_PUBLIC_MAIN
 
 #define AM_REF_VARIANTS 6U
+#ifndef AM_REF_PUBLIC_MAIN
+#define AM_REF_PUBLIC_MAIN main
+#endif
 
 struct am_ref_program {
     struct relation relation[4];
@@ -255,7 +258,7 @@ static void am_ref_print(
     );
 }
 
-int main(void) {
+int AM_REF_PUBLIC_MAIN(void) {
     for (size_t variant = 0U; variant < AM_REF_VARIANTS; ++variant) {
         const struct am_ref_program program =
             am_ref_make_program(variant);

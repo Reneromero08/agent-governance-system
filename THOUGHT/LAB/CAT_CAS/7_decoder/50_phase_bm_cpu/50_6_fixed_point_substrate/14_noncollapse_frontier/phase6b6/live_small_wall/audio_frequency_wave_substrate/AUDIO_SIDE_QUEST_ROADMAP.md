@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `5.4`
+**Roadmap version:** `5.5`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
-**Current highest milestone:** `ALGEBRAIC_WIDTH_PARAMETRIC_AFFINE_MIXED_MODULE_CLOSURE_ESTABLISHED`
-**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_MIXED_MODULE_REFERENCE_ONLY`
+**Current highest milestone:** `ALGEBRAIC_RECURSIVE_WIDTH_PARAMETRIC_AFFINE_TREE_COMPILER_ESTABLISHED`
+**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_TREE_COMPILER_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -88,6 +88,7 @@ ALGEBRAIC_PROJECTED_AFFINE_COMPACT_FULL_RELATION_CLOSURE_ESTABLISHED
 ALGEBRAIC_OBLIVIOUS_GENERAL_AFFINE_RELATION_CLOSURE_ESTABLISHED
 ALGEBRAIC_WIDTH_PARAMETRIC_GENERAL_AFFINE_RELATION_CLOSURE_ESTABLISHED
 ALGEBRAIC_WIDTH_PARAMETRIC_AFFINE_MIXED_MODULE_CLOSURE_ESTABLISHED
+ALGEBRAIC_RECURSIVE_WIDTH_PARAMETRIC_AFFINE_TREE_COMPILER_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -139,6 +140,8 @@ compact complete projected-affine relation closure
 coefficient-oblivious general affine relation closure at fixed width two
 width-parametric general affine relation closure through width sixteen
 typed address-bound mixed affine composition/intersection module closure
+public recursive affine series/intersection tree compilation
+reversible seven-slot pebbling versus fifteen-slot retain-all execution
 ```
 
 Its strongest bounded architecture is:
@@ -161,6 +164,8 @@ public typed series-parallel relational geometry
 -> polynomial complete affine boundaries through width sixteen
 -> actual resident composition-to-intersection-to-composition handoff
 -> nominal signatures bound to actual relation-block addresses
+-> public mixed-tree parsing and dependency compilation
+-> reversible lease-checked pebbling with native dependency reconstruction
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -188,9 +193,9 @@ CATVM open-intermediate composition
 CATVM width-two open-intermediate contraction
     ESTABLISHED_FIXED_TWO_CONTRACT2_CHAIN_WITH_RESIDENT_16_CELL_HANDOFF
 recursive typed relational modules
-    ESTABLISHED_BOUNDED_DEPTH_THREE_DIRECT_PHASE_HANDOFF
+    ESTABLISHED_PUBLIC_MANIFEST_DEPTH_THREE_WIDTH_SIXTEEN
 compact recursive module execution
-    ESTABLISHED_FOR_SHARED_LEAF_BODY_RECORDS_CARRIER_HISTORY_EXPANSION_REMAINS
+    ESTABLISHED_REVERSIBLE_PEBBLING_SEVEN_SLOTS_VERSUS_FIFTEEN_RETAIN_ALL
 width-two unresolved relational interface
     ESTABLISHED_DENSE_BOOLEAN_F3_CONTRACT2
 factorized width-three relation inputs
@@ -427,7 +432,7 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-RECURSIVE_WIDTH_PARAMETRIC_AFFINE_MODULE_COMPILER
+BOUNDED_AFFINE_DAG_FANOUT_WITH_SHARED_RESIDENT_MESSAGES
 ```
 
 The next crossing is not:
@@ -497,8 +502,7 @@ widths `3,4,8,12,16`. Nominal signatures are checked against actual carrier
 addresses. Only `ROOT` is decoded; actual inverse runs `ROOT^-1,I^-1,R^-1`,
 and the restored carrier runs unrelated programs.
 
-The next experiment must remove the hardcoded topology while preserving the
-machine law:
+The hardcoded topology has now been removed for bounded public trees:
 
 ```text
 public bounded series/intersection tree format
@@ -509,6 +513,31 @@ public bounded series/intersection tree format
 -> exact reverse-dependency restoration
 -> restored-carrier reuse
 -> carrier growth measured against live separator count
+```
+
+The accepted compiler parses a scrambled 15-node public manifest with eight
+leaves, five composition nodes, two intersection nodes, and depth three. It
+derives all signatures before assigning addresses, uses serial/owner/type
+checked leases, and performs reversible pebbling with seven working relation
+slots rather than the retain-all baseline's fifteen. Children are
+reconstructed natively for the actual inverse; only the final root is
+decoded. Five semantic boundaries and ten scaled primary/reuse boundaries
+match the separately linked coefficient-aware reference through width
+sixteen.
+
+The next experiment must admit bounded fanout without turning a shared
+message into a host-side copy or retaining one independent phase history per
+consumer:
+
+```text
+public affine DAG with one shared producer
+-> one actual resident relation message
+-> multiple typed consumers
+-> reference-counted or reversible shared custody
+-> one final boundary
+-> actual inverse restoration
+-> restored-carrier reuse
+-> live carrier measured against a duplicate-tree expansion
 ```
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
@@ -694,7 +723,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_RELATION_SYSTEM_REFERENCE_ONLY
+BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_TREE_COMPILER_REFERENCE_ONLY
 ```
 
 Not established:
