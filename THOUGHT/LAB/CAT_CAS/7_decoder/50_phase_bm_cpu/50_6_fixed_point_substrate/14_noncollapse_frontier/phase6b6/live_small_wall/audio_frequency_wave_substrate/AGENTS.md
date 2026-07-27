@@ -44,13 +44,13 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-ALGEBRAIC_WIDTH2_RELATIONAL_PHASE_CONTRACTION_ESTABLISHED
+ALGEBRAIC_WIDTH3_RANK2_LAZY_TT_RELATION_COMPOSITION_ESTABLISHED
 ```
 
 Claim ceiling:
 
 ```text
-SOFTWARE_COMPACT_WIDTH2_TYPED_RELATIONAL_PHASE_CONTRACTION_AND_RESTORATION_REFERENCE_ONLY
+BOUNDED_SPARSE_BOUNDARY_LAZY_TT_RELATION_COMPOSITION_REFERENCE_ONLY
 ```
 
 The strongest current bounded architecture is:
@@ -65,6 +65,8 @@ public typed series-parallel relational geometry
 -> bounded recursive module trees
 -> shared compiled leaf-body execution without per-instance native records
 -> native two-shared-port contraction with a resident 16-cell intermediate
+-> width-three rank-two TT input relations
+-> exact lazy sparse-boundary contraction
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -108,6 +110,16 @@ decoded; parent-before-child inverse execution restores the carrier; and a
 different source reuses that allocation. The dense representation still
 costs `2^(2w)` cells per width-`w` relation and `2^(3w)` transient union
 coefficients, so compact separator storage is not established.
+
+The first factorized wider-interface experiment stores each genuinely coupled
+width-three relation in 32 rank-two TT core cells rather than 64 dense
+coefficient cells. An immutable descriptor contracts the exact existing
+square/intersection/three-norm law from the actual resident cores into eight
+resident sparse `H` messages; only those public boundary invariants are
+decoded. Actual inverse restoration, an unrelated program, and 34 alternating
+same-allocation transactions restore below `2.5e-16`. Exact eager ranks grow
+`2 -> 4 -> 8 -> 64 -> 4096 -> 16777216`, so no compact full `H`, bounded-rank
+closure, or scaling advantage is claimed.
 
 A general holographic relational computer, arbitrary graph closure, C5
 advantage, root/kernel secrecy, physical phase computation, and unlimited
@@ -189,7 +201,7 @@ Verification follows a substantive result. One focused independent review is nor
 Selected frontier:
 
 ```text
-FACTORIZED_WIDE_INTERFACE_RELATIONS_WITHOUT_DENSE_SEPARATOR_EXPANSION
+CATVM_WIDTH2_ENFORCED_OPEN_INTERMEDIATE_CONTRACTION
 ```
 
 The next crossing is:
@@ -197,14 +209,15 @@ The next crossing is:
 ```text
 compact compiled-body typed relational modules
 -> native dense width-two unresolved interface
--> factorized wider-interface state and closure
+-> factorized width-three rank-two inputs with sparse lazy closure
+-> enforced CATVM custody for the actual width-two intermediate
+-> factor-preserving compact full-relation closure
 -> compact general relational geometry
 ```
 
 Investigate, without imposing a rigid sequence:
 
 ```text
-factorized four-port and wider relation signatures
 native contraction without dense 2^(2w) message materialization
 closure laws that preserve factor structure where valid
 explicit rank or treewidth growth when factor structure does not close

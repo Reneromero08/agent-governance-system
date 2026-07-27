@@ -1211,3 +1211,106 @@ topology or treewidth, CATVM enforcement for the wider operator, advantage,
 physical execution, Small Wall crossing, or unlimited catalytic computation.
 The next blocker is a factorized wider-interface relation representation whose
 native closure preserves structure without dense separator expansion.
+
+## Bounded width-three rank-two lazy tensor-train composition
+
+The first factorized wider-interface experiment now represents each
+six-variable Boolean/F3 relation in genuinely coupled rank-two tensor-train
+cores:
+
+```text
+rank shape                      1 -> 2 -> 2 -> 1
+phase cells per relation        32
+dense coefficients avoided      64
+nonzero public rank minors       F=1, G=1
+```
+
+The accepted descriptor retains two custody references, eight public
+selectors, and six topology-only operator nodes:
+
+```text
+SQUARE(F)
+SQUARE(G)
+ADD(LIFT_XY(SQUARE(F)), LIFT_YZ(SQUARE(G)))
+NORM_Y0
+NORM_Y1
+NORM_Y2
+```
+
+It contracts each selected coefficient directly from the actual resident
+cores through branch-native F3 symbol products and Boolean OR convolution.
+The descriptor contains no coefficient values. A sparse phase cache is
+cleared between selectors, and no dense 64-coefficient `H`, assignment
+expansion, truth table, decoded intermediate, or serialized intermediate is
+created.
+
+The resident layout is:
+
+```text
+F rank-two cores       cells  0..31
+G rank-two cores       cells 32..63
+sparse H messages      cells 64..71
+public boundary        cells 72..79
+```
+
+Only the eight public cells are decoded. The actual resident messages drive
+the boundary copy. Their inverse factors are recomputed while the actual F/G
+cores remain resident, then G and F are inversed. An unrelated fixture and 32
+more alternating programs execute on the same restored allocation:
+
+```text
+primary boundary                    [0,0,1,2,2,2,1,2]
+reuse boundary                      [1,1,2,2,1,0,2,0]
+single-transaction restoration max  1.57009245868e-16
+34-transaction reuse max            2.48253415325e-16
+```
+
+Wrong, missing, and noncommuting reordered inverses each leave error
+`1.73205080757`. Cutting both TT bonds to channel zero changes the boundary to
+`[1,0,0,0,0,0,0,0]`; mismatching one G bond changes it to
+`[0,0,2,1,2,1,0,2]`. Both altered algebra histories reverse cleanly.
+Intermediate projection, null carrier, malformed input, and eager output-TT
+materialization reject. Snapshot reload is separately labeled and does not
+support the in-place claim.
+
+The width-one degeneration matches the reviewed native `OP_COMPOSE` to
+`1.11022302463e-16`. Independent review also reimplemented the discrete F3
+sparse recurrence and reproduced both boundaries.
+
+The review found one resource-label defect: the original `38,688`-byte
+quantity counted selected buffers but not nested call frames. The repaired
+evidence labels it a material-buffer subtotal, gates a `37,088`-byte GCC
+`-O2 -fstack-usage` active call chain, and reports a deliberately conservative
+combined ceiling of `75,776` bytes. No space or performance advantage is
+claimed.
+
+Exact eager structural ranks disclose the unresolved closure barrier:
+
+```text
+input -> square -> intersection -> N_Y0 -> N_Y1 -> N_Y2
+   2       4            8            64    4096   16777216
+```
+
+This establishes:
+
+```text
+BOUNDED_WIDTH3_RANK2_PHASE_RESIDENT_LAZY_TT_RELATION_COMPOSITION_WITH_SPARSE_BOUNDARY_INVARIANT
+```
+
+with ceiling:
+
+```text
+BOUNDED_SPARSE_BOUNDARY_LAZY_TT_RELATION_COMPOSITION_REFERENCE_ONLY
+```
+
+It establishes compact coupled input relations and exact sparse lazy
+contraction, not a compact full output relation, bounded-rank closure,
+polynomial scaling, arbitrary tensor-network topology, computational
+advantage, CATVM enforcement for the wider operators, physical execution,
+Small Wall crossing, or unlimited catalytic computation.
+
+The selected next experiment is the minimal width-two CATVM enclosure: place
+the already qualified two-`CONTRACT2` chain and its actual 16-cell unresolved
+intermediate behind the proven Linux custody boundary. Factor-preserving
+compact full-relation closure remains the next representation blocker after
+that enforced transaction.

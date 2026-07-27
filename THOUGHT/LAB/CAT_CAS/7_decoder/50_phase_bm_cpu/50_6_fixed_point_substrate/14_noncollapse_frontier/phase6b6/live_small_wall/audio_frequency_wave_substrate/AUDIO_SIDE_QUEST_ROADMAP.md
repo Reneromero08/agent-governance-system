@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `4.8`
+**Roadmap version:** `4.9`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
-**Current highest milestone:** `ALGEBRAIC_WIDTH2_RELATIONAL_PHASE_CONTRACTION_ESTABLISHED`
-**Current claim ceiling:** `SOFTWARE_COMPACT_WIDTH2_TYPED_RELATIONAL_PHASE_CONTRACTION_AND_RESTORATION_REFERENCE_ONLY`
+**Current highest milestone:** `ALGEBRAIC_WIDTH3_RANK2_LAZY_TT_RELATION_COMPOSITION_ESTABLISHED`
+**Current claim ceiling:** `BOUNDED_SPARSE_BOUNDARY_LAZY_TT_RELATION_COMPOSITION_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -82,6 +82,7 @@ CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
 ALGEBRAIC_RECURSIVE_TYPED_RELATIONAL_MODULE_PHASE_ESTABLISHED
 ALGEBRAIC_COMPACT_TYPED_RELATIONAL_MODULE_EXECUTION_ESTABLISHED
 ALGEBRAIC_WIDTH2_RELATIONAL_PHASE_CONTRACTION_ESTABLISHED
+ALGEBRAIC_WIDTH3_RANK2_LAZY_TT_RELATION_COMPOSITION_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -127,6 +128,8 @@ final-boundary-only CATVM projection
 four-port Boolean/F3 relation phase state
 native two-shared-port relational contraction
 resident width-two intermediate handoff
+genuinely coupled width-three rank-two TT input relations
+exact lazy composition to sparse resident boundary invariants
 ```
 
 Its strongest bounded architecture is:
@@ -141,6 +144,8 @@ public typed series-parallel relational geometry
 -> bounded recursive module trees
 -> shared compiled leaf-body execution without per-instance native records
 -> native width-two separator contraction
+-> factorized width-three rank-two relation inputs
+-> exact lazy sparse-boundary contraction
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -171,8 +176,12 @@ compact recursive module execution
     ESTABLISHED_FOR_SHARED_LEAF_BODY_RECORDS_CARRIER_HISTORY_EXPANSION_REMAINS
 width-two unresolved relational interface
     ESTABLISHED_DENSE_BOOLEAN_F3_CONTRACT2
+factorized width-three relation inputs
+    ESTABLISHED_RANK2_32_CELLS_PER_RELATION_VERSUS_64_DENSE
+lazy factorized relational closure
+    ESTABLISHED_FOR_EIGHT_PREDECLARED_SPARSE_BOUNDARY_COEFFICIENTS
 compact separator storage
-    NOT_ESTABLISHED_DENSE_2_TO_2W_RELATION_STATE
+    PARTIAL_INPUT_COMPRESSION_FULL_OUTPUT_NOT_ESTABLISHED
 C5 advantage
     NOT_ESTABLISHED
 ```
@@ -275,6 +284,10 @@ width-two native contraction                      one CONTRACT2 body / two share
 width-two resident handoff                        16 actual H cells consumed by second contraction
 width-two carrier restoration/reuse               below 1.7e-16 / different source on same carrier
 width-two dense resource law                      2^(2w) message / 2^(3w) transient coefficients
+width-three rank-two TT inputs                     32 cells each / 64 dense coefficients each
+width-three sparse lazy boundary                   8 resident H messages / no dense 64-cell H
+width-three actual restoration/reuse               below 2.5e-16 / 34 same-carrier transactions
+width-three eager rank disclosure                  2 -> 4 -> 8 -> 64 -> 4096 -> 16777216
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -393,7 +406,7 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-FACTORIZED_WIDE_INTERFACE_RELATIONS_WITHOUT_DENSE_SEPARATOR_EXPANSION
+CATVM_WIDTH2_ENFORCED_OPEN_INTERMEDIATE_CONTRACTION
 ```
 
 The next crossing is not:
@@ -408,14 +421,27 @@ It is:
 ```text
 compact compiled-body typed relational modules
 -> native dense width-two unresolved interface
--> factorized wider-interface state and closure
+-> factorized width-three rank-two inputs with sparse lazy closure
+-> enforced CATVM custody for the actual width-two intermediate
+-> factor-preserving compact full-relation closure
 -> compact general relational geometry
 ```
 
-The major scientific questions are:
+The rank-two experiment resolves the first representation question but exposes
+the exact closure blocker:
 
 ```text
-factorized four-port and wider relation signatures
+input rank                  2
+intersection rank           8
+after three norms  16,777,216
+```
+
+It establishes compact coupled inputs and exact sparse lazy contraction, not a
+compact full output relation. The immediate selected experiment now encloses
+the already qualified 16-cell width-two intermediate behind the proven CATVM
+custody boundary. In parallel, the unresolved scientific questions remain:
+
+```text
 native contraction without dense 2^(2w) message materialization
 closure laws that preserve factor structure where valid
 explicit rank or treewidth growth when factor structure does not close
@@ -607,7 +633,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-SOFTWARE_COMPACT_WIDTH2_TYPED_RELATIONAL_PHASE_CONTRACTION_AND_RESTORATION_REFERENCE_ONLY
+BOUNDED_SPARSE_BOUNDARY_LAZY_TT_RELATION_COMPOSITION_REFERENCE_ONLY
 ```
 
 Not established:
