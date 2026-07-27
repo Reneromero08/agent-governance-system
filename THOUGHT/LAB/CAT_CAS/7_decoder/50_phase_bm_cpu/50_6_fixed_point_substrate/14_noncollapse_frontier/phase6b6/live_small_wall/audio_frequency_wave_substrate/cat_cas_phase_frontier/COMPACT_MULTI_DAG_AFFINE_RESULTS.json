@@ -1,0 +1,171 @@
+{
+  "evidence_parent_commit": "88c5e465",
+  "result": "PASS",
+  "claim": "BOUNDED_NESTED_AFFINE_DAG_PINNED_SHARED_COMPACT_LEAF_PEBBLING",
+  "claim_ceiling": "BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_SEVEN_NODE_DAG_FOUR_LOGICAL_LEASE_CAP_SIX_PHYSICAL_RELATION_BLOCKS_DISTINCT_COPIED_BOUNDARY_PINNED_S_T_ORIGINAL_I_ROOT_PUBLIC_IMMUTABLE_LEAF_ONLY_RECONSTRUCTION_CARRIER_COMPACTNESS_ONLY",
+  "evidence_directory": "/tmp/compact-multi-dag-final",
+  "tested_widths": [3, 4, 8, 12, 16],
+  "exact_phase_reference_complete_boundaries": 25,
+  "deterministic_replay": "PASS",
+  "analyzer": "PASS",
+  "sanitizers": "PASS",
+  "mandatory_expanded_no_smuggle_strace": "PASS",
+  "public_dag": {
+    "nodes": 7,
+    "leaves": 3,
+    "compose_nodes": 3,
+    "intersect_nodes": 1,
+    "edges": 8,
+    "depth": 4,
+    "fanout_nodes": 2,
+    "maximum_fanout": 2,
+    "shared_public_nodes": [704, 705],
+    "same_nominal_signature": true
+  },
+  "schedule": {
+    "logical_working_slots": 4,
+    "maximum_live_working_slots": 4,
+    "physical_relation_blocks_including_boundary": 6,
+    "retain_unique_working_slots": 7,
+    "occurrence_tree_working_slots": 15,
+    "proven_lower_bound_under_current_boundary_law": 4,
+    "lower_bound_live_set_at_root_forward": [
+      "S_ORIGINAL",
+      "T_ORIGINAL",
+      "I_ORIGINAL",
+      "ROOT_OUTPUT"
+    ],
+    "shared_generations_pinned": [704, 705],
+    "retained_internal_until_consumer_inverse": [706, 707],
+    "reconstructible_public_leaves": [701, 702, 703],
+    "initial_leaf_materializations": 3,
+    "early_leaf_unmaterializations": 3,
+    "restoration_leaf_reconstructions": 3,
+    "final_leaf_inverses": 3,
+    "internal_node_rematerializations": 0,
+    "operator_recomputations": 0,
+    "leaf_obligations_restored": true,
+    "residency_restored": true,
+    "morphism_cursor_empty": true
+  },
+  "carrier_laws": {
+    "relation_cells": "4*w^2 + 4*w + 1",
+    "workspace_cells": "36*w^2 + 11*w + 2",
+    "compact_carrier_cells": "60*w^2 + 35*w + 8",
+    "retain_unique_carrier_cells": "68*w^2 + 43*w + 10",
+    "occurrence_tree_carrier_cells": "100*w^2 + 75*w + 18"
+  },
+  "operation_comparison": {
+    "compact": {
+      "working_relation_slots": 4,
+      "native_operation_calls": 8,
+      "leaf_encode_calls": 12,
+      "lease_allocations": 10
+    },
+    "retain_unique": {
+      "working_relation_slots": 7,
+      "native_operation_calls": 8,
+      "leaf_encode_calls": 6,
+      "lease_allocations": 7
+    },
+    "occurrence_tree": {
+      "working_relation_slots": 15,
+      "native_operation_calls": 14,
+      "leaf_encode_calls": 16,
+      "lease_allocations": 15
+    }
+  },
+  "default_width3": {
+    "relation_cells": 49,
+    "workspace_cells": 359,
+    "carrier_cells": 653,
+    "live_carrier_bytes": 20896,
+    "carrier_and_verification_snapshot_heap_bytes": 41792,
+    "compiled_topology_bytes_current_abi": 2664,
+    "program_storage_bytes_current_abi": 1960,
+    "active_edge_descriptor_bytes": 192,
+    "custody_state_bytes_current_abi": 3576,
+    "boundary_storage_bytes_current_abi": 216,
+    "primary_boundary_fnv1a64": "59f0245207f2a0f1",
+    "reuse_boundary_fnv1a64": "6f46809cf9d2cb8e",
+    "same_carrier_transactions": 17,
+    "maximum_reuse_restoration_error": 6.66133814775e-16,
+    "wrong_root_restoration_abs": 1.73205080757,
+    "missing_root_restoration_abs": 1.73205080757
+  },
+  "maximum_width16": {
+    "width": 16,
+    "relation_cells": 1089,
+    "workspace_cells": 9394,
+    "carrier_cells": 15928,
+    "live_carrier_bytes": 509696,
+    "carrier_and_verification_snapshot_heap_bytes": 1019392,
+    "compiled_topology_bytes_current_abi": 2664,
+    "program_storage_bytes_current_abi": 43560,
+    "active_edge_descriptor_bytes": 192,
+    "custody_state_bytes_current_abi": 3576,
+    "boundary_storage_bytes_current_abi": 4376,
+    "phase_ands": 4948416,
+    "phase_xors": 9628416,
+    "phase_cell_updates": 7383094,
+    "native_phase_carrier_reads": 9856874,
+    "logical_carrier_cell_inspections": 10060451,
+    "restoration_max_abs": 5.11787526652e-16,
+    "boundary_fnv1a64": "4c77fdcd316fbdac"
+  },
+  "state_law": {
+    "exact_discrete_edge_owner_obligation_residency_allocator_reset": true,
+    "serial_postcondition": "serial_after=serial_before+10",
+    "restoration_generation_postcondition": "generation_after=generation_before+1",
+    "carrier_tolerance_predeclared": 2e-12,
+    "snapshot_loaded_on_accepted_path": false
+  },
+  "additional_material_resources": {
+    "phase_binary_bytes": 135288,
+    "accepted_default_stdout_bytes": 33264,
+    "compiler_measured_cp_execute_stack_bytes": 8176,
+    "compiler_measured_main_stack_bytes": 39232,
+    "compact_specific_stack_and_metadata_in_total_memory_comparison": false
+  },
+  "controls": {
+    "capacity_four_passes_capacity_three_fails": true,
+    "shared_and_internal_eviction_rejected": true,
+    "wrong_leaf_body_rejected": true,
+    "missing_leaf_reconstruction_rejected": true,
+    "double_leaf_reconstruction_rejected": true,
+    "skipped_final_leaf_inverse_rejected": true,
+    "premature_shared_inverse_each_owner_rejected": true,
+    "projection_of_intermediate_obligations_and_residency_rejected": true,
+    "null_carrier_rejected": true,
+    "wrong_and_missing_root_inverse_detected": true,
+    "snapshot_separate_weaker_path": true,
+    "retain_and_occurrence_complete_boundaries_equal": true,
+    "no_smuggle": true
+  },
+  "regressions": {
+    "nested_retain_all_qualifier": "PASS",
+    "single_fanout_qualifier": "PASS"
+  },
+  "sha256": {
+    "phase_source": "8209584f50edaa06e1ea20a53028c25bbcd8f71c157ca9ae43dfb1474561cf82",
+    "reference_source": "1172aea84be8976974e4d79503dbfbd0bbf86749a3592c53e81013ad1aab9b67",
+    "generalized_dag_source": "5fdf79654bdc8d2eac9dec578ff5abdf185dc0a553bd5e01925459fec519a0d3",
+    "public_manifest": "5eb6c149b42447ecdd391ad4793816543dbbd23f0d2948ff50ece43e0f32a311",
+    "occurrence_tree_manifest": "d806a10e9afa050427d301b46623167a3586930b81bf2d16113b7b737b49c3e5",
+    "qualifier": "c0d141ef0aefe66461d97dae6564ce947dff9a69a67293885420d7fd2c943193",
+    "accepted_output": "9239dbea89b606df4bdbf32f7892518dee43e0deaec97b64fb0338997ab73154",
+    "no_smuggle_trace": "5592339e9bed4b948161d4585b6bf3360cb552c6da506ada180edc93a90d1f1d"
+  },
+  "general_dag_compiler": false,
+  "automatic_pebbling": false,
+  "internal_relation_rematerialization": false,
+  "more_than_two_shared_nodes": false,
+  "catvm_enforcement": false,
+  "arbitrary_graph_topology": false,
+  "physical_execution": false,
+  "performance_advantage": false,
+  "total_memory_reduction": false,
+  "small_wall_crossed": false,
+  "unlimited_catalytic_computation": false,
+  "terminal": false
+}

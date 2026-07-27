@@ -18,6 +18,9 @@
 #define DF_LEAF_BODIES 4U
 #endif
 #define DF_VARIANTS 5U
+#ifndef DF_MAX_FANOUT
+#define DF_MAX_FANOUT 2U
+#endif
 #ifndef DF_RUN_VARIANTS
 #define DF_RUN_VARIANTS DF_VARIANTS
 #endif
@@ -84,7 +87,7 @@ static void df_compile(struct rr_graph *graph) {
             if (consumers != 0U) {
                 fail("affine DAG reference root has consumer");
             }
-        } else if (consumers == 0U || consumers > 2U) {
+        } else if (consumers == 0U || consumers > DF_MAX_FANOUT) {
             fail("affine DAG reference fanout outside bound");
         }
     }

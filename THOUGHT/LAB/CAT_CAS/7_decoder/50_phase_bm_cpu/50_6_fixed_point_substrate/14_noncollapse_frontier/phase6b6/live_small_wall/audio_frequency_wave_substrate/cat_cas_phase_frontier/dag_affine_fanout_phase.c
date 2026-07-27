@@ -39,6 +39,9 @@
 #define DC_SCALE_ONLY 0
 #endif
 #define DC_MAX_EDGES (2U * RC_MAX_NODES)
+#ifndef DC_MAX_FANOUT
+#define DC_MAX_FANOUT 2U
+#endif
 #ifndef DC_CLAIM
 #define DC_CLAIM \
     "BOUNDED_NATIVE_PRODUCED_AFFINE_DAG_SHARED_RESIDENT_MESSAGE_FANOUT"
@@ -149,6 +152,7 @@ struct dc_owner_audit {
 struct dc_execution {
     struct ga_boundary boundary;
     struct ga_stats stats;
+    size_t working_relation_slots;
     double restoration_max_abs;
     double integrity_max_abs;
     int workspace_cleared;
@@ -292,7 +296,7 @@ static struct dc_compiled dc_compile(
             }
             continue;
         }
-        if (consumers == 0U || consumers > 2U) {
+        if (consumers == 0U || consumers > DC_MAX_FANOUT) {
             fail("affine DAG consumer count outside bound");
         }
         if (consumers > result.maximum_fanout) {
@@ -310,7 +314,7 @@ static struct dc_compiled dc_compile(
     if (required_fanout_nodes > 0U) {
         if (
             result.fanout_nodes != required_fanout_nodes
-            || result.maximum_fanout != 2U
+            || result.maximum_fanout < 2U
         ) {
             if (required_fanout_nodes == 1U) {
                 fail(
@@ -1140,6 +1144,7 @@ static struct dc_execution dc_execute(
     execution.pending_counts_restored = counts_complete;
     execution.scheduler_queue_empty = 1;
     execution.stats = runtime.stats;
+    execution.working_relation_slots = runtime.pool;
     execution.maximum_live_slots = runtime.maximum_live;
     execution.outstanding_relation_leases = runtime.live;
     execution.lease_allocations = runtime.lease_allocations;
@@ -1352,7 +1357,7 @@ static void dc_print(
     const struct dc_execution *execution
 ) {
     const size_t carrier_cells =
-        rc_carrier_cells(compiled->graph.count);
+        rc_carrier_cells(execution->working_relation_slots);
     const size_t workspace_cells =
         GA_CARRIER_CELLS - GA_RELATION_BLOCKS * GA_BLOCK_CELLS;
     printf(
@@ -1411,9 +1416,11 @@ static void dc_print(
         (unsigned long long)compiled->graph.topology_hash,
         (unsigned long long)compiled->graph.schedule_hash,
         compiled->graph.manifest_bytes,
-        compiled->graph.count,
+        execution->working_relation_slots,
         execution->maximum_live_slots,
-        rc_physical_relation_blocks(compiled->graph.count),
+        rc_physical_relation_blocks(
+            execution->working_relation_slots
+        ),
         (unsigned)GA_BLOCK_CELLS,
         workspace_cells,
         carrier_cells,

@@ -437,7 +437,8 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-BOUNDED_GENERAL_AFFINE_DAG_CUSTODY_COMPILATION_AND_COMPACT_PEBBLING
+GENERAL_RETAIN_ALL_AFFINE_DAG_CUSTODY_COMPILATION
+-> AUTOMATIC_COMPACT_AFFINE_DAG_SCHEDULING
 ```
 
 The next crossing is not:
@@ -566,16 +567,33 @@ S native-produced and consumed to produce T
 -> one final boundary and restored-carrier reuse
 ```
 
-The next experiment must remove the exact-two topology fixture and retain-all
-execution policy:
+The exact seven-node nested graph now also has a reviewed compact schedule:
+
+```text
+pin original S and T generations
+-> retain original I through ROOT inverse
+-> reversibly release only immutable public degree-one leaves
+-> reconstruct those leaves into exact pending inverse edges
+-> four logical working leases versus seven retain-all and fifteen occurrence
+-> six physical relation blocks including the boundary
+-> actual inverse restoration and seventeen same-carrier transactions
+```
+
+The four-lease lower bound applies only to this fixed pinned schedule law.
+The established resource reduction is phase-carrier cells, not total memory
+or performance. It does not establish compiler-generated pebbling or internal
+operator rematerialization.
+
+The next experiment must remove the exact-two topology fixture before
+generalizing the compact schedule:
 
 ```text
 general bounded public affine DAG
--> compiler-derived shared-owner set and arbitrary bounded fanout counts
+-> at least four compiler-derived shared owners and fanout up to four
 -> per-edge custody for all shared producers
--> compact reversible live-range release or rematerialization law
--> comparison against retain-all unique-node and occurrence-expanded baselines
+-> retain-all unique-node comparison against occurrence expansion
 -> one final boundary and actual restoration
+-> only then automatic compact release or rematerialization
 ```
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without

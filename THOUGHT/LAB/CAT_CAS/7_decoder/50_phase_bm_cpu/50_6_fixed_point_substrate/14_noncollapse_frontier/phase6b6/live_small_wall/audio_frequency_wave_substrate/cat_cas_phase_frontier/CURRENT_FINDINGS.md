@@ -2191,3 +2191,87 @@ derive the shared-owner set and fanout counts from arbitrary bounded public
 DAGs, retain per-edge generation custody for every shared producer, and add a
 lawful compact release/rematerialization schedule compared against both
 retain-all unique-node and occurrence-expanded baselines.
+
+## Compact leaf-pebbled execution of the nested affine DAG
+
+The exact seven-node nested graph now has a lawful four-logical-lease
+execution. The native-produced shared messages `S` and `T` remain pinned in
+their original slot/serial generations. `I` and `ROOT` also remain their
+original resident relations. Only the three immutable public degree-one
+leaves are reversibly unencoded after their forward edge commits and
+re-encoded in fresh leases immediately before the matching inverse edge.
+
+The schedule performs the same four native forward and four native inverse
+operations as retain-all execution. It performs twelve leaf encodes instead
+of six and ten allocations instead of seven, but reduces the working
+relation lease cap from seven to four:
+
+```text
+                         compact     retain-all     occurrence tree
+working relation slots         4              7                  15
+native calls                    8              8                  14
+leaf encode calls              12              6                  16
+lease allocations              10              7                  15
+```
+
+Under the exact declared law, forward `ROOT` requires the still-pinned
+original `S`, its actual inputs `T` and `I`, and a distinct `ROOT` output.
+Thus four is a lower bound for allocator-visible working leases on this
+fixture. A three-slot build fails causally at that allocation. This is not a
+physical-block or general scheduling lower bound: the substrate has a fixed
+floor of six physical relation blocks including the copied boundary.
+
+With `B(w)=4w^2+4w+1` and `W(w)=36w^2+11w+2`:
+
+```text
+compact carrier       = W(w) + 6B(w)  = 60w^2 + 35w + 8
+retain unique carrier = W(w) + 8B(w)  = 68w^2 + 43w + 10
+occurrence tree       = W(w) + 16B(w) = 100w^2 + 75w + 18
+```
+
+At width sixteen the compact carrier is 15,928 complex cells and 509,696
+live bytes, versus 18,106 cells and 579,392 bytes for retain-all. This is
+phase-carrier compactness only. Compact-specific stack, metadata, binary, and
+output resources are not combined into a total-memory comparison, and no
+performance or computational advantage is claimed.
+
+Structural reconstruction obligations bind each public leaf body, nominal
+signature, public-program epoch, and exact pending edge without retaining
+relation contents. Wrong-body, missing, double, and incomplete
+reconstruction controls reject. Shared/internal eviction and premature `S`
+or `T` inverse controls also reject. No internal relation is rematerialized,
+no operator is recomputed, only `ROOT` reaches the copied boundary, and the
+expanded no-smuggle trace remains clean.
+
+Five semantic variants match the separate GF2 reference at widths
+`3,4,8,12,16`, for 25 complete boundaries. Seventeen alternating
+transactions on one carrier restore below `6.7e-16`; wrong and missing root
+inverses each leave `1.73205080757` error. The retain-all nested and earlier
+single-fanout qualifiers pass unchanged against the generalized backend.
+Focused adversarial review found no remaining finding after narrowing the
+claim to its exact logical-lease and carrier-cell scope.
+
+This establishes:
+
+```text
+BOUNDED_NESTED_AFFINE_DAG_PINNED_SHARED_COMPACT_LEAF_PEBBLING
+```
+
+with ceiling:
+
+```text
+BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_SEVEN_NODE_DAG_FOUR_LOGICAL_LEASE_CAP_SIX_PHYSICAL_RELATION_BLOCKS_DISTINCT_COPIED_BOUNDARY_PINNED_S_T_ORIGINAL_I_ROOT_PUBLIC_IMMUTABLE_LEAF_ONLY_RECONSTRUCTION_CARRIER_COMPACTNESS_ONLY
+```
+
+It does not establish generic or compiler-generated pebbling, a global
+four-slot optimum, internal or operator rematerialization, exact generation
+preservation for reconstructed leaf edges, more than two shared nodes,
+arbitrary DAGs or graphs, CATVM enforcement for this compiler, total-memory
+or performance advantage, physical execution, Small Wall crossing, or
+unlimited catalytic computation.
+
+The selected next experiment is now split deliberately. First compile and
+execute a larger retain-all public DAG with compiler-derived custody for at
+least four shared owners and fanout up to four. Only after that semantic
+generalization is independently established should automatic schedule
+generation attempt compact release or rematerialization.
