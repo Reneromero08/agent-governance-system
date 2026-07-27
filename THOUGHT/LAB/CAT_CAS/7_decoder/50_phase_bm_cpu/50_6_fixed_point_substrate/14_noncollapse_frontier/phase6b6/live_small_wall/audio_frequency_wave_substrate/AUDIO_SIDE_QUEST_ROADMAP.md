@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `4.4`
+**Roadmap version:** `4.5`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
-**Current highest milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
-**Current claim ceiling:** `SOFTWARE_PUBLIC_SERIES_PARALLEL_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY`
+**Current highest milestone:** `CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND`
+**Current claim ceiling:** `BOUNDED_LINUX_USERSPACE_CATVM_OPEN_INTERMEDIATE_PHASE_COMPOSITION_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -78,6 +78,7 @@ ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED
 ALGEBRAIC_RELATION_TREE_PHASE_ESTABLISHED
 ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED
 ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED
+CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -118,6 +119,8 @@ no intermediate coefficient decoding
 zero tuple, witness, and truth-table slots
 actual inverse restoration
 actual restored-carrier reuse
+enforced carrier-owning Linux userspace custody
+final-boundary-only CATVM projection
 ```
 
 Its strongest bounded architecture is:
@@ -149,6 +152,8 @@ internal-port closure
     ESTABLISHED_FOR_BOUNDED_PUBLIC_SERIES_PARALLEL_GRAPH_CLASS
 idempotent relational boundary
     PARTIAL_RESTRICTED_CLASS_ESTABLISHED_GENERAL_LAW_OPEN
+CATVM open-intermediate composition
+    ESTABLISHED_BOUNDED_LINUX_USERSPACE_PHASE_BACKEND
 C5 advantage
     NOT_ESTABLISHED
 ```
@@ -232,6 +237,13 @@ series-parallel capacity                       46 nodes / 60 relations / 59 oper
 series-parallel carrier                        480 complex cells, zero tuple/witness/truth slots
 series-parallel restoration/reuse              below 1.7e-16, cross-process reuse passes
 series-parallel repaired defects               phase drift / duplicate identity / UBSan fail-open
+CATVM native transaction                       compose -> resident Y -> intersect -> boundary Z
+CATVM custody boundary                         locked private non-dumpable seccomp service
+CATVM intermediate projection                  denied without decode or state mutation
+CATVM controller process access                all six same-UID attacks denied while Y resident
+CATVM actual restoration/reuse                 1002 generations, max error 4.997e-16
+CATVM snapshot baseline                        separate weaker claim, 8192 locked bytes
+CATVM warmed in-place transaction              76.615 us, no performance-advantage claim
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -565,7 +577,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-SOFTWARE_PUBLIC_SERIES_PARALLEL_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY
+BOUNDED_LINUX_USERSPACE_CATVM_OPEN_INTERMEDIATE_PHASE_COMPOSITION_REFERENCE_ONLY
 ```
 
 Not established:
@@ -585,6 +597,8 @@ holographic relational computation
 arbitrary-treewidth relational trace
 automatic elimination-order discovery
 unrestricted typed relation graphs and arity
+root or kernel secrecy
+microarchitectural secrecy
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.

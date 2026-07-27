@@ -44,13 +44,13 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED
+CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
 ```
 
 Claim ceiling:
 
 ```text
-SOFTWARE_PUBLIC_SERIES_PARALLEL_EXACT_RELATIONAL_PHASE_CLOSURE_REFERENCE_ONLY
+BOUNDED_LINUX_USERSPACE_CATVM_OPEN_INTERMEDIATE_PHASE_COMPOSITION_REFERENCE_ONLY
 ```
 
 The strongest current bounded architecture is:
@@ -60,6 +60,8 @@ public typed series-parallel relational geometry
 -> topology-only compilation
 -> native phase composition and intersection
 -> unresolved resident relation messages
+-> enforced carrier-owning userspace boundary
+-> final-boundary-only projection
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -74,9 +76,17 @@ intersection, bounded internal-port closure, actual restoration, and
 restored-carrier reuse are established without intermediate coefficient
 decode or tuple, witness, and truth-table slots.
 
+The first bounded CATVM substrate now seals that native engine behind a
+non-dumpable, locked, private, seccomp-restricted Linux service. Native `F`
+leaves `Y` unresolved in four resident phase cells; native `G` consumes those
+actual cells; only final `Z` crosses the protocol; actual `G^-1` then `F^-1`
+restore the borrowed carrier; and an unrelated program plus 1000 alternating
+transactions reuse the same restored allocation. Snapshot reload is measured
+separately and does not support the stronger claim.
+
 A general holographic relational computer, arbitrary graph closure, C5
-advantage, physical phase computation, and unlimited catalytic phase
-computation are not established.
+advantage, root/kernel secrecy, physical phase computation, and unlimited
+catalytic phase computation are not established.
 
 It is nonterminal.
 

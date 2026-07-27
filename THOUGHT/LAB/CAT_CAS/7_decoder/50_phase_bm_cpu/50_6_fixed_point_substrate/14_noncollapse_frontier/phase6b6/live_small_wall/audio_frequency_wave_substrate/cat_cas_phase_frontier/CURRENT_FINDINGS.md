@@ -912,3 +912,80 @@ computational advantage, physical phase computation, or unlimited catalytic
 phase computation. The next mechanism is recursive typed relational programs
 whose module boundaries remain open phase relations and compose without host
 expansion.
+
+## Enforced CATVM open-intermediate composition
+
+The branch-native Boolean/F3 phase engine now runs behind its first enforced
+machine boundary. A carrier-owning Linux `SOCK_SEQPACKET` service is
+non-dumpable before allocation, locks a private anonymous mapping, rejects
+forked mappings and core dumps, unlinks its single-client socket, and installs
+a post-accept seccomp allowlist. The IPC-only controller is not linked to the
+phase core.
+
+The accepted transaction is:
+
+```text
+seal A, B, C
+-> F: exact native composition leaves Y in four resident phase cells
+-> G: exact native intersection consumes those actual Y cells
+-> project only final Z = [0,2,1,1]
+-> actual G^-1
+-> actual F^-1
+-> exact discrete-state and tolerant complex-state restoration
+-> unrelated program on the same restored carrier, Z = [1,2,0,2]
+-> 1000 further alternating same-carrier transactions
+```
+
+There are zero intermediate decodes and no serialized Y, intermediate hash,
+witness list, candidate set, truth table, decoded relation, or retained
+inverse factor. While Y is resident, the controller's attempts through
+`/proc/<pid>/mem`, `/proc/<pid>/maps`, `/proc/<pid>/fd/0`,
+`process_vm_readv`, `ptrace`, and `pidfd_getfd` are all denied; the service
+then completes the transaction. `PROJECT Y`, malformed protocol requests,
+debug/detail requests, dumps, reads, snapshot commands, embedded NULs, and
+oversize packets receive fixed errors.
+
+One carrier allocation completes 1002 restoration generations. Maximum
+restoration error is `4.99600361081e-16` against a predeclared `2e-12`
+tolerance. Wrong-G, missing-G, and prospectively noncommuting reordered
+inverse controls each leave error `1.73205080757`. The final result is emitted
+before restoration and therefore survives outside inverse history.
+
+The separately measured snapshot baseline reloads a saved copy, performs no
+actual inverse, locks 8192 bytes rather than the in-place path's 4096 bytes,
+and establishes only:
+
+```text
+CATVM_SNAPSHOT_BACKED_TRANSACTIONAL_REUSE_ESTABLISHED
+```
+
+Warmed average transaction times in the repaired qualification are:
+
+```text
+direct process phase          14.853 us
+isolated inert boundary       58.019 us
+snapshot CATVM                72.610 us
+in-place inverse CATVM        76.615 us
+```
+
+GCC strict builds, `-fanalyzer`, ASan, UBSan, deterministic replay, native
+series-parallel semantic comparison, resource gates, no-smuggle source and
+runtime gates, and all controls pass. The focused independent review reports
+no claim blocker. Its two accounting/evidence findings were repaired by
+counting both snapshot mappings and replacing response constants with measured
+carrier-creation, receive-buffer, and socket-queue state.
+
+This establishes:
+
+```text
+CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
+```
+
+only for the bounded tested Linux userspace boundary against its ordinary
+same-UID controller. It does not establish root/kernel or microarchitectural
+secrecy, arbitrary topology, compact wide-interface relations, general
+holographic relational computation, computational advantage, physical
+waveform or silicon computation, Small Wall crossing, or unlimited catalytic
+computation. The relational frontier remains reusable typed modules whose
+open phase-resident outputs compose recursively into larger modules and wider
+interfaces without host expansion or decode.
