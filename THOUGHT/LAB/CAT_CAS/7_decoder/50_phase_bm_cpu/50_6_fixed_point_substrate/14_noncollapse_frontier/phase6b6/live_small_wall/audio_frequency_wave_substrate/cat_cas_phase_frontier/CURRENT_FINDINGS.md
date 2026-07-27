@@ -2771,3 +2771,114 @@ tables, assignment expansion, or decoded intermediate relations. If that
 mechanism cannot be made compact, the fallback is a controlled
 baseline/sham/augmented CATVM Small Wall experiment using the new enforced
 service as the machine substrate.
+
+## Fixed-schema quadratic ANF closes two hidden ports beyond affine GF(2)
+
+The first post-affine successor uses monic Boolean-ANF relation factors:
+
+```text
+F(a,b;u) = u + alpha + beta*a*b
+G(u,c;v) = v + gamma + delta*u*c
+J(v,e;d) = d + eta + theta*v*e
+```
+
+The port/support schema is fixed before coefficients. No fixture supplies
+selectors, expected results, membership masks, candidates, or witnesses.
+Phase-resident Boolean-subset F3 products compile the two substitutions:
+
+```text
+H = v + gamma + delta*alpha*c + delta*beta*a*b*c
+Z = d + eta
+      + theta*gamma*e
+      + theta*delta*alpha*c*e
+      + theta*delta*beta*a*b*c*e
+```
+
+`H` occupies four resident phase cells and is consumed directly by the five
+resident `Z` cells. `H` is never decoded or copied. Only the complete fixed
+five-coefficient `Z` signature crosses the declared boundary.
+
+The primary path closes:
+
+```text
+u+a*b = 0
+v+u*c = 0
+d+v*e = 0
+```
+
+to:
+
+```text
+d+a*b*c*e = 0
+boundary coefficients [1,0,0,0,1]
+```
+
+Its nonzero fourth Boolean derivative proves the functional graph is not an
+affine GF(2) relation. The unrelated reuse path closes to
+`d+1+e+c*e+a*b*c*e=0`, also non-affine. A degree-two counterexample closes to
+`d+c*e=0`; it has zero degree-four coefficient but a nonzero `c*e`
+coefficient and remains non-affine. An affine sham closes to `d+e=0`.
+Primary, reuse, degree-two, and sham paths share plan
+`f8198cf1e338bbb5` and exactly the same native operation counts.
+
+One accepted transaction uses:
+
+```text
+input signature cells                 9
+resident H cells                      4
+resident Z cells                      5
+final-boundary cells                  5
+total carrier cells                  23
+baseline-plus-working carrier       736 bytes
+comparison snapshot                 736 bytes
+phase products                       18
+carrier reads                        97
+phase-cell updates                   46
+intermediate decodes / copies       0 / 0
+final boundary decodes               5
+```
+
+The primary and reuse boundaries match a separately linked reference. It
+streams the bounded 32 external rows and 128 hidden probes without retaining
+an extensional relation. The native path contains neither those loops nor the
+reference machinery.
+
+Wrong, missing, and applicable reordered inverses each leave restoration
+error `1.73205080757`. Altering the resident-H source and cutting the
+quadratic input term change the final boundary while their actual altered
+histories reverse cleanly. Intermediate projection, null carrier, nonmonic
+definitions, and malformed coefficients reject. Snapshot reload is a
+separate weaker path with no inverse. One actual carrier restores through the
+primary, unrelated reuse, and 256 alternating sentinels.
+
+Strict compilation, analyzer, sanitizer, deterministic replay, reference
+parity, native/reference linkage separation, fixed output allowlist, and a
+one-write no-smuggle trace pass. Focused review found and repaired two
+certificate defects: the first classifier ignored a legal degree-two
+non-affine boundary, and its `c*e` coefficient was initially mislabeled as a
+complete derivative. Fresh evidence `/tmp/qanf-full-eighth` binds 24
+provenance entries and passes closure review with no remaining finding.
+
+This establishes:
+
+```text
+ALGEBRAIC_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_PHASE_COMPOSITION_ESTABLISHED
+```
+
+within:
+
+```text
+BOUNDED_BOOLEAN_GF2_MONIC_QAND_CHAIN_DEGREE4_FIVE_COEFFICIENT_BOUNDARY_SOFTWARE_REFERENCE_ONLY
+```
+
+It does not establish arbitrary non-affine relation closure, general Boolean
+ANF elimination, bounded degree or term growth, a many-to-many non-affine
+boundary, CATVM enforcement for this backend, advantage, Small Wall crossing,
+physical execution, or unlimited catalytic computation.
+
+The active successor is not a longer QAND fixture. It is the smallest CATVM
+enclosure of this exact nonlinear path: seal F/G/J, keep H and Z service-local,
+return only the final five coefficients after actual Z/H/input reversal, and
+reuse the actual carrier for an unrelated nonlinear program. Once enforced,
+the next alternative is a controlled baseline/sham/augmented CATVM Small Wall
+experiment.

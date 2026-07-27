@@ -1,0 +1,63 @@
+{
+  "evidence_parent_commit": "850fb84e",
+  "review": "PASS_AFTER_TWO_CERTIFICATE_REPAIRS",
+  "reviewer_id": "QANF-NONAFFINE-01",
+  "claim": "ALGEBRAIC_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_PHASE_COMPOSITION_ESTABLISHED",
+  "claim_ceiling": "BOUNDED_BOOLEAN_GF2_MONIC_QAND_CHAIN_DEGREE4_FIVE_COEFFICIENT_BOUNDARY_SOFTWARE_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/qanf-full-eighth",
+  "initial_findings": [
+    {
+      "severity": "BLOCKING_SCHEMA_CLASSIFICATION_DEFECT",
+      "finding": "REFERENCE_CLASSIFIED_A_BOUNDARY_AS_AFFINE_FROM_ONLY_THE_DEGREE4_COEFFICIENT",
+      "counterexample": "D_PLUS_CE_HAS_ZERO_ABCE_COEFFICIENT_BUT_IS_NON_AFFINE",
+      "repair": "CLASSIFY_FIXED_SCHEMA_AS_AFFINE_IFF_CE_AND_ABCE_COEFFICIENTS_ARE_BOTH_ZERO",
+      "new_control": "DEGREE2_NONAFFINE_BOUNDARY_1_0_0_1_0_SAME_PLAN_AND_COUNTS"
+    },
+    {
+      "severity": "BLOCKING_CERTIFICATE_LABEL_DEFECT",
+      "finding": "BOUNDARY_CE_COEFFICIENT_WAS_MISLABELED_AS_THE_COMPLETE_SECOND_BOOLEAN_DERIVATIVE",
+      "repair": "RENAME_TO_CE_ANF_COEFFICIENT_AND_RETAIN_DEGREE2_CERTIFICATE_ONLY_WHEN_ABCE_IS_ZERO"
+    }
+  ],
+  "closure_checks": {
+    "all_sha256sum_entries_verify": 24,
+    "fixed_addresses_loop_bounds_plan_and_counts": true,
+    "coefficient_dependent_native_branching": false,
+    "resident_h_directly_feeds_resident_z": true,
+    "hidden_port_decodes": 0,
+    "hidden_port_copies": 0,
+    "final_z_cells_copied_and_decoded": 5,
+    "actual_inverse_order": "BOUNDARY_Z_H_J_G_F",
+    "same_carrier_transactions": 258,
+    "wrong_missing_and_reordered_inverse_controls": "PASS",
+    "snapshot_separate_from_actual_inverse": true,
+    "reference_separate_from_native_binary": true,
+    "reference_external_rows_streamed": 32,
+    "reference_hidden_probes_streamed": 128,
+    "reference_extensional_storage_cells": 0,
+    "degree4_nonaffinity_certificate": "PASS_PRIMARY_AND_REUSE",
+    "degree2_nonaffinity_certificate": "PASS_CE_ONLY_COUNTEREXAMPLE",
+    "affine_sham": "PASS_SAME_PLAN_COUNTS_AND_AFFINE",
+    "no_smuggle_stdout_writes": 1,
+    "no_smuggle_forbidden_file_network_ipc_or_stderr_writes": 0,
+    "claim_ceiling": "PASS_STRICT"
+  },
+  "sha256": {
+    "phase_source": "f4a02d97a3002e6d2252e6853d4c80496154e13843e75bf1dd3b10217c5b10c0",
+    "reference_source": "5abd39416ef2ae93ba893d6ae1dddbd92b4d438a3daa347a44777aaeb85432e4",
+    "qualifier": "683228b6827484fc21d36ecc913d41c3fd9d73717e90519698d1ac8712506244",
+    "accepted_result": "0461f964b790a30e19374539aa7e502e5af2747d2c1e8686aa797a6b20264825",
+    "no_smuggle_trace": "4059165f0005e8aba05111d92cb9c461fe28365893451eb5a8e9ade01afc41b0"
+  },
+  "remaining_findings": [],
+  "arbitrary_non_affine_relation_closure": false,
+  "general_boolean_anf_elimination": false,
+  "bounded_degree_or_term_growth": false,
+  "many_to_many_non_affine_boundary": false,
+  "catvm_enforcement": false,
+  "computational_advantage": false,
+  "small_wall_crossing": false,
+  "physical_execution": false,
+  "unlimited_catalytic_computation": false,
+  "terminal": false
+}

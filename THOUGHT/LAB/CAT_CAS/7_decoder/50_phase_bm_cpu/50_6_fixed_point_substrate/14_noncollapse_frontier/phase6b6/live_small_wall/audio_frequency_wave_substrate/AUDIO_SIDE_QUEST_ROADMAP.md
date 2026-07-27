@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `7.0`
+**Roadmap version:** `8.0`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through parent commit:** `a06d5774`
-**Current highest milestone:** `CATVM_ENFORCED_15_NODE_RANK2_AUTOMATIC_SCHEDULED_SHARED_RELATIONAL_DAG_ESTABLISHED_ON_PHASE_BACKEND`
-**Current claim ceiling:** `BOUNDED_LINUX_SAME_UID_SOFTWARE_GF2_WIDTH3_EXACT_15_NODE_ATOMIC_RUN_28_FORWARD_28_REVERSE_9_WORKING_SLOTS_REFERENCE_ONLY`
+**Reconciled through parent commit:** `850fb84e`
+**Current highest milestone:** `ALGEBRAIC_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_PHASE_COMPOSITION_ESTABLISHED`
+**Current claim ceiling:** `BOUNDED_BOOLEAN_GF2_MONIC_QAND_CHAIN_DEGREE4_FIVE_COEFFICIENT_BOUNDARY_SOFTWARE_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -126,6 +126,8 @@ ALGEBRAIC_FOUR_OWNER_HETEROGENEOUS_FANOUT_RETAIN_ALL_AFFINE_DAG_CUSTODY_ESTABLIS
 ALGEBRAIC_15_NODE_FOUR_OWNER_AUTOMATIC_PUBLIC_LEAF_PEBBLING_ESTABLISHED
 ALGEBRAIC_15_NODE_FOUR_OWNER_INTERNAL_OPERATOR_REMATERIALIZATION_ESTABLISHED
 ALGEBRAIC_15_NODE_RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION_ESTABLISHED
+CATVM_ENFORCED_15_NODE_RANK2_AUTOMATIC_SCHEDULED_SHARED_RELATIONAL_DAG_ESTABLISHED_ON_PHASE_BACKEND
+ALGEBRAIC_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_PHASE_COMPOSITION_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -755,13 +757,30 @@ within:
 BOUNDED_LINUX_SAME_UID_SOFTWARE_GF2_WIDTH3_EXACT_15_NODE_ATOMIC_RUN_28_FORWARD_28_REVERSE_9_WORKING_SLOTS_REFERENCE_ONLY
 ```
 
-The selected successor is now the smallest compact non-affine relation
-signature and composition law that is strictly broader than GF(2) affine
-relations and closes on the existing phase carrier without truth tables,
-assignment expansion, decoded internal relations, or answer-bearing host
-state. If that mechanism cannot remain compact, the fallback is a controlled
-baseline/sham/augmented CATVM Small Wall experiment using the enforced service
-as its machine substrate.
+The smallest compact non-affine successor is now established for a fixed
+Boolean-ANF schema. Three public monic quadratic factors close two hidden ports
+by phase-resident substitution:
+
+```text
+u + a*b = 0
+v + u*c = 0
+d + v*e = 0
+```
+
+The actual resident intermediate `H` feeds `Z`, and only the complete
+five-coefficient boundary `d+a*b*c*e=0` is decoded. A degree-two non-affine
+counterexample and an affine sham use the identical plan and operation counts.
+This is a bounded composition algebra strictly broader than affine GF(2), not
+general nonlinear elimination.
+
+The selected successor is CATVM enforcement of this exact nonlinear hidden
+intermediate using the smallest existing service seam. The controller must
+not receive, derive, or retain `H`; production must return only the final ANF
+boundary after actual inverse restoration and must reuse the actual carrier.
+After that bounded machine-law integration, the next alternative is a
+controlled baseline/sham/augmented CATVM Small Wall experiment. Do not grow
+the QAND chain, degree, or fixture corpus unless a concrete obstruction
+requires it.
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
 per-instance native-operation records are established. Native contraction
@@ -946,7 +965,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_LINUX_SAME_UID_SOFTWARE_GF2_WIDTH3_EXACT_15_NODE_ATOMIC_RUN_28_FORWARD_28_REVERSE_9_WORKING_SLOTS_REFERENCE_ONLY
+BOUNDED_BOOLEAN_GF2_MONIC_QAND_CHAIN_DEGREE4_FIVE_COEFFICIENT_BOUNDARY_SOFTWARE_REFERENCE_ONLY
 ```
 
 Not established:
@@ -975,9 +994,11 @@ microarchitectural secrecy
 compact carrier or phase-history recursion
 arbitrary interface width or relation arity
 CATVM enforcement for the general affine operator
-compact non-affine relation signatures
-composition algebra strictly broader than GF(2) affine relations
 general CATVM relational-DAG enforcement
+general Boolean ANF elimination
+bounded nonlinear degree or term growth
+many-to-many compact non-affine boundary relations
+CATVM enforcement for the quadratic ANF backend
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
