@@ -263,6 +263,10 @@ internal affine DAG operator rematerialization
     ESTABLISHED_EXACT_15_NODE_ONE_LAYER_FOUR_OPERATORS_8_WORKING_SLOTS
 rank-two affine DAG rematerialization
     ESTABLISHED_EXACT_15_NODE_SINGLE_RANK2_BORROWER_ORDINAL3_9_WORKING_SLOTS
+fixed-schema quadratic ANF closure
+    ESTABLISHED_TWO_HIDDEN_PORTS_DEGREE4_FIVE_COEFFICIENT_BOUNDARY
+CATVM quadratic ANF custody
+    ESTABLISHED_SAME_UID_SERVICE_258_ONE_CARRIER_TRANSACTIONS
 C5 advantage
     NOT_ESTABLISHED
 ```
@@ -489,7 +493,11 @@ The selected frontier is:
 ```text
 GENERAL_RETAIN_ALL_AFFINE_DAG_CUSTODY_COMPILATION     ESTABLISHED_EXACT_15_NODE
 -> AUTOMATIC_PUBLIC_LEAF_PEBBLING                     ESTABLISHED_EXACT_15_NODE
--> INTERNAL_OPERATOR_REMATERIALIZATION_WITH_MULTI_EPOCH_EDGE_CUSTODY SELECTED
+-> RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION         ESTABLISHED_EXACT_15_NODE
+-> CATVM_RANK2_SHARED_DAG_CUSTODY                     ESTABLISHED
+-> FIXED_SCHEMA_QUADRATIC_ANF_COMPOSITION             ESTABLISHED
+-> CATVM_QUADRATIC_ANF_HIDDEN_INTERMEDIATE_CUSTODY    ESTABLISHED
+-> MATCHED_FIXED_SCHEMA_SMALL_WALL_OBSTRUCTION_TRIAD  SELECTED
 ```
 
 The next crossing is not:
@@ -965,7 +973,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_BOOLEAN_GF2_MONIC_QAND_CHAIN_DEGREE4_FIVE_COEFFICIENT_BOUNDARY_SOFTWARE_REFERENCE_ONLY
+BOUNDED_LINUX_SAME_UID_SOFTWARE_BOOLEAN_GF2_MONIC_QAND_CHAIN_DEGREE4_FIVE_COEFFICIENT_ATOMIC_TRANSACTION_REFERENCE_ONLY
 ```
 
 Not established:
@@ -998,7 +1006,7 @@ general CATVM relational-DAG enforcement
 general Boolean ANF elimination
 bounded nonlinear degree or term growth
 many-to-many compact non-affine boundary relations
-CATVM enforcement for the quadratic ANF backend
+fixed-schema or general Small Wall crossing
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.

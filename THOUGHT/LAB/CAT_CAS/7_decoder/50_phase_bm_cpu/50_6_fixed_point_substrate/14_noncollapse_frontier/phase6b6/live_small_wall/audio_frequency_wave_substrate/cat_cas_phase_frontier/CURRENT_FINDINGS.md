@@ -2882,3 +2882,108 @@ return only the final five coefficients after actual Z/H/input reversal, and
 reuse the actual carrier for an unrelated nonlinear program. Once enforced,
 the next alternative is a controlled baseline/sham/augmented CATVM Small Wall
 experiment.
+
+## CATVM now enforces the nonlinear QANF hidden-intermediate law
+
+The reviewed quadratic-ANF engine is now privately embedded in a separate
+carrier-owning Linux service. The ordinary controller has no phase code,
+fixture parser, Boolean evaluator, expected result, or answer table. It can
+request only:
+
+```text
+HELLO
+EXECUTE <public variant 0..3>
+SHUTDOWN
+```
+
+All attempts to project U, V, H, Z, F, G, J, carrier state, dumps, or state
+detail receive one fixed denial. Embedded-NUL, oversized, and unknown packets
+receive one fixed protocol error. The production protocol exposes no inverse,
+snapshot, fault, carrier-disabled, or coefficient selector.
+
+The service seals four public programs and one actual 23-cell carrier in a
+locked, non-dumpable, non-forking context. After accepting one same-UID
+client, it unlinks the Unix socket and installs a seccomp default-kill
+allowlist. The six same-UID `/proc`, `process_vm_readv`, `ptrace`, and
+`pidfd_getfd` inspection attempts fail.
+
+Each accepted request atomically executes:
+
+```text
+encode F/G/J
+-> construct unresolved resident H
+-> construct Z directly from that actual H
+-> copy and decode only final Z
+-> boundary^-1
+-> Z^-1
+-> H^-1
+-> (J,G,F)^-1
+-> verify sealed carrier state
+-> advance restoration generation
+-> send final boundary
+```
+
+The four H cells are never decoded, copied, serialized, or committed. The
+five Z coefficients are latched before inverse execution but no response is
+constructed or sent until the actual inverse, exact discrete custody, and
+complex restoration law pass.
+
+The accepted service executes primary, unrelated nonlinear reuse, and 256
+alternating transactions on one actual carrier. Exact per-transaction counts
+remain:
+
+```text
+phase products                       18
+carrier reads                        97
+phase-cell updates                   46
+final boundary decodes                5
+intermediate decodes / copies       0 / 0
+boundary copies                       2
+snapshot loads                        0
+```
+
+Primary `[1,0,0,0,1]` and reuse `[1,1,1,1,1]` match both the direct phase
+engine and separately linked reference. Wrong, missing, and applicable
+reordered inverses are detected. Snapshot remains a distinct weaker
+test-only path whose restoration generation stays zero; inert and null-carrier
+controls cannot masquerade as the accepted path.
+
+Strict compilation, static analysis, ASan/UBSan, deterministic replay,
+predecessor regression, symbol separation, fixed output allowlisting, and
+nonvacuous post-custody tracing pass. The traced suffix contains 27 actual
+receives and 27 sends, zero forbidden channels, and service stdout/stderr are
+byte-zero. Focused review first required the distinct trace build and every
+control artifact to be provenance-bound, then required exact sealed-copy
+equality for the discrete program table instead of relying on a 64-bit
+custody hash. Fresh evidence `/tmp/catvm-qanf-full-fifth` binds 37 top-level
+artifacts plus the nested predecessor bundle and passes with no remaining
+finding.
+
+This establishes:
+
+```text
+CATVM_ENFORCED_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
+```
+
+within:
+
+```text
+BOUNDED_LINUX_SAME_UID_SOFTWARE_BOOLEAN_GF2_MONIC_QAND_CHAIN_DEGREE4_FIVE_COEFFICIENT_ATOMIC_TRANSACTION_REFERENCE_ONLY
+```
+
+It does not establish general ANF elimination, arbitrary non-affine closure,
+advantage, Small Wall crossing, physical waveform execution, or unlimited
+catalytic computation.
+
+The exact fixed schema has only six free public coefficient bits and admits
+the compact conventional boundary law:
+
+```text
+[1, eta, theta*gamma, theta*delta*alpha, theta*delta*beta]
+```
+
+so a longer fixture would not remove the live obstruction. The selected next
+experiment is a matched persistent-service triad: four-AND compact baseline,
+snapshot sham, and in-place CATVM, with identical public requests and
+boundaries. It will adjudicate the fixed-schema obstruction honestly; batch
+repetition is throughput, not problem-size growth or mission Gamma.
