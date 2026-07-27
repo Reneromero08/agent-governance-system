@@ -3098,9 +3098,10 @@ H = F ; G  at rank 4
 Z = H ; J  at rank 8
 ```
 
-Z consumes the actual phase-resident H. H is never decoded, copied,
-serialized, or hashed. Only the final rank-eight core block is copied and
-decoded; it survives while the machine removes the boundary copy, applies
+Z consumes the actual phase-resident H. H is never decoded, serialized,
+hashed, or materialized into a second block; its ordinary operand reads are
+included in the carrier-read count. Only the final rank-eight core block is
+copied and decoded; it survives while the machine removes the boundary copy, applies
 `Z^-1`, applies `H^-1`, reverses the three leaf encodings, verifies
 restoration, and reuses the actual carrier for the unrelated neighbor-NAND
 program.
@@ -3168,3 +3169,71 @@ transaction. It must enforce hidden H custody and actual `Z^-1,H^-1`
 restoration behind the process boundary. After that, the scientific fork is
 exact relation-preserving rank reduction or a growing-instance Small Wall
 triad, not additional widths at the same fixed ranks.
+
+## CATVM enforces the width-growing Boolean-TT handoff
+
+The width-parametric non-affine transaction now runs inside one separately
+linked same-UID service per tested width. Each service creates one carrier,
+privately embeds the reviewed phase-TT engine, accepts one
+`AF_UNIX/SOCK_SEQPACKET` client, unlinks the endpoint, and installs a
+default-kill seccomp allowlist. The controller contains no phase core,
+relation generator, reference evaluator, expected boundary hash, witness
+list, or answer table.
+
+The production command surface is limited to `HELLO`, `EXECUTE 0/1`, and
+`SHUTDOWN`. Inside each atomic execution, actual rank-two F/G/J leaves produce
+resident rank-four H; Z reads the actual H cells as counted carrier operands.
+H has zero decoded cells, zero serialized cells, and zero second-block
+materializations. Only the final rank-eight core block is decoded and reduced
+to a custody receipt. The service then applies the actual boundary, Z, H, and
+leaf inverses, verifies canonical restoration, advances generation, and sends
+the already-latched receipt.
+
+At widths `4,5,8,12,16`, one service and one carrier complete primary,
+unrelated neighbor-NAND reuse, and 32 alternating transactions. All 34
+transactions preserve exact direct-backend boundary parity. The carrier
+creation count remains one, generation reaches 34, and the second program
+consumes the actual carrier restored by the first.
+
+Wrong, missing, and prospectively noncommuting reordered inverse builds fail
+restoration. Snapshot reload remains a separate generation-zero path. An
+inert test build provides a carrier-disabled transport control with no final
+result. The earlier no-argument check is labeled only as malformed startup,
+not as a null-carrier experiment. Intermediate projection, embedded-NUL,
+oversized, and unknown requests are rejected.
+
+All six same-UID `/proc`, `process_vm_readv`, `ptrace`, and `pidfd_getfd`
+inspection attempts are denied. A 3,701-byte post-custody trace contains 28
+receive and 28 send calls and no file-open, file-create, rename, connect, or
+stdout/stderr write channel. Service stdout and stderr are byte-zero.
+
+Resource evidence counts payload arrays, sealed verification state,
+transaction comparison state, protocol buffers and traffic, binaries, and the
+exact phase-operation laws. Direct, inert, snapshot, and in-place paths are
+compared only at operation-law scope; this is not comprehensive RSS or a
+performance study. The best generic classical TT evaluator and the stronger
+fixture-specialized O(N8) generator remain available, so no advantage follows.
+
+Focused review repaired the malformed-startup and overbroad zero-copy labels.
+Fresh evidence `/tmp/catvm-boolean-tt-third` passes both manifests,
+analyzers, ASan/UBSan, replay, direct regression, no-smuggle tracing, and
+review with no remaining finding. It establishes:
+
+```text
+CATVM_ENFORCED_WIDTH_PARAMETRIC_BOOLEAN_TT_RESIDENT_H_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
+```
+
+within:
+
+```text
+BOUNDED_LINUX_SAME_UID_SOFTWARE_WIDTHS4_5_8_12_16_BOOLEAN_TT_RANK2_TO_RANK4_TO_RANK8_ATOMIC_TRANSACTION_REFERENCE_ONLY
+```
+
+The machine boundary is no longer the immediate obstruction for this family.
+Product ranks still grow with depth, and neither exact rank reduction nor a
+fixed-rank closure law is established. The selected successor is the smallest
+exact relation-preserving Boolean-TT quotient experiment that can decide
+whether this public nonlinear family admits native fixed-rank recursive
+closure. If it only exploits fixture-specific structure or fails to reduce
+general products, record that obstruction and move to the growing-instance
+Small Wall triad rather than adding more widths.

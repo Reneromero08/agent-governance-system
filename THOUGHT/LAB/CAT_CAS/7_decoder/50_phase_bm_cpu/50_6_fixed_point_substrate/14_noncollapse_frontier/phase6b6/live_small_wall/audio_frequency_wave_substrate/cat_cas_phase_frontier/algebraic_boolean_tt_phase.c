@@ -690,6 +690,7 @@ static uint64_t btt_program_hash(
     return hash;
 }
 
+#ifndef ALGEBRAIC_BOOLEAN_TT_NO_MAIN
 static uint64_t btt_fibonacci(size_t ordinal) {
     uint64_t previous = 0U;
     uint64_t current = 1U;
@@ -862,7 +863,8 @@ int main(int argc, char **argv) {
         "\"final_decodes_per_transaction\":%llu,"
         "\"decoded_intermediate_cells\":0,"
         "\"serialized_intermediate_cells\":0,"
-        "\"copied_intermediate_cells\":0,"
+        "\"materialized_intermediate_block_copies\":0,"
+        "\"intermediate_carrier_operand_reads_counted\":true,"
         "\"shared_assignment_loops\":0,"
         "\"local_shared_values_per_output_core\":2,"
         "\"dense_relation_cells_materialized\":0,"
@@ -943,3 +945,4 @@ int main(int argc, char **argv) {
     btt_free_projection(&snapshot.projection);
     return 0;
 }
+#endif

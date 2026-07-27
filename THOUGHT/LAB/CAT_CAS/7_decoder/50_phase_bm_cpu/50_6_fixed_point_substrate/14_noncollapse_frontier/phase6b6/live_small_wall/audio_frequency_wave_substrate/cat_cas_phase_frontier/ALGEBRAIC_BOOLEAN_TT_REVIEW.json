@@ -1,10 +1,10 @@
 {
-  "evidence_parent_commit": "ddf0c6dd",
+  "evidence_parent_commit": "09a70636",
   "review": "PASS",
   "reviewer_id": "BOOLEAN-TT-PRODUCT-RANK-01",
   "claim": "BOUNDED_WIDTH_PARAMETRIC_BOOLEAN_TT_MANY_TO_MANY_RELATION_COMPOSITION_WITH_PRODUCT_RANK_NATIVE_PHASE_CLOSURE_AND_RESIDENT_INTERMEDIATE",
   "claim_ceiling": "BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_BOOLEAN_SEMIRING_TT_RANK2_TO_RANK4_TO_RANK8_REFERENCE_ONLY",
-  "evidence_directory": "/tmp/boolean-tt-phase-sixth",
+  "evidence_directory": "/tmp/catvm-boolean-tt-third/direct_regression",
   "closure_checks": {
     "top_level_sha256": "PASS",
     "core_sha256": "PASS",
@@ -14,7 +14,7 @@
     "degree4_non_affinity_certificate": "PASS",
     "width_wide_assignment_enumeration": 0,
     "dense_relation_tables": 0,
-    "actual_resident_h_custody": "PASS",
+    "actual_resident_h_custody": "PASS_ZERO_DECODE_SERIALIZATION_OR_BLOCK_MATERIALIZATION_WITH_OPERAND_READS_COUNTED",
     "wrong_missing_reordered_inverse_controls": "PASS",
     "snapshot_distinction": "PASS",
     "actual_restoration_and_reuse": "PASS",
@@ -30,6 +30,10 @@
     {
       "finding": "QUALIFIER_SOURCE_NOT_BOUND_IN_FIFTH_EVIDENCE",
       "repair": "SIXTH_EVIDENCE_BINDS_QUALIFIER_IN_CORE_MANIFEST_RESULT_AND_TOP_MANIFEST"
+    },
+    {
+      "finding": "ZERO_INTERMEDIATE_COPIES_WAS_TOO_BROAD_FOR_ORDINARY_H_OPERAND_LOADS",
+      "repair": "RELABEL_ZERO_BLOCK_MATERIALIZATIONS_AND_EXPLICITLY_COUNT_H_OPERAND_READS_IN_CARRIER_READS"
     }
   ],
   "remaining_blocking_findings": [],

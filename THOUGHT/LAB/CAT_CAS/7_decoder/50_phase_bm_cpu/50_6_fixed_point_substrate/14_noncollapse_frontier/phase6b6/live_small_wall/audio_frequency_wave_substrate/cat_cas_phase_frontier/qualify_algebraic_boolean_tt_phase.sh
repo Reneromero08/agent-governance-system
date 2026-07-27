@@ -165,7 +165,8 @@ jq -e '
         and .final_decodes_per_transaction == .final_z_cells
         and .decoded_intermediate_cells == 0
         and .serialized_intermediate_cells == 0
-        and .copied_intermediate_cells == 0
+        and .materialized_intermediate_block_copies == 0
+        and .intermediate_carrier_operand_reads_counted
         and .shared_assignment_loops == 0
         and .local_shared_values_per_output_core == 2
         and .dense_relation_cells_materialized == 0

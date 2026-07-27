@@ -1,9 +1,9 @@
 {
-  "evidence_parent_commit": "ddf0c6dd",
+  "evidence_parent_commit": "09a70636",
   "result": "PASS",
   "claim": "BOUNDED_WIDTH_PARAMETRIC_BOOLEAN_TT_MANY_TO_MANY_RELATION_COMPOSITION_WITH_PRODUCT_RANK_NATIVE_PHASE_CLOSURE_AND_RESIDENT_INTERMEDIATE",
   "claim_ceiling": "BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_BOOLEAN_SEMIRING_TT_RANK2_TO_RANK4_TO_RANK8_REFERENCE_ONLY",
-  "evidence_directory": "/tmp/boolean-tt-phase-sixth",
+  "evidence_directory": "/tmp/catvm-boolean-tt-third/direct_regression",
   "widths": [4, 5, 8, 12, 16],
   "representation": {
     "semiring": "BOOLEAN_OR_AND",
@@ -37,7 +37,8 @@
     "actual_resident_h_consumed_by_z": true,
     "decoded_intermediate_cells": 0,
     "serialized_intermediate_cells": 0,
-    "copied_intermediate_cells": 0,
+    "materialized_intermediate_block_copies": 0,
+    "intermediate_carrier_operand_reads_counted": true,
     "final_boundary_only_projection": true,
     "actual_inverse_restoration": true,
     "actual_restored_carrier_reuse": true,
@@ -148,13 +149,13 @@
     "output_trace": "PASS_ONE_STDOUT_WRITE_ZERO_STDERR"
   },
   "sha256": {
-    "phase_source": "936bc1dae83bf8913f1961db99d906e82fe57660c785842515e444a4808c123e",
+    "phase_source": "f8abfded8ad4f033db6f87927482e37aab4c6599a1987737c49a481ab989ab62",
     "reference_source": "d6e6d83c596fea526847ee6f41c1e477b76deef935622e4b77e40ba49bce4460",
-    "qualifier": "71484b537480fc1b377dfc2685feb87450981684e0ae286e9a16d92e3930eed1",
-    "evidence_result": "6ef71510708c6180923685416a9401caa0b3c3c3e090b7b4a2a7bffb49d33d99",
-    "native_jsonl": "1be8f16a45e2dc4d2d36e04ea419f3d4f9be3e0c88d720573a1e16e65d39ea02",
+    "qualifier": "094686f35af81e4f57a4bd9332708df1683d1d2d837002999cf06cfc8a5db076",
+    "evidence_result": "2ececa003b6b1ed1bab28fd2b1cd202eec7ba33b2c65b392580951f9cbec4c50",
+    "native_jsonl": "54fb1a3ac7dea562dfa70075f73762385223d01692c150c70332e7c2d2448cf6",
     "reference_jsonl": "f3450574b2348a95b95ebdb4e8fe5d30aed8333c0bce211fb110733ae7249886",
-    "output_trace": "5fb89af783cc58ce8906d415618f5661abf33c95847dcdc1159ec05d63e8200f"
+    "output_trace": "8af17b59706f236e4f4d8d901eba23af8c225f594719145993858b1f8fed0d9b"
   },
   "arbitrary_qanf_compactness": false,
   "arbitrary_graph_topology": false,

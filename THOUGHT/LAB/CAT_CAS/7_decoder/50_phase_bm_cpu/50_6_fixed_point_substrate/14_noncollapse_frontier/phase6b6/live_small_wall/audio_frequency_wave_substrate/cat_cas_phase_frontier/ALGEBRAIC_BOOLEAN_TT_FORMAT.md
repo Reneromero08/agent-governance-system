@@ -117,8 +117,10 @@ encode F/G/J
 -> reuse the actual restored carrier
 ```
 
-H is never decoded, copied, serialized, or hashed. The final projected core
-bytes survive outside inverse history. State restoration uses the predeclared
+H is never decoded, serialized, hashed, or materialized in a second block.
+Its cells are read directly as counted carrier operands while producing Z.
+The final projected core bytes survive outside inverse history. State
+restoration uses the predeclared
 complex tolerance `2e-12`; discrete width, ranks, topology, program variant,
 operation order, and restoration generation are exact.
 

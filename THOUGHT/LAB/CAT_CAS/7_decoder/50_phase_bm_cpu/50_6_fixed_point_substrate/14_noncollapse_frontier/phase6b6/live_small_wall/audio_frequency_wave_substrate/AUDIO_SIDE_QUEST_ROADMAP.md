@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `8.2`
+**Roadmap version:** `8.3`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through parent commit:** `ddf0c6dd`
-**Current highest milestone:** `BOUNDED_WIDTH_PARAMETRIC_BOOLEAN_TT_MANY_TO_MANY_RELATION_COMPOSITION_WITH_PRODUCT_RANK_NATIVE_PHASE_CLOSURE_AND_RESIDENT_INTERMEDIATE`
-**Current claim ceiling:** `BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_BOOLEAN_SEMIRING_TT_RANK2_TO_RANK4_TO_RANK8_REFERENCE_ONLY`
+**Reconciled through parent commit:** `09a70636`
+**Current highest milestone:** `CATVM_ENFORCED_WIDTH_PARAMETRIC_BOOLEAN_TT_RESIDENT_H_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND`
+**Current claim ceiling:** `BOUNDED_LINUX_SAME_UID_SOFTWARE_WIDTHS4_5_8_12_16_BOOLEAN_TT_RANK2_TO_RANK4_TO_RANK8_ATOMIC_TRANSACTION_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -803,15 +803,20 @@ product-rank law contracts two shared-bit values per output core, never a
 fixed QANF degree-four witness; width sixteen carries thirteen overlapping
 degree-four windows.
 
-The live obstruction has moved from width to composition depth: TT ranks
-multiply, no native exact recompression is established, and the strongest
-fixture-specialized classical baseline can directly emit the known rank-eight
-root. The selected successor is the smallest CATVM enclosure of the width-
-parametric Boolean-TT transaction. It must keep H service-local, expose only
-the final rank-eight boundary receipt, restore in the actual `Z^-1,H^-1`
-order, and reuse the actual carrier. After enforcement, the next scientific
-fork is exact relation-preserving rank reduction or a Small Wall triad on a
-growing non-affine instance family, not more tested widths of the same ranks.
+CATVM enforcement of the width-parametric transaction is now established.
+One private service carrier per width keeps H resident, exposes only the
+final boundary receipt, restores in the actual `Z^-1,H^-1` order, and
+completes 34 actual-carrier transactions. Same-UID inspection, protocol
+projection, inverse, snapshot, inert, replay, sanitizer, and non-vacuous
+no-smuggle controls pass.
+
+The live obstruction is composition depth: TT ranks multiply, no native exact
+recompression is established, and the strongest fixture-specialized
+classical baseline can directly emit the known rank-eight root. The selected
+successor is exact relation-preserving Boolean-TT quotienting with no dense
+truth table or width-wide assignment enumeration. If the quotient is only a
+fixture-specific recurrence, it is an obstruction result and the next fork is
+a growing-instance Small Wall triad, not more widths of the same ranks.
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
 per-instance native-operation records are established. Native contraction
@@ -996,7 +1001,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_LINUX_SAME_UID_SOFTWARE_BOOLEAN_GF2_MONIC_QAND_CHAIN_DEGREE4_FIVE_COEFFICIENT_ATOMIC_TRANSACTION_REFERENCE_ONLY
+BOUNDED_LINUX_SAME_UID_SOFTWARE_WIDTHS4_5_8_12_16_BOOLEAN_TT_RANK2_TO_RANK4_TO_RANK8_ATOMIC_TRANSACTION_REFERENCE_ONLY
 ```
 
 Not established:
@@ -1028,7 +1033,8 @@ CATVM enforcement for the general affine operator
 general CATVM relational-DAG enforcement
 general Boolean ANF elimination
 bounded nonlinear degree or term growth
-many-to-many compact non-affine boundary relations
+fixed-rank unbounded-depth Boolean-TT closure
+native exact Boolean-TT rank minimization
 fixed-schema or general Small Wall crossing
 ```
 
