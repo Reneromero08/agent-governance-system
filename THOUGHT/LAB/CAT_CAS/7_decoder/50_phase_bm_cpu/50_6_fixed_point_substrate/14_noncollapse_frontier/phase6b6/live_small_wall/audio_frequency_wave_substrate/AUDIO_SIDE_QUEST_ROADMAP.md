@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `5.8`
+**Roadmap version:** `5.9`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through parent commit:** `90e5afd6`
-**Current highest milestone:** `ALGEBRAIC_15_NODE_FOUR_OWNER_AUTOMATIC_PUBLIC_LEAF_PEBBLING_ESTABLISHED`
-**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_DAG_COMPILER_EMITTED_19_STEP_REVERSIBLE_PUBLIC_DEGREE_ONE_LEAF_ONLY_PEBBLING_11_WORKING_SLOTS_12_PHYSICAL_RELATION_BLOCKS_FOUR_PINNED_SHARED_OWNERS_REFERENCE_ONLY`
+**Reconciled through parent commit:** `1db61a22`
+**Current highest milestone:** `ALGEBRAIC_15_NODE_FOUR_OWNER_INTERNAL_OPERATOR_REMATERIALIZATION_ESTABLISHED`
+**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_ONE_LAYER_FOUR_INTERNAL_OPERATOR_REMATERIALIZATION_23_STEP_REVERSIBLE_TAPE_8_WORKING_SLOTS_9_PHYSICAL_BLOCKS_MULTI_ACTIVATION_EDGE_CUSTODY_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -94,6 +94,7 @@ ALGEBRAIC_NESTED_AFFINE_DAG_MULTI_SHARED_MESSAGE_CUSTODY_ESTABLISHED
 ALGEBRAIC_NESTED_AFFINE_DAG_PINNED_SHARED_COMPACT_LEAF_PEBBLING_ESTABLISHED
 ALGEBRAIC_FOUR_OWNER_HETEROGENEOUS_FANOUT_RETAIN_ALL_AFFINE_DAG_CUSTODY_ESTABLISHED
 ALGEBRAIC_15_NODE_FOUR_OWNER_AUTOMATIC_PUBLIC_LEAF_PEBBLING_ESTABLISHED
+ALGEBRAIC_15_NODE_FOUR_OWNER_INTERNAL_OPERATOR_REMATERIALIZATION_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -152,6 +153,8 @@ two nested shared affine DAG messages with overlapping custody
 exact pinned compact leaf-pebbled execution of the seven-node nested DAG
 four native shared affine DAG owners with fanouts 4,3,3,2
 twelve exact per-edge forward/inverse generation receipts
+compiler-planned native rematerialization of four internal operators
+multi-activation edge custody across two producer generations
 ```
 
 Its strongest bounded architecture is:
@@ -221,6 +224,8 @@ coefficient-oblivious affine elimination
     ESTABLISHED_PUBLIC_COMPILE_TIME_WIDTHS_2_3_4_8_12_16
 affine DAG shared resident message
     ESTABLISHED_EXACT_15_NODE_DAG_FOUR_NATIVE_PRODUCERS_FANOUTS_4_3_3_2_WIDTHS_3_4_8_12_16
+internal affine DAG operator rematerialization
+    ESTABLISHED_EXACT_15_NODE_ONE_LAYER_FOUR_OPERATORS_8_WORKING_SLOTS
 C5 advantage
     NOT_ESTABLISHED
 ```
@@ -633,13 +638,48 @@ resident-generation edges; all twelve shared edges remain exact. This does
 not establish internal operator rematerialization, general-DAG pebbling, a
 global optimum, total-memory reduction, or performance advantage.
 
-The selected successor is compiler-planned internal operator
-rematerialization. It must introduce multi-activation edge receipts that bind
+The leaf-only result selected compiler-planned internal operator
+rematerialization as its successor. That experiment had to introduce
+multi-activation edge receipts that bind
 each forward and inverse consumption to the correct recomputed producer
 generation, preserve the four pinned shared owners where dependencies require
 them, and reject stale receipts across rematerialization epochs. No decoded
 intermediate or saved relation content may substitute for actual native
 recomputation.
+
+Compiler-planned one-layer internal rematerialization is now established:
+
+```text
+derive four eligible degree-one internal operators from topology
+-> emit a 23-step reversible public tape
+-> native inverse-clear each operator after its sole forward consumer
+-> retain only structural reconstruction obligations
+-> natively recompute from actual pinned shared-owner generations
+-> consume the recomputed relation in the pending inverse edge
+-> close 30 physical activation receipts over 22 logical graph edges
+-> restore and reuse the actual carrier
+```
+
+The accepted compiler reduces the exact graph from eleven leaf-only working
+blocks to eight, or nine physical relation blocks including the boundary.
+Eight input edges have two producer activation epochs. A same-slot,
+same-serial stale-consumer control proves that generation custody is causal,
+not merely an address check. Twenty-five boundaries match both the
+independent GF2 evaluator and the leaf-only predecessor through width sixteen.
+The carrier law is `72w^2+47w+11`, compared with `84w^2+59w+14` for
+leaf-only pebbling, `100w^2+75w+18` retain-all, and
+`244w^2+219w+54` occurrence expansion.
+
+This result is one-layer and exact-topology bounded. It does not establish
+recursive internal rematerialization, automatic general-DAG pebbling, a
+global optimum, total-memory or performance advantage, or CATVM enforcement
+for this compiler.
+
+The selected successor is multi-layer recursive operator rematerialization
+with generalized activation custody. It must evict an operator whose inverse
+reconstruction depends on another evicted operator, derive nested
+obligations from public topology, and close producer/consumer activation
+generations at depth greater than two without retaining relation content.
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
 per-instance native-operation records are established. Native contraction

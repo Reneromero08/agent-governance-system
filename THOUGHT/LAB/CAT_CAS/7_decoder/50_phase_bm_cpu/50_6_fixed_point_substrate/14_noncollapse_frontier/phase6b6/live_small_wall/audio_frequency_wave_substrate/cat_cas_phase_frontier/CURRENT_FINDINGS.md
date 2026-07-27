@@ -2470,3 +2470,98 @@ rematerialization with multi-epoch shared-edge custody. It must release and
 later recompute eligible internal values while making every edge receipt
 identify the correct activation generation, without saving decoded
 intermediate content or relaxing final-boundary-only projection.
+
+## Compiler-planned one-layer internal operator rematerialization
+
+The compact compiler now derives four eligible public internal operators
+`809,810,811,812` from the same validated fifteen-node topology. Each is a
+nonshared degree-one operator whose two operands are pinned native shared
+owners. The compiler emits a coefficient-oblivious 23-step reversible tape,
+clears each operator after its sole forward consumer, and records only a
+structural reconstruction obligation. No relation coefficients, decoded
+intermediate, saved carrier copy, or answer-bearing table enters an
+obligation.
+
+During actual inverse execution, the pending consumer inverse causes the
+operator to be recomputed natively from the original resident shared-owner
+generations. The actual recomputed relation is consumed by the pending
+inverse edge, then its own native inverse clears and releases it. The four
+shared owners remain pinned and pairwise nonaliased throughout.
+
+Logical edge custody and physical activation custody are now distinct. The
+graph still has 22 public edges, each with one logical forward/inverse
+transition. Rematerialization produces 30 physical activation receipts:
+eight input edges activate twice, while six exact edges, four public-leaf
+reconstruction edges, and four internal-operator reconstruction edges
+activate once. All 22 producer-generation activation pairs close exactly.
+A causal control changes only a consumer activation generation while keeping
+the actual slot, serial, and producer activation unchanged; it is rejected.
+
+The bound plan hashes topology `41d917d4a3308fbe`, schedule
+`aa5719d149bc55e0`, and all 23 public steps into
+`f0345b7ae7bfe27d`. Predicted and observed peak residency are eight working
+blocks. An eight-slot build passes and a seven-slot build fails causally at
+clean relation-pool exhaustion.
+
+The one-layer path has:
+
+```text
+working relation blocks                  8
+physical blocks including boundary       9
+native operator calls                    30
+leaf encode calls                        16
+lease allocations                        23
+logical edge transitions                 22
+physical activation receipts             30
+```
+
+For `B(w)=4w^2+4w+1` and `W(w)=36w^2+11w+2`:
+
+```text
+internal rematerialization = W(w) +  9B(w) =  72w^2 +  47w + 11
+automatic leaf pebbling    = W(w) + 12B(w) =  84w^2 +  59w + 14
+retain-all                 = W(w) + 16B(w) = 100w^2 +  75w + 18
+occurrence expansion       = W(w) + 52B(w) = 244w^2 + 219w + 54
+```
+
+At width sixteen the accepted path uses 19,195 complex carrier cells and
+614,240 live carrier bytes. The evidence separately accounts for logical
+custody, activation receipts, the reversible plan, obligations, execution
+state, compiler-measured concurrent stack, the executable, and stdout.
+These are bounded software resource counts, not a total-memory or
+performance-advantage claim.
+
+Five semantic variants match the independent GF2 reference and the leaf-only
+predecessor at widths `3,4,8,12,16`, for twenty-five complete boundaries.
+Seventeen transactions use one actual carrier allocation and restore below
+`6.7e-16`; unrelated reuse consumes that actual restored carrier. Strict,
+analyzer, sanitizer, deterministic-replay, expanded no-smuggle, and
+predecessor-regression checks pass. Controls reject stale or missing
+activation closure, stale producer activation, missing/double/stale operator
+reconstruction, noneligible eviction, tape tampering, every forbidden
+projection, null carrier, wrong or missing root inverse, and the weaker
+snapshot branch. Focused independent review reports no blocking defect.
+
+This establishes:
+
+```text
+BOUNDED_15_NODE_FOUR_OWNER_INTERNAL_OPERATOR_REMATERIALIZATION_ESTABLISHED
+```
+
+with ceiling:
+
+```text
+BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_ONE_LAYER_FOUR_INTERNAL_OPERATOR_REMATERIALIZATION_23_STEP_REVERSIBLE_TAPE_8_WORKING_SLOTS_9_PHYSICAL_BLOCKS_MULTI_ACTIVATION_EDGE_CUSTODY_REFERENCE_ONLY
+```
+
+It does not establish recursive internal rematerialization, automatic general
+DAG pebbling, arbitrary graph topology, a global pebbling optimum, CATVM
+enforcement for this compiler, total-memory or performance advantage,
+physical execution, Small Wall crossing, or unlimited catalytic computation.
+
+The selected next experiment is multi-layer recursive internal operator
+rematerialization. It must evict an operator whose inverse reconstruction
+depends on at least one operator that has itself been evicted, derive nested
+obligations and activation generations from topology, and close exact custody
+at activation depth greater than two without retaining decoded relation
+content.

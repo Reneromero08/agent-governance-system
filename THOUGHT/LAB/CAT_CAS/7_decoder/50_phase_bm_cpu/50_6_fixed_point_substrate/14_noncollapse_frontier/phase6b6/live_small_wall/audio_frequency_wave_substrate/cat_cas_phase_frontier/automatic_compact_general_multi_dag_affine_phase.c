@@ -1609,7 +1609,11 @@ static enum ac_fault ac_fault_from_option(const char *option) {
     return AC_FAULT_NONE;
 }
 
-int main(int argc, char **argv) {
+#ifndef AC_PUBLIC_MAIN
+#define AC_PUBLIC_MAIN main
+#endif
+
+int AC_PUBLIC_MAIN(int argc, char **argv) {
     if (argc < 2 || argc > 3) {
         fail(
             "usage: automatic_compact_general_multi_dag_affine_phase "
