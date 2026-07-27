@@ -1131,3 +1131,83 @@ Boolean/F3 relations composed by one reusable `CONTRACT2` body, with the
 16-cell intermediate retained unresolved and consumed directly before actual
 inverse restoration and cross-program reuse. Its exponential
 separator-width resource law must remain explicit.
+
+## Native width-two relational phase contraction
+
+The branch now closes two shared Boolean ports in one native phase operator.
+A four-port relation is represented by 16 multiaffine F3 coefficients in 16
+relative phase cells. For resident `F(X,Y)` and `G(Y,Z)`, the reusable body
+computes:
+
+```text
+J = F^2 + G^2
+N_t(P) = P|t=0 * P|t=1
+CONTRACT2(F,G) = N_Y1(N_Y0(J))
+```
+
+Boolean-quotient multiplication is OR-index phase convolution. F3
+intersection and the two Boolean norm products are exact without decoding a
+coefficient or iterating shared assignments.
+
+The demonstrated chain is:
+
+```text
+F          cells  0..15
+G          cells 16..31
+K          cells 32..47
+resident H cells 48..63 = CONTRACT2(F,G)
+resident Z cells 64..79 = CONTRACT2(actual H,K)
+public     cells 80..95
+```
+
+Only the public boundary is decoded. The boundary result survives while
+actual inverse execution removes the parent contraction before the child,
+restores the carrier within `1.66533453694e-16`, and runs a different source
+on the same restored allocation.
+
+Primary and reuse boundaries are:
+
+```text
+[1,0,2,1,2,1,2,1,0,0,1,1,1,1,1,1]
+[1,0,2,1,0,0,1,1,2,1,2,1,1,1,1,1]
+```
+
+Wrong boundary inversion, omitted parent inversion, and prospectively
+noncommuting child-before-parent reversal each leave error
+`1.73205080757`. A bypassed Boolean norm, ordinary coefficient sum in place
+of its product, and swapped shared-port order each change the final relation
+and reverse their actual altered histories cleanly. Projection of the
+resident intermediate and null-carrier execution reject before state output.
+
+Strict compilation, `-fanalyzer`, ASan, UBSan, leaks, exact output allowlists,
+preprojection sink gates, parser negatives, replay hashes, and focused
+independent review pass. The final vectors are predeclared fixture assertions
+backed by algebra and implementation inspection; there is intentionally no
+second controller-side coefficient oracle that materializes the resident
+intermediate.
+
+This establishes:
+
+```text
+NATIVE_WIDTH2_TYPED_RELATIONAL_PHASE_CONTRACTION
+```
+
+with claim ceiling:
+
+```text
+SOFTWARE_COMPACT_WIDTH2_TYPED_RELATIONAL_PHASE_CONTRACTION_AND_RESTORATION_REFERENCE_ONLY
+```
+
+The compactness is the single reusable body rather than four expanded shared
+assignments. Dense storage remains exponential:
+
+```text
+relation/message cells       2^(2w)
+transient union coefficients 2^(3w)
+```
+
+It does not establish compact separator storage, arbitrary width, arity,
+topology or treewidth, CATVM enforcement for the wider operator, advantage,
+physical execution, Small Wall crossing, or unlimited catalytic computation.
+The next blocker is a factorized wider-interface relation representation whose
+native closure preserves structure without dense separator expansion.

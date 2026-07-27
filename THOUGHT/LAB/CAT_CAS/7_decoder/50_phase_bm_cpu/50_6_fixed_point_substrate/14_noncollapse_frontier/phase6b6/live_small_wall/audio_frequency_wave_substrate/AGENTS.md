@@ -44,13 +44,13 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-ALGEBRAIC_COMPACT_TYPED_RELATIONAL_MODULE_EXECUTION_ESTABLISHED
+ALGEBRAIC_WIDTH2_RELATIONAL_PHASE_CONTRACTION_ESTABLISHED
 ```
 
 Claim ceiling:
 
 ```text
-SOFTWARE_COMPACT_COMPILED_BODY_TYPED_RELATIONAL_MODULE_EXECUTION_REFERENCE_ONLY
+SOFTWARE_COMPACT_WIDTH2_TYPED_RELATIONAL_PHASE_CONTRACTION_AND_RESTORATION_REFERENCE_ONLY
 ```
 
 The strongest current bounded architecture is:
@@ -64,6 +64,7 @@ public typed series-parallel relational geometry
 -> direct child-export phase addresses consumed by parent composition
 -> bounded recursive module trees
 -> shared compiled leaf-body execution without per-instance native records
+-> native two-shared-port contraction with a resident 16-cell intermediate
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -97,6 +98,16 @@ leaf records serve all eight instances, with zero per-instance native records
 and one transient relocated descriptor. It does not establish compact
 carrier/history recursion: seven composite descriptors, 39 resident messages,
 and 320 carrier cells remain instance-specific.
+
+The native relation signature is now wider than two Boolean ports. A
+four-port relation occupies 16 phase cells, and one reusable `CONTRACT2` body
+closes two shared Boolean ports by exact F3 intersection followed by two
+Boolean norms. In the accepted chain, the actual 16-cell `H` produced by the
+first contraction is consumed directly by the second; only final `Z` is
+decoded; parent-before-child inverse execution restores the carrier; and a
+different source reuses that allocation. The dense representation still
+costs `2^(2w)` cells per width-`w` relation and `2^(3w)` transient union
+coefficients, so compact separator storage is not established.
 
 A general holographic relational computer, arbitrary graph closure, C5
 advantage, root/kernel secrecy, physical phase computation, and unlimited
@@ -178,31 +189,32 @@ Verification follows a substantive result. One focused independent review is nor
 Selected frontier:
 
 ```text
-NATIVE_WIDTH2_TYPED_RELATIONAL_PHASE_CONTRACTION
+FACTORIZED_WIDE_INTERFACE_RELATIONS_WITHOUT_DENSE_SEPARATOR_EXPANSION
 ```
 
 The next crossing is:
 
 ```text
 compact compiled-body typed relational modules
--> wider unresolved interfaces
+-> native dense width-two unresolved interface
+-> factorized wider-interface state and closure
 -> compact general relational geometry
 ```
 
 Investigate, without imposing a rigid sequence:
 
 ```text
-native contraction across two shared Boolean ports
-16-cell four-port relations with a resident 16-cell intermediate
-actual inverse and restored reuse across the wider interface
-compact representation across wider graph separators
+factorized four-port and wider relation signatures
+native contraction without dense 2^(2w) message materialization
+closure laws that preserve factor structure where valid
+explicit rank or treewidth growth when factor structure does not close
 elimination-order discovery without compiler-side solving
 general relation signatures without truth-table materialization
 resource growth versus separator width, message arity, and topology
 ```
 
-Another module-tree depth probe is not meaningful progress while relation
-storage and carrier messages still expand per instantiation.
+Another module-tree depth or dense separator-width probe is not meaningful
+progress while relation storage remains exponential in interface width.
 
 ## 7. Native No-Smuggle Law
 
