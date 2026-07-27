@@ -29,8 +29,11 @@
 #define DC_ENABLE_EDGE_RECEIPT_CONTROLS 1
 #endif
 #define DC_REUSE_CYCLES 0U
-#define DC_CLAIM \
+#ifndef GM_DC_CLAIM
+#define GM_DC_CLAIM \
     "BOUNDED_FOUR_OWNER_HETEROGENEOUS_FANOUT_RETAIN_ALL_AFFINE_DAG_CUSTODY_ESTABLISHED"
+#endif
+#define DC_CLAIM GM_DC_CLAIM
 #define DC_PUBLIC_MAIN general_multi_dag_embedded_main
 #include "dag_affine_fanout_phase.c"
 #undef DC_PUBLIC_MAIN
@@ -476,7 +479,11 @@ static void gm_run_control(
 }
 #endif
 
-int main(int argc, char **argv) {
+#ifndef GM_PUBLIC_MAIN
+#define GM_PUBLIC_MAIN main
+#endif
+
+int GM_PUBLIC_MAIN(int argc, char **argv) {
 #if GM_OCCURRENCE_ONLY
     if (argc != 2) {
         fail(

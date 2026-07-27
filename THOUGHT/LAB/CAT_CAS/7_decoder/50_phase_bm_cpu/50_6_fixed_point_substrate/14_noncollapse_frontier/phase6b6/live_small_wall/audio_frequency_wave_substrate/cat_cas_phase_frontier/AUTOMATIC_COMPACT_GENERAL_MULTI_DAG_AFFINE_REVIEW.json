@@ -1,0 +1,74 @@
+{
+  "evidence_parent_commit": "90e5afd6",
+  "review": "PASS",
+  "reviewer_id": "AUTOMATIC-COMPACT-GENERAL-DAG-01",
+  "claim": "BOUNDED_15_NODE_FOUR_OWNER_AUTOMATIC_PUBLIC_LEAF_PEBBLING_ESTABLISHED",
+  "claim_ceiling": "BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_DAG_COMPILER_EMITTED_19_STEP_REVERSIBLE_PUBLIC_DEGREE_ONE_LEAF_ONLY_PEBBLING_11_WORKING_SLOTS_12_PHYSICAL_RELATION_BLOCKS_FOUR_PINNED_SHARED_OWNERS_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/automatic-compact-general-third",
+  "initial_findings": [
+    {
+      "id": "AUTO-COMPACT-R1-001",
+      "severity": "PROVENANCE_BINDING",
+      "finding": "The first plan receipt did not explicitly bind the compiled topology hash, schedule hash, and public node identity for every emitted step.",
+      "repair": "The plan now stores and hashes the compiled topology and schedule hashes plus each step public node identifier; validation compares both hashes and public identity against the compiled graph before execution.",
+      "closed": true
+    },
+    {
+      "id": "AUTO-COMPACT-R1-002",
+      "severity": "RESOURCE_ACCOUNTING",
+      "finding": "The second bundle reported only the compiler-measured main frame and omitted the concurrent ac_execute frame and explicit automatic scheduler and temporary inverse state.",
+      "repair": "The final bundle reports exact current-ABI plan, obligation, edge-receipt, residency, node-lease, execution-summary, and machine-state sizes; GCC -fstack-usage records main 47936 bytes, ac_execute 13664 bytes, their 61600-byte concurrent floor, and a 273224-byte conservative all-frame upper bound over 89 functions.",
+      "closed": true
+    }
+  ],
+  "closure_checks": {
+    "topology_compiled_not_execution_hardcoded": true,
+    "literal_forward_and_reverse_tape": "PASS_CURSOR_0_TO_19_TO_0",
+    "bound_topology_fnv1a64": "41d917d4a3308fbe",
+    "bound_schedule_fnv1a64": "aa5719d149bc55e0",
+    "plan_fnv1a64": "627f298bb1d2c4e8",
+    "predicted_and_observed_peak_live": 11,
+    "capacity_ten_fails_at_pool_exhaustion": true,
+    "reconstructed_public_leaf_ids": [801, 802, 803, 804],
+    "obligation_binds_body_signature_edge_epoch_and_plan": true,
+    "obligation_retains_relation_content": false,
+    "exact_resident_generation_edges": 18,
+    "lawful_public_leaf_reconstruction_edges": 4,
+    "exact_shared_owner_edges": 12,
+    "shared_owner_forward_inverse_totals": {
+      "805": 4,
+      "806": 3,
+      "807": 3,
+      "808": 2
+    },
+    "final_boundary_before_actual_inverse": true,
+    "same_carrier_transactions": 17,
+    "maximum_reuse_restoration_error": 7.02715047328e-16,
+    "snapshot_is_separate_weaker_branch": true,
+    "phase_reference_matches": "PASS_25_OF_25_COMPLETE_BOUNDARIES",
+    "strict_build": "PASS",
+    "analyzer": "PASS",
+    "asan_ubsan_leak": "PASS",
+    "deterministic_replay": "PASS",
+    "expanded_file_network_ipc_memory_no_smuggle_strace": "PASS",
+    "resource_accounting_includes_scheduler_and_inverse_state": true,
+    "current_source_and_evidence_provenance": "PASS_EXACT_SHA256"
+  },
+  "sha256": {
+    "phase_source": "5adfb90b9490764bff06be835321b7f17722396955de5ac7faf39ea0f2967111",
+    "qualifier": "17e20a94234f10d7c25cfe75019652fbbe02e22bb5d499d778a603a744aa1124",
+    "accepted_output": "11eb7d003aaf5b0e0db54b35be31348178cc8b8e5c453dee2557bbdcd5cd7458",
+    "no_smuggle_trace": "d6668b2eac3e47289cc6db7074c60e83687b6c033134259c1b2b10b8c6d08959"
+  },
+  "remaining_findings": [],
+  "internal_operator_rematerialization": false,
+  "automatic_general_dag_pebbling": false,
+  "arbitrary_graph_topology": false,
+  "catvm_enforcement": false,
+  "total_memory_advantage": false,
+  "performance_advantage": false,
+  "physical_execution": false,
+  "small_wall_crossed": false,
+  "unlimited_catalytic_computation": false,
+  "terminal": false
+}

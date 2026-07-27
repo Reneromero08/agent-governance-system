@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `5.7`
+**Roadmap version:** `5.8`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through parent commit:** `857831b8`
-**Current highest milestone:** `ALGEBRAIC_FOUR_OWNER_HETEROGENEOUS_FANOUT_RETAIN_ALL_AFFINE_DAG_CUSTODY_ESTABLISHED`
-**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_RETAIN_ALL_DAG_FOUR_NATIVE_SHARED_OWNERS_FANOUT_HISTOGRAM_4_3_3_2_REFERENCE_ONLY`
+**Reconciled through parent commit:** `90e5afd6`
+**Current highest milestone:** `ALGEBRAIC_15_NODE_FOUR_OWNER_AUTOMATIC_PUBLIC_LEAF_PEBBLING_ESTABLISHED`
+**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_DAG_COMPILER_EMITTED_19_STEP_REVERSIBLE_PUBLIC_DEGREE_ONE_LEAF_ONLY_PEBBLING_11_WORKING_SLOTS_12_PHYSICAL_RELATION_BLOCKS_FOUR_PINNED_SHARED_OWNERS_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -93,6 +93,7 @@ ALGEBRAIC_BOUNDED_AFFINE_DAG_SHARED_MESSAGE_FANOUT_ESTABLISHED
 ALGEBRAIC_NESTED_AFFINE_DAG_MULTI_SHARED_MESSAGE_CUSTODY_ESTABLISHED
 ALGEBRAIC_NESTED_AFFINE_DAG_PINNED_SHARED_COMPACT_LEAF_PEBBLING_ESTABLISHED
 ALGEBRAIC_FOUR_OWNER_HETEROGENEOUS_FANOUT_RETAIN_ALL_AFFINE_DAG_CUSTODY_ESTABLISHED
+ALGEBRAIC_15_NODE_FOUR_OWNER_AUTOMATIC_PUBLIC_LEAF_PEBBLING_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -444,8 +445,9 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-GENERAL_RETAIN_ALL_AFFINE_DAG_CUSTODY_COMPILATION  ESTABLISHED_EXACT_15_NODE
--> AUTOMATIC_COMPACT_AFFINE_DAG_SCHEDULING         SELECTED
+GENERAL_RETAIN_ALL_AFFINE_DAG_CUSTODY_COMPILATION     ESTABLISHED_EXACT_15_NODE
+-> AUTOMATIC_PUBLIC_LEAF_PEBBLING                     ESTABLISHED_EXACT_15_NODE
+-> INTERNAL_OPERATOR_REMATERIALIZATION_WITH_MULTI_EPOCH_EDGE_CUSTODY SELECTED
 ```
 
 The next crossing is not:
@@ -611,17 +613,33 @@ missing, stale, or swapped edge receipt is rejected. The retain-all path uses
 performs 22 native calls versus 50. This is a bounded exact graph result, not
 a general DAG compiler, automatic compact schedule, or advantage claim.
 
-The selected experiment is now automatic compact scheduling for this
-established custody law:
+Automatic public-leaf scheduling is now established for this custody law:
 
 ```text
-derive legal live intervals and reconstruction obligations from the manifest
--> preserve all shared owner generations required by pending edges
--> release or lawfully rematerialize only compiler-selected values
--> enforce exact forward/inverse receipt custody after rematerialization
--> compare against both 15-block retain-all and 51-block occurrence baselines
+derive four public degree-one leaves from the compiled topology
+-> emit a 19-step coefficient-oblivious reversible tape
+-> bind topology, schedule, public node IDs, epochs, and obligations
+-> early inverse and later public-body reconstruction for leaf edges only
+-> pin all four native shared owners and all internal operator results
+-> reduce 15 retain-all working blocks to 11
 -> preserve final-boundary-only projection, actual inverse, and reuse
 ```
+
+The exact carrier law is `84w^2+59w+14`, versus retain-all
+`100w^2+75w+18` and occurrence expansion `244w^2+219w+54`. Twenty-five
+complete boundaries match the independent reference through width sixteen.
+The four reconstructed leaf edges are distinguished from eighteen exact
+resident-generation edges; all twelve shared edges remain exact. This does
+not establish internal operator rematerialization, general-DAG pebbling, a
+global optimum, total-memory reduction, or performance advantage.
+
+The selected successor is compiler-planned internal operator
+rematerialization. It must introduce multi-activation edge receipts that bind
+each forward and inverse consumption to the correct recomputed producer
+generation, preserve the four pinned shared owners where dependencies require
+them, and reject stale receipts across rematerialization epochs. No decoded
+intermediate or saved relation content may substitute for actual native
+recomputation.
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
 per-instance native-operation records are established. Native contraction
@@ -806,7 +824,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_RETAIN_ALL_DAG_FOUR_NATIVE_SHARED_OWNERS_FANOUT_HISTOGRAM_4_3_3_2_REFERENCE_ONLY
+BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_DAG_COMPILER_EMITTED_19_STEP_REVERSIBLE_PUBLIC_DEGREE_ONE_LEAF_ONLY_PEBBLING_11_WORKING_SLOTS_12_PHYSICAL_RELATION_BLOCKS_FOUR_PINNED_SHARED_OWNERS_REFERENCE_ONLY
 ```
 
 Not established:
@@ -827,7 +845,8 @@ arbitrary-treewidth relational trace
 general bounded affine DAG compilation
 more than four affine DAG shared owners
 fanout greater than four or unbounded fanout
-automatic compact affine DAG scheduling
+automatic general DAG pebbling
+internal operator rematerialization
 automatic elimination-order discovery
 unrestricted typed relation graphs and arity
 root or kernel secrecy

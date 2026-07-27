@@ -2383,3 +2383,90 @@ fifteen-node custody graph. It must derive legal release or rematerialization
 decisions from the compiled topology, preserve exact generation custody for
 all pending shared edges, and compare against both the fifteen-block
 retain-all and 51-block occurrence baselines.
+
+## Compiler-emitted public-leaf pebbling on the four-owner DAG
+
+The established fifteen-node custody graph now has a topology-compiled
+reversible compact tape. The compiler derives all four public degree-one
+leaves from the validated graph, emits nineteen forward steps, and records
+the exact reverse tape. It inverse-encodes each leaf after its sole forward
+edge and reconstructs it from its public body only when the reverse tape
+requires that pending inverse edge.
+
+The plan binds topology `41d917d4a3308fbe`, schedule
+`aa5719d149bc55e0`, every step's public node identity, and the complete
+opcode/node/edge/live-count sequence into plan `627f298bb1d2c4e8`.
+Predicted and observed peak residency are both eleven working relation
+blocks; a ten-slot build fails causally at clean-pool exhaustion.
+
+All four native shared owners `805,806,807,808` remain pinned and pairwise
+nonaliased. The edge audit distinguishes eighteen exact resident-generation
+edges from the four explicitly lawful reconstructed public-leaf edges
+`801->805`, `802->805`, `803->806`, and `804->806`. All twelve shared edges
+retain exact slot and serial generation. There are zero internal-node
+rematerializations and zero operator recomputations.
+
+The automatic path has:
+
+```text
+working relation blocks                 11
+physical blocks including boundary      12
+native operator calls                   22
+leaf encode calls                       16
+lease allocations                       19
+```
+
+For `B(w)=4w^2+4w+1` and `W(w)=36w^2+11w+2`:
+
+```text
+automatic leaf pebbling = W(w) + 12B(w) = 84w^2 + 59w + 14
+retain-all              = W(w) + 16B(w) = 100w^2 + 75w + 18
+occurrence expansion    = W(w) + 52B(w) = 244w^2 + 219w + 54
+```
+
+At width sixteen the automatic path uses 22,462 complex carrier cells and
+718,784 live bytes. This is a bounded carrier-cell comparison, not a
+total-memory or performance claim. The final evidence also counts automatic
+scheduler and temporary inverse resources explicitly: 4,092 current-ABI
+bytes for the plan and live scheduler arrays, a 4,416-byte transaction
+summary, and a compiler-measured 61,600-byte concurrent `main + ac_execute`
+stack floor. A 273,224-byte all-function-frame sum is retained as a
+conservative upper bound.
+
+Five semantic variants match the separate GF2 reference at widths
+`3,4,8,12,16`, giving twenty-five complete-boundary matches. Seventeen
+transactions use one actual carrier allocation and restore below `7.1e-16`.
+Only the final root reaches the boundary; actual inverse and actual restored
+carrier reuse remain intact. Snapshot is a separately marked weaker branch.
+
+Controls reject illegal shared/internal eviction, wrong body, stale epoch,
+missing/double/skipped reconstruction, shared inverse reordering, stale
+internal generation, tape tampering, capacity ten, all intermediate
+projection attempts, null carrier, and wrong/missing root inverse. The
+expanded no-smuggle trace is clean. Focused review closed topology/schedule
+provenance and resource-accounting findings and reports no remaining
+substantive defect.
+
+This establishes:
+
+```text
+BOUNDED_15_NODE_FOUR_OWNER_AUTOMATIC_PUBLIC_LEAF_PEBBLING_ESTABLISHED
+```
+
+with ceiling:
+
+```text
+BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_DAG_COMPILER_EMITTED_19_STEP_REVERSIBLE_PUBLIC_DEGREE_ONE_LEAF_ONLY_PEBBLING_11_WORKING_SLOTS_12_PHYSICAL_RELATION_BLOCKS_FOUR_PINNED_SHARED_OWNERS_REFERENCE_ONLY
+```
+
+It does not establish automatic general DAG pebbling, internal operator
+rematerialization, a global optimum beyond the declared leaf-only planner,
+arbitrary graph topology, CATVM enforcement for this compiler, total-memory
+or performance advantage, physical execution, Small Wall crossing, or
+unlimited catalytic computation.
+
+The selected next experiment is compiler-planned internal operator
+rematerialization with multi-epoch shared-edge custody. It must release and
+later recompute eligible internal values while making every edge receipt
+identify the correct activation generation, without saving decoded
+intermediate content or relaxing final-boundary-only projection.
