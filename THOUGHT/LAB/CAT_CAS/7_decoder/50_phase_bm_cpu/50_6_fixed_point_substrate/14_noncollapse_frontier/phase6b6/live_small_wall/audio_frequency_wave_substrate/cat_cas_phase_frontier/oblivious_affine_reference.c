@@ -18,6 +18,9 @@
 #define R_JOINT_COLUMNS (3U * R_WIDTH + 1U)
 #define R_REDUCTION_COLUMNS (3U * R_WIDTH)
 #define R_VARIANTS 9U
+#ifndef REF_PUBLIC_MAIN
+#define REF_PUBLIC_MAIN main
+#endif
 
 _Static_assert(R_WIDTH >= 2U, "affine reference requires width >= 2");
 _Static_assert(R_WIDTH <= 20U, "affine reference width exceeds bound");
@@ -336,7 +339,7 @@ static void print_relation(size_t variant, const struct relation *relation) {
     );
 }
 
-int main(void) {
+int REF_PUBLIC_MAIN(void) {
     for (size_t variant = 0U; variant < R_VARIANTS; ++variant) {
         const struct program program = make_program(variant);
         const struct relation intermediate = compose(

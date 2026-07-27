@@ -1747,3 +1747,121 @@ wide-interface composition and native relation intersection, then execute a
 recursive public series/parallel affine module with actual resident
 child-to-parent messages, boundary-only projection, actual inverse
 restoration, and restored-carrier reuse.
+
+## Width-parametric mixed affine module closure
+
+The accepted affine backend now executes one typed public mixed topology:
+
+```text
+R    = COMPOSE(F : X->U, G : U->B)
+I    = INTERSECT(actual R : X->B, P : X->B)
+ROOT = COMPOSE(actual I : X->B, K : B->C)
+```
+
+Nominal signature validation is bound to the actual carrier-block addresses.
+A width-compatible descriptor redirected to a block with the wrong nominal
+signature rejects before carrier execution.
+
+Native intersection concatenates both input equation systems in the existing
+`4w` resident row workspace. The public first `w` shared-interface columns
+are zero and the later `2w` columns represent the common external boundary.
+The unchanged fixed pivot/elimination schedule canonicalizes the
+intersection without decoding coefficients, rank, pivots, emptiness, or
+contradictions. It requires no new workspace/control cells and has the same
+native schedule as one composition.
+
+At width three, the primary module produces the complete four-row relation:
+
+```text
+x0 = 1
+c0 = 1
+c1 = x2
+c2 = x1 XOR x2 XOR 1
+```
+
+with hash `594d12aa095dab79`. The same actual restored carrier then runs an
+unrelated program whose final relation is:
+
+```text
+x2 = 0
+c0 = 1
+c1 = x0
+c2 = x1 XOR 1
+```
+
+with hash `4057ecbc8bf19d29`.
+
+Six complete phase boundaries match a separately compiled coefficient-aware
+GF2 reference at widths `3,4,8,12,16`. Empty propagation, universal
+intersection identity, cross-branch contradiction, and duplicate
+intersection idempotence pass. The idempotence fixture also places a
+right-operand-only equation at `X[w-1],B[w-1]`, so scaled executions cover
+the highest external coefficient columns on the intersection's right input.
+
+Wrong root inverse, missing root inverse, and the applicable order `I^-1`
+before `ROOT^-1` each leave `1.73205080757` error. Bypassing intersection
+with either input or substituting composition changes the complete boundary,
+while each altered path reverses its own history. Snapshot reload remains a
+separate weaker path with zero inverse-factor recomputations.
+
+The accepted transaction uses:
+
+```text
+B(w)        = 4w^2 + 4w + 1 relation cells
+W(w)        = 36w^2 + 11w + 2 workspace cells
+Carrier(w)  = 68w^2 + 43w + 10 phase cells
+```
+
+At width sixteen:
+
+```text
+complete relation cells                  1,089
+dense membership entries         4,294,967,296
+workspace cells                          9,394
+carrier cells                           18,106
+live carrier bytes                     579,392
+phase ANDs                            3,711,312
+phase XORs                            7,221,312
+phase-cell updates                    5,536,776
+native kernel reads                   7,393,200
+logical carrier cell inspections      7,552,623
+compiler-measured nested stack chain     98,320
+conservative current-ABI bytes        1,257,104
+```
+
+Only `ROOT` is copied to the surviving boundary and decoded. Resident `R`
+and `I` are never decoded, serialized, hashed, committed, aggregated, or
+exported. Strict compilation, analyzer, sanitizers, deterministic replay,
+exact output allowlists, source/result hashes, reference separation, and
+expanded syscall no-smuggle tracing pass.
+
+Focused review closed three evidence defects: the stack chain now includes
+the separately emitted reduction frame, scaled fixtures cover the right
+intersection operand's highest coefficient columns, and matching high-index
+equations through `R` and `P` restore genuine duplicate idempotence. Closure
+review reproduced all 30 phase/reference boundaries and found no remaining
+finding.
+
+This establishes:
+
+```text
+BOUNDED_WIDTH_PARAMETRIC_AFFINE_COMPOSITION_AND_INTERSECTION_MODULE_CLOSURE
+```
+
+with ceiling:
+
+```text
+BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_MIXED_MODULE_REFERENCE_ONLY
+```
+
+It does not establish an arbitrary mixed-module compiler, unbounded module
+depth or topology, arbitrary graphs or treewidth, nonlinear Boolean closure,
+CATVM custody for this module, computational advantage, physical execution,
+Small Wall crossing, or unlimited catalytic computation.
+
+The selected next experiment is
+`RECURSIVE_WIDTH_PARAMETRIC_AFFINE_MODULE_COMPILER`: compile arbitrary
+bounded public series/intersection trees to resident canonical message
+blocks, validate nominal signatures against addresses, schedule dependency-
+ordered forward execution and exact reverse-dependency restoration, and
+measure carrier growth against live separator count.

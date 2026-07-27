@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `5.3`
+**Roadmap version:** `5.4`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
-**Current highest milestone:** `ALGEBRAIC_WIDTH_PARAMETRIC_GENERAL_AFFINE_RELATION_CLOSURE_ESTABLISHED`
-**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_RELATION_SYSTEM_REFERENCE_ONLY`
+**Current highest milestone:** `ALGEBRAIC_WIDTH_PARAMETRIC_AFFINE_MIXED_MODULE_CLOSURE_ESTABLISHED`
+**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_MIXED_MODULE_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -87,6 +87,7 @@ CATVM_WIDTH2_OPEN_INTERMEDIATE_CONTRACT2_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEN
 ALGEBRAIC_PROJECTED_AFFINE_COMPACT_FULL_RELATION_CLOSURE_ESTABLISHED
 ALGEBRAIC_OBLIVIOUS_GENERAL_AFFINE_RELATION_CLOSURE_ESTABLISHED
 ALGEBRAIC_WIDTH_PARAMETRIC_GENERAL_AFFINE_RELATION_CLOSURE_ESTABLISHED
+ALGEBRAIC_WIDTH_PARAMETRIC_AFFINE_MIXED_MODULE_CLOSURE_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -137,6 +138,7 @@ exact lazy composition to sparse resident boundary invariants
 compact complete projected-affine relation closure
 coefficient-oblivious general affine relation closure at fixed width two
 width-parametric general affine relation closure through width sixteen
+typed address-bound mixed affine composition/intersection module closure
 ```
 
 Its strongest bounded architecture is:
@@ -157,6 +159,8 @@ public typed series-parallel relational geometry
 -> exact compact full-boundary closure for projected-affine F2 relations
 -> fixed-schedule complete general affine equation closure at width two
 -> polynomial complete affine boundaries through width sixteen
+-> actual resident composition-to-intersection-to-composition handoff
+-> nominal signatures bound to actual relation-block addresses
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -423,7 +427,7 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-WIDTH_PARAMETRIC_AFFINE_COMPOSITION_AND_INTERSECTION_MODULE_CLOSURE
+RECURSIVE_WIDTH_PARAMETRIC_AFFINE_MODULE_COMPILER
 ```
 
 The next crossing is not:
@@ -480,15 +484,31 @@ At width three and above, the complete affine descriptor is smaller than the
 the complete affine relation family, not an arbitrary-relation or performance
 advantage.
 
-The next experiment must turn the wider operator into richer geometry:
+The wider operator now executes one typed mixed geometry:
 
 ```text
-native affine relation intersection on the same wide boundary
-native affine composition through shared wide interfaces
-recursive typed series/parallel affine modules
-actual resident child-to-parent messages
-canonical complete boundary after every closure
-actual inverse restoration and restored-carrier reuse
+R    = COMPOSE(F,G)
+I    = INTERSECT(actual R,P)
+ROOT = COMPOSE(actual I,K)
+```
+
+All six complete boundaries match an independent compact GF2 reference at
+widths `3,4,8,12,16`. Nominal signatures are checked against actual carrier
+addresses. Only `ROOT` is decoded; actual inverse runs `ROOT^-1,I^-1,R^-1`,
+and the restored carrier runs unrelated programs.
+
+The next experiment must remove the hardcoded topology while preserving the
+machine law:
+
+```text
+public bounded series/intersection tree format
+-> nominal type and address validation
+-> topology-allocated canonical resident messages
+-> dependency-ordered native phase execution
+-> one final complete boundary
+-> exact reverse-dependency restoration
+-> restored-carrier reuse
+-> carrier growth measured against live separator count
 ```
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without

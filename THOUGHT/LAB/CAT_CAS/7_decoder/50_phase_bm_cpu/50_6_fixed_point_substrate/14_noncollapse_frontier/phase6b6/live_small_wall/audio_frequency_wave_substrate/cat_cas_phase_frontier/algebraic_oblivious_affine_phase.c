@@ -48,6 +48,9 @@
 #endif
 #define GA_SEMANTIC_VARIANTS 9U
 #define GA_WORKSPACE_TOLERANCE 2.0e-12
+#ifndef GA_PUBLIC_MAIN
+#define GA_PUBLIC_MAIN main
+#endif
 
 _Static_assert(GA_WIDTH >= 2U, "affine calibration requires width >= 2");
 _Static_assert(GA_WIDTH <= 20U, "affine calibration width exceeds bound");
@@ -1158,7 +1161,8 @@ static void ga_print_execution(
     );
 }
 
-int main(int argc, char **argv) {
+#ifndef GA_NO_MAIN
+int GA_PUBLIC_MAIN(int argc, char **argv) {
     if (argc == 2 && strcmp(argv[1], "--project-intermediate") == 0) {
         fail("only final affine equation boundary may be projected");
     }
@@ -1340,3 +1344,4 @@ int main(int argc, char **argv) {
         && fixed_operation_schedule;
     return pass ? 0 : 1;
 }
+#endif

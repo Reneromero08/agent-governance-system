@@ -1,0 +1,69 @@
+{
+  "review": "PASS",
+  "reviewer_id": "WIDTH-PARAMETRIC-MIXED-AFFINE-MODULE-01",
+  "claim": "BOUNDED_WIDTH_PARAMETRIC_AFFINE_COMPOSITION_AND_INTERSECTION_MODULE_CLOSURE",
+  "claim_ceiling": "BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_MIXED_MODULE_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/affine-module-final.PWpwjf",
+  "initial_findings": [
+    {
+      "id": "AFFINE-MODULE-R1-001",
+      "severity": "RESOURCE_ACCOUNTING",
+      "finding": "The initial maximum nested stack chain omitted the separately emitted ga_reduce_stage frame.",
+      "repair": "Included the 208-byte reduction frame in default and every scaled stack chain; default is 8432 bytes and width sixteen is 98320 bytes.",
+      "closed": true
+    },
+    {
+      "id": "AFFINE-MODULE-R1-002",
+      "severity": "EVIDENCE_COVERAGE",
+      "finding": "Scaled right-operand intersection constraints initially touched only low coefficient columns.",
+      "repair": "Added an asymmetric P equation on X[w-1],B[w-1] at every width and bound all complete phase/reference boundaries.",
+      "closed": true
+    },
+    {
+      "id": "AFFINE-MODULE-R1-003",
+      "severity": "SEMANTIC_CONTROL",
+      "finding": "The first high-column repair made P a strict refinement of R while retaining the duplicate-idempotence label.",
+      "repair": "Added matching high-index F/G equations so R and P genuinely duplicate both independent constraints; canonical idempotence and high-column coverage now hold together.",
+      "closed": true
+    }
+  ],
+  "closure_checks": {
+    "intersection_embedding_and_canonicalization": "PASS",
+    "nominal_type_registry_bound_to_actual_addresses": true,
+    "invalid_actual_block_address_rejected": true,
+    "actual_resident_R_consumed_by_I": true,
+    "actual_resident_I_consumed_by_ROOT": true,
+    "decoded_intermediate_coefficients": 0,
+    "serialized_intermediate_coefficients": 0,
+    "pre_inverse_carrier_aggregate_outputs": 0,
+    "sole_decode_is_copied_final_ROOT": true,
+    "correct_reverse_dependency_order": "ROOT_INVERSE_I_INVERSE_R_INVERSE",
+    "wrong_missing_reordered_inverse_controls": "PASS_1.73205080757_ERROR",
+    "altered_algebra_controls": "PASS_LEFT_BYPASS_RIGHT_BYPASS_COMPOSITION_SUBSTITUTION_ALL_CHANGED_AND_RESTORED",
+    "semantic_controls": "PASS_EMPTY_UNIVERSAL_CONTRADICTION_DUPLICATE_HIGH_RIGHT_COLUMN",
+    "same_carrier_transactions": 54,
+    "maximum_reuse_restoration_error": 1.57009245868e-16,
+    "snapshot_separate_reload_only": true,
+    "default_stack_chain_bytes": 8432,
+    "width16_stack_chain_bytes": 98320,
+    "strict_build": "PASS",
+    "analyzer": "PASS",
+    "asan_ubsan_leak": "PASS",
+    "deterministic_replay": "PASS",
+    "mandatory_no_smuggle_strace": "PASS",
+    "phase_reference_matches": "PASS_30_OF_30_COMPLETE_BOUNDARIES"
+  },
+  "sha256": {
+    "phase_source": "ebe5279f31851da94c37ab53e907f2f333ba04374a0674b066bd4deed263b190",
+    "reference_source": "9f972bdcbce99203ebb36efbcadd8fc5a5fd27e3f399217e16aef6a4b9c2cfe1",
+    "kernel_source": "93ce61f6dfb57fb6b337dc1568eb1b9c9540e4eadfd1570e7c584679248b383c",
+    "kernel_reference": "a421e656db631fe0a0113a3e22db76d8f9f0c17830d8aed32b8ac2edceff7048",
+    "base_source": "11ef5938e413108e7f94cea1f77bedb295fcf97f5501dae58ec046176f2d0316",
+    "qualifier_source": "a3d5bfa09f3bb34c35b0fd8c71a2a44086e55ae1bcca3da88d6bf6463f8672c5",
+    "result": "ad586b0714a01a5825ad2fda53d723d9dc6eaa635eb236833a0c7651eb032888",
+    "reference": "4a785967b9e124aa303563415e08cc563cbf53b706d8c304492521bce1f7440a",
+    "scaling": "95a9967d08e92618659e20bfb1d21ec526173907d0d7b47d4504eca6f1ba66ba"
+  },
+  "remaining_findings": [],
+  "terminal": false
+}

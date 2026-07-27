@@ -3,6 +3,7 @@
   "reviewer_id": "WIDTH-PARAMETRIC-GENERAL-AFFINE-PHASE-01",
   "claim": "BOUNDED_WIDTH_PARAMETRIC_COEFFICIENT_OBLIVIOUS_GENERAL_AFFINE_PHASE_RELATION_COMPOSITION",
   "claim_ceiling": "BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_RELATION_SYSTEM_REFERENCE_ONLY",
+  "evidence_commit": "118944b3",
   "evidence_directory": "/tmp/param-affine-final.NcpFDK",
   "initial_findings": [
     {
