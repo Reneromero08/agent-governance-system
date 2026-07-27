@@ -3061,3 +3061,110 @@ interface width or separator structure actually grows while native
 composition preserves compact unresolved state. Dense truth-table
 materialization, witness expansion, and longer fixed QAND fixtures are not
 acceptable substitutes.
+
+## Boolean relation tensor trains establish width-growing non-affine closure
+
+The fixed QANF obstruction is now bypassed by a relation family whose public
+word width grows. A Boolean-semiring tensor train represents
+`R:X<->Y` with local binary cores and unresolved internal bond states:
+
+```text
+chi_R(X,Y) = OR_bonds AND_i A_i[left,x_i,y_i,right]
+```
+
+For `A:X<->Y` and `B:Y<->Z`, native composition writes each output core cell
+from only two local shared-bit cofactors:
+
+```text
+C_i[x,z,(a,c),(b,d)]
+  = OR_y A_i[x,y,a,b] AND B_i[y,z,c,d]
+```
+
+Boolean distributivity makes this the exact existential composition over the
+complete word Y. There is no width-wide shared-assignment loop, witness list,
+truth table, or dense `4^w` relation buffer. Ranks multiply deterministically.
+
+The tested primary family is a rank-two, nonfunctional neighbor relation:
+
+```text
+y_i = x_i AND x_(i+1) for i < w
+y_w is free
+```
+
+Three actual resident leaves execute:
+
+```text
+H = F ; G  at rank 4
+Z = H ; J  at rank 8
+```
+
+Z consumes the actual phase-resident H. H is never decoded, copied,
+serialized, or hashed. Only the final rank-eight core block is copied and
+decoded; it survives while the machine removes the boundary copy, applies
+`Z^-1`, applies `H^-1`, reverses the three leaf encodings, verifies
+restoration, and reuses the actual carrier for the unrelated neighbor-NAND
+program.
+
+For each `i<=w-3`, the primary root has:
+
+```text
+z_i = x_i*x_(i+1)*x_(i+2)*x_(i+3)
+```
+
+Its fourth Boolean derivative is one. The projection onto those four inputs
+and z is the degree-four AND graph, so the full relation is not affine GF(2).
+Width four embeds the previous fixed QANF `d=abce`; widths 5, 8, 12, and 16
+produce 2, 5, 9, and 13 overlapping degree-four windows. Exact leaf
+multiplicities and conservative root lower bounds are kept distinct after
+focused review corrected the initial labels.
+
+The compact core laws are:
+
+```text
+N_2 =  16w - 16
+N_4 =  64w - 96
+N_8 = 256w - 448
+carrier = 3N_2 + N_4 + 2N_8 = 624w - 1040 phase cells
+```
+
+At width four the carrier has 1,456 cells; at width sixteen it has 8,944.
+Rank-eight output storage first becomes smaller than dense `4^w` storage at
+width five. The best matched generic classical TT evaluator stores
+`3N_2+N_4+N_8 = 368w-592` bits and performs linear local contraction. The
+stronger fixture-specialized baseline directly emits the public
+neighbor-AND-cubed rank-eight cores in `O(N_8)`, so no advantage follows.
+
+Independent compact-reference parity matches every final core for primary and
+reuse at all five widths. Strict compilation, GCC analyzer, ASan/UBSan,
+deterministic replay, symbol separation, one-write output tracing,
+wrong/missing/reordered inverse controls, snapshot separation, null-carrier
+rejection, hidden-H projection denial, dense-request denial, and rank-cap
+preflight pass. Thirty-four actual transactions reuse one carrier per width;
+maximum repeated restoration error is `2.98936698014e-16` against tolerance
+`2e-12`.
+
+Focused review repaired the multiplicity labels and required the qualifier
+source to join the provenance closure. Fresh evidence
+`/tmp/boolean-tt-phase-sixth` passes with no remaining finding and establishes:
+
+```text
+BOUNDED_WIDTH_PARAMETRIC_BOOLEAN_TT_MANY_TO_MANY_RELATION_COMPOSITION_WITH_PRODUCT_RANK_NATIVE_PHASE_CLOSURE_AND_RESIDENT_INTERMEDIATE
+```
+
+within:
+
+```text
+BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_BOOLEAN_SEMIRING_TT_RANK2_TO_RANK4_TO_RANK8_REFERENCE_ONLY
+```
+
+The union of finite TT ranks is closed under the product-rank construction,
+but no fixed rank cap is closed under unbounded depth. This does not establish
+native rank minimization, arbitrary QANF compactness, arbitrary graph
+topology, CATVM enforcement, advantage, Small Wall crossing, physical
+execution, or unlimited catalytic computation.
+
+The selected successor is a minimal CATVM enclosure for this width-parametric
+transaction. It must enforce hidden H custody and actual `Z^-1,H^-1`
+restoration behind the process boundary. After that, the scientific fork is
+exact relation-preserving rank reduction or a growing-instance Small Wall
+triad, not additional widths at the same fixed ranks.

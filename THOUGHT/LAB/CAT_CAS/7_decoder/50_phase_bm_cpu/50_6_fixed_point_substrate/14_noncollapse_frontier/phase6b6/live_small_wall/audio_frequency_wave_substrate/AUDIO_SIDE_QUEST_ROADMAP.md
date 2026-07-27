@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `8.1`
+**Roadmap version:** `8.2`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through parent commit:** `9f7e75bb`
-**Current highest milestone:** `FIXED_SCHEMA_QANF_COMPACT_BASELINE_OBSTRUCTION_CONFIRMED_UNDER_MATCHED_CATVM_BOUNDARY`
-**Current claim ceiling:** `BOUNDED_LINUX_WARM_FIXED_SCHEMA_QANF_BASELINE_SNAPSHOT_IN_PLACE_RESOURCE_COMPARISON_REFERENCE_ONLY`
+**Reconciled through parent commit:** `ddf0c6dd`
+**Current highest milestone:** `BOUNDED_WIDTH_PARAMETRIC_BOOLEAN_TT_MANY_TO_MANY_RELATION_COMPOSITION_WITH_PRODUCT_RANK_NATIVE_PHASE_CLOSURE_AND_RESIDENT_INTERMEDIATE`
+**Current claim ceiling:** `BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_BOOLEAN_SEMIRING_TT_RANK2_TO_RANK4_TO_RANK8_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -794,6 +794,24 @@ preserving factor structure through native composition, without materializing
 `2^(2w)` truth tables, witness lists, candidate sets, or answer-bearing
 lookup tables. Do not add longer fixed QAND chains or more fixed-schema CATVM
 fixtures.
+
+That successor is now established for Boolean-semiring tensor trains at
+widths `4,5,8,12,16`. Three rank-two neighbor-nonlinear leaves compose through
+an actual resident rank-four H into a rank-eight final relation. The local
+product-rank law contracts two shared-bit values per output core, never a
+`2^w` shared assignment set or `4^w` relation table. Width four embeds the
+fixed QANF degree-four witness; width sixteen carries thirteen overlapping
+degree-four windows.
+
+The live obstruction has moved from width to composition depth: TT ranks
+multiply, no native exact recompression is established, and the strongest
+fixture-specialized classical baseline can directly emit the known rank-eight
+root. The selected successor is the smallest CATVM enclosure of the width-
+parametric Boolean-TT transaction. It must keep H service-local, expose only
+the final rank-eight boundary receipt, restore in the actual `Z^-1,H^-1`
+order, and reuse the actual carrier. After enforcement, the next scientific
+fork is exact relation-preserving rank reduction or a Small Wall triad on a
+growing non-affine instance family, not more tested widths of the same ranks.
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
 per-instance native-operation records are established. Native contraction

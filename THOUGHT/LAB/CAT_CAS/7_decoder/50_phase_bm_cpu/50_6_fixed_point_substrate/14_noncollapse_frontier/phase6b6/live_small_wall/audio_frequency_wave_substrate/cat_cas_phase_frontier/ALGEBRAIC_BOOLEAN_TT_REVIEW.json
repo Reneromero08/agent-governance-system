@@ -1,0 +1,43 @@
+{
+  "evidence_parent_commit": "ddf0c6dd",
+  "review": "PASS",
+  "reviewer_id": "BOOLEAN-TT-PRODUCT-RANK-01",
+  "claim": "BOUNDED_WIDTH_PARAMETRIC_BOOLEAN_TT_MANY_TO_MANY_RELATION_COMPOSITION_WITH_PRODUCT_RANK_NATIVE_PHASE_CLOSURE_AND_RESIDENT_INTERMEDIATE",
+  "claim_ceiling": "BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_BOOLEAN_SEMIRING_TT_RANK2_TO_RANK4_TO_RANK8_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/boolean-tt-phase-sixth",
+  "closure_checks": {
+    "top_level_sha256": "PASS",
+    "core_sha256": "PASS",
+    "qualifier_provenance_bound": true,
+    "product_rank_boolean_composition": "PASS",
+    "neighbor_and_core_semantics": "PASS",
+    "degree4_non_affinity_certificate": "PASS",
+    "width_wide_assignment_enumeration": 0,
+    "dense_relation_tables": 0,
+    "actual_resident_h_custody": "PASS",
+    "wrong_missing_reordered_inverse_controls": "PASS",
+    "snapshot_distinction": "PASS",
+    "actual_restoration_and_reuse": "PASS",
+    "resource_formulas": "PASS",
+    "best_compact_baseline_acknowledged": true,
+    "claim_ceiling": "PASS_STRICT"
+  },
+  "repaired_findings": [
+    {
+      "finding": "ROOT_MULTIPLICITY_FIELDS_INITIALLY_DESCRIBED_LEAF_FACTS",
+      "repair": "RENAMED_EXACT_LEAF_FACTS_AND_RELABELED_FIBONACCI_AND_TWO_AS_ROOT_LOWER_BOUNDS"
+    },
+    {
+      "finding": "QUALIFIER_SOURCE_NOT_BOUND_IN_FIFTH_EVIDENCE",
+      "repair": "SIXTH_EVIDENCE_BINDS_QUALIFIER_IN_CORE_MANIFEST_RESULT_AND_TOP_MANIFEST"
+    }
+  ],
+  "remaining_blocking_findings": [],
+  "fixed_rank_unbounded_depth_closure": false,
+  "native_rank_minimization_or_recompression": false,
+  "computational_advantage": false,
+  "small_wall_crossed": false,
+  "physical_execution": false,
+  "unlimited_catalytic_computation": false,
+  "terminal": false
+}
