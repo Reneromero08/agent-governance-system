@@ -2666,3 +2666,108 @@ the automatically scheduled shared relational DAG behind a carrier-owning
 Unix-domain service. The controller may submit only the public manifest and
 program selection and receive only the final boundary plus content-oblivious
 custody receipts; it must never access action-time carrier state.
+
+## CATVM now enforces the automatic rank-two shared-DAG carrier law
+
+The reviewed scheduler is now privately embedded in a separate
+carrier-owning Linux service. A default-preserving `RR_PUBLIC_MAIN` hook lets
+the service link the actual scheduler while garbage-collecting its standalone
+entry point and detailed reporting functions. The original standalone
+semantics were requalified through the complete width and predecessor chain.
+
+The production service accepts only:
+
+```text
+HELLO
+EXECUTE <public variant 0..4>
+SHUTDOWN
+```
+
+The controller is not linked to the phase core and contains no evaluator,
+expected boundary, or answer table. Every internal projection, tape,
+obligation, generation, receipt, carrier-read, dump, and debug request
+returns one fixed denial. Embedded NUL, oversized, and unknown packets return
+one fixed protocol error.
+
+Each `EXECUTE` is atomic from the controller's perspective. Inside the
+non-dumpable service, the actual reviewed path runs all 28 forward actions,
+latches only root `815`, removes that actual boundary factor, runs the literal
+28-action reverse, closes receipts/nodes/obligations/allocator, checks the
+workspace and carrier, and advances restoration generation by exactly one.
+Only then does it construct and send the final 49-coefficient boundary.
+
+The service context and carrier are private, locked, `DONTDUMP`, and
+`DONTFORK`. After accepting one same-UID client it unlinks the Unix socket and
+installs a seccomp default-kill allowlist with no file-open, new socket,
+process creation, execution, inspection, or shared-memory syscall. Six
+same-UID access paths are denied. Accepted service stdout and stderr are
+byte-zero, and a dedicated traced build confirms the post-custody syscall
+surface.
+
+The accepted run executes:
+
+```text
+primary program transactions                 1
+unrelated reuse program transactions         1
+alternating restored-carrier transactions  256
+carrier creations                            1
+request / response packets             273 / 273
+request / response bytes          2,703 / 39,339
+```
+
+The primary and reuse boundaries match both the direct reviewed engine and
+the independent GF2 reference. Every accepted transaction hardcodes
+`RC_RESTORE_CORRECT` and `RR_FAULT_NONE`; the production protocol contains no
+restore or fault selector. The second and all later programs consume the
+actual carrier restored by the preceding inverse.
+
+Separate test-only services establish wrong-root and missing-root restoration
+failure, the weaker snapshot path, an inert boundary baseline, and a
+dependency-reordered reverse tape that is killed fail-closed by seccomp
+before a payload escapes. Strict, analyzer, sanitizer, deterministic replay,
+direct/reference parity, output-key allowlist, symbol separation, and the
+complete scheduler regression chain pass.
+
+At width three the accepted machine accounts for:
+
+```text
+service context                         17,888 bytes
+compiled topology                       2,664 bytes
+activation plan                        13,192 bytes
+program table                           1,960 bytes
+actual carrier                         27,168 bytes
+verification baseline                  27,168 bytes
+production service binary              86,248 bytes
+controller binary                      21,576 bytes
+```
+
+One uncontrolled 1,000-transaction comparison measured roughly equal direct
+and in-place time (`37.01 s` versus `36.96 s`), snapshot at `18.29 s`, and
+the inert boundary at `0.015 s`. This establishes no performance or
+total-memory advantage.
+
+This establishes:
+
+```text
+CATVM_ENFORCED_15_NODE_RANK2_AUTOMATIC_SCHEDULED_SHARED_RELATIONAL_DAG_ESTABLISHED_ON_PHASE_BACKEND
+```
+
+within:
+
+```text
+BOUNDED_LINUX_SAME_UID_SOFTWARE_GF2_WIDTH3_EXACT_15_NODE_ATOMIC_RUN_28_FORWARD_28_REVERSE_9_WORKING_SLOTS_REFERENCE_ONLY
+```
+
+It does not establish a generic CATVM DAG service, non-affine relations,
+general holographic relational computation, advantage, Small Wall crossing,
+physical waveform or silicon computation, or unlimited catalytic
+computation.
+
+This closes the selected machine-boundary obstruction. Per the durable
+main-goal guardrail, the next experiment is not another affine fixture. The
+active successor is the smallest compact non-affine relation signature and
+composition law that the existing phase carrier can close without truth
+tables, assignment expansion, or decoded intermediate relations. If that
+mechanism cannot be made compact, the fallback is a controlled
+baseline/sham/augmented CATVM Small Wall experiment using the new enforced
+service as the machine substrate.

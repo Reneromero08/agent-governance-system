@@ -2541,7 +2541,10 @@ static enum rr_fault rr_fault_from_option(const char *option) {
     return RR_FAULT_NONE;
 }
 
-int main(int argc, char **argv) {
+#ifndef RR_PUBLIC_MAIN
+#define RR_PUBLIC_MAIN main
+#endif
+int RR_PUBLIC_MAIN(int argc, char **argv) {
     if (argc < 2 || argc > 3) {
         fail(
             "usage: recursive_rematerializing_general_multi_dag_"

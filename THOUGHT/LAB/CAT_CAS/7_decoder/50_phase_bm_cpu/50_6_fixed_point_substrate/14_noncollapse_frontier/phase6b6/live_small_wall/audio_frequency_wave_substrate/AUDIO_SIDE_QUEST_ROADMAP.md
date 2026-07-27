@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `6.0`
+**Roadmap version:** `7.0`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through parent commit:** `ac798737`
-**Current highest milestone:** `ALGEBRAIC_15_NODE_RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION_ESTABLISHED`
-**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_SINGLE_RANK2_BORROWER_28_FORWARD_28_REVERSE_ACTIONS_9_WORKING_SLOTS_10_PHYSICAL_BLOCKS_MAX_ACTIVATION_ORDINAL3_REFERENCE_ONLY`
+**Reconciled through parent commit:** `a06d5774`
+**Current highest milestone:** `CATVM_ENFORCED_15_NODE_RANK2_AUTOMATIC_SCHEDULED_SHARED_RELATIONAL_DAG_ESTABLISHED_ON_PHASE_BACKEND`
+**Current claim ceiling:** `BOUNDED_LINUX_SAME_UID_SOFTWARE_GF2_WIDTH3_EXACT_15_NODE_ATOMIC_RUN_28_FORWARD_28_REVERSE_9_WORKING_SLOTS_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -736,11 +736,32 @@ edges. Nine working blocks pass and eight fail causally. The carrier law is
 affine advantage or general-DAG result.
 
 Per the durable main-goal reminder, the current affine scheduler is finished.
-The selected successor is CATVM enforcement for this automatically scheduled
-shared relational DAG using the existing carrier-owning Unix-domain service
-pattern. The controller may submit public topology/program identity and
-receive only the final boundary and content-oblivious custody receipts. It
-must not map, inspect, serialize, or retain action-time carrier state.
+Its exact width-three rank-two schedule is now enforced behind a separate
+same-UID Unix-domain CATVM service. The controller does not link the phase
+core, cannot select restoration or fault modes, and receives only the final
+boundary plus content-oblivious custody receipts after actual inverse
+restoration. One actual carrier completes the primary transaction, an
+unrelated reuse transaction, and 256 alternating reuse sentinels.
+
+This establishes only:
+
+```text
+CATVM_ENFORCED_15_NODE_RANK2_AUTOMATIC_SCHEDULED_SHARED_RELATIONAL_DAG_ESTABLISHED_ON_PHASE_BACKEND
+```
+
+within:
+
+```text
+BOUNDED_LINUX_SAME_UID_SOFTWARE_GF2_WIDTH3_EXACT_15_NODE_ATOMIC_RUN_28_FORWARD_28_REVERSE_9_WORKING_SLOTS_REFERENCE_ONLY
+```
+
+The selected successor is now the smallest compact non-affine relation
+signature and composition law that is strictly broader than GF(2) affine
+relations and closes on the existing phase carrier without truth tables,
+assignment expansion, decoded internal relations, or answer-bearing host
+state. If that mechanism cannot remain compact, the fallback is a controlled
+baseline/sham/augmented CATVM Small Wall experiment using the enforced service
+as its machine substrate.
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
 per-instance native-operation records are established. Native contraction
@@ -925,7 +946,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_DAG_COMPILER_EMITTED_19_STEP_REVERSIBLE_PUBLIC_DEGREE_ONE_LEAF_ONLY_PEBBLING_11_WORKING_SLOTS_12_PHYSICAL_RELATION_BLOCKS_FOUR_PINNED_SHARED_OWNERS_REFERENCE_ONLY
+BOUNDED_LINUX_SAME_UID_SOFTWARE_GF2_WIDTH3_EXACT_15_NODE_ATOMIC_RUN_28_FORWARD_28_REVERSE_9_WORKING_SLOTS_REFERENCE_ONLY
 ```
 
 Not established:
@@ -947,15 +968,16 @@ general bounded affine DAG compilation
 more than four affine DAG shared owners
 fanout greater than four or unbounded fanout
 automatic general DAG pebbling
-internal operator rematerialization
 automatic elimination-order discovery
 unrestricted typed relation graphs and arity
 root or kernel secrecy
 microarchitectural secrecy
 compact carrier or phase-history recursion
-compact separator storage
 arbitrary interface width or relation arity
 CATVM enforcement for the general affine operator
+compact non-affine relation signatures
+composition algebra strictly broader than GF(2) affine relations
+general CATVM relational-DAG enforcement
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
