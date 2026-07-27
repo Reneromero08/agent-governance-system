@@ -437,7 +437,11 @@ static void rr_print(size_t variant, const struct relation *boundary) {
     );
 }
 
-int main(int argc, char **argv) {
+#ifndef RR_PUBLIC_MAIN
+#define RR_PUBLIC_MAIN main
+#endif
+
+int RR_PUBLIC_MAIN(int argc, char **argv) {
     if (argc != 2) {
         fail("usage: recursive_affine_module_reference MANIFEST");
     }

@@ -1,0 +1,14 @@
+# Matched occurrence expansion: leaf bodies 0 and 1 are compiled once but
+# instantiated twice, producing two distinct resident S messages.
+root 308
+compose 305 301 302
+intersect 308 306 307
+leaf 304 C D 3
+leaf 301 A B 0
+compose 307 309 304
+leaf 303 C D 2
+leaf 302 B C 1
+compose 306 305 303
+compose 309 310 311
+leaf 310 A B 0
+leaf 311 B C 1

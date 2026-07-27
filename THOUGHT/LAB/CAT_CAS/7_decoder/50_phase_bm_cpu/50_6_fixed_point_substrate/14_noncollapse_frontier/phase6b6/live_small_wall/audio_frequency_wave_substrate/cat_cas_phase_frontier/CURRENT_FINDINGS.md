@@ -1967,3 +1967,122 @@ compiler with one shared affine producer consumed by multiple typed parents
 while keeping one actual resident message, reversible shared custody,
 boundary-only projection, actual inverse restoration, and carrier accounting
 against duplicate-tree expansion.
+
+## Bounded affine DAG shared-message fanout
+
+The tree-only occurrence restriction is now removed for one native-produced
+degree-two fanout:
+
+```text
+S    = COMPOSE(F : A->B, G : B->C)
+L    = COMPOSE(actual S : A->C, H : C->D)
+R    = COMPOSE(actual same S : A->C, K : C->D)
+ROOT = INTERSECT(actual L : A->D, actual R : A->D)
+```
+
+The public manifest contains eight nodes, eight edges, four leaves, three
+composition nodes, one intersection node, and depth three. It is declared in
+scrambled order. The compiler resolves the DAG once, derives all nominal
+signatures before assigning addresses, and emits every unique node exactly
+once.
+
+Each public operand edge transitions:
+
+```text
+DECLARED -> FORWARD_CONSUMED -> INVERSE_CONSUMED
+```
+
+The actual shared relation `S` has one observed owner allocation, one forward
+materialization, one peak live instance, and one actual inverse/release. Both
+forward consumers and both inverse consumers bind the same observed slot,
+owner, serial, signature, and carrier allocation. The live lease is validated
+again at final projection and after `ROOT^-1`. `S^-1` rejects while either
+consumer edge remains live.
+
+At width three the primary final relation is:
+
+```text
+x0 + z2 = 0
+x1 + z0 = 0
+x2      = 0
+z1      = 0
+```
+
+Its complete canonical boundary hash is `630132cdcd942021`. Left-neutral and
+right-neutral variants change the complete boundary; an opposed branch makes
+the intersection empty.
+
+The matched occurrence-expanded tree instantiates `F`, `G`, and
+`S=COMPOSE(F,G)` twice using the same immutable compiled body table. It
+reaches the exact same final boundary and restores by actual inverse, but it
+has eleven nodes, ten native calls, twelve leaf toggles, and two distinct
+producer owners/serials. It therefore fails the sharing predicate. The
+accepted DAG has eight nodes, eight native calls, eight leaf toggles, and one
+shared resident block.
+
+Carrier laws are:
+
+```text
+B(w)                  = 4w^2 + 4w + 1
+W(w)                  = 36w^2 + 11w + 2
+accepted DAG carrier  = W(w) + 9B(w)  = 72w^2 + 47w + 11
+duplicate tree        = W(w) + 12B(w) = 84w^2 + 59w + 14
+```
+
+At width sixteen, the accepted path uses 19,195 carrier cells and 614,240
+live carrier bytes. Eight forward/inverse native calls execute 4,948,416
+phase ANDs, 9,628,416 phase XORs, and 10,064,805 logical carrier-cell
+inspections. Conservative current-ABI accounting, including the carrier
+verification copy, topology, program bodies, boundary, measured stack, and
+both manifests, is 1,375,336 bytes.
+
+Twenty-five complete phase boundaries match the separately compiled compact
+GF2 reference at widths `3,4,8,12,16`. Seventeen transactions on one carrier
+allocation, alternating with an unrelated identity program, restore below
+`2.3e-16`. The accepted state resets all live leases, edge tokens, pending
+counts, scheduler state, and the shared custody receipt; serial advances by
+exactly eight allocations and restoration generation by exactly one.
+
+Wrong and missing root inverses each leave `1.73205080757` error. Premature
+producer inverse, stale serial, skipped consumer, duplicate consumer,
+projection, null-carrier, and copy controls reject. The copy control
+constructs an equal-content clone in a new typed lease and proves that
+coefficient equality cannot substitute for exact custody identity. All
+successor relation copies pass through a counted wrapper: the accepted path
+records two boundary-copy calls and zero intermediate-copy calls.
+
+The expanded no-smuggle trace covers file, network, IPC, memory-mapping,
+ordinary and positioned writes, memory-file creation, splice/sendfile/copy
+routes, cross-process writes, ptrace, and ioctl. It observes only read-only
+loader/manifest access, private mappings, and stdout final-boundary JSON.
+
+Focused review found and closed two evidence defects: sharing fields are now
+runtime observations rather than topology assertions, the copy control now
+attempts a real clone substitution, and resource reporting separates active
+edge descriptors from mutable custody state without double counting. Closure
+review found no remaining finding.
+
+This establishes:
+
+```text
+BOUNDED_NATIVE_PRODUCED_AFFINE_DAG_SHARED_RESIDENT_MESSAGE_FANOUT
+```
+
+with ceiling:
+
+```text
+BOUNDED_WIDTH16_SOFTWARE_GF2_SINGLE_FANOUT_AFFINE_DAG_REFERENCE_ONLY
+```
+
+It does not establish multiple shared nodes, arbitrary DAGs or graphs,
+runtime-unbounded topology or width, automatic live-range optimization,
+nonlinear Boolean closure, CATVM custody for this compiler, computational
+advantage, physical execution, Small Wall crossing, or unlimited catalytic
+computation.
+
+The selected next experiment is
+`MULTI_FANOUT_AFFINE_DAG_CUSTODY_AND_LIVE_RANGE_COMPILATION`: compile a
+bounded public DAG with multiple native-produced shared nodes and overlapping
+consumer lifetimes, retain per-node observed custody, release only at proven
+inverse readiness, and compare carrier/native work against its
+occurrence-expanded tree.

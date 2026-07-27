@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `5.5`
+**Roadmap version:** `5.6`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
-**Current highest milestone:** `ALGEBRAIC_RECURSIVE_WIDTH_PARAMETRIC_AFFINE_TREE_COMPILER_ESTABLISHED`
-**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_TREE_COMPILER_REFERENCE_ONLY`
+**Current highest milestone:** `ALGEBRAIC_BOUNDED_AFFINE_DAG_SHARED_MESSAGE_FANOUT_ESTABLISHED`
+**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_SINGLE_FANOUT_AFFINE_DAG_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -89,6 +89,7 @@ ALGEBRAIC_OBLIVIOUS_GENERAL_AFFINE_RELATION_CLOSURE_ESTABLISHED
 ALGEBRAIC_WIDTH_PARAMETRIC_GENERAL_AFFINE_RELATION_CLOSURE_ESTABLISHED
 ALGEBRAIC_WIDTH_PARAMETRIC_AFFINE_MIXED_MODULE_CLOSURE_ESTABLISHED
 ALGEBRAIC_RECURSIVE_WIDTH_PARAMETRIC_AFFINE_TREE_COMPILER_ESTABLISHED
+ALGEBRAIC_BOUNDED_AFFINE_DAG_SHARED_MESSAGE_FANOUT_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -142,6 +143,7 @@ width-parametric general affine relation closure through width sixteen
 typed address-bound mixed affine composition/intersection module closure
 public recursive affine series/intersection tree compilation
 reversible seven-slot pebbling versus fifteen-slot retain-all execution
+one native-produced affine DAG message consumed by two typed parents
 ```
 
 Its strongest bounded architecture is:
@@ -166,6 +168,7 @@ public typed series-parallel relational geometry
 -> nominal signatures bound to actual relation-block addresses
 -> public mixed-tree parsing and dependency compilation
 -> reversible lease-checked pebbling with native dependency reconstruction
+-> edge-token custody for one actual resident degree-two DAG fanout
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -179,11 +182,11 @@ Current architectural interpretation:
 phase-circuit substrate
     ESTABLISHED_DEVELOPMENT_FOUNDATION
 bounded holographic relational substrate
-    ESTABLISHED_FOR_PUBLIC_TWO_TERMINAL_SERIES_PARALLEL_GRAPHS
+    ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_ONE_AFFINE_DAG_FANOUT
 general holographic relational computer
     NOT_ESTABLISHED
 native relational composition
-    EXACT_BINARY_COMPOSITION_AND_INTERSECTION_ESTABLISHED
+    EXACT_BINARY_COMPOSITION_INTERSECTION_AND_SINGLE_SHARED_MESSAGE_FANOUT
 internal-port closure
     ESTABLISHED_FOR_BOUNDED_PUBLIC_SERIES_PARALLEL_GRAPH_CLASS
 idempotent relational boundary
@@ -208,6 +211,8 @@ factor-preserving compact full-relation closure
     ESTABLISHED_FOR_GENERAL_AFFINE_F2_RELATIONS_THROUGH_WIDTH16
 coefficient-oblivious affine elimination
     ESTABLISHED_PUBLIC_COMPILE_TIME_WIDTHS_2_3_4_8_12_16
+affine DAG shared resident message
+    ESTABLISHED_ONE_NATIVE_PRODUCER_TWO_TYPED_CONSUMERS_WIDTHS_3_4_8_12_16
 C5 advantage
     NOT_ESTABLISHED
 ```
@@ -432,7 +437,7 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-BOUNDED_AFFINE_DAG_FANOUT_WITH_SHARED_RESIDENT_MESSAGES
+MULTI_FANOUT_AFFINE_DAG_CUSTODY_AND_LIVE_RANGE_COMPILATION
 ```
 
 The next crossing is not:
@@ -525,9 +530,9 @@ decoded. Five semantic boundaries and ten scaled primary/reuse boundaries
 match the separately linked coefficient-aware reference through width
 sixteen.
 
-The next experiment must admit bounded fanout without turning a shared
-message into a host-side copy or retaining one independent phase history per
-consumer:
+One bounded native-produced fanout is now established without turning the
+shared message into a host-side copy or retaining an independent producer
+history per consumer:
 
 ```text
 public affine DAG with one shared producer
@@ -538,6 +543,26 @@ public affine DAG with one shared producer
 -> actual inverse restoration
 -> restored-carrier reuse
 -> live carrier measured against a duplicate-tree expansion
+```
+
+The eight-node public DAG allocates and materializes `S=COMPOSE(F,G)` once.
+Two typed consumers bind the same observed slot and serial in both forward
+and inverse execution. Edge custody prevents producer inverse while either
+consumer remains live. A matched eleven-node occurrence-expanded tree reaches
+the same complete boundary and restores, but uses three more relation blocks,
+two more native calls, and four more leaf toggles and fails the sharing
+predicate. Twenty-five complete boundaries match the separate compact GF2
+reference through width sixteen.
+
+The next experiment must lift the single-fanout bound:
+
+```text
+multiple native-produced shared messages
+-> overlapping consumer live ranges
+-> per-node measured custody receipts
+-> compiled release/inverse readiness
+-> carrier reuse below occurrence-expanded topology
+-> one final boundary and actual restoration
 ```
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
@@ -723,7 +748,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_TREE_COMPILER_REFERENCE_ONLY
+BOUNDED_WIDTH16_SOFTWARE_GF2_SINGLE_FANOUT_AFFINE_DAG_REFERENCE_ONLY
 ```
 
 Not established:
@@ -741,6 +766,7 @@ hardware bit replacement
 Small Wall crossing
 holographic relational computation
 arbitrary-treewidth relational trace
+multiple affine DAG fanout nodes
 automatic elimination-order discovery
 unrestricted typed relation graphs and arity
 root or kernel secrecy

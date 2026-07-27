@@ -1,0 +1,69 @@
+{
+  "review": "PASS",
+  "reviewer_id": "BOUNDED-AFFINE-DAG-SHARED-MESSAGE-01",
+  "claim": "BOUNDED_NATIVE_PRODUCED_AFFINE_DAG_SHARED_RESIDENT_MESSAGE_FANOUT",
+  "claim_ceiling": "BOUNDED_WIDTH16_SOFTWARE_GF2_SINGLE_FANOUT_AFFINE_DAG_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/dag-affine-final2",
+  "initial_findings": [
+    {
+      "id": "DAG-FANOUT-R1-001",
+      "severity": "EVIDENCE_INSTRUMENTATION",
+      "finding": "Initial sharing fields were derived from topology, the intermediate-copy counter had no counted wrapper, and the copy control rejected before constructing a clone.",
+      "repair": "Measured shared owner allocation/release, peak live instances, and observed bind slot/serial sets; validated the live lease at projection and after root inverse; routed successor copies through one counted wrapper; and made the control allocate an equal-content typed clone whose distinct handle is rejected.",
+      "closed": true
+    },
+    {
+      "id": "DAG-FANOUT-R1-002",
+      "severity": "RESOURCE_ACCOUNTING",
+      "finding": "The initial edge-custody byte field named immutable edge descriptors already included in compiled topology and did not identify mutable custody state.",
+      "repair": "Separated 192 active edge-descriptor bytes from 424 mutable custody-state bytes and avoided double-counting either in the conservative total because topology and measured stack already include them.",
+      "closed": true
+    }
+  ],
+  "closure_checks": {
+    "native_produced_fanout_nodes": 1,
+    "maximum_fanout": 2,
+    "shared_owner_allocations": 1,
+    "shared_owner_releases": 1,
+    "shared_peak_live_instances": 1,
+    "shared_forward_consumptions": 2,
+    "shared_inverse_consumptions": 2,
+    "observed_shared_distinct_slots": 1,
+    "observed_shared_distinct_serials": 1,
+    "shared_live_at_projection": true,
+    "shared_live_after_root_inverse": true,
+    "accepted_boundary_copy_calls": 2,
+    "accepted_intermediate_copy_calls": 0,
+    "equal_content_clone_substitution_rejected": true,
+    "actual_inverse_restoration": "PASS",
+    "edge_pending_and_shared_receipt_reset": "PASS",
+    "serial_postcondition": "PASS_PLUS_8_PER_ACCEPTED_TRANSACTION",
+    "restoration_generation_postcondition": "PASS_PLUS_1_PER_ACCEPTED_TRANSACTION",
+    "same_carrier_transactions": 17,
+    "maximum_reuse_restoration_error": 2.22044604925e-16,
+    "duplicate_tree_same_complete_boundary": true,
+    "duplicate_tree_restored_by_actual_inverse": true,
+    "duplicate_tree_fails_shared_predicate": true,
+    "wrong_missing_and_dependency_reordered_inverse_controls": "PASS",
+    "stale_skipped_duplicate_and_copy_custody_controls": "PASS",
+    "strict_build": "PASS",
+    "analyzer": "PASS",
+    "asan_ubsan_leak": "PASS",
+    "deterministic_replay": "PASS",
+    "expanded_file_network_ipc_memory_no_smuggle_strace": "PASS",
+    "phase_reference_matches": "PASS_25_OF_25_COMPLETE_BOUNDARIES"
+  },
+  "sha256": {
+    "phase_source": "7b4b58549113b48f97ea06498a273236636df582163cc798d13e9a51c2028399",
+    "reference_source": "7ef0e4ee06774a207011eb663dd734ce43480467e29e6160bc7b56d7801758b9",
+    "public_dag_manifest": "df662f69041335c92ae8c713bf08075b37afd21825264aea4ec3ac3494c719d4",
+    "duplicate_tree_manifest": "7fb3852a402cba671cff3635842ae098a63f5f6bd8c460e703bb5ee2e3c8ea16",
+    "qualifier_source": "658d0853b3aa770b51814e0d3f6be1780da56c285b19d08c5943a5f9391339fa",
+    "result": "cd06be01e611c7805c3765687a4d400bec89c77c77ace6689417cebb2ec73a70",
+    "reference": "47b38106aee695033f77a1dcb27b11cb2c1c54cfcdd33b9a7001d61f2343874e",
+    "scaling": "74aa703984717804a8591ef901695ee77ccf685a1fc7b6f73b01064ebc86450b",
+    "no_smuggle_trace": "aadadddd9a516d01737d707f17994f8f0bfb9f4a15786d9a88d8a02d9ca85c07"
+  },
+  "remaining_findings": [],
+  "terminal": false
+}

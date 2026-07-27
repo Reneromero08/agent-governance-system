@@ -1,0 +1,10 @@
+# One native-produced affine message (205) has two typed consumers.
+root 208
+compose 205 201 202
+intersect 208 206 207
+leaf 204 C D 3
+leaf 201 A B 0
+compose 207 205 204
+leaf 203 C D 2
+leaf 202 B C 1
+compose 206 205 203

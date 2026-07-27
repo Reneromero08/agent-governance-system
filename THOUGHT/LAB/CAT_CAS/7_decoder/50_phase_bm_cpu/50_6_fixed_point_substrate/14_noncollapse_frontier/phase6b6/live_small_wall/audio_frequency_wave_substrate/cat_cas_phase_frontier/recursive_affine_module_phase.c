@@ -1278,7 +1278,11 @@ static void rc_apply_manifest_control(
     fail("recursive affine control target unavailable");
 }
 
-int main(int argc, char **argv) {
+#ifndef RC_PUBLIC_MAIN
+#define RC_PUBLIC_MAIN main
+#endif
+
+int RC_PUBLIC_MAIN(int argc, char **argv) {
     if (argc < 2 || argc > 3) {
         fail(
             "usage: recursive_affine_module_phase MANIFEST [CONTROL]"
