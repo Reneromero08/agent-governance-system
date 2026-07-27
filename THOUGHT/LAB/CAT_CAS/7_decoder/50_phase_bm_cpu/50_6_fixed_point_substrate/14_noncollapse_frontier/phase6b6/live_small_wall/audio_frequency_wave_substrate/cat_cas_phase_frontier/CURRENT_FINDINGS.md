@@ -2086,3 +2086,108 @@ bounded public DAG with multiple native-produced shared nodes and overlapping
 consumer lifetimes, retain per-node observed custody, release only at proven
 inverse readiness, and compare carrier/native work against its
 occurrence-expanded tree.
+
+## Nested affine DAG multi-message custody
+
+The scalar shared-owner receipt has been replaced with node-indexed owner
+receipts and edge-indexed generation observations. The successor proves the
+smallest nested two-fanout case:
+
+```text
+S    = COMPOSE(F : A->B, G : B->A)
+T    = COMPOSE(actual S : A->A, H : A->A)
+I    = INTERSECT(actual S : A->A, actual T : A->A)
+ROOT = COMPOSE(actual I : A->A, actual same T : A->A)
+```
+
+`S` and `T` are same-typed native-produced messages. Each is allocated and
+materialized once, observed by exactly two forward and two inverse consumer
+edges through one slot/serial generation, inversed once, and released once.
+The two distinct owners are observed simultaneously live through projection
+and `ROOT^-1`. The runtime lifecycle is:
+
+```text
+birth(S) < birth(T) < projection < inverse(ROOT)
+         < inverse(T) < release(T) < inverse(S) < release(S)
+```
+
+Forward edge custody now follows validate, native operation, then commit; a
+failed parent cannot leave a false consumed-edge token. Producer inverse
+readiness checks both pending counts and every outgoing edge receipt.
+Same-typed `S`-for-`T` and `T`-for-`S` controls reject by exact owner
+generation, not by type. Equal-content clones, stale serials, skipped and
+duplicate edges, and premature inverse are targeted independently at both
+owners.
+
+At width three the primary complete boundary is:
+
+```text
+x0 + z0 = 0
+x1 + z1 = 0
+x2      = 0
+z2      = 0
+```
+
+Its canonical hash is `59f0245207f2a0f1`. Five semantic variants match the
+separate conventional GF2 reference at each width `3,4,8,12,16`, for 25
+complete-boundary matches.
+
+The accepted unique-node schedule retains seven working relations. The exact
+occurrence expansion retains fifteen:
+
+```text
+B(w)                 = 4w^2 + 4w + 1
+W(w)                 = 36w^2 + 11w + 2
+accepted carrier     = W(w) + 8B(w)  = 68w^2 + 43w + 10
+expanded tree        = W(w) + 16B(w) = 100w^2 + 75w + 18
+```
+
+At width sixteen the accepted path uses 18,106 carrier cells and 579,392 live
+carrier bytes. It performs eight native forward/inverse calls and six leaf
+toggles, versus fourteen and sixteen for the matched tree. The tree produces
+the same complete boundary and restores by actual inverse but has no shared
+owner and fails the custody predicate. This is a bounded resource comparison,
+not an advantage claim.
+
+Seventeen alternating transactions on one carrier allocation restore below
+`2.8e-16`. All seven leases, eight edge tokens, owner and edge receipts,
+pending counts, and scheduler state reset. Serial advances by seven
+allocations and restoration generation by one. Snapshot reload remains a
+separate weaker baseline.
+
+The expanded no-smuggle trace covers file, network, IPC, memory mappings,
+ordinary and positioned writes, memory files, splice/sendfile/copy routes,
+cross-process writes, ptrace, and ioctl. The accepted path records two
+boundary block copies and zero intermediate copies. It emits no intermediate
+coefficient, hash, rank, pivot, content equality bit, tuple, witness,
+candidate, or assignment expansion.
+
+Focused review found one evidence-provenance mismatch after a compatibility-
+only backend edit. The complete qualifier was rerun against the current
+source hash, the prior single-fanout qualifier also passed against that
+backend, and closure review found no remaining scientific finding.
+
+This establishes:
+
+```text
+BOUNDED_NESTED_AFFINE_DAG_MULTI_SHARED_RESIDENT_MESSAGE_CUSTODY
+```
+
+with ceiling:
+
+```text
+BOUNDED_WIDTH16_SOFTWARE_GF2_EXACTLY_TWO_NESTED_FANOUTS_REFERENCE_ONLY
+```
+
+It does not establish a general DAG compiler, more than two fanout nodes,
+unbounded fanout, compact live-range release or rematerialization, arbitrary
+graphs or treewidth, CATVM enforcement for the affine compiler,
+computational advantage, physical execution, Small Wall crossing, or
+unlimited catalytic computation.
+
+The selected next experiment is
+`BOUNDED_GENERAL_AFFINE_DAG_CUSTODY_COMPILATION_AND_COMPACT_PEBBLING`:
+derive the shared-owner set and fanout counts from arbitrary bounded public
+DAGs, retain per-edge generation custody for every shared producer, and add a
+lawful compact release/rematerialization schedule compared against both
+retain-all unique-node and occurrence-expanded baselines.

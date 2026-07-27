@@ -14,7 +14,9 @@
 #include "recursive_affine_module_reference.c"
 #undef RR_PUBLIC_MAIN
 
+#ifndef DF_LEAF_BODIES
 #define DF_LEAF_BODIES 4U
+#endif
 #define DF_VARIANTS 5U
 #ifndef DF_RUN_VARIANTS
 #define DF_RUN_VARIANTS DF_VARIANTS
@@ -133,7 +135,11 @@ static struct rr_program df_make_program(size_t variant) {
     return program;
 }
 
-int main(int argc, char **argv) {
+#ifndef DF_PUBLIC_MAIN
+#define DF_PUBLIC_MAIN main
+#endif
+
+int DF_PUBLIC_MAIN(int argc, char **argv) {
     if (argc != 2) {
         fail("usage: dag_affine_fanout_reference MANIFEST");
     }

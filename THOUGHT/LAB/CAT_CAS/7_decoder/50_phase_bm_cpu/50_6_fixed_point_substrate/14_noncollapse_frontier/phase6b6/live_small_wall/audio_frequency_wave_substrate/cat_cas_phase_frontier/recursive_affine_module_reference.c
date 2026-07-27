@@ -25,7 +25,9 @@ static void rr_fail(const char *message) {
 }
 #define fail rr_fail
 
+#ifndef RR_MAX_NODES
 #define RR_MAX_NODES 15U
+#endif
 #define RR_LEAVES 8U
 #define RR_VARIANTS 5U
 #ifndef RR_RUN_VARIANTS

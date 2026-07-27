@@ -182,11 +182,11 @@ Current architectural interpretation:
 phase-circuit substrate
     ESTABLISHED_DEVELOPMENT_FOUNDATION
 bounded holographic relational substrate
-    ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_ONE_AFFINE_DAG_FANOUT
+    ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_TWO_NESTED_AFFINE_DAG_FANOUTS
 general holographic relational computer
     NOT_ESTABLISHED
 native relational composition
-    EXACT_BINARY_COMPOSITION_INTERSECTION_AND_SINGLE_SHARED_MESSAGE_FANOUT
+    EXACT_BINARY_COMPOSITION_INTERSECTION_AND_TWO_NESTED_SHARED_MESSAGE_FANOUTS
 internal-port closure
     ESTABLISHED_FOR_BOUNDED_PUBLIC_SERIES_PARALLEL_GRAPH_CLASS
 idempotent relational boundary
@@ -212,7 +212,7 @@ factor-preserving compact full-relation closure
 coefficient-oblivious affine elimination
     ESTABLISHED_PUBLIC_COMPILE_TIME_WIDTHS_2_3_4_8_12_16
 affine DAG shared resident message
-    ESTABLISHED_ONE_NATIVE_PRODUCER_TWO_TYPED_CONSUMERS_WIDTHS_3_4_8_12_16
+    ESTABLISHED_TWO_NESTED_NATIVE_PRODUCERS_TWO_CONSUMERS_EACH_WIDTHS_3_4_8_12_16
 C5 advantage
     NOT_ESTABLISHED
 ```
@@ -437,7 +437,7 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-MULTI_FANOUT_AFFINE_DAG_CUSTODY_AND_LIVE_RANGE_COMPILATION
+BOUNDED_GENERAL_AFFINE_DAG_CUSTODY_COMPILATION_AND_COMPACT_PEBBLING
 ```
 
 The next crossing is not:
@@ -554,14 +554,27 @@ two more native calls, and four more leaf toggles and fails the sharing
 predicate. Twenty-five complete boundaries match the separate compact GF2
 reference through width sixteen.
 
-The next experiment must lift the single-fanout bound:
+The fixed single-fanout bound is now lifted once through a nested pair:
 
 ```text
-multiple native-produced shared messages
--> overlapping consumer live ranges
--> per-node measured custody receipts
--> compiled release/inverse readiness
--> carrier reuse below occurrence-expanded topology
+S native-produced and consumed to produce T
+-> S and same-typed T simultaneously resident
+-> two typed forward and inverse consumers per owner
+-> per-owner and per-edge observed generation receipts
+-> dependency-checked actual inverse and release
+-> occurrence-expanded equality control
+-> one final boundary and restored-carrier reuse
+```
+
+The next experiment must remove the exact-two topology fixture and retain-all
+execution policy:
+
+```text
+general bounded public affine DAG
+-> compiler-derived shared-owner set and arbitrary bounded fanout counts
+-> per-edge custody for all shared producers
+-> compact reversible live-range release or rematerialization law
+-> comparison against retain-all unique-node and occurrence-expanded baselines
 -> one final boundary and actual restoration
 ```
 
@@ -748,7 +761,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_WIDTH16_SOFTWARE_GF2_SINGLE_FANOUT_AFFINE_DAG_REFERENCE_ONLY
+BOUNDED_WIDTH16_SOFTWARE_GF2_EXACTLY_TWO_NESTED_FANOUTS_REFERENCE_ONLY
 ```
 
 Not established:
@@ -766,7 +779,8 @@ hardware bit replacement
 Small Wall crossing
 holographic relational computation
 arbitrary-treewidth relational trace
-multiple affine DAG fanout nodes
+more than two affine DAG fanout nodes
+general bounded affine DAG compilation
 automatic elimination-order discovery
 unrestricted typed relation graphs and arity
 root or kernel secrecy

@@ -24,7 +24,9 @@
 #include "algebraic_affine_module_phase.c"
 #undef AM_PUBLIC_MAIN
 
+#ifndef RC_MAX_NODES
 #define RC_MAX_NODES 15U
+#endif
 #define RC_LEAVES 8U
 #define RC_VARIANTS 5U
 #ifndef RC_RUN_VARIANTS

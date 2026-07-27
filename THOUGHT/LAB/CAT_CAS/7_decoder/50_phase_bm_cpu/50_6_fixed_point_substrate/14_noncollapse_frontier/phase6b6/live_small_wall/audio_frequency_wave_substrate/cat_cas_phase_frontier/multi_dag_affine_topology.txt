@@ -1,0 +1,10 @@
+# Minimal nested two-fanout DAG. S (704) produces T (705); both same-typed
+# native messages remain resident and each has exactly two public consumers.
+root 707
+compose 705 704 703
+leaf 702 B A 1
+compose 707 706 705
+leaf 703 A A 2
+intersect 706 704 705
+leaf 701 A B 0
+compose 704 701 702

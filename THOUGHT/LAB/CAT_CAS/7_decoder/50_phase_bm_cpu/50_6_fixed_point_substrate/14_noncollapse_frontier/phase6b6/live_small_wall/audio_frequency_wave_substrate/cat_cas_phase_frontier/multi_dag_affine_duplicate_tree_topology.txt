@@ -1,0 +1,18 @@
+# Exact occurrence expansion of the nested two-fanout DAG. The three immutable
+# leaf bodies are compiled once but instantiated eight times. No node fans out.
+root 815
+compose 806 805 803
+leaf 810 B A 1
+compose 815 807 814
+leaf 801 A B 0
+compose 813 811 816
+intersect 807 804 806
+leaf 812 A A 2
+compose 804 801 802
+leaf 803 A A 2
+compose 814 813 812
+leaf 809 A B 0
+leaf 816 B A 1
+compose 805 809 810
+leaf 802 B A 1
+leaf 811 A B 0

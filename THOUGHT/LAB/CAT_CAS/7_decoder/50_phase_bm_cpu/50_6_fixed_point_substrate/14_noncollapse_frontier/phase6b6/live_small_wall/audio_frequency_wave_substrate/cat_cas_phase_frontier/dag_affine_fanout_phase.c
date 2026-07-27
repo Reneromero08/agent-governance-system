@@ -25,7 +25,9 @@
 #include "recursive_affine_module_phase.c"
 #undef RC_PUBLIC_MAIN
 
+#ifndef DC_LEAF_BODIES
 #define DC_LEAF_BODIES 4U
+#endif
 #define DC_VARIANTS 5U
 #ifndef DC_RUN_VARIANTS
 #define DC_RUN_VARIANTS DC_VARIANTS
@@ -37,6 +39,10 @@
 #define DC_SCALE_ONLY 0
 #endif
 #define DC_MAX_EDGES (2U * RC_MAX_NODES)
+#ifndef DC_CLAIM
+#define DC_CLAIM \
+    "BOUNDED_NATIVE_PRODUCED_AFFINE_DAG_SHARED_RESIDENT_MESSAGE_FANOUT"
+#endif
 
 _Static_assert(DC_RUN_VARIANTS >= 2U, "DAG primary/reuse required");
 _Static_assert(DC_RUN_VARIANTS <= DC_VARIANTS, "DAG variants exceeded");
@@ -61,7 +67,8 @@ struct dc_compiled {
     size_t edge_count;
     size_t fanout_nodes;
     size_t maximum_fanout;
-    size_t shared_node;
+    size_t shared_node[RC_MAX_NODES];
+    unsigned char is_shared[RC_MAX_NODES];
     size_t leaf_body_bytes;
 };
 
@@ -70,29 +77,73 @@ struct dc_machine {
     uint64_t restoration_generation;
 };
 
+struct dc_owner_receipt {
+    struct rc_lease lease;
+    int lease_set;
+    uint64_t forward_consumptions;
+    uint64_t inverse_consumptions;
+    uint64_t forward_materializations;
+    uint64_t inverse_applications;
+    uint64_t owner_allocations;
+    uint64_t owner_releases;
+    size_t live_instances;
+    size_t peak_live_instances;
+    int observation_set;
+    size_t observed_slot;
+    uint64_t observed_serial;
+    size_t distinct_slots;
+    size_t distinct_serials;
+    int live_at_projection;
+    int live_after_root_inverse;
+    int all_edge_generations_exact;
+    uint64_t birth_event;
+    uint64_t inverse_event;
+    uint64_t release_event;
+};
+
+struct dc_edge_receipt {
+    int forward_seen;
+    int inverse_seen;
+    size_t forward_slot;
+    uint64_t forward_serial;
+};
+
 struct dc_custody {
     unsigned char edge_state[DC_MAX_EDGES];
+    struct dc_edge_receipt edge_receipt[DC_MAX_EDGES];
     size_t forward_pending[RC_MAX_NODES];
     size_t inverse_pending[RC_MAX_NODES];
-    struct rc_lease shared_lease;
-    int shared_lease_set;
-    uint64_t shared_forward_consumptions;
-    uint64_t shared_inverse_consumptions;
-    uint64_t shared_forward_materializations;
-    uint64_t shared_inverse_applications;
-    uint64_t shared_owner_allocations;
-    uint64_t shared_owner_releases;
+    struct dc_owner_receipt owner[RC_MAX_NODES];
     size_t shared_live_instances;
     size_t shared_peak_live_instances;
-    int shared_observation_set;
-    size_t shared_observed_slot;
-    uint64_t shared_observed_serial;
-    size_t shared_distinct_slots;
-    size_t shared_distinct_serials;
-    int shared_live_at_projection;
-    int shared_live_after_root_inverse;
+    int shared_pair_nonalias_observed;
+    int shared_overlap_observed;
+    uint64_t event_clock;
+    uint64_t projection_event;
+    uint64_t root_inverse_event;
     uint64_t boundary_block_copy_calls;
     uint64_t intermediate_block_copy_calls;
+};
+
+struct dc_owner_audit {
+    unsigned public_node_id;
+    size_t declared_consumers;
+    uint64_t forward_consumptions;
+    uint64_t inverse_consumptions;
+    uint64_t forward_materializations;
+    uint64_t inverse_applications;
+    uint64_t owner_allocations;
+    uint64_t owner_releases;
+    size_t peak_live_instances;
+    size_t consumer_distinct_slots;
+    size_t consumer_distinct_serials;
+    int live_at_projection;
+    int live_after_root_inverse;
+    int all_edge_generations_exact;
+    int receipt_exact;
+    uint64_t birth_event;
+    uint64_t inverse_event;
+    uint64_t release_event;
 };
 
 struct dc_execution {
@@ -129,6 +180,13 @@ struct dc_execution {
     size_t shared_consumer_distinct_serials;
     int shared_live_at_projection;
     int shared_live_after_root_inverse;
+    struct dc_owner_audit shared_owner[RC_MAX_NODES];
+    size_t shared_owner_count;
+    int shared_pair_nonalias_observed;
+    int shared_overlap_observed;
+    size_t shared_simultaneous_live_high_water;
+    uint64_t projection_event;
+    uint64_t root_inverse_event;
     uint64_t serial_before;
     uint64_t serial_after;
     uint64_t restoration_generation_before;
@@ -139,7 +197,7 @@ struct dc_execution {
 
 static struct dc_compiled dc_compile(
     const struct rc_manifest *manifest,
-    int require_fanout
+    size_t required_fanout_nodes
 ) {
     struct dc_compiled result = {0};
     struct rc_compiled *compiled = &result.graph;
@@ -244,16 +302,22 @@ static struct dc_compiled dc_compile(
             if (compiled->node[index].kind == RC_LEAF) {
                 fail("affine DAG proof requires native-produced fanout");
             }
-            result.shared_node = index;
+            result.shared_node[result.fanout_nodes] = index;
+            result.is_shared[index] = 1U;
             ++result.fanout_nodes;
         }
     }
-    if (require_fanout) {
+    if (required_fanout_nodes > 0U) {
         if (
-            result.fanout_nodes != 1U
+            result.fanout_nodes != required_fanout_nodes
             || result.maximum_fanout != 2U
         ) {
-            fail("affine DAG requires exactly one bounded fanout node");
+            if (required_fanout_nodes == 1U) {
+                fail(
+                    "affine DAG requires exactly one bounded fanout node"
+                );
+            }
+            fail("affine DAG has wrong bounded fanout-node count");
         }
     } else if (result.fanout_nodes != 0U) {
         fail("duplicate-tree baseline unexpectedly contains fanout");
@@ -343,53 +407,60 @@ static struct rc_program dc_make_program(size_t variant) {
 static void dc_validate_shared_handle(
     const struct dc_compiled *compiled,
     struct dc_custody *custody,
+    size_t producer,
     struct rc_lease lease
 ) {
-    if (custody->shared_lease_set == 0) {
+    const struct dc_owner_receipt *receipt =
+        &custody->owner[producer];
+    if (
+        producer >= compiled->graph.count
+        || compiled->is_shared[producer] == 0U
+        || receipt->lease_set == 0
+    ) {
         fail("affine DAG shared lease unavailable");
     }
     if (
-        lease.slot != custody->shared_lease.slot
-        || lease.serial != custody->shared_lease.serial
-        || compiled->fanout_nodes != 1U
+        lease.slot != receipt->lease.slot
+        || lease.serial != receipt->lease.serial
     ) {
         fail("affine DAG consumer substituted a shared lease");
     }
 }
 
 static void dc_observe_shared_handle(
-    struct dc_custody *custody,
+    struct dc_owner_receipt *receipt,
     struct rc_lease lease
 ) {
-    if (!custody->shared_observation_set) {
-        custody->shared_observation_set = 1;
-        custody->shared_observed_slot = lease.slot;
-        custody->shared_observed_serial = lease.serial;
-        custody->shared_distinct_slots = 1U;
-        custody->shared_distinct_serials = 1U;
+    if (!receipt->observation_set) {
+        receipt->observation_set = 1;
+        receipt->observed_slot = lease.slot;
+        receipt->observed_serial = lease.serial;
+        receipt->distinct_slots = 1U;
+        receipt->distinct_serials = 1U;
         return;
     }
-    if (lease.slot != custody->shared_observed_slot) {
-        ++custody->shared_distinct_slots;
+    if (lease.slot != receipt->observed_slot) {
+        ++receipt->distinct_slots;
     }
-    if (lease.serial != custody->shared_observed_serial) {
-        ++custody->shared_distinct_serials;
+    if (lease.serial != receipt->observed_serial) {
+        ++receipt->distinct_serials;
     }
 }
 
 static void dc_validate_shared_live(
     struct rc_runtime *runtime,
     const struct dc_compiled *compiled,
-    struct dc_custody *custody
+    struct dc_custody *custody,
+    size_t producer
 ) {
     dc_validate_shared_handle(
-        compiled, custody, custody->shared_lease
+        compiled, custody, producer, custody->owner[producer].lease
     );
     rc_validate_lease(
         runtime,
-        custody->shared_lease,
-        compiled->shared_node,
-        compiled->graph.node[compiled->shared_node].signature,
+        custody->owner[producer].lease,
+        producer,
+        compiled->graph.node[producer].signature,
         0
     );
 }
@@ -416,32 +487,66 @@ static void dc_copy_relation_block(
     }
 }
 
-static void dc_forward_edge(
+static int dc_prepare_forward_edge(
     const struct dc_compiled *compiled,
     struct dc_custody *custody,
     size_t edge_index,
     struct rc_lease lease,
     int stale_shared,
     int skip_second_shared,
-    int double_first_shared
+    size_t control_shared
 ) {
     const struct dc_edge *edge = &compiled->edge[edge_index];
     if (custody->edge_state[edge_index] != DC_EDGE_DECLARED) {
         fail("affine DAG edge consumed more than once");
     }
-    if (
-        compiled->fanout_nodes == 1U
-        && edge->producer == compiled->shared_node
-    ) {
-        if (skip_second_shared && custody->shared_forward_consumptions == 1U) {
-            return;
+    if (compiled->is_shared[edge->producer] != 0U) {
+        struct dc_owner_receipt *receipt =
+            &custody->owner[edge->producer];
+        if (
+            skip_second_shared
+            && edge->producer == control_shared
+            && receipt->forward_consumptions == 1U
+        ) {
+            return 0;
         }
-        if (stale_shared && custody->shared_forward_consumptions == 1U) {
+        if (
+            stale_shared
+            && edge->producer == control_shared
+            && receipt->forward_consumptions == 1U
+        ) {
             ++lease.serial;
         }
-        dc_validate_shared_handle(compiled, custody, lease);
-        dc_observe_shared_handle(custody, lease);
-        ++custody->shared_forward_consumptions;
+        dc_validate_shared_handle(
+            compiled, custody, edge->producer, lease
+        );
+    }
+    return 1;
+}
+
+static void dc_commit_forward_edge(
+    const struct dc_compiled *compiled,
+    struct dc_custody *custody,
+    size_t edge_index,
+    struct rc_lease lease,
+    int double_first_shared,
+    size_t control_shared
+) {
+    const struct dc_edge *edge = &compiled->edge[edge_index];
+    if (custody->edge_state[edge_index] != DC_EDGE_DECLARED) {
+        fail("affine DAG edge consumed more than once");
+    }
+    if (compiled->is_shared[edge->producer] != 0U) {
+        struct dc_owner_receipt *receipt =
+            &custody->owner[edge->producer];
+        dc_validate_shared_handle(
+            compiled, custody, edge->producer, lease
+        );
+        dc_observe_shared_handle(receipt, lease);
+        ++receipt->forward_consumptions;
+        custody->edge_receipt[edge_index].forward_seen = 1;
+        custody->edge_receipt[edge_index].forward_slot = lease.slot;
+        custody->edge_receipt[edge_index].forward_serial = lease.serial;
     }
     custody->edge_state[edge_index] = DC_EDGE_FORWARD;
     if (custody->forward_pending[edge->producer] == 0U) {
@@ -450,17 +555,16 @@ static void dc_forward_edge(
     --custody->forward_pending[edge->producer];
     if (
         double_first_shared
-        && edge->producer == compiled->shared_node
-        && custody->shared_forward_consumptions == 1U
+        && edge->producer == control_shared
+        && custody->owner[edge->producer].forward_consumptions == 1U
     ) {
-        dc_forward_edge(
+        dc_commit_forward_edge(
             compiled,
             custody,
             edge_index,
             lease,
             0,
-            0,
-            0
+            control_shared
         );
     }
 }
@@ -475,13 +579,25 @@ static void dc_inverse_edge(
     if (custody->edge_state[edge_index] != DC_EDGE_FORWARD) {
         fail("affine DAG inverse edge transition invalid");
     }
-    if (
-        compiled->fanout_nodes == 1U
-        && edge->producer == compiled->shared_node
-    ) {
-        dc_validate_shared_handle(compiled, custody, lease);
-        dc_observe_shared_handle(custody, lease);
-        ++custody->shared_inverse_consumptions;
+    if (compiled->is_shared[edge->producer] != 0U) {
+        struct dc_owner_receipt *receipt =
+            &custody->owner[edge->producer];
+        const struct dc_edge_receipt *edge_receipt =
+            &custody->edge_receipt[edge_index];
+        dc_validate_shared_handle(
+            compiled, custody, edge->producer, lease
+        );
+        if (
+            edge_receipt->forward_seen == 0
+            || edge_receipt->inverse_seen != 0
+            || edge_receipt->forward_slot != lease.slot
+            || edge_receipt->forward_serial != lease.serial
+        ) {
+            fail("affine DAG inverse edge changed shared generation");
+        }
+        dc_observe_shared_handle(receipt, lease);
+        ++receipt->inverse_consumptions;
+        custody->edge_receipt[edge_index].inverse_seen = 1;
     }
     custody->edge_state[edge_index] = DC_EDGE_INVERSE;
     if (custody->inverse_pending[edge->producer] == 0U) {
@@ -502,6 +618,14 @@ static void dc_require_inverse_ready(
         (void)compiled;
         fail("affine DAG producer inverse has live dependents");
     }
+    for (size_t edge = 0U; edge < compiled->edge_count; ++edge) {
+        if (
+            compiled->edge[edge].producer == node_index
+            && custody->edge_state[edge] != DC_EDGE_INVERSE
+        ) {
+            fail("affine DAG producer inverse has live edge receipt");
+        }
+    }
 }
 
 static struct rc_lease dc_forward(
@@ -511,7 +635,8 @@ static struct rc_lease dc_forward(
     struct rc_lease node_lease[RC_MAX_NODES],
     int stale_shared,
     int skip_second_shared,
-    int double_first_shared
+    int double_first_shared,
+    size_t control_shared
 ) {
     for (size_t index = 0U; index < RC_MAX_NODES; ++index) {
         node_lease[index] = (struct rc_lease){
@@ -547,37 +672,74 @@ static struct rc_lease dc_forward(
         } else {
             const struct rc_lease left = node_lease[node->left];
             const struct rc_lease right = node_lease[node->right];
-            dc_forward_edge(
+            const int consume_left = dc_prepare_forward_edge(
                 compiled,
                 custody,
                 compiled->left_edge[index],
                 left,
                 stale_shared,
                 skip_second_shared,
-                double_first_shared
+                control_shared
             );
-            dc_forward_edge(
+            const int consume_right = dc_prepare_forward_edge(
                 compiled,
                 custody,
                 compiled->right_edge[index],
                 right,
                 stale_shared,
                 skip_second_shared,
-                double_first_shared
+                control_shared
             );
             rc_apply_node(
                 runtime, index, left, right, output, 0, 0
             );
+            if (consume_left) {
+                dc_commit_forward_edge(
+                    compiled,
+                    custody,
+                    compiled->left_edge[index],
+                    left,
+                    double_first_shared,
+                    control_shared
+                );
+            }
+            if (consume_right) {
+                dc_commit_forward_edge(
+                    compiled,
+                    custody,
+                    compiled->right_edge[index],
+                    right,
+                    double_first_shared,
+                    control_shared
+                );
+            }
         }
-        if (
-            compiled->fanout_nodes == 1U
-            && index == compiled->shared_node
-        ) {
-            custody->shared_lease = output;
-            custody->shared_lease_set = 1;
-            ++custody->shared_forward_materializations;
-            ++custody->shared_owner_allocations;
+        if (compiled->is_shared[index] != 0U) {
+            struct dc_owner_receipt *receipt =
+                &custody->owner[index];
+            receipt->lease = output;
+            receipt->lease_set = 1;
+            receipt->all_edge_generations_exact = 1;
+            receipt->birth_event = ++custody->event_clock;
+            ++receipt->forward_materializations;
+            ++receipt->owner_allocations;
+            ++receipt->live_instances;
+            receipt->peak_live_instances = receipt->live_instances;
             ++custody->shared_live_instances;
+            if (custody->shared_live_instances > 1U) {
+                custody->shared_overlap_observed = 1;
+                for (size_t peer = 0U; peer < compiled->fanout_nodes; ++peer) {
+                    const size_t other = compiled->shared_node[peer];
+                    if (
+                        other != index
+                        && custody->owner[other].lease_set
+                        && custody->owner[other].lease.slot
+                            != output.slot
+                    ) {
+                        custody->shared_pair_nonalias_observed = 1;
+                    }
+                }
+            }
             if (
                 custody->shared_live_instances
                 > custody->shared_peak_live_instances
@@ -643,11 +805,11 @@ static void dc_reverse_one(
             compiled->right_edge[index],
             right
         );
-        if (
-            compiled->fanout_nodes == 1U
-            && index == compiled->shared_node
-        ) {
-            ++custody->shared_inverse_applications;
+        if (compiled->is_shared[index] != 0U) {
+            struct dc_owner_receipt *receipt =
+                &custody->owner[index];
+            ++receipt->inverse_applications;
+            receipt->inverse_event = ++custody->event_clock;
         }
     }
     rc_release(
@@ -657,15 +819,21 @@ static void dc_reverse_one(
         node->signature,
         index == wrong_node
     );
-    if (
-        compiled->fanout_nodes == 1U
-        && index == compiled->shared_node
-    ) {
-        ++custody->shared_owner_releases;
-        if (custody->shared_live_instances == 0U) {
+    if (compiled->is_shared[index] != 0U) {
+        struct dc_owner_receipt *receipt =
+            &custody->owner[index];
+        ++receipt->owner_releases;
+        receipt->release_event = ++custody->event_clock;
+        if (
+            receipt->live_instances == 0U
+            || custody->shared_live_instances == 0U
+        ) {
             fail("affine DAG shared live-instance underflow");
         }
+        --receipt->live_instances;
         --custody->shared_live_instances;
+        receipt->lease = (struct rc_lease){0};
+        receipt->lease_set = 0;
     }
 }
 
@@ -725,11 +893,16 @@ static struct dc_execution dc_execute(
         node_lease,
         0,
         0,
-        0
+        0,
+        SIZE_MAX
     );
-    if (compiled->fanout_nodes == 1U) {
-        dc_validate_shared_live(&runtime, compiled, &custody);
-        custody.shared_live_at_projection = 1;
+    custody.projection_event = ++custody.event_clock;
+    for (size_t shared = 0U; shared < compiled->fanout_nodes; ++shared) {
+        const size_t producer = compiled->shared_node[shared];
+        dc_validate_shared_live(
+            &runtime, compiled, &custody, producer
+        );
+        custody.owner[producer].live_at_projection = 1;
     }
     dc_copy_relation_block(
         &runtime,
@@ -758,8 +931,12 @@ static struct dc_execution dc_execute(
             0,
             sizeof(custody.inverse_pending)
         );
-        memset(&custody.shared_lease, 0, sizeof(custody.shared_lease));
-        custody.shared_lease_set = 0;
+        memset(custody.owner, 0, sizeof(custody.owner));
+        memset(
+            custody.edge_receipt,
+            0,
+            sizeof(custody.edge_receipt)
+        );
         custody.shared_live_instances = 0U;
         runtime.live = 0U;
         runtime.next_serial = machine->next_serial;
@@ -789,14 +966,25 @@ static struct dc_execution dc_execute(
                         ? compiled->graph.root
                         : SIZE_MAX
                 );
-                if (
-                    index == compiled->graph.root
-                    && compiled->fanout_nodes == 1U
-                ) {
-                    dc_validate_shared_live(
-                        &runtime, compiled, &custody
-                    );
-                    custody.shared_live_after_root_inverse = 1;
+                if (index == compiled->graph.root) {
+                    custody.root_inverse_event =
+                        ++custody.event_clock;
+                    for (
+                        size_t shared = 0U;
+                        shared < compiled->fanout_nodes;
+                        ++shared
+                    ) {
+                        const size_t producer =
+                            compiled->shared_node[shared];
+                        dc_validate_shared_live(
+                            &runtime,
+                            compiled,
+                            &custody,
+                            producer
+                        );
+                        custody.owner[producer]
+                            .live_after_root_inverse = 1;
+                    }
                 }
             }
         }
@@ -807,28 +995,103 @@ static struct dc_execution dc_execute(
     const int counts_complete = restore_mode == RC_RESTORE_SNAPSHOT
         ? 1
         : dc_counts_zero(compiled, &custody);
-    execution.shared_forward_consumptions =
-        custody.shared_forward_consumptions;
-    execution.shared_inverse_consumptions =
-        custody.shared_inverse_consumptions;
-    execution.shared_forward_materializations =
-        custody.shared_forward_materializations;
-    execution.shared_inverse_applications =
-        custody.shared_inverse_applications;
-    execution.shared_owner_allocations =
-        custody.shared_owner_allocations;
-    execution.shared_owner_releases =
-        custody.shared_owner_releases;
-    execution.shared_peak_live_instances =
-        custody.shared_peak_live_instances;
-    execution.shared_consumer_distinct_slots =
-        custody.shared_distinct_slots;
-    execution.shared_consumer_distinct_serials =
-        custody.shared_distinct_serials;
+    execution.shared_owner_count = compiled->fanout_nodes;
     execution.shared_live_at_projection =
-        custody.shared_live_at_projection;
+        compiled->fanout_nodes > 0U;
     execution.shared_live_after_root_inverse =
-        custody.shared_live_after_root_inverse;
+        compiled->fanout_nodes > 0U;
+    execution.shared_pair_nonalias_observed =
+        custody.shared_pair_nonalias_observed;
+    execution.shared_overlap_observed =
+        custody.shared_overlap_observed;
+    execution.shared_simultaneous_live_high_water =
+        custody.shared_peak_live_instances;
+    execution.projection_event = custody.projection_event;
+    execution.root_inverse_event = custody.root_inverse_event;
+    for (size_t shared = 0U; shared < compiled->fanout_nodes; ++shared) {
+        const size_t producer = compiled->shared_node[shared];
+        const struct dc_owner_receipt *receipt =
+            &custody.owner[producer];
+        struct dc_owner_audit *audit =
+            &execution.shared_owner[shared];
+        audit->public_node_id = compiled->graph.node[producer].id;
+        audit->declared_consumers =
+            compiled->graph.node[producer].indegree;
+        audit->forward_consumptions =
+            receipt->forward_consumptions;
+        audit->inverse_consumptions =
+            receipt->inverse_consumptions;
+        audit->forward_materializations =
+            receipt->forward_materializations;
+        audit->inverse_applications =
+            receipt->inverse_applications;
+        audit->owner_allocations = receipt->owner_allocations;
+        audit->owner_releases = receipt->owner_releases;
+        audit->peak_live_instances = receipt->peak_live_instances;
+        audit->consumer_distinct_slots = receipt->distinct_slots;
+        audit->consumer_distinct_serials =
+            receipt->distinct_serials;
+        audit->live_at_projection = receipt->live_at_projection;
+        audit->live_after_root_inverse =
+            receipt->live_after_root_inverse;
+        audit->all_edge_generations_exact =
+            receipt->all_edge_generations_exact;
+        audit->birth_event = receipt->birth_event;
+        audit->inverse_event = receipt->inverse_event;
+        audit->release_event = receipt->release_event;
+        audit->receipt_exact =
+            receipt->forward_consumptions
+                    == compiled->graph.node[producer].indegree
+            && receipt->inverse_consumptions
+                    == compiled->graph.node[producer].indegree
+            && receipt->forward_materializations == 1U
+            && receipt->inverse_applications == 1U
+            && receipt->owner_allocations == 1U
+            && receipt->owner_releases == 1U
+            && receipt->peak_live_instances == 1U
+            && receipt->distinct_slots == 1U
+            && receipt->distinct_serials == 1U
+            && receipt->live_at_projection
+            && receipt->live_after_root_inverse
+            && receipt->all_edge_generations_exact;
+        execution.shared_forward_consumptions +=
+            receipt->forward_consumptions;
+        execution.shared_inverse_consumptions +=
+            receipt->inverse_consumptions;
+        execution.shared_forward_materializations +=
+            receipt->forward_materializations;
+        execution.shared_inverse_applications +=
+            receipt->inverse_applications;
+        execution.shared_owner_allocations +=
+            receipt->owner_allocations;
+        execution.shared_owner_releases +=
+            receipt->owner_releases;
+        if (
+            receipt->peak_live_instances
+                > execution.shared_peak_live_instances
+        ) {
+            execution.shared_peak_live_instances =
+                receipt->peak_live_instances;
+        }
+        if (
+            receipt->distinct_slots
+                > execution.shared_consumer_distinct_slots
+        ) {
+            execution.shared_consumer_distinct_slots =
+                receipt->distinct_slots;
+        }
+        if (
+            receipt->distinct_serials
+                > execution.shared_consumer_distinct_serials
+        ) {
+            execution.shared_consumer_distinct_serials =
+                receipt->distinct_serials;
+        }
+        execution.shared_live_at_projection &=
+            receipt->live_at_projection;
+        execution.shared_live_after_root_inverse &=
+            receipt->live_after_root_inverse;
+    }
     execution.boundary_block_copy_calls =
         custody.boundary_block_copy_calls;
     execution.intermediate_block_copy_calls =
@@ -848,8 +1111,12 @@ static struct dc_execution dc_execute(
             sizeof(custody.inverse_pending)
         );
     }
-    memset(&custody.shared_lease, 0, sizeof(custody.shared_lease));
-    custody.shared_lease_set = 0;
+    memset(custody.owner, 0, sizeof(custody.owner));
+    memset(
+        custody.edge_receipt,
+        0,
+        sizeof(custody.edge_receipt)
+    );
     execution.restoration_max_abs = restoration(carrier, &borrowed);
     runtime.stats.restoration_cell_checks += carrier->cells;
     execution.integrity_max_abs = integrity(carrier);
@@ -860,10 +1127,16 @@ static struct dc_execution dc_execute(
     execution.allocator_restored = rc_allocator_is_restored(&runtime);
     execution.edge_custody_restored = edges_complete
         && dc_edges_all(compiled, &custody, DC_EDGE_DECLARED);
-    execution.shared_receipt_reset =
-        custody.shared_lease_set == 0
-        && custody.shared_lease.slot == 0U
-        && custody.shared_lease.serial == 0U;
+    execution.shared_receipt_reset = 1;
+    for (size_t index = 0U; index < RC_MAX_NODES; ++index) {
+        if (
+            custody.owner[index].lease_set != 0
+            || custody.owner[index].lease.slot != 0U
+            || custody.owner[index].lease.serial != 0U
+        ) {
+            execution.shared_receipt_reset = 0;
+        }
+    }
     execution.pending_counts_restored = counts_complete;
     execution.scheduler_queue_empty = 1;
     execution.stats = runtime.stats;
@@ -891,7 +1164,8 @@ static struct dc_execution dc_execute(
 
 static void dc_test_copy_substitution(
     const struct dc_compiled *compiled,
-    const struct rc_program *program
+    const struct rc_program *program,
+    size_t shared_node
 ) {
     const size_t control_pool = compiled->graph.count + 1U;
     const struct process shape = {
@@ -913,23 +1187,26 @@ static void dc_test_copy_substitution(
         node_lease,
         0,
         0,
-        0
+        0,
+        shared_node
     );
     const struct rc_signature signature =
-        compiled->graph.node[compiled->shared_node].signature;
+        compiled->graph.node[shared_node].signature;
     const struct rc_lease clone = rc_allocate(
         &runtime, RC_MAX_NODES - 1U, signature
     );
     dc_copy_relation_block(
         &runtime,
         &custody,
-        rc_slot_start(custody.shared_lease.slot),
+        rc_slot_start(custody.owner[shared_node].lease.slot),
         rc_slot_start(clone.slot),
         0,
         0
     );
     runtime.slot[clone.slot].reserved = 0;
-    dc_validate_shared_handle(compiled, &custody, clone);
+    dc_validate_shared_handle(
+        compiled, &custody, shared_node, clone
+    );
     free_carrier(&carrier);
     fail("affine DAG copied shared substitution was not rejected");
 }
@@ -939,7 +1216,8 @@ static void dc_test_forward_control(
     const struct rc_program *program,
     int stale_shared,
     int skip_second_shared,
-    int double_first_shared
+    int double_first_shared,
+    size_t shared_node
 ) {
     const struct process shape = {
         .carrier_cells = rc_carrier_cells(compiled->graph.count)
@@ -960,7 +1238,8 @@ static void dc_test_forward_control(
         node_lease,
         stale_shared,
         skip_second_shared,
-        double_first_shared
+        double_first_shared,
+        shared_node
     );
     free_carrier(&carrier);
     fail("affine DAG forward custody control was not rejected");
@@ -968,7 +1247,8 @@ static void dc_test_forward_control(
 
 static void dc_test_reordered(
     const struct dc_compiled *compiled,
-    const struct rc_program *program
+    const struct rc_program *program,
+    size_t shared_node
 ) {
     const struct process shape = {
         .carrier_cells = rc_carrier_cells(compiled->graph.count)
@@ -989,14 +1269,15 @@ static void dc_test_reordered(
         node_lease,
         0,
         0,
-        0
+        0,
+        shared_node
     );
     dc_reverse_one(
         &runtime,
         compiled,
         &custody,
         node_lease,
-        compiled->shared_node,
+        shared_node,
         SIZE_MAX
     );
     free_carrier(&carrier);
@@ -1015,6 +1296,56 @@ static unsigned long long dc_logical_inspections(
         + execution->lease_cell_checks;
 }
 
+static void dc_print_owner_audits(
+    const struct dc_execution *execution
+) {
+    printf(",\"shared_owner_receipts\":[");
+    for (
+        size_t shared = 0U;
+        shared < execution->shared_owner_count;
+        ++shared
+    ) {
+        const struct dc_owner_audit *audit =
+            &execution->shared_owner[shared];
+        if (shared > 0U) {
+            putchar(',');
+        }
+        printf(
+            "{\"public_node_id\":%u,"
+            "\"declared_consumers\":%zu,"
+            "\"forward_consumptions\":%llu,"
+            "\"inverse_consumptions\":%llu,"
+            "\"forward_materializations\":%llu,"
+            "\"inverse_applications\":%llu,"
+            "\"owner_allocations\":%llu,"
+            "\"owner_releases\":%llu,"
+            "\"peak_live_instances\":%zu,"
+            "\"consumer_distinct_slots\":%zu,"
+            "\"consumer_distinct_serials\":%zu,"
+            "\"live_at_projection\":%s,"
+            "\"live_after_root_inverse\":%s,"
+            "\"all_edge_generations_exact\":%s,"
+            "\"receipt_exact\":%s}",
+            audit->public_node_id,
+            audit->declared_consumers,
+            (unsigned long long)audit->forward_consumptions,
+            (unsigned long long)audit->inverse_consumptions,
+            (unsigned long long)audit->forward_materializations,
+            (unsigned long long)audit->inverse_applications,
+            (unsigned long long)audit->owner_allocations,
+            (unsigned long long)audit->owner_releases,
+            audit->peak_live_instances,
+            audit->consumer_distinct_slots,
+            audit->consumer_distinct_serials,
+            audit->live_at_projection ? "true" : "false",
+            audit->live_after_root_inverse ? "true" : "false",
+            audit->all_edge_generations_exact ? "true" : "false",
+            audit->receipt_exact ? "true" : "false"
+        );
+    }
+    putchar(']');
+}
+
 static void dc_print(
     const char *mode,
     const struct dc_compiled *compiled,
@@ -1026,8 +1357,7 @@ static void dc_print(
         GA_CARRIER_CELLS - GA_RELATION_BLOCKS * GA_BLOCK_CELLS;
     printf(
         "{\"mode\":\"%s\","
-        "\"claim\":\"BOUNDED_NATIVE_PRODUCED_AFFINE_DAG_"
-        "SHARED_RESIDENT_MESSAGE_FANOUT\","
+        "\"claim\":\"" DC_CLAIM "\","
         "\"width\":%u,"
         "\"manifest_nodes\":%zu,"
         "\"manifest_leaves\":%zu,"
@@ -1131,6 +1461,9 @@ static void dc_print(
         "\"shared_consumer_distinct_serials\":%zu,"
         "\"shared_live_at_projection\":%s,"
         "\"shared_live_after_root_inverse\":%s,"
+        "\"shared_pair_nonalias_observed\":%s,"
+        "\"shared_overlap_observed\":%s,"
+        "\"shared_simultaneous_live_high_water\":%zu,"
         "\"boundary_block_copy_calls\":%llu,"
         "\"intermediate_block_copy_calls\":%llu,"
         "\"serial_before\":%llu,"
@@ -1150,7 +1483,7 @@ static void dc_print(
         "\"workspace_cell_checks\":%llu,"
         "\"restoration_cell_checks\":%llu,"
         "\"integrity_cell_checks\":%llu,"
-        "\"logical_carrier_cell_inspections\":%llu}\n",
+        "\"logical_carrier_cell_inspections\":%llu",
         (unsigned long long)execution->boundary.hash,
         execution->boundary.maximum_root_error,
         GA_WORKSPACE_TOLERANCE,
@@ -1181,11 +1514,14 @@ static void dc_print(
         (unsigned long long)execution->shared_inverse_applications,
         (unsigned long long)execution->shared_owner_allocations,
         (unsigned long long)execution->shared_owner_releases,
-        execution->shared_peak_live_instances,
+        execution->shared_simultaneous_live_high_water,
         execution->shared_consumer_distinct_slots,
         execution->shared_consumer_distinct_serials,
         execution->shared_live_at_projection ? "true" : "false",
         execution->shared_live_after_root_inverse ? "true" : "false",
+        execution->shared_pair_nonalias_observed ? "true" : "false",
+        execution->shared_overlap_observed ? "true" : "false",
+        execution->shared_simultaneous_live_high_water,
         (unsigned long long)execution->boundary_block_copy_calls,
         (unsigned long long)execution->intermediate_block_copy_calls,
         (unsigned long long)execution->serial_before,
@@ -1207,6 +1543,8 @@ static void dc_print(
         (unsigned long long)execution->stats.integrity_cell_checks,
         dc_logical_inspections(execution)
     );
+    dc_print_owner_audits(execution);
+    printf("}\n");
 }
 
 static void dc_manifest_control(
@@ -1246,7 +1584,11 @@ static void dc_manifest_control(
     fail("affine DAG manifest control target unavailable");
 }
 
-int main(int argc, char **argv) {
+#ifndef DC_PUBLIC_MAIN
+#define DC_PUBLIC_MAIN main
+#endif
+
+int DC_PUBLIC_MAIN(int argc, char **argv) {
     if (argc < 3 || argc > 4) {
         fail(
             "usage: dag_affine_fanout_phase DAG_MANIFEST "
@@ -1284,19 +1626,44 @@ int main(int argc, char **argv) {
         program[variant] = dc_make_program(variant);
     }
     if (argc == 4 && strcmp(argv[3], "--reordered-inverse") == 0) {
-        dc_test_reordered(&compiled, &program[0]);
+        dc_test_reordered(
+            &compiled, &program[0], compiled.shared_node[0]
+        );
     }
     if (argc == 4 && strcmp(argv[3], "--control-stale-shared") == 0) {
-        dc_test_forward_control(&compiled, &program[0], 1, 0, 0);
+        dc_test_forward_control(
+            &compiled,
+            &program[0],
+            1,
+            0,
+            0,
+            compiled.shared_node[0]
+        );
     }
     if (argc == 4 && strcmp(argv[3], "--control-skip-consumer") == 0) {
-        dc_test_forward_control(&compiled, &program[0], 0, 1, 0);
+        dc_test_forward_control(
+            &compiled,
+            &program[0],
+            0,
+            1,
+            0,
+            compiled.shared_node[0]
+        );
     }
     if (argc == 4 && strcmp(argv[3], "--control-double-consume") == 0) {
-        dc_test_forward_control(&compiled, &program[0], 0, 0, 1);
+        dc_test_forward_control(
+            &compiled,
+            &program[0],
+            0,
+            0,
+            1,
+            compiled.shared_node[0]
+        );
     }
     if (argc == 4 && strcmp(argv[3], "--control-copy-shared") == 0) {
-        dc_test_copy_substitution(&compiled, &program[0]);
+        dc_test_copy_substitution(
+            &compiled, &program[0], compiled.shared_node[0]
+        );
     }
     if (argc == 4) {
         fail("affine DAG option unknown");
