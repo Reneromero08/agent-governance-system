@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `5.6`
+**Roadmap version:** `5.7`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
-**Current highest milestone:** `ALGEBRAIC_BOUNDED_AFFINE_DAG_SHARED_MESSAGE_FANOUT_ESTABLISHED`
-**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_SINGLE_FANOUT_AFFINE_DAG_REFERENCE_ONLY`
+**Reconciled through parent commit:** `857831b8`
+**Current highest milestone:** `ALGEBRAIC_FOUR_OWNER_HETEROGENEOUS_FANOUT_RETAIN_ALL_AFFINE_DAG_CUSTODY_ESTABLISHED`
+**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_RETAIN_ALL_DAG_FOUR_NATIVE_SHARED_OWNERS_FANOUT_HISTOGRAM_4_3_3_2_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -90,6 +90,9 @@ ALGEBRAIC_WIDTH_PARAMETRIC_GENERAL_AFFINE_RELATION_CLOSURE_ESTABLISHED
 ALGEBRAIC_WIDTH_PARAMETRIC_AFFINE_MIXED_MODULE_CLOSURE_ESTABLISHED
 ALGEBRAIC_RECURSIVE_WIDTH_PARAMETRIC_AFFINE_TREE_COMPILER_ESTABLISHED
 ALGEBRAIC_BOUNDED_AFFINE_DAG_SHARED_MESSAGE_FANOUT_ESTABLISHED
+ALGEBRAIC_NESTED_AFFINE_DAG_MULTI_SHARED_MESSAGE_CUSTODY_ESTABLISHED
+ALGEBRAIC_NESTED_AFFINE_DAG_PINNED_SHARED_COMPACT_LEAF_PEBBLING_ESTABLISHED
+ALGEBRAIC_FOUR_OWNER_HETEROGENEOUS_FANOUT_RETAIN_ALL_AFFINE_DAG_CUSTODY_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -144,6 +147,10 @@ typed address-bound mixed affine composition/intersection module closure
 public recursive affine series/intersection tree compilation
 reversible seven-slot pebbling versus fifteen-slot retain-all execution
 one native-produced affine DAG message consumed by two typed parents
+two nested shared affine DAG messages with overlapping custody
+exact pinned compact leaf-pebbled execution of the seven-node nested DAG
+four native shared affine DAG owners with fanouts 4,3,3,2
+twelve exact per-edge forward/inverse generation receipts
 ```
 
 Its strongest bounded architecture is:
@@ -212,7 +219,7 @@ factor-preserving compact full-relation closure
 coefficient-oblivious affine elimination
     ESTABLISHED_PUBLIC_COMPILE_TIME_WIDTHS_2_3_4_8_12_16
 affine DAG shared resident message
-    ESTABLISHED_TWO_NESTED_NATIVE_PRODUCERS_TWO_CONSUMERS_EACH_WIDTHS_3_4_8_12_16
+    ESTABLISHED_EXACT_15_NODE_DAG_FOUR_NATIVE_PRODUCERS_FANOUTS_4_3_3_2_WIDTHS_3_4_8_12_16
 C5 advantage
     NOT_ESTABLISHED
 ```
@@ -437,8 +444,8 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-GENERAL_RETAIN_ALL_AFFINE_DAG_CUSTODY_COMPILATION
--> AUTOMATIC_COMPACT_AFFINE_DAG_SCHEDULING
+GENERAL_RETAIN_ALL_AFFINE_DAG_CUSTODY_COMPILATION  ESTABLISHED_EXACT_15_NODE
+-> AUTOMATIC_COMPACT_AFFINE_DAG_SCHEDULING         SELECTED
 ```
 
 The next crossing is not:
@@ -584,16 +591,36 @@ The established resource reduction is phase-carrier cells, not total memory
 or performance. It does not establish compiler-generated pebbling or internal
 operator rematerialization.
 
-The next experiment must remove the exact-two topology fixture before
-generalizing the compact schedule:
+The exact-two topology fixture has now been removed for one bounded retain-all
+successor:
 
 ```text
-general bounded public affine DAG
--> at least four compiler-derived shared owners and fanout up to four
--> per-edge custody for all shared producers
--> retain-all unique-node comparison against occurrence expansion
--> one final boundary and actual restoration
--> only then automatic compact release or rematerialization
+scrambled 15-node public affine DAG
+-> four compiler-derived shared owners with fanouts 4,3,3,2
+-> twelve exact forward/inverse edge-generation receipts
+-> four pairwise-nonaliased owners live through projection and root inverse
+-> retain-all unique-node comparison against an exact 51-node occurrence tree
+-> one final boundary, actual restoration, and seventeen carrier transactions
+```
+
+Five semantic variants match an independent conventional GF2 evaluator
+through width sixteen. All twelve shared edges are independently necessary to
+the final relation; every ordered same-typed owner substitution and every
+missing, stale, or swapped edge receipt is rejected. The retain-all path uses
+15 working relation blocks versus 51 for the occurrence expansion and
+performs 22 native calls versus 50. This is a bounded exact graph result, not
+a general DAG compiler, automatic compact schedule, or advantage claim.
+
+The selected experiment is now automatic compact scheduling for this
+established custody law:
+
+```text
+derive legal live intervals and reconstruction obligations from the manifest
+-> preserve all shared owner generations required by pending edges
+-> release or lawfully rematerialize only compiler-selected values
+-> enforce exact forward/inverse receipt custody after rematerialization
+-> compare against both 15-block retain-all and 51-block occurrence baselines
+-> preserve final-boundary-only projection, actual inverse, and reuse
 ```
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
@@ -779,7 +806,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_WIDTH16_SOFTWARE_GF2_EXACTLY_TWO_NESTED_FANOUTS_REFERENCE_ONLY
+BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_RETAIN_ALL_DAG_FOUR_NATIVE_SHARED_OWNERS_FANOUT_HISTOGRAM_4_3_3_2_REFERENCE_ONLY
 ```
 
 Not established:
@@ -797,8 +824,10 @@ hardware bit replacement
 Small Wall crossing
 holographic relational computation
 arbitrary-treewidth relational trace
-more than two affine DAG fanout nodes
 general bounded affine DAG compilation
+more than four affine DAG shared owners
+fanout greater than four or unbounded fanout
+automatic compact affine DAG scheduling
 automatic elimination-order discovery
 unrestricted typed relation graphs and arity
 root or kernel secrecy

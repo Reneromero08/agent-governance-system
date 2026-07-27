@@ -1,0 +1,54 @@
+# Exact occurrence expansion of the 15-node four-owner DAG.
+# It contains 51 nodes, 26 leaf occurrences, 25 operators, and no fanout.
+root 1051
+leaf 1001 A A 0
+leaf 1002 A A 1
+compose 1003 1001 1002
+leaf 1004 A A 0
+leaf 1005 A A 1
+compose 1006 1004 1005
+leaf 1007 A A 2
+leaf 1008 A A 3
+compose 1009 1007 1008
+compose 1010 1006 1009
+compose 1011 1003 1010
+leaf 1012 A A 2
+leaf 1013 A A 3
+compose 1014 1012 1013
+leaf 1015 A A 0
+leaf 1016 A A 1
+compose 1017 1015 1016
+leaf 1018 A A 2
+leaf 1019 A A 3
+compose 1020 1018 1019
+compose 1021 1017 1020
+compose 1022 1014 1021
+intersect 1023 1011 1022
+leaf 1024 A A 0
+leaf 1025 A A 1
+compose 1026 1024 1025
+leaf 1027 A A 2
+leaf 1028 A A 3
+compose 1029 1027 1028
+leaf 1030 A A 0
+leaf 1031 A A 1
+compose 1032 1030 1031
+compose 1033 1029 1032
+compose 1034 1026 1033
+leaf 1035 A A 0
+leaf 1036 A A 1
+compose 1037 1035 1036
+leaf 1038 A A 2
+leaf 1039 A A 3
+compose 1040 1038 1039
+compose 1041 1037 1040
+leaf 1042 A A 2
+leaf 1043 A A 3
+compose 1044 1042 1043
+leaf 1045 A A 0
+leaf 1046 A A 1
+compose 1047 1045 1046
+compose 1048 1044 1047
+compose 1049 1041 1048
+intersect 1050 1034 1049
+intersect 1051 1023 1050

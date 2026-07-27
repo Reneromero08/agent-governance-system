@@ -109,6 +109,8 @@ struct dc_edge_receipt {
     int inverse_seen;
     size_t forward_slot;
     uint64_t forward_serial;
+    size_t inverse_slot;
+    uint64_t inverse_serial;
 };
 
 struct dc_custody {
@@ -120,6 +122,8 @@ struct dc_custody {
     size_t shared_live_instances;
     size_t shared_peak_live_instances;
     int shared_pair_nonalias_observed;
+    int shared_all_pair_nonalias_at_projection;
+    size_t shared_pair_nonalias_pairs_at_projection;
     int shared_overlap_observed;
     uint64_t event_clock;
     uint64_t projection_event;
@@ -147,6 +151,15 @@ struct dc_owner_audit {
     uint64_t birth_event;
     uint64_t inverse_event;
     uint64_t release_event;
+};
+
+struct dc_edge_audit {
+    unsigned producer_public_id;
+    unsigned consumer_public_id;
+    unsigned side;
+    int forward_seen;
+    int inverse_seen;
+    int same_owner_generation;
 };
 
 struct dc_execution {
@@ -186,7 +199,11 @@ struct dc_execution {
     int shared_live_after_root_inverse;
     struct dc_owner_audit shared_owner[RC_MAX_NODES];
     size_t shared_owner_count;
+    struct dc_edge_audit shared_edge[DC_MAX_EDGES];
+    size_t shared_edge_count;
     int shared_pair_nonalias_observed;
+    int shared_all_pair_nonalias_at_projection;
+    size_t shared_pair_nonalias_pairs_at_projection;
     int shared_overlap_observed;
     size_t shared_simultaneous_live_high_water;
     uint64_t projection_event;
@@ -602,12 +619,42 @@ static void dc_inverse_edge(
         dc_observe_shared_handle(receipt, lease);
         ++receipt->inverse_consumptions;
         custody->edge_receipt[edge_index].inverse_seen = 1;
+        custody->edge_receipt[edge_index].inverse_slot = lease.slot;
+        custody->edge_receipt[edge_index].inverse_serial = lease.serial;
     }
     custody->edge_state[edge_index] = DC_EDGE_INVERSE;
     if (custody->inverse_pending[edge->producer] == 0U) {
         fail("affine DAG inverse pending count underflow");
     }
     --custody->inverse_pending[edge->producer];
+}
+
+static int dc_owner_edges_exact(
+    const struct dc_compiled *compiled,
+    const struct dc_custody *custody,
+    size_t producer,
+    const struct dc_owner_receipt *owner
+) {
+    size_t observed_edges = 0U;
+    for (size_t edge = 0U; edge < compiled->edge_count; ++edge) {
+        if (compiled->edge[edge].producer != producer) {
+            continue;
+        }
+        const struct dc_edge_receipt *receipt =
+            &custody->edge_receipt[edge];
+        ++observed_edges;
+        if (
+            !receipt->forward_seen
+            || !receipt->inverse_seen
+            || receipt->forward_slot != owner->observed_slot
+            || receipt->inverse_slot != owner->observed_slot
+            || receipt->forward_serial != owner->observed_serial
+            || receipt->inverse_serial != owner->observed_serial
+        ) {
+            return 0;
+        }
+    }
+    return observed_edges == compiled->graph.node[producer].indegree;
 }
 
 static void dc_require_inverse_ready(
@@ -908,6 +955,28 @@ static struct dc_execution dc_execute(
         );
         custody.owner[producer].live_at_projection = 1;
     }
+    custody.shared_all_pair_nonalias_at_projection =
+        compiled->fanout_nodes > 1U;
+    for (size_t left = 0U; left < compiled->fanout_nodes; ++left) {
+        const size_t left_owner = compiled->shared_node[left];
+        for (
+            size_t right = left + 1U;
+            right < compiled->fanout_nodes;
+            ++right
+        ) {
+            const size_t right_owner = compiled->shared_node[right];
+            if (
+                !custody.owner[left_owner].lease_set
+                || !custody.owner[right_owner].lease_set
+                || custody.owner[left_owner].lease.slot
+                    == custody.owner[right_owner].lease.slot
+            ) {
+                custody.shared_all_pair_nonalias_at_projection = 0;
+            } else {
+                ++custody.shared_pair_nonalias_pairs_at_projection;
+            }
+        }
+    }
     dc_copy_relation_block(
         &runtime,
         &custody,
@@ -1006,6 +1075,10 @@ static struct dc_execution dc_execute(
         compiled->fanout_nodes > 0U;
     execution.shared_pair_nonalias_observed =
         custody.shared_pair_nonalias_observed;
+    execution.shared_all_pair_nonalias_at_projection =
+        custody.shared_all_pair_nonalias_at_projection;
+    execution.shared_pair_nonalias_pairs_at_projection =
+        custody.shared_pair_nonalias_pairs_at_projection;
     execution.shared_overlap_observed =
         custody.shared_overlap_observed;
     execution.shared_simultaneous_live_high_water =
@@ -1038,8 +1111,9 @@ static struct dc_execution dc_execute(
         audit->live_at_projection = receipt->live_at_projection;
         audit->live_after_root_inverse =
             receipt->live_after_root_inverse;
-        audit->all_edge_generations_exact =
-            receipt->all_edge_generations_exact;
+        audit->all_edge_generations_exact = dc_owner_edges_exact(
+            compiled, &custody, producer, receipt
+        );
         audit->birth_event = receipt->birth_event;
         audit->inverse_event = receipt->inverse_event;
         audit->release_event = receipt->release_event;
@@ -1057,7 +1131,7 @@ static struct dc_execution dc_execute(
             && receipt->distinct_serials == 1U
             && receipt->live_at_projection
             && receipt->live_after_root_inverse
-            && receipt->all_edge_generations_exact;
+            && audit->all_edge_generations_exact;
         execution.shared_forward_consumptions +=
             receipt->forward_consumptions;
         execution.shared_inverse_consumptions +=
@@ -1095,6 +1169,32 @@ static struct dc_execution dc_execute(
             receipt->live_at_projection;
         execution.shared_live_after_root_inverse &=
             receipt->live_after_root_inverse;
+    }
+    for (size_t edge = 0U; edge < compiled->edge_count; ++edge) {
+        const struct dc_edge *descriptor = &compiled->edge[edge];
+        if (!compiled->is_shared[descriptor->producer]) {
+            continue;
+        }
+        const struct dc_edge_receipt *receipt =
+            &custody.edge_receipt[edge];
+        const struct dc_owner_receipt *owner =
+            &custody.owner[descriptor->producer];
+        struct dc_edge_audit *audit =
+            &execution.shared_edge[execution.shared_edge_count++];
+        audit->producer_public_id =
+            compiled->graph.node[descriptor->producer].id;
+        audit->consumer_public_id =
+            compiled->graph.node[descriptor->consumer].id;
+        audit->side = descriptor->side;
+        audit->forward_seen = receipt->forward_seen;
+        audit->inverse_seen = receipt->inverse_seen;
+        audit->same_owner_generation =
+            receipt->forward_seen
+            && receipt->inverse_seen
+            && receipt->forward_slot == owner->observed_slot
+            && receipt->inverse_slot == owner->observed_slot
+            && receipt->forward_serial == owner->observed_serial
+            && receipt->inverse_serial == owner->observed_serial;
     }
     execution.boundary_block_copy_calls =
         custody.boundary_block_copy_calls;
@@ -1289,6 +1389,135 @@ static void dc_test_reordered(
     fail("affine DAG dependency reorder was not rejected");
 }
 
+#ifdef DC_ENABLE_EDGE_RECEIPT_CONTROLS
+enum dc_edge_receipt_fault {
+    DC_EDGE_RECEIPT_MISSING_FORWARD = 1,
+    DC_EDGE_RECEIPT_STALE_GENERATION = 2
+};
+
+static size_t dc_owner_edge_ordinal(
+    const struct dc_compiled *compiled,
+    size_t producer,
+    size_t ordinal
+) {
+    size_t observed = 0U;
+    for (size_t edge = 0U; edge < compiled->edge_count; ++edge) {
+        if (compiled->edge[edge].producer != producer) {
+            continue;
+        }
+        if (observed++ == ordinal) {
+            return edge;
+        }
+    }
+    fail("affine DAG owner edge ordinal unavailable");
+    return 0U;
+}
+
+static void dc_test_edge_receipt_control(
+    const struct dc_compiled *compiled,
+    const struct rc_program *program,
+    size_t shared_node,
+    size_t ordinal,
+    enum dc_edge_receipt_fault fault
+) {
+    const struct process shape = {
+        .carrier_cells = rc_carrier_cells(compiled->graph.count)
+    };
+    struct carrier carrier = make_carrier(&shape, 9127);
+    struct rc_runtime runtime = {
+        .carrier = &carrier,
+        .compiled = &compiled->graph,
+        .program = program,
+        .pool = compiled->graph.count
+    };
+    struct dc_custody custody = {0};
+    struct rc_lease node_lease[RC_MAX_NODES];
+    (void)dc_forward(
+        &runtime,
+        compiled,
+        &custody,
+        node_lease,
+        0,
+        0,
+        0,
+        shared_node
+    );
+    const size_t edge =
+        dc_owner_edge_ordinal(compiled, shared_node, ordinal);
+    if (fault == DC_EDGE_RECEIPT_MISSING_FORWARD) {
+        custody.edge_receipt[edge].forward_seen = 0;
+    } else if (fault == DC_EDGE_RECEIPT_STALE_GENERATION) {
+        ++custody.edge_receipt[edge].forward_serial;
+    } else {
+        free_carrier(&carrier);
+        fail("affine DAG edge receipt control unknown");
+    }
+    for (size_t step = compiled->graph.schedule_count; step-- > 0U;) {
+        dc_reverse_one(
+            &runtime,
+            compiled,
+            &custody,
+            node_lease,
+            compiled->graph.schedule[step],
+            SIZE_MAX
+        );
+    }
+    free_carrier(&carrier);
+    fail("affine DAG edge receipt control was not rejected");
+}
+
+static void dc_test_swapped_edge_receipts(
+    const struct dc_compiled *compiled,
+    const struct rc_program *program,
+    size_t left_owner,
+    size_t right_owner
+) {
+    const struct process shape = {
+        .carrier_cells = rc_carrier_cells(compiled->graph.count)
+    };
+    struct carrier carrier = make_carrier(&shape, 9127);
+    struct rc_runtime runtime = {
+        .carrier = &carrier,
+        .compiled = &compiled->graph,
+        .program = program,
+        .pool = compiled->graph.count
+    };
+    struct dc_custody custody = {0};
+    struct rc_lease node_lease[RC_MAX_NODES];
+    (void)dc_forward(
+        &runtime,
+        compiled,
+        &custody,
+        node_lease,
+        0,
+        0,
+        0,
+        left_owner
+    );
+    const size_t left_edge =
+        dc_owner_edge_ordinal(compiled, left_owner, 0U);
+    const size_t right_edge =
+        dc_owner_edge_ordinal(compiled, right_owner, 0U);
+    const struct dc_edge_receipt saved =
+        custody.edge_receipt[left_edge];
+    custody.edge_receipt[left_edge] =
+        custody.edge_receipt[right_edge];
+    custody.edge_receipt[right_edge] = saved;
+    for (size_t step = compiled->graph.schedule_count; step-- > 0U;) {
+        dc_reverse_one(
+            &runtime,
+            compiled,
+            &custody,
+            node_lease,
+            compiled->graph.schedule[step],
+            SIZE_MAX
+        );
+    }
+    free_carrier(&carrier);
+    fail("affine DAG swapped edge receipts were not rejected");
+}
+#endif
+
 static unsigned long long dc_logical_inspections(
     const struct dc_execution *execution
 ) {
@@ -1346,6 +1575,38 @@ static void dc_print_owner_audits(
             audit->live_after_root_inverse ? "true" : "false",
             audit->all_edge_generations_exact ? "true" : "false",
             audit->receipt_exact ? "true" : "false"
+        );
+    }
+    putchar(']');
+}
+
+static void dc_print_edge_audits(
+    const struct dc_execution *execution
+) {
+    printf(",\"shared_edge_receipts\":[");
+    for (
+        size_t edge = 0U;
+        edge < execution->shared_edge_count;
+        ++edge
+    ) {
+        const struct dc_edge_audit *audit =
+            &execution->shared_edge[edge];
+        if (edge > 0U) {
+            putchar(',');
+        }
+        printf(
+            "{\"producer_public_id\":%u,"
+            "\"consumer_public_id\":%u,"
+            "\"side\":%u,"
+            "\"forward_seen\":%s,"
+            "\"inverse_seen\":%s,"
+            "\"same_owner_generation\":%s}",
+            audit->producer_public_id,
+            audit->consumer_public_id,
+            audit->side,
+            audit->forward_seen ? "true" : "false",
+            audit->inverse_seen ? "true" : "false",
+            audit->same_owner_generation ? "true" : "false"
         );
     }
     putchar(']');
@@ -1469,6 +1730,8 @@ static void dc_print(
         "\"shared_live_at_projection\":%s,"
         "\"shared_live_after_root_inverse\":%s,"
         "\"shared_pair_nonalias_observed\":%s,"
+        "\"shared_all_pair_nonalias_at_projection\":%s,"
+        "\"shared_pair_nonalias_pairs_at_projection\":%zu,"
         "\"shared_overlap_observed\":%s,"
         "\"shared_simultaneous_live_high_water\":%zu,"
         "\"boundary_block_copy_calls\":%llu,"
@@ -1527,6 +1790,10 @@ static void dc_print(
         execution->shared_live_at_projection ? "true" : "false",
         execution->shared_live_after_root_inverse ? "true" : "false",
         execution->shared_pair_nonalias_observed ? "true" : "false",
+        execution->shared_all_pair_nonalias_at_projection
+            ? "true"
+            : "false",
+        execution->shared_pair_nonalias_pairs_at_projection,
         execution->shared_overlap_observed ? "true" : "false",
         execution->shared_simultaneous_live_high_water,
         (unsigned long long)execution->boundary_block_copy_calls,
@@ -1551,6 +1818,7 @@ static void dc_print(
         dc_logical_inspections(execution)
     );
     dc_print_owner_audits(execution);
+    dc_print_edge_audits(execution);
     printf("}\n");
 }
 

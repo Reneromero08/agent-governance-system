@@ -2275,3 +2275,111 @@ execute a larger retain-all public DAG with compiler-derived custody for at
 least four shared owners and fanout up to four. Only after that semantic
 generalization is independently established should automatic schedule
 generation attempt compact release or rematerialization.
+
+## Four-owner heterogeneous-fanout retain-all DAG custody
+
+The exact-two shared-owner fixture is now generalized once to a scrambled
+fifteen-node public DAG. The topology compiler derives four native-produced
+shared owners `S,T,U,V` with fanouts `4,3,3,2`, twelve shared edges, and
+twenty-two total edges. All four actual owners are simultaneously live at
+projection and after `ROOT^-1`; their six slot pairs are all nonaliased.
+
+Every shared outgoing edge independently records forward and inverse slot and
+serial observations. Per-owner exactness is recomputed from all actual edge
+receipts and exact allocation, materialization, consumption, inverse, and
+release counts. It is not trusted from an initialized flag. The observed
+lifecycle is:
+
+```text
+birth(S) < birth(T) < birth(U) < birth(V) < projection < ROOT^-1
+         < V^-1 < release(V) < U^-1 < release(U)
+         < T^-1 < release(T) < S^-1 < release(S)
+```
+
+Only `ROOT` is copied to the boundary. There are zero intermediate relation
+copies, hashes, coefficient decodes, tuple slots, assignment slots, witness
+slots, or content-dependent receipts.
+
+Five nontrivial semantic variants match the separate conventional GF2
+evaluator at widths `3,4,8,12,16`, giving twenty-five exact complete-boundary
+matches. The primary width-three boundary hash is `2e2200557469163d`;
+width sixteen is `a5d0a65b5a670ae6`.
+
+Each of the twelve shared edges also has an independent semantic necessity
+control. A distinct upstream `A->A` operand replaces that edge in the public
+identifier graph before reference compilation. Every modified graph passes
+alias, cycle, connectivity, and fanout validation and produces a nontrivial
+final boundary different from the primary result.
+
+The exact 51-node occurrence expansion has 26 leaf occurrences, 50 edges,
+and no fanout. It reaches the same complete boundary at widths three and
+sixteen and restores by actual inverse, but is a separate reference-only
+path:
+
+```text
+                                 retain-all DAG     occurrence expansion
+working relation blocks                     15                       51
+native calls                                22                       50
+leaf encode calls                            8                       52
+lease allocations                           15                       51
+```
+
+With `B(w)=4w^2+4w+1` and `W(w)=36w^2+11w+2`:
+
+```text
+retain-all carrier = W(w) + 16B(w) = 100w^2 + 75w + 18
+occurrence carrier = W(w) + 52B(w) = 244w^2 + 219w + 54
+```
+
+At width sixteen these paths use respectively 26,818 and 66,022 complex
+carrier cells, or 858,176 and 2,112,704 live bytes. These are bounded
+phase-carrier counts relative to this exact occurrence expansion, not a
+performance or computational-advantage claim.
+
+Seventeen alternating transactions use one actual carrier allocation and
+restore below `2.1e-16`. Wrong and missing root inverses each leave
+`1.73205080757` error. Exact discrete state resets all fifteen leases,
+twenty-two edge tokens, twelve shared-edge receipts, owner receipts, pending
+counts, and scheduler state. Serial advances by fifteen allocations and
+restoration generation by one.
+
+Controls reject all twelve ordered same-typed cross-owner substitutions,
+equal-content clones, stale/skip/double/reordered operations for every owner,
+missing and stale receipt for every shared edge, swapped cross-owner
+receipts, intermediate projection, custody projection, null carrier, and a
+degree-four graph compiled with a fanout cap of three. The clone control uses
+a separate bounded sixteen-slot build; the accepted executable remains
+fifteen-slot. The expanded no-smuggle trace is clean.
+
+Focused review initially rejected two controls. The semantic controls had
+mutated resolved indices after compilation into aliased operands, and the
+missing-receipt control had failed on edge state before receipt validation.
+Both were repaired: public identifiers are now changed before compilation,
+and missing receipt clears only `forward_seen` while preserving the forward
+edge state. All twelve repaired missing controls fail through the intended
+generation-receipt check with empty stdout. A direct width-sixteen occurrence
+boundary comparison was also added. Fresh closure review and all three
+predecessor qualifiers pass.
+
+This establishes:
+
+```text
+BOUNDED_FOUR_OWNER_HETEROGENEOUS_FANOUT_RETAIN_ALL_AFFINE_DAG_CUSTODY_ESTABLISHED
+```
+
+with ceiling:
+
+```text
+BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_RETAIN_ALL_DAG_FOUR_NATIVE_SHARED_OWNERS_FANOUT_HISTOGRAM_4_3_3_2_REFERENCE_ONLY
+```
+
+It does not establish a general DAG compiler, automatic compact scheduling,
+unbounded fanout, arbitrary graph topology, CATVM enforcement for this
+compiler, performance or computational advantage, physical execution, Small
+Wall crossing, or unlimited catalytic computation.
+
+The selected next experiment is automatic compact scheduling for this exact
+fifteen-node custody graph. It must derive legal release or rematerialization
+decisions from the compiled topology, preserve exact generation custody for
+all pending shared edges, and compare against both the fifteen-block
+retain-all and 51-block occurrence baselines.
