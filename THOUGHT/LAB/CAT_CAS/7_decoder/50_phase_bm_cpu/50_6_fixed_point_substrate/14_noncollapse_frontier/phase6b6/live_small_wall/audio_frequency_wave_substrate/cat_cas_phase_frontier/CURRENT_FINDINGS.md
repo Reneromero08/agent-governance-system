@@ -989,3 +989,83 @@ waveform or silicon computation, Small Wall crossing, or unlimited catalytic
 computation. The relational frontier remains reusable typed modules whose
 open phase-resident outputs compose recursively into larger modules and wider
 interfaces without host expansion or decode.
+
+## Bounded recursive typed relational modules
+
+The first typed module compiler now treats independently compiled
+series-parallel closures as nominally typed open relations. A composite
+descriptor is admitted only when the left child's right-domain identity
+exactly equals the right child's left-domain identity. A control with two
+distinct names backed by the same `BOOLEAN_F3` representation rejects,
+showing nominal type enforcement rather than a width check.
+
+Each module export is only:
+
+```text
+left domain
+right domain
+resident final_start phase address
+orientation
+```
+
+The parent native composition reads the actual child addresses. There is no
+child decode, serialization, hash, persistent export copy, witness list,
+candidate set, or truth table. Only the root relation is copied to the
+four-cell public boundary and decoded. Reverse execution visits parent
+operations before child operations, recomputes the actual factors, restores
+the carrier, and then runs a different module program on that same carrier.
+
+The shallow three-descriptor split of the reviewed nested graph matches the
+flattened series-parallel engine exactly:
+
+```text
+primary [0,2,1,2]
+reuse   [0,1,1,1]
+```
+
+The stronger balanced tree instantiates one cached leaf definition four times:
+
+```text
+nominal domains                    5
+module descriptors                 7
+tree depth                         3
+unique leaf sources                1
+native operation descriptors       19
+resident relation messages         19
+carrier cells                      160
+live carrier bytes                 5120
+primary root                       [0,2,2,0]
+reuse root                         [0,1,1,1]
+maximum correct restoration        2.00148302124e-16
+```
+
+Wrong-boundary and omitted-resident-module inverses each leave error
+`1.73205080757`. Nominal mismatch, non-root projection, leaf-intersection
+bypass, ordinary-sum intersection, deterministic replay, flattened parity,
+strict compilation, static analysis, ASan, UBSan, and leak detection pass.
+Focused independent review finds no remaining issue.
+
+This establishes:
+
+```text
+BOUNDED_RECURSIVE_TYPED_RELATIONAL_MODULE_COMPOSITION
+```
+
+The resource disclosure also identifies the next blocker. Leaf definition
+parsing is cached, but each instantiation still expands native operation
+descriptors and resident message cells:
+
+```text
+compact_definition_reuse              false
+expanded_native_operation_descriptors 19
+native operation descriptor bytes     912
+```
+
+`module_export_copy_cells = 0` excludes persistent cross-module export
+artifacts; native operators still use bounded transient operand arrays. This
+does not establish compact recursive closure, wide-interface relations,
+arbitrary topology or arity, advantage, physical phase execution, Small Wall
+crossing, or unlimited catalytic computation. The next mechanism must execute
+compiled module bodies without per-instance operation inlining while
+preserving phase-resident locals, actual inverse restoration, and reuse; the
+following lift is an unresolved interface wider than two Boolean ports.

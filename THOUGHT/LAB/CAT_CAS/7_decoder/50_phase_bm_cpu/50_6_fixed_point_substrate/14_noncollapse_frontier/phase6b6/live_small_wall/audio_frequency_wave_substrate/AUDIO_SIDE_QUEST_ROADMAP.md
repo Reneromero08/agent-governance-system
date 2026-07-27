@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `4.5`
+**Roadmap version:** `4.6`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
-**Current highest milestone:** `CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND`
-**Current claim ceiling:** `BOUNDED_LINUX_USERSPACE_CATVM_OPEN_INTERMEDIATE_PHASE_COMPOSITION_REFERENCE_ONLY`
+**Current highest milestone:** `ALGEBRAIC_RECURSIVE_TYPED_RELATIONAL_MODULE_PHASE_ESTABLISHED`
+**Current claim ceiling:** `SOFTWARE_BOUNDED_RECURSIVE_TYPED_RELATIONAL_MODULE_COMPOSITION_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -79,6 +79,7 @@ ALGEBRAIC_RELATION_TREE_PHASE_ESTABLISHED
 ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED
 ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED
 CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
+ALGEBRAIC_RECURSIVE_TYPED_RELATIONAL_MODULE_PHASE_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -130,6 +131,9 @@ public typed series-parallel relational geometry
 -> topology-only compilation
 -> native phase composition and intersection
 -> unresolved resident relation messages
+-> nominal typed module interfaces
+-> direct resident child-to-parent composition
+-> bounded recursive module trees
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -154,6 +158,10 @@ idempotent relational boundary
     PARTIAL_RESTRICTED_CLASS_ESTABLISHED_GENERAL_LAW_OPEN
 CATVM open-intermediate composition
     ESTABLISHED_BOUNDED_LINUX_USERSPACE_PHASE_BACKEND
+recursive typed relational modules
+    ESTABLISHED_BOUNDED_DEPTH_THREE_DIRECT_PHASE_HANDOFF
+compact recursive module execution
+    NOT_ESTABLISHED_OPERATION_AND_CARRIER_EXPANSION_REMAINS
 C5 advantage
     NOT_ESTABLISHED
 ```
@@ -244,6 +252,12 @@ CATVM controller process access                all six same-UID attacks denied w
 CATVM actual restoration/reuse                 1002 generations, max error 4.997e-16
 CATVM snapshot baseline                        separate weaker claim, 8192 locked bytes
 CATVM warmed in-place transaction              76.615 us, no performance-advantage claim
+typed nominal module interfaces                incompatible names reject despite common BOOLEAN_F3 representation
+direct child-to-parent phase handoff            actual final_start addresses, zero persistent export-copy cells
+recursive typed module tree                     depth 3 / 7 descriptors / one leaf source
+recursive module native work                    19 operations / 160 carrier cells
+recursive module restoration/reuse              below 2.1e-16, different program reuses carrier
+compact recursive definition execution          not established; 19 operation descriptors expanded
 ```
 
 The streaming C VM runs `ROT`, `ADD`, `MULADD`, `SWAP`, and `CSWAP` over
@@ -362,23 +376,21 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-RECURSIVE_TYPED_RELATIONAL_PROGRAMS_OVER_PUBLIC_GRAPH_MODULE_INTERFACES
+COMPACT_REUSABLE_MODULE_EXECUTION_WITHOUT_OPERATION_INLINING_AND_WIDER_UNRESOLVED_INTERFACES
 ```
 
 The next crossing is not:
 
 ```text
-series-parallel
--> another narrowly named topology
--> another milestone
+typed module tree
+-> another depth or module-count record
 ```
 
 It is:
 
 ```text
-bounded relational graph engine
--> reusable typed relational modules
--> recursive holographic composition
+bounded recursive typed relational modules
+-> compact compiled-body execution
 -> wider unresolved interfaces
 -> compact general relational geometry
 ```
@@ -386,9 +398,8 @@ bounded relational graph engine
 The major scientific questions are:
 
 ```text
-reusable relational modules with typed open interfaces
-module outputs remaining phase-resident inputs to larger modules
-recursive composition without host expansion or decode
+module call execution without per-instance operation descriptor expansion
+actual inverse and restored reuse with compact phase-resident locals
 interfaces wider than two Boolean ports
 compact representation across wider graph separators
 elimination-order discovery without compiler-side solving
@@ -396,9 +407,9 @@ general relation signatures without truth-table materialization
 resource growth versus separator width, message arity, and topology
 ```
 
-These questions are not a rigid sequence. Merely supporting another
-handcrafted graph family is insufficient if intermediate relation width,
-carrier state, or provenance grows exponentially.
+The typed module handoff and bounded recursion questions are now removed.
+Merely increasing module-tree depth is insufficient while operation
+descriptors and resident messages still expand per instantiation.
 
 The earlier `CYCLIC_PARITY(N)` quotient calibration remains preserved
 historical evidence. It is not the current frontier.
@@ -577,7 +588,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_LINUX_USERSPACE_CATVM_OPEN_INTERMEDIATE_PHASE_COMPOSITION_REFERENCE_ONLY
+SOFTWARE_BOUNDED_RECURSIVE_TYPED_RELATIONAL_MODULE_COMPOSITION_REFERENCE_ONLY
 ```
 
 Not established:
@@ -599,6 +610,7 @@ automatic elimination-order discovery
 unrestricted typed relation graphs and arity
 root or kernel secrecy
 microarchitectural secrecy
+compact recursive definition execution
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.

@@ -44,13 +44,13 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
+ALGEBRAIC_RECURSIVE_TYPED_RELATIONAL_MODULE_PHASE_ESTABLISHED
 ```
 
 Claim ceiling:
 
 ```text
-BOUNDED_LINUX_USERSPACE_CATVM_OPEN_INTERMEDIATE_PHASE_COMPOSITION_REFERENCE_ONLY
+SOFTWARE_BOUNDED_RECURSIVE_TYPED_RELATIONAL_MODULE_COMPOSITION_REFERENCE_ONLY
 ```
 
 The strongest current bounded architecture is:
@@ -60,8 +60,9 @@ public typed series-parallel relational geometry
 -> topology-only compilation
 -> native phase composition and intersection
 -> unresolved resident relation messages
--> enforced carrier-owning userspace boundary
--> final-boundary-only projection
+-> nominally typed module descriptors
+-> direct child-export phase addresses consumed by parent composition
+-> bounded recursive module trees
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -83,6 +84,16 @@ actual cells; only final `Z` crosses the protocol; actual `G^-1` then `F^-1`
 restore the borrowed carrier; and an unrelated program plus 1000 alternating
 transactions reuse the same restored allocation. Snapshot reload is measured
 separately and does not support the stronger claim.
+
+The relational engine now also composes independently compiled
+series-parallel leaves through nominally typed module descriptors. A
+depth-three balanced tree instantiates one leaf source four times; every
+parent consumes the actual child `final_start` phase cells, no child relation
+is decoded or serialized, only the root crosses the boundary, and the actual
+restored carrier runs a different module program. This establishes bounded
+recursive typed composition. It does not establish compact recursion:
+nineteen native operation descriptors and their resident messages are still
+expanded per instantiation.
 
 A general holographic relational computer, arbitrary graph closure, C5
 advantage, root/kernel secrecy, physical phase computation, and unlimited
@@ -164,15 +175,14 @@ Verification follows a substantive result. One focused independent review is nor
 Selected frontier:
 
 ```text
-RECURSIVE_TYPED_RELATIONAL_PROGRAMS_OVER_PUBLIC_GRAPH_MODULE_INTERFACES
+COMPACT_REUSABLE_MODULE_EXECUTION_WITHOUT_OPERATION_INLINING_AND_WIDER_UNRESOLVED_INTERFACES
 ```
 
 The next crossing is:
 
 ```text
-bounded relational graph engine
--> reusable typed relational modules
--> recursive holographic composition
+bounded recursive typed relational modules
+-> compiled body execution without per-instance operation inlining
 -> wider unresolved interfaces
 -> compact general relational geometry
 ```
@@ -180,9 +190,8 @@ bounded relational graph engine
 Investigate, without imposing a rigid sequence:
 
 ```text
-reusable relational modules with typed open interfaces
-module outputs remaining phase-resident inputs to larger modules
-recursive composition without host expansion or decode
+module call execution without per-instance operation descriptor expansion
+phase-resident locals under actual inverse and reuse
 interfaces wider than two Boolean ports
 compact representation across wider graph separators
 elimination-order discovery without compiler-side solving
@@ -190,8 +199,8 @@ general relation signatures without truth-table materialization
 resource growth versus separator width, message arity, and topology
 ```
 
-Another handcrafted graph family is not meaningful progress if intermediate
-relation width, carrier state, or provenance grows exponentially.
+Another module-tree depth probe is not meaningful progress while operation
+descriptors and carrier messages still expand per instantiation.
 
 ## 7. Native No-Smuggle Law
 
