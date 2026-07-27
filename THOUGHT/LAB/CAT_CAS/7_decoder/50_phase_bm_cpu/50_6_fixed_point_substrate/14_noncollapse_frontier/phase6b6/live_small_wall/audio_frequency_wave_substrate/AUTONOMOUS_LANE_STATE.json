@@ -2,7 +2,7 @@
   "schema_version": "1.1.0",
   "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
   "state_date": "2026-07-27",
-  "reconciled_through_milestone_commit": "5895eee2",
+  "reconciled_through_milestone_commit": "9f7e75bb",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
   "standing_mission": "CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1",
   "supporting_mission": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
@@ -34,8 +34,8 @@
   },
   "lane_closure_authority": "USER_ONLY",
   "terminal": false,
-  "current_highest_milestone": "CATVM_ENFORCED_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
-  "current_claim_ceiling": "BOUNDED_LINUX_SAME_UID_SOFTWARE_BOOLEAN_GF2_MONIC_QAND_CHAIN_DEGREE4_FIVE_COEFFICIENT_ATOMIC_TRANSACTION_REFERENCE_ONLY",
+  "current_highest_milestone": "FIXED_SCHEMA_QANF_COMPACT_BASELINE_OBSTRUCTION_CONFIRMED_UNDER_MATCHED_CATVM_BOUNDARY",
+  "current_claim_ceiling": "BOUNDED_LINUX_WARM_FIXED_SCHEMA_QANF_BASELINE_SNAPSHOT_IN_PLACE_RESOURCE_COMPARISON_REFERENCE_ONLY",
   "architectural_alignment": {
     "current_phase_circuit_substrate": "ESTABLISHED_DEVELOPMENT_FOUNDATION",
     "bounded_holographic_relational_substrate": "ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_EXACT_15_NODE_FOUR_OWNER_AFFINE_DAG",
@@ -67,7 +67,8 @@
     "catvm_automatic_rank2_shared_dag_enforcement": "ESTABLISHED_EXACT_WIDTH3_15_NODE_ATOMIC_28_FORWARD_28_REVERSE_9_SLOTS_258_TRANSACTIONS",
     "fixed_schema_quadratic_anf_composition": "ESTABLISHED_TWO_HIDDEN_PORTS_DEGREE4_FIVE_COEFFICIENT_BOUNDARY_258_TRANSACTIONS",
     "catvm_fixed_schema_quadratic_anf_enforcement": "ESTABLISHED_TWO_HIDDEN_PORTS_ONE_CARRIER_258_ATOMIC_TRANSACTIONS",
-    "selected_next_experiment": "MATCHED_COMPACT_BASELINE_SNAPSHOT_SHAM_IN_PLACE_CATVM_FIXED_SCHEMA_SMALL_WALL_OBSTRUCTION_TRIAD"
+    "fixed_schema_qanf_small_wall_obstruction": "CONFIRMED_UNDER_MATCHED_COMPACT_BASELINE_SNAPSHOT_IN_PLACE_CATVM_BOUNDARY",
+    "selected_next_experiment": "WIDTH_PARAMETRIC_COMPACT_NONAFFINE_MANY_TO_MANY_FACTOR_COMPOSITION"
   },
   "strongest_bounded_architecture": [
     "PUBLIC_TYPED_SERIES_PARALLEL_RELATIONAL_GEOMETRY",
@@ -1208,6 +1209,33 @@
     "catvm_qanf_arbitrary_non_affine_closure": false,
     "catvm_qanf_computational_advantage": false,
     "catvm_qanf_small_wall_crossing": false,
+    "small_wall_qanf_obstruction_phase": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS_STRICT_CEILING",
+    "small_wall_qanf_obstruction_reviewer_id": "QANF-SMALL-WALL-OBSTRUCTION-01",
+    "small_wall_qanf_obstruction_remaining_review_findings": 0,
+    "small_wall_qanf_obstruction_claim": "FIXED_SCHEMA_QANF_COMPACT_BASELINE_OBSTRUCTION_CONFIRMED_UNDER_MATCHED_CATVM_BOUNDARY",
+    "small_wall_qanf_obstruction_claim_ceiling": "BOUNDED_LINUX_WARM_FIXED_SCHEMA_QANF_BASELINE_SNAPSHOT_IN_PLACE_RESOURCE_COMPARISON_REFERENCE_ONLY",
+    "small_wall_qanf_obstruction_arms": [
+      "FOUR_AND_COMPACT_BASELINE",
+      "SNAPSHOT_SHAM",
+      "IN_PLACE_CATVM"
+    ],
+    "small_wall_qanf_obstruction_matched_protocol": "AF_UNIX_SOCK_SEQPACKET",
+    "small_wall_qanf_obstruction_raw_runs": 18,
+    "small_wall_qanf_obstruction_timed_batches": [1024, 4096, 16384],
+    "small_wall_qanf_obstruction_compact_boolean_ands_per_transaction": 4,
+    "small_wall_qanf_obstruction_snapshot_reload_bytes_per_transaction": 368,
+    "small_wall_qanf_obstruction_in_place_actual_inverse": true,
+    "small_wall_qanf_obstruction_in_place_actual_restored_carrier_reuse": true,
+    "small_wall_qanf_obstruction_public_coefficient_bits": 6,
+    "small_wall_qanf_obstruction_possible_public_programs": 64,
+    "small_wall_qanf_obstruction_raw_answer_vector_upper_bound_bits_not_materialized": 320,
+    "small_wall_qanf_obstruction_constant_size_compact_formula_exists": true,
+    "small_wall_qanf_obstruction_no_smuggle": "PASS_ALL_ARMS_NONVACUOUS_POST_CUSTODY_TRACE_ZERO_SERVICE_OUTPUT",
+    "small_wall_qanf_obstruction_capacity_separation": false,
+    "small_wall_qanf_obstruction_performance_advantage": false,
+    "small_wall_qanf_obstruction_total_memory_advantage": false,
+    "small_wall_qanf_obstruction_c5_fixed_point_advantage": false,
+    "small_wall_qanf_obstruction_small_wall_crossing": false,
     "algebraic_general_affine_equation_elimination": true,
     "general_boolean_relation_elimination": false,
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
@@ -1255,7 +1283,8 @@
     "ALGEBRAIC_15_NODE_RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION_ESTABLISHED",
     "CATVM_ENFORCED_15_NODE_RANK2_AUTOMATIC_SCHEDULED_SHARED_RELATIONAL_DAG_ESTABLISHED_ON_PHASE_BACKEND",
     "ALGEBRAIC_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_PHASE_COMPOSITION_ESTABLISHED",
-    "CATVM_ENFORCED_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND"
+    "CATVM_ENFORCED_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
+    "FIXED_SCHEMA_QANF_COMPACT_BASELINE_OBSTRUCTION_CONFIRMED_UNDER_MATCHED_CATVM_BOUNDARY"
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
@@ -1269,7 +1298,7 @@
     "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
   },
   "active_frontier_candidates": [
-    "MATCHED_COMPACT_BASELINE_SNAPSHOT_SHAM_IN_PLACE_CATVM_FIXED_SCHEMA_SMALL_WALL_OBSTRUCTION_TRIAD",
+    "WIDTH_PARAMETRIC_COMPACT_NONAFFINE_MANY_TO_MANY_FACTOR_COMPOSITION",
     "COMPACT_REPRESENTATION_ACROSS_WIDER_GRAPH_SEPARATORS",
     "NATIVE_CONTRACTION_WITHOUT_2_TO_2W_MESSAGE_MATERIALIZATION",
     "FACTOR_STRUCTURE_PRESERVING_CLOSURE",

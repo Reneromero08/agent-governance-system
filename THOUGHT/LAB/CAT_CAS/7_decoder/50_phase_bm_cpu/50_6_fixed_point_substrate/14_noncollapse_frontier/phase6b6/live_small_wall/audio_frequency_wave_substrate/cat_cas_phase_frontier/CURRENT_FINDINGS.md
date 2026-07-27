@@ -2987,3 +2987,77 @@ experiment is a matched persistent-service triad: four-AND compact baseline,
 snapshot sham, and in-place CATVM, with identical public requests and
 boundaries. It will adjudicate the fixed-schema obstruction honestly; batch
 repetition is throughput, not problem-size growth or mission Gamma.
+
+## The fixed-schema CATVM triad confirms the compact-baseline obstruction
+
+The same fixed QANF program family now runs behind three separately linked
+persistent services with the same `AF_UNIX/SOCK_SEQPACKET` request, response,
+fixture order, and final-boundary format:
+
+```text
+compact baseline -> direct four-AND coefficient law, no carrier
+snapshot sham    -> phase forward path, then 368-byte working reload
+in-place CATVM   -> phase forward, actual inverse, restoration, reuse
+```
+
+The compact arm contains no phase symbols and the phase arms contain no
+compact fallback. All four public fixtures match the independent reference.
+Projection of `H` or `Z`, embedded NULs, oversized packets, unknown commands,
+and null-carrier requests are rejected in every arm. Post-custody traces are
+nonempty and contain no forbidden channel; all service stdout and stderr are
+byte-zero.
+
+The exact per-transaction laws are:
+
+```text
+compact baseline  4 Boolean ANDs, no cache, table, carrier, or snapshot
+snapshot sham     9 phase products, 51 reads, 23 updates, 5 final decodes,
+                  1 snapshot load, 368 working bytes reloaded, no inverse
+in-place CATVM   18 phase products, 97 reads, 46 updates, 5 final decodes,
+                  no snapshot load, actual inverse and restored reuse
+```
+
+All 18 warm, CPU-pinned raw runs preserve identical boundaries and timed
+traffic. Timing remains descriptive: the fixed symmetric arm order is not a
+statistically counterbalanced performance study. Across batches 1024, 4096,
+and 16384, compact/in-place wall-time ratios were approximately `0.793`,
+`0.700`, and `0.737`; no performance or total-memory advantage appears.
+
+The decisive obstruction is analytic rather than timing-based. The schema has
+six free public coefficient bits, only 64 public programs, five final bits per
+program, and the constant formula:
+
+```text
+[1, eta, theta*gamma, theta*delta*alpha, theta*delta*beta]
+```
+
+Thus even the complete unmaterialized answer vector is bounded above by 320
+bits. Repeating transactions cannot create a growing problem family,
+capacity separation, mission Gamma, or a Small Wall crossing.
+
+Strict compilation, analyzer, ASan/UBSan, exact operation and traffic laws,
+symbol separation, predecessor regressions, deterministic replay, resource
+accounting, no-smuggle tracing, and 82 top-level provenance bindings pass.
+Focused review `QANF-SMALL-WALL-OBSTRUCTION-01` found no blocking defect.
+Evidence `/tmp/qanf-small-wall-fourth` establishes:
+
+```text
+FIXED_SCHEMA_QANF_COMPACT_BASELINE_OBSTRUCTION_CONFIRMED_UNDER_MATCHED_CATVM_BOUNDARY
+```
+
+within:
+
+```text
+BOUNDED_LINUX_WARM_FIXED_SCHEMA_QANF_BASELINE_SNAPSHOT_IN_PLACE_RESOURCE_COMPARISON_REFERENCE_ONLY
+```
+
+It does not establish advantage, capacity separation, Small Wall crossing,
+arbitrary non-affine closure, physical execution, or unlimited catalytic
+computation.
+
+This retires further fixed-schema QANF enlargement. The selected successor is
+a width-parametric compact non-affine many-to-many factor algebra whose
+interface width or separator structure actually grows while native
+composition preserves compact unresolved state. Dense truth-table
+materialization, witness expansion, and longer fixed QAND fixtures are not
+acceptable substitutes.

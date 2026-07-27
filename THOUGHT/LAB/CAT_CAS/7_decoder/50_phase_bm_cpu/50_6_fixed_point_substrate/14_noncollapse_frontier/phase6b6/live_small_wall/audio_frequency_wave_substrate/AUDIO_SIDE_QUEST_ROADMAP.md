@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `8.0`
+**Roadmap version:** `8.1`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through parent commit:** `850fb84e`
-**Current highest milestone:** `ALGEBRAIC_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_PHASE_COMPOSITION_ESTABLISHED`
-**Current claim ceiling:** `BOUNDED_BOOLEAN_GF2_MONIC_QAND_CHAIN_DEGREE4_FIVE_COEFFICIENT_BOUNDARY_SOFTWARE_REFERENCE_ONLY`
+**Reconciled through parent commit:** `9f7e75bb`
+**Current highest milestone:** `FIXED_SCHEMA_QANF_COMPACT_BASELINE_OBSTRUCTION_CONFIRMED_UNDER_MATCHED_CATVM_BOUNDARY`
+**Current claim ceiling:** `BOUNDED_LINUX_WARM_FIXED_SCHEMA_QANF_BASELINE_SNAPSHOT_IN_PLACE_RESOURCE_COMPARISON_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -781,14 +781,19 @@ counterexample and an affine sham use the identical plan and operation counts.
 This is a bounded composition algebra strictly broader than affine GF(2), not
 general nonlinear elimination.
 
-The selected successor is CATVM enforcement of this exact nonlinear hidden
-intermediate using the smallest existing service seam. The controller must
-not receive, derive, or retain `H`; production must return only the final ANF
-boundary after actual inverse restoration and must reuse the actual carrier.
-After that bounded machine-law integration, the next alternative is a
-controlled baseline/sham/augmented CATVM Small Wall experiment. Do not grow
-the QAND chain, degree, or fixture corpus unless a concrete obstruction
-requires it.
+CATVM enforcement of this exact nonlinear hidden intermediate and the
+controlled compact-baseline/snapshot/in-place Small Wall triad are now
+established. The triad confirms the fixed-schema obstruction: six public
+coefficient bits admit only 64 programs and the best matched compact
+conventional evaluator needs four Boolean ANDs. Batch repetition is
+throughput, not problem-size growth or mission Gamma.
+
+The selected successor is a width-parametric compact non-affine many-to-many
+relation algebra. It must grow public interface width or separator rank while
+preserving factor structure through native composition, without materializing
+`2^(2w)` truth tables, witness lists, candidate sets, or answer-bearing
+lookup tables. Do not add longer fixed QAND chains or more fixed-schema CATVM
+fixtures.
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
 per-instance native-operation records are established. Native contraction
