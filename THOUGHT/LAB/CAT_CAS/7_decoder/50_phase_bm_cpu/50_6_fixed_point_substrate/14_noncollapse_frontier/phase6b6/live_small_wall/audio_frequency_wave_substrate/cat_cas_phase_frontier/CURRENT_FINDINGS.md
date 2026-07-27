@@ -3237,3 +3237,92 @@ whether this public nonlinear family admits native fixed-rank recursive
 closure. If it only exploits fixture-specific structure or fails to reduce
 general products, record that obstruction and move to the growing-instance
 Small Wall triad rather than adding more widths.
+
+## Suffix bisimulation reduces this family from exponential to linear rank
+
+The selected exact quotient experiment is now established for homogeneous
+chains of the neighbor-AND relation and, separately, homogeneous chains of
+the neighbor-OR relation. At composition depth `d`, an unquotiented internal
+bond state is a `d`-bit column and has raw product rank `2^d`. For these two
+declared families the live columns are monotone threshold strings, so public
+family geometry admits an exact suffix-bisimulation quotient.
+
+Let `L` be the number of word sites remaining to the right of a bond. The
+exact quotient ranks are:
+
+```text
+outer boundaries                         1
+final internal bond, L=1                 2
+other internal bonds, L>=2     min(d+1,L+2)
+```
+
+For `2<=L<d`, threshold heights below `L` remain singleton classes, heights
+`L..d-1` merge into one suffix-indistinguishable middle class, and height
+`d` remains a distinct all-leading top class. An early prototype incorrectly
+merged that top state; focused review caught the error because width
+four/depth three then used 96 rather than 120 final cells and failed raw
+product semantics. The accepted implementation and an explicit bad-horizon
+control preserve this repair.
+
+The quotient plan depends only on public family, width, depth, site, and
+remaining suffix. Every output cell is written directly from the actual
+resident depth-`d-1` quotient stage and a resident depth-one leaf. It never
+materializes the raw product core, a width-wide shared assignment, a truth
+table, witness list, candidate set, or dense `4^w` relation. Only the final
+stage is copied and decoded. The machine then removes that boundary copy,
+reverses all quotient stages and the leaf, verifies restoration, and reuses
+the actual carrier for the other homogeneous family.
+
+Fifteen cases cover widths `4,5,8,12,16`, depths two and three at every
+width, and `(4,4),(5,5),(8,8),(12,8),(16,8)`. At width sixteen/depth eight:
+
+```text
+raw product rank                         256
+maximum quotient rank                      9
+raw final TT cells                  3,672,064
+quotient final TT cells                 3,548
+final representation reduction      1,034.967x
+retained resident stages               13,740 cells
+boundary copy                           3,548 cells
+total carrier                          17,288 phase cells
+```
+
+When width is at least depth, maximum rank is `d+1`, not `2^d`; at fixed
+width it saturates no higher than `w+1`. This is a family-scoped linear-rank
+law, not fixed-rank unbounded-depth closure or general Boolean-TT
+minimization.
+
+The independent verifier deliberately materializes raw product-rank TT cores
+to certify the bounded result. Its largest final stage is 3,672,064 one-byte
+cells. It verifies prefix reachability, suffix coaccessibility, class-uniform
+suffix signatures, exact quotient edges, and final core parity for both
+families. This exponential-in-depth verifier cost is disclosed and is not
+part of the accepted phase path.
+
+Wrong, missing, and noncommuting reordered inverses detect restoration
+failure. Snapshot reload remains generation zero. Bad-horizon overmerge fails
+semantic parity, the wrong OR phase law leaves the Boolean alphabet,
+intermediate projection and null carrier are rejected, and deterministic,
+analyzer, ASan/UBSan, and predecessor CATVM checks pass. Thirty-four
+transactions reuse each actual carrier; maximum observed restoration error is
+`2.48253415325e-16` against a predeclared `2e-12` tolerance.
+
+Focused evidence `/tmp/boolean-tt-quotient-fourth` establishes:
+
+```text
+BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE
+```
+
+within:
+
+```text
+BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS2_3_4_5_8_NEIGHBOR_AND_OR_FAMILY_SCOPED_QUOTIENT_REFERENCE_ONLY
+```
+
+The strongest fixture-specialized conventional baseline directly emits the
+public quotient cores in `O(final quotient cells)`. The phase path retains
+every stage for inverse execution, so neither compute nor memory advantage
+follows. The selected successor is the matched growing-instance compact
+baseline, snapshot-sham, and in-place CATVM triad. Its purpose is to expose
+whether direct quotient generation and retained inverse history are the next
+machine-law obstruction, not to enlarge the same family with more depths.

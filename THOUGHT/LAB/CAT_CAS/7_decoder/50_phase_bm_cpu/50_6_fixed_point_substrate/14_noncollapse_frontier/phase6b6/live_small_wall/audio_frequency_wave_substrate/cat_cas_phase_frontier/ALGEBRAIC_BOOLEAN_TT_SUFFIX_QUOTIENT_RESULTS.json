@@ -1,0 +1,177 @@
+{
+  "evidence_parent_commit": "eac39da1",
+  "result": "PASS",
+  "claim": "BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE",
+  "claim_ceiling": "BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS2_3_4_5_8_NEIGHBOR_AND_OR_FAMILY_SCOPED_QUOTIENT_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/boolean-tt-quotient-fourth",
+  "tested_cases": [
+    [4, 2], [5, 2], [8, 2], [12, 2], [16, 2],
+    [4, 3], [5, 3], [8, 3], [12, 3], [16, 3],
+    [4, 4], [5, 5], [8, 8], [12, 8], [16, 8]
+  ],
+  "scope": {
+    "homogeneous_repeated_neighbor_and": true,
+    "homogeneous_repeated_neighbor_or": true,
+    "arbitrary_mixed_and_or_layers": false,
+    "family_scoped_analytic_quotient": true,
+    "general_boolean_tt_minimization": false,
+    "globally_minimal_boolean_tt_rank": false
+  },
+  "rank_law": {
+    "raw_product_rank": "2^depth",
+    "outer_boundary_rank": 1,
+    "final_internal_bond_rank": 2,
+    "other_bond_with_L_remaining_sites": "min(depth+1,L+2)",
+    "maximum_when_width_at_least_depth": "depth+1",
+    "fixed_width_saturation_upper_bound": "width+1",
+    "depth2_cells": "36w-64",
+    "depth3_cells": "64w-136",
+    "fixed_rank_unbounded_depth_closure": false
+  },
+  "selected_measurements": [
+    {
+      "width": 4,
+      "depth": 2,
+      "raw_product_rank": 4,
+      "maximum_quotient_rank": 3,
+      "final_quotient_cells": 80,
+      "raw_product_final_cells": 160,
+      "final_cell_reduction_ratio": 2,
+      "carrier_cells": 208
+    },
+    {
+      "width": 4,
+      "depth": 3,
+      "raw_product_rank": 8,
+      "maximum_quotient_rank": 4,
+      "final_quotient_cells": 120,
+      "raw_product_final_cells": 576,
+      "final_cell_reduction_ratio": 4.8,
+      "carrier_cells": 368
+    },
+    {
+      "width": 4,
+      "depth": 4,
+      "raw_product_rank": 16,
+      "maximum_quotient_rank": 5,
+      "final_quotient_cells": 140,
+      "raw_product_final_cells": 2176,
+      "final_cell_reduction_ratio": 15.5428571429,
+      "carrier_cells": 528
+    },
+    {
+      "width": 5,
+      "depth": 5,
+      "raw_product_rank": 32,
+      "maximum_quotient_rank": 6,
+      "final_quotient_cells": 264,
+      "raw_product_final_cells": 12544,
+      "final_cell_reduction_ratio": 47.5151515152,
+      "carrier_cells": 1132
+    },
+    {
+      "width": 8,
+      "depth": 8,
+      "raw_product_rank": 256,
+      "maximum_quotient_rank": 9,
+      "final_quotient_cells": 956,
+      "raw_product_final_cells": 1574912,
+      "final_cell_reduction_ratio": 1647.39748954,
+      "carrier_cells": 5608
+    },
+    {
+      "width": 12,
+      "depth": 8,
+      "raw_product_rank": 256,
+      "maximum_quotient_rank": 9,
+      "final_quotient_cells": 2252,
+      "raw_product_final_cells": 2623488,
+      "final_cell_reduction_ratio": 1164.95914742,
+      "carrier_cells": 11448
+    },
+    {
+      "width": 16,
+      "depth": 8,
+      "raw_product_rank": 256,
+      "maximum_quotient_rank": 9,
+      "final_quotient_cells": 3548,
+      "raw_product_final_cells": 3672064,
+      "final_cell_reduction_ratio": 1034.96730552,
+      "retained_stage_cells": 13740,
+      "boundary_cells": 3548,
+      "carrier_cells": 17288,
+      "logical_phase_ands_per_transaction": 55952,
+      "logical_phase_ors_per_transaction": 28952,
+      "carrier_reads_per_transaction": 122548,
+      "phase_cell_updates_per_transaction": 34576,
+      "primary_boundary_fnv1a64": "4da4cbe210c58b26",
+      "reuse_boundary_fnv1a64": "1582e559b5414ed6"
+    }
+  ],
+  "custody": {
+    "materialized_raw_product_cells_in_accepted_phase_path": 0,
+    "decoded_intermediate_cells": 0,
+    "serialized_intermediate_cells": 0,
+    "width_wide_assignments_enumerated": 0,
+    "truth_table_slots": 0,
+    "actual_resident_stage_consumed_by_successor": true,
+    "actual_inverse_restoration": true,
+    "actual_restored_carrier_reuse": true,
+    "same_carrier_transactions_per_case": 34,
+    "maximum_observed_repeated_restoration_error": 2.48253415325e-16,
+    "restoration_tolerance": 2e-12
+  },
+  "verification_reference": {
+    "raw_product_tt_cores_materialized": true,
+    "maximum_final_stage_cells": 3672064,
+    "maximum_final_stage_bytes": 3672064,
+    "width_wide_assignments_enumerated": 0,
+    "dense_4_pow_width_relation_materialized": false,
+    "raw_intermediate_relations_serialized": false,
+    "width16_depth8_reachable_and_coaccessible_checks": 19588480,
+    "width16_depth8_class_uniformity_checks": 4952,
+    "width16_depth8_quotient_edge_checks": 27000,
+    "width16_depth8_raw_local_shared_reads": 39176960,
+    "phase_final_core_parity": "PASS_ALL_15_CASES_AND_OR"
+  },
+  "controls": {
+    "wrong_inverse": "PASS_DETECTED",
+    "missing_inverse": "PASS_DETECTED",
+    "reordered_noncommuting_inverse": "PASS_DETECTED",
+    "snapshot": "PASS_SEPARATE_GENERATION_ZERO",
+    "bad_horizon_overmerge": "PASS_REFERENCE_PARITY_FAILED",
+    "bad_boolean_or": "PASS_ROOT_ALPHABET_FAILED",
+    "intermediate_projection": "PASS_REJECTED",
+    "null_carrier": "PASS_REJECTED",
+    "depth_exceeds_width": "PASS_REJECTED",
+    "deterministic_replay": "PASS",
+    "analyzer": "PASS",
+    "asan_ubsan": "PASS",
+    "catvm_predecessor_regression": "PASS"
+  },
+  "baselines": {
+    "strongest_fixture_specialized": "DIRECT_PUBLIC_SUFFIX_QUOTIENT_CORE_GENERATOR_O_FINAL_CELLS",
+    "accepted_phase_retains_all_stages_for_inverse": true,
+    "compact_inverse_history_recursion": false,
+    "computational_advantage": false
+  },
+  "sha256": {
+    "phase_source": "1a8678d11df0be641a5c035d2e117eccb7086d23a4046362818a64ef4cb3a655",
+    "reference_source": "6343a5e02723891dfbb3f88defb175d6d7200be81bbf2d87c039fbaf835241b8",
+    "qualifier": "84cca527e8f7b1990826990a17656a66691ab6419f43af5f5c228d9e428935b7",
+    "phase_binary": "63e0b8d65a0da0aa38155e5e9f825ab2b63bd780564e80bbfabbc379767f1ce6",
+    "reference_binary": "6061f8b6520703fc5c70288a1c939de8596d7991b15206f9721faf1dd19716f8",
+    "native_jsonl": "f62748232f350c67756f1fe51743870dd891fefb8d72433a46c591dc672285d8",
+    "reference_jsonl": "29c123174d07790531a8da55dbc4c51ba9c1e1cf60aff009d6221347785f68ed",
+    "output_trace": "3cd59d49521f79c3138fb1c82a0c12de3e8eb68243705a5e677aa4dec6ba7afe",
+    "catvm_predecessor_manifest": "f596d1912494b95300849f1cb8e86f84a2945f7811ceb00f27a70d0184d6c5a1",
+    "evidence_result": "e9412eeda32f0f87d5e19f27c8fd2f3e5dc566e08795e0a89e996664c9821f0e"
+  },
+  "non_affine_depth3_fourth_derivative": 1,
+  "fixed_rank_unbounded_depth_closure": false,
+  "computational_advantage": false,
+  "small_wall_crossed": false,
+  "physical_execution": false,
+  "unlimited_catalytic_computation": false,
+  "terminal": false
+}

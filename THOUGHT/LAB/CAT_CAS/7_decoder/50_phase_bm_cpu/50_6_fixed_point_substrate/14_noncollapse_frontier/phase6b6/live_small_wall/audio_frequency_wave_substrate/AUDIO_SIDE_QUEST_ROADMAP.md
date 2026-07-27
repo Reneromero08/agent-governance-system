@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `8.3`
+**Roadmap version:** `8.4`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through parent commit:** `09a70636`
-**Current highest milestone:** `CATVM_ENFORCED_WIDTH_PARAMETRIC_BOOLEAN_TT_RESIDENT_H_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND`
-**Current claim ceiling:** `BOUNDED_LINUX_SAME_UID_SOFTWARE_WIDTHS4_5_8_12_16_BOOLEAN_TT_RANK2_TO_RANK4_TO_RANK8_ATOMIC_TRANSACTION_REFERENCE_ONLY`
+**Reconciled through parent commit:** `eac39da1`
+**Current highest milestone:** `BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE`
+**Current claim ceiling:** `BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS2_3_4_5_8_NEIGHBOR_AND_OR_FAMILY_SCOPED_QUOTIENT_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -128,6 +128,11 @@ ALGEBRAIC_15_NODE_FOUR_OWNER_INTERNAL_OPERATOR_REMATERIALIZATION_ESTABLISHED
 ALGEBRAIC_15_NODE_RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION_ESTABLISHED
 CATVM_ENFORCED_15_NODE_RANK2_AUTOMATIC_SCHEDULED_SHARED_RELATIONAL_DAG_ESTABLISHED_ON_PHASE_BACKEND
 ALGEBRAIC_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_PHASE_COMPOSITION_ESTABLISHED
+CATVM_ENFORCED_FIXED_SCHEMA_QUADRATIC_ANF_TWO_HIDDEN_PORT_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
+FIXED_SCHEMA_QANF_COMPACT_BASELINE_OBSTRUCTION_CONFIRMED_UNDER_MATCHED_CATVM_BOUNDARY
+BOUNDED_WIDTH_PARAMETRIC_BOOLEAN_TT_MANY_TO_MANY_RELATION_COMPOSITION_WITH_PRODUCT_RANK_NATIVE_PHASE_CLOSURE_AND_RESIDENT_INTERMEDIATE
+CATVM_ENFORCED_WIDTH_PARAMETRIC_BOOLEAN_TT_RESIDENT_H_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
+BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -810,13 +815,26 @@ completes 34 actual-carrier transactions. Same-UID inspection, protocol
 projection, inverse, snapshot, inert, replay, sanitizer, and non-vacuous
 no-smuggle controls pass.
 
-The live obstruction is composition depth: TT ranks multiply, no native exact
-recompression is established, and the strongest fixture-specialized
-classical baseline can directly emit the known rank-eight root. The selected
-successor is exact relation-preserving Boolean-TT quotienting with no dense
-truth table or width-wide assignment enumeration. If the quotient is only a
-fixture-specific recurrence, it is an obstruction result and the next fork is
-a growing-instance Small Wall triad, not more widths of the same ranks.
+Exact relation-preserving quotienting is now established for homogeneous
+neighbor-AND chains and, separately, homogeneous neighbor-OR chains. Public
+suffix geometry reduces raw product rank `2^d` to exact rank
+`min(d+1,L+2)` away from the final internal bond, with the final bond rank
+two. At width sixteen/depth eight, 3,672,064 raw final TT cells reduce to
+3,548 quotient cells while the accepted phase path materializes zero raw
+product cells.
+
+This is a family-scoped linear-rank law, not general Boolean-TT minimization
+or fixed-rank unbounded-depth closure. The independent bounded verifier
+materializes raw product cores, while the strongest fixture-specialized
+baseline directly emits quotient cores in `O(final cells)`. The accepted
+phase transaction also retains all quotient stages for actual inversion.
+
+The selected successor is therefore the matched growing-instance compact
+baseline, snapshot-sham, and in-place CATVM Small Wall triad. It must expose
+the direct-generation and inverse-history resource laws using the same public
+instances, final-boundary receipt, restoration, and reuse semantics. After
+that result, remove the demonstrated obstruction or change the problem
+family; do not continue by adding quotient depths.
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
 per-instance native-operation records are established. Native contraction
@@ -1001,7 +1019,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_LINUX_SAME_UID_SOFTWARE_WIDTHS4_5_8_12_16_BOOLEAN_TT_RANK2_TO_RANK4_TO_RANK8_ATOMIC_TRANSACTION_REFERENCE_ONLY
+BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS2_3_4_5_8_NEIGHBOR_AND_OR_FAMILY_SCOPED_QUOTIENT_REFERENCE_ONLY
 ```
 
 Not established:
@@ -1035,6 +1053,8 @@ general Boolean ANF elimination
 bounded nonlinear degree or term growth
 fixed-rank unbounded-depth Boolean-TT closure
 native exact Boolean-TT rank minimization
+arbitrary mixed-layer Boolean-TT quotient closure
+general family-independent Boolean-TT suffix minimization
 fixed-schema or general Small Wall crossing
 ```
 
