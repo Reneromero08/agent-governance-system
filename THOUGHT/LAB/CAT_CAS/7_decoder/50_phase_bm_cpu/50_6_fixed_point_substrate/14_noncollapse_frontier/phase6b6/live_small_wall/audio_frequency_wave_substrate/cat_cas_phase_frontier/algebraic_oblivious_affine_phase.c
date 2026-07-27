@@ -4,19 +4,21 @@
  * Mutable prototype: coefficient-oblivious projection of general affine
  * GF(2) relation equations using only resident F3 phase symbols.
  *
- * Width is deliberately fixed at two while the reversible row-reduction law
- * is calibrated.  Loop bounds and memory addresses depend only on fixed
- * public capacity.  Pivot, rank, active-row, and elimination controls remain
- * phase symbols and never select a host pivot, loop bound, or address.
+ * Width and equation capacity are public compile-time parameters.  Loop
+ * bounds and memory addresses depend only on those fixed capacities.  Pivot,
+ * rank, active-row, and elimination controls remain phase symbols and never
+ * select a host pivot, loop bound, or address.
  */
 
 #define main algebraic_series_parallel_embedded_main
 #include "algebraic_series_parallel_phase.c"
 #undef main
 
+#ifndef GA_WIDTH
 #define GA_WIDTH 2U
-#define GA_ROWS 4U
-#define GA_ROW_CELLS 6U
+#endif
+#define GA_ROWS (2U * GA_WIDTH)
+#define GA_ROW_CELLS (2U * GA_WIDTH + 2U)
 #define GA_BLOCK_CELLS (GA_ROWS * GA_ROW_CELLS + 1U)
 #define GA_RELATION_BLOCKS 6U
 #define GA_JOINT_ROWS (2U * GA_ROWS)
@@ -41,9 +43,14 @@
     (GA_ELIM_START + GA_REDUCTION_COLUMNS * GA_JOINT_ROWS)
 #define GA_INCONSISTENCY_CELL (GA_INPUT_EMPTY_CELL + 1U)
 #define GA_CARRIER_CELLS (GA_INCONSISTENCY_CELL + 1U)
+#ifndef GA_REPEAT_CYCLES
 #define GA_REPEAT_CYCLES 64U
+#endif
 #define GA_SEMANTIC_VARIANTS 9U
 #define GA_WORKSPACE_TOLERANCE 2.0e-12
+
+_Static_assert(GA_WIDTH >= 2U, "affine calibration requires width >= 2");
+_Static_assert(GA_WIDTH <= 20U, "affine calibration width exceeds bound");
 
 enum ga_restore_mode {
     GA_RESTORE_CORRECT = 0,
@@ -75,6 +82,9 @@ struct ga_stats {
     uint64_t carrier_reads;
     uint64_t boundary_decodes;
     uint64_t workspace_tolerance_checks;
+    uint64_t workspace_cell_checks;
+    uint64_t restoration_cell_checks;
+    uint64_t integrity_cell_checks;
 };
 
 struct ga_boundary {
@@ -86,7 +96,6 @@ struct ga_boundary {
 struct ga_execution {
     struct ga_boundary boundary;
     struct ga_stats stats;
-    double displacement_l2;
     double restoration_max_abs;
     double integrity_max_abs;
     int workspace_cleared;
@@ -192,85 +201,135 @@ static double complex ga_gate(
     return ga_and(active, value, stats);
 }
 
-static void ga_set_equation(
+static void ga_begin_equation(
     unsigned char relation[GA_BLOCK_CELLS],
     size_t row,
-    const unsigned char coefficient[4],
     unsigned char constant
 ) {
     relation[row * GA_ROW_CELLS] = 1U;
-    memcpy(
-        &relation[row * GA_ROW_CELLS + 1U],
-        coefficient,
-        4U
-    );
-    relation[row * GA_ROW_CELLS + 5U] = constant;
+    relation[
+        row * GA_ROW_CELLS + GA_ROW_CELLS - 1U
+    ] = constant;
+}
+
+static void ga_set_term(
+    unsigned char relation[GA_BLOCK_CELLS],
+    size_t row,
+    size_t variable
+) {
+    relation[row * GA_ROW_CELLS + 1U + variable] = 1U;
 }
 
 static struct ga_program ga_make_program(size_t variant) {
     struct ga_program program = {0};
     if (variant == 0U) {
-        static const unsigned char f[4] = {1U, 0U, 1U, 1U};
-        static const unsigned char g[4] = {1U, 1U, 1U, 0U};
-        static const unsigned char k0[4] = {1U, 0U, 1U, 1U};
-        static const unsigned char k1[4] = {0U, 1U, 0U, 1U};
-        ga_set_equation(program.relation[0], 3U, f, 0U);
-        ga_set_equation(program.relation[1], 2U, g, 1U);
-        ga_set_equation(program.relation[2], 1U, k0, 0U);
-        ga_set_equation(program.relation[2], 3U, k1, 0U);
+        ga_begin_equation(program.relation[0], GA_ROWS - 1U, 0U);
+        ga_set_term(program.relation[0], GA_ROWS - 1U, 0U);
+        ga_set_term(program.relation[0], GA_ROWS - 1U, GA_WIDTH);
+        ga_set_term(program.relation[0], GA_ROWS - 1U, GA_WIDTH + 1U);
+        ga_begin_equation(program.relation[1], GA_ROWS - 2U, 1U);
+        ga_set_term(program.relation[1], GA_ROWS - 2U, 0U);
+        ga_set_term(program.relation[1], GA_ROWS - 2U, 1U);
+        ga_set_term(program.relation[1], GA_ROWS - 2U, GA_WIDTH);
+        ga_begin_equation(program.relation[2], 1U, 0U);
+        ga_set_term(program.relation[2], 1U, 0U);
+        ga_set_term(program.relation[2], 1U, GA_WIDTH);
+        ga_set_term(program.relation[2], 1U, GA_WIDTH + 1U);
+        ga_begin_equation(program.relation[2], GA_ROWS - 1U, 0U);
+        ga_set_term(program.relation[2], GA_ROWS - 1U, 1U);
+        ga_set_term(
+            program.relation[2], GA_ROWS - 1U, GA_WIDTH + 1U
+        );
     } else if (variant == 1U) {
-        static const unsigned char f[4] = {0U, 1U, 1U, 0U};
-        static const unsigned char g[4] = {1U, 0U, 0U, 1U};
-        static const unsigned char k[4] = {0U, 1U, 1U, 0U};
-        ga_set_equation(program.relation[0], 2U, f, 1U);
-        ga_set_equation(program.relation[1], 3U, g, 0U);
-        ga_set_equation(program.relation[2], 1U, k, 1U);
+        ga_begin_equation(program.relation[0], GA_ROWS - 2U, 1U);
+        ga_set_term(program.relation[0], GA_ROWS - 2U, 1U);
+        ga_set_term(program.relation[0], GA_ROWS - 2U, GA_WIDTH);
+        ga_begin_equation(program.relation[1], GA_ROWS - 1U, 0U);
+        ga_set_term(program.relation[1], GA_ROWS - 1U, 0U);
+        ga_set_term(
+            program.relation[1], GA_ROWS - 1U, GA_WIDTH + 1U
+        );
+        ga_begin_equation(program.relation[2], 1U, 1U);
+        ga_set_term(program.relation[2], 1U, 1U);
+        ga_set_term(program.relation[2], 1U, GA_WIDTH);
     } else if (variant == 2U || variant == 3U) {
-        static const unsigned char f[4] = {1U, 0U, 1U, 1U};
-        static const unsigned char g[4] = {1U, 1U, 1U, 0U};
-        static const unsigned char k0[4] = {1U, 0U, 1U, 1U};
-        static const unsigned char k1[4] = {0U, 1U, 0U, 1U};
-        ga_set_equation(program.relation[0], 0U, f, 0U);
-        ga_set_equation(program.relation[1], 0U, g, 1U);
-        ga_set_equation(program.relation[2], 0U, k1, 0U);
-        ga_set_equation(program.relation[2], 2U, k0, 0U);
+        ga_begin_equation(program.relation[0], 0U, 0U);
+        ga_set_term(program.relation[0], 0U, 0U);
+        ga_set_term(program.relation[0], 0U, GA_WIDTH);
+        ga_set_term(program.relation[0], 0U, GA_WIDTH + 1U);
+        ga_begin_equation(program.relation[1], 0U, 1U);
+        ga_set_term(program.relation[1], 0U, 0U);
+        ga_set_term(program.relation[1], 0U, 1U);
+        ga_set_term(program.relation[1], 0U, GA_WIDTH);
+        ga_begin_equation(program.relation[2], 0U, 0U);
+        ga_set_term(program.relation[2], 0U, 1U);
+        ga_set_term(program.relation[2], 0U, GA_WIDTH + 1U);
+        ga_begin_equation(program.relation[2], 2U, 0U);
+        ga_set_term(program.relation[2], 2U, 0U);
+        ga_set_term(program.relation[2], 2U, GA_WIDTH);
+        ga_set_term(program.relation[2], 2U, GA_WIDTH + 1U);
         if (variant == 3U) {
-            ga_set_equation(program.relation[0], 3U, f, 0U);
-            ga_set_equation(program.relation[1], 2U, g, 1U);
+            ga_begin_equation(
+                program.relation[0], GA_ROWS - 1U, 0U
+            );
+            ga_set_term(program.relation[0], GA_ROWS - 1U, 0U);
+            ga_set_term(
+                program.relation[0], GA_ROWS - 1U, GA_WIDTH
+            );
+            ga_set_term(
+                program.relation[0], GA_ROWS - 1U, GA_WIDTH + 1U
+            );
+            ga_begin_equation(
+                program.relation[1], GA_ROWS - 2U, 1U
+            );
+            ga_set_term(program.relation[1], GA_ROWS - 2U, 0U);
+            ga_set_term(program.relation[1], GA_ROWS - 2U, 1U);
+            ga_set_term(
+                program.relation[1], GA_ROWS - 2U, GA_WIDTH
+            );
         }
     } else if (variant == 5U) {
-        static const unsigned char left_y0[4] = {0U, 0U, 1U, 0U};
-        static const unsigned char right_y0[4] = {1U, 0U, 0U, 0U};
-        ga_set_equation(program.relation[0], 3U, left_y0, 0U);
-        ga_set_equation(program.relation[1], 0U, right_y0, 0U);
-        ga_set_equation(program.relation[1], 2U, right_y0, 0U);
+        ga_begin_equation(program.relation[0], GA_ROWS - 1U, 0U);
+        ga_set_term(program.relation[0], GA_ROWS - 1U, GA_WIDTH);
+        ga_begin_equation(program.relation[1], 0U, 0U);
+        ga_set_term(program.relation[1], 0U, 0U);
+        ga_begin_equation(program.relation[1], 2U, 0U);
+        ga_set_term(program.relation[1], 2U, 0U);
     } else if (variant == 6U) {
         program.relation[0][GA_ROWS * GA_ROW_CELLS] = 1U;
     } else if (variant == 7U) {
-        static const unsigned char left_y0[4] = {0U, 0U, 1U, 0U};
-        static const unsigned char right_y0[4] = {1U, 0U, 0U, 0U};
-        ga_set_equation(program.relation[0], 3U, left_y0, 0U);
-        ga_set_equation(program.relation[1], 0U, right_y0, 1U);
-        ga_set_equation(program.relation[1], 1U, right_y0, 1U);
+        ga_begin_equation(program.relation[0], GA_ROWS - 1U, 0U);
+        ga_set_term(program.relation[0], GA_ROWS - 1U, GA_WIDTH);
+        ga_begin_equation(program.relation[1], 0U, 1U);
+        ga_set_term(program.relation[1], 0U, 0U);
+        ga_begin_equation(program.relation[1], 1U, 1U);
+        ga_set_term(program.relation[1], 1U, 0U);
     } else if (variant == 8U) {
-        static const unsigned char x0[4] = {1U, 0U, 0U, 0U};
-        static const unsigned char x1[4] = {0U, 1U, 0U, 0U};
-        static const unsigned char y0[4] = {0U, 0U, 1U, 0U};
-        static const unsigned char y1[4] = {0U, 0U, 0U, 1U};
-        ga_set_equation(program.relation[0], 0U, x0, 0U);
-        ga_set_equation(program.relation[0], 1U, x1, 0U);
-        ga_set_equation(program.relation[0], 2U, y0, 0U);
-        ga_set_equation(program.relation[0], 3U, y1, 0U);
-        ga_set_equation(program.relation[2], 0U, y0, 0U);
-        ga_set_equation(program.relation[2], 3U, y1, 0U);
+        for (size_t bit = 0U; bit < GA_WIDTH; ++bit) {
+            ga_begin_equation(program.relation[0], bit, 0U);
+            ga_set_term(program.relation[0], bit, bit);
+            ga_begin_equation(
+                program.relation[0], GA_WIDTH + bit, 0U
+            );
+            ga_set_term(
+                program.relation[0], GA_WIDTH + bit, GA_WIDTH + bit
+            );
+            ga_begin_equation(program.relation[2], bit, 0U);
+            ga_set_term(program.relation[2], bit, GA_WIDTH + bit);
+        }
     } else if (variant != 4U) {
         fail("unknown oblivious affine program variant");
     }
     return program;
 }
 
-static int ga_workspace_is_zero(const struct carrier *carrier) {
+static int ga_workspace_is_zero(
+    const struct carrier *carrier,
+    struct ga_stats *stats
+) {
+    ++stats->workspace_tolerance_checks;
     for (size_t cell = GA_WORK_START; cell < GA_CARRIER_CELLS; ++cell) {
+        ++stats->workspace_cell_checks;
         if (
             cabs(relative(carrier, cell) - root3(0))
             > GA_WORKSPACE_TOLERANCE
@@ -477,7 +536,9 @@ static void ga_encode_joint(
                 } else if (column == 3U * GA_WIDTH) {
                     value = ga_read(
                         carrier,
-                        ga_relation_cell(source, local, 5U),
+                        ga_relation_cell(
+                            source, local, GA_ROW_CELLS - 1U
+                        ),
                         stats
                     );
                 }
@@ -504,7 +565,9 @@ static void ga_encode_joint(
                 } else if (column == 3U * GA_WIDTH) {
                     value = ga_read(
                         carrier,
-                        ga_relation_cell(source, local, 5U),
+                        ga_relation_cell(
+                            source, local, GA_ROW_CELLS - 1U
+                        ),
                         stats
                     );
                 }
@@ -677,7 +740,7 @@ static double complex ga_output_factor(
     if (part == 0U) {
         return active;
     }
-    const size_t joint_column = part == 5U
+    const size_t joint_column = part == GA_ROW_CELLS - 1U
         ? GA_JOINT_COLUMNS - 1U
         : GA_WIDTH + part - 1U;
     return ga_gate(
@@ -697,8 +760,7 @@ static void ga_apply_compose(
     struct ga_stats *stats
 ) {
     ++stats->compose_calls;
-    ++stats->workspace_tolerance_checks;
-    if (!ga_workspace_is_zero(carrier)) {
+    if (!ga_workspace_is_zero(carrier, stats)) {
         fail("oblivious affine workspace not zero on entry");
     }
     ga_encode_joint(carrier, descriptor, stats);
@@ -733,8 +795,7 @@ static void ga_apply_compose(
         ga_clear_actual(carrier, ga_active_cell(row), stats);
     }
     ga_clear_actual(carrier, GA_INPUT_EMPTY_CELL, stats);
-    ++stats->workspace_tolerance_checks;
-    if (!ga_workspace_is_zero(carrier)) {
+    if (!ga_workspace_is_zero(carrier, stats)) {
         fail("oblivious affine workspace not cleared");
     }
 }
@@ -832,7 +893,6 @@ static struct ga_execution ga_execute(
         carrier, GA_Z_START, GA_BOUNDARY_START, 0, &execution.stats
     );
     execution.boundary = ga_latch_boundary(carrier, &execution.stats);
-    execution.displacement_l2 = displacement(carrier, &borrowed);
     if (restore_mode == GA_RESTORE_SNAPSHOT) {
         memcpy(
             carrier->working,
@@ -870,8 +930,12 @@ static struct ga_execution ga_execute(
         );
     }
     execution.restoration_max_abs = restoration(carrier, &borrowed);
+    execution.stats.restoration_cell_checks += GA_CARRIER_CELLS;
     execution.integrity_max_abs = integrity(carrier);
-    execution.workspace_cleared = ga_workspace_is_zero(carrier);
+    execution.stats.integrity_cell_checks += GA_CARRIER_CELLS;
+    execution.workspace_cleared = ga_workspace_is_zero(
+        carrier, &execution.stats
+    );
     free_carrier(&borrowed);
     return execution;
 }
@@ -905,6 +969,28 @@ static int ga_boundary_is_empty(const struct ga_boundary *boundary) {
     return boundary->coefficient[GA_BLOCK_CELLS - 1U] == 1;
 }
 
+static int ga_boundary_is_max_rank_zero(
+    const struct ga_boundary *boundary
+) {
+    if (boundary->coefficient[GA_BLOCK_CELLS - 1U] != 0) {
+        return 0;
+    }
+    for (size_t row = 0U; row < GA_ROWS; ++row) {
+        for (size_t field = 0U; field < GA_ROW_CELLS; ++field) {
+            const int expected = field == 0U
+                || field == 1U + row;
+            if (
+                boundary->coefficient[
+                    row * GA_ROW_CELLS + field
+                ] != expected
+            ) {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
 static int ga_stats_same_schedule(
     const struct ga_stats *left,
     const struct ga_stats *right
@@ -918,8 +1004,13 @@ static int ga_stats_same_schedule(
         && left->conditional_row_adds == right->conditional_row_adds
         && left->phase_cell_updates == right->phase_cell_updates
         && left->carrier_reads == right->carrier_reads
+        && left->boundary_decodes == right->boundary_decodes
         && left->workspace_tolerance_checks
-            == right->workspace_tolerance_checks;
+            == right->workspace_tolerance_checks
+        && left->workspace_cell_checks == right->workspace_cell_checks
+        && left->restoration_cell_checks
+            == right->restoration_cell_checks
+        && left->integrity_cell_checks == right->integrity_cell_checks;
 }
 
 static void ga_print_boundary(const struct ga_boundary *boundary) {
@@ -937,22 +1028,31 @@ static void ga_print_execution(
     const char *mode,
     const struct ga_execution *execution
 ) {
+    const unsigned long long dense_relation_entries =
+        UINT64_C(1) << (2U * GA_WIDTH);
+    const size_t joint_workspace_cells =
+        GA_JOINT_ROWS * GA_JOINT_COLUMNS;
+    const size_t total_workspace_cells =
+        GA_CARRIER_CELLS - GA_RELATION_BLOCKS * GA_BLOCK_CELLS;
+    const size_t phase_control_cells =
+        total_workspace_cells - joint_workspace_cells;
     printf(
         "{\"mode\":\"%s\","
-        "\"claim\":\"BOUNDED_WIDTH2_COEFFICIENT_OBLIVIOUS_GENERAL_"
+        "\"claim\":\"BOUNDED_WIDTH_PARAMETRIC_COEFFICIENT_OBLIVIOUS_"
+        "GENERAL_"
         "AFFINE_PHASE_RELATION_COMPOSITION\","
         "\"relation_family\":\"GENERAL_AFFINE_F2_EQUATION_SYSTEMS_"
-        "FIXED_WIDTH2\","
-        "\"width\":2,"
-        "\"relation_rows\":4,"
-        "\"relation_cells\":25,"
+        "PUBLIC_COMPILE_TIME_WIDTH\","
+        "\"width\":%u,"
+        "\"relation_rows\":%u,"
+        "\"relation_cells\":%u,"
         "\"complete_boundary_materialized\":true,"
         "\"canonical_boundary\":true,"
-        "\"dense_relation_entries\":16,"
-        "\"polynomial_descriptor_cells\":25,"
-        "\"joint_workspace_cells\":56,"
-        "\"phase_control_cells\":112,"
-        "\"total_workspace_cells\":168,"
+        "\"dense_relation_entries\":%llu,"
+        "\"polynomial_descriptor_cells\":%u,"
+        "\"joint_workspace_cells\":%zu,"
+        "\"phase_control_cells\":%zu,"
+        "\"total_workspace_cells\":%zu,"
         "\"carrier_cells\":%u,"
         "\"live_carrier_complex_values\":%zu,"
         "\"live_carrier_bytes\":%zu,"
@@ -973,9 +1073,20 @@ static void ga_print_execution(
         "\"witness_slots\":0,"
         "\"inverse_factor_recomputations\":%u,"
         "\"restoration_cell_checks\":%u,"
+        "\"integrity_cell_checks\":%u,"
+        "\"snapshot_creation_complex_values_copied\":%zu,"
+        "\"snapshot_reload_complex_values_copied\":%zu,"
         "\"restoration_path\":\"%s\","
         "\"boundary_coefficients\":",
         mode,
+        (unsigned)GA_WIDTH,
+        (unsigned)GA_ROWS,
+        (unsigned)GA_BLOCK_CELLS,
+        dense_relation_entries,
+        (unsigned)GA_BLOCK_CELLS,
+        joint_workspace_cells,
+        phase_control_cells,
+        total_workspace_cells,
         (unsigned)GA_CARRIER_CELLS,
         2U * (size_t)GA_CARRIER_CELLS,
         2U * (size_t)GA_CARRIER_CELLS * sizeof(double complex),
@@ -984,18 +1095,22 @@ static void ga_print_execution(
         4U * (size_t)GA_CARRIER_CELLS * sizeof(double complex),
         3U * (size_t)GA_BLOCK_CELLS,
         sizeof(struct ga_program),
-        2U * sizeof(struct ga_program),
+        GA_SEMANTIC_VARIANTS * sizeof(struct ga_program),
         2U * sizeof(struct ga_descriptor),
         sizeof(struct ga_execution),
         execution->snapshot_loaded ? 0U : 2U,
         (unsigned)GA_CARRIER_CELLS,
+        (unsigned)GA_CARRIER_CELLS,
+        2U * (size_t)GA_CARRIER_CELLS,
+        execution->snapshot_loaded
+            ? (size_t)GA_CARRIER_CELLS
+            : 0U,
         execution->snapshot_loaded ? "snapshot_reload" : "actual_inverse"
     );
     ga_print_boundary(&execution->boundary);
     printf(
         ",\"boundary_fnv1a64\":\"%016llx\","
         "\"maximum_root_error\":%.12g,"
-        "\"displacement_l2\":%.12g,"
         "\"restoration_max_abs\":%.12g,"
         "\"carrier_integrity_max_abs\":%.12g,"
         "\"workspace_cleared\":%s,"
@@ -1009,12 +1124,13 @@ static void ga_print_execution(
         "\"conditional_swaps\":%llu,"
         "\"conditional_row_adds\":%llu,"
         "\"phase_cell_updates\":%llu,"
-        "\"carrier_reads\":%llu,"
+        "\"native_phase_carrier_reads\":%llu,"
         "\"boundary_decodes\":%llu,"
-        "\"workspace_tolerance_checks\":%llu}\n",
+        "\"workspace_tolerance_checks\":%llu,"
+        "\"workspace_cell_checks\":%llu,"
+        "\"logical_carrier_cell_inspections\":%llu}\n",
         (unsigned long long)execution->boundary.hash,
         execution->boundary.maximum_root_error,
-        execution->displacement_l2,
         execution->restoration_max_abs,
         execution->integrity_max_abs,
         execution->workspace_cleared ? "true" : "false",
@@ -1030,7 +1146,15 @@ static void ga_print_execution(
         (unsigned long long)execution->stats.phase_cell_updates,
         (unsigned long long)execution->stats.carrier_reads,
         (unsigned long long)execution->stats.boundary_decodes,
-        (unsigned long long)execution->stats.workspace_tolerance_checks
+        (unsigned long long)execution->stats.workspace_tolerance_checks,
+        (unsigned long long)execution->stats.workspace_cell_checks,
+        (unsigned long long)(
+            execution->stats.carrier_reads
+            + execution->stats.boundary_decodes
+            + execution->stats.workspace_cell_checks
+            + execution->stats.restoration_cell_checks
+            + execution->stats.integrity_cell_checks
+        )
     );
 }
 
@@ -1129,8 +1253,7 @@ int main(int argc, char **argv) {
         "\"rank1_universal\":%s,"
         "\"input_empty_propagated\":%s,"
         "\"multi_contradiction_empty\":%s,"
-        "\"canonical_full_rank_boundary\":%s,"
-        "\"fixture_hashes_match\":%s,"
+        "\"canonical_max_rank_boundary\":%s,"
         "\"fixed_operation_schedule\":%s,"
         "\"same_carrier_transactions\":%u,"
         "\"repeated_reuse_max_restoration_abs\":%.12g}\n",
@@ -1161,12 +1284,7 @@ int main(int argc, char **argv) {
             ? "true" : "false",
         ga_boundary_is_empty(&semantic[7].boundary)
             ? "true" : "false",
-        semantic[8].boundary.hash == UINT64_C(0x2a656a080ba3a76b)
-            ? "true" : "false",
-        semantic[0].boundary.hash == UINT64_C(0xa96f5625e4054ee6)
-            && semantic[1].boundary.hash == UINT64_C(0x0183d6882c23ee46)
-            && semantic[4].boundary.hash == UINT64_C(0xd4657f55662f817f)
-            && semantic[6].boundary.hash == UINT64_C(0xd4657e55662f7fcc)
+        ga_boundary_is_max_rank_zero(&semantic[8].boundary)
             ? "true" : "false",
         fixed_operation_schedule ? "true" : "false",
         (unsigned)(GA_REPEAT_CYCLES + GA_SEMANTIC_VARIANTS),
@@ -1203,11 +1321,22 @@ int main(int argc, char **argv) {
         && ga_boundary_is_universal(&semantic[5].boundary)
         && ga_boundary_is_empty(&semantic[6].boundary)
         && ga_boundary_is_empty(&semantic[7].boundary)
-        && semantic[8].boundary.hash == UINT64_C(0x2a656a080ba3a76b)
-        && semantic[0].boundary.hash == UINT64_C(0xa96f5625e4054ee6)
-        && semantic[1].boundary.hash == UINT64_C(0x0183d6882c23ee46)
-        && semantic[4].boundary.hash == UINT64_C(0xd4657f55662f817f)
-        && semantic[6].boundary.hash == UINT64_C(0xd4657e55662f7fcc)
+        && ga_boundary_is_max_rank_zero(&semantic[8].boundary)
+        && (
+            GA_WIDTH != 2U
+            || (
+                semantic[0].boundary.hash
+                    == UINT64_C(0xa96f5625e4054ee6)
+                && semantic[1].boundary.hash
+                    == UINT64_C(0x0183d6882c23ee46)
+                && semantic[4].boundary.hash
+                    == UINT64_C(0xd4657f55662f817f)
+                && semantic[6].boundary.hash
+                    == UINT64_C(0xd4657e55662f7fcc)
+                && semantic[8].boundary.hash
+                    == UINT64_C(0x2a656a080ba3a76b)
+            )
+        )
         && fixed_operation_schedule;
     return pass ? 0 : 1;
 }

@@ -1,20 +1,26 @@
 /*
- * Independent compact GF(2) reference for the fixed-width oblivious affine
- * phase prototype.  It uses ordinary coefficient-aware row reduction only as
- * an external adjudicator and never materializes assignments or witnesses.
+ * Independent compact GF(2) reference for the width-parametric oblivious
+ * affine phase prototype.  It uses ordinary coefficient-aware row reduction
+ * only as an external adjudicator and never materializes assignments or
+ * witnesses.
  */
 
 #include <stdint.h>
 #include <stdio.h>
-#include <string.h>
-
-#define R_WIDTH 2U
-#define R_ROWS 4U
-#define R_ROW_CELLS 6U
-#define R_BLOCK_CELLS 25U
-#define R_JOINT_ROWS 8U
-#define R_JOINT_COLUMNS 7U
+#ifndef REF_WIDTH
+#define REF_WIDTH 2U
+#endif
+#define R_WIDTH REF_WIDTH
+#define R_ROWS (2U * R_WIDTH)
+#define R_ROW_CELLS (2U * R_WIDTH + 2U)
+#define R_BLOCK_CELLS (R_ROWS * R_ROW_CELLS + 1U)
+#define R_JOINT_ROWS (2U * R_ROWS)
+#define R_JOINT_COLUMNS (3U * R_WIDTH + 1U)
+#define R_REDUCTION_COLUMNS (3U * R_WIDTH)
 #define R_VARIANTS 9U
+
+_Static_assert(R_WIDTH >= 2U, "affine reference requires width >= 2");
+_Static_assert(R_WIDTH <= 20U, "affine reference width exceeds bound");
 
 struct relation {
     unsigned char cell[R_BLOCK_CELLS];
@@ -28,7 +34,7 @@ struct joint {
     unsigned char bit[R_JOINT_ROWS][R_JOINT_COLUMNS];
     size_t rows;
     size_t rank;
-    size_t pivot_row[6];
+    size_t pivot_row[R_REDUCTION_COLUMNS];
     unsigned char input_empty;
 };
 
@@ -44,77 +50,120 @@ static uint64_t hash_bytes(
     return hash;
 }
 
-static void set_equation(
+static void begin_equation(
     struct relation *relation,
     size_t row,
-    const unsigned char coefficient[4],
     unsigned char constant
 ) {
     relation->cell[row * R_ROW_CELLS] = 1U;
-    memcpy(
-        &relation->cell[row * R_ROW_CELLS + 1U],
-        coefficient,
-        4U
-    );
-    relation->cell[row * R_ROW_CELLS + 5U] = constant;
+    relation->cell[
+        row * R_ROW_CELLS + R_ROW_CELLS - 1U
+    ] = constant;
+}
+
+static void set_term(
+    struct relation *relation,
+    size_t row,
+    size_t variable
+) {
+    relation->cell[row * R_ROW_CELLS + 1U + variable] = 1U;
 }
 
 static struct program make_program(size_t variant) {
     struct program program = {0};
     if (variant == 0U) {
-        static const unsigned char f[4] = {1U, 0U, 1U, 1U};
-        static const unsigned char g[4] = {1U, 1U, 1U, 0U};
-        static const unsigned char k0[4] = {1U, 0U, 1U, 1U};
-        static const unsigned char k1[4] = {0U, 1U, 0U, 1U};
-        set_equation(&program.relation[0], 3U, f, 0U);
-        set_equation(&program.relation[1], 2U, g, 1U);
-        set_equation(&program.relation[2], 1U, k0, 0U);
-        set_equation(&program.relation[2], 3U, k1, 0U);
+        begin_equation(&program.relation[0], R_ROWS - 1U, 0U);
+        set_term(&program.relation[0], R_ROWS - 1U, 0U);
+        set_term(&program.relation[0], R_ROWS - 1U, R_WIDTH);
+        set_term(&program.relation[0], R_ROWS - 1U, R_WIDTH + 1U);
+        begin_equation(&program.relation[1], R_ROWS - 2U, 1U);
+        set_term(&program.relation[1], R_ROWS - 2U, 0U);
+        set_term(&program.relation[1], R_ROWS - 2U, 1U);
+        set_term(&program.relation[1], R_ROWS - 2U, R_WIDTH);
+        begin_equation(&program.relation[2], 1U, 0U);
+        set_term(&program.relation[2], 1U, 0U);
+        set_term(&program.relation[2], 1U, R_WIDTH);
+        set_term(&program.relation[2], 1U, R_WIDTH + 1U);
+        begin_equation(&program.relation[2], R_ROWS - 1U, 0U);
+        set_term(&program.relation[2], R_ROWS - 1U, 1U);
+        set_term(
+            &program.relation[2], R_ROWS - 1U, R_WIDTH + 1U
+        );
     } else if (variant == 1U) {
-        static const unsigned char f[4] = {0U, 1U, 1U, 0U};
-        static const unsigned char g[4] = {1U, 0U, 0U, 1U};
-        static const unsigned char k[4] = {0U, 1U, 1U, 0U};
-        set_equation(&program.relation[0], 2U, f, 1U);
-        set_equation(&program.relation[1], 3U, g, 0U);
-        set_equation(&program.relation[2], 1U, k, 1U);
+        begin_equation(&program.relation[0], R_ROWS - 2U, 1U);
+        set_term(&program.relation[0], R_ROWS - 2U, 1U);
+        set_term(&program.relation[0], R_ROWS - 2U, R_WIDTH);
+        begin_equation(&program.relation[1], R_ROWS - 1U, 0U);
+        set_term(&program.relation[1], R_ROWS - 1U, 0U);
+        set_term(
+            &program.relation[1], R_ROWS - 1U, R_WIDTH + 1U
+        );
+        begin_equation(&program.relation[2], 1U, 1U);
+        set_term(&program.relation[2], 1U, 1U);
+        set_term(&program.relation[2], 1U, R_WIDTH);
     } else if (variant == 2U || variant == 3U) {
-        static const unsigned char f[4] = {1U, 0U, 1U, 1U};
-        static const unsigned char g[4] = {1U, 1U, 1U, 0U};
-        static const unsigned char k0[4] = {1U, 0U, 1U, 1U};
-        static const unsigned char k1[4] = {0U, 1U, 0U, 1U};
-        set_equation(&program.relation[0], 0U, f, 0U);
-        set_equation(&program.relation[1], 0U, g, 1U);
-        set_equation(&program.relation[2], 0U, k1, 0U);
-        set_equation(&program.relation[2], 2U, k0, 0U);
+        begin_equation(&program.relation[0], 0U, 0U);
+        set_term(&program.relation[0], 0U, 0U);
+        set_term(&program.relation[0], 0U, R_WIDTH);
+        set_term(&program.relation[0], 0U, R_WIDTH + 1U);
+        begin_equation(&program.relation[1], 0U, 1U);
+        set_term(&program.relation[1], 0U, 0U);
+        set_term(&program.relation[1], 0U, 1U);
+        set_term(&program.relation[1], 0U, R_WIDTH);
+        begin_equation(&program.relation[2], 0U, 0U);
+        set_term(&program.relation[2], 0U, 1U);
+        set_term(&program.relation[2], 0U, R_WIDTH + 1U);
+        begin_equation(&program.relation[2], 2U, 0U);
+        set_term(&program.relation[2], 2U, 0U);
+        set_term(&program.relation[2], 2U, R_WIDTH);
+        set_term(&program.relation[2], 2U, R_WIDTH + 1U);
         if (variant == 3U) {
-            set_equation(&program.relation[0], 3U, f, 0U);
-            set_equation(&program.relation[1], 2U, g, 1U);
+            begin_equation(
+                &program.relation[0], R_ROWS - 1U, 0U
+            );
+            set_term(&program.relation[0], R_ROWS - 1U, 0U);
+            set_term(&program.relation[0], R_ROWS - 1U, R_WIDTH);
+            set_term(
+                &program.relation[0], R_ROWS - 1U, R_WIDTH + 1U
+            );
+            begin_equation(
+                &program.relation[1], R_ROWS - 2U, 1U
+            );
+            set_term(&program.relation[1], R_ROWS - 2U, 0U);
+            set_term(&program.relation[1], R_ROWS - 2U, 1U);
+            set_term(&program.relation[1], R_ROWS - 2U, R_WIDTH);
         }
     } else if (variant == 5U) {
-        static const unsigned char left_y0[4] = {0U, 0U, 1U, 0U};
-        static const unsigned char right_y0[4] = {1U, 0U, 0U, 0U};
-        set_equation(&program.relation[0], 3U, left_y0, 0U);
-        set_equation(&program.relation[1], 0U, right_y0, 0U);
-        set_equation(&program.relation[1], 2U, right_y0, 0U);
+        begin_equation(&program.relation[0], R_ROWS - 1U, 0U);
+        set_term(&program.relation[0], R_ROWS - 1U, R_WIDTH);
+        begin_equation(&program.relation[1], 0U, 0U);
+        set_term(&program.relation[1], 0U, 0U);
+        begin_equation(&program.relation[1], 2U, 0U);
+        set_term(&program.relation[1], 2U, 0U);
     } else if (variant == 6U) {
-        program.relation[0].cell[24] = 1U;
+        program.relation[0].cell[R_BLOCK_CELLS - 1U] = 1U;
     } else if (variant == 7U) {
-        static const unsigned char left_y0[4] = {0U, 0U, 1U, 0U};
-        static const unsigned char right_y0[4] = {1U, 0U, 0U, 0U};
-        set_equation(&program.relation[0], 3U, left_y0, 0U);
-        set_equation(&program.relation[1], 0U, right_y0, 1U);
-        set_equation(&program.relation[1], 1U, right_y0, 1U);
+        begin_equation(&program.relation[0], R_ROWS - 1U, 0U);
+        set_term(&program.relation[0], R_ROWS - 1U, R_WIDTH);
+        begin_equation(&program.relation[1], 0U, 1U);
+        set_term(&program.relation[1], 0U, 0U);
+        begin_equation(&program.relation[1], 1U, 1U);
+        set_term(&program.relation[1], 1U, 0U);
     } else if (variant == 8U) {
-        static const unsigned char x0[4] = {1U, 0U, 0U, 0U};
-        static const unsigned char x1[4] = {0U, 1U, 0U, 0U};
-        static const unsigned char y0[4] = {0U, 0U, 1U, 0U};
-        static const unsigned char y1[4] = {0U, 0U, 0U, 1U};
-        set_equation(&program.relation[0], 0U, x0, 0U);
-        set_equation(&program.relation[0], 1U, x1, 0U);
-        set_equation(&program.relation[0], 2U, y0, 0U);
-        set_equation(&program.relation[0], 3U, y1, 0U);
-        set_equation(&program.relation[2], 0U, y0, 0U);
-        set_equation(&program.relation[2], 3U, y1, 0U);
+        for (size_t bit = 0U; bit < R_WIDTH; ++bit) {
+            begin_equation(&program.relation[0], bit, 0U);
+            set_term(&program.relation[0], bit, bit);
+            begin_equation(
+                &program.relation[0], R_WIDTH + bit, 0U
+            );
+            set_term(
+                &program.relation[0],
+                R_WIDTH + bit,
+                R_WIDTH + bit
+            );
+            begin_equation(&program.relation[2], bit, 0U);
+            set_term(&program.relation[2], bit, R_WIDTH + bit);
+        }
     } else if (variant != 4U) {
         return program;
     }
@@ -177,9 +226,10 @@ static struct relation compose(
 ) {
     struct joint joint = {0};
     joint.input_empty = (unsigned char)(
-        left->cell[24] | right->cell[24]
+        left->cell[R_BLOCK_CELLS - 1U]
+        | right->cell[R_BLOCK_CELLS - 1U]
     );
-    for (size_t stage = 0U; stage < 6U; ++stage) {
+    for (size_t stage = 0U; stage < R_REDUCTION_COLUMNS; ++stage) {
         joint.pivot_row[stage] = SIZE_MAX;
     }
     if (joint.input_empty == 0U) {
@@ -187,51 +237,58 @@ static struct relation compose(
             const unsigned char active = relation_field(left, row, 0U);
             if (active != 0U) {
                 const size_t target = joint.rows++;
-                joint.bit[target][0] =
-                    relation_field(left, row, 3U);
-                joint.bit[target][1] =
-                    relation_field(left, row, 4U);
-                joint.bit[target][2] =
-                    relation_field(left, row, 1U);
-                joint.bit[target][3] =
-                    relation_field(left, row, 2U);
-                joint.bit[target][6] =
-                    relation_field(left, row, 5U);
+                for (size_t bit = 0U; bit < R_WIDTH; ++bit) {
+                    joint.bit[target][bit] = relation_field(
+                        left, row, 1U + R_WIDTH + bit
+                    );
+                    joint.bit[target][R_WIDTH + bit] =
+                        relation_field(left, row, 1U + bit);
+                }
+                joint.bit[target][R_JOINT_COLUMNS - 1U] =
+                    relation_field(
+                        left, row, R_ROW_CELLS - 1U
+                    );
             }
             const unsigned char right_active =
                 relation_field(right, row, 0U);
             if (right_active != 0U) {
                 const size_t target = joint.rows++;
-                joint.bit[target][0] =
-                    relation_field(right, row, 1U);
-                joint.bit[target][1] =
-                    relation_field(right, row, 2U);
-                joint.bit[target][4] =
-                    relation_field(right, row, 3U);
-                joint.bit[target][5] =
-                    relation_field(right, row, 4U);
-                joint.bit[target][6] =
-                    relation_field(right, row, 5U);
+                for (size_t bit = 0U; bit < R_WIDTH; ++bit) {
+                    joint.bit[target][bit] =
+                        relation_field(right, row, 1U + bit);
+                    joint.bit[target][2U * R_WIDTH + bit] =
+                        relation_field(
+                            right, row, 1U + R_WIDTH + bit
+                        );
+                }
+                joint.bit[target][R_JOINT_COLUMNS - 1U] =
+                    relation_field(
+                        right, row, R_ROW_CELLS - 1U
+                    );
             }
         }
     }
-    for (size_t stage = 0U; stage < 6U; ++stage) {
+    for (size_t stage = 0U; stage < R_REDUCTION_COLUMNS; ++stage) {
         reduce_stage(&joint, stage);
     }
     unsigned char inconsistent = 0U;
     for (size_t row = 0U; row < joint.rows; ++row) {
         unsigned char coefficient = 0U;
-        for (size_t column = 0U; column < 6U; ++column) {
+        for (
+            size_t column = 0U;
+            column < R_REDUCTION_COLUMNS;
+            ++column
+        ) {
             coefficient |= joint.bit[row][column];
         }
         if (coefficient == 0U) {
-            inconsistent |= joint.bit[row][6];
+            inconsistent |= joint.bit[row][R_JOINT_COLUMNS - 1U];
         }
     }
     const unsigned char empty =
         (unsigned char)(joint.input_empty | inconsistent);
     struct relation output = {0};
-    output.cell[24] = empty;
+    output.cell[R_BLOCK_CELLS - 1U] = empty;
     if (empty == 0U) {
         for (size_t row = 0U; row < R_ROWS; ++row) {
             const size_t stage = R_WIDTH + row;
@@ -241,12 +298,17 @@ static struct relation compose(
             const size_t source = joint.pivot_row[stage];
             output.cell[row * R_ROW_CELLS] = active;
             if (active != 0U) {
-                for (size_t column = 0U; column < 4U; ++column) {
+                for (
+                    size_t column = 0U;
+                    column < 2U * R_WIDTH;
+                    ++column
+                ) {
                     output.cell[row * R_ROW_CELLS + 1U + column] =
                         joint.bit[source][R_WIDTH + column];
                 }
-                output.cell[row * R_ROW_CELLS + 5U] =
-                    joint.bit[source][6];
+                output.cell[
+                    row * R_ROW_CELLS + R_ROW_CELLS - 1U
+                ] = joint.bit[source][R_JOINT_COLUMNS - 1U];
             }
         }
     }

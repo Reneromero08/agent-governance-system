@@ -1,0 +1,78 @@
+{
+  "review": "PASS",
+  "reviewer_id": "WIDTH-PARAMETRIC-GENERAL-AFFINE-PHASE-01",
+  "claim": "BOUNDED_WIDTH_PARAMETRIC_COEFFICIENT_OBLIVIOUS_GENERAL_AFFINE_PHASE_RELATION_COMPOSITION",
+  "claim_ceiling": "BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_RELATION_SYSTEM_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/param-affine-final.NcpFDK",
+  "initial_findings": [
+    {
+      "id": "PARAM-AFFINE-R1-001",
+      "severity": "CLAIM_BLOCKING",
+      "finding": "A pre-inverse whole-carrier displacement scalar revealed the resident hidden intermediate Hamming weight.",
+      "repair": "Removed the calculation and output, added a static rejection gate for pre-inverse displacement aggregates, and reran all qualification paths.",
+      "closed": true
+    },
+    {
+      "id": "PARAM-AFFINE-R1-002",
+      "severity": "RESOURCE_ACCOUNTING",
+      "finding": "The carrier_reads label covered only native ga_read calls and omitted verification scans, boundary projection, and snapshot traffic.",
+      "repair": "Renamed the native counter, added exact workspace, restoration, integrity, boundary, logical-inspection, and snapshot-copy accounting, and bound their laws in the qualifier.",
+      "closed": true
+    },
+    {
+      "id": "PARAM-AFFINE-R1-003",
+      "severity": "RESOURCE_ACCOUNTING",
+      "finding": "Coexisting fixture storage reported two programs although nine programs remain live in main.",
+      "repair": "Reports nine complete program structures and verifies the exact 27*B(w)-byte current-ABI law.",
+      "closed": true
+    },
+    {
+      "id": "PARAM-AFFINE-R1-004",
+      "severity": "RESOURCE_ACCOUNTING",
+      "finding": "The compiler-measured stack chain lookup failed to include the suffixed ga_apply_compose symbol.",
+      "repair": "Matched the complete symbol prefix, included the 224-byte frame, and updated all measured width chains and conservative totals.",
+      "closed": true
+    }
+  ],
+  "closure_checks": {
+    "pre_inverse_whole_carrier_aggregate_outputs": 0,
+    "optimized_binary_displacement_symbol": false,
+    "only_authorized_data_dependent_pre_restoration_output_is_final_boundary": true,
+    "default_native_phase_carrier_reads": 12474,
+    "default_workspace_scan_passes": 9,
+    "default_workspace_cell_checks": 1512,
+    "default_boundary_decodes": 25,
+    "default_restoration_cell_checks": 318,
+    "default_integrity_cell_checks": 318,
+    "default_logical_carrier_cell_inspections": 14647,
+    "default_snapshot_creation_complex_values_copied": 636,
+    "default_snapshot_reload_complex_values_copied_actual_inverse": 0,
+    "default_snapshot_reload_complex_values_copied_snapshot_path": 318,
+    "default_coexisting_program_storage_bytes_current_abi": 675,
+    "default_stack_chain_includes_ga_apply_compose": true,
+    "default_stack_chain_bytes": 6144,
+    "width16_stack_chain_bytes": 105840,
+    "strict_build": "PASS",
+    "analyzer": "PASS",
+    "asan_ubsan_leak": "PASS",
+    "deterministic_replay": "PASS",
+    "mandatory_no_smuggle_strace": "PASS",
+    "phase_reference_matches": "PASS_9_BOUNDARIES_AT_EACH_OF_6_WIDTHS"
+  },
+  "independent_extra_width_sweep": {
+    "widths": "2_THROUGH_16_INCLUSIVE",
+    "complete_boundaries_per_width": 9,
+    "all_phase_reference_matches": true,
+    "maximum_root_error": 4.9961e-16,
+    "maximum_restoration_error": 2.4826e-16
+  },
+  "sha256": {
+    "phase_source": "f309c08075b4c4b89e057942ea926dfff6dff43923265cc1669ce4cb6b096a38",
+    "reference_source": "26145488784e818c19e6e550df699ad387ee33d5b5c4a9a4241dbc80f297d06c",
+    "qualifier_source": "7684d2ed66fc45552357b15bf4b3ce6115e99b7ebfbbd7c2587e85b30d1ae999",
+    "default_result": "3da4361ad1c5493ec6fb428b3ea861e99cf980659149e7c81c09e52e2aa11ff4",
+    "scaling": "f823a1ad6b28d5484f48dcb0878371449124c29cdf5c038a6986bcd482bc3a36"
+  },
+  "remaining_findings": [],
+  "terminal": false
+}

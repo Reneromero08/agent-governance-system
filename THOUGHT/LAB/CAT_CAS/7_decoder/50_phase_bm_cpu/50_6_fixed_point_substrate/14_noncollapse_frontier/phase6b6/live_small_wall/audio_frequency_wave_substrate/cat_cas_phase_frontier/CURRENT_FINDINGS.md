@@ -1636,3 +1636,114 @@ The selected next experiment is
 law while increasing interface width and public equation capacity, emit a
 complete polynomial affine boundary, and measure the actual phase/resource
 law against conventional compact Gaussian elimination.
+
+## Width-parametric general affine relation closure
+
+The width-two calibration now compiles unchanged across:
+
+```text
+w = 2, 3, 4, 8, 12, 16
+```
+
+At width `w`, a complete affine relation between two `w`-bit ports is stored
+as `2w` equation slots plus an explicit empty flag:
+
+```text
+B(w) = 4w^2 + 4w + 1 phase cells
+```
+
+Composition embeds `F(X,Y)` and `G(Y,Z)` into `4w` resident augmented rows
+over public column order `Y,X,Z`. All candidate selection, conditional swaps,
+row activity, pivot state, elimination, emptiness, and contradiction logic
+remain Boolean-subset F3 phase symbols. The same public `3w`-stage host
+schedule executes for every coefficient pattern; rank and pivot positions do
+not select host pivots, loop bounds, addresses, or native-operation counts.
+
+The exact resident resource laws are:
+
+```text
+relation cells       4w^2 + 4w + 1
+workspace cells     36w^2 + 11w + 2
+carrier cells       60w^2 + 35w + 8
+phase ANDs         576w^3 + 450w^2 - 18w
+phase XORs       1,152w^3 + 384w^2 - 168w
+```
+
+Nine complete semantic boundaries match a separately compiled conventional
+rank-pointer GF2 reference at every accepted width. The suite includes
+rank-deficient many-to-many composition, unrelated restored-carrier reuse,
+row permutation, duplicate equations, rank-zero and rank-one universal
+projection, explicit input empty, multiple simultaneous contradictions, and
+maximum-rank `2w` output. It materializes no assignment, relation tuple,
+candidate, or witness expansion.
+
+At width sixteen:
+
+```text
+equation capacity                           32
+complete relation cells                  1,089
+dense membership entries         4,294,967,296
+workspace cells                          9,394
+carrier cells                           15,928
+live carrier bytes                     509,696
+phase ANDs                            2,474,208
+phase XORs                            4,814,208
+phase-cell updates                    3,692,636
+native kernel reads                   4,929,526
+logical carrier cell inspections      5,047,017
+maximum repeated restoration error  2.00148302124e-16
+predeclared tolerance                        2e-12
+```
+
+The width-sixteen compiler-measured nested call chain is 105,840 bytes.
+Carrier plus comparison heap is 1,019,392 bytes, giving a conservative
+current-ABI accounted total of 1,125,232 bytes. The complete affine
+descriptor becomes smaller than dense membership at width three; this is a
+polynomial closure law for affine relations, not a compact representation of
+arbitrary Boolean relations or a speed advantage over ordinary GF2
+elimination.
+
+The actual resident child relation is consumed by its parent. Only the final
+complete boundary is decoded; parent and child are then recomputed and
+reversed from the actual resident operands, restoration is checked exactly
+within tolerance, and the actual restored carrier runs unrelated programs.
+Wrong, missing, and applicable reordered inverses fail. Intermediate and
+control projection reject. No pre-inverse whole-carrier scalar is calculated
+or emitted. Snapshot reload remains separately labeled and performs zero
+inverse-factor recomputations. Mandatory file, network, write, vector-write,
+positional-write, and send tracing finds no extra output channel.
+
+Focused review independently swept every integer width from two through
+sixteen. All nine phase boundaries matched the conventional reference at all
+fifteen widths. The review closed four findings: it removed a whole-carrier
+displacement scalar that leaked the hidden intermediate's Hamming weight,
+made carrier inspection and snapshot-copy accounting complete, counted all
+nine simultaneously resident semantic programs, and included the
+`ga_apply_compose` frame in the measured stack chain. Closure review found no
+remaining finding within the bounded software claim.
+
+This establishes:
+
+```text
+BOUNDED_WIDTH_PARAMETRIC_COEFFICIENT_OBLIVIOUS_GENERAL_AFFINE_PHASE_RELATION_COMPOSITION
+```
+
+with ceiling:
+
+```text
+BOUNDED_WIDTH16_SOFTWARE_GF2_AFFINE_RELATION_SYSTEM_REFERENCE_ONLY
+```
+
+It does not establish runtime-unbounded width, arbitrary equation capacity,
+nonlinear Boolean closure, arbitrary graph topology or treewidth, automatic
+elimination-order discovery, CATVM custody for this wider kernel,
+computational advantage, physical execution, Small Wall crossing, or
+unlimited catalytic computation.
+
+The selected next experiment is
+`WIDTH_PARAMETRIC_AFFINE_COMPOSITION_AND_INTERSECTION_MODULE_CLOSURE`: reuse
+the polynomial canonical boundary and fixed phase reduction kernel for both
+wide-interface composition and native relation intersection, then execute a
+recursive public series/parallel affine module with actual resident
+child-to-parent messages, boundary-only projection, actual inverse
+restoration, and restored-carrier reuse.
