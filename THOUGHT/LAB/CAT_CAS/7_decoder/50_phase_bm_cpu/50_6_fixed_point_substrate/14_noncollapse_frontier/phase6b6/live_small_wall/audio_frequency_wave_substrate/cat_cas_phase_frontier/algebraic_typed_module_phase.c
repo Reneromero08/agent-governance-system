@@ -291,6 +291,7 @@ static struct typed_source read_typed_source(const char *path) {
     return source;
 }
 
+#ifndef CATCAS_TYPED_MODULE_NO_MAIN
 static size_t remap_leaf_start(
     const struct process *leaf,
     size_t start,
@@ -466,6 +467,7 @@ static struct process compile_typed_source(
     ) * CCOUNT;
     return process;
 }
+#endif
 
 static void free_typed_source(struct typed_source *typed) {
     for (size_t index = 0U; index < typed->module_count; ++index) {
@@ -493,6 +495,7 @@ static void free_typed_source(struct typed_source *typed) {
     }
 }
 
+#ifndef CATCAS_TYPED_MODULE_NO_MAIN
 static int same_typed_geometry(
     const struct typed_source *left_source,
     const struct process *left,
@@ -566,6 +569,7 @@ static int module_handoffs_are_direct(
     }
     return composite_operation == process->operation_count;
 }
+#endif
 
 static size_t module_depth(
     const struct typed_source *typed,
@@ -607,6 +611,7 @@ static size_t unique_leaf_source_count(
     return unique;
 }
 
+#ifndef CATCAS_TYPED_MODULE_NO_MAIN
 static void print_typed_execution(
     const char *mode,
     const struct typed_source *typed,
@@ -833,3 +838,4 @@ int main(int argc, char **argv) {
     free_typed_source(&reuse_typed);
     return valid ? 0 : 1;
 }
+#endif

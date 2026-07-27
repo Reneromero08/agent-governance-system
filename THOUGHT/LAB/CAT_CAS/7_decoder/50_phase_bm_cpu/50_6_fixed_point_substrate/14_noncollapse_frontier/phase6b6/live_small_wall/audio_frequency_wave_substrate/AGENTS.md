@@ -44,13 +44,13 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-ALGEBRAIC_RECURSIVE_TYPED_RELATIONAL_MODULE_PHASE_ESTABLISHED
+ALGEBRAIC_COMPACT_TYPED_RELATIONAL_MODULE_EXECUTION_ESTABLISHED
 ```
 
 Claim ceiling:
 
 ```text
-SOFTWARE_BOUNDED_RECURSIVE_TYPED_RELATIONAL_MODULE_COMPOSITION_REFERENCE_ONLY
+SOFTWARE_COMPACT_COMPILED_BODY_TYPED_RELATIONAL_MODULE_EXECUTION_REFERENCE_ONLY
 ```
 
 The strongest current bounded architecture is:
@@ -63,6 +63,7 @@ public typed series-parallel relational geometry
 -> nominally typed module descriptors
 -> direct child-export phase addresses consumed by parent composition
 -> bounded recursive module trees
+-> shared compiled leaf-body execution without per-instance native records
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -87,13 +88,15 @@ separately and does not support the stronger claim.
 
 The relational engine now also composes independently compiled
 series-parallel leaves through nominally typed module descriptors. A
-depth-three balanced tree instantiates one leaf source four times; every
+depth-four balanced tree instantiates one leaf source eight times; every
 parent consumes the actual child `final_start` phase cells, no child relation
 is decoded or serialized, only the root crosses the boundary, and the actual
 restored carrier runs a different module program. This establishes bounded
-recursive typed composition. It does not establish compact recursion:
-nineteen native operation descriptors and their resident messages are still
-expanded per instantiation.
+recursive typed composition and shared compiled-body execution: four native
+leaf records serve all eight instances, with zero per-instance native records
+and one transient relocated descriptor. It does not establish compact
+carrier/history recursion: seven composite descriptors, 39 resident messages,
+and 320 carrier cells remain instance-specific.
 
 A general holographic relational computer, arbitrary graph closure, C5
 advantage, root/kernel secrecy, physical phase computation, and unlimited
@@ -175,14 +178,13 @@ Verification follows a substantive result. One focused independent review is nor
 Selected frontier:
 
 ```text
-COMPACT_REUSABLE_MODULE_EXECUTION_WITHOUT_OPERATION_INLINING_AND_WIDER_UNRESOLVED_INTERFACES
+NATIVE_WIDTH2_TYPED_RELATIONAL_PHASE_CONTRACTION
 ```
 
 The next crossing is:
 
 ```text
-bounded recursive typed relational modules
--> compiled body execution without per-instance operation inlining
+compact compiled-body typed relational modules
 -> wider unresolved interfaces
 -> compact general relational geometry
 ```
@@ -190,17 +192,17 @@ bounded recursive typed relational modules
 Investigate, without imposing a rigid sequence:
 
 ```text
-module call execution without per-instance operation descriptor expansion
-phase-resident locals under actual inverse and reuse
-interfaces wider than two Boolean ports
+native contraction across two shared Boolean ports
+16-cell four-port relations with a resident 16-cell intermediate
+actual inverse and restored reuse across the wider interface
 compact representation across wider graph separators
 elimination-order discovery without compiler-side solving
 general relation signatures without truth-table materialization
 resource growth versus separator width, message arity, and topology
 ```
 
-Another module-tree depth probe is not meaningful progress while operation
-descriptors and carrier messages still expand per instantiation.
+Another module-tree depth probe is not meaningful progress while relation
+storage and carrier messages still expand per instantiation.
 
 ## 7. Native No-Smuggle Law
 

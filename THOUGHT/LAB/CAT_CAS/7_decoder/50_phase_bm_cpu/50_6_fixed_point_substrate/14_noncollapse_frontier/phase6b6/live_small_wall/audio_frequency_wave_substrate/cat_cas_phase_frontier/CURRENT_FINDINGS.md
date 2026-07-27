@@ -1069,3 +1069,65 @@ crossing, or unlimited catalytic computation. The next mechanism must execute
 compiled module bodies without per-instance operation inlining while
 preserving phase-resident locals, actual inverse restoration, and reuse; the
 following lift is an unresolved interface wider than two Boolean ports.
+
+## Compact compiled-body typed module execution
+
+The per-instance operation-inlining limitation is now removed for the bounded
+tested module trees. Eight typed leaf instances share one parsed four-operation
+leaf body. Each instance retains only typed module metadata and phase-message
+addresses. Forward and inverse execution reconstruct one transient native
+operation descriptor at a time and relocates the shared body's addresses into
+the instance carrier region.
+
+The depth-four balanced tree reports:
+
+```text
+leaf instances                                      8
+composite modules                                   7
+unique leaf sources                                 1
+persistent per-instance native operation records    0
+persistent shared leaf operation records             4
+persistent composite module descriptors              7
+simultaneous transient operation records              1
+executed native operations                          39
+resident operation messages                         39
+carrier cells                                      320
+primary root                                  [0,2,2,0]
+reuse root                                    [0,1,1,1]
+maximum correct restoration           2.00148302124e-16
+```
+
+The expanded typed backend retains 39 native-operation records for the same
+tree and produces the same boundaries. The compact executor retains the
+actual child `final_start` addresses, inverses parent operations before
+children, and runs the unrelated reuse program on the same restored carrier
+allocation. Wrong-boundary and omitted-parent inverses each leave error
+`1.73205080757`.
+
+Independent review found and caused repair of two evidence defects. The
+resource ledger now counts the four-value retained root boundary factor,
+four-value wrong-inverse rotation, 52-value maximum operator workspace,
+carrier plus comparison snapshot, both concurrently loaded typed sources,
+both leaf definitions, and both layouts. The no-smuggle qualifier now enforces
+an exact runtime output-key allowlist and rejects output sinks before the
+declared root projection. The shallow case also proves that definition-reuse
+reporting is dynamic rather than hardcoded.
+
+This establishes:
+
+```text
+COMPACT_COMPILED_BODY_TYPED_RELATIONAL_MODULE_EXECUTION
+```
+
+only for shared compiled leaf bodies in bounded software module trees.
+Composite descriptors and all 39 phase-history messages remain
+instance-specific, so this is not compact carrier/history or constant-space
+recursion. It does not establish interfaces wider than two Boolean ports,
+arbitrary topology or arity, advantage, physical phase execution, Small Wall
+crossing, or unlimited catalytic computation.
+
+The next experiment is a native width-two separator: 16-cell four-port
+Boolean/F3 relations composed by one reusable `CONTRACT2` body, with the
+16-cell intermediate retained unresolved and consumed directly before actual
+inverse restoration and cross-program reuse. Its exponential
+separator-width resource law must remain explicit.
