@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `5.0`
+**Roadmap version:** `5.1`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
-**Current highest milestone:** `CATVM_WIDTH2_OPEN_INTERMEDIATE_CONTRACT2_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND`
-**Current claim ceiling:** `SOFTWARE_ENFORCED_FIXED_WIDTH2_CATVM_CONTRACT2_CHAIN_REFERENCE_ONLY`
+**Current highest milestone:** `ALGEBRAIC_PROJECTED_AFFINE_COMPACT_FULL_RELATION_CLOSURE_ESTABLISHED`
+**Current claim ceiling:** `BOUNDED_PROJECTED_AFFINE_F2_RELATION_SUBCATEGORY_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -84,6 +84,7 @@ ALGEBRAIC_COMPACT_TYPED_RELATIONAL_MODULE_EXECUTION_ESTABLISHED
 ALGEBRAIC_WIDTH2_RELATIONAL_PHASE_CONTRACTION_ESTABLISHED
 ALGEBRAIC_WIDTH3_RANK2_LAZY_TT_RELATION_COMPOSITION_ESTABLISHED
 CATVM_WIDTH2_OPEN_INTERMEDIATE_CONTRACT2_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
+ALGEBRAIC_PROJECTED_AFFINE_COMPACT_FULL_RELATION_CLOSURE_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -131,6 +132,7 @@ native two-shared-port relational contraction
 resident width-two intermediate handoff
 genuinely coupled width-three rank-two TT input relations
 exact lazy composition to sparse resident boundary invariants
+compact complete projected-affine relation closure
 ```
 
 Its strongest bounded architecture is:
@@ -148,6 +150,7 @@ public typed series-parallel relational geometry
 -> enforced CATVM custody for the actual resident width-two intermediate
 -> factorized width-three rank-two relation inputs
 -> exact lazy sparse-boundary contraction
+-> exact compact full-boundary closure for projected-affine F2 relations
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -185,7 +188,9 @@ factorized width-three relation inputs
 lazy factorized relational closure
     ESTABLISHED_FOR_EIGHT_PREDECLARED_SPARSE_BOUNDARY_COEFFICIENTS
 compact separator storage
-    PARTIAL_INPUT_COMPRESSION_FULL_OUTPUT_NOT_ESTABLISHED
+    ESTABLISHED_FOR_PROJECTED_AFFINE_F2_SUBCATEGORY_GENERAL_CASE_OPEN
+factor-preserving compact full-relation closure
+    ESTABLISHED_FOR_PROJECTED_AFFINE_F2_SUBCATEGORY_ONLY
 C5 advantage
     NOT_ESTABLISHED
 ```
@@ -410,7 +415,7 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-FACTOR_PRESERVING_COMPACT_FULL_RELATION_CLOSURE
+OBLIVIOUS_PHASE_NATIVE_GENERAL_AFFINE_RELATION_ELIMINATION
 ```
 
 The next crossing is not:
@@ -442,18 +447,19 @@ after three norms  16,777,216
 
 It establishes compact coupled inputs and exact sparse lazy contraction, not a
 compact full output relation. The fixed two-`CONTRACT2` chain is now enclosed
-behind the proven CATVM custody boundary: its actual 16-cell intermediate
-remains resident and unresolved, inverse restoration and reuse pass, and the
-original CATVM proof regresses cleanly. The immediate selected experiment is
-therefore the factor-preserving full-boundary closure question:
+behind the proven CATVM custody boundary. A separate projected-affine F2
+subcategory now also preserves its complete full relation in `q*(q+1)` phase
+coefficients through exact native composition, with genuinely bi-many free
+fibres and scaling through quotient rank 64. The next experiment must remove
+that subcategory's quotient-only restriction:
 
 ```text
-native contraction without dense 2^(2w) message materialization
-closure laws that preserve factor structure where valid
-explicit rank or treewidth growth when factor structure does not close
-elimination-order discovery without compiler-side solving
-general relation signatures without truth-table materialization
-resource growth versus separator width, message arity, and topology
+general affine equation systems without dense relation materialization
+fixed coefficient-oblivious shared-interface elimination
+phase-resident pivot selection without host coefficient branching
+canonical compact full affine boundary including empty and universal cases
+identical operation topology across rank and pivot patterns
+resource growth versus width, equation rank, and fill
 ```
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without

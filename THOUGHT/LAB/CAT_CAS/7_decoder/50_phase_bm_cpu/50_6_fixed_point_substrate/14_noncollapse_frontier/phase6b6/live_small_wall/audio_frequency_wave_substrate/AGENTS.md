@@ -44,13 +44,13 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_WIDTH2_OPEN_INTERMEDIATE_CONTRACT2_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
+ALGEBRAIC_PROJECTED_AFFINE_COMPACT_FULL_RELATION_CLOSURE_ESTABLISHED
 ```
 
 Claim ceiling:
 
 ```text
-SOFTWARE_ENFORCED_FIXED_WIDTH2_CATVM_CONTRACT2_CHAIN_REFERENCE_ONLY
+BOUNDED_PROJECTED_AFFINE_F2_RELATION_SUBCATEGORY_REFERENCE_ONLY
 ```
 
 The strongest current bounded architecture is:
@@ -67,6 +67,7 @@ public typed series-parallel relational geometry
 -> native two-shared-port contraction with a resident 16-cell intermediate
 -> width-three rank-two TT input relations
 -> exact lazy sparse-boundary contraction
+-> compact full-boundary projected-affine relation closure
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -131,7 +132,21 @@ the restored allocation. Wrong, missing, and applicable reordered inverses,
 intermediate projection, protocol smuggling, and same-UID process inspection
 all discriminate. Snapshot reload is separately labeled, and the original
 four-cell CATVM proof regresses cleanly. This is a fixed dense width-two
-software enclosure, not compact full-relation closure or arbitrary CATVM.
+software enclosure, not compact full-relation closure for `CONTRACT2` or
+arbitrary CATVM.
+
+The first factor-preserving complete-boundary family is also established.
+Projected-affine F2 relations retain an invertible `q*q` quotient action and
+`q` offset coefficients while leaving `f` fibre bits free. Native phase
+matrix composition writes actual resident `H`, the parent consumes it
+directly, every final descriptor coefficient is decoded, and actual inverse
+restoration plus unrelated reuse pass. At `q=8, f=4`, the 72 phase
+coefficients denote a genuinely bi-many relation over two 12-bit ports. The
+minimum nonabelian family passes all 576 ordered pair closures and 13,824
+associativity triples; phase/reference scaling matches through `q=64, f=20`,
+where 4,160 coefficients replace a dense exponent-168 boundary. This is
+compact full closure only for quotient-affine relations that ignore free
+kernel coordinates, not general affine-system or nonlinear closure.
 
 A general holographic relational computer, arbitrary graph closure, C5
 advantage, root/kernel secrecy, physical phase computation, and unlimited
@@ -213,7 +228,7 @@ Verification follows a substantive result. One focused independent review is nor
 Selected frontier:
 
 ```text
-FACTOR_PRESERVING_COMPACT_FULL_RELATION_CLOSURE
+OBLIVIOUS_PHASE_NATIVE_GENERAL_AFFINE_RELATION_ELIMINATION
 ```
 
 The next crossing is:
@@ -230,12 +245,12 @@ compact compiled-body typed relational modules
 Investigate, without imposing a rigid sequence:
 
 ```text
-native contraction without dense 2^(2w) message materialization
-closure laws that preserve factor structure where valid
-explicit rank or treewidth growth when factor structure does not close
-elimination-order discovery without compiler-side solving
-general relation signatures without truth-table materialization
-resource growth versus separator width, message arity, and topology
+general affine equations without dense relation materialization
+fixed coefficient-oblivious shared-interface elimination
+phase-resident pivot controls without host branching
+canonical empty, universal, partial, and many-to-many boundaries
+identical operation topology across rank and pivot patterns
+resource growth versus width, equation rank, and fill
 ```
 
 Another module-tree depth or dense separator-width probe is not meaningful

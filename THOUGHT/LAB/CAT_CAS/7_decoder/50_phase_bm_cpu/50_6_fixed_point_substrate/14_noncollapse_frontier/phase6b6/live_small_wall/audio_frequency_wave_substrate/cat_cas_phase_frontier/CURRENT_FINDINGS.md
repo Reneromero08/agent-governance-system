@@ -1401,3 +1401,122 @@ The selected frontier returns to the representation barrier:
 seek a relation family or exact representation whose complete surviving
 boundary remains factorized after native closure; another dense-width record
 or sparse-only query does not resolve that blocker.
+
+## Projected-affine compact full relation closure
+
+The first exact factor-preserving full-boundary family is now resident on the
+phase carrier. A typed port has `q` quotient bits and `f` free fibre bits, and
+the relation:
+
+```text
+R(A,a) = {(x,y) : pi(y) = A pi(x) XOR a}
+```
+
+is retained as `q*q` binary matrix coefficients plus `q` offset coefficients.
+For invertible `A`, every source has `2^f` targets and every target has `2^f`
+sources. The free fibres therefore make the complete relation genuinely
+many-to-many in both directions without materializing a fibre value or
+witness.
+
+Composition closes exactly:
+
+```text
+R(B,b) o R(A,a) = R(B*A, B*a XOR b)
+```
+
+Each Boolean coefficient remains an F3 phase symbol. Native
+`symbol_product` supplies coefficient AND, and:
+
+```text
+lock(x * y * symbol_product(x,y))
+```
+
+supplies Boolean XOR without decoding. The implemented chain writes the first
+complete descriptor to actual resident `H`, consumes that same `H` in the
+second composition, projects every final descriptor coefficient, then
+recomputes and reverses parent before child. No sparse selector replaces the
+full boundary.
+
+The accepted `q=8, f=4` transaction reports:
+
+```text
+port bits                              12
+degree in each direction               16
+factor coefficients                    72
+dense pair/coefficient exponent        24
+carrier cells                          432
+primary full-boundary hash  33f962d84bbdd8db
+reuse full-boundary hash    1b6d1f9d91bbe788
+same-carrier transactions              130
+maximum restoration error   2.48253415325e-16
+```
+
+Both 72-coefficient vectors match a separately compiled compact GF2
+reference. Wrong, missing, and applicable reordered inverses fail;
+ordinary-F3-sum and reversed-composition controls change the complete
+boundary while reversing their own altered histories. Projection of `H` and
+null-carrier execution reject. Snapshot reload remains a separate weaker
+path.
+
+The minimum nonabelian `q=2, f=1` family contains 24 compact affine relations.
+The phase engine passes:
+
+```text
+ordered pair closures          576 / 576
+associativity triples       13,824 / 13,824
+retained relation lookups         0
+tuple/assignment/witness          0 / 0 / 0
+```
+
+The two parenthesizations use different resident intermediates and agree on
+the complete boundary. This is not an enumeration of fibre assignments or
+relation tuples.
+
+Scaling builds at quotient ranks `2,4,8,16,32,64` match the independent
+reference. At `q=64, f=20`:
+
+```text
+port bits                              84
+factor coefficients                 4,160
+carrier cells                      24,960
+live carrier bytes                798,720
+dense pair/coefficient exponent       168
+symbol products per transaction  2,129,920
+restoration error        2.22044604925e-16
+```
+
+The exact resource law is quadratic descriptor/carrier storage and cubic
+native composition. No advantage over ordinary compact binary matrix
+arithmetic is claimed. Accepted `q=8` accounting records 27,648 carrier-plus-
+comparison heap bytes, a 5,776-byte compiler-measured nested stack chain, and
+a conservative current-ABI total of 33,424 bytes.
+
+Focused review independently reproduced both `q=8` boundaries, verified
+noncommutation and bi-many fibre semantics, and closed two evidence findings:
+the qualifier now hashes itself, and the documentation limits heap/stack
+accounting to the accepted `q=8` ABI while scaling claims remain tied to
+explicitly measured laws.
+
+This establishes:
+
+```text
+BOUNDED_PROJECTED_AFFINE_PHASE_RELATION_COMPOSITION_WITH_COMPACT_FULL_BOUNDARY
+```
+
+with ceiling:
+
+```text
+BOUNDED_PROJECTED_AFFINE_F2_RELATION_SUBCATEGORY_REFERENCE_ONLY
+```
+
+Compact closure holds because the family ignores free kernel coordinates and
+acts invertibly on the quotient. It does not establish kernel-sensitive or
+general affine-system projection, nonlinear compact closure, arbitrary
+relation topology, advantage, CATVM custody for this new family, physical
+execution, Small Wall crossing, or unlimited catalytic computation.
+
+The selected next experiment is
+`OBLIVIOUS_PHASE_NATIVE_GENERAL_AFFINE_RELATION_ELIMINATION`: represent general
+open GF2 affine equation systems in phase cells and eliminate a shared
+interface with a fixed coefficient-oblivious schedule, phase-resident pivot
+controls, no host-selected pivots, and a complete canonical affine boundary.
