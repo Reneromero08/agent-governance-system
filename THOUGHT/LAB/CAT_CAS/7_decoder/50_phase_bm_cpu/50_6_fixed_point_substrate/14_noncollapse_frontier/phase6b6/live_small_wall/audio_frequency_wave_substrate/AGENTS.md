@@ -44,13 +44,13 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-ALGEBRAIC_WIDTH3_RANK2_LAZY_TT_RELATION_COMPOSITION_ESTABLISHED
+CATVM_WIDTH2_OPEN_INTERMEDIATE_CONTRACT2_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
 ```
 
 Claim ceiling:
 
 ```text
-BOUNDED_SPARSE_BOUNDARY_LAZY_TT_RELATION_COMPOSITION_REFERENCE_ONLY
+SOFTWARE_ENFORCED_FIXED_WIDTH2_CATVM_CONTRACT2_CHAIN_REFERENCE_ONLY
 ```
 
 The strongest current bounded architecture is:
@@ -120,6 +120,18 @@ decoded. Actual inverse restoration, an unrelated program, and 34 alternating
 same-allocation transactions restore below `2.5e-16`. Exact eager ranks grow
 `2 -> 4 -> 8 -> 64 -> 4096 -> 16777216`, so no compact full `H`, bounded-rank
 closure, or scaling advantage is claimed.
+
+The same protected CATVM service law now encloses the native width-two
+operator. `F` writes the actual 16-cell `H` into the carrier, `G` consumes
+those cells directly, and only the 16-cell final `Z` is projected. The locked
+machine mapping also owns and clears the 240-complex contraction workspace.
+Actual parent-before-child inverse execution restores one carrier through 258
+accepted generations below `8.7e-16`; a different width-two program consumes
+the restored allocation. Wrong, missing, and applicable reordered inverses,
+intermediate projection, protocol smuggling, and same-UID process inspection
+all discriminate. Snapshot reload is separately labeled, and the original
+four-cell CATVM proof regresses cleanly. This is a fixed dense width-two
+software enclosure, not compact full-relation closure or arbitrary CATVM.
 
 A general holographic relational computer, arbitrary graph closure, C5
 advantage, root/kernel secrecy, physical phase computation, and unlimited
@@ -201,7 +213,7 @@ Verification follows a substantive result. One focused independent review is nor
 Selected frontier:
 
 ```text
-CATVM_WIDTH2_ENFORCED_OPEN_INTERMEDIATE_CONTRACTION
+FACTOR_PRESERVING_COMPACT_FULL_RELATION_CLOSURE
 ```
 
 The next crossing is:

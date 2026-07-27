@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `4.9`
+**Roadmap version:** `5.0`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
-**Current highest milestone:** `ALGEBRAIC_WIDTH3_RANK2_LAZY_TT_RELATION_COMPOSITION_ESTABLISHED`
-**Current claim ceiling:** `BOUNDED_SPARSE_BOUNDARY_LAZY_TT_RELATION_COMPOSITION_REFERENCE_ONLY`
+**Current highest milestone:** `CATVM_WIDTH2_OPEN_INTERMEDIATE_CONTRACT2_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND`
+**Current claim ceiling:** `SOFTWARE_ENFORCED_FIXED_WIDTH2_CATVM_CONTRACT2_CHAIN_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -83,6 +83,7 @@ ALGEBRAIC_RECURSIVE_TYPED_RELATIONAL_MODULE_PHASE_ESTABLISHED
 ALGEBRAIC_COMPACT_TYPED_RELATIONAL_MODULE_EXECUTION_ESTABLISHED
 ALGEBRAIC_WIDTH2_RELATIONAL_PHASE_CONTRACTION_ESTABLISHED
 ALGEBRAIC_WIDTH3_RANK2_LAZY_TT_RELATION_COMPOSITION_ESTABLISHED
+CATVM_WIDTH2_OPEN_INTERMEDIATE_CONTRACT2_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -144,6 +145,7 @@ public typed series-parallel relational geometry
 -> bounded recursive module trees
 -> shared compiled leaf-body execution without per-instance native records
 -> native width-two separator contraction
+-> enforced CATVM custody for the actual resident width-two intermediate
 -> factorized width-three rank-two relation inputs
 -> exact lazy sparse-boundary contraction
 -> internal-port closure
@@ -170,6 +172,8 @@ idempotent relational boundary
     PARTIAL_RESTRICTED_CLASS_ESTABLISHED_GENERAL_LAW_OPEN
 CATVM open-intermediate composition
     ESTABLISHED_BOUNDED_LINUX_USERSPACE_PHASE_BACKEND
+CATVM width-two open-intermediate contraction
+    ESTABLISHED_FIXED_TWO_CONTRACT2_CHAIN_WITH_RESIDENT_16_CELL_HANDOFF
 recursive typed relational modules
     ESTABLISHED_BOUNDED_DEPTH_THREE_DIRECT_PHASE_HANDOFF
 compact recursive module execution
@@ -406,7 +410,7 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-CATVM_WIDTH2_ENFORCED_OPEN_INTERMEDIATE_CONTRACTION
+FACTOR_PRESERVING_COMPACT_FULL_RELATION_CLOSURE
 ```
 
 The next crossing is not:
@@ -437,9 +441,11 @@ after three norms  16,777,216
 ```
 
 It establishes compact coupled inputs and exact sparse lazy contraction, not a
-compact full output relation. The immediate selected experiment now encloses
-the already qualified 16-cell width-two intermediate behind the proven CATVM
-custody boundary. In parallel, the unresolved scientific questions remain:
+compact full output relation. The fixed two-`CONTRACT2` chain is now enclosed
+behind the proven CATVM custody boundary: its actual 16-cell intermediate
+remains resident and unresolved, inverse restoration and reuse pass, and the
+original CATVM proof regresses cleanly. The immediate selected experiment is
+therefore the factor-preserving full-boundary closure question:
 
 ```text
 native contraction without dense 2^(2w) message materialization

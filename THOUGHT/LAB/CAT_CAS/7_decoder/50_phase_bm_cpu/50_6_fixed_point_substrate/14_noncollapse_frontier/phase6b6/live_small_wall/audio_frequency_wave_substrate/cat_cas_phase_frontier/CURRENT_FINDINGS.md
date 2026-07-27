@@ -1314,3 +1314,90 @@ the already qualified two-`CONTRACT2` chain and its actual 16-cell unresolved
 intermediate behind the proven Linux custody boundary. Factor-preserving
 compact full-relation closure remains the next representation blocker after
 that enforced transaction.
+
+## Enforced CATVM width-two open-intermediate contraction
+
+The dense width-two relation engine now runs behind the protected CATVM
+controller/service boundary. The controller sends 48 public F3 coefficients
+and fixed typed commands, but it neither links the phase kernel nor contains
+an expected boundary. Inside the carrier-owning service:
+
+```text
+H = CONTRACT2(F,G)          resident cells 48..63
+Z = CONTRACT2(actual H,K)   resident cells 64..79
+PROJECT Z                   final 16 coefficients only
+```
+
+The actual 16-cell `H` is never decoded or serialized. The service's private,
+locked, non-dumpable machine mapping owns the 96-cell carrier, canonical
+machine metadata, and all 240 complex `CONTRACT2` workspace values. Every
+contraction requires an exactly zero workspace on entry and securely clears
+it on return.
+
+The accepted inverse removes the public boundary, recomputes the parent factor
+from actual `H` and `K`, removes the parent, removes `K`, recomputes the child
+factor from actual `F` and `G`, then removes the child, `G`, and `F`.
+Canonical equality includes carrier cells, workspace, topology and morphism
+digests, lease, carrier-creation count, morphism stack, open-port and pending
+state, restoration generation, receive buffer, and backend queue.
+
+The accepted run reports:
+
+```text
+primary boundary             [1,0,2,1,2,1,2,1,0,0,1,1,1,1,1,1]
+reuse boundary               [1,0,2,1,0,0,1,1,2,1,2,1,1,1,1,1]
+carrier creations            1
+accepted generations         258
+maximum restoration error    8.61764809305e-16
+predeclared tolerance        2e-12
+native CONTRACT2 calls       1,032
+locked in-place mapping      8,192 bytes
+```
+
+Wrong, missing, and applicable child-before-parent inverses each leave
+`1.73205080757` carrier error. Projection of the intermediate, null carrier,
+strict-protocol attacks, and same-UID `/proc`, `process_vm_readv`, `ptrace`,
+and `pidfd_getfd` inspection all fail. Service stdout and stderr remain empty,
+the sole decoder projects only `Z`, and the controller binary excludes the
+phase symbols. Strict compilation, static analysis, ASan, UBSan, leak checks,
+deterministic replay, direct branch-native parity, exact output allowlists,
+and the original four-cell CATVM regression pass.
+
+Snapshot reload remains a separate weaker baseline:
+
+```text
+CATVM_WIDTH2_SNAPSHOT_BACKED_TRANSACTIONAL_REUSE_ESTABLISHED
+```
+
+It maps another 4,096 locked bytes, writes and reloads 1,536 carrier bytes per
+transaction, performs no actual inverse, and is not credited toward the
+stronger claim. Warm direct-process, inert-boundary, snapshot, and in-place
+paths are all measured; no performance advantage is claimed.
+
+Focused independent review found no substantive scientific, security, or code
+defect and bound its verdict to the final source/result hashes plus a passing
+regression of the original CATVM proof.
+
+This establishes:
+
+```text
+CATVM_WIDTH2_OPEN_INTERMEDIATE_CONTRACT2_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
+```
+
+with ceiling:
+
+```text
+SOFTWARE_ENFORCED_FIXED_WIDTH2_CATVM_CONTRACT2_CHAIN_REFERENCE_ONLY
+```
+
+It does not establish compact separator storage, factor-preserving full
+relation closure, width-three CATVM custody, arbitrary width or topology,
+arbitrary CATVM programs, root/kernel or microarchitectural secrecy,
+computational advantage, physical execution, Small Wall crossing, or
+unlimited catalytic computation.
+
+The selected frontier returns to the representation barrier:
+`FACTOR_PRESERVING_COMPACT_FULL_RELATION_CLOSURE`. The next experiment must
+seek a relation family or exact representation whose complete surviving
+boundary remains factorized after native closure; another dense-width record
+or sparse-only query does not resolve that blocker.

@@ -9,12 +9,21 @@
  * post-accept seccomp allowlist before accepting any transaction command.
  */
 
+#ifdef CATVM_WIDE2_BUILD
+#include "catvm_wide2_core.h"
+#define CATVM_PROTOCOL_NAME "CATVM_WIDE2_PHASE_1"
+#define CATVM_MAXIMUM_TEMPORARY_COMPLEX_VALUES 240U
+#else
 #include "catvm_phase_core.h"
+#define CATVM_PROTOCOL_NAME "CATVM_PHASE_1"
+#define CATVM_MAXIMUM_TEMPORARY_COMPLEX_VALUES 52U
+#endif
 
 #include <errno.h>
 #include <linux/prctl.h>
 #include <seccomp.h>
 #include <signal.h>
+#include <stdarg.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -338,6 +347,69 @@ static int send_response(int client, const char *response) {
     return send(client, response, bytes, MSG_NOSIGNAL) == (ssize_t)bytes;
 }
 
+static int append_response(
+    char response[RESPONSE_CAPACITY],
+    size_t *used,
+    const char *format,
+    ...
+) {
+    if (*used >= RESPONSE_CAPACITY) {
+        return 0;
+    }
+    va_list arguments;
+    va_start(arguments, format);
+    const int written = vsnprintf(
+        response + *used,
+        RESPONSE_CAPACITY - *used,
+        format,
+        arguments
+    );
+    va_end(arguments);
+    if (
+        written < 0
+        || (size_t)written >= RESPONSE_CAPACITY - *used
+    ) {
+        return 0;
+    }
+    *used += (size_t)written;
+    return 1;
+}
+
+static int format_projection_response(
+    char response[RESPONSE_CAPACITY],
+    const struct catvm_projection *projection
+) {
+    size_t used = 0U;
+    if (!append_response(
+        response,
+        &used,
+        "{\"ok\":true,\"event\":\"FINAL_BOUNDARY\","
+        "\"port\":\"Z\",\"coefficients\":["
+    )) {
+        return 0;
+    }
+    for (size_t index = 0U; index < CATVM_RELATION_CELLS; ++index) {
+        if (!append_response(
+            response,
+            &used,
+            "%s%d",
+            index == 0U ? "" : ",",
+            projection->coefficient[index]
+        )) {
+            return 0;
+        }
+    }
+    return append_response(
+        response,
+        &used,
+        "],\"fnv1a64\":\"%016llx\","
+        "\"maximum_root_error\":%.12g,"
+        "\"decoded_intermediate_coefficients\":0}",
+        (unsigned long long)projection->hash,
+        projection->maximum_root_error
+    );
+}
+
 static int parse_program(
     const char *request,
     struct catvm_program *program
@@ -424,14 +496,15 @@ static int serve(
             const int written = snprintf(
                 response,
                 sizeof(response),
-                "{\"ok\":true,\"protocol\":\"CATVM_PHASE_1\","
+                "{\"ok\":true,\"protocol\":\"" CATVM_PROTOCOL_NAME "\","
                 "\"backend\":\"%s\",\"carrier\":%s,"
                 "\"carrier_cells\":%u,\"physical_complex_values\":%u,"
                 "\"logical_carrier_bytes\":%zu,"
                 "\"mapped_locked_bytes\":%zu,"
                 "\"compiled_program_bytes\":%zu,"
                 "\"compiled_morphisms\":2,"
-                "\"maximum_temporary_complex_values\":52,"
+                "\"compiled_morphism_descriptor_bytes\":%zu,"
+                "\"maximum_temporary_complex_values\":%u,"
                 "\"carrier_creations\":%llu,"
                 "\"retained_inverse_factors\":0,"
                 "\"memory_guard\":\"NON_DUMPABLE_LOCKED_PRIVATE\","
@@ -449,6 +522,8 @@ static int serve(
                     : 0U,
                 mapped_locked_bytes,
                 sizeof(struct catvm_program),
+                2U * sizeof(uint64_t),
+                CATVM_MAXIMUM_TEMPORARY_COMPLEX_VALUES,
                 (unsigned long long)machine->carrier_creation_count,
                 SECCOMP_STATUS
             );
@@ -567,27 +642,12 @@ static int serve(
                 }
                 continue;
             }
-            const int written = snprintf(
-                response,
-                sizeof(response),
-                "{\"ok\":true,\"event\":\"FINAL_BOUNDARY\","
-                "\"port\":\"Z\","
-                "\"coefficients\":[%d,%d,%d,%d],"
-                "\"fnv1a64\":\"%016llx\","
-                "\"maximum_root_error\":%.12g,"
-                "\"decoded_intermediate_coefficients\":0}",
-                projection.coefficient[0],
-                projection.coefficient[1],
-                projection.coefficient[2],
-                projection.coefficient[3],
-                (unsigned long long)projection.hash,
-                projection.maximum_root_error
+            const int written = format_projection_response(
+                response, &projection
             );
             secure_zero(&projection, sizeof(projection));
             if (
-                written <= 0
-                || (size_t)written >= sizeof(response)
-                || !send_response(client, response)
+                !written || !send_response(client, response)
             ) {
                 break;
             }
@@ -640,11 +700,15 @@ static int serve(
                 "\"invariant_state_exact\":%s,"
                 "\"generation_transition_exact\":%s,"
                 "\"transient_state_exact\":%s,"
+                "\"contract2_workspace_cleared\":%s,"
                 "\"generation\":%llu,"
                 "\"carrier_creations\":%llu,"
                 "\"native_compose_calls\":%llu,"
                 "\"native_intersection_calls\":%llu,"
+                "\"native_contract2_calls\":%llu,"
                 "\"native_symbol_products\":%llu,"
+                "\"coefficient_accumulation_additions\":%llu,"
+                "\"restriction_and_intersection_additions\":%llu,"
                 "\"phase_cell_updates\":%llu,"
                 "\"inverse_factor_recomputations\":%llu,"
                 "\"snapshot_bytes_written\":%llu,"
@@ -664,6 +728,7 @@ static int serve(
                 bool_json(restoration.invariant_state_exact),
                 bool_json(restoration.generation_transition_exact),
                 bool_json(restoration.transient_state_exact),
+                bool_json(restoration.workspace_cleared),
                 (unsigned long long)restoration.generation_after,
                 (unsigned long long)machine->carrier_creation_count,
                 (unsigned long long)
@@ -671,7 +736,14 @@ static int serve(
                 (unsigned long long)
                     machine->resources.native_intersection_calls,
                 (unsigned long long)
+                    machine->resources.native_contract2_calls,
+                (unsigned long long)
                     machine->resources.native_symbol_products,
+                (unsigned long long)
+                    machine->resources.coefficient_accumulation_additions,
+                (unsigned long long)
+                    machine->resources
+                        .restriction_and_intersection_additions,
                 (unsigned long long)
                     machine->resources.phase_cell_updates,
                 (unsigned long long)

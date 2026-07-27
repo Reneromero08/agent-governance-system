@@ -1,12 +1,13 @@
-#ifndef CATVM_PHASE_CORE_H
-#define CATVM_PHASE_CORE_H
+#ifndef CATVM_WIDE2_CORE_H
+#define CATVM_WIDE2_CORE_H
 
 #include <complex.h>
 #include <stddef.h>
 #include <stdint.h>
 
-#define CATVM_RELATION_CELLS 4U
-#define CATVM_CARRIER_CELLS 24U
+#define CATVM_RELATION_CELLS 16U
+#define CATVM_CARRIER_CELLS 96U
+#define CATVM_CONTRACT2_WORKSPACE_VALUES 240U
 #define CATVM_RESTORATION_TOLERANCE 2.0e-12
 #define CATVM_ROOT_TOLERANCE 4.0e-10
 #define CATVM_CONTROL_MINIMUM 1.0e-3
@@ -88,6 +89,9 @@ struct catvm_restoration {
 struct catvm_machine {
     double complex baseline[CATVM_CARRIER_CELLS];
     double complex working[CATVM_CARRIER_CELLS];
+    double complex contract2_workspace[
+        CATVM_CONTRACT2_WORKSPACE_VALUES
+    ];
     double complex *snapshot;
     size_t snapshot_mapped_bytes;
     int snapshot_valid;
@@ -97,10 +101,13 @@ struct catvm_machine {
     enum catvm_machine_state state;
     uint64_t lease_id;
     uint64_t topology_digest;
+    uint64_t compiled_morphism_digest;
     uint64_t baseline_digest;
     uint64_t carrier_creation_count;
     uint64_t restoration_generation;
+    uint64_t morphism_stack[2];
     size_t morphism_depth;
+    size_t resident_internal_messages;
     int open_boundary;
     int program_loaded;
     int pending_operations;

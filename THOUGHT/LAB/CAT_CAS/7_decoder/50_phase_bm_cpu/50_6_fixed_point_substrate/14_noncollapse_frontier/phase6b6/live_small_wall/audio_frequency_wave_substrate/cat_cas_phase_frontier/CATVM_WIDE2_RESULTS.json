@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0.0",
+  "result": "PASS",
+  "claim": "CATVM_WIDTH2_OPEN_INTERMEDIATE_CONTRACT2_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
+  "claim_ceiling": "SOFTWARE_ENFORCED_FIXED_WIDTH2_CATVM_CONTRACT2_CHAIN_REFERENCE_ONLY",
+  "scope": "BOUNDED_LINUX_USERSPACE_SOFTWARE_PHASE_BACKEND",
+  "transaction": {
+    "F": "NATIVE_BOOLEAN_F3_CONTRACT2",
+    "intermediate": "H_16_PHASE_CELLS_RESIDENT_UNDECODED",
+    "G": "NATIVE_BOOLEAN_F3_CONTRACT2_CONSUMING_ACTUAL_H",
+    "projected_boundary": "Z_16_COEFFICIENTS_ONLY",
+    "restoration": "ACTUAL_PARENT_INVERSE_THEN_ACTUAL_CHILD_INVERSE",
+    "reuse": "DIFFERENT_WIDTH2_PROGRAM_ON_SAME_ACTUAL_RESTORED_CARRIER"
+  },
+  "primary_boundary_coefficients": [1, 0, 2, 1, 2, 1, 2, 1, 0, 0, 1, 1, 1, 1, 1, 1],
+  "primary_boundary_fnv1a64": "f744cbb884ffd4c9",
+  "reuse_boundary_coefficients": [1, 0, 2, 1, 0, 0, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1],
+  "reuse_boundary_fnv1a64": "399095156cf6be91",
+  "carrier": {
+    "logical_complex_cells": 96,
+    "physical_complex_values": 192,
+    "logical_bytes": 3072,
+    "mapped_locked_bytes": 8192,
+    "workspace_complex_values": 240,
+    "workspace_cleared_exactly": true,
+    "creation_count": 1
+  },
+  "restoration": {
+    "generations": 258,
+    "alternating_repeat_cycles": 256,
+    "maximum_abs_error": 8.61764809305e-16,
+    "predeclared_tolerance": 2e-12,
+    "invariant_state_exact": true,
+    "generation_transition_exact": true,
+    "transient_state_exact": true,
+    "workspace_cleared_exactly": true,
+    "snapshot_reload": false
+  },
+  "no_smuggle": {
+    "intermediate_decodes": 0,
+    "intermediate_projection_denied": true,
+    "service_stdout_bytes": 0,
+    "service_stderr_bytes": 0,
+    "strict_protocol": true,
+    "seccomp_allowlist_active": true,
+    "proc_mem_denied": true,
+    "proc_maps_denied": true,
+    "proc_fd_denied": true,
+    "process_vm_readv_denied": true,
+    "ptrace_denied": true,
+    "pidfd_getfd_denied": true,
+    "controller_not_linked_to_phase_core": true
+  },
+  "inverse_controls": {
+    "wrong_parent_restoration_error": 1.73205080757,
+    "missing_parent_restoration_error": 1.73205080757,
+    "reordered_noncommuting_restoration_error": 1.73205080757,
+    "all_discriminated": true
+  },
+  "resources": {
+    "public_program_coefficients": 48,
+    "compiled_program_bytes": 192,
+    "compiled_morphisms": 2,
+    "compiled_morphism_descriptor_bytes": 16,
+    "maximum_temporary_complex_values": 240,
+    "native_contract2_calls": 1032,
+    "native_symbol_products": 1849344,
+    "coefficient_accumulation_additions": 1849344,
+    "restriction_and_intersection_additions": 115584,
+    "phase_cell_updates": 49536,
+    "inverse_factor_recomputations": 516,
+    "snapshot_bytes_written": 0,
+    "snapshot_bytes_reloaded": 0,
+    "boundary_decodes": 4128,
+    "restoration_cell_checks": 24768,
+    "request_bytes": 33594,
+    "response_bytes": 354483,
+    "request_packets": 1557,
+    "response_packets": 1557
+  },
+  "snapshot_comparison": {
+    "claim": "CATVM_WIDTH2_SNAPSHOT_BACKED_TRANSACTIONAL_REUSE_ESTABLISHED",
+    "actual_inverse": false,
+    "snapshot_reload": true,
+    "mapped_locked_bytes": 12288,
+    "snapshot_bytes_written_per_transaction": 1536,
+    "snapshot_bytes_reloaded_per_transaction": 1536
+  },
+  "warm_average_transaction_ns": {
+    "direct_process_phase": 795698.125,
+    "isolated_inert_boundary": 55561.651,
+    "snapshot_catvm": 477140.074,
+    "in_place_catvm": 868223.335
+  },
+  "performance_advantage_claim": false,
+  "qualifier": {
+    "result": "PASS",
+    "compiler_builds": 8,
+    "sanitizers": "PASS_IN_PLACE_AND_SNAPSHOT",
+    "evidence_directory_at_run": "/tmp/catvm-wide2-final.Se7sRp",
+    "summary_sha256": "a707e85abe02f33aeea4b952aae31140a27a5cf9e29390c3c299e63a2c50f328",
+    "accepted_result_sha256": "5ff33e560dd470faad0b5fd0211a4f4ddb6b5dd481826730fd548ee2c12328d4",
+    "snapshot_result_sha256": "d14815782bb0b8470dc4bcea0c9e3439aabd26b0644101e6139f3c82c47f200d"
+  },
+  "base_catvm_compatibility": {
+    "result": "PASS",
+    "claim": "CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
+    "evidence_directory_at_run": "/tmp/catvm-base-final.UWiCQ3",
+    "summary_sha256": "42d5810f92c8f5142379cca296309c4691d1cf8768ecfd613238d02a16b59718"
+  },
+  "not_established": [
+    "COMPACT_SEPARATOR_STORAGE",
+    "WIDTH3_CATVM_CUSTODY",
+    "ARBITRARY_INTERFACE_WIDTH_OR_TOPOLOGY",
+    "ARBITRARY_CATVM_PROGRAMS",
+    "MULTI_CLIENT_ISOLATION",
+    "ROOT_OR_KERNEL_SECRECY",
+    "MICROARCHITECTURAL_SECRECY",
+    "GENERAL_HOLOGRAPHIC_RELATIONAL_COMPUTATION",
+    "COMPUTATIONAL_ADVANTAGE",
+    "PHYSICAL_WAVEFORM_OR_SILICON_COMPUTATION",
+    "SMALL_WALL_CROSSING",
+    "UNLIMITED_CATALYTIC_COMPUTATION"
+  ],
+  "terminal": false
+}

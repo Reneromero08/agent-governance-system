@@ -53,10 +53,46 @@ struct access_controls {
     int pidfd_getfd_denied;
 };
 
+#ifdef CATVM_WIDE2_CONTROLLER_BUILD
+#define CONTROLLER_CARRIER_CELLS 96U
+#define CONTROLLER_PHYSICAL_COMPLEX_VALUES 192U
+#define CONTROLLER_LOGICAL_CARRIER_BYTES 3072U
+#define CONTROLLER_IN_PLACE_MAPPED_BYTES 8192U
+#define CONTROLLER_SNAPSHOT_MAPPED_BYTES 12288U
+#define CONTROLLER_COMPILED_PROGRAM_BYTES 192U
+#define CONTROLLER_COMPILED_MORPHISM_DESCRIPTOR_BYTES 16U
+#define CONTROLLER_MAXIMUM_TEMPORARY_COMPLEX_VALUES 240U
+#define CONTROLLER_ACCEPTED_CLAIM \
+    "CATVM_WIDTH2_OPEN_INTERMEDIATE_CONTRACT2_COMPOSITION_" \
+    "ESTABLISHED_ON_PHASE_BACKEND"
+#define CONTROLLER_SNAPSHOT_CLAIM \
+    "CATVM_WIDTH2_SNAPSHOT_BACKED_TRANSACTIONAL_REUSE_ESTABLISHED"
+static const char PRIMARY_PROGRAM[] =
+    "SEAL 0 1 1 0 1 1 0 0 1 0 1 0 0 0 0 0 "
+    "1 1 2 0 1 1 0 0 2 0 2 0 0 0 0 0 "
+    "0 1 1 0 1 0 1 0 1 1 0 0 0 0 0 0";
+static const char REUSE_PROGRAM[] =
+    "SEAL 0 1 1 0 1 1 0 0 1 0 1 0 0 0 0 0 "
+    "1 1 2 0 1 1 0 0 2 0 2 0 0 0 0 0 "
+    "0 1 1 0 1 1 0 0 1 0 1 0 0 0 0 0";
+#else
+#define CONTROLLER_CARRIER_CELLS 24U
+#define CONTROLLER_PHYSICAL_COMPLEX_VALUES 48U
+#define CONTROLLER_LOGICAL_CARRIER_BYTES 768U
+#define CONTROLLER_IN_PLACE_MAPPED_BYTES 4096U
+#define CONTROLLER_SNAPSHOT_MAPPED_BYTES 8192U
+#define CONTROLLER_COMPILED_PROGRAM_BYTES 48U
+#define CONTROLLER_COMPILED_MORPHISM_DESCRIPTOR_BYTES 16U
+#define CONTROLLER_MAXIMUM_TEMPORARY_COMPLEX_VALUES 52U
+#define CONTROLLER_ACCEPTED_CLAIM \
+    "CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND"
+#define CONTROLLER_SNAPSHOT_CLAIM \
+    "CATVM_SNAPSHOT_BACKED_TRANSACTIONAL_REUSE_ESTABLISHED"
 static const char PRIMARY_PROGRAM[] =
     "SEAL 0 1 2 0 0 1 2 0 0 1 0 0";
 static const char REUSE_PROGRAM[] =
     "SEAL 2 1 1 0 0 1 2 0 0 0 1 0";
+#endif
 
 static void secure_zero(void *memory, size_t bytes) {
     volatile unsigned char *cursor = memory;
@@ -580,6 +616,11 @@ static int run_accepted_or_snapshot(
     double maximum_restoration_error = 0.0;
     uint64_t carrier_creation_count = 0U;
     uint64_t mapped_locked_bytes = 0U;
+    uint64_t carrier_cells = 0U;
+    uint64_t logical_carrier_bytes = 0U;
+    uint64_t compiled_program_bytes = 0U;
+    uint64_t compiled_morphism_descriptor_bytes = 0U;
+    uint64_t maximum_temporary_complex_values = 0U;
     struct timespec start;
     struct timespec finish;
 
@@ -603,10 +644,41 @@ static int run_accepted_or_snapshot(
             "\"mapped_locked_bytes\":",
             &mapped_locked_bytes
         )
-        || mapped_locked_bytes != (snapshot ? 8192U : 4096U)
-        || !response_has(response, "\"carrier_cells\":24")
-        || !response_has(response, "\"logical_carrier_bytes\":768")
-        || !response_has(response, "\"compiled_program_bytes\":48")
+        || mapped_locked_bytes != (
+            snapshot
+                ? CONTROLLER_SNAPSHOT_MAPPED_BYTES
+                : CONTROLLER_IN_PLACE_MAPPED_BYTES
+        )
+        || !response_uint64(
+            response, "\"carrier_cells\":", &carrier_cells
+        )
+        || carrier_cells != CONTROLLER_CARRIER_CELLS
+        || !response_uint64(
+            response,
+            "\"logical_carrier_bytes\":",
+            &logical_carrier_bytes
+        )
+        || logical_carrier_bytes != CONTROLLER_LOGICAL_CARRIER_BYTES
+        || !response_uint64(
+            response,
+            "\"compiled_program_bytes\":",
+            &compiled_program_bytes
+        )
+        || compiled_program_bytes != CONTROLLER_COMPILED_PROGRAM_BYTES
+        || !response_uint64(
+            response,
+            "\"compiled_morphism_descriptor_bytes\":",
+            &compiled_morphism_descriptor_bytes
+        )
+        || compiled_morphism_descriptor_bytes
+            != CONTROLLER_COMPILED_MORPHISM_DESCRIPTOR_BYTES
+        || !response_uint64(
+            response,
+            "\"maximum_temporary_complex_values\":",
+            &maximum_temporary_complex_values
+        )
+        || maximum_temporary_complex_values
+            != CONTROLLER_MAXIMUM_TEMPORARY_COMPLEX_VALUES
         || (!snapshot && !protocol_adversaries(transport, response))
         || clock_gettime(CLOCK_MONOTONIC, &start) != 0
         || !run_one(
@@ -708,10 +780,11 @@ static int run_accepted_or_snapshot(
         "\"primary_boundary\":%s,"
         "\"reuse_boundary\":%s,"
         "\"same_carrier_creation_count\":%llu,"
-        "\"carrier_cells\":24,\"physical_complex_values\":48,"
-        "\"logical_carrier_bytes\":768,\"mapped_locked_bytes\":%llu,"
-        "\"compiled_program_bytes\":48,\"compiled_morphisms\":2,"
-        "\"maximum_temporary_complex_values\":52,"
+        "\"carrier_cells\":%u,\"physical_complex_values\":%u,"
+        "\"logical_carrier_bytes\":%u,\"mapped_locked_bytes\":%llu,"
+        "\"compiled_program_bytes\":%u,\"compiled_morphisms\":2,"
+        "\"compiled_morphism_descriptor_bytes\":%u,"
+        "\"maximum_temporary_complex_values\":%u,"
         "\"restoration_generations\":%zu,"
         "\"alternating_repeat_cycles\":%zu,"
         "\"maximum_restoration_error\":%.12g,"
@@ -729,12 +802,18 @@ static int run_accepted_or_snapshot(
         "\"request_packets\":%llu,\"response_packets\":%llu}\n",
         snapshot ? "snapshot-baseline" : "accepted-in-place",
         snapshot
-            ? "CATVM_SNAPSHOT_BACKED_TRANSACTIONAL_REUSE_ESTABLISHED"
-            : "CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
+            ? CONTROLLER_SNAPSHOT_CLAIM
+            : CONTROLLER_ACCEPTED_CLAIM,
         primary_boundary,
         reuse_boundary,
         (unsigned long long)carrier_creation_count,
+        CONTROLLER_CARRIER_CELLS,
+        CONTROLLER_PHYSICAL_COMPLEX_VALUES,
+        CONTROLLER_LOGICAL_CARRIER_BYTES,
         (unsigned long long)mapped_locked_bytes,
+        CONTROLLER_COMPILED_PROGRAM_BYTES,
+        CONTROLLER_COMPILED_MORPHISM_DESCRIPTOR_BYTES,
+        CONTROLLER_MAXIMUM_TEMPORARY_COMPLEX_VALUES,
         repeat_cycles + 2U,
         repeat_cycles,
         maximum_restoration_error,
