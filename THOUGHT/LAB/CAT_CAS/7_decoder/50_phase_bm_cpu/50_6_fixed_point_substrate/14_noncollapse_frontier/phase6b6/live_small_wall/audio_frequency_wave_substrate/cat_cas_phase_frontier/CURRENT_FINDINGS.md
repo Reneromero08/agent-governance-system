@@ -2565,3 +2565,104 @@ depends on at least one operator that has itself been evicted, derive nested
 obligations and activation generations from topology, and close exact custody
 at activation depth greater than two without retaining decoded relation
 content.
+
+## Rank-2 recursive custody finishes the current affine scheduler
+
+The exact public fifteen-node graph already contains a rank-two dependency:
+`813` consumes rank-one operators `809,810`, and root `815` consumes `813`.
+The compiler derives ranks from public topology and selects the maximum rank,
+then lowest public ID. This chooses `813`; symmetric candidate `814` remains
+resident as an anchor rather than enlarging the calibration.
+
+The compiler emits a 28-action forward tape and mechanically derives a
+28-action literal reverse. After the established one-layer prefix constructs
+root `815`, it reconstructs dormant `809,810`, actually inverses and releases
+`813`, then actually inverses and releases those temporary children.
+Projection retains only `805,806,807,808,814,815`.
+
+Literal reversal reconstructs `809,810` as generation two, then reconstructs
+`813` from those actual resident values. It suspends the temporary children,
+later reconstructs them as generation three, and uses those actual values in
+the native inverse of rematerialized `813`. The nested frame depth is two;
+including pinned owners, activation-chain depth is three.
+
+Custody is now receipt-specific rather than one policy per public edge. Each
+receipt binds exact edge, ordinal, consumer activation, forward and inverse
+producer activations, and both action IDs. Exact receipts require the same
+slot, serial, and generation. Rebind receipts require the exact unconsumed
+compiler authorization, a structural obligation, the declared replacement
+generation, and a fresh serial. A changed generation or serial alone is
+insufficient.
+
+There are still 22 logical public edges with one forward/inverse transition
+each. The physical ledger closes:
+
+```text
+activation receipts                         40
+exact receipts                              29
+public-leaf rebind receipts                  4
+internal-operator rebind receipts            7
+multi-activation edges                      10
+second-or-later activation receipts         18
+maximum activation ordinal                   3
+```
+
+The four shared owners remain their original activation-zero generations.
+Their physical forward/inverse totals are `805=8/8`, `806=6/6`,
+`807=10/10`, and `808=4/4`.
+
+Nine working relation slots are both predicted and observed; an eight-slot
+build fails causally at clean pool exhaustion. Projection has six live
+working blocks. With `B(w)=4w^2+4w+1` and
+`W(w)=36w^2+11w+2`:
+
+```text
+rank-2 recursive scheduler = W(w) + 10B(w) = 76w^2 + 51w + 12
+one-layer scheduler        = W(w) +  9B(w) = 72w^2 + 47w + 11
+leaf-only scheduler        = W(w) + 12B(w) = 84w^2 + 59w + 14
+retain-all                 = W(w) + 16B(w) = 100w^2 + 75w + 18
+occurrence expansion       = W(w) + 52B(w) = 244w^2 + 219w + 54
+```
+
+The extra block relative to the one-layer calibration is the bounded cost of
+holding the sibling anchor and actual recursive operands simultaneously. At
+width sixteen the path uses 20,284 complex carrier cells and 649,088 live
+carrier bytes. Each transaction performs 20 native forward and 20 native
+inverse calls, 16 leaf encode calls, and 28 allocations/releases.
+
+Five semantic variants match the independent GF2 evaluator and one-layer
+predecessor at widths `3,4,8,12,16`, for twenty-five complete boundaries.
+Seventeen same-carrier transactions restore below `5.0e-16`. Strict,
+analyzer, sanitizer, deterministic replay, expanded no-smuggle tracing, and
+the complete predecessor qualifier pass.
+
+Controls reject a deep stale consumer with the same shared lease, deep stale
+producer, cross-edge rebind authorization swap, generation reuse, missing
+nested close, missing nested child, tape tamper, every intermediate/debug
+projection, null carrier, capacity eight, and wrong or missing root inverse.
+Snapshot remains a separately labelled weaker branch. Focused independent
+review reports no blocking finding.
+
+This establishes:
+
+```text
+BOUNDED_15_NODE_RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION_ESTABLISHED
+```
+
+with ceiling:
+
+```text
+BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_SINGLE_RANK2_BORROWER_28_FORWARD_28_REVERSE_ACTIONS_9_WORKING_SLOTS_10_PHYSICAL_BLOCKS_MAX_ACTIVATION_ORDINAL3_REFERENCE_ONLY
+```
+
+It does not establish both rank-two branches, automatic general-DAG
+pebbling, arbitrary topology, unbounded depth, CATVM enforcement for this
+scheduler, non-affine relations, advantage, physical execution, Small Wall
+crossing, or unlimited catalytic computation.
+
+Per the durable main-goal guardrail, this finishes the current affine
+scheduler calibration. The selected next experiment is CATVM enforcement of
+the automatically scheduled shared relational DAG behind a carrier-owning
+Unix-domain service. The controller may submit only the public manifest and
+program selection and receive only the final boundary plus content-oblivious
+custody receipts; it must never access action-time carrier state.

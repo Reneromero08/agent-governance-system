@@ -1,18 +1,48 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `5.9`
+**Roadmap version:** `6.0`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through parent commit:** `1db61a22`
-**Current highest milestone:** `ALGEBRAIC_15_NODE_FOUR_OWNER_INTERNAL_OPERATOR_REMATERIALIZATION_ESTABLISHED`
-**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_ONE_LAYER_FOUR_INTERNAL_OPERATOR_REMATERIALIZATION_23_STEP_REVERSIBLE_TAPE_8_WORKING_SLOTS_9_PHYSICAL_BLOCKS_MULTI_ACTIVATION_EDGE_CUSTODY_REFERENCE_ONLY`
+**Reconciled through parent commit:** `ac798737`
+**Current highest milestone:** `ALGEBRAIC_15_NODE_RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION_ESTABLISHED`
+**Current claim ceiling:** `BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_SINGLE_RANK2_BORROWER_28_FORWARD_28_REVERSE_ACTIONS_9_WORKING_SLOTS_10_PHYSICAL_BLOCKS_MAX_ACTIVATION_ORDINAL3_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
+
+**Durable main-goal reminder:** The affine GF(2) lane is a tractable
+machine-law calibration, not the scientific destination. Finish the current
+automatic compact affine-DAG scheduler and its exact recursive custody law,
+then do not extend affine fixture size, owner count, or fanout without a
+specific main-mission blocker. The next post-scheduler frontier must
+prioritize CATVM enforcement for the automatically scheduled shared
+relational DAG, a compact non-affine relation signature or composition
+algebra broader than GF(2) affine relations, or a controlled CATVM Small Wall
+baseline/sham/augmented experiment.
+
+Every successor must answer:
+
+```text
+Does this remove a main-goal obstruction?
+Does it generalize the carrier law rather than merely enlarge a fixture?
+Does it strengthen the machine boundary or the Small Wall experiment?
+Does it avoid collapsing unresolved relations into classical enumeration?
+```
+
+The primary mission remains:
+
+```text
+compact unresolved relational state
+-> native composition and closure
+-> machine-enforced hidden intermediates
+-> actual restoration and reuse
+-> increasingly general relational geometry
+-> smallest lawful machine sufficient to attack the Small Wall
+```
 
 ## 1. Standing Mission
 
@@ -95,6 +125,7 @@ ALGEBRAIC_NESTED_AFFINE_DAG_PINNED_SHARED_COMPACT_LEAF_PEBBLING_ESTABLISHED
 ALGEBRAIC_FOUR_OWNER_HETEROGENEOUS_FANOUT_RETAIN_ALL_AFFINE_DAG_CUSTODY_ESTABLISHED
 ALGEBRAIC_15_NODE_FOUR_OWNER_AUTOMATIC_PUBLIC_LEAF_PEBBLING_ESTABLISHED
 ALGEBRAIC_15_NODE_FOUR_OWNER_INTERNAL_OPERATOR_REMATERIALIZATION_ESTABLISHED
+ALGEBRAIC_15_NODE_RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -155,6 +186,8 @@ four native shared affine DAG owners with fanouts 4,3,3,2
 twelve exact per-edge forward/inverse generation receipts
 compiler-planned native rematerialization of four internal operators
 multi-activation edge custody across two producer generations
+rank-two nested native rematerialization through activation ordinal three
+per-receipt exact and structural-rebind authorization
 ```
 
 Its strongest bounded architecture is:
@@ -226,6 +259,8 @@ affine DAG shared resident message
     ESTABLISHED_EXACT_15_NODE_DAG_FOUR_NATIVE_PRODUCERS_FANOUTS_4_3_3_2_WIDTHS_3_4_8_12_16
 internal affine DAG operator rematerialization
     ESTABLISHED_EXACT_15_NODE_ONE_LAYER_FOUR_OPERATORS_8_WORKING_SLOTS
+rank-two affine DAG rematerialization
+    ESTABLISHED_EXACT_15_NODE_SINGLE_RANK2_BORROWER_ORDINAL3_9_WORKING_SLOTS
 C5 advantage
     NOT_ESTABLISHED
 ```
@@ -680,6 +715,32 @@ with generalized activation custody. It must evict an operator whose inverse
 reconstruction depends on another evicted operator, derive nested
 obligations from public topology, and close producer/consumer activation
 generations at depth greater than two without retaining relation content.
+
+That scheduler calibration is now established for the smallest same-graph
+rank-two borrower:
+
+```text
+topology rank and lowest-ID selection chooses 813
+-> 28 public forward actions
+-> actual inverse 813 through rematerialized 809 and 810
+-> projection with six resident working blocks
+-> literal 28-action reverse
+-> reconstruct 813 through new dormant-child generations
+-> close ordinal-three receipt custody
+-> final boundary only, restoration, and actual reuse
+```
+
+The path closes 40 receipt-specific physical activations over 22 logical
+edges. Nine working blocks pass and eight fail causally. The carrier law is
+`76w^2+51w+12`; this is a bounded recursive-custody calibration, not an
+affine advantage or general-DAG result.
+
+Per the durable main-goal reminder, the current affine scheduler is finished.
+The selected successor is CATVM enforcement for this automatically scheduled
+shared relational DAG using the existing carrier-owning Unix-domain service
+pattern. The controller may submit public topology/program identity and
+receive only the final boundary and content-oblivious custody receipts. It
+must not map, inspect, serialize, or retain action-time carrier state.
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
 per-instance native-operation records are established. Native contraction
