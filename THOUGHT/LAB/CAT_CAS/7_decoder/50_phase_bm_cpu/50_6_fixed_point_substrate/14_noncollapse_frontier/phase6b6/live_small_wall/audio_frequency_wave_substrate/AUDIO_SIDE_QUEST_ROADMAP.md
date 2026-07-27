@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `5.1`
+**Roadmap version:** `5.2`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled through milestone:** `ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED`
-**Current highest milestone:** `ALGEBRAIC_PROJECTED_AFFINE_COMPACT_FULL_RELATION_CLOSURE_ESTABLISHED`
-**Current claim ceiling:** `BOUNDED_PROJECTED_AFFINE_F2_RELATION_SUBCATEGORY_REFERENCE_ONLY`
+**Current highest milestone:** `ALGEBRAIC_OBLIVIOUS_GENERAL_AFFINE_RELATION_CLOSURE_ESTABLISHED`
+**Current claim ceiling:** `FIXED_WIDTH2_SOFTWARE_GF2_AFFINE_RELATION_SYSTEM_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -85,6 +85,7 @@ ALGEBRAIC_WIDTH2_RELATIONAL_PHASE_CONTRACTION_ESTABLISHED
 ALGEBRAIC_WIDTH3_RANK2_LAZY_TT_RELATION_COMPOSITION_ESTABLISHED
 CATVM_WIDTH2_OPEN_INTERMEDIATE_CONTRACT2_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
 ALGEBRAIC_PROJECTED_AFFINE_COMPACT_FULL_RELATION_CLOSURE_ESTABLISHED
+ALGEBRAIC_OBLIVIOUS_GENERAL_AFFINE_RELATION_CLOSURE_ESTABLISHED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -133,6 +134,7 @@ resident width-two intermediate handoff
 genuinely coupled width-three rank-two TT input relations
 exact lazy composition to sparse resident boundary invariants
 compact complete projected-affine relation closure
+coefficient-oblivious general affine relation closure at fixed width two
 ```
 
 Its strongest bounded architecture is:
@@ -151,6 +153,7 @@ public typed series-parallel relational geometry
 -> factorized width-three rank-two relation inputs
 -> exact lazy sparse-boundary contraction
 -> exact compact full-boundary closure for projected-affine F2 relations
+-> fixed-schedule complete general affine equation closure at width two
 -> internal-port closure
 -> surviving two-port boundary relation
 -> actual reversal
@@ -188,9 +191,11 @@ factorized width-three relation inputs
 lazy factorized relational closure
     ESTABLISHED_FOR_EIGHT_PREDECLARED_SPARSE_BOUNDARY_COEFFICIENTS
 compact separator storage
-    ESTABLISHED_FOR_PROJECTED_AFFINE_F2_SUBCATEGORY_GENERAL_CASE_OPEN
+    ESTABLISHED_PROJECTED_AFFINE_ONLY_FIXED_WIDTH2_GENERAL_DESCRIPTOR_NOT_SMALLER_THAN_DENSE
 factor-preserving compact full-relation closure
-    ESTABLISHED_FOR_PROJECTED_AFFINE_F2_SUBCATEGORY_ONLY
+    PROJECTED_AFFINE_SCALING_ESTABLISHED_FIXED_WIDTH2_GENERAL_CLOSURE_WITHOUT_CONCRETE_COMPACTION
+coefficient-oblivious affine elimination
+    ESTABLISHED_FIXED_WIDTH2_FOUR_EQUATION_CAPACITY
 C5 advantage
     NOT_ESTABLISHED
 ```
@@ -415,7 +420,7 @@ Verification follows a substantive result. One focused review is normally suffic
 The selected frontier is:
 
 ```text
-OBLIVIOUS_PHASE_NATIVE_GENERAL_AFFINE_RELATION_ELIMINATION
+WIDTH_PARAMETRIC_OBLIVIOUS_AFFINE_PHASE_ELIMINATION
 ```
 
 The next crossing is not:
@@ -450,16 +455,21 @@ compact full output relation. The fixed two-`CONTRACT2` chain is now enclosed
 behind the proven CATVM custody boundary. A separate projected-affine F2
 subcategory now also preserves its complete full relation in `q*(q+1)` phase
 coefficients through exact native composition, with genuinely bi-many free
-fibres and scaling through quotient rank 64. The next experiment must remove
-that subcategory's quotient-only restriction:
+fibres and scaling through quotient rank 64. A fixed-width successor has now
+removed that subcategory's quotient-only restriction: arbitrary affine
+equation systems over two-bit interfaces, including singular, kernel-
+sensitive, rank-deficient, universal, and empty relations, close through a
+fixed coefficient-oblivious schedule.
+
+The next experiment must remove the fixed-width calibration:
 
 ```text
-general affine equation systems without dense relation materialization
-fixed coefficient-oblivious shared-interface elimination
-phase-resident pivot selection without host coefficient branching
-canonical compact full affine boundary including empty and universal cases
-identical operation topology across rank and pivot patterns
+width-parametric general affine equation systems
+fixed public row capacity proportional to interface width
+complete polynomial boundary descriptors at widths beyond two
+identical phase-operation topology across rank and pivot patterns
 resource growth versus width, equation rank, and fill
+actual inverse restoration and restored-carrier cross-width reuse
 ```
 
 Typed module handoff, bounded recursion, and compiled leaf-body reuse without
@@ -645,7 +655,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_SPARSE_BOUNDARY_LAZY_TT_RELATION_COMPOSITION_REFERENCE_ONLY
+FIXED_WIDTH2_SOFTWARE_GF2_AFFINE_RELATION_SYSTEM_REFERENCE_ONLY
 ```
 
 Not established:
@@ -670,7 +680,7 @@ microarchitectural secrecy
 compact carrier or phase-history recursion
 compact separator storage
 arbitrary interface width or relation arity
-CATVM enforcement for the width-two operator
+CATVM enforcement for the general affine operator
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.

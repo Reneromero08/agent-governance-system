@@ -1520,3 +1520,119 @@ The selected next experiment is
 open GF2 affine equation systems in phase cells and eliminate a shared
 interface with a fixed coefficient-oblivious schedule, phase-resident pivot
 controls, no host-selected pivots, and a complete canonical affine boundary.
+
+## Coefficient-oblivious general affine relation closure
+
+The fixed-width successor removes the projected-affine quotient restriction.
+Any affine subset of two two-bit ports is stored as at most four equation
+rows plus an empty flag. Composition embeds two such relations in a resident
+eight-row augmented phase system and eliminates the two shared bits before
+canonicalizing the complete external relation.
+
+The schedule is coefficient-oblivious. Six public column stages always
+execute the same selection, swap, and row-add topology. Pivot selection,
+row-active flags, elimination controls, input emptiness, and inconsistency
+remain Boolean-subset F3 phase symbols. Rank, pivot positions, coefficients,
+and contradictions never select a host pivot, loop bound, or memory address.
+
+The primary child composition is:
+
+```text
+x0 XOR y0 XOR y1 = 0
+y0 XOR y1 XOR z0 = 1
+--------------------------------
+x0 XOR z0 = 1
+```
+
+Each admissible `(X,Z)` pair retains two unresolved `Y` witnesses; no witness
+is selected or materialized. The actual 25-cell `H` is consumed by a second
+native composition, which yields the complete final relation:
+
+```text
+x0 XOR w0 XOR w1 = 1
+```
+
+The only decoder latches the final 25 coefficients. The boundary survives
+while the parent and child are recomputed and reversed from the actual
+resident operands. The same restored carrier then runs unrelated,
+rank-deficient, universal, empty, and full-rank programs.
+
+The accepted semantic suite reports:
+
+```text
+phase/reference exact boundary matches       9 / 9
+primary boundary hash           a96f5625e4054ee6
+unrelated reuse hash             0183d6882c23ee46
+full-rank four-row hash          2a656a080ba3a76b
+same-carrier actual-inverse transactions                  73
+maximum restoration error                    2.00148302124e-16
+predeclared tolerance                                      2e-12
+```
+
+Row permutation and duplicate equations preserve the exact canonical
+boundary. Rank-zero and rank-one shared systems both project to canonical
+universal. Explicit input empty propagates, while two simultaneous
+contradiction rows correctly produce canonical empty; the latter
+discriminates the required OR accumulation from XOR. A conventional
+rank-pointer GF2 eliminator, compiled as a separate binary and structurally
+different from the phase pivot schedule, reproduces all nine boundaries.
+
+Wrong parent inverse, missing parent inverse, and applicable child-before-
+parent inversion each leave `1.73205080757` error. Intermediate projection,
+control projection, null carrier, and unknown command paths reject. Snapshot
+reload remains separately labeled and is not credited as actual inverse.
+Strict GCC, `-fanalyzer`, ASan, UBSan, leak checks, deterministic replay,
+exact JSON allowlists, source/result hashes, syscall write tracing, and the
+sole-final-decode static gate pass.
+
+Focused review closed four evidence defects: it required a genuine rank-four
+boundary, narrowed the obliviousness wording to the demonstrated fixed host
+pivot/loop/address schedule, made expanded syscall tracing fail closed, and
+corrected snapshot inverse-recomputation accounting to zero. The repaired
+source and result hashes passed closure review with no remaining finding.
+
+The accepted carrier has:
+
+```text
+relation blocks                         6 * 25 cells
+joint augmented matrix                         56 cells
+resident phase controls                       112 cells
+total reusable workspace                      168 cells
+total carrier                                 318 cells
+live carrier bytes                         10,176
+carrier plus comparison heap bytes         20,352
+compiler-measured nested stack chain        6,000
+conservative current-ABI accounted bytes   26,352
+phase AND/XOR/OR/NOT per transaction
+                              6,372 / 10,416 / 232 / 440
+```
+
+At width two the 25-cell canonical descriptor is larger than the 16-entry
+dense membership table, so no concrete storage or performance advantage is
+claimed. Its importance is semantic generality: singular, kernel-sensitive,
+rank-deficient, empty, and universal affine relations now share one fixed
+phase-native closure law.
+
+This establishes:
+
+```text
+BOUNDED_WIDTH2_COEFFICIENT_OBLIVIOUS_GENERAL_AFFINE_PHASE_RELATION_COMPOSITION
+```
+
+with ceiling:
+
+```text
+FIXED_WIDTH2_SOFTWARE_GF2_AFFINE_RELATION_SYSTEM_REFERENCE_ONLY
+```
+
+It does not establish wider interfaces, arbitrary equation capacity,
+nonlinear Boolean elimination, arbitrary topology or treewidth, automatic
+elimination-order discovery, CATVM custody for this kernel, computational
+advantage, physical execution, Small Wall crossing, or unlimited catalytic
+computation.
+
+The selected next experiment is
+`WIDTH_PARAMETRIC_OBLIVIOUS_AFFINE_PHASE_ELIMINATION`: retain the same machine
+law while increasing interface width and public equation capacity, emit a
+complete polynomial affine boundary, and measure the actual phase/resource
+law against conventional compact Gaussian elimination.

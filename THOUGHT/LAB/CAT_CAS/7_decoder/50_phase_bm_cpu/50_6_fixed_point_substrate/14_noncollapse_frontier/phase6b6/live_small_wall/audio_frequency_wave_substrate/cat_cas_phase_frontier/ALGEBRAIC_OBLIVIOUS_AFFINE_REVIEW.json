@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "review_id": "OBLIVIOUS-GENERAL-AFFINE-PHASE-01",
+  "result": "PASS_AFTER_REPAIR",
+  "claim": "BOUNDED_WIDTH2_COEFFICIENT_OBLIVIOUS_GENERAL_AFFINE_PHASE_RELATION_COMPOSITION",
+  "claim_ceiling": "FIXED_WIDTH2_SOFTWARE_GF2_AFFINE_RELATION_SYSTEM_REFERENCE_ONLY",
+  "evidence_directory_at_review": "/tmp/oblivious-affine-final.NwEoxO",
+  "reviewed_sha256": {
+    "phase_source": "d7f5b766b479918d1b17a1ded6dc9f3b7319a7498cc156ffcb39c4f07bfe122f",
+    "reference_source": "cde5e17688f5f925f4866ae2883ccbe72267178f2b52de4247cf9ff613f4d449",
+    "qualifier_source": "d8607cc793a69da936c5dae4fbba7295d2edb0e92153f3a98e095eabfcfbf563",
+    "result_jsonl": "1a50d25b43d66b2a0c6ddfd8c8e175c4e5f9008de3691bc87b02538a296bea03",
+    "reference_jsonl": "e8158497b41893c1f7b212ae323dbcc80dc94782470ca319e3c44651f8f28bd8"
+  },
+  "closed_findings": [
+    {
+      "id": "AFFINE-R1-RANK4-COVERAGE",
+      "repair": "Replaced the rank-two equality fixture with a genuine four-row canonical output and required its exact independent-reference boundary."
+    },
+    {
+      "id": "AFFINE-R2-OBLIVIOUSNESS-SCOPE",
+      "repair": "Narrowed the evidence from an asserted absence of compiled branches to zero host-selected pivots and a fixed host loop-bound, address, and operation schedule."
+    },
+    {
+      "id": "AFFINE-R3-STRACE-FAIL-OPEN",
+      "repair": "Made strace mandatory and expanded tracing and rejection gates across file, network, write, writev, pwrite, and send channels."
+    },
+    {
+      "id": "AFFINE-R4-SNAPSHOT-INVERSE-ACCOUNTING",
+      "repair": "Corrected snapshot accounting to zero inverse-factor recomputations while accepted actual-inverse paths retain two."
+    }
+  ],
+  "remaining_findings": [],
+  "review_conclusion": "The existential GF2 projection, canonical row extraction, phase-resident controls, inverse ordering, workspace cleanup, same-carrier reuse, rank-four boundary, independent-reference parity, accounting, and no-smuggle gates support the bounded claim.",
+  "terminal": false
+}

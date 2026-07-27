@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0.0",
+  "result": "PASS",
+  "claim": "BOUNDED_WIDTH2_COEFFICIENT_OBLIVIOUS_GENERAL_AFFINE_PHASE_RELATION_COMPOSITION",
+  "claim_ceiling": "FIXED_WIDTH2_SOFTWARE_GF2_AFFINE_RELATION_SYSTEM_REFERENCE_ONLY",
+  "relation_family": {
+    "name": "GENERAL_AFFINE_F2_EQUATION_SYSTEMS_FIXED_WIDTH2",
+    "interface_width": 2,
+    "equation_capacity": 4,
+    "relation_cells": 25,
+    "complete_boundary_materialized": true,
+    "canonical_boundary": true,
+    "universal_encoding": "ALL_25_CELLS_ZERO",
+    "empty_encoding": "ROWS_ZERO_FINAL_EMPTY_FLAG_ONE",
+    "dense_relation_entries": 16,
+    "concrete_storage_advantage_at_width2": false
+  },
+  "transaction": {
+    "first": "H = PROJECT_COMPOSE(F,G)",
+    "intermediate": "ACTUAL_25_CELL_H_PHASE_RESIDENT_UNDECODED",
+    "second": "Z = PROJECT_COMPOSE(ACTUAL_H,K)",
+    "projected_boundary": "COMPLETE_CANONICAL_25_CELL_Z_DESCRIPTOR",
+    "restoration": "RECOMPUTED_ACTUAL_PARENT_INVERSE_THEN_RECOMPUTED_ACTUAL_CHILD_INVERSE",
+    "reuse": "DIFFERENT_AFFINE_PROGRAMS_ON_THE_SAME_RESTORED_CARRIER"
+  },
+  "boundaries": {
+    "primary_coefficients": [
+      1, 1, 0, 1, 1, 1,
+      0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0,
+      0
+    ],
+    "primary_fnv1a64": "a96f5625e4054ee6",
+    "reuse_fnv1a64": "0183d6882c23ee46",
+    "universal_fnv1a64": "d4657f55662f817f",
+    "empty_fnv1a64": "d4657e55662f7fcc",
+    "rank4_fnv1a64": "2a656a080ba3a76b"
+  },
+  "semantic_controls": {
+    "phase_reference_exact_matches": 9,
+    "row_permutation_invariant": "PASS",
+    "duplicate_equation_invariant": "PASS",
+    "rank0_universal": "PASS",
+    "rank1_universal": "PASS",
+    "input_empty": "PASS",
+    "multi_contradiction_empty": "PASS",
+    "rank4_four_active_rows": "PASS",
+    "fixed_host_loop_address_operation_schedule": "PASS",
+    "host_selected_pivots": 0
+  },
+  "restoration": {
+    "same_carrier_transactions": 73,
+    "maximum_abs_error": 2.00148302124e-16,
+    "predeclared_tolerance": 2e-12,
+    "actual_inverse": true,
+    "snapshot_reload": false,
+    "actual_restored_cross_program_reuse": true,
+    "inverse_factor_recomputations_per_accepted_transaction": 2
+  },
+  "inverse_controls": {
+    "wrong_parent_inverse_error": 1.73205080757,
+    "missing_parent_inverse_error": 1.73205080757,
+    "reordered_inverse_error": 1.73205080757,
+    "applicability": "PARENT_CONSUMES_ACTUAL_CHILD_OUTPUT_SO_CHILD_BEFORE_PARENT_IS_NONCOMMUTING"
+  },
+  "snapshot_baseline": {
+    "restoration": "PASS_SEPARATE_WEAKER_PATH",
+    "actual_inverse": false,
+    "snapshot_loaded": true,
+    "inverse_factor_recomputations": 0
+  },
+  "no_smuggle": {
+    "decoded_intermediate_coefficients": 0,
+    "serialized_intermediate_coefficients": 0,
+    "tuple_slots": 0,
+    "assignment_slots": 0,
+    "witness_slots": 0,
+    "sole_decode_is_final_boundary": true,
+    "intermediate_projection": "PASS_REJECTED",
+    "control_projection": "PASS_REJECTED",
+    "null_carrier": "PASS_REJECTED",
+    "phase_reference_binary_separation": true,
+    "mandatory_expanded_strace_no_extra_write_channel": true
+  },
+  "accepted_resources": {
+    "public_program_coefficients": 75,
+    "carrier_cells": 318,
+    "joint_workspace_cells": 56,
+    "resident_phase_control_cells": 112,
+    "total_workspace_cells": 168,
+    "baseline_and_working_complex_values": 636,
+    "live_carrier_bytes": 10176,
+    "comparison_snapshot_bytes": 10176,
+    "carrier_and_snapshot_heap_subtotal_bytes_current_abi": 20352,
+    "coexisting_program_storage_bytes_current_abi": 150,
+    "compiled_descriptor_bytes_current_abi": 48,
+    "execution_result_bytes_current_abi": 240,
+    "compiler_measured_nested_stack_call_chain_bytes": 6000,
+    "conservative_accounted_execution_bytes_current_abi": 26352,
+    "native_compose_calls": 4,
+    "phase_ands": 6372,
+    "phase_xors": 10416,
+    "phase_ors": 232,
+    "phase_nots": 440,
+    "conditional_swaps": 384,
+    "conditional_row_adds": 336,
+    "phase_cell_updates": 9348,
+    "carrier_reads": 12474,
+    "boundary_decodes": 25,
+    "restoration_cell_checks": 318
+  },
+  "qualifier": {
+    "result": "PASS",
+    "compiler_builds": 5,
+    "sanitizers": "PASS",
+    "evidence_directory_at_run": "/tmp/oblivious-affine-final.NwEoxO",
+    "phase_source_sha256": "d7f5b766b479918d1b17a1ded6dc9f3b7319a7498cc156ffcb39c4f07bfe122f",
+    "reference_source_sha256": "cde5e17688f5f925f4866ae2883ccbe72267178f2b52de4247cf9ff613f4d449",
+    "base_source_sha256": "11ef5938e413108e7f94cea1f77bedb295fcf97f5501dae58ec046176f2d0316",
+    "qualifier_source_sha256": "d8607cc793a69da936c5dae4fbba7295d2edb0e92153f3a98e095eabfcfbf563",
+    "result_sha256": "1a50d25b43d66b2a0c6ddfd8c8e175c4e5f9008de3691bc87b02538a296bea03",
+    "reference_sha256": "e8158497b41893c1f7b212ae323dbcc80dc94782470ca319e3c44651f8f28bd8"
+  },
+  "review": {
+    "review_id": "OBLIVIOUS-GENERAL-AFFINE-PHASE-01",
+    "result": "PASS_AFTER_REPAIR",
+    "closed_findings": 4,
+    "remaining_findings": 0
+  },
+  "performance_advantage_claim": false,
+  "not_established": [
+    "ARBITRARY_INTERFACE_WIDTH",
+    "ARBITRARY_EQUATION_CAPACITY",
+    "NONLINEAR_OR_GENERAL_BOOLEAN_RELATION_ELIMINATION",
+    "ARBITRARY_GRAPH_TOPOLOGY_OR_TREEWIDTH",
+    "AUTOMATIC_ELIMINATION_ORDER_DISCOVERY",
+    "CATVM_CUSTODY_FOR_GENERAL_AFFINE_KERNEL",
+    "COMPACTNESS_FOR_ARBITRARY_RELATIONS",
+    "COMPUTATIONAL_ADVANTAGE",
+    "PHYSICAL_EXECUTION",
+    "SMALL_WALL_CROSSING",
+    "UNLIMITED_CATALYTIC_COMPUTATION"
+  ],
+  "terminal": false
+}
