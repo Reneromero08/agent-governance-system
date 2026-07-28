@@ -4712,3 +4712,47 @@ MATCHED_COHERENT_DEPHASED_CLASSICAL_NECKLACE_GENERATOR_SMALL_WALL_TRIAD
 It must test whether coherent interference changes the useful boundary while
 retaining the best matched classical complex recurrence as the baseline. No
 leverage may be inferred from avoided occupation expansion alone.
+
+## Coherence changes the boundary but the compact classical arm is identical
+
+The coherent necklace generator, an exact initial-and-each-step
+necklace-basis dephasing sham, and the best matched compact classical complex
+recurrence now execute one bounded resource diagnostic on the same depth-eight
+public instance.
+
+Coherent and dephased boundaries separate by `0.0235042`, while probability
+normalization remains within `2.220e-15`. This establishes that initial and
+interstep coherence affects the boundary. It does not isolate the collision
+phase contribution.
+
+The coherent and matched-classical arms are deliberately the same executable
+complex recurrence. Their primary and reuse boundaries agree exactly; both
+perform actual inverse restoration and actual restored-carrier reuse. The
+irreversible dephased arm instead creates and reloads a 4,560-byte snapshot
+and is not accepted restoration.
+
+Evidence `/tmp/four-rotor-necklace-coherence-triad-final.rAd8AR` and the
+focused independent review support:
+
+```text
+BOUNDED_MATCHED_COHERENT_INITIAL_AND_EACH_STEP_NECKLACE_DEPHASED_CLASSICAL_GENERATOR_SMALL_WALL_RESOURCE_DIAGNOSTIC
+```
+
+Resource and timing scopes are separated per arm. No timing comparison is
+made. The dephased arm streams 265,118,400 permanent terms, so its smaller
+probability state is not presented as a cheap matched baseline.
+
+The result rules out dephased probability recurrence as an equivalent
+mechanism for this boundary, but it does not distinguish phase-native software
+from the identical compact classical complex recurrence. No advantage or
+Small Wall crossing is established.
+
+The next phase-owned experiment is:
+
+```text
+COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER
+```
+
+It must integrate typed public evidence relations into unresolved phase
+composition and preserve final-boundary-only inference, actual restoration,
+reuse, and the identical compact-classical comparison.

@@ -1,0 +1,59 @@
+{
+  "review_id": "FOUR-ROTOR-NECKLACE-COHERENCE-TRIAD-01-R3",
+  "evidence": "/tmp/four-rotor-necklace-coherence-triad-final.rAd8AR",
+  "verdict": "PASS",
+  "closed_findings": [
+    {
+      "id": "NCT-R1-001",
+      "finding": "dephased_probability_payload_omitted_topology_and_transition_scratch",
+      "repair": "arm-local forward and lifecycle payloads plus conservative harness peak reported"
+    },
+    {
+      "id": "NCT-R1-002",
+      "finding": "dephasing_semantics_overattributed_the_boundary_separation",
+      "repair": "scope narrowed to initial-and-each-step necklace-basis dephasing with collision contribution explicitly not isolated"
+    },
+    {
+      "id": "NCT-R1-003",
+      "finding": "triad_lacked_local_inverse_controls_and_reuse_boundary_parity",
+      "repair": "missing wrong reordered controls and matched reuse-boundary gate added"
+    },
+    {
+      "id": "NCT-R2-001",
+      "finding": "coherent_engine_only_payload_was_compared_to_dephased_lifecycle_payload",
+      "repair": "engine baseline projection and lifecycle payloads separated for all arms"
+    },
+    {
+      "id": "NCT-R2-002",
+      "finding": "coherent_inverse_and_dephased_forward_timing_scopes_were_not_explicit",
+      "repair": "non-comparable timing scopes named and no timing inference made"
+    }
+  ],
+  "remaining_findings": 0,
+  "mechanism_checks": {
+    "normalized_necklace_Markov_weight_ratio_correct": true,
+    "initial_carrier_dephased": true,
+    "dephased_after_each_free_step": true,
+    "collision_phase_contribution_isolated": false,
+    "coherent_classical_primary_boundary_exact": true,
+    "coherent_classical_reuse_boundary_exact": true,
+    "coherent_actual_inverse_and_reuse": true,
+    "classical_actual_inverse_and_reuse": true,
+    "dephased_recovery_snapshot_only": true,
+    "missing_wrong_reordered_controls_material": true,
+    "arm_local_resource_accounting_consistent": true,
+    "conservative_harness_peak_consistent": true,
+    "timing_scopes_noncomparable_and_explicit": true,
+    "manifest_verifies": true,
+    "sanitizers_pass": true
+  },
+  "claim_boundary_checks": {
+    "initial_and_interstep_coherence_causal": true,
+    "matched_classical_inherits_coherence_exactly": true,
+    "distinct_phase_resource_established": false,
+    "computational_advantage_established": false,
+    "small_wall_crossed": false,
+    "unbounded_computation_established": false,
+    "physical_execution_established": false
+  }
+}

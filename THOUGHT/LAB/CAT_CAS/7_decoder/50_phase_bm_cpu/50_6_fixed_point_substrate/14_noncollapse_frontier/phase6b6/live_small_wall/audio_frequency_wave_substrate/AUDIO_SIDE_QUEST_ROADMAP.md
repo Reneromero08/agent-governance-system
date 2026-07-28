@@ -1580,6 +1580,35 @@ purpose is to locate any useful interference resource and test whether the
 classical recurrence inherits it exactly, not to manufacture a crossing by
 choosing an expanded baseline.
 
+That one bounded diagnostic is established. Exact initial-and-each-step
+dephasing in the necklace basis changes the depth-eight boundary by
+`0.0235042`. The best matched compact classical complex arm is the identical
+recurrence and matches coherent primary and reuse boundaries exactly. Thus
+coherence is causal for the tested boundary, but it is not a resource absent
+from the matched classical method.
+
+The dephased arm uses snapshot recovery and is not accepted restoration. It
+also streams 265,118,400 permanent terms, so neither its state size nor its
+forward-only timing supports leverage. The obstruction is:
+
+```text
+COHERENCE_IS_CAUSAL_BUT_IDENTICAL_COMPACT_CLASSICAL_COMPLEX_RECURRENCE_INHERITS_IT
+```
+
+The next selected phase-owned experiment advances catalytic inference rather
+than repeating coherence benchmarks:
+
+```text
+COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER
+```
+
+Typed public evidence ports must couple natively into the unresolved necklace
+carrier, remain unprojected through composition, and yield only a final
+inference boundary before actual inverse restoration and unrelated reuse. The
+matched compact classical complex recurrence remains mandatory, and no
+inference claim may be upgraded to computational leverage without separating
+from it.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:

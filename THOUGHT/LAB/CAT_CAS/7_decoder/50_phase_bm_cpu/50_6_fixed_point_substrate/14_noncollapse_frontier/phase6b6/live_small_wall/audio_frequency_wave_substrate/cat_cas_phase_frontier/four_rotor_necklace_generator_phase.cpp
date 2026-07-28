@@ -2,6 +2,10 @@
 #include "four_rotor_bosonic_givens_phase.cpp"
 #undef BOSONIC_GIVENS_ENTRY
 
+#ifndef NECKLACE_GENERATOR_ENTRY
+#define NECKLACE_GENERATOR_ENTRY main
+#endif
+
 /*
  * Direct global-rotation quotient closure.
  *
@@ -410,7 +414,7 @@ GeneratorRun generator_transaction(
 
 }  // namespace
 
-int main() {
+int NECKLACE_GENERATOR_ENTRY() {
     const Plan plan = compile_plan();
     const std::vector<Complex> initial = make_carrier(plan, 0);
 
