@@ -1,0 +1,33 @@
+{
+  "review_id": "FOUR-ROTOR-STREAMED-MOMENTUM-COORDINATE-01-R2",
+  "review_scope": "bounded grid-17 four-rotor streamed total-momentum-coordinate quotient through depth 64",
+  "verdict": "PASS",
+  "evidence": "/tmp/four-rotor-streamed-momentum-coordinate-final.oba4A3",
+  "source_sha256": "275822fbc019ab2a8ff2724f6612e46ec1ae1064ecdcc7d9212374e9a7d1e909",
+  "qualification_sha256": "2e610580a8a12979ea71e1fea1dd1067d1d9098baeb13e3f3886ae16a59586a8",
+  "result_sha256": "844fd1201047822142a43433bb375e4061d09ef60aa97a5dadc0ce24e78c10b4",
+  "checks": {
+    "topology_derived_total_momentum_coordinate": "PASS",
+    "no_hidden_or_unresolved_port_overclaim": "PASS",
+    "coordinate_not_projected": "PASS",
+    "dense_lift_state_parity": "PASS",
+    "forward_inverse_order": "PASS",
+    "actual_inverse_restoration": "PASS",
+    "actual_restored_carrier_reuse": "PASS",
+    "retained_dense_free_plan_absent": "PASS",
+    "explicit_array_accounting": "PASS",
+    "wrong_missing_reordered_controls": "PASS",
+    "matched_classical_ceiling": "PASS",
+    "manifest_hashes": "PASS"
+  },
+  "quotient_carrier_complex_cells": 4913,
+  "retained_public_plan_bytes": 408,
+  "retained_plan_reduction_factor": 193.33333333333334,
+  "maximum_explicit_engine_array_bytes": 118592,
+  "maximum_explicit_wrapper_array_bytes": 197200,
+  "verification_peak_explicit_array_bytes": 2837368,
+  "phase_resident_unresolved_internal_port_established": false,
+  "distinct_phase_resource_established": false,
+  "computational_advantage_established": false,
+  "remaining_findings": []
+}

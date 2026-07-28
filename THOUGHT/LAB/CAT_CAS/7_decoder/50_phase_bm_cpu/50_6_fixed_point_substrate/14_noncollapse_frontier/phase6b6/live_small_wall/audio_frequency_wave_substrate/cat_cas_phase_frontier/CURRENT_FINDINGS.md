@@ -4518,3 +4518,34 @@ quotient has the same law and the remaining state grows as
 is established. The next mechanism must attack that relative-coordinate
 growth or introduce a useful phase resource that the matched compact
 classical method cannot immediately inherit.
+
+## Total-momentum coordinate streaming removes the dense free plan
+
+The quotient free update now derives
+`n0 = -(n1+n2+n3) mod 17` one 17-cell momentum slice at a time instead of
+retaining a `17^3` complex free-phase table. Across depths
+`1,2,4,8,16,32,64`, its full lifted state remains within `2.048e-14` of the
+independent dense execution and its resource signature is depth-independent.
+
+The retained public plan falls from 78,880 to 408 bytes, a `193.333x`
+reduction. Maximum explicit engine arrays fall from 236,368 to 118,592 bytes
+and wrapper arrays from 314,976 to 197,200 bytes. The actual depth-32 carrier
+restores within `8.614e-15`; unrelated generation-two reuse restores within
+`2.310e-15` and agrees with fresh execution within `7.994e-15`.
+
+Evidence `/tmp/four-rotor-streamed-momentum-coordinate-final.oba4A3`
+supports:
+
+```text
+BOUNDED_TOPOLOGY_STREAMED_TOTAL_MOMENTUM_COORDINATE_PHASE_CLOSURE_ELIMINATES_DENSE_QUOTIENT_FREE_PLAN_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+The materialized `n0` slice is an unprojected topology-derived classical
+coordinate, not a hidden or unresolved phase-resident port. The carrier
+remains 4,913 complex cells, execution performs 18,496 coordinate closures,
+and the matched classical streamed quotient is identical. This fixes retained
+operator-plan growth but not:
+
+```text
+RELATIVE_COORDINATE_EXPONENTIAL_GROWTH_AND_MATCHED_CLASSICAL_QUOTIENT_IDENTITY
+```

@@ -1459,6 +1459,25 @@ or introduce a phase update/projection resource not inherited immediately by
 the best matched compact classical recurrence. Repeating larger
 rotation-quotient fixtures is not useful.
 
+The dense retained free-plan defect is now removed. Total-momentum
+conservation is streamed as a 17-cell topology-derived coordinate slice,
+reducing the retained public plan from 78,880 to 408 bytes while preserving
+exact dense parity, actual inverse restoration, and generation-two reuse
+through depth 64. This is operator-plan compaction, not carrier compaction:
+the 4,913-cell quotient state and `N^(rotors-1)` width law are unchanged, and
+the identical classical streamed quotient inherits the repair.
+
+The next phase-owned experiment therefore remains targeted at the actual
+obstruction:
+
+```text
+RELATIVE_COORDINATE_EXPONENTIAL_GROWTH_AND_MATCHED_CLASSICAL_QUOTIENT_IDENTITY
+```
+
+It must change resident carrier growth or establish a useful native phase
+closure not immediately reducible to the same compact classical recurrence.
+It must not be another grid, depth, rotor-count, or fanout fixture sweep.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
