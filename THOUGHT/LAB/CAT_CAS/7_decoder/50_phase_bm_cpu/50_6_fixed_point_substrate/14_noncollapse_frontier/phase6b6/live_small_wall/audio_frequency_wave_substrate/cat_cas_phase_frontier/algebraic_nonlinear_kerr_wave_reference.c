@@ -44,14 +44,18 @@ static struct kr_value kr_phase(double angle) {
     return result;
 }
 
-static void kr_initialize(struct kr_value state[KR_CELLS]) {
+static void kr_initialize(
+    struct kr_value state[KR_CELLS],
+    uint64_t identity
+) {
     const struct kr_value seed[KR_CELLS] = {
         {0.51, 0.13},
         {-0.21, 0.47},
         {0.34, -0.29},
         {-0.18, -0.44}
     };
-    const double twist = 0.003 * 11.0;
+    const double twist =
+        0.003 * (double)(identity % UINT64_C(97));
     double norm = 0.0;
     for (size_t cell = 0U; cell < KR_CELLS; ++cell) {
         state[cell] = kr_multiply(
@@ -67,25 +71,35 @@ static void kr_initialize(struct kr_value state[KR_CELLS]) {
     }
 }
 
-static double kr_kappa(size_t layer) {
-    return 0.113 + 0.009 * (double)((layer + 9U) % 17U);
+static double kr_kappa(size_t layer, size_t program) {
+    return 0.113
+        + 0.009 * (double)((layer + 3U * program) % 17U);
 }
 
-static double kr_theta(size_t layer, size_t pair) {
+static double kr_theta(size_t layer, size_t program, size_t pair) {
     return 0.149
-        + 0.007 * (double)((5U * layer + 6U + pair) % 19U);
+        + 0.007
+            * (double)((5U * layer + 2U * program + pair) % 19U);
 }
 
-static double kr_phi(size_t layer, size_t pair) {
+static double kr_phi(size_t layer, size_t program, size_t pair) {
     return 0.071
-        + 0.013 * (double)((layer + 21U + 3U * pair) % 23U);
+        + 0.013
+            * (double)((layer + 7U * program + 3U * pair) % 23U);
 }
 
-static void kr_kerr(struct kr_value state[KR_CELLS], size_t layer) {
+static void kr_kerr(
+    struct kr_value state[KR_CELLS],
+    size_t layer,
+    size_t program
+) {
     for (size_t cell = 0U; cell < KR_CELLS; ++cell) {
         state[cell] = kr_multiply(
             state[cell],
-            kr_phase(kr_kappa(layer) * kr_abs_squared(state[cell]))
+            kr_phase(
+                kr_kappa(layer, program)
+                * kr_abs_squared(state[cell])
+            )
         );
     }
 }
@@ -95,11 +109,14 @@ static void kr_couple(
     size_t first,
     size_t second,
     size_t layer,
+    size_t program,
     size_t pair
 ) {
-    const double cosine = cos(kr_theta(layer, pair));
-    const double sine = sin(kr_theta(layer, pair));
-    const struct kr_value phase = kr_phase(kr_phi(layer, pair));
+    const double cosine = cos(kr_theta(layer, program, pair));
+    const double sine = sin(kr_theta(layer, program, pair));
+    const struct kr_value phase = kr_phase(
+        kr_phi(layer, program, pair)
+    );
     const struct kr_value conjugate_phase = {
         phase.real,
         -phase.imaginary
@@ -128,17 +145,21 @@ static uint64_t kr_hash_mix(uint64_t hash, uint64_t value) {
     return hash;
 }
 
-static uint64_t kr_run(size_t depth) {
+static uint64_t kr_run(
+    size_t depth,
+    uint64_t identity,
+    size_t program
+) {
     struct kr_value state[KR_CELLS] = {0};
-    kr_initialize(state);
+    kr_initialize(state, identity);
     for (size_t layer = 0U; layer < depth; ++layer) {
-        kr_kerr(state, layer);
+        kr_kerr(state, layer, program);
         if (layer % 2U == 0U) {
-            kr_couple(state, 0U, 1U, layer, 0U);
-            kr_couple(state, 2U, 3U, layer, 1U);
+            kr_couple(state, 0U, 1U, layer, program, 0U);
+            kr_couple(state, 2U, 3U, layer, program, 1U);
         } else {
-            kr_couple(state, 1U, 2U, layer, 0U);
-            kr_couple(state, 3U, 0U, layer, 1U);
+            kr_couple(state, 1U, 2U, layer, program, 0U);
+            kr_couple(state, 3U, 0U, layer, program, 1U);
         }
     }
     const struct kr_value fringe = {
@@ -160,6 +181,7 @@ static uint64_t kr_run(size_t depth) {
     return hash;
 }
 
+#ifndef KR_EMBEDDED
 int main(void) {
     const size_t depths[] = {1U, 4U, 32U, 128U, 512U};
     printf(
@@ -170,11 +192,12 @@ int main(void) {
         "\"state_model\":\"FOUR_COMPLEX_VALUES_AS_EIGHT_SCALAR_DOUBLES\","
         "\"state_bytes\":64,"
         "\"time\":\"O_DEPTH\"}\n",
-        kr_run(depths[0]),
-        kr_run(depths[1]),
-        kr_run(depths[2]),
-        kr_run(depths[3]),
-        kr_run(depths[4])
+        kr_run(depths[0], UINT64_C(11), 3U),
+        kr_run(depths[1], UINT64_C(11), 3U),
+        kr_run(depths[2], UINT64_C(11), 3U),
+        kr_run(depths[3], UINT64_C(11), 3U),
+        kr_run(depths[4], UINT64_C(11), 3U)
     );
     return 0;
 }
+#endif

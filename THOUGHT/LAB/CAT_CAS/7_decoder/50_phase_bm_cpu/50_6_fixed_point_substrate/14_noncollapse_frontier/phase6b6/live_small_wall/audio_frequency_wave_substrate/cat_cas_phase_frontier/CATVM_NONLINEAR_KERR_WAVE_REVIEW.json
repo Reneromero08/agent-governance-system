@@ -1,0 +1,45 @@
+{
+  "review_id": "CATVM-NONLINEAR-KERR-WAVE-01",
+  "result": "PASS",
+  "accepted_scope": "BOUNDED_LINUX_SAME_UID_NON_DUMPABLE_SECCOMP_AF_UNIX_SINGLE_PEER_DEPTH128_FOUR_DOUBLE_COMPLEX_CELL_KERR_SU2_SERVICE_WITH_FINAL_THREE_REAL_BOUNDARY_PUBLIC_TOPOLOGY_ACTUAL_INVERSE_2E_10_RESTORATION_AND_256_TRANSACTION_REUSE_SOFTWARE_REFERENCE_ONLY",
+  "findings": [],
+  "closed_hardenings": [
+    {
+      "id": "CKW-R1-001",
+      "finding": "The first response parser accepted trailing protocol tokens.",
+      "repair": "HELLO and final-boundary parsers now use %n and require exact end of string.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "CKW-R1-002",
+      "finding": "The strace record exposed syscall metadata but protected send payload memory was opaque.",
+      "repair": "A phase-free test client now records exact raw AF_UNIX response payloads; the qualifier validates the entire response grammar and scans final payloads for forbidden hidden state. Strace bytes are labeled only as syscall metadata.",
+      "status": "CLOSED"
+    },
+    {
+      "id": "CKW-R1-003",
+      "finding": "The 4096-byte context mapping could be mistaken for total locked process memory.",
+      "repair": "Evidence separately records warm service VmRSS 4120 KiB and VmLck 4112 KiB, and retains the 4096-byte number only as the context mapping.",
+      "status": "CLOSED"
+    }
+  ],
+  "mechanism_assessment": {
+    "enforcement": "One owner-only AF_UNIX single-peer service holds the wave and seal in a locked nondumpable mapping, rejects same-UID process inspection, and installs a default-kill seccomp filter restricted to the accepted client transport and teardown syscalls.",
+    "custody": "The service latches only three final real observables, runs the actual topology-derived inverse internally, and replies after restoration.",
+    "reuse": "Restoration generation reaches 256 on one service and one actual carrier; program one consumes the carrier restored after program zero.",
+    "no_smuggle": "Controller contains no wave implementation; service stdout and stderr are empty; exact raw responses contain only declared protocol, denial, final-boundary, restoration, generation, and closure fields.",
+    "parity": "At depth 128, initial primary and reuse boundaries exactly match direct wave execution and the independent eight-double scalar recurrence."
+  },
+  "benchmark_caveat": "Compact direct timing is a forward recurrence while direct wave timing includes forward projection and inverse restoration. The numbers are descriptive and not lifecycle-matched leverage.",
+  "not_established": [
+    "PRIVILEGED_ISOLATION",
+    "ARBITRARY_DEPTH_CATVM",
+    "ZERO_INFORMATION_SIDE_CHANNELS",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_EXECUTION",
+    "UNLIMITED_CATALYTIC_COMPUTATION"
+  ],
+  "terminal": false
+}

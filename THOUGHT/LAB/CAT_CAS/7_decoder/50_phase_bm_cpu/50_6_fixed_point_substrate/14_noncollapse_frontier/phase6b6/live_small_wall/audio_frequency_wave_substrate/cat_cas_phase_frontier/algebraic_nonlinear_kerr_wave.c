@@ -367,6 +367,7 @@ static struct nw_boundary nw_transaction(
     return boundary;
 }
 
+#ifndef NW_EMBEDDED
 static double nw_boundary_distance(
     const struct nw_boundary *first,
     const struct nw_boundary *second
@@ -626,3 +627,4 @@ int main(int argc, char **argv) {
     );
     return 0;
 }
+#endif

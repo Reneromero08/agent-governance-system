@@ -3824,3 +3824,51 @@ The next selected experiment puts this wave law behind CATVM and compares it
 against the exactly matched compact complex recurrence; no distinct phase
 resource, advantage, Small Wall crossing, physical execution, or unlimited
 computation is established.
+
+## CATVM now enforces nonlinear wave custody, restoration, and reuse
+
+The four-cell Kerr/`SU(2)` carrier now runs inside a non-dumpable, locked,
+single-peer `AF_UNIX` service with a default-kill seccomp filter. The public
+controller contains no complex carrier or wave update. It can request only a
+complete primary or reuse transaction and receives three final real
+observables after the service has reversed the actual resident wave.
+
+One carrier completes 256 alternating depth-128 transactions. Restoration
+generation reaches 256, maximum restoration error is `5.016e-13`, and
+maximum repeated final-boundary drift is `1.358e-13` under the predeclared
+`2e-10` continuous tolerance. Six same-UID inspection paths deny access.
+Intermediate projection, null-carrier, missing inverse, wrong Kerr inverse,
+and applicable reordered inverse controls fail; snapshot remains generation
+zero and is not actual restored-carrier reuse.
+
+Evidence `/tmp/catvm-kerr-wave-recorded.QUkVYO/evidence` and focused review
+establish:
+
+```text
+CATVM_ENFORCED_NONLINEAR_KERR_INTERFERENCE_WAVE_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+LINUX_USERSPACE_AF_UNIX_FOUR_COMPLEX_CELL_DEPTH128_DOUBLE_COMPLEX_KERR_SU2_SOFTWARE_REFERENCE_ONLY
+```
+
+The raw response recorder and exact parsers close the no-smuggle response
+surface. Resource evidence separates the 208-byte logical context and
+4096-byte context mapping from observed warm process `VmRSS=4120 KiB` and
+`VmLck=4112 KiB`.
+
+Matched CATVM inert, snapshot, and in-place arms have identical traffic.
+Descriptive warm medians are approximately `10.7 us`, `25.1 us`, and
+`40.4 us` per transaction. The compact scalar forward recurrence is
+approximately `13.2 us`; direct wave full lifecycle is approximately
+`29.2 us`. Those direct timings do not have identical lifecycle semantics
+and establish no leverage. The decisive obstruction remains an exactly
+matched 64-byte, four-complex-value recurrence.
+
+The next selected phase-owned experiment is not another CATVM wrapper or
+larger Kerr fixture. It tests whether the nonlinear symplectic wave law
+admits a compact open relation signature with native shared-port closure,
+or whether exact elimination forces relation-rank or harmonic growth. That
+directly reconnects the waveform machine to unresolved relational geometry.

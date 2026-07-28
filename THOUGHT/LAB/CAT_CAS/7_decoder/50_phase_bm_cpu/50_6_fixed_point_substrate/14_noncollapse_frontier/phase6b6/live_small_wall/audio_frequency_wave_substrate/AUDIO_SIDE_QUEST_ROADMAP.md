@@ -1154,6 +1154,26 @@ compact complex recurrence and an inert isolated boundary. CATVM enforcement
 alone will not establish a distinct phase resource; after custody is proven,
 the next phase-owned obstruction remains the equivalent compact recurrence.
 
+That CATVM enforcement is now established for one four-cell carrier across
+256 alternating depth-128 transactions. The service is same-UID,
+non-dumpable, locked, single-peer, and seccomp-confined; all declared
+inspection and no-smuggle controls pass. The matched 64-byte scalar recurrence
+remains faster under the descriptive, non-lifecycle-matched direct timing.
+
+The next selected phase-owned experiment is:
+
+```text
+COMPACT_NONLINEAR_SYMPLECTIC_PHASE_RELATION_SIGNATURE_WITH_NATIVE_SHARED_PORT_CLOSURE
+```
+
+It must expose typed open wave ports, retain shared wave state unresolved,
+compose Kerr/interference modules through the actual resident shared port,
+and determine exact signature growth without expanding assignments or
+wave paths. A positive result must compact relation geometry rather than
+merely evaluate another fixed-state recurrence. A negative result must
+identify whether nonlinear elimination causes polynomial degree, harmonic
+rank, interface width, or inverse-custody growth.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:

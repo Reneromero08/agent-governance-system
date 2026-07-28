@@ -48,8 +48,8 @@
   },
   "lane_closure_authority": "USER_ONLY",
   "terminal": false,
-  "current_highest_milestone": "BOUNDED_FIXED_RANK_NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE",
-  "current_claim_ceiling": "BOUNDED_FOUR_COMPLEX_CELL_NORMALIZED_KERR_SU2_WAVE_MESH_DEPTHS1_4_32_128_512_2048_DOUBLE_COMPLEX_SOFTWARE_REFERENCE_ONLY",
+  "current_highest_milestone": "CATVM_ENFORCED_NONLINEAR_KERR_INTERFERENCE_WAVE_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_REUSE",
+  "current_claim_ceiling": "LINUX_USERSPACE_AF_UNIX_FOUR_COMPLEX_CELL_DEPTH128_DOUBLE_COMPLEX_KERR_SU2_SOFTWARE_REFERENCE_ONLY",
   "architectural_alignment": {
     "current_phase_circuit_substrate": "ESTABLISHED_DEVELOPMENT_FOUNDATION",
     "bounded_holographic_relational_substrate": "ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_EXACT_15_NODE_FOUR_OWNER_AFFINE_DAG",
@@ -1463,14 +1463,34 @@
     "nonlinear_kerr_wave_distinct_phase_resource": false,
     "nonlinear_kerr_wave_computational_advantage": false,
     "nonlinear_kerr_wave_small_wall_crossing": false,
+    "catvm_nonlinear_kerr_wave": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS_STRICT_CEILING",
+    "catvm_nonlinear_kerr_wave_claim": "CATVM_ENFORCED_NONLINEAR_KERR_INTERFERENCE_WAVE_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_REUSE",
+    "catvm_nonlinear_kerr_wave_depth": 128,
+    "catvm_nonlinear_kerr_wave_carrier_complex_cells": 4,
+    "catvm_nonlinear_kerr_wave_transactions": 256,
+    "catvm_nonlinear_kerr_wave_carrier_creation_count": 1,
+    "catvm_nonlinear_kerr_wave_actual_inverse_restoration": true,
+    "catvm_nonlinear_kerr_wave_actual_restored_carrier_reuse": true,
+    "catvm_nonlinear_kerr_wave_maximum_restoration_error": 5.016249846544284e-13,
+    "catvm_nonlinear_kerr_wave_maximum_boundary_drift": 1.3578027591165664e-13,
+    "catvm_nonlinear_kerr_wave_continuous_tolerance": 2e-10,
+    "catvm_nonlinear_kerr_wave_process_inspection_controls_denied": 6,
+    "catvm_nonlinear_kerr_wave_live_component_bytes": 64,
+    "catvm_nonlinear_kerr_wave_warm_service_vm_rss_kib": 4120,
+    "catvm_nonlinear_kerr_wave_warm_service_vm_lck_kib": 4112,
+    "catvm_nonlinear_kerr_wave_best_compact_state_bytes": 64,
+    "catvm_nonlinear_kerr_wave_retained_inverse_history_bytes": 0,
+    "catvm_nonlinear_kerr_wave_distinct_phase_resource": false,
+    "catvm_nonlinear_kerr_wave_computational_advantage": false,
+    "catvm_nonlinear_kerr_wave_small_wall_crossing": false,
     "algebraic_general_affine_equation_elimination": true,
     "general_boolean_relation_elimination": false,
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
     "decoded_branch_feedback": false,
     "direct_metal_target": "HISTORICAL_ONLY_NOT_AUTHORIZED_BY_CURRENT_GOAL",
     "best_matched_compact_baseline": "FOUR_COMPLEX_VALUE_KERR_SU2_RECURRENCE_64_BYTE_STATE_O_DEPTH",
-    "best_phase_forward_over_compact_ratio": "NOT_YET_MEASURED_FOR_KERR_WAVE",
-    "best_phase_full_lifecycle_over_compact_ratio": "NOT_YET_MEASURED_FOR_KERR_WAVE",
+    "best_phase_forward_over_compact_ratio": "NOT_LIFECYCLE_MATCHED_COMPACT_FORWARD_13_2US_VS_DIRECT_WAVE_FULL_LIFECYCLE_29_2US",
+    "best_phase_full_lifecycle_over_compact_ratio": "CATVM_IN_PLACE_40_4US_VS_COMPACT_FORWARD_13_2US_DESCRIPTIVE_NO_LEVERAGE",
     "c5_advantage": false,
     "terminal": false
   },
@@ -1524,7 +1544,8 @@
     "BOUNDED_F5_QUADRATIC_PHASE_KERNEL_COHERENT_SHARED_PORT_GAUSS_CLOSURE_WITH_FIXED_TWO_BLOCK_CUSTODY_RESTORATION_AND_REUSE",
     "BOUNDED_GENERIC_5X5_UNITARY_PAIRED_UNIT_PHASOR_COHERENT_COMPOSITION_WITH_TWO_BLOCK_CUSTODY_RESTORATION_AND_REUSE",
     "ORDERED_THREE_UNIT_PHASOR_MEAN_HAS_SMOOTH_ZERO_LOCAL_SECTION_BUT_NO_GLOBAL_CONTINUOUS_GAUGE_FREE_DISK_SECTION",
-    "BOUNDED_FIXED_RANK_NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE"
+    "BOUNDED_FIXED_RANK_NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE",
+    "CATVM_ENFORCED_NONLINEAR_KERR_INTERFERENCE_WAVE_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_REUSE"
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
@@ -1538,7 +1559,7 @@
     "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
   },
   "active_frontier_candidates": [
-    "CATVM_ENFORCED_NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER",
+    "COMPACT_NONLINEAR_SYMPLECTIC_PHASE_RELATION_SIGNATURE_WITH_NATIVE_SHARED_PORT_CLOSURE",
     "BROADER_NON_AFFINE_PHASE_COMPOSITION_ALGEBRA",
     "FIXED_RANK_OR_COMPACT_CLOSURE_WITHOUT_BOOLEAN_RECURRENCE",
     "COMPACT_REPRESENTATION_ACROSS_WIDER_GRAPH_SEPARATORS",
@@ -1589,7 +1610,8 @@
     "GENERIC_OFF_CHIRP_PAIRED_PHASE_UNITARY_CLOSURE_ESTABLISHED",
     "FINITE_PHASOR_MEAN_GLOBAL_GAUGE_FREE_SECTION_OBSTRUCTION_ESTABLISHED",
     "NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER_WITHOUT_AMPLITUDE_REENCODING_ESTABLISHED",
-    "CATVM_ENFORCED_NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER"
+    "CATVM_ENFORCED_NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER_ESTABLISHED",
+    "COMPACT_NONLINEAR_SYMPLECTIC_PHASE_RELATION_SIGNATURE_WITH_NATIVE_SHARED_PORT_CLOSURE"
   ],
   "frontier_warning": "ANOTHER_HANDCRAFTED_GRAPH_FAMILY_IS_INSUFFICIENT_IF_INTERMEDIATE_RELATION_WIDTH_CARRIER_STATE_OR_PROVENANCE_GROWS_EXPONENTIALLY",
   "agent_policy": {
