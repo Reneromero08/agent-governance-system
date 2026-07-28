@@ -4212,3 +4212,38 @@ CATVM_ENFORCED_CYCLOTOMIC_CUBIC_TT_HIDDEN_BOND_COMPOSITION_WITH_ACTUAL_RESTORATI
 within Linux userspace width four. This strengthens machine custody but does
 not change the phase rank, matched classical TT, advantage, Small Wall, or
 physical-execution boundaries.
+
+## Continuous phase coherence yields a bounded bandwidth plateau
+
+The next carrier leaves finite cyclotomic arithmetic for a continuous
+sampled wave. Each fixed Floquet step applies the phase kick
+`exp(-i sqrt(2) cos(theta))`, a Fourier transform, the irrational quadratic
+free phase `exp(-i sqrt(3) n^2/2)`, and the inverse Fourier transform.
+
+At tail-energy tolerance `1e-12`, periodic radii at depths
+`64,128,256,512,1024,2048` are `26,26,26,26,26,24`. An identical-strength
+deterministic 17-step phase schedule reaches
+`50,77,131,239,452,882`. Grid doubling, an epsilon sweep, and a
+63-bit-mantissa replay preserve the contrast. The depth-2048 actual inverse
+restores within `1.412e-14`; an unrelated 31-step program and eight further
+cycles consume the same restored carrier.
+
+Evidence `/tmp/continuous-kicked-phase-repaired.I8PlYF/evidence` supports the bounded
+numerical claim:
+
+```text
+BOUNDED_NUMERICAL_CONTINUOUS_IRRATIONAL_KICKED_PHASE_COHERENT_FOURIER_LOCALIZATION_CONTRAST_WITH_EFFECTIVE_BANDWIDTH_PLATEAU_ACTUAL_RESTORATION_AND_REUSE
+```
+
+The matched adaptive Bessel recurrence needs only 97 complex coefficients
+and matches the 2,048-grid phase state within `7.298e-13`. It is smaller and
+faster than the dense FFT implementation. The plateau is therefore
+phase-coherent behavior but not a distinct computational resource or
+advantage. Exact compact support, asymptotic localization, control
+delocalization, Small Wall crossing, unbounded computation, CATVM
+enforcement for this carrier, and physical execution remain unestablished.
+
+The fixed one-rotor vector is the new obstruction. The selected repair lifts
+the periodic law to four nonseparably coupled rotors in a Fourier TT/MPS and
+tests the central `2|2` interface rank without materializing the dense
+four-dimensional wave.

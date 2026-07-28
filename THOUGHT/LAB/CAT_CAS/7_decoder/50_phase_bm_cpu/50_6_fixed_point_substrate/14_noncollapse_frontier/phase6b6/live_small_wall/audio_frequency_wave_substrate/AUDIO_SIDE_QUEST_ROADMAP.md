@@ -1273,10 +1273,10 @@ unrelated circuit consumes it; snapshot state exists only in a separate sham
 service, whose three logical copies and Python resident footprints are
 reported distinctly.
 
-The next selected work is:
+The resulting bounded diagnostic is:
 
 ```text
-CONTINUOUS_KICKED_PHASE_FOURIER_CUSTODY_AND_BESSEL_BANDWIDTH_KILL_TEST
+CONTINUOUS_KICKED_PHASE_FOURIER_COHERENCE_LOCALIZATION_CONTRAST_ESTABLISHED
 ```
 
 This moves beyond the finite-root calibration and tests a continuous phase
@@ -1285,6 +1285,32 @@ whether any compact harmonic/chirp representation survives generic
 nonintegrable phase mixing, or whether Bessel bandwidth and matched
 FFT/Krylov cost expose the next obstruction. It must not treat a software
 FFT or summation as a unit-cost physical waveform oracle.
+
+The periodic law exhibits a tolerance-defined Fourier-bandwidth plateau:
+radii remain `24..26` from depth 64 through 2,048, while the matched
+deterministic 17-step phase schedule reaches radius 882. Grid doubling,
+epsilon sweeps, extended-precision replay, actual inverse restoration, and
+unrelated restored-carrier reuse all pass.
+
+The adaptive Bessel recurrence is nevertheless the better matched compact
+classical representation: 97 complex coefficients reproduce the periodic
+phase state within `7.298e-13` and use less memory and warm time than the
+dense FFT implementation. The plateau is not advantage or a distinct phase
+resource.
+
+The next selected phase-owned repair is:
+
+```text
+FOUR_ROTOR_NONSEPARABLE_KICKED_PHASE_FOURIER_TT_INTERFACE_RANK_TEST
+```
+
+This is the smallest lift that removes the fixed one-rotor-vector
+explanation. Four nearest-neighbor rotors provide a nontrivial `2|2`
+relational cut. The implementation must preserve bounded local Fourier
+support, apply nonseparable phase coupling natively in a TT/MPS, project only
+the declared final boundary, reverse actual public topology, reuse the
+restored carrier, and compare against the identical best classical TT
+without dense `(2R+1)^4` expansion.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 

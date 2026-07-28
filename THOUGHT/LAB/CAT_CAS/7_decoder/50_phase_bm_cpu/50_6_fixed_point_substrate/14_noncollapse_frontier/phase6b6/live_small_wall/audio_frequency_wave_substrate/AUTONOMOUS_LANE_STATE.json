@@ -1675,6 +1675,33 @@
     "catvm_cyclotomic_f5_tt_distinct_phase_resource": false,
     "catvm_cyclotomic_f5_tt_computational_advantage": false,
     "catvm_cyclotomic_f5_tt_small_wall_crossing": false,
+    "continuous_kicked_phase_fourier": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS_STRICT_CEILING",
+    "continuous_kicked_phase_reviewer_id": "CONTINUOUS-KICKED-PHASE-01",
+    "continuous_kicked_phase_remaining_review_findings": 0,
+    "continuous_kicked_phase_claim": "BOUNDED_NUMERICAL_CONTINUOUS_IRRATIONAL_KICKED_PHASE_COHERENT_FOURIER_LOCALIZATION_CONTRAST_WITH_EFFECTIVE_BANDWIDTH_PLATEAU_ACTUAL_RESTORATION_AND_REUSE",
+    "continuous_kicked_phase_claim_ceiling": "PERIODIC_K_SQRT2_TAU_SQRT3_GRIDS256_TO2048_DEPTH2048_EPSILON1E_MINUS12_SOFTWARE_FLOAT64",
+    "continuous_kicked_phase_periodic_depths": [64, 128, 256, 512, 1024, 2048],
+    "continuous_kicked_phase_periodic_epsilon_radii": [26, 26, 26, 26, 26, 24],
+    "continuous_kicked_phase_scrambled_epsilon_radii": [50, 77, 131, 239, 452, 882],
+    "continuous_kicked_phase_epsilon_tail_energy": 1e-12,
+    "continuous_kicked_phase_periodic_grid_boundary_max_error": 3.8269387658829146e-13,
+    "continuous_kicked_phase_scrambled_grid_boundary_max_error": 3.33288951992472e-13,
+    "continuous_kicked_phase_extended_precision_boundary_error": 2.971415015234107e-13,
+    "continuous_kicked_phase_primary_restoration_error": 1.4117417178941347e-14,
+    "continuous_kicked_phase_actual_inverse_restoration": true,
+    "continuous_kicked_phase_actual_restored_carrier_reuse": true,
+    "continuous_kicked_phase_retained_inverse_history_bytes": 0,
+    "continuous_kicked_phase_bessel_retained_modes": 97,
+    "continuous_kicked_phase_bessel_l2_error": 7.297565654419186e-13,
+    "continuous_kicked_phase_phase_resident_bytes": 32768,
+    "continuous_kicked_phase_bessel_resident_bytes": 1552,
+    "continuous_kicked_phase_exact_finite_support": false,
+    "continuous_kicked_phase_asymptotic_localization": false,
+    "continuous_kicked_phase_scrambled_asymptotic_delocalization": false,
+    "continuous_kicked_phase_machine_enforced_hidden_intermediate": false,
+    "continuous_kicked_phase_distinct_phase_resource": false,
+    "continuous_kicked_phase_computational_advantage": false,
+    "continuous_kicked_phase_small_wall_crossing": false,
     "algebraic_general_affine_equation_elimination": true,
     "general_boolean_relation_elimination": false,
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
@@ -1743,7 +1770,8 @@
     "BOUNDED_TOPOLOGY_REMATERIALIZED_NONCOMMUTING_STOKES_BCH_CHARACTER_PHASE_CLOSURE_WITH_RESTORATION_AND_REUSE",
     "BOUNDED_REFLECTION_GRADED_TOPOLOGY_REMATERIALIZED_NONCOMMUTING_STOKES_BCH_CHARACTER_PHASE_QUOTIENT_WITH_RESTORATION_AND_REUSE",
     "BOUNDED_EXACT_CYCLOTOMIC_CUBIC_PHASE_FOURIER_TENSOR_TRAIN_SEQUENTIAL_RANK_GROWTH_WITH_ACTUAL_RESTORATION_AND_REUSE",
-    "CATVM_ENFORCED_CYCLOTOMIC_CUBIC_TT_HIDDEN_BOND_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_REUSE"
+    "CATVM_ENFORCED_CYCLOTOMIC_CUBIC_TT_HIDDEN_BOND_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_REUSE",
+    "BOUNDED_NUMERICAL_CONTINUOUS_IRRATIONAL_KICKED_PHASE_COHERENT_FOURIER_LOCALIZATION_CONTRAST_WITH_EFFECTIVE_BANDWIDTH_PLATEAU_ACTUAL_RESTORATION_AND_REUSE"
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
@@ -1757,7 +1785,7 @@
     "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
   },
   "active_frontier_candidates": [
-    "CONTINUOUS_KICKED_PHASE_FOURIER_CUSTODY_AND_BESSEL_BANDWIDTH_KILL_TEST",
+    "FOUR_ROTOR_NONSEPARABLE_KICKED_PHASE_FOURIER_TT_INTERFACE_RANK_TEST",
     "BROADER_NON_AFFINE_PHASE_COMPOSITION_ALGEBRA",
     "FIXED_RANK_OR_COMPACT_CLOSURE_WITHOUT_BOOLEAN_RECURRENCE",
     "COMPACT_REPRESENTATION_ACROSS_WIDER_GRAPH_SEPARATORS",
@@ -1818,7 +1846,8 @@
     "REFLECTION_GRADED_STOKES_BCH_PHASE_QUOTIENT_ESTABLISHED",
     "CYCLOTOMIC_CUBIC_PHASE_FOURIER_TT_SEQUENTIAL_RANK_GROWTH_ESTABLISHED",
     "CATVM_ENFORCED_CYCLOTOMIC_CUBIC_TT_HIDDEN_BOND_COMPOSITION_ESTABLISHED",
-    "CONTINUOUS_KICKED_PHASE_FOURIER_CUSTODY_AND_BESSEL_BANDWIDTH_KILL_TEST"
+    "CONTINUOUS_KICKED_PHASE_FOURIER_COHERENCE_LOCALIZATION_CONTRAST_ESTABLISHED",
+    "FOUR_ROTOR_NONSEPARABLE_KICKED_PHASE_FOURIER_TT_INTERFACE_RANK_TEST"
   ],
   "frontier_warning": "ANOTHER_HANDCRAFTED_GRAPH_FAMILY_IS_INSUFFICIENT_IF_INTERMEDIATE_RELATION_WIDTH_CARRIER_STATE_OR_PROVENANCE_GROWS_EXPONENTIALLY",
   "agent_policy": {
