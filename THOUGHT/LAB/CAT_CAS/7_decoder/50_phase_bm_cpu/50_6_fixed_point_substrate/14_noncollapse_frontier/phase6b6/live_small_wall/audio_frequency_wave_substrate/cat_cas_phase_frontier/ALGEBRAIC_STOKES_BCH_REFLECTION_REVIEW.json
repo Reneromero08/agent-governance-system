@@ -1,0 +1,15 @@
+{
+  "review_id": "STOKES-BCH-REFLECTION-01",
+  "result": "PASS",
+  "evidence": "/tmp/stokes-bch-reflection-final.pzfxDb/evidence",
+  "reflection_parity_law": "PASS",
+  "excluded_sector_exact_zero": "PASS",
+  "carrier_allocation_reduction": "PASS",
+  "exact_phase_reference_parity": "PASS",
+  "matched_boundary_accounting": "PASS",
+  "no_smuggle": "PASS",
+  "controls": "PASS",
+  "actual_inverse_restoration_and_reuse": "PASS",
+  "remaining_findings": 0,
+  "claim_ceiling_preserved": true
+}

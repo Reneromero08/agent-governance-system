@@ -4120,3 +4120,29 @@ signature. The same-output grade-ten dual-prime signature needs 720 logical
 residue bytes; the 64-byte point evaluator has different boundary semantics.
 This is not fixed-rank closure, an arbitrary representation lower bound,
 advantage, Small Wall crossing, or physical execution.
+
+## Reflection grading halves the BCH carrier but preserves rank growth
+
+Both noncommuting quadratic generators are even under `y -> -y`. The Stokes
+Lie-Poisson bracket maps parities `(p,q)` to `p+q+1 mod 2`, so public topology
+fixes the `y` parity of every length-`n` Lie word to `n-1 mod 2`.
+
+Compiling this grading removes 58 of 116 final and 58 of 116 reusable scratch
+coefficient cells. The character carrier falls from 8,352 to 4,176 unit
+phases, or from 133,632 to 66,816 logical packed bytes. A non-emitting exact
+verifier compares 232 retained primary/reuse dual-prime cells and proves all
+116 excluded primary/reuse cells exactly zero. Actual restoration remains
+`4.554e-13`; reuse remains within `6.054e-13`.
+
+Evidence `/tmp/stokes-bch-reflection-final.pzfxDb/evidence` establishes:
+
+```text
+BOUNDED_REFLECTION_GRADED_TOPOLOGY_REMATERIALIZED_NONCOMMUTING_STOKES_BCH_CHARACTER_PHASE_QUOTIENT_WITH_RESTORATION_AND_REUSE
+```
+
+within bounded grade-six phase execution and a grade-ten exact diagnostic.
+The matched classical signature is also halved to 116 logical residue bytes.
+Harmonic catalecticant ranks remain `3,3,5,5,7,7,9,9,11,11`; the exact
+quotient changes the constant but not the rank-growth obstruction. It is not
+fixed-rank closure, a distinct phase resource, advantage, Small Wall
+crossing, or physical execution.

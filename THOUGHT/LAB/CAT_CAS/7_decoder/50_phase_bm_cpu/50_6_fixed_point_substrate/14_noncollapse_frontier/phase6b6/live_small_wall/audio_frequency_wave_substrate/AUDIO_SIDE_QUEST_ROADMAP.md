@@ -1230,17 +1230,28 @@ logical-byte phase carrier is not compact relative to the 232-byte
 same-output dual-prime signature at executed grade six, and no advantage is
 claimed.
 
+An exact reflection grading removes the next representation redundancy.
+Because both generators are even under `y -> -y`, a length-`n` Lie word has
+`y` parity `n-1 mod 2`. Compiling that public law into final and scratch
+topology halves both from 116 to 58 coefficient cells. Exact verification
+proves every excluded cell zero, and restoration/reuse remain unchanged.
+The phase payload is 66,816 logical bytes versus 116 logical residue bytes
+for the same-output classical signature.
+
+The harmonic catalecticant ranks remain `3,3,5,5,7,7,9,9,11,11`.
+Therefore neither word-history rematerialization nor exact reflection
+quotienting removes the final-signature rank obstruction.
+
 The next selected work is:
 
 ```text
-COMPACT_RELATION_PRESERVING_BCH_SIGNATURE_QUOTIENT_OR_PHASE_COUPLING_BEYOND_CLASSICAL_POINT_EVOLUTION
+PHASE_NATIVE_NONSEPARABLE_COUPLING_WITH_COMPACT_BOUNDARY_AND_NO_FIXED_DIMENSIONAL_CLASSICAL_POINT_RECURRENCE
 ```
 
-It must reduce the actual final relation signature without moving its
-coefficients into another retained structure, or replace this integrable
-Hamiltonian family with a phase resource lacking an immediate compact
-classical point recurrence. More BCH grades, more Lie words, or a larger
-character orbit do not resolve the obstruction.
+The next mechanism must change the useful phase resource or boundary law,
+not extract another constant-factor symmetry quotient from this integrable
+family. More BCH grades, Lie words, reflection sectors, or character-orbit
+cells do not resolve the obstruction.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 
