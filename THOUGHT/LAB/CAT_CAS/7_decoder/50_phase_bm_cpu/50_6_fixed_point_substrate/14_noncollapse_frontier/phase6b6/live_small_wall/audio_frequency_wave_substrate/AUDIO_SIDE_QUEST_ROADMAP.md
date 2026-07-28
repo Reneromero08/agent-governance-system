@@ -1421,6 +1421,44 @@ phase structure in a factorized carrier without moving width growth into
 Bessel/Gram reconstruction or an immediately equivalent compact classical
 recurrence. Larger dense cyclic fixtures do not answer this question.
 
+That generic TT route is now closed. The grid-17 central rank reaches
+`17,92,201,280,289` over depths one through five and saturates the exact
+`17^2` interface. Logical TT storage reaches 167,620 cells versus 83,521
+dense cells, and the update materializes an 83,521-cell dense-equivalent
+two-site core. Restoration and reuse pass, but compactness does not.
+
+The next selected phase-owned repair is:
+
+```text
+GLOBAL_ROTATION_QUOTIENT_CYCLIC_PHASE_CARRIER
+```
+
+It must remove the redundant global `U(1)` coordinate exactly for a
+rotation-invariant phase program, derive the constrained free phase from
+total-momentum conservation, avoid TT/Gram reconstruction, preserve actual
+inverse restoration and reuse, and compare against the identical compact
+classical quotient. This is a structural phase quotient, not another larger
+TT fixture.
+
+That quotient is established. Three relative-angle coordinates with the
+public total-momentum-zero-mod-17 constraint reproduce the full four-rotor
+dense state within `2.048e-14` through depth 64. Resident state falls exactly
+from 83,521 to 4,913 complex cells, with fixed 236,368-byte explicit engine
+and 314,976-byte wrapper signatures. Actual inverse restoration and
+generation-two reuse pass.
+
+The matched classical quotient is identical, and state still grows as
+`N^(rotors-1)`. The next selected obstruction is:
+
+```text
+RELATIVE_COORDINATE_EXPONENTIAL_GROWTH_AND_MATCHED_CLASSICAL_QUOTIENT_IDENTITY
+```
+
+The successor must either factor the quotient without generic TT saturation
+or introduce a phase update/projection resource not inherited immediately by
+the best matched compact classical recurrence. Repeating larger
+rotation-quotient fixtures is not useful.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:

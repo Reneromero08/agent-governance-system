@@ -1,0 +1,30 @@
+{
+  "review_id": "FOUR-ROTOR-COMPACT-CYCLIC-PHASE-TT-01-R2",
+  "review_scope": "bounded four-site grid-17 cyclic phase tensor-train diagnostic at depths one through five",
+  "verdict": "PASS",
+  "evidence": "/tmp/four-rotor-compact-cyclic-tt-repaired.zELuOK",
+  "source_sha256": "5d18d04ba659b06ea45471ec063d3d559c626b92aa437e6bece23354efa316a4",
+  "qualification_sha256": "a25ec19eaa322a21146023192818f1eb02ef4ee119e6f4b1cca94a942341c197",
+  "checks": {
+    "native_pair_phase_update": "PASS",
+    "forward_inverse_order": "PASS",
+    "dense_boundary_parity": "PASS",
+    "central_rank_saturation": "PASS",
+    "logical_tt_cell_wording": "PASS",
+    "dense_equivalent_core_disclosure": "PASS",
+    "no_simultaneous_peak_payload_claim": "PASS",
+    "preclosure_actual_inverse_gate": "PASS",
+    "baseline_free_canonical_closure": "PASS",
+    "actual_restored_carrier_reuse": "PASS",
+    "wrong_missing_reordered_controls": "PASS",
+    "claim_ceiling": "PASS"
+  },
+  "central_rank_at_depth_five": 289,
+  "exact_central_rank_ceiling": 289,
+  "maximum_logical_tt_cells": 167620,
+  "dense_wave_cells": 83521,
+  "dense_equivalent_two_site_core_cells": 83521,
+  "simultaneous_peak_payload_established": false,
+  "remaining_findings": []
+}
+

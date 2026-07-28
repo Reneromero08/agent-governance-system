@@ -1,0 +1,31 @@
+{
+  "review_id": "FOUR-ROTOR-ROTATION-QUOTIENT-01-R2",
+  "review_scope": "bounded grid-17 four-rotor global-rotation quotient through depth 64",
+  "verdict": "PASS",
+  "evidence": "/tmp/four-rotor-rotation-quotient-repaired.EGpI53",
+  "source_sha256": "98eb81f0c8d1aab984b747da5856fb866ce0679bba094c27ad789a130be405dc",
+  "qualification_sha256": "6b1f945d46be0dcf69c258f45a52fba73e587985e74a551ab61ab82244a82f9f",
+  "checks": {
+    "relative_angle_mapping": "PASS",
+    "total_momentum_constraint": "PASS",
+    "nearest_neighbor_phase_mapping": "PASS",
+    "full_dense_lift_state_parity": "PASS",
+    "forward_inverse_order": "PASS",
+    "same_backing_actual_inverse_restoration": "PASS",
+    "actual_restored_carrier_reuse": "PASS",
+    "depth_independent_memory_signature": "PASS",
+    "plan_compilation_accounting": "PASS",
+    "verification_peak_accounting": "PASS",
+    "wrong_missing_reordered_controls": "PASS",
+    "matched_classical_ceiling": "PASS"
+  },
+  "quotient_carrier_complex_cells": 4913,
+  "dense_carrier_complex_cells": 83521,
+  "state_reduction_factor": 17,
+  "maximum_explicit_engine_array_bytes": 236368,
+  "verification_peak_explicit_array_bytes": 2915840,
+  "fft_internal_workspace_bounded": false,
+  "distinct_phase_resource_established": false,
+  "remaining_findings": []
+}
+

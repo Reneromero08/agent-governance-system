@@ -4456,3 +4456,65 @@ This path bypasses rather than solves the compact TT sector obstruction. The
 active obstruction is compact factorization of this phase law across rotor
 count or grid width without restoring Bessel/Gram costs or reducing
 immediately to an equivalent compact classical recurrence.
+
+## Generic cyclic phase TT saturates the dense central interface
+
+The exact cyclic law was applied through native two-site phase multiplication
+and SVD closure in a four-site TT. Central boundary ranks at depths
+`1,2,3,4,5` are `17,92,201,280,289`; the final value saturates the exact
+`17^2` central cut. Logical TT storage reaches 167,620 cells, `2.007x` the
+83,521-cell dense wave, and an 83,521-cell dense-equivalent two-site core is
+materialized from depth two.
+
+Shared boundaries agree with dense execution within `5.792e-15`. The actual
+inverse is hard-gated before closure at `1.041e-9`; baseline-free closure
+restores ranks `1,1,1` within `1.141e-9`. The actual restored carrier
+executes an unrelated generation-two program, with fresh/restored boundary
+error `4.338e-15`. Evidence
+`/tmp/four-rotor-compact-cyclic-tt-repaired.zELuOK` supports:
+
+```text
+BOUNDED_CYCLIC_PHASE_TT_NATIVE_PAIR_CLOSURE_SATURATES_GRID17_CENTRAL_INTERFACE_AT_DEPTH5_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+Only logical TT and core cells are claimed; simultaneous SVD/workspace peak
+payload is open. This closes generic cyclic TT factorization as the repair:
+
+```text
+COMPACT_CYCLIC_PHASE_TT_CENTRAL_RANK_SATURATES_DENSE_INTERFACE
+```
+
+The selected successor is an exact global-rotation quotient of the cyclic
+phase law. It must remove the redundant `U(1)` coordinate by conservation,
+preserve dense-reference parity and actual restoration/reuse, and report the
+identical matched classical quotient rather than claiming leverage.
+
+## Global rotation removes one phase coordinate exactly
+
+For rotation-invariant programs, the phase carrier now stores three relative
+angles instead of four absolute angles. The conjugate free phase derives
+`n0 = -(n1+n2+n3) mod 17` from public total-momentum conservation. Direct
+pair phases remain native in the relative coordinates.
+
+Resident state falls exactly from 83,521 to 4,913 complex cells, a factor of
+17. The fixed signature over depths `1,2,4,8,16,32,64` includes 78,608
+carrier bytes, 78,880 retained plan bytes, 157,760 bytes at plan compilation,
+236,368 explicit engine bytes, and 314,976 wrapper bytes including the
+non-reloaded verification baseline.
+
+The quotient's full lift agrees with independent dense execution within
+`2.048e-14` through depth 64. Primary restoration is `8.614e-15`; unrelated
+generation-two reuse restores at `2.310e-15`, and fresh/restored boundaries
+agree within `7.994e-15`. Evidence
+`/tmp/four-rotor-rotation-quotient-repaired.EGpI53` supports:
+
+```text
+BOUNDED_EXACT_GLOBAL_ROTATION_QUOTIENT_CYCLIC_PHASE_CARRIER_REDUCES_FOUR_ROTOR_STATE_BY_GRID_FACTOR_WITH_DEPTH_INDEPENDENT_MEMORY_ACTUAL_RESTORATION_AND_REUSE
+```
+
+The quotient is structural phase progress, but the identical classical
+quotient has the same law and the remaining state grows as
+`N^(rotors-1)`. No advantage, distinct phase resource, or Small Wall crossing
+is established. The next mechanism must attack that relative-coordinate
+growth or introduce a useful phase resource that the matched compact
+classical method cannot immediately inherit.
