@@ -4030,3 +4030,52 @@ shells and full Stokes signature remain open. A matched classical dual-prime
 machine stores the same Q4 recurrence in eight residue bytes, so this is not
 a distinct phase resource, advantage, Small Wall crossing, or unbounded
 catalytic computation.
+
+## Character-phase addition exposes noncommuting harmonic rank growth
+
+The complete-character phase representation now generalizes beyond the
+monomial Q4 recurrence. For each modular coefficient `v`, native
+componentwise phase multiplication performs coefficient addition. Every
+executed nonzero public scalar action is a phase-index permutation; modular
+zero contributions are skipped. Sparse Lie-Poisson contraction consumes
+actual resident coefficients without decoding, residue shadows, phase
+locking, or retained inverse history.
+
+With tilted and axial quadratic generators alternating through degree 14,
+the parity-admissible carrier holds 676 logical coefficient cells or 24,336
+unit phases. Its logical packed payload is 389,376 bytes. A non-emitting
+verifier compares all 2,704 primary/reuse dual-prime boundary cells exactly
+against the rational oracle. Correct restoration is `5.551e-16`; eight
+same-carrier transactions stay within `1.832e-15`. Missing, wrong, and
+noncommuting dependency-reordered inverses all leave modular mismatches.
+
+All thirteen projected grades are the declared final coefficient-jet
+boundary. After unique harmonic projection, exact middle catalecticant ranks
+are:
+
+```text
+3,3,5,5,7,7,9,9,11,11,13,13,15
+```
+
+This establishes bounded separable/Waring-rank growth through degree 14. It
+is not a lower bound against every compact representation and not an
+unbounded theorem.
+
+Evidence `/tmp/stokes-alternating-axis.HZY9E7/evidence` and focused
+independent review establish:
+
+```text
+BOUNDED_NONCOMMUTING_ALTERNATING_AXIS_STOKES_CHARACTER_PHASE_HARMONIC_CATALECTICANT_RANK_GROWTH_WITH_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+BOUNDED_NORMALIZED_TWO_MODE_RATIONAL_ALTERNATING_NONCOMMUTING_QUADRATIC_STOKES_AXES_DUAL_PRIME_CHARACTER_PHASE_GRADES2_TO14_SOFTWARE_REFERENCE_ONLY
+```
+
+The same-output dual-prime classical jet needs 1,352 logical one-byte
+residues; actual classical allocation is unmeasured. The 64-byte point
+evaluator has different boundary semantics. The next phase repair must find
+compact nonseparable closure or a resource not immediately equivalent to
+classical point evolution.

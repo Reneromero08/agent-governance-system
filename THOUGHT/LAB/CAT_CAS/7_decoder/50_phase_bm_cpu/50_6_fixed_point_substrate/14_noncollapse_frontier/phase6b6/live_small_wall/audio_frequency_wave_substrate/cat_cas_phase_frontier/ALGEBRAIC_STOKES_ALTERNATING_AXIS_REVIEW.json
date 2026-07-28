@@ -1,0 +1,33 @@
+{
+  "review_id": "STOKES-ALTERNATING-AXIS-CHARACTER-PHASE-01",
+  "result": "PASS",
+  "claim_affecting_defects": [],
+  "reviewed_evidence": "/tmp/stokes-alternating-axis.HZY9E7/evidence",
+  "repaired_findings": [
+    "ZERO_SCALAR_CHARACTER_ENDOMORPHISMS_SKIPPED",
+    "EXACT_2704_CELL_NONEMITTING_PHASE_REFERENCE_COMPARISON",
+    "SAME_OUTPUT_CLASSICAL_JET_SEPARATED_FROM_DIFFERENT_OUTPUT_POINT_EVALUATOR",
+    "FULL_13_GRADE_JET_EXPLICITLY_DECLARED_FINAL_BOUNDARY"
+  ],
+  "findings": {
+    "all_executed_scalar_actions_are_permutations": true,
+    "exact_per_cell_phase_reference_parity": true,
+    "actual_inverse_restoration": true,
+    "dependency_reordered_inverse_control": true,
+    "actual_restored_carrier_reuse": true,
+    "harmonic_projection_valid": true,
+    "bounded_catalecticant_interpretation_valid": true,
+    "resource_labels_valid": true,
+    "no_smuggle": true,
+    "claim_ceiling_strict": true
+  },
+  "explicitly_not_established": [
+    "ARBITRARY_COMPACT_REPRESENTATION_LOWER_BOUND",
+    "UNBOUNDED_RANK_GROWTH",
+    "FIXED_RANK_NONCOMMUTING_CLOSURE",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION"
+  ]
+}

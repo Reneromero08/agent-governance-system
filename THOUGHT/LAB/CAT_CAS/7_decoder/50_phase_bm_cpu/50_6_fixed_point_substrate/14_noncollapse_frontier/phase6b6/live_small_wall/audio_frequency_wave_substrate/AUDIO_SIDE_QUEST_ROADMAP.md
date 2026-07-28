@@ -1200,18 +1200,32 @@ are exact phase index permutations, so actual inverse restoration and
 same-carrier reuse have zero measured residual. The public `L^n` factor is
 stored as axis plus exponent and never expanded.
 
-This closes the highest shell at fixed rank, but not the lower shells or the
-full Stokes signature. The matched classical residue recurrence is only
-eight bytes. The next selected work is:
+The exact identity actually represents the full current repeated-axis Stokes
+quotient polynomial in factorized form; it does not retain the entire history
+of prior grades. Its compactness fails to generalize directly when two
+quadratic axes alternate.
+
+A complete character-orbit phase algebra now executes general sparse
+coefficient addition by native phase multiplication and public scalar action
+by phase-index permutation. For alternating noncommuting axes through degree
+14, the unique harmonic representatives have middle catalecticant ranks
+`3,3,5,5,7,7,9,9,11,11,13,13,15`. This is a bounded lower bound on
+separable/Waring rank, not every possible representation. The dense
+character carrier is 389,376 logical packed bytes. A same-output dual-prime
+coefficient jet needs 1,352 logical one-byte residues; the 64-byte point
+evaluator has different boundary semantics and is only a comparator.
+
+The next selected work is:
 
 ```text
-FULL_MULTI_SHELL_STOKES_FACTORIZATION_OR_PHASE_RESOURCE_BEYOND_MATCHED_Q4_RECURRENCE
+COMPACT_NONSEPARABLE_NONCOMMUTING_STOKES_CLOSURE_OR_PHASE_RESOURCE_BEYOND_MATCHED_POINT_RECURRENCE
 ```
 
-It must determine whether all lower shells share a compact factorized
-recurrence, or replace this class with a phase law that lacks an immediate
-compact residue equivalent. Adding higher depths to the established Q4
-recurrence does not resolve either obstruction.
+It must beat the growing separable factor rank without moving the full
+coefficient vector into another representation, or replace this integrable
+Hamiltonian family with a phase resource lacking an immediate compact
+classical point recurrence. Adding higher degrees to either established path
+does not resolve the obstruction.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 
