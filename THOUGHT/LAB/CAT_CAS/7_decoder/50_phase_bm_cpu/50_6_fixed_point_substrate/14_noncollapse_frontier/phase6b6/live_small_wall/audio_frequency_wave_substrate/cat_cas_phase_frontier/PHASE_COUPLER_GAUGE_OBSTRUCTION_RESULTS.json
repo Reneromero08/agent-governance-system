@@ -1,0 +1,48 @@
+{
+  "result": "PASS",
+  "claim": "ORDERED_THREE_UNIT_PHASOR_MEAN_HAS_SMOOTH_ZERO_LOCAL_SECTION_BUT_NO_GLOBAL_CONTINUOUS_GAUGE_FREE_DISK_SECTION",
+  "claim_ceiling": "FINITE_ORDERED_UNIT_PHASOR_ARITHMETIC_MEAN_ENCODING_TOPOLOGICAL_OBSTRUCTION_SOFTWARE_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/phase-coupler-gauge-recorded.tUAnYE/evidence",
+  "local_geometry": {
+    "two_phasor_zero_jacobian_rank": 1,
+    "three_phasor_equilateral_zero_jacobian_rank": 2,
+    "fixed_third_phase_jacobian_determinant": 0.09622504486493762,
+    "local_section_linearization_residual": 9.129875742318409e-10
+  },
+  "global_obstruction": {
+    "boundary_sample_count": 64,
+    "boundary_component_windings": [
+      1,
+      1,
+      1
+    ],
+    "boundary_triangle_equality_unique_preimage": true,
+    "disk_to_circle_extension_boundary_winding_required_zero": true,
+    "global_continuous_gauge_free_section": false,
+    "fixed_r_chart_failure_required_pair_sum_modulus": 4,
+    "fixed_r_chart_maximum_pair_sum_modulus": 2,
+    "fixed_r_chart_global": false
+  },
+  "gauge_witness": {
+    "gauge_shift_radians": 0.37,
+    "actual_phase_cell_residual_same_amplitude": 0.3678930670560826,
+    "amplitude_only_state_distinguishes_gauge_orbit": false,
+    "gauge_retention_or_reversible_gauge_transport_required": true
+  },
+  "scope": {
+    "finite_ordered_unit_phasor_arithmetic_means": true,
+    "weighted_or_nonmean_encodings_ruled_out": false,
+    "stateful_reversible_gauge_transport_ruled_out": false,
+    "native_conserved_phase_geometries_ruled_out": false,
+    "all_finite_phase_couplers_impossible": false
+  },
+  "analyzer": "PASS",
+  "asan_ubsan": "PASS",
+  "independent_review": "PASS",
+  "distinct_phase_resource": false,
+  "computational_advantage": false,
+  "small_wall_crossed": false,
+  "physical_execution": false,
+  "unlimited_catalytic_computation": false,
+  "terminal": false
+}

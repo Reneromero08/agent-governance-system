@@ -1,0 +1,37 @@
+{
+  "review_id": "NONLINEAR-KERR-WAVE-CARRIER-01",
+  "result": "PASS",
+  "accepted_scope": "BOUNDED_FOUR_DOUBLE_COMPLEX_CELL_NORMALIZED_KERR_THEN_SU2_INTERFERENCE_MESH_AT_DEPTHS_1_4_32_128_512_2048_WITH_PUBLIC_TOPOLOGY_RECOMPUTED_INVERSE_TOLERANCED_ACTUAL_RESTORATION_AND_REUSE_SOFTWARE_REFERENCE_ONLY",
+  "findings": [],
+  "closed_findings": [
+    {
+      "id": "NKW-R1-001",
+      "finding": "The first disabled-Kerr and disabled-coupler controls applied the full inverse to an altered forward law.",
+      "repair": "The disable flags now propagate through inverse_layer, each altered path applies its matching lawful inverse, and both restoration errors are hard-gated.",
+      "status": "CLOSED"
+    }
+  ],
+  "mechanism_assessment": {
+    "forward_law": "Kerr intensity phase update followed by two disjoint SU(2) couplers.",
+    "inverse_law": "Reverse pair adjoints restore the post-Kerr cells; inverse Kerr then uses the restored intensities, which Kerr itself did not change.",
+    "amplitude_custody": "Amplitude remains in four ordinary complex working cells. There is no phasor-pair split, amplitude chart, or gauge canonicalization.",
+    "fixed_rank_meaning": "Fixed carrier dimension only, not fixed relational rank, tensor rank, or computational complexity.",
+    "resource_caveat": "The 64-byte live-carrier label counts the four complex carrier components, not total struct, stack, code, counters, or process memory."
+  },
+  "reference_scope": {
+    "independent_scalar_parity_depth_max": 512,
+    "depth2048": "Deterministic replay, sanitizer, norm conservation, and inverse restoration only; no cross-implementation parity."
+  },
+  "boundary_scope": {
+    "intermediate_complex_cells_projected": 0,
+    "intermediate_complex_cells_serialized": 0,
+    "machine_enforced": false,
+    "cli_denial_is_not_machine_enforcement": true
+  },
+  "distinct_phase_resource": false,
+  "computational_advantage": false,
+  "small_wall_crossed": false,
+  "physical_execution": false,
+  "unlimited_catalytic_computation": false,
+  "terminal": false
+}

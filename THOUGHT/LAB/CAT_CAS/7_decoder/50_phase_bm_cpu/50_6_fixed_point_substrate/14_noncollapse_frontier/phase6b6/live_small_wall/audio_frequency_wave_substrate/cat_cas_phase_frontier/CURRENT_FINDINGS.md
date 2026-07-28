@@ -3752,3 +3752,75 @@ an equivalent complex recurrence and gauge-sensitive amplitude split. The
 next phase-owned advance must supply a native coupling resource that does
 not merely move this complex recurrence into host temporaries or extra gauge
 state.
+
+## Finite phasor means have a global gauge-section obstruction
+
+The ordered arithmetic mean of two unit phasors is rank-one at its antipodal
+zero. Three equilateral phasors repair that local defect: the full Jacobian
+has rank two, and fixing the third phase leaves determinant `sqrt(3)/18`.
+Thus a smooth local amplitude section genuinely exists near zero.
+
+That repair cannot be global over the closed unit disk. On the disk boundary,
+triangle equality forces every unit summand to equal the boundary value.
+Each of the three component phases would therefore have winding one, while a
+circle-valued map extending continuously over a disk must have boundary
+winding zero. The fixed-third-phase chart independently fails at `z=-r`,
+where it demands a two-phasor sum of modulus four although the maximum is
+two.
+
+Evidence `/tmp/phase-coupler-gauge-recorded.tUAnYE/evidence` and focused
+review establish:
+
+```text
+ORDERED_THREE_UNIT_PHASOR_MEAN_HAS_SMOOTH_ZERO_LOCAL_SECTION_BUT_NO_GLOBAL_CONTINUOUS_GAUGE_FREE_DISK_SECTION
+```
+
+within:
+
+```text
+FINITE_ORDERED_UNIT_PHASOR_ARITHMETIC_MEAN_ENCODING_TOPOLOGICAL_OBSTRUCTION_SOFTWARE_REFERENCE_ONLY
+```
+
+This retires only memoryless finite ordered phasor arithmetic-mean encoding
+as the amplitude repair. It does not rule out weighted or nonmean encodings,
+stateful gauge transport, conserved phase geometries, or general phase
+couplers.
+
+## Kerr/interference waves keep amplitude resident without re-encoding
+
+The successor changes the carrier law instead of adding phasor coordinates.
+Four normalized complex wave cells receive an intensity-dependent Kerr phase
+kick followed by alternating `SU(2)` interference couplers. Interference
+changes amplitude while amplitude remains resident in the actual wave cells;
+there is no phasor split, magnitude chart, or gauge canonicalization.
+
+Public topology rematerializes the inverse without retained matrices or
+intermediate wave states. Depths `1,4,32,128,512,2048` pass with a fixed
+four-complex-cell carrier. At depth 2048, maximum norm error is `5.773e-15`
+and restoration error is `1.207e-11` against a predeclared `2e-10`
+tolerance. Sixteen varying programs consume the same restored carrier and
+remain below `2.935e-14` restoration error. Missing, wrong, and reordered
+inverse controls leave raw residuals; disabled-Kerr and disabled-coupler
+paths change the boundary and lawfully restore.
+
+Evidence `/tmp/nonlinear-kerr-wave-recorded.dCFXDX/evidence` and focused
+review establish:
+
+```text
+BOUNDED_FIXED_RANK_NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+BOUNDED_FOUR_COMPLEX_CELL_NORMALIZED_KERR_SU2_WAVE_MESH_DEPTHS1_4_32_128_512_2048_DOUBLE_COMPLEX_SOFTWARE_REFERENCE_ONLY
+```
+
+Here fixed rank means fixed carrier dimension only. An independent
+eight-double recurrence has the same 64-byte semantic state and matches
+quantized boundaries through depth 512. Cross-implementation parity at depth
+2048 is not claimed. Direct-process CLI denial is not machine enforcement.
+The next selected experiment puts this wave law behind CATVM and compares it
+against the exactly matched compact complex recurrence; no distinct phase
+resource, advantage, Small Wall crossing, physical execution, or unlimited
+computation is established.

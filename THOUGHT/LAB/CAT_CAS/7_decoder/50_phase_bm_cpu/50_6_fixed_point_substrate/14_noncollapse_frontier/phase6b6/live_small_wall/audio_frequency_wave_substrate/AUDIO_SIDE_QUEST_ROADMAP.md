@@ -1123,6 +1123,37 @@ coordinates. A successor must either supply a lawful phase-native coupling
 resource unavailable to the matched compact complex method, or decisively
 show why the candidate coupling class cannot avoid amplitude/gauge state.
 
+The finite ordered phasor arithmetic-mean candidate is now retired as a
+global memoryless repair. Three phasors recover local rank at zero, but
+boundary winding forbids a global continuous gauge-free disk section. This
+is not a general phase-coupler impossibility.
+
+The smallest phase-owned replacement is now established:
+
+```text
+NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER_WITHOUT_AMPLITUDE_REENCODING
+```
+
+Four normalized complex wave cells compose Kerr intensity-phase kicks and
+`SU(2)` interference through depth 2048, restore by public-topology inverse,
+and reuse the actual carrier. The carrier dimension is fixed and amplitude
+remains resident, so the host amplitude split and memoryless gauge chart are
+removed rather than moved.
+
+The matched classical recurrence is still exactly four complex values with
+the same 64-byte semantic state and `O(depth)` work. The next selected
+experiment is:
+
+```text
+CATVM_ENFORCED_NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER
+```
+
+It must enforce hidden wave intermediates, retain the actual waveform across
+the transaction, restore and reuse it, and compare against the matched
+compact complex recurrence and an inert isolated boundary. CATVM enforcement
+alone will not establish a distinct phase resource; after custody is proven,
+the next phase-owned obstruction remains the equivalent compact recurrence.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -1160,7 +1191,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_LINUX_SOFTWARE_NONLINEAR_TORUS_SHEAR_DEPTHS3_32_128_512_2048_4096_DOUBLE_COMPLEX_PHASE_REFERENCE_ONLY
+BOUNDED_FOUR_COMPLEX_CELL_NORMALIZED_KERR_SU2_WAVE_MESH_DEPTHS1_4_32_128_512_2048_DOUBLE_COMPLEX_SOFTWARE_REFERENCE_ONLY
 ```
 
 Not established:

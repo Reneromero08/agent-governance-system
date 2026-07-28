@@ -1,0 +1,83 @@
+{
+  "result": "PASS",
+  "claim": "BOUNDED_FIXED_RANK_NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE",
+  "claim_ceiling": "BOUNDED_FOUR_COMPLEX_CELL_NORMALIZED_KERR_SU2_WAVE_MESH_DEPTHS1_4_32_128_512_2048_DOUBLE_COMPLEX_SOFTWARE_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/nonlinear-kerr-wave-recorded.dCFXDX/evidence",
+  "tested_depths": [
+    1,
+    4,
+    32,
+    128,
+    512,
+    2048
+  ],
+  "depth2048": {
+    "kerr_phase_updates_forward_plus_inverse": 16384,
+    "interference_couplers_forward_plus_inverse": 8192,
+    "maximum_norm_error": 5.773159728050814e-15,
+    "maximum_restoration_error": 1.2067564018280953e-11,
+    "restoration_tolerance": 2e-10
+  },
+  "reuse": {
+    "transactions": 16,
+    "restoration_generation": 16,
+    "maximum_restoration_error": 2.9342776576492895e-14,
+    "same_actual_carrier": true
+  },
+  "resource_law": {
+    "carrier_complex_cells": 4,
+    "live_carrier_component_bytes": 64,
+    "verification_snapshot_bytes": 64,
+    "compiled_inverse_history_bytes": 0,
+    "best_matched_compact_complex_state_bytes": 64,
+    "maximum_individual_compiler_stack_frame_bytes": 1536,
+    "phase_time": "O_DEPTH",
+    "matched_reference_time": "O_DEPTH"
+  },
+  "mechanism": {
+    "amplitude_resident_in_wave_carrier": true,
+    "host_amplitude_split_count": 0,
+    "gauge_canonicalization_count": 0,
+    "kerr_intensity_phase_coupling": true,
+    "su2_interference_coupling": true,
+    "fixed_carrier_dimension_across_depth": true,
+    "topology_derived_inverse_rematerialization": true,
+    "projected_intermediate_complex_cells": 0,
+    "serialized_intermediate_complex_cells": 0
+  },
+  "controls": {
+    "missing_inverse_residual": 0.19172736610224564,
+    "wrong_inverse_residual": 0.11981620022140292,
+    "reordered_inverse_residual": 0.01862521405096569,
+    "disabled_kerr_changes_boundary_and_lawfully_restores": true,
+    "disabled_coupler_changes_boundary_and_lawfully_restores": true,
+    "intermediate_projection_denied": true,
+    "null_carrier_denied": true,
+    "snapshot_restoration_generation": 0,
+    "snapshot_separated_from_actual_inverse": true,
+    "analyzer": "PASS",
+    "asan_ubsan": "PASS",
+    "deterministic_replay": true
+  },
+  "reference": {
+    "model": "FOUR_COMPLEX_VALUES_AS_EIGHT_SCALAR_DOUBLES",
+    "state_bytes": 64,
+    "exact_quantized_boundary_parity_depths": [
+      1,
+      4,
+      32,
+      128,
+      512
+    ],
+    "depth2048_cross_implementation_parity_established": false
+  },
+  "independent_review": "PASS",
+  "machine_enforced_hidden_intermediate": false,
+  "equivalent_compact_complex_recurrence": true,
+  "genuinely_distinct_phase_resource": false,
+  "computational_advantage": false,
+  "small_wall_crossed": false,
+  "physical_execution": false,
+  "unlimited_catalytic_computation": false,
+  "terminal": false
+}
