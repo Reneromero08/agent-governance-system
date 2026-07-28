@@ -4306,7 +4306,7 @@ BOUNDED_MATRIX_FREE_STREAMED_BESSEL_SCHMIDT_CLOSURE_WITHOUT_EXPANDED_MPO_OR_DENS
 ```
 
 A conservative simultaneous-array upper bound falls from 86.091 MB to
-46.522 MB, including QR/SVD factors, output arrays, and nested contraction
+43.532 MB, including QR/SVD factors, output arrays, and nested contraction
 temporaries. The largest workspace array is smaller than the eliminated
 dense core. Total matrix-free state still exceeds the 11.316 MB
 dense-equivalent because inverse cancellation requires probe rank 492. The
@@ -4315,3 +4315,38 @@ identical classical matrix-free TT defeats any advantage claim.
 The next repair is post-inverse canonical phase closure with
 fresh-versus-restored reuse rank/resource parity. Numerical high-rank residue
 must not move into later transactions.
+
+## Post-inverse canonical closure stops reuse-rank accumulation
+
+One standard TT-rounding sweep now acts directly on the actual strict
+inverse-restored carrier. The sweep uses a global `1e-7` L2 budget divided
+over the three cuts and never consults a baseline state.
+
+Residual bond ranks `29,166,29` reduce to `1,1,1`; carrier cells fall from
+280,894 to 116. The inverse error before closure is `5.235e-8`, the closure
+delta is `5.108e-8`, and postclosure restoration error is `1.147e-8`.
+This is a tolerance-defined numerical quotient after actual inverse
+execution, not exact inverse restoration.
+
+The unrelated matrix-free reuse program has rank history `9,27` on both the
+actual restored carrier and a separately created fresh diagnostic carrier.
+Probe rank, probe columns, matvec counts, retained rank, largest array,
+workspace, and total live cells match exactly. Boundary disagreement is
+`6.681e-12`; both carriers close to 116 cells and ranks `1,1,1`. The accepted
+carrier advances to generation two with no snapshot or retained inverse
+history.
+
+Evidence `/tmp/four-rotor-canonical-final.dQzIFv` supports:
+
+```text
+BOUNDED_ACTUAL_POST_INVERSE_TT_CANONICAL_QUOTIENT_CLOSURE_WITH_FRESH_RESTORED_MATRIX_FREE_REUSE_RANK_AND_RESOURCE_PARITY
+```
+
+The matrix-free counter was also repaired to use the selected live workspace
+rather than recursively adding a historical maximum. Compact factors,
+squared singular values, and retained NumPy backing allocations are counted.
+Its primary peak is 43.532 MB, not 46.522 MB.
+
+The primary inverse still needs probe rank 492 and exceeds the 11.316 MB
+dense-equivalent wave. Canonical reuse is repaired; inverse cancellation
+without probe-space expansion is now the active obstruction.

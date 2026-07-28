@@ -26,11 +26,18 @@ restores within `4.087e-9`, and generations advance `1,2`. Missing, wrong,
 reordered, and snapshot controls separate.
 
 Conservative simultaneous-array accounting reduces the bounded peak from
-86.091 MB to at most 46.522 MB. It includes QR/SVD factors, projected and
+86.091 MB to at most 43.532 MB. It includes QR/SVD factors, projected and
 output arrays, nested contractions, shift temporaries, and the old carrier.
 The largest single workspace array is 299,628 complex cells, below the
 eliminated 707,281-cell core. It does not beat the 11.316 MB dense-equivalent
 total: inverse cancellation still requires certified probe rank 492.
+
+The initial 46.522 MB result recursively added a historical maximum when
+accounting the final retained tensors. Replacing that term with the selected
+currently live workspace gives the stricter 43.532 MB upper bound after
+including compact factor copies, squared singular values, and retained
+NumPy backing allocations; the
+qualification and all qualitative conclusions are unchanged.
 
 This is a real phase-machine resource repair, but not fixed-rank closure,
 compactness versus the dense equivalent, a distinct resource, advantage,

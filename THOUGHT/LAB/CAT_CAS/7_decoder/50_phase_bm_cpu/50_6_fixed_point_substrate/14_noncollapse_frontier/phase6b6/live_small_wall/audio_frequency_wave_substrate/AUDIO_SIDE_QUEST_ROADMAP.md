@@ -1336,7 +1336,7 @@ parity, actual inverse restoration, and actual restored-carrier reuse.
 The matrix-free repair is established. Deterministic streamed Bessel
 matvecs and full-column Frobenius residual accounting reproduce the
 same-tolerance dense reference within `9.459e-10`. A conservative
-simultaneous-array upper bound falls from 86.091 MB to 46.522 MB and neither
+simultaneous-array upper bound falls from 86.091 MB to 43.532 MB and neither
 forbidden structure is materialized.
 
 This remains larger than the 11.316 MB dense-equivalent total because
@@ -1350,6 +1350,24 @@ After the actual inverse, the carrier must undergo lawful canonical
 compression without snapshot reload. The same unrelated program must then
 match a fresh carrier in boundary, rank history, retained cells, and
 matrix-free probe resources within declared tolerances.
+
+That repair is established. A single globally budgeted TT-rounding sweep on
+the actual inverse-restored carrier reduces residual ranks `29,166,29` to
+`1,1,1` and cells 280,894 to 116 without consulting a snapshot. Unrelated
+fresh and restored matrix-free reuse now match exactly in rank and
+deterministic resource signature and close back to the same compact payload.
+
+The next selected phase-owned repair is:
+
+```text
+TOPOLOGY_DERIVED_INVERSE_COUPLING_CANCELLATION_WITHOUT_492_COLUMN_PROBE_EXPANSION
+```
+
+The public inverse topology must act on the actual resident carrier without
+retained private history, but it must avoid rediscovering the cancellation
+through a 492-column numerical range search. Acceptance requires lower total
+live memory than the 11.316 MB dense-equivalent wave, actual restoration and
+reuse, and comparison with the identical best compact classical method.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 

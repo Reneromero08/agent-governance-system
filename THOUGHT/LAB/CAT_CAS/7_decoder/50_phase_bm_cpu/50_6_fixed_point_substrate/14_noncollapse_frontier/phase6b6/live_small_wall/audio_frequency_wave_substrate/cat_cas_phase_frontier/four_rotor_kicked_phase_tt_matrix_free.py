@@ -133,13 +133,24 @@ def deterministic_probes(rows: int, columns: int) -> np.ndarray:
     ) / math.sqrt(rows)
 
 
+def carrier_backing_cells(carrier: reference.Carrier) -> int:
+    """Count unique retained NumPy backing allocations, not view sizes."""
+    allocations: dict[int, np.ndarray] = {}
+    for tensor in carrier.tensors:
+        allocation = tensor
+        while isinstance(allocation.base, np.ndarray):
+            allocation = allocation.base
+        allocations[id(allocation)] = allocation
+    return sum(int(allocation.size) for allocation in allocations.values())
+
+
 def update_live_stats(
     carrier: reference.Carrier,
     stats: Stats,
     workspace_cells: int = 0,
     workspace_array_cells: int = 0,
 ) -> None:
-    carrier_cells = sum(tensor.size for tensor in carrier.tensors)
+    carrier_cells = carrier_backing_cells(carrier)
     stats.maximum_carrier_cells = max(
         stats.maximum_carrier_cells, carrier_cells
     )
@@ -196,7 +207,7 @@ def matrix_free_compress(
         }
     )
     selected: tuple[
-        np.ndarray, np.ndarray, np.ndarray, float
+        np.ndarray, np.ndarray, np.ndarray, float, int
     ] | None = None
     final_projection_residual = frobenius_squared
     for probe_rank in probe_ranks:
@@ -281,6 +292,7 @@ def matrix_free_compress(
                 singular,
                 vh,
                 projection_residual,
+                svd_and_output_upper,
             )
             break
     if selected is None:
@@ -289,9 +301,13 @@ def matrix_free_compress(
             f"rows={operator.rows} columns={operator.columns} "
             f"residual={final_projection_residual:.17g}"
         )
-    left_vectors, singular, right_vectors, projection_residual = (
-        selected
-    )
+    (
+        left_vectors,
+        singular,
+        right_vectors,
+        projection_residual,
+        selected_workspace_cells,
+    ) = selected
     squared = singular * singular
     keep = len(singular)
     for candidate in range(1, len(singular) + 1):
@@ -304,18 +320,22 @@ def matrix_free_compress(
     total_discarded = projection_residual + float(
         np.sum(squared[keep:])
     )
+    compact_right = right_vectors[:keep].reshape(
+        keep, carrier.tensors[edge + 1].shape[1], -1
+    ).copy()
     new_tensor_cells = (
         left_vectors.shape[0] * keep
-        + keep * right_vectors.shape[1]
+        + compact_right.size
     )
     update_live_stats(
         carrier,
         stats,
-        stats.maximum_workspace_cells + new_tensor_cells,
+        selected_workspace_cells + squared.size + new_tensor_cells,
         max(
             stats.maximum_workspace_array_cells,
             left_vectors.shape[0] * keep,
-            keep * right_vectors.shape[1],
+            compact_right.size,
+            squared.size,
         ),
     )
     stats.discarded_l2_squared += total_discarded
@@ -328,9 +348,7 @@ def matrix_free_compress(
     carrier.tensors[edge] = (
         left_vectors[:, :keep] * singular[:keep]
     ).reshape(left, dimension, keep)
-    carrier.tensors[edge + 1] = right_vectors[
-        :keep
-    ].reshape(keep, dimension, right)
+    carrier.tensors[edge + 1] = compact_right
     stats.coupling_applications += 1
     update_live_stats(carrier, stats)
     norm = float(np.linalg.norm(singular))
