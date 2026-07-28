@@ -1,0 +1,19 @@
+{
+  "reviewer_id": "CATVM-CYCLOTOMIC-F5-TT-01",
+  "review_scope": "focused_independent_claim_review",
+  "evidence": "/tmp/catvm-cyclotomic-f5-tt-repaired.MNFtp2/evidence",
+  "result": "PASS",
+  "remaining_findings": 0,
+  "verified": {
+    "controller_imports_protocol_only": true,
+    "controller_service_module_loaded": false,
+    "controller_phase_engine_loaded": false,
+    "snapshot_logical_copies_counted": 3,
+    "snapshot_total_logical_copy_bytes": 480,
+    "python_resident_sizes_reported_separately": true,
+    "same_carrier_actual_restoration_and_reuse": true,
+    "strict_software_only_ceiling": true
+  },
+  "claim": "CATVM_ENFORCED_CYCLOTOMIC_CUBIC_TT_HIDDEN_BOND_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_REUSE",
+  "claim_ceiling": "LINUX_USERSPACE_AF_UNIX_WIDTH4_PRIMARY_ROUNDS4_REUSE_ROUNDS3_EXACT_Q_ZETA5_SOFTWARE_ONLY"
+}

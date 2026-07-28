@@ -1242,10 +1242,10 @@ The harmonic catalecticant ranks remain `3,3,5,5,7,7,9,9,11,11`.
 Therefore neither word-history rematerialization nor exact reflection
 quotienting removes the final-signature rank obstruction.
 
-The next selected work is:
+The resulting machine-boundary milestone is:
 
 ```text
-CATVM_ENFORCED_CYCLOTOMIC_CUBIC_TT_HIDDEN_BOND_COMPOSITION
+CATVM_ENFORCED_CYCLOTOMIC_CUBIC_TT_HIDDEN_BOND_COMPOSITION_ESTABLISHED
 ```
 
 The phase-machine successor now leaves the integrable Stokes family. An exact
@@ -1263,10 +1263,28 @@ Wall crossing. The matched exact classical TT is the accepted
 representation and incurs identical rank, coefficient-height, state, and
 factorization-scratch growth.
 
-The immediate next work places this exact growing-rank carrier behind CATVM
-so bond tensors and Fourier intermediates cannot cross the controller
-boundary. After machine enforcement, the next scientific repair must attack
-the `4->14->64` interface-rank growth rather than add widths or crossings.
+CATVM now places the exact width-four carrier behind a non-dumpable
+same-peer Unix service. The controller receives only one final cyclotomic
+amplitude, restoration generation, flags, and custody receipt in fixed-size
+traffic. Bond tensors, ranks, pivots, and Fourier intermediates have no
+protocol path. The controller imports only a protocol framing module and
+loads neither service nor phase engine. The actual carrier restores and an
+unrelated circuit consumes it; snapshot state exists only in a separate sham
+service, whose three logical copies and Python resident footprints are
+reported distinctly.
+
+The next selected work is:
+
+```text
+CONTINUOUS_KICKED_PHASE_FOURIER_CUSTODY_AND_BESSEL_BANDWIDTH_KILL_TEST
+```
+
+This moves beyond the finite-root calibration and tests a continuous phase
+kick plus collective Fourier interference. Its purpose is to determine
+whether any compact harmonic/chirp representation survives generic
+nonintegrable phase mixing, or whether Bessel bandwidth and matched
+FFT/Krylov cost expose the next obstruction. It must not treat a software
+FFT or summation as a unit-cost physical waveform oracle.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 

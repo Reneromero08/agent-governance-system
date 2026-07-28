@@ -4178,3 +4178,37 @@ exact classical TT is identical to the accepted representation, so the same
 rank, coefficient, state, and scratch growth defeats any distinct-resource,
 advantage, or Small Wall claim. This is bounded phase-native rank growth, not
 fixed-rank or unbounded computation.
+
+## CATVM enforces hidden cyclotomic bond composition
+
+A non-dumpable Linux Unix-domain service now owns one persistent width-four
+exact cubic/Fourier TT carrier. The controller imports only a protocol
+framing module; current-source AST inspection and runtime module inspection
+prove that it loads neither the service nor the phase engine. Fixed
+1,024-byte requests select only public programs; fixed 4,096-byte responses
+contain one final cyclotomic amplitude, restoration generation, flags, and a
+one-way custody receipt. Tensor entries, bonds, ranks, pivots, and Fourier
+intermediates have no protocol path.
+
+Primary and unrelated reuse amplitudes match direct exact reference.
+Restoration generations advance `1,2`, proving that the second circuit
+consumes the actual restored carrier. The mode-`0600` service checks peer
+credentials, emits no process output, denies `/proc/<pid>/mem` inspection,
+and rejects intermediate, null, and cross-mode commands.
+
+The accepted in-place service contains no snapshot image. A separate sham
+service matches the primary boundary and charges all three actual logical
+payload copies: 160 bytes at image creation, 160 at execution load, and 160
+at restoration reload. Python object-graph resident sizes are reported
+separately. The sham sets snapshot-loaded and reports restoration generation
+zero.
+
+Evidence `/tmp/catvm-cyclotomic-f5-tt-repaired.MNFtp2/evidence` establishes:
+
+```text
+CATVM_ENFORCED_CYCLOTOMIC_CUBIC_TT_HIDDEN_BOND_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+within Linux userspace width four. This strengthens machine custody but does
+not change the phase rank, matched classical TT, advantage, Small Wall, or
+physical-execution boundaries.
