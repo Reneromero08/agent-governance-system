@@ -3508,3 +3508,247 @@ matched recurrence stores two double angles in 16 bytes and has the same
 shared nonlinear phase-shear graph behind CATVM. It must grow relational
 geometry beyond fixed two-angle state without hiding an equivalent compact
 classical solver or materializing phase paths.
+
+## Shared nonlinear phase graphs now execute behind CATVM
+
+The successor replaces the implicit alternating two-cell schedule with a
+public dependency graph. Six scrambled shear declarations compile to a
+deterministic topological tape over four resident phasors. Two source epochs
+feed multiple consumers. The compiler rejects cycles and every noncommuting
+hazard pair not ordered by reachability; declaration order does not affect
+the compiled topology or boundary.
+
+Each morphism consumes the actual baseline-relative source and mutates only
+the actual target through `multiply_cell`. No source phase or forward factor
+is retained. Reverse execution traverses exact compiled custody and
+recomputes the conjugate factor from the then-restored resident source. Only
+two final latch cells are decoded.
+
+The direct backend passes rounds `1,3,128,512,2048,4096` with exact quantized
+parity against an independently compiled four-angle recurrence. The CATVM
+service is non-dumpable, locked, single-peer `AF_UNIX/SOCK_SEQPACKET`. At 128
+rounds:
+
+```text
+transactions on one carrier                         256
+forward / inverse shears per transaction        768 / 768
+native phase updates                                  1,548
+resident phase reads                                   1,540
+unit-modulus complex-cell checks                        9,240
+live carrier / comparison snapshot bytes            192 / 192
+snapshot creation / reload bytes                    192 / 96
+page-rounded locked context bytes                       8,192
+best matched classical state bytes                         32
+```
+
+All six same-UID process inspection paths and every intermediate projection
+request are denied. Wrong, missing, and applicable reordered inverses fail
+restoration. Snapshot recovery remains generation zero. The unrelated second
+program and 254 following alternations consume the same actual restored
+carrier.
+
+A matched warm diagnostic uses three observations per arm, each after 32
+warmups with 1,024 timed transactions. Boundary arms have identical request
+and response byte counts:
+
+```text
+compact four-angle direct process             5,696 ns/transaction
+direct phase process                        110,397 ns/transaction
+isolated inert boundary                      10,922 ns/transaction
+snapshot CATVM                               63,525 ns/transaction
+in-place CATVM                              127,496 ns/transaction
+```
+
+These Linux software timings are descriptive and show overhead, not
+leverage. Evidence `/tmp/catvm-nonlinear-phase-resource2.VKjf3e/evidence` and
+focused independent review establish:
+
+```text
+BOUNDED_CATVM_TOPOLOGY_COMPILED_SHARED_NONLINEAR_UNIT_PHASE_GRAPH_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+LINUX_USERSPACE_AF_UNIX_WIDTH4_EDGES6_ROUNDS128_DOUBLE_COMPLEX_PHASE_REFERENCE_ONLY
+```
+
+This generalizes phase topology, shared custody, and the machine boundary. It
+does not establish a distinct phase resource, computational advantage,
+arbitrary relational geometry, physical execution, or a Small Wall crossing.
+The exact four-double recurrence remains the primary obstruction.
+
+The selected next mechanism is not a larger point-phase graph. It is the
+smallest compact non-affine open phase-relation signature with native
+shared-port closure that preserves unresolved relational interference beyond
+an immediately equivalent point-angle recurrence.
+
+## Full-F5 conics now close through two resident hidden ports at fixed rank
+
+The selected repair replaces the Boolean/GF(2) affine calibration with a
+full-F5, six-coefficient conic signature. A total-degree-two conic
+`Q(u,v)` is bracketed by monic affine graph relations `u=A(x)` and `v=C(z)`.
+Native root-of-unity product interpolation computes `H(x,v)=Q(A(x),v)` and
+then consumes the actual resident `H` to compute `K(x,z)=H(x,C(z))`. Neither
+hidden coefficient vector is decoded or serialized.
+
+The primary fixture closes to `K=xz`, whose F5 zero set has nine points and
+therefore cannot be an affine F5 subset. The carrier preserves six signature
+cells after each closure. Correct reverse dependency order restores all 22
+borrowed cells, and the actual restored carrier runs an unrelated dense
+conic program plus sixteen alternating reuse transactions.
+
+The qualified component accounting is:
+
+```text
+resident phase storage                         352 bytes
+hidden baseline storage                        352 bytes
+borrowed verification copy                     704 bytes
+explicit h/k phase-factor temporaries          192 bytes
+projected boundary structure                    32 bytes
+compact classical live coefficient state       64 bytes
+retain-all classical coefficient state          88 bytes
+largest individual compiler stack frame       1648 bytes
+```
+
+These are separately measured components, not a summed peak-process-memory
+claim. Analyzer, ASan/UBSan, deterministic replay, wrong/missing/applicable
+reordered inverse, snapshot, bypass, null-carrier, and intermediate-projection
+controls pass. Focused review found and repaired one evidence leak: the
+classical reference had serialized `H`; corrected evidence hard-gates its
+absence.
+
+Evidence `/tmp/algebraic-f5-conic-recorded.GK4aG4/evidence` establishes:
+
+```text
+BOUNDED_F5_MONIC_AFFINE_CONIC_TWO_HIDDEN_PORT_FIXED_RANK_PHASE_CLOSURE_WITH_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+BOUNDED_FULL_F5_MONIC_AFFINE_PORT_MAPS_TOTAL_DEGREE2_CONIC_TWO_HIDDEN_PORTS_FIXED_FIXTURES_SOFTWARE_REFERENCE_ONLY
+```
+
+This is a broader non-affine phase-relation algebra, but not general
+conic-conic composition. Monic substitution also has an exact 64-byte compact
+modular recurrence, so this result is not a distinct phase resource,
+computational advantage, or Small Wall crossing.
+
+The next selected mechanism changes the native operation from coefficient
+substitution to coherent hidden-port summation: reversible nondegenerate F5
+quadratic phase-kernel Gauss contraction with fixed two-block custody. Exact
+chirps will be compared against one-entry off-manifold perturbations and
+generic unit-phase kernels. If only the chirp manifold preserves unit-modulus
+fixed-rank closure, the compact seven-integer Weil recurrence is the
+adjudicated obstruction and further depth variants will not be selected.
+
+## Coherent Gauss contraction closes at fixed rank, but only on the tested chirp manifold
+
+The phase machine now contracts actual resident 5-by-5 unit-phase kernels
+through a coherent five-path shared-port sum. Two 25-cell blocks alternate:
+the new block is formed from the live block and public quadratic kernel, then
+the new actual resident block and public adjoint reconstruct and clear the
+old block. Reverse execution repeats those contractions in exact reverse
+order. No inverse kernels are retained.
+
+Depths `2,4,8,32,128,512,2048` preserve 50 hidden phase cells. At depth
+2,048, the accepted lifecycle performs 204,850 native updates and 1,024,000
+coherent path terms. Final hashes and probabilities match an independent
+seven-integer F5 Weil recurrence. Restoration remains below
+`1.997e-14` against a predeclared `2e-10` tolerance, and the actual restored
+carrier runs an unrelated kernel plus eight alternating transactions.
+
+The decisive raw-modulus control does not normalize a failed fixture into the
+claim:
+
+```text
+exact chirp maximum raw modulus error       2.465e-14
+one-entry 2^-20 radian perturbation          4.056e-7
+deterministic generic unit-phase fixture       0.6265
+```
+
+Thus the two tested off-manifold fixtures do not close in a phase-only
+unit-modulus block. This is not a theorem about every off-manifold kernel.
+The 28-byte classical number is the semantic seven-integer recurrence state,
+not complete peak memory with temporaries and final expansion.
+
+Evidence `/tmp/algebraic-f5-gauss-recorded.RnbSLQ/evidence` and focused review
+establish:
+
+```text
+BOUNDED_F5_QUADRATIC_PHASE_KERNEL_COHERENT_SHARED_PORT_GAUSS_CLOSURE_WITH_FIXED_TWO_BLOCK_CUSTODY_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+BOUNDED_F5_NONDEGENERATE_QUADRATIC_PHASE_KERNEL_DEPTHS2_4_8_32_128_512_2048_DOUBLE_COMPLEX_SOFTWARE_REFERENCE_ONLY
+```
+
+This changes the native operation from coefficient substitution to coherent
+hidden-port interference and removes depth-growing inverse history for the
+tested class. Direct two-block role custody is not CATVM enforcement. The
+exact Weil recurrence and failed tested off-manifold closure mean there is
+still no distinct phase resource, advantage, or Small Wall crossing.
+
+The next repair must represent lawful contraction magnitude without moving
+it into hidden classical state. The selected experiment uses a canonical
+pair of unit phasors per complex kernel entry and tests generic off-chirp
+unitary composition. Its matched baseline is the full 25-complex matrix
+recurrence; success can establish a broader waveform carrier law, not
+advantage.
+
+## Paired phasors admit generic off-chirp unitaries but expose amplitude and gauge costs
+
+Each complex matrix entry is represented as the coherent average of two unit
+phasors. A 5-by-5 product entry is computed from 20 actual phasor path
+products and canonically split back into a phase pair. Two 50-cell blocks
+alternate through produce, adjoint reconstruction, source release, reverse
+execution, and final unsealing.
+
+Structured generic dense unitaries outside the F5 chirp manifold pass at
+depths `1,2,4,8,16,32`. Final hashes and probabilities match an independent
+25-complex dense recurrence. The depth-32 carrier uses 100 hidden phase cells,
+retains no inverse matrices, performs 64,000 phasor path products, restores
+within `2.369e-9` against a predeclared `1e-8` phase-cell tolerance, and
+reuses the actual restored carrier for an unrelated depth-8 program plus
+eight following transactions.
+
+The accepted class declares a `1e-6` nonzero-entry floor; its observed
+minimum is `0.004346`. Canonical pair gauge becomes ill-conditioned near
+zero. The shared production validator rejects a nonunitary candidate, and
+the production encoder rejects an entry outside the unit disk. Missing,
+wrong, reordered inverse, snapshot, null-carrier, and
+intermediate-projection controls also pass.
+
+Evidence `/tmp/algebraic-paired-phase-recorded.EAtbac/evidence` and focused
+review establish:
+
+```text
+BOUNDED_GENERIC_5X5_UNITARY_PAIRED_UNIT_PHASOR_COHERENT_COMPOSITION_WITH_TWO_BLOCK_CUSTODY_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+BOUNDED_DOUBLE_COMPLEX_5X5_UNITARY_PUBLIC_CONSTANT_STATE_GENERATOR_PAIRED_PHASE_COORDINATE_EMBEDDING_DEPTHS1_2_4_8_16_32_ENTRY_FLOOR1E_6_SOFTWARE_REFERENCE_ONLY
+```
+
+This is broader waveform custody, not a distinct phase resource. The split
+materializes a 25-complex result plus 50 phase factors in 1,200 bytes of
+explicit host temporaries and performs magnitude-sensitive arithmetic.
+Resident paired-phase storage is 1,600 bytes versus a 400-byte dense complex
+recurrence; U(5) has a 25-double, 200-byte coordinate lower bound before
+chart metadata and workspace. CATVM enforcement, global arbitrary-unitary
+stability, phase-only computation without amplitude arithmetic, advantage,
+and Small Wall crossing remain unestablished.
+
+Three materially different phase mechanisms now localize the same
+obstruction: discrete F5 conic coefficients collapse to modular
+substitution; one-phasor coherent kernels close only on the tested compact
+chirp manifold; paired phasors admit generic unitary magnitude only through
+an equivalent complex recurrence and gauge-sensitive amplitude split. The
+next phase-owned advance must supply a native coupling resource that does
+not merely move this complex recurrence into host temporaries or extra gauge
+state.

@@ -1051,6 +1051,78 @@ boundary, actually restore and reuse the carrier, and compare against the
 best compact classical graph recurrence. Its purpose is to generalize the
 phase law and machine boundary, not merely enlarge a two-cell fixture.
 
+The successor is now established. A scrambled six-operation dependency graph
+compiles deterministically over four resident unit phasors, including two
+shared source epochs and compiler rejection of unordered noncommuting
+hazards. The direct backend restores and reuses six carrier cells through
+4,096 rounds. CATVM enforces final-only projection, process isolation, actual
+inverse restoration, and 256 same-carrier transactions at 128 rounds.
+
+Matched direct, inert-boundary, snapshot, and in-place warm accounting passes
+after an independent resource review. The best compact classical baseline is
+still an exact four-double public graph recurrence using 32 state bytes.
+Therefore this milestone strengthens phase topology and custody but does not
+move C5 or cross the Small Wall.
+
+The next selected phase-owned experiment is:
+
+```text
+REVERSIBLE_F5_QUADRATIC_PHASE_KERNEL_GAUSS_CONTRACTION_WITH_OFF_MANIFOLD_FALSIFICATION
+```
+
+The compact non-affine signature milestone is now established for a
+six-coefficient full-F5 conic bracketed by two monic affine port maps. It
+preserves the actual resident intermediate, fixed rank six, final-only
+projection, inverse restoration, and reuse. Its exact compact modular
+coefficient recurrence is the remaining obstruction, and the claim does not
+extend to general conic-conic composition or CATVM enforcement.
+
+The successor changes the native law to coherent summation over a genuinely
+shared quadratic hidden port. Two 25-cell phase-kernel blocks must alternate
+through reversible Gauss contraction without depth-growing inverse history.
+The matched primary baseline is the exact seven-integer F5 Weil recurrence.
+One-entry phase perturbations and deterministic generic unit-phase kernels
+must falsify phase-only fixed-rank closure unless their raw contraction
+moduli remain uniform without normalization. Normalizing a nonuniform kernel
+is not lawful closure because it discards magnitude.
+
+That successor is now established for the exact nondegenerate F5 chirp
+manifold through depth 2,048. Actual coherent contraction, adjoint source
+uncompute, fixed 50-cell hidden storage, inverse restoration, and reuse pass.
+The one-entry perturbation and deterministic generic unit-phase fixture fail
+the raw unit-modulus closure gate, while the exact path matches a compact
+seven-integer Weil recurrence.
+
+The next selected phase-machine repair is:
+
+```text
+PAIRED_UNIT_PHASOR_GENERIC_UNITARY_KERNEL_CONTRACTION
+```
+
+Each complex waveform entry must be represented by interference between two
+unit phasors, so contraction magnitude remains phase-resident instead of
+being discarded or stored as a hidden scalar. Generic off-chirp unitary
+kernels must compose, uncompute, restore, and reuse at fixed matrix rank. The
+primary matched baseline is the complete 25-complex matrix recurrence, not
+the inapplicable seven-integer chirp recurrence.
+
+That bounded repair is now established through depth 32 for structured
+generic off-chirp unitaries. It restores and reuses 100 phase cells but needs
+an amplitude-sensitive canonical split, a nonzero-entry floor, and disclosed
+classical complex temporaries. It uses more state and work than the best
+matched dense recurrence and does not warrant larger matrix fixtures.
+
+The next selected obstruction is:
+
+```text
+NATIVE_PHASE_COUPLER_WITHOUT_HOST_AMPLITUDE_SPLIT_OR_EXPLICIT_GAUGE_STATE
+```
+
+It must do more than replace the 25-complex recurrence with additional phase
+coordinates. A successor must either supply a lawful phase-native coupling
+resource unavailable to the matched compact complex method, or decisively
+show why the candidate coupling class cannot avoid amplitude/gauge state.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -1183,12 +1255,11 @@ Commit and push meaningful progress. Do not merge or open a PR without user auth
 P0 remains frozen and parked. Its audio/hardware execution path is not
 reactivated.
 
-The user authorized ordinary SSH direct-to-metal compute experiments on the
-existing `catcas` target on `2026-07-23`. Source transfer, compilation,
-isolated-core execution, and read-only host inspection are permitted. Voltage
-or MSR writes, firmware changes, audio playback or recording, attached
-instrument action, procurement, fabrication, and destructive target changes
-remain unauthorized.
+The current unified goal does not authorize direct-metal, physical audio,
+powered-circuit, firmware, device, or hardware experiments. Historical
+direct-metal evidence remains valid only within its recorded scope. Current
+work is confined to repository-local Linux software compilation, execution,
+simulation, and non-destructive analysis.
 
 ## 12. Standing Directive
 

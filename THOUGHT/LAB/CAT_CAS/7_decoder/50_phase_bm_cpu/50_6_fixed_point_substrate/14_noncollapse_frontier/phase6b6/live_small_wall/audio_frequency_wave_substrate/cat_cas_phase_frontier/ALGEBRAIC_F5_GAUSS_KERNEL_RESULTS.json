@@ -1,0 +1,65 @@
+{
+  "result": "PASS",
+  "claim": "BOUNDED_F5_QUADRATIC_PHASE_KERNEL_COHERENT_SHARED_PORT_GAUSS_CLOSURE_WITH_FIXED_TWO_BLOCK_CUSTODY_RESTORATION_AND_REUSE",
+  "claim_ceiling": "BOUNDED_F5_NONDEGENERATE_QUADRATIC_PHASE_KERNEL_DEPTHS2_4_8_32_128_512_2048_DOUBLE_COMPLEX_SOFTWARE_REFERENCE_ONLY",
+  "tested_depths": [2, 4, 8, 32, 128, 512, 2048],
+  "mechanism": {
+    "phase_kernel_side": 5,
+    "hidden_phase_blocks": 2,
+    "hidden_phase_cells": 50,
+    "retained_inverse_kernel_cells": 0,
+    "actual_coherent_shared_port_sum": true,
+    "actual_adjoint_source_uncompute": true,
+    "fixed_rank_across_tested_depth": true,
+    "actual_inverse_restoration": true,
+    "actual_restored_carrier_reuse": true,
+    "hidden_kernel_decodes": 0,
+    "final_phase_decodes": 25
+  },
+  "resource_components": {
+    "resident_phase_storage_bytes": 800,
+    "hidden_baseline_storage_bytes": 800,
+    "borrowed_verification_copy_bytes": 1600,
+    "explicit_contraction_temporaries_bytes": 800,
+    "maximum_individual_compiler_stack_frame_bytes": 9280,
+    "compact_semantic_signature_state_bytes": 28,
+    "semantic_signature_bytes_are_not_complete_classical_peak_memory": true
+  },
+  "deepest_execution": {
+    "native_phase_updates": 204850,
+    "resident_phase_reads": 1024000,
+    "coherent_path_terms": 1024000,
+    "maximum_raw_modulus_error": 2.4646951146678475e-14,
+    "maximum_reconstruction_error": 2.5916039533189232e-14,
+    "maximum_repeated_restoration_error": 1.9967045498213124e-14
+  },
+  "controls": {
+    "missing_inverse_residual": 2.0000000000000004,
+    "wrong_inverse_residual": 2,
+    "reordered_inverse_residual": 1.9021130325903075,
+    "snapshot_residual": 0,
+    "intermediate_projection_denied": true,
+    "null_carrier_denied": true,
+    "deterministic_replay": "PASS",
+    "analyzer": "PASS",
+    "asan_ubsan": "PASS"
+  },
+  "off_manifold_falsification": {
+    "perturbation_radians": 9.5367431640625e-7,
+    "one_entry_perturbed_raw_modulus_error": 4.056219683468143e-7,
+    "deterministic_generic_raw_modulus_error": 0.6264810106701755,
+    "tested_fixtures_preserve_phase_only_unit_modulus_closure": false,
+    "universal_off_manifold_impossibility_claim": false
+  },
+  "independent_review": "PASS_WITH_CAVEATS",
+  "remaining_primary_obstruction": "EXACT_COMPACT_SEVEN_INTEGER_WEIL_RECURRENCE_AND_NO_TESTED_OFF_MANIFOLD_PHASE_ONLY_CLOSURE",
+  "catvm_enforced": false,
+  "topology_compiled": false,
+  "arbitrary_kernel_closure": false,
+  "genuinely_distinct_phase_resource": false,
+  "computational_advantage": false,
+  "small_wall_crossed": false,
+  "physical_execution": false,
+  "unlimited_catalytic_computation": false,
+  "terminal": false
+}
