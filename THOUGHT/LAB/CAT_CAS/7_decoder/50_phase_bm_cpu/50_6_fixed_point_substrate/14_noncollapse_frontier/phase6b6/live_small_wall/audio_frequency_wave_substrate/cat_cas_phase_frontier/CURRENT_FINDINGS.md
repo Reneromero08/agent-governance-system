@@ -3,6 +3,37 @@
 This directory is intentionally a mutable research surface. It is not a frozen
 package, promotion packet, or new stopping point.
 
+## Canonical claim reconciliation
+
+Claim authority is reconciled through source head
+`65be0046ae02c79ab8c3b3356ef68d891de19e53`. The canonical per-milestone
+verification levels, restoration classifications, source-audit authority,
+and strict ceilings are recorded in
+`../CLAIM_AUTHORITY_REGISTRY.json`.
+
+The original CATVM open-intermediate atomic transaction is
+`REJECTED_SOURCE_DEFECT_ATOMICITY`: its `PROJECT Z` response precedes a later,
+independent `RESTORE` command. Its bounded F-to-G algebra, hidden resident
+`Y`, direct consumption of the actual `Y`, later inverse restoration,
+same-carrier reuse, and same-UID process controls remain valid separately.
+The exact 15-node rank-two scheduler remains valid only at its recorded
+fixture ceiling. The homogeneous Boolean suffix quotient remains valid only
+for its neighbor-AND/OR family; mixed/nonperiodic depth-6 ranks reach 14
+against the homogeneous ceiling 7.
+
+Every result after audit head `16b3db783f86d966fdb52830d591a0aa8d27cc5d`
+is `SOURCE_AUDITED_PACKAGE_LOCAL` unless the registry records stronger
+evidence. Tolerance-defined inverse-plus-canonical closure is
+`INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT`, not unqualified exact
+restoration. Snapshot reload is a recovery baseline, not catalytic
+restoration.
+
+No distinct phase resource, computational advantage, Small Wall crossing,
+physical waveform execution, or replacement of physical bits with pi has
+been established. New mechanism development is stopped by user direction.
+The completed necklace observation work must not be restarted, and its held
+successor must not execute without explicit user resume authority.
+
 ## Active construction
 
 The first bottleneck repair replaces the prior `O(n*k*M)` time-layer carrier
@@ -913,7 +944,7 @@ phase computation. The next mechanism is recursive typed relational programs
 whose module boundaries remain open phase relations and compose without host
 expansion.
 
-## Enforced CATVM open-intermediate composition
+## Original CATVM open-intermediate package: atomic claim rejected
 
 The branch-native Boolean/F3 phase engine now runs behind its first enforced
 machine boundary. A carrier-owning Linux `SOCK_SEQPACKET` service is
@@ -922,7 +953,7 @@ forked mappings and core dumps, unlinks its single-client socket, and installs
 a post-accept seccomp allowlist. The IPC-only controller is not linked to the
 phase core.
 
-The accepted transaction is:
+The source sequence is:
 
 ```text
 seal A, B, C
@@ -949,7 +980,9 @@ One carrier allocation completes 1002 restoration generations. Maximum
 restoration error is `4.99600361081e-16` against a predeclared `2e-12`
 tolerance. Wrong-G, missing-G, and prospectively noncommuting reordered
 inverse controls each leave error `1.73205080757`. The final result is emitted
-before restoration and therefore survives outside inverse history.
+before restoration and therefore survives outside inverse history, but that
+ordering also defeats the claimed atomic machine law: the controller can
+receive `Z` before the later independent `RESTORE` command.
 
 The separately measured snapshot baseline reloads a saved copy, performs no
 actual inverse, locks 8192 bytes rather than the in-place path's 4096 bytes,
@@ -975,20 +1008,20 @@ no claim blocker. Its two accounting/evidence findings were repaired by
 counting both snapshot mappings and replacing response constants with measured
 carrier-creation, receive-buffer, and socket-queue state.
 
-This establishes:
+The former atomic claim:
 
 ```text
 CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
 ```
 
-only for the bounded tested Linux userspace boundary against its ordinary
-same-UID controller. It does not establish root/kernel or microarchitectural
-secrecy, arbitrary topology, compact wide-interface relations, general
-holographic relational computation, computational advantage, physical
-waveform or silicon computation, Small Wall crossing, or unlimited catalytic
-computation. The relational frontier remains reusable typed modules whose
-open phase-resident outputs compose recursively into larger modules and wider
-interfaces without host expansion or decode.
+is `REJECTED_SOURCE_DEFECT_ATOMICITY`. Clean-room adversarial verification
+preserves only the bounded algebra, hidden-intermediate custody, later actual
+inverse restoration, reuse, and same-UID controls. Later CATVM packages that
+place restoration before response are separate claims. This package does not
+establish root/kernel or microarchitectural secrecy, arbitrary topology,
+compact wide-interface relations, general holographic relational
+computation, computational advantage, physical waveform or silicon
+computation, Small Wall crossing, or unlimited catalytic computation.
 
 ## Bounded recursive typed relational modules
 
@@ -2758,6 +2791,13 @@ within:
 BOUNDED_LINUX_SAME_UID_SOFTWARE_GF2_WIDTH3_EXACT_15_NODE_ATOMIC_RUN_28_FORWARD_28_REVERSE_9_WORKING_SLOTS_REFERENCE_ONLY
 ```
 
+The public fixture has root `815`, shared owners `805,806,807,808`, and
+fanouts `4,3,3,2`. Clean-room adversarial verification confirms this exact
+schedule exists but rejects generic transfer: source action identities,
+obligations, and tape remain tied to this fixture. Its status is
+`FIXTURE_SCOPED_VALID`; generic scheduler and arbitrary-DAG wording are
+forbidden.
+
 It does not establish a generic CATVM DAG service, non-affine relations,
 general holographic relational computation, advantage, Small Wall crossing,
 physical waveform or silicon computation, or unlimited catalytic
@@ -3318,6 +3358,17 @@ within:
 ```text
 BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS2_3_4_5_8_NEIGHBOR_AND_OR_FAMILY_SCOPED_QUOTIENT_REFERENCE_ONLY
 ```
+
+Clean-room adversarial verification matches all 112 homogeneous formula
+cases. Alternating, nonperiodic, and reverse-nonperiodic depth-six controls
+instead produce ranks `2,7,14,14,14,14`, exceeding the homogeneous maximum
+rank 7. The result is therefore `FAMILY_SCOPED_VALID`, not a general
+Boolean-TT quotient law. Frozen evidence is bound to phase-source SHA-256
+`1a8678d11df0be641a5c035d2e117eccb7086d23a4046362818a64ef4cb3a655`;
+the current SHA-256
+`281e1d1eb455cfdd0abaa77943459d7dbb0df340025023e6ee1cb6d91f3e2520`
+differs only by the `QTT_EMBEDDED_MAIN` preprocessor wrapper added at
+`c0cee6a9`, not by the quotient body.
 
 The strongest fixture-specialized conventional baseline directly emits the
 public quotient cores in `O(final quotient cells)`. The phase path retains
@@ -4326,7 +4377,9 @@ Residual bond ranks `29,166,29` reduce to `1,1,1`; carrier cells fall from
 280,894 to 116. The inverse error before closure is `5.235e-8`, the closure
 delta is `5.108e-8`, and postclosure restoration error is `1.147e-8`.
 This is a tolerance-defined numerical quotient after actual inverse
-execution, not exact inverse restoration.
+execution, not exact inverse restoration. Its canonical classification is
+`INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT`; it must never be reported as
+unqualified exact restoration.
 
 The unrelated matrix-free reuse program has rank history `9,27` on both the
 actual restored carrier and a separately created fresh diagnostic carrier.
@@ -4747,7 +4800,7 @@ mechanism for this boundary, but it does not distinguish phase-native software
 from the identical compact classical complex recurrence. No advantage or
 Small Wall crossing is established.
 
-The next phase-owned experiment is:
+The phase-owned experiment selected at this historical point was:
 
 ```text
 COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER
@@ -4756,6 +4809,7 @@ COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER
 It must integrate typed public evidence relations into unresolved phase
 composition and preserve final-boundary-only inference, actual restoration,
 reuse, and the identical compact-classical comparison.
+It was subsequently completed at source head `65be0046`; do not restart it.
 
 ## Typed open observations now close into unresolved necklace phase state
 
@@ -4793,13 +4847,18 @@ is not a Bayesian posterior, ground-truth accuracy result, general catalytic
 inference, or learning result.
 
 The identical compact classical complex recurrence reproduces the boundary
-exactly. No advantage or Small Wall crossing is established. The next
-phase-machine experiment is:
+exactly. No advantage or Small Wall crossing is established. This package is
+`SOURCE_AUDITED_PACKAGE_LOCAL`; it has not received clean-room adversarial
+verification.
+
+New mechanism development is stopped. The unstarted successor held without
+execution is:
 
 ```text
 COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
 ```
 
-It must keep a shared observation interface unresolved across multiple
-noncommuting relation modules and close it without relation-table or
-assignment expansion.
+If explicitly resumed, it must keep a shared observation interface unresolved
+across multiple noncommuting relation modules and close it without
+relation-table or assignment expansion. Until then it is not an active
+experiment, result, or scheduled continuation.

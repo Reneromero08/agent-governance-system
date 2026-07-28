@@ -1,12 +1,49 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "2.0.0",
   "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
   "state_date": "2026-07-28",
-  "reconciled_through_milestone_commit": "e3e0d32b",
+  "reconciled_source_head": "65be0046ae02c79ab8c3b3356ef68d891de19e53",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
   "standing_mission": "CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1",
   "supporting_mission": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
   "prime_directive": "REPLACE_THE_BIT_WITH_PI",
+  "claim_authority": {
+    "registry": "CLAIM_AUTHORITY_REGISTRY.json",
+    "milestones_classified": 77,
+    "original_catvm_atomic_transaction": "REJECTED_SOURCE_DEFECT_ATOMICITY",
+    "original_catvm_preserved_subclaims": [
+      "BOUNDED_BOOLEAN_F3_F_TO_G_ALGEBRA",
+      "HIDDEN_PHASE_RESIDENT_Y_CUSTODY",
+      "NATIVE_G_CONSUMES_ACTUAL_RESIDENT_Y",
+      "LATER_ACTUAL_INVERSE_G_THEN_F_RESTORATION",
+      "SAME_CARRIER_UNRELATED_PROGRAM_REUSE",
+      "SAME_UID_PROCESS_ACCESS_CONTROLS"
+    ],
+    "exact_15_node_scheduler": "FIXTURE_SCOPED_VALID_NO_GENERIC_SCHEDULER_CLAIM",
+    "homogeneous_boolean_suffix_quotient": "FAMILY_SCOPED_VALID_MIXED_NONPERIODIC_GENERALIZATION_FAILED",
+    "post_audit_default_authority": "SOURCE_AUDITED_PACKAGE_LOCAL",
+    "verification_levels": [
+      "PACKAGE_SELF_REVIEW",
+      "SEPARATE_REFERENCE_PARITY",
+      "INDEPENDENT_ORACLE_REEXECUTION",
+      "POST_SEAL_BOUNDARY_VERIFICATION",
+      "CLEANROOM_ADVERSARIAL_VERIFICATION"
+    ],
+    "restoration_classifications": [
+      "EXACT_ALGEBRAIC_RESTORATION",
+      "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT",
+      "SNAPSHOT_RELOAD"
+    ],
+    "post_inverse_canonical_closure_unqualified_exact_restoration": false
+  },
+  "development_state": {
+    "new_mechanism_development": "STOPPED_BY_USER",
+    "already_completed_do_not_restart": "COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER",
+    "held_successor": "COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
+    "resume_authority": "EXPLICIT_USER_INSTRUCTION_ONLY",
+    "resume_condition": "CLEAN_RECONCILIATION_CHECKPOINT_AND_VERIFICATION_LEVEL_PLUS_RESTORATION_CLASS_FOR_EVERY_NEW_RESULT"
+  },
   "durable_main_goal_reminder": {
     "primary": [
       "REPLACE_THE_BIT_WITH_PI",
@@ -57,8 +94,9 @@
     "open_binary_boolean_f3_relations": "ESTABLISHED_BOUNDED_SOFTWARE",
     "native_relational_composition": "EXACT_BINARY_COMPOSITION_INTERSECTION_AND_FOUR_NATIVE_SHARED_OWNERS_WITH_FANOUT_HISTOGRAM_4_3_3_2",
     "internal_port_closure_or_relational_trace": "ESTABLISHED_FOR_BOUNDED_PUBLIC_SERIES_PARALLEL_GRAPH_CLASS",
-    "catvm_enforced_machine_boundary": "ESTABLISHED_BOUNDED_LINUX_USERSPACE_SAME_UID_CONTROLLER",
-    "catvm_open_intermediate_composition": "ESTABLISHED_ON_NATIVE_BOOLEAN_F3_PHASE_BACKEND",
+    "catvm_enforced_machine_boundary": "ESTABLISHED_IN_LATER_BOUNDED_ATOMIC_LINUX_USERSPACE_SAME_UID_GENERATIONS",
+    "original_catvm_open_intermediate_atomic_transaction": "REJECTED_SOURCE_DEFECT_ATOMICITY",
+    "original_catvm_open_intermediate_preserved_evidence": "BOUNDED_F_TO_G_ALGEBRA_HIDDEN_Y_CUSTODY_LATER_RESTORATION_AND_REUSE",
     "catvm_snapshot_recovery": "ESTABLISHED_SEPARATE_WEAKER_BASELINE",
     "idempotent_relational_boundary": "PARTIAL_RESTRICTED_CLASS_ESTABLISHED_GENERAL_LAW_OPEN",
     "phase_circuit_scaling_alone": "NONTERMINAL_SUPPORT_WORK",
@@ -77,14 +115,14 @@
     "general_retain_all_affine_dag_custody": "ESTABLISHED_EXACT_15_NODE_FOUR_SHARED_OWNERS_FANOUT_HISTOGRAM_4_3_3_2_WIDTHS3_4_8_12_16",
     "automatic_public_leaf_pebbling": "ESTABLISHED_EXACT_15_NODE_COMPILER_EMITTED_19_STEP_TAPE_11_WORKING_SLOTS_WIDTHS3_4_8_12_16",
     "internal_operator_rematerialization": "ESTABLISHED_EXACT_15_NODE_ONE_LAYER_FOUR_OPERATORS_23_STEP_TAPE_8_WORKING_SLOTS_WIDTHS3_4_8_12_16",
-    "rank2_recursive_operator_rematerialization": "ESTABLISHED_EXACT_15_NODE_SINGLE_RANK2_BORROWER_28_FORWARD_28_REVERSE_ACTIONS_MAX_ACTIVATION_ORDINAL3_WIDTHS3_4_8_12_16",
-    "catvm_automatic_rank2_shared_dag_enforcement": "ESTABLISHED_EXACT_WIDTH3_15_NODE_ATOMIC_28_FORWARD_28_REVERSE_9_SLOTS_258_TRANSACTIONS",
+    "rank2_recursive_operator_rematerialization": "FIXTURE_SCOPED_VALID_EXACT_15_NODE_SINGLE_RANK2_BORROWER_28_FORWARD_28_REVERSE_ACTIONS_MAX_ACTIVATION_ORDINAL3_WIDTHS3_4_8_12_16_NO_GENERIC_SCHEDULER",
+    "catvm_automatic_rank2_shared_dag_enforcement": "FIXTURE_SCOPED_VALID_EXACT_WIDTH3_15_NODE_ATOMIC_28_FORWARD_28_REVERSE_9_SLOTS_258_TRANSACTIONS_NO_GENERIC_SCHEDULER",
     "fixed_schema_quadratic_anf_composition": "ESTABLISHED_TWO_HIDDEN_PORTS_DEGREE4_FIVE_COEFFICIENT_BOUNDARY_258_TRANSACTIONS",
     "catvm_fixed_schema_quadratic_anf_enforcement": "ESTABLISHED_TWO_HIDDEN_PORTS_ONE_CARRIER_258_ATOMIC_TRANSACTIONS",
     "fixed_schema_qanf_small_wall_obstruction": "CONFIRMED_UNDER_MATCHED_COMPACT_BASELINE_SNAPSHOT_IN_PLACE_CATVM_BOUNDARY",
     "width_parametric_boolean_tt_non_affine_composition": "ESTABLISHED_WIDTHS4_5_8_12_16_RANK2_TO_RANK4_TO_RANK8",
     "catvm_width_parametric_boolean_tt_enforcement": "ESTABLISHED_ONE_SERVICE_ONE_CARRIER_PER_WIDTH_34_ATOMIC_TRANSACTIONS",
-    "boolean_tt_suffix_bisimulation_quotient": "ESTABLISHED_HOMOGENEOUS_NEIGHBOR_AND_OR_DEPTHS2_3_4_5_8_LINEAR_RANK",
+    "boolean_tt_suffix_bisimulation_quotient": "FAMILY_SCOPED_VALID_HOMOGENEOUS_NEIGHBOR_AND_OR_DEPTHS2_3_4_5_8_LINEAR_RANK_MIXED_NONPERIODIC_FAILED",
     "boolean_tt_suffix_quotient_small_wall_triad": "ESTABLISHED_COMPACT_PUBLIC_RECURRENCE_PRIMARY_OBSTRUCTION_RETAINED_HISTORY_SECONDARY_DEFECT",
     "boolean_tt_suffix_quotient_reversible_pebbling": "ESTABLISHED_WIDTH16_DEPTH8_17288_TO_12152_CELLS_AT_1_356_PHASE_UPDATE_MULTIPLIER",
     "boolean_tt_quotient_fixed_rank_unbounded_depth_closure": false,
@@ -98,7 +136,7 @@
     "f5_gauss_best_matched_baseline": "SEVEN_INTEGER_WEIL_RECURRENCE_28_SEMANTIC_BYTES",
     "paired_phase_generic_unitary": "ESTABLISHED_100_PHASE_CELLS_DEPTH32_WITH_AMPLITUDE_SPLIT_AND_ENTRY_FLOOR",
     "paired_phase_best_matched_baseline": "DENSE_25_COMPLEX_RECURRENCE_400_BYTES_WITH_U5_200_BYTE_COORDINATE_LOWER_BOUND",
-    "catvm_four_rotor_incremental_custody": "ESTABLISHED_SAME_UID_LINUX_FIXED_PRIMARY_REUSE_ACTUAL_INVERSE_CANONICAL_RESTORATION",
+    "catvm_four_rotor_incremental_custody": "SOURCE_AUDITED_PACKAGE_LOCAL_SAME_UID_LINUX_FIXED_PRIMARY_REUSE_INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT",
     "four_rotor_sector_inverse_tradeoff": "ESTABLISHED_117_TO9_INVERSE_CLOSURE_REDUCTION_WITH_73167_RHS_REMATERIALIZATION_OBSTRUCTION",
     "four_rotor_dense_cyclic_phase_law": "ESTABLISHED_GRID17_DEPTHS1_TO64_FIXED_EXPLICIT_ARRAY_PAYLOAD_ACTUAL_RESTORATION_REUSE",
     "four_rotor_dense_cyclic_best_matched_baseline": "IDENTICAL_DIRECT_CLASSICAL_CYCLIC_FFT",
@@ -107,9 +145,10 @@
     "four_rotor_streamed_momentum_coordinate": "ESTABLISHED_RETAINED_PLAN408_BYTES_ENGINE118592_WRAPPER197200_ACTUAL_RESTORATION_REUSE",
     "four_rotor_necklace_orbit_phase": "ESTABLISHED_EXCHANGE_SYMMETRIC_GRID17_CARRIER285_FIXED_GRID_O_R16_ACTUAL_RESTORATION_REUSE",
     "four_rotor_bosonic_givens_phase": "ESTABLISHED_RESIDENT285_TEMPORARY_OCCUPATION4845_ZERO_ACCEPTED_PERMANENT_TERMS_ACTUAL_RESTORATION_REUSE",
-    "four_rotor_necklace_open_observation_relation_closure": "ESTABLISHED_SIX_TYPED_PUBLIC_OBSERVATION_SUBSTITUTIONS_WITHOUT_RELATION_TABLE_MATERIALIZATION",
-    "four_rotor_necklace_bounded_hypothesis_scoring": "ESTABLISHED_SEVEN_COLLISION_CLASSES_EXPLICIT_SCORE_SEMANTICS_ARGMAX_AND_EXACT_REFERENCE",
-    "selected_next_experiment": "COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER"
+    "four_rotor_necklace_open_observation_relation_closure": "SOURCE_AUDITED_PACKAGE_LOCAL_SIX_TYPED_PUBLIC_OBSERVATION_SUBSTITUTIONS_WITHOUT_RELATION_TABLE_MATERIALIZATION",
+    "four_rotor_necklace_bounded_hypothesis_scoring": "SOURCE_AUDITED_PACKAGE_LOCAL_SEVEN_COLLISION_CLASSES_EXPLICIT_SCORE_SEMANTICS_ARGMAX_AND_PACKAGE_REFERENCE",
+    "selected_next_experiment": "NONE_DEVELOPMENT_STOPPED",
+    "held_successor": "COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER"
   },
   "strongest_bounded_architecture": [
     "PUBLIC_TYPED_SERIES_PARALLEL_RELATIONAL_GEOMETRY",
@@ -498,14 +537,26 @@
     "algebraic_series_parallel_capacity_restoration_max_abs": 1.66533453694e-16,
     "algebraic_series_parallel_cross_process_reuse": "PASS",
     "algebraic_series_parallel_review": "PASS",
-    "catvm_phase_backend": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS",
+    "catvm_phase_backend": "SOURCE_AUDITED_PACKAGE_LOCAL_PRESERVED_SUBCLAIMS_ONLY",
     "catvm_phase_reviewer_id": "CATVM-OPEN-INTERMEDIATE-COMPOSITION-01",
     "catvm_phase_remaining_review_findings": 0,
     "catvm_phase_repaired_findings": [
       "SNAPSHOT_LOCKED_MEMORY_UNDERCOUNT",
       "RESTORATION_RESPONSE_CONSTANTS_REPLACED_WITH_MEASURED_STATE"
     ],
-    "catvm_phase_claim": "CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
+    "catvm_phase_rejected_claim": "CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
+    "catvm_phase_atomic_transaction_status": "REJECTED_SOURCE_DEFECT_ATOMICITY",
+    "catvm_phase_source_defect": "PROJECT_Z_RESPONSE_PRECEDES_LATER_INDEPENDENT_RESTORE_COMMAND",
+    "catvm_phase_preserved_subclaims": [
+      "BOUNDED_BOOLEAN_F3_F_TO_G_ALGEBRA",
+      "HIDDEN_PHASE_RESIDENT_Y_CUSTODY",
+      "NATIVE_G_CONSUMES_ACTUAL_RESIDENT_Y",
+      "LATER_ACTUAL_INVERSE_G_THEN_F_RESTORATION",
+      "SAME_CARRIER_UNRELATED_PROGRAM_REUSE",
+      "SAME_UID_PROCESS_ACCESS_CONTROLS"
+    ],
+    "catvm_phase_restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+    "catvm_phase_verification_level": "CLEANROOM_ADVERSARIAL_VERIFICATION",
     "catvm_phase_boundary": "LINUX_AF_UNIX_SOCK_SEQPACKET_NON_DUMPABLE_LOCKED_PRIVATE_SECCOMP",
     "catvm_phase_intermediate": "Y_PHASE_RESIDENT_UNDECODED_AND_UNSERIALIZED",
     "catvm_phase_final_boundary_coefficients": [0, 2, 1, 1],
@@ -1797,6 +1848,8 @@
     "four_rotor_post_inverse_canonical_closure_retained_inverse_history_bytes": 0,
     "four_rotor_post_inverse_canonical_closure_stable_compact_reuse": true,
     "four_rotor_post_inverse_canonical_closure_exact_restoration": false,
+    "four_rotor_post_inverse_canonical_closure_restoration_classification": "INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT",
+    "four_rotor_post_inverse_canonical_closure_unqualified_exact_restoration": false,
     "four_rotor_post_inverse_canonical_closure_matched_classical_tt_identical": true,
     "four_rotor_post_inverse_canonical_closure_distinct_phase_resource": false,
     "four_rotor_post_inverse_canonical_closure_computational_advantage": false,
@@ -1824,7 +1877,9 @@
     "four_rotor_incremental_schmidt_closure_reuse_rank_history": [11, 32],
     "four_rotor_incremental_schmidt_closure_fresh_restored_resource_signature_exact": true,
     "four_rotor_incremental_schmidt_closure_restoration_generations": [1, 2],
-    "four_rotor_incremental_schmidt_closure_actual_inverse_restoration": true,
+    "four_rotor_incremental_schmidt_closure_inverse_execution_before_canonical_quotient": true,
+    "four_rotor_incremental_schmidt_closure_restoration_classification": "INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT",
+    "four_rotor_incremental_schmidt_closure_unqualified_exact_restoration": false,
     "four_rotor_incremental_schmidt_closure_actual_restored_carrier_reuse": true,
     "four_rotor_incremental_schmidt_closure_matched_classical_tt_identical": true,
     "four_rotor_incremental_schmidt_closure_distinct_phase_resource": false,
@@ -1832,8 +1887,12 @@
     "four_rotor_incremental_schmidt_closure_small_wall_crossing": false,
     "catvm_four_rotor_primary_native_coupling_applications": 18,
     "direct_four_rotor_primary_native_coupling_applications": 9,
+    "catvm_four_rotor_incremental_restoration_classification": "INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT",
+    "catvm_four_rotor_incremental_unqualified_exact_restoration": false,
     "sector_inverse_primary_closures": 9,
     "sector_inverse_rhs_rematerializations": 73167,
+    "sector_inverse_restoration_classification": "INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT",
+    "sector_inverse_unqualified_exact_restoration": false,
     "dense_cyclic_grid_size": 17,
     "dense_cyclic_carrier_complex_cells": 83521,
     "dense_cyclic_maximum_depth_tested": 64,
@@ -2022,7 +2081,6 @@
     "ALGEBRAIC_RELATION_TREE_PHASE_ESTABLISHED",
     "ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED",
     "ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED",
-    "CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
     "ALGEBRAIC_RECURSIVE_TYPED_RELATIONAL_MODULE_PHASE_ESTABLISHED",
     "ALGEBRAIC_COMPACT_TYPED_RELATIONAL_MODULE_EXECUTION_ESTABLISHED",
     "ALGEBRAIC_WIDTH2_RELATIONAL_PHASE_CONTRACTION_ESTABLISHED",
@@ -2060,6 +2118,9 @@
     "CATVM_ENFORCED_NONLINEAR_KERR_INTERFERENCE_WAVE_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_REUSE",
     "BOUNDED_DUAL_PRIME_PHASE_RESIDENT_NONLINEAR_SYMPLECTIC_LIE_SIGNATURE_GROWTH_WITH_ACTUAL_RESTORATION_AND_REUSE",
     "BOUNDED_STOKES_SPHERE_REDUCED_DUAL_PRIME_PHASE_RESIDENT_NONLINEAR_SYMPLECTIC_LIE_SIGNATURE_WITH_RESTORATION_AND_REUSE",
+    "BOUNDED_PARITY_ADMISSIBLE_STOKES_HARMONIC_SECTOR_DUAL_PRIME_PHASE_SIGNATURE_REDUCTION_WITH_RESTORATION_AND_REUSE",
+    "FIXED_RANK_FACTORIZED_HIGHEST_STOKES_HARMONIC_SHELL_PHASE_RECURRENCE_WITH_RESTORATION_AND_REUSE",
+    "BOUNDED_NONCOMMUTING_ALTERNATING_AXIS_STOKES_CHARACTER_PHASE_HARMONIC_CATALECTICANT_RANK_GROWTH_WITH_RESTORATION_AND_REUSE",
     "BOUNDED_TOPOLOGY_REMATERIALIZED_NONCOMMUTING_STOKES_BCH_CHARACTER_PHASE_CLOSURE_WITH_RESTORATION_AND_REUSE",
     "BOUNDED_REFLECTION_GRADED_TOPOLOGY_REMATERIALIZED_NONCOMMUTING_STOKES_BCH_CHARACTER_PHASE_QUOTIENT_WITH_RESTORATION_AND_REUSE",
     "BOUNDED_EXACT_CYCLOTOMIC_CUBIC_PHASE_FOURIER_TENSOR_TRAIN_SEQUENTIAL_RANK_GROWTH_WITH_ACTUAL_RESTORATION_AND_REUSE",
@@ -2074,7 +2135,20 @@
     "BOUNDED_DENSE_FINITE_TORUS_CYCLIC_PHASE_UPDATE_LAW_WITH_DEPTH_INDEPENDENT_EXPLICIT_NUMPY_ARRAY_PAYLOAD_ACTUAL_RESTORATION_AND_REUSE",
     "BOUNDED_CYCLIC_PHASE_TT_NATIVE_PAIR_CLOSURE_SATURATES_GRID17_CENTRAL_INTERFACE_AT_DEPTH5_WITH_ACTUAL_RESTORATION_AND_REUSE",
     "BOUNDED_EXACT_GLOBAL_ROTATION_QUOTIENT_CYCLIC_PHASE_CARRIER_REDUCES_FOUR_ROTOR_STATE_BY_GRID_FACTOR_WITH_DEPTH_INDEPENDENT_MEMORY_ACTUAL_RESTORATION_AND_REUSE",
+    "BOUNDED_TOPOLOGY_STREAMED_TOTAL_MOMENTUM_COORDINATE_PHASE_CLOSURE_ELIMINATES_DENSE_QUOTIENT_FREE_PLAN_WITH_ACTUAL_RESTORATION_AND_REUSE",
+    "BOUNDED_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_NECKLACE_PHASE_CARRIER_CHANGES_FIXED_GRID_ROTOR_GROWTH_FROM_EXPONENTIAL_TO_POLYNOMIAL_WITH_STREAMED_EXACT_CYCLOTOMIC_FREE_CLOSURE_ACTUAL_RESTORATION_AND_REUSE",
+    "BOUNDED_TOPOLOGY_COMPILED_BOSONIC_GIVENS_PHASE_CLOSURE_REPLACES_STREAMED_NECKLACE_TRANSITION_PERMANENTS_WITH_POLYNOMIAL_OCCUPATION_SCRATCH_ACTUAL_RESTORATION_AND_REUSE",
+    "BOUNDED_CATVM_ENFORCED_TOPOLOGY_COMPILED_BOSONIC_GIVENS_HIDDEN_OCCUPATION_COMPOSITION_WITH_ACTUAL_INVERSE_RESTORATION_AND_REUSE",
+    "BOUNDED_SYMMETRY_PRESERVING_HERMITIAN_NECKLACE_GENERATOR_PHASE_CLOSURE_ELIMINATES_OCCUPATION_EXPANSION_WITH_ACTUAL_RESTORATION_AND_REUSE",
+    "BOUNDED_MATCHED_COHERENT_INITIAL_AND_EACH_STEP_NECKLACE_DEPHASED_CLASSICAL_GENERATOR_SMALL_WALL_RESOURCE_DIAGNOSTIC",
     "BOUNDED_COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_AND_CATALYTIC_HYPOTHESIS_SCORING_ON_COMPACT_NECKLACE_PHASE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE"
+  ],
+  "rejected_results": [
+    {
+      "milestone": "CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
+      "status": "REJECTED_SOURCE_DEFECT_ATOMICITY",
+      "preserved_subclaims": "SEE_CLAIM_AUTHORITY_REGISTRY"
+    }
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
@@ -2108,6 +2182,7 @@
     "OFFICIAL_EXTERNAL_ACCEPTANCE",
     "CROSS_DOMAIN_TRANSFER"
   ],
+  "active_frontier_candidates_status": "HISTORICAL_QUEUE_HELD_NO_EXECUTION",
   "next_crossing": [
     "COMPACT_COMPILED_BODY_TYPED_RELATIONAL_MODULES",
     "NATIVE_DENSE_WIDTH2_RELATIONAL_PHASE_CONTRACTION",
@@ -2172,12 +2247,15 @@
     "COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_ESTABLISHED",
     "COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER"
   ],
+  "next_crossing_status": "HISTORICAL_ROUTE_HELD_NO_EXECUTION",
   "frontier_warning": "ANOTHER_HANDCRAFTED_GRAPH_FAMILY_IS_INSUFFICIENT_IF_INTERMEDIATE_RELATION_WIDTH_CARRIER_STATE_OR_PROVENANCE_GROWS_EXPONENTIALLY",
   "agent_policy": {
-    "continue_without_new_user_prompt": true,
+    "continue_without_new_user_prompt": false,
     "ordinary_reversible_choices_are_autonomous": true,
-    "may_replace_architecture": true,
-    "may_select_next_experiment": true,
+    "may_replace_architecture": false,
+    "may_select_next_experiment": false,
+    "claim_reconciliation_only": true,
+    "explicit_user_resume_required": true,
     "verification_follows_substantive_result": true,
     "audit_of_audit_loops_forbidden": true,
     "roadmap_must_track_evidence": true,
@@ -2245,7 +2323,9 @@
     "provenance_growth_audit_required": true
   },
   "goal_terminal_condition": "USER_DETERMINES_UNLIMITED_CATALYTIC_PHASE_COMPUTATION_ACHIEVED_OR_EXPLICITLY_CLOSES_LANE",
-  "operational_stop_conditions": [],
+  "operational_stop_conditions": [
+    "USER_DIRECTED_NEW_MECHANISM_DEVELOPMENT_STOP"
+  ],
   "route_boundary_policy": {
     "external_authority_boundary": "DO_NOT_CROSS_PROHIBITED_ACTION_CONTINUE_OTHER_AUTHORIZED_WORK",
     "scientific_blocker": "RETIRE_OR_REPLACE_ROUTE_CONTINUE_MISSION",
@@ -2269,8 +2349,9 @@
     "EVIDENCED_SCIENTIFIC_BLOCKER"
   ],
   "forced_runtime_exit_policy": {
-    "status": "AUTONOMOUS_CONTINUATION_REQUIRED",
-    "must_record_exact_next_action": true,
+    "status": "RECONCILIATION_CHECKPOINT_ONLY_NO_MECHANISM_CONTINUATION",
+    "must_record_exact_next_action": false,
+    "must_preserve_held_successor_without_execution": true,
     "may_claim_complete": false,
     "may_claim_blocked": false
   },

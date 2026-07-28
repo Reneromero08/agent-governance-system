@@ -8,11 +8,19 @@ Read in this order:
 THOUGHT/LAB/CAT_CAS/MISSION.md
 AUDIO_SIDE_QUEST_ROADMAP.md
 AUTONOMOUS_LANE_STATE.json
+CLAIM_AUTHORITY_REGISTRY.json
 this file
 package-local contracts and reports
 ```
 
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
+
+Canonical claim authority is reconciled through source head
+`65be0046ae02c79ab8c3b3356ef68d891de19e53`. The registry assigns one
+verification level and one restoration classification to every recorded
+milestone. Its corrections and ceilings supersede stale package summaries.
+New mechanism development is stopped by user direction. Do not start or
+restart any successor without an explicit user resume instruction.
 
 ## 1. Prime Directive
 
@@ -44,16 +52,22 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-ALGEBRAIC_PROJECTED_AFFINE_COMPACT_FULL_RELATION_CLOSURE_ESTABLISHED
+BOUNDED_COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_AND_CATALYTIC_HYPOTHESIS_SCORING_ON_COMPACT_NECKLACE_PHASE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE
 ```
 
 Claim ceiling:
 
 ```text
-BOUNDED_PROJECTED_AFFINE_F2_RELATION_SUBCATEGORY_REFERENCE_ONLY
+DIRECT_PROCESS_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_GRID17_FOUR_ROTOR_SIX_TYPED_OPEN_PUBLIC_OBSERVATION_PORTS_COMPLEX128_SOFTWARE_ONLY
 ```
 
-The strongest current bounded architecture is:
+This current result is `SOURCE_AUDITED_PACKAGE_LOCAL`. It has a matched
+classical complex recurrence with identical boundary results and does not
+establish a distinct phase resource, computational advantage, Small Wall
+crossing, physical waveform execution, or replacement of physical bits with
+pi.
+
+The accumulated bounded architecture includes:
 
 ```text
 public typed series-parallel relational geometry
@@ -82,13 +96,16 @@ intersection, bounded internal-port closure, actual restoration, and
 restored-carrier reuse are established without intermediate coefficient
 decode or tuple, witness, and truth-table slots.
 
-The first bounded CATVM substrate now seals that native engine behind a
-non-dumpable, locked, private, seccomp-restricted Linux service. Native `F`
-leaves `Y` unresolved in four resident phase cells; native `G` consumes those
-actual cells; only final `Z` crosses the protocol; actual `G^-1` then `F^-1`
-restore the borrowed carrier; and an unrelated program plus 1000 alternating
-transactions reuse the same restored allocation. Snapshot reload is measured
-separately and does not support the stronger claim.
+The original CATVM open-intermediate package does not establish an atomic
+transaction. Its `PROJECT Z` response can escape before a later independent
+`RESTORE` command, so
+`CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND` is
+`REJECTED_SOURCE_DEFECT_ATOMICITY`. Its separately valid bounded F-to-G
+algebra, hidden resident `Y` custody, direct consumption of the actual `Y`,
+later `G^-1` then `F^-1` restoration, same-carrier reuse, and same-UID process
+controls remain preserved. Later atomic CATVM generations are separate
+claims. Snapshot reload remains only `SNAPSHOT_RELOAD`, never catalytic
+restoration.
 
 The relational engine now also composes independently compiled
 series-parallel leaves through nominally typed module descriptors. A
@@ -152,6 +169,14 @@ A general holographic relational computer, arbitrary graph closure, C5
 advantage, root/kernel secrecy, physical phase computation, and unlimited
 catalytic phase computation are not established.
 
+The exact rank-two affine DAG scheduler is valid only for the public 15-node
+fixture with root 815, shared owners 805--808, fanouts 4/3/3/2, 28 forward
+actions, 28 reverse actions, and nine working slots. Generic scheduler and
+arbitrary-DAG wording are forbidden. The Boolean suffix quotient is valid
+only for its homogeneous neighbor-AND/OR family; mixed and nonperiodic depth-6
+cases reach rank 14 versus the homogeneous ceiling 7. Its frozen evidence
+remains bound to the original tracked source hash recorded in the registry.
+
 It is nonterminal.
 
 ## 3. Owner-Only Closure
@@ -179,11 +204,13 @@ a completed roadmap phase
 
 Words such as `final`, `verified`, `complete`, `mission result`, and `highest-value successor` are package-level descriptions. They never authorize stopping.
 
-After preserving any result, update lane state, select the next highest-leverage unresolved blocker, and continue without waiting for a new user prompt.
+This owner-only nonterminal law does not override a user-directed development
+stop. While the current stop is active, preserve evidence and return after
+the clean reconciliation checkpoint. Do not select or execute a successor.
 
 ## 4. Autonomous Authority
 
-The agent may autonomously:
+When no user-directed stop is active, the agent may autonomously:
 
 ```text
 inspect the complete lane and related CAT_CAS work
@@ -201,11 +228,16 @@ update roadmap authority files
 select the next experiment from accumulated evidence
 ```
 
-Do not ask the user to decide ordinary reversible software, mathematical, architectural, or experimental choices that can be investigated directly.
+The present user-directed stop suspends mechanism replacement, experiment
+selection, and successor execution. Authority-file reconciliation, validation,
+the authorized checkpoint commit, and its push remain allowed.
 
 Use judgment. Choose work that most directly removes the blocker between current evidence and the next C-rung.
 
 ## 5. Operating Loop
+
+This loop is suspended after the current reconciliation checkpoint until an
+explicit user resume instruction.
 
 ```text
 explore
@@ -225,36 +257,24 @@ Verification follows a substantive result. One focused independent review is nor
 
 ## 6. Current Frontier
 
-Selected frontier:
+Development state:
 
 ```text
-OBLIVIOUS_PHASE_NATIVE_GENERAL_AFFINE_RELATION_ELIMINATION
+STOPPED_BY_USER
 ```
 
-The next crossing is:
+The named
+`COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER`
+work already exists at the reconciled source head; do not restart or extend
+it. The unstarted successor held without execution is:
 
 ```text
-compact compiled-body typed relational modules
--> native dense width-two unresolved interface
--> factorized width-three rank-two inputs with sparse lazy closure
--> enforced CATVM custody for the actual width-two intermediate
--> factor-preserving compact full-relation closure
--> compact general relational geometry
+COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
 ```
 
-Investigate, without imposing a rigid sequence:
-
-```text
-general affine equations without dense relation materialization
-fixed coefficient-oblivious shared-interface elimination
-phase-resident pivot controls without host branching
-canonical empty, universal, partial, and many-to-many boundaries
-identical operation topology across rank and pivot patterns
-resource growth versus width, equation rank, and fill
-```
-
-Another module-tree depth or dense separator-width probe is not meaningful
-progress while relation storage remains exponential in interface width.
+Resume only after explicit user instruction following a clean reconciliation
+checkpoint, and record a verification level plus restoration classification
+for every new result.
 
 ## 7. Native No-Smuggle Law
 
@@ -362,6 +382,9 @@ If the runtime forcibly ends, preserve an `AUTONOMOUS_CONTINUATION_REQUIRED`
 checkpoint with the exact next action. Do not label the lane or mission
 complete or blocked.
 
+While the user-directed development stop is active, do not create an
+autonomous continuation checkpoint that schedules new mechanism work.
+
 ## 11. Roadmap Maintenance
 
 When capability changes, update:
@@ -373,6 +396,7 @@ AGENTS.md when current milestone or frontier authority changes
 ```
 
 Record the result, claim ceiling, C-rung position, best compact baseline, highest-leverage blocker, selected next work, and `terminal: false`.
+During the current stop, record held work as unstarted and non-executable.
 
 ## 12. Git and Physical Boundaries
 
@@ -398,9 +422,10 @@ target changes.
 ```text
 The user owns lane closure.
 
-Preserve every milestone, then continue.
+Preserve every milestone; continue only when no user-directed stop is active.
 
 Do not return merely because the latest package looks like the mission.
 
 Do not end the goal at an external boundary or a failed scientific route.
+Do stop mechanism development when the user expressly directs it.
 ```

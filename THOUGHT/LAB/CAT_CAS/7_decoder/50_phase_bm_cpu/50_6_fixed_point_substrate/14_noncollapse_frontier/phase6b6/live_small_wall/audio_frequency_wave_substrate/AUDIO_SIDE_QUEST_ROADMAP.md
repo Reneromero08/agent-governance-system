@@ -1,12 +1,15 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `8.6`
+**Status:** `CLAIM_AUTHORITY_RECONCILED_DEVELOPMENT_STOPPED`
+**Roadmap version:** `9.0`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through parent commit:** `3c68f725`
-**Current highest milestone:** `BOUNDED_STOKES_SPHERE_REDUCED_DUAL_PRIME_PHASE_RESIDENT_NONLINEAR_SYMPLECTIC_LIE_SIGNATURE_WITH_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `BOUNDED_NORMALIZED_TWO_MODE_STOKES_SPHERE_RATIONAL_SU2_KERR_DUAL_PRIME_LIE_GRADES2_3_4_5_6_SOFTWARE_REFERENCE_ONLY`
+**Reconciled source head:** `65be0046ae02c79ab8c3b3356ef68d891de19e53`
+**Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
+**Current highest milestone:** `BOUNDED_COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_AND_CATALYTIC_HYPOTHESIS_SCORING_ON_COMPACT_NECKLACE_PHASE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `DIRECT_PROCESS_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_GRID17_FOUR_ROTOR_SIX_TYPED_OPEN_PUBLIC_OBSERVATION_PORTS_COMPLEX128_SOFTWARE_ONLY`
+**Current evidence authority:** `SOURCE_AUDITED_PACKAGE_LOCAL`
+**New mechanism development:** `STOPPED_BY_USER`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -61,6 +64,85 @@ compact unresolved relational state
 -> smallest lawful machine sufficient to attack the Small Wall
 ```
 
+## 0. Canonical claim reconciliation
+
+This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
+pushed scientific source head
+`65be0046ae02c79ab8c3b3356ef68d891de19e53`. The complete 77-milestone
+verification and restoration partitions are in
+`CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
+package prose or frozen evidence uses a stronger unqualified label.
+
+The canonical corrections are:
+
+```text
+original CATVM open-intermediate atomic transaction
+    REJECTED_SOURCE_DEFECT_ATOMICITY
+preserved Candidate A subclaims
+    bounded F->G algebra
+    hidden resident Y custody
+    G consumption of the actual Y
+    later G^-1 then F^-1 restoration
+    same-carrier unrelated-program reuse
+exact rank-two affine DAG scheduler
+    FIXTURE_SCOPED_VALID
+    exact 15 nodes / root 815 / fanouts 4,3,3,2
+    28 forward / 28 reverse / 9 working slots
+    no generic or arbitrary-DAG scheduler claim
+homogeneous Boolean suffix quotient
+    FAMILY_SCOPED_VALID
+    112 clean-room homogeneous formula cases
+    mixed/nonperiodic depth-six rank 14 versus homogeneous ceiling 7
+    no general Boolean-TT quotient claim
+post-inverse TT canonical closure
+    INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT
+    not unqualified exact restoration
+```
+
+Candidate D provenance is repaired without rewriting frozen evidence. The
+tracked result binds the original phase source hash
+`1a8678d11df0be641a5c035d2e117eccb7086d23a4046362818a64ef4cb3a655`.
+The current source hash is
+`281e1d1eb455cfdd0abaa77943459d7dbb0df340025023e6ee1cb6d91f3e2520`;
+the only delta is the `QTT_EMBEDDED_MAIN` preprocessor wrapper added at
+`c0cee6a9`, not a change to the evidenced quotient body.
+
+Every milestone has exactly one verification level:
+
+```text
+PACKAGE_SELF_REVIEW
+SEPARATE_REFERENCE_PARITY
+INDEPENDENT_ORACLE_REEXECUTION
+POST_SEAL_BOUNDARY_VERIFICATION
+CLEANROOM_ADVERSARIAL_VERIFICATION
+```
+
+Restoration evidence is no longer flattened. Accepted mechanisms are
+classified as `EXACT_ALGEBRAIC_RESTORATION`,
+`NUMERICAL_PHYSICAL_STATE_RESTORATION`, or
+`INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT`. Snapshot controls are
+`SNAPSHOT_RELOAD` and never count as catalytic restoration. Milestones with
+no restoration claim are explicit in the registry.
+
+Every mechanism after audit head
+`16b3db783f86d966fdb52830d591a0aa8d27cc5d` is
+`SOURCE_AUDITED_PACKAGE_LOCAL` unless the registry records stronger evidence.
+Package-local focused review does not upgrade that authority level.
+
+No distinct phase resource, computational advantage over the best matched
+compact classical method, Small Wall crossing, physical waveform execution,
+physical replacement of bits with pi, general holographic relational
+computation, fixed-rank unbounded-depth non-affine closure, or unlimited
+catalytic computation has been established.
+
+New mechanism development is stopped. The already completed
+`COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER`
+work at `65be0046` must not be restarted. The later
+`COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER`
+successor is held, not selected for execution. Resume requires an explicit
+user instruction after this clean reconciliation checkpoint, with a
+verification level and restoration class recorded for every new result.
+
 ## 1. Standing Mission
 
 Authority order:
@@ -105,9 +187,11 @@ Gamma_best(n) = cost of the best matched compact classical method
 
 The target is not leverage against deliberately expanded path enumeration when an equivalent compact classical algorithm exists. Explicit-path compression is useful evidence, but it is not C5 advantage.
 
-## 2. Current Verified State
+## 2. Current Recorded State
 
-Established bounded software results include:
+The following is a legacy compatibility list of bounded software result
+tokens. It is subordinate to the per-milestone registry and strict package
+ceilings:
 
 ```text
 AUDIO_FM_WAVE_ALGEBRA_ESTABLISHED
@@ -125,7 +209,6 @@ ALGEBRAIC_TWO_HUB_RELATION_MEMORY_ESTABLISHED
 ALGEBRAIC_RELATION_TREE_PHASE_ESTABLISHED
 ALGEBRAIC_CYCLE_RELATIONAL_PHASE_ESTABLISHED
 ALGEBRAIC_SERIES_PARALLEL_RELATIONAL_PHASE_ESTABLISHED
-CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
 ALGEBRAIC_RECURSIVE_TYPED_RELATIONAL_MODULE_PHASE_ESTABLISHED
 ALGEBRAIC_COMPACT_TYPED_RELATIONAL_MODULE_EXECUTION_ESTABLISHED
 ALGEBRAIC_WIDTH2_RELATIONAL_PHASE_CONTRACTION_ESTABLISHED
@@ -152,6 +235,14 @@ CATVM_ENFORCED_WIDTH_PARAMETRIC_BOOLEAN_TT_RESIDENT_H_COMPOSITION_ESTABLISHED_ON
 BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE
 GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD_CONFIRMS_COMPACT_RECURRENCE_AND_RETAINED_HISTORY_OBSTRUCTION
 TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING_REDUCES_RETAINED_PHASE_HISTORY
+```
+
+The removed Candidate A token is retained only as a rejected predecessor:
+
+```text
+CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND
+    atomic transaction: REJECTED_SOURCE_DEFECT_ATOMICITY
+    algebra/custody/later restoration/reuse subclaims: PRESERVED_BOUNDED
 ```
 
 The phase-native computer established factorized registers, composable phase instructions, intermediate phase state, conditional control, routing, boundary-only decoding, true inverse restoration, and cross-program carrier reuse.
@@ -261,8 +352,10 @@ internal-port closure
     ESTABLISHED_FOR_BOUNDED_PUBLIC_SERIES_PARALLEL_GRAPH_CLASS
 idempotent relational boundary
     PARTIAL_RESTRICTED_CLASS_ESTABLISHED_GENERAL_LAW_OPEN
-CATVM open-intermediate composition
-    ESTABLISHED_BOUNDED_LINUX_USERSPACE_PHASE_BACKEND
+original CATVM open-intermediate atomic transaction
+    REJECTED_SOURCE_DEFECT_ATOMICITY
+original CATVM algebra/custody/later restoration/reuse
+    PRESERVED_BOUNDED_LINUX_USERSPACE_SOURCE_EVIDENCE
 CATVM width-two open-intermediate contraction
     ESTABLISHED_FIXED_TWO_CONTRACT2_CHAIN_WITH_RESIDENT_16_CELL_HANDOFF
 recursive typed relational modules
@@ -374,7 +467,7 @@ series-parallel capacity                       46 nodes / 60 relations / 59 oper
 series-parallel carrier                        480 complex cells, zero tuple/witness/truth slots
 series-parallel restoration/reuse              below 1.7e-16, cross-process reuse passes
 series-parallel repaired defects               phase drift / duplicate identity / UBSan fail-open
-CATVM native transaction                       compose -> resident Y -> intersect -> boundary Z
+original CATVM non-atomic source sequence       compose -> resident Y -> intersect -> emit Z -> later restore
 CATVM custody boundary                         locked private non-dumpable seccomp service
 CATVM intermediate projection                  denied without decode or state mutation
 CATVM controller process access                all six same-UID attacks denied while Y resident
@@ -470,6 +563,10 @@ select the next experiment or architectural move
 continue without waiting for a new user prompt
 ```
 
+That default loop is suspended by the current user-directed development stop.
+The reconciliation checkpoint is the only selected work; afterward the agent
+must return without starting a mechanism.
+
 The agent may not reinterpret a newly satisfied milestone as lane completion. `MISSION_COMPLETE`, `FINAL`, and equivalent labels are owner-controlled.
 
 ## 5. Autonomous Operating Authority
@@ -494,7 +591,9 @@ update roadmap authority files
 select the next work from accumulated evidence
 ```
 
-The operating loop is:
+The operating loop below is suspended by the current user-directed
+development stop. It becomes active again only after the registry's resume
+condition is satisfied:
 
 ```text
 explore
@@ -512,7 +611,17 @@ Verification follows a substantive result. One focused review is normally suffic
 
 ## 6. Current Frontier
 
-The selected frontier is:
+Current execution state:
+
+```text
+NEW_MECHANISM_DEVELOPMENT    STOPPED_BY_USER
+SCIENTIFIC_SOURCE_HEAD       65be0046ae02c79ab8c3b3356ef68d891de19e53
+HELD_SUCCESSOR               COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+RESUME_AUTHORITY             EXPLICIT_USER_INSTRUCTION_ONLY
+```
+
+All successor language below this point is historical route context, not
+authorization to start a mechanism. The last pre-stop route was:
 
 ```text
 GENERAL_RETAIN_ALL_AFFINE_DAG_CUSTODY_COMPILATION     ESTABLISHED_EXACT_15_NODE
@@ -1638,7 +1747,7 @@ neither general catalytic inference nor a calibrated posterior or accuracy
 claim. The identical compact classical complex recurrence matches exactly,
 so no computational leverage or Small Wall crossing is established.
 
-The next selected phase-machine experiment is:
+The unstarted successor is held:
 
 ```text
 COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
@@ -1648,6 +1757,9 @@ It must replace public scalar substitution with an unresolved shared
 observation interface composed across multiple noncommuting relation modules,
 while preserving compactness, final-only projection, actual restoration,
 reuse, and the strongest compact classical comparison.
+
+No implementation, fixture expansion, CATVM wrapper, or benchmark for that
+successor is authorized while the development stop remains in force.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 
@@ -1729,10 +1841,10 @@ A locally controlled verifier is evidence discipline, not official external acce
 
 ## 9. Persistent Goal Law
 
-The lane remains active until the user determines that unlimited catalytic
-computation with phase has been achieved or explicitly closes the lane.
-
-There is no autonomous operational stop condition.
+The lane remains nonterminal until the user determines that unlimited
+catalytic computation with phase has been achieved or explicitly closes the
+lane. Nonterminal mission state does not override the current user-directed
+stop on new mechanism development.
 
 ```text
 external authority boundary -> do not cross it; continue every authorized route
@@ -1747,10 +1859,10 @@ change, merge, release, payment, or submission without ending the compute
 goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
-Hard runtime or context exhaustion is not scientific completion. If the
-execution environment forcibly ends, preserve a continuation checkpoint with
-the exact next action and mark it `AUTONOMOUS_CONTINUATION_REQUIRED`, never
-`COMPLETE` or `BLOCKED`.
+Hard runtime or context exhaustion is not scientific completion. While the
+development stop is active, preserve only the reconciliation checkpoint and
+held unstarted successor; do not mark or execute an autonomous mechanism
+continuation.
 
 ## 10. Roadmap Maintenance
 
