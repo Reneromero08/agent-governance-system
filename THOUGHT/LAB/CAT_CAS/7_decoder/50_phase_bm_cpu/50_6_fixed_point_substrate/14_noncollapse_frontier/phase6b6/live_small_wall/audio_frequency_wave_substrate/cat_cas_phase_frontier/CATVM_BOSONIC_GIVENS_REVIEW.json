@@ -1,0 +1,55 @@
+{
+  "review_id": "CATVM-BOSONIC-GIVENS-HIDDEN-OCCUPATION-01-R2",
+  "evidence": "/tmp/catvm-bosonic-givens-accepted.j4xxOA",
+  "verdict": "PASS",
+  "review_scope": [
+    "executed_binary_provenance",
+    "native_wire_format_claim_ceiling",
+    "separate_process_custody",
+    "actual_resident_intermediate_continuation",
+    "projection_denial",
+    "actual_inverse_restoration",
+    "same_carrier_backing",
+    "generation_two_reuse",
+    "snapshot_distinction",
+    "matched_protocol_traffic",
+    "controls",
+    "claim_boundaries"
+  ],
+  "closed_findings": [
+    {
+      "id": "CATVM-BG-R1-001",
+      "finding": "executed_service_binary_missing_from_SHA256SUMS",
+      "repair": "exact executed service binary included in evidence manifest"
+    },
+    {
+      "id": "CATVM-BG-R1-002",
+      "finding": "native_endian_C_wire_format_exceeded_linux_claim_ceiling",
+      "repair": "controller gates x86_64 little endian and claim ceiling matches"
+    }
+  ],
+  "remaining_findings": 0,
+  "mechanism_checks": {
+    "actual_4845_cell_stage_retained_across_protocol": true,
+    "continuation_consumes_same_stage": true,
+    "intermediate_projection_denied": true,
+    "boundary_not_valid_during_denial": true,
+    "hidden_stage_released_before_reuse": true,
+    "actual_inverse_on_borrowed_carrier": true,
+    "carrier_backing_preserved": true,
+    "primary_restoration_generation": 1,
+    "unrelated_reuse_generation": 2,
+    "snapshot_not_accepted_as_restoration": true,
+    "backend_output_empty": true,
+    "no_transaction_law_regression": true
+  },
+  "claim_boundary_checks": {
+    "matched_classical_identical": true,
+    "cross_uid_secrecy_established": false,
+    "distinct_phase_resource_established": false,
+    "computational_advantage_established": false,
+    "small_wall_crossed": false,
+    "unbounded_computation_established": false,
+    "physical_execution_established": false
+  }
+}

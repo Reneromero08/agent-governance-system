@@ -4625,3 +4625,48 @@ new obstruction is:
 ```text
 POLYNOMIAL_OCCUPATION_SCRATCH_AND_MATCHED_CLASSICAL_BOSONIC_GIVENS_IDENTITY
 ```
+
+## CATVM enforces custody of the factorized occupation intermediate
+
+The automatically factorized closure now executes behind a non-dumpable
+same-UID Linux service. After the diagonal and first 68 of 136 Givens
+rotations, the backend retains the actual 4,845-cell occupation state across
+the protocol boundary. Projection is denied without a valid boundary, and
+the continuation consumes that same resident state before closing to the
+285-cell necklace carrier.
+
+Only the final seven-value invariant boundary is released. The backend then
+applies the actual inverse to the same carrier allocation, restores within
+`8.446e-15`, and the actual restored carrier executes an unrelated
+generation-two program and restores within `9.273e-15`. Missing, wrong, and
+applicably reordered inverses separate by more than `1.0`. The snapshot sham
+reloads a 4,560-byte copy and is explicitly not accepted restoration.
+
+Evidence `/tmp/catvm-bosonic-givens-accepted.j4xxOA` and the focused
+independent review support:
+
+```text
+BOUNDED_CATVM_ENFORCED_TOPOLOGY_COMPILED_BOSONIC_GIVENS_HIDDEN_OCCUPATION_COMPOSITION_WITH_ACTUAL_INVERSE_RESTORATION_AND_REUSE
+```
+
+The ceiling is x86-64 little-endian Linux, same-UID `AF_UNIX`
+`SOCK_SEQPACKET`, grid 17, four rotors, depth eight, tested nonzero chirp
+schedule, complex128, and software only. The manifest binds the exact executed
+binary. An ASan/UBSan rebuild also completes the transaction without a
+diagnostic.
+
+The direct arm is service-local and forward-only, not a warm direct-process
+baseline. Kernel socket buffers and allocator metadata remain outside the
+explicit 102,147-byte service-plus-packet payload bound. The matched classical
+bosonic Givens method remains identical. This does not establish leverage,
+Small Wall crossing, cross-UID secrecy, a distinct phase resource, physical
+execution, or unbounded computation.
+
+The next phase-machine repair is:
+
+```text
+SYMMETRY_PRESERVING_NECKLACE_GENERATOR_CLOSURE_WITHOUT_OCCUPATION_EXPANSION
+```
+
+It must eliminate the 4,845-cell occupation release without replacing it by
+an equivalent retained operator or uncontrolled Krylov workspace.

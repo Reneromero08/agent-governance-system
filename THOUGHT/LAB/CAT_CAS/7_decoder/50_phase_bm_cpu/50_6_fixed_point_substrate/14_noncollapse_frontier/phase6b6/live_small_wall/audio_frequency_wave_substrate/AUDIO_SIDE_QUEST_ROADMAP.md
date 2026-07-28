@@ -1528,6 +1528,29 @@ Givens lifecycle, and reuse the restored 285-cell carrier. This strengthens
 the phase machine boundary but will not by itself establish a distinct phase
 resource or Small Wall crossing.
 
+That CATVM custody experiment is established on x86-64 little-endian Linux.
+The non-dumpable same-UID service retains the actual 4,845-cell occupation
+state across the protocol boundary, denies projection, consumes the same
+resident state, projects only the final invariant boundary, applies the actual
+inverse to the same 285-cell carrier allocation, and consumes the restored
+carrier in an unrelated generation-two program. The exact executed binary is
+bound into the evidence manifest and the focused review passes.
+
+The machine boundary does not change the underlying phase resource result:
+the best matched classical bosonic Givens method remains identical. The next
+selected experiment therefore changes the phase closure itself:
+
+```text
+SYMMETRY_PRESERVING_NECKLACE_GENERATOR_CLOSURE_WITHOUT_OCCUPATION_EXPANSION
+```
+
+The target is a topology-derived sparse generator or equivalent exact
+rotation-commuting update acting directly on the 285-cell necklace carrier.
+It must avoid a retained `285^2` operator, avoid the 4,845-cell occupation
+release, preserve final-boundary-only projection and actual restoration/reuse,
+and bound every polynomial, Krylov, or rematerialization workspace. Repeating
+depth or rotor fixtures is not selected.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
