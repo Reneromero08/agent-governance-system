@@ -4549,3 +4549,42 @@ operator-plan growth but not:
 ```text
 RELATIVE_COORDINATE_EXPONENTIAL_GROWTH_AND_MATCHED_CLASSICAL_QUOTIENT_IDENTITY
 ```
+
+## Exchange symmetry changes fixed-grid rotor carrier growth to polynomial
+
+For an explicitly exchange-symmetric, global-rotation-invariant non-affine
+subfamily, the phase carrier now stores one unresolved cyclotomic amplitude
+per cyclic necklace of occupation histograms. At grid 17 and four rotors,
+4,845 histograms form 285 necklaces, reducing the prior 4,913-cell labelled
+rotation quotient by another factor of `17.239`.
+
+The native collision phase depends quadratically on occupation collisions.
+The free law is a circulant quadratic chirp. Both commute with permutation
+and global rotation. Each induced free coefficient is streamed from an exact
+17-component cyclotomic permanent count; neither the `285^2` operator nor the
+83,521-cell labelled wave nor an assignment list is retained.
+
+At fixed grid, Burnside counting gives `O(R^16)` carrier growth. For `R < 17`
+the free-orbit formula is `binomial(R+16,16)/17`; the analytic five-rotor
+dimension is 1,197. This is a declared symmetric family and does not compress
+the preceding open-chain program.
+
+The depth-eight weighted norm error is `2.220e-16`; an independent labelled
+verifier agrees within `1.346e-15`. Actual inverse restoration is
+`7.457e-15`; unrelated generation-two reuse restores within `8.247e-15` and
+agrees with fresh execution within `8.882e-16`.
+
+Evidence `/tmp/four-rotor-necklace-orbit-final.RoJ1jK` supports:
+
+```text
+BOUNDED_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_NECKLACE_PHASE_CARRIER_CHANGES_FIXED_GRID_ROTOR_GROWTH_FROM_EXPONENTIAL_TO_POLYNOMIAL_WITH_STREAMED_EXACT_CYCLOTOMIC_FREE_CLOSURE_ACTUAL_RESTORATION_AND_REUSE
+```
+
+The carrier is 4,560 bytes and the maximum explicit engine payload is 19,829
+bytes, but the depth-eight lifecycle streams 1,299,600 coefficients by
+enumerating 530,236,800 permanent assignment terms. The matched classical
+orbit recurrence is identical. The new obstruction is:
+
+```text
+STREAMED_NECKLACE_FREE_CLOSURE_QUADRATIC_TRANSITION_WORK_AND_MATCHED_CLASSICAL_ORBIT_IDENTITY
+```

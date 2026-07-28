@@ -1478,6 +1478,31 @@ It must change resident carrier growth or establish a useful native phase
 closure not immediately reducible to the same compact classical recurrence.
 It must not be another grid, depth, rotor-count, or fanout fixture sweep.
 
+That carrier-growth repair is established for a narrower, explicitly
+exchange-symmetric and rotation-invariant non-affine family. A cyclic
+occupation-necklace carrier uses 285 unresolved complex amplitudes at grid 17
+and four rotors instead of the prior 4,913 labelled relative-coordinate
+amplitudes. Burnside counting changes fixed-grid carrier growth from
+exponential to `O(R^16)`. Actual inverse restoration, unrelated
+generation-two reuse, and independent labelled-wave parity pass.
+
+The free closure streams exact cyclotomic permanent counts without retaining
+an orbit transition matrix or labelled wave. It does not solve work growth:
+the depth-eight lifecycle enumerates 530,236,800 permanent terms, and the
+best matched classical orbit recurrence is identical. The original
+edge-resolved open-chain family also lacks the required exchange symmetry.
+
+The next selected phase-owned obstruction is therefore:
+
+```text
+STREAMED_NECKLACE_FREE_CLOSURE_QUADRATIC_TRANSITION_WORK_AND_MATCHED_CLASSICAL_ORBIT_IDENTITY
+```
+
+The successor must reduce the exact closure work without moving it into a
+retained dense operator, or establish a useful phase resource unavailable to
+the identical classical orbit simulator. Repeating rotor-count or depth
+fixtures is not selected.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
