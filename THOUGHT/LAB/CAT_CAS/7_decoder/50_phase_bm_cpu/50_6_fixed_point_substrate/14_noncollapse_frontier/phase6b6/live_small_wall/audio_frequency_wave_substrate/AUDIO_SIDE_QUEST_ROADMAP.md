@@ -1014,6 +1014,43 @@ Physical phase persistence, computation, restoration, hardware bit replacement, 
 
 The agent must choose the work that most directly advances the mission. It is not required to follow the list in order.
 
+## 6A. Current Native Nonlinear Phase Frontier
+
+The current highest bounded phase-machine result is:
+
+```text
+BOUNDED_NONLINEAR_UNIT_PHASE_TORUS_SHEAR_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_INTERFERENCE_PROJECTION
+```
+
+within:
+
+```text
+BOUNDED_LINUX_SOFTWARE_NONLINEAR_TORUS_SHEAR_DEPTHS3_32_128_512_2048_4096_DOUBLE_COMPLEX_PHASE_REFERENCE_ONLY
+```
+
+Two baseline-relative unit phasors undergo alternating public nonlinear
+shears through the native carrier update primitive. Final-only interference
+projection, actual inverse restoration, sixteen-cycle reuse, coupling and
+null-carrier controls, snapshot separation, and a focused independent review
+pass.
+
+The best matched classical method is a two-double angle recurrence using 16
+bytes and `O(depth)` work. Consequently this establishes a broader native
+phase law, not a distinct resource, advantage, or Small Wall crossing.
+Further depths in the same fixed-rank map are not selected.
+
+The selected successor is:
+
+```text
+CATVM_TOPOLOGY_COMPILED_SHARED_NONLINEAR_PHASE_SHEAR_GRAPH
+```
+
+It must compile coupling and inverse custody from public graph topology,
+retain shared internal phases resident, expose only a final interference
+boundary, actually restore and reuse the carrier, and compare against the
+best compact classical graph recurrence. Its purpose is to generalize the
+phase law and machine boundary, not merely enlarge a two-cell fixture.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -1051,7 +1088,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS2_3_4_5_8_NEIGHBOR_AND_OR_FAMILY_SCOPED_QUOTIENT_REFERENCE_ONLY
+BOUNDED_LINUX_SOFTWARE_NONLINEAR_TORUS_SHEAR_DEPTHS3_32_128_512_2048_4096_DOUBLE_COMPLEX_PHASE_REFERENCE_ONLY
 ```
 
 Not established:

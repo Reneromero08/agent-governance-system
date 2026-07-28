@@ -3454,3 +3454,57 @@ whose composition preserves unresolved interference information that is not
 immediately homomorphic to Boolean threshold or GF(2) affine recurrence. It
 must retain boundary-only projection, actual inverse restoration, restored
 carrier reuse, and a matched compact classical signature.
+
+## Nonlinear unit-phase shear establishes a native non-Boolean law
+
+The first coherent U(2) prototype was rejected because it decoded the whole
+resident matrix into the matched classical recurrence. A direct additive-wave
+repair was also rejected because it bypassed unit-phase carrier semantics.
+Neither rejected prototype entered the accepted evidence.
+
+The accepted repair operates on two baseline-relative unit phasors. Each
+public morphism rotates one actual resident target by
+`exp(i*k*Im(source))`, using only `relative` and `multiply_cell`. The source
+is unchanged by its shear, so reverse topology order with conjugate factors
+is the actual inverse. Alternating targets make adjacent morphisms nonlinear
+and noncommuting.
+
+Across depths `3,32,128,512,2048,4096`, exact quantized final hashes match an
+independent two-angle recurrence. Only the copied final two-phase boundary is
+decoded as an interference probability. Sixteen additional transactions
+reuse the same restored carrier. At depth 4096:
+
+```text
+resident plus boundary phase cells           4
+native forward-plus-inverse updates       8,200
+maximum unit-modulus error          3.33066907388e-16
+maximum repeated restoration       7.58532257521e-14
+predeclared restoration tolerance             2e-12
+```
+
+Wrong boundary, missing shear, wrong shear, and noncommuting reordered
+inverses leave raw restoration residuals. Coupling-disabled and
+baseline-neutralized executions change the boundary, actual null-carrier
+execution is rejected, snapshot reload remains generation zero, and analyzer,
+ASan/UBSan, replay, and source-level no-bypass checks pass.
+
+Evidence `/tmp/nonlinear-phase-shear-final.uC5B2f/evidence` establishes:
+
+```text
+BOUNDED_NONLINEAR_UNIT_PHASE_TORUS_SHEAR_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_INTERFERENCE_PROJECTION
+```
+
+within:
+
+```text
+BOUNDED_LINUX_SOFTWARE_NONLINEAR_TORUS_SHEAR_DEPTHS3_32_128_512_2048_4096_DOUBLE_COMPLEX_PHASE_REFERENCE_ONLY
+```
+
+This is phase-owned progress: phase is the primitive state, the update is
+nonlinear and noncommuting, and the carrier is actually restored and reused.
+It is not a distinct phase resource or a Small Wall crossing. The best
+matched recurrence stores two double angles in 16 bytes and has the same
+`O(depth)` cost. The next selected mechanism is a public-topology compiled
+shared nonlinear phase-shear graph behind CATVM. It must grow relational
+geometry beyond fixed two-angle state without hiding an equivalent compact
+classical solver or materializing phase paths.
