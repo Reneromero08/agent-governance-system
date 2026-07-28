@@ -1551,6 +1551,35 @@ release, preserve final-boundary-only projection and actual restoration/reuse,
 and bound every polynomial, Krylov, or rematerialization workspace. Repeating
 depth or rotor fixtures is not selected.
 
+That phase-machine repair is established. A 17-by-17 Hermitian logarithm of
+the circulant free law lifts to a streamed `dGamma(H)` action directly among
+the 285 necklaces. A degree-64 Chebyshev recurrence uses three carrier-sized
+vectors, has a rigorous complete-tail bound, and never materializes the
+4,845-cell occupation space or a 285-by-285 transition operator.
+
+The repair preserves predecessor parity, actual inverse restoration, and
+unrelated restored-carrier reuse while reducing explicit engine payload from
+97,447 to 33,470 bytes. It is slower and the matched compact classical
+Hermitian quotient recurrence is identical. The resulting obstruction is:
+
+```text
+CHEBYSHEV_GENERATOR_WORK_AND_MATCHED_CLASSICAL_HERMITIAN_QUOTIENT_IDENTITY
+```
+
+The next bounded experiment targets the resource distinction rather than
+another carrier-size fixture:
+
+```text
+MATCHED_COHERENT_DEPHASED_CLASSICAL_NECKLACE_GENERATOR_SMALL_WALL_TRIAD
+```
+
+It must compare coherent phase execution, a dephased sham, and the best
+matched compact classical complex recurrence on identical public instances,
+carrier dimensions, traffic, boundary semantics, restoration, and reuse. Its
+purpose is to locate any useful interference resource and test whether the
+classical recurrence inherits it exactly, not to manufacture a crossing by
+choosing an expanded baseline.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:

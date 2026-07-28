@@ -4670,3 +4670,45 @@ SYMMETRY_PRESERVING_NECKLACE_GENERATOR_CLOSURE_WITHOUT_OCCUPATION_EXPANSION
 
 It must eliminate the 4,845-cell occupation release without replacing it by
 an equivalent retained operator or uncontrolled Krylov workspace.
+
+## A Hermitian generator closes directly on the necklace quotient
+
+The single-particle circulant free unitary now compiles to a 17-by-17
+Hermitian logarithm. Its lifted `dGamma(H)` action is streamed directly among
+canonical occupation necklaces, and a degree-64 Chebyshev recurrence applies
+`exp(+/- i dGamma(H))` with three 285-cell work vectors.
+
+The accepted path materializes zero occupation cells and no 285-by-285
+transition operator. One-step state parity against bosonic Givens is
+`2.617e-15`; the depth-eight boundary differs by `2.609e-15`. The complete
+omitted Chebyshev tail is bounded by `6.697e-41`.
+
+Primary actual-inverse restoration is `1.388e-14`. The actual restored
+carrier executes an unrelated generation-two program, restoring within
+`1.727e-14` and matching a fresh boundary within `1.277e-14`. Missing, wrong,
+and applicably reordered controls remain material.
+
+Evidence `/tmp/four-rotor-necklace-generator-final.P7tXmz` and the focused
+independent review support:
+
+```text
+BOUNDED_SYMMETRY_PRESERVING_HERMITIAN_NECKLACE_GENERATOR_PHASE_CLOSURE_ELIMINATES_OCCUPATION_EXPANSION_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+Explicit engine payload falls from the bosonic Givens predecessor's 97,447
+bytes to 33,470 bytes, a `2.912x` reduction. The comparison harness's
+4,845-cell occupation scratch is separately disclosed and never attributed
+to the accepted path. The generator lifecycle is about `3.36x` slower and
+streams 16,868,352 terms, so this is a memory/closure repair rather than a
+work advantage.
+
+The matched compact classical Hermitian quotient recurrence is identical.
+The next diagnostic is:
+
+```text
+MATCHED_COHERENT_DEPHASED_CLASSICAL_NECKLACE_GENERATOR_SMALL_WALL_TRIAD
+```
+
+It must test whether coherent interference changes the useful boundary while
+retaining the best matched classical complex recurrence as the baseline. No
+leverage may be inferred from avoided occupation expansion alone.

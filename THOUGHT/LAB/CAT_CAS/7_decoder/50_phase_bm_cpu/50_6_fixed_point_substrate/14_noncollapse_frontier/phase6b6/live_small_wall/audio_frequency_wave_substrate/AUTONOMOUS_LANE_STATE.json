@@ -48,8 +48,8 @@
   },
   "lane_closure_authority": "USER_ONLY",
   "terminal": false,
-  "current_highest_milestone": "BOUNDED_CATVM_ENFORCED_TOPOLOGY_COMPILED_BOSONIC_GIVENS_HIDDEN_OCCUPATION_COMPOSITION_WITH_ACTUAL_INVERSE_RESTORATION_AND_REUSE",
-  "current_claim_ceiling": "LINUX_X86_64_LITTLE_ENDIAN_SAME_UID_AF_UNIX_SEQPACKET_GRID17_FOUR_ROTOR_DEPTH8_TESTED_NONZERO_CHIRP_COMPLEX128_SOFTWARE_ONLY",
+  "current_highest_milestone": "BOUNDED_SYMMETRY_PRESERVING_HERMITIAN_NECKLACE_GENERATOR_PHASE_CLOSURE_ELIMINATES_OCCUPATION_EXPANSION_WITH_ACTUAL_RESTORATION_AND_REUSE",
+  "current_claim_ceiling": "EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_GRID17_FOUR_ROTOR_DEPTH8_CHEBYSHEV_DEGREE64_TESTED_NONZERO_CHIRP_COMPLEX128_SOFTWARE_ONLY",
   "architectural_alignment": {
     "current_phase_circuit_substrate": "ESTABLISHED_DEVELOPMENT_FOUNDATION",
     "bounded_holographic_relational_substrate": "ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_EXACT_15_NODE_FOUR_OWNER_AFFINE_DAG",
@@ -107,7 +107,7 @@
     "four_rotor_streamed_momentum_coordinate": "ESTABLISHED_RETAINED_PLAN408_BYTES_ENGINE118592_WRAPPER197200_ACTUAL_RESTORATION_REUSE",
     "four_rotor_necklace_orbit_phase": "ESTABLISHED_EXCHANGE_SYMMETRIC_GRID17_CARRIER285_FIXED_GRID_O_R16_ACTUAL_RESTORATION_REUSE",
     "four_rotor_bosonic_givens_phase": "ESTABLISHED_RESIDENT285_TEMPORARY_OCCUPATION4845_ZERO_ACCEPTED_PERMANENT_TERMS_ACTUAL_RESTORATION_REUSE",
-    "selected_next_experiment": "SYMMETRY_PRESERVING_NECKLACE_GENERATOR_CLOSURE_WITHOUT_OCCUPATION_EXPANSION"
+    "selected_next_experiment": "MATCHED_COHERENT_DEPHASED_CLASSICAL_NECKLACE_GENERATOR_SMALL_WALL_TRIAD"
   },
   "strongest_bounded_architecture": [
     "PUBLIC_TYPED_SERIES_PARALLEL_RELATIONAL_GEOMETRY",
@@ -1928,6 +1928,26 @@
     "catvm_bosonic_givens_distinct_phase_resource": false,
     "catvm_bosonic_givens_computational_advantage": false,
     "catvm_bosonic_givens_small_wall_crossing": false,
+    "necklace_hermitian_generator_phase": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS_STRICT_CEILING",
+    "necklace_hermitian_generator_reviewer_id": "FOUR-ROTOR-NECKLACE-HERMITIAN-GENERATOR-01-R2",
+    "necklace_hermitian_generator_remaining_review_findings": 0,
+    "necklace_hermitian_generator_resident_cells": 285,
+    "necklace_hermitian_generator_work_cells": 855,
+    "necklace_hermitian_generator_accepted_occupation_cells": 0,
+    "necklace_hermitian_generator_retained_operator_bytes": 0,
+    "necklace_hermitian_generator_maximum_explicit_engine_bytes": 33470,
+    "necklace_hermitian_generator_predecessor_engine_bytes": 97447,
+    "necklace_hermitian_generator_engine_payload_reduction_factor": 2.911472960860472,
+    "necklace_hermitian_generator_streamed_terms_depth8_lifecycle": 16868352,
+    "necklace_hermitian_generator_maximum_tail_bound": 6.69717105552036E-41,
+    "necklace_hermitian_generator_primary_restoration_error": 1.3877500627453903E-14,
+    "necklace_hermitian_generator_reuse_restoration_error": 1.7274307843759177E-14,
+    "necklace_hermitian_generator_actual_inverse_restoration": true,
+    "necklace_hermitian_generator_actual_restored_carrier_reuse": true,
+    "necklace_hermitian_generator_matched_classical_identical": true,
+    "necklace_hermitian_generator_distinct_phase_resource": false,
+    "necklace_hermitian_generator_computational_advantage": false,
+    "necklace_hermitian_generator_small_wall_crossing": false,
     "algebraic_general_affine_equation_elimination": true,
     "general_boolean_relation_elimination": false,
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
@@ -2020,8 +2040,8 @@
     "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
   },
   "active_frontier_candidates": [
-    "MATCHED_CLASSICAL_BOSONIC_GIVENS_IDENTITY_AND_POLYNOMIAL_OCCUPATION_SCRATCH",
-    "SYMMETRY_PRESERVING_NECKLACE_GENERATOR_CLOSURE_WITHOUT_OCCUPATION_EXPANSION",
+    "CHEBYSHEV_GENERATOR_WORK_AND_MATCHED_CLASSICAL_HERMITIAN_QUOTIENT_IDENTITY",
+    "MATCHED_COHERENT_DEPHASED_CLASSICAL_NECKLACE_GENERATOR_SMALL_WALL_TRIAD",
     "BROADER_NON_AFFINE_PHASE_COMPOSITION_ALGEBRA",
     "FIXED_RANK_OR_COMPACT_CLOSURE_WITHOUT_BOOLEAN_RECURRENCE",
     "COMPACT_REPRESENTATION_ACROSS_WIDER_GRAPH_SEPARATORS",
@@ -2098,7 +2118,8 @@
     "STREAMED_NECKLACE_FREE_CLOSURE_QUADRATIC_TRANSITION_WORK_AND_MATCHED_CLASSICAL_ORBIT_IDENTITY",
     "TOPOLOGY_COMPILED_BOSONIC_GIVENS_PHASE_CLOSURE_ESTABLISHED",
     "CATVM_ENFORCED_BOSONIC_GIVENS_HIDDEN_OCCUPATION_CLOSURE_ESTABLISHED",
-    "SYMMETRY_PRESERVING_NECKLACE_GENERATOR_CLOSURE_WITHOUT_OCCUPATION_EXPANSION"
+    "SYMMETRY_PRESERVING_NECKLACE_GENERATOR_CLOSURE_WITHOUT_OCCUPATION_EXPANSION_ESTABLISHED",
+    "MATCHED_COHERENT_DEPHASED_CLASSICAL_NECKLACE_GENERATOR_SMALL_WALL_TRIAD"
   ],
   "frontier_warning": "ANOTHER_HANDCRAFTED_GRAPH_FAMILY_IS_INSUFFICIENT_IF_INTERMEDIATE_RELATION_WIDTH_CARRIER_STATE_OR_PROVENANCE_GROWS_EXPONENTIALLY",
   "agent_policy": {

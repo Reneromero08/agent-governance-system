@@ -22,7 +22,7 @@ service_stdout="$evidence_dir/service.stdout"
 service_stderr="$evidence_dir/service.stderr"
 
 mkdir -p "$evidence_dir"
-sed 's/^int main() {/int bosonic_givens_standalone_main() {/' \
+sed 's/^int BOSONIC_GIVENS_ENTRY() {/int bosonic_givens_standalone_main() {/' \
   "$base_source" >"$generated_source"
 printf '\n' >>"$generated_source"
 sed '/^#include /d' "$tail_source" >>"$generated_source"

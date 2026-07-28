@@ -1,0 +1,45 @@
+{
+  "review_id": "FOUR-ROTOR-NECKLACE-HERMITIAN-GENERATOR-01-R2",
+  "evidence": "/tmp/four-rotor-necklace-generator-final.P7tXmz",
+  "verdict": "PASS",
+  "closed_findings": [
+    {
+      "id": "NG-R1-001",
+      "finding": "accepted_path_and_comparison_occupation_resources_were_not_separately_scoped",
+      "repair": "accepted path reports zero occupation cells while comparator reports 4845 cells and 77520 bytes"
+    },
+    {
+      "id": "NG-R1-002",
+      "finding": "finite_Bessel_tail_sum_was_not_an_infinite_remainder_bound",
+      "repair": "complete omitted tail bounded by a Bessel-series geometric envelope"
+    }
+  ],
+  "remaining_findings": 0,
+  "mathematical_checks": {
+    "circulant_Fourier_convention_reconstructs_C_as_exp_iH": true,
+    "generator_is_Hermitian_within_gate": true,
+    "dGamma_necklace_indexing_and_m_i_coefficient_correct": true,
+    "global_rotation_quotient_closed": true,
+    "Chebyshev_forward_and_adjoint_coefficients_correct": true,
+    "complete_omitted_tail_rigorously_bounded": true
+  },
+  "mechanism_checks": {
+    "accepted_path_occupation_expansion_materialized": false,
+    "accepted_path_dense_285_by_285_operator_materialized": false,
+    "accepted_path_three_285_cell_work_vectors": true,
+    "actual_inverse_restoration": true,
+    "actual_restored_carrier_reuse": true,
+    "missing_wrong_reordered_controls": true,
+    "resource_arithmetic_consistent": true,
+    "manifest_verifies": true,
+    "sanitizers_pass": true
+  },
+  "claim_boundary_checks": {
+    "matched_classical_generator_identical": true,
+    "distinct_phase_resource_established": false,
+    "computational_advantage_established": false,
+    "small_wall_crossed": false,
+    "unbounded_computation_established": false,
+    "physical_execution_established": false
+  }
+}

@@ -2,6 +2,10 @@
 #include "four_rotor_necklace_orbit_phase.cpp"
 #undef main
 
+#ifndef BOSONIC_GIVENS_ENTRY
+#define BOSONIC_GIVENS_ENTRY main
+#endif
+
 /*
  * Successor to streamed necklace permanents.
  *
@@ -520,7 +524,7 @@ FastRun fast_transaction(
 
 }  // namespace
 
-int main() {
+int BOSONIC_GIVENS_ENTRY() {
     const Plan plan = compile_plan();
     const std::vector<Complex> initial = make_carrier(plan, 0);
 
