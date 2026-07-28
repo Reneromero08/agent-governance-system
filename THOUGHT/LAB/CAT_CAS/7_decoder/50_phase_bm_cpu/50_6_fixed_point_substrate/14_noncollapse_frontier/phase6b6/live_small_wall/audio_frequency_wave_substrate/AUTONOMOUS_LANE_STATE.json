@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1.0",
   "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
-  "state_date": "2026-07-27",
+  "state_date": "2026-07-28",
   "reconciled_through_milestone_commit": "46dda91f",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
   "standing_mission": "CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1",
@@ -98,7 +98,7 @@
     "f5_gauss_best_matched_baseline": "SEVEN_INTEGER_WEIL_RECURRENCE_28_SEMANTIC_BYTES",
     "paired_phase_generic_unitary": "ESTABLISHED_100_PHASE_CELLS_DEPTH32_WITH_AMPLITUDE_SPLIT_AND_ENTRY_FLOOR",
     "paired_phase_best_matched_baseline": "DENSE_25_COMPLEX_RECURRENCE_400_BYTES_WITH_U5_200_BYTE_COORDINATE_LOWER_BOUND",
-    "selected_next_experiment": "NATIVE_PHASE_COUPLER_WITHOUT_HOST_AMPLITUDE_SPLIT_OR_EXPLICIT_GAUGE_STATE"
+    "selected_next_experiment": "CATVM_ENFORCED_PROBE_FREE_INCREMENTAL_PHASE_TT_SMALL_WALL_TRIAD"
   },
   "strongest_bounded_architecture": [
     "PUBLIC_TYPED_SERIES_PARALLEL_RELATIONAL_GEOMETRY",
@@ -1790,6 +1790,35 @@
     "four_rotor_post_inverse_canonical_closure_distinct_phase_resource": false,
     "four_rotor_post_inverse_canonical_closure_computational_advantage": false,
     "four_rotor_post_inverse_canonical_closure_small_wall_crossing": false,
+    "four_rotor_incremental_schmidt_closure": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS_STRICT_CEILING",
+    "four_rotor_incremental_schmidt_closure_reviewer_id": "FOUR-ROTOR-INCREMENTAL-SCHMIDT-CLOSURE-01-R2",
+    "four_rotor_incremental_schmidt_closure_remaining_review_findings": 0,
+    "four_rotor_incremental_schmidt_closure_claim": "BOUNDED_PROBE_FREE_INCREMENTAL_BESSEL_SCHMIDT_PHASE_CLOSURE_BELOW_DENSE_EQUIVALENT_MEMORY_WITH_ACTUAL_RESTORATION_AND_REUSE",
+    "four_rotor_incremental_schmidt_closure_claim_ceiling": "FOUR_OPEN_CHAIN_ROTORS_MODE_RADIUS14_DEPTH3_INCREMENTAL_L2_1E_MINUS6_SOFTWARE_FLOAT64",
+    "four_rotor_incremental_schmidt_closure_central_ranks": [11, 47, 117],
+    "four_rotor_incremental_schmidt_closure_maximum_rank": 122,
+    "four_rotor_incremental_schmidt_closure_probe_columns": 0,
+    "four_rotor_incremental_schmidt_closure_peak_complex_cells": 677010,
+    "four_rotor_incremental_schmidt_closure_peak_bytes": 10832160,
+    "four_rotor_incremental_schmidt_closure_dense_equivalent_cells": 707281,
+    "four_rotor_incremental_schmidt_closure_dense_equivalent_bytes": 11316496,
+    "four_rotor_incremental_schmidt_closure_peak_below_dense_equivalent": true,
+    "four_rotor_incremental_schmidt_closure_maximum_orthogonality_error": 1.983078876364051e-14,
+    "four_rotor_incremental_schmidt_closure_maximum_coupling_l2_bound": 8.967436978087953e-7,
+    "four_rotor_incremental_schmidt_closure_aggregate_l2_bound": 8.981569392363135e-6,
+    "four_rotor_incremental_schmidt_closure_boundary_error": 7.380289657188399e-8,
+    "four_rotor_incremental_schmidt_closure_inverse_error": 2.686690091130435e-7,
+    "four_rotor_incremental_schmidt_closure_postclosure_error": 7.494832523577427e-8,
+    "four_rotor_incremental_schmidt_closure_postclosure_ranks": [1, 1, 1],
+    "four_rotor_incremental_schmidt_closure_reuse_rank_history": [11, 32],
+    "four_rotor_incremental_schmidt_closure_fresh_restored_resource_signature_exact": true,
+    "four_rotor_incremental_schmidt_closure_restoration_generations": [1, 2],
+    "four_rotor_incremental_schmidt_closure_actual_inverse_restoration": true,
+    "four_rotor_incremental_schmidt_closure_actual_restored_carrier_reuse": true,
+    "four_rotor_incremental_schmidt_closure_matched_classical_tt_identical": true,
+    "four_rotor_incremental_schmidt_closure_distinct_phase_resource": false,
+    "four_rotor_incremental_schmidt_closure_computational_advantage": false,
+    "four_rotor_incremental_schmidt_closure_small_wall_crossing": false,
     "algebraic_general_affine_equation_elimination": true,
     "general_boolean_relation_elimination": false,
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
@@ -1862,7 +1891,8 @@
     "BOUNDED_NUMERICAL_CONTINUOUS_IRRATIONAL_KICKED_PHASE_COHERENT_FOURIER_LOCALIZATION_CONTRAST_WITH_EFFECTIVE_BANDWIDTH_PLATEAU_ACTUAL_RESTORATION_AND_REUSE",
     "BOUNDED_FOUR_ROTOR_NONSEPARABLE_CONTINUOUS_KICKED_PHASE_FOURIER_TT_CENTRAL_INTERFACE_RANK_GROWTH_WITH_ACTUAL_RESTORATION_AND_REUSE",
     "BOUNDED_MATRIX_FREE_STREAMED_BESSEL_SCHMIDT_CLOSURE_WITHOUT_EXPANDED_MPO_OR_DENSE_INTERFACE_CORE_WITH_ACTUAL_RESTORATION_AND_REUSE",
-    "BOUNDED_ACTUAL_POST_INVERSE_TT_CANONICAL_QUOTIENT_CLOSURE_WITH_FRESH_RESTORED_MATRIX_FREE_REUSE_RANK_AND_RESOURCE_PARITY"
+    "BOUNDED_ACTUAL_POST_INVERSE_TT_CANONICAL_QUOTIENT_CLOSURE_WITH_FRESH_RESTORED_MATRIX_FREE_REUSE_RANK_AND_RESOURCE_PARITY",
+    "BOUNDED_PROBE_FREE_INCREMENTAL_BESSEL_SCHMIDT_PHASE_CLOSURE_BELOW_DENSE_EQUIVALENT_MEMORY_WITH_ACTUAL_RESTORATION_AND_REUSE"
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
@@ -1876,7 +1906,7 @@
     "PHYSICAL_PHASE_COMPUTATION": "NOT_ESTABLISHED"
   },
   "active_frontier_candidates": [
-    "TOPOLOGY_DERIVED_INVERSE_COUPLING_CANCELLATION_WITHOUT_492_COLUMN_PROBE_EXPANSION",
+    "CATVM_ENFORCED_PROBE_FREE_INCREMENTAL_PHASE_TT_SMALL_WALL_TRIAD",
     "BROADER_NON_AFFINE_PHASE_COMPOSITION_ALGEBRA",
     "FIXED_RANK_OR_COMPACT_CLOSURE_WITHOUT_BOOLEAN_RECURRENCE",
     "COMPACT_REPRESENTATION_ACROSS_WIDER_GRAPH_SEPARATORS",
@@ -1941,7 +1971,8 @@
     "FOUR_ROTOR_NONSEPARABLE_KICKED_PHASE_FOURIER_TT_INTERFACE_RANK_GROWTH_ESTABLISHED",
     "MATRIX_FREE_STREAMED_COUPLING_SCHMIDT_CLOSURE_WITHOUT_EXPANDED_MPO_OR_DENSE_INTERFACE_CORE_ESTABLISHED",
     "POST_INVERSE_CANONICAL_PHASE_CLOSURE_WITH_FRESH_REUSE_RANK_RESOURCE_PARITY_ESTABLISHED",
-    "TOPOLOGY_DERIVED_INVERSE_COUPLING_CANCELLATION_WITHOUT_492_COLUMN_PROBE_EXPANSION"
+    "PROBE_FREE_INCREMENTAL_BESSEL_SCHMIDT_PHASE_CLOSURE_BELOW_DENSE_EQUIVALENT_MEMORY_ESTABLISHED",
+    "CATVM_ENFORCED_PROBE_FREE_INCREMENTAL_PHASE_TT_SMALL_WALL_TRIAD"
   ],
   "frontier_warning": "ANOTHER_HANDCRAFTED_GRAPH_FAMILY_IS_INSUFFICIENT_IF_INTERMEDIATE_RELATION_WIDTH_CARRIER_STATE_OR_PROVENANCE_GROWS_EXPONENTIALLY",
   "agent_policy": {

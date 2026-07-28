@@ -1,0 +1,32 @@
+{
+  "review_id": "FOUR-ROTOR-INCREMENTAL-SCHMIDT-CLOSURE-01-R2",
+  "review_scope": "bounded four-rotor mode-radius-14 depth-3 software-float64 incremental Schmidt closure",
+  "verdict": "PASS",
+  "source_sha256": "c11ab81261a12bf7ecd168dfbc09102bbf4727a139698641e2722b5567baf3bf",
+  "evidence": "/tmp/four-rotor-incremental-schmidt-certified.DHPL2i",
+  "checks": {
+    "owned_fortran_qr_buffers": "PASS",
+    "queried_zgeqrf_zungqr_workspace": "PASS",
+    "simultaneous_zgesvd_input_output_workspace_accounting": "PASS",
+    "explicit_blas_output_lifetimes": "PASS",
+    "combined_basis_reorthogonalization": "PASS",
+    "basis_orthogonality_gate": "PASS",
+    "finite_plus_analytic_bessel_tail": "PASS",
+    "per_coupling_error_budget": "PASS",
+    "aggregate_error_budget": "PASS",
+    "probe_free_execution": "PASS",
+    "below_dense_equivalent_array_payload": "PASS",
+    "actual_inverse_restoration": "PASS",
+    "canonical_closure": "PASS",
+    "actual_restored_carrier_reuse": "PASS",
+    "fresh_restored_resource_parity": "PASS",
+    "claim_ceiling": "PASS"
+  },
+  "maximum_per_coupling_l2_bound": 8.967436978087953e-7,
+  "aggregate_l2_bound": 8.981569392363135e-6,
+  "aggregate_l2_ceiling": 1.8e-5,
+  "maximum_basis_orthogonality_error": 1.983078876364051e-14,
+  "accepted_peak_complex_cells": 677010,
+  "dense_equivalent_complex_cells": 707281,
+  "remaining_findings": []
+}

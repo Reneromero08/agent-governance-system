@@ -1369,6 +1369,26 @@ through a 492-column numerical range search. Acceptance requires lower total
 live memory than the 11.316 MB dense-equivalent wave, actual restoration and
 reuse, and comparison with the identical best compact classical method.
 
+The probe-free incremental Schmidt repair is established. It composes public
+Bessel factors through reorthogonalized compact low-rank additions, peaks at
+10.832 MB including queried QR and simultaneous ZGESVD input/output/workspace,
+restores and reuses the actual carrier, and stays below the 11.316 MB nominal
+dense wave. Its per-coupling error law subtracts a finite-plus-analytic Bessel
+tail before distributing the remaining truncation budget.
+
+This is not computational leverage: the identical compact classical TT uses
+the same 10.832 MB path. The next integrated experiment is:
+
+```text
+CATVM_ENFORCED_PROBE_FREE_INCREMENTAL_PHASE_TT_SMALL_WALL_TRIAD
+```
+
+The isolated backend must retain all unresolved TT factors, deny intermediate
+projection, execute actual inverse and canonical reuse, and compare identical
+instances and protocol traffic across the compact direct baseline,
+snapshot-backed sham, and in-place CATVM path. The dense wave may be reported
+only as a representation threshold, never as the best classical baseline.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:

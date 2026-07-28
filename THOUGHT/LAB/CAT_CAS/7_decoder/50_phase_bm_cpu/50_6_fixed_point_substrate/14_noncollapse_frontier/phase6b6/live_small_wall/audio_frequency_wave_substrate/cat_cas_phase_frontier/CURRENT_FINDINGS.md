@@ -4350,3 +4350,40 @@ Its primary peak is 43.532 MB, not 46.522 MB.
 The primary inverse still needs probe rank 492 and exceeds the 11.316 MB
 dense-equivalent wave. Canonical reuse is repaired; inverse cancellation
 without probe-space expansion is now the active obstruction.
+
+## Incremental Schmidt algebra removes the probe-space expansion
+
+The 13 public Bessel factors are now added directly to a compact Schmidt
+factorization. Each update reorthogonalizes the combined old/new bases with
+explicit in-place ZGEQRF/ZUNGQR and applies a small-core ZGESVD. The certified
+finite-plus-analytic Bessel tail is subtracted from the `1e-6` per-coupling
+budget before the remainder is divided over 13 updates. Factor lifetimes,
+retained NumPy backing allocations, queried QR workspaces, simultaneous
+ZGESVD input/output/workspace, and explicit BLAS outputs are counted.
+Every combined basis passes a `1e-10` ZHERK orthogonality gate.
+
+At radius 14 and depth three, the accepted path uses zero probes and peaks at
+677,010 complex-cell equivalents (10.832 MB), below the 707,281-cell
+(11.316 MB) nominal dense wave. Central ranks are `11,47,117`; boundary
+disagreement against the same-tolerance dense reference is `7.380e-8`.
+No expanded MPO bond or dense interface core is constructed.
+
+The actual inverse restores within `2.687e-7` and canonical closure within
+`7.495e-8`. Unrelated generation-two reuse restores within `1.499e-7`.
+Fresh and restored reuse have rank history `11,32`, exact deterministic
+resource signatures, and boundary disagreement `6.003e-8`. Missing, wrong,
+and reordered inverse controls separate.
+
+Evidence `/tmp/four-rotor-incremental-schmidt-certified.DHPL2i` supports:
+
+```text
+BOUNDED_PROBE_FREE_INCREMENTAL_BESSEL_SCHMIDT_PHASE_CLOSURE_BELOW_DENSE_EQUIVALENT_MEMORY_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+This is a dense-representation memory-threshold crossing, not a Small Wall
+crossing. The identical best classical incremental TT has the same resource
+law, so no distinct phase resource or advantage is established.
+
+The next diagnostic places this phase machine behind CATVM custody and
+compares the in-place path with an identical compact direct baseline and a
+snapshot sham. Dense expansion is not the baseline.
