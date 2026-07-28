@@ -122,24 +122,37 @@ def field_product(left: complex, right: complex, field: int, stats: Stats) -> co
     return unit(total / prime)
 
 
-def basis(degree_limit: int) -> tuple[Monomial, ...]:
+def basis(
+    degree_limit: int, parity_reduced: bool = False
+) -> tuple[Monomial, ...]:
     result: list[Monomial] = []
     for x_exponent in range(degree_limit + 1):
         for y_exponent in range(degree_limit - x_exponent + 1):
             for z_exponent in range(2):
-                if x_exponent + y_exponent + z_exponent <= degree_limit:
+                total_degree = x_exponent + y_exponent + z_exponent
+                if (
+                    total_degree <= degree_limit
+                    and (
+                        not parity_reduced
+                        or total_degree % 2 == degree_limit % 2
+                    )
+                ):
                     result.append((x_exponent, y_exponent, z_exponent))
-    expected = (degree_limit + 1) ** 2
+    expected = (
+        (degree_limit + 1) * (degree_limit + 2) // 2
+        if parity_reduced
+        else (degree_limit + 1) ** 2
+    )
     if len(result) != expected:
         fail("Stokes quotient basis cardinality mismatch")
     return tuple(result)
 
 
-def make_carrier() -> Carrier:
+def make_carrier(parity_reduced: bool = False) -> Carrier:
     blocks: list[Block] = []
     for grade in range(GRADES):
         degree_limit = 2 + grade
-        canonical_basis = basis(degree_limit)
+        canonical_basis = basis(degree_limit, parity_reduced)
         blocks.append(
             Block(
                 degree_limit=degree_limit,
@@ -470,8 +483,10 @@ def execute_on(carrier: Carrier, program: Program, mode: Mode) -> Execution:
     )
 
 
-def execute_once(program: Program, mode: Mode) -> Execution:
-    return execute_on(make_carrier(), program, mode)
+def execute_once(
+    program: Program, mode: Mode, parity_reduced: bool = False
+) -> Execution:
+    return execute_on(make_carrier(parity_reduced), program, mode)
 
 
 def main() -> None:

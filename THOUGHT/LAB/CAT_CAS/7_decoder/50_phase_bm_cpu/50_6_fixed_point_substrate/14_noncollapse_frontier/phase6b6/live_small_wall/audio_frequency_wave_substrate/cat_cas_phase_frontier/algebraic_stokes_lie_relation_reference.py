@@ -54,11 +54,20 @@ PRIMARY = reduce_sphere((24 * x - 7 * z) ** 2 / sympy.Integer(625))
 REUSE = reduce_sphere((24 * x + 7 * z) ** 2 / sympy.Integer(625))
 
 
-def quotient_basis(degree_limit: int) -> Iterator[tuple[int, int, int]]:
+def quotient_basis(
+    degree_limit: int, parity_reduced: bool = False
+) -> Iterator[tuple[int, int, int]]:
     for x_exponent in range(degree_limit + 1):
         for y_exponent in range(degree_limit - x_exponent + 1):
             for z_exponent in range(2):
-                if x_exponent + y_exponent + z_exponent <= degree_limit:
+                total_degree = x_exponent + y_exponent + z_exponent
+                if (
+                    total_degree <= degree_limit
+                    and (
+                        not parity_reduced
+                        or total_degree % 2 == degree_limit % 2
+                    )
+                ):
                     yield (x_exponent, y_exponent, z_exponent)
 
 
@@ -71,7 +80,11 @@ def hash_byte(hash_value: int, value: int) -> int:
     return ((hash_value ^ value) * FNV_PRIME) & ((1 << 64) - 1)
 
 
-def grade_record(expression: sympy.Expr, degree_limit: int) -> dict[str, object]:
+def grade_record(
+    expression: sympy.Expr,
+    degree_limit: int,
+    parity_reduced: bool = False,
+) -> dict[str, object]:
     polynomial = sympy.Poly(expression, *VARIABLES)
     coefficients = {
         monomial: sympy.Rational(value)
@@ -80,8 +93,17 @@ def grade_record(expression: sympy.Expr, degree_limit: int) -> dict[str, object]
     rational_nonzero = [value for value in coefficients.values() if value]
     record: dict[str, object] = {
         "degree_limit": degree_limit,
-        "quotient_basis_cells": (degree_limit + 1) ** 2,
+        "quotient_basis_cells": (
+            (degree_limit + 1) * (degree_limit + 2) // 2
+            if parity_reduced
+            else (degree_limit + 1) ** 2
+        ),
         "rational_nonzero_terms": len(rational_nonzero),
+        "support_parity_exact": all(
+            sum(monomial) % 2 == degree_limit % 2
+            for monomial, value in coefficients.items()
+            if value
+        ),
         "maximum_numerator_bits": max(
             (
                 abs(int(sympy.numer(value))).bit_length()
@@ -100,7 +122,7 @@ def grade_record(expression: sympy.Expr, degree_limit: int) -> dict[str, object]
     for prime in PRIMES:
         hash_value = FNV_OFFSET
         nonzero = 0
-        for monomial in quotient_basis(degree_limit):
+        for monomial in quotient_basis(degree_limit, parity_reduced):
             for exponent in monomial:
                 hash_value = hash_byte(hash_value, exponent)
             value = coefficient_mod(coefficients.get(monomial, 0), prime)
@@ -111,11 +133,17 @@ def grade_record(expression: sympy.Expr, degree_limit: int) -> dict[str, object]
     return record
 
 
-def chain(seed: sympy.Expr, generator: sympy.Expr) -> list[dict[str, object]]:
+def chain(
+    seed: sympy.Expr,
+    generator: sympy.Expr,
+    parity_reduced: bool = False,
+) -> list[dict[str, object]]:
     expression = seed
     records = []
     for grade in range(GRADES):
-        records.append(grade_record(expression, 2 + grade))
+        records.append(
+            grade_record(expression, 2 + grade, parity_reduced)
+        )
         expression = lie_poisson(generator, expression)
     return records
 

@@ -3953,3 +3953,39 @@ point-evaluation recurrence remains 64 bytes. The next selected experiment
 must use irreducible Stokes harmonic sectors or a lawful nontrivial invariant
 quotient; adding more grades to the same monomial fixture would not remove
 the obstruction.
+
+## Topology-derived parity closure removes impossible harmonic cells
+
+The Stokes Lie-Poisson carrier now compiles only canonical monomials whose
+total-degree parity matches the public grade. Quadratic generation changes
+parity once per bracket and exact sphere reduction changes degree by two, so
+this 80-cell sector is closed by construction. It replaces the prior
+135-cell all-degrees-through-limit allocation without inspecting answers.
+
+Dual-prime custody falls from 270 to 160 resident phase cells, or from 4,320
+to 2,560 logical packed payload bytes. Exact rational hashes match at every
+grade. Correct restoration is `2.220e-16`; eight same-carrier transactions
+remain within `1.110e-15`. Missing, wrong, and dependency-reordered inverses
+leave nonidentity modular cells, while snapshot receives no restoration
+receipt.
+
+The independent homogeneous-sphere quotient is nonzero at highest degrees
+`2,3,4,5,6`, with canonical term counts `2,3,5,5,7`. This certifies bounded
+survival of the highest harmonic shell, not an explicit irreducible
+decomposition or an unbounded-growth theorem.
+
+Evidence `/tmp/stokes-harmonic-final.ZwLLlN/evidence` and focused independent
+review establish:
+
+```text
+BOUNDED_PARITY_ADMISSIBLE_STOKES_HARMONIC_SECTOR_DUAL_PRIME_PHASE_SIGNATURE_REDUCTION_WITH_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+BOUNDED_NORMALIZED_TWO_MODE_PARITY_ADMISSIBLE_STOKES_HARMONIC_DUAL_PRIME_LIE_GRADES2_3_4_5_6_SOFTWARE_REFERENCE_ONLY
+```
+
+The remaining obstruction is whether those nonzero highest shells obey a
+compact exact phase recurrence or require increasing independent rank.

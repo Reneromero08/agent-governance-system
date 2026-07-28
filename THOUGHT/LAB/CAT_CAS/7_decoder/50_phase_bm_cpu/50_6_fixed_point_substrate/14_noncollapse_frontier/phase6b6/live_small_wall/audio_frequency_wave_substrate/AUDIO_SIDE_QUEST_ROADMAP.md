@@ -1179,18 +1179,25 @@ from 1,025 to 135 cells and the logical packed dual-prime phase payload from
 32,800 to 4,320 bytes while retaining actual inverse restoration and
 same-carrier reuse.
 
-The remaining obstruction is no longer redundant four-coordinate state. It
-is spherical-harmonic degree and rank growth. The next selected work is:
+The next exact repair compiles only the parity-admissible Stokes sector.
+Across degree limits `2,3,4,5,6`, this reduces the resident quotient basis
+from 135 to 80 cells and logical dual-prime phase payload from 4,320 to 2,560
+bytes while preserving exact coefficient hashes, actual inverse restoration,
+and same-carrier reuse.
+
+The homogeneous-sphere quotient certifies a nonzero highest harmonic shell
+at every tested degree. Parity closure therefore removes impossible state but
+does not establish fixed rank. The next selected work is:
 
 ```text
-IRREDUCIBLE_STOKES_SPHERICAL_HARMONIC_PHASE_SIGNATURE_OR_FIXED_RANK_INVARIANT_CLOSURE
+EXACT_STOKES_HIGHEST_HARMONIC_SHELL_RECURRENCE_OR_INDEPENDENT_RANK_GROWTH_CERTIFICATE
 ```
 
-It must use exact irreducible harmonic sectors or a lawful invariant quotient,
-not add higher Lie grades to the same monomial fixture. It must determine
-whether a nontrivial final boundary invariant closes at fixed rank without
-discarding the relational content. The 64-byte direct complex recurrence
-remains the best matched point-evaluation baseline.
+It must derive the shell action algebraically rather than add more grades to
+the same monomial fixture. It must determine whether the nonzero shells admit
+a compact exact phase recurrence or require genuinely increasing independent
+rank. The 64-byte direct complex recurrence remains the best matched
+point-evaluation baseline.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 

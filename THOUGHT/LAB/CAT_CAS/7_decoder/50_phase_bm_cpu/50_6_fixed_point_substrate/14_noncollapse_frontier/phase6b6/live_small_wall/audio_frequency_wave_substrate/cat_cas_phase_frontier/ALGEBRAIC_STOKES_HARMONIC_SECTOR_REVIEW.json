@@ -1,0 +1,30 @@
+{
+  "review_id": "STOKES-HARMONIC-PARITY-SECTOR-01",
+  "result": "PASS",
+  "claim_affecting_defects": [],
+  "reviewed_evidence": "/tmp/stokes-harmonic-final.ZwLLlN/evidence",
+  "findings": {
+    "parity_sector_closed": true,
+    "basis_cardinality_exact": true,
+    "homogeneous_sphere_quotient_certificate_valid": true,
+    "phase_rational_hash_parity": true,
+    "actual_inverse_restoration": true,
+    "actual_restored_carrier_reuse": true,
+    "no_smuggle": true,
+    "logical_payload_label_correct": true,
+    "claim_ceiling_strict": true
+  },
+  "hardening_applied": [
+    "EXACT_RATIONAL_OFF_PARITY_SUPPORT_ASSERTION",
+    "PUBLIC_DEGREE_PARITY_BASIS_COMPILATION_NARROW_WORDING"
+  ],
+  "explicitly_not_established": [
+    "IRREDUCIBLE_HARMONIC_DECOMPOSITION",
+    "FIXED_RANK_CLOSURE",
+    "UNBOUNDED_GROWTH",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION"
+  ]
+}
