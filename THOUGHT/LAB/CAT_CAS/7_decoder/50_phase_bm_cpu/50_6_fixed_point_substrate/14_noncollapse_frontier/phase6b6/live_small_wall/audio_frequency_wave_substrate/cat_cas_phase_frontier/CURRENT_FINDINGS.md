@@ -4079,3 +4079,44 @@ residues; actual classical allocation is unmeasured. The 64-byte point
 evaluator has different boundary semantics. The next phase repair must find
 compact nonseparable closure or a resource not immediately equivalent to
 classical point evolution.
+
+## Reversible BCH rematerialization removes Lie-word history
+
+Two noncommuting Stokes modules are now composed through the exact bounded
+signature `log(exp(A) exp(B))`. Public tensor-log coefficients are
+Dynkin-Specht-Wever projected into right-nested Poisson brackets. The phase
+backend rematerializes one Lie word at a time, adds its complete character
+orbit to the declared final grade, and immediately applies the actual inverse
+to its reusable scratch chain.
+
+Through word grade six, 72 nonzero words require at most six live scratch
+blocks. The carrier holds 116 final and 116 reusable scratch coefficient
+cells, or 8,352 unit phases and 133,632 logical packed bytes. Retained
+Lie-word history is zero. A non-emitting verifier checks all 464
+primary/reuse dual-prime cells. Correct restoration is `4.554e-13`; reuse
+restores within `6.054e-13`. Missing and wrong inverses leave residual
+`1.993`, and swapped noncommuting module order changes the boundary.
+The matched grade-six classical signature is 232 logical residue bytes.
+An executed snapshot sham transfers 133,632 logical bytes at both creation
+and reload, mints no restoration receipt, and successfully runs the reuse
+program. The null-carrier path fails closed.
+
+Evidence `/tmp/stokes-bch-rematerialized-final.3Xj1ap/evidence` establishes:
+
+```text
+BOUNDED_TOPOLOGY_REMATERIALIZED_NONCOMMUTING_STOKES_BCH_CHARACTER_PHASE_CLOSURE_WITH_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+BOUNDED_NORMALIZED_TWO_MODULE_NONCOMMUTING_STOKES_BCH_GRADES1_TO6_PHASE_AND_EXACT_RATIONAL_DIAGNOSTIC_THROUGH_GRADE10_SOFTWARE_ONLY
+```
+
+The independent exact diagnostic through word grade ten has harmonic
+catalecticant ranks `3,3,5,5,7,7,9,9,11,11`. Rematerialization therefore
+removes retained inverse history but not growth of the declared final
+signature. The same-output grade-ten dual-prime signature needs 720 logical
+residue bytes; the 64-byte point evaluator has different boundary semantics.
+This is not fixed-rank closure, an arbitrary representation lower bound,
+advantage, Small Wall crossing, or physical execution.

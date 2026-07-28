@@ -1215,17 +1215,32 @@ character carrier is 389,376 logical packed bytes. A same-output dual-prime
 coefficient jet needs 1,352 logical one-byte residues; the 64-byte point
 evaluator has different boundary semantics and is only a comparator.
 
+The next exact composition repair replaces retained Lie-word history with
+topology-derived reversible rematerialization. Two noncommuting Stokes
+modules are composed through `log(exp(A) exp(B))`; public tensor-log topology
+is Dynkin-projected into native phase-resident Poisson brackets. Through word
+grade six, 72 nonzero words use at most six reusable scratch blocks and
+retain no word-value or inverse-history tape. The actual inverse restores and
+reuses the same carrier. An exact rational diagnostic through word grade ten
+finds harmonic catalecticant ranks `3,3,5,5,7,7,9,9,11,11`.
+
+This separates the obstruction: retained inverse history is removable, but
+the declared final coefficient signature itself still grows. The 133,632
+logical-byte phase carrier is not compact relative to the 232-byte
+same-output dual-prime signature at executed grade six, and no advantage is
+claimed.
+
 The next selected work is:
 
 ```text
-COMPACT_NONSEPARABLE_NONCOMMUTING_STOKES_CLOSURE_OR_PHASE_RESOURCE_BEYOND_MATCHED_POINT_RECURRENCE
+COMPACT_RELATION_PRESERVING_BCH_SIGNATURE_QUOTIENT_OR_PHASE_COUPLING_BEYOND_CLASSICAL_POINT_EVOLUTION
 ```
 
-It must beat the growing separable factor rank without moving the full
-coefficient vector into another representation, or replace this integrable
+It must reduce the actual final relation signature without moving its
+coefficients into another retained structure, or replace this integrable
 Hamiltonian family with a phase resource lacking an immediate compact
-classical point recurrence. Adding higher degrees to either established path
-does not resolve the obstruction.
+classical point recurrence. More BCH grades, more Lie words, or a larger
+character orbit do not resolve the obstruction.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 

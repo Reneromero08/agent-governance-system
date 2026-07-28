@@ -1,0 +1,16 @@
+{
+  "review_id": "STOKES-BCH-REMATERIALIZED-01",
+  "result": "PASS",
+  "evidence": "/tmp/stokes-bch-rematerialized-final.3Xj1ap/evidence",
+  "bch_dynkin_algebra": "PASS",
+  "exact_phase_reference_parity": "PASS",
+  "no_smuggle": "PASS",
+  "actual_inverse_restoration_and_reuse": "PASS",
+  "topology_derived_rematerialization": "PASS",
+  "accepted_grade6_same_output_baseline_bytes": 232,
+  "public_topology_accounting": "PASS",
+  "executed_snapshot_sham": "PASS",
+  "explicit_null_carrier_denial": "PASS",
+  "remaining_findings": 0,
+  "claim_ceiling_preserved": true
+}
