@@ -4588,3 +4588,40 @@ orbit recurrence is identical. The new obstruction is:
 ```text
 STREAMED_NECKLACE_FREE_CLOSURE_QUADRATIC_TRANSITION_WORK_AND_MATCHED_CLASSICAL_ORBIT_IDENTITY
 ```
+
+## Bosonic Givens closure removes permanent enumeration from the accepted path
+
+The 285-cell resident necklace carrier now expands temporarily into the 4,845
+permutation-symmetric occupation coefficients, applies a topology-compiled
+136-rotation Givens factorization of the 17-mode chirp, and closes every
+global-rotation orbit back to its necklace amplitude.
+
+The accepted path retains no transition operator, materializes no labelled
+83,521-cell wave or labelled assignment expansion, and enumerates zero
+permanent assignment terms. It does materialize 77,520 bytes of occupation
+scratch. This preserves the fixed-grid `O(R^16)` law but temporarily releases
+the factor-17 global-rotation quotient.
+
+One-step weighted state parity against the exact-cyclotomic permanent
+predecessor is `2.570e-15`; the depth-eight boundary error is `4.663e-15`.
+Actual restoration is `8.446e-15`; unrelated generation-two reuse restores
+within `9.273e-15` and agrees with fresh execution within `6.162e-15`.
+
+Evidence `/tmp/four-rotor-bosonic-givens-accepted.GMfQks` supports:
+
+```text
+BOUNDED_TOPOLOGY_COMPILED_BOSONIC_GIVENS_PHASE_CLOSURE_REPLACES_STREAMED_NECKLACE_TRANSITION_PERMANENTS_WITH_POLYNOMIAL_OCCUPATION_SCRATCH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+The predecessor comparison enumerates 530,236,800 permanent terms; the
+accepted path performs 15,917,440 heterogeneous polynomial block terms. Their
+count ratio is not a total-work claim. The same-process warm lifecycle is
+descriptively `2.951x` faster. Maximum explicit engine payload rises from
+19,829 to 97,447 bytes.
+
+The identical classical bosonic Givens method inherits the repair, so the
+new obstruction is:
+
+```text
+POLYNOMIAL_OCCUPATION_SCRATCH_AND_MATCHED_CLASSICAL_BOSONIC_GIVENS_IDENTITY
+```

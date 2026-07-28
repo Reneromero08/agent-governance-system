@@ -1503,6 +1503,31 @@ retained dense operator, or establish a useful phase resource unavailable to
 the identical classical orbit simulator. Repeating rotor-count or depth
 fixtures is not selected.
 
+The factorial-permanent path is now replaced by a topology-compiled bosonic
+Givens closure. The resident carrier remains 285 necklace amplitudes; the
+free step temporarily uses all 4,845 permutation-symmetric occupation
+coefficients, then verifies and restores global-rotation closure. No labelled
+wave, transition matrix, or permanent assignment term appears in the
+accepted path.
+
+The structural repair reduces the recorded warm lifecycle from 4.853 to
+1.645 seconds while preserving predecessor parity, actual inverse
+restoration, and generation-two reuse. The occupation scratch raises explicit
+engine payload to 97,447 bytes and the matched classical bosonic Givens
+simulator is identical. The next obstruction is:
+
+```text
+POLYNOMIAL_OCCUPATION_SCRATCH_AND_MATCHED_CLASSICAL_BOSONIC_GIVENS_IDENTITY
+```
+
+The next selected experiment is CATVM custody for the automatically
+factorized free closure, because its 4,845-cell occupation state is currently
+unresolved only by direct-process convention. The service must deny that
+intermediate, project only the final invariant boundary, reverse the actual
+Givens lifecycle, and reuse the restored 285-cell carrier. This strengthens
+the phase machine boundary but will not by itself establish a distinct phase
+resource or Small Wall crossing.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
