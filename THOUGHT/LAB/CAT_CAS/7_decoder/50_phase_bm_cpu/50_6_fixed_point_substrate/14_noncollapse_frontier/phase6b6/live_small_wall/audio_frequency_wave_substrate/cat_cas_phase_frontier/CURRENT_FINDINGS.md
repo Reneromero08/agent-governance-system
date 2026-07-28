@@ -4146,3 +4146,35 @@ Harmonic catalecticant ranks remain `3,3,5,5,7,7,9,9,11,11`; the exact
 quotient changes the constant but not the rank-growth obstruction. It is not
 fixed-rank closure, a distinct phase resource, advantage, Small Wall
 crossing, or physical execution.
+
+## Cubic phase/Fourier waves expose exact sequential rank growth
+
+The next phase machine leaves the integrable Stokes point recurrence. It
+stores an unresolved exact wave tensor train over `Q(zeta_5)` and interleaves
+normalized local Fourier interference with the nonseparable two-site phase
+law `zeta^(gamma*(x^2*y+x*y^2))`. Arbitrary cyclotomic amplitudes remain
+resident; roots of unity are not being used merely as encoded digits.
+
+Across widths `2,4,6` and one, two, and three central crossings, exact central
+bond ranks are `4,14,64`. Separate `F11` and `F31` implementations reproduce
+all bond vectors and projected boundary residues. No global `5^width` wave,
+assignment expansion, statevector, or truth table is materialized.
+
+At width six, the carrier reaches 9,710 TT cells and 129,678 logical
+coefficient bytes. Exact factorization scratch reaches 1,642,143 logical
+bytes, with 128/129-bit numerator/denominator height. Actual inverse
+restoration is exact, and an unrelated circuit consumes the same restored
+carrier. Missing, wrong, reordered, Fourier-disabled, forced-rank,
+separable, Clifford, snapshot, projection, and null-carrier controls pass.
+
+Evidence `/tmp/cyclotomic-f5-cubic-tt-final.7jbmXC/evidence` establishes:
+
+```text
+BOUNDED_EXACT_CYCLOTOMIC_CUBIC_PHASE_FOURIER_TENSOR_TRAIN_SEQUENTIAL_RANK_GROWTH_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+within widths `2,4,6` and bounded software exact arithmetic. The matched
+exact classical TT is identical to the accepted representation, so the same
+rank, coefficient, state, and scratch growth defeats any distinct-resource,
+advantage, or Small Wall claim. This is bounded phase-native rank growth, not
+fixed-rank or unbounded computation.

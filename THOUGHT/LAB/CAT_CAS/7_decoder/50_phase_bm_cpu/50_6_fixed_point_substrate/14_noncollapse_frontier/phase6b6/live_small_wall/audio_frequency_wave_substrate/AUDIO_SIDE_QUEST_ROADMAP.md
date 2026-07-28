@@ -1245,13 +1245,28 @@ quotienting removes the final-signature rank obstruction.
 The next selected work is:
 
 ```text
-PHASE_NATIVE_NONSEPARABLE_COUPLING_WITH_COMPACT_BOUNDARY_AND_NO_FIXED_DIMENSIONAL_CLASSICAL_POINT_RECURRENCE
+CATVM_ENFORCED_CYCLOTOMIC_CUBIC_TT_HIDDEN_BOND_COMPOSITION
 ```
 
-The next mechanism must change the useful phase resource or boundary law,
-not extract another constant-factor symmetry quotient from this integrable
-family. More BCH grades, Lie words, reflection sectors, or character-orbit
-cells do not resolve the obstruction.
+The phase-machine successor now leaves the integrable Stokes family. An exact
+`Q(zeta_5)` wave tensor train interleaves normalized local Fourier transforms
+with nonseparable cubic controlled-phase gates. Central exact bond ranks grow
+`4,14,64` across widths `2,4,6` and one, two, and three center crossings.
+Dual-field certificates independently reproduce the ranks and projected
+amplitude without dense wave or assignment expansion. Actual inverse
+restoration and unrelated reuse are exact.
+
+This is phase-native progress because coherent amplitude addition and
+nonseparable phase coupling are the transition law; roots of unity are not
+merely labels for bits. It is nevertheless not a distinct resource or Small
+Wall crossing. The matched exact classical TT is the accepted
+representation and incurs identical rank, coefficient-height, state, and
+factorization-scratch growth.
+
+The immediate next work places this exact growing-rank carrier behind CATVM
+so bond tensors and Fourier intermediates cannot cross the controller
+boundary. After machine enforcement, the next scientific repair must attack
+the `4->14->64` interface-rank growth rather than add widths or crossings.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 
