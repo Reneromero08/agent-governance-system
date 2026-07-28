@@ -2,7 +2,7 @@
   "schema_version": "1.1.0",
   "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
   "state_date": "2026-07-28",
-  "reconciled_through_milestone_commit": "46dda91f",
+  "reconciled_through_milestone_commit": "e3e0d32b",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
   "standing_mission": "CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1",
   "supporting_mission": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
@@ -48,8 +48,8 @@
   },
   "lane_closure_authority": "USER_ONLY",
   "terminal": false,
-  "current_highest_milestone": "BOUNDED_MATCHED_COHERENT_INITIAL_AND_EACH_STEP_NECKLACE_DEPHASED_CLASSICAL_GENERATOR_SMALL_WALL_RESOURCE_DIAGNOSTIC",
-  "current_claim_ceiling": "DIRECT_PROCESS_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_GRID17_FOUR_ROTOR_DEPTH8_COMPLEX128_SOFTWARE_ONLY",
+  "current_highest_milestone": "BOUNDED_COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_AND_CATALYTIC_HYPOTHESIS_SCORING_ON_COMPACT_NECKLACE_PHASE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE",
+  "current_claim_ceiling": "DIRECT_PROCESS_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_GRID17_FOUR_ROTOR_SIX_TYPED_OPEN_PUBLIC_OBSERVATION_PORTS_COMPLEX128_SOFTWARE_ONLY",
   "architectural_alignment": {
     "current_phase_circuit_substrate": "ESTABLISHED_DEVELOPMENT_FOUNDATION",
     "bounded_holographic_relational_substrate": "ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_EXACT_15_NODE_FOUR_OWNER_AFFINE_DAG",
@@ -107,7 +107,9 @@
     "four_rotor_streamed_momentum_coordinate": "ESTABLISHED_RETAINED_PLAN408_BYTES_ENGINE118592_WRAPPER197200_ACTUAL_RESTORATION_REUSE",
     "four_rotor_necklace_orbit_phase": "ESTABLISHED_EXCHANGE_SYMMETRIC_GRID17_CARRIER285_FIXED_GRID_O_R16_ACTUAL_RESTORATION_REUSE",
     "four_rotor_bosonic_givens_phase": "ESTABLISHED_RESIDENT285_TEMPORARY_OCCUPATION4845_ZERO_ACCEPTED_PERMANENT_TERMS_ACTUAL_RESTORATION_REUSE",
-    "selected_next_experiment": "COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER"
+    "four_rotor_necklace_open_observation_relation_closure": "ESTABLISHED_SIX_TYPED_PUBLIC_OBSERVATION_SUBSTITUTIONS_WITHOUT_RELATION_TABLE_MATERIALIZATION",
+    "four_rotor_necklace_bounded_hypothesis_scoring": "ESTABLISHED_SEVEN_COLLISION_CLASSES_EXPLICIT_SCORE_SEMANTICS_ARGMAX_AND_EXACT_REFERENCE",
+    "selected_next_experiment": "COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER"
   },
   "strongest_bounded_architecture": [
     "PUBLIC_TYPED_SERIES_PARALLEL_RELATIONAL_GEOMETRY",
@@ -1969,6 +1971,30 @@
     "necklace_coherence_triad_distinct_phase_resource": false,
     "necklace_coherence_triad_computational_advantage": false,
     "necklace_coherence_triad_small_wall_crossing": false,
+    "necklace_open_observation_relation": "MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS_STRICT_CEILING",
+    "necklace_open_observation_reviewer_id": "FOUR-ROTOR-NECKLACE-OPEN-OBSERVATION-01",
+    "necklace_open_observation_remaining_review_findings": 0,
+    "necklace_open_observation_claim": "BOUNDED_COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_AND_CATALYTIC_HYPOTHESIS_SCORING_ON_COMPACT_NECKLACE_PHASE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE",
+    "necklace_open_observation_public_ports": 6,
+    "necklace_open_observation_relation_table_cells": 0,
+    "necklace_open_observation_intermediate_cells": 285,
+    "necklace_open_observation_intermediate_projected": false,
+    "necklace_open_observation_semantic_reference_error": 0,
+    "necklace_open_observation_selected_hypothesis": 0,
+    "necklace_open_observation_engine_bytes": 33638,
+    "necklace_open_observation_lifecycle_bytes": 38310,
+    "necklace_open_observation_primary_restoration_error": 9.656765549913727E-15,
+    "necklace_open_observation_reuse_restoration_error": 1.4051092836756142E-14,
+    "necklace_open_observation_fresh_reuse_boundary_error": 8.43769498715119E-15,
+    "necklace_open_observation_coherence_boundary_effect": 0.039045417878374566,
+    "necklace_open_observation_machine_boundary_enforced": false,
+    "necklace_open_observation_no_smuggle_enforced": false,
+    "necklace_open_observation_bounded_hypothesis_scoring": true,
+    "necklace_open_observation_general_catalytic_inference": false,
+    "necklace_open_observation_matched_classical_identical": true,
+    "necklace_open_observation_distinct_phase_resource": false,
+    "necklace_open_observation_computational_advantage": false,
+    "necklace_open_observation_small_wall_crossing": false,
     "algebraic_general_affine_equation_elimination": true,
     "general_boolean_relation_elimination": false,
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
@@ -2047,7 +2073,8 @@
     "BOUNDED_TOPOLOGY_DERIVED_TOTAL_MOMENTUM_SECTOR_INVERSE_PHASE_CLOSURE_UPDATE_REDUCTION_WITH_GRAM_REMATERIALIZATION_OBSTRUCTION_ACTUAL_RESTORATION_AND_REUSE",
     "BOUNDED_DENSE_FINITE_TORUS_CYCLIC_PHASE_UPDATE_LAW_WITH_DEPTH_INDEPENDENT_EXPLICIT_NUMPY_ARRAY_PAYLOAD_ACTUAL_RESTORATION_AND_REUSE",
     "BOUNDED_CYCLIC_PHASE_TT_NATIVE_PAIR_CLOSURE_SATURATES_GRID17_CENTRAL_INTERFACE_AT_DEPTH5_WITH_ACTUAL_RESTORATION_AND_REUSE",
-    "BOUNDED_EXACT_GLOBAL_ROTATION_QUOTIENT_CYCLIC_PHASE_CARRIER_REDUCES_FOUR_ROTOR_STATE_BY_GRID_FACTOR_WITH_DEPTH_INDEPENDENT_MEMORY_ACTUAL_RESTORATION_AND_REUSE"
+    "BOUNDED_EXACT_GLOBAL_ROTATION_QUOTIENT_CYCLIC_PHASE_CARRIER_REDUCES_FOUR_ROTOR_STATE_BY_GRID_FACTOR_WITH_DEPTH_INDEPENDENT_MEMORY_ACTUAL_RESTORATION_AND_REUSE",
+    "BOUNDED_COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_AND_CATALYTIC_HYPOTHESIS_SCORING_ON_COMPACT_NECKLACE_PHASE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE"
   ],
   "capability_position": {
     "C0_CATALYTIC_CLOSURE": "ESTABLISHED_BOUNDED_SOFTWARE",
@@ -2062,7 +2089,8 @@
   },
   "active_frontier_candidates": [
     "COHERENCE_IS_CAUSAL_BUT_IDENTICAL_COMPACT_CLASSICAL_COMPLEX_RECURRENCE_INHERITS_IT",
-    "COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER",
+    "TYPED_OPEN_OBSERVATION_RELATION_PHASE_CLOSURE_AND_BOUNDED_HYPOTHESIS_SCORING_ESTABLISHED_BUT_IDENTICAL_COMPACT_CLASSICAL_COMPLEX_RECURRENCE_INHERITS_IT",
+    "COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
     "BROADER_NON_AFFINE_PHASE_COMPOSITION_ALGEBRA",
     "FIXED_RANK_OR_COMPACT_CLOSURE_WITHOUT_BOOLEAN_RECURRENCE",
     "COMPACT_REPRESENTATION_ACROSS_WIDER_GRAPH_SEPARATORS",
@@ -2141,7 +2169,8 @@
     "CATVM_ENFORCED_BOSONIC_GIVENS_HIDDEN_OCCUPATION_CLOSURE_ESTABLISHED",
     "SYMMETRY_PRESERVING_NECKLACE_GENERATOR_CLOSURE_WITHOUT_OCCUPATION_EXPANSION_ESTABLISHED",
     "MATCHED_COHERENT_DEPHASED_CLASSICAL_NECKLACE_GENERATOR_SMALL_WALL_TRIAD_ESTABLISHED",
-    "COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER"
+    "COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_ESTABLISHED",
+    "COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER"
   ],
   "frontier_warning": "ANOTHER_HANDCRAFTED_GRAPH_FAMILY_IS_INSUFFICIENT_IF_INTERMEDIATE_RELATION_WIDTH_CARRIER_STATE_OR_PROVENANCE_GROWS_EXPONENTIALLY",
   "agent_policy": {

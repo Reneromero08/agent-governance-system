@@ -1609,6 +1609,46 @@ matched compact classical complex recurrence remains mandatory, and no
 inference claim may be upgraded to computational leverage without separating
 from it.
 
+### Typed open-observation closure and bounded hypothesis scoring
+
+Six typed public observation ports now define phase-valued open relations:
+
+```text
+R(x, o) = omega^(strength * (feature(x) - o)^2)
+```
+
+Native substitution closes collision-count and cyclic-separation observations
+directly into the 285-cell unresolved necklace carrier. Six noncommuting
+relation-plus-generator modules compose before the only surviving
+seven-hypothesis boundary is projected.
+
+The boundary has an explicit collision-count hypothesis domain, score
+semantics, and argmax decision rule. An independent aggregation agrees
+exactly. Actual inverse restoration is `9.657e-15`, and generation-two reuse
+restores within `1.405e-14`.
+
+The bounded result is:
+
+```text
+BOUNDED_COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_AND_CATALYTIC_HYPOTHESIS_SCORING_ON_COMPACT_NECKLACE_PHASE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+This direct-process result does not enforce no-smuggle custody. It establishes
+neither general catalytic inference nor a calibrated posterior or accuracy
+claim. The identical compact classical complex recurrence matches exactly,
+so no computational leverage or Small Wall crossing is established.
+
+The next selected phase-machine experiment is:
+
+```text
+COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+```
+
+It must replace public scalar substitution with an unresolved shared
+observation interface composed across multiple noncommuting relation modules,
+while preserving compactness, final-only projection, actual restoration,
+reuse, and the strongest compact classical comparison.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:

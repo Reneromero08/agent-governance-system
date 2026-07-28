@@ -4756,3 +4756,50 @@ COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER
 It must integrate typed public evidence relations into unresolved phase
 composition and preserve final-boundary-only inference, actual restoration,
 reuse, and the identical compact-classical comparison.
+
+## Typed open observations now close into unresolved necklace phase state
+
+Each public signature now defines a phase-valued open relation
+`R(x,o) = omega^(strength * (feature(x)-o)^2)` between the unresolved
+necklace state and either a collision-count or cyclic-separation observation
+port. Six public observations close by native substitution without
+enumerating their domains or materializing a relation table.
+
+The closed relations interleave with noncommuting Hermitian necklace
+generator updates. The 285 latent amplitudes remain unprojected until the
+seven-class collision-hypothesis score is emitted. An independent
+hypothesis-by-hypothesis aggregation agrees exactly with that boundary.
+
+Primary actual-inverse restoration is `9.657e-15`. The actual restored carrier
+executes an unrelated generation-two program, restores within `1.405e-14`,
+and agrees with fresh execution within `8.438e-15`. Bypass, module-order,
+dephasing, and inverse controls all separate materially.
+
+Evidence `/tmp/four-rotor-necklace-open-observation-final-v2` and the focused
+independent review support:
+
+```text
+BOUNDED_COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_AND_CATALYTIC_HYPOTHESIS_SCORING_ON_COMPACT_NECKLACE_PHASE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+The accepted engine payload is 33,638 bytes and the complete explicit
+lifecycle is 38,310 bytes. The accepted path materializes no relation table,
+truth table, candidate assignments, or observation-domain expansion. The
+dephased comparison separately streams 198,838,800 permanent terms.
+
+This is direct-process evidence, so intermediate non-emission is observed but
+no-smuggle custody is not enforced here. The score contract is bounded and
+is not a Bayesian posterior, ground-truth accuracy result, general catalytic
+inference, or learning result.
+
+The identical compact classical complex recurrence reproduces the boundary
+exactly. No advantage or Small Wall crossing is established. The next
+phase-machine experiment is:
+
+```text
+COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+```
+
+It must keep a shared observation interface unresolved across multiple
+noncommuting relation modules and close it without relation-table or
+assignment expansion.

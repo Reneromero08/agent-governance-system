@@ -2,6 +2,10 @@
 #include "four_rotor_necklace_generator_phase.cpp"
 #undef NECKLACE_GENERATOR_ENTRY
 
+#ifndef NECKLACE_COHERENCE_TRIAD_ENTRY
+#define NECKLACE_COHERENCE_TRIAD_ENTRY main
+#endif
+
 /*
  * One bounded resource diagnostic:
  *
@@ -148,7 +152,7 @@ Boundary dephased_forward(
 
 }  // namespace
 
-int main() {
+int NECKLACE_COHERENCE_TRIAD_ENTRY() {
     const Plan plan = compile_plan();
     const std::vector<Complex> initial = make_carrier(plan, 0);
 
