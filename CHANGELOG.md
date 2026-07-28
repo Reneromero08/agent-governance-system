@@ -2,6 +2,17 @@
 
 # Changelog
 
+## 2026-07-28: Research artifact tracking cleanup
+
+- Stop tracking generated and external research artifacts across deprecated
+  FERAL_RESIDENT data and paper outputs, TINY_COMPRESS rendered outputs,
+  CAT_CAS slot conflict archives, and FORMULA v1 q54/q18/q37 data/cache/result
+  payloads. Add ignore rules so future agents keep authored tests and notes in
+  Git while leaving raw datasets, caches, and generated results local.
+
+- Record the archived source path for the removed FERAL_RESIDENT raw PDFs so the
+  repository keeps provenance without carrying duplicate PDF payloads.
+
 ## 2026-07-17: CAT_CAS phase-lock control plane
 
 - Add an executable CAT_CAS mission and capability control plane that binds

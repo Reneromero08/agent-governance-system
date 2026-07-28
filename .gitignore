@@ -142,6 +142,7 @@ THOUGHT/LAB/FORMULA/experiments/open_questions/q32/physdata/
 # Q37 histwords data (large .npy files exceed GitHub 100MB limit)
 THOUGHT/LAB/FORMULA/experiments/open_questions/q37/data/histwords_data/
 THOUGHT/LAB/FORMULA/questions/**/histwords_data/
+THOUGHT/LAB/FORMULA/v1/questions/medium_q37_1380/tests/data/histwords_data/
 
 # Q32 physdata (large .mat files exceed GitHub 100MB limit)
 THOUGHT/LAB/FORMULA/questions/**/physdata/
@@ -152,6 +153,12 @@ THOUGHT/LAB/FORMULA/questions/**/physdata/
 
 # Q18 real data cache (downloaded biological datasets - too large for git)
 THOUGHT/LAB/FORMULA/experiments/open_questions/q18/real_data/cache/
+THOUGHT/LAB/FORMULA/v1/questions/medium_q18_1400/tests/real_data/cache/
+THOUGHT/LAB/FORMULA/v1/questions/medium_q18_1400/tests/**/results/
+THOUGHT/LAB/FORMULA/v1/questions/medium_q18_1400/tests/real_data/*_results.json
+
+# Q54 raw experimental data (external payloads and duplicate archive)
+THOUGHT/LAB/FORMULA/v1/questions/critical_q54_1980/data/
 
 # Formula lab runtime caches
 THOUGHT/LAB/FORMULA/**/.cache/
@@ -164,11 +171,16 @@ THOUGHT/LAB/FERAL_RESIDENT/research/papers/pipeline_results.json
 THOUGHT/LAB/FERAL_RESIDENT/perception/research/papers/raw/
 THOUGHT/LAB/FERAL_RESIDENT/perception/research/papers/markdown/
 THOUGHT/LAB/FERAL_RESIDENT/perception/research/papers/god_tier/
+THOUGHT/DEPRECATED/FERAL_RESIDENT/perception/research/papers/raw/
+THOUGHT/DEPRECATED/FERAL_RESIDENT/perception/research/papers/markdown/
+THOUGHT/DEPRECATED/FERAL_RESIDENT/perception/research/papers/god_tier/
 
 # Feral Resident & NEO3000 databases (runtime artifacts)
 THOUGHT/LAB/FERAL_RESIDENT/*.db
 THOUGHT/LAB/FERAL_RESIDENT/data/
 !THOUGHT/LAB/FERAL_RESIDENT/data/.gitkeep
+THOUGHT/DEPRECATED/FERAL_RESIDENT/data/
+!THOUGHT/DEPRECATED/FERAL_RESIDENT/data/.gitkeep
 THOUGHT/LAB/NEO3000/data/
 !THOUGHT/LAB/NEO3000/data/.gitkeep
 THOUGHT/LAB/FERAL_RESIDENT/backups_to_delete/
@@ -189,6 +201,8 @@ THOUGHT/LAB/CAT_CAS/storage/
 target/  
 **/rust_engine/target/  
 **/rust_ffi/target/
+THOUGHT/LAB/CAT_CAS/**/slot1_conflict/csv/
+THOUGHT/LAB/CAT_CAS/**/slot1_conflict/csv_cp23/
 *.holo
 *.holo.npz
 *.holo.json
