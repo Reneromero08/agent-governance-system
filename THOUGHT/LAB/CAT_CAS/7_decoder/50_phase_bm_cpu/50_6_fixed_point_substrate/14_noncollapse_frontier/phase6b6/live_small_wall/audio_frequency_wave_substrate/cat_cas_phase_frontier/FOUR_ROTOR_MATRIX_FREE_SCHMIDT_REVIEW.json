@@ -1,0 +1,25 @@
+{
+  "reviewer_id": "FOUR-ROTOR-MATRIX-FREE-01",
+  "review_scope": "focused_independent_claim_and_resource_accounting_review",
+  "evidence": "/tmp/four-rotor-matrix-free-accounted.sTo4ay/evidence",
+  "result": "PASS",
+  "remaining_findings": 0,
+  "repaired_finding": "SIMULTANEOUS_NUMPY_ARRAY_PAYLOAD_UNDERCOUNT",
+  "strict_interpretation": {
+    "conservative_simultaneous_array_upper_bound_bytes": 46521856,
+    "prior_factorized_peak_bytes": 86091488,
+    "dense_equivalent_bytes": 11316496,
+    "matrix_free_peak_below_prior_factorized_peak": true,
+    "matrix_free_peak_below_dense_equivalent": false,
+    "expanded_mpo_bond_materialized": false,
+    "dense_interface_core_materialized": false,
+    "largest_single_workspace_complex_cells": 299628,
+    "maximum_certified_probe_rank": 492,
+    "actual_inverse_restoration": true,
+    "actual_restored_carrier_reuse": true,
+    "matched_classical_matrix_free_tt_identical": true,
+    "computational_advantage": false
+  },
+  "claim": "BOUNDED_MATRIX_FREE_STREAMED_BESSEL_SCHMIDT_CLOSURE_WITHOUT_EXPANDED_MPO_OR_DENSE_INTERFACE_CORE_WITH_ACTUAL_RESTORATION_AND_REUSE",
+  "claim_ceiling": "FOUR_OPEN_CHAIN_ROTORS_MODE_RADIUS14_DEPTH3_MATRIX_FREE_L2_1E_MINUS6_SOFTWARE_FLOAT64"
+}

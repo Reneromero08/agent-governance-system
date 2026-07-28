@@ -4247,3 +4247,71 @@ The fixed one-rotor vector is the new obstruction. The selected repair lifts
 the periodic law to four nonseparably coupled rotors in a Fourier TT/MPS and
 tests the central `2|2` interface rank without materializing the dense
 four-dimensional wave.
+
+## Four-rotor phase relations move the obstruction to interface rank
+
+The one-rotor recurrence is lifted to four continuous rotors with
+nearest-neighbor nonseparable Bessel-factorized phase coupling. Canonical TT
+compression measures the physical central `2|2` Schmidt cut.
+
+At mode radius 14 and discarded-L2 tolerance `1e-11`, central ranks grow
+`13,100,246` over three rounds while maximum local Fourier radius remains
+12. The separable control stays rank one. Guards 14 and 16 agree in the
+declared boundary within `8.895e-13`.
+
+The exact depth-three rank is guard-dependent (`242,246,247`); only
+qualitative monotone growth is claimed. Ranks are tolerance-truncated values
+at central closure. Restoration is physical-state tolerant rather than
+canonical-rank restoration, and high-rank numerical residue prevents any
+stable compact-reuse claim.
+
+The actual inverse restores within `5.236e-8`; an unrelated two-round
+program consumes the actual restored carrier and restores within
+`1.251e-8`. Retained inverse history is zero and generations advance `1,2`.
+
+Evidence `/tmp/four-rotor-kicked-phase-tt-final.MhLb0S/evidence` supports:
+
+```text
+BOUNDED_FOUR_ROTOR_NONSEPARABLE_CONTINUOUS_KICKED_PHASE_FOURIER_TT_CENTRAL_INTERFACE_RANK_GROWTH_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+This is an obstruction result. The nominal unmaterialized dense wave has
+707,281 cells (11.316 MB), but inverse closure peaks at 5,380,718 TT/MPO
+cells (86.091 MB) and a 707,281-cell interface core. The matched classical
+TT is identical. No fixed rank, distinct resource, advantage, Small Wall
+crossing, unbounded computation, CATVM enforcement for this carrier, or
+physical execution is established.
+
+The selected repair is matrix-free streamed coupling Schmidt closure. It
+must rematerialize public Bessel terms into matvecs, retain only the needed
+interface subspace with exact Frobenius-tail accounting, and eliminate both
+the expanded live MPO bond and dense interface core.
+
+## Matrix-free closure removes the expanded inverse structures
+
+The public Bessel coupling is now rematerialized term by term into
+deterministic matrix-free Schmidt matvecs. Streamed full-column Frobenius
+accounting certifies the retained subspace without constructing the expanded
+MPO bond or 707,281-cell dense interface core.
+
+At discarded-L2 tolerance `1e-6`, central ranks are `11,41,97`; the
+same-tolerance dense reference gives `11,40,96`. Boundary disagreement is
+`9.459e-10`. Actual inverse restoration is `1.922e-8`; unrelated reuse is
+`4.087e-9`, with generations `1,2`.
+
+Evidence `/tmp/four-rotor-matrix-free-accounted.sTo4ay/evidence` supports:
+
+```text
+BOUNDED_MATRIX_FREE_STREAMED_BESSEL_SCHMIDT_CLOSURE_WITHOUT_EXPANDED_MPO_OR_DENSE_INTERFACE_CORE_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+A conservative simultaneous-array upper bound falls from 86.091 MB to
+46.522 MB, including QR/SVD factors, output arrays, and nested contraction
+temporaries. The largest workspace array is smaller than the eliminated
+dense core. Total matrix-free state still exceeds the 11.316 MB
+dense-equivalent because inverse cancellation requires probe rank 492. The
+identical classical matrix-free TT defeats any advantage claim.
+
+The next repair is post-inverse canonical phase closure with
+fresh-versus-restored reuse rank/resource parity. Numerical high-rank residue
+must not move into later transactions.

@@ -1301,7 +1301,7 @@ resource.
 The next selected phase-owned repair is:
 
 ```text
-FOUR_ROTOR_NONSEPARABLE_KICKED_PHASE_FOURIER_TT_INTERFACE_RANK_TEST
+FOUR_ROTOR_NONSEPARABLE_KICKED_PHASE_FOURIER_TT_INTERFACE_RANK_GROWTH_ESTABLISHED
 ```
 
 This is the smallest lift that removes the fixed one-rotor-vector
@@ -1311,6 +1311,45 @@ support, apply nonseparable phase coupling natively in a TT/MPS, project only
 the declared final boundary, reverse actual public topology, reuse the
 restored carrier, and compare against the identical best classical TT
 without dense `(2R+1)^4` expansion.
+
+The four-rotor result keeps local radius 12 but grows central Schmidt rank
+`13->100->246` in three rounds. Mode guards converge, coupling is materially
+nonseparable, actual inverse/restored reuse pass, and the separable control
+stays rank one. The matched classical TT is identical.
+
+The factorized implementation exposes a sharper machine defect: inverse
+closure peaks at 86.091 MB, versus 11.316 MB for the nominal dense wave, and
+materializes an equally large canonical interface core.
+
+The next selected phase-owned repair is:
+
+```text
+MATRIX_FREE_STREAMED_COUPLING_SCHMIDT_CLOSURE_WITHOUT_EXPANDED_MPO_OR_DENSE_INTERFACE_CORE
+```
+
+Public Bessel terms must be rematerialized on demand into matrix-free
+Schmidt matvecs. Exact Frobenius-tail accounting must certify the retained
+subspace. The repair is accepted only if it eliminates both the 3,198 live
+expanded bond and the 707,281-cell dense core while preserving boundary
+parity, actual inverse restoration, and actual restored-carrier reuse.
+
+The matrix-free repair is established. Deterministic streamed Bessel
+matvecs and full-column Frobenius residual accounting reproduce the
+same-tolerance dense reference within `9.459e-10`. A conservative
+simultaneous-array upper bound falls from 86.091 MB to 46.522 MB and neither
+forbidden structure is materialized.
+
+This remains larger than the 11.316 MB dense-equivalent total because
+inverse cancellation requires probe rank 492. The next selected repair is:
+
+```text
+POST_INVERSE_CANONICAL_PHASE_CLOSURE_WITH_FRESH_REUSE_RANK_RESOURCE_PARITY
+```
+
+After the actual inverse, the carrier must undergo lawful canonical
+compression without snapshot reload. The same unrelated program must then
+match a fresh carrier in boundary, rank history, retained cells, and
+matrix-free probe resources within declared tolerances.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 
