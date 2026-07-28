@@ -1,0 +1,31 @@
+{
+  "review_id": "FOUR-ROTOR-CYCLIC-PHASE-LAW-01-R2",
+  "review_scope": "bounded dense four-rotor grid-17 finite-torus cyclic phase/FFT law across depths 1 through 64",
+  "verdict": "PASS",
+  "evidence": "/tmp/four-rotor-cyclic-phase-law-repaired.HgR1j4",
+  "source_sha256": "539e2e897c8b8fb53cf9bcc428d0a5757d7aa374506f8d9efed308d782cf4dc7",
+  "qualification_sha256": "3ed8d9fc03636f6a978453cf69fa3016c1c35a672b018e15484acdab6e12b1ab",
+  "checks": {
+    "forward_inverse_order": "PASS",
+    "reverse_public_step_derivation": "PASS",
+    "same_carrier_backing_allocation": "PASS",
+    "actual_inverse_restoration": "PASS",
+    "actual_restored_carrier_reuse": "PASS",
+    "depth_independent_carrier_payload": "PASS",
+    "owned_phase_construction_array_accounting": "PASS",
+    "projection_array_accounting": "PASS",
+    "verification_baseline_accounting": "PASS",
+    "plan_compilation_array_accounting": "PASS",
+    "depth_independent_explicit_numpy_payload": "PASS",
+    "wrong_missing_reordered_controls": "PASS",
+    "dense_path_sector_wording": "PASS",
+    "claim_ceiling": "PASS"
+  },
+  "explicit_engine_peak_bytes": 2009672,
+  "explicit_wrapper_peak_bytes": 3346008,
+  "fft_internal_workspace_bounded": false,
+  "compact_tt_advantage_established": false,
+  "distinct_phase_resource_established": false,
+  "remaining_findings": []
+}
+

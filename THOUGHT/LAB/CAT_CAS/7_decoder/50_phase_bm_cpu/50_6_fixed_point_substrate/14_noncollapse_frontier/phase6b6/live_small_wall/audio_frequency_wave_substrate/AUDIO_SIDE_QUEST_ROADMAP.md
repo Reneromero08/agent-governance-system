@@ -1389,6 +1389,38 @@ instances and protocol traffic across the compact direct baseline,
 snapshot-backed sham, and in-place CATVM path. The dense wave may be reported
 only as a representation threshold, never as the best classical baseline.
 
+That triad is established. The same-UID Linux service denies intermediate
+projection, retains the unresolved TT carrier, performs the actual inverse,
+canonically restores it, and consumes the same carrier in an unrelated
+generation-two program. The deterministic bounded obstruction is two native
+coupling applications per forward/inverse lifecycle versus one in the
+forward-only direct, isolated, and snapshot arms.
+
+A topology-derived sector inverse reduced 117 inverse incremental updates to
+9 public sector closures, but 73,167 exact sector RHS rematerializations
+raised wrapper peak from 10.834 MB to 21.974 MB. That route is closed as the
+measured `EXACT_GRAM_AND_SECTOR_RHS_REMATERIALIZATION_COST` tradeoff.
+
+The phase-owned successor replaces that inverse construction with a dense
+finite-torus phase law. On a fixed `17^4` carrier, onsite and pair phase
+multipliers plus separable Fourier momentum phases preserve one backing
+allocation and a fixed 3,346,008-byte explicit wrapper signature across
+depths `1,2,4,8,16,32,64`. Actual inverse restoration, generation-two reuse,
+and wrong/missing/reordered controls pass. PocketFFT internal workspace is
+outside this explicit-array bound.
+
+The matched classical cyclic FFT is identical, and dense `17^4` width is the
+new obstruction. The next selected phase-owned experiment is:
+
+```text
+COMPACT_CYCLIC_PHASE_FACTORIZATION_ACROSS_DEPTH_WITHOUT_SECTOR_GRAM_REMATERIALIZATION
+```
+
+It must determine whether the same cyclic phase law preserves unresolved
+phase structure in a factorized carrier without moving width growth into
+Bessel/Gram reconstruction or an immediately equivalent compact classical
+recurrence. Larger dense cyclic fixtures do not answer this question.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:

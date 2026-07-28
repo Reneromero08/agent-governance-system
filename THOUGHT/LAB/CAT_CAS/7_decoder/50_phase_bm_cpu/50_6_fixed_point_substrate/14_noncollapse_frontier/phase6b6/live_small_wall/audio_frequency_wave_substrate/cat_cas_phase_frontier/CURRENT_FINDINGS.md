@@ -4387,3 +4387,72 @@ law, so no distinct phase resource or advantage is established.
 The next diagnostic places this phase machine behind CATVM custody and
 compares the in-place path with an identical compact direct baseline and a
 snapshot sham. Dense expansion is not the baseline.
+
+## CATVM custody exposes actual inverse coupling cost
+
+The probe-free incremental carrier now runs behind a Linux same-UID
+`AF_UNIX/SOCK_SEQPACKET` service. The protocol-only controller cannot import
+the phase backend, intermediate projection and null-carrier paths are denied,
+ordinary outputs pass the no-smuggle scan, and the accepted carrier is
+actually restored and consumed by a generation-two unrelated program.
+
+Matched direct, isolated-sham, snapshot-sham, and in-place arms use identical
+public programs, boundary schemas, fixed packet shapes, and 64,512 logical
+protocol bytes. All primary boundaries agree exactly; restored reuse agrees
+within `6.003e-8`. The in-place primary uses 18 native coupling applications
+versus 9 for each forward-only baseline. This identifies:
+
+```text
+ACTUAL_INVERSE_REQUIRES_2X_NATIVE_COUPLING_APPLICATIONS_IN_THIS_BOUNDED_IMPLEMENTATION
+```
+
+Evidence `/tmp/catvm-four-rotor-incremental-repaired.KpxZnT` supports the
+bounded CATVM claim. It does not establish cross-UID secrecy, seccomp
+confinement, leverage, a distinct phase resource, or Small Wall crossing.
+
+## Sector inversion reduces closures but moves cost into rematerialization
+
+Public total-pair-momentum sector LU solves replace 117 inverse incremental
+updates with 9 inverse sector closures. Primary restoration is `6.423e-8`,
+canonical closure is `6.424e-8`, and generation-two reuse agrees with fresh
+execution within `7.381e-8`.
+
+The repair is a negative tradeoff. Exact Grams require 73,167 sector RHS
+rematerializations, and wrapper peak payload rises from 10.834 MB to
+21.974 MB. Evidence `/tmp/four-rotor-sector-inverse-final.drDP8n` identifies:
+
+```text
+EXACT_GRAM_AND_SECTOR_RHS_REMATERIALIZATION_COST
+```
+
+No memory, warm-time, advantage, or distinct-resource claim follows.
+
+## An exact cyclic phase law fixes state size across depth
+
+The successor removes sector and Gram reconstruction. A `17^4` resident
+finite-torus wave receives onsite and nearest-neighbor phase multipliers
+directly in angle coordinates and separable free phases through an
+orthonormal Fourier transform. Its inverse conjugates the same public phase
+law in reverse step order without retained history.
+
+Across depths `1,2,4,8,16,32,64`, carrier payload remains 1,336,336 bytes,
+accounted explicit engine arrays remain 2,009,672 bytes, and wrapper payload
+including phase construction, projection arrays, and the non-reloaded
+verification baseline remains 3,346,008 bytes. Depth-64 restoration error is
+`1.698e-14`. The depth-32 primary restores at `7.671e-15`; unrelated
+generation-two reuse restores at `2.244e-15` and agrees with fresh execution
+within `6.661e-15`.
+
+Evidence `/tmp/four-rotor-cyclic-phase-law-repaired.HgR1j4` supports:
+
+```text
+BOUNDED_DENSE_FINITE_TORUS_CYCLIC_PHASE_UPDATE_LAW_WITH_DEPTH_INDEPENDENT_EXPLICIT_NUMPY_ARRAY_PAYLOAD_ACTUAL_RESTORATION_AND_REUSE
+```
+
+This is fixed-depth-growth explicit array payload for a fixed dense
+four-rotor grid, not compact growth in width; PocketFFT internal workspace is
+outside the bound. The matched direct classical cyclic FFT is identical.
+This path bypasses rather than solves the compact TT sector obstruction. The
+active obstruction is compact factorization of this phase law across rotor
+count or grid width without restoring Bessel/Gram costs or reducing
+immediately to an equivalent compact classical recurrence.

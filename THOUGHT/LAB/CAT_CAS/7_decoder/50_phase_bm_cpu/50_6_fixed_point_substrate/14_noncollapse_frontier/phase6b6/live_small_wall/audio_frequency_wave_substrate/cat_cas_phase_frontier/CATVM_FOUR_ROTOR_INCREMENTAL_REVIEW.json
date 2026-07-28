@@ -1,0 +1,27 @@
+{
+  "review_id": "CATVM-FOUR-ROTOR-INCREMENTAL-01-R2",
+  "review_scope": "bounded Linux same-UID CATVM custody triad for the four-rotor incremental Schmidt carrier",
+  "verdict": "PASS",
+  "evidence": "/tmp/catvm-four-rotor-incremental-repaired.KpxZnT",
+  "qualification_sha256": "9c587587109f12b9aac158ff92331a5f86ba0598f50389ee5e1c4cdfbe999a2b",
+  "checks": {
+    "matched_public_programs_and_boundary": "PASS",
+    "fixed_protocol_shape": "PASS",
+    "controller_backend_import_separation": "PASS",
+    "intermediate_projection_denied": "PASS",
+    "null_carrier_denied": "PASS",
+    "ordinary_output_no_smuggle_scan": "PASS",
+    "same_uid_proc_mem_inspection_denied": "PASS",
+    "actual_inverse_on_borrowed_carrier": "PASS",
+    "verification_baseline_not_reloaded": "PASS",
+    "canonical_restoration": "PASS",
+    "actual_restored_carrier_reuse": "PASS",
+    "wrong_missing_reordered_controls": "PASS",
+    "resource_categories_separated": "PASS",
+    "claim_ceiling": "PASS"
+  },
+  "deterministic_obstruction": "ACTUAL_INVERSE_REQUIRES_2X_NATIVE_COUPLING_APPLICATIONS_IN_THIS_BOUNDED_IMPLEMENTATION",
+  "nonblocking_accounting_note": "snapshot service_init_carrier_creation_ns and snapshot_creation_ns describe the same combined interval and are not additive",
+  "remaining_findings": []
+}
+
