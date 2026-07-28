@@ -1186,18 +1186,32 @@ bytes while preserving exact coefficient hashes, actual inverse restoration,
 and same-carrier reuse.
 
 The homogeneous-sphere quotient certifies a nonzero highest harmonic shell
-at every tested degree. Parity closure therefore removes impossible state but
-does not establish fixed rank. The next selected work is:
+at every tested degree. That shell nevertheless admits an exact factorization
+for the repeated single-axis quadratic generator:
 
 ```text
-EXACT_STOKES_HIGHEST_HARMONIC_SHELL_RECURRENCE_OR_INDEPENDENT_RANK_GROWTH_CERTIFICATE
+ad_(L^2/625)^n(z^2) = L^n q_n
 ```
 
-It must derive the shell action algebraically rather than add more grades to
-the same monomial fixture. It must determine whether the nonzero shells admit
-a compact exact phase recurrence or require genuinely increasing independent
-rank. The 64-byte direct complex recurrence remains the best matched
-point-evaluation baseline.
+where `q_n` remains in a four-coordinate rotation space. A complete
+dual-prime phase-character encoding executes this recurrence with 144
+unit-phase cells and no retained history through depth 2,048. Scalar updates
+are exact phase index permutations, so actual inverse restoration and
+same-carrier reuse have zero measured residual. The public `L^n` factor is
+stored as axis plus exponent and never expanded.
+
+This closes the highest shell at fixed rank, but not the lower shells or the
+full Stokes signature. The matched classical residue recurrence is only
+eight bytes. The next selected work is:
+
+```text
+FULL_MULTI_SHELL_STOKES_FACTORIZATION_OR_PHASE_RESOURCE_BEYOND_MATCHED_Q4_RECURRENCE
+```
+
+It must determine whether all lower shells share a compact factorized
+recurrence, or replace this class with a phase law that lacks an immediate
+compact residue equivalent. Adding higher depths to the established Q4
+recurrence does not resolve either obstruction.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 

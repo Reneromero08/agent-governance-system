@@ -3989,3 +3989,44 @@ BOUNDED_NORMALIZED_TWO_MODE_PARITY_ADMISSIBLE_STOKES_HARMONIC_DUAL_PRIME_LIE_GRA
 
 The remaining obstruction is whether those nonzero highest shells obey a
 compact exact phase recurrence or require increasing independent rank.
+
+## The highest Stokes shell has an exact fixed-rank factorization
+
+For the repeated quadratic generator `Q=L^2/625`, the identity
+`ad_Q(f)=(2/625)L ad_L(f)` and `ad_L(L)=0` give
+`ad_Q^n(z^2)=L^n q_n`. In a rational frame aligned with `L`, every `q_n`
+after the first bracket remains in the four-coordinate space
+`ac,ab,bc,b^2-c^2`.
+
+The phase machine stores each modular coefficient as its complete `F17` or
+`F19` unit-phase character orbit. Public scalar multiplication is a reversible
+index permutation, eliminating the deep floating-power drift without a
+contractive phase lock or decoded residue shadow. The carrier has 144
+unit-phase cells, 2,304 logical packed bytes, and zero retained inverse
+history independent of depth.
+
+At depths `1,2,4,8,32,128,512,2048`, phase boundaries match the exact
+rational recurrence. At maximum depth the unexpanded highest shell has
+degree 2,050 and expanded dimension 4,101. Root error and restoration
+residual are both zero; 16 transactions consume the same restored carrier.
+Missing and wrong inverses leave 136 and 52 nonidentity character cells.
+
+Evidence `/tmp/stokes-factorized-shell-final.YPrr4F/evidence` and focused
+independent review establish:
+
+```text
+FIXED_RANK_FACTORIZED_HIGHEST_STOKES_HARMONIC_SHELL_PHASE_RECURRENCE_WITH_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+EXACT_REPEATED_SINGLE_AXIS_QUADRATIC_STOKES_KERR_HIGHEST_HOMOGENEOUS_SHELL_FACTOR_L_POWER_N_TIMES_Q4_DUAL_PRIME_SOFTWARE_DEPTHS1_TO_2048
+```
+
+The algebraic factorization law holds at every positive depth, but executed
+software evidence is bounded and covers only the highest shell. The lower
+shells and full Stokes signature remain open. A matched classical dual-prime
+machine stores the same Q4 recurrence in eight residue bytes, so this is not
+a distinct phase resource, advantage, Small Wall crossing, or unbounded
+catalytic computation.

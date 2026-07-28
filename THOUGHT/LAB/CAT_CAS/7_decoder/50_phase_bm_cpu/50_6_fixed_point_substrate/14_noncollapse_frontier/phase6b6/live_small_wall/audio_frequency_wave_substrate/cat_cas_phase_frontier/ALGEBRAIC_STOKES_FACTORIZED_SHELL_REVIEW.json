@@ -1,0 +1,30 @@
+{
+  "review_id": "STOKES-FACTORIZED-HIGHEST-SHELL-01",
+  "result": "PASS",
+  "claim_affecting_defects": [],
+  "reviewed_evidence": "/tmp/stokes-factorized-shell-final.YPrr4F/evidence",
+  "findings": {
+    "all_depth_lie_factorization_valid": true,
+    "q4_frame_signs_and_scales_valid": true,
+    "character_orbit_permutation_exact": true,
+    "actual_inverse_orientation_correct": true,
+    "actual_restored_carrier_reuse": true,
+    "no_smuggle": true,
+    "matched_classical_baseline_valid": true,
+    "claim_ceiling_strict": true
+  },
+  "hardening_applied": [
+    "PUBLIC_DESCRIPTOR_BYTES_LABELED_LOGICAL_PACKED",
+    "ACTUAL_PYTHON_ALLOCATION_EXPLICITLY_UNMEASURED",
+    "REUSE_SEED_LABELED_SECOND_PUBLIC_FACTORIZED_Q4_PROGRAM"
+  ],
+  "explicitly_not_established": [
+    "ARBITRARY_HIGHEST_HARMONIC_SHELL_FIXED_RANK",
+    "FULL_MULTI_SHELL_STOKES_FIXED_RANK",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "UNBOUNDED_CATALYTIC_COMPUTATION",
+    "PHYSICAL_WAVEFORM_EXECUTION"
+  ]
+}
