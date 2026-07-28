@@ -1,0 +1,36 @@
+{
+  "review": "PASS",
+  "scope": "TWO_STAGE_NONLINEAR_SYMPLECTIC_LIE_SIGNATURE_AND_STOKES_SPHERE_RANK_REDUCTION",
+  "evidence": [
+    "/tmp/symplectic-lie-final.slaEJp/evidence",
+    "/tmp/stokes-lie-final.ji9Ao2/evidence"
+  ],
+  "equations_and_orientation": "PASS",
+  "dual_prime_phase_to_exact_rational_parity": "PASS",
+  "correct_actual_inverse_restoration": "PASS",
+  "same_actual_carrier_reuse": "PASS",
+  "final_graded_boundary_projection": "PASS",
+  "no_smuggle": "PASS",
+  "resource_labels": "PASS_LOGICAL_PAYLOAD_SEPARATED_FROM_ACTUAL_ALLOCATION",
+  "claim_ceilings": "PASS_STRICT",
+  "closed_findings": [
+    "WRONG_INVERSE_IDENTITY_CONTRIBUTION_HAZARD",
+    "FAILED_CONTROL_RESTORATION_RECEIPT",
+    "SHARED_COORDINATE_PORT_ELIMINATION_OVERCLAIM",
+    "LOGICAL_PAYLOAD_VERSUS_ALLOCATOR_MEMORY_LABEL"
+  ],
+  "wrong_inverse_hardening": {
+    "law": "FORWARD_CONTRIBUTION_APPLIED_IN_PLACE_OF_EVERY_INVERSE_CONTRIBUTION",
+    "four_dimensional_residual": 1.9931757774161853,
+    "four_dimensional_nonidentity_modular_cells": 442,
+    "stokes_residual": 1.993168979208953,
+    "stokes_nonidentity_modular_cells": 31
+  },
+  "remaining_claim_affecting_findings": 0,
+  "shared_wave_port_elimination_established": false,
+  "fixed_rank_closure_established": false,
+  "unbounded_growth_proved": false,
+  "computational_advantage": false,
+  "small_wall_crossed": false,
+  "terminal": false
+}

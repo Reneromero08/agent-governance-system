@@ -3872,3 +3872,84 @@ larger Kerr fixture. It tests whether the nonlinear symplectic wave law
 admits a compact open relation signature with native shared-port closure,
 or whether exact elimination forces relation-rank or harmonic growth. That
 directly reconnects the waveform machine to unresolved relational geometry.
+
+## Nonlinear Kerr Lie signatures expose bounded polynomial rank growth
+
+Two rational Kerr/`SU(2)` Hamiltonians now undergo native Poisson
+canonical-index contraction with every coefficient resident as both an
+`F17` and `F19` root phase. No coefficient is decoded before the complete
+five-grade boundary. Exact rational and phase hashes agree at degrees
+`4,6,8,10,12`.
+
+The exact rational support grows:
+
+```text
+degree                 4    6    8    10    12
+nonzero terms          6   32   85   126   231
+full basis cells      35   84  165   286   455
+```
+
+Correct reverse contractions restore within `7.772e-16`; the same carrier
+runs a different mixer and seven further alternating transactions within
+`2.887e-15`. Missing, wrong, and dependency-reordered inverses leave both
+large continuous residuals and nonidentity modular cells. Failed controls
+receive no successful restoration receipt.
+
+Evidence `/tmp/symplectic-lie-final.slaEJp/evidence` and focused review
+establish:
+
+```text
+BOUNDED_DUAL_PRIME_PHASE_RESIDENT_NONLINEAR_SYMPLECTIC_LIE_SIGNATURE_GROWTH_WITH_ACTUAL_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+BOUNDED_TWO_MODE_RATIONAL_SU2_KERR_HAMILTONIAN_DUAL_PRIME_LIE_GRADES4_6_8_10_12_SOFTWARE_REFERENCE_ONLY
+```
+
+The 2,050 active dual-prime cells are 32,800 logical packed payload bytes,
+but the allocated C carrier is 154,800 bytes before compiler and stack
+temporaries. Poisson contraction contracts canonical derivative indices; it
+does not eliminate the coordinate interface of a general open relation.
+This is bounded growth in the tested polynomial Lie-signature class, not a
+full BCH materialization or an unbounded-growth theorem.
+
+## The exact Stokes quotient removes redundant phase and norm state
+
+The first phase-owned repair maps normalized two-mode waves to the Stokes
+sphere and reduces every Lie-Poisson product by
+`x^2+y^2+z^2=1`. This removes global optical phase and the conserved norm
+Casimir exactly. Canonical monomials have `z` exponent zero or one.
+
+Across degree limits `2,3,4,5,6`, exact rational support is
+`3,4,9,9,16` and quotient basis size is `9,16,25,36,49`. Thus the five-grade
+basis falls from 1,025 four-coordinate cells to 135 Stokes cells. The
+dual-prime carrier falls from 2,050 to 270 phase cells, or from 32,800 to
+4,320 logical packed payload bytes. Actual CPython object allocation is not
+claimed.
+
+Phase hashes match an independent exact-rational Groebner oracle at every
+grade. Correct restoration is `2.220e-16`; eight same-carrier reuse
+transactions remain within `1.110e-15`. Wrong inverse now leaves residual
+`1.993` and 31 nonidentity modular cells, closing the focused review finding.
+
+Evidence `/tmp/stokes-lie-final.ji9Ao2/evidence` and focused review
+establish:
+
+```text
+BOUNDED_STOKES_SPHERE_REDUCED_DUAL_PRIME_PHASE_RESIDENT_NONLINEAR_SYMPLECTIC_LIE_SIGNATURE_WITH_RESTORATION_AND_REUSE
+```
+
+within:
+
+```text
+BOUNDED_NORMALIZED_TWO_MODE_STOKES_SPHERE_RATIONAL_SU2_KERR_DUAL_PRIME_LIE_GRADES2_3_4_5_6_SOFTWARE_REFERENCE_ONLY
+```
+
+This is an exact relation-preserving rank reduction, but not fixed-rank
+closure. Spherical-harmonic degree and rank still grow, and the matched
+point-evaluation recurrence remains 64 bytes. The next selected experiment
+must use irreducible Stokes harmonic sectors or a lawful nontrivial invariant
+quotient; adding more grades to the same monomial fixture would not remove
+the obstruction.

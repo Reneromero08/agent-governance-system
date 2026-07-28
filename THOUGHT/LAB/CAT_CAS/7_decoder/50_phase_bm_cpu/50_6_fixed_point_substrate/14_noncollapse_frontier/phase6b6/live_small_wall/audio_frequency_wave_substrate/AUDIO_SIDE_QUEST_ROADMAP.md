@@ -1,12 +1,12 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `ACTIVE_AUTONOMOUS_FRONTIER`  
-**Roadmap version:** `8.5`
+**Roadmap version:** `8.6`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled through parent commit:** `eac39da1`
-**Current highest milestone:** `TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING_REDUCES_RETAINED_PHASE_HISTORY`
-**Current claim ceiling:** `BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS4_5_8_HOMOGENEOUS_NEIGHBOR_AND_OR_PHASE_PEBBLING_REFERENCE_ONLY`
+**Reconciled through parent commit:** `3c68f725`
+**Current highest milestone:** `BOUNDED_STOKES_SPHERE_REDUCED_DUAL_PRIME_PHASE_RESIDENT_NONLINEAR_SYMPLECTIC_LIE_SIGNATURE_WITH_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `BOUNDED_NORMALIZED_TWO_MODE_STOKES_SPHERE_RATIONAL_SU2_KERR_DUAL_PRIME_LIE_GRADES2_3_4_5_6_SOFTWARE_REFERENCE_ONLY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -1064,7 +1064,7 @@ still an exact four-double public graph recurrence using 32 state bytes.
 Therefore this milestone strengthens phase topology and custody but does not
 move C5 or cross the Small Wall.
 
-The next selected phase-owned experiment is:
+The selected phase-owned experiment was:
 
 ```text
 REVERSIBLE_F5_QUADRATIC_PHASE_KERNEL_GAUSS_CONTRACTION_WITH_OFF_MANIFOLD_FALSIFICATION
@@ -1166,13 +1166,31 @@ The next selected phase-owned experiment is:
 COMPACT_NONLINEAR_SYMPLECTIC_PHASE_RELATION_SIGNATURE_WITH_NATIVE_SHARED_PORT_CLOSURE
 ```
 
-It must expose typed open wave ports, retain shared wave state unresolved,
-compose Kerr/interference modules through the actual resident shared port,
-and determine exact signature growth without expanding assignments or
-wave paths. A positive result must compact relation geometry rather than
-merely evaluate another fixed-state recurrence. A negative result must
-identify whether nonlinear elimination causes polynomial degree, harmonic
-rank, interface width, or inverse-custody growth.
+The bounded diagnostic now contracts canonical Poisson indices through
+dual-prime resident phases and matches an exact rational oracle. Its
+polynomial Lie grades grow from 6 to 231 rational terms through degree 12.
+This is a bounded signature-growth obstruction, not general coordinate-port
+elimination or an unbounded-growth theorem.
+
+The first evidence-supported repair is also established. Mapping normalized
+two-mode waves to the Stokes sphere removes global optical phase and quotients
+the exact norm Casimir. Across five grades it reduces the full canonical basis
+from 1,025 to 135 cells and the logical packed dual-prime phase payload from
+32,800 to 4,320 bytes while retaining actual inverse restoration and
+same-carrier reuse.
+
+The remaining obstruction is no longer redundant four-coordinate state. It
+is spherical-harmonic degree and rank growth. The next selected work is:
+
+```text
+IRREDUCIBLE_STOKES_SPHERICAL_HARMONIC_PHASE_SIGNATURE_OR_FIXED_RANK_INVARIANT_CLOSURE
+```
+
+It must use exact irreducible harmonic sectors or a lawful invariant quotient,
+not add higher Lie grades to the same monomial fixture. It must determine
+whether a nontrivial final boundary invariant closes at fixed rank without
+discarding the relational content. The 64-byte direct complex recurrence
+remains the best matched point-evaluation baseline.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 
@@ -1211,7 +1229,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_FOUR_COMPLEX_CELL_NORMALIZED_KERR_SU2_WAVE_MESH_DEPTHS1_4_32_128_512_2048_DOUBLE_COMPLEX_SOFTWARE_REFERENCE_ONLY
+BOUNDED_NORMALIZED_TWO_MODE_STOKES_SPHERE_RATIONAL_SU2_KERR_DUAL_PRIME_LIE_GRADES2_3_4_5_6_SOFTWARE_REFERENCE_ONLY
 ```
 
 Not established:
@@ -1242,7 +1260,7 @@ arbitrary interface width or relation arity
 CATVM enforcement for the general affine operator
 general CATVM relational-DAG enforcement
 general Boolean ANF elimination
-bounded nonlinear degree or term growth
+unbounded nonlinear degree or term growth theorem
 fixed-rank unbounded-depth Boolean-TT closure
 native exact Boolean-TT rank minimization
 arbitrary mixed-layer Boolean-TT quotient closure
