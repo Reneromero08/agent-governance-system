@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F17_PERIOD17_PI_ADIC_HEIGHT_REJECTS_FIXED_FINITE_LOSSLESS_BOUNDARY_ALPHABET`
-**Roadmap version:** `11.2`
+**Status:** `STRICT_SCOPE_PI_CONTENT_LEDGER_WORSENS_RESIDENT_PAYLOAD_IN_TWO_TESTED_INTEGRAL_COORDINATE_SYSTEMS`
+**Roadmap version:** `11.3`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `1251cb3a34669fa6b00eddcd66a2228b8f7f9731`
+**Reconciled source head:** `7c79414f2beb34c29bf0d63783a6effea26c65ed`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F17_PERIOD17_PI_ADIC_BOUNDARY_HEIGHT_CERTIFICATE_PROVES_UNBOUNDED_LOSSLESS_DISCRETE_BOUNDARY_ALPHABET_AND_WORST_CASE_OMEGA_LOG_N_HORIZON_CODE_WIDTH_FOR_TWO_PUBLIC_RECURRENCE_FAMILIES_WITH_EXACT_MESSAGE_PAYLOAD_RESTORATION_AND_REUSE_BUT_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_Q_ZETA17_PI_ADIC_BOUNDARY_HEIGHT_LOWER_BOUND_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE_EXACT_SUBTRACTIVE_RESTORATION_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WORSENS_CARRIER_PAYLOAD_IN_ZETA_AND_PI_INTEGRAL_BASES_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_PAYLOAD_AND_LEDGER_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_Q_ZETA17_PI_CONTENT_LEDGER_NORMALIZED_RECURRENCE_PERIODS1_4_16_64_256_ZETA_AND_PI_INTEGRAL_BASIS_RESIDENT_PAYLOAD_DIAGNOSTIC_EXACT_SUBTRACTIVE_PAYLOAD_AND_LEDGER_RESTORATION_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`1251cb3a34669fa6b00eddcd66a2228b8f7f9731`. The current 106-milestone
+`7c79414f2beb34c29bf0d63783a6effea26c65ed`. The current 107-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -3113,6 +3113,89 @@ The live obstruction is:
 THE_EXACT_BOUNDARY_PI_VALUATION_FORCES_AN_UNBOUNDED_LOSSLESS_BOUNDARY_ALPHABET_BUT_ONLY_A_WORST_CASE_LOGARITHMIC_HORIZON_CODE_WIDTH_WITHOUT_A_FREE_PERIOD_INDEX_THE_PI_EXPONENT_HAS_A_COMPACT_LOGARITHMIC_LEDGER_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
 ```
 
+## Pi-content factoring exposes residual-height amplification
+
+The successor factors every common power of `pi = 1 - zeta17` during exact
+recurrence arithmetic. Each message and coefficient is stored as an exact
+residual plus a nonnegative `pi`-exponent ledger. The accepted path does not
+materialize raw growing recurrence coefficients; final boundary projection
+rematerializes the exact value.
+
+```text
+claim
+    BOUNDED_EXACT_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WORSENS_CARRIER_PAYLOAD_IN_ZETA_AND_PI_INTEGRAL_BASES_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_PAYLOAD_AND_LEDGER_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+The exact ledger stays narrow, but dividing out the compulsory scale
+amplifies residual height enough to increase resident signed-integer payload
+in every declared case:
+
+```text
+period  family   raw recurrence   zeta residual+ledger   pi residual+ledger
+1       PRIMARY       1,306,953               6,152,594            6,193,436
+1       REUSE         1,332,125               6,213,406            6,253,922
+4       PRIMARY       1,335,548               6,287,563            6,328,417
+4       REUSE         1,361,285               6,349,688            6,390,206
+16      PRIMARY       1,451,089               6,827,356            6,868,281
+16      REUSE         1,479,214               6,895,056            6,935,581
+64      PRIMARY       2,368,807              11,160,253           11,203,120
+64      REUSE         2,447,532              11,433,973           11,476,565
+256     PRIMARY       5,850,470              27,417,447           27,460,355
+256     REUSE         6,112,042              28,372,693           28,415,308
+```
+
+At period 256, the maximum residual signed widths are 42,337 bits for
+PRIMARY and 42,774 for REUSE, while the exponent ledger needs 16 signed
+bits. The result is a negative diagnostic for this exact normalization, not
+an all-basis or asymptotic lower bound.
+
+The separate oracle imports no production implementation. It recompiles
+both public operators, checks both complete annihilator identities, advances
+coefficients sequentially by `x mod q`, and independently reproduces every
+coefficient decomposition, boundary, valuation, raw baseline, and resident
+resource tuple. This closes the exact-integer evidence gap; finite-field
+parity alone is not used for the precision tuples.
+
+The actual inverse subtracts output, coefficients, basis messages, seed, and
+their ledgers from the same backing. All payload and ledgers return exactly
+to zero, and the unrelated REUSE program agrees with fresh execution.
+Generation and lease advance to two, so full object equality and bounded
+repeated-use metadata are not claimed.
+
+The comparison counts declared resident signed-integer carrier payload.
+Python objects, allocator peak, internal multiplication temporaries, and
+whole-process storage remain outside the bound. The normalized pi-coordinate
+payload is compared with the available raw recurrence in zeta coordinates;
+this rejects the tested candidate as a smaller machine but does not establish
+basis optimality. The identical compact classical normalization remains.
+
+The next phase-owned experiment is:
+
+```text
+EXACT_MULTI_EMBEDDING_CYCLOTOMIC_UNIT_BALANCING_AFTER_PI_CONTENT_FACTORIZATION
+```
+
+It must test whether exact cyclotomic-unit moves can balance the residual
+across all declared embeddings after compulsory `pi` content is separated,
+without moving equivalent height into the unit ledger or hidden
+rematerialization state. It must retain the identical classical normalizer,
+exact restoration, and unrelated reuse.
+
+The live obstruction is:
+
+```text
+COMPULSORY_PI_SCALE_HAS_A_COMPACT_LEDGER_BUT_DIVIDING_IT_EXPANDS_RESIDUAL_HEIGHT_IN_BOTH_TESTED_INTEGRAL_BASES_AND_THE_IDENTICAL_CLASSICAL_NORMALIZATION_REMAINS
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -3150,7 +3233,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F17_PERIOD17_PI_ADIC_BOUNDARY_HEIGHT_CERTIFICATE_PROVES_UNBOUNDED_LOSSLESS_DISCRETE_BOUNDARY_ALPHABET_AND_WORST_CASE_OMEGA_LOG_N_HORIZON_CODE_WIDTH_FOR_TWO_PUBLIC_RECURRENCE_FAMILIES_WITH_EXACT_MESSAGE_PAYLOAD_RESTORATION_AND_REUSE_BUT_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE
+BOUNDED_EXACT_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WORSENS_CARRIER_PAYLOAD_IN_ZETA_AND_PI_INTEGRAL_BASES_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_PAYLOAD_AND_LEDGER_RESTORATION_AND_REUSE
 ```
 
 Not established:
@@ -3195,6 +3278,10 @@ generic machine-memory or online-space lower bound
 lower bound when a period index or external counter is supplied free
 full carrier-object equality after exact message restoration
 bounded repeated-use generation or lease metadata
+intrinsic lower bound across all integral bases
+asymptotic residual-height lower bound from the five tested periods
+basis-optimal exact pi-content normalization
+exact Python allocator, internal multiplication, or whole-process peak
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.

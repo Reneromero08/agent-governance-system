@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`1251cb3a34669fa6b00eddcd66a2228b8f7f9731`. The canonical per-milestone
+`7c79414f2beb34c29bf0d63783a6effea26c65ed`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -6231,4 +6231,79 @@ The live obstruction is:
 
 ```text
 THE_EXACT_BOUNDARY_PI_VALUATION_FORCES_AN_UNBOUNDED_LOSSLESS_BOUNDARY_ALPHABET_BUT_ONLY_A_WORST_CASE_LOGARITHMIC_HORIZON_CODE_WIDTH_WITHOUT_A_FREE_PERIOD_INDEX_THE_PI_EXPONENT_HAS_A_COMPACT_LOGARITHMIC_LEDGER_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+```
+
+## Pi-content factoring increases resident payload in both tested bases
+
+The executed successor stores each exact message and recurrence coefficient
+as a `Z[zeta17]` residual plus its common nonnegative
+`pi = 1 - zeta17` exponent. It factors that content during recurrence
+arithmetic and rematerializes only the final exact boundary.
+
+```text
+claim
+    BOUNDED_EXACT_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WORSENS_CARRIER_PAYLOAD_IN_ZETA_AND_PI_INTEGRAL_BASES_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_PAYLOAD_AND_LEDGER_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+The exact exponent ledger remains small, but the residual height grows. All
+ten tested cases use more resident signed-integer payload than the identical
+raw recurrence:
+
+```text
+period  family   raw recurrence   zeta residual+ledger   pi residual+ledger
+1       PRIMARY       1,306,953               6,152,594            6,193,436
+1       REUSE         1,332,125               6,213,406            6,253,922
+4       PRIMARY       1,335,548               6,287,563            6,328,417
+4       REUSE         1,361,285               6,349,688            6,390,206
+16      PRIMARY       1,451,089               6,827,356            6,868,281
+16      REUSE         1,479,214               6,895,056            6,935,581
+64      PRIMARY       2,368,807              11,160,253           11,203,120
+64      REUSE         2,447,532              11,433,973           11,476,565
+256     PRIMARY       5,850,470              27,417,447           27,460,355
+256     REUSE         6,112,042              28,372,693           28,415,308
+```
+
+At period 256, residual signed width reaches 42,337 bits for PRIMARY and
+42,774 for REUSE. The exponent ledger uses 16 signed bits.
+
+The durable exact-integer oracle imports no production implementation. It
+independently recompiles both public operators, checks both annihilator
+identities, uses sequential `x mod q` coefficient advancement, and matches
+all exact decompositions, boundaries, valuations, raw baselines, and
+resident payload/width tuples. A nonzero coefficient-ledger mutation changes
+the boundary.
+
+The valid inverse subtracts output, coefficients, basis, seed, and ledgers
+on the original backing. Payload and ledgers return exactly to zero; the
+unrelated REUSE program agrees with fresh execution. Generation and lease
+advance to two, so full object equality and bounded metadata are not
+claimed.
+
+This is a finite negative diagnostic for one exact normalization. It is not
+an all-integral-basis or asymptotic lower bound. The pi-coordinate normalized
+payload is compared with the available raw zeta-coordinate recurrence,
+which rejects this candidate as a smaller machine without proving
+basis-optimality. Python object overhead, allocator peak, internal
+multiplication temporaries, and whole-process storage are not bounded. The
+identical compact classical normalizer remains.
+
+The next selected phase-machine experiment is:
+
+```text
+EXACT_MULTI_EMBEDDING_CYCLOTOMIC_UNIT_BALANCING_AFTER_PI_CONTENT_FACTORIZATION
+```
+
+The live obstruction is:
+
+```text
+COMPULSORY_PI_SCALE_HAS_A_COMPACT_LEDGER_BUT_DIVIDING_IT_EXPANDS_RESIDUAL_HEIGHT_IN_BOTH_TESTED_INTEGRAL_BASES_AND_THE_IDENTICAL_CLASSICAL_NORMALIZATION_REMAINS
 ```
