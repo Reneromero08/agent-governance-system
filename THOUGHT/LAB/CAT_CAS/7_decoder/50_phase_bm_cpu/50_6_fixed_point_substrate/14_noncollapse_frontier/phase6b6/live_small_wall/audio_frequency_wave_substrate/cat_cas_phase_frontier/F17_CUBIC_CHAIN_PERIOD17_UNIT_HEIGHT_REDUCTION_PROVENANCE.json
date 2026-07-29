@@ -1,0 +1,18 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "2b6234b6b24331387b91ec3b1ed17a46a5a0605a",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "reference_full_result_sha256": "da9edf6387bf375484f51fb22bd3351016afe15ef5f0a4c245d27233425efd1b",
+  "reference_full_oracle_sha256": "fb053f81d019cdc37fc61e7138ff4d93e84d31c4f30685e61c1e75f886a7cf8f",
+  "files": {
+    "f17_cubic_chain_period17_unit_height_reduction.py": "dde70223c7b5be234501e872ebad267b2811668ad0a5e98192ce8f7100d3ea52",
+    "f17_cubic_chain_period17_unit_height_reduction_oracle.py": "f89b775aa967035ed6e5a62330cceeb26101d5a556d2f71dd04541b3f8ba5d7d",
+    "f17_cubic_chain_period17_cyclotomic_module.py": "9bf400adc38462796e574da4f88c2778918169245517ebd7385f6c2dc1d52033",
+    "f17_cubic_chain_period17_executed_recurrence.py": "aca8e34294bbaaf345d6bce81f9bb32ce3234da8e3e55b4a7ac52e55e531a3c7",
+    "f17_cubic_chain_adaptive_gauge.py": "083ddddab5907bb9148e00057cf4e8f33b0ba2f76db71f32fc7a3b085418d828",
+    "qualify_f17_cubic_chain_period17_unit_height_reduction.sh": "d8e5afbfac89eb1e4876d8ffbe7557eb6be7cb98cbf2003d8fceed391201f259",
+    "F17_CUBIC_CHAIN_PERIOD17_UNIT_HEIGHT_REDUCTION_RESULTS.json": "44d8679ca6165f204dcf0132dababcc1ee4251f802025a0ee5e3a2027adb80c6",
+    "F17_CUBIC_CHAIN_PERIOD17_UNIT_HEIGHT_REDUCTION_ORACLE_RESULTS.json": "fb053f81d019cdc37fc61e7138ff4d93e84d31c4f30685e61c1e75f886a7cf8f"
+  }
+}
