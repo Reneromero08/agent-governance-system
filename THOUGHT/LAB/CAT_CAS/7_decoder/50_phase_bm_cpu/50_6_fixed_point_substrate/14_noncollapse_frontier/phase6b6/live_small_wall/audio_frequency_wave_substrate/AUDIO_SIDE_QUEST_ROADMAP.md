@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F17_PERIOD17_NATIVE_CYCLOTOMIC_MODULE_CLOSURE_WITH_Q_SCALAR_AND_WIDTH_OBSTRUCTION`
-**Roadmap version:** `10.9`
+**Status:** `STRICT_SCOPE_F17_PERIOD17_EXECUTED_NATIVE_K_RECURRENCE_WITH_GROWING_WIDTH_AND_IDENTICAL_CLASSICAL_EXECUTION`
+**Roadmap version:** `11.0`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `bf845d208feb81972f63e5d35bb36596e43d7bc6`
+**Reconciled source head:** `7fa4ec7d5f7d19ed1c6072ecfe8f19a62596f282`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_NATIVE_CYCLOTOMIC_17_STATE_BLOCK_MODULE_HAS_ORDER_AT_MOST17_CAYLEY_HAMILTON_CLOSURE_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS_GROWING_INTEGER_WIDTH`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_SYMPY_EXACT_TWO_PUBLIC_F17_PERIOD17_UNARY_CUBIC_AND_NEAREST_NEIGHBOR_MIXED_CUBIC_PATH_FAMILIES_17_STATE_Q_ZETA17_MODULE_PERIODS1_2_4_8_EXACT_CAYLEY_HAMILTON_AND_SUBTRACTIVE_RESTORATION_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_EXECUTED_NATIVE_Q_ZETA17_CAYLEY_HAMILTON_RECURRENCE_USES_FIXED_18_RESIDENT_MESSAGE_SLOTS_PLUS16_CYCLOTOMIC_COEFFICIENT_REGISTERS_ACROSS_PERIODS1_4_16_64_WITH_EXACT_RESTORATION_AND_REUSE_BUT_GROWING_INTEGER_WIDTH_AND_IDENTICAL_CLASSICAL_EXECUTION`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_Q_ZETA17_CHARACTERISTIC_RECURRENCE_PERIODS1_4_16_64_FIXED18_RESIDENT_MESSAGE_SLOTS_PLUS16_CYCLOTOMIC_COEFFICIENT_REGISTERS_DIRECT_DENSE_BOUNDARY_PARITY_EXACT_SUBTRACTIVE_RESTORATION_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`bf845d208feb81972f63e5d35bb36596e43d7bc6`. The current 103-milestone
+`7fa4ec7d5f7d19ed1c6072ecfe8f19a62596f282`. The current 104-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -2915,6 +2915,79 @@ The live obstruction is:
 THE_NATIVE_Q_ZETA17_COEFFICIENT_ORDER_AT_MOST17_CLOSURE_IS_CERTIFIED_NOT_EXECUTED_DOES_NOT_LIFT_THE_PRIOR_Q_DEPENDENCIES_OR_ESTABLISH_A_SCALAR_Q_ORDER17_RECURRENCE_AND_RETAINS_GROWING_INTEGER_WIDTH_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE
 ```
 
+### Native cyclotomic recurrence is executed with fixed slots, not fixed bits
+
+The successor executes the characteristic recurrence rather than only
+certifying it. Since the whole-operator characteristic has the form
+`p(x) = x q(x)`, with monic degree-16 `q` over
+`K = Q(zeta17)`, each declared positive power is reduced to 16 native-`K`
+coefficients and contracted against the resident basis
+`A seed, ..., A^16 seed`.
+
+```text
+claim
+    BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_EXECUTED_NATIVE_Q_ZETA17_CAYLEY_HAMILTON_RECURRENCE_USES_FIXED_18_RESIDENT_MESSAGE_SLOTS_PLUS16_CYCLOTOMIC_COEFFICIENT_REGISTERS_ACROSS_PERIODS1_4_16_64_WITH_EXACT_RESTORATION_AND_REUSE_BUT_GROWING_INTEGER_WIDTH_AND_IDENTICAL_CLASSICAL_EXECUTION
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+The declared mechanism uses 18 resident message slots plus 16 cyclotomic
+coefficient registers for periods 1, 4, 16, and 64. This is not a fixed
+total footprint. Each restored transaction executes 16 forward and 16
+inverse dense block applications. The 16 retained basis messages occupy
+4,352 integer cells; seed plus basis occupies 4,624 cells. Across the full
+run, the two compiled operators occupy 9,248 integer cells and their
+characteristics occupy 576 cells.
+
+At period 64, recurrence-carrier payload is 2,368,807 bits for PRIMARY and
+2,447,532 bits for REUSE. The direct compact two-message execution uses
+1,221,725 and 1,246,736 bits. Maximum signed widths agree between recurrence
+and direct paths at 2,266 and 2,313 bits. Thus fixed slot count does not
+remove growing exact arithmetic width, and this recurrence is not a storage
+or computational advantage.
+
+The separate no-import oracle independently compiles both public
+descriptors and operators, checks the whole-operator annihilators, advances
+coefficients by sequential multiplication by `x` rather than production
+binary powering, reconstructs all eight boundaries, and reproduces every
+reported exact boundary/carrier/direct payload and width tuple. It also
+restores message and coefficient backing, executes PRIMARY then REUSE on the
+same carrier, and confirms generation and lease two with no reload.
+
+PRIMARY has zero `q(0)` and REUSE has nonzero `q(0)`, but neither has a
+certified cyclotomic-unit or integral-inverse status. An integrally
+reversible rolling window is not established. The identical recurrence is
+available to compact classical software. No CATVM custody, distinct phase
+resource, computational advantage, Small Wall crossing, catalytic
+inference, physical waveform execution, physical bit replacement, or
+unbounded computation is established.
+
+The next phase-owned experiment is:
+
+```text
+EXACT_REVERSIBLE_CYCLOTOMIC_UNIT_HEIGHT_REDUCTION_FOR_NATIVE_K_RECURRENCE_WITH_SCALE_LEDGER_ACCOUNTING
+```
+
+It must test whether lawful cyclotomic-unit or ideal-content normalization
+reduces actual exact carrier height without moving the same growth into a
+scale ledger, rematerialization plan, inverse state, projection, or
+verification baseline. It must retain exact boundary semantics,
+restoration, reuse, and the strongest identical compact classical
+normalization.
+
+The live obstruction is:
+
+```text
+THE_EXECUTED_NATIVE_Q_ZETA17_RECURRENCE_FIXES_RESIDENT_SLOT_AND_REGISTER_COUNTS_IN_THE_TESTED_MECHANISM_BUT_EXACT_INTEGER_WIDTH_GROWS_AN_INTEGRALLY_REVERSIBLE_ROLLING_WINDOW_IS_NOT_ESTABLISHED_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_RECURRENCE
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -2952,7 +3025,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_NATIVE_CYCLOTOMIC_17_STATE_BLOCK_MODULE_HAS_ORDER_AT_MOST17_CAYLEY_HAMILTON_CLOSURE_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS_GROWING_INTEGER_WIDTH
+BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_EXECUTED_NATIVE_Q_ZETA17_CAYLEY_HAMILTON_RECURRENCE_USES_FIXED_18_RESIDENT_MESSAGE_SLOTS_PLUS16_CYCLOTOMIC_COEFFICIENT_REGISTERS_ACROSS_PERIODS1_4_16_64_WITH_EXACT_RESTORATION_AND_REUSE_BUT_GROWING_INTEGER_WIDTH_AND_IDENTICAL_CLASSICAL_EXECUTION
 ```
 
 Not established:

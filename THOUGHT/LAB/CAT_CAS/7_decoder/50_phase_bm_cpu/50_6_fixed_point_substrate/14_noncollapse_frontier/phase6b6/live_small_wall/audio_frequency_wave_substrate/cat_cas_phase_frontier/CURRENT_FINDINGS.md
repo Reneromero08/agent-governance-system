@@ -6005,3 +6005,75 @@ The live obstruction is:
 ```text
 THE_NATIVE_Q_ZETA17_COEFFICIENT_ORDER_AT_MOST17_CLOSURE_IS_CERTIFIED_NOT_EXECUTED_DOES_NOT_LIFT_THE_PRIOR_Q_DEPENDENCIES_OR_ESTABLISH_A_SCALAR_Q_ORDER17_RECURRENCE_AND_RETAINS_GROWING_INTEGER_WIDTH_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE
 ```
+
+## Executed native-K recurrence fixes slots, not exact bit storage
+
+The degree-17 whole-operator characteristic has zero constant coefficient,
+so it factors as `p(x) = x q(x)` with monic degree-16 `q` over
+`K = Q(zeta17)`. Production now executes the reduced recurrence:
+`A^n seed = A (x^(n-1) mod q)(A) seed` for every tested positive period.
+
+```text
+claim
+    BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_EXECUTED_NATIVE_Q_ZETA17_CAYLEY_HAMILTON_RECURRENCE_USES_FIXED_18_RESIDENT_MESSAGE_SLOTS_PLUS16_CYCLOTOMIC_COEFFICIENT_REGISTERS_ACROSS_PERIODS1_4_16_64_WITH_EXACT_RESTORATION_AND_REUSE_BUT_GROWING_INTEGER_WIDTH_AND_IDENTICAL_CLASSICAL_EXECUTION
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+The runtime builds `A seed` through `A^16 seed` once, computes 16
+native-`K` coefficients by binary polynomial powering, and contracts them
+into the final message. It uses 18 resident message slots and 16
+cyclotomic coefficient registers at periods 1, 4, 16, and 64. It then
+subtracts the output, coefficients, basis, and seed in reverse order.
+
+Every transaction performs 16 forward and 16 inverse block applications.
+The retained basis occupies 4,352 integer cells; seed plus basis occupies
+4,624. Both compiled family operators occupy 9,248 integer cells and both
+characteristics occupy 576 cells during the full run. There is no separate
+inverse-operation log or baseline reload.
+
+At period 64:
+
+```text
+                         PRIMARY       REUSE
+recurrence payload       2,368,807     2,447,532 bits
+direct two-message       1,221,725     1,246,736 bits
+maximum signed width         2,266         2,313 bits
+nonzero coefficient regs        15            16
+```
+
+The independent no-import tuple oracle uses sequential multiplication by
+`x` modulo `q`, rather than production binary powering. It matches all
+eight recurrence and direct boundaries and independently reproduces the
+exact boundary payload, carrier peak payload, coefficient width, nonzero
+slot/register, and direct two-message resource tuples.
+
+The oracle also restores message and coefficient backing exactly and runs
+PRIMARY then REUSE on the same carrier. Generation and lease reach two,
+fresh REUSE agrees, and all state returns to zero.
+
+PRIMARY has zero `q(0)`; REUSE has nonzero `q(0)`. Neither factor has a
+certified cyclotomic-unit or integral-inverse status, so an integrally
+reversible rolling window is not established. The identical cyclotomic
+recurrence is available to compact classical software. No phase resource,
+advantage, Small Wall crossing, CATVM custody, physical execution, or
+unbounded computation follows.
+
+The next selected experiment is:
+
+```text
+EXACT_REVERSIBLE_CYCLOTOMIC_UNIT_HEIGHT_REDUCTION_FOR_NATIVE_K_RECURRENCE_WITH_SCALE_LEDGER_ACCOUNTING
+```
+
+The live obstruction is:
+
+```text
+THE_EXECUTED_NATIVE_Q_ZETA17_RECURRENCE_FIXES_RESIDENT_SLOT_AND_REGISTER_COUNTS_IN_THE_TESTED_MECHANISM_BUT_EXACT_INTEGER_WIDTH_GROWS_AN_INTEGRALLY_REVERSIBLE_ROLLING_WINDOW_IS_NOT_ESTABLISHED_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_RECURRENCE
+```
