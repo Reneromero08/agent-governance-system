@@ -11,6 +11,9 @@ verification_level:
 
 restoration_class:
     EXACT_ALGEBRAIC_RESTORATION
+
+scientific_source_commit:
+    1761781e960030f47c49c7d14aa8fdcce0356371
 ```
 
 The accepted scope is limited to fixed public width four with one through four

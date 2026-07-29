@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`251d89cf95ac50edb78a085cfe6e60721e288876`. The canonical per-milestone
+`1761781e960030f47c49c7d14aa8fdcce0356371`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5654,4 +5654,67 @@ The live obstruction is:
 
 ```text
 SINGLE_CUBIC_LATENT_PHASE_QUOTIENT_CLOSES_IN_O_PORTS_SQUARED_FIXED_WIDTH_STATE_WITH_FIXED17_TRACE_BUT_HAS_AN_IDENTICAL_CLASSICAL_RECURRENCE_AND_MULTIPLE_INTERACTING_LATENTS_MAY_REQUIRE_A_GROWING_INTERACTION_SIGNATURE_OR_17_TO_K_TRACE
+```
+
+## Interacting cubic latent variables expose final-trace growth
+
+The next exact F17 diagnostic retains the complete degree-three latent
+signature while public Gaussian/shear Fourier modules consume shared latent
+couplings:
+
+```text
+claim
+    BOUNDED_EXACT_F17_INTERACTING_MULTI_CUBIC_LATENT_SIGNATURE_REMAINS_POLYNOMIAL_WHILE_FINAL_CHARACTER_TRACE_GROWS_AS_17_TO_K_WITH_EXACT_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+At fixed public width four, latent counts one through four require 28, 38,
+52, and 71 resident F17 cells. The complete cubic signatures contain 1, 4,
+10, and 20 coefficients. The generic final trace streams 17, 289, 4,913,
+and 83,521 assignments respectively.
+
+The exact resident signature is polynomial at this fixture ceiling. The
+accepted projection is not compact in latent count: it streams every
+assignment without materializing an assignment table. Accounting now includes
+the integer histogram and canonical cyclotomic payloads, projection
+temporaries, serialized boundaries, public program descriptors, compiler
+mask scans, restoration, and reuse. Python/NumPy/native allocator and
+whole-process peaks remain unbounded.
+
+The separate Python-list reference matches exact boundaries, inverse
+restoration, and unrelated reuse for every declared case. A dense
+ports-two / latents-two oracle retains both latent axes through all public
+modules. Production compiler generation and inverse controls remain
+package-local.
+
+The reverse sequence restores the exact coefficient state on the same array
+backing, retains no inverse history, reloads no baseline, and supports an
+unrelated second program. The mixed cubic signature is preinitialized and is
+not changed by the public Gaussian modules. An identical compact classical
+coefficient recurrence has the same generic final trace.
+
+This result does not establish compact multiple-latent final closure, native
+cubic-interaction updates, arbitrary non-Gaussian composition, CATVM custody,
+a distinct phase resource, computational advantage, Small Wall crossing,
+catalytic inference, physical waveform execution, physical bit replacement,
+or unbounded computation.
+
+The next selected phase-machine experiment is:
+
+```text
+TOPOLOGY_FACTORIZED_INTERACTING_CUBIC_LATENT_GRAPH_WITH_NATIVE_VARIABLE_ELIMINATION_OR_TRANSFER_CLOSURE_AVOIDING_17_TO_K_FINAL_TRACE
+```
+
+The live obstruction is:
+
+```text
+INTERACTING_CUBIC_LATENT_SIGNATURE_REMAINS_POLYNOMIAL_AT_FIXED_PUBLIC_WIDTH_BUT_GENERIC_FINAL_CHARACTER_TRACE_GROWS_AS_17_TO_K_AND_THE_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE_HAS_THE_SAME_COST
 ```

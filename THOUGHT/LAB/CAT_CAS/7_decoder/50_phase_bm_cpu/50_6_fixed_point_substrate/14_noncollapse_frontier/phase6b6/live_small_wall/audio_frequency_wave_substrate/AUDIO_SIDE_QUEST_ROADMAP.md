@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_EXACT_F17_SINGLE_CUBIC_LATENT_PHASE_QUOTIENT_ESTABLISHED`
-**Roadmap version:** `10.4`
+**Status:** `STRICT_SCOPE_F17_INTERACTING_CUBIC_LATENT_TRACE_OBSTRUCTION_ESTABLISHED`
+**Roadmap version:** `10.5`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `251d89cf95ac50edb78a085cfe6e60721e288876`
+**Reconciled source head:** `1761781e960030f47c49c7d14aa8fdcce0356371`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F17_SINGLE_CUBIC_LATENT_CHARACTER_SUM_MULTI_PORT_PHASE_QUOTIENT_WITH_NATIVE_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_NUMPY_EXACT_F17_ONE_UNRESOLVED_CUBIC_LATENT_PUBLIC_PORTS2_4_8_16_32_TWO_PUBLIC_ALGORITHMIC_PROGRAM_FAMILIES_NONZERO_GAUSSIAN_FOURIER_PIVOTS_NONSINGULAR_PUBLIC_GAUSSIAN_FINAL_BLOCK_FIXED17_TERM_LATENT_TRACE_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_F17_INTERACTING_MULTI_CUBIC_LATENT_SIGNATURE_REMAINS_POLYNOMIAL_WHILE_FINAL_CHARACTER_TRACE_GROWS_AS_17_TO_K_WITH_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_NUMPY_EXACT_F17_FIXED_PUBLIC_PORTS4_LATENTS1_2_3_4_PLUS_DENSE_ORACLE_CASE_PORTS2_LATENTS2_TWO_PUBLIC_ALGORITHMIC_PROGRAM_FAMILIES_FULL_MIXED_CUBIC_MONOMIAL_SIGNATURE_NONZERO_GAUSSIAN_FOURIER_PIVOTS_NONSINGULAR_PUBLIC_FINAL_BLOCK_STREAMED_17_TO_K_FINAL_TRACE_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -2513,6 +2513,73 @@ The next obstruction is:
 SINGLE_CUBIC_LATENT_PHASE_QUOTIENT_CLOSES_IN_O_PORTS_SQUARED_FIXED_WIDTH_STATE_WITH_FIXED17_TRACE_BUT_HAS_AN_IDENTICAL_CLASSICAL_RECURRENCE_AND_MULTIPLE_INTERACTING_LATENTS_MAY_REQUIRE_A_GROWING_INTERACTION_SIGNATURE_OR_17_TO_K_TRACE
 ```
 
+### Exact interacting cubic-latent trace diagnostic
+
+The bounded successor stores the complete cubic monomial signature for
+multiple unresolved F17 latent variables while public Gaussian/shear Fourier
+modules act on the shared public interface.
+
+```text
+claim
+    BOUNDED_EXACT_F17_INTERACTING_MULTI_CUBIC_LATENT_SIGNATURE_REMAINS_POLYNOMIAL_WHILE_FINAL_CHARACTER_TRACE_GROWS_AS_17_TO_K_WITH_EXACT_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+At fixed public width four, the measured resident and projection laws are:
+
+```text
+latent variables              1     2      3       4
+resident F17 field cells      28    38     52      71
+cubic coefficient cells        1     4     10      20
+streamed trace assignments    17   289   4913   83521
+```
+
+The resident coefficient signature therefore remains polynomial at the
+declared ceiling, but the generic final character trace grows by a factor of
+17 for every added latent variable. The projector streams every assignment;
+it does not materialize an assignment table. The accounting includes compiler
+mask scans, projection field scratch, integer histogram and cyclotomic
+payloads, serialized programs and boundaries, restoration, and reuse. Python,
+NumPy/native allocator, OS, and whole-process peaks remain outside the bound.
+
+A separate Python-list oracle reproduces the exact recurrence, boundary,
+restoration, and reuse for every declared case. A ports-two / latents-two
+dense check keeps both latent axes through the public program. Compiler
+generation and inverse-failure controls remain package-local.
+
+The exact inverse preserves the same coefficient-array backing, reloads no
+baseline, and permits an unrelated program on the actual restored carrier.
+The cubic interaction signature is preinitialized and unchanged by the public
+Gaussian modules, so this does not establish native cubic-interaction updates
+or arbitrary non-Gaussian composition. The identical exact compact classical
+recurrence has the same generic trace cost.
+
+The next selected phase-machine experiment is:
+
+```text
+TOPOLOGY_FACTORIZED_INTERACTING_CUBIC_LATENT_GRAPH_WITH_NATIVE_VARIABLE_ELIMINATION_OR_TRANSFER_CLOSURE_AVOIDING_17_TO_K_FINAL_TRACE
+```
+
+It must replace generic global enumeration with a topology-derived bounded
+interface closure and retain exact restoration, actual reuse, and the
+identical strongest compact classical transfer recurrence. A success in that
+family will still not by itself establish a distinct phase resource or a
+Small Wall crossing.
+
+The live obstruction is:
+
+```text
+INTERACTING_CUBIC_LATENT_SIGNATURE_REMAINS_POLYNOMIAL_AT_FIXED_PUBLIC_WIDTH_BUT_GENERIC_FINAL_CHARACTER_TRACE_GROWS_AS_17_TO_K_AND_THE_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE_HAS_THE_SAME_COST
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -2550,7 +2617,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F17_SINGLE_CUBIC_LATENT_CHARACTER_SUM_MULTI_PORT_PHASE_QUOTIENT_WITH_NATIVE_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE
+BOUNDED_EXACT_F17_INTERACTING_MULTI_CUBIC_LATENT_SIGNATURE_REMAINS_POLYNOMIAL_WHILE_FINAL_CHARACTER_TRACE_GROWS_AS_17_TO_K_WITH_EXACT_RESTORATION_AND_REUSE
 ```
 
 Not established:
