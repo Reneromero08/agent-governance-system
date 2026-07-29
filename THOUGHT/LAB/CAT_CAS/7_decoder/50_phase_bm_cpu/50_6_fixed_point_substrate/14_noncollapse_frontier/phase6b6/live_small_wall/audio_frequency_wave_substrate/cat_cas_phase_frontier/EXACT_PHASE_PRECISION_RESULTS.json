@@ -127,10 +127,27 @@
     "dense_operator_cells": 0,
     "assignment_expansion_cells": 0
   },
+  "independent_exact_integer_oracle": {
+    "implementation": "four_rotor_necklace_exact_phase_precision_integer_oracle.py",
+    "durable_output": "EXACT_PHASE_PRECISION_INTEGER_ORACLE_RESULTS.json",
+    "representation": "PYTHON_FRACTION_FOUR_COEFFICIENT_ZETA8_BASIS",
+    "production_backend_imported": false,
+    "production_exact_representation_reused": false,
+    "histogram_count": 4845,
+    "necklace_count": 285,
+    "all_depth_precision_tuples_match": true,
+    "reuse_depth23_precision_tuple_matches": true,
+    "all_restorations_exact": true,
+    "fresh_restored_reuse_boundary_equal": true,
+    "dense_operator_cells": 0,
+    "assignment_expansion_cells": 0
+  },
   "independent_review": {
     "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
     "frozen_source_sha256": "ae461c6bb5a59a33312998ef04a64e4d6524fc2ce7ff5ec5a7352ebe9e1cadce",
-    "independent_implementation": "NONPERSISTENT_PYTHON_INTEGER_Z_ZETA8_DYADIC_RECURRENCE",
+    "independent_implementation": "DURABLE_PYTHON_FRACTION_Z_ZETA8_DYADIC_RECURRENCE",
+    "durable_implementation": "four_rotor_necklace_exact_phase_precision_integer_oracle.py",
+    "durable_output": "EXACT_PHASE_PRECISION_INTEGER_ORACLE_RESULTS.json",
     "all_depth_precision_tuples_reproduced": true,
     "both_finite_field_boundaries_reproduced": true,
     "reuse_depth23_reproduced": true,
@@ -163,13 +180,16 @@
   "source_sha256": {
     "four_rotor_necklace_exact_phase_precision.cpp": "ae461c6bb5a59a33312998ef04a64e4d6524fc2ce7ff5ec5a7352ebe9e1cadce",
     "four_rotor_necklace_exact_phase_precision_oracle.py": "a2660805741580da40731487120b88cb4c0f6f81e7da8a592d31a369a3758d87",
-    "qualify_four_rotor_necklace_exact_phase_precision.sh": "f6a0c3e3c4b63336e663e9ab644ab281da74bcd31d5561db58b53e9fc00c9d50"
+    "four_rotor_necklace_exact_phase_precision_integer_oracle.py": "36d7816b9efde9822ec06419a7ae92d79e9ad12591786f249c639780b8409eba",
+    "EXACT_PHASE_PRECISION_INTEGER_ORACLE_RESULTS.json": "1cfce8bb8913b82b7abef61603fb2ca56d2a9b7117bbc2c3d19c8207e614f991",
+    "qualify_four_rotor_necklace_exact_phase_precision.sh": "ff2bfa35c19db9a1637a028e05b805d847bca2685a02b2f5881e5629282729e2"
   },
   "qualification_sha256": {
     "result.json": "c76416ba767303cbee0e398a7fa11af325a1d9676f299d13e38a46fc6f844912",
     "oracle.json": "fd65b260fdab5b0d6f333d846fd5d93e9001ccae21aa65ae130d5c135b2ac80c",
-    "qualification.json": "ba119ce10d3c909e274bd6377deadad32e69f204a7469e3e58ed800810d0f693",
-    "qualification_manifest": "f1c32be4a9979825efbddab3fa6faf56657a8bca4a9faaca12c1e610c4e0c13f"
+    "integer_oracle.json": "1cfce8bb8913b82b7abef61603fb2ca56d2a9b7117bbc2c3d19c8207e614f991",
+    "qualification.json": "c114db5d88c6d2f20ec62e8617321bd7b279fea85dde853225e70d084301c87a",
+    "qualification_manifest": "0e7d070441a2fbb6e0c00e8a8279098bf5593f0508553d5b66f951a7323430cd"
   },
   "not_established": [
     "EXACT_VERIFICATION_OF_THE_COMPLEX128_HERMITIAN_GENERATOR_PACKAGE",

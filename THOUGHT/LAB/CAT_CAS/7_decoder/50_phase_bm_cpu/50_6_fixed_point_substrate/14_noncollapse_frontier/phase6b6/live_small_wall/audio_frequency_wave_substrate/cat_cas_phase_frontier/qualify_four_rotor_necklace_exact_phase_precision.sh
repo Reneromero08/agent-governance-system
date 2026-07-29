@@ -17,12 +17,15 @@ repo=$(git -C "$frontier_dir" rev-parse --show-toplevel)
 python="$repo/.venv/bin/python"
 source_path="$frontier_dir/four_rotor_necklace_exact_phase_precision.cpp"
 oracle_path="$frontier_dir/four_rotor_necklace_exact_phase_precision_oracle.py"
+integer_oracle_path="$frontier_dir/four_rotor_necklace_exact_phase_precision_integer_oracle.py"
+integer_oracle_expected="$frontier_dir/EXACT_PHASE_PRECISION_INTEGER_ORACLE_RESULTS.json"
 binary="$evidence_dir/four_rotor_necklace_exact_phase_precision"
 ubsan_binary="$evidence_dir/four_rotor_necklace_exact_phase_precision_ubsan"
 result="$evidence_dir/result.json"
 replay="$evidence_dir/replay.json"
 ubsan_result="$evidence_dir/ubsan.json"
 oracle_result="$evidence_dir/oracle.json"
+integer_oracle_result="$evidence_dir/integer_oracle.json"
 
 mkdir -p "$evidence_dir"
 export PYTHONPYCACHEPREFIX="$evidence_dir/pycache"
@@ -31,6 +34,7 @@ for tool in g++ jq cmp sha256sum nice taskset; do
   command -v "$tool" >/dev/null
 done
 test -x "$python"
+jq empty "$integer_oracle_expected"
 
 g++ \
   -std=c++20 \
@@ -68,11 +72,16 @@ test ! -s "$evidence_dir/ubsan.stderr"
 cmp "$result" "$replay"
 cmp "$result" "$ubsan_result"
 
-"$python" -m py_compile "$oracle_path"
+"$python" -m py_compile "$oracle_path" "$integer_oracle_path"
 nice -n 10 taskset -c 0-3 \
   "$python" -X dev "$oracle_path" "$result" \
   >"$oracle_result" 2>"$evidence_dir/oracle.stderr"
 test ! -s "$evidence_dir/oracle.stderr"
+nice -n 10 taskset -c 0-3 \
+  "$python" -X dev "$integer_oracle_path" "$result" \
+  >"$integer_oracle_result" 2>"$evidence_dir/integer_oracle.stderr"
+test ! -s "$evidence_dir/integer_oracle.stderr"
+cmp "$integer_oracle_result" "$integer_oracle_expected"
 
 jq -e '
   .result == "PASS"
@@ -183,9 +192,46 @@ jq -e '
   and (.terminal | not)
 ' "$oracle_result" >/dev/null
 
+jq -e '
+  .result == "PASS"
+  and .oracle
+    == "INDEPENDENT_FRACTION_BASED_EXACT_INTEGER_PRECISION_REEXECUTION"
+  and .histogram_count == 4845
+  and .necklace_count == 285
+  and .logical_phase_cells == 570
+  and .tested_depths == [1,2,4,8,16,32,64]
+  and [.depth_runs[].maximum_numerator_bits]
+    == [1,1,1,4,7,15,31]
+  and [.depth_runs[].maximum_denominator_power]
+    == [1,2,3,5,9,17,33]
+  and [.depth_runs[].forward_logical_payload_bits]
+    == [2854,2864,2898,3188,4339,14645,57166]
+  and [.depth_runs[].forward_elementary_operations]
+    == [1709,3418,6836,13672,27344,54688,109376]
+  and ([.depth_runs[].exact_algebraic_restoration] | all)
+  and ([.depth_runs[].outer_list_backing_preserved] | all)
+  and .primary.maximum_numerator_bits == 31
+  and .primary.maximum_denominator_power == 33
+  and .primary.forward_logical_payload_bits == 57166
+  and .reuse.maximum_numerator_bits == 10
+  and .reuse.maximum_denominator_power == 12
+  and .reuse.forward_logical_payload_bits == 7880
+  and .fresh_restored_reuse_boundary_equal
+  and .all_precision_tuples_match
+  and .all_restorations_exact
+  and (.production_backend_imported | not)
+  and (.production_exact_representation_reused | not)
+  and .independent_representation
+    == "PYTHON_FRACTION_FOUR_COEFFICIENT_ZETA8_BASIS"
+  and .dense_operator_cells == 0
+  and .assignment_expansion_cells == 0
+  and .matched_compact_classical_recurrence_identical
+  and (.terminal | not)
+' "$integer_oracle_result" >/dev/null
+
 if rg -n \
   'witness_list|candidate_set|truth_table|dense_operator\[' \
-  "$source_path" "$oracle_path"
+  "$source_path" "$oracle_path" "$integer_oracle_path"
 then
   echo "exact precision path contains forbidden extensional state" >&2
   exit 1
@@ -193,7 +239,8 @@ fi
 
 jq -n \
   --slurpfile accepted "$result" \
-  --slurpfile oracle "$oracle_result" '
+  --slurpfile oracle "$oracle_result" \
+  --slurpfile integer_oracle "$integer_oracle_result" '
   {
     result: "PASS",
     claim:
@@ -204,6 +251,7 @@ jq -n \
     restoration_classification: "EXACT_ALGEBRAIC_RESTORATION",
     accepted: $accepted[0],
     independent_oracle: $oracle[0],
+    independent_exact_integer_oracle: $integer_oracle[0],
     fixed_logical_cells_hide_growing_exact_coefficient_width: true,
     strongest_compact_classical_recurrence_identical: true,
     distinct_phase_resource_established: false,
@@ -216,11 +264,14 @@ jq -n \
 sha256sum \
   "$source_path" \
   "$oracle_path" \
+  "$integer_oracle_path" \
+  "$integer_oracle_expected" \
   "$frontier_dir/qualify_four_rotor_necklace_exact_phase_precision.sh" \
   "$binary" \
   "$ubsan_binary" \
   "$result" \
   "$oracle_result" \
+  "$integer_oracle_result" \
   "$evidence_dir/qualification.json" \
   >"$evidence_dir/SHA256SUMS"
 
