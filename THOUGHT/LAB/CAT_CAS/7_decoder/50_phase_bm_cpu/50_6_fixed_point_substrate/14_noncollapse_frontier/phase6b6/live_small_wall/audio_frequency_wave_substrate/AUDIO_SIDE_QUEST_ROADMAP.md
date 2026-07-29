@@ -1,14 +1,14 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_ROOT_LOCKED_PHASE_VM_BISIMULATION_OBSTRUCTION_ESTABLISHED`
-**Roadmap version:** `9.9`
+**Status:** `SOURCE_LOCAL_TWO_SHARED_LATENT_PORT_CATVM_GENERALIZATION_ESTABLISHED`
+**Roadmap version:** `10.0`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `4a20a697cf074dc5ecaaed52bdfd293fe1be5822`
+**Reconciled source head:** `ac3447c2fa85caee570845ee8a2d79dbb17cce99`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_ROOT_LOCKED_PHASE_VM_OPERATION_TRACE_CLASSICAL_BISIMULATION_WITH_NUMERICAL_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_Q3_ROOT_LOCKED_STREAMING_PHASE_VM_SIX_OPCODES_NINE_CANONICAL_LEGAL_WIRING_VARIANTS_ALL_243_Q3_STATES_AND_TWO_EIGHT_REGISTER_CHAINED_PROGRAMS_SOFTWARE_ONLY`
-**Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
+**Current highest milestone:** `CATVM_ENFORCED_OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER`
+**Current claim ceiling:** `FIXED_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_1140_COMPLEX_FOUR_CELL_TWO_PORT_FIBER_FIXED_PRIMARY_AND_REUSE_LINUX_SAME_UID_ONE_SEQPACKET_CONNECTION_COMPLEX128_SOFTWARE_ONLY`
+**Current evidence authority:** `CLEANROOM_ADVERSARIAL_VERIFICATION`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`ee022a18e7f5b11c485dd4f335cdd02c77a5f161`. The current 89-milestone
+`ac3447c2fa85caee570845ee8a2d79dbb17cce99`. The current 94-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -2198,12 +2198,64 @@ root-locked subdomain the matched symbolic state is additionally smaller.
 This does not adjudicate physical analog resources, external oracles,
 nondeterministic resources, or unbounded-precision models.
 
-No CATVM custody, distinct phase resource, computational advantage, Small
-Wall crossing, physical waveform execution, physical bit replacement, or
-unbounded computation is established. The next obstruction is:
+## 6H. Two full-tuple-bound shared latent ports
+
+The one-port 570-complex necklace recurrence is generalized to one joint
+four-cell fiber per necklace, indexed by two binary latent coordinates. Local
+modules consume one typed port. Two controlled-phase modules consume both
+ports and create a nonfactorable joint fiber from the declared product input.
+The ports remain unprojected; only the final seven-bin collision-norm boundary
+is released.
 
 ```text
-FINITE_DETERMINISTIC_SOFTWARE_PHASE_BACKENDS_REMAIN_CLASSICALLY_IDENTITY_SIMULABLE_AND_THE_ROOT_LOCKED_VM_ADMITS_A_STRICTLY_SMALLER_Q3_RECURRENCE
+OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+CATVM_ENFORCED_OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+classification                    INDEPENDENTLY_VERIFIED_SOURCE_LOCAL
+verification                      CLEANROOM_ADVERSARIAL_VERIFICATION
+restoration                       NUMERICAL_PHYSICAL_STATE_RESTORATION
+necklaces                         285
+latent cells per necklace         4
+resident complex cells            1,140
+primary / reuse modules           6 / 4
+joint consumers                   2
+primary restoration error         8.623e-15
+reuse restoration error           1.702e-14
+fresh/restored reuse boundary     8.438e-15
+```
+
+An independent small algebra oracle confirms that the product determinant is
+zero, the controlled phase is nonfactorable, a local X update and the joint
+update do not commute, and the joint inverse restores. Same-generator
+identity and one declared factorizable diagonal replacement change the final
+boundary by `0.004308` and `0.009597`; separate strength perturbations show
+that both fixed joint consumers affect the final boundary. This is not an
+exhaustive lower bound against every separable program.
+
+The Linux same-UID Unix-seqpacket CATVM binds every primary and reuse module
+to current `(id,type,owner,generation,lease)` tuples for both ports. Wrong
+type, owner, lease, generation, duplicate-port, and undermerge descriptors
+are denied before carrier mutation. The staged response contains only a
+non-content custody receipt. Final boundary release follows inverse execution
+and restoration verification. Disconnect and authorized STOP roll back the
+resident stage; denied STOP does not terminate it. The same backing is then
+consumed by the unrelated reuse program at generation two without baseline
+reload.
+
+Payload accounting is scoped: the carrier is 18,240 bytes, persistent
+baseline plus carrier is 36,480 bytes, and the declared streamed
+generator/extraction scratch is 18,240 bytes. Plan, program, evidence,
+allocator, native-library, OS, and total process peak are not bounded.
+
+The strongest matched classical method is the identical 1,140-complex
+recurrence. That comparison is package-local identity reexecution rather
+than separate reference parity. No distinct phase resource, advantage,
+general inference, Small Wall crossing, physical execution, physical bit
+replacement, or unbounded computation is established.
+
+The next obstruction is:
+
+```text
+TWO_FULL_TUPLE_BOUND_SHARED_PORTS_AND_NONSEPARABLE_JOINT_CONSUMERS_GENERALIZE_RELATIONAL_GEOMETRY_BUT_THE_FIXED_1140_COMPLEX_RECURRENCE_REMAINS_AN_IDENTICAL_COMPACT_CLASSICAL_SOFTWARE_MODEL
 ```
 
 ## 7. No-Smuggle and Non-Collapse Laws
@@ -2271,6 +2323,8 @@ root or kernel secrecy
 microarchitectural secrecy
 compact carrier or phase-history recursion
 arbitrary interface width or relation arity
+generic two-port phase relation algebra or scheduler
+lower bound against all separable replacements
 CATVM enforcement for the general affine operator
 general CATVM relational-DAG enforcement
 general Boolean ANF elimination

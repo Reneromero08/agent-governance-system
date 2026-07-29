@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`ee022a18e7f5b11c485dd4f335cdd02c77a5f161`. The canonical per-milestone
+`ac3447c2fa85caee570845ee8a2d79dbb17cce99`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5330,4 +5330,66 @@ unbounded computation is established. The next obstruction is:
 
 ```text
 FINITE_DETERMINISTIC_SOFTWARE_PHASE_BACKENDS_REMAIN_CLASSICALLY_IDENTITY_SIMULABLE_AND_THE_ROOT_LOCKED_VM_ADMITS_A_STRICTLY_SMALLER_Q3_RECURRENCE
+```
+
+## Two shared latent ports with one joint four-cell fiber
+
+Two separately typed binary latent ports now inhabit one four-complex fiber
+on each of the 285 exchange-symmetric rotation necklaces. The fixed primary
+program contains four local and two controlled-phase joint modules. Both
+ports remain resident and unprojected until the final seven-bin norm
+boundary.
+
+```text
+OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+CATVM_ENFORCED_OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+classification                     INDEPENDENTLY_VERIFIED_SOURCE_LOCAL
+verification level                 CLEANROOM_ADVERSARIAL_VERIFICATION
+restoration                        NUMERICAL_PHYSICAL_STATE_RESTORATION
+resident complex cells             1,140
+primary / reuse modules            6 / 4
+primary restoration error          8.6226248845102124e-15
+reuse restoration error            1.7019059468819284e-14
+fresh/restored reuse boundary      8.4376949871511897e-15
+identity joint boundary effect     0.004308395186971431
+separable joint boundary effect    0.0095970301579075268
+```
+
+The direct product fiber has zero determinant within `9.48e-22`. One joint
+controlled phase raises the maximum per-necklace determinant to
+`5.758e-6`, and its inverse restores within `2.889e-17`. An independent
+small algebra oracle confirms nonfactorability, local/joint noncommutation,
+and inverse restoration without importing the production recurrence.
+Identity and one explicitly factorizable diagonal surrogate retain every
+generator stage and still change the final boundary. Strength-only mutations
+of each fixed joint consumer separately change that boundary. The controls
+do not prove a lower bound against all separable programs.
+
+CATVM binds every fixed primary and reuse module to exact current
+`(id,type,owner,generation,lease)` records for both ports. It rejects stale
+generation, wrong lease/type/owner, duplicate-port, and undermerge mutations
+before carrier work. A staged response is receipt-only. The service releases
+the final boundary after inverse execution, restoration verification, and
+atomic generation advancement. Disconnect and authorized staged STOP restore
+before exit or acknowledgement; denied staged STOP leaves the transaction
+live. The actual restored backing runs the unrelated reuse program at
+generation two with no baseline reload.
+
+Resource figures cover declared complex-vector payloads and wire ABI only:
+18,240 bytes for the carrier, 36,480 bytes for persistent baseline plus
+carrier, 18,240 bytes of declared streamed generator/extraction scratch, a
+32-byte request, and a 116-byte response. They exclude plan and program
+objects, the harness, evidence, allocator, native libraries, OS state, and
+whole-process peak.
+
+The compact classical comparison reruns the identical 1,140-complex
+recurrence and is classified `PACKAGE_SELF_REVIEW`, not separate reference
+parity. No distinct phase resource, computational advantage, general
+catalytic inference, Small Wall crossing, physical waveform execution,
+physical bit replacement, or unbounded computation is established.
+
+The next obstruction is:
+
+```text
+TWO_FULL_TUPLE_BOUND_SHARED_PORTS_AND_NONSEPARABLE_JOINT_CONSUMERS_GENERALIZE_RELATIONAL_GEOMETRY_BUT_THE_FIXED_1140_COMPLEX_RECURRENCE_REMAINS_AN_IDENTICAL_COMPACT_CLASSICAL_SOFTWARE_MODEL
 ```
