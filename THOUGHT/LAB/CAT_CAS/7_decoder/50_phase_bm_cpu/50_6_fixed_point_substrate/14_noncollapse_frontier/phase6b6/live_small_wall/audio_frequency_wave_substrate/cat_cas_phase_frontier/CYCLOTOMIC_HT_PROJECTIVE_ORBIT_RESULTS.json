@@ -1,0 +1,166 @@
+{
+  "schema_version": "cyclotomic_ht_projective_orbit_obstruction.v1",
+  "source_base_head": "a9cc15de049e3071e4e4f6fec1b6a0db75fd8a8b",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "milestone": "BOUNDED_EXACT_HT_ANALYTIC_INFINITE_PROJECTIVE_ORBIT_REJECTS_FIXED_FINITE_STATE_LOSSLESS_PHASE_QUOTIENT_WITH_EXACT_RESTORATION_AND_REUSE",
+  "classification": "INDEPENDENTLY_VERIFIED_TRANSFERABLE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "execution_claim_ceiling": "LINUX_X86_64_DIRECT_PROCESS_TWO_CELL_Z_ZETA8_DYADIC_ANALYTIC_HT_ORBIT_DEPTHS1_2_4_8_16_32_64_REUSE_DEPTH23_SOFTWARE_ONLY",
+  "transferable_theorem_ceiling": "NO_INJECTIVE_ENCODING_OF_THE_COMPLETE_ANALYTIC_HT_POWER_ORBIT_OF_E0_INTO_ANY_FIXED_FINITE_STATE_SET",
+  "gate_law": {
+    "unitary": "U_EQUALS_H_T",
+    "phase_gate": "T_EQUALS_DIAG_1_ZETA8",
+    "initial_state": "E0",
+    "logical_phase_cells": 2,
+    "coefficient_ring": "Z_ZETA8_DYADIC"
+  },
+  "theorem_certificate": {
+    "eigenvalue_ratio_symbol": "q",
+    "q_plus_inverse_q": {
+      "rational": -1,
+      "sqrt2_numerator": -1,
+      "sqrt2_denominator": 2
+    },
+    "quadratic_integer_ring": "Z_SQRT2",
+    "q_plus_inverse_q_is_algebraic_integer": false,
+    "root_of_unity_would_require_algebraic_integer_sum": true,
+    "eigenvalue_ratio_is_root_of_unity": false,
+    "initial_basis_vector_is_cyclic": true,
+    "analytic_projective_orbit_infinite": true,
+    "fixed_finite_state_lossless_quotient_possible": false
+  },
+  "tested_depths": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "maximum_numerator_bits": [
+    1,
+    1,
+    2,
+    3,
+    5,
+    9,
+    17
+  ],
+  "maximum_denominator_power": [
+    1,
+    1,
+    2,
+    3,
+    5,
+    9,
+    17
+  ],
+  "logical_payload_bits": [
+    14,
+    14,
+    21,
+    26,
+    41,
+    73,
+    141
+  ],
+  "accepted_path": {
+    "primary_depth": 64,
+    "primary_star_norm_exactly_one": true,
+    "primary_exact_algebraic_restoration": true,
+    "reuse_program": "H_THEN_T_CUBED",
+    "reuse_depth": 23,
+    "reuse_exact_algebraic_restoration": true,
+    "fresh_restored_reuse_boundary_equal": true,
+    "same_outer_carrier_backing": true,
+    "restoration_generation_sequence": [
+      1,
+      2
+    ],
+    "baseline_reload_bytes": 0
+  },
+  "controls": {
+    "missing_inverse_restored": false,
+    "wrong_inverse_restored": false,
+    "reordered_inverse_restored": false,
+    "phase_disabled_boundary_differs": true,
+    "demonstrated_nonzero_kernel_element_integer": 697,
+    "analytic_alias_pair_distinct": true,
+    "alias_pair_equal_mod_17_and_41": true,
+    "alias_pair_is_normalized_transaction": false,
+    "alias_pair_used_to_prove_theorem": false
+  },
+  "resource_law": {
+    "logical_phase_cells": 2,
+    "bounded_executor_signed64_integer_slots": 8,
+    "phase_object_bytes": 40,
+    "carrier_inline_bytes": 80,
+    "restoration_verification_baseline_inline_bytes": 80,
+    "retained_boundary_inline_bytes": 80,
+    "transaction_run_record_bytes": 120,
+    "retained_module_tape_bytes": 0,
+    "retained_inverse_history_bytes": 0,
+    "public_program_descriptor_bytes": 16,
+    "verification_depth_run_array_bytes": 840,
+    "compiler_binary_allocator_and_whole_process_excluded": true,
+    "fixed_bit_payload_established": false,
+    "whole_process_rss_claimed": false
+  },
+  "matched_baseline": {
+    "strongest_compact_classical": "IDENTICAL_EXACT_TWO_CELL_RECURRENCE",
+    "boundary_error": 0,
+    "distinct_phase_resource_established": false,
+    "computational_advantage_established": false,
+    "small_wall_crossing_established": false
+  },
+  "independent_oracle": {
+    "implementation": "INDEPENDENT_FRACTION_HT_RECURRENCE_AND_QUADRATIC_INTEGER_CERTIFICATE",
+    "production_backend_imported": false,
+    "all_boundaries_match": true,
+    "all_star_norms_exactly_one": true,
+    "all_restorations_exact": true,
+    "sampled_projective_states_distinct": true,
+    "fresh_restored_reuse_boundary_equal": true,
+    "inverse_controls_pass": true
+  },
+  "independent_review": {
+    "classification": "INDEPENDENTLY_VERIFIED_TRANSFERABLE",
+    "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+    "rejecting_defect_found": false,
+    "execution_scope": "BOUNDED_DEPTH64_SIGNED64_EXECUTOR",
+    "theorem_scope": "EXACT_HT_E0_ANALYTIC_PROJECTIVE_ORBIT",
+    "other_gate_pairs_or_starting_vectors_covered": false,
+    "finite_field_alias_control_is_only_illustrative": true
+  },
+  "source_sha256": {
+    "cyclotomic_ht_projective_orbit_obstruction.cpp": "fbbffe1ea227dec8bb2b6546cac7fd1f767599ad9be37fc33b44ef3c44b9d10d",
+    "cyclotomic_ht_projective_orbit_oracle.py": "a6e0009d568f154d99eb91792703be2bdecaa87a8570d35dca22c1d88c197d0a",
+    "qualify_cyclotomic_ht_projective_orbit_obstruction.sh": "a522ec0aa7571e397c6961030028a2dbf2e8d6b181f3b311d5893b9962e00989"
+  },
+  "qualification_sha256": {
+    "result.json": "dee32340bfdc10a6739d374530c986c9593f7df47fbb26657f95c83e10977fa1",
+    "oracle.json": "b6209f640a8b2619439369014473db1b8b95c4731449bc7d7a281911d4e1f80a",
+    "qualification.json": "8855047e961fcde3de1f3c39163b632be8613995d3be307b37d7fbf097aa66a8",
+    "qualification_manifest": "6140ff4fd5ef2e69dfa118b6ac253c08f11f67aec9e19a4ce01d6347f756c7a9"
+  },
+  "not_ruled_out": [
+    "UNBOUNDED_SYMBOLIC_STATE",
+    "FIXED_DIMENSION_CONTINUOUS_STATE_WITH_UNBOUNDED_PRECISION",
+    "CONTROLLED_APPROXIMATION_WITH_EXPLICIT_ERROR_LAW",
+    "LOSSY_OR_OUTPUT_SPECIFIC_QUOTIENTS",
+    "OTHER_PHASE_MECHANISMS"
+  ],
+  "not_established": [
+    "UNBOUNDED_COMPUTATION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "GENERAL_CATALYTIC_INFERENCE",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT_WITH_PI"
+  ],
+  "next_obstruction": "LOSSLESS_INFINITE_HT_PROJECTIVE_ORBIT_REQUIRES_UNBOUNDED_SYMBOLIC_INFORMATION_OR_NONFINITE_CONTINUOUS_STATE_WHILE_THE_EXACT_COMPACT_CLASSICAL_RECURRENCE_REMAINS_IDENTICAL"
+}
