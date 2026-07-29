@@ -30,9 +30,10 @@ restoration.
 
 No distinct phase resource, computational advantage, Small Wall crossing,
 physical waveform execution, or replacement of physical bits with pi has
-been established. New mechanism development is stopped by user direction.
-The completed necklace observation work must not be restarted, and its held
-successor must not execute without explicit user resume authority.
+been established. The explicit verification/resume goal superseded the
+earlier development stop. The completed public-observation package was not
+restarted; the required shared-latent successor and its distinct owner-binding
+repair are recorded below.
 
 ## Active construction
 
@@ -4847,18 +4848,93 @@ is not a Bayesian posterior, ground-truth accuracy result, general catalytic
 inference, or learning result.
 
 The identical compact classical complex recurrence reproduces the boundary
-exactly. No advantage or Small Wall crossing is established. This package is
-`SOURCE_AUDITED_PACKAGE_LOCAL`; it has not received clean-room adversarial
-verification.
+exactly. No advantage or Small Wall crossing is established.
 
-New mechanism development is stopped. The unstarted successor held without
-execution is:
+## Clean-room four-rotor, necklace, and CATVM gate
+
+Independent oracles reconstructed the immediate bundle from exact source head
+`65be0046ae02c79ab8c3b3356ef68d891de19e53` without calling the production
+projection. The public typed score matched exactly across alternate
+observations, strengths, orders, and a different valid program family.
+Global rotation, streamed momentum, the 285-cell exchange-symmetric necklace,
+bosonic Givens closure, the Hermitian generator, coherence diagnostic, and
+public observation result pass at their registry ceilings.
+
+The original staged bosonic CATVM aggregate is `REJECTED_SOURCE_DEFECT`:
+disconnect after `BEGIN` exited without inverse-restoring the borrowed
+carrier. Its hidden 4,845-cell occupation custody, denied projection, normal
+path response ordering, numerical restoration, and reuse are preserved.
+A distinct mode-locked successor restores on disconnect, separates snapshot
+and in-place modes, removes content-derived receipts, and passed independent
+wrong/missing/reordered inverse attacks:
 
 ```text
-COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+classification        INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+restoration           NUMERICAL_PHYSICAL_STATE_RESTORATION
+primary error         8.446068614196007e-15
+reuse error           9.27279516256988e-15
+fresh/reuse delta     6.161737786669619e-15
 ```
 
-If explicitly resumed, it must keep a shared observation interface unresolved
-across multiple noncommuting relation modules and close it without
-relation-table or assignment expansion. Until then it is not an active
-experiment, result, or scheduled continuation.
+The generator's strongest compact classical recurrence is identical.
+Coherence changes the tested boundary by `0.039045417878374566`, but that
+causal dependence is not a resource absent from compact classical software.
+Durable evidence is in
+`FOUR_ROTOR_NECKLACE_CATVM_CLEANROOM_VERIFICATION.json`.
+
+## Shared unresolved latent port and owner-bound CATVM repair
+
+The resumed successor replaces public scalar substitution with one resident
+two-cell coherent latent fiber jointly carried by all 285 necklace cells.
+Four feature-controlled `Z/X/Y/X` consumers share it, with Hermitian necklace
+updates interleaved. A coupling-only clean-room commutator has weighted state
+distance `0.4080881046853783`, so the shared consumers genuinely
+noncommute. The 570-complex joint carrier is never projected before the final
+seven-bin boundary, and no relation table, assignment list, occupation
+expansion, or dense 285-by-285 operator is materialized.
+
+The first implementation's full custody claim is:
+
+```text
+REJECTED_SOURCE_DEFECT
+```
+
+`LatentModule.owner` was merely required to be nonzero. Four distinct wrong
+nonzero owners were accepted with zero boundary and restored-state delta.
+Outer lease/generation custody, hidden-stage behavior, numerical restoration,
+disconnect cleanup, reuse, and the shared-carrier mechanics remain valid
+subclaims.
+
+A distinct repair checks all four primary and three reuse consumers against
+static port owner `0x4c415431` before a carrier operation. CATVM separately
+enforces the exact nonce-derived outer lease and restoration generation.
+Independent attacks before and during residency denied wrong module owner,
+outer lease, and generation with no boundary. Attacked and clean final and
+reuse boundaries agree exactly.
+
+```text
+OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+CATVM_ENFORCED_OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+classification        INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+restoration           NUMERICAL_PHYSICAL_STATE_RESTORATION
+primary error         6.743856375997441e-15
+reuse error           1.0937531519571031e-14
+fresh/reuse delta     5.9396931817445875e-15
+```
+
+The exact ceiling is Linux x86-64, same UID, one accepted Unix seqpacket
+connection, fixed grid-17/four exchange-symmetric rotation-invariant rotors,
+285 necklaces, 570 complex cells, a fixed four-module primary and
+three-module reuse program, static owner binding, seven-bin boundary, and
+complex128 software. The static tag is not cryptographic or a dynamic
+program-owner interface.
+
+The strongest compact classical implementation remains the identical
+570-complex recurrence. No distinct phase resource, advantage, Small Wall
+crossing, general catalytic inference, physical waveform execution, physical
+bit replacement, or unbounded computation is established. The exact next
+obstruction is:
+
+```text
+PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_FIXED_TWO_CELL_570_COMPLEX_RECURRENCE
+```

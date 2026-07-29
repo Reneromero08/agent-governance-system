@@ -1,15 +1,15 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `CLAIM_AUTHORITY_RECONCILED_DEVELOPMENT_STOPPED`
-**Roadmap version:** `9.0`
+**Status:** `CLEANROOM_GATE_REPAIRED_SHARED_LATENT_SUCCESSOR_ESTABLISHED`
+**Roadmap version:** `9.1`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
 **Reconciled source head:** `65be0046ae02c79ab8c3b3356ef68d891de19e53`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_AND_CATALYTIC_HYPOTHESIS_SCORING_ON_COMPACT_NECKLACE_PHASE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `DIRECT_PROCESS_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_GRID17_FOUR_ROTOR_SIX_TYPED_OPEN_PUBLIC_OBSERVATION_PORTS_COMPLEX128_SOFTWARE_ONLY`
-**Current evidence authority:** `SOURCE_AUDITED_PACKAGE_LOCAL`
-**New mechanism development:** `STOPPED_BY_USER`
+**Current highest milestone:** `CATVM_ENFORCED_OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER`
+**Current claim ceiling:** `LINUX_X86_64_SAME_UID_ONE_UNIX_SEQPACKET_CONNECTION_NONCE_DERIVED_OUTER_LEASE_EXACT_GENERATION_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_570_COMPLEX_CELLS_TWO_CELL_LATENT_FIBER_FIXED_FOUR_MODULE_PRIMARY_THREE_MODULE_REUSE_STATIC_OWNER_0X4C415431_SEVEN_BIN_BOUNDARY_COMPLEX128_SOFTWARE_ONLY`
+**Current evidence authority:** `CLEANROOM_ADVERSARIAL_VERIFICATION`
+**New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`65be0046ae02c79ab8c3b3356ef68d891de19e53`. The complete 77-milestone
+`65be0046ae02c79ab8c3b3356ef68d891de19e53`. The current 82-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -135,13 +135,22 @@ physical replacement of bits with pi, general holographic relational
 computation, fixed-rank unbounded-depth non-affine closure, or unlimited
 catalytic computation has been established.
 
-New mechanism development is stopped. The already completed
-`COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER`
-work at `65be0046` must not be restarted. The later
-`COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER`
-successor is held, not selected for execution. Resume requires an explicit
-user instruction after this clean reconciliation checkpoint, with a
-verification level and restoration class recorded for every new result.
+The immediate four-rotor/necklace/CATVM bundle was independently reconstructed
+at exact source head `65be0046`. The original staged bosonic CATVM aggregate
+is `REJECTED_SOURCE_DEFECT` because disconnect after `BEGIN` did not restore
+the borrowed carrier. A distinct mode-locked successor repairs disconnect
+cleanup and response ordering and is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE`.
+
+The resumed shared-latent successor exposed a second defect: the predecessor
+accepted any nonzero module owner. Its resident 570-complex carrier,
+noncommuting consumers, hidden-stage ordering, numerical restoration, and
+reuse remain valid subclaims, but the full owner-custody claim is
+`REJECTED_SOURCE_DEFECT`. A distinct owner-bound successor checks all four
+primary and three reuse consumers against static port owner `0x4c415431`,
+while CATVM independently enforces the exact nonce-derived outer lease and
+generation. That repair is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with
+`NUMERICAL_PHYSICAL_STATE_RESTORATION`.
 
 ## 1. Standing Mission
 
@@ -563,9 +572,9 @@ select the next experiment or architectural move
 continue without waiting for a new user prompt
 ```
 
-That default loop is suspended by the current user-directed development stop.
-The reconciliation checkpoint is the only selected work; afterward the agent
-must return without starting a mechanism.
+The explicit verification/resume goal reactivated this loop. The clean-room
+gate, defect-preserving repairs, and owner-bound shared-latent successor are
+now the current checkpoint.
 
 The agent may not reinterpret a newly satisfied milestone as lane completion. `MISSION_COMPLETE`, `FINAL`, and equivalent labels are owner-controlled.
 
@@ -591,9 +600,7 @@ update roadmap authority files
 select the next work from accumulated evidence
 ```
 
-The operating loop below is suspended by the current user-directed
-development stop. It becomes active again only after the registry's resume
-condition is satisfied:
+The operating loop below is active under the explicit resume goal:
 
 ```text
 explore
@@ -614,14 +621,14 @@ Verification follows a substantive result. One focused review is normally suffic
 Current execution state:
 
 ```text
-NEW_MECHANISM_DEVELOPMENT    STOPPED_BY_USER
+NEW_MECHANISM_DEVELOPMENT    RESUMED_AFTER_CLEANROOM_GATE
 SCIENTIFIC_SOURCE_HEAD       65be0046ae02c79ab8c3b3356ef68d891de19e53
-HELD_SUCCESSOR               COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
-RESUME_AUTHORITY             EXPLICIT_USER_INSTRUCTION_ONLY
+REJECTED_SUCCESSOR           CATVM_ENFORCED_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+REPAIRED_SUCCESSOR           CATVM_ENFORCED_OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+NEXT_OBSTRUCTION             IDENTICAL_570_COMPLEX_COMPACT_CLASSICAL_RECURRENCE
 ```
 
-All successor language below this point is historical route context, not
-authorization to start a mechanism. The last pre-stop route was:
+The earlier route remains historical context:
 
 ```text
 GENERAL_RETAIN_ALL_AFFINE_DAG_CUSTODY_COMPILATION     ESTABLISHED_EXACT_15_NODE
@@ -1747,19 +1754,46 @@ neither general catalytic inference nor a calibrated posterior or accuracy
 claim. The identical compact classical complex recurrence matches exactly,
 so no computational leverage or Small Wall crossing is established.
 
-The unstarted successor is held:
+The resumed predecessor implemented one shared unresolved two-cell latent
+fiber over all 285 necklaces and four genuinely noncommuting `Z/X/Y/X`
+consumers. It retained 570 complex cells, projected only the final seven-bin
+boundary, restored the same backing allocation, and reused it. Independent
+review nevertheless rejected its full custody claim:
 
 ```text
-COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+REJECTED_SOURCE_DEFECT
+LATENT_MODULE_OWNER_ACCEPTED_ANY_NONZERO_VALUE
 ```
 
-It must replace public scalar substitution with an unresolved shared
-observation interface composed across multiple noncommuting relation modules,
-while preserving compactness, final-only projection, actual restoration,
-reuse, and the strongest compact classical comparison.
+Four distinct wrong nonzero module owners produced exactly the same boundary
+and restored state. The controller's prior wrong-owner test covered only the
+outer transaction lease. The carrier, noncommutation, no-expansion,
+final-response ordering, restoration, and reuse subclaims remain valid.
 
-No implementation, fixture expansion, CATVM wrapper, or benchmark for that
-successor is authorized while the development stop remains in force.
+A distinct repair now binds every fixed primary and reuse consumer to static
+port owner `0x4c415431` before a carrier operation. CATVM separately checks
+the nonce-derived outer lease and exact restoration generation. Independent
+pre-stage and resident-stage attacks denied wrong module owner, lease, and
+generation with zero boundary release; attacked and clean final/reuse
+boundaries agree exactly.
+
+```text
+OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+CATVM_ENFORCED_OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+verification       INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+restoration         NUMERICAL_PHYSICAL_STATE_RESTORATION
+primary error       6.744e-15
+reuse error         1.094e-14
+```
+
+The strongest compact classical method is still the identical 570-complex
+recurrence. This is a machine-law and unresolved-port advance, not a distinct
+phase resource, advantage, Small Wall crossing, general inference result, or
+physical waveform execution. The next obstruction is therefore:
+
+```text
+PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_FIXED_TWO_CELL_570_COMPLEX_RECURRENCE
+```
 
 ## 7. No-Smuggle and Non-Collapse Laws
 
@@ -1843,8 +1877,7 @@ A locally controlled verifier is evidence discipline, not official external acce
 
 The lane remains nonterminal until the user determines that unlimited
 catalytic computation with phase has been achieved or explicitly closes the
-lane. Nonterminal mission state does not override the current user-directed
-stop on new mechanism development.
+lane.
 
 ```text
 external authority boundary -> do not cross it; continue every authorized route
@@ -1859,10 +1892,9 @@ change, merge, release, payment, or submission without ending the compute
 goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
-Hard runtime or context exhaustion is not scientific completion. While the
-development stop is active, preserve only the reconciliation checkpoint and
-held unstarted successor; do not mark or execute an autonomous mechanism
-continuation.
+Hard runtime or context exhaustion is not scientific completion. Preserve
+this verified repair checkpoint and resume from the exact compact-classical
+identity obstruction rather than repeating the fixed shared-latent fixture.
 
 ## 10. Roadmap Maintenance
 

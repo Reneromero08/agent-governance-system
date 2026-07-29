@@ -1,0 +1,152 @@
+{
+  "schema": "four_rotor_necklace_catvm_cleanroom_verification.v1",
+  "scientific_source_head": "65be0046ae02c79ab8c3b3356ef68d891de19e53",
+  "verification_level": "CLEANROOM_ADVERSARIAL_VERIFICATION",
+  "copied_files": [],
+  "independent_oracles": [
+    "cleanroom_four_rotor_symmetry_oracle.py",
+    "cleanroom_four_rotor_necklace_oracle.cpp"
+  ],
+  "source_manifest": {
+    "four_rotor_rotation_quotient_phase.py": "98eb81f0c8d1aab984b747da5856fb866ce0679bba094c27ad789a130be405dc",
+    "four_rotor_streamed_momentum_coordinate_phase.py": "275822fbc019ab2a8ff2724f6612e46ec1ae1064ecdcc7d9212374e9a7d1e909",
+    "four_rotor_necklace_orbit_phase.cpp": "f65ca7693bbf4064732c6e07bcb3e26fd407b6b39c7402d39c1a32e0cb78d871",
+    "four_rotor_bosonic_givens_phase.cpp": "4685e34c9207e6a36f479ad2063ab73ef2c785aecfeb08db78bac363599db6d5",
+    "four_rotor_necklace_generator_phase.cpp": "b698112d66058d1c3cb3db6ca75be19363e2464181d6f1c5c0a564c21a31a894",
+    "four_rotor_necklace_coherence_triad.cpp": "e1b8afd0b65a4099199a9c9d7978eb84caf314815903840defbb5b881015184c",
+    "four_rotor_necklace_relational_inference.cpp": "89784a5b86058298d755c14673d8baf2afb494f7008370f6fcc1031d90a9b3c3",
+    "catvm_bosonic_givens_service_tail.inc": "176ad7ef926a3f07cca968ed9e7991d1a56530dfa4f421e8012d83de194fb6ba",
+    "catvm_bosonic_givens_protocol.py": "ca62ba7c352974c64eb93377d99ef2fa758309db7ecd843a2098af0ee18cdb56",
+    "catvm_bosonic_givens_controller.py": "5dded70ef7f2ed3251296e6cd8990e67e596b7a6246adadd9019757e71f291dc",
+    "four_rotor_incremental_schmidt_closure.py": "c11ab81261a12bf7ecd168dfbc09102bbf4727a139698641e2722b5567baf3bf",
+    "catvm_four_rotor_incremental_backend.py": "60ec7de8a9d3e118ee07d816ea9a922557185a1b7dc940035d144694db0f5152",
+    "catvm_four_rotor_incremental_service.py": "9e5e83b4a218ce9805b189afcc8739383a135376bacfa14a612bc7d9aa91c343"
+  },
+  "classifications": {
+    "global_rotation_quotient": "INDEPENDENTLY_VERIFIED_TRANSFERABLE",
+    "streamed_total_momentum_coordinate": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "exchange_symmetric_necklace_carrier": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "bosonic_givens_closure": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "hermitian_necklace_generator": "INDEPENDENTLY_VERIFIED_TRANSFERABLE",
+    "coherence_dephasing_diagnostic": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "typed_public_open_observation": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "original_staged_bosonic_catvm_required_atomic_scope": "REJECTED_SOURCE_DEFECT",
+    "later_incremental_catvm_response_ordering": "INDEPENDENTLY_VERIFIED_SOURCE_LOCAL"
+  },
+  "restoration_classes": {
+    "rotation_streaming_necklace_givens_generator_open_observation": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+    "incremental_catvm_in_place": "INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT",
+    "snapshot_and_dephased_shams": "SNAPSHOT_RELOAD",
+    "direct_forward_only_arms": "NO_RESTORATION_CLAIM"
+  },
+  "symmetry_oracle": {
+    "rotation_sector_cells": 4913,
+    "full_labelled_cells": 83521,
+    "reduction_factor": 17,
+    "weak_compositions": 4845,
+    "necklace_cells": 285,
+    "labelled_weight": 83521,
+    "five_rotor_necklace_cells": 1197,
+    "burnside_law": "(C(R+16,16)+16*INDICATOR(17_DIVIDES_R))/17",
+    "rotor17_stabilizer_correction": 1,
+    "simple_division_ceiling": "R_LESS_THAN_17",
+    "exchange_symmetry_required": true,
+    "labelled_open_chain_compressed": false,
+    "public_topology_inspects_final_answer": false
+  },
+  "observation_oracle": {
+    "production_projection_called": false,
+    "production_observation_package_included": false,
+    "tested_programs": 5,
+    "different_program_family": true,
+    "invalid_typed_observation_rejected": true,
+    "primary_scores": [
+      0.47745721167016919,
+      0.460098045965949,
+      0.01934703306632151,
+      0.040188169020947427,
+      0.0,
+      0.0,
+      0.0029095402766043921
+    ],
+    "production_boundary_error": 0.0,
+    "alternate_observation_effect": 0.013065983819753046,
+    "alternate_strength_effect": 0.012150081842165428,
+    "reversed_module_order_effect": 0.04906859005939259,
+    "different_family_effect": 0.028427912516146903,
+    "maximum_restoration_error": 4.5477313344564362e-14,
+    "fresh_restored_reuse_boundary_error": 4.035660694512444e-14,
+    "carrier_backing_preserved": true
+  },
+  "coherence_oracle": {
+    "boundary_effect": 0.039045417878374566,
+    "probability_sum_error": 2.220446049250313e-15,
+    "transition_coefficients": 487350,
+    "permanent_terms": 198838800,
+    "strongest_compact_coherent_classical_boundary_error": 0.0,
+    "coherence_causally_relevant": true,
+    "distinct_phase_resource_established": false
+  },
+  "resource_law": {
+    "givens_resident_cells": 285,
+    "givens_temporary_occupation_cells": 4845,
+    "givens_accepted_kernel_permanent_enumeration": false,
+    "givens_whole_comparison_process_permanent_free": false,
+    "generator_carrier_sized_work_vectors": 3,
+    "generator_occupation_cells": 0,
+    "generator_dense_285_by_285_operator_cells": 0,
+    "matched_compact_classical_generator_identical": true,
+    "allocator_native_library_os_memory_bounded": false
+  },
+  "original_catvm_defect": {
+    "disconnect_after_begin_restores_borrowed_carrier": false,
+    "launch_time_mode_separation": false,
+    "aggregate_classification": "REJECTED_SOURCE_DEFECT",
+    "preserved_subclaims": [
+      "ACTUAL_4845_CELL_RESIDENT_HIDDEN_OCCUPATION",
+      "PROJECTION_DENIED_DURING_RESIDENCY",
+      "NORMAL_PATH_FINAL_RESPONSE_AFTER_NUMERICAL_RESTORATION",
+      "NORMAL_PATH_SAME_BACKING_REUSE"
+    ]
+  },
+  "repaired_successor": {
+    "claim": "BOUNDED_CATVM_MODE_LOCKED_BOSONIC_GIVENS_HIDDEN_OCCUPATION_ATOMIC_DISCONNECT_RESTORATION_AND_REUSE",
+    "source": "catvm_bosonic_givens_atomic_repair.cpp",
+    "result": "PASS",
+    "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+    "cross_mode_commands_denied": true,
+    "nonce_replay_denied": true,
+    "disconnect_inverse_cleanup": true,
+    "disconnect_internal_fresh_reuse_sentinel": true,
+    "stage_content_derived_wire_hashes": 0,
+    "primary_restoration_error": 8.446068614196007e-15,
+    "reuse_restoration_error": 9.27279516256988e-15,
+    "fresh_restored_reuse_boundary_error": 6.161737786669619e-15,
+    "missing_inverse_error": 1.4040897828772652,
+    "wrong_inverse_error": 1.3464039441456188,
+    "reordered_inverse_error": 1.0750797873027769,
+    "disconnect_cleanup_scope": "UNCOMMITTED_4845_CELL_OCCUPATION_SCRATCH_IS_DISCARDED_AND_THE_ACTUAL_285_CELL_BORROWED_CARRIER_IS_INVERSE_RESTORED",
+    "one_connection_lease_semantics": "SINGLE_ACCEPTED_SAME_UID_SOCKET_PLUS_MONOTONE_NONCE_NOT_AN_INDEPENDENT_AUTHENTICATED_LEASE"
+  },
+  "claim_ceiling": [
+    "GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS",
+    "285_CELL_NECKLACE_CARRIER",
+    "DIRECT_PUBLIC_SCALAR_OBSERVATION_SUBSTITUTION_FOR_OPEN_OBSERVATION_PACKAGE",
+    "SAME_UID_LINUX_X86_64_PROTOCOL_CUSTODY_FOR_REPAIRED_CATVM",
+    "COMPLEX128_SOFTWARE_ONLY"
+  ],
+  "rejected_interpretations": [
+    "LABELLED_OPEN_CHAIN_COMPRESSED_TO_285_CELLS",
+    "SHARED_UNRESOLVED_OBSERVATION_PORT_IN_THE_AUDITED_PUBLIC_SUBSTITUTION_PACKAGE",
+    "GENERAL_CATALYTIC_INFERENCE",
+    "LEARNING",
+    "BAYESIAN_INFERENCE_OR_ACCURACY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI"
+  ],
+  "result": "PASS_WITH_DISTINCT_CATVM_REPAIR"
+}
