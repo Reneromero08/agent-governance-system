@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`f67319b66aeb8cabef5b871a3d2eda9a54532c0d`. The canonical per-milestone
+`a1d96fcc8d705c059a595f8899cf208be1cd8b74`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5872,4 +5872,66 @@ The live obstruction is:
 
 ```text
 EXACT_17_CONTENT_AND_ADAPTIVE_GAUGE_REDUCE_THE_TESTED_CHAIN_PAYLOAD_BUT_RESIDUAL_COEFFICIENT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_INHERITS_EVERY_REDUCTION
+```
+
+## Period-17 modular seed images do not yet give an exact quotient
+
+The exact public coefficient schedule repeats every 17 edges. Applying that
+block as a black-box map on the fixed 272-coordinate cyclotomic message gives
+seed Krylov dimensions 241 for PRIMARY and 256 for REUSE over both `F41` and
+`F73`.
+
+```text
+claim
+    BOUNDED_F17_PERIOD17_CUBIC_CHAIN_BLOCK_MODULAR_SEED_KRYLOV_IMAGES_HAVE_DIMENSIONS241_AND256_WHILE_EXACT_ADAPTIVE_PROJECTIVE_CONTENT_RETAINS_RESIDUAL_WIDTH_GROWTH_WITH_EXACT_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+The ranks are exact over the two tested finite fields and imply rational-rank
+lower bounds only. No exact rational dimension, minimal polynomial, or
+`Z[zeta17]` dependency has been established.
+
+At periods 1, 2, 4, and 8, PRIMARY adaptive payload is
+`3,462, 6,263, 13,205, 26,164` bits and REUSE payload is
+`3,629, 6,567, 13,949, 27,689` bits. Maximum residual quotient width grows
+from 15 to 99 bits for PRIMARY and 16 to 104 bits for REUSE, even after
+extracting exact power-of-17 content. All residual coefficient gcds are one.
+
+At period 4, the actual resident messages are exactly subtracted, the same
+backing is restored, and an unrelated program matches fresh execution.
+Generation and lease reach two; retained inverse history and baseline reload
+are zero.
+
+The separate oracle independently recompiles the public descriptors, uses
+fixed-basis integer transfer and reverse-pivot elimination, and matches all
+ranks and projective tuples. Explicit logical accounting includes production
+metadata and restoration work plus oracle working cells. The modular-oracle
+peak is 70,720 field cells; its final fixed/adaptive/semantic coexistence is
+816 integer cells. Python object, allocator/native-library, bit-operation,
+and whole-process peaks remain unbounded.
+
+The identical exact 272-coordinate block map is the matched compact
+classical implementation. This result does not establish a lifted exact
+quotient, fixed width, CATVM custody, a distinct phase resource,
+computational advantage, Small Wall crossing, catalytic inference, physical
+waveform execution, physical bit replacement, or unbounded computation.
+
+The next selected experiment is:
+
+```text
+EXACT_Z_ZETA17_LIFT_OF_PERIOD17_MODULAR_KRYLOV_DEPENDENCIES_WITH_RESOURCE_CAPPED_CRT_OR_STRUCTURAL_CERTIFICATE
+```
+
+The live obstruction is:
+
+```text
+THE_PERIOD17_BLOCK_HAS_STABLE_241_AND256_DIMENSIONAL_MODULAR_SEED_IMAGES_BUT_THE_DEPENDENCIES_ARE_NOT_YET_LIFTED_TO_AN_EXACT_Z_ZETA17_QUOTIENT_AND_EXACT_PROJECTIVE_CONTENT_DOES_NOT_STOP_RESIDUAL_WIDTH_GROWTH
 ```

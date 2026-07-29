@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F17_ADAPTIVE_GAUGE_AND_EXACT_17_CONTENT_QUOTIENT_REDUCES_PAYLOAD_BUT_RESIDUAL_WIDTH_GROWS`
-**Roadmap version:** `10.7`
+**Status:** `STRICT_SCOPE_F17_PERIOD17_MODULAR_KRYLOV_LOWER_BOUNDS_AND_PROJECTIVE_WIDTH_GROWTH`
+**Roadmap version:** `10.8`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `f67319b66aeb8cabef5b871a3d2eda9a54532c0d`
+**Reconciled source head:** `a1d96fcc8d705c059a595f8899cf208be1cd8b74`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F17_ADAPTIVE_OMITTED_ROOT_AND_17_CONTENT_CYCLOTOMIC_QUOTIENT_CHAIN_TRANSFER_REDUCES_INTEGER_PAYLOAD_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS_DEPTH_GROWING_WIDTH`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_F17_PUBLIC_PATH_GRAPH_UNARY_CUBIC_AND_NEAREST_NEIGHBOR_MIXED_CUBIC_FACTORS_NODES2_3_5_9_17_33_65_TWO_PROGRAM_FAMILIES_PER_ROW_ADAPTIVE_OMITTED_ROOT_AND_EXACT_COMMON_17_CONTENT_Z_ZETA17_QUOTIENT_TOPOLOGY_DERIVED_REVERSIBLE_RECURSIVE_PEBBLING_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_F17_PERIOD17_CUBIC_CHAIN_BLOCK_MODULAR_SEED_KRYLOV_IMAGES_HAVE_DIMENSIONS241_AND256_WHILE_EXACT_ADAPTIVE_PROJECTIVE_CONTENT_RETAINS_RESIDUAL_WIDTH_GROWTH_WITH_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_F17_TWO_PUBLIC_PERIOD17_UNARY_CUBIC_AND_NEAREST_NEIGHBOR_MIXED_CUBIC_PATH_FAMILIES_FIXED_272_DIMENSION_Z_ZETA17_TRANSFER_KRYLOV_RANK_MOD41_AND73_PERIODS1_2_4_8_RESTORATION_AT_PERIOD4_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`f67319b66aeb8cabef5b871a3d2eda9a54532c0d`. The current 101-milestone
+`a1d96fcc8d705c059a595f8899cf208be1cd8b74`. The current 102-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -2749,6 +2749,93 @@ The live obstruction is:
 
 ```text
 EXACT_17_CONTENT_AND_ADAPTIVE_GAUGE_REDUCE_THE_TESTED_CHAIN_PAYLOAD_BUT_RESIDUAL_COEFFICIENT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_INHERITS_EVERY_REDUCTION
+```
+
+### Period-17 modular Krylov images and exact projective accounting
+
+The public coefficient descriptors repeat every 17 edges. The bounded
+diagnostic applies one exact public block to the 272-coordinate fixed
+cyclotomic message and reconstructs its seed Krylov image over two finite
+fields. Separately, it follows the exact adaptive `Z[zeta17]` projective
+message through one, two, four, and eight periods.
+
+```text
+claim
+    BOUNDED_F17_PERIOD17_CUBIC_CHAIN_BLOCK_MODULAR_SEED_KRYLOV_IMAGES_HAVE_DIMENSIONS241_AND256_WHILE_EXACT_ADAPTIVE_PROJECTIVE_CONTENT_RETAINS_RESIDUAL_WIDTH_GROWTH_WITH_EXACT_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+The PRIMARY seed image has dimension 241 over both `F41` and `F73`; the
+REUSE image has dimension 256 over both fields. These are exact modular
+ranks and therefore rational-rank lower bounds only. They do not establish
+the exact rational Krylov dimension, a lifted dependency over
+`Z[zeta17]`, or an exact lower-order recurrence.
+
+For periods 1, 2, 4, and 8, exact adaptive payloads are:
+
+```text
+PRIMARY    3,462   6,263   13,205   26,164 bits
+REUSE      3,629   6,567   13,949   27,689 bits
+```
+
+Maximum residual quotient-coefficient signed width grows:
+
+```text
+PRIMARY       15      25       52       99 bits
+REUSE         16      27       54      104 bits
+```
+
+The retained power-of-17 exponents are `5, 11, 22, 45`, while every
+residual coefficient gcd is one. Exact projective content extraction
+therefore removes the available common integer content but does not produce
+fixed residual width.
+
+At four periods, the sealed adaptive dependency recomputes and subtracts the
+actual resident transfer, restores the same backing exactly, and reuses it
+for the unrelated REUSE family. Generation and lease reach two, every
+carrier message is zero, and retained inverse history and baseline reload
+are both zero.
+
+The independent oracle recompiles the public descriptors, uses fixed-basis
+integer transfer and reverse-pivot modular elimination, and matches all
+modular ranks and exact projective tuples without importing the production
+module. Accounting includes logical messages, pivot and scale metadata,
+program descriptors, metric-verification buffers, three restoration
+transactions, and separate-oracle working cells. The oracle's modular
+explicit peak is 70,720 field cells and its final fixed/adaptive/semantic
+coexistence peak is 816 integer cells. Python objects, allocator and native
+library state, bit-operation cost, and whole-process peaks remain unbounded.
+
+The identical exact 272-coordinate block recurrence is the matched compact
+classical implementation and inherits every projective reduction. The
+strongest family-specific method is not established. This result does not
+establish CATVM custody, a distinct phase resource, computational advantage,
+Small Wall crossing, catalytic inference, physical waveform execution,
+replacement of physical bits with pi, or unbounded computation.
+
+The next phase-owned experiment is:
+
+```text
+EXACT_Z_ZETA17_LIFT_OF_PERIOD17_MODULAR_KRYLOV_DEPENDENCIES_WITH_RESOURCE_CAPPED_CRT_OR_STRUCTURAL_CERTIFICATE
+```
+
+It must first use bounded modular fingerprints and explicit coefficient
+bounds. It may promote a dependency only after exact black-box
+`Z[zeta17]` verification; a large uncapped rational elimination is not an
+accepted path.
+
+The live obstruction is:
+
+```text
+THE_PERIOD17_BLOCK_HAS_STABLE_241_AND256_DIMENSIONAL_MODULAR_SEED_IMAGES_BUT_THE_DEPENDENCIES_ARE_NOT_YET_LIFTED_TO_AN_EXACT_Z_ZETA17_QUOTIENT_AND_EXACT_PROJECTIVE_CONTENT_DOES_NOT_STOP_RESIDUAL_WIDTH_GROWTH
 ```
 
 ## 7. No-Smuggle and Non-Collapse Laws
