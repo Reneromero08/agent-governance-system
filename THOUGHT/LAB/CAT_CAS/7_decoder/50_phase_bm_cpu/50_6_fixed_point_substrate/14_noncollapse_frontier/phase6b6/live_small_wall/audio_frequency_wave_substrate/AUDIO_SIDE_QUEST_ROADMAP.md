@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_EXACT_F17_GAUSSIAN_PHASE_QUOTIENT_ESTABLISHED`
-**Roadmap version:** `10.3`
+**Status:** `STRICT_SCOPE_EXACT_F17_SINGLE_CUBIC_LATENT_PHASE_QUOTIENT_ESTABLISHED`
+**Roadmap version:** `10.4`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `ca9061d652c59bb48fc56643bc5120cab217d6ee`
+**Reconciled source head:** `251d89cf9ffbf48f769fe8b34b9a5c4103c67d76`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F17_GAUSSIAN_CYCLOTOMIC_MULTI_PORT_PHASE_QUOTIENT_WITH_NONCOMMUTING_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_NUMPY_EXACT_F17_QUADRATIC_GAUSSIAN_PHASE_CHART_PORTS2_4_8_16_32_TWO_PUBLIC_ALGORITHMIC_PROGRAM_FAMILIES_NONZERO_FOURIER_PIVOTS_NONSINGULAR_FINAL_OVERLAP_BOUNDARY_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_F17_SINGLE_CUBIC_LATENT_CHARACTER_SUM_MULTI_PORT_PHASE_QUOTIENT_WITH_NATIVE_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_NUMPY_EXACT_F17_ONE_UNRESOLVED_CUBIC_LATENT_PUBLIC_PORTS2_4_8_16_32_TWO_PUBLIC_ALGORITHMIC_PROGRAM_FAMILIES_NONZERO_GAUSSIAN_FOURIER_PIVOTS_NONSINGULAR_PUBLIC_GAUSSIAN_FINAL_BLOCK_FIXED17_TERM_LATENT_TRACE_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`ca9061d652c59bb48fc56643bc5120cab217d6ee`. The current 97-milestone
+`251d89cf9ffbf48f769fe8b34b9a5c4103c67d76`. The current 98-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -2445,6 +2445,74 @@ The next obstruction is:
 EXACT_F17_QUADRATIC_GAUSSIAN_PHASE_CLOSURE_HAS_POLYNOMIAL_FIXED_WIDTH_STATE_BUT_IS_IDENTICAL_TO_A_COMPACT_CLASSICAL_RECURRENCE_AND_DOES_NOT_COVER_NON_GAUSSIAN_PHASE_LAWS_OR_NECKLACE_CARRIER_INTEGRATION
 ```
 
+## Exact single-cubic-latent quotient extends the restricted phase law
+
+The selected non-Gaussian diagnostic introduces one unresolved cubic latent
+coordinate into the exact F17 character-sum carrier. It stores
+`(A,b,l,c,a,d,e,sign)` and applies public shears and Fourier modules directly
+to those coefficients. The nonzero third finite difference of the latent
+cubic distinguishes this chart from the quadratic Gaussian predecessor.
+
+```text
+BOUNDED_EXACT_F17_SINGLE_CUBIC_LATENT_CHARACTER_SUM_MULTI_PORT_PHASE_QUOTIENT_WITH_NATIVE_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE
+classification                     INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification level                 SEPARATE_REFERENCE_PARITY
+restoration                        EXACT_ALGEBRAIC_RESTORATION
+tested ports                       2, 4, 8, 16, 32
+resident F17 cells                 12, 28, 84, 292, 1,092
+resident fixed-width payload bits  61, 141, 421, 1,461, 5,461
+final latent trace evaluations     17
+```
+
+Every generated primary family has `ports+2` Fourier modules that consume a
+live latent coupling. The latent is not projected during forward composition.
+Final projection eliminates the public Gaussian block and performs one fixed
+17-value character trace, returning 16 canonical cyclotomic coefficients.
+The accepted path does not materialize a `17**ports` public tensor.
+
+The independent integer-list oracle reexecutes the emitted descriptors,
+boundaries, inverse, and reuse at every tested width. Dense complex parity
+covers ports 2 and 4. At port 2, a second dense oracle retains the latent as
+an explicit 17-cell axis through all public modules and contracts it only at
+the boundary. Compiler generation and wrong/missing/reordered controls remain
+source-local.
+
+Reverse public modules restore the exact symbolic state, preserve the same
+quadratic, linear, and latent-coupling array backing, advance generation to 2
+and lease to 3, and permit an unrelated second program without baseline
+reload or retained inverse history.
+
+Accounting includes baseline plus carrier, both public programs, compiler
+simulation and determinant search, execution scratch, simultaneous
+histogram/canonical projection scratch, boundary serialization, restoration,
+and reuse. Python objects, NumPy/native internals, allocator, OS state, and
+whole-process peak remain outside the bound.
+
+This closure still has an identical exact compact classical coefficient
+recurrence. It is one fixed-size latent trace, not non-enumerative
+multiple-latent closure. Package serialization excludes the reduced latent
+polynomial, but no machine-enforced CATVM custody is claimed. It does not
+establish necklace integration, a distinct phase resource, computational
+advantage, Small Wall crossing, catalytic inference, physical waveform
+execution, physical bit replacement, or unbounded computation.
+
+The next selected phase-machine experiment is:
+
+```text
+EXACT_F17_INTERACTING_MULTI_CUBIC_LATENT_SIGNATURE_GROWTH_AND_TRACE_CLOSURE_DIAGNOSTIC
+```
+
+It should introduce the smallest genuinely interacting second cubic latent
+and measure whether exact native composition can avoid either a growing
+interaction signature or a `17**k` final trace. It must retain the identical
+exact compact recurrence as the matched classical comparison.
+
+The next obstruction is:
+
+```text
+SINGLE_CUBIC_LATENT_PHASE_QUOTIENT_CLOSES_IN_O_PORTS_SQUARED_FIXED_WIDTH_STATE_WITH_FIXED17_TRACE_BUT_HAS_AN_IDENTICAL_CLASSICAL_RECURRENCE_AND_MULTIPLE_INTERACTING_LATENTS_MAY_REQUIRE_A_GROWING_INTERACTION_SIGNATURE_OR_17_TO_K_TRACE
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -2482,7 +2550,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_HT_ANALYTIC_INFINITE_PROJECTIVE_ORBIT_REJECTS_FIXED_FINITE_STATE_LOSSLESS_PHASE_QUOTIENT_WITH_EXACT_RESTORATION_AND_REUSE
+BOUNDED_EXACT_F17_SINGLE_CUBIC_LATENT_CHARACTER_SUM_MULTI_PORT_PHASE_QUOTIENT_WITH_NATIVE_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE
 ```
 
 Not established:

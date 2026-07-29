@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`ca9061d652c59bb48fc56643bc5120cab217d6ee`. The canonical per-milestone
+`251d89cf9ffbf48f769fe8b34b9a5c4103c67d76`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5586,4 +5586,72 @@ The live obstruction is:
 
 ```text
 EXACT_F17_QUADRATIC_GAUSSIAN_PHASE_CLOSURE_HAS_POLYNOMIAL_FIXED_WIDTH_STATE_BUT_IS_IDENTICAL_TO_A_COMPACT_CLASSICAL_RECURRENCE_AND_DOES_NOT_COVER_NON_GAUSSIAN_PHASE_LAWS_OR_NECKLACE_CARRIER_INTEGRATION
+```
+
+## Exact one-cubic-latent character-sum quotient closes in a bounded chart
+
+The non-Gaussian successor stores one unresolved cubic latent coordinate in
+the exact F17 coefficient state `(A,b,l,c,a,d,e,sign)`. Its third finite
+difference is nonzero, while public shears and Fourier transforms close
+inside that tuple.
+
+```text
+claim
+    BOUNDED_EXACT_F17_SINGLE_CUBIC_LATENT_CHARACTER_SUM_MULTI_PORT_PHASE_QUOTIENT_WITH_NATIVE_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+At ports 2, 4, 8, 16, and 32, resident F17 cells and semantic payload bits are:
+
+```text
+ports             2    4    8     16     32
+F17 cells        12   28   84    292  1,092
+payload bits     61  141  421  1,461  5,461
+```
+
+Every primary family has `ports+2` Fourier consumers of the live latent
+coupling. The latent remains unresolved during forward composition. The
+final boundary uses a fixed 17-value character trace and returns 16 canonical
+cyclotomic coefficients.
+
+An independent Python-list oracle matches exact boundaries, restoration, and
+reuse at all widths. Dense complex parity covers ports 2 and 4. A distinct
+port-2 dense construction retains the latent as an explicit axis through all
+forward modules and matches the same boundary before exact reverse reuse.
+
+The exact reverse preserves the same `A`, `b`, and `l` array backing, reaches
+generation 2 and lease 3 after unrelated reuse, retains no inverse history,
+and reloads no baseline. Missing, wrong, and reordered inverse controls fail
+in the production package; compiler generation and those controls remain
+source-local.
+
+The package counts both accepted resident carriers, public program
+descriptors, compiler search, execution scratch, final histogram and
+cyclotomic output scratch, boundary serialization, restoration, and reuse.
+Python/NumPy/native allocator and whole-process peaks remain unbounded.
+
+This is a fixed one-latent trace and has an identical compact classical
+coefficient recurrence. It does not establish multiple-latent closure,
+machine-enforced custody, necklace integration, a distinct phase resource,
+advantage, Small Wall crossing, catalytic inference, physical waveform
+execution, physical bit replacement, or unbounded computation.
+
+The next selected experiment is:
+
+```text
+EXACT_F17_INTERACTING_MULTI_CUBIC_LATENT_SIGNATURE_GROWTH_AND_TRACE_CLOSURE_DIAGNOSTIC
+```
+
+The live obstruction is:
+
+```text
+SINGLE_CUBIC_LATENT_PHASE_QUOTIENT_CLOSES_IN_O_PORTS_SQUARED_FIXED_WIDTH_STATE_WITH_FIXED17_TRACE_BUT_HAS_AN_IDENTICAL_CLASSICAL_RECURRENCE_AND_MULTIPLE_INTERACTING_LATENTS_MAY_REQUIRE_A_GROWING_INTERACTION_SIGNATURE_OR_17_TO_K_TRACE
 ```
