@@ -1,0 +1,40 @@
+{
+  "result": "SEALED",
+  "scope": "F17_PERIOD17_CUBIC_CHAIN_EXACT_NATIVE_CYCLOTOMIC_MODULE_AND_FAILED_MODULAR_DEPENDENCE_LIFT_CONTROL",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "files": {
+    "f17_cubic_chain_period17_cyclotomic_module.py": "9bf400adc38462796e574da4f88c2778918169245517ebd7385f6c2dc1d52033",
+    "f17_cubic_chain_period17_cyclotomic_module_oracle.py": "8264a6779366ec3f5ed4abd566071493493f89015e1ede09873ca40d2e0a8383",
+    "f17_cubic_chain_period17_exact_lift.py": "53952c1153ecba91a161c58e1474d706ea59f69f1630e48abed176192f079834",
+    "f17_cubic_chain_adaptive_gauge.py": "083ddddab5907bb9148e00057cf4e8f33b0ba2f76db71f32fc7a3b085418d828",
+    "f17_cubic_chain_period17_krylov.py": "928ec54aea8d6f7c8e7eaaf8e80d809fbfa6bcd37bc5f576b331eed4e0bb21ca",
+    "qualify_f17_cubic_chain_period17_cyclotomic_module.sh": "90023b5f9e30302f5707825372885f0b105188641788376bdd7892342e690ac6",
+    "F17_CUBIC_CHAIN_PERIOD17_CYCLOTOMIC_MODULE_RESULTS.json": "43fe48945417217a5f6a4c19b991dfb7b462bd9a34d7665a687f8542f9a059e8",
+    "F17_CUBIC_CHAIN_PERIOD17_CYCLOTOMIC_MODULE_ORACLE_RESULTS.json": "080056d2110ae92ab210a9b083ed33bfdb39b2576d1c5cb4bf425adb27552ef0",
+    "F17_CUBIC_CHAIN_PERIOD17_EXACT_LIFT_CONTROL_RESULTS.json": "dc8916cd1a629863d3d7951d1d2a79fc031b0a558055178a4fcfc7dbbeab6f9d"
+  },
+  "sealed_claim_ceiling": "two exact public period-17 F17 unary-cubic and nearest-neighbor mixed-cubic path families; 17-state Q(zeta17) coefficient module with integral Z[zeta17] carrier; exact degree-17 monic Cayley-Hamilton annihilator; periods 1, 2, 4, and 8; exact subtractive restoration and unrelated reuse at period 8; software only",
+  "independent_scope": "separate no-production-import public-descriptor compiler, tuple Z[zeta17] operator construction, whole-operator monic annihilator evaluation, all tested boundary reconstruction, and exact subtractive inverse",
+  "failed_lift_control": "eight-prime 108-bit CRT candidates for the prior degree-241 and degree-256 modular dependencies leave all 272 exact fixed-basis residual cells nonzero; this does not prove that no other exact recurrence exists",
+  "resource_accounting_scope": "component-level named logical integer cells for compiled tuple operators, characteristic coefficients, carriers, expected messages, projection, restoration, and independent-oracle components; SymPy internals, Python objects, allocator/native-library peaks, bit-operation cost, coexisting process peaks, and whole-process peaks remain unbounded",
+  "excluded_interpretations": [
+    "minimal native cyclotomic recurrence order 17",
+    "scalar-Q recurrence order at most 17",
+    "exact lift of the prior modular dependencies",
+    "execution of the characteristic recurrence by the runtime",
+    "fixed integer width",
+    "constant total reversible storage",
+    "arbitrary graph topology",
+    "general non-Gaussian composition",
+    "machine-enforced CATVM custody",
+    "distinct phase resource",
+    "computational advantage",
+    "Small Wall crossing",
+    "catalytic inference",
+    "physical waveform execution",
+    "replacement of physical bits with pi",
+    "unbounded computation"
+  ]
+}
