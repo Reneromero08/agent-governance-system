@@ -1,0 +1,188 @@
+{
+  "schema_version": "four_rotor_necklace_cyclotomic_star_quotient.v1",
+  "source_base_head": "04bf8b0016470539b228b5998517bf6d1fb6c7dd",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "milestone": "BOUNDED_DUAL_PRIME_CONJUGATE_PAIR_CYCLOTOMIC_STAR_QUOTIENT_FIXED_570_CELL_PHASE_CLOSURE_ACROSS_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "DIRECT_PROCESS_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACE_DESCRIPTORS_570_F17_F17_F41_F41_CONJUGATE_PAIR_RESIDUE_PHASE_CELLS_PUBLIC_VARIANT_ORDINAL_MATCHING_COMPILER_DEPTHS1_64_256_1024_4096_REUSE_DEPTH1537_SOFTWARE_ONLY",
+  "mechanism": {
+    "quotient": "F17_X_F17_X_F41_X_F41_CONJUGATE_PAIR",
+    "embeddings": [
+      {
+        "prime": 17,
+        "zeta8_root": 2,
+        "conjugate_index": 1
+      },
+      {
+        "prime": 17,
+        "zeta8_root": 9,
+        "conjugate_index": 0
+      },
+      {
+        "prime": 41,
+        "zeta8_root": 3,
+        "conjugate_index": 3
+      },
+      {
+        "prime": 41,
+        "zeta8_root": 14,
+        "conjugate_index": 2
+      }
+    ],
+    "necklace_descriptors": 285,
+    "latent_cells_per_necklace": 2,
+    "logical_phase_cells": 570,
+    "residues_per_phase_cell": 4,
+    "phase_cell_bytes": 8,
+    "carrier_inline_bytes": 4560,
+    "restoration_baseline_inline_bytes": 4560,
+    "retained_module_tape_bytes": 0,
+    "retained_inverse_history_bytes": 0,
+    "dense_570_by_570_operator_cells": 0,
+    "relation_table_cells": 0,
+    "assignment_cells": 0
+  },
+  "tested_depths": [
+    1,
+    64,
+    256,
+    1024,
+    4096
+  ],
+  "forward_elementary_operations": [
+    1709,
+    109376,
+    437504,
+    1750016,
+    7000064
+  ],
+  "accepted_path": {
+    "primary_depth": 4096,
+    "primary_forward_elementary_operations": 7000064,
+    "primary_forward_inverse_elementary_operations": 14000128,
+    "primary_forward_star_norm": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "primary_exact_algebraic_restoration": true,
+    "reuse_depth": 1537,
+    "reuse_forward_elementary_operations": 2626733,
+    "reuse_forward_inverse_elementary_operations": 5253466,
+    "reuse_forward_star_norm": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "reuse_exact_algebraic_restoration": true,
+    "fresh_restored_reuse_boundary_equal": true,
+    "same_outer_backing_primary_and_reuse": true,
+    "restoration_generation_sequence": [
+      1,
+      2
+    ],
+    "baseline_reload_bytes": 0
+  },
+  "controls": {
+    "missing_inverse_restored": false,
+    "wrong_inverse_variant_restored": false,
+    "reordered_inverse_restored": false,
+    "phase_disabled_boundary_differs": true,
+    "topology_perturbation_boundary_differs": true,
+    "null_carrier_boundary_differs": true,
+    "wrong_conjugation_pairing_norm_is_one": false
+  },
+  "independent_oracle": {
+    "implementation": "INDEPENDENT_CONJUGATE_PAIR_RESIDUE_RECURRENCE_WITH_FRACTION_EXACT_BRIDGE",
+    "histogram_count": 4845,
+    "necklace_count": 285,
+    "tested_depths": [
+      1,
+      64,
+      256,
+      1024,
+      4096
+    ],
+    "exact_fraction_bridge_depths": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "all_residue_boundaries_match": true,
+    "all_star_norms_one": true,
+    "all_restorations_exact": true,
+    "all_exact_fraction_bridges_match": true,
+    "fresh_restored_reuse_boundary_equal": true,
+    "production_backend_imported": false,
+    "dense_operator_cells": 0,
+    "assignment_expansion_cells": 0
+  },
+  "semantic_loss_boundary": {
+    "analytic_cyclotomic_amplitudes_losslessly_preserved": false,
+    "demonstrated_nonzero_kernel_element_integer": 697,
+    "demonstrated_nonzero_kernel_element_maps_to_zero": true,
+    "fixed_width_applies_only_to_declared_residue_semantics": true
+  },
+  "resource_law": {
+    "logical_phase_cells_constant_on_tested_depths": true,
+    "residues_per_phase_cell_constant_on_tested_depths": true,
+    "carrier_vector_capacity_cells": 570,
+    "carrier_inline_bytes": 4560,
+    "restoration_baseline_inline_bytes": 4560,
+    "permanent_restoration_baseline_phase_cells": 570,
+    "final_boundary_phase_cells": 7,
+    "topology_necklace_capacity_bytes": 10260,
+    "transaction_run_record_bytes": 112,
+    "accepted_path_declared_payload_subtotal_bytes": 19492,
+    "allocator_control_block_and_heap_metadata_bounded": false,
+    "verification_harness_and_binary_bytes_included": false,
+    "whole_process_rss_claimed": false
+  },
+  "matched_baseline": {
+    "strongest_compact_classical": "IDENTICAL_FOUR_RESIDUE_RECURRENCE",
+    "boundary_error": 0,
+    "distinct_phase_resource_established": false,
+    "computational_advantage_established": false,
+    "small_wall_crossing_established": false
+  },
+  "source_sha256": {
+    "four_rotor_necklace_cyclotomic_star_quotient.cpp": "eb986f245fe3cb2772c9b847144db8d6019ffb7c37be61de53333e85a685bf26",
+    "four_rotor_necklace_cyclotomic_star_quotient_oracle.py": "5868acc9451138e19eebc76d86ba96677e47c143a234604db6439e7bea085a54",
+    "qualify_four_rotor_necklace_cyclotomic_star_quotient.sh": "dee5a500d923d32ac7fe1d725f0894c592847cb987c721dd6edbf7f871971a34"
+  },
+  "qualification_sha256": {
+    "result.json": "6e5094a98940e3d737b2ecdba9bdf4a8124973d5384d3b101041cf440f2a883f",
+    "oracle.json": "163900906d267acadb85e3d615565ad8b15ea5affff2585c673d798feef1cacf",
+    "qualification.json": "9d550bca88f6fbc727adf6b36075b13a9a55fbca4486d9fcbe1524652c46205c",
+    "qualification_manifest": "fb53633c09ae25f8ce69d93671881be100864ac3e7b73dd984a5c8300a5ee83a"
+  },
+  "independent_review": {
+    "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+    "source_sha256": "eb986f245fe3cb2772c9b847144db8d6019ffb7c37be61de53333e85a685bf26",
+    "rejecting_defect_found": false,
+    "strict_scope": "FOUR_RESIDUE_QUOTIENT_SEMANTICS_ONLY",
+    "resource_scope": "DECLARED_19492_BYTE_SUBTOTAL_NOT_WHOLE_PROCESS_PEAK",
+    "semantic_caveat": "697_IS_A_DEMONSTRATED_NONZERO_KERNEL_ELEMENT_NOT_A_COMPLETE_KERNEL_GENERATOR"
+  },
+  "not_established": [
+    "LOSSLESS_ANALYTIC_CYCLOTOMIC_PHASE_STATE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "GENERAL_CATALYTIC_INFERENCE",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT_WITH_PI",
+    "UNBOUNDED_OR_UNLIMITED_CATALYTIC_COMPUTATION"
+  ],
+  "next_obstruction": "FIXED_WIDTH_CYCLOTOMIC_STAR_QUOTIENT_DISCARDS_NONZERO_ANALYTIC_KERNEL_697_AND_REMAINS_IDENTICAL_FINITE_FIELD_RECURRENCE"
+}
