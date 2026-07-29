@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F17_PERIOD17_MODULAR_KRYLOV_LOWER_BOUNDS_AND_PROJECTIVE_WIDTH_GROWTH`
-**Roadmap version:** `10.8`
+**Status:** `STRICT_SCOPE_F17_PERIOD17_NATIVE_CYCLOTOMIC_MODULE_CLOSURE_WITH_Q_SCALAR_AND_WIDTH_OBSTRUCTION`
+**Roadmap version:** `10.9`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `a1d96fcc8d705c059a595f8899cf208be1cd8b74`
+**Reconciled source head:** `bf845d208feb81972f63e5d35bb36596e43d7bc6`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_F17_PERIOD17_CUBIC_CHAIN_BLOCK_MODULAR_SEED_KRYLOV_IMAGES_HAVE_DIMENSIONS241_AND256_WHILE_EXACT_ADAPTIVE_PROJECTIVE_CONTENT_RETAINS_RESIDUAL_WIDTH_GROWTH_WITH_EXACT_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_F17_TWO_PUBLIC_PERIOD17_UNARY_CUBIC_AND_NEAREST_NEIGHBOR_MIXED_CUBIC_PATH_FAMILIES_FIXED_272_DIMENSION_Z_ZETA17_TRANSFER_KRYLOV_RANK_MOD41_AND73_PERIODS1_2_4_8_RESTORATION_AT_PERIOD4_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_NATIVE_CYCLOTOMIC_17_STATE_BLOCK_MODULE_HAS_ORDER_AT_MOST17_CAYLEY_HAMILTON_CLOSURE_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS_GROWING_INTEGER_WIDTH`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_SYMPY_EXACT_TWO_PUBLIC_F17_PERIOD17_UNARY_CUBIC_AND_NEAREST_NEIGHBOR_MIXED_CUBIC_PATH_FAMILIES_17_STATE_Q_ZETA17_MODULE_PERIODS1_2_4_8_EXACT_CAYLEY_HAMILTON_AND_SUBTRACTIVE_RESTORATION_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`a1d96fcc8d705c059a595f8899cf208be1cd8b74`. The current 102-milestone
+`bf845d208feb81972f63e5d35bb36596e43d7bc6`. The current 103-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -2838,6 +2838,83 @@ The live obstruction is:
 THE_PERIOD17_BLOCK_HAS_STABLE_241_AND256_DIMENSIONAL_MODULAR_SEED_IMAGES_BUT_THE_DEPENDENCIES_ARE_NOT_YET_LIFTED_TO_AN_EXACT_Z_ZETA17_QUOTIENT_AND_EXACT_PROJECTIVE_CONTENT_DOES_NOT_STOP_RESIDUAL_WIDTH_GROWTH
 ```
 
+### Native cyclotomic-module closure is exact but not a scalar-Q reduction
+
+The resource-capped lift control combined each prior modular dependence over
+eight primes through a 108-bit CRT modulus. Direct streamed exact evaluation
+completed below the declared vector-width cap, but all 272 residual cells
+were nonzero for both the degree-241 PRIMARY candidate and degree-256 REUSE
+candidate. Those candidates therefore do not lift to exact
+`Z[zeta17]` dependencies.
+
+The structural successor keeps one public period block as a 17-by-17 linear
+operator over `K = Q(zeta17)`. For each of the two fixed public families, its
+exact monic degree-17 characteristic polynomial annihilates the entire
+operator:
+
+```text
+claim
+    BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_NATIVE_CYCLOTOMIC_17_STATE_BLOCK_MODULE_HAS_ORDER_AT_MOST17_CAYLEY_HAMILTON_CLOSURE_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS_GROWING_INTEGER_WIDTH
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+This is an order-at-most-17 recurrence with coefficients in `K`; it is not
+minimal and is not a scalar-`Q` recurrence of order 17. Under restriction of
+scalars, each `K` coefficient acts as a 16-by-16 `Q`-linear map. The prior
+241 and 256 modular dimensions remain exact only over the tested finite
+fields and rational-rank lower bounds only.
+
+The current runtime certifies but does not execute the characteristic
+recurrence. It still applies the dense 17-by-17 cyclotomic block. Across
+periods 1, 2, 4, and 8, carrier integer cells are
+`544, 816, 1,088, 1,360`, while maximum coefficient signed width grows from
+36 to 283 bits for PRIMARY and 37 to 289 bits for REUSE.
+
+At period 8, exact subtractive inverse restoration returns every resident
+coefficient to zero on the same backing. The unrelated REUSE family consumes
+that backing, matches fresh execution, and leaves generation and lease at
+two with no inverse history or baseline reload.
+
+The separate no-import tuple oracle independently recompiles both public
+descriptors and operators, evaluates the supplied monic annihilators on every
+matrix entry, reconstructs all eight tested boundaries, and checks exact
+subtractive inverse. Component-level resource accounting includes named
+tuple operators, characteristics, carriers, expected messages, projection,
+restoration, and oracle components. SymPy internals, coexisting process
+peaks, Python objects, allocator/native-library overhead, bit-operation cost,
+and whole-process memory remain unbounded.
+
+The identical cyclotomic matrix execution and characteristic identity are
+available to compact classical software. No distinct phase resource,
+computational advantage, Small Wall crossing, CATVM custody, catalytic
+inference, physical waveform execution, physical bit replacement, or
+unbounded computation is established.
+
+The next phase-owned experiment is:
+
+```text
+EXECUTABLE_NATIVE_K_COEFFICIENT_CAYLEY_HAMILTON_RECURRENCE_WITH_FIXED_MESSAGE_WINDOW_RESTORATION_AND_WIDTH_ACCOUNTING
+```
+
+It must execute rather than merely certify the recurrence, preserve exact
+restoration and reuse, compare with the identical strongest cyclotomic
+classical recurrence, and count characteristic storage, message windows,
+coefficient width, recomputation, and projection.
+
+The live obstruction is:
+
+```text
+THE_NATIVE_Q_ZETA17_COEFFICIENT_ORDER_AT_MOST17_CLOSURE_IS_CERTIFIED_NOT_EXECUTED_DOES_NOT_LIFT_THE_PRIOR_Q_DEPENDENCIES_OR_ESTABLISH_A_SCALAR_Q_ORDER17_RECURRENCE_AND_RETAINS_GROWING_INTEGER_WIDTH_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -2875,7 +2952,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F17_TOPOLOGY_FACTORIZED_INTERACTING_CUBIC_LATENT_CHAIN_NATIVE_CYCLOTOMIC_TRANSFER_CLOSURE_REPLACES_17_TO_K_TRACE_WITH_LOGARITHMIC_REVERSIBLE_PEBBLE_STORAGE_EXACT_RESTORATION_AND_REUSE
+BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_NATIVE_CYCLOTOMIC_17_STATE_BLOCK_MODULE_HAS_ORDER_AT_MOST17_CAYLEY_HAMILTON_CLOSURE_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS_GROWING_INTEGER_WIDTH
 ```
 
 Not established:

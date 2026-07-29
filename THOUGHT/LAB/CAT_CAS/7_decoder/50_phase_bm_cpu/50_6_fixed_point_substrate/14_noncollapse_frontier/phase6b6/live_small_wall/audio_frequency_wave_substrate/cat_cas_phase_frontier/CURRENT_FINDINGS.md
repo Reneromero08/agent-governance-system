@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`a1d96fcc8d705c059a595f8899cf208be1cd8b74`. The canonical per-milestone
+`bf845d208feb81972f63e5d35bb36596e43d7bc6`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5934,4 +5934,74 @@ The live obstruction is:
 
 ```text
 THE_PERIOD17_BLOCK_HAS_STABLE_241_AND256_DIMENSIONAL_MODULAR_SEED_IMAGES_BUT_THE_DEPENDENCIES_ARE_NOT_YET_LIFTED_TO_AN_EXACT_Z_ZETA17_QUOTIENT_AND_EXACT_PROJECTIVE_CONTENT_DOES_NOT_STOP_RESIDUAL_WIDTH_GROWTH
+```
+
+## Native cyclotomic-module closure does not reduce scalar-Q order
+
+The eight-prime exact-lift control combined the prior degree-241 and
+degree-256 modular dependence coefficients through a 108-bit CRT modulus.
+Direct streamed exact `Z[zeta17]` evaluation completed below the declared
+16,384-bit vector cap. Both candidate residuals had all 272 cells nonzero,
+with maximum signed widths 8,536 and 9,254 bits. The tested CRT candidates
+therefore do not lift.
+
+The structural successor compiles each public period-17 block into a
+17-by-17 operator over `Q(zeta17)`. Its exact monic degree-17 characteristic
+polynomial annihilates the entire operator.
+
+```text
+claim
+    BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_NATIVE_CYCLOTOMIC_17_STATE_BLOCK_MODULE_HAS_ORDER_AT_MOST17_CAYLEY_HAMILTON_CLOSURE_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS_GROWING_INTEGER_WIDTH
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+The closure order is over `K = Q(zeta17)`. It is not a minimal-order result,
+a scalar-`Q` order-17 result, or a lift of the previous modular
+dependencies. Restriction of scalars expands each `K` coefficient to a
+16-by-16 `Q`-linear map.
+
+The production runtime certifies but does not execute the characteristic
+recurrence. It applies the dense cyclotomic block under recursive reversible
+pebbling. At periods 1, 2, 4, and 8, the carrier occupies
+`544, 816, 1,088, 1,360` integer cells. Maximum resident coefficient signed
+width is `36, 71, 141, 283` bits for PRIMARY and
+`37, 72, 144, 289` bits for REUSE.
+
+At period 8, coefficient-wise subtractive inverse restores the actual
+borrowed carrier on the same backing. An unrelated REUSE program consumes
+it, matches fresh execution, reaches generation and lease two, and leaves
+all messages zero with no inverse history or baseline reload.
+
+The separate tuple-ring oracle recompiles both public descriptors and
+operators without production imports. It checks both whole-operator
+annihilator identities, all eight boundaries, and exact subtraction. The
+resource figures are named component-level logical cells, not exact process
+peaks; SymPy internals, coexisting buffers, Python objects, allocator and
+native-library overhead, bit-operation cost, and whole-process memory remain
+unbounded.
+
+The identical cyclotomic matrix execution and characteristic closure are
+available to compact classical software. No distinct phase resource,
+computational advantage, Small Wall crossing, CATVM custody, catalytic
+inference, physical waveform execution, physical bit replacement, or
+unbounded computation is established.
+
+The next selected experiment is:
+
+```text
+EXECUTABLE_NATIVE_K_COEFFICIENT_CAYLEY_HAMILTON_RECURRENCE_WITH_FIXED_MESSAGE_WINDOW_RESTORATION_AND_WIDTH_ACCOUNTING
+```
+
+The live obstruction is:
+
+```text
+THE_NATIVE_Q_ZETA17_COEFFICIENT_ORDER_AT_MOST17_CLOSURE_IS_CERTIFIED_NOT_EXECUTED_DOES_NOT_LIFT_THE_PRIOR_Q_DEPENDENCIES_OR_ESTABLISH_A_SCALAR_Q_ORDER17_RECURRENCE_AND_RETAINS_GROWING_INTEGER_WIDTH_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE
 ```
