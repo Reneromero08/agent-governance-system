@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`2eee3d901aa3fdecd4ea559098d47dfb0896fd5c`. The canonical per-milestone
+`b3ee8442777725cd645ba78eda140d2ec8a08681`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5432,4 +5432,86 @@ established. The next obstruction is:
 
 ```text
 BOUNDED_DESCRIPTOR_COMPILATION_REMOVES_FIXED_PROGRAM_ARRAYS_BUT_FLAT_MAX8_TWO_PORT_PROGRAMS_REMAIN_THE_IDENTICAL_1140_COMPLEX_CLASSICAL_RECURRENCE_AND_DO_NOT_GENERALIZE_PORT_ARITY_OR_GRAPH_TOPOLOGY
+```
+
+## Multi-port TT diagnostic finds full bounded numerical ranks
+
+The tensor-factorized successor executes the 285-necklace carrier with two
+through six binary latent ports. It applies deterministic public local
+X/Y/Z modules and joint controlled-phase modules, restores by reverse public
+topology, and runs an unrelated second program in the same logical carrier
+container.
+
+```text
+claim
+    BOUNDED_TENSOR_FACTORIZED_MULTI_PORT_NECKLACE_PHASE_DIAGNOSTIC_FINDS_FULL_TOLERANCE_DEFINED_CANONICAL_MATRICIZATION_RANK_AND_NO_TT_COMPACTION_WITH_RESTORATION_AND_LOGICAL_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT
+```
+
+The production path does not allocate an assignment-indexed dense tensor.
+Nevertheless, its final canonical rank signatures are:
+
+```text
+ports 2  [4, 2]
+ports 3  [8, 4, 2]
+ports 4  [16, 8, 4, 2]
+ports 5  [32, 16, 8, 4, 2]
+ports 6  [64, 32, 16, 8, 4, 2]
+```
+
+A separate direct dense oracle reconstructs the same public programs without
+importing the production backend or projection. It independently matches
+final boundaries to at most `2.50e-15`, restores to at most `7.55e-15`, and
+matches reuse boundaries to at most `5.39e-15`. Every final canonical cut has
+full tolerance-defined numerical rank. The minimum retained singular value
+at six ports is more than `1.3e10` times the declared cutoff.
+
+Peak TT core cells are:
+
+```text
+1,160  2,364  4,900  10,484  23,700
+```
+
+The matched explicit dense state cells are:
+
+```text
+1,140  2,280  4,560  9,120  18,240
+```
+
+Thus this TT representation does not compact the tested family. Its first
+bond reaches the full `2**ports` width, and its core payload exceeds the
+dense reference in all five cases.
+
+Correct inverse restoration upper bounds remain below `1.40e-13`; missing,
+wrong, and reordered inverse controls separate. Reuse preserves the logical
+carrier container, not fixed core array backing. Baseline and fresh parity
+carrier cells are counted. TT, SVD, and generator temporary figures are
+component maxima rather than a whole-process RSS bound.
+
+The identical TT recurrence and separate direct dense recurrence are matched
+references. No strongest compact classical method is established.
+
+This result does not establish a universal rank lower bound, fixed-rank
+multi-port closure, CATVM custody, distinct phase resource, computational
+advantage, Small Wall crossing, catalytic inference, physical waveform
+execution, replacement of physical bits with pi, or unbounded computation.
+
+The next selected representation change is:
+
+```text
+EXACT_SYMMETRY_ADAPTED_CYCLOTOMIC_OPERATOR_SCHMIDT_QUOTIENT_FOR_MULTI_PORT_NECKLACE_PHASE_CLOSURE
+```
+
+The live obstruction is:
+
+```text
+GENERIC_NONCOMMUTING_MULTI_PORT_NECKLACE_PROGRAMS_SATURATE_EVERY_TESTED_CANONICAL_CUT_AND_TT_STORAGE_EXCEEDS_DENSE_SO_FIXED_RANK_REQUIRES_A_DIFFERENT_PHASE_ALGEBRA_OR_RESTRICTED_LAW_WITH_AN_INDEPENDENT_COMPACT_CLASSICAL_COMPARISON
 ```
