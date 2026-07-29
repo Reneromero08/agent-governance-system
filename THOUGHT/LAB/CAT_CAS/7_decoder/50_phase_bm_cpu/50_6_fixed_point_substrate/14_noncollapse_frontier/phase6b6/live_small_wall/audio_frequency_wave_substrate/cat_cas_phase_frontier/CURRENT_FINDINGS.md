@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`5e53c7d5e90e617c52475ac88061e1fb327ef6c6`. The canonical per-milestone
+`6f39766e9cf622e2e41d178f8131bd8777b6cd1d`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -4998,3 +4998,59 @@ therefore does not by itself provide a distinct phase resource. The next
 phase-owned experiment should measure exact phase precision or another
 resource that the logical cell count may conceal, while retaining the same
 matched recurrence, restoration, and reuse requirements.
+
+## Exact dyadic-cyclotomic phase precision
+
+A distinct direct-process diagnostic replaces complex128 values with
+canonical elements of `Z[ZETA8,1/2]`. It retains the public 285
+necklace-descriptor set and two-cell latent fiber, while using public
+necklace-index matchings rather than the prior Hermitian necklace generator.
+The inverse rematerializes each `(variant, ordinal)` descriptor in reverse.
+
+```text
+BOUNDED_EXACT_DYADIC_CYCLOTOMIC_PHASE_PRECISION_GROWTH_ON_FIXED_570_CELL_NECKLACE_LATENT_CARRIER_WITH_EXACT_RESTORATION_AND_REUSE
+classification                   INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification level               INDEPENDENT_ORACLE_REEXECUTION
+restoration                      EXACT_ALGEBRAIC_RESTORATION
+tested depths                    1, 2, 4, 8, 16, 32, 64
+reuse depth                      23
+logical phase cells              570
+retained module tape             0 bytes
+retained inverse history         0 bytes
+baseline reload                  0 bytes
+```
+
+The depth measurements are:
+
+```text
+depth                         1      2      4      8      16      32      64
+maximum numerator bits       1      1      1      4       7      15      31
+maximum denominator power    1      2      3      5       9      17      33
+logical payload bits      2,854  2,864  2,898  3,188   4,339  14,645  57,166
+```
+
+Both the depth-64 primary and unrelated depth-23 reuse restore the canonical
+carrier exactly, and fresh/restored reuse boundaries agree. Backing identity
+is claimed only for the outer vector of 570 `Phase` objects; dynamic
+big-integer limb allocations are not stable or claimed.
+
+The independent oracle reconstructs the 4,845 histograms and 285 necklaces
+without importing the production backend. It matches all boundaries,
+restorations, and forward norms over `F17` and `F41`. A separate
+integer-arithmetic reexecution reproduces every reported precision tuple and
+the reuse result.
+
+The baseline payload is 2,851 bits, so the fixed object count conceals growing
+exact coefficient width. Reported payload excludes big-integer
+allocator/container overhead, temporary lifetime peak, whole-process RSS, and
+bit-operation complexity. The strongest compact classical implementation is
+the identical exact 570-cell recurrence.
+
+This result establishes neither CATVM custody nor a distinct phase resource,
+computational advantage, Small Wall crossing, physical waveform execution,
+physical bit replacement, or unbounded computation. The exact next
+obstruction is:
+
+```text
+FIXED_570_LOGICAL_PHASE_CELLS_HIDE_DEPTH_GROWING_EXACT_COEFFICIENT_WIDTH_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE
+```

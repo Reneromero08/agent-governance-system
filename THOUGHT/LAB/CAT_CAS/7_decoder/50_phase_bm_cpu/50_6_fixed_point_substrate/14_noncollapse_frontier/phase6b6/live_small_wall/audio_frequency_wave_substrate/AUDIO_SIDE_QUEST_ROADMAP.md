@@ -1,14 +1,14 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `REMATERIALIZED_DEPTH_AND_ACCOUNTED_CATVM_SUCCESSOR_ESTABLISHED`
-**Roadmap version:** `9.2`
+**Status:** `EXACT_PHASE_PRECISION_GROWTH_DIAGNOSTIC_ESTABLISHED`
+**Roadmap version:** `9.3`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `5e53c7d5e90e617c52475ac88061e1fb327ef6c6`
+**Reconciled source head:** `6f39766e9cf622e2e41d178f8131bd8777b6cd1d`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32`
-**Current claim ceiling:** `LINUX_X86_64_SAME_UID_ONE_UNIX_SEQPACKET_CONNECTION_NONCE_DERIVED_LEASE_EXACT_GENERATION_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_570_COMPLEX_CELLS_TWO_CELL_LATENT_FIBER_PUBLIC_VARIANT_ORDINAL_COMPILER_PRIMARY_DEPTH32_REUSE_DEPTH11_STATIC_OWNER_SEVEN_BIN_BOUNDARY_COMPLEX128_SOFTWARE_ONLY`
-**Current evidence authority:** `CLEANROOM_ADVERSARIAL_VERIFICATION`
+**Current highest milestone:** `BOUNDED_EXACT_DYADIC_CYCLOTOMIC_PHASE_PRECISION_GROWTH_ON_FIXED_570_CELL_NECKLACE_LATENT_CARRIER_WITH_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `DIRECT_PROCESS_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACE_DESCRIPTORS_570_Q_ZETA8_DYADIC_PHASE_CELLS_PUBLIC_VARIANT_ORDINAL_MATCHING_COMPILER_DEPTHS1_2_4_8_16_32_64_REUSE_DEPTH23_SOFTWARE_ONLY`
+**Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`5e53c7d5e90e617c52475ac88061e1fb327ef6c6`. The current 86-milestone
+`6f39766e9cf622e2e41d178f8131bd8777b6cd1d`. The current 87-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -1860,6 +1860,50 @@ unbounded computation. The next measurement must address precision or another
 resource hidden by fixed logical cell counts rather than add more depths to
 the same recurrence.
 
+## 6B. Exact phase-precision diagnostic
+
+The distinct direct-process package
+`BOUNDED_EXACT_DYADIC_CYCLOTOMIC_PHASE_PRECISION_GROWTH_ON_FIXED_570_CELL_NECKLACE_LATENT_CARRIER_WITH_EXACT_RESTORATION_AND_REUSE`
+uses 570 logical cells over `Z[ZETA8,1/2]`, public `(variant, ordinal)`
+compilation, exact diagonal phases, latent Hadamards, and public
+necklace-index matching Hadamards. It is not an exact reinterpretation of the
+earlier complex128 Hermitian-generator package and makes no CATVM custody
+claim.
+
+Independent reexecution classified the package
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with
+`EXACT_ALGEBRAIC_RESTORATION`. A separate oracle reconstructs the 4,845
+histograms and 285 necklaces without importing the production backend, then
+matches every boundary and restoration over two finite fields. The primary
+depth-64 transaction and unrelated depth-23 reuse restore canonical carrier
+values exactly on the same outer 570-`Phase` object vector without baseline
+reload. Dynamic big-integer limb allocation identity is excluded.
+
+Measured exact precision is:
+
+```text
+depth                         1      2      4      8      16      32      64
+maximum numerator bits       1      1      1      4       7      15      31
+maximum denominator power    1      2      3      5       9      17      33
+logical payload bits      2,854  2,864  2,898  3,188   4,339  14,645  57,166
+```
+
+The baseline payload is 2,851 bits. The fixed logical cell count therefore
+does not establish fixed exact memory. Big-integer allocator/container
+overhead, temporary lifetime peak, whole-process RSS, and bit-operation
+complexity remain outside the reported bound. The strongest matched compact
+classical implementation is the identical exact 570-cell recurrence.
+
+The next obstruction is:
+
+```text
+FIXED_570_LOGICAL_PHASE_CELLS_HIDE_DEPTH_GROWING_EXACT_COEFFICIENT_WIDTH_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+No distinct phase resource, computational advantage, Small Wall crossing,
+physical waveform execution, physical bit replacement, or unbounded
+computation follows from this result.
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -1897,7 +1941,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32
+BOUNDED_EXACT_DYADIC_CYCLOTOMIC_PHASE_PRECISION_GROWTH_ON_FIXED_570_CELL_NECKLACE_LATENT_CARRIER_WITH_EXACT_RESTORATION_AND_REUSE
 ```
 
 Not established:
@@ -1958,8 +2002,9 @@ goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve
-this verified repair checkpoint and resume from the exact compact-classical
-identity obstruction rather than repeating the fixed shared-latent fixture.
+this exact-precision checkpoint and resume by controlling coefficient height
+and total material cost, or by introducing a phase-owned resource absent from
+the identical compact classical recurrence.
 
 ## 10. Roadmap Maintenance
 
