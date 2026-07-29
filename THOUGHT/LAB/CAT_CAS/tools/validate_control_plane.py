@@ -108,11 +108,13 @@ def validate_context_binding(
         return
 
     current_branch = phase_lock_tool.git_value(root, "branch", "--show-current")
-    resolved_commit = phase_lock_tool.resolve_branch_commit(root, branch, current_branch)
+    resolved_commit = phase_lock_tool.resolve_branch_commit(root, branch, current_branch, registry)
     if resolved_commit != branch_commit:
         errors.append(
             f"{source}: stale or wrong branch commit {branch_commit}; expected {resolved_commit}"
         )
+    if not git_succeeds(root, "cat-file", "-e", f"{branch_commit}^{{commit}}"):
+        errors.append(f"{source}: branch commit is not a Git commit")
     if not git_succeeds(root, "cat-file", "-e", f"{control_plane_commit}^{{commit}}"):
         errors.append(f"{source}: control_plane_commit is not a Git commit")
 
@@ -363,15 +365,8 @@ def validate_branch_registry(root: Path, errors: list[str]) -> None:
         errors.append("audio branch head bindings disagree across control files")
     else:
         frozen_head = str(next(iter(heads)))
-        resolved = phase_lock_tool.resolve_branch_commit(
-            root,
-            "codex/audio-frequency-wave-substrate",
-            phase_lock_tool.git_value(root, "branch", "--show-current"),
-        )
-        if resolved != "UNKNOWN" and resolved != frozen_head:
-            errors.append(
-                f"audio branch advanced or diverged: frozen {frozen_head}, resolved {resolved}"
-            )
+        if not git_succeeds(root, "cat-file", "-e", f"{frozen_head}^{{commit}}"):
+            errors.append(f"frozen audio branch commit is not available: {frozen_head}")
 
 
 def validate_evals(root: Path, errors: list[str]) -> None:

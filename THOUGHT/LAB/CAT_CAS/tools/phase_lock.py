@@ -187,9 +187,24 @@ def load_branch_context(root: Path, branch: str, registry: dict[str, Any]) -> di
     return context
 
 
-def resolve_branch_commit(root: Path, branch: str, checked_out_branch: str) -> str:
+def frozen_head_for_branch(branch: str, registry: dict[str, Any]) -> str | None:
+    record = branch_record(branch, registry)
+    frozen_head = record.get("frozen_head") if record else None
+    return str(frozen_head) if frozen_head else None
+
+
+def resolve_branch_commit(
+    root: Path,
+    branch: str,
+    checked_out_branch: str,
+    registry: dict[str, Any] | None = None,
+) -> str:
     if branch == checked_out_branch:
         return git_value(root, "rev-parse", "HEAD")
+    if registry is not None:
+        frozen_head = frozen_head_for_branch(branch, registry)
+        if frozen_head:
+            return frozen_head
     candidates = (f"origin/{branch}", f"refs/remotes/origin/{branch}", branch)
     for candidate in candidates:
         value = git_value(root, "rev-parse", "--verify", candidate)
@@ -374,7 +389,7 @@ def main() -> None:
     control_plane_commit = git_value(root, "rev-parse", "HEAD")
     inferred_branch = selected[0].get("branch") if selected else None
     branch = args.branch or inferred_branch or checked_out_branch
-    branch_commit = resolve_branch_commit(root, branch, checked_out_branch)
+    branch_commit = resolve_branch_commit(root, branch, checked_out_branch, registry)
     if branch_commit == "UNKNOWN":
         raise SystemExit(f"Cannot resolve target branch commit: {branch}")
     context = load_branch_context(root, branch, registry)

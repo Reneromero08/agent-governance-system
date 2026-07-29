@@ -2,6 +2,18 @@
 
 # Changelog
 
+## 2026-07-28: CAT_CAS snapshot-based CI validation
+
+- Change the CAT_CAS control-plane workflow from live research-branch freshness
+  enforcement to frozen-snapshot validation. Required main CI now fetches and
+  validates the committed frozen audio snapshot instead of failing whenever the
+  mutable `codex/audio-frequency-wave-substrate` branch advances.
+
+- Keep fail-closed validation for disagreeing frozen heads, unavailable frozen
+  commits, missing frozen entrypoints, stale generated graph data, and malformed
+  receipts. Add regression coverage that live branch drift or deletion does not
+  break required snapshot validation when the frozen commit remains available.
+
 ## 2026-07-28: Research artifact tracking cleanup
 
 - Stop tracking generated and external research artifacts across deprecated

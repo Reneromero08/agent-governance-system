@@ -10,6 +10,8 @@ LAB_ROOT = Path(__file__).resolve().parents[2]
 VALIDATOR = LAB_ROOT / "tools" / "validate_control_plane.py"
 PHASE_LOCK = LAB_ROOT / "tools" / "phase_lock.py"
 GRAPH_GENERATOR = LAB_ROOT / "tools" / "generate_capability_graph.py"
+sys.path.insert(0, str(LAB_ROOT / "tools"))
+import validate_control_plane as validator  # noqa: E402
 
 
 def run(*args: object) -> subprocess.CompletedProcess[str]:
@@ -80,14 +82,50 @@ def test_audio_phase_lock_loads_registered_branch_context(tmp_path: Path) -> Non
     assert result.returncode == 0, result.stdout
     packet = (tmp_path / "PHASE_LOCK_PACKET.md").read_text(encoding="utf-8")
     receipt = json.loads((tmp_path / "PHASE_LOCK_RECEIPT.json").read_text(encoding="utf-8"))
+    registry = json.loads((LAB_ROOT / "control" / "branch_registry.json").read_text(encoding="utf-8"))
+    expected_commit = next(
+        record["frozen_head"]
+        for record in registry["branches"]
+        if record.get("pattern") == "codex/audio-frequency-wave-substrate"
+    )
     assert "REPLACE THE BIT WITH PI" in packet
     assert "AUDIO_SIDEQUEST" in packet
     assert receipt["branch"] == "codex/audio-frequency-wave-substrate"
-    assert receipt["commit"] == "6c1875b2b4c39588ab5bdc4878a317671329b0f0"
+    assert receipt["commit"] == expected_commit
     assert "AUDIO_SIDEQUEST" in receipt["selected_capability_nodes"]
     assert "HOLO_GEN5" in receipt["selected_capability_nodes"]
     assert receipt["selected_code_paths"]
     assert receipt["current_claim_ceiling"] == "NON_EXECUTING_PHYSICAL_PHASE_CARRIER_BUILD_READINESS_ONLY"
+
+
+def test_required_snapshot_validation_ignores_live_audio_branch_drift(monkeypatch) -> None:
+    errors: list[str] = []
+
+    def live_branch_tip(*args: object) -> str:
+        if args[1:] == ("branch", "--show-current"):
+            return "main"
+        return "8698cb383354a0a5a2ca65bd7e21e2229fbc39d5"
+
+    monkeypatch.setattr(validator.phase_lock_tool, "git_value", live_branch_tip)
+    monkeypatch.setattr(validator, "git_succeeds", lambda *args: True)
+
+    validator.validate_branch_registry(LAB_ROOT, errors)
+
+    assert errors == []
+
+
+def test_required_snapshot_validation_does_not_resolve_deleted_live_branch(monkeypatch) -> None:
+    errors: list[str] = []
+
+    def fail_if_live_branch_is_resolved(*args: object) -> str:
+        raise AssertionError("required snapshot validation must not resolve the live branch")
+
+    monkeypatch.setattr(validator.phase_lock_tool, "resolve_branch_commit", fail_if_live_branch_is_resolved)
+    monkeypatch.setattr(validator, "git_succeeds", lambda *args: True)
+
+    validator.validate_branch_registry(LAB_ROOT, errors)
+
+    assert errors == []
 
 
 def test_uncompleted_flagship_receipt_fails(tmp_path: Path) -> None:
