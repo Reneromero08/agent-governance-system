@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_STATEFUL_PANCHARATNAM_PHASE_MEMORY_ESTABLISHED`
-**Roadmap version:** `9.7`
+**Status:** `STRICT_SCOPE_NONABELIAN_WILCZEK_ZEE_PHASE_FRAME_ESTABLISHED`
+**Roadmap version:** `9.8`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `1587d37678afd65a6e88ab642da31f44c5b70539`
+**Reconciled source head:** `7c0bb031a3952865be02c47999277c21ca78b254`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_STATEFUL_PANCHARATNAM_GAUGE_TRANSPORT_ENDPOINT_INVISIBLE_HOLONOMY_PHASE_MEMORY_WITH_NUMERICAL_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_TWO_CELL_PANCHARATNAM_LATITUDE_SEGMENTS4_8_16_32_64_128_256_512_PUBLIC_RECTANGLE_REUSE37_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_NONABELIAN_WILCZEK_ZEE_SHARED_PHASE_FRAME_NONCOMMUTING_HOLONOMY_COMPOSITION_WITH_NUMERICAL_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_C3_DARK_TWO_FRAME_PUBLIC_CP2_PHI1_PHI2_LOOPS_SEGMENTS512_PRIMARY_TWO_MODULE_REUSE_THREE_MODULE_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -2085,6 +2085,64 @@ The next obstruction is:
 PANCHARATNAM_HOLONOMY_IS_PUBLIC_ENDPOINT_INVISIBLE_AND_RESIDENT_BUT_FIXED_PUBLIC_PATHS_ADMIT_AN_EQUIVALENT_OR_CLOSED_FORM_COMPACT_CLASSICAL_PHASE_RECURRENCE
 ```
 
+## 6F. Non-Abelian Wilczek-Zee shared phase frame
+
+The scalar U(1) transport is generalized to a two-column dark frame over a
+public bright ray in `C^3`. Each edge uses the unitary polar correction that
+makes the old/new dark-frame overlap positive Hermitian. Two public coordinate
+loops act on the same resident frame and produce order-sensitive U(2)
+holonomies.
+
+```text
+BOUNDED_NONABELIAN_WILCZEK_ZEE_SHARED_PHASE_FRAME_NONCOMMUTING_HOLONOMY_COMPOSITION_WITH_NUMERICAL_RESTORATION_AND_REUSE
+classification                    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                      INDEPENDENT_ORACLE_REEXECUTION
+restoration                       NUMERICAL_PHYSICAL_STATE_RESTORATION
+public chart                      alpha=1.0, beta=0.7
+segments per loop                 512
+loop-order boundary difference    1.9817209383 Frobenius
+primary restoration error         4.158e-15
+reuse restoration error           4.687e-15
+100-cycle maximum restoration     1.684e-13
+predeclared tolerance             1e-9
+retained edge history             0 bytes
+baseline reload                   0 bytes
+```
+
+The primary word applies the positive `phi1` loop and then the positive
+`phi2` loop. Reversing that order changes the final 2x2 boundary. The lawful
+inverse traverses the second loop backward before the first and restores the
+same carrier variable. Reversing the inverse order fails, as do wrong and
+missing inverses. The actual restored frame then executes the unrelated word
+`phi1^-1, phi2, phi1`; fresh and restored reuse boundaries agree within
+`5.434e-15`.
+
+An independent implementation using an SVD polar factor, rather than the
+production closed-form inverse square root, confirms the dark-frame geometry,
+positive-Hermitian edge transport, noncommutator, legal inverse order, and
+reuse. A separate 80-digit implementation reproduces the finite-edge loop
+products and restoration. The finite 512-edge product differs from its
+continuous-connection limit by `1.289e-5`; the two are not conflated.
+
+The declared 448-byte per-edge figure is only a subtotal of named source
+objects. The optimized compiler reports 784 bytes for the transport function
+itself, while caller frames, complete peak, code, libm, allocator state, and
+whole-process RSS remain outside the bound. The 64-byte 2x2 matrix recurrence
+is not claimed state-minimal. Fixed loop modules also admit closed-form
+products, so no runtime or memory leverage is claimed.
+
+This result establishes no generic CP2 path compiler, CATVM custody,
+machine-enforced no-smuggle boundary, physical Wilczek-Zee evolution,
+distinct phase resource, computational advantage, Small Wall crossing,
+physical waveform execution, physical bit replacement, or unbounded
+computation.
+
+The next obstruction is:
+
+```text
+NONABELIAN_SHARED_PHASE_FRAME_ESTABLISHES_ORDER_SENSITIVE_NATIVE_HOLONOMY_BUT_AN_IDENTICAL_2X2_MATRIX_OR_CLOSED_FORM_CLASSICAL_RECURRENCE_REMAINS
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -2183,10 +2241,10 @@ goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve
-the analytic orbit obstruction and stateful gauge-transport result. The next
-mechanism must move beyond scalar or fixed-path closed-form holonomy without
-relocating growth into hidden precision, retained history, or an equivalent
-compact classical recurrence.
+the analytic orbit obstruction and both gauge-transport results. The next
+mechanism must move beyond fixed-rank matrix or fixed-path closed-form
+holonomy without relocating growth into hidden precision, retained history,
+or an equivalent compact classical recurrence.
 
 ## 10. Roadmap Maintenance
 

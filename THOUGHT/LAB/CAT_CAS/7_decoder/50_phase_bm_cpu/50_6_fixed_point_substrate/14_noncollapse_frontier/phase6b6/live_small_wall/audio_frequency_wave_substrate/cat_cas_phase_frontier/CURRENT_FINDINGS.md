@@ -5215,3 +5215,59 @@ The next obstruction is:
 ```text
 PANCHARATNAM_HOLONOMY_IS_PUBLIC_ENDPOINT_INVISIBLE_AND_RESIDENT_BUT_FIXED_PUBLIC_PATHS_ADMIT_AN_EQUIVALENT_OR_CLOSED_FORM_COMPACT_CLASSICAL_PHASE_RECURRENCE
 ```
+
+## A shared non-Abelian dark frame makes inverse order material
+
+A two-column dark frame over a public bright ray in `C^3` generalizes the
+scalar gauge carrier. Public `phi1` and `phi2` loops transport the actual
+resident frame by a unitary polar correction. The transported edge overlap
+is positive Hermitian, and the two closed-loop holonomies do not commute.
+
+```text
+BOUNDED_NONABELIAN_WILCZEK_ZEE_SHARED_PHASE_FRAME_NONCOMMUTING_HOLONOMY_COMPOSITION_WITH_NUMERICAL_RESTORATION_AND_REUSE
+classification                    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                      INDEPENDENT_ORACLE_REEXECUTION
+restoration                       NUMERICAL_PHYSICAL_STATE_RESTORATION
+claim ceiling                     Linux x86_64 direct process, complex128
+public chart                      alpha=1.0, beta=0.7
+loop segments                     512
+loop-order difference             1.9817209383 Frobenius
+primary restoration error         4.158e-15
+reuse restoration error           4.687e-15
+100-cycle maximum restoration     1.684e-13
+predeclared tolerance             1e-9
+retained edge history             0 bytes
+```
+
+The primary public word applies `phi1` and then `phi2`; reversing the word
+changes the 2x2 final boundary. The actual inverse must traverse `phi2`
+backward before `phi1`. Reversing that inverse order fails restoration, so
+the earlier U(1) applicability exception no longer applies. Wrong, missing,
+and null-carrier controls also fail. The same restored carrier variable then
+runs the unrelated word `phi1^-1, phi2, phi1`, matching a fresh carrier
+within `5.434e-15`.
+
+Independent SVD-polar reconstruction confirms bright/dark orthogonality,
+positive-Hermitian edge overlap, noncommutation, correct inverse order, and
+reuse without relying on the production inverse-square-root formula. An
+80-digit oracle independently reproduces the finite-edge products and
+restorations. The finite product is explicitly distinct from its continuous
+connection limit.
+
+Resource accounting remains scoped. Six complex128 carrier cells occupy 96
+inline bytes, and the boundary matrix occupies 64 bytes. The 448-byte
+per-edge figure is a named-object subtotal, not a peak; the optimized
+transport function alone has a measured 784-byte stack frame. Complete caller
+stack, code, libm, allocator, whole-process RSS, and timing remain unbounded.
+
+The identical 2x2 matrix recurrence reproduces the accepted boundary, and the
+fixed public loop modules also have closed-form products. The matrix state is
+not claimed minimal. No generic CP2 path compiler, CATVM custody, distinct
+phase resource, advantage, Small Wall crossing, physical execution, physical
+bit replacement, or unbounded computation is established.
+
+The next obstruction is:
+
+```text
+NONABELIAN_SHARED_PHASE_FRAME_ESTABLISHES_ORDER_SENSITIVE_NATIVE_HOLONOMY_BUT_AN_IDENTICAL_2X2_MATRIX_OR_CLOSED_FORM_CLASSICAL_RECURRENCE_REMAINS
+```

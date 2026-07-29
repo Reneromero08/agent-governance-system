@@ -2,14 +2,14 @@
   "schema_version": "2.0.0",
   "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
   "state_date": "2026-07-29",
-  "reconciled_source_head": "1587d37678afd65a6e88ab642da31f44c5b70539",
+  "reconciled_source_head": "7c0bb031a3952865be02c47999277c21ca78b254",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
   "standing_mission": "CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1",
   "supporting_mission": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
   "prime_directive": "REPLACE_THE_BIT_WITH_PI",
   "claim_authority": {
     "registry": "CLAIM_AUTHORITY_REGISTRY.json",
-    "milestones_classified": 90,
+    "milestones_classified": 91,
     "original_catvm_atomic_transaction": "REJECTED_SOURCE_DEFECT_ATOMICITY",
     "original_catvm_preserved_subclaims": [
       "BOUNDED_BOOLEAN_F3_F_TO_G_ALGEBRA",
@@ -49,12 +49,13 @@
     "completed_cyclotomic_star_quotient_result": "BOUNDED_DUAL_PRIME_CONJUGATE_PAIR_CYCLOTOMIC_STAR_QUOTIENT_FIXED_570_CELL_PHASE_CLOSURE_ACROSS_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE",
     "completed_exact_ht_projective_orbit_result": "BOUNDED_EXACT_HT_ANALYTIC_INFINITE_PROJECTIVE_ORBIT_REJECTS_FIXED_FINITE_STATE_LOSSLESS_PHASE_QUOTIENT_WITH_EXACT_RESTORATION_AND_REUSE",
     "completed_stateful_pancharatnam_gauge_transport_result": "BOUNDED_STATEFUL_PANCHARATNAM_GAUGE_TRANSPORT_ENDPOINT_INVISIBLE_HOLONOMY_PHASE_MEMORY_WITH_NUMERICAL_RESTORATION_AND_REUSE",
+    "completed_wilczek_zee_nonabelian_phase_frame_result": "BOUNDED_NONABELIAN_WILCZEK_ZEE_SHARED_PHASE_FRAME_NONCOMMUTING_HOLONOMY_COMPOSITION_WITH_NUMERICAL_RESTORATION_AND_REUSE",
     "rejected_depth_catvm_predecessor": "CATVM_ENFORCED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
     "rejected_depth_catvm_predecessor_defect": "RESIDENT_ERROR_AND_STOP_RESPONSE_ORDERING_DID_NOT_UNIFORMLY_PRESERVE_OR_RESTORE_RESIDENT_STATE",
     "rejected_atomic_dispatch_revision": "CATVM_ATOMIC_DISPATCH_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
     "rejected_atomic_dispatch_revision_defect": "LIVE_289_COMPLEX_GENERATOR_MATRIX_OMITTED_FROM_PRIMARY_AND_REUSE_PEAK_TOTALS",
     "resume_condition_satisfied": true,
-    "next_obstruction": "PANCHARATNAM_HOLONOMY_IS_PUBLIC_ENDPOINT_INVISIBLE_AND_RESIDENT_BUT_FIXED_PUBLIC_PATHS_ADMIT_AN_EQUIVALENT_OR_CLOSED_FORM_COMPACT_CLASSICAL_PHASE_RECURRENCE"
+    "next_obstruction": "NONABELIAN_SHARED_PHASE_FRAME_ESTABLISHES_ORDER_SENSITIVE_NATIVE_HOLONOMY_BUT_AN_IDENTICAL_2X2_MATRIX_OR_CLOSED_FORM_CLASSICAL_RECURRENCE_REMAINS"
   },
   "durable_main_goal_reminder": {
     "primary": [
@@ -97,8 +98,8 @@
   },
   "lane_closure_authority": "USER_ONLY",
   "terminal": false,
-  "current_highest_milestone": "BOUNDED_STATEFUL_PANCHARATNAM_GAUGE_TRANSPORT_ENDPOINT_INVISIBLE_HOLONOMY_PHASE_MEMORY_WITH_NUMERICAL_RESTORATION_AND_REUSE",
-  "current_claim_ceiling": "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_TWO_CELL_PANCHARATNAM_LATITUDE_SEGMENTS4_8_16_32_64_128_256_512_PUBLIC_RECTANGLE_REUSE37_SOFTWARE_ONLY",
+  "current_highest_milestone": "BOUNDED_NONABELIAN_WILCZEK_ZEE_SHARED_PHASE_FRAME_NONCOMMUTING_HOLONOMY_COMPOSITION_WITH_NUMERICAL_RESTORATION_AND_REUSE",
+  "current_claim_ceiling": "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_C3_DARK_TWO_FRAME_PUBLIC_CP2_PHI1_PHI2_LOOPS_SEGMENTS512_PRIMARY_TWO_MODULE_REUSE_THREE_MODULE_SOFTWARE_ONLY",
   "architectural_alignment": {
     "current_phase_circuit_substrate": "ESTABLISHED_DEVELOPMENT_FOUNDATION",
     "bounded_holographic_relational_substrate": "ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_EXACT_15_NODE_FOUR_OWNER_AFFINE_DAG",
@@ -2261,6 +2262,33 @@
     "pancharatnam_gauge_transport_computational_advantage": false,
     "pancharatnam_gauge_transport_small_wall_crossing": false,
     "pancharatnam_gauge_transport_next_obstruction": "PANCHARATNAM_HOLONOMY_IS_PUBLIC_ENDPOINT_INVISIBLE_AND_RESIDENT_BUT_FIXED_PUBLIC_PATHS_ADMIT_AN_EQUIVALENT_OR_CLOSED_FORM_COMPACT_CLASSICAL_PHASE_RECURRENCE",
+    "wilczek_zee_nonabelian_phase_frame_source_head": "7c0bb031a3952865be02c47999277c21ca78b254",
+    "wilczek_zee_nonabelian_phase_frame_durable_evidence": "cat_cas_phase_frontier/WILCZEK_ZEE_NONABELIAN_PHASE_FRAME_RESULTS.json",
+    "wilczek_zee_nonabelian_phase_frame_classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "wilczek_zee_nonabelian_phase_frame_verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+    "wilczek_zee_nonabelian_phase_frame_restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+    "wilczek_zee_nonabelian_phase_frame_claim_ceiling": "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_C3_DARK_TWO_FRAME_PUBLIC_CP2_PHI1_PHI2_LOOPS_SEGMENTS512_PRIMARY_TWO_MODULE_REUSE_THREE_MODULE_SOFTWARE_ONLY",
+    "wilczek_zee_nonabelian_phase_frame_loop_order_difference_frobenius": 1.9817209383202135,
+    "wilczek_zee_nonabelian_phase_frame_primary_restoration_error": 4.157573610616368e-15,
+    "wilczek_zee_nonabelian_phase_frame_reuse_restoration_error": 4.6874630130596784e-15,
+    "wilczek_zee_nonabelian_phase_frame_stress_cycles": 100,
+    "wilczek_zee_nonabelian_phase_frame_stress_maximum_restoration_error": 1.6840494080950143e-13,
+    "wilczek_zee_nonabelian_phase_frame_predeclared_tolerance": 1e-9,
+    "wilczek_zee_nonabelian_phase_frame_actual_restored_carrier_reused": true,
+    "wilczek_zee_nonabelian_phase_frame_generation_lease_enforced": false,
+    "wilczek_zee_nonabelian_phase_frame_retained_edge_history_bytes": 0,
+    "wilczek_zee_nonabelian_phase_frame_named_object_subtotal_bytes": 448,
+    "wilczek_zee_nonabelian_phase_frame_o2_transport_stack_bytes": 784,
+    "wilczek_zee_nonabelian_phase_frame_complete_peak_bounded": false,
+    "wilczek_zee_nonabelian_phase_frame_matched_classical": "IDENTICAL_2X2_HOLONOMY_MATRIX_RECURRENCE",
+    "wilczek_zee_nonabelian_phase_frame_matrix_state_minimal_claimed": false,
+    "wilczek_zee_nonabelian_phase_frame_closed_form_modules_available": true,
+    "wilczek_zee_nonabelian_phase_frame_generic_cp2_path_compiler": false,
+    "wilczek_zee_nonabelian_phase_frame_catvm_custody": false,
+    "wilczek_zee_nonabelian_phase_frame_distinct_phase_resource": false,
+    "wilczek_zee_nonabelian_phase_frame_computational_advantage": false,
+    "wilczek_zee_nonabelian_phase_frame_small_wall_crossing": false,
+    "wilczek_zee_nonabelian_phase_frame_next_obstruction": "NONABELIAN_SHARED_PHASE_FRAME_ESTABLISHES_ORDER_SENSITIVE_NATIVE_HOLONOMY_BUT_AN_IDENTICAL_2X2_MATRIX_OR_CLOSED_FORM_CLASSICAL_RECURRENCE_REMAINS",
     "algebraic_general_affine_equation_elimination": true,
     "general_boolean_relation_elimination": false,
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
@@ -2357,7 +2385,8 @@
     "BOUNDED_EXACT_DYADIC_CYCLOTOMIC_PHASE_PRECISION_GROWTH_ON_FIXED_570_CELL_NECKLACE_LATENT_CARRIER_WITH_EXACT_RESTORATION_AND_REUSE",
     "BOUNDED_DUAL_PRIME_CONJUGATE_PAIR_CYCLOTOMIC_STAR_QUOTIENT_FIXED_570_CELL_PHASE_CLOSURE_ACROSS_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE",
     "BOUNDED_EXACT_HT_ANALYTIC_INFINITE_PROJECTIVE_ORBIT_REJECTS_FIXED_FINITE_STATE_LOSSLESS_PHASE_QUOTIENT_WITH_EXACT_RESTORATION_AND_REUSE",
-    "BOUNDED_STATEFUL_PANCHARATNAM_GAUGE_TRANSPORT_ENDPOINT_INVISIBLE_HOLONOMY_PHASE_MEMORY_WITH_NUMERICAL_RESTORATION_AND_REUSE"
+    "BOUNDED_STATEFUL_PANCHARATNAM_GAUGE_TRANSPORT_ENDPOINT_INVISIBLE_HOLONOMY_PHASE_MEMORY_WITH_NUMERICAL_RESTORATION_AND_REUSE",
+    "BOUNDED_NONABELIAN_WILCZEK_ZEE_SHARED_PHASE_FRAME_NONCOMMUTING_HOLONOMY_COMPOSITION_WITH_NUMERICAL_RESTORATION_AND_REUSE"
   ],
   "rejected_results": [
     {
@@ -2410,6 +2439,7 @@
     "FIXED_WIDTH_CYCLOTOMIC_STAR_QUOTIENT_DIAGNOSED_AS_LOSSY_WITH_IDENTICAL_CLASSICAL_RECURRENCE",
     "FIXED_FINITE_STATE_LOSSLESS_QUOTIENT_REJECTED_FOR_THE_EXACT_INFINITE_HT_PROJECTIVE_ORBIT",
     "STATEFUL_PANCHARATNAM_PHASE_MEMORY_ESTABLISHED_BUT_FIXED_PATH_CLASSICAL_PRODUCT_REMAINS_EQUIVALENT",
+    "NONABELIAN_SHARED_PHASE_FRAME_ESTABLISHED_BUT_IDENTICAL_2X2_OR_CLOSED_FORM_CLASSICAL_PRODUCT_REMAINS_EQUIVALENT",
     "PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_FIXED_TWO_CELL_570_COMPLEX_RECURRENCE",
     "BROADER_NON_AFFINE_PHASE_COMPOSITION_ALGEBRA",
     "FIXED_RANK_OR_COMPACT_CLOSURE_WITHOUT_BOOLEAN_RECURRENCE",
@@ -2428,7 +2458,7 @@
     "OFFICIAL_EXTERNAL_ACCEPTANCE",
     "CROSS_DOMAIN_TRANSFER"
   ],
-  "active_frontier_candidates_status": "ACTIVE_AFTER_STRICT_SCOPE_STATEFUL_PANCHARATNAM_GAUGE_TRANSPORT",
+  "active_frontier_candidates_status": "ACTIVE_AFTER_STRICT_SCOPE_NONABELIAN_WILCZEK_ZEE_PHASE_FRAME",
   "next_crossing": [
     "COMPACT_COMPILED_BODY_TYPED_RELATIONAL_MODULES",
     "NATIVE_DENSE_WIDTH2_RELATIONAL_PHASE_CONTRACTION",
@@ -2501,9 +2531,10 @@
     "FIXED_WIDTH_CYCLOTOMIC_STAR_QUOTIENT_SEMANTIC_LOSS_AND_IDENTICAL_RECURRENCE_DIAGNOSED",
     "FIXED_FINITE_STATE_LOSSLESS_QUOTIENT_REJECTED_FOR_EXACT_INFINITE_HT_PROJECTIVE_ORBIT",
     "STATEFUL_PANCHARATNAM_GAUGE_TRANSPORT_PUBLIC_ENDPOINT_INVISIBLE_HOLONOMY_ESTABLISHED",
+    "NONABELIAN_WILCZEK_ZEE_SHARED_PHASE_FRAME_NONCOMMUTING_HOLONOMY_ESTABLISHED",
     "PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_570_COMPLEX_RECURRENCE"
   ],
-  "next_crossing_status": "STATEFUL_PANCHARATNAM_HOLONOMY_REMAINS_EQUIVALENT_TO_A_COMPACT_SCALAR_OR_CLOSED_FORM_CLASSICAL_PATH_PRODUCT",
+  "next_crossing_status": "NONABELIAN_SHARED_PHASE_FRAME_REMAINS_EQUIVALENT_TO_AN_IDENTICAL_2X2_MATRIX_OR_CLOSED_FORM_CLASSICAL_PATH_PRODUCT",
   "frontier_warning": "ANOTHER_HANDCRAFTED_GRAPH_FAMILY_IS_INSUFFICIENT_IF_INTERMEDIATE_RELATION_WIDTH_CARRIER_STATE_OR_PROVENANCE_GROWS_EXPONENTIALLY",
   "agent_policy": {
     "continue_without_new_user_prompt": true,
