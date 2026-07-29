@@ -6307,3 +6307,64 @@ The live obstruction is:
 ```text
 COMPULSORY_PI_SCALE_HAS_A_COMPACT_LEDGER_BUT_DIVIDING_IT_EXPANDS_RESIDUAL_HEIGHT_IN_BOTH_TESTED_INTEGRAL_BASES_AND_THE_IDENTICAL_CLASSICAL_NORMALIZATION_REMAINS
 ```
+
+## Exact multi-embedding unit balance repairs pi payload but remains above raw
+
+The bounded successor adds a seven-entry cyclotomic-unit ledger after
+pi-content factorization and chooses unit moves with the exact field trace
+of `a * conjugate(a)`. This is the sum of squared magnitude over all sixteen
+embeddings and is compared with exact integers.
+
+```text
+claim
+    BOUNDED_EXACT_MULTI_EMBEDDING_TRACE_ENERGY_CYCLOTOMIC_UNIT_BALANCING_AFTER_PI_FACTORIZATION_REDUCES_RESIDENT_PI_RESIDUAL_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1_AND64_BUT_REMAINS_ABOVE_THE_IDENTICAL_RAW_RECURRENCE_AT_PERIOD64_AND_DECLARED_LIVE_STATE_COUNTS_DUPLICATE_REMATERIALIZATION_WITH_EXACT_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+```text
+period family    raw       pi-only     balanced resident   declared live
+1      PRIMARY   1,306,953  6,152,594            601,130       1,202,260
+1      REUSE     1,332,125  6,213,406            603,011       1,206,022
+64     PRIMARY   2,368,807 11,160,253          5,489,878      10,979,756
+64     REUSE     2,447,532 11,433,973          5,699,705      11,399,410
+```
+
+All four balanced resident and declared-live counts improve on the pi-only
+representation. Both period-64 counts remain above the identical raw
+recurrence. The declared-live count includes a full public-topology
+rematerialization beside the carrier without alias discounts; it is not a
+whole-process peak.
+
+The no-production-import oracle recompiles both public operators, verifies
+both annihilator identities, uses sequential `x mod q` coefficient
+advancement, and reproduces every boundary and forward/inverse resource
+tuple. The inverse subtracts payload and both ledgers on the original
+backing. PRIMARY-to-REUSE cross-family reuse is verified at period 1;
+period-64 cases restore separately.
+
+The greedy search has a 128-step cap. Fifty-three PRIMARY and fifty-eight
+REUSE calls hit it at period 64, so local or global optimality is not
+established. Multiplicative independence of the unit generators is not
+certified. Python objects, allocator behavior, convolution temporaries,
+native-library storage, and whole-process peak remain unbounded. The
+identical recurrence and balancer remain available to classical software.
+
+The next selected experiment is:
+
+```text
+EXACT_LOG_EMBEDDING_UNIT_LATTICE_CLOSEST_VECTOR_BALANCING_WITH_SEARCH_WORK_AND_LEDGER_ACCOUNTING
+```
+
+The live obstruction is:
+
+```text
+EXACT_TRACE_ENERGY_UNIT_BALANCING_REDUCES_PI_FACTORED_RESIDENT_PAYLOAD_BUT_RESIDENT_AND_DECLARED_LIVE_STATE_REMAIN_ABOVE_THE_RAW_RECURRENCE_AT_PERIOD64_MANY_CALLS_HIT_THE_DECLARED_CAP_AND_THE_IDENTICAL_CLASSICAL_BALANCER_REMAINS
+```

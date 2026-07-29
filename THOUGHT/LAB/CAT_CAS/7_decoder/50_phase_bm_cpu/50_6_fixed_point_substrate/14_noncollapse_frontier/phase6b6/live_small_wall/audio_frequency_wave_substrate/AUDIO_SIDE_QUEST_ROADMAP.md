@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_PI_CONTENT_LEDGER_WORSENS_RESIDENT_PAYLOAD_IN_TWO_TESTED_INTEGRAL_COORDINATE_SYSTEMS`
-**Roadmap version:** `11.3`
+**Status:** `STRICT_SCOPE_EXACT_MULTI_EMBEDDING_UNIT_BALANCE_REDUCES_PI_FACTORED_PAYLOAD_BUT_REMAINS_ABOVE_RAW_AT_PERIOD64`
+**Roadmap version:** `11.4`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `7c79414f2beb34c29bf0d63783a6effea26c65ed`
+**Reconciled source head:** `b328df5b1c012f0b9c3120f095117c3c1127cabc`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WORSENS_CARRIER_PAYLOAD_IN_ZETA_AND_PI_INTEGRAL_BASES_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_PAYLOAD_AND_LEDGER_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_Q_ZETA17_PI_CONTENT_LEDGER_NORMALIZED_RECURRENCE_PERIODS1_4_16_64_256_ZETA_AND_PI_INTEGRAL_BASIS_RESIDENT_PAYLOAD_DIAGNOSTIC_EXACT_SUBTRACTIVE_PAYLOAD_AND_LEDGER_RESTORATION_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_MULTI_EMBEDDING_TRACE_ENERGY_CYCLOTOMIC_UNIT_BALANCING_AFTER_PI_FACTORIZATION_REDUCES_RESIDENT_PI_RESIDUAL_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1_AND64_BUT_REMAINS_ABOVE_THE_IDENTICAL_RAW_RECURRENCE_AT_PERIOD64_AND_DECLARED_LIVE_STATE_COUNTS_DUPLICATE_REMATERIALIZATION_WITH_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_Q_ZETA17_PI_CONTENT_PLUS_SEVEN_DECLARED_UNIT_LEDGER_EXACT_TRACE_ENERGY_BALANCE_128_STEP_CAP_PERIODS1_AND64_RESIDENT_AND_DECLARED_DUPLICATE_REMATERIALIZATION_LIVE_PAYLOAD_DIAGNOSTIC_EXACT_SUBTRACTIVE_RESTORATION_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`7c79414f2beb34c29bf0d63783a6effea26c65ed`. The current 107-milestone
+`b328df5b1c012f0b9c3120f095117c3c1127cabc`. The current 108-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -3196,6 +3196,88 @@ The live obstruction is:
 COMPULSORY_PI_SCALE_HAS_A_COMPACT_LEDGER_BUT_DIVIDING_IT_EXPANDS_RESIDUAL_HEIGHT_IN_BOTH_TESTED_INTEGRAL_BASES_AND_THE_IDENTICAL_CLASSICAL_NORMALIZATION_REMAINS
 ```
 
+## Exact all-embedding unit balance repairs pi residuals but not the raw comparison
+
+The bounded successor stores each value as a `Z[zeta17]` residual, a
+`pi = 1 - zeta17` exponent, and seven declared cyclotomic-unit exponents.
+It selects unit moves with the exact field trace of
+`a * conjugate(a)`, which equals squared magnitude summed over all sixteen
+embeddings. Selection uses exact integers.
+
+```text
+claim
+    BOUNDED_EXACT_MULTI_EMBEDDING_TRACE_ENERGY_CYCLOTOMIC_UNIT_BALANCING_AFTER_PI_FACTORIZATION_REDUCES_RESIDENT_PI_RESIDUAL_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1_AND64_BUT_REMAINS_ABOVE_THE_IDENTICAL_RAW_RECURRENCE_AT_PERIOD64_AND_DECLARED_LIVE_STATE_COUNTS_DUPLICATE_REMATERIALIZATION_WITH_EXACT_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+The balance reduces the pi-only residual representation in all four declared
+cases. It does not beat the identical raw recurrence at period 64:
+
+```text
+period family    raw       pi-only     balanced resident   declared live
+1      PRIMARY   1,306,953  6,152,594            601,130       1,202,260
+1      REUSE     1,332,125  6,213,406            603,011       1,206,022
+64     PRIMARY   2,368,807 11,160,253          5,489,878      10,979,756
+64     REUSE     2,447,532 11,433,973          5,699,705      11,399,410
+```
+
+The declared live count conservatively includes the complete
+public-topology rematerialization beside the carrier without alias
+discounts. It is not a whole-process memory bound. The period-64 declared
+live payload remains above raw by `8,610,949` and `8,951,878` bits.
+
+The accepted counters include basis-operator accumulation, exact norm
+construction, candidate norm multiplication, selected unit moves,
+scalar-vector multiplication, unit-power materialization, resident payload,
+and duplicate rematerialization payload. Python objects, allocator storage,
+internal convolution temporaries, native-library storage, and whole-process
+peak remain outside the claim.
+
+The separate oracle imports no production successor. It recompiles both
+public operators, verifies both complete annihilator identities, advances
+coefficients sequentially by `x mod q`, and reproduces every boundary,
+forward resource tuple, and separately rebuilt inverse resource tuple.
+
+The inverse rematerializes from public topology and subtracts output,
+coefficients, basis, seed, pi ledgers, and unit ledgers from the original
+backing. The unrelated family reuses that backing at period 1 and agrees
+with fresh execution. Period-64 cases restore separately. Generation and
+lease advance; full object equality and bounded repeated-use metadata are
+not claimed.
+
+The 128-step greedy cap is part of the claim ceiling. Fifty-three PRIMARY
+and fifty-eight REUSE balance calls hit it at period 64. A cap hit does not
+certify a local or global optimum, and multiplicative independence of the
+seven generators is not certified. The identical exact recurrence and
+balancer remain available to compact classical software.
+
+The next phase-owned experiment is:
+
+```text
+EXACT_LOG_EMBEDDING_UNIT_LATTICE_CLOSEST_VECTOR_BALANCING_WITH_SEARCH_WORK_AND_LEDGER_ACCOUNTING
+```
+
+It must determine whether the period-64 gap is an artifact of capped greedy
+search or persists under a bounded exact unit-lattice reduction. It must
+count lattice construction, search, ledger width, materialization,
+public-topology inverse rematerialization, and the strongest identical
+classical implementation. It must not add periods or public families unless
+needed to distinguish those mechanisms.
+
+The live obstruction is:
+
+```text
+EXACT_TRACE_ENERGY_UNIT_BALANCING_REDUCES_PI_FACTORED_RESIDENT_PAYLOAD_BUT_RESIDENT_AND_DECLARED_LIVE_STATE_REMAIN_ABOVE_THE_RAW_RECURRENCE_AT_PERIOD64_MANY_CALLS_HIT_THE_DECLARED_CAP_AND_THE_IDENTICAL_CLASSICAL_BALANCER_REMAINS
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -3233,7 +3315,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WORSENS_CARRIER_PAYLOAD_IN_ZETA_AND_PI_INTEGRAL_BASES_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_PAYLOAD_AND_LEDGER_RESTORATION_AND_REUSE
+BOUNDED_EXACT_MULTI_EMBEDDING_TRACE_ENERGY_CYCLOTOMIC_UNIT_BALANCING_AFTER_PI_FACTORIZATION_REDUCES_RESIDENT_PI_RESIDUAL_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1_AND64_BUT_REMAINS_ABOVE_THE_IDENTICAL_RAW_RECURRENCE_AT_PERIOD64_AND_DECLARED_LIVE_STATE_COUNTS_DUPLICATE_REMATERIALIZATION_WITH_EXACT_RESTORATION_AND_REUSE
 ```
 
 Not established:
