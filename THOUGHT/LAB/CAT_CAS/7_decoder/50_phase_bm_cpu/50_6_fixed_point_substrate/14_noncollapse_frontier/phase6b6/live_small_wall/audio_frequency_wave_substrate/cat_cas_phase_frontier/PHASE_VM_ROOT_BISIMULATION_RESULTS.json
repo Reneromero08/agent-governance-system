@@ -2,7 +2,7 @@
   "result": "PASS",
   "claim": "BOUNDED_ROOT_LOCKED_PHASE_VM_OPERATION_TRACE_CLASSICAL_BISIMULATION_WITH_NUMERICAL_RESTORATION_AND_REUSE",
   "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
-  "claim_ceiling": "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_Q3_ROOT_LOCKED_STREAMING_PHASE_VM_SIX_OPCODES_EXHAUSTIVE_FIVE_REGISTER_LOCAL_DOMAIN_AND_TWO_EIGHT_REGISTER_CHAINED_PROGRAMS_SOFTWARE_ONLY",
+  "claim_ceiling": "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_Q3_ROOT_LOCKED_STREAMING_PHASE_VM_SIX_OPCODES_NINE_CANONICAL_LEGAL_WIRING_VARIANTS_ALL_243_Q3_STATES_AND_TWO_EIGHT_REGISTER_CHAINED_PROGRAMS_SOFTWARE_ONLY",
   "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
   "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
   "accepted": {
@@ -13,10 +13,10 @@
     "scope": "ROOT_LOCKED_PUBLIC_HOLO_OPERATION_DOMAIN",
     "exhaustive": {
       "registers": 5,
-      "operation_variants": 8,
+      "operation_variants": 9,
       "input_states_per_variant": 243,
-      "operation_cases": 1944,
-      "forward_inverse_checkpoints": 3888,
+      "operation_cases": 2187,
+      "forward_inverse_checkpoints": 4374,
       "cswap_active_cases": 81,
       "pcswap_active_cases": 54
     },
@@ -55,6 +55,8 @@
         1
       ],
       "fresh_restored_boundary_equal": true,
+      "fresh_restored_native_boundary_max_abs": 6.6416674085110684E-14,
+      "fresh_restored_native_boundary_equal_within_tolerance": true,
       "same_carrier_backing_reused": true,
       "restoration_generation_sequence": [
         1,
@@ -63,9 +65,10 @@
       "baseline_reload_bytes": 0
     },
     "trace": {
-      "semantic_trace_fnv1a64": "76c64491b21a63d2",
-      "checkpoints": 3928,
-      "compared_relation_cells": 19760,
+      "semantic_trace_fnv1a64": "f752af9c339230e9",
+      "trace_hash_role": "DETERMINISTIC_REPLAY_COMMITMENT_NOT_COLLISION_RESISTANT_PROOF",
+      "checkpoints": 4414,
+      "compared_relation_cells": 22190,
       "intermediate_state_inspected_by_diagnostic": true,
       "intermediate_state_emitted": false
     },
@@ -98,18 +101,24 @@
       "native_complex128_rails_per_register": 2,
       "native_heap_payload_bytes_per_register": 32,
       "classical_uint8_payload_bytes_per_register": 1,
-      "exhaustive_native_heap_payload_bytes": 160,
-      "exhaustive_classical_payload_bytes": 5,
-      "chain_native_heap_payload_bytes": 256,
-      "chain_classical_payload_bytes": 8,
+      "exhaustive_one_native_carrier_heap_payload_bytes": 160,
+      "exhaustive_simultaneous_native_and_baseline_clone_heap_payload_bytes": 320,
+      "exhaustive_one_classical_state_payload_bytes": 5,
+      "chain_one_native_carrier_heap_payload_bytes": 256,
+      "chain_simultaneous_three_native_carrier_heap_payload_bytes": 768,
+      "chain_one_classical_state_payload_bytes": 8,
       "public_program_descriptor_shared_between_paths": true,
-      "trace_buffers_are_verification_only": true,
+      "trace_symbolic_and_stack_buffers_are_verification_only": true,
+      "accepted_proof_total_memory_claimed": false,
       "runtime_advantage_claimed": false,
       "whole_process_peak_claimed": false
     },
     "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
     "finite_deterministic_identity_simulation_lemma": "A_CLASSICAL_SIMULATOR_MAY_STORE_THE_SAME_FINITE_MACHINE_STATE_AND_APPLY_THE_SAME_DETERMINISTIC_TRANSITION;_THE_ROOT_LOCKED_SUBDOMAIN_HERE_ADMITS_THE_STRICTLY_SMALLER_Q3_SYMBOLIC_STATE",
     "lemma_scope": "FINITE_DETERMINISTIC_SOFTWARE_TRANSITION_SYSTEMS_ONLY",
+    "operand_position_coverage": "NINE_CANONICAL_LEGAL_WIRING_VARIANTS_ALL_243_Q3_STATES",
+    "all_register_placements_executed": false,
+    "register_permutation_equivariance_claimed_from_source": false,
     "exceptions_not_adjudicated": [
       "PHYSICAL_ANALOG_RESOURCES",
       "EXTERNAL_ORACLES",
@@ -123,7 +132,7 @@
     "physical_waveform_execution": false,
     "physical_bit_replacement": false,
     "unbounded_computation_established": false,
-    "claim_ceiling": "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_Q3_ROOT_LOCKED_STREAMING_PHASE_VM_SIX_OPCODES_EXHAUSTIVE_FIVE_REGISTER_LOCAL_DOMAIN_AND_TWO_EIGHT_REGISTER_CHAINED_PROGRAMS_SOFTWARE_ONLY",
+    "claim_ceiling": "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_Q3_ROOT_LOCKED_STREAMING_PHASE_VM_SIX_OPCODES_NINE_CANONICAL_LEGAL_WIRING_VARIANTS_ALL_243_Q3_STATES_AND_TWO_EIGHT_REGISTER_CHAINED_PROGRAMS_SOFTWARE_ONLY",
     "terminal": false
   },
   "independent_oracle": {
@@ -149,8 +158,8 @@
     "fresh_restored_reuse_boundary_equal": true,
     "input_states_per_variant": 243,
     "lemma_scope": "FINITE_DETERMINISTIC_SOFTWARE_TRANSITION_SYSTEMS_ONLY",
-    "operation_cases": 1944,
-    "operation_variants": 8,
+    "operation_cases": 2187,
+    "operation_variants": 9,
     "oracle": "INDEPENDENT_MPMATH80_Q3_INTERPOLATION_AND_SYMBOLIC_TRANSITION_REEXECUTION",
     "pcswap_active_cases": 54,
     "precision_decimal_digits": 80,
@@ -180,7 +189,7 @@
     ],
     "reuse_boundary_matches": true,
     "root_locked_symbolic_state_is_sufficient": true,
-    "semantic_trace_fnv1a64": "76c64491b21a63d2",
+    "semantic_trace_fnv1a64": "f752af9c339230e9",
     "small_wall_crossed": false,
     "terminal": false,
     "two_bit_packing_available": true

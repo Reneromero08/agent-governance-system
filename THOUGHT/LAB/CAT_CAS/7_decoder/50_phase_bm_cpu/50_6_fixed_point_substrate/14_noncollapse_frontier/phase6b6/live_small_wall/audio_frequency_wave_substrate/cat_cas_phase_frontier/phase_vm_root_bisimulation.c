@@ -21,7 +21,7 @@
 
 #define BISIM_EXHAUSTIVE_REGISTERS 5U
 #define BISIM_CHAIN_REGISTERS 8U
-#define BISIM_VARIANTS 8U
+#define BISIM_VARIANTS 9U
 #define BISIM_EXHAUSTIVE_STATES 243U
 #define BISIM_TOLERANCE 2.0e-11
 
@@ -210,6 +210,14 @@ static struct instruction bisim_variant(size_t variant) {
             .c = 0U,
             .target = 0U,
             .amount = 2
+        },
+        {
+            .op = OP_ROT,
+            .a = 0U,
+            .b = 0U,
+            .c = 0U,
+            .target = 0U,
+            .amount = 0
         },
         {
             .op = OP_ADD,
@@ -470,6 +478,23 @@ static int bisim_boundary_equal(
     ) == 0;
 }
 
+static double bisim_native_relation_error(
+    const struct carrier *left,
+    const struct carrier *right
+) {
+    if (left->registers != right->registers) {
+        bisim_fail("native relation comparison register mismatch");
+    }
+    double maximum = 0.0;
+    for (size_t index = 0U; index < left->registers; ++index) {
+        maximum = fmax(
+            maximum,
+            cabs(relation(left, index) - relation(right, index))
+        );
+    }
+    return maximum;
+}
+
 static double bisim_missing_inverse_error(void) {
     struct symbolic_state symbolic = bisim_chain_initial();
     struct carrier native = make_carrier(BISIM_CHAIN_REGISTERS, 211);
@@ -621,6 +646,11 @@ int main(void) {
     if (!bisim_boundary_equal(reuse_boundary, fresh_boundary)) {
         bisim_fail("fresh/restored reuse boundary mismatch");
     }
+    const double fresh_restored_native_boundary_error =
+        bisim_native_relation_error(&native, &fresh);
+    if (fresh_restored_native_boundary_error > BISIM_TOLERANCE) {
+        bisim_fail("fresh/restored native relation boundary mismatch");
+    }
     bisim_run_program_inverse(
         &native,
         &symbolic,
@@ -718,6 +748,12 @@ int main(void) {
             : "false"
     );
     printf(
+        "    \"fresh_restored_native_boundary_max_abs\": %.17g,\n"
+        "    \"fresh_restored_native_boundary_equal_within_tolerance\": "
+        "true,\n",
+        fresh_restored_native_boundary_error
+    );
+    printf(
         "    \"same_carrier_backing_reused\": true,\n"
         "    \"restoration_generation_sequence\": [1,2],\n"
         "    \"baseline_reload_bytes\": 0\n"
@@ -727,6 +763,11 @@ int main(void) {
     printf(
         "    \"semantic_trace_fnv1a64\": \"%016" PRIx64 "\",\n",
         metrics.trace_hash
+    );
+    printf(
+        "    \"trace_hash_role\": "
+        "\"DETERMINISTIC_REPLAY_COMMITMENT_NOT_COLLISION_RESISTANT_"
+        "PROOF\",\n"
     );
     printf(
         "    \"checkpoints\": %" PRIu64 ",\n",
@@ -805,26 +846,41 @@ int main(void) {
         sizeof(uint8_t)
     );
     printf(
-        "    \"exhaustive_native_heap_payload_bytes\": %zu,\n",
+        "    \"exhaustive_one_native_carrier_heap_payload_bytes\": "
+        "%zu,\n",
         BISIM_EXHAUSTIVE_REGISTERS
             * UINT64_C(2) * sizeof(double complex)
     );
     printf(
-        "    \"exhaustive_classical_payload_bytes\": %zu,\n",
+        "    \"exhaustive_simultaneous_native_and_baseline_clone_heap_"
+        "payload_bytes\": %zu,\n",
+        BISIM_EXHAUSTIVE_REGISTERS
+            * UINT64_C(4) * sizeof(double complex)
+    );
+    printf(
+        "    \"exhaustive_one_classical_state_payload_bytes\": %zu,\n",
         BISIM_EXHAUSTIVE_REGISTERS * sizeof(uint8_t)
     );
     printf(
-        "    \"chain_native_heap_payload_bytes\": %zu,\n",
+        "    \"chain_one_native_carrier_heap_payload_bytes\": %zu,\n",
         BISIM_CHAIN_REGISTERS
             * UINT64_C(2) * sizeof(double complex)
     );
     printf(
-        "    \"chain_classical_payload_bytes\": %zu,\n",
+        "    \"chain_simultaneous_three_native_carrier_heap_payload_"
+        "bytes\": %zu,\n",
+        BISIM_CHAIN_REGISTERS
+            * UINT64_C(6) * sizeof(double complex)
+    );
+    printf(
+        "    \"chain_one_classical_state_payload_bytes\": %zu,\n",
         BISIM_CHAIN_REGISTERS * sizeof(uint8_t)
     );
     printf(
         "    \"public_program_descriptor_shared_between_paths\": true,\n"
-        "    \"trace_buffers_are_verification_only\": true,\n"
+        "    \"trace_symbolic_and_stack_buffers_are_verification_only\": "
+        "true,\n"
+        "    \"accepted_proof_total_memory_claimed\": false,\n"
         "    \"runtime_advantage_claimed\": false,\n"
         "    \"whole_process_peak_claimed\": false\n"
     );
@@ -844,6 +900,15 @@ int main(void) {
         "\"FINITE_DETERMINISTIC_SOFTWARE_TRANSITION_SYSTEMS_ONLY\",\n"
     );
     printf(
+        "  \"operand_position_coverage\": "
+        "\"NINE_CANONICAL_LEGAL_WIRING_VARIANTS_ALL_243_Q3_STATES\",\n"
+    );
+    printf(
+        "  \"all_register_placements_executed\": false,\n"
+        "  \"register_permutation_equivariance_claimed_from_source\": "
+        "false,\n"
+    );
+    printf(
         "  \"exceptions_not_adjudicated\": "
         "[\"PHYSICAL_ANALOG_RESOURCES\",\"EXTERNAL_ORACLES\","
         "\"NONDETERMINISTIC_RESOURCES\",\"UNBOUNDED_PRECISION_MODELS\"],\n"
@@ -858,8 +923,9 @@ int main(void) {
         "  \"unbounded_computation_established\": false,\n"
         "  \"claim_ceiling\": "
         "\"LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_Q3_ROOT_LOCKED_"
-        "STREAMING_PHASE_VM_SIX_OPCODES_EXHAUSTIVE_FIVE_REGISTER_LOCAL_"
-        "DOMAIN_AND_TWO_EIGHT_REGISTER_CHAINED_PROGRAMS_SOFTWARE_ONLY\",\n"
+        "STREAMING_PHASE_VM_SIX_OPCODES_NINE_CANONICAL_LEGAL_WIRING_"
+        "VARIANTS_ALL_243_Q3_STATES_AND_TWO_EIGHT_REGISTER_CHAINED_"
+        "PROGRAMS_SOFTWARE_ONLY\",\n"
         "  \"terminal\": false\n"
     );
     printf("}\n");

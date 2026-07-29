@@ -27,6 +27,7 @@ Instruction = tuple[str, int, int, int, int, int]
 VARIANTS: Final[tuple[Instruction, ...]] = (
     ("ROT", 0, 0, 0, 0, 1),
     ("ROT", 0, 0, 0, 0, 2),
+    ("ROT", 0, 0, 0, 0, 0),
     ("ADD", 1, 0, 0, 0, 0),
     ("MULADD", 1, 2, 0, 0, 0),
     ("MULADD", 1, 1, 0, 0, 0),

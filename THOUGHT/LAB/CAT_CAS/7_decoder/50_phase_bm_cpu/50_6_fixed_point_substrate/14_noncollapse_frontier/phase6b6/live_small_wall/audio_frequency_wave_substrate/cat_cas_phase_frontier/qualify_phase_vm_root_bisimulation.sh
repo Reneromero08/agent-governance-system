@@ -81,10 +81,10 @@ jq -e '
   and .native_backend == "streaming_phase_vm.c"
   and .scope == "ROOT_LOCKED_PUBLIC_HOLO_OPERATION_DOMAIN"
   and .exhaustive.registers == 5
-  and .exhaustive.operation_variants == 8
+  and .exhaustive.operation_variants == 9
   and .exhaustive.input_states_per_variant == 243
-  and .exhaustive.operation_cases == 1944
-  and .exhaustive.forward_inverse_checkpoints == 3888
+  and .exhaustive.operation_cases == 2187
+  and .exhaustive.forward_inverse_checkpoints == 4374
   and .exhaustive.cswap_active_cases == 81
   and .exhaustive.pcswap_active_cases == 54
   and .chained_transactions.registers == 8
@@ -94,12 +94,16 @@ jq -e '
   and .chained_transactions.reuse_boundary == [0,0,1,2,2,0,0,1]
   and .chained_transactions.fresh_boundary == [0,0,1,2,2,0,0,1]
   and .chained_transactions.fresh_restored_boundary_equal
+  and .chained_transactions.fresh_restored_native_boundary_max_abs <= 2e-11
+  and .chained_transactions.fresh_restored_native_boundary_equal_within_tolerance
   and .chained_transactions.same_carrier_backing_reused
   and .chained_transactions.restoration_generation_sequence == [1,2]
   and .chained_transactions.baseline_reload_bytes == 0
-  and .trace.semantic_trace_fnv1a64 == "76c64491b21a63d2"
-  and .trace.checkpoints == 3928
-  and .trace.compared_relation_cells == 19760
+  and .trace.semantic_trace_fnv1a64 == "f752af9c339230e9"
+  and .trace.trace_hash_role
+    == "DETERMINISTIC_REPLAY_COMMITMENT_NOT_COLLISION_RESISTANT_PROOF"
+  and .trace.checkpoints == 4414
+  and .trace.compared_relation_cells == 22190
   and .trace.intermediate_state_inspected_by_diagnostic
   and (.trace.intermediate_state_emitted | not)
   and .numerics.predeclared_tolerance == 2e-11
@@ -124,16 +128,23 @@ jq -e '
   and .resource_law.native_complex128_rails_per_register == 2
   and .resource_law.native_heap_payload_bytes_per_register == 32
   and .resource_law.classical_uint8_payload_bytes_per_register == 1
-  and .resource_law.exhaustive_native_heap_payload_bytes == 160
-  and .resource_law.exhaustive_classical_payload_bytes == 5
-  and .resource_law.chain_native_heap_payload_bytes == 256
-  and .resource_law.chain_classical_payload_bytes == 8
+  and .resource_law.exhaustive_one_native_carrier_heap_payload_bytes == 160
+  and .resource_law.exhaustive_simultaneous_native_and_baseline_clone_heap_payload_bytes == 320
+  and .resource_law.exhaustive_one_classical_state_payload_bytes == 5
+  and .resource_law.chain_one_native_carrier_heap_payload_bytes == 256
+  and .resource_law.chain_simultaneous_three_native_carrier_heap_payload_bytes == 768
+  and .resource_law.chain_one_classical_state_payload_bytes == 8
   and .resource_law.public_program_descriptor_shared_between_paths
-  and .resource_law.trace_buffers_are_verification_only
+  and .resource_law.trace_symbolic_and_stack_buffers_are_verification_only
+  and (.resource_law.accepted_proof_total_memory_claimed | not)
   and (.resource_law.runtime_advantage_claimed | not)
   and (.resource_law.whole_process_peak_claimed | not)
   and .restoration_classification == "NUMERICAL_PHYSICAL_STATE_RESTORATION"
   and .lemma_scope == "FINITE_DETERMINISTIC_SOFTWARE_TRANSITION_SYSTEMS_ONLY"
+  and .operand_position_coverage
+    == "NINE_CANONICAL_LEGAL_WIRING_VARIANTS_ALL_243_Q3_STATES"
+  and (.all_register_placements_executed | not)
+  and (.register_permutation_equivariance_claimed_from_source | not)
   and .exceptions_not_adjudicated == [
     "PHYSICAL_ANALOG_RESOURCES",
     "EXTERNAL_ORACLES",
@@ -148,7 +159,7 @@ jq -e '
   and (.physical_bit_replacement | not)
   and (.unbounded_computation_established | not)
   and .claim_ceiling
-    == "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_Q3_ROOT_LOCKED_STREAMING_PHASE_VM_SIX_OPCODES_EXHAUSTIVE_FIVE_REGISTER_LOCAL_DOMAIN_AND_TWO_EIGHT_REGISTER_CHAINED_PROGRAMS_SOFTWARE_ONLY"
+    == "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_Q3_ROOT_LOCKED_STREAMING_PHASE_VM_SIX_OPCODES_NINE_CANONICAL_LEGAL_WIRING_VARIANTS_ALL_243_Q3_STATES_AND_TWO_EIGHT_REGISTER_CHAINED_PROGRAMS_SOFTWARE_ONLY"
   and (.terminal | not)
 ' "$result" >/dev/null
 
@@ -158,13 +169,13 @@ jq -e '
     == "INDEPENDENT_MPMATH80_Q3_INTERPOLATION_AND_SYMBOLIC_TRANSITION_REEXECUTION"
   and (.production_backend_imported | not)
   and .precision_decimal_digits == 80
-  and .operation_cases == 1944
-  and .operation_variants == 8
+  and .operation_cases == 2187
+  and .operation_variants == 9
   and .input_states_per_variant == 243
   and .cswap_active_cases == 81
   and .pcswap_active_cases == 54
   and .complex_formula_maximum_root_error <= 1e-70
-  and .semantic_trace_fnv1a64 == "76c64491b21a63d2"
+  and .semantic_trace_fnv1a64 == "f752af9c339230e9"
   and .production_trace_hash_matches
   and .primary_boundary == [2,0,1,1,2,0,0,1]
   and .primary_boundary_matches
@@ -204,7 +215,7 @@ jq -n \
       "BOUNDED_ROOT_LOCKED_PHASE_VM_OPERATION_TRACE_CLASSICAL_BISIMULATION_WITH_NUMERICAL_RESTORATION_AND_REUSE",
     classification: "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
     claim_ceiling:
-      "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_Q3_ROOT_LOCKED_STREAMING_PHASE_VM_SIX_OPCODES_EXHAUSTIVE_FIVE_REGISTER_LOCAL_DOMAIN_AND_TWO_EIGHT_REGISTER_CHAINED_PROGRAMS_SOFTWARE_ONLY",
+      "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_Q3_ROOT_LOCKED_STREAMING_PHASE_VM_SIX_OPCODES_NINE_CANONICAL_LEGAL_WIRING_VARIANTS_ALL_243_Q3_STATES_AND_TWO_EIGHT_REGISTER_CHAINED_PROGRAMS_SOFTWARE_ONLY",
     verification_level: "INDEPENDENT_ORACLE_REEXECUTION",
     restoration_classification: "NUMERICAL_PHYSICAL_STATE_RESTORATION",
     accepted: $accepted[0],
