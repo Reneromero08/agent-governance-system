@@ -2,14 +2,14 @@
   "schema_version": "2.0.0",
   "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
   "state_date": "2026-07-29",
-  "reconciled_source_head": "ac3447c2fa85caee570845ee8a2d79dbb17cce99",
+  "reconciled_source_head": "2eee3d901aa3fdecd4ea559098d47dfb0896fd5c",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
   "standing_mission": "CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1",
   "supporting_mission": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
   "prime_directive": "REPLACE_THE_BIT_WITH_PI",
   "claim_authority": {
     "registry": "CLAIM_AUTHORITY_REGISTRY.json",
-    "milestones_classified": 94,
+    "milestones_classified": 95,
     "original_catvm_atomic_transaction": "REJECTED_SOURCE_DEFECT_ATOMICITY",
     "original_catvm_preserved_subclaims": [
       "BOUNDED_BOOLEAN_F3_F_TO_G_ALGEBRA",
@@ -53,12 +53,13 @@
     "completed_root_locked_phase_vm_bisimulation_result": "BOUNDED_ROOT_LOCKED_PHASE_VM_OPERATION_TRACE_CLASSICAL_BISIMULATION_WITH_NUMERICAL_RESTORATION_AND_REUSE",
     "completed_two_shared_latent_port_direct_result": "OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
     "completed_two_shared_latent_port_catvm_result": "CATVM_ENFORCED_OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
+    "completed_bounded_two_port_descriptor_catvm_result": "CATVM_ENFORCED_BOUNDED_PUBLIC_DESCRIPTOR_COMPILED_TWO_SHARED_LATENT_PORT_PROGRAM_FAMILIES_WITH_FULL_TUPLE_CUSTODY_RESTORATION_AND_REUSE",
     "rejected_depth_catvm_predecessor": "CATVM_ENFORCED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
     "rejected_depth_catvm_predecessor_defect": "RESIDENT_ERROR_AND_STOP_RESPONSE_ORDERING_DID_NOT_UNIFORMLY_PRESERVE_OR_RESTORE_RESIDENT_STATE",
     "rejected_atomic_dispatch_revision": "CATVM_ATOMIC_DISPATCH_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
     "rejected_atomic_dispatch_revision_defect": "LIVE_289_COMPLEX_GENERATOR_MATRIX_OMITTED_FROM_PRIMARY_AND_REUSE_PEAK_TOTALS",
     "resume_condition_satisfied": true,
-    "next_obstruction": "TWO_FULL_TUPLE_BOUND_SHARED_PORTS_AND_NONSEPARABLE_JOINT_CONSUMERS_GENERALIZE_RELATIONAL_GEOMETRY_BUT_THE_FIXED_1140_COMPLEX_RECURRENCE_REMAINS_AN_IDENTICAL_COMPACT_CLASSICAL_SOFTWARE_MODEL"
+    "next_obstruction": "BOUNDED_DESCRIPTOR_COMPILATION_REMOVES_FIXED_PROGRAM_ARRAYS_BUT_FLAT_MAX8_TWO_PORT_PROGRAMS_REMAIN_THE_IDENTICAL_1140_COMPLEX_CLASSICAL_RECURRENCE_AND_DO_NOT_GENERALIZE_PORT_ARITY_OR_GRAPH_TOPOLOGY"
   },
   "durable_main_goal_reminder": {
     "primary": [
@@ -101,8 +102,8 @@
   },
   "lane_closure_authority": "USER_ONLY",
   "terminal": false,
-  "current_highest_milestone": "CATVM_ENFORCED_OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
-  "current_claim_ceiling": "BOUNDED_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_FOUR_CELL_TWO_BINARY_LATENT_FIBER_TWO_EXACT_FULL_TUPLE_BOUND_PORTS_FIXED_SIX_MODULE_PRIMARY_FOUR_MODULE_REUSE_TWO_CONTROLLED_PHASE_JOINT_CONSUMERS_IDENTITY_AND_ONE_DECLARED_SEPARABLE_SAME_GENERATOR_CONTROL_LINUX_X86_64_SAME_UID_ONE_UNIX_SEQPACKET_CONNECTION_FINAL_SEVEN_BIN_NORM_BOUNDARY_COMPLEX128_SOFTWARE_ONLY",
+  "current_highest_milestone": "CATVM_ENFORCED_BOUNDED_PUBLIC_DESCRIPTOR_COMPILED_TWO_SHARED_LATENT_PORT_PROGRAM_FAMILIES_WITH_FULL_TUPLE_CUSTODY_RESTORATION_AND_REUSE",
+  "current_claim_ceiling": "LINUX_X86_64_SAME_UID_ONE_UNIX_SEQPACKET_CONNECTION_THREE_PUBLIC_PROGRAM_SLOTS_FOUR_TO_EIGHT_MODULES_THREE_EXECUTED_FAMILIES_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_1140_COMPLEX_CELLS_TWO_BINARY_LATENT_PORTS_COMPILER_DERIVED_OWNERS_STAGE_CUT_AND_REVERSE_TRAVERSAL_SEVEN_BIN_FINAL_BOUNDARY_COMPLEX128_SOFTWARE_ONLY",
   "architectural_alignment": {
     "current_phase_circuit_substrate": "ESTABLISHED_DEVELOPMENT_FOUNDATION",
     "bounded_holographic_relational_substrate": "ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_EXACT_15_NODE_FOUR_OWNER_AFFINE_DAG",
@@ -174,7 +175,9 @@
     "exact_dyadic_cyclotomic_phase_precision_growth": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE_FIXED_570_LOGICAL_CELLS_DEPTHS1_2_4_8_16_32_64_EXACT_RESTORATION_REUSE_WITH_GROWING_COEFFICIENT_WIDTH",
     "two_shared_latent_port_joint_phase": "INDEPENDENTLY_VERIFIED_SOURCE_LOCAL_285_NECKLACES_1140_COMPLEX_FOUR_CELL_FIBER_TWO_FULL_TUPLE_BOUND_PORTS_TWO_CONTROLLED_PHASE_JOINT_CONSUMERS_NUMERICAL_RESTORATION_REUSE",
     "two_shared_latent_port_joint_phase_best_matched_baseline": "PACKAGE_LOCAL_IDENTICAL_1140_COMPLEX_RECURRENCE_NO_SEPARATE_REFERENCE_PARITY",
-    "selected_next_experiment": "COMPILE_A_NONFIXTURE_TYPED_MULTI_PORT_PHASE_RELATION_GRAPH_OR_IDENTIFY_A_RESOURCE_LAW_NOT_CLASSICALLY_IDENTITY_SIMULABLE",
+    "bounded_two_port_descriptor_catvm": "INDEPENDENTLY_VERIFIED_SOURCE_LOCAL_THREE_SEALED_PUBLIC_SLOTS_MODULE_COUNTS6_5_7_MAX8_COMPILER_DERIVED_STAGE_AND_REVERSE_ORDER_FULL_TUPLE_CUSTODY_NUMERICAL_RESTORATION_REUSE",
+    "bounded_two_port_descriptor_catvm_best_matched_baseline": "PACKAGE_LOCAL_IDENTICAL_1140_COMPLEX_RECURRENCE_NO_SEPARATE_REFERENCE_PARITY",
+    "selected_next_experiment": "EXACT_TENSOR_FACTORIZED_MULTI_PORT_LATENT_PHASE_CUSTODY_WITH_TOPOLOGY_COMPILED_JOINT_CONSUMERS_AND_RANK_GROWTH_DIAGNOSTIC",
     "held_successor": "COMPLETED_WITH_DISTINCT_OWNER_BOUND_REPAIR"
   },
   "strongest_bounded_architecture": [
@@ -2358,6 +2361,39 @@
     "two_shared_latent_port_computational_advantage": false,
     "two_shared_latent_port_small_wall_crossing": false,
     "two_shared_latent_port_next_obstruction": "TWO_FULL_TUPLE_BOUND_SHARED_PORTS_AND_NONSEPARABLE_JOINT_CONSUMERS_GENERALIZE_RELATIONAL_GEOMETRY_BUT_THE_FIXED_1140_COMPLEX_RECURRENCE_REMAINS_AN_IDENTICAL_COMPACT_CLASSICAL_SOFTWARE_MODEL",
+    "bounded_two_port_descriptor_source_head": "2eee3d901aa3fdecd4ea559098d47dfb0896fd5c",
+    "bounded_two_port_descriptor_durable_evidence": "cat_cas_phase_frontier/TWO_SHARED_LATENT_DESCRIPTOR_RESULTS.json",
+    "bounded_two_port_descriptor_cleanroom_review": "cat_cas_phase_frontier/TWO_SHARED_LATENT_DESCRIPTOR_CLEANROOM_REVIEW.md",
+    "bounded_two_port_descriptor_classification": "INDEPENDENTLY_VERIFIED_SOURCE_LOCAL",
+    "bounded_two_port_descriptor_verification_level": "CLEANROOM_ADVERSARIAL_VERIFICATION",
+    "bounded_two_port_descriptor_restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+    "bounded_two_port_descriptor_program_slots": 3,
+    "bounded_two_port_descriptor_module_counts": [6, 5, 7],
+    "bounded_two_port_descriptor_maximum_modules_per_slot": 8,
+    "bounded_two_port_descriptor_checksums": [3610134026993329256, 4040401652886712863, 244865615137279479],
+    "bounded_two_port_descriptor_compiler_carrier_inputs": 0,
+    "bounded_two_port_descriptor_compiler_boundary_inputs": 0,
+    "bounded_two_port_descriptor_full_tuple_bound_consumers": true,
+    "bounded_two_port_descriptor_program_identity_custody": true,
+    "bounded_two_port_descriptor_restoration_generation_sequence": [1, 2, 3],
+    "bounded_two_port_descriptor_maximum_restoration_error": 3.04574225268428e-14,
+    "bounded_two_port_descriptor_maximum_fresh_restored_boundary_error": 1.7541523789077473e-14,
+    "bounded_two_port_descriptor_streamed_generator_term_parity": true,
+    "bounded_two_port_descriptor_same_carrier_backing": true,
+    "bounded_two_port_descriptor_baseline_reload_bytes": 0,
+    "bounded_two_port_descriptor_carrier_payload_bytes": 18240,
+    "bounded_two_port_descriptor_persistent_baseline_plus_carrier_payload_bytes": 36480,
+    "bounded_two_port_descriptor_slot_registry_object_bytes": 384,
+    "bounded_two_port_descriptor_accepted_peak_active_bound_program_bytes": 616,
+    "bounded_two_port_descriptor_ceiling_peak_active_bound_program_bytes": 704,
+    "bounded_two_port_descriptor_total_process_peak_bounded": false,
+    "bounded_two_port_descriptor_separate_classical_reference_parity": false,
+    "bounded_two_port_descriptor_generic_scheduler": false,
+    "bounded_two_port_descriptor_variable_port_arity": false,
+    "bounded_two_port_descriptor_distinct_phase_resource": false,
+    "bounded_two_port_descriptor_computational_advantage": false,
+    "bounded_two_port_descriptor_small_wall_crossing": false,
+    "bounded_two_port_descriptor_next_obstruction": "BOUNDED_DESCRIPTOR_COMPILATION_REMOVES_FIXED_PROGRAM_ARRAYS_BUT_FLAT_MAX8_TWO_PORT_PROGRAMS_REMAIN_THE_IDENTICAL_1140_COMPLEX_CLASSICAL_RECURRENCE_AND_DO_NOT_GENERALIZE_PORT_ARITY_OR_GRAPH_TOPOLOGY",
     "algebraic_general_affine_equation_elimination": true,
     "general_boolean_relation_elimination": false,
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
@@ -2458,7 +2494,8 @@
     "BOUNDED_NONABELIAN_WILCZEK_ZEE_SHARED_PHASE_FRAME_NONCOMMUTING_HOLONOMY_COMPOSITION_WITH_NUMERICAL_RESTORATION_AND_REUSE",
     "BOUNDED_ROOT_LOCKED_PHASE_VM_OPERATION_TRACE_CLASSICAL_BISIMULATION_WITH_NUMERICAL_RESTORATION_AND_REUSE",
     "OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
-    "CATVM_ENFORCED_OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER"
+    "CATVM_ENFORCED_OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
+    "CATVM_ENFORCED_BOUNDED_PUBLIC_DESCRIPTOR_COMPILED_TWO_SHARED_LATENT_PORT_PROGRAM_FAMILIES_WITH_FULL_TUPLE_CUSTODY_RESTORATION_AND_REUSE"
   ],
   "rejected_results": [
     {
@@ -2515,6 +2552,8 @@
     "ROOT_LOCKED_PHASE_VM_OPERATION_LEVEL_Q3_BISIMULATION_AND_SMALLER_SYMBOLIC_RECURRENCE_ESTABLISHED",
     "FINITE_DETERMINISTIC_SOFTWARE_PHASE_IDENTITY_SIMULATION_OBSTRUCTION",
     "TWO_FULL_TUPLE_BOUND_SHARED_LATENT_PORTS_WITH_NONSEPARABLE_JOINT_CONSUMERS_ESTABLISHED_BUT_IDENTICAL_1140_COMPLEX_RECURRENCE_REMAINS",
+    "BOUNDED_DESCRIPTOR_COMPILED_TWO_PORT_PROGRAM_FAMILIES_ESTABLISHED_BUT_FLAT_MAX8_AND_IDENTICAL_1140_COMPLEX_RECURRENCE_REMAIN",
+    "EXACT_TENSOR_FACTORIZED_MULTI_PORT_LATENT_PHASE_CUSTODY_AND_RANK_GROWTH",
     "PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_FIXED_TWO_CELL_570_COMPLEX_RECURRENCE",
     "BROADER_NON_AFFINE_PHASE_COMPOSITION_ALGEBRA",
     "FIXED_RANK_OR_COMPACT_CLOSURE_WITHOUT_BOOLEAN_RECURRENCE",
@@ -2533,7 +2572,7 @@
     "OFFICIAL_EXTERNAL_ACCEPTANCE",
     "CROSS_DOMAIN_TRANSFER"
   ],
-  "active_frontier_candidates_status": "ACTIVE_AFTER_SOURCE_LOCAL_TWO_SHARED_LATENT_PORT_CATVM_GENERALIZATION",
+  "active_frontier_candidates_status": "ACTIVE_AFTER_SOURCE_LOCAL_BOUNDED_DESCRIPTOR_COMPILED_TWO_PORT_CATVM",
   "next_crossing": [
     "COMPACT_COMPILED_BODY_TYPED_RELATIONAL_MODULES",
     "NATIVE_DENSE_WIDTH2_RELATIONAL_PHASE_CONTRACTION",
@@ -2610,9 +2649,10 @@
     "ROOT_LOCKED_PHASE_VM_OPERATION_TRACE_CLASSICAL_BISIMULATION_ESTABLISHED",
     "FINITE_DETERMINISTIC_SOFTWARE_PHASE_IDENTITY_SIMULATION_OBSTRUCTION_ESTABLISHED",
     "CATVM_ENFORCED_TWO_FULL_TUPLE_BOUND_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ESTABLISHED",
+    "CATVM_ENFORCED_BOUNDED_PUBLIC_DESCRIPTOR_COMPILED_TWO_PORT_PROGRAM_FAMILIES_ESTABLISHED",
     "PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_570_COMPLEX_RECURRENCE"
   ],
-  "next_crossing_status": "TWO_FULL_TUPLE_BOUND_SHARED_PORTS_AND_NONSEPARABLE_JOINT_CONSUMERS_ESTABLISHED;_NEXT_REQUIRES_NONFIXTURE_PORT_GRAPH_COMPILATION_OR_A_RESOURCE_LAW_NOT_CLASSICALLY_IDENTITY_SIMULABLE",
+  "next_crossing_status": "BOUNDED_FLAT_TWO_PORT_DESCRIPTOR_COMPILATION_ESTABLISHED;_NEXT_TESTS_EXACT_TENSOR_FACTORIZED_MULTI_PORT_CUSTODY_AND_RANK_GROWTH_WITHOUT_FULL_2_TO_P_PORT_FIBER_MATERIALIZATION",
   "frontier_warning": "ANOTHER_HANDCRAFTED_GRAPH_FAMILY_IS_INSUFFICIENT_IF_INTERMEDIATE_RELATION_WIDTH_CARRIER_STATE_OR_PROVENANCE_GROWS_EXPONENTIALLY",
   "agent_policy": {
     "continue_without_new_user_prompt": true,

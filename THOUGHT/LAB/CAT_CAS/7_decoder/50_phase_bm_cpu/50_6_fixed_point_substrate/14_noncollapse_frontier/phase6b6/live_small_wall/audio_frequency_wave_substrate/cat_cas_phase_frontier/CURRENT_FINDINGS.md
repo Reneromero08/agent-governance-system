@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`ac3447c2fa85caee570845ee8a2d79dbb17cce99`. The canonical per-milestone
+`2eee3d901aa3fdecd4ea559098d47dfb0896fd5c`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5392,4 +5392,44 @@ The next obstruction is:
 
 ```text
 TWO_FULL_TUPLE_BOUND_SHARED_PORTS_AND_NONSEPARABLE_JOINT_CONSUMERS_GENERALIZE_RELATIONAL_GEOMETRY_BUT_THE_FIXED_1140_COMPLEX_RECURRENCE_REMAINS_AN_IDENTICAL_COMPACT_CLASSICAL_SOFTWARE_MODEL
+```
+
+## Bounded descriptor-compiled two-port program families
+
+The two-port CATVM now compiles public flat program descriptors instead of
+accepting only fixed source arrays. Three sealed slots execute six-, five-,
+and seven-module families on the same restored 1,140-complex backing.
+
+```text
+CATVM_ENFORCED_BOUNDED_PUBLIC_DESCRIPTOR_COMPILED_TWO_SHARED_LATENT_PORT_PROGRAM_FAMILIES_WITH_FULL_TUPLE_CUSTODY_RESTORATION_AND_REUSE
+classification                     INDEPENDENTLY_VERIFIED_SOURCE_LOCAL
+verification level                 CLEANROOM_ADVERSARIAL_VERIFICATION
+restoration                        NUMERICAL_PHYSICAL_STATE_RESTORATION
+maximum restoration error          3.04574225268428e-14
+maximum fresh/restored boundary    1.7541523789077473e-14
+restoration generations            1, 2, 3
+```
+
+The compiler has no carrier or answer input. It derives owners, validates
+both local port consumers and two joint consumers, derives the stage cut from
+the first joint consumer, seals a forward-only topology, and derives inverse
+order by reverse traversal. Every active consumer holds current full custody
+tuples plus sealed program identity. Wrong tuple, stale program, malformed
+descriptor, premature projection, staged substitution, disconnect, STOP,
+null carrier, and inverse controls pass at the recorded ceiling.
+
+The independent oracle covers public topology compilation only. The
+identical 1,140-complex recurrence remains the strongest compact classical
+method and has only package-local identity comparison here. Resource evidence
+counts slot and bound-custody objects and explicitly excludes unmeasured
+vector capacity, plan/topology allocation, allocator, native-library, OS, and
+total process peak memory.
+
+No generic scheduler, arbitrary program algebra, distinct phase resource,
+computational advantage, Small Wall crossing, catalytic inference, physical
+waveform execution, physical bit replacement, or unbounded computation is
+established. The next obstruction is:
+
+```text
+BOUNDED_DESCRIPTOR_COMPILATION_REMOVES_FIXED_PROGRAM_ARRAYS_BUT_FLAT_MAX8_TWO_PORT_PROGRAMS_REMAIN_THE_IDENTICAL_1140_COMPLEX_CLASSICAL_RECURRENCE_AND_DO_NOT_GENERALIZE_PORT_ARITY_OR_GRAPH_TOPOLOGY
 ```

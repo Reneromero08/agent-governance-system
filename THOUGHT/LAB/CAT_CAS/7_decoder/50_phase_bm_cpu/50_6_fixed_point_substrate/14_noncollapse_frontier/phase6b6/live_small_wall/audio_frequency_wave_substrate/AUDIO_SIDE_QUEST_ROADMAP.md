@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `SOURCE_LOCAL_TWO_SHARED_LATENT_PORT_CATVM_GENERALIZATION_ESTABLISHED`
-**Roadmap version:** `10.0`
+**Status:** `SOURCE_LOCAL_BOUNDED_DESCRIPTOR_COMPILED_TWO_PORT_CATVM_ESTABLISHED`
+**Roadmap version:** `10.1`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `ac3447c2fa85caee570845ee8a2d79dbb17cce99`
+**Reconciled source head:** `2eee3d901aa3fdecd4ea559098d47dfb0896fd5c`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_OWNER_BOUND_TWO_SHARED_LATENT_PORT_JOINT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER`
-**Current claim ceiling:** `FIXED_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_1140_COMPLEX_FOUR_CELL_TWO_PORT_FIBER_FIXED_PRIMARY_AND_REUSE_LINUX_SAME_UID_ONE_SEQPACKET_CONNECTION_COMPLEX128_SOFTWARE_ONLY`
+**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_PUBLIC_DESCRIPTOR_COMPILED_TWO_SHARED_LATENT_PORT_PROGRAM_FAMILIES_WITH_FULL_TUPLE_CUSTODY_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_SAME_UID_ONE_SEQPACKET_CONNECTION_THREE_PUBLIC_SLOTS_FOUR_TO_EIGHT_MODULES_THREE_EXECUTED_FAMILIES_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_1140_COMPLEX_TWO_PORT_FIBER_COMPLEX128_SOFTWARE_ONLY`
 **Current evidence authority:** `CLEANROOM_ADVERSARIAL_VERIFICATION`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`ac3447c2fa85caee570845ee8a2d79dbb17cce99`. The current 94-milestone
+`2eee3d901aa3fdecd4ea559098d47dfb0896fd5c`. The current 95-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -2256,6 +2256,69 @@ The next obstruction is:
 
 ```text
 TWO_FULL_TUPLE_BOUND_SHARED_PORTS_AND_NONSEPARABLE_JOINT_CONSUMERS_GENERALIZE_RELATIONAL_GEOMETRY_BUT_THE_FIXED_1140_COMPLEX_RECURRENCE_REMAINS_AN_IDENTICAL_COMPACT_CLASSICAL_SOFTWARE_MODEL
+```
+
+## 6I. Bounded public descriptor compilation for two shared ports
+
+The fixed six-module primary and four-module reuse arrays are no longer the
+only CATVM program source. A fixed-ABI compiler now receives public
+descriptors through authenticated 32-byte requests, derives owners and the
+stage cut without carrier or boundary input, seals forward topology, and
+rematerializes inverse order by reverse traversal.
+
+```text
+CATVM_ENFORCED_BOUNDED_PUBLIC_DESCRIPTOR_COMPILED_TWO_SHARED_LATENT_PORT_PROGRAM_FAMILIES_WITH_FULL_TUPLE_CUSTODY_RESTORATION_AND_REUSE
+classification                    INDEPENDENTLY_VERIFIED_SOURCE_LOCAL
+verification                      CLEANROOM_ADVERSARIAL_VERIFICATION
+restoration                       NUMERICAL_PHYSICAL_STATE_RESTORATION
+program slots                     3
+modules per accepted family       6 / 5 / 7
+bounded slot ceiling              8 modules
+resident complex cells            1,140
+restoration generations           1 / 2 / 3
+maximum restoration error         3.046e-14
+maximum fresh/restored boundary   1.755e-14
+```
+
+Each sealed family contains at least one local consumer for each typed port,
+two joint controlled-phase consumers, and non-diagonal local structure. The
+first joint consumer determines the unresolved stage boundary; another joint
+consumer must follow it. Every compiled consumer is rebound to the current
+`(id,type,owner,generation,lease)` records plus the sealed
+`(slot,epoch,checksum,carrier_generation)` identity before execution.
+Projection, snapshot, descriptor substitution, stale program identity, and
+wrong tuple attacks are denied while the stage is resident.
+
+Three structurally distinct public families execute sequentially on the same
+restored carrier backing. Separate fresh services reproduce their public
+topology checksums, final boundaries, and streamed-generator-term counts.
+Authorized STOP and disconnect restore a staged carrier; a denied STOP does
+not terminate it. Missing, wrong, and reordered inverse controls fail
+restoration.
+
+An independent topology oracle reimplements descriptor validation, stage-cut
+derivation, canonical noncryptographic FNV checksums, and reverse indices. It
+does not reimplement the 285-necklace recurrence and therefore does not
+establish separate compact-classical numerical parity.
+
+Resource reporting includes the 36,480-byte persistent carrier plus baseline,
+18,240-byte declared generator fiber scratch, 384 bytes of three slot
+objects, a 616-byte observed active bound-custody peak, and a 704-byte
+eight-module bound ceiling. Plan/topology vector capacity, compiled and
+active vector capacity, allocator, native libraries, OS state, and total
+process peak remain explicitly unbounded.
+
+The strongest compact classical method is still the identical 1,140-complex
+recurrence. This result removes fixed program arrays inside the bounded
+two-port CATVM, but it is not a generic scheduler, arbitrary program algebra,
+variable-port or graph compiler, distinct phase resource, computational
+advantage, Small Wall crossing, catalytic inference, physical waveform
+execution, physical bit replacement, or unbounded computation.
+
+The next obstruction is:
+
+```text
+BOUNDED_DESCRIPTOR_COMPILATION_REMOVES_FIXED_PROGRAM_ARRAYS_BUT_FLAT_MAX8_TWO_PORT_PROGRAMS_REMAIN_THE_IDENTICAL_1140_COMPLEX_CLASSICAL_RECURRENCE_AND_DO_NOT_GENERALIZE_PORT_ARITY_OR_GRAPH_TOPOLOGY
 ```
 
 ## 7. No-Smuggle and Non-Collapse Laws
