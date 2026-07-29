@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_NONABELIAN_WILCZEK_ZEE_PHASE_FRAME_ESTABLISHED`
-**Roadmap version:** `9.8`
+**Status:** `STRICT_SCOPE_ROOT_LOCKED_PHASE_VM_BISIMULATION_OBSTRUCTION_ESTABLISHED`
+**Roadmap version:** `9.9`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `7c0bb031a3952865be02c47999277c21ca78b254`
+**Reconciled source head:** `4a20a697cf074dc5ecaaed52bdfd293fe1be5822`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_NONABELIAN_WILCZEK_ZEE_SHARED_PHASE_FRAME_NONCOMMUTING_HOLONOMY_COMPOSITION_WITH_NUMERICAL_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_C3_DARK_TWO_FRAME_PUBLIC_CP2_PHI1_PHI2_LOOPS_SEGMENTS512_PRIMARY_TWO_MODULE_REUSE_THREE_MODULE_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_ROOT_LOCKED_PHASE_VM_OPERATION_TRACE_CLASSICAL_BISIMULATION_WITH_NUMERICAL_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_Q3_ROOT_LOCKED_STREAMING_PHASE_VM_SIX_OPCODES_NINE_CANONICAL_LEGAL_WIRING_VARIANTS_ALL_243_Q3_STATES_AND_TWO_EIGHT_REGISTER_CHAINED_PROGRAMS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -2141,6 +2141,69 @@ The next obstruction is:
 
 ```text
 NONABELIAN_SHARED_PHASE_FRAME_ESTABLISHES_ORDER_SENSITIVE_NATIVE_HOLONOMY_BUT_AN_IDENTICAL_2X2_MATRIX_OR_CLOSED_FORM_CLASSICAL_RECURRENCE_REMAINS
+```
+
+## 6G. Root-locked phase-VM operation bisimulation
+
+The existing `streaming_phase_vm.c` backend was tested directly against a
+compact Q3 symbolic transition system. The accepted scope contains all 243
+Q3 states on nine canonical legal wiring variants: ROT residues 0, 1, and 2;
+ADD; MULADD with distinct and equal inputs; SWAP; CSWAP; and PCSWAP. It does
+not claim execution of every register placement.
+
+```text
+BOUNDED_ROOT_LOCKED_PHASE_VM_OPERATION_TRACE_CLASSICAL_BISIMULATION_WITH_NUMERICAL_RESTORATION_AND_REUSE
+classification                    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                      INDEPENDENT_ORACLE_REEXECUTION
+restoration                       NUMERICAL_PHYSICAL_STATE_RESTORATION
+canonical wiring variants         9
+input states per variant           243
+native operation cases            2,187
+forward/inverse local checkpoints  4,374
+total trace checkpoints            4,414
+compared relation cells            22,190
+maximum root distance              4.006e-14
+maximum restoration error          2.616e-13
+fresh/restored native boundary     6.642e-14
+predeclared tolerance              2e-11
+```
+
+The native complex twin-rail carrier and the uint8 Q3 recurrence agree after
+every tested forward and inverse operation. The primary 12-step program
+restores the actual carrier, and an unrelated eight-step program consumes
+that same backing. Its fresh and restored native boundaries agree within the
+declared tolerance; restoration generations are `1, 2`, and baseline reload
+is zero. Missing, wrong, and reordered inverses fail restoration.
+
+An independent 80-digit implementation reconstructs the Q3 interpolation
+network, Boolean-one indicator, conditional swaps, both final boundaries, and
+the complete symbolic trace without importing the production backend. The
+FNV trace value `f752af9c339230e9` is a deterministic replay commitment, not
+collision-resistant proof.
+
+The matched semantic implementation stores one uint8 Q3 symbol per register;
+two-bit packing is available and program-specific optimization may be
+smaller. The native twin-rail heap payload is 32 bytes per register. The
+reported 160- and 256-byte native figures are one-carrier heap payloads, not
+proof totals: the exhaustive verifier simultaneously holds a 320-byte native
+carrier plus baseline clone, and the chained verifier holds 768 bytes across
+three native carriers. Symbolic verification buffers, stack, code, allocator,
+and whole-process peak remain outside any total-memory claim. No runtime
+advantage is claimed.
+
+The general identity-simulation observation is restricted to closed finite
+deterministic software transition systems: a conventional simulator can
+store the same finite machine state and apply the same transition. In the
+root-locked subdomain the matched symbolic state is additionally smaller.
+This does not adjudicate physical analog resources, external oracles,
+nondeterministic resources, or unbounded-precision models.
+
+No CATVM custody, distinct phase resource, computational advantage, Small
+Wall crossing, physical waveform execution, physical bit replacement, or
+unbounded computation is established. The next obstruction is:
+
+```text
+FINITE_DETERMINISTIC_SOFTWARE_PHASE_BACKENDS_REMAIN_CLASSICALLY_IDENTITY_SIMULABLE_AND_THE_ROOT_LOCKED_VM_ADMITS_A_STRICTLY_SMALLER_Q3_RECURRENCE
 ```
 
 ## 7. No-Smuggle and Non-Collapse Laws

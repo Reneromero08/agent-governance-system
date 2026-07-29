@@ -5271,3 +5271,63 @@ The next obstruction is:
 ```text
 NONABELIAN_SHARED_PHASE_FRAME_ESTABLISHES_ORDER_SENSITIVE_NATIVE_HOLONOMY_BUT_AN_IDENTICAL_2X2_MATRIX_OR_CLOSED_FORM_CLASSICAL_RECURRENCE_REMAINS
 ```
+
+## Root-locked phase-VM operation trace has a smaller Q3 bisimulation
+
+The branch-native complex twin-rail phase VM was compared after every
+operation with a separate uint8 Q3 transition system. The accepted diagnostic
+covers all 243 input states on nine canonical legal wiring variants:
+ROT residues 0, 1, and 2; ADD; MULADD with distinct and equal inputs; SWAP;
+CSWAP; and PCSWAP. It does not claim every register placement.
+
+```text
+BOUNDED_ROOT_LOCKED_PHASE_VM_OPERATION_TRACE_CLASSICAL_BISIMULATION_WITH_NUMERICAL_RESTORATION_AND_REUSE
+classification                    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                      INDEPENDENT_ORACLE_REEXECUTION
+restoration                       NUMERICAL_PHYSICAL_STATE_RESTORATION
+operation cases                   2,187
+forward/inverse local checkpoints 4,374
+total checkpoints                 4,414
+compared relation cells           22,190
+semantic trace FNV                f752af9c339230e9
+maximum root distance             4.006e-14
+maximum restoration error         2.616e-13
+fresh/restored native boundary    6.642e-14
+predeclared tolerance             2e-11
+```
+
+The primary 12-step chain restores the actual complex carrier before an
+unrelated eight-step program reuses the same backing. Fresh and restored
+native relation boundaries agree within tolerance, restoration generations
+are `1, 2`, and no baseline reload occurs. Missing, wrong, and reordered
+inverse controls fail.
+
+The independent 80-digit oracle reconstructs the root interpolation formulas,
+the Boolean-one indicator, both conditional-swap operations, both final
+boundaries, and the symbolic trace without importing production code. The
+FNV value is a deterministic replay commitment rather than
+collision-resistant proof.
+
+For the accepted semantic comparison, the native carrier uses two complex128
+rails, or 32 heap bytes per register, while the matched implementation stores
+one uint8 Q3 symbol per register and may pack each symbol into two bits. The
+160- and 256-byte native figures are one-carrier payloads, not total verifier
+memory. The verifier simultaneously holds 320 native heap bytes in an
+exhaustive case and 768 native heap bytes in a chained case; symbolic buffers,
+stack, code, allocator, and whole-process peak are not bounded.
+
+This closes one ambiguity in the software lane. Any closed finite
+deterministic software phase backend is classically identity-simulable by
+storing the same machine state and applying the same deterministic
+transition. The root-locked VM has the stronger result that a smaller
+symbolic state suffices. This statement does not cover physical analog
+resources, external oracles, nondeterministic resources, or
+unbounded-precision models.
+
+No CATVM custody, distinct phase resource, computational advantage, Small
+Wall crossing, physical waveform execution, physical bit replacement, or
+unbounded computation is established. The next obstruction is:
+
+```text
+FINITE_DETERMINISTIC_SOFTWARE_PHASE_BACKENDS_REMAIN_CLASSICALLY_IDENTITY_SIMULABLE_AND_THE_ROOT_LOCKED_VM_ADMITS_A_STRICTLY_SMALLER_Q3_RECURRENCE
+```
