@@ -1,0 +1,151 @@
+{
+  "schema_version": "pancharatnam_gauge_transport_phase_memory.v1",
+  "source_base_head": "5687cd2aa6d9860ee86e61593957f8dc1bc2fa0d",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "milestone": "BOUNDED_STATEFUL_PANCHARATNAM_GAUGE_TRANSPORT_ENDPOINT_INVISIBLE_HOLONOMY_PHASE_MEMORY_WITH_NUMERICAL_RESTORATION_AND_REUSE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "claim_ceiling": "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_TWO_CELL_PANCHARATNAM_LATITUDE_SEGMENTS4_8_16_32_64_128_256_512_PUBLIC_RECTANGLE_REUSE37_SOFTWARE_ONLY",
+  "carrier_law": {
+    "geometry": "U1_FIBER_OVER_PUBLIC_BLOCH_SPHERE_PATH",
+    "transport_factor": "CONJUGATE_CURRENT_TARGET_OVERLAP_DIVIDED_BY_ITS_MAGNITUDE",
+    "transport_condition": "EACH_TRANSPORTED_EDGE_OVERLAP_IS_POSITIVE_REAL",
+    "endpoint_invisible_scope": "PUBLIC_BLOCH_ENDPOINT_ONLY",
+    "intermediate_gauge_phase_projected": false,
+    "final_boundary_projected_before_inverse": true,
+    "retained_edge_history_bytes": 0
+  },
+  "latitude_law": {
+    "theta": 1.1,
+    "tested_segments": [
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256,
+      512
+    ],
+    "discrete_holonomy_formula": "(CONJ(COS_THETA_OVER_2_SQUARED_PLUS_SIN_THETA_OVER_2_SQUARED_TIMES_EXP_I_2PI_OVER_N)/ABS_SAME)^N",
+    "continuous_limit": "EXP_MINUS_I_PI_TIMES_ONE_MINUS_COS_THETA",
+    "continuous_limit_errors": [
+      0.27744980246212386,
+      0.06074034583505241,
+      0.014701354454894709,
+      0.0036459743085129888,
+      0.0009096717811246049,
+      0.000227304293052185,
+      0.000056818973278304146,
+      0.000014204299621764968
+    ],
+    "continuous_limit_errors_strictly_decrease": true
+  },
+  "accepted_path": {
+    "predeclared_numerical_tolerance": 1e-10,
+    "primary_segments": 512,
+    "primary_holonomy": [
+      -0.14525220856236867,
+      -0.9893946613499358
+    ],
+    "primary_restoration_error": 8.533347710517063e-16,
+    "reuse_program": "PUBLIC_SPHERICAL_RECTANGLE",
+    "reuse_repetitions": 37,
+    "reuse_holonomy": [
+      -0.749241171765305,
+      0.662297264475517
+    ],
+    "reuse_restoration_error": 4.722081013049682e-16,
+    "fresh_restored_reuse_boundary_error": 1.3551999095955061e-15,
+    "same_outer_carrier_variable": true,
+    "actual_restored_carrier_reused": true,
+    "restoration_generation_sequence": [
+      1,
+      2
+    ],
+    "restoration_generation_lease_enforced": false,
+    "baseline_reload_bytes": 0,
+    "stress_cycles": 100,
+    "stress_maximum_restoration_error": 8.698570287196784e-16
+  },
+  "controls": {
+    "missing_inverse_restored": false,
+    "wrong_inverse_restored": false,
+    "reordered_inverse_applicable": false,
+    "reordered_inverse_inapplicability_reason": "RETAINED_U1_FIBER_UPDATE_IS_SCALAR_AND_COMMUTATIVE",
+    "premature_phase_canonicalization_erases_holonomy": true,
+    "reverse_orientation_conjugates_holonomy": true,
+    "area_perturbation_changes_holonomy": true,
+    "null_carrier_accepted": false,
+    "endpoint_only_public_base_state_distinguishes_closed_paths": false
+  },
+  "resource_law": {
+    "phase_carrier_complex128_cells": 2,
+    "phase_carrier_inline_bytes": 32,
+    "restoration_verification_baseline_inline_bytes": 32,
+    "final_boundary_inline_bytes": 16,
+    "latitude_descriptor_inline_bytes": 24,
+    "reuse_public_path_inline_bytes": 80,
+    "retained_edge_history_bytes": 0,
+    "stack_temporaries_bounded": false,
+    "compiler_binary_libm_allocator_and_whole_process_excluded": true,
+    "whole_process_rss_claimed": false,
+    "execution_time_advantage_claimed": false
+  },
+  "matched_baseline": {
+    "state_minimal_recurrence": "IDENTICAL_ONE_DOUBLE_GAUGE_ANGLE_RECURRENCE",
+    "scalar_state_bytes": 8,
+    "primary_boundary_error": 8.690465304641566e-15,
+    "reuse_boundary_error": 3.4684476073050936e-15,
+    "closed_form_public_path_product_available": true,
+    "recurrence_claimed_as_unique_runtime_optimum": false,
+    "distinct_phase_resource_established": false,
+    "computational_advantage_established": false,
+    "small_wall_crossing_established": false
+  },
+  "independent_oracle": {
+    "implementation": "INDEPENDENT_MPMATH80_PANCHARATNAM_TRANSPORT_AND_ANALYTIC_LATITUDE_FORMULA",
+    "production_backend_imported": false,
+    "precision_decimal_digits": 80,
+    "all_discrete_holonomies_match": true,
+    "all_analytic_formulas_match": true,
+    "all_norms_one": true,
+    "all_restorations_below_1e_70_at_oracle_precision": true,
+    "primary_boundary_matches": true,
+    "reuse_boundary_matches": true,
+    "fresh_restored_reuse_boundary_equal": true
+  },
+  "independent_review": {
+    "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+    "rejecting_defect_found": false,
+    "reordered_inverse_control_removed_as_inapplicable": true,
+    "endpoint_invisible_means_public_base_endpoint_only": true,
+    "closed_form_fixed_path_classical_baseline_disclosed": true,
+    "catvm_custody_established": false
+  },
+  "source_sha256": {
+    "pancharatnam_gauge_transport_phase_memory.c": "a7b843bb80e0e01a8c24abbd1ae2752a4c0c89c6387f1613d7c023da0e32593d",
+    "pancharatnam_gauge_transport_oracle.py": "1ff2f0682292a3f6e664f5501a9784aeaa24847172e383e653587f3e66b4f05a",
+    "qualify_pancharatnam_gauge_transport_phase_memory.sh": "f67802615f1c9b11050d07f1c501b410fe0b2d01ec44b6fee8839cfd59615e0b"
+  },
+  "qualification_sha256": {
+    "result.json": "01da2d9b95401b71e83498848651b73b4abd93d973fb5be7aff4e596ef3e8179",
+    "oracle.json": "6002ec64b738ce5e226df12da0f2100f9964f1c2239bcad6edcd6aa8ccab2fa8",
+    "qualification.json": "a923aca92547ed24c0fea41cedf14ddc32045e070e6c5fb2de1731966b055ae3",
+    "qualification_manifest": "c080612a0180c8e105390729bdb853d3f47978cb9ea2298166eb97cd766127e2"
+  },
+  "not_established": [
+    "EXACT_ALGEBRAIC_RESTORATION",
+    "CATVM_CUSTODY",
+    "MACHINE_ENFORCED_NO_SMUGGLE",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "UNBOUNDED_COMPUTATION",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT_WITH_PI"
+  ],
+  "next_obstruction": "PANCHARATNAM_HOLONOMY_IS_PUBLIC_ENDPOINT_INVISIBLE_AND_RESIDENT_BUT_FIXED_PUBLIC_PATHS_ADMIT_AN_EQUIVALENT_OR_CLOSED_FORM_COMPACT_CLASSICAL_PHASE_RECURRENCE"
+}
