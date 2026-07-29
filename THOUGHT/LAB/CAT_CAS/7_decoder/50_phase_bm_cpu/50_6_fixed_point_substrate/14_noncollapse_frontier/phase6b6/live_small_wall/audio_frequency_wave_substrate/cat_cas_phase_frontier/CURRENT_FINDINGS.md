@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`bf845d208feb81972f63e5d35bb36596e43d7bc6`. The canonical per-milestone
+`1251cb3a34669fa6b00eddcd66a2228b8f7f9731`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -6152,4 +6152,83 @@ The live obstruction is:
 
 ```text
 THE_SEVEN_GENERATOR_UNIT_GAUGE_REDUCES_COUNTED_PAYLOAD_BUT_EXACT_INTEGER_WIDTH_STILL_GROWS_EIGHT_PERIOD256_SEARCHES_HIT_THE_DECLARED_CAP_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_NORMALIZATION
+```
+
+## Exact pi-adic height rejects a fixed finite boundary alphabet
+
+The next diagnostic derives an exact boundary-height certificate over
+`Z[zeta17]`, with `pi = 1 - zeta17`.
+
+```text
+claim
+    BOUNDED_EXACT_F17_PERIOD17_PI_ADIC_BOUNDARY_HEIGHT_CERTIFICATE_PROVES_UNBOUNDED_LOSSLESS_DISCRETE_BOUNDARY_ALPHABET_AND_WORST_CASE_OMEGA_LOG_N_HORIZON_CODE_WIDTH_FOR_TWO_PUBLIC_RECURRENCE_FAMILIES_WITH_EXACT_MESSAGE_PAYLOAD_RESTORATION_AND_REUSE_BUT_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+Both public period-17 cubic path families satisfy the exact lower bound
+
+```text
+L(n) = CEIL((272*n + 16)/3)
+```
+
+on boundary `pi`-valuation. The production gate checks both complete
+characteristic identities, direct exact boundaries through period 17, all
+three residue-class induction inequalities, and the normalized recurrence.
+
+The normalized `F17` recurrence has:
+
+```text
+family   prefix   cycle length   nonzero outputs   exact density
+PRIMARY       3          1,632             1,555       1555/1632
+REUSE         0         14,688            13,826       6913/7344
+```
+
+Nonzero cycle outputs recur infinitely often, so infinitely many exact
+boundaries have valuation exactly `L(n)`. Since `L` is strictly increasing,
+their valuations and exact boundaries are distinct.
+
+The no-production-import oracle uses the sealed separate descriptor/ring
+kernel, recompiles both public operators, checks the supplied annihilators,
+repeats exact `pi` division and induction, and uses Brent instead of Floyd
+cycle detection. It reproduces both exact cycles and detects a weakened
+induction coefficient and a perturbed normalized recurrence.
+
+The encoding consequence is deliberately narrow. For an injective exact
+boundary or valuation encoding through horizon `N`, when the decoder gets no
+free period index, the worst-case code width through `N` is
+`Omega(log N)`. No pointwise-at-every-period, generic machine-memory,
+online-space, indexed-generator, or variable-length impossibility is
+established. The `pi` exponent itself has an `O(log N)` ledger, and the
+identical compact classical recurrence remains.
+
+Message payloads restore exactly on the same backing at 16 periods, and
+unrelated REUSE agrees with fresh execution. Generation and lease advance to
+two, so full carrier-object equality and bounded repeated-use metadata are
+not claimed. Named component counts are not exact temporary or process
+peaks.
+
+The next selected phase-machine experiment is:
+
+```text
+EXACT_REVERSIBLE_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WITH_RESIDUAL_HEIGHT_ACCOUNTING
+```
+
+It must move compulsory `pi` content into a counted reversible exponent
+ledger during native recurrence execution and determine whether the exact
+residual height remains unbounded. It must preserve exact message-payload
+restoration and reuse, count metadata growth, and retain the identical
+classical normalized recurrence.
+
+The live obstruction is:
+
+```text
+THE_EXACT_BOUNDARY_PI_VALUATION_FORCES_AN_UNBOUNDED_LOSSLESS_BOUNDARY_ALPHABET_BUT_ONLY_A_WORST_CASE_LOGARITHMIC_HORIZON_CODE_WIDTH_WITHOUT_A_FREE_PERIOD_INDEX_THE_PI_EXPONENT_HAS_A_COMPACT_LOGARITHMIC_LEDGER_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
 ```

@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F17_PERIOD17_SEVEN_GENERATOR_UNIT_GAUGE_REDUCES_PAYLOAD_BUT_WIDTH_GROWS`
-**Roadmap version:** `11.1`
+**Status:** `STRICT_SCOPE_F17_PERIOD17_PI_ADIC_HEIGHT_REJECTS_FIXED_FINITE_LOSSLESS_BOUNDARY_ALPHABET`
+**Roadmap version:** `11.2`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `e9137eeb58784c24311241cc96c53e964793e1b8`
+**Reconciled source head:** `1251cb3a34669fa6b00eddcd66a2228b8f7f9731`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_SEVEN_GENERATOR_CYCLOTOMIC_UNIT_GAUGE_REDUCES_LEDGER_INCLUSIVE_CARRIER_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_RECURRENCE_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_VALID_PATH_RESTORATION_AND_REUSE_BUT_DOES_NOT_BOUND_INTEGER_WIDTH`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_Q_ZETA17_SEVEN_DECLARED_CYCLOTOMIC_UNIT_GENERATORS_DETERMINISTIC_128_STEP_PER_CALL_SEARCH_PERIODS1_4_16_64_256_DENSE_DIRECT_PARITY_THROUGH64_SEPARATE_SEQUENTIAL_RECURRENCE_PARITY_THROUGH256_EXACT_VALID_PATH_SUBTRACTIVE_RESTORATION_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_F17_PERIOD17_PI_ADIC_BOUNDARY_HEIGHT_CERTIFICATE_PROVES_UNBOUNDED_LOSSLESS_DISCRETE_BOUNDARY_ALPHABET_AND_WORST_CASE_OMEGA_LOG_N_HORIZON_CODE_WIDTH_FOR_TWO_PUBLIC_RECURRENCE_FAMILIES_WITH_EXACT_MESSAGE_PAYLOAD_RESTORATION_AND_REUSE_BUT_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_Q_ZETA17_PI_ADIC_BOUNDARY_HEIGHT_LOWER_BOUND_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE_EXACT_SUBTRACTIVE_RESTORATION_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`e9137eeb58784c24311241cc96c53e964793e1b8`. The current 105-milestone
+`1251cb3a34669fa6b00eddcd66a2228b8f7f9731`. The current 106-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -3042,6 +3042,77 @@ The live obstruction is:
 THE_SEVEN_GENERATOR_UNIT_GAUGE_REDUCES_COUNTED_PAYLOAD_BUT_EXACT_INTEGER_WIDTH_STILL_GROWS_EIGHT_PERIOD256_SEARCHES_HIT_THE_DECLARED_CAP_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_NORMALIZATION
 ```
 
+The selected exact height diagnostic is now established within strict scope:
+
+```text
+claim
+    BOUNDED_EXACT_F17_PERIOD17_PI_ADIC_BOUNDARY_HEIGHT_CERTIFICATE_PROVES_UNBOUNDED_LOSSLESS_DISCRETE_BOUNDARY_ALPHABET_AND_WORST_CASE_OMEGA_LOG_N_HORIZON_CODE_WIDTH_FOR_TWO_PUBLIC_RECURRENCE_FAMILIES_WITH_EXACT_MESSAGE_PAYLOAD_RESTORATION_AND_REUSE_BUT_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+For `pi = 1 - zeta17`, both public families satisfy
+
+```text
+L(n) = CEIL((272*n + 16)/3)
+```
+
+as an exact boundary `pi`-valuation lower bound. Both complete
+characteristic identities are exact and hard-gated. After division by
+`pi^L(n)`, the normalized `F17` recurrence has a PRIMARY cycle of length
+1,632 with 1,555 nonzero outputs and a REUSE cycle of length 14,688 with
+13,826 nonzero outputs. Those nonzero cycle positions certify infinitely
+many exact boundaries with distinct `pi`-valuations.
+
+The separate oracle recompiles both public operators from the sealed
+reference kernel, checks the annihilators, repeats exact division and
+induction, and uses Brent rather than production Floyd cycle detection. It
+reproduces both exact cycles and detects weakened-induction and perturbed
+recurrence mutations.
+
+The encoding consequence is limited to a worst-case horizon statement. For
+an injective exact boundary or valuation encoding through period `N`, when
+the decoder is not supplied the period index for free, the maximum code
+width through `N` is `Omega(log N)`. This is not a pointwise bound at every
+period, generic machine-memory or online-space lower bound, or rejection of
+a compact indexed generator. The `pi` exponent alone has an `O(log N)`
+ledger, and the identical compact recurrence and certificate remain
+available to classical software.
+
+At 16 periods, message payloads restore exactly on the original backing and
+the unrelated REUSE boundary agrees with fresh execution. Generation and
+lease intentionally advance to two. Full carrier-object equality and
+bounded repeated-use metadata are not claimed. Resource counts are named
+logical components, not exact temporary, allocator, or whole-process peaks.
+
+The next phase-owned experiment is:
+
+```text
+EXACT_REVERSIBLE_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WITH_RESIDUAL_HEIGHT_ACCOUNTING
+```
+
+It must factor compulsory `pi` content into an exact reversible exponent
+ledger during native recurrence execution, not only at final projection.
+It must count coefficient and message residual width, exponent ledgers,
+rematerialization, inverse work, verification, and repeated-use metadata.
+It must compare against the identical compact classical normalized
+recurrence. A useful result must determine whether residual unit-normalized
+height still grows or whether a fixed-rank exact quotient closes without
+moving cost into an equivalent ledger.
+
+The live obstruction is:
+
+```text
+THE_EXACT_BOUNDARY_PI_VALUATION_FORCES_AN_UNBOUNDED_LOSSLESS_BOUNDARY_ALPHABET_BUT_ONLY_A_WORST_CASE_LOGARITHMIC_HORIZON_CODE_WIDTH_WITHOUT_A_FREE_PERIOD_INDEX_THE_PI_EXPONENT_HAS_A_COMPACT_LOGARITHMIC_LEDGER_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -3079,7 +3150,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_SEVEN_GENERATOR_CYCLOTOMIC_UNIT_GAUGE_REDUCES_LEDGER_INCLUSIVE_CARRIER_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_RECURRENCE_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_VALID_PATH_RESTORATION_AND_REUSE_BUT_DOES_NOT_BOUND_INTEGER_WIDTH
+BOUNDED_EXACT_F17_PERIOD17_PI_ADIC_BOUNDARY_HEIGHT_CERTIFICATE_PROVES_UNBOUNDED_LOSSLESS_DISCRETE_BOUNDARY_ALPHABET_AND_WORST_CASE_OMEGA_LOG_N_HORIZON_CODE_WIDTH_FOR_TWO_PUBLIC_RECURRENCE_FAMILIES_WITH_EXACT_MESSAGE_PAYLOAD_RESTORATION_AND_REUSE_BUT_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE
 ```
 
 Not established:
@@ -3118,6 +3189,12 @@ native exact Boolean-TT rank minimization
 arbitrary mixed-layer Boolean-TT quotient closure
 general family-independent Boolean-TT suffix minimization
 fixed-schema or general Small Wall crossing
+linear exact-boundary bit lower bound
+pointwise Omega(log n) width at every period
+generic machine-memory or online-space lower bound
+lower bound when a period index or external counter is supplied free
+full carrier-object equality after exact message restoration
+bounded repeated-use generation or lease metadata
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
