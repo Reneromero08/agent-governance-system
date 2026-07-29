@@ -1,6 +1,6 @@
 # Focused independent review: exact F17 single-cubic-latent quotient
 
-**Scientific source commit:** `251d89cf9ffbf48f769fe8b34b9a5c4103c67d76`
+**Scientific source commit:** `251d89cf95ac50edb78a085cfe6e60721e288876`
 **Decision:** `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`
 **Verification level:** `SEPARATE_REFERENCE_PARITY`
 **Restoration class:** `EXACT_ALGEBRAIC_RESTORATION`

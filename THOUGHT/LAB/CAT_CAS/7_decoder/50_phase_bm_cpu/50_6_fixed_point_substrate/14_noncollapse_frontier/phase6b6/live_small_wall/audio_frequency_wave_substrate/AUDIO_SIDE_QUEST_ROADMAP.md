@@ -4,7 +4,7 @@
 **Roadmap version:** `10.4`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `251d89cf9ffbf48f769fe8b34b9a5c4103c67d76`
+**Reconciled source head:** `251d89cf95ac50edb78a085cfe6e60721e288876`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
 **Current highest milestone:** `BOUNDED_EXACT_F17_SINGLE_CUBIC_LATENT_CHARACTER_SUM_MULTI_PORT_PHASE_QUOTIENT_WITH_NATIVE_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE`
 **Current claim ceiling:** `LINUX_X86_64_PYTHON_NUMPY_EXACT_F17_ONE_UNRESOLVED_CUBIC_LATENT_PUBLIC_PORTS2_4_8_16_32_TWO_PUBLIC_ALGORITHMIC_PROGRAM_FAMILIES_NONZERO_GAUSSIAN_FOURIER_PIVOTS_NONSINGULAR_PUBLIC_GAUSSIAN_FINAL_BLOCK_FIXED17_TERM_LATENT_TRACE_SOFTWARE_ONLY`
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`251d89cf9ffbf48f769fe8b34b9a5c4103c67d76`. The current 98-milestone
+`251d89cf95ac50edb78a085cfe6e60721e288876`. The current 98-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.

@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`251d89cf9ffbf48f769fe8b34b9a5c4103c67d76`. The canonical per-milestone
+`251d89cf95ac50edb78a085cfe6e60721e288876`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.

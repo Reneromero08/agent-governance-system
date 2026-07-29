@@ -1,7 +1,7 @@
 {
   "schema_version": "audio_phase_claim_authority.v1",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
-  "reconciled_source_head": "251d89cf9ffbf48f769fe8b34b9a5c4103c67d76",
+  "reconciled_source_head": "251d89cf95ac50edb78a085cfe6e60721e288876",
   "audit_inputs": {
     "branch_audit_pinned_head": "16b3db783f86d966fdb52830d591a0aa8d27cc5d",
     "branch_audit_sha256": "255cc232bf0b621507c357bbe7173c0ca716e0b4705e50a8b646da3b3161a1e3",
@@ -711,7 +711,7 @@
       "UNBOUNDED_COMPUTATION"
     ],
     "f17_single_cubic_latent_phase_quotient": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
-    "f17_single_cubic_latent_phase_quotient_source_head": "251d89cf9ffbf48f769fe8b34b9a5c4103c67d76",
+    "f17_single_cubic_latent_phase_quotient_source_head": "251d89cf95ac50edb78a085cfe6e60721e288876",
     "f17_single_cubic_latent_phase_quotient_verification_level": "SEPARATE_REFERENCE_PARITY",
     "f17_single_cubic_latent_phase_quotient_restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
     "f17_single_cubic_latent_phase_quotient_claim_ceiling": "LINUX_X86_64_PYTHON_NUMPY_EXACT_F17_ONE_UNRESOLVED_CUBIC_LATENT_PUBLIC_PORTS2_4_8_16_32_TWO_PUBLIC_ALGORITHMIC_PROGRAM_FAMILIES_NONZERO_GAUSSIAN_FOURIER_PIVOTS_NONSINGULAR_PUBLIC_GAUSSIAN_FINAL_BLOCK_FIXED17_TERM_LATENT_TRACE_SOFTWARE_ONLY",
@@ -750,7 +750,7 @@
   },
   "post_audit_source_authority": {
     "authority": "SOURCE_AUDITED_PACKAGE_LOCAL",
-    "source_head_range": "16b3db783f86d966fdb52830d591a0aa8d27cc5d..251d89cf9ffbf48f769fe8b34b9a5c4103c67d76",
+    "source_head_range": "16b3db783f86d966fdb52830d591a0aa8d27cc5d..251d89cf95ac50edb78a085cfe6e60721e288876",
     "milestones": [
       "BOUNDED_PARITY_ADMISSIBLE_STOKES_HARMONIC_SECTOR_DUAL_PRIME_PHASE_SIGNATURE_REDUCTION_WITH_RESTORATION_AND_REUSE",
       "FIXED_RANK_FACTORIZED_HIGHEST_STOKES_HARMONIC_SHELL_PHASE_RECURRENCE_WITH_RESTORATION_AND_REUSE",
