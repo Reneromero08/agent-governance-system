@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`88cdb8cbe2f3796bf0282640437116450114e0ad`. The canonical per-milestone
+`ee022a18e7f5b11c485dd4f335cdd02c77a5f161`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5105,4 +5105,57 @@ obstruction is:
 
 ```text
 FIXED_WIDTH_CYCLOTOMIC_STAR_QUOTIENT_DISCARDS_NONZERO_ANALYTIC_KERNEL_697_AND_REMAINS_IDENTICAL_FINITE_FIELD_RECURRENCE
+```
+
+## Exact H-T analytic projective-orbit obstruction
+
+The branch-native exact gates `H` and `T = diag(1, ZETA8)` already give a
+transferable obstruction to a fixed finite-state lossless repair. For
+`U = H T`, if `q` is the eigenvalue ratio, exact algebra gives:
+
+```text
+q + q^-1 = trace(U)^2 / det(U) - 2 = -1 - sqrt(2)/2
+```
+
+This value is not in the quadratic integer ring `Z[sqrt(2)]`. Since a root of
+unity would make `q + q^-1` an algebraic integer, `q` is not a root of unity.
+The initial basis vector is cyclic because `det[e0, Ue0] = 1/sqrt(2)` is
+nonzero. Consequently the complete analytic projective orbit
+`(H T)^n [e0]` is infinite, and no fixed finite state set can encode that
+complete orbit injectively.
+
+The theorem was independently classified
+`INDEPENDENTLY_VERIFIED_TRANSFERABLE`. The executor evidence has the narrower
+ceiling:
+
+```text
+BOUNDED_EXACT_HT_ANALYTIC_INFINITE_PROJECTIVE_ORBIT_REJECTS_FIXED_FINITE_STATE_LOSSLESS_PHASE_QUOTIENT_WITH_EXACT_RESTORATION_AND_REUSE
+execution ceiling                 Linux x86_64, depths 1..64
+logical phase cells               2
+depth-64 maximum numerator bits   17
+depth-64 maximum denominator      17
+depth-64 logical payload bits     141
+reuse                             H then T^3, depth 23
+restoration                       EXACT_ALGEBRAIC_RESTORATION
+```
+
+The exact primary and unrelated reuse programs restore on the same outer
+backing with generations `1, 2` and no baseline reload. Missing, wrong, and
+reordered inverse controls fail. The independent Fraction implementation
+reproduces every boundary, norm, and coefficient-height tuple. The strongest
+compact classical method is the identical exact two-cell recurrence.
+
+The illustrative values 1 and 698 agree in the four `F17/F41` embeddings but
+are not a normalized transaction and are not used to prove the theorem.
+The theorem does not rule out unbounded symbolic state, fixed-dimensional
+continuous state with unbounded precision, controlled approximation,
+lossy/output-specific quotients, other gate pairs, or other phase mechanisms.
+It establishes no unbounded computation, CATVM custody, distinct phase
+resource, computational advantage, Small Wall crossing, physical waveform
+execution, or physical bit replacement.
+
+The next obstruction is:
+
+```text
+LOSSLESS_INFINITE_HT_PROJECTIVE_ORBIT_REQUIRES_UNBOUNDED_SYMBOLIC_INFORMATION_OR_NONFINITE_CONTINUOUS_STATE_WHILE_THE_EXACT_COMPACT_CLASSICAL_RECURRENCE_REMAINS_IDENTICAL
 ```

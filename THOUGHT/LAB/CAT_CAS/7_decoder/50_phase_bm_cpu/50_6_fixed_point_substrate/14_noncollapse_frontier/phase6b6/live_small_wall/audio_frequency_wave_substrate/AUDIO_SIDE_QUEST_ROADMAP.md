@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `FIXED_WIDTH_CYCLOTOMIC_STAR_QUOTIENT_SEMANTIC_LOSS_DIAGNOSTIC_ESTABLISHED`
-**Roadmap version:** `9.5`
+**Status:** `TRANSFERABLE_FIXED_FINITE_STATE_HT_ORBIT_OBSTRUCTION_ESTABLISHED`
+**Roadmap version:** `9.6`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `88cdb8cbe2f3796bf0282640437116450114e0ad`
+**Reconciled source head:** `ee022a18e7f5b11c485dd4f335cdd02c77a5f161`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_DUAL_PRIME_CONJUGATE_PAIR_CYCLOTOMIC_STAR_QUOTIENT_FIXED_570_CELL_PHASE_CLOSURE_ACROSS_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `DIRECT_PROCESS_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACE_DESCRIPTORS_570_F17_F17_F41_F41_CONJUGATE_PAIR_RESIDUE_PHASE_CELLS_PUBLIC_VARIANT_ORDINAL_MATCHING_COMPILER_DEPTHS1_64_256_1024_4096_REUSE_DEPTH1537_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_HT_ANALYTIC_INFINITE_PROJECTIVE_ORBIT_REJECTS_FIXED_FINITE_STATE_LOSSLESS_PHASE_QUOTIENT_WITH_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_DIRECT_PROCESS_TWO_CELL_Z_ZETA8_DYADIC_ANALYTIC_HT_ORBIT_DEPTHS1_2_4_8_16_32_64_REUSE_DEPTH23_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`88cdb8cbe2f3796bf0282640437116450114e0ad`. The current 88-milestone
+`ee022a18e7f5b11c485dd4f335cdd02c77a5f161`. The current 89-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -1967,6 +1967,63 @@ The next obstruction is:
 FIXED_WIDTH_CYCLOTOMIC_STAR_QUOTIENT_DISCARDS_NONZERO_ANALYTIC_KERNEL_697_AND_REMAINS_IDENTICAL_FINITE_FIELD_RECURRENCE
 ```
 
+## 6D. Exact H-T analytic projective-orbit obstruction
+
+The smallest branch-native analytic gate law, `U = H T` with
+`T = diag(1, ZETA8)`, isolates why a fixed finite quotient cannot be the
+general lossless repair for exact phase growth. If `q` is the eigenvalue
+ratio of `U`, then:
+
+```text
+q + q^-1
+    = trace(U)^2 / det(U) - 2
+    = -1 - sqrt(2)/2
+```
+
+The ring of integers of `Q(sqrt(2))` is `Z[sqrt(2)]`, so this value is not an
+algebraic integer. A root of unity would make `q + q^-1` algebraic integral;
+therefore `q` is not a root of unity. The initial basis vector is cyclic
+because `det[e0, Ue0] = 1/sqrt(2)` is nonzero. Its analytic projective orbit is
+therefore infinite.
+
+One focused independent review classified the theorem
+`INDEPENDENTLY_VERIFIED_TRANSFERABLE`. Its exact transfer ceiling is:
+
+```text
+NO_INJECTIVE_ENCODING_OF_THE_COMPLETE_ANALYTIC_HT_POWER_ORBIT_OF_E0_INTO_ANY_FIXED_FINITE_STATE_SET
+```
+
+The accompanying executor remains bounded:
+
+```text
+BOUNDED_EXACT_HT_ANALYTIC_INFINITE_PROJECTIVE_ORBIT_REJECTS_FIXED_FINITE_STATE_LOSSLESS_PHASE_QUOTIENT_WITH_EXACT_RESTORATION_AND_REUSE
+execution ceiling       Linux x86_64, two phase cells, depths 1..64
+reuse                   unrelated H then T^3 program, depth 23
+restoration             EXACT_ALGEBRAIC_RESTORATION
+depth-64 numerator bits 17
+depth-64 denominator    17
+depth-64 payload bits   141
+```
+
+The primary and reuse programs restore exactly on the same outer carrier
+backing without baseline reload. Missing, wrong, and reordered inverse
+controls fail; the independent Fraction oracle reproduces all exact
+boundaries, norms, and size tuples. The strongest compact classical method is
+the identical exact two-cell recurrence.
+
+This theorem does not rule out unbounded symbolic state, fixed-dimensional
+continuous state with unbounded precision, controlled approximation,
+lossy/output-specific quotients, other gate pairs, or other phase mechanisms.
+It does not establish unbounded computation, CATVM custody, a distinct phase
+resource, computational advantage, Small Wall crossing, physical waveform
+execution, or replacement of physical bits.
+
+The next obstruction is:
+
+```text
+LOSSLESS_INFINITE_HT_PROJECTIVE_ORBIT_REQUIRES_UNBOUNDED_SYMBOLIC_INFORMATION_OR_NONFINITE_CONTINUOUS_STATE_WHILE_THE_EXACT_COMPACT_CLASSICAL_RECURRENCE_REMAINS_IDENTICAL
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -2004,7 +2061,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_DUAL_PRIME_CONJUGATE_PAIR_CYCLOTOMIC_STAR_QUOTIENT_FIXED_570_CELL_PHASE_CLOSURE_ACROSS_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE
+BOUNDED_EXACT_HT_ANALYTIC_INFINITE_PROJECTIVE_ORBIT_REJECTS_FIXED_FINITE_STATE_LOSSLESS_PHASE_QUOTIENT_WITH_EXACT_RESTORATION_AND_REUSE
 ```
 
 Not established:
@@ -2065,10 +2122,10 @@ goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve
-this quotient diagnostic and resume by seeking lossless analytic compactness
-or a phase-owned resource absent from the identical compact classical
-recurrence; adding only more quotient primes or depths does not resolve the
-recorded obstruction.
+this analytic orbit obstruction and resume with a phase law that either
+states an explicit approximation/continuous-state resource or changes the
+matched classical equivalence; adding finite quotient states cannot provide
+a general lossless repair for the certified orbit.
 
 ## 10. Roadmap Maintenance
 
