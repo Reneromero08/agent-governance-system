@@ -1,7 +1,7 @@
 {
   "schema_version": "audio_phase_claim_authority.v1",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
-  "reconciled_source_head": "6f39766e9cf622e2e41d178f8131bd8777b6cd1d",
+  "reconciled_source_head": "050a78c6b7c46f961c63bab4c13d478b2be55984",
   "audit_inputs": {
     "branch_audit_pinned_head": "16b3db783f86d966fdb52830d591a0aa8d27cc5d",
     "branch_audit_sha256": "255cc232bf0b621507c357bbe7173c0ca716e0b4705e50a8b646da3b3161a1e3",
@@ -398,12 +398,14 @@
       "small_wall_crossing_established": false
     },
     "exact_dyadic_cyclotomic_phase_precision_growth": {
-      "scientific_source_head": "6f39766e9cf622e2e41d178f8131bd8777b6cd1d",
+      "scientific_source_head": "050a78c6b7c46f961c63bab4c13d478b2be55984",
       "milestone": "BOUNDED_EXACT_DYADIC_CYCLOTOMIC_PHASE_PRECISION_GROWTH_ON_FIXED_570_CELL_NECKLACE_LATENT_CARRIER_WITH_EXACT_RESTORATION_AND_REUSE",
       "status": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
       "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
       "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
       "durable_evidence": "cat_cas_phase_frontier/EXACT_PHASE_PRECISION_RESULTS.json",
+      "durable_exact_integer_oracle": "cat_cas_phase_frontier/four_rotor_necklace_exact_phase_precision_integer_oracle.py",
+      "durable_exact_integer_oracle_output": "cat_cas_phase_frontier/EXACT_PHASE_PRECISION_INTEGER_ORACLE_RESULTS.json",
       "claim_ceiling": "DIRECT_PROCESS_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACE_DESCRIPTORS_570_Q_ZETA8_DYADIC_PHASE_CELLS_PUBLIC_VARIANT_ORDINAL_MATCHING_COMPILER_DEPTHS1_2_4_8_16_32_64_REUSE_DEPTH23_SOFTWARE_ONLY",
       "tested_depths": [1, 2, 4, 8, 16, 32, 64],
       "logical_phase_cells": 570,
@@ -446,7 +448,7 @@
     "rematerialized_shared_latent_depth_atomic_dispatch_and_accounting_successor": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
     "rematerialized_shared_latent_depth_source_head": "5e53c7d5e90e617c52475ac88061e1fb327ef6c6",
     "exact_dyadic_cyclotomic_phase_precision_growth": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
-    "exact_dyadic_cyclotomic_phase_precision_source_head": "6f39766e9cf622e2e41d178f8131bd8777b6cd1d",
+    "exact_dyadic_cyclotomic_phase_precision_source_head": "050a78c6b7c46f961c63bab4c13d478b2be55984",
     "claim_ceiling": "GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_PUBLIC_SCALAR_OBSERVATION_SUBSTITUTION_IN_AUDITED_OPEN_OBSERVATION_PACKAGE_COMPLEX128_SOFTWARE_ONLY",
     "rejected_interpretations": [
       "LABELLED_OPEN_CHAIN_COMPRESSION",
@@ -460,7 +462,7 @@
   },
   "post_audit_source_authority": {
     "authority": "SOURCE_AUDITED_PACKAGE_LOCAL",
-    "source_head_range": "16b3db783f86d966fdb52830d591a0aa8d27cc5d..6f39766e9cf622e2e41d178f8131bd8777b6cd1d",
+    "source_head_range": "16b3db783f86d966fdb52830d591a0aa8d27cc5d..050a78c6b7c46f961c63bab4c13d478b2be55984",
     "milestones": [
       "BOUNDED_PARITY_ADMISSIBLE_STOKES_HARMONIC_SECTOR_DUAL_PRIME_PHASE_SIGNATURE_REDUCTION_WITH_RESTORATION_AND_REUSE",
       "FIXED_RANK_FACTORIZED_HIGHEST_STOKES_HARMONIC_SHELL_PHASE_RECURRENCE_WITH_RESTORATION_AND_REUSE",

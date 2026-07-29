@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`6f39766e9cf622e2e41d178f8131bd8777b6cd1d`. The canonical per-milestone
+`050a78c6b7c46f961c63bab4c13d478b2be55984`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5038,7 +5038,10 @@ The independent oracle reconstructs the 4,845 histograms and 285 necklaces
 without importing the production backend. It matches all boundaries,
 restorations, and forward norms over `F17` and `F41`. A separate
 integer-arithmetic reexecution reproduces every reported precision tuple and
-the reuse result.
+the reuse result. That reexecution is now durable in
+`four_rotor_necklace_exact_phase_precision_integer_oracle.py`; the qualifier
+executes it and byte-compares its result with
+`EXACT_PHASE_PRECISION_INTEGER_ORACLE_RESULTS.json`.
 
 The baseline payload is 2,851 bits, so the fixed object count conceals growing
 exact coefficient width. Reported payload excludes big-integer

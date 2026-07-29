@@ -1,10 +1,10 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
 **Status:** `EXACT_PHASE_PRECISION_GROWTH_DIAGNOSTIC_ESTABLISHED`
-**Roadmap version:** `9.3`
+**Roadmap version:** `9.4`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `6f39766e9cf622e2e41d178f8131bd8777b6cd1d`
+**Reconciled source head:** `050a78c6b7c46f961c63bab4c13d478b2be55984`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
 **Current highest milestone:** `BOUNDED_EXACT_DYADIC_CYCLOTOMIC_PHASE_PRECISION_GROWTH_ON_FIXED_570_CELL_NECKLACE_LATENT_CARRIER_WITH_EXACT_RESTORATION_AND_REUSE`
 **Current claim ceiling:** `DIRECT_PROCESS_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACE_DESCRIPTORS_570_Q_ZETA8_DYADIC_PHASE_CELLS_PUBLIC_VARIANT_ORDINAL_MATCHING_COMPILER_DEPTHS1_2_4_8_16_32_64_REUSE_DEPTH23_SOFTWARE_ONLY`
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`6f39766e9cf622e2e41d178f8131bd8777b6cd1d`. The current 87-milestone
+`050a78c6b7c46f961c63bab4c13d478b2be55984`. The current 87-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -1878,6 +1878,13 @@ matches every boundary and restoration over two finite fields. The primary
 depth-64 transaction and unrelated depth-23 reuse restore canonical carrier
 values exactly on the same outer 570-`Phase` object vector without baseline
 reload. Dynamic big-integer limb allocation identity is excluded.
+
+The exact coefficient-height tuples are separately reproduced by the durable
+Fraction-based implementation
+`cat_cas_phase_frontier/four_rotor_necklace_exact_phase_precision_integer_oracle.py`.
+Its committed deterministic output is
+`cat_cas_phase_frontier/EXACT_PHASE_PRECISION_INTEGER_ORACLE_RESULTS.json`,
+and the qualification script executes and byte-compares that output.
 
 Measured exact precision is:
 
