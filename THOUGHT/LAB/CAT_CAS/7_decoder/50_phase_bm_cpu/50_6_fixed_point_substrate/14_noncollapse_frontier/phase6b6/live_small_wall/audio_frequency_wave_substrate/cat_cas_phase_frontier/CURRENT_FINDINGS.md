@@ -5159,3 +5159,59 @@ The next obstruction is:
 ```text
 LOSSLESS_INFINITE_HT_PROJECTIVE_ORBIT_REQUIRES_UNBOUNDED_SYMBOLIC_INFORMATION_OR_NONFINITE_CONTINUOUS_STATE_WHILE_THE_EXACT_COMPACT_CLASSICAL_RECURRENCE_REMAINS_IDENTICAL
 ```
+
+## Stateful Pancharatnam transport retains public-endpoint-invisible phase
+
+The next mechanism uses a resident U(1) fiber coordinate over public
+Bloch-sphere paths. It does not select a canonical phase independently at
+each base point. Instead, every edge chooses the target phase that makes its
+overlap with the current carrier positive real. This stateful Pancharatnam
+transport preserves path-dependent holonomy when a public closed path returns
+to the same Bloch endpoint.
+
+```text
+BOUNDED_STATEFUL_PANCHARATNAM_GAUGE_TRANSPORT_ENDPOINT_INVISIBLE_HOLONOMY_PHASE_MEMORY_WITH_NUMERICAL_RESTORATION_AND_REUSE
+classification                    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                      INDEPENDENT_ORACLE_REEXECUTION
+restoration                       NUMERICAL_PHYSICAL_STATE_RESTORATION
+claim ceiling                     Linux x86_64 direct process, complex128
+carrier                           two complex cells
+tested latitude segments          4, 8, 16, 32, 64, 128, 256, 512
+primary restoration error         8.533e-16
+reuse restoration error           4.722e-16
+100-cycle maximum restoration     8.699e-16
+predeclared tolerance             1e-10
+retained edge history             0 bytes
+```
+
+The inverse regenerates the public vertices in reverse and restores the same
+carrier variable before an unrelated 37-repetition spherical-rectangle reuse
+program. Fresh and restored reuse boundaries differ by `1.355e-15`, and no
+baseline reload occurs. Restoration generations `1, 2` are descriptive
+bookkeeping rather than lease-enforced state.
+
+The missing- and wrong-inverse controls fail. Reordering is inapplicable for
+this commutative scalar U(1) update. Premature canonicalization removes the
+holonomy; reversing path orientation conjugates it; changing the enclosed
+area changes it; and a null carrier is rejected. “Endpoint-invisible” is
+strictly limited to the identical public Bloch endpoint, not the full fiber
+carrier or final overlap.
+
+An independent 80-digit implementation reproduces the discrete latitude
+formula, its decreasing continuous-limit error, both accepted boundaries,
+unit norms, and restorations below `1e-70` at oracle precision. The compiled
+package is deterministic and passes its undefined-behavior build.
+
+The resource record counts inline payloads and public descriptors, not stack
+temporaries, code, libm, allocator state, process RSS, or timing. The
+identical one-double gauge-angle recurrence is state-minimal, and these fixed
+public paths also admit closed-form product evaluation. Therefore no runtime
+advantage, distinct phase resource, CATVM custody, Small Wall crossing,
+physical execution, physical bit replacement, or unbounded computation is
+established.
+
+The next obstruction is:
+
+```text
+PANCHARATNAM_HOLONOMY_IS_PUBLIC_ENDPOINT_INVISIBLE_AND_RESIDENT_BUT_FIXED_PUBLIC_PATHS_ADMIT_AN_EQUIVALENT_OR_CLOSED_FORM_COMPACT_CLASSICAL_PHASE_RECURRENCE
+```

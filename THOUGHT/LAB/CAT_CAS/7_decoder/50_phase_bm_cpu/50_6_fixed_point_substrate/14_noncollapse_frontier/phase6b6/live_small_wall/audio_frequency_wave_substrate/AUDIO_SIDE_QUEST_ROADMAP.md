@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `TRANSFERABLE_FIXED_FINITE_STATE_HT_ORBIT_OBSTRUCTION_ESTABLISHED`
-**Roadmap version:** `9.6`
+**Status:** `STRICT_SCOPE_STATEFUL_PANCHARATNAM_PHASE_MEMORY_ESTABLISHED`
+**Roadmap version:** `9.7`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `ee022a18e7f5b11c485dd4f335cdd02c77a5f161`
+**Reconciled source head:** `1587d37678afd65a6e88ab642da31f44c5b70539`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_HT_ANALYTIC_INFINITE_PROJECTIVE_ORBIT_REJECTS_FIXED_FINITE_STATE_LOSSLESS_PHASE_QUOTIENT_WITH_EXACT_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_DIRECT_PROCESS_TWO_CELL_Z_ZETA8_DYADIC_ANALYTIC_HT_ORBIT_DEPTHS1_2_4_8_16_32_64_REUSE_DEPTH23_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_STATEFUL_PANCHARATNAM_GAUGE_TRANSPORT_ENDPOINT_INVISIBLE_HOLONOMY_PHASE_MEMORY_WITH_NUMERICAL_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_TWO_CELL_PANCHARATNAM_LATITUDE_SEGMENTS4_8_16_32_64_128_256_512_PUBLIC_RECTANGLE_REUSE37_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -2024,6 +2024,67 @@ The next obstruction is:
 LOSSLESS_INFINITE_HT_PROJECTIVE_ORBIT_REQUIRES_UNBOUNDED_SYMBOLIC_INFORMATION_OR_NONFINITE_CONTINUOUS_STATE_WHILE_THE_EXACT_COMPACT_CLASSICAL_RECURRENCE_REMAINS_IDENTICAL
 ```
 
+## 6E. Stateful Pancharatnam gauge-transport phase memory
+
+A distinct numerical mechanism retains the U(1) fiber coordinate over a
+public Bloch-sphere path rather than replacing each visited ray with a
+canonical representative. Each edge applies:
+
+```text
+target <- conj(<carrier,target>) / abs(<carrier,target>) * target
+```
+
+so the transported overlap is positive real. A closed public base path can
+therefore return to the same Bloch endpoint while retaining a nontrivial
+fiber holonomy. “Endpoint-invisible” here means invisible from that public
+Bloch endpoint; it does not mean hidden from the full fiber carrier or the
+final overlap.
+
+```text
+BOUNDED_STATEFUL_PANCHARATNAM_GAUGE_TRANSPORT_ENDPOINT_INVISIBLE_HOLONOMY_PHASE_MEMORY_WITH_NUMERICAL_RESTORATION_AND_REUSE
+classification                    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification level                INDEPENDENT_ORACLE_REEXECUTION
+restoration                       NUMERICAL_PHYSICAL_STATE_RESTORATION
+latitude segments                 4, 8, 16, 32, 64, 128, 256, 512
+primary restoration error         8.533e-16
+reuse                             public spherical rectangle, 37 repetitions
+reuse restoration error           4.722e-16
+100-cycle maximum restoration     8.699e-16
+predeclared tolerance             1e-10
+retained edge history             0 bytes
+baseline reload                   0 bytes
+```
+
+The inverse rematerializes the public vertices in reverse and acts on the
+same carrier variable. The restored carrier then runs the unrelated public
+rectangle program; fresh and restored reuse boundaries agree within
+`1.356e-15`. Restoration generation values `1, 2` are bookkeeping and are
+not lease-enforced. Missing and wrong inverses fail. A reordered-inverse
+control is inapplicable because this retained U(1) update is scalar and
+commutative. Canonicalization erases the holonomy, reverse orientation
+conjugates it, an area change alters it, and a null carrier is rejected.
+
+An independent 80-digit implementation reconstructs the transport, discrete
+latitude product, continuous limit, both accepted boundaries, and numerical
+restoration without importing the production backend. The declared resource
+counts cover the 32-byte two-cell carrier, 32-byte verification baseline,
+16-byte final boundary, and public descriptors. They do not bound stack
+temporaries, code, libm, allocator state, whole-process RSS, or timing.
+
+The identical one-double gauge-angle recurrence is a state-minimal compact
+classical implementation. These fixed public path families also admit direct
+closed-form product evaluation, so no runtime leverage is claimed. This
+result establishes no CATVM custody, machine-enforced no-smuggle boundary,
+distinct phase resource, computational advantage, Small Wall crossing,
+physical waveform execution, physical bit replacement, or unbounded
+computation.
+
+The next obstruction is:
+
+```text
+PANCHARATNAM_HOLONOMY_IS_PUBLIC_ENDPOINT_INVISIBLE_AND_RESIDENT_BUT_FIXED_PUBLIC_PATHS_ADMIT_AN_EQUIVALENT_OR_CLOSED_FORM_COMPACT_CLASSICAL_PHASE_RECURRENCE
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -2122,10 +2183,10 @@ goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve
-this analytic orbit obstruction and resume with a phase law that either
-states an explicit approximation/continuous-state resource or changes the
-matched classical equivalence; adding finite quotient states cannot provide
-a general lossless repair for the certified orbit.
+the analytic orbit obstruction and stateful gauge-transport result. The next
+mechanism must move beyond scalar or fixed-path closed-form holonomy without
+relocating growth into hidden precision, retained history, or an equivalent
+compact classical recurrence.
 
 ## 10. Roadmap Maintenance
 
