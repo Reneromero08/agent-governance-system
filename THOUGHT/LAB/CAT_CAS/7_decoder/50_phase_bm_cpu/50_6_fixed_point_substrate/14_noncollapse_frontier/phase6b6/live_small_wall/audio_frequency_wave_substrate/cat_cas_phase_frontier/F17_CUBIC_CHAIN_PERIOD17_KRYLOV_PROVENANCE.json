@@ -1,0 +1,32 @@
+{
+  "result": "SEALED",
+  "scope": "F17_PERIOD17_CUBIC_CHAIN_MODULAR_KRYLOV_AND_EXACT_PROJECTIVE_WIDTH_DIAGNOSTIC",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "files": {
+    "f17_cubic_chain_period17_krylov.py": "928ec54aea8d6f7c8e7eaaf8e80d809fbfa6bcd37bc5f576b331eed4e0bb21ca",
+    "f17_cubic_chain_period17_krylov_oracle.py": "4662b96ae26db9792e4acda93831c17ca6e9456f1440e4952dcd50240435931e",
+    "f17_cubic_chain_adaptive_gauge.py": "083ddddab5907bb9148e00057cf4e8f33b0ba2f76db71f32fc7a3b085418d828",
+    "qualify_f17_cubic_chain_period17_krylov.sh": "45b5d145f511df367f63171bf1586218b6f8f000c9d55f1c0930b9132a9f28ed",
+    "F17_CUBIC_CHAIN_PERIOD17_KRYLOV_RESULTS.json": "d88afd96acd6855daa0dc3928909b6e1fb45e227bf1a1321e2addcddd9b1ba78",
+    "F17_CUBIC_CHAIN_PERIOD17_KRYLOV_ORACLE_RESULTS.json": "9c6aad467518796a0616e2de7ada1ef08758486d242537c6a96b37fb38a75685"
+  },
+  "sealed_claim_ceiling": "two exact public period-17 F17 cubic-chain descriptor families; 272-dimensional fixed cyclotomic transfer message; seed Krylov ranks over F41 and F73; exact adaptive projective messages at periods 1, 2, 4, and 8; exact restoration and unrelated reuse at period 4; software only",
+  "independent_scope": "separate descriptor compiler, fixed-basis integer transfer, maximal power-of-17 quotient, adaptive omitted-root reconstruction, opposite-pivot modular Krylov elimination, and exact projective message parity",
+  "resource_accounting_scope": "explicit logical carrier/message cells, pivot and scale metadata, public descriptors, verification buffers, restoration transaction work, and separate-oracle working cells; Python objects, allocator/native-library peaks, bit-operation cost, and whole-process peaks remain unbounded",
+  "excluded_interpretations": [
+    "exact rational Krylov dimensions",
+    "exact Z[zeta17] Krylov quotient",
+    "fixed integer width",
+    "constant reversible storage",
+    "arbitrary graph topology",
+    "general non-Gaussian composition",
+    "machine-enforced CATVM custody",
+    "distinct phase resource",
+    "computational advantage",
+    "Small Wall crossing",
+    "physical waveform execution",
+    "unbounded computation"
+  ]
+}
