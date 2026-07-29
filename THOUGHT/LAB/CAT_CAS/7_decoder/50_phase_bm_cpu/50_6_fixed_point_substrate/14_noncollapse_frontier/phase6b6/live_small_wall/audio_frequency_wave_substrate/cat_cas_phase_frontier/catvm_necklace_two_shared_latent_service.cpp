@@ -908,7 +908,14 @@ bool two_port_disconnect_cleanup(
 
 }  // namespace
 
-int main(int argc, char **argv) {
+#ifndef CATVM_NECKLACE_TWO_SHARED_LATENT_SERVICE_ENTRY
+#define CATVM_NECKLACE_TWO_SHARED_LATENT_SERVICE_ENTRY main
+#endif
+
+int CATVM_NECKLACE_TWO_SHARED_LATENT_SERVICE_ENTRY(
+    int argc,
+    char **argv
+) {
     if (argc != 3) {
         return 2;
     }
