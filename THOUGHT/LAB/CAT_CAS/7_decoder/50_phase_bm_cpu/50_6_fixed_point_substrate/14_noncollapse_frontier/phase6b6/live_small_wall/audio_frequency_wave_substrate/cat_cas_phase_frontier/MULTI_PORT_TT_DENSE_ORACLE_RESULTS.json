@@ -1,0 +1,62 @@
+{
+  "accepted_carrier_path": false,
+  "all_boundaries_match": true,
+  "all_final_canonical_cuts_full_numerical_rank": true,
+  "all_final_ranks_match": true,
+  "all_peak_ranks_match": true,
+  "all_restorations_within_tolerance": true,
+  "boundary_max_abs_errors": [
+    4.996003610813204e-16,
+    1.1657341758564144e-15,
+    4.440892098500626e-16,
+    2.7755575615628914e-16,
+    2.4980018054066022e-15
+  ],
+  "computational_advantage": false,
+  "dense_operator_materialized": false,
+  "distinct_phase_resource_established": false,
+  "final_ranks": [
+    [4, 2],
+    [8, 4, 2],
+    [16, 8, 4, 2],
+    [32, 16, 8, 4, 2],
+    [64, 32, 16, 8, 4, 2]
+  ],
+  "fixed_rank_multi_port_closure_established": false,
+  "maximum_discarded_to_cutoff_ratios": [0.0, 0.0, 0.0, 0.0, 0.0],
+  "maximum_verification_dense_complex_cells": 18240,
+  "minimum_retained_to_cutoff_ratios": [
+    108756536223.44229,
+    76984144820.51892,
+    51273141453.617195,
+    24602362708.130913,
+    13219647630.94238
+  ],
+  "oracle": "SEPARATE_DIRECT_DENSE_NECKLACE_PORT_RECURRENCE_AND_NUMERICAL_RANK_PARITY",
+  "production_backend_imported": false,
+  "production_program_compiler_called": false,
+  "production_projection_called": false,
+  "restoration_l2_errors": [
+    3.3149806233405687e-15,
+    5.139810058986005e-15,
+    5.947722196162261e-15,
+    6.709946744963425e-15,
+    7.5437611786732e-15
+  ],
+  "result": "PASS",
+  "reuse_boundary_max_abs_errors": [
+    4.440892098500626e-16,
+    1.9984014443252818e-15,
+    9.43689570931383e-16,
+    5.384581669432009e-15,
+    8.326672684688674e-16
+  ],
+  "small_wall_crossed": false,
+  "matched_identical_tt_reference_exists": true,
+  "strongest_compact_classical_established": false,
+  "terminal": false,
+  "tested_port_counts": [2, 3, 4, 5, 6],
+  "verification_dense_assignment_materialized": true,
+  "verification_dense_cells_counted": true,
+  "verification_dense_complex_cells": [1140, 2280, 4560, 9120, 18240]
+}
