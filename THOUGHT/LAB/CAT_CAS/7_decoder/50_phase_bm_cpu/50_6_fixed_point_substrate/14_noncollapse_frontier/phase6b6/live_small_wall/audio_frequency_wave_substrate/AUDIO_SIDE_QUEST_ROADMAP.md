@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `EXACT_PHASE_PRECISION_GROWTH_DIAGNOSTIC_ESTABLISHED`
-**Roadmap version:** `9.4`
+**Status:** `FIXED_WIDTH_CYCLOTOMIC_STAR_QUOTIENT_SEMANTIC_LOSS_DIAGNOSTIC_ESTABLISHED`
+**Roadmap version:** `9.5`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `050a78c6b7c46f961c63bab4c13d478b2be55984`
+**Reconciled source head:** `88cdb8cbe2f3796bf0282640437116450114e0ad`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_DYADIC_CYCLOTOMIC_PHASE_PRECISION_GROWTH_ON_FIXED_570_CELL_NECKLACE_LATENT_CARRIER_WITH_EXACT_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `DIRECT_PROCESS_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACE_DESCRIPTORS_570_Q_ZETA8_DYADIC_PHASE_CELLS_PUBLIC_VARIANT_ORDINAL_MATCHING_COMPILER_DEPTHS1_2_4_8_16_32_64_REUSE_DEPTH23_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_DUAL_PRIME_CONJUGATE_PAIR_CYCLOTOMIC_STAR_QUOTIENT_FIXED_570_CELL_PHASE_CLOSURE_ACROSS_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `DIRECT_PROCESS_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACE_DESCRIPTORS_570_F17_F17_F41_F41_CONJUGATE_PAIR_RESIDUE_PHASE_CELLS_PUBLIC_VARIANT_ORDINAL_MATCHING_COMPILER_DEPTHS1_64_256_1024_4096_REUSE_DEPTH1537_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`050a78c6b7c46f961c63bab4c13d478b2be55984`. The current 87-milestone
+`88cdb8cbe2f3796bf0282640437116450114e0ad`. The current 88-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -1911,6 +1911,62 @@ No distinct phase resource, computational advantage, Small Wall crossing,
 physical waveform execution, physical bit replacement, or unbounded
 computation follows from this result.
 
+## 6C. Fixed-width cyclotomic star-quotient diagnostic
+
+The successor package preserves the same public 285 necklace descriptors and
+570 logical phase cells, but maps each cell into four conjugate-paired
+residues over `F17 x F17 x F41 x F41`. The conjugation pairing and the
+Hadamard scalar preserve the declared star norm exactly. Public
+`(variant, ordinal)` descriptors are rematerialized in reverse, leaving no
+retained module tape or inverse history.
+
+The strict bounded result is:
+
+```text
+BOUNDED_DUAL_PRIME_CONJUGATE_PAIR_CYCLOTOMIC_STAR_QUOTIENT_FIXED_570_CELL_PHASE_CLOSURE_ACROSS_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE
+classification                     INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification level                 INDEPENDENT_ORACLE_REEXECUTION
+restoration                        EXACT_ALGEBRAIC_RESTORATION
+tested depths                      1, 64, 256, 1024, 4096
+reuse depth                        1537
+logical phase cells                570
+residues per phase cell            4
+carrier inline bytes               4,560
+restoration baseline inline bytes  4,560
+declared payload subtotal bytes    19,492
+retained module tape               0 bytes
+retained inverse history           0 bytes
+baseline reload                    0 bytes
+```
+
+The primary depth-4096 transaction executes 7,000,064 forward elementary
+operations; unrelated depth-1537 reuse executes 2,626,733. Both restore the
+quotient carrier exactly on the same outer backing, fresh/restored reuse
+boundaries agree, and restoration generations are `1, 2`. The independent
+oracle reconstructs the recurrence without importing the production backend
+and bridges exact Fraction boundaries through depth 64 into all four residue
+embeddings.
+
+This fixes arithmetic width only by changing the state semantics. The
+quotient is noninjective for analytic cyclotomic amplitudes: the nonzero
+integer 697 maps to zero in all four embeddings. This is one demonstrated
+kernel element, not a claim that it generates the complete kernel.
+The 19,492-byte subtotal excludes allocator control blocks, heap metadata,
+the verification harness, binaries, and whole-process RSS.
+
+The strongest compact classical implementation is the identical four-residue
+recurrence with zero boundary error. Exact restoration is therefore
+established only within the declared quotient semantics. CATVM custody, a
+distinct phase resource, computational advantage, Small Wall crossing,
+physical waveform execution, physical bit replacement, and unbounded
+computation remain unestablished.
+
+The next obstruction is:
+
+```text
+FIXED_WIDTH_CYCLOTOMIC_STAR_QUOTIENT_DISCARDS_NONZERO_ANALYTIC_KERNEL_697_AND_REMAINS_IDENTICAL_FINITE_FIELD_RECURRENCE
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -1948,7 +2004,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_DYADIC_CYCLOTOMIC_PHASE_PRECISION_GROWTH_ON_FIXED_570_CELL_NECKLACE_LATENT_CARRIER_WITH_EXACT_RESTORATION_AND_REUSE
+BOUNDED_DUAL_PRIME_CONJUGATE_PAIR_CYCLOTOMIC_STAR_QUOTIENT_FIXED_570_CELL_PHASE_CLOSURE_ACROSS_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE
 ```
 
 Not established:
@@ -2009,9 +2065,10 @@ goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve
-this exact-precision checkpoint and resume by controlling coefficient height
-and total material cost, or by introducing a phase-owned resource absent from
-the identical compact classical recurrence.
+this quotient diagnostic and resume by seeking lossless analytic compactness
+or a phase-owned resource absent from the identical compact classical
+recurrence; adding only more quotient primes or depths does not resolve the
+recorded obstruction.
 
 ## 10. Roadmap Maintenance
 

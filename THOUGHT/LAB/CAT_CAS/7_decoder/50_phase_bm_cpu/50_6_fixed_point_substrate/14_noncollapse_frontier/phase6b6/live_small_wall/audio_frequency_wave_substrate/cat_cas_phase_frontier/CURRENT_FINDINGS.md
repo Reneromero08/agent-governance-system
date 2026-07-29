@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`050a78c6b7c46f961c63bab4c13d478b2be55984`. The canonical per-milestone
+`88cdb8cbe2f3796bf0282640437116450114e0ad`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5056,4 +5056,53 @@ obstruction is:
 
 ```text
 FIXED_570_LOGICAL_PHASE_CELLS_HIDE_DEPTH_GROWING_EXACT_COEFFICIENT_WIDTH_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+## Fixed-width cyclotomic star quotient
+
+A distinct exact diagnostic maps every one of the 570 logical phase cells
+into four conjugate-paired residues over `F17 x F17 x F41 x F41`. It retains
+the public 285 necklace descriptors, rematerializes public
+`(variant, ordinal)` operations for the inverse, and preserves the declared
+star norm exactly.
+
+```text
+BOUNDED_DUAL_PRIME_CONJUGATE_PAIR_CYCLOTOMIC_STAR_QUOTIENT_FIXED_570_CELL_PHASE_CLOSURE_ACROSS_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE
+classification                     INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification level                 INDEPENDENT_ORACLE_REEXECUTION
+restoration                        EXACT_ALGEBRAIC_RESTORATION
+tested depths                      1, 64, 256, 1024, 4096
+reuse depth                        1537
+logical phase cells                570
+residues per phase cell            4
+carrier inline bytes               4,560
+restoration baseline inline bytes  4,560
+declared payload subtotal bytes    19,492
+retained module tape               0 bytes
+retained inverse history           0 bytes
+baseline reload                    0 bytes
+```
+
+The depth-4096 primary and unrelated depth-1537 reuse both restore exactly in
+the quotient on the same outer carrier backing. Fresh/restored reuse
+boundaries agree and restoration generations are `1, 2`. Wrong, missing, and
+reordered inverses fail restoration; phase-disabled, topology-perturbed, and
+null-carrier paths change the boundary. An independent implementation matches
+the four-residue boundaries and exact Fraction bridges through depth 64
+without importing the production backend.
+
+The fixed width is not lossless analytic compression. The nonzero integer 697
+maps to zero in every declared embedding. This establishes one kernel element,
+not a complete kernel generator. The declared 19,492-byte subtotal excludes
+allocator and heap metadata, the verification harness, binaries, and
+whole-process RSS.
+
+The strongest compact classical implementation is the identical four-residue
+recurrence with zero boundary error. No CATVM custody, distinct phase resource,
+computational advantage, Small Wall crossing, physical waveform execution,
+physical bit replacement, or unbounded computation is established. The next
+obstruction is:
+
+```text
+FIXED_WIDTH_CYCLOTOMIC_STAR_QUOTIENT_DISCARDS_NONZERO_ANALYTIC_KERNEL_697_AND_REMAINS_IDENTICAL_FINITE_FIELD_RECURRENCE
 ```
