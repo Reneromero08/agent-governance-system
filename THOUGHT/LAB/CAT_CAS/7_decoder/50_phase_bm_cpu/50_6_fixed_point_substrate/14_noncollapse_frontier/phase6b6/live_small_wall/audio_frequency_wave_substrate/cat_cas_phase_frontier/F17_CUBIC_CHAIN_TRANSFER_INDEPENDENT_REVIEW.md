@@ -1,5 +1,8 @@
 # F17 cubic-chain transfer independent review
 
+Scientific source commit:
+`8d769d1ca8f7a9da233c5ca6a0aa9422f911c8d7`
+
 ## Decision after repair
 
 ```text

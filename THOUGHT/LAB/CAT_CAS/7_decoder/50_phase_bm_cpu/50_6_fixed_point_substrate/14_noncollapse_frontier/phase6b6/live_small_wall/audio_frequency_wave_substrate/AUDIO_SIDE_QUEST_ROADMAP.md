@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F17_INTERACTING_CUBIC_LATENT_TRACE_OBSTRUCTION_ESTABLISHED`
-**Roadmap version:** `10.5`
+**Status:** `STRICT_SCOPE_F17_CUBIC_CHAIN_TRANSFER_CLOSURE_AND_EXACT_INTEGER_WIDTH_OBSTRUCTION_ESTABLISHED`
+**Roadmap version:** `10.6`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `1761781e960030f47c49c7d14aa8fdcce0356371`
+**Reconciled source head:** `8d769d1ca8f7a9da233c5ca6a0aa9422f911c8d7`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F17_INTERACTING_MULTI_CUBIC_LATENT_SIGNATURE_REMAINS_POLYNOMIAL_WHILE_FINAL_CHARACTER_TRACE_GROWS_AS_17_TO_K_WITH_EXACT_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_NUMPY_EXACT_F17_FIXED_PUBLIC_PORTS4_LATENTS1_2_3_4_PLUS_DENSE_ORACLE_CASE_PORTS2_LATENTS2_TWO_PUBLIC_ALGORITHMIC_PROGRAM_FAMILIES_FULL_MIXED_CUBIC_MONOMIAL_SIGNATURE_NONZERO_GAUSSIAN_FOURIER_PIVOTS_NONSINGULAR_PUBLIC_FINAL_BLOCK_STREAMED_17_TO_K_FINAL_TRACE_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_F17_TOPOLOGY_FACTORIZED_INTERACTING_CUBIC_LATENT_CHAIN_NATIVE_CYCLOTOMIC_TRANSFER_CLOSURE_REPLACES_17_TO_K_TRACE_WITH_LOGARITHMIC_REVERSIBLE_PEBBLE_STORAGE_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_F17_PUBLIC_PATH_GRAPH_UNARY_CUBIC_AND_NEAREST_NEIGHBOR_MIXED_CUBIC_FACTORS_NODES2_3_5_9_17_33_65_TWO_ALGORITHMIC_PROGRAM_FAMILIES_17_BY_16_INTEGER_CYCLOTOMIC_TRANSFER_MESSAGE_TOPOLOGY_DERIVED_REVERSIBLE_RECURSIVE_PEBBLING_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`251d89cf95ac50edb78a085cfe6e60721e288876`. The current 98-milestone
+`8d769d1ca8f7a9da233c5ca6a0aa9422f911c8d7`. The current 100-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -2580,6 +2580,89 @@ The live obstruction is:
 INTERACTING_CUBIC_LATENT_SIGNATURE_REMAINS_POLYNOMIAL_AT_FIXED_PUBLIC_WIDTH_BUT_GENERIC_FINAL_CHARACTER_TRACE_GROWS_AS_17_TO_K_AND_THE_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE_HAS_THE_SAME_COST
 ```
 
+### Exact topology-factorized cubic-chain transfer closure
+
+The phase-owned repair composes exact F17 unary cubic and nearest-neighbor
+mixed cubic path factors into a canonical `17 x 16` integer cyclotomic
+message. It replaces the predecessor's global `17**nodes` character trace
+with local native transfer composition.
+
+```text
+claim
+    BOUNDED_EXACT_F17_TOPOLOGY_FACTORIZED_INTERACTING_CUBIC_LATENT_CHAIN_NATIVE_CYCLOTOMIC_TRANSFER_CLOSURE_REPLACES_17_TO_K_TRACE_WITH_LOGARITHMIC_REVERSIBLE_PEBBLE_STORAGE_EXACT_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+The declared public path cases have 2, 3, 5, 9, 17, 33, and 65 nodes, so
+their edge counts are powers of two. The topology-derived recursive schedule
+uses 2 through 8 message slots:
+
+```text
+nodes                              2      3      5       9      17      33       65
+reversible message integer cells 544    816   1088    1360    1632    1904     2176
+retain-all integer cells          544    816   1360    2448    4624    8976    17680
+forward transfer applications       1      3      9      27      81     243      729
+maximum message payload bits      869   1837   4653   13432   35191   88872   216589
+maximum coefficient signed bits     3      6     10      18      34      68      136
+```
+
+The recursive forward schedule preserves only the source and final message.
+Its actual inverse rematerializes required checkpoints, subtracts the final
+message, clears all scratch, and removes the seed. The same message
+containers and row backing are preserved. An unrelated program consumes the
+actual restored carrier; no baseline reload or retained inverse descriptor is
+used.
+
+A separate Python-list oracle uses an exact two-message dynamic program and a
+retain-all inverse for every declared case. It also directly enumerates
+assignments at nodes 2 and 3. It does not import or call the production
+compiler, transfer, or projection.
+
+The accepted accounting includes public factors, descriptors, message
+payloads, transfer scalar updates, projection, restoration, reuse, and a
+two-carrier verification peak. It does not bound Python integer objects,
+container allocation, recursive stack bytes, OS or whole-process state, or
+growing-integer bit-operation cost. Each transfer enumerates fixed local
+left-value, right-value, and cyclotomic-basis domains.
+
+The strongest implemented matched streaming baseline is the identical exact
+two-message path dynamic program. It uses 544 integer cells and fewer
+transfer applications than reversible pebbling for nodes at least 3.
+Periodic block-transfer powering has not been tested, so the strongest
+family-specific compact baseline is not established.
+
+This result does not establish arbitrary non-power-of-two scheduling,
+arbitrary graphs or treewidth, fixed integer width, constant reversible
+storage, general non-Gaussian composition, CATVM custody, a distinct phase
+resource, computational advantage, Small Wall crossing, physical waveform
+execution, physical bit replacement, or unbounded computation.
+
+The next selected phase-machine experiment is:
+
+```text
+EXACT_CYCLOTOMIC_CONTENT_AND_PROJECTIVE_PHASE_GAUGE_QUOTIENT_ON_TOPOLOGY_FACTORIZED_CUBIC_CHAIN_TRANSFER_MESSAGES
+```
+
+It must test whether exact common content or a lawful global phase gauge can
+reduce the growing integer payload without relocating answer-bearing scale,
+history, or precision. The comparison must include the identical two-message
+dynamic program and a periodic block-transfer/powering baseline where
+applicable.
+
+The live obstruction is:
+
+```text
+CHAIN_TRANSFER_REMOVES_17_TO_K_TRACE_BUT_EXACT_INTEGER_PAYLOAD_WIDTH_GROWS_WITH_DEPTH_AND_THE_IDENTICAL_TWO_MESSAGE_CLASSICAL_DYNAMIC_PROGRAM_USES_LESS_STORAGE_AND_WORK_THAN_REVERSIBLE_PEBBLING
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -2617,7 +2700,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F17_INTERACTING_MULTI_CUBIC_LATENT_SIGNATURE_REMAINS_POLYNOMIAL_WHILE_FINAL_CHARACTER_TRACE_GROWS_AS_17_TO_K_WITH_EXACT_RESTORATION_AND_REUSE
+BOUNDED_EXACT_F17_TOPOLOGY_FACTORIZED_INTERACTING_CUBIC_LATENT_CHAIN_NATIVE_CYCLOTOMIC_TRANSFER_CLOSURE_REPLACES_17_TO_K_TRACE_WITH_LOGARITHMIC_REVERSIBLE_PEBBLE_STORAGE_EXACT_RESTORATION_AND_REUSE
 ```
 
 Not established:

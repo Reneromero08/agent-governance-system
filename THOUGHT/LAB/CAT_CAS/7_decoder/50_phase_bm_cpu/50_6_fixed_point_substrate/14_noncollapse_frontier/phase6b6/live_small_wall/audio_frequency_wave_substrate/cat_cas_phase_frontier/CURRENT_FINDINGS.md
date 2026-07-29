@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`1761781e960030f47c49c7d14aa8fdcce0356371`. The canonical per-milestone
+`8d769d1ca8f7a9da233c5ca6a0aa9422f911c8d7`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5717,4 +5717,75 @@ The live obstruction is:
 
 ```text
 INTERACTING_CUBIC_LATENT_SIGNATURE_REMAINS_POLYNOMIAL_AT_FIXED_PUBLIC_WIDTH_BUT_GENERIC_FINAL_CHARACTER_TRACE_GROWS_AS_17_TO_K_AND_THE_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE_HAS_THE_SAME_COST
+```
+
+## Exact cubic-chain transfer closes the declared path family
+
+The topology-factorized successor composes exact F17 unary cubic and
+nearest-neighbor mixed cubic path factors through a canonical `17 x 16`
+integer cyclotomic transfer message.
+
+```text
+claim
+    BOUNDED_EXACT_F17_TOPOLOGY_FACTORIZED_INTERACTING_CUBIC_LATENT_CHAIN_NATIVE_CYCLOTOMIC_TRANSFER_CLOSURE_REPLACES_17_TO_K_TRACE_WITH_LOGARITHMIC_REVERSIBLE_PEBBLE_STORAGE_EXACT_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+At nodes 2, 3, 5, 9, 17, 33, and 65, the recursive reversible schedule uses
+2, 3, 4, 5, 6, 7, and 8 message slots, or 544 through 2,176 logical integer
+cells. Retain-all execution would use 544 through 17,680 cells. Forward
+transfer applications are 1, 3, 9, 27, 81, 243, and 729.
+
+The accepted path does not execute the global `17**nodes` assignment trace.
+It does enumerate fixed local left-value, right-value, and cyclotomic-basis
+domains inside each transfer. The final boundary is a 16-coefficient
+numerator with public normalization metadata `17^(-nodes/2)`.
+
+The actual recursive inverse rematerializes intermediate messages, clears the
+final and every scratch message exactly, and removes the seed. The same
+outer carrier, message containers, and row backing are preserved. An
+unrelated program then consumes the actual restored carrier without baseline
+reload or retained inverse history.
+
+A separate oracle implements a two-message exact dynamic program and
+retain-all inverse for every case, plus direct assignment enumeration at
+nodes 2 and 3. It does not import or call the production transfer or
+projection.
+
+Exact payload width remains the obstruction. Maximum logical message payload
+grows from 869 to 216,589 bits, and maximum single-coefficient signed width
+grows from 3 to 136 bits. The identical exact two-message classical dynamic
+program uses 544 integer cells and less transfer work. Periodic block-transfer
+powering is untested, so this is not an established strongest
+family-specific baseline.
+
+The result does not establish arbitrary graph topology, fixed-width
+arithmetic, constant reversible storage, CATVM custody, a distinct phase
+resource, computational advantage, Small Wall crossing, catalytic inference,
+physical waveform execution, replacement of physical bits with pi, or
+unbounded computation.
+
+The next selected experiment is:
+
+```text
+EXACT_CYCLOTOMIC_CONTENT_AND_PROJECTIVE_PHASE_GAUGE_QUOTIENT_ON_TOPOLOGY_FACTORIZED_CUBIC_CHAIN_TRANSFER_MESSAGES
+```
+
+It must test exact content or projective phase reduction without moving
+answer-bearing scale or precision into hidden metadata, and compare against
+the identical two-message dynamic program plus periodic block powering where
+applicable.
+
+The live obstruction is:
+
+```text
+CHAIN_TRANSFER_REMOVES_17_TO_K_TRACE_BUT_EXACT_INTEGER_PAYLOAD_WIDTH_GROWS_WITH_DEPTH_AND_THE_IDENTICAL_TWO_MESSAGE_CLASSICAL_DYNAMIC_PROGRAM_USES_LESS_STORAGE_AND_WORK_THAN_REVERSIBLE_PEBBLING
 ```
