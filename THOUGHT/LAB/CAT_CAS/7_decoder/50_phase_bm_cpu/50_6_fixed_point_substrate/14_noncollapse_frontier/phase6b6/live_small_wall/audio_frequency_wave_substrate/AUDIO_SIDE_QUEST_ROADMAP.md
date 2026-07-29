@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `CLEANROOM_GATE_REPAIRED_SHARED_LATENT_SUCCESSOR_ESTABLISHED`
-**Roadmap version:** `9.1`
+**Status:** `REMATERIALIZED_DEPTH_AND_ACCOUNTED_CATVM_SUCCESSOR_ESTABLISHED`
+**Roadmap version:** `9.2`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `65be0046ae02c79ab8c3b3356ef68d891de19e53`
+**Reconciled source head:** `5e53c7d5e90e617c52475ac88061e1fb327ef6c6`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER`
-**Current claim ceiling:** `LINUX_X86_64_SAME_UID_ONE_UNIX_SEQPACKET_CONNECTION_NONCE_DERIVED_OUTER_LEASE_EXACT_GENERATION_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_570_COMPLEX_CELLS_TWO_CELL_LATENT_FIBER_FIXED_FOUR_MODULE_PRIMARY_THREE_MODULE_REUSE_STATIC_OWNER_0X4C415431_SEVEN_BIN_BOUNDARY_COMPLEX128_SOFTWARE_ONLY`
+**Current highest milestone:** `CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32`
+**Current claim ceiling:** `LINUX_X86_64_SAME_UID_ONE_UNIX_SEQPACKET_CONNECTION_NONCE_DERIVED_LEASE_EXACT_GENERATION_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_570_COMPLEX_CELLS_TWO_CELL_LATENT_FIBER_PUBLIC_VARIANT_ORDINAL_COMPILER_PRIMARY_DEPTH32_REUSE_DEPTH11_STATIC_OWNER_SEVEN_BIN_BOUNDARY_COMPLEX128_SOFTWARE_ONLY`
 **Current evidence authority:** `CLEANROOM_ADVERSARIAL_VERIFICATION`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`65be0046ae02c79ab8c3b3356ef68d891de19e53`. The current 82-milestone
+`5e53c7d5e90e617c52475ac88061e1fb327ef6c6`. The current 86-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -150,6 +150,19 @@ reuse remain valid subclaims, but the full owner-custody claim is
 primary and three reuse consumers against static port owner `0x4c415431`,
 while CATVM independently enforces the exact nonce-derived outer lease and
 generation. That repair is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with
+`NUMERICAL_PHYSICAL_STATE_RESTORATION`.
+
+The next depth package compiles each module from public `(variant, ordinal)`
+topology and rematerializes the inverse sequence in reverse order. Its direct
+path keeps the 570-complex carrier fixed at depths 1, 2, 4, 8, 16, and 32
+without retaining a module tape or inverse history. The initial CATVM version
+is `REJECTED_SOURCE_DEFECT` for inconsistent resident error flags, accepted
+nonce mutation on rejected initialization, and resident `STOP` response
+ordering. A distinct atomic-order repair preserves the corrected state
+machine, but the complete package is also `REJECTED_SOURCE_DEFECT` because it
+omitted the live 289-complex generator matrix from reported peaks. The final
+accounting successor preserves both historical records and is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with
 `NUMERICAL_PHYSICAL_STATE_RESTORATION`.
 
 ## 1. Standing Mission
@@ -1773,9 +1786,9 @@ final-response ordering, restoration, and reuse subclaims remain valid.
 A distinct repair now binds every fixed primary and reuse consumer to static
 port owner `0x4c415431` before a carrier operation. CATVM separately checks
 the nonce-derived outer lease and exact restoration generation. Independent
-pre-stage and resident-stage attacks denied wrong module owner, lease, and
-generation with zero boundary release; attacked and clean final/reuse
-boundaries agree exactly.
+pre-stage and resident-stage conformance cases denied wrong module owner,
+lease, and generation with zero boundary release; affected and clean
+final/reuse boundaries agree exactly.
 
 ```text
 OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
@@ -1794,6 +1807,58 @@ physical waveform execution. The next obstruction is therefore:
 ```text
 PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_FIXED_TWO_CELL_570_COMPLEX_RECURRENCE
 ```
+
+### Topology-rematerialized depth and accounted CATVM successor
+
+A public `(variant, ordinal)` compiler now rematerializes shared-latent
+modules in forward order and reconstructs their inverses in reverse order.
+The direct process was checked at depths `1, 2, 4, 8, 16, 32`; the catalytic
+carrier remains 570 complex cells and retained module tape and inverse history
+remain zero. The maximum restoration error is `9.352e-14`. A depth-11
+unrelated reuse restores within `1.093e-13`, and fresh/restored reuse
+boundaries differ by `9.009e-14`.
+
+The initial CATVM depth implementation is preserved as
+`REJECTED_SOURCE_DEFECT`. Resident descriptor errors omitted the resident
+state flag, rejected repeat initialization changed the accepted nonce, and
+resident `STOP` responded before numerical inverse cleanup. Its valid
+`CONTINUE` ordering, disconnect cleanup, hidden-stage custody, and same-backing
+reuse subclaims remain recorded.
+
+A distinct atomic-dispatch repair corrected those transitions. That complete
+package is also preserved as `REJECTED_SOURCE_DEFECT` because its reported
+primary and reuse peaks omitted the live 289-complex generator matrix. The
+atomic response-ordering subclaim remains
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE`.
+
+The separate accounting successor reports:
+
+```text
+CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32
+verification                         INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+restoration                          NUMERICAL_PHYSICAL_STATE_RESTORATION
+primary depth                        32
+reuse depth                          11
+primary restoration error            4.952e-14
+reuse restoration error              6.546e-14
+fresh/restored reuse boundary error  4.829e-14
+baseline reload bytes                0
+```
+
+The accepted primary plus reuse protocol is 740 bytes. The counted primary
+and reuse peaks are 2,569 and 3,139 complex cells excluding persistent plan
+roots, or 2,586 and 3,156 including those roots. These are declared complex
+buffers, not whole-process RSS bounds; allocator, native-library, operating
+system, socket, controller, and binary memory remain outside the bound.
+
+The strongest matched classical implementation is still the identical
+570-complex recurrence with zero boundary error. Thus topology
+rematerialization removes retained history at increasing tested depth, but it
+does not establish a distinct phase resource, computational advantage, Small
+Wall crossing, physical waveform execution, physical bit replacement, or
+unbounded computation. The next measurement must address precision or another
+resource hidden by fixed logical cell counts rather than add more depths to
+the same recurrence.
 
 ## 7. No-Smuggle and Non-Collapse Laws
 
@@ -1832,7 +1897,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_NORMALIZED_TWO_MODE_STOKES_SPHERE_RATIONAL_SU2_KERR_DUAL_PRIME_LIE_GRADES2_3_4_5_6_SOFTWARE_REFERENCE_ONLY
+CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32
 ```
 
 Not established:

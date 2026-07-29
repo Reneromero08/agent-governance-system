@@ -2,14 +2,14 @@
   "schema_version": "2.0.0",
   "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
   "state_date": "2026-07-28",
-  "reconciled_source_head": "65be0046ae02c79ab8c3b3356ef68d891de19e53",
+  "reconciled_source_head": "5e53c7d5e90e617c52475ac88061e1fb327ef6c6",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
   "standing_mission": "CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1",
   "supporting_mission": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
   "prime_directive": "REPLACE_THE_BIT_WITH_PI",
   "claim_authority": {
     "registry": "CLAIM_AUTHORITY_REGISTRY.json",
-    "milestones_classified": 82,
+    "milestones_classified": 86,
     "original_catvm_atomic_transaction": "REJECTED_SOURCE_DEFECT_ATOMICITY",
     "original_catvm_preserved_subclaims": [
       "BOUNDED_BOOLEAN_F3_F_TO_G_ALGEBRA",
@@ -43,9 +43,14 @@
     "already_completed_do_not_restart": "COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER",
     "rejected_successor": "CATVM_ENFORCED_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
     "rejected_successor_defect": "MODULE_OWNER_NONZERO_CHECK_DID_NOT_BIND_CONSUMERS_TO_DECLARED_SHARED_PORT_OWNER",
-    "completed_repaired_successor": "CATVM_ENFORCED_OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
+    "completed_repaired_successor": "CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
+    "completed_direct_depth_result": "TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_ACROSS_INCREASING_DEPTH",
+    "rejected_depth_catvm_predecessor": "CATVM_ENFORCED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
+    "rejected_depth_catvm_predecessor_defect": "RESIDENT_ERROR_AND_STOP_RESPONSE_ORDERING_DID_NOT_UNIFORMLY_PRESERVE_OR_RESTORE_RESIDENT_STATE",
+    "rejected_atomic_dispatch_revision": "CATVM_ATOMIC_DISPATCH_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
+    "rejected_atomic_dispatch_revision_defect": "LIVE_289_COMPLEX_GENERATOR_MATRIX_OMITTED_FROM_PRIMARY_AND_REUSE_PEAK_TOTALS",
     "resume_condition_satisfied": true,
-    "next_obstruction": "FIXED_TWO_CELL_LATENT_FIBER_IS_IMMEDIATELY_SIMULATED_BY_THE_IDENTICAL_570_COMPLEX_COMPACT_CLASSICAL_RECURRENCE"
+    "next_obstruction": "IDENTICAL_570_COMPLEX_COMPACT_CLASSICAL_RECURRENCE_REMAINS_THE_STRONGEST_MATCHED_IMPLEMENTATION"
   },
   "durable_main_goal_reminder": {
     "primary": [
@@ -88,8 +93,8 @@
   },
   "lane_closure_authority": "USER_ONLY",
   "terminal": false,
-  "current_highest_milestone": "CATVM_ENFORCED_OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
-  "current_claim_ceiling": "LINUX_X86_64_SAME_UID_ONE_UNIX_SEQPACKET_CONNECTION_NONCE_DERIVED_OUTER_LEASE_EXACT_GENERATION_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_570_COMPLEX_CELLS_TWO_CELL_LATENT_FIBER_FIXED_FOUR_MODULE_PRIMARY_THREE_MODULE_REUSE_STATIC_OWNER_0X4C415431_SEVEN_BIN_BOUNDARY_COMPLEX128_SOFTWARE_ONLY",
+  "current_highest_milestone": "CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
+  "current_claim_ceiling": "LINUX_X86_64_SAME_UID_ONE_UNIX_SEQPACKET_CONNECTION_NONCE_DERIVED_LEASE_EXACT_GENERATION_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_570_COMPLEX_CELLS_TWO_CELL_LATENT_FIBER_PUBLIC_VARIANT_ORDINAL_COMPILER_PRIMARY_DEPTH32_REUSE_DEPTH11_STATIC_OWNER_SEVEN_BIN_BOUNDARY_COMPLEX128_SOFTWARE_ONLY",
   "architectural_alignment": {
     "current_phase_circuit_substrate": "ESTABLISHED_DEVELOPMENT_FOUNDATION",
     "bounded_holographic_relational_substrate": "ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_EXACT_15_NODE_FOUR_OWNER_AFFINE_DAG",
@@ -154,7 +159,11 @@
     "four_rotor_necklace_bounded_hypothesis_scoring": "SOURCE_AUDITED_PACKAGE_LOCAL_SEVEN_COLLISION_CLASSES_EXPLICIT_SCORE_SEMANTICS_ARGMAX_AND_PACKAGE_REFERENCE",
     "coherent_shared_latent_predecessor": "REJECTED_SOURCE_DEFECT_UNBOUND_NONZERO_MODULE_OWNER_WITH_CARRIER_NONCOMMUTATION_AND_RESTORATION_SUBCLAIMS_PRESERVED",
     "owner_bound_coherent_shared_latent_repair": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE_ONE_570_COMPLEX_CARRIER_TWO_CELL_LATENT_FIBER_FOUR_NONCOMMUTING_CONSUMERS_STATIC_PORT_OWNER_AND_EXACT_OUTER_LEASE_GENERATION",
-    "selected_next_experiment": "PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_FIXED_TWO_CELL_570_COMPLEX_RECURRENCE",
+    "topology_rematerialized_shared_latent_depth_direct": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE_DEPTHS1_2_4_8_16_32_FIXED_570_COMPLEX_CARRIER_ZERO_RETAINED_MODULE_TAPE_ZERO_RETAINED_INVERSE_HISTORY_REUSE_DEPTH11",
+    "topology_rematerialized_shared_latent_depth_catvm_predecessor": "REJECTED_SOURCE_DEFECT_RESIDENT_ERROR_FLAGS_NONCE_REWIND_AND_RESIDENT_STOP_RESPONSE_ORDERING",
+    "topology_rematerialized_shared_latent_depth_atomic_dispatch_revision": "REJECTED_SOURCE_DEFECT_LIVE_289_COMPLEX_GENERATOR_MATRIX_OMITTED_FROM_REPORTED_PEAKS_ATOMIC_ORDERING_SUBCLAIM_PRESERVED",
+    "topology_rematerialized_shared_latent_depth_accounting_successor": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE_FIXED_570_COMPLEX_CARRIER_PRIMARY_DEPTH32_REUSE_DEPTH11_FINAL_RESPONSE_AFTER_NUMERICAL_RESTORATION",
+    "selected_next_experiment": "EXACT_PHASE_PRECISION_GROWTH_BEYOND_IDENTICAL_570_COMPLEX_RECURRENCE",
     "held_successor": "COMPLETED_WITH_DISTINCT_OWNER_BOUND_REPAIR"
   },
   "strongest_bounded_architecture": [
@@ -2094,6 +2103,43 @@
     "owner_bound_shared_latent_repair_small_wall_crossing": false,
     "owner_bound_shared_latent_repair_physical_waveform_execution": false,
     "owner_bound_shared_latent_repair_next_obstruction": "IDENTICAL_570_COMPLEX_COMPACT_CLASSICAL_RECURRENCE",
+    "shared_latent_depth_source_head": "5e53c7d5e90e617c52475ac88061e1fb327ef6c6",
+    "shared_latent_depth_durable_evidence": "cat_cas_phase_frontier/CATVM_NECKLACE_SHARED_LATENT_DEPTH_RESULTS.json",
+    "shared_latent_depth_verification_level": "CLEANROOM_ADVERSARIAL_VERIFICATION",
+    "shared_latent_depth_restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+    "shared_latent_depth_direct_classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "shared_latent_depth_direct_tested_depths": [1, 2, 4, 8, 16, 32],
+    "shared_latent_depth_direct_fixed_carrier_complex_cells": 570,
+    "shared_latent_depth_direct_retained_module_tape_bytes": 0,
+    "shared_latent_depth_direct_retained_inverse_history_bytes": 0,
+    "shared_latent_depth_direct_maximum_restoration_error": 9.351601280794374e-14,
+    "shared_latent_depth_direct_reuse_depth": 11,
+    "shared_latent_depth_direct_reuse_restoration_error": 1.0927586480356206e-13,
+    "shared_latent_depth_direct_fresh_restored_reuse_boundary_error": 9.009459844833145e-14,
+    "shared_latent_depth_catvm_predecessor_classification": "REJECTED_SOURCE_DEFECT",
+    "shared_latent_depth_catvm_predecessor_preserved_valid_continue_ordering": true,
+    "shared_latent_depth_atomic_dispatch_revision_classification": "REJECTED_SOURCE_DEFECT",
+    "shared_latent_depth_atomic_dispatch_preserved_subclaim": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "shared_latent_depth_accounting_successor_classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "shared_latent_depth_accounting_successor_primary_depth": 32,
+    "shared_latent_depth_accounting_successor_reuse_depth": 11,
+    "shared_latent_depth_accounting_successor_primary_restoration_error": 4.951942189030858e-14,
+    "shared_latent_depth_accounting_successor_reuse_restoration_error": 6.545926890278212e-14,
+    "shared_latent_depth_accounting_successor_fresh_restored_reuse_boundary_error": 4.829470157119431e-14,
+    "shared_latent_depth_accounting_successor_carrier_backing_preserved": true,
+    "shared_latent_depth_accounting_successor_baseline_reload_bytes": 0,
+    "shared_latent_depth_primary_native_generator_terms": 134946816,
+    "shared_latent_depth_primary_peak_counted_complex_cells_excluding_persistent_plan": 2569,
+    "shared_latent_depth_reuse_peak_counted_complex_cells_excluding_persistent_plan": 3139,
+    "shared_latent_depth_primary_peak_counted_complex_cells_including_plan_roots": 2586,
+    "shared_latent_depth_reuse_peak_counted_complex_cells_including_plan_roots": 3156,
+    "shared_latent_depth_counted_peak_is_whole_process_rss": false,
+    "shared_latent_depth_matched_classical": "IDENTICAL_570_COMPLEX_RECURRENCE",
+    "shared_latent_depth_distinct_phase_resource": false,
+    "shared_latent_depth_computational_advantage": false,
+    "shared_latent_depth_small_wall_crossing": false,
+    "shared_latent_depth_physical_waveform_execution": false,
+    "shared_latent_depth_next_obstruction": "IDENTICAL_570_COMPLEX_COMPACT_CLASSICAL_RECURRENCE_REMAINS_THE_STRONGEST_MATCHED_IMPLEMENTATION",
     "algebraic_general_affine_equation_elimination": true,
     "general_boolean_relation_elimination": false,
     "embedded_nul_custody_controls": "PASS_NATIVE_REFERENCE_COMPILER",
@@ -2184,7 +2230,9 @@
     "BOUNDED_COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_AND_CATALYTIC_HYPOTHESIS_SCORING_ON_COMPACT_NECKLACE_PHASE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE",
     "BOUNDED_CATVM_MODE_LOCKED_BOSONIC_GIVENS_HIDDEN_OCCUPATION_ATOMIC_DISCONNECT_RESTORATION_AND_REUSE",
     "OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
-    "CATVM_ENFORCED_OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER"
+    "CATVM_ENFORCED_OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
+    "TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_ACROSS_INCREASING_DEPTH",
+    "CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32"
   ],
   "rejected_results": [
     {
@@ -2203,6 +2251,18 @@
       "status": "REJECTED_SOURCE_DEFECT",
       "defect": "MODULE_OWNER_WAS_NOT_BOUND_TO_DECLARED_SHARED_PORT_OWNER",
       "preserved_subclaims": "SEE_CLAIM_AUTHORITY_REGISTRY"
+    },
+    {
+      "milestone": "CATVM_ENFORCED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
+      "status": "REJECTED_SOURCE_DEFECT",
+      "defect": "RESIDENT_ERROR_FLAGS_NONCE_REWIND_AND_RESIDENT_STOP_RESPONSE_ORDERING",
+      "preserved_subclaims": "SEE_CLAIM_AUTHORITY_REGISTRY"
+    },
+    {
+      "milestone": "CATVM_ATOMIC_DISPATCH_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
+      "status": "REJECTED_SOURCE_DEFECT",
+      "defect": "LIVE_289_COMPLEX_GENERATOR_MATRIX_OMITTED_FROM_PRIMARY_AND_REUSE_PEAK_TOTALS",
+      "preserved_subclaims": "ATOMIC_DISPATCH_INDEPENDENTLY_VERIFIED_STRICT_SCOPE"
     }
   ],
   "capability_position": {
@@ -2220,6 +2280,8 @@
     "COHERENCE_IS_CAUSAL_BUT_IDENTICAL_COMPACT_CLASSICAL_COMPLEX_RECURRENCE_INHERITS_IT",
     "TYPED_OPEN_OBSERVATION_RELATION_PHASE_CLOSURE_AND_BOUNDED_HYPOTHESIS_SCORING_ESTABLISHED_BUT_IDENTICAL_COMPACT_CLASSICAL_COMPLEX_RECURRENCE_INHERITS_IT",
     "OWNER_BOUND_SHARED_LATENT_PORT_ESTABLISHED_BUT_IDENTICAL_570_COMPLEX_COMPACT_CLASSICAL_RECURRENCE_INHERITS_IT",
+    "TOPOLOGY_REMATERIALIZED_DEPTH32_FIXED_570_CARRIER_ESTABLISHED_BUT_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE_INHERITS_IT",
+    "EXACT_PHASE_PRECISION_GROWTH_BEYOND_FIXED_LOGICAL_CELL_COUNTS",
     "PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_FIXED_TWO_CELL_570_COMPLEX_RECURRENCE",
     "BROADER_NON_AFFINE_PHASE_COMPOSITION_ALGEBRA",
     "FIXED_RANK_OR_COMPACT_CLOSURE_WITHOUT_BOOLEAN_RECURRENCE",
@@ -2238,7 +2300,7 @@
     "OFFICIAL_EXTERNAL_ACCEPTANCE",
     "CROSS_DOMAIN_TRANSFER"
   ],
-  "active_frontier_candidates_status": "ACTIVE_AFTER_REQUIRED_VERIFICATION_AND_OWNER_BOUND_REPAIR_CHECKPOINT",
+  "active_frontier_candidates_status": "ACTIVE_AFTER_REMATERIALIZED_DEPTH_AND_ACCOUNTED_CATVM_CHECKPOINT",
   "next_crossing": [
     "COMPACT_COMPILED_BODY_TYPED_RELATIONAL_MODULES",
     "NATIVE_DENSE_WIDTH2_RELATIONAL_PHASE_CONTRACTION",
@@ -2304,9 +2366,12 @@
     "COHERENT_SHARED_LATENT_OBSERVATION_PORT_REJECTED_UNBOUND_MODULE_OWNER",
     "OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ESTABLISHED",
     "CATVM_ENFORCED_OWNER_BOUND_SHARED_LATENT_PORT_RESTORATION_AND_REUSE_ESTABLISHED",
+    "TOPOLOGY_REMATERIALIZED_SHARED_LATENT_DEPTH32_FIXED_570_CARRIER_ESTABLISHED",
+    "CATVM_SHARED_LATENT_DEPTH_PREDECESSOR_RESPONSE_ORDER_DEFECT_RECORDED",
+    "CATVM_SHARED_LATENT_DEPTH_ATOMIC_DISPATCH_AND_ACCOUNTING_SUCCESSOR_ESTABLISHED",
     "PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_570_COMPLEX_RECURRENCE"
   ],
-  "next_crossing_status": "OWNER_BOUND_SHARED_LATENT_SUCCESSOR_ESTABLISHED_NEXT_RESOURCE_OBSTRUCTION_IDENTIFIED",
+  "next_crossing_status": "REMATERIALIZED_DEPTH_AND_ACCOUNTED_CATVM_SUCCESSOR_ESTABLISHED_IDENTICAL_RECURRENCE_OBSTRUCTION_REMAINS",
   "frontier_warning": "ANOTHER_HANDCRAFTED_GRAPH_FAMILY_IS_INSUFFICIENT_IF_INTERMEDIATE_RELATION_WIDTH_CARRIER_STATE_OR_PROVENANCE_GROWS_EXPONENTIALLY",
   "agent_policy": {
     "continue_without_new_user_prompt": true,

@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`65be0046ae02c79ab8c3b3356ef68d891de19e53`. The canonical per-milestone
+`5e53c7d5e90e617c52475ac88061e1fb327ef6c6`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -4938,3 +4938,63 @@ obstruction is:
 ```text
 PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_FIXED_TWO_CELL_570_COMPLEX_RECURRENCE
 ```
+
+## Topology-rematerialized shared-latent depth
+
+The public phase program is now compiled from `(variant, ordinal)` descriptors
+instead of retaining a module tape. The inverse reconstructs the same
+descriptors in reverse. Independent conformance checks cover direct depths
+`1, 2, 4, 8, 16, 32` and an unrelated depth-11 reuse on the same restored
+carrier.
+
+```text
+TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_ACROSS_INCREASING_DEPTH
+classification                         INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+restoration                            NUMERICAL_PHYSICAL_STATE_RESTORATION
+fixed catalytic carrier                570 complex cells
+retained module tape                   0 bytes
+retained inverse history               0 bytes
+maximum restoration error              9.351601280794374e-14
+reuse restoration error                1.0927586480356206e-13
+fresh/restored reuse boundary error    9.009459844833145e-14
+```
+
+The first CATVM depth service remains
+`REJECTED_SOURCE_DEFECT`. Resident descriptor errors did not return the
+resident state flag, rejected repeated initialization changed the accepted
+nonce, and resident `STOP` returned before numerical inverse cleanup. Its
+valid `CONTINUE` ordering, disconnect cleanup, hidden-stage behavior, and
+same-backing reuse are preserved subclaims.
+
+The distinct atomic-dispatch repair corrects those state transitions. As a
+complete package it is also `REJECTED_SOURCE_DEFECT`, because the reported
+primary and reuse peak totals omitted the live 289-complex generator matrix.
+Its atomic response-ordering subclaim remains independently valid at the
+recorded ceiling.
+
+The separated accounting successor is:
+
+```text
+CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32
+classification                         INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+restoration                            NUMERICAL_PHYSICAL_STATE_RESTORATION
+primary restoration error              4.951942189030858e-14
+reuse restoration error                6.545926890278212e-14
+fresh/restored reuse boundary error    4.829470157119431e-14
+restoration generations                1, 2
+baseline reload bytes                  0
+accepted primary plus reuse protocol   740 bytes
+```
+
+The counted primary and reuse peaks are 2,569 and 3,139 complex cells
+excluding persistent plan roots, or 2,586 and 3,156 including those roots.
+They are enumerated complex-buffer counts rather than whole-process RSS
+bounds. Allocator, native-library, operating-system, socket, controller, and
+binary memory are not bounded by this result.
+
+The strongest compact classical implementation is the identical 570-complex
+recurrence and agrees with zero boundary error. Fixed logical cell count
+therefore does not by itself provide a distinct phase resource. The next
+phase-owned experiment should measure exact phase precision or another
+resource that the logical cell count may conceal, while retaining the same
+matched recurrence, restoration, and reuse requirements.
