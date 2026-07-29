@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_MULTI_PORT_TT_NO_COMPACTION_OBSTRUCTION_ESTABLISHED`
-**Roadmap version:** `10.2`
+**Status:** `STRICT_SCOPE_EXACT_F17_GAUSSIAN_PHASE_QUOTIENT_ESTABLISHED`
+**Roadmap version:** `10.3`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `b3ee8442777725cd645ba78eda140d2ec8a08681`
+**Reconciled source head:** `ca9061d652c59bb48fc56643bc5120cab217d6ee`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_TENSOR_FACTORIZED_MULTI_PORT_NECKLACE_PHASE_DIAGNOSTIC_FINDS_FULL_TOLERANCE_DEFINED_CANONICAL_MATRICIZATION_RANK_AND_NO_TT_COMPACTION_WITH_RESTORATION_AND_LOGICAL_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_NUMPY_SCIPY_COMPLEX128_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_BINARY_PORT_COUNTS2_TO6_PUBLIC_ALGORITHMIC_LOCAL_CHAIN_AND_RING_JOINT_PROGRAMS_SVD_RELATIVE_2E_MINUS12_SOFTWARE_ONLY_NO_FIXED_BUFFER_OR_PROCESS_RSS_CLAIM`
+**Current highest milestone:** `BOUNDED_EXACT_F17_GAUSSIAN_CYCLOTOMIC_MULTI_PORT_PHASE_QUOTIENT_WITH_NONCOMMUTING_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_NUMPY_EXACT_F17_QUADRATIC_GAUSSIAN_PHASE_CHART_PORTS2_4_8_16_32_TWO_PUBLIC_ALGORITHMIC_PROGRAM_FAMILIES_NONZERO_FOURIER_PIVOTS_NONSINGULAR_FINAL_OVERLAP_BOUNDARY_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`b3ee8442777725cd645ba78eda140d2ec8a08681`. The current 96-milestone
+`ca9061d652c59bb48fc56643bc5120cab217d6ee`. The current 97-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -2379,6 +2379,70 @@ The next obstruction is:
 
 ```text
 GENERIC_NONCOMMUTING_MULTI_PORT_NECKLACE_PROGRAMS_SATURATE_EVERY_TESTED_CANONICAL_CUT_AND_TT_STORAGE_EXCEEDS_DENSE_SO_FIXED_RANK_REQUIRES_A_DIFFERENT_PHASE_ALGEBRA_OR_RESTRICTED_LAW_WITH_AN_INDEPENDENT_COMPACT_CLASSICAL_COMPARISON
+```
+
+## Exact F17 Gaussian phase quotient supplies a restricted compact law
+
+The successor changed the algebra rather than enlarging the saturated tensor
+train. It represents an F17 quadratic Gaussian phase function by the exact
+coefficient tuple `(A,b,c,sign)` and applies symmetric phase shears and
+single-port Fourier transforms directly to that resident tuple. No
+`17**ports` phase vector, assignment list, or truth table is materialized in
+the accepted path.
+
+```text
+BOUNDED_EXACT_F17_GAUSSIAN_CYCLOTOMIC_MULTI_PORT_PHASE_QUOTIENT_WITH_NONCOMMUTING_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE
+classification                     INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification level                 SEPARATE_REFERENCE_PARITY
+restoration                        EXACT_ALGEBRAIC_RESTORATION
+tested ports                       2, 4, 8, 16, 32
+resident F17 cells                 7, 21, 73, 273, 1,057
+resident fixed-width payload bits  36, 106, 366, 1,366, 5,286
+represented dense phase cells      289 through 17**32
+```
+
+The exact Schur-complement Fourier update closes inside `O(ports**2)`
+fixed-width coefficient state for the two tested public algorithmic program
+families. Reverse public modules restore the symbolic F17 state exactly
+without retained inverse history or baseline reload. The same carrier object
+and coefficient-array backing then execute an unrelated second program.
+
+The independent oracle reexecutes the coefficient recurrence, boundary,
+inverse, and reuse using Python integer lists at every tested port. At ports 2
+and 4 it also expands the explicit complex F17 phase vector and matches both
+boundaries and restorations within the predeclared `2e-11` tolerance. The
+oracle consumes hashed public descriptors; compiler generation and the
+missing, wrong, and reordered controls remain source-local.
+
+Resource reporting separates the two-carrier accepted path from the
+three-carrier verification path. It counts fixed-width F17 payload,
+generation and lease metadata, serialized primary and reuse programs,
+Fourier scratch, projection scratch, and determinant-search compilation for
+both programs. Python objects, NumPy and native-library internals, allocator,
+OS state, and whole-process peak remain unbounded.
+
+The identical exact Gaussian coefficient recurrence is a compact classical
+implementation. This result therefore establishes a restricted polynomial
+phase algebra, not a distinct phase resource, computational advantage, Small
+Wall crossing, CATVM custody, necklace-carrier integration, non-Gaussian
+closure, physical waveform execution, physical bit replacement, or unbounded
+computation.
+
+The next selected phase-machine experiment is:
+
+```text
+EXACT_F17_NON_GAUSSIAN_CHARACTER_SUM_QUOTIENT_CLOSURE_DIAGNOSTIC_BEYOND_QUADRATIC_GAUSSIAN_CLASS
+```
+
+It must introduce the smallest exact non-Gaussian phase law and determine
+whether native composition can remain compact without moving exponential
+character-sum state into history, projection, compilation, or a classical
+lookup structure.
+
+The next obstruction is:
+
+```text
+EXACT_F17_QUADRATIC_GAUSSIAN_PHASE_CLOSURE_HAS_POLYNOMIAL_FIXED_WIDTH_STATE_BUT_IS_IDENTICAL_TO_A_COMPACT_CLASSICAL_RECURRENCE_AND_DOES_NOT_COVER_NON_GAUSSIAN_PHASE_LAWS_OR_NECKLACE_CARRIER_INTEGRATION
 ```
 
 ## 7. No-Smuggle and Non-Collapse Laws

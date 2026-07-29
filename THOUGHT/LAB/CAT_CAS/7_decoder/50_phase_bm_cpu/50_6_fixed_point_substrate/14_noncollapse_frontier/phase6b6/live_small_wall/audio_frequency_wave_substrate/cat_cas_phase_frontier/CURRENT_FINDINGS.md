@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`b3ee8442777725cd645ba78eda140d2ec8a08681`. The canonical per-milestone
+`ca9061d652c59bb48fc56643bc5120cab217d6ee`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5514,4 +5514,76 @@ The live obstruction is:
 
 ```text
 GENERIC_NONCOMMUTING_MULTI_PORT_NECKLACE_PROGRAMS_SATURATE_EVERY_TESTED_CANONICAL_CUT_AND_TT_STORAGE_EXCEEDS_DENSE_SO_FIXED_RANK_REQUIRES_A_DIFFERENT_PHASE_ALGEBRA_OR_RESTRICTED_LAW_WITH_AN_INDEPENDENT_COMPACT_CLASSICAL_COMPARISON
+```
+
+## Exact F17 Gaussian quotient closes a restricted multi-port phase law
+
+The representation-changing successor stores an exact quadratic Gaussian
+phase function as `(A,b,c,sign)` over F17. Symmetric phase shears and
+single-port Fourier transforms update that tuple without materializing the
+`17**ports` phase vector.
+
+```text
+claim
+    BOUNDED_EXACT_F17_GAUSSIAN_CYCLOTOMIC_MULTI_PORT_PHASE_QUOTIENT_WITH_NONCOMMUTING_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+At ports 2, 4, 8, 16, and 32, the resident F17-cell counts are:
+
+```text
+7  21  73  273  1,057
+```
+
+The corresponding fixed-width coefficient payloads, including the sign bit,
+are:
+
+```text
+36  106  366  1,366  5,286 bits
+```
+
+Both tested program families contain `ports+3` public modules. The accepted
+path retains no inverse history and reloads no baseline. Reverse public
+modules exactly restore the symbolic coefficient state, preserve the same
+quadratic and linear array backing, advance restoration generation, and
+permit an unrelated second program on the same carrier.
+
+A separate Python-integer oracle consumes the hashed public descriptors and
+independently matches the exact boundary and both restorations at every
+tested width. At ports 2 and 4, explicit complex phase vectors of 289 and
+83,521 logical cells also match within the predeclared `2e-11` tolerance.
+Compiler generation and the production missing, wrong, and reordered
+controls are not independently regenerated.
+
+Accounting distinguishes two accepted-path carriers from the third fresh
+verification carrier. It includes coefficient payload, machine metadata,
+serialized primary and reuse programs, Fourier scratch, projection scratch,
+and determinant-search compilation for both programs. Python objects,
+NumPy/native internals, allocator, OS, and whole-process peak remain
+unbounded.
+
+The identical exact Gaussian coefficient recurrence is a compact classical
+implementation. No distinct phase resource, computational advantage, Small
+Wall crossing, CATVM custody, necklace integration, non-Gaussian closure,
+physical waveform execution, replacement of physical bits with pi, or
+unbounded computation is established.
+
+The next selected experiment is:
+
+```text
+EXACT_F17_NON_GAUSSIAN_CHARACTER_SUM_QUOTIENT_CLOSURE_DIAGNOSTIC_BEYOND_QUADRATIC_GAUSSIAN_CLASS
+```
+
+The live obstruction is:
+
+```text
+EXACT_F17_QUADRATIC_GAUSSIAN_PHASE_CLOSURE_HAS_POLYNOMIAL_FIXED_WIDTH_STATE_BUT_IS_IDENTICAL_TO_A_COMPACT_CLASSICAL_RECURRENCE_AND_DOES_NOT_COVER_NON_GAUSSIAN_PHASE_LAWS_OR_NECKLACE_CARRIER_INTEGRATION
 ```
