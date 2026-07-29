@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F17_CUBIC_CHAIN_TRANSFER_CLOSURE_AND_EXACT_INTEGER_WIDTH_OBSTRUCTION_ESTABLISHED`
-**Roadmap version:** `10.6`
+**Status:** `STRICT_SCOPE_F17_ADAPTIVE_GAUGE_AND_EXACT_17_CONTENT_QUOTIENT_REDUCES_PAYLOAD_BUT_RESIDUAL_WIDTH_GROWS`
+**Roadmap version:** `10.7`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `8d769d1ca8f7a9da233c5ca6a0aa9422f911c8d7`
+**Reconciled source head:** `f67319b66aeb8cabef5b871a3d2eda9a54532c0d`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F17_TOPOLOGY_FACTORIZED_INTERACTING_CUBIC_LATENT_CHAIN_NATIVE_CYCLOTOMIC_TRANSFER_CLOSURE_REPLACES_17_TO_K_TRACE_WITH_LOGARITHMIC_REVERSIBLE_PEBBLE_STORAGE_EXACT_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_F17_PUBLIC_PATH_GRAPH_UNARY_CUBIC_AND_NEAREST_NEIGHBOR_MIXED_CUBIC_FACTORS_NODES2_3_5_9_17_33_65_TWO_ALGORITHMIC_PROGRAM_FAMILIES_17_BY_16_INTEGER_CYCLOTOMIC_TRANSFER_MESSAGE_TOPOLOGY_DERIVED_REVERSIBLE_RECURSIVE_PEBBLING_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_F17_ADAPTIVE_OMITTED_ROOT_AND_17_CONTENT_CYCLOTOMIC_QUOTIENT_CHAIN_TRANSFER_REDUCES_INTEGER_PAYLOAD_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS_DEPTH_GROWING_WIDTH`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_F17_PUBLIC_PATH_GRAPH_UNARY_CUBIC_AND_NEAREST_NEIGHBOR_MIXED_CUBIC_FACTORS_NODES2_3_5_9_17_33_65_TWO_PROGRAM_FAMILIES_PER_ROW_ADAPTIVE_OMITTED_ROOT_AND_EXACT_COMMON_17_CONTENT_Z_ZETA17_QUOTIENT_TOPOLOGY_DERIVED_REVERSIBLE_RECURSIVE_PEBBLING_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`8d769d1ca8f7a9da233c5ca6a0aa9422f911c8d7`. The current 100-milestone
+`f67319b66aeb8cabef5b871a3d2eda9a54532c0d`. The current 101-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -2661,6 +2661,94 @@ The live obstruction is:
 
 ```text
 CHAIN_TRANSFER_REMOVES_17_TO_K_TRACE_BUT_EXACT_INTEGER_PAYLOAD_WIDTH_GROWS_WITH_DEPTH_AND_THE_IDENTICAL_TWO_MESSAGE_CLASSICAL_DYNAMIC_PROGRAM_USES_LESS_STORAGE_AND_WORK_THAN_REVERSIBLE_PEBBLING
+```
+
+### Exact adaptive cyclotomic gauge and 17-content quotient
+
+The selected exact repair retains each 17-row transfer message in an
+adaptive 16-coefficient chart of `Z[zeta17]`. Each row omits the root that
+minimizes signed-bit payload under the exact null relation
+`1 + zeta + ... + zeta^16 = 0`. Each message also extracts its maximal exact
+common integer power of 17 and retains that exponent as machine state.
+
+```text
+claim
+    BOUNDED_EXACT_F17_ADAPTIVE_OMITTED_ROOT_AND_17_CONTENT_CYCLOTOMIC_QUOTIENT_CHAIN_TRANSFER_REDUCES_INTEGER_PAYLOAD_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS_DEPTH_GROWING_WIDTH
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+For nodes 2, 3, 5, 9, 17, 33, and 65:
+
+```text
+nodes                                  2      3      5      9      17      33       65
+unfactored reversible peak bits      869   1837   4653  13432   35191   88872   216589
+adaptive/content peak bits           937   1885   2851   5580   12760   30652    76433
+unfactored coefficient signed bits     3      6     10     18      34      68      136
+adaptive coefficient signed bits       3      5      5      9      14      26       50
+resident 17-content exponent            0      0      1      2       5      10       21
+```
+
+The tested resident exponents equal `floor((nodes-1)/3)`. Boundary content
+exponents are `0, 1, 1, 3, 5, 11, 21`. Exact `(1-zeta17)` factorization was
+also tested but increased fixed-basis payload for every final case.
+
+The first pre-seal inspection rejected a draft inverse that compared a
+recomputed target and then cleared it. The accepted source instead
+recomputes the public transfer and exactly subtracts coefficients, the
+power-of-17 exponent, and the offset pivot register from the actual resident
+target. Seed release uses the same operation. Destructive clear is a hard
+qualification failure. The same backing is restored and consumed by an
+unrelated program without a baseline reload or retained inverse history.
+
+A separate fixed-basis oracle consumes the public hashed descriptors without
+importing or calling production compiler, transfer, gauge, projection, or
+inverse functions. It independently matches semantic and quotient
+boundaries, maximal 17-content, adaptive pivot minimality, retain-all
+restoration, and direct assignment enumeration at nodes 2 and 3.
+
+Accounting includes public descriptors, the accepted and fresh verification
+carriers, a 272-cell seed, a 272-cell inverse expected message, pivot
+metadata, the 49-cell combined regauge temporary, projection and
+reconstruction buffers, content diagnostics, restoration, and reuse. Python
+objects, allocator, recursive stack, integer bit-operation, OS, and
+whole-process peaks remain unbounded.
+
+The identical adaptive-gauge and content recurrence is the matched compact
+classical implementation. Dense period-17 block construction is
+applicability-gated: its 73,984 integer cells and at least 4,624
+transfer-equivalents exceed the declared single-query cases. It was not
+executed, and the strongest family-specific method remains unestablished.
+
+The exact quotient reduces the depth-65 peak by about 65 percent, but
+residual coefficient width still grows. It does not establish a fixed-width
+carrier, a distinct phase resource, computational advantage, a Small Wall
+crossing, CATVM custody, physical waveform execution, physical bit
+replacement, or unbounded computation.
+
+The next selected phase-owned diagnostic is:
+
+```text
+EXACT_PERIOD17_BLOCK_KRYLOV_ORBIT_AND_PROJECTIVE_SCALE_ACCOUNTING_ON_ADAPTIVE_F17_CUBIC_CHAIN
+```
+
+It must determine whether the public period-17 transfer orbit admits a
+strictly smaller exact Krylov or minimal-polynomial closure, and whether any
+projective normalization reduces total state rather than moving growing
+scale into hidden metadata. It must compare the resulting phase recurrence
+with the identical strongest compact classical implementation.
+
+The live obstruction is:
+
+```text
+EXACT_17_CONTENT_AND_ADAPTIVE_GAUGE_REDUCE_THE_TESTED_CHAIN_PAYLOAD_BUT_RESIDUAL_COEFFICIENT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_INHERITS_EVERY_REDUCTION
 ```
 
 ## 7. No-Smuggle and Non-Collapse Laws

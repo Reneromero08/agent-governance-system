@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`8d769d1ca8f7a9da233c5ca6a0aa9422f911c8d7`. The canonical per-milestone
+`f67319b66aeb8cabef5b871a3d2eda9a54532c0d`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -5788,4 +5788,88 @@ The live obstruction is:
 
 ```text
 CHAIN_TRANSFER_REMOVES_17_TO_K_TRACE_BUT_EXACT_INTEGER_PAYLOAD_WIDTH_GROWS_WITH_DEPTH_AND_THE_IDENTICAL_TWO_MESSAGE_CLASSICAL_DYNAMIC_PROGRAM_USES_LESS_STORAGE_AND_WORK_THAN_REVERSIBLE_PEBBLING
+```
+
+## Exact adaptive gauge and 17-content reduce, but do not bound, width
+
+The exact successor uses the cyclotomic null relation
+`1 + zeta + ... + zeta^16 = 0` to select a minimum-signed-bit omitted-root
+chart independently for each latent-value row. It also extracts the maximal
+common integer power of 17 from each resident message and retains the
+exponent explicitly.
+
+```text
+claim
+    BOUNDED_EXACT_F17_ADAPTIVE_OMITTED_ROOT_AND_17_CONTENT_CYCLOTOMIC_QUOTIENT_CHAIN_TRANSFER_REDUCES_INTEGER_PAYLOAD_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS_DEPTH_GROWING_WIDTH
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+At nodes 2, 3, 5, 9, 17, 33, and 65, the unfactored reversible payload
+peaks are:
+
+```text
+869  1,837  4,653  13,432  35,191  88,872  216,589 bits
+```
+
+Adaptive gauge plus exact 17-content reduces them to:
+
+```text
+937  1,885  2,851  5,580  12,760  30,652  76,433 bits
+```
+
+Maximum coefficient signed widths fall from
+`3, 6, 10, 18, 34, 68, 136` to `3, 5, 5, 9, 14, 26, 50`. The resident
+content exponents `0, 0, 1, 2, 5, 10, 21` match
+`floor((nodes-1)/3)` in the declared cases. Exact `(1-zeta17)` extraction
+does not reduce the tested final fixed-basis payloads.
+
+The accepted inverse is exact subtraction on the actual resident message:
+coefficients, the integer 17-content exponent, and the offset pivot register
+are all uncomputed. Seed release uses the same operation. This repairs a
+pre-seal draft that only validated and cleared the target. The same backing
+is restored and reused by an unrelated program without baseline reload or
+retained inverse history.
+
+A separate fixed-basis exact oracle reconstructs the public descriptors and
+matches semantic boundaries, factorized boundaries, maximal 17-content,
+adaptive pivot minima, and retain-all restoration for every case. Direct
+assignment enumeration additionally matches at nodes 2 and 3. The oracle
+does not import or call the production compiler, transfer, gauge selector,
+projector, or inverse.
+
+Resource accounting includes the seed and inverse expected messages, pivot
+metadata, a 49-cell combined regauge temporary, projection and reconstruction
+buffers, content diagnostics, descriptors, restoration, reuse, and a fresh
+verification carrier. Python objects, allocator, recursive stack,
+growing-integer operations, OS state, and whole-process peak are not bounded.
+
+The identical exact adaptive-gauge/content recurrence is the matched compact
+classical method. Dense period-17 block powering is not executed because its
+73,984 integer cells and at least 4,624 build transfer-equivalents exceed all
+declared single-query streaming cases. The strongest family-specific method
+is therefore still unestablished.
+
+The quotient is a substantive exact payload reduction, not a fixed-width
+closure. It does not establish CATVM custody, a distinct phase resource,
+computational advantage, Small Wall crossing, catalytic inference, physical
+waveform execution, physical bit replacement, or unbounded computation.
+
+The next selected experiment is:
+
+```text
+EXACT_PERIOD17_BLOCK_KRYLOV_ORBIT_AND_PROJECTIVE_SCALE_ACCOUNTING_ON_ADAPTIVE_F17_CUBIC_CHAIN
+```
+
+The live obstruction is:
+
+```text
+EXACT_17_CONTENT_AND_ADAPTIVE_GAUGE_REDUCE_THE_TESTED_CHAIN_PAYLOAD_BUT_RESIDUAL_COEFFICIENT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_INHERITS_EVERY_REDUCTION
 ```
