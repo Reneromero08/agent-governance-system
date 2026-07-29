@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F17_PERIOD17_EXECUTED_NATIVE_K_RECURRENCE_WITH_GROWING_WIDTH_AND_IDENTICAL_CLASSICAL_EXECUTION`
-**Roadmap version:** `11.0`
+**Status:** `STRICT_SCOPE_F17_PERIOD17_SEVEN_GENERATOR_UNIT_GAUGE_REDUCES_PAYLOAD_BUT_WIDTH_GROWS`
+**Roadmap version:** `11.1`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `7fa4ec7d5f7d19ed1c6072ecfe8f19a62596f282`
+**Reconciled source head:** `e9137eeb58784c24311241cc96c53e964793e1b8`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_EXECUTED_NATIVE_Q_ZETA17_CAYLEY_HAMILTON_RECURRENCE_USES_FIXED_18_RESIDENT_MESSAGE_SLOTS_PLUS16_CYCLOTOMIC_COEFFICIENT_REGISTERS_ACROSS_PERIODS1_4_16_64_WITH_EXACT_RESTORATION_AND_REUSE_BUT_GROWING_INTEGER_WIDTH_AND_IDENTICAL_CLASSICAL_EXECUTION`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_Q_ZETA17_CHARACTERISTIC_RECURRENCE_PERIODS1_4_16_64_FIXED18_RESIDENT_MESSAGE_SLOTS_PLUS16_CYCLOTOMIC_COEFFICIENT_REGISTERS_DIRECT_DENSE_BOUNDARY_PARITY_EXACT_SUBTRACTIVE_RESTORATION_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_SEVEN_GENERATOR_CYCLOTOMIC_UNIT_GAUGE_REDUCES_LEDGER_INCLUSIVE_CARRIER_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_RECURRENCE_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_VALID_PATH_RESTORATION_AND_REUSE_BUT_DOES_NOT_BOUND_INTEGER_WIDTH`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_Q_ZETA17_SEVEN_DECLARED_CYCLOTOMIC_UNIT_GENERATORS_DETERMINISTIC_128_STEP_PER_CALL_SEARCH_PERIODS1_4_16_64_256_DENSE_DIRECT_PARITY_THROUGH64_SEPARATE_SEQUENTIAL_RECURRENCE_PARITY_THROUGH256_EXACT_VALID_PATH_SUBTRACTIVE_RESTORATION_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`7fa4ec7d5f7d19ed1c6072ecfe8f19a62596f282`. The current 104-milestone
+`e9137eeb58784c24311241cc96c53e964793e1b8`. The current 105-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -2988,6 +2988,60 @@ The live obstruction is:
 THE_EXECUTED_NATIVE_Q_ZETA17_RECURRENCE_FIXES_RESIDENT_SLOT_AND_REGISTER_COUNTS_IN_THE_TESTED_MECHANISM_BUT_EXACT_INTEGER_WIDTH_GROWS_AN_INTEGRALLY_REVERSIBLE_ROLLING_WINDOW_IS_NOT_ESTABLISHED_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_RECURRENCE
 ```
 
+The selected height-reduction successor is now established within strict
+scope:
+
+```text
+claim
+    BOUNDED_EXACT_SEVEN_GENERATOR_CYCLOTOMIC_UNIT_GAUGE_REDUCES_LEDGER_INCLUSIVE_CARRIER_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_RECURRENCE_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_VALID_PATH_RESTORATION_AND_REUSE_BUT_DOES_NOT_BOUND_INTEGER_WIDTH
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+The exact deterministic gauge reduces counted payload in all ten cases,
+including its seven-integer scale ledgers. At period 256, PRIMARY falls from
+5,850,470 to 5,767,292 bits and REUSE from 6,112,042 to 5,935,644 bits.
+Maximum signed widths remain 8,931 and 8,988 bits, however, and eight
+normalization calls reach the declared 128-step cap.
+
+The separate no-import oracle recompiles both public operators, checks their
+complete annihilators, uses sequential `x mod q` coefficient advancement,
+and reproduces all ten exact boundaries, precision tuples, cap counts,
+valid-path restoration, backing identity, and restored-carrier reuse.
+
+This is a bounded exact reduction, not fixed-width closure. Multiplicative
+independence of the seven generators is not certified, rejected inverses do
+not roll back atomically, dense-direct parity stops at period 64, and process
+peak memory is not bounded. The identical compact classical recurrence and
+normalizer remain available.
+
+The next phase-owned experiment is:
+
+```text
+EXACT_F17_PERIOD17_BOUNDARY_HEIGHT_LOWER_BOUND_FOR_LOSSLESS_DISCRETE_PHASE_STATE
+```
+
+It must determine whether the remaining growth is compulsory for the exact
+declared boundary family rather than merely missed by the local unit search.
+The smallest acceptable result is an independently checked algebraic-height,
+norm, or distinct-state lower bound tied to the public recurrence. It must
+separate a lower bound on lossless discrete software state from any claim
+about continuous physical phase, and it must retain the identical compact
+classical recurrence as the matched baseline.
+
+The live obstruction is:
+
+```text
+THE_SEVEN_GENERATOR_UNIT_GAUGE_REDUCES_COUNTED_PAYLOAD_BUT_EXACT_INTEGER_WIDTH_STILL_GROWS_EIGHT_PERIOD256_SEARCHES_HIT_THE_DECLARED_CAP_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_NORMALIZATION
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -3025,7 +3079,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F17_PERIOD17_CUBIC_CHAIN_EXECUTED_NATIVE_Q_ZETA17_CAYLEY_HAMILTON_RECURRENCE_USES_FIXED_18_RESIDENT_MESSAGE_SLOTS_PLUS16_CYCLOTOMIC_COEFFICIENT_REGISTERS_ACROSS_PERIODS1_4_16_64_WITH_EXACT_RESTORATION_AND_REUSE_BUT_GROWING_INTEGER_WIDTH_AND_IDENTICAL_CLASSICAL_EXECUTION
+BOUNDED_EXACT_SEVEN_GENERATOR_CYCLOTOMIC_UNIT_GAUGE_REDUCES_LEDGER_INCLUSIVE_CARRIER_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_RECURRENCE_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_VALID_PATH_RESTORATION_AND_REUSE_BUT_DOES_NOT_BOUND_INTEGER_WIDTH
 ```
 
 Not established:

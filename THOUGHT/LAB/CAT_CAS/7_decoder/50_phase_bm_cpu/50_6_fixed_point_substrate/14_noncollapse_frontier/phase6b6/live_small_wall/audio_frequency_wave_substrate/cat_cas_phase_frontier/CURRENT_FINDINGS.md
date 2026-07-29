@@ -6077,3 +6077,79 @@ The live obstruction is:
 ```text
 THE_EXECUTED_NATIVE_Q_ZETA17_RECURRENCE_FIXES_RESIDENT_SLOT_AND_REGISTER_COUNTS_IN_THE_TESTED_MECHANISM_BUT_EXACT_INTEGER_WIDTH_GROWS_AN_INTEGRALLY_REVERSIBLE_ROLLING_WINDOW_IS_NOT_ESTABLISHED_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_RECURRENCE
 ```
+
+## Cyclotomic-unit normalization reduces payload but does not bound width
+
+The successor represents each resident message as a `Z[zeta17]` vector plus
+a seven-integer exponent ledger for the declared cyclotomic units
+`u_a = 1 + zeta + ... + zeta^(a-1)`, `a = 2..8`. A deterministic exact
+search accepts only unit moves that reduce vector-payload-plus-ledger bits.
+
+```text
+claim
+    BOUNDED_EXACT_SEVEN_GENERATOR_CYCLOTOMIC_UNIT_GAUGE_REDUCES_LEDGER_INCLUSIVE_CARRIER_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_RECURRENCE_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_VALID_PATH_RESTORATION_AND_REUSE_BUT_DOES_NOT_BOUND_INTEGER_WIDTH
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+All ten declared cases reduce counted carrier payload:
+
+```text
+period  family   unnormalized   unit gauge   reduction   max width
+1       PRIMARY      1,306,953   1,291,419      15,534         558
+1       REUSE        1,332,125   1,292,645      39,480         558
+4       PRIMARY      1,335,548   1,319,724      15,824         558
+4       REUSE        1,361,285   1,320,981      40,304         558
+16      PRIMARY      1,451,089   1,433,338      17,751         558
+16      REUSE        1,479,214   1,435,141      44,073         560
+64      PRIMARY      2,368,807   2,337,094      31,713       2,228
+64      REUSE        2,447,532   2,375,887      71,645       2,242
+256     PRIMARY      5,850,470   5,767,292      83,178       8,931
+256     REUSE        6,112,042   5,935,644     176,398       8,988
+```
+
+At period 256, four calls per family reach the 128-step search cap. The
+result therefore does not establish a strict local minimum for every call
+or a global optimum. Multiplicative independence of the seven generators is
+also not certified.
+
+The valid forward path reconstructs all basis and coefficient scales at the
+final contraction. It then rematerializes and subtracts output,
+coefficients, basis messages, seed, and ledgers on the original backing.
+PRIMARY-to-REUSE restored-carrier reuse reaches generation and lease two
+with no inverse log or baseline reload. Wrong and reordered inverses are
+detected, but rejected attempts do not provide failure-atomic rollback.
+
+The separate no-import oracle recompiles both public operators, checks the
+complete annihilator identities, advances recurrence coefficients
+sequentially by `x mod q`, and independently reproduces all ten boundaries,
+payloads, widths, search counts, cap hits, restoration, and reuse. Direct
+dense boundary parity is executed through period 64; period 256 is supported
+by the separate recurrence and annihilator check.
+
+Exact accounting covers declared carrier integers and ledgers, not Python
+objects, allocator peak, transient bit-operation peak, or whole-process
+storage. The identical recurrence and unit normalizer are available to
+compact classical software. No CATVM custody, distinct phase resource,
+computational advantage, Small Wall crossing, catalytic inference, physical
+waveform execution, physical bit replacement, or unbounded computation is
+established.
+
+The next selected experiment is:
+
+```text
+EXACT_F17_PERIOD17_BOUNDARY_HEIGHT_LOWER_BOUND_FOR_LOSSLESS_DISCRETE_PHASE_STATE
+```
+
+The live obstruction is:
+
+```text
+THE_SEVEN_GENERATOR_UNIT_GAUGE_REDUCES_COUNTED_PAYLOAD_BUT_EXACT_INTEGER_WIDTH_STILL_GROWS_EIGHT_PERIOD256_SEARCHES_HIT_THE_DECLARED_CAP_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_NORMALIZATION
+```
