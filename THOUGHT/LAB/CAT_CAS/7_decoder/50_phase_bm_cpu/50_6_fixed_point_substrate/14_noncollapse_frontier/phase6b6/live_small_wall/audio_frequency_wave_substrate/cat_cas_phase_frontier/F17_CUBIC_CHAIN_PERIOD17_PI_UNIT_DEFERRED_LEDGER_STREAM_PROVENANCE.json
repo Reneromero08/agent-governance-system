@@ -1,0 +1,26 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "91523133f6a26b4c20fce72d0388f8bff2722660",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "reference_full_result_sha256": "f2351b230d7af4770fdc6cb14eae674ec9a3bd3b9c13cdfef6bdffef16d45f19",
+  "reference_full_oracle_sha256": "3d25b5646edee3b9fd72a94ac45ee4020811fdef5d150904608d625e03ef5d56",
+  "files": {
+    "F17_CUBIC_CHAIN_PERIOD17_PI_UNIT_DEFERRED_LEDGER_STREAM_INDEPENDENT_REVIEW.md": "7bc36bf06557d2a8df287e5ea46b89cb70d7fcc0a7a95f166307a3953545e8a0",
+    "F17_CUBIC_CHAIN_PERIOD17_PI_UNIT_DEFERRED_LEDGER_STREAM_ORACLE_RESULTS.json": "3d25b5646edee3b9fd72a94ac45ee4020811fdef5d150904608d625e03ef5d56",
+    "F17_CUBIC_CHAIN_PERIOD17_PI_UNIT_DEFERRED_LEDGER_STREAM_RESULTS.json": "15de5072d004ebacc952d5278351276585045e74f92611ad444ae1362971e2cd",
+    "f17_cubic_chain_period17_cyclotomic_module.py": "9bf400adc38462796e574da4f88c2778918169245517ebd7385f6c2dc1d52033",
+    "f17_cubic_chain_period17_executed_recurrence.py": "aca8e34294bbaaf345d6bce81f9bb32ce3234da8e3e55b4a7ac52e55e531a3c7",
+    "f17_cubic_chain_period17_pi_content_recurrence.py": "870009ad4e668f81db3c30b8bf15f693232a664e93bcb7098286e58a975ab4f9",
+    "f17_cubic_chain_period17_pi_content_recurrence_oracle.py": "c0a7617edff7faea96ed43520ab7b8de3ede7a4ad729725ead0d635121f6e634",
+    "f17_cubic_chain_period17_pi_unit_deferred_ledger_stream.py": "aa632b5a515b8d12b2f1a68a07d5b8034b8aa416ffd81ac51a116656a2ba9753",
+    "f17_cubic_chain_period17_pi_unit_deferred_ledger_stream_oracle.py": "0e3d7f7eaadc4fb6da494e0c3bf1ed25c1a3312cfc6dcb3517b04fa916fdb137",
+    "f17_cubic_chain_period17_pi_unit_embedding_balance.py": "7dab9a3eec4d66e1ef92ae27348ae191a75c549f372e5a5fb452c385de9019f2",
+    "f17_cubic_chain_period17_pi_unit_embedding_balance_oracle.py": "0abe868f118e562956ce77d1f8887459f5ae9fc288619985e5959a27ac388eb2",
+    "f17_cubic_chain_period17_pi_unit_exact_coordinate_descent.py": "5f327162a8f313cd91660a975946bc8d77055506b227799131db6edb1c6dd36e",
+    "f17_cubic_chain_period17_pi_unit_exact_coordinate_descent_oracle.py": "f1f1b9619892d6c8ced5f6fa0d5b7ecc4aa1b8c5623301652d151dd94ead5c3c",
+    "f17_cubic_chain_period17_unit_height_reduction.py": "dde70223c7b5be234501e872ebad267b2811668ad0a5e98192ce8f7100d3ea52",
+    "f17_cubic_chain_period17_unit_height_reduction_oracle.py": "f89b775aa967035ed6e5a62330cceeb26101d5a556d2f71dd04541b3f8ba5d7d",
+    "qualify_f17_cubic_chain_period17_pi_unit_deferred_ledger_stream.sh": "0abe9a8f78cd42a04abe508ee11dfa79f89056473a3d24c0e89bf7c1a8cdfa96"
+  }
+}
