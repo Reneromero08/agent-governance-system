@@ -5204,11 +5204,11 @@ package is deterministic and passes its undefined-behavior build.
 
 The resource record counts inline payloads and public descriptors, not stack
 temporaries, code, libm, allocator state, process RSS, or timing. The
-identical one-double gauge-angle recurrence is state-minimal, and these fixed
-public paths also admit closed-form product evaluation. Therefore no runtime
-advantage, distinct phase resource, CATVM custody, Small Wall crossing,
-physical execution, physical bit replacement, or unbounded computation is
-established.
+identical one-double gauge-angle recurrence is the compact matched recurrence
+used here; minimality is not claimed, and these fixed public paths also admit
+closed-form product evaluation. Therefore no runtime advantage, distinct
+phase resource, CATVM custody, Small Wall crossing, physical execution,
+physical bit replacement, or unbounded computation is established.
 
 The next obstruction is:
 
@@ -6230,7 +6230,7 @@ classical normalized recurrence.
 The live obstruction is:
 
 ```text
-THE_EXACT_BOUNDARY_PI_VALUATION_FORCES_AN_UNBOUNDED_LOSSLESS_BOUNDARY_ALPHABET_BUT_ONLY_A_WORST_CASE_LOGARITHMIC_HORIZON_CODE_WIDTH_WITHOUT_A_FREE_PERIOD_INDEX_THE_PI_EXPONENT_HAS_A_COMPACT_LOGARITHMIC_LEDGER_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+THE_EXACT_BOUNDARY_PI_VALUATION_REJECTS_A_FIXED_FINITE_BOUNDED_WIDTH_EXACT_STATE_SET_BUT_ESTABLISHES_ONLY_A_WORST_CASE_LOGARITHMIC_HORIZON_CODE_WIDTH_WITHOUT_A_FREE_PERIOD_INDEX_THE_PI_EXPONENT_HAS_A_COMPACT_LOGARITHMIC_LEDGER_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
 ```
 
 ## Pi-content factoring increases resident payload in both tested bases
@@ -6242,7 +6242,7 @@ arithmetic and rematerializes only the final exact boundary.
 
 ```text
 claim
-    BOUNDED_EXACT_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WORSENS_CARRIER_PAYLOAD_IN_ZETA_AND_PI_INTEGRAL_BASES_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_PAYLOAD_AND_LEDGER_RESTORATION_AND_REUSE
+    BOUNDED_EXACT_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WORSENS_MATCHED_ZETA_BASIS_CARRIER_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_PAYLOAD_AND_LEDGER_RESTORATION_AND_REUSE_WHILE_PI_BASIS_VALUES_REMAIN_AUXILIARY_UNMATCHED_DIAGNOSTICS
 
 classification
     INDEPENDENTLY_VERIFIED_STRICT_SCOPE
@@ -6259,7 +6259,7 @@ ten tested cases use more resident signed-integer payload than the identical
 raw recurrence:
 
 ```text
-period  family   raw recurrence   zeta residual+ledger   pi residual+ledger
+period  family   raw zeta basis   zeta residual+ledger   auxiliary pi basis
 1       PRIMARY       1,306,953               6,152,594            6,193,436
 1       REUSE         1,332,125               6,213,406            6,253,922
 4       PRIMARY       1,335,548               6,287,563            6,328,417
@@ -6289,12 +6289,13 @@ advance to two, so full object equality and bounded metadata are not
 claimed.
 
 This is a finite negative diagnostic for one exact normalization. It is not
-an all-integral-basis or asymptotic lower bound. The pi-coordinate normalized
-payload is compared with the available raw zeta-coordinate recurrence,
-which rejects this candidate as a smaller machine without proving
-basis-optimality. Python object overhead, allocator peak, internal
-multiplication temporaries, and whole-process storage are not bounded. The
-identical compact classical normalizer remains.
+an all-integral-basis or asymptotic lower bound. The accepted worsening
+comparison uses raw and normalized recurrences in the same zeta basis. The
+pi-coordinate values are auxiliary only because no raw recurrence was
+measured in that basis; the historical cross-basis worsening interpretation
+is rejected. Python object overhead, allocator peak, internal multiplication
+temporaries, and whole-process storage are not bounded. The identical compact
+classical normalizer remains.
 
 The next selected phase-machine experiment is:
 
@@ -6305,7 +6306,7 @@ EXACT_MULTI_EMBEDDING_CYCLOTOMIC_UNIT_BALANCING_AFTER_PI_CONTENT_FACTORIZATION
 The live obstruction is:
 
 ```text
-COMPULSORY_PI_SCALE_HAS_A_COMPACT_LEDGER_BUT_DIVIDING_IT_EXPANDS_RESIDUAL_HEIGHT_IN_BOTH_TESTED_INTEGRAL_BASES_AND_THE_IDENTICAL_CLASSICAL_NORMALIZATION_REMAINS
+COMPULSORY_PI_SCALE_HAS_A_COMPACT_LEDGER_BUT_DIVIDING_IT_EXPANDS_MATCHED_ZETA_BASIS_RESIDUAL_HEIGHT_THE_PI_BASIS_VALUES_ARE_AUXILIARY_UNMATCHED_DIAGNOSTICS_AND_THE_IDENTICAL_CLASSICAL_NORMALIZATION_REMAINS
 ```
 
 ## Exact multi-embedding unit balance repairs pi payload but remains above raw
@@ -6367,4 +6368,72 @@ The live obstruction is:
 
 ```text
 EXACT_TRACE_ENERGY_UNIT_BALANCING_REDUCES_PI_FACTORED_RESIDENT_PAYLOAD_BUT_RESIDENT_AND_DECLARED_LIVE_STATE_REMAIN_ABOVE_THE_RAW_RECURRENCE_AT_PERIOD64_MANY_CALLS_HIT_THE_DECLARED_CAP_AND_THE_IDENTICAL_CLASSICAL_BALANCER_REMAINS
+```
+
+## Fixed-precision unit-lattice center: carrier reduction, total-cost obstruction
+
+The bounded successor proposes one global seven-entry unit move for every
+nonzero normalization call. It evaluates norm embeddings with a fixed
+65,536-bit cosine table and solves for the center in float64. This proposal
+is approximate and is not a certified closest-vector solution. Exact integer
+trace energy decides whether the proposed carrier update is accepted.
+
+```text
+claim
+    BOUNDED_65536_BIT_LOG_EMBEDDING_UNIT_LATTICE_CENTER_PROPOSAL_WITH_EXACT_TRACE_ACCEPTANCE_REDUCES_PI_FACTORED_RESIDENT_AND_DUPLICATE_REMATERIALIZATION_LIVE_PAYLOAD_BELOW_THE_IDENTICAL_RAW_RECURRENCE_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1_AND64_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_CONSERVATIVE_DECLARED_NAMED_COMPONENT_MAXIMA_SUM_REMAINS_ABOVE_RAW_AND_THE_IDENTICAL_CLASSICAL_EXECUTION_REMAINS
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+```text
+period family    raw       pi-only     resident   duplicate-live   named-maxima sum
+1      PRIMARY   1,306,953  6,152,594   430,790          861,580        1,701,036
+1      REUSE     1,332,125  6,213,406   430,336          860,672        1,701,260
+64     PRIMARY   2,368,807 11,160,253   773,662        1,547,324        5,891,350
+64     REUSE     2,447,532 11,433,973   782,790        1,565,580        5,942,297
+```
+
+Resident and duplicate-rematerialization live payload beat raw in all four
+cases. The conservative sum of separately observed named component maxima
+does not. It adds the live state, nominal high-precision table mantissas,
+float64 matrix and scratch, fixed-precision scalar work, a 256-bit rolling
+proposal commitment, and exact temporary maxima. This is not a simultaneous
+process peak; Python, allocator, native-library, and whole-process storage
+remain unbounded.
+
+The separate oracle uses the sealed public-descriptor recurrence kernels,
+sequential coefficient advancement, and a normal-equation center solve
+instead of the production least-squares call. It reproduces proposal
+commitments, exact boundaries, all declared integer precision/resource
+tuples, inverse tuples, restoration, mutation response, and fresh-versus-
+restored reuse.
+
+The valid inverse rematerializes from public topology and restores exact
+payload and both ledgers to zero on the original backing. Unrelated REUSE at
+period 1 agrees with a fresh carrier. Direct-process generation and lease are
+observed bookkeeping only.
+
+The same proposal and exact acceptance test are available to compact
+classical software. Certified embeddings or closest-vector optimality, fixed
+integer width, total resource advantage, a distinct phase resource, Small
+Wall crossing, CATVM custody, physical execution, physical bit replacement,
+and unbounded computation are not established.
+
+The next selected experiment is:
+
+```text
+COMPACT_CERTIFIED_UNIT_REDUCTION_WITHOUT_A_65536_BIT_EMBEDDING_TABLE_OR_EQUIVALENT_HIDDEN_PRECISION_COST
+```
+
+The live obstruction is:
+
+```text
+THE_GLOBAL_PROPOSAL_REDUCES_TESTED_CARRIER_PAYLOAD_BUT_REQUIRES_A_LARGE_FIXED_PRECISION_EMBEDDING_TABLE_AND_FLOATING_SOLVE_THE_CONSERVATIVE_NAMED_COMPONENT_MAXIMA_SUM_REMAINS_ABOVE_RAW_THE_IDENTICAL_COMPACT_CLASSICAL_METHOD_REMAINS_AND_NO_TOTAL_RESOURCE_ADVANTAGE_IS_ESTABLISHED
 ```

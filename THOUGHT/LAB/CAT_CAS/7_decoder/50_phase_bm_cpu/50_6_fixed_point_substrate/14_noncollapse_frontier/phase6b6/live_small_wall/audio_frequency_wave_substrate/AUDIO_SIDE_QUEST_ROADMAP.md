@@ -1,13 +1,13 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_EXACT_MULTI_EMBEDDING_UNIT_BALANCE_REDUCES_PI_FACTORED_PAYLOAD_BUT_REMAINS_ABOVE_RAW_AT_PERIOD64`
-**Roadmap version:** `11.4`
+**Status:** `STRICT_SCOPE_FIXED_PRECISION_LATTICE_CENTER_REDUCES_TESTED_CARRIER_PAYLOAD_BUT_DECLARED_NAMED_MAXIMA_SUM_REMAINS_ABOVE_RAW`
+**Roadmap version:** `11.5`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `b328df5b1c012f0b9c3120f095117c3c1127cabc`
+**Reconciled source head:** `6b6f085bfb64be01c066b2c7af24e65f6033a29d`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_MULTI_EMBEDDING_TRACE_ENERGY_CYCLOTOMIC_UNIT_BALANCING_AFTER_PI_FACTORIZATION_REDUCES_RESIDENT_PI_RESIDUAL_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1_AND64_BUT_REMAINS_ABOVE_THE_IDENTICAL_RAW_RECURRENCE_AT_PERIOD64_AND_DECLARED_LIVE_STATE_COUNTS_DUPLICATE_REMATERIALIZATION_WITH_EXACT_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_EXACT_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_Q_ZETA17_PI_CONTENT_PLUS_SEVEN_DECLARED_UNIT_LEDGER_EXACT_TRACE_ENERGY_BALANCE_128_STEP_CAP_PERIODS1_AND64_RESIDENT_AND_DECLARED_DUPLICATE_REMATERIALIZATION_LIVE_PAYLOAD_DIAGNOSTIC_EXACT_SUBTRACTIVE_RESTORATION_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_65536_BIT_LOG_EMBEDDING_UNIT_LATTICE_CENTER_PROPOSAL_WITH_EXACT_TRACE_ACCEPTANCE_REDUCES_PI_FACTORED_RESIDENT_AND_DUPLICATE_REMATERIALIZATION_LIVE_PAYLOAD_BELOW_THE_IDENTICAL_RAW_RECURRENCE_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1_AND64_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_CONSERVATIVE_DECLARED_NAMED_COMPONENT_MAXIMA_SUM_REMAINS_ABOVE_RAW_AND_THE_IDENTICAL_CLASSICAL_EXECUTION_REMAINS`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_PERIODS1_AND64_65536_BIT_LOG_EMBEDDING_CENTER_PROPOSAL_EXACT_INTEGER_TRACE_ACCEPTANCE_EXACT_BOUNDARY_PAYLOAD_WIDTH_PROPOSAL_COMMITMENT_INVERSE_AND_REUSE_PARITY_COMPONENT_LEVEL_ACCOUNTING_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
@@ -68,7 +68,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`b328df5b1c012f0b9c3120f095117c3c1127cabc`. The current 108-milestone
+`6b6f085bfb64be01c066b2c7af24e65f6033a29d`. The current 109-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -2071,9 +2071,10 @@ counts cover the 32-byte two-cell carrier, 32-byte verification baseline,
 16-byte final boundary, and public descriptors. They do not bound stack
 temporaries, code, libm, allocator state, whole-process RSS, or timing.
 
-The identical one-double gauge-angle recurrence is a state-minimal compact
-classical implementation. These fixed public path families also admit direct
-closed-form product evaluation, so no runtime leverage is claimed. This
+The identical one-double gauge-angle recurrence is the compact matched
+classical implementation used here; minimality is not claimed. These fixed
+public path families also admit direct closed-form product evaluation, so no
+runtime leverage is claimed. This
 result establishes no CATVM custody, machine-enforced no-smuggle boundary,
 distinct phase resource, computational advantage, Small Wall crossing,
 physical waveform execution, physical bit replacement, or unbounded
@@ -3110,7 +3111,7 @@ moving cost into an equivalent ledger.
 The live obstruction is:
 
 ```text
-THE_EXACT_BOUNDARY_PI_VALUATION_FORCES_AN_UNBOUNDED_LOSSLESS_BOUNDARY_ALPHABET_BUT_ONLY_A_WORST_CASE_LOGARITHMIC_HORIZON_CODE_WIDTH_WITHOUT_A_FREE_PERIOD_INDEX_THE_PI_EXPONENT_HAS_A_COMPACT_LOGARITHMIC_LEDGER_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+THE_EXACT_BOUNDARY_PI_VALUATION_REJECTS_A_FIXED_FINITE_BOUNDED_WIDTH_EXACT_STATE_SET_BUT_ESTABLISHES_ONLY_A_WORST_CASE_LOGARITHMIC_HORIZON_CODE_WIDTH_WITHOUT_A_FREE_PERIOD_INDEX_THE_PI_EXPONENT_HAS_A_COMPACT_LOGARITHMIC_LEDGER_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
 ```
 
 ## Pi-content factoring exposes residual-height amplification
@@ -3123,7 +3124,7 @@ rematerializes the exact value.
 
 ```text
 claim
-    BOUNDED_EXACT_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WORSENS_CARRIER_PAYLOAD_IN_ZETA_AND_PI_INTEGRAL_BASES_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_PAYLOAD_AND_LEDGER_RESTORATION_AND_REUSE
+    BOUNDED_EXACT_PI_CONTENT_LEDGER_NORMALIZED_NATIVE_K_RECURRENCE_WORSENS_MATCHED_ZETA_BASIS_CARRIER_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_ACROSS_PERIODS1_4_16_64_256_WITH_EXACT_PAYLOAD_AND_LEDGER_RESTORATION_AND_REUSE_WHILE_PI_BASIS_VALUES_REMAIN_AUXILIARY_UNMATCHED_DIAGNOSTICS
 
 classification
     INDEPENDENTLY_VERIFIED_STRICT_SCOPE
@@ -3140,7 +3141,7 @@ amplifies residual height enough to increase resident signed-integer payload
 in every declared case:
 
 ```text
-period  family   raw recurrence   zeta residual+ledger   pi residual+ledger
+period  family   raw zeta basis   zeta residual+ledger   auxiliary pi basis
 1       PRIMARY       1,306,953               6,152,594            6,193,436
 1       REUSE         1,332,125               6,213,406            6,253,922
 4       PRIMARY       1,335,548               6,287,563            6,328,417
@@ -3171,12 +3172,13 @@ to zero, and the unrelated REUSE program agrees with fresh execution.
 Generation and lease advance to two, so full object equality and bounded
 repeated-use metadata are not claimed.
 
-The comparison counts declared resident signed-integer carrier payload.
-Python objects, allocator peak, internal multiplication temporaries, and
-whole-process storage remain outside the bound. The normalized pi-coordinate
-payload is compared with the available raw recurrence in zeta coordinates;
-this rejects the tested candidate as a smaller machine but does not establish
-basis optimality. The identical compact classical normalization remains.
+The matched comparison counts both the raw and normalized recurrences in
+zeta coordinates. Python objects, allocator peak, internal multiplication
+temporaries, and whole-process storage remain outside the bound. The
+normalized pi-coordinate values are retained only as auxiliary diagnostics:
+no raw recurrence was measured in that same pi basis, so the historical
+cross-basis worsening interpretation is rejected. The identical compact
+classical normalization remains.
 
 The next phase-owned experiment is:
 
@@ -3193,7 +3195,7 @@ exact restoration, and unrelated reuse.
 The live obstruction is:
 
 ```text
-COMPULSORY_PI_SCALE_HAS_A_COMPACT_LEDGER_BUT_DIVIDING_IT_EXPANDS_RESIDUAL_HEIGHT_IN_BOTH_TESTED_INTEGRAL_BASES_AND_THE_IDENTICAL_CLASSICAL_NORMALIZATION_REMAINS
+COMPULSORY_PI_SCALE_HAS_A_COMPACT_LEDGER_BUT_DIVIDING_IT_EXPANDS_MATCHED_ZETA_BASIS_RESIDUAL_HEIGHT_THE_PI_BASIS_VALUES_ARE_AUXILIARY_UNMATCHED_DIAGNOSTICS_AND_THE_IDENTICAL_CLASSICAL_NORMALIZATION_REMAINS
 ```
 
 ## Exact all-embedding unit balance repairs pi residuals but not the raw comparison
@@ -3276,6 +3278,78 @@ The live obstruction is:
 
 ```text
 EXACT_TRACE_ENERGY_UNIT_BALANCING_REDUCES_PI_FACTORED_RESIDENT_PAYLOAD_BUT_RESIDENT_AND_DECLARED_LIVE_STATE_REMAIN_ABOVE_THE_RAW_RECURRENCE_AT_PERIOD64_MANY_CALLS_HIT_THE_DECLARED_CAP_AND_THE_IDENTICAL_CLASSICAL_BALANCER_REMAINS
+```
+
+## Fixed-precision lattice-center proposals reduce carrier height but not declared total cost
+
+The successor replaces up to 128 single-generator greedy moves with one
+global seven-dimensional log-embedding center proposal per nonzero
+normalization call. The proposal uses a fixed 65,536-bit cosine table and a
+float64 least-squares solve. It is neither exact nor a certified
+closest-vector solution. A proposed carrier update is accepted only when the
+exact integer field trace of the resulting norm strictly decreases.
+
+```text
+claim
+    BOUNDED_65536_BIT_LOG_EMBEDDING_UNIT_LATTICE_CENTER_PROPOSAL_WITH_EXACT_TRACE_ACCEPTANCE_REDUCES_PI_FACTORED_RESIDENT_AND_DUPLICATE_REMATERIALIZATION_LIVE_PAYLOAD_BELOW_THE_IDENTICAL_RAW_RECURRENCE_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1_AND64_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_CONSERVATIVE_DECLARED_NAMED_COMPONENT_MAXIMA_SUM_REMAINS_ABOVE_RAW_AND_THE_IDENTICAL_CLASSICAL_EXECUTION_REMAINS
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+```text
+period family    raw       pi-only     resident   duplicate-live   named-maxima sum
+1      PRIMARY   1,306,953  6,152,594   430,790          861,580        1,701,036
+1      REUSE     1,332,125  6,213,406   430,336          860,672        1,701,260
+64     PRIMARY   2,368,807 11,160,253   773,662        1,547,324        5,891,350
+64     REUSE     2,447,532 11,433,973   782,790        1,565,580        5,942,297
+```
+
+All four resident and duplicate-rematerialization live payloads fall below
+the identical raw recurrence. All four conservative named-component maxima
+sums remain above raw. That sum includes the declared live state, nominal
+cosine-table mantissas, float64 matrix and solve scratch, two fixed-precision
+working scalars, the rolling proposal commitment, and separately observed
+exact temporary maxima. It is not a simultaneous measured process peak and
+excludes Python objects, allocator state, native-library internals, and
+whole-process RSS.
+
+The alternate oracle imports no production successor. It recompiles the
+public operators, advances recurrence coefficients sequentially by
+`x mod q`, computes the center through float64 normal equations rather than
+the production least-squares call, and reproduces all proposal commitments,
+exact boundaries, integer payload/width/work tuples, separately rebuilt
+inverse tuples, mutation behavior, and restored reuse.
+
+The inverse rematerializes public topology, subtracts exact payload and both
+ledgers from the original backing, and leaves all carrier cells zero. The
+unrelated family reuses that backing at period 1 and agrees with fresh
+execution. Generation and lease are observed bookkeeping rather than bounded
+or machine-enforced metadata in this direct-process package.
+
+The identical fixed-precision proposal and exact-acceptance recurrence are
+available to compact classical software. No certified embedding values,
+closest-vector optimum, fixed integer width, total process bound, distinct
+phase resource, computational advantage, Small Wall crossing, CATVM custody,
+physical execution, physical bit replacement, or unbounded computation is
+established.
+
+The next phase-owned experiment is:
+
+```text
+COMPACT_CERTIFIED_UNIT_REDUCTION_WITHOUT_A_65536_BIT_EMBEDDING_TABLE_OR_EQUIVALENT_HIDDEN_PRECISION_COST
+```
+
+The live obstruction is:
+
+```text
+THE_GLOBAL_PROPOSAL_REDUCES_TESTED_CARRIER_PAYLOAD_BUT_REQUIRES_A_LARGE_FIXED_PRECISION_EMBEDDING_TABLE_AND_FLOATING_SOLVE_THE_CONSERVATIVE_NAMED_COMPONENT_MAXIMA_SUM_REMAINS_ABOVE_RAW_THE_IDENTICAL_COMPACT_CLASSICAL_METHOD_REMAINS_AND_NO_TOTAL_RESOURCE_ADVANTAGE_IS_ESTABLISHED
 ```
 
 ## 7. No-Smuggle and Non-Collapse Laws
