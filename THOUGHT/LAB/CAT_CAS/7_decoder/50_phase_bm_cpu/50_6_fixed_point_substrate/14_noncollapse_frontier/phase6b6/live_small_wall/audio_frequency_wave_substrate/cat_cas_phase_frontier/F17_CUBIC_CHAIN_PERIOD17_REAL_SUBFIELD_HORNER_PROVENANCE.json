@@ -1,0 +1,31 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "3591b812a76303c35ec64354c105a444e8bfb8a4",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "6270e58bdccf73d77791191eae386c70fc1b27eaed35d13f0da734ed818c0f43",
+  "reference_full_oracle_sha256": "b358630f0f6dcd69c8140ab32554bfe2429e45dc64aee703ad685103acdbb995",
+  "files": {
+    "F17_CUBIC_CHAIN_PERIOD17_REAL_SUBFIELD_HORNER_INDEPENDENT_REVIEW.md": "b49956e34a47fc42a0590a5da44b28efb18e06927d4321ebe67b85e4559c99b0",
+    "F17_CUBIC_CHAIN_PERIOD17_REAL_SUBFIELD_HORNER_ORACLE_RESULTS.json": "b358630f0f6dcd69c8140ab32554bfe2429e45dc64aee703ad685103acdbb995",
+    "F17_CUBIC_CHAIN_PERIOD17_REAL_SUBFIELD_HORNER_RESULTS.json": "ae39bc242e8fc3d45088a59c6075658566f1b184216ad193a1d63862aa7cd3e5",
+    "f17_cubic_chain_period17_cyclotomic_module.py": "9bf400adc38462796e574da4f88c2778918169245517ebd7385f6c2dc1d52033",
+    "f17_cubic_chain_period17_executed_recurrence.py": "aca8e34294bbaaf345d6bce81f9bb32ce3234da8e3e55b4a7ac52e55e531a3c7",
+    "f17_cubic_chain_period17_pi_content_recurrence.py": "870009ad4e668f81db3c30b8bf15f693232a664e93bcb7098286e58a975ab4f9",
+    "f17_cubic_chain_period17_pi_content_recurrence_oracle.py": "c0a7617edff7faea96ed43520ab7b8de3ede7a4ad729725ead0d635121f6e634",
+    "f17_cubic_chain_period17_pi_unit_deferred_ledger_stream.py": "aa632b5a515b8d12b2f1a68a07d5b8034b8aa416ffd81ac51a116656a2ba9753",
+    "f17_cubic_chain_period17_pi_unit_deferred_ledger_stream_oracle.py": "0e3d7f7eaadc4fb6da494e0c3bf1ed25c1a3312cfc6dcb3517b04fa916fdb137",
+    "f17_cubic_chain_period17_pi_unit_embedding_balance.py": "7dab9a3eec4d66e1ef92ae27348ae191a75c549f372e5a5fb452c385de9019f2",
+    "f17_cubic_chain_period17_pi_unit_embedding_balance_oracle.py": "0abe868f118e562956ce77d1f8887459f5ae9fc288619985e5959a27ac388eb2",
+    "f17_cubic_chain_period17_pi_unit_exact_coordinate_descent.py": "5f327162a8f313cd91660a975946bc8d77055506b227799131db6edb1c6dd36e",
+    "f17_cubic_chain_period17_pi_unit_exact_coordinate_descent_oracle.py": "f1f1b9619892d6c8ced5f6fa0d5b7ecc4aa1b8c5623301652d151dd94ead5c3c",
+    "f17_cubic_chain_period17_pi_unit_horner_stream.py": "bc9d94b0b90ba62dfab4476ff034b8b2a0e1a2905063d2cb531cf0471d99dc45",
+    "f17_cubic_chain_period17_pi_unit_horner_stream_oracle.py": "2035f73c40c52fdd882a760f317e5fa824606ff62c7e69b1f4649e41f7cf9128",
+    "f17_cubic_chain_period17_real_subfield_horner.py": "2a03970a4f40b9dddcad743d9728774d8a3155ada114ba749822a85abea19266",
+    "f17_cubic_chain_period17_real_subfield_horner_oracle.py": "27b89803db94b4d9175ae80a5fa6d74f6d0c42ec59e2e8a0707a6c47354ad8c9",
+    "f17_cubic_chain_period17_unit_height_reduction.py": "dde70223c7b5be234501e872ebad267b2811668ad0a5e98192ce8f7100d3ea52",
+    "f17_cubic_chain_period17_unit_height_reduction_oracle.py": "f89b775aa967035ed6e5a62330cceeb26101d5a556d2f71dd04541b3f8ba5d7d",
+    "qualify_f17_cubic_chain_period17_real_subfield_horner.sh": "9c7fb695a35181e30fc6261aed04408d4ff4a3810027f6a2632e945ff37503fc"
+  }
+}
