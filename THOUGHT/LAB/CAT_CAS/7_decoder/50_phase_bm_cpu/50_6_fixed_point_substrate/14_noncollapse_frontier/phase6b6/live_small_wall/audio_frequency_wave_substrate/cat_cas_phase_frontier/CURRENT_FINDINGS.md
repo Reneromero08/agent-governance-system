@@ -6489,3 +6489,53 @@ The obstruction is:
 ```text
 EXACT_LOG_FREE_SEARCH_REMOVES_THE_FIXED_PRECISION_TABLE_AND_FLOATING_SOLVE_BUT_ACCEPTED_VECTOR_AND_UNIT_MATERIALIZATION_WORK_PLUS_LIVE_POWER_AND_SCALE_TEMPORARIES_LEAVE_THE_CORRECTED_PERIOD64_NAMED_MAXIMA_SUM_ABOVE_RAW_WHILE_THE_IDENTICAL_CLASSICAL_EXECUTION_REMAINS
 ```
+
+## Deferred exact unit-ledger action: large history-cost reduction, residual obstruction
+
+The exact search now accumulates coordinate moves in the norm and seven-entry
+unit ledger, then applies one net residual action after certification. Vector
+addition uses one relative unit alignment, and boundary projection precedes
+one scalar unit materialization.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+```
+
+```text
+period family    raw       resident-live   named-maxima sum   change from M110
+1      PRIMARY   1,306,953        990,964          1,193,107           +30,096
+1      REUSE     1,332,125        941,848          1,137,779           +27,944
+64     PRIMARY   2,368,807      1,708,194          3,908,681        -4,571,117
+64     REUSE     2,447,532      1,683,548          4,692,261        -3,820,561
+```
+
+The period-64 totals improve materially but remain above raw. The named totals
+sum separately observed maxima for resident plus inverse-rematerialized state,
+exact search power pairs, trial norms, energy pairs, the one net action,
+relative alignment, scalar projection, and the fixed public unit table. They
+are not simultaneous or whole-process peaks.
+
+The independent oracle imports no production successor and uses sequential
+coefficient advancement. It reproduces every boundary, forward and inverse
+resource tuple, local-search certificate, exact restoration result, and the
+period-1 cross-family restored-carrier reuse result. No accepted search move
+materializes the full residual vector.
+
+The identical deferred implementation remains available to compact classical
+software. No distinct phase resource, computational advantage, Small Wall
+crossing, CATVM custody, physical waveform execution, physical bit
+replacement, or unbounded computation is established.
+
+The next experiment is:
+
+```text
+TOPOLOGY_DERIVED_SINGLE_LIVE_VECTOR_HORNER_PHASE_RECURRENCE_WITH_STREAMED_INVERSE_REMATERIALIZATION_AND_MATCHED_RAW_HORNER_BASELINE
+```
+
+The obstruction is:
+
+```text
+DEFERRED_UNIT_LEDGER_SEARCH_REDUCES_PERIOD64_NAMED_MAXIMA_BY_3_82_TO_4_57_MBITS_BUT_RESIDENT_PLUS_DUPLICATE_INVERSE_REMATERIALIZATION_AND_EXACT_SEARCH_POWER_PAIRS_LEAVE_3_91_AND4_69_MBIT_TOTALS_ABOVE_2_37_AND2_45_MBIT_RAW_WHILE_THE_IDENTICAL_DEFERRED_CLASSICAL_EXECUTION_REMAINS
+```

@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_EXACT_LOG_FREE_UNIT_DESCENT_REDUCES_TESTED_LIVE_PAYLOAD_BUT_CORRECTED_PERIOD64_NAMED_MAXIMA_SUM_REMAINS_ABOVE_RAW`
-**Roadmap version:** `11.6`
+**Status:** `STRICT_SCOPE_DEFERRED_UNIT_LEDGER_ACTION_REDUCES_PERIOD64_NAMED_MAXIMA_BUT_REMAINS_ABOVE_RAW`
+**Roadmap version:** `11.7`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `0cac507bc0a91807e91917981620e28c3e4d9bc1`
+**Reconciled source head:** `258e8e21b8f5ff3cd0242f121142d5a76cff29d8`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_LOG_FREE_49_DIRECTION_CYCLOTOMIC_UNIT_LINE_DESCENT_AFTER_PI_FACTORIZATION_REDUCES_RESIDENT_AND_DUPLICATE_REMATERIALIZATION_LIVE_PAYLOAD_BELOW_RAW_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1AND64_WITH_EXACT_RESTORATION_AT_PERIODS1AND64_AND_CROSS_FAMILY_RESTORED_CARRIER_REUSE_AT_PERIOD1_BUT_PERIOD64_CONSERVATIVE_NAMED_COMPONENT_MAXIMA_SUM_REMAINS_ABOVE_RAW_AND_THE_IDENTICAL_CLASSICAL_EXECUTION_REMAINS`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_PERIODS1AND64_EXACT_LOG_FREE_49_DIRECTION_UNIT_LINE_DESCENT_EXACT_BOUNDARY_RESOURCE_INVERSE_AND_RESTORATION_PARITY_WITH_CROSS_FAMILY_RESTORED_CARRIER_REUSE_PARITY_AT_PERIOD1_COMPONENT_LEVEL_ACCOUNTING_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_49_DIRECTION_UNIT_SEARCH_DEFERS_RESIDUAL_MUTATION_TO_ONE_NET_ACTION_ALIGNS_ADDITIONS_BY_ONE_RELATIVE_UNIT_ACTION_AND_PROJECTS_BEFORE_ONE_SCALAR_UNIT_MATERIALIZATION_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1AND64_WITH_EXACT_BOUNDARY_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_PERIODS1AND64_EXACT_49_DIRECTION_SEARCH_WITH_ONE_NET_RESIDUAL_ACTION_RELATIVE_LEDGER_ADDITION_STREAMED_SCALAR_PROJECTION_EXACT_BOUNDARY_RESOURCE_INVERSE_AND_RESTORATION_PARITY_AND_PERIOD1_CROSS_FAMILY_REUSE_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `DEFERRED_EXACT_UNIT_LEDGER_SEARCH_WITH_SINGLE_NET_RESIDUAL_ACTION_AND_STREAMED_UNIT_MATERIALIZATION`
+**Active primary successor:** `TOPOLOGY_DERIVED_SINGLE_LIVE_VECTOR_HORNER_PHASE_RECURRENCE_WITH_STREAMED_INVERSE_REMATERIALIZATION_AND_MATCHED_RAW_HORNER_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -3423,6 +3423,72 @@ The live obstruction is:
 
 ```text
 EXACT_LOG_FREE_SEARCH_REMOVES_THE_FIXED_PRECISION_TABLE_AND_FLOATING_SOLVE_BUT_ACCEPTED_VECTOR_AND_UNIT_MATERIALIZATION_WORK_PLUS_LIVE_POWER_AND_SCALE_TEMPORARIES_LEAVE_THE_CORRECTED_PERIOD64_NAMED_MAXIMA_SUM_ABOVE_RAW_WHILE_THE_IDENTICAL_CLASSICAL_EXECUTION_REMAINS
+```
+
+## Deferred exact unit-ledger action reduces history work, not the compact baseline
+
+The exact 49-direction search now changes only the certified norm and the
+seven-entry unit ledger while it searches. After an unchanged full sweep, one
+net unit action updates the residual vector. Addition carries the left ledger
+and aligns only the right residual by the relative unit, and projection acts
+on the residual before one scalar unit materialization.
+
+```text
+claim
+    BOUNDED_EXACT_49_DIRECTION_UNIT_SEARCH_DEFERS_RESIDUAL_MUTATION_TO_ONE_NET_ACTION_ALIGNS_ADDITIONS_BY_ONE_RELATIVE_UNIT_ACTION_AND_PROJECTS_BEFORE_ONE_SCALAR_UNIT_MATERIALIZATION_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1AND64_WITH_EXACT_BOUNDARY_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+```text
+period family    raw       resident-live   named-maxima sum   M110 named sum
+1      PRIMARY   1,306,953        990,964          1,193,107        1,163,011
+1      REUSE     1,332,125        941,848          1,137,779        1,109,835
+64     PRIMARY   2,368,807      1,708,194          3,908,681        8,479,798
+64     REUSE     2,447,532      1,683,548          4,692,261        8,512,822
+```
+
+Period-64 named maxima fall by 4,571,117 and 3,820,561 bits relative to M110.
+They remain 1,539,874 and 2,244,729 bits above the raw compact recurrence.
+Period-1 totals increase slightly but remain below raw. The totals are
+conservative sums of separately observed maxima, not simultaneous or
+whole-process peaks.
+
+The separate reference implementation uses sequential `x mod q` coefficient
+advancement and independently reproduces all four boundaries, forward and
+inverse resource tuples, 49-direction local certificates, restoration, and
+period-1 cross-family reuse. No per-accepted-move residual-vector action
+remains in the accepted path.
+
+The identical deferred-ledger recurrence remains the strongest matched
+classical implementation. Global unit optimality, fixed total footprint,
+period-64 cross-family reuse, CATVM custody, a distinct phase resource,
+computational advantage, Small Wall crossing, physical execution, physical
+bit replacement, and unbounded computation remain unestablished.
+
+The next phase-owned experiment is:
+
+```text
+TOPOLOGY_DERIVED_SINGLE_LIVE_VECTOR_HORNER_PHASE_RECURRENCE_WITH_STREAMED_INVERSE_REMATERIALIZATION_AND_MATCHED_RAW_HORNER_BASELINE
+```
+
+It must replace the retained 17-vector basis family with a public
+topology-derived one-live-vector Horner schedule, release expired work, and
+reconstruct the inverse without retaining a second full state. It must compare
+against an equally compact raw/classical Horner schedule and preserve exact
+boundary-only projection, restoration, same backing, and unrelated reuse.
+
+The live obstruction is:
+
+```text
+DEFERRED_UNIT_LEDGER_SEARCH_REDUCES_PERIOD64_NAMED_MAXIMA_BY_3_82_TO_4_57_MBITS_BUT_RESIDENT_PLUS_DUPLICATE_INVERSE_REMATERIALIZATION_AND_EXACT_SEARCH_POWER_PAIRS_LEAVE_3_91_AND4_69_MBIT_TOTALS_ABOVE_2_37_AND2_45_MBIT_RAW_WHILE_THE_IDENTICAL_DEFERRED_CLASSICAL_EXECUTION_REMAINS
 ```
 
 ## 7. No-Smuggle and Non-Collapse Laws
