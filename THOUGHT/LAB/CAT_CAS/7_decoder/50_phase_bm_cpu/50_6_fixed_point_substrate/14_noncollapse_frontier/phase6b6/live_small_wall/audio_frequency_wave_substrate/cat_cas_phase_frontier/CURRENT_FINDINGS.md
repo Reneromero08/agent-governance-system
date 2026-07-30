@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`de89bc89c8b8035abe83434471fbfdf6649557c9`. The canonical per-milestone
+`37cf971aab05a44e39e7bacc4eb7fdcc829069c8`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -6587,4 +6587,57 @@ The obstruction is:
 
 ```text
 HORNER_HISTORY_RELEASE_REMOVES_THE_RETAINED_MULTI_VECTOR_OBSTRUCTION_BUT_EXACT_ARITHMETIC_WIDTH_AND_THE_IDENTICAL_NORMALIZED_CLASSICAL_HORNER_EXECUTION_REMAIN
+```
+
+## Exact maximal-real-subfield Horner search
+
+The unit-search norm state and 98 signed direction norm factors now execute
+in the degree-8 maximal real subfield. Production uses the integral
+`(1,s1,...,s7)` basis. A separate power-basis oracle independently
+reconstructs all factors, 9,604 products, traces, public Horner operators,
+boundaries, named resources, inverse outputs, restoration, and reuse.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+```
+
+The retained warm table is 3,407 logical payload bits. The one-time compiler
+transition is 11,861 bits, including 571 separately allocated predecessor
+singleton norm factors. Search accounting releases the full aggregate norm
+after conversion and explicitly includes the persistent real norm and energy.
+Stale trial norms and energy scalars are released before later probes.
+
+```text
+period family    phase named total   matched raw Horner   difference
+1      PRIMARY              93,479               10,005      +83,474
+1      REUSE               101,169               10,097      +91,072
+64     PRIMARY           3,466,215            2,790,766     +675,449
+64     REUSE             3,840,016            2,901,994     +938,022
+```
+
+All phase named totals remain above raw. The identical normalized
+real-subfield execution remains available to classical software. The stricter
+M113 accounting is not promoted as a direct total-payload improvement over
+M112.
+
+Exact payload and ledger restoration on the original backing holds for both
+families at periods 1 and 64. Primary-to-unrelated restored-carrier reuse is
+established at period 1 only. Full object-state equality, bounded generation
+or lease metadata, CATVM custody, a distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+catalytic inference, and unbounded computation are not established.
+
+The next experiment is:
+
+```text
+STREAMED_EXACT_REAL_SUBFIELD_AUTOCORRELATION_WITHOUT_FULL_AGGREGATE_NORM_AND_MATCHED_FULL_CYCLOTOMIC_BOUNDARY
+```
+
+The obstruction is:
+
+```text
+REAL_SUBFIELD_SEARCH_REMOVES_CONJUGATION_REDUNDANCY_FROM_NORM_FACTORS_BUT_PER_ELEMENT_AUTOCORRELATION_AND_THE_FINAL_CERTIFIED_ACTION_REMAIN_FULL_CYCLOTOMIC_ALL_PHASE_NAMED_TOTALS_REMAIN_ABOVE_RAW_AND_THE_IDENTICAL_CLASSICAL_REAL_SUBFIELD_EXECUTION_REMAINS
 ```

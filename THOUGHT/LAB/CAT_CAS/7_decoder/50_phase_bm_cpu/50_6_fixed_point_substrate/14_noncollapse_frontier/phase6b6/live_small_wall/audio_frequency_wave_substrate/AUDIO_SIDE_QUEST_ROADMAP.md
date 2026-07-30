@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_HORNER_REMATERIALIZATION_REMOVES_RETAINED_MULTI_VECTOR_HISTORY_BUT_MATCHED_RAW_AND_IDENTICAL_CLASSICAL_OBSTRUCTIONS_REMAIN`
-**Roadmap version:** `11.8`
+**Status:** `STRICT_SCOPE_DEGREE8_REAL_SUBFIELD_SEARCH_REDUCES_NORM_REDUNDANCY_BUT_MATCHED_RAW_AND_IDENTICAL_CLASSICAL_OBSTRUCTIONS_REMAIN`
+**Roadmap version:** `11.9`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `de89bc89c8b8035abe83434471fbfdf6649557c9`
+**Reconciled source head:** `37cf971aab05a44e39e7bacc4eb7fdcc829069c8`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_PUBLIC_TOPOLOGY_HORNER_PHASE_RECURRENCE_STORES_ONE_FINAL_17_ELEMENT_CYCLOTOMIC_VECTOR_REMATERIALIZES_THE_INVERSE_WITHOUT_RETAINED_HISTORY_RESTORES_TWO_F17_PERIOD17_FAMILIES_AT_PERIODS1AND64_REUSES_THE_SAME_CARRIER_CROSS_FAMILY_AT_PERIOD1_AND_RETAINS_A_MATCHED_RAW_HORNER_NAMED_VECTOR_CHECKPOINT_BASELINE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_FAMILIES_PERIODS1AND64_ONE_RESIDENT_CARRIER_VECTOR_SIX_NAMED_PHASE_VECTOR_CHECKPOINT_FIVE_NAMED_RAW_VECTOR_CHECKPOINT_EXACT_BOUNDARY_NAMED_RESOURCE_INVERSE_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE_PARITY_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_MAXIMAL_REAL_SUBFIELD_QUOTIENT_REDUCES_98_UNIT_NORM_SEARCH_FACTORS_FROM16_TO8_COORDINATES_RELEASES_FULL_DIRECTION_FACTOR_RETENTION_AND_PRESERVES_SINGLE_RESIDENT_HORNER_BOUNDARIES_EXACT_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_FAMILIES_PERIODS1AND64_DEGREE8_REAL_SUBFIELD_UNIT_NORM_SEARCH_ONE_FULL_CERTIFIED_ACTION_ONE_RESIDENT_HORNER_CARRIER_EXACT_BOUNDARY_NAMED_RESOURCE_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE_PARITY_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_MAXIMAL_REAL_SUBFIELD_UNIT_NORM_SEARCH_QUOTIENT_WITH_MATCHED_CYCLOTOMIC_AND_CLASSICAL_COST`
+**Active primary successor:** `STREAMED_EXACT_REAL_SUBFIELD_AUTOCORRELATION_WITHOUT_FULL_AGGREGATE_NORM_AND_MATCHED_FULL_CYCLOTOMIC_BOUNDARY`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`0cac507bc0a91807e91917981620e28c3e4d9bc1`. The current 110-milestone
+`37cf971aab05a44e39e7bacc4eb7fdcc829069c8`. The current 113-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -3543,6 +3543,73 @@ The obstruction is:
 HORNER_HISTORY_RELEASE_REMOVES_THE_RETAINED_MULTI_VECTOR_OBSTRUCTION_BUT_EXACT_ARITHMETIC_WIDTH_AND_THE_IDENTICAL_NORMALIZED_CLASSICAL_HORNER_EXECUTION_REMAIN
 ```
 
+## Degree-8 real-subfield norm search: conjugation redundancy removed, full-carrier obstruction remains
+
+The exact unit search now stores its Hermitian norm powers and all 98 signed
+direction factors in the maximal real subfield
+`Q(zeta_17 + zeta_17^-1)`. Production uses the integral basis
+`(1,s1,...,s7)`. A separate oracle uses a degree-8 power basis and reproduces
+all 98 factors, all 9,604 pair products, traces, public Horner boundaries,
+named resource tuples, inverse outputs, restoration, and reuse.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+```
+
+```text
+retained warm table                                      3,407 bits
+one-time compiler transition                            11,861 bits
+full cyclotomic direction norm factors                   5,342 bits
+degree-8 real direction norm factors                     2,679 bits
+```
+
+The compiler transition includes the 8,177-bit predecessor direction table,
+571 separately allocated predecessor singleton norm factors, public
+descriptors, and the new real factors. Aliased generators are not counted
+twice. The full aggregate norm is deleted immediately after conversion;
+persistent current real norm and energy, conversion pairs, power pairs, trial
+norms, energy pairs, the final full action, alignment, projection, and inverse
+rematerialization are explicit named components.
+
+```text
+period family    phase named total   matched raw Horner   difference
+1      PRIMARY              93,479               10,005      +83,474
+1      REUSE               101,169               10,097      +91,072
+64     PRIMARY           3,466,215            2,790,766     +675,449
+64     REUSE             3,840,016            2,901,994     +938,022
+```
+
+These conservative component maxima are not legal live intervals or a
+simultaneous process peak. Because their accounting is stricter than M112,
+they do not establish a clean M112-to-M113 total-payload improvement. All
+four totals remain above raw, and the identical normalized real-subfield
+algorithm remains available to classical software.
+
+Exact payload and ledger restoration is established on the original backing
+for both families at periods 1 and 64. Primary-to-unrelated reuse is
+established only at period 1. Full object-state equality and bounded
+generation or lease metadata are not established.
+
+No full real-subfield carrier, distinct phase resource, computational
+advantage, Small Wall crossing, CATVM custody, physical waveform execution,
+physical bit replacement, catalytic inference, or unbounded computation is
+established.
+
+The next experiment is:
+
+```text
+STREAMED_EXACT_REAL_SUBFIELD_AUTOCORRELATION_WITHOUT_FULL_AGGREGATE_NORM_AND_MATCHED_FULL_CYCLOTOMIC_BOUNDARY
+```
+
+The obstruction is:
+
+```text
+REAL_SUBFIELD_SEARCH_REMOVES_CONJUGATION_REDUNDANCY_FROM_NORM_FACTORS_BUT_PER_ELEMENT_AUTOCORRELATION_AND_THE_FINAL_CERTIFIED_ACTION_REMAIN_FULL_CYCLOTOMIC_ALL_PHASE_NAMED_TOTALS_REMAIN_ABOVE_RAW_AND_THE_IDENTICAL_CLASSICAL_REAL_SUBFIELD_EXECUTION_REMAINS
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -3580,7 +3647,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_PUBLIC_TOPOLOGY_HORNER_PHASE_RECURRENCE_STORES_ONE_FINAL_17_ELEMENT_CYCLOTOMIC_VECTOR_REMATERIALIZES_THE_INVERSE_WITHOUT_RETAINED_HISTORY_RESTORES_TWO_F17_PERIOD17_FAMILIES_AT_PERIODS1AND64_REUSES_THE_SAME_CARRIER_CROSS_FAMILY_AT_PERIOD1_AND_RETAINS_A_MATCHED_RAW_HORNER_NAMED_VECTOR_CHECKPOINT_BASELINE
+BOUNDED_EXACT_MAXIMAL_REAL_SUBFIELD_QUOTIENT_REDUCES_98_UNIT_NORM_SEARCH_FACTORS_FROM16_TO8_COORDINATES_RELEASES_FULL_DIRECTION_FACTOR_RETENTION_AND_PRESERVES_SINGLE_RESIDENT_HORNER_BOUNDARIES_EXACT_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE
 ```
 
 Not established:
@@ -3653,10 +3720,13 @@ goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve
-the analytic orbit obstruction and both gauge-transport results. The next
-mechanism must move beyond fixed-rank matrix or fixed-path closed-form
-holonomy without relocating growth into hidden precision, retained history,
-or an equivalent compact classical recurrence.
+the exact F17 recurrence, pi-content, unit-search, deferred-ledger, Horner,
+and real-subfield evidence together with the earlier relational and
+gauge-transport results. The next mechanism streams per-element
+autocorrelation directly into the degree-8 real subfield without constructing
+a full aggregate norm, while retaining the full cyclotomic boundary and the
+identical compact classical path. It must not relocate growth into hidden
+precision, retained history, or an uncounted compiler transition.
 
 ## 10. Roadmap Maintenance
 
