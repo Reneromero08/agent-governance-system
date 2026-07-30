@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`7c79414f2beb34c29bf0d63783a6effea26c65ed`. The canonical per-milestone
+`de89bc89c8b8035abe83434471fbfdf6649557c9`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -6538,4 +6538,53 @@ The obstruction is:
 
 ```text
 DEFERRED_UNIT_LEDGER_SEARCH_REDUCES_PERIOD64_NAMED_MAXIMA_BY_3_82_TO_4_57_MBITS_BUT_RESIDENT_PLUS_DUPLICATE_INVERSE_REMATERIALIZATION_AND_EXACT_SEARCH_POWER_PAIRS_LEAVE_3_91_AND4_69_MBIT_TOTALS_ABOVE_2_37_AND2_45_MBIT_RAW_WHILE_THE_IDENTICAL_DEFERRED_CLASSICAL_EXECUTION_REMAINS
+```
+
+## Single-resident Horner recurrence removes retained multi-vector history
+
+The topology-compiled Horner successor stores one final 17-element cyclotomic
+vector in the borrowed carrier and retains zero inverse-history bytes. Its
+inverse rematerializes the exact output from public topology and restores
+payload and ledgers on the original backing for both public families at
+periods 1 and 64. Period-1 primary-to-unrelated reuse agrees with a fresh
+carrier.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+```
+
+The independent oracle advances coefficients sequentially by `x mod q`
+instead of production binary powering and reproduces boundaries, six named
+phase-vector checkpoints, five named raw-vector checkpoints, inverse outputs,
+restoration, and reuse.
+
+```text
+period family    phase named total   matched raw Horner   difference
+1      PRIMARY              99,971               10,005      +89,966
+1      REUSE               107,579               10,097      +97,482
+64     PRIMARY           3,244,245            2,790,766     +453,479
+64     REUSE             3,970,780            2,901,994   +1,068,786
+```
+
+Named checkpoints are not legal live intervals or a simultaneous process
+peak. Python objects, allocator state, native-library storage, internal ring
+multiplication, and whole-process memory are not bounded. The identical
+normalized Horner execution remains available to compact classical software.
+
+No distinct phase resource, computational advantage, Small Wall crossing,
+CATVM custody, catalytic inference, physical waveform execution, physical bit
+replacement, or unbounded computation is established.
+
+The next experiment is:
+
+```text
+EXACT_MAXIMAL_REAL_SUBFIELD_UNIT_NORM_SEARCH_QUOTIENT_WITH_MATCHED_CYCLOTOMIC_AND_CLASSICAL_COST
+```
+
+The obstruction is:
+
+```text
+HORNER_HISTORY_RELEASE_REMOVES_THE_RETAINED_MULTI_VECTOR_OBSTRUCTION_BUT_EXACT_ARITHMETIC_WIDTH_AND_THE_IDENTICAL_NORMALIZED_CLASSICAL_HORNER_EXECUTION_REMAIN
 ```

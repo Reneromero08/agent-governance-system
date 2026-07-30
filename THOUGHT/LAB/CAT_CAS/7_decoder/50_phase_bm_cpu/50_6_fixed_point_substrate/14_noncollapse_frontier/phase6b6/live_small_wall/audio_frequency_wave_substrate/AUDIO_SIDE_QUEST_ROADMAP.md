@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_DEFERRED_UNIT_LEDGER_ACTION_REDUCES_PERIOD64_NAMED_MAXIMA_BUT_REMAINS_ABOVE_RAW`
-**Roadmap version:** `11.7`
+**Status:** `STRICT_SCOPE_HORNER_REMATERIALIZATION_REMOVES_RETAINED_MULTI_VECTOR_HISTORY_BUT_MATCHED_RAW_AND_IDENTICAL_CLASSICAL_OBSTRUCTIONS_REMAIN`
+**Roadmap version:** `11.8`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `258e8e21b8f5ff3cd0242f121142d5a76cff29d8`
+**Reconciled source head:** `de89bc89c8b8035abe83434471fbfdf6649557c9`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_49_DIRECTION_UNIT_SEARCH_DEFERS_RESIDUAL_MUTATION_TO_ONE_NET_ACTION_ALIGNS_ADDITIONS_BY_ONE_RELATIVE_UNIT_ACTION_AND_PROJECTS_BEFORE_ONE_SCALAR_UNIT_MATERIALIZATION_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1AND64_WITH_EXACT_BOUNDARY_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_PERIODS1AND64_EXACT_49_DIRECTION_SEARCH_WITH_ONE_NET_RESIDUAL_ACTION_RELATIVE_LEDGER_ADDITION_STREAMED_SCALAR_PROJECTION_EXACT_BOUNDARY_RESOURCE_INVERSE_AND_RESTORATION_PARITY_AND_PERIOD1_CROSS_FAMILY_REUSE_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_PUBLIC_TOPOLOGY_HORNER_PHASE_RECURRENCE_STORES_ONE_FINAL_17_ELEMENT_CYCLOTOMIC_VECTOR_REMATERIALIZES_THE_INVERSE_WITHOUT_RETAINED_HISTORY_RESTORES_TWO_F17_PERIOD17_FAMILIES_AT_PERIODS1AND64_REUSES_THE_SAME_CARRIER_CROSS_FAMILY_AT_PERIOD1_AND_RETAINS_A_MATCHED_RAW_HORNER_NAMED_VECTOR_CHECKPOINT_BASELINE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_FAMILIES_PERIODS1AND64_ONE_RESIDENT_CARRIER_VECTOR_SIX_NAMED_PHASE_VECTOR_CHECKPOINT_FIVE_NAMED_RAW_VECTOR_CHECKPOINT_EXACT_BOUNDARY_NAMED_RESOURCE_INVERSE_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE_PARITY_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `TOPOLOGY_DERIVED_SINGLE_LIVE_VECTOR_HORNER_PHASE_RECURRENCE_WITH_STREAMED_INVERSE_REMATERIALIZATION_AND_MATCHED_RAW_HORNER_BASELINE`
+**Active primary successor:** `EXACT_MAXIMAL_REAL_SUBFIELD_UNIT_NORM_SEARCH_QUOTIENT_WITH_MATCHED_CYCLOTOMIC_AND_CLASSICAL_COST`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -3491,6 +3491,58 @@ The live obstruction is:
 DEFERRED_UNIT_LEDGER_SEARCH_REDUCES_PERIOD64_NAMED_MAXIMA_BY_3_82_TO_4_57_MBITS_BUT_RESIDENT_PLUS_DUPLICATE_INVERSE_REMATERIALIZATION_AND_EXACT_SEARCH_POWER_PAIRS_LEAVE_3_91_AND4_69_MBIT_TOTALS_ABOVE_2_37_AND2_45_MBIT_RAW_WHILE_THE_IDENTICAL_DEFERRED_CLASSICAL_EXECUTION_REMAINS
 ```
 
+## Single-resident-vector Horner rematerialization: retained history removed, arithmetic obstruction remains
+
+The public characteristic polynomial is now compiled into a Horner schedule.
+The borrowed carrier retains one final 17-element cyclotomic vector and no
+inverse history. The inverse rematerializes the exact Horner output from
+public topology and subtracts it from the same backing.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+```
+
+```text
+period family    phase named total   matched raw Horner checkpoint   difference
+1      PRIMARY              99,971                         10,005       +89,966
+1      REUSE               107,579                         10,097       +97,482
+64     PRIMARY           3,244,245                      2,790,766      +453,479
+64     REUSE             3,970,780                      2,901,994    +1,068,786
+```
+
+The accounting is limited to one resident vector, six named phase-vector
+checkpoints, five named raw-vector checkpoints, public coefficients, declared
+search temporaries, projection, and inverse rematerialization. These named
+checkpoints are not legal live intervals or a simultaneous process peak.
+Python objects, allocator state, internal ring multiplication, native-library
+storage, and whole-process memory remain outside the bound.
+
+The separate oracle advances recurrence coefficients sequentially by
+`x mod q`, while production uses binary polynomial powering. It reproduces
+all four boundaries, named resource tuples, inverse outputs, and exact
+restoration on the original backing. Both public families restore at periods
+1 and 64. Primary-to-unrelated cross-family reuse is established at period 1.
+
+Every phase named total remains above the matched raw Horner checkpoint, and
+the identical normalized Horner execution remains available to compact
+classical software. No distinct phase resource, computational advantage,
+Small Wall crossing, CATVM custody, physical waveform execution, physical bit
+replacement, catalytic inference, or unbounded computation is established.
+
+The next experiment is:
+
+```text
+EXACT_MAXIMAL_REAL_SUBFIELD_UNIT_NORM_SEARCH_QUOTIENT_WITH_MATCHED_CYCLOTOMIC_AND_CLASSICAL_COST
+```
+
+The obstruction is:
+
+```text
+HORNER_HISTORY_RELEASE_REMOVES_THE_RETAINED_MULTI_VECTOR_OBSTRUCTION_BUT_EXACT_ARITHMETIC_WIDTH_AND_THE_IDENTICAL_NORMALIZED_CLASSICAL_HORNER_EXECUTION_REMAIN
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -3528,7 +3580,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_MULTI_EMBEDDING_TRACE_ENERGY_CYCLOTOMIC_UNIT_BALANCING_AFTER_PI_FACTORIZATION_REDUCES_RESIDENT_PI_RESIDUAL_PAYLOAD_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1_AND64_BUT_REMAINS_ABOVE_THE_IDENTICAL_RAW_RECURRENCE_AT_PERIOD64_AND_DECLARED_LIVE_STATE_COUNTS_DUPLICATE_REMATERIALIZATION_WITH_EXACT_RESTORATION_AND_REUSE
+BOUNDED_PUBLIC_TOPOLOGY_HORNER_PHASE_RECURRENCE_STORES_ONE_FINAL_17_ELEMENT_CYCLOTOMIC_VECTOR_REMATERIALIZES_THE_INVERSE_WITHOUT_RETAINED_HISTORY_RESTORES_TWO_F17_PERIOD17_FAMILIES_AT_PERIODS1AND64_REUSES_THE_SAME_CARRIER_CROSS_FAMILY_AT_PERIOD1_AND_RETAINS_A_MATCHED_RAW_HORNER_NAMED_VECTOR_CHECKPOINT_BASELINE
 ```
 
 Not established:
