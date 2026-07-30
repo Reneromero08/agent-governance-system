@@ -6437,3 +6437,55 @@ The live obstruction is:
 ```text
 THE_GLOBAL_PROPOSAL_REDUCES_TESTED_CARRIER_PAYLOAD_BUT_REQUIRES_A_LARGE_FIXED_PRECISION_EMBEDDING_TABLE_AND_FLOATING_SOLVE_THE_CONSERVATIVE_NAMED_COMPONENT_MAXIMA_SUM_REMAINS_ABOVE_RAW_THE_IDENTICAL_COMPACT_CLASSICAL_METHOD_REMAINS_AND_NO_TOTAL_RESOURCE_ADVANTAGE_IS_ESTABLISHED
 ```
+
+## Exact log-free 49-direction unit descent: corrected temporary-cost obstruction
+
+The exact successor removes the 65,536-bit cosine table and floating solve.
+It minimizes exact integer trace energy along seven generator directions and
+all 42 public pair sum/difference directions. Exponential bracketing plus
+binary search finds each exact line minimum, and every nonzero call finishes
+an unchanged full sweep without a tested cap hit.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+```
+
+```text
+period family    raw       resident   duplicate-live   corrected named-maxima sum
+1      PRIMARY   1,306,953   495,482          990,964                1,163,011
+1      REUSE     1,332,125   470,924          941,848                1,109,835
+64     PRIMARY   2,368,807   874,192        1,748,384                8,479,798
+64     REUSE     2,447,532   865,136        1,730,272                8,512,822
+```
+
+Resident and duplicate-live payload beat the raw recurrence in all four
+cases. The corrected period-64 sum remains far above raw after adding the
+previously omitted live power result/factor pair, accepted move scale, and
+ledger-derived unit scale maxima. The sum is not a simultaneous process
+peak and does not bound internal multiplication, Python objects, allocator
+state, or whole-process memory.
+
+The separate sequential-coefficient oracle reproduces every boundary,
+forward/inverse resource tuple, restoration check, and semantic mutation.
+Each declared period-1 and period-64 case restores exact payload and ledgers
+on the original backing. Cross-family restored-carrier reuse is checked only
+at period 1.
+
+The identical exact recurrence and search remain available to compact
+classical software. No distinct phase resource, computational advantage,
+Small Wall crossing, CATVM custody, physical waveform execution, physical
+bit replacement, or unbounded computation is established.
+
+The next experiment is:
+
+```text
+DEFERRED_EXACT_UNIT_LEDGER_SEARCH_WITH_SINGLE_NET_RESIDUAL_ACTION_AND_STREAMED_UNIT_MATERIALIZATION
+```
+
+The obstruction is:
+
+```text
+EXACT_LOG_FREE_SEARCH_REMOVES_THE_FIXED_PRECISION_TABLE_AND_FLOATING_SOLVE_BUT_ACCEPTED_VECTOR_AND_UNIT_MATERIALIZATION_WORK_PLUS_LIVE_POWER_AND_SCALE_TEMPORARIES_LEAVE_THE_CORRECTED_PERIOD64_NAMED_MAXIMA_SUM_ABOVE_RAW_WHILE_THE_IDENTICAL_CLASSICAL_EXECUTION_REMAINS
+```

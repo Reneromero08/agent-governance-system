@@ -1,19 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_FIXED_PRECISION_LATTICE_CENTER_REDUCES_TESTED_CARRIER_PAYLOAD_BUT_DECLARED_NAMED_MAXIMA_SUM_REMAINS_ABOVE_RAW`
-**Roadmap version:** `11.5`
+**Status:** `STRICT_SCOPE_EXACT_LOG_FREE_UNIT_DESCENT_REDUCES_TESTED_LIVE_PAYLOAD_BUT_CORRECTED_PERIOD64_NAMED_MAXIMA_SUM_REMAINS_ABOVE_RAW`
+**Roadmap version:** `11.6`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `6b6f085bfb64be01c066b2c7af24e65f6033a29d`
+**Reconciled source head:** `0cac507bc0a91807e91917981620e28c3e4d9bc1`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_65536_BIT_LOG_EMBEDDING_UNIT_LATTICE_CENTER_PROPOSAL_WITH_EXACT_TRACE_ACCEPTANCE_REDUCES_PI_FACTORED_RESIDENT_AND_DUPLICATE_REMATERIALIZATION_LIVE_PAYLOAD_BELOW_THE_IDENTICAL_RAW_RECURRENCE_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1_AND64_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_CONSERVATIVE_DECLARED_NAMED_COMPONENT_MAXIMA_SUM_REMAINS_ABOVE_RAW_AND_THE_IDENTICAL_CLASSICAL_EXECUTION_REMAINS`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_PERIODS1_AND64_65536_BIT_LOG_EMBEDDING_CENTER_PROPOSAL_EXACT_INTEGER_TRACE_ACCEPTANCE_EXACT_BOUNDARY_PAYLOAD_WIDTH_PROPOSAL_COMMITMENT_INVERSE_AND_REUSE_PARITY_COMPONENT_LEVEL_ACCOUNTING_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_LOG_FREE_49_DIRECTION_CYCLOTOMIC_UNIT_LINE_DESCENT_AFTER_PI_FACTORIZATION_REDUCES_RESIDENT_AND_DUPLICATE_REMATERIALIZATION_LIVE_PAYLOAD_BELOW_RAW_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1AND64_WITH_EXACT_RESTORATION_AT_PERIODS1AND64_AND_CROSS_FAMILY_RESTORED_CARRIER_REUSE_AT_PERIOD1_BUT_PERIOD64_CONSERVATIVE_NAMED_COMPONENT_MAXIMA_SUM_REMAINS_ABOVE_RAW_AND_THE_IDENTICAL_CLASSICAL_EXECUTION_REMAINS`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_CUBIC_PATH_FAMILIES_PERIODS1AND64_EXACT_LOG_FREE_49_DIRECTION_UNIT_LINE_DESCENT_EXACT_BOUNDARY_RESOURCE_INVERSE_AND_RESTORATION_PARITY_WITH_CROSS_FAMILY_RESTORED_CARRIER_REUSE_PARITY_AT_PERIOD1_COMPONENT_LEVEL_ACCOUNTING_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `RESUMED_BY_EXPLICIT_USER_GOAL_AFTER_CLEANROOM_GATE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
+**Active primary successor:** `DEFERRED_EXACT_UNIT_LEDGER_SEARCH_WITH_SINGLE_NET_RESIDUAL_ACTION_AND_STREAMED_UNIT_MATERIALIZATION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -68,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`6b6f085bfb64be01c066b2c7af24e65f6033a29d`. The current 109-milestone
+`0cac507bc0a91807e91917981620e28c3e4d9bc1`. The current 110-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -3350,6 +3351,78 @@ The live obstruction is:
 
 ```text
 THE_GLOBAL_PROPOSAL_REDUCES_TESTED_CARRIER_PAYLOAD_BUT_REQUIRES_A_LARGE_FIXED_PRECISION_EMBEDDING_TABLE_AND_FLOATING_SOLVE_THE_CONSERVATIVE_NAMED_COMPONENT_MAXIMA_SUM_REMAINS_ABOVE_RAW_THE_IDENTICAL_COMPACT_CLASSICAL_METHOD_REMAINS_AND_NO_TOTAL_RESOURCE_ADVANTAGE_IS_ESTABLISHED
+```
+
+## Exact log-free unit descent removes hidden proposal precision, not period-64 total cost
+
+The successor replaces the 65,536-bit embedding table and floating solve
+with exact integer trace-energy line minimization over 49 public unit
+directions. Each line search uses exponential bracketing and binary search
+of the monotone discrete difference. Every nonzero normalization call ends
+with a full unchanged direction sweep; no tested sweep or bracket cap is
+hit. This establishes only a local minimum over the declared directions.
+
+```text
+claim
+    BOUNDED_EXACT_LOG_FREE_49_DIRECTION_CYCLOTOMIC_UNIT_LINE_DESCENT_AFTER_PI_FACTORIZATION_REDUCES_RESIDENT_AND_DUPLICATE_REMATERIALIZATION_LIVE_PAYLOAD_BELOW_RAW_FOR_TWO_PUBLIC_F17_PERIOD17_FAMILIES_AT_PERIODS1AND64_WITH_EXACT_RESTORATION_AT_PERIODS1AND64_AND_CROSS_FAMILY_RESTORED_CARRIER_REUSE_AT_PERIOD1_BUT_PERIOD64_CONSERVATIVE_NAMED_COMPONENT_MAXIMA_SUM_REMAINS_ABOVE_RAW_AND_THE_IDENTICAL_CLASSICAL_EXECUTION_REMAINS
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    SEPARATE_REFERENCE_PARITY
+
+restoration
+    EXACT_ALGEBRAIC_RESTORATION
+```
+
+```text
+period family    raw       resident   duplicate-live   corrected named-maxima sum
+1      PRIMARY   1,306,953   495,482          990,964                1,163,011
+1      REUSE     1,332,125   470,924          941,848                1,109,835
+64     PRIMARY   2,368,807   874,192        1,748,384                8,479,798
+64     REUSE     2,447,532   865,136        1,730,272                8,512,822
+```
+
+All four resident and duplicate-rematerialization live payloads remain below
+the identical raw recurrence. The corrected period-64 sum is larger than
+the preliminary package-local report because it now includes the live
+result/factor pair during exact powering, accepted move scales, and
+ledger-derived unit scales as well as trial norms, energy pairs, accepted
+vectors, and materialized vectors. It is a conservative sum of separately
+observed maxima, not a simultaneous process peak or a bound on Python,
+allocator, internal ring-multiplication, or whole-process memory.
+
+The separate oracle imports no production successor. It recompiles both
+public operators, advances coefficients sequentially by `x mod q`,
+reimplements the exact direction search, and reproduces every new forward
+and inverse resource metric, boundary, restoration check, and mutation
+control. Each period-1 and period-64 case restores exact payload and ledgers
+on the original backing. Unrelated cross-family restored-carrier reuse is
+verified only at period 1.
+
+The identical exact search and recurrence remain available to compact
+classical software. Global unit optimality, fixed total footprint, CATVM
+custody, a distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical bit replacement, and unbounded
+computation remain unestablished.
+
+The next phase-owned experiment is:
+
+```text
+DEFERRED_EXACT_UNIT_LEDGER_SEARCH_WITH_SINGLE_NET_RESIDUAL_ACTION_AND_STREAMED_UNIT_MATERIALIZATION
+```
+
+It must search by updating only the exact norm and unit ledger, apply one net
+residual action after convergence, and avoid materializing absolute unit
+scales across all 17 vector entries. It must preserve exact restoration,
+period-1 unrelated reuse, the strongest identical compact classical
+recurrence, and the corrected component-level accounting.
+
+The live obstruction is:
+
+```text
+EXACT_LOG_FREE_SEARCH_REMOVES_THE_FIXED_PRECISION_TABLE_AND_FLOATING_SOLVE_BUT_ACCEPTED_VECTOR_AND_UNIT_MATERIALIZATION_WORK_PLUS_LIVE_POWER_AND_SCALE_TEMPORARIES_LEAVE_THE_CORRECTED_PERIOD64_NAMED_MAXIMA_SUM_ABOVE_RAW_WHILE_THE_IDENTICAL_CLASSICAL_EXECUTION_REMAINS
 ```
 
 ## 7. No-Smuggle and Non-Collapse Laws
