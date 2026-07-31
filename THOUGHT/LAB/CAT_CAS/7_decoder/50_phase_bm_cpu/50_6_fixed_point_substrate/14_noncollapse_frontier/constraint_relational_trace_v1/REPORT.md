@@ -11,8 +11,8 @@ ontology. It now contains exact relational semantics, native parity holonomy,
 program-derived inverse carrier actions, a complete topological SAT index, a constant
 energy-margin Hamiltonian, an exceptional-point root-amplifier candidate, a direct
 clause-local thermal boundary, a terminal-agnostic preparation flow, a public
-polynomial-selector dilation of that flow, and explicit resource audits for every
-tested shortcut.
+polynomial-selector dilation, a polynomial `S^1` phase-selector carrier with an exact
+product truth channel, and explicit resource audits for every tested shortcut.
 
 The package does not yet implement a polynomial-resource native existential trace. It
 does not prove `P = NP`.
@@ -204,6 +204,49 @@ instanton/dwell time. No asymptotic claim follows from this finite series.
 The exact unresolved theorem is a formula-uniform polynomial trajectory-length bound
 from the declared public seed.
 
+### Polynomial S1 phase-selector carrier
+
+The stronger reconstructed carrier replaces each scalar voltage with:
+
+```text
+(c_i, s_i) in S1
+c_i^2 + s_i^2 = 1.
+```
+
+Its native angular evolution preserves every circle identically. Selector variables
+choose correction direction, while semantic clause truth is carried separately by the
+exact polynomial product:
+
+```text
+C_m = 4 d_m1 d_m2 d_m3 / 8.
+```
+
+At a Boolean phase section, `C_m = 0` exactly when at least one clause literal is true.
+Consequently every satisfying Boolean phase section remains invariant regardless of
+selector drift, while every violated Boolean corner receives angular release.
+
+The reconstructed Linux checkpoint passed:
+
+```text
+circle tangent conservation
+satisfying-section phase invariance
+violated Boolean-corner release
+all 256 three-variable formulae
+all 255 satisfiable formulae with verified witnesses
+the sole UNSAT formula with no false witness
+fixed-deadline parity SAT and UNSAT controls
+sealed near-threshold SAT/UNSAT semantic-digest pair
+16-seed 12-variable, 51-clause near-threshold campaign
+```
+
+At one public deadline of three, the sealed campaign produced fourteen terminal SAT
+witnesses, two UNSAT no-witness controls, zero false positives, and zero invalid
+carriers. Intermediate witness checks are out-of-band first-passage observations and do
+not stop the native evolution.
+
+This evidence is finite. A formula-uniform polynomial phase-trajectory bound, total
+UNSAT deadline, and reversible environment restoration remain unestablished.
+
 ### Clause-local thermal zero-mode latch
 
 For inverse temperature
@@ -271,8 +314,8 @@ invariants and a constant-population normalized boundary are available.
 
 ```text
 public clause geometry
--> polynomial selector dilation or another exact native preparation
--> uniform polynomial trajectory-length or equilibration theorem
+-> polynomial S1 phase-selector preparation or another exact native preparation
+-> formula-uniform polynomial phase-trajectory or equilibration theorem
 -> deterministic zero-mode presence boundary
 -> totalized SAT/UNSAT/INVALID result
 -> native inverse restoration of the complete environment
@@ -282,7 +325,7 @@ public clause geometry
 Equivalent compact statement:
 
 ```text
-POLYNOMIAL_SELECTOR_CLAUSE_FLOW_WITH_UNIFORM_DEADLINE_AND_REVERSIBLE_ENVIRONMENT
+POLYNOMIAL_S1_PHASE_CLAUSE_FLOW_WITH_UNIFORM_DEADLINE_AND_REVERSIBLE_ENVIRONMENT
 ```
 
 ## Current Claim Ceiling
@@ -293,6 +336,6 @@ CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED
 
 ## Current Engineering Surface
 
-DevSpace is available in an isolated worktree at the published PR head. Local focused
-experiments and tests are now the primary engineering loop; GitHub remains the intended
-publication and review surface.
+The Windows-only unpublished worktree did not migrate to Linux. This checkpoint was
+reconstructed from published head `7ebf749f` in an isolated Linux DevSpace worktree,
+then requalified against the exhaustive and sealed controls before publication.

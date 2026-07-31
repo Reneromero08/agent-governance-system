@@ -8,6 +8,7 @@ import sys
 if __package__ in (None, ""):
     package_parent = Path(__file__).resolve().parent.parent
     sys.path.insert(0, str(package_parent))
+    from constraint_relational_trace_v1.adaptive_phase_logit_flow import integrate_adaptive_phase_logit_flow
     from constraint_relational_trace_v1.adaptive_polynomial_selector_flow import integrate_adaptive_polynomial_selector_flow
     from constraint_relational_trace_v1.clause_hamiltonian import audit_clause_hamiltonian
     from constraint_relational_trace_v1.constraint_holo import ClauseRelation, ConstraintHolo, Literal
@@ -16,6 +17,10 @@ if __package__ in (None, ""):
     from constraint_relational_trace_v1.exceptional_point_root_latch import audit_exceptional_point_root_latch
     from constraint_relational_trace_v1.fermionic_interaction_audit import audit_fermionic_interactions
     from constraint_relational_trace_v1.instanton_deadline_audit import audit_instanton_deadline_argument
+    from constraint_relational_trace_v1.polynomial_phase_selector_flow import (
+        audit_polynomial_phase_selector_flow,
+        integrate_polynomial_phase_selector_flow,
+    )
     from constraint_relational_trace_v1.polynomial_selector_flow import (
         audit_polynomial_selector_flow,
         integrate_polynomial_selector_flow,
@@ -30,6 +35,7 @@ if __package__ in (None, ""):
     from constraint_relational_trace_v1.thermal_zero_mode_latch import audit_thermal_zero_mode_latch
     from constraint_relational_trace_v1.zero_mode_amplifier_audit import audit_ideal_zero_mode_amplifier
 else:
+    from .adaptive_phase_logit_flow import integrate_adaptive_phase_logit_flow
     from .adaptive_polynomial_selector_flow import integrate_adaptive_polynomial_selector_flow
     from .clause_hamiltonian import audit_clause_hamiltonian
     from .constraint_holo import ClauseRelation, ConstraintHolo, Literal
@@ -38,6 +44,10 @@ else:
     from .exceptional_point_root_latch import audit_exceptional_point_root_latch
     from .fermionic_interaction_audit import audit_fermionic_interactions
     from .instanton_deadline_audit import audit_instanton_deadline_argument
+    from .polynomial_phase_selector_flow import (
+        audit_polynomial_phase_selector_flow,
+        integrate_polynomial_phase_selector_flow,
+    )
     from .polynomial_selector_flow import (
         audit_polynomial_selector_flow,
         integrate_polynomial_selector_flow,
@@ -123,6 +133,30 @@ def build_mechanism_record(variable_count: int = 10) -> dict[str, object]:
         relative_tolerance=1.0e-7,
         absolute_tolerance=1.0e-9,
         maximum_step=5.0e-2,
+    )
+    phase_holo = exact_three_parity_cycle_holo(4, total_charge=0)
+    phase_unsat_holo = exact_three_parity_cycle_holo(4, total_charge=1)
+    phase_audit = audit_polynomial_phase_selector_flow(phase_holo)
+    phase_reference_run = integrate_polynomial_phase_selector_flow(
+        phase_holo,
+        step_size=1.0e-3,
+        max_steps=100_000,
+    )
+    phase_adaptive_run = integrate_adaptive_phase_logit_flow(
+        phase_holo,
+        fixed_deadline=3.0,
+        relative_tolerance=1.0e-6,
+        absolute_tolerance=1.0e-8,
+        maximum_step=5.0e-2,
+        solver_method="BDF",
+    )
+    phase_unsat_adaptive_run = integrate_adaptive_phase_logit_flow(
+        phase_unsat_holo,
+        fixed_deadline=2.0,
+        relative_tolerance=1.0e-6,
+        absolute_tolerance=1.0e-8,
+        maximum_step=5.0e-2,
+        solver_method="BDF",
     )
 
     gates = {
@@ -220,12 +254,39 @@ def build_mechanism_record(variable_count: int = 10) -> dict[str, object]:
         "polynomial_selector_deadline_fails_closed": (
             selector_audit.global_convergence_status == "NOT_ESTABLISHED"
         ),
+        "polynomial_phase_carrier_compiled": (
+            phase_audit.state_coordinates
+            == 2 * len(phase_holo.variables) + 11 * len(phase_holo.clauses)
+            and phase_audit.polynomial_degree_upper_bound <= 6
+            and phase_audit.circle_tangent_identity_exact
+            and phase_audit.exact_clause_truth_channel
+            and phase_audit.satisfying_boolean_sections_invariant
+            and phase_audit.wrong_boolean_corner_release_present
+        ),
+        "polynomial_phase_reference_reaches_solution": (
+            phase_reference_run.converged_to_public_solution
+            and phase_holo.accepts(dict(phase_reference_run.final_assignment))
+        ),
+        "polynomial_phase_fixed_deadline_witness": (
+            phase_adaptive_run.reached_fixed_deadline
+            and phase_adaptive_run.terminal_solution_verified
+            and phase_adaptive_run.status == "TERMINAL_WITNESS_VERIFIED"
+            and phase_adaptive_run.terminal_clause_satisfaction_margin > 0.0
+        ),
+        "polynomial_phase_unsat_no_false_witness": (
+            phase_unsat_adaptive_run.reached_fixed_deadline
+            and not phase_unsat_adaptive_run.terminal_solution_verified
+            and not phase_unsat_adaptive_run.status.startswith("INVALID_CARRIER")
+        ),
+        "polynomial_phase_deadline_fails_closed": (
+            phase_audit.global_convergence_status == "NOT_ESTABLISHED"
+        ),
     }
 
     return {
         "schema": "CONSTRAINT_RELATIONAL_TRACE_MECHANISM_CAMPAIGN_V1",
         "status": (
-            "MECHANISM_CAMPAIGN_PASS__POLYNOMIAL_SELECTOR_DILATION_THERMAL_LATCH_CANDIDATE__CET_NOT_ESTABLISHED"
+            "MECHANISM_CAMPAIGN_PASS__POLYNOMIAL_PHASE_SELECTOR_THERMAL_LATCH_CANDIDATE__CET_NOT_ESTABLISHED"
             if all(gates.values())
             else "MECHANISM_CAMPAIGN_FAILED"
         ),
@@ -250,10 +311,14 @@ def build_mechanism_record(variable_count: int = 10) -> dict[str, object]:
         "polynomial_selector_flow_audit": asdict(selector_audit),
         "polynomial_selector_reference_run": asdict(selector_reference_run),
         "polynomial_selector_adaptive_run": asdict(selector_adaptive_run),
+        "polynomial_phase_flow_audit": asdict(phase_audit),
+        "polynomial_phase_reference_run": asdict(phase_reference_run),
+        "polynomial_phase_adaptive_run": asdict(phase_adaptive_run),
+        "polynomial_phase_unsat_adaptive_run": asdict(phase_unsat_adaptive_run),
         "decision": {
             "strongest_candidate": (
-                "POLYNOMIAL_SELECTOR_DILATION_OF_TERMINAL_AGNOSTIC_CLAUSE_FLOW_"
-                "WITH_THERMAL_ZERO_MODE_LATCH"
+                "POLYNOMIAL_S1_PHASE_SELECTOR_CLAUSE_FLOW_WITH_EXACT_PRODUCT_"
+                "TRUTH_AND_THERMAL_ZERO_MODE_LATCH"
             ),
             "mathematical_sat_margin": "CONSTANT_NORMALIZED_ZERO_MODE_POPULATION",
             "native_clean_port": "DIRECT_PUBLIC_CLAUSE_HAMILTONIAN",
@@ -261,7 +326,9 @@ def build_mechanism_record(variable_count: int = 10) -> dict[str, object]:
             "worst_case_native_preparation": (
                 "UNIFORM_POLYNOMIAL_TRAJECTORY_BOUND_NOT_ESTABLISHED"
             ),
-            "deterministic_exact_boundary": "NOT_ESTABLISHED",
+            "deterministic_exact_boundary": (
+                "SAT_WITNESS_BOUNDARY_REFERENCE__UNSAT_TOTALITY_NOT_ESTABLISHED"
+            ),
             "complete_environment_restoration": "SMOOTH_REGION_ONLY__GLOBAL_NOT_ESTABLISHED",
             "polynomial_total_resources": "NOT_ESTABLISHED",
             "standard_model_transfer": "NOT_ESTABLISHED",

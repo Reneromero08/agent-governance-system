@@ -91,6 +91,11 @@ complete three-variable selector-flow census
 structured parity, pigeonhole, and coloring selector controls
 adaptive selector-mass preservation audit
 parity-32 memory and numerical-work scaling transition
+public polynomial S1 phase-selector carrier with 2n + 11m coordinates
+exact product clause-truth channel separated from selector direction
+fixed-deadline angle/log-ratio boundary chart
+complete three-variable phase-flow census
+sealed near-threshold SAT/UNSAT pair and 16-seed campaign
 ```
 
 The existential quotient remains unresolved.
@@ -155,6 +160,12 @@ complete 256-formula selector-flow census
 smooth adaptive selector chart without projection
 structured selector SAT and UNSAT controls
 parity-family selector scaling transition
+phase-circle tangent conservation
+satisfying Boolean phase-section invariance
+violated Boolean-corner angular release
+complete 256-formula phase-flow census
+fixed-deadline phase SAT/UNSAT boundary
+sealed near-threshold semantic-digest controls
 ```
 
 ## Reference Boundary
@@ -214,6 +225,25 @@ solutions through parity-24 while preserving selector mass near machine precisio
 Parity-32 exposed a sharp memory and numerical-work transition. A uniform polynomial
 trajectory-length bound remains unestablished.
 
+### Polynomial S1 phase-selector carrier
+
+```text
+public clauses -> 2n + 11m polynomial carrier coordinates
+(c_i, s_i) in S1 with c_i^2 + s_i^2 = 1
+exact product clause truth C_m = 4 d_m1 d_m2 d_m3 / 8
+selectors choose correction direction but never semantic truth
+one fixed-deadline terminal boundary
+```
+
+The carrier preserves every phase circle algebraically. Every satisfying Boolean phase
+section is invariant independently of selector state, while a violated Boolean corner
+is released by angular motion. The reference carrier passed the complete 256-formula
+three-variable census, fixed-deadline parity SAT/UNSAT controls, a sealed near-threshold
+SAT/UNSAT pair, and a 16-seed 12-variable, 51-clause campaign with fourteen terminal
+SAT witnesses, two UNSAT no-witness controls, zero false positives, and zero invalid
+carriers. These are finite controls only. A formula-uniform polynomial native
+trajectory-length bound and total UNSAT boundary remain unestablished.
+
 ### Clause-local thermal zero-mode latch
 
 ```text
@@ -262,6 +292,12 @@ POLYNOMIAL_SELECTOR_DILATION_ESTABLISHED_REFERENCE_CANDIDATE
 EXHAUSTIVE_THREE_VARIABLE_SELECTOR_CENSUS_PASS
 STRUCTURED_SELECTOR_RELATIONAL_CONTROLS_PASS
 PARITY_32_SELECTOR_SCALING_TRANSITION_EXPOSED
+POLYNOMIAL_S1_PHASE_SELECTOR_CARRIER_ESTABLISHED_REFERENCE_CANDIDATE
+EXACT_PRODUCT_CLAUSE_TRUTH_CHANNEL_ESTABLISHED
+EXHAUSTIVE_THREE_VARIABLE_PHASE_CENSUS_PASS
+FIXED_DEADLINE_PHASE_BOUNDARY_REFERENCE_PASS
+SEALED_PHASE_TRANSITION_16_SEED_REFERENCE_PASS
+FORMULA_UNIFORM_POLYNOMIAL_PHASE_TRAJECTORY_NOT_ESTABLISHED
 UNIFORM_POLYNOMIAL_TRAJECTORY_BOUND_NOT_ESTABLISHED
 CET_NATIVE_OPERATOR_NOT_ESTABLISHED
 P_EQUALS_NP_NOT_PROVEN

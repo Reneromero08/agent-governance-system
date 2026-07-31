@@ -1,0 +1,357 @@
+{
+  "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+  "conditional_witness_boundary": {
+    "boundary_status": "VALID_SAT",
+    "conditional_theorem": "UNIFORM_POLYNOMIAL_CET_DECISION_IMPLIES_3SAT_IN_P",
+    "decision_calls": 3,
+    "extraction_scope": "classical_post_boundary_self_reduction",
+    "satisfiable": true,
+    "valid": true,
+    "witness": {
+      "x1": true,
+      "x2": false
+    },
+    "witness_verified": true
+  },
+  "duplicate_boundary": {
+    "boundary_status": "REFERENCE_TOTALIZED_BOUNDARY_COMPLETE",
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "ledger": {
+      "accepted_basis_states": 1,
+      "explicit_provenance_states": 4,
+      "native_carrier_coordinates": null,
+      "native_readout_cost": null,
+      "native_restoration_cost": null,
+      "public_clauses": 3,
+      "public_literal_occurrences": 9,
+      "public_variables": 2,
+      "reference_basis_states": 4,
+      "symbolic_relation_size": 11,
+      "unresolved_resources": [
+        "native_relation_valued_transport",
+        "exact_idempotent_existential_boundary",
+        "provenance_compactness",
+        "native_inverse_restoration",
+        "polynomial_standard_model_transfer"
+      ]
+    },
+    "satisfiable": true,
+    "valid": true,
+    "witness": {
+      "x1": true,
+      "x2": false
+    },
+    "witness_count": 1
+  },
+  "factorized_projector": {
+    "basis_action": "retain satisfying basis state; annihilate violating basis state",
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "input_object": "open_solution_relation",
+    "native_operator_status": "CATALYTIC_EXISTENTIAL_TRACE_NOT_ESTABLISHED",
+    "operator_family": "factorized_commuting_clause_projectors",
+    "symbolic_size": 8,
+    "unresolved_boundary": "EXACT_NONZERO_NORMALIZATION_WITHOUT_PROVENANCE_EXPANSION"
+  },
+  "gates": {
+    "conditional_witness_boundary": true,
+    "duplicate_clause_idempotence": true,
+    "exact_open_relation": true,
+    "full_oracle_determinant_compensation": true,
+    "historical_mpo_projection_rejected": true,
+    "native_cet_not_smuggled": true,
+    "native_z2_cycle_obstruction": true,
+    "pairwise_false_closure_exposed": true,
+    "presentation_gauge": true,
+    "program_derived_restoration": true,
+    "residual_relation_width_exposes_order_dependence": true,
+    "reversible_evaluation_dilation": true,
+    "topological_latch_restoration": true,
+    "topological_rank_latch_complete_reference": true,
+    "unsat_reference": true
+  },
+  "grouped_residual_width": {
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "cut_widths": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      17,
+      9,
+      5,
+      3,
+      2
+    ],
+    "exact_reference": true,
+    "maximum_cut": 5,
+    "maximum_width": 32,
+    "status": "EXACT_RESIDUAL_OPEN_RELATION_WIDTH_MEASURED",
+    "variable_order": [
+      "x1",
+      "x2",
+      "x3",
+      "x4",
+      "x5",
+      "y1",
+      "y2",
+      "y3",
+      "y4",
+      "y5"
+    ]
+  },
+  "historical_mpo_projection_audit": {
+    "alphabet_symbols": 2,
+    "bounded_tape_cells": 8,
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "compression_ratio": 1024.0,
+    "control_states": 4,
+    "exact_configuration_injective": false,
+    "full_bounded_configuration_count": 8192,
+    "invariant_scope": "finite_control_symbol_transition_graph_only",
+    "omitted_head_positions": 8,
+    "omitted_tape_configurations": 256,
+    "reported_bond_dimension": 8,
+    "status": "MPO_CONTROL_SYMBOL_PROJECTION_NOT_AN_EXACT_CONFIGURATION_CARRIER"
+  },
+  "interleaved_residual_width": {
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "cut_widths": [
+      1,
+      2,
+      2,
+      3,
+      2,
+      3,
+      2,
+      3,
+      2,
+      3,
+      2
+    ],
+    "exact_reference": true,
+    "maximum_cut": 3,
+    "maximum_width": 3,
+    "status": "EXACT_RESIDUAL_OPEN_RELATION_WIDTH_MEASURED",
+    "variable_order": [
+      "x1",
+      "y1",
+      "x2",
+      "y2",
+      "x3",
+      "y3",
+      "x4",
+      "y4",
+      "x5",
+      "y5"
+    ]
+  },
+  "oracle_determinant_compensation_sat": {
+    "ancillary_qubits": 2,
+    "assignment_qubits": 2,
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "clean_subspace_dimension": 4,
+    "clean_winding": 1,
+    "compensation_identity_verified": true,
+    "complementary_winding": 7,
+    "full_winding": 8,
+    "full_winding_formula_independent": true,
+    "restricted_sensor_required": true,
+    "satisfying_rank": 1,
+    "status": "FULL_REVERSIBLE_ORACLE_DETERMINANT_FORMULA_INDEPENDENT__CLEAN_SUBSPACE_DETERMINANT_RETAINS_SAT_INDEX",
+    "total_dimension": 16
+  },
+  "oracle_determinant_compensation_unsat": {
+    "ancillary_qubits": 2,
+    "assignment_qubits": 2,
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "clean_subspace_dimension": 4,
+    "clean_winding": 0,
+    "compensation_identity_verified": true,
+    "complementary_winding": 8,
+    "full_winding": 8,
+    "full_winding_formula_independent": true,
+    "restricted_sensor_required": true,
+    "satisfying_rank": 0,
+    "status": "FULL_REVERSIBLE_ORACLE_DETERMINANT_FORMULA_INDEPENDENT__CLEAN_SUBSPACE_DETERMINANT_RETAINS_SAT_INDEX",
+    "total_dimension": 16
+  },
+  "parity_holonomy": {
+    "claim_ceiling": "PARITY_HOLONOMY_CALIBRATION_ONLY",
+    "consistent": false,
+    "cycle_count": 1,
+    "cycle_holonomies": [
+      -1
+    ],
+    "cycle_residues": [
+      1
+    ],
+    "initial_carrier_digest": "370d698b8c246601617333f93f774b6d55f769a157f7bc1de9766f3e51793f78",
+    "obstruction_scope": "native_cycle_product_on_borrowed_vertex_phase_lanes",
+    "pairwise_locally_compatible": true,
+    "restoration_scope": "program_derived_inverse_of_executed_z2_tree_transport",
+    "restored": true,
+    "restored_carrier_digest": "370d698b8c246601617333f93f774b6d55f769a157f7bc1de9766f3e51793f78",
+    "terminal_carrier_digest": "26fb567d3cd1e48ef93af3eb63de753e72b588e8cd8dc3d05b6f9ad5caa71a71",
+    "tree_transport_count": 2
+  },
+  "proof_state": {
+    "catalytic_existential_trace": "NOT_ESTABLISHED",
+    "clean_subspace_determinant": "ESTABLISHED_RETAINS_SAT_INDEX",
+    "conditional_cet_implies_3sat_in_p": "ESTABLISHED_THEOREM",
+    "conditional_witness_self_reduction": "ESTABLISHED_REFERENCE",
+    "false_closure_control": "ESTABLISHED_CALIBRATION",
+    "full_reversible_oracle_determinant": "ESTABLISHED_FORMULA_INDEPENDENT_NULL",
+    "historical_mpo_control_symbol_projection": "REJECTED_AS_CONFIGURATION_CARRIER",
+    "native_relation_valued_transport": "NOT_ESTABLISHED_FOR_GENERAL_CLAUSES",
+    "p_equals_np": "NOT_PROVEN",
+    "parity_holonomy": "ESTABLISHED_NATIVE_Z2_CALIBRATION",
+    "polynomial_native_determinant_line_sensor": "NOT_ESTABLISHED",
+    "polynomial_resource_theorem": "NOT_ESTABLISHED",
+    "polynomial_restricted_determinant_sensor": "NOT_ESTABLISHED",
+    "residual_relation_width": "ESTABLISHED_PRESENTATION_SENSITIVE_CONTROL",
+    "semantic_object": "ESTABLISHED_REFERENCE",
+    "standard_model_transfer": "NOT_ESTABLISHED",
+    "topological_determinant_winding": "ESTABLISHED_COMPLETE_REFERENCE_INVARIANT",
+    "universal_polynomial_bond_dimension": "NOT_ESTABLISHED"
+  },
+  "renamed_boundary": {
+    "boundary_status": "REFERENCE_TOTALIZED_BOUNDARY_COMPLETE",
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "ledger": {
+      "accepted_basis_states": 1,
+      "explicit_provenance_states": 4,
+      "native_carrier_coordinates": null,
+      "native_readout_cost": null,
+      "native_restoration_cost": null,
+      "public_clauses": 2,
+      "public_literal_occurrences": 6,
+      "public_variables": 2,
+      "reference_basis_states": 4,
+      "symbolic_relation_size": 8,
+      "unresolved_resources": [
+        "native_relation_valued_transport",
+        "exact_idempotent_existential_boundary",
+        "provenance_compactness",
+        "native_inverse_restoration",
+        "polynomial_standard_model_transfer"
+      ]
+    },
+    "satisfiable": true,
+    "valid": true,
+    "witness": {
+      "renamed_a": false,
+      "renamed_b": true
+    },
+    "witness_count": 1
+  },
+  "reversible_dilation": {
+    "accepted_basis_states": 1,
+    "all_basis_states_restored": true,
+    "basis_states_audited": 4,
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "existential_boundary_idempotence_required": true,
+    "native_existential_trace_established": false,
+    "oracle_description_size": 8,
+    "provenance_retained": true,
+    "status": "REVERSIBLE_EVALUATION_DILATION_ESTABLISHED__EXISTENTIAL_QUOTIENT_UNRESOLVED"
+  },
+  "schema": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_CAMPAIGN_V1",
+  "status": "REFERENCE_CAMPAIGN_PASS__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+  "topological_rank_latch_unique": {
+    "basis_dimension": 4,
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "determinant_line_filled_modes": 4,
+    "determinant_projection_error": 0.0,
+    "determinant_winding": 1,
+    "materialized_carrier_coordinates": 4,
+    "minimum_unique_trace_gap": 0.5,
+    "native_readout_status": "POLYNOMIAL_NATIVE_DETERMINANT_LINE_SENSOR_NOT_ESTABLISHED__NORMALIZED_TRACE_HAS_EXPONENTIAL_UNIQUE_WITNESS_GAP",
+    "normalized_trace_at_pi": 0.5,
+    "presence_index": 1,
+    "program_inverse": "U_F(theta)^-1 = U_F(-theta)",
+    "public_clauses": 2,
+    "public_variables": 2,
+    "restoration_verified": true,
+    "satisfying_rank": 1,
+    "semantic_status": "TOPOLOGICAL_DETERMINANT_WINDING_COMPLETE_FOR_REFERENCE_RELATION",
+    "symbolic_projector_size": 8
+  },
+  "topological_rank_latch_unsat": {
+    "basis_dimension": 2,
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "determinant_line_filled_modes": 2,
+    "determinant_projection_error": 0.0,
+    "determinant_winding": 0,
+    "materialized_carrier_coordinates": 2,
+    "minimum_unique_trace_gap": 1.0,
+    "native_readout_status": "POLYNOMIAL_NATIVE_DETERMINANT_LINE_SENSOR_NOT_ESTABLISHED__NORMALIZED_TRACE_HAS_EXPONENTIAL_UNIQUE_WITNESS_GAP",
+    "normalized_trace_at_pi": 1.0,
+    "presence_index": 0,
+    "program_inverse": "U_F(theta)^-1 = U_F(-theta)",
+    "public_clauses": 2,
+    "public_variables": 1,
+    "restoration_verified": true,
+    "satisfying_rank": 0,
+    "semantic_status": "TOPOLOGICAL_DETERMINANT_WINDING_COMPLETE_FOR_REFERENCE_RELATION",
+    "symbolic_projector_size": 7
+  },
+  "unique_solution_boundary": {
+    "boundary_status": "REFERENCE_TOTALIZED_BOUNDARY_COMPLETE",
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "ledger": {
+      "accepted_basis_states": 1,
+      "explicit_provenance_states": 4,
+      "native_carrier_coordinates": null,
+      "native_readout_cost": null,
+      "native_restoration_cost": null,
+      "public_clauses": 2,
+      "public_literal_occurrences": 6,
+      "public_variables": 2,
+      "reference_basis_states": 4,
+      "symbolic_relation_size": 8,
+      "unresolved_resources": [
+        "native_relation_valued_transport",
+        "exact_idempotent_existential_boundary",
+        "provenance_compactness",
+        "native_inverse_restoration",
+        "polynomial_standard_model_transfer"
+      ]
+    },
+    "satisfiable": true,
+    "valid": true,
+    "witness": {
+      "x1": true,
+      "x2": false
+    },
+    "witness_count": 1
+  },
+  "unsat_boundary": {
+    "boundary_status": "REFERENCE_TOTALIZED_BOUNDARY_COMPLETE",
+    "claim_ceiling": "CONSTRAINT_RELATIONAL_TRACE_REFERENCE_ONLY__CET_NATIVE_OPERATOR_NOT_ESTABLISHED",
+    "ledger": {
+      "accepted_basis_states": 0,
+      "explicit_provenance_states": 2,
+      "native_carrier_coordinates": null,
+      "native_readout_cost": null,
+      "native_restoration_cost": null,
+      "public_clauses": 2,
+      "public_literal_occurrences": 6,
+      "public_variables": 1,
+      "reference_basis_states": 2,
+      "symbolic_relation_size": 7,
+      "unresolved_resources": [
+        "native_relation_valued_transport",
+        "exact_idempotent_existential_boundary",
+        "provenance_compactness",
+        "native_inverse_restoration",
+        "polynomial_standard_model_transfer"
+      ]
+    },
+    "satisfiable": false,
+    "valid": true,
+    "witness": null,
+    "witness_count": 0
+  }
+}

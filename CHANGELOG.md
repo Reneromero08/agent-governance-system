@@ -2,6 +2,21 @@
 
 # Changelog
 
+## 2026-07-30: CAT_CAS polynomial phase-selector checkpoint
+
+- Reconstruct the lost Windows-only proof-campaign checkpoint on Linux from PR
+  head `7ebf749f`. Add a public rational `S^1` phase-pair carrier with
+  `2n + 11m` coordinates, exact circle-preserving evolution, selector-only
+  direction transport, and an independent product clause-truth channel that
+  keeps every satisfying Boolean phase section invariant.
+
+- Add a fixed-deadline angle/log-ratio observation chart, fail-closed numerical
+  carrier states, complete 256-formula phase census, sealed near-threshold
+  SAT/UNSAT semantic-digest controls, and a 16-seed campaign with fourteen
+  terminal SAT witnesses, two UNSAT no-witness controls, zero false positives,
+  and zero invalid carriers. Preserve the claim ceiling: uniform polynomial
+  phase-trajectory, total UNSAT, restoration, and `P = NP` remain unproved.
+
 ## 2026-07-23: CAT_CAS constraint relational trace proof campaign
 
 - Extend the public 3-CNF proof campaign with terminal-agnostic clause dynamics,
