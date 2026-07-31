@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`37cf971aab05a44e39e7bacc4eb7fdcc829069c8`. The canonical per-milestone
+`7b0e6050c94619643175fe803c01a3d192f84134`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -6640,4 +6640,63 @@ The obstruction is:
 
 ```text
 REAL_SUBFIELD_SEARCH_REMOVES_CONJUGATION_REDUNDANCY_FROM_NORM_FACTORS_BUT_PER_ELEMENT_AUTOCORRELATION_AND_THE_FINAL_CERTIFIED_ACTION_REMAIN_FULL_CYCLOTOMIC_ALL_PHASE_NAMED_TOTALS_REMAIN_ABOVE_RAW_AND_THE_IDENTICAL_CLASSICAL_REAL_SUBFIELD_EXECUTION_REMAINS
+```
+
+## Exact streamed real autocorrelation removes the full aggregate norm
+
+M114 converts every temporary full cyclotomic Hermitian product immediately
+into the degree-8 real subfield and accumulates it there. Neither production
+nor the separate power-basis oracle constructs the predecessor's summed
+degree-16 norm.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+source head     7b0e6050c94619643175fe803c01a3d192f84134
+```
+
+The qualifier declares the two actual norm shapes rather than assuming every
+call is a 17-cell carrier vector:
+
+```text
+period family   calls  17-cell  singleton  terms
+1      PRIMARY      5        4          1     69
+1      REUSE        5        4          1     69
+64     PRIMARY     93       63         30   1101
+64     REUSE       98       66         32   1154
+```
+
+```text
+period family    streamed named total   matched raw Horner   difference
+1      PRIMARY                  96,088               10,005      +86,083
+1      REUSE                   103,778               10,097      +93,681
+64     PRIMARY               3,466,223            2,790,766     +675,457
+64     REUSE                 3,840,024            2,901,994     +938,030
+```
+
+The live metric now includes the persistent real accumulator with transient
+conversion or addition state. M114 is therefore 2,609 bits above M113 at
+period 1 and 8 bits above M113 at period 64 for each corresponding family.
+This is a stricter named-live account, not a resource improvement.
+
+All exact boundaries, inverse outputs, restoration on original backing, and
+period-1 unrelated reuse agree independently. Each per-element Hermitian
+product, the resident carrier, and the final certified action remain full
+cyclotomic. Compact classical software can execute the identical streamed
+algorithm. No distinct phase resource, advantage, Small Wall crossing, CATVM
+custody, physical execution, physical bit replacement, catalytic inference,
+or unbounded computation is established.
+
+The held successor is:
+
+```text
+EXACT_REAL_SUBFIELD_HERMITIAN_TERM_GENERATOR_WITHOUT_PER_ELEMENT_FULL_CYCLOTOMIC_PRODUCT_OR_PHASE_NATIVE_NONCLASSICAL_TRACE_COUPLING
+```
+
+The exact resume obstruction is:
+
+```text
+THE_FULL_AGGREGATE_NORM_IS_GONE_BUT_EACH_HERMITIAN_TERM_THE_RESIDENT_CARRIER_AND_THE_CERTIFIED_ACTION_STILL_USE_THE_FULL_CYCLOTOMIC_REPRESENTATION_AND_COMPACT_CLASSICAL_SOFTWARE_CAN_USE_THE_SAME_STREAM
 ```
