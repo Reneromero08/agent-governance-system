@@ -9,7 +9,7 @@
 | RAM | DDR3 1600 |
 | GPU | NVIDIA GeForce GTX 1050 |
 | NIC (onboard) | Realtek RTL8111F GbE (r8169 driver) |
-| WiFi (USB) | Netgear WNA1100 (Atheros AR9271, ath9k_htc driver) |
+| WiFi (USB) | Netgear WNA1100 (Atheros AR9271, ath9k_htc driver, firmware 1.4) |
 | Boot Drive | Sabrent 128GB SATA SSD (hot-swap) |
 
 ## OS
@@ -19,18 +19,24 @@
 | Distro | Debian 13 "Trixie" (netinst) |
 | Kernel | 6.12.86+deb13-amd64 |
 | Hostname | catcas |
-| Root Password | linktome |
+| Authentication | Dedicated Ed25519 SSH key; passwords intentionally omitted |
 
 ## Network Architecture
 
 ```
-[Phenom II catcas] ---Ethernet--- [Windows ASSFACE3000] ---WiFi--- [Internet]
-  192.168.137.100                  192.168.137.1 (Ethernet 2)
-                                   10.5.0.2 (Ethernet)
-                                   192.168.0.12 (Ethernet 2, alt)
+                         +--- Beehive WiFi --- Internet
+                         |    192.168.0.102/24 (DHCP at verification)
+[Phenom II catcas] ------+
+                         +--- Tailscale --- 100.94.228.48
+                         |
+                         +--- optional direct Ethernet maintenance link
+                              192.168.137.100/24
 ```
 
-Windows ICS shares WiFi internet to Ethernet 2 (Realtek Gaming GbE) which feeds the Phenom II directly.
+The Netgear WNA1100 is the preferred internet interface. The direct Ethernet
+link remains configured as a higher-metric fallback/maintenance path and may
+be physically disconnected. WiFi-only Tailscale SSH was mechanically verified
+with Ethernet reporting `NO-CARRIER`.
 
 ## Persistent Configuration
 
@@ -45,34 +51,62 @@ iface enp3s0 inet static
     address 192.168.137.100
     netmask 255.255.255.0
     gateway 192.168.137.1
+    metric 600
     dns-nameservers 8.8.8.8 8.8.4.4
+
+allow-hotplug wlxe091f54f8afe
+iface wlxe091f54f8afe inet dhcp
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant-beehive.conf
+    metric 100
 ```
+
+The WPA2 credential is stored on `catcas` as a derived PSK in
+`/etc/wpa_supplicant/wpa_supplicant-beehive.conf` with mode `0600`. The
+plaintext WiFi password is not recorded here.
 
 ### SSH
 
 - PermitRootLogin: yes
-- Key-based auth: ed25519 from ASSFACE3000 (reneshizzle@ASSFACE3000)
-- Key installed in /root/.ssh/authorized_keys
+- Key-based auth: dedicated Ed25519 key from the current Linux host
+- Public key installed in `/root/.ssh/authorized_keys`
+- Key fingerprint: `SHA256:NK3mLL+wEU/Aamr15ZntaDgyHA2t0iPOBR5DS70DKzg`
+- Direct-link alias: `ssh catcas`
+- Tailscale alias: `ssh catcas-ts`
 - Service: ssh (enabled)
+
+No private key or login password is stored in this report.
+
+### Tailscale
+
+- Node name: `catcas`
+- Tailnet IPv4: `100.94.228.48`
+- Tailnet IPv6: `fd7a:115c:a1e0::e338:e431`
+- Service: `tailscaled` (active and enabled)
+- WiFi-only Tailscale ping and SSH: verified
 
 ### Services Enabled
 
 - ssh
 - networking
+- wpa_supplicant
+- tailscaled
 
 ## Boot Sequence (Survives Reboot)
 
 1. Power on Phenom II
 2. BIOS POST (MSI monitor, Gigabyte board)
 3. GRUB loads kernel 6.12.86+deb13-amd64
-4. networking.service brings up enp3s0 at 192.168.137.100/24
-5. ssh.service starts, accepts key-based auth
-6. Windows ICS provides internet through gateway 192.168.137.1
+4. The WNA1100 loads `ath9k_htc` firmware and exposes `wlxe091f54f8afe`
+5. networking.service associates with Beehive and obtains a DHCP lease
+6. ssh.service starts and accepts dedicated key-based authentication
+7. tailscaled reconnects `catcas` to the tailnet
+8. WiFi is preferred at metric 100; Ethernet remains fallback at metric 600
 
-## Connection from Windows (ASSFACE3000)
+## Connection from the Linux Host
 
-```powershell
-ssh root@192.168.137.100
+```bash
+ssh catcas-ts  # Tailscale; works without the Ethernet cable
+ssh catcas     # Optional direct Ethernet maintenance link
 ```
 
 No password required (key-based auth).
@@ -87,7 +121,12 @@ No password required (key-based auth).
 - openssh-server
 - ethtool
 - pciutils (lspci)
-- firmware-atheros (for Netgear WNA1100 USB WiFi)
+- firmware-atheros
+- firmware-ath9k-htc (AR9271 firmware required by ath9k_htc)
+- wpasupplicant
+- isc-dhcp-client
+- curl
+- tailscale 1.98.10 (official stable Debian Trixie repository)
 
 ## Sensors Output
 
@@ -145,3 +184,8 @@ temp1:  +53.0C  (high = +95.0C, crit = +105.0C, emerg = +135.0C)
 - python3-pip has broken deps on trixie (python3-distutils conflict)
 - devmem2 not in repos (built from source)
 - k10temp-tools not a real package (use lm-sensors instead)
+- The WNA1100 fails to enumerate on the motherboard's legacy AMD EHCI/OHCI
+  USB paths with descriptor errors `-32`/`-71`. It works reliably on the rear
+  VIA VL805/806 xHCI USB 3.x port, where firmware 1.4 loads successfully.
+- Boot logs warn that EHCI should load before OHCI; no remote controller reset
+  or USB-controller reconfiguration was attempted.
