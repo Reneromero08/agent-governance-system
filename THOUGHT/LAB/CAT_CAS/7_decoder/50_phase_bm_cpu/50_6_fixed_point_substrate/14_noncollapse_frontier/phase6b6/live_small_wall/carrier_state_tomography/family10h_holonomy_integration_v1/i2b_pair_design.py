@@ -18,10 +18,12 @@ DESIGN_PATH = PACKAGE_ROOT / "I2B_PAIR_DESIGN.json"
 
 
 def find_repo_root() -> Path:
-    """Locate the repository root."""
+    """Locate the repository root in full or sparse Git checkouts."""
 
     for parent in Path(__file__).resolve().parents:
-        if (parent / "THOUGHT").is_dir() and (parent / ".github").is_dir():
+        has_repo_tree = (parent / "THOUGHT").is_dir()
+        has_repo_marker = (parent / ".git").exists() or (parent / ".github").is_dir()
+        if has_repo_tree and has_repo_marker:
             return parent
     raise RuntimeError("repository root not found")
 
