@@ -4,6 +4,8 @@ from pathlib import Path
 import math
 import sys
 
+import pytest
+
 CAT_CAS_ROOT = Path(__file__).resolve().parents[2]
 PACKAGE_PARENT = (
     CAT_CAS_ROOT
@@ -14,6 +16,9 @@ PACKAGE_PARENT = (
 )
 sys.path.insert(0, str(PACKAGE_PARENT))
 
+from constraint_relational_trace_v1.catalytic_existential_trace import (  # noqa: E402
+    REFERENCE_VARIABLE_LIMIT,
+)
 from constraint_relational_trace_v1.clause_hamiltonian import (  # noqa: E402
     audit_clause_hamiltonian,
     clause_violation_energy,
@@ -21,6 +26,7 @@ from constraint_relational_trace_v1.clause_hamiltonian import (  # noqa: E402
 from constraint_relational_trace_v1.constraint_holo import (  # noqa: E402
     ClauseRelation,
     ConstraintHolo,
+    ConstraintHoloError,
     Literal,
 )
 from constraint_relational_trace_v1.zero_mode_amplifier_audit import (  # noqa: E402
@@ -78,6 +84,17 @@ def test_unsat_has_integer_ground_energy_at_least_one() -> None:
     assert result.ground_degeneracy == 0
     assert result.normalized_zero_mode_weight == 0.0
     assert result.unsat_energy_margin == 1
+
+
+def test_clause_hamiltonian_audit_rejects_expanded_reference_cap() -> None:
+    with pytest.raises(
+        ConstraintHoloError,
+        match="invalid clause-Hamiltonian reference limit",
+    ):
+        audit_clause_hamiltonian(
+            unique_solution(1),
+            variable_limit=REFERENCE_VARIABLE_LIMIT + 1,
+        )
 
 
 def test_unique_zero_mode_amplification_moves_cost_to_gain_or_modes() -> None:
