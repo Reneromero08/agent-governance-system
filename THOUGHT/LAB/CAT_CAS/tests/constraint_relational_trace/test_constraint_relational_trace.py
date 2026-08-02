@@ -17,6 +17,7 @@ sys.path.insert(0, str(PACKAGE_PARENT))
 
 from constraint_relational_trace_v1.catalytic_existential_trace import (  # noqa: E402
     CLAIM_CEILING,
+    REFERENCE_VARIABLE_LIMIT,
     FactorizedProjectorCandidate,
     audit_reversible_dilation,
     reference_existential_trace,
@@ -206,6 +207,17 @@ def test_reversible_dilation_restores_but_does_not_claim_existential_trace() -> 
     assert audit.existential_boundary_idempotence_required
     assert not audit.native_existential_trace_established
     assert audit.accepted_basis_states == 1
+
+
+def test_reversible_dilation_audit_rejects_expanded_reference_cap() -> None:
+    with pytest.raises(
+        ConstraintHoloError,
+        match="invalid reversible-dilation reference limit",
+    ):
+        audit_reversible_dilation(
+            unique_solution_holo(),
+            variable_limit=REFERENCE_VARIABLE_LIMIT + 1,
+        )
 
 
 def test_factorized_projector_exposes_the_actual_missing_boundary() -> None:
