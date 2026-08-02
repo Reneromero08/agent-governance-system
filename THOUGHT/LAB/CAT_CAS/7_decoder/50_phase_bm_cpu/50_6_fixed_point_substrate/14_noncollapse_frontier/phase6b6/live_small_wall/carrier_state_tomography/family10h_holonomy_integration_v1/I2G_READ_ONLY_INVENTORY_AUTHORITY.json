@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0.0",
+  "authority_id": "family10h_i2g_read_only_target_inventory_v1",
+  "source_blob": {
+    "path": "I2F_TOPOLOGY_BACKEND_PROBE_CONTRACT.json",
+    "blob_sha": "73aa7bc2081320e02bab2f8b87134e3efd7c0b94"
+  },
+  "current_authority": {
+    "explicit_user_grant_recorded": false,
+    "target_access_method_recorded": false,
+    "target_contact_authorized": false,
+    "read_only_inventory_authorized": false,
+    "live_experiment_authorized": false
+  },
+  "proposed_read_only_scope": [
+    "identify target hostname and operating system",
+    "read CPU model, online cores, topology, cache hierarchy, and NUMA layout",
+    "read current process affinity capability without changing it",
+    "read perf_event_paranoid and PMU event availability without opening events",
+    "read page-size, huge-page, and memory-allocation capabilities without allocation",
+    "read temperature sensor identities and permissions without polling a live campaign",
+    "read frequency governor and policy state without writing sysfs",
+    "read compiler, libc, kernel, and toolchain versions",
+    "read existing target-side package paths and hashes without executing binaries",
+    "record network and process custody required for a future source isolation design"
+  ],
+  "forbidden_actions": [
+    "run any Family 10h scientific acquisition",
+    "open PMU counters for scientific measurement",
+    "change CPU affinity, governor, frequency, policy, sysfs, kernel, or sensor settings",
+    "allocate or mutate a carrier",
+    "compile or execute a physical backend",
+    "copy a source package to the target",
+    "create or consume live authorization",
+    "reuse historical authorization",
+    "modify or delete target files",
+    "infer topology values from historical branch labels"
+  ],
+  "required_before_contact": {
+    "explicit_user_grant": null,
+    "access_method": null,
+    "target_identity": null,
+    "workspace_or_remote_root": null,
+    "read_only_command_allowlist_hash": null,
+    "output_destination": null,
+    "cleanup_law": null
+  },
+  "inventory_output_fields": [
+    "target_identity",
+    "timestamp",
+    "access_method",
+    "command_allowlist_hash",
+    "cpu_topology",
+    "cache_topology",
+    "numa_topology",
+    "affinity_capability",
+    "pmu_capability",
+    "page_and_memory_capability",
+    "sensor_capability",
+    "frequency_policy",
+    "toolchain",
+    "existing_package_hashes",
+    "source_isolation_capability",
+    "write_attempt_count",
+    "scientific_measurement_count",
+    "cleanup_receipt"
+  ],
+  "acceptance": {
+    "authority_boundary_complete": true,
+    "current_authority_granted": false,
+    "target_contact_performed": false,
+    "write_attempt_count": 0,
+    "scientific_measurement_count": 0,
+    "physical_package_freeze_ready": false
+  },
+  "i2g_decision": {
+    "result": "I2G_READ_ONLY_TARGET_INVENTORY_AUTHORITY_CONTRACT_COMPLETE__AUTHORITY_NOT_GRANTED",
+    "github_only_work_complete": true,
+    "read_only_target_inventory_blocked": true,
+    "physical_package_freeze_ready": false,
+    "next_gate": "I2G_AUTHORITY_GRANT_AND_TARGET_ACCESS_REQUIRED",
+    "live_execution_authorized": false
+  },
+  "claim_ceiling": [
+    "READ_ONLY_INVENTORY_AUTHORITY_CONTRACT_ONLY",
+    "TARGET_CONTACT_NOT_AUTHORIZED",
+    "TARGET_INVENTORY_NOT_ACQUIRED",
+    "PHYSICAL_PACKAGE_NOT_FREEZE_READY",
+    "FAMILY10H_TRANSPORT_OPERATOR_NOT_ESTABLISHED",
+    "FAMILY10H_HOLONOMY_NOT_ESTABLISHED",
+    "SMALL_WALL_NOT_CROSSED",
+    "NO_LIVE_EXECUTION_AUTHORIZED"
+  ]
+}
