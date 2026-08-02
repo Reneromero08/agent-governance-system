@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0.0",
+  "interface_id": "family10h_post_source_operator_runtime_i2a_v1",
+  "mode": "compile_only_and_synthetic_lifecycle_validation",
+  "live_backend_implemented": false,
+  "target_contact_authorized": false,
+  "lifecycle": [
+    "ALLOCATED",
+    "SOURCE_PREPARED",
+    "SOURCE_DEAD_SEALED",
+    "RECEIVER_WORD_OPEN",
+    "RECEIVER_WORD_CLOSED",
+    "RESTORATION_RECORDED",
+    "DESTROYED"
+  ],
+  "custody_requirements": {
+    "source_pid_positive": true,
+    "waitpid_exited_zero": true,
+    "source_alive": false,
+    "open_source_ipc": 0,
+    "source_helper_count": 0,
+    "challenge_selected_before_source_death": false,
+    "challenge_nonce_distinct_from_preparation_nonce": true,
+    "carrier_identity_constant_across_word": true,
+    "same_carrier_destroyed_only_after_transaction": true,
+    "future_physical_requirement": "source must not inherit realized word or challenge seed; use an exec or capability-isolated source boundary rather than fork-only secrecy"
+  },
+  "operator_roles": {
+    "REMOTE_STORE_SAME_VALUE_EXTRACTION_TARGET": {
+      "role": "GENERATOR_EXTRACTION_TARGET",
+      "backend_required": true,
+      "byte_preserving_required": true,
+      "physical_generator_established": false,
+      "inverse_established": false
+    },
+    "QUERY_PROBE": {
+      "role": "READOUT_ONLY",
+      "may_enter_receiver_word": false
+    },
+    "DESTRUCTIVE_RESET": {
+      "role": "KILL_CONTROL",
+      "may_enter_receiver_word": false,
+      "may_be_inverse": false
+    },
+    "UNRESOLVED_SECOND_GENERATOR": {
+      "role": "PLACEHOLDER_ONLY",
+      "may_enter_receiver_word": false
+    },
+    "UNQUALIFIED_INVERSE": {
+      "role": "PLACEHOLDER_ONLY",
+      "may_enter_receiver_word": false
+    }
+  },
+  "operator_spec_fields": [
+    "operator_kind",
+    "operator_instance_id",
+    "line_set_id",
+    "route_id",
+    "executor_core",
+    "amplitude",
+    "operation_budget",
+    "byte_preserving_required",
+    "inverse_of_instance_id"
+  ],
+  "word_receipt_fields": [
+    "carrier_id",
+    "source_death_seal",
+    "challenge_nonce",
+    "word_hash",
+    "operation_index",
+    "operator_instance_id",
+    "backend_receipt",
+    "carrier_digest_before",
+    "carrier_digest_after",
+    "byte_digest_preserved",
+    "state_tomography_receipt"
+  ],
+  "acceptance": {
+    "persistent_carrier_interface": true,
+    "source_death_before_word_enforced": true,
+    "receiver_word_after_seal_enforced": true,
+    "readout_as_generator_rejected": true,
+    "destructive_reset_as_inverse_rejected": true,
+    "unresolved_second_generator_rejected": true,
+    "unqualified_inverse_rejected": true,
+    "synthetic_backend_explicitly_labeled": true,
+    "physical_backend_present": false,
+    "h1_generator_established": false,
+    "h1_generator_pair_established": false
+  },
+  "i2a_decision": {
+    "result": "I2A_COMPILE_ONLY_POST_SOURCE_RUNTIME_INTERFACE_ESTABLISHED__PHYSICAL_BACKEND_NOT_IMPLEMENTED",
+    "interface_freeze_allowed": true,
+    "physical_transport_candidate_freeze_allowed": false,
+    "next_gate": "I2B_SECOND_GENERATOR_AND_INVERSE_CANDIDATE_DESIGN",
+    "live_execution_authorized": false
+  },
+  "claim_ceiling": [
+    "POST_SOURCE_OPERATOR_INTERFACE_ONLY",
+    "REMOTE_STORE_SAME_VALUE_EXTRACTION_TARGET_ONLY",
+    "FAMILY10H_TRANSPORT_OPERATOR_NOT_ESTABLISHED",
+    "FAMILY10H_HOLONOMY_NOT_ESTABLISHED",
+    "SMALL_WALL_NOT_CROSSED",
+    "NO_LIVE_EXECUTION_AUTHORIZED"
+  ]
+}
