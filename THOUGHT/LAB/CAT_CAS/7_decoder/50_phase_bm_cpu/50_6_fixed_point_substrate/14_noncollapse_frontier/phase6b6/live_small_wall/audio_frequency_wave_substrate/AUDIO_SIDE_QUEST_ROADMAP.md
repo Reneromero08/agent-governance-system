@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_FOUR_SITE_INTERLEAVED_PHASE_COUPLING_HAS_CERTIFIED_EXACT_TT_RANK_GROWTH_BUT_PUBLIC_TOPOLOGY_COLLAPSES_TO_A_SMALLER_SPARSE_CHARACTER_CONTRACTION`
-**Roadmap version:** `12.4`
+**Status:** `STRICT_SCOPE_RUNTIME_WEIGHTED_F17_GRID_FACTOR_CLOSURE_HAS_ROW_INTERFACE_RANKS4_8_16_BUT_TRANSFER_AND_GRAY_DELTA_BASELINES_REMOVE_ANY_RESOURCE_CLAIM`
+**Roadmap version:** `12.5`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `30de9ca9b0e663d0ab8367db7a91d7aab727cbe4`
+**Reconciled source head:** `af8a41ae5acf179eac57576ce58a75a55d2d2d1e`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_WIDTH4_EXACT_Q_ZETA17_INTERLEAVED_PHASE_COUPLING_WITH_CERTIFIED_TT_RANK_GROWTH_BOUNDARY_ONLY_PROJECTION_EXACT_REVERSE_RESTORATION_AND_REUSE_BUT_NO_RESOURCE_BEYOND_COMPACT_FACTOR_CONTRACTION`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_WIDTH4_LOCAL_DIMENSION2_F17_PROGRAMS_INTERLEAVED_K2_2_PHASE_COUPLING_EXACT_INTRA_PROGRAM_TT_RANK_TRACE_ONE_TO_TWO_TO_FOUR_FINAL_ALL_TWO_BY_TWO_CUT_RANK_FOUR_ONE_FINAL_CYCLOTOMIC_BOUNDARY_EXACT_REVERSE_ORDER_ZERO_BACKING_RESTORATION_CROSS_PROGRAM_SAME_BACKING_REUSE_INDEPENDENT_POWER_BASIS_AND_F103_CERTIFICATES_PUBLIC_TOPOLOGY_COMPILED_8_OR_7_ROOT_SPARSE_CHARACTER_BASELINE_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_RUNTIME_WEIGHTED_F17_GRID_PHASE_FACTOR_CLOSURE_FOR_N2_N3_N4_TREEWIDTH2_3_4_WITH_CERTIFIED_ACTUAL_ROW_INTERFACE_RANKS4_8_16_FINAL_ONLY_SCALAR_PROJECTION_EXACT_REVERSE_RESTORATION_AND_HELD_OUT_SAME_BACKING_REUSE_BUT_NO_DISTINCT_RESOURCE_OBSERVED_AGAINST_THE_EVALUATED_TRANSFER_GRAY_DELTA_HISTOGRAM_AND_THREE_ORDER_MTBDD_BASELINES`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_DETERMINISTIC_PUBLIC_RUNTIME_WEIGHT_FAMILIES_ON_BINARY_N_BY_N_GRIDS_N2_N3_N4_EXACT_PUBLIC_FACTOR_STATE_MUTATION_ACTUAL_ROW_INTERFACE_RANKS4_8_16_ONE_FINAL_CYCLOTOMIC_SCALAR_PROJECTION_EXACT_REVERSE_AND_SEED_UNLOAD_ZERO_BACKING_RESTORATION_HELD_OUT_SAME_BACKING_REUSE_NO_DENSE_TWO_TO_THE_N_SQUARED_TENSOR_ON_ACCEPTED_PATH_BUT_TWO_TO_THE_N_INTERFACE_MESSAGES_AND_N_MINUS_ONE_TIMES_FOUR_TO_THE_N_TRANSITIONS_EVALUATED_BASELINES_NONEXHAUSTIVE_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M118_PUBLIC_FACTOR_COLLAPSE_DIAGNOSTIC`
+**New mechanism development:** `ACTIVE_AFTER_M119_GROWING_TREEWIDTH_NEGATIVE_RESOURCE_DIAGNOSTIC`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `RESIDENTLY_GENERATED_NONPUBLIC_COUPLING_TOPOLOGY_OR_GROWING_TREEWIDTH_PHASE_CLOSURE_WITH_OPTIMAL_CLASSICAL_TENSOR_BASELINE`
+**Active primary successor:** `PHASE_NATIVE_SEPARATOR_QUOTIENT_OR_COUPLING_RESOURCE_THAT_AVOIDS_BOTH_TWO_TO_THE_N_INTERFACE_MESSAGES_AND_TWO_TO_THE_N_SQUARED_GLOBAL_ENUMERATION_AGAINST_THE_EVALUATED_COMPACT_CLASSICAL_BASELINE_SET`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`30de9ca9b0e663d0ab8367db7a91d7aab727cbe4`. The current 118-milestone
+`af8a41ae5acf179eac57576ce58a75a55d2d2d1e`. The current 119-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -3959,6 +3959,80 @@ The obstruction is:
 PUBLIC_LOW_TREEWIDTH_PHASE_TOPOLOGY_RETAINS_THE_COMPLETE_BOUNDARY_LAW_WITHOUT_RESIDENT_TENSOR_EXPANSION_DESPITE_EXACT_TT_RANK_GROWTH
 ```
 
+### 6.119 Runtime-weighted exact F17 grid factor closure diagnostic
+
+M119 compiles public binary square-grid topology before binding either of two
+deterministic runtime-weight families. The actual carrier contains unary and
+pair factor cells, not a dense `2^(n^2)` amplitude tensor. Native preparation,
+unary-root, and edge-root actions mutate those resident factor cells. Only one
+final cyclotomic scalar is projected.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    INDEPENDENT_ORACLE_REEXECUTION
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+source head     af8a41ae5acf179eac57576ce58a75a55d2d2d1e
+```
+
+The accepted row-transfer path has the following exact bounded growth:
+
+```text
+n                         2       3        4
+factor cells             24      66      128
+row-interface messages    4       8       16
+exact interface rank      4       8       16
+global tensor avoided    16     512   65,536 cells
+transitions total        16     128      768
+```
+
+The transition count is `(n-1)4^n`. This is disclosed work, not a compact
+fixed-rank closure result. Independent direct character enumeration,
+Gray-code one-bit-delta enumeration, and exact row-character transfer agree
+with all six production boundaries. Independent `F103` determinant
+certificates establish row-interface ranks `4,8,16` over `Q(zeta_17)`.
+
+Reverse phase actions and inverse preparation shears recover the exact factor
+seed. Seed unload returns the actual original backing to zero with no retained
+inverse history or snapshot reload. The held-out runtime family consumes that
+same backing and matches a fresh carrier in boundary, separator certificate,
+and nonmetadata statistics. Projection validates both public topology
+fingerprint and runtime-family ownership.
+
+The evaluated compact classical comparison contains the identical exact row
+transfer, a Gray-delta 17-bin character histogram, and a three-order observed
+reduced MTBDD sweep. The MTBDD oracle builds the full assignment tree and
+claims no order optimality. This set is neither exhaustive nor asserted
+Pareto-optimal. Direct zero-field planar-Ising Pfaffian evaluation is
+inapplicable for the tested nonzero field residues; broader matchgate or
+holographic reductions remain unresolved.
+
+Named logical accounting includes factor cells, UTF-8 phase/family/fingerprint
+metadata, public plan and runtime program, the root table, projection,
+restoration, reuse, and conservative selected transfer values. Selected-value
+sums may double-count aliases and do not bound exact simultaneous Python
+objects, allocator/native-library/bigint internals, or whole-process storage.
+Topology compilation and runtime binding are reported as public logical
+counts. Benchmark paths are not operation-matched and establish no advantage.
+
+M119 therefore establishes a bounded growing-treewidth calibration and a
+negative resource diagnostic. It does not establish compact closure across
+growing treewidth, a lower bound against all classical algorithms, a distinct
+phase resource, computational advantage, Small Wall crossing, CATVM custody,
+inference, physical execution, bit replacement, or unbounded computation.
+
+The next experiment is:
+
+```text
+PHASE_NATIVE_SEPARATOR_QUOTIENT_OR_COUPLING_RESOURCE_THAT_AVOIDS_BOTH_TWO_TO_THE_N_INTERFACE_MESSAGES_AND_TWO_TO_THE_N_SQUARED_GLOBAL_ENUMERATION_AGAINST_THE_EVALUATED_COMPACT_CLASSICAL_BASELINE_SET
+```
+
+The obstruction is:
+
+```text
+EXACT_PHASE_FACTOR_STORAGE_REMAINS_COMPACT_BUT_FINAL_CLOSURE_HAS_NO_LEVERAGE_THE_IDENTICAL_TRANSFER_USES_TWO_TO_THE_N_SEPARATOR_MESSAGES_WHILE_THE_17_BIN_GRAY_DELTA_HISTOGRAM_TRADES_CHARACTER_ACCUMULATOR_MEMORY_FOR_TWO_TO_THE_N_SQUARED_GLOBAL_ASSIGNMENTS
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -3996,7 +4070,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_WIDTH4_EXACT_Q_ZETA17_INTERLEAVED_PHASE_COUPLING_WITH_CERTIFIED_TT_RANK_GROWTH_BOUNDARY_ONLY_PROJECTION_EXACT_REVERSE_RESTORATION_AND_REUSE_BUT_NO_RESOURCE_BEYOND_COMPACT_FACTOR_CONTRACTION
+BOUNDED_EXACT_RUNTIME_WEIGHTED_F17_GRID_PHASE_FACTOR_CLOSURE_FOR_N2_N3_N4_TREEWIDTH2_3_4_WITH_CERTIFIED_ACTUAL_ROW_INTERFACE_RANKS4_8_16_FINAL_ONLY_SCALAR_PROJECTION_EXACT_REVERSE_RESTORATION_AND_HELD_OUT_SAME_BACKING_REUSE_BUT_NO_DISTINCT_RESOURCE_OBSERVED_AGAINST_THE_EVALUATED_TRANSFER_GRAY_DELTA_HISTOGRAM_AND_THREE_ORDER_MTBDD_BASELINES
 ```
 
 Not established:
@@ -4058,6 +4132,10 @@ compact variable-rank nonseparable phase closure
 growing-family rank behavior from the M118 width-four calibration
 phase resource beyond the public-topology sparse character contraction
 operation-matched timing advantage from the M118 observational benchmark
+compact row-interface closure across the M119 growing-treewidth cases
+an exhaustive or Pareto-optimal M119 compact-classical comparison set
+advantage over the M119 identical row transfer or Gray-delta histogram
+lower bound against untested matchgate, holographic, or other boundary reductions
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4106,7 +4184,15 @@ public treewidth-two topology compiled to a smaller exact sparse character
 sum. Continue from that public-factor collapse into a residently generated
 nonpublic coupling law or a controlled growing-treewidth closure with the
 strongest optimal tensor-network baseline. Do not add more width-four public
-fixtures or treat tensor materialization as a native resource.
+fixtures or treat tensor materialization as a native resource. M119 then
+tested public runtime-weighted square grids at treewidths two, three, and four.
+The factor carrier avoided the dense global tensor, but final closure still
+used `2^n` interface messages and `(n-1)4^n` transitions, while a Gray-delta
+17-bin histogram retained a smaller-memory global-enumeration alternative.
+Continue only toward a phase-owned separator quotient or coupling law that
+avoids both costs against the evaluated compact classical set. Do not add
+larger public grid fixtures unless they resolve that mechanism-level
+obstruction, and do not treat the evaluated baseline set as exhaustive.
 
 ## 10. Roadmap Maintenance
 

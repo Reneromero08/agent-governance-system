@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`7b0e6050c94619643175fe803c01a3d192f84134`. The canonical per-milestone
+`af8a41ae5acf179eac57576ce58a75a55d2d2d1e`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -6957,4 +6957,67 @@ The obstruction is:
 
 ```text
 PUBLIC_LOW_TREEWIDTH_PHASE_TOPOLOGY_RETAINS_THE_COMPLETE_BOUNDARY_LAW_WITHOUT_RESIDENT_TENSOR_EXPANSION_DESPITE_EXACT_TT_RANK_GROWTH
+```
+
+## Exact runtime-weighted F17 grid factor closure diagnostic
+
+M119 compiles public square-grid topology before binding two deterministic
+runtime-weight families. It stores exact unary and pair factors on actual
+`Q(zeta_17)` phase cells and avoids a dense `2^(n^2)` global amplitude tensor
+on the accepted path.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    INDEPENDENT_ORACLE_REEXECUTION
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+source head     af8a41ae5acf179eac57576ce58a75a55d2d2d1e
+```
+
+```text
+n                              2       3        4
+actual factor cells           24      66      128
+row-interface messages         4       8       16
+exact Q(zeta17) rank           4       8       16
+dense global cells avoided    16     512   65,536
+total transfer transitions    16     128      768
+```
+
+Independent direct enumeration, Gray-code energy-delta enumeration, and row
+character transfer reproduce all six final boundaries. Independent
+order-seventeen `F103` determinant images certify the actual row-interface
+ranks. The accepted transaction projects only the final cyclotomic scalar.
+Reverse actions recover the exact factor seed; seed unload restores the
+original backing to zero. The held-out family reuses that same backing and
+matches fresh execution without retained history or snapshot reload.
+
+Projection now validates both topology fingerprint and family ownership.
+Controls reject premature projection, mismatched projection custody, missing
+or wrong inverse, noncommuting inverse reordering, mutation, null carrier, and
+a false rank cap. A separable zero-weight diagnostic has rank one, and removal
+of one interface edge changes the boundary and halves the certified rank.
+
+The evaluated compact classical set contains the identical exact row
+transfer, a Gray-delta 17-bin histogram, and a three-order observed MTBDD
+sweep. The MTBDD builds the full assignment tree and claims no order
+optimality. The set is not exhaustive or Pareto-optimal. Broader matchgate or
+holographic reductions remain unresolved. Warm timings compare a restoring
+phase transaction against boundary-only classical paths and are not
+operation-matched.
+
+The result is a bounded growing-treewidth calibration and negative resource
+diagnostic. It establishes no compact closure across growing treewidth,
+distinct phase resource, advantage, Small Wall crossing, CATVM custody,
+inference, physical execution, bit replacement, or unbounded computation.
+
+The next experiment is:
+
+```text
+PHASE_NATIVE_SEPARATOR_QUOTIENT_OR_COUPLING_RESOURCE_THAT_AVOIDS_BOTH_TWO_TO_THE_N_INTERFACE_MESSAGES_AND_TWO_TO_THE_N_SQUARED_GLOBAL_ENUMERATION_AGAINST_THE_EVALUATED_COMPACT_CLASSICAL_BASELINE_SET
+```
+
+The obstruction is:
+
+```text
+EXACT_PHASE_FACTOR_STORAGE_REMAINS_COMPACT_BUT_FINAL_CLOSURE_HAS_NO_LEVERAGE_THE_IDENTICAL_TRANSFER_USES_TWO_TO_THE_N_SEPARATOR_MESSAGES_WHILE_THE_17_BIN_GRAY_DELTA_HISTOGRAM_TRADES_CHARACTER_ACCUMULATOR_MEMORY_FOR_TWO_TO_THE_N_SQUARED_GLOBAL_ASSIGNMENTS
 ```
