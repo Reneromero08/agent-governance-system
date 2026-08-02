@@ -4,6 +4,7 @@
 
 ```text
 JACOBIAN_UNIT_FIBER_CARRIER_EXACT
+EXACT_THREE_SHEET_FIBER_CERTIFIED
 WEIGHTED_FIBER_TRACE_EQUALS_SAT_COUNT_EXACT
 MODULAR_PHASE_SIEVE_EXACT
 NATIVE_CATALYTIC_FIBER_PUSHFORWARD_NOT_ESTABLISHED
@@ -48,12 +49,19 @@ phase-lock receipts before modifying this package or authorizing execution.
 
 ## Package index
 
-- `BRIDGE_PACKET.md`: exact derivation, proof audit, and resource law.
+- `BRIDGE_PACKET.md`: exact derivation, initial proof audit, and operator target.
+- `ADVERSARIAL_PROOF_AUDIT.md`: exact fiber-completeness proof, derivative separation,
+  attack ledger, and strongest supported theorem.
+- `RESOURCE_AND_NO_SMUGGLE_LEDGER.md`: latent, controlled, readout, restoration, and
+  standard-transfer accounting.
 - `FAMILY10H_PROTOCOL.md`: prospective commutator-holonomy protocol, R2 restoration,
   answer-cache exclusion, and kill matrix.
 - `bridge_model.py`: exact standard-library reference verifier.
+- `proof_certificate.py`: exact invariant reductions and fiber case-split certificate.
 - `__init__.py`: package exports.
-- `tests/jacobian_holonomy_small_wall_bridge/test_bridge_model.py`: focused exact tests.
+- `tests/jacobian_holonomy_small_wall_bridge/`: focused exact tests and exhaustive
+  two-variable one- and two-clause census.
+- `.github/workflows/cat-cas-jacobian-holonomy-bridge.yml`: dedicated qualification.
 
 ## Current result
 
@@ -67,6 +75,10 @@ public 3-CNF
 -> modular residue family
 -> exact SAT/UNSAT boundary
 ```
+
+The exact target fiber is now certified complete by a direct algebraic case split, not
+only by checking the three listed points. The audit also distinguishes the full carrier
+Jacobian from the reduced elimination derivative used in the logarithmic residue.
 
 The derivation does not implement the missing native pushforward. A conventional program
 that enumerates sheets, expands the formula weight, performs numerical quadrature, or
