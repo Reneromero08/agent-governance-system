@@ -1,0 +1,173 @@
+{
+  "cases": [
+    {
+      "all_boundaries_equal": true,
+      "boundary": [
+        2,
+        0,
+        1,
+        0,
+        3,
+        1,
+        1,
+        0,
+        2,
+        0,
+        1,
+        1,
+        2,
+        1,
+        0,
+        1
+      ],
+      "compact_descriptor_butterfly_boundary_only": {
+        "maximum_ns": 996768,
+        "median_ns": 972762,
+        "minimum_ns": 965369,
+        "p90_ns": 978904,
+        "samples": 31
+      },
+      "full_restoring_phase_transaction": {
+        "maximum_ns": 5834592,
+        "median_ns": 5776202,
+        "minimum_ns": 5745474,
+        "p90_ns": 5827859,
+        "samples": 31
+      },
+      "gray_delta_global_histogram_boundary_only": {
+        "maximum_ns": 9618,
+        "median_ns": 8767,
+        "minimum_ns": 8156,
+        "p90_ns": 9177,
+        "samples": 11
+      },
+      "n": 2,
+      "resident_phase_factor_butterfly_boundary_only": {
+        "maximum_ns": 1777790,
+        "median_ns": 1724890,
+        "minimum_ns": 1708489,
+        "p90_ns": 1759615,
+        "samples": 31
+      },
+      "restoring_carrier_restored_after_timing": true
+    },
+    {
+      "all_boundaries_equal": true,
+      "boundary": [
+        -4,
+        0,
+        -2,
+        10,
+        1,
+        -1,
+        4,
+        3,
+        8,
+        0,
+        3,
+        1,
+        6,
+        3,
+        8,
+        13
+      ],
+      "compact_descriptor_butterfly_boundary_only": {
+        "maximum_ns": 6781516,
+        "median_ns": 6715422,
+        "minimum_ns": 6622056,
+        "p90_ns": 6752832,
+        "samples": 31
+      },
+      "full_restoring_phase_transaction": {
+        "maximum_ns": 31454978,
+        "median_ns": 30644060,
+        "minimum_ns": 30493106,
+        "p90_ns": 31091554,
+        "samples": 31
+      },
+      "gray_delta_global_histogram_boundary_only": {
+        "maximum_ns": 198714,
+        "median_ns": 171042,
+        "minimum_ns": 167256,
+        "p90_ns": 174128,
+        "samples": 11
+      },
+      "n": 3,
+      "resident_phase_factor_butterfly_boundary_only": {
+        "maximum_ns": 11025822,
+        "median_ns": 10747467,
+        "minimum_ns": 10587656,
+        "p90_ns": 10962201,
+        "samples": 31
+      },
+      "restoring_carrier_restored_after_timing": true
+    },
+    {
+      "all_boundaries_equal": true,
+      "boundary": [
+        -11,
+        -51,
+        -6,
+        -65,
+        -91,
+        -14,
+        -106,
+        -52,
+        -26,
+        -50,
+        -51,
+        -15,
+        -102,
+        -33,
+        -23,
+        -68
+      ],
+      "compact_descriptor_butterfly_boundary_only": {
+        "maximum_ns": 34936015,
+        "median_ns": 34580937,
+        "minimum_ns": 34282655,
+        "p90_ns": 34828353,
+        "samples": 17
+      },
+      "full_restoring_phase_transaction": {
+        "maximum_ns": 124280973,
+        "median_ns": 114553207,
+        "minimum_ns": 114019802,
+        "p90_ns": 117436809,
+        "samples": 17
+      },
+      "gray_delta_global_histogram_boundary_only": {
+        "maximum_ns": 24437568,
+        "median_ns": 23744732,
+        "minimum_ns": 23154881,
+        "p90_ns": 24437568,
+        "samples": 5
+      },
+      "n": 4,
+      "resident_phase_factor_butterfly_boundary_only": {
+        "maximum_ns": 50931519,
+        "median_ns": 50679254,
+        "minimum_ns": 50403505,
+        "p90_ns": 50846299,
+        "samples": 17
+      },
+      "restoring_carrier_restored_after_timing": true
+    }
+  ],
+  "catvm_boundary_used": false,
+  "compact_descriptor_path_scope": "PUBLIC_RUNTIME_WEIGHTS_TO_IDENTICAL_KRONECKER_INTERFACE_RECURRENCE_AND_FINAL_SCALAR_LIFT",
+  "controller_backend_traffic_bits": 0,
+  "experiment": "M120_WARM_RUNTIME_WEIGHTED_GRID_KRONECKER_BUTTERFLY_TIMING",
+  "full_transaction_scope": "FACTOR_SEED_LOAD_NATIVE_PHASE_UPDATES_BUTTERFLY_BOUNDARY_REVERSE_AND_EXACT_UNLOAD",
+  "gray_path_scope": "GLOBAL_GRAY_ASSIGNMENT_17_BIN_CHARACTER_HISTOGRAM",
+  "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.43",
+  "process_max_rss_kib_after_all_paths": 68084,
+  "python": "3.14.4",
+  "resident_and_descriptor_interface_recurrences_are_identical": true,
+  "resident_and_descriptor_row_diagonal_generation_are_not_operation_matched": true,
+  "resident_phase_path_scope": "BOUND_RUNTIME_FACTOR_CELLS_READ_BY_TOPOLOGY_DERIVED_BUTTERFLY_AND_FINAL_SCALAR_LIFT",
+  "result": "PASS",
+  "rss_is_process_wide_not_path_attributed": true,
+  "timing_is_observational_not_used_for_advantage_claim": true,
+  "warm_execution": true
+}
