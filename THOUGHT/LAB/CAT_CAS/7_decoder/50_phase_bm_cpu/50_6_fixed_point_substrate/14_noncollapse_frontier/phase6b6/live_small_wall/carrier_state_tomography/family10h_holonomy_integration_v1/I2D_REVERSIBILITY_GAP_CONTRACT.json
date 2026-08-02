@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "family10h_i2d_physical_reversibility_gap_v1",
+  "mode": "non_executing_prospective_evidence_contract",
+  "source_blobs": {
+    "I1_COMPATIBILITY_MATRIX.json": "5d142196f767ea331f14ee801adb5135a9a350fe",
+    "I2_GENERATOR_CATALOG.json": "3967c82be601f4a0852ed253979b6b2fee9fc874",
+    "I2A_RUNTIME_INTERFACE.json": "cb79071c5cf58559a76dec766a85bc1ebf6fe946",
+    "I2B_PAIR_DESIGN.json": "4008153d35343c5209b825b173cb3177131b8ed2",
+    "I2C_SYNTHETIC_MODEL_CONTRACT.json": "d97d287349899f172f107e157cf1063aa7505445"
+  },
+  "current_capability_snapshot": {
+    "scalar_q_calibration_confirmed": true,
+    "local_primary_minus_sham_differential_confirmed": true,
+    "stable_second_carrier_axis": false,
+    "frozen_multivariate_carrier_state": false,
+    "nondestructive_repeated_tomography": false,
+    "persistent_post_source_runtime_interface": true,
+    "physical_operator_backend": false,
+    "h1_admissible_generator_count": 0,
+    "h1_admissible_generator_pair_count": 0,
+    "qualified_inverse_count": 0,
+    "reversible_reference_model": "synthetic_only",
+    "independent_accumulator": false,
+    "r2_restoration": false
+  },
+  "minimum_state_observable_contract": {
+    "logical_byte_digest": {
+      "required": true,
+      "dispositive_for_reversibility": false
+    },
+    "D_single_scalar_q_coordinate": {
+      "required_as_calibration": true,
+      "sufficient_as_state": false
+    },
+    "D_local_primary_minus_sham": {
+      "required_as_local_coordinate": true,
+      "sufficient_as_state": false
+    },
+    "multi_observer_coherence_vector": {
+      "required": true,
+      "minimum_observers": 3,
+      "must_cross": [
+        "declared home core",
+        "remote core A",
+        "remote core B",
+        "matched route controls"
+      ],
+      "available": false
+    },
+    "overlap_stratified_line_response": {
+      "required": true,
+      "strata": ["A_only", "A_intersection_B", "B_only", "outside_union"],
+      "available": false
+    },
+    "timing_and_probe_vector": {
+      "required": true,
+      "prospective_disturbance_bound_required": true,
+      "available": false
+    },
+    "public_codeword_discrimination": {
+      "required": true,
+      "minimum_public_states": 3,
+      "heldout_rank_at_least": 2,
+      "available": false
+    }
+  },
+  "reversibility_tests": [
+    {
+      "id": "REV-01",
+      "name": "public multi-state preparation",
+      "required": true,
+      "current_pass": false,
+      "law": "at least three answer-blind public carrier states are prospectively prepared and distinguished"
+    },
+    {
+      "id": "REV-02",
+      "name": "frozen multivariate state vector",
+      "required": true,
+      "current_pass": false,
+      "law": "state vector, covariance, hierarchy, and equivalence region are frozen from public calibration only"
+    },
+    {
+      "id": "REV-03",
+      "name": "nondestructive repeated tomography",
+      "required": true,
+      "current_pass": false,
+      "law": "measurement disturbance is bounded and the same carrier can be observed after every primitive"
+    },
+    {
+      "id": "REV-04",
+      "name": "persistent object identity",
+      "required": true,
+      "current_pass": false,
+      "law": "allocation, page identity, line-set identity, process custody, and carrier ID remain fixed through the word"
+    },
+    {
+      "id": "REV-05",
+      "name": "post-source challenge secrecy",
+      "required": true,
+      "current_pass": false,
+      "law": "source cannot inherit the realized word, seed, operator schedule, or accumulator target"
+    },
+    {
+      "id": "REV-06",
+      "name": "directional backend receipts",
+      "required": true,
+      "current_pass": false,
+      "law": "each operation binds acting core, prior owner proxy, destination owner proxy, route, line set, amplitude, and completion"
+    },
+    {
+      "id": "REV-07",
+      "name": "injectivity collision screen",
+      "required": true,
+      "current_pass": false,
+      "law": "distinct held-out pre-states remain distinguishable after each candidate forward map"
+    },
+    {
+      "id": "REV-08",
+      "name": "left inverse law",
+      "required": true,
+      "current_pass": false,
+      "law": "T_inverse(T(s)) is equivalent to s for every held-out starting-state stratum"
+    },
+    {
+      "id": "REV-09",
+      "name": "right inverse law",
+      "required": true,
+      "current_pass": false,
+      "law": "T(T_inverse(s)) is equivalent to s for every held-out starting-state stratum"
+    },
+    {
+      "id": "REV-10",
+      "name": "wrong-inverse rejection",
+      "required": true,
+      "current_pass": false,
+      "law": "wrong core, route, direction, line set, amplitude, partial inverse, and inverse order fail under the same equivalence law"
+    },
+    {
+      "id": "REV-11",
+      "name": "held-out composition law",
+      "required": true,
+      "current_pass": false,
+      "law": "single fitted generator maps predict unseen pairs, powers, contractible words, and cancellation words"
+    },
+    {
+      "id": "REV-12",
+      "name": "commutator orientation and nulls",
+      "required": true,
+      "current_pass": false,
+      "law": "commutator and inverse commutator reverse orientation while contractible, disjoint-support, commuting-pair, and carrier-off controls are null"
+    },
+    {
+      "id": "REV-13",
+      "name": "causal independent accumulator",
+      "required": true,
+      "current_pass": false,
+      "law": "output depends on carrier transport, vanishes carrier-off and word-only replay, and is decoupled before inverse restoration"
+    },
+    {
+      "id": "REV-14",
+      "name": "inverse restoration with retained output",
+      "required": true,
+      "current_pass": false,
+      "law": "inverse commutator restores the full frozen carrier state while the independent output remains"
+    },
+    {
+      "id": "REV-15",
+      "name": "system-plus-environment accounting",
+      "required": true,
+      "current_pass": false,
+      "law": "cache, coherence, page, timing, frequency, temperature, process, measurement, accumulator, and external bath fields are classified"
+    }
+  ],
+  "hard_kills": {
+    "logical_bytes_only": "NOT_REVERSIBILITY_EVIDENCE",
+    "single_scalar_return": "NOT_STATE_RESTORATION",
+    "endpoint_return_after_reclaim": "DESTRUCTIVE_CLOSURE_UNLESS_INJECTIVITY_AND_TWO_SIDED_INVERSE_PASS",
+    "same_core_store_named_inverse": "NAME_ONLY_INVERSE",
+    "flush_or_reprepare": "DESTRUCTIVE_RESET",
+    "word_label_accumulator": "ANSWER_PATH_REPLAY",
+    "aggregate_rescues_failed_replicate": "FORBIDDEN",
+    "posthoc_state_vector_or_threshold": "CUSTODY_INVALID"
+  },
+  "prospective_freeze_requirements": {
+    "numerical_thresholds_frozen": false,
+    "state_vector_frozen": false,
+    "operator_topology_frozen": false,
+    "backend_implementation_frozen": false,
+    "accumulator_implementation_frozen": false,
+    "challenge_custody_frozen": false,
+    "physical_package_freeze_ready": false
+  },
+  "i2d_decision": {
+    "result": "I2D_PHYSICAL_REVERSIBILITY_GAP_CONTRACT_COMPLETE__OBSERVABLE_AND_BACKEND_PREREQUISITES_UNMET",
+    "gap_contract_complete": true,
+    "physical_package_freeze_ready": false,
+    "next_gate": "I2E_PROSPECTIVE_MEASUREMENT_HARNESS_SKELETON",
+    "live_execution_authorized": false
+  },
+  "claim_ceiling": [
+    "PHYSICAL_REVERSIBILITY_GAP_EXPLICIT",
+    "NO_PHYSICAL_REVERSIBLE_GENERATOR_ESTABLISHED",
+    "NO_PHYSICAL_INVERSE_ESTABLISHED",
+    "FAMILY10H_TRANSPORT_OPERATOR_NOT_ESTABLISHED",
+    "FAMILY10H_HOLONOMY_NOT_ESTABLISHED",
+    "SMALL_WALL_NOT_CROSSED",
+    "NO_LIVE_EXECUTION_AUTHORIZED"
+  ]
+}
