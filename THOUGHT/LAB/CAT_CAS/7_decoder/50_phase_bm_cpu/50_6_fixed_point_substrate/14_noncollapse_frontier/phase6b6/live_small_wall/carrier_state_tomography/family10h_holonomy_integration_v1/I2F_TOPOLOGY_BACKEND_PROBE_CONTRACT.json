@@ -1,0 +1,188 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "family10h_i2f_topology_backend_probe_spec_v1",
+  "mode": "non_executing_physical_interface_specification",
+  "source_blobs": {
+    "I2A_RUNTIME_INTERFACE.json": "cb79071c5cf58559a76dec766a85bc1ebf6fe946",
+    "I2B_PAIR_DESIGN.json": "4008153d35343c5209b825b173cb3177131b8ed2",
+    "I2D_REVERSIBILITY_GAP_CONTRACT.json": "16d40d79aaddfebb517147e1413e179ab3691610",
+    "I2E_MEASUREMENT_HARNESS_CONTRACT.json": "b68d91df2f97337d7d6adb1360548b7c4895a0ec"
+  },
+  "topology_roles": {
+    "preparation_core": null,
+    "home_reclaim_core": null,
+    "remote_core_A": null,
+    "remote_core_B": null,
+    "route_control_core": null,
+    "assignment_source": null,
+    "assignment_frozen": false
+  },
+  "topology_laws": {
+    "remote_core_A_distinct_from_remote_core_B": true,
+    "remote_cores_distinct_from_home_reclaim_core": true,
+    "preparation_core_may_equal_home_reclaim_core_only_if_declared": true,
+    "route_control_must_not_alias_an_unrecorded_operator_core": true,
+    "all_core_assignments_require_read_only_target_inventory": true,
+    "no_core_assignment_may_be_inferred_from_historical_labels": true
+  },
+  "carrier_layout": {
+    "allocation_owner": "future_experiment_controller",
+    "persistent_single_allocation_required": true,
+    "page_identity_manifest_required": true,
+    "line_identity_manifest_required": true,
+    "logical_initialization_answer_blind": true,
+    "line_set_A": null,
+    "line_set_B": null,
+    "line_set_cardinality": null,
+    "intersection_cardinality": null,
+    "partial_overlap_required": true,
+    "disjoint_control_required": true,
+    "identical_support_control_required": true,
+    "layout_frozen": false
+  },
+  "source_isolation": {
+    "process_model": "exec_based_preparation_only_source_required",
+    "preparation_payload_contains_challenge": false,
+    "preparation_payload_contains_operator_word": false,
+    "preparation_payload_contains_accumulator_target": false,
+    "challenge_entropy_generated_after_waitpid": true,
+    "source_descriptors_closed_before_challenge": true,
+    "source_ipc_zero_before_challenge": true,
+    "source_helpers_zero_before_challenge": true,
+    "fork_only_secrecy_allowed": false,
+    "implementation_frozen": false
+  },
+  "backend_abi": {
+    "implementation_status": "SPEC_ONLY_NOT_IMPLEMENTED",
+    "physical_execution_enabled": false,
+    "required_methods": [
+      "bind_topology",
+      "bind_carrier",
+      "prepare_public_codeword",
+      "seal_source_death",
+      "apply_directional_operation",
+      "measure_state_checkpoint",
+      "decouple_accumulator",
+      "record_restoration",
+      "record_environment",
+      "destroy_carrier"
+    ],
+    "directional_operation_fields": [
+      "carrier_id",
+      "operator_role",
+      "acting_core",
+      "expected_prior_owner_proxy",
+      "destination_owner_proxy",
+      "route_id",
+      "line_set_id",
+      "amplitude",
+      "operation_budget",
+      "logical_digest_before",
+      "logical_digest_after",
+      "state_receipt_before",
+      "state_receipt_after",
+      "start_barrier",
+      "end_barrier",
+      "backend_receipt_id"
+    ],
+    "required_result_classes": [
+      "BACKEND_NOT_IMPLEMENTED",
+      "TOPOLOGY_UNBOUND",
+      "CARRIER_UNBOUND",
+      "SOURCE_DEATH_UNSEALED",
+      "OPERATION_RECEIPT_INVALID",
+      "PROBE_RECEIPT_INVALID",
+      "FIXTURE_ONLY_SUCCESS"
+    ]
+  },
+  "nondestructive_probe_spec": {
+    "implementation_status": "SPEC_ONLY_NOT_IMPLEMENTED",
+    "required_observers": [
+      "home_core",
+      "remote_core_A",
+      "remote_core_B",
+      "route_control"
+    ],
+    "required_strata": [
+      "A_only",
+      "A_intersection_B",
+      "B_only",
+      "outside_union"
+    ],
+    "required_channels": [
+      "logical_byte_digest",
+      "D_single",
+      "D_local",
+      "change_to_dirty",
+      "probe_dirty",
+      "timing_cycles",
+      "probe_coordinate"
+    ],
+    "measurement_only_baselines_required": true,
+    "repeated_probe_baselines_required": true,
+    "probe_order_randomization_required": true,
+    "probe_disturbance_receipt_required": true,
+    "same_carrier_before_and_after_probe_required": true,
+    "disturbance_metric": null,
+    "disturbance_ceiling": null,
+    "measurement_deadline": null,
+    "numerical_fields_frozen": false
+  },
+  "accumulator_backend_spec": {
+    "implementation_status": "SPEC_ONLY_NOT_IMPLEMENTED",
+    "carrier_coupling_required": true,
+    "public_word_access_forbidden": true,
+    "source_class_access_forbidden": true,
+    "carrier_off_null_required": true,
+    "word_only_replay_null_required": true,
+    "reference_only_null_required": true,
+    "coupling_removal_intervention_required": true,
+    "decouple_before_inverse_required": true,
+    "output_retention_after_inverse_required": true
+  },
+  "environment_receipt_spec": {
+    "required_fields": [
+      "cache_coherence",
+      "page_identity",
+      "frequency_policy",
+      "temperature",
+      "source_process",
+      "receiver_process",
+      "measurement_registers",
+      "accumulator_state",
+      "external_bath"
+    ],
+    "unclassified_field_is_hard_fail": true
+  },
+  "freeze_blockers": [
+    "concrete topology unassigned",
+    "carrier support unassigned",
+    "physical backend absent",
+    "nondestructive probe absent",
+    "accumulator backend absent",
+    "disturbance metric and ceiling unset",
+    "state equivalence metric and thresholds unset",
+    "target inventory authority absent",
+    "live execution authority absent"
+  ],
+  "i2f_decision": {
+    "result": "I2F_TOPOLOGY_BACKEND_AND_NONDESTRUCTIVE_PROBE_SPEC_COMPLETE__ALL_PHYSICAL_ASSIGNMENTS_UNSET",
+    "interface_spec_complete": true,
+    "target_inventory_required_next": true,
+    "physical_package_freeze_ready": false,
+    "next_gate": "I2G_READ_ONLY_TARGET_INVENTORY_AUTHORITY_REQUIRED",
+    "live_execution_authorized": false
+  },
+  "claim_ceiling": [
+    "PHYSICAL_INTERFACE_SPECIFICATION_ONLY",
+    "TOPOLOGY_UNASSIGNED",
+    "PHYSICAL_BACKEND_NOT_IMPLEMENTED",
+    "NONDESTRUCTIVE_PROBE_NOT_IMPLEMENTED",
+    "ACCUMULATOR_BACKEND_NOT_IMPLEMENTED",
+    "NUMERICAL_THRESHOLDS_NOT_FROZEN",
+    "FAMILY10H_TRANSPORT_OPERATOR_NOT_ESTABLISHED",
+    "FAMILY10H_HOLONOMY_NOT_ESTABLISHED",
+    "SMALL_WALL_NOT_CROSSED",
+    "NO_LIVE_EXECUTION_AUTHORIZED"
+  ]
+}
