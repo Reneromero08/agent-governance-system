@@ -1,0 +1,9 @@
+# I2C Inspectable Qualification
+
+```text
+OVERWRITE_MODEL=reject_H2_R2
+REVERSIBLE_REFERENCE=synthetic_only
+MODEL_BLOB_BOUND=true
+PHYSICAL_REALIZATION=false
+NO_LIVE_EXECUTION_AUTHORIZED
+```
