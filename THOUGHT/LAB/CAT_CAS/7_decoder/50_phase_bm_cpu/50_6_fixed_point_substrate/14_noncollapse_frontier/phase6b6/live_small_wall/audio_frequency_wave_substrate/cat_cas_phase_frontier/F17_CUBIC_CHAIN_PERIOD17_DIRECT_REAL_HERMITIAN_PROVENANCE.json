@@ -1,0 +1,23 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "2ed6ae2a906a6873b58a77cabaf886377a8234bb",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "7ff624c3471b244ad99eff0f2c5e444ca8c7da5af973a3f995ca8c8a56d35fea",
+  "reference_full_oracle_sha256": "2e20b0c1cafe406adc482fe2463291cd8ac77579237188fc15e5e90dcfe991a4",
+  "files": {
+    "F17_CUBIC_CHAIN_PERIOD17_DIRECT_REAL_HERMITIAN_INDEPENDENT_REVIEW.md": "92e8214fc8469760f25dc6d814884948f473220cc0e736eebd7d0382512ba4c0",
+    "F17_CUBIC_CHAIN_PERIOD17_DIRECT_REAL_HERMITIAN_ORACLE_RESULTS.json": "2e20b0c1cafe406adc482fe2463291cd8ac77579237188fc15e5e90dcfe991a4",
+    "F17_CUBIC_CHAIN_PERIOD17_DIRECT_REAL_HERMITIAN_RESULTS.json": "7ff624c3471b244ad99eff0f2c5e444ca8c7da5af973a3f995ca8c8a56d35fea",
+    "f17_cubic_chain_period17_direct_real_hermitian.py": "6d60cd4eb7853c208d5b6a51d3ee710a85c0144719997efd329d583b57377e28",
+    "f17_cubic_chain_period17_direct_real_hermitian_oracle.py": "e1165eef8a9936103c8cc0238534e998be171f1af7c148233498b774ba204e00",
+    "f17_cubic_chain_period17_streamed_real_autocorrelation.py": "c872e78bf42d94ab5c3f84989faa3dbfae8d4232dec970fd8a5bbb7b0ccefe1c",
+    "f17_cubic_chain_period17_streamed_real_autocorrelation_oracle.py": "52aa4cdfb8d53dd866220a9e4636ee980444cbd4d85e8af389486b12a52a045f",
+    "qualify_f17_cubic_chain_period17_direct_real_hermitian.sh": "a8f56536d02721e7c59d26f94ca855b631fd5f06624fec75aa010ab48e39ec8f"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_FAMILIES_PERIODS1AND64_DIRECT_8_COORDINATE_HERMITIAN_TERM_GENERATION_NO_ACCEPTED_DEGREE16_NORM_PRODUCT_ONE_FULL_CYCLOTOMIC_HORNER_CARRIER_ONE_FULL_CERTIFIED_ACTION_EXACT_BOUNDARY_RESOURCE_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE_PARITY_SOFTWARE_ONLY"
+}
