@@ -54,8 +54,16 @@ phase-lock receipts before modifying this package or authorizing execution.
   attack ledger, and strongest supported theorem.
 - `RESOURCE_AND_NO_SMUGGLE_LEDGER.md`: latent, controlled, readout, restoration, and
   standard-transfer accounting.
-- `FAMILY10H_PROTOCOL.md`: prospective commutator-holonomy protocol, R2 restoration,
-  answer-cache exclusion, and kill matrix.
+- `CLAIM_BOUNDARY.md`: separate theory and physical promotion ladders with forbidden
+  claim tokens.
+- `FAMILY10H_PROTOCOL.md`: repaired receiver-side commutator protocol and exclusive
+  result classes.
+- `FAMILY10H_PROTOCOL_AUDIT.md`: adversarial protocol review and repair rationale.
+- `RESTORATION_R2_CONTRACT.md`: forward-use, inverse return, accumulator retention, and
+  environment accounting.
+- `ANSWER_CACHE_EXCLUSION.md`: post-source challenge custody and frozen bounded-replay
+  exclusion law.
+- `KILL_MATRIX.md`: fail-closed mathematical, compiler, hardware, and restoration gates.
 - `bridge_model.py`: exact standard-library reference verifier.
 - `proof_certificate.py`: exact invariant reductions and fiber case-split certificate.
 - `__init__.py`: package exports.
@@ -76,9 +84,14 @@ public 3-CNF
 -> exact SAT/UNSAT boundary
 ```
 
-The exact target fiber is now certified complete by a direct algebraic case split, not
-only by checking the three listed points. The audit also distinguishes the full carrier
+The exact target fiber is certified complete by a direct algebraic case split, not only
+by checking the three listed points. The audit also distinguishes the full carrier
 Jacobian from the reduced elimination derivative used in the logarithmic residue.
+
+The physical protocol now requires the receiver to choose and execute held-out loop
+words only after source death. It treats holonomy as a transport operator on a frozen
+carrier state, not as an unexplained scalar order effect. Replay exclusion is explicitly
+limited to a prospectively frozen bounded adversary.
 
 The derivation does not implement the missing native pushforward. A conventional program
 that enumerates sheets, expands the formula weight, performs numerical quadrature, or
