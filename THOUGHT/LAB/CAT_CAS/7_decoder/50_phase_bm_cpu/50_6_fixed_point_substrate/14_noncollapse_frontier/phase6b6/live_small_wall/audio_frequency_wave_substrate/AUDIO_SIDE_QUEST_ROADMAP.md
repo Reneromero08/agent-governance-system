@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_THREE_SHEAR_RELATIVE_HERMITIAN_FEEDBACK_IS_EXACT_AND_PHASE_COVARIANT_BUT_COLLAPSES_TO_IDENTICAL_FIXED_RANK_CLASSICAL_RECURRENCE`
-**Roadmap version:** `12.3`
+**Status:** `STRICT_SCOPE_FOUR_SITE_INTERLEAVED_PHASE_COUPLING_HAS_CERTIFIED_EXACT_TT_RANK_GROWTH_BUT_PUBLIC_TOPOLOGY_COLLAPSES_TO_A_SMALLER_SPARSE_CHARACTER_CONTRACTION`
+**Roadmap version:** `12.4`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `5e1b6b5bed88be896e920c7769a6935bd2395c87`
+**Reconciled source head:** `30de9ca9b0e663d0ab8367db7a91d7aab727cbe4`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_THREE_NONCOMMUTING_RELATIVE_HERMITIAN_TRACE_SHEARS_EXECUTE_AND_RESTORE_ON_THE_TWO_BY_EIGHT_F17_PHASE_CARRIER_BUT_COLLAPSE_TO_AN_IDENTICAL_FIXED_RANK_COMPACT_CLASSICAL_INTEGER_RECURRENCE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_SEED_FAMILIES_17_CELL_TWO_BY_EIGHT_PAIR_CARRIER_THREE_PAIRWISE_NONCOMMUTING_GLOBALLY_PHASE_COVARIANT_RELATIVE_HERMITIAN_SOURCE_SCALED_SHEARS_FINAL_INTEGER_TRACE_BOUNDARY_EXACT_REVERSE_ORDER_ZERO_CARRIER_RESTORATION_CROSS_FAMILY_SAME_BACKING_REUSE_INDEPENDENT_FULL_POWER_AND_PAIR_STATE_PARITY_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE_DIRECT_PROCESS_SOFTWARE_ONLY`
-**Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M117_FIXED_RANK_TRACE_FEEDBACK_CLASSICAL_COLLAPSE_DIAGNOSTIC`
+**Current highest milestone:** `BOUNDED_WIDTH4_EXACT_Q_ZETA17_INTERLEAVED_PHASE_COUPLING_WITH_CERTIFIED_TT_RANK_GROWTH_BOUNDARY_ONLY_PROJECTION_EXACT_REVERSE_RESTORATION_AND_REUSE_BUT_NO_RESOURCE_BEYOND_COMPACT_FACTOR_CONTRACTION`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_WIDTH4_LOCAL_DIMENSION2_F17_PROGRAMS_INTERLEAVED_K2_2_PHASE_COUPLING_EXACT_INTRA_PROGRAM_TT_RANK_TRACE_ONE_TO_TWO_TO_FOUR_FINAL_ALL_TWO_BY_TWO_CUT_RANK_FOUR_ONE_FINAL_CYCLOTOMIC_BOUNDARY_EXACT_REVERSE_ORDER_ZERO_BACKING_RESTORATION_CROSS_PROGRAM_SAME_BACKING_REUSE_INDEPENDENT_POWER_BASIS_AND_F103_CERTIFICATES_PUBLIC_TOPOLOGY_COMPILED_8_OR_7_ROOT_SPARSE_CHARACTER_BASELINE_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
+**New mechanism development:** `ACTIVE_AFTER_M118_PUBLIC_FACTOR_COLLAPSE_DIAGNOSTIC`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `VARIABLE_RANK_PHASE_COUPLING_WITH_COMPACT_CLASSICAL_TENSOR_BASELINE`
+**Active primary successor:** `RESIDENTLY_GENERATED_NONPUBLIC_COUPLING_TOPOLOGY_OR_GROWING_TREEWIDTH_PHASE_CLOSURE_WITH_OPTIMAL_CLASSICAL_TENSOR_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`5e1b6b5bed88be896e920c7769a6935bd2395c87`. The current 117-milestone
+`30de9ca9b0e663d0ab8367db7a91d7aab727cbe4`. The current 118-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -3876,6 +3876,89 @@ The obstruction is:
 FIXED_RANK_RELATIVE_HERMITIAN_TRACE_FEEDBACK_REMAINS_AN_IDENTICAL_COMPACT_CLASSICAL_POLYNOMIAL_RECURRENCE
 ```
 
+## Exact four-site phase coupling grows TT rank but public topology remains compact
+
+M118 loads a public product seed into sixteen actual `Q(zeta_17)` phase
+cells, applies the public interleaved program
+
+```text
+U_ac -> U_bc -> S_c -> U_ad -> U_bd
+```
+
+and projects only one final cyclotomic scalar. The four diagonal gates form a
+`K2,2` coupling graph and the local unimodular shear does not commute with the
+adjacent `c`-edge gates. Both public weight families have the exact natural
+TT-rank trace
+
+```text
+[1,1,1] -> [2,2,1] -> [2,2,1] -> [2,2,1] -> [2,4,2] -> [2,4,2].
+```
+
+Every final two-versus-two cut has exact rank four and every final one-site
+cut has rank two. Exhaustive nonzero-minor search in `Z[zeta_17]` supplies
+the exact certificates; an independent `F103` image with the order-seventeen
+root 72 has nonzero determinant residues `(59,42,86)` and `(90,65,78)` for
+the three final two-versus-two cuts.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    INDEPENDENT_ORACLE_REEXECUTION
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+source head     30de9ca9b0e663d0ab8367db7a91d7aab727cbe4
+```
+
+```text
+family    final boundary                                  dense named sum  compact named sum
+PRIMARY   [9,2,1,4,2,1,0,1,2,0,0,2,0,0,0,0]             1,761 bits       643 bits
+REUSE     [9,0,2,0,3,0,4,0,2,1,0,0,0,1,0,2]             1,754 bits       621 bits
+```
+
+The actual reverse path executes `U_bd^-1`, `U_ad^-1`, `S_c^-1`,
+`U_bc^-1`, and `U_ac^-1`, unloads the public seed, and restores the same
+backing to exact zero with no retained inverse history or snapshot. The
+unrelated `REUSE` program then agrees with a fresh carrier in boundary, rank
+trace, and every nonmetadata arithmetic statistic.
+
+The independent oracle imports neither production M118 nor the M116 pair
+backend. It reconstructs both programs in the full sixteen-coordinate power
+basis and separately checks the determinant certificates and exact inverse.
+Wrong phase inversion, reordered inversion across the noncommuting shear and
+edge, missing inverse, premature projection, mutation, invalid descriptor,
+and null-carrier controls fail or reject as required. Zero phase weights
+remain rank one, removing the `BD` edge lowers a final cut rank, and forcing a
+rank-two cap after `U_ad` contradicts an exact rank-four minor.
+
+The strongest matched classical method is not a dense tensor or a retained
+TT. Public topology compiles directly to a coalesced sparse character sum
+with eight nonconstant roots for `PRIMARY`, seven for `REUSE`, zero general
+pair multiplications, and at most four live phase cells. It reproduces the
+same exact boundary and uses less named logical payload. The phase timing is
+a full restoring transaction while the compact timing is boundary-only, so
+those observations are not operation-matched and establish no advantage.
+Named totals are conservative sums of component maxima, not simultaneous or
+whole-process peaks; rank-verifier work, Python objects, allocator and bigint
+internals, and native-library storage are separately excluded.
+
+M118 is therefore a bounded F17 carrier integration calibration. Earlier
+`Q(zeta_5)` work had already established bounded exact TT-rank growth. M118
+does not establish growing-family rank behavior, compact variable-rank
+closure, a distinct phase resource, computational advantage, Small Wall
+crossing, CATVM custody, inference, physical execution, bit replacement, or
+unbounded computation.
+
+The next experiment is:
+
+```text
+RESIDENTLY_GENERATED_NONPUBLIC_COUPLING_TOPOLOGY_OR_GROWING_TREEWIDTH_PHASE_CLOSURE_WITH_OPTIMAL_CLASSICAL_TENSOR_BASELINE
+```
+
+The obstruction is:
+
+```text
+PUBLIC_LOW_TREEWIDTH_PHASE_TOPOLOGY_RETAINS_THE_COMPLETE_BOUNDARY_LAW_WITHOUT_RESIDENT_TENSOR_EXPANSION_DESPITE_EXACT_TT_RANK_GROWTH
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -3913,7 +3996,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_THREE_NONCOMMUTING_RELATIVE_HERMITIAN_TRACE_SHEARS_EXECUTE_AND_RESTORE_ON_THE_TWO_BY_EIGHT_F17_PHASE_CARRIER_BUT_COLLAPSE_TO_AN_IDENTICAL_FIXED_RANK_COMPACT_CLASSICAL_INTEGER_RECURRENCE
+BOUNDED_WIDTH4_EXACT_Q_ZETA17_INTERLEAVED_PHASE_COUPLING_WITH_CERTIFIED_TT_RANK_GROWTH_BOUNDARY_ONLY_PROJECTION_EXACT_REVERSE_RESTORATION_AND_REUSE_BUT_NO_RESOURCE_BEYOND_COMPACT_FACTOR_CONTRACTION
 ```
 
 Not established:
@@ -3972,6 +4055,9 @@ executed physical dephasing for the M117 declared-erasure control
 complete M117 arithmetic-scratch or whole-process peak accounting
 phase resource unavailable to the identical two-by-eight integer recurrence
 compact variable-rank nonseparable phase closure
+growing-family rank behavior from the M118 width-four calibration
+phase resource beyond the public-topology sparse character contraction
+operation-matched timing advantage from the M118 observational benchmark
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4014,7 +4100,13 @@ but the complete law is still the identical fixed-rank two-by-eight classical
 integer recurrence. Continue from that collapse into a variable-rank or
 genuinely nonseparable coupling diagnostic with the strongest compact tensor
 baseline; do not repeat fixed-rank shear fixtures or depth sweeps without a
-specific obstruction they resolve.
+specific obstruction they resolve. M118 then certified exact intra-program
+TT-rank growth through rank four on every final two-versus-two cut, but its
+public treewidth-two topology compiled to a smaller exact sparse character
+sum. Continue from that public-factor collapse into a residently generated
+nonpublic coupling law or a controlled growing-treewidth closure with the
+strongest optimal tensor-network baseline. Do not add more width-four public
+fixtures or treat tensor materialization as a native resource.
 
 ## 10. Roadmap Maintenance
 

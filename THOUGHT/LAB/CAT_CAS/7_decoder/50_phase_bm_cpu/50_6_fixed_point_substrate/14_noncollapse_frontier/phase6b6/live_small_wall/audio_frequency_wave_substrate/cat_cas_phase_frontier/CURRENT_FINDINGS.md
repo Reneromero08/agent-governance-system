@@ -6890,3 +6890,71 @@ The obstruction is:
 ```text
 FIXED_RANK_RELATIVE_HERMITIAN_TRACE_FEEDBACK_REMAINS_AN_IDENTICAL_COMPACT_CLASSICAL_POLYNOMIAL_RECURRENCE
 ```
+
+## Exact four-site interleaved phase coupling rank diagnostic
+
+M118 executes two public width-four, local-dimension-two programs on sixteen
+actual `Q(zeta_17)` phase cells. Four public `K2,2` diagonal phase gates are
+interleaved with one local unimodular shear. Only one final cyclotomic scalar
+is projected.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    INDEPENDENT_ORACLE_REEXECUTION
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+source head     30de9ca9b0e663d0ab8367db7a91d7aab727cbe4
+```
+
+Both public families have exact natural TT ranks
+
+```text
+[1,1,1] -> [2,2,1] -> [2,2,1] -> [2,2,1] -> [2,4,2] -> [2,4,2].
+```
+
+All three final two-versus-two cuts have rank four, and all final one-site
+cuts have rank two. An independent full power-basis oracle reproduces the
+rank trace, exact boundaries, inverse, and controls without importing M118 or
+the M116 pair backend. Its `F103` order-seventeen-root images give nonzero
+final determinant residues `(59,42,86)` for `PRIMARY` and `(90,65,78)` for
+`REUSE`.
+
+```text
+family    final boundary                                  phase sum  compact sum
+PRIMARY   [9,2,1,4,2,1,0,1,2,0,0,2,0,0,0,0]             1,761      643 bits
+REUSE     [9,0,2,0,3,0,4,0,2,1,0,0,0,1,0,2]             1,754      621 bits
+```
+
+Exact reverse-order gates followed by public seed unload return the actual
+backing to zero with no retained inverse history or snapshot. The unrelated
+reuse program consumes the same backing and matches fresh execution in
+boundary, rank trace, and every nonmetadata arithmetic statistic.
+
+The strongest matched classical method compiles the public treewidth-two
+topology to a coalesced sparse character sum: eight nonconstant roots for
+`PRIMARY`, seven for `REUSE`, zero general pair multiplications, and four
+live phase cells. It reproduces the exact boundary without resident tensor
+expansion and uses less named logical payload. The phase benchmark measures
+a restoring transaction while the compact benchmark measures boundary-only
+evaluation; those timings are not operation-matched and are not evidence of
+advantage. Named sums remain sums of component maxima, not simultaneous or
+whole-process peaks, and exclude rank-verifier, Python, allocator, bigint,
+and native-library storage.
+
+Earlier `Q(zeta_5)` work already established bounded exact TT-rank growth.
+M118 is an F17 integration calibration, not a general TT or growing-family
+result. It establishes no compact variable-rank closure, distinct phase
+resource, computational advantage, Small Wall crossing, CATVM custody,
+inference, physical execution, bit replacement, or unbounded computation.
+
+The next experiment is:
+
+```text
+RESIDENTLY_GENERATED_NONPUBLIC_COUPLING_TOPOLOGY_OR_GROWING_TREEWIDTH_PHASE_CLOSURE_WITH_OPTIMAL_CLASSICAL_TENSOR_BASELINE
+```
+
+The obstruction is:
+
+```text
+PUBLIC_LOW_TREEWIDTH_PHASE_TOPOLOGY_RETAINS_THE_COMPLETE_BOUNDARY_LAW_WITHOUT_RESIDENT_TENSOR_EXPANSION_DESPITE_EXACT_TT_RANK_GROWTH
+```
