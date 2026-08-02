@@ -243,9 +243,11 @@ boundary.
 Choose any `n+1` distinct primes `p_1,...,p_{n+1}`. Then:
 
 \[
-\boxed{k=0
+\boxed{
+k=0
 \iff
-k\bmod p_j=0\text{ for every }j.}
+k\bmod p_j=0\text{ for every }j.
+}
 \]
 
 If `k>0` and every prime divided `k`, their product would divide `k`. But:
