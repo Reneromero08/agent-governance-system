@@ -51,6 +51,8 @@ def audit_clause_hamiltonian(
     ground energy zero and UNSAT has ground energy at least one.
     """
 
+    if variable_limit < 0 or variable_limit > REFERENCE_VARIABLE_LIMIT:
+        raise ConstraintHoloError("invalid clause-Hamiltonian reference limit")
     if len(holo.variables) > variable_limit:
         raise ConstraintHoloError("clause-Hamiltonian audit exceeds reference limit")
 
