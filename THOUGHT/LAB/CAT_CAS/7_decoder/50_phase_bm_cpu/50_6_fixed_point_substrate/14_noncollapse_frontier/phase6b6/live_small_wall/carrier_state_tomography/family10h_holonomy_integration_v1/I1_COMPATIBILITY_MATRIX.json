@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0.0",
+  "audit_id": "family10h_holonomy_integration_i1_v1",
+  "mode": "read_only_retained_evidence_compatibility_audit",
+  "evidence_parent_head": "cf6d49b0a46d25520a9ce61a06b1f90533058186",
+  "source_blobs": {
+    "AUTONOMOUS_SMALL_WALL_GOAL_STATE.json": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/AUTONOMOUS_SMALL_WALL_GOAL_STATE.json",
+      "blob_sha": "b16e9eb1d41e5a7d90f039556054b1d61c6a2cb2"
+    },
+    "RELATIONAL_SUCCESSOR_DECISION.md": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1_1_operator_dimension_audit/RELATIONAL_SUCCESSOR_DECISION.md",
+      "blob_sha": "61747607519421e9d73d840687f96beb5e509788"
+    },
+    "OPERATOR_DIMENSION_AUDIT.md": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1_1_operator_dimension_audit/OPERATOR_DIMENSION_AUDIT.md",
+      "blob_sha": "fab3a03a19f08b72da25c05ef7b607883d4e7993"
+    },
+    "OPERATOR_DIMENSION_DEEP_HUNT.md": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1_1_operator_dimension_audit/OPERATOR_DIMENSION_DEEP_HUNT.md",
+      "blob_sha": "cef6904b2a088288c293949ccd2b684aa7b38497"
+    },
+    "SCALAR_REPLAY_ADVERSARY_REPORT.json": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1_1_operator_dimension_audit/SCALAR_REPLAY_ADVERSARY_REPORT.json",
+      "blob_sha": "c7c90560a52b71a7e2e0f7e05d5491608cefaa63"
+    },
+    "RELATION_COMPOSITION_LOOP_DISCOVERY_SUMMARY.md": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_loop_discovery_v1/RELATION_COMPOSITION_LOOP_DISCOVERY_SUMMARY.md",
+      "blob_sha": "00f68313eacb7d99dd7b672f6d9f7d476af599e9"
+    },
+    "RELATION_COMPOSITION_LOOP_RESET_SCREEN_SUMMARY.md": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_loop_reset_screen_v1/RELATION_COMPOSITION_LOOP_RESET_SCREEN_SUMMARY.md",
+      "blob_sha": "c1339fbb127ece8350253be6523f9d47324303fd"
+    },
+    "RELATION_BALANCED_PHASE_SOURCE_OFF_SCREEN_SUMMARY.md": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_balanced_phase_source_off_screen_v1/RELATION_BALANCED_PHASE_SOURCE_OFF_SCREEN_SUMMARY.md",
+      "blob_sha": "029afc75df5978f5f8555f1abdadd3c5a5edb3ba"
+    },
+    "LOCAL_PAIRED_DIFFERENTIAL_AUDIT.md": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_primary_minus_sham_local_paired_differential_v1/LOCAL_PAIRED_DIFFERENTIAL_AUDIT.md",
+      "blob_sha": "44f75f09c01ee72cc6a04f8dbbed1f7dc909b15d"
+    }
+  },
+  "retained_calibration_surface": {
+    "scalar_q_coordinate": {
+      "name": "D_single",
+      "status": "PROSPECTIVELY_CONFIRMED_CALIBRATION_COORDINATE",
+      "slope_per_q": 1.8612688337053558,
+      "linear_regression_r_squared": 0.9940328492833816,
+      "nearest_q_accuracy": 1.0,
+      "warning": "linear_regression_r_squared_is_not_R2_restoration"
+    },
+    "local_paired_coordinate": {
+      "name": "D_local = R_primary - R_sham",
+      "status": "PROSPECTIVELY_CONFIRMED_POST_SOURCE_LOCAL_DIFFERENTIAL",
+      "claim_ceiling": "PUBLIC_POST_SOURCE_LOCAL_PRIMARY_MINUS_SHAM_DIFFERENTIAL_CONFIRMED",
+      "not_a_transport_state_vector": true
+    },
+    "exploratory_composition_coordinate": {
+      "name": "Omega_alive_composition_r0r1_minus_r1r0",
+      "initial_value": 0.025081683677790033,
+      "initial_source_off_ratio": 0.06326050530086345,
+      "initial_dead_ratio": 0.2979268569177624,
+      "status": "EXPLORATORY_CANDIDATE_REJECTED_BY_FOLLOWUP",
+      "followup_source_off_ratio": 0.822584339306217,
+      "followup_reset_ratio": 0.6670017174979355,
+      "followup_one_factor_same_sign": false
+    },
+    "second_operator_axis": {
+      "status": "UNRESOLVED",
+      "stable_across_required_strata": false,
+      "minimum_second_axis_alignment": 0.011908297788603826
+    }
+  },
+  "h_gates": {
+    "H0": {
+      "status": "PARTIAL_CALIBRATION_ONLY",
+      "passed": false,
+      "reason": "D_single and D_local are retained post-source calibration observables, but no frozen multivariate carrier state E or complete disturbance/equivalence law exists."
+    },
+    "H1": {
+      "status": "NOT_ESTABLISHED",
+      "passed": false,
+      "reason": "Retained schedules expose relation and order contrasts, but no receiver-side post-source generator maps T_A and T_B on a frozen carrier state have been identified."
+    },
+    "H2": {
+      "status": "NOT_ESTABLISHED",
+      "passed": false,
+      "reason": "No candidate operation has passed both left- and right-inverse laws; flush/reset operations are destructive controls and failed the retained collapse screens."
+    },
+    "H3": {
+      "status": "NOT_ESTABLISHED",
+      "passed": false,
+      "reason": "The exploratory composition coordinate did not survive reset/source-off followup, one-factor strata, replay alternatives, or a frozen held-out transport model."
+    },
+    "H4": {
+      "status": "ORDER_EFFECT_OBSERVED_BUT_CONNECTION_LAW_NOT_ESTABLISHED",
+      "passed": false,
+      "reason": "Several schedule-order contrasts were nonzero, but route/common-mode/replay controls and cross-session operator stability failed."
+    },
+    "H5": {
+      "status": "NOT_TESTED",
+      "passed": false,
+      "reason": "All retained outputs are endpoint PMU or derived readouts; no independent accumulator causally coupled to carrier transport exists."
+    },
+    "H6": {
+      "status": "NOT_ESTABLISHED",
+      "passed": false,
+      "reason": "Byte/hash return is R0 custody only. Reset screens did not collapse the candidate response, and no state-wide inverse restoration law retained an independent output."
+    },
+    "H7": {
+      "status": "DIAGNOSTIC_ADVERSARY_ONLY",
+      "passed": false,
+      "reason": "A retrospective scalar replay model failed to predict several candidate coordinates, but the candidate coordinates themselves were unstable and no prospective bounded replay class, capacity bound, held-out word grammar, or causal intervention campaign was frozen."
+    }
+  },
+  "i1_decision": {
+    "result": "I1_READ_ONLY_COMPATIBILITY_AUDIT_COMPLETE__H0_PARTIAL__H1_THROUGH_H7_NOT_PASSED",
+    "transport_candidate_freeze_allowed": false,
+    "synthetic_i2_design_allowed": true,
+    "next_gate": "I2_RECEIVER_SIDE_GENERATOR_CANDIDATE_CATALOG",
+    "live_execution_authorized": false
+  },
+  "claim_ceiling": [
+    "FAMILY10H_HOLONOMY_NOT_ESTABLISHED",
+    "NATIVE_CATALYTIC_FIBER_PUSHFORWARD_NOT_ESTABLISHED",
+    "SMALL_WALL_NOT_CROSSED",
+    "NO_LIVE_EXECUTION_AUTHORIZED"
+  ]
+}
