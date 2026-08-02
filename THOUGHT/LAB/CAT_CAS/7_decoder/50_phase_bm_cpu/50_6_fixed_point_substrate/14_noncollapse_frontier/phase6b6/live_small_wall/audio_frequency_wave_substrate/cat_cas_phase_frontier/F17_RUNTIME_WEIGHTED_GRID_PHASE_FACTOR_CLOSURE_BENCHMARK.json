@@ -1,0 +1,156 @@
+{
+  "cases": [
+    {
+      "all_boundaries_equal": true,
+      "boundary": [
+        2,
+        0,
+        1,
+        0,
+        3,
+        1,
+        1,
+        0,
+        2,
+        0,
+        1,
+        1,
+        2,
+        1,
+        0,
+        1
+      ],
+      "compact_transfer_boundary_only": {
+        "maximum_ns": 4167871,
+        "median_ns": 2820061,
+        "minimum_ns": 2646256,
+        "p90_ns": 3692719,
+        "samples": 31
+      },
+      "gray_delta_global_histogram_boundary_only": {
+        "maximum_ns": 12113,
+        "median_ns": 9408,
+        "minimum_ns": 8847,
+        "p90_ns": 11111,
+        "samples": 11
+      },
+      "n": 2,
+      "phase_carrier_generation_after_timing": 37,
+      "phase_carrier_lease_after_timing": 37,
+      "phase_carrier_restored_after_timing": true,
+      "phase_restoring_transaction": {
+        "maximum_ns": 8080401,
+        "median_ns": 7059526,
+        "minimum_ns": 6876362,
+        "p90_ns": 7382532,
+        "samples": 31
+      }
+    },
+    {
+      "all_boundaries_equal": true,
+      "boundary": [
+        -4,
+        0,
+        -2,
+        10,
+        1,
+        -1,
+        4,
+        3,
+        8,
+        0,
+        3,
+        1,
+        6,
+        3,
+        8,
+        13
+      ],
+      "compact_transfer_boundary_only": {
+        "maximum_ns": 37325535,
+        "median_ns": 31842346,
+        "minimum_ns": 31001338,
+        "p90_ns": 33195235,
+        "samples": 31
+      },
+      "gray_delta_global_histogram_boundary_only": {
+        "maximum_ns": 201879,
+        "median_ns": 196048,
+        "minimum_ns": 193854,
+        "p90_ns": 201648,
+        "samples": 11
+      },
+      "n": 3,
+      "phase_carrier_generation_after_timing": 37,
+      "phase_carrier_lease_after_timing": 37,
+      "phase_carrier_restored_after_timing": true,
+      "phase_restoring_transaction": {
+        "maximum_ns": 64034660,
+        "median_ns": 53517476,
+        "minimum_ns": 52571131,
+        "p90_ns": 59608696,
+        "samples": 31
+      }
+    },
+    {
+      "all_boundaries_equal": true,
+      "boundary": [
+        -11,
+        -51,
+        -6,
+        -65,
+        -91,
+        -14,
+        -106,
+        -52,
+        -26,
+        -50,
+        -51,
+        -15,
+        -102,
+        -33,
+        -23,
+        -68
+      ],
+      "compact_transfer_boundary_only": {
+        "maximum_ns": 346675979,
+        "median_ns": 341120855,
+        "minimum_ns": 335635503,
+        "p90_ns": 344865061,
+        "samples": 11
+      },
+      "gray_delta_global_histogram_boundary_only": {
+        "maximum_ns": 26371462,
+        "median_ns": 26269781,
+        "minimum_ns": 26097357,
+        "p90_ns": 26371462,
+        "samples": 5
+      },
+      "n": 4,
+      "phase_carrier_generation_after_timing": 17,
+      "phase_carrier_lease_after_timing": 17,
+      "phase_carrier_restored_after_timing": true,
+      "phase_restoring_transaction": {
+        "maximum_ns": 405536520,
+        "median_ns": 398341139,
+        "minimum_ns": 396578181,
+        "p90_ns": 402261685,
+        "samples": 11
+      }
+    }
+  ],
+  "catvm_boundary_used": false,
+  "compact_transfer_path_scope": "FINAL_BOUNDARY_TRANSFER_FROM_RUNTIME_WEIGHTS_ONLY",
+  "controller_backend_traffic_bits": 0,
+  "experiment": "M119_WARM_RUNTIME_WEIGHTED_GRID_PHASE_FACTOR_TIMING",
+  "gray_delta_histogram_path_scope": "FINAL_BOUNDARY_GRAY_CODE_GLOBAL_ASSIGNMENT_CHARACTER_HISTOGRAM_WITH_ONE_CHANGED_BIT_ENERGY_DELTAS",
+  "phase_path_scope": "FACTOR_SEED_LOAD_NATIVE_PREP_UNARY_EDGE_PHASE_COMPOSITION_FINAL_TRANSFER_BOUNDARY_REVERSE_RESTORATION",
+  "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.43",
+  "process_max_rss_kib_after_all_paths": 65368,
+  "python": "3.14.4",
+  "result": "PASS",
+  "rss_is_process_wide_not_path_attributed": true,
+  "timed_paths_are_not_operation_matched": true,
+  "timing_is_observational_not_used_for_advantage_claim": true,
+  "warm_execution": true
+}
