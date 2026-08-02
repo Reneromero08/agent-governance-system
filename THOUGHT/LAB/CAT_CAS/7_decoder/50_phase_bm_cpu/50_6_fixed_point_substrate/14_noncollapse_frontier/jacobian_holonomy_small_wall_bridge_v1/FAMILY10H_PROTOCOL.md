@@ -18,11 +18,20 @@ It does not modify or authorize the current Family 10h tomography package. The
 tomography package remains the precursor that must first identify reproducible
 post-source carrier coordinates and candidate order-dependent operators.
 
+Current protocol status:
+
+```text
+PROSPECTIVE_ONLY
+TRANSPORT_OPERATOR_NOT_ESTABLISHED
+ACCUMULATOR_COUPLING_NOT_ESTABLISHED
+BOUNDED_REPLAY_CLASS_NOT_FROZEN
+```
+
 ## 2. Experimental objective
 
 Determine whether the Family 10h carrier supports a path-relational transformation
 whose closed-loop response cannot be reduced to endpoint state, operation counts,
-ordinary nonlinearity, or a source-authored answer cache.
+ordinary nonlinearity, or a source-authored bounded replay mechanism.
 
 The first target is a commutator:
 
@@ -30,16 +39,39 @@ The first target is a commutator:
 K_{AB}=T_AT_BT_A^{-1}T_B^{-1}.
 \]
 
-The goal is not to call every order effect holonomy. The goal is to establish a
-connection-like transport law with inverse, composition, area scaling, and R2
-restoration.
+The goal is not to call every order effect holonomy. The goal is to identify a
+receiver-side transport law with inverse, composition, area scaling, a causally coupled
+accumulator, and R2 restoration.
 
-## 3. Gate H0: carrier tomography prerequisite
+## 3. Frozen causal sequence
+
+Every future transaction must use this order:
+
+```text
+public carrier preparation selected
+source prepares one carrier baseline
+source exits
+parent verifies source death
+source IPC, descriptors, and capabilities close
+receiver draws one held-out loop word
+receiver applies every generator in the word
+receiver measures carrier and accumulator
+receiver applies the declared inverse sequence where required
+receiver performs R2 tomography
+feature packet freezes
+analysis begins
+```
+
+The source must not know the realized word, word length, amplitudes, mapping, or delay
+before closure. `T_A`, `T_B`, and every inverse candidate are receiver-side operations on
+the surviving carrier.
+
+## 4. Gate H0: carrier tomography prerequisite
 
 Before any holonomy package can be frozen, tomography must identify:
 
-- a receiver-visible state vector `S`;
-- at least two controlled transformations `T_A` and `T_B`;
+- a receiver-visible carrier vector `s`;
+- at least two controlled receiver-side transformations `T_A` and `T_B`;
 - bounded persistence after source death;
 - repeatable response under held-out replicate, mapping, and delay;
 - prospective disturbance ceilings;
@@ -47,9 +79,39 @@ Before any holonomy package can be frozen, tomography must identify:
 
 No tomography result alone establishes relational memory or a Small Wall crossing.
 
-## 4. Gate H1: exact operator grammar
+## 5. Gate H1: carrier state and operator grammar
 
-Every operation must bind:
+Freeze a carrier coordinate space:
+
+\[
+s\in E\subseteq\mathbb R^d.
+\]
+
+The carrier vector may include:
+
+```text
+PMU response coordinates
+standardized probe coordinates
+timing-response coordinates
+other prospectively frozen receiver observables
+```
+
+Keep custody metadata separate:
+
+```text
+mapping
+policy
+temperature
+CPU identity
+process identity
+schedule identity
+address-layout identity
+```
+
+Custody metadata defines valid matched strata. It is not silently counted as restored
+carrier state.
+
+Each generator must bind:
 
 ```text
 operator id
@@ -67,77 +129,171 @@ process custody
 policy custody
 ```
 
-Candidate inverse operations must be independently characterized. A label such as
-`A_inverse` does not establish inversion.
+The generator is an empirical map:
 
-## 5. Gate H2: matched loop family
+\[
+T_g:E\to E.
+\]
 
-The minimum loop family is:
+A scalar PMU count after a word is not itself a holonomy. Any scalar result must be a
+predeclared function of the identified transport and accumulator response.
+
+## 6. Gate H2: inverse qualification
+
+An operation named `A_inverse` is only a candidate. Before commutator testing, require
+both left and right inverse laws:
+
+\[
+T_{A^{-1}}T_A\approx I,
+\qquad
+T_AT_{A^{-1}}\approx I,
+\]
+
+\[
+T_{B^{-1}}T_B\approx I,
+\qquad
+T_BT_{B^{-1}}\approx I.
+\]
+
+These laws must survive held-out:
+
+```text
+starting carrier states
+replicates
+mappings
+delays
+public amplitudes
+```
+
+Wrong amplitude, wrong inverse, and wrong inverse order must fail under the same frozen
+equivalence law.
+
+## 7. Gate H3: matched loop strata
+
+### Four-operation base stratum
 
 ```text
 L_null_1 = A A^-1 B B^-1
 L_null_2 = A B B^-1 A^-1
 L_comm   = A B A^-1 B^-1
 L_rev    = B A B^-1 A^-1
-L_double = L_comm L_comm
-L_cancel = L_comm L_rev
 ```
 
-All arms must preserve the exact operation multiset. They must match pages, banks,
-routes, order-position counts, timing envelope, source work, receiver work, and
-measurement windows.
+Every base word contains exactly one copy of `A`, `B`, `A^-1`, and `B^-1`.
+
+### Eight-operation composition stratum
+
+```text
+L_double       = L_comm L_comm
+L_cancel       = L_comm L_rev
+L_cancel_rev   = L_rev L_comm
+L_reverse_pair = L_rev L_rev
+matched doubled null words
+```
+
+Compare operation multisets within one stratum. A four-operation word and an
+eight-operation word are not described as having the same multiset.
+
+Every matched arm must preserve:
+
+```text
+pages and line population
+banks and routes
+operator-position counts
+source work
+receiver work
+timing envelope
+measurement windows
+starting-state stratum
+```
+
+## 8. Gate H4: transport and response laws
+
+For a word:
+
+\[
+\gamma=g_L\cdots g_1,
+\]
+
+define:
+
+\[
+T_\gamma=T_{g_L}\circ\cdots\circ T_{g_1}.
+\]
+
+Required held-out prediction includes the state after each single generator, pair,
+commutator, inverse commutator, doubled word, and cancellation word.
 
 Required laws:
 
 \[
-H(L_{\mathrm{rev}})=H(L_{\mathrm{comm}})^{-1},
+T_{L_{rev}}\approx T_{L_{comm}}^{-1},
 \]
 
 \[
-H(L_{\mathrm{cancel}})=I,
+T_{L_{cancel}}\approx I,
 \]
 
 \[
-H(\gamma_2\gamma_1)=H(\gamma_2)H(\gamma_1).
+T_{\gamma_2\gamma_1}\approx T_{\gamma_2}T_{\gamma_1}.
 \]
 
-For small public operator amplitudes `alpha` and `beta`, a connection-like response must
-also satisfy a prospectively frozen area law:
+For small public amplitudes `alpha` and `beta`, a connection-like response must satisfy
+a prospectively frozen area law:
 
 \[
-H(L_{\mathrm{comm}})-I
+T_{L_{comm}}-I
 =
 \mathcal F_{AB}\alpha\beta
 +
 o(\alpha\beta).
 \]
 
-Ordinary order sensitivity without these laws remains an order artifact.
+Area scaling alone is insufficient. Ordinary nonlinear systems can produce it. The
+candidate must also pass inverse orientation, composition, cancellation, contractible
+nulls, commuting-pair nulls, held-out starting states, causal accumulator intervention,
+and R2 restoration.
 
-## 6. Gate H3: independent accumulator
+## 9. Gate H5: independent causal accumulator
 
-The carrier cannot reveal a nontrivial closed-path invariant through an endpoint-only
-readout while also returning to the same arbitrary state. The protocol therefore needs
-an independent comparison channel.
+An endpoint-only measurement of an arbitrary restored carrier cannot reveal a
+nontrivial loop invariant. The protocol therefore requires an independent comparison
+channel.
 
-Allowed accumulator candidates must be identified before acquisition, for example:
+The accumulator contract must freeze:
 
-- a differential receiver path;
-- a phase-referenced counter pair;
-- a held-out standardized probe;
-- a separately initialized public memory register.
+```text
+initial state
+allowed carrier interaction
+forbidden direct access to source class and expected result
+readout observable
+inverse behavior
+carrier-off null
+reference-only null
+word-only replay null
+```
 
-The accumulator must not contain a source-authored response table.
+Candidate implementations may include a differential receiver path, phase-referenced
+counter pair, standardized probe register, or separately initialized public memory.
+A normal register that merely records the public word or computes a local formula is not
+an admissible accumulator.
 
-## 7. Restoration R2 contract
+The accumulator must change because of carrier transport. A causal intervention that
+removes or scrambles the carrier coupling must destroy the claimed response.
 
-Define a frozen public carrier-state vector:
+## 10. Gate H6: Restoration R2 contract
+
+Freeze separately:
 
 \[
-S=
-(S_{\mathrm{PMU}},S_{\mathrm{probe}},S_{\mathrm{timing}},
-S_{\mathrm{mapping}},S_{\mathrm{policy}},S_{\mathrm{temperature}}).
+S_{carrier}=(S_{PMU},S_{probe},S_{timing},S_{other}),
 \]
+
+and:
+
+```text
+C_custody = mapping, policy, temperature, CPU, process, schedule, identity
+```
 
 Measure:
 
@@ -154,10 +310,11 @@ S_wrong_order_inverse
 R2 requires:
 
 \[
-S_{\mathrm{after\ inverse}}\sim S_{\mathrm{baseline}}
+S_{after\ inverse}\sim S_{baseline}
 \]
 
-under a prospectively frozen multivariate equivalence region.
+under a prospectively frozen multivariate equivalence region and inverse deadline.
+Both fresh replicates must pass. Aggregate rescue is forbidden.
 
 The same gate must reject:
 
@@ -171,17 +328,22 @@ The same gate must reject:
 The output invariant must remain in the independent accumulator after carrier
 restoration.
 
-## 8. Answer-cache exclusion
+## 11. Gate H7: bounded replay exclusion
 
-A finite fixed loop family is answer-cache equivalent. The receiver must choose a loop
-word after source death from a public generator family:
+No finite campaign can exclude an arbitrary table or unrestricted algorithmic
+predictor. Freeze a bounded adversary class before acquisition, including:
 
-\[
-\gamma=
-g_{i_L}^{\epsilon_L}\cdots g_{i_1}^{\epsilon_1}.
-\]
+```text
+maximum encoded bits
+maximum predictor state dimension
+maximum automaton states
+maximum polynomial degree
+allowed public side information
+allowed route and timing features
+training cross-product
+```
 
-The campaign must include held-out:
+The receiver must choose post-source held-out:
 
 - words;
 - word lengths;
@@ -192,22 +354,27 @@ The campaign must include held-out:
 - amplitudes;
 - mappings and delays.
 
-A positive candidate must predict unseen words through one frozen composition law. A
-lookup table, scalar replay, bounded automaton, route model, or ordinary nonlinear
-predictor must be evaluated under the same held-out split.
+A positive candidate must predict unseen words through one frozen composition law.
+Preparation capacity alone does not exclude compressed replay. Required evidence is:
 
-Preparation capacity alone does not exclude algorithmic compression. Exclusion requires
-both:
+1. an independently measured capacity bound;
+2. held-out group-law generalization;
+3. causal operator and accumulator interventions.
 
-1. an independently measured preparation-capacity bound;
-2. held-out group-law generalization and causal operator interventions.
+The strongest allowed exclusion token is:
 
-## 9. Relation mutation
+```text
+BOUNDED_REPLAY_CLASS_REJECTED
+```
+
+not an unrestricted claim that every classical explanation was excluded.
+
+## 12. Relation mutation
 
 The strongest matched mutation changes only ordered incidence:
 
 ```text
-same operator multiset
+same operator multiset within stratum
 same public amplitudes
 same pages and banks
 same routes and cores
@@ -216,7 +383,7 @@ same marginal occupancy
 different closed word
 ```
 
-The primary contrast is not `both active` versus `separate`. It is:
+The primary contrast is:
 
 ```text
 contractible word
@@ -226,48 +393,56 @@ versus
 inverse commutator word
 ```
 
-## 10. Kill matrix
+## 13. Kill matrix
 
 | Attack | Required killer |
 |---|---|
 | Static answer vector | Post-source unseen words plus held-out composition |
-| Scalar endpoint memory | Same endpoint and same operation multiset across loop classes |
+| Scalar endpoint memory | Same endpoint and same operation multiset within stratum |
 | Route or bank artifact | Crossed mapping with exact route and bank equivalence |
 | Ordinary nonlinear contention | Contractible and commuting-pair nulls |
-| Generic order effect | Inverse, composition, and area laws |
+| Generic order effect | Inverse, composition, cancellation, and area laws |
 | Timing drift | Randomized interleaving and time-matched sham loops |
 | Source preselection | Independent post-death word entropy and sealed source-death receipt |
 | Label-derived orientation | Blinded operator-to-physical-lane assignment |
+| Word recorder | Word-only replay null and accumulator-coupling intervention |
 | Reset called restoration | Wrong-inverse, natural-relaxation, and destructive-reset controls |
 | Accumulator leakage | Carrier-off and reference-only nulls |
 | Endpoint-only fake | Independent accumulator required |
 | Post-hoc threshold | Prospective equivalence region and response law |
+| Unbounded replay class | Claim remains bounded to the frozen adversary |
 | Classical loop simulator | Claim limited to calibration unless native carrier use is proved |
 
-## 11. Promotion ladder
+## 14. Promotion ladder
 
 ```text
 H0: post-source carrier coordinates observed
-H1: two controlled transformations identified
-H2: inverse and composition laws survive
-H3: nontrivial commutator response survives matched nulls
-H4: R2 carrier restoration plus retained accumulator invariant
-H5: held-out word generalization excludes bounded answer caches
-H6: higher-cycle construction linked to weighted fiber pushforward
+H1: receiver-side generator maps identified
+H2: left and right inverse laws survive
+H3: composition model predicts held-out words
+H4: nontrivial commutator response survives matched nulls
+H5: causal accumulator retains the response
+H6: R2 carrier restoration passes
+H7: frozen bounded replay class is rejected
+H8: separate higher-cycle theorem links transport to weighted fiber pushforward
 ```
 
-Only H4 or above is relevant to catalytic holonomy. No rung in this document is already
-passed.
+Only H6 or above is relevant to catalytic holonomy. No rung in this document is already
+passed. H8 is a separate theorem and does not follow automatically from pair
+commutators.
 
-## 12. Required result classes
+## 15. Exclusive result classes
 
 ```text
-FAMILY10H_HOLONOMY_NOT_ESTABLISHED
+FAMILY10H_HOLONOMY_CUSTODY_INVALID
+FAMILY10H_TRANSPORT_OPERATOR_NOT_ESTABLISHED
 FAMILY10H_ORDER_DEPENDENCE_OBSERVED
 FAMILY10H_CONNECTION_LAW_CANDIDATE
 FAMILY10H_CATALYTIC_HOLONOMY_CANDIDATE
-FAMILY10H_HOLONOMY_CUSTODY_INVALID
 ```
+
+A result must emit exactly one class. Missing custody or malformed evidence takes
+precedence and yields `FAMILY10H_HOLONOMY_CUSTODY_INVALID`.
 
 Forbidden from this package:
 
