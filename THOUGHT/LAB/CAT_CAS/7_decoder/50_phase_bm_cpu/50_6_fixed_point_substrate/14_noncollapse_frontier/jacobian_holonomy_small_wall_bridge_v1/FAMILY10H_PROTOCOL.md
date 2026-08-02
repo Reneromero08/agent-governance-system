@@ -444,6 +444,35 @@ FAMILY10H_CATALYTIC_HOLONOMY_CANDIDATE
 A result must emit exactly one class. Missing custody or malformed evidence takes
 precedence and yields `FAMILY10H_HOLONOMY_CUSTODY_INVALID`.
 
+## 16. Fail-closed catalytic-holonomy transition
+
+`FAMILY10H_CATALYTIC_HOLONOMY_CANDIDATE` may be emitted if and only if all of the
+following are present in the frozen contract, passed on both fresh replicates, and
+independently verified:
+
+```text
+PROMOTION_RUNG_REQUIREMENTS = H0, H1, H2, H3, H4, H5, H6, H7
+CONNECTION_LAW_CONTROLS_PASS = inverse orientation, composition, cancellation,
+                               area law, contractible nulls, commuting-pair nulls,
+                               matched strata, held-out starting states
+ACCUMULATOR_CONTROLS_PASS = carrier-causal coupling, carrier-off null,
+                            reference-only null, word-only replay null,
+                            retained output after restoration
+BOUNDED_REPLAY_CONTROLS_PASS = bounded adversary frozen, capacity bound measured,
+                               held-out words and lengths, group-law generalization,
+                               causal interventions
+R2_KILL_MATRIX_CONTROLS_PASS = R2-01, R2-02, R2-03, R2-04, R2-05,
+                               R2-06, R2-07, R2-08, R2-09, R2-10
+ALL_REQUIRED_CONTROLS_PRESENT_PASSING_VERIFIED = true
+```
+
+This transition is conjunctive. Any missing, failed, or unverified rung or control
+forbids `FAMILY10H_CATALYTIC_HOLONOMY_CANDIDATE`. The result must fail closed to the
+strongest supported noncandidate class from Section 15. A malformed custody record
+always yields `FAMILY10H_HOLONOMY_CUSTODY_INVALID`. An order effect without all required
+transport, accumulator, replay, and R2 controls yields at most
+`FAMILY10H_ORDER_DEPENDENCE_OBSERVED` or `FAMILY10H_CONNECTION_LAW_CANDIDATE`.
+
 Forbidden from this package:
 
 ```text
