@@ -4,6 +4,25 @@
   "mode": "compile_only_and_synthetic_lifecycle_validation",
   "live_backend_implemented": false,
   "target_contact_authorized": false,
+  "implementation_blobs": {
+    "post_source_operator_runtime.h": "bfe5625c9845cf5b2bfa75d245bb1164331fdb9b",
+    "post_source_operator_runtime.c": "f8dba2722d4e96cb7556de5420002295fee3e0e9"
+  },
+  "compile_contract": {
+    "language": "C11",
+    "flags": [
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pedantic",
+      "-O2",
+      "-DF10HI_BUILD_SELF_TEST"
+    ],
+    "target_specific_instructions": false,
+    "pmu_access": false,
+    "network_access": false
+  },
   "lifecycle": [
     "ALLOCATED",
     "SOURCE_PREPARED",
