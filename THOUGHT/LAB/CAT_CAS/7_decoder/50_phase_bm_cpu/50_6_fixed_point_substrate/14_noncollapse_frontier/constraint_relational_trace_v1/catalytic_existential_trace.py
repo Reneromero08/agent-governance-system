@@ -165,6 +165,8 @@ def audit_reversible_dilation(
     dilation of evaluation, not an existential trace over the complete relation.
     """
 
+    if variable_limit < 0 or variable_limit > REFERENCE_VARIABLE_LIMIT:
+        raise ConstraintHoloError("invalid reversible-dilation reference limit")
     if len(holo.variables) > variable_limit:
         raise ConstraintHoloError("reversible-dilation audit exceeds reference limit")
 
