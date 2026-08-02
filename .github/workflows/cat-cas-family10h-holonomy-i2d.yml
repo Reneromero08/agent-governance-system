@@ -1,0 +1,58 @@
+name: CAT_CAS Family10h Holonomy I2D
+
+on:
+  push:
+    branches:
+      - 'codex/family10h-holonomy-integration-v1'
+    paths:
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1/I2D_*'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1/i2d_gap_contract.py'
+      - 'THOUGHT/LAB/CAT_CAS/tests/family10h_holonomy_integration/test_i2d_gap_contract.py'
+      - '.github/workflows/cat-cas-family10h-holonomy-i2d.yml'
+  pull_request:
+    branches:
+      - 'codex/family10h-holonomy-integration-v1'
+    paths:
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1/I2D_*'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1/i2d_gap_contract.py'
+      - 'THOUGHT/LAB/CAT_CAS/tests/family10h_holonomy_integration/test_i2d_gap_contract.py'
+      - '.github/workflows/cat-cas-family10h-holonomy-i2d.yml'
+
+concurrency:
+  group: cat-cas-family10h-holonomy-i2d-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    name: Physical reversibility gap contract
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout I2D surface
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout: |
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1
+            THOUGHT/LAB/CAT_CAS/tests/family10h_holonomy_integration/test_i2d_gap_contract.py
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+
+      - name: Install pinned test dependency
+        run: python -m pip install pytest==9.1.1
+
+      - name: Run I2D tests
+        run: >-
+          python -m pytest -q
+          THOUGHT/LAB/CAT_CAS/tests/family10h_holonomy_integration/test_i2d_gap_contract.py
+
+      - name: Run exact I2D contract audit
+        run: >-
+          python
+          THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1/i2d_gap_contract.py
