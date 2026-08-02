@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_DIRECT_REAL_HERMITIAN_GENERATOR_REMOVES_ACCEPTED_DEGREE16_NORM_PRODUCTS_BUT_FULL_CARRIER_FINAL_ACTION_AND_IDENTICAL_CLASSICAL_OBSTRUCTIONS_REMAIN`
-**Roadmap version:** `12.1`
+**Status:** `STRICT_SCOPE_QUADRATIC_EXTENSION_STORED_PAIR_IS_EXACT_ISOMORPHISM_BUT_INCREASES_RESIDENT_AND_TOTAL_NAMED_PAYLOAD_AND_RETAINS_FULL_CONSTRUCTION_AND_IDENTICAL_CLASSICAL_RECURRENCE`
+**Roadmap version:** `12.2`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `d4e117ae06597abb683e50b0e2a466cbdc877c2d`
+**Reconciled source head:** `01ff12d2984560cad59d0448125fe79b644fb225`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_DIRECT_EIGHT_COORDINATE_HERMITIAN_GENERATOR_ELIMINATES_PER_ELEMENT_DEGREE16_PRODUCTS_FROM_THE_ACCEPTED_NORM_PATH_WHILE_PRESERVING_BOUNDARIES_EXACT_RESTORATION_AND_PERIOD1_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_FAMILIES_PERIODS1AND64_DIRECT_8_COORDINATE_HERMITIAN_TERM_GENERATION_NO_ACCEPTED_DEGREE16_NORM_PRODUCT_ONE_FULL_CYCLOTOMIC_HORNER_CARRIER_ONE_FULL_CERTIFIED_ACTION_EXACT_BOUNDARY_RESOURCE_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE_PARITY_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_POST_FORWARD_TWO_BY_EIGHT_REAL_SUBFIELD_QUADRATIC_EXTENSION_STORED_CARRIER_REPLACES_FULL_CYCLOTOMIC_RESIDENCY_AND_PROJECTS_THROUGH_ONE_FINAL_SCALAR_FULL_LIFT_WITH_EXACT_RESTORATION_AND_PERIOD1_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_FAMILIES_PERIODS1AND64_EXACT_POST_FORWARD_TWO_BY_EIGHT_REAL_SUBFIELD_QUADRATIC_EXTENSION_STORED_CARRIER_PAIR_NATIVE_PROJECTION_AND_LEDGER_MATERIALIZATION_ONE_SPLIT_TO_FULL_FINAL_SCALAR_BOUNDARY_LIFT_FULL_CYCLOTOMIC_FORWARD_AND_INVERSE_REMATERIALIZATION_EXACT_ALGEBRAIC_ORIGINAL_BACKING_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE_SEPARATE_REFERENCE_PARITY_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_USER_RESUME_AND_M115_CHECKPOINT`
+**New mechanism development:** `ACTIVE_AFTER_M116_QUADRATIC_EXTENSION_ISOMORPHISM_DIAGNOSTIC`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `PHASE_NATIVE_NONCLASSICAL_TRACE_COUPLING_OR_EXACT_FULL_CARRIER_PHASE_QUOTIENT_WITH_BOUNDARY_LIFT`
+**Active primary successor:** `PHASE_NATIVE_NONCLASSICAL_TRACE_COUPLING_WITHOUT_FULL_CARRIER_RECONSTRUCTION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`d4e117ae06597abb683e50b0e2a466cbdc877c2d`. The current 115-milestone
+`01ff12d2984560cad59d0448125fe79b644fb225`. The current 116-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -1146,7 +1146,7 @@ The agent must choose the work that most directly advances the mission. It is no
 
 ## 6A. Current Native Nonlinear Phase Frontier
 
-The current highest bounded phase-machine result is:
+A prior bounded phase-machine result at this stage was:
 
 ```text
 BOUNDED_NONLINEAR_UNIT_PHASE_TORUS_SHEAR_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_INTERFERENCE_PROJECTION
@@ -3742,6 +3742,70 @@ The obstruction is:
 THE_NORM_SEARCH_NO_LONGER_NEEDS_ANY_DEGREE16_HERMITIAN_PRODUCT_BUT_THE_PHASE_CARRIER_AND_CERTIFIED_ACTION_REMAIN_FULL_CYCLOTOMIC_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_DIRECT_BILINEAR_MAP
 ```
 
+## Exact quadratic-extension storage is an isomorphism, not compression
+
+M116 replaces the stored post-forward full-cyclotomic vector with an exact
+pair `A + zeta B`, where `A` and `B` each use eight integral real-subfield
+coordinates and `zeta^2-s1*zeta+1=0`. The coordinate map is unimodular with
+determinant `+1`; it retains 16 independent integer coordinates per element
+and is not a quotient.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+source head     01ff12d2984560cad59d0448125fe79b644fb225
+```
+
+The stored carrier, public projection, and public unit-ledger materialization
+use the two-lane algebra. Pair multiplication uses three real-subfield
+products. Only the selected final scalar is lifted from the pair to the full
+cyclotomic basis. The forward Horner construction and inverse
+rematerialization still build full-cyclotomic vectors; those paths and both
+full-to-pair conversions are declared and counted.
+
+```text
+period family   M115 total  M116 total  increase  raw Horner  M116 - raw
+1      PRIMARY       93,790      94,616       826      10,005      84,611
+1      REUSE        101,475     102,400       925      10,097      92,303
+64     PRIMARY    3,324,441   3,325,225       784   2,790,766     534,459
+64     REUSE      3,695,435   3,696,278       843   2,901,994     794,284
+```
+
+Metadata-inclusive pair residency exceeds the comparable full carrier by
+99, 198, 57, and 116 bits. Forward conversion includes the empty borrowed
+carrier backing while full and partial pair outputs coexist. Projection
+includes the normalized scalar state and pair-multiplication live work. The
+reported named total remains a conservative sum of component maxima, not a
+simultaneous or whole-process peak; Python objects, allocator and
+native-library state, bigint internals, and whole-process storage remain
+outside the bound.
+
+The separate oracle imports no production M116 module. It derives semantic
+pair arithmetic in the real-subfield power basis and separately reexecutes
+the integral `S`-basis resource schedule. It matches every declared boundary,
+forward and inverse resource tuple, comparable residency delta, exact
+restoration, and period-1 reuse boundary. Backing identity and negative
+exception controls remain source-local rather than a rehosted CATVM service.
+
+The strongest matched classical method is the identical two-by-eight pair
+recurrence. It has the same public coefficients, operator, pair algebra, and
+boundary. M116 establishes no reduction in rank, no resource improvement over
+M115 or raw Horner, and no distinct phase resource.
+
+The next experiment is:
+
+```text
+PHASE_NATIVE_NONCLASSICAL_TRACE_COUPLING_WITHOUT_FULL_CARRIER_RECONSTRUCTION
+```
+
+The obstruction is:
+
+```text
+THE_EXACT_TWO_BY_EIGHT_PAIR_CHANGES_POST_FORWARD_STORAGE_COORDINATES_WITHOUT_REDUCING_RANK_INCREASES_COMPARABLE_RESIDENT_AND_TOTAL_NAMED_PAYLOAD_RETAINS_FULL_FORWARD_AND_INVERSE_CONSTRUCTION_AND_HAS_AN_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -3779,7 +3843,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_DIRECT_EIGHT_COORDINATE_HERMITIAN_GENERATOR_ELIMINATES_PER_ELEMENT_DEGREE16_PRODUCTS_FROM_THE_ACCEPTED_NORM_PATH_WHILE_PRESERVING_BOUNDARIES_EXACT_RESTORATION_AND_PERIOD1_REUSE
+BOUNDED_EXACT_POST_FORWARD_TWO_BY_EIGHT_REAL_SUBFIELD_QUADRATIC_EXTENSION_STORED_CARRIER_REPLACES_FULL_CYCLOTOMIC_RESIDENCY_AND_PROJECTS_THROUGH_ONE_FINAL_SCALAR_FULL_LIFT_WITH_EXACT_RESTORATION_AND_PERIOD1_REUSE
 ```
 
 Not established:
@@ -3829,6 +3893,11 @@ asymptotic residual-height lower bound from the five tested periods
 basis-optimal exact pi-content normalization
 exact Python allocator, internal multiplication, or whole-process peak
 full real-subfield carrier or final certified action
+dimension or rank reduction from the two-by-eight pair representation
+fully pair-native forward or inverse recurrence
+elimination of full-cyclotomic forward or inverse rematerialization
+lower pair residency than the comparable metadata-inclusive full carrier
+lower M116 named total than M115 or matched raw Horner
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -3854,13 +3923,18 @@ blocking the mission.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve the
 exact F17 recurrence, pi-content, unit-search, deferred-ledger, Horner,
-real-subfield, streamed-autocorrelation, and direct-Hermitian evidence
+real-subfield, streamed-autocorrelation, direct-Hermitian, and exact
+quadratic-extension pair evidence
 together with the earlier relational and gauge-transport results. M115
 removed accepted degree-16 products from Hermitian term generation but
-retained the full cyclotomic carrier, the final certified action, and an
-identical compact classical bilinear execution. Continue only from that
-measured obstruction; do not repeat M115 fixture sizes or reintroduce the
-removed full products.
+retained the full cyclotomic carrier and an identical compact classical
+bilinear execution. M116 then replaced only post-forward storage and
+projection with an exact two-by-eight pair, but retained 16 independent
+coordinates, increased comparable resident and total named payload, retained
+full forward and inverse construction, and preserved an identical classical
+pair recurrence. Continue only from that measured obstruction; do not repeat
+M115/M116 fixture sizes, reintroduce the removed norm products, or mistake a
+coordinate isomorphism for compression.
 
 ## 10. Roadmap Maintenance
 

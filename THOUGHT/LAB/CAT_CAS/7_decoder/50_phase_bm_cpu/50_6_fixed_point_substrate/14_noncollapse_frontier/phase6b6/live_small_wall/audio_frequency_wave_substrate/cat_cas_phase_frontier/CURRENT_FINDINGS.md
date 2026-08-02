@@ -6761,3 +6761,73 @@ The obstruction is:
 ```text
 THE_NORM_SEARCH_NO_LONGER_NEEDS_ANY_DEGREE16_HERMITIAN_PRODUCT_BUT_THE_PHASE_CARRIER_AND_CERTIFIED_ACTION_REMAIN_FULL_CYCLOTOMIC_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_DIRECT_BILINEAR_MAP
 ```
+
+## Exact quadratic-extension post-forward storage diagnostic
+
+M116 represents each stored full-cyclotomic element exactly as
+`A + zeta B`, with two eight-coordinate integral real-subfield lanes and
+`zeta^2-s1*zeta+1=0`. The map has determinant `+1`, retains 16 independent
+integer coordinates, and is an isomorphism rather than a quotient.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+source head     01ff12d2984560cad59d0448125fe79b644fb225
+```
+
+The stored carrier, projection, and unit-ledger materialization use the pair
+algebra. Pair multiplication uses three real-subfield products, and the
+accepted forward path performs one split-to-full lift for the final scalar
+boundary. The full forward Horner construction and full inverse
+rematerialization remain; each is converted to the pair representation and
+counted. No full resident vector is retained after forward conversion.
+
+The initial resource comparison had mixed metadata-inclusive pair residency
+with metadata-exclusive full-vector residency. Adversarial review rejected
+that field before sealing. The repaired source includes pi and unit ledgers
+on both sides, counts the empty carrier backing during forward conversion,
+and includes normalized projection state plus pair-multiplication live work.
+The qualifier seals the repaired fields.
+
+```text
+period family   pair resident  comparable full  pair-full  M116 total  M115 total  raw
+1      PRIMARY          3,036            2,937         99      94,616      93,790   10,005
+1      REUSE            5,452            5,254        198     102,400     101,475   10,097
+64     PRIMARY        222,134          222,077         57   3,325,225   3,324,441 2,790,766
+64     REUSE          211,318          211,202        116   3,696,278   3,695,435 2,901,994
+```
+
+All pair resident measurements and all named totals worsen. The named total
+remains a conservative sum of component maxima rather than a simultaneous or
+whole-process peak. Python object, allocator, native-library, bigint-internal,
+and whole-process storage are excluded.
+
+The separate oracle imports no production M116 module. It derives semantic
+pair arithmetic in the real-subfield power basis and independently
+reexecutes the integral `S`-basis schedule. All four boundaries, raw
+boundaries, resource tuples, comparable residency deltas, inverse outputs,
+and restoration results match. Exact restoration returns the actual original
+backing to zero payload and ledgers without retained inverse history or
+baseline reload. Period-1 unrelated reuse matches a fresh carrier in boundary
+and declared resource signature. Generation and lease remain observed
+direct-process metadata, not enforced CATVM custody.
+
+The strongest matched classical execution is the identical two-by-eight
+pair recurrence. This package establishes no dimension reduction, full
+pair-native recurrence, distinct phase resource, computational advantage,
+Small Wall crossing, CATVM custody, catalytic inference, physical waveform
+execution, physical bit replacement, or unbounded computation.
+
+The next experiment is:
+
+```text
+PHASE_NATIVE_NONCLASSICAL_TRACE_COUPLING_WITHOUT_FULL_CARRIER_RECONSTRUCTION
+```
+
+The obstruction is:
+
+```text
+THE_EXACT_TWO_BY_EIGHT_PAIR_CHANGES_POST_FORWARD_STORAGE_COORDINATES_WITHOUT_REDUCING_RANK_INCREASES_COMPARABLE_RESIDENT_AND_TOTAL_NAMED_PAYLOAD_RETAINS_FULL_FORWARD_AND_INVERSE_CONSTRUCTION_AND_HAS_AN_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE
+```
