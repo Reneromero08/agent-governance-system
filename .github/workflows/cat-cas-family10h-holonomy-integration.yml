@@ -35,7 +35,7 @@ jobs:
       - name: Checkout successor
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          fetch-depth: 0
+          fetch-depth: 64
           persist-credentials: false
 
       - name: Set up Python
@@ -50,7 +50,7 @@ jobs:
 
       - name: Verify evidence lineage and additions-only integration
         run: |
-          git fetch --no-tags origin \
+          git fetch --depth=1 --no-tags origin \
             codex/family10h-tomography-repair \
             archive/family10h-tomography-repair-pre-holonomy-20260802
           test "$(git rev-parse origin/codex/family10h-tomography-repair)" = \
