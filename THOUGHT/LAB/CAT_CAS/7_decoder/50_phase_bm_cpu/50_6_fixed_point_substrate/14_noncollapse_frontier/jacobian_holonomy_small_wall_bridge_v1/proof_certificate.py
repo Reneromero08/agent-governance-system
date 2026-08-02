@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from fractions import Fraction
+from math import isqrt
 
 from .bridge_model import (
     A,
@@ -47,6 +48,8 @@ class FiberAlgebraCertificate:
 
     @property
     def passed(self) -> bool:
+        """Return whether every exact identity in the certificate passed."""
+
         return all(
             (
                 self.c_factorization,
@@ -143,6 +146,8 @@ class FormulaCircuitShape:
 
     @property
     def total_nodes(self) -> int:
+        """Return the total counted arithmetic-circuit nodes."""
+
         return (
             self.selector_nodes
             + self.multiplication_nodes
@@ -192,8 +197,23 @@ def logarithmic_residue_is_unit(root: int | Fraction) -> bool:
     return derivative / derivative == 1
 
 
+def _is_prime(value: int) -> bool:
+    """Return whether ``value`` is prime by exact trial division."""
+
+    if value < 2:
+        return False
+    if value == 2:
+        return True
+    if value % 2 == 0:
+        return False
+    for divisor in range(3, isqrt(value) + 1, 2):
+        if value % divisor == 0:
+            return False
+    return True
+
+
 def prime_sieve_bound_certificate(variable_count: int, primes: tuple[int, ...]) -> bool:
-    """Check the exact product bound used by the zero versus nonzero sieve."""
+    """Check primality, distinctness, and the exact zero-sieve product bound."""
 
     if variable_count < 0:
         raise ValueError("variable_count must be nonnegative")
@@ -201,7 +221,7 @@ def prime_sieve_bound_certificate(variable_count: int, primes: tuple[int, ...]) 
         return False
     if len(set(primes)) != len(primes):
         return False
-    if any(prime < 2 for prime in primes):
+    if not all(_is_prime(prime) for prime in primes):
         return False
 
     product_value = 1
