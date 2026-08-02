@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import exp, isfinite
+from math import exp, isfinite, log, log1p
 
 from .catalytic_existential_trace import CLAIM_CEILING
 from .constraint_holo import ConstraintHoloError
@@ -50,13 +50,16 @@ def public_seed_normalized_long_memory_from_short(
     if long_memory_cap <= 1.0:
         raise ConstraintHoloError("public long-memory cap must exceed the initial value")
 
-    short_odds = short_memory / (1.0 - short_memory)
-    long_odds = (
-        exp(parameters.alpha * (parameters.gamma - parameters.delta) * elapsed_time)
-        / (long_memory_cap - 1.0)
-        * short_odds ** (parameters.alpha / parameters.beta)
+    short_log_odds = log(short_memory) - log1p(-short_memory)
+    long_log_odds = (
+        parameters.alpha * (parameters.gamma - parameters.delta) * elapsed_time
+        - log(long_memory_cap - 1.0)
+        + (parameters.alpha / parameters.beta) * short_log_odds
     )
-    return long_odds / (1.0 + long_odds)
+    if long_log_odds >= 0.0:
+        return 1.0 / (1.0 + exp(-long_log_odds))
+    exponential = exp(long_log_odds)
+    return exponential / (1.0 + exponential)
 
 
 def classify_public_seed_forward_compatible_stationary_strata(
