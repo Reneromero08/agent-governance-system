@@ -6,7 +6,10 @@
 INTEGRATION_BOOTSTRAP_COMPLETE
 JACOBIAN_HOLONOMY_BRIDGE_IMPORTED_EXACTLY
 TOMOGRAPHY_EVIDENCE_LINEAGE_PRESERVED
-READ_ONLY_COMPATIBILITY_AUDIT_NOT_STARTED
+I1_READ_ONLY_COMPATIBILITY_AUDIT_COMPLETE
+H0_PARTIAL_CALIBRATION_ONLY
+H1_THROUGH_H7_NOT_PASSED
+I2_RECEIVER_SIDE_GENERATOR_CANDIDATE_CATALOG_NOT_STARTED
 SYNTHETIC_TRANSPORT_QUALIFICATION_NOT_STARTED
 NO_LIVE_EXECUTION_AUTHORIZED
 FAMILY10H_HOLONOMY_NOT_ESTABLISHED
@@ -60,6 +63,52 @@ The imported sibling package is:
 It establishes an exact representation theorem and a prospective protocol. It does not
 supply a native pushforward, physical holonomy, R2 restoration, or a Small Wall crossing.
 
+## I1 retained-evidence compatibility decision
+
+I1 binds nine retained source artifacts by exact Git blob identity and maps them onto the
+prospective H0-H7 protocol.
+
+Usable calibration surface:
+
+```text
+D_single scalar q coordinate: prospectively confirmed
+D_local = R_primary - R_sham: prospectively confirmed local differential
+```
+
+The old operator-dimension report's `R2 = 0.9940328492833816` is statistical regression
+R-squared, not CAT_CAS R2 restoration.
+
+Blocked transport surface:
+
+```text
+no stable second carrier axis
+no receiver-side post-source generator maps
+no two-sided inverse
+no held-out composition law
+no causal independent accumulator
+no R2 restoration
+no prospective bounded replay rejection
+```
+
+The initial composition-loop lead remains useful history, but its reset follow-up had
+source-off magnitude `0.823x` alive, reset magnitude `0.667x` alive, and failed
+one-factor sign stability. It cannot be promoted into a connection law.
+
+Exact I1 result:
+
+```text
+I1_READ_ONLY_COMPATIBILITY_AUDIT_COMPLETE__H0_PARTIAL__H1_THROUGH_H7_NOT_PASSED
+```
+
+Artifacts:
+
+- `I1_COMPATIBILITY_AUDIT.md`: human-readable source-by-source decision.
+- `I1_COMPATIBILITY_MATRIX.json`: frozen H0-H7 evidence and claim matrix.
+- `i1_compatibility_audit.py`: exact source-blob and decision validator.
+- `INTEGRATION_MANIFEST.json`: imported-file and custody manifest.
+- `INTEGRATION_VALIDATION.json`: exact bridge-blob and additions-only receipt.
+- `QUALIFICATION_REQUEST.md`: merged qualification receipt.
+
 ## Scope lock
 
 This package may perform only:
@@ -82,22 +131,27 @@ run PMU acquisition
 modify or reinterpret sealed evidence
 reactivate retired packages
 reuse consumed live authority
+inherit historical target authorization from the parent branch
 fit thresholds to retained private results
 emit FAMILY10H_CATALYTIC_HOLONOMY_CANDIDATE
 emit NATIVE_CATALYTIC_FIBER_PUSHFORWARD_ESTABLISHED
 emit SMALL_WALL_CROSSED
 ```
 
-## Next gates
+## Gates
 
 ```text
-I0: verify exact bridge-file identity and evidence-lineage preservation
-I1: map retained carrier coordinates to the H0-H7 protocol without changing evidence
-I2: identify candidate receiver-side generator maps from public/retained calibration only
-I3: build synthetic two-sided inverse and matched commutator qualification
-I4: build synthetic causal accumulator and R2 restoration qualification
-I5: freeze a bounded replay adversary and held-out word grammar
-I6: decide whether a new prospective physical package is justified
+I0: PASS - exact bridge-file identity and evidence-lineage preservation
+I1: PASS - read-only H0-H7 compatibility audit
+I2: NEXT - receiver-side generator candidate catalog
+I3: pending - synthetic two-sided inverse and matched commutator qualification
+I4: pending - synthetic causal accumulator and R2 restoration qualification
+I5: pending - frozen bounded replay adversary and held-out word grammar
+I6: pending - decide whether a new prospective physical package is justified
 ```
+
+I2 may catalog candidate operations only. It may not freeze a physical transport
+candidate until an operation is shown to be receiver-executable after verified source
+death and admissible under the no-smuggle boundary.
 
 No gate above is a live authorization.
