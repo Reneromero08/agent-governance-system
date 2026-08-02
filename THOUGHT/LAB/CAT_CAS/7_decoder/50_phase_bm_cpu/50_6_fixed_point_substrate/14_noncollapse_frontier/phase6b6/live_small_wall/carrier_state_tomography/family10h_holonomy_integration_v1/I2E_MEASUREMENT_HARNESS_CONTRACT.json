@@ -6,6 +6,10 @@
     "path": "I2D_REVERSIBILITY_GAP_CONTRACT.json",
     "blob_sha": "16d40d79aaddfebb517147e1413e179ab3691610"
   },
+  "implementation_blob": {
+    "path": "measurement_harness.py",
+    "blob_sha": "281875909931bcd41cda2466b2de6fd86210ce03"
+  },
   "required_transaction_sections": [
     "identity",
     "carrier",
