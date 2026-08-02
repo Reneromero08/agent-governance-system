@@ -277,9 +277,15 @@ def polynomial_phase_selector_flow_derivative(
             if gradient_mode == "exact_product":
                 others = tuple(index for index in range(3) if index != local_index)
                 directional_factor = defects[others[0]] * defects[others[1]]
+                gradient_coefficient = truth_gain / 8.0
             else:
                 directional_factor = pair_minima[local_index]
-            gradient = 0.5 * signs[local_index] * directional_factor
+                gradient_coefficient = 0.5
+            gradient = (
+                gradient_coefficient
+                * signs[local_index]
+                * directional_factor
+            )
             rigidity = (
                 0.5
                 * (signs[local_index] - local_cosine[local_index])
