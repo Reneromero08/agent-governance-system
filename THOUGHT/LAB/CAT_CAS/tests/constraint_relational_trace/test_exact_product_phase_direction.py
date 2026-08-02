@@ -15,8 +15,17 @@ sys.path.insert(0, str(PACKAGE_PARENT))
 from constraint_relational_trace_v1.adaptive_phase_logit_flow import (  # noqa: E402
     integrate_adaptive_phase_logit_flow,
 )
+from constraint_relational_trace_v1.constraint_holo import (  # noqa: E402
+    ClauseRelation,
+    ConstraintHolo,
+    Literal,
+)
 from constraint_relational_trace_v1.phase_transition_corpus import (  # noqa: E402
     certify_phase_transition_case,
+)
+from constraint_relational_trace_v1.polynomial_phase_selector_flow import (  # noqa: E402
+    PolynomialPhaseSelectorFlowState,
+    polynomial_phase_selector_flow_derivative,
 )
 
 
@@ -57,3 +66,41 @@ def test_selector_min_remains_a_falsified_nondefault_calibration() -> None:
     assert run.status == "TERMINAL_NO_WITNESS__UNSAT_NOT_ESTABLISHED"
     assert run.terminal_clause_satisfaction_margin < 0.0
     assert run.maximum_long_memory > 500.0
+
+
+def test_exact_product_gradient_scales_with_truth_gain() -> None:
+    holo = ConstraintHolo.build(
+        ("x", "y", "z"),
+        (
+            ClauseRelation(
+                (
+                    Literal("x"),
+                    Literal("y"),
+                    Literal("z"),
+                )
+            ),
+        ),
+    )
+    state = PolynomialPhaseSelectorFlowState(
+        phase_cosine=(0.0, 0.0, 0.0),
+        phase_sine=(1.0, 1.0, 1.0),
+        short_memory=(1.0,),
+        long_memory=(1.0,),
+        clause_selector=((1.0 / 3.0, 1.0 / 3.0, 1.0 / 3.0),),
+        pair_selector=((0.5, 0.5, 0.5, 0.5, 0.5, 0.5),),
+    )
+
+    default_gain = polynomial_phase_selector_flow_derivative(
+        holo,
+        state,
+        truth_gain=4.0,
+    )
+    doubled_gain = polynomial_phase_selector_flow_derivative(
+        holo,
+        state,
+        truth_gain=8.0,
+    )
+
+    assert default_gain.phase_cosine == (0.5, 0.5, 0.5)
+    assert doubled_gain.phase_cosine == (1.0, 1.0, 1.0)
+    assert doubled_gain.phase_sine == (0.0, 0.0, 0.0)
