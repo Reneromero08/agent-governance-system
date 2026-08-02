@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from math import exp, isclose
+from math import exp, isclose, log
 from pathlib import Path
 import sys
 
@@ -58,7 +58,7 @@ def test_public_seed_odds_relation_matches_direct_constant_violation_solution() 
     violation = 0.4
 
     short_logit = parameters.beta * (violation - parameters.gamma) * elapsed
-    long_initial_logit = -__import__("math").log(cap - 1.0)
+    long_initial_logit = -log(cap - 1.0)
     long_logit = long_initial_logit + parameters.alpha * (
         violation - parameters.delta
     ) * elapsed
@@ -72,7 +72,12 @@ def test_public_seed_odds_relation_matches_direct_constant_violation_solution() 
         parameters,
     )
 
-    assert isclose(reconstructed, direct_normalized_long, rel_tol=1.0e-12, abs_tol=1.0e-14)
+    assert isclose(
+        reconstructed,
+        direct_normalized_long,
+        rel_tol=1.0e-12,
+        abs_tol=1.0e-14,
+    )
 
 
 def test_public_seed_reconstruction_recovers_initial_long_memory() -> None:
