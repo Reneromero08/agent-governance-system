@@ -1,0 +1,28 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "367716267b83f2bcbcb6c3cd3d52f6209f70a582",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "7cdde540c26ac6aaa9c8a96c0706e99b4abd408b2805470605e6af46a492ef01",
+  "reference_full_oracle_sha256": "c44d5abb1cc702fcf8bf287a2890d0b2eaf53f2c69f651b123985111e5ff55bd",
+  "execution": {
+    "production": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_three_shear_relative_hermitian_trace_feedback.py",
+    "oracle": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_three_shear_relative_hermitian_trace_feedback_oracle.py",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_three_shear_relative_hermitian_trace_feedback.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "F17_THREE_SHEAR_RELATIVE_HERMITIAN_TRACE_FEEDBACK_INDEPENDENT_REVIEW.md": "2b3c115990302d38447299e457db7ebd6460e5f7f20dbb666851ee8c541c1a14",
+    "F17_THREE_SHEAR_RELATIVE_HERMITIAN_TRACE_FEEDBACK_ORACLE_RESULTS.json": "c44d5abb1cc702fcf8bf287a2890d0b2eaf53f2c69f651b123985111e5ff55bd",
+    "F17_THREE_SHEAR_RELATIVE_HERMITIAN_TRACE_FEEDBACK_RESULTS.json": "7cdde540c26ac6aaa9c8a96c0706e99b4abd408b2805470605e6af46a492ef01",
+    "f17_cubic_chain_period17_quadratic_extension_resident_carrier.py": "1eea251c3dee2e6e0673376c0285fed88de31efc7a547418cbe960b1c89bb111",
+    "f17_cubic_chain_period17_quadratic_extension_resident_carrier_oracle.py": "552bb44edd11ae6e3c9cf1270cac6a1cabd6c914c9f7f8d228ae37a066110e24",
+    "f17_three_shear_relative_hermitian_trace_feedback.py": "71d5fa9f166cd9a93eb5e0a8a5f1869d22b0ee169813c155547d085374cedbc8",
+    "f17_three_shear_relative_hermitian_trace_feedback_oracle.py": "496f6db6c051d7ac7c741d412e966b9f9a2b8dff96f472de473d2e0a5dc2da11",
+    "qualify_f17_three_shear_relative_hermitian_trace_feedback.sh": "4e04cb08216eceb3461a5866d9693d6c7ed07c325c04933911a8cc9f68803b9b"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_SEED_FAMILIES_17_CELL_TWO_BY_EIGHT_PAIR_CARRIER_THREE_PAIRWISE_NONCOMMUTING_GLOBALLY_PHASE_COVARIANT_RELATIVE_HERMITIAN_SOURCE_SCALED_SHEARS_FINAL_INTEGER_TRACE_BOUNDARY_EXACT_REVERSE_ORDER_ZERO_CARRIER_RESTORATION_CROSS_FAMILY_SAME_BACKING_REUSE_INDEPENDENT_FULL_POWER_AND_PAIR_STATE_PARITY_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE_DIRECT_PROCESS_SOFTWARE_ONLY"
+}
