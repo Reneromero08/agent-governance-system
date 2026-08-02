@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_PLANAR_FREE_FERMION_ZERO_FIELD_CLOSURE_WITH_SPARSE_DEFECT_SECTOR_GROWTH_NEXT_PARITY_LEDGER_SELECTED`
-**Roadmap version:** `12.9`
+**Status:** `STRICT_SCOPE_PAIRED_PHASE_BASIS_MATCHGATE_CLOSURE_WITH_PUBLIC_HOLOGRAPHIC_CANCELLATION_NEXT_RESIDENT_BASIS_COUPLING_SELECTED`
+**Roadmap version:** `13.1`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `8a2d459c3706a3ac1187ae876006c6c9af1a36ee`
+**Reconciled source head:** `ae36a130352ba92f4272858cc00bde13c6336b90`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_PLANAR_FREE_FERMION_TERMINAL_PFAFFIAN_PHASE_CLOSURE_FOR_DECLARED_ZERO_FIELD_F17_GRIDS_WITH_EXACT_SPARSE_DEFECT_SECTOR_GROWTH_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `EXACT_Q_ZETA17_OPEN_PLANAR_GRIDS_N2_N3_N4_TERMINAL_PFAFFIAN_CLOSURE_WITH_N4_K0_K1_K2_K4_STREAMED_EVEN_DEFECT_SECTORS_EXACT_RESTORATION_AND_REUSE_PLUS_DUAL_FIELD_SOURCE_LOCAL_STRUCTURE_N2_THROUGH_N8_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_PAIRED_ZETA17_BASIS_CLOSES_COMPACT_NATIVE_MIXED_PARITY_EXACT_ONE_GENERATORS_ON_GROWING_EVEN_PLANAR_GRIDS_BY_SHARED_EDGE_IDENTITY_AND_KASTELEYN_DETERMINANT_WITH_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `EVEN_OPEN_SQUARE_GRIDS_ONLY_EXACT_Q_ZETA17_N2_N4_N6_DUAL_FIELD_STRUCTURE_N2_TO_N12_COMPACT_MIXED_PARITY_NATIVE_GENERATORS_SHARED_EDGE_IDENTITY_AND_MATCHGATE_DETERMINANT_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M123_PLANAR_FREE_FERMION_CLOSURE_AND_SPARSE_DEFECT_SECTOR_GROWTH`
+**New mechanism development:** `ACTIVE_AFTER_M125_PAIRED_PHASE_BASIS_MATCHGATE_CLOSURE_AND_PUBLIC_HOLOGRAPHIC_CANCELLATION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_SHARED_PHASE_PARITY_LEDGER_FOR_SPARSE_NON_GAUSSIAN_FIELD_INSERTIONS_WITHOUT_EVEN_SECTOR_ENUMERATION_OR_A_PROOF_THAT_THE_LEDGER_RANK_MUST_GROW`
+**Active primary successor:** `RESIDENTLY_GENERATED_OR_COHERENCE_DEPENDENT_PHASE_BASIS_COUPLING_WITHOUT_A_PUBLIC_CLASSICAL_HOLOGRAPHIC_CANCELLATION_OR_A_MATCHED_NO_GO`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`8a2d459c3706a3ac1187ae876006c6c9af1a36ee`. The current 123-milestone
+`ae36a130352ba92f4272858cc00bde13c6336b90`. The current 125-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4341,6 +4341,97 @@ The obstruction is:
 ZERO_FIELD_FREE_FERMION_CLOSURE_IS_IDENTICAL_TO_COMPACT_CLASSICAL_GAUSSIAN_SOFTWARE_WHILE_TRUE_EXTERNAL_FIELDS_SPLIT_INTO_2_TO_THE_K_MINUS_1_EVEN_GAUSSIAN_SECTORS_AND_NO_PHASE_NATIVE_OPERATION_CURRENTLY_CLOSES_THEIR_SUM_WITHOUT_MOVING_THAT_GROWTH
 ```
 
+### 6.124 Exact shared phase-parity ledger on two-row ladders
+
+M124 tests the M123 non-Gaussian obstruction without enumerating even defect
+sectors. Public topology interleaves the factors of a declared two-row open
+ladder so the unresolved boundary is a four-state exact `Q(zeta17)` message.
+
+```text
+classification                 INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                   INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration   EXACT_ALGEBRAIC_RESTORATION
+transient recurrence frontier  NO_RESTORATION_CLAIM
+source head                    ae36a130352ba92f4272858cc00bde13c6336b90
+hosted run                     NOT ESTABLISHED
+```
+
+An independent Fraction power-basis implementation reproduces both public
+families at exact widths `1,2,4,8,16,32,64`; `F103/F137` structural parity
+extends through width 128. Bounded assignment and occurrence-expanded oracles
+agree through width four. Grouped factor ranks grow through 16 at width four,
+whereas public column interleaving keeps the maximum rank at four; exhaustive
+public order checks through width four confirm that optimum. The exact PRIMARY
+width-two native defect signature has a nonzero Grassmann--Pluecker delta, but
+broader exact non-Gaussian classification is not claimed.
+
+The accepted path retains `10W-4` factor cells, four frontier cells, and at
+most 19 named transient field cells for width greater than one. It uses
+`O(W)` field operations with exact bit complexity reported separately. Only
+the final boundary is projected; the actual factor/scalar carrier reverses
+exactly without inverse history or snapshot reload and the same backing is
+reused by an unrelated width-16 program.
+
+This eliminates M123's sector enumeration only for a two-row topology whose
+four-state separator gives the identical compact classical transfer. It does
+not establish fixed rank at growing treewidth, a distinct phase resource, an
+advantage, CATVM custody, or a Small Wall crossing.
+
+### 6.125 Paired phase-basis holographic matchgate closure
+
+M125 tests growing treewidth with paired exact phase bases. For
+`p=zeta17^a`, the public bases
+
+```text
+T = [[1,1],[p,-p]]
+S = [[1/2,1/2],[p^-1/2,-p^-1/2]]
+```
+
+satisfy `T S^T = I`, so shared native edge indices close by exact identity.
+The compact native degree-four exact-one generators have nonzero components
+in both fermion parities. After paired-basis cancellation, the remaining core
+is the weighted planar perfect-matching problem and closes through a public
+Kasteleyn determinant.
+
+```text
+classification                   INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                     INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration     EXACT_ALGEBRAIC_RESTORATION
+transient determinant buffers    NO_RESTORATION_CLAIM
+source head                      ae36a130352ba92f4272858cc00bde13c6336b90
+hosted run                       NOT ESTABLISHED
+```
+
+Independent exact matching recursion reproduces both public families at
+`n=2,4,6`, including perfect-matching counts `2,36,6728`. A separate modular
+row-profile recurrence agrees for `F103/F137` at `n=2,4,6,8,10,12`; direct
+native Holant enumeration is confined to the bounded `n=2` control. Public
+face signing and reference-matching calibration do not inspect the answer.
+
+For even `N`, resident state uses `2N(N-1)+8` field cells. The determinant
+matrix has `N^2/2` rows and `N^4/4` cells; caller plus elimination copy and
+five named scalars use `N^4/2+5` transient cells. The accepted path uses
+`O(N^6)` field operations, with bit complexity and logical payload exclusions
+reported explicitly. The actual basis/weight/scalar carrier restores exactly
+and an unrelated `n=6` program reuses the same backing.
+
+M125 closes this growing-treewidth matchgate family without native signature
+tables or edge-assignment enumeration. It does not establish arbitrary planar
+Holant closure or a distinct phase resource because the public paired basis
+cancels to the identical compact classical Kasteleyn determinant.
+
+The selected successor is:
+
+```text
+RESIDENTLY_GENERATED_OR_COHERENCE_DEPENDENT_PHASE_BASIS_COUPLING_WITHOUT_A_PUBLIC_CLASSICAL_HOLOGRAPHIC_CANCELLATION_OR_A_MATCHED_NO_GO
+```
+
+The surviving obstruction is:
+
+```text
+THE_PUBLIC_PAIRED_PHASE_BASIS_CLOSES_THE_DECLARED_GROWING_TREEWIDTH_MATCHGATE_FAMILY_BUT_CANCELS_EXACTLY_TO_THE_IDENTICAL_COMPACT_CLASSICAL_KASTELEYN_DETERMINANT
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -4378,7 +4469,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_PLANAR_FREE_FERMION_TERMINAL_PFAFFIAN_PHASE_CLOSURE_FOR_DECLARED_ZERO_FIELD_F17_GRIDS_WITH_EXACT_SPARSE_DEFECT_SECTOR_GROWTH_RESTORATION_AND_REUSE
+BOUNDED_EXACT_PAIRED_ZETA17_BASIS_CLOSES_COMPACT_NATIVE_MIXED_PARITY_EXACT_ONE_GENERATORS_ON_GROWING_EVEN_PLANAR_GRIDS_BY_SHARED_EDGE_IDENTITY_AND_KASTELEYN_DETERMINANT_WITH_EXACT_RESTORATION_AND_REUSE
 ```
 
 Not established:
@@ -4462,6 +4553,12 @@ independent exact-number parity for the M123 dual-field n=5,...,8 structural run
 arbitrary matchgate or holographic closure from M123
 CATVM custody of the M123 direct-process carrier or projection buffers
 distinct phase resource or advantage from the M123 terminal Pfaffian closure
+general external-field compaction from the M124 two-row parity ledger
+fixed rank four beyond the M124 two-row four-state separator
+exact non-Gaussian classification beyond the M124 PRIMARY width-two witness
+arbitrary planar Holant or holographic closure from M125
+CATVM custody of the M124 or M125 direct-process carriers or transient buffers
+distinct phase resource or advantage from the M124 transfer or M125 determinant
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4537,7 +4634,16 @@ as a general lower bound. Keep the M120 general-field row transfer and the
 strongest admitted Pfaffian/covariance implementations in the comparison.
 Do not add larger zero-field grids or more sparse-defect fixtures unless they
 resolve this mechanism-level obstruction, and do not treat the evaluated
-baseline set as exhaustive.
+baseline set as exhaustive. M124 then removes explicit even-sector enumeration
+for the declared two-row family, but the fixed rank is exactly the four-state
+column separator and the strongest classical recurrence is identical. M125
+changes topology and signature geometry: paired exact phase bases close compact
+mixed-parity native generators on growing even planar grids, but the public
+bases cancel to the identical classical matchgate determinant. Continue from
+that cancellation with the smallest residently generated or
+coherence-dependent basis coupling that cannot be compiled away publicly, or
+establish a matched no-go. Do not repeat ladder widths, even grid sizes, or
+public paired-basis fixtures unless they test that obstruction directly.
 
 ## 10. Roadmap Maintenance
 

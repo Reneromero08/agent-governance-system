@@ -1,0 +1,68 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "ae36a130352ba92f4272858cc00bde13c6336b90",
+  "scientific_source_parent": "1c14ed8aa76b073e1de95afb9c550ab76bf3c2de",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "a3ef560e578877e88a24571f30eb0ee03e4ea5804cd485fce092ab4096d48653",
+  "reference_full_oracle_sha256": "1fe64b4faee4711aee8b3a089a51ef296612907fbe9a4be0ce7d30dc3891643e",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_paired_phase_basis_holographic_matchgate_closure.py",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_paired_phase_basis_holographic_matchgate_closure_oracle.py",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_paired_phase_basis_holographic_matchgate_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_paired_phase_basis_holographic_matchgate_closure.py": "32404802a5755645ce4e8c389037bed256f4151caa6500debbfe456c1835a74f",
+    "f17_paired_phase_basis_holographic_matchgate_closure_oracle.py": "ded409f49ea9b999531868a12e0f804fdb8ae0c74b522970fe7aa83cd7662b84",
+    "F17_PAIRED_PHASE_BASIS_HOLOGRAPHIC_MATCHGATE_CLOSURE_RESULTS.json": "a3ef560e578877e88a24571f30eb0ee03e4ea5804cd485fce092ab4096d48653",
+    "F17_PAIRED_PHASE_BASIS_HOLOGRAPHIC_MATCHGATE_CLOSURE_ORACLE_RESULTS.json": "1fe64b4faee4711aee8b3a089a51ef296612907fbe9a4be0ce7d30dc3891643e",
+    "F17_PAIRED_PHASE_BASIS_HOLOGRAPHIC_MATCHGATE_CLOSURE_INDEPENDENT_REVIEW.md": "c858ff39f75b708dda699b095f393cf5eb648b7d1ac1356628b6535c44580aed",
+    "qualify_f17_paired_phase_basis_holographic_matchgate_closure.sh": "f2d35ab274c3cddb03b4f719b538f1919ca3d31d7cdfb06f4a66406d79b38617"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_determinant_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "exact_q_zeta17_even_open_grid_widths": [2, 4, 6],
+    "dual_field_structural_widths": [2, 4, 6, 8, 10, 12],
+    "families": ["PRIMARY", "REUSE"],
+    "independent_methods": [
+      "MEMOIZED_EXACT_WEIGHTED_MATCHING_RECURSION",
+      "MODULAR_ROW_PROFILE_MATCHING_RECURRENCE",
+      "BOUNDED_N2_NATIVE_HOLANT_ENUMERATION"
+    ]
+  },
+  "resource_accounting": {
+    "resident_phase_field_cells": "2N_TIMES_N_MINUS_1_PLUS_8",
+    "kasteleyn_matrix_dimension": "N_SQUARED_OVER_2",
+    "kasteleyn_matrix_field_cells": "N_TO_THE_4_OVER_4",
+    "maximum_named_dense_work_field_cells": "N_TO_THE_4_OVER_2_PLUS_5",
+    "accepted_field_operations": "O_N_TO_THE_6_WITH_EXACT_BIT_COMPLEXITY_REPORTED_SEPARATELY",
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_baselines": [
+    "IDENTICAL_PAIRED_BASIS_COMPILATION_AND_KASTELEYN_DETERMINANT",
+    "INDEPENDENT_EXACT_WEIGHTED_MATCHING_RECURSION",
+    "INDEPENDENT_DUAL_FIELD_ROW_PROFILE_MATCHING_DP"
+  ],
+  "claim_ceiling": "EVEN_OPEN_SQUARE_GRIDS_ONLY_EXACT_Q_ZETA17_N2_N4_N6_DUAL_FIELD_STRUCTURE_N2_TO_N12_COMPACT_MIXED_PARITY_NATIVE_GENERATORS_SHARED_EDGE_IDENTITY_AND_MATCHGATE_DETERMINANT_DIRECT_PROCESS_SOFTWARE_ONLY",
+  "rejected_interpretations": [
+    "ARBITRARY_PLANAR_HOLANT_CLOSURE",
+    "GENERAL_HOLOGRAPHIC_RELATIONAL_COMPUTATION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

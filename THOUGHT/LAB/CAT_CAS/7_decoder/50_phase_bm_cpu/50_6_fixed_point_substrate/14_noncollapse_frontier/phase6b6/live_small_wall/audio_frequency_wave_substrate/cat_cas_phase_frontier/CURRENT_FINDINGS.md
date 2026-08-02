@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`8a2d459c3706a3ac1187ae876006c6c9af1a36ee`. The canonical per-milestone
+`ae36a130352ba92f4272858cc00bde13c6336b90`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -7266,4 +7266,83 @@ The surviving obstruction is:
 
 ```text
 ZERO_FIELD_FREE_FERMION_CLOSURE_IS_IDENTICAL_TO_COMPACT_CLASSICAL_GAUSSIAN_SOFTWARE_WHILE_TRUE_EXTERNAL_FIELDS_SPLIT_INTO_2_TO_THE_K_MINUS_1_EVEN_GAUSSIAN_SECTORS_AND_NO_PHASE_NATIVE_OPERATION_CURRENTLY_CLOSES_THEIR_SUM_WITHOUT_MOVING_THAT_GROWTH
+```
+
+## Exact shared phase-parity ledger closes only the two-row separator
+
+M124 replaces M123's even-sector enumeration on declared two-row open ladders
+with a public column-interleaved four-state exact recurrence.
+
+```text
+classification                 INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                   INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration   EXACT_ALGEBRAIC_RESTORATION
+transient recurrence frontier  NO_RESTORATION_CLAIM
+source head                    ae36a130352ba92f4272858cc00bde13c6336b90
+```
+
+Independent `Q(zeta17)` power-basis execution agrees for both public families
+at widths `1,2,4,8,16,32,64`; `F103/F137` structural parity agrees through
+128. Bounded independent assignment and occurrence-expanded oracles agree
+through width four. Grouped ordering grows to rank 16 at width four, while
+column interleaving holds the optimum observed maximum rank at four. The exact
+PRIMARY width-two native defect signature has a nonzero
+Grassmann--Pluecker delta; this does not classify other exact cases.
+
+The accepted path uses `10W-4` resident factor cells, four frontier cells, at
+most 19 named transient field cells for width greater than one, and `O(W)`
+field operations with bit complexity reported separately. It neither retains
+the `4^W` signature nor enumerates even sectors. Final-only projection, exact
+same-backing reversal, generation advancement, and unrelated width-16 restored
+reuse all pass without history or snapshot reload.
+
+The fixed rank is explained by the two-row four-state separator and is
+identical to the strongest compact classical transfer. No growing-treewidth
+closure, distinct phase resource, advantage, CATVM custody, or Small Wall
+crossing follows.
+
+## Paired phase bases close a growing planar matchgate family but cancel publicly
+
+M125 uses exact paired `zeta17` bases satisfying `T S^T = I`. Shared native
+edge indices therefore close by identity, while the compact native degree-four
+exact-one generators have nonzero components in both fermion parities. After
+the public basis cancellation, the core is a weighted planar perfect-matching
+problem evaluated by a Kasteleyn determinant.
+
+```text
+classification                   INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                     INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration     EXACT_ALGEBRAIC_RESTORATION
+transient determinant buffers    NO_RESTORATION_CLAIM
+source head                      ae36a130352ba92f4272858cc00bde13c6336b90
+```
+
+Independent exact weighted-matching recursion agrees for both families at
+`n=2,4,6`, reconstructing perfect-matching counts `2,36,6728`. A separate
+modular row-profile recurrence agrees for both fields through `n=12`. Direct
+native Holant enumeration is confined to the bounded `n=2` control. Public
+Kasteleyn signing and reference-matching sign calibration do not inspect the
+answer.
+
+Resident state is `2N(N-1)+8` field cells. The `N^2/2` determinant has
+`N^4/4` cells; caller plus elimination copy and five named scalars use
+`N^4/2+5` named transient cells. Accepted work is `O(N^6)` field operations,
+with exact bit complexity and logical-payload exclusions stated separately.
+Final-only projection, exact same-backing reversal, generation advancement,
+and unrelated `n=6` restored reuse pass without history or snapshot reload.
+
+This is a bounded growing-treewidth holographic matchgate closure, not general
+Holant closure or a distinct phase resource. The strongest compact classical
+method performs the identical public paired-basis compilation and determinant.
+
+The selected successor is:
+
+```text
+RESIDENTLY_GENERATED_OR_COHERENCE_DEPENDENT_PHASE_BASIS_COUPLING_WITHOUT_A_PUBLIC_CLASSICAL_HOLOGRAPHIC_CANCELLATION_OR_A_MATCHED_NO_GO
+```
+
+The obstruction is:
+
+```text
+THE_PUBLIC_PAIRED_PHASE_BASIS_CLOSES_THE_DECLARED_GROWING_TREEWIDTH_MATCHGATE_FAMILY_BUT_CANCELS_EXACTLY_TO_THE_IDENTICAL_COMPACT_CLASSICAL_KASTELEYN_DETERMINANT
 ```
