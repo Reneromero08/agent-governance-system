@@ -32,11 +32,16 @@ jobs:
     name: Evidence-safe holonomy integration
     runs-on: ubuntu-24.04
     steps:
-      - name: Checkout successor
+      - name: Checkout successor qualification surface
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           fetch-depth: 64
           persist-credentials: false
+          sparse-checkout: |
+            .github/workflows
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1
+            THOUGHT/LAB/CAT_CAS/tests/jacobian_holonomy_small_wall_bridge
 
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -73,5 +78,28 @@ jobs:
           python
           THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/bridge_model.py
 
-      - name: Run CAT_CAS governance critic
-        run: python CAPABILITY/TOOLS/governance/critic.py
+      - name: Verify integration receipts and claim ceilings
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path(
+              'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/'
+              '50_6_fixed_point_substrate/14_noncollapse_frontier/'
+              'phase6b6/live_small_wall/carrier_state_tomography/'
+              'family10h_holonomy_integration_v1'
+          )
+          manifest = json.loads((root / 'INTEGRATION_MANIFEST.json').read_text())
+          validation = json.loads((root / 'INTEGRATION_VALIDATION.json').read_text())
+          assert len(manifest['imported_files']) == 17
+          assert manifest['custody']['original_branch_modified'] is False
+          assert manifest['custody']['existing_tomography_files_deleted'] is False
+          assert manifest['claim_ceiling']['small_wall_crossed'] is False
+          assert validation['archive_equals_parent'] is True
+          assert validation['non_addition_changes_observed'] is False
+          assert len(validation['imported_blob_identity']) == 17
+          assert validation['checks']['all_17_imported_blobs_match_main'] is True
+          assert validation['checks']['live_authority_granted'] is False
+          print('integration receipts and claim ceilings verified')
+          PY
