@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0.0",
+  "design_id": "family10h_holonomy_i2b_pair_design_v1",
+  "mode": "read_only_evidence_attack_plus_synthetic_geometry_design",
+  "source_blobs": {
+    "coherence_operator_checkpoint": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/F10_COHERENCE_OPERATOR_CHECKPOINT_20260712.json",
+      "blob_sha": "bbe51358ed096a5417f74f55cef809b84b8731b2"
+    },
+    "path_rw_checkpoint": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/F10_PATH_RW_OBSERVE_CHECKPOINT_20260712.json",
+      "blob_sha": "e15a5070a72efc1fcc4df3f874c49c4290d436f6"
+    },
+    "route_operator_checkpoint": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/F10_ROUTE_OPERATOR_COMPARISON_CHECKPOINT_20260712.json",
+      "blob_sha": "d65c08a2fbb18bfb2c329abf75677cd8e166d186"
+    },
+    "route_state_checkpoint": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/F10_ROUTE_STATE_PILOT_CHECKPOINT_20260712.json",
+      "blob_sha": "ca9331333560f258f228615f000707ba9b95d242"
+    },
+    "i2a_runtime_interface": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1/I2A_RUNTIME_INTERFACE.json",
+      "blob_sha": "cb79071c5cf58559a76dec766a85bc1ebf6fe946"
+    }
+  },
+  "attacked_pair_families": [
+    {
+      "id": "remote_read_vs_remote_store_rectangle",
+      "status": "REJECTED_BY_RETAINED_PATH_PILOT",
+      "reason": "forward and reverse normalized areas were both positive; sign reversal and small-control gates failed",
+      "retained_values": {
+        "forward_area": 3.149513983986e-09,
+        "reverse_area": 3.0244653157e-09,
+        "sign_reversal": false,
+        "controls_small": false
+      }
+    },
+    {
+      "id": "route45_vs_route23_as_generators",
+      "status": "REJECTED_AS_ROUTE_INSTANCES_NOT_DISTINCT_MAPS",
+      "reason": "remote same-value store was route-stable on both matched routes; route reassignment did not produce a route-selective operator"
+    },
+    {
+      "id": "simple_route_state_axis",
+      "status": "REJECTED_BY_RETAINED_ROUTE_STATE_PILOT",
+      "reason": "direct-route movement failed while one swapped-route distance moved under route/control asymmetry",
+      "retained_values": {
+        "direct_route_moved": false,
+        "swapped_route_moved": true,
+        "route_state_response": false
+      }
+    },
+    {
+      "id": "same_core_store_as_inverse",
+      "status": "REJECTED_AS_NAME_ONLY_INVERSE",
+      "reason": "same-core same-value store was a near-identity control, not an observed reverse ownership-transfer map and not qualified on left and right inverse laws"
+    },
+    {
+      "id": "flush_or_reprepare_as_inverse",
+      "status": "REJECTED_AS_DESTRUCTIVE",
+      "reason": "flush, prefault, and relation re-preparation erase or replace the state and cannot qualify as transport inverses"
+    },
+    {
+      "id": "disjoint_remote_store_line_sets",
+      "status": "REJECTED_BY_SYNTHETIC_LOCALITY_KILL",
+      "reason": "independent disjoint line sets commute in the declared local ownership model and cannot support a nontrivial commutator"
+    },
+    {
+      "id": "identical_remote_store_instances",
+      "status": "REJECTED_AS_ONE_PARAMETER_FAMILY",
+      "reason": "changing labels or budgets on the same source core, destination core, route, and line set does not establish two independent generators"
+    }
+  ],
+  "design_only_candidate": {
+    "id": "multi_destination_partial_overlap_ownership_pair",
+    "physical_support_status": "NOT_ESTABLISHED",
+    "topology_assignment_frozen": false,
+    "carrier_model": "one persistent experiment-owned carrier with one declared home/reclaim core and two distinct remote receiver cores",
+    "operators": {
+      "A": {
+        "action": "remote same-value ownership-intent stores from remote_core_A onto line_set_A",
+        "inverse_candidate": "same-value reclaim stores from home_core onto line_set_A",
+        "inverse_established": false
+      },
+      "B": {
+        "action": "remote same-value ownership-intent stores from remote_core_B onto line_set_B",
+        "inverse_candidate": "same-value reclaim stores from home_core onto line_set_B",
+        "inverse_established": false
+      }
+    },
+    "line_set_law": {
+      "same_cardinality": true,
+      "partial_overlap_required": true,
+      "disjoint_forbidden": true,
+      "identical_forbidden": true,
+      "synthetic_fixture": {
+        "line_set_A": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+        "line_set_B": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "intersection_size": 8,
+        "fixture_is_physical_schedule": false
+      }
+    },
+    "required_before_h1_or_h2": [
+      "topology assignment and executor cores prospectively frozen",
+      "A and B each independently distinguishable from identity and matched read controls",
+      "same persistent carrier measured after every primitive",
+      "explicit directional backend receipts for every ownership transfer",
+      "A inverse and B inverse each pass both left and right inverse laws on held-out starting states",
+      "wrong core, wrong line set, wrong direction, wrong amplitude, and wrong order controls fail",
+      "source cannot inherit challenge word, seed, or operator schedule",
+      "logical-byte equality is separated from physical state equivalence",
+      "no destructive flush or re-preparation enters an inverse word"
+    ],
+    "known_risks": [
+      "ownership stores may be idempotent rather than invertible",
+      "home-core reclaim may be a new forward operation rather than an inverse",
+      "partial-overlap effects may reduce to first-touch or per-line occupancy",
+      "different remote cores may expose route asymmetry rather than noncommuting transport",
+      "endpoint PMU response may not identify the transported carrier state"
+    ]
+  },
+  "alternate_design_track": {
+    "id": "phase_or_timing_native_second_generator",
+    "status": "UNRESOLVED_OUTSIDE_CURRENT_ACCEPTED_OPERATOR_EVIDENCE",
+    "reason": "retained route-state and read/store axes failed; a second generator may require a phase-native or timing-coupled state coordinate, but none is presently frozen"
+  },
+  "synthetic_admission": {
+    "pair_geometry_fixture_valid": true,
+    "physical_generator_A_established": false,
+    "physical_generator_B_established": false,
+    "inverse_A_established": false,
+    "inverse_B_established": false,
+    "h1_pair_established": false,
+    "h2_inverse_laws_established": false
+  },
+  "i2b_decision": {
+    "result": "I2B_SECOND_GENERATOR_AND_INVERSE_DESIGN_COMPLETE__NO_PHYSICALLY_SUPPORTED_PAIR",
+    "design_grammar_freeze_allowed": true,
+    "physical_pair_freeze_allowed": false,
+    "next_gate": "I2C_SYNTHETIC_BIDIRECTIONAL_OWNERSHIP_MODEL",
+    "live_execution_authorized": false
+  },
+  "claim_ceiling": [
+    "DESIGN_GRAMMAR_ONLY",
+    "SECOND_GENERATOR_NOT_ESTABLISHED",
+    "INVERSE_NOT_ESTABLISHED",
+    "FAMILY10H_TRANSPORT_OPERATOR_NOT_ESTABLISHED",
+    "FAMILY10H_HOLONOMY_NOT_ESTABLISHED",
+    "SMALL_WALL_NOT_CROSSED",
+    "NO_LIVE_EXECUTION_AUTHORIZED"
+  ]
+}
