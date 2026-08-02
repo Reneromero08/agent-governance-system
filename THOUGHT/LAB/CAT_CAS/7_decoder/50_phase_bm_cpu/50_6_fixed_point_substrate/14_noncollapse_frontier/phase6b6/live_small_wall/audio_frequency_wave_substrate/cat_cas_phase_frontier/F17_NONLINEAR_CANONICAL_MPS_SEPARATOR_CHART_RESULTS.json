@@ -1,0 +1,4007 @@
+{
+  "accepted_path_dense_two_to_the_n_row_vector_materialized": false,
+  "canonicalization_can_require_two_to_the_n_scratch_cells_at_rank_saturation": true,
+  "catvm_custody_claimed": false,
+  "claim": "BOUNDED_EXACT_NONLINEAR_PROJECTIVE_AND_CANONICAL_TENSOR_TRAIN_SEPARATOR_CHART_DIAGNOSTIC_FINDS_NO_COMPACTION_ON_GENERIC_F17_GRID_MESSAGES_WHILE_EXACT_SMALL_WIDTH_TRANSACTIONS_RESTORE_AND_REUSE",
+  "claim_ceiling": "EXACT_Q_ZETA17_N2_N3_N4_AND_DUAL_FIELD_STRUCTURAL_N2_THROUGH_N8_CANONICAL_TT_CHART_DIAGNOSTIC_ONLY",
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "computational_advantage_established": false,
+  "controls": {
+    "accepted_transaction_intermediate_projection_calls_absent": true,
+    "controller_backend_boundary_claimed": false,
+    "missing_inverse_detected": true,
+    "null_carrier_rejected": true,
+    "prospectively_noncommuting_reordered_inverse_detected": true,
+    "snapshot_command_absent": true,
+    "wrong_chart_metadata_detected": true,
+    "wrong_inverse_detected": true,
+    "zero_phase_weight_rejected": true
+  },
+  "distinct_phase_resource_established": false,
+  "dual_field_structural_transactions": [
+    {
+      "algebra": "F103",
+      "boundary": 28,
+      "boundary_sha256": "59e19706d51d39f66711c2653cd7eb1291c94d9b55eb14bda74ce4dc636d015a",
+      "descriptor_sha256": "62cf0236d4bd00cd1277e46c597aa8e2e98e258bf42564547407406f951670ee",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "451f5b06d562b1944efd9cb88e907bf2451e0dcefa656aa51c38f89544dc271c",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 2,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 1
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "e9f10d5e16091b707652122c0a10e5737eac4ef646f12c966955629ac8ed95d1",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 171,
+        "canonicalizations": 4,
+        "inversions": 51,
+        "local_updates": 4,
+        "maximum_chart_metadata_bits": 2,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 4,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 8,
+        "maximum_resident_payload_bits": 58,
+        "maximum_scratch_field_cells": 12,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 84,
+        "multiplications": 365,
+        "pair_updates": 4,
+        "projection_field_cells": 3,
+        "rref_pivots": 49,
+        "subtractions": 42,
+        "unary_updates": 8,
+        "zero_tests": 176
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 24,
+      "boundary_sha256": "c2356069e9d1e79ca924378153cfbbfb4d4416b1f99d41a2940bfdb66c5319db",
+      "descriptor_sha256": "66fae04d62f6987d0f77c9a3f18567fe404bd64ffdf7f5c4ccad0d25856e78b5",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "7beafab784a3be03d7278c687b7d74d2080b54e276b860a8b6459352e4d194fd",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 2,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 1
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "e9f10d5e16091b707652122c0a10e5737eac4ef646f12c966955629ac8ed95d1",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 171,
+        "canonicalizations": 4,
+        "inversions": 51,
+        "local_updates": 4,
+        "maximum_chart_metadata_bits": 2,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 4,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 8,
+        "maximum_resident_payload_bits": 58,
+        "maximum_scratch_field_cells": 12,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 84,
+        "multiplications": 365,
+        "pair_updates": 4,
+        "projection_field_cells": 3,
+        "rref_pivots": 49,
+        "subtractions": 42,
+        "unary_updates": 8,
+        "zero_tests": 176
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 8,
+      "boundary_sha256": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3",
+      "descriptor_sha256": "e8adbc47d3a6bf14c3a6f27974c09b837575563b4f173ec81103e5908abb08db",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "a51fd41f12177a5f400883c57a9e2e23268920b4bf5abf659f81b4730e38111b",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 3,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 2
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "2b49bb616312c3d58cd58198ca4edc4364cb8c7a0fc4b307a4d987a43e24e463",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 754,
+        "canonicalizations": 6,
+        "inversions": 160,
+        "local_updates": 12,
+        "maximum_chart_metadata_bits": 4,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 8,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 16,
+        "maximum_resident_payload_bits": 116,
+        "maximum_scratch_field_cells": 20,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 140,
+        "multiplications": 1598,
+        "pair_updates": 12,
+        "projection_field_cells": 4,
+        "rref_pivots": 154,
+        "subtractions": 220,
+        "unary_updates": 18,
+        "zero_tests": 599
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 22,
+      "boundary_sha256": "785f3ec7eb32f30b90cd0fcf3657d388b5ff4297f2f9716ff66e9b69c05ddd09",
+      "descriptor_sha256": "c8ed0303113dfd1cdeaac044856a26b10c090df99d24e18c888f48ea953047fa",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "1aa7ca82ddbf03a7b1375623556f620e6ec2d6cc7151bed7fa0a7c420a6dc899",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 3,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 2
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "2b49bb616312c3d58cd58198ca4edc4364cb8c7a0fc4b307a4d987a43e24e463",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 754,
+        "canonicalizations": 6,
+        "inversions": 160,
+        "local_updates": 12,
+        "maximum_chart_metadata_bits": 4,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 8,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 16,
+        "maximum_resident_payload_bits": 116,
+        "maximum_scratch_field_cells": 20,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 140,
+        "multiplications": 1594,
+        "pair_updates": 12,
+        "projection_field_cells": 4,
+        "rref_pivots": 154,
+        "subtractions": 216,
+        "unary_updates": 18,
+        "zero_tests": 598
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 37,
+      "boundary_sha256": "7a61b53701befdae0eeeffaecc73f14e20b537bb0f8b91ad7c2936dc63562b25",
+      "descriptor_sha256": "ee322281236a8c5aa1659e0f348f9beae1397d396dd17b69c587f5308e204db8",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "127ea4ffa93dde6d6e4ca6d8cb642cbdd230168e2c561f6461fc458b1b6c6fc9",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 4,
+      "n": 4,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 6,
+          "effective_chart_field_coordinates": 12,
+          "ranks": [
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 24,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 3
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "7105ab3ea4c589588bcff1caac6204dfaa2d9cc3f305ca09ec5baee957ca0208",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 3457,
+        "canonicalizations": 8,
+        "inversions": 397,
+        "local_updates": 24,
+        "maximum_chart_metadata_bits": 10,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 16,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 40,
+        "maximum_resident_payload_bits": 290,
+        "maximum_scratch_field_cells": 48,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 336,
+        "multiplications": 6857,
+        "pair_updates": 24,
+        "projection_field_cells": 6,
+        "rref_pivots": 385,
+        "subtractions": 1222,
+        "unary_updates": 32,
+        "zero_tests": 1889
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 16,
+      "boundary_sha256": "b17ef6d19c7a5b1ee83b907c595526dcb1eb06db8227d650d5dda0a9f4ce8cd9",
+      "descriptor_sha256": "bab49ebd544511e164349e23f6108d97de0a770196dbfbfd6f8578b1eafc2b4e",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "ea5d2fb08261c81b67ad7a282b5c66fe11f40e1e3e22e7a5c14a591f2810dee9",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 4,
+      "n": 4,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 6,
+          "effective_chart_field_coordinates": 12,
+          "ranks": [
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 24,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 3
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "7105ab3ea4c589588bcff1caac6204dfaa2d9cc3f305ca09ec5baee957ca0208",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 3457,
+        "canonicalizations": 8,
+        "inversions": 397,
+        "local_updates": 24,
+        "maximum_chart_metadata_bits": 10,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 16,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 40,
+        "maximum_resident_payload_bits": 290,
+        "maximum_scratch_field_cells": 48,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 336,
+        "multiplications": 6857,
+        "pair_updates": 24,
+        "projection_field_cells": 6,
+        "rref_pivots": 385,
+        "subtractions": 1222,
+        "unary_updates": 32,
+        "zero_tests": 1889
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 100,
+      "boundary_sha256": "ad57366865126e55649ecb23ae1d48887544976efea46a48eb5d85a6eeb4d306",
+      "descriptor_sha256": "d211e6d01d0415aa96a76da24b2efdc7f533490c810ef568847142e347750726",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "63e744c90816605a3d801a94b90e58d48c0edcf580f84aa69420af9745ee6377",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 4,
+      "n": 5,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 8,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 32,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 17,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 4
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "4a8fcbb96eb52cfbd87f7650fc8f07359012470456526dc4a20d89aca335e273",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 9656,
+        "canonicalizations": 10,
+        "inversions": 748,
+        "local_updates": 40,
+        "maximum_chart_metadata_bits": 17,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 32,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 72,
+        "maximum_resident_payload_bits": 521,
+        "maximum_scratch_field_cells": 80,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 560,
+        "multiplications": 18602,
+        "pair_updates": 40,
+        "projection_field_cells": 8,
+        "rref_pivots": 728,
+        "subtractions": 3884,
+        "unary_updates": 50,
+        "zero_tests": 4067
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 34,
+      "boundary_sha256": "86e50149658661312a9e0b35558d84f6c6d3da797f552a9657fe0558ca40cdef",
+      "descriptor_sha256": "248637ed6d56299f26b4e848e0516f288245c191a810a1b6d236facc5470da7e",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "16fee904680513147641f724314128b00ba5e3208200c216d5305578dbf24daf",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 4,
+      "n": 5,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 8,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 32,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 4
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "4a8fcbb96eb52cfbd87f7650fc8f07359012470456526dc4a20d89aca335e273",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 9656,
+        "canonicalizations": 10,
+        "inversions": 748,
+        "local_updates": 40,
+        "maximum_chart_metadata_bits": 16,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 32,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 72,
+        "maximum_resident_payload_bits": 520,
+        "maximum_scratch_field_cells": 80,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 560,
+        "multiplications": 18650,
+        "pair_updates": 40,
+        "projection_field_cells": 8,
+        "rref_pivots": 728,
+        "subtractions": 3932,
+        "unary_updates": 50,
+        "zero_tests": 4055
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 21,
+      "boundary_sha256": "6f4b6612125fb3a0daecd2799dfd6c9c299424fd920f9b308110a2c1fbd8f443",
+      "descriptor_sha256": "0a51a2a1d6051dc1c6074be94866783bed2713ff96bd59cfccab02175bd96196",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "0bd58283f8f775cec71b75ce2e00b5a7ca2ee631939cc323a15ac0a83987bcfe",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 8,
+      "n": 6,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 20,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 22,
+          "effective_chart_field_coordinates": 48,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 104,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 5
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "9ff5b840a170c7eac29a33f573545674dfcb5ac1cb2d24abbfa2d07c6609369d",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 37359,
+        "canonicalizations": 12,
+        "inversions": 1409,
+        "local_updates": 60,
+        "maximum_chart_metadata_bits": 34,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 64,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 168,
+        "maximum_resident_payload_bits": 1210,
+        "maximum_scratch_field_cells": 192,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 1344,
+        "multiplications": 67661,
+        "pair_updates": 60,
+        "projection_field_cells": 12,
+        "rref_pivots": 1379,
+        "subtractions": 16786,
+        "unary_updates": 72,
+        "zero_tests": 10353
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 80,
+      "boundary_sha256": "48449a14a4ff7d79bb7a1b6f3d488eba397c36ef25634c111b49baf362511afc",
+      "descriptor_sha256": "7b1721f28980e88826436a2343987796f8d1a13156692a682c1ad3d8dd5bf3ab",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "8f6f1be9b3f689c51309976661a1aba2d78c8127c3d3448c136e852dfef7af5d",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 8,
+      "n": 6,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 20,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 22,
+          "effective_chart_field_coordinates": 48,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 104,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 5
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "9ff5b840a170c7eac29a33f573545674dfcb5ac1cb2d24abbfa2d07c6609369d",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 37359,
+        "canonicalizations": 12,
+        "inversions": 1409,
+        "local_updates": 60,
+        "maximum_chart_metadata_bits": 34,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 64,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 168,
+        "maximum_resident_payload_bits": 1210,
+        "maximum_scratch_field_cells": 192,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 1344,
+        "multiplications": 67627,
+        "pair_updates": 60,
+        "projection_field_cells": 12,
+        "rref_pivots": 1379,
+        "subtractions": 16752,
+        "unary_updates": 72,
+        "zero_tests": 10355
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 44,
+      "boundary_sha256": "71ee45a3c0db9a9865f7313dd3372cf60dca6479d46261f3542eb9346e4a04d6",
+      "descriptor_sha256": "0a4de35c51dd6bec4d02008f65e9c58ed7953e0399b3e41e91786a52d70db80b",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "f3c2c0606493e6d7c2781b3b5f10e4291560231178a7eb70039457b79ed3d53e",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 8,
+      "n": 7,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 12,
+          "effective_chart_field_coordinates": 24,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 48,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 28,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 136,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 5
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 6
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "c20c57195d53bc9737e3a7b7dfd66576a2ca7de85b7b7dfd0efb369d0ebbfd5a",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 95814,
+        "canonicalizations": 14,
+        "inversions": 2296,
+        "local_updates": 84,
+        "maximum_chart_metadata_bits": 52,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 128,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 296,
+        "maximum_resident_payload_bits": 2124,
+        "maximum_scratch_field_cells": 320,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 2240,
+        "multiplications": 170942,
+        "pair_updates": 84,
+        "projection_field_cells": 16,
+        "rref_pivots": 2254,
+        "subtractions": 47364,
+        "unary_updates": 98,
+        "zero_tests": 19998
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 63,
+      "boundary_sha256": "da4ea2a5506f2693eae190d9360a1f31793c98a1adade51d93533a6f520ace1c",
+      "descriptor_sha256": "2b3941c02305e2f59c991fefc986bfbc3369ef1e87c7b678cfa4c56ce02096c2",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "7057f1bde92621622a6096abd7405f966a254db49ef2b704e8664c96894dc1fe",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 8,
+      "n": 7,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 12,
+          "effective_chart_field_coordinates": 24,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 48,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 28,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 136,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 5
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 6
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "c20c57195d53bc9737e3a7b7dfd66576a2ca7de85b7b7dfd0efb369d0ebbfd5a",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 95814,
+        "canonicalizations": 14,
+        "inversions": 2296,
+        "local_updates": 84,
+        "maximum_chart_metadata_bits": 52,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 128,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 296,
+        "maximum_resident_payload_bits": 2124,
+        "maximum_scratch_field_cells": 320,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 2240,
+        "multiplications": 170994,
+        "pair_updates": 84,
+        "projection_field_cells": 16,
+        "rref_pivots": 2254,
+        "subtractions": 47416,
+        "unary_updates": 98,
+        "zero_tests": 20001
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 8,
+      "boundary_sha256": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3",
+      "descriptor_sha256": "1cf414b059f788aecdbaad8e862bf4b33ea16754f325c34d93422cbbf9324893",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "479063ca5ebd3b17a7c5ba81554303b0e896565591a78a4ba84a93623b996bc6",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 16,
+      "n": 8,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 14,
+          "effective_chart_field_coordinates": 28,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 56,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 80,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 70,
+          "effective_chart_field_coordinates": 192,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 424,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 5
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 6
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 7
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "166bdebae334e2acaa3d27d37747b0bb8b8af69a3fe33a27e3c4ea202e22c50b",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 363933,
+        "canonicalizations": 16,
+        "inversions": 3913,
+        "local_updates": 112,
+        "maximum_chart_metadata_bits": 102,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 256,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 680,
+        "maximum_resident_payload_bits": 4862,
+        "maximum_scratch_field_cells": 768,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 5376,
+        "multiplications": 618833,
+        "pair_updates": 112,
+        "projection_field_cells": 24,
+        "rref_pivots": 3857,
+        "subtractions": 185622,
+        "unary_updates": 128,
+        "zero_tests": 49140
+      }
+    },
+    {
+      "algebra": "F103",
+      "boundary": 57,
+      "boundary_sha256": "c837649cce43f2729138e72cc315207057ac82599a59be72765a477f22d14a54",
+      "descriptor_sha256": "efdd2205b43d6a1538337b9444d08c679792d1e95590accd7841d3dff5de7d65",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "9ba317cd0aaf5a46da2b89a8c8bef31c7d08ae10e2b05ee0842609a63cedb1a5",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 16,
+      "n": 8,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 14,
+          "effective_chart_field_coordinates": 28,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 56,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 36,
+          "effective_chart_field_coordinates": 80,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 70,
+          "effective_chart_field_coordinates": 192,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 424,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 5
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 6
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 7
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "166bdebae334e2acaa3d27d37747b0bb8b8af69a3fe33a27e3c4ea202e22c50b",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 363933,
+        "canonicalizations": 16,
+        "inversions": 3913,
+        "local_updates": 112,
+        "maximum_chart_metadata_bits": 102,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 256,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_raw_core_field_cells": 680,
+        "maximum_resident_payload_bits": 4862,
+        "maximum_scratch_field_cells": 768,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 5376,
+        "multiplications": 618613,
+        "pair_updates": 112,
+        "projection_field_cells": 24,
+        "rref_pivots": 3857,
+        "subtractions": 185402,
+        "unary_updates": 128,
+        "zero_tests": 49200
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 9,
+      "boundary_sha256": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7",
+      "descriptor_sha256": "62cf0236d4bd00cd1277e46c597aa8e2e98e258bf42564547407406f951670ee",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "53fa15651fadf20adcdd382eacb72dd2cf589a55cd9df31f751f64ab0571c5cc",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 2,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 1
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "e9f10d5e16091b707652122c0a10e5737eac4ef646f12c966955629ac8ed95d1",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 171,
+        "canonicalizations": 4,
+        "inversions": 51,
+        "local_updates": 4,
+        "maximum_chart_metadata_bits": 2,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 4,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 8,
+        "maximum_resident_payload_bits": 66,
+        "maximum_scratch_field_cells": 12,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 96,
+        "multiplications": 365,
+        "pair_updates": 4,
+        "projection_field_cells": 3,
+        "rref_pivots": 49,
+        "subtractions": 42,
+        "unary_updates": 8,
+        "zero_tests": 176
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 134,
+      "boundary_sha256": "5d389f5e2e34c6b0bad96581c22cee0be36dcf627cd73af4d4cccacd9ef40cc3",
+      "descriptor_sha256": "66fae04d62f6987d0f77c9a3f18567fe404bd64ffdf7f5c4ccad0d25856e78b5",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "d7757a6c900b1c57a3ffad3b843927b706e8c352ca52a630b3fc7bfed66cdc4d",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 2,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 1
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "e9f10d5e16091b707652122c0a10e5737eac4ef646f12c966955629ac8ed95d1",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 171,
+        "canonicalizations": 4,
+        "inversions": 51,
+        "local_updates": 4,
+        "maximum_chart_metadata_bits": 2,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 4,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 8,
+        "maximum_resident_payload_bits": 66,
+        "maximum_scratch_field_cells": 12,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 96,
+        "multiplications": 365,
+        "pair_updates": 4,
+        "projection_field_cells": 3,
+        "rref_pivots": 49,
+        "subtractions": 42,
+        "unary_updates": 8,
+        "zero_tests": 176
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 106,
+      "boundary_sha256": "482d9673cfee5de391f97fde4d1c84f9f8d6f2cf0784fcffb958b4032de7236c",
+      "descriptor_sha256": "e8adbc47d3a6bf14c3a6f27974c09b837575563b4f173ec81103e5908abb08db",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "9028f6c7d56a87de157859c81116fdf69308a48ccd886bfd89a61f34cb9b93ab",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 3,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 2
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "2b49bb616312c3d58cd58198ca4edc4364cb8c7a0fc4b307a4d987a43e24e463",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 754,
+        "canonicalizations": 6,
+        "inversions": 160,
+        "local_updates": 12,
+        "maximum_chart_metadata_bits": 4,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 8,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 16,
+        "maximum_resident_payload_bits": 132,
+        "maximum_scratch_field_cells": 20,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 160,
+        "multiplications": 1600,
+        "pair_updates": 12,
+        "projection_field_cells": 4,
+        "rref_pivots": 154,
+        "subtractions": 222,
+        "unary_updates": 18,
+        "zero_tests": 598
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 133,
+      "boundary_sha256": "d2f483672c0239f6d7dd3c9ecee6deacbcd59185855625902a8b1c1a3bd67440",
+      "descriptor_sha256": "c8ed0303113dfd1cdeaac044856a26b10c090df99d24e18c888f48ea953047fa",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "41b30f03fa1ce6447b15c84feb013901c2dd1f3fb6c2f9e84ed3ca7bd18a3f05",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 3,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 2
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "2b49bb616312c3d58cd58198ca4edc4364cb8c7a0fc4b307a4d987a43e24e463",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 754,
+        "canonicalizations": 6,
+        "inversions": 160,
+        "local_updates": 12,
+        "maximum_chart_metadata_bits": 4,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 8,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 16,
+        "maximum_resident_payload_bits": 132,
+        "maximum_scratch_field_cells": 20,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 160,
+        "multiplications": 1600,
+        "pair_updates": 12,
+        "projection_field_cells": 4,
+        "rref_pivots": 154,
+        "subtractions": 222,
+        "unary_updates": 18,
+        "zero_tests": 598
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 14,
+      "boundary_sha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+      "descriptor_sha256": "ee322281236a8c5aa1659e0f348f9beae1397d396dd17b69c587f5308e204db8",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "a654b33175105e016ac4309607893f09ea67979af2d4c31bacda25a0a82daf3d",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 4,
+      "n": 4,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 6,
+          "effective_chart_field_coordinates": 12,
+          "ranks": [
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 24,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 3
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "7105ab3ea4c589588bcff1caac6204dfaa2d9cc3f305ca09ec5baee957ca0208",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 3457,
+        "canonicalizations": 8,
+        "inversions": 397,
+        "local_updates": 24,
+        "maximum_chart_metadata_bits": 10,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 16,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 40,
+        "maximum_resident_payload_bits": 330,
+        "maximum_scratch_field_cells": 48,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 384,
+        "multiplications": 6821,
+        "pair_updates": 24,
+        "projection_field_cells": 6,
+        "rref_pivots": 385,
+        "subtractions": 1186,
+        "unary_updates": 32,
+        "zero_tests": 1889
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 64,
+      "boundary_sha256": "a68b412c4282555f15546cf6e1fc42893b7e07f271557ceb021821098dd66c1b",
+      "descriptor_sha256": "bab49ebd544511e164349e23f6108d97de0a770196dbfbfd6f8578b1eafc2b4e",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "b02a78205a78cb8e3a345ce2284d15835a9f0fd4ae5330f9fdf22750577b1d31",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 4,
+      "n": 4,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 6,
+          "effective_chart_field_coordinates": 12,
+          "ranks": [
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 24,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 3
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "7105ab3ea4c589588bcff1caac6204dfaa2d9cc3f305ca09ec5baee957ca0208",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 3457,
+        "canonicalizations": 8,
+        "inversions": 397,
+        "local_updates": 24,
+        "maximum_chart_metadata_bits": 10,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 16,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 40,
+        "maximum_resident_payload_bits": 330,
+        "maximum_scratch_field_cells": 48,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 384,
+        "multiplications": 6865,
+        "pair_updates": 24,
+        "projection_field_cells": 6,
+        "rref_pivots": 385,
+        "subtractions": 1230,
+        "unary_updates": 32,
+        "zero_tests": 1889
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 128,
+      "boundary_sha256": "2747b7c718564ba5f066f0523b03e17f6a496b06851333d2d59ab6d863225848",
+      "descriptor_sha256": "d211e6d01d0415aa96a76da24b2efdc7f533490c810ef568847142e347750726",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "b6defd808248e7dcb2d11d6e90d5aae076a5bb8fbfb220d78d08df74aec6055a",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 4,
+      "n": 5,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 8,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 32,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 4
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "4a8fcbb96eb52cfbd87f7650fc8f07359012470456526dc4a20d89aca335e273",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 9656,
+        "canonicalizations": 10,
+        "inversions": 748,
+        "local_updates": 40,
+        "maximum_chart_metadata_bits": 16,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 32,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 72,
+        "maximum_resident_payload_bits": 592,
+        "maximum_scratch_field_cells": 80,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 640,
+        "multiplications": 18590,
+        "pair_updates": 40,
+        "projection_field_cells": 8,
+        "rref_pivots": 728,
+        "subtractions": 3872,
+        "unary_updates": 50,
+        "zero_tests": 4058
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 126,
+      "boundary_sha256": "65a699905c02619370bcf9207f5a477c3d67130ca71ec6f750e07fe8d510b084",
+      "descriptor_sha256": "248637ed6d56299f26b4e848e0516f288245c191a810a1b6d236facc5470da7e",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "9632ba954e346991a345d33a3c7988106a70470a0b1c2407a1064e181a18c997",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 4,
+      "n": 5,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 8,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 32,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 16,
+          "effective_chart_field_coordinates": 32,
+          "ranks": [
+            2,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 72,
+          "row": 4
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "4a8fcbb96eb52cfbd87f7650fc8f07359012470456526dc4a20d89aca335e273",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 9656,
+        "canonicalizations": 10,
+        "inversions": 748,
+        "local_updates": 40,
+        "maximum_chart_metadata_bits": 16,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 32,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 72,
+        "maximum_resident_payload_bits": 592,
+        "maximum_scratch_field_cells": 80,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 640,
+        "multiplications": 18654,
+        "pair_updates": 40,
+        "projection_field_cells": 8,
+        "rref_pivots": 728,
+        "subtractions": 3936,
+        "unary_updates": 50,
+        "zero_tests": 4060
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 45,
+      "boundary_sha256": "811786ad1ae74adfdd20dd0372abaaebc6246e343aebd01da0bfc4c02bf0106c",
+      "descriptor_sha256": "0a51a2a1d6051dc1c6074be94866783bed2713ff96bd59cfccab02175bd96196",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "53edb5f645749a51f5f13dfebf916cf63969bcf30bb3e68f9f9cb2008a9fb851",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 8,
+      "n": 6,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 20,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 22,
+          "effective_chart_field_coordinates": 48,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 104,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 5
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "9ff5b840a170c7eac29a33f573545674dfcb5ac1cb2d24abbfa2d07c6609369d",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 37359,
+        "canonicalizations": 12,
+        "inversions": 1409,
+        "local_updates": 60,
+        "maximum_chart_metadata_bits": 34,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 64,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 168,
+        "maximum_resident_payload_bits": 1378,
+        "maximum_scratch_field_cells": 192,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 1536,
+        "multiplications": 67631,
+        "pair_updates": 60,
+        "projection_field_cells": 12,
+        "rref_pivots": 1379,
+        "subtractions": 16756,
+        "unary_updates": 72,
+        "zero_tests": 10356
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 32,
+      "boundary_sha256": "e29c9c180c6279b0b02abd6a1801c7c04082cf486ec027aa13515e4f3884bb6b",
+      "descriptor_sha256": "7b1721f28980e88826436a2343987796f8d1a13156692a682c1ad3d8dd5bf3ab",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "b4d4be0141c6c2f72de0ff286d9f05e4038c2131229cd91d7db53fa26992e49e",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 8,
+      "n": 6,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 20,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 22,
+          "effective_chart_field_coordinates": 48,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 104,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 5
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "9ff5b840a170c7eac29a33f573545674dfcb5ac1cb2d24abbfa2d07c6609369d",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 37359,
+        "canonicalizations": 12,
+        "inversions": 1409,
+        "local_updates": 60,
+        "maximum_chart_metadata_bits": 34,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 64,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 168,
+        "maximum_resident_payload_bits": 1378,
+        "maximum_scratch_field_cells": 192,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 1536,
+        "multiplications": 67669,
+        "pair_updates": 60,
+        "projection_field_cells": 12,
+        "rref_pivots": 1379,
+        "subtractions": 16794,
+        "unary_updates": 72,
+        "zero_tests": 10352
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 13,
+      "boundary_sha256": "3fdba35f04dc8c462986c992bcf875546257113072a909c162f7e470e581e278",
+      "descriptor_sha256": "0a4de35c51dd6bec4d02008f65e9c58ed7953e0399b3e41e91786a52d70db80b",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "52a65f3bd33f952cbb0d4b7e4ef22c67bf42d07ee7389d03704eea38f27446c2",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 8,
+      "n": 7,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 12,
+          "effective_chart_field_coordinates": 24,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 48,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 28,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 136,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 5
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 6
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "c20c57195d53bc9737e3a7b7dfd66576a2ca7de85b7b7dfd0efb369d0ebbfd5a",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 95814,
+        "canonicalizations": 14,
+        "inversions": 2296,
+        "local_updates": 84,
+        "maximum_chart_metadata_bits": 52,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 128,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 296,
+        "maximum_resident_payload_bits": 2420,
+        "maximum_scratch_field_cells": 320,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 2560,
+        "multiplications": 171210,
+        "pair_updates": 84,
+        "projection_field_cells": 16,
+        "rref_pivots": 2254,
+        "subtractions": 47632,
+        "unary_updates": 98,
+        "zero_tests": 19998
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 34,
+      "boundary_sha256": "86e50149658661312a9e0b35558d84f6c6d3da797f552a9657fe0558ca40cdef",
+      "descriptor_sha256": "2b3941c02305e2f59c991fefc986bfbc3369ef1e87c7b678cfa4c56ce02096c2",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "626b3655a6f35c8a7d98cf6b0cc3b655c2346460a2799330fe301d4dfb8ed04b",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 8,
+      "n": 7,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 12,
+          "effective_chart_field_coordinates": 24,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 48,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 28,
+          "effective_chart_field_coordinates": 64,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 136,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 5
+        },
+        {
+          "chart_metadata_bits": 52,
+          "effective_chart_field_coordinates": 128,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 296,
+          "row": 6
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "c20c57195d53bc9737e3a7b7dfd66576a2ca7de85b7b7dfd0efb369d0ebbfd5a",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 95814,
+        "canonicalizations": 14,
+        "inversions": 2296,
+        "local_updates": 84,
+        "maximum_chart_metadata_bits": 52,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 128,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 296,
+        "maximum_resident_payload_bits": 2420,
+        "maximum_scratch_field_cells": 320,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 2560,
+        "multiplications": 171058,
+        "pair_updates": 84,
+        "projection_field_cells": 16,
+        "rref_pivots": 2254,
+        "subtractions": 47480,
+        "unary_updates": 98,
+        "zero_tests": 20001
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 4,
+      "boundary_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+      "descriptor_sha256": "1cf414b059f788aecdbaad8e862bf4b33ea16754f325c34d93422cbbf9324893",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "89983d26795e06de3e8034ae4f63cdbc519023e4892d7fc7eff0dbbde8ec4124",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 16,
+      "n": 8,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 14,
+          "effective_chart_field_coordinates": 28,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 56,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 36,
+          "effective_chart_field_coordinates": 80,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 70,
+          "effective_chart_field_coordinates": 192,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 424,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 5
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 6
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 7
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "166bdebae334e2acaa3d27d37747b0bb8b8af69a3fe33a27e3c4ea202e22c50b",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 363933,
+        "canonicalizations": 16,
+        "inversions": 3913,
+        "local_updates": 112,
+        "maximum_chart_metadata_bits": 102,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 256,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 680,
+        "maximum_resident_payload_bits": 5542,
+        "maximum_scratch_field_cells": 768,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 6144,
+        "multiplications": 618841,
+        "pair_updates": 112,
+        "projection_field_cells": 24,
+        "rref_pivots": 3857,
+        "subtractions": 185630,
+        "unary_updates": 128,
+        "zero_tests": 49190
+      }
+    },
+    {
+      "algebra": "F137",
+      "boundary": 62,
+      "boundary_sha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "descriptor_sha256": "efdd2205b43d6a1538337b9444d08c679792d1e95590accd7841d3dff5de7d65",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "d4ff3f265c03ef0491d835ac6e25df1d093a245489875b8b8740c11d765b156d",
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 16,
+      "n": 8,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 14,
+          "effective_chart_field_coordinates": 28,
+          "ranks": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 56,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 34,
+          "effective_chart_field_coordinates": 80,
+          "ranks": [
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 168,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 70,
+          "effective_chart_field_coordinates": 192,
+          "ranks": [
+            2,
+            4,
+            8,
+            8,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 424,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 3
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 4
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 5
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 6
+        },
+        {
+          "chart_metadata_bits": 102,
+          "effective_chart_field_coordinates": 256,
+          "ranks": [
+            2,
+            4,
+            8,
+            16,
+            8,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 680,
+          "row": 7
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "166bdebae334e2acaa3d27d37747b0bb8b8af69a3fe33a27e3c4ea202e22c50b",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 363933,
+        "canonicalizations": 16,
+        "inversions": 3913,
+        "local_updates": 112,
+        "maximum_chart_metadata_bits": 102,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 256,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_raw_core_field_cells": 680,
+        "maximum_resident_payload_bits": 5542,
+        "maximum_scratch_field_cells": 768,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 6144,
+        "multiplications": 619165,
+        "pair_updates": 112,
+        "projection_field_cells": 24,
+        "rref_pivots": 3857,
+        "subtractions": 185954,
+        "unary_updates": 128,
+        "zero_tests": 49141
+      }
+    }
+  ],
+  "exact_scope": {
+    "families": [
+      "PRIMARY",
+      "GENERIC"
+    ],
+    "field": "Q_ZETA17",
+    "sizes": [
+      2,
+      3,
+      4
+    ]
+  },
+  "exact_transactions": [
+    {
+      "algebra": "Q_ZETA17",
+      "boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "boundary_sha256": "544678b0cdf241628cfe4ebe610f6f6edf44f6b9376a9c5e6cfd8e880eaecd4b",
+      "descriptor_sha256": "62cf0236d4bd00cd1277e46c597aa8e2e98e258bf42564547407406f951670ee",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "013f4003e6616e432cd741885d77930c6575a03d9e200ce2d9588e858d2f1dc4",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 2,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 1
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "b1ee01924cf06b68d0e85e89da31969a52fddddf467ddf4d53004320e2903e93",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 171,
+        "canonicalizations": 4,
+        "inversions": 51,
+        "local_updates": 4,
+        "maximum_chart_metadata_bits": 2,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 4,
+        "maximum_numerator_signed_bits": 3,
+        "maximum_raw_core_field_cells": 8,
+        "maximum_resident_payload_bits": 285,
+        "maximum_scratch_field_cells": 12,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 540,
+        "multiplications": 365,
+        "pair_updates": 4,
+        "projection_field_cells": 3,
+        "rref_pivots": 49,
+        "subtractions": 42,
+        "unary_updates": 8,
+        "zero_tests": 176
+      }
+    },
+    {
+      "algebra": "Q_ZETA17",
+      "boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "boundary_sha256": "9ea4b76db9fefda0b17106414974cb6a64cfb18667533ae49690c6f27a4615f9",
+      "descriptor_sha256": "66fae04d62f6987d0f77c9a3f18567fe404bd64ffdf7f5c4ccad0d25856e78b5",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "c7d769a11080043220d2f50f26b8cdec29c611e2d017fcc416e20f4db682c3ac",
+      "fresh_restored_boundary_parity": true,
+      "fresh_restored_rank_signature_parity": true,
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 2,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 2,
+          "effective_chart_field_coordinates": 4,
+          "ranks": [
+            2
+          ],
+          "raw_core_field_cells": 8,
+          "row": 1
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "b1ee01924cf06b68d0e85e89da31969a52fddddf467ddf4d53004320e2903e93",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 171,
+        "canonicalizations": 4,
+        "inversions": 51,
+        "local_updates": 4,
+        "maximum_chart_metadata_bits": 2,
+        "maximum_denominator_bits": 1,
+        "maximum_effective_chart_field_coordinates": 4,
+        "maximum_numerator_signed_bits": 3,
+        "maximum_raw_core_field_cells": 8,
+        "maximum_resident_payload_bits": 285,
+        "maximum_scratch_field_cells": 12,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 540,
+        "multiplications": 365,
+        "pair_updates": 4,
+        "projection_field_cells": 3,
+        "rref_pivots": 49,
+        "subtractions": 42,
+        "unary_updates": 8,
+        "zero_tests": 176
+      }
+    },
+    {
+      "algebra": "Q_ZETA17",
+      "boundary": [
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          23,
+          1
+        ],
+        [
+          14,
+          1
+        ],
+        [
+          19,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          13,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          4,
+          1
+        ]
+      ],
+      "boundary_sha256": "7d9b2ebb0d9bf421d829a5a45fb3eec1e8672cde6cb55baa2c919e5dc7a39a97",
+      "descriptor_sha256": "e8adbc47d3a6bf14c3a6f27974c09b837575563b4f173ec81103e5908abb08db",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "142a0ec30452aa1ea3861169afd6e6ac5defbaa8b427dbbca354ab8ad1d4e5d3",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 3,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 2
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "0b2da63eca60f939af98a5383416d9b68a8d8eaacd69a21cfdd43293847a66b6",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 754,
+        "canonicalizations": 6,
+        "inversions": 160,
+        "local_updates": 12,
+        "maximum_chart_metadata_bits": 4,
+        "maximum_denominator_bits": 79,
+        "maximum_effective_chart_field_coordinates": 8,
+        "maximum_numerator_signed_bits": 80,
+        "maximum_raw_core_field_cells": 16,
+        "maximum_resident_payload_bits": 10556,
+        "maximum_scratch_field_cells": 20,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 50700,
+        "multiplications": 1600,
+        "pair_updates": 12,
+        "projection_field_cells": 4,
+        "rref_pivots": 154,
+        "subtractions": 222,
+        "unary_updates": 18,
+        "zero_tests": 598
+      }
+    },
+    {
+      "algebra": "Q_ZETA17",
+      "boundary": [
+        [
+          3,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          17,
+          1
+        ],
+        [
+          22,
+          1
+        ],
+        [
+          12,
+          1
+        ],
+        [
+          22,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          -5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "boundary_sha256": "5b401ea4ef367eeecb1569675cb7a17e8ef682ace29429067de35f85804e07ea",
+      "descriptor_sha256": "c8ed0303113dfd1cdeaac044856a26b10c090df99d24e18c888f48ea953047fa",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "fcbccdffe2818169998f6ba58d3622ce45ac2e9df6196a79fd02eefd02f222e3",
+      "fresh_restored_boundary_parity": true,
+      "fresh_restored_rank_signature_parity": true,
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 2,
+      "n": 3,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 4,
+          "effective_chart_field_coordinates": 8,
+          "ranks": [
+            2,
+            2
+          ],
+          "raw_core_field_cells": 16,
+          "row": 2
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "0b2da63eca60f939af98a5383416d9b68a8d8eaacd69a21cfdd43293847a66b6",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 754,
+        "canonicalizations": 6,
+        "inversions": 160,
+        "local_updates": 12,
+        "maximum_chart_metadata_bits": 4,
+        "maximum_denominator_bits": 88,
+        "maximum_effective_chart_field_coordinates": 8,
+        "maximum_numerator_signed_bits": 89,
+        "maximum_raw_core_field_cells": 16,
+        "maximum_resident_payload_bits": 11669,
+        "maximum_scratch_field_cells": 20,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 56080,
+        "multiplications": 1600,
+        "pair_updates": 12,
+        "projection_field_cells": 4,
+        "rref_pivots": 154,
+        "subtractions": 222,
+        "unary_updates": 18,
+        "zero_tests": 598
+      }
+    },
+    {
+      "algebra": "Q_ZETA17",
+      "boundary": [
+        [
+          -142,
+          1
+        ],
+        [
+          -29,
+          1
+        ],
+        [
+          -33,
+          1
+        ],
+        [
+          72,
+          1
+        ],
+        [
+          155,
+          1
+        ],
+        [
+          159,
+          1
+        ],
+        [
+          202,
+          1
+        ],
+        [
+          185,
+          1
+        ],
+        [
+          249,
+          1
+        ],
+        [
+          68,
+          1
+        ],
+        [
+          277,
+          1
+        ],
+        [
+          87,
+          1
+        ],
+        [
+          132,
+          1
+        ],
+        [
+          39,
+          1
+        ],
+        [
+          97,
+          1
+        ],
+        [
+          -89,
+          1
+        ]
+      ],
+      "boundary_sha256": "e62a989624746c314bae383154fbb7bc0e9ed7a7c9646fd1e285648d1e332d22",
+      "descriptor_sha256": "ee322281236a8c5aa1659e0f348f9beae1397d396dd17b69c587f5308e204db8",
+      "family": "PRIMARY",
+      "final_resident_digest_before_inverse": "3974141e6db4a339ea2beb99368642b46a636b6d29f255bc9a8fcf0f0df4b6ca",
+      "generation_after": 1,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 4,
+      "n": 4,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 6,
+          "effective_chart_field_coordinates": 12,
+          "ranks": [
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 24,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 3
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "d9f09779bce6c5ae79b88a741ee4c5847ead242362836a7a368c22d94feedce5",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 3457,
+        "canonicalizations": 8,
+        "inversions": 397,
+        "local_updates": 24,
+        "maximum_chart_metadata_bits": 10,
+        "maximum_denominator_bits": 186,
+        "maximum_effective_chart_field_coordinates": 16,
+        "maximum_numerator_signed_bits": 188,
+        "maximum_raw_core_field_cells": 40,
+        "maximum_resident_payload_bits": 72430,
+        "maximum_scratch_field_cells": 48,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 285696,
+        "multiplications": 6865,
+        "pair_updates": 24,
+        "projection_field_cells": 6,
+        "rref_pivots": 385,
+        "subtractions": 1230,
+        "unary_updates": 32,
+        "zero_tests": 1889
+      }
+    },
+    {
+      "algebra": "Q_ZETA17",
+      "boundary": [
+        [
+          -121,
+          1
+        ],
+        [
+          -71,
+          1
+        ],
+        [
+          -178,
+          1
+        ],
+        [
+          -100,
+          1
+        ],
+        [
+          -108,
+          1
+        ],
+        [
+          -9,
+          1
+        ],
+        [
+          -25,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          78,
+          1
+        ],
+        [
+          -146,
+          1
+        ],
+        [
+          -98,
+          1
+        ],
+        [
+          -164,
+          1
+        ],
+        [
+          -290,
+          1
+        ],
+        [
+          -70,
+          1
+        ],
+        [
+          -241,
+          1
+        ],
+        [
+          -108,
+          1
+        ]
+      ],
+      "boundary_sha256": "259441e8852d89b8cca33ca1252a5209cac48afc8ba7c2f29c3ffdbc145eec31",
+      "descriptor_sha256": "bab49ebd544511e164349e23f6108d97de0a770196dbfbfd6f8578b1eafc2b4e",
+      "family": "GENERIC",
+      "final_resident_digest_before_inverse": "8a2c640351742b9eb3533e8b6cdcaa90786ecd7c4292b768b6d2d0353c2bbb59",
+      "fresh_restored_boundary_parity": true,
+      "fresh_restored_rank_signature_parity": true,
+      "generation_after": 2,
+      "lease_cleared_after_restoration": true,
+      "maximum_rank": 4,
+      "n": 4,
+      "rank_trace": [
+        {
+          "chart_metadata_bits": 6,
+          "effective_chart_field_coordinates": 12,
+          "ranks": [
+            2,
+            2,
+            2
+          ],
+          "raw_core_field_cells": 24,
+          "row": 0
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 1
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 2
+        },
+        {
+          "chart_metadata_bits": 10,
+          "effective_chart_field_coordinates": 16,
+          "ranks": [
+            2,
+            4,
+            2
+          ],
+          "raw_core_field_cells": 40,
+          "row": 3
+        }
+      ],
+      "restoration_generation_correct": true,
+      "restored_exactly": true,
+      "restored_state_digest": "d9f09779bce6c5ae79b88a741ee4c5847ead242362836a7a368c22d94feedce5",
+      "retained_inverse_history_bytes": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "additions": 3457,
+        "canonicalizations": 8,
+        "inversions": 397,
+        "local_updates": 24,
+        "maximum_chart_metadata_bits": 10,
+        "maximum_denominator_bits": 165,
+        "maximum_effective_chart_field_coordinates": 16,
+        "maximum_numerator_signed_bits": 168,
+        "maximum_raw_core_field_cells": 40,
+        "maximum_resident_payload_bits": 64507,
+        "maximum_scratch_field_cells": 48,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 253872,
+        "multiplications": 6865,
+        "pair_updates": 24,
+        "projection_field_cells": 6,
+        "rref_pivots": 385,
+        "subtractions": 1230,
+        "unary_updates": 32,
+        "zero_tests": 1889
+      }
+    }
+  ],
+  "exact_zero_division_pivot_and_gauge_operations_are_resident_phase_primitives": false,
+  "generic_n4_discriminator": {
+    "dense_row_message_field_coordinates": 16,
+    "descriptor_sha256": "bab49ebd544511e164349e23f6108d97de0a770196dbfbfd6f8578b1eafc2b4e",
+    "effective_chart_field_coordinates": 16,
+    "final_rank_profile": [
+      2,
+      4,
+      2
+    ],
+    "full_tensor_train_rank_profile": true,
+    "projective_ratios_plus_scale": 16,
+    "raw_core_field_cells": 40,
+    "separator_compaction_observed": false
+  },
+  "matched_classical": {
+    "all_order_separator_add_mtbdd": "EXACT_N4_FULLY_REDUCED_NO_GAIN_CERTIFICATE_AND_DUAL_FIELD_N2_THROUGH_N8_QUASI_REDUCED_LAYERED_COUNTS_IN_INDEPENDENT_ORACLE",
+    "broader_global_or_boundary_specific_algorithms_exhausted": false,
+    "direct_butterfly_separator_cells": {
+      "2": 4,
+      "3": 8,
+      "4": 16,
+      "5": 32,
+      "6": 64,
+      "7": 128,
+      "8": 256
+    },
+    "lazy_public_factor_descriptor_cells": "O_N_SQUARED_WITH_O_N_SQUARED_TIMES_TWO_TO_THE_N_PROJECTION_WORK",
+    "projective_chart_is_coordinate_change_not_compression": true,
+    "strongest_identical_recurrence": "THE_SAME_EXACT_CANONICAL_TT_UPDATE_RUN_AS_ORDINARY_SOFTWARE"
+  },
+  "matchgate_controls": {
+    "arbitrary_local_basis_or_holographic_matchgate_reductions_exhausted": false,
+    "direct_zero_field_pfaffian_route_applicable_to_generic_fixture": false,
+    "direct_zero_field_pfaffian_route_applicable_to_positive_control": true,
+    "direct_zero_field_planar_ising_positive_control_residues": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "generic_discriminator_field_residues": [
+      7,
+      13,
+      1,
+      11,
+      1,
+      3,
+      16,
+      10,
+      1,
+      7,
+      3,
+      8,
+      13,
+      2,
+      6,
+      16
+    ],
+    "negative_control_nonzero_sites": [
+      13
+    ],
+    "positive_control_all_zero": true,
+    "single_site_13_mutation_negative_control_residues": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+    ]
+  },
+  "next_experiment": "CHANGE_THE_RESIDENT_PHASE_UPDATE_OR_RESTRICT_THE_SIGNATURE_FAMILY_TO_SEEK_A_DEPTH_STABLE_NONCLASSICAL_COMPOSITION_INVARIANT_RATHER_THAN_ANOTHER_SEPARATOR_NORMALIZATION",
+  "next_obstruction": "GENERIC_SEPARATOR_TT_RANKS_SATURATE_AND_CANONICALIZATION_MOVES_TWO_TO_THE_N_GROWTH_INTO_EFFECTIVE_COORDINATES_RAW_CORES_OR_SCRATCH_WHILE_THE_IDENTICAL_EXACT_TT_RECURRENCE_IS_CLASSICAL",
+  "physical_bits_replaced_with_pi": false,
+  "physical_waveform_execution_established": false,
+  "projective_controls": [
+    {
+      "amplitude_bearing_projective_chart_coordinates": 4,
+      "exact_division_payload_measurement": "INDEPENDENT_DENSE_ORACLE_Q_ZETA17_N2_N3_N4",
+      "fixed_pivot_zero_impossible_for_declared_binary_grid_family": true,
+      "n": 2,
+      "nonvanishing_reason": "EACH_ENTRY_IS_A_SUM_OF_TWO_TO_THE_K_SEVENTEENTH_ROOTS_AND_A_ZERO_SUM_WOULD_REQUIRE_EQUAL_CHARACTER_MULTIPLICITIES_HENCE_TOTAL_DIVISIBLE_BY_17",
+      "projective_ratio_coordinates": 3,
+      "required_exact_scale_coordinates": 1,
+      "row_message_field_coordinates": 4,
+      "separator_compaction": false
+    },
+    {
+      "amplitude_bearing_projective_chart_coordinates": 8,
+      "exact_division_payload_measurement": "INDEPENDENT_DENSE_ORACLE_Q_ZETA17_N2_N3_N4",
+      "fixed_pivot_zero_impossible_for_declared_binary_grid_family": true,
+      "n": 3,
+      "nonvanishing_reason": "EACH_ENTRY_IS_A_SUM_OF_TWO_TO_THE_K_SEVENTEENTH_ROOTS_AND_A_ZERO_SUM_WOULD_REQUIRE_EQUAL_CHARACTER_MULTIPLICITIES_HENCE_TOTAL_DIVISIBLE_BY_17",
+      "projective_ratio_coordinates": 7,
+      "required_exact_scale_coordinates": 1,
+      "row_message_field_coordinates": 8,
+      "separator_compaction": false
+    },
+    {
+      "amplitude_bearing_projective_chart_coordinates": 16,
+      "exact_division_payload_measurement": "INDEPENDENT_DENSE_ORACLE_Q_ZETA17_N2_N3_N4",
+      "fixed_pivot_zero_impossible_for_declared_binary_grid_family": true,
+      "n": 4,
+      "nonvanishing_reason": "EACH_ENTRY_IS_A_SUM_OF_TWO_TO_THE_K_SEVENTEENTH_ROOTS_AND_A_ZERO_SUM_WOULD_REQUIRE_EQUAL_CHARACTER_MULTIPLICITIES_HENCE_TOTAL_DIVISIBLE_BY_17",
+      "projective_ratio_coordinates": 15,
+      "required_exact_scale_coordinates": 1,
+      "row_message_field_coordinates": 16,
+      "separator_compaction": false
+    },
+    {
+      "amplitude_bearing_projective_chart_coordinates": 32,
+      "exact_division_payload_measurement": "INDEPENDENT_DENSE_ORACLE_Q_ZETA17_N2_N3_N4",
+      "fixed_pivot_zero_impossible_for_declared_binary_grid_family": true,
+      "n": 5,
+      "nonvanishing_reason": "EACH_ENTRY_IS_A_SUM_OF_TWO_TO_THE_K_SEVENTEENTH_ROOTS_AND_A_ZERO_SUM_WOULD_REQUIRE_EQUAL_CHARACTER_MULTIPLICITIES_HENCE_TOTAL_DIVISIBLE_BY_17",
+      "projective_ratio_coordinates": 31,
+      "required_exact_scale_coordinates": 1,
+      "row_message_field_coordinates": 32,
+      "separator_compaction": false
+    },
+    {
+      "amplitude_bearing_projective_chart_coordinates": 64,
+      "exact_division_payload_measurement": "INDEPENDENT_DENSE_ORACLE_Q_ZETA17_N2_N3_N4",
+      "fixed_pivot_zero_impossible_for_declared_binary_grid_family": true,
+      "n": 6,
+      "nonvanishing_reason": "EACH_ENTRY_IS_A_SUM_OF_TWO_TO_THE_K_SEVENTEENTH_ROOTS_AND_A_ZERO_SUM_WOULD_REQUIRE_EQUAL_CHARACTER_MULTIPLICITIES_HENCE_TOTAL_DIVISIBLE_BY_17",
+      "projective_ratio_coordinates": 63,
+      "required_exact_scale_coordinates": 1,
+      "row_message_field_coordinates": 64,
+      "separator_compaction": false
+    },
+    {
+      "amplitude_bearing_projective_chart_coordinates": 128,
+      "exact_division_payload_measurement": "INDEPENDENT_DENSE_ORACLE_Q_ZETA17_N2_N3_N4",
+      "fixed_pivot_zero_impossible_for_declared_binary_grid_family": true,
+      "n": 7,
+      "nonvanishing_reason": "EACH_ENTRY_IS_A_SUM_OF_TWO_TO_THE_K_SEVENTEENTH_ROOTS_AND_A_ZERO_SUM_WOULD_REQUIRE_EQUAL_CHARACTER_MULTIPLICITIES_HENCE_TOTAL_DIVISIBLE_BY_17",
+      "projective_ratio_coordinates": 127,
+      "required_exact_scale_coordinates": 1,
+      "row_message_field_coordinates": 128,
+      "separator_compaction": false
+    },
+    {
+      "amplitude_bearing_projective_chart_coordinates": 256,
+      "exact_division_payload_measurement": "INDEPENDENT_DENSE_ORACLE_Q_ZETA17_N2_N3_N4",
+      "fixed_pivot_zero_impossible_for_declared_binary_grid_family": true,
+      "n": 8,
+      "nonvanishing_reason": "EACH_ENTRY_IS_A_SUM_OF_TWO_TO_THE_K_SEVENTEENTH_ROOTS_AND_A_ZERO_SUM_WOULD_REQUIRE_EQUAL_CHARACTER_MULTIPLICITIES_HENCE_TOTAL_DIVISIBLE_BY_17",
+      "projective_ratio_coordinates": 255,
+      "required_exact_scale_coordinates": 1,
+      "row_message_field_coordinates": 256,
+      "separator_compaction": false
+    }
+  ],
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F17_NONLINEAR_CANONICAL_MPS_SEPARATOR_CHART_V1",
+  "scratch_exact_coefficient_payload_measured": false,
+  "scratch_payload_number_is_resident_height_estimate_only": true,
+  "small_wall_crossing_established": false,
+  "structural_scope": {
+    "families": [
+      "PRIMARY",
+      "GENERIC"
+    ],
+    "finite_fields": [
+      103,
+      137
+    ],
+    "sizes": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  "transient_chart_and_projection_buffers_restoration_classification": "NO_RESTORATION_CLAIM",
+  "unbounded_catalytic_computation_established": false,
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}

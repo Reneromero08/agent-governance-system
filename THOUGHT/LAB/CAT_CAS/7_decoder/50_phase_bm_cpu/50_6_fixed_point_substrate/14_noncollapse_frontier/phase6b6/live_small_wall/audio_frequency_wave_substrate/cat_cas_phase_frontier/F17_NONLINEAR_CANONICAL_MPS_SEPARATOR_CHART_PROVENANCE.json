@@ -1,0 +1,67 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "6c0f48f4ee07fd33d19466e55a71ceb5476300a3",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "aa77693bf9c094c525e55b3b4d64bbc928edd3d1d52440510559bc20d0fe442e",
+  "reference_full_oracle_sha256": "50c0f589804d490fdcb9d245bc45ca192be9cb14176886da9dd7ea490581ba0e",
+  "execution": {
+    "production": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_nonlinear_canonical_mps_separator_chart.py",
+    "oracle": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_nonlinear_canonical_mps_separator_chart_oracle.py",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_nonlinear_canonical_mps_separator_chart.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_nonlinear_canonical_mps_separator_chart.py": "f5962e6af4138bf694b4f6eeb52d8f79be1a13f39cbf3c6fe670970e2e77efce",
+    "f17_nonlinear_canonical_mps_separator_chart_oracle.py": "cf0cbfaa1e95ef9bdcf83a4a05380714865e6af0e7cf71c2e10202d8a303d213",
+    "F17_NONLINEAR_CANONICAL_MPS_SEPARATOR_CHART_RESULTS.json": "aa77693bf9c094c525e55b3b4d64bbc928edd3d1d52440510559bc20d0fe442e",
+    "F17_NONLINEAR_CANONICAL_MPS_SEPARATOR_CHART_ORACLE_RESULTS.json": "50c0f589804d490fdcb9d245bc45ca192be9cb14176886da9dd7ea490581ba0e",
+    "F17_NONLINEAR_CANONICAL_MPS_SEPARATOR_CHART_INDEPENDENT_REVIEW.md": "8cfd9cf84e24ba6963161eca624eb8fabe2c238a2497930769673483e6c885af",
+    "qualify_f17_nonlinear_canonical_mps_separator_chart.sh": "e14062d13330d8d7515424e073ac86e5c39b1033f2a85b17da6338f8e7855c16"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_chart_and_projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "resource_accounting": {
+    "counted": [
+      "TT_CORE_FIELD_CELLS",
+      "EFFECTIVE_CHART_COORDINATES",
+      "PIVOT_METADATA_BITS",
+      "RESIDENT_EXACT_COEFFICIENT_PAYLOAD",
+      "NUMERATOR_AND_DENOMINATOR_HEIGHT",
+      "FIELD_OPERATIONS",
+      "SCRATCH_FIELD_CELLS",
+      "PROJECTION",
+      "INVERSE",
+      "GENERATION_AND_LEASE_RESTORATION",
+      "FRESH_AND_RESTORED_REUSE",
+      "PROJECTIVE_RATIO_AND_SCALE_PAYLOAD_IN_THE_EXACT_ORACLE",
+      "QUASI_REDUCED_DD_NODES_ARCS_LABELS_UNIQUE_TABLE_AND_COMPILATION_COUNTS"
+    ],
+    "excluded_or_estimated": [
+      "SCRATCH_EXACT_COEFFICIENT_PAYLOAD_IS_AN_ESTIMATE_FROM_RESIDENT_CELL_HEIGHT",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "SYMPY_INTERNAL_TEMPORARIES",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "claim_ceiling": "EXACT_Q_ZETA17_TWO_DESCRIPTOR_FAMILIES_N2_N3_N4_CANONICAL_TT_PROJECTIVE_AND_FULLY_REDUCED_N4_EVDD_NO_COMPACTION_DIAGNOSTIC_PLUS_DUAL_FIELD_STRUCTURAL_TT_AND_QUASI_REDUCED_LAYERED_DD_REEXECUTION_N2_THROUGH_N8_DIRECT_PROCESS_SOFTWARE_ONLY",
+  "rejected_interpretations": [
+    "GENERAL_NONLINEAR_SEPARATOR_NO_GO",
+    "EXACT_Q_ZETA17_EXECUTION_BEYOND_N4",
+    "TWO_FIELD_ALL_ORDER_MAXIMALITY_AT_N8",
+    "FULLY_REDUCED_DD_COUNTS_WHERE_PREFIX_CLASSES_ARE_NOT_FULL",
+    "EXHAUSTIVE_MATCHGATE_HOLOGRAPHIC_GLOBAL_OR_BOUNDARY_SPECIFIC_BASELINES",
+    "NATIVE_PHASE_ZERO_TEST_DIVISION_RREF_PIVOT_OR_GAUGE_PRIMITIVES",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_COMPUTATION"
+  ]
+}
