@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_KRONECKER_BUTTERFLY_REPAIRS_FOUR_TO_THE_N_GRID_TRANSFER_WORK_BUT_FULL_TWO_TO_THE_N_INTERFACE_AND_IDENTICAL_CLASSICAL_RECURRENCE_REMAIN`
-**Roadmap version:** `12.6`
+**Status:** `STRICT_SCOPE_UNIFORM_FIXED_LINEAR_SEPARATOR_QUOTIENT_BELOW_TWO_TO_THE_N_REJECTED_NONLINEAR_AND_GLOBAL_ROUTES_OPEN`
+**Roadmap version:** `12.7`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `9ddc7fc623ec28bb6557e865fdadca5b38d73241`
+**Reconciled source head:** `1963fd2ba12e68008af5824496fc1b3c75ca6495`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_RUNTIME_WEIGHTED_F17_GRID_PHASE_FACTOR_KRONECKER_BUTTERFLY_CLOSURE_FOR_N2_N3_N4_WITH_FULL_ROW_INTERFACE_RANKS4_8_16_TOPOLOGY_DERIVED_N_TIMES_TWO_TO_THE_N_TRANSFER_FINAL_ONLY_SCALAR_PROJECTION_EXACT_REVERSE_FACTOR_CARRIER_RESTORATION_AND_HELD_OUT_SAME_BACKING_REUSE_BUT_NO_COMPACTION_BELOW_TWO_TO_THE_N_MESSAGES_OR_DISTINCT_PHASE_RESOURCE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_DETERMINISTIC_PUBLIC_RUNTIME_WEIGHT_FAMILIES_BINARY_N_BY_N_GRIDS_N2_N3_N4_ACTUAL_RESIDENT_FACTOR_KRONECKER_BUTTERFLY_ROOT_ACTIONS4_24_96_ADDITIONS8_48_192_EXACT_INTERFACE_RANKS4_8_16_ONE_FINAL_CYCLOTOMIC_SCALAR_LIFT_EXACT_FACTOR_CARRIER_REVERSE_AND_SEED_UNLOAD_ZERO_BACKING_RESTORATION_HELD_OUT_SAME_BACKING_REUSE_TRANSIENT_FRONTIER_NO_RESTORATION_CLAIM_IDENTICAL_TWO_TO_THE_N_MESSAGE_CLASSICAL_BUTTERFLY_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `EXACT_Q_ZETA17_GENERIC_NONZERO_RUNTIME_WEIGHT_GRID_CONTINUATION_SPAN_REJECTS_ANY_UNIFORM_FIXED_LINEAR_SEPARATOR_QUOTIENT_BELOW_TWO_TO_THE_N_FIELD_COORDINATES_WHILE_TWO_DESCRIPTOR_DRIVEN_FACTOR_CARRIER_TRANSACTIONS_RESTORE_AND_REUSE_AT_N2_N3_N4`
+**Current claim ceiling:** `UNIFORM_FIXED_Q_ZETA17_LINEAR_SEPARATOR_ENCODERS_SUPPORTING_ARBITRARY_FIELD_MESSAGES_AND_EVERY_LEGAL_NONZERO_FINAL_ROW_CONTINUATION_REQUIRE_AT_LEAST_TWO_TO_THE_N_FIELD_COORDINATES_ANALYTIC_ALL_N_FORMULA_CERTIFICATES_N1_TO_N16_PHASE_AND_DUAL_FIELD_REEXECUTION_N2_N3_N4_TWO_DESCRIPTOR_DRIVEN_EXACT_FACTOR_CARRIER_RESTORATION_AND_SAME_BACKING_REUSE_TRANSIENT_PROJECTION_BUFFER_NO_RESTORATION_CLAIM_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M120_KRONECKER_BUTTERFLY_TRANSFER_WORK_REPAIR`
+**New mechanism development:** `ACTIVE_AFTER_M121_UNIFORM_LINEAR_SEPARATOR_QUOTIENT_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `OVERLAPPING_CUBIC_PHASE_AND_EXACT_MIXING_COMPOSITION_WITH_THIRD_BOOLEAN_DIFFERENCE_CERTIFICATE_AGAINST_MATCHGATE_TENSOR_NETWORK_AND_DECISION_DIAGRAM_BASELINES`
+**Active primary successor:** `NONLINEAR_CANONICAL_PHASE_SEPARATOR_CHART_WITH_RESIDENT_UPDATES_ON_GROWING_HETEROGENEOUS_WIDTHS_AGAINST_ALL_ORDER_ADD_MTBDD_EXACT_MPS_TENSOR_AND_MATCHGATE_HOLOGRAPHIC_BASELINES`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`9ddc7fc623ec28bb6557e865fdadca5b38d73241`. The current 120-milestone
+`1963fd2ba12e68008af5824496fc1b3c75ca6495`. The current 121-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4105,16 +4105,89 @@ establishes no separator quotient, CATVM custody, distinct phase resource,
 computational advantage, Small Wall crossing, inference, physical execution,
 bit replacement, or unbounded computation.
 
+An applicability review rejected the initially proposed fixed four-bit cubic
+plus mixing successor as mechanism-redundant with the existing F5
+cubic/Fourier, F17 cubic-latent, and M118 interleaved phase/shear packages. It
+would not have changed the growing separator obstruction. M121 therefore
+tests the obstruction directly rather than adding another fixed-width cubic
+fixture.
+
+### 6.121 Exact generic-runtime linear-separator quotient no-go
+
+M121 explicitly broadens the runtime descriptor interface from the two M119
+fixtures to arbitrary public nonzero F17 unary and edge weights. Two distinct
+generated descriptors per size are executed at `n=2,3,4` through the actual
+M120 factor carrier. Their boundaries match the identical compact butterfly,
+the carrier is exactly reversed and unloaded to zero on its original backing,
+and the held-out descriptor agrees with a fresh carrier after reuse.
+
+```text
+classification                 INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                   INDEPENDENT_ORACLE_REEXECUTION
+factor restoration             EXACT_ALGEBRAIC_RESTORATION
+transient projection buffers   NO_RESTORATION_CLAIM
+hosted run                      NOT ESTABLISHED
+source head                     1963fd2ba12e68008af5824496fc1b3c75ca6495
+```
+
+The certificate is placed at the penultimate-to-final-row separator. For
+unary continuation choices `h_i in {1,2}`, its observation matrix factors as
+
+```text
+C D V
+C = tensor_i [[1,zeta17],[1,zeta17^2]]
+D = nonzero horizontal-row phase diagonal
+V = tensor_i [[1,1],[1,zeta17^J_i]], J_i != 0.
+```
+
+Every factor is invertible over `Q(zeta17)`. Each Kronecker family contributes
+determinant-norm exponent `n*2^(n-1)` and their product contributes
+`n*2^n`. Therefore any uniform fixed `Q(zeta17)`-linear separator encoder that
+must accept arbitrary field messages and preserve every legal nonzero final-row
+continuation is injective and retains at least `2^n` field coordinates.
+
+The accepted analytic certificate materializes no dense matrix and enumerates
+no continuation family. It emits formula certificates for `n=1,...,16`.
+The independent oracle is deliberately bounded to `n=2,3,4`: it imports
+neither production nor the phase backend, reconstructs every exact boundary
+with separate butterfly and Gray-histogram recurrences, and forms explicit
+verification-only matrices over both `F103` and `F137`.
+
+```text
+n                                      2   3    4
+continuation rank                      4   8   16
+vertical rank                          4   8   16
+combined rank                          4   8   16
+one zero vertical weight rank          2   4    8
+one duplicated continuation choice     2   4    8
+dense cells per oracle matrix          16  64  256
+dense cells in accepted certificate     0   0    0
+```
+
+An explicit coordinate-drop encoder has rank `2^n-1`; its nonzero kernel is
+detected by a legal continuation. Public topology remains answer-independent.
+The operational comparator remains the identical exact `2^n`-message
+Kronecker butterfly, with Gray streaming retained. Broader ADD/MTBDD, exact
+MPS/tensor, matchgate/Pfaffian, holographic, and boundary-specific algorithms
+remain unexhausted.
+
+This is not a lower bound for only the two frozen M119 fixtures and not a
+lower bound for nonlinear, program-dependent, or restricted signatures. It
+does not establish a total time, memory, or bit-complexity lower bound, a
+distinct phase resource, computational advantage, Small Wall crossing, CATVM
+custody, inference, physical execution, bit replacement, or unbounded
+computation.
+
 The next experiment is:
 
 ```text
-OVERLAPPING_CUBIC_PHASE_AND_EXACT_MIXING_COMPOSITION_WITH_THIRD_BOOLEAN_DIFFERENCE_CERTIFICATE_AGAINST_MATCHGATE_TENSOR_NETWORK_AND_DECISION_DIAGRAM_BASELINES
+NONLINEAR_CANONICAL_PHASE_SEPARATOR_CHART_WITH_RESIDENT_UPDATES_ON_GROWING_HETEROGENEOUS_WIDTHS_AGAINST_ALL_ORDER_ADD_MTBDD_EXACT_MPS_TENSOR_AND_MATCHGATE_HOLOGRAPHIC_BASELINES
 ```
 
 The obstruction is:
 
 ```text
-THE_FOUR_TO_THE_N_TRANSFER_WORK_DEFECT_IS_REPAIRED_BUT_EXACT_ROW_INTERFACE_RANK_AND_MESSAGE_STORAGE_REMAIN_TWO_TO_THE_N_AND_THE_IDENTICAL_CLASSICAL_BUTTERFLY_HAS_THE_SAME_RECURRENCE
+GENERIC_NONZERO_RUNTIME_GRID_CONTINUATIONS_REQUIRE_FULL_TWO_TO_THE_N_COORDINATES_FOR_ANY_UNIFORM_FIXED_Q_ZETA17_LINEAR_SEPARATOR_ENCODER_SO_THE_NEXT_REPAIR_MUST_CHANGE_REPRESENTATION_CLASS_AND_RETAIN_BROADER_GLOBAL_ALGORITHM_CONTROLS
 ```
 
 ## 7. No-Smuggle and Non-Collapse Laws
@@ -4154,7 +4227,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_RUNTIME_WEIGHTED_F17_GRID_PHASE_FACTOR_KRONECKER_BUTTERFLY_CLOSURE_FOR_N2_N3_N4_WITH_FULL_ROW_INTERFACE_RANKS4_8_16_TOPOLOGY_DERIVED_N_TIMES_TWO_TO_THE_N_TRANSFER_FINAL_ONLY_SCALAR_PROJECTION_EXACT_REVERSE_FACTOR_CARRIER_RESTORATION_AND_HELD_OUT_SAME_BACKING_REUSE_BUT_NO_COMPACTION_BELOW_TWO_TO_THE_N_MESSAGES_OR_DISTINCT_PHASE_RESOURCE
+EXACT_Q_ZETA17_GENERIC_NONZERO_RUNTIME_WEIGHT_GRID_CONTINUATION_SPAN_REJECTS_ANY_UNIFORM_FIXED_LINEAR_SEPARATOR_QUOTIENT_BELOW_TWO_TO_THE_N_FIELD_COORDINATES_WHILE_TWO_DESCRIPTOR_DRIVEN_FACTOR_CARRIER_TRANSACTIONS_RESTORE_AND_REUSE_AT_N2_N3_N4
 ```
 
 Not established:
@@ -4224,6 +4297,10 @@ restoration or CATVM custody of M120 transient butterfly frontiers
 separator compression below the M120 exact 2^n interface
 global optimality of the M120 identical classical butterfly
 distinct phase resource or advantage from the M120 work repair
+nonlinear, program-dependent, or restricted separator lower bound from M121
+ADD/MTBDD, MPS/MPO, matchgate/Pfaffian, holographic, or global contraction lower bound from M121
+total time, memory, or bit-complexity lower bound from M121
+distinct phase resource or advantage from the M121 linear quotient no-go
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4280,12 +4357,16 @@ used `2^n` interface messages and `(n-1)4^n` transitions, while a Gray-delta
 M120 then repaired the missed row-kernel application with actual-resident
 Kronecker butterflies: root actions fall to `(n-1)n2^(n-1)`, but exact rank
 and message storage remain `2^n`, transient frontier buffers have no
-restoration claim, and the identical classical recurrence remains. Continue
-from that structural obstruction into a nonquadratic composition law or a
-genuine separator quotient with matchgate, tensor-network, decision-diagram,
-and boundary-specific controls. Do not add larger public grid fixtures unless
-they resolve the mechanism-level obstruction, and do not treat the evaluated
-baseline set as exhaustive.
+restoration claim, and the identical classical recurrence remains. M121 then
+proves that no uniform fixed `Q(zeta17)`-linear separator encoder can compress
+the broadened legal final-row continuation family below `2^n` field
+coordinates. This retires only that linear representation route. Continue
+with a nonlinear canonical resident separator chart and test whether its
+chart count, update law, or program dependence merely relocates the same
+growth. Keep all-order ADD/MTBDD, exact MPS/tensor, matchgate/Pfaffian,
+holographic, and boundary-specific controls. Do not add larger public grid or
+fixed-width cubic fixtures unless they resolve this mechanism-level
+obstruction, and do not treat the evaluated baseline set as exhaustive.
 
 ## 10. Roadmap Maintenance
 

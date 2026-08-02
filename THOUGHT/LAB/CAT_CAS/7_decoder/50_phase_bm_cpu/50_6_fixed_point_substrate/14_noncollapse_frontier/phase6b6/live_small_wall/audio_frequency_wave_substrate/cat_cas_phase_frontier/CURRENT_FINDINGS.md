@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`9ddc7fc623ec28bb6557e865fdadca5b38d73241`. The canonical per-milestone
+`1963fd2ba12e68008af5824496fc1b3c75ca6495`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -7081,14 +7081,70 @@ identical compact classical recurrence. No separator quotient, distinct phase
 resource, advantage, Small Wall crossing, CATVM custody, inference, physical
 execution, bit replacement, or unbounded computation is established.
 
+The initially selected fixed four-bit cubic plus mixing successor was skipped
+after applicability review because it recombined mechanisms already present
+in the F5 cubic/Fourier, F17 cubic-latent, and M118 interleaved phase/shear
+packages without changing the growing separator law. The next package tested
+that obstruction directly.
+
+## Exact generic-runtime F17 linear-separator quotient no-go
+
+M121 broadens the public runtime interface to arbitrary nonzero F17 unary and
+edge descriptors. Two distinct generated descriptors per size execute through
+the actual M120 factor carrier at `n=2,3,4`. Every boundary agrees with the
+identical exact butterfly, reverse phase actions plus seed unload restore the
+original zero backing exactly, and the held-out descriptor reuses that same
+backing with fresh-carrier parity.
+
+```text
+classification                 INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                   INDEPENDENT_ORACLE_REEXECUTION
+factor restoration             EXACT_ALGEBRAIC_RESTORATION
+transient projection buffers   NO_RESTORATION_CLAIM
+hosted run                      NOT ESTABLISHED
+source head                     1963fd2ba12e68008af5824496fc1b3c75ca6495
+```
+
+At the penultimate-to-final-row separator, the legal continuation matrix is
+the product of
+
+```text
+tensor_i [[1,zeta17],[1,zeta17^2]]
+a nonzero horizontal-row phase diagonal
+tensor_i [[1,1],[1,zeta17^J_i]], J_i != 0.
+```
+
+All three factors are invertible over `Q(zeta17)`. Hence a uniform fixed
+linear encoder that must accept arbitrary field messages and preserve every
+legal nonzero final-row continuation is injective and requires at least
+`2^n` field coordinates. The accepted certificate is formula-only, emits
+`n=1,...,16`, and materializes neither dense rank matrices nor the
+continuation family.
+
+An independent oracle imports neither production nor the phase backend. It
+reconstructs all six exact boundaries with separate butterfly and
+Gray-histogram recurrences. Explicit verification-only matrices over `F103`
+and `F137` have continuation, vertical, and combined ranks `4,8,16`.
+Zeroing one vertical weight or duplicating one continuation choice gives
+`2,4,8`. A rank-`2^n-1` coordinate-drop encoder has a nonzero kernel vector
+detected by a legal continuation.
+
+This rejects only uniform fixed `Q(zeta17)`-linear separator compression for
+the broadened legal continuation family. It does not reject nonlinear,
+program-dependent, or restricted signatures, nor ADD/MTBDD, exact MPS/tensor,
+matchgate/Pfaffian, holographic, global, or boundary-specific contractions.
+It establishes no total complexity lower bound, distinct phase resource,
+advantage, Small Wall crossing, CATVM custody, inference, physical execution,
+bit replacement, or unbounded computation.
+
 The selected successor is:
 
 ```text
-OVERLAPPING_CUBIC_PHASE_AND_EXACT_MIXING_COMPOSITION_WITH_THIRD_BOOLEAN_DIFFERENCE_CERTIFICATE_AGAINST_MATCHGATE_TENSOR_NETWORK_AND_DECISION_DIAGRAM_BASELINES
+NONLINEAR_CANONICAL_PHASE_SEPARATOR_CHART_WITH_RESIDENT_UPDATES_ON_GROWING_HETEROGENEOUS_WIDTHS_AGAINST_ALL_ORDER_ADD_MTBDD_EXACT_MPS_TENSOR_AND_MATCHGATE_HOLOGRAPHIC_BASELINES
 ```
 
 The surviving obstruction is:
 
 ```text
-THE_FOUR_TO_THE_N_TRANSFER_WORK_DEFECT_IS_REPAIRED_BUT_EXACT_ROW_INTERFACE_RANK_AND_MESSAGE_STORAGE_REMAIN_TWO_TO_THE_N_AND_THE_IDENTICAL_CLASSICAL_BUTTERFLY_HAS_THE_SAME_RECURRENCE
+GENERIC_NONZERO_RUNTIME_GRID_CONTINUATIONS_REQUIRE_FULL_TWO_TO_THE_N_COORDINATES_FOR_ANY_UNIFORM_FIXED_Q_ZETA17_LINEAR_SEPARATOR_ENCODER_SO_THE_NEXT_REPAIR_MUST_CHANGE_REPRESENTATION_CLASS_AND_RETAIN_BROADER_GLOBAL_ALGORITHM_CONTROLS
 ```
