@@ -6700,3 +6700,64 @@ The exact resume obstruction is:
 ```text
 THE_FULL_AGGREGATE_NORM_IS_GONE_BUT_EACH_HERMITIAN_TERM_THE_RESIDENT_CARRIER_AND_THE_CERTIFIED_ACTION_STILL_USE_THE_FULL_CYCLOTOMIC_REPRESENTATION_AND_COMPACT_CLASSICAL_SOFTWARE_CAN_USE_THE_SAME_STREAM
 ```
+
+## Exact direct real Hermitian generator
+
+M115 removes the remaining per-element degree-16 Hermitian products from the
+accepted norm path. For canonical `x = sum(a_j zeta^j)` with `a_16 = 0`, it
+streams the cyclic correlations `P_k = sum_j a_j a_(j+k mod 17)` and emits
+the exact integral-real-basis tuple `(P_0-P_8, ..., P_7-P_8)`.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+source head     d4e117ae06597abb683e50b0e2a466cbdc877c2d
+```
+
+The production schedule stores `P_8` and streams the other eight
+correlations. Per term it records 136 integer multiplications, 127
+accumulation additions, and 8 final subtractions. It creates no materialized
+conjugate, full degree-16 product, full-to-real conversion, or degree-16 norm
+scratch.
+
+The separate oracle imports no production M115 module and reconstructs the
+Hermitian output in a different representation: `x = A(y) + zeta B(y)` and
+`x conjugate(x) = A^2 + yAB + B^2`. Across 10,811 term-schedule checks and
+11,083 semantic calls, its boundaries, resources, restoration, and reuse
+match production exactly.
+
+```text
+period family   calls  terms  integer products  direct named total  raw Horner  M115-raw
+1      PRIMARY      5     69             9,384              93,790      10,005    83,785
+1      REUSE        5     69             9,384             101,475      10,097    91,378
+64     PRIMARY     93  1,101           149,736           3,324,441   2,790,766   533,675
+64     REUSE       98  1,154           156,944           3,695,435   2,901,994   793,441
+```
+
+The corresponding reductions from M114 are 2,298, 2,303, 141,782, and
+144,589 bits. The named totals are sums of separately observed maxima, not
+simultaneous or whole-process peaks. All four remain above raw, and compact
+classical software can execute the identical direct degree-8 bilinear map.
+
+Exact payload and ledger restoration on the original backing holds for both
+families at periods 1 and 64, without retained inverse history or baseline
+reload. Unrelated cross-family reuse is established at period 1. Full object
+equality and machine-enforced generation or lease custody are not established.
+
+No distinct phase resource, computational advantage, Small Wall crossing,
+CATVM custody, physical waveform execution, physical bit replacement,
+catalytic inference, or unbounded computation is established.
+
+The next experiment is:
+
+```text
+PHASE_NATIVE_NONCLASSICAL_TRACE_COUPLING_OR_EXACT_FULL_CARRIER_PHASE_QUOTIENT_WITH_BOUNDARY_LIFT
+```
+
+The obstruction is:
+
+```text
+THE_NORM_SEARCH_NO_LONGER_NEEDS_ANY_DEGREE16_HERMITIAN_PRODUCT_BUT_THE_PHASE_CARRIER_AND_CERTIFIED_ACTION_REMAIN_FULL_CYCLOTOMIC_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_DIRECT_BILINEAR_MAP
+```

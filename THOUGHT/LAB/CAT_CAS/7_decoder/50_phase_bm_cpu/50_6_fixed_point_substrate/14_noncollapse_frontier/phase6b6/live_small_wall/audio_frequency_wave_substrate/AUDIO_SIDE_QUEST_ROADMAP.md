@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_STREAMED_REAL_AUTOCORRELATION_REMOVES_FULL_AGGREGATE_BUT_FULL_TERMS_AND_IDENTICAL_CLASSICAL_OBSTRUCTIONS_REMAIN`
-**Roadmap version:** `12.0`
+**Status:** `STRICT_SCOPE_DIRECT_REAL_HERMITIAN_GENERATOR_REMOVES_ACCEPTED_DEGREE16_NORM_PRODUCTS_BUT_FULL_CARRIER_FINAL_ACTION_AND_IDENTICAL_CLASSICAL_OBSTRUCTIONS_REMAIN`
+**Roadmap version:** `12.1`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `7b0e6050c94619643175fe803c01a3d192f84134`
+**Reconciled source head:** `d4e117ae06597abb683e50b0e2a466cbdc877c2d`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_TERM_STREAMING_ELIMINATES_THE_FULL_CYCLOTOMIC_AGGREGATE_NORM_FROM_INITIAL_SEARCH_AND_CERTIFIED_ACTION_VERIFICATION_WHILE_PRESERVING_BOUNDARIES_EXACT_RESTORATION_AND_PERIOD1_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_FAMILIES_PERIODS1AND64_TERM_STREAMED_FULL_PRODUCT_TO_DEGREE8_REAL_NORM_ACCUMULATOR_NO_DEGREE16_AGGREGATE_ONE_FULL_CERTIFIED_ACTION_ONE_RESIDENT_HORNER_CARRIER_EXACT_BOUNDARY_RESOURCE_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE_PARITY_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_DIRECT_EIGHT_COORDINATE_HERMITIAN_GENERATOR_ELIMINATES_PER_ELEMENT_DEGREE16_PRODUCTS_FROM_THE_ACCEPTED_NORM_PATH_WHILE_PRESERVING_BOUNDARIES_EXACT_RESTORATION_AND_PERIOD1_REUSE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_FAMILIES_PERIODS1AND64_DIRECT_8_COORDINATE_HERMITIAN_TERM_GENERATION_NO_ACCEPTED_DEGREE16_NORM_PRODUCT_ONE_FULL_CYCLOTOMIC_HORNER_CARRIER_ONE_FULL_CERTIFIED_ACTION_EXACT_BOUNDARY_RESOURCE_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE_PARITY_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `PAUSED_BY_USER_AFTER_M114_CHECKPOINT`
+**New mechanism development:** `ACTIVE_AFTER_USER_RESUME_AND_M115_CHECKPOINT`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor (held):** `EXACT_REAL_SUBFIELD_HERMITIAN_TERM_GENERATOR_WITHOUT_PER_ELEMENT_FULL_CYCLOTOMIC_PRODUCT_OR_PHASE_NATIVE_NONCLASSICAL_TRACE_COUPLING`
+**Active primary successor:** `PHASE_NATIVE_NONCLASSICAL_TRACE_COUPLING_OR_EXACT_FULL_CARRIER_PHASE_QUOTIENT_WITH_BOUNDARY_LIFT`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`7b0e6050c94619643175fe803c01a3d192f84134`. The current 114-milestone
+`d4e117ae06597abb683e50b0e2a466cbdc877c2d`. The current 115-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -3680,6 +3680,68 @@ The obstruction is:
 THE_FULL_AGGREGATE_NORM_IS_GONE_BUT_EACH_HERMITIAN_TERM_THE_RESIDENT_CARRIER_AND_THE_CERTIFIED_ACTION_STILL_USE_THE_FULL_CYCLOTOMIC_REPRESENTATION_AND_COMPACT_CLASSICAL_SOFTWARE_CAN_USE_THE_SAME_STREAM
 ```
 
+## Direct real Hermitian generation removes accepted degree-16 norm products
+
+M115 replaces each temporary `x * conjugate(x)` plus real-field conversion
+with a direct eight-coordinate Hermitian generator. For canonical
+`x = sum(a_j zeta^j)`, extend with `a_16 = 0`, form the cyclic correlations
+`P_k = sum_j a_j a_(j+k mod 17)`, and emit
+`(P_0-P_8, ..., P_7-P_8)` in the integral real basis. The accepted schedule
+stores `P_8` and streams `P_0` through `P_7`.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+source head     d4e117ae06597abb683e50b0e2a466cbdc877c2d
+```
+
+The separate oracle imports no production M115 module and derives the same
+Hermitian value by writing `x = A(y) + zeta B(y)` over the real-subfield power
+basis, then evaluating `A^2 + yAB + B^2`. It also independently reexecutes
+the public direct schedule for resource parity. The accepted generator uses
+136 integer multiplications, 127 accumulation additions, and 8 final
+subtractions per Hermitian term. It materializes no conjugate tuple, full
+degree-16 Hermitian product, full-to-real conversion, or degree-16 norm
+scratch.
+
+```text
+period family   calls  terms  integer products  direct named total  raw Horner  difference
+1      PRIMARY      5     69             9,384              93,790      10,005     +83,785
+1      REUSE        5     69             9,384             101,475      10,097     +91,378
+64     PRIMARY     93  1,101           149,736           3,324,441   2,790,766    +533,675
+64     REUSE       98  1,154           156,944           3,695,435   2,901,994    +793,441
+```
+
+These totals reduce the corresponding M114 named sums by 2,298, 2,303,
+141,782, and 144,589 bits. They remain conservative sums of named maxima,
+not simultaneous or whole-process peaks, and all four remain above the
+matched raw Horner baseline. Python objects, allocator/native-library state,
+and internal integer multiplication storage are not bounded.
+
+Exact payload and ledger restoration holds on the original backing for both
+families at periods 1 and 64, with no retained inverse history or baseline
+reload. Unrelated cross-family reuse is established at period 1. Full object
+equality and enforced generation/lease custody are not established.
+
+Compact classical software can execute the identical direct bilinear map.
+No distinct phase resource, computational advantage, Small Wall crossing,
+CATVM custody, physical waveform execution, physical bit replacement,
+catalytic inference, or unbounded computation is established.
+
+The next experiment is:
+
+```text
+PHASE_NATIVE_NONCLASSICAL_TRACE_COUPLING_OR_EXACT_FULL_CARRIER_PHASE_QUOTIENT_WITH_BOUNDARY_LIFT
+```
+
+The obstruction is:
+
+```text
+THE_NORM_SEARCH_NO_LONGER_NEEDS_ANY_DEGREE16_HERMITIAN_PRODUCT_BUT_THE_PHASE_CARRIER_AND_CERTIFIED_ACTION_REMAIN_FULL_CYCLOTOMIC_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_DIRECT_BILINEAR_MAP
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -3717,7 +3779,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_TERM_STREAMING_ELIMINATES_THE_FULL_CYCLOTOMIC_AGGREGATE_NORM_FROM_INITIAL_SEARCH_AND_CERTIFIED_ACTION_VERIFICATION_WHILE_PRESERVING_BOUNDARIES_EXACT_RESTORATION_AND_PERIOD1_REUSE
+BOUNDED_EXACT_DIRECT_EIGHT_COORDINATE_HERMITIAN_GENERATOR_ELIMINATES_PER_ELEMENT_DEGREE16_PRODUCTS_FROM_THE_ACCEPTED_NORM_PATH_WHILE_PRESERVING_BOUNDARIES_EXACT_RESTORATION_AND_PERIOD1_REUSE
 ```
 
 Not established:
@@ -3766,7 +3828,6 @@ intrinsic lower bound across all integral bases
 asymptotic residual-height lower bound from the five tested periods
 basis-optimal exact pi-content normalization
 exact Python allocator, internal multiplication, or whole-process peak
-elimination of per-element full cyclotomic Hermitian products
 full real-subfield carrier or final certified action
 ```
 
@@ -3793,12 +3854,13 @@ blocking the mission.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve the
 exact F17 recurrence, pi-content, unit-search, deferred-ledger, Horner,
-real-subfield, and streamed-autocorrelation evidence together with the
-earlier relational and gauge-transport results. M114 removed the full
-aggregate norm but retained full per-element products, the full carrier, the
-final certified action, and the identical compact classical stream. Resume
-only from that measured obstruction; do not repeat M114 fixture sizes or
-reintroduce the removed aggregate.
+real-subfield, streamed-autocorrelation, and direct-Hermitian evidence
+together with the earlier relational and gauge-transport results. M115
+removed accepted degree-16 products from Hermitian term generation but
+retained the full cyclotomic carrier, the final certified action, and an
+identical compact classical bilinear execution. Continue only from that
+measured obstruction; do not repeat M115 fixture sizes or reintroduce the
+removed full products.
 
 ## 10. Roadmap Maintenance
 
