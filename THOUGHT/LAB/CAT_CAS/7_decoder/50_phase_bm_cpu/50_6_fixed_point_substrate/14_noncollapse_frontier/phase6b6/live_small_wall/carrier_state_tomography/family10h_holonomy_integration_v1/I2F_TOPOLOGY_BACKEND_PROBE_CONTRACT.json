@@ -69,6 +69,7 @@
     ],
     "directional_operation_fields": [
       "carrier_id",
+      "source_death_seal_id",
       "operator_role",
       "acting_core",
       "expected_prior_owner_proxy",
