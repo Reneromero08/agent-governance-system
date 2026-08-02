@@ -1,0 +1,297 @@
+{
+  "basis_mismatch_identity_checks": [
+    {
+      "agreement": true,
+      "exponent": 0
+    },
+    {
+      "agreement": true,
+      "exponent": 1
+    },
+    {
+      "agreement": true,
+      "exponent": 5
+    },
+    {
+      "agreement": true,
+      "exponent": 16
+    }
+  ],
+  "bounded_native_holant_parity": [
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "latent": 0,
+      "module": 0
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "latent": 1,
+      "module": 0
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "latent": 7,
+      "module": 0
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "latent": 0,
+      "module": 1
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "latent": 1,
+      "module": 1
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "latent": 7,
+      "module": 1
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "latent": 0,
+      "module": 0
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "latent": 1,
+      "module": 0
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "latent": 7,
+      "module": 0
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "latent": 0,
+      "module": 1
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "latent": 1,
+      "module": 1
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "latent": 7,
+      "module": 1
+    }
+  ],
+  "claim_ceiling": {
+    "arbitrary_latent_geometry_or_planar_holant_closure": false,
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "dual_field_structural_sizes": [
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "even_open_square_grid_family_only": true,
+    "exact_q_zeta17_sizes": [
+      2,
+      4,
+      6
+    ],
+    "fixed_17_coordinate_latent_port_only": true,
+    "identical_compact_classical_direct_sum_recurrence": true,
+    "physical_bits_replaced_with_pi": false,
+    "physical_waveform_execution": false,
+    "small_wall_crossing": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "control_receipt_consistency": {
+    "all_required_controls_true": true,
+    "limitation": "LIFECYCLE_RECEIPTS_REQUIRE_SEPARATE_SOURCE_AUDIT_NOT_ORACLE_INFERENCE"
+  },
+  "dual_field_structural_parity": [
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "n": 2
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "n": 4
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "n": 6
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "n": 8
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "n": 10
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "n": 2
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "n": 4
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "n": 6
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "n": 8
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "n": 10
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "n": 2
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "n": 4
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "n": 6
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "n": 8
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "n": 10
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F137",
+      "n": 2
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F137",
+      "n": 4
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F137",
+      "n": 6
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F137",
+      "n": 8
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F137",
+      "n": 10
+    }
+  ],
+  "exact_production_parity": [
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "n": 2
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "n": 4
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "n": 6
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "n": 2
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "n": 4
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "n": 6
+    }
+  ],
+  "independence": {
+    "imports_production_or_matchgate_predecessor": false,
+    "latent_recurrence": "INDEPENDENT_34_COORDINATE_FOURIER_CHIRP_SHEAR_EXECUTION",
+    "matching_oracle": "INDEPENDENT_ROW_PROFILE_PERFECT_MATCHING_RECURRENCE"
+  },
+  "next_obstruction": "THE_COHERENT_SHARED_BASIS_PORT_IS_EXACT_AND_CAUSALLY_USED_BUT_ITS_FIXED_17_COORDINATES_ARE_THE_IDENTICAL_CLASSICAL_DIRECT_SUM",
+  "observed_resource_law": {
+    "fixed_latent_direct_sum_rank": 17,
+    "independent_matching_interface_states": "2_TO_THE_N",
+    "independent_module_work": "O_17_N_2_TO_THE_N_FIELD_OPERATIONS_FOR_ORACLE_ONLY",
+    "latent_coordinate_count": 17,
+    "oracle_latent_boundary_vector_field_cells": 17,
+    "oracle_materializes_fixed_latent_boundary_vector": true,
+    "production_matched_determinant_work": "O_17_N_TO_THE_6_FIELD_OPERATIONS",
+    "production_streams_each_latent_boundary_directly_into_resident_state": true,
+    "resident_latent_field_cells": 34
+  },
+  "schema": "CAT_CAS_F17_COHERENT_LATENT_BASIS_MISMATCH_GRID_CLOSURE_ORACLE_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
