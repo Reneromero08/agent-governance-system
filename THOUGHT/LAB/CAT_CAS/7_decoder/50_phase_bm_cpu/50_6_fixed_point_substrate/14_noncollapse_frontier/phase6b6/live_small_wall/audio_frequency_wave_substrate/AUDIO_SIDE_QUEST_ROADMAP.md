@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_RUNTIME_WEIGHTED_F17_GRID_FACTOR_CLOSURE_HAS_ROW_INTERFACE_RANKS4_8_16_BUT_TRANSFER_AND_GRAY_DELTA_BASELINES_REMOVE_ANY_RESOURCE_CLAIM`
-**Roadmap version:** `12.5`
+**Status:** `STRICT_SCOPE_KRONECKER_BUTTERFLY_REPAIRS_FOUR_TO_THE_N_GRID_TRANSFER_WORK_BUT_FULL_TWO_TO_THE_N_INTERFACE_AND_IDENTICAL_CLASSICAL_RECURRENCE_REMAIN`
+**Roadmap version:** `12.6`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `af8a41ae5acf179eac57576ce58a75a55d2d2d1e`
+**Reconciled source head:** `9ddc7fc623ec28bb6557e865fdadca5b38d73241`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_RUNTIME_WEIGHTED_F17_GRID_PHASE_FACTOR_CLOSURE_FOR_N2_N3_N4_TREEWIDTH2_3_4_WITH_CERTIFIED_ACTUAL_ROW_INTERFACE_RANKS4_8_16_FINAL_ONLY_SCALAR_PROJECTION_EXACT_REVERSE_RESTORATION_AND_HELD_OUT_SAME_BACKING_REUSE_BUT_NO_DISTINCT_RESOURCE_OBSERVED_AGAINST_THE_EVALUATED_TRANSFER_GRAY_DELTA_HISTOGRAM_AND_THREE_ORDER_MTBDD_BASELINES`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_DETERMINISTIC_PUBLIC_RUNTIME_WEIGHT_FAMILIES_ON_BINARY_N_BY_N_GRIDS_N2_N3_N4_EXACT_PUBLIC_FACTOR_STATE_MUTATION_ACTUAL_ROW_INTERFACE_RANKS4_8_16_ONE_FINAL_CYCLOTOMIC_SCALAR_PROJECTION_EXACT_REVERSE_AND_SEED_UNLOAD_ZERO_BACKING_RESTORATION_HELD_OUT_SAME_BACKING_REUSE_NO_DENSE_TWO_TO_THE_N_SQUARED_TENSOR_ON_ACCEPTED_PATH_BUT_TWO_TO_THE_N_INTERFACE_MESSAGES_AND_N_MINUS_ONE_TIMES_FOUR_TO_THE_N_TRANSITIONS_EVALUATED_BASELINES_NONEXHAUSTIVE_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_RUNTIME_WEIGHTED_F17_GRID_PHASE_FACTOR_KRONECKER_BUTTERFLY_CLOSURE_FOR_N2_N3_N4_WITH_FULL_ROW_INTERFACE_RANKS4_8_16_TOPOLOGY_DERIVED_N_TIMES_TWO_TO_THE_N_TRANSFER_FINAL_ONLY_SCALAR_PROJECTION_EXACT_REVERSE_FACTOR_CARRIER_RESTORATION_AND_HELD_OUT_SAME_BACKING_REUSE_BUT_NO_COMPACTION_BELOW_TWO_TO_THE_N_MESSAGES_OR_DISTINCT_PHASE_RESOURCE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_DETERMINISTIC_PUBLIC_RUNTIME_WEIGHT_FAMILIES_BINARY_N_BY_N_GRIDS_N2_N3_N4_ACTUAL_RESIDENT_FACTOR_KRONECKER_BUTTERFLY_ROOT_ACTIONS4_24_96_ADDITIONS8_48_192_EXACT_INTERFACE_RANKS4_8_16_ONE_FINAL_CYCLOTOMIC_SCALAR_LIFT_EXACT_FACTOR_CARRIER_REVERSE_AND_SEED_UNLOAD_ZERO_BACKING_RESTORATION_HELD_OUT_SAME_BACKING_REUSE_TRANSIENT_FRONTIER_NO_RESTORATION_CLAIM_IDENTICAL_TWO_TO_THE_N_MESSAGE_CLASSICAL_BUTTERFLY_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M119_GROWING_TREEWIDTH_NEGATIVE_RESOURCE_DIAGNOSTIC`
+**New mechanism development:** `ACTIVE_AFTER_M120_KRONECKER_BUTTERFLY_TRANSFER_WORK_REPAIR`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `PHASE_NATIVE_SEPARATOR_QUOTIENT_OR_COUPLING_RESOURCE_THAT_AVOIDS_BOTH_TWO_TO_THE_N_INTERFACE_MESSAGES_AND_TWO_TO_THE_N_SQUARED_GLOBAL_ENUMERATION_AGAINST_THE_EVALUATED_COMPACT_CLASSICAL_BASELINE_SET`
+**Active primary successor:** `OVERLAPPING_CUBIC_PHASE_AND_EXACT_MIXING_COMPOSITION_WITH_THIRD_BOOLEAN_DIFFERENCE_CERTIFICATE_AGAINST_MATCHGATE_TENSOR_NETWORK_AND_DECISION_DIAGRAM_BASELINES`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`af8a41ae5acf179eac57576ce58a75a55d2d2d1e`. The current 119-milestone
+`9ddc7fc623ec28bb6557e865fdadca5b38d73241`. The current 120-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4033,6 +4033,90 @@ The obstruction is:
 EXACT_PHASE_FACTOR_STORAGE_REMAINS_COMPACT_BUT_FINAL_CLOSURE_HAS_NO_LEVERAGE_THE_IDENTICAL_TRANSFER_USES_TWO_TO_THE_N_SEPARATOR_MESSAGES_WHILE_THE_17_BIN_GRAY_DELTA_HISTOGRAM_TRADES_CHARACTER_ACCUMULATOR_MEMORY_FOR_TWO_TO_THE_N_SQUARED_GLOBAL_ASSIGNMENTS
 ```
 
+### 6.120 Exact resident-factor Kronecker-butterfly closure repair
+
+M120 preserves M119 as a frozen bounded result and repairs its missed compact
+row-kernel application in a distinct successor. For one vertical column, the
+actual resident factor is checked as
+
+```text
+K(J) = [[1,1],[1,zeta17^J]].
+```
+
+The accepted closure validates the three resident unit cells and consumes the
+actual resident fourth cell in an MSB-indexed butterfly. It materializes
+neither a `2^n x 2^n` interface matrix nor source/target pairs.
+
+```text
+classification       INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification         INDEPENDENT_ORACLE_REEXECUTION
+factor restoration   EXACT_ALGEBRAIC_RESTORATION
+transient buffers     NO_RESTORATION_CLAIM
+hosted run            NOT ESTABLISHED
+source head           9ddc7fc623ec28bb6557e865fdadca5b38d73241
+```
+
+The repaired exact interface work is:
+
+```text
+n                              2       3       4
+factor cells                  24      66     128
+row-interface messages         4       8      16
+exact interface rank           4       8      16
+nontrivial root actions         4      24      96
+butterfly additions             8      48     192
+global tensor cells avoided    16     512  65,536
+```
+
+These counts are `(n-1)n2^(n-1)` root actions and twice as many additions,
+not the historical `(n-1)4^n` source/target transitions. Row-factor
+construction and pointwise diagonal multiplication are counted separately.
+The Python implementation uses conservative alias-inclusive transient
+buffers; it does not claim an optimal simultaneous object peak.
+
+The independent oracle imports neither production nor the phase backend. It
+reconstructs all six boundaries in a separate 16-integer power basis from a
+Gray-code global character histogram, reexecutes the butterfly counts, and
+forms explicit `F103` interface matrices. Their ranks are exactly `4,8,16`;
+setting one separator weight to zero halves them. A separate dense
+source/target contraction on nontrivial exact vectors also agrees with every
+MSB-indexed butterfly interface. The qualifier checks parity with the frozen
+M119 boundaries.
+
+Only the final scalar receives a full cyclotomic lift. Reverse phase actions
+and seed unload restore the actual borrowed factor carrier to its original
+zero backing, and the held-out family reuses that same backing. The transient
+butterfly frontiers are projection work buffers, are not retained, and have
+`NO_RESTORATION_CLAIM`. A future claim of catalytic custody or restoration of
+those frontiers would require a resident interface bank and its actual
+inverse.
+
+The strongest evaluated generic row comparator is now the identical compact
+`2^n`-message Kronecker butterfly. The Gray-delta 17-bin histogram remains a
+lower-memory `2^(n^2)`-assignment comparison. Neither the evaluated set nor
+the observed timings establish Pareto optimality or advantage; ADD/MPS,
+matchgate, holographic, symmetry, and boundary-specific reductions remain
+unexhausted.
+
+M120 fixes a concrete transition-work source defect but leaves the structural
+obstruction unchanged: exact interface rank and message storage remain
+`2^n`, and compact classical software executes the identical recurrence. It
+establishes no separator quotient, CATVM custody, distinct phase resource,
+computational advantage, Small Wall crossing, inference, physical execution,
+bit replacement, or unbounded computation.
+
+The next experiment is:
+
+```text
+OVERLAPPING_CUBIC_PHASE_AND_EXACT_MIXING_COMPOSITION_WITH_THIRD_BOOLEAN_DIFFERENCE_CERTIFICATE_AGAINST_MATCHGATE_TENSOR_NETWORK_AND_DECISION_DIAGRAM_BASELINES
+```
+
+The obstruction is:
+
+```text
+THE_FOUR_TO_THE_N_TRANSFER_WORK_DEFECT_IS_REPAIRED_BUT_EXACT_ROW_INTERFACE_RANK_AND_MESSAGE_STORAGE_REMAIN_TWO_TO_THE_N_AND_THE_IDENTICAL_CLASSICAL_BUTTERFLY_HAS_THE_SAME_RECURRENCE
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -4070,7 +4154,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_RUNTIME_WEIGHTED_F17_GRID_PHASE_FACTOR_CLOSURE_FOR_N2_N3_N4_TREEWIDTH2_3_4_WITH_CERTIFIED_ACTUAL_ROW_INTERFACE_RANKS4_8_16_FINAL_ONLY_SCALAR_PROJECTION_EXACT_REVERSE_RESTORATION_AND_HELD_OUT_SAME_BACKING_REUSE_BUT_NO_DISTINCT_RESOURCE_OBSERVED_AGAINST_THE_EVALUATED_TRANSFER_GRAY_DELTA_HISTOGRAM_AND_THREE_ORDER_MTBDD_BASELINES
+BOUNDED_EXACT_RUNTIME_WEIGHTED_F17_GRID_PHASE_FACTOR_KRONECKER_BUTTERFLY_CLOSURE_FOR_N2_N3_N4_WITH_FULL_ROW_INTERFACE_RANKS4_8_16_TOPOLOGY_DERIVED_N_TIMES_TWO_TO_THE_N_TRANSFER_FINAL_ONLY_SCALAR_PROJECTION_EXACT_REVERSE_FACTOR_CARRIER_RESTORATION_AND_HELD_OUT_SAME_BACKING_REUSE_BUT_NO_COMPACTION_BELOW_TWO_TO_THE_N_MESSAGES_OR_DISTINCT_PHASE_RESOURCE
 ```
 
 Not established:
@@ -4136,6 +4220,10 @@ compact row-interface closure across the M119 growing-treewidth cases
 an exhaustive or Pareto-optimal M119 compact-classical comparison set
 advantage over the M119 identical row transfer or Gray-delta histogram
 lower bound against untested matchgate, holographic, or other boundary reductions
+restoration or CATVM custody of M120 transient butterfly frontiers
+separator compression below the M120 exact 2^n interface
+global optimality of the M120 identical classical butterfly
+distinct phase resource or advantage from the M120 work repair
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4186,13 +4274,18 @@ nonpublic coupling law or a controlled growing-treewidth closure with the
 strongest optimal tensor-network baseline. Do not add more width-four public
 fixtures or treat tensor materialization as a native resource. M119 then
 tested public runtime-weighted square grids at treewidths two, three, and four.
-The factor carrier avoided the dense global tensor, but final closure still
+The factor carrier avoided the dense global tensor, but M119 final closure
 used `2^n` interface messages and `(n-1)4^n` transitions, while a Gray-delta
 17-bin histogram retained a smaller-memory global-enumeration alternative.
-Continue only toward a phase-owned separator quotient or coupling law that
-avoids both costs against the evaluated compact classical set. Do not add
-larger public grid fixtures unless they resolve that mechanism-level
-obstruction, and do not treat the evaluated baseline set as exhaustive.
+M120 then repaired the missed row-kernel application with actual-resident
+Kronecker butterflies: root actions fall to `(n-1)n2^(n-1)`, but exact rank
+and message storage remain `2^n`, transient frontier buffers have no
+restoration claim, and the identical classical recurrence remains. Continue
+from that structural obstruction into a nonquadratic composition law or a
+genuine separator quotient with matchgate, tensor-network, decision-diagram,
+and boundary-specific controls. Do not add larger public grid fixtures unless
+they resolve the mechanism-level obstruction, and do not treat the evaluated
+baseline set as exhaustive.
 
 ## 10. Roadmap Maintenance
 

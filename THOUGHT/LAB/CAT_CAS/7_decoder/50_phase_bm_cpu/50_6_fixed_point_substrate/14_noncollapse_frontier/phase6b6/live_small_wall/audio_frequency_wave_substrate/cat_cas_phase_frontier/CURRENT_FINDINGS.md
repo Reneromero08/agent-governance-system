@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`af8a41ae5acf179eac57576ce58a75a55d2d2d1e`. The canonical per-milestone
+`9ddc7fc623ec28bb6557e865fdadca5b38d73241`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -7020,4 +7020,75 @@ The obstruction is:
 
 ```text
 EXACT_PHASE_FACTOR_STORAGE_REMAINS_COMPACT_BUT_FINAL_CLOSURE_HAS_NO_LEVERAGE_THE_IDENTICAL_TRANSFER_USES_TWO_TO_THE_N_SEPARATOR_MESSAGES_WHILE_THE_17_BIN_GRAY_DELTA_HISTOGRAM_TRADES_CHARACTER_ACCUMULATOR_MEMORY_FOR_TWO_TO_THE_N_SQUARED_GLOBAL_ASSIGNMENTS
+```
+
+## Exact resident-factor Kronecker-butterfly grid closure repair
+
+M120 preserves M119 and repairs its missed row-kernel application in a
+distinct source package at scientific head
+`9ddc7fc623ec28bb6557e865fdadca5b38d73241`.
+
+```text
+classification       INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification         INDEPENDENT_ORACLE_REEXECUTION
+factor restoration   EXACT_ALGEBRAIC_RESTORATION
+transient buffers     NO_RESTORATION_CLAIM
+hosted run            NOT ESTABLISHED
+```
+
+For each vertical column, the accepted path validates the actual resident
+factor as `[[1,1],[1,zeta17^J]]` and consumes its resident root in an
+MSB-indexed Kronecker butterfly. All six M119 boundaries are preserved.
+
+```text
+n                              2       3       4
+factor cells                  24      66     128
+exact interface rank           4       8      16
+row-interface messages         4       8      16
+nontrivial root actions         4      24      96
+butterfly additions             8      48     192
+global tensor cells avoided    16     512  65,536
+```
+
+This removes M119's `(n-1)4^n` source/target work from the accepted closure.
+The new exact counts are `(n-1)n2^(n-1)` resident-root actions and twice as
+many additions. No dense transfer matrix or source/target pair enumeration is
+present. Row-factor construction and pointwise diagonal work remain separate
+and counted.
+
+The independent oracle imports neither production nor the phase backend. It
+reconstructs every boundary in a separate 16-integer power basis from a
+Gray-code character histogram, reexecutes exact counts, and forms explicit
+`F103` matrices with ranks `4,8,16`. Setting one separator weight to zero
+halves each rank. A separate exact dense-vector check agrees with every
+butterfly interface.
+
+Only the final scalar receives a full lift. The actual borrowed factor carrier
+is reversed and seed-unloaded to its original zero backing, then reused by the
+held-out family on the same backing. The transient butterfly frontiers are
+discarded projection work and have `NO_RESTORATION_CLAIM`; no CATVM or
+catalytic custody of them is claimed.
+
+The strongest evaluated generic row recurrence is now the identical exact
+`2^n`-message classical butterfly. Its diagonal generation is not
+operation-matched to the resident-factor path, and timings are observational.
+ADD/MPS, matchgate, holographic, symmetry, and boundary-specific reductions
+remain unexhausted.
+
+The repair therefore changes the work law but not the scientific resource
+position. Exact interface rank and message storage remain `2^n`, with an
+identical compact classical recurrence. No separator quotient, distinct phase
+resource, advantage, Small Wall crossing, CATVM custody, inference, physical
+execution, bit replacement, or unbounded computation is established.
+
+The selected successor is:
+
+```text
+OVERLAPPING_CUBIC_PHASE_AND_EXACT_MIXING_COMPOSITION_WITH_THIRD_BOOLEAN_DIFFERENCE_CERTIFICATE_AGAINST_MATCHGATE_TENSOR_NETWORK_AND_DECISION_DIAGRAM_BASELINES
+```
+
+The surviving obstruction is:
+
+```text
+THE_FOUR_TO_THE_N_TRANSFER_WORK_DEFECT_IS_REPAIRED_BUT_EXACT_ROW_INTERFACE_RANK_AND_MESSAGE_STORAGE_REMAIN_TWO_TO_THE_N_AND_THE_IDENTICAL_CLASSICAL_BUTTERFLY_HAS_THE_SAME_RECURRENCE
 ```
