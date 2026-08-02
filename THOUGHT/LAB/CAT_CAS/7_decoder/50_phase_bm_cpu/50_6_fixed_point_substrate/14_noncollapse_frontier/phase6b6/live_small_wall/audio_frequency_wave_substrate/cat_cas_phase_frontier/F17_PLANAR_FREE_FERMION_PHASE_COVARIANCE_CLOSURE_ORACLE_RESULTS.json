@@ -1,0 +1,699 @@
+{
+  "claim_ceiling": {
+    "cycle_space_enumeration_is_accepted_path": false,
+    "independently_checks_spin_transform_and_sparse_defect_boundaries": true,
+    "oracle_enumeration_proves_compact_execution": false
+  },
+  "exact_cases": [
+    {
+      "boundary": [
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "bounded_face_cycle_rank": 1,
+      "cycle_space_terms_evaluated": 2,
+      "defect_count": 0,
+      "dense_assignment_count": 16,
+      "dense_cycle_exact_agreement": true,
+      "even_sector_count": 1,
+      "n": 2,
+      "residue_histogram": [
+        2,
+        0,
+        2,
+        4,
+        2,
+        0,
+        2,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "boundary": [
+        [
+          4,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          6,
+          1
+        ]
+      ],
+      "bounded_face_cycle_rank": 4,
+      "cycle_space_terms_evaluated": 16,
+      "defect_count": 0,
+      "dense_assignment_count": 512,
+      "dense_cycle_exact_agreement": true,
+      "even_sector_count": 1,
+      "n": 3,
+      "residue_histogram": [
+        30,
+        24,
+        36,
+        24,
+        30,
+        26,
+        32,
+        36,
+        26,
+        32,
+        32,
+        32,
+        32,
+        26,
+        36,
+        32,
+        26
+      ]
+    },
+    {
+      "boundary": [
+        [
+          16,
+          1
+        ],
+        [
+          -100,
+          1
+        ],
+        [
+          18,
+          1
+        ],
+        [
+          -100,
+          1
+        ],
+        [
+          16,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          256,
+          1
+        ],
+        [
+          36,
+          1
+        ],
+        [
+          166,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          -110,
+          1
+        ],
+        [
+          -110,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          166,
+          1
+        ],
+        [
+          36,
+          1
+        ],
+        [
+          256,
+          1
+        ]
+      ],
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 512,
+      "defect_count": 0,
+      "dense_assignment_count": 65536,
+      "dense_cycle_exact_agreement": true,
+      "even_sector_count": 1,
+      "n": 4,
+      "residue_histogram": [
+        3838,
+        3722,
+        3840,
+        3722,
+        3838,
+        3822,
+        4078,
+        3858,
+        3988,
+        3830,
+        3712,
+        3712,
+        3830,
+        3988,
+        3858,
+        4078,
+        3822
+      ]
+    },
+    {
+      "boundary": [
+        [
+          -120,
+          1
+        ],
+        [
+          -170,
+          1
+        ],
+        [
+          -169,
+          1
+        ],
+        [
+          -169,
+          1
+        ],
+        [
+          -170,
+          1
+        ],
+        [
+          -120,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          18,
+          1
+        ],
+        [
+          -27,
+          1
+        ],
+        [
+          -41,
+          1
+        ],
+        [
+          -179,
+          1
+        ],
+        [
+          -238,
+          1
+        ],
+        [
+          -179,
+          1
+        ],
+        [
+          -41,
+          1
+        ],
+        [
+          -27,
+          1
+        ],
+        [
+          18,
+          1
+        ]
+      ],
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 512,
+      "defect_count": 1,
+      "dense_assignment_count": 65536,
+      "dense_cycle_exact_agreement": true,
+      "even_sector_count": 1,
+      "n": 4,
+      "residue_histogram": [
+        3830,
+        3780,
+        3781,
+        3781,
+        3780,
+        3830,
+        3950,
+        3968,
+        3923,
+        3909,
+        3771,
+        3712,
+        3771,
+        3909,
+        3923,
+        3968,
+        3950
+      ]
+    },
+    {
+      "boundary": [
+        [
+          -18,
+          1
+        ],
+        [
+          29,
+          1
+        ],
+        [
+          -101,
+          1
+        ],
+        [
+          -226,
+          1
+        ],
+        [
+          -37,
+          1
+        ],
+        [
+          -112,
+          1
+        ],
+        [
+          -123,
+          1
+        ],
+        [
+          -8,
+          1
+        ],
+        [
+          49,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -58,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          -141,
+          1
+        ],
+        [
+          -213,
+          1
+        ],
+        [
+          -72,
+          1
+        ],
+        [
+          52,
+          1
+        ]
+      ],
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 1024,
+      "defect_count": 2,
+      "dense_assignment_count": 65536,
+      "dense_cycle_exact_agreement": true,
+      "even_sector_count": 2,
+      "n": 4,
+      "residue_histogram": [
+        3894,
+        3941,
+        3811,
+        3686,
+        3875,
+        3800,
+        3789,
+        3904,
+        3961,
+        3913,
+        3854,
+        3922,
+        3771,
+        3699,
+        3840,
+        3964,
+        3912
+      ]
+    },
+    {
+      "boundary": [
+        [
+          86,
+          1
+        ],
+        [
+          208,
+          1
+        ],
+        [
+          117,
+          1
+        ],
+        [
+          -89,
+          1
+        ],
+        [
+          -55,
+          1
+        ],
+        [
+          -101,
+          1
+        ],
+        [
+          -128,
+          1
+        ],
+        [
+          -26,
+          1
+        ],
+        [
+          179,
+          1
+        ],
+        [
+          110,
+          1
+        ],
+        [
+          90,
+          1
+        ],
+        [
+          112,
+          1
+        ],
+        [
+          13,
+          1
+        ],
+        [
+          -124,
+          1
+        ],
+        [
+          -75,
+          1
+        ],
+        [
+          24,
+          1
+        ]
+      ],
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 4096,
+      "defect_count": 4,
+      "dense_assignment_count": 65536,
+      "dense_cycle_exact_agreement": true,
+      "even_sector_count": 8,
+      "n": 4,
+      "residue_histogram": [
+        3921,
+        4043,
+        3952,
+        3746,
+        3780,
+        3734,
+        3707,
+        3809,
+        4014,
+        3945,
+        3925,
+        3947,
+        3848,
+        3711,
+        3760,
+        3859,
+        3835
+      ]
+    }
+  ],
+  "implementation": "INDEPENDENT_BINARY_RESIDUE_HISTOGRAM_AND_BOUNDED_FACE_CYCLE_SPACE",
+  "imports_terminal_pfaffian_implementation": false,
+  "modular_controls": [
+    {
+      "boundary": 61,
+      "bounded_face_cycle_rank": 1,
+      "cycle_space_terms_evaluated": 2,
+      "defect_count": 0,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 1,
+      "field": "F103",
+      "n": 2
+    },
+    {
+      "boundary": 65,
+      "bounded_face_cycle_rank": 4,
+      "cycle_space_terms_evaluated": 16,
+      "defect_count": 0,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 1,
+      "field": "F103",
+      "n": 3
+    },
+    {
+      "boundary": 65,
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 512,
+      "defect_count": 0,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 1,
+      "field": "F103",
+      "n": 4
+    },
+    {
+      "boundary": 55,
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 512,
+      "defect_count": 1,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 1,
+      "field": "F103",
+      "n": 4
+    },
+    {
+      "boundary": 39,
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 1024,
+      "defect_count": 2,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 2,
+      "field": "F103",
+      "n": 4
+    },
+    {
+      "boundary": 68,
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 4096,
+      "defect_count": 4,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 8,
+      "field": "F103",
+      "n": 4
+    },
+    {
+      "boundary": 135,
+      "bounded_face_cycle_rank": 1,
+      "cycle_space_terms_evaluated": 2,
+      "defect_count": 0,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 1,
+      "field": "F137",
+      "n": 2
+    },
+    {
+      "boundary": 48,
+      "bounded_face_cycle_rank": 4,
+      "cycle_space_terms_evaluated": 16,
+      "defect_count": 0,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 1,
+      "field": "F137",
+      "n": 3
+    },
+    {
+      "boundary": 6,
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 512,
+      "defect_count": 0,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 1,
+      "field": "F137",
+      "n": 4
+    },
+    {
+      "boundary": 51,
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 512,
+      "defect_count": 1,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 1,
+      "field": "F137",
+      "n": 4
+    },
+    {
+      "boundary": 134,
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 1024,
+      "defect_count": 2,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 2,
+      "field": "F137",
+      "n": 4
+    },
+    {
+      "boundary": 49,
+      "bounded_face_cycle_rank": 9,
+      "cycle_space_terms_evaluated": 4096,
+      "defect_count": 4,
+      "dense_cycle_agreement": true,
+      "even_sector_count": 8,
+      "field": "F137",
+      "n": 4
+    }
+  ],
+  "oracle_digest": "47b52addcbda636f6ad2eda5cf567a943073513416ee90f49f4422b3f04108b9",
+  "schema": "CAT_CAS_F17_PLANAR_FREE_FERMION_PHASE_COVARIANCE_CLOSURE_ORACLE_V1"
+}

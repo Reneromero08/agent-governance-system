@@ -1,0 +1,82 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "448e9ee826fd3a793c56ae901a000d5e6ca0bca1",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "9a5bb79d800145ab71706aab6b27754dea8869f289ace13723aff7f4e7b33b20",
+  "reference_full_oracle_sha256": "a1d3f40837812c0b919a1f65c8818072af065ee0b1b7ea68652f00a22af07921",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_planar_free_fermion_phase_covariance_closure.py",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_planar_free_fermion_phase_covariance_closure_oracle.py",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_planar_free_fermion_phase_covariance_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_planar_free_fermion_phase_covariance_closure.py": "5b3e57342b9464cb90e6a3c4e05379a0086340faa965cd10debbe6b33d4b1604",
+    "f17_planar_free_fermion_phase_covariance_closure_oracle.py": "faa0d1fa46e29fbf908309e531d78b03e8c6b8940699fd7dbd51280083da17f7",
+    "F17_PLANAR_FREE_FERMION_PHASE_COVARIANCE_CLOSURE_RESULTS.json": "9a5bb79d800145ab71706aab6b27754dea8869f289ace13723aff7f4e7b33b20",
+    "F17_PLANAR_FREE_FERMION_PHASE_COVARIANCE_CLOSURE_ORACLE_RESULTS.json": "a1d3f40837812c0b919a1f65c8818072af065ee0b1b7ea68652f00a22af07921",
+    "F17_PLANAR_FREE_FERMION_PHASE_COVARIANCE_CLOSURE_INDEPENDENT_REVIEW.md": "d2a3a9031a6a345728df37c479e66ab5dd36bf584c69c53363cb1ac76ba9981c",
+    "qualify_f17_planar_free_fermion_phase_covariance_closure.sh": "58c7a62079803703dd1f42a0d7c121d1b92a1f186cf436f4780bccc62b15a72a"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_pfaffian_projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "exact_q_zeta17_open_grid_widths": [2, 3, 4],
+    "exact_n4_defect_counts": [0, 1, 2, 4],
+    "independent_methods": [
+      "BINARY_RESIDUE_HISTOGRAM",
+      "BOUNDED_FACE_CYCLE_SPACE"
+    ],
+    "dual_field_n5_through_n8": "SOURCE_AUDITED_PACKAGE_LOCAL_STRUCTURAL_EXECUTION"
+  },
+  "resource_accounting": {
+    "counted": [
+      "TRIVALENT_AND_TERMINAL_GRAPH_SIZES",
+      "PUBLIC_ORIENTATION_EQUATIONS",
+      "SPARSE_RESIDENT_PHASE_FIELD_CELLS",
+      "EXACT_RESIDENT_PHASE_PAYLOAD",
+      "TERMINAL_LOAD_AND_UNLOAD_ADDITIONS",
+      "SCALAR_ACCUMULATOR_FORWARD_AND_INVERSE_UPDATES",
+      "INTERNAL_SECTOR_PFAFFIAN_EVALUATIONS",
+      "TWO_DENSE_PFAFFIAN_MATRICES",
+      "TEN_NAMED_FIELD_SCALAR_WORK_SLOTS",
+      "EVERY_NAMED_SCHUR_FIELD_TEMPORARY",
+      "PIVOTS_SWAPS_ZERO_TESTS_FIELD_OPERATIONS",
+      "MAXIMUM_NUMERATOR_AND_DENOMINATOR_HEIGHT",
+      "FINAL_BOUNDARY_PAYLOAD",
+      "DEFECT_SECTOR_COUNT",
+      "RESTORATION_VERIFICATION_AND_REUSE"
+    ],
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "SYMPY_INTERNAL_TEMPORARIES",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "WHOLE_PROCESS_PEAK"
+    ],
+    "dense_payload_classification": "UPPER_BOUND_OVER_NAMED_LOGICAL_FIELD_SLOTS_FROM_MAXIMUM_OBSERVED_FIELD_VALUE_NOT_PHYSICAL_PROCESS_MEMORY"
+  },
+  "matched_baselines": [
+    "IDENTICAL_SQUARE_ROOT_FREE_TERMINAL_PFAFFIAN",
+    "IDENTICAL_EVEN_GAUSSIAN_BOUNDARY_COVARIANCE_OR_SPARSE_PLANAR_PFAFFIAN_KNOWN_STRONGER_IMPLEMENTATION",
+    "M120_GENERAL_FIELD_ROW_TRANSFER_O_N2_2N_WORK_2N_MEMORY_INDEPENDENT_OF_DEFECT_COUNT"
+  ],
+  "claim_ceiling": "EXACT_Q_ZETA17_OPEN_PLANAR_GRIDS_N2_N3_N4_TERMINAL_PFAFFIAN_CLOSURE_WITH_N4_K0_K1_K2_K4_STREAMED_EVEN_DEFECT_SECTORS_EXACT_RESTORATION_AND_REUSE_PLUS_DUAL_FIELD_SOURCE_LOCAL_STRUCTURE_N2_THROUGH_N8_DIRECT_PROCESS_SOFTWARE_ONLY",
+  "rejected_interpretations": [
+    "DEFECT_SECTOR_EXPANSION_LOWER_BOUND",
+    "DENSE_EXTERNAL_FIELD_COMPACTION",
+    "ARBITRARY_MATCHGATE_OR_HOLOGRAPHIC_REDUCTION",
+    "NATIVE_PHASE_ORIENTATION_PIVOT_ZERO_TEST_OR_DIVISION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}
