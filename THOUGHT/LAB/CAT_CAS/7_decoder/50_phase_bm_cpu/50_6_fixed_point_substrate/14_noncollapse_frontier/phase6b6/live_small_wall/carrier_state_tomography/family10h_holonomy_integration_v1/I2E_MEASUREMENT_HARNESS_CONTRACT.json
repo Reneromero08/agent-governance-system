@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "family10h_i2e_prospective_measurement_harness_v1",
+  "mode": "fixture_only_non_executing_schema",
+  "source_blob": {
+    "path": "I2D_REVERSIBILITY_GAP_CONTRACT.json",
+    "blob_sha": "16d40d79aaddfebb517147e1413e179ab3691610"
+  },
+  "required_transaction_sections": [
+    "identity",
+    "carrier",
+    "source_death",
+    "challenge",
+    "operator_specs",
+    "operation_receipts",
+    "state_observations",
+    "accumulator",
+    "restoration",
+    "environment",
+    "thresholds",
+    "claim_boundary"
+  ],
+  "required_state_checkpoints": [
+    "baseline_pre",
+    "after_A",
+    "after_B",
+    "after_forward_commutator",
+    "after_output_decoupled",
+    "after_inverse_commutator"
+  ],
+  "required_state_components": [
+    "carrier_id",
+    "logical_byte_digest",
+    "D_single",
+    "D_local",
+    "multi_observer_coherence_vector",
+    "overlap_strata",
+    "timing_probe_vector",
+    "measurement_receipt_id",
+    "synthetic_fixture"
+  ],
+  "required_observers": [
+    "home_core",
+    "remote_core_A",
+    "remote_core_B",
+    "route_control"
+  ],
+  "required_overlap_strata": [
+    "A_only",
+    "A_intersection_B",
+    "B_only",
+    "outside_union"
+  ],
+  "required_operation_roles": [
+    "A",
+    "B",
+    "A_INVERSE_CANDIDATE",
+    "B_INVERSE_CANDIDATE"
+  ],
+  "required_environment_fields": [
+    "cache_coherence",
+    "page_identity",
+    "frequency_policy",
+    "temperature",
+    "source_process",
+    "receiver_process",
+    "measurement_registers",
+    "accumulator_state",
+    "external_bath"
+  ],
+  "fixture_constraints": {
+    "mode_must_equal": "synthetic_fixture",
+    "physical_backend_must_be": false,
+    "live_authority_must_be": false,
+    "challenge_selected_after_source_death": true,
+    "source_alive_must_be": false,
+    "open_source_ipc_must_be": 0,
+    "source_helper_count_must_be": 0,
+    "same_carrier_id_at_all_checkpoints": true,
+    "synthetic_fixture_flag_at_all_checkpoints": true,
+    "all_numeric_thresholds_must_be_null": true,
+    "thresholds_frozen_must_be": false,
+    "qualified_inverse_must_be": false,
+    "physical_state_equivalence_must_be": false,
+    "physical_claims_must_be": false
+  },
+  "negative_fixture_classes": [
+    "EARLY_CHALLENGE_SELECTION",
+    "SOURCE_STILL_ALIVE",
+    "OPEN_SOURCE_IPC",
+    "CARRIER_ID_SUBSTITUTION",
+    "MISSING_OBSERVER",
+    "MISSING_OVERLAP_STRATUM",
+    "READOUT_ONLY_STATE_VECTOR",
+    "DESTRUCTIVE_RESET_AS_INVERSE",
+    "WORD_LABEL_ACCUMULATOR",
+    "CARRIER_OFF_OUTPUT_NONZERO",
+    "POSTHOC_THRESHOLD",
+    "PHYSICAL_CLAIM_WITHOUT_BACKEND"
+  ],
+  "harness_acceptance": {
+    "transaction_schema_complete": true,
+    "valid_synthetic_fixture_available": true,
+    "negative_fixture_count": 12,
+    "all_negative_fixtures_rejected": true,
+    "physical_backend_present": false,
+    "numerical_thresholds_frozen": false,
+    "physical_package_freeze_ready": false
+  },
+  "i2e_decision": {
+    "result": "I2E_PROSPECTIVE_MEASUREMENT_HARNESS_SKELETON_COMPLETE__FIXTURE_ONLY__PHYSICAL_PACKAGE_NOT_FREEZE_READY",
+    "schema_freeze_allowed": true,
+    "physical_package_freeze_ready": false,
+    "next_gate": "I2F_TOPOLOGY_BACKEND_AND_NDESTRUCTIVE_PROBE_SPEC",
+    "live_execution_authorized": false
+  },
+  "claim_ceiling": [
+    "MEASUREMENT_HARNESS_SCHEMA_ONLY",
+    "SYNTHETIC_FIXTURES_ONLY",
+    "PHYSICAL_BACKEND_NOT_IMPLEMENTED",
+    "NUMERICAL_THRESHOLDS_NOT_FROZEN",
+    "FAMILY10H_TRANSPORT_OPERATOR_NOT_ESTABLISHED",
+    "FAMILY10H_HOLONOMY_NOT_ESTABLISHED",
+    "SMALL_WALL_NOT_CROSSED",
+    "NO_LIVE_EXECUTION_AUTHORIZED"
+  ]
+}
