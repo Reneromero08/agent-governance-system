@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_NONLINEAR_PROJECTIVE_AND_TT_SEPARATOR_CHART_NO_COMPACTION_NEXT_PHASE_UPDATE_SELECTED`
-**Roadmap version:** `12.8`
+**Status:** `STRICT_SCOPE_PLANAR_FREE_FERMION_ZERO_FIELD_CLOSURE_WITH_SPARSE_DEFECT_SECTOR_GROWTH_NEXT_PARITY_LEDGER_SELECTED`
+**Roadmap version:** `12.9`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `e8c8e45ab7308197f553fb44522ca4664356e171`
+**Reconciled source head:** `8a2d459c3706a3ac1187ae876006c6c9af1a36ee`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_NONLINEAR_PROJECTIVE_AND_CANONICAL_TENSOR_TRAIN_SEPARATOR_CHART_DIAGNOSTIC_FINDS_NO_COMPACTION_ON_GENERIC_F17_GRID_MESSAGES_WHILE_EXACT_SMALL_WIDTH_TRANSACTIONS_RESTORE_AND_REUSE`
-**Current claim ceiling:** `EXACT_Q_ZETA17_TWO_DESCRIPTOR_FAMILIES_N2_N3_N4_CANONICAL_TT_PROJECTIVE_AND_FULLY_REDUCED_N4_EVDD_NO_COMPACTION_DIAGNOSTIC_PLUS_DUAL_FIELD_STRUCTURAL_TT_AND_QUASI_REDUCED_LAYERED_DD_REEXECUTION_N2_THROUGH_N8_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_PLANAR_FREE_FERMION_TERMINAL_PFAFFIAN_PHASE_CLOSURE_FOR_DECLARED_ZERO_FIELD_F17_GRIDS_WITH_EXACT_SPARSE_DEFECT_SECTOR_GROWTH_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `EXACT_Q_ZETA17_OPEN_PLANAR_GRIDS_N2_N3_N4_TERMINAL_PFAFFIAN_CLOSURE_WITH_N4_K0_K1_K2_K4_STREAMED_EVEN_DEFECT_SECTORS_EXACT_RESTORATION_AND_REUSE_PLUS_DUAL_FIELD_SOURCE_LOCAL_STRUCTURE_N2_THROUGH_N8_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M122_NONLINEAR_SEPARATOR_CHART_NO_COMPACTION`
+**New mechanism development:** `ACTIVE_AFTER_M123_PLANAR_FREE_FERMION_CLOSURE_AND_SPARSE_DEFECT_SECTOR_GROWTH`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F17_PLANAR_FREE_FERMION_MATCHGATE_PHASE_COVARIANCE_CLOSURE_FOR_ZERO_FIELD_GRID_SIGNATURES_WITH_SPARSE_EXTERNAL_FIELD_DEFECT_GROWTH_RESTORATION_REUSE_AND_IDENTICAL_PFAFFIAN_BASELINE`
+**Active primary successor:** `EXACT_SHARED_PHASE_PARITY_LEDGER_FOR_SPARSE_NON_GAUSSIAN_FIELD_INSERTIONS_WITHOUT_EVEN_SECTOR_ENUMERATION_OR_A_PROOF_THAT_THE_LEDGER_RANK_MUST_GROW`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`e8c8e45ab7308197f553fb44522ca4664356e171`. The current 122-milestone
+`8a2d459c3706a3ac1187ae876006c6c9af1a36ee`. The current 123-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4274,6 +4274,73 @@ The obstruction is:
 GENERIC_F17_GRID_MESSAGES_SATURATE_PROJECTIVE_TT_AND_ALL_ORDER_N4_DECISION_DIAGRAM_CHARTS_WHILE_SOFTWARE_ZERO_TEST_DIVISION_AND_GAUGE_FIXING_ARE_NOT_PHASE_PRIMITIVES_SO_THE_NEXT_REPAIR_MUST_CHANGE_THE_RESIDENT_PHASE_UPDATE_OR_RESTRICT_THE_SIGNATURE_FAMILY_WITHOUT_MOVING_GROWTH_INTO_DEFECT_ENUMERATION
 ```
 
+### 6.123 Exact planar free-fermion terminal Pfaffian closure and sparse-defect growth
+
+M123 changes the phase update to the restricted zero-field planar family
+exposed by M122's positive control. Public topology compilation converts each
+declared open square grid to a trivalent terminal graph, solves its face
+orientation over GF(2), and loads exact `Q(zeta17)` terminal entries into a
+sparse resident carrier. The accepted zero-field path closes the boundary
+through one square-root-free terminal Pfaffian.
+
+```text
+classification                     INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                       INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration       EXACT_ALGEBRAIC_RESTORATION
+dense Pfaffian projection buffers  NO_RESTORATION_CLAIM
+hosted run                         NOT ESTABLISHED
+source head                        8a2d459c3706a3ac1187ae876006c6c9af1a36ee
+```
+
+Independent exact reexecution imports neither production nor the phase
+backend. A binary residue histogram and a separately implemented bounded-face
+cycle-space recurrence both reproduce every `n=2,3,4` boundary. The `n=4`
+exact cases additionally execute defect counts `k=0,1,2,4`. The wider
+`F103/F137` `n=5,...,8` executions establish only source-audited structural
+behavior; they are not promoted to independent exact-number parity.
+
+The sparse-field implementation streams one even defect sector at a time and
+retains no sector list. Its implemented sector count is `1` for `k=0,1` and
+`2^(k-1)` thereafter. This is an upper bound for the implemented path, not a
+lower bound for every exact field algorithm. The general-field M120 row
+transfer remains a matched fallback whose `2^n` storage is independent of
+defect count.
+
+At `n=4`, the terminal graph has 72 vertices and the resident terminal carrier
+uses 96 field cells. Each Pfaffian projection uses 10,378 named logical field
+cells: the caller matrix, elimination copy, and ten simultaneously live named
+field slots. Payload totals are upper bounds obtained by applying the maximum
+observed field-element width to those named slots; they exclude Python object
+containers, SymPy/native-library internals, bigint workspace, and whole-process
+memory. The identical terminal Pfaffian is the strongest implemented matched
+classical path, and known even-Gaussian covariance or sparse planar Pfaffian
+methods remain admitted.
+
+Only the final boundary is projected. The actual terminal and scalar carrier
+is reversed by rematerializing the public commuting schedule, returns exactly
+to its original backing with no retained inverse history or snapshot reload,
+and is reused by an unrelated descriptor with fresh/restored boundary parity.
+The response is direct-process software; CATVM custody is not claimed.
+
+M123 establishes compact polynomial free-fermion closure only for the declared
+zero-field planar family. It does not establish dense external-field
+compaction, an arbitrary matchgate or holographic reduction, native phase
+orientation/pivot/zero-test/division primitives, a distinct phase resource,
+computational advantage, Small Wall crossing, physical execution, physical
+bit replacement, or unbounded computation.
+
+The next experiment tests the surviving non-Gaussian obstruction directly:
+
+```text
+EXACT_SHARED_PHASE_PARITY_LEDGER_FOR_SPARSE_NON_GAUSSIAN_FIELD_INSERTIONS_WITHOUT_EVEN_SECTOR_ENUMERATION_OR_A_PROOF_THAT_THE_LEDGER_RANK_MUST_GROW
+```
+
+The obstruction is:
+
+```text
+ZERO_FIELD_FREE_FERMION_CLOSURE_IS_IDENTICAL_TO_COMPACT_CLASSICAL_GAUSSIAN_SOFTWARE_WHILE_TRUE_EXTERNAL_FIELDS_SPLIT_INTO_2_TO_THE_K_MINUS_1_EVEN_GAUSSIAN_SECTORS_AND_NO_PHASE_NATIVE_OPERATION_CURRENTLY_CLOSES_THEIR_SUM_WITHOUT_MOVING_THAT_GROWTH
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -4311,7 +4378,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_Q_ZETA17_GENERIC_NONZERO_RUNTIME_WEIGHT_GRID_CONTINUATION_SPAN_REJECTS_ANY_UNIFORM_FIXED_LINEAR_SEPARATOR_QUOTIENT_BELOW_TWO_TO_THE_N_FIELD_COORDINATES_WHILE_TWO_DESCRIPTOR_DRIVEN_FACTOR_CARRIER_TRANSACTIONS_RESTORE_AND_REUSE_AT_N2_N3_N4
+BOUNDED_EXACT_PLANAR_FREE_FERMION_TERMINAL_PFAFFIAN_PHASE_CLOSURE_FOR_DECLARED_ZERO_FIELD_F17_GRIDS_WITH_EXACT_SPARSE_DEFECT_SECTOR_GROWTH_RESTORATION_AND_REUSE
 ```
 
 Not established:
@@ -4385,6 +4452,16 @@ nonlinear, program-dependent, or restricted separator lower bound from M121
 ADD/MTBDD, MPS/MPO, matchgate/Pfaffian, holographic, or global contraction lower bound from M121
 total time, memory, or bit-complexity lower bound from M121
 distinct phase resource or advantage from the M121 linear quotient no-go
+general nonlinear separator no-go from M122
+exact Q(zeta17) execution beyond M122 width four
+fully reduced decision-diagram optimality beyond the certified M122 cases
+native phase zero tests, division, RREF, pivoting, or gauge fixing
+external-field compaction from the M123 zero-field Pfaffian closure
+a lower bound requiring the M123 implemented 2^(k-1) defect sectors
+independent exact-number parity for the M123 dual-field n=5,...,8 structural runs
+arbitrary matchgate or holographic closure from M123
+CATVM custody of the M123 direct-process carrier or projection buffers
+distinct phase resource or advantage from the M123 terminal Pfaffian closure
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4447,10 +4524,20 @@ the broadened legal final-row continuation family below `2^n` field
 coordinates. This retires only that linear representation route. Continue
 with a nonlinear canonical resident separator chart and test whether its
 chart count, update law, or program dependence merely relocates the same
-growth. Keep all-order ADD/MTBDD, exact MPS/tensor, matchgate/Pfaffian,
-holographic, and boundary-specific controls. Do not add larger public grid or
-fixed-width cubic fixtures unless they resolve this mechanism-level
-obstruction, and do not treat the evaluated baseline set as exhaustive.
+growth. M122 executed that chart and found full effective dimension on the
+declared generic cases; its public zero-field positive control then selected
+the restricted free-fermion route. M123 closes that zero-field planar family
+through the exact terminal Pfaffian, but the identical compact classical
+Gaussian computation remains and the implemented sparse-field path streams
+`2^(k-1)` even sectors. Continue from that measured non-Gaussian obstruction
+with an exact shared parity-ledger diagnostic. Determine whether the defect
+signature has a compact Gaussian or bounded-rank closure, or whether its
+required ledger rank grows, without presenting the implemented sector count
+as a general lower bound. Keep the M120 general-field row transfer and the
+strongest admitted Pfaffian/covariance implementations in the comparison.
+Do not add larger zero-field grids or more sparse-defect fixtures unless they
+resolve this mechanism-level obstruction, and do not treat the evaluated
+baseline set as exhaustive.
 
 ## 10. Roadmap Maintenance
 

@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`e8c8e45ab7308197f553fb44522ca4664356e171`. The canonical per-milestone
+`8a2d459c3706a3ac1187ae876006c6c9af1a36ee`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -7209,4 +7209,61 @@ The surviving obstruction is:
 
 ```text
 GENERIC_F17_GRID_MESSAGES_SATURATE_PROJECTIVE_TT_AND_ALL_ORDER_N4_DECISION_DIAGRAM_CHARTS_WHILE_SOFTWARE_ZERO_TEST_DIVISION_AND_GAUGE_FIXING_ARE_NOT_PHASE_PRIMITIVES_SO_THE_NEXT_REPAIR_MUST_CHANGE_THE_RESIDENT_PHASE_UPDATE_OR_RESTRICT_THE_SIGNATURE_FAMILY_WITHOUT_MOVING_GROWTH_INTO_DEFECT_ENUMERATION
+```
+
+## Exact planar free-fermion terminal Pfaffian closure and sparse-defect obstruction
+
+M123 restricts the M122 grid family to the declared open planar zero-field
+sector and changes the closure law. Public topology compilation builds a
+trivalent terminal graph and a GF(2) face orientation without inspecting the
+answer. Exact terminal entries remain resident until the final boundary is
+closed through one square-root-free Pfaffian.
+
+```text
+classification                     INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                       INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration       EXACT_ALGEBRAIC_RESTORATION
+dense Pfaffian projection buffers  NO_RESTORATION_CLAIM
+source head                        8a2d459c3706a3ac1187ae876006c6c9af1a36ee
+hosted run                         NOT ESTABLISHED
+```
+
+A separate binary residue histogram and bounded-face cycle-space recurrence
+reproduce every exact `Q(zeta17)` boundary at `n=2,3,4`, including the
+declared `n=4` defect counts `k=0,1,2,4`. The actual terminal and scalar
+carrier reverses exactly with no retained inverse history or snapshot reload,
+and an unrelated program reuses the same restored backing with fresh-carrier
+boundary parity. Dual-field `F103/F137` runs through `n=8` establish only
+source-audited structural behavior, not independent exact-number parity.
+
+The implemented sparse-field path streams one even sector at a time. Its
+sector count is `1` for `k=0,1` and `2^(k-1)` thereafter, with no retained
+sector tuple. This is an implemented upper bound, not a general lower bound.
+The M120 `O(n^2 2^n)` general-field row transfer remains a matched fallback
+whose memory does not depend on `k`.
+
+At `n=4`, the terminal graph has 72 vertices, the sparse resident carrier has
+96 field cells, and each dense Pfaffian projection accounts for 10,378 named
+logical field cells. The reported dense bit payload applies the maximum
+observed field-element width to the caller matrix, elimination copy, and ten
+named live field slots. It is not a measured allocator or whole-process peak
+and excludes Python containers, SymPy/native internals, and bigint workspace.
+
+The identical terminal Pfaffian is the strongest implemented classical
+baseline; known covariance or sparse planar Pfaffian implementations are also
+admitted. Therefore the zero-field closure establishes no distinct phase
+resource or advantage. Dense external-field compaction, arbitrary matchgate
+or holographic closure, CATVM custody, Small Wall crossing, physical execution,
+bit replacement, and unbounded computation remain unestablished.
+
+The selected successor is:
+
+```text
+EXACT_SHARED_PHASE_PARITY_LEDGER_FOR_SPARSE_NON_GAUSSIAN_FIELD_INSERTIONS_WITHOUT_EVEN_SECTOR_ENUMERATION_OR_A_PROOF_THAT_THE_LEDGER_RANK_MUST_GROW
+```
+
+The surviving obstruction is:
+
+```text
+ZERO_FIELD_FREE_FERMION_CLOSURE_IS_IDENTICAL_TO_COMPACT_CLASSICAL_GAUSSIAN_SOFTWARE_WHILE_TRUE_EXTERNAL_FIELDS_SPLIT_INTO_2_TO_THE_K_MINUS_1_EVEN_GAUSSIAN_SECTORS_AND_NO_PHASE_NATIVE_OPERATION_CURRENTLY_CLOSES_THEIR_SUM_WITHOUT_MOVING_THAT_GROWTH
 ```
