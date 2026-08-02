@@ -7,7 +7,14 @@ on:
     paths:
       - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/**'
       - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/AUTONOMOUS_SMALL_WALL_GOAL_STATE.json'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1_1_operator_dimension_audit/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_loop_discovery_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_loop_reset_screen_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_balanced_phase_source_off_screen_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_primary_minus_sham_local_paired_differential_v1/**'
       - 'THOUGHT/LAB/CAT_CAS/tests/jacobian_holonomy_small_wall_bridge/**'
+      - 'THOUGHT/LAB/CAT_CAS/tests/family10h_holonomy_integration/**'
       - '.github/workflows/cat-cas-jacobian-holonomy-bridge-requirements.txt'
       - '.github/workflows/cat-cas-family10h-holonomy-integration.yml'
   pull_request:
@@ -16,7 +23,14 @@ on:
     paths:
       - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/**'
       - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/AUTONOMOUS_SMALL_WALL_GOAL_STATE.json'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1_1_operator_dimension_audit/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_loop_discovery_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_loop_reset_screen_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_balanced_phase_source_off_screen_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_primary_minus_sham_local_paired_differential_v1/**'
       - 'THOUGHT/LAB/CAT_CAS/tests/jacobian_holonomy_small_wall_bridge/**'
+      - 'THOUGHT/LAB/CAT_CAS/tests/family10h_holonomy_integration/**'
       - '.github/workflows/cat-cas-jacobian-holonomy-bridge-requirements.txt'
       - '.github/workflows/cat-cas-family10h-holonomy-integration.yml'
 
@@ -41,7 +55,14 @@ jobs:
             .github/workflows
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1
             THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/AUTONOMOUS_SMALL_WALL_GOAL_STATE.json
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1_1_operator_dimension_audit
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_loop_discovery_v1
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_loop_reset_screen_v1
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_balanced_phase_source_off_screen_v1
+            THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_primary_minus_sham_local_paired_differential_v1
             THOUGHT/LAB/CAT_CAS/tests/jacobian_holonomy_small_wall_bridge
+            THOUGHT/LAB/CAT_CAS/tests/family10h_holonomy_integration
 
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -73,6 +94,16 @@ jobs:
           python -m pytest -q
           THOUGHT/LAB/CAT_CAS/tests/jacobian_holonomy_small_wall_bridge
 
+      - name: Run I1 compatibility tests
+        run: >-
+          python -m pytest -q
+          THOUGHT/LAB/CAT_CAS/tests/family10h_holonomy_integration
+
+      - name: Run I1 compatibility audit
+        run: >-
+          python
+          THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1/i1_compatibility_audit.py
+
       - name: Run exact reference verifier
         run: >-
           python
@@ -92,6 +123,7 @@ jobs:
           )
           manifest = json.loads((root / 'INTEGRATION_MANIFEST.json').read_text())
           validation = json.loads((root / 'INTEGRATION_VALIDATION.json').read_text())
+          matrix = json.loads((root / 'I1_COMPATIBILITY_MATRIX.json').read_text())
           assert len(manifest['imported_files']) == 17
           assert manifest['custody']['original_branch_modified'] is False
           assert manifest['custody']['existing_tomography_files_deleted'] is False
@@ -101,5 +133,8 @@ jobs:
           assert len(validation['imported_blob_identity']) == 17
           assert validation['checks']['all_17_imported_blobs_match_main'] is True
           assert validation['checks']['live_authority_granted'] is False
-          print('integration receipts and claim ceilings verified')
+          assert matrix['i1_decision']['transport_candidate_freeze_allowed'] is False
+          assert matrix['i1_decision']['live_execution_authorized'] is False
+          assert all(gate['passed'] is False for gate in matrix['h_gates'].values())
+          print('integration receipts and I1 claim ceilings verified')
           PY
