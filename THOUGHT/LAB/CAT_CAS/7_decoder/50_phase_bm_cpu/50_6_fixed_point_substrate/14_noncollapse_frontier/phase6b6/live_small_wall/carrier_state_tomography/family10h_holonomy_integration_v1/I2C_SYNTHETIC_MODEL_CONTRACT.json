@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "contract_id": "family10h_i2c_synthetic_ownership_models_v1",
+  "model_blob": {
+    "path": "synthetic_ownership_model.py",
+    "blob_sha": "d3d773f287f08e93c7c2c863a161cad44b53485e"
+  },
+  "scope": {
+    "synthetic_only": true,
+    "family10h_backend_used": false,
+    "pmu_used": false,
+    "network_used": false,
+    "physical_realization_established": false
+  },
+  "geometry": {
+    "carrier_line_count": 24,
+    "line_set_size": 16,
+    "overlap_size": 8,
+    "owner_alphabet": ["H", "A", "B"]
+  },
+  "overwrite_model_expected": {
+    "ab_ba_changed_line_count": 8,
+    "order_effect_localized_to_overlap": true,
+    "orientation_ab": 8,
+    "orientation_ba": -8,
+    "baseline_endpoint_restored_after_reclaims_ab": true,
+    "baseline_endpoint_restored_after_reclaims_ba": true,
+    "reclaim_is_left_inverse_on_all_states": false,
+    "reclaim_is_right_inverse_on_all_states": false,
+    "forward_map_injective": false,
+    "carrier_coupled_readout_ab": 8,
+    "carrier_coupled_readout_ba": -8,
+    "carrier_off_readout": 0,
+    "invalid_word_recorder_carrier_off": 8,
+    "promotion": "REJECT_H2_AND_R2"
+  },
+  "reversible_reference_expected": {
+    "A_two_sided_inverse": true,
+    "B_two_sided_inverse": true,
+    "commutator_nontrivial": true,
+    "reverse_commutator_is_inverse_orientation": true,
+    "commutator_output": 8,
+    "reverse_commutator_output": -8,
+    "commutator_then_inverse_restores_carrier": true,
+    "retained_output_after_decoupled_inverse": 8,
+    "contractible_word_is_identity": true,
+    "disjoint_support_commutator_is_identity": true,
+    "carrier_off_output": 0,
+    "nontrivial_lines_equal_overlap": true,
+    "physical_realization_established": false,
+    "promotion": "SYNTHETIC_PROTOCOL_REFERENCE_ONLY"
+  },
+  "kill_laws": {
+    "endpoint_return_without_injectivity_is_not_restoration": true,
+    "home_reclaim_without_two_sided_inverse_is_not_inverse": true,
+    "word_label_output_surviving_carrier_off_is_invalid": true,
+    "disjoint_support_commutator_must_be_identity": true,
+    "contractible_word_must_be_identity": true,
+    "inverse_commutator_must_restore_carrier_after_output_decoupling": true,
+    "logical_byte_return_is_not_full_state_equivalence": true
+  },
+  "i2c_decision": {
+    "result": "I2C_SYNTHETIC_MODELS_COMPLETE__OVERWRITE_MODEL_REJECTED_FOR_H2_R2__REVERSIBLE_REFERENCE_PASSES_PROTOCOL_LAWS__PHYSICAL_REALIZATION_NOT_ESTABLISHED",
+    "overwrite_physical_candidate_promotable": false,
+    "reversible_reference_physical_candidate_promotable": false,
+    "synthetic_protocol_laws_qualified": true,
+    "next_gate": "I2D_PHYSICAL_REVERSIBILITY_GAP_CONTRACT",
+    "live_execution_authorized": false
+  },
+  "claim_ceiling": [
+    "SYNTHETIC_PROTOCOL_REFERENCE_ONLY",
+    "PHYSICAL_REVERSIBLE_OWNERSHIP_CARRIER_NOT_ESTABLISHED",
+    "FAMILY10H_TRANSPORT_OPERATOR_NOT_ESTABLISHED",
+    "FAMILY10H_HOLONOMY_NOT_ESTABLISHED",
+    "SMALL_WALL_NOT_CROSSED",
+    "NO_LIVE_EXECUTION_AUTHORIZED"
+  ]
+}
