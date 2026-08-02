@@ -57,8 +57,8 @@ def test_unsat_phase_chart_never_emits_false_terminal_witness() -> None:
         fixed_deadline=2.0,
         relative_tolerance=1.0e-6,
         absolute_tolerance=1.0e-8,
-        maximum_step=5.0e-2,
-        solver_method="BDF",
+        maximum_step=2.0e-2,
+        solver_method="DOP853",
     )
     assert run.reached_fixed_deadline
     assert not run.terminal_solution_verified

@@ -169,6 +169,7 @@ def _chart_derivative(
     selector_rate: float,
     boundary_release_rate: float,
     truth_gain: float,
+    gradient_mode: str,
 ) -> tuple[float, ...]:
     derivative = polynomial_phase_selector_flow_derivative(
         holo,
@@ -177,6 +178,7 @@ def _chart_derivative(
         selector_rate=selector_rate,
         boundary_release_rate=boundary_release_rate,
         truth_gain=truth_gain,
+        gradient_mode=gradient_mode,
     )
     cap = max(
         1.0,
@@ -309,6 +311,7 @@ def integrate_adaptive_phase_logit_flow(
     selector_rate: float = 20.0,
     boundary_release_rate: float = 10.0,
     truth_gain: float = 4.0,
+    gradient_mode: str = "exact_product",
 ) -> AdaptivePhaseLogitFlowRun:
     """Run to one public deadline; first passage is observation, never control."""
 
@@ -329,6 +332,8 @@ def integrate_adaptive_phase_logit_flow(
         boundary_release_rate,
         truth_gain,
     )
+    if gradient_mode not in {"selector_min", "exact_product"}:
+        raise ConstraintHoloError("unsupported adaptive phase gradient mode")
     if not all(isfinite(value) and value > 0.0 for value in controls):
         raise ConstraintHoloError("adaptive phase controls must be positive and finite")
     if solver_method not in {"RK45", "DOP853", "Radau", "BDF"}:
@@ -347,6 +352,7 @@ def integrate_adaptive_phase_logit_flow(
                 selector_rate,
                 boundary_release_rate,
                 truth_gain,
+                gradient_mode,
             ),
             dtype=np.float64,
         )
@@ -497,6 +503,7 @@ def integrate_adaptive_phase_logit_flow(
             selector_rate,
             boundary_release_rate,
             truth_gain,
+            gradient_mode,
         )
         native_derivative = polynomial_phase_selector_flow_derivative(
             holo,
@@ -505,6 +512,7 @@ def integrate_adaptive_phase_logit_flow(
             selector_rate=selector_rate,
             boundary_release_rate=boundary_release_rate,
             truth_gain=truth_gain,
+            gradient_mode=gradient_mode,
         )
         chart_speed = float(np.linalg.norm(np.asarray(chart_derivative)))
         phase_speed = float(np.linalg.norm(np.asarray(chart_derivative[:n])))

@@ -231,18 +231,28 @@ trajectory-length bound remains unestablished.
 public clauses -> 2n + 11m polynomial carrier coordinates
 (c_i, s_i) in S1 with c_i^2 + s_i^2 = 1
 exact product clause truth C_m = 4 d_m1 d_m2 d_m3 / 8
-selectors choose correction direction but never semantic truth
+exact negative clause-product gradient q_i d_j d_k / 2
+selector-min direction retained only as a falsified calibration
 one fixed-deadline terminal boundary
 ```
 
 The carrier preserves every phase circle algebraically. Every satisfying Boolean phase
 section is invariant independently of selector state, while a violated Boolean corner
-is released by angular motion. The reference carrier passed the complete 256-formula
-three-variable census, fixed-deadline parity SAT/UNSAT controls, a sealed near-threshold
-SAT/UNSAT pair, and a 16-seed 12-variable, 51-clause campaign with fourteen terminal
-SAT witnesses, two UNSAT no-witness controls, zero false positives, and zero invalid
-carriers. These are finite controls only. A formula-uniform polynomial native
-trajectory-length bound and total UNSAT boundary remain unestablished.
+is released by angular motion. The default direction is now the exact negative gradient
+of the public clause-product violation. The former selector-min direction remains a
+falsified calibration: it enters a high-memory switching regime on unique-witness seed
+38, while the exact gradient reaches a robust witness near time 1.37 with low memory and
+path length.
+
+The exact-gradient carrier passed the complete 256-formula three-variable census,
+structured parity/pigeonhole/coloring SAT and UNSAT controls, 128 deterministic
+near-threshold 12-variable formulae with 101 SAT witnesses and 27 UNSAT no-false-witness
+controls, presentation gauges on the near-deadline seed 86, capped exact-reference cases
+through 20 variables, and planted-but-answer-blind SAT controls at 32, 64, and 128
+variables. These are finite controls only. The 32-variable planted case required time
+about 3.46, so a constant deadline of three is already falsified. A formula-uniform
+polynomial native trajectory-length bound and total UNSAT boundary remain
+unestablished.
 
 ### Clause-local thermal zero-mode latch
 
@@ -294,6 +304,11 @@ STRUCTURED_SELECTOR_RELATIONAL_CONTROLS_PASS
 PARITY_32_SELECTOR_SCALING_TRANSITION_EXPOSED
 POLYNOMIAL_S1_PHASE_SELECTOR_CARRIER_ESTABLISHED_REFERENCE_CANDIDATE
 EXACT_PRODUCT_CLAUSE_TRUTH_CHANNEL_ESTABLISHED
+EXACT_PRODUCT_PHASE_DIRECTION_ESTABLISHED_REFERENCE_CANDIDATE
+SELECTOR_MIN_PHASE_DIRECTION_FALSIFIED_ON_SEED_38
+PHASE_TRANSITION_128_CASE_REFERENCE_PASS
+PHASE_PRESENTATION_GAUGE_REFERENCE_PASS
+PLANTED_PHASE_SAT_32_64_128_REFERENCE_PASS
 EXHAUSTIVE_THREE_VARIABLE_PHASE_CENSUS_PASS
 FIXED_DEADLINE_PHASE_BOUNDARY_REFERENCE_PASS
 SEALED_PHASE_TRANSITION_16_SEED_REFERENCE_PASS

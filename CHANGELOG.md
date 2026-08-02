@@ -14,8 +14,15 @@
   carrier states, complete 256-formula phase census, sealed near-threshold
   SAT/UNSAT semantic-digest controls, and a 16-seed campaign with fourteen
   terminal SAT witnesses, two UNSAT no-witness controls, zero false positives,
-  and zero invalid carriers. Preserve the claim ceiling: uniform polynomial
-  phase-trajectory, total UNSAT, restoration, and `P = NP` remain unproved.
+  and zero invalid carriers.
+
+- Replace selector-min direction with the exact negative gradient of the public
+  clause-product violation after the old direction failed on unique-witness seed
+  38. The exact gradient repairs that case, passes 128 near-threshold formulae,
+  presentation gauges, exact-reference controls through 20 variables, and
+  planted-but-answer-blind SAT controls at 32, 64, and 128 variables. Preserve
+  the claim ceiling: formula-uniform polynomial phase trajectory, total UNSAT,
+  restoration, and `P = NP` remain unproved.
 
 ## 2026-07-23: CAT_CAS constraint relational trace proof campaign
 

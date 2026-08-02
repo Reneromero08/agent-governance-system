@@ -43,6 +43,7 @@ def _clause(sign_mask: int) -> ClauseRelation:
 def run_three_variable_polynomial_phase_flow_census(
     step_size: float = 1.0e-3,
     max_steps: int = 100_000,
+    gradient_mode: str = "exact_product",
 ) -> ThreeVariablePolynomialPhaseFlowCensus:
     clause_basis = tuple(_clause(mask) for mask in range(8))
     satisfiable_formulae = 0
@@ -64,6 +65,7 @@ def run_three_variable_polynomial_phase_flow_census(
             holo,
             step_size=step_size,
             max_steps=max_steps,
+            gradient_mode=gradient_mode,
         )
         if reference.satisfiable:
             satisfiable_formulae += 1

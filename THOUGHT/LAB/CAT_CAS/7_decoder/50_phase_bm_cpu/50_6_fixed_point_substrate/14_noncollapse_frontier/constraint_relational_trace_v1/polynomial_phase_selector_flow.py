@@ -205,10 +205,13 @@ def polynomial_phase_selector_flow_derivative(
     selector_rate: float = 20.0,
     boundary_release_rate: float = 10.0,
     truth_gain: float = 4.0,
+    gradient_mode: str = "exact_product",
 ) -> PolynomialPhaseSelectorFlowDerivative:
     controls = (selector_rate, boundary_release_rate, truth_gain)
     if not all(isfinite(value) and value > 0.0 for value in controls):
         raise ConstraintHoloError("phase flow controls must be positive and finite")
+    if gradient_mode not in {"selector_min", "exact_product"}:
+        raise ConstraintHoloError("unsupported phase gradient mode")
     n = len(holo.variables)
     m = len(holo.clauses)
     if (
@@ -271,7 +274,12 @@ def polynomial_phase_selector_flow_derivative(
         long_memory = state.long_memory[clause_index]
         for local_index, variable_index_local in enumerate(indices):
             incident_violation[variable_index_local] += violation
-            gradient = 0.5 * signs[local_index] * pair_minima[local_index]
+            if gradient_mode == "exact_product":
+                others = tuple(index for index in range(3) if index != local_index)
+                directional_factor = defects[others[0]] * defects[others[1]]
+            else:
+                directional_factor = pair_minima[local_index]
+            gradient = 0.5 * signs[local_index] * directional_factor
             rigidity = (
                 0.5
                 * (signs[local_index] - local_cosine[local_index])
@@ -361,6 +369,7 @@ def phase_selector_euler_step(
     selector_rate: float = 20.0,
     boundary_release_rate: float = 10.0,
     truth_gain: float = 4.0,
+    gradient_mode: str = "exact_product",
 ) -> PolynomialPhaseSelectorFlowState:
     """Reference chart step; projection is instrumentation, not native evolution."""
 
@@ -373,6 +382,7 @@ def phase_selector_euler_step(
         selector_rate=selector_rate,
         boundary_release_rate=boundary_release_rate,
         truth_gain=truth_gain,
+        gradient_mode=gradient_mode,
     )
     cap = max(1.0, parameters.long_memory_cap_factor * max(1, len(holo.clauses)))
 
@@ -456,6 +466,7 @@ def integrate_polynomial_phase_selector_flow(
     initial_state: PolynomialPhaseSelectorFlowState | None = None,
     step_size: float = 1.0e-3,
     max_steps: int = 100_000,
+    gradient_mode: str = "exact_product",
 ) -> PolynomialPhaseSelectorFlowRun:
     """Reference first-passage chart used only for falsification and controls."""
 
@@ -487,7 +498,12 @@ def integrate_polynomial_phase_selector_flow(
                     "NO_UNSAT_CONCLUSION"
                 ),
             )
-        state = phase_selector_euler_step(holo, state, step_size)
+        state = phase_selector_euler_step(
+            holo,
+            state,
+            step_size,
+            gradient_mode=gradient_mode,
+        )
         maximum_circle_residual = max(
             maximum_circle_residual, phase_circle_residual(state)
         )

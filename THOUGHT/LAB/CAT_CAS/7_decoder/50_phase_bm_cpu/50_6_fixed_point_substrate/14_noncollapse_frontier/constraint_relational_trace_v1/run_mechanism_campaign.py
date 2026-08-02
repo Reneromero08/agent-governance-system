@@ -147,16 +147,16 @@ def build_mechanism_record(variable_count: int = 10) -> dict[str, object]:
         fixed_deadline=3.0,
         relative_tolerance=1.0e-6,
         absolute_tolerance=1.0e-8,
-        maximum_step=5.0e-2,
-        solver_method="BDF",
+        maximum_step=2.0e-2,
+        solver_method="DOP853",
     )
     phase_unsat_adaptive_run = integrate_adaptive_phase_logit_flow(
         phase_unsat_holo,
         fixed_deadline=2.0,
         relative_tolerance=1.0e-6,
         absolute_tolerance=1.0e-8,
-        maximum_step=5.0e-2,
-        solver_method="BDF",
+        maximum_step=2.0e-2,
+        solver_method="DOP853",
     )
 
     gates = {
@@ -317,8 +317,8 @@ def build_mechanism_record(variable_count: int = 10) -> dict[str, object]:
         "polynomial_phase_unsat_adaptive_run": asdict(phase_unsat_adaptive_run),
         "decision": {
             "strongest_candidate": (
-                "POLYNOMIAL_S1_PHASE_SELECTOR_CLAUSE_FLOW_WITH_EXACT_PRODUCT_"
-                "TRUTH_AND_THERMAL_ZERO_MODE_LATCH"
+                "POLYNOMIAL_S1_EXACT_PRODUCT_GRADIENT_CLAUSE_FLOW_WITH_"
+                "THERMAL_ZERO_MODE_LATCH"
             ),
             "mathematical_sat_margin": "CONSTANT_NORMALIZED_ZERO_MODE_POPULATION",
             "native_clean_port": "DIRECT_PUBLIC_CLAUSE_HAMILTONIAN",

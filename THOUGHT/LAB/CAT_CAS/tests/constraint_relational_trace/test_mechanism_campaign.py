@@ -27,8 +27,8 @@ def test_mechanism_campaign_selects_polynomial_phase_flow_without_promoting_proo
     assert all(record["gates"].values())
     decision = record["decision"]
     assert decision["strongest_candidate"] == (
-        "POLYNOMIAL_S1_PHASE_SELECTOR_CLAUSE_FLOW_WITH_EXACT_PRODUCT_"
-        "TRUTH_AND_THERMAL_ZERO_MODE_LATCH"
+        "POLYNOMIAL_S1_EXACT_PRODUCT_GRADIENT_CLAUSE_FLOW_WITH_"
+        "THERMAL_ZERO_MODE_LATCH"
     )
     assert decision["mathematical_sat_margin"] == "CONSTANT_NORMALIZED_ZERO_MODE_POPULATION"
     assert decision["native_clean_port"] == "DIRECT_PUBLIC_CLAUSE_HAMILTONIAN"

@@ -213,12 +213,13 @@ The stronger reconstructed carrier replaces each scalar voltage with:
 c_i^2 + s_i^2 = 1.
 ```
 
-Its native angular evolution preserves every circle identically. Selector variables
-choose correction direction, while semantic clause truth is carried separately by the
-exact polynomial product:
+Its native angular evolution preserves every circle identically. Semantic clause truth
+is carried by the exact polynomial product, and the default correction direction is now
+the exact negative gradient of that same public product:
 
 ```text
-C_m = 4 d_m1 d_m2 d_m3 / 8.
+C_m = 4 d_m1 d_m2 d_m3 / 8
+- partial C_m / partial c_i = q_i d_j d_k / 2.
 ```
 
 At a Boolean phase section, `C_m = 0` exactly when at least one clause literal is true.
@@ -239,13 +240,25 @@ sealed near-threshold SAT/UNSAT semantic-digest pair
 16-seed 12-variable, 51-clause near-threshold campaign
 ```
 
-At one public deadline of three, the sealed campaign produced fourteen terminal SAT
-witnesses, two UNSAT no-witness controls, zero false positives, and zero invalid
-carriers. Intermediate witness checks are out-of-band first-passage observations and do
-not stop the native evolution.
+The earlier selector-min direction was falsified by unique-witness seed 38: it entered a
+high-memory one-clause switching regime and emitted no terminal witness by deadline
+three. With the exact product gradient, the same public formula and seed reach a robust
+witness near time 1.37 with maximum long memory about 43 and native path about 213.
+Selector-min remains only as a calibration lane.
 
-This evidence is finite. A formula-uniform polynomial phase-trajectory bound, total
-UNSAT deadline, and reversible environment restoration remain unestablished.
+The exact-gradient carrier passed 128 deterministic near-threshold 12-variable,
+51-clause formulae at one public deadline of three: 101 SAT formulae produced 101
+terminal witnesses, 27 UNSAT formulae produced zero false witnesses, and no carrier was
+invalid. The latest SAT first passage was about 2.997. The near-deadline seed 86 remained
+stable under variable renaming and clause/literal reversal. Exact-reference campaigns
+also passed through 20 variables, and planted-but-answer-blind SAT controls produced
+terminal witnesses at 32, 64, and 128 variables. The 32-variable planted case crossed at
+about 3.46, so a constant deadline of three is already ruled out.
+
+Intermediate witness checks are out-of-band first-passage observations and do not stop
+the native evolution. This evidence is finite. A formula-uniform polynomial
+phase-trajectory bound, total UNSAT deadline, and reversible environment restoration
+remain unestablished.
 
 ### Clause-local thermal zero-mode latch
 
@@ -314,7 +327,7 @@ invariants and a constant-population normalized boundary are available.
 
 ```text
 public clause geometry
--> polynomial S1 phase-selector preparation or another exact native preparation
+-> polynomial S1 exact-product phase preparation or another exact native preparation
 -> formula-uniform polynomial phase-trajectory or equilibration theorem
 -> deterministic zero-mode presence boundary
 -> totalized SAT/UNSAT/INVALID result

@@ -42,9 +42,11 @@ class PhaseTransitionFlowCaseResult:
 def build_phase_transition_flow_record(
     *,
     seed_count: int = 16,
+    seed_start: int = 0,
     variable_count: int = 12,
     clause_count: int = 51,
     fixed_deadline: float = 3.0,
+    gradient_mode: str = "exact_product",
 ) -> dict[str, object]:
     results: list[PhaseTransitionFlowCaseResult] = []
     satisfiable_cases = 0
@@ -54,7 +56,7 @@ def build_phase_transition_flow_record(
     unsat_false_positives = 0
     invalid_carriers = 0
 
-    for seed in range(seed_count):
+    for seed in range(seed_start, seed_start + seed_count):
         case = certify_phase_transition_case(variable_count, clause_count, seed)
         run = integrate_adaptive_phase_logit_flow(
             case.holo,
@@ -63,6 +65,7 @@ def build_phase_transition_flow_record(
             absolute_tolerance=1.0e-8,
             maximum_step=2.0e-2,
             solver_method="DOP853",
+            gradient_mode=gradient_mode,
         )
         invalid = run.status.startswith("INVALID_CARRIER")
         false_positive = (
@@ -121,9 +124,11 @@ def build_phase_transition_flow_record(
             else "PHASE_TRANSITION_FLOW_CAMPAIGN_EXPOSED_MISSES_OR_INVALID_CARRIERS"
         ),
         "seed_count": seed_count,
+        "seed_start": seed_start,
         "variable_count": variable_count,
         "clause_count": clause_count,
         "fixed_deadline": fixed_deadline,
+        "gradient_mode": gradient_mode,
         "satisfiable_cases": satisfiable_cases,
         "satisfiable_terminal_witnesses": satisfiable_terminal_witnesses,
         "satisfiable_misses": satisfiable_misses,
