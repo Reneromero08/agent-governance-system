@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "family10h_holonomy_integration_v1",
+  "mode": "read_only_bootstrap_and_synthetic_qualification_only",
+  "repository": "Reneromero08/agent-governance-system",
+  "evidence_parent_branch": "codex/family10h-tomography-repair",
+  "evidence_parent_head_at_fork": "cf6d49b0a46d25520a9ce61a06b1f90533058186",
+  "archive_branch": "archive/family10h-tomography-repair-pre-holonomy-20260802",
+  "successor_branch": "codex/family10h-holonomy-integration-v1",
+  "pr50": {
+    "number": 50,
+    "head": "df874f21e09332880bf9c3bbd311368a2e0c2bce",
+    "main_merge_commit": "20ef5a7d1c39c7abe4eba8eeac9bde1d13a25df6",
+    "integration_method": "exact_file_transplant"
+  },
+  "rejected_integration": {
+    "pr": 51,
+    "state": "closed_unmerged",
+    "reason": "whole-history reverse integration exposed unrelated evidence-threatening deletions",
+    "changed_files": 553,
+    "deletions": 5078661
+  },
+  "imported_files": [
+    ".github/workflows/cat-cas-jacobian-holonomy-bridge-requirements.txt",
+    ".github/workflows/cat-cas-jacobian-holonomy-bridge.yml",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/ADVERSARIAL_PROOF_AUDIT.md",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/ANSWER_CACHE_EXCLUSION.md",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/BRIDGE_PACKET.md",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/CLAIM_BOUNDARY.md",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/FAMILY10H_PROTOCOL.md",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/FAMILY10H_PROTOCOL_AUDIT.md",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/KILL_MATRIX.md",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/README.md",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/RESOURCE_AND_NO_SMUGGLE_LEDGER.md",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/RESTORATION_R2_CONTRACT.md",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/__init__.py",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/bridge_model.py",
+    "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/proof_certificate.py",
+    "THOUGHT/LAB/CAT_CAS/tests/jacobian_holonomy_small_wall_bridge/test_bridge_model.py",
+    "THOUGHT/LAB/CAT_CAS/tests/jacobian_holonomy_small_wall_bridge/test_proof_certificate.py"
+  ],
+  "custody": {
+    "original_branch_modified": false,
+    "archive_branch_modified": false,
+    "existing_tomography_files_deleted": false,
+    "retired_package_reactivated": false,
+    "live_authority_granted": false
+  },
+  "claim_ceiling": {
+    "jacobian_holonomy_exact_representation_established": true,
+    "family10h_transport_operator_established": false,
+    "family10h_holonomy_established": false,
+    "native_catalytic_fiber_pushforward_established": false,
+    "r2_restoration_established": false,
+    "small_wall_crossed": false,
+    "p_equals_np_proven": false
+  }
+}
