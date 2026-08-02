@@ -82,11 +82,33 @@ another required row.
 |---|---|
 | Exact representation established | MATH-01 through MATH-08 |
 | Native pushforward candidate | Exact representation plus COMP-01 through COMP-10 |
-| Family 10h connection-law candidate | HW-01 through HW-09 |
-| Bounded replay class rejected | HW-01, HW-02, HW-10 through HW-13 |
+| Family 10h connection-law candidate | HW-01 through HW-09, HW-14, HW-15 |
+| Bounded replay class rejected | HW-01, HW-02, HW-10, HW-12, HW-13 |
 | R2 restoration candidate | R2-01 through R2-10 |
-| Catalytic holonomy candidate | Connection law, accumulator, bounded replay, and R2 all pass |
 | Higher fiber-pushforward candidate | Separate higher-cycle theorem plus every relevant prior gate |
+
+## Fail-closed Family 10h catalytic-holonomy transition
+
+The token `FAMILY10H_CATALYTIC_HOLONOMY_CANDIDATE` may be emitted if and only if every
+item below is present in the frozen contract, passed on the evidence, and independently
+verified:
+
+```text
+PROMOTION_RUNG_REQUIREMENTS = H0, H1, H2, H3, H4, H5, H6, H7
+CONNECTION_REQUIRED_ROWS = HW-01, HW-02, HW-03, HW-04, HW-05, HW-06,
+                           HW-07, HW-08, HW-09, HW-14, HW-15
+ACCUMULATOR_REQUIRED_ROWS = HW-10, HW-11, R2-07
+BOUNDED_REPLAY_REQUIRED_ROWS = HW-01, HW-02, HW-10, HW-12, HW-13
+R2_REQUIRED_ROWS = R2-01, R2-02, R2-03, R2-04, R2-05,
+                   R2-06, R2-07, R2-08, R2-09, R2-10
+ALL_REQUIRED_CONTROLS_PRESENT_PASSING_VERIFIED = true
+```
+
+The transition is the conjunction of all five lines. Any missing row, failed row,
+unverified row, malformed custody record, or unpassed rung forbids
+`FAMILY10H_CATALYTIC_HOLONOMY_CANDIDATE` and must produce one of the noncandidate result
+classes defined by `FAMILY10H_PROTOCOL.md`. No aggregate statistic may rescue a failed
+required row or failed fresh replicate.
 
 ## Hard claim ceiling
 
