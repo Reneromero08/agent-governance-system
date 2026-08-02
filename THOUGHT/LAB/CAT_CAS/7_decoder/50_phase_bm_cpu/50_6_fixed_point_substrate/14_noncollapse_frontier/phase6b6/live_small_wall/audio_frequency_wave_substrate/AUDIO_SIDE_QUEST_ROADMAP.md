@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_QUADRATIC_EXTENSION_STORED_PAIR_IS_EXACT_ISOMORPHISM_BUT_INCREASES_RESIDENT_AND_TOTAL_NAMED_PAYLOAD_AND_RETAINS_FULL_CONSTRUCTION_AND_IDENTICAL_CLASSICAL_RECURRENCE`
-**Roadmap version:** `12.2`
+**Status:** `STRICT_SCOPE_THREE_SHEAR_RELATIVE_HERMITIAN_FEEDBACK_IS_EXACT_AND_PHASE_COVARIANT_BUT_COLLAPSES_TO_IDENTICAL_FIXED_RANK_CLASSICAL_RECURRENCE`
+**Roadmap version:** `12.3`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `01ff12d2984560cad59d0448125fe79b644fb225`
+**Reconciled source head:** `5e1b6b5bed88be896e920c7769a6935bd2395c87`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_POST_FORWARD_TWO_BY_EIGHT_REAL_SUBFIELD_QUADRATIC_EXTENSION_STORED_CARRIER_REPLACES_FULL_CYCLOTOMIC_RESIDENCY_AND_PROJECTS_THROUGH_ONE_FINAL_SCALAR_FULL_LIFT_WITH_EXACT_RESTORATION_AND_PERIOD1_REUSE`
-**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_FAMILIES_PERIODS1AND64_EXACT_POST_FORWARD_TWO_BY_EIGHT_REAL_SUBFIELD_QUADRATIC_EXTENSION_STORED_CARRIER_PAIR_NATIVE_PROJECTION_AND_LEDGER_MATERIALIZATION_ONE_SPLIT_TO_FULL_FINAL_SCALAR_BOUNDARY_LIFT_FULL_CYCLOTOMIC_FORWARD_AND_INVERSE_REMATERIALIZATION_EXACT_ALGEBRAIC_ORIGINAL_BACKING_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE_SEPARATE_REFERENCE_PARITY_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_THREE_NONCOMMUTING_RELATIVE_HERMITIAN_TRACE_SHEARS_EXECUTE_AND_RESTORE_ON_THE_TWO_BY_EIGHT_F17_PHASE_CARRIER_BUT_COLLAPSE_TO_AN_IDENTICAL_FIXED_RANK_COMPACT_CLASSICAL_INTEGER_RECURRENCE`
+**Current claim ceiling:** `LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_SEED_FAMILIES_17_CELL_TWO_BY_EIGHT_PAIR_CARRIER_THREE_PAIRWISE_NONCOMMUTING_GLOBALLY_PHASE_COVARIANT_RELATIVE_HERMITIAN_SOURCE_SCALED_SHEARS_FINAL_INTEGER_TRACE_BOUNDARY_EXACT_REVERSE_ORDER_ZERO_CARRIER_RESTORATION_CROSS_FAMILY_SAME_BACKING_REUSE_INDEPENDENT_FULL_POWER_AND_PAIR_STATE_PARITY_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M116_QUADRATIC_EXTENSION_ISOMORPHISM_DIAGNOSTIC`
+**New mechanism development:** `ACTIVE_AFTER_M117_FIXED_RANK_TRACE_FEEDBACK_CLASSICAL_COLLAPSE_DIAGNOSTIC`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `PHASE_NATIVE_NONCLASSICAL_TRACE_COUPLING_WITHOUT_FULL_CARRIER_RECONSTRUCTION`
+**Active primary successor:** `VARIABLE_RANK_PHASE_COUPLING_WITH_COMPACT_CLASSICAL_TENSOR_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`01ff12d2984560cad59d0448125fe79b644fb225`. The current 116-milestone
+`5e1b6b5bed88be896e920c7769a6935bd2395c87`. The current 117-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -3806,6 +3806,76 @@ The obstruction is:
 THE_EXACT_TWO_BY_EIGHT_PAIR_CHANGES_POST_FORWARD_STORAGE_COORDINATES_WITHOUT_REDUCING_RANK_INCREASES_COMPARABLE_RESIDENT_AND_TOTAL_NAMED_PAYLOAD_RETAINS_FULL_FORWARD_AND_INVERSE_CONSTRUCTION_AND_HAS_AN_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE
 ```
 
+## Exact relative-Hermitian feedback is phase-covariant but classically compact
+
+M117 loads public F17 root seeds into the actual zeroed M116 two-by-eight
+carrier backing and applies three source-scaled relative-Hermitian shears:
+
+```text
+F = (0,1 -> 2, root 5)
+G = (1,2 -> 0, root 11)
+H = (2,0 -> 1, root 3)
+```
+
+Each update adds `zeta^k * x_left * Tr_K/S(x_left*conjugate(x_right))`.
+The source factor makes the law covariant under a common root-of-unity phase
+rotation. All three shear pairs have executed nonzero commutators on both
+public families. Only the final integer trace of cells 1 and 2 is projected.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+source head     5e1b6b5bed88be896e920c7769a6935bd2395c87
+```
+
+```text
+family    coupled boundary    coherent no-shear    named component sum
+PRIMARY   197                 16                   5,177 bits
+REUSE     112                 -1                   5,123 bits
+```
+
+The inverse executes `H^-1`, `G^-1`, then `F^-1`, unloads the public seed,
+and returns the original backing to exact zero without retained inverse
+history or a snapshot. The restored carrier then executes the unrelated
+`REUSE` family; its boundary, rank, and arithmetic signature match a fresh
+carrier. Monotone generation and lease counters account for the two-bit
+metadata difference from fresh reuse.
+
+The independent oracle imports no M117 production module. It executes a
+canonical degree-16 cyclotomic power-basis semantic model and a separate
+two-by-eight reference recurrence. Every forward and inverse state agrees for
+both public families, three global rotations per family, one single-site phase
+perturbation, and one alternate valid shear plan. Wrong arithmetic inversion
+and same-order inversion fail restoration; wrong descriptors are separately
+rejected before mutation.
+
+The zero cross-cell value is a declared-erasure diagnostic, not an executed
+physical dephasing model. The named resource totals count 272 carrier integer
+coordinates, machine metadata, the public program, plan, retained 17-root
+table, seed buffers, named coupling work, and the boundary. They are not
+simultaneous or whole-process peaks and exclude internal real-multiply
+accumulators, Python objects, allocator/native-library state, bigint internals,
+and compilation work.
+
+The strongest matched classical implementation is the identical fixed-rank
+two-by-eight integer recurrence. M117 therefore establishes a bounded exact,
+non-affine, globally phase-covariant coupling law and exact reuse, but no
+distinct phase resource or computational advantage.
+
+The next experiment is:
+
+```text
+VARIABLE_RANK_PHASE_COUPLING_WITH_COMPACT_CLASSICAL_TENSOR_BASELINE
+```
+
+The obstruction is:
+
+```text
+FIXED_RANK_RELATIVE_HERMITIAN_TRACE_FEEDBACK_REMAINS_AN_IDENTICAL_COMPACT_CLASSICAL_POLYNOMIAL_RECURRENCE
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -3843,7 +3913,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_POST_FORWARD_TWO_BY_EIGHT_REAL_SUBFIELD_QUADRATIC_EXTENSION_STORED_CARRIER_REPLACES_FULL_CYCLOTOMIC_RESIDENCY_AND_PROJECTS_THROUGH_ONE_FINAL_SCALAR_FULL_LIFT_WITH_EXACT_RESTORATION_AND_PERIOD1_REUSE
+BOUNDED_EXACT_THREE_NONCOMMUTING_RELATIVE_HERMITIAN_TRACE_SHEARS_EXECUTE_AND_RESTORE_ON_THE_TWO_BY_EIGHT_F17_PHASE_CARRIER_BUT_COLLAPSE_TO_AN_IDENTICAL_FIXED_RANK_COMPACT_CLASSICAL_INTEGER_RECURRENCE
 ```
 
 Not established:
@@ -3898,6 +3968,10 @@ fully pair-native forward or inverse recurrence
 elimination of full-cyclotomic forward or inverse rematerialization
 lower pair residency than the comparable metadata-inclusive full carrier
 lower M116 named total than M115 or matched raw Horner
+executed physical dephasing for the M117 declared-erasure control
+complete M117 arithmetic-scratch or whole-process peak accounting
+phase resource unavailable to the identical two-by-eight integer recurrence
+compact variable-rank nonseparable phase closure
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -3934,7 +4008,13 @@ coordinates, increased comparable resident and total named payload, retained
 full forward and inverse construction, and preserved an identical classical
 pair recurrence. Continue only from that measured obstruction; do not repeat
 M115/M116 fixture sizes, reintroduce the removed norm products, or mistake a
-coordinate isomorphism for compression.
+coordinate isomorphism for compression. M117 added globally phase-covariant,
+pairwise noncommuting relative-Hermitian feedback without a full-carrier lift,
+but the complete law is still the identical fixed-rank two-by-eight classical
+integer recurrence. Continue from that collapse into a variable-rank or
+genuinely nonseparable coupling diagnostic with the strongest compact tensor
+baseline; do not repeat fixed-rank shear fixtures or depth sweeps without a
+specific obstruction they resolve.
 
 ## 10. Roadmap Maintenance
 

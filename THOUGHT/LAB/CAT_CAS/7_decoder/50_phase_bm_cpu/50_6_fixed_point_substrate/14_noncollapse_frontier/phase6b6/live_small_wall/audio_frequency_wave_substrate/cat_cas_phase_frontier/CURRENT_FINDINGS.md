@@ -6831,3 +6831,62 @@ The obstruction is:
 ```text
 THE_EXACT_TWO_BY_EIGHT_PAIR_CHANGES_POST_FORWARD_STORAGE_COORDINATES_WITHOUT_REDUCING_RANK_INCREASES_COMPARABLE_RESIDENT_AND_TOTAL_NAMED_PAYLOAD_RETAINS_FULL_FORWARD_AND_INVERSE_CONSTRUCTION_AND_HAS_AN_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE
 ```
+
+## Exact globally phase-covariant three-shear feedback diagnostic
+
+M117 uses the M116 two-by-eight pair algebra as the resident primitive for a
+three-step nonlinear feedback law. Each shear adds
+`zeta^k * x_left * Tr_K/S(x_left*conjugate(x_right))` to a distinct target.
+The public plan is `(0,1->2,k5)`, `(1,2->0,k11)`, `(2,0->1,k3)`.
+
+```text
+classification  INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification    SEPARATE_REFERENCE_PARITY
+restoration     EXACT_ALGEBRAIC_RESTORATION
+hosted run      NOT ESTABLISHED
+source head     5e1b6b5bed88be896e920c7769a6935bd2395c87
+```
+
+All three shear pairs have executed nonzero commutators for both public seed
+families. Three tested common root rotations preserve each boundary, while a
+single-site phase change produces a different boundary. The accepted path
+materializes neither a full cyclotomic carrier nor a full scalar lift.
+
+```text
+family    coupled boundary    no-shear boundary    named sum
+PRIMARY   197                 16                   5,177 bits
+REUSE     112                 -1                   5,123 bits
+```
+
+Reverse-order arithmetic inversion restores the actual zero-carrier backing
+exactly, after which cross-family reuse agrees with fresh execution in
+boundary, rank, and arithmetic signature. A wrong arithmetic inverse and a
+same-order inverse fail restoration. The independent degree-16 power-basis
+oracle and separate two-by-eight reference agree after every forward and
+inverse step for the main families, phase mutations, global rotations, and an
+alternate plan.
+
+The zero cross-cell diagnostic is declared erasure, not executed physical
+dephasing. Named totals count 272 integer carrier coordinates, public program
+and plan payload, the retained 17-root table, seed buffers, named coupling
+work, and the final boundary. They exclude internal multiplication scratch,
+Python and allocator storage, bigint/native-library internals, compilation
+work, and whole-process peaks.
+
+The strongest compact classical implementation is the identical fixed-rank
+two-by-eight integer recurrence. The exact nonlinear phase coupling therefore
+does not establish a distinct phase resource, advantage, Small Wall crossing,
+CATVM custody, inference, physical execution, bit replacement, or unbounded
+computation.
+
+The next experiment is:
+
+```text
+VARIABLE_RANK_PHASE_COUPLING_WITH_COMPACT_CLASSICAL_TENSOR_BASELINE
+```
+
+The obstruction is:
+
+```text
+FIXED_RANK_RELATIVE_HERMITIAN_TRACE_FEEDBACK_REMAINS_AN_IDENTICAL_COMPACT_CLASSICAL_POLYNOMIAL_RECURRENCE
+```
