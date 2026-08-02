@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "validation_status": "EXACT_BLOB_IDENTITY_AND_ADDITIONS_ONLY_CUSTODY_VERIFIED",
+  "evidence_parent_head": "cf6d49b0a46d25520a9ce61a06b1f90533058186",
+  "archive_head": "cf6d49b0a46d25520a9ce61a06b1f90533058186",
+  "archive_equals_parent": true,
+  "successor_relation_to_parent": "ahead_only",
+  "non_addition_changes_observed": false,
+  "imported_blob_identity": {
+    ".github/workflows/cat-cas-jacobian-holonomy-bridge-requirements.txt": "b3f1e016de18e546baabeb2637da1830fec0f014",
+    ".github/workflows/cat-cas-jacobian-holonomy-bridge.yml": "e7bad9d937ba6f0dd1f093ecdddac4fb637066e9",
+    "ADVERSARIAL_PROOF_AUDIT.md": "025a5b7e5840de1dc46fb875dd888bd26fdfbf10",
+    "ANSWER_CACHE_EXCLUSION.md": "a6347a428a7d81123bf8dfabaaec8ce3b97792e1",
+    "BRIDGE_PACKET.md": "b4ced154343523abcbd7f0c773bae9c69e72bf70",
+    "CLAIM_BOUNDARY.md": "849d935427c54562b1d73d86841d26c74568e4f8",
+    "FAMILY10H_PROTOCOL.md": "694ad131bca5f79d497b677df59204667324e87c",
+    "FAMILY10H_PROTOCOL_AUDIT.md": "0c999c1b203661a5e21d1c2e6473639a133eeb47",
+    "KILL_MATRIX.md": "dd03f2d91ce634da7a66baf79eadade2bfb854e5",
+    "README.md": "452592b8264dff4687e454e6051e10558e5b81b9",
+    "RESOURCE_AND_NO_SMUGGLE_LEDGER.md": "0eeefdec4ad024a1fb84398199be2be435d7b930",
+    "RESTORATION_R2_CONTRACT.md": "89e34230b8d1ab71821805421200bf5d569052f5",
+    "__init__.py": "4662114c09773da4c0470b0afc8ae5ab1cd12e45",
+    "bridge_model.py": "daa7ff391653b8f40e2c87729f2fff59867e987d",
+    "proof_certificate.py": "79f2cb14fa49e03815ab2561a2cd1c6b35c2a5bf",
+    "test_bridge_model.py": "71141d657fe290139157436fbe9dd37cb6f74e9b",
+    "test_proof_certificate.py": "3a5b2c9cb39953a13660c8083f070f6be61bd22f"
+  },
+  "checks": {
+    "all_17_imported_blobs_match_main": true,
+    "original_evidence_branch_unchanged": true,
+    "archive_branch_unchanged": true,
+    "existing_tomography_files_deleted": false,
+    "whole_history_reverse_merge_used": false,
+    "pr51_merged": false,
+    "live_authority_granted": false
+  },
+  "claim_ceiling": "NATIVE_CATALYTIC_FIBER_PUSHFORWARD_NOT_ESTABLISHED__FAMILY10H_HOLONOMY_NOT_ESTABLISHED__SMALL_WALL_NOT_CROSSED"
+}
