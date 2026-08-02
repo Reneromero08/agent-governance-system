@@ -17,21 +17,37 @@ from .bridge_model import (
     sheet_selectors,
     verify_exact_reference,
 )
+from .proof_certificate import (
+    FiberAlgebraCertificate,
+    FormulaCircuitShape,
+    fiber_algebra_certificate,
+    formula_circuit_shape,
+    logarithmic_residue_is_unit,
+    prime_sieve_bound_certificate,
+    target_fiber_case_split,
+)
 
 __all__ = [
     "FIBER_POINTS",
     "PSI",
     "TARGET",
+    "FiberAlgebraCertificate",
+    "FormulaCircuitShape",
     "assignment_satisfies",
     "brute_force_sat_count",
+    "fiber_algebra_certificate",
     "first_primes",
+    "formula_circuit_shape",
     "formula_weight",
     "groebner_fiber_parameterization",
     "jacobian_determinant",
+    "logarithmic_residue_is_unit",
     "map_point",
     "modular_signature",
     "modular_sieve_is_nonzero",
+    "prime_sieve_bound_certificate",
     "reference_fiber_trace",
     "sheet_selectors",
+    "target_fiber_case_split",
     "verify_exact_reference",
 ]
