@@ -1,0 +1,68 @@
+name: CAT_CAS Family10h Holonomy Integration
+
+on:
+  push:
+    branches:
+      - 'codex/family10h-holonomy-integration-v1'
+    paths:
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/tests/jacobian_holonomy_small_wall_bridge/**'
+      - '.github/workflows/cat-cas-jacobian-holonomy-bridge-requirements.txt'
+      - '.github/workflows/cat-cas-family10h-holonomy-integration.yml'
+
+concurrency:
+  group: cat-cas-family10h-holonomy-integration-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    name: Evidence-safe holonomy integration
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout successor
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+
+      - name: Install qualification dependencies
+        run: >-
+          python -m pip install -r
+          .github/workflows/cat-cas-jacobian-holonomy-bridge-requirements.txt
+
+      - name: Verify evidence lineage and additions-only integration
+        run: |
+          git fetch --no-tags origin \
+            codex/family10h-tomography-repair \
+            archive/family10h-tomography-repair-pre-holonomy-20260802
+          test "$(git rev-parse origin/codex/family10h-tomography-repair)" = \
+               "cf6d49b0a46d25520a9ce61a06b1f90533058186"
+          test "$(git rev-parse origin/archive/family10h-tomography-repair-pre-holonomy-20260802)" = \
+               "cf6d49b0a46d25520a9ce61a06b1f90533058186"
+          git diff --name-status cf6d49b0a46d25520a9ce61a06b1f90533058186...HEAD > /tmp/integration-diff.tsv
+          if grep -Ev '^A[[:space:]]' /tmp/integration-diff.tsv; then
+            echo 'Non-addition change detected in evidence-safe integration' >&2
+            exit 1
+          fi
+
+      - name: Run exact bridge tests
+        run: >-
+          python -m pytest -q
+          THOUGHT/LAB/CAT_CAS/tests/jacobian_holonomy_small_wall_bridge
+
+      - name: Run exact reference verifier
+        run: >-
+          python
+          THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/bridge_model.py
+
+      - name: Run CAT_CAS governance critic
+        run: python CAPABILITY/TOOLS/governance/critic.py
