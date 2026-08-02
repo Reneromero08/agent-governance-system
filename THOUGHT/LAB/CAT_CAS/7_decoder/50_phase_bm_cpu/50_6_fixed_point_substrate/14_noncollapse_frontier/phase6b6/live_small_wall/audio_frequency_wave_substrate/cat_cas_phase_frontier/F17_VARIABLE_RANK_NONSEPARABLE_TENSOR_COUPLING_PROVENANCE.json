@@ -1,0 +1,31 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "fc8825af6eb392e5a4d143bcebd74b5354f4841d",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "9f447fb13d4991312bb703e8bee329a2874a7023d046eb53762e7d0de6c229a2",
+  "reference_full_oracle_sha256": "572c2971e25db3ca190120303e3130801071c83316620f121d0c521b7199adbb",
+  "reference_observational_benchmark_sha256": "19e4761396e7ca7a1b51533d6e0a457178682fe51d5f292159c5845a6ed1a76a",
+  "execution": {
+    "production": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_variable_rank_nonseparable_tensor_coupling.py",
+    "oracle": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_variable_rank_nonseparable_tensor_coupling_oracle.py",
+    "benchmark": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/benchmark_f17_variable_rank_nonseparable_tensor_coupling.py",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_variable_rank_nonseparable_tensor_coupling.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_variable_rank_nonseparable_tensor_coupling.py": "9697bf3549e7af7c0331c1828cf6e02d540777d2a78cde0d6da5bd3bbf6a2061",
+    "f17_variable_rank_nonseparable_tensor_coupling_oracle.py": "c306c4da1373a71822044744b3f4722e816d5d88986af1cb0763550100d116b9",
+    "benchmark_f17_variable_rank_nonseparable_tensor_coupling.py": "5f38006e4d494bab4eedcf8f2f858c0673ceee2d2480dc01460e4922ff73530b",
+    "f17_three_shear_relative_hermitian_trace_feedback.py": "71d5fa9f166cd9a93eb5e0a8a5f1869d22b0ee169813c155547d085374cedbc8",
+    "qualify_f17_variable_rank_nonseparable_tensor_coupling.sh": "67da9be808213a050963d0c0bed6ca729466f4db060b97b993b6e5643e18c89d",
+    "F17_VARIABLE_RANK_NONSEPARABLE_TENSOR_COUPLING_RESULTS.json": "9f447fb13d4991312bb703e8bee329a2874a7023d046eb53762e7d0de6c229a2",
+    "F17_VARIABLE_RANK_NONSEPARABLE_TENSOR_COUPLING_ORACLE_RESULTS.json": "572c2971e25db3ca190120303e3130801071c83316620f121d0c521b7199adbb",
+    "F17_VARIABLE_RANK_NONSEPARABLE_TENSOR_COUPLING_BENCHMARK.json": "19e4761396e7ca7a1b51533d6e0a457178682fe51d5f292159c5845a6ed1a76a",
+    "F17_VARIABLE_RANK_NONSEPARABLE_TENSOR_COUPLING_INDEPENDENT_REVIEW.md": "4b29e1bfc151bf7e787b50fb3e7a0398d4d70c79cd2472991e8fb925e45e1221"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "LINUX_X86_64_PYTHON_TWO_PUBLIC_WIDTH4_LOCAL_DIMENSION2_F17_PROGRAMS_INTERLEAVED_K2_2_PHASE_COUPLING_EXACT_INTRA_PROGRAM_TT_RANK_TRACE_ONE_TO_TWO_TO_FOUR_FINAL_ALL_TWO_BY_TWO_CUT_RANK_FOUR_ONE_FINAL_CYCLOTOMIC_BOUNDARY_EXACT_REVERSE_ORDER_ZERO_BACKING_RESTORATION_CROSS_PROGRAM_SAME_BACKING_REUSE_INDEPENDENT_POWER_BASIS_AND_F103_CERTIFICATES_PUBLIC_TOPOLOGY_COMPILED_8_OR_7_ROOT_SPARSE_CHARACTER_BASELINE_DIRECT_PROCESS_SOFTWARE_ONLY"
+}
