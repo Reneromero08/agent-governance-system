@@ -203,7 +203,7 @@ the substrate supports reproducible closed-loop path dependence and restoration.
 A positive commutator result would establish at most:
 
 ```text
-FAMILY10H_PATH_DEPENDENT_CARRIER_CANDIDATE
+FAMILY10H_ORDER_DEPENDENCE_OBSERVED
 ```
 
 It would not establish the fiber pushforward, SAT computation, unbounded compute
