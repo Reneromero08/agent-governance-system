@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`1963fd2ba12e68008af5824496fc1b3c75ca6495`. The canonical per-milestone
+`e8c8e45ab7308197f553fb44522ca4664356e171`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -7147,4 +7147,66 @@ The surviving obstruction is:
 
 ```text
 GENERIC_NONZERO_RUNTIME_GRID_CONTINUATIONS_REQUIRE_FULL_TWO_TO_THE_N_COORDINATES_FOR_ANY_UNIFORM_FIXED_Q_ZETA17_LINEAR_SEPARATOR_ENCODER_SO_THE_NEXT_REPAIR_MUST_CHANGE_REPRESENTATION_CLASS_AND_RETAIN_BROADER_GLOBAL_ALGORITHM_CONTROLS
+```
+
+## Nonlinear projective and canonical TT separator charts do not compact the generic grid message
+
+M122 executes an exact gauge-fixed tensor-train row carrier over `Q(zeta17)`
+for two descriptors at `n=2,3,4`. The accepted path applies the resident
+vertical, unary, and horizontal phase updates without materializing the
+`2^n` row vector. It projects one final scalar and then reverses the actual
+schedule. The same backing, exact canonical state, generation, and lease are
+restored before a held-out descriptor is reused with fresh-carrier boundary
+and rank parity.
+
+```text
+classification                 INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                   INDEPENDENT_ORACLE_REEXECUTION
+carrier restoration            EXACT_ALGEBRAIC_RESTORATION
+transient buffers              NO_RESTORATION_CLAIM
+source head                     e8c8e45ab7308197f553fb44522ca4664356e171
+```
+
+Projective normalization retains `2^n-1` exact ratios plus the answer-bearing
+scale. The fixed zero-index pivot is nonzero for the declared family, but the
+coordinate count does not fall. At `n=4`, projective denominator width reaches
+91 bits.
+
+The generic exact discriminator has final ranks `[2,4,2]`, 40 raw core cells,
+24 gauge dimensions, 16 effective coordinates, and 15 fully reduced
+projective EVDD nodes under the exact all-order subset optimization. The dense
+message has 16 coordinates and its full binary decision tree has 15
+nonterminal nodes. Neither nonlinear chart compacts it.
+
+Dual-field resident and dense recurrences agree through `n=8`. The natural
+rank profile reaches `[2,4,8,16,8,4,2]`; effective coordinates reach 256, raw
+cores 680 cells, and named scratch 768 field cells. `F103` certifies maximal
+ranks across every bit-order subset at each tested width. An `F137` `n=8`
+degeneracy is preserved, so exact `Q(zeta17)` execution beyond `n=4` and
+two-field all-order maximality are not claimed. Wider decision-diagram results
+are quasi-reduced layered counts unless redundant-test deletion is separately
+certified.
+
+The direct zero-field planar-Ising/Pfaffian positive control passes; a
+single-site field defect and the generic discriminator reject that direct
+route. Broader matchgate, holographic, global, and boundary-specific methods
+remain open. The identical exact TT recurrence is classical. Its exact zero
+tests, division, RREF, pivoting, and gauge fixing are not native phase
+primitives, and scratch coefficient payload is estimated rather than measured
+as a process peak.
+
+No general nonlinear no-go, CATVM custody, distinct phase resource,
+computational advantage, Small Wall crossing, physical execution, bit
+replacement, or unbounded computation follows.
+
+The selected successor is:
+
+```text
+EXACT_F17_PLANAR_FREE_FERMION_MATCHGATE_PHASE_COVARIANCE_CLOSURE_FOR_ZERO_FIELD_GRID_SIGNATURES_WITH_SPARSE_EXTERNAL_FIELD_DEFECT_GROWTH_RESTORATION_REUSE_AND_IDENTICAL_PFAFFIAN_BASELINE
+```
+
+The surviving obstruction is:
+
+```text
+GENERIC_F17_GRID_MESSAGES_SATURATE_PROJECTIVE_TT_AND_ALL_ORDER_N4_DECISION_DIAGRAM_CHARTS_WHILE_SOFTWARE_ZERO_TEST_DIVISION_AND_GAUGE_FIXING_ARE_NOT_PHASE_PRIMITIVES_SO_THE_NEXT_REPAIR_MUST_CHANGE_THE_RESIDENT_PHASE_UPDATE_OR_RESTRICT_THE_SIGNATURE_FAMILY_WITHOUT_MOVING_GROWTH_INTO_DEFECT_ENUMERATION
 ```

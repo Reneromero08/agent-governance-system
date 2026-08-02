@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_UNIFORM_FIXED_LINEAR_SEPARATOR_QUOTIENT_BELOW_TWO_TO_THE_N_REJECTED_NONLINEAR_AND_GLOBAL_ROUTES_OPEN`
-**Roadmap version:** `12.7`
+**Status:** `STRICT_SCOPE_NONLINEAR_PROJECTIVE_AND_TT_SEPARATOR_CHART_NO_COMPACTION_NEXT_PHASE_UPDATE_SELECTED`
+**Roadmap version:** `12.8`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `1963fd2ba12e68008af5824496fc1b3c75ca6495`
+**Reconciled source head:** `e8c8e45ab7308197f553fb44522ca4664356e171`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_Q_ZETA17_GENERIC_NONZERO_RUNTIME_WEIGHT_GRID_CONTINUATION_SPAN_REJECTS_ANY_UNIFORM_FIXED_LINEAR_SEPARATOR_QUOTIENT_BELOW_TWO_TO_THE_N_FIELD_COORDINATES_WHILE_TWO_DESCRIPTOR_DRIVEN_FACTOR_CARRIER_TRANSACTIONS_RESTORE_AND_REUSE_AT_N2_N3_N4`
-**Current claim ceiling:** `UNIFORM_FIXED_Q_ZETA17_LINEAR_SEPARATOR_ENCODERS_SUPPORTING_ARBITRARY_FIELD_MESSAGES_AND_EVERY_LEGAL_NONZERO_FINAL_ROW_CONTINUATION_REQUIRE_AT_LEAST_TWO_TO_THE_N_FIELD_COORDINATES_ANALYTIC_ALL_N_FORMULA_CERTIFICATES_N1_TO_N16_PHASE_AND_DUAL_FIELD_REEXECUTION_N2_N3_N4_TWO_DESCRIPTOR_DRIVEN_EXACT_FACTOR_CARRIER_RESTORATION_AND_SAME_BACKING_REUSE_TRANSIENT_PROJECTION_BUFFER_NO_RESTORATION_CLAIM_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_NONLINEAR_PROJECTIVE_AND_CANONICAL_TENSOR_TRAIN_SEPARATOR_CHART_DIAGNOSTIC_FINDS_NO_COMPACTION_ON_GENERIC_F17_GRID_MESSAGES_WHILE_EXACT_SMALL_WIDTH_TRANSACTIONS_RESTORE_AND_REUSE`
+**Current claim ceiling:** `EXACT_Q_ZETA17_TWO_DESCRIPTOR_FAMILIES_N2_N3_N4_CANONICAL_TT_PROJECTIVE_AND_FULLY_REDUCED_N4_EVDD_NO_COMPACTION_DIAGNOSTIC_PLUS_DUAL_FIELD_STRUCTURAL_TT_AND_QUASI_REDUCED_LAYERED_DD_REEXECUTION_N2_THROUGH_N8_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M121_UNIFORM_LINEAR_SEPARATOR_QUOTIENT_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M122_NONLINEAR_SEPARATOR_CHART_NO_COMPACTION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `NONLINEAR_CANONICAL_PHASE_SEPARATOR_CHART_WITH_RESIDENT_UPDATES_ON_GROWING_HETEROGENEOUS_WIDTHS_AGAINST_ALL_ORDER_ADD_MTBDD_EXACT_MPS_TENSOR_AND_MATCHGATE_HOLOGRAPHIC_BASELINES`
+**Active primary successor:** `EXACT_F17_PLANAR_FREE_FERMION_MATCHGATE_PHASE_COVARIANCE_CLOSURE_FOR_ZERO_FIELD_GRID_SIGNATURES_WITH_SPARSE_EXTERNAL_FIELD_DEFECT_GROWTH_RESTORATION_REUSE_AND_IDENTICAL_PFAFFIAN_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`1963fd2ba12e68008af5824496fc1b3c75ca6495`. The current 121-milestone
+`e8c8e45ab7308197f553fb44522ca4664356e171`. The current 122-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4188,6 +4188,90 @@ The obstruction is:
 
 ```text
 GENERIC_NONZERO_RUNTIME_GRID_CONTINUATIONS_REQUIRE_FULL_TWO_TO_THE_N_COORDINATES_FOR_ANY_UNIFORM_FIXED_Q_ZETA17_LINEAR_SEPARATOR_ENCODER_SO_THE_NEXT_REPAIR_MUST_CHANGE_REPRESENTATION_CLASS_AND_RETAIN_BROADER_GLOBAL_ALGORITHM_CONTROLS
+```
+
+### 6.122 Nonlinear projective and canonical TT separator-chart diagnostic
+
+M122 changes representation class rather than extending the M121 linear
+certificate. The accepted path stores the row message as an exact gauge-fixed
+tensor train, applies vertical kernels, unary phases, and horizontal
+controlled phases directly to that resident state, projects one final scalar,
+then applies the actual reverse schedule. It never constructs the `2^n` row
+vector.
+
+```text
+classification                 INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                   INDEPENDENT_ORACLE_REEXECUTION
+carrier restoration            EXACT_ALGEBRAIC_RESTORATION
+transient chart/projection      NO_RESTORATION_CLAIM
+hosted run                      NOT ESTABLISHED
+source head                     e8c8e45ab7308197f553fb44522ca4664356e171
+```
+
+Exact `Q(zeta17)` execution covers two deterministic descriptors at
+`n=2,3,4`. Production and the separately implemented dense oracle agree on
+every boundary and natural-rank trace. The actual canonical TT state restores
+exactly on the same carrier backing, increments its generation once, clears
+its lease, and gives fresh/restored boundary and rank-signature parity on an
+unrelated descriptor without snapshot reload or retained inverse history.
+
+The amplitude-bearing projective control is not a compression. Every exact
+row-message entry is nonzero because it is a sum of a power-of-two number of
+seventeenth roots; a zero sum would require all 17 character multiplicities
+to be equal. Therefore a fixed pivot is legal, but the chart still needs
+`2^n-1` ratios plus one exact scale. At `n=4`, the ratio denominators reach 91
+bits.
+
+```text
+n                                      2    3     4
+final natural TT ranks                 2   2,2   2,4,2
+effective chart coordinates            4    8    16
+raw TT core cells                       8   16    40
+dense row-message coordinates           4    8    16
+best exact projective EVDD nodes        -    7    15
+full binary-tree nonterminal nodes      3    7    15
+```
+
+The `n=4` `GENERIC` fixture has maximal ranks for every separator-bit order,
+16 effective TT coordinates, and 15 fully reduced projective EVDD nodes. The
+independent oracle uses all subset states to optimize static variable order.
+Where redundant-test deletion is not certified, its wider modular counts are
+labelled quasi-reduced layered DD counts, not fully reduced MTBDD/EVDD optima.
+
+The same resident TT update and independent dense recurrence agree over
+`F103` and `F137` through `n=8`. Natural ranks saturate at
+`[2,4,8,16,8,4,2]`, the effective chart reaches 256 coordinates, raw cores
+reach 680 cells, and named scratch reaches 768 field cells. `F103` gives a
+full all-order modular rank certificate at every tested width. `F137` has an
+`n=8` degeneracy, so two-field all-order maximality is not claimed and no
+exact `Q(zeta17)` execution beyond `n=4` is inferred.
+
+The direct zero-field planar-Ising/Pfaffian control passes. A single-site
+field mutation and the generic discriminator reject that direct route, while
+arbitrary local-basis matchgate, holographic, global, and boundary-specific
+algorithms remain unexhausted. The identical exact TT recurrence remains the
+strongest matched implementation. Exact zero tests, division, RREF, pivoting,
+and gauge fixing are ordinary software operations rather than resident phase
+primitives. Scratch coefficient payload is an estimate from resident height,
+not an exact transient peak.
+
+M122 therefore rejects only these projective and canonical TT chart repairs
+for the declared bounded families. It establishes no general nonlinear
+separator lower bound, CATVM custody, distinct phase resource, advantage,
+Small Wall crossing, physical execution, bit replacement, or unbounded
+computation.
+
+The next experiment changes the phase update law to the smallest restricted
+family already exposed by the positive control:
+
+```text
+EXACT_F17_PLANAR_FREE_FERMION_MATCHGATE_PHASE_COVARIANCE_CLOSURE_FOR_ZERO_FIELD_GRID_SIGNATURES_WITH_SPARSE_EXTERNAL_FIELD_DEFECT_GROWTH_RESTORATION_REUSE_AND_IDENTICAL_PFAFFIAN_BASELINE
+```
+
+The obstruction is:
+
+```text
+GENERIC_F17_GRID_MESSAGES_SATURATE_PROJECTIVE_TT_AND_ALL_ORDER_N4_DECISION_DIAGRAM_CHARTS_WHILE_SOFTWARE_ZERO_TEST_DIVISION_AND_GAUGE_FIXING_ARE_NOT_PHASE_PRIMITIVES_SO_THE_NEXT_REPAIR_MUST_CHANGE_THE_RESIDENT_PHASE_UPDATE_OR_RESTRICT_THE_SIGNATURE_FAMILY_WITHOUT_MOVING_GROWTH_INTO_DEFECT_ENUMERATION
 ```
 
 ## 7. No-Smuggle and Non-Collapse Laws
