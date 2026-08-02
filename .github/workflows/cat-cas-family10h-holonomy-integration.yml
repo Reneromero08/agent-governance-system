@@ -10,6 +10,15 @@ on:
       - 'THOUGHT/LAB/CAT_CAS/tests/jacobian_holonomy_small_wall_bridge/**'
       - '.github/workflows/cat-cas-jacobian-holonomy-bridge-requirements.txt'
       - '.github/workflows/cat-cas-family10h-holonomy-integration.yml'
+  pull_request:
+    branches:
+      - 'codex/family10h-holonomy-integration-v1'
+    paths:
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/jacobian_holonomy_small_wall_bridge_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_holonomy_integration_v1/**'
+      - 'THOUGHT/LAB/CAT_CAS/tests/jacobian_holonomy_small_wall_bridge/**'
+      - '.github/workflows/cat-cas-jacobian-holonomy-bridge-requirements.txt'
+      - '.github/workflows/cat-cas-family10h-holonomy-integration.yml'
 
 concurrency:
   group: cat-cas-family10h-holonomy-integration-${{ github.ref }}
