@@ -25,6 +25,8 @@ class Polynomial:
     terms: Mapping[Monomial, Fraction]
 
     def __post_init__(self) -> None:
+        """Normalize coefficients and remove exact zero terms."""
+
         cleaned = {
             monomial: Fraction(coefficient)
             for monomial, coefficient in self.terms.items()
@@ -34,11 +36,15 @@ class Polynomial:
 
     @staticmethod
     def constant(value: int | Fraction) -> "Polynomial":
+        """Construct an exact constant polynomial."""
+
         value = Fraction(value)
         return Polynomial({(0, 0, 0): value} if value else {})
 
     @staticmethod
     def variable(index: int) -> "Polynomial":
+        """Construct one of the coordinate polynomials x, y, or z."""
+
         if index not in (0, 1, 2):
             raise ValueError("variable index must be 0, 1, or 2")
         exponent = [0, 0, 0]
@@ -46,6 +52,8 @@ class Polynomial:
         return Polynomial({tuple(exponent): Fraction(1)})
 
     def __add__(self, other: object) -> "Polynomial":
+        """Add another exact polynomial or scalar."""
+
         rhs = coerce_polynomial(other)
         result = dict(self.terms)
         for monomial, coefficient in rhs.terms.items():
@@ -55,20 +63,30 @@ class Polynomial:
         return Polynomial(result)
 
     def __radd__(self, other: object) -> "Polynomial":
+        """Add this polynomial to a scalar or polynomial on the left."""
+
         return self + other
 
     def __neg__(self) -> "Polynomial":
+        """Negate every exact coefficient."""
+
         return Polynomial(
             {monomial: -coefficient for monomial, coefficient in self.terms.items()}
         )
 
     def __sub__(self, other: object) -> "Polynomial":
+        """Subtract another exact polynomial or scalar."""
+
         return self + (-coerce_polynomial(other))
 
     def __rsub__(self, other: object) -> "Polynomial":
+        """Subtract this polynomial from a scalar or polynomial on the left."""
+
         return coerce_polynomial(other) - self
 
     def __mul__(self, other: object) -> "Polynomial":
+        """Multiply by another exact polynomial or scalar."""
+
         rhs = coerce_polynomial(other)
         result: dict[Monomial, Fraction] = {}
         for left_monomial, left_coefficient in self.terms.items():
@@ -84,9 +102,13 @@ class Polynomial:
         return Polynomial(result)
 
     def __rmul__(self, other: object) -> "Polynomial":
+        """Multiply this polynomial by a scalar or polynomial on the left."""
+
         return self * other
 
     def __pow__(self, exponent: int) -> "Polynomial":
+        """Raise the polynomial to a nonnegative integer power."""
+
         if exponent < 0:
             raise ValueError("negative polynomial powers are unsupported")
         result = Polynomial.constant(1)
@@ -100,6 +122,8 @@ class Polynomial:
         return result
 
     def derivative(self, variable_index: int) -> "Polynomial":
+        """Differentiate exactly with respect to one coordinate."""
+
         result: dict[Monomial, Fraction] = {}
         for monomial, coefficient in self.terms.items():
             exponent = monomial[variable_index]
@@ -116,6 +140,8 @@ class Polynomial:
         y_value: int | Fraction,
         z_value: int | Fraction,
     ) -> Fraction:
+        """Evaluate the polynomial in exact rational arithmetic."""
+
         values = (Fraction(x_value), Fraction(y_value), Fraction(z_value))
         total = Fraction(0)
         for monomial, coefficient in self.terms.items():
@@ -127,6 +153,8 @@ class Polynomial:
 
 
 def coerce_polynomial(value: object) -> Polynomial:
+    """Coerce an exact scalar or polynomial into ``Polynomial`` form."""
+
     if isinstance(value, Polynomial):
         return value
     if isinstance(value, (int, Fraction)):
@@ -135,6 +163,8 @@ def coerce_polynomial(value: object) -> Polynomial:
 
 
 def determinant_3x3(matrix: Sequence[Sequence[Polynomial]]) -> Polynomial:
+    """Compute the exact determinant of a three-by-three polynomial matrix."""
+
     if len(matrix) != 3 or any(len(row) != 3 for row in matrix):
         raise ValueError("expected a 3 by 3 matrix")
     return (
@@ -166,6 +196,8 @@ FIBER_POINTS = (
 
 
 def jacobian_determinant() -> Polynomial:
+    """Return the exact determinant of the normalized carrier map Jacobian."""
+
     matrix = tuple(
         tuple(component.derivative(variable) for variable in range(3))
         for component in PSI
@@ -174,6 +206,8 @@ def jacobian_determinant() -> Polynomial:
 
 
 def map_point(point: Sequence[int | Fraction]) -> tuple[Fraction, Fraction, Fraction]:
+    """Evaluate the normalized carrier map at one exact point."""
+
     if len(point) != 3:
         raise ValueError("a carrier point must have three coordinates")
     return tuple(component.evaluate(*point) for component in PSI)  # type: ignore[return-value]
@@ -210,6 +244,8 @@ Formula = tuple[Clause, ...]
 
 
 def literal_selector(literal: Literal, sheet: int) -> Fraction:
+    """Return the exact satisfaction selector for one literal and sheet."""
+
     variable_index, positive = literal
     if variable_index < 0:
         raise ValueError("variable index must be nonnegative")
@@ -218,6 +254,8 @@ def literal_selector(literal: Literal, sheet: int) -> Fraction:
 
 
 def formula_weight(formula: Formula, sheets: Sequence[int], variable_count: int) -> Fraction:
+    """Evaluate the formula-local sheet weight on one product-fiber point."""
+
     if len(sheets) != variable_count:
         raise ValueError("sheet count does not match variable count")
     valid = Fraction(1)
@@ -240,6 +278,8 @@ def formula_weight(formula: Formula, sheets: Sequence[int], variable_count: int)
 
 
 def assignment_satisfies(formula: Formula, assignment: Sequence[bool]) -> bool:
+    """Evaluate a Boolean assignment with the independent reference semantics."""
+
     for clause in formula:
         if not any(
             assignment[variable_index] if positive else not assignment[variable_index]
@@ -250,6 +290,8 @@ def assignment_satisfies(formula: Formula, assignment: Sequence[bool]) -> bool:
 
 
 def brute_force_sat_count(formula: Formula, variable_count: int) -> int:
+    """Count satisfying Boolean assignments for capped reference validation."""
+
     return sum(
         assignment_satisfies(formula, assignment)
         for assignment in product((False, True), repeat=variable_count)
@@ -268,6 +310,8 @@ def reference_fiber_trace(formula: Formula, variable_count: int) -> int:
 
 
 def first_primes(count: int) -> tuple[int, ...]:
+    """Return the first ``count`` prime numbers deterministically."""
+
     if count < 0:
         raise ValueError("count must be nonnegative")
     primes: list[int] = []
@@ -281,16 +325,22 @@ def first_primes(count: int) -> tuple[int, ...]:
 
 
 def modular_signature(value: int, variable_count: int) -> tuple[int, ...]:
+    """Return the exact prime-residue signature for a bounded count."""
+
     if value < 0 or value > 2**variable_count:
         raise ValueError("value is outside the SAT-count range")
     return tuple(value % prime for prime in first_primes(variable_count + 1))
 
 
 def modular_sieve_is_nonzero(signature: Iterable[int]) -> bool:
+    """Return whether any modular channel witnesses a nonzero count."""
+
     return any(residue != 0 for residue in signature)
 
 
 def verify_exact_reference() -> dict[str, object]:
+    """Run the compact exact-reference verification and return its result record."""
+
     determinant_ok = jacobian_determinant() == Polynomial.constant(1)
     fiber_ok = all(map_point(point) == TARGET for point in FIBER_POINTS)
     parameterization_ok = tuple(
