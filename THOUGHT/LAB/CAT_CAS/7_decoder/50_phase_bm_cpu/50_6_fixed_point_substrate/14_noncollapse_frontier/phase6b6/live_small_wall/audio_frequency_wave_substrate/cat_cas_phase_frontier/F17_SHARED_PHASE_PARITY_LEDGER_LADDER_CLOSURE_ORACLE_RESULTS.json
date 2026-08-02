@@ -1,0 +1,833 @@
+{
+  "bounded_dense_checks": [
+    {
+      "agreement": true,
+      "binary_assignments": 4,
+      "even_sector_ceiling": 2,
+      "expanded_signature_cells": 4,
+      "family": "PRIMARY",
+      "width": 1
+    },
+    {
+      "agreement": true,
+      "binary_assignments": 16,
+      "even_sector_ceiling": 8,
+      "expanded_signature_cells": 16,
+      "family": "PRIMARY",
+      "width": 2
+    },
+    {
+      "agreement": true,
+      "binary_assignments": 256,
+      "even_sector_ceiling": 128,
+      "expanded_signature_cells": 256,
+      "family": "PRIMARY",
+      "width": 4
+    },
+    {
+      "agreement": true,
+      "binary_assignments": 4,
+      "even_sector_ceiling": 2,
+      "expanded_signature_cells": 4,
+      "family": "REUSE",
+      "width": 1
+    },
+    {
+      "agreement": true,
+      "binary_assignments": 16,
+      "even_sector_ceiling": 8,
+      "expanded_signature_cells": 16,
+      "family": "REUSE",
+      "width": 2
+    },
+    {
+      "agreement": true,
+      "binary_assignments": 256,
+      "even_sector_ceiling": 128,
+      "expanded_signature_cells": 256,
+      "family": "REUSE",
+      "width": 4
+    }
+  ],
+  "claim_ceiling": {
+    "arbitrary_treewidth_compaction": false,
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "fixed_rank4_topology_ordered_closure": true,
+    "identical_compact_classical_recurrence": true,
+    "native_non_gaussian_signature_scope": "PRIMARY_WIDTH2_EXACT_GRASSMANN_PLUCKER_WITNESS_ONLY",
+    "other_exact_families_or_widths_non_gaussian_established": false,
+    "physical_bits_replaced_with_pi": false,
+    "physical_waveform_execution": false,
+    "small_wall_crossing": false,
+    "two_row_open_ladder_family_only": true,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "accepted_recurrence_enumerates_even_sectors": false,
+    "accepted_recurrence_materializes_dense_signature": false,
+    "grouped_order_is_width_exposing_not_a_semantic_mutation": true,
+    "oracle_dense_enumeration_is_bounded_to_width4": true,
+    "rank3_overmerge_changes_boundary": true,
+    "semantic_field_port_mutation_changes_boundary": true
+  },
+  "exact_non_gaussian_signature": {
+    "indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "interpretation": "THE_FULL_DEFECT_SIGNATURE_IS_NOT_A_SINGLE_EVEN_GAUSSIAN_SIGNATURE",
+    "nonzero": true,
+    "plucker_delta": [
+      [
+        64,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        -32,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        -32,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "width": 2
+  },
+  "independence": {
+    "accepted_boundary_oracle": "DIRECT_16_TRANSITION_FOUR_STATE_COLUMN_RECURRENCE",
+    "bounded_dense_oracles": "BINARY_ASSIGNMENT_AND_OCCURRENCE_EXPANDED_SIGNATURE_WIDTHS_1_2_4",
+    "exact_algebra": "INDEPENDENT_FRACTION_POWER_BASIS_MOD_PHI17",
+    "imports_production_or_predecessor": false
+  },
+  "lifecycle_receipt_consistency": {
+    "all_responses_marked_after_restoration": true,
+    "all_rows_exact_factor_restored": true,
+    "all_rows_generation_incremented": true,
+    "all_rows_same_backing": true,
+    "fresh_restored_reuse_receipt_consistent": true,
+    "limitation": "LIFECYCLE_FIELDS_REQUIRE_SEPARATE_SOURCE_AUDIT;THEY_ARE_NOT_PROVEN_BY_BOUNDARY_PARITY_ALONE",
+    "receipt_rows_checked": 46,
+    "snapshot_reload_absent": true
+  },
+  "next_obstruction": "FIXED_RANK4_IS_EXPLAINED_BY_THE_TWO_ROW_FOUR_STATE_SEPARATOR_AND_IS_IDENTICAL_TO_COMPACT_CLASSICAL_TRANSFER",
+  "observed_resource_law": {
+    "all_order_optimum_tested": "4_FOR_W2_TO_W4_AND_2_FOR_W1_OVER_F103_AND_F137",
+    "column_interleaved_max_cut_rank": "AT_MOST_4_FOR_ARBITRARY_WIDTH_BY_THE_TWO_ROW_SEPARATOR",
+    "dense_signature_cells": "4_TO_THE_W",
+    "direct_transition_work": "O_W_FIELD_OPERATIONS_WITH_FIXED_FOUR_STATE_FRONTIER_EXACT_BIT_COMPLEXITY_REPORTED_SEPARATELY",
+    "even_sector_count": "2_TO_THE_2W_MINUS_1",
+    "grouped_row_cut_rank": "2_TO_THE_W_FOR_THE_TESTED_NONZERO_VERTICAL_KERNELS_W1_TO_W4",
+    "resident_factor_cells": "10W_MINUS_4",
+    "topology_ordered_frontier_cells": 4
+  },
+  "production_parity": {
+    "dual_field_structural": [
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F103",
+        "width": 1
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F103",
+        "width": 2
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F103",
+        "width": 4
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F103",
+        "width": 8
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F103",
+        "width": 16
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F103",
+        "width": 32
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F103",
+        "width": 64
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F103",
+        "width": 128
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F103",
+        "width": 1
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F103",
+        "width": 2
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F103",
+        "width": 4
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F103",
+        "width": 8
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F103",
+        "width": 16
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F103",
+        "width": 32
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F103",
+        "width": 64
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F103",
+        "width": 128
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F137",
+        "width": 1
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F137",
+        "width": 2
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F137",
+        "width": 4
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F137",
+        "width": 8
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F137",
+        "width": 16
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F137",
+        "width": 32
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F137",
+        "width": 64
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "field": "F137",
+        "width": 128
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F137",
+        "width": 1
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F137",
+        "width": 2
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F137",
+        "width": 4
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F137",
+        "width": 8
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F137",
+        "width": 16
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F137",
+        "width": 32
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F137",
+        "width": 64
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "field": "F137",
+        "width": 128
+      }
+    ],
+    "exact": [
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "width": 1
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "width": 2
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "width": 4
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "width": 8
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "width": 16
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "width": 32
+      },
+      {
+        "agreement": true,
+        "family": "PRIMARY",
+        "width": 64
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "width": 1
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "width": 2
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "width": 4
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "width": 8
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "width": 16
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "width": 32
+      },
+      {
+        "agreement": true,
+        "family": "REUSE",
+        "width": 64
+      }
+    ]
+  },
+  "production_result_sha256": "10730c0107cb992b208568df951a71a8894720cb645fe1640332729104287460",
+  "residual_rank_order_gauge": [
+    {
+      "all_order_optimal_maximum_cut_rank": 2,
+      "all_order_witness": [
+        1,
+        0
+      ],
+      "column_interleaved_cut_rank_profile": [
+        2
+      ],
+      "column_interleaved_order": [
+        0,
+        1
+      ],
+      "field": "F103",
+      "first_plucker_violation": null,
+      "grouped_cut_rank_profile": [
+        2
+      ],
+      "grouped_order": [
+        0,
+        1
+      ],
+      "odd_signature_entries_zero": true,
+      "plucker_violation_count": 0,
+      "width": 1
+    },
+    {
+      "all_order_optimal_maximum_cut_rank": 4,
+      "all_order_witness": [
+        3,
+        2,
+        1,
+        0
+      ],
+      "column_interleaved_cut_rank_profile": [
+        2,
+        4,
+        2
+      ],
+      "column_interleaved_order": [
+        0,
+        2,
+        1,
+        3
+      ],
+      "field": "F103",
+      "first_plucker_violation": {
+        "delta": 10,
+        "indices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "grouped_cut_rank_profile": [
+        2,
+        4,
+        2
+      ],
+      "grouped_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "odd_signature_entries_zero": true,
+      "plucker_violation_count": 1,
+      "width": 2
+    },
+    {
+      "all_order_optimal_maximum_cut_rank": 4,
+      "all_order_witness": [
+        5,
+        4,
+        2,
+        3,
+        1,
+        0
+      ],
+      "column_interleaved_cut_rank_profile": [
+        2,
+        4,
+        4,
+        4,
+        2
+      ],
+      "column_interleaved_order": [
+        0,
+        3,
+        1,
+        4,
+        2,
+        5
+      ],
+      "field": "F103",
+      "first_plucker_violation": {
+        "delta": 3,
+        "indices": [
+          0,
+          1,
+          3,
+          4
+        ]
+      },
+      "grouped_cut_rank_profile": [
+        2,
+        4,
+        8,
+        4,
+        2
+      ],
+      "grouped_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "odd_signature_entries_zero": true,
+      "plucker_violation_count": 9,
+      "width": 3
+    },
+    {
+      "all_order_optimal_maximum_cut_rank": 4,
+      "all_order_witness": [
+        7,
+        6,
+        3,
+        5,
+        2,
+        4,
+        1,
+        0
+      ],
+      "column_interleaved_cut_rank_profile": [
+        2,
+        4,
+        4,
+        4,
+        4,
+        4,
+        2
+      ],
+      "column_interleaved_order": [
+        0,
+        4,
+        1,
+        5,
+        2,
+        6,
+        3,
+        7
+      ],
+      "field": "F103",
+      "first_plucker_violation": {
+        "delta": 80,
+        "indices": [
+          0,
+          1,
+          4,
+          5
+        ]
+      },
+      "grouped_cut_rank_profile": [
+        2,
+        4,
+        8,
+        16,
+        8,
+        4,
+        2
+      ],
+      "grouped_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "odd_signature_entries_zero": true,
+      "plucker_violation_count": 36,
+      "width": 4
+    },
+    {
+      "all_order_optimal_maximum_cut_rank": 2,
+      "all_order_witness": [
+        1,
+        0
+      ],
+      "column_interleaved_cut_rank_profile": [
+        2
+      ],
+      "column_interleaved_order": [
+        0,
+        1
+      ],
+      "field": "F137",
+      "first_plucker_violation": null,
+      "grouped_cut_rank_profile": [
+        2
+      ],
+      "grouped_order": [
+        0,
+        1
+      ],
+      "odd_signature_entries_zero": true,
+      "plucker_violation_count": 0,
+      "width": 1
+    },
+    {
+      "all_order_optimal_maximum_cut_rank": 4,
+      "all_order_witness": [
+        3,
+        2,
+        1,
+        0
+      ],
+      "column_interleaved_cut_rank_profile": [
+        2,
+        4,
+        2
+      ],
+      "column_interleaved_order": [
+        0,
+        2,
+        1,
+        3
+      ],
+      "field": "F137",
+      "first_plucker_violation": {
+        "delta": 72,
+        "indices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "grouped_cut_rank_profile": [
+        2,
+        4,
+        2
+      ],
+      "grouped_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "odd_signature_entries_zero": true,
+      "plucker_violation_count": 1,
+      "width": 2
+    },
+    {
+      "all_order_optimal_maximum_cut_rank": 4,
+      "all_order_witness": [
+        5,
+        4,
+        2,
+        3,
+        1,
+        0
+      ],
+      "column_interleaved_cut_rank_profile": [
+        2,
+        4,
+        4,
+        4,
+        2
+      ],
+      "column_interleaved_order": [
+        0,
+        3,
+        1,
+        4,
+        2,
+        5
+      ],
+      "field": "F137",
+      "first_plucker_violation": {
+        "delta": 4,
+        "indices": [
+          0,
+          1,
+          3,
+          4
+        ]
+      },
+      "grouped_cut_rank_profile": [
+        2,
+        4,
+        8,
+        4,
+        2
+      ],
+      "grouped_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "odd_signature_entries_zero": true,
+      "plucker_violation_count": 9,
+      "width": 3
+    },
+    {
+      "all_order_optimal_maximum_cut_rank": 4,
+      "all_order_witness": [
+        7,
+        6,
+        3,
+        5,
+        2,
+        4,
+        1,
+        0
+      ],
+      "column_interleaved_cut_rank_profile": [
+        2,
+        4,
+        4,
+        4,
+        4,
+        4,
+        2
+      ],
+      "column_interleaved_order": [
+        0,
+        4,
+        1,
+        5,
+        2,
+        6,
+        3,
+        7
+      ],
+      "field": "F137",
+      "first_plucker_violation": {
+        "delta": 83,
+        "indices": [
+          0,
+          1,
+          4,
+          5
+        ]
+      },
+      "grouped_cut_rank_profile": [
+        2,
+        4,
+        8,
+        16,
+        8,
+        4,
+        2
+      ],
+      "grouped_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "odd_signature_entries_zero": true,
+      "plucker_violation_count": 36,
+      "width": 4
+    }
+  ],
+  "restoration_class": {
+    "resident_factor_and_accumulator_carrier": "EXACT_ALGEBRAIC_RESTORATION",
+    "transient_projection_frontier": "NO_RESTORATION_CLAIM"
+  },
+  "schema": "CAT_CAS_F17_SHARED_PHASE_PARITY_LEDGER_LADDER_CLOSURE_ORACLE_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
