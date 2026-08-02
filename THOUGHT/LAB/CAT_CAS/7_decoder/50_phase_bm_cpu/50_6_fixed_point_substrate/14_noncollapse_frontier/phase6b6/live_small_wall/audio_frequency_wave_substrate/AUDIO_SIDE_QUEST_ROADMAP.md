@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_PAIRED_PHASE_BASIS_MATCHGATE_CLOSURE_WITH_PUBLIC_HOLOGRAPHIC_CANCELLATION_NEXT_RESIDENT_BASIS_COUPLING_SELECTED`
-**Roadmap version:** `13.1`
+**Status:** `STRICT_SCOPE_COHERENT_SHARED_LATENT_BASIS_MISMATCH_CLOSURE_FIXED17_CLASSICAL_DIRECT_SUM_NEXT_GROWING_LATENT_GEOMETRY_SELECTED`
+**Roadmap version:** `13.2`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `ae36a130352ba92f4272858cc00bde13c6336b90`
+**Reconciled source head:** `16ad7bec40126f9b60531225135f78c2bc3ac111`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_PAIRED_ZETA17_BASIS_CLOSES_COMPACT_NATIVE_MIXED_PARITY_EXACT_ONE_GENERATORS_ON_GROWING_EVEN_PLANAR_GRIDS_BY_SHARED_EDGE_IDENTITY_AND_KASTELEYN_DETERMINANT_WITH_EXACT_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `EVEN_OPEN_SQUARE_GRIDS_ONLY_EXACT_Q_ZETA17_N2_N4_N6_DUAL_FIELD_STRUCTURE_N2_TO_N12_COMPACT_MIXED_PARITY_NATIVE_GENERATORS_SHARED_EDGE_IDENTITY_AND_MATCHGATE_DETERMINANT_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_COHERENT_SHARED_F17_LATENT_PHASE_PORT_CONTROLS_TWO_GRID_WIDE_BASIS_MISMATCH_MODULES_SEPARATED_BY_NONCOMMUTING_FOURIER_AND_CHIRP_UPDATES_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_IDENTICAL_34_COORDINATE_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `EVEN_OPEN_SQUARE_GRIDS_ONLY_EXACT_Q_ZETA17_N2_N4_N6_DUAL_FIELD_STRUCTURE_N2_TO_N10_FIXED17_SHARED_LATENT_PORT_TWO_GRID_WIDE_CONSUMERS_FINAL_ONLY_PROJECTION_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M125_PAIRED_PHASE_BASIS_MATCHGATE_CLOSURE_AND_PUBLIC_HOLOGRAPHIC_CANCELLATION`
+**New mechanism development:** `ACTIVE_AFTER_M126_COHERENT_SHARED_LATENT_BASIS_MISMATCH_CLOSURE_AND_FIXED17_CLASSICAL_DIRECT_SUM_COLLAPSE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `RESIDENTLY_GENERATED_OR_COHERENCE_DEPENDENT_PHASE_BASIS_COUPLING_WITHOUT_A_PUBLIC_CLASSICAL_HOLOGRAPHIC_CANCELLATION_OR_A_MATCHED_NO_GO`
+**Active primary successor:** `GROWING_SHARED_LATENT_PHASE_GEOMETRY_WITH_NATIVE_CONVOLUTION_OR_EXACT_RANK_REDUCTION_AGAINST_THE_STRONGEST_GROUP_ALGEBRA_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`ae36a130352ba92f4272858cc00bde13c6336b90`. The current 125-milestone
+`16ad7bec40126f9b60531225135f78c2bc3ac111`. The current 126-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4432,6 +4432,60 @@ The surviving obstruction is:
 THE_PUBLIC_PAIRED_PHASE_BASIS_CLOSES_THE_DECLARED_GROWING_TREEWIDTH_MATCHGATE_FAMILY_BUT_CANCELS_EXACTLY_TO_THE_IDENTICAL_COMPACT_CLASSICAL_KASTELEYN_DETERMINANT
 ```
 
+### 6.126 Coherent shared latent basis-mismatch closure
+
+M126 replaces M125's single public basis cancellation with one unresolved
+17-coordinate phase port consumed by two grid-wide basis-mismatch modules.
+Exact Fourier and quadratic-chirp updates separate the consumers, and controls
+show that basis, chirp, and Fourier/chirp order affect the surviving final
+boundary or latent state.
+
+```text
+classification                   INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                     INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration     EXACT_ALGEBRAIC_RESTORATION
+transient determinant buffers    NO_RESTORATION_CLAIM
+source head                      16ad7bec40126f9b60531225135f78c2bc3ac111
+hosted run                       NOT ESTABLISHED
+```
+
+The accepted path streams each of the 17 sector closures directly into the
+resident port and never materializes a latent diagonal boundary vector,
+edge-local signature table, or edge assignment table. Only `w[0]` is
+projected. The actual inverse rematerializes both module closures and reverses
+every shear, Fourier, chirp, and load; same-backing reuse agrees with fresh
+execution in both boundary and resource signature.
+
+Independent exact reexecution agrees for both public families on `Q(zeta17)`
+at `n=2,4,6`; `F103/F137` structural parity extends through `n=10`. Bounded
+native-Holant and paired-basis identity controls also agree. The oracle
+materializes a fixed 17-value boundary vector as a verification baseline; the
+accepted production path does not.
+
+Resident state is `4N(N-1)+34` field cells. Named transaction transient state
+is `max(N^4/2+5,34)` field cells after streaming loads and sector closures.
+Final boundary payload and JSON bytes are reported, but full exact bit
+complexity, Python containers, allocator/native-library storage, bigint
+internals, and whole-process peak are not established.
+
+M126 establishes coherent shared-port causality, final-only projection, exact
+restoration, and reuse within its strict bounded family. It does not establish
+a distinct phase resource: the strongest compact classical method is the
+identical 34-coordinate recurrence plus 17 compact Kasteleyn closures per
+module.
+
+The selected successor is:
+
+```text
+GROWING_SHARED_LATENT_PHASE_GEOMETRY_WITH_NATIVE_CONVOLUTION_OR_EXACT_RANK_REDUCTION_AGAINST_THE_STRONGEST_GROUP_ALGEBRA_CLASSICAL_BASELINE
+```
+
+The surviving obstruction is:
+
+```text
+COHERENCE_DEPENDENT_BASIS_CONTROL_AVOIDS_ONE_PUBLIC_SCALAR_CANCELLATION_BUT_A_FIXED17_STATE_LATENT_PORT_IS_THE_IDENTICAL_CLASSICAL_DIRECT_SUM_SO_THE_NEXT_ROUTE_MUST_GROW_OR_CLOSE_LATENT_GEOMETRY_WITHOUT_GROWING_CLASSICAL_SECTOR_RANK
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -4469,7 +4523,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_PAIRED_ZETA17_BASIS_CLOSES_COMPACT_NATIVE_MIXED_PARITY_EXACT_ONE_GENERATORS_ON_GROWING_EVEN_PLANAR_GRIDS_BY_SHARED_EDGE_IDENTITY_AND_KASTELEYN_DETERMINANT_WITH_EXACT_RESTORATION_AND_REUSE
+BOUNDED_EXACT_COHERENT_SHARED_F17_LATENT_PHASE_PORT_CONTROLS_TWO_GRID_WIDE_BASIS_MISMATCH_MODULES_SEPARATED_BY_NONCOMMUTING_FOURIER_AND_CHIRP_UPDATES_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_IDENTICAL_34_COORDINATE_CLASSICAL_RECURRENCE
 ```
 
 Not established:
@@ -4559,6 +4613,10 @@ exact non-Gaussian classification beyond the M124 PRIMARY width-two witness
 arbitrary planar Holant or holographic closure from M125
 CATVM custody of the M124 or M125 direct-process carriers or transient buffers
 distinct phase resource or advantage from the M124 transfer or M125 determinant
+arbitrary latent geometry or planar Holant closure from M126
+CATVM custody of the M126 direct-process carrier or transient buffers
+distinct phase resource or advantage from the M126 fixed 17-state direct sum
+full exact bit-complexity or whole-process peak accounting for M126
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4643,7 +4701,16 @@ bases cancel to the identical classical matchgate determinant. Continue from
 that cancellation with the smallest residently generated or
 coherence-dependent basis coupling that cannot be compiled away publicly, or
 establish a matched no-go. Do not repeat ladder widths, even grid sizes, or
-public paired-basis fixtures unless they test that obstruction directly.
+public paired-basis fixtures unless they test that obstruction directly. M126
+then makes the coupling resident and coherence dependent: one unresolved
+17-coordinate port controls two grid-wide modules separated by exact Fourier
+and chirp updates. That removes the single public cancellation, but the whole
+law remains the identical classical 34-coordinate direct sum plus 17 compact
+matching closures per module. Continue from that fixed-rank collapse into a
+growing shared latent geometry with native convolution or an exact
+relation-preserving rank reduction, keeping the strongest group-algebra
+classical recurrence matched. Do not repeat fixed-17 grid sizes or add more
+fixed-17 consumers unless they directly resolve sector-rank growth.
 
 ## 10. Roadmap Maintenance
 

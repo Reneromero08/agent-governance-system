@@ -7346,3 +7346,56 @@ The obstruction is:
 ```text
 THE_PUBLIC_PAIRED_PHASE_BASIS_CLOSES_THE_DECLARED_GROWING_TREEWIDTH_MATCHGATE_FAMILY_BUT_CANCELS_EXACTLY_TO_THE_IDENTICAL_COMPACT_CLASSICAL_KASTELEYN_DETERMINANT
 ```
+
+## Coherent shared latent basis control remains a fixed classical direct sum
+
+M126 replaces M125's one public paired-basis cancellation with a resident
+17-coordinate latent port consumed by two grid-wide basis-mismatch modules.
+Exact Fourier and quadratic-chirp updates separate the modules. Basis-control
+and chirp mutations change the final boundary, and Fourier/chirp order changes
+the latent state.
+
+```text
+classification                   INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                     INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration     EXACT_ALGEBRAIC_RESTORATION
+transient determinant buffers    NO_RESTORATION_CLAIM
+source head                      16ad7bec40126f9b60531225135f78c2bc3ac111
+hosted run                       NOT ESTABLISHED
+```
+
+Each latent sector closure is streamed directly into resident state. The
+accepted path materializes no 17-value boundary vector, edge-local signature
+table, or edge-assignment table, and projects only the final `w[0]` scalar.
+Exact inverse rematerialization restores the same backing and advances its
+generation. Unrelated reuse agrees with fresh execution in boundary and
+resource signature, without snapshot reload or retained inverse history.
+
+Independent exact execution agrees for both public families at `n=2,4,6`;
+dual-field structural execution agrees through `n=10`. A separate row-profile
+matching recurrence, independently reconstructed 34-coordinate latent law,
+bounded `n=2` native-Holant enumeration, and basis-identity controls all agree.
+
+Resident state is `4N(N-1)+34` field cells. Named transaction transient state
+is `max(N^4/2+5,34)` field cells; final boundary payload bits and JSON bytes
+are reported. Full exact bit complexity and whole-process memory are not
+established.
+
+The coherent shared port is causal, but its fixed 17 coordinates are the
+identical classical direct sum. The strongest matched baseline is the same
+34-coordinate recurrence plus 17 compact Kasteleyn closures per module. No
+CATVM custody, arbitrary latent geometry, distinct phase resource, advantage,
+Small Wall crossing, physical execution, bit replacement, or unbounded
+computation follows.
+
+The selected successor is:
+
+```text
+GROWING_SHARED_LATENT_PHASE_GEOMETRY_WITH_NATIVE_CONVOLUTION_OR_EXACT_RANK_REDUCTION_AGAINST_THE_STRONGEST_GROUP_ALGEBRA_CLASSICAL_BASELINE
+```
+
+The obstruction is:
+
+```text
+COHERENCE_DEPENDENT_BASIS_CONTROL_AVOIDS_ONE_PUBLIC_SCALAR_CANCELLATION_BUT_A_FIXED17_STATE_LATENT_PORT_IS_THE_IDENTICAL_CLASSICAL_DIRECT_SUM_SO_THE_NEXT_ROUTE_MUST_GROW_OR_CLOSE_LATENT_GEOMETRY_WITHOUT_GROWING_CLASSICAL_SECTOR_RANK
+```
