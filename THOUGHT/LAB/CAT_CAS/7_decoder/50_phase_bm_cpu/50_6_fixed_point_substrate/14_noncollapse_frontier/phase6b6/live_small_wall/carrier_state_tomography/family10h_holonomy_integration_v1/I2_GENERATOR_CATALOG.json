@@ -1,0 +1,200 @@
+{
+  "schema_version": "1.0.0",
+  "catalog_id": "family10h_holonomy_integration_i2_v1",
+  "mode": "read_only_runtime_and_checkpoint_audit",
+  "source_blobs": {
+    "base_runtime_c": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/family10h_carrier_tomography_runtime.c",
+      "blob_sha": "b561cb8fc19cab44308782a4b6d3febff996fa2b"
+    },
+    "base_runtime_h": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_carrier_tomography_v1/family10h_carrier_tomography_runtime.h",
+      "blob_sha": "73254dcbe65cc856db458b60fca46f882f3e68be"
+    },
+    "relation_runtime_c": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_loop_discovery_v1/generated_source/relation_spatial_runtime.c",
+      "blob_sha": "21a99c31fc0a63f58193b76f1c42a0d7f1e90fd3"
+    },
+    "relation_runtime_h": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/carrier_state_tomography/family10h_relation_composition_loop_discovery_v1/generated_source/relation_spatial_runtime.h",
+      "blob_sha": "c9aac530d0ce0cdc35e423de4959c8b7fa8df497"
+    },
+    "coherence_checkpoint": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/F10_COHERENCE_OPERATOR_CHECKPOINT_20260712.json",
+      "blob_sha": "bbe51358ed096a5417f74f55cef809b84b8731b2"
+    },
+    "coherence_worker_c": {
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/f10_pmc_first_light_worker.c",
+      "blob_sha": "1a64c0ace2f3d7e447858aab99e751f5734f9690"
+    }
+  },
+  "admission_law": {
+    "required": [
+      "operation acts on the surviving carrier after verified source death",
+      "source cannot select or execute the realized operation",
+      "operation is a state transformation rather than endpoint readout only",
+      "same carrier remains available for held-out composition and tomography",
+      "operation has no destructive reinitialization or fresh-carrier substitution",
+      "left and right inverse candidates can be tested under one frozen state law",
+      "physical work and timing are manifest-bound"
+    ],
+    "query_only_is_insufficient": true,
+    "byte_preserving_is_insufficient_without_state_transport": true,
+    "label_naming_is_insufficient": true
+  },
+  "operation_families": [
+    {
+      "id": "base_query_single_A_B",
+      "members": ["query_A", "query_B"],
+      "implementation": "f10_carrier_query_mapped -> query_lane",
+      "executor": "receiver_parent",
+      "source_lifetime": "source_exited_and_waitpid_completed",
+      "byte_effect": "read_only_at_language_level",
+      "physical_effect": "cache_and_coherence_disturbance_possible_but_not_state_tomographed",
+      "carrier_reuse": "no; one query then shared state is unmapped",
+      "challenge_secrecy": "not established; schedule row is parsed before fork and inherited by source image",
+      "inverse_candidate": null,
+      "h1_admissible": false,
+      "status": "POST_SOURCE_READOUT_PROBE_NOT_GENERATOR"
+    },
+    {
+      "id": "base_query_ordered_pair",
+      "members": ["query_A_then_B", "query_B_then_A"],
+      "implementation": "f10_carrier_query_mapped -> query_pair_ordered",
+      "executor": "receiver_parent",
+      "source_lifetime": "source_exited_and_waitpid_completed",
+      "byte_effect": "read_only_at_language_level",
+      "physical_effect": "ordered endpoint probe; post-probe carrier state not measured",
+      "carrier_reuse": "no; one ordered pair then shared state is unmapped",
+      "challenge_secrecy": "not established; operation name is part of the preloaded schedule row",
+      "inverse_candidate": null,
+      "h1_admissible": false,
+      "status": "POST_SOURCE_ORDERED_READOUT_NOT_TRANSPORT"
+    },
+    {
+      "id": "relation_pair_probe",
+      "members": [
+        "query_relation_pair",
+        "relation_sham",
+        "scrambled_pair_control",
+        "route_pressure_control",
+        "distance_matched_control"
+      ],
+      "implementation": "receiver load-cycle pair measurements and endpoint PMU readout",
+      "executor": "receiver_parent",
+      "source_lifetime": "alive for primary relation schedules; dead only in dedicated control variants",
+      "byte_effect": "read_only_load_probe",
+      "physical_effect": "endpoint observation; no frozen post-probe carrier map",
+      "carrier_reuse": "no word grammar or inter-operation state tomography",
+      "inverse_candidate": null,
+      "h1_admissible": false,
+      "status": "MEASUREMENT_FAMILY_NOT_GENERATOR"
+    },
+    {
+      "id": "relation_prepare_R0_R1",
+      "members": ["RELATION_SPATIAL_R0", "RELATION_SPATIAL_R1"],
+      "implementation": "relation_spatial_prepare and relation_spatial_touch_pair",
+      "executor": "source_child_during_preparation",
+      "source_lifetime": "before or during receiver query",
+      "byte_effect": "increments lane bytes after prefault and full flush",
+      "physical_effect": "source-authored relation preparation",
+      "carrier_reuse": "not exposed as receiver word operation",
+      "inverse_candidate": null,
+      "h1_admissible": false,
+      "status": "SOURCE_ONLY_PREPARATION_NOT_GENERATOR"
+    },
+    {
+      "id": "relation_composition_R0R1_R1R0",
+      "members": ["compose_r0_then_r1", "compose_r1_then_r0"],
+      "implementation": "relation_spatial_prepare_composition",
+      "executor": "source_child_during_preparation",
+      "source_lifetime": "alive_during_query_for_primary_composition_schedules",
+      "byte_effect": "source mutates both lanes after prefault and full flush",
+      "physical_effect": "precomputed source schedule composition, not receiver transport composition",
+      "carrier_reuse": "single prepared state followed by endpoint measurement",
+      "inverse_candidate": null,
+      "h1_admissible": false,
+      "status": "SOURCE_AUTHORED_COMPOSITION_NOT_H3_COMPOSITION"
+    },
+    {
+      "id": "post_death_flush_reset_family",
+      "members": ["full_flush", "prefault_then_flush", "double_flush", "lane_A_flush"],
+      "implementation": "flush_state_lines, relation_spatial_prefault, flush_lane_a_lines",
+      "executor": "parent_after_source_exit",
+      "source_lifetime": "dead_before_query",
+      "byte_effect": "prefault variant rewrites baseline bytes; flush variants globally evict state",
+      "physical_effect": "destructive reset/control",
+      "carrier_reuse": "old state is erased or broadly disturbed",
+      "inverse_candidate": null,
+      "h1_admissible": false,
+      "status": "POST_SOURCE_CONTROL_NOT_INVERSE"
+    },
+    {
+      "id": "post_death_mutate_same_opposite",
+      "members": ["mutate_same_relation", "mutate_opposite_relation"],
+      "implementation": "parent repins to source CPU then calls relation_spatial_prepare",
+      "executor": "parent_after_source_exit_on_source_cpu",
+      "source_lifetime": "dead_before_query",
+      "byte_effect": "full prefault, flush, and relation re-preparation",
+      "physical_effect": "destructive re-preparation selected by schedule label",
+      "carrier_reuse": "previous physical state is replaced rather than transported",
+      "inverse_candidate": "name-only; no left or right inverse law",
+      "h1_admissible": false,
+      "status": "POST_SOURCE_DESTRUCTIVE_REPREPARATION_NOT_GENERATOR"
+    },
+    {
+      "id": "remote_store_same_value",
+      "members": ["OP_REMOTE_STORE_SAME_VALUE"],
+      "implementation": "accepted coherence worker ownership-intent same-value store",
+      "executor": "remote_observed_core_in_legacy_worker",
+      "source_lifetime": "not bound to the successor post-source runtime",
+      "byte_effect": "logical bytes preserved in retained checkpoint",
+      "physical_effect": "measurable coherence-transition response",
+      "carrier_reuse": "legacy operator window restores bytes but does not expose a persistent word API",
+      "inverse_candidate": "none qualified",
+      "h1_admissible": false,
+      "extraction_candidate": true,
+      "status": "CONFIRMED_PRIMITIVE_REQUIRES_POST_SOURCE_RUNTIME_EXTRACTION"
+    },
+    {
+      "id": "remote_read_shared",
+      "members": ["OP_REMOTE_READ_SHARED"],
+      "implementation": "legacy coherence worker read-shared control",
+      "executor": "remote_observed_core_in_legacy_worker",
+      "source_lifetime": "not bound to the successor post-source runtime",
+      "byte_effect": "read only",
+      "physical_effect": "control response, not accepted ownership-intent operator",
+      "carrier_reuse": "no persistent word API",
+      "inverse_candidate": null,
+      "h1_admissible": false,
+      "status": "CONTROL_ONLY"
+    }
+  ],
+  "catalog_summary": {
+    "operation_family_count": 9,
+    "post_source_readout_family_count": 3,
+    "post_source_destructive_control_family_count": 2,
+    "source_preparation_family_count": 2,
+    "legacy_confirmed_primitive_count": 1,
+    "h1_admissible_generator_count": 0,
+    "h1_admissible_generator_pair_count": 0,
+    "promising_extraction_candidates": [
+      "remote_store_same_value parameterized by disjoint line set, route, and amplitude"
+    ]
+  },
+  "i2_decision": {
+    "result": "I2_RECEIVER_SIDE_GENERATOR_CATALOG_COMPLETE__NO_H1_ADMISSIBLE_GENERATOR_PAIR",
+    "h1_passed": false,
+    "physical_transport_candidate_freeze_allowed": false,
+    "next_gate": "I2A_POST_SOURCE_OPERATOR_RUNTIME_EXTRACTION_DESIGN",
+    "synthetic_protocol_tooling_allowed": true,
+    "live_execution_authorized": false
+  },
+  "claim_ceiling": [
+    "FAMILY10H_TRANSPORT_OPERATOR_NOT_ESTABLISHED",
+    "FAMILY10H_HOLONOMY_NOT_ESTABLISHED",
+    "NATIVE_CATALYTIC_FIBER_PUSHFORWARD_NOT_ESTABLISHED",
+    "SMALL_WALL_NOT_CROSSED",
+    "NO_LIVE_EXECUTION_AUTHORIZED"
+  ]
+}
