@@ -1,0 +1,124 @@
+{
+  "claim_ceiling": "STRICT_ANISOTROPIC_F17_SQUARED_RADIAL_FUNCTIONS_WITH_QUARTIC_NORM_PHASES_AND_THE_DECLARED_NORMALIZED_PHASE_FOURIER",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "dense_coordinate_controls": [
+    {
+      "all_17_shell_values_equal": true,
+      "boundary_equal": true,
+      "dense_state_remains_radial": true,
+      "depth": 2,
+      "family": "ALTERNATE",
+      "field": "F103"
+    },
+    {
+      "all_17_shell_values_equal": true,
+      "boundary_equal": true,
+      "dense_state_remains_radial": true,
+      "depth": 4,
+      "family": "PRIMARY",
+      "field": "F103"
+    },
+    {
+      "all_17_shell_values_equal": true,
+      "boundary_equal": true,
+      "dense_state_remains_radial": true,
+      "depth": 2,
+      "family": "ALTERNATE",
+      "field": "F137"
+    },
+    {
+      "all_17_shell_values_equal": true,
+      "boundary_equal": true,
+      "dense_state_remains_radial": true,
+      "depth": 4,
+      "family": "PRIMARY",
+      "field": "F137"
+    }
+  ],
+  "exact_reexecution": {
+    "all_boundaries_equal": true,
+    "all_final_state_commitments_equal": true,
+    "all_resident_payload_maxima_equal": true,
+    "all_restore_seed_exactly": true,
+    "depths": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "resident_payload_tuple": [
+      2203,
+      2243,
+      4364,
+      8709,
+      17552,
+      35394,
+      70992
+    ],
+    "transaction_count": 7,
+    "update_scratch_payload_tuple_independently_reproduced": false
+  },
+  "independence": {
+    "imports_production_module": false,
+    "reconstructs_exact_forward_inverse_recurrence": true,
+    "reconstructs_program_schedule": true,
+    "reconstructs_public_geometry": true,
+    "shared_established_generic_exact_arithmetic_backend_only": true,
+    "uses_separable_289_coordinate_dft_for_selected_dense_controls": true
+  },
+  "mutations": {
+    "isotropic_zero_orbit_overmerge_fails": true,
+    "quartic_phase_rejects_sign_overmerge": true
+  },
+  "not_established": [
+    "CATVM_CUSTODY",
+    "GENERAL_NONLINEAR_RELATION_QUOTIENT",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_EXECUTION",
+    "UNBOUNDED_COMPUTATION"
+  ],
+  "passed": true,
+  "production_result_sha256": "75d1ba3df82b23fafd9bb28a1bc2d8940057f8b095dd63fea27a84b504d2ca03",
+  "production_source_sha256": "5f84e855ce3a1db3ba012c2f3f05f08e86d7d9b51e578bf474f3fe963bc42e9f",
+  "resource_law": {
+    "accepted_assignment_or_truth_table_cells": 0,
+    "compiled_public_quotient_fourier_field_cells": 289,
+    "executed_matched_classical_recurrence_exact_field_cells": 17,
+    "exhaustive_invariance_verification_source_coordinate_visits": 83521,
+    "exhaustive_invariance_verification_target_coordinate_visits": 289,
+    "exhaustive_invariance_verification_total_coordinate_visits": 83810,
+    "public_kernel_source_coordinate_visits": 4913,
+    "represented_dense_coordinate_field_cells": 289,
+    "resident_relation_quotient_exact_field_cells": 17
+  },
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F17_ANISOTROPIC_QUARTIC_RADIAL_PHASE_QUOTIENT_ORACLE_V1",
+  "structural_reexecution": [
+    {
+      "all_structural_boundaries_equal": true,
+      "field": "F103",
+      "transaction_count": 24,
+      "transform_checks": {
+        "all_289_target_rows_factor_through_norm": true,
+        "normalized_quotient_fourier_squares_to_identity": true,
+        "representatives_cover_all_17_norms": true
+      }
+    },
+    {
+      "all_structural_boundaries_equal": true,
+      "field": "F137",
+      "transaction_count": 24,
+      "transform_checks": {
+        "all_289_target_rows_factor_through_norm": true,
+        "normalized_quotient_fourier_squares_to_identity": true,
+        "representatives_cover_all_17_norms": true
+      }
+    }
+  ],
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
