@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_SINGLE_INVOLUTIVE_RANK2_SECANT_CLOSURE_NEXT_CATALECTICANT_OR_GAUSSIAN_DIAGNOSTIC_SELECTED`
-**Roadmap version:** `13.6`
+**Status:** `STRICT_SCOPE_DOUBLE_COUPLING_RANK4_SECANT_CLOSURE_NEXT_SYMBOLIC_RANK_GROWTH_OR_FIXED_RANK_GAUSSIAN_DIAGNOSTIC_SELECTED`
+**Roadmap version:** `13.7`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `e728386bef818bf92a497cf6ff1f183971e36e8c`
+**Reconciled source head:** `7fc59e806cc49298c44cd9d16ea2e309358d7de4`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F17_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_EXPANDS_ONE_RANK1_VERONESE_PHASE_STATE_TO_A_RANK2_SECANT_SHARED_BY_TWO_NONCOMMUTING_MODULES_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_A_COMPILED_FOUR_DYNAMIC_SCALAR_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `DECLARED_K4_TO128_SINGLE_INVOLUTIVE_RANK1_TO_RANK2_SECANT_COUPLING_WITH_TWO_FIXED_NONCOMMUTING_CONSUMER_MODULES_EXACT_Q_ZETA17_K4_TO32_DUAL_FIELD_K4_TO128_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_SECOND_INTERLEAVED_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_WITH_MODULE_ORDER_NONCOMMUTATION_FORCES_CATALECTICANT_RANK4_ON_THE_DECLARED_F17_SECANT_PROGRAM_AND_CLOSES_ON_A_FOUR_COMPONENT_72_CELL_PHASE_CARRIER_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EIGHT_TOTAL_FOLDED_SCALAR_WARM_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `DECLARED_TWO_COUPLING_FOUR_COMPONENT_NORMALIZED_DIVIDED_POWER_SECANT_RANK4_PROGRAM_Q_ZETA17_K4_TO32_DUAL_FIELD_K4_TO128_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M130_SINGLE_COUPLING_RANK2_CLOSURE_AND_FOUR_TOTAL_SCALAR_CLASSICAL_COLLAPSE`
+**New mechanism development:** `ACTIVE_AFTER_M131_TWO_COUPLING_RANK4_CLOSURE_AND_EIGHT_TOTAL_SCALAR_CLASSICAL_COLLAPSE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_SECOND_NONCOMMUTING_COUPLING_CATALECTICANT_RANK_LOWER_BOUND_OR_GAUSSIAN_CLOSURE_DIAGNOSTIC_WITHOUT_COMPONENT_ASSIGNMENT_ENUMERATION`
+**Active primary successor:** `EXACT_SYMBOLIC_ITERATED_COHERENT_COUPLING_SECANT_RANK_GROWTH_LAW_OR_FIXED_RANK_GAUSSIAN_PHASE_CHART_NO_GO_WITHOUT_COMPONENT_ENUMERATION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F17_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_EXPANDS_ONE_RANK1_VERONESE_PHASE_STATE_TO_A_RANK2_SECANT_SHARED_BY_TWO_NONCOMMUTING_MODULES_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_A_COMPILED_FOUR_DYNAMIC_SCALAR_CLASSICAL_RECURRENCE
+BOUNDED_EXACT_SECOND_INTERLEAVED_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_WITH_MODULE_ORDER_NONCOMMUTATION_FORCES_CATALECTICANT_RANK4_ON_THE_DECLARED_F17_SECANT_PROGRAM_AND_CLOSES_ON_A_FOUR_COMPONENT_72_CELL_PHASE_CARRIER_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EIGHT_TOTAL_FOLDED_SCALAR_WARM_CLASSICAL_RECURRENCE
 ```
 
 Not established:
@@ -4810,6 +4810,12 @@ minimal secant rank above two from the M130 four distinct second-coupling terms
 repeated-coupling fixed-rank closure or Gaussian closure from M130
 CATVM custody of the M130 direct-process carrier or transient buffers
 distinct phase resource or advantage from the M130 four-total-scalar warm classical baseline
+third or unbounded coupling-rank law from the M131 two-coupling certificate
+fixed-rank unbounded-depth secant or Gaussian closure from M131
+ordinary symmetric Waring-rank interpretation for the M131 finite-field structural cases
+noncommutation of the two M131 coupling operators with each other
+CATVM custody of the M131 direct-process carrier or transient buffers
+distinct phase resource or advantage from the M131 eight-total-scalar warm classical baseline
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4946,6 +4952,42 @@ terms, but that is not a minimal secant-rank lower bound. Continue with the
 smallest exact catalecticant certificate or genuinely closed Gaussian chart;
 do not call generated-term count rank, add more single-coupling degrees, or
 hide assignment enumeration in the successor.
+
+M131 resolves that specific lower-bound defect. A second interleaved
+`I+eta*R` coupling produces four coherent components after module A, and an
+independently reconstructed normalized `4x4` catalecticant minor is nonzero in
+every declared case. The lower bound four and explicit four-component upper
+bound establish exact normalized divided-power secant rank four. Ordinary
+symmetric Waring-rank interpretation is restricted to the exact
+`Q(zeta17)` cases; `F103/F137` remain structural evidence. The two couplings
+commute with each other. The detected noncommutation is the coupling/module-A
+order, not coupling/coupling order.
+
+The accepted direct-process carrier holds 72 field cells and the inverse
+coupling uses at most 144 logical transient field cells before exact duplicate
+cancellation. Full `H(4)=4,845` occupation reexecution agrees in three
+algebras, the actual reverse path restores exact zero on the same backing, and
+unrelated reuse agrees with a fresh carrier. The strongest fixed-word warm
+classical recurrence compiles through the same 72 cells and retains eight
+total folded endpoint scalars. M131 therefore proves bounded rank growth and
+closure, not a distinct phase resource or advantage.
+
+The next experiment is:
+
+```text
+EXACT_SYMBOLIC_ITERATED_COHERENT_COUPLING_SECANT_RANK_GROWTH_LAW_OR_FIXED_RANK_GAUSSIAN_PHASE_CHART_NO_GO_WITHOUT_COMPONENT_ENUMERATION
+```
+
+The obstruction is:
+
+```text
+THE_SECOND_INTERLEAVED_COUPLING_NOW_HAS_AN_EXACT_NORMALIZED_CATALECTICANT_RANK4_CERTIFICATE_AND_A72_CELL_CLOSED_TRANSACTION_BUT_EACH_ADDITIONAL_GENERIC_COUPLING_CAN_DOUBLE_GENERATED_COMPONENTS_AND_THE_FIXED_WORD_ALREADY_COMPILES_TO_AN_EIGHT_TOTAL_SCALAR_CLASSICAL_BOUNDARY_RECURRENCE
+```
+
+Do not continue by adding a rank-eight fixture alone. Derive a symbolic
+iterated-coupling rank-growth law, or test a genuinely fixed-rank Gaussian
+phase chart and record a no-go if closure fails, without component-assignment
+enumeration or a weaker classical baseline.
 
 ## 10. Roadmap Maintenance
 

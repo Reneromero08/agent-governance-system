@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`e728386bef818bf92a497cf6ff1f183971e36e8c`. The canonical per-milestone
+`7fc59e806cc49298c44cd9d16ea2e309358d7de4`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -7663,4 +7663,79 @@ The obstruction is:
 
 ```text
 ONE_INVOLUTIVE_SUPERPOSITION_BROADENS_RANK1_TO_RANK2_BUT_THE_SECANT_RECURRENCE_IS_CLASSICALLY_IDENTICAL_FIXED_WORDS_COMPILE_TO_FOUR_TOTAL_FOLDED_ENDPOINT_SCALARS_AND_A_SECOND_COUPLING_GENERATES_FOUR_DISTINCT_TERMS_WITHOUT_YET_PROVING_MINIMAL_SECANT_RANK_ABOVE_TWO
+```
+
+## A second interleaved coupling has exact normalized secant rank four
+
+M131 executes the selected M130 catalecticant diagnostic without component
+assignment enumeration.
+
+```text
+claim
+    BOUNDED_EXACT_SECOND_INTERLEAVED_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_WITH_MODULE_ORDER_NONCOMMUTATION_FORCES_CATALECTICANT_RANK4_ON_THE_DECLARED_F17_SECANT_PROGRAM_AND_CLOSES_ON_A_FOUR_COMPONENT_72_CELL_PHASE_CARRIER_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EIGHT_TOTAL_FOLDED_SCALAR_WARM_CLASSICAL_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident carrier  EXACT_ALGEBRAIC_RESTORATION
+    transient buffers NO_RESTORATION_CLAIM
+
+source head
+    7fc59e806cc49298c44cd9d16ea2e309358d7de4
+```
+
+The second `I+eta*R` coupling is interleaved after module A. The two coupling
+operators commute with each other because both are polynomials in the same
+reflection `R`; the verified noncommutation is the coupling/module-A order. A
+fixed normalized `4x4` catalecticant minor is nonzero in every declared case.
+Each coherent component contributes a rank-one outer product, so the minor
+gives rank at least four and the explicit four-component chart gives rank at
+most four. The exact normalized divided-power secant rank is four. Ordinary
+symmetric Waring interpretation is restricted to `Q(zeta17)` at
+`k=4,8,16,32`; dual-field cases through `k=128` are structural.
+
+The accepted carrier holds four weights plus four 17-coordinate vectors, or
+72 field cells. The inverse coupling has at most eight logical component
+records, or 144 field cells, before exact duplicate cancellation. Only the
+final `(k-1,1,0,...,0)` occupation scalar is projected. Reverse module B,
+second coupling, module A, and first coupling execution restores exact zero
+on the same backing. Unrelated `PRIMARY k=8` then `REUSE k=16` execution
+advances generation to two and agrees with a fresh carrier in boundary and
+reported resource signature without snapshot reload or inverse history.
+
+The independent oracle separately reconstructs both couplings, both module
+halves, projection, inverse, duplicate merge, and the strongest warm baseline.
+Its catalecticant determinant is a separate 24-term Leibniz expansion. Full
+`H(4)=4,845` occupation reexecution agrees in `Q(zeta17)`, `F103`, and
+`F137` through both couplings and modules and the complete reverse path. All
+16 transaction commitments and all 16 rank certificates agree.
+
+The strongest fixed-word warm classical baseline folds each public weight
+into its mode-one endpoint and retains eight total scalars after 72 compiler
+working cells. Descriptor-runtime classical software uses the identical
+four-component 72-cell recurrence. Exact payload-height tuples remain
+package-local; Python containers, allocator/native-library storage, bigint
+internals, hashlib state, bit-operation complexity, and whole-process peaks
+remain excluded.
+
+M131 does not establish a third or unbounded coupling-rank law, fixed-rank
+unbounded-depth closure, general Gaussian closure, arbitrary secant input
+closure, CATVM custody, a distinct phase resource, computational advantage,
+Small Wall crossing, physical execution, physical bit replacement, or
+unbounded catalytic computation.
+
+The next experiment is:
+
+```text
+EXACT_SYMBOLIC_ITERATED_COHERENT_COUPLING_SECANT_RANK_GROWTH_LAW_OR_FIXED_RANK_GAUSSIAN_PHASE_CHART_NO_GO_WITHOUT_COMPONENT_ENUMERATION
+```
+
+The obstruction is:
+
+```text
+THE_SECOND_INTERLEAVED_COUPLING_NOW_HAS_AN_EXACT_NORMALIZED_CATALECTICANT_RANK4_CERTIFICATE_AND_A72_CELL_CLOSED_TRANSACTION_BUT_EACH_ADDITIONAL_GENERIC_COUPLING_CAN_DOUBLE_GENERATED_COMPONENTS_AND_THE_FIXED_WORD_ALREADY_COMPILES_TO_AN_EIGHT_TOTAL_SCALAR_CLASSICAL_BOUNDARY_RECURRENCE
 ```
