@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_TYPED_CUBIC_SEPARATOR_RANK_TWO_TO_THE_K_NO_UNIFORM_EXACT_LINEAR_QUOTIENT_BUT_O_K_MATCHED_CLASSICAL_FACTOR_CONTRACTION_REMAINS`
-**Roadmap version:** `14.2`
+**Status:** `STRICT_SCOPE_RANK_ONE_CUBIC_WALSH_DERIVATIVE_FIXED_34_CELL_GROUP_ALGEBRA_CLOSURE_WITH_GROWING_EXACT_PAYLOAD_AND_IDENTICAL_CLASSICAL_RECURRENCE`
+**Roadmap version:** `14.3`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `e3af2700c46fec0e6dea330d9dc133b8144754eb`
+**Reconciled source head:** `bdbc3a1339b7112c28c78f25425899bda0c3e112`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_K_TYPED_SHARED_LATENT_CUBIC_BRANCH_MAPS_WITH_INVERTIBLE_PHASE_WALSH_INTERLEAVING_HAVE_SEPARATOR_RANK_TWO_TO_THE_K_AND_REJECT_UNIFORM_EXACT_LINEAR_RELATION_QUOTIENTS_BELOW_TWO_TO_THE_K_WHILE_BOUNDED_DESCRIPTOR_PHASE_FACTOR_CARRIERS_RESTORE_AND_REUSE_WITHOUT_PORT_EXPANSION_BUT_LOW_TREEWIDTH_CLASSICAL_FACTOR_CONTRACTION_REMAINS`
-**Current claim ceiling:** `DECLARED_K_TYPED_SHARED_BOOLEAN_LATENT_CUBIC_BRANCH_MAPS_NONIDENTITY_Q_ZETA17_PHASES_INVERTIBLE_TYPED_WALSH_SEPARATOR_UNIFORM_EXACT_FIELD_LINEAR_QUOTIENT_ARBITRARY_INCOMING_MESSAGES_FULL_DECLARED_TYPED_CONTINUATIONS_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `EXACT_RANK_ONE_CUBIC_PHASE_POLYNOMIAL_WALSH_DERIVATIVE_SIGNATURES_CLOSE_IN_A_FIXED_34_CELL_C17_GROUP_ALGEBRA_ACROSS_GROWING_BOOLEAN_BRANCH_COUNT_AND_GATE_DEPTH_WITH_FINAL_ONLY_BOUNDARY_PROJECTION_EXACT_RESTORATION_AND_REUSE_WHILE_AN_INDEPENDENT_SECOND_SIGNATURE_EXPANDS_THE_CANONICAL_C17_SQUARED_GROUP_ALGEBRA_CHART_TO_578_CELLS_OR_IS_REJECTED_BY_THE_34_CELL_COMPILER_AND_THE_ACCEPTED_FAMILY_HAS_AN_IDENTICAL_COMPACT_CLASSICAL_CHARACTER_RECURRENCE`
+**Current claim ceiling:** `DECLARED_RANK_ONE_F17_BOOLEAN_PAIR_PRODUCT_QUADRATIC_SIGNATURE_ONE_UNRESOLVED_TYPED_WALSH_PORT_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M136_TYPED_CUBIC_SEPARATOR_RANK_NO_GO_WITH_NONLINEAR_DERIVATIVE_CHART_ROUTE_OPEN`
+**New mechanism development:** `ACTIVE_AFTER_M137_RANK_ONE_DERIVATIVE_CHART_CLOSURE_WITH_TWO_SIGNATURE_SEPARATION_RANK_ROUTE_OPEN`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_CUBIC_PHASE_POLYNOMIAL_WALSH_DERIVATIVE_BINOMIAL_FACTOR_CHART_MERGING_OR_RANK_GROWTH_WITH_MATCHED_CLASSICAL_TREEWIDTH_BASELINE`
+**Active primary successor:** `EXACT_TWO_SIGNATURE_CUBIC_WALSH_DERIVATIVE_C17_SQUARED_SEPARATION_RANK_GROWTH_OR_LOW_RANK_FACTOR_CHART_WITH_MATCHED_CLASSICAL_17_BY_17_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`e3af2700c46fec0e6dea330d9dc133b8144754eb`. The current 136-milestone
+`bdbc3a1339b7112c28c78f25425899bda0c3e112`. The current 137-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -5305,6 +5305,80 @@ The obstruction is:
 
 ```text
 THE_DECLARED_K_TYPED_CUBIC_BRANCH_FAMILY_HAS_AN_EXACT_TWO_TO_THE_K_UNIFORM_LINEAR_PORT_LOWER_BOUND_BUT_RANK_ALONE_DOES_NOT_BLOCK_THE_IDENTICAL_O_K_KRONECKER_CLASSICAL_CONTRACTION_SO_A_REPAIR_MUST_USE_A_NONLINEAR_PROGRAM_DEPENDENT_PHASE_CHART_OR_CHANGE_THE_NATIVE_UPDATE_LAW_WITHOUT_MOVING_EXPONENTIAL_STATE_ELSEWHERE
+```
+
+## Rank-one cubic/Walsh derivatives close in a fixed group-algebra chart
+
+M137 implements the nonlinear program-dependent route left open by M136.
+The public topology defines the Boolean quadratic signature
+`Q_n=sum_i z_(2i)z_(2i+1) mod 17`; every accepted cubic phase derivative is
+an exact scalar multiple of that signature plus a retained scalar phase.
+The compiler canonicalizes Boolean monomials and derives signature rank one
+by exact row reduction over `F17`, without sampling assignments or inspecting
+the final boundary.
+
+```text
+claim
+    EXACT_RANK_ONE_CUBIC_PHASE_POLYNOMIAL_WALSH_DERIVATIVE_SIGNATURES_CLOSE_IN_A_FIXED_34_CELL_C17_GROUP_ALGEBRA_ACROSS_GROWING_BOOLEAN_BRANCH_COUNT_AND_GATE_DEPTH_WITH_FINAL_ONLY_BOUNDARY_PROJECTION_EXACT_RESTORATION_AND_REUSE_WHILE_AN_INDEPENDENT_SECOND_SIGNATURE_EXPANDS_THE_CANONICAL_C17_SQUARED_GROUP_ALGEBRA_CHART_TO_578_CELLS_OR_IS_REJECTED_BY_THE_34_CELL_COMPILER_AND_THE_ACCEPTED_FAMILY_HAS_AN_IDENTICAL_COMPACT_CLASSICAL_CHARACTER_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident group-algebra carrier     EXACT_ALGEBRAIC_RESTORATION
+    compiler/projection/oracle buffers NO_RESTORATION_CLAIM
+
+source head
+    bdbc3a1339b7112c28c78f25425899bda0c3e112
+```
+
+The resident phase state is `K[C17]^2`: two unresolved Walsh rows of 17
+exact field cells.  Cubic phase application is a cyclic row shift and Walsh
+mixing is `(A0,A1)->(A0+A1,A0-A1)`.  Exact transactions grow from one branch
+pair and two rounds through 128 branch pairs and 256 rounds over
+`Q(zeta17)`, with dual-field structural parity over `F103` and `F137`.
+Logical residency remains 34 cells, but independently reproduced exact
+payload grows as:
+
+```text
+branch pairs                 1     2     4     8    16     32     64     128
+maximum resident bits     1096  1120  1616  3313  7607  16305  33763   68588
+```
+
+The actual inverse rematerializes each phase/Walsh operation from public
+topology, restores exact canonical zero on the same backing, and supports an
+unrelated reuse transaction without snapshot or inverse history.  The
+package-local restoration count is not a CATVM custody generation.
+
+An independent second quadratic signature has rank two.  It expands the
+canonical full `C17^2` group-algebra chart to 578 cells and is rejected by
+the 34-cell compiler.  This is not a proof that every exact representation
+of the bounded rank-two program needs 578 cells.  The next experiment tests
+whether the two-signature coefficient matrices retain low separation rank
+under alternating noncommuting phase/Walsh updates, or instead establish
+rank growth against the full matched 17-by-17 recurrence.
+
+The strongest compact classical method is the identical exact 34-coordinate
+group-algebra recurrence, equivalently the 17-residue multiplicity and
+character recurrence.  It has the same arithmetic and payload law.  M137
+therefore establishes neither a distinct phase resource nor computational
+advantage, Small Wall crossing, CATVM custody, general cubic-hypergraph
+closure, physical waveform execution, physical bit replacement, nor
+unbounded computation.
+
+The next experiment is:
+
+```text
+EXACT_TWO_SIGNATURE_CUBIC_WALSH_DERIVATIVE_C17_SQUARED_SEPARATION_RANK_GROWTH_OR_LOW_RANK_FACTOR_CHART_WITH_MATCHED_CLASSICAL_17_BY_17_RECURRENCE
+```
+
+The obstruction is:
+
+```text
+M137_CLOSES_ONLY_ONE_PUBLIC_F17_DERIVATIVE_SIGNATURE_IN_34_EXACT_CELLS_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE_AND_GROWING_COEFFICIENT_PAYLOAD_WHILE_A_SECOND_INDEPENDENT_SIGNATURE_EXPANDS_THE_CANONICAL_FULL_GROUP_ALGEBRA_CHART_TO_578_CELLS_SO_THE_NEXT_TEST_MUST_FIND_EXACT_LOW_SEPARATION_RANK_OR_REJECT_COMPACTION_WITHOUT_TREATING_CANONICAL_CHART_SIZE_AS_A_UNIVERSAL_LOWER_BOUND
 ```
 
 ## 10. Roadmap Maintenance

@@ -8107,3 +8107,53 @@ phase-port closure, arbitrary cubic-hypergraph closure, CATVM custody,
 distinct phase resource, computational advantage, Small Wall crossing,
 physical execution, physical bit replacement, or unbounded catalytic
 computation is established.
+
+## M137: Exact rank-one cubic/Walsh derivative group-algebra closure
+
+M137 follows the M136 linear-quotient obstruction with a nonlinear
+program-dependent chart.  Public topology defines
+`Q_n=sum_i z_(2i)z_(2i+1) mod 17`; exact Boolean-polynomial
+canonicalization proves that every accepted cubic phase derivative is a
+scalar multiple of this one signature.  One unresolved typed Walsh port then
+closes in two 17-coordinate rows of `K[C17]`.
+
+```text
+Q(zeta17) branch pairs       1     2     4     8    16     32     64     128
+phase/Walsh rounds           2     4     8    16    32     64    128     256
+resident field cells        34    34    34    34    34     34     34      34
+maximum payload bits      1096  1120  1616  3313  7607  16305  33763   68588
+```
+
+Twenty exact and dual-field structural transactions execute final-only
+projection, exact inverse restoration on the same backing, and no-snapshot
+reuse.  The inverse schedule is rematerialized from public topology and no
+inverse history is retained.  The package-local restoration counter is not
+a CATVM custody generation.
+
+The separate oracle reconstructs all public fingerprints, boundaries, hidden
+state commitments, inverse seeds, and exact payload tuples.  A distinct
+17-residue multiplicity recurrence matches every transaction, and twelve
+bounded direct Boolean-assignment sums through six branch pairs match both
+implementations.  The focused review classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+An independent second quadratic derivative has rank two, expands the
+canonical full `C17^2` chart to 578 cells, and is rejected by the 34-cell
+compiler.  This does not prove a universal 578-cell lower bound for every
+alternative exact representation.  The strongest compact classical method
+is the identical 34-coordinate group-algebra or 17-residue character
+recurrence with the same exact payload law.  No distinct phase resource,
+advantage, Small Wall crossing, CATVM custody, physical execution, physical
+bit replacement, or unbounded computation is established.
+
+The next experiment is:
+
+```text
+EXACT_TWO_SIGNATURE_CUBIC_WALSH_DERIVATIVE_C17_SQUARED_SEPARATION_RANK_GROWTH_OR_LOW_RANK_FACTOR_CHART_WITH_MATCHED_CLASSICAL_17_BY_17_RECURRENCE
+```
+
+It tests whether alternating two-signature updates admit an exact low
+separation-rank phase factor chart, or whether separation rank grows toward
+the canonical 17-by-17 coefficient surface against the identical strongest
+classical recurrence.

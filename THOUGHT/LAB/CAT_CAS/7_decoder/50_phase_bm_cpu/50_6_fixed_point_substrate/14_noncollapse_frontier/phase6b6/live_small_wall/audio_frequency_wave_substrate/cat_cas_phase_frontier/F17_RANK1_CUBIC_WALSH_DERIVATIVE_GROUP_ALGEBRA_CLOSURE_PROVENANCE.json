@@ -1,0 +1,81 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "bdbc3a1339b7112c28c78f25425899bda0c3e112",
+  "scientific_source_parent": "36b659b5f510aee199f5210ce1f615b501748e5b",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "3e67009e713dd2b5e23272ac1ff9eb9ce6e8742953afb5c1205039773a0681f9",
+  "reference_full_oracle_sha256": "eab1c4a2d7a3b488f2b6060bd639dc062f19bd470e2cff51c8c16b5c15905aae",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_rank1_cubic_walsh_derivative_group_algebra_closure.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_rank1_cubic_walsh_derivative_group_algebra_closure_oracle.py --production PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_rank1_cubic_walsh_derivative_group_algebra_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_rank1_cubic_walsh_derivative_group_algebra_closure.py": "b5d8e712d75343c8326414aa101187287f726104f87866fab089aae7cc5fe5bb",
+    "f17_rank1_cubic_walsh_derivative_group_algebra_closure_oracle.py": "81b14ed122dbb15e7f1e53d4f4d383fac9dbb9da10b9055e50c521b39244ecda",
+    "F17_RANK1_CUBIC_WALSH_DERIVATIVE_GROUP_ALGEBRA_CLOSURE_RESULTS.json": "3e67009e713dd2b5e23272ac1ff9eb9ce6e8742953afb5c1205039773a0681f9",
+    "F17_RANK1_CUBIC_WALSH_DERIVATIVE_GROUP_ALGEBRA_CLOSURE_ORACLE_RESULTS.json": "eab1c4a2d7a3b488f2b6060bd639dc062f19bd470e2cff51c8c16b5c15905aae",
+    "F17_RANK1_CUBIC_WALSH_DERIVATIVE_GROUP_ALGEBRA_CLOSURE_INDEPENDENT_REVIEW.md": "22f9b01c489edad3eb3a42529fdb618a13621aa552c637443a3d82cddd883162",
+    "qualify_f17_rank1_cubic_walsh_derivative_group_algebra_closure.sh": "e7831a6dc553a711d9df7d4cd87396c63400178425b712dda05bdd9edf541dd7"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "chart": "RANK_ONE_BOOLEAN_PAIR_PRODUCT_CUBIC_WALSH_DERIVATIVE_C17_GROUP_ALGEBRA",
+    "exact_branch_pair_round_cases": [[1, 2], [2, 4], [4, 8], [8, 16], [16, 32], [32, 64], [64, 128], [128, 256]],
+    "structural_fields": ["F103", "F137"],
+    "structural_branch_pair_round_cases": [[1, 2], [2, 4], [4, 8], [8, 16], [16, 32], [32, 64]],
+    "direct_assignment_oracle_branch_pairs": [1, 2, 3, 4, 5, 6],
+    "families": ["PRIMARY", "REUSE", "ALTERNATE"],
+    "independent_methods": [
+      "SEPARATE_PUBLIC_PROGRAM_GENERATOR",
+      "SEPARATE_BOOLEAN_QUADRATIC_CANONICALIZATION_AND_F17_ROW_REDUCTION",
+      "SEPARATE_34_COORDINATE_GROUP_ALGEBRA_FORWARD_AND_INVERSE",
+      "SEPARATE_17_RESIDUE_MULTIPLICITY_DYNAMIC_PROGRAM",
+      "DIRECT_SMALL_BOOLEAN_ASSIGNMENT_SUMS",
+      "SEPARATE_EXACT_PAYLOAD_TUPLE_REEXECUTION",
+      "RANK_TWO_DUPLICATE_UNSAMPLED_MONOMIAL_WRONG_INVERSE_AND_ZERO_DIVISOR_MUTATIONS"
+    ]
+  },
+  "resource_accounting": {
+    "resident_exact_field_cells": 34,
+    "rank_two_canonical_group_algebra_chart_field_cells": 578,
+    "rank_two_universal_representation_minimum_established": false,
+    "maximum_update_scratch_field_cells": 34,
+    "projection_stream_named_field_cells": 6,
+    "accepted_path_assignment_truth_table_or_projected_binomial_cells": 0,
+    "inverse_history_cells": 0,
+    "exact_q_zeta17_resident_payload_bits": [1096, 1120, 1616, 3313, 7607, 16305, 33763, 68588],
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "HASHLIB_INTERNAL_STATE",
+      "BIT_OPERATION_COMPLEXITY",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_baselines": [
+    "IDENTICAL_EXACT_34_COORDINATE_C17_GROUP_ALGEBRA_RECURRENCE",
+    "IDENTICAL_17_RESIDUE_CLASS_MULTIPLICITY_AND_CHARACTER_RECURRENCE",
+    "SEVENTEEN_INDEPENDENT_TWO_BY_TWO_COMPILED_TRANSFER_MATRICES"
+  ],
+  "claim_ceiling": "DECLARED_RANK_ONE_F17_BOOLEAN_PAIR_PRODUCT_QUADRATIC_SIGNATURE_ONE_UNRESOLVED_TYPED_WALSH_PORT_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE",
+  "rejected_interpretations": [
+    "RANK_TWO_FIXED_34_CELL_CLOSURE",
+    "UNIVERSAL_578_CELL_MINIMUM_FOR_ALL_EXACT_REPRESENTATIONS",
+    "GENERAL_RANK_R_OR_ARBITRARY_CUBIC_HYPERGRAPH_CLOSURE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}
