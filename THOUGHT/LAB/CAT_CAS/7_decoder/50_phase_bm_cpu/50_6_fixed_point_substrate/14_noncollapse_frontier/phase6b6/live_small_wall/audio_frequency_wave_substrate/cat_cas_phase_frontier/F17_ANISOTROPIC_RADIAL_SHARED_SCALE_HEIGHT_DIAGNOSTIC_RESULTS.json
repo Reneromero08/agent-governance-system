@@ -1,0 +1,2090 @@
+{
+  "all_depth2_and_above_have_zero_common_pi_content": true,
+  "all_exact_reconstructions_equal": true,
+  "all_shared_denominators_are_power17": true,
+  "cases": [
+    {
+      "common_pi_exponent": 8,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 3579,
+      "denominator_power_of_17": 1,
+      "depth": 1,
+      "exact_pi_divisions": 136,
+      "exact_reconstruction_equal": true,
+      "family": "PRIMARY",
+      "final_boundary": [
+        [
+          18,
+          1
+        ],
+        [
+          -36,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          17,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          18,
+          1
+        ],
+        [
+          18,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          18,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          18,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          18,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "final_state_commitment": "679a91de68442e5d9c6d0be28f0c1584541411f6d1171ed131bd479e721c1494",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 8,
+      "maximum_integral_numerator_signed_bits": 7,
+      "maximum_pi_residual_signed_bits": 17,
+      "minimum_cell_pi_valuation": 8,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "4a9eabf8431fc1d93a8305aff9b640d8bd9d0fe7673252fea4ee4cc7030b36de",
+      "raw_repeated_denominator_payload_bits": 2203,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 957,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 944,
+      "denominator_power_of_17": 1,
+      "depth": 2,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "PRIMARY",
+      "final_boundary": [
+        [
+          -288,
+          17
+        ],
+        [
+          486,
+          17
+        ],
+        [
+          378,
+          17
+        ],
+        [
+          287,
+          17
+        ],
+        [
+          36,
+          17
+        ],
+        [
+          342,
+          17
+        ],
+        [
+          108,
+          17
+        ],
+        [
+          -216,
+          17
+        ],
+        [
+          324,
+          17
+        ],
+        [
+          522,
+          17
+        ],
+        [
+          -108,
+          17
+        ],
+        [
+          126,
+          17
+        ],
+        [
+          540,
+          17
+        ],
+        [
+          594,
+          17
+        ],
+        [
+          162,
+          17
+        ],
+        [
+          -216,
+          17
+        ]
+      ],
+      "final_state_commitment": "8156f804102b436845bf7b1b21ec6b5e437e31770bcfc733aee10d53408e543a",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 8,
+      "maximum_pi_residual_signed_bits": 8,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "30cc04cd6bcb61a1d071aca0ade2e43ce06655d067ec25a2507a426ec3ba7c5b",
+      "raw_repeated_denominator_payload_bits": 2201,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 943,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 2024,
+      "denominator_power_of_17": 2,
+      "depth": 4,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "PRIMARY",
+      "final_boundary": [
+        [
+          -36,
+          289
+        ],
+        [
+          4537,
+          289
+        ],
+        [
+          7686,
+          289
+        ],
+        [
+          -3510,
+          289
+        ],
+        [
+          4392,
+          289
+        ],
+        [
+          2664,
+          289
+        ],
+        [
+          -2340,
+          289
+        ],
+        [
+          -936,
+          289
+        ],
+        [
+          378,
+          289
+        ],
+        [
+          7380,
+          289
+        ],
+        [
+          3474,
+          289
+        ],
+        [
+          414,
+          289
+        ],
+        [
+          -2016,
+          289
+        ],
+        [
+          4014,
+          289
+        ],
+        [
+          -954,
+          289
+        ],
+        [
+          846,
+          289
+        ]
+      ],
+      "final_state_commitment": "04d0ff985bc6111b0bf3ae78ab65e5924e9106c981adeba5e7f8e224c7402b63",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 11,
+      "maximum_pi_residual_signed_bits": 11,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "c010a30076408093a10133e6ba682f8567f0a85cd86ac320ef112d5664de7e38",
+      "raw_repeated_denominator_payload_bits": 4340,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 2023,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 4190,
+      "denominator_power_of_17": 4,
+      "depth": 8,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "PRIMARY",
+      "final_boundary": [
+        [
+          528948,
+          83521
+        ],
+        [
+          1422,
+          289
+        ],
+        [
+          588654,
+          83521
+        ],
+        [
+          -1009458,
+          83521
+        ],
+        [
+          318618,
+          83521
+        ],
+        [
+          1495944,
+          83521
+        ],
+        [
+          -125334,
+          83521
+        ],
+        [
+          1441854,
+          83521
+        ],
+        [
+          2821176,
+          83521
+        ],
+        [
+          -450036,
+          83521
+        ],
+        [
+          -183042,
+          83521
+        ],
+        [
+          -18234,
+          83521
+        ],
+        [
+          3444769,
+          83521
+        ],
+        [
+          587484,
+          83521
+        ],
+        [
+          1153710,
+          83521
+        ],
+        [
+          739476,
+          83521
+        ]
+      ],
+      "final_state_commitment": "312df5138b0c45fc83083bae23ceadb8ebf44e9ed73320e66b5f77e925169396",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 19,
+      "maximum_pi_residual_signed_bits": 19,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "a0a62c8a7ce21061ed1abf90370ce8ff88d0d4da39b82d7ebe03fd0cb90f49f7",
+      "raw_repeated_denominator_payload_bits": 8688,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 4189,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 8663,
+      "denominator_power_of_17": 8,
+      "depth": 16,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "PRIMARY",
+      "final_boundary": [
+        [
+          52976709702,
+          6975757441
+        ],
+        [
+          105605376282,
+          6975757441
+        ],
+        [
+          -41611319172,
+          6975757441
+        ],
+        [
+          -200849054328,
+          6975757441
+        ],
+        [
+          18022273344,
+          6975757441
+        ],
+        [
+          38435970925,
+          6975757441
+        ],
+        [
+          -8756644122,
+          6975757441
+        ],
+        [
+          115014136032,
+          6975757441
+        ],
+        [
+          75286745046,
+          6975757441
+        ],
+        [
+          234305766900,
+          6975757441
+        ],
+        [
+          204901742178,
+          6975757441
+        ],
+        [
+          72139660848,
+          6975757441
+        ],
+        [
+          31455908514,
+          6975757441
+        ],
+        [
+          -23444726832,
+          6975757441
+        ],
+        [
+          23877707796,
+          6975757441
+        ],
+        [
+          33626657448,
+          6975757441
+        ]
+      ],
+      "final_state_commitment": "e02cb4abf54a9ee2c9d5dae9e012fbdb4f59de2eaaaf92479624465da7697935",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 36,
+      "maximum_pi_residual_signed_bits": 36,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "9270013643135255436dc94986b3039a261cd96ca798bedb57595f4a22b2c5bc",
+      "raw_repeated_denominator_payload_bits": 17552,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 8662,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 17529,
+      "denominator_power_of_17": 16,
+      "depth": 32,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "PRIMARY",
+      "final_boundary": [
+        [
+          1815759894236162607864,
+          48661191875666868481
+        ],
+        [
+          -159603001856642600820,
+          48661191875666868481
+        ],
+        [
+          630080732022085073304,
+          48661191875666868481
+        ],
+        [
+          880822952133762173041,
+          48661191875666868481
+        ],
+        [
+          678410734599487534968,
+          48661191875666868481
+        ],
+        [
+          1276520074629060371436,
+          48661191875666868481
+        ],
+        [
+          364017077343490093830,
+          48661191875666868481
+        ],
+        [
+          -263165597264636220240,
+          48661191875666868481
+        ],
+        [
+          1009477686241282527126,
+          48661191875666868481
+        ],
+        [
+          644913746300997361242,
+          48661191875666868481
+        ],
+        [
+          814749781077326325276,
+          48661191875666868481
+        ],
+        [
+          1941114992665789310292,
+          48661191875666868481
+        ],
+        [
+          956418465263029282854,
+          48661191875666868481
+        ],
+        [
+          1247714322839989158456,
+          48661191875666868481
+        ],
+        [
+          824818647371163029028,
+          48661191875666868481
+        ],
+        [
+          870377560207252284258,
+          48661191875666868481
+        ]
+      ],
+      "final_state_commitment": "3f3641332c79bb4bdfd39e2241725633b88f381c127c00f8345372eb1a0105cf",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 68,
+      "maximum_pi_residual_signed_bits": 68,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "8e4d5b1e52da2ad73eda79bed8a1b978a884c1ffcbea5db169e72c02c3d7b49e",
+      "raw_repeated_denominator_payload_bits": 35361,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 17528,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 35426,
+      "denominator_power_of_17": 32,
+      "depth": 64,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "PRIMARY",
+      "final_boundary": [
+        [
+          -56413051077607769220586611106294113998418,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          90508677068781365673546230145296196634542,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          36321399490505001837123336812441635885686,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          72568655724957224604361538420667089236428,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          46416155592437017897419788108431115502414,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          77571687739311121992126036519433283697060,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          -10036334418557532928787453364417640454802,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          45422033190500452281189127570346209735068,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          -16416626665974135285253007062927474920036,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          5954744391479708181835404072782035213398,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          -4248453357054852877246361028325834620492,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          20877340272189662000898760531488835977936,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          19918352500793180659778838308929784286018,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          39690397254758810540737902100888528424844,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          66198657514977623400292643594533269474529,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          -5496651899701089341823000321435601497270,
+          2367911594760467245844106297320951247361
+        ]
+      ],
+      "final_state_commitment": "a4bc385a200612abf939a299f868f4bf8bf235853010a0f5f4dcf36063b4ac25",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 133,
+      "maximum_pi_residual_signed_bits": 133,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "7238d00f52dd21fc80553d4db72d3c12d60589d889e9866c3891b0060abc06d0",
+      "raw_repeated_denominator_payload_bits": 70912,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 35425,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 8,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 3553,
+      "denominator_power_of_17": 1,
+      "depth": 1,
+      "exact_pi_divisions": 136,
+      "exact_reconstruction_equal": true,
+      "family": "REUSE",
+      "final_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          -36,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -19,
+          1
+        ],
+        [
+          -36,
+          1
+        ],
+        [
+          -36,
+          1
+        ],
+        [
+          -36,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -36,
+          1
+        ]
+      ],
+      "final_state_commitment": "aee331bbe7c7743db04b58d97ea710335fa62ed5fd83bf90158eaeaa70f592b1",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 8,
+      "maximum_integral_numerator_signed_bits": 7,
+      "maximum_pi_residual_signed_bits": 17,
+      "minimum_cell_pi_valuation": 8,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "885f29e634c5ba048b47e6e4566d5410ca51792f0d95c9c43d8d3b5cef1ef900",
+      "raw_repeated_denominator_payload_bits": 2197,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 951,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 967,
+      "denominator_power_of_17": 1,
+      "depth": 2,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "REUSE",
+      "final_boundary": [
+        [
+          -36,
+          17
+        ],
+        [
+          252,
+          17
+        ],
+        [
+          144,
+          17
+        ],
+        [
+          -414,
+          17
+        ],
+        [
+          234,
+          17
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          468,
+          17
+        ],
+        [
+          -36,
+          17
+        ],
+        [
+          -540,
+          17
+        ],
+        [
+          -217,
+          17
+        ],
+        [
+          216,
+          17
+        ],
+        [
+          108,
+          17
+        ],
+        [
+          108,
+          17
+        ],
+        [
+          144,
+          17
+        ],
+        [
+          36,
+          17
+        ],
+        [
+          468,
+          17
+        ]
+      ],
+      "final_state_commitment": "4e457e3920b355f7091682d7b4404922fe1e6946df469282aa8be756e9d03330",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 7,
+      "maximum_pi_residual_signed_bits": 7,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "4ba000108cd2d03258ceebfd0b00ac7dea97fef7cf421b8984dac604025148c2",
+      "raw_repeated_denominator_payload_bits": 2244,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 966,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 2045,
+      "denominator_power_of_17": 2,
+      "depth": 4,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "REUSE",
+      "final_boundary": [
+        [
+          -702,
+          17
+        ],
+        [
+          -1890,
+          289
+        ],
+        [
+          -15408,
+          289
+        ],
+        [
+          -17694,
+          289
+        ],
+        [
+          -9126,
+          289
+        ],
+        [
+          -14165,
+          289
+        ],
+        [
+          -9036,
+          289
+        ],
+        [
+          -13212,
+          289
+        ],
+        [
+          -414,
+          17
+        ],
+        [
+          -10152,
+          289
+        ],
+        [
+          -10962,
+          289
+        ],
+        [
+          -9900,
+          289
+        ],
+        [
+          -558,
+          17
+        ],
+        [
+          -11376,
+          289
+        ],
+        [
+          -8118,
+          289
+        ],
+        [
+          -4536,
+          289
+        ]
+      ],
+      "final_state_commitment": "bffe41e67f19cbaaf8260b3fee15fd1a2586d40f04dc0310a8157b0d6553d192",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 11,
+      "maximum_pi_residual_signed_bits": 11,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "92ed223a229b817fa2d794dbdc1705ce53539577ac4604f0e1947efa3058814f",
+      "raw_repeated_denominator_payload_bits": 4385,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 2044,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 4269,
+      "denominator_power_of_17": 4,
+      "depth": 8,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "REUSE",
+      "final_boundary": [
+        [
+          1471896,
+          83521
+        ],
+        [
+          -1810206,
+          83521
+        ],
+        [
+          -1526220,
+          83521
+        ],
+        [
+          1293498,
+          83521
+        ],
+        [
+          -2259972,
+          83521
+        ],
+        [
+          -2391066,
+          83521
+        ],
+        [
+          -3876336,
+          83521
+        ],
+        [
+          -2256281,
+          83521
+        ],
+        [
+          28206,
+          83521
+        ],
+        [
+          -3024090,
+          83521
+        ],
+        [
+          -76248,
+          83521
+        ],
+        [
+          -2200950,
+          83521
+        ],
+        [
+          -110376,
+          83521
+        ],
+        [
+          -1038906,
+          83521
+        ],
+        [
+          -7506,
+          4913
+        ],
+        [
+          -1846746,
+          83521
+        ]
+      ],
+      "final_state_commitment": "56f7c5b23094af998536935c2491bc6646335eb9907dbfc97d189dd7543de07a",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 19,
+      "maximum_pi_residual_signed_bits": 19,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "18fd085fbeca7bf7c995b6bad37090472bb861c7051bacdd680c62c702fbdebe",
+      "raw_repeated_denominator_payload_bits": 8758,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 4268,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 8652,
+      "denominator_power_of_17": 8,
+      "depth": 16,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "REUSE",
+      "final_boundary": [
+        [
+          -96621326100,
+          6975757441
+        ],
+        [
+          -228164918742,
+          6975757441
+        ],
+        [
+          114213540186,
+          6975757441
+        ],
+        [
+          -244369249073,
+          6975757441
+        ],
+        [
+          -36531115254,
+          6975757441
+        ],
+        [
+          -128078713494,
+          6975757441
+        ],
+        [
+          -132662472282,
+          6975757441
+        ],
+        [
+          -234103138326,
+          6975757441
+        ],
+        [
+          -20323926216,
+          6975757441
+        ],
+        [
+          -263611815012,
+          6975757441
+        ],
+        [
+          -182311682886,
+          6975757441
+        ],
+        [
+          -256503553758,
+          6975757441
+        ],
+        [
+          -181866976866,
+          6975757441
+        ],
+        [
+          -227852275734,
+          6975757441
+        ],
+        [
+          114416364330,
+          6975757441
+        ],
+        [
+          -16068488328,
+          6975757441
+        ]
+      ],
+      "final_state_commitment": "65bd3209b5f034a626173e8d9ea70c28350ba78fa1a2030b689294a619a90701",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 35,
+      "maximum_pi_residual_signed_bits": 35,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "970263d6d91fb571665733439d099a5f3ce6efb4f5d6ca130fcfcdbec46d3397",
+      "raw_repeated_denominator_payload_bits": 17508,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 8651,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 17567,
+      "denominator_power_of_17": 16,
+      "depth": 32,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "REUSE",
+      "final_boundary": [
+        [
+          891248930228010592494,
+          48661191875666868481
+        ],
+        [
+          785450377592116897069,
+          48661191875666868481
+        ],
+        [
+          6893042653138110912,
+          48661191875666868481
+        ],
+        [
+          125660140992092775510,
+          48661191875666868481
+        ],
+        [
+          868986232480435656636,
+          48661191875666868481
+        ],
+        [
+          855924246472042154250,
+          48661191875666868481
+        ],
+        [
+          -229587999158207838042,
+          48661191875666868481
+        ],
+        [
+          879864442955794590192,
+          48661191875666868481
+        ],
+        [
+          982824913484083358388,
+          48661191875666868481
+        ],
+        [
+          -1074211255851009655734,
+          48661191875666868481
+        ],
+        [
+          517208680234246086108,
+          48661191875666868481
+        ],
+        [
+          -1346626233891185098176,
+          48661191875666868481
+        ],
+        [
+          188439318147780612738,
+          48661191875666868481
+        ],
+        [
+          -1080584591721876032346,
+          48661191875666868481
+        ],
+        [
+          -1435238110987231017294,
+          48661191875666868481
+        ],
+        [
+          866210920065291606552,
+          48661191875666868481
+        ]
+      ],
+      "final_state_commitment": "d77512e1b642ce862ce3087a34fb9d2807dd8f8d159f7d6af67548e3be74ce2c",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 68,
+      "maximum_pi_residual_signed_bits": 68,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "1b771522e805ff1841d80aba2b3b08e08c273eafb6d6f5e13cc9e14ce591b86b",
+      "raw_repeated_denominator_payload_bits": 35414,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 17566,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 35370,
+      "denominator_power_of_17": 32,
+      "depth": 64,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "REUSE",
+      "final_boundary": [
+        [
+          20512973081059906482985624496342441880372,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          100606254161865694742386594477442766899664,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          -9828634151488055476450647765802399764138,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          2701821015339337838654759308531831892352,
+          139288917338851014461418017489467720433
+        ],
+        [
+          5105399743119698134276706859993149716038,
+          139288917338851014461418017489467720433
+        ],
+        [
+          84145366229330023453833628756198138240428,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          70337842280287937528043642593807521730160,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          4801606017800025933818960009559154208280,
+          139288917338851014461418017489467720433
+        ],
+        [
+          20433626682390725234509131703747682086044,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          123829458290025642603185836979980951795656,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          58311411173670297157310738410385196945456,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          110491309696666669232636278405856224265400,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          -9651651119906017113135109777840535242638,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          51826496613452008110832614120150012463176,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          37400775581823461331177442007191752010855,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          53218278673373242452371352805435267994004,
+          2367911594760467245844106297320951247361
+        ]
+      ],
+      "final_state_commitment": "0efa1b79d1307876cdc78e07b402a871bde70dde6c86837fda8b4fe4fe2c56ec",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 134,
+      "maximum_pi_residual_signed_bits": 134,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "3d0daa8af7f8986fefaea8256325454e85cf28493e06c68d14807f259cae672a",
+      "raw_repeated_denominator_payload_bits": 70840,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 35369,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 8,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 3558,
+      "denominator_power_of_17": 1,
+      "depth": 1,
+      "exact_pi_divisions": 136,
+      "exact_reconstruction_equal": true,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        [
+          -36,
+          1
+        ],
+        [
+          -19,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -36,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          -36,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          -36,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          18,
+          1
+        ],
+        [
+          -36,
+          1
+        ],
+        [
+          -36,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "final_state_commitment": "616e03abd36595e8fd960112338b9b7773c62f6a0f37f202d38bbc58193e469f",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 8,
+      "maximum_integral_numerator_signed_bits": 7,
+      "maximum_pi_residual_signed_bits": 16,
+      "minimum_cell_pi_valuation": 8,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "32710e866f7212fff2518243e4eda753387f1ee69807fc66b8162edbfcfaf462",
+      "raw_repeated_denominator_payload_bits": 2195,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 981,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 965,
+      "denominator_power_of_17": 1,
+      "depth": 2,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        [
+          -360,
+          17
+        ],
+        [
+          36,
+          17
+        ],
+        [
+          -234,
+          17
+        ],
+        [
+          -792,
+          17
+        ],
+        [
+          -486,
+          17
+        ],
+        [
+          -288,
+          17
+        ],
+        [
+          -468,
+          17
+        ],
+        [
+          -288,
+          17
+        ],
+        [
+          180,
+          17
+        ],
+        [
+          -343,
+          17
+        ],
+        [
+          -144,
+          17
+        ],
+        [
+          -54,
+          17
+        ],
+        [
+          -270,
+          17
+        ],
+        [
+          -576,
+          17
+        ],
+        [
+          -432,
+          17
+        ],
+        [
+          -54,
+          17
+        ]
+      ],
+      "final_state_commitment": "1b07fe1b1397c709d841f911eeb1bcc76e93e54937fd195dbf63d5526fc8f84f",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 8,
+      "maximum_pi_residual_signed_bits": 8,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "da15242689f2a2756ad588927fbc045fa7cc015193b44f55227936062758990e",
+      "raw_repeated_denominator_payload_bits": 2218,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 964,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 2153,
+      "denominator_power_of_17": 2,
+      "depth": 4,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        [
+          13050,
+          289
+        ],
+        [
+          -558,
+          289
+        ],
+        [
+          6336,
+          289
+        ],
+        [
+          6264,
+          289
+        ],
+        [
+          -3870,
+          289
+        ],
+        [
+          5058,
+          289
+        ],
+        [
+          648,
+          289
+        ],
+        [
+          900,
+          289
+        ],
+        [
+          2988,
+          289
+        ],
+        [
+          5688,
+          289
+        ],
+        [
+          4213,
+          289
+        ],
+        [
+          -1404,
+          289
+        ],
+        [
+          -2088,
+          289
+        ],
+        [
+          2124,
+          289
+        ],
+        [
+          972,
+          289
+        ],
+        [
+          1278,
+          289
+        ]
+      ],
+      "final_state_commitment": "bbdd467694a4a9d7ef937d60268a86cdc1d4b00f5343985c1a43524b1c5efb85",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 11,
+      "maximum_pi_residual_signed_bits": 11,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "521066d7beb896ef98f1289191adf46f907e81b71d9f324d9d4a3b1314cbc126",
+      "raw_repeated_denominator_payload_bits": 4469,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 2152,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 4167,
+      "denominator_power_of_17": 4,
+      "depth": 8,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        [
+          -1995984,
+          83521
+        ],
+        [
+          -1451555,
+          83521
+        ],
+        [
+          -690174,
+          83521
+        ],
+        [
+          -876024,
+          83521
+        ],
+        [
+          -548640,
+          83521
+        ],
+        [
+          -2531610,
+          83521
+        ],
+        [
+          913932,
+          83521
+        ],
+        [
+          -177030,
+          83521
+        ],
+        [
+          690228,
+          83521
+        ],
+        [
+          568530,
+          83521
+        ],
+        [
+          466704,
+          83521
+        ],
+        [
+          1003536,
+          83521
+        ],
+        [
+          -364104,
+          83521
+        ],
+        [
+          -726498,
+          83521
+        ],
+        [
+          -144522,
+          4913
+        ],
+        [
+          -750780,
+          83521
+        ]
+      ],
+      "final_state_commitment": "fdb0258f7f1ca730674847fe9936a928edc16382e528a0dde599ab67497396cd",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 19,
+      "maximum_pi_residual_signed_bits": 19,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "32b6efa02e9902278bb6693650ed9768616448ee11a25d382372a19958358a33",
+      "raw_repeated_denominator_payload_bits": 8682,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 4166,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 8727,
+      "denominator_power_of_17": 8,
+      "depth": 16,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        [
+          175754151342,
+          6975757441
+        ],
+        [
+          198037158822,
+          6975757441
+        ],
+        [
+          201231656802,
+          6975757441
+        ],
+        [
+          210483925489,
+          6975757441
+        ],
+        [
+          4039175196,
+          410338673
+        ],
+        [
+          -137524340682,
+          6975757441
+        ],
+        [
+          139982921550,
+          6975757441
+        ],
+        [
+          152871567588,
+          6975757441
+        ],
+        [
+          107848495098,
+          6975757441
+        ],
+        [
+          53593058466,
+          6975757441
+        ],
+        [
+          -6921552888,
+          410338673
+        ],
+        [
+          53682559758,
+          6975757441
+        ],
+        [
+          -3468624822,
+          410338673
+        ],
+        [
+          70298094888,
+          6975757441
+        ],
+        [
+          118516137336,
+          6975757441
+        ],
+        [
+          136687519602,
+          6975757441
+        ]
+      ],
+      "final_state_commitment": "dbbd84495878bfe6f27072a7416292c6e37a819c6d0ae9b16b7d36a7ce422ad1",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 35,
+      "maximum_pi_residual_signed_bits": 35,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "5d15e8ac3952ee20788d8f587179dca62efe85227b7e5f59c290d6b080e957c7",
+      "raw_repeated_denominator_payload_bits": 17592,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 8726,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 17650,
+      "denominator_power_of_17": 16,
+      "depth": 32,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        [
+          -734799726548050795092,
+          48661191875666868481
+        ],
+        [
+          231812263504311222924,
+          48661191875666868481
+        ],
+        [
+          1144881064298547175518,
+          48661191875666868481
+        ],
+        [
+          -134188261722754767054,
+          48661191875666868481
+        ],
+        [
+          -909137687963615449074,
+          48661191875666868481
+        ],
+        [
+          -324654980689810999692,
+          48661191875666868481
+        ],
+        [
+          -593874555134332636854,
+          48661191875666868481
+        ],
+        [
+          -431734292886193474644,
+          48661191875666868481
+        ],
+        [
+          204063831349682141322,
+          48661191875666868481
+        ],
+        [
+          -1833381851577606753498,
+          48661191875666868481
+        ],
+        [
+          537953879051796266820,
+          48661191875666868481
+        ],
+        [
+          879954903066383315623,
+          48661191875666868481
+        ],
+        [
+          -45987528530252314980,
+          48661191875666868481
+        ],
+        [
+          -116895673786787217342,
+          48661191875666868481
+        ],
+        [
+          345623449646727083520,
+          48661191875666868481
+        ],
+        [
+          1192688978307970698216,
+          48661191875666868481
+        ]
+      ],
+      "final_state_commitment": "df2842de28f6a1902fdc66f5a97e6320ca090b356f5084e3b0be4acacc6e95fa",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 69,
+      "maximum_pi_residual_signed_bits": 69,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "c17b50662e31cb40be137b0ba36eb497d7c12f04be3b61381b1bd60099288aa3",
+      "raw_repeated_denominator_payload_bits": 35482,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 17649,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    },
+    {
+      "common_pi_exponent": 0,
+      "common_pi_ledger_integers": 1,
+      "common_pi_normalized_payload_bits": 35381,
+      "denominator_power_of_17": 32,
+      "depth": 64,
+      "exact_pi_divisions": 0,
+      "exact_reconstruction_equal": true,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        [
+          31220469040862815278062672518474948918974,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          -30821973645105913815828800678640032426790,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          1014121233391562146092653434882668321864,
+          139288917338851014461418017489467720433
+        ],
+        [
+          49445204534622375123467953078450386679908,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          -20661575927927195044501068739576430159874,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          1854455924823556477342664124824677555086,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          75933881193500581783692747842542577520,
+          8193465725814765556554001028792218849
+        ],
+        [
+          52140757240983809561292228848089228403418,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          40364344881739672148148853316692514622786,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          17911685670740420955315488499201454373634,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          6552326739974052658687260628131466058953,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          58389292119247223176446394540888706817258,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          50961228467201235604347934312659797817426,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          3221521731052994322958424742291477686652,
+          139288917338851014461418017489467720433
+        ],
+        [
+          41946326971563671620910484476655810192120,
+          2367911594760467245844106297320951247361
+        ],
+        [
+          9516228448062206815476364302462240720552,
+          2367911594760467245844106297320951247361
+        ]
+      ],
+      "final_state_commitment": "94c7284d1c148d61149ec1e69966b50b24d84cf76bee33747dcf7b44d6c9e0c5",
+      "inverse_history_cells": 0,
+      "maximum_cell_pi_valuation": 0,
+      "maximum_integral_numerator_signed_bits": 133,
+      "maximum_pi_residual_signed_bits": 133,
+      "minimum_cell_pi_valuation": 0,
+      "package_local_restoration_count": 1,
+      "program_fingerprint": "82bb90a4c6db3f6b51c8e38bcf0cf9aa73fbdbda4ac2cbe805e25e9e6498d36a",
+      "raw_repeated_denominator_payload_bits": 70882,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_cyclotomic_integer_coefficients": 272,
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "scale_ledger_restoration_class": "NO_RESTORATION_CLAIM",
+      "shared_denominator_ledger_integers": 1,
+      "shared_denominator_payload_bits": 35380,
+      "shared_scale_resident_integer_coefficients": 272,
+      "snapshot_reload_used": false
+    }
+  ],
+  "claim": "BOUNDED_EXACT_SHARED_DENOMINATOR_LEDGER_REDUCES_REPEATED_DENOMINATOR_FINAL_STATE_ACCOUNTING_BY_MORE_THAN_HALF_ACROSS_21_MATRIX_FREE_ANISOTROPIC_F17_RADIAL_CASES_BUT_COMMON_PI_CONTENT_DOES_NOT_BOUND_RESIDUAL_HEIGHT_THROUGH_DEPTH64_WHILE_EXACT_RECONSTRUCTION_RESTORATION_REUSE_AND_THE_IDENTICAL_COMPACT_CLASSICAL_NORMALIZATION_REMAIN",
+  "claim_boundary": {
+    "established": [
+      "BOUNDED_EXACT_SHARED_DENOMINATOR_FINAL_STATE_PAYLOAD_REDUCTION_BY_MORE_THAN_HALF_ACROSS_21_DECLARED_CASES",
+      "BOUNDED_COMMON_PI_CONTENT_NORMALIZATION_DOES_NOT_BOUND_RESIDUAL_HEIGHT_THROUGH_DEPTH64",
+      "EXACT_RECONSTRUCTION_BEFORE_FINAL_PROJECTION_AND_ACTUAL_INVERSE",
+      "EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE"
+    ],
+    "not_established": [
+      "ASYMPTOTIC_OR_UNIVERSAL_HEIGHT_LOWER_BOUND",
+      "OPTIMAL_EXACT_REPRESENTATION",
+      "CATVM_MACHINE_ENFORCED_CUSTODY",
+      "DISTINCT_PHASE_RESOURCE",
+      "COMPUTATIONAL_ADVANTAGE",
+      "SMALL_WALL_CROSSING",
+      "PHYSICAL_EXECUTION",
+      "PHYSICAL_BIT_REPLACEMENT",
+      "UNBOUNDED_CATALYTIC_COMPUTATION"
+    ]
+  },
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "controls": {
+    "common_pi_content_removes_depth2_plus_denominator_growth": false,
+    "exact_pi_division_identity": true,
+    "fixed_bounded_width_exact_state_established": false,
+    "intermediate_projection_available": false,
+    "m140_primary_commitment_and_boundary_parity": true,
+    "snapshot_command_available": false
+  },
+  "endpoint_growth": {
+    "ALTERNATE": {
+      "pi_normalized_payload_grows": true,
+      "residual_width_grows": true,
+      "shared_denominator_payload_grows": true
+    },
+    "PRIMARY": {
+      "pi_normalized_payload_grows": true,
+      "residual_width_grows": true,
+      "shared_denominator_payload_grows": true
+    },
+    "REUSE": {
+      "pi_normalized_payload_grows": true,
+      "residual_width_grows": true,
+      "shared_denominator_payload_grows": true
+    }
+  },
+  "execution_scope": "LINUX_DIRECT_PROCESS_EXACT_SOFTWARE",
+  "m140_result_sha256": "d32a6939e546836ae9a0e7edae23ab4a43f5d084287fe3a94dcf5342ae8b386e",
+  "matched_classical_baseline": {
+    "all_case_boundaries_equal": true,
+    "comparison_establishes_computational_advantage": false,
+    "comparison_establishes_distinct_phase_resource": false,
+    "method": "IDENTICAL_SHARED_SCALE_NORMALIZED_MATRIX_FREE_17_COORDINATE_RECURRENCE",
+    "same_normalization_and_payload_law": true,
+    "universal_optimality_or_lower_bound_claimed": false
+  },
+  "next_obstruction": "SHARED_DENOMINATOR_STORAGE_REDUCES_REPEATED_DENOMINATOR_FINAL_STATE_ACCOUNTING_BUT_ALL_DEPTH2_PLUS_TESTED_STATES_HAVE_ZERO_COMMON_PI_CONTENT_AND_RESIDUAL_NUMERATOR_HEIGHT_STILL_GROWS_WHILE_THE_IDENTICAL_COMPACT_CLASSICAL_NORMALIZATION_REMAINS",
+  "resource_law": {
+    "accepted_assignment_truth_table_coordinate_or_kernel_cells": 0,
+    "common_pi_ledger_integers": 1,
+    "matrix_free_generator_exact_field_cells": 1,
+    "payload_includes_all272_integer_coefficients_and_both_ledgers": true,
+    "python_container_allocator_sympy_native_bigint_hashlib_and_whole_process_memory_excluded": true,
+    "represented_cyclotomic_integer_coefficients": 272,
+    "resident_radial_field_cells": 17,
+    "retained_public_kernel_exact_field_cells": 0,
+    "shared_denominator_ledger_integers": 1
+  },
+  "restoration": {
+    "class": "EXACT_ALGEBRAIC_RESTORATION",
+    "fresh_restored_reuse_equal": true,
+    "inverse_history_cells": 0,
+    "restoration_count_is_package_local_not_catvm_generation": true,
+    "same_backing": true,
+    "scale_metric_buffers": "NO_RESTORATION_CLAIM",
+    "snapshot_reload_used": false
+  },
+  "reuse": {
+    "fresh_restored_boundary_equal": true,
+    "fresh_restored_scale_signature_equal": true,
+    "inverse_history_cells": 0,
+    "package_local_restoration_count": 2,
+    "restored_exact_zero": true,
+    "same_original_backing": true,
+    "snapshot_reload_used": false
+  },
+  "schema": "CAT_CAS_F17_ANISOTROPIC_RADIAL_SHARED_SCALE_HEIGHT_DIAGNOSTIC_V1",
+  "source_scope": {
+    "anisotropic_norm": "X_SQUARED_MINUS_3_Y_SQUARED",
+    "coordinate_field": "F17_SQUARED",
+    "depths": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "families": [
+      "PRIMARY",
+      "REUSE",
+      "ALTERNATE"
+    ],
+    "normalization": "ONE_SHARED_POWER17_DENOMINATOR_LEDGER_PLUS_GREATEST_COMMON_PI_CONTENT_LEDGER",
+    "phase_family": "M140_QUARTIC_RADIAL_PHASE_AND_MATRIX_FREE_FOURIER"
+  },
+  "source_sha256": "5133ba36c0658391aef4e37557cd52966d6b8deaabfb1a17eb30d4c766500a98",
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}

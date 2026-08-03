@@ -1,0 +1,33 @@
+{
+  "all_cases_equal": true,
+  "all_exact_inverse_seed_checks_pass": true,
+  "case_count": 21,
+  "claim_ceiling": "INDEPENDENT_EXACT_PARITY_FOR_21_DECLARED_CASES_THROUGH_DEPTH64;NO_UNIVERSAL_HEIGHT_LOWER_BOUND_OR_OPTIMALITY_OR_ADVANTAGE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "metric_and_boundary_comparisons": 252,
+  "oracle_method": "SEPARATE_RETAINED_17_BY_17_EXACT_FOURIER_RECURRENCE_WITH_INDEPENDENT_PUBLIC_PROGRAM_COMPILER_AND_DIRECT_INTEGER_PI_DIVISION",
+  "package_sha256": "a94bc911ce0636a2a84ac0337ada0b115cef7347bcbd87c26890dbb9f5b29f6e",
+  "payload_mutation_detected": true,
+  "preserved_subclaims": [
+    "EXACT_SHARED_SCALE_METRIC_PARITY_FOR_21_DECLARED_CASES",
+    "EXACT_FINAL_BOUNDARY_PARITY",
+    "EXACT_INVERSE_SEED_RESTORATION_IN_THE_SEPARATE_RECURRENCE"
+  ],
+  "rejected_interpretations": [
+    "ASYMPTOTIC_OR_UNIVERSAL_HEIGHT_LOWER_BOUND",
+    "OPTIMAL_EXACT_REPRESENTATION",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING"
+  ],
+  "resource_observation": {
+    "oracle_is_verification_only": true,
+    "oracle_retains_exact_fourier_kernel_cells": 289,
+    "package_accepted_path_retains_exact_fourier_kernel_cells": 0,
+    "whole_process_and_allocator_memory_excluded": true
+  },
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F17_ANISOTROPIC_RADIAL_SHARED_SCALE_HEIGHT_ORACLE_V1",
+  "source_sha256": "e33bc196bc06f6e62d1c5f4938191eabf30db2d4fd89861cb25d4242c25cb714",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
