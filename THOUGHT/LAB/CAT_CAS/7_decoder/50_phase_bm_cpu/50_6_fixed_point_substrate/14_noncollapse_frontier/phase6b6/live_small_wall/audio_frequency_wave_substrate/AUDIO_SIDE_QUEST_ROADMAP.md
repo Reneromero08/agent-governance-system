@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_NONAFFINE_CUBIC_BOND3_PHASE_FACTOR_CHAIN_ESTABLISHED_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_BOUNDARY_WIDTH_REMAIN_NEXT_SHARED_BRANCHING_CUBIC_DIAGNOSTIC_SELECTED`
-**Roadmap version:** `14.0`
+**Status:** `STRICT_SCOPE_TWO_SHARED_LATENT_CUBIC_RANK4_JUNCTION_ESTABLISHED_IDENTICAL_FOUR_SCALAR_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PORT_WIDTH_REMAIN`
+**Roadmap version:** `14.1`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `15b9f81e999455d7156dc2d3a7d55b20a3d47fae`
+**Reconciled source head:** `74684d968304da3886a4e4309a35993bf3cc291f`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_OVERLAPPING_NONAFFINE_CUBIC_BOOLEAN_PHASE_FACTOR_CHAIN_HAS_MINIMAL_MPS_BOND3_AND_TWO_M_RESIDENT_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PARTITION_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_FIXED_LOGICAL_RANK_HIDES_GROWING_EXACT_BOUNDARY_WIDTH`
-**Current claim ceiling:** `DECLARED_OVERLAPPING_PURE_CUBIC_BOOLEAN_PHASE_FACTOR_CHAIN_EXACT_Q_ZETA17_DEPTHS1_2_4_8_16_32_64_128_DUAL_FIELD_STRUCTURAL_DEPTHS1_TO8_SELECTED_PARTITION_BOUNDARY_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_TWO_SHARED_LATENT_NONAFFINE_CUBIC_PHASE_CYCLE_WITH_INTERLEAVED_WALSH_TRANSPORT_NONCOMMUTING_WITH_BRANCH_DIAGONALS_HAS_CERTIFIED_RANK4_JUNCTION_CLOSURE_ON_A_FOUR_CELL_RESIDENT_PORT_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_FOUR_SCALAR_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `DECLARED_TWO_SHARED_LATENT_CUBIC_CYCLE_WITH_INTERLEAVED_WALSH_TRANSPORT_EXACT_Q_ZETA17_BRANCH_COUNTS2_4_8_16_32_64_DUAL_FIELD_STRUCTURAL_BRANCH_COUNTS2_TO8_FINAL_SCALAR_BOUNDARY_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M134_NONAFFINE_CUBIC_BOND3_CHAIN_CLOSURE_WITH_IDENTICAL_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_BOUNDARY_WIDTH`
+**New mechanism development:** `ACTIVE_AFTER_M135_TWO_LATENT_CUBIC_RANK4_CYCLE_CLOSURE_WITH_IDENTICAL_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PORT_WIDTH`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_SHARED_LATENT_BRANCHING_CUBIC_PHASE_FACTOR_HYPERTREE_CLOSURE_OR_SEPARATOR_RANK_GROWTH_WITH_MATCHED_CLASSICAL_HYPERTREE_BASELINE`
+**Active primary successor:** `EXACT_GROWING_SHARED_LATENT_CUBIC_PORT_SEPARATOR_RANK_LAW_OR_RELATION_PRESERVING_PHASE_QUOTIENT_WITH_MATCHED_CLASSICAL_JUNCTION_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`15b9f81e999455d7156dc2d3a7d55b20a3d47fae`. The current 134-milestone
+`74684d968304da3886a4e4309a35993bf3cc291f`. The current 135-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_OVERLAPPING_NONAFFINE_CUBIC_BOOLEAN_PHASE_FACTOR_CHAIN_HAS_MINIMAL_MPS_BOND3_AND_TWO_M_RESIDENT_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PARTITION_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_FIXED_LOGICAL_RANK_HIDES_GROWING_EXACT_BOUNDARY_WIDTH
+BOUNDED_EXACT_TWO_SHARED_LATENT_NONAFFINE_CUBIC_PHASE_CYCLE_WITH_INTERLEAVED_WALSH_TRANSPORT_NONCOMMUTING_WITH_BRANCH_DIAGONALS_HAS_CERTIFIED_RANK4_JUNCTION_CLOSURE_ON_A_FOUR_CELL_RESIDENT_PORT_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_FOUR_SCALAR_CLASSICAL_RECURRENCE
 ```
 
 Not established:
@@ -5159,6 +5159,86 @@ Do not add another chain-depth fixture.  Introduce the smallest shared latent
 or branching cubic geometry that changes the separator law, and compare it to
 the strongest exact hypertree or tensor contraction before considering CATVM
 custody or a Small Wall diagnostic.
+
+## Two shared latent coordinates raise the junction rank to four
+
+M135 replaces the rejected one-latent hypertree draft with the smallest
+changed separator: two shared Boolean coordinates `h,k`.  Each branch has one
+local anchor and two local leaves, with pure cubic factors
+`alpha^(h*u*v)` and `beta^(k*u*w)`.  A nonzero exact four-by-four minor
+`(alpha-1)^2(beta-1)^2` proves each accepted branch map has rank four.  The
+independent oracle directly constructs the complete two-branch eight-by-eight
+boundary tensor and finds exact rank four over `Q(zeta17)`, `F137`, and `F239`.
+
+```text
+claim
+    BOUNDED_EXACT_TWO_SHARED_LATENT_NONAFFINE_CUBIC_PHASE_CYCLE_WITH_INTERLEAVED_WALSH_TRANSPORT_NONCOMMUTING_WITH_BRANCH_DIAGONALS_HAS_CERTIFIED_RANK4_JUNCTION_CLOSURE_ON_A_FOUR_CELL_RESIDENT_PORT_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_FOUR_SCALAR_CLASSICAL_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    factor and shared-port carrier EXACT_ALGEBRAIC_RESTORATION
+    transient buffers               NO_RESTORATION_CLAIM
+
+source head
+    74684d968304da3886a4e4309a35993bf3cc291f
+```
+
+The four-component unresolved port is seeded internally, multiplied by each
+branch response, and transported by alternating unnormalised Walsh maps on
+the `h` and `k` axes only between consumer groups.  Only the final scalar is
+projected.  Lawful reversal consumes the actual resident factors and applies
+every diagonal and Walsh inverse in reverse order before returning the factor
+and port carriers to exact zero on the same backing.  Unrelated branch-eight
+then branch-sixteen execution agrees with a fresh carrier without snapshot or
+retained inverse history.  The restoration counter is direct-process
+package-local instrumentation, not CATVM custody generation.
+
+The focused review repaired three state-law defects before acceptance:
+nested factor backing identity is included, projection count is part of the
+zero predicate, and reordered/wrong-Walsh attacks now execute complete inverse
+sequences.  Only the lawful sequence restores the seed.  Controls also cover
+missing and wrong factor inverse, ownership, premature projection, null
+carrier, overmerge, undershare, semantic perturbation, and unavailable
+snapshot.
+
+Exact `Q(zeta17)` executions cover branch counts `2,4,8,16,32,64`; dual-field
+structural executions cover branch counts two through eight.  At `b` branches
+the carrier stores `4b` factor cells, including `2b` nontrivial public phase
+factors, plus four shared-port cells.  Factor payload grows from 264 to 8448
+bits and the maximum port payload grows from 205 to 13,915 bits.  The matched
+classical runtime is the identical four-scalar recurrence and has exactly the
+same measured port payload.  The matched full signature stores the `2b`
+public factors; an arbitrary port input compiles to four row coefficients;
+the fixed transaction can cache one scalar.
+
+The result is limited to the declared two-latent cubic cycle and final scalar
+boundary.  It establishes neither arbitrary hypergraph closure nor arbitrary
+port arity, CATVM custody, a distinct phase resource, computational advantage,
+Small Wall crossing, physical waveform execution, physical bit replacement,
+nor unbounded computation.
+
+The next experiment is:
+
+```text
+EXACT_GROWING_SHARED_LATENT_CUBIC_PORT_SEPARATOR_RANK_LAW_OR_RELATION_PRESERVING_PHASE_QUOTIENT_WITH_MATCHED_CLASSICAL_JUNCTION_BASELINE
+```
+
+The obstruction is:
+
+```text
+THE_TWO_SHARED_LATENT_CUBIC_CYCLE_REQUIRES_EXACT_RANK4_BUT_CLOSES_ON_THE_IDENTICAL_FOUR_SCALAR_CLASSICAL_RECURRENCE_THE_PHASE_CARRIER_STORES_TWICE_THE_PUBLIC_FACTOR_SIGNATURE_AND_PHASE_AND_CLASSICAL_PORT_PAYLOAD_WIDTH_GROW_IDENTICALLY_WITH_DEPTH
+```
+
+Do not add branch-count or fanout fixtures to M135.  The successor must derive
+a transferable shared-port rank law as latent arity grows or implement an
+exact relation-preserving phase quotient.  It must retain the strongest
+matched classical junction recurrence and reject the mechanism if port width
+or factor state is merely moved elsewhere.
 
 ## 10. Roadmap Maintenance
 

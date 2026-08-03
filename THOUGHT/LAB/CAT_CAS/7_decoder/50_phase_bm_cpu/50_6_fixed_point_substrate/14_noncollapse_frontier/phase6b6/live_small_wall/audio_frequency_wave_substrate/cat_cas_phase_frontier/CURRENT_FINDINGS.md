@@ -7969,3 +7969,73 @@ The obstruction is:
 ```text
 THE_DECLARED_NONAFFINE_CUBIC_PHASE_CHAIN_CLOSES_AT_EXACT_BOND3_BUT_THE_PHASE_CARRIER_STORES_TWICE_THE_PUBLIC_FACTOR_SIGNATURE_THE_SELECTED_BOUNDARY_HAS_AN_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_EXACT_BOUNDARY_WIDTH_GROWS_WITH_DEPTH
 ```
+
+## Two shared latent coordinates require an exact rank-four junction but not more than four classical scalars
+
+M135 changes the separator geometry rather than extending M134's chain.  It
+uses two shared Boolean latent coordinates `h,k`; each branch couples one
+local anchor and two local leaves through `alpha^(h*u*v)` and
+`beta^(k*u*w)`.  The branch map has a nonzero exact four-by-four minor
+`(alpha-1)^2(beta-1)^2`.  Independent direct construction of the complete
+two-branch eight-by-eight boundary tensor gives exact rank four over
+`Q(zeta17)`, `F137`, and `F239`.
+
+```text
+claim
+    BOUNDED_EXACT_TWO_SHARED_LATENT_NONAFFINE_CUBIC_PHASE_CYCLE_WITH_INTERLEAVED_WALSH_TRANSPORT_NONCOMMUTING_WITH_BRANCH_DIAGONALS_HAS_CERTIFIED_RANK4_JUNCTION_CLOSURE_ON_A_FOUR_CELL_RESIDENT_PORT_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_FOUR_SCALAR_CLASSICAL_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    factor and shared-port carrier EXACT_ALGEBRAIC_RESTORATION
+    transient buffers               NO_RESTORATION_CLAIM
+
+source head
+    74684d968304da3886a4e4309a35993bf3cc291f
+```
+
+Alternating unnormalised Walsh transports on the `h` and `k` axes occur only
+between consumer groups.  Disabling transport, applying it before the
+consumer, merging `h=k`, copying instead of sharing the port, or perturbing a
+phase changes the final boundary.  Only the final scalar is projected.  The
+lawful inverse consumes the actual resident factors and reverses every
+diagonal and Walsh action before restoring factor and port state to exact zero
+on the same backing.  Unrelated restored-carrier reuse agrees with fresh
+execution without snapshot or retained inverse history.
+
+The focused review required nested backing identity, projection count in the
+zero predicate, complete inverse-order controls, and exact classical/phase
+port-payload parity.  The repaired qualifier independently passes twenty
+transactions and full lawful, reordered, wrong-Walsh, missing, wrong-factor,
+ownership, projection, null, overmerge, undershare, and semantic attacks.
+
+Exact branch counts are `2,4,8,16,32,64`; dual-field structural branch counts
+are two through eight.  At `b` branches the carrier holds `4b` factor cells,
+including `2b` public nontrivial phases, plus four shared-port cells.  The
+factor payload grows from 264 to 8448 bits and the maximum exact port payload
+from 205 to 13,915 bits.  The identical four-scalar classical recurrence has
+the same measured port payload; its full signature stores only the `2b`
+public factors, an arbitrary port input compiles to four row coefficients,
+and the fixed transaction can cache one scalar.
+
+The result is restricted to this declared two-latent cycle and scalar final
+boundary.  It is not arbitrary cubic-hypergraph closure, arbitrary port
+arity, CATVM custody, a distinct phase resource, computational advantage,
+Small Wall crossing, physical execution, bit replacement, or unbounded
+catalytic computation.
+
+The next experiment is:
+
+```text
+EXACT_GROWING_SHARED_LATENT_CUBIC_PORT_SEPARATOR_RANK_LAW_OR_RELATION_PRESERVING_PHASE_QUOTIENT_WITH_MATCHED_CLASSICAL_JUNCTION_BASELINE
+```
+
+The obstruction is:
+
+```text
+THE_TWO_SHARED_LATENT_CUBIC_CYCLE_REQUIRES_EXACT_RANK4_BUT_CLOSES_ON_THE_IDENTICAL_FOUR_SCALAR_CLASSICAL_RECURRENCE_THE_PHASE_CARRIER_STORES_TWICE_THE_PUBLIC_FACTOR_SIGNATURE_AND_PHASE_AND_CLASSICAL_PORT_PAYLOAD_WIDTH_GROW_IDENTICALLY_WITH_DEPTH
+```

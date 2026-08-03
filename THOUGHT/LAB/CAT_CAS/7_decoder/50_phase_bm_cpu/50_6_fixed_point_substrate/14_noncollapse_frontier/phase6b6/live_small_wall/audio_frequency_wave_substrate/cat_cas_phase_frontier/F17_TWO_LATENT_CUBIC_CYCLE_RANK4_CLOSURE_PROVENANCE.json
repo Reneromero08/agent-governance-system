@@ -1,0 +1,89 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "74684d968304da3886a4e4309a35993bf3cc291f",
+  "scientific_source_parent": "2c265b3aa187d09a6671386ba0ce02e71d141906",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "0d9a5903cc04f20ab4e4162bfe1df148464d2cdbd20ffec1ba5f295a9cf8e27f",
+  "reference_full_oracle_sha256": "7eaec6e5863bfceda6d4e3e039a1f0a2e57f679125ba1865e6f2749d34715cd4",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_two_latent_cubic_cycle_rank4_closure.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_two_latent_cubic_cycle_rank4_closure_oracle.py --production PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_two_latent_cubic_cycle_rank4_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_two_latent_cubic_cycle_rank4_closure.py": "0e25f0036af95872c05c21ea29110ca63424a211b98fb3fba1014fc01e7a0dc0",
+    "f17_two_latent_cubic_cycle_rank4_closure_oracle.py": "defb72e25b28c2b681f2458f75879ca4660dea75ea93a41664be54e75eae8d16",
+    "F17_TWO_LATENT_CUBIC_CYCLE_RANK4_CLOSURE_RESULTS.json": "0d9a5903cc04f20ab4e4162bfe1df148464d2cdbd20ffec1ba5f295a9cf8e27f",
+    "F17_TWO_LATENT_CUBIC_CYCLE_RANK4_CLOSURE_ORACLE_RESULTS.json": "7eaec6e5863bfceda6d4e3e039a1f0a2e57f679125ba1865e6f2749d34715cd4",
+    "F17_TWO_LATENT_CUBIC_CYCLE_RANK4_CLOSURE_INDEPENDENT_REVIEW.md": "b36c6b990d0cf9cd851f3163dbddb13aa8c4fa3083c50d5a5643b1c448ed2e1d",
+    "qualify_f17_two_latent_cubic_cycle_rank4_closure.sh": "e433e80e7ae3a57ac063425b4dccf55dfcf2810e83ac376c3ca70d34705f1746"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "chart": "TWO_SHARED_LATENT_CUBIC_CYCLE_WITH_INTERLEAVED_WALSH_TRANSPORT",
+    "exact_branch_counts": [2, 4, 8, 16, 32, 64],
+    "structural_fields": ["F137", "F239"],
+    "structural_branch_counts": [2, 3, 4, 5, 6, 7, 8],
+    "families": ["PRIMARY", "REUSE"],
+    "independent_methods": [
+      "SEPARATE_PUBLIC_DESCRIPTOR_COMPILER",
+      "DIRECT_LOCAL_EIGHT_ASSIGNMENT_BRANCH_RESPONSE",
+      "SEPARATE_FOUR_STATE_RECURRENCE_AND_COMPLETE_INVERSE",
+      "DIRECT_TWO_BRANCH_EIGHT_BY_EIGHT_BOUNDARY_TENSOR",
+      "INDEPENDENT_EXACT_GAUSSIAN_RANK",
+      "SEPARATE_COMMITMENT_BYTE_AND_PAYLOAD_ACCOUNTING",
+      "INDEPENDENT_SEMANTIC_OWNERSHIP_AND_INVERSE_ORDER_MUTATIONS"
+    ]
+  },
+  "resource_accounting": {
+    "resident_phase_factor_field_cells_at_b_branches": "FOUR_TIMES_B",
+    "resident_nontrivial_theta_field_cells_at_b_branches": "TWO_TIMES_B",
+    "resident_shared_latent_port_field_cells": 4,
+    "exact_two_branch_junction_separator_rank": 4,
+    "maximum_named_port_update_field_cells": 16,
+    "matched_classical_full_signature_field_cells_at_b_branches": "TWO_TIMES_B",
+    "matched_classical_runtime_dynamic_port_field_cells": 4,
+    "matched_classical_exact_port_payload_equals_phase_port_payload": true,
+    "matched_classical_arbitrary_port_input_compiled_row_field_cells": 4,
+    "matched_classical_fixed_sealed_transaction_scalars": 1,
+    "accepted_path_assignment_or_dense_tensor_cells": 0,
+    "inverse_history_cells": 0,
+    "branch2_resident_factor_payload_bits": 264,
+    "branch64_resident_factor_payload_bits": 8448,
+    "branch2_maximum_port_payload_bits": 205,
+    "branch64_maximum_port_payload_bits": 13915,
+    "full_exact_bit_complexity_established": false,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "HASHLIB_INTERNAL_STATE",
+      "BIT_OPERATION_COMPLEXITY",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_baselines": [
+    "TWO_B_EXACT_PUBLIC_CUBIC_PHASE_FACTORS_FOR_FULL_SIGNATURE",
+    "IDENTICAL_FOUR_DYNAMIC_SCALAR_RECURRENCE_FOR_SELECTED_BOUNDARY",
+    "FOUR_COMPILED_FINAL_ROW_COEFFICIENTS_FOR_ARBITRARY_PORT_INPUT",
+    "ONE_CACHED_SCALAR_FOR_THE_FIXED_SEALED_TRANSACTION"
+  ],
+  "claim_ceiling": "DECLARED_TWO_SHARED_LATENT_CUBIC_CYCLE_WITH_INTERLEAVED_WALSH_TRANSPORT_EXACT_Q_ZETA17_BRANCH_COUNTS2_4_8_16_32_64_DUAL_FIELD_STRUCTURAL_BRANCH_COUNTS2_TO8_FINAL_SCALAR_BOUNDARY_DIRECT_PROCESS_SOFTWARE",
+  "rejected_interpretations": [
+    "ARBITRARY_CUBIC_HYPERGRAPH_CLOSURE",
+    "ARBITRARY_PORT_ARITY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}
