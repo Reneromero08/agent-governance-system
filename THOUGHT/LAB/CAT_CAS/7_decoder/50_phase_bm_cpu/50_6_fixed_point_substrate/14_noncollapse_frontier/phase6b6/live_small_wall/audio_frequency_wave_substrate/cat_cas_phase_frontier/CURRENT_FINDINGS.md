@@ -9034,3 +9034,44 @@ against the direct dense F103 recurrence. M156 establishes no CATVM custody,
 distinct phase resource, computational advantage, Small Wall crossing,
 physical execution, physical bit replacement, arbitrary topology, or
 unbounded catalytic computation.
+
+## M157: unresolved C102 group algebra closes exactly but not compactly
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_UNRESOLVED_C102_GROUP_ALGEBRA_PHASE_SUPERPOSITION_OPEN_RELATION_COMPOSITION_ELIMINATES_INTERMEDIATE_LOG_RECHARTING_AND_DEFERS_EVALUATION_TO_THE_FINAL_BOUNDARY_ON_C5_C7_C11_C17_WITH_EXACT_COEFFICIENT_CARRIER_RESTORATION_AND_REUSE_BUT_THE_CANONICAL_CARRIER_IS102X_THE_DENSE_F103_QUOTIENT_AND_THE_COMPACT_EXPRESSION_DAG_RETAINS_GROWING_PREDECESSOR_HISTORY_WHILE_THE_EVALUATION_QUOTIENT_IS_THE_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+M157 replaces log recharting with an exact `F103[C102]` relation entry. Native
+intersection shifts cyclic coefficient support, and rank-one composition adds
+shifted group-algebra moments. Only the final boundary evaluates `t -> 5`.
+Every composition denominator is invertible at all 102 characters, so the
+accepted inverse is an exact group-algebra inverse.
+
+Across C5, C7, C11, and C17, two families, and depths 1, 2, and 4, maximum
+per-entry support reaches all 102 coefficients by depth four. The coefficient
+payload law is `102n^2` bytes per relation, exactly 102 times the executed
+`n^2` dense F103 evaluation quotient. A hash-consed expression DAG avoids
+coefficient expansion in forward execution but its nodes, edges, and logical
+bytes grow strictly with depth. Its expanded semantics restore on one bounded
+inverse diagnostic while the actual roots do not, so that representation has
+`NO_RESTORATION_CLAIM`.
+
+The coefficient carrier restores the exact borrowed payload on the same
+backing, retains no history or baseline, and passes unrelated and repeated
+reuse. A production-independent scalar oracle passes 385 comparisons and
+reconstructs every full coefficient state, inverse kernel, state commitment,
+dense quotient boundary, and DAG metric. Backing identity, production work
+totals, transient maxima, runtime exclusions, and direct-process custody
+controls remain package-local.
+
+The exact obstruction is that the present linear group-algebra machine
+preserves evaluation at one character as a congruence. Keeping unresolved
+coefficients costs 102x; keeping expressions retains growing history; applying
+the congruence yields the identical compact classical recurrence. The selected
+successor adds one reversible coefficientwise quadratic shear between two
+group-algebra registers to break that single-character quotient and measure
+the resulting minimal observable state. M157 establishes no CATVM custody,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical bit replacement, or unbounded computation.

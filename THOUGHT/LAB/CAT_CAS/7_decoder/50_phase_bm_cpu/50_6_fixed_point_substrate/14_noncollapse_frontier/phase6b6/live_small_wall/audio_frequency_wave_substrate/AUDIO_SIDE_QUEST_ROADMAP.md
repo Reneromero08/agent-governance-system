@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F103_DUAL_MULTIPLICATIVE_EXPONENT_VALUE_MOMENT_RELATION_NO_GO`
-**Roadmap version:** `14.22`
+**Status:** `STRICT_SCOPE_F103_UNRESOLVED_C102_GROUP_ALGEBRA_SUPERPOSITION_RELATION_NO_GO`
+**Roadmap version:** `14.23`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `d7f5c05f9188986fa848e3db15fec94b8b3d6f1a`
+**Reconciled source head:** `08ff1d24e56d1c68559b100118d1e3ba3286dbda`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F103_DUAL_MULTIPLICATIVE_C102_EXPONENT_CRT_RANK_AND_VALUE_MOMENT_OPEN_RELATION_CHART_MAKES_HADAMARD_INTERSECTION_NATIVE_WITHOUT_DENSE_RELATION_TABLES_ON_C5_C7_C11_C17_BUT_ONE_REVERSIBLE_COMPOSITION_CONVERSION_RAISES_THE_EXPONENT_CHART_TO_NEAR_FULL_OR_FULL_RANK_IN_EVERY_CRT_COMPONENT_THE_FIXED_BACKING_IS_AT_LEAST4N2_AND_AN_EXECUTED_DENSE_F103_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `F103_DUAL_C102_EXPONENT_CRT_RANK_AND_STREAMED_VALUE_MOMENT_CHARTS_ON_DECLARED_C5_C7_C11_C17_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH8_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_F103_UNRESOLVED_C102_GROUP_ALGEBRA_PHASE_SUPERPOSITION_OPEN_RELATION_COMPOSITION_ELIMINATES_INTERMEDIATE_LOG_RECHARTING_AND_DEFERS_EVALUATION_TO_THE_FINAL_BOUNDARY_ON_C5_C7_C11_C17_WITH_EXACT_COEFFICIENT_CARRIER_RESTORATION_AND_REUSE_BUT_THE_CANONICAL_CARRIER_IS102X_THE_DENSE_F103_QUOTIENT_AND_THE_COMPACT_EXPRESSION_DAG_RETAINS_GROWING_PREDECESSOR_HISTORY_WHILE_THE_EVALUATION_QUOTIENT_IS_THE_IDENTICAL_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `F103_C102_GROUP_ALGEBRA_AND_HASH_CONSED_EXPRESSION_DAG_ON_DECLARED_C5_C7_C11_C17_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH4_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M156_F103_DUAL_MULTIPLICATIVE_EXPONENT_VALUE_MOMENT_RELATION_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M157_F103_UNRESOLVED_C102_GROUP_ALGEBRA_SUPERPOSITION_RELATION_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_UNRESOLVED_C102_GROUP_ALGEBRA_PHASE_SUPERPOSITION_OPEN_RELATION_COMPOSITION_WITH_DEFERRED_EVALUATION_AND_EXPRESSION_DAG_GROWTH_OR_QUOTIENT_NO_GO`
+**Active primary successor:** `EXACT_F103_C102_DUAL_REGISTER_COEFFICIENTWISE_QUADRATIC_PHASE_SHEAR_OPEN_RELATION_COMPOSITION_BREAKS_SINGLE_CHARACTER_EVALUATION_QUOTIENT_OR_FULL102_CHARACTER_NO_GO`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`d7f5c05f9188986fa848e3db15fec94b8b3d6f1a`. The current 156-milestone
+`08ff1d24e56d1c68559b100118d1e3ba3286dbda`. The current 157-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -6715,6 +6715,65 @@ evaluation quotient. M156 establishes no CATVM custody, distinct phase
 resource, computational advantage, Small Wall crossing, physical execution,
 physical bit replacement, arbitrary topology, or unbounded catalytic
 computation.
+
+## M157: unresolved group-algebra closure exposes full support and history growth
+
+M157 removes M156's intermediate discrete-log rechart. Each relation entry is
+an unresolved element of `F103[C102]`; Hadamard intersection is a native cyclic
+support shift, and rank-one hidden-interface composition closes by
+group-algebra addition and shift. The only evaluation is the final public
+boundary homomorphism `t -> 5`.
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_UNRESOLVED_C102_GROUP_ALGEBRA_PHASE_SUPERPOSITION_OPEN_RELATION_COMPOSITION_ELIMINATES_INTERMEDIATE_LOG_RECHARTING_AND_DEFERS_EVALUATION_TO_THE_FINAL_BOUNDARY_ON_C5_C7_C11_C17_WITH_EXACT_COEFFICIENT_CARRIER_RESTORATION_AND_REUSE_BUT_THE_CANONICAL_CARRIER_IS102X_THE_DENSE_F103_QUOTIENT_AND_THE_COMPACT_EXPRESSION_DAG_RETAINS_GROWING_PREDECESSOR_HISTORY_WHILE_THE_EVALUATION_QUOTIENT_IS_THE_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+The exact coefficient carrier is tested on 24 cases across C5, C7, C11, and
+C17, two descriptor families, and depths 1, 2, and 4. Every reversible
+rank-one composition denominator is certified nonzero at all 102 characters;
+the inverse therefore acts in the full group algebra rather than only after
+evaluation. The actual coefficient payload restores exactly on the same
+backing with no snapshot, retained inverse history, or baseline reload.
+Unrelated restored-carrier reuse and eight repeated cycles match fresh
+execution.
+
+The closure is not compact. Maximum per-entry coefficient support at depths
+1, 2, and 4 is 6/35/102 on C5, 8/57/102 on C7, 12/89/102 on C11, and
+18/102/102 on C17. The canonical payload is `102n^2` bytes per relation while
+the executed dense F103 evaluation quotient is `n^2`, exactly 102x smaller.
+Both execute the same public topology and agree at every final boundary.
+
+A hash-consed structural expression DAG avoids coefficient expansion during
+forward execution and projection, but its live graph grows strictly at every
+declared depth. Maximum logical bytes across the two families rise from
+7,088 to 14,218 to 28,774 on C5 and from 73,257 to 150,416 to 308,502 on C17,
+with the same strict trend on C7 and C11. On the bounded C5 primary
+depth-one inverse diagnostic, expanded coefficient semantics restore, but the
+actual expression roots do not: 5,269 reachable nodes and 9,886 predecessor
+edges remain. The DAG path therefore has `NO_RESTORATION_CLAIM`.
+
+The independent scalar oracle imports neither production nor NumPy and passes
+385 comparisons. It reconstructs all programs, full coefficient states,
+characterwise inverse kernels, forward byte commitments, exact inverse for all
+24 cases, dense quotient boundaries, and DAG nodes, edges, and logical byte
+counts. NumPy backing identity, production operation totals, transient maxima,
+runtime exclusions, and direct-process custody controls remain package-local.
+
+The next machine change must break the single-character evaluation congruence
+rather than increasing these already saturated fixtures. The selected test is:
+
+```text
+EXACT_F103_C102_DUAL_REGISTER_COEFFICIENTWISE_QUADRATIC_PHASE_SHEAR_OPEN_RELATION_COMPOSITION_BREAKS_SINGLE_CHARACTER_EVALUATION_QUOTIENT_OR_FULL102_CHARACTER_NO_GO
+```
+
+It introduces one reversible cross-character coupling and measures the minimal
+observable quotient against the strongest full-character classical recurrence.
+M157 establishes no CATVM custody, compact or fixed-rank group-algebra closure,
+distinct phase resource, computational advantage, Small Wall crossing,
+physical execution, physical bit replacement, arbitrary topology, or
+unbounded catalytic computation.
 
 ## 10. Roadmap Maintenance
 

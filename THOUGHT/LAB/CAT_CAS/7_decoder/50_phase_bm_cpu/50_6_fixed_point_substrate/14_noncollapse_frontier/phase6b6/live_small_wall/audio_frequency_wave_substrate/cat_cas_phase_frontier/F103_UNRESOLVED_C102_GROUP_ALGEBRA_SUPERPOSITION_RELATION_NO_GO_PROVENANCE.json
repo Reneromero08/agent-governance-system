@@ -1,0 +1,88 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 157,
+  "scientific_source_head": "08ff1d24e56d1c68559b100118d1e3ba3286dbda",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "coefficient_carrier_restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "expression_dag_restoration_classification": "NO_RESTORATION_CLAIM",
+  "transient_buffer_restoration_classification": "NO_RESTORATION_CLAIM",
+  "artifacts": {
+    "production_source": {
+      "path": "f103_unresolved_c102_group_algebra_superposition_relation_no_go.py",
+      "sha256": "961ba11f4c19841985fdfc66959ec865bea1f3b1800c9e05dccfd313fa1f1d57"
+    },
+    "oracle_source": {
+      "path": "f103_unresolved_c102_group_algebra_superposition_relation_no_go_oracle.py",
+      "sha256": "dc40fb0a6a3004262415a573ec5e391ecd04658bd1f3c0fd11952e2092d8f05d"
+    },
+    "production_result": {
+      "path": "F103_UNRESOLVED_C102_GROUP_ALGEBRA_SUPERPOSITION_RELATION_NO_GO_RESULTS.json",
+      "sha256": "8e9ea0040c24c5ff64440ab39b67a8b8b7bd85b19515d750c2cb3ab414fbbe7e"
+    },
+    "oracle_result": {
+      "path": "F103_UNRESOLVED_C102_GROUP_ALGEBRA_SUPERPOSITION_RELATION_NO_GO_ORACLE_RESULTS.json",
+      "sha256": "81067035c4be28308b09db38576b8fafe2e978e7272960829a953a0d1a658c8d"
+    },
+    "qualifier": {
+      "path": "qualify_f103_unresolved_c102_group_algebra_superposition_relation_no_go.sh",
+      "sha256": "e9443dd19ae3d3904521a2dbca51e5bff2e330cb761f7593161ae76a7b61ce3b"
+    },
+    "review": {
+      "path": "F103_UNRESOLVED_C102_GROUP_ALGEBRA_SUPERPOSITION_RELATION_NO_GO_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "6f7bb878e6405bc92154323f07fc208273559d91be1136aec59580d649191058"
+    }
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_F103_UNRESOLVED_C102_GROUP_ALGEBRA_SUPERPOSITION_RELATION_NO_GO_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m157-qualifier-ZpGie7"
+  },
+  "independent_oracle": {
+    "imports_production_module": false,
+    "imports_numpy": false,
+    "case_count": 24,
+    "comparison_count": 385,
+    "exact_inverse_cases": 24,
+    "reconstructs_full_group_algebra_coefficients": true,
+    "reconstructs_characterwise_inverse_kernels": true,
+    "reconstructs_forward_coefficient_commitments": true,
+    "reconstructs_dense_evaluation_quotient": true,
+    "reconstructs_expression_dag_metrics": true
+  },
+  "resource_law": {
+    "coefficient_payload_cells_per_relation": "102N2",
+    "dense_evaluation_quotient_payload_cells_per_relation": "N2",
+    "coefficient_to_dense_payload_ratio": 102,
+    "depth4_maximum_support_by_interface": {
+      "5": 102,
+      "7": 102,
+      "11": 102,
+      "17": 102
+    },
+    "expression_dag_nodes_edges_and_bytes_grow_strictly_with_depth": true,
+    "production_operation_totals_independently_recounted": false,
+    "declared_transient_scratch_maxima_independently_recounted": false,
+    "python_numpy_runtime_exclusions_independently_recounted": false
+  },
+  "claim_ceiling": "F103_C102_GROUP_ALGEBRA_AND_HASH_CONSED_EXPRESSION_DAG_ON_DECLARED_C5_C7_C11_C17_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH4_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "INTERMEDIATE_DISCRETE_LOG_RECHARTING_IS_ELIMINATED",
+    "HADAMARD_INTERSECTION_IS_NATIVE_C102_SUPPORT_SHIFT",
+    "RANK1_COMPOSITION_CLOSES_IN_F103_C102_GROUP_ALGEBRA",
+    "ONLY_FINAL_BOUNDARY_IS_EVALUATED_AT_T_EQUALS5",
+    "EXACT_COEFFICIENT_CARRIER_RESTORATION_AND_SAME_BACKING_REUSE",
+    "EXECUTED_DENSE_F103_EVALUATION_QUOTIENT_BOUNDARY_PARITY"
+  ],
+  "rejected_interpretations": [
+    "COMPACT_OR_FIXED_RANK_UNRESOLVED_GROUP_ALGEBRA_CLOSURE",
+    "ACTUAL_EXPRESSION_DAG_CARRIER_RESTORATION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_COMPUTATION"
+  ]
+}
