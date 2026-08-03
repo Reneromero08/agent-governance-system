@@ -7,9 +7,10 @@ HYBRID_GUARD_DIRECTIONAL_GEOMETRY_ESTABLISHED
 CONDITIONAL_TRANSVERSE_MARGIN_AND_DWELL_TRANSFER_ESTABLISHED
 HYBRID_EVENT_POLYNOMIAL_ACCELERATION_UPPER_BOUND_ESTABLISHED
 NATIVE_SIMPLE_GUARD_GRAZING_STATE_ESTABLISHED
+NONSMOOTH_POSITIVE_WITNESS_CONE_ESTABLISHED
 STRUCTURAL_TRANSVERSALITY_FALSE
-PUBLIC_SEED_TRANSVERSE_LOWER_BOUND_NOT_ESTABLISHED
-PUBLIC_SEED_ACTIVE_SET_GAP_NOT_ESTABLISHED
+ACTIVE_SET_GAP_SUFFICIENT_NOT_NECESSARY
+PUBLIC_SEED_DIRECTIONAL_CONE_LOWER_BOUND_NOT_ESTABLISHED
 P_EQUALS_NP_NOT_PROVEN
 ```
 
@@ -63,7 +64,7 @@ NONSMOOTH_DIRECTIONAL_WITNESS_EXIT
 NONSMOOTH_GRAZING_OR_HIGHER_ORDER_EVENT
 ```
 
-## Active-set separation
+## Simple-event active-set separation
 
 At a simple event define:
 
@@ -80,10 +81,10 @@ clause/literal branch persists for at least the conservative interval
 t_gap = Delta / (4 V).
 ```
 
-Thus nonsmooth min/max switching is separated from ordinary transverse entry whenever
-an inverse-polynomial active-set gap is available.
+Thus an inverse-polynomial active-set gap is one sufficient route for reducing the
+nonsmooth guard to one ordinary signed phase coordinate.
 
-## Conditional margin and dwell transfer
+## Conditional simple-event margin and dwell transfer
 
 Suppose a simple public-seed witness entry satisfies
 
@@ -120,8 +121,58 @@ Consequently, inverse-polynomial lower bounds on `kappa` and `Delta`, together w
 polynomial upper bounds on `A` and `V`, imply inverse-polynomial witness margin and dwell
 time.
 
-This is a local conditional theorem. It does not prove such lower bounds on every
-public-seed SAT trajectory.
+This is a sufficient local theorem, not a necessary event geometry.
+
+## Active-set gap is not necessary
+
+Odd three-bit parity has the exact witness ray
+
+```text
+c(epsilon) = (epsilon,-epsilon,-epsilon), epsilon > 0.
+```
+
+Every point on the ray is the verified `TFF` witness and satisfies
+
+```text
+G_F(c(epsilon)) = epsilon.
+```
+
+At the origin, all four clause margins tie at zero and several literal maxima tie. Thus
+
+```text
+active-set gap = 0.
+```
+
+Nevertheless the radial direction
+
+```text
+dc = (1,-1,-1)
+```
+
+gives every active clause directional derivative one, so
+
+```text
+D G_F(0;dc) = 1.
+```
+
+This is an exact nonsmooth directional witness entry. Therefore a positive active-set
+gap is sufficient for the simple-event proof but is not necessary for robust directional
+entry.
+
+The general nonsmooth route must instead control a neighborhood lower derivative, for
+example a lower Dini or equivalent directional-cone bound of the form
+
+```text
+D_lower G_F(c(t); f_F(c(t))) >= kappa > 0
+```
+
+throughout an interval after entry. Integrating such a bound yields
+
+```text
+G_F(c(t)) >= kappa t
+```
+
+without selecting one unique clause/literal branch.
 
 ## Polynomial upper bounds are available
 
@@ -139,7 +190,9 @@ phase-cosine acceleration.
 ```
 
 At a simple guard event the active branch is one signed phase cosine `q_i c_i`, so the
-phase-cosine acceleration bound is also a guard-branch acceleration bound.
+phase-cosine acceleration bound is also a guard-branch acceleration bound. For a tied
+guard, the same coordinate bounds control every finite active branch, although a
+uniform lower directional-cone theorem is still missing.
 
 Thus the upper-bound half of the local hybrid event theorem is established.
 
@@ -179,22 +232,37 @@ proved specifically for the declared public-seed witness crossings.
 
 ## Exact remaining hybrid theorem
 
-The hybrid lane is reduced to proving that every satisfiable public formula and every
-declared presentation gauge has a public-seed event by polynomial time with
+The hybrid lane has two sufficient geometric routes.
+
+### Simple-event route
+
+For every satisfiable public formula and every declared presentation gauge, prove a
+public-seed event by polynomial time with
 
 ```text
 transverse guard speed kappa >= 1/poly(|F|)
 active-set gap Delta >= 1/poly(|F|).
 ```
 
-The established polynomial speed and acceleration upper bounds would then transfer these
-lower bounds into inverse-polynomial event margin and dwell time.
+### Nonsmooth-cone route
+
+Allow ties, but prove for an inverse-polynomial interval after entry that
+
+```text
+lower directional guard speed >= 1/poly(|F|)
+```
+
+uniformly over every active min/max branch that can control the trajectory.
+
+The established polynomial speed and acceleration upper bounds would then transfer
+either lower-bound route into inverse-polynomial event margin and dwell time.
 
 Still separate:
 
 ```text
+polynomial first-passage time
 polynomial event-location simulation
-fail-closed handling of nonsmooth or grazing events
+fail-closed handling of unresolved grazing events
 recorder write and readout cost
 native restoration of event history
 P = NP.
