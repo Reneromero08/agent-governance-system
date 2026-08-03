@@ -1,0 +1,86 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 158,
+  "scientific_source_head": "d1ceb668d81b4de00e439f51aa032d97c4dd5e4c",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "carrier_restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_classification": "NO_RESTORATION_CLAIM",
+  "artifacts": {
+    "production_source": {
+      "path": "f103_c102_dual_register_quadratic_phase_shear_relation_no_go.py",
+      "sha256": "29b0333cd9236236fad04fa7df8f6dc42851c47c69e89a61a57c843157e0eb69"
+    },
+    "oracle_source": {
+      "path": "f103_c102_dual_register_quadratic_phase_shear_relation_no_go_oracle.py",
+      "sha256": "176a0f05528c52178455945982224df5aef620b39b022a16643f6f72d2b88c5f"
+    },
+    "production_result": {
+      "path": "F103_C102_DUAL_REGISTER_QUADRATIC_PHASE_SHEAR_RELATION_NO_GO_RESULTS.json",
+      "sha256": "5ad41c9dd30371470ab9369043c3e148d1e6cada345adcf7c010e1c006194c8a"
+    },
+    "oracle_result": {
+      "path": "F103_C102_DUAL_REGISTER_QUADRATIC_PHASE_SHEAR_RELATION_NO_GO_ORACLE_RESULTS.json",
+      "sha256": "6f3ba0a4b875f817867007baa29c0147d92e771241da53129f688e9eda11cb7d"
+    },
+    "qualifier": {
+      "path": "qualify_f103_c102_dual_register_quadratic_phase_shear_relation_no_go.sh",
+      "sha256": "cb82bf78ede67e540b3e0a7ad6b4c97dde10c1a944c8202bb17e3c3a2daddda3"
+    },
+    "review": {
+      "path": "F103_C102_DUAL_REGISTER_QUADRATIC_PHASE_SHEAR_RELATION_NO_GO_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "a41aa50cf1f7d5348d6fad7c4b00c83ae4a0c1e9919a726f9251b54417c01aed"
+    }
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_F103_C102_DUAL_REGISTER_QUADRATIC_PHASE_SHEAR_RELATION_NO_GO_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m158-qualifier-SjiWN7"
+  },
+  "independent_oracle": {
+    "imports_production_module": false,
+    "imports_numpy": false,
+    "reuses_prior_independent_m157_scalar_reference": true,
+    "case_count": 12,
+    "comparison_count": 97,
+    "exact_inverse_cases": 12,
+    "reconstructs_dual_register_coefficients": true,
+    "reconstructs_quadratic_shear_and_inverse": true,
+    "reconstructs_single_character_collision": true,
+    "reconstructs_character_coupling_support": true,
+    "reconstructs_boundary_character_evaluation": true
+  },
+  "resource_law": {
+    "two_register_cells_per_node": "204N2",
+    "complete_nine_node_carrier_cells": "1836N2",
+    "complete_carrier_cells_by_interface": {
+      "5": 45900,
+      "7": 89964
+    },
+    "matched_identical_classical_complete_carrier_cells": "1836N2",
+    "phase_to_matched_classical_payload_ratio": 1,
+    "production_operation_totals_independently_recounted": false,
+    "numpy_physical_transient_peak_bytes_measured": false,
+    "python_numpy_runtime_exclusions_independently_recounted": false
+  },
+  "claim_ceiling": "F103_C102_DUAL_REGISTER_QUADRATIC_SHEAR_ON_DECLARED_C5_C7_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH4_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "SINGLE_CHARACTER_EVALUATION_QUOTIENT_IS_REJECTED_BY_AN_EXPLICIT_COLLISION",
+    "ONE_SHEAR_QUADRATIC_OBSERVABLE_HAS_EXACT_HESSIAN_RANK102",
+    "EACH_OF_ALL102_INPUT_CHARACTERS_CAN_INFLUENCE_EACH_OUTPUT_CHARACTER_THROUGH_A_COMPANION_CHARACTER",
+    "EXACT_COEFFICIENT_CARRIER_RESTORATION_AND_SAME_BACKING_REUSE",
+    "INDEPENDENT_SCALAR_BOUNDARY_AND_INVERSE_PARITY"
+  ],
+  "rejected_interpretations": [
+    "DENSE102_SUPPORT_MULTIPLIER_TRANSFORM",
+    "SUB102_LINEAR_OBSERVABLE_QUOTIENT_FOR_ARBITRARY_SOURCE_POLYNOMIALS",
+    "SHARED_LATENT_PORT_WITH_MULTIPLE_CONSUMERS",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_COMPUTATION"
+  ]
+}

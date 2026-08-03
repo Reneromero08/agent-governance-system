@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F103_UNRESOLVED_C102_GROUP_ALGEBRA_SUPERPOSITION_RELATION_NO_GO`
-**Roadmap version:** `14.23`
+**Status:** `STRICT_SCOPE_F103_C102_DUAL_REGISTER_QUADRATIC_PHASE_SHEAR_RELATION_NO_GO`
+**Roadmap version:** `14.24`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `08ff1d24e56d1c68559b100118d1e3ba3286dbda`
+**Reconciled source head:** `d1ceb668d81b4de00e439f51aa032d97c4dd5e4c`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F103_UNRESOLVED_C102_GROUP_ALGEBRA_PHASE_SUPERPOSITION_OPEN_RELATION_COMPOSITION_ELIMINATES_INTERMEDIATE_LOG_RECHARTING_AND_DEFERS_EVALUATION_TO_THE_FINAL_BOUNDARY_ON_C5_C7_C11_C17_WITH_EXACT_COEFFICIENT_CARRIER_RESTORATION_AND_REUSE_BUT_THE_CANONICAL_CARRIER_IS102X_THE_DENSE_F103_QUOTIENT_AND_THE_COMPACT_EXPRESSION_DAG_RETAINS_GROWING_PREDECESSOR_HISTORY_WHILE_THE_EVALUATION_QUOTIENT_IS_THE_IDENTICAL_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `F103_C102_GROUP_ALGEBRA_AND_HASH_CONSED_EXPRESSION_DAG_ON_DECLARED_C5_C7_C11_C17_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH4_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_F103_C102_DUAL_REGISTER_COEFFICIENTWISE_QUADRATIC_PHASE_SHEAR_OPEN_RELATION_COMPOSITION_BREAKS_THE_SINGLE_CHARACTER_EVALUATION_QUOTIENT_COUPLES_ALL102_CHARACTER_SECTORS_AND_HAS_FULL_RANK102_ONE_SHEAR_QUADRATIC_OBSERVABLE_ON_C5_C7_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_ACCEPTED_CARRIER_AND_STRONGEST_MATCHED_CLASSICAL_RECURRENCE_BOTH_RETAIN_THE_IDENTICAL204N2_FIELD_COORDINATES_PER_NODE_AND1836N2_TOTAL_NINE_NODE_PAYLOAD`
+**Current claim ceiling:** `F103_C102_DUAL_REGISTER_QUADRATIC_SHEAR_ON_DECLARED_C5_C7_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH4_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M157_F103_UNRESOLVED_C102_GROUP_ALGEBRA_SUPERPOSITION_RELATION_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M158_F103_C102_DUAL_REGISTER_QUADRATIC_PHASE_SHEAR_RELATION_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_C102_DUAL_REGISTER_COEFFICIENTWISE_QUADRATIC_PHASE_SHEAR_OPEN_RELATION_COMPOSITION_BREAKS_SINGLE_CHARACTER_EVALUATION_QUOTIENT_OR_FULL102_CHARACTER_NO_GO`
+**Active primary successor:** `EXACT_F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN_RANK_OR_COMPACT_NONLINEAR_PHASE_QUOTIENT_ON_DUAL_REGISTER_SHEAR_CARRIER`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`08ff1d24e56d1c68559b100118d1e3ba3286dbda`. The current 157-milestone
+`d1ceb668d81b4de00e439f51aa032d97c4dd5e4c`. The current 158-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -6774,6 +6774,57 @@ M157 establishes no CATVM custody, compact or fixed-rank group-algebra closure,
 distinct phase resource, computational advantage, Small Wall crossing,
 physical execution, physical bit replacement, arbitrary topology, or
 unbounded catalytic computation.
+
+## M158: nonlinear shear breaks the one-character quotient but not the classical match
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C102_DUAL_REGISTER_COEFFICIENTWISE_QUADRATIC_PHASE_SHEAR_OPEN_RELATION_COMPOSITION_BREAKS_THE_SINGLE_CHARACTER_EVALUATION_QUOTIENT_COUPLES_ALL102_CHARACTER_SECTORS_AND_HAS_FULL_RANK102_ONE_SHEAR_QUADRATIC_OBSERVABLE_ON_C5_C7_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_ACCEPTED_CARRIER_AND_STRONGEST_MATCHED_CLASSICAL_RECURRENCE_BOTH_RETAIN_THE_IDENTICAL204N2_FIELD_COORDINATES_PER_NODE_AND1836N2_TOTAL_NINE_NODE_PAYLOAD
+```
+
+M158 changes the phase machine rather than extending M157's linear fixtures.
+A second unresolved `F103[C102]` register receives the reversible
+coefficientwise shear `B[e] <- B[e] + gamma[e] A[e]^2`. This operation is a
+quadratic convolution in the character chart. Its multiplier transform has
+support 51, not 102, but every input character can influence every output
+character through at least one companion character.
+
+An explicit exact collision proves that evaluation at `t=5` is no longer a
+congruence: `A=1` and `A=1+(t-5)` have the same pre-shear evaluation and
+different post-shear B boundaries. The one-shear arbitrary-source observable
+has 102 nonzero Hessian diagonal entries, establishing a 102-dimensional
+lower bound only for linear sketches in that strict scope. It does not rule
+out a structured nonlinear quotient for the actually reachable continuation
+family.
+
+The result covers 12 cases across C5 and C7, two public families, and depths
+1, 2, and 4. The exact borrowed coefficient carrier restores on the same
+backing without history or snapshot and passes unrelated-program and eight-
+cycle reuse. The complete nine-node payload is `1836n^2` F103 cells: 45,900
+at C5 and 89,964 at C7. `204n^2` is only the per-node two-register count. The
+strongest matched classical method is the identical coefficient recurrence
+with the same full payload.
+
+The scalar oracle imports neither M158 production nor NumPy and passes 97
+exact comparisons, including all 12 forward commitments, boundaries, and
+inverses. NumPy backing identity, production counters, the production
+full-character path, direct-process custody controls, and physical transient
+peak bytes remain package-local. This package establishes no shared latent
+port with multiple consumers and no CATVM custody.
+
+The next bounded diagnostic targets the remaining logical gap rather than
+adding width or depth:
+
+```text
+EXACT_F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN_RANK_OR_COMPACT_NONLINEAR_PHASE_QUOTIENT_ON_DUAL_REGISTER_SHEAR_CARRIER
+```
+
+It must test the actual public continuation family, not arbitrary unrelated
+quadratic forms, and either construct a compact nonlinear phase chart or
+certify the local observable dimension that blocks it. M158 establishes no
+distinct phase resource, computational advantage, Small Wall crossing,
+physical execution, physical bit replacement, or unbounded computation.
 
 ## 10. Roadmap Maintenance
 

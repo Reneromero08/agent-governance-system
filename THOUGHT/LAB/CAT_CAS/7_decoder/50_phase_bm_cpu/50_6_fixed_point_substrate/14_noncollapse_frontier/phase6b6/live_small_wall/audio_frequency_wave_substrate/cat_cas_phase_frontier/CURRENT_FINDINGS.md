@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`466557668e8ea4497f58794591291990048d3964`. The canonical per-milestone
+`d1ceb668d81b4de00e439f51aa032d97c4dd5e4c`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9075,3 +9075,45 @@ group-algebra registers to break that single-character quotient and measure
 the resulting minimal observable state. M157 establishes no CATVM custody,
 distinct phase resource, advantage, Small Wall crossing, physical execution,
 physical bit replacement, or unbounded computation.
+
+## M158: quadratic cross-character coupling rejects the old quotient
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C102_DUAL_REGISTER_COEFFICIENTWISE_QUADRATIC_PHASE_SHEAR_OPEN_RELATION_COMPOSITION_BREAKS_THE_SINGLE_CHARACTER_EVALUATION_QUOTIENT_COUPLES_ALL102_CHARACTER_SECTORS_AND_HAS_FULL_RANK102_ONE_SHEAR_QUADRATIC_OBSERVABLE_ON_C5_C7_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_ACCEPTED_CARRIER_AND_STRONGEST_MATCHED_CLASSICAL_RECURRENCE_BOTH_RETAIN_THE_IDENTICAL204N2_FIELD_COORDINATES_PER_NODE_AND1836N2_TOTAL_NINE_NODE_PAYLOAD
+```
+
+M158 adds a second exact `F103[C102]` register and the reversible native shear
+`B[e] <- B[e] + gamma[e] A[e]^2`. An explicit pair of A polynomials agrees at
+`t=5` before the shear and yields different B evaluations afterward, so the
+M157 single-character quotient is not lawful for the new machine. The public
+multiplier transform has exact support 51 rather than a falsely dense 102,
+while its quadratic dependency law still lets every input character affect
+every output character through some companion character.
+
+The one-shear boundary quadratic form has exact Hessian rank 102 on arbitrary
+source polynomials. This rejects sub-102 linear observable sketches only in
+that scope. It does not reject a nonlinear quotient adapted to the reachable
+public continuation family.
+
+All 12 C5/C7, primary/alternate, depth 1/2/4 cases restore the two-register
+coefficient carrier exactly on the same backing. Unrelated-program reuse and
+eight repeated cycles match fresh execution without snapshot or retained
+inverse history. The full nine-node carrier has `1836n^2` F103 cells (45,900
+at C5 and 89,964 at C7); `204n^2` is the per-node count. The strongest matched
+classical method is the identical coefficient recurrence, so the payload ratio
+is exactly 1.
+
+An independent scalar oracle reuses only the already qualified M157 scalar
+linear reference, imports neither M158 production nor NumPy, and passes 97
+comparisons with exact inverse in all 12 cases. Production backing identity,
+operation counters, full-character implementation path, direct-process
+custody, and unmeasured NumPy physical transient peaks remain package-local.
+
+The next test is the exact public-continuation observability Jacobian. It must
+either expose a compact nonlinear phase quotient for reachable states or
+certify the local observable dimension that prevents one. M158 establishes no
+shared multi-consumer latent port, CATVM custody, distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+or unbounded computation.
