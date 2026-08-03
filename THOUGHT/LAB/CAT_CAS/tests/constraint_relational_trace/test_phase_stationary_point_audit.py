@@ -38,10 +38,22 @@ def test_satisfiable_relation_has_non_solution_stationary_carrier_state() -> Non
     )
 
 
-def test_public_low_discrepancy_seed_escapes_exact_symmetry_manifold() -> None:
+def test_stationary_obstruction_has_exact_positive_phase_eigenvalue() -> None:
+    audit = audit_symmetric_sat_stationary_point()
+
+    assert audit.phase_tangent_trace < 0.0
+    assert audit.phase_tangent_determinant < 0.0
+    assert audit.phase_positive_eigenvalue > 0.0
+    assert audit.stationary_point_has_phase_saddle
+    assert audit.phase_tangent_jacobian[0][1] == audit.phase_tangent_jacobian[1][0]
+
+
+def test_public_low_discrepancy_seed_is_already_witness_for_obstruction_formula() -> None:
     holo = symmetric_sat_stationary_holo()
     stationary_state = symmetric_non_solution_stationary_state(holo)
     public_seed = public_phase_selector_initial_state(holo)
+    public_assignment = phase_threshold_assignment(holo, public_seed)
+    audit = audit_symmetric_sat_stationary_point()
 
     assert polynomial_phase_selector_flow_derivative(
         holo,
@@ -52,3 +64,11 @@ def test_public_low_discrepancy_seed_escapes_exact_symmetry_manifold() -> None:
         public_seed,
     ).max_abs() > 0.0
     assert not holo.accepts(phase_threshold_assignment(holo, stationary_state))
+    assert public_assignment == {"x": True, "y": False}
+    assert holo.accepts(public_assignment)
+    assert audit.public_seed_threshold_is_witness
+    assert audit.all_two_variable_renaming_gauges_seed_satisfy
+    assert audit.public_seed_convergence_status == (
+        "PUBLIC_SEED_ALREADY_TERMINAL_WITNESS_ON_THIS_OBSTRUCTION_FORMULA__"
+        "GLOBAL_PUBLIC_SEED_THEOREM_UNRESOLVED"
+    )
