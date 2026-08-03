@@ -1,0 +1,948 @@
+{
+  "claim_ceiling": "DECLARED_K4_TO128_SINGLE_INVOLUTIVE_RANK1_TO_RANK2_SECANT_COUPLING_WITH_TWO_FIXED_NONCOMMUTING_CONSUMER_MODULES_EXACT_Q_ZETA17_K4_TO32_DUAL_FIELD_K4_TO128_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "compiled_four_dynamic_scalar_baseline_checks": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 4,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 8,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 16,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 32,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 4,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 8,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 16,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 32,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 64,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 128,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 4,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 8,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 16,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 32,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 64,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "folded_endpoint_commitment_agreement": true,
+      "k": 128,
+      "maximum_record_json_bytes_agreement": true,
+      "retained_folded_endpoint_field_cells_agreement": true,
+      "total_compiled_warm_field_cells_agreement": true
+    }
+  ],
+  "full_occupation_oracle_cases": [
+    {
+      "algebra": "Q_ZETA17",
+      "chart_forward_inverse_restored": true,
+      "dense_forward_inverse_restored": true,
+      "forward_boundary_agreement": true,
+      "forward_full_occupation_secant_agreement": true,
+      "initial_coupling_full_occupation_agreement": true,
+      "k": 4,
+      "occupation_dimension": 4845,
+      "oracle_full_occupation_vector_field_cells": 4845,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            16,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "algebra": "F103",
+      "chart_forward_inverse_restored": true,
+      "dense_forward_inverse_restored": true,
+      "forward_boundary_agreement": true,
+      "forward_full_occupation_secant_agreement": true,
+      "initial_coupling_full_occupation_agreement": true,
+      "k": 4,
+      "occupation_dimension": 4845,
+      "oracle_full_occupation_vector_field_cells": 4845,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 28
+      }
+    },
+    {
+      "algebra": "F137",
+      "chart_forward_inverse_restored": true,
+      "dense_forward_inverse_restored": true,
+      "forward_boundary_agreement": true,
+      "forward_full_occupation_secant_agreement": true,
+      "initial_coupling_full_occupation_agreement": true,
+      "k": 4,
+      "occupation_dimension": 4845,
+      "oracle_full_occupation_vector_field_cells": 4845,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 50
+      }
+    }
+  ],
+  "independent_methods": [
+    "SEPARATE_PUBLIC_PROGRAM_COMPILER",
+    "SEPARATE_INVOLUTIVE_COUPLING_AND_TWO_COMPONENT_CHART",
+    "FULL_H4_4845_COORDINATE_OCCUPATION_REEXECUTION_IN_THREE_ALGEBRAS",
+    "INDEPENDENT_FIRST_DERIVATIVE_RANK_TWO_CERTIFICATE",
+    "SEPARATE_EXACT_FORWARD_INVERSE_AND_DUPLICATE_MERGE",
+    "SEPARATE_COMPILED_FOUR_TOTAL_FOLDED_ENDPOINT_SCALAR_BASELINE",
+    "SECOND_GENERIC_COUPLING_FOUR_GENERATED_TERM_MUTATION_WITHOUT_MINIMAL_RANK_CLAIM"
+  ],
+  "independent_mutation_checks": {
+    "coupling_omission_changes_boundary": true,
+    "eta_plus_or_minus_one_inverse_singular": true,
+    "k_one_excluded_from_declared_program_domain": true,
+    "missing_inverse_leaves_nonseed_state": true,
+    "module_order_changes_boundary": true,
+    "rank_one_seed_to_rank_two_to_rank_one": true,
+    "second_generic_coupling_generates_four_distinct_terms": true,
+    "second_generic_coupling_minimal_secant_rank_established": false,
+    "second_generic_coupling_observed_generated_term_count": 4,
+    "wrong_coupling_inverse_rejected_by_seed_equality": true
+  },
+  "matched_baseline": {
+    "descriptor_runtime": "IDENTICAL_TWO_COMPONENT_36_FIELD_CELL_RECURRENCE",
+    "phase_advantage_over_matched_classical": false,
+    "strongest_sealed_fixture_warm": "FOUR_TOTAL_FOLDED_ENDPOINT_SCALARS"
+  },
+  "production_claim": "BOUNDED_EXACT_F17_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_EXPANDS_ONE_RANK1_VERONESE_PHASE_STATE_TO_A_RANK2_SECANT_SHARED_BY_TWO_NONCOMMUTING_MODULES_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_A_COMPILED_FOUR_DYNAMIC_SCALAR_CLASSICAL_RECURRENCE",
+  "production_schema": "CAT_CAS_F17_COHERENT_RANK2_SECANT_PHASE_COUPLING_CLOSURE_V1",
+  "rejected_interpretations": [
+    "REPEATED_COUPLING_FIXED_RANK_CLOSURE",
+    "M127_GRID_ORBIT_SHEAR_CLOSURE",
+    "ARBITRARY_SECANT_INPUT_CLOSURE",
+    "GENERAL_GAUSSIAN_CLOSURE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_EXECUTION_OR_BIT_REPLACEMENT",
+    "UNBOUNDED_COMPUTATION"
+  ],
+  "resource_law": {
+    "accepted_path_occupation_or_assignment_expansion_cells": 0,
+    "accepted_path_resident_field_cells": 36,
+    "exact_payload_height_tuples_independently_reexecuted": false,
+    "full_exact_bit_complexity_established": false,
+    "inverse_coupling_bounded_transient_field_cells": 72,
+    "oracle_full_occupation_field_cells_per_full_case": 4845,
+    "oracle_full_occupation_vectors_are_verification_only": true
+  },
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F17_COHERENT_RANK2_SECANT_PHASE_COUPLING_CLOSURE_ORACLE_V1",
+  "transaction_parity": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 4,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            16,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 8,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            64,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 16,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            256,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 32,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1024,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 4,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 28
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 8,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 9
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 16,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 36
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 32,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 41
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 64,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 61
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 128,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 38
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 4,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 50
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 8,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 63
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 16,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 115
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 32,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 49
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 64,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 59
+      },
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "algebra_signature_agreement": true,
+      "boundary_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "family": "PRIMARY",
+      "forward_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "independent_rank_two_certificate_nonzero": true,
+      "inverse_transient_field_cells_agreement": true,
+      "k": 128,
+      "maximum_commitment_record_bound_honest": true,
+      "program_fingerprint_agreement": true,
+      "rank_two_derivative_certificate": {
+        "certificate": "INDEPENDENT_FIRST_DERIVATIVE_TWO_BY_TWO_MINOR",
+        "nonzero": true,
+        "serialized_minor": 99
+      },
+      "resident_field_cells_agreement": true
+    }
+  ],
+  "transient_restoration_class": "NO_RESTORATION_CLAIM",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
