@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "grant_id": "family10h_i2g_read_only_inventory_grant_20260803",
+  "granted_at": "2026-08-03T00:28:00-07:00",
+  "grant_source": "explicit user message: Authorized.",
+  "scope": {
+    "target_contact_authorized": true,
+    "read_only_target_inventory_authorized": true,
+    "scientific_acquisition_authorized": false,
+    "pmu_counter_open_authorized": false,
+    "target_write_authorized": false,
+    "carrier_allocation_or_mutation_authorized": false,
+    "backend_compile_or_execution_authorized": false,
+    "live_experiment_authorized": false
+  },
+  "target": {
+    "expected_hostname": "catcas",
+    "address": "192.168.137.100",
+    "user": "root",
+    "expected_cpu": "AMD Phenom II X6 1090T, Family 10h",
+    "access_method": "SSH over the previously used direct LAN/ICS route",
+    "ssh_endpoint": "root@192.168.137.100",
+    "remote_read_root": "/root/catcas_live_small_wall",
+    "credentials_recorded_in_repository": false
+  },
+  "allowlist": {
+    "path": "I2G_READ_ONLY_COMMAND_ALLOWLIST_V1.md",
+    "identity_algorithm": "git-blob-sha1",
+    "identity": "844d8abb1eaf32718b51dcbd0decf01d60afddb7",
+    "command_count": 20,
+    "execute_individually": true,
+    "copy_remote_script": false
+  },
+  "output": {
+    "destination": "target_inventory/I2G_TARGET_INVENTORY_RECEIPT.json",
+    "capture_location": "client side only",
+    "inventory_receipt_id_required": true,
+    "raw_command_receipts_required": true
+  },
+  "cleanup_law": {
+    "remote_files_created": 0,
+    "remote_files_modified": 0,
+    "remote_cleanup_required": false,
+    "session_rule": "Close each read-only SSH command after stdout, stderr, exit status, and command identity are captured client-side.",
+    "hard_fail": "Any unallowlisted command, target write attempt, PMU acquisition, affinity mutation, backend execution, or unexpected remote artifact terminates the inventory."
+  },
+  "initial_reachability_probe": {
+    "performed_after_grant": true,
+    "probe": "TCP connect to 192.168.137.100:22 from the current ChatGPT execution environment",
+    "result": "CONNECTION_REFUSED",
+    "ssh_session_established": false,
+    "inventory_command_executed": false,
+    "target_write_attempt_count": 0,
+    "scientific_measurement_count": 0,
+    "interpretation": "The current ChatGPT execution environment cannot reach the previously used local SSH route. This does not revoke the grant and does not authorize a different access route."
+  },
+  "decision": {
+    "authority_grant_record_complete": true,
+    "read_only_inventory_authorized": true,
+    "inventory_acquired": false,
+    "inventory_blocked_on_reachable_local_execution_route": true,
+    "physical_package_freeze_ready": false,
+    "next_gate": "I2G_REACHABLE_LOCAL_SSH_ROUTE_REQUIRED",
+    "live_execution_authorized": false
+  },
+  "claim_ceiling": [
+    "READ_ONLY_TARGET_INVENTORY_AUTHORIZED",
+    "TARGET_INVENTORY_NOT_ACQUIRED",
+    "CURRENT_EXECUTION_ENVIRONMENT_CANNOT_REACH_TARGET_SSH",
+    "PHYSICAL_PACKAGE_NOT_FREEZE_READY",
+    "FAMILY10H_TRANSPORT_OPERATOR_NOT_ESTABLISHED",
+    "FAMILY10H_HOLONOMY_NOT_ESTABLISHED",
+    "SMALL_WALL_NOT_CROSSED",
+    "NO_LIVE_EXPERIMENT_AUTHORIZED"
+  ]
+}
