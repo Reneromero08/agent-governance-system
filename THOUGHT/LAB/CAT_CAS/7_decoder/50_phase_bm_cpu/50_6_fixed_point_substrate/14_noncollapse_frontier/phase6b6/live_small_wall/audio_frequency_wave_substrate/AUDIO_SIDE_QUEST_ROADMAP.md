@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_COHERENT_SHARED_LATENT_BASIS_MISMATCH_CLOSURE_FIXED17_CLASSICAL_DIRECT_SUM_NEXT_GROWING_LATENT_GEOMETRY_SELECTED`
-**Roadmap version:** `13.2`
+**Status:** `STRICT_SCOPE_GROWING_EXCHANGE_SYMMETRIC_LATENT_GEOMETRY_HK_RANK_AND_HEIGHT_OBSTRUCTION_NEXT_EXACT_RANK_REDUCTION_SELECTED`
+**Roadmap version:** `13.3`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `16ad7bec40126f9b60531225135f78c2bc3ac111`
+**Reconciled source head:** `8d0c04b02460d1f7b5e37c03183cd6c4c77addbc`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_COHERENT_SHARED_F17_LATENT_PHASE_PORT_CONTROLS_TWO_GRID_WIDE_BASIS_MISMATCH_MODULES_SEPARATED_BY_NONCOMMUTING_FOURIER_AND_CHIRP_UPDATES_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_IDENTICAL_34_COORDINATE_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `EVEN_OPEN_SQUARE_GRIDS_ONLY_EXACT_Q_ZETA17_N2_N4_N6_DUAL_FIELD_STRUCTURE_N2_TO_N10_FIXED17_SHARED_LATENT_PORT_TWO_GRID_WIDE_CONSUMERS_FINAL_ONLY_PROJECTION_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_GROWING_EXCHANGE_SYMMETRIC_F17_LATENT_GEOMETRY_USES_DEGREE_K_OCCUPATION_ORBITS_WITH_EXACT_LIFTED_FOURIER_NON_SUM_ONLY_POWER_SUM_GRID_CONTROLS_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_CLASSICAL_ORBIT_RECURRENCE`
+**Current claim ceiling:** `GRID_N4_ONLY_EXCHANGE_SYMMETRIC_K1_TO_K4_EXACT_Q_ZETA17_K1_K2_DUAL_FIELD_K1_TO_K4_TWO_ORBIT_VECTORS_FINAL_ONLY_PROJECTION_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M126_COHERENT_SHARED_LATENT_BASIS_MISMATCH_CLOSURE_AND_FIXED17_CLASSICAL_DIRECT_SUM_COLLAPSE`
+**New mechanism development:** `ACTIVE_AFTER_M127_EXCHANGE_SYMMETRIC_LATENT_GEOMETRY_ORBIT_RANK_AND_HEIGHT_OBSTRUCTION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `GROWING_SHARED_LATENT_PHASE_GEOMETRY_WITH_NATIVE_CONVOLUTION_OR_EXACT_RANK_REDUCTION_AGAINST_THE_STRONGEST_GROUP_ALGEBRA_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_RELATION_PRESERVING_RANK_REDUCTION_OR_NATIVE_PHASE_CONVOLUTION_ACROSS_GROWING_EXCHANGE_SYMMETRIC_DEGREE_WITHOUT_MOVING_H_K_GROWTH_INTO_PRECISION_OR_HISTORY`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`16ad7bec40126f9b60531225135f78c2bc3ac111`. The current 126-milestone
+`8d0c04b02460d1f7b5e37c03183cd6c4c77addbc`. The current 127-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4486,6 +4486,68 @@ The surviving obstruction is:
 COHERENCE_DEPENDENT_BASIS_CONTROL_AVOIDS_ONE_PUBLIC_SCALAR_CANCELLATION_BUT_A_FIXED17_STATE_LATENT_PORT_IS_THE_IDENTICAL_CLASSICAL_DIRECT_SUM_SO_THE_NEXT_ROUTE_MUST_GROW_OR_CLOSE_LATENT_GEOMETRY_WITHOUT_GROWING_CLASSICAL_SECTOR_RANK
 ```
 
+### 6.127 Exchange-symmetric growing latent geometry
+
+M127 replaces the fixed 17-coordinate direct sum with the declared
+exchange-symmetric degree-`k` sector. Its exact occupation-orbit carrier has
+
+```text
+H(k) = binomial(k+16,16) = 17,153,969,4845 for k=1,2,3,4.
+```
+
+The public DFT17 is compiled to 289 elementary operations and lifted through
+streamed occupation blocks of at most `k+1` coefficients. Two grid-wide
+modules consume the same unresolved orbit geometry through non-sum-only power
+sums, separated by exact lifted Fourier and symmetric-chirp updates.
+
+```text
+classification                   INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                     INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration     EXACT_ALGEBRAIC_RESTORATION
+transient compiler/grid buffers  NO_RESTORATION_CLAIM
+source head                      8d0c04b02460d1f7b5e37c03183cd6c4c77addbc
+hosted run                       NOT ESTABLISHED
+```
+
+Only the final orbit scalar is projected. Actual reverse execution
+rematerializes both grid closures, reverses both lifted transforms and the
+chirp, restores exact zero on the same backing, advances the restoration
+generation, and supports unrelated fresh/restored reuse without a snapshot or
+retained inverse history.
+
+An independent labelled `17^k` tensor oracle reproduces every sealed boundary
+and exact inverse. Separate deterministic symmetric-vector checks reproduce
+the streamed lifted DFT17 at `k=1,2,3`; exhaustive histogram checks confirm
+that `p1,...,pk` identify the declared multisets for `k<17`, while `p1` alone
+overmerges every tested `k>=2` sector. Exchange symmetry is required: M127
+does not compress the original labelled open-chain family.
+
+Production stores two `H(k)` orbit vectors plus 48 grid-weight cells. It
+retains 578 forward-plus-inverse plan coefficients and reports public
+topology, compiler peak, transaction transient, projection, exact resident
+payload, restoration, verification, and reuse. At exact `Q(zeta17)` scope,
+PRIMARY resident payload grows from 5,637 bits at `k=1` to 66,389 bits at
+`k=2`, while maximum resident numerator width grows from 15 to 28 bits. Python
+and native containers, allocator and bigint internals, full exact bit
+complexity, and whole-process peak remain excluded.
+
+M127 therefore establishes growing exchange-symmetric latent geometry but not
+compact closure across degree. The strongest matched classical method is the
+identical `H(k)`-coordinate orbit recurrence. Both orbit rank and arithmetic
+height remain obstructions; no distinct phase resource or advantage follows.
+
+The selected successor is:
+
+```text
+EXACT_RELATION_PRESERVING_RANK_REDUCTION_OR_NATIVE_PHASE_CONVOLUTION_ACROSS_GROWING_EXCHANGE_SYMMETRIC_DEGREE_WITHOUT_MOVING_H_K_GROWTH_INTO_PRECISION_OR_HISTORY
+```
+
+The surviving obstruction is:
+
+```text
+EXCHANGE_SYMMETRY_REPLACES_LABELLED_17_TO_THE_K_GROWTH_BY_EXACT_H_K_ORBIT_GROWTH_AND_NON_SUM_ONLY_CONTROLS_BUT_THE_RESIDENT_RANK_STILL_GROWS_AS_BINOMIAL_K_PLUS_16_CHOOSE_16_ARITHMETIC_WIDTH_ALSO_GROWS_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_RECURRENCE
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -4523,7 +4585,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_COHERENT_SHARED_F17_LATENT_PHASE_PORT_CONTROLS_TWO_GRID_WIDE_BASIS_MISMATCH_MODULES_SEPARATED_BY_NONCOMMUTING_FOURIER_AND_CHIRP_UPDATES_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_IDENTICAL_34_COORDINATE_CLASSICAL_RECURRENCE
+BOUNDED_EXACT_GROWING_EXCHANGE_SYMMETRIC_F17_LATENT_GEOMETRY_USES_DEGREE_K_OCCUPATION_ORBITS_WITH_EXACT_LIFTED_FOURIER_NON_SUM_ONLY_POWER_SUM_GRID_CONTROLS_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_CLASSICAL_ORBIT_RECURRENCE
 ```
 
 Not established:
@@ -4617,6 +4679,11 @@ arbitrary latent geometry or planar Holant closure from M126
 CATVM custody of the M126 direct-process carrier or transient buffers
 distinct phase resource or advantage from the M126 fixed 17-state direct sum
 full exact bit-complexity or whole-process peak accounting for M126
+compression of the original labelled open-chain family from M127
+fixed-rank or fixed-width exact closure across growing exchange-symmetric degree from M127
+CATVM custody of the M127 direct-process carrier, compiler, or transient buffers
+distinct phase resource or advantage from the M127 identical H(k)-coordinate orbit recurrence
+full exact bit-complexity or whole-process peak accounting for M127
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4710,7 +4777,15 @@ matching closures per module. Continue from that fixed-rank collapse into a
 growing shared latent geometry with native convolution or an exact
 relation-preserving rank reduction, keeping the strongest group-algebra
 classical recurrence matched. Do not repeat fixed-17 grid sizes or add more
-fixed-17 consumers unless they directly resolve sector-rank growth.
+fixed-17 consumers unless they directly resolve sector-rank growth. M127 then
+grows the declared latent geometry through the exchange-symmetric degree-`k`
+sector and introduces non-sum-only power-sum controls, but exact state rank is
+still `H(k)=binomial(k+16,16)` and measured exact arithmetic height grows too.
+The strongest compact classical method executes the identical occupation-orbit
+recurrence. Continue with exact relation-preserving rank reduction or a native
+phase convolution that does not relocate `H(k)` growth into coefficient width,
+retained inverse history, compiler state, or hidden enumeration. Do not add
+larger symmetric degrees unless they test a concrete reduction law.
 
 ## 10. Roadmap Maintenance
 

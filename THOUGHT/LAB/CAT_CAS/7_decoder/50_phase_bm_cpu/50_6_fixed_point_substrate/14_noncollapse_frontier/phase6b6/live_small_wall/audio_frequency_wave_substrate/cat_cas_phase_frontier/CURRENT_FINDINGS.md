@@ -7399,3 +7399,64 @@ The obstruction is:
 ```text
 COHERENCE_DEPENDENT_BASIS_CONTROL_AVOIDS_ONE_PUBLIC_SCALAR_CANCELLATION_BUT_A_FIXED17_STATE_LATENT_PORT_IS_THE_IDENTICAL_CLASSICAL_DIRECT_SUM_SO_THE_NEXT_ROUTE_MUST_GROW_OR_CLOSE_LATENT_GEOMETRY_WITHOUT_GROWING_CLASSICAL_SECTOR_RANK
 ```
+
+## Exchange symmetry grows latent geometry but does not close its rank
+
+M127 replaces the fixed 17-state direct sum with the degree-`k`
+exchange-symmetric sector. The accepted carrier uses exact occupation orbits
+of dimension
+
+```text
+H(k) = binomial(k+16,16) = 17,153,969,4845 for k=1,2,3,4.
+```
+
+```text
+classification                   INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                     INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration     EXACT_ALGEBRAIC_RESTORATION
+transient compiler/grid buffers  NO_RESTORATION_CLAIM
+source head                      8d0c04b02460d1f7b5e37c03183cd6c4c77addbc
+hosted run                       NOT ESTABLISHED
+```
+
+The exact public DFT17 plan is lifted through streamed occupation blocks.
+Two grid-wide modules consume the unresolved orbit geometry through
+non-sum-only power sums, with exact lifted Fourier and chirp updates between
+them. Production projects only one final scalar and materializes no labelled
+`17^k` tensor, dense `H(k) x H(k)` operator, orbit-boundary vector,
+assignment table, relation table, or inverse history.
+
+Independent labelled-tensor and row-profile recurrences reproduce every
+sealed boundary and exact reverse. Deterministic symmetric-vector tests also
+reproduce the lifted DFT17, and exhaustive controls confirm that `p1,...,pk`
+identify the declared multisets while `p1` alone overmerges at `k>=2`.
+Exchange symmetry is essential; the result does not compress the original
+labelled open-chain family.
+
+The same backing restores to exact zero, advances its restoration generation,
+and supports unrelated fresh/restored reuse without snapshot reload. Named
+resources include two `H(k)` resident vectors plus 48 grid weights, 578
+retained plan coefficients, `18H(k)` public topology integers, 1,496 compiler
+field cells, 133 transaction transient field cells, and 48 transaction
+transient integers. Full exact bit complexity and whole-process memory remain
+excluded.
+
+Exact PRIMARY resident payload rises from 5,637 bits at `k=1` to 66,389 bits
+at `k=2`, with maximum resident numerator width rising from 15 to 28 bits.
+The strongest compact classical method executes the identical `H(k)` orbit
+recurrence. Thus both orbit rank and arithmetic height remain obstructions;
+no distinct phase resource, advantage, Small Wall crossing, CATVM custody,
+physical waveform execution, physical bit replacement, or unbounded
+computation is established.
+
+The selected successor is:
+
+```text
+EXACT_RELATION_PRESERVING_RANK_REDUCTION_OR_NATIVE_PHASE_CONVOLUTION_ACROSS_GROWING_EXCHANGE_SYMMETRIC_DEGREE_WITHOUT_MOVING_H_K_GROWTH_INTO_PRECISION_OR_HISTORY
+```
+
+The obstruction is:
+
+```text
+EXCHANGE_SYMMETRY_REPLACES_LABELLED_17_TO_THE_K_GROWTH_BY_EXACT_H_K_ORBIT_GROWTH_AND_NON_SUM_ONLY_CONTROLS_BUT_THE_RESIDENT_RANK_STILL_GROWS_AS_BINOMIAL_K_PLUS_16_CHOOSE_16_ARITHMETIC_WIDTH_ALSO_GROWS_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_RECURRENCE
+```

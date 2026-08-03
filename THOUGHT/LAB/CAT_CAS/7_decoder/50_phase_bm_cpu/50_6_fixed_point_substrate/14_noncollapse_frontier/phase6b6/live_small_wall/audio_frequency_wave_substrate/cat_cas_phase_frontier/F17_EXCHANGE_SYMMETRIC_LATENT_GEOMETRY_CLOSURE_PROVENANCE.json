@@ -1,0 +1,87 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "8d0c04b02460d1f7b5e37c03183cd6c4c77addbc",
+  "scientific_source_parent": "69cd97740f3bea79d1afa04c194608b08ef60dc7",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "68999f32d794f955fad44ad751f922b3999afce96364ddfcfc626bb96271ffe6",
+  "reference_full_oracle_sha256": "c8b64d9c1d269b8305b607dd96bab79229a22b260d29b87b20ffdeedc37da378",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_exchange_symmetric_latent_geometry_closure.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_exchange_symmetric_latent_geometry_closure_oracle.py --production PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_exchange_symmetric_latent_geometry_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_exchange_symmetric_latent_geometry_closure.py": "06d6e615dfe43361c44f3aea223b958997718bf8ac2d6ce33efb402d3baa0175",
+    "f17_exchange_symmetric_latent_geometry_closure_oracle.py": "37aa1275fa7dc2a74165e73891f9285eeec8835739f8774e48988a6bb6874b66",
+    "F17_EXCHANGE_SYMMETRIC_LATENT_GEOMETRY_CLOSURE_RESULTS.json": "68999f32d794f955fad44ad751f922b3999afce96364ddfcfc626bb96271ffe6",
+    "F17_EXCHANGE_SYMMETRIC_LATENT_GEOMETRY_CLOSURE_ORACLE_RESULTS.json": "c8b64d9c1d269b8305b607dd96bab79229a22b260d29b87b20ffdeedc37da378",
+    "F17_EXCHANGE_SYMMETRIC_LATENT_GEOMETRY_CLOSURE_INDEPENDENT_REVIEW.md": "76cc12812b52f4447d9574642e9e858a5aca574eecaebd11abeb7448c3cae440",
+    "qualify_f17_exchange_symmetric_latent_geometry_closure.sh": "d346a48b940af8b950cbd5b66423b76d0e568ef949a6a1d68f5a323bec625677"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "grid_n": 4,
+    "exact_q_zeta17_degrees": [1, 2],
+    "dual_field_degrees": [1, 2, 3, 4],
+    "families": ["PRIMARY", "REUSE"],
+    "occupation_orbit_dimensions": [17, 153, 969, 4845],
+    "independent_methods": [
+      "LABELLED_17_TO_THE_K_TENSOR_RECURRENCE",
+      "ROW_PROFILE_WEIGHTED_MATCHING_RECURRENCE",
+      "DETERMINISTIC_SYMMETRIC_VECTOR_DFT17_PARITY",
+      "EXHAUSTIVE_POWER_SUM_INJECTIVITY_AND_OVERMERGE_CHECKS"
+    ]
+  },
+  "resource_accounting": {
+    "resident_phase_field_cells": "2H_K_PLUS_48",
+    "retained_forward_plus_inverse_plan_field_coefficients": 578,
+    "public_occupation_topology_integer_cells": "18H_K",
+    "public_program_integer_cells": 146,
+    "public_grid_edge_coordinate_integer_cells": 96,
+    "public_grid_vertex_coordinate_integer_cells": 32,
+    "maximum_named_compiler_field_cells": 1496,
+    "maximum_named_transaction_transient_field_cells": 133,
+    "maximum_named_transaction_transient_integer_cells": 48,
+    "final_boundary_payload_and_exact_resident_payload_reported": true,
+    "full_exact_bit_complexity_established": false,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "observed_exact_precision": {
+    "primary_k1_resident_peak_bits": 5637,
+    "primary_k1_max_resident_numerator_bits": 15,
+    "primary_k2_resident_peak_bits": 66389,
+    "primary_k2_max_resident_numerator_bits": 28,
+    "reuse_k2_resident_peak_bits": 63756,
+    "reuse_k2_max_resident_numerator_bits": 27,
+    "plan_max_numerator_bits": 7,
+    "plan_max_denominator_bits": 5
+  },
+  "matched_baselines": [
+    "IDENTICAL_H_K_COORDINATE_OCCUPATION_ORBIT_RECURRENCE",
+    "INDEPENDENT_LABELLED_17_TO_THE_K_TENSOR_ORACLE",
+    "INDEPENDENT_ROW_PROFILE_WEIGHTED_MATCHING_RECURRENCE"
+  ],
+  "claim_ceiling": "GRID_N4_ONLY_EXCHANGE_SYMMETRIC_K1_TO_K4_EXACT_Q_ZETA17_K1_K2_DUAL_FIELD_K1_TO_K4_TWO_ORBIT_VECTORS_FINAL_ONLY_PROJECTION_DIRECT_PROCESS_SOFTWARE_ONLY",
+  "rejected_interpretations": [
+    "COMPRESSION_OF_THE_ORIGINAL_LABELLED_OPEN_CHAIN_FAMILY",
+    "FIXED_RANK_OR_FIXED_WIDTH_EXACT_CLOSURE_ACROSS_GROWING_K",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}
