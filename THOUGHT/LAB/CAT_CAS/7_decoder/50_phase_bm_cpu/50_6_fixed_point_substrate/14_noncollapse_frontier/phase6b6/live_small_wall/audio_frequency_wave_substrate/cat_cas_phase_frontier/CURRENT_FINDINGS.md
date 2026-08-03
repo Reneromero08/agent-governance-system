@@ -8431,3 +8431,46 @@ execution, physical bit replacement, or unbounded computation.  The next
 test is a direct angle-domain interference update or a bounded no-go against
 the identical complex recurrence; increasing fixture depth alone is not the
 next experiment.
+
+## M144: Streamed native-angle radial interference
+
+Claim:
+
+```text
+BOUNDED_STREAMED_ANGLE_DOMAIN_ANISOTROPIC_F17_RADIAL_INTERFERENCE_CONSUMES_FIXED34_RESIDENT_PHASE_ANGLES_WITHOUT17_COMPLEX_STATE_DECODE_OR_RETAINED_DENSE_KERNEL_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_USES_TWO_CARTESIAN_ACCUMULATORS_PER_OUTPUT_AND_IS_STRICTLY_MORE_TRIGONOMETRIC_WORK_THAN_THE_IDENTICAL17_COMPLEX_MATRIX_FREE_RECURRENCE
+```
+
+M144 pairs the public nonzero character indices `p` and `-p` to form a real
+radial kernel.  It consumes the 34 resident phase angles directly, streams one
+output through two Cartesian scalar accumulators, and returns that output to
+the two-angle chart.  No 17-complex accepted state or dense kernel is retained.
+
+Across the 21 declared cases through depth 4096, maximum boundary error is
+`2.607e-11` against the matrix-free baseline and `2.012e-11` against the
+streamed-complex baseline.  Maximum transaction restoration is `2.102e-12`.
+Unrelated depth-1537 same-backing reuse differs from fresh execution by
+`8.638e-13`; 100 same-backing depth-64 cycles restore within `3.752e-12`.
+The accepted class is `NUMERICAL_PHYSICAL_STATE_RESTORATION`; no reset,
+reload, snapshot, or inverse history is used.
+
+The independent long-double oracle imports no production or predecessor
+module.  It reconstructs the dense real kernel from 2,312 public pair visits,
+checks character pairing and involution, performs 474 declared comparisons,
+enforces the production restoration/reuse fields, independently repeats both
+reuse paths, and detects a kernel mutation.  The result is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+The native path reaches 1,018 named live bytes including program.  The
+work-minimizing matrix-free complex baseline reaches 1,770 named live bytes,
+but the equal-memory streamed real-kernel complex baseline reaches only 986.
+It also avoids the native path's 1,156 input-phasor and 51 chart trigonometric
+calls per Fourier.  Removing the decoded full state therefore does not
+establish a representation or work advantage.
+
+The next selected test is topology-compiled local polar Givens phase coupling
+without global Cartesian accumulation, or a bounded no-go against matched
+complex Givens execution.  M144 establishes no exact semantics, unbounded
+numerical stability, CATVM custody, distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+or unbounded catalytic computation.

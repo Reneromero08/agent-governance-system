@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_NUMERICAL_UNIT_PHASOR_PAIR_CHART`
-**Roadmap version:** `14.9`
+**Status:** `STRICT_SCOPE_STREAMED_NATIVE_ANGLE_INTERFERENCE`
+**Roadmap version:** `14.10`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `c206d2052245c88f5e949776b165d1d37bb86e65`
+**Reconciled source head:** `ca017fa6f5c01f15f7f0ba18b6e0a0b9c05d8261`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_NUMERICAL_UNIT_PHASOR_PAIR_CHART_REPRESENTS_NORMALIZED_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_STATE_IN_FIXED34_PHASE_ANGLE_COORDINATES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_PHYSICAL_STATE_RESTORATION_AND_REUSE_BUT_REQUIRES_TRANSCENDENTAL_CANONICAL_CHART_ARITHMETIC_AND_HAS_THE_IDENTICAL17_COMPLEX_COMPACT_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `21_DECLARED_NUMERICAL_PHASE_PAIR_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_UNRELATED_AND100_CYCLE_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_STREAMED_ANGLE_DOMAIN_ANISOTROPIC_F17_RADIAL_INTERFERENCE_CONSUMES_FIXED34_RESIDENT_PHASE_ANGLES_WITHOUT17_COMPLEX_STATE_DECODE_OR_RETAINED_DENSE_KERNEL_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_USES_TWO_CARTESIAN_ACCUMULATORS_PER_OUTPUT_AND_IS_STRICTLY_MORE_TRIGONOMETRIC_WORK_THAN_THE_IDENTICAL17_COMPLEX_MATRIX_FREE_RECURRENCE`
+**Current claim ceiling:** `21_DECLARED_NATIVE_ANGLE_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M143_UNIT_PHASOR_PAIR_CHART`
+**New mechanism development:** `ACTIVE_AFTER_M144_STREAMED_NATIVE_ANGLE_INTERFERENCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `NATIVE_ANGLE_DOMAIN_INTERFERENCE_UPDATE_FOR_UNIT_PHASOR_PAIR_CHART_OR_BOUNDED_BISIMULATION_NO_GO_AGAINST_IDENTICAL_COMPLEX_RECURRENCE`
+**Active primary successor:** `TOPOLOGY_COMPILED_LOCAL_POLAR_GIVENS_PHASE_COUPLING_WITHOUT_GLOBAL_CARTESIAN_ACCUMULATION_OR_BOUNDED_NO_GO_AGAINST_MATCHED_COMPLEX_GIVENS_EXECUTION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`c206d2052245c88f5e949776b165d1d37bb86e65`. The current 143-milestone
+`ca017fa6f5c01f15f7f0ba18b6e0a0b9c05d8261`. The current 144-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -5826,6 +5826,83 @@ recurrence during Fourier interference.  Extending only the tested depth is
 insufficient.  The next result must either supply a direct angle-domain update
 with complete material accounting or establish a bounded obstruction against
 that update while retaining the strongest identical complex recurrence.
+
+## M144: Streamed native-angle radial interference
+
+M144 consumes the M143 carrier's 34 resident `float64` phase angles directly.
+The public radial kernel pairs each nonzero character index `p` with `-p`, so
+each output can be streamed through a real kernel with two Cartesian scalar
+accumulators and returned to the two-angle chart.  The accepted update retains
+neither a decoded 17-complex state nor a dense 17-by-17 kernel.
+
+```text
+claim
+    BOUNDED_STREAMED_ANGLE_DOMAIN_ANISOTROPIC_F17_RADIAL_INTERFERENCE_CONSUMES_FIXED34_RESIDENT_PHASE_ANGLES_WITHOUT17_COMPLEX_STATE_DECODE_OR_RETAINED_DENSE_KERNEL_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_USES_TWO_CARTESIAN_ACCUMULATORS_PER_OUTPUT_AND_IS_STRICTLY_MORE_TRIGONOMETRIC_WORK_THAN_THE_IDENTICAL17_COMPLEX_MATRIX_FREE_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident 34-angle carrier NUMERICAL_PHYSICAL_STATE_RESTORATION
+    transient accumulators, output chart, and projection NO_RESTORATION_CLAIM
+
+source head
+    ca017fa6f5c01f15f7f0ba18b6e0a0b9c05d8261
+```
+
+The 21 declared cases cover `PRIMARY`, `REUSE`, and `ALTERNATE` at depths
+`1,4,16,64,256,1024,4096`.  Maximum boundary error is `2.607e-11` against the
+matrix-free compact baseline and `2.012e-11` against the streamed complex
+baseline.  Maximum transaction restoration error is `2.102e-12`.  An
+unrelated depth-1537 reuse differs from fresh execution by `8.638e-13`, and
+100 same-backing depth-64 cycles restore within `3.752e-12`.
+
+The actual inverse acts on the resident angle array without reset, reload,
+snapshot, or history.  The accepted class is
+`NUMERICAL_PHYSICAL_STATE_RESTORATION`, not exact algebraic restoration.
+Package generations are not CATVM leases, and CATVM custody is not claimed.
+
+The independent oracle imports no production or predecessor implementation.
+It reconstructs the dense real radial kernel in long-double arithmetic from
+2,312 public pair visits, verifies exact character pairing, checks involution
+to `3.931e-19`, reexecutes all 21 cases, performs 474 comparisons, enforces the
+production restoration and reuse fields, independently repeats both reuse
+controls, and detects a kernel mutation.  The unweighted kernel is explicitly
+not claimed symmetric; measured asymmetry is `1.0`.
+
+Accepted named accounting is 272 resident angle bytes, 64 retained inverse
+parameter bytes, 136 shell-count bytes, 368 maximum update bytes, 80
+projection bytes, and at most 178 public program bytes, for 1,018 named live
+bytes including program.  The commitment uses a zero-copy input view and a
+declared 96-byte logical SHA state/block allowance.  Python, allocator,
+NumPy/native-library, hashlib-internal, and whole-process peaks remain
+excluded.
+
+Both strongest matched compact classical paths are executed.  The
+work-minimizing matrix-free 17-complex recurrence reaches 1,770 named live
+bytes and uses 544 complex character products per Fourier.  The equal-memory
+streamed real-kernel 17-complex recurrence reaches only 986 named live bytes
+and avoids the phase path's 1,156 input-phasor and 51 chart trigonometric calls
+per Fourier.  M144 therefore removes the full-state decode but establishes no
+storage, work, or computational advantage.
+
+The next obstruction is the remaining per-output Cartesian complex scalar and
+the stronger equal-memory classical recurrence.  The selected successor is:
+
+```text
+TOPOLOGY_COMPILED_LOCAL_POLAR_GIVENS_PHASE_COUPLING_WITHOUT_GLOBAL_CARTESIAN_ACCUMULATION_OR_BOUNDED_NO_GO_AGAINST_MATCHED_COMPLEX_GIVENS_EXECUTION
+```
+
+It must test whether public local polar couplers can replace global Cartesian
+accumulation while counting the complete compiled plan and a matched complex
+Givens execution.  Increasing only depth or fixture count is insufficient.
+M144 establishes no exact semantics, unbounded numerical stability, distinct
+phase resource, computational advantage, Small Wall crossing, physical
+waveform execution, physical bit replacement, or unbounded catalytic
+computation.
 
 ## 10. Roadmap Maintenance
 

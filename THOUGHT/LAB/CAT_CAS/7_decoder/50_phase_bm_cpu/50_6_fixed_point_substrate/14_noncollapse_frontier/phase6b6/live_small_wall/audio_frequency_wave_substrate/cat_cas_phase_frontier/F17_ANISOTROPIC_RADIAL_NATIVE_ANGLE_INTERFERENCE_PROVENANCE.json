@@ -1,0 +1,109 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "ca017fa6f5c01f15f7f0ba18b6e0a0b9c05d8261",
+  "scientific_source_parent": "2ea50631a9710aef444683d40a5a61c1ff3b4aa4",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "b4fecd8ca883a588e46af22cde200bd973284a0e33dc016a91ab7f8b2b56b9fa",
+  "reference_full_oracle_sha256": "222a9a8c8433832bfe2573a22aaf44578b69c4bd90172e6f7e9893b28752591c",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_native_angle_interference.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_native_angle_interference_oracle.py --package PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_anisotropic_radial_native_angle_interference.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_anisotropic_radial_native_angle_interference.py": "df907fd2219b79fe7044d6c3f9fc8a38893ea8891d7720398c202bbafdb76bae",
+    "f17_anisotropic_radial_native_angle_interference_oracle.py": "861dedd60989cf5268ffc71a8a48130c9df268932eed383d818aa7017b16d9e7",
+    "F17_ANISOTROPIC_RADIAL_NATIVE_ANGLE_INTERFERENCE_RESULTS.json": "b4fecd8ca883a588e46af22cde200bd973284a0e33dc016a91ab7f8b2b56b9fa",
+    "F17_ANISOTROPIC_RADIAL_NATIVE_ANGLE_INTERFERENCE_ORACLE_RESULTS.json": "222a9a8c8433832bfe2573a22aaf44578b69c4bd90172e6f7e9893b28752591c",
+    "F17_ANISOTROPIC_RADIAL_NATIVE_ANGLE_INTERFERENCE_INDEPENDENT_REVIEW.md": "9e7414916b01dae11b523c4017b0a64e50a8278ad5824f25ca4e61970320cc8b",
+    "qualify_f17_anisotropic_radial_native_angle_interference.sh": "eaf5dfe114e5efb3738c59719dc65d892da82aca6b247fce2ffaa6d2c73f3995"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "coordinate_space": "F17_SQUARED_ANISOTROPIC_RADIAL_QUOTIENT",
+    "resident_chart": "TWO_UNIT_PHASOR_ANGLES_PER_NORMALIZED_COMPLEX_COEFFICIENT",
+    "update_law": "STREAMED_PUBLIC_P_NEG_P_REAL_KERNEL_WITH_TWO_CARTESIAN_SCALAR_ACCUMULATORS_PER_OUTPUT",
+    "depths": [1, 4, 16, 64, 256, 1024, 4096],
+    "families": ["PRIMARY", "REUSE", "ALTERNATE"],
+    "independent_methods": [
+      "LONG_DOUBLE_DENSE17_REAL_RADIAL_KERNEL",
+      "EXACT_PUBLIC_CHARACTER_PAIRING_CHECK",
+      "SEPARATE_LONG_DOUBLE_TWO_PHASOR_CHART",
+      "SEPARATE_UNRELATED_DEPTH1537_REUSE",
+      "SEPARATE100_CYCLE_DEPTH64_REUSE",
+      "PRODUCTION_RESTORATION_AND_REUSE_FIELD_ENFORCEMENT",
+      "KERNEL_MUTATION_CONTROL"
+    ]
+  },
+  "predeclared_tolerances": {
+    "restoration_phasor_max_abs": 1e-11,
+    "boundary_max_abs": 5e-11,
+    "chart_zero_floor": 1e-7,
+    "chart_radius_slack": 2e-12
+  },
+  "resource_accounting": {
+    "resident_phase_angle_float64_cells": 34,
+    "resident_phase_angle_bytes": 272,
+    "retained_inverse_half_parameter_int64_cells": 8,
+    "retained_inverse_half_parameter_bytes": 64,
+    "retained_shell_count_int64_equivalent_cells": 17,
+    "retained_shell_count_bytes": 136,
+    "cartesian_accumulator_float64_cells_per_output": 2,
+    "output_angle_buffer_float64_cells": 34,
+    "maximum_named_update_bytes": 368,
+    "maximum_named_projection_bytes": 80,
+    "maximum_public_program_json_bytes": 178,
+    "maximum_named_accepted_live_bytes_including_program_json": 1018,
+    "commitment_input_copy_bytes": 0,
+    "commitment_public_hexdigest_bytes": 64,
+    "commitment_logical_sha256_state_and_block_bytes": 96,
+    "maximum_named_commitment_live_bytes_including_program_json": 810,
+    "retained_complex_state_cells": 0,
+    "retained_dense_kernel_cells": 0,
+    "compiled_gate_sequence_cells": 0,
+    "inverse_history_cells": 0,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NUMPY_AND_NATIVE_LIBRARY_INTERNAL_STORAGE",
+      "HASHLIB_INTERNAL_REPRESENTATION_BEYOND_LOGICAL96_BYTES",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_classical_baselines": {
+    "work_minimizing": "IDENTICAL_MATRIX_FREE_NORMALIZED17_COMPLEX_RADIAL_RECURRENCE",
+    "work_minimizing_maximum_live_bytes_including_program_json": 1770,
+    "equal_memory": "STREAMED_REAL_KERNEL_NORMALIZED17_COMPLEX_RADIAL_RECURRENCE",
+    "equal_memory_maximum_live_bytes_including_program_json": 986,
+    "native_angle_maximum_live_bytes_including_program_json": 1018,
+    "native_angle_path_has_strictly_more_trigonometric_work": true
+  },
+  "claim_ceiling": "21_DECLARED_NATIVE_ANGLE_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "DIRECT_ANGLE_CONSUMPTION_WITHOUT17_COMPLEX_STATE_DECODE",
+    "PUBLIC_P_NEG_P_REAL_KERNEL_PAIRING",
+    "TWO_CARTESIAN_SCALAR_ACCUMULATORS_PER_OUTPUT",
+    "ZERO_RETAINED_DENSE_KERNEL_AND_ZERO_INVERSE_HISTORY",
+    "FINAL_ONLY_STREAMED_BOUNDARY_PROJECTION",
+    "HISTORY_FREE_NUMERICAL_PHYSICAL_STATE_RESTORATION_ON_SAME_BACKING",
+    "UNRELATED_DEPTH1537_AND100_CYCLE_DEPTH64_REUSE_WITHIN_TOLERANCE",
+    "INDEPENDENT_LONG_DOUBLE_DENSE_REAL_KERNEL_REEXECUTION"
+  ],
+  "rejected_interpretations": [
+    "CARTESIAN_ACCUMULATOR_FREE_INTERFERENCE",
+    "EXACT_ALGEBRAIC_SEMANTICS",
+    "UNBOUNDED_DEPTH_NUMERICAL_STABILITY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}
