@@ -5,7 +5,12 @@
   "repository": "Reneromero08/agent-governance-system",
   "evidence_parent_branch": "codex/family10h-tomography-repair",
   "evidence_parent_head_at_fork": "cf6d49b0a46d25520a9ce61a06b1f90533058186",
-  "archive_branch": "archive/family10h-tomography-repair-pre-holonomy-20260802",
+  "former_archive_ref": {
+    "branch": "archive/family10h-tomography-repair-pre-holonomy-20260802",
+    "head_at_snapshot": "cf6d49b0a46d25520a9ce61a06b1f90533058186",
+    "state": "removed_as_redundant",
+    "canonical_retained_evidence_ref": "codex/family10h-tomography-repair"
+  },
   "successor_branch": "codex/family10h-holonomy-integration-v1",
   "pr50": {
     "number": 50,
@@ -41,7 +46,7 @@
   ],
   "custody": {
     "original_branch_modified": false,
-    "archive_branch_modified": false,
+    "former_archive_branch_was_identical_and_removed": true,
     "existing_tomography_files_deleted": false,
     "retired_package_reactivated": false,
     "live_authority_granted": false

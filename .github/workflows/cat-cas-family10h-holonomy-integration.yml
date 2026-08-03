@@ -89,11 +89,8 @@ jobs:
       - name: Verify evidence lineage and additions-only integration
         run: |
           git fetch --depth=1 --no-tags origin \
-            codex/family10h-tomography-repair \
-            archive/family10h-tomography-repair-pre-holonomy-20260802
+            codex/family10h-tomography-repair
           test "$(git rev-parse origin/codex/family10h-tomography-repair)" = \
-               "cf6d49b0a46d25520a9ce61a06b1f90533058186"
-          test "$(git rev-parse origin/archive/family10h-tomography-repair-pre-holonomy-20260802)" = \
                "cf6d49b0a46d25520a9ce61a06b1f90533058186"
           git diff --name-status cf6d49b0a46d25520a9ce61a06b1f90533058186...HEAD > /tmp/integration-diff.tsv
           if grep -Ev '^A[[:space:]]' /tmp/integration-diff.tsv; then
@@ -146,7 +143,8 @@ jobs:
           assert manifest['custody']['original_branch_modified'] is False
           assert manifest['custody']['existing_tomography_files_deleted'] is False
           assert manifest['claim_ceiling']['small_wall_crossed'] is False
-          assert validation['archive_equals_parent'] is True
+          assert validation['canonical_evidence_branch'] == 'codex/family10h-tomography-repair'
+          assert validation['evidence_parent_head'] == 'cf6d49b0a46d25520a9ce61a06b1f90533058186'
           assert validation['non_addition_changes_observed'] is False
           assert len(validation['imported_blob_identity']) == 17
           assert validation['checks']['all_17_imported_blobs_match_main'] is True

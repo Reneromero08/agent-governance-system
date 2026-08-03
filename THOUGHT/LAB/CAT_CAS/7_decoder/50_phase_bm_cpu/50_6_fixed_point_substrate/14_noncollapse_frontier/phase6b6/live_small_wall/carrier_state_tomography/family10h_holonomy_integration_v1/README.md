@@ -30,10 +30,18 @@ codex/family10h-tomography-repair
 cf6d49b0a46d25520a9ce61a06b1f90533058186
 ```
 
-The archive branch is identical:
+A former archive ref pointed to the same frozen evidence commit and has been removed as
+redundant:
 
 ```text
 archive/family10h-tomography-repair-pre-holonomy-20260802
+cf6d49b0a46d25520a9ce61a06b1f90533058186
+```
+
+The canonical retained evidence ref is now:
+
+```text
+codex/family10h-tomography-repair
 ```
 
 The active successor is:

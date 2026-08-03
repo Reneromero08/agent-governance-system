@@ -1,9 +1,13 @@
 {
   "schema_version": "1.0.0",
   "validation_status": "EXACT_BLOB_IDENTITY_AND_ADDITIONS_ONLY_CUSTODY_VERIFIED",
+  "canonical_evidence_branch": "codex/family10h-tomography-repair",
   "evidence_parent_head": "cf6d49b0a46d25520a9ce61a06b1f90533058186",
-  "archive_head": "cf6d49b0a46d25520a9ce61a06b1f90533058186",
-  "archive_equals_parent": true,
+  "former_archive_snapshot": {
+    "branch": "archive/family10h-tomography-repair-pre-holonomy-20260802",
+    "head_was_identical_to_evidence_parent": true,
+    "removed_as_redundant": true
+  },
   "successor_relation_to_parent": "ahead_only",
   "non_addition_changes_observed": false,
   "imported_blob_identity": {
@@ -28,7 +32,7 @@
   "checks": {
     "all_17_imported_blobs_match_main": true,
     "original_evidence_branch_unchanged": true,
-    "archive_branch_unchanged": true,
+    "former_archive_snapshot_was_identical_and_removed": true,
     "existing_tomography_files_deleted": false,
     "whole_history_reverse_merge_used": false,
     "pr51_merged": false,
