@@ -8206,3 +8206,56 @@ The next mechanism must change the native phase coupling law or use a
 nonlinear relation quotient beyond additive `C17` signature axes; adding more
 signature axes or dense group-algebra cells would repeat the diagnosed
 obstruction.
+
+## M139: Nonlinear anisotropic radial phase quotient
+
+M139 changes the coupling law from additive signature axes to the nonlinear
+anisotropic norm relation `Q(x,y)=x^2-3y^2` on `F17^2`.  Its 289 public
+coordinates form 17 exact norm shells of sizes `1,18,...,18`.  Quartic radial
+phases and the declared normalized anisotropic phase Fourier transform close
+exactly on one 17-cell unresolved radial carrier and do not commute on the
+tested programs.
+
+Seven exact `Q(zeta17)` transactions cover depths through 64; 48 structural
+transactions cover three public families over `F103` and `F137` through depth
+128.  An independent implementation reconstructs the geometry, schedules,
+forward/inverse recurrence, commitments, resident payload maxima, and selected
+dense 289-coordinate controls.  All selected dense controls match every one
+of the 17 shell values and the final boundary.  Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.  Update-scratch payload tuples remain
+package-local.
+
+```text
+exact depth                         1     2     4     8     16     32     64
+maximum resident payload bits   2203  2243  4364  8709  17552  35394  70992
+resident field cells              17    17    17    17     17     17     17
+update scratch cells              20    20    20    20     20     20     20
+resident plus update live         37    37    37    37     37     37     37
+```
+
+Projection uses six scratch cells, for 23 carrier-plus-projection cells.  The
+accepted compiler retains no coordinate table, assignment expansion, or truth
+table, but it does retain a 289-cell public Fourier kernel.  Public compilation
+visits 5,202 coordinates per algebra.  Exhaustive verification visits 83,810,
+uses 867 dense control buffer cells, and is outside the accepted transaction.
+The whole three-algebra verification package retains 1,734 kernel-plus-dense-
+buffer cells, excluding arithmetic expression temporaries, Python and native
+storage, bigint internals, and whole-process memory.
+
+The exact inverse restores canonical zero on the same carrier backing and an
+unrelated program reuses it without snapshot or inverse history.  The
+restoration counter is package-local and does not establish CATVM custody.
+
+The strongest executed compact classical baseline is the identical 17-cell
+radial recurrence with the same 289-cell kernel, scratch law, and
+`O(289*depth)` work.  M139 therefore establishes no distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+or unbounded computation.
+
+The next obstruction is the retained public kernel together with growing
+exact payload and the identical classical recurrence.  The selected repair is:
+
+```text
+EXACT_MATRIX_FREE_ANISOTROPIC_RADIAL_PHASE_FOURIER_FROM_KLOOSTERMAN_GENERATOR_WITH_MATCHED_CLASSICAL_RECURRENCE
+```

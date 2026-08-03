@@ -1,0 +1,97 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "f89bcf14e9031bc814a768accee310e0cd3d26d5",
+  "scientific_source_parent": "7f6d976353434e725725548cae7a3392578a6058",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "75d1ba3df82b23fafd9bb28a1bc2d8940057f8b095dd63fea27a84b504d2ca03",
+  "reference_full_oracle_sha256": "ed88a4c69246ba7fba7a22a4d36afa9086535f8f56855a5171ce0608d4efd209",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_quartic_radial_phase_quotient_closure.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_quartic_radial_phase_quotient_closure_oracle.py --production PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_anisotropic_quartic_radial_phase_quotient_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_anisotropic_quartic_radial_phase_quotient_closure.py": "5f84e855ce3a1db3ba012c2f3f05f08e86d7d9b51e578bf474f3fe963bc42e9f",
+    "f17_anisotropic_quartic_radial_phase_quotient_closure_oracle.py": "ddbea066ce3bc6de5278dbe50736e6ffe84de3ec59f1e373f88ddbedbf377fc5",
+    "F17_ANISOTROPIC_QUARTIC_RADIAL_PHASE_QUOTIENT_CLOSURE_RESULTS.json": "75d1ba3df82b23fafd9bb28a1bc2d8940057f8b095dd63fea27a84b504d2ca03",
+    "F17_ANISOTROPIC_QUARTIC_RADIAL_PHASE_QUOTIENT_CLOSURE_ORACLE_RESULTS.json": "ed88a4c69246ba7fba7a22a4d36afa9086535f8f56855a5171ce0608d4efd209",
+    "F17_ANISOTROPIC_QUARTIC_RADIAL_PHASE_QUOTIENT_CLOSURE_INDEPENDENT_REVIEW.md": "aff9489efa312cd761bec2777460c0e0027062bc09af0266d8cd7208ae1fb176",
+    "qualify_f17_anisotropic_quartic_radial_phase_quotient_closure.sh": "5baef9d7aa371d1e29d4bb9b98491accd4f749c9462506631dbcbfbb9b93cad6"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "coordinate_space": "F17_SQUARED",
+    "anisotropic_norm": "X_SQUARED_MINUS_3_Y_SQUARED",
+    "norm_shell_sizes": [1, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18],
+    "operations": [
+      "QUARTIC_RADIAL_PHASE",
+      "NORMALIZED_ANISOTROPIC_PHASE_FOURIER"
+    ],
+    "exact_depths": [1, 2, 4, 8, 16, 32, 64],
+    "structural_depths": [1, 2, 4, 8, 16, 32, 64, 128],
+    "structural_fields": ["F103", "F137"],
+    "families": ["PRIMARY", "REUSE", "ALTERNATE"],
+    "independent_methods": [
+      "SEPARATE_PUBLIC_GEOMETRY_COMPILER",
+      "SEPARATE_PUBLIC_PROGRAM_SCHEDULE",
+      "SEPARATE_EXACT_FORWARD_AND_INVERSE_RECURRENCE",
+      "SEPARATE_STATE_COMMITMENT",
+      "SEPARATE_RESIDENT_PAYLOAD_REEXECUTION",
+      "SELECTED_DENSE_289_COORDINATE_SEPARABLE_DFT"
+    ]
+  },
+  "resource_accounting": {
+    "resident_relation_quotient_exact_field_cells": 17,
+    "maximum_update_scratch_exact_field_cells": 20,
+    "maximum_live_resident_plus_update_scratch_exact_field_cells": 37,
+    "maximum_projection_scratch_exact_field_cells": 6,
+    "maximum_live_resident_plus_projection_scratch_exact_field_cells": 23,
+    "compiled_public_fourier_kernel_exact_field_cells": 289,
+    "public_topology_compile_coordinate_visits_per_algebra": 5202,
+    "exhaustive_invariance_verification_total_coordinate_visits_per_algebra": 83810,
+    "verification_only_dense_coordinate_buffers_exact_field_cells": 867,
+    "maximum_whole_package_kernel_plus_dense_verification_cells": 1734,
+    "accepted_assignment_or_truth_table_cells": 0,
+    "inverse_history_cells": 0,
+    "exact_q_zeta17_resident_payload_bits": [2203, 2243, 4364, 8709, 17552, 35394, 70992],
+    "update_scratch_payload_verification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+    "excluded": [
+      "ARITHMETIC_EXPRESSION_TEMPORARIES",
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "SYMPY_NATIVE_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "HASHLIB_INTERNAL_STATE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_classical_frontier": [
+    "EXECUTED_IDENTICAL_17_COORDINATE_RADIAL_QUOTIENT_RECURRENCE_WITH_289_CELL_PUBLIC_KERNEL",
+    "EXECUTED_DENSE_289_COORDINATE_SEPARABLE_FOURIER_VERIFICATION_CONTROL",
+    "SEPARATE_NONUNIFORM_FIXED_TRANSACTION_SCALAR_CACHE_OPTION"
+  ],
+  "claim_ceiling": "STRICT_ANISOTROPIC_F17_SQUARED_RADIAL_FUNCTIONS_QUARTIC_NORM_PHASES_DECLARED_NORMALIZED_PHASE_FOURIER_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "EXACT_17_CLASS_ANISOTROPIC_NORM_RELATION_QUOTIENT",
+    "EXACT_NONCOMMUTING_QUARTIC_RADIAL_PHASE_AND_NORMALIZED_PHASE_FOURIER_CLOSURE",
+    "INDEPENDENT_ALL17_SHELL_VALUE_AND_BOUNDARY_PARITY_FOR_SELECTED_DENSE_CONTROLS",
+    "EXACT_FORWARD_FINAL_PROJECTION_INVERSE_RESTORATION_AND_UNRELATED_REUSE",
+    "NO_ACCEPTED_ASSIGNMENT_TRUTH_TABLE_OR_PUBLIC_COORDINATE_EXPANSION",
+    "EXECUTED_IDENTICAL_17_COORDINATE_CLASSICAL_RECURRENCE_PARITY"
+  ],
+  "rejected_interpretations": [
+    "GENERAL_NONLINEAR_RELATION_QUOTIENT",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

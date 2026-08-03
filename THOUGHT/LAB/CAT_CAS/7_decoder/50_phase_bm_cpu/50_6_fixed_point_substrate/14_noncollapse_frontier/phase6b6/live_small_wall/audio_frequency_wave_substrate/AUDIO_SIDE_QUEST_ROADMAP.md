@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_TWO_SIGNATURE_CUBIC_WALSH_FULL_SEPARATION_RANK_WITH_CLASSICAL_STREAMING_OBSTRUCTION`
-**Roadmap version:** `14.4`
+**Status:** `STRICT_SCOPE_NONLINEAR_ANISOTROPIC_RADIAL_QUOTIENT_WITH_MATCHED_CLASSICAL_KERNEL_OBSTRUCTION`
+**Roadmap version:** `14.5`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `d556c65e6f9410713700db474d4a7d90af44d244`
+**Reconciled source head:** `f89bcf14e9031bc814a768accee310e0cd3d26d5`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_TWO_INDEPENDENT_CUBIC_WALSH_DERIVATIVE_SIGNATURES_ON_ONE_UNRESOLVED_TYPED_PORT_GENERATE_FULL_17_BY_17_COEFFICIENT_SEPARATION_RANK_IN_THE_DECLARED_ALTERNATING_PROGRAM_FAMILIES_SO_UNIFORMLY_LOW_SEPARATION_RANK_FACTOR_CHARTS_ARE_REJECTED_AT_THE_FAMILY_CEILING_WHILE_THE_CANONICAL_578_CELL_C17_SQUARED_GROUP_ALGEBRA_CARRIER_RESTORES_AND_REUSES_EXACTLY_BUT_HAS_MATCHED_COMPACT_CLASSICAL_RESIDUE_RECURRENCES_AND_GROWING_EXACT_PAYLOAD`
-**Current claim ceiling:** `DECLARED_TWO_DISJOINT_F17_QUADRATIC_SIGNATURES_ONE_UNRESOLVED_TYPED_WALSH_PORT_ALTERNATING_PRIMARY_REUSE_ALTERNATE_PROGRAM_FAMILIES_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `EXACT_ANISOTROPIC_F17_SQUARED_NORM_RELATION_QUOTIENT_CLOSES_NONCOMMUTING_QUARTIC_RADIAL_PHASE_AND_NORMALIZED_PHASE_FOURIER_OPERATIONS_ON_17_UNRESOLVED_EXACT_CELLS_ACROSS_GROWING_PROGRAM_DEPTH_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_17_COORDINATE_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PAYLOAD_REMAIN`
+**Current claim ceiling:** `STRICT_ANISOTROPIC_F17_SQUARED_RADIAL_FUNCTIONS_QUARTIC_NORM_PHASES_DECLARED_NORMALIZED_PHASE_FOURIER_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M138_FULL_TWO_SIGNATURE_SEPARATION_RANK_AND_STREAMED_CLASSICAL_BOUNDARY_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M139_NONLINEAR_ANISOTROPIC_RADIAL_QUOTIENT_AND_MATCHED_CLASSICAL_KERNEL_OBSTRUCTION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_NONADDITIVE_PHASE_COUPLING_OR_RELATION_QUOTIENT_BEYOND_C17_SIGNATURE_AXIS_GROUP_ALGEBRA_WITH_MATCHED_STREAMED_CLASSICAL_CONTRACTION`
+**Active primary successor:** `EXACT_MATRIX_FREE_ANISOTROPIC_RADIAL_PHASE_FOURIER_FROM_KLOOSTERMAN_GENERATOR_WITH_MATCHED_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`d556c65e6f9410713700db474d4a7d90af44d244`. The current 138-milestone
+`f89bcf14e9031bc814a768accee310e0cd3d26d5`. The current 139-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_TWO_INDEPENDENT_CUBIC_WALSH_DERIVATIVE_SIGNATURES_ON_ONE_UNRESOLVED_TYPED_PORT_GENERATE_FULL_17_BY_17_COEFFICIENT_SEPARATION_RANK_IN_THE_DECLARED_ALTERNATING_PROGRAM_FAMILIES_SO_UNIFORMLY_LOW_SEPARATION_RANK_FACTOR_CHARTS_ARE_REJECTED_AT_THE_FAMILY_CEILING_WHILE_THE_CANONICAL_578_CELL_C17_SQUARED_GROUP_ALGEBRA_CARRIER_RESTORES_AND_REUSES_EXACTLY_BUT_HAS_MATCHED_COMPACT_CLASSICAL_RESIDUE_RECURRENCES_AND_GROWING_EXACT_PAYLOAD
+EXACT_ANISOTROPIC_F17_SQUARED_NORM_RELATION_QUOTIENT_CLOSES_NONCOMMUTING_QUARTIC_RADIAL_PHASE_AND_NORMALIZED_PHASE_FOURIER_OPERATIONS_ON_17_UNRESOLVED_EXACT_CELLS_ACROSS_GROWING_PROGRAM_DEPTH_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_17_COORDINATE_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PAYLOAD_REMAIN
 ```
 
 Not established:
@@ -5372,13 +5372,12 @@ unbounded computation.
 The next experiment is:
 
 ```text
-EXACT_TWO_SIGNATURE_CUBIC_WALSH_DERIVATIVE_C17_SQUARED_SEPARATION_RANK_GROWTH_OR_LOW_RANK_FACTOR_CHART_WITH_MATCHED_CLASSICAL_17_BY_17_RECURRENCE
 ```
 
 The obstruction is:
 
 ```text
-M137_CLOSES_ONLY_ONE_PUBLIC_F17_DERIVATIVE_SIGNATURE_IN_34_EXACT_CELLS_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE_AND_GROWING_COEFFICIENT_PAYLOAD_WHILE_A_SECOND_INDEPENDENT_SIGNATURE_EXPANDS_THE_CANONICAL_FULL_GROUP_ALGEBRA_CHART_TO_578_CELLS_SO_THE_NEXT_TEST_MUST_FIND_EXACT_LOW_SEPARATION_RANK_OR_REJECT_COMPACTION_WITHOUT_TREATING_CANONICAL_CHART_SIZE_AS_A_UNIVERSAL_LOWER_BOUND
+M139_NONLINEAR_ANISOTROPIC_NORM_QUOTIENT_CLOSES_ON17_RESIDENT_EXACT_CELLS_BUT_RETAINS_A289_CELL_PUBLIC_FOURIER_KERNEL_THE_IDENTICAL17_COORDINATE_CLASSICAL_RECURRENCE_AND_DEPTH_GROWING_EXACT_PAYLOAD_SO_THE_NEXT_PHASE_REPAIR_MUST_GENERATE_THE_RADIAL_FOURIER_ACTION_MATRIX_FREE_OR_FIND_A_BROADER_PHASE_COUPLING_WITHOUT_MOVING_STATE_INTO_PUBLIC_KERNEL_STORAGE
 ```
 
 ## Two-signature coefficient surfaces reach full matrix separation rank
@@ -5455,6 +5454,84 @@ M138_TWO_SIGNATURE_COEFFICIENT_SURFACES_REACH_FULL17_MATRIX_RANK_BUT_THE_FINAL_S
 M138 establishes neither CATVM custody, a distinct phase resource,
 computational advantage, Small Wall crossing, physical waveform execution,
 physical bit replacement, nor unbounded catalytic computation.
+
+## M139: Nonlinear anisotropic radial phase quotient
+
+M139 follows the additive-signature obstruction with a nonlinear public
+relation quotient on `F17^2`.  The anisotropic norm
+`Q(x,y)=x^2-3y^2` has 17 shells of sizes `1,18,...,18`.  Exact functions
+constant on those shells close under both quartic radial phases
+`zeta17^(a Q^2+bQ+c)` and the declared normalized anisotropic phase Fourier
+transform.  The two operations do not commute on the tested programs.
+
+```text
+claim
+    EXACT_ANISOTROPIC_F17_SQUARED_NORM_RELATION_QUOTIENT_CLOSES_NONCOMMUTING_QUARTIC_RADIAL_PHASE_AND_NORMALIZED_PHASE_FOURIER_OPERATIONS_ON_17_UNRESOLVED_EXACT_CELLS_ACROSS_GROWING_PROGRAM_DEPTH_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_17_COORDINATE_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PAYLOAD_REMAIN
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident 17-cell quotient carrier EXACT_ALGEBRAIC_RESTORATION
+    compiler/projection/oracle buffers NO_RESTORATION_CLAIM
+
+source head
+    f89bcf14e9031bc814a768accee310e0cd3d26d5
+```
+
+Seven exact `Q(zeta17)` transactions cover depths
+`1,2,4,8,16,32,64`.  The three public program families also receive 48
+structural transactions over `F103` and `F137` through depth 128.  The
+separate oracle reconstructs the public geometry and schedule, exact
+forward/inverse recurrence, state commitment, resident payload maxima, and
+selected dense 289-coordinate controls.  Every selected dense control
+matches all 17 shell values and the projected boundary.  Update-scratch
+payload tuples remain package-local rather than independently reproduced.
+
+```text
+exact depth                         1     2     4     8     16     32     64
+maximum resident payload bits   2203  2243  4364  8709  17552  35394  70992
+resident exact field cells        17    17    17    17     17     17     17
+```
+
+The accepted transaction uses 20 update scratch cells, 37
+resident-plus-update live cells, six projection scratch cells, and 23
+resident-plus-projection live cells.  It retains a public 289-cell quotient
+Fourier kernel.  Public compilation visits 5,202 coordinates per algebra;
+the exhaustive invariance verifier visits 83,810 and uses 867 dense control
+buffer cells.  One kernel plus dense buffers is 1,156 cells per algebra, and
+the whole three-kernel verification package retains 1,734 such cells.  These
+counts exclude arithmetic expression temporaries, Python containers,
+allocator and native-library storage, bigint and hashlib internals, and
+whole-process memory.
+
+The actual inverse rematerializes the public operation sequence, restores
+exact canonical zero on the same backing, and supports an unrelated reuse
+transaction without snapshot or inverse history.  The package-local
+restoration count is not CATVM custody.
+
+The strongest executed compact classical comparison is the identical
+17-coordinate radial quotient recurrence with the same 289-cell public
+kernel, scratch law, and `O(289*depth)` arithmetic work.  A fully fixed
+transaction scalar cache is a separate nonuniform option.  No universal
+classical lower bound is claimed.
+
+The next experiment is:
+
+```text
+EXACT_MATRIX_FREE_ANISOTROPIC_RADIAL_PHASE_FOURIER_FROM_KLOOSTERMAN_GENERATOR_WITH_MATCHED_CLASSICAL_RECURRENCE
+```
+
+It must derive each radial Fourier coefficient on demand from the finite-
+field character-sum generator, remove retained 289-cell public-kernel state,
+preserve exact restoration and same-backing reuse, and compare against the
+identical matrix-free classical recurrence.  M139 establishes neither a
+general nonlinear quotient, CATVM custody, a distinct phase resource,
+computational advantage, Small Wall crossing, physical execution, physical
+bit replacement, nor unbounded computation.
 
 ## 10. Roadmap Maintenance
 
