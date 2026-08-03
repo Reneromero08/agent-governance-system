@@ -1,0 +1,91 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "c206d2052245c88f5e949776b165d1d37bb86e65",
+  "scientific_source_parent": "61ddf0e2194d2e361509e1bbadd8b4e5588ac767",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "3b04e5fc44483f7f15db44b871f61cb2a783909ab8d57af91a7f1728a36d1d4e",
+  "reference_full_oracle_sha256": "ee574e70dde0749de58d8f7d3fcb4020337de485ff1f93a7bb2b1329718b78eb",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_unit_phasor_pair_chart.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_unit_phasor_pair_chart_oracle.py --package PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_anisotropic_radial_unit_phasor_pair_chart.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_anisotropic_radial_unit_phasor_pair_chart.py": "d1f1159a8c8a7768b5ba90f6ce8d211e4355d324e4a190abef7a8e23097951c6",
+    "f17_anisotropic_radial_unit_phasor_pair_chart_oracle.py": "d1f606f74b5180d1fe16e7cc4b7633096398fed77beea79470d39cb4456b4e06",
+    "F17_ANISOTROPIC_RADIAL_UNIT_PHASOR_PAIR_CHART_RESULTS.json": "3b04e5fc44483f7f15db44b871f61cb2a783909ab8d57af91a7f1728a36d1d4e",
+    "F17_ANISOTROPIC_RADIAL_UNIT_PHASOR_PAIR_CHART_ORACLE_RESULTS.json": "ee574e70dde0749de58d8f7d3fcb4020337de485ff1f93a7bb2b1329718b78eb",
+    "F17_ANISOTROPIC_RADIAL_UNIT_PHASOR_PAIR_CHART_INDEPENDENT_REVIEW.md": "0ee8525d1c0191b01ed55ff749a1c7fa3a49757b65fdb38481830ff3a86e8555",
+    "qualify_f17_anisotropic_radial_unit_phasor_pair_chart.sh": "9a3fbcd325715529ecbe95862af160e425829d32c56657741a2f48bac787a8d8"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "coordinate_space": "F17_SQUARED_ANISOTROPIC_RADIAL_QUOTIENT",
+    "resident_chart": "TWO_UNIT_PHASOR_ANGLES_PER_NORMALIZED_COMPLEX_COEFFICIENT",
+    "depths": [1, 4, 16, 64, 256, 1024, 4096],
+    "families": ["PRIMARY", "REUSE", "ALTERNATE"],
+    "independent_methods": [
+      "COMPLEX_LONG_DOUBLE_DENSE289_COORDINATE_RADIAL_FOURIER",
+      "SEPARATE_PUBLIC_STREAMED_GATE_FORMULA",
+      "SEPARATE_LONG_DOUBLE_TWO_PHASOR_CHART",
+      "SEPARATE_UNRELATED_DEPTH1537_REUSE",
+      "SEPARATE100_CYCLE_DEPTH64_REUSE",
+      "FINAL_BOUNDARY_MUTATION_CONTROL"
+    ]
+  },
+  "predeclared_tolerances": {
+    "restoration_phasor_max_abs": 2e-11,
+    "boundary_max_abs": 5e-11,
+    "chart_zero_floor": 1e-7,
+    "chart_radius_slack": 2e-12
+  },
+  "resource_accounting": {
+    "resident_phase_angle_float64_cells": 34,
+    "resident_phase_angle_bytes": 272,
+    "matched_classical_resident_complex128_cells": 17,
+    "matched_classical_resident_bytes": 272,
+    "retained_root_table_complex128_cells": 17,
+    "retained_inverse_parameter_int64_cells": 16,
+    "retained_source_index_int64_cells": 17,
+    "retained_shell_count_int64_cells": 17,
+    "maximum_named_update_bytes": 1056,
+    "maximum_named_projection_bytes": 816,
+    "maximum_public_program_json_bytes": 184,
+    "maximum_named_accepted_live_bytes_including_program_json": 2184,
+    "retained_dense_fourier_kernel_cells": 0,
+    "compiled_gate_sequence_cells": 0,
+    "inverse_history_cells": 0,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NUMPY_AND_NATIVE_LIBRARY_INTERNAL_STORAGE",
+      "HASHLIB_INTERNAL_STATE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_classical_baseline": "IDENTICAL_MATRIX_FREE_NORMALIZED17_COMPLEX_RADIAL_RECURRENCE_WITHOUT_PHASE_PAIR_CHART",
+  "claim_ceiling": "21_DECLARED_NUMERICAL_PHASE_PAIR_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_UNRELATED_AND100_CYCLE_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "FIXED34_PHASE_ANGLE_RESIDENCY_FOR21_DECLARED_CASES",
+    "FINAL_ONLY_BOUNDARY_PARITY_WITH_IDENTICAL17_COMPLEX_RECURRENCE",
+    "HISTORY_FREE_NUMERICAL_PHYSICAL_STATE_RESTORATION_ON_SAME_BACKING",
+    "UNRELATED_DEPTH1537_AND100_CYCLE_DEPTH64_REUSE_WITHIN_TOLERANCE",
+    "INDEPENDENT_LONG_DOUBLE_DENSE_COORDINATE_REEXECUTION"
+  ],
+  "rejected_interpretations": [
+    "EXACT_ALGEBRAIC_SEMANTICS",
+    "UNBOUNDED_DEPTH_NUMERICAL_STABILITY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

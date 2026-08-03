@@ -8391,3 +8391,43 @@ advantage, Small Wall crossing, physical execution, physical bit replacement,
 or unbounded computation.  The next experiment must change the primitive
 phase state/update law rather than extend this exhausted scale-and-unit gauge
 fixture family.
+
+## M143: Numerical unit-phasor-pair chart
+
+Claim:
+
+```text
+BOUNDED_NUMERICAL_UNIT_PHASOR_PAIR_CHART_REPRESENTS_NORMALIZED_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_STATE_IN_FIXED34_PHASE_ANGLE_COORDINATES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_PHYSICAL_STATE_RESTORATION_AND_REUSE_BUT_REQUIRES_TRANSCENDENTAL_CANONICAL_CHART_ARITHMETIC_AND_HAS_THE_IDENTICAL17_COMPLEX_COMPACT_CLASSICAL_RECURRENCE
+```
+
+M143 stores each normalized radial coefficient as two `float64` unit-phasor
+angles.  Across 21 declared cases in three families through depth 4096, the
+carrier stays at 34 angles or 272 resident bytes.  Maximum boundary error
+against the identical matrix-free 17-complex recurrence is `2.242e-11`,
+maximum final-state error is `1.658e-12`, and maximum transaction restoration
+error is `5.764e-12`, all below predeclared tolerances.
+
+The actual inverse acts on the resident angle array without reset, reload, or
+history.  Unrelated depth-1537 same-backing reuse differs from fresh execution
+by `1.646e-12`; 100 consecutive depth-64 cycles restore within `8.189e-12`.
+The correct class is `NUMERICAL_PHYSICAL_STATE_RESTORATION`, not exact
+algebraic restoration.
+
+An independent long-double oracle reconstructs the radial Fourier from all
+4,913 public coordinate visits, checks involution to `3.152e-19`, reexecutes
+all 21 cases and both reuse controls, and detects a boundary mutation.  The
+result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+The matched compact baseline also uses 272 resident bytes and the identical
+17-complex matrix-free recurrence.  The phase chart adds exponentials,
+magnitudes, arguments, and arccosines around each Fourier.  The current
+obstruction is therefore the explicit complex decode and transcendental
+recharting, not resident-cell growth in the tested cases.
+
+M143 establishes no exact semantics, unbounded numerical stability, CATVM
+custody, distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical bit replacement, or unbounded computation.  The next
+test is a direct angle-domain interference update or a bounded no-go against
+the identical complex recurrence; increasing fixture depth alone is not the
+next experiment.

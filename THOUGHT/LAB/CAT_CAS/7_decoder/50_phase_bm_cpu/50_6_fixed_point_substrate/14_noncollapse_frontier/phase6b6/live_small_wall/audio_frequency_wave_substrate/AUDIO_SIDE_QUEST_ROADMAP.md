@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_ANISOTROPIC_GLOBAL_UNIT_BALANCE_BOUNDED_NO_GO`
-**Roadmap version:** `14.8`
+**Status:** `STRICT_SCOPE_NUMERICAL_UNIT_PHASOR_PAIR_CHART`
+**Roadmap version:** `14.9`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `466557668e8ea4497f58794591291990048d3964`
+**Reconciled source head:** `c206d2052245c88f5e949776b165d1d37bb86e65`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_LOG_FREE_49_DIRECTION_AND_FIXED_PRECISION_LOG_EMBEDDING_GLOBAL_CYCLOTOMIC_UNIT_BALANCERS_AGREE_ON_ALL_21_COMMON_PI_FACTORED_ANISOTROPIC_F17_RADIAL_FINAL_STATES_REPAIR_THE_DEPTH1_PI_RESIDUAL_BLOWUP_BUT_SELECT_THE_IDENTITY_AT_EVERY_DEPTH2_PLUS_CASE_THROUGH_DEPTH64_WHILE_EXACT_RECONSTRUCTION_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_BALANCING_PATH_REMAIN`
-**Current claim ceiling:** `21_DECLARED_ANISOTROPIC_F17_RADIAL_Q_ZETA17_FINAL_STATES_ACROSS_THREE_PUBLIC_FAMILIES_DEPTHS1_TO64_AND_TWO_DECLARED_UNIT_BALANCERS_IN_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_NUMERICAL_UNIT_PHASOR_PAIR_CHART_REPRESENTS_NORMALIZED_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_STATE_IN_FIXED34_PHASE_ANGLE_COORDINATES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_PHYSICAL_STATE_RESTORATION_AND_REUSE_BUT_REQUIRES_TRANSCENDENTAL_CANONICAL_CHART_ARITHMETIC_AND_HAS_THE_IDENTICAL17_COMPLEX_COMPACT_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `21_DECLARED_NUMERICAL_PHASE_PAIR_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_UNRELATED_AND100_CYCLE_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M142_GLOBAL_UNIT_BALANCE_BOUNDED_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M143_UNIT_PHASOR_PAIR_CHART`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `PHASE_STATE_LAW_CHANGE_BEYOND_SHARED_SCALE_AND_GLOBAL_UNIT_GAUGES_WITH_FIXED_MATERIAL_COST_OR_BOUNDED_NO_GO_AGAINST_IDENTICAL_CLASSICAL_EXECUTION`
+**Active primary successor:** `NATIVE_ANGLE_DOMAIN_INTERFERENCE_UPDATE_FOR_UNIT_PHASOR_PAIR_CHART_OR_BOUNDED_BISIMULATION_NO_GO_AGAINST_IDENTICAL_COMPLEX_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`466557668e8ea4497f58794591291990048d3964`. The current 142-milestone
+`c206d2052245c88f5e949776b165d1d37bb86e65`. The current 143-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_LOG_FREE_49_DIRECTION_AND_FIXED_PRECISION_LOG_EMBEDDING_GLOBAL_CYCLOTOMIC_UNIT_BALANCERS_AGREE_ON_ALL_21_COMMON_PI_FACTORED_ANISOTROPIC_F17_RADIAL_FINAL_STATES_REPAIR_THE_DEPTH1_PI_RESIDUAL_BLOWUP_BUT_SELECT_THE_IDENTITY_AT_EVERY_DEPTH2_PLUS_CASE_THROUGH_DEPTH64_WHILE_EXACT_RECONSTRUCTION_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_BALANCING_PATH_REMAIN
+BOUNDED_NUMERICAL_UNIT_PHASOR_PAIR_CHART_REPRESENTS_NORMALIZED_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_STATE_IN_FIXED34_PHASE_ANGLE_COORDINATES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_PHYSICAL_STATE_RESTORATION_AND_REUSE_BUT_REQUIRES_TRANSCENDENTAL_CANONICAL_CHART_ARITHMETIC_AND_HAS_THE_IDENTICAL17_COMPLEX_COMPACT_CLASSICAL_RECURRENCE
 ```
 
 Not established:
@@ -5750,6 +5750,82 @@ It must alter the phase machine's primitive state/update law rather than add
 more cases to the exhausted scale-and-unit gauge route.  Any fixed-cost claim
 must count the complete state, ledgers, rematerialization, projection,
 restoration, and matched classical execution.
+
+## M143: Numerical unit-phasor-pair chart
+
+M143 changes the resident primitive from exact cyclotomic coefficients to two
+`float64` unit-phasor angles per normalized radial coefficient:
+`z = (exp(i alpha) + exp(i beta)) / 2`.  Quartic phase modules translate both
+angles directly.  The radial Fourier uses the matrix-free 16-character
+contraction and then returns to the canonical two-angle chart.
+
+```text
+claim
+    BOUNDED_NUMERICAL_UNIT_PHASOR_PAIR_CHART_REPRESENTS_NORMALIZED_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_STATE_IN_FIXED34_PHASE_ANGLE_COORDINATES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_PHYSICAL_STATE_RESTORATION_AND_REUSE_BUT_REQUIRES_TRANSCENDENTAL_CANONICAL_CHART_ARITHMETIC_AND_HAS_THE_IDENTICAL17_COMPLEX_COMPACT_CLASSICAL_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident 34-angle carrier NUMERICAL_PHYSICAL_STATE_RESTORATION
+    transient chart and projection buffers NO_RESTORATION_CLAIM
+
+source head
+    c206d2052245c88f5e949776b165d1d37bb86e65
+```
+
+The 21 declared cases cover `PRIMARY`, `REUSE`, and `ALTERNATE` at depths
+`1,4,16,64,256,1024,4096`.  The carrier remains 34 angles, or 272 resident
+bytes.  Maximum final-boundary error against the identical 17-`complex128`
+recurrence is `2.242e-11`; maximum final-state error is `1.658e-12`; maximum
+single-transaction restoration error is `5.764e-12`.  These are below the
+predeclared `5e-11` boundary and `2e-11` restoration tolerances.
+
+The accepted inverse acts on the actual angle array and does not reset or
+reload it.  An unrelated depth-1537 program reuses the same backing with
+`1.646e-12` fresh-versus-restored boundary error.  One hundred consecutive
+same-backing depth-64 cycles have maximum restoration error `8.189e-12`.
+This is tolerance-defined numerical physical-state restoration, not exact
+algebraic restoration or a canonical post-inverse reset.
+
+The independent oracle imports no production or predecessor module.  It
+rebuilds the dense 17-by-17 radial Fourier from all 4,913 public coordinate
+visits in complex long-double arithmetic, checks involution to `3.152e-19`,
+reexecutes all 21 cases, repeats the unrelated and 100-cycle reuse paths, and
+detects a final-boundary mutation.  Its dense matrix is verification-only.
+
+Accepted named accounting includes 272 resident angle bytes, 672 bytes of
+public root/index/shell geometry, 1,056 maximum named update bytes, 816
+maximum named projection bytes, and at most 184 public program bytes.  The
+2,184-byte named-component total is not a Python or whole-process peak.
+Allocator, NumPy/native-library, hashing, and container overhead remain
+excluded.
+
+The strongest compact classical baseline stores 17 `complex128` values,
+also 272 resident bytes, and executes the identical matrix-free recurrence
+without the chart's per-Fourier exponentials, magnitudes, arguments, and
+arccosines.  M143 therefore establishes fixed bounded numerical residency for
+the declared cases, but no improved representation or work law.
+
+M143 establishes no exact algebraic semantics, unbounded-depth numerical
+stability, CATVM custody, distinct phase resource, computational advantage,
+Small Wall crossing, physical waveform execution, physical bit replacement,
+or unbounded catalytic computation.
+
+The selected successor is:
+
+```text
+NATIVE_ANGLE_DOMAIN_INTERFERENCE_UPDATE_FOR_UNIT_PHASOR_PAIR_CHART_OR_BOUNDED_BISIMULATION_NO_GO_AGAINST_IDENTICAL_COMPLEX_RECURRENCE
+```
+
+It must attempt to remove the explicit decode to the identical 17-complex
+recurrence during Fourier interference.  Extending only the tested depth is
+insufficient.  The next result must either supply a direct angle-domain update
+with complete material accounting or establish a bounded obstruction against
+that update while retaining the strongest identical complex recurrence.
 
 ## 10. Roadmap Maintenance
 
