@@ -7523,3 +7523,69 @@ The next experiment is:
 ```text
 NONLINEAR_OR_PROGRAM_RESTRICTED_INTEGRABLE_PHASE_CONVOLUTION_CHART_WITH_EXACT_COMPOSITION_WITHOUT_H_K_COORDINATE_MATERIALIZATION_OR_HIDDEN_PRECISION_HISTORY_GROWTH
 ```
+
+## Coherent Veronese chart closes the fixed integrable word but not the grid coupling
+
+M129 implements the nonlinear program-restricted route left open by M128.
+The accepted phase carrier stores 17 exact coefficients `v_j` for
+`(sum_j v_j x_j)^k`. The fixed public `p1,...,p4` character operations are
+diagonal updates of those coefficients, and each declared adjacent-mode shear
+is the exact one-particle substitution `v_row += zeta17^e v_pivot`.
+
+```text
+claim
+    BOUNDED_EXACT_PROGRAM_RESTRICTED_F17_COHERENT_VERONESE_PHASE_CHART_CLOSES_FIXED_P1_TO_P4_CHARACTERS_AND_BIDIRECTIONAL_MODE_SHEARS_IN_17_RESIDENT_COORDINATES_ACROSS_GROWING_EXCHANGE_SYMMETRIC_DEGREE_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_SEALED_WORDS_HAVE_A_STRONGER_TWO_SCALAR_WARM_CLASSICAL_BASELINE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident carrier  EXACT_ALGEBRAIC_RESTORATION
+    transient buffers NO_RESTORATION_CLAIM
+
+source head
+    f787e13100715219b8d39bd113f5aaade3695013
+```
+
+Exact `Q(zeta17)` execution passes at `k=4,8,16,32`; structural `F103/F137`
+execution passes through `k=128`. The resident count stays at 17 field cells
+and 762 counted exact payload bits while the implicit `H(k)` rises from 4,845
+at `k=4` to 687,917,389,635,036,844,569 at `k=128`. The final scalar is
+`k*v0^(k-1)*v1`; its exact payload grows from 197 to 1,545 bits through the
+exact `k=32` scope and is counted.
+
+The forward chart is committed by streaming one serialized field record at a
+time and is never returned. Actual reverse execution restores exact zero on
+the same backing, advances generation, and supports an unrelated `k=16`
+reuse after `k=8` with fresh boundary and full reported resource-signature
+agreement. No snapshot or inverse history is used.
+
+The independent oracle expands all `H(4)=4,845` occupation coordinates in
+`Q(zeta17)`, `F103`, and `F137`, separately checks all 40 primitives and their
+inverses in both finite fields, reconstructs the streamed commitments, and
+hard-gates the compiled classical baseline. Actual M128 `k=2` grid states
+have nonzero rank-one catalecticant minors 58 and 46; those bounded witnesses
+prove that the grid injections leave this chart. They do not establish grid
+exit for every degree.
+
+For descriptor-runtime programs, compact classical software executes the
+identical 17-coordinate recurrence. For the fixed sealed words, a stronger
+warm baseline compiles the public word through 17 working cells, retains only
+`(v0,v1)`, and evaluates the boundary with two retained field cells. M129
+therefore establishes a bounded nonlinear chart closure, not a distinct phase
+resource or advantage.
+
+The next experiment is:
+
+```text
+EXACT_BOUNDED_SECANT_OR_GAUSSIAN_COHERENT_PHASE_CHART_FOR_ONE_SHARED_NONINTEGRABLE_ORBIT_COUPLING_WITH_RANK_GROWTH_AND_STRONGEST_COMPACT_CLASSICAL_BASELINE
+```
+
+The obstruction is:
+
+```text
+THE_RANK1_COHERENT_VERONESE_CHART_REMOVES_H_K_RESIDENCY_FOR_AN_INTEGRABLE_CHARACTER_AND_ONE_PARTICLE_SHEAR_SUBPROGRAM_BUT_M127_GRID_ORBIT_SHEARS_AND_GENERIC_SUPERPOSITIONS_LEAVE_THE_CHART_AND_EACH_SEALED_PUBLIC_WORD_COMPILES_TO_AN_EVEN_SMALLER_TWO_SCALAR_WARM_CLASSICAL_BOUNDARY_RECURRENCE
+```

@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_EXCHANGE_SYMMETRIC_PHASE_MODULE_LINEAR_IRREDUCIBILITY_OBSTRUCTION_NEXT_NONLINEAR_OR_RESTRICTED_CHART_SELECTED`
-**Roadmap version:** `13.4`
+**Status:** `STRICT_SCOPE_PROGRAM_RESTRICTED_COHERENT_VERONESE_PHASE_CHART_CLOSURE_NEXT_NONINTEGRABLE_SECANT_OR_GAUSSIAN_CHART_SELECTED`
+**Roadmap version:** `13.5`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `aa641f93a89c6311f469e222ae4f94e1ecad960f`
+**Reconciled source head:** `f787e13100715219b8d39bd113f5aaade3695013`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F17_POWER_SUM_CHARACTER_AND_BIDIRECTIONAL_MODE_SHEAR_PHASE_MODULE_HAS_NO_NONTRIVIAL_LINEAR_QUOTIENT_BELOW_H_K_ON_EACH_DECLARED_EXCHANGE_SYMMETRIC_K1_TO_K4_ORBIT_MODULE_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `K1_TO_K4_EXCHANGE_SYMMETRIC_F17_POWER_SUM_CHARACTER_AND_BIDIRECTIONAL_ADJACENT_MODE_SHEAR_LINEAR_H_K_MODULE_ONLY_EXACT_Q_ZETA17_K1_K2_DUAL_FIELD_K1_TO_K4_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_PROGRAM_RESTRICTED_F17_COHERENT_VERONESE_PHASE_CHART_CLOSES_FIXED_P1_TO_P4_CHARACTERS_AND_BIDIRECTIONAL_MODE_SHEARS_IN_17_RESIDENT_COORDINATES_ACROSS_GROWING_EXCHANGE_SYMMETRIC_DEGREE_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_SEALED_WORDS_HAVE_A_STRONGER_TWO_SCALAR_WARM_CLASSICAL_BASELINE`
+**Current claim ceiling:** `DECLARED_K4_TO128_RANK1_COHERENT_VERONESE_FIXED_P1_TO_P4_AND_BIDIRECTIONAL_ADJACENT_MODE_SHEAR_PROGRAM_FAMILY_EXACT_Q_ZETA17_K4_TO32_DUAL_FIELD_K4_TO128_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M128_EXCHANGE_SYMMETRIC_LINEAR_MODULE_IRREDUCIBILITY_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M129_RANK1_CHART_CEILING_AND_TWO_SCALAR_CLASSICAL_COLLAPSE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `NONLINEAR_OR_PROGRAM_RESTRICTED_INTEGRABLE_PHASE_CONVOLUTION_CHART_WITH_EXACT_COMPOSITION_WITHOUT_H_K_COORDINATE_MATERIALIZATION_OR_HIDDEN_PRECISION_HISTORY_GROWTH`
+**Active primary successor:** `EXACT_BOUNDED_SECANT_OR_GAUSSIAN_COHERENT_PHASE_CHART_FOR_ONE_SHARED_NONINTEGRABLE_ORBIT_COUPLING_WITH_RANK_GROWTH_AND_STRONGEST_COMPACT_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`aa641f93a89c6311f469e222ae4f94e1ecad960f`. The current 128-milestone
+`f787e13100715219b8d39bd113f5aaade3695013`. The current 129-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4606,6 +4606,61 @@ The surviving obstruction is:
 THE_POWER_SUM_CHARACTER_AND_CONNECTED_MODE_SHEAR_EXTENSION_MAKES_EACH_DECLARED_EXCHANGE_SYMMETRIC_H_K_PHASE_MODULE_IRREDUCIBLE_SO_ANY_EXACT_UNIFORM_LINEAR_QUOTIENT_RETAINS_ALL_H_K_COORDINATES_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE
 ```
 
+### 6.129 Program-restricted coherent Veronese phase chart
+
+M129 follows the M128 linear no-go with a nonlinear rank-one coherent chart.
+For the fixed public `p1,...,p4` character and bidirectional adjacent-mode
+shear words, the exchange-symmetric occupation tensor remains
+
+```text
+(sum_j v_j x_j)^k
+```
+
+and therefore closes in 17 exact resident field coordinates rather than all
+`H(k)` occupation coordinates.
+
+```text
+classification                   INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                     INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration     EXACT_ALGEBRAIC_RESTORATION
+transient and oracle state       NO_RESTORATION_CLAIM
+source head                      f787e13100715219b8d39bd113f5aaade3695013
+hosted run                       NOT ESTABLISHED
+```
+
+Exact `Q(zeta17)` transactions pass at `k=4,8,16,32`; `F103/F137`
+structural transactions pass at `k=4,8,16,32,64,128`. The resident carrier
+stays at 17 cells and 762 counted exact payload bits while the implicit
+`H(k)` grows from 4,845 through 687,917,389,635,036,844,569. The final scalar
+payload grows and remains counted. Forward chart commitments are streamed one
+field record at a time; chart amplitudes are not returned.
+
+Independent full `H(4)=4,845` occupation reexecution in three algebras agrees
+with the chart, as do all 40 individual primitives and inverses in two fields.
+Actual reverse execution restores exact zero on the same backing and supports
+unrelated fresh/restored reuse. Exact M128 `k=2` grid transactions yield
+nonzero rank-one minors 58 and 46, so the rank-one chart does not absorb those
+grid-orbit injections or generic coherent superpositions.
+
+The strongest fixed-word warm classical baseline compiles through 17 working
+cells, retains only `(v0,v1)`, and evaluates the final boundary with two
+retained field cells. Descriptor-runtime comparison uses the identical
+17-coordinate recurrence. Thus M129 establishes a strict bounded nonlinear
+program-restricted closure but no resource unavailable to compact classical
+software.
+
+The selected successor is:
+
+```text
+EXACT_BOUNDED_SECANT_OR_GAUSSIAN_COHERENT_PHASE_CHART_FOR_ONE_SHARED_NONINTEGRABLE_ORBIT_COUPLING_WITH_RANK_GROWTH_AND_STRONGEST_COMPACT_CLASSICAL_BASELINE
+```
+
+The surviving obstruction is:
+
+```text
+THE_RANK1_COHERENT_VERONESE_CHART_REMOVES_H_K_RESIDENCY_FOR_AN_INTEGRABLE_CHARACTER_AND_ONE_PARTICLE_SHEAR_SUBPROGRAM_BUT_M127_GRID_ORBIT_SHEARS_AND_GENERIC_SUPERPOSITIONS_LEAVE_THE_CHART_AND_EACH_SEALED_PUBLIC_WORD_COMPILES_TO_AN_EVEN_SMALLER_TWO_SCALAR_WARM_CLASSICAL_BOUNDARY_RECURRENCE
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -4747,6 +4802,10 @@ nonlinear, program-restricted, approximate, or integrable quotient lower bounds 
 compression below H(k) for operations outside the declared M128 selectable primitive algebra
 CATVM custody of the M128 direct-process carrier or certificate buffers
 distinct phase resource or advantage from the M128 identical H(k)-coordinate recurrence
+M127 grid-orbit shear closure or generic coherent-superposition closure from M129
+arbitrary H(k)-input or general nonlinear quotient closure from M129
+CATVM custody of the M129 direct-process carrier or transient buffers
+distinct phase resource or advantage from the M129 two-scalar warm classical baseline comparison
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4859,6 +4918,18 @@ nonlinear or integrable phase-convolution chart that composes exactly without
 materializing all `H(k)` coordinates or moving growth into precision, history,
 compiler state, or hidden enumeration. Keep the identical compact classical
 chart or recurrence as the matched baseline.
+M129 then closes the fixed character and one-particle-shear word on the
+rank-one coherent Veronese chart in 17 resident field cells across the
+declared degrees, with exact restoration and reuse. The actual M128 grid
+injections and generic superpositions leave that chart, and each sealed word
+admits a stronger compiled two-scalar warm classical boundary recurrence.
+Continue with the smallest exact bounded secant or Gaussian coherent chart
+that admits one shared nonintegrable orbit coupling, and measure whether
+chart rank grows or merely moves the `H(k)` obstruction. Do not expand the
+rank-one degree list or treat the 17-cell encoding as a distinct resource.
+Retain the compiled two-scalar fixed-word baseline, the 17-coordinate
+descriptor-runtime baseline, final-only projection, exact restoration, and
+same-backing reuse; do not introduce matching or assignment enumeration.
 
 ## 10. Roadmap Maintenance
 
