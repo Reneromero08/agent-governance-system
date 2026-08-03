@@ -524,16 +524,25 @@ def run(production_path: Path) -> dict[str, Any]:
     if not all(controls.values()):
         fail("independent semantic controls failed")
     compare(
-        production["resource_accounting"]["accepted_phase_and_classical_state_law"],
-        "204N2_FIELD_COORDINATES",
-        "resource law",
+        production["resource_accounting"][
+            "accepted_phase_and_classical_per_node_state_law"
+        ],
+        "204N2_FIELD_COORDINATES_PER_NODE",
+        "per-node resource law",
+    )
+    compare(
+        production["resource_accounting"][
+            "accepted_phase_and_classical_full_carrier_state_law"
+        ],
+        "1836N2_FIELD_COORDINATES",
+        "full-carrier resource law",
     )
     compare(
         production["resource_accounting"]["phase_to_matched_classical_payload_ratio"],
         1.0,
         "payload ratio",
     )
-    comparisons += 2
+    comparisons += 3
 
     return {
         "schema": "CAT_CAS_F103_C102_DUAL_REGISTER_QUADRATIC_PHASE_SHEAR_RELATION_NO_GO_ORACLE_V1",
@@ -552,7 +561,8 @@ def run(production_path: Path) -> dict[str, Any]:
         "reconstructed_single_character_collision": True,
         "reconstructed_character_coupling_support": True,
         "reconstructed_boundary_character_evaluation": True,
-        "reconstructed_identical_204n2_coordinate_law": True,
+        "reconstructed_identical_204n2_per_node_coordinate_law": True,
+        "reconstructed_identical_1836n2_full_carrier_coordinate_law": True,
         "semantic_controls": controls,
         "cases": oracle_cases,
         "package_local_only": [

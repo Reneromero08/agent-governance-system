@@ -42,11 +42,12 @@ kernel interpretation is therefore rejected. The exact quadratic dependency
 law nevertheless lets each of the 102 input characters influence every output
 character through at least one companion character.
 
-The two-register payload is 45,900 F103 cells at C5 and 89,964 at C7, exactly
-`204 n^2`. The strongest matched compact classical method is the identical
-dual-register coefficient recurrence and has the same coordinate count. This
-is a useful nonlinear phase mechanism and a no-go for the old one-character
-quotient, not evidence of a distinct phase resource or advantage.
+The two-register payload is `204 n^2` F103 cells per node. Across the complete
+nine-node carrier it is `1,836 n^2`: 45,900 cells at C5 and 89,964 at C7. The
+strongest matched compact classical method is the identical dual-register
+coefficient recurrence and has the same coordinate count. This is a useful
+nonlinear phase mechanism and a no-go for the old one-character quotient, not
+evidence of a distinct phase resource or advantage.
 
 ## Controls
 

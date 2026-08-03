@@ -35,7 +35,7 @@ CLAIM = (
     "FULL_RANK102_ONE_SHEAR_QUADRATIC_OBSERVABLE_ON_C5_C7_WITH_EXACT_"
     "RESTORATION_AND_REUSE_BUT_THE_ACCEPTED_CARRIER_AND_STRONGEST_"
     "MATCHED_CLASSICAL_RECURRENCE_BOTH_RETAIN_THE_IDENTICAL204N2_FIELD_"
-    "COORDINATES"
+    "COORDINATES_PER_NODE_AND1836N2_TOTAL_NINE_NODE_PAYLOAD"
 )
 
 
@@ -1017,7 +1017,8 @@ def run() -> dict[str, Any]:
             "phase_payload_field_cells_by_interface": payload_by_interface,
             "matched_classical_payload_field_cells_by_interface": payload_by_interface,
             "phase_to_matched_classical_payload_ratio": 1.0,
-            "accepted_phase_and_classical_state_law": "204N2_FIELD_COORDINATES",
+            "accepted_phase_and_classical_per_node_state_law": "204N2_FIELD_COORDINATES_PER_NODE",
+            "accepted_phase_and_classical_full_carrier_state_law": "1836N2_FIELD_COORDINATES",
             "declared_forward_inverse_and_shear_arithmetic_counts_reported": True,
             "named_moment_output_shear_and_plan_buffer_cells_reported": True,
             "compiled_program_descriptor_counted": True,

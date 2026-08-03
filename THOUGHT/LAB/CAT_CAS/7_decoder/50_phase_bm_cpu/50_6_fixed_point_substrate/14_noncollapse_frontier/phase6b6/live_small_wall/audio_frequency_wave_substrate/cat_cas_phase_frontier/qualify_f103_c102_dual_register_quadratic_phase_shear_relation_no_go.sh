@@ -27,13 +27,13 @@ for artifact in \
   cp "${frontier_dir}/${artifact}" "${evidence_dir}/${artifact}"
 done
 
-test "$(sha256sum "${evidence_dir}/${production}" | cut -d' ' -f1)" = "8b4e78613c5c9afc78ffed7fe8022a70b40307e23093b0770ed7c5a09e4e0112"
-test "$(sha256sum "${evidence_dir}/${oracle}" | cut -d' ' -f1)" = "cb2e6a037b02aaab2d0c81900601d9224ce189731bd39f6c6f5ee2ca03fb0a70"
+test "$(sha256sum "${evidence_dir}/${production}" | cut -d' ' -f1)" = "29b0333cd9236236fad04fa7df8f6dc42851c47c69e89a61a57c843157e0eb69"
+test "$(sha256sum "${evidence_dir}/${oracle}" | cut -d' ' -f1)" = "176a0f05528c52178455945982224df5aef620b39b022a16643f6f72d2b88c5f"
 test "$(sha256sum "${evidence_dir}/${base_production}" | cut -d' ' -f1)" = "961ba11f4c19841985fdfc66959ec865bea1f3b1800c9e05dccfd313fa1f1d57"
 test "$(sha256sum "${evidence_dir}/${base_oracle}" | cut -d' ' -f1)" = "dc40fb0a6a3004262415a573ec5e391ecd04658bd1f3c0fd11952e2092d8f05d"
-test "$(sha256sum "${evidence_dir}/${result}" | cut -d' ' -f1)" = "706f72845cf6519c0c78d64ff4b59e0b8fdab8026931a2951033708b94d5811e"
-test "$(sha256sum "${evidence_dir}/${oracle_result}" | cut -d' ' -f1)" = "7d933c85583bb227e2ee4fe7215636c142c9a4d46184833afc228d4d2a78defe"
-test "$(sha256sum "${evidence_dir}/${review}" | cut -d' ' -f1)" = "21b23ee3d076ba32b37bfb1e965fa73167afb0828b22dd46197d3395ebc544ea"
+test "$(sha256sum "${evidence_dir}/${result}" | cut -d' ' -f1)" = "5ad41c9dd30371470ab9369043c3e148d1e6cada345adcf7c010e1c006194c8a"
+test "$(sha256sum "${evidence_dir}/${oracle_result}" | cut -d' ' -f1)" = "6f3ba0a4b875f817867007baa29c0147d92e771241da53129f688e9eda11cb7d"
+test "$(sha256sum "${evidence_dir}/${review}" | cut -d' ' -f1)" = "a41aa50cf1f7d5348d6fad7c4b00c83ae4a0c1e9919a726f9251b54417c01aed"
 
 if rg -n '^\s*(import numpy|from numpy|from .*f103_c102_dual_register_quadratic_phase_shear_relation_no_go import|import f103_c102_dual_register_quadratic_phase_shear_relation_no_go)' "${evidence_dir}/${oracle}"; then
   echo "oracle isolation violation" >&2
@@ -65,7 +65,8 @@ jq -e '
   and .restoration_and_reuse.snapshot_used == false
   and .restoration_and_reuse.unrelated_program_reuse.second_boundary_matches_fresh == true
   and .restoration_and_reuse.repeated_reuse.cycles == 8
-  and .resource_accounting.accepted_phase_and_classical_state_law == "204N2_FIELD_COORDINATES"
+  and .resource_accounting.accepted_phase_and_classical_per_node_state_law == "204N2_FIELD_COORDINATES_PER_NODE"
+  and .resource_accounting.accepted_phase_and_classical_full_carrier_state_law == "1836N2_FIELD_COORDINATES"
   and .resource_accounting.phase_to_matched_classical_payload_ratio == 1
   and .resource_accounting.physical_numpy_transient_peak_bytes_measured == false
   and .resource_accounting.no_physical_peak_or_runtime_advantage_claimed == true
@@ -83,13 +84,14 @@ jq -e '
   and .imports_numpy == false
   and .reuses_prior_independent_m157_scalar_reference == true
   and .case_count == 12
-  and .comparison_count == 96
+  and .comparison_count == 97
   and .exact_inverse_cases == 12
   and .reconstructed_dual_register_coefficients == true
   and .reconstructed_quadratic_shear_and_inverse == true
   and .reconstructed_single_character_collision == true
   and .reconstructed_character_coupling_support == true
-  and .reconstructed_identical_204n2_coordinate_law == true
+  and .reconstructed_identical_204n2_per_node_coordinate_law == true
+  and .reconstructed_identical_1836n2_full_carrier_coordinate_law == true
   and ([.semantic_controls[]] | all)
 ' "${evidence_dir}/oracle.rerun.json" >/dev/null
 
