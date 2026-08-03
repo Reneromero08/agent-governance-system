@@ -1,0 +1,81 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 161,
+  "scientific_source_head": "f0a97ab928af766f3e939b9ce17e1c4e130e0608",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "artifacts": {
+    "production_source": {
+      "path": "f17_c17_nilpotent_phase_jet_open_relation_closure.py",
+      "sha256": "64238bf43a957a1dd497313914925495f0f53ec781a692ef50ad0caa2c935810"
+    },
+    "oracle_source": {
+      "path": "f17_c17_nilpotent_phase_jet_open_relation_closure_oracle.py",
+      "sha256": "816ae7a7a5106ccaaad5f7b813cd7ada263239b532896a570a5f9920b071257c"
+    },
+    "production_result": {
+      "path": "F17_C17_NILPOTENT_PHASE_JET_OPEN_RELATION_CLOSURE_RESULTS.json",
+      "sha256": "986d3948c7a4b0e20e69d46d15f754dc6bb6b938a2b24358c459f4a5b1fa7587"
+    },
+    "oracle_result": {
+      "path": "F17_C17_NILPOTENT_PHASE_JET_OPEN_RELATION_CLOSURE_ORACLE_RESULTS.json",
+      "sha256": "d6569c939af32d9263b7f218dc040bfd7b6e6ac5e04710a04b6c6930e873fdcc"
+    },
+    "qualifier": {
+      "path": "qualify_f17_c17_nilpotent_phase_jet_open_relation_closure.sh",
+      "sha256": "db7a071dfc77420846a1fa166ac11c7f1ae9e5419d66c9c18fe42d1ee6daf569"
+    },
+    "review": {
+      "path": "F17_C17_NILPOTENT_PHASE_JET_OPEN_RELATION_CLOSURE_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "64e3339a157f2e65e02631eb1309e78e0538ea78135be7df87ff58182da009d7"
+    }
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_F17_C17_NILPOTENT_PHASE_JET_OPEN_RELATION_CLOSURE_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m161-qualifier-5GLk1T"
+  },
+  "independent_oracle": {
+    "imports_production": false,
+    "imports_numpy": false,
+    "full_group_algebra_reference": true,
+    "case_count": 24,
+    "production_comparisons": 96,
+    "quotient_law_comparisons": 54,
+    "scope_controls": 6,
+    "all_pass": true
+  },
+  "resource_law": {
+    "maximum_accepted_carrier_field_cells": 16,
+    "maximum_logical_working_field_cells_peak": 56,
+    "matched_compact_classical_carrier_field_cells": 16,
+    "matched_compact_classical_logical_working_field_cells_peak": 56,
+    "accepted_over_matched_compact_classical_carrier_ratio": 1,
+    "accepted_over_matched_compact_classical_logical_working_ratio": 1,
+    "retained_inverse_history_field_cells": 0,
+    "oracle_full_group_algebra_field_cells": 34,
+    "dense_relation_table_cells": 0,
+    "physical_process_peak_measured": false
+  },
+  "claim_ceiling": "F17_C17_TRANSLATION_INVARIANT_OPEN_RELATION_JETS_RANKS2_4_8_TWO_PUBLIC_PROGRAM_FAMILIES_DEPTHS1_4_16_64_FINAL_LINEAR_B_JET_BOUNDARIES",
+  "preserved_subclaims": [
+    "FULL17_CYCLIC_CONVOLUTION_MAPS_EXACTLY_TO_TRUNCATED_JET_MULTIPLICATION",
+    "FULL17_NONLINEAR_CONVOLUTION_SHEAR_MAPS_EXACTLY_TO_THE_JET_SHEAR",
+    "FULL17_REFERENCE_AND_ACCEPTED_JET_BOUNDARIES_MATCH_IN24_CASES",
+    "FULL17_AND_JET_CARRIERS_RESTORE_EXACTLY",
+    "SAME_BACKING_UNRELATED_PROGRAM_REUSE_WITHOUT_SNAPSHOT",
+    "HIGHER_HASSE_COORDINATES_ARE_DEMONSTRABLY_DISCARDED"
+  ],
+  "rejected_interpretations": [
+    "GENERAL_OPEN_RELATION_INTERSECTION_CLOSURE",
+    "LOSSLESS_FULL_F17_C17_RELATION_REPRESENTATION_BELOW17_COORDINATES",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_QUOTIENT`
-**Roadmap version:** `14.26`
+**Status:** `STRICT_SCOPE_F17_C17_NILPOTENT_PHASE_JET_OPEN_RELATION_CLOSURE`
+**Roadmap version:** `14.27`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `3e3a311fc35a0088511d8414cd75b23d58396135`
+**Reconciled source head:** `f0a97ab928af766f3e939b9ce17e1c4e130e0608`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_QUOTIENT_IS_CLOSED_UNDER_DUAL_REGISTER_QUADRATIC_SHEAR_RELATION_PROGRAMS_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_CANONICAL_REPRESENTATIVE_RETAINS_ALL45900_FIELD_CELLS_AND_THE45_BIT_ORIENTATION_LEDGER_EXACTLY_RETURNS_THE_DISCARDED_ORBIT_INFORMATION_WHILE_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS`
-**Current claim ceiling:** `C5_TWO_PUBLIC_ROTATING_HUB_FAMILIES_DEPTHS1_4_16_64_COLUMNWISE_GLOBAL_SIGN_ORBITS_OF_EACH_A_MATRIX_COLUMN_WITH45_BIT_PRIVATE_RESTORATION_LEDGER`
+**Current highest milestone:** `BOUNDED_EXACT_F17_C17_REPEATED_ROOT_NILPOTENT_PHASE_JET_QUOTIENT_CLOSES_TRANSLATION_INVARIANT_OPEN_RELATION_COMPOSITION_AND_NONLINEAR_CONVOLUTION_SHEAR_IN_RANKS2_4_8_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_RANK_R_CLASSICAL_JET_RECURRENCE_REMAINS_AND_HIGHER_HASSE_MOMENTS_ARE_EXPLICITLY_OUTSIDE_THE_QUOTIENT`
+**Current claim ceiling:** `F17_C17_TRANSLATION_INVARIANT_OPEN_RELATION_JETS_RANKS2_4_8_TWO_PUBLIC_PROGRAM_FAMILIES_DEPTHS1_4_16_64_FINAL_LINEAR_B_JET_BOUNDARIES`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M160_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_QUOTIENT`
+**New mechanism development:** `ACTIVE_AFTER_M161_F17_C17_NILPOTENT_PHASE_JET_OPEN_RELATION_CLOSURE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F17_C17_REPEATED_ROOT_NILPOTENT_PHASE_JET_OPEN_RELATION_CLOSURE_WITH_NONLINEAR_SHEAR_AND_MATCHED_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_F17_C17_COMMON_PHASE_CONGRUENCE_FOR_CONVOLUTION_AND_HADAMARD_INTERSECTION_OR_FULL17_NO_GO_WITH_RESTRICTED_COMPATIBLE_MODULE_SEARCH`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`3e3a311fc35a0088511d8414cd75b23d58396135`. The current 160-milestone
+`f0a97ab928af766f3e939b9ce17e1c4e130e0608`. The current 161-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_QUOTIENT_IS_CLOSED_UNDER_DUAL_REGISTER_QUADRATIC_SHEAR_RELATION_PROGRAMS_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_CANONICAL_REPRESENTATIVE_RETAINS_ALL45900_FIELD_CELLS_AND_THE45_BIT_ORIENTATION_LEDGER_EXACTLY_RETURNS_THE_DISCARDED_ORBIT_INFORMATION_WHILE_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+BOUNDED_EXACT_F17_C17_REPEATED_ROOT_NILPOTENT_PHASE_JET_QUOTIENT_CLOSES_TRANSLATION_INVARIANT_OPEN_RELATION_COMPOSITION_AND_NONLINEAR_CONVOLUTION_SHEAR_IN_RANKS2_4_8_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_RANK_R_CLASSICAL_JET_RECURRENCE_REMAINS_AND_HIGHER_HASSE_MOMENTS_ARE_EXPLICITLY_OUTSIDE_THE_QUOTIENT
 ```
 
 Not established:
@@ -6923,6 +6923,57 @@ with exact restoration, final-only projection, and the identical compact
 classical recurrence counted. M160 establishes no CATVM custody, distinct
 phase resource, computational advantage, Small Wall crossing, physical
 execution, physical bit replacement, or unbounded computation.
+
+## M161: characteristic-17 nilpotent phase jets close exact composition
+
+Claim:
+
+```text
+BOUNDED_EXACT_F17_C17_REPEATED_ROOT_NILPOTENT_PHASE_JET_QUOTIENT_CLOSES_TRANSLATION_INVARIANT_OPEN_RELATION_COMPOSITION_AND_NONLINEAR_CONVOLUTION_SHEAR_IN_RANKS2_4_8_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_RANK_R_CLASSICAL_JET_RECURRENCE_REMAINS_AND_HIGHER_HASSE_MOMENTS_ARE_EXPLICITLY_OUTSIDE_THE_QUOTIENT
+```
+
+M161 changes the algebraic phase state law. In characteristic 17,
+`t^17 - 1 = (t - 1)^17`, so `F17[C17]` is exactly the nilpotent jet algebra
+`F17[epsilon]/(epsilon^17)` with `t = 1 + epsilon`. Reduction modulo
+`epsilon^rank` is consequently an exact algebra quotient. Rank-2, rank-4,
+and rank-8 carriers execute translation-invariant open-relation convolution,
+public phase rotations, invertible relation kernels, and a reversible
+nonlinear convolution-square shear directly in the resident jet.
+
+Both public noncommuting module orders at depths 1, 4, 16, and 64 match the
+executed identical rank-r compact classical recurrence in all 24 cases.
+Actual inverse operations restore the exact jet cells on the same backing.
+An alternate-family program consumes the carrier restored from a primary
+program, reaches restoration generation two, and matches fresh execution
+without snapshot or inverse history.
+
+The independent oracle imports neither production nor NumPy. It executes the
+full 17-coefficient cyclic group algebra and only then maps the final state to
+the Hasse jet. It matches 96 production fields, restores the full reference
+exactly, and passes 54 independent addition, rotation, and convolution
+quotient-law comparisons.
+
+The same oracle supplies the strict ceiling. Explicit `epsilon^rank`
+witnesses have zero retained jet but nonzero higher Hasse content, and
+coefficientwise Hadamard intersection with a coordinate idempotent exposes
+that discarded content. General relation intersection therefore does not
+descend to this quotient. At rank 8 the phase and strongest classical paths
+both use 16 carrier cells and the same conservative 56-cell logical working
+peak and field-operation law; no advantage is present.
+
+The selected successor attacks exactly that obstruction rather than adding
+rank or depth fixtures:
+
+```text
+EXACT_F17_C17_COMMON_PHASE_CONGRUENCE_FOR_CONVOLUTION_AND_HADAMARD_INTERSECTION_OR_FULL17_NO_GO_WITH_RESTRICTED_COMPATIBLE_MODULE_SEARCH
+```
+
+It must determine the smallest common exact quotient for both relation
+products and, if only the full 17-coordinate algebra survives, identify the
+largest nontrivial public intersection family compatible with a proper phase
+quotient. M161 establishes no CATVM custody, distinct phase resource,
+computational advantage, Small Wall crossing, physical execution, physical
+bit replacement, or unbounded catalytic computation.
 
 ## 10. Roadmap Maintenance
 

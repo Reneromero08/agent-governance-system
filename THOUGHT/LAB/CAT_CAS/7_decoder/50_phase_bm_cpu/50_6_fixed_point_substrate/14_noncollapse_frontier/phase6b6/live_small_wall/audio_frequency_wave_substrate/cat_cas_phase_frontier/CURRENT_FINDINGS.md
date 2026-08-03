@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`3e3a311fc35a0088511d8414cd75b23d58396135`. The canonical per-milestone
+`f0a97ab928af766f3e939b9ce17e1c4e130e0608`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9191,3 +9191,43 @@ EXACT_F17_C17_REPEATED_ROOT_NILPOTENT_PHASE_JET_OPEN_RELATION_CLOSURE_WITH_NONLI
 M160 establishes no CATVM custody, distinct phase resource, computational
 advantage, Small Wall crossing, physical execution, physical bit replacement,
 or unbounded computation.
+
+## M161: exact repeated-root phase jets change the carrier law
+
+Claim:
+
+```text
+BOUNDED_EXACT_F17_C17_REPEATED_ROOT_NILPOTENT_PHASE_JET_QUOTIENT_CLOSES_TRANSLATION_INVARIANT_OPEN_RELATION_COMPOSITION_AND_NONLINEAR_CONVOLUTION_SHEAR_IN_RANKS2_4_8_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_RANK_R_CLASSICAL_JET_RECURRENCE_REMAINS_AND_HIGHER_HASSE_MOMENTS_ARE_EXPLICITLY_OUTSIDE_THE_QUOTIENT
+```
+
+Characteristic 17 turns the C17 group algebra into the repeated-root algebra
+`F17[epsilon]/(epsilon^17)`. M161 executes proper rank-2, rank-4, and rank-8
+quotients directly, with translation-invariant relation composition as jet
+multiplication and a reversible nonlinear convolution-square shear. The
+accepted path retains neither a full 17-coefficient relation nor a 17-by-17
+relation table.
+
+All 24 declared rank/family/depth cases match the executed identical compact
+jet recurrence. Exact inverse operations restore the same backing, and a
+second alternate-family program consumes a carrier restored from a primary
+program without snapshot or inverse history.
+
+The independent oracle executes the full 17-coefficient group algebra,
+matches 96 production fields, and passes 54 quotient-law checks. It also
+constructs explicit discarded `epsilon^rank` witnesses. Those witnesses prove
+that higher Hasse moments are outside the quotient and that coefficientwise
+Hadamard relation intersection does not descend. The strongest classical path
+has the same 16-cell rank-8 carrier, 56-cell conservative logical working
+peak, and field-operation law.
+
+The next experiment asks whether any proper common exact congruence can support
+both convolution composition and Hadamard intersection, then searches only
+the restricted compatible intersection family if the common quotient is full:
+
+```text
+EXACT_F17_C17_COMMON_PHASE_CONGRUENCE_FOR_CONVOLUTION_AND_HADAMARD_INTERSECTION_OR_FULL17_NO_GO_WITH_RESTRICTED_COMPATIBLE_MODULE_SEARCH
+```
+
+No CATVM custody, distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical bit replacement, or unbounded
+catalytic computation is established.
