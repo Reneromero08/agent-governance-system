@@ -46,6 +46,7 @@
     "cleanup_law": null
   },
   "inventory_output_fields": [
+    "inventory_receipt_id",
     "target_identity",
     "timestamp",
     "access_method",
