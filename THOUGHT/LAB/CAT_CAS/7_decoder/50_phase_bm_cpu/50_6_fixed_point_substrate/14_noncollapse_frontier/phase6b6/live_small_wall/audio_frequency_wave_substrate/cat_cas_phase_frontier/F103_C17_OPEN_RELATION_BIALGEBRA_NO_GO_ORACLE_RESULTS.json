@@ -1,0 +1,78 @@
+{
+  "all_459_coordinate_coefficient_dual_matches": true,
+  "all_boundary_matches": true,
+  "all_exact_restorations": true,
+  "case_field_comparisons": 360,
+  "claim_ceiling": "F103_TRANSLATION_INVARIANT_WEIGHTED_C17_TO_C17_OPEN_RELATIONS_ON_THE_DECLARED9_NODE_THREE_SLOT_ROTATING_HUB_TOPOLOGY_ACROSS_18_CASES_THROUGH_DEPTH512_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "composition_intersection_order_noncommutes": true,
+    "composition_not_intersection": true,
+    "missing_inverse_changes_state": true,
+    "null_carrier_rejected": true,
+    "null_port_changes_boundary": true,
+    "out_in_order_changes_boundary": true,
+    "premature_projection_rejected": true,
+    "reordered_inverse_changes_state": true,
+    "resident_relation_projection_rejected": true,
+    "topology_mutation_changes_boundary": true,
+    "wrong_inverse_changes_state": true,
+    "wrong_owner_rejected": true,
+    "wrong_relation_type_rejected": true
+  },
+  "decision": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "exact_case_reexecutions": 18,
+  "independence": {
+    "implementation": "SCALAR_PYTHON_F103_ARITHMETIC_RECONSTRUCTED_FROM_PUBLIC_DESCRIPTOR",
+    "imports_numpy": false,
+    "imports_production": false
+  },
+  "oracle_source_sha256": "6c3a85dff1d6441b1f0317af3545f9e725c4e6db710e4ee19d7920f98e400f7c",
+  "production_result_sha256": "2edb42e20b99ae05a56c1a5b7285a0f7898bfb5f60c07e1732279b97cdac3da9",
+  "rejected_interpretations": [
+    "NON_TRANSLATION_INVARIANT_RELATIONS",
+    "ARBITRARY_PORT_ARITY_OR_GRAPH_TOPOLOGY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "repeated_reuse": {
+    "cycles": 64,
+    "exact_restoration": true,
+    "restoration_generation": 64,
+    "same_backing": true,
+    "snapshot_reload_used": false,
+    "stable_boundary_count": 1
+  },
+  "resource_law": {
+    "assignment_expansions_materialized": 0,
+    "coefficient_and_dual_spectral_dimensions_equal": true,
+    "dense_relation_table_cells_materialized": 0,
+    "maximum_dual_spectral_bialgebra_multiplications": 2506752,
+    "maximum_phase_bialgebra_multiplications": 2506752,
+    "resident_field_coordinates_each": 459
+  },
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F103_C17_OPEN_RELATION_BIALGEBRA_NO_GO_ORACLE_RESULT_V1",
+  "semantic_controls": {
+    "assignment_expansions_materialized": 0,
+    "composition_scalar_checks": 289,
+    "intersection_scalar_checks": 289,
+    "relation_tables_materialized": 0
+  },
+  "unrelated_reuse": {
+    "first_exact_restoration": true,
+    "resource_signature_matches_fresh": true,
+    "restoration_generation": 2,
+    "same_backing_across_programs": true,
+    "second_boundary_matches_fresh": true,
+    "second_exact_restoration": true,
+    "second_final_commitment_matches_fresh": true,
+    "snapshot_reload_used": false
+  },
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
