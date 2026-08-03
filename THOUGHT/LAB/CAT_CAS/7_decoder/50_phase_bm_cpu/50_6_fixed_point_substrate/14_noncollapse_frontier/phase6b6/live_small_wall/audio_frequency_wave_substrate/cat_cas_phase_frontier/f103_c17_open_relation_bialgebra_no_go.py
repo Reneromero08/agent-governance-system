@@ -1027,8 +1027,9 @@ def run() -> dict[str, Any]:
             "logical_relation_factors": NODE_COUNT * SLOTS,
             "resident_field_coordinates": resident_cells,
             "resident_bytes": resident_bytes,
-            "typed_owner_checked": True,
-            "exact_generation_checked": True,
+            "direct_process_type_and_owner_checks_observed": True,
+            "restoration_generation_sequence_observed": True,
+            "machine_enforced_generation_or_lease_custody": False,
             "retained_public_plan_cells": 0,
         },
         "matched_classical_recurrences": {

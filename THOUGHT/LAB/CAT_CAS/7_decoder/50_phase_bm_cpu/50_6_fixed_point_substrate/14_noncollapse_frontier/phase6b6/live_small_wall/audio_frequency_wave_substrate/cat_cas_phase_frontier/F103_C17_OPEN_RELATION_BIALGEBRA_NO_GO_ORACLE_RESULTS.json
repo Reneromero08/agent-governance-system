@@ -28,7 +28,7 @@
     "imports_production": false
   },
   "oracle_source_sha256": "6c3a85dff1d6441b1f0317af3545f9e725c4e6db710e4ee19d7920f98e400f7c",
-  "production_result_sha256": "2edb42e20b99ae05a56c1a5b7285a0f7898bfb5f60c07e1732279b97cdac3da9",
+  "production_result_sha256": "b75b84d774888122b91c3221b0c67de5f00713d2b8619061dc7af049adb0a1ef",
   "rejected_interpretations": [
     "NON_TRANSLATION_INVARIANT_RELATIONS",
     "ARBITRARY_PORT_ARITY_OR_GRAPH_TOPOLOGY",

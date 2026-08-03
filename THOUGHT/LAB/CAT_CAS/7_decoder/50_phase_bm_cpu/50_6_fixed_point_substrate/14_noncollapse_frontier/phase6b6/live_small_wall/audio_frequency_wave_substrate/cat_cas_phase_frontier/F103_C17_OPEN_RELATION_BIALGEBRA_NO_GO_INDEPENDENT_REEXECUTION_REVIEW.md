@@ -51,7 +51,9 @@ classical implementation.
 
 The verified claim is limited to translation-invariant `C17 -> C17` weighted
 relations, the declared nine-node three-slot topology, the 18 executed cases,
-and Linux direct-process software.  The result establishes bounded native
+and Linux direct-process software.  Type, owner, and restoration-generation
+checks are direct-process bookkeeping, not machine-enforced lease custody.
+The result establishes bounded native
 open-relation composition and intersection without dense relation tables, but
 translation invariance reduces every relation to 17 classical coefficients.
 

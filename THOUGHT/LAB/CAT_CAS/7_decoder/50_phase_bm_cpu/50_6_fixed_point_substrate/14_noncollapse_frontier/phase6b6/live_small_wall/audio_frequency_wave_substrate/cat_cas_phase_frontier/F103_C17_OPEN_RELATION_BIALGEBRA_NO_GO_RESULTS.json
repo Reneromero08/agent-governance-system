@@ -1,11 +1,12 @@
 {
   "carrier_law": {
-    "exact_generation_checked": true,
+    "direct_process_type_and_owner_checks_observed": true,
     "logical_relation_factors": 27,
+    "machine_enforced_generation_or_lease_custody": false,
     "resident_bytes": 459,
     "resident_field_coordinates": 459,
-    "retained_public_plan_cells": 0,
-    "typed_owner_checked": true
+    "restoration_generation_sequence_observed": true,
+    "retained_public_plan_cells": 0
   },
   "cases": [
     {
@@ -1596,6 +1597,6 @@
   },
   "schema": "CAT_CAS_F103_C17_OPEN_RELATION_BIALGEBRA_NO_GO_RESULT_V1",
   "source_scope": "LINUX_DIRECT_PROCESS_EXACT_FINITE_FIELD_TYPED_OPEN_RELATION_SOFTWARE",
-  "source_sha256": "49d4b39e04b6fcc5fca35cba4f6303b8a009ce8a42083fe5069066f3df2e4896",
+  "source_sha256": "307a1e34ddbfd771807d605254d999b6e9d126ddd996d5c70982d210731ac23f",
   "verification_level": "PACKAGE_SELF_REVIEW"
 }

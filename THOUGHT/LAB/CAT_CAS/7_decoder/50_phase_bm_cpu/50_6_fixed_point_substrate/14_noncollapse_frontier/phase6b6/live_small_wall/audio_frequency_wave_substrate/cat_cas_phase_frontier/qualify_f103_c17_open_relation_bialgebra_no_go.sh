@@ -14,7 +14,7 @@ test "$(git branch --show-current)" = "codex/audio-frequency-wave-substrate"
 test -x "$PYTHON"
 
 printf '%s  %s\n' \
-  '49d4b39e04b6fcc5fca35cba4f6303b8a009ce8a42083fe5069066f3df2e4896' \
+  '307a1e34ddbfd771807d605254d999b6e9d126ddd996d5c70982d210731ac23f' \
   "$PRODUCTION" | sha256sum -c -
 printf '%s  %s\n' \
   '6c3a85dff1d6441b1f0317af3545f9e725c4e6db710e4ee19d7920f98e400f7c' \
@@ -43,6 +43,9 @@ jq -e '
   .relation_law.materialized_assignment_expansion_cells == 0 and
   .relation_law.shared_unresolved_port_consumers_per_out_layer == 8 and
   .relation_law.resident_relation_projection_before_boundary == false and
+  .carrier_law.direct_process_type_and_owner_checks_observed == true and
+  .carrier_law.restoration_generation_sequence_observed == true and
+  .carrier_law.machine_enforced_generation_or_lease_custody == false and
   .matched_classical_recurrences.full_state_and_boundary_match_every_case == true and
   .matched_classical_recurrences.resident_field_coordinates_each == 459 and
   .matched_classical_recurrences.maximum_phase_bialgebra_multiplications == 2506752 and
