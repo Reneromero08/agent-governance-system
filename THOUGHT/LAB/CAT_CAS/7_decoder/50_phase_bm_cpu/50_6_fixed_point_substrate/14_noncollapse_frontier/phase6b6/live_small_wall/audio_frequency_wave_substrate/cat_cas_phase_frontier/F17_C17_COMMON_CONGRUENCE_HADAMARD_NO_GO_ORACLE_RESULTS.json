@@ -1,0 +1,751 @@
+{
+  "cases": [
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 1,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 4,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 16,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 64,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 1,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 4,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 16,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 64,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 1,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 4,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 16,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 64,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 1,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 4,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 16,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 64,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 1,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 4,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 16,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 64,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 1,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 4,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 16,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 64,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true,
+      "rank": 8
+    }
+  ],
+  "claim": "BOUNDED_EXACT_LINEAR_CONGRUENCE_NO_GO_FOR_SIMULTANEOUS_ARBITRARY_C17_CONVOLUTION_AND_COEFFICIENTWISE_HADAMARD_INTERSECTION_OVER_F17_WITH_ONLY_CONSTANT_PUBLIC_HADAMARD_MULTIPLIERS_PRESERVING_RANK2_4_8_NILPOTENT_PHASE_JETS_AND_EXACT_RESTRICTED_PROGRAM_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_COMPACT_CLASSICAL_JET_RECURRENCE_REMAINS",
+  "claim_ceiling": "LINEAR_F17_QUOTIENTS_OF_F17_TO_THE_C17_WITH_ARBITRARY_BILINEAR_CONVOLUTION_AND_HADAMARD_OPERANDS_PLUS_RANK2_4_8_JET_COMPATIBLE_DIAGONAL_MULTIPLIER_SEARCH",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "common_kernel_oracle": {
+    "all_nonzero_coordinate_orbits_are_full": true,
+    "common_invariant_kernel_dimensions": [
+      0,
+      17
+    ],
+    "coordinate_projector_then_shift_orbit_ranks": [
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17
+    ],
+    "nonzero_proper_common_kernel_exists": false,
+    "proof_law": "PROJECT_ANY_NONZERO_VECTOR_TO_A_NONZERO_COORDINATE_THEN_CYCLICALLY_SHIFT_TO_ALL_COORDINATES"
+  },
+  "imports_numpy": false,
+  "imports_production": false,
+  "independent_monomial_multiplier_search": [
+    {
+      "basis": "MONOMIAL_EVALUATION_SPACE",
+      "multiplier_space_dimension": 1,
+      "normalized_multiplier_basis": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "only_constants": true,
+      "rank": 2,
+      "solution_dimension": 1
+    },
+    {
+      "basis": "MONOMIAL_EVALUATION_SPACE",
+      "multiplier_space_dimension": 1,
+      "normalized_multiplier_basis": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "only_constants": true,
+      "rank": 4,
+      "solution_dimension": 1
+    },
+    {
+      "basis": "MONOMIAL_EVALUATION_SPACE",
+      "multiplier_space_dimension": 1,
+      "normalized_multiplier_basis": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "only_constants": true,
+      "rank": 8,
+      "solution_dimension": 1
+    }
+  ],
+  "oracle_state_law": "FULL17_COEFFICIENT_F17_C17_GROUP_ALGEBRA",
+  "preserved_subclaims": [
+    "EXACT_LINEAR_COMMON_CONGRUENCE_NO_GO_IN_DECLARED_SCOPE",
+    "ONLY_CONSTANT_DIAGONAL_MULTIPLIERS_DESCEND_AT_RANKS2_4_8",
+    "FULL_COEFFICIENT_PARITY_FOR24_RESTRICTED_PROGRAM_CASES",
+    "FULL34_CELL_EXACT_RESTORATION"
+  ],
+  "production_comparison": {
+    "all_match": true,
+    "cases": 24,
+    "field_comparisons": 120
+  },
+  "quotient_law": {
+    "all_pass": true,
+    "checks": [
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 2,
+        "sample": 0
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 2,
+        "sample": 0
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 2,
+        "sample": 0
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 2,
+        "sample": 1
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 2,
+        "sample": 1
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 2,
+        "sample": 1
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 2,
+        "sample": 2
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 2,
+        "sample": 2
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 2,
+        "sample": 2
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 2,
+        "sample": 3
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 2,
+        "sample": 3
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 2,
+        "sample": 3
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 2,
+        "sample": 4
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 2,
+        "sample": 4
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 2,
+        "sample": 4
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 2,
+        "sample": 5
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 2,
+        "sample": 5
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 2,
+        "sample": 5
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 4,
+        "sample": 0
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 4,
+        "sample": 0
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 4,
+        "sample": 0
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 4,
+        "sample": 1
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 4,
+        "sample": 1
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 4,
+        "sample": 1
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 4,
+        "sample": 2
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 4,
+        "sample": 2
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 4,
+        "sample": 2
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 4,
+        "sample": 3
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 4,
+        "sample": 3
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 4,
+        "sample": 3
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 4,
+        "sample": 4
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 4,
+        "sample": 4
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 4,
+        "sample": 4
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 4,
+        "sample": 5
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 4,
+        "sample": 5
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 4,
+        "sample": 5
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 8,
+        "sample": 0
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 8,
+        "sample": 0
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 8,
+        "sample": 0
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 8,
+        "sample": 1
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 8,
+        "sample": 1
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 8,
+        "sample": 1
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 8,
+        "sample": 2
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 8,
+        "sample": 2
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 8,
+        "sample": 2
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 8,
+        "sample": 3
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 8,
+        "sample": 3
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 8,
+        "sample": 3
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 8,
+        "sample": 4
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 8,
+        "sample": 4
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 8,
+        "sample": 4
+      },
+      {
+        "law": "CONVOLUTION",
+        "pass": true,
+        "rank": 8,
+        "sample": 5
+      },
+      {
+        "law": "CONSTANT_HADAMARD",
+        "pass": true,
+        "rank": 8,
+        "sample": 5
+      },
+      {
+        "law": "ROTATION",
+        "pass": true,
+        "rank": 8,
+        "sample": 5
+      }
+    ],
+    "comparison_count": 54
+  },
+  "rejected_interpretations": [
+    "NO_NONLINEAR_OR_NONQUOTIENT_ENCODING_CAN_SUPPORT_BOTH_OPERATIONS",
+    "NO_OTHER_PHASE_ALGEBRA_CAN_SUPPORT_COMPOSITION_AND_INTERSECTION",
+    "CONSTANT_HADAMARD_MULTIPLIERS_PROVIDE_GENERAL_RELATION_INTERSECTION",
+    "THE_RESTRICTED_PHASE_JET_OUTPERFORMS_THE_IDENTICAL_CLASSICAL_RECURRENCE"
+  ],
+  "resource_scope": {
+    "accepted_maximum_jet_carrier_field_cells": 16,
+    "constraint_matrices_are_verification_only": true,
+    "independent_constraint_matrix_max_columns": 81,
+    "independent_constraint_matrix_max_rows": 136,
+    "oracle_dense17_by17_relation_table_cells": 0,
+    "oracle_full_coefficient_carrier_field_cells": 34,
+    "whole_process_memory_not_measured": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F17_C17_COMMON_CONGRUENCE_HADAMARD_NO_GO_ORACLE_RESULTS_V1",
+  "structural_parity": {
+    "common_kernel_parity": true,
+    "multiplier_space_parity": true
+  },
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

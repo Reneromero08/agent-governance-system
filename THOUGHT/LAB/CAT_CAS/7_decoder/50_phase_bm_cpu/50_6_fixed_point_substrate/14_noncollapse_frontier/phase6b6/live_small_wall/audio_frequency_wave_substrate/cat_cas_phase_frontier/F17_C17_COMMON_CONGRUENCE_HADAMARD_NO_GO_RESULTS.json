@@ -1,0 +1,867 @@
+{
+  "cases": [
+    {
+      "boundary": 10,
+      "depth": 1,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        11,
+        14
+      ],
+      "forward_b": [
+        5,
+        6
+      ],
+      "forward_commitment": "b76c57f96d590eb9dc93034aa366a226b975f23c00eef339f85fd0f711902955",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 10,
+      "matched_classical_forward_commitment": "b76c57f96d590eb9dc93034aa366a226b975f23c00eef339f85fd0f711902955",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 2,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 1,
+      "depth": 4,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        8,
+        0
+      ],
+      "forward_b": [
+        4,
+        16
+      ],
+      "forward_commitment": "16f47c6b77ed1b1d7da4d7a1c69c7bf860a58e60ce6ab8e015258c68523f6a9c",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 1,
+      "matched_classical_forward_commitment": "16f47c6b77ed1b1d7da4d7a1c69c7bf860a58e60ce6ab8e015258c68523f6a9c",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 2,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 10,
+      "depth": 16,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        5,
+        10
+      ],
+      "forward_b": [
+        2,
+        3
+      ],
+      "forward_commitment": "33794ec791a7b23f17d55e3646e276f6a0b7a457400bca1d5e9433e8c8afd67c",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 10,
+      "matched_classical_forward_commitment": "33794ec791a7b23f17d55e3646e276f6a0b7a457400bca1d5e9433e8c8afd67c",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 2,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 3,
+      "depth": 64,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        11,
+        15
+      ],
+      "forward_b": [
+        1,
+        3
+      ],
+      "forward_commitment": "6500bbec9a47bb6c700b471056561e8fe6e53ad85d827cc72f7cb31154fffd32",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 3,
+      "matched_classical_forward_commitment": "6500bbec9a47bb6c700b471056561e8fe6e53ad85d827cc72f7cb31154fffd32",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 2,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 4,
+      "depth": 1,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        3,
+        0
+      ],
+      "forward_b": [
+        5,
+        11
+      ],
+      "forward_commitment": "fa9c0b96f08685d33eb002e6ca6f255c985dc807d6a60238c3a26db17acb94d6",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 4,
+      "matched_classical_forward_commitment": "fa9c0b96f08685d33eb002e6ca6f255c985dc807d6a60238c3a26db17acb94d6",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 2,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 2,
+      "depth": 4,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        9,
+        4
+      ],
+      "forward_b": [
+        6,
+        1
+      ],
+      "forward_commitment": "20b6ddea5160198e624dc012fa96a793c5b4bcf246ed34ffa78dfca5234625d8",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 2,
+      "matched_classical_forward_commitment": "20b6ddea5160198e624dc012fa96a793c5b4bcf246ed34ffa78dfca5234625d8",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 2,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 10,
+      "depth": 16,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        2,
+        6
+      ],
+      "forward_b": [
+        10,
+        4
+      ],
+      "forward_commitment": "29da31de7d000880a6c42ba8ab2f8c727093494fd65e5ec44e53ced4038cb576",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 10,
+      "matched_classical_forward_commitment": "29da31de7d000880a6c42ba8ab2f8c727093494fd65e5ec44e53ced4038cb576",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 2,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 8,
+      "depth": 64,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        13,
+        9
+      ],
+      "forward_b": [
+        8,
+        10
+      ],
+      "forward_commitment": "2bfc05eb9232494c223c21aac470834b93be63a4b577dc26528042fa2b81f92f",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 8,
+      "matched_classical_forward_commitment": "2bfc05eb9232494c223c21aac470834b93be63a4b577dc26528042fa2b81f92f",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 2,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 5,
+      "depth": 1,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        15,
+        10,
+        5,
+        4
+      ],
+      "forward_b": [
+        11,
+        7,
+        1,
+        11
+      ],
+      "forward_commitment": "9cb11229d2d2c8a21e6af00ae72cf12cbd9116f1ce8d25936cf92ad5ec20e130",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 5,
+      "matched_classical_forward_commitment": "9cb11229d2d2c8a21e6af00ae72cf12cbd9116f1ce8d25936cf92ad5ec20e130",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 4,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 7,
+      "depth": 4,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        10,
+        5,
+        6,
+        13
+      ],
+      "forward_b": [
+        8,
+        12,
+        15,
+        8
+      ],
+      "forward_commitment": "02e6eed53bc73fff81e0883ea96420b676d1f3cd2c7346d3d7d25f5a202cf10c",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 7,
+      "matched_classical_forward_commitment": "02e6eed53bc73fff81e0883ea96420b676d1f3cd2c7346d3d7d25f5a202cf10c",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 4,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 9,
+      "depth": 16,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        11,
+        13,
+        15,
+        4
+      ],
+      "forward_b": [
+        14,
+        6,
+        4,
+        6
+      ],
+      "forward_commitment": "2acd991a0b014944f0825839f0386d7c9d8d45b8195dec178117a5b1b00fee21",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 9,
+      "matched_classical_forward_commitment": "2acd991a0b014944f0825839f0386d7c9d8d45b8195dec178117a5b1b00fee21",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 4,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 16,
+      "depth": 64,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        14,
+        12,
+        0,
+        12
+      ],
+      "forward_b": [
+        5,
+        5,
+        4,
+        4
+      ],
+      "forward_commitment": "6e263ac6fdb405341dc9cfc228be9d049c154a25e2f5b729d12827f214c355aa",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 16,
+      "matched_classical_forward_commitment": "6e263ac6fdb405341dc9cfc228be9d049c154a25e2f5b729d12827f214c355aa",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 4,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 6,
+      "depth": 1,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        8,
+        13,
+        9,
+        4
+      ],
+      "forward_b": [
+        11,
+        11,
+        10,
+        11
+      ],
+      "forward_commitment": "9ea8c973d484a1abb64bd14cd1e403eec31ce485b13fdc2b320611d8e5a8bdee",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 6,
+      "matched_classical_forward_commitment": "9ea8c973d484a1abb64bd14cd1e403eec31ce485b13fdc2b320611d8e5a8bdee",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 4,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 14,
+      "depth": 4,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        10,
+        3,
+        0,
+        4
+      ],
+      "forward_b": [
+        12,
+        11,
+        12,
+        9
+      ],
+      "forward_commitment": "85b9824f38475ce318280994a23d3017826f1e9c30668679c82aa65e9fb8ec81",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 14,
+      "matched_classical_forward_commitment": "85b9824f38475ce318280994a23d3017826f1e9c30668679c82aa65e9fb8ec81",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 4,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 12,
+      "depth": 16,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        5,
+        3,
+        1,
+        12
+      ],
+      "forward_b": [
+        8,
+        1,
+        5,
+        9
+      ],
+      "forward_commitment": "2e8a77f32b482225f2daf61b2ff6c74ff8be16e0ac857c90aec1ec57e17bead6",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 12,
+      "matched_classical_forward_commitment": "2e8a77f32b482225f2daf61b2ff6c74ff8be16e0ac857c90aec1ec57e17bead6",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 4,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 1,
+      "depth": 64,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        0,
+        2,
+        2,
+        15
+      ],
+      "forward_b": [
+        1,
+        10,
+        15,
+        0
+      ],
+      "forward_commitment": "17b0c772afc24bbea19a00df33440fcbfbc5d5981b9c4ee18680b3c889da7fc6",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 1,
+      "matched_classical_forward_commitment": "17b0c772afc24bbea19a00df33440fcbfbc5d5981b9c4ee18680b3c889da7fc6",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 4,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 4,
+      "depth": 1,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        10,
+        12,
+        11,
+        16,
+        5,
+        12,
+        14,
+        10
+      ],
+      "forward_b": [
+        7,
+        3,
+        7,
+        2,
+        3,
+        10,
+        1,
+        16
+      ],
+      "forward_commitment": "98c816a28efaf922deed4410a22807904a5db851c58f31199acee1db39ae2b16",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 4,
+      "matched_classical_forward_commitment": "98c816a28efaf922deed4410a22807904a5db851c58f31199acee1db39ae2b16",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 8,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 8,
+      "depth": 4,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        1,
+        12,
+        6,
+        11,
+        9,
+        2,
+        5,
+        3
+      ],
+      "forward_b": [
+        10,
+        15,
+        8,
+        9,
+        8,
+        2,
+        10,
+        14
+      ],
+      "forward_commitment": "a6a103896d45147300709324b578ee22b7db3e4305a2314b1b5db01cd9b9412c",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 8,
+      "matched_classical_forward_commitment": "a6a103896d45147300709324b578ee22b7db3e4305a2314b1b5db01cd9b9412c",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 8,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 12,
+      "depth": 16,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        15,
+        8,
+        3,
+        9,
+        0,
+        15,
+        7,
+        14
+      ],
+      "forward_b": [
+        13,
+        6,
+        8,
+        0,
+        15,
+        1,
+        15,
+        2
+      ],
+      "forward_commitment": "850f08de8090ba1ab3bc5286c71e378de45c7a45b406165d48682f87d790c7a5",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 12,
+      "matched_classical_forward_commitment": "850f08de8090ba1ab3bc5286c71e378de45c7a45b406165d48682f87d790c7a5",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 8,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 4,
+      "depth": 64,
+      "exact_cells_restored": true,
+      "family": "PRIMARY",
+      "forward_a": [
+        2,
+        11,
+        13,
+        7,
+        3,
+        5,
+        0,
+        16
+      ],
+      "forward_b": [
+        10,
+        14,
+        14,
+        12,
+        6,
+        11,
+        14,
+        13
+      ],
+      "forward_commitment": "5dd7261aa3b93a4b6fa83d67b815db1665782db603cacd018532f41c5fb34912",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 4,
+      "matched_classical_forward_commitment": "5dd7261aa3b93a4b6fa83d67b815db1665782db603cacd018532f41c5fb34912",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 8,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 8,
+      "depth": 1,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        1,
+        5,
+        10,
+        4,
+        0,
+        2,
+        14,
+        1
+      ],
+      "forward_b": [
+        3,
+        5,
+        1,
+        9,
+        11,
+        12,
+        14,
+        7
+      ],
+      "forward_commitment": "7ffc410c227885a9df9270c6c46d4d5b9dfca67ce9bb4fb284d908bd60429c26",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 8,
+      "matched_classical_forward_commitment": "7ffc410c227885a9df9270c6c46d4d5b9dfca67ce9bb4fb284d908bd60429c26",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 8,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 15,
+      "depth": 4,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        0,
+        0,
+        13,
+        2,
+        15,
+        15,
+        3,
+        2
+      ],
+      "forward_b": [
+        13,
+        8,
+        1,
+        14,
+        14,
+        9,
+        6,
+        16
+      ],
+      "forward_commitment": "0189f3e48af902e01007080cf9f6bd64b0dcdce645bb6dd628fc0583ade09190",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 15,
+      "matched_classical_forward_commitment": "0189f3e48af902e01007080cf9f6bd64b0dcdce645bb6dd628fc0583ade09190",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 8,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 14,
+      "depth": 16,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        8,
+        14,
+        8,
+        0,
+        8,
+        16,
+        6,
+        9
+      ],
+      "forward_b": [
+        12,
+        1,
+        16,
+        8,
+        7,
+        6,
+        15,
+        13
+      ],
+      "forward_commitment": "4219cdb09de3a1714802901851f9be77fd372073d55c0bc1151f910e3364ad26",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 14,
+      "matched_classical_forward_commitment": "4219cdb09de3a1714802901851f9be77fd372073d55c0bc1151f910e3364ad26",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 8,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 1,
+      "depth": 64,
+      "exact_cells_restored": true,
+      "family": "ALTERNATE",
+      "forward_a": [
+        3,
+        11,
+        7,
+        11,
+        6,
+        11,
+        5,
+        6
+      ],
+      "forward_b": [
+        10,
+        8,
+        15,
+        6,
+        10,
+        2,
+        7,
+        12
+      ],
+      "forward_commitment": "aee84228c05c7ed219fc29e06ed56b19d382007618d9c1f2c25f9d6404374bcd",
+      "hidden_a_serialized": false,
+      "matched_classical_boundary": 1,
+      "matched_classical_forward_commitment": "aee84228c05c7ed219fc29e06ed56b19d382007618d9c1f2c25f9d6404374bcd",
+      "matches_identical_compact_classical_recurrence": true,
+      "rank": 8,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    }
+  ],
+  "claim": "BOUNDED_EXACT_LINEAR_CONGRUENCE_NO_GO_FOR_SIMULTANEOUS_ARBITRARY_C17_CONVOLUTION_AND_COEFFICIENTWISE_HADAMARD_INTERSECTION_OVER_F17_WITH_ONLY_CONSTANT_PUBLIC_HADAMARD_MULTIPLIERS_PRESERVING_RANK2_4_8_NILPOTENT_PHASE_JETS_AND_EXACT_RESTRICTED_PROGRAM_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_COMPACT_CLASSICAL_JET_RECURRENCE_REMAINS",
+  "claim_ceiling": "LINEAR_F17_QUOTIENTS_OF_F17_TO_THE_C17_WITH_ARBITRARY_BILINEAR_CONVOLUTION_AND_HADAMARD_OPERANDS_PLUS_RANK2_4_8_JET_COMPATIBLE_DIAGONAL_MULTIPLIER_SEARCH",
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "common_congruence_no_go": {
+    "all_coordinate_orbits_span_full_space": true,
+    "common_invariant_kernel_dimensions": [
+      0,
+      17
+    ],
+    "convolution_kernel_requirement": "INVARIANT_UNDER_CYCLIC_SHIFT_DELTA1_CONVOLUTION",
+    "coordinate_orbit_ranks": [
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17
+    ],
+    "hadamard_kernel_requirement": "INVARIANT_UNDER_ALL_COORDINATE_PROJECTORS",
+    "nonzero_proper_common_kernel_exists": false,
+    "nonzero_vector_projector_law": "ANY_NONZERO_KERNEL_VECTOR_YIELDS_A_COORDINATE_BASIS_VECTOR",
+    "smallest_nonzero_common_quotient_dimension": 17,
+    "strict_scope": "LINEAR_QUOTIENTS_WITH_BILINEAR_OPERATIONS_DESCENDING_FOR_ALL_OPERANDS"
+  },
+  "controls": {
+    "carrier_disabled_path_changes_boundary": true,
+    "missing_inverse_fails_restoration": true,
+    "null_carrier_rejected": true,
+    "premature_projection_rejected": true,
+    "reordered_inverse_fails_for_noncommuting_program": true,
+    "three_nonconstant_hadamard_multipliers_escape_rank8_kernel": true,
+    "wrong_inverse_fails_restoration": true,
+    "wrong_rank_rejected": true
+  },
+  "matched_baselines": {
+    "cold_start_comparison_used": false,
+    "full_semantic_reference": "17_COEFFICIENT_CYCLIC_GROUP_ALGEBRA_IN_INDEPENDENT_ORACLE",
+    "strongest": "IDENTICAL_RANK_R_TRUNCATED_POLYNOMIAL_RECURRENCE_WITH_SCALAR_MULTIPLIERS",
+    "strongest_executed": true
+  },
+  "next_obstruction": "ARBITRARY_RELATION_INTERSECTION_FORCES_THE_PROPER_LINEAR_C17_PHASE_JET_QUOTIENT_BACK_TO_ALL17_COEFFICIENTS_WHILE_ITS_MAXIMAL_COMPATIBLE_DIAGONAL_FAMILY_IS_ONLY_PUBLIC_SCALAR_MULTIPLICATION",
+  "not_established": [
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "rejected_interpretations": [
+    "NO_NONLINEAR_OR_NONQUOTIENT_ENCODING_CAN_SUPPORT_BOTH_OPERATIONS",
+    "NO_OTHER_PHASE_ALGEBRA_CAN_SUPPORT_COMPOSITION_AND_INTERSECTION",
+    "CONSTANT_HADAMARD_MULTIPLIERS_PROVIDE_GENERAL_RELATION_INTERSECTION",
+    "THE_RESTRICTED_PHASE_JET_OUTPERFORMS_THE_IDENTICAL_CLASSICAL_RECURRENCE"
+  ],
+  "resource_accounting": {
+    "accepted_over_matched_compact_classical_carrier_ratio": 1,
+    "accepted_over_matched_compact_classical_working_ratio": 1,
+    "advantage_claimed": false,
+    "dense17_by17_relation_table_cells": 0,
+    "full_nonzero_common_quotient_field_cells_per_register": 17,
+    "full_nonzero_common_quotient_two_register_carrier_field_cells": 34,
+    "matched_compact_classical_carrier_field_cells": 16,
+    "matched_compact_classical_logical_working_field_cells_peak": 56,
+    "maximum_accepted_phase_jet_carrier_field_cells": 16,
+    "maximum_logical_working_field_cells_peak": 56,
+    "phase_and_matched_classical_operation_law_identical": true,
+    "python_allocator_and_whole_process_peaks_excluded": true,
+    "retained_inverse_history_field_cells": 0
+  },
+  "restoration_and_reuse": {
+    "exact_cells_restored_after_reuse": true,
+    "first_boundary": 5,
+    "restoration_generation": 2,
+    "same_backing_reused": true,
+    "second_boundary": 12,
+    "snapshot_used": false,
+    "unrelated_second_boundary_matches_fresh": true,
+    "unrelated_second_commitment_matches_fresh": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "restricted_hadamard_multiplier_search": [
+    {
+      "constraint_rows": 34,
+      "constraint_variables": 21,
+      "multiplier_space_dimension": 1,
+      "normalized_multiplier_basis": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "only_constant_multipliers": true,
+      "rank": 2,
+      "solution_dimension": 1
+    },
+    {
+      "constraint_rows": 68,
+      "constraint_variables": 33,
+      "multiplier_space_dimension": 1,
+      "normalized_multiplier_basis": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "only_constant_multipliers": true,
+      "rank": 4,
+      "solution_dimension": 1
+    },
+    {
+      "constraint_rows": 136,
+      "constraint_variables": 81,
+      "multiplier_space_dimension": 1,
+      "normalized_multiplier_basis": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "only_constant_multipliers": true,
+      "rank": 8,
+      "solution_dimension": 1
+    }
+  ],
+  "schema": "CAT_CAS_F17_C17_COMMON_CONGRUENCE_HADAMARD_NO_GO_RESULTS_V1",
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}
