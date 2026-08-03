@@ -1,0 +1,42 @@
+{
+  "all_cases_within_predeclared_tolerances": true,
+  "case_count": 21,
+  "claim_ceiling": "21_DECLARED_NATIVE_ANGLE_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "dense_kernel_asymmetry_max_abs": 1.0,
+  "dense_kernel_involution_max_abs": 3.9302328752599536e-19,
+  "dense_public_coordinate_visits": 2312,
+  "kernel_mutation_detected": true,
+  "maximum_production_oracle_classical_boundary_error": 1.611041285288731e-11,
+  "maximum_production_oracle_phase_boundary_error": 1.914311227355517e-11,
+  "metric_and_boundary_comparisons": 474,
+  "oracle_100_cycle_maximum_restoration_error": 1.6061405798195015e-15,
+  "oracle_method": "INDEPENDENT_LONG_DOUBLE_DENSE_REAL_KERNEL_AND_SEPARATE_TWO_ANGLE_CHART",
+  "oracle_unrelated_reuse_boundary_error": 9.192921513844874e-16,
+  "oracle_unrelated_reuse_restoration_error": 2.7289490219227984e-16,
+  "package_sha256": "b4fecd8ca883a588e46af22cde200bd973284a0e33dc016a91ab7f8b2b56b9fa",
+  "preserved_subclaims": [
+    "INDEPENDENT_REAL_KERNEL_PAIRING_AND_INVOLUTION",
+    "INDEPENDENT_LONG_DOUBLE_PHASE_CHART_BOUNDARY_PARITY",
+    "INDEPENDENT_LONG_DOUBLE_RESTORATION_AND_REUSE_TOLERANCE_CHECKS",
+    "PRODUCTION_RESTORATION_GENERATION_SNAPSHOT_HISTORY_AND_REUSE_FIELD_CHECKS"
+  ],
+  "production_restoration_and_reuse_fields_verified": true,
+  "public_character_pairing_violations": 0,
+  "rejected_interpretations": [
+    "CARTESIAN_ACCUMULATOR_FREE_INTERFERENCE",
+    "EXACT_ALGEBRAIC_RESTORATION",
+    "UNBOUNDED_DEPTH_NUMERICAL_STABILITY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "schema": "CAT_CAS_F17_NATIVE_ANGLE_INTERFERENCE_ORACLE_V1",
+  "source_sha256": "861dedd60989cf5268ffc71a8a48130c9df268932eed383d818aa7017b16d9e7",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
