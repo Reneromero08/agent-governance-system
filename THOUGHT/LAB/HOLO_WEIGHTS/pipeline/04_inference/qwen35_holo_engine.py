@@ -152,6 +152,11 @@ class Qwen35HoloEngine:
         self.kv_cache: dict[int, tuple[torch.Tensor, torch.Tensor]] = {}
         self.last_hidden_rms: list[float] = []
         self.last_hidden_states: list[torch.Tensor] = []
+        # Analytic low-rank calibration corrections (no training):
+        #   corrections[layer] = {"mix": (A, B), "mlp": (A, B)}
+        #   A: D x r, B: D x r; applied as  sub_out += A @ (B.T @ h_in)
+        self.corrections: dict[int, dict[str, tuple[torch.Tensor, torch.Tensor]]] = {}
+        self.capture_io: dict[int, dict[str, torch.Tensor]] | None = None
 
     @property
     def label(self) -> str:
@@ -401,6 +406,24 @@ class Qwen35HoloEngine:
             chunks.append((flat.to(weight.dtype) @ weight.transpose(0, 1)).float())
         return torch.cat(chunks, dim=-1).reshape(*hidden.shape[:-1], VOCAB)
 
+    @staticmethod
+    def _apply_correction(
+        sub_out: torch.Tensor, h_in: torch.Tensor, corr: tuple[torch.Tensor, torch.Tensor] | None
+    ) -> torch.Tensor:
+        if corr is None:
+            return sub_out
+        a, b = corr
+        a = a.to(sub_out.device)
+        b = b.to(sub_out.device)
+        xf = h_in.to(a.dtype)
+        correction = ((xf @ b) @ a.transpose(0, 1)).to(sub_out.dtype)
+        return sub_out + correction
+
+    def _prefill_layer_mixer(self, layer: int, normed: torch.Tensor, adapters) -> torch.Tensor:
+        if layer % 4 == 3:
+            return self._full_attention(normed, layer, adapters)
+        return self._gated_delta_net(normed, layer, adapters)
+
     def prefill(
         self,
         input_ids: torch.Tensor,
@@ -415,26 +438,39 @@ class Qwen35HoloEngine:
         self.kv_cache.clear()
         self.last_hidden_rms = []
         self.last_hidden_states = []
+        if self.capture_io is not None:
+            self.capture_io.clear()
         started = time.perf_counter()
         for layer in range(self.num_layers):
             prefix = f"model.language_model.layers.{layer}"
             residual = hidden
             norm = self._exact_weight(f"{prefix}.input_layernorm.weight").to(self.device)
             mixed_input = self._rms_offset(hidden, norm)
-            if layer % 4 == 3:
-                mixed = self._full_attention(mixed_input, layer, adapters)
-                block = "FULL"
-            else:
-                mixed = self._gated_delta_net(mixed_input, layer, adapters)
-                block = "GDN"
+            mixed_pre = self._prefill_layer_mixer(layer, mixed_input, adapters)
+            mixed = self._apply_correction(
+                mixed_pre, residual, self.corrections.get(layer, {}).get("mix")
+            )
+            block = "FULL" if layer % 4 == 3 else "GDN"
             hidden = residual + mixed.to(residual.dtype)
             residual = hidden
             post = self._exact_weight(f"{prefix}.post_attention_layernorm.weight").to(
                 self.device
             )
-            hidden = residual + self._mlp(
-                self._rms_offset(hidden, post), layer, adapters
-            ).to(residual.dtype)
+            mlp_input = self._rms_offset(hidden, post)
+            mlp_pre = self._mlp(mlp_input, layer, adapters)
+            mlp = self._apply_correction(
+                mlp_pre, residual, self.corrections.get(layer, {}).get("mlp")
+            )
+            hidden = residual + mlp.to(residual.dtype)
+            if self.capture_io is not None:
+                self.capture_io[layer] = {
+                    "h_in": residual.detach().clone(),      # layer input (pre-norm)
+                    "normed": mixed_input.detach().clone(), # mixer input (post-norm)
+                    "mix_pre": mixed_pre.detach().clone(),  # mixer output before correction
+                    "mlp_in": mlp_input.detach().clone(),   # mlp input (post-norm)
+                    "mlp_pre": mlp_pre.detach().clone(),    # mlp output before correction
+                    "h_out": hidden.detach().clone(),
+                }
             rms = float(hidden.float().square().mean().sqrt().item())
             self.last_hidden_rms.append(rms)
             if capture_hidden:
