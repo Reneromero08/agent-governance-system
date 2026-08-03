@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_STATEFUL_GAUGE_PHASOR_LIFT`
-**Roadmap version:** `14.12`
+**Status:** `STRICT_SCOPE_FIBER_ACTIVE_GAUGE_SHEAR`
+**Roadmap version:** `14.13`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `8025f0124ff1eb43f02de50195ed062087679e9a`
+**Reconciled source head:** `61cd8fb814a8d243c7106aa62cb3ce68a610fb45`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_STATEFUL_WEIGHTED_THREE_PHASOR_GAUGE_CHART_LIFTS_LOCAL_F17_GIVENS_COUPLING_ACROSS_BASE_ZERO_IN_FIXED51_RESIDENT_PHASE_ANGLES_FOR_THE_DECLARED_MAGNITUDE_ENVELOPE_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_ADDS17_GAUGE_CELLS_RETAINS_LOCAL_CARTESIAN_RECHARTING_AND_HAS_THE_IDENTICAL_SMALLER_COMPLEX_GIVENS_RECURRENCE`
-**Current claim ceiling:** `21_DECLARED_WEIGHTED_GAUGE_PHASOR_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_ZERO_AND_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_FIBER_ACTIVE_GAUGE_DEPENDENT_PHASE_SHEAR_MAKES_EQUAL_BASE_DIFFERENT_GAUGE_F17_CARRIERS_BOUNDARY_DISTINGUISHABLE_WHILE_INTERLEAVING_NONCOMMUTING_PHASE_AND_LOCAL_GIVENS_MODULES_ON_FIXED51_RESIDENT_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EXECUTED_MATCHED17_COMPLEX_PLUS17_GAUGE_SCALAR_RECURRENCE`
+**Current claim ceiling:** `21_DECLARED_FIBER_ACTIVE_GAUGE_SHEAR_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_CAUSALITY_AND_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M146_STATEFUL_GAUGE_PHASOR_LIFT`
+**New mechanism development:** `ACTIVE_AFTER_M147_FIBER_ACTIVE_GAUGE_SHEAR`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `FIBER_ACTIVE_SHARED_GAUGE_PHASE_SHEAR_BEYOND17_COMPLEX_BASE_QUOTIENT_OR_BOUNDED_COLLAPSE_TO_MATCHED51_SCALAR_RECURRENCE`
+**Active primary successor:** `DIRECT_PHASE_ANGLE_TRIANGULAR_SHARED_GAUGE_COUPLING_WITHOUT_CARTESIAN_RECHARTING_OR_BOUNDED_BISIMULATION_TO_IDENTICAL51_ANGLE_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`8025f0124ff1eb43f02de50195ed062087679e9a`. The current 146-milestone
+`61cd8fb814a8d243c7106aa62cb3ce68a610fb45`. The current 147-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -6056,6 +6056,80 @@ M146 establishes no exact algebraic semantics, unbounded numerical stability,
 CATVM custody, distinct phase resource, computational advantage, Small Wall
 crossing, physical waveform execution, physical bit replacement, or
 unbounded catalytic computation.
+
+## M147: Fiber-active gauge-dependent phase shear
+
+M147 makes the M146 gauge causally affect the final boundary.  Each public
+step applies the reversible magnitude-preserving shear
+
+```text
+z_j -> z_j exp(i (3/16) sin(g_j + public_offset(j,step,family)))
+```
+
+before the local Givens transform.  The actual resident gauge is retained and
+transported, so later shears consume its updated value.  Both phase/shear and
+shear/Givens order mutations change the final boundary.
+
+```text
+claim
+    BOUNDED_FIBER_ACTIVE_GAUGE_DEPENDENT_PHASE_SHEAR_MAKES_EQUAL_BASE_DIFFERENT_GAUGE_F17_CARRIERS_BOUNDARY_DISTINGUISHABLE_WHILE_INTERLEAVING_NONCOMMUTING_PHASE_AND_LOCAL_GIVENS_MODULES_ON_FIXED51_RESIDENT_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EXECUTED_MATCHED17_COMPLEX_PLUS17_GAUGE_SCALAR_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident 51-angle carrier NUMERICAL_PHYSICAL_STATE_RESTORATION
+    Cartesian, chart, comparison, and verification buffers NO_RESTORATION_CLAIM
+
+source head
+    61cd8fb814a8d243c7106aa62cb3ce68a610fb45
+```
+
+Two carriers with equal base state to `5.888e-16` and gauge separation
+`0.714` produce final-state separation `0.0825` and boundary separation
+`0.0493` under the same public depth-4 program.  Both actual carriers restore
+within `7.241e-14`.  The base-only 17-complex quotient is therefore
+insufficient for this declared variable-gauge family.
+
+Across the 21 cases through depth 4096, maximum state error against the
+executed compact scalar recurrence is `5.361e-12`, maximum boundary error is
+`6.908e-11`, and maximum single-transaction restoration error is
+`2.839e-11`.  Unrelated depth-1537 reuse and 100 same-backing depth-64 cycles
+remain within their predeclared tolerances.
+
+The separate oracle imports neither M147 nor M146.  It shares only the
+established M145 public program and Givens-plan compiler, independently
+implements the chart, 51-angle forward/inverse, shear, causality witness,
+matched recurrence, controls, and reuse, and passes 146 comparisons.  The
+qualifier reproduces both sealed JSON files byte-for-byte.
+
+The accepted path retains 51 phase angles or 408 bytes and reaches a 3,223-
+byte named warm peak.  It still decodes and recharts locally with 24 scratch
+float cells.  The executed comparison stores 17 complex bases plus 17 gauge
+scalars: the same 51 scalar-equivalent cells and 408 resident bytes.  It
+reaches 3,191 named warm bytes and avoids phase-chart decode and reencode.
+No optimal classical baseline is claimed.
+
+The selected successor is:
+
+```text
+DIRECT_PHASE_ANGLE_TRIANGULAR_SHARED_GAUGE_COUPLING_WITHOUT_CARTESIAN_RECHARTING_OR_BOUNDED_BISIMULATION_TO_IDENTICAL51_ANGLE_RECURRENCE
+```
+
+It must replace the decoded-base shear with a reversible angle-only coupling
+whose public triangular schedule makes one resident gauge control multiple
+phase targets.  It must preserve final-only projection, actual inverse,
+same-backing reuse, and an executed identical 51-angle recurrence.  Merely
+showing that angles are causally active is not a distinct phase resource.
+
+M147 establishes no resource beyond compact 51-scalar software, optimal
+classical lower bound, global unit-sphere chart, exact algebraic semantics,
+CATVM custody, computational advantage, Small Wall crossing, physical
+waveform execution, physical bit replacement, or unbounded catalytic
+computation.
 
 ## 10. Roadmap Maintenance
 

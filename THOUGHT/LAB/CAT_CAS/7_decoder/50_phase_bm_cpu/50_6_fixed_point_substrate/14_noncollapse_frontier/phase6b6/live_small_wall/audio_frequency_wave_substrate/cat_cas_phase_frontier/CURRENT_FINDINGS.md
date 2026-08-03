@@ -8563,3 +8563,46 @@ recurrence.  M146 establishes no global unit-sphere chart, exact semantics,
 CATVM custody, distinct phase resource, computational advantage, Small Wall
 crossing, physical execution, physical bit replacement, or unbounded
 catalytic computation.
+
+## M147: Fiber-active gauge-dependent phase shear
+
+Claim:
+
+```text
+BOUNDED_FIBER_ACTIVE_GAUGE_DEPENDENT_PHASE_SHEAR_MAKES_EQUAL_BASE_DIFFERENT_GAUGE_F17_CARRIERS_BOUNDARY_DISTINGUISHABLE_WHILE_INTERLEAVING_NONCOMMUTING_PHASE_AND_LOCAL_GIVENS_MODULES_ON_FIXED51_RESIDENT_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EXECUTED_MATCHED17_COMPLEX_PLUS17_GAUGE_SCALAR_RECURRENCE
+```
+
+M147 applies a gauge-dependent diagonal phase shear before each local Givens
+transform.  The shear preserves base magnitude, leaves the actual gauge
+resident, and uses no relation table.  Phase/shear and shear/Givens order
+mutations both change the boundary.
+
+The equal-base/different-gauge witness starts with base agreement
+`5.888e-16`, then separates final states by `0.0825` and boundaries by
+`0.0493`.  Both actual 51-angle carriers restore.  This establishes that the
+base-only 17-complex quotient cannot represent the declared variable-gauge
+carrier family.
+
+All 21 cases through depth 4096 match an executed 17-complex-plus-17-gauge
+scalar recurrence.  Maximum state and boundary errors are `5.361e-12` and
+`6.908e-11`; maximum single-transaction restoration error is `2.839e-11`.
+Unrelated depth-1537 and 100-cycle depth-64 reuse pass on the same backing
+without snapshot, retained history, or restoration baseline.
+
+The independent implementation imports neither M147 nor M146, shares only
+the established M145 public program and plan compiler, and separately
+reexecutes the chart, shear, inverse, witness, scalar recurrence, controls,
+and reuse in 146 comparisons.  Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+The 51-angle path reaches 3,223 named warm bytes and retains 24 local
+Cartesian/chart scratch cells.  The matched 51-scalar recurrence reaches
+3,191 named warm bytes and avoids phase-chart decode and reencode.  Thus the
+gauge is causally active but no distinct phase resource is established.
+
+The next experiment is a reversible triangular shared-gauge angle coupling
+that removes Cartesian recharting, or a bounded bisimulation to the identical
+51-angle recurrence.  M147 establishes no optimal classical lower bound,
+CATVM custody, computational advantage, Small Wall crossing, physical
+execution, physical bit replacement, or unbounded catalytic computation.
