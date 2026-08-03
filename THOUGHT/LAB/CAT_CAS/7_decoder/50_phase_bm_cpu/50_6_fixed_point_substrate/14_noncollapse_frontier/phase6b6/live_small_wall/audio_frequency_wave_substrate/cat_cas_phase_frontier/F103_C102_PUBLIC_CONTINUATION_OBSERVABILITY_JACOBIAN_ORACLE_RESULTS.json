@@ -1,0 +1,93 @@
+{
+  "claim_ceiling": "INDEPENDENT_SCALAR_PARITY_FOR_THE_EXACT_M159_C5_DEPTHS1_TO24_SOURCE_CHART_JACOBIAN_ONLY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "families": [
+    {
+      "basis_direction_reexecutions": 102,
+      "exact_full_recurrence_centered_difference_control": true,
+      "family": "PRIMARY",
+      "final_rank": 102,
+      "forward_trajectories": 206,
+      "jacobian_commitment": "c17d30992e5680a68f5fec0d3583ea556dadafa25e3d22f47533d6237fd3ef68",
+      "prefix_ranks_by_maximum_depth": {
+        "1": 5,
+        "10": 45,
+        "11": 50,
+        "12": 50,
+        "13": 55,
+        "14": 60,
+        "15": 65,
+        "16": 70,
+        "17": 75,
+        "18": 80,
+        "19": 85,
+        "2": 10,
+        "20": 90,
+        "21": 90,
+        "22": 95,
+        "23": 100,
+        "24": 102,
+        "3": 10,
+        "4": 15,
+        "5": 20,
+        "6": 25,
+        "7": 30,
+        "8": 35,
+        "9": 40
+      },
+      "source_node": 6
+    },
+    {
+      "basis_direction_reexecutions": 102,
+      "exact_full_recurrence_centered_difference_control": true,
+      "family": "ALTERNATE",
+      "final_rank": 102,
+      "forward_trajectories": 206,
+      "jacobian_commitment": "55078809baf7acf6c13ab1b9ae0eb554a733761d36c9a46601f6430ff7ff9bcf",
+      "prefix_ranks_by_maximum_depth": {
+        "1": 5,
+        "10": 45,
+        "11": 50,
+        "12": 55,
+        "13": 60,
+        "14": 65,
+        "15": 70,
+        "16": 75,
+        "17": 75,
+        "18": 80,
+        "19": 85,
+        "2": 10,
+        "20": 90,
+        "21": 95,
+        "22": 100,
+        "23": 102,
+        "24": 102,
+        "3": 15,
+        "4": 20,
+        "5": 25,
+        "6": 30,
+        "7": 35,
+        "8": 35,
+        "9": 40
+      },
+      "source_node": 7
+    }
+  ],
+  "full_rank102_on_every_family": true,
+  "imports_m158_production": false,
+  "imports_m159_production": false,
+  "imports_numpy": false,
+  "method": "EXACT_FULL_FORWARD_CENTERED_DIFFERENCES_OVER_F103",
+  "production_comparison": {
+    "all_match": true,
+    "comparisons": 8,
+    "production_artifact": "F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN_RESULTS.json"
+  },
+  "resource_accounting": {
+    "accepted_carrier_or_advantage_claimed": false,
+    "jacobian_field_cells": 61200,
+    "simultaneous_plus_minus_source_node_state_field_cells": 10200
+  },
+  "schema": "CAT_CAS_F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN_ORACLE_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
