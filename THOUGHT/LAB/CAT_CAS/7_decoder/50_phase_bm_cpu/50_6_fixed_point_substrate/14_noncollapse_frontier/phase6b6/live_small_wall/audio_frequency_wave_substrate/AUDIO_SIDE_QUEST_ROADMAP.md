@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_PROGRAM_RESTRICTED_COHERENT_VERONESE_PHASE_CHART_CLOSURE_NEXT_NONINTEGRABLE_SECANT_OR_GAUSSIAN_CHART_SELECTED`
-**Roadmap version:** `13.5`
+**Status:** `STRICT_SCOPE_SINGLE_INVOLUTIVE_RANK2_SECANT_CLOSURE_NEXT_CATALECTICANT_OR_GAUSSIAN_DIAGNOSTIC_SELECTED`
+**Roadmap version:** `13.6`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `f787e13100715219b8d39bd113f5aaade3695013`
+**Reconciled source head:** `e728386bef818bf92a497cf6ff1f183971e36e8c`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_PROGRAM_RESTRICTED_F17_COHERENT_VERONESE_PHASE_CHART_CLOSES_FIXED_P1_TO_P4_CHARACTERS_AND_BIDIRECTIONAL_MODE_SHEARS_IN_17_RESIDENT_COORDINATES_ACROSS_GROWING_EXCHANGE_SYMMETRIC_DEGREE_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_SEALED_WORDS_HAVE_A_STRONGER_TWO_SCALAR_WARM_CLASSICAL_BASELINE`
-**Current claim ceiling:** `DECLARED_K4_TO128_RANK1_COHERENT_VERONESE_FIXED_P1_TO_P4_AND_BIDIRECTIONAL_ADJACENT_MODE_SHEAR_PROGRAM_FAMILY_EXACT_Q_ZETA17_K4_TO32_DUAL_FIELD_K4_TO128_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_F17_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_EXPANDS_ONE_RANK1_VERONESE_PHASE_STATE_TO_A_RANK2_SECANT_SHARED_BY_TWO_NONCOMMUTING_MODULES_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_A_COMPILED_FOUR_DYNAMIC_SCALAR_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `DECLARED_K4_TO128_SINGLE_INVOLUTIVE_RANK1_TO_RANK2_SECANT_COUPLING_WITH_TWO_FIXED_NONCOMMUTING_CONSUMER_MODULES_EXACT_Q_ZETA17_K4_TO32_DUAL_FIELD_K4_TO128_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M129_RANK1_CHART_CEILING_AND_TWO_SCALAR_CLASSICAL_COLLAPSE`
+**New mechanism development:** `ACTIVE_AFTER_M130_SINGLE_COUPLING_RANK2_CLOSURE_AND_FOUR_TOTAL_SCALAR_CLASSICAL_COLLAPSE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_BOUNDED_SECANT_OR_GAUSSIAN_COHERENT_PHASE_CHART_FOR_ONE_SHARED_NONINTEGRABLE_ORBIT_COUPLING_WITH_RANK_GROWTH_AND_STRONGEST_COMPACT_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_SECOND_NONCOMMUTING_COUPLING_CATALECTICANT_RANK_LOWER_BOUND_OR_GAUSSIAN_CLOSURE_DIAGNOSTIC_WITHOUT_COMPONENT_ASSIGNMENT_ENUMERATION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F17_POWER_SUM_CHARACTER_AND_BIDIRECTIONAL_MODE_SHEAR_PHASE_MODULE_HAS_NO_NONTRIVIAL_LINEAR_QUOTIENT_BELOW_H_K_ON_EACH_DECLARED_EXCHANGE_SYMMETRIC_K1_TO_K4_ORBIT_MODULE_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE
+BOUNDED_EXACT_F17_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_EXPANDS_ONE_RANK1_VERONESE_PHASE_STATE_TO_A_RANK2_SECANT_SHARED_BY_TWO_NONCOMMUTING_MODULES_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_A_COMPILED_FOUR_DYNAMIC_SCALAR_CLASSICAL_RECURRENCE
 ```
 
 Not established:
@@ -4806,6 +4806,10 @@ M127 grid-orbit shear closure or generic coherent-superposition closure from M12
 arbitrary H(k)-input or general nonlinear quotient closure from M129
 CATVM custody of the M129 direct-process carrier or transient buffers
 distinct phase resource or advantage from the M129 two-scalar warm classical baseline comparison
+minimal secant rank above two from the M130 four distinct second-coupling terms
+repeated-coupling fixed-rank closure or Gaussian closure from M130
+CATVM custody of the M130 direct-process carrier or transient buffers
+distinct phase resource or advantage from the M130 four-total-scalar warm classical baseline
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4930,6 +4934,18 @@ rank-one degree list or treat the 17-cell encoding as a distinct resource.
 Retain the compiled two-scalar fixed-word baseline, the 17-coordinate
 descriptor-runtime baseline, final-only projection, exact restoration, and
 same-backing reuse; do not introduce matching or assignment enumeration.
+M130 then admits one involutive coherent superposition coupling by broadening
+the rank-one chart to two coherent components in 36 resident field cells. Two
+noncommuting modules consume that actual unresolved rank-two state, the final
+scalar alone is projected, and the exact module and coupling inverses restore
+and reuse the same backing. Full `H(4)=4,845` occupation reexecution agrees in
+three algebras. The strongest fixed-word warm classical recurrence folds the
+two public weights into the endpoints and retains only four total scalars, so
+no distinct phase resource appears. A second coupling generates four distinct
+terms, but that is not a minimal secant-rank lower bound. Continue with the
+smallest exact catalecticant certificate or genuinely closed Gaussian chart;
+do not call generated-term count rank, add more single-coupling degrees, or
+hide assignment enumeration in the successor.
 
 ## 10. Roadmap Maintenance
 

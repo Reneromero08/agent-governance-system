@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`ae36a130352ba92f4272858cc00bde13c6336b90`. The canonical per-milestone
+`e728386bef818bf92a497cf6ff1f183971e36e8c`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -7588,4 +7588,79 @@ The obstruction is:
 
 ```text
 THE_RANK1_COHERENT_VERONESE_CHART_REMOVES_H_K_RESIDENCY_FOR_AN_INTEGRABLE_CHARACTER_AND_ONE_PARTICLE_SHEAR_SUBPROGRAM_BUT_M127_GRID_ORBIT_SHEARS_AND_GENERIC_SUPERPOSITIONS_LEAVE_THE_CHART_AND_EACH_SEALED_PUBLIC_WORD_COMPILES_TO_AN_EVEN_SMALLER_TWO_SCALAR_WARM_CLASSICAL_BOUNDARY_RECURRENCE
+```
+
+## One involutive superposition closes on a rank-two coherent secant
+
+M130 implements the smallest exact chart broadening supported by the M129
+obstruction. With `R` the mode-zero/mode-one swap on the symmetric sector, the
+coupling is `C_eta=I+eta*R` and its exact inverse is
+`(I-eta*R)/(1-eta^2)`. It sends the rank-one seed `x0^k` to the rank-two
+secant `x0^k+eta*x1^k`.
+
+```text
+claim
+    BOUNDED_EXACT_F17_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_EXPANDS_ONE_RANK1_VERONESE_PHASE_STATE_TO_A_RANK2_SECANT_SHARED_BY_TWO_NONCOMMUTING_MODULES_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_A_COMPILED_FOUR_DYNAMIC_SCALAR_CLASSICAL_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident carrier  EXACT_ALGEBRAIC_RESTORATION
+    transient buffers NO_RESTORATION_CLAIM
+
+source head
+    e728386bef818bf92a497cf6ff1f183971e36e8c
+```
+
+Exact `Q(zeta17)` transactions pass at `k=4,8,16,32`; structural `F103/F137`
+transactions pass through `k=128`. The accepted carrier uses two weights and
+two 17-coordinate coherent vectors, or 36 resident field cells. The inverse
+coupling uses at most four logical component records, or 72 field cells,
+before exact duplicate cancellation. Two fixed 20-primitive modules have a
+boundary-visible noncommuting order and consume the actual resident secant.
+
+Only the final `(k-1,1,0,...,0)` occupation scalar is projected. Reverse
+module execution followed by the exact coupling inverse restores exact zero
+on the same backing, advances generation, and supports unrelated `PRIMARY
+k=8` then `REUSE k=16` execution. Fresh/restored boundaries and complete
+reported resource signatures agree without snapshot reload or inverse
+history.
+
+The independent oracle separately reconstructs the public compiler, coupling,
+two-component recurrence, rank-two derivative minor, projection, inverse,
+duplicate merge, and warm baseline. Full `H(4)=4,845` occupation reexecution
+agrees in `Q(zeta17)`, `F103`, and `F137`; all 16 declared transaction
+commitments and boundaries agree.
+
+The first independent review rejected two overstatements before the scientific
+commit. Four distinct generated terms after a second coupling do not prove
+minimal secant rank four, so the repaired evidence leaves minimal rank and the
+repeated-coupling rank law unestablished. The public weights can also be folded
+into the mode-one endpoints, so the strongest fixed-word warm baseline retains
+four total scalars, not six. That repaired baseline is independently sealed
+and boundary matched. Descriptor-runtime classical software executes the
+identical 36-cell recurrence.
+
+Exact payload-height maxima remain package-local. Python containers, native
+allocators, bigint internals, hashlib state, bit-operation complexity, and
+whole-process peaks are excluded. M130 does not establish repeated-coupling
+fixed-rank closure, M127 grid closure, arbitrary secant input closure, Gaussian
+closure, CATVM custody, a distinct phase resource, computational advantage,
+Small Wall crossing, physical waveform execution, physical bit replacement,
+or unbounded catalytic computation.
+
+The next experiment is:
+
+```text
+EXACT_SECOND_NONCOMMUTING_COUPLING_CATALECTICANT_RANK_LOWER_BOUND_OR_GAUSSIAN_CLOSURE_DIAGNOSTIC_WITHOUT_COMPONENT_ASSIGNMENT_ENUMERATION
+```
+
+The obstruction is:
+
+```text
+ONE_INVOLUTIVE_SUPERPOSITION_BROADENS_RANK1_TO_RANK2_BUT_THE_SECANT_RECURRENCE_IS_CLASSICALLY_IDENTICAL_FIXED_WORDS_COMPILE_TO_FOUR_TOTAL_FOLDED_ENDPOINT_SCALARS_AND_A_SECOND_COUPLING_GENERATES_FOUR_DISTINCT_TERMS_WITHOUT_YET_PROVING_MINIMAL_SECANT_RANK_ABOVE_TWO
 ```

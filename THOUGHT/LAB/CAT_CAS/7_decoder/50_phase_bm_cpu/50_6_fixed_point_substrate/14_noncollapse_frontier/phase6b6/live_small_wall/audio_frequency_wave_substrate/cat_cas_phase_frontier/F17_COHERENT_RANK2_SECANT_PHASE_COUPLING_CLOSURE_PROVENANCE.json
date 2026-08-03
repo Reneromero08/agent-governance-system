@@ -1,0 +1,85 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "e728386bef818bf92a497cf6ff1f183971e36e8c",
+  "scientific_source_parent": "ec983e068c13f840c8751a41d7a110e1b6d55428",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "810629a3cd56d987ad7266bfe86f382ce7dd0044c1a74a5418fd0a72e341fed0",
+  "reference_full_oracle_sha256": "0c4d7be8bdd9c17201c94723488612415e8b4ae4c5e1a88c03b921a5fc81a79f",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_coherent_rank2_secant_phase_coupling_closure.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_coherent_rank2_secant_phase_coupling_closure_oracle.py --production PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_coherent_rank2_secant_phase_coupling_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_coherent_rank2_secant_phase_coupling_closure.py": "884d754e1f1edf047cf9a99253e767b4e3a7337e2b8dd9d3c10dc1e8516e1a45",
+    "f17_coherent_rank2_secant_phase_coupling_closure_oracle.py": "85ae95efbad9377c792c0940af03357b3d2af860b39d780f7c5851917850dce9",
+    "F17_COHERENT_RANK2_SECANT_PHASE_COUPLING_CLOSURE_RESULTS.json": "810629a3cd56d987ad7266bfe86f382ce7dd0044c1a74a5418fd0a72e341fed0",
+    "F17_COHERENT_RANK2_SECANT_PHASE_COUPLING_CLOSURE_ORACLE_RESULTS.json": "0c4d7be8bdd9c17201c94723488612415e8b4ae4c5e1a88c03b921a5fc81a79f",
+    "F17_COHERENT_RANK2_SECANT_PHASE_COUPLING_CLOSURE_INDEPENDENT_REVIEW.md": "8ec9d043b515fedd1234089e6ddcf3d4b520c00a9ab0a99505f320b3ac438979",
+    "qualify_f17_coherent_rank2_secant_phase_coupling_closure.sh": "f63a2a67d8e76af3a98c015b8c2d4e5d6cac17e943141d89ec758db52f3c112a"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "chart": "RANK2_COHERENT_VERONESE_SECANT",
+    "coupling": "ONE_INVOLUTIVE_I_PLUS_ETA_SWAP_MODE0_MODE1",
+    "exact_q_zeta17_degrees": [4, 8, 16, 32],
+    "dual_field_degrees": [4, 8, 16, 32, 64, 128],
+    "families": ["PRIMARY", "REUSE"],
+    "consumer_modules": 2,
+    "primitives_per_consumer": 20,
+    "full_occupation_oracle_degree": 4,
+    "full_occupation_oracle_dimension": 4845,
+    "independent_methods": [
+      "SEPARATE_PUBLIC_PROGRAM_COMPILER",
+      "SEPARATE_INVOLUTIVE_COUPLING_AND_TWO_COMPONENT_CHART",
+      "FULL_H4_OCCUPATION_REEXECUTION_IN_THREE_ALGEBRAS",
+      "INDEPENDENT_FIRST_DERIVATIVE_RANK_TWO_CERTIFICATE",
+      "SEPARATE_EXACT_FORWARD_INVERSE_AND_DUPLICATE_MERGE",
+      "SEPARATE_COMPILED_FOUR_TOTAL_FOLDED_ENDPOINT_SCALAR_BASELINE"
+    ]
+  },
+  "resource_accounting": {
+    "resident_phase_field_cells": 36,
+    "inverse_coupling_logical_transient_field_cells": 72,
+    "accepted_path_occupation_coordinates": 0,
+    "accepted_path_matching_or_assignment_expansion": 0,
+    "inverse_history_cells": 0,
+    "compiled_warm_baseline_retained_total_field_cells": 4,
+    "compiled_warm_baseline_compiler_working_field_cells": 36,
+    "exact_payload_height_tuples_independently_reexecuted": false,
+    "full_exact_bit_complexity_established": false,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "HASHLIB_INTERNAL_STATE",
+      "BIT_OPERATION_COMPLEXITY",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_baselines": [
+    "COMPILED_FOUR_TOTAL_FOLDED_ENDPOINT_SCALAR_WARM_BOUNDARY_RECURRENCE_FOR_SEALED_WORDS",
+    "IDENTICAL_TWO_COMPONENT_36_FIELD_CELL_RECURRENCE_FOR_DESCRIPTOR_RUNTIME"
+  ],
+  "claim_ceiling": "DECLARED_K4_TO128_SINGLE_INVOLUTIVE_RANK1_TO_RANK2_SECANT_COUPLING_WITH_TWO_FIXED_NONCOMMUTING_CONSUMER_MODULES_EXACT_Q_ZETA17_K4_TO32_DUAL_FIELD_K4_TO128_DIRECT_PROCESS_SOFTWARE",
+  "rejected_interpretations": [
+    "REPEATED_COUPLING_MINIMAL_SECANT_RANK_ABOVE_TWO",
+    "REPEATED_COUPLING_FIXED_RANK_CLOSURE",
+    "M127_GRID_ORBIT_SHEAR_CLOSURE",
+    "ARBITRARY_SECANT_INPUT_CLOSURE",
+    "GENERAL_GAUSSIAN_CLOSURE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}
