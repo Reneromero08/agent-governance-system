@@ -1,0 +1,104 @@
+{
+  "schema": "CAT_CAS_F103_C17_QUADRATIC_MODE_MIXING_NO_GO_PROVENANCE_V1",
+  "scientific_source_commit": "1a02e6cc6cd63d45c80ea645d9aed1fd26a97be8",
+  "scientific_parent_commit": "249e839a943430a92fda51f007148613206f8d35",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_restoration_classification": "NO_RESTORATION_CLAIM",
+  "artifacts": {
+    "production_source": {
+      "path": "cat_cas_phase_frontier/f103_c17_quadratic_mode_mixing_no_go.py",
+      "sha256": "24a1ed77bfc13e7ffe30b1fd1182e23f3907059c459a227a9a4d87a35da2220d"
+    },
+    "oracle_source": {
+      "path": "cat_cas_phase_frontier/f103_c17_quadratic_mode_mixing_no_go_oracle.py",
+      "sha256": "a96e669ca9b935305db656a35f1bf4d9a7894dd20e8106f8133f80a6ccbc41a5"
+    },
+    "production_dependency": {
+      "path": "cat_cas_phase_frontier/f103_c17_superposition_interference_factor_no_go.py",
+      "sha256": "a8e4dac14366fb4edbeb7335ba938f8675e352216840d3cb8a3a8c5a8f93a86a"
+    },
+    "production_result": {
+      "path": "cat_cas_phase_frontier/F103_C17_QUADRATIC_MODE_MIXING_NO_GO_RESULTS.json",
+      "sha256": "8281dfd5b01699092f7467766adcf545e93b29eaa3139353e6cddbe1c11ac41b"
+    },
+    "oracle_result": {
+      "path": "cat_cas_phase_frontier/F103_C17_QUADRATIC_MODE_MIXING_NO_GO_ORACLE_RESULTS.json",
+      "sha256": "0953ac92f1486ddc9c95154be7e3df53030db828ece1d1adad0e19af5f52b838"
+    },
+    "qualifier": {
+      "path": "cat_cas_phase_frontier/qualify_f103_c17_quadratic_mode_mixing_no_go.sh",
+      "sha256": "2e23f611c099d9668e789ec5a85115980b59e5abadd1391080b67ca4f0749fdb"
+    },
+    "review": {
+      "path": "cat_cas_phase_frontier/F103_C17_QUADRATIC_MODE_MIXING_NO_GO_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "23db80a54881b1a6cdda6632bf639a37fbc522782547627a2ac687b486bc2c20"
+    }
+  },
+  "qualifier_execution": {
+    "evidence_directory": "/dev/shm/ags-audio-m151-qualifier-rGdeOp",
+    "result": "QUALIFIED_F103_C17_QUADRATIC_MODE_MIXING_NO_GO_STRICT_SCOPE",
+    "production_output_byte_identical_to_seal": true,
+    "oracle_output_byte_identical_to_seal": true
+  },
+  "scope": {
+    "field_modulus": 103,
+    "cycle_order": 17,
+    "families": [
+      "PRIMARY",
+      "REUSE",
+      "ALTERNATE"
+    ],
+    "depths": [
+      1,
+      4,
+      16,
+      64,
+      256,
+      1024
+    ],
+    "case_count": 18,
+    "logical_phase_factors": 51,
+    "resident_field_coordinates": 867,
+    "shared_quadratic_port_consumers": 16,
+    "independent_comparisons": 180
+  },
+  "observed_resource_law": {
+    "phase_resident_bytes": 867,
+    "coupled_spectral_resident_bytes": 867,
+    "phase_maximum_named_warm_live_bytes": 1369,
+    "coupled_spectral_maximum_named_warm_live_bytes": 1369,
+    "depth1024_phase_core_multiplications": 18957312,
+    "depth1024_coupled_spectral_core_multiplications": 1410048,
+    "independent_spectral_modes_close": false,
+    "identical867_coordinate_classical_recurrence_executes": true,
+    "coupled17_mode_classical_recurrence_executes": true,
+    "inverse_history_cells": 0,
+    "retained_restoration_baseline_cells": 0,
+    "snapshot_reload_used": false
+  },
+  "claim_ceiling": "F103_C17_CONVOLUTION_AND_COEFFICIENTWISE_QUADRATIC_SHEARS_ON_THE_DECLARED51_PORT_ROTATING_HUB_TOPOLOGY_ACROSS18_CASES_THROUGH_DEPTH1024_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "GENERAL_MULTI_COORDINATE_F103_C17_SUPERPOSITION",
+    "NATIVE_CONVOLUTION_AND_COEFFICIENTWISE_QUADRATIC_INTERLEAVING",
+    "EXACT_CROSS_MODE_COUPLING",
+    "NONCOMMUTING_MULTI_CONSUMER_RESIDENT_PORT",
+    "FINAL_ONLY_BOUNDARY_PROJECTION",
+    "EXACT_SAME_BACKING_RESTORATION_AND_REUSE",
+    "INDEPENDENT17_MODE_FACTORIZATION_REJECTED",
+    "EXECUTED_COUPLED17_MODE_AND_IDENTICAL867_COORDINATE_CLASSICAL_RECURRENCES"
+  ],
+  "rejected_interpretations": [
+    "COMPLEX_OR_PHYSICAL_COHERENCE",
+    "GENERAL_PHASE_RELATIONAL_CONTRACTION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

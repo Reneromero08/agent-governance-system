@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F103_C17_SUPERPOSITION_SPECTRAL_FACTOR_NO_GO`
-**Roadmap version:** `14.16`
+**Status:** `STRICT_SCOPE_F103_C17_QUADRATIC_MODE_MIXING_NO_GO`
+**Roadmap version:** `14.17`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `3f49909a19b02436ffa900097c7c5cdc068f4d46`
+**Reconciled source head:** `1a02e6cc6cd63d45c80ea645d9aed1fd26a97be8`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F103_C17_PHASE_ORBIT_SUPERPOSITION_CONVOLUTION_SHEARS_KEEP_ONE_MULTI_COORDINATE_RESIDENT_PORT_UNPROJECTED_ACROSS16_TARGETS_AND_RECIPROCAL_NONCOMMUTING_CONSUMERS_WITH_EXACT_DESTRUCTIVE_INTERFERENCE_RESTORATION_AND_REUSE_THROUGH_DEPTH1024_BUT_FACTORIZE_EXACTLY_INTO_AN_EXECUTED17_MODE_CLASSICAL_RECURRENCE_WITH_EQUAL_RESIDENT_DIMENSION_AND_LOWER_CONVOLUTION_WORK`
-**Current claim ceiling:** `F103_C17_GROUP_ALGEBRA_ROTATION_ADDITION_AND_CONVOLUTION_SHEARS_ON_THE_DECLARED51_PORT_ROTATING_HUB_TOPOLOGY_ACROSS18_CASES_THROUGH_DEPTH1024_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_F103_C17_INTERLEAVED_CONVOLUTION_AND_COEFFICIENTWISE_QUADRATIC_PHASE_SHEARS_BREAK17_INDEPENDENT_SPECTRAL_MODE_CLOSURE_WHILE_KEEPING_ONE_RESIDENT_MULTI_COORDINATE_PORT_UNPROJECTED_ACROSS_16_CONSUMERS_WITH_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH1024_BUT_COLLAPSE_TO_EXECUTED_COUPLED17_MODE_AND_IDENTICAL867_COORDINATE_CLASSICAL_RECURRENCES`
+**Current claim ceiling:** `F103_C17_CONVOLUTION_AND_COEFFICIENTWISE_QUADRATIC_SHEARS_ON_THE_DECLARED51_PORT_ROTATING_HUB_TOPOLOGY_ACROSS18_CASES_THROUGH_DEPTH1024_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M150_F103_C17_SUPERPOSITION_SPECTRAL_FACTOR_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M151_F103_C17_QUADRATIC_MODE_MIXING_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `INTERLEAVED_C17_CONVOLUTION_AND_COEFFICIENTWISE_QUADRATIC_PHASE_SHEAR_WITH_EXACT_SPECTRAL_MODE_MIXING_OR_MATCHED17_COORDINATE_CLASSICAL_RECURRENCE_NO_GO`
+**Active primary successor:** `TYPED_OPEN_F103_C17_PHASE_RELATION_BIALGEBRA_SHARED_PORT_COMPOSITION_INTERSECTION_CLOSURE_OR_MATCHED_COMPACT_CLASSICAL_NO_GO`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`3f49909a19b02436ffa900097c7c5cdc068f4d46`. The current 150-milestone
+`1a02e6cc6cd63d45c80ea645d9aed1fd26a97be8`. The current 151-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_DIRECT_PHASE_ANGLE_TRIANGULAR_SHARED_GAUGE_COUPLING_USES_ONE_RESIDENT_GAUGE_ACROSS16_TARGETS_AND_RECIPROCAL_NONCOMMUTING_HUB_UPDATES_WITHOUT_COMPLEX_DECODE_CARTESIAN_SCRATCH_CHART_RECONSTRUCTION_OR_RETAINED_GIVENS_PLAN_ON_FIXED51_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_IS_BYTE_BISIMULATED_BY_AN_EXECUTED_IDENTICAL51_ANGLE_CLASSICAL_RECURRENCE
+BOUNDED_EXACT_F103_C17_INTERLEAVED_CONVOLUTION_AND_COEFFICIENTWISE_QUADRATIC_PHASE_SHEARS_BREAK17_INDEPENDENT_SPECTRAL_MODE_CLOSURE_WHILE_KEEPING_ONE_RESIDENT_MULTI_COORDINATE_PORT_UNPROJECTED_ACROSS_16_CONSUMERS_WITH_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH1024_BUT_COLLAPSE_TO_EXECUTED_COUPLED17_MODE_AND_IDENTICAL867_COORDINATE_CLASSICAL_RECURRENCES
 ```
 
 Not established:
@@ -6347,6 +6347,80 @@ the shared port unresolved, project only the final boundary, restore and reuse
 the actual carrier, and avoid relation tables and assignment expansion.
 
 M150 establishes no complex or physical coherence, general relational
+contraction, CATVM custody, distinct phase resource, computational advantage,
+Small Wall crossing, physical waveform execution, physical bit replacement,
+or unbounded catalytic computation.
+
+## M151: C17 quadratic mode mixing and fixed-coordinate no-go
+
+M151 changes the M150 phase machine by interleaving its cyclic-convolution
+shears with a reversible coefficientwise quadratic shear. One unresolved hub
+slot supplies one shared square to 16 target consumers between the OUT and IN
+layers. The accepted path performs no scalar or exponent readout, materializes
+no relation table or assignment expansion, and projects only the final
+17-coordinate boundary.
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C17_INTERLEAVED_CONVOLUTION_AND_COEFFICIENTWISE_QUADRATIC_PHASE_SHEARS_BREAK17_INDEPENDENT_SPECTRAL_MODE_CLOSURE_WHILE_KEEPING_ONE_RESIDENT_MULTI_COORDINATE_PORT_UNPROJECTED_ACROSS_16_CONSUMERS_WITH_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH1024_BUT_COLLAPSE_TO_EXECUTED_COUPLED17_MODE_AND_IDENTICAL867_COORDINATE_CLASSICAL_RECURRENCES
+```
+
+Classification and restoration:
+
+```text
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification level
+    INDEPENDENT_ORACLE_REEXECUTION
+resident carrier
+    EXACT_ALGEBRAIC_RESTORATION
+transient buffers
+    NO_RESTORATION_CLAIM
+source head
+    1a02e6cc6cd63d45c80ea645d9aed1fd26a97be8
+```
+
+The exact transform law sends coefficientwise square to inverse-17 times
+circular self-convolution of all 17 character modes. The independent-mode
+square sham changes the final state, and a two-mode witness generates a third
+mode. M151 therefore rejects M150's 17 independent-mode closure for the new
+primitive rather than assuming that nonlinearity defeats the factorization.
+
+All 18 cases across three public families and depths through 1024 match both
+the coefficient recurrence and the fully coupled 17-mode recurrence in all
+867 cells and at the boundary. The pure-Python oracle imports neither
+production nor M150, uses no NumPy, and passes 180 comparisons plus inverse,
+order, topology, null-port, transform, and sham controls.
+
+Every carrier restores exactly on the same backing without snapshot, inverse
+history, retained restoration baseline, or canonicalization. Unrelated
+depth-613 reuse matches fresh execution, and 64 depth-8 reuse cycles restore
+exactly. The accepted executions record 10,601 quadratic cancellation events.
+
+The nonlinear primitive still has no demonstrated resource advantage. The
+coefficient and coupled-spectral paths each retain 867 field coordinates and
+reach 1,369 named warm bytes. At depth 1024 the evaluated coefficient path
+counts 18,957,312 convolution-plus-quadratic core multiplications; the coupled
+spectral path counts 1,410,048. The independent oracle also executes the
+identical 867-coordinate classical coefficient recurrence. No optimal
+classical recurrence is claimed.
+
+The selected successor is:
+
+```text
+TYPED_OPEN_F103_C17_PHASE_RELATION_BIALGEBRA_SHARED_PORT_COMPOSITION_INTERSECTION_CLOSURE_OR_MATCHED_COMPACT_CLASSICAL_NO_GO
+```
+
+It must move from another deterministic finite-coordinate polynomial update
+to an open typed relation law. It must make cyclic convolution serve native
+relation composition and Hadamard product serve native relation intersection
+on at least one shared unresolved port, retain multiple consumers and
+final-only closure, restore and reuse the actual carrier, and compare against
+the strongest compact classical bialgebra recurrence without relation tables
+or assignment enumeration.
+
+M151 establishes no complex or physical coherence, general relational
 contraction, CATVM custody, distinct phase resource, computational advantage,
 Small Wall crossing, physical waveform execution, physical bit replacement,
 or unbounded catalytic computation.

@@ -8764,3 +8764,52 @@ recurrence. M150 establishes no complex or physical coherence, general
 relational contraction, CATVM custody, distinct phase resource, computational
 advantage, Small Wall crossing, physical execution, physical bit replacement,
 or unbounded catalytic computation.
+
+## M151: C17 quadratic spectral-mode mixing no-go
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C17_INTERLEAVED_CONVOLUTION_AND_COEFFICIENTWISE_QUADRATIC_PHASE_SHEARS_BREAK17_INDEPENDENT_SPECTRAL_MODE_CLOSURE_WHILE_KEEPING_ONE_RESIDENT_MULTI_COORDINATE_PORT_UNPROJECTED_ACROSS_16_CONSUMERS_WITH_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH1024_BUT_COLLAPSE_TO_EXECUTED_COUPLED17_MODE_AND_IDENTICAL867_COORDINATE_CLASSICAL_RECURRENCES
+```
+
+M151 interleaves M150's cyclic-convolution shears with a reversible
+coefficientwise quadratic shear. One resident hub slot supplies the shared
+quadratic term to 16 target consumers. The port remains unprojected; the path
+uses no scalar or exponent readout, relation table, assignment expansion,
+retained plan, inverse history, or restoration baseline.
+
+The quadratic shear genuinely breaks independent character-mode evolution.
+For the declared transform, pointwise coefficient square becomes inverse-17
+times circular self-convolution of the 17 modes. The independent-mode square
+sham changes the final state, and an explicit two-mode witness produces a
+third mode.
+
+All 18 cases across three public families and depths 1, 4, 16, 64, 256, and
+1024 match a fully coupled 17-mode recurrence in all 867 cells and at the
+boundary. The pure-Python independent oracle imports neither production nor
+M150, uses no NumPy, separately executes the 867-coordinate coefficient and
+coupled 17-mode recurrences, and passes 180 comparisons. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+All 867 carrier cells restore exactly on the same backing. Unrelated
+depth-613 reuse matches fresh execution, and 64 depth-8 cycles restore
+exactly. Resident restoration is `EXACT_ALGEBRAIC_RESTORATION`; transient
+buffers have `NO_RESTORATION_CLAIM`. No snapshot reload or post-inverse
+canonicalization is used.
+
+The accepted runs contain 10,601 exact quadratic cancellation events. Both
+evaluated paths retain 867 bytes and reach 1,369 named warm bytes. At depth
+1024 the coefficient path counts 18,957,312 convolution-plus-quadratic core
+multiplications, while the coupled spectral path counts 1,410,048. The oracle
+also executes the identical 867-coordinate classical coefficient recurrence.
+No optimal classical baseline is claimed.
+
+The selected successor is a typed open `F103[C17]` phase-relation bialgebra:
+native convolution composition plus Hadamard intersection on a shared
+unresolved port, with final-only closure, exact restoration/reuse, and the
+strongest compact classical recurrence. M151 establishes no general
+relational contraction, CATVM custody, distinct phase resource,
+computational advantage, Small Wall crossing, physical execution, physical
+bit replacement, or unbounded catalytic computation.
