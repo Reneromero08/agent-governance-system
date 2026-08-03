@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_STREAMED_NATIVE_ANGLE_INTERFERENCE`
-**Roadmap version:** `14.10`
+**Status:** `STRICT_SCOPE_LOCAL_POLAR_GIVENS_PHASE_COUPLING`
+**Roadmap version:** `14.11`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `ca017fa6f5c01f15f7f0ba18b6e0a0b9c05d8261`
+**Reconciled source head:** `f8bd38afa9975341a4d914bad0efe9dc155c9a68`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_STREAMED_ANGLE_DOMAIN_ANISOTROPIC_F17_RADIAL_INTERFERENCE_CONSUMES_FIXED34_RESIDENT_PHASE_ANGLES_WITHOUT17_COMPLEX_STATE_DECODE_OR_RETAINED_DENSE_KERNEL_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_USES_TWO_CARTESIAN_ACCUMULATORS_PER_OUTPUT_AND_IS_STRICTLY_MORE_TRIGONOMETRIC_WORK_THAN_THE_IDENTICAL17_COMPLEX_MATRIX_FREE_RECURRENCE`
-**Current claim ceiling:** `21_DECLARED_NATIVE_ANGLE_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_TOPOLOGY_COMPILED_LOCAL_POLAR_GIVENS_PHASE_COUPLING_FACTORS_WEIGHTED_ANISOTROPIC_F17_RADIAL_INTERFERENCE_IN136_TWO_CELL_COUPLERS_WITH_FIXED34_RESIDENT_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_REQUIRES_A2312_BYTE_PUBLIC_PLAN_LOCAL_CARTESIAN_REGISTERS_AND_HAS_THE_IDENTICAL_COMPLEX_GIVENS_RECURRENCE`
+**Current claim ceiling:** `21_DECLARED_WEIGHTED_LOCAL_POLAR_GIVENS_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M144_STREAMED_NATIVE_ANGLE_INTERFERENCE`
+**New mechanism development:** `ACTIVE_AFTER_M145_LOCAL_POLAR_GIVENS_COUPLING`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `TOPOLOGY_COMPILED_LOCAL_POLAR_GIVENS_PHASE_COUPLING_WITHOUT_GLOBAL_CARTESIAN_ACCUMULATION_OR_BOUNDED_NO_GO_AGAINST_MATCHED_COMPLEX_GIVENS_EXECUTION`
+**Active primary successor:** `GAUGE_TRANSPORTED_PHASE_ONLY_LOCAL_GIVENS_LIFT_ON_WEIGHTED_UNIT_SPHERE_OR_BOUNDED_ZERO_FIBER_NO_GO_AGAINST_IDENTICAL_COMPLEX_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`ca017fa6f5c01f15f7f0ba18b6e0a0b9c05d8261`. The current 144-milestone
+`f8bd38afa9975341a4d914bad0efe9dc155c9a68`. The current 145-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_NUMERICAL_UNIT_PHASOR_PAIR_CHART_REPRESENTS_NORMALIZED_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_STATE_IN_FIXED34_PHASE_ANGLE_COORDINATES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_PHYSICAL_STATE_RESTORATION_AND_REUSE_BUT_REQUIRES_TRANSCENDENTAL_CANONICAL_CHART_ARITHMETIC_AND_HAS_THE_IDENTICAL17_COMPLEX_COMPACT_CLASSICAL_RECURRENCE
+BOUNDED_TOPOLOGY_COMPILED_LOCAL_POLAR_GIVENS_PHASE_COUPLING_FACTORS_WEIGHTED_ANISOTROPIC_F17_RADIAL_INTERFERENCE_IN136_TWO_CELL_COUPLERS_WITH_FIXED34_RESIDENT_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_REQUIRES_A2312_BYTE_PUBLIC_PLAN_LOCAL_CARTESIAN_REGISTERS_AND_HAS_THE_IDENTICAL_COMPLEX_GIVENS_RECURRENCE
 ```
 
 Not established:
@@ -5903,6 +5903,77 @@ M144 establishes no exact semantics, unbounded numerical stability, distinct
 phase resource, computational advantage, Small Wall crossing, physical
 waveform execution, physical bit replacement, or unbounded catalytic
 computation.
+
+## M145: Topology-compiled local polar Givens coupling
+
+M145 changes the carrier to public shell-normalized radial coefficients.
+Conjugation by the square roots of the declared `(1,18 x 16)` shell
+multiplicities makes the radial transform real symmetric orthogonal.  A
+deterministic public QR schedule factors it into 136 two-cell Givens rotations
+and 17 signs.  Forward and inverse then touch only two phase-pair cells at a
+time; no full complex state or dense kernel is retained.
+
+```text
+claim
+    BOUNDED_TOPOLOGY_COMPILED_LOCAL_POLAR_GIVENS_PHASE_COUPLING_FACTORS_WEIGHTED_ANISOTROPIC_F17_RADIAL_INTERFERENCE_IN136_TWO_CELL_COUPLERS_WITH_FIXED34_RESIDENT_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_REQUIRES_A2312_BYTE_PUBLIC_PLAN_LOCAL_CARTESIAN_REGISTERS_AND_HAS_THE_IDENTICAL_COMPLEX_GIVENS_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident 34-angle carrier NUMERICAL_PHYSICAL_STATE_RESTORATION
+    compiler, local scratch, chart, verification, and projection buffers NO_RESTORATION_CLAIM
+
+source head
+    f8bd38afa9975341a4d914bad0efe9dc155c9a68
+```
+
+Across the 21 declared cases through depth 4096, maximum boundary error
+against the identical complex-Givens execution is `7.280e-11`, maximum state
+error is `5.641e-12`, and maximum single-transaction restoration error is
+`6.853e-12`.  Unrelated depth-1537 reuse differs from fresh execution by
+`7.230e-13`; 100 same-backing depth-64 cycles restore within `1.368e-11`.
+
+The local chart canonically represents magnitudes at or below `1e-14` by an
+antipodal pair.  This occurs intrinsically during forward and inverse; it is
+not a post-inverse reset or reload.  The declared seed and programs restore the
+actual angle-phasor cells on the same backing.  The supported class is
+`NUMERICAL_PHYSICAL_STATE_RESTORATION` at this strict seeded-carrier ceiling,
+not exact algebraic restoration or general invertibility.
+
+The independent oracle imports no production or predecessor module.  It
+reconstructs the weighted operator in long-double arithmetic, compiles and
+executes a separate float64 QR plan, repeats every case and reuse path, and
+performs 289 comparisons.  Symmetry, orthogonality, and involution errors are
+below `1e-15`; plan, weighting, missing-inverse, wrong-inverse, and reordered-
+inverse mutations are detected.
+
+The retained public plan is 2,312 bytes; its implicit index schedule stores no
+indices.  Public compilation has a conservative 4,960-byte named peak.  Warm
+native execution reaches 3,055 named bytes including commitment, while the
+identical in-place 17-complex Givens baseline reaches 2,959 named bytes and
+uses no Fourier input-phasor or chart trigonometry.  Both paths share the
+4,960-byte full-lifecycle compilation peak.
+
+M145 removes M144's global Cartesian accumulator, but not local Cartesian
+registers or the stronger compact classical execution.  The selected
+successor is:
+
+```text
+GAUGE_TRANSPORTED_PHASE_ONLY_LOCAL_GIVENS_LIFT_ON_WEIGHTED_UNIT_SPHERE_OR_BOUNDED_ZERO_FIBER_NO_GO_AGAINST_IDENTICAL_COMPLEX_RECURRENCE
+```
+
+It must test whether the actual phase-pair fibers can carry the local Givens
+law through zero without Cartesian reconstruction or post-hoc chart reset.  A
+bounded no-go must distinguish the declared weighted unit-sphere carrier from
+arbitrary disk pairs and retain the strongest identical complex recurrence.
+M145 establishes no exact semantics, unbounded numerical stability, CATVM
+custody, distinct phase resource, computational advantage, Small Wall
+crossing, physical waveform execution, physical bit replacement, or
+unbounded catalytic computation.
 
 ## 10. Roadmap Maintenance
 

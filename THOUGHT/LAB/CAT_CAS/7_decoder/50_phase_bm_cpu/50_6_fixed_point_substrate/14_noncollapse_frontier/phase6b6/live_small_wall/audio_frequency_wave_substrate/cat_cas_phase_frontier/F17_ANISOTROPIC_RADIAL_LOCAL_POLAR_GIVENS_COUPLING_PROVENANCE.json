@@ -1,0 +1,103 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "f8bd38afa9975341a4d914bad0efe9dc155c9a68",
+  "scientific_source_parent": "ddbcdd8e01c426460eed2c53bc19e04dc6436258",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "19c7a3de4feb779a2277ec8b8c1d35718aba66b80311c1779fd8e8aa7b387e31",
+  "reference_full_oracle_sha256": "e79ebd3ee1daff20db19533ee14110442a93ec487c55c9d148f3214dfb8b51ab",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_local_polar_givens_coupling.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_local_polar_givens_coupling_oracle.py --package PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_anisotropic_radial_local_polar_givens_coupling.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_anisotropic_radial_local_polar_givens_coupling.py": "e257720dd3eab4ab6d1c7eb1e8e2037ded69d2641faeb8274c1d08b20525f065",
+    "f17_anisotropic_radial_local_polar_givens_coupling_oracle.py": "ab8d0ff3886f94d69807df46fef5a126f3d23a805014412ffcfbf3072a31d152",
+    "F17_ANISOTROPIC_RADIAL_LOCAL_POLAR_GIVENS_COUPLING_RESULTS.json": "19c7a3de4feb779a2277ec8b8c1d35718aba66b80311c1779fd8e8aa7b387e31",
+    "F17_ANISOTROPIC_RADIAL_LOCAL_POLAR_GIVENS_COUPLING_ORACLE_RESULTS.json": "e79ebd3ee1daff20db19533ee14110442a93ec487c55c9d148f3214dfb8b51ab",
+    "F17_ANISOTROPIC_RADIAL_LOCAL_POLAR_GIVENS_COUPLING_INDEPENDENT_REVIEW.md": "f80149c0c5098425c8f113a870fb786737720925c4866cb0fdc33e1520520154",
+    "qualify_f17_anisotropic_radial_local_polar_givens_coupling.sh": "9e523a85338f1d581b397e7430b8ea2a088df3b3dc57b862e8d7c42d1dec1f9d"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "coordinate_space": "SHELL_NORMALIZED_F17_SQUARED_ANISOTROPIC_RADIAL_QUOTIENT",
+    "resident_chart": "TWO_UNIT_PHASOR_ANGLES_PER_SHELL_NORMALIZED_COMPLEX_COEFFICIENT",
+    "update_law": "PUBLIC136_TWO_CELL_REAL_GIVENS_COUPLERS_PLUS17_SIGNS",
+    "depths": [1, 4, 16, 64, 256, 1024, 4096],
+    "families": ["PRIMARY", "REUSE", "ALTERNATE"],
+    "independent_methods": [
+      "LONG_DOUBLE_DENSE_WEIGHTED_RADIAL_OPERATOR",
+      "SEPARATE_FLOAT64_QR_PLAN_COMPILATION",
+      "SEPARATE_LOCAL_PHASE_PAIR_FORWARD_AND_INVERSE",
+      "SEPARATE_UNRELATED_DEPTH1537_REUSE",
+      "SEPARATE100_CYCLE_DEPTH64_REUSE",
+      "PRODUCTION_RESTORATION_REUSE_AND_RESOURCE_FIELD_ENFORCEMENT",
+      "PLAN_WEIGHT_AND_INVERSE_ORDER_MUTATION_CONTROLS"
+    ]
+  },
+  "predeclared_tolerances": {
+    "restoration_phasor_max_abs": 2e-11,
+    "state_max_abs": 2e-11,
+    "boundary_max_abs": 1e-10,
+    "plan_max_abs": 5e-14,
+    "chart_zero_canonical_floor": 1e-14,
+    "chart_radius_slack": 2e-12
+  },
+  "resource_accounting": {
+    "resident_phase_angle_float64_cells": 34,
+    "resident_phase_angle_bytes": 272,
+    "retained_public_givens_plan_float64_cells": 289,
+    "retained_public_givens_plan_bytes": 2312,
+    "implicit_givens_index_schedule_stored_cells": 0,
+    "retained_shell_count_bytes": 136,
+    "maximum_named_update_bytes": 96,
+    "maximum_named_projection_bytes": 80,
+    "maximum_named_restoration_verification_bytes": 64,
+    "maximum_public_program_json_bytes": 175,
+    "maximum_named_warm_execution_live_bytes_including_program_json": 3055,
+    "maximum_named_full_lifecycle_live_bytes": 4960,
+    "public_plan_compilation_maximum_named_bytes": 4960,
+    "matched_complex_givens_warm_live_bytes_including_program_json": 2959,
+    "matched_complex_givens_full_lifecycle_live_bytes": 4960,
+    "retained_complex_state_cells": 0,
+    "retained_dense_kernel_cells": 0,
+    "compiled_gate_sequence_cells": 0,
+    "inverse_history_cells": 0,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NUMPY_AND_NATIVE_LIBRARY_INTERNAL_STORAGE",
+      "HASHLIB_INTERNAL_REPRESENTATION_BEYOND_LOGICAL96_BYTES",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_classical_baseline": "IDENTICAL_PUBLIC_PLAN17_COMPLEX_IN_PLACE_GIVENS_RECURRENCE",
+  "claim_ceiling": "21_DECLARED_WEIGHTED_LOCAL_POLAR_GIVENS_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "PUBLIC_WEIGHTED_REAL_SYMMETRIC_ORTHOGONAL_RADIAL_OPERATOR",
+    "DETERMINISTIC136_TWO_CELL_GIVENS_PLUS17_SIGN_FACTORIZATION",
+    "LOCAL_PHASE_PAIR_CONSUMPTION_WITHOUT17_COMPLEX_ACCEPTED_STATE",
+    "ZERO_RETAINED_DENSE_KERNEL_AND_ZERO_INVERSE_HISTORY",
+    "FINAL_ONLY_BOUNDARY_PROJECTION",
+    "HISTORY_FREE_NUMERICAL_PHYSICAL_STATE_RESTORATION_ON_SAME_BACKING",
+    "UNRELATED_DEPTH1537_AND100_CYCLE_DEPTH64_REUSE_WITHIN_TOLERANCE",
+    "INDEPENDENT_LONG_DOUBLE_DENSE_WEIGHTED_OPERATOR_REEXECUTION"
+  ],
+  "rejected_interpretations": [
+    "CARTESIAN_REGISTER_FREE_LOCAL_COUPLING",
+    "EXACT_ALGEBRAIC_SEMANTICS",
+    "UNBOUNDED_DEPTH_NUMERICAL_STABILITY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

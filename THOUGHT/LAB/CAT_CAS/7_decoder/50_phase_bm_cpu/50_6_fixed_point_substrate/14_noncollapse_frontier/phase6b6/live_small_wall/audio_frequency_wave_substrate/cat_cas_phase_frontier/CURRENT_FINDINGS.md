@@ -8474,3 +8474,46 @@ complex Givens execution.  M144 establishes no exact semantics, unbounded
 numerical stability, CATVM custody, distinct phase resource, computational
 advantage, Small Wall crossing, physical execution, physical bit replacement,
 or unbounded catalytic computation.
+
+## M145: Topology-compiled local polar Givens coupling
+
+Claim:
+
+```text
+BOUNDED_TOPOLOGY_COMPILED_LOCAL_POLAR_GIVENS_PHASE_COUPLING_FACTORS_WEIGHTED_ANISOTROPIC_F17_RADIAL_INTERFERENCE_IN136_TWO_CELL_COUPLERS_WITH_FIXED34_RESIDENT_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_REQUIRES_A2312_BYTE_PUBLIC_PLAN_LOCAL_CARTESIAN_REGISTERS_AND_HAS_THE_IDENTICAL_COMPLEX_GIVENS_RECURRENCE
+```
+
+Public shell normalization converts the radial transform to a real symmetric
+orthogonal operator.  A deterministic QR schedule compiles 136 two-cell
+Givens rotations and 17 signs.  The accepted path applies these directly to
+the resident phase pairs and retains neither a 17-complex state nor a dense
+kernel.
+
+Across 21 declared cases through depth 4096, maximum boundary error against
+the identical complex-Givens recurrence is `7.280e-11`, maximum state error is
+`5.641e-12`, and maximum single-transaction restoration error is `6.853e-12`.
+Unrelated depth-1537 same-backing reuse differs from fresh execution by
+`7.230e-13`; 100 same-backing depth-64 cycles restore within `1.368e-11`.
+The supported restoration class is `NUMERICAL_PHYSICAL_STATE_RESTORATION`
+for the declared seeded carrier, not exact algebraic restoration.
+
+The independent oracle reconstructs the weighted operator in long-double
+arithmetic, independently compiles and executes the float64 plan, performs 289
+case, field, resource, and mutation checks, and detects omitted weighting and
+plan or inverse corruption.  The result is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+The public plan occupies 2,312 retained bytes and compiles within a 4,960-byte
+named full-lifecycle peak.  Warm native execution reaches 3,055 named bytes,
+while the identical in-place 17-complex Givens baseline reaches 2,959 and
+performs no Fourier input-phasor or chart trigonometry.  The local phase law
+therefore removes global Cartesian accumulation but establishes no storage or
+work advantage.
+
+The next test is a gauge-transported phase-only local Givens lift on the
+weighted unit sphere, or a bounded zero-fiber obstruction against such a lift.
+M145 establishes no exact semantics, unbounded numerical stability, CATVM
+custody, distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical bit replacement, or unbounded
+catalytic computation.
