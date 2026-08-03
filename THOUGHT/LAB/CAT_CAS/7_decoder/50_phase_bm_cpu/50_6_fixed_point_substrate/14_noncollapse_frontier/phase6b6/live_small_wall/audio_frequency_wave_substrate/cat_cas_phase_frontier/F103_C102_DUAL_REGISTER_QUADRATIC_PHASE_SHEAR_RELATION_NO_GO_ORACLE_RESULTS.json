@@ -1,0 +1,168 @@
+{
+  "case_count": 12,
+  "cases": [
+    {
+      "boundary_commitment": "06561d9cfdf0d6071a66514191f955e0b627832fce7bf8a51e2060909fc2016c",
+      "depth": 1,
+      "exact_inverse_restored": true,
+      "family": "PRIMARY",
+      "forward_register_commitment": "132334a56dd3f03fbbf767fa59ca40cbf01a9099409420edb8023b00154210c7",
+      "interface": 5,
+      "payload_field_cells": 45900,
+      "program_fingerprint": "943d1f4869d07a0d0a0f68df59ce7e99dbb7212152f9f3bf1502f1e41d53525d"
+    },
+    {
+      "boundary_commitment": "5a579a558071b653de69994e6e677f288d259b0bc8e1280e2e0c25fcbba84e10",
+      "depth": 2,
+      "exact_inverse_restored": true,
+      "family": "PRIMARY",
+      "forward_register_commitment": "2e5aa079300979a308385f95fc7697dda01197977bc1995bab095caa3766f682",
+      "interface": 5,
+      "payload_field_cells": 45900,
+      "program_fingerprint": "e8e206edeb72b03e8afd678ff442fa1e169f993a6b54547c25c1dbcdc1e049c6"
+    },
+    {
+      "boundary_commitment": "d872edd371cf629f81bac07d368e1090cf8922084a02237f35a4fcfda919c6d5",
+      "depth": 4,
+      "exact_inverse_restored": true,
+      "family": "PRIMARY",
+      "forward_register_commitment": "9a338d8836888db4c3df1e2371b0fc12387f2652e212d4649203b0ec592a361e",
+      "interface": 5,
+      "payload_field_cells": 45900,
+      "program_fingerprint": "c93de75d709c4fd22bff4972e5445b7f84da287eb079ec388aa4a285b30facf3"
+    },
+    {
+      "boundary_commitment": "14253e85a3879c10880dc051b76729ce1ea218f9e657980ab4ec39a4dbeccdaa",
+      "depth": 1,
+      "exact_inverse_restored": true,
+      "family": "ALTERNATE",
+      "forward_register_commitment": "9578c8e7dd9b028791526bb6e41a7fdd05a0d479f3240100ec930258432058b8",
+      "interface": 5,
+      "payload_field_cells": 45900,
+      "program_fingerprint": "054231a094fc5769046878e73877d8a1190f349baa00edc9228dacbc1a9eccb2"
+    },
+    {
+      "boundary_commitment": "a6ca626e9e2dade0bf0505839de5a84690ca9e4c2303af57beba248b34de08e0",
+      "depth": 2,
+      "exact_inverse_restored": true,
+      "family": "ALTERNATE",
+      "forward_register_commitment": "936716c183f5ec69f4b1d993029a708b0c386b11ab561d0d48b3d17539124356",
+      "interface": 5,
+      "payload_field_cells": 45900,
+      "program_fingerprint": "a53eeb335dfb480e866f28c590f94c0b33b93c4a630506fbb0c62d7dc52088f8"
+    },
+    {
+      "boundary_commitment": "26af2d81acc295f680a6ac25899ce603c059bb673d7a7b02e9042eb847e5cc4f",
+      "depth": 4,
+      "exact_inverse_restored": true,
+      "family": "ALTERNATE",
+      "forward_register_commitment": "3bf1341e858c11f8f1ab5ff83c872a80eac18f732179272e501b6ead91b9c8b9",
+      "interface": 5,
+      "payload_field_cells": 45900,
+      "program_fingerprint": "8772d3ae1ed3eb1db06c678575b17672102c3b7a55be69968b1a2a75bd096449"
+    },
+    {
+      "boundary_commitment": "1c115dfcd259791235732d1453a62ec5d13b281ec24a6feb71d35b0d4cb44249",
+      "depth": 1,
+      "exact_inverse_restored": true,
+      "family": "PRIMARY",
+      "forward_register_commitment": "351141f8f7430fae9b576cb5ace559c2371e3e005289ea8808ac23bf74b7638f",
+      "interface": 7,
+      "payload_field_cells": 89964,
+      "program_fingerprint": "52b82ee316a99e8fc94846c93705321731c92e7aa1c5a5eaff43eeb2160dd15f"
+    },
+    {
+      "boundary_commitment": "1c8f5d6c0a99acf5df313d1c9c944f3238f63b858566621ca49b956f7d18ba5f",
+      "depth": 2,
+      "exact_inverse_restored": true,
+      "family": "PRIMARY",
+      "forward_register_commitment": "4db1a2fac9fb5c7207686aefe11179724ad1e8c47587f931b9c5f15ac29f31a7",
+      "interface": 7,
+      "payload_field_cells": 89964,
+      "program_fingerprint": "d8276245485c700db5eb3fc6f5edc27c11a3ba9f327145b65061052d7e7a2fb6"
+    },
+    {
+      "boundary_commitment": "8ae6f4c82c398693a0dafa64f5ca33ca96d65002ce9860a907c32bef4e460588",
+      "depth": 4,
+      "exact_inverse_restored": true,
+      "family": "PRIMARY",
+      "forward_register_commitment": "b5f98cf89e8f03de1759b942d6d6eb1e97c539e32402d46c653d1dad22d8b308",
+      "interface": 7,
+      "payload_field_cells": 89964,
+      "program_fingerprint": "c69ddc9dc18322a26defc722c3d81830457bd1cdda69866ae10a073aab7ccaa9"
+    },
+    {
+      "boundary_commitment": "f9cdf344c9eb0e61b72668f34f82602806efc39e279eed7727753a99c2432243",
+      "depth": 1,
+      "exact_inverse_restored": true,
+      "family": "ALTERNATE",
+      "forward_register_commitment": "00f7c81ac4853c8ecc9db8ca8f5119fdfd826532d069fc76f3ea687ea77c6c39",
+      "interface": 7,
+      "payload_field_cells": 89964,
+      "program_fingerprint": "03a3cb783859e9b9ce3fdb7a002989901f3e8feaf6a4605783808d660b357ae6"
+    },
+    {
+      "boundary_commitment": "1bbe3abd287ded6008e74f3685a97f2c9196a67dcc9ae90b419c97ee0bee8624",
+      "depth": 2,
+      "exact_inverse_restored": true,
+      "family": "ALTERNATE",
+      "forward_register_commitment": "71722e7e803083615b73dc7d6b21ec2e0b2d4a614a2a94f85a51da8caea43b6d",
+      "interface": 7,
+      "payload_field_cells": 89964,
+      "program_fingerprint": "f7bde13a5126c0ce7693021fa467d6181446173f9165a2e42f914cb6efd3aa9f"
+    },
+    {
+      "boundary_commitment": "7e4915f9da2ef5d6650ada411585b6fc5f6c92fbbe14f2c5084d2a18a294ed39",
+      "depth": 4,
+      "exact_inverse_restored": true,
+      "family": "ALTERNATE",
+      "forward_register_commitment": "568753816d6d9f3411082142ba2c3e15a883f904b279a594ee40789815a8149e",
+      "interface": 7,
+      "payload_field_cells": 89964,
+      "program_fingerprint": "c8bef31cba563a9625ea2f2ec80de06d1bfd66675720a7dee05f834418122846"
+    }
+  ],
+  "claim_ceiling": "F103_C102_DUAL_REGISTER_QUADRATIC_SHEAR_ON_DECLARED_C5_C7_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH4_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "comparison_count": 96,
+  "exact_inverse_cases": 12,
+  "imports_numpy": false,
+  "imports_production_module": false,
+  "not_established": [
+    "SUB102_LINEAR_OBSERVABLE_QUOTIENT_FOR_ARBITRARY_SOURCE_POLYNOMIALS",
+    "SHARED_LATENT_PORT_WITH_MULTIPLE_CONSUMERS",
+    "COMPACT_OR_FIXED_RANK_GROWING_INTERFACE_CLOSURE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_COMPUTATION"
+  ],
+  "package_local_only": [
+    "NUMPY_BACKING_IDENTITY_AND_OPERATION_COUNTERS",
+    "PRODUCTION_FULL_CHARACTER_IMPLEMENTATION_PATH",
+    "DIRECT_PROCESS_CUSTODY_STATE_MACHINE",
+    "PYTHON_ALLOCATOR_AND_NATIVE_LIBRARY_EXCLUSIONS"
+  ],
+  "reconstructed_boundary_character_evaluation": true,
+  "reconstructed_character_coupling_support": true,
+  "reconstructed_dual_register_coefficients": true,
+  "reconstructed_identical_204n2_coordinate_law": true,
+  "reconstructed_public_programs": true,
+  "reconstructed_quadratic_shear_and_inverse": true,
+  "reconstructed_single_character_collision": true,
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "reuses_prior_independent_m157_scalar_reference": true,
+  "schema": "CAT_CAS_F103_C102_DUAL_REGISTER_QUADRATIC_PHASE_SHEAR_RELATION_NO_GO_ORACLE_V1",
+  "semantic_controls": {
+    "disabled_port_changes_boundary": true,
+    "every_character_sector_can_influence_every_output_sector": true,
+    "missing_inverse_changes_payload": true,
+    "one_shear_quadratic_hessian_has_rank102": true,
+    "reordered_inverse_changes_payload": true,
+    "single_character_collision_changes_later_boundary": true,
+    "wrong_inverse_changes_payload": true
+  },
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
