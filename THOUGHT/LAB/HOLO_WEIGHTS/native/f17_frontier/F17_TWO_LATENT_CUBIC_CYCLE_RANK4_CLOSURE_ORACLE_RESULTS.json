@@ -1,0 +1,622 @@
+{
+  "claim_ceiling": {
+    "arbitrary_cubic_hypergraph_closure": false,
+    "arbitrary_port_arity": false,
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "declared_two_shared_latent_cubic_cycle_family": true,
+    "distinct_phase_resource": false,
+    "physical_bits_replaced_with_pi": false,
+    "physical_execution": false,
+    "small_wall_crossing": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "compiled_classical_baseline_checks": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "branch_count": 2,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "branch_count": 4,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "branch_count": 8,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "branch_count": 16,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "branch_count": 32,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "branch_count": 64,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "branch_count": 2,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "branch_count": 3,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "branch_count": 4,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "branch_count": 5,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "branch_count": 6,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "branch_count": 7,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "branch_count": 8,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "branch_count": 2,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "branch_count": 3,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "branch_count": 4,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "branch_count": 5,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "branch_count": 6,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "branch_count": 7,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "branch_count": 8,
+      "family": "PRIMARY",
+      "row_commitment_matches": true,
+      "row_record_bytes_match": true,
+      "runtime_port_payload_matches_transaction": true
+    }
+  ],
+  "direct_two_branch_tensor_rank_checks": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "direct_tensor_sum_matches_recurrence": true,
+      "family": "PRIMARY",
+      "full_tensor_shape": [
+        8,
+        8
+      ],
+      "full_two_branch_boundary_tensor_rank": 4,
+      "left_branch_map_rank": 4,
+      "right_branch_map_rank": 4,
+      "selected_anchor_one_four_by_four_minor_rank": 4
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "direct_tensor_sum_matches_recurrence": true,
+      "family": "PRIMARY",
+      "full_tensor_shape": [
+        8,
+        8
+      ],
+      "full_two_branch_boundary_tensor_rank": 4,
+      "left_branch_map_rank": 4,
+      "right_branch_map_rank": 4,
+      "selected_anchor_one_four_by_four_minor_rank": 4
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "direct_tensor_sum_matches_recurrence": true,
+      "family": "PRIMARY",
+      "full_tensor_shape": [
+        8,
+        8
+      ],
+      "full_two_branch_boundary_tensor_rank": 4,
+      "left_branch_map_rank": 4,
+      "right_branch_map_rank": 4,
+      "selected_anchor_one_four_by_four_minor_rank": 4
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "direct_tensor_sum_matches_recurrence": true,
+      "family": "REUSE",
+      "full_tensor_shape": [
+        8,
+        8
+      ],
+      "full_two_branch_boundary_tensor_rank": 4,
+      "left_branch_map_rank": 4,
+      "right_branch_map_rank": 4,
+      "selected_anchor_one_four_by_four_minor_rank": 4
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "direct_tensor_sum_matches_recurrence": true,
+      "family": "REUSE",
+      "full_tensor_shape": [
+        8,
+        8
+      ],
+      "full_two_branch_boundary_tensor_rank": 4,
+      "left_branch_map_rank": 4,
+      "right_branch_map_rank": 4,
+      "selected_anchor_one_four_by_four_minor_rank": 4
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "direct_tensor_sum_matches_recurrence": true,
+      "family": "REUSE",
+      "full_tensor_shape": [
+        8,
+        8
+      ],
+      "full_two_branch_boundary_tensor_rank": 4,
+      "left_branch_map_rank": 4,
+      "right_branch_map_rank": 4,
+      "selected_anchor_one_four_by_four_minor_rank": 4
+    }
+  ],
+  "independent_mutation_checks": [
+    {
+      "forced_rank3_rejected": true,
+      "identity_theta_drops_branch_map_below_rank4": true,
+      "lawful_complete_port_inverse_restores_seed": true,
+      "missing_inverse_leaves_nonseed_port": true,
+      "overmerge_h_equals_k_changes_boundary": true,
+      "phase_perturbation_changes_boundary": true,
+      "primary_and_reuse_descriptors_differ": true,
+      "proper_branch_map_has_rank4": true,
+      "snapshot_command_available": false,
+      "transport_before_consumer_changes_boundary": true,
+      "transport_disabled_changes_boundary": true,
+      "under_share_changes_boundary": true,
+      "wrong_inverse_order_fails": true,
+      "wrong_walsh_inverse_fails": true
+    },
+    {
+      "forced_rank3_rejected": true,
+      "identity_theta_drops_branch_map_below_rank4": true,
+      "lawful_complete_port_inverse_restores_seed": true,
+      "missing_inverse_leaves_nonseed_port": true,
+      "overmerge_h_equals_k_changes_boundary": true,
+      "phase_perturbation_changes_boundary": true,
+      "primary_and_reuse_descriptors_differ": true,
+      "proper_branch_map_has_rank4": true,
+      "snapshot_command_available": false,
+      "transport_before_consumer_changes_boundary": true,
+      "transport_disabled_changes_boundary": true,
+      "under_share_changes_boundary": true,
+      "wrong_inverse_order_fails": true,
+      "wrong_walsh_inverse_fails": true
+    },
+    {
+      "forced_rank3_rejected": true,
+      "identity_theta_drops_branch_map_below_rank4": true,
+      "lawful_complete_port_inverse_restores_seed": true,
+      "missing_inverse_leaves_nonseed_port": true,
+      "overmerge_h_equals_k_changes_boundary": true,
+      "phase_perturbation_changes_boundary": true,
+      "primary_and_reuse_descriptors_differ": true,
+      "proper_branch_map_has_rank4": true,
+      "snapshot_command_available": false,
+      "transport_before_consumer_changes_boundary": true,
+      "transport_disabled_changes_boundary": true,
+      "under_share_changes_boundary": true,
+      "wrong_inverse_order_fails": true,
+      "wrong_walsh_inverse_fails": true
+    }
+  ],
+  "observed_resource_law": {
+    "exact_branch_counts": [
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "exact_final_boundary_payload_bits": [
+      70,
+      184,
+      421,
+      872,
+      1760,
+      3509
+    ],
+    "exact_resident_factor_payload_bits": [
+      264,
+      528,
+      1056,
+      2112,
+      4224,
+      8448
+    ],
+    "exact_resident_port_payload_bits": [
+      205,
+      687,
+      1607,
+      3365,
+      6900,
+      13915
+    ],
+    "fixed_logical_rank_implies_fixed_exact_bit_width": false,
+    "full_exact_bit_complexity_established": false,
+    "matched_runtime_dynamic_port_field_cells": 4,
+    "phase_factor_field_cells": [
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "shared_port_field_cells": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ]
+  },
+  "oracle_independence": {
+    "branch_response_direct_local_enumeration": true,
+    "carrier_and_port_inverse_reimplemented": true,
+    "commitment_and_byte_accounting_reimplemented": true,
+    "descriptor_compiler_reimplemented": true,
+    "exact_gaussian_rank_reimplemented": true,
+    "four_state_recurrence_reimplemented": true,
+    "full_two_branch_boundary_tensor_directly_built": true,
+    "imports_production_module": false,
+    "shared_exact_arithmetic_backend_only": true
+  },
+  "production_claim": "BOUNDED_EXACT_TWO_SHARED_LATENT_NONAFFINE_CUBIC_PHASE_CYCLE_WITH_INTERLEAVED_WALSH_TRANSPORT_NONCOMMUTING_WITH_BRANCH_DIAGONALS_HAS_CERTIFIED_RANK4_JUNCTION_CLOSURE_ON_A_FOUR_CELL_RESIDENT_PORT_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_FOUR_SCALAR_CLASSICAL_RECURRENCE",
+  "production_sha256": "0d9a5903cc04f20ab4e4162bfe1df148464d2cdbd20ffec1ba5f295a9cf8e27f",
+  "restoration": {
+    "compiler_commitment_and_verification_buffers": "NO_RESTORATION_CLAIM",
+    "factor_and_shared_port_carrier": "EXACT_ALGEBRAIC_RESTORATION",
+    "snapshot_reload_used": false
+  },
+  "schema": "CAT_CAS_F17_TWO_LATENT_CUBIC_CYCLE_RANK4_CLOSURE_ORACLE_V1",
+  "transaction_parity": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_core_fields_match": true,
+      "branch_count": 2,
+      "compiled_final_row_commitment": "a61311405e817830d53116d6a71658f57f39035b96d344a2a98b13785702febf",
+      "compiled_final_row_commitment_json_bytes": 111,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 205,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_core_fields_match": true,
+      "branch_count": 4,
+      "compiled_final_row_commitment": "d4ef57cdbebce7ca2a3a8d51f7494651097963c29e270d0f84f63ab7b25a05e3",
+      "compiled_final_row_commitment_json_bytes": 143,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 687,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_core_fields_match": true,
+      "branch_count": 8,
+      "compiled_final_row_commitment": "ce86fd7a33c22c5ce5147a67c676bb71a5c217dc9b9f559ac87444b4b0a9057c",
+      "compiled_final_row_commitment_json_bytes": 216,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 1607,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_core_fields_match": true,
+      "branch_count": 16,
+      "compiled_final_row_commitment": "aeacf0acbf567f701dade72bdf0447f1985d2f785dc2681aaddbf17288d1711b",
+      "compiled_final_row_commitment_json_bytes": 345,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 3365,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_core_fields_match": true,
+      "branch_count": 32,
+      "compiled_final_row_commitment": "c21d666759dc7fc83e437bffc15eee3a431b231b99c4fd392e27cf8c27aa8733",
+      "compiled_final_row_commitment_json_bytes": 615,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 6900,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_core_fields_match": true,
+      "branch_count": 64,
+      "compiled_final_row_commitment": "a39e55aec4bebdf0d6de07d8093340ab0a1b6df4f0e58686bfb4bf63009f1b44",
+      "compiled_final_row_commitment_json_bytes": 1144,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 13915,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_core_fields_match": true,
+      "branch_count": 2,
+      "compiled_final_row_commitment": "bdc0202c970a69768693652c710bd422f4234b07218b44bd64e5337fa9e06b1c",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_core_fields_match": true,
+      "branch_count": 3,
+      "compiled_final_row_commitment": "305068c278b49cd50da60afa51657c4d954022a8df03b200459aef1604729f2c",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_core_fields_match": true,
+      "branch_count": 4,
+      "compiled_final_row_commitment": "ae7fe55804a867b2d0d2861d49e0489520b3aa115406ee1c3f39feba38f580d9",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_core_fields_match": true,
+      "branch_count": 5,
+      "compiled_final_row_commitment": "d204cfff39ec4f06fa691d86965b2802b501c36f4bfad8d73ec1f8207bdd2c4b",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_core_fields_match": true,
+      "branch_count": 6,
+      "compiled_final_row_commitment": "2922828433ee94724696a0d85bb944f97551719f9e2ca25dc8d943f47ca4ea63",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_core_fields_match": true,
+      "branch_count": 7,
+      "compiled_final_row_commitment": "155df08abdee077e28655f7bc02cc0e30809cf4764fcfc9f069f5c5b59104cbf",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_core_fields_match": true,
+      "branch_count": 8,
+      "compiled_final_row_commitment": "9f298df25e5693e460a4f6e814bdb1176b24fb0fd562e9fb681bde2dc956d5e7",
+      "compiled_final_row_commitment_json_bytes": 2,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "all_core_fields_match": true,
+      "branch_count": 2,
+      "compiled_final_row_commitment": "98168b63f55aae1e817d319087e8e43f0b304bfe24837f057b9328c72e20a3d4",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "all_core_fields_match": true,
+      "branch_count": 3,
+      "compiled_final_row_commitment": "e444cedb22ce6f70ab2e92bd718dca379123439412c406133948dd017da44ab5",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "all_core_fields_match": true,
+      "branch_count": 4,
+      "compiled_final_row_commitment": "04209bc6b0385c5d8e00ce90f9f402be63a7983b59f1f2e4f89854e51acb634e",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "all_core_fields_match": true,
+      "branch_count": 5,
+      "compiled_final_row_commitment": "e452e2403bf0b56797afa0459d5317bf0f03e71df9e65174705dae89d1543bca",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "all_core_fields_match": true,
+      "branch_count": 6,
+      "compiled_final_row_commitment": "5f131181c353d5b090dc30e582da27886d7f3142f359c56e9e1215f5f9f9ba49",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "all_core_fields_match": true,
+      "branch_count": 7,
+      "compiled_final_row_commitment": "a360da402899aa3641a806fb4cfef989373b705a825cf91951f75517a08bd232",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    },
+    {
+      "algebra": "4db7e213986034c101971fb57d0702d1d0dbe8704f9d55b211f76dd94845b6c4",
+      "all_core_fields_match": true,
+      "branch_count": 8,
+      "compiled_final_row_commitment": "445d264ed544f804eff7b7b583e05572bff14eec20907ac6e0892af5c8c941a6",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "factor_pairs_restore_exact_seed": true,
+      "family": "PRIMARY",
+      "maximum_resident_port_payload_bits": 32,
+      "mismatches": {},
+      "port_restores_exact_seed": true
+    }
+  ],
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

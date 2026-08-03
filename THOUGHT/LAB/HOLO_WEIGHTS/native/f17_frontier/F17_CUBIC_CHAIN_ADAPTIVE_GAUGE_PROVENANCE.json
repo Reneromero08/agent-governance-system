@@ -1,0 +1,28 @@
+{
+  "result": "SEALED",
+  "scope": "F17_CUBIC_CHAIN_ADAPTIVE_OMITTED_ROOT_AND_17_CONTENT_QUOTIENT",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "files": {
+    "f17_cubic_chain_adaptive_gauge.py": "083ddddab5907bb9148e00057cf4e8f33b0ba2f76db71f32fc7a3b085418d828",
+    "f17_cubic_chain_adaptive_gauge_oracle.py": "f7c738e5b17fa9259f521ae12e49d068b026aa139e7c8d5df50f513c9927ed2c",
+    "qualify_f17_cubic_chain_adaptive_gauge.sh": "145d64cb8b5e2b7338b0ce4f839297208df7b97fe1cb264bc9bb738a674fe0dd",
+    "F17_CUBIC_CHAIN_ADAPTIVE_GAUGE_RESULTS.json": "3119203bbbc4f66695c7d084c761bba65796b52ca8d24731258a2662a0dde710",
+    "F17_CUBIC_CHAIN_ADAPTIVE_GAUGE_ORACLE_RESULTS.json": "a904d0780bfeeddbfbe1d9ab529b3d2faad11c3dcd12095dd7c5c909f0ff1950"
+  },
+  "sealed_claim_ceiling": "exact F17 public path graphs with unary cubic and nearest-neighbor mixed cubic factors; nodes 2, 3, 5, 9, 17, 33, and 65; two public program families; per-row adaptive omitted-root Z[zeta17] gauge; maximal exact common integer power-of-17 quotient per resident message; topology-derived recursive reversible pebbling; software only",
+  "independent_scope": "separate fixed-basis exact recurrence, maximal power-of-17 factorization, adaptive-gauge reconstruction, retain-all exact inverse for every case, and direct assignment enumeration at nodes 2 and 3",
+  "excluded_interpretations": [
+    "fixed coefficient width",
+    "constant reversible storage",
+    "arbitrary graph topology",
+    "general non-Gaussian composition",
+    "machine-enforced CATVM custody",
+    "distinct phase resource",
+    "computational advantage",
+    "Small Wall crossing",
+    "physical waveform execution",
+    "unbounded computation"
+  ]
+}

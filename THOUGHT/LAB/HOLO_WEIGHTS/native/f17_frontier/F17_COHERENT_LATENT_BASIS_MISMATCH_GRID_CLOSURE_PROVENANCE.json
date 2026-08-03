@@ -1,0 +1,71 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "16ad7bec40126f9b60531225135f78c2bc3ac111",
+  "scientific_source_parent": "927915570a42e44eb801a73b7047d1a86216177e",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "f23832e4488ca14d0135f2f91a7d6757e183b582e7b32f647ad01ce63265a211",
+  "reference_full_oracle_sha256": "33e3cfba1cb4b7361103c129aad120dac97c6b45ff61faff21af05abc1ca1e7c",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_coherent_latent_basis_mismatch_grid_closure.py",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_coherent_latent_basis_mismatch_grid_closure_oracle.py --production PRODUCTION_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_coherent_latent_basis_mismatch_grid_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_coherent_latent_basis_mismatch_grid_closure.py": "845a7b621b0eb6fa6d4e750c338d6366a4cc772b197e587e318b817bfa770c51",
+    "f17_coherent_latent_basis_mismatch_grid_closure_oracle.py": "b520ad03f970378a17aea18635a7805b9a05a00746c924616b03427fd36dc1e2",
+    "F17_COHERENT_LATENT_BASIS_MISMATCH_GRID_CLOSURE_RESULTS.json": "f23832e4488ca14d0135f2f91a7d6757e183b582e7b32f647ad01ce63265a211",
+    "F17_COHERENT_LATENT_BASIS_MISMATCH_GRID_CLOSURE_ORACLE_RESULTS.json": "33e3cfba1cb4b7361103c129aad120dac97c6b45ff61faff21af05abc1ca1e7c",
+    "F17_COHERENT_LATENT_BASIS_MISMATCH_GRID_CLOSURE_INDEPENDENT_REVIEW.md": "fec0d0e4523bc4e1317784dc7c74e20acb69eee0354217ca7f4c3a807b633d3a",
+    "qualify_f17_coherent_latent_basis_mismatch_grid_closure.sh": "7253a8223a7b8f69a1ec2d40653e1a3d2920706d41382c73afd697ae58b00def"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_determinant_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "exact_q_zeta17_even_open_grid_widths": [2, 4, 6],
+    "dual_field_structural_widths": [2, 4, 6, 8, 10],
+    "families": ["PRIMARY", "REUSE"],
+    "latent_dimension": 17,
+    "grid_wide_consumers": 2,
+    "independent_methods": [
+      "ROW_PROFILE_WEIGHTED_MATCHING_RECURRENCE",
+      "INDEPENDENT_34_COORDINATE_LATENT_RECURRENCE",
+      "BOUNDED_N2_NATIVE_HOLANT_ENUMERATION",
+      "PAIRED_BASIS_IDENTITY_RECONSTRUCTION"
+    ]
+  },
+  "resource_accounting": {
+    "resident_phase_field_cells": "4N_TIMES_N_MINUS_1_PLUS_34",
+    "kasteleyn_matrix_dimension": "N_SQUARED_OVER_2",
+    "maximum_named_transaction_transient_field_cells": "MAX_N_TO_THE_4_OVER_2_PLUS_5_COMMA_34",
+    "final_boundary_payload_and_json_bytes_reported": true,
+    "full_exact_bit_complexity_established": false,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_baselines": [
+    "IDENTICAL_34_COORDINATE_EXACT_LATENT_RECURRENCE_PLUS_17_SECTOR_KASTELEYN_CLOSURES_PER_MODULE",
+    "INDEPENDENT_ROW_PROFILE_WEIGHTED_MATCHING_RECURRENCE",
+    "BOUNDED_N2_NATIVE_HOLANT_ENUMERATION"
+  ],
+  "claim_ceiling": "EVEN_OPEN_SQUARE_GRIDS_ONLY_EXACT_Q_ZETA17_N2_N4_N6_DUAL_FIELD_STRUCTURE_N2_TO_N10_FIXED17_SHARED_LATENT_PORT_TWO_GRID_WIDE_CONSUMERS_FINAL_ONLY_PROJECTION_DIRECT_PROCESS_SOFTWARE_ONLY",
+  "rejected_interpretations": [
+    "ARBITRARY_LATENT_GEOMETRY_OR_PLANAR_HOLANT_CLOSURE",
+    "GENERAL_HOLOGRAPHIC_RELATIONAL_COMPUTATION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

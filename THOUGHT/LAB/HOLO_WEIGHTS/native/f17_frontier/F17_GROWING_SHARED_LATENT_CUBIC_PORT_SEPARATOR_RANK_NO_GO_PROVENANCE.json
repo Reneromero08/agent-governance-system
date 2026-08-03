@@ -1,0 +1,110 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "e3af2700c46fec0e6dea330d9dc133b8144754eb",
+  "scientific_source_parent": "f2f6c177b54b41c096bff5f84e697326c13af6e1",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "535c4bd3500d14433986dcc8a5809d62d3093298e1e596599711f50f9f291ec2",
+  "reference_full_oracle_sha256": "f414360336cd100e2a13c7277a95231df8e5c86ce193daf0450312bb09d15a10",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_growing_shared_latent_cubic_port_separator_rank_no_go.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_growing_shared_latent_cubic_port_separator_rank_no_go_oracle.py --production PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_growing_shared_latent_cubic_port_separator_rank_no_go.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_growing_shared_latent_cubic_port_separator_rank_no_go.py": "30280fff6d6637c19ce20bfd63b8399dd238f3400264ca5cb86968bd579539d2",
+    "f17_growing_shared_latent_cubic_port_separator_rank_no_go_oracle.py": "4b6f088f36c5a8d58ec1b1ab0f72d8fb4b4ef4b92afa22cb85403a61dba93ca0",
+    "F17_GROWING_SHARED_LATENT_CUBIC_PORT_SEPARATOR_RANK_NO_GO_RESULTS.json": "535c4bd3500d14433986dcc8a5809d62d3093298e1e596599711f50f9f291ec2",
+    "F17_GROWING_SHARED_LATENT_CUBIC_PORT_SEPARATOR_RANK_NO_GO_ORACLE_RESULTS.json": "f414360336cd100e2a13c7277a95231df8e5c86ce193daf0450312bb09d15a10",
+    "F17_GROWING_SHARED_LATENT_CUBIC_PORT_SEPARATOR_RANK_NO_GO_INDEPENDENT_REVIEW.md": "119aa5e579441b7edad315815da4352a6689d32bb399da14fdb8ac40d8719c72",
+    "qualify_f17_growing_shared_latent_cubic_port_separator_rank_no_go.sh": "0e211b50cad019af6c99ce0c63fc38adc5d60d5d39f8a85686a78e48135435b7"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "chart": "K_TYPED_SHARED_LATENT_CUBIC_BRANCHES_WITH_INVERTIBLE_WALSH_SEPARATOR",
+    "exact_arities": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "structural_fields": [
+      "F103",
+      "F137"
+    ],
+    "structural_arities": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "direct_dense_oracle_arities": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "families": [
+      "PRIMARY",
+      "REUSE"
+    ],
+    "independent_methods": [
+      "SEPARATE_PUBLIC_DESCRIPTOR_COMPILER",
+      "SEPARATE_LOCAL_PAIR_COUPLING_AND_INVERSE",
+      "DIRECT_LEFT_RIGHT_WALSH_AND_TWO_SIDED_MATRICES",
+      "INDEPENDENT_EXACT_GAUSSIAN_RANK",
+      "SEPARATE_O_K_KRONECKER_CLASSICAL_CONTRACTION",
+      "SEPARATE_COMMITMENT_PAYLOAD_AND_RESOURCE_PARITY",
+      "IDENTITY_SINGULAR_PHASE_WRONG_INVERSE_AND_RANK_CAP_MUTATIONS"
+    ]
+  },
+  "resource_accounting": {
+    "resident_phase_factor_field_cells_at_arity_k": "FOUR_TIMES_K",
+    "resident_nontrivial_theta_field_cells_at_arity_k": "TWO_TIMES_K",
+    "uniform_exact_linear_arbitrary_message_port_minimum_field_coordinates": "TWO_TO_THE_K",
+    "analytic_certificate_work_scalars": "SIX_K_PLUS_TWELVE",
+    "accepted_path_port_assignment_or_dense_minor_cells": 0,
+    "inverse_history_cells": 0,
+    "rank_alone_general_storage_or_advantage_lower_bound": false,
+    "full_exact_bit_complexity_established": false,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "HASHLIB_INTERNAL_STATE",
+      "BIT_OPERATION_COMPLEXITY",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_baselines": [
+    "TWO_K_EXACT_PUBLIC_PHASE_FACTORS_FOR_FULL_SIGNATURE",
+    "IDENTICAL_O_K_KRONECKER_DETERMINANT_CERTIFICATE",
+    "O_K_TWO_BY_TWO_FACTORS_FOR_STRICTLY_LOCAL_SEALED_CONTRACTION",
+    "POLY_DESCRIPTOR_SIZE_TIMES_TWO_TO_THE_TREEWIDTH_FOR_GENERAL_FACTOR_CONTRACTION"
+  ],
+  "claim_ceiling": "DECLARED_K_TYPED_SHARED_BOOLEAN_LATENT_CUBIC_BRANCH_MAPS_NONIDENTITY_Q_ZETA17_PHASES_INVERTIBLE_TYPED_WALSH_SEPARATOR_UNIFORM_EXACT_FIELD_LINEAR_QUOTIENT_ARBITRARY_INCOMING_MESSAGES_FULL_DECLARED_TYPED_CONTINUATIONS_DIRECT_PROCESS_SOFTWARE",
+  "rejected_interpretations": [
+    "GENERAL_STORAGE_OR_ADVANTAGE_LOWER_BOUND_FROM_RANK_ALONE",
+    "NONLINEAR_OR_PROGRAM_DEPENDENT_QUOTIENT_NO_GO",
+    "OPERATIONAL_TWO_TO_THE_K_PHASE_PORT_CLOSURE",
+    "ARBITRARY_CUBIC_HYPERGRAPH_CLOSURE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

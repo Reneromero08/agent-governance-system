@@ -1,0 +1,2545 @@
+{
+  "catalecticant_rank_certificates": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 4,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": true,
+      "row_common_mode": 2,
+      "row_common_power": 0,
+      "row_degree": 2,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 8,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": true,
+      "row_common_mode": 2,
+      "row_common_power": 4,
+      "row_degree": 6,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 16,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": true,
+      "row_common_mode": 2,
+      "row_common_power": 12,
+      "row_degree": 14,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 32,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": true,
+      "row_common_mode": 2,
+      "row_common_power": 28,
+      "row_degree": 30,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 4,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 0,
+      "row_degree": 2,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 8,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 4,
+      "row_degree": 6,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 16,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 12,
+      "row_degree": 14,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 32,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 28,
+      "row_degree": 30,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 64,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 60,
+      "row_degree": 62,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 128,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 124,
+      "row_degree": 126,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 4,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 0,
+      "row_degree": 2,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 8,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 4,
+      "row_degree": 6,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 16,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 12,
+      "row_degree": 14,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 32,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 28,
+      "row_degree": 30,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 64,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 60,
+      "row_degree": 62,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "certificate": "NORMALIZED_CATALECTICANT_FOUR_BY_FOUR_MINOR",
+      "column_degree": 2,
+      "column_mode_pairs": [
+        [
+          16,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          16
+        ]
+      ],
+      "exact_normalized_divided_power_secant_rank": 4,
+      "family": "PRIMARY",
+      "generated_component_upper_bound": 4,
+      "intermediate_amplitudes_serialized": false,
+      "k": 128,
+      "lower_bound": 4,
+      "minor_nonzero": true,
+      "minor_value_serialized": false,
+      "ordinary_symmetric_waring_rank_interpretation": false,
+      "row_common_mode": 2,
+      "row_common_power": 124,
+      "row_degree": 126,
+      "verification_carrier_restored_to_empty": true,
+      "verification_only_not_accepted_transaction_path": true
+    }
+  ],
+  "claim": "BOUNDED_EXACT_SECOND_INTERLEAVED_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_WITH_MODULE_ORDER_NONCOMMUTATION_FORCES_CATALECTICANT_RANK4_ON_THE_DECLARED_F17_SECANT_PROGRAM_AND_CLOSES_ON_A_FOUR_COMPONENT_72_CELL_PHASE_CARRIER_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EIGHT_TOTAL_FOLDED_SCALAR_WARM_CLASSICAL_RECURRENCE",
+  "claim_ceiling": {
+    "catvm_custody_established": false,
+    "computational_advantage_established": false,
+    "declared_k_values_only": [
+      4,
+      8,
+      16,
+      32,
+      64,
+      128
+    ],
+    "distinct_phase_resource_established": false,
+    "fixed_rank_unbounded_depth_closure_established": false,
+    "fixed_two_consumer_public_word_only": true,
+    "gaussian_chart_closure_established": false,
+    "physical_bits_replaced_with_pi": false,
+    "physical_waveform_execution_established": false,
+    "small_wall_crossing_established": false,
+    "third_or_unbounded_coupling_rank_law_established": false,
+    "two_declared_involutive_couplings_only": true,
+    "unbounded_catalytic_computation_established": false
+  },
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "compiled_eight_total_scalar_classical_baselines": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 4,
+      "maximum_commitment_record_json_bytes": 110,
+      "retained_folded_endpoint_commitment": "9b40a991f5f2852a5f257a47cb0fb95cc3c5573b2dc642e64836b844d27b463c",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 8,
+      "maximum_commitment_record_json_bytes": 110,
+      "retained_folded_endpoint_commitment": "9b40a991f5f2852a5f257a47cb0fb95cc3c5573b2dc642e64836b844d27b463c",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 16,
+      "maximum_commitment_record_json_bytes": 110,
+      "retained_folded_endpoint_commitment": "9b40a991f5f2852a5f257a47cb0fb95cc3c5573b2dc642e64836b844d27b463c",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 32,
+      "maximum_commitment_record_json_bytes": 110,
+      "retained_folded_endpoint_commitment": "9b40a991f5f2852a5f257a47cb0fb95cc3c5573b2dc642e64836b844d27b463c",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "9def72527659f0abdada37fc1afca4e82c0134755fb58e77067ef7086b40ecdf",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 8,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "9def72527659f0abdada37fc1afca4e82c0134755fb58e77067ef7086b40ecdf",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 16,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "9def72527659f0abdada37fc1afca4e82c0134755fb58e77067ef7086b40ecdf",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 32,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "9def72527659f0abdada37fc1afca4e82c0134755fb58e77067ef7086b40ecdf",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 64,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "9def72527659f0abdada37fc1afca4e82c0134755fb58e77067ef7086b40ecdf",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 128,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "9def72527659f0abdada37fc1afca4e82c0134755fb58e77067ef7086b40ecdf",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "f12118065c27a926bb88a96393caaa08d00c2d2c2b2ce950a738079c82b12a84",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 8,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "f12118065c27a926bb88a96393caaa08d00c2d2c2b2ce950a738079c82b12a84",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 16,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "f12118065c27a926bb88a96393caaa08d00c2d2c2b2ce950a738079c82b12a84",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 32,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "f12118065c27a926bb88a96393caaa08d00c2d2c2b2ce950a738079c82b12a84",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 64,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "f12118065c27a926bb88a96393caaa08d00c2d2c2b2ce950a738079c82b12a84",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiler_working_field_cells": 72,
+      "family": "PRIMARY",
+      "k": 128,
+      "maximum_commitment_record_json_bytes": 3,
+      "retained_folded_endpoint_commitment": "f12118065c27a926bb88a96393caaa08d00c2d2c2b2ce950a738079c82b12a84",
+      "retained_folded_endpoint_field_cells": 8,
+      "snapshot_or_phase_carrier_used_by_warm_evaluator": false,
+      "total_compiled_warm_field_cells": 8,
+      "warm_named_transient_field_cells": 4
+    }
+  ],
+  "controls": {
+    "catalecticant_rank_four_minor_nonzero": true,
+    "generated_term_count_not_used_without_lower_bound": true,
+    "missing_exact_merge_rejected": true,
+    "missing_inverse_detected": true,
+    "null_carrier_rejected": true,
+    "premature_projection_rejected": true,
+    "rank_two_capacity_insufficient_after_second_coupling": true,
+    "reordered_inverse_detected": true,
+    "second_coupling_module_order_detected": true,
+    "second_coupling_omission_changes_boundary": true,
+    "snapshot_command_available": false,
+    "wrong_program_ownership_rejected": true,
+    "wrong_second_coupling_inverse_detected": true
+  },
+  "dual_field_structural_transactions": [
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 49,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_operation_counts": {
+        "additions": 214,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1057,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 2,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "0ccf1f43fc9e9724d02ee59df12a369af93ff4584ec0d99b6f96268c17b9c907",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 4845,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 4,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 7,
+      "maximum_resident_payload_bits": 504,
+      "maximum_resident_value_payload_bits": 7,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 7,
+      "maximum_transient_value_payload_bits": 7,
+      "program_fingerprint": "95840f9c1d8819c002c521d8a00c9d1f9addb7709e3147ef97c5cadc9a701233",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3062,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 79,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_operation_counts": {
+        "additions": 218,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1065,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 2,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "0ccf1f43fc9e9724d02ee59df12a369af93ff4584ec0d99b6f96268c17b9c907",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 735471,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 8,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 7,
+      "maximum_resident_payload_bits": 504,
+      "maximum_resident_value_payload_bits": 7,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 7,
+      "maximum_transient_value_payload_bits": 7,
+      "program_fingerprint": "b6929c86eba82d36b888930e5b4a505b7a8de3578678be545095285fce67d817",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3062,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 19,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_operation_counts": {
+        "additions": 222,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1073,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 2,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "0ccf1f43fc9e9724d02ee59df12a369af93ff4584ec0d99b6f96268c17b9c907",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 601080390,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 16,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 7,
+      "maximum_resident_payload_bits": 504,
+      "maximum_resident_value_payload_bits": 7,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 7,
+      "maximum_transient_value_payload_bits": 7,
+      "program_fingerprint": "2ac443a8a10b70623eaaabe2a0af538c477b03176c93bbed2fe627bf44e7555b",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3063,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 76,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_operation_counts": {
+        "additions": 226,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1081,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 2,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "0ccf1f43fc9e9724d02ee59df12a369af93ff4584ec0d99b6f96268c17b9c907",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 2254848913647,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 32,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 7,
+      "maximum_resident_payload_bits": 504,
+      "maximum_resident_value_payload_bits": 7,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 7,
+      "maximum_transient_value_payload_bits": 7,
+      "program_fingerprint": "0e1ea8fb5582be9fa94a9ac30b988b13fb08406a45d778703f3fc7b7a4a18a72",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3063,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 56,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_operation_counts": {
+        "additions": 230,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1089,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 2,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "0ccf1f43fc9e9724d02ee59df12a369af93ff4584ec0d99b6f96268c17b9c907",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 26958221130508525,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 64,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 7,
+      "maximum_resident_payload_bits": 504,
+      "maximum_resident_value_payload_bits": 7,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 7,
+      "maximum_transient_value_payload_bits": 7,
+      "program_fingerprint": "d028fec76b8c9a0eac8e4b71b153e71a54712c27d45e5926c4ca06fbe262211f",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3063,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 99,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_operation_counts": {
+        "additions": 234,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1097,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 2,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "0ccf1f43fc9e9724d02ee59df12a369af93ff4584ec0d99b6f96268c17b9c907",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 687917389635036844569,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 128,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 7,
+      "maximum_resident_payload_bits": 504,
+      "maximum_resident_value_payload_bits": 7,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 7,
+      "maximum_transient_value_payload_bits": 7,
+      "program_fingerprint": "4c97b901dbf9dc524da74d83508c49d2b5e2569706d0a5e29f37b3bc4c999bd9",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3064,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 86,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_operation_counts": {
+        "additions": 214,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1057,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 2,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "6938b1868aaad521daa540445b88a215f5f12ae0c40c16ac2e4f6df0572506e8",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 4845,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 4,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 8,
+      "maximum_resident_payload_bits": 576,
+      "maximum_resident_value_payload_bits": 8,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 8,
+      "maximum_transient_value_payload_bits": 8,
+      "program_fingerprint": "95840f9c1d8819c002c521d8a00c9d1f9addb7709e3147ef97c5cadc9a701233",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3062,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 48,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_operation_counts": {
+        "additions": 218,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1065,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 2,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "6938b1868aaad521daa540445b88a215f5f12ae0c40c16ac2e4f6df0572506e8",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 735471,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 8,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 8,
+      "maximum_resident_payload_bits": 576,
+      "maximum_resident_value_payload_bits": 8,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 8,
+      "maximum_transient_value_payload_bits": 8,
+      "program_fingerprint": "b6929c86eba82d36b888930e5b4a505b7a8de3578678be545095285fce67d817",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3062,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 121,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_operation_counts": {
+        "additions": 222,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1073,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 3,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "6938b1868aaad521daa540445b88a215f5f12ae0c40c16ac2e4f6df0572506e8",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 601080390,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 16,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 8,
+      "maximum_resident_payload_bits": 576,
+      "maximum_resident_value_payload_bits": 8,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 8,
+      "maximum_transient_value_payload_bits": 8,
+      "program_fingerprint": "2ac443a8a10b70623eaaabe2a0af538c477b03176c93bbed2fe627bf44e7555b",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3063,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 21,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_operation_counts": {
+        "additions": 226,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1081,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 2,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "6938b1868aaad521daa540445b88a215f5f12ae0c40c16ac2e4f6df0572506e8",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 2254848913647,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 32,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 8,
+      "maximum_resident_payload_bits": 576,
+      "maximum_resident_value_payload_bits": 8,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 8,
+      "maximum_transient_value_payload_bits": 8,
+      "program_fingerprint": "0e1ea8fb5582be9fa94a9ac30b988b13fb08406a45d778703f3fc7b7a4a18a72",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3063,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 56,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_operation_counts": {
+        "additions": 230,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1089,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 2,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "6938b1868aaad521daa540445b88a215f5f12ae0c40c16ac2e4f6df0572506e8",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 26958221130508525,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 64,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 8,
+      "maximum_resident_payload_bits": 576,
+      "maximum_resident_value_payload_bits": 8,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 8,
+      "maximum_transient_value_payload_bits": 8,
+      "program_fingerprint": "d028fec76b8c9a0eac8e4b71b153e71a54712c27d45e5926c4ca06fbe262211f",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3063,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 6,
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_operation_counts": {
+        "additions": 234,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1097,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 1,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "6938b1868aaad521daa540445b88a215f5f12ae0c40c16ac2e4f6df0572506e8",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 687917389635036844569,
+      "initial_digest": "0eed22e671e3ff160a99c66de356a5769cff73e405f3a031a56a97a803a237ad",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 128,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 3,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 8,
+      "maximum_resident_payload_bits": 576,
+      "maximum_resident_value_payload_bits": 8,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 8,
+      "maximum_transient_value_payload_bits": 8,
+      "program_fingerprint": "4c97b901dbf9dc524da74d83508c49d2b5e2569706d0a5e29f37b3bc4c999bd9",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3064,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "8d61b87fe1f12c39223d48f06f4e21750f0dc432dc765f158d9aa118117b5a9c",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    }
+  ],
+  "exact_transactions": [
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          1300,
+          1
+        ],
+        [
+          2980,
+          1
+        ],
+        [
+          1344,
+          1
+        ],
+        [
+          1368,
+          1
+        ],
+        [
+          1604,
+          1
+        ],
+        [
+          932,
+          1
+        ],
+        [
+          1464,
+          1
+        ],
+        [
+          3252,
+          1
+        ],
+        [
+          828,
+          1
+        ],
+        [
+          2000,
+          1
+        ],
+        [
+          620,
+          1
+        ],
+        [
+          1324,
+          1
+        ],
+        [
+          1956,
+          1
+        ],
+        [
+          2624,
+          1
+        ],
+        [
+          360,
+          1
+        ],
+        [
+          2372,
+          1
+        ]
+      ],
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field_operation_counts": {
+        "additions": 214,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1057,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 141,
+      "final_boundary_payload_bits": 207,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "d37f86d5e80128bf2c277235fb3ea51a2dcaebc9a515c94ed8c12d02fc129c58",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 4845,
+      "initial_digest": "821ecf506e3d3f752a6e9fe208309a1573436c0e4ed07d324638acad784ef964",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 4,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 112,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 3,
+      "maximum_resident_payload_bits": 3142,
+      "maximum_resident_value_payload_bits": 61,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 13,
+      "maximum_transient_value_payload_bits": 197,
+      "program_fingerprint": "95840f9c1d8819c002c521d8a00c9d1f9addb7709e3147ef97c5cadc9a701233",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3062,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "d902f00bc10279ffb828a0ed67a3ed7db4b264fe17af0ddf6dd57b5dff7f5db2",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          14963008,
+          1
+        ],
+        [
+          15172416,
+          1
+        ],
+        [
+          2621312,
+          1
+        ],
+        [
+          17871288,
+          1
+        ],
+        [
+          11474448,
+          1
+        ],
+        [
+          1432912,
+          1
+        ],
+        [
+          19866256,
+          1
+        ],
+        [
+          8474304,
+          1
+        ],
+        [
+          6474488,
+          1
+        ],
+        [
+          19790080,
+          1
+        ],
+        [
+          4418800,
+          1
+        ],
+        [
+          7783840,
+          1
+        ],
+        [
+          19144208,
+          1
+        ],
+        [
+          4290816,
+          1
+        ],
+        [
+          11712304,
+          1
+        ],
+        [
+          18002104,
+          1
+        ]
+      ],
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field_operation_counts": {
+        "additions": 218,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1065,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 202,
+      "final_boundary_payload_bits": 412,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "d37f86d5e80128bf2c277235fb3ea51a2dcaebc9a515c94ed8c12d02fc129c58",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 735471,
+      "initial_digest": "821ecf506e3d3f752a6e9fe208309a1573436c0e4ed07d324638acad784ef964",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 8,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 112,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 3,
+      "maximum_resident_payload_bits": 3142,
+      "maximum_resident_value_payload_bits": 61,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 25,
+      "maximum_transient_value_payload_bits": 393,
+      "program_fingerprint": "b6929c86eba82d36b888930e5b4a505b7a8de3578678be545095285fce67d817",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3062,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "d902f00bc10279ffb828a0ed67a3ed7db4b264fe17af0ddf6dd57b5dff7f5db2",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          192125899931104,
+          1
+        ],
+        [
+          201534422620192,
+          1
+        ],
+        [
+          -1363956497328,
+          1
+        ],
+        [
+          234053929017728,
+          1
+        ],
+        [
+          152901889639856,
+          1
+        ],
+        [
+          13891401877648,
+          1
+        ],
+        [
+          263335666188416,
+          1
+        ],
+        [
+          101298628262592,
+          1
+        ],
+        [
+          49208114566288,
+          1
+        ],
+        [
+          272524150805616,
+          1
+        ],
+        [
+          56211576878832,
+          1
+        ],
+        [
+          91437581133232,
+          1
+        ],
+        [
+          266938653368528,
+          1
+        ],
+        [
+          19661042675184,
+          1
+        ],
+        [
+          143980411308448,
+          1
+        ],
+        [
+          239988617854656,
+          1
+        ]
+      ],
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field_operation_counts": {
+        "additions": 222,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1073,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 315,
+      "final_boundary_payload_bits": 780,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "d37f86d5e80128bf2c277235fb3ea51a2dcaebc9a515c94ed8c12d02fc129c58",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 601080390,
+      "initial_digest": "821ecf506e3d3f752a6e9fe208309a1573436c0e4ed07d324638acad784ef964",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 16,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 112,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 3,
+      "maximum_resident_payload_bits": 3142,
+      "maximum_resident_value_payload_bits": 61,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 50,
+      "maximum_transient_value_payload_bits": 783,
+      "program_fingerprint": "2ac443a8a10b70623eaaabe2a0af538c477b03176c93bbed2fe627bf44e7555b",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3063,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "d902f00bc10279ffb828a0ed67a3ed7db4b264fe17af0ddf6dd57b5dff7f5db2",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "accepted_path_catalecticant_materialized": false,
+      "accepted_path_dense_operator_materialized": false,
+      "accepted_path_matching_or_assignment_expansion_materialized": false,
+      "accepted_path_occupation_topology_materialized": false,
+      "accepted_path_occupation_vector_materialized": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          51094566852632394756061768192,
+          1
+        ],
+        [
+          33384871093746652338784622432,
+          1
+        ],
+        [
+          3636916681846477902669845376,
+          1
+        ],
+        [
+          57199243095210041079472031072,
+          1
+        ],
+        [
+          22390637588505473146977162208,
+          1
+        ],
+        [
+          10781309415999792861995458016,
+          1
+        ],
+        [
+          59583094584732964635821126400,
+          1
+        ],
+        [
+          12373603654286423527943429632,
+          1
+        ],
+        [
+          20471592334633277687926244384,
+          1
+        ],
+        [
+          57920983123149011381276075296,
+          1
+        ],
+        [
+          4684996559501087811975248032,
+          1
+        ],
+        [
+          31400697909355546226879480096,
+          1
+        ],
+        [
+          52436126095709824157531319008,
+          1
+        ],
+        [
+          369084824943281326724946816,
+          1
+        ],
+        [
+          42086429791285272573458015456,
+          1
+        ],
+        [
+          43874143814007406713464400384,
+          1
+        ]
+      ],
+      "character_cell_multiplications": 816,
+      "family": "PRIMARY",
+      "field_operation_counts": {
+        "additions": 226,
+        "canonicalizations": 0,
+        "inversions": 2,
+        "local_updates": 0,
+        "maximum_chart_metadata_bits": 0,
+        "maximum_denominator_bits": 0,
+        "maximum_effective_chart_field_coordinates": 0,
+        "maximum_numerator_signed_bits": 0,
+        "maximum_raw_core_field_cells": 0,
+        "maximum_resident_payload_bits": 0,
+        "maximum_scratch_field_cells": 0,
+        "maximum_scratch_payload_bits_estimate_from_resident_cell_height": 0,
+        "multiplications": 1081,
+        "pair_updates": 0,
+        "projection_field_cells": 0,
+        "rref_pivots": 0,
+        "subtractions": 108,
+        "unary_updates": 0,
+        "zero_tests": 2
+      },
+      "final_boundary_field_cells": 1,
+      "final_boundary_json_bytes": 541,
+      "final_boundary_payload_bits": 1545,
+      "final_projection_calls": 1,
+      "forward_rank4_commitment": "d37f86d5e80128bf2c277235fb3ea51a2dcaebc9a515c94ed8c12d02fc129c58",
+      "generation_after": 1,
+      "generation_before": 0,
+      "implicit_occupation_dimension_h_k": 2254848913647,
+      "initial_digest": "821ecf506e3d3f752a6e9fe208309a1573436c0e4ed07d324638acad784ef964",
+      "intermediate_projection_calls": 0,
+      "intermediate_rank4_components_serialized_to_controller": false,
+      "inverse_history_cells": 0,
+      "inverse_history_retained": false,
+      "k": 32,
+      "maximum_active_rank": 4,
+      "maximum_commitment_record_json_bytes": 112,
+      "maximum_coupling_transient_components": 8,
+      "maximum_coupling_transient_field_cells": 144,
+      "maximum_named_transaction_transient_field_cells": 144,
+      "maximum_resident_denominator_bits": 1,
+      "maximum_resident_numerator_signed_bits": 3,
+      "maximum_resident_payload_bits": 3142,
+      "maximum_resident_value_payload_bits": 61,
+      "maximum_transient_denominator_bits": 1,
+      "maximum_transient_numerator_signed_bits": 97,
+      "maximum_transient_value_payload_bits": 1545,
+      "program_fingerprint": "0e1ea8fb5582be9fa94a9ac30b988b13fb08406a45d778703f3fc7b7a4a18a72",
+      "public_mode_topology_integer_cells": 36,
+      "public_program_integer_cells": 170,
+      "public_program_json_bytes": 3063,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_chart_rank": 4,
+      "resident_phase_field_cells": 72,
+      "response_released_after_restoration": true,
+      "restored_digest_with_generation": "d902f00bc10279ffb828a0ed67a3ed7db4b264fe17af0ddf6dd57b5dff7f5db2",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "shear_cell_updates": 192,
+      "snapshot_reload_used": false,
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    }
+  ],
+  "matched_baseline": {
+    "descriptor_runtime": "IDENTICAL_FOUR_COMPONENT_72_FIELD_CELL_RECURRENCE",
+    "phase_advantage_over_matched_classical": false,
+    "strongest_declared_warm": "COMPILED_EIGHT_TOTAL_FOLDED_ENDPOINT_SCALARS"
+  },
+  "next_experiment": "EXACT_SYMBOLIC_ITERATED_COHERENT_COUPLING_SECANT_RANK_GROWTH_LAW_OR_FIXED_RANK_GAUSSIAN_PHASE_CHART_NO_GO_WITHOUT_COMPONENT_ENUMERATION",
+  "next_obstruction": "THE_SECOND_COUPLING_NOW_HAS_AN_EXACT_RANK4_LOWER_BOUND_AND_A72_CELL_CLOSED_TRANSACTION_BUT_EACH_ADDITIONAL_GENERIC_INVOLUTIVE_COUPLING_CAN_DOUBLE_THE_GENERATED_COHERENT_TERMS_AND_THE_FIXED_WORD_ALREADY_COMPILES_TO_AN_EIGHT_TOTAL_SCALAR_CLASSICAL_BOUNDARY_RECURRENCE",
+  "resource_law": {
+    "accepted_path_catalecticant_cells": 0,
+    "accepted_path_dense_operator_cells": 0,
+    "accepted_path_matching_or_assignment_expansion": 0,
+    "accepted_path_occupation_coordinates": 0,
+    "accepted_resident_phase_field_cells": 72,
+    "full_exact_bit_complexity_established": false,
+    "hashlib_internal_state_excluded": true,
+    "inverse_history_cells": 0,
+    "maximum_coupling_transient_components": 8,
+    "maximum_coupling_transient_field_cells": 144,
+    "python_container_native_bigint_and_whole_process_memory_excluded": true,
+    "resident_chart_rank": 4,
+    "verification_only_catalecticant_scalar_cells_per_certificate": 16
+  },
+  "restoration": {
+    "inverse_history_retained": false,
+    "resident_rank4_double_secant_phase_carrier": "EXACT_ALGEBRAIC_RESTORATION",
+    "snapshot_reload_used": false,
+    "transient_eight_component_inverse_merge": "NO_RESTORATION_CLAIM",
+    "verification_only_catalecticant_buffers": "NO_RESTORATION_CLAIM"
+  },
+  "reuse": {
+    "baseline_reload_used": false,
+    "first_boundary": [
+      [
+        14963008,
+        1
+      ],
+      [
+        15172416,
+        1
+      ],
+      [
+        2621312,
+        1
+      ],
+      [
+        17871288,
+        1
+      ],
+      [
+        11474448,
+        1
+      ],
+      [
+        1432912,
+        1
+      ],
+      [
+        19866256,
+        1
+      ],
+      [
+        8474304,
+        1
+      ],
+      [
+        6474488,
+        1
+      ],
+      [
+        19790080,
+        1
+      ],
+      [
+        4418800,
+        1
+      ],
+      [
+        7783840,
+        1
+      ],
+      [
+        19144208,
+        1
+      ],
+      [
+        4290816,
+        1
+      ],
+      [
+        11712304,
+        1
+      ],
+      [
+        18002104,
+        1
+      ]
+    ],
+    "first_family": "PRIMARY",
+    "first_k": 8,
+    "fresh_boundary": [
+      [
+        1033955549359200,
+        1
+      ],
+      [
+        297279654925136,
+        1
+      ],
+      [
+        -1396682250736304,
+        1
+      ],
+      [
+        -2162470537978784,
+        1
+      ],
+      [
+        -1153128998908784,
+        1
+      ],
+      [
+        507663502428624,
+        1
+      ],
+      [
+        982122937424352,
+        1
+      ],
+      [
+        -250900652913696,
+        1
+      ],
+      [
+        -1830788523978640,
+        1
+      ],
+      [
+        -2008016461796032,
+        1
+      ],
+      [
+        -578284331215008,
+        1
+      ],
+      [
+        869076667604576,
+        1
+      ],
+      [
+        725521203473712,
+        1
+      ],
+      [
+        -844250964674640,
+        1
+      ],
+      [
+        -2098223241473952,
+        1
+      ],
+      [
+        -1652072459800032,
+        1
+      ]
+    ],
+    "fresh_restored_boundary_agreement": true,
+    "fresh_restored_resource_signature_agreement": true,
+    "generation_after_two_transactions": 2,
+    "reused_boundary": [
+      [
+        1033955549359200,
+        1
+      ],
+      [
+        297279654925136,
+        1
+      ],
+      [
+        -1396682250736304,
+        1
+      ],
+      [
+        -2162470537978784,
+        1
+      ],
+      [
+        -1153128998908784,
+        1
+      ],
+      [
+        507663502428624,
+        1
+      ],
+      [
+        982122937424352,
+        1
+      ],
+      [
+        -250900652913696,
+        1
+      ],
+      [
+        -1830788523978640,
+        1
+      ],
+      [
+        -2008016461796032,
+        1
+      ],
+      [
+        -578284331215008,
+        1
+      ],
+      [
+        869076667604576,
+        1
+      ],
+      [
+        725521203473712,
+        1
+      ],
+      [
+        -844250964674640,
+        1
+      ],
+      [
+        -2098223241473952,
+        1
+      ],
+      [
+        -1652072459800032,
+        1
+      ]
+    ],
+    "reused_family": "REUSE",
+    "reused_k": 16,
+    "same_actual_backing_across_unrelated_programs": true
+  },
+  "schema": "CAT_CAS_F17_COHERENT_RANK4_DOUBLE_SECANT_PHASE_COUPLING_CLOSURE_V1",
+  "source_scope": {
+    "base_obstruction": "M130_SECOND_COUPLING_FOUR_TERMS_WITHOUT_MINIMAL_RANK_PROOF",
+    "chart": "RANK4_DOUBLE_COHERENT_VERONESE_SECANT",
+    "consumer_modules": 2,
+    "coupling_count": 2,
+    "coupling_law": "I_PLUS_ETA_SWAP_MODE0_MODE1",
+    "declared_degrees": [
+      4,
+      8,
+      16,
+      32,
+      64,
+      128
+    ],
+    "dual_field_degrees": [
+      4,
+      8,
+      16,
+      32,
+      64,
+      128
+    ],
+    "exact_q_zeta17_degrees": [
+      4,
+      8,
+      16,
+      32
+    ],
+    "interleaved_coupling_module_order_noncommutation_detected": true,
+    "primitives_per_consumer": 20,
+    "two_couplings_commute_with_each_other": true
+  },
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}

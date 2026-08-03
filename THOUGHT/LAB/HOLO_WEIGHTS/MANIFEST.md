@@ -68,6 +68,47 @@ streaming/parallel phase VMs, fredkin compiler, algebraic relation closures
 (Q(zeta17), F103/F137), CATVM services (seccomp-enclosed custody), Kerr/SU(2)
 wave carriers, F5 conics/Gauss kernels, F17 group-algebra charts.
 
+## native/f17_frontier/ — the NEW .holo frontier (copied 2026-08-03, live work)
+
+294 files copied from `(catvm)` `.../cat_cas_phase_frontier/`:
+
+- pi-unit exact arithmetic: embedding_balance, exact_coordinate_descent,
+  deferred_ledger_stream, horner_stream, lattice_center, height_reduction,
+  pi_content_recurrence (log-free exact coordinate reduction in pi units)
+- coherent charts: veronese_phase_chart, rank2_secant_coupling,
+  rank4_double_secant_coupling, latent_basis_mismatch_grid,
+  paired_phase_basis_holographic_matchgate, planar_free_fermion_phase_covariance
+- rank laws: two_signature_separation_rank_diagnostic (LIVE, 2026-08-03),
+  growing_shared_latent_no_go (2^k separator), grid_linear_separator_no_go,
+  nonlinear_canonical_mps_separator_chart, variable_rank_nonseparable_tensor,
+  symbolic_iterated_affine_reflection_secant_rank_growth
+- chain family: cyclotomic_module, direct_real_hermitian, exact_lift, krylov,
+  height_lower_bound, quadratic_extension_resident_carrier, real_subfield_horner,
+  streamed_real_autocorrelation, transfer_closure, adaptive_gauge,
+  gray_code_bond2, overlapping_cubic_bond3, two_latent_cubic_cycle_rank4
+- closures: exchange_symmetric, global_shift_latent_ladder_convolution,
+  shared_latent_cubic_hypertree, three_shear_relative_hermitian_trace_feedback,
+  runtime_weighted_grid, shared_phase_parity_ledger_ladder,
+  interacting_cubic_latent_trace
+- per-experiment: *_oracle.py, RESULTS.json, PROVENANCE.json, REVIEW.md, qualify_*.sh
+
+Two-signature verdict (live): two independent cubic Walsh derivative signatures
+generate FULL 17x17 coefficient separation rank -> uniformly low separation-rank
+factor charts rejected at family ceiling; canonical 578-cell C17^2 carrier
+restores/reuses exactly; matched compact classical residue recurrences.
+
+## native/unbounded_compute_v1/ — toroidal path-sum package
+
+43 files from `(catvm)` `.../audio_cat_cas_unbounded_compute_v1/`:
+
+- `CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED` (bounded mission stop)
+- public `.holo` programs: programs/phase_path_{alpha,beta,gamma,delta}_{16..256}.holo
+- Gamma vs explicit path-work: n=16 -> 2.19, n=32 -> 71913, n=64 -> 1.5e14,
+  n=128 -> 1.4e33, n=256 -> 2.4e71 (compact classical DP still faster;
+  no best-classical advantage claimed)
+- ARCHITECTURE.md, FINAL_REPORT.md, EXTERNAL_VERIFICATION, INVARIANT_RESULTS,
+  PACKAGE_MANIFEST.json (SHA-bound), development probes
+
 ## lib/
 
 | File | Origin |

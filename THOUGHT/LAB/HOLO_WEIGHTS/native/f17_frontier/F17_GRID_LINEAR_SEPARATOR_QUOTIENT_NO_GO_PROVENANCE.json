@@ -1,0 +1,29 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "f279ab62874fe1a1e0331c99fcf94430f0df3512",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "e5ac122f64548141afd5d957dfb62faa5945a8acc91f86bfc8200c4a3e210594",
+  "reference_full_oracle_sha256": "2a5d3772bcb037e8b9b7c7f64d942d57f3e1e74582c7842c0553a4f45c086723",
+  "execution": {
+    "production": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_grid_linear_separator_quotient_no_go.py",
+    "oracle": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_grid_linear_separator_quotient_no_go_oracle.py",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_grid_linear_separator_quotient_no_go.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_grid_linear_separator_quotient_no_go.py": "045362b4446ab931d6914e77498408353e40856bcecc1f7a07f6a99ce67231aa",
+    "f17_grid_linear_separator_quotient_no_go_oracle.py": "0ff9beb76095c32a68e97b48f6b0ce089565299c418b0db7d278a4dc6aea3bfa",
+    "f17_runtime_weighted_grid_kronecker_butterfly_closure.py": "8691e684266d032757db3b806e93631e46a8520145af020ec33e390bcccd1019",
+    "f17_runtime_weighted_grid_phase_factor_closure.py": "fe145481bbd6c35cb7c524f32b83806ed3f07af824430dcd277c74cd8a4ac7f7",
+    "qualify_f17_grid_linear_separator_quotient_no_go.sh": "b54ace12f3feccaf0381b524d9fa32d108b813250699fc1b8e54304194f6643c",
+    "F17_GRID_LINEAR_SEPARATOR_QUOTIENT_NO_GO_RESULTS.json": "e5ac122f64548141afd5d957dfb62faa5945a8acc91f86bfc8200c4a3e210594",
+    "F17_GRID_LINEAR_SEPARATOR_QUOTIENT_NO_GO_ORACLE_RESULTS.json": "2a5d3772bcb037e8b9b7c7f64d942d57f3e1e74582c7842c0553a4f45c086723",
+    "F17_GRID_LINEAR_SEPARATOR_QUOTIENT_NO_GO_INDEPENDENT_REVIEW.md": "2117c508de432d7e5c6913c2a4eb29c6ac899a2f6761c62e4e86bbedee0b1d70"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "factor_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "claim_ceiling": "UNIFORM_FIXED_Q_ZETA17_LINEAR_SEPARATOR_ENCODERS_SUPPORTING_ARBITRARY_FIELD_MESSAGES_AND_EVERY_LEGAL_NONZERO_FINAL_ROW_CONTINUATION_REQUIRE_AT_LEAST_TWO_TO_THE_N_FIELD_COORDINATES_ANALYTIC_ALL_N_FORMULA_CERTIFICATES_N1_TO_N16_PHASE_AND_DUAL_FIELD_REEXECUTION_N2_N3_N4_TWO_DESCRIPTOR_DRIVEN_EXACT_FACTOR_CARRIER_RESTORATION_AND_SAME_BACKING_REUSE_TRANSIENT_PROJECTION_BUFFER_NO_RESTORATION_CLAIM_DIRECT_PROCESS_SOFTWARE_ONLY"
+}

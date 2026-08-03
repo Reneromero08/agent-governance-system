@@ -1,0 +1,33 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "7bdbac7a8eb047b82bcd9171402188ae665a2cef",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "c02c9eee81421a00b1e18787b76720c85b5b7705d126f65bc3988d824ae03184",
+  "reference_full_oracle_sha256": "4690ed994d328de5c3ee3487ec783df2a98eec8892423f6597b84b3c8be1bd71",
+  "reference_observational_benchmark_sha256": "3b9f62bbb48e8fa7bb315c8cece1e16b6f168f3e2e0f08c15fb61639630d74fb",
+  "execution": {
+    "production": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_runtime_weighted_grid_phase_factor_closure.py",
+    "oracle": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_runtime_weighted_grid_phase_factor_closure_oracle.py",
+    "benchmark": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/benchmark_f17_runtime_weighted_grid_phase_factor_closure.py",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_runtime_weighted_grid_phase_factor_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_runtime_weighted_grid_phase_factor_closure.py": "fe145481bbd6c35cb7c524f32b83806ed3f07af824430dcd277c74cd8a4ac7f7",
+    "f17_runtime_weighted_grid_phase_factor_closure_oracle.py": "e8213a80c8a5d53ce961cdf056936010290159b0c5aedbe5bc894bcd43af7916",
+    "benchmark_f17_runtime_weighted_grid_phase_factor_closure.py": "327e72c563a7710aff74d2fd5c1e085382369fa568bbd93ffd73869c1c75a4a1",
+    "f17_variable_rank_nonseparable_tensor_coupling.py": "9697bf3549e7af7c0331c1828cf6e02d540777d2a78cde0d6da5bd3bbf6a2061",
+    "f17_cubic_chain_period17_quadratic_extension_resident_carrier.py": "1eea251c3dee2e6e0673376c0285fed88de31efc7a547418cbe960b1c89bb111",
+    "F17_VARIABLE_RANK_NONSEPARABLE_TENSOR_COUPLING_PROVENANCE.json": "b63160104d777e99077bfa6f6e8aa30c6b471d65b8cd78589cca312c84040275",
+    "qualify_f17_runtime_weighted_grid_phase_factor_closure.sh": "c07b7851d22820a290486e495b48e153743bbf5dfc3553e0fa7bdc0e96030542",
+    "F17_RUNTIME_WEIGHTED_GRID_PHASE_FACTOR_CLOSURE_RESULTS.json": "c02c9eee81421a00b1e18787b76720c85b5b7705d126f65bc3988d824ae03184",
+    "F17_RUNTIME_WEIGHTED_GRID_PHASE_FACTOR_CLOSURE_ORACLE_RESULTS.json": "4690ed994d328de5c3ee3487ec783df2a98eec8892423f6597b84b3c8be1bd71",
+    "F17_RUNTIME_WEIGHTED_GRID_PHASE_FACTOR_CLOSURE_BENCHMARK.json": "3b9f62bbb48e8fa7bb315c8cece1e16b6f168f3e2e0f08c15fb61639630d74fb",
+    "F17_RUNTIME_WEIGHTED_GRID_PHASE_FACTOR_CLOSURE_INDEPENDENT_REVIEW.md": "007636d88279584edc319ffa7bde1459afff61f5298b4f570c775eb532bc2f42"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "LINUX_X86_64_PYTHON_TWO_DETERMINISTIC_PUBLIC_RUNTIME_WEIGHT_FAMILIES_ON_BINARY_N_BY_N_GRIDS_N2_N3_N4_EXACT_PUBLIC_FACTOR_STATE_MUTATION_ACTUAL_ROW_INTERFACE_RANKS4_8_16_ONE_FINAL_CYCLOTOMIC_SCALAR_PROJECTION_EXACT_REVERSE_AND_SEED_UNLOAD_ZERO_BACKING_RESTORATION_HELD_OUT_SAME_BACKING_REUSE_NO_DENSE_TWO_TO_THE_N_SQUARED_TENSOR_ON_ACCEPTED_PATH_BUT_TWO_TO_THE_N_INTERFACE_MESSAGES_AND_N_MINUS_ONE_TIMES_FOUR_TO_THE_N_TRANSITIONS_EVALUATED_BASELINES_NONEXHAUSTIVE_DIRECT_PROCESS_SOFTWARE_ONLY"
+}

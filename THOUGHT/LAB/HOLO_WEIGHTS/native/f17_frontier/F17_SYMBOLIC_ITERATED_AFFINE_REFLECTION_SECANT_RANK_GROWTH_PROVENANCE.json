@@ -1,0 +1,93 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "105d1a1944b975382ad1d084ac7bbfd30d317824",
+  "scientific_source_parent": "7897931f32c2e93665f195a5a89dc7dac18882d4",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "b56c05340c6ff8acfe504a519d5c0bd6a64e7a536883d5a8179979ee55822fab",
+  "reference_full_oracle_sha256": "8c4959a7d1ec124a5a62bb9bd3a64e959e2b71bf44f6207a5dda1a163bedd5eb",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_symbolic_iterated_affine_reflection_secant_rank_growth.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_symbolic_iterated_affine_reflection_secant_rank_growth_oracle.py --production PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_symbolic_iterated_affine_reflection_secant_rank_growth.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_symbolic_iterated_affine_reflection_secant_rank_growth.py": "c48e844af5a2895f7de2b5541dcf53bb4502c269f1f2d3ca21d5f600f252b972",
+    "f17_symbolic_iterated_affine_reflection_secant_rank_growth_oracle.py": "71f13c1415108077216e6466985aa1a3c3ee92ee3e9815832371ab3355a5c764",
+    "F17_SYMBOLIC_ITERATED_AFFINE_REFLECTION_SECANT_RANK_GROWTH_RESULTS.json": "b56c05340c6ff8acfe504a519d5c0bd6a64e7a536883d5a8179979ee55822fab",
+    "F17_SYMBOLIC_ITERATED_AFFINE_REFLECTION_SECANT_RANK_GROWTH_ORACLE_RESULTS.json": "8c4959a7d1ec124a5a62bb9bd3a64e959e2b71bf44f6207a5dda1a163bedd5eb",
+    "F17_SYMBOLIC_ITERATED_AFFINE_REFLECTION_SECANT_RANK_GROWTH_INDEPENDENT_REVIEW.md": "625651f989aabe982904830dfec9ddbff871598561934da886b4e577996d6a90",
+    "qualify_f17_symbolic_iterated_affine_reflection_secant_rank_growth.sh": "9ef350145ec8633bd0c869c73149a13aeef3005d6596789c9f8a4097022a7af6"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "chart": "EXPLICIT_ITERATED_AFFINE_REFLECTION_COHERENT_SECANT",
+    "affine_centers": "A_LEVEL_EQUALS_TWO_TO_THE_LEVEL_MINUS_ONE",
+    "support": "ZERO_THROUGH_TWO_TO_THE_M_MINUS_ONE",
+    "executed_m": [1, 2, 3, 4, 5, 6],
+    "executed_ranks": [2, 4, 8, 16, 32, 64],
+    "executed_degrees": [2, 6, 14, 30, 62, 126],
+    "ordinary_waring_interpretation": "Q_ZETA17_ONLY",
+    "finite_field_applicability": "TWO_TO_THE_M_AT_MOST_FIELD_MODULUS",
+    "families": ["PRIMARY", "REUSE"],
+    "independent_methods": [
+      "SEPARATE_PUBLIC_TOPOLOGY_COMPILER",
+      "SEPARATE_COMPONENT_COUPLING_AND_EXACT_INVERSE",
+      "INDEPENDENT_PUBLIC_POINT_SET_INDUCTION",
+      "INDEPENDENT_VANDERMONDE_PRODUCT_CERTIFICATE",
+      "DIRECT_HANKEL_GAUSSIAN_DETERMINANTS_Q_M1_TO4_AND_DUAL_FIELD_M1_TO6",
+      "SEPARATE_FULL_BINARY_TRIANGULAR_MOMENT_FORWARD_INVERSE_RECURRENCE",
+      "SEPARATE_PUBLIC_SUPPORT_ATOMIC_WEIGHT_FULL_STATE_RECURRENCE",
+      "SEPARATE_TWO_DYNAMIC_MOMENT_FINAL_BOUNDARY_BASELINE"
+    ]
+  },
+  "resource_accounting": {
+    "resident_explicit_coherent_components_at_m": "TWO_TO_THE_M",
+    "resident_phase_field_cells_at_m": "18_TIMES_TWO_TO_THE_M",
+    "inverse_coupling_logical_transient_field_cells_at_m": "36_TIMES_TWO_TO_THE_M",
+    "accepted_path_occupation_coordinates": 0,
+    "accepted_path_catalecticant_cells": 0,
+    "accepted_path_separate_truth_table_or_assignment_buffer_cells": 0,
+    "inverse_history_cells": 0,
+    "compact_classical_atomic_weight_field_cells_at_m": "TWO_TO_THE_M",
+    "compact_classical_atomic_weight_named_update_cells_at_m": "THREE_TIMES_TWO_TO_THE_M_DIVIDED_BY_TWO",
+    "dense_classical_moment_field_cells_at_m": "TWO_TIMES_TWO_TO_THE_M_MINUS_ONE",
+    "final_boundary_classical_dynamic_field_cells": 2,
+    "sealed_word_cached_boundary_field_cells": 1,
+    "exact_payload_height_tuples_independently_reexecuted": false,
+    "full_exact_bit_complexity_established": false,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "HASHLIB_INTERNAL_STATE",
+      "BIT_OPERATION_COMPLEXITY",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_baselines": [
+    "TWO_TO_THE_M_ATOMIC_WEIGHTS_ON_PUBLIC_SUPPORT_FOR_FULL_STATE",
+    "TWO_DYNAMIC_MOMENTS_FOR_FINAL_BOUNDARY_ONLY",
+    "ONE_CACHED_FINAL_BOUNDARY_SCALAR_FOR_SEALED_WORD",
+    "TWO_TIMES_TWO_TO_THE_M_MINUS_ONE_TRIANGULAR_MOMENTS_AS_DENSE_REFERENCE_NOT_STRONGEST_COMPACT_STATE"
+  ],
+  "claim_ceiling": "DECLARED_A_LEVEL_TWO_TO_THE_LEVEL_MINUS_ONE_ITERATED_AFFINE_REFLECTION_FAMILY_BOUNDED_EXECUTION_M1_TO6_ANALYTIC_NORMALIZED_SECANT_RANK_TWO_TO_THE_M_Q_ZETA17_AND_DUAL_FIELD_WHERE_RANK_AT_MOST_MODULUS_DIRECT_PROCESS_SOFTWARE",
+  "rejected_interpretations": [
+    "SYMBOLIC_OR_NONENUMERATIVE_ACCEPTED_EXECUTION",
+    "ARBITRARY_INTERLEAVED_COUPLING_RANK_LAW",
+    "GENERAL_GAUSSIAN_NO_GO",
+    "FIXED_RANK_CLOSURE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

@@ -1,0 +1,1488 @@
+{
+  "claim_ceiling": {
+    "arbitrary_cubic_hypergraph_closure": false,
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "declared_overlapping_cubic_chain_only": true,
+    "distinct_phase_resource": false,
+    "physical_bits_replaced_with_pi": false,
+    "physical_execution": false,
+    "small_wall_crossing": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "compiled_classical_baseline_checks": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 1,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 2,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 4,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 8,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 16,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 32,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 64,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 128,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 1,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 2,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 3,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 4,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 5,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 6,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 7,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 8,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 1,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 2,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 3,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 4,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 5,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 6,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 7,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_final_row_commitment_agreement": true,
+      "compiled_final_row_record_bytes_agreement": true,
+      "depth": 8,
+      "factor_commitment_agreement": true,
+      "factor_record_bytes_agreement": true,
+      "family": "PRIMARY",
+      "full_signature_factor_cells_agreement": true,
+      "three_compiled_chart_row_cells_agreement": true,
+      "three_dynamic_cells_agreement": true
+    }
+  ],
+  "direct_assignment_partition_checks": [
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 1,
+      "direct_assignment_count": 8,
+      "direct_partition_agrees_with_four_state_recurrence": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 2,
+      "direct_assignment_count": 16,
+      "direct_partition_agrees_with_four_state_recurrence": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 3,
+      "direct_assignment_count": 32,
+      "direct_partition_agrees_with_four_state_recurrence": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 4,
+      "direct_assignment_count": 64,
+      "direct_partition_agrees_with_four_state_recurrence": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 5,
+      "direct_assignment_count": 128,
+      "direct_partition_agrees_with_four_state_recurrence": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 6,
+      "direct_assignment_count": 256,
+      "direct_partition_agrees_with_four_state_recurrence": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 7,
+      "direct_assignment_count": 512,
+      "direct_partition_agrees_with_four_state_recurrence": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 8,
+      "direct_assignment_count": 1024,
+      "direct_partition_agrees_with_four_state_recurrence": true
+    }
+  ],
+  "direct_full_tensor_rank_checks": [
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 1,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        2
+      ],
+      "exact_maximum_bond_dimension": 2,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 2,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 3,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 4,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        3,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "depth": 5,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "depth": 1,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        2
+      ],
+      "exact_maximum_bond_dimension": 2,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "depth": 2,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "depth": 3,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "depth": 4,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        3,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "depth": 5,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "depth": 6,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "depth": 1,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        2
+      ],
+      "exact_maximum_bond_dimension": 2,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "depth": 2,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "depth": 3,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "depth": 4,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        3,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "depth": 5,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    },
+    {
+      "accepted_path": false,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "depth": 6,
+      "direct_full_tensor_cut_ranks": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only_assignment_tensor_materialized": true
+    }
+  ],
+  "direct_local_rank_checks": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 1,
+      "direct_cut_ranks": [
+        2,
+        2
+      ],
+      "exact_maximum_bond_dimension": 2,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 2,
+      "direct_cut_ranks": [
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 3,
+      "direct_cut_ranks": [
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 4,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 5,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 6,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 7,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 8,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 1,
+      "direct_cut_ranks": [
+        2,
+        2
+      ],
+      "exact_maximum_bond_dimension": 2,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 2,
+      "direct_cut_ranks": [
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 3,
+      "direct_cut_ranks": [
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 4,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 5,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 6,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 7,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 8,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 1,
+      "direct_cut_ranks": [
+        2,
+        2
+      ],
+      "exact_maximum_bond_dimension": 2,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 2,
+      "direct_cut_ranks": [
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 3,
+      "direct_cut_ranks": [
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 4,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 5,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 6,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 7,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_interior_local_cross_ranks_three": true,
+      "depth": 8,
+      "direct_cut_ranks": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "exact_maximum_bond_dimension": 3,
+      "family": "PRIMARY",
+      "verification_only": true
+    }
+  ],
+  "independent_mutation_checks": {
+    "all_identity_cubic_factors_reduce_to_unweighted_assignment_count": true,
+    "bond_two_rejected_by_direct_rank3_cross_matrix": true,
+    "identity_theta_collapses_rank3_minor": true,
+    "independent_primary_reuse_lease_identities_differ": true,
+    "last_cubic_factor_replaced_by_identity_changes_boundary": true,
+    "missing_inverse_leaves_cubic_branch_nonzero": true,
+    "perturbed_theta_changes_boundary": true,
+    "reordered_inverse_does_not_restore_latest_site": true,
+    "reversed_factor_order_preserves_chain_reflection_boundary": true,
+    "snapshot_command_available": false,
+    "wrong_inverse_does_not_restore_seeded_site": true
+  },
+  "observed_resource_law": {
+    "accepted_path_assignment_enumeration": false,
+    "accepted_path_factor_cells": "TWO_TIMES_M",
+    "accepted_path_nontrivial_theta_cells": "M",
+    "exact_boundary_payload_bits_reexecuted": true,
+    "exact_maximum_mps_bond_dimension": 3,
+    "exact_resident_payload_bits_reexecuted": true,
+    "full_exact_bit_complexity_established": false,
+    "independent_direct_assignment_enumeration_maximum": 1024,
+    "matched_classical_boundary_dynamic_cells": 3,
+    "matched_classical_compiled_final_row_cells": 3,
+    "matched_classical_full_signature_cells": "M"
+  },
+  "oracle_independence": {
+    "direct_assignment_enumeration_verification_only": true,
+    "imports_production_module": false,
+    "separate_exact_local_cross_matrix_rank": true,
+    "separate_four_state_classical_recurrence": true,
+    "separate_public_descriptor_compiler": true,
+    "separate_seeded_pair_inverse": true,
+    "shared_established_exact_arithmetic_backend_only": true
+  },
+  "production_claim": "BOUNDED_EXACT_OVERLAPPING_NONAFFINE_CUBIC_BOOLEAN_PHASE_FACTOR_CHAIN_HAS_MINIMAL_MPS_BOND3_AND_TWO_M_RESIDENT_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PARTITION_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_FIXED_LOGICAL_RANK_HIDES_GROWING_EXACT_BOUNDARY_WIDTH",
+  "restoration": {
+    "projection_compiler_commitment_and_oracle_buffers": "NO_RESTORATION_CLAIM",
+    "resident_factor_carrier": "EXACT_ALGEBRAIC_RESTORATION"
+  },
+  "schema": "CAT_CAS_F17_OVERLAPPING_CUBIC_BOND3_PHASE_FACTOR_CLOSURE_ORACLE_V1",
+  "transaction_parity": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 1,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 2,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 4,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 8,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 16,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 32,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 64,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 128,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 1,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 2,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 3,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 4,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 5,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 6,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 7,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 8,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 1,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 2,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 3,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 4,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 5,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 6,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 7,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "bond_agreement": true,
+      "boundary_payload_bits_agreement": true,
+      "commitment_record_bytes_agreement": true,
+      "depth": 8,
+      "factor_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_four_state_boundary_agreement": true,
+      "independent_local_inverse_restores_seeded_sites": true,
+      "no_assignment_or_weight_tensor_payload_in_transaction": true,
+      "physical_bits_agreement": true,
+      "program_fingerprint_agreement": true,
+      "public_program_json_bytes_agreement": true,
+      "resident_factor_cells_agreement": true,
+      "resident_nontrivial_theta_cells_agreement": true,
+      "resident_payload_bits_agreement": true,
+      "restored_exact_zero_reported": true,
+      "same_backing_reported": true
+    }
+  ],
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

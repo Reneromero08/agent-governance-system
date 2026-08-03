@@ -1,0 +1,321 @@
+{
+  "accepted_path_baseline_plus_carrier_total_scalar_slots": [
+    24,
+    52,
+    156,
+    556,
+    2124
+  ],
+  "all_carrier_and_array_backing_preserved": true,
+  "all_fresh_restored_reuse_boundaries_equal": true,
+  "all_primary_restored_exactly": true,
+  "all_reuse_restored_exactly": true,
+  "baseline_reload_bytes": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "carrier": {
+    "assignment_enumeration_materialized": false,
+    "dense_phase_vector_materialized": false,
+    "field": "F17",
+    "inverse_descriptors_retained": 0,
+    "inverse_order": "REVERSE_PUBLIC_MODULES",
+    "phase_root_order": 17,
+    "state": "SYMMETRIC_QUADRATIC_A_LINEAR_B_CONSTANT_C_SIGN",
+    "tested_ports": [
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "truth_table_materialized": false
+  },
+  "catalytic_inference_established": false,
+  "catvm_custody_established": false,
+  "claim_candidate": "BOUNDED_EXACT_F17_GAUSSIAN_CYCLOTOMIC_MULTI_PORT_PHASE_QUOTIENT_WITH_NONCOMMUTING_FOURIER_SHEAR_CLOSURE_RESTORATION_AND_REUSE",
+  "claim_ceiling": "LINUX_X86_64_PYTHON_NUMPY_EXACT_F17_QUADRATIC_GAUSSIAN_PHASE_CHART_PORTS2_4_8_16_32_TWO_PUBLIC_ALGORITHMIC_PROGRAM_FAMILIES_NONZERO_FOURIER_PIVOTS_NONSINGULAR_FINAL_OVERLAP_BOUNDARY_SOFTWARE_ONLY",
+  "compile_determinant_search_calls": [
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "compile_determinant_search_field_inversions": [
+    2,
+    4,
+    8,
+    16,
+    32
+  ],
+  "compile_determinant_search_field_update_equivalents": [
+    3,
+    26,
+    191,
+    1409,
+    10826
+  ],
+  "computational_advantage": false,
+  "controls": {
+    "missing_inverse_failure_mode": "EXACT_SEMANTIC_STATE_MISMATCH",
+    "missing_inverse_rejected": true,
+    "reordered_inverse_failure_mode": "public Fourier module reached a zero Gaussian pivot",
+    "reordered_inverse_rejected": true,
+    "wrong_inverse_failure_mode": "EXACT_SEMANTIC_STATE_MISMATCH",
+    "wrong_inverse_rejected": true
+  },
+  "dense_phase_cells_not_materialized": [
+    289,
+    83521,
+    6975757441,
+    48661191875666868481,
+    2367911594760467245844106297320951247361
+  ],
+  "distinct_phase_resource_established": false,
+  "matched_compact_classical": {
+    "identical_exact_gaussian_coefficient_recurrence_exists": true,
+    "strongest_compact_classical_established": false,
+    "verification_level": "PACKAGE_SELF_REVIEW"
+  },
+  "maximum_execution_temporary_field_cells": [
+    7,
+    23,
+    79,
+    287,
+    1087
+  ],
+  "phase_primitive_is_symbolic_f17_exponent_not_physical_wave": true,
+  "physical_waveform_execution": false,
+  "port_counts": [
+    2,
+    4,
+    8,
+    16,
+    32
+  ],
+  "primary_boundaries": [
+    {
+      "overlap_probability_denominator_base": 17,
+      "overlap_probability_denominator_power": 2,
+      "overlap_probability_numerator": 1,
+      "quadratic_rank": 2,
+      "real_sign": -1,
+      "root_exponent": 5,
+      "root_order": 17
+    },
+    {
+      "overlap_probability_denominator_base": 17,
+      "overlap_probability_denominator_power": 4,
+      "overlap_probability_numerator": 1,
+      "quadratic_rank": 4,
+      "real_sign": -1,
+      "root_exponent": 7,
+      "root_order": 17
+    },
+    {
+      "overlap_probability_denominator_base": 17,
+      "overlap_probability_denominator_power": 8,
+      "overlap_probability_numerator": 1,
+      "quadratic_rank": 8,
+      "real_sign": -1,
+      "root_exponent": 1,
+      "root_order": 17
+    },
+    {
+      "overlap_probability_denominator_base": 17,
+      "overlap_probability_denominator_power": 16,
+      "overlap_probability_numerator": 1,
+      "quadratic_rank": 16,
+      "real_sign": -1,
+      "root_exponent": 9,
+      "root_order": 17
+    },
+    {
+      "overlap_probability_denominator_base": 17,
+      "overlap_probability_denominator_power": 32,
+      "overlap_probability_numerator": 1,
+      "quadratic_rank": 32,
+      "real_sign": -1,
+      "root_exponent": 9,
+      "root_order": 17
+    }
+  ],
+  "primary_execution_field_inversions": [
+    8,
+    12,
+    20,
+    36,
+    68
+  ],
+  "primary_execution_field_update_equivalents": [
+    48,
+    216,
+    1320,
+    9288,
+    69768
+  ],
+  "primary_module_counts": [
+    5,
+    7,
+    11,
+    19,
+    35
+  ],
+  "primary_program_sha256": [
+    "a83ce54dc7d6f92811d0d35e6f9fe3dc176765f32d6b276c6a0cd92f9a5959bc",
+    "00d6e7c6edc7cf5aab7771efe5fc343b701214a07e07085d148e9b83e387916d",
+    "6871ea5876f0747f464c2b4905e523331ad300cae8777ab4312d81b5db9315fe",
+    "f16834fd48e3bb80746bad972322a1739e8c84cd15dc83c8d6e26e7f9a53552e",
+    "8273edbb06e65f3221afb62984485aff92a4bf03c30c9d0ac37ca741e86cd41f"
+  ],
+  "projection_temporary_field_cells_upper_bounds": [
+    22,
+    84,
+    328,
+    1296,
+    5152
+  ],
+  "replacement_of_physical_bits_with_pi": false,
+  "resident_f17_field_cells": [
+    7,
+    21,
+    73,
+    273,
+    1057
+  ],
+  "resident_fixed_width_payload_bits": [
+    36,
+    106,
+    366,
+    1366,
+    5286
+  ],
+  "resource_law": {
+    "accepted_path_resident_carriers": 2,
+    "compiled_program_modules_formula": "ports+3",
+    "compiler_answer_inputs": 0,
+    "compiler_boundary_inputs": 0,
+    "compiler_determinant_search_counted": true,
+    "compiler_determinant_search_scratch_upper_bound_formula": "4*ports*ports",
+    "compiler_simulates_public_coefficient_topology": true,
+    "dense_phase_cells_materialized": 0,
+    "execution_work_formula": "O(program_modules*ports*ports)",
+    "numpy_python_allocator_os_process_peak_bounded": false,
+    "projection_scratch_field_cells_formula": "O(ports*ports)",
+    "projection_temporary_field_cells_upper_bound_formula": "5*ports*ports+ports",
+    "projection_work_formula": "O(ports_cubed)",
+    "python_program_object_allocator_peak_bounded": false,
+    "resident_algebraic_scalar_slots_formula": "ports*ports+ports+2",
+    "resident_f17_field_cells_formula": "ports*ports+ports+1",
+    "resident_fixed_width_payload_bits_formula": "5*(ports*ports+ports+1)+1",
+    "resident_machine_metadata_scalar_slots": 4,
+    "retained_inverse_history_bytes": 0,
+    "serialized_program_descriptor_bytes_counted": true,
+    "verification_peak_resident_carriers": 3
+  },
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "restoration_generations": [
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "result": "PASS",
+  "retained_inverse_history_bytes": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "reuse_boundaries": [
+    {
+      "overlap_probability_denominator_base": 17,
+      "overlap_probability_denominator_power": 2,
+      "overlap_probability_numerator": 1,
+      "quadratic_rank": 2,
+      "real_sign": 1,
+      "root_exponent": 4,
+      "root_order": 17
+    },
+    {
+      "overlap_probability_denominator_base": 17,
+      "overlap_probability_denominator_power": 4,
+      "overlap_probability_numerator": 1,
+      "quadratic_rank": 4,
+      "real_sign": 1,
+      "root_exponent": 3,
+      "root_order": 17
+    },
+    {
+      "overlap_probability_denominator_base": 17,
+      "overlap_probability_denominator_power": 8,
+      "overlap_probability_numerator": 1,
+      "quadratic_rank": 8,
+      "real_sign": 1,
+      "root_exponent": 8,
+      "root_order": 17
+    },
+    {
+      "overlap_probability_denominator_base": 17,
+      "overlap_probability_denominator_power": 16,
+      "overlap_probability_numerator": 1,
+      "quadratic_rank": 16,
+      "real_sign": 1,
+      "root_exponent": 3,
+      "root_order": 17
+    },
+    {
+      "overlap_probability_denominator_base": 17,
+      "overlap_probability_denominator_power": 32,
+      "overlap_probability_numerator": 1,
+      "quadratic_rank": 32,
+      "real_sign": 1,
+      "root_exponent": 3,
+      "root_order": 17
+    }
+  ],
+  "reuse_compile_determinant_search_calls": [
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "reuse_compile_determinant_search_field_inversions": [
+    2,
+    4,
+    8,
+    16,
+    32
+  ],
+  "reuse_compile_determinant_search_field_update_equivalents": [
+    3,
+    26,
+    147,
+    910,
+    5530
+  ],
+  "reuse_program_sha256": [
+    "2139eb912e09894f38b95f9388a70a301853259ee99414cfd9de77d7825ded16",
+    "7b0122e386e8daa18cd01b67732c2e724801edb6446a72155d9f66a5c64c35d9",
+    "ed570dc3066bc13163b5e98b8fef5a402e1d0dd70fb79aa570eff7bf07374cda",
+    "f8f05fc2d7195db6ec8fdc0fdef94932090c4d0e608556b74e25ca04ea5c36e0",
+    "145ee58f408e0bc4962ea2ba8b605ad688005c10ae7913ecbc9106698873feb2"
+  ],
+  "small_wall_crossed": false,
+  "terminal": false,
+  "unbounded_computation_established": false,
+  "verification_peak_three_carrier_total_scalar_slots": [
+    36,
+    78,
+    234,
+    834,
+    3186
+  ]
+}

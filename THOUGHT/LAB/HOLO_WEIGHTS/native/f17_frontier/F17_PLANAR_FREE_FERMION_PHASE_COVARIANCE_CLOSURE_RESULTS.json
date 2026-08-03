@@ -1,0 +1,2419 @@
+{
+  "claim": "BOUNDED_EXACT_PLANAR_FREE_FERMION_TERMINAL_PFAFFIAN_PHASE_CLOSURE_FOR_DECLARED_ZERO_FIELD_F17_GRIDS_WITH_EXACT_SPARSE_DEFECT_SECTOR_GROWTH_RESTORATION_AND_REUSE",
+  "claim_ceiling": {
+    "arbitrary_matchgate_or_holographic_reduction_established": false,
+    "catvm_custody_established": false,
+    "computational_advantage_established": false,
+    "dense_external_field_compaction_established": false,
+    "direct_single_pfaffian_only_in_declared_zero_field_sector": true,
+    "distinct_phase_resource_established": false,
+    "implemented_sparse_external_field_path_uses_even_sector_expansion": true,
+    "phase_native_zero_tests_pivots_divisions_or_orientation_established": false,
+    "physical_bits_replaced_with_pi": false,
+    "physical_waveform_execution_established": false,
+    "small_wall_crossing_established": false,
+    "unbounded_catalytic_computation_established": false
+  },
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "controls": {
+    "alternate_path_boundary_agreement_f103_n4_k4": true,
+    "controller_backend_boundary_claimed": false,
+    "intermediate_boundary_projection_api_absent": true,
+    "missing_inverse_detected": true,
+    "null_carrier_rejected": true,
+    "odd_defect_sector_rejected": true,
+    "pfaffian_square_equals_determinant_f103_n3": true,
+    "premature_projection_rejected": true,
+    "reordered_inverse_control_applicable": false,
+    "reordered_inverse_reason": "TERMINAL_ENTRY_ADDITIONS_AND_SCALAR_SECTOR_ADDITIONS_COMMUTE",
+    "single_orientation_edge_flip_changes_pfaffian": true,
+    "snapshot_command_absent": true,
+    "undeclared_external_field_rejected_by_zero_field_gate": true,
+    "wrong_inverse_ownership_detected": true
+  },
+  "defect_growth": [
+    {
+      "defect_count": 0,
+      "even_sector_count": 1,
+      "executed": false,
+      "n": 6,
+      "status": "PUBLIC_EXACT_SECTOR_LAW_ONLY_NOT_A_LOWER_BOUND"
+    },
+    {
+      "defect_count": 1,
+      "even_sector_count": 1,
+      "executed": false,
+      "n": 6,
+      "status": "PUBLIC_EXACT_SECTOR_LAW_ONLY_NOT_A_LOWER_BOUND"
+    },
+    {
+      "defect_count": 2,
+      "even_sector_count": 2,
+      "executed": false,
+      "n": 6,
+      "status": "PUBLIC_EXACT_SECTOR_LAW_ONLY_NOT_A_LOWER_BOUND"
+    },
+    {
+      "defect_count": 3,
+      "even_sector_count": 4,
+      "executed": false,
+      "n": 6,
+      "status": "PUBLIC_EXACT_SECTOR_LAW_ONLY_NOT_A_LOWER_BOUND"
+    },
+    {
+      "defect_count": 4,
+      "even_sector_count": 8,
+      "executed": false,
+      "n": 6,
+      "status": "PUBLIC_EXACT_SECTOR_LAW_ONLY_NOT_A_LOWER_BOUND"
+    },
+    {
+      "defect_count": 5,
+      "even_sector_count": 16,
+      "executed": false,
+      "n": 6,
+      "status": "PUBLIC_EXACT_SECTOR_LAW_ONLY_NOT_A_LOWER_BOUND"
+    },
+    {
+      "defect_count": 6,
+      "even_sector_count": 32,
+      "executed": false,
+      "n": 6,
+      "status": "PUBLIC_EXACT_SECTOR_LAW_ONLY_NOT_A_LOWER_BOUND"
+    },
+    {
+      "defect_count": 7,
+      "even_sector_count": 64,
+      "executed": false,
+      "n": 6,
+      "status": "PUBLIC_EXACT_SECTOR_LAW_ONLY_NOT_A_LOWER_BOUND"
+    },
+    {
+      "defect_count": 8,
+      "even_sector_count": 128,
+      "executed": false,
+      "n": 6,
+      "status": "PUBLIC_EXACT_SECTOR_LAW_ONLY_NOT_A_LOWER_BOUND"
+    }
+  ],
+  "dual_field_structural_transactions": [
+    {
+      "boundary": 61,
+      "boundary_payload_bits": 7,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 3,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 138,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "83081e1a1b4a6101c88d692dd45301b5a37a9227c02c6508be600b2d6e484b53",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 63,
+      "n": 2,
+      "orientation_constrained_face_count": 1,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 44,
+        "divisions": 8,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 138,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 966,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_observed_field_element_payload_bits": 7,
+        "multiplications": 140,
+        "pivots": 8,
+        "subtractions": 44,
+        "swaps": 0,
+        "zero_tests": 8
+      },
+      "program_fingerprint": "f694ae942c22d2824183abe6f44e2bef6224ae8931c4774faaf9f1695d0ec6f1",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "4e5f48f45bf80f93f5271a609061340e6483447c6767838dfedd9a04aaaffe60",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 8,
+      "terminal_entry_load_additions": 16,
+      "terminal_entry_unload_additions": 16,
+      "terminal_plan_fingerprint": "be86412df4671566e3456328cd27f719687aec9b09bdc5dd6f50304d80aa2b44",
+      "terminal_vertex_count": 8,
+      "trivalent_edge_count": 4,
+      "trivalent_vertex_count": 4
+    },
+    {
+      "boundary": 65,
+      "boundary_payload_bits": 7,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 2,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 1810,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "5c01089a5154d94c5f65b935b770b8affafc3bd43edac1676022d2b26c22b4c4",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 280,
+      "n": 3,
+      "orientation_constrained_face_count": 10,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 3850,
+        "divisions": 30,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 1810,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 12670,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_observed_field_element_payload_bits": 7,
+        "multiplications": 11580,
+        "pivots": 30,
+        "subtractions": 3850,
+        "swaps": 0,
+        "zero_tests": 30
+      },
+      "program_fingerprint": "95535bb62b616804e89ef6192dbefde19bba2baec20bd7483deede6516f61ac5",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "eed3c7ea265b17637ae043632b385116dc455ee4f331f1f0346e539ae19e6d37",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 39,
+      "terminal_entry_load_additions": 78,
+      "terminal_entry_unload_additions": 78,
+      "terminal_plan_fingerprint": "8bc1933ed26bf5969b5621df0fc9ee1f22814a57d630c45c4e6f4cf7cb3ad253",
+      "terminal_vertex_count": 30,
+      "trivalent_edge_count": 15,
+      "trivalent_vertex_count": 12
+    },
+    {
+      "boundary": 65,
+      "boundary_payload_bits": 7,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 2,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 10378,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "f0417974bb8c017a14a3a1c8bf121721945be0fc7ade4d4545608bb790784d97",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 679,
+      "n": 4,
+      "orientation_constrained_face_count": 25,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 58380,
+        "divisions": 72,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 10378,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 72646,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_observed_field_element_payload_bits": 7,
+        "multiplications": 175212,
+        "pivots": 72,
+        "subtractions": 58380,
+        "swaps": 2,
+        "zero_tests": 74
+      },
+      "program_fingerprint": "7c320720c76a8c541106d5c5edfcad6fcdf86efe87eb698eaea5d7c661482775",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "139c119319a82cf9642a1fb7818808098e78a987b4aba0bc16249de9ed3fc72b",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 96,
+      "terminal_entry_load_additions": 192,
+      "terminal_entry_unload_additions": 192,
+      "terminal_plan_fingerprint": "e9f31ad37bdeef49600947df6be8c7ef9d20778784851b76b78b8f98138332fb",
+      "terminal_vertex_count": 72,
+      "trivalent_edge_count": 36,
+      "trivalent_vertex_count": 28
+    },
+    {
+      "boundary": 35,
+      "boundary_payload_bits": 7,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 0,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 35922,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "dcd39c6ef36b41d66d99002fbe802d0f6654185a388755f1475bef013ab2eb3c",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 1260,
+      "n": 5,
+      "orientation_constrained_face_count": 46,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 387662,
+        "divisions": 134,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 35922,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 251454,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_observed_field_element_payload_bits": 7,
+        "multiplications": 1163120,
+        "pivots": 134,
+        "subtractions": 387662,
+        "swaps": 0,
+        "zero_tests": 134
+      },
+      "program_fingerprint": "b8974efa2197a24418c7b17bf084aa2993d824be7b280385fcc6745dc8038469",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "f198684a80b61ae2261aa04f97405d74676da0e951a0fd9cdefa043b58268249",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 179,
+      "terminal_entry_load_additions": 358,
+      "terminal_entry_unload_additions": 358,
+      "terminal_plan_fingerprint": "950478cc1ff0d44e5e2fadb3397371d9e8dabee2bfdb15915db54105c76d85fe",
+      "terminal_vertex_count": 134,
+      "trivalent_edge_count": 67,
+      "trivalent_vertex_count": 52
+    },
+    {
+      "boundary": 98,
+      "boundary_payload_bits": 7,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 1,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 93322,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "680f4bda49984788fecd5a946cf651de68a72439875df0da15a5031473850a62",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 2023,
+      "n": 6,
+      "orientation_constrained_face_count": 73,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 1644804,
+        "divisions": 216,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 93322,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 653254,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_observed_field_element_payload_bits": 7,
+        "multiplications": 4934628,
+        "pivots": 216,
+        "subtractions": 1644804,
+        "swaps": 0,
+        "zero_tests": 216
+      },
+      "program_fingerprint": "4709f147928a6e154a7e2e387c2b310e1b9bcb0ee25e9d385c8bf8e0b858d9a0",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "ff370238955a608aeb19214ab3fbf0601c658549affccac21c8b10060b262afe",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 288,
+      "terminal_entry_load_additions": 576,
+      "terminal_entry_unload_additions": 576,
+      "terminal_plan_fingerprint": "6edc76fc0ba3d6fc14bd04267bc316e34438d5f8b6f0a97bfc518900086f0442",
+      "terminal_vertex_count": 216,
+      "trivalent_edge_count": 108,
+      "trivalent_vertex_count": 84
+    },
+    {
+      "boundary": 2,
+      "boundary_payload_bits": 7,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 15,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 202258,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "4a24ea6354773f8f74d9c508f3441db7a1613bdb2b5c81dbd670bab34eb44aeb",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 2968,
+      "n": 7,
+      "orientation_constrained_face_count": 106,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 5283994,
+        "divisions": 318,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 202258,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 1415806,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_observed_field_element_payload_bits": 7,
+        "multiplications": 15852300,
+        "pivots": 318,
+        "subtractions": 5283994,
+        "swaps": 0,
+        "zero_tests": 318
+      },
+      "program_fingerprint": "76ab2279e8ff02a626ef533c44ebd024976a07131e5e5667e3a14aa96b2e124e",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "1e4518341627c72ea9bec727f0f399d32c8d25b444ecc8bfa5c867fd690e619b",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 423,
+      "terminal_entry_load_additions": 846,
+      "terminal_entry_unload_additions": 846,
+      "terminal_plan_fingerprint": "ed980b3172d29f3f4d96ee9cc4e008e1b1ef60cbdf68099f641992b3d3dfdf7a",
+      "terminal_vertex_count": 318,
+      "trivalent_edge_count": 159,
+      "trivalent_vertex_count": 124
+    },
+    {
+      "boundary": 64,
+      "boundary_payload_bits": 7,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 0,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 387210,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "17a52207103d8d84ba0d34eb7ad9abb72ea4b1cfbcdf7250153f2817be7660a9",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 4095,
+      "n": 8,
+      "orientation_constrained_face_count": 145,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 14052500,
+        "divisions": 440,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 387210,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 2710470,
+        "maximum_numerator_signed_bits": 7,
+        "maximum_observed_field_element_payload_bits": 7,
+        "multiplications": 42157940,
+        "pivots": 440,
+        "subtractions": 14052500,
+        "swaps": 0,
+        "zero_tests": 440
+      },
+      "program_fingerprint": "487bfc57863768c660ffc803386025174cade0679618598f2e19e7c1ffe337b0",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "39827d20fcb04d8772012db90e544ecbc7624dd76fa1c0a2679a17a38a9cd6db",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 584,
+      "terminal_entry_load_additions": 1168,
+      "terminal_entry_unload_additions": 1168,
+      "terminal_plan_fingerprint": "33b8bca4573fc7689e88b58859863822169194bfbf0edcd1749261fcd2268b88",
+      "terminal_vertex_count": 440,
+      "trivalent_edge_count": 220,
+      "trivalent_vertex_count": 172
+    },
+    {
+      "boundary": 135,
+      "boundary_payload_bits": 8,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 3,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 138,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "83081e1a1b4a6101c88d692dd45301b5a37a9227c02c6508be600b2d6e484b53",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 72,
+      "n": 2,
+      "orientation_constrained_face_count": 1,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 44,
+        "divisions": 8,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 138,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 1104,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_observed_field_element_payload_bits": 8,
+        "multiplications": 140,
+        "pivots": 8,
+        "subtractions": 44,
+        "swaps": 0,
+        "zero_tests": 8
+      },
+      "program_fingerprint": "f694ae942c22d2824183abe6f44e2bef6224ae8931c4774faaf9f1695d0ec6f1",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "4e5f48f45bf80f93f5271a609061340e6483447c6767838dfedd9a04aaaffe60",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 8,
+      "terminal_entry_load_additions": 16,
+      "terminal_entry_unload_additions": 16,
+      "terminal_plan_fingerprint": "be86412df4671566e3456328cd27f719687aec9b09bdc5dd6f50304d80aa2b44",
+      "terminal_vertex_count": 8,
+      "trivalent_edge_count": 4,
+      "trivalent_vertex_count": 4
+    },
+    {
+      "boundary": 48,
+      "boundary_payload_bits": 8,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 2,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 1810,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "5c01089a5154d94c5f65b935b770b8affafc3bd43edac1676022d2b26c22b4c4",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 320,
+      "n": 3,
+      "orientation_constrained_face_count": 10,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 3850,
+        "divisions": 30,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 1810,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 14480,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_observed_field_element_payload_bits": 8,
+        "multiplications": 11580,
+        "pivots": 30,
+        "subtractions": 3850,
+        "swaps": 0,
+        "zero_tests": 30
+      },
+      "program_fingerprint": "95535bb62b616804e89ef6192dbefde19bba2baec20bd7483deede6516f61ac5",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "eed3c7ea265b17637ae043632b385116dc455ee4f331f1f0346e539ae19e6d37",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 39,
+      "terminal_entry_load_additions": 78,
+      "terminal_entry_unload_additions": 78,
+      "terminal_plan_fingerprint": "8bc1933ed26bf5969b5621df0fc9ee1f22814a57d630c45c4e6f4cf7cb3ad253",
+      "terminal_vertex_count": 30,
+      "trivalent_edge_count": 15,
+      "trivalent_vertex_count": 12
+    },
+    {
+      "boundary": 6,
+      "boundary_payload_bits": 8,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 2,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 10378,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "f0417974bb8c017a14a3a1c8bf121721945be0fc7ade4d4545608bb790784d97",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 776,
+      "n": 4,
+      "orientation_constrained_face_count": 25,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 58380,
+        "divisions": 72,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 10378,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 83024,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_observed_field_element_payload_bits": 8,
+        "multiplications": 175212,
+        "pivots": 72,
+        "subtractions": 58380,
+        "swaps": 0,
+        "zero_tests": 72
+      },
+      "program_fingerprint": "7c320720c76a8c541106d5c5edfcad6fcdf86efe87eb698eaea5d7c661482775",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "139c119319a82cf9642a1fb7818808098e78a987b4aba0bc16249de9ed3fc72b",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 96,
+      "terminal_entry_load_additions": 192,
+      "terminal_entry_unload_additions": 192,
+      "terminal_plan_fingerprint": "e9f31ad37bdeef49600947df6be8c7ef9d20778784851b76b78b8f98138332fb",
+      "terminal_vertex_count": 72,
+      "trivalent_edge_count": 36,
+      "trivalent_vertex_count": 28
+    },
+    {
+      "boundary": 127,
+      "boundary_payload_bits": 8,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 0,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 35922,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "dcd39c6ef36b41d66d99002fbe802d0f6654185a388755f1475bef013ab2eb3c",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 1440,
+      "n": 5,
+      "orientation_constrained_face_count": 46,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 387662,
+        "divisions": 134,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 35922,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 287376,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_observed_field_element_payload_bits": 8,
+        "multiplications": 1163120,
+        "pivots": 134,
+        "subtractions": 387662,
+        "swaps": 0,
+        "zero_tests": 134
+      },
+      "program_fingerprint": "b8974efa2197a24418c7b17bf084aa2993d824be7b280385fcc6745dc8038469",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "f198684a80b61ae2261aa04f97405d74676da0e951a0fd9cdefa043b58268249",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 179,
+      "terminal_entry_load_additions": 358,
+      "terminal_entry_unload_additions": 358,
+      "terminal_plan_fingerprint": "950478cc1ff0d44e5e2fadb3397371d9e8dabee2bfdb15915db54105c76d85fe",
+      "terminal_vertex_count": 134,
+      "trivalent_edge_count": 67,
+      "trivalent_vertex_count": 52
+    },
+    {
+      "boundary": 74,
+      "boundary_payload_bits": 8,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 1,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 93322,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "680f4bda49984788fecd5a946cf651de68a72439875df0da15a5031473850a62",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 2312,
+      "n": 6,
+      "orientation_constrained_face_count": 73,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 1644804,
+        "divisions": 216,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 93322,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 746576,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_observed_field_element_payload_bits": 8,
+        "multiplications": 4934628,
+        "pivots": 216,
+        "subtractions": 1644804,
+        "swaps": 2,
+        "zero_tests": 218
+      },
+      "program_fingerprint": "4709f147928a6e154a7e2e387c2b310e1b9bcb0ee25e9d385c8bf8e0b858d9a0",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "ff370238955a608aeb19214ab3fbf0601c658549affccac21c8b10060b262afe",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 288,
+      "terminal_entry_load_additions": 576,
+      "terminal_entry_unload_additions": 576,
+      "terminal_plan_fingerprint": "6edc76fc0ba3d6fc14bd04267bc316e34438d5f8b6f0a97bfc518900086f0442",
+      "terminal_vertex_count": 216,
+      "trivalent_edge_count": 108,
+      "trivalent_vertex_count": 84
+    },
+    {
+      "boundary": 98,
+      "boundary_payload_bits": 8,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 15,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 202258,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "4a24ea6354773f8f74d9c508f3441db7a1613bdb2b5c81dbd670bab34eb44aeb",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 3392,
+      "n": 7,
+      "orientation_constrained_face_count": 106,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 5283994,
+        "divisions": 318,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 202258,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 1618064,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_observed_field_element_payload_bits": 8,
+        "multiplications": 15852300,
+        "pivots": 318,
+        "subtractions": 5283994,
+        "swaps": 0,
+        "zero_tests": 318
+      },
+      "program_fingerprint": "76ab2279e8ff02a626ef533c44ebd024976a07131e5e5667e3a14aa96b2e124e",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "1e4518341627c72ea9bec727f0f399d32c8d25b444ecc8bfa5c867fd690e619b",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 423,
+      "terminal_entry_load_additions": 846,
+      "terminal_entry_unload_additions": 846,
+      "terminal_plan_fingerprint": "ed980b3172d29f3f4d96ee9cc4e008e1b1ef60cbdf68099f641992b3d3dfdf7a",
+      "terminal_vertex_count": 318,
+      "trivalent_edge_count": 159,
+      "trivalent_vertex_count": 124
+    },
+    {
+      "boundary": 44,
+      "boundary_payload_bits": 8,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 0,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 387210,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "17a52207103d8d84ba0d34eb7ad9abb72ea4b1cfbcdf7250153f2817be7660a9",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "maximum_resident_phase_payload_bits": 4680,
+      "n": 8,
+      "orientation_constrained_face_count": 145,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 14052500,
+        "divisions": 440,
+        "maximum_denominator_bits": 1,
+        "maximum_dense_work_field_cells": 387210,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 3097680,
+        "maximum_numerator_signed_bits": 8,
+        "maximum_observed_field_element_payload_bits": 8,
+        "multiplications": 42157940,
+        "pivots": 440,
+        "subtractions": 14052500,
+        "swaps": 2,
+        "zero_tests": 442
+      },
+      "program_fingerprint": "487bfc57863768c660ffc803386025174cade0679618598f2e19e7c1ffe337b0",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "39827d20fcb04d8772012db90e544ecbc7624dd76fa1c0a2679a17a38a9cd6db",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 584,
+      "terminal_entry_load_additions": 1168,
+      "terminal_entry_unload_additions": 1168,
+      "terminal_plan_fingerprint": "33b8bca4573fc7689e88b58859863822169194bfbf0edcd1749261fcd2268b88",
+      "terminal_vertex_count": 440,
+      "trivalent_edge_count": 220,
+      "trivalent_vertex_count": 172
+    }
+  ],
+  "exact_transactions": [
+    {
+      "boundary": [
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "boundary_payload_bits": 47,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 3,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 138,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "2b896c3ed5ad51cf835b15b7f2cf7d55cb561937fc77945be208ddd333923f24",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "matched_classical": {
+        "algorithm": "IDENTICAL_SQUARE_ROOT_FREE_TERMINAL_PFAFFIAN",
+        "pfaffian_stats": {
+          "additions": 22,
+          "divisions": 4,
+          "maximum_denominator_bits": 9,
+          "maximum_dense_work_field_cells": 138,
+          "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 36984,
+          "maximum_numerator_signed_bits": 10,
+          "maximum_observed_field_element_payload_bits": 268,
+          "multiplications": 70,
+          "pivots": 4,
+          "subtractions": 22,
+          "swaps": 0,
+          "zero_tests": 4
+        },
+        "restoration_class": "NO_RESTORATION_CLAIM"
+      },
+      "matched_classical_boundary_agreement": true,
+      "maximum_resident_phase_payload_bits": 400,
+      "n": 2,
+      "orientation_constrained_face_count": 1,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 44,
+        "divisions": 8,
+        "maximum_denominator_bits": 9,
+        "maximum_dense_work_field_cells": 138,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 36984,
+        "maximum_numerator_signed_bits": 10,
+        "maximum_observed_field_element_payload_bits": 268,
+        "multiplications": 140,
+        "pivots": 8,
+        "subtractions": 44,
+        "swaps": 0,
+        "zero_tests": 8
+      },
+      "program_fingerprint": "f694ae942c22d2824183abe6f44e2bef6224ae8931c4774faaf9f1695d0ec6f1",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "fa148e4e881ae1982b4160e68659e944ab58304bd6f3f5fc22e20f22e2409d9d",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 8,
+      "terminal_entry_load_additions": 16,
+      "terminal_entry_unload_additions": 16,
+      "terminal_plan_fingerprint": "be86412df4671566e3456328cd27f719687aec9b09bdc5dd6f50304d80aa2b44",
+      "terminal_vertex_count": 8,
+      "trivalent_edge_count": 4,
+      "trivalent_vertex_count": 4
+    },
+    {
+      "boundary": [
+        [
+          4,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          6,
+          1
+        ]
+      ],
+      "boundary_payload_bits": 72,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 2,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 1810,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "e504798c1913d2085d05a016b1e063e586d005bdb74ea231a843e3bb2c36e388",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "matched_classical": {
+        "algorithm": "IDENTICAL_SQUARE_ROOT_FREE_TERMINAL_PFAFFIAN",
+        "pfaffian_stats": {
+          "additions": 1925,
+          "divisions": 15,
+          "maximum_denominator_bits": 47,
+          "maximum_dense_work_field_cells": 1810,
+          "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 2747580,
+          "maximum_numerator_signed_bits": 55,
+          "maximum_observed_field_element_payload_bits": 1518,
+          "multiplications": 5790,
+          "pivots": 15,
+          "subtractions": 1925,
+          "swaps": 0,
+          "zero_tests": 15
+        },
+        "restoration_class": "NO_RESTORATION_CLAIM"
+      },
+      "matched_classical_boundary_agreement": true,
+      "maximum_resident_phase_payload_bits": 1581,
+      "n": 3,
+      "orientation_constrained_face_count": 10,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 3850,
+        "divisions": 30,
+        "maximum_denominator_bits": 47,
+        "maximum_dense_work_field_cells": 1810,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 2747580,
+        "maximum_numerator_signed_bits": 55,
+        "maximum_observed_field_element_payload_bits": 1518,
+        "multiplications": 11580,
+        "pivots": 30,
+        "subtractions": 3850,
+        "swaps": 0,
+        "zero_tests": 30
+      },
+      "program_fingerprint": "95535bb62b616804e89ef6192dbefde19bba2baec20bd7483deede6516f61ac5",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "e27c67e256602ed6351187d13370ae2f709a6ea001a42ad88a572e74883ab667",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 39,
+      "terminal_entry_load_additions": 78,
+      "terminal_entry_unload_additions": 78,
+      "terminal_plan_fingerprint": "8bc1933ed26bf5969b5621df0fc9ee1f22814a57d630c45c4e6f4cf7cb3ad253",
+      "terminal_vertex_count": 30,
+      "trivalent_edge_count": 15,
+      "trivalent_vertex_count": 12
+    },
+    {
+      "boundary": [
+        [
+          16,
+          1
+        ],
+        [
+          -100,
+          1
+        ],
+        [
+          18,
+          1
+        ],
+        [
+          -100,
+          1
+        ],
+        [
+          16,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          256,
+          1
+        ],
+        [
+          36,
+          1
+        ],
+        [
+          166,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          -110,
+          1
+        ],
+        [
+          -110,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          166,
+          1
+        ],
+        [
+          36,
+          1
+        ],
+        [
+          256,
+          1
+        ]
+      ],
+      "boundary_payload_bits": 129,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 2,
+      "defect_count": 0,
+      "dense_projection_work_field_cells": 10378,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "bed28ed6a25cb0151f8cffa62b76c4621ace53b591fae4d5c956f998d1fdf881",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "matched_classical": {
+        "algorithm": "IDENTICAL_SQUARE_ROOT_FREE_TERMINAL_PFAFFIAN",
+        "pfaffian_stats": {
+          "additions": 29190,
+          "divisions": 36,
+          "maximum_denominator_bits": 105,
+          "maximum_dense_work_field_cells": 10378,
+          "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 33261490,
+          "maximum_numerator_signed_bits": 111,
+          "maximum_observed_field_element_payload_bits": 3205,
+          "multiplications": 87606,
+          "pivots": 36,
+          "subtractions": 29190,
+          "swaps": 0,
+          "zero_tests": 36
+        },
+        "restoration_class": "NO_RESTORATION_CLAIM"
+      },
+      "matched_classical_boundary_agreement": true,
+      "maximum_resident_phase_payload_bits": 3950,
+      "n": 4,
+      "orientation_constrained_face_count": 25,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 58380,
+        "divisions": 72,
+        "maximum_denominator_bits": 105,
+        "maximum_dense_work_field_cells": 10378,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 33261490,
+        "maximum_numerator_signed_bits": 111,
+        "maximum_observed_field_element_payload_bits": 3205,
+        "multiplications": 175212,
+        "pivots": 72,
+        "subtractions": 58380,
+        "swaps": 0,
+        "zero_tests": 72
+      },
+      "program_fingerprint": "7c320720c76a8c541106d5c5edfcad6fcdf86efe87eb698eaea5d7c661482775",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "9e36ba719889179b6365ef14ee4736873c16c792e6925642b2882ad696d655bf",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 96,
+      "terminal_entry_load_additions": 192,
+      "terminal_entry_unload_additions": 192,
+      "terminal_plan_fingerprint": "e9f31ad37bdeef49600947df6be8c7ef9d20778784851b76b78b8f98138332fb",
+      "terminal_vertex_count": 72,
+      "trivalent_edge_count": 36,
+      "trivalent_vertex_count": 28
+    },
+    {
+      "boundary": [
+        [
+          -120,
+          1
+        ],
+        [
+          -170,
+          1
+        ],
+        [
+          -169,
+          1
+        ],
+        [
+          -169,
+          1
+        ],
+        [
+          -170,
+          1
+        ],
+        [
+          -120,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          18,
+          1
+        ],
+        [
+          -27,
+          1
+        ],
+        [
+          -41,
+          1
+        ],
+        [
+          -179,
+          1
+        ],
+        [
+          -238,
+          1
+        ],
+        [
+          -179,
+          1
+        ],
+        [
+          -41,
+          1
+        ],
+        [
+          -27,
+          1
+        ],
+        [
+          18,
+          1
+        ]
+      ],
+      "boundary_payload_bits": 134,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 11,
+      "defect_count": 1,
+      "dense_projection_work_field_cells": 10378,
+      "even_sector_count": 1,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "bed28ed6a25cb0151f8cffa62b76c4621ace53b591fae4d5c956f998d1fdf881",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 2,
+      "inverse_history_retained": false,
+      "matched_classical": {
+        "algorithm": "IDENTICAL_SQUARE_ROOT_FREE_TERMINAL_PFAFFIAN",
+        "pfaffian_stats": {
+          "additions": 29190,
+          "divisions": 36,
+          "maximum_denominator_bits": 105,
+          "maximum_dense_work_field_cells": 10378,
+          "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 33261490,
+          "maximum_numerator_signed_bits": 111,
+          "maximum_observed_field_element_payload_bits": 3205,
+          "multiplications": 87606,
+          "pivots": 36,
+          "subtractions": 29190,
+          "swaps": 0,
+          "zero_tests": 36
+        },
+        "restoration_class": "NO_RESTORATION_CLAIM"
+      },
+      "matched_classical_boundary_agreement": true,
+      "maximum_resident_phase_payload_bits": 3973,
+      "n": 4,
+      "orientation_constrained_face_count": 25,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 58380,
+        "divisions": 72,
+        "maximum_denominator_bits": 105,
+        "maximum_dense_work_field_cells": 10378,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 33261490,
+        "maximum_numerator_signed_bits": 111,
+        "maximum_observed_field_element_payload_bits": 3205,
+        "multiplications": 175212,
+        "pivots": 72,
+        "subtractions": 58380,
+        "swaps": 0,
+        "zero_tests": 72
+      },
+      "program_fingerprint": "4e405ea8366b25ee5a11378a7f41fc9e648bbdaff67cc394030dd2729ac581a0",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "9e36ba719889179b6365ef14ee4736873c16c792e6925642b2882ad696d655bf",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 2,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 96,
+      "terminal_entry_load_additions": 192,
+      "terminal_entry_unload_additions": 192,
+      "terminal_plan_fingerprint": "e9f31ad37bdeef49600947df6be8c7ef9d20778784851b76b78b8f98138332fb",
+      "terminal_vertex_count": 72,
+      "trivalent_edge_count": 36,
+      "trivalent_vertex_count": 28
+    },
+    {
+      "boundary": [
+        [
+          -18,
+          1
+        ],
+        [
+          29,
+          1
+        ],
+        [
+          -101,
+          1
+        ],
+        [
+          -226,
+          1
+        ],
+        [
+          -37,
+          1
+        ],
+        [
+          -112,
+          1
+        ],
+        [
+          -123,
+          1
+        ],
+        [
+          -8,
+          1
+        ],
+        [
+          49,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -58,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          -141,
+          1
+        ],
+        [
+          -213,
+          1
+        ],
+        [
+          -72,
+          1
+        ],
+        [
+          52,
+          1
+        ]
+      ],
+      "boundary_payload_bits": 127,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 12,
+      "defect_count": 2,
+      "dense_projection_work_field_cells": 10378,
+      "even_sector_count": 2,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "bed28ed6a25cb0151f8cffa62b76c4621ace53b591fae4d5c956f998d1fdf881",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 4,
+      "inverse_history_retained": false,
+      "matched_classical": {
+        "algorithm": "IDENTICAL_SQUARE_ROOT_FREE_TERMINAL_PFAFFIAN",
+        "pfaffian_stats": {
+          "additions": 58380,
+          "divisions": 72,
+          "maximum_denominator_bits": 105,
+          "maximum_dense_work_field_cells": 10378,
+          "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 33261490,
+          "maximum_numerator_signed_bits": 111,
+          "maximum_observed_field_element_payload_bits": 3205,
+          "multiplications": 175212,
+          "pivots": 72,
+          "subtractions": 58380,
+          "swaps": 0,
+          "zero_tests": 72
+        },
+        "restoration_class": "NO_RESTORATION_CLAIM"
+      },
+      "matched_classical_boundary_agreement": true,
+      "maximum_resident_phase_payload_bits": 4027,
+      "n": 4,
+      "orientation_constrained_face_count": 25,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 116760,
+        "divisions": 144,
+        "maximum_denominator_bits": 105,
+        "maximum_dense_work_field_cells": 10378,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 33261490,
+        "maximum_numerator_signed_bits": 111,
+        "maximum_observed_field_element_payload_bits": 3205,
+        "multiplications": 350424,
+        "pivots": 144,
+        "subtractions": 116760,
+        "swaps": 0,
+        "zero_tests": 144
+      },
+      "program_fingerprint": "07250c8cafbff7a71a7eb5225f926d8663d25d98755b6ba3bbf5b1930d6e8ad8",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "9e36ba719889179b6365ef14ee4736873c16c792e6925642b2882ad696d655bf",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 4,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 96,
+      "terminal_entry_load_additions": 384,
+      "terminal_entry_unload_additions": 384,
+      "terminal_plan_fingerprint": "e9f31ad37bdeef49600947df6be8c7ef9d20778784851b76b78b8f98138332fb",
+      "terminal_vertex_count": 72,
+      "trivalent_edge_count": 36,
+      "trivalent_vertex_count": 28
+    },
+    {
+      "boundary": [
+        [
+          86,
+          1
+        ],
+        [
+          208,
+          1
+        ],
+        [
+          117,
+          1
+        ],
+        [
+          -89,
+          1
+        ],
+        [
+          -55,
+          1
+        ],
+        [
+          -101,
+          1
+        ],
+        [
+          -128,
+          1
+        ],
+        [
+          -26,
+          1
+        ],
+        [
+          179,
+          1
+        ],
+        [
+          110,
+          1
+        ],
+        [
+          90,
+          1
+        ],
+        [
+          112,
+          1
+        ],
+        [
+          13,
+          1
+        ],
+        [
+          -124,
+          1
+        ],
+        [
+          -75,
+          1
+        ],
+        [
+          24,
+          1
+        ]
+      ],
+      "boundary_payload_bits": 139,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "constant_exponent": 7,
+      "defect_count": 4,
+      "dense_projection_work_field_cells": 10378,
+      "even_sector_count": 8,
+      "exact_phase_cells_restored": true,
+      "family": "PRIMARY",
+      "field_residue_vector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        4,
+        0,
+        0,
+        6,
+        8,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "bed28ed6a25cb0151f8cffa62b76c4621ace53b591fae4d5c956f998d1fdf881",
+      "intermediate_boundary_projection_calls": 0,
+      "internal_sector_pfaffian_evaluations": 16,
+      "inverse_history_retained": false,
+      "matched_classical": {
+        "algorithm": "IDENTICAL_SQUARE_ROOT_FREE_TERMINAL_PFAFFIAN",
+        "pfaffian_stats": {
+          "additions": 233520,
+          "divisions": 288,
+          "maximum_denominator_bits": 110,
+          "maximum_dense_work_field_cells": 10378,
+          "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 35150286,
+          "maximum_numerator_signed_bits": 117,
+          "maximum_observed_field_element_payload_bits": 3387,
+          "multiplications": 700848,
+          "pivots": 288,
+          "subtractions": 233520,
+          "swaps": 0,
+          "zero_tests": 288
+        },
+        "restoration_class": "NO_RESTORATION_CLAIM"
+      },
+      "matched_classical_boundary_agreement": true,
+      "maximum_resident_phase_payload_bits": 4084,
+      "n": 4,
+      "orientation_constrained_face_count": 25,
+      "orientation_face_parity_verified": true,
+      "pfaffian_stats": {
+        "additions": 467040,
+        "divisions": 576,
+        "maximum_denominator_bits": 110,
+        "maximum_dense_work_field_cells": 10378,
+        "maximum_named_dense_work_payload_bits_upper_bound_from_observed_field_value": 35150286,
+        "maximum_numerator_signed_bits": 117,
+        "maximum_observed_field_element_payload_bits": 3387,
+        "multiplications": 1401696,
+        "pivots": 576,
+        "subtractions": 467040,
+        "swaps": 0,
+        "zero_tests": 576
+      },
+      "program_fingerprint": "b46fb2f5416430015803e55668a862e98d13b42481db470e021d69d091175d90",
+      "projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "9e36ba719889179b6365ef14ee4736873c16c792e6925642b2882ad696d655bf",
+      "same_backing": true,
+      "scalar_accumulator_forward_and_inverse_updates": 16,
+      "snapshot_reload_used": false,
+      "sparse_resident_terminal_field_cells": 96,
+      "terminal_entry_load_additions": 1536,
+      "terminal_entry_unload_additions": 1536,
+      "terminal_plan_fingerprint": "e9f31ad37bdeef49600947df6be8c7ef9d20778784851b76b78b8f98138332fb",
+      "terminal_vertex_count": 72,
+      "trivalent_edge_count": 36,
+      "trivalent_vertex_count": 28
+    }
+  ],
+  "matched_baselines": {
+    "defect_expansion": "STREAMED_2_TO_THE_K_MINUS_1_PFAFFIANS_IS_AN_UPPER_BOUND_NOT_A_LOWER_BOUND",
+    "general_field_fallback": "M120_ROW_TRANSFER_O_N2_2N_WORK_AND_2N_FIELD_CELLS_INDEPENDENT_OF_DEFECT_COUNT",
+    "phase_advantage_over_matched_classical": false,
+    "strongest_implemented": "IDENTICAL_SQUARE_ROOT_FREE_TERMINAL_PFAFFIAN",
+    "strongest_known_compact_zero_field": "IDENTICAL_EVEN_GAUSSIAN_BOUNDARY_COVARIANCE_OR_SPARSE_PLANAR_PFAFFIAN"
+  },
+  "next_experiment": "EXACT_SHARED_PHASE_PARITY_LEDGER_FOR_SPARSE_NON_GAUSSIAN_FIELD_INSERTIONS_WITHOUT_EVEN_SECTOR_ENUMERATION_OR_A_PROOF_THAT_THE_LEDGER_RANK_MUST_GROW",
+  "next_obstruction": "ZERO_FIELD_FREE_FERMION_CLOSURE_IS_IDENTICAL_TO_COMPACT_CLASSICAL_GAUSSIAN_SOFTWARE_WHILE_TRUE_EXTERNAL_FIELDS SPLIT_INTO_2_TO_THE_K_MINUS_1_EVEN_GAUSSIAN_SECTORS_AND_NO_PHASE_NATIVE_OPERATION_CURRENTLY_CLOSES_THEIR_SUM_WITHOUT_MOVING_THAT_GROWTH",
+  "resource_accounting": {
+    "allocator_and_native_library_overhead_excluded": true,
+    "controller_backend_traffic": "DIRECT_PROCESS_NO_CATVM_TRAFFIC",
+    "defect_sector_count_counted": true,
+    "dense_named_logical_payload_is_an_upper_bound_from_every_observed_field_temporary": true,
+    "dense_pfaffian_projection_buffers_counted": true,
+    "exact_phase_coefficient_height_observed": true,
+    "forward_and_inverse_rematerialization_counted": true,
+    "nested_dissection_not_implemented": true,
+    "pfaffian_pivots_and_exact_divisions_counted": true,
+    "public_topology_orientation_compilation_counted": true,
+    "python_container_sympy_and_native_internal_payload_excluded": true,
+    "sparse_terminal_phase_cells_counted": true
+  },
+  "restoration": {
+    "dense_pfaffian_projection_buffers": "NO_RESTORATION_CLAIM",
+    "inverse_history_retained": false,
+    "resident_terminal_and_scalar_carrier": "EXACT_ALGEBRAIC_RESTORATION",
+    "snapshot_reload_used": false
+  },
+  "reuse": {
+    "baseline_reload_used": false,
+    "first_boundary": [
+      [
+        16,
+        1
+      ],
+      [
+        -100,
+        1
+      ],
+      [
+        18,
+        1
+      ],
+      [
+        -100,
+        1
+      ],
+      [
+        16,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        256,
+        1
+      ],
+      [
+        36,
+        1
+      ],
+      [
+        166,
+        1
+      ],
+      [
+        8,
+        1
+      ],
+      [
+        -110,
+        1
+      ],
+      [
+        -110,
+        1
+      ],
+      [
+        8,
+        1
+      ],
+      [
+        166,
+        1
+      ],
+      [
+        36,
+        1
+      ],
+      [
+        256,
+        1
+      ]
+    ],
+    "fresh_boundary": [
+      [
+        -141,
+        1
+      ],
+      [
+        -30,
+        1
+      ],
+      [
+        -66,
+        1
+      ],
+      [
+        -61,
+        1
+      ],
+      [
+        -28,
+        1
+      ],
+      [
+        -97,
+        1
+      ],
+      [
+        6,
+        1
+      ],
+      [
+        -89,
+        1
+      ],
+      [
+        -34,
+        1
+      ],
+      [
+        -33,
+        1
+      ],
+      [
+        -97,
+        1
+      ],
+      [
+        -16,
+        1
+      ],
+      [
+        -118,
+        1
+      ],
+      [
+        16,
+        1
+      ],
+      [
+        -73,
+        1
+      ],
+      [
+        -73,
+        1
+      ]
+    ],
+    "fresh_restored_boundary_agreement": true,
+    "generation_after_two_transactions": 2,
+    "reused_boundary": [
+      [
+        -141,
+        1
+      ],
+      [
+        -30,
+        1
+      ],
+      [
+        -66,
+        1
+      ],
+      [
+        -61,
+        1
+      ],
+      [
+        -28,
+        1
+      ],
+      [
+        -97,
+        1
+      ],
+      [
+        6,
+        1
+      ],
+      [
+        -89,
+        1
+      ],
+      [
+        -34,
+        1
+      ],
+      [
+        -33,
+        1
+      ],
+      [
+        -97,
+        1
+      ],
+      [
+        -16,
+        1
+      ],
+      [
+        -118,
+        1
+      ],
+      [
+        16,
+        1
+      ],
+      [
+        -73,
+        1
+      ],
+      [
+        -73,
+        1
+      ]
+    ],
+    "same_actual_backing_across_unrelated_programs": true
+  },
+  "schema": "CAT_CAS_F17_PLANAR_FREE_FERMION_PHASE_COVARIANCE_CLOSURE_V1",
+  "source_scope": {
+    "defect_growth_law_only": {
+      "k": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "n": 6
+    },
+    "dual_field_structural_widths": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "exact_defect_execution": {
+      "k": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "n": 4
+    },
+    "exact_q_zeta17_widths": [
+      2,
+      3,
+      4
+    ],
+    "topology": "OPEN_PLANAR_SQUARE_GRIDS_ONLY"
+  },
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}

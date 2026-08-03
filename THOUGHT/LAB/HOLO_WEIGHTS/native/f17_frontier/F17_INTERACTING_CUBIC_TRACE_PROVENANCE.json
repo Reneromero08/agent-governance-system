@@ -1,0 +1,27 @@
+{
+  "result": "SEALED",
+  "scope": "F17_INTERACTING_CUBIC_LATENT_TRACE_DIAGNOSTIC",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "files": {
+    "f17_interacting_cubic_latent_trace_diagnostic.py": "4d8b56b8387c34449a40f0ad2f02b02e6adac959e929edf4f906bf156c8e805e",
+    "f17_gaussian_multi_port_phase_quotient.py": "823f1193dfb24afe3d933b80ccad006cdc1cc78142ee9e4790b019f1df1ca176",
+    "f17_interacting_cubic_latent_trace_oracle.py": "9bacd279ab9d28a483a23d9e4189bbdb4ea159d413ea46ff140f93a4ccbeb28e",
+    "F17_INTERACTING_CUBIC_TRACE_RESULTS.json": "123f4b7ad5a5b884c3216fb37c78253607f1829e85fe4fe075740e2c46d0f3ae",
+    "F17_INTERACTING_CUBIC_TRACE_ORACLE_RESULTS.json": "fc23bab10d84cbd3115fc5e0991a35e6cef96ab537877531f4d51eeab893ed0b"
+  },
+  "sealed_claim_ceiling": "fixed public ports 4 with latent counts 1, 2, 3, 4 plus dense oracle case ports 2 / latents 2; two public program families; exact F17 recurrence; streamed 17^k final trace; software only",
+  "independent_scope": "separate Python-list exact recurrence for all cases plus a dense complex latent-axis parity check at ports 2 / latents 2",
+  "excluded_interpretations": [
+    "compact multiple-latent final closure",
+    "native cubic-interaction update",
+    "arbitrary non-Gaussian composition",
+    "machine-enforced CATVM custody",
+    "distinct phase resource",
+    "computational advantage",
+    "Small Wall crossing",
+    "physical waveform execution",
+    "unbounded computation"
+  ]
+}

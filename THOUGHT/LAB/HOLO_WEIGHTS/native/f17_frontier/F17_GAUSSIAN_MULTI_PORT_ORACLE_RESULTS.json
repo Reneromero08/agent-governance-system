@@ -1,0 +1,71 @@
+{
+  "all_dense_metrics_within_tolerance": true,
+  "all_exact_boundaries_equal": true,
+  "all_exact_restorations_equal": true,
+  "computational_advantage": false,
+  "dense_logical_vector_cells_are_not_process_peak": true,
+  "dense_oracle_is_accepted_compact_carrier_path": false,
+  "dense_phase_vector_materialized": [
+    true,
+    true,
+    false,
+    false,
+    false
+  ],
+  "dense_tested_ports": [
+    2,
+    4
+  ],
+  "distinct_phase_resource_established": false,
+  "exact_formula_supported_by_numerical_parity_at_dense_ports": true,
+  "exact_reference_f17_field_cells": [
+    7,
+    21,
+    73,
+    273,
+    1057
+  ],
+  "exact_reference_reexecutes_all_tested_ports": true,
+  "exact_reference_uses_compact_quadratic_coefficients": true,
+  "maximum_verification_dense_logical_complex_cells": 83521,
+  "numpy_dense_oracle_process_peak_bounded": false,
+  "oracle": "SEPARATE_PYTHON_INTEGER_F17_GAUSSIAN_RECURRENCE_PLUS_EXPLICIT_COMPLEX_PHASE_VECTOR_PARITY",
+  "predeclared_tolerance": 2E-11,
+  "primary_program_sha256": [
+    "a83ce54dc7d6f92811d0d35e6f9fe3dc176765f32d6b276c6a0cd92f9a5959bc",
+    "00d6e7c6edc7cf5aab7771efe5fc343b701214a07e07085d148e9b83e387916d",
+    "6871ea5876f0747f464c2b4905e523331ad300cae8777ab4312d81b5db9315fe",
+    "f16834fd48e3bb80746bad972322a1739e8c84cd15dc83c8d6e26e7f9a53552e",
+    "8273edbb06e65f3221afb62984485aff92a4bf03c30c9d0ac37ca741e86cd41f"
+  ],
+  "production_backend_imported": false,
+  "production_compiler_called": false,
+  "production_projection_called": false,
+  "public_descriptors_consumed": true,
+  "result": "PASS",
+  "reuse_program_sha256": [
+    "2139eb912e09894f38b95f9388a70a301853259ee99414cfd9de77d7825ded16",
+    "7b0122e386e8daa18cd01b67732c2e724801edb6446a72155d9f66a5c64c35d9",
+    "ed570dc3066bc13163b5e98b8fef5a402e1d0dd70fb79aa570eff7bf07374cda",
+    "f8f05fc2d7195db6ec8fdc0fdef94932090c4d0e608556b74e25ca04ea5c36e0",
+    "145ee58f408e0bc4962ea2ba8b605ad688005c10ae7913ecbc9106698873feb2"
+  ],
+  "small_wall_crossed": false,
+  "terminal": false,
+  "tested_ports": [
+    2,
+    4,
+    8,
+    16,
+    32
+  ],
+  "verification_assignment_expansion_materialized": true,
+  "verification_dense_logical_complex_cells": [
+    289,
+    83521,
+    0,
+    0,
+    0
+  ],
+  "verification_dense_logical_vector_cells_counted": true
+}

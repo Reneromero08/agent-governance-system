@@ -1,0 +1,38 @@
+{
+  "result": "SEALED",
+  "scope": "F17_PERIOD17_CUBIC_CHAIN_EXECUTED_NATIVE_Q_ZETA17_CHARACTERISTIC_RECURRENCE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "files": {
+    "f17_cubic_chain_period17_executed_recurrence.py": "aca8e34294bbaaf345d6bce81f9bb32ce3234da8e3e55b4a7ac52e55e531a3c7",
+    "f17_cubic_chain_period17_executed_recurrence_oracle.py": "f6a27071ff66b27e9dca6cd2535bc902d297d816dcf4f6ee63789d4860d773dc",
+    "f17_cubic_chain_period17_cyclotomic_module.py": "9bf400adc38462796e574da4f88c2778918169245517ebd7385f6c2dc1d52033",
+    "f17_cubic_chain_adaptive_gauge.py": "083ddddab5907bb9148e00057cf4e8f33b0ba2f76db71f32fc7a3b085418d828",
+    "qualify_f17_cubic_chain_period17_executed_recurrence.sh": "3584e718e06d412bbd578f5806e38f33f144f720cd6398c58796b08707b3e93d",
+    "F17_CUBIC_CHAIN_PERIOD17_EXECUTED_RECURRENCE_RESULTS.json": "db68dc929c6fc23331a928a463439c5c772b0458871cb723907891097b811e88",
+    "F17_CUBIC_CHAIN_PERIOD17_EXECUTED_RECURRENCE_ORACLE_RESULTS.json": "319f412c0a3a3f8b2769f6c200fa3e5eb82bae37a9f148354ffd93bcea0c41e8"
+  },
+  "sealed_claim_ceiling": "Linux x86_64 Python; two exact public period-17 F17 unary-cubic and nearest-neighbor mixed-cubic path families; characteristic recurrence over Q(zeta17) with integral Z[zeta17] carrier; periods 1, 4, 16, and 64; 18 resident message slots plus 16 cyclotomic coefficient registers; direct dense boundary parity; exact subtractive restoration and unrelated reuse on the same backing; software only",
+  "independent_scope": "separate no-production-import public-descriptor compiler, tuple Z[zeta17] operator construction, whole-operator annihilator evaluation, sequential multiplication-by-x recurrence, all eight boundary reconstructions, exact carrier/direct payload and coefficient-width tuple reproduction, exact message-and-coefficient backing restoration, and primary-to-reuse generation/lease execution",
+  "resource_accounting_scope": "component-level named logical integer cells and exact integer-width payload metrics for resident messages, coefficient registers, compiled operators and characteristics, named temporaries, projection, restoration, and direct two-message execution; Python objects, SymPy internals, allocator/native-library peaks, bit-operation peaks, and whole-process peaks remain unbounded",
+  "rolling_window_scope": "the tested recurrence does not establish an integrally reversible rolling window; the primary degree-16 monic factor has zero constant coefficient, the reuse factor has a nonzero constant coefficient, and neither factor has certified cyclotomic-unit or integral-inverse status",
+  "excluded_interpretations": [
+    "scalar-Q order-16 or order-17 recurrence",
+    "minimal native recurrence order",
+    "integrally reversible rolling window",
+    "fixed integer width",
+    "fixed total bit storage",
+    "strongest family-specific compact baseline",
+    "arbitrary graph topology",
+    "general non-Gaussian composition",
+    "machine-enforced CATVM custody",
+    "distinct phase resource",
+    "computational advantage",
+    "Small Wall crossing",
+    "catalytic inference",
+    "physical waveform execution",
+    "replacement of physical bits with pi",
+    "unbounded computation"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "ae36a130352ba92f4272858cc00bde13c6336b90",
+  "scientific_source_parent": "1c14ed8aa76b073e1de95afb9c550ab76bf3c2de",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "10730c0107cb992b208568df951a71a8894720cb645fe1640332729104287460",
+  "reference_full_oracle_sha256": "8c472e774a8d2e320f30da15206a5d104c3836281d68a1ff0d627e57ce9dd51b",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_shared_phase_parity_ledger_ladder_closure.py",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_shared_phase_parity_ledger_ladder_closure_oracle.py",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_shared_phase_parity_ledger_ladder_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_shared_phase_parity_ledger_ladder_closure.py": "2238a5cdbf859037ef03cb3cf7d513c8d00e5ad36f2f4ec1b8ec44bfd3b2a34d",
+    "f17_shared_phase_parity_ledger_ladder_closure_oracle.py": "8fe96af6b7ee3254696c280deb7058b04b13e8eb8e4adae670e9dcad2c093baf",
+    "F17_SHARED_PHASE_PARITY_LEDGER_LADDER_CLOSURE_RESULTS.json": "10730c0107cb992b208568df951a71a8894720cb645fe1640332729104287460",
+    "F17_SHARED_PHASE_PARITY_LEDGER_LADDER_CLOSURE_ORACLE_RESULTS.json": "8c472e774a8d2e320f30da15206a5d104c3836281d68a1ff0d627e57ce9dd51b",
+    "F17_SHARED_PHASE_PARITY_LEDGER_LADDER_CLOSURE_INDEPENDENT_REVIEW.md": "40f90a526835397d2328d4764cd4c83cf10ec3219f05dec8afa616c5c4158d13",
+    "qualify_f17_shared_phase_parity_ledger_ladder_closure.sh": "1ec781324fa1df1e44d87f9cf43ac2a8c5df57979a30c71f29887779a9824869"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "exact_q_zeta17_widths": [1, 2, 4, 8, 16, 32, 64],
+    "dual_field_structural_widths": [1, 2, 4, 8, 16, 32, 64, 128],
+    "families": ["PRIMARY", "REUSE"],
+    "topology": "TWO_ROW_OPEN_LADDERS_ONLY",
+    "bounded_enumerative_controls": [1, 2, 3, 4]
+  },
+  "resource_accounting": {
+    "resident_factor_field_cells": "10W_MINUS_4",
+    "frontier_field_cells": 4,
+    "maximum_named_transient_field_cells_width_gt_1": 19,
+    "accepted_field_operations": "O_W_WITH_EXACT_BIT_COMPLEXITY_REPORTED_SEPARATELY",
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_baselines": [
+    "IDENTICAL_EXACT_FOUR_STATE_COLUMN_TRANSFER",
+    "M123_STREAMED_EVEN_SECTOR_PFAFFIANS",
+    "FULL_4_TO_THE_W_DEFECT_SIGNATURE_RETAIN_ALL"
+  ],
+  "claim_ceiling": "DECLARED_TWO_ROW_OPEN_LADDERS_ONLY_FIXED_RANK4_COLUMN_INTERLEAVED_CLOSURE_EXACT_Q_ZETA17_WIDTHS1_TO64_DUAL_FIELD_STRUCTURE_WIDTHS1_TO128_PRIMARY_WIDTH2_EXACT_NON_GAUSSIAN_WITNESS_DIRECT_PROCESS_SOFTWARE_ONLY",
+  "rejected_interpretations": [
+    "GENERAL_EXTERNAL_FIELD_COMPACTION",
+    "ARBITRARY_TREEWIDTH_FIXED_RANK_CLOSURE",
+    "BROAD_EXACT_NON_GAUSSIAN_CLASSIFICATION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

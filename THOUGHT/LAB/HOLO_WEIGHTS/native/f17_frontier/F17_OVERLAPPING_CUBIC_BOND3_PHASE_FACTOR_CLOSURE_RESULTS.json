@@ -1,0 +1,2205 @@
+{
+  "claim": "BOUNDED_EXACT_OVERLAPPING_NONAFFINE_CUBIC_BOOLEAN_PHASE_FACTOR_CHAIN_HAS_MINIMAL_MPS_BOND3_AND_TWO_M_RESIDENT_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PARTITION_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_FIXED_LOGICAL_RANK_HIDES_GROWING_EXACT_BOUNDARY_WIDTH",
+  "claim_ceiling": {
+    "arbitrary_boundary_compaction": false,
+    "arbitrary_cubic_hypergraph_closure": false,
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "declared_overlapping_cubic_factor_chain": true,
+    "distinct_phase_resource": false,
+    "fixed_bond3_nonaffine_phase_factor_signature": true,
+    "physical_bits_replaced_with_pi": false,
+    "physical_execution": false,
+    "small_wall_crossing": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "compiled_classical_baselines": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "38f8643f41268aaef8f1a9bf2452aa419b85da84a1e7292ef42998e0bfdf3359",
+      "compiled_final_row_commitment_json_bytes": 97,
+      "depth": 1,
+      "factor_commitment": "975399e8c65f8555e08c3916d196e6458b0ce0b0f40afe4e2c31164e57398475",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 1,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "ac9c73a87dc718f1982b69d4ecf607b3fb8f0fd1aa9ff0de4965a3c8ef3ae8fa",
+      "compiled_final_row_commitment_json_bytes": 97,
+      "depth": 2,
+      "factor_commitment": "241a862eb113f047d95ab7d2f442e7172c632609fafdc501097697e8c83bfe86",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 2,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "2cbdead416ed5b4a4bbf8b54870cf83265c247d577f519332a4172f29a2651df",
+      "compiled_final_row_commitment_json_bytes": 111,
+      "depth": 4,
+      "factor_commitment": "dbf98c1e40771ae10e6118b7c0c623da8bbcdb80528131b0f0ab8b0baa7e902f",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 4,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "b680da0b96c655ee6ab9194bd7a91cc8a941238f0eb748ee0cdacdeba5dddedc",
+      "compiled_final_row_commitment_json_bytes": 122,
+      "depth": 8,
+      "factor_commitment": "974d658ee1a697b6121b6a3ad8cf240e1372d7f2a06eee6c37d29b8a219b1259",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 8,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "928ede35310998f44d2fc2a4ccf7fb51bbeab34e04a59ed49b893e5ba467cf7a",
+      "compiled_final_row_commitment_json_bytes": 157,
+      "depth": 16,
+      "factor_commitment": "e133e6aa9019446ecd4c9d0595c9410139e47105a08688c80a039af6029c95a4",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 16,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "96f193fcc623c89c67a2ee2b440f9c26239f1b66a1ad03c6e4a239cb102a0528",
+      "compiled_final_row_commitment_json_bytes": 232,
+      "depth": 32,
+      "factor_commitment": "889c9d751d0fd64987fc238eef44ef6aaa2fec5b2e0b919bb19c8f0a52a5f9a1",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 32,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "43a7655bbdfe8a6284427f2c57bf53f5e75829344839b8f95737aab5b2346c79",
+      "compiled_final_row_commitment_json_bytes": 368,
+      "depth": 64,
+      "factor_commitment": "5d20f42d020cc4bccc82fd1b72283aaa71f0a20905bbef2608a9c77ae84a9084",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 64,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "01cbe951d4062cfccf41e7b2e0961dfc97c8e6afcab2f5cdaac7167cfcc560d2",
+      "compiled_final_row_commitment_json_bytes": 636,
+      "depth": 128,
+      "factor_commitment": "e1dc892e2a3bdc9f8caa56ac9c9137aa55b472a3705690d0afbac2a38ef40887",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 128,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "50d9d06110e0b5bc4da590c0fc5a6f8d322dc71ed1846d8b898fadf29a37fa2e",
+      "compiled_final_row_commitment_json_bytes": 2,
+      "depth": 1,
+      "factor_commitment": "772019579b682787bb9b7e912e036eab78f3487e86ce5a5d088c594aa6e4d090",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 1,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "518d202e88980b60a15adde59247747f061816cdefa6294087fe050d4fbbc5c3",
+      "compiled_final_row_commitment_json_bytes": 2,
+      "depth": 2,
+      "factor_commitment": "aad76ea54ba7e8bf8630f9b25b8f9bffd83d025dc6b176553e29d44248aa1f98",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 2,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "af99736e7c6b325e2109bcb95cc9ef5d23e9bbf6214afb609cc985e1e727e876",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "depth": 3,
+      "factor_commitment": "e08abc393a59dab8f7c9a947bc7c40e4387cad24217f23b01716bde17b6bc6a0",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 3,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "1876ff8af04ce1f7911db12a4f6fce3b6b16d9c52db5fdb8dba46a7e5ec50f5d",
+      "compiled_final_row_commitment_json_bytes": 2,
+      "depth": 4,
+      "factor_commitment": "bd84af2b9d4491348a031be85f433d4a63da4075572734e0a84397208ac26e8f",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 4,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "08281bca311c5a266d113324545d362795f7c935b1541ab14cc132626f582908",
+      "compiled_final_row_commitment_json_bytes": 2,
+      "depth": 5,
+      "factor_commitment": "6faa1b0b1cdedd7a3ad0aac533ecc1b8a31dce972cf46797b4bad7ee4985daf8",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 5,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "a04cb4d49b99dfa505ca859b81f903641c06338999384d89a2f22e888ae7d612",
+      "compiled_final_row_commitment_json_bytes": 2,
+      "depth": 6,
+      "factor_commitment": "cd1e34c6dd873017ce24ef2406445eabb24a129940b363b271beb35cf558f5ce",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 6,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "e853de3016d2a9e3cc762cdd479b06fcbf9b65c3c5bf89f28f2efdcd9b55678d",
+      "compiled_final_row_commitment_json_bytes": 2,
+      "depth": 7,
+      "factor_commitment": "9f7f9ceb8fdcd8c1e9b4ef275f93dbe78c4c4746994f2b0eb0f70e35a1fd8853",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 7,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "e1055bbd7cbcea33b33bcf22805f553c9600703a224d866956271ecba60793c9",
+      "compiled_final_row_commitment_json_bytes": 2,
+      "depth": 8,
+      "factor_commitment": "ecd4481c00b7858b32e651a862344915a0da48cfd90a2ee535e06ee00ea09ac5",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 8,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "a7dfe54123c7cb2418a4cbee91c176f6bf6c70ce5de80527f5a4ea57fce8e7de",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "depth": 1,
+      "factor_commitment": "961dcdc1c901e48f95cb51561926222de7a3759555f3593f0cd1754baaed39a4",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 1,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "c72f7a700bed89df3fdc2da653022476c9bbb13adfa07d161377824d83c0dc53",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "depth": 2,
+      "factor_commitment": "0e8f0867e3d2862e6229be990aad734267db40c47179155173a469112863970d",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 2,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "ae62e7b76df0c16f1f9101b0a35ed10548ff0f91326aafba0f1a307c511fcd53",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "depth": 3,
+      "factor_commitment": "98c8adb1fc070ff02391e414a5e9f68f7713c6f15ffb5cfbaefb57e5f29cae72",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 3,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "e9e59dba963f7d2a30a0845b80c274d160766eefbf157bf92e690966bca32d7c",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "depth": 4,
+      "factor_commitment": "6ea5958ee59ae06c7bbb2e394dc087d94e8b1a6a0f6389d11b72636e48ed63a0",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 4,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "ebaebb711858ab2f169534b14d9e8a532c789249f6bcb4a5c653118f307eaec4",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "depth": 5,
+      "factor_commitment": "8b2836affc1d9f1984147213dff564448208b1969aa0bff29f75035d4eecf212",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 5,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "256012f31c5440bf63400e2d94851c435f593bb7b3a3b2f502d4be44878e00dd",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "depth": 6,
+      "factor_commitment": "90fbd10170b0b60734a05514b6bc8d274bef0245f9c186f339a971415dfb9846",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 6,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "0889a71459202cb4a24a32ca10ee9caf6008178604ac5c6bb1e546cc8ad441b5",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "depth": 7,
+      "factor_commitment": "d843360bf6fb8a7ad4a108e4bb61d5123b5bcd67130ccca133d59e6189879d72",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 7,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary_agreement": true,
+      "compiled_boundary_agreement": true,
+      "compiled_final_row_commitment": "ca991820d321874dee90e80a75abd1dc2c7cbfd57ae28f6c90093dba3e620e1f",
+      "compiled_final_row_commitment_json_bytes": 3,
+      "depth": 8,
+      "factor_commitment": "5a9f37b2fef01eca6b9e7154738b15d79420d6514315851abb40eae464c6fa3d",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "final_boundary_dynamic_field_cells": 3,
+      "final_boundary_maximum_named_update_field_cells": 6,
+      "full_weight_signature_exact_factor_field_cells": 8,
+      "phase_carrier_or_snapshot_used": false,
+      "sealed_fixed_initial_and_final_boundary_field_cells": 1,
+      "sealed_word_three_state_chart_input_final_row_field_cells": 3
+    }
+  ],
+  "controls": {
+    "all_declared_theta_factors_nonidentity": true,
+    "altered_theta_schedule_changes_public_descriptor": true,
+    "bond_two_rejected_by_nonzero_rank3_minor": true,
+    "identity_theta_collapses_declared_rank3_minor": true,
+    "missing_inverse_leaves_resident_state": true,
+    "null_carrier_rejected": true,
+    "premature_projection_rejected": true,
+    "reference_transaction_restored": true,
+    "reordered_inverse_rejected": true,
+    "snapshot_command_available": false,
+    "wrong_inverse_detected": true,
+    "wrong_inverse_owner_rejected": true,
+    "wrong_projection_owner_rejected": true
+  },
+  "dual_field_structural_transactions": [
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 86,
+      "depth": 1,
+      "exact_maximum_mps_bond_dimension": 2,
+      "factor_commitment": "b640cf0e5819a615caf339be9ffaaf18ab2cf7b31116a607a8191e0974fbab84",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "field": "F103",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "bc1a54cba2234c5aaf7330804e25d68cdfdb3ac6f504c7867b38caceb54a1c35",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 14,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 3,
+      "program_fingerprint": "81edb58039525831fad5f49fc757def5b87415fd48c72e11c5f97f95fa8284ff",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 254,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 1,
+      "resident_phase_factor_field_cells": 2,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "bb4de42d2d3b353dd16a6d6713efe74f46bd6ab942f83186f57363f09fd86cb7",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 11,
+      "depth": 2,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "ac2ee9c2c3378b1735fd3358ddaa616c4b13d5a0fac98bff3dae156171f6ca59",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "field": "F103",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "6cf171ff20d9bc15422a21bed6d398e4c12e76d3a8e62a3c5fa63b6be3b987b1",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 28,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 4,
+      "program_fingerprint": "63700f3262fea91ac2269bc2866f7fe076e7848417b64d6b8d510a4efccc4271",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 256,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 2,
+      "resident_phase_factor_field_cells": 4,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "5ccdbeb5eb12d66305a0f3b53db6d363de4c60186fb194b32fb490a55712565a",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 37,
+      "depth": 3,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "038901fe579e51cac7984c6ba1cceceb369637fb7b918446a9e6a13f0af0a416",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "field": "F103",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "dbf509bd85d44427cbd96823b1f6c94e2f756fa6148ead943a5151853e25c7cb",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 42,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 5,
+      "program_fingerprint": "0010b5aba63c777dad4df5b9c71e98862389f006fd947a5856facd2ba65066d1",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 258,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 3,
+      "resident_phase_factor_field_cells": 6,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "1f54e59b46133f4d009a3dc2e3f6a0ca535104a35d7ab3976f55851253ce7cce",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 12,
+      "depth": 4,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "a38f747fedbcec85a013ed96ab64e42317991d724325e69567c8accbdf91e89e",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "field": "F103",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "e9afac2f986b9194375724df536fb35660d6e1c6f02100a3e3c480eebcf21f0a",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 56,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 6,
+      "program_fingerprint": "eb98832a2e18bb302e5dec2c13181f57e4efe3f3590273d02e3962ccbf157c76",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 260,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 4,
+      "resident_phase_factor_field_cells": 8,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "419fc0765b27b697a161a64ad36fdae6eb3f4572ad7d3830454e5ada8a6b5200",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 2,
+      "depth": 5,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "16559b4caf601cf134a334e9562b2f527f1e24380c8be225b4d1837922b2a217",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "field": "F103",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "b3a81a83dd2b9cee8bca9a130a5a4f8efd3427295b65a106606104407a0a5c65",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 70,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 7,
+      "program_fingerprint": "ca0ab850d96f4f3d219ca5d47ba66f687420af50cb88e38d3e221ae86548d5a7",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 263,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 5,
+      "resident_phase_factor_field_cells": 10,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "e819e4a85c4ea3ebf7d1dab2c1b1b44acee9f2b6936be1e708e237d0f3f500ef",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 40,
+      "depth": 6,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "af14eb6a5de938c608831fb5a404da48bf7090adad923a266ac7c8d9fa992a29",
+      "factor_commitment_json_bytes": 2,
+      "family": "PRIMARY",
+      "field": "F103",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "0f46bbe408a954f26c6a677c5512e2caa83579969149727e1e0d31a08b1b6891",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 84,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 8,
+      "program_fingerprint": "f07117958bb0d4ff3f402d83b4258aa1393559e4714693789b8f3c132c83683c",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 266,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 6,
+      "resident_phase_factor_field_cells": 12,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "b4e828e0973e28732a523dd33cc0e9846901feacd7c61c0beeb1ba4fe12c9fc8",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 79,
+      "depth": 7,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "331bac0cdf5b28148da162b5860409f5df6ecb54a2ee30dc6b63985d3f1bb869",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "field": "F103",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "62b9f37fb5852e3f10da8758e7cf3939bcfa905ef4a422fb0b14126ab4fee6fb",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 98,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 9,
+      "program_fingerprint": "21411068b55da130c316fd669f8f104ecb8fa8cfa0ae304ee4b1647f53b7ef6a",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 269,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 7,
+      "resident_phase_factor_field_cells": 14,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "f0a7af8eb6fd2a2c41bf84bf430c8bdb54f56505538ce6fb34dd62765e062a16",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "boundary": 4,
+      "depth": 8,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "f6be956d2361bcdb39204721c781a0ba8bb125b926ffe066f2568ff1010ba9db",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "field": "F103",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 7,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "248c74f8552b27fbc5a37830a276eca8c95fb3093176eb677e6720e14c98e4f0",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 112,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 10,
+      "program_fingerprint": "f44c14759bad369dbcc4ff553017e763c81e6ecdfa9ff6f6a3721950f11d4165",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 272,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 8,
+      "resident_phase_factor_field_cells": 16,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "2685fd4ae1b9e7f2060725f257ba955c084af666408f101874dbab7753ea4d24",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 130,
+      "depth": 1,
+      "exact_maximum_mps_bond_dimension": 2,
+      "factor_commitment": "ffa157c36e5d2e0f1c60357e8f053c2a95faaede523d5294d3bd85a5721c100b",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "field": "F137",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "bc1a54cba2234c5aaf7330804e25d68cdfdb3ac6f504c7867b38caceb54a1c35",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 16,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 3,
+      "program_fingerprint": "81edb58039525831fad5f49fc757def5b87415fd48c72e11c5f97f95fa8284ff",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 254,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 1,
+      "resident_phase_factor_field_cells": 2,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "bb4de42d2d3b353dd16a6d6713efe74f46bd6ab942f83186f57363f09fd86cb7",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 11,
+      "depth": 2,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "9e2023a880edfa99d56463f5f7d0707dbf8b067f143ed3244f69003111b2bc98",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "field": "F137",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "6cf171ff20d9bc15422a21bed6d398e4c12e76d3a8e62a3c5fa63b6be3b987b1",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 32,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 4,
+      "program_fingerprint": "63700f3262fea91ac2269bc2866f7fe076e7848417b64d6b8d510a4efccc4271",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 256,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 2,
+      "resident_phase_factor_field_cells": 4,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "5ccdbeb5eb12d66305a0f3b53db6d363de4c60186fb194b32fb490a55712565a",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 72,
+      "depth": 3,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "c9545788598a1a4195e44346095815ee4012d881e2681952187c3cc551b6013e",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "field": "F137",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "dbf509bd85d44427cbd96823b1f6c94e2f756fa6148ead943a5151853e25c7cb",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 48,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 5,
+      "program_fingerprint": "0010b5aba63c777dad4df5b9c71e98862389f006fd947a5856facd2ba65066d1",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 258,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 3,
+      "resident_phase_factor_field_cells": 6,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "1f54e59b46133f4d009a3dc2e3f6a0ca535104a35d7ab3976f55851253ce7cce",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 78,
+      "depth": 4,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "90b6a4b097598a49d23e9f6c5c7798efb28a7b19614cde6941f3fd05da446521",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "field": "F137",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "e9afac2f986b9194375724df536fb35660d6e1c6f02100a3e3c480eebcf21f0a",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 64,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 6,
+      "program_fingerprint": "eb98832a2e18bb302e5dec2c13181f57e4efe3f3590273d02e3962ccbf157c76",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 260,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 4,
+      "resident_phase_factor_field_cells": 8,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "419fc0765b27b697a161a64ad36fdae6eb3f4572ad7d3830454e5ada8a6b5200",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 75,
+      "depth": 5,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "e0d1376937a9ff33fa1b7294dae856236d221d04b7c093d6964fda228e60371b",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "field": "F137",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "b3a81a83dd2b9cee8bca9a130a5a4f8efd3427295b65a106606104407a0a5c65",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 80,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 7,
+      "program_fingerprint": "ca0ab850d96f4f3d219ca5d47ba66f687420af50cb88e38d3e221ae86548d5a7",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 263,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 5,
+      "resident_phase_factor_field_cells": 10,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "e819e4a85c4ea3ebf7d1dab2c1b1b44acee9f2b6936be1e708e237d0f3f500ef",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 18,
+      "depth": 6,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "da4a2a226cfdc8c31d5d163da3e7ce9d5020290bc5a6a6b2289e6720081cb8d0",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "field": "F137",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "0f46bbe408a954f26c6a677c5512e2caa83579969149727e1e0d31a08b1b6891",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 96,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 8,
+      "program_fingerprint": "f07117958bb0d4ff3f402d83b4258aa1393559e4714693789b8f3c132c83683c",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 266,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 6,
+      "resident_phase_factor_field_cells": 12,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "b4e828e0973e28732a523dd33cc0e9846901feacd7c61c0beeb1ba4fe12c9fc8",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 110,
+      "depth": 7,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "0156be9951c5be0aa14d0ebf7a6fe5896e444e4478bff8b0f82370fdfc33e20c",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "field": "F137",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "62b9f37fb5852e3f10da8758e7cf3939bcfa905ef4a422fb0b14126ab4fee6fb",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 112,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 9,
+      "program_fingerprint": "21411068b55da130c316fd669f8f104ecb8fa8cfa0ae304ee4b1647f53b7ef6a",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 269,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 7,
+      "resident_phase_factor_field_cells": 14,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "f0a7af8eb6fd2a2c41bf84bf430c8bdb54f56505538ce6fb34dd62765e062a16",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "boundary": 64,
+      "depth": 8,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "d52b63b8c694e23ada4d9dfba52a8f498db8124e1292566a3bb831910eff48ae",
+      "factor_commitment_json_bytes": 3,
+      "family": "PRIMARY",
+      "field": "F137",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 8,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "248c74f8552b27fbc5a37830a276eca8c95fb3093176eb677e6720e14c98e4f0",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 128,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 10,
+      "program_fingerprint": "f44c14759bad369dbcc4ff553017e763c81e6ecdfa9ff6f6a3721950f11d4165",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 272,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 8,
+      "resident_phase_factor_field_cells": 16,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "2685fd4ae1b9e7f2060725f257ba955c084af666408f101874dbab7753ea4d24",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    }
+  ],
+  "exact_transactions": [
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          7,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "depth": 1,
+      "exact_maximum_mps_bond_dimension": 2,
+      "factor_commitment": "6535ee77951e25945873b9f2304feea8720c339f4add5d3acc05476373b46c9c",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 36,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "aa56f217b4d0f3fa6a93ec0184c50bce49ab028a97e65c11ab12aea53c87b93f",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 66,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 3,
+      "program_fingerprint": "81edb58039525831fad5f49fc757def5b87415fd48c72e11c5f97f95fa8284ff",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 254,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 1,
+      "resident_phase_factor_field_cells": 2,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "d46f62f31560a7491985ca6005649dc07db71b1b1958ceb1e35e011aad352217",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          13,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "depth": 2,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "4c12b6ffc0f8ae4b2cef5e3f60703a3f85a4886bc54d4273d9adc3c75953da84",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 39,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "5f73364071905d1dc9089fb51f9fe393f72b5ec3f4db4a4c3c1750a9acb0ae7a",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 132,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 4,
+      "program_fingerprint": "63700f3262fea91ac2269bc2866f7fe076e7848417b64d6b8d510a4efccc4271",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 256,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 2,
+      "resident_phase_factor_field_cells": 4,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "991fcb5ab1e930b780d9e181885cc4b0183d6d66baddffdf604aa7938325ee87",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          42,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      "depth": 4,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "71baa553068e1f0df25ff11553fe8faebc7580a4eb0dde25ea1e32ff96112f4b",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 60,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "b17db3a42ce2f8ba2ad1d0f6a40477a3164c927508d37b87da7a2272797e0365",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 264,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 6,
+      "program_fingerprint": "eb98832a2e18bb302e5dec2c13181f57e4efe3f3590273d02e3962ccbf157c76",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 260,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 4,
+      "resident_phase_factor_field_cells": 8,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "b7c2b1a229f7632017e35d20616d2fb06a7e05e18b6e573610f5184551bddad3",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          457,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          -47,
+          1
+        ],
+        [
+          12,
+          1
+        ],
+        [
+          -34,
+          1
+        ],
+        [
+          -14,
+          1
+        ],
+        [
+          -34,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -22,
+          1
+        ],
+        [
+          -18,
+          1
+        ],
+        [
+          -34,
+          1
+        ],
+        [
+          -6,
+          1
+        ],
+        [
+          -23,
+          1
+        ],
+        [
+          -21,
+          1
+        ],
+        [
+          -38,
+          1
+        ],
+        [
+          -4,
+          1
+        ]
+      ],
+      "depth": 8,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "2680463da1a7208c26ef391aa8f717d4069a60433671612e64e2de420048d6ed",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 109,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "4c80c611d7d3d19b9f8cec7472c61965bf51a31c06bac265f20c2f7997a77a76",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 528,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 10,
+      "program_fingerprint": "f44c14759bad369dbcc4ff553017e763c81e6ecdfa9ff6f6a3721950f11d4165",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 272,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 8,
+      "resident_phase_factor_field_cells": 16,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "3aa1860a034f156fcc38cfcfd7d11f725302a5a2c09f872bdcd0fc10413695c4",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          53789,
+          1
+        ],
+        [
+          -913,
+          1
+        ],
+        [
+          -10459,
+          1
+        ],
+        [
+          1315,
+          1
+        ],
+        [
+          -6629,
+          1
+        ],
+        [
+          -2786,
+          1
+        ],
+        [
+          -8372,
+          1
+        ],
+        [
+          -11,
+          1
+        ],
+        [
+          -5835,
+          1
+        ],
+        [
+          -3652,
+          1
+        ],
+        [
+          -7775,
+          1
+        ],
+        [
+          -1348,
+          1
+        ],
+        [
+          -5310,
+          1
+        ],
+        [
+          -5302,
+          1
+        ],
+        [
+          -8321,
+          1
+        ],
+        [
+          -763,
+          1
+        ]
+      ],
+      "depth": 16,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "f27b8a9a10da350c01a85d69238be93ec33b05fe7ea5a72830e6941ce7cc2fcb",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 225,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "c787cbc155aac821dfe47e61f384c7088706f16d1cd2df3d896e6717c6608995",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 1056,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 18,
+      "program_fingerprint": "9d0505ec25a26d3827296b7eb1752780bc5ed9a517007f50740fe04f10288036",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 292,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 16,
+      "resident_phase_factor_field_cells": 32,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "9d9ce2ae04c147b6c56e0ce6a46bf96a2770e80f6d0df8e8a32bb0134dffebb4",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          693438987,
+          1
+        ],
+        [
+          -60368681,
+          1
+        ],
+        [
+          -325561606,
+          1
+        ],
+        [
+          2540836,
+          1
+        ],
+        [
+          -203079702,
+          1
+        ],
+        [
+          -97808045,
+          1
+        ],
+        [
+          -268347653,
+          1
+        ],
+        [
+          -20620792,
+          1
+        ],
+        [
+          -195178162,
+          1
+        ],
+        [
+          -138266199,
+          1
+        ],
+        [
+          -228451196,
+          1
+        ],
+        [
+          -76030844,
+          1
+        ],
+        [
+          -162682952,
+          1
+        ],
+        [
+          -209769692,
+          1
+        ],
+        [
+          -234520408,
+          1
+        ],
+        [
+          -53239633,
+          1
+        ]
+      ],
+      "depth": 32,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "ef737e71fbe4029d0c04f1184f4f99b1a9aa31d3de6277ffdf18722c230f091d",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 468,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "bdfccac16fe4178c11000b02fcde06c2345b5046a2ecaf47a7d93e17aee51c56",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 2112,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 34,
+      "program_fingerprint": "5892a065e68f114974221dcd041c46a572c1ba6c37c08b9b917f6a3ad9f0b105",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 330,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 32,
+      "resident_phase_factor_field_cells": 64,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "7c3539d01f2eed639388121559f5004cb846e306e63d57e353d02671ad33434b",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          82657586178813471,
+          1
+        ],
+        [
+          -44321983611180787,
+          1
+        ],
+        [
+          -149711987334111793,
+          1
+        ],
+        [
+          -20712738668314772,
+          1
+        ],
+        [
+          -97196114029430524,
+          1
+        ],
+        [
+          -67662846988523747,
+          1
+        ],
+        [
+          -117041118890164967,
+          1
+        ],
+        [
+          -37260910027240286,
+          1
+        ],
+        [
+          -87781095231249222,
+          1
+        ],
+        [
+          -97424382471537177,
+          1
+        ],
+        [
+          -89662765518005607,
+          1
+        ],
+        [
+          -66513126688869799,
+          1
+        ],
+        [
+          -73558196155944268,
+          1
+        ],
+        [
+          -134346470918898570,
+          1
+        ],
+        [
+          -93776229348018803,
+          1
+        ],
+        [
+          -42308062296851565,
+          1
+        ]
+      ],
+      "depth": 64,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "c78a1e38c06d43416b1618b6d04053cf13e632e4b717ef60f86b7987788f61e0",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 938,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "bdbfff369f874673b434067caf1736a6e2683b15efad4de5c8f8c15696c5cf2f",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 4224,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 66,
+      "program_fingerprint": "500c46d44376233c2803b536da981b06e87e4812a4b5c6c83d3e081f942d3594",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 406,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 64,
+      "resident_phase_factor_field_cells": 128,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "f0e4a397425ef01f28536ef0e8de7665e54bbe22b8e992dc08c41aab34d13907",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    },
+    {
+      "accepted_path_assignment_enumeration": false,
+      "accepted_path_component_weight_cells": 0,
+      "accepted_path_dense_transfer_cells": 0,
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "boundary": [
+        [
+          461527278153710573440822348659695,
+          1
+        ],
+        [
+          -5078918745021842776989945551809916,
+          1
+        ],
+        [
+          -8222166694917121555671092333143098,
+          1
+        ],
+        [
+          -3797777110561880927200654847253863,
+          1
+        ],
+        [
+          -5356502814670391319401134946040854,
+          1
+        ],
+        [
+          -7515628617397620097239660880241891,
+          1
+        ],
+        [
+          -5495729292193900247186161068464150,
+          1
+        ],
+        [
+          -5029309983411985985809868256596288,
+          1
+        ],
+        [
+          -5104199887030912363136388003460779,
+          1
+        ],
+        [
+          -9889168072729945528090861917526184,
+          1
+        ],
+        [
+          -3976186542846846204795626491071322,
+          1
+        ],
+        [
+          -6201675800932131565142287229126308,
+          1
+        ],
+        [
+          -6871141040083260145496510950896439,
+          1
+        ],
+        [
+          -12252799469172348088840608649103492,
+          1
+        ],
+        [
+          -5639604389061375783430615873806578,
+          1
+        ],
+        [
+          602841429091274960521741082233291,
+          1
+        ]
+      ],
+      "depth": 128,
+      "exact_maximum_mps_bond_dimension": 3,
+      "factor_commitment": "4d45ffa254a1b0a6a93ad2bff3c55b3b9fb55c918e8bd9ee75846eb3201a3460",
+      "factor_commitment_json_bytes": 97,
+      "family": "PRIMARY",
+      "final_boundary_field_cells": 1,
+      "final_boundary_payload_bits": 1828,
+      "final_projection_calls": 1,
+      "fixed_wiring_field_cells": 0,
+      "initial_digest": "856d3a0af2465f8d5f875ebdde4e640bc911da571222ace31367e2c80a9a0fb5",
+      "intermediate_factor_payload_exposed_in_result": false,
+      "intermediate_projection_calls": 0,
+      "inverse_history_cells": 0,
+      "maximum_local_coupling_named_field_cells": 4,
+      "maximum_resident_factor_payload_bits": 8448,
+      "one_way_factor_commitment_emitted": true,
+      "package_local_restoration_count_after": 1,
+      "package_local_restoration_count_before": 0,
+      "physical_bits": 130,
+      "program_fingerprint": "68057369ef33887a7f390a102c65e5843d64e62c9af0ce778d4f4fc27b17be8c",
+      "projection_compiler_and_commitment_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+      "projection_dynamic_field_cells": 6,
+      "public_program_json_bytes": 560,
+      "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "resident_nontrivial_theta_field_cells": 128,
+      "resident_phase_factor_field_cells": 256,
+      "response_released_after_restoration": true,
+      "restored_digest_with_package_local_count": "24631f532f29e85077869d5015009467e8b92ababb5d5f14aecd4f02d3cad92a",
+      "restored_exact_zero": true,
+      "same_backing": true,
+      "snapshot_reload_used": false
+    }
+  ],
+  "matched_baseline": {
+    "phase_advantage_over_matched_classical": false,
+    "strongest_final_boundary_runtime": "THREE_DYNAMIC_SCALARS",
+    "strongest_full_weight_signature": "M_EXACT_PUBLIC_THETA_FACTORS",
+    "strongest_sealed_fixed_transaction": "ONE_CACHED_BOUNDARY_SCALAR",
+    "strongest_sealed_three_state_chart_input_boundary": "THREE_COMPILED_FINAL_ROW_SCALARS"
+  },
+  "next_obstruction": "THE_DECLARED_NONAFFINE_CUBIC_PHASE_CHAIN_CLOSES_AT_EXACT_BOND3_BUT_THE_PHASE_CARRIER_STORES_TWICE_THE_PUBLIC_FACTOR_SIGNATURE_THE_SELECTED_BOUNDARY_HAS_AN_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_EXACT_BOUNDARY_WIDTH_GROWS_WITH_DEPTH",
+  "rank_certificates": [
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 1,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 2,
+      "interior_rank3_cut_count": 0,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 2,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 1,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 4,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 3,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 8,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 7,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 16,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 15,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 32,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 31,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 64,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 63,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "2b344f7bb21c80a6d39a70f050937b5cac21f2fcafc4ae5c4923802abf7d7d9c",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 128,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 127,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 1,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 2,
+      "interior_rank3_cut_count": 0,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 2,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 1,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 3,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 2,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 4,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 3,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 5,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 4,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 6,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 5,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 7,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 6,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "99c7c5d0194bf3a0f710aa1af706d2b19f724ca1a8422e5a9f8fd20e3a16cc25",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 8,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 7,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 1,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 2,
+      "interior_rank3_cut_count": 0,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 2,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 1,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 3,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 2,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 4,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 3,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 5,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 4,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 6,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 5,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 7,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 6,
+      "minor_values_serialized": false
+    },
+    {
+      "algebra": "39622c25d6885ebfd130a6e89f6ca748cbc459785dc29147526102bd207605ce",
+      "all_declared_rank3_minors_nonzero": true,
+      "assignment_tensor_materialized": false,
+      "bond_two_rejected_for_depth_at_least_two": true,
+      "depth": 8,
+      "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+      "interior_rank3_cut_count": 7,
+      "minor_values_serialized": false
+    }
+  ],
+  "resource_law": {
+    "accepted_path_assignment_or_weight_tensor_cells": 0,
+    "exact_maximum_weight_tensor_mps_bond_dimension": 3,
+    "final_boundary_projection_dynamic_field_cells": 6,
+    "fixed_logical_rank_implies_fixed_exact_bit_width": false,
+    "full_exact_bit_complexity_established": false,
+    "inverse_history_cells": 0,
+    "matched_classical_final_boundary_dynamic_field_cells": 3,
+    "matched_classical_full_signature_field_cells_at_depth_m": "M",
+    "matched_classical_sealed_three_state_chart_input_final_row_field_cells": 3,
+    "native_local_coupling_named_field_cells": 4,
+    "physical_bits_at_depth_m": "M_PLUS_TWO",
+    "python_container_allocator_native_bigint_hashlib_and_whole_process_excluded": true,
+    "resident_nontrivial_theta_field_cells_at_depth_m": "M",
+    "resident_phase_factor_field_cells_at_depth_m": "TWO_TIMES_M"
+  },
+  "restoration": {
+    "inverse_history_retained": false,
+    "projection_compiler_and_commitment_buffers": "NO_RESTORATION_CLAIM",
+    "resident_phase_factor_carrier": "EXACT_ALGEBRAIC_RESTORATION",
+    "snapshot_reload_used": false
+  },
+  "reuse": {
+    "baseline_reload_used": false,
+    "first_depth": 8,
+    "first_family": "PRIMARY",
+    "fresh_restored_boundary_agreement": true,
+    "fresh_restored_resource_signature_agreement": true,
+    "package_local_restoration_count_after_two_transactions": 2,
+    "reused_depth": 16,
+    "reused_family": "REUSE",
+    "same_actual_backing_across_unrelated_programs": true
+  },
+  "schema": "CAT_CAS_F17_OVERLAPPING_CUBIC_BOND3_PHASE_FACTOR_CLOSURE_V1",
+  "source_scope": {
+    "dual_field_structural_depths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "exact_bond_law": "DEPTH1_BOND2_DEPTH_AT_LEAST2_BOND3",
+    "exact_depths": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128
+    ],
+    "factor_law": "THETA_LEVEL_TO_X_LEVEL_X_LEVEL_PLUS1_X_LEVEL_PLUS2",
+    "nonaffine_boolean_degree": 3,
+    "ordinary_secant_or_waring_interpretation": "NOT_CLAIMED"
+  },
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}

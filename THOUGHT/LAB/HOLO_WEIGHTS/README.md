@@ -37,6 +37,8 @@ Qwen3.6-27B (full precision safetensors, Seagate)
 | 4. Inference | `pipeline/04_inference/` | Catalytic engine cores (EIGEN_BUDDY), HOLO pipeline (cavity, wormhole, calibrate, inference engines) | Ran 43-layer DeepSeek engine (incoherent output; fidelity was the cause) |
 | 5. Validate | `pipeline/05_validate/` | PLV phase diagnostics (predict adapter difficulty), fidelity sweeps, Gemma calibration | Proven diagnostics |
 | Native phase machinery | `native/phase_frontier/` | CAT_CAS audio-lane C engine: phase-lock (0.074 -> 1.6e-16), exact cyclotomic arithmetic (Q(zeta17), depth 4096), CATVM custody | Proven, independently verified |
+| F17 coherent phase charts | `native/f17_frontier/` | NEW FRONTIER (Jul 29 - Aug 3, live): 70+ experiments — pi-unit exact coordinate descent / embedding balance, coherent Veronese/secant/rank-2/rank-4 charts, rank laws (rank-one = 34 cells, two-signature = full 17x17 separation rank), gray-code bond2, matchgate, free-fermion closures | Running now; two-signature diagnostic live |
+| Toroidal path-sum package | `native/unbounded_compute_v1/` | Public `.holo` programs -> global torus shears; Gamma 2.19 (n=16) -> 2.4e71 (n=256) vs explicit path-work; reaches the bounded CAT_CAS mission stop condition | CAT_CAS_COMPACT_TOROIDAL_PATH_SUM_REFERENCE_VERIFIED |
 
 ## Known blockages and their state (2026-08-03 audit)
 

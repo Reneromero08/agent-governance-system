@@ -1,0 +1,597 @@
+{
+  "actual_m128_grid_exit_witness_checks": [
+    {
+      "entry_commitment_agreement": true,
+      "family": "PRIMARY",
+      "independent_minor": 58,
+      "independent_prior_carrier_restored": true,
+      "minor_agreement": true,
+      "oracle_cached_grid_boundary_field_cells": 306,
+      "rank_one_chart_rejected": true
+    },
+    {
+      "entry_commitment_agreement": true,
+      "family": "REUSE",
+      "independent_minor": 46,
+      "independent_prior_carrier_restored": true,
+      "minor_agreement": true,
+      "oracle_cached_grid_boundary_field_cells": 306,
+      "rank_one_chart_rejected": true
+    }
+  ],
+  "claim_ceiling": "DECLARED_K4_TO128_RANK1_COHERENT_VERONESE_FIXED_P1_TO_P4_AND_BIDIRECTIONAL_ADJACENT_MODE_SHEAR_PROGRAM_FAMILY_EXACT_Q_ZETA17_K4_TO32_DUAL_FIELD_K4_TO128_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "compiled_two_scalar_warm_classical_baseline_checks": [
+    {
+      "algebra": "Q_ZETA17",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 4,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "Q_ZETA17",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 8,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "Q_ZETA17",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 16,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "Q_ZETA17",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 32,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 4,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 8,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 16,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 32,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 64,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 128,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 4,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 8,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 16,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 32,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 64,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "compiler_working_field_cells_agreement": true,
+      "family": "PRIMARY",
+      "k": 128,
+      "maximum_record_json_bytes_agreement": true,
+      "pair_commitment_agreement": true,
+      "warm_retained_field_cells_agreement": true
+    }
+  ],
+  "dual_field_transaction_parity": [
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 4,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 8,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 16,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 32,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 64,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "F103",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 128,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 4,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 8,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 16,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 32,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 64,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "F137",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 128,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    }
+  ],
+  "exact_transaction_parity": [
+    {
+      "algebra": "Q_ZETA17",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 4,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "Q_ZETA17",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 8,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "Q_ZETA17",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 16,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    },
+    {
+      "algebra": "Q_ZETA17",
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "forward_chart_commitment_agreement": true,
+      "implicit_dimension_agreement": true,
+      "independent_forward_inverse_restored": true,
+      "k": 32,
+      "program_fingerprint_agreement": true,
+      "resident_field_cells_agreement": true
+    }
+  ],
+  "full_occupation_oracle_cases": [
+    {
+      "algebra": "Q_ZETA17",
+      "chart_forward_inverse_restored": true,
+      "dense_forward_inverse_restored": true,
+      "forward_boundary": [
+        [
+          1632,
+          1
+        ],
+        [
+          2264,
+          1
+        ],
+        [
+          404,
+          1
+        ],
+        [
+          1888,
+          1
+        ],
+        [
+          1780,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          2436,
+          1
+        ],
+        [
+          1800,
+          1
+        ],
+        [
+          148,
+          1
+        ],
+        [
+          2788,
+          1
+        ],
+        [
+          476,
+          1
+        ],
+        [
+          860,
+          1
+        ],
+        [
+          2696,
+          1
+        ],
+        [
+          816,
+          1
+        ],
+        [
+          1184,
+          1
+        ],
+        [
+          2212,
+          1
+        ]
+      ],
+      "forward_rank_one_catalecticant_minor": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "forward_rank_one_catalecticant_minor_zero": true,
+      "full_occupation_chart_agreement": true,
+      "k": 4,
+      "occupation_dimension": 4845,
+      "oracle_full_occupation_vector_field_cells": 4845
+    },
+    {
+      "algebra": "F103",
+      "chart_forward_inverse_restored": true,
+      "dense_forward_inverse_restored": true,
+      "forward_boundary": 1,
+      "forward_rank_one_catalecticant_minor": 0,
+      "forward_rank_one_catalecticant_minor_zero": true,
+      "full_occupation_chart_agreement": true,
+      "k": 4,
+      "occupation_dimension": 4845,
+      "oracle_full_occupation_vector_field_cells": 4845
+    },
+    {
+      "algebra": "F137",
+      "chart_forward_inverse_restored": true,
+      "dense_forward_inverse_restored": true,
+      "forward_boundary": 60,
+      "forward_rank_one_catalecticant_minor": 0,
+      "forward_rank_one_catalecticant_minor_zero": true,
+      "full_occupation_chart_agreement": true,
+      "k": 4,
+      "occupation_dimension": 4845,
+      "oracle_full_occupation_vector_field_cells": 4845
+    }
+  ],
+  "independent_methods": [
+    "SEPARATE_PUBLIC_PROGRAM_COMPILER",
+    "SEPARATE_17_COORDINATE_CHART_RECURRENCE",
+    "ORDINARY_MONOMIAL_MULTINOMIAL_EXPANSION",
+    "FULL_H4_4845_COORDINATE_OCCUPATION_REEXECUTION_IN_THREE_ALGEBRAS",
+    "INDIVIDUAL_CHARACTER_AND_BIDIRECTIONAL_SHEAR_FULL_OCCUPATION_PARITY",
+    "CATALECTICANT_RANK_ONE_MEMBERSHIP_AND_GRID_EXIT_CONTROLS",
+    "SEPARATE_COMPILED_TWO_SCALAR_WARM_CLASSICAL_BASELINE_RECONSTRUCTION"
+  ],
+  "individual_primitive_checks": [
+    {
+      "every_individual_primitive_and_inverse_agrees": true,
+      "field": "F103",
+      "k": 3,
+      "occupation_dimension": 969,
+      "primitive_count": 40
+    },
+    {
+      "every_individual_primitive_and_inverse_agrees": true,
+      "field": "F137",
+      "k": 3,
+      "occupation_dimension": 969,
+      "primitive_count": 40
+    }
+  ],
+  "matched_baseline": {
+    "descriptor_runtime": "IDENTICAL_17_COORDINATE_COHERENT_VECTOR_RECURRENCE_WITH_CLOSED_FORM_OCCUPATION_PROJECTION",
+    "phase_advantage_over_matched_classical": false,
+    "strongest_sealed_fixture_warm": "COMPILED_TWO_SCALAR_V0_V1_RETENTION_WITH_CLOSED_FORM_OCCUPATION_PROJECTION"
+  },
+  "monomial_convention_control": {
+    "k": 2,
+    "mixed_occupation_coefficient": 2,
+    "raw_unmultiplied_coefficient_rejected": true,
+    "v0": 1,
+    "v1": 1
+  },
+  "production_claim": "BOUNDED_EXACT_PROGRAM_RESTRICTED_F17_COHERENT_VERONESE_PHASE_CHART_CLOSES_FIXED_P1_TO_P4_CHARACTERS_AND_BIDIRECTIONAL_MODE_SHEARS_IN_17_RESIDENT_COORDINATES_ACROSS_GROWING_EXCHANGE_SYMMETRIC_DEGREE_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_SEALED_WORDS_HAVE_A_STRONGER_TWO_SCALAR_WARM_CLASSICAL_BASELINE",
+  "production_schema": "CAT_CAS_F17_COHERENT_VERONESE_PHASE_CHART_CLOSURE_V1",
+  "rejected_interpretations": [
+    "M127_GRID_ORBIT_SHEAR_CLOSURE",
+    "MULTIPLE_COHERENT_COMPONENT_CLOSURE",
+    "ARBITRARY_H_K_INPUT_CLOSURE",
+    "GENERAL_NONLINEAR_QUOTIENT",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_EXECUTION_OR_BIT_REPLACEMENT",
+    "UNBOUNDED_COMPUTATION"
+  ],
+  "resource_law": {
+    "accepted_path_occupation_vector_or_topology_cells": 0,
+    "accepted_path_resident_field_cells": 17,
+    "full_exact_bit_complexity_established": false,
+    "oracle_full_occupation_field_cells_per_full_case": 4845,
+    "oracle_full_occupation_vectors_are_verification_only": true,
+    "python_native_allocator_bigint_and_whole_process_memory_excluded": true
+  },
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F17_COHERENT_VERONESE_PHASE_CHART_CLOSURE_ORACLE_V1",
+  "transient_restoration_class": "NO_RESTORATION_CLAIM",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

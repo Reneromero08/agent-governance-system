@@ -1,0 +1,3352 @@
+{
+  "claim": "BOUNDED_EXACT_COLUMN_INTERLEAVED_SHARED_PHASE_PARITY_LEDGER_CLOSES_DECLARED_TWO_ROW_F17_FIELD_FAMILY_AT_RANK4_WITHOUT_EVEN_SECTOR_ENUMERATION_WITH_EXACT_FACTOR_CARRIER_RESTORATION_AND_REUSE_AND_PRIMARY_WIDTH2_NATIVE_DEFECT_SIGNATURE_FAILS_GRASSMANN_PLUCKER",
+  "claim_ceiling": {
+    "arbitrary_width_or_treewidth_compaction_established": false,
+    "catvm_custody_established": false,
+    "computational_advantage_established": false,
+    "distinct_phase_resource_established": false,
+    "fixed_rank4_column_interleaved_closure": true,
+    "native_non_gaussian_signature_scope": "PRIMARY_WIDTH2_EXACT_GRASSMANN_PLUCKER_WITNESS_ONLY",
+    "other_exact_families_or_widths_non_gaussian_established": false,
+    "physical_bits_replaced_with_pi": false,
+    "physical_waveform_execution_established": false,
+    "small_wall_crossing_established": false,
+    "two_row_open_ladders_only": true,
+    "unbounded_catalytic_computation_established": false
+  },
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "controls": {
+    "accepted_path_dense_signature_materialized": false,
+    "accepted_path_even_sector_enumeration": false,
+    "catvm_boundary_claimed": false,
+    "missing_inverse_detected": true,
+    "null_carrier_rejected": true,
+    "premature_projection_rejected": true,
+    "reordered_inverse_control_applicable": false,
+    "reordered_inverse_reason": "FACTOR_LOADS_AND_ACCUMULATOR_ADDITIONS_COMMUTE",
+    "resident_factor_mutation_changes_boundary": true,
+    "snapshot_command_absent": true,
+    "wrong_field_port_type_rejected": true,
+    "wrong_inverse_ownership_detected": true
+  },
+  "dual_field_structural_transactions": [
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 79,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 1,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 6,
+      "factor_unload_additions": 6,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_port_count": 2,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "a9b3afb18651da116e0080b206fd40360298329da1246dccd4d3370f5f41bdaf",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 5,
+      "maximum_named_transient_payload_bits": 35,
+      "maximum_resident_payload_bits": 49,
+      "occurrence_expanded_even_sector_count": 2,
+      "program_fingerprint": "3466202e0e8e02eeea38bb15c9c3b35f6550a18b08ac4ec11f7f9c8c8bb9f7c0",
+      "resident_factor_field_cells": 6,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "03783ad30f72e9f51d0048d02916836b8bf2e4221630e4ede4226f4b3fa76134",
+      "retain_all_signature_field_cells": 4,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 1,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 0,
+        "horizontal_kernel_field_multiplications": 0,
+        "local_diagonal_field_multiplications": 0,
+        "local_factor_field_multiplications": 16,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 5,
+        "maximum_named_transient_payload_bits": 35,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 88,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 4,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 16,
+      "factor_unload_additions": 16,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_port_count": 4,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "8530fe02004d772b52a0b4a5309b99010e8bab2076b0a4026a6a14ebf38e6e68",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 119,
+      "occurrence_expanded_even_sector_count": 8,
+      "program_fingerprint": "cea7b485ee074cb26ee170a03a2ae04e196af57af99db18a9befe27ccff3acef",
+      "resident_factor_field_cells": 16,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "82e64c744790f3cca148a6343c3e426017732514ca0c3e33a19314adff8a1aa4",
+      "retain_all_signature_field_cells": 16,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 2,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 32,
+        "horizontal_kernel_field_multiplications": 32,
+        "local_diagonal_field_multiplications": 8,
+        "local_factor_field_multiplications": 32,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 69,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 10,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 36,
+      "factor_unload_additions": 36,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_port_count": 8,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "04ef2b2c7d9c5a94236e949b42e20ac2928d8248fcd30a8852f6dee1b901e598",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 259,
+      "occurrence_expanded_even_sector_count": 128,
+      "program_fingerprint": "b0e88cdd64003648a3bc6f706cb570684091fd5a30c5eab0a8491b9d741102d9",
+      "resident_factor_field_cells": 36,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "3c010fb44e214cbd909f2670ea5f1a08a3a861714ceab9fd8c8df02c6f656dbd",
+      "retain_all_signature_field_cells": 256,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 4,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 96,
+        "horizontal_kernel_field_multiplications": 96,
+        "local_diagonal_field_multiplications": 24,
+        "local_factor_field_multiplications": 64,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 0,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 22,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 76,
+      "factor_unload_additions": 76,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_port_count": 16,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "e55e88e2af39c8a6bbdfaac200a87a4b3fc3e1f6a54b282c4a6aff48f5153bb6",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 539,
+      "occurrence_expanded_even_sector_count": 32768,
+      "program_fingerprint": "b75dc10802dba7b01f964742eac6f8cd12b884d6d67ffa1d29d3e3c52b88dc7f",
+      "resident_factor_field_cells": 76,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "23f3f0b12473bc76899e09fac5370900cda6a19765554ef6a792082ad104d470",
+      "retain_all_signature_field_cells": 65536,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 8,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 224,
+        "horizontal_kernel_field_multiplications": 224,
+        "local_diagonal_field_multiplications": 56,
+        "local_factor_field_multiplications": 128,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 96,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 46,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 156,
+      "factor_unload_additions": 156,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_port_count": 32,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "6cde6430006ff9652a4d98e97ff4a8d904250fe844a7535484eb56452458e99c",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 1099,
+      "occurrence_expanded_even_sector_count": 2147483648,
+      "program_fingerprint": "d2fdce1ea135f518eae0376fc71fb5461ec560ad313f4b9e0608540b8a68545f",
+      "resident_factor_field_cells": 156,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "911abc435cc312cbfd52fabed424733a2f276d2c032082857856b575bd99593f",
+      "retain_all_signature_field_cells": 4294967296,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 16,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 480,
+        "horizontal_kernel_field_multiplications": 480,
+        "local_diagonal_field_multiplications": 120,
+        "local_factor_field_multiplications": 256,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 97,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 94,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 316,
+      "factor_unload_additions": 316,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_port_count": 64,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "0c7459c770ac872d142c94118449518a7120cc19a38b3d668da436139015a103",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 2219,
+      "occurrence_expanded_even_sector_count": 9223372036854775808,
+      "program_fingerprint": "99b123a0030d2a6d18eb5469903675e93f62c4897b421863cd6c6ad26fb0eb75",
+      "resident_factor_field_cells": 316,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "d67af26bf4a46f1714bec58a8f8d657564b9b05efd450bb4bbf9ed45c4c3f3e5",
+      "retain_all_signature_field_cells": 18446744073709551616,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 32,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 992,
+        "horizontal_kernel_field_multiplications": 992,
+        "local_diagonal_field_multiplications": 248,
+        "local_factor_field_multiplications": 512,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 7,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 190,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 636,
+      "factor_unload_additions": 636,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_port_count": 128,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "993fb1d46e075b17c32447437cc157af6deb52bf05994d875d5a7c0ffac8e179",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 4459,
+      "occurrence_expanded_even_sector_count": 170141183460469231731687303715884105728,
+      "program_fingerprint": "a7f59818bc7424aac1f8ecb228a4a83638bee50ba0fec66739193dc5409dbb85",
+      "resident_factor_field_cells": 636,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "e5afd1ea9f04c1119cf9c83b8174ba1968ab13458d532b082aacb7a1b8940d0d",
+      "retain_all_signature_field_cells": 340282366920938463463374607431768211456,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 64,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 2016,
+        "horizontal_kernel_field_multiplications": 2016,
+        "local_diagonal_field_multiplications": 504,
+        "local_factor_field_multiplications": 1024,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 19,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 382,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 1276,
+      "factor_unload_additions": 1276,
+      "family": "PRIMARY",
+      "field": "F103",
+      "field_port_count": 256,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "f888af13f1721afedb590f2985e16010ff423f7fbf67b08f902a16a26f702e5e",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 8939,
+      "occurrence_expanded_even_sector_count": 57896044618658097711785492504343953926634992332820282019728792003956564819968,
+      "program_fingerprint": "7c6fed83ad1854250147615fcd7e074c1efbcb38238ab7ff3d01ce427ec731a7",
+      "resident_factor_field_cells": 1276,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "67446155ce665fe2dacb7d3ef4d160ccff3b093b3287ccc9e17d5b9851889a7a",
+      "retain_all_signature_field_cells": 115792089237316195423570985008687907853269984665640564039457584007913129639936,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 128,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 4064,
+        "horizontal_kernel_field_multiplications": 4064,
+        "local_diagonal_field_multiplications": 1016,
+        "local_factor_field_multiplications": 2048,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 37,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 1,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 6,
+      "factor_unload_additions": 6,
+      "family": "REUSE",
+      "field": "F103",
+      "field_port_count": 2,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "a9b3afb18651da116e0080b206fd40360298329da1246dccd4d3370f5f41bdaf",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 5,
+      "maximum_named_transient_payload_bits": 35,
+      "maximum_resident_payload_bits": 49,
+      "occurrence_expanded_even_sector_count": 2,
+      "program_fingerprint": "d6725046f1276006044b74547f19467a2fbbba25721fefc76da8345150597eab",
+      "resident_factor_field_cells": 6,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "03783ad30f72e9f51d0048d02916836b8bf2e4221630e4ede4226f4b3fa76134",
+      "retain_all_signature_field_cells": 4,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 1,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 0,
+        "horizontal_kernel_field_multiplications": 0,
+        "local_diagonal_field_multiplications": 0,
+        "local_factor_field_multiplications": 16,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 5,
+        "maximum_named_transient_payload_bits": 35,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 81,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 4,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 16,
+      "factor_unload_additions": 16,
+      "family": "REUSE",
+      "field": "F103",
+      "field_port_count": 4,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "8530fe02004d772b52a0b4a5309b99010e8bab2076b0a4026a6a14ebf38e6e68",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 119,
+      "occurrence_expanded_even_sector_count": 8,
+      "program_fingerprint": "ea43c14b85675826239031ef1a02c001204df09ef69b05d37a195b7319fa519d",
+      "resident_factor_field_cells": 16,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "82e64c744790f3cca148a6343c3e426017732514ca0c3e33a19314adff8a1aa4",
+      "retain_all_signature_field_cells": 16,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 2,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 32,
+        "horizontal_kernel_field_multiplications": 32,
+        "local_diagonal_field_multiplications": 8,
+        "local_factor_field_multiplications": 32,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 76,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 10,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 36,
+      "factor_unload_additions": 36,
+      "family": "REUSE",
+      "field": "F103",
+      "field_port_count": 8,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "04ef2b2c7d9c5a94236e949b42e20ac2928d8248fcd30a8852f6dee1b901e598",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 259,
+      "occurrence_expanded_even_sector_count": 128,
+      "program_fingerprint": "2bb74bdf075f96960985bcdeb8926b3f76e88d4456707abcb46ceed36c59fab7",
+      "resident_factor_field_cells": 36,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "3c010fb44e214cbd909f2670ea5f1a08a3a861714ceab9fd8c8df02c6f656dbd",
+      "retain_all_signature_field_cells": 256,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 4,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 96,
+        "horizontal_kernel_field_multiplications": 96,
+        "local_diagonal_field_multiplications": 24,
+        "local_factor_field_multiplications": 64,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 51,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 22,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 76,
+      "factor_unload_additions": 76,
+      "family": "REUSE",
+      "field": "F103",
+      "field_port_count": 16,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "e55e88e2af39c8a6bbdfaac200a87a4b3fc3e1f6a54b282c4a6aff48f5153bb6",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 539,
+      "occurrence_expanded_even_sector_count": 32768,
+      "program_fingerprint": "d287ec2026a810eab3ee816e78e6daa8b48e56ea4f260c7ccb2d5da57cbaa857",
+      "resident_factor_field_cells": 76,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "23f3f0b12473bc76899e09fac5370900cda6a19765554ef6a792082ad104d470",
+      "retain_all_signature_field_cells": 65536,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 8,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 224,
+        "horizontal_kernel_field_multiplications": 224,
+        "local_diagonal_field_multiplications": 56,
+        "local_factor_field_multiplications": 128,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 57,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 46,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 156,
+      "factor_unload_additions": 156,
+      "family": "REUSE",
+      "field": "F103",
+      "field_port_count": 32,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "6cde6430006ff9652a4d98e97ff4a8d904250fe844a7535484eb56452458e99c",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 1099,
+      "occurrence_expanded_even_sector_count": 2147483648,
+      "program_fingerprint": "0cde3171217dcbe33e13127a00e87ccd3dbf648a7373f0a2e05544f3841e9458",
+      "resident_factor_field_cells": 156,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "911abc435cc312cbfd52fabed424733a2f276d2c032082857856b575bd99593f",
+      "retain_all_signature_field_cells": 4294967296,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 16,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 480,
+        "horizontal_kernel_field_multiplications": 480,
+        "local_diagonal_field_multiplications": 120,
+        "local_factor_field_multiplications": 256,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 90,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 94,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 316,
+      "factor_unload_additions": 316,
+      "family": "REUSE",
+      "field": "F103",
+      "field_port_count": 64,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "0c7459c770ac872d142c94118449518a7120cc19a38b3d668da436139015a103",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 2219,
+      "occurrence_expanded_even_sector_count": 9223372036854775808,
+      "program_fingerprint": "8b269092411b4b16623e0f3e98c018d8b97da3b10d6d50b197ccf9a7c644d175",
+      "resident_factor_field_cells": 316,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "d67af26bf4a46f1714bec58a8f8d657564b9b05efd450bb4bbf9ed45c4c3f3e5",
+      "retain_all_signature_field_cells": 18446744073709551616,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 32,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 992,
+        "horizontal_kernel_field_multiplications": 992,
+        "local_diagonal_field_multiplications": 248,
+        "local_factor_field_multiplications": 512,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 69,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 190,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 636,
+      "factor_unload_additions": 636,
+      "family": "REUSE",
+      "field": "F103",
+      "field_port_count": 128,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "993fb1d46e075b17c32447437cc157af6deb52bf05994d875d5a7c0ffac8e179",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 4459,
+      "occurrence_expanded_even_sector_count": 170141183460469231731687303715884105728,
+      "program_fingerprint": "bfa9519c47e2c207f2844fa547a7b3191808efd41a3fdec7cf13ed846c4ddbc3",
+      "resident_factor_field_cells": 636,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "e5afd1ea9f04c1119cf9c83b8174ba1968ab13458d532b082aacb7a1b8940d0d",
+      "retain_all_signature_field_cells": 340282366920938463463374607431768211456,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 64,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 2016,
+        "horizontal_kernel_field_multiplications": 2016,
+        "local_diagonal_field_multiplications": 504,
+        "local_factor_field_multiplications": 1024,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 48,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 382,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 1276,
+      "factor_unload_additions": 1276,
+      "family": "REUSE",
+      "field": "F103",
+      "field_port_count": 256,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "f888af13f1721afedb590f2985e16010ff423f7fbf67b08f902a16a26f702e5e",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 133,
+      "maximum_resident_payload_bits": 8939,
+      "occurrence_expanded_even_sector_count": 57896044618658097711785492504343953926634992332820282019728792003956564819968,
+      "program_fingerprint": "3a409580b9a5896aeeab9ec34486ac029b6fc49cb839227564f0bf91d608eba8",
+      "resident_factor_field_cells": 1276,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "67446155ce665fe2dacb7d3ef4d160ccff3b093b3287ccc9e17d5b9851889a7a",
+      "retain_all_signature_field_cells": 115792089237316195423570985008687907853269984665640564039457584007913129639936,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 128,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 4064,
+        "horizontal_kernel_field_multiplications": 4064,
+        "local_diagonal_field_multiplications": 1016,
+        "local_factor_field_multiplications": 2048,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 133,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 105,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 1,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 6,
+      "factor_unload_additions": 6,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_port_count": 2,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "a9b3afb18651da116e0080b206fd40360298329da1246dccd4d3370f5f41bdaf",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 5,
+      "maximum_named_transient_payload_bits": 40,
+      "maximum_resident_payload_bits": 56,
+      "occurrence_expanded_even_sector_count": 2,
+      "program_fingerprint": "3466202e0e8e02eeea38bb15c9c3b35f6550a18b08ac4ec11f7f9c8c8bb9f7c0",
+      "resident_factor_field_cells": 6,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "03783ad30f72e9f51d0048d02916836b8bf2e4221630e4ede4226f4b3fa76134",
+      "retain_all_signature_field_cells": 4,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 1,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 0,
+        "horizontal_kernel_field_multiplications": 0,
+        "local_diagonal_field_multiplications": 0,
+        "local_factor_field_multiplications": 16,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 5,
+        "maximum_named_transient_payload_bits": 40,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 51,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 4,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 16,
+      "factor_unload_additions": 16,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_port_count": 4,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "8530fe02004d772b52a0b4a5309b99010e8bab2076b0a4026a6a14ebf38e6e68",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 136,
+      "occurrence_expanded_even_sector_count": 8,
+      "program_fingerprint": "cea7b485ee074cb26ee170a03a2ae04e196af57af99db18a9befe27ccff3acef",
+      "resident_factor_field_cells": 16,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "82e64c744790f3cca148a6343c3e426017732514ca0c3e33a19314adff8a1aa4",
+      "retain_all_signature_field_cells": 16,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 2,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 32,
+        "horizontal_kernel_field_multiplications": 32,
+        "local_diagonal_field_multiplications": 8,
+        "local_factor_field_multiplications": 32,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 40,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 10,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 36,
+      "factor_unload_additions": 36,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_port_count": 8,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "04ef2b2c7d9c5a94236e949b42e20ac2928d8248fcd30a8852f6dee1b901e598",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 296,
+      "occurrence_expanded_even_sector_count": 128,
+      "program_fingerprint": "b0e88cdd64003648a3bc6f706cb570684091fd5a30c5eab0a8491b9d741102d9",
+      "resident_factor_field_cells": 36,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "3c010fb44e214cbd909f2670ea5f1a08a3a861714ceab9fd8c8df02c6f656dbd",
+      "retain_all_signature_field_cells": 256,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 4,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 96,
+        "horizontal_kernel_field_multiplications": 96,
+        "local_diagonal_field_multiplications": 24,
+        "local_factor_field_multiplications": 64,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 54,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 22,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 76,
+      "factor_unload_additions": 76,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_port_count": 16,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "e55e88e2af39c8a6bbdfaac200a87a4b3fc3e1f6a54b282c4a6aff48f5153bb6",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 616,
+      "occurrence_expanded_even_sector_count": 32768,
+      "program_fingerprint": "b75dc10802dba7b01f964742eac6f8cd12b884d6d67ffa1d29d3e3c52b88dc7f",
+      "resident_factor_field_cells": 76,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "23f3f0b12473bc76899e09fac5370900cda6a19765554ef6a792082ad104d470",
+      "retain_all_signature_field_cells": 65536,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 8,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 224,
+        "horizontal_kernel_field_multiplications": 224,
+        "local_diagonal_field_multiplications": 56,
+        "local_factor_field_multiplications": 128,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 33,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 46,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 156,
+      "factor_unload_additions": 156,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_port_count": 32,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "6cde6430006ff9652a4d98e97ff4a8d904250fe844a7535484eb56452458e99c",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 1256,
+      "occurrence_expanded_even_sector_count": 2147483648,
+      "program_fingerprint": "d2fdce1ea135f518eae0376fc71fb5461ec560ad313f4b9e0608540b8a68545f",
+      "resident_factor_field_cells": 156,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "911abc435cc312cbfd52fabed424733a2f276d2c032082857856b575bd99593f",
+      "retain_all_signature_field_cells": 4294967296,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 16,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 480,
+        "horizontal_kernel_field_multiplications": 480,
+        "local_diagonal_field_multiplications": 120,
+        "local_factor_field_multiplications": 256,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 127,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 94,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 316,
+      "factor_unload_additions": 316,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_port_count": 64,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "0c7459c770ac872d142c94118449518a7120cc19a38b3d668da436139015a103",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 2536,
+      "occurrence_expanded_even_sector_count": 9223372036854775808,
+      "program_fingerprint": "99b123a0030d2a6d18eb5469903675e93f62c4897b421863cd6c6ad26fb0eb75",
+      "resident_factor_field_cells": 316,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "d67af26bf4a46f1714bec58a8f8d657564b9b05efd450bb4bbf9ed45c4c3f3e5",
+      "retain_all_signature_field_cells": 18446744073709551616,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 32,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 992,
+        "horizontal_kernel_field_multiplications": 992,
+        "local_diagonal_field_multiplications": 248,
+        "local_factor_field_multiplications": 512,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 130,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 190,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 636,
+      "factor_unload_additions": 636,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_port_count": 128,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "993fb1d46e075b17c32447437cc157af6deb52bf05994d875d5a7c0ffac8e179",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 5096,
+      "occurrence_expanded_even_sector_count": 170141183460469231731687303715884105728,
+      "program_fingerprint": "a7f59818bc7424aac1f8ecb228a4a83638bee50ba0fec66739193dc5409dbb85",
+      "resident_factor_field_cells": 636,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "e5afd1ea9f04c1119cf9c83b8174ba1968ab13458d532b082aacb7a1b8940d0d",
+      "retain_all_signature_field_cells": 340282366920938463463374607431768211456,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 64,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 2016,
+        "horizontal_kernel_field_multiplications": 2016,
+        "local_diagonal_field_multiplications": 504,
+        "local_factor_field_multiplications": 1024,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 5,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 382,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 1276,
+      "factor_unload_additions": 1276,
+      "family": "PRIMARY",
+      "field": "F137",
+      "field_port_count": 256,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "f888af13f1721afedb590f2985e16010ff423f7fbf67b08f902a16a26f702e5e",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 10216,
+      "occurrence_expanded_even_sector_count": 57896044618658097711785492504343953926634992332820282019728792003956564819968,
+      "program_fingerprint": "7c6fed83ad1854250147615fcd7e074c1efbcb38238ab7ff3d01ce427ec731a7",
+      "resident_factor_field_cells": 1276,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "67446155ce665fe2dacb7d3ef4d160ccff3b093b3287ccc9e17d5b9851889a7a",
+      "retain_all_signature_field_cells": 115792089237316195423570985008687907853269984665640564039457584007913129639936,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 128,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 4064,
+        "horizontal_kernel_field_multiplications": 4064,
+        "local_diagonal_field_multiplications": 1016,
+        "local_factor_field_multiplications": 2048,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 3,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 1,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 6,
+      "factor_unload_additions": 6,
+      "family": "REUSE",
+      "field": "F137",
+      "field_port_count": 2,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "a9b3afb18651da116e0080b206fd40360298329da1246dccd4d3370f5f41bdaf",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 5,
+      "maximum_named_transient_payload_bits": 40,
+      "maximum_resident_payload_bits": 56,
+      "occurrence_expanded_even_sector_count": 2,
+      "program_fingerprint": "d6725046f1276006044b74547f19467a2fbbba25721fefc76da8345150597eab",
+      "resident_factor_field_cells": 6,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "03783ad30f72e9f51d0048d02916836b8bf2e4221630e4ede4226f4b3fa76134",
+      "retain_all_signature_field_cells": 4,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 1,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 0,
+        "horizontal_kernel_field_multiplications": 0,
+        "local_diagonal_field_multiplications": 0,
+        "local_factor_field_multiplications": 16,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 5,
+        "maximum_named_transient_payload_bits": 40,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 98,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 4,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 16,
+      "factor_unload_additions": 16,
+      "family": "REUSE",
+      "field": "F137",
+      "field_port_count": 4,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "8530fe02004d772b52a0b4a5309b99010e8bab2076b0a4026a6a14ebf38e6e68",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 136,
+      "occurrence_expanded_even_sector_count": 8,
+      "program_fingerprint": "ea43c14b85675826239031ef1a02c001204df09ef69b05d37a195b7319fa519d",
+      "resident_factor_field_cells": 16,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "82e64c744790f3cca148a6343c3e426017732514ca0c3e33a19314adff8a1aa4",
+      "retain_all_signature_field_cells": 16,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 2,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 32,
+        "horizontal_kernel_field_multiplications": 32,
+        "local_diagonal_field_multiplications": 8,
+        "local_factor_field_multiplications": 32,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 111,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 10,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 36,
+      "factor_unload_additions": 36,
+      "family": "REUSE",
+      "field": "F137",
+      "field_port_count": 8,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "04ef2b2c7d9c5a94236e949b42e20ac2928d8248fcd30a8852f6dee1b901e598",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 296,
+      "occurrence_expanded_even_sector_count": 128,
+      "program_fingerprint": "2bb74bdf075f96960985bcdeb8926b3f76e88d4456707abcb46ceed36c59fab7",
+      "resident_factor_field_cells": 36,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "3c010fb44e214cbd909f2670ea5f1a08a3a861714ceab9fd8c8df02c6f656dbd",
+      "retain_all_signature_field_cells": 256,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 4,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 96,
+        "horizontal_kernel_field_multiplications": 96,
+        "local_diagonal_field_multiplications": 24,
+        "local_factor_field_multiplications": 64,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 98,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 22,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 76,
+      "factor_unload_additions": 76,
+      "family": "REUSE",
+      "field": "F137",
+      "field_port_count": 16,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "e55e88e2af39c8a6bbdfaac200a87a4b3fc3e1f6a54b282c4a6aff48f5153bb6",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 616,
+      "occurrence_expanded_even_sector_count": 32768,
+      "program_fingerprint": "d287ec2026a810eab3ee816e78e6daa8b48e56ea4f260c7ccb2d5da57cbaa857",
+      "resident_factor_field_cells": 76,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "23f3f0b12473bc76899e09fac5370900cda6a19765554ef6a792082ad104d470",
+      "retain_all_signature_field_cells": 65536,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 8,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 224,
+        "horizontal_kernel_field_multiplications": 224,
+        "local_diagonal_field_multiplications": 56,
+        "local_factor_field_multiplications": 128,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 124,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 46,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 156,
+      "factor_unload_additions": 156,
+      "family": "REUSE",
+      "field": "F137",
+      "field_port_count": 32,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "6cde6430006ff9652a4d98e97ff4a8d904250fe844a7535484eb56452458e99c",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 1256,
+      "occurrence_expanded_even_sector_count": 2147483648,
+      "program_fingerprint": "0cde3171217dcbe33e13127a00e87ccd3dbf648a7373f0a2e05544f3841e9458",
+      "resident_factor_field_cells": 156,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "911abc435cc312cbfd52fabed424733a2f276d2c032082857856b575bd99593f",
+      "retain_all_signature_field_cells": 4294967296,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 16,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 480,
+        "horizontal_kernel_field_multiplications": 480,
+        "local_diagonal_field_multiplications": 120,
+        "local_factor_field_multiplications": 256,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 75,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 94,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 316,
+      "factor_unload_additions": 316,
+      "family": "REUSE",
+      "field": "F137",
+      "field_port_count": 64,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "0c7459c770ac872d142c94118449518a7120cc19a38b3d668da436139015a103",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 2536,
+      "occurrence_expanded_even_sector_count": 9223372036854775808,
+      "program_fingerprint": "8b269092411b4b16623e0f3e98c018d8b97da3b10d6d50b197ccf9a7c644d175",
+      "resident_factor_field_cells": 316,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "d67af26bf4a46f1714bec58a8f8d657564b9b05efd450bb4bbf9ed45c4c3f3e5",
+      "retain_all_signature_field_cells": 18446744073709551616,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 32,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 992,
+        "horizontal_kernel_field_multiplications": 992,
+        "local_diagonal_field_multiplications": 248,
+        "local_factor_field_multiplications": 512,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 132,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 190,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 636,
+      "factor_unload_additions": 636,
+      "family": "REUSE",
+      "field": "F137",
+      "field_port_count": 128,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "993fb1d46e075b17c32447437cc157af6deb52bf05994d875d5a7c0ffac8e179",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 5096,
+      "occurrence_expanded_even_sector_count": 170141183460469231731687303715884105728,
+      "program_fingerprint": "bfa9519c47e2c207f2844fa547a7b3191808efd41a3fdec7cf13ed846c4ddbc3",
+      "resident_factor_field_cells": 636,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "e5afd1ea9f04c1119cf9c83b8174ba1968ab13458d532b082aacb7a1b8940d0d",
+      "retain_all_signature_field_cells": 340282366920938463463374607431768211456,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 64,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 2016,
+        "horizontal_kernel_field_multiplications": 2016,
+        "local_diagonal_field_multiplications": 504,
+        "local_factor_field_multiplications": 1024,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": 6,
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 382,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 1276,
+      "factor_unload_additions": 1276,
+      "family": "REUSE",
+      "field": "F137",
+      "field_port_count": 256,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "f888af13f1721afedb590f2985e16010ff423f7fbf67b08f902a16a26f702e5e",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 152,
+      "maximum_resident_payload_bits": 10216,
+      "occurrence_expanded_even_sector_count": 57896044618658097711785492504343953926634992332820282019728792003956564819968,
+      "program_fingerprint": "3a409580b9a5896aeeab9ec34486ac029b6fc49cb839227564f0bf91d608eba8",
+      "resident_factor_field_cells": 1276,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "67446155ce665fe2dacb7d3ef4d160ccff3b093b3287ccc9e17d5b9851889a7a",
+      "retain_all_signature_field_cells": 115792089237316195423570985008687907853269984665640564039457584007913129639936,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 128,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 4064,
+        "horizontal_kernel_field_multiplications": 4064,
+        "local_diagonal_field_multiplications": 1016,
+        "local_factor_field_multiplications": 2048,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 152,
+        "recurrence_calls": 2
+      }
+    }
+  ],
+  "exact_transactions": [
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 1,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 6,
+      "factor_unload_additions": 6,
+      "family": "PRIMARY",
+      "field_port_count": 2,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "4dd45738ad38cd65e8e4363bbf26fe9ed3d2d2c908ba1d8def5d83f22f7606d4",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 5,
+      "maximum_named_transient_payload_bits": 168,
+      "maximum_resident_payload_bits": 305,
+      "occurrence_expanded_even_sector_count": 2,
+      "program_fingerprint": "3466202e0e8e02eeea38bb15c9c3b35f6550a18b08ac4ec11f7f9c8c8bb9f7c0",
+      "resident_factor_field_cells": 6,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "88f4f14ef5c26fb4b498c66c869778a83d4ea14e5a2d35e98b70c6df56812bd3",
+      "retain_all_signature_field_cells": 4,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 1,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 0,
+        "horizontal_kernel_field_multiplications": 0,
+        "local_diagonal_field_multiplications": 0,
+        "local_factor_field_multiplications": 16,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 5,
+        "maximum_named_transient_payload_bits": 168,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          3,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 4,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 16,
+      "factor_unload_additions": 16,
+      "family": "PRIMARY",
+      "field_port_count": 4,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "d28556c2dcacee3b23b6a418d8a90c6889d6dee15e82c80b2f34cf02cbdc9d18",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 642,
+      "maximum_resident_payload_bits": 673,
+      "occurrence_expanded_even_sector_count": 8,
+      "program_fingerprint": "cea7b485ee074cb26ee170a03a2ae04e196af57af99db18a9befe27ccff3acef",
+      "resident_factor_field_cells": 16,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "03a103f231d340dafdffc9a1b7b88265c286d7fedf8218fbd611f6a5ed7309fc",
+      "retain_all_signature_field_cells": 16,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 2,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 32,
+        "horizontal_kernel_field_multiplications": 32,
+        "local_diagonal_field_multiplications": 8,
+        "local_factor_field_multiplications": 32,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 642,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          10,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -3,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          -4,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 10,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 36,
+      "factor_unload_additions": 36,
+      "family": "PRIMARY",
+      "field_port_count": 8,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "4762787a18e553bafc4b35fa6e2c7fb558d31fd32e2a00e946072b070bb41310",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 867,
+      "maximum_resident_payload_bits": 1518,
+      "occurrence_expanded_even_sector_count": 128,
+      "program_fingerprint": "b0e88cdd64003648a3bc6f706cb570684091fd5a30c5eab0a8491b9d741102d9",
+      "resident_factor_field_cells": 36,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "1ec70117c051095b0f2877bbbd985ac51abc5890879d065948c95ba725fb9474",
+      "retain_all_signature_field_cells": 256,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 4,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 96,
+        "horizontal_kernel_field_multiplications": 96,
+        "local_diagonal_field_multiplications": 24,
+        "local_factor_field_multiplications": 64,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 867,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          -77,
+          1
+        ],
+        [
+          -39,
+          1
+        ],
+        [
+          -69,
+          1
+        ],
+        [
+          -20,
+          1
+        ],
+        [
+          -23,
+          1
+        ],
+        [
+          -52,
+          1
+        ],
+        [
+          -56,
+          1
+        ],
+        [
+          -3,
+          1
+        ],
+        [
+          -38,
+          1
+        ],
+        [
+          -15,
+          1
+        ],
+        [
+          53,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          -40,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -7,
+          1
+        ],
+        [
+          -107,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 22,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 76,
+      "factor_unload_additions": 76,
+      "family": "PRIMARY",
+      "field_port_count": 16,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "c72053dbff09a2cfb1de8f7934bf68f4fc04f87083fb33f90248dbb2a1c3f8eb",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 1506,
+      "maximum_resident_payload_bits": 3059,
+      "occurrence_expanded_even_sector_count": 32768,
+      "program_fingerprint": "b75dc10802dba7b01f964742eac6f8cd12b884d6d67ffa1d29d3e3c52b88dc7f",
+      "resident_factor_field_cells": 76,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "ed0d548d04031e2b97a57d1e2c61453b9ddfe4f3dba92069adfd3eff664f1b93",
+      "retain_all_signature_field_cells": 65536,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 8,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 224,
+        "horizontal_kernel_field_multiplications": 224,
+        "local_diagonal_field_multiplications": 56,
+        "local_factor_field_multiplications": 128,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 1506,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          7028,
+          1
+        ],
+        [
+          7648,
+          1
+        ],
+        [
+          7987,
+          1
+        ],
+        [
+          12155,
+          1
+        ],
+        [
+          20182,
+          1
+        ],
+        [
+          12555,
+          1
+        ],
+        [
+          6939,
+          1
+        ],
+        [
+          5042,
+          1
+        ],
+        [
+          -3546,
+          1
+        ],
+        [
+          8822,
+          1
+        ],
+        [
+          6046,
+          1
+        ],
+        [
+          10100,
+          1
+        ],
+        [
+          3700,
+          1
+        ],
+        [
+          2988,
+          1
+        ],
+        [
+          -5177,
+          1
+        ],
+        [
+          9851,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 46,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 156,
+      "factor_unload_additions": 156,
+      "family": "PRIMARY",
+      "field_port_count": 32,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "09cc463c5789d0c2499268d3e593618561944071e586eccd98fa884ab0c4f629",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 3021,
+      "maximum_resident_payload_bits": 6375,
+      "occurrence_expanded_even_sector_count": 2147483648,
+      "program_fingerprint": "d2fdce1ea135f518eae0376fc71fb5461ec560ad313f4b9e0608540b8a68545f",
+      "resident_factor_field_cells": 156,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "16d751b5e61ce2d9e92ef3c516ccbc9f0eb3611ed9d58cf144a652343d2fdc14",
+      "retain_all_signature_field_cells": 4294967296,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 16,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 480,
+        "horizontal_kernel_field_multiplications": 480,
+        "local_diagonal_field_multiplications": 120,
+        "local_factor_field_multiplications": 256,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 3021,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          -94232923,
+          1
+        ],
+        [
+          -618192512,
+          1
+        ],
+        [
+          -729275787,
+          1
+        ],
+        [
+          -374449543,
+          1
+        ],
+        [
+          -165167381,
+          1
+        ],
+        [
+          583148165,
+          1
+        ],
+        [
+          1088753717,
+          1
+        ],
+        [
+          1373532526,
+          1
+        ],
+        [
+          1687568089,
+          1
+        ],
+        [
+          1861523881,
+          1
+        ],
+        [
+          1474690421,
+          1
+        ],
+        [
+          1383016777,
+          1
+        ],
+        [
+          746933907,
+          1
+        ],
+        [
+          378378352,
+          1
+        ],
+        [
+          339681050,
+          1
+        ],
+        [
+          180592522,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 94,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 316,
+      "factor_unload_additions": 316,
+      "family": "PRIMARY",
+      "field_port_count": 64,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "a2759401a6861d2539d5ea77a73a4e442308cb48f75126cc87b5e2a257d8f8a1",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 6550,
+      "maximum_resident_payload_bits": 12944,
+      "occurrence_expanded_even_sector_count": 9223372036854775808,
+      "program_fingerprint": "99b123a0030d2a6d18eb5469903675e93f62c4897b421863cd6c6ad26fb0eb75",
+      "resident_factor_field_cells": 316,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "6d15e0ff827eb50085fed4fdf806fb0506902201abaeb4f85593859c2f13844d",
+      "retain_all_signature_field_cells": 18446744073709551616,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 32,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 992,
+        "horizontal_kernel_field_multiplications": 992,
+        "local_diagonal_field_multiplications": 248,
+        "local_factor_field_multiplications": 512,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 6550,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          22210724542442959798,
+          1
+        ],
+        [
+          39012048998470239305,
+          1
+        ],
+        [
+          47722185485970073806,
+          1
+        ],
+        [
+          48557575636524482908,
+          1
+        ],
+        [
+          41493164441545804906,
+          1
+        ],
+        [
+          27091678002946491279,
+          1
+        ],
+        [
+          7838220216273356736,
+          1
+        ],
+        [
+          -14514478905037364824,
+          1
+        ],
+        [
+          -37566465336830008287,
+          1
+        ],
+        [
+          -57593459900978269170,
+          1
+        ],
+        [
+          -72580623326058475237,
+          1
+        ],
+        [
+          -80133237054781745489,
+          1
+        ],
+        [
+          -78142372648861375086,
+          1
+        ],
+        [
+          -67333192189748469915,
+          1
+        ],
+        [
+          -48678298343595021663,
+          1
+        ],
+        [
+          -24707253279754424614,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 190,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 636,
+      "factor_unload_additions": 636,
+      "family": "PRIMARY",
+      "field_port_count": 128,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "1012a6d17cb763f05aa7376c89b1a4d3397398925f0d4539c27404463d19ae2f",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 13922,
+      "maximum_resident_payload_bits": 26096,
+      "occurrence_expanded_even_sector_count": 170141183460469231731687303715884105728,
+      "program_fingerprint": "a7f59818bc7424aac1f8ecb228a4a83638bee50ba0fec66739193dc5409dbb85",
+      "resident_factor_field_cells": 636,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "936e4699aaad48f41d8c91cd00f33d52f8b519294fcc7533c89f92c8206dc7b9",
+      "retain_all_signature_field_cells": 340282366920938463463374607431768211456,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 64,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 2016,
+        "horizontal_kernel_field_multiplications": 2016,
+        "local_diagonal_field_multiplications": 504,
+        "local_factor_field_multiplications": 1024,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 13922,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 1,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 6,
+      "factor_unload_additions": 6,
+      "family": "REUSE",
+      "field_port_count": 2,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "4dd45738ad38cd65e8e4363bbf26fe9ed3d2d2c908ba1d8def5d83f22f7606d4",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 5,
+      "maximum_named_transient_payload_bits": 194,
+      "maximum_resident_payload_bits": 263,
+      "occurrence_expanded_even_sector_count": 2,
+      "program_fingerprint": "d6725046f1276006044b74547f19467a2fbbba25721fefc76da8345150597eab",
+      "resident_factor_field_cells": 6,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "88f4f14ef5c26fb4b498c66c869778a83d4ea14e5a2d35e98b70c6df56812bd3",
+      "retain_all_signature_field_cells": 4,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 1,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 0,
+        "horizontal_kernel_field_multiplications": 0,
+        "local_diagonal_field_multiplications": 0,
+        "local_factor_field_multiplications": 16,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 5,
+        "maximum_named_transient_payload_bits": 194,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 4,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 16,
+      "factor_unload_additions": 16,
+      "family": "REUSE",
+      "field_port_count": 4,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "d28556c2dcacee3b23b6a418d8a90c6889d6dee15e82c80b2f34cf02cbdc9d18",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 689,
+      "maximum_resident_payload_bits": 689,
+      "occurrence_expanded_even_sector_count": 8,
+      "program_fingerprint": "ea43c14b85675826239031ef1a02c001204df09ef69b05d37a195b7319fa519d",
+      "resident_factor_field_cells": 16,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "03a103f231d340dafdffc9a1b7b88265c286d7fedf8218fbd611f6a5ed7309fc",
+      "retain_all_signature_field_cells": 16,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 2,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 32,
+        "horizontal_kernel_field_multiplications": 32,
+        "local_diagonal_field_multiplications": 8,
+        "local_factor_field_multiplications": 32,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 689,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          3,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -5,
+          1
+        ],
+        [
+          -4,
+          1
+        ],
+        [
+          -3,
+          1
+        ],
+        [
+          -6,
+          1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -3,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 10,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 36,
+      "factor_unload_additions": 36,
+      "family": "REUSE",
+      "field_port_count": 8,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "4762787a18e553bafc4b35fa6e2c7fb558d31fd32e2a00e946072b070bb41310",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 830,
+      "maximum_resident_payload_bits": 1358,
+      "occurrence_expanded_even_sector_count": 128,
+      "program_fingerprint": "2bb74bdf075f96960985bcdeb8926b3f76e88d4456707abcb46ceed36c59fab7",
+      "resident_factor_field_cells": 36,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "1ec70117c051095b0f2877bbbd985ac51abc5890879d065948c95ba725fb9474",
+      "retain_all_signature_field_cells": 256,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 4,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 96,
+        "horizontal_kernel_field_multiplications": 96,
+        "local_diagonal_field_multiplications": 24,
+        "local_factor_field_multiplications": 64,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 830,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          -173,
+          1
+        ],
+        [
+          34,
+          1
+        ],
+        [
+          -57,
+          1
+        ],
+        [
+          -302,
+          1
+        ],
+        [
+          132,
+          1
+        ],
+        [
+          -80,
+          1
+        ],
+        [
+          -86,
+          1
+        ],
+        [
+          -136,
+          1
+        ],
+        [
+          -237,
+          1
+        ],
+        [
+          -33,
+          1
+        ],
+        [
+          -58,
+          1
+        ],
+        [
+          -167,
+          1
+        ],
+        [
+          -262,
+          1
+        ],
+        [
+          96,
+          1
+        ],
+        [
+          -61,
+          1
+        ],
+        [
+          -156,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 22,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 76,
+      "factor_unload_additions": 76,
+      "family": "REUSE",
+      "field_port_count": 16,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "c72053dbff09a2cfb1de8f7934bf68f4fc04f87083fb33f90248dbb2a1c3f8eb",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 1893,
+      "maximum_resident_payload_bits": 3091,
+      "occurrence_expanded_even_sector_count": 32768,
+      "program_fingerprint": "d287ec2026a810eab3ee816e78e6daa8b48e56ea4f260c7ccb2d5da57cbaa857",
+      "resident_factor_field_cells": 76,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "ed0d548d04031e2b97a57d1e2c61453b9ddfe4f3dba92069adfd3eff664f1b93",
+      "retain_all_signature_field_cells": 65536,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 8,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 224,
+        "horizontal_kernel_field_multiplications": 224,
+        "local_diagonal_field_multiplications": 56,
+        "local_factor_field_multiplications": 128,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 1893,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          -68855,
+          1
+        ],
+        [
+          -58150,
+          1
+        ],
+        [
+          1025,
+          1
+        ],
+        [
+          206,
+          1
+        ],
+        [
+          -54107,
+          1
+        ],
+        [
+          -88071,
+          1
+        ],
+        [
+          -32958,
+          1
+        ],
+        [
+          -7535,
+          1
+        ],
+        [
+          -59032,
+          1
+        ],
+        [
+          -81546,
+          1
+        ],
+        [
+          -52432,
+          1
+        ],
+        [
+          -5027,
+          1
+        ],
+        [
+          -36997,
+          1
+        ],
+        [
+          -71142,
+          1
+        ],
+        [
+          -41130,
+          1
+        ],
+        [
+          9446,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 46,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 156,
+      "factor_unload_additions": 156,
+      "family": "REUSE",
+      "field_port_count": 32,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "09cc463c5789d0c2499268d3e593618561944071e586eccd98fa884ab0c4f629",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 3422,
+      "maximum_resident_payload_bits": 6429,
+      "occurrence_expanded_even_sector_count": 2147483648,
+      "program_fingerprint": "0cde3171217dcbe33e13127a00e87ccd3dbf648a7373f0a2e05544f3841e9458",
+      "resident_factor_field_cells": 156,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "16d751b5e61ce2d9e92ef3c516ccbc9f0eb3611ed9d58cf144a652343d2fdc14",
+      "retain_all_signature_field_cells": 4294967296,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 16,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 480,
+        "horizontal_kernel_field_multiplications": 480,
+        "local_diagonal_field_multiplications": 120,
+        "local_factor_field_multiplications": 256,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 3422,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          -3550841948,
+          1
+        ],
+        [
+          10144166160,
+          1
+        ],
+        [
+          15943452149,
+          1
+        ],
+        [
+          2071499233,
+          1
+        ],
+        [
+          -6285409569,
+          1
+        ],
+        [
+          4865097606,
+          1
+        ],
+        [
+          15488757967,
+          1
+        ],
+        [
+          6244841791,
+          1
+        ],
+        [
+          -6605875723,
+          1
+        ],
+        [
+          1051015418,
+          1
+        ],
+        [
+          14826988098,
+          1
+        ],
+        [
+          10864697383,
+          1
+        ],
+        [
+          -2960926960,
+          1
+        ],
+        [
+          -1266242249,
+          1
+        ],
+        [
+          13775340392,
+          1
+        ],
+        [
+          14411578001,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 94,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 316,
+      "factor_unload_additions": 316,
+      "family": "REUSE",
+      "field_port_count": 64,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "a2759401a6861d2539d5ea77a73a4e442308cb48f75126cc87b5e2a257d8f8a1",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 7149,
+      "maximum_resident_payload_bits": 12994,
+      "occurrence_expanded_even_sector_count": 9223372036854775808,
+      "program_fingerprint": "8b269092411b4b16623e0f3e98c018d8b97da3b10d6d50b197ccf9a7c644d175",
+      "resident_factor_field_cells": 316,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "6d15e0ff827eb50085fed4fdf806fb0506902201abaeb4f85593859c2f13844d",
+      "retain_all_signature_field_cells": 18446744073709551616,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 32,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 992,
+        "horizontal_kernel_field_multiplications": 992,
+        "local_diagonal_field_multiplications": 248,
+        "local_factor_field_multiplications": 512,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 7149,
+        "recurrence_calls": 2
+      }
+    },
+    {
+      "accepted_path_dense_signature_materialized": false,
+      "accepted_path_even_sector_enumeration": false,
+      "accepted_path_topology_column_interleaving": true,
+      "accumulator_forward_inverse_updates": 2,
+      "boundary": [
+        [
+          903287940868187023941,
+          1
+        ],
+        [
+          489365299103677129585,
+          1
+        ],
+        [
+          -492270813535358125725,
+          1
+        ],
+        [
+          -261682329281641949695,
+          1
+        ],
+        [
+          760420698900772901884,
+          1
+        ],
+        [
+          719367602492292346421,
+          1
+        ],
+        [
+          -309594703453114759860,
+          1
+        ],
+        [
+          -454428699937347853309,
+          1
+        ],
+        [
+          550937713085407316764,
+          1
+        ],
+        [
+          884616810759833737522,
+          1
+        ],
+        [
+          -55796507775791206697,
+          1
+        ],
+        [
+          -561595477353785548383,
+          1
+        ],
+        [
+          288571281500450832586,
+          1
+        ],
+        [
+          951116981550732494872,
+          1
+        ],
+        [
+          222797717079519375577,
+          1
+        ],
+        [
+          -576396308773349657666,
+          1
+        ]
+      ],
+      "carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+      "edge_count": 190,
+      "exact_factor_carrier_restored": true,
+      "factor_load_additions": 636,
+      "factor_unload_additions": 636,
+      "family": "REUSE",
+      "field_port_count": 128,
+      "final_boundary_projection_calls": 1,
+      "generation_after": 1,
+      "generation_before": 0,
+      "initial_digest": "1012a6d17cb763f05aa7376c89b1a4d3397398925f0d4539c27404463d19ae2f",
+      "intermediate_boundary_projection_calls": 0,
+      "inverse_history_retained": false,
+      "maximum_frontier_field_cells": 4,
+      "maximum_named_transient_field_cells": 19,
+      "maximum_named_transient_payload_bits": 14650,
+      "maximum_resident_payload_bits": 26157,
+      "occurrence_expanded_even_sector_count": 170141183460469231731687303715884105728,
+      "program_fingerprint": "bfa9519c47e2c207f2844fa547a7b3191808efd41a3fdec7cf13ed846c4ddbc3",
+      "resident_factor_field_cells": 636,
+      "response_released_after_restoration": true,
+      "restoration_generation_increment": true,
+      "restored_digest_with_generation": "936e4699aaad48f41d8c91cd00f33d52f8b519294fcc7533c89f92c8206dc7b9",
+      "retain_all_signature_field_cells": 340282366920938463463374607431768211456,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "transient_frontier_restoration_class": "NO_RESTORATION_CLAIM",
+      "width": 64,
+      "work": {
+        "final_frontier_field_additions": 6,
+        "horizontal_kernel_field_additions": 2016,
+        "horizontal_kernel_field_multiplications": 2016,
+        "local_diagonal_field_multiplications": 504,
+        "local_factor_field_multiplications": 1024,
+        "maximum_frontier_field_cells": 4,
+        "maximum_named_transient_field_cells": 19,
+        "maximum_named_transient_payload_bits": 14650,
+        "recurrence_calls": 2
+      }
+    }
+  ],
+  "matched_baselines": {
+    "occurrence_expanded": "M123_STREAMED_EVEN_SECTOR_PFAFFIANS",
+    "phase_advantage_over_matched_classical": false,
+    "retain_all": "FULL_4_TO_THE_W_DEFECT_SIGNATURE",
+    "strongest_implemented": "IDENTICAL_EXACT_FOUR_STATE_COLUMN_TRANSFER"
+  },
+  "next_experiment": "EXACT_TOPOLOGY_ORDERED_SHARED_PHASE_PARITY_LEDGER_ON_GROWING_SQUARE_GRID_SEPARATORS_WITH_ALL_ORDER_RESIDUAL_RANK_AND_IDENTICAL_TENSOR_NETWORK_BASELINES",
+  "next_obstruction": "THE_SHARED_NON_GAUSSIAN_PARITY_LEDGER_IS_FIXED_RANK_ONLY_BECAUSE_THE_TWO_ROW_TOPOLOGY_HAS_A_FOUR_STATE_COLUMN_SEPARATOR_AND_THE_IDENTICAL_CLASSICAL_TRANSFER_HAS_THE_SAME_LAW_SO_THE_NEXT_PHASE_REPAIR_MUST_CLOSE_GROWING_SEPARATOR_WIDTH_OR_INTRODUCE_A_RESOURCE_NOT_REDUCIBLE_TO_THE_TRANSFER",
+  "resource_law": {
+    "accepted_live_frontier_field_cells": 4,
+    "accepted_recurrence_work": "O_W_FIELD_OPERATIONS_WITH_FIXED_FOUR_STATE_FRONTIER_EXACT_BIT_COMPLEXITY_REPORTED_SEPARATELY",
+    "inverse_history_retained": 0,
+    "named_transient_field_cells_upper_bound": 19,
+    "occurrence_expanded_even_sectors": "2_TO_THE_2W_MINUS_1",
+    "python_container_sympy_native_bigint_and_whole_process_memory_excluded": true,
+    "resident_factor_field_cells": "10W_MINUS_4",
+    "retain_all_signature_cells": "4_TO_THE_W"
+  },
+  "restoration": {
+    "inverse_history_retained": false,
+    "resident_factor_and_accumulator_carrier": "EXACT_ALGEBRAIC_RESTORATION",
+    "snapshot_reload_used": false,
+    "transient_four_state_projection_frontier": "NO_RESTORATION_CLAIM"
+  },
+  "reuse": {
+    "baseline_reload_used": false,
+    "first_boundary": [
+      [
+        7028,
+        1
+      ],
+      [
+        7648,
+        1
+      ],
+      [
+        7987,
+        1
+      ],
+      [
+        12155,
+        1
+      ],
+      [
+        20182,
+        1
+      ],
+      [
+        12555,
+        1
+      ],
+      [
+        6939,
+        1
+      ],
+      [
+        5042,
+        1
+      ],
+      [
+        -3546,
+        1
+      ],
+      [
+        8822,
+        1
+      ],
+      [
+        6046,
+        1
+      ],
+      [
+        10100,
+        1
+      ],
+      [
+        3700,
+        1
+      ],
+      [
+        2988,
+        1
+      ],
+      [
+        -5177,
+        1
+      ],
+      [
+        9851,
+        1
+      ]
+    ],
+    "fresh_boundary": [
+      [
+        -68855,
+        1
+      ],
+      [
+        -58150,
+        1
+      ],
+      [
+        1025,
+        1
+      ],
+      [
+        206,
+        1
+      ],
+      [
+        -54107,
+        1
+      ],
+      [
+        -88071,
+        1
+      ],
+      [
+        -32958,
+        1
+      ],
+      [
+        -7535,
+        1
+      ],
+      [
+        -59032,
+        1
+      ],
+      [
+        -81546,
+        1
+      ],
+      [
+        -52432,
+        1
+      ],
+      [
+        -5027,
+        1
+      ],
+      [
+        -36997,
+        1
+      ],
+      [
+        -71142,
+        1
+      ],
+      [
+        -41130,
+        1
+      ],
+      [
+        9446,
+        1
+      ]
+    ],
+    "fresh_restored_boundary_agreement": true,
+    "generation_after_two_transactions": 2,
+    "reused_boundary": [
+      [
+        -68855,
+        1
+      ],
+      [
+        -58150,
+        1
+      ],
+      [
+        1025,
+        1
+      ],
+      [
+        206,
+        1
+      ],
+      [
+        -54107,
+        1
+      ],
+      [
+        -88071,
+        1
+      ],
+      [
+        -32958,
+        1
+      ],
+      [
+        -7535,
+        1
+      ],
+      [
+        -59032,
+        1
+      ],
+      [
+        -81546,
+        1
+      ],
+      [
+        -52432,
+        1
+      ],
+      [
+        -5027,
+        1
+      ],
+      [
+        -36997,
+        1
+      ],
+      [
+        -71142,
+        1
+      ],
+      [
+        -41130,
+        1
+      ],
+      [
+        9446,
+        1
+      ]
+    ],
+    "same_actual_backing_across_unrelated_programs": true,
+    "width": 16
+  },
+  "schema": "CAT_CAS_F17_SHARED_PHASE_PARITY_LEDGER_LADDER_CLOSURE_V1",
+  "source_scope": {
+    "all_vertices_are_nonzero_typed_field_ports": true,
+    "dual_field_structural_widths": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128
+    ],
+    "exact_q_zeta17_widths": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "families": [
+      "PRIMARY",
+      "REUSE"
+    ],
+    "topology": "TWO_ROW_OPEN_LADDERS_ONLY"
+  },
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}

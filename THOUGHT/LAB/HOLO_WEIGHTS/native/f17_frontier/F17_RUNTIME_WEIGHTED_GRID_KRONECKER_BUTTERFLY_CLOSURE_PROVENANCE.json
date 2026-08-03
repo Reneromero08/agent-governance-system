@@ -1,0 +1,35 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "a87d1c2c5e5bec30e26ae39512b17313d0cec8b9",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "a5f43dac1dc5bd2cc5d8bba78953e87353828fcca40f9efb4d76976dd0f3abdc",
+  "reference_full_oracle_sha256": "1da972bf5ea61fba925071e69a5b8d4f785107412fedc3f2b5479e3aea54f003",
+  "reference_observational_benchmark_sha256": "8ad65165b0b0fece6c731baf5ee3e720a4080328211df1ef6db9c9dd4a820ee6",
+  "execution": {
+    "production": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_runtime_weighted_grid_kronecker_butterfly_closure.py",
+    "oracle": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_runtime_weighted_grid_kronecker_butterfly_closure_oracle.py",
+    "benchmark": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/benchmark_f17_runtime_weighted_grid_kronecker_butterfly_closure.py",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_runtime_weighted_grid_kronecker_butterfly_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_runtime_weighted_grid_kronecker_butterfly_closure.py": "8691e684266d032757db3b806e93631e46a8520145af020ec33e390bcccd1019",
+    "f17_runtime_weighted_grid_kronecker_butterfly_closure_oracle.py": "55da9699ac937bc156fe318bedc9def3ec5aee201669eb02d38a32fbc9f88d7f",
+    "benchmark_f17_runtime_weighted_grid_kronecker_butterfly_closure.py": "f10c2449c563fecc6fc55a2b2cc92bd540dd126c362b1d9562a42d89722c2915",
+    "f17_runtime_weighted_grid_phase_factor_closure.py": "fe145481bbd6c35cb7c524f32b83806ed3f07af824430dcd277c74cd8a4ac7f7",
+    "F17_RUNTIME_WEIGHTED_GRID_PHASE_FACTOR_CLOSURE_RESULTS.json": "c02c9eee81421a00b1e18787b76720c85b5b7705d126f65bc3988d824ae03184",
+    "f17_variable_rank_nonseparable_tensor_coupling.py": "9697bf3549e7af7c0331c1828cf6e02d540777d2a78cde0d6da5bd3bbf6a2061",
+    "f17_cubic_chain_period17_quadratic_extension_resident_carrier.py": "1eea251c3dee2e6e0673376c0285fed88de31efc7a547418cbe960b1c89bb111",
+    "qualify_f17_runtime_weighted_grid_kronecker_butterfly_closure.sh": "1ce98814ed89d1fe765c42e51096bf993229e58e32942a43e82e2c90cc9f075c",
+    "F17_RUNTIME_WEIGHTED_GRID_KRONECKER_BUTTERFLY_CLOSURE_RESULTS.json": "a5f43dac1dc5bd2cc5d8bba78953e87353828fcca40f9efb4d76976dd0f3abdc",
+    "F17_RUNTIME_WEIGHTED_GRID_KRONECKER_BUTTERFLY_CLOSURE_ORACLE_RESULTS.json": "1da972bf5ea61fba925071e69a5b8d4f785107412fedc3f2b5479e3aea54f003",
+    "F17_RUNTIME_WEIGHTED_GRID_KRONECKER_BUTTERFLY_CLOSURE_BENCHMARK.json": "8ad65165b0b0fece6c731baf5ee3e720a4080328211df1ef6db9c9dd4a820ee6",
+    "F17_RUNTIME_WEIGHTED_GRID_KRONECKER_BUTTERFLY_CLOSURE_INDEPENDENT_REVIEW.md": "d1bff3f0deffa03d5526043ed47a918ebc4f733f2c4734ac3bcef10823278655"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "factor_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_butterfly_projection_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "claim_ceiling": "LINUX_X86_64_PYTHON_TWO_DETERMINISTIC_PUBLIC_RUNTIME_WEIGHT_FAMILIES_BINARY_N_BY_N_GRIDS_N2_N3_N4_ACTUAL_RESIDENT_FACTOR_KRONECKER_BUTTERFLY_ROOT_ACTIONS4_24_96_ADDITIONS8_48_192_EXACT_INTERFACE_RANKS4_8_16_ONE_FINAL_CYCLOTOMIC_SCALAR_LIFT_EXACT_FACTOR_CARRIER_REVERSE_AND_SEED_UNLOAD_ZERO_BACKING_RESTORATION_HELD_OUT_SAME_BACKING_REUSE_TRANSIENT_FRONTIER_NO_RESTORATION_CLAIM_IDENTICAL_TWO_TO_THE_N_MESSAGE_CLASSICAL_BUTTERFLY_DIRECT_PROCESS_SOFTWARE_ONLY"
+}

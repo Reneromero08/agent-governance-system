@@ -1,0 +1,28 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "86fd1c944a139996709b04714be6713fc64726cd",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "0db1f3104d9c20ec1d91e50d163522ef2065608c41c4d91c39bd58587869bb94",
+  "reference_full_oracle_sha256": "e855a872ec8ae72d9c24b10de3646f6ddc06e085d6220df6cb5dd3bb85668f89",
+  "execution": {
+    "production": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_cubic_chain_period17_quadratic_extension_resident_carrier.py",
+    "oracle": "PYTHONHASHSEED=0 LC_ALL=C nice -n 10 ./.venv/bin/python -X dev cat_cas_phase_frontier/f17_cubic_chain_period17_quadratic_extension_resident_carrier_oracle.py PRODUCTION_RESULT_JSON",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_cubic_chain_period17_quadratic_extension_resident_carrier.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "F17_CUBIC_CHAIN_PERIOD17_QUADRATIC_EXTENSION_RESIDENT_CARRIER_INDEPENDENT_REVIEW.md": "55ccc33a80677a5f8094a9cc2a0a00f9ac97c9aa246908358696253ba3034148",
+    "F17_CUBIC_CHAIN_PERIOD17_QUADRATIC_EXTENSION_RESIDENT_CARRIER_ORACLE_RESULTS.json": "e855a872ec8ae72d9c24b10de3646f6ddc06e085d6220df6cb5dd3bb85668f89",
+    "F17_CUBIC_CHAIN_PERIOD17_QUADRATIC_EXTENSION_RESIDENT_CARRIER_RESULTS.json": "0db1f3104d9c20ec1d91e50d163522ef2065608c41c4d91c39bd58587869bb94",
+    "f17_cubic_chain_period17_direct_real_hermitian.py": "6d60cd4eb7853c208d5b6a51d3ee710a85c0144719997efd329d583b57377e28",
+    "f17_cubic_chain_period17_direct_real_hermitian_oracle.py": "e1165eef8a9936103c8cc0238534e998be171f1af7c148233498b774ba204e00",
+    "f17_cubic_chain_period17_quadratic_extension_resident_carrier.py": "1eea251c3dee2e6e0673376c0285fed88de31efc7a547418cbe960b1c89bb111",
+    "f17_cubic_chain_period17_quadratic_extension_resident_carrier_oracle.py": "552bb44edd11ae6e3c9cf1270cac6a1cabd6c914c9f7f8d228ae37a066110e24",
+    "qualify_f17_cubic_chain_period17_quadratic_extension_resident_carrier.sh": "8cd55587c9018dc88b11638b76bd970397b162baa2fdd2d499737b80812b0458"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_FAMILIES_PERIODS1AND64_EXACT_POST_FORWARD_TWO_BY_EIGHT_REAL_SUBFIELD_QUADRATIC_EXTENSION_STORED_CARRIER_PAIR_NATIVE_PROJECTION_AND_LEDGER_MATERIALIZATION_ONE_SPLIT_TO_FULL_FINAL_SCALAR_BOUNDARY_LIFT_FULL_CYCLOTOMIC_FORWARD_AND_INVERSE_REMATERIALIZATION_EXACT_ALGEBRAIC_ORIGINAL_BACKING_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE_SEPARATE_REFERENCE_PARITY_SOFTWARE_ONLY"
+}

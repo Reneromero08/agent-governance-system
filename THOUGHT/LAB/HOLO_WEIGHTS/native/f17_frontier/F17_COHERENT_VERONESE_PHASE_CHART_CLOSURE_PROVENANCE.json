@@ -1,0 +1,84 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "f787e13100715219b8d39bd113f5aaade3695013",
+  "scientific_source_parent": "497afc1851379b27a625a19ada76cba91b79f199",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "11bd52e43d55e2a48f54ef31dada33ee2c29abb91ce7eb232cd10398d35521e3",
+  "reference_full_oracle_sha256": "89b53b279bc2327d770fd4e52cd9652459ceb32ec6ed2ac156aeee05760c24ad",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_coherent_veronese_phase_chart_closure.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_coherent_veronese_phase_chart_closure_oracle.py --production PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_coherent_veronese_phase_chart_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_coherent_veronese_phase_chart_closure.py": "d87beb76617333442b73fd322fc44bd15ea2970b0988cb346f665e985189a570",
+    "f17_coherent_veronese_phase_chart_closure_oracle.py": "c841ef83e23ea35497d9b4fe094dcb88d1becf803f8b97b27e07116201bdb128",
+    "F17_COHERENT_VERONESE_PHASE_CHART_CLOSURE_RESULTS.json": "11bd52e43d55e2a48f54ef31dada33ee2c29abb91ce7eb232cd10398d35521e3",
+    "F17_COHERENT_VERONESE_PHASE_CHART_CLOSURE_ORACLE_RESULTS.json": "89b53b279bc2327d770fd4e52cd9652459ceb32ec6ed2ac156aeee05760c24ad",
+    "F17_COHERENT_VERONESE_PHASE_CHART_CLOSURE_INDEPENDENT_REVIEW.md": "ccf264037ff1622cbcd8e3c676ecf6cb00296984bcba07d004971adc3fbc5957",
+    "qualify_f17_coherent_veronese_phase_chart_closure.sh": "36a2455232fa3ae6a6bd75febc71df0cdec7010995398fdb43947a07af270515"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "chart": "RANK1_EXCHANGE_SYMMETRIC_COHERENT_VERONESE",
+    "exact_q_zeta17_degrees": [4, 8, 16, 32],
+    "dual_field_degrees": [4, 8, 16, 32, 64, 128],
+    "families": ["PRIMARY", "REUSE"],
+    "primitive_count_per_word": 40,
+    "full_occupation_oracle_degree": 4,
+    "full_occupation_oracle_dimension": 4845,
+    "independent_methods": [
+      "SEPARATE_PUBLIC_PROGRAM_COMPILER",
+      "SEPARATE_17_COORDINATE_CHART_RECURRENCE",
+      "ORDINARY_MONOMIAL_MULTINOMIAL_EXPANSION",
+      "FULL_H4_OCCUPATION_REEXECUTION_IN_THREE_ALGEBRAS",
+      "INDIVIDUAL_PRIMITIVE_FULL_OCCUPATION_PARITY",
+      "INDEPENDENT_M128_GRID_EXIT_RECONSTRUCTION",
+      "SEPARATE_COMPILED_TWO_SCALAR_WARM_BASELINE"
+    ]
+  },
+  "resource_accounting": {
+    "resident_phase_field_cells": 17,
+    "exact_resident_payload_bits": 762,
+    "accepted_path_occupation_coordinates": 0,
+    "accepted_path_occupation_topology_cells": 0,
+    "inverse_history_cells": 0,
+    "maximum_named_transaction_transient_field_cells": 5,
+    "compiled_warm_baseline_retained_field_cells": 2,
+    "compiled_warm_baseline_compiler_working_field_cells": 17,
+    "compiled_warm_baseline_named_transient_field_cells": 4,
+    "full_exact_bit_complexity_established": false,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "HASHLIB_INTERNAL_STATE",
+      "BIT_OPERATION_COMPLEXITY",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_baselines": [
+    "COMPILED_TWO_SCALAR_V0_V1_WARM_BOUNDARY_RECURRENCE_FOR_SEALED_WORDS",
+    "IDENTICAL_17_COORDINATE_COHERENT_VECTOR_RECURRENCE_FOR_DESCRIPTOR_RUNTIME"
+  ],
+  "claim_ceiling": "DECLARED_K4_TO128_RANK1_COHERENT_VERONESE_FIXED_P1_TO_P4_AND_BIDIRECTIONAL_ADJACENT_MODE_SHEAR_PROGRAM_FAMILY_EXACT_Q_ZETA17_K4_TO32_DUAL_FIELD_K4_TO128_DIRECT_PROCESS_SOFTWARE",
+  "rejected_interpretations": [
+    "M127_GRID_ORBIT_SHEAR_CLOSURE",
+    "MULTIPLE_COHERENT_COMPONENT_CLOSURE",
+    "ARBITRARY_H_K_INPUT_CLOSURE",
+    "GENERAL_NONLINEAR_QUOTIENT",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

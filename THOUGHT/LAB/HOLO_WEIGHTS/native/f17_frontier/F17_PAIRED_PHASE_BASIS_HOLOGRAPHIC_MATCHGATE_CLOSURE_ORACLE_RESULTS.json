@@ -1,0 +1,336 @@
+{
+  "claim_ceiling": {
+    "arbitrary_planar_holant_closure": false,
+    "catvm_custody": false,
+    "compact_mixed_parity_native_generators": true,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "even_open_square_grid_family_only": true,
+    "growing_treewidth_polynomial_matchgate_closure": true,
+    "identical_compact_classical_holographic_determinant": true,
+    "paired_phase_basis_identity_closure": true,
+    "physical_bits_replaced_with_pi": false,
+    "physical_waveform_execution": false,
+    "small_wall_crossing": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "direct_native_assignment_control_bounded_to_n2": true,
+    "paired_basis_mutation_changes_native_boundary": true,
+    "production_accepted_path_edge_assignments_required": false,
+    "production_accepted_path_signature_tables_required": false,
+    "public_grid_face_signing_valid": true,
+    "semantic_edge_phase_mutation_changes_boundary": true
+  },
+  "dual_field_row_dp_parity": [
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "matching_branches": 4,
+      "memoized_position_masks": 7,
+      "n": 2
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "matching_branches": 50,
+      "memoized_position_masks": 70,
+      "n": 4
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "matching_branches": 389,
+      "memoized_position_masks": 527,
+      "n": 6
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "matching_branches": 2504,
+      "memoized_position_masks": 3361,
+      "n": 8
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "matching_branches": 14476,
+      "memoized_position_masks": 19360,
+      "n": 10
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "matching_branches": 78108,
+      "memoized_position_masks": 104284,
+      "n": 12
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "matching_branches": 4,
+      "memoized_position_masks": 7,
+      "n": 2
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "matching_branches": 50,
+      "memoized_position_masks": 70,
+      "n": 4
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "matching_branches": 389,
+      "memoized_position_masks": 527,
+      "n": 6
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "matching_branches": 2504,
+      "memoized_position_masks": 3361,
+      "n": 8
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "matching_branches": 14476,
+      "memoized_position_masks": 19360,
+      "n": 10
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "matching_branches": 78108,
+      "memoized_position_masks": 104284,
+      "n": 12
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "matching_branches": 4,
+      "memoized_position_masks": 7,
+      "n": 2
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "matching_branches": 50,
+      "memoized_position_masks": 70,
+      "n": 4
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "matching_branches": 389,
+      "memoized_position_masks": 527,
+      "n": 6
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "matching_branches": 2504,
+      "memoized_position_masks": 3361,
+      "n": 8
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "matching_branches": 14476,
+      "memoized_position_masks": 19360,
+      "n": 10
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "matching_branches": 78108,
+      "memoized_position_masks": 104284,
+      "n": 12
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F137",
+      "matching_branches": 4,
+      "memoized_position_masks": 7,
+      "n": 2
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F137",
+      "matching_branches": 50,
+      "memoized_position_masks": 70,
+      "n": 4
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F137",
+      "matching_branches": 389,
+      "memoized_position_masks": 527,
+      "n": 6
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F137",
+      "matching_branches": 2504,
+      "memoized_position_masks": 3361,
+      "n": 8
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F137",
+      "matching_branches": 14476,
+      "memoized_position_masks": 19360,
+      "n": 10
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F137",
+      "matching_branches": 78108,
+      "memoized_position_masks": 104284,
+      "n": 12
+    }
+  ],
+  "exact_matching_parity": [
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "matching_branches": 4,
+      "memoized_vertex_masks": 4,
+      "n": 2,
+      "perfect_matching_count": 2
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "matching_branches": 50,
+      "memoized_vertex_masks": 36,
+      "n": 4,
+      "perfect_matching_count": 36
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "matching_branches": 389,
+      "memoized_vertex_masks": 267,
+      "n": 6,
+      "perfect_matching_count": 6728
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "matching_branches": 4,
+      "memoized_vertex_masks": 4,
+      "n": 2,
+      "perfect_matching_count": 2
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "matching_branches": 50,
+      "memoized_vertex_masks": 36,
+      "n": 4,
+      "perfect_matching_count": 36
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "matching_branches": 389,
+      "memoized_vertex_masks": 267,
+      "n": 6,
+      "perfect_matching_count": 6728
+    }
+  ],
+  "exact_native_holant_parity": [
+    {
+      "family": "PRIMARY",
+      "native_edge_assignments": 16,
+      "native_matching_agreement": true,
+      "paired_basis_identity": true
+    },
+    {
+      "family": "REUSE",
+      "native_edge_assignments": 16,
+      "native_matching_agreement": true,
+      "paired_basis_identity": true
+    }
+  ],
+  "independence": {
+    "exact_boundary_oracle": "MEMOIZED_WEIGHTED_PERFECT_MATCHING_HISTOGRAM",
+    "imports_production_or_predecessor": false,
+    "modular_boundary_oracle": "ROW_PROFILE_WEIGHTED_MATCHING_DP",
+    "native_basis_oracle": "DIRECT_N2_EDGE_ASSIGNMENT_HOLANT_WITH_INDEPENDENT_FRACTION_POWER_BASIS"
+  },
+  "lifecycle_receipt_consistency": {
+    "all_responses_marked_after_restoration": true,
+    "all_rows_exact_carrier_restored": true,
+    "all_rows_generation_incremented": true,
+    "all_rows_same_backing": true,
+    "fresh_restored_reuse_receipt_consistent": true,
+    "limitation": "LIFECYCLE_RECEIPTS_REQUIRE_SEPARATE_SOURCE_AUDIT_AND_ARE_NOT_PROVEN_BY_BOUNDARY_PARITY_ALONE",
+    "receipt_rows_checked": 30,
+    "snapshot_reload_absent": true
+  },
+  "native_mixed_parity_witnesses": [
+    {
+      "family": "PRIMARY",
+      "interpretation": "NATIVE_DEGREE4_SIGNATURE_IS_NOT_PARITY_PRESERVING_MATCHGATE_IN_ITS_RESIDENT_BASIS",
+      "left_even_nonzero": true,
+      "left_odd_nonzero": true,
+      "right_even_nonzero": true,
+      "right_odd_nonzero": true,
+      "witness_sha256": "df3ea90f19af8435decdef9cc6fc0984afbf59b8e618d7c97ebb71c2897eb7b0"
+    },
+    {
+      "family": "REUSE",
+      "interpretation": "NATIVE_DEGREE4_SIGNATURE_IS_NOT_PARITY_PRESERVING_MATCHGATE_IN_ITS_RESIDENT_BASIS",
+      "left_even_nonzero": true,
+      "left_odd_nonzero": true,
+      "right_even_nonzero": true,
+      "right_odd_nonzero": true,
+      "witness_sha256": "5ae430ad9a0a0d531acaf66fd7eee63346db7102be57be942345f152a371b4ce"
+    }
+  ],
+  "next_obstruction": "THE_PUBLIC_PAIRED_PHASE_BASIS_CANCELS_TO_THE_IDENTICAL_CLASSICAL_MATCHGATE_DETERMINANT",
+  "observed_resource_law": {
+    "accepted_and_matched_determinant_materialize_no_native_signature_table": true,
+    "determinant_field_operations": "O_N_TO_THE_6",
+    "kasteleyn_dimension": "N_SQUARED_OVER_2",
+    "native_edge_assignment_baseline": "2_TO_THE_2N_TIMES_N_MINUS_1",
+    "resident_phase_field_cells": "2N_TIMES_N_MINUS_1_PLUS_8",
+    "row_matching_dp_baseline": "O_N_SQUARED_TIMES_2_TO_THE_N_WORK_AND_O_2_TO_THE_N_MEMORY"
+  },
+  "production_result_sha256": "a3ef560e578877e88a24571f30eb0ee03e4ea5804cd485fce092ab4096d48653",
+  "restoration_class": {
+    "resident_basis_weight_and_accumulator_carrier": "EXACT_ALGEBRAIC_RESTORATION",
+    "transient_determinant_buffers": "NO_RESTORATION_CLAIM"
+  },
+  "schema": "CAT_CAS_F17_PAIRED_PHASE_BASIS_HOLOGRAPHIC_MATCHGATE_CLOSURE_ORACLE_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

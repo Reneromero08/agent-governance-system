@@ -1,0 +1,29 @@
+{
+  "result": "SEALED",
+  "scope": "F17_TOPOLOGY_FACTORIZED_CUBIC_CHAIN_TRANSFER_CLOSURE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "files": {
+    "f17_cubic_chain_transfer_closure.py": "9efba6e98b7726d5170a2f2af09649787adc335797ba569d3341c231be50a61c",
+    "f17_cubic_chain_transfer_oracle.py": "e3301f1cfda37088a3be9c9318dcef3def3546fc112079d46fd157a2fddda784",
+    "qualify_f17_cubic_chain_transfer.sh": "67df56ed411add54b70d20a7fd479bcbece53fab8c403e757bd20bbe61992620",
+    "F17_CUBIC_CHAIN_TRANSFER_RESULTS.json": "1d9798dd0ca931292550cd1054528476d347683b26637d0193585c60f1d81a2a",
+    "F17_CUBIC_CHAIN_TRANSFER_ORACLE_RESULTS.json": "5dcfffabc3a7e2812cd87f78836162311e5e2ee9ba4fa490159a14433191d169"
+  },
+  "sealed_claim_ceiling": "exact F17 public path graphs with unary cubic and nearest-neighbor mixed cubic factors; nodes 2, 3, 5, 9, 17, 33, and 65; two public program families; 17 by 16 canonical cyclotomic transfer messages; topology-derived recursive reversible pebbling; software only",
+  "independent_scope": "separate two-message exact dynamic program and retain-all exact inverse for every case, plus direct assignment enumeration at nodes 2 and 3",
+  "excluded_interpretations": [
+    "fixed integer payload width",
+    "constant reversible carrier storage",
+    "arbitrary graph topology",
+    "arbitrary treewidth",
+    "general non-Gaussian composition",
+    "machine-enforced CATVM custody",
+    "distinct phase resource",
+    "computational advantage",
+    "Small Wall crossing",
+    "physical waveform execution",
+    "unbounded computation"
+  ]
+}

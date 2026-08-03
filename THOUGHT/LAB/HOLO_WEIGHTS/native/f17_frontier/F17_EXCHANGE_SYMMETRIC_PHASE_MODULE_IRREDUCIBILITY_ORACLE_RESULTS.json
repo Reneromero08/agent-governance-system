@@ -1,0 +1,225 @@
+{
+  "certificate_parity": [
+    {
+      "dimension_agreement": true,
+      "full_matrix_algebra_certificate": true,
+      "k": 1,
+      "minimum_quotient_dimension_agreement": true,
+      "predecessor_fingerprint_agreement": true,
+      "signature_count_agreement": true
+    },
+    {
+      "dimension_agreement": true,
+      "full_matrix_algebra_certificate": true,
+      "k": 2,
+      "minimum_quotient_dimension_agreement": true,
+      "predecessor_fingerprint_agreement": true,
+      "signature_count_agreement": true
+    },
+    {
+      "dimension_agreement": true,
+      "full_matrix_algebra_certificate": true,
+      "k": 3,
+      "minimum_quotient_dimension_agreement": true,
+      "predecessor_fingerprint_agreement": true,
+      "signature_count_agreement": true
+    },
+    {
+      "dimension_agreement": true,
+      "full_matrix_algebra_certificate": true,
+      "k": 4,
+      "minimum_quotient_dimension_agreement": true,
+      "predecessor_fingerprint_agreement": true,
+      "signature_count_agreement": true
+    }
+  ],
+  "claim_ceiling": "K1_TO_K4_EXCHANGE_SYMMETRIC_F17_POWER_SUM_CHARACTER_AND_BIDIRECTIONAL_ADJACENT_MODE_SHEAR_LINEAR_MODULE_ONLY_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "dual_field_structural_transaction_parity": [
+    {
+      "boundary_agreement": true,
+      "field": "F103",
+      "independent_forward_inverse_restored": true,
+      "k": 1,
+      "oracle_cached_orbit_boundary_field_cells": 34
+    },
+    {
+      "boundary_agreement": true,
+      "field": "F103",
+      "independent_forward_inverse_restored": true,
+      "k": 2,
+      "oracle_cached_orbit_boundary_field_cells": 306
+    },
+    {
+      "boundary_agreement": true,
+      "field": "F103",
+      "independent_forward_inverse_restored": true,
+      "k": 3,
+      "oracle_cached_orbit_boundary_field_cells": 1938
+    },
+    {
+      "boundary_agreement": true,
+      "field": "F103",
+      "independent_forward_inverse_restored": true,
+      "k": 4,
+      "oracle_cached_orbit_boundary_field_cells": 9690
+    },
+    {
+      "boundary_agreement": true,
+      "field": "F137",
+      "independent_forward_inverse_restored": true,
+      "k": 1,
+      "oracle_cached_orbit_boundary_field_cells": 34
+    },
+    {
+      "boundary_agreement": true,
+      "field": "F137",
+      "independent_forward_inverse_restored": true,
+      "k": 2,
+      "oracle_cached_orbit_boundary_field_cells": 306
+    },
+    {
+      "boundary_agreement": true,
+      "field": "F137",
+      "independent_forward_inverse_restored": true,
+      "k": 3,
+      "oracle_cached_orbit_boundary_field_cells": 1938
+    },
+    {
+      "boundary_agreement": true,
+      "field": "F137",
+      "independent_forward_inverse_restored": true,
+      "k": 4,
+      "oracle_cached_orbit_boundary_field_cells": 9690
+    }
+  ],
+  "exact_transaction_parity": [
+    {
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "independent_forward_inverse_restored": true,
+      "k": 1,
+      "oracle_cached_orbit_boundary_field_cells": 34
+    },
+    {
+      "boundary_agreement": true,
+      "family": "PRIMARY",
+      "independent_forward_inverse_restored": true,
+      "k": 2,
+      "oracle_cached_orbit_boundary_field_cells": 306
+    },
+    {
+      "boundary_agreement": true,
+      "family": "REUSE",
+      "independent_forward_inverse_restored": true,
+      "k": 2,
+      "oracle_cached_orbit_boundary_field_cells": 306
+    }
+  ],
+  "independent_certificates": [
+    {
+      "bidirectional_adjacent_transition_edges": 32,
+      "expected_predecessor_edges": 16,
+      "full_matrix_algebra_certificate": true,
+      "independent_predecessor_edges_to_zero_mode": 16,
+      "isolated_one_particle_transition_coefficients_nonzero": true,
+      "k": 1,
+      "minimum_exact_linear_quotient_dimension": 17,
+      "newton_denominators_invertible_mod17": true,
+      "occupation_dimension": 17,
+      "omitting_pk_overmerges_when_k_at_least2": true,
+      "p1_through_p_k_minus_1_signature_count": 17,
+      "p1_through_pk_signature_count": 17,
+      "power_sum_signature_injective": true,
+      "predecessor_certificate_fingerprint": "6c78ec1c21dab708e5413d656f195e0982f56dc4a85871b51e625575c4652742",
+      "stars_and_bars_dimension": 17
+    },
+    {
+      "bidirectional_adjacent_transition_edges": 544,
+      "expected_predecessor_edges": 152,
+      "full_matrix_algebra_certificate": true,
+      "independent_predecessor_edges_to_zero_mode": 152,
+      "isolated_one_particle_transition_coefficients_nonzero": true,
+      "k": 2,
+      "minimum_exact_linear_quotient_dimension": 153,
+      "newton_denominators_invertible_mod17": true,
+      "occupation_dimension": 153,
+      "omitting_pk_overmerges_when_k_at_least2": true,
+      "p1_through_p_k_minus_1_signature_count": 17,
+      "p1_through_pk_signature_count": 153,
+      "power_sum_signature_injective": true,
+      "predecessor_certificate_fingerprint": "2c0f856ac1ca5ba00f049cc9b37fba109712a94925133d59866218be9e3a8b80",
+      "stars_and_bars_dimension": 153
+    },
+    {
+      "bidirectional_adjacent_transition_edges": 4896,
+      "expected_predecessor_edges": 968,
+      "full_matrix_algebra_certificate": true,
+      "independent_predecessor_edges_to_zero_mode": 968,
+      "isolated_one_particle_transition_coefficients_nonzero": true,
+      "k": 3,
+      "minimum_exact_linear_quotient_dimension": 969,
+      "newton_denominators_invertible_mod17": true,
+      "occupation_dimension": 969,
+      "omitting_pk_overmerges_when_k_at_least2": true,
+      "p1_through_p_k_minus_1_signature_count": 289,
+      "p1_through_pk_signature_count": 969,
+      "power_sum_signature_injective": true,
+      "predecessor_certificate_fingerprint": "1fb03e2bdf2ee65190607713062e6aa4d21c66a129168dc8178497607eab352d",
+      "stars_and_bars_dimension": 969
+    },
+    {
+      "bidirectional_adjacent_transition_edges": 31008,
+      "expected_predecessor_edges": 4844,
+      "full_matrix_algebra_certificate": true,
+      "independent_predecessor_edges_to_zero_mode": 4844,
+      "isolated_one_particle_transition_coefficients_nonzero": true,
+      "k": 4,
+      "minimum_exact_linear_quotient_dimension": 4845,
+      "newton_denominators_invertible_mod17": true,
+      "occupation_dimension": 4845,
+      "omitting_pk_overmerges_when_k_at_least2": true,
+      "p1_through_p_k_minus_1_signature_count": 3553,
+      "p1_through_pk_signature_count": 4845,
+      "power_sum_signature_injective": true,
+      "predecessor_certificate_fingerprint": "b0e3b11b8a6a4effa56d44522e7fd5c2c6f6b7c84e90e742888a3a3ae23ccaea",
+      "stars_and_bars_dimension": 4845
+    }
+  ],
+  "matched_baseline": "IDENTICAL_H_K_COORDINATE_EXACT_LINEAR_PHASE_MODULE_RECURRENCE",
+  "phase_character_orthogonality": [
+    {
+      "algebra": "Q_ZETA17",
+      "all_17_character_sums_exact": true,
+      "all_nonzero_differences_zero": true,
+      "zero_difference_nonzero": true
+    },
+    {
+      "algebra": "F103",
+      "all_17_character_sums_exact": true,
+      "all_nonzero_differences_zero": true,
+      "zero_difference_nonzero": true
+    },
+    {
+      "algebra": "F137",
+      "all_17_character_sums_exact": true,
+      "all_nonzero_differences_zero": true,
+      "zero_difference_nonzero": true
+    }
+  ],
+  "production_claim": "BOUNDED_EXACT_F17_POWER_SUM_CHARACTER_AND_BIDIRECTIONAL_MODE_SHEAR_PHASE_MODULE_HAS_NO_NONTRIVIAL_LINEAR_QUOTIENT_BELOW_H_K_ON_EACH_DECLARED_EXCHANGE_SYMMETRIC_K1_TO_K4_ORBIT_MODULE_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE",
+  "production_result_sha256": "61ac5e08bd776a70265308a482cca75ec0eed4674c6664e03193d1faee000d55",
+  "rejected_interpretations": [
+    "THE_NO_GO_ALREADY_APPLIES_TO_UNEXTENDED_M127_SEMANTICS",
+    "NONLINEAR_OR_PROGRAM_RESTRICTED_QUOTIENT_NO_GO",
+    "GENERAL_COMPLEXITY_LOWER_BOUND",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "CATVM_CUSTODY",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "schema": "CAT_CAS_F17_EXCHANGE_SYMMETRIC_PHASE_MODULE_IRREDUCIBILITY_ORACLE_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

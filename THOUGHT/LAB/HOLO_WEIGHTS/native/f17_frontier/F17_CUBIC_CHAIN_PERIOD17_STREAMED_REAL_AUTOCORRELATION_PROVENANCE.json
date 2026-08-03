@@ -1,0 +1,23 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_parent": "319118cc4958304ee5c24d7a6dc9602adb277b1d",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "ab00e77c96dceef82c0d24e2537305ea5425dcb201bd20cd670eee63dda70d43",
+  "reference_full_oracle_sha256": "165e15f898c97a5124d53bfd24ef398bab013e42d662b92bddbab74261acd44c",
+  "files": {
+    "F17_CUBIC_CHAIN_PERIOD17_STREAMED_REAL_AUTOCORRELATION_INDEPENDENT_REVIEW.md": "b867db9784f0f949a9f0afca17e8e7dc5d2d27349bc4a3614dc56604c2ae01cf",
+    "F17_CUBIC_CHAIN_PERIOD17_STREAMED_REAL_AUTOCORRELATION_ORACLE_RESULTS.json": "165e15f898c97a5124d53bfd24ef398bab013e42d662b92bddbab74261acd44c",
+    "F17_CUBIC_CHAIN_PERIOD17_STREAMED_REAL_AUTOCORRELATION_RESULTS.json": "ec68f5b5fc97035979d3e1b66c26765187a6801bfde035973f3acf375c8d5f19",
+    "f17_cubic_chain_period17_real_subfield_horner.py": "2a03970a4f40b9dddcad743d9728774d8a3155ada114ba749822a85abea19266",
+    "f17_cubic_chain_period17_real_subfield_horner_oracle.py": "27b89803db94b4d9175ae80a5fa6d74f6d0c42ec59e2e8a0707a6c47354ad8c9",
+    "f17_cubic_chain_period17_streamed_real_autocorrelation.py": "c872e78bf42d94ab5c3f84989faa3dbfae8d4232dec970fd8a5bbb7b0ccefe1c",
+    "f17_cubic_chain_period17_streamed_real_autocorrelation_oracle.py": "52aa4cdfb8d53dd866220a9e4636ee980444cbd4d85e8af389486b12a52a045f",
+    "qualify_f17_cubic_chain_period17_streamed_real_autocorrelation.sh": "9c9f82961046b5cbe23534211ac8b0bc211b0aa5847b965df38e67cb32916eab"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "LINUX_X86_64_PYTHON_TWO_PUBLIC_F17_PERIOD17_FAMILIES_PERIODS1AND64_TERM_STREAMED_FULL_PRODUCT_TO_DEGREE8_REAL_NORM_ACCUMULATOR_NO_DEGREE16_AGGREGATE_ONE_FULL_CERTIFIED_ACTION_ONE_RESIDENT_HORNER_CARRIER_EXACT_BOUNDARY_RESOURCE_RESTORATION_AND_PERIOD1_CROSS_FAMILY_REUSE_PARITY_SOFTWARE_ONLY"
+}

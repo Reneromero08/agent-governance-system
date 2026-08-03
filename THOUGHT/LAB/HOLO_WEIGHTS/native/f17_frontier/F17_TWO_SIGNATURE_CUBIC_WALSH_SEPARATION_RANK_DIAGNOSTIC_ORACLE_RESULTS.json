@@ -1,0 +1,1272 @@
+{
+  "claim_ceiling": {
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "declared_two_signature_alternating_families_only": true,
+    "distinct_phase_resource": false,
+    "general_rank_r_no_go": false,
+    "physical_execution": false,
+    "rejects_only_matrix_factor_rank_caps_below17": true,
+    "small_wall_crossing": false,
+    "universal_578_cell_minimum": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "direct_assignment_checks": [
+    {
+      "assignments_enumerated_for_verification_only": 16,
+      "branch_pairs_per_signature": 1,
+      "chart_matches_289_class_residue_recurrence": true,
+      "chart_matches_direct_assignments": true,
+      "modulus": 103,
+      "phase_steps": 2
+    },
+    {
+      "assignments_enumerated_for_verification_only": 256,
+      "branch_pairs_per_signature": 2,
+      "chart_matches_289_class_residue_recurrence": true,
+      "chart_matches_direct_assignments": true,
+      "modulus": 103,
+      "phase_steps": 4
+    },
+    {
+      "assignments_enumerated_for_verification_only": 4096,
+      "branch_pairs_per_signature": 3,
+      "chart_matches_289_class_residue_recurrence": true,
+      "chart_matches_direct_assignments": true,
+      "modulus": 103,
+      "phase_steps": 6
+    },
+    {
+      "assignments_enumerated_for_verification_only": 16,
+      "branch_pairs_per_signature": 1,
+      "chart_matches_289_class_residue_recurrence": true,
+      "chart_matches_direct_assignments": true,
+      "modulus": 137,
+      "phase_steps": 2
+    },
+    {
+      "assignments_enumerated_for_verification_only": 256,
+      "branch_pairs_per_signature": 2,
+      "chart_matches_289_class_residue_recurrence": true,
+      "chart_matches_direct_assignments": true,
+      "modulus": 137,
+      "phase_steps": 4
+    },
+    {
+      "assignments_enumerated_for_verification_only": 4096,
+      "branch_pairs_per_signature": 3,
+      "chart_matches_289_class_residue_recurrence": true,
+      "chart_matches_direct_assignments": true,
+      "modulus": 137,
+      "phase_steps": 6
+    }
+  ],
+  "independent_rank_mutations": {
+    "alternate_full_rank_at_phase_step32": true,
+    "canonical_578_cells_universal_minimum_claimed": false,
+    "primary_full_rank_at_phase_step12": true,
+    "primary_rank_below17_before_family_ceiling": true,
+    "rank16_matrix_factor_cap_rejected": true,
+    "reuse_full_rank_at_phase_step32": true,
+    "snapshot_or_baseline_reload_used": false
+  },
+  "observed_resource_law": {
+    "accepted_path_assignment_expansion": false,
+    "canonical_resident_field_cells": 578,
+    "compact_classical_frontier": [
+      "RETAIN_BOTH_SURFACES",
+      "STREAM_JOINT_RESIDUE_FINAL_SCALAR",
+      "REMATERIALIZE_COEFFICIENT_ROWS_FOR_FULL_DIAGNOSTICS"
+    ],
+    "full_matrix_separation_rank": 17,
+    "oracle_assignment_expansion_small_cases_only": true,
+    "payload_tuples_reproduced_independently": true,
+    "phase_update_scratch_shape_source_audited": true,
+    "strongest_streamed_payload_tuple_claimed": false,
+    "update_scratch_payload_tuples_reproduced_independently": false
+  },
+  "production_claim": "EXACT_TWO_INDEPENDENT_CUBIC_WALSH_DERIVATIVE_SIGNATURES_ON_ONE_UNRESOLVED_TYPED_PORT_GENERATE_FULL_17_BY_17_COEFFICIENT_SEPARATION_RANK_IN_THE_DECLARED_ALTERNATING_PROGRAM_FAMILIES_SO_UNIFORMLY_LOW_SEPARATION_RANK_FACTOR_CHARTS_ARE_REJECTED_AT_THE_FAMILY_CEILING_WHILE_THE_CANONICAL_578_CELL_C17_SQUARED_GROUP_ALGEBRA_CARRIER_RESTORES_AND_REUSES_EXACTLY_BUT_HAS_MATCHED_COMPACT_CLASSICAL_RESIDUE_RECURRENCES_AND_GROWING_EXACT_PAYLOAD",
+  "production_result_sha256": "88be1a7c80219f8c989a815c60a4378f6d7a2876a4ce871a1fc4a20fa67b6b9c",
+  "schema": "CAT_CAS_F17_TWO_SIGNATURE_CUBIC_WALSH_SEPARATION_RANK_ORACLE_V1",
+  "transaction_parity": [
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 1,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 18504,
+      "payload_equal": true,
+      "phase_steps": 2,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        2,
+        2
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 2,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 18528,
+      "payload_equal": true,
+      "phase_steps": 4,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        4,
+        4
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 18744,
+      "payload_equal": true,
+      "phase_steps": 6,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        8,
+        8
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 8,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 19369,
+      "payload_equal": true,
+      "phase_steps": 8,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        12,
+        12
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 16,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 21392,
+      "payload_equal": true,
+      "phase_steps": 10,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 32,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 25842,
+      "payload_equal": true,
+      "phase_steps": 12,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 64,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 40028,
+      "payload_equal": true,
+      "phase_steps": 16,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 128,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 110637,
+      "payload_equal": true,
+      "phase_steps": 32,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 2,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        2,
+        2
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 4,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        4,
+        4
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 6,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        8,
+        8
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 8,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        12,
+        12
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 10,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 12,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 16,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 32,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 64,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 2,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        2,
+        2
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 4,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        3,
+        3
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 6,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        5,
+        5
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 8,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        7,
+        7
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 10,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        8,
+        8
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 12,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        9,
+        9
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 16,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        13,
+        13
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 32,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 64,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 2,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        2,
+        2
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 4,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        3,
+        3
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 6,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        6,
+        6
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 8,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        8,
+        8
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 10,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        11,
+        11
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 12,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        13,
+        13
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 16,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 32,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4046,
+      "payload_equal": true,
+      "phase_steps": 64,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 2,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        2,
+        2
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 4,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        4,
+        4
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 6,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        8,
+        8
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 8,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        12,
+        12
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 10,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 12,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 16,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        16,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 32,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "PRIMARY",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 64,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 2,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        2,
+        2
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 4,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        3,
+        3
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 6,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        5,
+        5
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 8,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        7,
+        7
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 10,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        8,
+        8
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 12,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        9,
+        9
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 16,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        13,
+        13
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 32,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "REUSE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 64,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 2,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        2,
+        2
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 4,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        3,
+        3
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 6,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        6,
+        6
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 8,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        8,
+        8
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 10,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        11,
+        11
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 12,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        13,
+        13
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 16,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 32,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    },
+    {
+      "boundary_equal": true,
+      "branch_pairs_per_signature": 4,
+      "declared_resource_shape_consistent": true,
+      "exact_inverse_restores_seed": true,
+      "family": "ALTERNATE",
+      "logical_cells": 578,
+      "maximum_resident_payload_bits": 4624,
+      "payload_equal": true,
+      "phase_steps": 64,
+      "program_fingerprint_equal": true,
+      "residue_boundary_equal": true,
+      "separation_ranks": [
+        17,
+        17
+      ],
+      "separation_ranks_equal": true,
+      "state_commitment_equal": true
+    }
+  ],
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
