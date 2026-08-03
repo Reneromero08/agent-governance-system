@@ -1,0 +1,92 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "15b9f81e999455d7156dc2d3a7d55b20a3d47fae",
+  "scientific_source_parent": "e1a72d5e27fd1fab20ad48495044723710d665ab",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "366b0f5a45e076dbc56114493ea679136fea4543897bdca60a9deaf6abd2a594",
+  "reference_full_oracle_sha256": "24f0852d05492dc18df523775a113dcf6ab191bf42d25ca22461e0b9e6ba348e",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_overlapping_cubic_bond3_phase_factor_closure.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_overlapping_cubic_bond3_phase_factor_closure_oracle.py --production PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_overlapping_cubic_bond3_phase_factor_closure.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_overlapping_cubic_bond3_phase_factor_closure.py": "c9b74d11ad71257f254104f268ed297793bc120b63a2eda34cb71cad47d2734a",
+    "f17_overlapping_cubic_bond3_phase_factor_closure_oracle.py": "32dfbd06644a54368418629d65b590effcfe5fdc91f005fd3580ac7adbf31c23",
+    "F17_OVERLAPPING_CUBIC_BOND3_PHASE_FACTOR_CLOSURE_RESULTS.json": "366b0f5a45e076dbc56114493ea679136fea4543897bdca60a9deaf6abd2a594",
+    "F17_OVERLAPPING_CUBIC_BOND3_PHASE_FACTOR_CLOSURE_ORACLE_RESULTS.json": "24f0852d05492dc18df523775a113dcf6ab191bf42d25ca22461e0b9e6ba348e",
+    "F17_OVERLAPPING_CUBIC_BOND3_PHASE_FACTOR_CLOSURE_INDEPENDENT_REVIEW.md": "21c3808e7591cfe31471b1a62e062dfbe18670faba2a9e0f865bf099ad632c4a",
+    "qualify_f17_overlapping_cubic_bond3_phase_factor_closure.sh": "de7d5519e9a4776873ad0124b43aff9bd3326a3325b8b21c1217e4e2797b14ab"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "chart": "OVERLAPPING_PURE_CUBIC_BOOLEAN_PHASE_FACTOR_CHAIN",
+    "exact_depths": [1, 2, 4, 8, 16, 32, 64, 128],
+    "structural_fields": ["F103", "F137"],
+    "structural_depths": [1, 2, 3, 4, 5, 6, 7, 8],
+    "families": ["PRIMARY", "REUSE"],
+    "independent_methods": [
+      "SEPARATE_PUBLIC_DESCRIPTOR_COMPILER",
+      "SEPARATE_FOUR_STATE_LAST_TWO_BIT_RECURRENCE",
+      "DIRECT_EXACT_ASSIGNMENT_ENUMERATION_THROUGH_DEPTH8",
+      "DIRECT_EXACT_GAUSSIAN_RANK_OF_LOCAL_CROSS_MATRICES",
+      "DIRECT_EXACT_GAUSSIAN_RANK_OF_FULL_TENSOR_CUTS",
+      "SEPARATE_LOCAL_EXACT_INVERSE",
+      "SEPARATE_PAYLOAD_AND_BASELINE_REEXECUTION",
+      "INDEPENDENT_SEMANTIC_AND_OWNERSHIP_MUTATIONS"
+    ]
+  },
+  "resource_accounting": {
+    "resident_phase_factor_field_cells_at_depth_m": "TWO_TIMES_M",
+    "resident_nontrivial_theta_field_cells_at_depth_m": "M",
+    "exact_maximum_factor_tensor_mps_bond_dimension_depth1": 2,
+    "exact_maximum_factor_tensor_mps_bond_dimension_depth_at_least2": 3,
+    "selected_boundary_dynamic_field_cells": 3,
+    "selected_boundary_named_old_plus_new_work_cells": 6,
+    "matched_classical_full_signature_field_cells_at_depth_m": "M",
+    "matched_classical_selected_boundary_dynamic_field_cells": 3,
+    "matched_classical_three_state_chart_input_coefficients": 3,
+    "matched_classical_fixed_sealed_transaction_scalars": 1,
+    "accepted_path_assignment_tensor_cells": 0,
+    "accepted_path_expanded_component_weight_cells": 0,
+    "accepted_path_dense_transfer_cells": 0,
+    "inverse_history_cells": 0,
+    "depth1_resident_payload_bits": 66,
+    "depth128_resident_payload_bits": 8448,
+    "depth1_boundary_payload_bits": 36,
+    "depth128_boundary_payload_bits": 1828,
+    "full_exact_bit_complexity_established": false,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "HASHLIB_INTERNAL_STATE",
+      "BIT_OPERATION_COMPLEXITY",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_baselines": [
+    "M_EXACT_PUBLIC_CUBIC_PHASE_FACTORS_FOR_FULL_SIGNATURE",
+    "IDENTICAL_THREE_DYNAMIC_SCALAR_RECURRENCE_FOR_SELECTED_BOUNDARY",
+    "THREE_COEFFICIENTS_FOR_ARBITRARY_INPUT_IN_THE_THREE_STATE_CHART",
+    "ONE_CACHED_SCALAR_FOR_THE_FIXED_SEALED_TRANSACTION"
+  ],
+  "claim_ceiling": "DECLARED_OVERLAPPING_PURE_CUBIC_BOOLEAN_PHASE_FACTOR_CHAIN_EXACT_Q_ZETA17_DEPTHS1_2_4_8_16_32_64_128_DUAL_FIELD_STRUCTURAL_DEPTHS1_TO8_SELECTED_PARTITION_BOUNDARY_DIRECT_PROCESS_SOFTWARE",
+  "rejected_interpretations": [
+    "ARBITRARY_CUBIC_HYPERGRAPH_CLOSURE",
+    "ARBITRARY_BOUNDARY_COMPACTION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

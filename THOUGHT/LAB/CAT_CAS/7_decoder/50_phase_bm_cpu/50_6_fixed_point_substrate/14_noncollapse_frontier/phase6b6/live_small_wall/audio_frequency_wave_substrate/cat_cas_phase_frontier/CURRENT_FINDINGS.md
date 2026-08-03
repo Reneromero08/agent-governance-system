@@ -7893,3 +7893,79 @@ The obstruction is:
 ```text
 THE_SPECIAL_GRAY_ORDERED_COMPONENT_WEIGHT_TENSOR_HAS_EXACT_BOND2_AND_LINEAR_FACTOR_STORAGE_BUT_THE_ASSOCIATED_COHERENT_BINARY_FORM_RETAINS_SECANT_RANK_TWO_TO_THE_M_ARBITRARY_HIGHER_MOMENT_BOUNDARIES_DO_NOT_CLOSE_ON_TWO_SCALARS_AND_THE_IDENTICAL_PUBLIC_CLASSICAL_FACTOR_RECURRENCE_REMAINS
 ```
+
+## Overlapping cubic factors raise exact bond dimension to three, not beyond a compact classical chain
+
+M134 replaces M133's pairwise Gray factor law with the smallest growing
+one-dimensional pure-cubic Boolean interaction.
+
+```text
+claim
+    BOUNDED_EXACT_OVERLAPPING_NONAFFINE_CUBIC_BOOLEAN_PHASE_FACTOR_CHAIN_HAS_MINIMAL_MPS_BOND3_AND_TWO_M_RESIDENT_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PARTITION_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_FIXED_LOGICAL_RANK_HIDES_GROWING_EXACT_BOUNDARY_WIDTH
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident factor carrier EXACT_ALGEBRAIC_RESTORATION
+    transient buffers       NO_RESTORATION_CLAIM
+
+source head
+    15b9f81e999455d7156dc2d3a7d55b20a3d47fae
+```
+
+For public bits `x_0,...,x_(m+1)`, factor `j` is
+`theta_j^(x_j x_(j+1) x_(j+2))`.  Its multiplicative third interaction
+invariant equals the nonidentity `theta_j`, so it is not a unary or pairwise
+Gray factorization on the same bits.  The two factors crossing an interior cut
+give a rank-three matrix: two rows coincide and a three-by-three minor is, up
+to sign, `(theta_left-1)(theta_right-1)`.  Full-tensor exact elimination
+independently gives cut ranks `[2,2]` at depth one and
+`[2,3,...,3,2]` at every checked larger depth.
+
+The accepted path executes exact `Q(zeta17)` depths
+`1,2,4,8,16,32,64,128` and dual-field structural depths one through eight.
+It uses `2m` resident exact field cells and no accepted assignment tensor,
+expanded component weights, or dense transfer.  Each factor pair is actually
+coupled from `(1,0)` to `(1,theta_j)`, consumed, and inverted in reverse before
+unseeding exact zero on the same backing.  Unrelated depth-eight then
+depth-sixteen reuse agrees with fresh execution without snapshot or retained
+inverse history.  Active use enforces type, stage, depth, family, and a
+recomputed lease; the restoration generation is package-local, not CATVM
+custody.
+
+The independent oracle uses a separate four-state last-two-bit recurrence and
+direct exact assignment enumeration through depth eight.  It also reconstructs
+local and full-tensor ranks over `Q(zeta17)`, `F103`, and `F137`, exact
+boundaries, payload tuples, commitments, and matched classical signatures.
+Controls cover identity rank collapse, bond-two rejection, phase and schedule
+perturbations, wrong/missing/reordered inverse, premature projection, null and
+wrong-owner use, unavailable snapshot, and primary/reuse lease separation.
+
+The selected partition boundary closes on the exact three-state recurrence
+`A'=A+B`, `B'=A+C`, `C'=A+theta*C`, then `Z=2A+B+C`.  The strongest matched
+classical selected-boundary implementation is this identical recurrence.  The
+full signature needs only the `m` public factors; an arbitrary input in the
+three-state chart needs three coefficients; and the fixed transaction can
+cache one scalar.  Resident payload grows from 66 to 8448 bits and final
+boundary payload from 36 to 1828 bits across the declared exact depths.
+
+This is strict one-dimensional chain closure, not arbitrary cubic-hypergraph
+or arbitrary-boundary closure.  It establishes no CATVM custody, distinct
+phase resource, computational advantage, Small Wall crossing, physical
+waveform execution, physical bit replacement, or unbounded computation.
+
+The next experiment is:
+
+```text
+EXACT_SHARED_LATENT_BRANCHING_CUBIC_PHASE_FACTOR_HYPERTREE_CLOSURE_OR_SEPARATOR_RANK_GROWTH_WITH_MATCHED_CLASSICAL_HYPERTREE_BASELINE
+```
+
+The obstruction is:
+
+```text
+THE_DECLARED_NONAFFINE_CUBIC_PHASE_CHAIN_CLOSES_AT_EXACT_BOND3_BUT_THE_PHASE_CARRIER_STORES_TWICE_THE_PUBLIC_FACTOR_SIGNATURE_THE_SELECTED_BOUNDARY_HAS_AN_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_EXACT_BOUNDARY_WIDTH_GROWS_WITH_DEPTH
+```

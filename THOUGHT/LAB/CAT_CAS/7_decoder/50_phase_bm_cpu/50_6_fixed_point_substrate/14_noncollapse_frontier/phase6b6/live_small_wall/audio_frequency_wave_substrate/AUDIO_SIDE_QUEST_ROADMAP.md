@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_GRAY_CODE_BOND2_PHASE_FACTOR_CHART_ESTABLISHED_FOR_DECLARED_WEIGHT_TENSOR_IDENTICAL_CLASSICAL_FACTOR_RECURRENCE_REMAINS_NEXT_HIGHER_ORDER_COUPLING_DIAGNOSTIC_SELECTED`
-**Roadmap version:** `13.9`
+**Status:** `STRICT_SCOPE_NONAFFINE_CUBIC_BOND3_PHASE_FACTOR_CHAIN_ESTABLISHED_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_BOUNDARY_WIDTH_REMAIN_NEXT_SHARED_BRANCHING_CUBIC_DIAGNOSTIC_SELECTED`
+**Roadmap version:** `14.0`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `bd76fb590c0653a26de42a2db83c9dd89c4b5d90`
+**Reconciled source head:** `15b9f81e999455d7156dc2d3a7d55b20a3d47fae`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_GRAY_CODE_BOND2_PHASE_FACTOR_CHART_COMPRESSES_THE_DECLARED_ITERATED_NONCOMMUTING_AFFINE_REFLECTION_SUPERPOSITION_COMPONENT_WEIGHTS_FROM_TWO_TO_THE_M_EXPLICIT_COMPONENTS_TO_TWO_M_RESIDENT_PHASE_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_IS_AN_IDENTICAL_PUBLIC_MARKOV_FACTOR_CLASSICAL_RECURRENCE_AND_DOES_NOT_COMPACT_THE_GENERAL_COHERENT_POLYNOMIAL_OR_ESTABLISH_A_STABILIZER_RESOURCE`
-**Current claim ceiling:** `DECLARED_GRAY_ORDERED_COMPONENT_WEIGHT_TENSOR_FOR_ITERATED_AFFINE_REFLECTION_FAMILY_EXACT_Q_ZETA17_DEPTHS1_2_4_8_16_32_64_128_DUAL_FIELD_STRUCTURAL_DEPTHS1_TO6_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_OVERLAPPING_NONAFFINE_CUBIC_BOOLEAN_PHASE_FACTOR_CHAIN_HAS_MINIMAL_MPS_BOND3_AND_TWO_M_RESIDENT_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PARTITION_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_FIXED_LOGICAL_RANK_HIDES_GROWING_EXACT_BOUNDARY_WIDTH`
+**Current claim ceiling:** `DECLARED_OVERLAPPING_PURE_CUBIC_BOOLEAN_PHASE_FACTOR_CHAIN_EXACT_Q_ZETA17_DEPTHS1_2_4_8_16_32_64_128_DUAL_FIELD_STRUCTURAL_DEPTHS1_TO8_SELECTED_PARTITION_BOUNDARY_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M133_BOND2_SPECIAL_WEIGHT_TENSOR_CLOSURE_WITH_IDENTICAL_CLASSICAL_FACTOR_RECURRENCE`
+**New mechanism development:** `ACTIVE_AFTER_M134_NONAFFINE_CUBIC_BOND3_CHAIN_CLOSURE_WITH_IDENTICAL_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_BOUNDARY_WIDTH`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_HIGHER_ORDER_GRAY_PHASE_FACTOR_COUPLING_OR_COHERENT_MOMENT_PORT_CLOSURE_BEYOND_PAIRWISE_BOND2_WITH_MATCHED_CLASSICAL_TENSOR_BASELINE`
+**Active primary successor:** `EXACT_SHARED_LATENT_BRANCHING_CUBIC_PHASE_FACTOR_HYPERTREE_CLOSURE_OR_SEPARATOR_RANK_GROWTH_WITH_MATCHED_CLASSICAL_HYPERTREE_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`bd76fb590c0653a26de42a2db83c9dd89c4b5d90`. The current 133-milestone
+`15b9f81e999455d7156dc2d3a7d55b20a3d47fae`. The current 134-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_GRAY_CODE_BOND2_PHASE_FACTOR_CHART_COMPRESSES_THE_DECLARED_ITERATED_NONCOMMUTING_AFFINE_REFLECTION_SUPERPOSITION_COMPONENT_WEIGHTS_FROM_TWO_TO_THE_M_EXPLICIT_COMPONENTS_TO_TWO_M_RESIDENT_PHASE_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_IS_AN_IDENTICAL_PUBLIC_MARKOV_FACTOR_CLASSICAL_RECURRENCE_AND_DOES_NOT_COMPACT_THE_GENERAL_COHERENT_POLYNOMIAL_OR_ESTABLISH_A_STABILIZER_RESOURCE
+BOUNDED_EXACT_OVERLAPPING_NONAFFINE_CUBIC_BOOLEAN_PHASE_FACTOR_CHAIN_HAS_MINIMAL_MPS_BOND3_AND_TWO_M_RESIDENT_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PARTITION_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_FIXED_LOGICAL_RANK_HIDES_GROWING_EXACT_BOUNDARY_WIDTH
 ```
 
 Not established:
@@ -5090,6 +5090,75 @@ higher-order phase coupling or shared higher-moment consumer that breaks the
 pairwise Markov factorization, then measure whether exact tensor bond must
 grow or a broader compact phase algebra closes against the strongest matched
 classical contraction.
+
+M134 executes that higher-order diagnostic with a public overlapping pure
+cubic Boolean phase-factor chain.  For factor `j`, the visible-bit law is
+`theta_j^(x_j x_(j+1) x_(j+2))`.  Its nonidentity multiplicative third
+interaction invariant prevents reduction to a unary or pairwise Gray factor
+law on the same public bits.
+
+Across an interior cut, the two crossing factors have a rank-three local
+matrix.  Two rows coincide, while a three-by-three minor is, up to sign,
+`(theta_left-1)(theta_right-1)`.  Independent full-tensor elimination gives
+cut ranks `[2,2]` at depth one and `[2,3,...,3,2]` for every checked depth at
+least two.  The declared family therefore has exact minimal maximum MPS bond
+dimension two at depth one and three thereafter.  Production runs exact
+`Q(zeta17)` depths `1,2,4,8,16,32,64,128`; `F103/F137` structural checks cover
+depths one through eight.
+
+The accepted carrier stores `2m` exact field cells with `m` nontrivial cubic
+phase factors.  It seeds each resident pair as `(1,0)`, performs an actual
+invertible local coupling to `(1,theta_j)`, consumes the resident factors,
+projects only the selected final partition scalar, and reverses every coupling
+before unseeding exact zero on the same backing.  Unrelated depth-eight then
+depth-sixteen reuse matches fresh execution without snapshot or retained
+inverse history.  Type, stage, depth, family, and recomputed lease are enforced
+before active use.  The restoration counter remains direct-process
+package-local instrumentation, not CATVM custody generation.
+
+The independent oracle imports no production code.  It reconstructs a
+separate four-state last-two-bit recurrence, directly enumerates exact
+assignments through depth eight, derives local and full-tensor ranks, checks
+payloads and commitments, and attacks identity substitution, bond-two
+factorization, semantic perturbation, inverse ordering, projection stage,
+null carrier, ownership, and snapshot availability.  The focused decision is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`; the scientific source is
+`15b9f81e999455d7156dc2d3a7d55b20a3d47fae`.
+
+The mechanism does not yield leverage.  The selected boundary closes exactly
+on three dynamic scalars,
+`A'=A+B`, `B'=A+C`, `C'=A+theta*C`, followed by `Z=2A+B+C`.  This is also the
+strongest matched compact classical recurrence.  Full-signature classical
+storage uses the identical `m` public factors, arbitrary input in the
+three-state chart uses three coefficients, and the fixed sealed transaction
+can cache one scalar.  Resident payload grows from 66 to 8448 bits and final
+boundary payload from 36 to 1828 bits over the declared exact depths.  Fixed
+logical bond rank therefore does not bound exact arithmetic width.
+
+M134 establishes neither arbitrary cubic-hypergraph nor arbitrary-boundary
+closure, CATVM custody, a distinct phase resource, computational advantage,
+Small Wall crossing, physical waveform execution, physical bit replacement,
+nor unbounded catalytic computation.  Python containers and allocator,
+native-library storage, bigint and hash internals, bit-operation complexity,
+and whole-process peak remain outside its resource claim.
+
+The next experiment is:
+
+```text
+EXACT_SHARED_LATENT_BRANCHING_CUBIC_PHASE_FACTOR_HYPERTREE_CLOSURE_OR_SEPARATOR_RANK_GROWTH_WITH_MATCHED_CLASSICAL_HYPERTREE_BASELINE
+```
+
+The obstruction is:
+
+```text
+THE_DECLARED_NONAFFINE_CUBIC_PHASE_CHAIN_CLOSES_AT_EXACT_BOND3_BUT_THE_PHASE_CARRIER_STORES_TWICE_THE_PUBLIC_FACTOR_SIGNATURE_THE_SELECTED_BOUNDARY_HAS_AN_IDENTICAL_THREE_SCALAR_CLASSICAL_RECURRENCE_AND_EXACT_BOUNDARY_WIDTH_GROWS_WITH_DEPTH
+```
+
+Do not add another chain-depth fixture.  Introduce the smallest shared latent
+or branching cubic geometry that changes the separator law, and compare it to
+the strongest exact hypertree or tensor contraction before considering CATVM
+custody or a Small Wall diagnostic.
 
 ## 10. Roadmap Maintenance
 
