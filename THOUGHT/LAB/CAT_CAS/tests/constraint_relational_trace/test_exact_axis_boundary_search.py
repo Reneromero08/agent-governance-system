@@ -43,17 +43,19 @@ def symmetric_stationary_holo() -> ConstraintHolo:
     )
 
 
-def test_exact_axis_search_rediscovers_symmetric_non_solution_stationary_state() -> None:
+def test_exact_axis_search_rediscovers_only_seed_terminal_symmetric_obstruction() -> None:
     holo = symmetric_stationary_holo()
     result = search_exact_axis_boundary_candidates((holo,))
 
     assert result.input_formulae == 1
     assert result.semantic_unique_formulae == 1
     assert result.satisfiable_formulae_searched == 1
+    assert result.formulae_public_seed_already_witness == 1
     assert result.axis_states_audited == 16
     assert result.non_solution_stationary_candidates > 0
+    assert result.seed_relevant_non_solution_candidates == 0
     assert result.status == (
-        "EXACT_AXIS_BOUNDARY_SEARCH_FOUND_NON_SOLUTION_STATIONARY_CANDIDATES"
+        "EXACT_AXIS_BOUNDARY_SEARCH_FOUND_ONLY_PUBLIC_SEED_TERMINAL_OBSTRUCTIONS"
     )
 
     symmetric = tuple(
@@ -77,7 +79,35 @@ def test_exact_axis_search_rediscovers_symmetric_non_solution_stationary_state()
         assert candidate.maximum_memory_field_residual == 0.0
         assert candidate.maximum_selector_field_residual == 0.0
         assert candidate.public_seed_distance_squared > 0.0
+        assert candidate.public_seed_is_terminal_witness
+        assert not candidate.seed_relevant_obstruction_candidate
+        assert dict(candidate.public_seed_threshold_assignment) == {
+            "x": True,
+            "y": False,
+        }
         assert dict(candidate.threshold_assignment) == {"x": False, "y": False}
+
+
+def test_wrong_public_seed_formula_without_axis_stationary_candidate_stays_clear() -> None:
+    holo = ConstraintHolo.build(
+        ("x",),
+        (
+            clause(
+                Literal("x", False),
+                Literal("x", False),
+                Literal("x", False),
+            ),
+        ),
+    )
+    result = search_exact_axis_boundary_candidates((holo,))
+
+    assert result.satisfiable_formulae_searched == 1
+    assert result.formulae_public_seed_already_witness == 0
+    assert result.non_solution_stationary_candidates == 0
+    assert result.seed_relevant_non_solution_candidates == 0
+    assert result.status == (
+        "EXACT_AXIS_BOUNDARY_SEARCH_FOUND_NO_CANDIDATE_ON_CAPPED_SURFACE"
+    )
 
 
 def test_search_semantically_deduplicates_duplicate_clause_presentations() -> None:
@@ -110,6 +140,7 @@ def test_unsat_formula_is_reference_certified_and_not_searched_for_sat_obstructi
     )
     result = search_exact_axis_boundary_candidates((holo,))
     assert result.satisfiable_formulae_searched == 0
+    assert result.formulae_public_seed_already_witness == 0
     assert result.axis_states_audited == 0
     assert result.non_solution_stationary_candidates == 0
     assert result.status == (
