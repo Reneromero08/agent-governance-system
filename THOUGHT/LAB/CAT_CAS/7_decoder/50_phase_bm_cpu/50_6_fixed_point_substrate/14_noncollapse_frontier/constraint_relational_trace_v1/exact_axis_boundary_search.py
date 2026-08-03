@@ -41,6 +41,9 @@ class ExactAxisStationaryCandidate:
     maximum_memory_field_residual: float
     maximum_selector_field_residual: float
     public_seed_distance_squared: float
+    public_seed_threshold_assignment: tuple[tuple[str, bool], ...]
+    public_seed_is_terminal_witness: bool
+    seed_relevant_obstruction_candidate: bool
     threshold_assignment: tuple[tuple[str, bool], ...]
 
 
@@ -49,9 +52,11 @@ class ExactAxisBoundarySearchResult:
     input_formulae: int
     semantic_unique_formulae: int
     satisfiable_formulae_searched: int
+    formulae_public_seed_already_witness: int
     axis_states_audited: int
     selector_combinations_audited: int
     non_solution_stationary_candidates: int
+    seed_relevant_non_solution_candidates: int
     truncated: bool
     candidates: tuple[ExactAxisStationaryCandidate, ...]
     status: str
@@ -170,6 +175,16 @@ def _public_seed_distance_squared(
     return sum(value * value for value in values)
 
 
+def _threshold_assignment(
+    holo: ConstraintHolo,
+    state: ReducedExactProductPhaseState,
+) -> tuple[tuple[str, bool], ...]:
+    return tuple(
+        (variable, state.phase_cosine[index] > 0.0)
+        for index, variable in enumerate(holo.variables)
+    )
+
+
 def search_exact_axis_boundary_candidates(
     formulae: Iterable[ConstraintHolo],
     *,
@@ -189,6 +204,9 @@ def search_exact_axis_boundary_candidates(
     per variable and uniform selector faces supported on equal literal-defect costs.
     Memory classes are derived from each exact clause violation; no ``5**m`` memory-label
     enumeration is performed.
+
+    A stationary state is marked seed-relevant only when the declared public-seed
+    threshold assignment does not already satisfy the same presented formula.
     """
 
     integer_limits = (
@@ -217,6 +235,7 @@ def search_exact_axis_boundary_candidates(
     truncated = len(unique) > formula_limit
     selected = tuple(unique[key] for key in sorted(unique)[:formula_limit])
     satisfiable_searched = 0
+    public_seed_witness_formulae = 0
     axis_states_audited = 0
     selector_combinations_audited = 0
     candidates: list[ExactAxisStationaryCandidate] = []
@@ -234,6 +253,10 @@ def search_exact_axis_boundary_candidates(
             parameters.long_memory_cap_factor * max(1, len(holo.clauses)),
         )
         public_state = public_reduced_exact_product_state(holo)
+        public_assignment = _threshold_assignment(holo, public_state)
+        public_seed_is_witness = holo.accepts(dict(public_assignment))
+        if public_seed_is_witness:
+            public_seed_witness_formulae += 1
 
         for phase_choice in product(AXIS_PHASES, repeat=len(holo.variables)):
             axis_states_audited += 1
@@ -301,13 +324,7 @@ def search_exact_axis_boundary_candidates(
                     or audit.terminal_assignment_satisfies_public_relation
                 ):
                     continue
-                assignment = tuple(
-                    (
-                        variable,
-                        state.phase_cosine[index] > 0.0,
-                    )
-                    for index, variable in enumerate(holo.variables)
-                )
+                assignment = _threshold_assignment(holo, state)
                 candidates.append(
                     ExactAxisStationaryCandidate(
                         semantic_digest=holo.semantic_digest(),
@@ -335,6 +352,11 @@ def search_exact_axis_boundary_candidates(
                             public_state,
                             state,
                         ),
+                        public_seed_threshold_assignment=public_assignment,
+                        public_seed_is_terminal_witness=public_seed_is_witness,
+                        seed_relevant_obstruction_candidate=(
+                            not public_seed_is_witness
+                        ),
                         threshold_assignment=assignment,
                     )
                 )
@@ -347,18 +369,27 @@ def search_exact_axis_boundary_candidates(
             item.selector_supports,
         )
     )
+    seed_relevant = sum(
+        candidate.seed_relevant_obstruction_candidate for candidate in candidates
+    )
+    if seed_relevant:
+        status = "EXACT_AXIS_BOUNDARY_SEARCH_FOUND_SEED_RELEVANT_STATIONARY_CANDIDATES"
+    elif candidates:
+        status = (
+            "EXACT_AXIS_BOUNDARY_SEARCH_FOUND_ONLY_PUBLIC_SEED_TERMINAL_OBSTRUCTIONS"
+        )
+    else:
+        status = "EXACT_AXIS_BOUNDARY_SEARCH_FOUND_NO_CANDIDATE_ON_CAPPED_SURFACE"
     return ExactAxisBoundarySearchResult(
         input_formulae=len(supplied),
         semantic_unique_formulae=len(unique),
         satisfiable_formulae_searched=satisfiable_searched,
+        formulae_public_seed_already_witness=public_seed_witness_formulae,
         axis_states_audited=axis_states_audited,
         selector_combinations_audited=selector_combinations_audited,
         non_solution_stationary_candidates=len(candidates),
+        seed_relevant_non_solution_candidates=seed_relevant,
         truncated=truncated,
         candidates=tuple(candidates),
-        status=(
-            "EXACT_AXIS_BOUNDARY_SEARCH_FOUND_NON_SOLUTION_STATIONARY_CANDIDATES"
-            if candidates
-            else "EXACT_AXIS_BOUNDARY_SEARCH_FOUND_NO_CANDIDATE_ON_CAPPED_SURFACE"
-        ),
+        status=status,
     )
