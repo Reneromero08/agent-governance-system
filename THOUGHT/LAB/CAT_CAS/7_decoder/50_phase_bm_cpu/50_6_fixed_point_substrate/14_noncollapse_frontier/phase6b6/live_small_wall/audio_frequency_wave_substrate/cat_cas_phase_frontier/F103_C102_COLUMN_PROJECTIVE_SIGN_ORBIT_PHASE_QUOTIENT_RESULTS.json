@@ -1,0 +1,220 @@
+{
+  "cases": [
+    {
+      "boundary_commitment": "53f110e23bf1677e33c95f882dcd420227c93a998491ca2745389c93616b4881",
+      "depth": 1,
+      "exact_raw_payload_restored_after_unseal": true,
+      "family": "PRIMARY",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23,
+      "program_fingerprint": "0734886f594b880adcfb3ebafffb1d2a114198013eab1b5ba0025f48fef40129",
+      "quotient_work": {
+        "canonicalizations": 40,
+        "column_scans": 200,
+        "consumers": 16,
+        "representative_flips": 0
+      },
+      "restoration_generation": 1,
+      "same_backing_restored": true
+    },
+    {
+      "boundary_commitment": "427ab27b45ceed293cca0d6b10b098c67e598bda305f295b19f504534097d966",
+      "depth": 4,
+      "exact_raw_payload_restored_after_unseal": true,
+      "family": "PRIMARY",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23,
+      "program_fingerprint": "19934f489690f259ba2923c855bb94827ecade984c483f12719f22230da8d735",
+      "quotient_work": {
+        "canonicalizations": 160,
+        "column_scans": 800,
+        "consumers": 64,
+        "representative_flips": 112
+      },
+      "restoration_generation": 1,
+      "same_backing_restored": true
+    },
+    {
+      "boundary_commitment": "896d32bd3457e85df7da6057ce8faadf21b90c5325968236eef4fd49371aea7c",
+      "depth": 16,
+      "exact_raw_payload_restored_after_unseal": true,
+      "family": "PRIMARY",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23,
+      "program_fingerprint": "f9d405471d66d85fce8d5f8fe6f86467cfd55c08a9fd91491e58a3ded4669422",
+      "quotient_work": {
+        "canonicalizations": 640,
+        "column_scans": 3200,
+        "consumers": 256,
+        "representative_flips": 1258
+      },
+      "restoration_generation": 1,
+      "same_backing_restored": true
+    },
+    {
+      "boundary_commitment": "d459f553b31614afb17d99ddc8720410606b4ad13ad42104cdb12c85740a68c1",
+      "depth": 64,
+      "exact_raw_payload_restored_after_unseal": true,
+      "family": "PRIMARY",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23,
+      "program_fingerprint": "57fc3acca5a7d5585c1a77d02c726d613700367f1dd66a4afb6211de6ad571e1",
+      "quotient_work": {
+        "canonicalizations": 2560,
+        "column_scans": 12800,
+        "consumers": 1024,
+        "representative_flips": 5838
+      },
+      "restoration_generation": 1,
+      "same_backing_restored": true
+    },
+    {
+      "boundary_commitment": "57a64f891f2fca37a1bd780d1923d3868a221ece71b44e50df28812b4898ac18",
+      "depth": 1,
+      "exact_raw_payload_restored_after_unseal": true,
+      "family": "ALTERNATE",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23,
+      "program_fingerprint": "4fe2bc7f3493406db32cb3ea7679e8172d30f1f4a53cd38dbaf51b42d8ae6dc3",
+      "quotient_work": {
+        "canonicalizations": 40,
+        "column_scans": 200,
+        "consumers": 16,
+        "representative_flips": 0
+      },
+      "restoration_generation": 1,
+      "same_backing_restored": true
+    },
+    {
+      "boundary_commitment": "df8f42d84367ea01e42a9d07aecfbdae0c56e66070060264eedf5b2c689b698e",
+      "depth": 4,
+      "exact_raw_payload_restored_after_unseal": true,
+      "family": "ALTERNATE",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23,
+      "program_fingerprint": "a344c7558d0e2fc7c63455873c42987e895a2b7ae869b1f300b899d20e9e62d6",
+      "quotient_work": {
+        "canonicalizations": 160,
+        "column_scans": 800,
+        "consumers": 64,
+        "representative_flips": 116
+      },
+      "restoration_generation": 1,
+      "same_backing_restored": true
+    },
+    {
+      "boundary_commitment": "71d6fdad417196bfc04d74f24712a7463f5d9276bb4a640da0eb2995e731c671",
+      "depth": 16,
+      "exact_raw_payload_restored_after_unseal": true,
+      "family": "ALTERNATE",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23,
+      "program_fingerprint": "c1ca508521c5285b0882e2f199274999c603448b9bbb3b4b55c42f2c135695ad",
+      "quotient_work": {
+        "canonicalizations": 640,
+        "column_scans": 3200,
+        "consumers": 256,
+        "representative_flips": 1278
+      },
+      "restoration_generation": 1,
+      "same_backing_restored": true
+    },
+    {
+      "boundary_commitment": "282ead486589a9c84649b9309533af814efdcffbf662bfc79ee10a06fdf87146",
+      "depth": 64,
+      "exact_raw_payload_restored_after_unseal": true,
+      "family": "ALTERNATE",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23,
+      "program_fingerprint": "cacbc022edb01dc6024cc110263009957f68fbc280b0fd4beed4f9cff4c29139",
+      "quotient_work": {
+        "canonicalizations": 2560,
+        "column_scans": 12800,
+        "consumers": 1024,
+        "representative_flips": 5778
+      },
+      "restoration_generation": 1,
+      "same_backing_restored": true
+    }
+  ],
+  "claim": "BOUNDED_EXACT_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_QUOTIENT_IS_CLOSED_UNDER_DUAL_REGISTER_QUADRATIC_SHEAR_RELATION_PROGRAMS_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_CANONICAL_REPRESENTATIVE_RETAINS_ALL45900_FIELD_CELLS_AND_THE45_BIT_ORIENTATION_LEDGER_EXACTLY_RETURNS_THE_DISCARDED_ORBIT_INFORMATION_WHILE_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS",
+  "claim_ceiling": "C5_TWO_PUBLIC_ROTATING_HUB_FAMILIES_DEPTHS1_4_16_64_COLUMNWISE_GLOBAL_SIGN_ORBITS_OF_EACH_A_MATRIX_COLUMN_WITH45_BIT_PRIVATE_RESTORATION_LEDGER",
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "controls": {
+    "a_register_projection_rejected": true,
+    "all45_independent_column_sign_generators_collapse_preserve_boundary_and_restore": true,
+    "carrier_disabled_path_changes_boundary": true,
+    "dropped_orientation_ledger_fails_raw_restoration": true,
+    "missing_inverse_fails_restoration": true,
+    "null_carrier_rejected": true,
+    "reordered_inverse_fails_restoration": true,
+    "sign_related_inputs_have_distinct_orientation_ledgers": true,
+    "sign_related_inputs_have_identical_public_b_boundaries": true,
+    "sign_related_inputs_have_same_canonical_representative": true,
+    "wrong_orientation_ledger_fails_raw_restoration": true
+  },
+  "experiment": {
+    "case_count": 8,
+    "depths": [
+      1,
+      4,
+      16,
+      64
+    ],
+    "families": [
+      "PRIMARY",
+      "ALTERNATE"
+    ],
+    "field": "F103",
+    "final_boundary_only": true,
+    "interface": 5,
+    "orientation_bits": 45,
+    "phase_group": "C102",
+    "quotient": "INDEPENDENT_COLUMNWISE_A_REGISTER_SIGN_ORBITS",
+    "raw_boundary_values_serialized": false
+  },
+  "matched_compact_classical": {
+    "same_field_cells": true,
+    "same_public_boundaries": true,
+    "strongest_path": "IDENTICAL_DUAL_REGISTER_F103_C102_COEFFICIENT_RECURRENCE"
+  },
+  "next_obstruction": "THE_ONLY_EXECUTED_DISCRETE_PROJECTIVE_QUOTIENT_RETAINS_THE_FULL_FIELD_COORDINATE_BACKING_AND_EXACT_RESTORATION_RETURNS_ALL_REMOVED_ORIENTATION_INFORMATION_SO_THE_NEXT_PHASE_MACHINE_MUST_CHANGE_THE_ALGEBRAIC_STATE_LAW_RATHER_THAN_QUOTIENT_THIS_SHEAR_CARRIER",
+  "not_established": [
+    "FIELD_CELL_OR_FIXED_WIDTH_PAYLOAD_COMPACTION",
+    "QUOTIENT_BY_SCALARS_OTHER_THAN_PLUS_OR_MINUS_ONE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_COMPUTATION"
+  ],
+  "platform": "LINUX_DIRECT_PROCESS_SOFTWARE",
+  "resource_accounting": {
+    "actual_numpy_representative_bytes": 45900,
+    "advantage_claimed": false,
+    "canonical_representative_field_cells": 45900,
+    "exact_restoration_orientation_ledger_bits": 45,
+    "free_nonzero_seed_sign_orbit_order": 35184372088832,
+    "information_theoretic_minimum_restoration_ledger_bits_for_arbitrary_orbit_member": 45,
+    "matched_raw_coefficient_recurrence_field_cells": 45900,
+    "material_field_cell_reduction": 0,
+    "minimum_packed_orientation_ledger_bytes": 6,
+    "net_lossless_information_reduction_bits_after_restoration_ledger": 0,
+    "projective_orbit_cardinality_reduction_bits_when_all_columns_nonzero": 45,
+    "python_integer_allocator_and_whole_process_peaks_excluded": true,
+    "raw_fixed_width_payload_bits": 321300,
+    "tested_independent_sign_generators": 45
+  },
+  "restoration_and_reuse": {
+    "exact_raw_payload_restored_after_reuse": true,
+    "first_boundary_commitment": "57a64f891f2fca37a1bd780d1923d3868a221ece71b44e50df28812b4898ac18",
+    "restoration_generation": 2,
+    "same_backing_reused": true,
+    "snapshot_used": false,
+    "unrelated_second_boundary_matches_fresh": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_PHASE_QUOTIENT_V1",
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}

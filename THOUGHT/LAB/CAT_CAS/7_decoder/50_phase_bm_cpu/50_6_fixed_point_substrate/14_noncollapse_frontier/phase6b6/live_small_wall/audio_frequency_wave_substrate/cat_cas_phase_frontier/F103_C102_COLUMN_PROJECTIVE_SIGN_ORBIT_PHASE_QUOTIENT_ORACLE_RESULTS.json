@@ -1,0 +1,102 @@
+{
+  "cases": [
+    {
+      "boundary_commitment": "53f110e23bf1677e33c95f882dcd420227c93a998491ca2745389c93616b4881",
+      "depth": 1,
+      "exact_raw_payload_restored_after_unseal": true,
+      "exact_sealed_restoration": true,
+      "family": "PRIMARY",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23
+    },
+    {
+      "boundary_commitment": "427ab27b45ceed293cca0d6b10b098c67e598bda305f295b19f504534097d966",
+      "depth": 4,
+      "exact_raw_payload_restored_after_unseal": true,
+      "exact_sealed_restoration": true,
+      "family": "PRIMARY",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23
+    },
+    {
+      "boundary_commitment": "896d32bd3457e85df7da6057ce8faadf21b90c5325968236eef4fd49371aea7c",
+      "depth": 16,
+      "exact_raw_payload_restored_after_unseal": true,
+      "exact_sealed_restoration": true,
+      "family": "PRIMARY",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23
+    },
+    {
+      "boundary_commitment": "d459f553b31614afb17d99ddc8720410606b4ad13ad42104cdb12c85740a68c1",
+      "depth": 64,
+      "exact_raw_payload_restored_after_unseal": true,
+      "exact_sealed_restoration": true,
+      "family": "PRIMARY",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23
+    },
+    {
+      "boundary_commitment": "57a64f891f2fca37a1bd780d1923d3868a221ece71b44e50df28812b4898ac18",
+      "depth": 1,
+      "exact_raw_payload_restored_after_unseal": true,
+      "exact_sealed_restoration": true,
+      "family": "ALTERNATE",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23
+    },
+    {
+      "boundary_commitment": "df8f42d84367ea01e42a9d07aecfbdae0c56e66070060264eedf5b2c689b698e",
+      "depth": 4,
+      "exact_raw_payload_restored_after_unseal": true,
+      "exact_sealed_restoration": true,
+      "family": "ALTERNATE",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23
+    },
+    {
+      "boundary_commitment": "71d6fdad417196bfc04d74f24712a7463f5d9276bb4a640da0eb2995e731c671",
+      "depth": 16,
+      "exact_raw_payload_restored_after_unseal": true,
+      "exact_sealed_restoration": true,
+      "family": "ALTERNATE",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23
+    },
+    {
+      "boundary_commitment": "282ead486589a9c84649b9309533af814efdcffbf662bfc79ee10a06fdf87146",
+      "depth": 64,
+      "exact_raw_payload_restored_after_unseal": true,
+      "exact_sealed_restoration": true,
+      "family": "ALTERNATE",
+      "matches_raw_identical_coefficient_recurrence": true,
+      "orientation_bits_set_at_seal": 23
+    }
+  ],
+  "claim_ceiling": "INDEPENDENT_SCALAR_PARITY_FOR_M160_C5_TWO_FAMILIES_DEPTHS1_4_16_64_AND_ALL45_SIGN_GENERATORS",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "generator_control": {
+    "all_collapse_preserve_boundary_and_restore": true,
+    "free_nonzero_seed_orbit_order": 35184372088832,
+    "minimum_arbitrary_member_restoration_ledger_bits": 45,
+    "tested_generators": 45
+  },
+  "imports_m158_production": false,
+  "imports_m160_production": false,
+  "imports_numpy": false,
+  "production_comparison": {
+    "all_match": true,
+    "comparisons": 32
+  },
+  "resource_reconstruction": {
+    "canonical_representative_field_cells": 45900,
+    "matched_raw_field_cells": 45900,
+    "material_field_cell_reduction": 0,
+    "net_lossless_information_reduction_bits": 0,
+    "orientation_ledger_bits": 45
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "reuses_prior_independent_m158_scalar_reference": true,
+  "schema": "CAT_CAS_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_PHASE_QUOTIENT_ORACLE_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
