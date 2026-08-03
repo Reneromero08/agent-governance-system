@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_NONLINEAR_ANISOTROPIC_RADIAL_QUOTIENT_WITH_MATCHED_CLASSICAL_KERNEL_OBSTRUCTION`
-**Roadmap version:** `14.5`
+**Status:** `STRICT_SCOPE_MATRIX_FREE_ANISOTROPIC_RADIAL_PHASE_FOURIER_WITH_PAYLOAD_AND_CLASSICAL_OBSTRUCTION`
+**Roadmap version:** `14.6`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `f89bcf14e9031bc814a768accee310e0cd3d26d5`
+**Reconciled source head:** `75de68e25043b2f5bd2fd7da4409c101caec28e9`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_ANISOTROPIC_F17_SQUARED_NORM_RELATION_QUOTIENT_CLOSES_NONCOMMUTING_QUARTIC_RADIAL_PHASE_AND_NORMALIZED_PHASE_FOURIER_OPERATIONS_ON_17_UNRESOLVED_EXACT_CELLS_ACROSS_GROWING_PROGRAM_DEPTH_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_17_COORDINATE_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PAYLOAD_REMAIN`
-**Current claim ceiling:** `STRICT_ANISOTROPIC_F17_SQUARED_RADIAL_FUNCTIONS_QUARTIC_NORM_PHASES_DECLARED_NORMALIZED_PHASE_FOURIER_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `EXACT_MATRIX_FREE_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_GENERATED_FROM_16_TERM_KLOOSTERMAN_CHARACTER_SUM_REMOVES_THE_RETAINED_289_CELL_PUBLIC_KERNEL_WHILE_PRESERVING_17_CELL_NONCOMMUTING_QUARTIC_PHASE_CLOSURE_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_MATRIX_FREE_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PAYLOAD_REMAIN`
+**Current claim ceiling:** `STRICT_ANISOTROPIC_F17_SQUARED_RADIAL_FUNCTIONS_QUARTIC_NORM_PHASES_FACTORED16_TERM_KLOOSTERMAN_TYPE_PHASE_FOURIER_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M139_NONLINEAR_ANISOTROPIC_RADIAL_QUOTIENT_AND_MATCHED_CLASSICAL_KERNEL_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M140_MATRIX_FREE_KERNEL_REMOVAL_AND_EXACT_PAYLOAD_CLASSICAL_EQUIVALENCE_OBSTRUCTION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_MATRIX_FREE_ANISOTROPIC_RADIAL_PHASE_FOURIER_FROM_KLOOSTERMAN_GENERATOR_WITH_MATCHED_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_HEIGHT_STABLE_ANISOTROPIC_RADIAL_PHASE_COUPLING_OR_NO_GO_WITH_MATRIX_FREE_CLASSICAL_FRONTIER`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`f89bcf14e9031bc814a768accee310e0cd3d26d5`. The current 139-milestone
+`75de68e25043b2f5bd2fd7da4409c101caec28e9`. The current 140-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_ANISOTROPIC_F17_SQUARED_NORM_RELATION_QUOTIENT_CLOSES_NONCOMMUTING_QUARTIC_RADIAL_PHASE_AND_NORMALIZED_PHASE_FOURIER_OPERATIONS_ON_17_UNRESOLVED_EXACT_CELLS_ACROSS_GROWING_PROGRAM_DEPTH_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_17_COORDINATE_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PAYLOAD_REMAIN
+EXACT_MATRIX_FREE_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_GENERATED_FROM_16_TERM_KLOOSTERMAN_CHARACTER_SUM_REMOVES_THE_RETAINED_289_CELL_PUBLIC_KERNEL_WHILE_PRESERVING_17_CELL_NONCOMMUTING_QUARTIC_PHASE_CLOSURE_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_MATRIX_FREE_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PAYLOAD_REMAIN
 ```
 
 Not established:
@@ -5448,10 +5448,10 @@ EXACT_NONADDITIVE_PHASE_COUPLING_OR_RELATION_QUOTIENT_BEYOND_C17_SIGNATURE_AXIS_
 The obstruction is:
 
 ```text
-M138_TWO_SIGNATURE_COEFFICIENT_SURFACES_REACH_FULL17_MATRIX_RANK_BUT_THE_FINAL_SCALAR_STREAMS_THROUGH_EIGHT_DYNAMIC_EXACT_FIELDS_PLUS17_PUBLIC_COUNTS_AND_FULL_DIAGNOSTICS_TRADE_MEMORY_FOR_REMATERIALIZATION_SO_ADDING_SIGNATURE_AXES_OR_DENSE_GROUP_ALGEBRA_CELLS_CANNOT_ESTABLISH_A_PHASE_RESOURCE; THE_NEXT_MECHANISM_MUST_CHANGE_THE_NATIVE_COUPLING_LAW_OR_USE_A_NONLINEAR_RELATION_QUOTIENT
+M140_REMOVES_THE_RETAINED289_CELL_PUBLIC_FOURIER_KERNEL_WITH_A16_TERM_CHARACTER_SUM_FACTORIZATION_BUT_USES544_CHARACTER_PRODUCTS_PER_FOURIER38_UPDATE_SCRATCH_CELLS_AND_ONE_RETAINED_GENERATOR_SCALAR_WHILE_THE_IDENTICAL_MATRIX_FREE17_COORDINATE_CLASSICAL_RECURRENCE_AND_DEPTH_GROWING_EXACT_PAYLOAD_REMAIN
 ```
 
-M138 establishes neither CATVM custody, a distinct phase resource,
+M140 establishes neither CATVM custody, a distinct phase resource,
 computational advantage, Small Wall crossing, physical waveform execution,
 physical bit replacement, nor unbounded catalytic computation.
 
@@ -5532,6 +5532,90 @@ identical matrix-free classical recurrence.  M139 establishes neither a
 general nonlinear quotient, CATVM custody, a distinct phase resource,
 computational advantage, Small Wall crossing, physical execution, physical
 bit replacement, nor unbounded computation.
+
+## M140: Matrix-free anisotropic radial phase Fourier
+
+M140 removes M139's retained 289-cell public Fourier kernel.  For source shell
+`q`, target shell `r`, and nonzero `t` in `F17`, it executes the exact
+factorization
+
+```text
+s(t) = sum_q zeta17^(-q t) f(q)
+F(f)(r) = delta[r=0] sum_q f(q)
+          - 17^-1 sum_(t != 0) zeta17^(-r/(4t)) s(t)
+```
+
+The accepted Fourier path does not enumerate the 289 coordinates, call the
+per-entry generator, generate kernel entries, or retain a dense kernel.
+
+```text
+claim
+    EXACT_MATRIX_FREE_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_GENERATED_FROM_16_TERM_KLOOSTERMAN_CHARACTER_SUM_REMOVES_THE_RETAINED_289_CELL_PUBLIC_KERNEL_WHILE_PRESERVING_17_CELL_NONCOMMUTING_QUARTIC_PHASE_CLOSURE_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_MATRIX_FREE_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PAYLOAD_REMAIN
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident 17-cell quotient carrier EXACT_ALGEBRAIC_RESTORATION
+    generator/projection/commitment/oracle buffers NO_RESTORATION_CLAIM
+
+source head
+    75de68e25043b2f5bd2fd7da4409c101caec28e9
+```
+
+Seven exact `Q(zeta17)` transactions cover depths `1,2,4,8,16,32,64`.
+Forty-eight structural transactions cover three public families over `F103`
+and `F137` through depth 128.  The independent oracle reconstructs the public
+geometry, program schedules, factorized forward/inverse recurrence, final
+commitments, and exact resident-payload maxima.  It checks every generated
+kernel entry against a direct coordinate character sum over both finite
+fields, five selected exact entries, two dense 289-coordinate transforms,
+and missing-term and wrong-sign mutations.
+
+```text
+exact depth                         1     2     4     8     16     32     64
+maximum resident payload bits   2203  2243  4364  8709  17552  35394  70992
+resident exact field cells        17    17    17    17     17     17     17
+update scratch cells               38    38    38    38     38     38     38
+resident plus update live          55    55    55    55     55     55     55
+```
+
+The retained public generator is one exact `17^-1` scalar, bringing the
+counted maximum to 56 field cells.  Each Fourier uses 272 source contractions
+and 272 target contractions, or 544 character products.  Projection uses six
+scratch cells, for 23 carrier-plus-projection cells.  Verification-only
+coordinate kernels and dense controls are reported separately.  Python
+container and allocator overhead, native-library storage, bigint workspace,
+hashlib internals, and whole-process memory remain excluded.
+
+The actual inverse restores exact canonical zero on the same backing and an
+unrelated public program reuses it without snapshot or retained inverse
+history.  The restoration counter is package-local and is not CATVM custody.
+
+The strongest executed compact classical comparison is the identical
+matrix-free 17-coordinate recurrence with the same generator, scratch, and
+`O(544*depth)` arithmetic law.  M139's retained-kernel recurrence remains in
+the frontier because it uses `O(289*depth)` warm products and 20 update scratch
+cells at the cost of the 289 retained kernel cells.  No universal lower bound
+or asymptotic improvement is claimed.
+
+The retained-kernel obstruction is closed, but the exact payload tuple still
+grows with depth and the identical compact classical recurrence remains.  The
+next selected experiment is:
+
+```text
+EXACT_HEIGHT_STABLE_ANISOTROPIC_RADIAL_PHASE_COUPLING_OR_NO_GO_WITH_MATRIX_FREE_CLASSICAL_FRONTIER
+```
+
+It must change the phase machine's exact height law or establish a bounded
+no-go for the declared anisotropic radial family.  It must not count another
+kernel/scratch constant-factor trade as a phase resource.  M140 establishes
+neither CATVM custody, a general nonlinear quotient, a distinct phase
+resource, computational advantage, Small Wall crossing, physical execution,
+physical bit replacement, nor unbounded computation.
 
 ## 10. Roadmap Maintenance
 

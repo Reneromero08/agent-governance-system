@@ -8259,3 +8259,54 @@ exact payload and the identical classical recurrence.  The selected repair is:
 ```text
 EXACT_MATRIX_FREE_ANISOTROPIC_RADIAL_PHASE_FOURIER_FROM_KLOOSTERMAN_GENERATOR_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```
+
+## M140: Matrix-free anisotropic radial phase Fourier
+
+M140 removes M139's retained 289-cell public Fourier kernel by factoring the
+anisotropic radial transform through 16 nonzero `F17` character parameters.
+The accepted path performs 272 source and 272 target contractions per
+Fourier, retains only the exact `17^-1` generator scalar, and neither calls a
+per-entry kernel generator nor enumerates the 289 coordinates.
+
+Seven exact `Q(zeta17)` transactions through depth 64 and 48 structural
+transactions over `F103` and `F137` through depth 128 restore exactly.  The
+same backing supports an unrelated reuse without snapshot or inverse history.
+The independent oracle reconstructs schedules, factorized forward/inverse
+execution, commitments, and resident payload maxima; checks all 289 entries
+over both finite fields and selected exact entries against direct coordinate
+sums; executes two dense 289-coordinate controls; and rejects missing-term
+and wrong-sign mutations.  Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+```text
+exact depth                         1     2     4     8     16     32     64
+maximum resident payload bits   2203  2243  4364  8709  17552  35394  70992
+resident field cells              17    17    17    17     17     17     17
+update scratch cells              38    38    38    38     38     38     38
+resident plus update live         55    55    55    55     55     55     55
+```
+
+Including the retained generator scalar gives 56 counted field cells.
+Projection uses six scratch cells, for 23 carrier-plus-projection cells.  The
+verification-only coordinate kernels and dense controls are outside this
+accepted resource path.  Python/native allocation, bigint workspace, hashlib
+internals, and whole-process memory remain excluded.
+
+The strongest executed compact classical baseline is the identical
+matrix-free 17-coordinate recurrence with the same `O(544*depth)` work and
+scratch law.  M139's retained-kernel recurrence remains a relevant frontier
+point: 289 retained kernel cells, 20 update scratch cells, and
+`O(289*depth)` warm products.  Removing the kernel is therefore not evidence
+of a computational advantage.
+
+The current obstruction is depth-growing exact payload together with the
+identical compact classical recurrence.  The selected next experiment is:
+
+```text
+EXACT_HEIGHT_STABLE_ANISOTROPIC_RADIAL_PHASE_COUPLING_OR_NO_GO_WITH_MATRIX_FREE_CLASSICAL_FRONTIER
+```
+
+M140 establishes neither CATVM custody, a general nonlinear quotient, a
+distinct phase resource, computational advantage, Small Wall crossing,
+physical execution, physical bit replacement, nor unbounded computation.
