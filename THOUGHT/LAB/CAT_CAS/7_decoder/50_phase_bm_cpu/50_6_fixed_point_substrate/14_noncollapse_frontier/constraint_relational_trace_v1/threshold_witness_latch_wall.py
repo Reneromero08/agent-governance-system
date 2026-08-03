@@ -13,7 +13,7 @@ class ThresholdWitnessLatchWallAudit:
     odd_parity_clause_violations: tuple[float, float, float, float]
     all_threshold_clauses_satisfied: bool
     every_exact_product_channel_strictly_positive: bool
-    exact_product_zero_matches_only_boolean_literal_truth: bool
+    exact_product_zero_requires_literal_phase_boundary: bool
     nonzero_polynomial_exact_write_enable_possible: bool
     nonzero_real_analytic_exact_write_enable_possible: bool
     naive_polynomial_threshold_latch_status: str
@@ -78,7 +78,7 @@ def audit_threshold_witness_latch_wall(
         raise ConstraintHoloError("latch-wall truth gain must be positive")
 
     # (True, False, False) is an odd-parity witness, represented strictly inside its
-    # sign orthant rather than at a Boolean phase corner.
+    # sign orthant rather than at a literal phase boundary.
     cosines = (epsilon, -epsilon, -epsilon)
     signs = _odd_parity_clause_signs()
     satisfied = tuple(
@@ -98,7 +98,7 @@ def audit_threshold_witness_latch_wall(
         odd_parity_clause_violations=violations,  # type: ignore[arg-type]
         all_threshold_clauses_satisfied=all_satisfied,
         every_exact_product_channel_strictly_positive=every_positive,
-        exact_product_zero_matches_only_boolean_literal_truth=True,
+        exact_product_zero_requires_literal_phase_boundary=True,
         nonzero_polynomial_exact_write_enable_possible=False,
         nonzero_real_analytic_exact_write_enable_possible=False,
         naive_polynomial_threshold_latch_status=(
@@ -107,7 +107,7 @@ def audit_threshold_witness_latch_wall(
         allowed_escape_routes=(
             "DISCONTINUOUS_OR_HYBRID_THRESHOLD_EVENT_WITH_EXPLICIT_RESOURCE_MODEL",
             "TOPOLOGICAL_CROSSING_RECORD_NOT_REQUIRING_OPEN_SET_SUPPORT",
-            "BOOLEAN_SECTION_LATCH_AFTER_PROVED_POLYNOMIAL_BOOLEANIZATION",
+            "LITERAL_PHASE_BOUNDARY_LATCH_AFTER_PROVED_POLYNOMIAL_BOOLEANIZATION",
             "DIFFERENT_SMOOTH_PERSISTENCE_MECHANISM_WITH_INDEPENDENT_FALSE_POSITIVE_PROOF",
         ),
         status=(
