@@ -8039,3 +8039,71 @@ The obstruction is:
 ```text
 THE_TWO_SHARED_LATENT_CUBIC_CYCLE_REQUIRES_EXACT_RANK4_BUT_CLOSES_ON_THE_IDENTICAL_FOUR_SCALAR_CLASSICAL_RECURRENCE_THE_PHASE_CARRIER_STORES_TWICE_THE_PUBLIC_FACTOR_SIGNATURE_AND_PHASE_AND_CLASSICAL_PORT_PAYLOAD_WIDTH_GROW_IDENTICALLY_WITH_DEPTH
 ```
+
+## M136: Growing typed cubic separator rank no-go
+
+M136 replaces larger rank-four fixtures with a symbolic all-`k` separator
+law.  For `k` individually typed shared Boolean latent ports, the anchor-one
+left and right branch minors are Kronecker products of
+`[[1,1],[1,theta_i]]`.  Every accepted `theta_i` is nonidentity and the typed
+Walsh separator is invertible, so the exact two-sided separator rank is
+`2^k`.
+
+```text
+claim
+    EXACT_K_TYPED_SHARED_LATENT_CUBIC_BRANCH_MAPS_WITH_INVERTIBLE_PHASE_WALSH_INTERLEAVING_HAVE_SEPARATOR_RANK_TWO_TO_THE_K_AND_REJECT_UNIFORM_EXACT_LINEAR_RELATION_QUOTIENTS_BELOW_TWO_TO_THE_K_WHILE_BOUNDED_DESCRIPTOR_PHASE_FACTOR_CARRIERS_RESTORE_AND_REUSE_WITHOUT_PORT_EXPANSION_BUT_LOW_TREEWIDTH_CLASSICAL_FACTOR_CONTRACTION_REMAINS
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident cubic-factor carrier EXACT_ALGEBRAIC_RESTORATION
+    transient buffers              NO_RESTORATION_CLAIM
+
+source head
+    e3af2700c46fec0e6dea330d9dc133b8144754eb
+```
+
+The production package executes exact `Q(zeta17)` arities
+`1,2,4,8,16,32,64` and dual-field structural arities `1,2,4,8,16`.  The
+independent oracle builds dense exact matrices only for verification through
+`k=6` over `Q(zeta17)`, `F103`, and `F137`.  All left, right, Walsh, and
+two-sided ranks equal `2^k`; left identity, right identity, and singular
+transport mutations reduce rank.  All typed configurations are separated by
+legal right continuations.
+
+The accepted transaction stores `2k` public phases in `4k` exact paired
+factor cells.  Its symbolic rank certificate uses the actual resident values
+without materialising any exponential port, assignment family, dense minor,
+or determinant value.  The actual inverse restores the same carrier backing
+to exact zero, and unrelated restored-carrier reuse agrees with fresh
+execution without snapshot or inverse history.
+
+The theorem rejects only fixed or uniform exact field-linear quotients that
+must preserve arbitrary incoming messages and the full declared typed
+continuation family.  It is not a general storage lower bound.  The strongest
+matched classical implementation contracts this local family in `O(k)`
+two-by-two Kronecker factors; general descriptors retain the
+`poly(descriptor size) * 2^treewidth` baseline.  The phase path therefore has
+no established resource or advantage.
+
+The next experiment is:
+
+```text
+EXACT_CUBIC_PHASE_POLYNOMIAL_WALSH_DERIVATIVE_BINOMIAL_FACTOR_CHART_MERGING_OR_RANK_GROWTH_WITH_MATCHED_CLASSICAL_TREEWIDTH_BASELINE
+```
+
+The obstruction is:
+
+```text
+THE_DECLARED_K_TYPED_CUBIC_BRANCH_FAMILY_HAS_AN_EXACT_TWO_TO_THE_K_UNIFORM_LINEAR_PORT_LOWER_BOUND_BUT_RANK_ALONE_DOES_NOT_BLOCK_THE_IDENTICAL_O_K_KRONECKER_CLASSICAL_CONTRACTION_SO_A_REPAIR_MUST_USE_A_NONLINEAR_PROGRAM_DEPENDENT_PHASE_CHART_OR_CHANGE_THE_NATIVE_UPDATE_LAW_WITHOUT_MOVING_EXPONENTIAL_STATE_ELSEWHERE
+```
+
+No nonlinear or program-dependent quotient no-go, operational exponential
+phase-port closure, arbitrary cubic-hypergraph closure, CATVM custody,
+distinct phase resource, computational advantage, Small Wall crossing,
+physical execution, physical bit replacement, or unbounded catalytic
+computation is established.
