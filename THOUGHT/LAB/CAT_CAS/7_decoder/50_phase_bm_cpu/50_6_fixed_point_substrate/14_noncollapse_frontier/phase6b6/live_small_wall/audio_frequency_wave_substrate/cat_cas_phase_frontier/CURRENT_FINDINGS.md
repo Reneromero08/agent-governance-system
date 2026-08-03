@@ -8857,3 +8857,49 @@ or forces rank growth against matched rematerialized classical contraction.
 M152 establishes no non-translation-invariant closure, CATVM custody, distinct
 phase resource, computational advantage, Small Wall crossing, physical
 execution, physical bit replacement, or unbounded catalytic computation.
+
+## M153: non-translation rank-one closure and exact rank-two escape
+
+Claim:
+
+```text
+BOUNDED_EXACT_FACTORED_NON_TRANSLATION_INVARIANT_F103_C17_OPEN_RELATIONS_CLOSE_UNDER_IDENTITY_PLUS_RANK1_HIDDEN_INTERFACE_COMPOSITION_AND_RANK1_PARALLEL_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_ACROSS8_NONCOMMUTING_CONSUMERS_WITHOUT_DENSE_RELATION_TABLES_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH512_BUT_COLLAPSE_TO_AN_EXECUTED306_COORDINATE_REMATERIALIZED_CONTROL_CLASSICAL_RECURRENCE_AND_RANK2_INTERSECTION_EXITS_THE_CLOSED_FAMILY
+```
+
+M153 removes translation invariance. Each relation is stored as the exact
+rank-one factorization `R(x,y)=a[x]b[y]` over `F103`, and one shared resident
+control `C=u v^T` acts on eight targets. Hidden-interface composition with
+`I+C` and parallel Hadamard intersection with `C` both close factorwise, while
+their order changes the final boundary.
+
+The independent scalar-Python oracle imports neither production nor NumPy. It
+reconstructs all 18 cases through depth 512 and passes 414 case-field
+comparisons. Production streams all 289 scalar semantics checks for both
+relation laws without retaining a dense 17 by 17 relation table or assignment
+expansion. A separate two-term perturbation has a nonzero 2 by 2 minor equal
+to 34, so it is exactly rank two and cannot remain in the accepted rank-one
+family.
+
+All 612 resident field coordinates restore exactly on the same backing with no
+snapshot, retained inverse history, baseline reload, or canonicalization.
+Unrelated depth-311 reuse after depth 37 and 64 repeated depth-8 cycles match
+fresh execution. Resident restoration is `EXACT_ALGEBRAIC_RESTORATION`;
+temporary buffers have `NO_RESTORATION_CLAIM`. Direct-process type, owner, and
+generation observations do not establish machine-enforced custody or CATVM
+isolation.
+
+The strongest executed classical recurrence rematerializes the immutable
+controls and retains 306 target-factor coordinates plus 34 control scratch.
+The phase carrier retains 612 coordinates. Both count 278,528 relation field
+multiplications at depth 512, so the accepted phase path has neither a state
+nor work advantage. No optimal classical recurrence is claimed.
+
+The next experiment must determine whether exact rank-two factors close under
+repeated composition and intersection or grow toward the dense rank-17
+ceiling. It must count rank metadata, canonicalization, rematerialization, and
+temporary contraction storage against a streamed compact classical baseline.
+
+M153 establishes no rank-two or arbitrary-rank closure, arbitrary topology,
+CATVM custody, distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical bit replacement, or unbounded
+catalytic computation.

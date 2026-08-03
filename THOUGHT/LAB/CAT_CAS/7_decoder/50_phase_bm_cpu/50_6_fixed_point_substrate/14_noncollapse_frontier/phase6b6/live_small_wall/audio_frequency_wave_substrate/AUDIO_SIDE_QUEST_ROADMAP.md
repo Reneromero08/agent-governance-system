@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F103_C17_OPEN_RELATION_BIALGEBRA_NO_GO`
-**Roadmap version:** `14.18`
+**Status:** `STRICT_SCOPE_F103_C17_RANK1_OPEN_RELATION_CLOSURE_NO_GO`
+**Roadmap version:** `14.19`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `2447569946e6e7f5bb8fc5888de2dde7686a1b5c`
+**Reconciled source head:** `3c418475bf564b701e0205b4ec81831d55271555`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_TYPED_OPEN_F103_C17_WEIGHTED_PHASE_RELATIONS_COMPOSE_BY_CYCLIC_CONVOLUTION_AND_INTERSECT_BY_HADAMARD_PRODUCT_ON_ONE_SHARED_UNRESOLVED_PORT_ACROSS8_NONCOMMUTING_CONSUMERS_WITHOUT_RELATION_TABLE_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH512_BUT_COLLAPSE_TO_IDENTICAL459_COORDINATE_COEFFICIENT_AND_DUAL_SPECTRAL_CLASSICAL_RECURRENCES`
-**Current claim ceiling:** `F103_TRANSLATION_INVARIANT_WEIGHTED_C17_TO_C17_OPEN_RELATIONS_ON_THE_DECLARED9_NODE_THREE_SLOT_ROTATING_HUB_TOPOLOGY_ACROSS_18_CASES_THROUGH_DEPTH512_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_FACTORED_NON_TRANSLATION_INVARIANT_F103_C17_OPEN_RELATIONS_CLOSE_UNDER_IDENTITY_PLUS_RANK1_HIDDEN_INTERFACE_COMPOSITION_AND_RANK1_PARALLEL_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_ACROSS8_NONCOMMUTING_CONSUMERS_WITHOUT_DENSE_RELATION_TABLES_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH512_BUT_COLLAPSE_TO_AN_EXECUTED306_COORDINATE_REMATERIALIZED_CONTROL_CLASSICAL_RECURRENCE_AND_RANK2_INTERSECTION_EXITS_THE_CLOSED_FAMILY`
+**Current claim ceiling:** `F103_NON_TRANSLATION_INVARIANT_RANK1_FACTORED_C17_TO_C17_RELATIONS_WITH_IDENTITY_PLUS_RANK1_COMPOSITION_AND_RANK1_INTERSECTION_ON_THE_DECLARED9_CONTROL9_TARGET_ROTATING_HUB_TOPOLOGY_ACROSS18_CASES_THROUGH_DEPTH512_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M152_F103_C17_OPEN_RELATION_BIALGEBRA_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M153_F103_C17_RANK1_OPEN_RELATION_CLOSURE_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_FACTORED_NON_TRANSLATION_INVARIANT_F103_C17_OPEN_RELATION_COMPOSITION_INTERSECTION_RANK_GROWTH_OR_COMPACT_PHASE_CLOSURE`
+**Active primary successor:** `EXACT_F103_C17_RANK2_FACTORED_OPEN_RELATION_COMPOSITION_INTERSECTION_CLOSURE_OR_RANK_GROWTH_WITH_MATCHED_STREAMED_CLASSICAL_CONTRACTION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`2447569946e6e7f5bb8fc5888de2dde7686a1b5c`. The current 152-milestone
+`3c418475bf564b701e0205b4ec81831d55271555`. The current 153-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_TYPED_OPEN_F103_C17_WEIGHTED_PHASE_RELATIONS_COMPOSE_BY_CYCLIC_CONVOLUTION_AND_INTERSECT_BY_HADAMARD_PRODUCT_ON_ONE_SHARED_UNRESOLVED_PORT_ACROSS8_NONCOMMUTING_CONSUMERS_WITHOUT_RELATION_TABLE_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH512_BUT_COLLAPSE_TO_IDENTICAL459_COORDINATE_COEFFICIENT_AND_DUAL_SPECTRAL_CLASSICAL_RECURRENCES
+BOUNDED_EXACT_FACTORED_NON_TRANSLATION_INVARIANT_F103_C17_OPEN_RELATIONS_CLOSE_UNDER_IDENTITY_PLUS_RANK1_HIDDEN_INTERFACE_COMPOSITION_AND_RANK1_PARALLEL_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_ACROSS8_NONCOMMUTING_CONSUMERS_WITHOUT_DENSE_RELATION_TABLES_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH512_BUT_COLLAPSE_TO_AN_EXECUTED306_COORDINATE_REMATERIALIZED_CONTROL_CLASSICAL_RECURRENCE_AND_RANK2_INTERSECTION_EXITS_THE_CLOSED_FAMILY
 ```
 
 Not established:
@@ -6494,6 +6494,54 @@ M152 establishes no non-translation-invariant relation closure, arbitrary
 port arity or graph topology, CATVM custody, distinct phase resource,
 computational advantage, Small Wall crossing, physical waveform execution,
 physical bit replacement, or unbounded catalytic computation.
+
+## M153: non-translation rank-one relation closure and rank-two escape
+
+M153 removes M152's translation-invariance quotient. Each open relation is
+stored as `R(x,y)=a[x]b[y]`. One shared resident `C=u v^T` port acts on eight
+targets by exact hidden-interface composition with `I+C` and by parallel
+Hadamard intersection with `C`. Both laws preserve the declared rank-one
+family and their order changes the boundary.
+
+Claim:
+
+```text
+BOUNDED_EXACT_FACTORED_NON_TRANSLATION_INVARIANT_F103_C17_OPEN_RELATIONS_CLOSE_UNDER_IDENTITY_PLUS_RANK1_HIDDEN_INTERFACE_COMPOSITION_AND_RANK1_PARALLEL_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_ACROSS8_NONCOMMUTING_CONSUMERS_WITHOUT_DENSE_RELATION_TABLES_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH512_BUT_COLLAPSE_TO_AN_EXECUTED306_COORDINATE_REMATERIALIZED_CONTROL_CLASSICAL_RECURRENCE_AND_RANK2_INTERSECTION_EXITS_THE_CLOSED_FAMILY
+```
+
+The independent scalar-Python oracle imports neither production nor NumPy and
+passes 414 case-field comparisons over 18 cases through depth 512. It streams
+all 289 scalar entries for each relation law without retaining a dense table.
+A separate two-term control perturbation has a nonzero 2 by 2 minor of 34,
+proving exact rank two and rejection by the rank-one closed family.
+
+All 612 carrier coordinates restore exactly on the same backing without
+snapshot, inverse history, retained baseline, or canonicalization. Unrelated
+depth-311 reuse and 64 repeated depth-8 transactions match fresh execution.
+Direct-process owner and generation checks do not establish CATVM custody.
+
+The strongest executed baseline rematerializes the immutable control and
+retains only 306 target-factor coordinates, versus 612 on the carrier. Both
+paths count 278,528 relation field multiplications at depth 512. The phase
+path therefore has no resident-state or work advantage; no optimal classical
+recurrence is claimed.
+
+The selected successor is:
+
+```text
+EXACT_F103_C17_RANK2_FACTORED_OPEN_RELATION_COMPOSITION_INTERSECTION_CLOSURE_OR_RANK_GROWTH_WITH_MATCHED_STREAMED_CLASSICAL_CONTRACTION
+```
+
+It must determine whether rank-two factors admit an exact reversible native
+closure under repeated composition and intersection, or whether rank grows
+toward the dense 17-dimensional ceiling. Any accepted path must count factor
+canonicalization, rematerialization, and rank metadata and compare against a
+streamed compact classical contraction without materializing relation tables.
+
+M153 establishes no rank-two or general relation closure, CATVM custody,
+distinct phase resource, computational advantage, Small Wall crossing,
+physical execution, physical bit replacement, or unbounded catalytic
+computation.
 
 ## 10. Roadmap Maintenance
 
