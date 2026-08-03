@@ -8157,3 +8157,52 @@ It tests whether alternating two-signature updates admit an exact low
 separation-rank phase factor chart, or whether separation rank grows toward
 the canonical 17-by-17 coefficient surface against the identical strongest
 classical recurrence.
+
+## M138: Two-signature separation-rank and streamed-classical obstruction
+
+M138 executes two independent disjoint quadratic derivative signatures on
+one unresolved typed Walsh port in the canonical 578-cell
+`K[C17 x C17]^2` chart. Exact `Q(zeta17)` cases and structural `F103/F137`
+cases cover 62 transactions across `PRIMARY`, `REUSE`, and `ALTERNATE`
+families. Each declared family reaches exact 17-by-17 matrix separation rank
+17 at a tested ceiling, rejecting only uniform matrix-factor caps below 17
+for these families.
+
+The separate oracle reconstructs public descriptors, full coefficient
+surfaces, ranks, final scalar boundaries, 289-residue streamed boundaries,
+commitments, resident payload tuples, and inverse seeds. Six small direct
+assignment sums agree over two finite fields. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+Adversarial review repaired three accounting/comparison defects and one
+control defect before sealing. The out-of-place Walsh update has 578 scratch
+cells simultaneously live with the 578-cell carrier, for a 1,156-cell logical
+peak. Projection declares 20 persistent named cells separately from its
+289-cell rank buffer. A real wrong-order inverse on the projected resident
+carrier fails exact restoration.
+
+```text
+Q(zeta17) branch pairs             1      2      4      8     16     32     64      128
+resident payload bits          18504  18528  18744  19369  21392  25842  40028   110637
+resident plus scratch bits     37004  37040  37364  38323  41501  49067  76295   216450
+```
+
+The matched classical comparison is a memory/work frontier. Retain-both
+reproduces the full diagnostic; an executed 289-residue stream reproduces
+every final scalar with eight named dynamic exact fields plus 17 public
+integer counts; and an explicitly unexecuted conservative 320-field
+rematerialized construction can reproduce ranks and commitment with more
+work. No streamed payload tuple or dominant classical point is claimed.
+
+The resident carrier restores exact canonical zero on the same backing and
+supports unrelated reuse without snapshot or inverse history. The package-
+local restoration count is not CATVM custody. Full separation rank does not
+prove a universal 578-cell minimum or a general rank-r lower bound. No
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical bit replacement, or unbounded computation is established.
+
+The next mechanism must change the native phase coupling law or use a
+nonlinear relation quotient beyond additive `C17` signature axes; adding more
+signature axes or dense group-algebra cells would repeat the diagnosed
+obstruction.

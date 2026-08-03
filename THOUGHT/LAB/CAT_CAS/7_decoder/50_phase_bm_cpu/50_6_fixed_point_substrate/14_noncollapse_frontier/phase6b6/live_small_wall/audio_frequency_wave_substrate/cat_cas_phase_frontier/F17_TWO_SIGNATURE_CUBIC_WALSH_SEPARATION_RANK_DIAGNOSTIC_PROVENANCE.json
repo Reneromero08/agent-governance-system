@@ -1,0 +1,97 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "d556c65e6f9410713700db474d4a7d90af44d244",
+  "scientific_source_parent": "d0d998885c08fb3e9691edb087989de4d13293d3",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "94c6703d984dd0cd7228f863ea351c8851d99334a9e1693478a194425a63a3f4",
+  "reference_full_oracle_sha256": "ab05adb3540d1a5117813219596ac0176c2d5a8b8d44cb4cdf9ae9bc010967b3",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_two_signature_cubic_walsh_separation_rank_diagnostic.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_two_signature_cubic_walsh_separation_rank_diagnostic_oracle.py --production PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_two_signature_cubic_walsh_separation_rank_diagnostic.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_two_signature_cubic_walsh_separation_rank_diagnostic.py": "48958bff6ae4ddebea381ec1d659c0167c3c449a03187475c2ee835c93e7bdeb",
+    "f17_two_signature_cubic_walsh_separation_rank_diagnostic_oracle.py": "3b0231528aebbc78864ac5a3f90cd59a53ce6ae8a590e4d40a89c22d28a58ff9",
+    "F17_TWO_SIGNATURE_CUBIC_WALSH_SEPARATION_RANK_DIAGNOSTIC_RESULTS.json": "94c6703d984dd0cd7228f863ea351c8851d99334a9e1693478a194425a63a3f4",
+    "F17_TWO_SIGNATURE_CUBIC_WALSH_SEPARATION_RANK_DIAGNOSTIC_ORACLE_RESULTS.json": "ab05adb3540d1a5117813219596ac0176c2d5a8b8d44cb4cdf9ae9bc010967b3",
+    "F17_TWO_SIGNATURE_CUBIC_WALSH_SEPARATION_RANK_DIAGNOSTIC_INDEPENDENT_REVIEW.md": "025b71385c3964ff951decd61ffe546f6adb54716ec9d01d8e3857eaaf794a7b",
+    "qualify_f17_two_signature_cubic_walsh_separation_rank_diagnostic.sh": "60758ecb33430b11e7960fd14f9f6355f8e7efb5fbf15457bfb044bdcbf944c9"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "chart": "TWO_INDEPENDENT_BOOLEAN_PAIR_PRODUCT_CUBIC_WALSH_DERIVATIVE_SIGNATURES_IN_C17_SQUARED_GROUP_ALGEBRA",
+    "exact_branch_pair_phase_step_cases": [[1, 2], [2, 4], [4, 6], [8, 8], [16, 10], [32, 12], [64, 16], [128, 32]],
+    "structural_fields": ["F103", "F137"],
+    "structural_phase_steps": [2, 4, 6, 8, 10, 12, 16, 32, 64],
+    "families": ["PRIMARY", "REUSE", "ALTERNATE"],
+    "direct_assignment_oracle_branch_pairs": [1, 2, 3],
+    "independent_methods": [
+      "SEPARATE_PUBLIC_PROGRAM_GENERATOR",
+      "SEPARATE_TWO_BY_17_BY_17_GROUP_ALGEBRA_FORWARD_AND_INVERSE",
+      "SEPARATE_EXACT_MATRIX_RANK",
+      "SEPARATE_289_RESIDUE_STREAMED_BOUNDARY_RECURRENCE",
+      "DIRECT_SMALL_BOOLEAN_ASSIGNMENT_SUMS",
+      "SEPARATE_RESIDENT_EXACT_PAYLOAD_TUPLE_REEXECUTION",
+      "PRE_CEILING_AND_FULL_RANK_FAMILY_MUTATIONS"
+    ]
+  },
+  "resource_accounting": {
+    "canonical_resident_exact_field_cells": 578,
+    "simultaneous_walsh_update_scratch_field_cells": 578,
+    "maximum_live_resident_plus_update_scratch_field_cells": 1156,
+    "rank_dense_buffer_field_cells": 289,
+    "maximum_live_resident_plus_rank_dense_buffer_field_cells": 867,
+    "projection_persistently_named_field_cells_excluding_rank_work_and_expression_temporaries": 20,
+    "accepted_path_assignment_or_truth_table_cells": 0,
+    "inverse_history_cells": 0,
+    "exact_q_zeta17_resident_payload_bits": [18504, 18528, 18744, 19369, 21392, 25842, 40028, 110637],
+    "exact_q_zeta17_resident_plus_update_scratch_payload_bits": [37004, 37040, 37364, 38323, 41501, 49067, 76295, 216450],
+    "update_scratch_payload_verification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "HASHLIB_INTERNAL_STATE",
+      "BIT_OPERATION_COMPLEXITY",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_classical_frontier": [
+    "EXECUTED_RETAIN_BOTH_SURFACES_FULL_DIAGNOSTIC",
+    "EXECUTED_STREAMED_289_RESIDUE_FINAL_SCALAR_WITH_EIGHT_DYNAMIC_EXACT_FIELDS_AND17_PUBLIC_INTEGER_COUNTS",
+    "UNEXECUTED_CONSERVATIVE_320_FIELD_REMATERIALIZED_FULL_DIAGNOSTIC_CONSTRUCTION"
+  ],
+  "classical_frontier_caveats": {
+    "all_streamed_final_boundaries_equal": true,
+    "streamed_path_reproduces_rank_and_commitment_diagnostics": false,
+    "rematerialized_full_diagnostic_executed": false,
+    "strongest_streamed_payload_tuple_claimed": false,
+    "single_dominant_memory_work_point_claimed": false
+  },
+  "claim_ceiling": "DECLARED_TWO_DISJOINT_F17_QUADRATIC_SIGNATURES_ONE_UNRESOLVED_TYPED_WALSH_PORT_ALTERNATING_PRIMARY_REUSE_ALTERNATE_PROGRAM_FAMILIES_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "DECLARED_FAMILIES_REACH_FULL_17_BY_17_MATRIX_SEPARATION_RANK_AT_TESTED_CEILINGS",
+    "UNIFORM_MATRIX_FACTOR_RANK_CAPS_BELOW17_REJECTED_FOR_DECLARED_FAMILIES",
+    "EXACT_FORWARD_FINAL_PROJECTION_INVERSE_RESTORATION_AND_UNRELATED_REUSE",
+    "NO_ACCEPTED_ASSIGNMENT_OR_TRUTH_TABLE_EXPANSION",
+    "EXECUTED_STREAMED_CLASSICAL_FINAL_BOUNDARY_PARITY"
+  ],
+  "rejected_interpretations": [
+    "UNIVERSAL_578_CELL_MINIMUM_FOR_ALL_EXACT_REPRESENTATIONS",
+    "GENERAL_RANK_R_OR_ARBITRARY_CUBIC_HYPERGRAPH_NO_GO",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

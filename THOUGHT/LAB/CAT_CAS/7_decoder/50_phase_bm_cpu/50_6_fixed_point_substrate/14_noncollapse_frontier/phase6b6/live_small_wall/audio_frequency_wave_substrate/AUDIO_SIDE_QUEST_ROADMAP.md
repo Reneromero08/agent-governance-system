@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_RANK_ONE_CUBIC_WALSH_DERIVATIVE_FIXED_34_CELL_GROUP_ALGEBRA_CLOSURE_WITH_GROWING_EXACT_PAYLOAD_AND_IDENTICAL_CLASSICAL_RECURRENCE`
-**Roadmap version:** `14.3`
+**Status:** `STRICT_SCOPE_TWO_SIGNATURE_CUBIC_WALSH_FULL_SEPARATION_RANK_WITH_CLASSICAL_STREAMING_OBSTRUCTION`
+**Roadmap version:** `14.4`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `bdbc3a1339b7112c28c78f25425899bda0c3e112`
+**Reconciled source head:** `d556c65e6f9410713700db474d4a7d90af44d244`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_RANK_ONE_CUBIC_PHASE_POLYNOMIAL_WALSH_DERIVATIVE_SIGNATURES_CLOSE_IN_A_FIXED_34_CELL_C17_GROUP_ALGEBRA_ACROSS_GROWING_BOOLEAN_BRANCH_COUNT_AND_GATE_DEPTH_WITH_FINAL_ONLY_BOUNDARY_PROJECTION_EXACT_RESTORATION_AND_REUSE_WHILE_AN_INDEPENDENT_SECOND_SIGNATURE_EXPANDS_THE_CANONICAL_C17_SQUARED_GROUP_ALGEBRA_CHART_TO_578_CELLS_OR_IS_REJECTED_BY_THE_34_CELL_COMPILER_AND_THE_ACCEPTED_FAMILY_HAS_AN_IDENTICAL_COMPACT_CLASSICAL_CHARACTER_RECURRENCE`
-**Current claim ceiling:** `DECLARED_RANK_ONE_F17_BOOLEAN_PAIR_PRODUCT_QUADRATIC_SIGNATURE_ONE_UNRESOLVED_TYPED_WALSH_PORT_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `EXACT_TWO_INDEPENDENT_CUBIC_WALSH_DERIVATIVE_SIGNATURES_ON_ONE_UNRESOLVED_TYPED_PORT_GENERATE_FULL_17_BY_17_COEFFICIENT_SEPARATION_RANK_IN_THE_DECLARED_ALTERNATING_PROGRAM_FAMILIES_SO_UNIFORMLY_LOW_SEPARATION_RANK_FACTOR_CHARTS_ARE_REJECTED_AT_THE_FAMILY_CEILING_WHILE_THE_CANONICAL_578_CELL_C17_SQUARED_GROUP_ALGEBRA_CARRIER_RESTORES_AND_REUSES_EXACTLY_BUT_HAS_MATCHED_COMPACT_CLASSICAL_RESIDUE_RECURRENCES_AND_GROWING_EXACT_PAYLOAD`
+**Current claim ceiling:** `DECLARED_TWO_DISJOINT_F17_QUADRATIC_SIGNATURES_ONE_UNRESOLVED_TYPED_WALSH_PORT_ALTERNATING_PRIMARY_REUSE_ALTERNATE_PROGRAM_FAMILIES_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M137_RANK_ONE_DERIVATIVE_CHART_CLOSURE_WITH_TWO_SIGNATURE_SEPARATION_RANK_ROUTE_OPEN`
+**New mechanism development:** `ACTIVE_AFTER_M138_FULL_TWO_SIGNATURE_SEPARATION_RANK_AND_STREAMED_CLASSICAL_BOUNDARY_OBSTRUCTION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_TWO_SIGNATURE_CUBIC_WALSH_DERIVATIVE_C17_SQUARED_SEPARATION_RANK_GROWTH_OR_LOW_RANK_FACTOR_CHART_WITH_MATCHED_CLASSICAL_17_BY_17_RECURRENCE`
+**Active primary successor:** `EXACT_NONADDITIVE_PHASE_COUPLING_OR_RELATION_QUOTIENT_BEYOND_C17_SIGNATURE_AXIS_GROUP_ALGEBRA_WITH_MATCHED_STREAMED_CLASSICAL_CONTRACTION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`bdbc3a1339b7112c28c78f25425899bda0c3e112`. The current 137-milestone
+`d556c65e6f9410713700db474d4a7d90af44d244`. The current 138-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_K_TYPED_SHARED_LATENT_CUBIC_BRANCH_MAPS_WITH_INVERTIBLE_PHASE_WALSH_INTERLEAVING_HAVE_SEPARATOR_RANK_TWO_TO_THE_K_AND_REJECT_UNIFORM_EXACT_LINEAR_RELATION_QUOTIENTS_BELOW_TWO_TO_THE_K_WHILE_BOUNDED_DESCRIPTOR_PHASE_FACTOR_CARRIERS_RESTORE_AND_REUSE_WITHOUT_PORT_EXPANSION_BUT_LOW_TREEWIDTH_CLASSICAL_FACTOR_CONTRACTION_REMAINS
+EXACT_TWO_INDEPENDENT_CUBIC_WALSH_DERIVATIVE_SIGNATURES_ON_ONE_UNRESOLVED_TYPED_PORT_GENERATE_FULL_17_BY_17_COEFFICIENT_SEPARATION_RANK_IN_THE_DECLARED_ALTERNATING_PROGRAM_FAMILIES_SO_UNIFORMLY_LOW_SEPARATION_RANK_FACTOR_CHARTS_ARE_REJECTED_AT_THE_FAMILY_CEILING_WHILE_THE_CANONICAL_578_CELL_C17_SQUARED_GROUP_ALGEBRA_CARRIER_RESTORES_AND_REUSES_EXACTLY_BUT_HAS_MATCHED_COMPACT_CLASSICAL_RESIDUE_RECURRENCES_AND_GROWING_EXACT_PAYLOAD
 ```
 
 Not established:
@@ -5380,6 +5380,81 @@ The obstruction is:
 ```text
 M137_CLOSES_ONLY_ONE_PUBLIC_F17_DERIVATIVE_SIGNATURE_IN_34_EXACT_CELLS_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE_AND_GROWING_COEFFICIENT_PAYLOAD_WHILE_A_SECOND_INDEPENDENT_SIGNATURE_EXPANDS_THE_CANONICAL_FULL_GROUP_ALGEBRA_CHART_TO_578_CELLS_SO_THE_NEXT_TEST_MUST_FIND_EXACT_LOW_SEPARATION_RANK_OR_REJECT_COMPACTION_WITHOUT_TREATING_CANONICAL_CHART_SIZE_AS_A_UNIVERSAL_LOWER_BOUND
 ```
+
+## Two-signature coefficient surfaces reach full matrix separation rank
+
+M138 executes the rank-two route selected by M137. Two disjoint public
+Boolean quadratic signatures share one unresolved typed Walsh port. Public
+phase shifts alternate between the two signature axes and are interleaved
+with Walsh mixing on the unresolved port.
+
+```text
+claim
+    EXACT_TWO_INDEPENDENT_CUBIC_WALSH_DERIVATIVE_SIGNATURES_ON_ONE_UNRESOLVED_TYPED_PORT_GENERATE_FULL_17_BY_17_COEFFICIENT_SEPARATION_RANK_IN_THE_DECLARED_ALTERNATING_PROGRAM_FAMILIES_SO_UNIFORMLY_LOW_SEPARATION_RANK_FACTOR_CHARTS_ARE_REJECTED_AT_THE_FAMILY_CEILING_WHILE_THE_CANONICAL_578_CELL_C17_SQUARED_GROUP_ALGEBRA_CARRIER_RESTORES_AND_REUSES_EXACTLY_BUT_HAS_MATCHED_COMPACT_CLASSICAL_RESIDUE_RECURRENCES_AND_GROWING_EXACT_PAYLOAD
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident group-algebra carrier     EXACT_ALGEBRAIC_RESTORATION
+    compiler/projection/oracle buffers NO_RESTORATION_CLAIM
+
+source head
+    d556c65e6f9410713700db474d4a7d90af44d244
+```
+
+The canonical direct carrier is `K[C17 x C17]^2`, or 578 exact field cells.
+Exact `Q(zeta17)` cases cover branch-pair/depth tuples
+`(1,2),(2,4),(4,6),(8,8),(16,10),(32,12),(64,16),(128,32)`; three public
+program families receive structural checks over `F103` and `F137` through
+depth 64. All three tested families reach separation rank 17 at a declared
+ceiling. This rejects only uniform matrix-factor rank caps below 17 for these
+families. It is not a universal 578-cell lower bound or general rank-r no-go.
+
+The adversarial review repaired material accounting before the source seal.
+Both 289-cell Walsh output surfaces are live simultaneously, so update scratch
+is 578 cells and carrier-plus-update live storage is 1,156 logical field cells.
+The projection reports 20 persistently named field cells separately from its
+289-cell rank buffer. Exact resident and resident-plus-update payloads are:
+
+```text
+branch pairs                    1      2      4      8     16     32     64      128
+resident bits               18504  18528  18744  19369  21392  25842  40028   110637
+resident plus scratch bits  37004  37040  37364  38323  41501  49067  76295   216450
+```
+
+The exact inverse is rematerialized from public topology, restores canonical
+zero on the same backing, and supports unrelated reuse without a snapshot or
+inverse history. A true wrong-order inverse applied to the post-projection
+resident state fails restoration. The restoration count is package-local and
+does not establish CATVM custody.
+
+The compact classical comparison is a frontier rather than one overstated
+representation. Retaining both surfaces reproduces the scalar, ranks, and
+commitment at the same 578-cell residency. An executed 289-residue recurrence
+reproduces every final scalar with at most eight named dynamic exact fields
+plus 17 public integer counts. A conservative 320-field rematerialized
+full-diagnostic construction is recorded but not executed, and no payload
+tuple is claimed for it. Consequently no single memory/work point dominates.
+
+The next experiment is:
+
+```text
+EXACT_NONADDITIVE_PHASE_COUPLING_OR_RELATION_QUOTIENT_BEYOND_C17_SIGNATURE_AXIS_GROUP_ALGEBRA_WITH_MATCHED_STREAMED_CLASSICAL_CONTRACTION
+```
+
+The obstruction is:
+
+```text
+M138_TWO_SIGNATURE_COEFFICIENT_SURFACES_REACH_FULL17_MATRIX_RANK_BUT_THE_FINAL_SCALAR_STREAMS_THROUGH_EIGHT_DYNAMIC_EXACT_FIELDS_PLUS17_PUBLIC_COUNTS_AND_FULL_DIAGNOSTICS_TRADE_MEMORY_FOR_REMATERIALIZATION_SO_ADDING_SIGNATURE_AXES_OR_DENSE_GROUP_ALGEBRA_CELLS_CANNOT_ESTABLISH_A_PHASE_RESOURCE; THE_NEXT_MECHANISM_MUST_CHANGE_THE_NATIVE_COUPLING_LAW_OR_USE_A_NONLINEAR_RELATION_QUOTIENT
+```
+
+M138 establishes neither CATVM custody, a distinct phase resource,
+computational advantage, Small Wall crossing, physical waveform execution,
+physical bit replacement, nor unbounded catalytic computation.
 
 ## 10. Roadmap Maintenance
 
