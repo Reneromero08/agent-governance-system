@@ -1,0 +1,38 @@
+{
+  "model": {
+    "qwen3_6_27b": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/Qwen/Qwen3.6-27B",
+    "shards": 15,
+    "size_gb": 52,
+    "format": "safetensors",
+    "note": "Full-precision original. All distillers in pipeline/01_distill were originally hardcoded to this model (F:\\LLM_Models\\lmstudio-models\\Qwen\\Qwen3.6-27B)."
+  },
+  "holo_archive": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/.holo",
+  "qwen_holo": {
+    "catalytic_k256": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/.holo/qwen-27b/qwen_27b_catalytic_k256.holo",
+    "mtp_k128": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/.holo/qwen-27b/qwen_27b_mtp_k128.holo"
+  },
+  "deepseek_holo": {
+    "attention_k128": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/.holo/deepseek-v4-flash/deepseek_v4_flash_attention_k128.holo",
+    "attention_k256": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/.holo/deepseek-v4-flash/deepseek_v4_flash_attention_k256.holo",
+    "experts_residual_r4": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/.holo/deepseek-v4-flash/ds_experts_residual_r4.holo",
+    "note_residual_r4": "988 bytes - EMPTY STUB. Rank-4 residual correction was started but never produced data. This is the fix to execute.",
+    "shared_ffn": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/.holo/deepseek-v4-flash/ds_shared_ffn.holo",
+    "aux_weights": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/.holo/deepseek-v4-flash/ds_aux_weights.holo",
+    "original_attn_pt": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/.holo/deepseek-v4-flash/ds_attn_original.pt",
+    "expert_shards": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/.holo/deepseek-v4-flash/experts_layer_*.holo"
+  },
+  "qwen0_5b_holo": "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/.holo/qwen-0.5b/qwen_0_5b_k128.holo",
+  "gemma_gguf": {
+    "note": "Alternative testbed; superseded by Qwen3.6-27B full precision.",
+    "model": "/run/media/reneshizzle/860_1/Reneshizzle/Apps/LM Studio/lmstudio-community/gemma-4-12B-it-QAT-GGUF/gemma-4-12B-it-QAT-Q4_0.gguf"
+  },
+  "local_references": {
+    "neo3000_ggml": "/run/media/reneshizzle/860_1/CCC 2.0/AI/Neo3000",
+    "note_neo3000": "llama.cpp fork; ggml Q4_0 dequant kernels + GGUF server; can serve the same model as baseline."
+  },
+  "defaults": {
+    "rank_k": 256,
+    "residual_rank": 4,
+    "residual_bits": 2
+  }
+}
