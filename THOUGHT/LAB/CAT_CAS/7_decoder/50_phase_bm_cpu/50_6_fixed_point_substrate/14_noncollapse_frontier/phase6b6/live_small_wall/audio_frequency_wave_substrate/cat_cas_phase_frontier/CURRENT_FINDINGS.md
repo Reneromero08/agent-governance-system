@@ -8517,3 +8517,49 @@ M145 establishes no exact semantics, unbounded numerical stability, CATVM
 custody, distinct phase resource, computational advantage, Small Wall
 crossing, physical execution, physical bit replacement, or unbounded
 catalytic computation.
+
+## M146: Stateful weighted three-phasor gauge lift
+
+Claim:
+
+```text
+BOUNDED_STATEFUL_WEIGHTED_THREE_PHASOR_GAUGE_CHART_LIFTS_LOCAL_F17_GIVENS_COUPLING_ACROSS_BASE_ZERO_IN_FIXED51_RESIDENT_PHASE_ANGLES_FOR_THE_DECLARED_MAGNITUDE_ENVELOPE_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_ADDS17_GAUGE_CELLS_RETAINS_LOCAL_CARTESIAN_RECHARTING_AND_HAS_THE_IDENTICAL_SMALLER_COMPLEX_GIVENS_RECURRENCE
+```
+
+The M145 two-phasor chart cannot be lifted injectively through an actual
+zero/nonzero Givens transition: the input fiber is uncountable and the generic
+output fiber has four elements.  M146 adds one resident gauge phasor per
+coordinate with weight `1/32`.  For base magnitude at most `15/16`, the
+remaining two-phasor chart is representable for every gauge; at base zero its
+radius is `1/31`.  Local Givens operations transport the gauges by an
+invertible public counter-rotation.
+
+The carrier has 51 resident `float64` phase angles.  Across 21 cases through
+depth 4096, maximum boundary error against the matrix-free compact comparison
+is `7.313e-11`; maximum single-transaction restoration error is `1.375e-11`.
+The same backing is restored and reused without snapshot, inverse history, or
+retained restoration baseline.  The class is
+`NUMERICAL_PHYSICAL_STATE_RESTORATION`; transient buffers have
+`NO_RESTORATION_CLAIM`.
+
+An oracle independent of production and predecessor code reconstructs the
+weighted operator in long-double arithmetic, compiles a separate QR plan,
+reexecutes the 51-angle carrier, and independently checks the zero-fiber
+repair, controls, and reuse.  All 233 comparisons pass.  Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+The accepted path reaches 3,223 named warm bytes and still uses 24 local
+Cartesian/chart scratch cells.  Executed compact classical comparisons reach
+3,055 named warm bytes for the identical Givens plan, 1,767 for the
+matrix-free work frontier, and 983 for the streamed real-kernel memory
+frontier.  M146 therefore repairs phase-fiber loss but does not establish a
+storage or work advantage.
+
+The next experiment must make the gauge causally visible to a later
+noncommuting phase module and distinguish equal-base/different-gauge carriers,
+or show that the mechanism collapses to a matched compact 51-scalar
+recurrence.  M146 establishes no global unit-sphere chart, exact semantics,
+CATVM custody, distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical bit replacement, or unbounded
+catalytic computation.

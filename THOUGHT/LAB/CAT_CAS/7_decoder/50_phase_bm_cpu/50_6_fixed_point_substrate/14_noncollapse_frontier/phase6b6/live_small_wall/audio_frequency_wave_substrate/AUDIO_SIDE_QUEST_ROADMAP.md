@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_LOCAL_POLAR_GIVENS_PHASE_COUPLING`
-**Roadmap version:** `14.11`
+**Status:** `STRICT_SCOPE_STATEFUL_GAUGE_PHASOR_LIFT`
+**Roadmap version:** `14.12`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `f8bd38afa9975341a4d914bad0efe9dc155c9a68`
+**Reconciled source head:** `8025f0124ff1eb43f02de50195ed062087679e9a`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_TOPOLOGY_COMPILED_LOCAL_POLAR_GIVENS_PHASE_COUPLING_FACTORS_WEIGHTED_ANISOTROPIC_F17_RADIAL_INTERFERENCE_IN136_TWO_CELL_COUPLERS_WITH_FIXED34_RESIDENT_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_REQUIRES_A2312_BYTE_PUBLIC_PLAN_LOCAL_CARTESIAN_REGISTERS_AND_HAS_THE_IDENTICAL_COMPLEX_GIVENS_RECURRENCE`
-**Current claim ceiling:** `21_DECLARED_WEIGHTED_LOCAL_POLAR_GIVENS_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_STATEFUL_WEIGHTED_THREE_PHASOR_GAUGE_CHART_LIFTS_LOCAL_F17_GIVENS_COUPLING_ACROSS_BASE_ZERO_IN_FIXED51_RESIDENT_PHASE_ANGLES_FOR_THE_DECLARED_MAGNITUDE_ENVELOPE_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_ADDS17_GAUGE_CELLS_RETAINS_LOCAL_CARTESIAN_RECHARTING_AND_HAS_THE_IDENTICAL_SMALLER_COMPLEX_GIVENS_RECURRENCE`
+**Current claim ceiling:** `21_DECLARED_WEIGHTED_GAUGE_PHASOR_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_ZERO_AND_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M145_LOCAL_POLAR_GIVENS_COUPLING`
+**New mechanism development:** `ACTIVE_AFTER_M146_STATEFUL_GAUGE_PHASOR_LIFT`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `GAUGE_TRANSPORTED_PHASE_ONLY_LOCAL_GIVENS_LIFT_ON_WEIGHTED_UNIT_SPHERE_OR_BOUNDED_ZERO_FIBER_NO_GO_AGAINST_IDENTICAL_COMPLEX_RECURRENCE`
+**Active primary successor:** `FIBER_ACTIVE_SHARED_GAUGE_PHASE_SHEAR_BEYOND17_COMPLEX_BASE_QUOTIENT_OR_BOUNDED_COLLAPSE_TO_MATCHED51_SCALAR_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`f8bd38afa9975341a4d914bad0efe9dc155c9a68`. The current 145-milestone
+`8025f0124ff1eb43f02de50195ed062087679e9a`. The current 146-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -5972,6 +5972,88 @@ bounded no-go must distinguish the declared weighted unit-sphere carrier from
 arbitrary disk pairs and retain the strongest identical complex recurrence.
 M145 establishes no exact semantics, unbounded numerical stability, CATVM
 custody, distinct phase resource, computational advantage, Small Wall
+crossing, physical waveform execution, physical bit replacement, or
+unbounded catalytic computation.
+
+## M146: Stateful gauge lift across the radial zero fiber
+
+M146 proves a strict obstruction for the M145 two-phasor chart and repairs it
+inside a declared magnitude envelope.  At zero, the two-phasor mean has an
+`S1` continuum fiber; at a generic nonzero value its ordered fiber has two
+elements.  For an actual two-cell Givens pair, a zero/nonzero input therefore
+has an uncountable fiber while the generic/generic output has four elements.
+No injective fixed four-angle lift can cover that transition.
+
+The repaired coordinate stores three phase angles with `epsilon=1/32`:
+
+```text
+z = epsilon exp(i g) + (1-epsilon)/2 (exp(i a) + exp(i b)).
+```
+
+For base magnitude at most `15/16`, the residual two-phasor chart is bounded
+by one for every gauge.  At base zero its residual radius is exactly `1/31`,
+so distinct gauges do not collapse.  Phase modules rotate all three angles;
+local Givens couplers transport gauges by an invertible public
+counter-rotation before recharting the affected base amplitudes.
+
+```text
+claim
+    BOUNDED_STATEFUL_WEIGHTED_THREE_PHASOR_GAUGE_CHART_LIFTS_LOCAL_F17_GIVENS_COUPLING_ACROSS_BASE_ZERO_IN_FIXED51_RESIDENT_PHASE_ANGLES_FOR_THE_DECLARED_MAGNITUDE_ENVELOPE_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_ADDS17_GAUGE_CELLS_RETAINS_LOCAL_CARTESIAN_RECHARTING_AND_HAS_THE_IDENTICAL_SMALLER_COMPLEX_GIVENS_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident 51-angle carrier NUMERICAL_PHYSICAL_STATE_RESTORATION
+    Cartesian, chart, comparison, and verification buffers NO_RESTORATION_CLAIM
+
+source head
+    8025f0124ff1eb43f02de50195ed062087679e9a
+```
+
+Across the 21 declared cases through depth 4096, maximum boundary error is
+`7.313e-11` against the matrix-free 17-complex comparison and maximum
+transaction restoration error is `1.375e-11`.  Unrelated depth-1537 reuse and
+100 same-backing depth-64 cycles remain within their predeclared tolerances.
+The exact-zero adversary restores both actual gauges while preserving a
+`1.363`-radian carrier separation between equal-base states.
+
+The independent oracle imports neither production nor predecessor code.  It
+reconstructs the weighted dense operator in long-double arithmetic, compiles
+a separate float64 QR plan, reexecutes the 51-angle path and zero-fiber repair,
+and performs 233 comparisons.  Deterministic no-write replays reproduce both
+sealed JSON files byte-for-byte.
+
+The accepted path has 51 resident angles or 408 bytes, 2,312 retained public
+plan bytes, and a 3,223-byte named warm peak.  It retains no complex state,
+dense kernel, inverse history, or restoration baseline, but uses 24 local
+Cartesian/chart scratch cells.  All three declared compact classical paths
+execute in every case: the identical complex-Givens path reaches 3,055 warm
+named bytes, the matrix-free work frontier reaches 1,767, and the streamed
+real-kernel memory frontier reaches 983.  The phase path also performs more
+trigonometric work.
+
+M146 repairs the zero-fiber loss without establishing a global unit-sphere
+chart or a resource beyond compact classical software.  The selected
+successor is:
+
+```text
+FIBER_ACTIVE_SHARED_GAUGE_PHASE_SHEAR_BEYOND17_COMPLEX_BASE_QUOTIENT_OR_BOUNDED_COLLAPSE_TO_MATCHED51_SCALAR_RECURRENCE
+```
+
+It must make the resident gauge causally affect a later noncommuting module:
+two carriers with the same 17 complex base amplitudes but different hidden
+gauges must produce different final boundaries under the same public program.
+It must retain final-only projection, same-backing restoration and reuse, and
+the strongest executable base-plus-gauge classical recurrence.  A positive
+base-quotient separation is not by itself a distinct phase resource; collapse
+to a compact 51-scalar recurrence remains an admissible bounded result.
+
+M146 establishes no exact algebraic semantics, unbounded numerical stability,
+CATVM custody, distinct phase resource, computational advantage, Small Wall
 crossing, physical waveform execution, physical bit replacement, or
 unbounded catalytic computation.
 

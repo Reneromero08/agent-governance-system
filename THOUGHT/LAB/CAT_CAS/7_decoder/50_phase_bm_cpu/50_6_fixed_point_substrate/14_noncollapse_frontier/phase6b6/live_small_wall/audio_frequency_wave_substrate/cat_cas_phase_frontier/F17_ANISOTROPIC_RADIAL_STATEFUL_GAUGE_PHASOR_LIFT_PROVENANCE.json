@@ -1,0 +1,112 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "8025f0124ff1eb43f02de50195ed062087679e9a",
+  "scientific_source_parent": "a94005ea9587e153e5f2dc82f37004eb1d781563",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "bcb917199e9d799ad53eba9cf692a30345162a9036a75f8c11d9ffaeeaf8dcac",
+  "reference_full_oracle_sha256": "bfc03a9667d78bc07cdae7f8571443743955c90c9d2b5bb3bd31de1dc8a3a62b",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_stateful_gauge_phasor_lift.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_stateful_gauge_phasor_lift_oracle.py --package PRODUCTION_RESULT --production PRODUCTION_SOURCE --predecessor PREDECESSOR_SOURCE --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_anisotropic_radial_stateful_gauge_phasor_lift.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_anisotropic_radial_stateful_gauge_phasor_lift.py": "27a147d45415e97de5fafd9436cfce7a3f1cb0ae0cbd3410189560282a760590",
+    "f17_anisotropic_radial_stateful_gauge_phasor_lift_oracle.py": "eb236e860a0e503ebd15b1f981f25811351248fc0f75ec9694125640f394e233",
+    "F17_ANISOTROPIC_RADIAL_STATEFUL_GAUGE_PHASOR_LIFT_RESULTS.json": "bcb917199e9d799ad53eba9cf692a30345162a9036a75f8c11d9ffaeeaf8dcac",
+    "F17_ANISOTROPIC_RADIAL_STATEFUL_GAUGE_PHASOR_LIFT_ORACLE_RESULTS.json": "bfc03a9667d78bc07cdae7f8571443743955c90c9d2b5bb3bd31de1dc8a3a62b",
+    "F17_ANISOTROPIC_RADIAL_STATEFUL_GAUGE_PHASOR_LIFT_INDEPENDENT_REVIEW.md": "c58dc3c52845d60134a2ea7597305b747d4ccf223d723d87cd28e95beff93a24",
+    "qualify_f17_anisotropic_radial_stateful_gauge_phasor_lift.sh": "ffb1d7c67268cb06b5f739b8c86770f0325bcb1ef9bee3a7231ccea5fa0de172",
+    "f17_anisotropic_radial_local_polar_givens_coupling.py": "e257720dd3eab4ab6d1c7eb1e8e2037ded69d2641faeb8274c1d08b20525f065"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "coordinate_space": "SHELL_NORMALIZED_F17_SQUARED_ANISOTROPIC_RADIAL_QUOTIENT",
+    "resident_chart": "WEIGHTED_THREE_UNIT_PHASOR_ANGLES_PER_SHELL_NORMALIZED_COMPLEX_COEFFICIENT",
+    "update_law": "PUBLIC136_TWO_CELL_REAL_GIVENS_COUPLERS_WITH_INVERTIBLE_GAUGE_COUNTER_ROTATION_PLUS17_SIGNS",
+    "depths": [1, 4, 16, 64, 256, 1024, 4096],
+    "families": ["PRIMARY", "REUSE", "ALTERNATE"],
+    "supported_base_magnitude_ceiling": 0.9375,
+    "independent_comparison_count": 233,
+    "independent_methods": [
+      "LONG_DOUBLE_DENSE_WEIGHTED_RADIAL_OPERATOR",
+      "SEPARATE_FLOAT64_QR_PLAN_COMPILATION",
+      "SEPARATE51_ANGLE_FORWARD_AND_INVERSE",
+      "SEPARATE_ZERO_FIBER_COLLISION_AND_REPAIR",
+      "SEPARATE_UNRELATED_DEPTH1537_REUSE",
+      "SEPARATE100_CYCLE_DEPTH64_REUSE",
+      "PRODUCTION_RESTORATION_REUSE_RESOURCE_AND_CLASSICAL_FRONTIER_ENFORCEMENT",
+      "PLAN_INVERSE_GAUGE_PROJECTION_NULL_AND_ENVELOPE_CONTROLS"
+    ]
+  },
+  "predeclared_tolerances": {
+    "restoration_phasor_max_abs": 3e-11,
+    "state_max_abs": 2e-11,
+    "boundary_max_abs": 1e-10,
+    "plan_max_abs": 5e-14,
+    "chart_radius_slack": 2e-12
+  },
+  "resource_accounting": {
+    "resident_phase_angle_float64_cells": 51,
+    "resident_phase_angle_bytes": 408,
+    "added_gauge_phase_angle_cells_against_m145": 17,
+    "added_resident_bytes_against_m145": 136,
+    "retained_public_givens_plan_float64_cells": 289,
+    "retained_public_givens_plan_bytes": 2312,
+    "retained_shell_count_bytes": 136,
+    "local_cartesian_and_chart_scratch_float64_cells": 24,
+    "maximum_named_update_bytes": 192,
+    "maximum_named_projection_bytes": 112,
+    "maximum_named_warm_execution_live_bytes_including_program_json": 3223,
+    "maximum_named_full_lifecycle_live_bytes": 4960,
+    "commitment_input_copy_bytes": 0,
+    "commitment_public_hexdigest_bytes": 64,
+    "commitment_logical_sha256_state_and_block_bytes": 96,
+    "retained_complex_state_cells": 0,
+    "retained_dense_kernel_cells": 0,
+    "inverse_history_cells": 0,
+    "retained_restoration_baseline_cells": 0,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NUMPY_AND_NATIVE_LIBRARY_INTERNAL_STORAGE",
+      "HASHLIB_INTERNAL_REPRESENTATION_BEYOND_LOGICAL96_BYTES",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "executed_matched_classical_frontiers": {
+    "identical_local_plan": "IDENTICAL_PUBLIC_PLAN17_COMPLEX_IN_PLACE_GIVENS_RECURRENCE_3055_WARM_NAMED_BYTES",
+    "work_frontier": "IDENTICAL_MATRIX_FREE_NORMALIZED17_COMPLEX_RADIAL_RECURRENCE_1767_WARM_NAMED_BYTES",
+    "memory_frontier": "STREAMED_REAL_KERNEL_NORMALIZED17_COMPLEX_RADIAL_RECURRENCE_983_WARM_NAMED_BYTES"
+  },
+  "claim_ceiling": "21_DECLARED_WEIGHTED_GAUGE_PHASOR_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_ZERO_AND_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "FIXED_FOUR_ANGLE_TWO_COORDINATE_PAIR_CHART_HAS_NO_INJECTIVE_LIFT_ACROSS_BASE_ZERO",
+    "FIXED51_PHASE_ANGLE_STATEFUL_GAUGE_CARRIER_FOR_DECLARED_INTERIOR_ENVELOPE",
+    "NONTRIVIAL_LOCAL_INVERTIBLE_GAUGE_COUNTER_ROTATION_PER_GIVENS_COUPLER",
+    "BASE_ZERO_GAUGE_SURVIVES_FORWARD_AND_ACTUAL_INVERSE",
+    "ZERO_RETAINED_DENSE_KERNEL_INVERSE_HISTORY_AND_RESTORATION_BASELINE",
+    "FINAL_ONLY_BOUNDARY_PROJECTION",
+    "HISTORY_FREE_NUMERICAL_PHYSICAL_STATE_RESTORATION_AND_UNRELATED_REUSE_ON_SAME_BACKING",
+    "INDEPENDENT_LONG_DOUBLE_OPERATOR_AND_SEPARATE51_ANGLE_REEXECUTION"
+  ],
+  "rejected_interpretations": [
+    "FULL_WEIGHTED_UNIT_SPHERE_GLOBAL_CHART",
+    "GLOBAL_CONTINUOUS_GAUGE_SECTION",
+    "LOCAL_CARTESIAN_REGISTER_FREE_COUPLING",
+    "EXACT_ALGEBRAIC_SEMANTICS",
+    "UNBOUNDED_DEPTH_NUMERICAL_STABILITY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}
