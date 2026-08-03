@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`7fc59e806cc49298c44cd9d16ea2e309358d7de4`. The canonical per-milestone
+`105d1a1944b975382ad1d084ac7bbfd30d317824`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -7738,4 +7738,78 @@ The obstruction is:
 
 ```text
 THE_SECOND_INTERLEAVED_COUPLING_NOW_HAS_AN_EXACT_NORMALIZED_CATALECTICANT_RANK4_CERTIFICATE_AND_A72_CELL_CLOSED_TRANSACTION_BUT_EACH_ADDITIONAL_GENERIC_COUPLING_CAN_DOUBLE_GENERATED_COMPONENTS_AND_THE_FIXED_WORD_ALREADY_COMPILES_TO_AN_EIGHT_TOTAL_SCALAR_CLASSICAL_BOUNDARY_RECURRENCE
+```
+
+## Iterated affine-reflection couplings have exact exponential secant rank
+
+M132 resolves the M131 rank-law question for one declared public family.
+
+```text
+claim
+    BOUNDED_EXECUTION_AND_EXACT_SYMBOLIC_VANDERMONDE_CERTIFICATE_FOR_ITERATED_NONCOMMUTING_AFFINE_REFLECTION_SUPERPOSITION_COUPLING_SECANT_RANK_TWO_TO_THE_M_GROWTH_WITH_EXACT_RESTORATION_AND_REUSE_BUT_EXPLICIT_EXPONENTIAL_PHASE_COMPONENT_ENUMERATION_AND_MATCHED_R_WEIGHT_FULL_STATE_OR_TWO_SCALAR_FINAL_BOUNDARY_CLASSICAL_RECURRENCES
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident carrier  EXACT_ALGEBRAIC_RESTORATION
+    transient buffers NO_RESTORATION_CLAIM
+
+source head
+    105d1a1944b975382ad1d084ac7bbfd30d317824
+```
+
+At level `j`, the one-particle affine involution sends slope `t` to
+`a_j-t`, where `a_j=2^j-1`. The public support induction is exactly
+`S_j=S_(j-1) union (a_j-S_(j-1))={0,...,2^j-1}`. The distinct reflections
+do not commute. Each coupling `I+eta_j R_j` has exact inverse
+`(I-eta_j R_j)/(1-eta_j^2)`.
+
+For `r=2^m` and `k=2r-2`, the normalized `r x r` Hankel catalecticant
+factors as `V diag(w) V^T`. Its determinant is the nonzero product of the
+weights and squared Vandermonde differences. The lower bound `r` and explicit
+`r`-component upper bound establish exact normalized divided-power secant
+rank `2^m`. Production executes `m=1..6`, or ranks `2..64` and degrees
+`2,6,14,30,62,126`, in exact `Q(zeta17)` and structurally in `F103/F137`.
+Ordinary symmetric Waring interpretation is restricted to `Q(zeta17)`;
+finite-field applicability requires `r<=p`.
+
+The accepted carrier explicitly enumerates all `r` coherent components. It
+uses `18r` resident field cells and at most `36r` logical coupling-transient
+field cells. No separate truth table or assignment buffer is retained; that
+narrow fact does not make the execution symbolic or compact. The symbolic
+part is the rank certificate.
+
+Only the final degree-one mode-one occupation is projected. Reverse execution
+restores exact zero on the same backing without snapshot reload or inverse
+history. Unrelated `PRIMARY m=3` then `REUSE m=4` execution advances
+generation to two and matches fresh boundary and resource signatures.
+
+The strongest matched full-state classical representation independently
+stores `r` atomic weights on public support `0..r-1`; the implementation uses
+`3r/2` named old-plus-new update cells. The separately checked dense moment
+recurrence uses `2r-1` cells but is not the strongest compact baseline.
+Final-boundary-only execution uses two dynamic moments, and a sealed word can
+cache one scalar. The explicit phase chart therefore uses substantially more
+field cells and establishes no advantage or distinct phase resource.
+
+M132 does not establish an arbitrary interleaved-coupling rank law, a
+fixed-rank closure, general Gaussian no-go, CATVM custody, Small Wall
+crossing, physical waveform execution, physical bit replacement, or
+unbounded catalytic computation. Exact payload-height tuples and complete
+bit complexity remain outside the independently verified scope.
+
+The next experiment is:
+
+```text
+EXACT_FIXED_RANK_GAUSSIAN_OR_STABILIZER_PHASE_CHART_FOR_NONCOMMUTING_SUPERPOSITION_COUPLINGS_OR_A_TRANSFERABLE_NO_GO_THAT_FORCES_A_DIFFERENT_NATIVE_PHASE_RESOURCE
+```
+
+The obstruction is:
+
+```text
+THE_DECLARED_NONCOMMUTING_AFFINE_REFLECTION_COUPLING_FAMILY_HAS_AN_EXACT_TWO_TO_THE_M_SECANT_RANK_LAW_AND_REQUIRES_EXPONENTIAL_EXPLICIT_PHASE_COMPONENTS_WHILE_ITS_STRONGEST_MATCHED_FULL_STATE_CLASSICAL_RECURRENCE_USES_ONLY_TWO_TO_THE_M_WEIGHTS_AND_ITS_FINAL_BOUNDARY_COLLAPSES_TO_TWO_CLASSICAL_MOMENTS
 ```

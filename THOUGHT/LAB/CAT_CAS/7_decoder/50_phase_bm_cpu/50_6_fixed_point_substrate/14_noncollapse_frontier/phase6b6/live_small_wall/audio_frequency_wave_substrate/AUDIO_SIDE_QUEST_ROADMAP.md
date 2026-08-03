@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_DOUBLE_COUPLING_RANK4_SECANT_CLOSURE_NEXT_SYMBOLIC_RANK_GROWTH_OR_FIXED_RANK_GAUSSIAN_DIAGNOSTIC_SELECTED`
-**Roadmap version:** `13.7`
+**Status:** `STRICT_SCOPE_ITERATED_AFFINE_REFLECTION_SECANT_RANK_GROWTH_ESTABLISHED_EXPLICIT_COMPONENT_CHART_REJECTED_AS_COMPACT_RESOURCE_NEXT_FIXED_RANK_GAUSSIAN_OR_STABILIZER_DIAGNOSTIC_SELECTED`
+**Roadmap version:** `13.8`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `7fc59e806cc49298c44cd9d16ea2e309358d7de4`
+**Reconciled source head:** `105d1a1944b975382ad1d084ac7bbfd30d317824`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_SECOND_INTERLEAVED_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_WITH_MODULE_ORDER_NONCOMMUTATION_FORCES_CATALECTICANT_RANK4_ON_THE_DECLARED_F17_SECANT_PROGRAM_AND_CLOSES_ON_A_FOUR_COMPONENT_72_CELL_PHASE_CARRIER_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EIGHT_TOTAL_FOLDED_SCALAR_WARM_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `DECLARED_TWO_COUPLING_FOUR_COMPONENT_NORMALIZED_DIVIDED_POWER_SECANT_RANK4_PROGRAM_Q_ZETA17_K4_TO32_DUAL_FIELD_K4_TO128_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXECUTION_AND_EXACT_SYMBOLIC_VANDERMONDE_CERTIFICATE_FOR_ITERATED_NONCOMMUTING_AFFINE_REFLECTION_SUPERPOSITION_COUPLING_SECANT_RANK_TWO_TO_THE_M_GROWTH_WITH_EXACT_RESTORATION_AND_REUSE_BUT_EXPLICIT_EXPONENTIAL_PHASE_COMPONENT_ENUMERATION_AND_MATCHED_R_WEIGHT_FULL_STATE_OR_TWO_SCALAR_FINAL_BOUNDARY_CLASSICAL_RECURRENCES`
+**Current claim ceiling:** `DECLARED_A_LEVEL_TWO_TO_THE_LEVEL_MINUS_ONE_ITERATED_AFFINE_REFLECTION_FAMILY_BOUNDED_EXECUTION_M1_TO6_ANALYTIC_NORMALIZED_SECANT_RANK_TWO_TO_THE_M_Q_ZETA17_AND_DUAL_FIELD_WHERE_RANK_AT_MOST_MODULUS_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M131_TWO_COUPLING_RANK4_CLOSURE_AND_EIGHT_TOTAL_SCALAR_CLASSICAL_COLLAPSE`
+**New mechanism development:** `ACTIVE_AFTER_M132_EXACT_RANK_GROWTH_AND_EXPLICIT_COMPONENT_CHART_COMPACTNESS_FAILURE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_SYMBOLIC_ITERATED_COHERENT_COUPLING_SECANT_RANK_GROWTH_LAW_OR_FIXED_RANK_GAUSSIAN_PHASE_CHART_NO_GO_WITHOUT_COMPONENT_ENUMERATION`
+**Active primary successor:** `EXACT_FIXED_RANK_GAUSSIAN_OR_STABILIZER_PHASE_CHART_FOR_NONCOMMUTING_SUPERPOSITION_COUPLINGS_OR_A_TRANSFERABLE_NO_GO_THAT_FORCES_A_DIFFERENT_NATIVE_PHASE_RESOURCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`f787e13100715219b8d39bd113f5aaade3695013`. The current 129-milestone
+`105d1a1944b975382ad1d084ac7bbfd30d317824`. The current 132-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_SECOND_INTERLEAVED_INVOLUTIVE_COHERENT_SUPERPOSITION_COUPLING_WITH_MODULE_ORDER_NONCOMMUTATION_FORCES_CATALECTICANT_RANK4_ON_THE_DECLARED_F17_SECANT_PROGRAM_AND_CLOSES_ON_A_FOUR_COMPONENT_72_CELL_PHASE_CARRIER_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EIGHT_TOTAL_FOLDED_SCALAR_WARM_CLASSICAL_RECURRENCE
+BOUNDED_EXECUTION_AND_EXACT_SYMBOLIC_VANDERMONDE_CERTIFICATE_FOR_ITERATED_NONCOMMUTING_AFFINE_REFLECTION_SUPERPOSITION_COUPLING_SECANT_RANK_TWO_TO_THE_M_GROWTH_WITH_EXACT_RESTORATION_AND_REUSE_BUT_EXPLICIT_EXPONENTIAL_PHASE_COMPONENT_ENUMERATION_AND_MATCHED_R_WEIGHT_FULL_STATE_OR_TWO_SCALAR_FINAL_BOUNDARY_CLASSICAL_RECURRENCES
 ```
 
 Not established:
@@ -4816,6 +4816,12 @@ ordinary symmetric Waring-rank interpretation for the M131 finite-field structur
 noncommutation of the two M131 coupling operators with each other
 CATVM custody of the M131 direct-process carrier or transient buffers
 distinct phase resource or advantage from the M131 eight-total-scalar warm classical baseline
+arbitrary interleaved-coupling rank law from the declared M132 affine-reflection family
+fixed-rank closure or general Gaussian no-go from M132
+symbolic or nonenumerative accepted execution in M132
+CATVM custody of the M132 direct-process carrier or transient buffers
+distinct phase resource or advantage from the M132 r-weight or two-moment matched baselines
+full exact payload-height or bit-complexity accounting for M132
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4988,6 +4994,48 @@ Do not continue by adding a rank-eight fixture alone. Derive a symbolic
 iterated-coupling rank-growth law, or test a genuinely fixed-rank Gaussian
 phase chart and record a no-go if closure fails, without component-assignment
 enumeration or a weaker classical baseline.
+
+M132 derives and executes the symbolic growth law for the declared
+noncommuting affine-reflection family. With `a_j=2^j-1`, the public support
+induction gives `S_m={0,...,2^m-1}`. At `r=2^m` and `k=2r-2`, the normalized
+Hankel catalecticant factors as `V diag(w) V^T`; its determinant is nonzero,
+so the exact normalized divided-power secant rank is `r`. Ordinary Waring
+interpretation remains restricted to `Q(zeta17)`, and finite-field evidence
+is structural only where `r<=p`.
+
+The accepted direct-process carrier restores exact zero on the same backing,
+supports unrelated reuse, projects only the final scalar, and uses no
+snapshot or inverse history. It is not compact across coupling depth: it
+explicitly enumerates `r` coherent components, holds `18r` resident field
+cells, and reaches `36r` logical transient field cells. No separate truth
+table, assignment buffer, occupation vector, catalecticant, or dense operator
+is materialized on the accepted transaction path.
+
+The strongest matched full-state classical recurrence stores only `r` atomic
+weights on public support; the independently executed dense moment recurrence
+uses `2r-1` cells and is retained as a reference, not the strongest compact
+baseline. Final-boundary-only execution uses two moments, and a sealed word
+can cache one scalar. M132 therefore establishes a bounded exact rank-growth
+law and rejects this explicit secant chart as a compact phase resource. It
+does not establish an arbitrary coupling law, general Gaussian no-go,
+distinct phase resource, advantage, CATVM custody, Small Wall crossing,
+physical execution, physical bit replacement, or unbounded computation.
+
+The next experiment is:
+
+```text
+EXACT_FIXED_RANK_GAUSSIAN_OR_STABILIZER_PHASE_CHART_FOR_NONCOMMUTING_SUPERPOSITION_COUPLINGS_OR_A_TRANSFERABLE_NO_GO_THAT_FORCES_A_DIFFERENT_NATIVE_PHASE_RESOURCE
+```
+
+The obstruction is:
+
+```text
+THE_DECLARED_NONCOMMUTING_AFFINE_REFLECTION_COUPLING_FAMILY_HAS_AN_EXACT_TWO_TO_THE_M_SECANT_RANK_LAW_AND_REQUIRES_EXPONENTIAL_EXPLICIT_PHASE_COMPONENTS_WHILE_ITS_STRONGEST_MATCHED_FULL_STATE_CLASSICAL_RECURRENCE_USES_ONLY_TWO_TO_THE_M_WEIGHTS_AND_ITS_FINAL_BOUNDARY_COLLAPSES_TO_TWO_CLASSICAL_MOMENTS
+```
+
+Do not add larger explicit secant fixtures. Test a genuinely fixed-rank
+Gaussian or stabilizer phase chart under noncommuting superposition coupling,
+or derive a transferable no-go that forces a different native phase resource.
 
 ## 10. Roadmap Maintenance
 
