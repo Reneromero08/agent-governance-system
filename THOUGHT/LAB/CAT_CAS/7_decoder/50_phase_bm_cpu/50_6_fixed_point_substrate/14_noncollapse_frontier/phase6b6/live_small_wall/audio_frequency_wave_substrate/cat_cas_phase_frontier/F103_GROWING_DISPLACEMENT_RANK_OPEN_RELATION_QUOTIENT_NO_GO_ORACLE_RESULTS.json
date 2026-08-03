@@ -1,0 +1,1257 @@
+{
+  "case_count": 40,
+  "cases": [
+    {
+      "boundary_commitment": "5ee9fbebbdd62d63fceaa641f1e40593c567311b42e8a7c69f6d39ad169f8c9e",
+      "chart_commitment": "e72e9d9ae15ad926f3c2e7fdf849222bacdd401f39110c51a49439c7c9644654",
+      "depth": 1,
+      "displacement_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        2,
+        5,
+        5,
+        5
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 5,
+      "ordinary_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "boundary_commitment": "9f649538bf691888111b1bb7a79ac5fa06663a33b65d5c290910074c54a01907",
+      "chart_commitment": "6e95c0539094cca707a78c29ae6f71ef6c559815cdfb4726b61bdede504f60f2",
+      "depth": 2,
+      "displacement_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 5,
+      "ordinary_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "boundary_commitment": "ab8fd340fc9f31c3de1ee30e48471d83781ab0362fd6a3b938b86436f4dc70fe",
+      "chart_commitment": "0c3df35100c64f1c5537c8ccf5f19ca9727f1c4b0ea1e5347ed6c389acc32992",
+      "depth": 4,
+      "displacement_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 5,
+      "ordinary_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "boundary_commitment": "5df1a39fa955dc1e2d7fdb697a5acdcda13d407fa25be8e6212bc64672877456",
+      "chart_commitment": "43c249acd1e1869753a3530c1828a42707fe12c402d0203725aba07076ed08cd",
+      "depth": 8,
+      "displacement_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 5,
+      "ordinary_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "boundary_commitment": "f6084301a0a47af76744a54f231585213dcf077b5b7208f4a40a0d031e469cc4",
+      "chart_commitment": "f4283cd4c5a0759dcc1428f2c693cc68c4a0799d33de5959b2a03d1685c67c47",
+      "depth": 16,
+      "displacement_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 5,
+      "ordinary_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "boundary_commitment": "84f4753c246010e4eaa830739d4dd9dc39feddcf239c39e0b970c15eb52cc5ad",
+      "chart_commitment": "5b1c3ae0d619bdb11ff9831b07ee21745d843bbb00abc8df4741601f15e179c2",
+      "depth": 1,
+      "displacement_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        2
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 5,
+      "ordinary_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "boundary_commitment": "8f8629ea8b177f28fe57356da2e97bd7570e7e3b99b9dd8df7d94694566f67ff",
+      "chart_commitment": "a7d153154aa265b09003bd4145484f1d0d157341e86471387a5ec412b0c8ed30",
+      "depth": 2,
+      "displacement_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 5,
+      "ordinary_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "boundary_commitment": "94c1417a896b1f5eaaaef6d4a942e985a8a73c021b7725ce189cd440e53584f8",
+      "chart_commitment": "70ce373b5c3e478180fbda497a0c09de10d0c3956597a2925153d50b54749202",
+      "depth": 4,
+      "displacement_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 5,
+      "ordinary_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "boundary_commitment": "fe58f4f72cbaec39d2a40a26ea15fecf94bbad3ceab3aebac84d1977091c8045",
+      "chart_commitment": "a75401f0057c4c7b9293b2f975e39bb0c0568e9e24c212b02e2107ddee598ad5",
+      "depth": 8,
+      "displacement_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 5,
+      "ordinary_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "boundary_commitment": "e37f83f77118833f7bf1d3355bf50a9db873980f7147bd6bd84ba4f69243e232",
+      "chart_commitment": "4db2b35968f74d38bc4649d363643a3b79ec34586748eff260e947ee6fd1d912",
+      "depth": 16,
+      "displacement_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 5,
+      "ordinary_ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "boundary_commitment": "ecc1fffe325cc90d9924e1fe808b161ae907ff045fe9d91449c14b7038a5149f",
+      "chart_commitment": "2e8edf73dee67532951321e9a1fdbeb2917fafffeeb4f6ef34b97501d4197739",
+      "depth": 1,
+      "displacement_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        2,
+        7,
+        7,
+        7
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 7,
+      "ordinary_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "boundary_commitment": "c19c7927b4cea6d999cee0cdf4faa13b94085a10f92a698de62245b8e2e42275",
+      "chart_commitment": "57b655f452e768703ae1b3f80c08e4ff92f469bcac6533062b09345e5777c4db",
+      "depth": 2,
+      "displacement_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 7,
+      "ordinary_ranks": [
+        7,
+        7,
+        7,
+        7,
+        6,
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "boundary_commitment": "3471db2bf22923deb0ff147e8f292fb17308c649a228407ea45fae004e861d96",
+      "chart_commitment": "5abf210653b416c74869b82f8e9c56c85edca9b3e46d72be4c8c3039214400b6",
+      "depth": 4,
+      "displacement_ranks": [
+        7,
+        7,
+        6,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 7,
+      "ordinary_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "boundary_commitment": "b845c5c82041d8fd46e81ddf171b92287a144886dcd0be8f6b94fad3b15241c8",
+      "chart_commitment": "5abb3af26cfe4e022648f4c31d641b98bdcc5d7ad23a94a752aed44cecddcf2d",
+      "depth": 8,
+      "displacement_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 7,
+      "ordinary_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        6
+      ]
+    },
+    {
+      "boundary_commitment": "27179e959a6c2b84050bd1dd5adda04471240b76d08f958c32a140d4fa6890f8",
+      "chart_commitment": "15fbf2eb3504948ee3b3277ae185fd69397af02df7ad69bee3a4f2d7573b64e4",
+      "depth": 16,
+      "displacement_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        6,
+        7
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 7,
+      "ordinary_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "boundary_commitment": "86c0cdbcf54e51b2d8415bc7dc1b1a5164611f5838bdcd8ec86297e95098dcee",
+      "chart_commitment": "3f365f7e59538890595223b1fdd27311c1c3fdb68dd6bc90d16f6ccceeafb52d",
+      "depth": 1,
+      "displacement_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        2
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 7,
+      "ordinary_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "boundary_commitment": "218b79e77b59cf89e97e2b86af386dc84dd00ca43a06da22221710b63e1a47b7",
+      "chart_commitment": "a1e7bcdc99782e797b3290ced507a172942d1bdc51a074bdf5e989683db5b51a",
+      "depth": 2,
+      "displacement_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 7,
+      "ordinary_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "boundary_commitment": "48dac4b73d3c44df72a5c0ed59628b57b063d31b0ad1c7f72c4079602acdd929",
+      "chart_commitment": "82768eb046b88248ddbcec0321fd62f72802872dc28f5850a01030524e1f8414",
+      "depth": 4,
+      "displacement_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 7,
+      "ordinary_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "boundary_commitment": "3ec5c76c6018e182d4fff92abd2ca5be89e7a6a400c666eac34ad3550260fc53",
+      "chart_commitment": "27a03b4b5d391ec153d678d0ca45bac3972a1b2928b01730ab96ee5bb2b86185",
+      "depth": 8,
+      "displacement_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 7,
+      "ordinary_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "boundary_commitment": "543f5320b67f1f5fee38f2da2dae72f85f3753daceb1c8adad111fa427d73a1c",
+      "chart_commitment": "2c0213b161d14c36962b67833fdb7344e915217c336c5c2c24ba4bf3bdb418bd",
+      "depth": 16,
+      "displacement_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 7,
+      "ordinary_ranks": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "boundary_commitment": "bf767a4f284959874b248b465f75cd79dd807ae59527954e3344acaac25cd742",
+      "chart_commitment": "fdc72928e8fcf14c222862aef4cc9be045d82d17dc80c4ca289f24d760586651",
+      "depth": 1,
+      "displacement_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        2,
+        10,
+        11,
+        11
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 11,
+      "ordinary_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "boundary_commitment": "de1cf9f15c015137f212b25e489de8acc47c19250e96bdf5a3174173e9fbf23f",
+      "chart_commitment": "7648065eef7487487129073004e69a3646c21c23411b1bfbf4c0dd6882af8c08",
+      "depth": 2,
+      "displacement_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 11,
+      "ordinary_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "boundary_commitment": "099ab12ac8076b30fca4624d28c0b344864e369f6f95f5237cd4883cdebbde6c",
+      "chart_commitment": "88d420244bdcaaa34089d8c8c7f313652493293ce561b585ed3a47d509a0df58",
+      "depth": 4,
+      "displacement_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 11,
+      "ordinary_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "boundary_commitment": "27fbc8cc194e1780ddc5e36b66da665d0d85ecc6a698bde81916a1ecae0ca966",
+      "chart_commitment": "134e1db6e928e8ad9f610e5b043979d8e647c8a17305619ad62f9ece7ce3a619",
+      "depth": 8,
+      "displacement_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 11,
+      "ordinary_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "boundary_commitment": "5867f38c5d3017b55723e49b6ef8eade1f9498cb8847d6f0c4790de8ac6c661f",
+      "chart_commitment": "af8fc4cd9252609f76f4422b55ddf18a87d6df598ec78391da8cbb00d7bf4b25",
+      "depth": 16,
+      "displacement_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 11,
+      "ordinary_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "boundary_commitment": "83c5ed3b8558e1c7754cd8fb3ed7278102dfb42c602b5c8ac7c6395191424081",
+      "chart_commitment": "63ccd971fdafad9408b0690475dbb0934c93947e8dd7f550d3a5cc65bcff6ee3",
+      "depth": 1,
+      "displacement_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        2
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 11,
+      "ordinary_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "boundary_commitment": "7edb673d9587e6a4834331a99fb9ab662086ddf6c2f28041a1a9302faaf97473",
+      "chart_commitment": "800336ca24b674268dbab1042717dfb21cd115a4442b7acae84c648e7efa7759",
+      "depth": 2,
+      "displacement_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 11,
+      "ordinary_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "boundary_commitment": "2037b3ebd8797b41555256703fba5fbc60f60f59a59421918b6cdb65dfb17992",
+      "chart_commitment": "6a393b12ac429f5f81fbdde38d1f19843a8125cd4aba1c632dad76b58fdfa358",
+      "depth": 4,
+      "displacement_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 11,
+      "ordinary_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "boundary_commitment": "5b0892072f188f5675fa2086fa0def6256961ce036358eab9d3e33d53ce15af3",
+      "chart_commitment": "3d87db29077eeaac83c14855db25bf5dc3e4b1cec97b84179067b5e3f77ded47",
+      "depth": 8,
+      "displacement_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 11,
+      "ordinary_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "boundary_commitment": "11d0e35c27108e6567f4454b56dd8e25036544d792300e95359cb5d70831332b",
+      "chart_commitment": "b0c8b406661eee44958f1c603ad3333fdc4a360049429c048bc347bc01e54e12",
+      "depth": 16,
+      "displacement_ranks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 11,
+      "ordinary_ranks": [
+        11,
+        11,
+        10,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ]
+    },
+    {
+      "boundary_commitment": "23de15032494f64e56b79490382759b5a8bd5fdc40fea39cd5f6d3aac6b8b832",
+      "chart_commitment": "b5e3e16fc775e0afd8e94b31fa723dcd53bc71cca625cc558383f9e8c46a41d7",
+      "depth": 1,
+      "displacement_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        2,
+        17,
+        17,
+        17
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 17,
+      "ordinary_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ]
+    },
+    {
+      "boundary_commitment": "da66abb1aab0721d85a3b366b5ac5337e9abde6b95f71e5dfc329ec8fa5b6a2d",
+      "chart_commitment": "843fdb289a7c8454ea354cc93316a0a70522ee2a737d84882e00b69141377665",
+      "depth": 2,
+      "displacement_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 17,
+      "ordinary_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ]
+    },
+    {
+      "boundary_commitment": "df2a44155c3ed344bafa4af7b44a3faf82a4985fd4261a76568cf745c8e4b095",
+      "chart_commitment": "249bba514fc07cfae1dec3c4483fd50b969fac47c7cbd4f6c7a17f54ff667f19",
+      "depth": 4,
+      "displacement_ranks": [
+        16,
+        16,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 17,
+      "ordinary_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ]
+    },
+    {
+      "boundary_commitment": "ce3478226ab2a2819849ebe0e1d7c111839d69759e3878130e6d42ce213622f7",
+      "chart_commitment": "cb9a508269fa44e6d9d31a3fab14fe6455460e93b51d1625f671259d7b7d3d9f",
+      "depth": 8,
+      "displacement_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 17,
+      "ordinary_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ]
+    },
+    {
+      "boundary_commitment": "f4aaecec46dbd50a631a1d5b76c2cdb540144f97aa062f649b44bc703ad41e29",
+      "chart_commitment": "2a300b2e09b4ec96427ac353b6b3d475d76d2907e5375ea91729ea8be37ada8c",
+      "depth": 16,
+      "displacement_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "PRIMARY",
+      "interface": 17,
+      "ordinary_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ]
+    },
+    {
+      "boundary_commitment": "ed33d4525d6504e9911553ae3579f8d558c714399271c695c68713df5f500a57",
+      "chart_commitment": "a48f383292389cc00b8e28bbe3859536484e5e81ea6312da5901815c3b925573",
+      "depth": 1,
+      "displacement_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        2
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 17,
+      "ordinary_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ]
+    },
+    {
+      "boundary_commitment": "877419a0e0abf5aa284f447347d27c737951b905119988986cc89e619b66471e",
+      "chart_commitment": "037e81ae581e170fd29f3e1f9960a4833ccaa0c0a6a0264c7c4e3d59ce8eadf7",
+      "depth": 2,
+      "displacement_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 17,
+      "ordinary_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ]
+    },
+    {
+      "boundary_commitment": "b5093b9b9460b99be837c4448ca5f97cca5f9f94bc6d9ea2a998f36cac043d97",
+      "chart_commitment": "db743ec40817a8c8fb5171aec34e8f3073d60f7963c63c41a8c8d3d7572159eb",
+      "depth": 4,
+      "displacement_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 17,
+      "ordinary_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ]
+    },
+    {
+      "boundary_commitment": "f9645eaf97bbdd824b8ca82136af23218ad6fab43108e66f9d4ced5e259a6877",
+      "chart_commitment": "e4500c4716a7f9d1d4db926afddfa699bbdc7ad01138bd295055a5cf86a5f75a",
+      "depth": 8,
+      "displacement_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 17,
+      "ordinary_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ]
+    },
+    {
+      "boundary_commitment": "75ff19fe403718c8222d089bc4b72d10c0b2202e7e6c7dbcf07ac1d3cbfdeaf6",
+      "chart_commitment": "77203dcbe3e0138add53d8fa5756a1c3251c3089214850a2f49cfaea0124f1a7",
+      "depth": 16,
+      "displacement_ranks": [
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ],
+      "exact_dense_inverse_restoration": true,
+      "family": "ALTERNATE",
+      "interface": 17,
+      "ordinary_ranks": [
+        17,
+        17,
+        16,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17
+      ]
+    }
+  ],
+  "claim_ceiling": "F103_CYCLIC_DISPLACEMENT_CHARTS_ON_THE_DECLARED_C5_C7_C11_C17_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH16_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "comparison_count": 1628,
+  "controls": {
+    "composition_intersection_order_changes_boundary": true,
+    "missing_inverse_changes_state": true,
+    "null_port_changes_boundary": true,
+    "reciprocal_rank2_controls_exact": true,
+    "reordered_inverse_changes_state": true,
+    "topology_mutation_changes_boundary": true,
+    "wrong_inverse_changes_state": true
+  },
+  "imports_numpy": false,
+  "imports_production_module": false,
+  "next_obstruction": "CYCLIC_DISPLACEMENT_RANK2_SEEDS_BECOME_FULL_DISPLACEMENT_RANK_AFTER_ONE_NONCOMMUTING_COMPOSITION_INTERSECTION_LAYER_AT_EVERY_GROWING_INTERFACE_SO_THE_N2_PLUS_N_PHASE_CHART_IS_DENSE_EQUIVALENT_AND_THE_EXECUTED_DENSE_FALLBACK_CLASSICAL_RECURRENCE_IS_SMALLER_AND_CHEAPER",
+  "oracle_source_sha256": "1431c6953185997075f0d42e14d7f41dcc768d835d97480c304c937c913ce987",
+  "package_local_fields_not_independently_recounted": [
+    "STREAMED_PHASE_FIELD_MULTIPLICATION_TOTALS",
+    "DECLARED_TRANSIENT_SCRATCH_MAXIMA",
+    "PYTHON_AND_NUMPY_RUNTIME_EXCLUSIONS"
+  ],
+  "preserved_subclaims": [
+    "FULL_ORDINARY_RANK_SEEDS_HAVE_EXACT_DISPLACEMENT_RANK2",
+    "ONE_LAYER_SATURATES_DISPLACEMENT_RANK_TO_INTERFACE_SIZE",
+    "DENSE_SEMANTICS_BOUNDARIES_CHART_COMMITMENTS_AND_INVERSE_RECONSTRUCT",
+    "PHASE_RESIDENT_CHART_IS_LARGER_THAN_EXECUTED_CLASSICAL_DENSE_FALLBACK"
+  ],
+  "production_result_sha256": "f13511f6406e73e93546683ad09c275a9e6014f1c6c223cea34f361172e5c737",
+  "resident_formula_checks": {
+    "11": {
+      "classical": 1116,
+      "phase": 1692,
+      "phase_to_classical_ratio": 1.5161290322580645
+    },
+    "17": {
+      "classical": 2628,
+      "phase": 3528,
+      "phase_to_classical_ratio": 1.3424657534246576
+    },
+    "5": {
+      "classical": 252,
+      "phase": 504,
+      "phase_to_classical_ratio": 2.0
+    },
+    "7": {
+      "classical": 468,
+      "phase": 828,
+      "phase_to_classical_ratio": 1.7692307692307692
+    }
+  },
+  "schema": "CAT_CAS_F103_GROWING_DISPLACEMENT_RELATION_QUOTIENT_ORACLE_RESULT_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
