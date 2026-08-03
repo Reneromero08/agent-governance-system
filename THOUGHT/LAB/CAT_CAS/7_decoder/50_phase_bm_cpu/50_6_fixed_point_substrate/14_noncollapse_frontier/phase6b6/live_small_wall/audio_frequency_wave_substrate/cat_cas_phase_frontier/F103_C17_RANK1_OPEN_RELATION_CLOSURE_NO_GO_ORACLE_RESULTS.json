@@ -1,0 +1,73 @@
+{
+  "all_exact_restorations": true,
+  "all_target_and_boundary_matches": true,
+  "case_field_comparisons": 414,
+  "claim_ceiling": "F103_NON_TRANSLATION_INVARIANT_RANK1_FACTORED_C17_TO_C17_RELATIONS_WITH_IDENTITY_PLUS_RANK1_COMPOSITION_AND_RANK1_INTERSECTION_ON_THE_DECLARED9_CONTROL9_TARGET_ROTATING_HUB_TOPOLOGY_ACROSS18_CASES_THROUGH_DEPTH512_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "composition_intersection_order_changes_boundary": true,
+    "missing_inverse_changes_state": true,
+    "null_carrier_rejected": true,
+    "null_port_changes_boundary": true,
+    "premature_projection_rejected": true,
+    "reordered_inverse_changes_state": true,
+    "resident_controls_remain_unmodified": true,
+    "resident_port_projection_rejected": true,
+    "topology_mutation_changes_boundary": true,
+    "wrong_inverse_changes_state": true,
+    "wrong_owner_rejected": true,
+    "wrong_relation_type_rejected": true
+  },
+  "decision": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "exact_case_reexecutions": 18,
+  "independence": {
+    "implementation": "SCALAR_PYTHON_FACTORED_F103_RELATION_ARITHMETIC",
+    "imports_numpy": false,
+    "imports_production": false
+  },
+  "oracle_source_sha256": "706731942bc640c4e9c562012a36a5a4c75c8b131d940dbf3144f28592fa5470",
+  "production_result_sha256": "bc5ee1a3b56141f5a8022f08aac7f32c2a40cd51396670ad5925e9b20f53fbed",
+  "rank2_escape_certificate": {
+    "dense_relation_tables_materialized": 0,
+    "exact_rank": 2,
+    "nonzero_two_by_two_minor": {
+      "minor_determinant": 34,
+      "x0": 0,
+      "x1": 1,
+      "y0": 0,
+      "y1": 1
+    },
+    "rank1_closed_family_exited": true,
+    "rank_upper_bound": 2,
+    "scalar_entries_streamed": 4
+  },
+  "rejected_interpretations": [
+    "RANK2_OR_GENERAL_RELATION_CLOSURE",
+    "ARBITRARY_PORT_ARITY_OR_GRAPH_TOPOLOGY",
+    "MACHINE_ENFORCED_GENERATION_OR_LEASE_CUSTODY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "resource_law": {
+    "dense_relation_tables_materialized": 0,
+    "maximum_control_scratch_coordinates": 34,
+    "maximum_relation_field_multiplications_each": 278528,
+    "phase_resident_coordinates": 612,
+    "phase_to_classical_resident_dimension_ratio": 2,
+    "rematerialized_classical_resident_coordinates": 306
+  },
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F103_C17_RANK1_OPEN_RELATION_CLOSURE_NO_GO_ORACLE_RESULT_V1",
+  "semantic_controls": {
+    "assignment_expansions_materialized": 0,
+    "composition_scalar_checks": 289,
+    "dense_relation_tables_materialized": 0,
+    "intersection_scalar_checks": 289
+  },
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
