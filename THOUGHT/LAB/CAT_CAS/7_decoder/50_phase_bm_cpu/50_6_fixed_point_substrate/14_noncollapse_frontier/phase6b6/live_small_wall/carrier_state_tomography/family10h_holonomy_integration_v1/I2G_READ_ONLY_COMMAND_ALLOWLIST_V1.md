@@ -6,7 +6,7 @@ Target: `root@192.168.137.100` (hostname expected: `catcas`).
 No command may contain redirection, pipelines to writers, package installation, compilation,
 process signaling, affinity mutation, PMU opening, file creation, file deletion, or sysfs writes.
 
-SHA-256 of this complete file content is recorded in the accompanying authority grant.
+The canonical Git blob identity of this complete file is recorded in the accompanying authority grant.
 
 ## Commands
 
