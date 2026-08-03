@@ -1,0 +1,80 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 160,
+  "scientific_source_head": "3e3a311fc35a0088511d8414cd75b23d58396135",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "artifacts": {
+    "production_source": {
+      "path": "f103_c102_column_projective_sign_orbit_phase_quotient.py",
+      "sha256": "5cf1b787a6174a45e8e9262e8c2c3cefd28fe6c5cdc31462a54b5c7aa14fec7d"
+    },
+    "oracle_source": {
+      "path": "f103_c102_column_projective_sign_orbit_phase_quotient_oracle.py",
+      "sha256": "ec86d09c43b7b0dd6d45586db9071e16776d1a24c36aa4f337b32c3717d7df7d"
+    },
+    "production_result": {
+      "path": "F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_PHASE_QUOTIENT_RESULTS.json",
+      "sha256": "ff60be20b21d6c6c7a03760849e8f3dab7432148a02da49224defe157788d109"
+    },
+    "oracle_result": {
+      "path": "F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_PHASE_QUOTIENT_ORACLE_RESULTS.json",
+      "sha256": "82a6d0f8af243295e746a8de12d07fdf3df29b9c350db90e5302d5ce836c6050"
+    },
+    "qualifier": {
+      "path": "qualify_f103_c102_column_projective_sign_orbit_phase_quotient.sh",
+      "sha256": "0b2ffc7159a507966ebc17d62640788cfe9ffe36700bd63847c614b67765fdf4"
+    },
+    "review": {
+      "path": "F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_PHASE_QUOTIENT_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "18e11d90f9bcf68b3e1dcc3ee2de6dafa9b0202a1e88f6c776b7764d60b02378"
+    }
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_PHASE_QUOTIENT_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m160-qualifier-FTjIjD"
+  },
+  "independent_oracle": {
+    "imports_m160_production": false,
+    "imports_m158_production": false,
+    "imports_numpy": false,
+    "reuses_prior_independent_m158_scalar_reference": true,
+    "case_count": 8,
+    "comparison_count": 32,
+    "independent_sign_generators": 45,
+    "all_generators_collapse_preserve_boundary_and_restore": true
+  },
+  "resource_law": {
+    "canonical_representative_field_cells": 45900,
+    "matched_raw_field_cells": 45900,
+    "material_field_cell_reduction": 0,
+    "free_nonzero_seed_sign_orbit_order": 35184372088832,
+    "projective_orbit_reduction_bits": 45,
+    "exact_restoration_orientation_ledger_bits": 45,
+    "net_lossless_information_reduction_bits": 0,
+    "minimum_packed_orientation_ledger_bytes": 6,
+    "physical_process_peak_measured": false
+  },
+  "claim_ceiling": "C5_TWO_PUBLIC_ROTATING_HUB_FAMILIES_DEPTHS1_4_16_64_COLUMNWISE_GLOBAL_SIGN_ORBITS_OF_EACH_A_MATRIX_COLUMN_WITH45_BIT_PRIVATE_RESTORATION_LEDGER",
+  "preserved_subclaims": [
+    "ALL45_INDEPENDENT_COLUMN_SIGN_GENERATORS_COLLAPSE_TO_THE_SAME_PROJECTIVE_REPRESENTATIVE",
+    "ALL45_GENERATORS_PRESERVE_THE_DECLARED_PUBLIC_B_BOUNDARY",
+    "QUOTIENT_FORWARD_INVERSE_AND_UNSEAL_RESTORE_THE_EXACT_RAW_PAYLOAD",
+    "SAME_BACKING_UNRELATED_PROGRAM_REUSE_WITHOUT_SNAPSHOT",
+    "INDEPENDENT_SCALAR_BOUNDARY_AND_RESTORATION_PARITY"
+  ],
+  "rejected_interpretations": [
+    "FIELD_CELL_OR_FIXED_WIDTH_PAYLOAD_COMPACTION",
+    "NET_LOSSLESS_INFORMATION_REDUCTION_AFTER_RESTORATION_LEDGER",
+    "SCALAR_QUOTIENTS_OTHER_THAN_PLUS_OR_MINUS_ONE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_COMPUTATION"
+  ]
+}

@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN`
-**Roadmap version:** `14.25`
+**Status:** `STRICT_SCOPE_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_QUOTIENT`
+**Roadmap version:** `14.26`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `c3b0fb28e6587c7ceb0d50cf017423aa46ac93c3`
+**Reconciled source head:** `3e3a311fc35a0088511d8414cd75b23d58396135`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F103_C102_PUBLIC_CONTINUATION_FINAL_BOUNDARY_OBSERVABILITY_JACOBIAN_REACHES_FULL_RANK102_ON_BOTH_DECLARED_C5_DUAL_REGISTER_QUADRATIC_SHEAR_FAMILIES_BY_DEPTH24_REJECTING_SUB102_REGULAR_ALGEBRAIC_LOCAL_PHASE_QUOTIENTS_AT_THE_TESTED_SOURCE_CHARTS_WITH_EXACT_UNDERLYING_CARRIER_RESTORATION_AND_REUSE_BUT_THE_TANGENT_CERTIFICATE_EXPANDS102_DIRECTIONS_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS`
-**Current claim ceiling:** `C5_TWO_PUBLIC_TOPOLOGY_FAMILIES_CONSECUTIVE_DEPTHS1_TO24_ONE_PUBLICLY_DERIVED_SOURCE_POLYNOMIAL_CHART_AND_ALL25_EXPLICIT_PUBLIC_FINAL_ONLY_B_COORDINATE_PROJECTIONS_PER_DEPTH_IN_EXACT_F103_TANGENT_ARITHMETIC`
+**Current highest milestone:** `BOUNDED_EXACT_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_QUOTIENT_IS_CLOSED_UNDER_DUAL_REGISTER_QUADRATIC_SHEAR_RELATION_PROGRAMS_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_CANONICAL_REPRESENTATIVE_RETAINS_ALL45900_FIELD_CELLS_AND_THE45_BIT_ORIENTATION_LEDGER_EXACTLY_RETURNS_THE_DISCARDED_ORBIT_INFORMATION_WHILE_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS`
+**Current claim ceiling:** `C5_TWO_PUBLIC_ROTATING_HUB_FAMILIES_DEPTHS1_4_16_64_COLUMNWISE_GLOBAL_SIGN_ORBITS_OF_EACH_A_MATRIX_COLUMN_WITH45_BIT_PRIVATE_RESTORATION_LEDGER`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M159_F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN`
+**New mechanism development:** `ACTIVE_AFTER_M160_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_QUOTIENT`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_PHASE_QUOTIENT_WITH_REVERSIBLE_ORIENTATION_LEDGER_AND_MATCHED_CLASSICAL_INFORMATION_ACCOUNTING`
+**Active primary successor:** `EXACT_F17_C17_REPEATED_ROOT_NILPOTENT_PHASE_JET_OPEN_RELATION_CLOSURE_WITH_NONLINEAR_SHEAR_AND_MATCHED_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`c3b0fb28e6587c7ceb0d50cf017423aa46ac93c3`. The current 159-milestone
+`3e3a311fc35a0088511d8414cd75b23d58396135`. The current 160-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F103_DUAL_MULTIPLICATIVE_C102_EXPONENT_CRT_RANK_AND_VALUE_MOMENT_OPEN_RELATION_CHART_MAKES_HADAMARD_INTERSECTION_NATIVE_WITHOUT_DENSE_RELATION_TABLES_ON_C5_C7_C11_C17_BUT_ONE_REVERSIBLE_COMPOSITION_CONVERSION_RAISES_THE_EXPONENT_CHART_TO_NEAR_FULL_OR_FULL_RANK_IN_EVERY_CRT_COMPONENT_THE_FIXED_BACKING_IS_AT_LEAST4N2_AND_AN_EXECUTED_DENSE_F103_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE
+BOUNDED_EXACT_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_QUOTIENT_IS_CLOSED_UNDER_DUAL_REGISTER_QUADRATIC_SHEAR_RELATION_PROGRAMS_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_CANONICAL_REPRESENTATIVE_RETAINS_ALL45900_FIELD_CELLS_AND_THE45_BIT_ORIENTATION_LEDGER_EXACTLY_RETURNS_THE_DISCARDED_ORBIT_INFORMATION_WHILE_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
 ```
 
 Not established:
@@ -6872,6 +6872,57 @@ material compaction once exact borrowed-carrier restoration accounts for every
 orientation bit. M159 establishes no CATVM custody, distinct phase resource,
 computational advantage, Small Wall crossing, physical execution, physical bit
 replacement, or unbounded computation.
+
+## M160: column-projective signs close but do not compact lossless state
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_QUOTIENT_IS_CLOSED_UNDER_DUAL_REGISTER_QUADRATIC_SHEAR_RELATION_PROGRAMS_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_CANONICAL_REPRESENTATIVE_RETAINS_ALL45900_FIELD_CELLS_AND_THE45_BIT_ORIENTATION_LEDGER_EXACTLY_RETURNS_THE_DISCARDED_ORBIT_INFORMATION_WHILE_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+```
+
+M160 tests the smallest discrete symmetry left open by M159. The A-register
+linear operations are homogeneous and column-local up to public column
+permutations, while the nonlinear B shear depends on A only through squares.
+Each of the nine nodes therefore admits five independent whole-column sign
+actions. The accepted carrier canonicalizes all 45 sign orbits after each
+native operation and transports one private orientation bit per column.
+
+Across both declared C5 rotating-hub families and depths 1, 4, 16, and 64,
+all quotient boundaries equal the identical raw coefficient recurrence. The
+actual quotient inverse returns the canonical carrier to its sealed state,
+then unsealing with the private orientation ledger restores the exact raw
+payload on the same backing. An unrelated depth-16 program after a depth-1
+transaction matches fresh execution at restoration generation two without a
+snapshot.
+
+The scalar oracle imports neither M160 production, M158 production, nor
+NumPy. It independently reconstructs canonicalization, orientation transport,
+forward and inverse order, and unsealing. It matches 32 production fields over
+all eight cases and separately tests every one of the 45 sign generators.
+Each generator has the same canonical representative and public B boundary
+but restores its distinct raw input.
+
+The quotient is lawful but not materially compact. Its representative still
+uses all 45,900 F103 cells. The free orbit removes 45 information bits and
+exact restoration requires the same 45 bits; the minimum packed ledger is six
+bytes and the net lossless information reduction is zero. The strongest
+classical baseline remains the identical 45,900-cell recurrence.
+
+The next experiment changes the phase state law rather than adding another
+quotient to the saturated C102 shear carrier:
+
+```text
+EXACT_F17_C17_REPEATED_ROOT_NILPOTENT_PHASE_JET_OPEN_RELATION_CLOSURE_WITH_NONLINEAR_SHEAR_AND_MATCHED_CLASSICAL_RECURRENCE
+```
+
+It must test whether the characteristic-17 repeated-root identity
+`F17[C17] ~= F17[epsilon]/(epsilon^17)` supports a fixed truncated phase-jet
+law that is closed under native open-relation operations and nonlinear shear,
+with exact restoration, final-only projection, and the identical compact
+classical recurrence counted. M160 establishes no CATVM custody, distinct
+phase resource, computational advantage, Small Wall crossing, physical
+execution, physical bit replacement, or unbounded computation.
 
 ## 10. Roadmap Maintenance
 

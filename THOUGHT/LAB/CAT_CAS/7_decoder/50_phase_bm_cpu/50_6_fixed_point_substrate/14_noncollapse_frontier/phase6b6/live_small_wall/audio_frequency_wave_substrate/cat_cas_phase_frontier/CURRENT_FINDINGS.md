@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`c3b0fb28e6587c7ceb0d50cf017423aa46ac93c3`. The canonical per-milestone
+`3e3a311fc35a0088511d8414cd75b23d58396135`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9152,3 +9152,42 @@ projective sign symmetry with every reversible orientation bit counted. No
 CATVM custody, distinct phase resource, advantage, Small Wall crossing,
 physical execution, physical bit replacement, or unbounded computation is
 established.
+
+## M160: exact column-projective sign quotient returns every saved bit
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_QUOTIENT_IS_CLOSED_UNDER_DUAL_REGISTER_QUADRATIC_SHEAR_RELATION_PROGRAMS_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_CANONICAL_REPRESENTATIVE_RETAINS_ALL45900_FIELD_CELLS_AND_THE45_BIT_ORIENTATION_LEDGER_EXACTLY_RETURNS_THE_DISCARDED_ORBIT_INFORMATION_WHILE_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+```
+
+The M158 A-register linear laws are homogeneous and column-local up to public
+column permutation, and the nonlinear B shear sees A only through squares.
+M160 therefore canonicalizes the independent sign orbit of each of five A
+columns at each of nine nodes and privately transports the resulting 45-bit
+orientation word. Both public C5 families at depths 1, 4, 16, and 64 match the
+identical raw recurrence at the final-only B boundary.
+
+The exact quotient inverse restores the sealed canonical payload; the private
+orientation word then unseals the exact raw payload on the same backing.
+Cross-family reuse reaches restoration generation two without snapshot. The
+independent scalar oracle imports neither M160 nor M158 production and no
+NumPy, matches 32 production fields, and independently checks every one of the
+45 sign generators.
+
+This is a closure result and a compaction no-go in its strict scope. The
+canonical representative still has 45,900 F103 cells. Its free `2^45` orbit
+removes 45 bits while arbitrary-member restoration requires 45 private bits,
+so the net lossless information reduction is zero. The strongest matched
+classical implementation is still the identical 45,900-cell coefficient
+recurrence.
+
+The next experiment changes the phase algebra itself:
+
+```text
+EXACT_F17_C17_REPEATED_ROOT_NILPOTENT_PHASE_JET_OPEN_RELATION_CLOSURE_WITH_NONLINEAR_SHEAR_AND_MATCHED_CLASSICAL_RECURRENCE
+```
+
+M160 establishes no CATVM custody, distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+or unbounded computation.
