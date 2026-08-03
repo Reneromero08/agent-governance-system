@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F103_C17_RANK_ADAPTIVE_OPEN_RELATION_CHART_NO_GO`
-**Roadmap version:** `14.20`
+**Status:** `STRICT_SCOPE_F103_GROWING_DISPLACEMENT_RANK_OPEN_RELATION_QUOTIENT_NO_GO`
+**Roadmap version:** `14.21`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `e3e908510b2c171e178282fb36bb37f0d242a6d5`
+**Reconciled source head:** `2e4e83626ee676244952e2e77c0a5730b162a014`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_RANK_ADAPTIVE_NON_TRANSLATION_INVARIANT_F103_C17_OPEN_RELATION_CHART_CLOSES_IDENTITY_PLUS_RANK2_COMPOSITION_AND_RECIPROCAL_RANK2_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_ACROSS8_NONCOMMUTING_CONSUMERS_WITH_EXACT_RANK_ADAPTIVE_CANONICALIZATION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH128_BUT_RANK_SATURATES17_THE_CHART_BECOMES_DENSE_EQUIVALENT_AND_AN_EXECUTED_REMATERIALIZED_CONTROL_HYBRID_CLASSICAL_RECURRENCE_RETAINS_FEWER_RESIDENT_COORDINATES`
-**Current claim ceiling:** `F103_NON_TRANSLATION_INVARIANT_C17_TO_C17_RELATIONS_REACHED_BY_RECIPROCAL_RANK2_CONTROLS_ON_THE_DECLARED9_NODE_ROTATING_HUB_ACROSS18_CASES_THROUGH_DEPTH128_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_F103_GROWING_C5_C7_C11_C17_CYCLIC_DISPLACEMENT_RANK_OPEN_RELATION_CHART_STREAMS_FULL_ORDINARY_RANK_SEEDS_FROM_RANK2_GENERATORS_WITHOUT_DENSE_RELATION_TABLES_BUT_ONE_NONCOMMUTING_COMPOSITION_INTERSECTION_LAYER_SATURATES_DISPLACEMENT_RANK_N_AT_EVERY_INTERFACE_THE_CHART_BECOMES_N2_PLUS_N_DENSE_EQUIVALENT_AND_AN_EXECUTED_DENSE_FALLBACK_CLASSICAL_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `F103_CYCLIC_DISPLACEMENT_CHARTS_ON_THE_DECLARED_C5_C7_C11_C17_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH16_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M154_F103_C17_RANK_ADAPTIVE_OPEN_RELATION_CHART_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M155_F103_GROWING_DISPLACEMENT_RANK_OPEN_RELATION_QUOTIENT_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_GROWING_C5_C7_C11_C17_DISPLACEMENT_RANK_OPEN_RELATION_QUOTIENT_CLOSURE_OR_NO_GO_WITH_MATCHED_COMPACT_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_F103_DUAL_MULTIPLICATIVE_PHASE_EXPONENT_AND_VALUE_MOMENT_OPEN_RELATION_CHART_CLOSURE_OR_CONVERSION_NO_GO_WITHOUT_DENSE_ENTRY_TABLES`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`e3e908510b2c171e178282fb36bb37f0d242a6d5`. The current 154-milestone
+`2e4e83626ee676244952e2e77c0a5730b162a014`. The current 155-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_RANK_ADAPTIVE_NON_TRANSLATION_INVARIANT_F103_C17_OPEN_RELATION_CHART_CLOSES_IDENTITY_PLUS_RANK2_COMPOSITION_AND_RECIPROCAL_RANK2_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_ACROSS8_NONCOMMUTING_CONSUMERS_WITH_EXACT_RANK_ADAPTIVE_CANONICALIZATION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH128_BUT_RANK_SATURATES17_THE_CHART_BECOMES_DENSE_EQUIVALENT_AND_AN_EXECUTED_REMATERIALIZED_CONTROL_HYBRID_CLASSICAL_RECURRENCE_RETAINS_FEWER_RESIDENT_COORDINATES
+BOUNDED_EXACT_F103_GROWING_C5_C7_C11_C17_CYCLIC_DISPLACEMENT_RANK_OPEN_RELATION_CHART_STREAMS_FULL_ORDINARY_RANK_SEEDS_FROM_RANK2_GENERATORS_WITHOUT_DENSE_RELATION_TABLES_BUT_ONE_NONCOMMUTING_COMPOSITION_INTERSECTION_LAYER_SATURATES_DISPLACEMENT_RANK_N_AT_EVERY_INTERFACE_THE_CHART_BECOMES_N2_PLUS_N_DENSE_EQUIVALENT_AND_AN_EXECUTED_DENSE_FALLBACK_CLASSICAL_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE
 ```
 
 Not established:
@@ -6598,6 +6598,65 @@ M154 establishes no sub-dense closure after saturation, growing-interface
 closure, arbitrary topology, CATVM custody, distinct phase resource,
 computational advantage, Small Wall crossing, physical execution, physical
 bit replacement, or unbounded catalytic computation.
+
+## M155: growing cyclic-displacement rank saturates immediately
+
+M155 changes the tested invariant and the interface size rather than adding
+another fixed-C17 ordinary-rank fixture. Exact F103 relations on C5, C7, C11,
+and C17 are stored as one boundary row plus a canonical factorization of the
+cyclic displacement
+`D(A)[x,y] = A[x,y] - A[x-1,y-1]`. Entry access, rotations, composition,
+intersection, projection, and inverse stream from that chart; the accepted
+phase path materializes no ordinary dense relation table.
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_GROWING_C5_C7_C11_C17_CYCLIC_DISPLACEMENT_RANK_OPEN_RELATION_CHART_STREAMS_FULL_ORDINARY_RANK_SEEDS_FROM_RANK2_GENERATORS_WITHOUT_DENSE_RELATION_TABLES_BUT_ONE_NONCOMMUTING_COMPOSITION_INTERSECTION_LAYER_SATURATES_DISPLACEMENT_RANK_N_AT_EVERY_INTERFACE_THE_CHART_BECOMES_N2_PLUS_N_DENSE_EQUIVALENT_AND_AN_EXECUTED_DENSE_FALLBACK_CLASSICAL_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE
+```
+
+All nine seed relations have full ordinary rank `n` and displacement rank two.
+Across two public descriptor families, four interfaces, and depths 1, 2, 4,
+8, and 16, one noncommuting composition/intersection layer raises exact
+displacement rank to `n` in every case, and it stays saturated. The resulting
+chart stores `n^2+n` field values and is dense-equivalent.
+
+The executed matched classical recurrence uses the identical displacement
+chart only while it is smaller, then switches to a dense `n^2` relation. It
+matches every relation entry and final boundary while retaining fewer bytes:
+phase/classical residency is 504/252 at C5, 828/468 at C7, 1692/1116 at C11,
+and 3528/2628 at C17. Counted depth-16 phase forward work is about 20.3x,
+34.3x, 37.9x, and 64.3x the respective matched classical path. These work,
+scratch, and traffic counts are package-local; the separate oracle verifies
+semantics, ranks, canonical charts, boundaries, resident formulas,
+restoration, and controls, but does not independently recount streamed field
+operations, transient scratch maxima, or Python/NumPy/native-library costs.
+
+The actual resident chart reverses exactly without a snapshot, retained
+history, or baseline reload. Payload and pivot backing identities restore;
+an unrelated C11 depth-13 program consumes the carrier restored after a
+depth-three transaction, and 16 repeated C5 depth-four cycles remain exact.
+The plain-Python oracle imports neither production nor NumPy and passes 1,628
+comparisons across all 40 cases. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE`, verification level is
+`INDEPENDENT_ORACLE_REEXECUTION`, and restoration class is
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The result rejects cyclic displacement rank as a uniform compact quotient for
+this family. The next test changes the intersection algebra instead of adding
+larger displacement fixtures:
+
+```text
+EXACT_F103_DUAL_MULTIPLICATIVE_PHASE_EXPONENT_AND_VALUE_MOMENT_OPEN_RELATION_CHART_CLOSURE_OR_CONVERSION_NO_GO_WITHOUT_DENSE_ENTRY_TABLES
+```
+
+It must test whether Hadamard intersection can remain native in multiplicative
+phase/exponent coordinates while composition is recovered from compact value
+moments, and must count every conversion or reject the route if dense entry
+materialization merely moves between charts. M155 establishes no CATVM
+custody, distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical bit replacement, arbitrary relation
+topology, or unbounded catalytic computation.
 
 ## 10. Roadmap Maintenance
 

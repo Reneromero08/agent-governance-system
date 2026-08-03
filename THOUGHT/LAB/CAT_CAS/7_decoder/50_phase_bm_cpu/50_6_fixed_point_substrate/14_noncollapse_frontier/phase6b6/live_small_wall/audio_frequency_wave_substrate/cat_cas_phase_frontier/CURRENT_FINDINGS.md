@@ -8940,3 +8940,52 @@ relation quotient or reject that route against a matched compact classical
 recurrence. M154 establishes no growing-interface compact closure, CATVM
 custody, distinct phase resource, advantage, Small Wall crossing, physical
 execution, physical bit replacement, or unbounded catalytic computation.
+
+## M155: exact growing cyclic-displacement chart is dense-equivalent after one layer
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_GROWING_C5_C7_C11_C17_CYCLIC_DISPLACEMENT_RANK_OPEN_RELATION_CHART_STREAMS_FULL_ORDINARY_RANK_SEEDS_FROM_RANK2_GENERATORS_WITHOUT_DENSE_RELATION_TABLES_BUT_ONE_NONCOMMUTING_COMPOSITION_INTERSECTION_LAYER_SATURATES_DISPLACEMENT_RANK_N_AT_EVERY_INTERFACE_THE_CHART_BECOMES_N2_PLUS_N_DENSE_EQUIVALENT_AND_AN_EXECUTED_DENSE_FALLBACK_CLASSICAL_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE
+```
+
+M155 stores exact F103 C5, C7, C11, and C17 relations as one boundary row
+plus a canonical factorization of their cyclic displacement. All nine public
+seeds at each interface have full ordinary rank but displacement rank two.
+Across two descriptor families and depths 1, 2, 4, 8, and 16, the first
+noncommuting composition/intersection layer raises displacement rank to the
+full interface size in every case. The chart therefore stores `n^2+n` field
+values and is dense-equivalent even though no ordinary dense relation table is
+materialized by the phase path.
+
+The matched executed classical recurrence uses the same displacement chart
+only while smaller, switches to dense `n^2` storage, and agrees entrywise and
+at every final boundary. Phase/classical resident bytes are 504/252 at C5,
+828/468 at C7, 1692/1116 at C11, and 3528/2628 at C17. Counted depth-16
+phase/classical forward-work ratios range from about 20.3x to 64.3x. Those
+operation, scratch, and traffic totals remain package-local; Python container,
+allocator, NumPy, native-library, and whole-process peaks are excluded.
+
+The direct-process carrier reverses the actual chart exactly with no retained
+history, snapshot, or baseline reload. Payload and pivot backing identities
+restore; unrelated restored-carrier reuse and 16 repeated transactions match
+fresh execution. A production-independent plain-Python oracle reconstructs
+the public programs, dense semantics, displacement ranks, canonical chart
+commitments, boundaries, inverse, controls, and resident formulas. It imports
+neither production nor NumPy and passes 1,628 comparisons over all 40 cases.
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`, verification level
+is `INDEPENDENT_ORACLE_REEXECUTION`, and restoration is
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The next experiment changes the algebra rather than growing this rejected
+quotient:
+
+```text
+EXACT_F103_DUAL_MULTIPLICATIVE_PHASE_EXPONENT_AND_VALUE_MOMENT_OPEN_RELATION_CHART_CLOSURE_OR_CONVERSION_NO_GO_WITHOUT_DENSE_ENTRY_TABLES
+```
+
+It must determine whether native multiplicative phase/exponent intersection
+and compact value-moment composition coexist without dense conversion. M155
+establishes no CATVM custody, distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+arbitrary topology, or unbounded catalytic computation.

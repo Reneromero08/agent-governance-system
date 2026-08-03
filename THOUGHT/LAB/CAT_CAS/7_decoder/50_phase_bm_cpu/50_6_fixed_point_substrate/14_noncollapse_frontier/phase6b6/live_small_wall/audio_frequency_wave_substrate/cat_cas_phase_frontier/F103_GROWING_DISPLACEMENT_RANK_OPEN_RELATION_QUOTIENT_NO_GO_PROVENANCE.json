@@ -1,0 +1,86 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 155,
+  "scientific_source_head": "2e4e83626ee676244952e2e77c0a5730b162a014",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "carrier_restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_classification": "NO_RESTORATION_CLAIM",
+  "artifacts": {
+    "production_source": {
+      "path": "f103_growing_displacement_rank_open_relation_quotient_no_go.py",
+      "sha256": "9bff616d5dc6b3a23a4c4dc56ab56e51059144b42ae90ff599ec6ef750600062"
+    },
+    "oracle_source": {
+      "path": "f103_growing_displacement_rank_open_relation_quotient_no_go_oracle.py",
+      "sha256": "1431c6953185997075f0d42e14d7f41dcc768d835d97480c304c937c913ce987"
+    },
+    "production_result": {
+      "path": "F103_GROWING_DISPLACEMENT_RANK_OPEN_RELATION_QUOTIENT_NO_GO_RESULTS.json",
+      "sha256": "f13511f6406e73e93546683ad09c275a9e6014f1c6c223cea34f361172e5c737"
+    },
+    "oracle_result": {
+      "path": "F103_GROWING_DISPLACEMENT_RANK_OPEN_RELATION_QUOTIENT_NO_GO_ORACLE_RESULTS.json",
+      "sha256": "f88f2da5d55415732e6bd8a97a7668015b462ae91264a8d83740ac3d0c1f8ee8"
+    },
+    "qualifier": {
+      "path": "qualify_f103_growing_displacement_rank_open_relation_quotient_no_go.sh",
+      "sha256": "28559315cb1003d89cfec64a4bdae29ade374bad83e9d2d3c1bcf7f6d05c1ec8"
+    },
+    "review": {
+      "path": "F103_GROWING_DISPLACEMENT_RANK_OPEN_RELATION_QUOTIENT_NO_GO_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "bc3533c8cbb45493ff95c8369e2e5cfcbf0585b63e14e31c63b0ebfcbd3ef305"
+    }
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_F103_GROWING_DISPLACEMENT_RANK_OPEN_RELATION_QUOTIENT_NO_GO_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m155-qualifier-pzZyBH"
+  },
+  "independent_oracle": {
+    "imports_production_module": false,
+    "imports_numpy": false,
+    "case_count": 40,
+    "comparison_count": 1628,
+    "reconstructs_dense_semantics": true,
+    "reconstructs_chart_commitments": true,
+    "reconstructs_exact_inverse": true
+  },
+  "resource_law": {
+    "phase_resident_bytes_by_interface": {
+      "5": 504,
+      "7": 828,
+      "11": 1692,
+      "17": 3528
+    },
+    "classical_resident_bytes_by_interface": {
+      "5": 252,
+      "7": 468,
+      "11": 1116,
+      "17": 2628
+    },
+    "phase_relation_table_scratch_coordinates": 0,
+    "streamed_phase_field_operation_totals_independently_recounted": false,
+    "declared_transient_scratch_maxima_independently_recounted": false,
+    "python_numpy_runtime_exclusions_independently_recounted": false
+  },
+  "claim_ceiling": "F103_CYCLIC_DISPLACEMENT_CHARTS_ON_THE_DECLARED_C5_C7_C11_C17_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH16_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "FULL_ORDINARY_RANK_SEEDS_HAVE_EXACT_CYCLIC_DISPLACEMENT_RANK2",
+    "ONE_LAYER_SATURATES_DISPLACEMENT_RANK_TO_INTERFACE_SIZE",
+    "STREAMED_CHART_PATH_AVOIDS_ORDINARY_DENSE_RELATION_TABLE_MATERIALIZATION",
+    "FINAL_ONLY_BOUNDARY_EXACT_ALGEBRAIC_RESTORATION_AND_SAME_BACKING_REUSE",
+    "EXECUTED_REMATERIALIZED_CONTROL_DISPLACEMENT_CHART_TO_DENSE_CLASSICAL_PARITY"
+  ],
+  "rejected_interpretations": [
+    "UNIFORM_SUB_DENSE_DISPLACEMENT_RANK_CLOSURE_ACROSS_GROWING_INTERFACES",
+    "DISPLACEMENT_CHART_RESOURCE_ADVANTAGE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_COMPUTATION"
+  ]
+}
